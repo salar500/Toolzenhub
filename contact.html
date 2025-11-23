@@ -3,39 +3,41 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Contact – ToolZenHub</title>
-<link rel="stylesheet" href="assets/style.css" />
-<style>
-    body { font-family:'Poppins', sans-serif; background:#ffffff; margin:0; padding:0; color:#111; }
-    .container { max-width:1000px; margin:auto; padding:30px; }
-    h1 { font-size:40px; color:#2663FF; margin-bottom:12px; }
-    p { font-size:18px; line-height:1.7; }
-    form { margin-top:25px; }
-    input, textarea { width:100%; padding:14px; margin-bottom:15px; border-radius:12px; border:1px solid #ccc; font-size:18px; }
-    button { width:100%; background:#2663FF; border:none; padding:14px; font-size:20px; color:#fff; border-radius:12px; cursor:pointer; }
-    button:hover { background:#1E4ED8; }
-    .info-box { margin-top:25px; padding:20px; border-radius:14px; background:#f7faff; border-left:6px solid #2663FF; }
-    a { color:#2663FF; font-weight:600; text-decoration:none; }
-</style>
+<title>Contact Us | ToolZenHub</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-<div class="container">
-    <h1>Contact Us</h1>
-    <p>Have questions, feedback, or feature suggestions? We’d love to hear from you. Use the form below and we’ll get back within 24 hours.</p>
+<header>
+  <nav class="navbar">
+    <div class="logo">ToolZenHub</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="/finsite/">Finance Tools</a></li>
+      <li><a href="/HealthTracker/">Health Tools</a></li>
+    </ul>
+  </nav>
+</header>
 
-    <form action="mailto:toolzenhub@gmail.com" method="post" enctype="text/plain">
-        <input type="text" name="Name" placeholder="Your Name" required />
-        <input type="email" name="Email" placeholder="Email Address" required />
-        <textarea name="Message" rows="6" placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
-    </form>
+<section class="hero">
+  <h1>Contact Us</h1>
+  <p>We’d love to hear from you. Reach out with feedback or suggestions!</p>
+</section>
 
-    <div class="info-box">
-        <h2>📩 Email Support</h2>
-        <p>Email us anytime at: <a href="mailto:toolzenhub@gmail.com">toolzenhub@gmail.com</a></p>
-        <p>Available: Monday – Saturday / 9AM – 8PM IST</p>
-    </div>
-</div>
+<section class="content-section">
+  <form class="contact-form" action="mailto:toolzenhub@gmail.com" method="post" enctype="text/plain">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+    <button type="submit" class="btn-primary">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  <p>© 2025 ToolZenHub — All Rights Reserved</p>
+</footer>
+
 </body>
 </html>
