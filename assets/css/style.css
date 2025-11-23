@@ -1,17 +1,21 @@
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
-body{background:#ffffff;color:#222;}
-.container{width:90%;max-width:1200px;margin:auto;}
+body { font-family: Arial, sans-serif; margin: 0; background:#ffffff; color:#222; }
+.navbar { display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:#fff; border-bottom:1px solid #eaeaea; }
+.logo { font-size:24px; font-weight:bold; color:#28a745; }
+.nav-links { list-style:none; display:flex; gap:20px; }
+.nav-links a { text-decoration:none; color:#222; font-weight:600; }
+.nav-links a.active, .nav-links a:hover { color:#28a745; }
 
-.site-header{background:#fff;padding:18px 0;border-bottom:1px solid #eaeaea;position:sticky;top:0;z-index:999;}
-.header-wrapper{display:flex;align-items:center;justify-content:space-between;}
-.brand-logo{font-size:28px;font-weight:700;color:#2663FF;text-decoration:none;}
+.hero { text-align:center; padding:60px 20px; }
+.hero h1 { font-size:42px; color:#28a745; }
+.hero p { font-size:18px; }
 
-.navbar ul{display:flex;gap:20px;list-style:none;}
-.navbar a{text-decoration:none;color:#222;font-weight:500;}
-.btn-primary{background:#2663FF;color:#fff;padding:8px 16px;border-radius:6px;}
+.content-section { padding:40px 20px; max-width:900px; margin:auto; }
+.content-section.gray { background:#f4f6f8; }
+.ticks li { margin:10px 0; }
 
-.site-footer{background:#111;color:#eee;padding:50px 0;margin-top:40px;}
-.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
-.footer-section h3,.footer-section h4{margin-bottom:15px;}
-.social-links li{list-style:none;margin:5px 0;}
-.footer-bottom{text-align:center;margin-top:20px;font-size:14px;color:#bbb;}
+.btn-primary { background:#28a745; border:none; padding:12px 26px; color:#fff; border-radius:6px; cursor:pointer; font-size:18px; }
+.btn-primary:hover { opacity:.85; }
+
+.contact-form { display:flex; flex-direction:column; gap:15px; max-width:500px; margin:auto; }
+.contact-form input, .contact-form textarea { padding:12px; border:1px solid #ddd; border-radius:6px; }
+footer { text-align:center; padding:20px; background:#fff; border-top:1px solid #eaeaea; margin-top:40px; }
