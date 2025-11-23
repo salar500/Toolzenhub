@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToolZenHub - Smart Tools for Life & Productivity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #ffffff;
+    color: #111111;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 50px;
+    background: #2663FF;
+    color: #fff;
+}
+header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    margin: 0;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 500;
+}
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: #f4f6f8;
+}
+.hero h2 {
+    font-size: 42px;
+    font-family: 'Poppins', sans-serif;
+}
+.hero p { font-size: 18px; max-width: 650px; margin: 10px auto; }
+.hero button {
+    padding: 14px 32px;
+    font-size: 18px;
+    background: #2663FF;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.section-title {
+    text-align: center;
+    font-family: 'Poppins';
+    font-size: 32px;
+    margin-top: 60px;
+}
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 20px;
+    padding: 30px 40px;
+}
+.tool-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+.tool-card h3 {
+    font-size: 22px;
+    font-family: 'Poppins';
+}
+.tool-card a {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #00E676;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #111;
+    margin-top: 10px;
+}
+.about, .contact {
+    padding: 50px;
+    text-align: center;
+    background: #f4f6f8;
+}
+footer {
+    background: #2663FF;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>ToolZenHub</h1>
+    <nav>
+        <a href="#tools">Tools</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Smart Tools for Financial & Health Productivity</h2>
+    <p>Free calculators, productivity tools, planners, and utilities designed to make life easy. Improve your daily routine, track your goals, and make smarter decisions.</p>
+    <button onclick="window.location.href='#tools'">Explore Tools</button>
+</section>
+
+<h2 class="section-title" id="tools">Popular Tools</h2>
+<div class="tools-grid">
+    <div class="tool-card">
+        <h3>Finance Calculators</h3>
+        <p>EMI, SIP, SWP, Home Loan & more</p>
+        <a href="/finsite">Open Tools</a>
+    </div>
+    <div class="tool-card">
+        <h3>Health Trackers</h3>
+        <p>BMI, Hydration, Sleep, Calories</p>
+        <a href="/HealthTracker">Open Tools</a>
+    </div>
+    <div class="tool-card">
+        <h3>Coming Soon</h3>
+        <p>AI Notepad, Routine Generator, Productivity Planner</p>
+        <a href="#">Learn More</a>
+    </div>
+</div>
+
+<section class="about" id="about">
+    <h2>About ToolZenHub</h2>
+    <p>Your one-stop platform for powerful free tools that improve your daily life. Our mission is to simplify decision-making with easy-to-use calculators and productivity utilities.</p>
+</section>
+
+<section class="contact" id="contact">
+    <h2>Contact</h2>
+    <p>Email: hello@toolzenhub.in</p>
+</section>
+
+<footer>
+    © 2025 ToolZenHub — All Rights Reserved.
+</footer>
+
+</body>
+</html>
