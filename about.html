@@ -1,50 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>About Us – ToolZenHub</title>
-<link rel="stylesheet" href="assets/style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | ToolZenHub</title>
+<link rel="stylesheet" href="styles.css">
+
+<!-- FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-    body { font-family: 'Poppins', sans-serif; background:#ffffff; margin:0; padding:0; color:#111; }
-    .container { max-width:1200px; margin:auto; padding:30px; }
-    h1 { font-size:42px; color:#2663FF; margin-bottom:10px; }
-    h2 { font-size:26px; color:#000; margin-top:30px; }
-    p { font-size:18px; line-height:1.7; margin:10px 0; }
-    .highlight { font-weight:600; color:#2663FF; }
-    .cta-box { margin-top:40px; padding:30px; border-radius:14px; background:#f7faff; border-left:6px solid #2663FF; }
-    .cta-btn { display:inline-block; margin-top:15px; padding:12px 28px; background:#2663FF; color:#fff; text-decoration:none; font-size:18px; border-radius:10px; }
+body { margin:0; font-family:'Poppins', sans-serif; background:white; color:#1f2937; }
+
+/* HEADER */
+header { display:flex; justify-content:space-between; align-items:center; padding:18px 40px; background:white; border-bottom:1px solid #f3f4f6; }
+header a.logo { font-size:26px; font-weight:700; color:#22c55e; text-decoration:none; }
+nav a { margin-left:24px; text-decoration:none; color:#1f2937; font-weight:500; }
+
+/* HERO SECTION */
+.hero { text-align:center; padding:80px 20px; max-width:900px; margin:auto; }
+.hero h1 { font-size:48px; font-weight:700; color:#22c55e; }
+.hero p { font-size:20px; margin-top:10px; line-height:1.6; }
+
+/* SECTIONS */
+.section { padding:70px 20px; max-width:1000px; margin:auto; }
+.section h2 { font-size:32px; font-weight:700; color:#22c55e; margin-bottom:20px; }
+.section p { font-size:18px; line-height:1.6; }
+
+/* CTA BUTTON */
+.btn-primary {
+    display:inline-block;
+    background:#22c55e;
+    color:white;
+    padding:15px 32px;
+    font-size:18px;
+    border-radius:8px;
+    text-decoration:none;
+    margin-top:28px;
+}
+.btn-primary:hover { opacity:0.85; }
+
+/* FOOTER */
+footer {
+    text-align:center;
+    padding:25px;
+    margin-top:40px;
+    background:#f3f4f6;
+    font-size:15px;
+}
+footer span { color:#22c55e; font-weight:600; }
 </style>
 </head>
 
 <body>
-<div class="container">
+
+<header>
+    <a href="index.html" class="logo">ToolZenHub</a>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html"><b>About</b></a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<section class="hero">
     <h1>About ToolZenHub</h1>
-    <p><span class="highlight">ToolZenHub</span> is a modern productivity and smart utility ecosystem designed to simplify life using powerful online tools powered by automation and AI.</p>
+    <p>We are building a connected ecosystem of smart productivity tools, calculators, and AI utilities designed to make everyday life easier — from financial planning to personal health.</p>
+</section>
 
-    <p>We help students, creators, working professionals, and entrepreneurs save time and increase efficiency with tools for <strong>finance, productivity, health, study, and daily utility needs</strong>.</p>
-
+<section class="section">
     <h2>Our Mission</h2>
-    <p>To build a seamless platform where anyone can access high-quality tools without ads overload, complexity, or expensive software.</p>
+    <p>At ToolZenHub, our goal is simple: create fast, clean, privacy-focused tools that solve real-life problems instantly. No ads, no logins — just useful tools that work for everyone.</p>
+</section>
 
-    <h2>What We Offer</h2>
-    <p>Our current tools include:</p>
-    <ul>
-        <li>📊 Financial Calculators (EMI, SIP, SWP, Home Loan, Personal Loan)</li>
-        <li>💪 Health Tools (BMI, Hydration, Sleep Tracker)</li>
-        <li>🛠 Productivity & Automation Utilities (more tools coming soon)</li>
+<section class="section">
+    <h2>What We Provide</h2>
+    <p>Currently, our platform includes:</p>
+    <ul style="font-size:18px; line-height:1.9;">
+        <li>📊 Financial Tools (EMI, SIP, SWP, Loan calculator)</li>
+        <li>💪 Health Tools (BMI, Hydration, Sleep calculator)</li>
+        <li>🧠 Productivity utilities & upcoming AI features</li>
     </ul>
+    <a class="btn-primary" href="index.html">Explore Our Tools</a>
+</section>
 
-    <p>We are continuously adding more AI-powered utilities and advanced digital tools every month.</p>
+<footer>
+    © 2025 <span>ToolZenHub</span> — Smart Tools. Real Results.
+</footer>
 
-    <h2>Our Vision</h2>
-    <p>To create one of the biggest collections of smart online utilities similar to major tool ecosystems worldwide — but built with Indian accessibility and global standards.</p>
-
-    <div class="cta-box">
-        <h2>Join Us on Our Journey 🚀</h2>
-        <p>We’re building a powerful tools platform step-by-step, and we’d love you to be part of it.</p>
-        <a href="/contact.html" class="cta-btn">Contact Us</a>
-    </div>
-</div>
 </body>
 </html>
