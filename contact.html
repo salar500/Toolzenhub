@@ -1,82 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Contact | ToolZenHub</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #ffffff;
-  color: #333;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 50px;
-  border-bottom: 1px solid #eaeaea;
-}
-
-.logo {
-  font-size: 26px;
-  font-weight: 700;
-  color: #2ecc71;
-}
-
-nav a {
-  margin-left: 22px;
-  text-decoration: none;
-  font-weight: 600;
-  color: #333;
-}
-nav a:hover { color: #2ecc71; }
-
-.hero {
-  text-align: center;
-  padding: 70px 20px;
-}
-.hero h1 {
-  font-size: 42px;
-  color: #2ecc71;
-}
-
-.contact-box {
-  max-width: 500px;
-  margin: auto;
-  padding: 30px 20px;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-button {
-  width: 100%;
-  background: #2ecc71;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-}
-button:hover { background: #27ae60; }
-
-footer {
-  margin-top: 60px;
-  padding: 28px;
-  text-align: center;
-  background: #f8f8f8;
-}
+body{margin:0;font-family:Poppins,sans-serif;background:#fff;color:#333}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 50px;border-bottom:1px solid #eee}
+.logo{color:#2ecc71;font-size:26px;font-weight:700}
+nav a{margin-left:22px;color:#333;text-decoration:none;font-weight:600}
+.hero{text-align:center;padding:70px 20px}
+.hero h1{color:#2ecc71}
+.form-wrap{max-width:500px;margin:auto;padding:40px}
+input,textarea{width:100%;margin-bottom:14px;padding:12px;border:1px solid #ccc;border-radius:6px}
+button{background:#2ecc71;color:#fff;border:none;padding:12px 25px;border-radius:6px;font-weight:600}
+footer{text-align:center;padding:20px;background:#f8f8f8;margin-top:40px}
 </style>
 </head>
 
@@ -85,28 +25,28 @@ footer {
 <header>
   <div class="logo">ToolZenHub</div>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+    <a href="/index.html">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
   </nav>
 </header>
 
 <section class="hero">
   <h1>Contact Us</h1>
-  <p>Send us your feedback or partnership requests.</p>
+  <p>We would love to hear from you</p>
 </section>
 
-<section class="contact-box">
+<div class="form-wrap">
   <form action="mailto:toolzenhub@gmail.com" method="post" enctype="text/plain">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Your Email" required>
-    <textarea rows="6" name="message" placeholder="Your Message" required></textarea>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="6" placeholder="Your Message"></textarea>
     <button type="submit">Send Message</button>
   </form>
-</section>
+</div>
 
 <footer>
-  © 2025 ToolZenHub — All Rights Reserved
+  © 2025 ToolZenHub
 </footer>
 
 </body>
