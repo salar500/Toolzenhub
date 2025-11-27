@@ -1,42 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Contact Us | ToolZenHub</title>
-<link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<title>Contact | ToolZenHub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:#fff;
+  color:#333;
+}
+.hero { text-align:center; padding:70px 20px; }
+.hero h1 { color:#2ecc71; }
+.form-box {
+  max-width:600px;
+  margin:auto;
+  padding:30px;
+}
+input, textarea {
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:1px solid #ccc;
+}
+button {
+  background:#2ecc71;
+  color:white;
+  padding:12px 20px;
+  border:none;
+}
+</style>
 </head>
 
 <body>
-<header>
-  <nav class="navbar">
-    <div class="logo">ToolZenHub</div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html" class="active">Contact</a></li>
-      <li><a href="/finsite/">Finance Tools</a></li>
-      <li><a href="/HealthTracker/">Health Tools</a></li>
-    </ul>
+
+<header style="border-bottom:1px solid #eaeaea; padding:18px 50px; display:flex; justify-content:space-between; align-items:center;">
+  <div style="font-size:26px; font-weight:700; color:#2ecc71;">ToolZenHub</div>
+  <nav>
+    <a href="/index.html">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/paisa/">Finance</a>
+    <a href="/HealthTracker/">Health</a>
   </nav>
 </header>
 
 <section class="hero">
   <h1>Contact Us</h1>
-  <p>We’d love to hear from you. Reach out with feedback or suggestions!</p>
+  <p>Feedback, suggestions & collaboration welcome</p>
 </section>
 
-<section class="content-section">
-  <form class="contact-form" action="mailto:toolzenhub@gmail.com" method="post" enctype="text/plain">
-    <input type="text" name="name" placeholder="Your Name" required />
-    <input type="email" name="email" placeholder="Your Email" required />
-    <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
-    <button type="submit" class="btn-primary">Send Message</button>
+<div class="form-box">
+  <form action="mailto:toolzenhub@gmail.com" method="post">
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="5" placeholder="Your Message"></textarea>
+    <button type="submit">Send Message</button>
   </form>
-</section>
+</div>
 
-<footer>
-  <p>© 2025 ToolZenHub — All Rights Reserved</p>
+<footer style="margin-top:60px; padding:28px; text-align:center; background:#f8f8f8;">
+  © 2025 ToolZenHub
 </footer>
 
 </body>
