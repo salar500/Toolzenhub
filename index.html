@@ -1,215 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ToolZenHub - Smart Tools for Everyone</title>
+  <meta charset="UTF-8">
+  <title>ToolZenHub – AI Tools for Creators</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Find the best free AI tools for creators, YouTubers, freelancers and marketers. All in one place.">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9fafb;
+      color: #111;
+    }
+    header {
+      background: #111;
+      color: #fff;
+      padding: 15px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 15px;
+      text-decoration: none;
+      font-size: 14px;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    .hero {
+      padding: 60px 5%;
+      text-align: center;
+      background: linear-gradient(120deg, #0f172a, #020617);
+      color: #fff;
+    }
+    .hero h2 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+    .hero p {
+      font-size: 16px;
+      margin-bottom: 25px;
+      color: #cbd5f5;
+    }
+    .hero input {
+      padding: 12px;
+      width: 70%;
+      max-width: 400px;
+      border: none;
+      border-radius: 6px;
+    }
+    .hero button {
+      padding: 12px 20px;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      border-radius: 6px;
+      margin-left: 5px;
+      cursor: pointer;
+    }
 
-<style>
-body{
-  margin:0;
-  font-family:Poppins,sans-serif;
-  background:#fff;
-  color:#333;
-}
+    .section {
+      padding: 50px 5%;
+    }
+    .section h3 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 26px;
+    }
 
-/* ========== HEADER ========== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
 
-.site-header {
-  width: 100%;
-  background:#fff;
-  border-bottom:1px solid #eee;
-  padding:18px 50px;
-}
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    .card h4 {
+      margin-bottom: 8px;
+    }
+    .card p {
+      font-size: 14px;
+      color: #555;
+    }
 
-.header-container {
-  max-width: 1200px;
-  margin: 0 auto;
+    .why {
+      background: #0f172a;
+      color: #fff;
+    }
+    .why .card {
+      background: #020617;
+      color: #fff;
+    }
 
-  display:flex;
-  align-items:center;
-  justify-content:space-between; /* logo left, nav right */
-}
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 25px 10px;
+      font-size: 14px;
+    }
 
-.logo{
-  font-size:26px;
-  font-weight:700;
-  color:#2ecc71;
-}
-
-.nav {
-  display:flex;
-  align-items:center;
-}
-
-.nav-links {
-  list-style:none;
-  display:flex;              /* horizontal menu */
-  gap:22px;
-  margin:0;
-  padding:0;
-}
-
-.nav-links a{
-  text-decoration:none;
-  color:#333;
-  font-weight:600;
-}
-
-.nav-links a:hover{
-  color:#2ecc71;
-}
-
-/* hamburger for mobile (hidden on desktop) */
-.menu-toggle {
-  display:none;
-  font-size:26px;
-  margin-left:18px;
-  cursor:pointer;
-  user-select:none;
-}
-
-/* ========== HERO ========== */
-
-.hero{
-  text-align:center;
-  padding:80px 20px;
-}
-.hero h1{
-  font-size:46px;
-  color:#2ecc71;
-}
-.hero p{
-  max-width:650px;
-  margin:15px auto;
-  font-size:18px;
-}
-.btn-main{
-  display:inline-block;
-  margin-top:18px;
-  padding:14px 30px;
-  background:#2ecc71;
-  color:#fff;
-  border-radius:6px;
-  text-decoration:none;
-  font-weight:600;
-}
-
-/* ========== TOOLS ========== */
-
-.tools-section{
-  padding:60px 20px;
-  max-width:1100px;
-  margin:auto;
-  text-align:center;
-}
-.tools-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:25px;
-}
-.tool-card{
-  border:1px solid #eee;
-  padding:28px;
-  border-radius:12px;
-}
-.tool-card a{
-  color:#2ecc71;
-  font-weight:600;
-  text-decoration:none;
-}
-
-/* ========== RESPONSIVE ========== */
-
-@media (max-width: 768px) {
-  .site-header {
-    padding:14px 20px;
-  }
-
-  .header-container {
-    /* keep logo left & menu right even on mobile */
-  }
-
-  .nav-links {
-    display:none; /* hide links on small screens (you can add JS later to toggle) */
-  }
-
-  .menu-toggle {
-    display:block;
-  }
-
-  .hero {
-    padding:60px 16px;
-  }
-
-  .hero h1 {
-    font-size:34px;
-  }
-
-  .hero p {
-    font-size:16px;
-  }
-}
-
-/* ========== FOOTER ========== */
-
-footer{
-  text-align:center;
-  padding:28px;
-  background:#f8f8f8;
-  margin-top:60px;
-}
-</style>
+    @media(max-width: 600px) {
+      .hero h2 { font-size: 26px; }
+      nav { display: none; }
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="site-header">
-  <div class="header-container">
-    <div class="logo">ToolZenHub</div>
-
-    <nav class="nav">
-      <ul class="nav-links">
-        <li><a href="/index.html">Home</a></li>
-        <li><a href="/about.html">About</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-      </ul>
-
-      <div class="menu-toggle" id="menu-toggle">
-        ☰
-      </div>
-    </nav>
-  </div>
+<header>
+  <h1>ToolZenHub</h1>
+  <nav>
+    <a href="#">Tools</a>
+    <a href="#">Categories</a>
+    <a href="#">Blog</a>
+    <a href="#">Submit</a>
+  </nav>
 </header>
 
 <section class="hero">
-  <h1>Your Tools, All in One Place</h1>
-  <p>AI-powered productivity, finance & health calculators built to simplify your life.</p>
-  <a href="#tools" class="btn-main">Explore Tools</a>
+  <h2>Smart AI Tools for Creators</h2>
+  <p>Discover free and powerful AI tools for YouTubers, designers, freelancers and digital creators.</p>
+  <input type="text" placeholder="Search AI tools...">
+  <button>Search</button>
 </section>
 
-<section class="tools-section" id="tools">
-  <h2 style="color:#2ecc71">Our Featured Tools</h2>
+<section class="section">
+  <h3>Featured AI Tools</h3>
+  <div class="grid">
+    <div class="card"><h4>ChatGPT</h4><p>AI writing & ideas</p></div>
+    <div class="card"><h4>Canva AI</h4><p>Design & content</p></div>
+    <div class="card"><h4>Runway</h4><p>AI video creation</p></div>
+    <div class="card"><h4>Copy.ai</h4><p>Marketing copy</p></div>
+  </div>
+</section>
 
-  <div class="tools-grid">
-    <div class="tool-card">
-      <h3>Finance Calculators</h3>
-      <p>EMI, SIP, SWP, Home Loan & More</p>
-      <a href="/paisa/">Open Tools →</a>
-    </div>
+<section class="section">
+  <h3>Your Free Creator Tools</h3>
+  <div class="grid">
+    <div class="card"><h4>Hashtag Generator</h4><p>Generate viral hashtags</p></div>
+    <div class="card"><h4>YouTube Title Generator</h4><p>High CTR titles</p></div>
+    <div class="card"><h4>Bio Generator</h4><p>Creator bios in seconds</p></div>
+  </div>
+</section>
 
-    <div class="tool-card">
-      <h3>Health Calculators</h3>
-      <p>BMI, Hydration, Sleep & More</p>
-      <a href="/HealthTracker/">Open Tools →</a>
-    </div>
+<section class="section why">
+  <h3>Why ToolZenHub?</h3>
+  <div class="grid">
+    <div class="card"><h4>100% Free</h4><p>All tools are free to use</p></div>
+    <div class="card"><h4>No Login</h4><p>Instant access</p></div>
+    <div class="card"><h4>Curated Tools</h4><p>Only best creator tools</p></div>
+    <div class="card"><h4>Fast & Secure</h4><p>Lightweight & safe</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <h3>Latest From the Blog</h3>
+  <div class="grid">
+    <div class="card"><h4>Best AI Tools for YouTubers (2025)</h4></div>
+    <div class="card"><h4>Free Instagram Caption Tools</h4></div>
+    <div class="card"><h4>Top AI Video Generators</h4></div>
   </div>
 </section>
 
 <footer>
-  © 2025 ToolZenHub — Made with 💚
+  © 2025 ToolZenHub.in – All Rights Reserved  
+  <br>About | Contact | Privacy | Terms
 </footer>
 
 </body>
