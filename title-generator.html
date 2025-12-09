@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>YouTube Title Generator – ToolZenHub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free YouTube title generator for creators. Generate high-CTR video title ideas in seconds." />
+
+  <style>
+    :root {
+      --bg: #020617;
+      --fg: #e5e7eb;
+      --primary: #22c55e;
+      --primary-dark: #16a34a;
+      --card-bg: #020617;
+      --radius: 10px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 45%, #020617 100%);
+      color: var(--fg);
+      line-height: 1.5;
+    }
+
+    header {
+      background: #020617;
+      padding: 12px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #111827;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    header a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 14px;
+      margin-left: 16px;
+    }
+
+    header a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 30px auto 40px;
+      padding: 0 5%;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .sub {
+      font-size: 14px;
+      color: #9ca3af;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 20px 18px;
+      border: 1px solid #111827;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #d1d5db;
+    }
+
+    textarea, select, input[type="text"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 14px;
+      resize: vertical;
+      margin-bottom: 14px;
+    }
+
+    textarea:focus, select:focus, input[type="text"]:focus {
+      outline: 1px solid var(--primary);
+      border-color: var(--primary);
+    }
+
+    button {
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: none;
+      background: var(--primary);
+      color: #020617;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 4px;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+
+    button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .results {
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px solid #1f2937;
+    }
+
+    .results-title {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .titles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .title-card {
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #020617;
+      border: 1px solid #1f2937;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .title-card:hover {
+      border-color: var(--primary);
+    }
+
+    .small {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 10px;
+    }
+
+    .copy-box {
+      margin-top: 14px;
+    }
+
+    .copy-input {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 13px;
+    }
+
+    .copy-btn {
+      margin-top: 6px;
+      font-size: 12px;
+      padding: 7px 12px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 10px 30px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    @media (max-width: 640px) {
+      main { margin-top: 20px; }
+      h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">ToolZenHub</div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="#top">Title Generator</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <h1>YouTube Title Generator for Creators</h1>
+    <p class="sub">
+      Describe your video and choose a style. Get clickable YouTube title ideas you can tweak in seconds.
+      No login, completely free.
+    </p>
+
+    <div class="card">
+      <label for="idea">What is your video about?</label>
+      <textarea id="idea" rows="3" placeholder="Example: AI tools that save time for freelancers, content creation on a budget, Instagram growth tips..."></textarea>
+
+      <label for="audience">Optional: who is it for?</label>
+      <input id="audience" type="text" placeholder="Example: beginners, small business owners, creators, students..." />
+
+      <label for="tone">Tone / style</label>
+      <select id="tone">
+        <option value="curiosity">Curiosity / Clickable</option>
+        <option value="howto">How-to / Tutorial</option>
+        <option value="listicle">List / Top X</option>
+        <option value="case">Results / Case Study</option>
+      </select>
+
+      <button type="button" onclick="generateTitles()">Generate Titles</button>
+
+      <div class="results" id="results" style="display:none;">
+        <div class="results-title">Title ideas (tap/click to select one):</div>
+        <div class="titles" id="titles"></div>
+
+        <div class="copy-box">
+          <input id="copyField" class="copy-input" readonly />
+          <button class="copy-btn" type="button" onclick="copyTitle()">Copy selected title</button>
+        </div>
+
+        <div class="small">
+          Tip: Keep your final title under ~60 characters when possible, and match it to your thumbnail.
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 ToolZenHub.in – YouTube Title Generator •
+    <a href="index.html" style="color:#9ca3af;">Back to home</a>
+  </footer>
+
+  <script>
+    function generateTitles() {
+      const idea = document.getElementById('idea').value.trim();
+      const audience = document.getElementById('audience').value.trim();
+      const tone = document.getElementById('tone').value;
+
+      if (!idea) {
+        alert('Please describe what your video is about.');
+        return;
+      }
+
+      const shortIdea = idea.length > 80 ? idea.slice(0, 80) + '…' : idea;
+      const audienceText = audience ? ' for ' + audience : '';
+
+      let titles = [];
+
+      if (tone === 'curiosity') {
+        titles.push(
+          `You’re Using AI Wrong${audience ? ' ' + audience : ''}`,
+          `This AI Trick Changes Everything${audienceText}`,
+          `The Secret AI Tools No One Shows You${audienceText}`
+        );
+      } else if (tone === 'howto') {
+        titles.push(
+          `How to Use AI to ${shortIdea}`,
+          `Beginner’s Guide to ${shortIdea}`,
+          `Step-by-Step: ${shortIdea} with AI`
+        );
+      } else if (tone === 'listicle') {
+        titles.push(
+          `7 AI Tools to ${shortIdea}`,
+          `Top 5 AI Hacks${audienceText}`,
+          `${audience ? audience + ': ' : ''}10 AI Tools You’ll Actually Use`
+        );
+      } else if (tone === 'case') {
+        titles.push(
+          `How I Used AI to ${shortIdea}`,
+          `${shortIdea}: What Happened When I Tried AI`,
+          `From 0 to Results with AI${audienceText}`
+        );
+      }
+
+      // Add some generic variants based on idea
+      titles.push(
+        `${shortIdea} (Using Only Free AI Tools)`,
+        `Stop Doing This Without AI: ${shortIdea}`
+      );
+
+      // Remove duplicates
+      titles = [...new Set(titles)];
+
+      const titlesContainer = document.getElementById('titles');
+      titlesContainer.innerHTML = '';
+
+      titles.forEach(t => {
+        const div = document.createElement('div');
+        div.className = 'title-card';
+        div.textContent = t;
+        div.onclick = () => {
+          document.getElementById('copyField').value = t;
+        };
+        titlesContainer.appendChild(div);
+      });
+
+      // Preselect first title
+      document.getElementById('copyField').value = titles[0] || '';
+      document.getElementById('results').style.display = 'block';
+    }
+
+    function copyTitle() {
+      const field = document.getElementById('copyField');
+      if (!field.value) {
+        alert('Click on a title first, then copy.');
+        return;
+      }
+      field.select();
+      field.setSelectionRange(0, 99999);
+      try {
+        document.execCommand('copy');
+        alert('Title copied!');
+      } catch (e) {
+        alert('Select and copy the text manually.');
+      }
+    }
+  </script>
+</body>
+</html>
