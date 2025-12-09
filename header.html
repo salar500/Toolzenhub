@@ -1,17 +1,63 @@
-<header class="site-header">
-  <div class="header-container">
-    <div class="logo">ToolZenHub</div>
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    <nav class="nav">
-      <ul class="nav-links">
-        <li><a href="/index.html">Home</a></li>
-        <li><a href="/about.html">About</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-      </ul>
+.site-header {
+  width: 100%;
+  background-color: #0f172a;   /* Dark professional color */
+  padding: 16px 40px;
+}
 
-      <div class="menu-toggle" id="menu-toggle">
-        ☰
-      </div>
-    </nav>
-  </div>
-</header>
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  /* MAIN FLEX LAYOUT */
+  display: flex;
+  align-items: center;        /* Vertical center */
+  justify-content: space-between; /* Logo left, nav right */
+}
+
+/* Logo */
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;             /* Horizontal links */
+  gap: 24px;                 /* Space between links */
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #e5e7eb;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #38bdf8;             /* Hover effect */
+}
+
+/* Mobile menu toggle (hidden on desktop) */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  color: white;
+  margin-left: 20px;
+  cursor: pointer;
+}
