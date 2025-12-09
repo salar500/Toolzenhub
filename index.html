@@ -1,183 +1,430 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>ToolZenHub – AI Tools for Creators</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Find the best free AI tools for creators, YouTubers, freelancers and marketers. All in one place.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ToolZenHub helps creators, YouTubers, freelancers and marketers discover the best free AI tools, along with simple built-in creator utilities like hashtag and title generators." />
+  <meta name="keywords" content="AI tools for creators, AI tools, YouTube tools, Instagram tools, hashtag generator, title generator, toolzenhub" />
+  <meta name="author" content="ToolZenHub" />
+
+  <!-- Open Graph (for social sharing) -->
+  <meta property="og:title" content="ToolZenHub – AI Tools for Creators" />
+  <meta property="og:description" content="Discover free AI tools and simple utilities curated for creators, YouTubers, freelancers and marketers." />
+  <meta property="og:url" content="https://toolzenhub.in/" />
+  <meta property="og:type" content="website" />
+
   <style>
+    :root {
+      --bg: #f9fafb;
+      --fg: #111827;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --hero-bg1: #0f172a;
+      --hero-bg2: #020617;
+      --card-bg: #ffffff;
+      --card-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f9fafb;
-      color: #111;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.5;
     }
+
+    /* HEADER */
     header {
-      background: #111;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: #020617;
       color: #fff;
-      padding: 15px 5%;
+      padding: 12px 5%;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
     }
-    header h1 {
+
+    .logo {
+      font-weight: 700;
       font-size: 20px;
-      margin: 0;
+      letter-spacing: 0.04em;
     }
+
     nav a {
-      color: #fff;
-      margin-left: 15px;
+      color: #e5e7eb;
+      margin-left: 18px;
       text-decoration: none;
       font-size: 14px;
+      transition: color 0.15s ease;
     }
 
+    nav a:hover {
+      color: #ffffff;
+    }
+
+    .mobile-note {
+      display: none;
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    /* HERO */
     .hero {
-      padding: 60px 5%;
+      padding: 60px 5% 50px;
       text-align: center;
-      background: linear-gradient(120deg, #0f172a, #020617);
+      background: linear-gradient(120deg, var(--hero-bg1), var(--hero-bg2));
       color: #fff;
     }
-    .hero h2 {
-      font-size: 36px;
-      margin-bottom: 15px;
+
+    .hero h1 {
+      font-size: 34px;
+      max-width: 700px;
+      margin: 0 auto 16px;
     }
+
+    .hero span.highlight {
+      color: #60a5fa;
+    }
+
     .hero p {
       font-size: 16px;
-      margin-bottom: 25px;
+      max-width: 560px;
+      margin: 0 auto 24px;
       color: #cbd5f5;
     }
-    .hero input {
-      padding: 12px;
-      width: 70%;
-      max-width: 400px;
-      border: none;
-      border-radius: 6px;
-    }
-    .hero button {
-      padding: 12px 20px;
-      border: none;
-      background: #2563eb;
-      color: #fff;
-      border-radius: 6px;
-      margin-left: 5px;
-      cursor: pointer;
+
+    .search-wrapper {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
     }
 
-    .section {
-      padding: 50px 5%;
+    .search-wrapper input {
+      padding: 12px 14px;
+      width: min(420px, 80vw);
+      border-radius: 8px;
+      border: none;
+      outline: none;
     }
-    .section h3 {
+
+    .search-wrapper button {
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+
+    .search-wrapper button:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .hero-small-text {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    /* SECTIONS */
+    .section {
+      padding: 45px 5%;
+    }
+
+    .section h2 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 8px;
       font-size: 26px;
+    }
+
+    .section p.section-sub {
+      text-align: center;
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 30px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
       gap: 20px;
     }
 
     .card {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      text-align: center;
-    }
-    .card h4 {
-      margin-bottom: 8px;
-    }
-    .card p {
-      font-size: 14px;
-      color: #555;
+      background: var(--card-bg);
+      padding: 18px 16px;
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+      text-align: left;
     }
 
+    .card h3,
+    .card h4 {
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 13px;
+      color: #4b5563;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: #e0f2fe;
+      color: #0369a1;
+      margin-bottom: 6px;
+    }
+
+    /* WHY SECTION */
     .why {
-      background: #0f172a;
-      color: #fff;
+      background: #020617;
+      color: #e5e7eb;
+    }
+    .why .section-sub {
+      color: #9ca3af;
     }
     .why .card {
-      background: #020617;
-      color: #fff;
+      background: #0b1120;
+      color: #e5e7eb;
+      box-shadow: none;
+      border: 1px solid #111827;
     }
 
+    /* CATEGORIES */
+    .pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+    .pill {
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      font-size: 13px;
+      color: #111827;
+    }
+
+    /* FOOTER */
     footer {
-      background: #111;
-      color: #aaa;
+      background: #020617;
+      color: #9ca3af;
       text-align: center;
-      padding: 25px 10px;
-      font-size: 14px;
+      padding: 22px 10px 26px;
+      font-size: 13px;
     }
 
-    @media(max-width: 600px) {
-      .hero h2 { font-size: 26px; }
-      nav { display: none; }
+    footer a {
+      color: #e5e7eb;
+      text-decoration: none;
+      margin: 0 6px;
+      font-size: 12px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header {
+        padding-inline: 4%;
+      }
+      nav {
+        display: none;
+      }
+      .mobile-note {
+        display: block;
+      }
+      .hero h1 {
+        font-size: 24px;
+      }
+      .hero p {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 
 <body>
+  <!-- HEADER -->
+  <header>
+    <div>
+      <div class="logo">ToolZenHub</div>
+      <div class="mobile-note">Scroll to explore AI tools ↓</div>
+    </div>
+    <nav>
+      <a href="#tools">Tools</a>
+      <a href="#creator-tools">Creator Tools</a>
+      <a href="#categories">Categories</a>
+      <a href="#blog">Blog</a>
+    </nav>
+  </header>
 
-<header>
-  <h1>ToolZenHub</h1>
-  <nav>
-    <a href="#">Tools</a>
-    <a href="#">Categories</a>
-    <a href="#">Blog</a>
-    <a href="#">Submit</a>
-  </nav>
-</header>
+  <!-- HERO -->
+  <section class="hero">
+    <h1>
+      Smart <span class="highlight">AI Tools</span> Curated
+      for Creators, YouTubers & Freelancers
+    </h1>
+    <p>
+      Discover free and powerful AI tools for content, design, video, and marketing —
+      plus simple built-in utilities like hashtag and title generators.
+    </p>
+    <div class="search-wrapper">
+      <input type="text" placeholder="Search AI tools (e.g. YouTube, Instagram, writing)..." />
+      <button type="button">Search</button>
+    </div>
+    <div class="hero-small-text">
+      No login • Free to explore • Updated for creators
+    </div>
+  </section>
 
-<section class="hero">
-  <h2>Smart AI Tools for Creators</h2>
-  <p>Discover free and powerful AI tools for YouTubers, designers, freelancers and digital creators.</p>
-  <input type="text" placeholder="Search AI tools...">
-  <button>Search</button>
-</section>
+  <!-- FEATURED AI TOOLS -->
+  <section id="tools" class="section">
+    <h2>Featured AI Tools</h2>
+    <p class="section-sub">Popular AI platforms creators search and use in real time.</p>
 
-<section class="section">
-  <h3>Featured AI Tools</h3>
-  <div class="grid">
-    <div class="card"><h4>ChatGPT</h4><p>AI writing & ideas</p></div>
-    <div class="card"><h4>Canva AI</h4><p>Design & content</p></div>
-    <div class="card"><h4>Runway</h4><p>AI video creation</p></div>
-    <div class="card"><h4>Copy.ai</h4><p>Marketing copy</p></div>
-  </div>
-</section>
+    <div class="grid">
+      <div class="card">
+        <span class="badge">Writing & Ideas</span>
+        <h3>ChatGPT</h3>
+        <p>Generate scripts, captions, ideas, and replies for any platform.</p>
+      </div>
+      <div class="card">
+        <span class="badge">Design & Social</span>
+        <h3>Canva AI</h3>
+        <p>Design social posts, thumbnails and graphics using AI suggestions.</p>
+      </div>
+      <div class="card">
+        <span class="badge">Video</span>
+        <h3>Runway</h3>
+        <p>Create and edit videos with AI effects and smart tools.</p>
+      </div>
+      <div class="card">
+        <span class="badge">Copywriting</span>
+        <h3>Copy.ai</h3>
+        <p>Write hooks, ad copy, email lines and landing page content.</p>
+      </div>
+    </div>
+  </section>
 
-<section class="section">
-  <h3>Your Free Creator Tools</h3>
-  <div class="grid">
-    <div class="card"><h4>Hashtag Generator</h4><p>Generate viral hashtags</p></div>
-    <div class="card"><h4>YouTube Title Generator</h4><p>High CTR titles</p></div>
-    <div class="card"><h4>Bio Generator</h4><p>Creator bios in seconds</p></div>
-  </div>
-</section>
+  <!-- YOUR BUILT-IN CREATOR TOOLS -->
+  <section id="creator-tools" class="section">
+    <h2>Your Free Creator Tools</h2>
+    <p class="section-sub">Simple, fast utilities built into ToolZenHub (no signup needed).</p>
 
-<section class="section why">
-  <h3>Why ToolZenHub?</h3>
-  <div class="grid">
-    <div class="card"><h4>100% Free</h4><p>All tools are free to use</p></div>
-    <div class="card"><h4>No Login</h4><p>Instant access</p></div>
-    <div class="card"><h4>Curated Tools</h4><p>Only best creator tools</p></div>
-    <div class="card"><h4>Fast & Secure</h4><p>Lightweight & safe</p></div>
-  </div>
-</section>
+    <div class="grid">
+      <div class="card">
+        <span class="badge">Social Media</span>
+        <h4>Hashtag Generator</h4>
+        <p>Generate relevant hashtag ideas for Instagram, YouTube Shorts and Reels.</p>
+        <!-- Later you can link this to a dedicated page -->
+        <!-- <p><a href="hashtag-generator.html">Open tool →</a></p> -->
+      </div>
 
-<section class="section">
-  <h3>Latest From the Blog</h3>
-  <div class="grid">
-    <div class="card"><h4>Best AI Tools for YouTubers (2025)</h4></div>
-    <div class="card"><h4>Free Instagram Caption Tools</h4></div>
-    <div class="card"><h4>Top AI Video Generators</h4></div>
-  </div>
-</section>
+      <div class="card">
+        <span class="badge">YouTube</span>
+        <h4>YouTube Title Generator</h4>
+        <p>Brainstorm engaging, high-CTR video titles for your channel.</p>
+      </div>
 
-<footer>
-  © 2025 ToolZenHub.in – All Rights Reserved  
-  <br>About | Contact | Privacy | Terms
-</footer>
+      <div class="card">
+        <span class="badge">Personal Brand</span>
+        <h4>Bio & Profile Line Ideas</h4>
+        <p>Quick ideas for Instagram, X and LinkedIn bios tailored to creators.</p>
+      </div>
+    </div>
+  </section>
 
+  <!-- CATEGORIES -->
+  <section id="categories" class="section">
+    <h2>Browse by Creator Category</h2>
+    <p class="section-sub">Find AI tools based on the type of content you create.</p>
+
+    <div class="pill-grid">
+      <div class="pill">YouTube & Video Tools</div>
+      <div class="pill">Instagram & Reels</div>
+      <div class="pill">TikTok & Shorts</div>
+      <div class="pill">Writing & Blogging</div>
+      <div class="pill">Design & Thumbnails</div>
+      <div class="pill">Email & Funnels</div>
+      <div class="pill">Freelancing & Clients</div>
+      <div class="pill">Automation & Productivity</div>
+    </div>
+  </section>
+
+  <!-- WHY TOOLZENHUB -->
+  <section class="section why">
+    <h2>Why Creators Use ToolZenHub</h2>
+    <p class="section-sub">Built to be a calm, focused place to discover the right tools — without noise.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h4>100% Free to Explore</h4>
+        <p>Browse, click and test tools without paying or creating an account here.</p>
+      </div>
+      <div class="card">
+        <h4>Curated for Real Use</h4>
+        <p>We focus on tools creators actually use in real time to grow content.</p>
+      </div>
+      <div class="card">
+        <h4>Simple & Fast</h4>
+        <p>No clutter, no heavy scripts — designed to load quickly on mobile data.</p>
+      </div>
+      <div class="card">
+        <h4>Expandable Hub</h4>
+        <p>More tools, guides and mini-utilities are added over time as we grow.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG / CONTENT SECTION -->
+  <section id="blog" class="section">
+    <h2>Latest Guides for Creators</h2>
+    <p class="section-sub">Short, practical reads on using AI tools to grow your content.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h4>Best AI Tools for YouTubers (2025)</h4>
+        <p>From script writing to thumbnails and editing — tools that save hours.</p>
+      </div>
+      <div class="card">
+        <h4>Free AI Caption Tools for Instagram & Reels</h4>
+        <p>How to speed up posting while keeping your voice and style.</p>
+      </div>
+      <div class="card">
+        <h4>AI Video Generators for Short-Form Content</h4>
+        <p>Turn ideas into videos faster for Shorts, TikTok and Reels.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 ToolZenHub.in – All Rights Reserved<br />
+    <a href="#">About</a> |
+    <a href="#">Contact</a> |
+    <a href="#">Privacy</a> |
+    <a href="#">Terms</a>
+  </footer>
 </body>
 </html>
