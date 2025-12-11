@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QR Code Generator — ToolZenHub</title>
+  <meta name="description" content="Create free high-resolution QR codes. Customize colors, size, error correction and add a center logo. Download PNG for print or web. Fast & privacy-friendly." />
+  <meta name="keywords" content="QR code generator, create QR code, download QR code, QR code logo, free QR code" />
+  <link rel="canonical" href="https://toolzenhub.com/qr-code-generator" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"ToolZenHub QR Code Generator",
+    "url":"https://toolzenhub.com/qr-code-generator",
+    "description":"Create and download custom QR codes with color, size, and logo options.",
+    "applicationCategory":"Utilities"
+  }
+  </script>
+
+  <!-- QRCode.js (small, client-only) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-Gy3w5KqG3xGk9cY3p5m6b6k6b8m7q9Gg8p7O6G9H6J7K6H5JkGm8J7K6H5JkGm8J7K6==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <style>
+    :root{
+      --accent:#0b79ff;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --bg:#f3f4f6;
+      --radius:14px;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:#0f172a;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:28px;
+    }
+    .container{
+      width:100%;
+      max-width:1100px;
+      display:grid;
+      grid-template-columns:1fr 420px;
+      gap:20px;
+      align-items:start;
+    }
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow: 0 6px 22px rgba(15,23,42,0.07);
+      padding:20px;
+    }
+    header h1{margin:0 0 6px 0;font-size:20px}
+    header p{margin:0;color:var(--muted);font-size:13px}
+
+    .form-row{display:flex;gap:10px;align-items:center;margin-top:12px}
+    label{font-size:13px;color:var(--muted)}
+    input[type="text"], textarea, select{
+      width:100%;
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid #e6e9ee;
+      font-size:14px;
+      background:#fff;
+      box-sizing:border-box;
+    }
+    textarea{min-height:84px;resize:vertical}
+    .left .controls{margin-top:14px}
+    button{
+      background:var(--accent);
+      color:#fff;
+      border:0;
+      padding:10px 14px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    button.ghost{background:#fff;border:1px solid #e6e9ee;color:#0f172a}
+    .small{padding:8px 10px;font-size:13px}
+    .muted{color:var(--muted);font-size:13px}
+
+    /* preview column */
+    .preview-wrap{display:flex;flex-direction:column;gap:14px;align-items:center}
+    .qr-box{
+      width:100%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+      border-radius:12px;
+      background:linear-gradient(180deg,#fff,#fbfdff);
+      min-height:360px;
+    }
+    .qr-canvas{background:#fff;padding:16px;border-radius:8px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    .meta{width:100%;display:flex;justify-content:space-between;align-items:center}
+    .meta .hint{color:var(--muted);font-size:13px}
+    .actions{display:flex;gap:8px}
+
+    /* responsive */
+    @media (max-width:980px){
+      .container{grid-template-columns:1fr; padding:12px}
+      .preview-wrap{order:-1}
+    }
+
+    /* small helpers */
+    .option-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .file-input{display:flex;gap:8px;align-items:center}
+    .logo-thumb{width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid #e6e9ee}
+    .ad-placeholder{width:100%;height:90px;border-radius:10px;background:linear-gradient(90deg,#eef2ff,#fff);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:600}
+  </style>
+</head>
+<body>
+  <main class="container">
+    <!-- LEFT: Controls -->
+    <section class="card left" aria-labelledby="qr-title">
+      <header>
+        <h1 id="qr-title">Free QR Code Generator</h1>
+        <p>Create a custom QR code — set size, colors, error correction, add a center logo & download PNG for web or print.</p>
+      </header>
+
+      <form id="qrForm" onsubmit="return false;" aria-describedby="qr-desc">
+        <div id="qr-desc" class="muted">Enter the URL or text you want to encode. Preview updates as you change options.</div>
+
+        <div style="margin-top:12px">
+          <label for="text">Text or URL</label>
+          <textarea id="text" placeholder="https://toolzenhub.com — or any text" aria-label="Text or URL to encode">https://toolzenhub.com</textarea>
+        </div>
+
+        <div class="form-row">
+          <div style="flex:1">
+            <label for="size">Size (px)</label>
+            <select id="size" aria-label="QR code size">
+              <option value="200">200</option>
+              <option value="300" selected>300</option>
+              <option value="400">400</option>
+              <option value="600">600</option>
+            </select>
+          </div>
+          <div style="width:170px">
+            <label for="ec">Error correction</label>
+            <select id="ec" aria-label="Error correction level">
+              <option value="L">Low (L)</option>
+              <option value="M">Medium (M)</option>
+              <option value="Q">Quartile (Q)</option>
+              <option value="H" selected>High (H)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div style="flex:1">
+            <label for="fg">Foreground color</label>
+            <input id="fg" type="color" value="#000000" aria-label="Foreground color" />
+          </div>
+          <div style="flex:1">
+            <label for="bg">Background color</label>
+            <input id="bg" type="color" value="#ffffff" aria-label="Background color" />
+          </div>
+        </div>
+
+        <div class="form-row" style="align-items:center">
+          <label style="width:170px">Transparent background</label>
+          <input id="transparent" type="checkbox" aria-label="Transparent background option" />
+          <span class="muted" style="margin-left:auto">Tip: use transparent bg for overlays.</span>
+        </div>
+
+        <div style="margin-top:12px">
+          <label>Center logo (optional)</label>
+          <div class="file-input">
+            <input id="logoFile" type="file" accept="image/*" aria-label="Upload center logo" />
+            <div id="logoPreview" style="display:flex;align-items:center;gap:8px">
+              <img id="logoThumb" class="logo-thumb" style="display:none" alt="Logo preview">
+              <span id="logoName" class="muted" style="font-size:13px"></span>
+            </div>
+          </div>
+          <div class="muted" style="margin-top:8px;font-size:13px">
+            Recommended: square PNG with transparent background. Logo will be centered and sized automatically.
+          </div>
+        </div>
+
+        <div class="controls" style="margin-top:16px;display:flex;gap:8px">
+          <button id="generate" type="button">Generate</button>
+          <button id="download" type="button" class="ghost small">Download PNG</button>
+          <button id="copyData" type="button" class="ghost small">Copy Image</button>
+          <button id="clearBtn" type="button" class="ghost small">Clear</button>
+        </div>
+
+        <div style="margin-top:16px" class="muted">
+          <strong>Usage:</strong> use this QR for marketing, print, product labels, menus and more.
+        </div>
+
+        <!-- Suggested Ad placement -->
+        <div style="margin-top:18px">
+          <div class="ad-placeholder" aria-hidden="true">Ad: Place responsive ad here (top of tool)</div>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- RIGHT: Preview -->
+    <aside class="card preview-wrap" aria-labelledby="preview-title">
+      <div class="meta" style="width:100%">
+        <div>
+          <h2 id="preview-title" style="margin:0;font-size:16px">Preview</h2>
+          <div class="hint muted">Live - updates when you click Generate</div>
+        </div>
+        <div class="actions">
+          <button id="download2" class="small">Download</button>
+        </div>
+      </div>
+
+      <div class="qr-box">
+        <div id="qrcode" class="qr-canvas" role="img" aria-label="Generated QR code"></div>
+      </div>
+
+      <div style="width:100%;display:flex;gap:10px;flex-direction:column">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="muted">File type: PNG (high-resolution)</div>
+          <div class="muted">Ready for print</div>
+        </div>
+
+        <!-- Another ad placeholder -->
+        <div class="ad-placeholder" aria-hidden="true">Ad: Place medium rectangle ad here</div>
+
+        <details>
+          <summary style="cursor:pointer;padding:10px 0;font-weight:600">FAQ & Tips</summary>
+          <div style="padding-top:8px" class="muted">
+            <p><strong>Q:</strong> Which error level to use for logo? <br><strong>A:</strong> Use Q or H to allow a logo overlay without harming scannability.</p>
+            <p><strong>Q:</strong> Transparent background for PNG? <br><strong>A:</strong> Check the Transparent background box and use PNG for overlays on colored backgrounds.</p>
+          </div>
+        </details>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    // Basic QR generator code using QRCode.js
+    const qrcodeContainer = document.getElementById('qrcode');
+    let qr; // QRCode instance
+    function clearQRCode() {
+      qrcodeContainer.innerHTML = '';
+    }
+
+    function createQRCode(text, options = {}) {
+      clearQRCode();
+      const settings = Object.assign({
+        text: text || '',
+        width: 300,
+        height: 300,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      }, options);
+
+      // Create temporary element
+      qr = new QRCode(qrcodeContainer, {
+        text: settings.text,
+        width: settings.width,
+        height: settings.height,
+        colorDark: settings.colorDark,
+        colorLight: settings.colorLight,
+        correctLevel: settings.correctLevel
+      });
+
+      // If transparent background requested, we'll replace canvas with a new canvas and draw transparent
+      setTimeout(()=> {
+        const canvas = qrcodeContainer.querySelector('canvas');
+        if (!canvas) return;
+        if (options.transparent) {
+          // Convert white pixels to transparent
+          const ctx = canvas.getContext('2d');
+          const imgData = ctx.getImageData(0,0,canvas.width,canvas.height);
+          for (let i = 0; i < imgData.data.length; i += 4) {
+            // if pixel is white (or near white)
+            if (imgData.data[i] > 250 && imgData.data[i+1] > 250 && imgData.data[i+2] > 250) {
+              imgData.data[i+3] = 0; // alpha -> transparent
+            }
+          }
+          ctx.putImageData(imgData,0,0);
+        }
+
+        // If logo provided, overlay it
+        if (logoImg && logoLoaded) {
+          overlayLogoOnCanvas(canvas, logoImg);
+        }
+      }, 60);
+    }
+
+    function overlayLogoOnCanvas(canvas, logo) {
+      try {
+        const ctx = canvas.getContext('2d');
+        const size = Math.min(canvas.width, canvas.height);
+        const logoSize = Math.floor(size * 0.22); // ~22% of QR size (safe)
+        const x = Math.floor((canvas.width - logoSize) / 2);
+        const y = Math.floor((canvas.height - logoSize) / 2);
+
+        // optional white rounded background behind logo for contrast
+        const radius = 10;
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        roundedRect(ctx, x - 8, y - 8, logoSize + 16, logoSize + 16, radius);
+        ctx.fill();
+
+        ctx.drawImage(logo, x, y, logoSize, logoSize);
+      } catch (e) {
+        console.warn('Logo overlay failed', e);
+      }
+    }
+
+    function roundedRect(ctx, x, y, width, height, radius) {
+      ctx.moveTo(x + radius, y);
+      ctx.arcTo(x + width, y, x + width, y + height, radius);
+      ctx.arcTo(x + width, y + height, x, y + height, radius);
+      ctx.arcTo(x, y + height, x, y, radius);
+      ctx.arcTo(x, y, x + width, y, radius);
+      ctx.closePath();
+    }
+
+    // UI bindings
+    const textEl = document.getElementById('text');
+    const sizeEl = document.getElementById('size');
+    const ecEl = document.getElementById('ec');
+    const fgEl = document.getElementById('fg');
+    const bgEl = document.getElementById('bg');
+    const transparentEl = document.getElementById('transparent');
+    const generateBtn = document.getElementById('generate');
+    const downloadBtn = document.getElementById('download');
+    const download2Btn = document.getElementById('download2');
+    const copyBtn = document.getElementById('copyData');
+    const clearBtn = document.getElementById('clearBtn');
+
+    // logo upload
+    const logoFile = document.getElementById('logoFile');
+    const logoThumb = document.getElementById('logoThumb');
+    const logoName = document.getElementById('logoName');
+    let logoImg = null;
+    let logoLoaded = false;
+
+    logoFile.addEventListener('change', (e) => {
+      const f = e.target.files && e.target.files[0];
+      if (!f) { logoThumb.style.display='none'; logoName.textContent=''; logoImg=null; logoLoaded=false; return; }
+      logoName.textContent = f.name;
+      const reader = new FileReader();
+      reader.onload = function(ev){
+        logoImg = new Image();
+        logoImg.onload = function(){ logoLoaded=true; logoThumb.src = ev.target.result; logoThumb.style.display='block'; };
+        logoImg.src = ev.target.result;
+      };
+      reader.readAsDataURL(f);
+    });
+
+    function getCorrectLevel(val) {
+      switch(val){
+        case 'L': return QRCode.CorrectLevel.L;
+        case 'M': return QRCode.CorrectLevel.M;
+        case 'Q': return QRCode.CorrectLevel.Q;
+        case 'H': default: return QRCode.CorrectLevel.H;
+      }
+    }
+
+    function generateAction(){
+      const txt = textEl.value.trim();
+      if (!txt) {
+        alert('Please enter the text or URL to encode.');
+        return;
+      }
+
+      const size = parseInt(sizeEl.value,10) || 300;
+      const ec = getCorrectLevel(ecEl.value);
+      const colorDark = fgEl.value || '#000000';
+      const colorLight = transparentEl.checked ? '#ffffff' : (bgEl.value || '#ffffff'); // we'll make white->transparent later
+      createQRCode(txt, {
+        width: size,
+        height: size,
+        colorDark: colorDark,
+        colorLight: colorLight,
+        correctLevel: ec,
+        transparent: transparentEl.checked
+      });
+    }
+
+    generateBtn.addEventListener('click', generateAction);
+    // convenience: generate on Enter in textarea
+    textEl.addEventListener('keydown', (e)=> { if (e.key === 'Enter' && e.ctrlKey) generateAction(); });
+
+    clearBtn.addEventListener('click', ()=>{
+      textEl.value = '';
+      clearQRCode();
+    });
+
+    // download function
+    function downloadPNG(filename = 'qr.png'){
+      const canvas = qrcodeContainer.querySelector('canvas');
+      if (!canvas) { alert('Generate a QR code first'); return; }
+      // convert to data URL
+      const dataURL = canvas.toDataURL('image/png');
+      const a = document.createElement('a');
+      a.href = dataURL;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+
+    downloadBtn.addEventListener('click', ()=> downloadPNG('toolzenhub-qr.png'));
+    download2Btn.addEventListener('click', ()=> downloadPNG('toolzenhub-qr.png'));
+
+    // copy image to clipboard (as blob)
+    copyBtn.addEventListener('click', async ()=>{
+      const canvas = qrcodeContainer.querySelector('canvas');
+      if (!canvas) { alert('Generate a QR code first'); return; }
+      if (!navigator.clipboard) { alert('Clipboard API not supported in this browser'); return; }
+      canvas.toBlob(async function(blob){
+        try {
+          await navigator.clipboard.write([new ClipboardItem({'image/png': blob})]);
+          alert('QR image copied to clipboard. Paste into chat or document.');
+        } catch(err){
+          alert('Copy failed: ' + err);
+        }
+      });
+    });
+
+    // initial generate
+    window.addEventListener('load', () => {
+      generateAction();
+    });
+
+  </script>
+</body>
+</html>
