@@ -1,1 +1,10 @@
-
+[
+  {
+    "id": "emi",
+    "title": "EMI Calculator",
+    "slug": "emi",
+    "category": "loan",
+    "featured": true,
+    "popular": true
+  }
+]
