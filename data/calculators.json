@@ -2,9 +2,25 @@
   {
     "id": "emi",
     "title": "EMI Calculator",
-    "slug": "emi",
     "category": "loan",
-    "featured": true,
+    "popular": true
+  },
+  {
+    "id": "sip",
+    "title": "SIP Calculator",
+    "category": "investment",
+    "popular": true
+  },
+  {
+    "id": "gst",
+    "title": "GST Calculator",
+    "category": "tax",
+    "popular": true
+  },
+  {
+    "id": "bmi",
+    "title": "BMI Calculator",
+    "category": "health",
     "popular": true
   }
 ]
