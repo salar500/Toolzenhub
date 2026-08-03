@@ -1,1 +1,8 @@
-
+[
+  {
+    "id": "loan",
+    "title": "Loans",
+    "icon": "loan.svg",
+    "description": "EMI, Home Loan, Personal Loan"
+  }
+]
