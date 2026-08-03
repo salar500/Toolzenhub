@@ -2,7 +2,25 @@
   {
     "id": "loan",
     "title": "Loans",
-    "icon": "loan.svg",
-    "description": "EMI, Home Loan, Personal Loan"
+    "description": "EMI, Home Loan, Personal Loan",
+    "icon": "🏦"
+  },
+  {
+    "id": "investment",
+    "title": "Investment",
+    "description": "SIP, FD, RD",
+    "icon": "📈"
+  },
+  {
+    "id": "tax",
+    "title": "Tax",
+    "description": "Income Tax, GST",
+    "icon": "💰"
+  },
+  {
+    "id": "health",
+    "title": "Health",
+    "description": "BMI, Calories",
+    "icon": "❤️"
   }
 ]
