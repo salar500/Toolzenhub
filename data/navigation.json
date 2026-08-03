@@ -1,1 +1,27 @@
-
+[
+  {
+    "title": "Home",
+    "url": "/",
+    "icon": "home"
+  },
+  {
+    "title": "Categories",
+    "url": "/categories/",
+    "icon": "grid"
+  },
+  {
+    "title": "Calculators",
+    "url": "/calculators/",
+    "icon": "calculator"
+  },
+  {
+    "title": "Articles",
+    "url": "/articles/",
+    "icon": "book"
+  },
+  {
+    "title": "About",
+    "url": "/about.html",
+    "icon": "info"
+  }
+]
