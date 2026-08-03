@@ -35,3 +35,118 @@
     color:var(--primary);
     font-weight:600;
 }
+
+/* ===========================
+   Header
+=========================== */
+
+.site-header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    background:white;
+
+    border-bottom:1px solid var(--border);
+
+    backdrop-filter:blur(12px);
+
+}
+
+.navbar{
+
+    height:72px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+}
+
+.nav-menu{
+
+    display:flex;
+
+    gap:32px;
+
+}
+
+.nav-menu a{
+
+    font-weight:500;
+
+    transition:.25s;
+
+}
+
+.nav-menu a:hover{
+
+    color:var(--primary);
+
+}
+
+.nav-actions{
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+.search-btn,
+.menu-btn{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    border:1px solid var(--border);
+
+    background:white;
+
+}
+
+.menu-btn{
+
+    display:none;
+
+}
+
+@media(max-width:768px){
+
+    .nav-menu{
+
+        display:none;
+
+    }
+
+    .menu-btn{
+
+        display:block;
+
+    }
+
+}
