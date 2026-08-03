@@ -1,1 +1,54 @@
+/* ==========================
+   ToolZen Hub Design Tokens
+========================== */
 
+:root {
+
+  /* Brand */
+  --primary: #16a34a;
+  --primary-dark: #15803d;
+  --secondary: #0f172a;
+
+  /* Backgrounds */
+  --bg: #ffffff;
+  --bg-light: #f8fafc;
+  --bg-section: #f9fafb;
+
+  /* Text */
+  --text: #0f172a;
+  --text-light: #64748b;
+
+  /* Borders */
+  --border: #e5e7eb;
+
+  /* Status */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.05);
+  --shadow-md: 0 8px 25px rgba(0,0,0,.08);
+  --shadow-lg: 0 20px 45px rgba(0,0,0,.12);
+
+  /* Spacing */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 96px;
+
+  /* Container */
+  --container: 1280px;
+
+  /* Transition */
+  --transition: .25s ease;
+}
