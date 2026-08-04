@@ -1,40 +1,81 @@
-// assets/js/components/header.js
-
 import { loadJSON } from "../services/dataService.js";
 
 export async function renderHeader() {
 
-    const navigation = await loadJSON("/data/navigation.json");
+    const nav = await loadJSON("data/navigation.json");
 
-    const menu = navigation.map(item => `
-        <li class="navbar__item">
-            <a href="${item.url}"
-               class="navbar__link"
-               data-page="${item.id}">
+    const menu = nav.map(item => `
+        <li>
+            <a class="navbar__link"
+               href="${item.url}">
                ${item.title}
             </a>
         </li>
     `).join("");
 
     return `
-        <header class="site-header" id="siteHeader">
 
-            <div class="container">
+<header class="site-header">
 
-                <nav class="navbar">
+<div class="container">
 
-                    <a href="/" class="navbar__brand">
+<nav class="navbar">
 
-                        <div class="brand-logo">🧮</div>
+<a href="/" class="navbar__brand">
 
-                        <div class="brand-text">
+<div class="brand-logo">
+🧮
+</div>
 
-                            <span class="brand-title">
-                                ToolZen Hub
-                            </span>
+<div class="brand-text">
 
-                            <small>
-                                Smart Tools, Smarter You
+<span class="brand-title">
+
+ToolZen Hub
+
+</span>
+
+<span class="brand-subtitle">
+
+Smart Tools • Smarter Decisions
+
+</span>
+
+</div>
+
+</a>
+
+<ul class="navbar__menu">
+
+${menu}
+
+</ul>
+
+<div class="navbar__actions">
+
+<button class="btn btn-outline btn-sm">
+
+Search
+
+</button>
+
+<button class="btn btn-primary btn-sm menu-toggle">
+
+☰
+
+</button>
+
+</div>
+
+</nav>
+
+</div>
+
+</header>
+
+`;
+
+}                                Smart Tools, Smarter You
                             </small>
 
                         </div>
