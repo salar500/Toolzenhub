@@ -1,1 +1,81 @@
+/* =========================================================
+   Navigation
+========================================================= */
 
+.navbar__menu{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:32px;
+
+}
+
+.navbar__link{
+
+    position:relative;
+
+    color:var(--text-secondary);
+
+    font-weight:500;
+
+    transition:color .25s;
+
+}
+
+.navbar__link:hover{
+
+    color:var(--color-primary);
+
+}
+
+.navbar__link.active{
+
+    color:var(--color-primary);
+
+}
+
+.navbar__link.active::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:-8px;
+
+    width:100%;
+
+    height:2px;
+
+    background:var(--color-primary);
+
+}
+
+/* Mobile Button */
+
+.menu-toggle{
+
+    display:none;
+
+}
+
+/* Tablet */
+
+@media(max-width:992px){
+
+    .navbar__menu{
+
+        display:none;
+
+    }
+
+    .menu-toggle{
+
+        display:flex;
+
+    }
+
+}
