@@ -1,27 +1,27 @@
 [
   {
+    "id": "home",
     "title": "Home",
-    "url": "/",
-    "icon": "home"
+    "url": "/"
   },
   {
+    "id": "categories",
     "title": "Categories",
-    "url": "/categories/",
-    "icon": "grid"
+    "url": "/categories/"
   },
   {
+    "id": "calculators",
     "title": "Calculators",
-    "url": "/calculators/",
-    "icon": "calculator"
+    "url": "/calculators/"
   },
   {
+    "id": "articles",
     "title": "Articles",
-    "url": "/articles/",
-    "icon": "book"
+    "url": "/articles/"
   },
   {
+    "id": "about",
     "title": "About",
-    "url": "/about.html",
-    "icon": "info"
+    "url": "/about/"
   }
 ]
