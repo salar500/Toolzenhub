@@ -1,7 +1,17 @@
-// assets/js/core/bootstrap.js
+import { renderHeader } from "./components/header.js";
 
-export function bootstrap() {
+async function initHeader(){
 
-    console.log("ToolZen Hub Started");
+    const container=document.getElementById("header");
+
+    if(!container) return;
+
+    container.innerHTML=await renderHeader();
+
+}
+
+export async function bootstrap(){
+
+    await initHeader();
 
 }
