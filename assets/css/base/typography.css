@@ -1,1 +1,185 @@
 
+/* =========================================================
+   ToolZen Hub Design System
+   Typography
+========================================================= */
+
+/* ========================================
+   Body
+======================================== */
+
+body {
+    font-size: var(--font-base);
+    font-weight: var(--fw-normal);
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+/* ========================================
+   Headings
+======================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-primary);
+    font-weight: var(--fw-bold);
+    line-height: 1.2;
+    margin-bottom: var(--space-4);
+}
+
+h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+}
+
+h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+}
+
+h3 {
+    font-size: 1.75rem;
+}
+
+h4 {
+    font-size: 1.5rem;
+}
+
+h5 {
+    font-size: 1.25rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+/* ========================================
+   Paragraphs
+======================================== */
+
+p {
+    margin-bottom: var(--space-4);
+    color: var(--text-secondary);
+}
+
+/* ========================================
+   Links
+======================================== */
+
+a {
+    color: var(--color-primary);
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-primary-dark);
+}
+
+/* ========================================
+   Small Text
+======================================== */
+
+small {
+    font-size: var(--font-sm);
+    color: var(--text-light);
+}
+
+/* ========================================
+   Strong & Bold
+======================================== */
+
+strong,
+b {
+    font-weight: var(--fw-bold);
+}
+
+/* ========================================
+   Code
+======================================== */
+
+code,
+pre {
+    font-family: Consolas, Monaco, monospace;
+    background: var(--color-gray-100);
+    border-radius: var(--radius-sm);
+}
+
+code {
+    padding: 0.2rem 0.4rem;
+}
+
+pre {
+    padding: var(--space-4);
+    overflow-x: auto;
+}
+
+/* ========================================
+   Text Selection
+======================================== */
+
+::selection {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+/* ========================================
+   Utility Classes
+======================================== */
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-primary {
+    color: var(--color-primary);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.text-muted {
+    color: var(--text-light);
+}
+
+.fw-light {
+    font-weight: var(--fw-light);
+}
+
+.fw-normal {
+    font-weight: var(--fw-normal);
+}
+
+.fw-medium {
+    font-weight: var(--fw-medium);
+}
+
+.fw-semibold {
+    font-weight: var(--fw-semibold);
+}
+
+.fw-bold {
+    font-weight: var(--fw-bold);
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
