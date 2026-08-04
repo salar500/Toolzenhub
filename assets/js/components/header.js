@@ -1,40 +1,67 @@
-// ==========================================
-// ToolZen Hub - Global Header Component
-// ==========================================
+// assets/js/components/header.js
 
-export function Header() {
-  return `
-    <header class="site-header" id="siteHeader">
+import { loadJSON } from "../services/dataService.js";
 
-      <div class="container">
+export async function renderHeader() {
 
-        <nav class="navbar">
+    const navigation = await loadJSON("/data/navigation.json");
 
-          ${Logo()}
+    const menu = navigation.map(item => `
+        <li class="navbar__item">
+            <a href="${item.url}"
+               class="navbar__link"
+               data-page="${item.id}">
+               ${item.title}
+            </a>
+        </li>
+    `).join("");
 
-          <div class="navbar-right">
+    return `
+        <header class="site-header" id="siteHeader">
 
-            ${DesktopNavigation()}
+            <div class="container">
 
-            ${HeaderActions()}
+                <nav class="navbar">
 
-          </div>
+                    <a href="/" class="navbar__brand">
 
-        </nav>
+                        <div class="brand-logo">🧮</div>
 
-      </div>
+                        <div class="brand-text">
 
-      ${MobileDrawer()}
+                            <span class="brand-title">
+                                ToolZen Hub
+                            </span>
 
-    </header>
-  `;
-}
+                            <small>
+                                Smart Tools, Smarter You
+                            </small>
 
-// ---------------- Logo ----------------
+                        </div>
 
-function Logo() {
-  return `
-    <a href="/" class="navbar__brand">
+                    </a>
+
+                    <ul class="navbar__menu">
+
+                        ${menu}
+
+                    </ul>
+
+                    <div class="navbar__actions">
+
+                        <button id="searchButton">🔍</button>
+
+                        <button id="menuButton">☰</button>
+
+                    </div>
+
+                </nav>
+
+            </div>
+
+        </header>
+    `;
+}    <a href="/" class="navbar__brand">
 
       <div class="brand-icon">
         🧮
