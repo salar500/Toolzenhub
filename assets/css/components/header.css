@@ -1,28 +1,30 @@
-}
-
-/* ===========================
-   Header
-=========================== */
+/* =========================================================
+   ToolZen Hub Header
+========================================================= */
 
 .site-header{
-
     position:sticky;
-
     top:0;
+    left:0;
+    width:100%;
+    height:var(--header-height);
 
-    z-index:1000;
+    background:var(--bg-header);
 
-    background:white;
+    backdrop-filter:blur(18px);
 
-    border-bottom:1px solid var(--border);
+    border-bottom:1px solid var(--border-color);
 
-    backdrop-filter:blur(12px);
+    z-index:var(--z-sticky);
 
+    transition:all var(--transition-normal);
 }
+
+/* Container */
 
 .navbar{
 
-    height:72px;
+    height:100%;
 
     display:flex;
 
@@ -32,85 +34,80 @@
 
 }
 
-.logo{
+/* Brand */
+
+.navbar__brand{
 
     display:flex;
 
     align-items:center;
 
-    gap:10px;
+    gap:14px;
 
-    font-size:22px;
+    color:inherit;
+
+}
+
+.brand-logo{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+        135deg,
+        var(--color-primary),
+        var(--color-secondary)
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:1.3rem;
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.brand-text{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.brand-title{
+
+    font-size:1.1rem;
 
     font-weight:700;
 
-    color:var(--primary);
+}
+
+.brand-subtitle{
+
+    font-size:.8rem;
+
+    color:var(--text-secondary);
 
 }
 
-.nav-menu{
+/* Right Side */
+
+.navbar__actions{
 
     display:flex;
 
-    gap:32px;
-
-}
-
-.nav-menu a{
-
-    font-weight:500;
-
-    transition:.25s;
-
-}
-
-.nav-menu a:hover{
-
-    color:var(--primary);
-
-}
-
-.nav-actions{
-
-    display:flex;
+    align-items:center;
 
     gap:12px;
-
-}
-
-.search-btn,
-.menu-btn{
-
-    width:42px;
-
-    height:42px;
-
-    border-radius:50%;
-
-    border:1px solid var(--border);
-
-    background:white;
-
-}
-
-.menu-btn{
-
-    display:none;
-
-}
-
-@media(max-width:768px){
-
-    .nav-menu{
-
-        display:none;
-
-    }
-
-    .menu-btn{
-
-        display:block;
-
-    }
 
 }
