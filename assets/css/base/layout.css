@@ -1,1 +1,246 @@
+/* =========================================================
+   ToolZen Hub Design System
+   Layout
+========================================================= */
 
+/* ========================================
+   Container
+======================================== */
+
+.container {
+    width: 100%;
+    max-width: var(--container-width);
+    margin-inline: auto;
+    padding-inline: var(--container-padding);
+}
+
+/* ========================================
+   Sections
+======================================== */
+
+.section {
+    padding-block: var(--space-16);
+}
+
+.section-sm {
+    padding-block: var(--space-10);
+}
+
+.section-lg {
+    padding-block: var(--space-20);
+}
+
+/* ========================================
+   Display Utilities
+======================================== */
+
+.block {
+    display: block;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.flex {
+    display: flex;
+}
+
+.inline-flex {
+    display: inline-flex;
+}
+
+.grid {
+    display: grid;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ========================================
+   Flex Utilities
+======================================== */
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.items-start {
+    align-items: flex-start;
+}
+
+.items-end {
+    align-items: flex-end;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-around {
+    justify-content: space-around;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+.gap-8 { gap: var(--space-8); }
+
+/* ========================================
+   Grid Utilities
+======================================== */
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-6);
+}
+
+/* ========================================
+   Width Utilities
+======================================== */
+
+.w-100 {
+    width: 100%;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+/* ========================================
+   Margin Utilities
+======================================== */
+
+.mt-1 { margin-top: var(--space-1); }
+.mt-2 { margin-top: var(--space-2); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-6 { margin-top: var(--space-6); }
+.mt-8 { margin-top: var(--space-8); }
+
+.mb-1 { margin-bottom: var(--space-1); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-6 { margin-bottom: var(--space-6); }
+.mb-8 { margin-bottom: var(--space-8); }
+
+/* ========================================
+   Padding Utilities
+======================================== */
+
+.p-2 {
+    padding: var(--space-2);
+}
+
+.p-4 {
+    padding: var(--space-4);
+}
+
+.p-6 {
+    padding: var(--space-6);
+}
+
+.p-8 {
+    padding: var(--space-8);
+}
+
+/* ========================================
+   Border Radius
+======================================== */
+
+.rounded-sm {
+    border-radius: var(--radius-sm);
+}
+
+.rounded-md {
+    border-radius: var(--radius-md);
+}
+
+.rounded-lg {
+    border-radius: var(--radius-lg);
+}
+
+.rounded-full {
+    border-radius: var(--radius-full);
+}
+
+/* ========================================
+   Shadow
+======================================== */
+
+.shadow-sm {
+    box-shadow: var(--shadow-sm);
+}
+
+.shadow-md {
+    box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+    box-shadow: var(--shadow-lg);
+}
+
+/* ========================================
+   Responsive
+======================================== */
+
+@media (max-width: 992px) {
+
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .grid-4,
+    .grid-3,
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding-block: var(--space-10);
+    }
+
+}
