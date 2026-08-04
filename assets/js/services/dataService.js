@@ -2,25 +2,25 @@
 
 const cache = new Map();
 
-export async function getJSON(file) {
+export async function loadJSON(path) {
 
-    if (cache.has(file)) {
+    if (cache.has(path)) {
 
-        return cache.get(file);
+        return cache.get(path);
 
     }
 
-    const response = await fetch(`/data/${file}`);
+    const response = await fetch(path);
 
     if (!response.ok) {
 
-        throw new Error(`Cannot load ${file}`);
+        throw new Error(`Unable to load: ${path}`);
 
     }
 
     const data = await response.json();
 
-    cache.set(file, data);
+    cache.set(path, data);
 
     return data;
 
