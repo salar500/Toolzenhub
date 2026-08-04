@@ -1,7 +1,9 @@
-import { Header } from "./components/header.js";
+// assets/js/core/app.js
+
+import { bootstrap } from "./bootstrap.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    document.getElementById("header").innerHTML = Header();
+    bootstrap();
 
 });
