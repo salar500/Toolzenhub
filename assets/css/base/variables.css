@@ -1,1 +1,142 @@
+/* =========================================================
+   ToolZen Hub Design System
+   Variables
+========================================================= */
 
+:root {
+
+    /* ========================================
+       Brand Colors
+    ======================================== */
+
+    --color-primary: #2563eb;
+    --color-primary-dark: #1d4ed8;
+    --color-primary-light: #dbeafe;
+
+    --color-secondary: #14b8a6;
+    --color-accent: #f59e0b;
+
+    --color-success: #16a34a;
+    --color-warning: #f59e0b;
+    --color-danger: #dc2626;
+    --color-info: #0ea5e9;
+
+    /* ========================================
+       Neutral Colors
+    ======================================== */
+
+    --color-white: #ffffff;
+    --color-black: #111827;
+
+    --color-gray-50: #f9fafb;
+    --color-gray-100: #f3f4f6;
+    --color-gray-200: #e5e7eb;
+    --color-gray-300: #d1d5db;
+    --color-gray-400: #9ca3af;
+    --color-gray-500: #6b7280;
+    --color-gray-600: #4b5563;
+    --color-gray-700: #374151;
+    --color-gray-800: #1f2937;
+    --color-gray-900: #111827;
+
+    /* ========================================
+       Background
+    ======================================== */
+
+    --bg-body: var(--color-gray-50);
+    --bg-card: var(--color-white);
+    --bg-header: rgba(255,255,255,0.92);
+
+    /* ========================================
+       Text
+    ======================================== */
+
+    --text-primary: var(--color-gray-900);
+    --text-secondary: var(--color-gray-600);
+    --text-light: var(--color-gray-400);
+
+    /* ========================================
+       Border
+    ======================================== */
+
+    --border-color: var(--color-gray-200);
+
+    /* ========================================
+       Typography
+    ======================================== */
+
+    --font-family:
+        "Inter",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    --font-xs: .75rem;
+    --font-sm: .875rem;
+    --font-base: 1rem;
+    --font-lg: 1.125rem;
+    --font-xl: 1.25rem;
+    --font-2xl: 1.5rem;
+    --font-3xl: 2rem;
+    --font-4xl: 2.5rem;
+
+    --fw-light: 300;
+    --fw-normal: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extra-bold: 800;
+
+    /* ========================================
+       Spacing
+    ======================================== */
+
+    --space-1: .25rem;
+    --space-2: .5rem;
+    --space-3: .75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+
+    /* ========================================
+       Border Radius
+    ======================================== */
+
+    --radius-xs: .25rem;
+    --radius-sm: .5rem;
+    --radius-md: .75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --radius-full: 999px;
+
+    /* ========================================
+       Shadows
+    ======================================== */
+
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+
+    --shadow-md: 0 6px 20px rgba(0,0,0,.08);
+
+    --shadow-lg: 0 12px 35px rgba(0,0,0,.12);
+
+    /* ========================================
+       Container
+    ======================================== */
+
+    --container-width: 1280px;
+    --container-padding: 1rem;
+
+    /* ========================================
+       Header
+    ======================================== */
+
+    --header-height: 72px;
+
+    /* ========================================
