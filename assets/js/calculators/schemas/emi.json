@@ -1,1 +1,25 @@
-
+{
+  "id": "emi",
+  "title": "EMI Calculator",
+  "formula": "emi",
+  "inputs": [
+    {
+      "id": "loan",
+      "label": "Loan Amount",
+      "min": 1000,
+      "max": 100000000
+    },
+    {
+      "id": "rate",
+      "label": "Interest Rate",
+      "min": 1,
+      "max": 30
+    },
+    {
+      "id": "years",
+      "label": "Loan Tenure (Years)",
+      "min": 1,
+      "max": 40
+    }
+  ]
+}
