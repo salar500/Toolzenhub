@@ -1,1 +1,118 @@
+/* =========================================================
+   ToolZen Hub Design System
+   Reset
+========================================================= */
 
+/* Box Sizing */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Remove Default Margin & Padding */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Smooth Scrolling */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Body */
+
+body {
+    min-height: 100vh;
+    font-family: var(--font-family);
+    background: var(--bg-body);
+    color: var(--text-primary);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Images */
+
+img,
+picture,
+svg,
+video,
+canvas {
+    display: block;
+    max-width: 100%;
+}
+
+/* Forms */
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+}
+
+/* Buttons */
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* Links */
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Lists */
+
+ul,
+ol {
+    list-style: none;
+}
+
+/* Tables */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+/* Textarea */
+
+textarea {
+    resize: vertical;
+}
+
+/* Form Elements */
+
+input,
+textarea,
+select {
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+/* Disabled Elements */
+
+button:disabled,
+input:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Hidden */
+
+[hidden] {
+    display: none !important;
+}
