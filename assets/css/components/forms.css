@@ -1,0 +1,382 @@
+/* =========================================================
+   ToolZen Hub
+   Forms Component
+========================================================= */
+
+
+/* ========================================
+   Form
+======================================== */
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+
+/* ========================================
+   Form Group
+======================================== */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+
+/* ========================================
+   Label
+======================================== */
+
+.form-label {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: var(--space-2);
+
+    color: var(--text-primary);
+
+    font-size: var(--font-sm);
+
+    font-weight: var(--fw-semibold);
+
+    line-height: 1.4;
+}
+
+
+/* Required Indicator */
+
+.form-label--required::after {
+    content: "*";
+
+    color: var(--color-danger);
+}
+
+
+/* ========================================
+   Help Text
+======================================== */
+
+.form-help {
+    margin: 0;
+
+    color: var(--text-light);
+
+    font-size: var(--font-xs);
+
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   Input Base
+======================================== */
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+
+    padding: .8rem 1rem;
+
+    border: 1px solid var(--border-color);
+
+    border-radius: var(--radius-md);
+
+    background: var(--bg-card);
+
+    color: var(--text-primary);
+
+    font-size: var(--font-base);
+
+    line-height: 1.5;
+
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background var(--transition-fast);
+}
+
+
+/* ========================================
+   Input Focus
+======================================== */
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    border-color: var(--color-primary);
+
+    box-shadow:
+        0 0 0 3px var(--color-primary-light);
+}
+
+
+/* ========================================
+   Placeholder
+======================================== */
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: var(--text-light);
+
+    opacity: 1;
+}
+
+
+/* ========================================
+   Select
+======================================== */
+
+.form-select {
+    cursor: pointer;
+
+    appearance: auto;
+}
+
+
+/* ========================================
+   Textarea
+======================================== */
+
+.form-textarea {
+    min-height: 120px;
+
+    resize: vertical;
+}
+
+
+/* ========================================
+   Input With Prefix / Suffix
+======================================== */
+
+.input-group {
+    position: relative;
+
+    display: flex;
+
+    align-items: stretch;
+}
+
+
+.input-group .form-input {
+    min-width: 0;
+}
+
+
+.input-prefix,
+.input-suffix {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding-inline: var(--space-3);
+
+    background: var(--color-gray-100);
+
+    color: var(--text-secondary);
+
+    font-size: var(--font-sm);
+
+    white-space: nowrap;
+}
+
+
+.input-prefix {
+    border: 1px solid var(--border-color);
+
+    border-right: 0;
+
+    border-radius:
+        var(--radius-md)
+        0
+        0
+        var(--radius-md);
+}
+
+
+.input-prefix + .form-input {
+    border-radius:
+        0
+        var(--radius-md)
+        var(--radius-md)
+        0;
+}
+
+
+.form-input + .input-suffix {
+    border: 1px solid var(--border-color);
+
+    border-left: 0;
+
+    border-radius:
+        0
+        var(--radius-md)
+        var(--radius-md)
+        0;
+}
+
+
+/* ========================================
+   Error State
+======================================== */
+
+.form-group--error .form-input,
+.form-group--error .form-select,
+.form-group--error .form-textarea {
+    border-color: var(--color-danger);
+}
+
+
+.form-group--error .form-input:focus,
+.form-group--error .form-select:focus,
+.form-group--error .form-textarea:focus {
+    box-shadow:
+        0 0 0 3px rgba(220, 38, 38, .12);
+}
+
+
+.form-error {
+    margin: 0;
+
+    color: var(--color-danger);
+
+    font-size: var(--font-xs);
+}
+
+
+/* ========================================
+   Success State
+======================================== */
+
+.form-group--success .form-input,
+.form-group--success .form-select,
+.form-group--success .form-textarea {
+    border-color: var(--color-success);
+}
+
+
+/* ========================================
+   Disabled
+======================================== */
+
+.form-input:disabled,
+.form-select:disabled,
+.form-textarea:disabled {
+    background: var(--color-gray-100);
+
+    cursor: not-allowed;
+}
+
+
+/* ========================================
+   Checkbox / Radio
+======================================== */
+
+.form-check {
+    display: flex;
+
+    align-items: center;
+
+    gap: var(--space-2);
+
+    cursor: pointer;
+}
+
+
+.form-check input {
+    width: 18px;
+
+    height: 18px;
+
+    accent-color: var(--color-primary);
+
+    cursor: pointer;
+}
+
+
+.form-check-label {
+    color: var(--text-secondary);
+
+    font-size: var(--font-sm);
+}
+
+
+/* ========================================
+   Form Row
+======================================== */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: var(--space-5);
+}
+
+
+/* ========================================
+   Form Actions
+======================================== */
+
+.form-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: var(--space-3);
+
+    margin-top: var(--space-3);
+}
+
+
+/* ========================================
+   Calculator Form
+======================================== */
+
+.calculator-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--space-5);
+
+    padding: var(--space-6);
+
+    background: var(--bg-card);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+}
+
+
+/* ========================================
+   Responsive
+======================================== */
+
+@media (max-width: 768px) {
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+
+}
