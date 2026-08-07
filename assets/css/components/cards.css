@@ -1,1 +1,403 @@
+/* =========================================================
+   ToolZen Hub
+   Cards Component
+========================================================= */
 
+/* ========================================
+   Base Card
+======================================== */
+
+.card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    background: var(--bg-card);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: var(--radius-lg);
+
+    overflow: hidden;
+
+    transition:
+        transform var(--transition-normal),
+        box-shadow var(--transition-normal),
+        border-color var(--transition-normal);
+}
+
+
+/* ========================================
+   Card Hover
+======================================== */
+
+.card--interactive {
+    cursor: pointer;
+}
+
+.card--interactive:hover {
+    transform: translateY(-4px);
+
+    border-color: var(--color-primary-light);
+
+    box-shadow: var(--shadow-lg);
+}
+
+
+/* ========================================
+   Card Header
+======================================== */
+
+.card__header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: var(--space-4);
+
+    padding: var(--space-5) var(--space-6);
+
+    border-bottom: 1px solid var(--border-color);
+}
+
+
+/* ========================================
+   Card Body
+======================================== */
+
+.card__body {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+
+    padding: var(--space-6);
+}
+
+
+/* ========================================
+   Card Footer
+======================================== */
+
+.card__footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: var(--space-4);
+
+    padding: var(--space-4) var(--space-6);
+
+    border-top: 1px solid var(--border-color);
+}
+
+
+/* ========================================
+   Card Icon
+======================================== */
+
+.card__icon {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    border-radius: var(--radius-md);
+
+    background: var(--color-primary-light);
+
+    color: var(--color-primary);
+
+    font-size: var(--font-xl);
+}
+
+
+/* ========================================
+   Card Title
+======================================== */
+
+.card__title {
+    margin: 0;
+
+    color: var(--text-primary);
+
+    font-size: var(--font-lg);
+
+    font-weight: var(--fw-semibold);
+
+    line-height: 1.3;
+}
+
+
+/* ========================================
+   Card Description
+======================================== */
+
+.card__description {
+    margin-top: var(--space-2);
+    margin-bottom: 0;
+
+    color: var(--text-secondary);
+
+    font-size: var(--font-sm);
+
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   Calculator Card
+======================================== */
+
+.calculator-card {
+    min-height: 220px;
+}
+
+.calculator-card__icon {
+    margin-bottom: var(--space-4);
+}
+
+.calculator-card__content {
+    flex: 1;
+}
+
+.calculator-card__action {
+    margin-top: var(--space-5);
+}
+
+
+/* ========================================
+   Category Card
+======================================== */
+
+.category-card {
+    min-height: 180px;
+
+    text-align: left;
+}
+
+.category-card__icon {
+    margin-bottom: var(--space-4);
+}
+
+.category-card__count {
+    display: inline-flex;
+
+    align-items: center;
+
+    width: fit-content;
+
+    margin-top: var(--space-4);
+
+    padding: var(--space-1) var(--space-3);
+
+    border-radius: var(--radius-full);
+
+    background: var(--color-gray-100);
+
+    color: var(--text-secondary);
+
+    font-size: var(--font-xs);
+
+    font-weight: var(--fw-medium);
+}
+
+
+/* ========================================
+   Article Card
+======================================== */
+
+.article-card__image {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    object-fit: cover;
+
+    background: var(--color-gray-100);
+}
+
+.article-card__content {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+
+    padding: var(--space-5);
+}
+
+.article-card__meta {
+    display: flex;
+
+    align-items: center;
+
+    gap: var(--space-3);
+
+    margin-bottom: var(--space-3);
+
+    color: var(--text-light);
+
+    font-size: var(--font-xs);
+}
+
+.article-card__title {
+    margin: 0;
+}
+
+.article-card__excerpt {
+    margin-top: var(--space-3);
+}
+
+.article-card__link {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: var(--space-2);
+
+    margin-top: auto;
+    padding-top: var(--space-5);
+
+    font-size: var(--font-sm);
+
+    font-weight: var(--fw-semibold);
+}
+
+
+/* ========================================
+   Feature Card
+======================================== */
+
+.feature-card {
+    padding: var(--space-6);
+
+    text-align: center;
+}
+
+.feature-card__icon {
+    margin-inline: auto;
+
+    margin-bottom: var(--space-4);
+}
+
+
+/* ========================================
+   Featured Card
+======================================== */
+
+.card--featured {
+    border-color: var(--color-primary);
+
+    box-shadow: var(--shadow-md);
+}
+
+.card--featured::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0 0 auto 0;
+
+    height: 3px;
+
+    background: var(--color-primary);
+}
+
+
+/* ========================================
+   Compact Card
+======================================== */
+
+.card--compact .card__body {
+    padding: var(--space-4);
+}
+
+.card--compact .card__header {
+    padding: var(--space-4);
+}
+
+.card--compact .card__footer {
+    padding: var(--space-3) var(--space-4);
+}
+
+
+/* ========================================
+   Horizontal Card
+======================================== */
+
+.card--horizontal {
+    flex-direction: row;
+}
+
+.card--horizontal .card__icon {
+    margin: var(--space-5);
+}
+
+.card--horizontal .card__body {
+    padding-left: 0;
+}
+
+
+/* ========================================
+   Card Grid
+======================================== */
+
+.card-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: var(--space-6);
+}
+
+
+/* ========================================
+   Responsive
+======================================== */
+
+@media (max-width: 992px) {
+
+    .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card__header,
+    .card__body {
+        padding: var(--space-5);
+    }
+
+    .card--horizontal {
+        flex-direction: column;
+    }
+
+    .card--horizontal .card__icon {
+        margin: var(--space-5) var(--space-5) 0;
+    }
+
+    .card--horizontal .card__body {
+        padding-top: 0;
+        padding-left: var(--space-5);
+    }
+
+}
