@@ -11,14 +11,22 @@ export function renderHeader() {
         return;
     }
 
+
     header.innerHTML = `
+
         <div class="site-header">
 
             <div class="container">
 
-                <nav class="navbar" aria-label="Main navigation">
+                <nav
+                    class="navbar"
+                    aria-label="Main navigation"
+                >
 
-                    <!-- Brand -->
+
+                    <!-- ======================================
+                         Brand
+                    ======================================= -->
 
                     <a
                         href="/"
@@ -29,6 +37,7 @@ export function renderHeader() {
                         <span class="brand-logo">
                             <span aria-hidden="true">▦</span>
                         </span>
+
 
                         <span class="brand-text">
 
@@ -45,11 +54,14 @@ export function renderHeader() {
                     </a>
 
 
-                    <!-- Navigation -->
+                    <!-- ======================================
+                         Desktop Navigation
+                    ======================================= -->
 
                     <ul class="navbar__menu">
 
                         <li>
+
                             <a
                                 href="/"
                                 class="navbar__link active"
@@ -57,9 +69,12 @@ export function renderHeader() {
                             >
                                 Home
                             </a>
+
                         </li>
 
+
                         <li>
+
                             <a
                                 href="categories.html"
                                 class="navbar__link"
@@ -67,9 +82,12 @@ export function renderHeader() {
                             >
                                 Categories
                             </a>
+
                         </li>
 
+
                         <li>
+
                             <a
                                 href="articles.html"
                                 class="navbar__link"
@@ -77,9 +95,12 @@ export function renderHeader() {
                             >
                                 Articles
                             </a>
+
                         </li>
 
+
                         <li>
+
                             <a
                                 href="about.html"
                                 class="navbar__link"
@@ -87,35 +108,30 @@ export function renderHeader() {
                             >
                                 About
                             </a>
+
                         </li>
 
                     </ul>
 
 
-                    <!-- Actions -->
+                    <!-- ======================================
+                         Header Actions
+                    ======================================= -->
 
                     <div class="navbar__actions">
 
                         <button
                             type="button"
-                            class="header-action"
-                            data-action="search"
-                            aria-label="Search"
-                        >
-                            <span aria-hidden="true">⌕</span>
-                        </button>
-
-
-                        <button
-                            type="button"
-                            class="header-action menu-toggle"
+                            class="menu-toggle"
                             data-action="menu"
-                            aria-label="Open menu"
+                            aria-label="Open navigation menu"
                             aria-expanded="false"
                         >
+
                             <span></span>
                             <span></span>
                             <span></span>
+
                         </button>
 
                     </div>
