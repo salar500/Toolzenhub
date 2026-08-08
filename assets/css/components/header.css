@@ -46,7 +46,7 @@
 
     align-items: center;
 
-    gap: 90px;
+    gap: 12px;
 
     width: fit-content;
 
@@ -120,24 +120,6 @@
 
 
 /* =========================================================
-   Desktop Navigation Position
-========================================================= */
-
-@media (min-width: 901px) {
-
-    /*
-       Space between ToolZen Hub
-       and Home.
-    */
-
-    .navbar__menu {
-        margin-left: 90px;
-    }
-
-}
-
-
-/* =========================================================
    Header Actions
 ========================================================= */
 
@@ -146,7 +128,7 @@
 
     align-items: center;
 
-    margin-left: 18px;
+    margin-left: 12px;
 
     gap: 0;
 }
@@ -220,8 +202,6 @@
 
     .navbar__actions {
         margin-left: auto;
-
-        gap: 0;
     }
 
 }
