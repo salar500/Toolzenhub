@@ -134,7 +134,7 @@
 
     justify-content: flex-end;
 
-    gap: 4px;
+    gap: 0;
 }
 
 
@@ -197,8 +197,8 @@
 @media (min-width: 901px) {
 
     /*
-       Small separation between
-       About and hamburger.
+       Keeps About and the hamburger
+       visually close together.
     */
 
     .menu-toggle {
