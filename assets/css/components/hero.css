@@ -1,1 +1,436 @@
+/* =========================================================
+   ToolZen Hub
+   Hero Component
+========================================================= */
 
+
+/* ========================================
+   Hero Section
+======================================== */
+
+.hero {
+    position: relative;
+
+    overflow: hidden;
+
+    padding-block: clamp(
+        var(--space-12),
+        8vw,
+        var(--space-20)
+    );
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--color-primary-light),
+            var(--bg-body) 55%,
+            var(--bg-card)
+        );
+}
+
+
+/* ========================================
+   Hero Container
+======================================== */
+
+.hero__container {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.2fr)
+        minmax(320px, .8fr);
+
+    align-items: center;
+
+    gap: var(--space-12);
+}
+
+
+/* ========================================
+   Hero Content
+======================================== */
+
+.hero__content {
+    position: relative;
+
+    z-index: 1;
+}
+
+
+/* ========================================
+   Eyebrow
+======================================== */
+
+.hero__eyebrow {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: var(--space-2);
+
+    margin-bottom: var(--space-4);
+
+    padding:
+        var(--space-2)
+        var(--space-3);
+
+    border: 1px solid var(--color-primary-light);
+
+    border-radius: var(--radius-full);
+
+    background: var(--bg-card);
+
+    color: var(--color-primary);
+
+    font-size: var(--font-sm);
+
+    font-weight: var(--fw-semibold);
+}
+
+
+/* ========================================
+   Hero Title
+======================================== */
+
+.hero__title {
+    max-width: 760px;
+
+    margin-bottom: var(--space-5);
+
+    font-size: clamp(
+        2.5rem,
+        6vw,
+        4.5rem
+    );
+
+    font-weight: var(--fw-extra-bold);
+
+    line-height: 1.05;
+
+    letter-spacing: -.04em;
+}
+
+
+/* ========================================
+   Highlight
+======================================== */
+
+.hero__highlight {
+    color: var(--color-primary);
+}
+
+
+/* ========================================
+   Hero Description
+======================================== */
+
+.hero__description {
+    max-width: 650px;
+
+    margin-bottom: var(--space-8);
+
+    color: var(--text-secondary);
+
+    font-size: var(--font-lg);
+
+    line-height: 1.7;
+}
+
+
+/* ========================================
+   Hero Actions
+======================================== */
+
+.hero__actions {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: var(--space-3);
+}
+
+
+/* ========================================
+   Hero Search
+======================================== */
+
+.hero__search {
+    width: min(620px, 100%);
+
+    margin-top: var(--space-6);
+}
+
+
+/* ========================================
+   Hero Visual
+======================================== */
+
+.hero__visual {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 360px;
+}
+
+
+/* ========================================
+   Hero Card
+======================================== */
+
+.hero__card {
+    position: relative;
+
+    width: min(380px, 100%);
+
+    padding: var(--space-8);
+
+    background: var(--bg-card);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: var(--radius-xl);
+
+    box-shadow: var(--shadow-lg);
+
+    animation: float 5s ease-in-out infinite;
+}
+
+
+/* ========================================
+   Hero Card Icon
+======================================== */
+
+.hero__card-icon {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 64px;
+    height: 64px;
+
+    margin-bottom: var(--space-5);
+
+    border-radius: var(--radius-lg);
+
+    background: var(--color-primary-light);
+
+    color: var(--color-primary);
+
+    font-size: var(--font-2xl);
+}
+
+
+/* ========================================
+   Hero Card Title
+======================================== */
+
+.hero__card-title {
+    margin-bottom: var(--space-2);
+
+    font-size: var(--font-xl);
+
+    font-weight: var(--fw-bold);
+}
+
+
+/* ========================================
+   Hero Card Description
+======================================== */
+
+.hero__card-description {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: var(--font-sm);
+}
+
+
+/* ========================================
+   Decorative Elements
+======================================== */
+
+.hero__decoration {
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    opacity: .6;
+
+    filter: blur(1px);
+}
+
+
+.hero__decoration--one {
+    top: -100px;
+
+    right: -100px;
+
+    width: 260px;
+
+    height: 260px;
+
+    background: var(--color-primary-light);
+}
+
+
+.hero__decoration--two {
+    bottom: -120px;
+
+    left: -100px;
+
+    width: 220px;
+
+    height: 220px;
+
+    background: rgba(20, 184, 166, .12);
+}
+
+
+/* ========================================
+   Stats
+======================================== */
+
+.hero__stats {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: var(--space-6);
+
+    margin-top: var(--space-8);
+}
+
+
+.hero__stat {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.hero__stat-value {
+    color: var(--text-primary);
+
+    font-size: var(--font-xl);
+
+    font-weight: var(--fw-bold);
+}
+
+
+.hero__stat-label {
+    color: var(--text-light);
+
+    font-size: var(--font-xs);
+}
+
+
+/* ========================================
+   Floating Animation
+======================================== */
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+}
+
+
+/* ========================================
+   Responsive
+======================================== */
+
+@media (max-width: 992px) {
+
+    .hero__container {
+        grid-template-columns: 1fr;
+
+        gap: var(--space-10);
+
+        text-align: center;
+    }
+
+    .hero__content {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+    .hero__description {
+        margin-inline: auto;
+    }
+
+    .hero__actions {
+        justify-content: center;
+    }
+
+    .hero__visual {
+        min-height: 280px;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .hero {
+        padding-block: var(--space-12);
+    }
+
+    .hero__title {
+        font-size: clamp(
+            2.25rem,
+            11vw,
+            3.25rem
+        );
+    }
+
+    .hero__description {
+        font-size: var(--font-base);
+    }
+
+    .hero__card {
+        padding: var(--space-6);
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .hero__actions {
+        width: 100%;
+
+        flex-direction: column;
+    }
+
+    .hero__actions .btn {
+        width: 100%;
+    }
+
+    .hero__stats {
+        justify-content: center;
+
+        gap: var(--space-4);
+    }
+
+}
