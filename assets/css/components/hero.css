@@ -1,48 +1,69 @@
 /* =========================================================
    ToolZen Hub
-   Hero Component
+   Global Hero
 ========================================================= */
-
-
-/* ========================================
-   Hero Section
-======================================== */
 
 .hero {
     position: relative;
 
     overflow: hidden;
 
-    padding-block: clamp(
-        var(--space-12),
-        8vw,
-        var(--space-20)
-    );
-
     background:
         linear-gradient(
             135deg,
-            var(--color-primary-light),
-            var(--bg-body) 55%,
-            var(--bg-card)
+            #f3fbf8 0%,
+            #f8fcfb 55%,
+            #eef8f5 100%
         );
+
+    border-bottom: 1px solid #eef2f1;
 }
 
 
 /* ========================================
-   Hero Container
+   Background Decoration
 ======================================== */
 
-.hero__container {
+.hero__background {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 48%;
+    height: 100%;
+
+    background:
+        radial-gradient(
+            circle at 60% 45%,
+            rgba(11, 159, 88, .08),
+            transparent 60%
+        );
+
+    pointer-events: none;
+}
+
+
+/* ========================================
+   Hero Grid
+======================================== */
+
+.hero__grid {
+    position: relative;
+
+    min-height: 340px;
+
     display: grid;
 
     grid-template-columns:
-        minmax(0, 1.2fr)
-        minmax(320px, .8fr);
+        minmax(0, 1fr)
+        minmax(400px, .9fr);
 
     align-items: center;
 
-    gap: var(--space-12);
+    gap: 40px;
+
+    padding-block: 38px;
 }
 
 
@@ -53,7 +74,7 @@
 .hero__content {
     position: relative;
 
-    z-index: 1;
+    z-index: 2;
 }
 
 
@@ -66,100 +87,168 @@
 
     align-items: center;
 
-    gap: var(--space-2);
+    gap: 10px;
 
-    margin-bottom: var(--space-4);
+    margin-bottom: 20px;
 
-    padding:
-        var(--space-2)
-        var(--space-3);
+    padding: 9px 15px;
 
-    border: 1px solid var(--color-primary-light);
+    border: 1px solid #d9eee5;
 
-    border-radius: var(--radius-full);
+    border-radius: 999px;
 
-    background: var(--bg-card);
+    background: rgba(235, 249, 243, .9);
 
-    color: var(--color-primary);
+    color: #0b8750;
 
-    font-size: var(--font-sm);
+    font-size: 13px;
 
-    font-weight: var(--fw-semibold);
+    font-weight: 600;
+}
+
+
+.hero__dot {
+    color: #53b987;
 }
 
 
 /* ========================================
-   Hero Title
+   Title
 ======================================== */
 
 .hero__title {
-    max-width: 760px;
+    max-width: 620px;
 
-    margin-bottom: var(--space-5);
+    margin: 0 0 16px;
 
-    font-size: clamp(
-        2.5rem,
-        6vw,
-        4.5rem
-    );
+    color: #101828;
 
-    font-weight: var(--fw-extra-bold);
+    font-size: clamp(40px, 4.2vw, 56px);
+
+    font-weight: 800;
 
     line-height: 1.05;
 
-    letter-spacing: -.04em;
+    letter-spacing: -1.8px;
+}
+
+
+.hero__title-highlight {
+    display: block;
+
+    color: #0b9f58;
 }
 
 
 /* ========================================
-   Highlight
-======================================== */
-
-.hero__highlight {
-    color: var(--color-primary);
-}
-
-
-/* ========================================
-   Hero Description
+   Description
 ======================================== */
 
 .hero__description {
-    max-width: 650px;
+    max-width: 500px;
 
-    margin-bottom: var(--space-8);
+    margin: 0 0 24px;
 
-    color: var(--text-secondary);
+    color: #475467;
 
-    font-size: var(--font-lg);
+    font-size: 18px;
 
-    line-height: 1.7;
+    line-height: 1.55;
 }
 
 
 /* ========================================
-   Hero Actions
-======================================== */
-
-.hero__actions {
-    display: flex;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: var(--space-3);
-}
-
-
-/* ========================================
-   Hero Search
+   Search
 ======================================== */
 
 .hero__search {
-    width: min(620px, 100%);
+    position: relative;
 
-    margin-top: var(--space-6);
+    display: flex;
+    align-items: center;
+
+    width: min(100%, 500px);
+
+    height: 52px;
+
+    overflow: hidden;
+
+    border: 1px solid #e2e8e6;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 4px 16px rgba(16, 24, 40, .07);
+}
+
+
+.hero__search-icon {
+    padding-left: 17px;
+
+    color: #98a2b3;
+
+    font-size: 25px;
+}
+
+
+.hero__search input {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 100%;
+
+    padding: 0 14px;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    color: #101828;
+
+    font-family: inherit;
+
+    font-size: 14px;
+}
+
+
+.hero__search input::placeholder {
+    color: #98a2b3;
+}
+
+
+/* ========================================
+   Search Button
+======================================== */
+
+.hero__search-button {
+    width: 55px;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+
+    background: #0b9f58;
+
+    color: #ffffff;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease;
+}
+
+
+.hero__search-button:hover {
+    background: #087d46;
 }
 
 
@@ -170,201 +259,44 @@
 .hero__visual {
     position: relative;
 
-    display: flex;
+    min-height: 300px;
 
-    align-items: center;
-
-    justify-content: center;
-
-    min-height: 360px;
-}
-
-
-/* ========================================
-   Hero Card
-======================================== */
-
-.hero__card {
-    position: relative;
-
-    width: min(380px, 100%);
-
-    padding: var(--space-8);
-
-    background: var(--bg-card);
-
-    border: 1px solid var(--border-color);
-
-    border-radius: var(--radius-xl);
-
-    box-shadow: var(--shadow-lg);
-
-    animation: float 5s ease-in-out infinite;
-}
-
-
-/* ========================================
-   Hero Card Icon
-======================================== */
-
-.hero__card-icon {
     display: flex;
 
     align-items: center;
     justify-content: center;
+}
 
-    width: 64px;
-    height: 64px;
 
-    margin-bottom: var(--space-5);
+.hero__image {
+    display: block;
 
-    border-radius: var(--radius-lg);
+    width: min(100%, 530px);
 
-    background: var(--color-primary-light);
+    height: auto;
 
-    color: var(--color-primary);
+    object-fit: contain;
 
-    font-size: var(--font-2xl);
+    user-select: none;
+
+    filter: drop-shadow(
+        0 16px 25px rgba(16, 24, 40, .08)
+    );
 }
 
 
 /* ========================================
-   Hero Card Title
-======================================== */
-
-.hero__card-title {
-    margin-bottom: var(--space-2);
-
-    font-size: var(--font-xl);
-
-    font-weight: var(--fw-bold);
-}
-
-
-/* ========================================
-   Hero Card Description
-======================================== */
-
-.hero__card-description {
-    margin: 0;
-
-    color: var(--text-secondary);
-
-    font-size: var(--font-sm);
-}
-
-
-/* ========================================
-   Decorative Elements
-======================================== */
-
-.hero__decoration {
-    position: absolute;
-
-    border-radius: 50%;
-
-    pointer-events: none;
-
-    opacity: .6;
-
-    filter: blur(1px);
-}
-
-
-.hero__decoration--one {
-    top: -100px;
-
-    right: -100px;
-
-    width: 260px;
-
-    height: 260px;
-
-    background: var(--color-primary-light);
-}
-
-
-.hero__decoration--two {
-    bottom: -120px;
-
-    left: -100px;
-
-    width: 220px;
-
-    height: 220px;
-
-    background: rgba(20, 184, 166, .12);
-}
-
-
-/* ========================================
-   Stats
-======================================== */
-
-.hero__stats {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: var(--space-6);
-
-    margin-top: var(--space-8);
-}
-
-
-.hero__stat {
-    display: flex;
-
-    flex-direction: column;
-}
-
-
-.hero__stat-value {
-    color: var(--text-primary);
-
-    font-size: var(--font-xl);
-
-    font-weight: var(--fw-bold);
-}
-
-
-.hero__stat-label {
-    color: var(--text-light);
-
-    font-size: var(--font-xs);
-}
-
-
-/* ========================================
-   Floating Animation
-======================================== */
-
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-8px);
-    }
-
-}
-
-
-/* ========================================
-   Responsive
+   Tablet
 ======================================== */
 
 @media (max-width: 992px) {
 
-    .hero__container {
+    .hero__grid {
         grid-template-columns: 1fr;
 
-        gap: var(--space-10);
-
         text-align: center;
+
+        padding-block: 48px;
     }
 
     .hero__content {
@@ -379,58 +311,49 @@
         margin-inline: auto;
     }
 
-    .hero__actions {
-        justify-content: center;
+    .hero__search {
+        margin-inline: auto;
     }
 
     .hero__visual {
-        min-height: 280px;
+        min-height: 250px;
     }
 
 }
 
 
-@media (max-width: 768px) {
+/* ========================================
+   Mobile
+======================================== */
 
-    .hero {
-        padding-block: var(--space-12);
+@media (max-width: 600px) {
+
+    .hero__grid {
+        padding-block: 34px;
+    }
+
+    .hero__eyebrow {
+        font-size: 11px;
+
+        gap: 7px;
     }
 
     .hero__title {
-        font-size: clamp(
-            2.25rem,
-            11vw,
-            3.25rem
-        );
+        font-size: 36px;
+
+        letter-spacing: -1.2px;
     }
 
     .hero__description {
-        font-size: var(--font-base);
+        font-size: 16px;
     }
 
-    .hero__card {
-        padding: var(--space-6);
+    .hero__search {
+        height: 50px;
     }
 
-}
-
-
-@media (max-width: 480px) {
-
-    .hero__actions {
-        width: 100%;
-
-        flex-direction: column;
-    }
-
-    .hero__actions .btn {
-        width: 100%;
-    }
-
-    .hero__stats {
-        justify-content: center;
-
-        gap: var(--space-4);
+    .hero__visual {
+        min-height: 200px;
     }
 
 }
