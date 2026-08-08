@@ -1,10 +1,11 @@
-        /* =========================================================
+/* =========================================================
    ToolZen Hub
    Global Header Component
 ========================================================= */
 
 .site-header {
     position: sticky;
+
     top: 0;
     left: 0;
 
@@ -32,11 +33,11 @@
 
     display: grid;
 
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: auto 1fr auto;
 
     align-items: center;
 
-    column-gap: 18px;
+    column-gap: 24px;
 }
 
 
@@ -133,15 +134,15 @@
 
     justify-content: flex-end;
 
-    gap: 6px;
+    gap: 4px;
 }
 
 
 /* =========================================================
-   Header Action Buttons
+   Menu Button
 ========================================================= */
 
-.header-action {
+.menu-toggle {
     width: 40px;
     height: 40px;
 
@@ -149,6 +150,10 @@
 
     align-items: center;
     justify-content: center;
+
+    flex-direction: column;
+
+    gap: 5px;
 
     padding: 0;
 
@@ -168,37 +173,10 @@
 }
 
 
-.header-action:hover {
+.menu-toggle:hover {
     background: #f1f8f5;
 
     color: #0b9f58;
-}
-
-
-/* =========================================================
-   Search
-========================================================= */
-
-.header-action[data-action="search"] {
-    font-size: 28px;
-
-    line-height: 1;
-}
-
-
-/* =========================================================
-   Mobile Menu Button
-========================================================= */
-
-.menu-toggle {
-    display: none;
-
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 5px;
 }
 
 
@@ -213,7 +191,25 @@
 
 
 /* =========================================================
-   Tablet
+   Desktop
+========================================================= */
+
+@media (min-width: 901px) {
+
+    /*
+       Small separation between
+       About and hamburger.
+    */
+
+    .menu-toggle {
+        margin-left: 8px;
+    }
+
+}
+
+
+/* =========================================================
+   Tablet / Mobile
 ========================================================= */
 
 @media (max-width: 900px) {
@@ -221,22 +217,22 @@
     .navbar {
         grid-template-columns: 1fr auto;
 
-        column-gap: 16px;
+        column-gap: 12px;
     }
 
     .navbar__menu {
         display: none;
     }
 
-    .menu-toggle {
-        display: inline-flex;
+    .navbar__actions {
+        gap: 0;
     }
 
 }
 
 
 /* =========================================================
-   Mobile
+   Small Mobile
 ========================================================= */
 
 @media (max-width: 600px) {
@@ -248,16 +244,14 @@
         font-size: 20px;
     }
 
+
     .brand-title {
         font-size: 18px;
     }
 
+
     .brand-subtitle {
         font-size: 10px;
-    }
-
-    .navbar__actions {
-        gap: 2px;
     }
 
 }
