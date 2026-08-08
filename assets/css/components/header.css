@@ -4,7 +4,6 @@
 ========================================================= */
 
 .site-header {
-
     position: sticky;
 
     top: 0;
@@ -29,7 +28,6 @@
 ========================================================= */
 
 .navbar {
-
     width: 100%;
     height: var(--header-height);
 
@@ -44,7 +42,6 @@
 ========================================================= */
 
 .navbar__brand {
-
     display: inline-flex;
 
     align-items: center;
@@ -66,7 +63,6 @@
 ========================================================= */
 
 .brand-logo {
-
     width: 42px;
     height: 42px;
 
@@ -96,7 +92,6 @@
 ========================================================= */
 
 .brand-text {
-
     display: flex;
 
     flex-direction: column;
@@ -106,7 +101,6 @@
 
 
 .brand-title {
-
     color: #111827;
 
     font-size: 21px;
@@ -117,13 +111,11 @@
 
 
 .brand-title span {
-
     color: #0b9f58;
 }
 
 
 .brand-subtitle {
-
     margin-top: 5px;
 
     color: #667085;
@@ -136,19 +128,27 @@
 
 
 /* =========================================================
-   Desktop Navigation Position
+   Desktop Navigation
 ========================================================= */
 
 @media (min-width: 901px) {
 
     /*
-       Creates the desired space between
-       ToolZen Hub and Home.
+       Creates a clear but controlled gap
+       between ToolZen Hub and Home.
     */
 
     .navbar__menu {
+        margin-left: 85px;
+    }
 
-        margin-left: 110px;
+
+    /*
+       Keeps hamburger close to About.
+    */
+
+    .navbar__actions {
+        margin-left: 12px;
     }
 
 }
@@ -159,16 +159,9 @@
 ========================================================= */
 
 .navbar__actions {
-
     display: flex;
 
     align-items: center;
-
-    /*
-       Keeps hamburger close to About.
-    */
-
-    margin-left: 14px;
 
     gap: 0;
 }
@@ -179,7 +172,6 @@
 ========================================================= */
 
 .menu-toggle {
-
     width: 40px;
     height: 40px;
 
@@ -215,7 +207,6 @@
 ========================================================= */
 
 .menu-toggle:hover {
-
     background: #f1f8f5;
 
     color: #0b9f58;
@@ -227,7 +218,6 @@
 ========================================================= */
 
 .menu-toggle span {
-
     width: 20px;
     height: 2px;
 
@@ -244,19 +234,24 @@
 @media (max-width: 900px) {
 
     .navbar {
-
         justify-content: space-between;
     }
 
 
-    .navbar__menu {
+    /*
+       Hide desktop navigation.
+    */
 
+    .navbar__menu {
         display: none;
     }
 
 
-    .navbar__actions {
+    /*
+       Push hamburger completely to the right.
+    */
 
+    .navbar__actions {
         margin-left: auto;
     }
 
@@ -270,7 +265,6 @@
 @media (max-width: 600px) {
 
     .brand-logo {
-
         width: 38px;
         height: 38px;
 
@@ -279,13 +273,11 @@
 
 
     .brand-title {
-
         font-size: 18px;
     }
 
 
     .brand-subtitle {
-
         font-size: 10px;
     }
 
