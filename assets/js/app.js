@@ -1,9 +1,22 @@
-// assets/js/core/app.js
+/* =========================================================
+   ToolZen Hub
+   Application Entry
+========================================================= */
 
-import { bootstrap } from "./bootstrap.js";
+import { renderHeader } from "./components/header.js";
+import { renderHero } from "./components/hero.js";
 
-document.addEventListener("DOMContentLoaded", () => {
 
-    bootstrap();
+function initializeApp() {
 
-});
+    renderHeader();
+
+    renderHero();
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    initializeApp
+);
