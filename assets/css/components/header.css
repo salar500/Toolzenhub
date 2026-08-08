@@ -5,7 +5,6 @@
 
 .site-header {
     position: sticky;
-
     top: 0;
     left: 0;
 
@@ -32,7 +31,6 @@
     height: var(--header-height);
 
     display: flex;
-
     align-items: center;
 }
 
@@ -43,7 +41,6 @@
 
 .navbar__brand {
     display: inline-flex;
-
     align-items: center;
 
     gap: 12px;
@@ -51,7 +48,6 @@
     width: fit-content;
 
     color: #101828;
-
     text-decoration: none;
 
     flex-shrink: 0;
@@ -67,7 +63,6 @@
     height: 42px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -93,7 +88,6 @@
 
 .brand-text {
     display: flex;
-
     flex-direction: column;
 
     line-height: 1;
@@ -128,18 +122,18 @@
 
 
 /* =========================================================
-   Desktop Navigation
+   Desktop Layout
 ========================================================= */
 
 @media (min-width: 901px) {
 
     /*
-       Creates a clear but controlled gap
-       between ToolZen Hub and Home.
+       Creates clear separation between
+       ToolZen Hub and Home.
     */
 
     .navbar__menu {
-        margin-left: 85px;
+        margin-left: 100px;
     }
 
 
@@ -148,7 +142,7 @@
     */
 
     .navbar__actions {
-        margin-left: 12px;
+        margin-left: 8px;
     }
 
 }
@@ -164,6 +158,8 @@
     align-items: center;
 
     gap: 0;
+
+    flex-shrink: 0;
 }
 
 
@@ -208,7 +204,6 @@
 
 .menu-toggle:hover {
     background: #f1f8f5;
-
     color: #0b9f58;
 }
 
@@ -239,7 +234,7 @@
 
 
     /*
-       Hide desktop navigation.
+       Desktop navigation disappears.
     */
 
     .navbar__menu {
@@ -248,7 +243,8 @@
 
 
     /*
-       Push hamburger completely to the right.
+       Hamburger moves completely
+       to the right side.
     */
 
     .navbar__actions {
