@@ -31,13 +31,9 @@
     width: 100%;
     height: var(--header-height);
 
-    display: grid;
-
-    grid-template-columns: auto 1fr auto;
+    display: flex;
 
     align-items: center;
-
-    column-gap: 24px;
 }
 
 
@@ -124,6 +120,24 @@
 
 
 /* =========================================================
+   Desktop Navigation Position
+========================================================= */
+
+@media (min-width: 901px) {
+
+    /*
+       Space between ToolZen Hub
+       and Home.
+    */
+
+    .navbar__menu {
+        margin-left: 90px;
+    }
+
+}
+
+
+/* =========================================================
    Header Actions
 ========================================================= */
 
@@ -132,7 +146,7 @@
 
     align-items: center;
 
-    justify-content: flex-end;
+    margin-left: 18px;
 
     gap: 0;
 }
@@ -191,33 +205,13 @@
 
 
 /* =========================================================
-   Desktop
-========================================================= */
-
-@media (min-width: 901px) {
-
-    /*
-       Keeps About and the hamburger
-       visually close together.
-    */
-
-    .menu-toggle {
-        margin-left: 8px;
-    }
-
-}
-
-
-/* =========================================================
    Tablet / Mobile
 ========================================================= */
 
 @media (max-width: 900px) {
 
     .navbar {
-        grid-template-columns: 1fr auto;
-
-        column-gap: 12px;
+        justify-content: space-between;
     }
 
     .navbar__menu {
@@ -225,6 +219,8 @@
     }
 
     .navbar__actions {
+        margin-left: auto;
+
         gap: 0;
     }
 
