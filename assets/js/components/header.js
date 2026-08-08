@@ -1,79 +1,129 @@
+/* =========================================================
+   ToolZen Hub
+   Global Header Component
+========================================================= */
 
-import { loadJSON } from "../services/dataService.js";
+export function renderHeader() {
 
-export async function renderHeader() {
+    const header = document.getElementById("header");
 
-    const nav = await loadJSON("data/navigation.json");
+    if (!header) {
+        return;
+    }
 
-    const menu = nav.map(item => `
-        <li>
-            <a class="navbar__link"
-               href="${item.url}">
-               ${item.title}
-            </a>
-        </li>
-    `).join("");
+    header.innerHTML = `
+        <div class="site-header">
 
-    return `
+            <div class="container">
 
-<header class="site-header">
+                <nav class="navbar" aria-label="Main navigation">
 
-<div class="container">
+                    <!-- Brand -->
 
-<nav class="navbar">
+                    <a
+                        href="/"
+                        class="navbar__brand"
+                        aria-label="ToolZen Hub Home"
+                    >
 
-<a href="/" class="navbar__brand">
+                        <span class="brand-logo">
+                            <span aria-hidden="true">▦</span>
+                        </span>
 
-<div class="brand-logo">
-🧮
-</div>
+                        <span class="brand-text">
 
-<div class="brand-text">
+                            <span class="brand-title">
+                                ToolZen <span>Hub</span>
+                            </span>
 
-<span class="brand-title">
+                            <span class="brand-subtitle">
+                                Smart Tools, Smarter You
+                            </span>
 
-ToolZen Hub
+                        </span>
 
-</span>
+                    </a>
 
-<span class="brand-subtitle">
 
-Smart Tools • Smarter Decisions
+                    <!-- Navigation -->
 
-</span>
+                    <ul class="navbar__menu">
 
-</div>
+                        <li>
+                            <a
+                                href="/"
+                                class="navbar__link active"
+                                data-nav="home"
+                            >
+                                Home
+                            </a>
+                        </li>
 
-</a>
+                        <li>
+                            <a
+                                href="categories.html"
+                                class="navbar__link"
+                                data-nav="categories"
+                            >
+                                Categories
+                            </a>
+                        </li>
 
-<ul class="navbar__menu">
+                        <li>
+                            <a
+                                href="articles.html"
+                                class="navbar__link"
+                                data-nav="articles"
+                            >
+                                Articles
+                            </a>
+                        </li>
 
-${menu}
+                        <li>
+                            <a
+                                href="about.html"
+                                class="navbar__link"
+                                data-nav="about"
+                            >
+                                About
+                            </a>
+                        </li>
 
-</ul>
+                    </ul>
 
-<div class="navbar__actions">
 
-<button class="btn btn-outline btn-sm">
+                    <!-- Actions -->
 
-Search
+                    <div class="navbar__actions">
 
-</button>
+                        <button
+                            type="button"
+                            class="header-action"
+                            data-action="search"
+                            aria-label="Search"
+                        >
+                            <span aria-hidden="true">⌕</span>
+                        </button>
 
-<button class="btn btn-primary btn-sm menu-toggle">
 
-☰
+                        <button
+                            type="button"
+                            class="header-action menu-toggle"
+                            data-action="menu"
+                            aria-label="Open menu"
+                            aria-expanded="false"
+                        >
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
 
-</button>
+                    </div>
 
-</div>
+                </nav>
 
-</nav>
+            </div>
 
-</div>
-
-</header>
-
-`;
-
+        </div>
+    `;
 }
