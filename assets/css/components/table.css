@@ -1,1 +1,240 @@
+/* =========================================================
+   ToolZen Hub
+   Table Component
+========================================================= */
 
+
+/* ========================================
+   Table Wrapper
+======================================== */
+
+.table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border: 1px solid var(--border-color);
+
+    border-radius: var(--radius-lg);
+
+    background: var(--bg-card);
+
+    box-shadow: var(--shadow-sm);
+
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* ========================================
+   Base Table
+======================================== */
+
+.table {
+    width: 100%;
+
+    min-width: 600px;
+
+    border-collapse: collapse;
+
+    color: var(--text-primary);
+
+    font-size: var(--font-sm);
+}
+
+
+/* ========================================
+   Table Header
+======================================== */
+
+.table thead {
+    background: var(--color-gray-100);
+}
+
+
+.table th {
+    padding: var(--space-4);
+
+    color: var(--text-primary);
+
+    font-weight: var(--fw-semibold);
+
+    text-align: left;
+
+    white-space: nowrap;
+
+    border-bottom: 1px solid var(--border-color);
+}
+
+
+/* ========================================
+   Table Body
+======================================== */
+
+.table td {
+    padding: var(--space-4);
+
+    color: var(--text-secondary);
+
+    vertical-align: middle;
+
+    border-bottom: 1px solid var(--border-color);
+}
+
+
+/* ========================================
+   Remove Last Border
+======================================== */
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ========================================
+   Row Hover
+======================================== */
+
+.table tbody tr {
+    transition: background var(--transition-fast);
+}
+
+
+.table tbody tr:hover {
+    background: var(--color-gray-50);
+}
+
+
+/* ========================================
+   Numeric Cells
+======================================== */
+
+.table .text-number {
+    text-align: right;
+
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* ========================================
+   Centered Cells
+======================================== */
+
+.table .text-center {
+    text-align: center;
+}
+
+
+/* ========================================
+   Highlight Row
+======================================== */
+
+.table tr.is-highlighted {
+    background: var(--color-primary-light);
+}
+
+
+.table tr.is-highlighted td {
+    color: var(--text-primary);
+
+    font-weight: var(--fw-semibold);
+}
+
+
+/* ========================================
+   Total Row
+======================================== */
+
+.table tr.is-total {
+    background: var(--color-gray-100);
+}
+
+
+.table tr.is-total td {
+    color: var(--text-primary);
+
+    font-weight: var(--fw-bold);
+
+    border-top: 2px solid var(--border-color);
+}
+
+
+/* ========================================
+   Compact Table
+======================================== */
+
+.table--compact th,
+.table--compact td {
+    padding: var(--space-2) var(--space-3);
+}
+
+
+/* ========================================
+   Bordered Table
+======================================== */
+
+.table--bordered th,
+.table--bordered td {
+    border: 1px solid var(--border-color);
+}
+
+
+/* ========================================
+   Striped Table
+======================================== */
+
+.table--striped tbody tr:nth-child(even) {
+    background: var(--color-gray-50);
+}
+
+
+/* ========================================
+   Calculator Results Table
+======================================== */
+
+.calculator-table {
+    margin-top: var(--space-6);
+}
+
+
+.calculator-table__header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: var(--space-4);
+
+    margin-bottom: var(--space-4);
+}
+
+
+.calculator-table__title {
+    margin: 0;
+
+    font-size: var(--font-lg);
+
+    font-weight: var(--fw-semibold);
+}
+
+
+/* ========================================
+   Responsive
+======================================== */
+
+@media (max-width: 768px) {
+
+    .table-wrapper {
+        border-radius: var(--radius-md);
+    }
+
+    .table {
+        min-width: 550px;
+    }
+
+    .table th,
+    .table td {
+        padding: var(--space-3);
+    }
+
+}
