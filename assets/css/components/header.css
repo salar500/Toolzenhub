@@ -4,7 +4,9 @@
 ========================================================= */
 
 .site-header {
+
     position: sticky;
+
     top: 0;
     left: 0;
 
@@ -27,10 +29,12 @@
 ========================================================= */
 
 .navbar {
+
     width: 100%;
     height: var(--header-height);
 
     display: flex;
+
     align-items: center;
 }
 
@@ -40,7 +44,9 @@
 ========================================================= */
 
 .navbar__brand {
+
     display: inline-flex;
+
     align-items: center;
 
     gap: 12px;
@@ -48,17 +54,24 @@
     width: fit-content;
 
     color: #101828;
+
     text-decoration: none;
 
     flex-shrink: 0;
 }
 
 
+/* =========================================================
+   Brand Logo
+========================================================= */
+
 .brand-logo {
+
     width: 42px;
     height: 42px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -78,8 +91,14 @@
 }
 
 
+/* =========================================================
+   Brand Text
+========================================================= */
+
 .brand-text {
+
     display: flex;
+
     flex-direction: column;
 
     line-height: 1;
@@ -87,6 +106,7 @@
 
 
 .brand-title {
+
     color: #111827;
 
     font-size: 21px;
@@ -97,17 +117,21 @@
 
 
 .brand-title span {
+
     color: #0b9f58;
 }
 
 
 .brand-subtitle {
+
     margin-top: 5px;
 
     color: #667085;
 
     font-size: 11px;
     font-weight: 400;
+
+    letter-spacing: 0;
 }
 
 
@@ -117,8 +141,14 @@
 
 @media (min-width: 901px) {
 
+    /*
+       Creates the desired space between
+       ToolZen Hub and Home.
+    */
+
     .navbar__menu {
-        margin-left: 55px;
+
+        margin-left: 70px;
     }
 
 }
@@ -129,9 +159,14 @@
 ========================================================= */
 
 .navbar__actions {
+
     display: flex;
 
     align-items: center;
+
+    /*
+       Keeps hamburger close to About.
+    */
 
     margin-left: 14px;
 
@@ -144,6 +179,7 @@
 ========================================================= */
 
 .menu-toggle {
+
     width: 40px;
     height: 40px;
 
@@ -174,13 +210,24 @@
 }
 
 
+/* =========================================================
+   Hamburger Hover
+========================================================= */
+
 .menu-toggle:hover {
+
     background: #f1f8f5;
+
     color: #0b9f58;
 }
 
 
+/* =========================================================
+   Hamburger Lines
+========================================================= */
+
 .menu-toggle span {
+
     width: 20px;
     height: 2px;
 
@@ -197,14 +244,19 @@
 @media (max-width: 900px) {
 
     .navbar {
+
         justify-content: space-between;
     }
 
+
     .navbar__menu {
+
         display: none;
     }
 
+
     .navbar__actions {
+
         margin-left: auto;
     }
 
@@ -218,17 +270,22 @@
 @media (max-width: 600px) {
 
     .brand-logo {
+
         width: 38px;
         height: 38px;
 
         font-size: 20px;
     }
 
+
     .brand-title {
+
         font-size: 18px;
     }
 
+
     .brand-subtitle {
+
         font-size: 10px;
     }
 
