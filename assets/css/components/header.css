@@ -5,7 +5,6 @@
 
 .site-header {
     position: sticky;
-
     top: 0;
     left: 0;
 
@@ -32,7 +31,6 @@
     height: var(--header-height);
 
     display: flex;
-
     align-items: center;
 }
 
@@ -43,7 +41,6 @@
 
 .navbar__brand {
     display: inline-flex;
-
     align-items: center;
 
     gap: 12px;
@@ -51,23 +48,17 @@
     width: fit-content;
 
     color: #101828;
-
     text-decoration: none;
 
     flex-shrink: 0;
 }
 
 
-/* =========================================================
-   Brand Logo
-========================================================= */
-
 .brand-logo {
     width: 42px;
     height: 42px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -87,13 +78,8 @@
 }
 
 
-/* =========================================================
-   Brand Text
-========================================================= */
-
 .brand-text {
     display: flex;
-
     flex-direction: column;
 
     line-height: 1;
@@ -122,19 +108,17 @@
 
     font-size: 11px;
     font-weight: 400;
-
-    letter-spacing: 0;
 }
 
 
 /* =========================================================
-   Desktop Navigation
+   Desktop Navigation Position
 ========================================================= */
 
 @media (min-width: 901px) {
 
     .navbar__menu {
-        margin-left: 70px;
+        margin-left: 55px;
     }
 
 }
@@ -149,7 +133,7 @@
 
     align-items: center;
 
-    margin-left: auto;
+    margin-left: 14px;
 
     gap: 0;
 }
@@ -192,7 +176,6 @@
 
 .menu-toggle:hover {
     background: #f1f8f5;
-
     color: #0b9f58;
 }
 
@@ -208,24 +191,6 @@
 
 
 /* =========================================================
-   Desktop
-========================================================= */
-
-@media (min-width: 901px) {
-
-    /*
-       Keeps hamburger close to About
-       while remaining on the right side.
-    */
-
-    .navbar__actions {
-        margin-left: 14px;
-    }
-
-}
-
-
-/* =========================================================
    Tablet / Mobile
 ========================================================= */
 
@@ -235,11 +200,9 @@
         justify-content: space-between;
     }
 
-
     .navbar__menu {
         display: none;
     }
-
 
     .navbar__actions {
         margin-left: auto;
@@ -261,19 +224,12 @@
         font-size: 20px;
     }
 
-
     .brand-title {
         font-size: 18px;
     }
 
-
     .brand-subtitle {
         font-size: 10px;
-    }
-
-
-    .navbar__actions {
-        margin-left: auto;
     }
 
 }
