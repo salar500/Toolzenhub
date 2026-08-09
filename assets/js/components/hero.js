@@ -110,6 +110,7 @@ export function renderHero() {
                             src="assets/Images/hero-calculators.png"
                             alt="Financial calculators, charts and money"
                             class="hero__image"
+                             loading="eager"
                         >
 
                     </div>
