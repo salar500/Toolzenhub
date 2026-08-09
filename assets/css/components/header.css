@@ -5,6 +5,7 @@
 
 .site-header {
     position: sticky;
+
     top: 0;
     left: 0;
 
@@ -31,7 +32,10 @@
     height: var(--header-height);
 
     display: flex;
+
     align-items: center;
+
+    box-sizing: border-box;
 }
 
 
@@ -41,6 +45,7 @@
 
 .navbar__brand {
     display: inline-flex;
+
     align-items: center;
 
     gap: 12px;
@@ -48,6 +53,7 @@
     width: fit-content;
 
     color: #101828;
+
     text-decoration: none;
 
     flex-shrink: 0;
@@ -63,6 +69,7 @@
     height: 42px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -88,6 +95,7 @@
 
 .brand-text {
     display: flex;
+
     flex-direction: column;
 
     line-height: 1;
@@ -122,16 +130,45 @@
 
 
 /* =========================================================
+   Desktop Navigation
+========================================================= */
+
+@media (min-width: 901px) {
+
+    /*
+       Push the complete navigation group
+       to the right side of the header.
+    */
+
+    .navbar__menu {
+        margin-left: auto;
+    }
+
+
+    /*
+       Small controlled gap between
+       About and hamburger.
+    */
+
+    .navbar__actions {
+        margin-left: 10px;
+    }
+
+}
+
+
+/* =========================================================
    Header Actions
 ========================================================= */
 
 .navbar__actions {
     display: flex;
+
     align-items: center;
 
     flex-shrink: 0;
 
-    margin-left: 10px;
+    gap: 0;
 }
 
 
@@ -170,8 +207,13 @@
 }
 
 
+/* =========================================================
+   Hamburger Hover
+========================================================= */
+
 .menu-toggle:hover {
     background: #f1f8f5;
+
     color: #0b9f58;
 }
 
@@ -191,34 +233,7 @@
 
 
 /* =========================================================
-   DESKTOP
-========================================================= */
-
-@media (min-width: 901px) {
-
-    /*
-       FORCE a visible separation
-       between ToolZen Hub and Home.
-    */
-
-    .navbar__menu {
-        margin-left: 100px !important;
-    }
-
-
-    /*
-       Keep hamburger close to About.
-    */
-
-    .navbar__actions {
-        margin-left: 10px !important;
-    }
-
-}
-
-
-/* =========================================================
-   TABLET / MOBILE
+   Tablet / Mobile
 ========================================================= */
 
 @media (max-width: 900px) {
@@ -230,8 +245,6 @@
 
     .navbar__menu {
         display: none !important;
-
-        margin-left: 0 !important;
     }
 
 
@@ -243,7 +256,7 @@
 
 
 /* =========================================================
-   SMALL MOBILE
+   Small Mobile
 ========================================================= */
 
 @media (max-width: 600px) {
