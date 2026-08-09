@@ -58,17 +58,18 @@
     position: relative;
 
     width: 100%;
+
     min-height: 420px;
 
     display: grid;
 
     grid-template-columns:
-        minmax(0, 1fr)
-        minmax(0, 0.9fr);
+        minmax(0, 1.05fr)
+        minmax(420px, 0.95fr);
 
     align-items: center;
 
-    gap: clamp(32px, 5vw, 70px);
+    gap: clamp(30px, 4vw, 64px);
 
     padding-top: 48px;
     padding-bottom: 48px;
@@ -136,7 +137,8 @@
 
 .hero__title {
     width: 100%;
-    max-width: 650px;
+
+    max-width: 680px;
 
     margin: 0 0 18px;
 
@@ -167,6 +169,7 @@
 
 .hero__description {
     width: 100%;
+
     max-width: 520px;
 
     margin: 0 0 26px;
@@ -226,6 +229,7 @@
     min-width: 0;
 
     width: 100%;
+
     height: 100%;
 
     box-sizing: border-box;
@@ -233,6 +237,7 @@
     padding: 0 14px;
 
     border: 0;
+
     outline: 0;
 
     background: transparent;
@@ -258,6 +263,7 @@
     flex: 0 0 55px;
 
     width: 55px;
+
     height: 100%;
 
     display: flex;
@@ -295,12 +301,15 @@
     position: relative;
 
     width: 100%;
+
     min-width: 0;
+
     min-height: 320px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     z-index: 1;
@@ -310,7 +319,8 @@
 .hero__image {
     display: block;
 
-    width: min(100%, 540px);
+    width: min(100%, 580px);
+
     max-width: 100%;
 
     height: auto;
@@ -335,18 +345,27 @@
     .hero__grid {
         min-height: 450px;
 
-        padding-top: 55px;
-        padding-bottom: 55px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+
+        gap: 50px;
     }
 
 
     .hero__title {
-        max-width: 680px;
+        max-width: 700px;
+
+        font-size: clamp(48px, 4vw, 60px);
     }
 
 
     .hero__visual {
-        min-height: 350px;
+        min-height: 360px;
+    }
+
+
+    .hero__image {
+        width: min(100%, 600px);
     }
 
 }
@@ -366,6 +385,7 @@
         gap: 36px;
 
         padding-top: 44px;
+
         padding-bottom: 44px;
 
         text-align: center;
@@ -426,9 +446,10 @@
 
 
     .hero__grid {
-        gap: 28px;
+        gap: 26px;
 
         padding-top: 32px;
+
         padding-bottom: 34px;
     }
 
@@ -521,7 +542,10 @@
 @media (max-width: 380px) {
 
     .hero__grid {
+        gap: 22px;
+
         padding-top: 28px;
+
         padding-bottom: 30px;
     }
 
@@ -552,4 +576,9 @@
         min-height: 160px;
     }
 
-       }
+
+    .hero__image {
+        width: min(100%, 320px);
+    }
+
+}
