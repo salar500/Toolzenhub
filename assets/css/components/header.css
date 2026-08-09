@@ -44,6 +44,7 @@
 
 .navbar__brand {
     display: inline-flex;
+
     align-items: center;
 
     gap: 12px;
@@ -179,6 +180,10 @@
 }
 
 
+/* =========================================================
+   Hamburger Hover
+========================================================= */
+
 .menu-toggle:hover {
     background: #f1f8f5;
 
@@ -207,21 +212,21 @@
 @media (min-width: 901px) {
 
     /*
-       Navigation automatically moves
-       toward the right side.
+       Automatically pushes the complete
+       navigation group to the right.
     */
 
     .navbar__menu {
-        margin-left: auto;
+        margin-left: auto !important;
     }
 
 
     /*
-       Hamburger stays close to About.
+       Keeps hamburger close to About.
     */
 
     .navbar__actions {
-        margin-left: 12px;
+        margin-left: 12px !important;
     }
 
 }
@@ -238,13 +243,23 @@
     }
 
 
+    /*
+       Hide desktop navigation.
+    */
+
     .navbar__menu {
         display: none !important;
+
+        margin-left: 0 !important;
     }
 
 
+    /*
+       Hamburger stays on the far right.
+    */
+
     .navbar__actions {
-        margin-left: auto;
+        margin-left: auto !important;
     }
 
 }
