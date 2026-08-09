@@ -108,7 +108,7 @@
 @media (max-width: 900px) {
 
     .navbar__menu {
-        display: none;
+        display: none !important;
     }
 
 }
