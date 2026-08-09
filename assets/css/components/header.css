@@ -32,7 +32,6 @@
     height: var(--header-height);
 
     display: flex;
-
     align-items: center;
 
     box-sizing: border-box;
@@ -45,7 +44,6 @@
 
 .navbar__brand {
     display: inline-flex;
-
     align-items: center;
 
     gap: 12px;
@@ -130,34 +128,6 @@
 
 
 /* =========================================================
-   Desktop Navigation
-========================================================= */
-
-@media (min-width: 901px) {
-
-    /*
-       Push the complete navigation group
-       to the right side of the header.
-    */
-
-    .navbar__menu {
-        margin-left: auto;
-    }
-
-
-    /*
-       Small controlled gap between
-       About and hamburger.
-    */
-
-    .navbar__actions {
-        margin-left: 10px;
-    }
-
-}
-
-
-/* =========================================================
    Header Actions
 ========================================================= */
 
@@ -167,6 +137,8 @@
     align-items: center;
 
     flex-shrink: 0;
+
+    margin-left: 12px;
 
     gap: 0;
 }
@@ -207,10 +179,6 @@
 }
 
 
-/* =========================================================
-   Hamburger Hover
-========================================================= */
-
 .menu-toggle:hover {
     background: #f1f8f5;
 
@@ -233,6 +201,33 @@
 
 
 /* =========================================================
+   Desktop
+========================================================= */
+
+@media (min-width: 901px) {
+
+    /*
+       Navigation automatically moves
+       toward the right side.
+    */
+
+    .navbar__menu {
+        margin-left: auto;
+    }
+
+
+    /*
+       Hamburger stays close to About.
+    */
+
+    .navbar__actions {
+        margin-left: 12px;
+    }
+
+}
+
+
+/* =========================================================
    Tablet / Mobile
 ========================================================= */
 
@@ -249,7 +244,7 @@
 
 
     .navbar__actions {
-        margin-left: auto !important;
+        margin-left: auto;
     }
 
 }
