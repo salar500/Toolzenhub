@@ -1,0 +1,584 @@
+/* =========================================================
+   ToolZen Hub
+   Global Hero
+========================================================= */
+
+.hero {
+    position: relative;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f3fbf8 0%,
+            #f8fcfb 55%,
+            #eef8f5 100%
+        );
+
+    border-bottom: 1px solid #eef2f1;
+}
+
+
+/* =========================================================
+   Background Decoration
+========================================================= */
+
+.hero__background {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 50%;
+    height: 100%;
+
+    background:
+        radial-gradient(
+            circle at 60% 45%,
+            rgba(11, 159, 88, 0.08),
+            transparent 62%
+        );
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   Hero Grid
+========================================================= */
+
+.hero__grid {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 420px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.05fr)
+        minmax(420px, 0.95fr);
+
+    align-items: center;
+
+    gap: clamp(30px, 4vw, 64px);
+
+    padding-top: 48px;
+    padding-bottom: 48px;
+
+    box-sizing: border-box;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   Hero Content
+========================================================= */
+
+.hero__content {
+    position: relative;
+
+    z-index: 2;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   Eyebrow
+========================================================= */
+
+.hero__eyebrow {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 0 0 20px;
+
+    padding: 9px 15px;
+
+    border: 1px solid #d9eee5;
+
+    border-radius: 999px;
+
+    background: rgba(235, 249, 243, 0.9);
+
+    color: #0b8750;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    line-height: 1;
+
+    white-space: nowrap;
+}
+
+
+.hero__dot {
+    color: #53b987;
+}
+
+
+/* =========================================================
+   Title
+========================================================= */
+
+.hero__title {
+    width: 100%;
+
+    max-width: 680px;
+
+    margin: 0 0 18px;
+
+    color: #101828;
+
+    font-size: clamp(40px, 4vw, 56px);
+
+    font-weight: 800;
+
+    line-height: 1.05;
+
+    letter-spacing: -1.8px;
+
+    overflow-wrap: break-word;
+}
+
+
+.hero__title-highlight {
+    display: block;
+
+    color: #0b9f58;
+}
+
+
+/* =========================================================
+   Description
+========================================================= */
+
+.hero__description {
+    width: 100%;
+
+    max-width: 520px;
+
+    margin: 0 0 26px;
+
+    color: #475467;
+
+    font-size: clamp(16px, 1.4vw, 18px);
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   Search
+========================================================= */
+
+.hero__search {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    width: min(100%, 606px);
+
+    height: 52px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+    border: 1px solid #e2e8e6;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 4px 16px rgba(16, 24, 40, 0.07);
+}
+
+
+.hero__search-icon {
+    flex-shrink: 0;
+
+    padding-left: 17px;
+
+    color: #98a2b3;
+
+    font-size: 24px;
+}
+
+
+.hero__search input {
+    flex: 1;
+
+    min-width: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    box-sizing: border-box;
+
+    padding: 0 14px;
+
+    border: 0;
+
+    outline: 0;
+
+    background: transparent;
+
+    color: #101828;
+
+    font-family: inherit;
+
+    font-size: 14px;
+}
+
+
+.hero__search input::placeholder {
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   Search Button
+========================================================= */
+
+.hero__search-button {
+    flex: 0 0 55px;
+
+    width: 55px;
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 0;
+
+    background: #0b9f58;
+
+    color: #ffffff;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease;
+}
+
+
+.hero__search-button:hover {
+    background: #087d46;
+}
+
+
+/* =========================================================
+   Hero Visual
+========================================================= */
+
+.hero__visual {
+    position: relative;
+
+    width: 100%;
+
+    min-width: 0;
+
+    min-height: 320px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 1;
+}
+
+
+.hero__image {
+    display: block;
+
+    width: min(100%, 580px);
+
+    max-width: 100%;
+
+    height: auto;
+
+    object-fit: contain;
+
+    user-select: none;
+
+    filter:
+        drop-shadow(
+            0 16px 25px rgba(16, 24, 40, 0.08)
+        );
+}
+
+
+/* =========================================================
+   Large Desktop
+========================================================= */
+
+@media (min-width: 1200px) {
+
+    .hero__grid {
+        min-height: 450px;
+
+        padding-top: 50px;
+        padding-bottom: 50px;
+
+        gap: 50px;
+    }
+
+
+    .hero__title {
+        max-width: 700px;
+
+        font-size: clamp(48px, 4vw, 60px);
+    }
+
+
+    .hero__visual {
+        min-height: 360px;
+    }
+
+
+    .hero__image {
+        width: min(100%, 600px);
+    }
+
+}
+
+
+/* =========================================================
+   Tablet
+========================================================= */
+
+@media (max-width: 992px) {
+
+    .hero__grid {
+        grid-template-columns: 1fr;
+
+        min-height: auto;
+
+        gap: 36px;
+
+        padding-top: 44px;
+
+        padding-bottom: 44px;
+
+        text-align: center;
+    }
+
+
+    .hero__content {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+
+    .hero__title {
+        max-width: 720px;
+
+        margin-inline: auto;
+    }
+
+
+    .hero__description {
+        margin-inline: auto;
+    }
+
+
+    .hero__search {
+        width: min(100%, 606px);
+
+        margin-inline: auto;
+    }
+
+
+    .hero__visual {
+        min-height: 260px;
+    }
+
+
+    .hero__image {
+        width: min(100%, 500px);
+    }
+
+}
+
+
+/* =========================================================
+   Mobile
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .hero__background {
+        width: 100%;
+
+        opacity: 0.8;
+    }
+
+
+    .hero__grid {
+        gap: 26px;
+
+        padding-top: 32px;
+
+        padding-bottom: 34px;
+    }
+
+
+    .hero__eyebrow {
+        max-width: 100%;
+
+        gap: 7px;
+
+        margin-bottom: 17px;
+
+        padding: 8px 12px;
+
+        font-size: 11px;
+    }
+
+
+    .hero__title {
+        max-width: 100%;
+
+        margin-bottom: 14px;
+
+        font-size: clamp(32px, 9vw, 40px);
+
+        line-height: 1.08;
+
+        letter-spacing: -1.2px;
+    }
+
+
+    .hero__description {
+        max-width: 100%;
+
+        margin-bottom: 22px;
+
+        font-size: 16px;
+
+        line-height: 1.5;
+    }
+
+
+    .hero__search {
+        width: 100%;
+
+        height: 50px;
+
+        border-radius: 8px;
+    }
+
+
+    .hero__search-icon {
+        padding-left: 14px;
+
+        font-size: 22px;
+    }
+
+
+    .hero__search input {
+        padding: 0 10px;
+
+        font-size: 14px;
+    }
+
+
+    .hero__search-button {
+        flex-basis: 52px;
+
+        width: 52px;
+
+        font-size: 22px;
+    }
+
+
+    .hero__visual {
+        min-height: 190px;
+    }
+
+
+    .hero__image {
+        width: min(100%, 360px);
+    }
+
+}
+
+
+/* =========================================================
+   Very Small Mobile
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .hero__grid {
+        gap: 22px;
+
+        padding-top: 28px;
+
+        padding-bottom: 30px;
+    }
+
+
+    .hero__eyebrow {
+        font-size: 10px;
+    }
+
+
+    .hero__title {
+        font-size: 31px;
+
+        letter-spacing: -1px;
+    }
+
+
+    .hero__description {
+        font-size: 15px;
+    }
+
+
+    .hero__search {
+        height: 48px;
+    }
+
+
+    .hero__visual {
+        min-height: 160px;
+    }
+
+
+    .hero__image {
+        width: min(100%, 320px);
+    }
+
+}
