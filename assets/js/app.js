@@ -14,11 +14,11 @@ import { renderCategories } from "./components/categories.js";
 
 function initializeApp() {
 
-    /* Global Header */
+    /* Header */
     renderHeader();
 
 
-    /* Hero Section */
+    /* Hero */
     renderHero();
 
 
