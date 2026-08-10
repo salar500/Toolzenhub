@@ -63,13 +63,21 @@
 
     display: grid;
 
+    /*
+       Content on the left
+       Image on the right
+
+       minmax(0, ...) allows both
+       columns to shrink automatically.
+    */
+
     grid-template-columns:
         minmax(0, 1.05fr)
-        minmax(420px, 0.95fr);
+        minmax(0, 0.95fr);
 
     align-items: center;
 
-    gap: clamp(30px, 4vw, 64px);
+    gap: clamp(20px, 4vw, 64px);
 
     padding-top: 48px;
     padding-bottom: 48px;
@@ -269,6 +277,7 @@
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     padding: 0;
@@ -316,6 +325,10 @@
 }
 
 
+/* =========================================================
+   Hero Image
+========================================================= */
+
 .hero__image {
     display: block;
 
@@ -346,6 +359,7 @@
         min-height: 450px;
 
         padding-top: 50px;
+
         padding-bottom: 50px;
 
         gap: 50px;
@@ -373,22 +387,34 @@
 
 /* =========================================================
    Tablet
+   IMPORTANT:
+   Keep text + image side-by-side.
 ========================================================= */
 
 @media (max-width: 992px) {
 
     .hero__grid {
-        grid-template-columns: 1fr;
+        /*
+           DO NOT change this to 1fr.
 
-        min-height: auto;
+           The two columns remain:
+           LEFT  = content
+           RIGHT = image
+        */
 
-        gap: 36px;
+        grid-template-columns:
+            minmax(0, 1.15fr)
+            minmax(180px, 0.85fr);
 
-        padding-top: 44px;
+        min-height: 360px;
 
-        padding-bottom: 44px;
+        gap: 24px;
 
-        text-align: center;
+        padding-top: 38px;
+
+        padding-bottom: 38px;
+
+        text-align: left;
     }
 
 
@@ -397,36 +423,63 @@
 
         flex-direction: column;
 
-        align-items: center;
+        align-items: flex-start;
+
+        min-width: 0;
+    }
+
+
+    .hero__eyebrow {
+        max-width: 100%;
     }
 
 
     .hero__title {
-        max-width: 720px;
+        max-width: 100%;
 
-        margin-inline: auto;
+        margin-inline: 0;
+
+        font-size: clamp(32px, 5vw, 48px);
     }
 
 
     .hero__description {
-        margin-inline: auto;
+        max-width: 100%;
+
+        margin-inline: 0;
+
+        font-size: 16px;
     }
 
 
     .hero__search {
-        width: min(100%, 606px);
+        width: 100%;
 
-        margin-inline: auto;
+        max-width: 606px;
+
+        margin-inline: 0;
     }
 
 
     .hero__visual {
-        min-height: 260px;
+        width: 100%;
+
+        min-height: 0;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
     }
 
 
     .hero__image {
-        width: min(100%, 500px);
+        width: 100%;
+
+        max-width: 420px;
+
+        height: auto;
     }
 
 }
@@ -434,6 +487,7 @@
 
 /* =========================================================
    Mobile
+   Keep text + image side-by-side.
 ========================================================= */
 
 @media (max-width: 600px) {
@@ -446,90 +500,144 @@
 
 
     .hero__grid {
-        gap: 26px;
+        /*
+           Slightly more space for the text,
+           but image is ALWAYS on the right.
+        */
 
-        padding-top: 32px;
+        grid-template-columns:
+            minmax(0, 1.25fr)
+            minmax(100px, 0.75fr);
 
-        padding-bottom: 34px;
+        gap: 12px;
+
+        min-height: 0;
+
+        padding-top: 28px;
+
+        padding-bottom: 30px;
+
+        text-align: left;
     }
 
+
+    .hero__content {
+        align-items: flex-start;
+
+        min-width: 0;
+    }
+
+
+    /* =========================================
+       Eyebrow
+    ========================================= */
 
     .hero__eyebrow {
         max-width: 100%;
 
-        gap: 7px;
+        gap: 5px;
 
-        margin-bottom: 17px;
+        margin-bottom: 14px;
 
-        padding: 8px 12px;
+        padding: 7px 9px;
 
-        font-size: 11px;
+        font-size: 9px;
+
+        white-space: nowrap;
     }
 
+
+    /* =========================================
+       Title
+    ========================================= */
 
     .hero__title {
         max-width: 100%;
 
-        margin-bottom: 14px;
+        margin-bottom: 12px;
 
-        font-size: clamp(32px, 9vw, 40px);
+        font-size: clamp(25px, 7vw, 36px);
 
         line-height: 1.08;
 
-        letter-spacing: -1.2px;
+        letter-spacing: -1px;
     }
 
+
+    /* =========================================
+       Description
+    ========================================= */
 
     .hero__description {
         max-width: 100%;
 
-        margin-bottom: 22px;
+        margin-bottom: 18px;
 
-        font-size: 16px;
+        font-size: 14px;
 
-        line-height: 1.5;
+        line-height: 1.45;
     }
 
+
+    /* =========================================
+       Search
+    ========================================= */
 
     .hero__search {
         width: 100%;
 
-        height: 50px;
+        height: 46px;
 
-        border-radius: 8px;
+        border-radius: 7px;
     }
 
 
     .hero__search-icon {
-        padding-left: 14px;
+        padding-left: 10px;
 
-        font-size: 22px;
+        font-size: 19px;
     }
 
 
     .hero__search input {
-        padding: 0 10px;
+        padding: 0 7px;
 
-        font-size: 14px;
+        font-size: 12px;
     }
 
 
     .hero__search-button {
-        flex-basis: 52px;
+        flex: 0 0 44px;
 
-        width: 52px;
+        width: 44px;
 
-        font-size: 22px;
+        font-size: 19px;
     }
 
 
+    /* =========================================
+       Visual
+    ========================================= */
+
     .hero__visual {
-        min-height: 190px;
+        width: 100%;
+
+        min-height: 0;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
     }
 
 
     .hero__image {
-        width: min(100%, 360px);
+        width: 100%;
+
+        max-width: 230px;
+
+        height: auto;
     }
 
 }
@@ -542,43 +650,78 @@
 @media (max-width: 380px) {
 
     .hero__grid {
-        gap: 22px;
+        grid-template-columns:
+            minmax(0, 1.25fr)
+            minmax(90px, 0.75fr);
 
-        padding-top: 28px;
+        gap: 8px;
 
-        padding-bottom: 30px;
+        padding-top: 24px;
+
+        padding-bottom: 26px;
     }
 
 
     .hero__eyebrow {
-        font-size: 10px;
+        gap: 4px;
+
+        padding: 6px 7px;
+
+        font-size: 8px;
     }
 
 
     .hero__title {
-        font-size: 31px;
+        font-size: 24px;
 
-        letter-spacing: -1px;
+        letter-spacing: -0.8px;
     }
 
 
     .hero__description {
-        font-size: 15px;
+        margin-bottom: 15px;
+
+        font-size: 13px;
     }
 
 
     .hero__search {
-        height: 48px;
+        height: 43px;
+    }
+
+
+    .hero__search-icon {
+        padding-left: 8px;
+
+        font-size: 17px;
+    }
+
+
+    .hero__search input {
+        padding: 0 6px;
+
+        font-size: 11px;
+    }
+
+
+    .hero__search-button {
+        flex: 0 0 40px;
+
+        width: 40px;
+
+        font-size: 17px;
     }
 
 
     .hero__visual {
-        min-height: 160px;
+        min-height: 0;
     }
 
 
     .hero__image {
-        width: min(100%, 320px);
+        width: 100%;
+
+        max-width: 190px;
     }
 
 }
