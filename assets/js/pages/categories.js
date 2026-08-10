@@ -1,39 +1,36 @@
 /* =========================================================
    ToolZen Hub
-   Categories Page
+   All Categories Page
 ========================================================= */
 
 import { categories } from "../data/categories.js";
 
+import { renderHeader } from "../components/header.js";
 
-/* =========================================================
-   DOM
-========================================================= */
-
-const grid = document.getElementById("categories-page-grid");
-const form = document.getElementById("categories-search-form");
-const input = document.getElementById("categories-search-input");
-const noResults = document.getElementById("categories-no-results");
+import { renderFooter } from "../components/footer.js";
 
 
 /* =========================================================
-   Render Categories
+   Render Category Cards
 ========================================================= */
 
-function renderCategories(list = categories) {
+function renderCategoriesPage() {
+
+    const grid = document.getElementById(
+        "categories-page-grid"
+    );
 
     if (!grid) {
         return;
     }
 
 
-    grid.innerHTML = list.map(category => `
+    grid.innerHTML = categories.map(category => `
 
         <a
-            id="category-${category.id}"
+            id="${category.id}"
             href="${category.href}"
             class="category-page-card"
-            data-category="${category.id}"
         >
 
             <div
@@ -68,65 +65,23 @@ function renderCategories(list = categories) {
 
     `).join("");
 
-
-    if (noResults) {
-        noResults.hidden = list.length !== 0;
-    }
-
 }
 
 
 /* =========================================================
-   Search Categories
+   Category Search
 ========================================================= */
 
-function searchCategories(query) {
+function initCategoriesSearch() {
 
-    const normalizedQuery = query
-        .trim()
-        .toLowerCase();
+    const form = document.getElementById(
+        "categories-search-form"
+    );
 
+    const input = document.getElementById(
+        "categories-search-input"
+    );
 
-    if (!normalizedQuery) {
-
-        renderCategories(categories);
-
-        return;
-
-    }
-
-
-    const matches = categories.filter(category => {
-
-        const title =
-            category.title.toLowerCase();
-
-        const description =
-            category.description.toLowerCase();
-
-        const id =
-            category.id.toLowerCase();
-
-
-        return (
-            title.includes(normalizedQuery) ||
-            description.includes(normalizedQuery) ||
-            id.includes(normalizedQuery)
-        );
-
-    });
-
-
-    renderCategories(matches);
-
-}
-
-
-/* =========================================================
-   Search Submit
-========================================================= */
-
-function initSearch() {
 
     if (!form || !input) {
         return;
@@ -137,91 +92,121 @@ function initSearch() {
 
         event.preventDefault();
 
-        const query = input.value.trim();
+
+        const query = input.value
+            .trim()
+            .toLowerCase();
+
 
         if (!query) {
-
-            renderCategories(categories);
-
             return;
-
         }
 
 
-        const normalizedQuery =
-            query.toLowerCase();
+        const match = categories.find(category => {
 
+            return (
 
-        /*
-         * If the user enters an exact category name,
-         * go directly to that category page.
-         */
+                category.title
+                    .toLowerCase()
+                    .includes(query)
 
-        const exactMatch =
-            categories.find(category =>
-                category.title.toLowerCase() === normalizedQuery ||
-                category.id.toLowerCase() === normalizedQuery
+                ||
+
+                category.description
+                    .toLowerCase()
+                    .includes(query)
+
             );
 
+        });
 
-        if (exactMatch) {
 
-            window.location.href =
-                exactMatch.href;
+        if (match) {
 
-            return;
+            window.location.href = match.href;
 
         }
 
+    });
+
+}
+
+
+/* =========================================================
+   Handle Category Hash
+========================================================= */
+
+function handleCategoryHash() {
+
+    const hash = window.location.hash;
+
+    if (!hash) {
+        return;
+    }
+
+
+    const target = document.querySelector(hash);
+
+    if (!target) {
+        return;
+    }
+
+
+    requestAnimationFrame(() => {
+
+        target.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+
+        target.classList.add(
+            "category-page-card--active"
+        );
+
+
+        window.setTimeout(() => {
+
+            target.classList.remove(
+                "category-page-card--active"
+            );
+
+        }, 1400);
+
+    });
+
+}
+
+
+/* =========================================================
+   Initialize Page
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
         /*
-         * Otherwise filter the category cards.
+         * Render global components first.
+         * This is what was missing from the
+         * standalone categories page.
          */
 
-        searchCategories(query);
+        renderHeader();
 
-    });
-
-
-    /*
-     * Live search
-     */
-
-    input.addEventListener("input", function () {
-
-        searchCategories(input.value);
-
-    });
-
-}
+        renderFooter();
 
 
-/* =========================================================
-   Init
-========================================================= */
+        /*
+         * Then render page content.
+         */
 
-function initCategoriesPage() {
+        renderCategoriesPage();
 
-    renderCategories();
+        initCategoriesSearch();
 
-    initSearch();
+        handleCategoryHash();
 
-}
-
-
-/* =========================================================
-   DOM Ready
-========================================================= */
-
-if (document.readyState === "loading") {
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        initCategoriesPage
-    );
-
-} else {
-
-    initCategoriesPage();
-
-}
+    }
+);
