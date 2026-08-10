@@ -29,7 +29,7 @@ export function renderHeader() {
                     ======================================= -->
 
                     <a
-                        href="/"
+                        href="index.html"
                         class="navbar__brand"
                         aria-label="ToolZen Hub Home"
                     >
@@ -63,7 +63,7 @@ export function renderHeader() {
                         <li>
 
                             <a
-                                href="/"
+                                href="index.html"
                                 class="navbar__link"
                                 data-nav="home"
                             >
@@ -151,64 +151,34 @@ export function renderHeader() {
     const currentPage =
         window.location.pathname
             .split("/")
-            .pop()
-            .toLowerCase();
+            .pop() || "index.html";
 
 
     const navLinks =
-        header.querySelectorAll(
-            ".navbar__link"
-        );
+        header.querySelectorAll(".navbar__link");
 
 
     navLinks.forEach(link => {
 
-        const navTarget =
-            link.dataset.nav;
-
-
-        let isActive = false;
+        const href =
+            link.getAttribute("href");
 
 
         if (
-            navTarget === "home" &&
+            href === currentPage ||
             (
-                currentPage === "" ||
-                currentPage === "index.html"
+                currentPage === "" &&
+                href === "index.html"
             )
         ) {
-            isActive = true;
+
+            link.classList.add("active");
+
+        } else {
+
+            link.classList.remove("active");
+
         }
-
-
-        if (
-            navTarget === "categories" &&
-            currentPage === "categories.html"
-        ) {
-            isActive = true;
-        }
-
-
-        if (
-            navTarget === "articles" &&
-            currentPage === "articles.html"
-        ) {
-            isActive = true;
-        }
-
-
-        if (
-            navTarget === "about" &&
-            currentPage === "about.html"
-        ) {
-            isActive = true;
-        }
-
-
-        link.classList.toggle(
-            "active",
-            isActive
-        );
 
     });
 
