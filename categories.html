@@ -117,15 +117,13 @@
 
                 <div class="categories-page__intro">
 
-                    <div class="categories-page__eyebrow">
-                        CALCULATORS & TOOLS
-                    </div>
-
+                    <span class="categories-page__eyebrow">
+                        CALCULATORS &amp; TOOLS
+                    </span>
 
                     <h1 class="categories-page__title">
                         All Categories
                     </h1>
-
 
                     <p class="categories-page__description">
                         Explore our wide range of calculators and smart tools
@@ -174,6 +172,7 @@
                     <form
                         class="categories-search__form"
                         id="categories-search-form"
+                        role="search"
                     >
 
                         <input
@@ -182,6 +181,7 @@
                             class="categories-search__input"
                             placeholder="Search calculators..."
                             autocomplete="off"
+                            aria-label="Search calculators"
                         >
 
                         <button
@@ -195,6 +195,19 @@
                     </form>
 
                 </div>
+
+
+                <!-- =================================================
+                     No Results
+                ================================================== -->
+
+                <p
+                    id="categories-no-results"
+                    class="categories-no-results"
+                    hidden
+                >
+                    No matching category found.
+                </p>
 
             </div>
 
