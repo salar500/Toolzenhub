@@ -8,14 +8,6 @@ import { renderFooter } from "../components/footer.js";
 
 
 /* =========================================================
-   Render Global Components
-========================================================= */
-
-renderHeader();
-renderFooter();
-
-
-/* =========================================================
    Category Data
 ========================================================= */
 
@@ -94,13 +86,12 @@ const categories = [
 
 function renderCategories() {
 
-    const grid =
-        document.getElementById("categories-grid");
+    const grid = document.getElementById("categories-grid");
 
     if (!grid) {
+        console.error("categories-grid not found");
         return;
     }
-
 
     grid.innerHTML = categories.map(category => `
 
@@ -116,7 +107,6 @@ function renderCategories() {
                 ${category.icon}
             </span>
 
-
             <span class="category-page-card__content">
 
                 <span class="category-page-card__title">
@@ -129,7 +119,6 @@ function renderCategories() {
 
             </span>
 
-
             <span
                 class="category-page-card__arrow"
                 aria-hidden="true"
@@ -140,7 +129,6 @@ function renderCategories() {
         </a>
 
     `).join("");
-
 }
 
 
@@ -151,47 +139,58 @@ function renderCategories() {
 function setupSearch() {
 
     const form =
-        document.getElementById(
-            "categories-search-form"
-        );
+        document.getElementById("categories-search-form");
 
     const input =
-        document.getElementById(
-            "categories-search-input"
-        );
-
+        document.getElementById("categories-search-input");
 
     if (!form || !input) {
+        console.error("Categories search elements not found");
         return;
     }
-
 
     form.addEventListener("submit", event => {
 
         event.preventDefault();
 
-
-        const query =
-            input.value.trim();
-
+        const query = input.value.trim();
 
         if (!query) {
             return;
         }
 
-
         window.location.href =
             `search.html?q=${encodeURIComponent(query)}`;
 
     });
-
 }
 
 
 /* =========================================================
-   Initialize
+   Initialize Page
 ========================================================= */
 
-renderCategories();
+function initCategoriesPage() {
 
-setupSearch();
+    console.log("Categories page JS loaded");
+
+    renderHeader();
+    renderFooter();
+
+    renderCategories();
+    setupSearch();
+}
+
+
+if (document.readyState === "loading") {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initCategoriesPage
+    );
+
+} else {
+
+    initCategoriesPage();
+
+}
