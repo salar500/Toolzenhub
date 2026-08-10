@@ -5,7 +5,79 @@
 
 import { renderHeader } from "../components/header.js";
 import { renderFooter } from "../components/footer.js";
-import { categories } from "../data/categories.js";
+
+
+/* =========================================================
+   Categories Data
+========================================================= */
+
+const categories = [
+
+    {
+        id: "loans",
+        title: "Loans",
+        description: "EMI, Home Loan, Personal Loan and more",
+        icon: "🏠",
+        className: "loans"
+    },
+
+    {
+        id: "investment",
+        title: "Investment",
+        description: "SIP, PPF, FD, CAGR and more",
+        icon: "📈",
+        className: "investment"
+    },
+
+    {
+        id: "tax",
+        title: "Tax",
+        description: "Income Tax, GST, TDS and more",
+        icon: "🧾",
+        className: "tax"
+    },
+
+    {
+        id: "health",
+        title: "Health",
+        description: "BMI, Calorie, BMR and more",
+        icon: "♥",
+        className: "health"
+    },
+
+    {
+        id: "business",
+        title: "Business",
+        description: "Profit, Margin, ROI and more",
+        icon: "💼",
+        className: "business"
+    },
+
+    {
+        id: "math",
+        title: "Math",
+        description: "Percentage, Ratio, Age and more",
+        icon: "🔢",
+        className: "math"
+    },
+
+    {
+        id: "converter",
+        title: "Converter",
+        description: "Unit, Currency, Date and more",
+        icon: "↻",
+        className: "converter"
+    },
+
+    {
+        id: "more",
+        title: "More",
+        description: "Explore all calculators and tools",
+        icon: "▦",
+        className: "more"
+    }
+
+];
 
 
 /* =========================================================
@@ -14,9 +86,15 @@ import { categories } from "../data/categories.js";
 
 function renderCategoriesPage() {
 
-    const grid = document.getElementById("categories-page-grid");
+    const grid =
+        document.getElementById("categories-grid");
+
 
     if (!grid) {
+        console.error(
+            "ToolZen Hub: #categories-grid not found."
+        );
+
         return;
     }
 
@@ -24,14 +102,16 @@ function renderCategoriesPage() {
     grid.innerHTML = categories.map(category => `
 
         <a
-            id="${category.id}"
-            href="${category.href}"
+            href="#${category.id}"
             class="category-page-card"
+            id="${category.id}"
         >
 
             <div
-                class="category-page-card__icon category-page-card__icon--${category.iconClass}"
-                aria-hidden="true"
+                class="
+                    category-page-card__icon
+                    category-page-card__icon--${category.className}
+                "
             >
                 ${category.icon}
             </div>
@@ -42,7 +122,6 @@ function renderCategoriesPage() {
                 <h2 class="category-page-card__title">
                     ${category.title}
                 </h2>
-
 
                 <p class="category-page-card__description">
                     ${category.description}
@@ -69,13 +148,18 @@ function renderCategoriesPage() {
    Search
 ========================================================= */
 
-function initCategoriesSearch() {
+function initializeSearch() {
 
     const form =
-        document.getElementById("categories-search-form");
+        document.getElementById(
+            "categories-search-form"
+        );
+
 
     const input =
-        document.getElementById("categories-search-input");
+        document.getElementById(
+            "categories-search-input"
+        );
 
 
     if (!form || !input) {
@@ -83,89 +167,28 @@ function initCategoriesSearch() {
     }
 
 
-    form.addEventListener("submit", function (event) {
+    form.addEventListener(
+        "submit",
+        event => {
 
-        event.preventDefault();
+            event.preventDefault();
 
-
-        const query =
-            input.value.trim().toLowerCase();
-
-
-        if (!query) {
-            return;
-        }
+            const query =
+                input.value.trim();
 
 
-        const match = categories.find(category => {
+            if (!query) {
+                return;
+            }
 
-            const title =
-                category.title.toLowerCase();
 
-            const description =
-                category.description.toLowerCase();
-
-            return (
-                title.includes(query) ||
-                description.includes(query)
+            console.log(
+                "Searching calculators:",
+                query
             );
 
-        });
-
-
-        if (match) {
-
-            window.location.href = match.href;
-
-            return;
         }
-
-
-        /*
-         * If no category matches, send the user
-         * to the categories page instead of doing
-         * nothing silently.
-         */
-
-        input.focus();
-
-    });
-
-}
-
-
-/* =========================================================
-   Category Hash Navigation
-========================================================= */
-
-function handleCategoryHash() {
-
-    const hash =
-        window.location.hash.replace("#", "");
-
-
-    if (!hash) {
-        return;
-    }
-
-
-    const target =
-        document.getElementById(hash);
-
-
-    if (!target) {
-        return;
-    }
-
-
-    setTimeout(() => {
-
-        target.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
-    }, 100);
+    );
 
 }
 
@@ -174,34 +197,34 @@ function handleCategoryHash() {
    Initialize Page
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+function initializeCategoriesPage() {
 
-        /*
-         * Global components
-         */
+    renderHeader();
 
-        renderHeader();
+    renderCategoriesPage();
 
-        renderFooter();
+    renderFooter();
 
+    initializeSearch();
 
-        /*
-         * Page content
-         */
-
-        renderCategoriesPage();
-
-        initCategoriesSearch();
+}
 
 
-        /*
-         * Handle links such as:
-         * categories.html#loans
-         */
+/* =========================================================
+   Start
+========================================================= */
 
-        handleCategoryHash();
+if (
+    document.readyState === "loading"
+) {
 
-    }
-);
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeCategoriesPage
+    );
+
+} else {
+
+    initializeCategoriesPage();
+
+}
