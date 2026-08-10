@@ -1,0 +1,796 @@
+/* =========================================================
+   ToolZen Hub
+   Categories Page
+   Full-Page / Sticky Footer Layout
+========================================================= */
+
+
+/* =========================================================
+   PAGE RESET
+========================================================= */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================================
+   FULL PAGE LAYOUT
+========================================================= */
+
+body.categories-page-body {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #f8fafb;
+}
+
+
+/*
+   #app expands automatically when the page content
+   is shorter than the viewport.
+
+   This creates the required space BETWEEN the content
+   and footer, not below the footer.
+*/
+
+body.categories-page-body #app {
+    flex: 1 0 auto;
+
+    width: 100%;
+
+    min-height: 0;
+}
+
+
+/* =========================================================
+   CATEGORIES PAGE
+========================================================= */
+
+.categories-page {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 22px 0 24px;
+
+    background: #f8fafb;
+}
+
+
+.categories-page .container {
+    width: 100%;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.categories-page__intro {
+    text-align: center;
+
+    margin: 0 0 18px;
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.categories-page__eyebrow {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 20px;
+
+    box-sizing: border-box;
+
+    margin-bottom: 7px;
+
+    padding: 4px 9px;
+
+    border-radius: 999px;
+
+    background: #eaf8f0;
+
+    color: #0b9f58;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    letter-spacing: 0.4px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.categories-page__title {
+    margin: 0;
+
+    color: #101828;
+
+    font-size: 24px;
+
+    font-weight: 800;
+
+    line-height: 1.2;
+
+    letter-spacing: -0.5px;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.categories-page__description {
+    max-width: 560px;
+
+    margin: 7px auto 0;
+
+    color: #667085;
+
+    font-size: 11px;
+
+    font-weight: 400;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CATEGORY GRID
+========================================================= */
+
+.categories-page__grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   CATEGORY CARD
+========================================================= */
+
+.category-page-card {
+    position: relative;
+
+    min-width: 0;
+
+    min-height: 78px;
+
+    display: flex;
+
+    align-items: center;
+
+    box-sizing: border-box;
+
+    padding: 11px;
+
+    border: 1px solid #e5ebe8;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: inherit;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 2px 6px rgba(16, 24, 40, 0.03);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.category-page-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #cfe8dc;
+
+    box-shadow:
+        0 6px 16px rgba(16, 24, 40, 0.06);
+}
+
+
+/* =========================================================
+   CATEGORY ICON
+========================================================= */
+
+.category-page-card__icon {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    margin-right: 10px;
+
+    border-radius: 9px;
+
+    font-size: 17px;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   ICON COLORS
+========================================================= */
+
+.category-page-card__icon--loans {
+    background: #e9f8e9;
+    color: #159447;
+}
+
+.category-page-card__icon--investment {
+    background: #e6f6ed;
+    color: #0b9f58;
+}
+
+.category-page-card__icon--tax {
+    background: #eee8ff;
+    color: #7047d9;
+}
+
+.category-page-card__icon--health {
+    background: #ffe8f0;
+    color: #e23d75;
+}
+
+.category-page-card__icon--business {
+    background: #e5f2ff;
+    color: #2475c7;
+}
+
+.category-page-card__icon--math {
+    background: #fff4df;
+    color: #c88a12;
+}
+
+.category-page-card__icon--converter {
+    background: #e3f7f4;
+    color: #158c7d;
+}
+
+.category-page-card__icon--more {
+    background: #edf1f5;
+    color: #496277;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.category-page-card__content {
+    min-width: 0;
+
+    padding-right: 18px;
+}
+
+
+.category-page-card__title {
+    margin: 0 0 3px;
+
+    color: #101828;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+
+.category-page-card__description {
+    margin: 0;
+
+    color: #667085;
+
+    font-size: 8px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   CARD ARROW
+========================================================= */
+
+.category-page-card__arrow {
+    position: absolute;
+
+    top: 50%;
+    right: 10px;
+
+    transform: translateY(-50%);
+
+    color: #0b9f58;
+
+    font-size: 14px;
+
+    line-height: 1;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.category-page-card:hover .category-page-card__arrow {
+    transform:
+        translate(3px, -50%);
+}
+
+
+/* =========================================================
+   SEARCH BOX
+========================================================= */
+
+.categories-search {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    box-sizing: border-box;
+
+    gap: 10px;
+
+    margin-top: 16px;
+
+    padding: 10px;
+
+    border: 1px solid #dcefe5;
+
+    border-radius: 9px;
+
+    background: #f0f9f4;
+}
+
+
+/* =========================================================
+   SEARCH ICON
+========================================================= */
+
+.categories-search__icon {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+    background: #e7f7ed;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   SEARCH CONTENT
+========================================================= */
+
+.categories-search__content {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.categories-search__content h2 {
+    margin: 0 0 2px;
+
+    color: #101828;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+
+.categories-search__content p {
+    margin: 0;
+
+    color: #667085;
+
+    font-size: 8px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   SEARCH FORM
+========================================================= */
+
+.categories-search__form {
+    width: 38%;
+
+    height: 30px;
+
+    display: flex;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    border-radius: 6px;
+}
+
+
+/* =========================================================
+   SEARCH INPUT
+========================================================= */
+
+.categories-search__input {
+    width: 100%;
+    min-width: 0;
+
+    height: 30px;
+
+    flex: 1;
+
+    box-sizing: border-box;
+
+    padding: 0 9px;
+
+    border: 1px solid #dce3e0;
+
+    border-right: 0;
+
+    border-radius: 6px 0 0 6px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #101828;
+
+    font-family: inherit;
+
+    font-size: 9px;
+}
+
+
+.categories-search__input::placeholder {
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   SEARCH BUTTON
+========================================================= */
+
+.categories-search__button {
+    width: 32px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border: 0;
+
+    border-radius: 0 6px 6px 0;
+
+    background: #0b9f58;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease;
+}
+
+
+.categories-search__button:hover {
+    background: #087d46;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1200px) {
+
+    .categories-page {
+        padding-top: 26px;
+        padding-bottom: 28px;
+    }
+
+
+    .categories-page__intro {
+        margin-bottom: 21px;
+    }
+
+
+    .categories-page__grid {
+        gap: 14px;
+    }
+
+
+    .category-page-card {
+        min-height: 88px;
+
+        padding: 13px;
+    }
+
+
+    .category-page-card__icon {
+        width: 40px;
+        height: 40px;
+
+        font-size: 19px;
+    }
+
+
+    .category-page-card__title {
+        font-size: 12px;
+    }
+
+
+    .category-page-card__description {
+        font-size: 9px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .categories-page__grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .categories-page {
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+
+
+    .categories-page__intro {
+        margin-bottom: 14px;
+    }
+
+
+    .categories-page__title {
+        font-size: 21px;
+    }
+
+
+    .categories-page__description {
+        max-width: 330px;
+
+        padding: 0 10px;
+
+        font-size: 10px;
+    }
+
+
+    .categories-page__eyebrow {
+        font-size: 8px;
+    }
+
+
+    .categories-page__grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+
+    .category-page-card {
+        min-height: 78px;
+
+        padding: 9px;
+    }
+
+
+    .category-page-card__icon {
+        width: 32px;
+        height: 32px;
+
+        margin-right: 8px;
+
+        border-radius: 8px;
+
+        font-size: 15px;
+    }
+
+
+    .category-page-card__content {
+        padding-right: 13px;
+    }
+
+
+    .category-page-card__title {
+        font-size: 10px;
+    }
+
+
+    .category-page-card__description {
+        font-size: 7px;
+
+        line-height: 1.4;
+    }
+
+
+    .category-page-card__arrow {
+        right: 8px;
+
+        font-size: 13px;
+    }
+
+
+    /* -----------------------------------------
+       Search
+    ----------------------------------------- */
+
+    .categories-search {
+        display: grid;
+
+        grid-template-columns: auto 1fr;
+
+        align-items: center;
+
+        gap: 8px;
+
+        padding: 9px;
+    }
+
+
+    .categories-search__icon {
+        width: 32px;
+        height: 32px;
+
+        grid-row: span 2;
+
+        font-size: 15px;
+    }
+
+
+    .categories-search__content {
+        padding-top: 1px;
+    }
+
+
+    .categories-search__content h2 {
+        font-size: 9px;
+    }
+
+
+    .categories-search__content p {
+        font-size: 7px;
+    }
+
+
+    .categories-search__form {
+        width: 100%;
+
+        height: 31px;
+    }
+
+
+    .categories-search__input {
+        height: 31px;
+
+        font-size: 8px;
+    }
+
+
+    .categories-search__button {
+        width: 34px;
+
+        height: 31px;
+
+        font-size: 14px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .categories-page {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+
+    .categories-page__grid {
+        gap: 8px;
+    }
+
+
+    .category-page-card {
+        min-height: 74px;
+
+        padding: 8px;
+    }
+
+
+    .category-page-card__icon {
+        width: 30px;
+        height: 30px;
+
+        margin-right: 7px;
+
+        font-size: 14px;
+    }
+
+
+    .category-page-card__title {
+        font-size: 9px;
+    }
+
+
+    .category-page-card__description {
+        font-size: 7px;
+    }
+
+}
