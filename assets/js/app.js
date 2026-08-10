@@ -8,18 +8,29 @@ import { renderHero } from "./components/hero.js";
 import { renderCategories } from "./components/categories.js";
 
 
+/* =========================================================
+   Application Initialization
+========================================================= */
 
 function initializeApp() {
 
+    /* Global Header */
     renderHeader();
 
+
+    /* Hero Section */
     renderHero();
 
-   rendercategories();
-   
+
+    /* Categories + Popular Calculators */
+    renderCategories();
 
 }
 
+
+/* =========================================================
+   DOM Ready
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
