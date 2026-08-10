@@ -45,7 +45,7 @@ export function renderCategories() {
 
                     <!-- Loans -->
 
-                    <a href="categories.html#loans" class="category-card">
+                    <a href="loans.html" class="category-card">
 
                         <div class="category-card__icon category-card__icon--loans">
                             🏠
@@ -67,7 +67,7 @@ export function renderCategories() {
 
                     <!-- Investment -->
 
-                    <a href="categories.html#investment" class="category-card">
+                    <a href="investment.html" class="category-card">
 
                         <div class="category-card__icon category-card__icon--investment">
                             📈
@@ -89,7 +89,7 @@ export function renderCategories() {
 
                     <!-- Tax -->
 
-              <a href="categories.html#tax" class="category-card">
+                    <a href="tax.html" class="category-card">
 
                         <div class="category-card__icon category-card__icon--tax">
                             🧾
@@ -111,7 +111,7 @@ export function renderCategories() {
 
                     <!-- Health -->
 
-                    <a href="categories.html#health" class="category-card">
+                    <a href="health.html" class="category-card">
 
                         <div class="category-card__icon category-card__icon--health">
                             ♥
@@ -133,7 +133,7 @@ export function renderCategories() {
 
                     <!-- Business -->
 
-                    <a href="categories.html#business" class="category-card">
+                    <a href="business.html" class="category-card">
 
                         <div class="category-card__icon category-card__icon--business">
                             💼
@@ -155,7 +155,7 @@ export function renderCategories() {
 
                     <!-- Math -->
 
-                    <a href="categories.html#math" class="category-card">
+                    <a href="math.html" class="category-card">
 
                         <div class="category-card__icon category-card__icon--math">
                             🔢
@@ -177,7 +177,7 @@ export function renderCategories() {
 
                     <!-- Converter -->
 
-                    <a href="categories.html#converter" class="category-card">
+                    <a href="converter.html" class="category-card">
 
                         <div class="category-card__icon category-card__icon--converter">
                             ↻
