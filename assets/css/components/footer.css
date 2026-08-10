@@ -650,3 +650,54 @@
     }
 
 }
+
+/* =========================================================
+   FINAL FOOTER LAYOUT RESET
+========================================================= */
+
+#footer {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#footer .footer {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#footer .footer__features,
+#footer .footer__main,
+#footer .footer__bottom {
+    margin: 0;
+}
+
+#footer .footer__features-grid,
+#footer .footer__main-grid,
+#footer .footer__bottom-inner {
+    box-sizing: border-box;
+}
+
+
+/* Prevent accidental inherited height */
+
+.footer,
+.footer__features,
+.footer__main,
+.footer__bottom {
+    min-height: 0;
+    height: auto;
+}
+
+
+/* Remove possible last-child spacing */
+
+.footer p:last-child,
+.footer h1:last-child,
+.footer h2:last-child,
+.footer h3:last-child,
+.footer ul:last-child {
+    margin-bottom: 0;
+}
