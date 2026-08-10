@@ -18,13 +18,7 @@ const categories = [
         icon: "🏠",
         iconClass: "loans",
         title: "Loans",
-        description: "EMI, Home Loan, Personal Loan and more",
-        calculators: [
-            "EMI Calculator",
-            "Home Loan Calculator",
-            "Personal Loan Calculator",
-            "Loan Comparison"
-        ]
+        description: "EMI, Home Loan, Personal Loan and more"
     },
 
     {
@@ -32,13 +26,7 @@ const categories = [
         icon: "📈",
         iconClass: "investment",
         title: "Investment",
-        description: "SIP, PPF, FD, CAGR and more",
-        calculators: [
-            "SIP Calculator",
-            "PPF Calculator",
-            "FD Calculator",
-            "CAGR Calculator"
-        ]
+        description: "SIP, PPF, FD, CAGR and more"
     },
 
     {
@@ -46,13 +34,7 @@ const categories = [
         icon: "🧾",
         iconClass: "tax",
         title: "Tax",
-        description: "Income Tax, GST and more",
-        calculators: [
-            "Income Tax Calculator",
-            "GST Calculator",
-            "HRA Calculator",
-            "Tax Savings Calculator"
-        ]
+        description: "Income Tax, GST, TDS and more"
     },
 
     {
@@ -60,13 +42,7 @@ const categories = [
         icon: "♥",
         iconClass: "health",
         title: "Health",
-        description: "BMI, Calorie, BMR and more",
-        calculators: [
-            "BMI Calculator",
-            "BMR Calculator",
-            "Calorie Calculator",
-            "Body Fat Calculator"
-        ]
+        description: "BMI, Calorie, BMR and more"
     },
 
     {
@@ -74,13 +50,7 @@ const categories = [
         icon: "💼",
         iconClass: "business",
         title: "Business",
-        description: "Profit, Margin, ROI and more",
-        calculators: [
-            "Profit Calculator",
-            "Margin Calculator",
-            "ROI Calculator",
-            "Break Even Calculator"
-        ]
+        description: "Profit, Margin, ROI and more"
     },
 
     {
@@ -88,13 +58,7 @@ const categories = [
         icon: "🔢",
         iconClass: "math",
         title: "Math",
-        description: "Percentage, Ratio, Age and more",
-        calculators: [
-            "Percentage Calculator",
-            "Ratio Calculator",
-            "Age Calculator",
-            "Average Calculator"
-        ]
+        description: "Percentage, Ratio, Age and more"
     },
 
     {
@@ -102,20 +66,22 @@ const categories = [
         icon: "↻",
         iconClass: "converter",
         title: "Converter",
-        description: "Unit, Currency, Date and more",
-        calculators: [
-            "Unit Converter",
-            "Currency Converter",
-            "Date Calculator",
-            "Time Converter"
-        ]
+        description: "Unit, Currency, Date and more"
+    },
+
+    {
+        id: "more",
+        icon: "▦",
+        iconClass: "more",
+        title: "More",
+        description: "Explore all calculators and tools"
     }
 
 ];
 
 
 /* =========================================================
-   Render Categories
+   Render Category Cards
 ========================================================= */
 
 function renderCategoriesPage() {
@@ -131,73 +97,94 @@ function renderCategoriesPage() {
 
     grid.innerHTML = categories.map(category => `
 
-        <article
-            id="${category.id}"
+        <a
+            href="categories.html#${category.id}"
             class="category-page-card"
         >
 
-            <div class="category-page-card__header">
+            <div
+                class="
+                    category-page-card__icon
+                    category-page-card__icon--${category.iconClass}
+                "
+                aria-hidden="true"
+            >
+                ${category.icon}
+            </div>
 
-                <div
-                    class="
-                        category-page-card__icon
-                        category-page-card__icon--${category.iconClass}
-                    "
-                >
-                    ${category.icon}
-                </div>
 
-                <div>
+            <div class="category-page-card__content">
 
-                    <h2 class="category-page-card__title">
-                        ${category.title}
-                    </h2>
+                <h2 class="category-page-card__title">
+                    ${category.title}
+                </h2>
 
-                    <p class="category-page-card__description">
-                        ${category.description}
-                    </p>
-
-                </div>
+                <p class="category-page-card__description">
+                    ${category.description}
+                </p>
 
             </div>
 
 
-            <div class="category-page-card__divider"></div>
+            <span
+                class="category-page-card__arrow"
+                aria-hidden="true"
+            >
+                →
+            </span>
 
-
-            <ul class="category-page-card__links">
-
-                ${category.calculators.map(calculator => `
-
-                    <li>
-
-                        <a
-                            href="categories.html"
-                            class="category-page-card__link"
-                        >
-
-                            <span>
-                                ${calculator}
-                            </span>
-
-                            <span
-                                class="category-page-card__arrow"
-                                aria-hidden="true"
-                            >
-                                →
-                            </span>
-
-                        </a>
-
-                    </li>
-
-                `).join("")}
-
-            </ul>
-
-        </article>
+        </a>
 
     `).join("");
+}
+
+
+/* =========================================================
+   Search
+========================================================= */
+
+function initializeSearch() {
+
+    const form = document.getElementById(
+        "categories-search-form"
+    );
+
+    const input = document.getElementById(
+        "categories-search-input"
+    );
+
+
+    if (!form || !input) {
+        return;
+    }
+
+
+    form.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        const query = input.value.trim();
+
+
+        if (!query) {
+            input.focus();
+            return;
+        }
+
+
+        /*
+         * Temporary search behavior.
+         *
+         * Later we can connect this to the
+         * global calculator search system.
+         */
+
+        window.location.href =
+            `search.html?q=${encodeURIComponent(query)}`;
+
+    });
+
 }
 
 
@@ -211,10 +198,16 @@ function initializeCategoriesPage() {
 
     renderCategoriesPage();
 
+    initializeSearch();
+
     renderFooter();
 
 }
 
+
+/* =========================================================
+   DOM Ready
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
