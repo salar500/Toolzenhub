@@ -1,6 +1,6 @@
 /* =========================================================
    ToolZen Hub
-   Shared Category Data
+   Category Data
 ========================================================= */
 
 export const categories = [
@@ -14,6 +14,7 @@ export const categories = [
         href: "loans.html"
     },
 
+
     {
         id: "investment",
         icon: "📈",
@@ -22,6 +23,7 @@ export const categories = [
         description: "SIP, PPF, FD, CAGR and more",
         href: "investment.html"
     },
+
 
     {
         id: "tax",
@@ -32,6 +34,7 @@ export const categories = [
         href: "tax.html"
     },
 
+
     {
         id: "health",
         icon: "♥",
@@ -40,6 +43,7 @@ export const categories = [
         description: "BMI, Calorie, BMR and more",
         href: "health.html"
     },
+
 
     {
         id: "business",
@@ -50,6 +54,7 @@ export const categories = [
         href: "business.html"
     },
 
+
     {
         id: "math",
         icon: "🔢",
@@ -59,6 +64,7 @@ export const categories = [
         href: "math.html"
     },
 
+
     {
         id: "converter",
         icon: "↻",
@@ -67,6 +73,7 @@ export const categories = [
         description: "Unit, Currency, Date and more",
         href: "converter.html"
     },
+
 
     {
         id: "more",
