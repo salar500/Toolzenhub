@@ -64,7 +64,7 @@ export function renderHeader() {
 
                             <a
                                 href="/"
-                                class="navbar__link active"
+                                class="navbar__link"
                                 data-nav="home"
                             >
                                 Home
@@ -142,4 +142,74 @@ export function renderHeader() {
 
         </div>
     `;
+
+
+    /* =====================================================
+       Active Navigation
+    ===================================================== */
+
+    const currentPage =
+        window.location.pathname
+            .split("/")
+            .pop()
+            .toLowerCase();
+
+
+    const navLinks =
+        header.querySelectorAll(
+            ".navbar__link"
+        );
+
+
+    navLinks.forEach(link => {
+
+        const navTarget =
+            link.dataset.nav;
+
+
+        let isActive = false;
+
+
+        if (
+            navTarget === "home" &&
+            (
+                currentPage === "" ||
+                currentPage === "index.html"
+            )
+        ) {
+            isActive = true;
+        }
+
+
+        if (
+            navTarget === "categories" &&
+            currentPage === "categories.html"
+        ) {
+            isActive = true;
+        }
+
+
+        if (
+            navTarget === "articles" &&
+            currentPage === "articles.html"
+        ) {
+            isActive = true;
+        }
+
+
+        if (
+            navTarget === "about" &&
+            currentPage === "about.html"
+        ) {
+            isActive = true;
+        }
+
+
+        link.classList.toggle(
+            "active",
+            isActive
+        );
+
+    });
+
 }
