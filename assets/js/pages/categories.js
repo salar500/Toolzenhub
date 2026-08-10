@@ -8,73 +8,81 @@ import { renderFooter } from "../components/footer.js";
 
 
 /* =========================================================
-   Categories Data
+   Render Global Components
+========================================================= */
+
+renderHeader();
+renderFooter();
+
+
+/* =========================================================
+   Category Data
 ========================================================= */
 
 const categories = [
 
     {
-        id: "loans",
-        title: "Loans",
+        name: "Loans",
         description: "EMI, Home Loan, Personal Loan and more",
         icon: "🏠",
-        className: "loans"
+        className: "loans",
+        href: "loans.html"
     },
 
     {
-        id: "investment",
-        title: "Investment",
+        name: "Investment",
         description: "SIP, PPF, FD, CAGR and more",
         icon: "📈",
-        className: "investment"
+        className: "investment",
+        href: "investment.html"
     },
 
     {
-        id: "tax",
-        title: "Tax",
+        name: "Tax",
         description: "Income Tax, GST, TDS and more",
         icon: "🧾",
-        className: "tax"
+        className: "tax",
+        href: "tax.html"
     },
 
     {
-        id: "health",
-        title: "Health",
+        name: "Health",
         description: "BMI, Calorie, BMR and more",
         icon: "♥",
-        className: "health"
+        className: "health",
+        href: "health.html"
     },
 
     {
-        id: "business",
-        title: "Business",
+        name: "Business",
         description: "Profit, Margin, ROI and more",
         icon: "💼",
-        className: "business"
+        className: "business",
+        href: "business.html"
     },
 
     {
-        id: "math",
-        title: "Math",
+        name: "Math",
         description: "Percentage, Ratio, Age and more",
         icon: "🔢",
-        className: "math"
+        className: "math",
+        href: "math.html"
     },
 
     {
-        id: "converter",
-        title: "Converter",
+        name: "Converter",
         description: "Unit, Currency, Date and more",
         icon: "↻",
-        className: "converter"
+        className: "converter",
+        href: "converter.html"
     },
 
     {
-        id: "more",
-        title: "More",
+        name: "More",
         description: "Explore all calculators and tools",
         icon: "▦",
-        className: "more"
+        className: "more",
+        href: "categories.html"
     }
 
 ];
@@ -84,17 +92,12 @@ const categories = [
    Render Categories
 ========================================================= */
 
-function renderCategoriesPage() {
+function renderCategories() {
 
     const grid =
         document.getElementById("categories-grid");
 
-
     if (!grid) {
-        console.error(
-            "ToolZen Hub: #categories-grid not found."
-        );
-
         return;
     }
 
@@ -102,32 +105,29 @@ function renderCategoriesPage() {
     grid.innerHTML = categories.map(category => `
 
         <a
-            href="#${category.id}"
+            href="${category.href}"
             class="category-page-card"
-            id="${category.id}"
         >
 
-            <div
-                class="
-                    category-page-card__icon
-                    category-page-card__icon--${category.className}
-                "
+            <span
+                class="category-page-card__icon
+                       category-page-card__icon--${category.className}"
             >
                 ${category.icon}
-            </div>
+            </span>
 
 
-            <div class="category-page-card__content">
+            <span class="category-page-card__content">
 
-                <h2 class="category-page-card__title">
-                    ${category.title}
-                </h2>
+                <span class="category-page-card__title">
+                    ${category.name}
+                </span>
 
-                <p class="category-page-card__description">
+                <span class="category-page-card__description">
                     ${category.description}
-                </p>
+                </span>
 
-            </div>
+            </span>
 
 
             <span
@@ -148,13 +148,12 @@ function renderCategoriesPage() {
    Search
 ========================================================= */
 
-function initializeSearch() {
+function setupSearch() {
 
     const form =
         document.getElementById(
             "categories-search-form"
         );
-
 
     const input =
         document.getElementById(
@@ -167,64 +166,32 @@ function initializeSearch() {
     }
 
 
-    form.addEventListener(
-        "submit",
-        event => {
+    form.addEventListener("submit", event => {
 
-            event.preventDefault();
-
-            const query =
-                input.value.trim();
+        event.preventDefault();
 
 
-            if (!query) {
-                return;
-            }
+        const query =
+            input.value.trim();
 
 
-            console.log(
-                "Searching calculators:",
-                query
-            );
-
+        if (!query) {
+            return;
         }
-    );
+
+
+        window.location.href =
+            `search.html?q=${encodeURIComponent(query)}`;
+
+    });
 
 }
 
 
 /* =========================================================
-   Initialize Page
+   Initialize
 ========================================================= */
 
-function initializeCategoriesPage() {
+renderCategories();
 
-    renderHeader();
-
-    renderCategoriesPage();
-
-    renderFooter();
-
-    initializeSearch();
-
-}
-
-
-/* =========================================================
-   Start
-========================================================= */
-
-if (
-    document.readyState === "loading"
-) {
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        initializeCategoriesPage
-    );
-
-} else {
-
-    initializeCategoriesPage();
-
-}
+setupSearch();
