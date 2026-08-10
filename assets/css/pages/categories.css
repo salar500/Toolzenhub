@@ -792,3 +792,49 @@ body.categories-page-body #app {
     }
 
 }
+
+/* =========================================================
+   FINAL PAGE HEIGHT FIX
+========================================================= */
+
+html {
+    height: auto;
+    min-height: 0;
+}
+
+body.categories-page-body {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+
+    margin: 0;
+    padding: 0;
+
+    overflow-x: hidden;
+}
+
+body.categories-page-body #app {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+
+    margin: 0;
+    padding: 0;
+}
+
+body.categories-page-body .categories-page {
+    height: auto;
+    min-height: 0;
+}
+
+
+/* Footer must immediately follow content */
+
+body.categories-page-body #footer {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+
+    margin: 0;
+    padding: 0;
+}
