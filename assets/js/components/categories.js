@@ -2,6 +2,7 @@
    ToolZen Hub
    Categories + Popular Calculators Component
 ========================================================= */
+import { categories } from "../data/categories.js";
 
 export function renderCategories() {
 
