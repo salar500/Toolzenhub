@@ -1,0 +1,352 @@
+/* =========================================================
+   ToolZen Hub
+   Latest Articles Component
+========================================================= */
+
+
+/* =========================================================
+   Articles Section
+========================================================= */
+
+.articles-section {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding-top: 22px;
+    padding-bottom: 30px;
+
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   Articles Grid
+========================================================= */
+
+.articles-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   Article Card
+========================================================= */
+
+.article-card {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    border: 1px solid #e5ebe8;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    color: inherit;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 2px 7px rgba(16, 24, 40, 0.035);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.article-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #cfe8dc;
+
+    box-shadow:
+        0 7px 18px rgba(16, 24, 40, 0.07);
+}
+
+
+/* =========================================================
+   Article Image
+========================================================= */
+
+.article-card__image {
+    width: 100%;
+
+    aspect-ratio: 16 / 8;
+
+    overflow: hidden;
+
+    background: #eef5f2;
+}
+
+
+.article-card__image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.article-card:hover .article-card__image img {
+    transform: scale(1.03);
+}
+
+
+/* =========================================================
+   Article Content
+========================================================= */
+
+.article-card__content {
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+
+    padding: 14px;
+}
+
+
+/* =========================================================
+   Article Category
+========================================================= */
+
+.article-card__category {
+    width: fit-content;
+
+    margin-bottom: 8px;
+
+    color: #0b9f58;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+}
+
+
+/* =========================================================
+   Article Title
+========================================================= */
+
+.article-card__title {
+    margin: 0 0 7px;
+
+    color: #101828;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    line-height: 1.35;
+
+    letter-spacing: -0.2px;
+}
+
+
+/* =========================================================
+   Article Description
+========================================================= */
+
+.article-card__description {
+    margin: 0;
+
+    color: #667085;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   Article Footer
+========================================================= */
+
+.article-card__footer {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-top: auto;
+
+    padding-top: 14px;
+}
+
+
+/* =========================================================
+   Read Article
+========================================================= */
+
+.article-card__read {
+    color: #087d46;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition:
+        color 0.2s ease,
+        gap 0.2s ease;
+}
+
+
+.article-card:hover .article-card__read {
+    color: #056438;
+}
+
+
+/* =========================================================
+   Article Arrow
+========================================================= */
+
+.article-card__arrow {
+    color: #0b9f58;
+
+    font-size: 18px;
+
+    line-height: 1;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.article-card:hover .article-card__arrow {
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   Large Desktop
+========================================================= */
+
+@media (min-width: 1200px) {
+
+    .articles-section {
+        padding-top: 24px;
+        padding-bottom: 34px;
+    }
+
+
+    .articles-grid {
+        gap: 18px;
+    }
+
+
+    .article-card__content {
+        padding: 15px;
+    }
+
+
+    .article-card__title {
+        font-size: 16px;
+    }
+
+}
+
+
+/* =========================================================
+   Tablet
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .articles-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   Mobile
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .articles-section {
+        padding-top: 18px;
+        padding-bottom: 24px;
+    }
+
+
+    .articles-grid {
+        display: flex;
+
+        overflow-x: auto;
+
+        gap: 12px;
+
+        padding-bottom: 6px;
+
+        scroll-snap-type: x proximity;
+
+        scrollbar-width: thin;
+    }
+
+
+    .article-card {
+        flex: 0 0 285px;
+
+        scroll-snap-align: start;
+    }
+
+
+    .article-card__content {
+        padding: 13px;
+    }
+
+
+    .article-card__title {
+        font-size: 14px;
+    }
+
+
+    .article-card__description {
+        font-size: 11px;
+    }
+
+}
+
+
+/* =========================================================
+   Very Small Mobile
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .article-card {
+        flex-basis: 270px;
+    }
+
+}
