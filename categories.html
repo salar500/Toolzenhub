@@ -3,6 +3,10 @@
 
 <head>
 
+    <!-- ==========================================
+         Meta
+    =========================================== -->
+
     <meta charset="UTF-8">
 
     <meta
@@ -10,11 +14,11 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>All Categories | ToolZen Hub</title>
+    <title>Categories | ToolZen Hub</title>
 
     <meta
         name="description"
-        content="Explore all calculator categories and smart tools on ToolZen Hub."
+        content="Explore finance, investment, tax, health, business, math and conversion calculators on ToolZen Hub."
     >
 
     <meta
@@ -23,13 +27,15 @@
     >
 
 
-    <!-- Google Fonts -->
+    <!-- ==========================================
+         Google Fonts
+    =========================================== -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link
         rel="preconnect"
-        href="https://fonts.gstatic.com"
+        href="https://fonts.googleapis.com"
         crossorigin
     >
 
@@ -39,7 +45,9 @@
     >
 
 
-    <!-- Base CSS -->
+    <!-- ==========================================
+         Base CSS
+    =========================================== -->
 
     <link rel="stylesheet" href="assets/css/base/variables.css">
     <link rel="stylesheet" href="assets/css/base/reset.css">
@@ -48,7 +56,9 @@
     <link rel="stylesheet" href="assets/css/base/animations.css">
 
 
-    <!-- Component CSS -->
+    <!-- ==========================================
+         Component CSS
+    =========================================== -->
 
     <link rel="stylesheet" href="assets/css/components/buttons.css">
     <link rel="stylesheet" href="assets/css/components/cards.css">
@@ -61,15 +71,16 @@
     <link rel="stylesheet" href="assets/css/components/footer.css">
 
 
-    <!-- Theme -->
+    <!-- ==========================================
+         Theme
+    =========================================== -->
 
-    <link
-        rel="stylesheet"
-        href="assets/css/themes/light.css"
-    >
+    <link rel="stylesheet" href="assets/css/themes/light.css">
 
 
-    <!-- Page CSS -->
+    <!-- ==========================================
+         Page CSS
+    =========================================== -->
 
     <link
         rel="stylesheet"
@@ -82,23 +93,32 @@
 <body>
 
 
-    <!-- Header -->
+    <!-- ==========================================
+         Global Header
+    =========================================== -->
 
     <header id="header"></header>
 
 
-    <!-- Main -->
+    <!-- ==========================================
+         Main
+    =========================================== -->
 
     <main id="app">
 
 
         <!-- ==========================================
-             Categories Hero
+             Categories Page
         =========================================== -->
 
         <section class="categories-page">
 
             <div class="container">
+
+
+                <!-- ==================================
+                     Page Intro
+                =================================== -->
 
                 <div class="categories-page__intro">
 
@@ -118,7 +138,9 @@
                 </div>
 
 
-                <!-- Category Grid -->
+                <!-- ==================================
+                     Category Grid
+                =================================== -->
 
                 <div
                     id="categories-grid"
@@ -130,11 +152,12 @@
                      Search
                 =================================== -->
 
-                <section class="categories-search">
+                <div class="categories-search">
 
                     <div class="categories-search__icon">
                         ⌕
                     </div>
+
 
                     <div class="categories-search__content">
 
@@ -149,28 +172,30 @@
                     </div>
 
 
-                    <div class="categories-search__form">
+                    <form
+                        class="categories-search__form"
+                        id="categories-search-form"
+                    >
 
                         <input
                             type="search"
-                            id="category-search-input"
+                            id="categories-search-input"
                             class="categories-search__input"
                             placeholder="Search calculators..."
-                            aria-label="Search calculators"
+                            autocomplete="off"
                         >
 
                         <button
-                            type="button"
-                            id="category-search-button"
+                            type="submit"
                             class="categories-search__button"
-                            aria-label="Search"
+                            aria-label="Search calculators"
                         >
                             ⌕
                         </button>
 
-                    </div>
+                    </form>
 
-                </section>
+                </div>
 
             </div>
 
@@ -179,12 +204,16 @@
     </main>
 
 
-    <!-- Footer -->
+    <!-- ==========================================
+         Global Footer
+    =========================================== -->
 
     <footer id="footer"></footer>
 
 
-    <!-- JavaScript -->
+    <!-- ==========================================
+         JavaScript
+    =========================================== -->
 
     <script
         type="module"
