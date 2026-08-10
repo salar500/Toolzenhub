@@ -3,7 +3,7 @@
    Categories Page
 ========================================================= */
 
-import { categories } from "../data/categories.js";
+import { categories as categoryData } from "../data/categories.js";
 
 
 /* =========================================================
