@@ -2,7 +2,6 @@
    ToolZen Hub
    Categories + Popular Calculators Component
 ========================================================= */
-import { categories } from "../data/categories.js";
 
 export function renderCategories() {
 
@@ -46,7 +45,10 @@ export function renderCategories() {
 
                     <!-- Loans -->
 
-                    <a href="loans.html" class="category-card">
+                    <a
+                        href="categories.html#loans"
+                        class="category-card"
+                    >
 
                         <div class="category-card__icon category-card__icon--loans">
                             🏠
@@ -68,7 +70,10 @@ export function renderCategories() {
 
                     <!-- Investment -->
 
-                    <a href="investment.html" class="category-card">
+                    <a
+                        href="categories.html#investment"
+                        class="category-card"
+                    >
 
                         <div class="category-card__icon category-card__icon--investment">
                             📈
@@ -90,7 +95,10 @@ export function renderCategories() {
 
                     <!-- Tax -->
 
-                    <a href="tax.html" class="category-card">
+                    <a
+                        href="categories.html#tax"
+                        class="category-card"
+                    >
 
                         <div class="category-card__icon category-card__icon--tax">
                             🧾
@@ -112,7 +120,10 @@ export function renderCategories() {
 
                     <!-- Health -->
 
-                    <a href="health.html" class="category-card">
+                    <a
+                        href="categories.html#health"
+                        class="category-card"
+                    >
 
                         <div class="category-card__icon category-card__icon--health">
                             ♥
@@ -134,7 +145,10 @@ export function renderCategories() {
 
                     <!-- Business -->
 
-                    <a href="business.html" class="category-card">
+                    <a
+                        href="categories.html#business"
+                        class="category-card"
+                    >
 
                         <div class="category-card__icon category-card__icon--business">
                             💼
@@ -156,7 +170,10 @@ export function renderCategories() {
 
                     <!-- Math -->
 
-                    <a href="math.html" class="category-card">
+                    <a
+                        href="categories.html#math"
+                        class="category-card"
+                    >
 
                         <div class="category-card__icon category-card__icon--math">
                             🔢
@@ -178,7 +195,10 @@ export function renderCategories() {
 
                     <!-- Converter -->
 
-                    <a href="converter.html" class="category-card">
+                    <a
+                        href="categories.html#converter"
+                        class="category-card"
+                    >
 
                         <div class="category-card__icon category-card__icon--converter">
                             ↻
@@ -200,7 +220,10 @@ export function renderCategories() {
 
                     <!-- More -->
 
-                    <a href="categories.html" class="category-card">
+                    <a
+                        href="categories.html#more"
+                        class="category-card"
+                    >
 
                         <div class="category-card__icon category-card__icon--more">
                             ▦
@@ -244,7 +267,7 @@ export function renderCategories() {
                     </h2>
 
                     <a
-                        href="#"
+                        href="categories.html"
                         class="section-link"
                     >
                         View all calculators
