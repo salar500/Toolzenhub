@@ -1,24 +1,20 @@
 /* =========================================================
    ToolZen Hub
-   All Categories Page
+   Categories Page
 ========================================================= */
 
-import { categories } from "../data/categories.js";
-
 import { renderHeader } from "../components/header.js";
-
 import { renderFooter } from "../components/footer.js";
+import { categories } from "../data/categories.js";
 
 
 /* =========================================================
-   Render Category Cards
+   Render Categories
 ========================================================= */
 
 function renderCategoriesPage() {
 
-    const grid = document.getElementById(
-        "categories-page-grid"
-    );
+    const grid = document.getElementById("categories-page-grid");
 
     if (!grid) {
         return;
@@ -47,6 +43,7 @@ function renderCategoriesPage() {
                     ${category.title}
                 </h2>
 
+
                 <p class="category-page-card__description">
                     ${category.description}
                 </p>
@@ -69,18 +66,16 @@ function renderCategoriesPage() {
 
 
 /* =========================================================
-   Category Search
+   Search
 ========================================================= */
 
 function initCategoriesSearch() {
 
-    const form = document.getElementById(
-        "categories-search-form"
-    );
+    const form =
+        document.getElementById("categories-search-form");
 
-    const input = document.getElementById(
-        "categories-search-input"
-    );
+    const input =
+        document.getElementById("categories-search-input");
 
 
     if (!form || !input) {
@@ -93,9 +88,8 @@ function initCategoriesSearch() {
         event.preventDefault();
 
 
-        const query = input.value
-            .trim()
-            .toLowerCase();
+        const query =
+            input.value.trim().toLowerCase();
 
 
         if (!query) {
@@ -105,18 +99,15 @@ function initCategoriesSearch() {
 
         const match = categories.find(category => {
 
+            const title =
+                category.title.toLowerCase();
+
+            const description =
+                category.description.toLowerCase();
+
             return (
-
-                category.title
-                    .toLowerCase()
-                    .includes(query)
-
-                ||
-
-                category.description
-                    .toLowerCase()
-                    .includes(query)
-
+                title.includes(query) ||
+                description.includes(query)
             );
 
         });
@@ -126,7 +117,17 @@ function initCategoriesSearch() {
 
             window.location.href = match.href;
 
+            return;
         }
+
+
+        /*
+         * If no category matches, send the user
+         * to the categories page instead of doing
+         * nothing silently.
+         */
+
+        input.focus();
 
     });
 
@@ -134,47 +135,37 @@ function initCategoriesSearch() {
 
 
 /* =========================================================
-   Handle Category Hash
+   Category Hash Navigation
 ========================================================= */
 
 function handleCategoryHash() {
 
-    const hash = window.location.hash;
+    const hash =
+        window.location.hash.replace("#", "");
+
 
     if (!hash) {
         return;
     }
 
 
-    const target = document.querySelector(hash);
+    const target =
+        document.getElementById(hash);
+
 
     if (!target) {
         return;
     }
 
 
-    requestAnimationFrame(() => {
+    setTimeout(() => {
 
         target.scrollIntoView({
             behavior: "smooth",
             block: "center"
         });
 
-
-        target.classList.add(
-            "category-page-card--active"
-        );
-
-
-        window.setTimeout(() => {
-
-            target.classList.remove(
-                "category-page-card--active"
-            );
-
-        }, 1400);
-
-    });
+    }, 100);
 
 }
 
@@ -188,9 +179,7 @@ document.addEventListener(
     function () {
 
         /*
-         * Render global components first.
-         * This is what was missing from the
-         * standalone categories page.
+         * Global components
          */
 
         renderHeader();
@@ -199,12 +188,18 @@ document.addEventListener(
 
 
         /*
-         * Then render page content.
+         * Page content
          */
 
         renderCategoriesPage();
 
         initCategoriesSearch();
+
+
+        /*
+         * Handle links such as:
+         * categories.html#loans
+         */
 
         handleCategoryHash();
 
