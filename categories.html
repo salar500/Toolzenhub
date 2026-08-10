@@ -1,6 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- =====================================================
+         ToolZen Hub
+         Categories Page
+    ====================================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Explore all ToolZen Hub calculators and smart tools for finance, health, business, math and everyday life."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b9f58"
+    >
+
+    <title>
+        All Categories | ToolZen Hub
+    </title>
+
+
+    <!-- =====================================================
+         FAVICON
+    ====================================================== -->
+
+    <link
+        rel="icon"
+        href="favicon.ico"
+    >
+
+
+    <!-- =====================================================
+         BASE CSS
+    ====================================================== -->
+
+    <!--
+        IMPORTANT:
+        Do NOT use:
+
+        assets/css/style.css
+
+        because style.css does not exist in your repository.
+    -->
+
+
+    <!-- =====================================================
+         COMPONENT CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="assets/css/components/header.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/components/footer.css"
+    >
+
+
+    <!-- =====================================================
+         PAGE CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="assets/css/pages/categories.css"
+    >
+
+
+</head>
+
+
 <body class="categories-page-body">
 
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
     <div id="header"></div>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
     <main id="app">
 
@@ -8,15 +102,22 @@
 
             <div class="container">
 
+
+                <!-- =================================================
+                     PAGE INTRO
+                ================================================== -->
+
                 <div class="categories-page__intro">
 
                     <span class="categories-page__eyebrow">
-                        Calculators & Tools
+                        Calculators &amp; Tools
                     </span>
+
 
                     <h1 class="categories-page__title">
                         All Categories
                     </h1>
+
 
                     <p class="categories-page__description">
                         Explore our wide range of calculators and smart tools
@@ -24,16 +125,37 @@
 
                 </div>
 
+
+                <!-- =================================================
+                     CATEGORY GRID
+
+                     categories.js will insert the cards here.
+                ================================================== -->
+
                 <div
                     id="categories-grid"
                     class="categories-page__grid"
                 ></div>
 
+
+                <!-- =================================================
+                     SEARCH
+                ================================================== -->
+
                 <div class="categories-search">
 
-                    <div class="categories-search__icon">
+
+                    <!-- Search Icon -->
+
+                    <div
+                        class="categories-search__icon"
+                        aria-hidden="true"
+                    >
                         💡
                     </div>
+
+
+                    <!-- Search Content -->
 
                     <div class="categories-search__content">
 
@@ -41,15 +163,20 @@
                             Can't find what you need?
                         </h2>
 
+
                         <p>
                             Search from 100+ calculators and tools
                         </p>
 
                     </div>
 
+
+                    <!-- Search Form -->
+
                     <form
                         class="categories-search__form"
                         id="categories-search-form"
+                        role="search"
                     >
 
                         <input
@@ -58,7 +185,9 @@
                             class="categories-search__input"
                             placeholder="Search calculators..."
                             aria-label="Search calculators"
+                            autocomplete="off"
                         >
+
 
                         <button
                             type="submit"
@@ -78,11 +207,24 @@
 
     </main>
 
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
     <div id="footer"></div>
+
+
+    <!-- =====================================================
+         PAGE JAVASCRIPT
+    ====================================================== -->
 
     <script
         type="module"
         src="assets/js/pages/categories.js"
     ></script>
 
+
 </body>
+
+</html>
