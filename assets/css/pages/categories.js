@@ -172,7 +172,7 @@ function renderCategoriesPage() {
                     <li>
 
                         <a
-                            href="#"
+                            href="categories.html"
                             class="category-page-card__link"
                         >
 
