@@ -1,225 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
+<header id="header"></header>
 
-<head>
+<main id="app">
 
-    <!-- =====================================================
-         Meta
-    ====================================================== -->
+    <section class="categories-page">
 
-    <meta charset="UTF-8">
+        <div class="container">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+            <div class="categories-page__intro">
 
-    <title>All Categories | ToolZen Hub</title>
+                <div class="categories-page__eyebrow">
+                    CALCULATORS & TOOLS
+                </div>
 
-    <meta
-        name="description"
-        content="Explore all ToolZen Hub calculators and smart tools for loans, investment, tax, health, business, math and more."
-    >
+                <h1 class="categories-page__title">
+                    All Categories
+                </h1>
 
-    <meta
-        name="theme-color"
-        content="#0b9f58"
-    >
+                <p class="categories-page__description">
+                    Explore our wide range of calculators and smart tools
+                </p>
 
+            </div>
 
-    <!-- =====================================================
-         Google Fonts
-    ====================================================== -->
+            <div
+                id="categories-page-grid"
+                class="categories-page__grid"
+            ></div>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+            <div class="categories-search">
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-        crossorigin
-    >
+                <div
+                    class="categories-search__icon"
+                    aria-hidden="true"
+                >
+                    💡
+                </div>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+                <div class="categories-search__content">
 
+                    <h2>
+                        Can't find what you need?
+                    </h2>
 
-    <!-- =====================================================
-         Base CSS
-    ====================================================== -->
-
-    <link rel="stylesheet" href="assets/css/base/variables.css">
-    <link rel="stylesheet" href="assets/css/base/reset.css">
-    <link rel="stylesheet" href="assets/css/base/typography.css">
-    <link rel="stylesheet" href="assets/css/base/layout.css">
-    <link rel="stylesheet" href="assets/css/base/animations.css">
-
-
-    <!-- =====================================================
-         Component CSS
-    ====================================================== -->
-
-    <link rel="stylesheet" href="assets/css/components/buttons.css">
-    <link rel="stylesheet" href="assets/css/components/cards.css">
-    <link rel="stylesheet" href="assets/css/components/header.css">
-    <link rel="stylesheet" href="assets/css/components/navigation.css">
-    <link rel="stylesheet" href="assets/css/components/forms.css">
-    <link rel="stylesheet" href="assets/css/components/search.css">
-    <link rel="stylesheet" href="assets/css/components/modal.css">
-    <link rel="stylesheet" href="assets/css/components/table.css">
-    <link rel="stylesheet" href="assets/css/components/footer.css">
-
-
-    <!-- =====================================================
-         Theme
-    ====================================================== -->
-
-    <link rel="stylesheet" href="assets/css/themes/light.css">
-
-
-    <!-- =====================================================
-         Categories Page CSS
-    ====================================================== -->
-
-    <link
-        rel="stylesheet"
-        href="assets/css/pages/categories.css"
-    >
-
-</head>
-
-
-<body class="categories-page-body">
-
-
-    <!-- =====================================================
-         Global Header
-    ====================================================== -->
-
-    <div id="header"></div>
-
-
-    <!-- =====================================================
-         Main
-    ====================================================== -->
-
-    <main id="app">
-
-        <section class="categories-page">
-
-            <div class="container">
-
-
-                <!-- =================================================
-                     Page Intro
-                ================================================== -->
-
-                <div class="categories-page__intro">
-
-                    <div class="categories-page__eyebrow">
-                        CALCULATORS &amp; TOOLS
-                    </div>
-
-
-                    <h1 class="categories-page__title">
-                        All Categories
-                    </h1>
-
-
-                    <p class="categories-page__description">
-                        Explore our wide range of calculators and smart tools
+                    <p>
+                        Search from 100+ calculators and tools
                     </p>
 
                 </div>
 
+                <form
+                    class="categories-search__form"
+                    id="categories-search-form"
+                >
 
-                <!-- =================================================
-                     Category Grid
-                ================================================== -->
-
-                <div
-                    id="categories-page-grid"
-                    class="categories-page__grid"
-                ></div>
-
-
-                <!-- =================================================
-                     Search
-                ================================================== -->
-
-                <div class="categories-search">
-
-                    <div
-                        class="categories-search__icon"
-                        aria-hidden="true"
-                    >
-                        💡
-                    </div>
-
-
-                    <div class="categories-search__content">
-
-                        <h2>
-                            Can't find what you need?
-                        </h2>
-
-                        <p>
-                            Search from 100+ calculators and tools
-                        </p>
-
-                    </div>
-
-
-                    <form
-                        class="categories-search__form"
-                        id="categories-search-form"
+                    <input
+                        type="search"
+                        id="categories-search-input"
+                        class="categories-search__input"
+                        placeholder="Search calculators..."
+                        autocomplete="off"
                     >
 
-                        <input
-                            type="search"
-                            id="categories-search-input"
-                            class="categories-search__input"
-                            placeholder="Search calculators..."
-                            autocomplete="off"
-                            aria-label="Search calculators"
-                        >
+                    <button
+                        type="submit"
+                        class="categories-search__button"
+                        aria-label="Search calculators"
+                    >
+                        ⌕
+                    </button>
 
-                        <button
-                            type="submit"
-                            class="categories-search__button"
-                            aria-label="Search calculators"
-                        >
-                            ⌕
-                        </button>
-
-                    </form>
-
-                </div>
+                </form>
 
             </div>
 
-        </section>
+        </div>
 
-    </main>
+    </section>
 
+</main>
 
-    <!-- =====================================================
-         Global Footer
-    ====================================================== -->
-
-    <div id="footer"></div>
-
-
-    <!-- =====================================================
-         JavaScript
-    ====================================================== -->
-
-    <script
-        type="module"
-        src="assets/js/pages/categories.js"
-    ></script>
-
-</body>
-
-</html>
+<footer id="footer"></footer>
