@@ -1,6 +1,6 @@
 /* =========================================================
    ToolZen Hub
-   Category Data
+   Shared Category Data
 ========================================================= */
 
 export const categories = [
