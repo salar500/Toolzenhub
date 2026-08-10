@@ -3,107 +3,37 @@
    Categories Page
 ========================================================= */
 
+import { categories } from "../data/categories.js";
+
 
 /* =========================================================
-   Category Data
+   DOM
 ========================================================= */
 
-const categories = [
-
-    {
-        id: "loans",
-        icon: "🏠",
-        iconClass: "loans",
-        title: "Loans",
-        description: "EMI, Home Loan, Personal Loan and more",
-        href: "loans.html"
-    },
-
-    {
-        id: "investment",
-        icon: "📈",
-        iconClass: "investment",
-        title: "Investment",
-        description: "SIP, PPF, FD, CAGR and more",
-        href: "investment.html"
-    },
-
-    {
-        id: "tax",
-        icon: "🧾",
-        iconClass: "tax",
-        title: "Tax",
-        description: "Income Tax, GST, TDS and more",
-        href: "tax.html"
-    },
-
-    {
-        id: "health",
-        icon: "♥",
-        iconClass: "health",
-        title: "Health",
-        description: "BMI, Calorie, BMR and more",
-        href: "health.html"
-    },
-
-    {
-        id: "business",
-        icon: "💼",
-        iconClass: "business",
-        title: "Business",
-        description: "Profit, Margin, ROI and more",
-        href: "business.html"
-    },
-
-    {
-        id: "math",
-        icon: "🔢",
-        iconClass: "math",
-        title: "Math",
-        description: "Percentage, Ratio, Age and more",
-        href: "math.html"
-    },
-
-    {
-        id: "converter",
-        icon: "↻",
-        iconClass: "converter",
-        title: "Converter",
-        description: "Unit, Currency, Date and more",
-        href: "converter.html"
-    },
-
-    {
-        id: "more",
-        icon: "▦",
-        iconClass: "more",
-        title: "More",
-        description: "Explore all calculators and tools",
-        href: "more.html"
-    }
-
-];
+const grid = document.getElementById("categories-page-grid");
+const form = document.getElementById("categories-search-form");
+const input = document.getElementById("categories-search-input");
+const noResults = document.getElementById("categories-no-results");
 
 
 /* =========================================================
    Render Categories
 ========================================================= */
 
-function renderCategoriesPage() {
-
-    const grid = document.getElementById("categories-page-grid");
+function renderCategories(list = categories) {
 
     if (!grid) {
         return;
     }
 
 
-    grid.innerHTML = categories.map(category => `
+    grid.innerHTML = list.map(category => `
 
         <a
-            id="${category.id}"
+            id="category-${category.id}"
             href="${category.href}"
             class="category-page-card"
+            data-category="${category.id}"
         >
 
             <div
@@ -138,17 +68,65 @@ function renderCategoriesPage() {
 
     `).join("");
 
+
+    if (noResults) {
+        noResults.hidden = list.length !== 0;
+    }
+
 }
 
 
 /* =========================================================
-   Search
+   Search Categories
 ========================================================= */
 
-function initCategoriesSearch() {
+function searchCategories(query) {
 
-    const form = document.getElementById("categories-search-form");
-    const input = document.getElementById("categories-search-input");
+    const normalizedQuery = query
+        .trim()
+        .toLowerCase();
+
+
+    if (!normalizedQuery) {
+
+        renderCategories(categories);
+
+        return;
+
+    }
+
+
+    const matches = categories.filter(category => {
+
+        const title =
+            category.title.toLowerCase();
+
+        const description =
+            category.description.toLowerCase();
+
+        const id =
+            category.id.toLowerCase();
+
+
+        return (
+            title.includes(normalizedQuery) ||
+            description.includes(normalizedQuery) ||
+            id.includes(normalizedQuery)
+        );
+
+    });
+
+
+    renderCategories(matches);
+
+}
+
+
+/* =========================================================
+   Search Submit
+========================================================= */
+
+function initSearch() {
 
     if (!form || !input) {
         return;
@@ -159,28 +137,59 @@ function initCategoriesSearch() {
 
         event.preventDefault();
 
-        const query = input.value.trim().toLowerCase();
+        const query = input.value.trim();
 
         if (!query) {
+
+            renderCategories(categories);
+
             return;
+
         }
 
 
-        const match = categories.find(category => {
+        const normalizedQuery =
+            query.toLowerCase();
 
-            return (
-                category.title.toLowerCase().includes(query) ||
-                category.description.toLowerCase().includes(query)
+
+        /*
+         * If the user enters an exact category name,
+         * go directly to that category page.
+         */
+
+        const exactMatch =
+            categories.find(category =>
+                category.title.toLowerCase() === normalizedQuery ||
+                category.id.toLowerCase() === normalizedQuery
             );
 
-        });
 
+        if (exactMatch) {
 
-        if (match) {
+            window.location.href =
+                exactMatch.href;
 
-            window.location.href = match.href;
+            return;
 
         }
+
+
+        /*
+         * Otherwise filter the category cards.
+         */
+
+        searchCategories(query);
+
+    });
+
+
+    /*
+     * Live search
+     */
+
+    input.addEventListener("input", function () {
+
+        searchCategories(input.value);
 
     });
 
@@ -191,10 +200,28 @@ function initCategoriesSearch() {
    Init
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+function initCategoriesPage() {
 
-    renderCategoriesPage();
+    renderCategories();
 
-    initCategoriesSearch();
+    initSearch();
 
-});
+}
+
+
+/* =========================================================
+   DOM Ready
+========================================================= */
+
+if (document.readyState === "loading") {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initCategoriesPage
+    );
+
+} else {
+
+    initCategoriesPage();
+
+}
