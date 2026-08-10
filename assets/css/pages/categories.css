@@ -1,11 +1,37 @@
 /* =========================================================
    ToolZen Hub
-   All Categories Page
+   Categories Page
 ========================================================= */
 
 
 /* =========================================================
-   Page
+   Page Layout
+========================================================= */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+body.categories-page-body {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #f8fafb;
+}
+
+
+body.categories-page-body #app {
+    flex: 1 0 auto;
+}
+
+
+/* =========================================================
+   Categories Page
 ========================================================= */
 
 .categories-page {
@@ -13,10 +39,14 @@
 
     box-sizing: border-box;
 
-    padding-top: 32px;
-    padding-bottom: 40px;
+    padding: 28px 0 28px;
 
-    background: #ffffff;
+    background: #f8fafb;
+}
+
+
+.categories-page .container {
+    width: 100%;
 }
 
 
@@ -27,9 +57,7 @@
 .categories-page__intro {
     text-align: center;
 
-    max-width: 720px;
-
-    margin: 0 auto 30px;
+    margin-bottom: 24px;
 }
 
 
@@ -38,32 +66,47 @@
 ========================================================= */
 
 .categories-page__eyebrow {
-    margin-bottom: 8px;
+    display: inline-flex;
 
-    color: #0b9f58;
+    align-items: center;
+    justify-content: center;
 
-    font-size: 11px;
+    min-height: 22px;
+
+    padding: 4px 10px;
+
+    box-sizing: border-box;
+
+    border-radius: 999px;
+
+    background: #e9f8f1;
+
+    color: #0b8c50;
+
+    font-size: 9px;
 
     font-weight: 700;
 
-    letter-spacing: 1px;
+    line-height: 1;
 
-    line-height: 1.4;
+    letter-spacing: 0.35px;
+
+    text-transform: uppercase;
 }
 
 
 /* =========================================================
-   Title
+   Page Title
 ========================================================= */
 
 .categories-page__title {
-    margin: 0;
+    margin: 9px 0 6px;
 
     color: #101828;
 
-    font-size: 30px;
+    font-size: 28px;
 
-    font-weight: 800;
+    font-weight: 750;
 
     line-height: 1.2;
 
@@ -76,18 +119,22 @@
 ========================================================= */
 
 .categories-page__description {
-    margin: 9px 0 0;
+    max-width: 560px;
+
+    margin: 0 auto;
 
     color: #667085;
 
-    font-size: 14px;
+    font-size: 13px;
+
+    font-weight: 400;
 
     line-height: 1.5;
 }
 
 
 /* =========================================================
-   Page Category Grid
+   Category Grid
 ========================================================= */
 
 .categories-page__grid {
@@ -98,12 +145,14 @@
     grid-template-columns:
         repeat(4, minmax(0, 1fr));
 
-    gap: 16px;
+    gap: 14px;
+
+    margin-bottom: 20px;
 }
 
 
 /* =========================================================
-   Page Category Card
+   Category Card
 ========================================================= */
 
 .category-page-card {
@@ -111,19 +160,19 @@
 
     min-width: 0;
 
-    min-height: 145px;
+    min-height: 112px;
 
     display: flex;
 
-    flex-direction: column;
+    align-items: center;
 
     box-sizing: border-box;
 
-    padding: 16px;
+    padding: 14px;
 
-    border: 1px solid #e5ebe8;
+    border: 1px solid #e4e9e7;
 
-    border-radius: 14px;
+    border-radius: 11px;
 
     background: #ffffff;
 
@@ -132,45 +181,32 @@
     text-decoration: none;
 
     box-shadow:
-        0 2px 8px rgba(16, 24, 40, 0.035);
+        0 2px 7px rgba(16, 24, 40, 0.035);
 
     transition:
         transform 0.2s ease,
         border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
+        box-shadow 0.2s ease;
 }
 
 
 .category-page-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 
-    border-color: #bfe2d0;
+    border-color: #c9e6d8;
 
     box-shadow:
-        0 8px 22px rgba(16, 24, 40, 0.075);
+        0 7px 18px rgba(16, 24, 40, 0.07);
 }
 
 
 /* =========================================================
-   Hash Target Highlight
-========================================================= */
-
-.category-page-card--active {
-    border-color: #0b9f58;
-
-    box-shadow:
-        0 0 0 3px rgba(11, 159, 88, 0.10);
-}
-
-
-/* =========================================================
-   Icon
+   Category Icon
 ========================================================= */
 
 .category-page-card__icon {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
 
     display: flex;
 
@@ -179,11 +215,11 @@
 
     flex-shrink: 0;
 
-    margin-bottom: 12px;
+    margin-right: 12px;
 
-    border-radius: 11px;
+    border-radius: 10px;
 
-    font-size: 22px;
+    font-size: 20px;
 
     line-height: 1;
 }
@@ -198,35 +234,42 @@
     color: #159447;
 }
 
+
 .category-page-card__icon--investment {
     background: #e6f6ed;
     color: #0b9f58;
 }
+
 
 .category-page-card__icon--tax {
     background: #eee8ff;
     color: #7047d9;
 }
 
+
 .category-page-card__icon--health {
     background: #ffe8f0;
     color: #e23d75;
 }
+
 
 .category-page-card__icon--business {
     background: #e5f2ff;
     color: #2475c7;
 }
 
+
 .category-page-card__icon--math {
     background: #fff4df;
     color: #c88a12;
 }
 
+
 .category-page-card__icon--converter {
     background: #e3f7f4;
     color: #158c7d;
 }
+
 
 .category-page-card__icon--more {
     background: #edf1f5;
@@ -235,26 +278,22 @@
 
 
 /* =========================================================
-   Content
+   Category Content
 ========================================================= */
 
 .category-page-card__content {
     min-width: 0;
 
-    padding-right: 24px;
+    padding-right: 20px;
 }
 
 
-/* =========================================================
-   Title
-========================================================= */
-
 .category-page-card__title {
-    margin: 0 0 6px;
+    margin: 0 0 5px;
 
     color: #101828;
 
-    font-size: 15px;
+    font-size: 13px;
 
     font-weight: 700;
 
@@ -262,18 +301,14 @@
 }
 
 
-/* =========================================================
-   Description
-========================================================= */
-
 .category-page-card__description {
     margin: 0;
 
     color: #667085;
 
-    font-size: 12px;
+    font-size: 10px;
 
-    line-height: 1.5;
+    line-height: 1.45;
 }
 
 
@@ -284,12 +319,15 @@
 .category-page-card__arrow {
     position: absolute;
 
-    right: 14px;
-    bottom: 13px;
+    right: 12px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
 
     color: #0b9f58;
 
-    font-size: 19px;
+    font-size: 17px;
 
     line-height: 1;
 
@@ -298,32 +336,36 @@
 }
 
 
-.category-page-card:hover
-.category-page-card__arrow {
-    transform: translateX(3px);
+.category-page-card:hover .category-page-card__arrow {
+    transform:
+        translate(3px, -50%);
 }
 
 
 /* =========================================================
-   Search Section
+   Search Box
 ========================================================= */
 
 .categories-search {
+    width: 100%;
+
+    min-height: 58px;
+
     display: flex;
 
     align-items: center;
 
-    gap: 16px;
+    box-sizing: border-box;
 
-    margin-top: 30px;
+    padding: 9px 12px;
 
-    padding: 20px;
+    gap: 11px;
 
-    border: 1px solid #dce9e3;
+    border: 1px solid #dfeae5;
 
-    border-radius: 14px;
+    border-radius: 10px;
 
-    background: #f7fbf9;
+    background: #eff8f4;
 }
 
 
@@ -332,8 +374,8 @@
 ========================================================= */
 
 .categories-search__icon {
-    width: 44px;
-    height: 44px;
+    width: 38px;
+    height: 38px;
 
     display: flex;
 
@@ -342,11 +384,11 @@
 
     flex-shrink: 0;
 
-    border-radius: 11px;
+    border-radius: 9px;
 
-    background: #e4f6ec;
+    background: #dff4e9;
 
-    font-size: 21px;
+    font-size: 18px;
 }
 
 
@@ -355,18 +397,18 @@
 ========================================================= */
 
 .categories-search__content {
-    flex: 1;
+    min-width: 170px;
 
-    min-width: 0;
+    flex: 1;
 }
 
 
 .categories-search__content h2 {
-    margin: 0 0 4px;
+    margin: 0 0 2px;
 
     color: #101828;
 
-    font-size: 15px;
+    font-size: 11px;
 
     font-weight: 700;
 
@@ -379,9 +421,9 @@
 
     color: #667085;
 
-    font-size: 12px;
+    font-size: 9px;
 
-    line-height: 1.45;
+    line-height: 1.4;
 }
 
 
@@ -390,13 +432,21 @@
 ========================================================= */
 
 .categories-search__form {
-    width: min(330px, 100%);
+    width: min(430px, 48%);
+
+    height: 36px;
 
     display: flex;
 
     flex-shrink: 0;
 
-    position: relative;
+    overflow: hidden;
+
+    border: 1px solid #dce5e1;
+
+    border-radius: 7px;
+
+    background: #ffffff;
 }
 
 
@@ -407,15 +457,15 @@
 .categories-search__input {
     width: 100%;
 
-    min-height: 42px;
+    min-width: 0;
+
+    flex: 1;
 
     box-sizing: border-box;
 
-    padding: 0 46px 0 13px;
+    padding: 0 11px;
 
-    border: 1px solid #d0d9d5;
-
-    border-radius: 9px;
+    border: 0;
 
     outline: none;
 
@@ -425,11 +475,7 @@
 
     font-family: inherit;
 
-    font-size: 12px;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+    font-size: 10px;
 }
 
 
@@ -438,35 +484,21 @@
 }
 
 
-.categories-search__input:focus {
-    border-color: #0b9f58;
-
-    box-shadow:
-        0 0 0 3px rgba(11, 159, 88, 0.10);
-}
-
-
 /* =========================================================
    Search Button
 ========================================================= */
 
 .categories-search__button {
-    position: absolute;
-
-    top: 4px;
-    right: 4px;
-
-    width: 34px;
-    height: 34px;
+    width: 40px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    border: 0;
+    flex-shrink: 0;
 
-    border-radius: 7px;
+    border: 0;
 
     background: #0b9f58;
 
@@ -474,9 +506,7 @@
 
     cursor: pointer;
 
-    font-size: 18px;
-
-    line-height: 1;
+    font-size: 17px;
 
     transition:
         background 0.2s ease;
@@ -495,30 +525,25 @@
 @media (min-width: 1200px) {
 
     .categories-page {
-        padding-top: 36px;
-        padding-bottom: 44px;
+        padding-top: 30px;
+        padding-bottom: 30px;
     }
 
 
     .categories-page__intro {
-        margin-bottom: 32px;
-    }
-
-
-    .categories-page__title {
-        font-size: 32px;
+        margin-bottom: 25px;
     }
 
 
     .categories-page__grid {
-        gap: 18px;
+        gap: 16px;
     }
 
 
     .category-page-card {
-        min-height: 150px;
+        min-height: 116px;
 
-        padding: 17px;
+        padding: 15px;
     }
 
 }
@@ -528,78 +553,11 @@
    Tablet
 ========================================================= */
 
-@media (max-width: 1000px) {
-
-    .categories-page__grid {
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-    }
-
-}
-
-
-/* =========================================================
-   Small Tablet
-========================================================= */
-
-@media (max-width: 760px) {
-
-    .categories-page {
-        padding-top: 26px;
-        padding-bottom: 32px;
-    }
-
-
-    .categories-page__intro {
-        margin-bottom: 24px;
-    }
-
-
-    .categories-page__title {
-        font-size: 27px;
-    }
-
-
-    .categories-page__description {
-        font-size: 13px;
-    }
-
+@media (max-width: 900px) {
 
     .categories-page__grid {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
-
-        gap: 12px;
-    }
-
-
-    .category-page-card {
-        min-height: 138px;
-
-        padding: 14px;
-    }
-
-
-    .categories-search {
-        align-items: flex-start;
-
-        flex-wrap: wrap;
-
-        gap: 13px;
-
-        margin-top: 24px;
-
-        padding: 16px;
-    }
-
-
-    .categories-search__content {
-        flex: 1 1 calc(100% - 60px);
-    }
-
-
-    .categories-search__form {
-        width: 100%;
     }
 
 }
@@ -612,30 +570,35 @@
 @media (max-width: 600px) {
 
     .categories-page {
-        padding-top: 22px;
-        padding-bottom: 28px;
+        padding: 22px 0 20px;
     }
 
 
     .categories-page__intro {
-        margin-bottom: 20px;
-    }
-
-
-    .categories-page__eyebrow {
-        font-size: 10px;
+        margin-bottom: 18px;
     }
 
 
     .categories-page__title {
-        font-size: 24px;
+        font-size: 23px;
+
+        letter-spacing: -0.5px;
     }
 
 
     .categories-page__description {
-        margin-top: 7px;
+        max-width: 330px;
 
-        font-size: 12px;
+        padding: 0 10px;
+
+        font-size: 11px;
+    }
+
+
+    .categories-page__eyebrow {
+        font-size: 8px;
+
+        padding: 4px 9px;
     }
 
 
@@ -644,74 +607,112 @@
             repeat(2, minmax(0, 1fr));
 
         gap: 10px;
+
+        margin-bottom: 14px;
     }
 
 
     .category-page-card {
-        min-height: 130px;
+        min-height: 88px;
 
-        padding: 12px;
+        padding: 10px;
 
-        border-radius: 12px;
+        border-radius: 10px;
     }
 
 
     .category-page-card__icon {
-        width: 38px;
-        height: 38px;
+        width: 34px;
+        height: 34px;
 
-        margin-bottom: 9px;
+        margin-right: 8px;
 
-        border-radius: 9px;
-
-        font-size: 19px;
-    }
-
-
-    .category-page-card__title {
-        font-size: 13px;
-    }
-
-
-    .category-page-card__description {
-        font-size: 10px;
-    }
-
-
-    .category-page-card__arrow {
-        right: 10px;
-        bottom: 10px;
+        border-radius: 8px;
 
         font-size: 17px;
     }
 
 
-    .categories-search {
-        margin-top: 20px;
-
-        padding: 14px;
-
-        border-radius: 12px;
+    .category-page-card__content {
+        padding-right: 13px;
     }
 
 
-    .categories-search__icon {
-        width: 38px;
-        height: 38px;
+    .category-page-card__title {
+        margin-bottom: 3px;
 
-        border-radius: 9px;
-
-        font-size: 18px;
+        font-size: 10px;
     }
 
 
-    .categories-search__content h2 {
+    .category-page-card__description {
+        font-size: 7.5px;
+
+        line-height: 1.4;
+    }
+
+
+    .category-page-card__arrow {
+        right: 8px;
+
         font-size: 13px;
     }
 
 
+    .categories-search {
+        min-height: 0;
+
+        display: grid;
+
+        grid-template-columns: auto 1fr;
+
+        padding: 9px;
+
+        gap: 8px;
+    }
+
+
+    .categories-search__icon {
+        width: 32px;
+        height: 32px;
+
+        grid-row: span 2;
+
+        font-size: 15px;
+    }
+
+
+    .categories-search__content {
+        min-width: 0;
+    }
+
+
+    .categories-search__content h2 {
+        font-size: 9px;
+    }
+
+
     .categories-search__content p {
-        font-size: 10px;
+        font-size: 7px;
+    }
+
+
+    .categories-search__form {
+        width: 100%;
+
+        height: 31px;
+    }
+
+
+    .categories-search__input {
+        font-size: 8px;
+    }
+
+
+    .categories-search__button {
+        width: 34px;
+
+        font-size: 14px;
     }
 
 }
@@ -723,25 +724,45 @@
 
 @media (max-width: 380px) {
 
+    .categories-page {
+        padding-top: 18px;
+    }
+
+
+    .categories-page__title {
+        font-size: 21px;
+    }
+
+
     .categories-page__grid {
         gap: 8px;
     }
 
 
     .category-page-card {
-        min-height: 124px;
+        min-height: 84px;
 
-        padding: 11px;
+        padding: 8px;
+    }
+
+
+    .category-page-card__icon {
+        width: 31px;
+        height: 31px;
+
+        margin-right: 7px;
+
+        font-size: 15px;
     }
 
 
     .category-page-card__title {
-        font-size: 12px;
+        font-size: 9px;
     }
 
 
     .category-page-card__description {
-        font-size: 9.5px;
+        font-size: 7px;
     }
 
 }
