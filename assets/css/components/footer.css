@@ -1,56 +1,154 @@
 /* =========================================================
    ToolZen Hub
-   Footer Component
+   Global Footer
 ========================================================= */
 
 
-/* ========================================
+/* =========================================================
    Footer
-======================================== */
+========================================================= */
 
-.site-footer {
-    margin-top: var(--space-16);
+.footer {
+    width: 100%;
 
-    background: var(--color-gray-900);
+    box-sizing: border-box;
 
-    color: var(--color-white);
+    background: #071c2b;
+
+    color: #ffffff;
 }
 
 
-/* ========================================
-   Footer Main
-======================================== */
+/* =========================================================
+   Footer Features
+========================================================= */
 
-.footer__main {
-    padding-block: var(--space-12);
+.footer__features {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    background: #f7fbf9;
+
+    border-top: 1px solid #e7eeeb;
+    border-bottom: 1px solid #e7eeeb;
 }
 
 
-/* ========================================
-   Footer Grid
-======================================== */
-
-.footer__grid {
+.footer__features-grid {
     display: grid;
 
     grid-template-columns:
-        minmax(240px, 1.5fr)
-        repeat(3, minmax(140px, 1fr));
+        repeat(5, minmax(0, 1fr));
 
-    gap: var(--space-10);
+    gap: 20px;
+
+    padding-top: 16px;
+    padding-bottom: 16px;
 }
 
 
-/* ========================================
-   Footer Brand
-======================================== */
+/* =========================================================
+   Feature
+========================================================= */
 
-.footer__brand {
+.footer__feature {
     display: flex;
 
-    flex-direction: column;
+    align-items: center;
 
-    align-items: flex-start;
+    gap: 10px;
+
+    min-width: 0;
+}
+
+
+.footer__feature-icon {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+    background: #e6f7ee;
+
+    color: #0b9f58;
+
+    font-size: 16px;
+}
+
+
+.footer__feature-content {
+    min-width: 0;
+}
+
+
+.footer__feature-title {
+    margin: 0 0 2px;
+
+    color: #101828;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+
+.footer__feature-text {
+    margin: 0;
+
+    color: #667085;
+
+    font-size: 9px;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================================
+   Main Footer
+========================================================= */
+
+.footer__main {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    background: #071c2b;
+}
+
+
+.footer__main-grid {
+    display: grid;
+
+    grid-template-columns:
+        1.4fr
+        0.8fr
+        1fr
+        1.2fr
+        1.5fr;
+
+    gap: 35px;
+
+    padding-top: 30px;
+    padding-bottom: 28px;
+}
+
+
+/* =========================================================
+   Footer Brand
+========================================================= */
+
+.footer__brand {
+    min-width: 0;
 }
 
 
@@ -59,241 +157,496 @@
 
     align-items: center;
 
-    gap: var(--space-3);
+    gap: 8px;
 
-    margin-bottom: var(--space-4);
+    margin-bottom: 8px;
 
-    color: var(--color-white);
+    color: #ffffff;
 
-    font-size: var(--font-xl);
+    font-size: 17px;
 
-    font-weight: var(--fw-bold);
+    font-weight: 800;
+
+    line-height: 1;
+
+    text-decoration: none;
 }
 
 
-.footer__logo-icon {
-    display: inline-flex;
+.footer__logo-mark {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
 
     align-items: center;
     justify-content: center;
 
-    width: 42px;
-    height: 42px;
+    border-radius: 50%;
 
-    border-radius: var(--radius-md);
+    background: #0b9f58;
 
-    background: var(--color-primary);
+    color: #ffffff;
 
-    color: var(--color-white);
+    font-size: 15px;
+}
+
+
+.footer__logo-highlight {
+    color: #20b968;
 }
 
 
 .footer__description {
-    max-width: 360px;
+    max-width: 230px;
 
-    margin: 0;
+    margin: 0 0 14px;
 
-    color: var(--color-gray-400);
+    color: #aab8c3;
 
-    font-size: var(--font-sm);
+    font-size: 10px;
 
-    line-height: 1.7;
+    line-height: 1.5;
 }
 
 
-/* ========================================
-   Footer Column
-======================================== */
+/* =========================================================
+   Social Links
+========================================================= */
 
-.footer__column {
+.footer__social {
     display: flex;
 
-    flex-direction: column;
+    align-items: center;
+
+    gap: 7px;
 }
 
 
-.footer__title {
-    margin: 0 0 var(--space-4);
+.footer__social-link {
+    width: 27px;
+    height: 27px;
 
-    color: var(--color-white);
+    display: flex;
 
-    font-size: var(--font-sm);
+    align-items: center;
+    justify-content: center;
 
-    font-weight: var(--fw-semibold);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    color: #c7d2da;
+
+    font-size: 11px;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 
-/* ========================================
-   Footer Links
-======================================== */
+.footer__social-link:hover {
+    background: #0b9f58;
+
+    border-color: #0b9f58;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   Footer Columns
+========================================================= */
+
+.footer__column {
+    min-width: 0;
+}
+
+
+.footer__column-title {
+    margin: 0 0 12px;
+
+    color: #ffffff;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
 
 .footer__links {
     display: flex;
 
     flex-direction: column;
 
-    gap: var(--space-3);
+    gap: 7px;
+
+    margin: 0;
+
+    padding: 0;
+
+    list-style: none;
 }
 
 
-.footer__link {
-    color: var(--color-gray-400);
+.footer__links a {
+    color: #aab8c3;
 
-    font-size: var(--font-sm);
+    font-size: 10px;
+
+    line-height: 1.4;
+
+    text-decoration: none;
 
     transition:
-        color var(--transition-fast),
-        transform var(--transition-fast);
+        color 0.2s ease;
 }
 
 
-.footer__link:hover {
-    color: var(--color-white);
-
-    transform: translateX(3px);
+.footer__links a:hover {
+    color: #35c878;
 }
 
 
-/* ========================================
-   Social Links
-======================================== */
+/* =========================================================
+   Newsletter
+========================================================= */
 
-.footer__socials {
+.footer__newsletter {
+    min-width: 0;
+}
+
+
+.footer__newsletter-text {
+    max-width: 240px;
+
+    margin: 0 0 10px;
+
+    color: #aab8c3;
+
+    font-size: 10px;
+
+    line-height: 1.45;
+}
+
+
+.footer__newsletter-form {
+    width: 100%;
+
+    max-width: 280px;
+
+    height: 36px;
+
     display: flex;
 
-    align-items: center;
+    align-items: stretch;
 
-    gap: var(--space-2);
+    box-sizing: border-box;
 
-    margin-top: var(--space-5);
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    border-radius: 6px;
+
+    background: rgba(255, 255, 255, 0.05);
 }
 
 
-.footer__social {
-    display: inline-flex;
+.footer__newsletter-input {
+    flex: 1;
 
-    align-items: center;
-    justify-content: center;
+    min-width: 0;
 
-    width: 40px;
-    height: 40px;
+    width: 100%;
 
-    border: 1px solid var(--color-gray-700);
+    padding: 0 10px;
 
-    border-radius: var(--radius-full);
+    border: 0;
 
-    color: var(--color-gray-400);
+    outline: 0;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 10px;
+}
+
+
+.footer__newsletter-input::placeholder {
+    color: #7f919f;
+}
+
+
+.footer__newsletter-button {
+    flex: 0 0 auto;
+
+    padding: 0 12px;
+
+    border: 0;
+
+    background: #0b9f58;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    cursor: pointer;
 
     transition:
-        background var(--transition-fast),
-        color var(--transition-fast),
-        border-color var(--transition-fast);
+        background 0.2s ease;
 }
 
 
-.footer__social:hover {
-    background: var(--color-primary);
-
-    border-color: var(--color-primary);
-
-    color: var(--color-white);
+.footer__newsletter-button:hover {
+    background: #087d46;
 }
 
 
-/* ========================================
+/* =========================================================
    Footer Bottom
-======================================== */
+========================================================= */
 
 .footer__bottom {
-    border-top: 1px solid var(--color-gray-700);
-
-    padding-block: var(--space-5);
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
 }
 
 
 .footer__bottom-inner {
+    min-height: 44px;
+
     display: flex;
 
     align-items: center;
 
     justify-content: space-between;
 
-    gap: var(--space-4);
+    gap: 20px;
 }
 
 
 .footer__copyright {
     margin: 0;
 
-    color: var(--color-gray-400);
+    color: #7f919f;
 
-    font-size: var(--font-xs);
+    font-size: 9px;
+
+    line-height: 1.4;
 }
 
-
-/* ========================================
-   Footer Bottom Links
-======================================== */
 
 .footer__legal {
     display: flex;
 
     align-items: center;
 
-    gap: var(--space-5);
+    gap: 14px;
+
+    flex-wrap: wrap;
 }
 
 
-.footer__legal-link {
-    color: var(--color-gray-400);
+.footer__legal a {
+    color: #7f919f;
 
-    font-size: var(--font-xs);
+    font-size: 9px;
 
-    transition: color var(--transition-fast);
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease;
 }
 
 
-.footer__legal-link:hover {
-    color: var(--color-white);
+.footer__legal a:hover {
+    color: #ffffff;
 }
 
 
-/* ========================================
-   Responsive
-======================================== */
+/* =========================================================
+   Large Desktop
+========================================================= */
 
-@media (max-width: 992px) {
+@media (min-width: 1200px) {
 
-    .footer__grid {
+    .footer__main-grid {
+        gap: 45px;
+
+        padding-top: 34px;
+        padding-bottom: 30px;
+    }
+
+
+    .footer__features-grid {
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+
+}
+
+
+/* =========================================================
+   Tablet
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .footer__features-grid {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        row-gap: 16px;
+    }
+
+
+    .footer__main-grid {
+        grid-template-columns:
+            1.2fr
+            1fr
+            1fr;
+
+        row-gap: 30px;
+    }
+
+
+    .footer__brand {
+        grid-column: span 3;
+    }
+
+}
+
+
+/* =========================================================
+   Small Tablet
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .footer__features-grid {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
+
+        gap: 14px;
+    }
+
+
+    .footer__main-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 28px 24px;
+    }
+
+
+    .footer__brand {
+        grid-column: span 2;
+    }
+
+
+    .footer__newsletter {
+        grid-column: span 2;
     }
 
 }
 
 
-@media (max-width: 768px) {
+/* =========================================================
+   Mobile
+========================================================= */
 
-    .footer__main {
-        padding-block: var(--space-10);
-    }
+@media (max-width: 600px) {
 
-    .footer__grid {
+    .footer__features-grid {
         grid-template-columns: 1fr;
 
-        gap: var(--space-8);
+        gap: 12px;
+
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
 
+
+    .footer__feature {
+        padding: 2px 0;
+    }
+
+
+    .footer__main-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 26px 20px;
+
+        padding-top: 28px;
+        padding-bottom: 24px;
+    }
+
+
+    .footer__brand {
+        grid-column: span 2;
+    }
+
+
+    .footer__newsletter {
+        grid-column: span 2;
+    }
+
+
     .footer__bottom-inner {
+        min-height: auto;
+
         flex-direction: column;
 
         align-items: flex-start;
+
+        gap: 10px;
+
+        padding-top: 14px;
+        padding-bottom: 14px;
     }
 
-    .footer__legal {
-        flex-wrap: wrap;
 
-        gap: var(--space-3);
+    .footer__legal {
+        gap: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   Very Small Mobile
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .footer__main-grid {
+        gap: 24px 16px;
+    }
+
+
+    .footer__logo {
+        font-size: 16px;
+    }
+
+
+    .footer__description {
+        font-size: 9px;
     }
 
 }
