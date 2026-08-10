@@ -30,7 +30,7 @@ export function renderCategories() {
                     </h2>
 
                     <a
-                        href="#"
+                        href="categories.html"
                         class="section-link"
                     >
                         View all categories
