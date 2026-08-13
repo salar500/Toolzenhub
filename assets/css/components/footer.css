@@ -5,11 +5,17 @@
 
 
 /* =========================================================
-   Footer
+   FOOTER
 ========================================================= */
 
 .footer {
     width: 100%;
+    max-width: 100%;
+
+    display: block;
+
+    margin: 0;
+    padding: 0;
 
     box-sizing: border-box;
 
@@ -20,105 +26,14 @@
 
 
 /* =========================================================
-   Footer Features
-========================================================= */
-
-.footer__features {
-    width: 100%;
-
-    box-sizing: border-box;
-
-    background: #f7fbf9;
-
-    border-top: 1px solid #e7eeeb;
-    border-bottom: 1px solid #e7eeeb;
-}
-
-
-.footer__features-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(5, minmax(0, 1fr));
-
-    gap: 20px;
-
-    padding-top: 16px;
-    padding-bottom: 16px;
-}
-
-
-/* =========================================================
-   Feature
-========================================================= */
-
-.footer__feature {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    min-width: 0;
-}
-
-
-.footer__feature-icon {
-    width: 30px;
-    height: 30px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    border-radius: 8px;
-
-    background: #e6f7ee;
-
-    color: #0b9f58;
-
-    font-size: 16px;
-}
-
-
-.footer__feature-content {
-    min-width: 0;
-}
-
-
-.footer__feature-title {
-    margin: 0 0 2px;
-
-    color: #101828;
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    line-height: 1.3;
-}
-
-
-.footer__feature-text {
-    margin: 0;
-
-    color: #667085;
-
-    font-size: 9px;
-
-    line-height: 1.3;
-}
-
-
-/* =========================================================
-   Main Footer
+   MAIN FOOTER
 ========================================================= */
 
 .footer__main {
     width: 100%;
+
+    margin: 0;
+    padding: 0;
 
     box-sizing: border-box;
 
@@ -126,7 +41,31 @@
 }
 
 
+/* =========================================================
+   MAIN FOOTER CONTAINER
+========================================================= */
+
+.footer__main .container {
+    width: calc(100% - 24px);
+    max-width: 1200px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-left: 0;
+    padding-right: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
 .footer__main-grid {
+    width: 100%;
+
     display: grid;
 
     grid-template-columns:
@@ -138,13 +77,16 @@
 
     gap: 35px;
 
+    margin: 0;
     padding-top: 30px;
     padding-bottom: 28px;
+
+    box-sizing: border-box;
 }
 
 
 /* =========================================================
-   Footer Brand
+   BRAND
 ========================================================= */
 
 .footer__brand {
@@ -159,12 +101,11 @@
 
     gap: 8px;
 
-    margin-bottom: 8px;
+    margin: 0 0 8px;
 
     color: #ffffff;
 
     font-size: 17px;
-
     font-weight: 800;
 
     line-height: 1;
@@ -182,10 +123,11 @@
     align-items: center;
     justify-content: center;
 
+    flex-shrink: 0;
+
     border-radius: 50%;
 
     background: #0b9f58;
-
     color: #ffffff;
 
     font-size: 15px;
@@ -211,7 +153,7 @@
 
 
 /* =========================================================
-   Social Links
+   SOCIAL
 ========================================================= */
 
 .footer__social {
@@ -220,6 +162,9 @@
     align-items: center;
 
     gap: 7px;
+
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -231,6 +176,10 @@
 
     align-items: center;
     justify-content: center;
+
+    flex-shrink: 0;
+
+    margin: 0;
 
     border: 1px solid rgba(255, 255, 255, 0.14);
 
@@ -261,10 +210,11 @@
 
 
 /* =========================================================
-   Footer Columns
+   FOOTER COLUMN
 ========================================================= */
 
-.footer__column {
+.footer__column,
+.footer__newsletter {
     min-width: 0;
 }
 
@@ -275,12 +225,15 @@
     color: #ffffff;
 
     font-size: 11px;
-
     font-weight: 700;
 
     line-height: 1.3;
 }
 
+
+/* =========================================================
+   LINKS
+========================================================= */
 
 .footer__links {
     display: flex;
@@ -290,10 +243,15 @@
     gap: 7px;
 
     margin: 0;
-
     padding: 0;
 
     list-style: none;
+}
+
+
+.footer__links li {
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -317,13 +275,8 @@
 
 
 /* =========================================================
-   Newsletter
+   NEWSLETTER
 ========================================================= */
-
-.footer__newsletter {
-    min-width: 0;
-}
-
 
 .footer__newsletter-text {
     max-width: 240px;
@@ -338,9 +291,12 @@
 }
 
 
+/* =========================================================
+   NEWSLETTER FORM
+========================================================= */
+
 .footer__newsletter-form {
     width: 100%;
-
     max-width: 280px;
 
     height: 36px;
@@ -349,7 +305,8 @@
 
     align-items: stretch;
 
-    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 
     overflow: hidden;
 
@@ -368,6 +325,9 @@
 
     width: 100%;
 
+    height: 100%;
+
+    margin: 0;
     padding: 0 10px;
 
     border: 0;
@@ -392,6 +352,9 @@
 .footer__newsletter-button {
     flex: 0 0 auto;
 
+    height: 100%;
+
+    margin: 0;
     padding: 0 12px;
 
     border: 0;
@@ -403,7 +366,6 @@
     font-family: inherit;
 
     font-size: 9px;
-
     font-weight: 600;
 
     cursor: pointer;
@@ -419,15 +381,38 @@
 
 
 /* =========================================================
-   Footer Bottom
+   FOOTER BOTTOM
 ========================================================= */
 
 .footer__bottom {
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+
     border-top: 1px solid rgba(255, 255, 255, 0.09);
+
+    box-sizing: border-box;
+}
+
+
+.footer__bottom .container {
+    width: calc(100% - 24px);
+    max-width: 1200px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-left: 0;
+    padding-right: 0;
+
+    box-sizing: border-box;
 }
 
 
 .footer__bottom-inner {
+    width: 100%;
+
     min-height: 44px;
 
     display: flex;
@@ -437,6 +422,11 @@
     justify-content: space-between;
 
     gap: 20px;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
 }
 
 
@@ -451,6 +441,10 @@
 }
 
 
+/* =========================================================
+   LEGAL
+========================================================= */
+
 .footer__legal {
     display: flex;
 
@@ -459,6 +453,9 @@
     gap: 14px;
 
     flex-wrap: wrap;
+
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -466,6 +463,8 @@
     color: #7f919f;
 
     font-size: 9px;
+
+    line-height: 1.4;
 
     text-decoration: none;
 
@@ -480,7 +479,7 @@
 
 
 /* =========================================================
-   Large Desktop
+   LARGE DESKTOP
 ========================================================= */
 
 @media (min-width: 1200px) {
@@ -493,27 +492,19 @@
     }
 
 
-    .footer__features-grid {
-        padding-top: 18px;
-        padding-bottom: 18px;
+    .footer__main .container,
+    .footer__bottom .container {
+        width: calc(100% - 32px);
     }
 
 }
 
 
 /* =========================================================
-   Tablet
+   TABLET
 ========================================================= */
 
 @media (max-width: 1000px) {
-
-    .footer__features-grid {
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-
-        row-gap: 16px;
-    }
-
 
     .footer__main-grid {
         grid-template-columns:
@@ -533,18 +524,10 @@
 
 
 /* =========================================================
-   Small Tablet
+   SMALL TABLET
 ========================================================= */
 
 @media (max-width: 700px) {
-
-    .footer__features-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 14px;
-    }
-
 
     .footer__main-grid {
         grid-template-columns:
@@ -567,23 +550,17 @@
 
 
 /* =========================================================
-   Mobile
+   MOBILE
 ========================================================= */
 
 @media (max-width: 600px) {
 
-    .footer__features-grid {
-        grid-template-columns: 1fr;
+    .footer__main .container,
+    .footer__bottom .container {
+        width: calc(100% - 24px);
 
-        gap: 12px;
-
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-
-    .footer__feature {
-        padding: 2px 0;
+        margin-left: 12px;
+        margin-right: 12px;
     }
 
 
@@ -626,14 +603,28 @@
         gap: 10px;
     }
 
+
+    .footer__newsletter-form {
+        max-width: 100%;
+    }
+
 }
 
 
 /* =========================================================
-   Very Small Mobile
+   VERY SMALL MOBILE
 ========================================================= */
 
 @media (max-width: 380px) {
+
+    .footer__main .container,
+    .footer__bottom .container {
+        width: calc(100% - 20px);
+
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
 
     .footer__main-grid {
         gap: 24px 16px;
@@ -651,53 +642,35 @@
 
 }
 
+
 /* =========================================================
-   FINAL FOOTER LAYOUT RESET
+   FINAL FOOTER GAP FIX
 ========================================================= */
 
-#footer {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-#footer .footer {
-    display: block;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-#footer .footer__features,
-#footer .footer__main,
-#footer .footer__bottom {
-    margin: 0;
-}
-
-#footer .footer__features-grid,
-#footer .footer__main-grid,
-#footer .footer__bottom-inner {
-    box-sizing: border-box;
+html,
+body,
+body.categories-page-body,
+body.categories-page-body #app,
+body.categories-page-body #footer,
+body.categories-page-body .footer,
+body.categories-page-body .footer__main,
+body.categories-page-body .footer__bottom {
+    margin-bottom: 0 !important;
 }
 
 
-/* Prevent accidental inherited height */
-
-.footer,
-.footer__features,
-.footer__main,
-.footer__bottom {
-    min-height: 0;
-    height: auto;
+body.categories-page-body #footer,
+body.categories-page-body .footer {
+    padding-bottom: 0 !important;
 }
 
 
-/* Remove possible last-child spacing */
+/* Footer must remain in normal document flow */
 
-.footer p:last-child,
-.footer h1:last-child,
-.footer h2:last-child,
-.footer h3:last-child,
-.footer ul:last-child {
-    margin-bottom: 0;
+body.categories-page-body #footer {
+    position: static !important;
+
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
 }
