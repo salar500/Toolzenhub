@@ -18,139 +18,6 @@ export function renderFooter() {
 
 
             <!-- ==========================================
-                 Footer Features
-            =========================================== -->
-
-            <div class="footer__features">
-
-                <div class="container">
-
-                    <div class="footer__features-grid">
-
-
-                        <!-- Accurate -->
-
-                        <div class="footer__feature">
-
-                            <div class="footer__feature-icon">
-                                ◎
-                            </div>
-
-                            <div class="footer__feature-content">
-
-                                <h3 class="footer__feature-title">
-                                    Accurate
-                                </h3>
-
-                                <p class="footer__feature-text">
-                                    Trusted Calculations
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Fast -->
-
-                        <div class="footer__feature">
-
-                            <div class="footer__feature-icon">
-                                ⚡
-                            </div>
-
-                            <div class="footer__feature-content">
-
-                                <h3 class="footer__feature-title">
-                                    Fast
-                                </h3>
-
-                                <p class="footer__feature-text">
-                                    Instant Results
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Free -->
-
-                        <div class="footer__feature">
-
-                            <div class="footer__feature-icon">
-                                ✓
-                            </div>
-
-                            <div class="footer__feature-content">
-
-                                <h3 class="footer__feature-title">
-                                    Free
-                                </h3>
-
-                                <p class="footer__feature-text">
-                                    100% Free Forever
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Mobile Friendly -->
-
-                        <div class="footer__feature">
-
-                            <div class="footer__feature-icon">
-                                ▣
-                            </div>
-
-                            <div class="footer__feature-content">
-
-                                <h3 class="footer__feature-title">
-                                    Mobile Friendly
-                                </h3>
-
-                                <p class="footer__feature-text">
-                                    Works on All Devices
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Secure -->
-
-                        <div class="footer__feature">
-
-                            <div class="footer__feature-icon">
-                                🔒
-                            </div>
-
-                            <div class="footer__feature-content">
-
-                                <h3 class="footer__feature-title">
-                                    Secure
-                                </h3>
-
-                                <p class="footer__feature-text">
-                                    Your Data Stays Safe
-                                </p>
-
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- ==========================================
                  Main Footer
             =========================================== -->
 
@@ -187,11 +54,8 @@ export function renderFooter() {
 
 
                             <p class="footer__description">
-
-                                Smart, simple and reliable calculators
-                                for finance, health, business and
-                                everyday life.
-
+                                Smart tools to make better
+                                decisions every day.
                             </p>
 
 
@@ -205,6 +69,7 @@ export function renderFooter() {
                                     f
                                 </a>
 
+
                                 <a
                                     href="#"
                                     class="footer__social-link"
@@ -213,13 +78,6 @@ export function renderFooter() {
                                     𝕏
                                 </a>
 
-                                <a
-                                    href="#"
-                                    class="footer__social-link"
-                                    aria-label="Instagram"
-                                >
-                                    ◎
-                                </a>
 
                                 <a
                                     href="#"
@@ -227,6 +85,15 @@ export function renderFooter() {
                                     aria-label="LinkedIn"
                                 >
                                     in
+                                </a>
+
+
+                                <a
+                                    href="#"
+                                    class="footer__social-link"
+                                    aria-label="Instagram"
+                                >
+                                    ◎
                                 </a>
 
                             </div>
@@ -244,6 +111,7 @@ export function renderFooter() {
                                 Quick Links
                             </h3>
 
+
                             <ul class="footer__links">
 
                                 <li>
@@ -252,17 +120,20 @@ export function renderFooter() {
                                     </a>
                                 </li>
 
+
                                 <li>
                                     <a href="#">
                                         Categories
                                     </a>
                                 </li>
 
+
                                 <li>
                                     <a href="#">
                                         Articles
                                     </a>
                                 </li>
+
 
                                 <li>
                                     <a href="#">
@@ -285,6 +156,7 @@ export function renderFooter() {
                                 Resources
                             </h3>
 
+
                             <ul class="footer__links">
 
                                 <li>
@@ -293,17 +165,20 @@ export function renderFooter() {
                                     </a>
                                 </li>
 
+
                                 <li>
                                     <a href="#">
                                         Privacy Policy
                                     </a>
                                 </li>
 
+
                                 <li>
                                     <a href="#">
                                         Terms & Conditions
                                     </a>
                                 </li>
+
 
                                 <li>
                                     <a href="#">
@@ -326,6 +201,7 @@ export function renderFooter() {
                                 Popular Calculators
                             </h3>
 
+
                             <ul class="footer__links">
 
                                 <li>
@@ -334,17 +210,20 @@ export function renderFooter() {
                                     </a>
                                 </li>
 
+
                                 <li>
                                     <a href="#">
                                         Loan Comparison
                                     </a>
                                 </li>
 
+
                                 <li>
                                     <a href="#">
                                         SIP Calculator
                                     </a>
                                 </li>
+
 
                                 <li>
                                     <a href="#">
@@ -369,10 +248,8 @@ export function renderFooter() {
 
 
                             <p class="footer__newsletter-text">
-
                                 Get updates, useful tips and new
                                 calculators directly in your inbox.
-
                             </p>
 
 
@@ -417,9 +294,7 @@ export function renderFooter() {
 
 
                         <p class="footer__copyright">
-
                             © 2026 ToolZen Hub. All rights reserved.
-
                         </p>
 
 
@@ -432,9 +307,11 @@ export function renderFooter() {
                                 Privacy Policy
                             </a>
 
+
                             <a href="#">
-                                Terms
+                                Terms & Conditions
                             </a>
+
 
                             <a href="#">
                                 Disclaimer
