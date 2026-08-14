@@ -1,10 +1,21 @@
-export function renderLoan(tool) {
+/* =========================================================
+   ToolZen Hub
+   Loan Comparison Calculator
+========================================================= */
 
-    const root = document.querySelector('#inputs');
+export function renderLoan() {
 
-    if (!root) return;
+    const app = document.querySelector("#app");
 
-    root.innerHTML = `
+    if (!app) return;
+
+
+    /* =====================================================
+       CALCULATOR HTML
+    ===================================================== */
+
+    app.innerHTML = `
+
         <section class="loan-calculator">
 
             <div class="loan-calculator__intro">
@@ -18,8 +29,8 @@ export function renderLoan(tool) {
                 </h1>
 
                 <p class="loan-calculator__description">
-                    Compare two loans by EMI, interest,
-                    repayment and potential savings.
+                    Compare two loans by EMI, interest rate,
+                    total interest and total repayment.
                 </p>
 
             </div>
@@ -27,476 +38,839 @@ export function renderLoan(tool) {
 
             <div class="loan-calculator__grid">
 
-                ${loanCard('a', 'Loan A', 'Option 1')}
 
-                ${loanCard('b', 'Loan B', 'Option 2')}
+                <!-- ================= LOAN A ================= -->
+
+                <div class="loan-card">
+
+                    <div class="loan-card__header">
+
+                        <h2 class="loan-card__title">
+                            Loan A
+                        </h2>
+
+                        <span class="loan-card__badge">
+                            Option A
+                        </span>
+
+                    </div>
+
+
+                    <div class="loan-field">
+
+                        <label>
+                            Loan Amount
+                        </label>
+
+                        <div class="loan-amount-row">
+
+                            <select id="a_value">
+                                ${createAmountOptions()}
+                            </select>
+
+                            <select id="a_unit">
+
+                                <option value="1000">
+                                    Thousands
+                                </option>
+
+                                <option
+                                    value="100000"
+                                    selected
+                                >
+                                    Lakhs
+                                </option>
+
+                                <option value="10000000">
+                                    Crores
+                                </option>
+
+                                <option value="1000000">
+                                    Millions
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <input
+                            id="a_amount"
+                            type="hidden"
+                            value="5000000"
+                        >
+
+                        <input
+                            id="a_amount_slider"
+                            class="loan-range"
+                            type="range"
+                            min="1"
+                            max="100"
+                            step="1"
+                            value="50"
+                        >
+
+                    </div>
+
+
+                    <div class="loan-field">
+
+                        <label for="a_rate">
+                            Interest Rate (%)
+                        </label>
+
+                        <input
+                            id="a_rate"
+                            type="number"
+                            min="0"
+                            max="25"
+                            step="0.01"
+                            value="8.5"
+                        >
+
+                        <input
+                            id="a_rate_slider"
+                            class="loan-range"
+                            type="range"
+                            min="0"
+                            max="25"
+                            step="0.01"
+                            value="8.5"
+                        >
+
+                    </div>
+
+
+                    <div class="loan-field">
+
+                        <label for="a_years">
+                            Tenure (Years)
+                        </label>
+
+                        <input
+                            id="a_years"
+                            type="number"
+                            min="1"
+                            max="100"
+                            step="1"
+                            value="20"
+                        >
+
+                        <input
+                            id="a_years_slider"
+                            class="loan-range"
+                            type="range"
+                            min="1"
+                            max="100"
+                            step="1"
+                            value="20"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ================= LOAN B ================= -->
+
+                <div class="loan-card">
+
+                    <div class="loan-card__header">
+
+                        <h2 class="loan-card__title">
+                            Loan B
+                        </h2>
+
+                        <span class="loan-card__badge">
+                            Option B
+                        </span>
+
+                    </div>
+
+
+                    <div class="loan-field">
+
+                        <label>
+                            Loan Amount
+                        </label>
+
+                        <div class="loan-amount-row">
+
+                            <select id="b_value">
+                                ${createAmountOptions()}
+                            </select>
+
+                            <select id="b_unit">
+
+                                <option value="1000">
+                                    Thousands
+                                </option>
+
+                                <option
+                                    value="100000"
+                                    selected
+                                >
+                                    Lakhs
+                                </option>
+
+                                <option value="10000000">
+                                    Crores
+                                </option>
+
+                                <option value="1000000">
+                                    Millions
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <input
+                            id="b_amount"
+                            type="hidden"
+                            value="5000000"
+                        >
+
+                        <input
+                            id="b_amount_slider"
+                            class="loan-range"
+                            type="range"
+                            min="1"
+                            max="100"
+                            step="1"
+                            value="50"
+                        >
+
+                    </div>
+
+
+                    <div class="loan-field">
+
+                        <label for="b_rate">
+                            Interest Rate (%)
+                        </label>
+
+                        <input
+                            id="b_rate"
+                            type="number"
+                            min="0"
+                            max="25"
+                            step="0.01"
+                            value="9"
+                        >
+
+                        <input
+                            id="b_rate_slider"
+                            class="loan-range"
+                            type="range"
+                            min="0"
+                            max="25"
+                            step="0.01"
+                            value="9"
+                        >
+
+                    </div>
+
+
+                    <div class="loan-field">
+
+                        <label for="b_years">
+                            Tenure (Years)
+                        </label>
+
+                        <input
+                            id="b_years"
+                            type="number"
+                            min="1"
+                            max="100"
+                            step="1"
+                            value="20"
+                        >
+
+                        <input
+                            id="b_years_slider"
+                            class="loan-range"
+                            type="range"
+                            min="1"
+                            max="100"
+                            step="1"
+                            value="20"
+                        >
+
+                    </div>
+
+                </div>
 
             </div>
 
 
             <button
                 id="compare_btn"
-                class="loan-compare-button">
-
+                class="loan-compare-button"
+                type="button"
+            >
                 Compare Loans
-
             </button>
 
 
             <div
                 id="loan-result"
-                class="loan-result">
+                class="loan-result"
+            >
 
                 <h2 class="loan-result__title">
-                    Comparison Result
+                    Loan Comparison
                 </h2>
 
-                <p>
+                <div id="comparison-result">
                     Enter your loan details and compare.
-                </p>
+                </div>
 
             </div>
 
         </section>
+
     `;
 
 
-    function loanCard(prefix, title, badge) {
+    /* =====================================================
+       HELPERS
+    ===================================================== */
 
-        return `
-
-            <div class="loan-card">
-
-                <div class="loan-card__header">
-
-                    <h2 class="loan-card__title">
-                        ${title}
-                    </h2>
-
-                    <span class="loan-card__badge">
-                        ${badge}
-                    </span>
-
-                </div>
+    const money = new Intl.NumberFormat(
+        "en-IN",
+        {
+            style: "currency",
+            currency: "INR",
+            maximumFractionDigits: 0
+        }
+    );
 
 
-                <div class="loan-field">
+    function createAmountOptions() {
 
-                    <label>
-                        Loan Amount
-                    </label>
+        return Array.from(
+            { length: 100 },
+            (_, index) => {
 
-                    <div class="loan-amount-row">
+                const value = index + 1;
 
-                        <input
-                            id="${prefix}_value"
-                            type="number"
-                            min="1"
-                            max="100"
-                            value="50">
+                return `
+                    <option value="${value}">
+                        ${value}
+                    </option>
+                `;
 
-                        <select id="${prefix}_unit">
+            }
+        ).join("");
 
-                            <option value="1000">
-                                Thousands
-                            </option>
-
-                            <option
-                                value="100000"
-                                selected>
-
-                                Lakhs
-
-                            </option>
-
-                            <option value="10000000">
-                                Crores
-                            </option>
-
-                            <option value="1000000">
-                                Millions
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <input
-                        id="${prefix}_amount"
-                        type="hidden"
-                        value="5000000">
-
-                    <input
-                        id="${prefix}_amount_slider"
-                        class="loan-range"
-                        type="range"
-                        min="1"
-                        max="100"
-                        value="50">
-
-                </div>
-
-
-                <div class="loan-field">
-
-                    <label>
-                        Interest Rate (%)
-                    </label>
-
-                    <input
-                        id="${prefix}_rate"
-                        type="number"
-                        min="0"
-                        max="25"
-                        step=".01"
-                        value="${prefix === 'a' ? '8.5' : '9'}">
-
-                    <input
-                        id="${prefix}_rate_slider"
-                        class="loan-range"
-                        type="range"
-                        min="0"
-                        max="25"
-                        step=".01"
-                        value="${prefix === 'a' ? '8.5' : '9'}">
-
-                </div>
-
-
-                <div class="loan-field">
-
-                    <label>
-                        Tenure (Years)
-                    </label>
-
-                    <input
-                        id="${prefix}_years"
-                        type="number"
-                        min="1"
-                        max="100"
-                        value="20">
-
-                    <input
-                        id="${prefix}_years_slider"
-                        class="loan-range"
-                        type="range"
-                        min="1"
-                        max="100"
-                        value="20">
-
-                </div>
-
-            </div>
-        `;
     }
 
 
-    const money = new Intl.NumberFormat('en-IN', {
-        style: 'currency',
-        currency: 'INR',
-        maximumFractionDigits: 0
-    });
+    /* =====================================================
+       LOAN CALCULATION
+    ===================================================== */
 
+    function calculateLoan(
+        principal,
+        annualRate,
+        years
+    ) {
 
-    function calculate(principal, rate, years) {
+        if (
+            principal <= 0 ||
+            years <= 0 ||
+            annualRate < 0
+        ) {
 
-        const months = years * 12;
-        const monthlyRate = rate / 12 / 100;
-
-        if (principal <= 0 || years <= 0) {
             return {
                 emi: 0,
+                total: 0,
                 interest: 0,
-                total: 0
+                monthlyInterest: 0,
+                schedule: []
             };
+
         }
 
-        const emi = monthlyRate === 0
-            ? principal / months
-            : principal *
-              monthlyRate *
-              Math.pow(1 + monthlyRate, months) /
-              (Math.pow(1 + monthlyRate, months) - 1);
 
-        const total = emi * months;
+        const monthlyRate =
+            annualRate / 12 / 100;
+
+        const months =
+            years * 12;
+
+
+        let emi;
+
+
+        if (monthlyRate === 0) {
+
+            emi =
+                principal / months;
+
+        } else {
+
+            const factor =
+                Math.pow(
+                    1 + monthlyRate,
+                    months
+                );
+
+            emi =
+                principal *
+                monthlyRate *
+                factor /
+                (factor - 1);
+
+        }
+
+
+        const total =
+            emi * months;
+
+        const interest =
+            total - principal;
+
+
+        const schedule = [];
+
+        let balance =
+            principal;
+
+
+        for (
+            let month = 1;
+            month <= months;
+            month++
+        ) {
+
+            let interestPaid;
+            let principalPaid;
+
+
+            if (monthlyRate === 0) {
+
+                interestPaid = 0;
+
+                principalPaid =
+                    principal / months;
+
+            } else {
+
+                interestPaid =
+                    balance * monthlyRate;
+
+                principalPaid =
+                    emi - interestPaid;
+
+            }
+
+
+            balance -= principalPaid;
+
+
+            schedule.push({
+
+                month,
+
+                emi,
+
+                principal:
+                    principalPaid,
+
+                interest:
+                    interestPaid,
+
+                balance:
+                    Math.max(balance, 0)
+
+            });
+
+        }
+
 
         return {
+
             emi,
+
             total,
-            interest: total - principal
+
+            interest,
+
+            monthlyInterest:
+                schedule[0]?.interest || 0,
+
+            schedule
+
         };
+
     }
 
 
-    function updateAmount(prefix) {
+    /* =====================================================
+       AMOUNT HELPERS
+    ===================================================== */
 
-        const value =
-            document.querySelector(`#${prefix}_value`);
-
-        const unit =
-            document.querySelector(`#${prefix}_unit`);
-
-        const amount =
-            document.querySelector(`#${prefix}_amount`);
-
-        const slider =
-            document.querySelector(`#${prefix}_amount_slider`);
-
-        amount.value =
-            Number(value.value) *
-            Number(unit.value);
-
-        slider.value = value.value;
-    }
-
-
-    function getLoan(prefix) {
-
-        return calculate(
-            Number(
-                document.querySelector(
-                    `#${prefix}_amount`
-                ).value
-            ),
-
-            Number(
-                document.querySelector(
-                    `#${prefix}_rate`
-                ).value
-            ),
-
-            Number(
-                document.querySelector(
-                    `#${prefix}_years`
-                ).value
-            )
-        );
-    }
-
-
-    function compareLoans() {
-
-        updateAmount('a');
-        updateAmount('b');
-
-        const a = getLoan('a');
-        const b = getLoan('b');
-
-        const winner =
-            a.interest < b.interest
-                ? 'Loan A'
-                : b.interest < a.interest
-                    ? 'Loan B'
-                    : 'Both Loans';
-
-        const savings =
-            Math.abs(a.interest - b.interest);
-
-
-        document.querySelector('#loan-result').innerHTML = `
-
-            <h2 class="loan-result__title">
-                Comparison Result
-            </h2>
-
-            <div class="loan-result__table-wrap">
-
-                <table>
-
-                    <thead>
-
-                        <tr>
-                            <th>Metric</th>
-                            <th>Loan A</th>
-                            <th>Loan B</th>
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        <tr>
-                            <td>Monthly EMI</td>
-
-                            <td class="${
-                                a.emi < b.emi
-                                    ? 'loan-winner'
-                                    : ''
-                            }">
-                                ${money.format(a.emi)}
-                            </td>
-
-                            <td class="${
-                                b.emi < a.emi
-                                    ? 'loan-winner'
-                                    : ''
-                            }">
-                                ${money.format(b.emi)}
-                            </td>
-                        </tr>
-
-
-                        <tr>
-
-                            <td>Total Interest</td>
-
-                            <td class="${
-                                a.interest < b.interest
-                                    ? 'loan-winner'
-                                    : ''
-                            }">
-                                ${money.format(a.interest)}
-                            </td>
-
-                            <td class="${
-                                b.interest < a.interest
-                                    ? 'loan-winner'
-                                    : ''
-                            }">
-                                ${money.format(b.interest)}
-                            </td>
-
-                        </tr>
-
-
-                        <tr>
-
-                            <td>Total Repayment</td>
-
-                            <td>
-                                ${money.format(a.total)}
-                            </td>
-
-                            <td>
-                                ${money.format(b.total)}
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-
-            <div class="loan-winner-box">
-
-                🏆 <strong>Best Overall:</strong>
-                ${winner}
-
-                <br>
-
-                Interest Difference:
-                <strong>
-                    ${money.format(savings)}
-                </strong>
-
-            </div>
-
-        `;
-    }
-
-
-    ['a', 'b'].forEach(prefix => {
-
-        const amountSlider =
-            document.querySelector(
-                `#${prefix}_amount_slider`
-            );
+    function updatePrincipal(prefix) {
 
         const value =
             document.querySelector(
                 `#${prefix}_value`
             );
 
-        const rate =
+        const unit =
             document.querySelector(
-                `#${prefix}_rate`
+                `#${prefix}_unit`
             );
 
-        const rateSlider =
+        const amount =
             document.querySelector(
-                `#${prefix}_rate_slider`
+                `#${prefix}_amount`
             );
+
+        const slider =
+            document.querySelector(
+                `#${prefix}_amount_slider`
+            );
+
+
+        const principal =
+            Number(value.value) *
+            Number(unit.value);
+
+
+        amount.value =
+            principal;
+
+
+        slider.value =
+            value.value;
+
+    }
+
+
+    function updateDropdown(prefix) {
+
+        const value =
+            document.querySelector(
+                `#${prefix}_value`
+            );
+
+        const unit =
+            document.querySelector(
+                `#${prefix}_unit`
+            );
+
+        const amount =
+            document.querySelector(
+                `#${prefix}_amount`
+            );
+
+
+        const principal =
+            Number(amount.value);
+
+
+        let selectedUnit =
+            100000;
+
+
+        if (principal >= 10000000) {
+
+            selectedUnit =
+                10000000;
+
+        } else if (principal < 100000) {
+
+            selectedUnit =
+                1000;
+
+        }
+
+
+        unit.value =
+            selectedUnit;
+
+
+        let number =
+            Math.round(
+                principal /
+                selectedUnit
+            );
+
+
+        number =
+            Math.max(
+                1,
+                Math.min(100, number)
+            );
+
+
+        value.value =
+            number;
+
+    }
+
+
+    /* =====================================================
+       YEAR ANALYSIS
+    ===================================================== */
+
+    function renderYearAnalysis(
+        principal,
+        rate,
+        currentYears
+    ) {
 
         const years =
-            document.querySelector(
-                `#${prefix}_years`
+            [
+                ...new Set([
+                    10,
+                    15,
+                    20,
+                    25,
+                    30,
+                    currentYears
+                ])
+            ]
+            .sort(
+                (a, b) => a - b
             );
 
-        const yearsSlider =
-            document.querySelector(
-                `#${prefix}_years_slider`
+
+        return `
+
+            <div class="loan-result__table-wrap">
+
+                <table>
+
+                    <tr>
+                        <th>Years</th>
+                        <th>EMI</th>
+                        <th>Interest</th>
+                        <th>Repayment</th>
+                    </tr>
+
+                    ${years.map(year => {
+
+                        const loan =
+                            calculateLoan(
+                                principal,
+                                rate,
+                                year
+                            );
+
+
+                        return `
+
+                            <tr>
+
+                                <td>
+                                    ${year}
+                                </td>
+
+                                <td>
+                                    ${money.format(
+                                        loan.emi
+                                    )}
+                                </td>
+
+                                <td>
+                                    ${money.format(
+                                        loan.interest
+                                    )}
+                                </td>
+
+                                <td>
+                                    ${money.format(
+                                        loan.total
+                                    )}
+                                </td>
+
+                            </tr>
+
+                        `;
+
+                    }).join("")}
+
+                </table>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       AMORTIZATION
+    ===================================================== */
+
+    function renderAmortization(
+        schedule
+    ) {
+
+        return `
+
+            <div class="loan-result__table-wrap">
+
+                <table>
+
+                    <tr>
+
+                        <th>
+                            Month
+                        </th>
+
+                        <th>
+                            Principal
+                        </th>
+
+                        <th>
+                            Interest
+                        </th>
+
+                        <th>
+                            Balance
+                        </th>
+
+                    </tr>
+
+                    ${schedule
+                        .slice(0, 12)
+                        .map(row => `
+
+                            <tr>
+
+                                <td>
+                                    ${row.month}
+                                </td>
+
+                                <td>
+                                    ${money.format(
+                                        row.principal
+                                    )}
+                                </td>
+
+                                <td>
+                                    ${money.format(
+                                        row.interest
+                                    )}
+                                </td>
+
+                                <td>
+                                    ${money.format(
+                                        row.balance
+                                    )}
+                                </td>
+
+                            </tr>
+
+                        `)
+                        .join("")}
+
+                </table>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       COMPARISON
+    ===================================================== */
+
+    function compareLoans() {
+
+        const aAmount =
+            Number(
+                document.querySelector(
+                    "#a_amount"
+                ).value
+            );
+
+        const aRate =
+            Number(
+                document.querySelector(
+                    "#a_rate"
+                ).value
+            );
+
+        const aYears =
+            Number(
+                document.querySelector(
+                    "#a_years"
+                ).value
             );
 
 
-        amountSlider.addEventListener('input', () => {
+        const bAmount =
+            Number(
+                document.querySelector(
+                    "#b_amount"
+                ).value
+            );
 
-            value.value = amountSlider.value;
+        const bRate =
+            Number(
+                document.querySelector(
+                    "#b_rate"
+                ).value
+            );
 
-            compareLoans();
-
-        });
-
-
-        value.addEventListener('input', compareLoans);
-
-
-        rate.addEventListener('input', () => {
-
-            rateSlider.value = rate.value;
-
-            compareLoans();
-
-        });
-
-
-        rateSlider.addEventListener('input', () => {
-
-            rate.value = rateSlider.value;
-
-            compareLoans();
-
-        });
+        const bYears =
+            Number(
+                document.querySelector(
+                    "#b_years"
+                ).value
+            );
 
 
-        years.addEventListener('input', () => {
-
-            yearsSlider.value = years.value;
-
-            compareLoans();
-
-        });
+        const output =
+            document.querySelector(
+                "#comparison-result"
+            );
 
 
-        yearsSlider.addEventListener('input', () => {
+        if (
+            aAmount <= 0 ||
+            bAmount <= 0 ||
+            aRate < 0 ||
+            bRate < 0 ||
+            aYears <= 0 ||
+            bYears <= 0
+        ) {
 
-            years.value = yearsSlider.value;
+            output.innerHTML = `
 
-            compareLoans();
+                <div class="loan-winner-box">
+                    Please enter valid loan details.
+                </div>
 
-        });
+            `;
 
+            return;
 
-        document.querySelector(
-            `#${prefix}_unit`
-        ).addEventListener(
-            'change',
-            compareLoans
-        );
-
-    });
-
-
-    document.querySelector(
-        '#compare_btn'
-    ).addEventListener(
-        'click',
-        compareLoans
-    );
+        }
 
 
-    compareLoans();
-                              }
+        const loanA =
+            calculateLoan(
+                aAmount,
+                aRate,
+                aYears
+            );
+
+
+        const loanB =
+            calculateLoan(
+                bAmount,
+                bRate,
+                bYears
+            );
+
+
+        const lowestE
