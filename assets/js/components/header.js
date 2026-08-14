@@ -23,7 +23,6 @@ export function renderHeader() {
                     aria-label="Main navigation"
                 >
 
-
                     <!-- ======================================
                          Brand
                     ======================================= -->
@@ -58,60 +57,56 @@ export function renderHeader() {
                          Desktop Navigation
                     ======================================= -->
 
-                    <ul class="navbar__menu">
+                    <div class="navbar__menu">
 
-                        <li>
+                        <ul>
 
-                            <a
-                                href="index.html"
-                                class="navbar__link"
-                                data-nav="home"
-                            >
-                                Home
-                            </a>
-
-                        </li>
-
-
-                        <li>
-
-                            <a
-                                href="categories.html"
-                                class="navbar__link"
-                                data-nav="categories"
-                            >
-                                Categories
-                            </a>
-
-                        </li>
+                            <li>
+                                <a
+                                    href="index.html"
+                                    class="navbar__link"
+                                    data-nav="home"
+                                >
+                                    Home
+                                </a>
+                            </li>
 
 
-                        <li>
-
-                            <a
-                                href="articles.html"
-                                class="navbar__link"
-                                data-nav="articles"
-                            >
-                                Articles
-                            </a>
-
-                        </li>
+                            <li>
+                                <a
+                                    href="categories.html"
+                                    class="navbar__link"
+                                    data-nav="categories"
+                                >
+                                    Categories
+                                </a>
+                            </li>
 
 
-                        <li>
+                            <li>
+                                <a
+                                    href="articles.html"
+                                    class="navbar__link"
+                                    data-nav="articles"
+                                >
+                                    Articles
+                                </a>
+                            </li>
 
-                            <a
-                                href="about.html"
-                                class="navbar__link"
-                                data-nav="about"
-                            >
-                                About
-                            </a>
 
-                        </li>
+                            <li>
+                                <a
+                                    href="about.html"
+                                    class="navbar__link"
+                                    data-nav="about"
+                                >
+                                    About
+                                </a>
+                            </li>
 
-                    </ul>
+                        </ul>
+
+                    </div>
 
 
                     <!-- ======================================
@@ -174,9 +169,18 @@ export function renderHeader() {
 
             link.classList.add("active");
 
+            link.setAttribute(
+                "aria-current",
+                "page"
+            );
+
         } else {
 
             link.classList.remove("active");
+
+            link.removeAttribute(
+                "aria-current"
+            );
 
         }
 
