@@ -1,0 +1,133 @@
+/* =========================================================
+   TOOLZEN HUB — HOME PAGE FULL WIDTH FIX
+   Removes unwanted left/right page spacing
+========================================================= */
+
+
+/* =========================================================
+   PAGE / BODY
+========================================================= */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   HOME PAGE — OUTER WRAPPER
+========================================================= */
+
+main,
+main > *,
+.home,
+.home-page,
+.homepage,
+.home-container,
+.home-wrapper {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   REMOVE COMMON MAX-WIDTH CONTAINERS ON HOME
+========================================================= */
+
+.home-page,
+.homepage,
+.home-container,
+.home-wrapper {
+    width: 100% !important;
+    max-width: none !important;
+
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+
+/* =========================================================
+   HOME MAIN CONTENT
+========================================================= */
+
+main {
+    width: 100% !important;
+    max-width: none !important;
+
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+
+/* =========================================================
+   HOME SECTIONS
+========================================================= */
+
+main .categories-section,
+main .popular-section {
+    width: 100% !important;
+    max-width: none !important;
+
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+
+/* =========================================================
+   FORCE SECTION CONTENT TO USE FULL AVAILABLE WIDTH
+========================================================= */
+
+main .categories-section > *,
+main .popular-section > * {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   DESKTOP — REMOVE SIDE GAPS
+========================================================= */
+
+@media (min-width: 901px) {
+
+    main,
+    .home-page,
+    .homepage,
+    .home-container,
+    .home-wrapper {
+        width: 100% !important;
+        max-width: none !important;
+
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    main,
+    .home-page,
+    .homepage,
+    .home-container,
+    .home-wrapper {
+        width: 100% !important;
+        max-width: none !important;
+
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+}
