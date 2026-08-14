@@ -1,6 +1,6 @@
 /* =========================================================
    TOOLZEN HUB — HOME PAGE FULL WIDTH
-   Full-width sections + safe content spacing
+   Full-width sections + safe mobile content
 ========================================================= */
 
 
@@ -113,9 +113,8 @@ body {
 
 
 /* =========================================================
-   CONTENT CONTAINER
-   Keep the full-width section background,
-   but give the actual content breathing room.
+   HOME CONTAINERS
+   Full width — no extra page-side padding
 ========================================================= */
 
 #app .container {
@@ -125,32 +124,13 @@ body {
     margin-left: 0 !important;
     margin-right: 0 !important;
 
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-
-    box-sizing: border-box;
-}
-
-
-/* =========================================================
-   CATEGORY / POPULAR CONTENT
-========================================================= */
-
-#categories .container,
-#popular-calculators .container,
-#latest-articles .container {
-    width: 100% !important;
-    max-width: none !important;
-
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-
     box-sizing: border-box;
 }
 
 
 /* =========================================================
    DESKTOP
+   Keep your current desktop appearance
 ========================================================= */
 
 @media (min-width: 901px) {
@@ -178,13 +158,18 @@ body {
 
 
 /* =========================================================
-   TABLET
+   TABLET / MOBILE
+   REMOVE THE EXTRA 16px HOME PADDING
 ========================================================= */
 
 @media (max-width: 900px) {
 
     #app,
-    #app > section {
+    #app > section,
+    #hero,
+    #categories,
+    #popular-calculators,
+    #latest-articles {
         width: 100% !important;
         max-width: 100% !important;
 
@@ -194,8 +179,14 @@ body {
 
 
     #app .container {
-        padding-left: 16px !important;
-        padding-right: 16px !important;
+        width: 100% !important;
+        max-width: none !important;
+
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 
 }
@@ -208,8 +199,8 @@ body {
 @media (max-width: 600px) {
 
     #app .container {
-        padding-left: 16px !important;
-        padding-right: 16px !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 
 }
@@ -222,8 +213,8 @@ body {
 @media (max-width: 380px) {
 
     #app .container {
-        padding-left: 12px !important;
-        padding-right: 12px !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 
 }
