@@ -1,51 +1,73 @@
 /* =========================================================
-   ToolZen — Loan Comparison Calculator
+   ToolZen Hub
+   Loan Comparison Calculator
 ========================================================= */
 
 .loan-calculator {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 28px 16px 40px;
-    color: #101828;
+    padding: 22px 0 28px;
 }
 
 
 /* =========================================================
-   HEADER
+   CALCULATOR HEADER
 ========================================================= */
 
-.loan-calculator__header {
+.loan-calculator__intro {
+    margin-bottom: 18px;
     text-align: center;
-    margin-bottom: 26px;
 }
 
-.loan-calculator__header h1 {
+.loan-calculator__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 9px;
+    margin-bottom: 7px;
+
+    border-radius: 999px;
+
+    background: #eaf8f0;
+    color: #0b9f58;
+
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+}
+
+.loan-calculator__title {
     margin: 0;
+
     color: #101828;
-    font-size: 28px;
+
+    font-size: 24px;
     font-weight: 800;
     line-height: 1.2;
-    letter-spacing: -0.6px;
+    letter-spacing: -.5px;
 }
 
-.loan-calculator__header p {
+.loan-calculator__description {
     max-width: 560px;
-    margin: 8px auto 0;
+    margin: 7px auto 0;
+
     color: #667085;
-    font-size: 12px;
+
+    font-size: 11px;
     line-height: 1.5;
 }
 
 
 /* =========================================================
-   LOAN INPUT LAYOUT
+   MAIN GRID
 ========================================================= */
 
-.loan-calculator__layout {
+.loan-calculator__grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
+
+    gap: 14px;
 }
 
 
@@ -54,77 +76,53 @@
 ========================================================= */
 
 .loan-card {
-    min-width: 0;
-    padding: 18px;
+    padding: 14px;
+
     border: 1px solid #e5ebe8;
-    border-radius: 12px;
-    background: #ffffff;
-    box-shadow: 0 4px 14px rgba(16, 24, 40, 0.05);
+    border-radius: 10px;
+
+    background: #fff;
+
+    box-shadow:
+        0 2px 6px rgba(16, 24, 40, .03);
 }
-
-.loan-card--a {
-    border-top: 3px solid #0b9f58;
-}
-
-.loan-card--b {
-    border-top: 3px solid #4f8cc9;
-}
-
-
-/* =========================================================
-   CARD HEADER
-========================================================= */
 
 .loan-card__header {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
+    justify-content: space-between;
+
+    margin-bottom: 14px;
+}
+
+.loan-card__title {
+    margin: 0;
+
+    color: #101828;
+
+    font-size: 13px;
+    font-weight: 800;
 }
 
 .loan-card__badge {
-    width: 34px;
-    height: 34px;
+    padding: 4px 7px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    border-radius: 50%;
+    border-radius: 999px;
 
     background: #eaf8f0;
     color: #0b9f58;
 
-    font-size: 15px;
-    font-weight: 800;
-}
-
-.loan-card--b .loan-card__badge {
-    background: #e8f2fb;
-    color: #2475c7;
-}
-
-.loan-card__header h2 {
-    margin: 0;
-    font-size: 17px;
-    font-weight: 800;
-}
-
-.loan-card__header p {
-    margin: 2px 0 0;
-    color: #98a2b3;
-    font-size: 9px;
+    font-size: 7px;
+    font-weight: 700;
 }
 
 
 /* =========================================================
-   FIELDS
+   FORM FIELD
 ========================================================= */
 
 .loan-field {
-    margin-bottom: 17px;
+    margin-bottom: 13px;
 }
 
 .loan-field:last-child {
@@ -133,16 +131,14 @@
 
 .loan-field label {
     display: block;
-    margin-bottom: 6px;
+
+    margin-bottom: 5px;
+
     color: #344054;
-    font-size: 10px;
+
+    font-size: 9px;
     font-weight: 700;
 }
-
-
-/* =========================================================
-   AMOUNT
-========================================================= */
 
 .loan-amount-row {
     display: grid;
@@ -150,11 +146,10 @@
     gap: 7px;
 }
 
-.loan-amount-row select,
-.loan-number-input input {
+.loan-field input,
+.loan-field select {
     width: 100%;
-    height: 34px;
-    min-width: 0;
+    height: 32px;
 
     box-sizing: border-box;
 
@@ -163,117 +158,39 @@
     border: 1px solid #dce3e0;
     border-radius: 7px;
 
-    background: #ffffff;
+    outline: none;
+
+    background: #fff;
     color: #101828;
 
     font-family: inherit;
-    font-size: 10px;
-
-    outline: none;
-}
-
-.loan-amount-row select:focus,
-.loan-number-input input:focus {
-    border-color: #0b9f58;
-}
-
-
-/* =========================================================
-   NUMBER INPUT
-========================================================= */
-
-.loan-number-input {
-    position: relative;
-}
-
-.loan-number-input input {
-    padding-right: 55px;
-}
-
-.loan-number-input span {
-    position: absolute;
-
-    top: 0;
-    right: 0;
-
-    height: 34px;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 9px;
-
-    border-left: 1px solid #e5ebe8;
-
-    color: #667085;
     font-size: 9px;
 }
 
+.loan-field input:focus,
+.loan-field select:focus {
+    border-color: #8ed5b1;
+    box-shadow: 0 0 0 2px rgba(11, 159, 88, .08);
+}
+
 
 /* =========================================================
-   SLIDER
+   RANGE
 ========================================================= */
 
-.loan-slider {
+.loan-range {
     width: 100%;
-    height: 18px;
 
-    display: block;
+    margin-top: 7px;
+    padding: 0 !important;
 
-    margin: 7px 0 0;
-    padding: 0;
+    border: 0 !important;
 
-    appearance: none;
-    -webkit-appearance: none;
+    background: transparent !important;
 
-    background: transparent;
+    accent-color: #0b9f58;
 
     cursor: pointer;
-}
-
-.loan-slider::-webkit-slider-runnable-track {
-    height: 5px;
-    border-radius: 999px;
-    background: #dfe8e3;
-}
-
-.loan-slider::-webkit-slider-thumb {
-    width: 16px;
-    height: 16px;
-
-    margin-top: -5.5px;
-
-    appearance: none;
-    -webkit-appearance: none;
-
-    border: 2px solid #ffffff;
-    border-radius: 50%;
-
-    background: #0b9f58;
-
-    box-shadow: 0 1px 4px rgba(16, 24, 40, 0.25);
-}
-
-.loan-card--b .loan-slider::-webkit-slider-thumb {
-    background: #2475c7;
-}
-
-.loan-slider::-moz-range-track {
-    height: 5px;
-    border-radius: 999px;
-    background: #dfe8e3;
-}
-
-.loan-slider::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
-
-    border: 2px solid #ffffff;
-    border-radius: 50%;
-
-    background: #0b9f58;
-
-    box-shadow: 0 1px 4px rgba(16, 24, 40, 0.25);
 }
 
 
@@ -282,30 +199,26 @@
 ========================================================= */
 
 .loan-compare-button {
-    display: block;
+    width: 100%;
+    height: 36px;
 
-    width: min(280px, 100%);
-    height: 42px;
-
-    margin: 20px auto 24px;
+    margin-top: 14px;
 
     border: 0;
     border-radius: 8px;
 
     background: #0b9f58;
-    color: #ffffff;
+    color: #fff;
 
     font-family: inherit;
-    font-size: 12px;
-    font-weight: 800;
+    font-size: 10px;
+    font-weight: 700;
 
     cursor: pointer;
 
-    box-shadow: 0 5px 14px rgba(11, 159, 88, 0.18);
-
     transition:
-        background 0.2s ease,
-        transform 0.2s ease;
+        background .2s ease,
+        transform .2s ease;
 }
 
 .loan-compare-button:hover {
@@ -315,66 +228,74 @@
 
 
 /* =========================================================
-   RESULTS
+   RESULT
 ========================================================= */
 
-.loan-results {
-    padding: 18px;
+.loan-result {
+    margin-top: 14px;
+
+    padding: 14px;
 
     border: 1px solid #e5ebe8;
-    border-radius: 12px;
+    border-radius: 10px;
 
-    background: #ffffff;
+    background: #fff;
 
-    box-shadow: 0 4px 14px rgba(16, 24, 40, 0.05);
+    box-shadow:
+        0 2px 6px rgba(16, 24, 40, .03);
 }
 
-.loan-results__header {
-    margin-bottom: 14px;
-}
+.loan-result__title {
+    margin: 0 0 12px;
 
-.loan-results__header h2 {
-    margin: 0;
-    font-size: 17px;
+    color: #101828;
+
+    font-size: 13px;
     font-weight: 800;
-}
-
-.loan-results__header p {
-    margin: 3px 0 0;
-    color: #667085;
-    font-size: 9px;
 }
 
 
 /* =========================================================
-   TABLE
+   RESULT TABLE
 ========================================================= */
 
-.loan-results table {
+.loan-result__table-wrap {
     width: 100%;
-    border-collapse: collapse;
-    font-size: 10px;
+    overflow-x: auto;
 }
 
-.loan-results th,
-.loan-results td {
+.loan-result table {
+    width: 100%;
+    min-width: 430px;
+
+    border-collapse: collapse;
+
+    font-size: 9px;
+}
+
+.loan-result th,
+.loan-result td {
     padding: 9px 7px;
+
     border-bottom: 1px solid #edf1ef;
+
     text-align: center;
 }
 
-.loan-results th {
-    background: #f6faf8;
+.loan-result th {
+    background: #f5faf7;
+
     color: #344054;
-    font-weight: 800;
+
+    font-weight: 700;
 }
 
-.loan-results td:first-child,
-.loan-results th:first-child {
+.loan-result td:first-child {
     text-align: left;
+    font-weight: 600;
 }
 
-.loan-results .winner {
+.loan-winner {
     color: #0b9f58;
     font-weight: 800;
 }
@@ -384,36 +305,18 @@
    WINNER
 ========================================================= */
 
-.loan-winner {
-    margin-top: 16px;
-    padding: 14px;
+.loan-winner-box {
+    margin-top: 12px;
+    padding: 11px;
 
     border: 1px solid #cfe8dc;
-    border-radius: 9px;
+    border-radius: 8px;
 
     background: #f0f9f4;
+    color: #166534;
 
-    text-align: center;
-}
-
-.loan-winner__title {
-    margin-bottom: 5px;
-    color: #087d46;
-    font-size: 12px;
-    font-weight: 800;
-}
-
-.loan-winner__text {
-    color: #344054;
-    font-size: 10px;
-    line-height: 1.5;
-}
-
-.loan-winner__saving {
-    margin-top: 5px;
-    color: #0b9f58;
-    font-size: 16px;
-    font-weight: 800;
+    font-size: 9px;
+    line-height: 1.6;
 }
 
 
@@ -422,124 +325,83 @@
 ========================================================= */
 
 .loan-chart {
-    width: 100%;
-    max-width: 520px;
     height: 260px;
-    margin: 20px auto 0;
-}
-
-#loan-chart {
-    width: 100% !important;
-    height: 100% !important;
-}
-
-
-/* =========================================================
-   COPY
-========================================================= */
-
-.loan-copy-button {
-    display: block;
-
-    width: 150px;
-    height: 34px;
+    max-width: 420px;
 
     margin: 18px auto 0;
-
-    border: 1px solid #b9dfcb;
-    border-radius: 7px;
-
-    background: #ffffff;
-    color: #0b9f58;
-
-    font-family: inherit;
-    font-size: 10px;
-    font-weight: 700;
-
-    cursor: pointer;
-}
-
-.loan-copy-button:hover {
-    background: #f0f9f4;
 }
 
 
 /* =========================================================
-   MOBILE
+   RESPONSIVE
 ========================================================= */
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
 
     .loan-calculator {
-        padding: 20px 12px 30px;
+        width: calc(100% - 24px);
     }
 
-    .loan-calculator__header {
-        margin-bottom: 18px;
+    .loan-calculator__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .loan-calculator {
+        padding-top: 18px;
+        padding-bottom: 18px;
     }
 
-    .loan-calculator__header h1 {
+    .loan-calculator__title {
         font-size: 21px;
     }
 
-    .loan-calculator__header p {
+    .loan-calculator__description {
         font-size: 10px;
-    }
-
-    .loan-calculator__layout {
-        grid-template-columns: 1fr;
-        gap: 10px;
+        padding: 0 8px;
     }
 
     .loan-card {
-        padding: 14px;
+        padding: 11px;
     }
 
-    .loan-card__header {
-        margin-bottom: 15px;
+    .loan-field label {
+        font-size: 8px;
     }
 
-    .loan-results {
-        padding: 13px;
-        overflow: hidden;
+    .loan-field input,
+    .loan-field select {
+        height: 31px;
     }
 
-    .loan-results table {
-        min-width: 470px;
-    }
-
-    .loan-results {
-        overflow-x: auto;
+    .loan-result {
+        padding: 11px;
     }
 
     .loan-chart {
-        min-width: 280px;
         height: 230px;
     }
 }
 
 
-/* =========================================================
-   VERY SMALL MOBILE
-========================================================= */
-
 @media (max-width: 380px) {
 
     .loan-calculator {
-        padding-left: 10px;
-        padding-right: 10px;
+        width: calc(100% - 20px);
+    }
+
+    .loan-calculator__title {
+        font-size: 19px;
     }
 
     .loan-card {
-        padding: 12px;
+        padding: 10px;
     }
 
     .loan-amount-row {
         gap: 5px;
-    }
-
-    .loan-amount-row select,
-    .loan-number-input input {
-        font-size: 9px;
     }
 }
