@@ -1133,31 +1133,6 @@
         font-size: 10px;
     }
 
-.loans-hero__illustration {
-
-    min-height: 0;
-
-    margin-top: 0;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-}
-
-
-.loans-illustration {
-
-    transform: scale(0.55);
-}
-
-
-    .loans-illustration {
-
-        transform: scale(0.75);
-    }
-
 
     .loans-calculators {
 
@@ -1292,3 +1267,137 @@
     }
 
   }
+
+
+/* =========================================================
+   Loans Hero - Keep Illustration Beside Text
+   Isolated responsive fix
+========================================================= */
+
+.loans-hero__content {
+    display: grid !important;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 0.9fr) !important;
+
+    align-items: center !important;
+
+    gap: 35px !important;
+}
+
+
+/* =========================================================
+   Tablet
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .loans-hero__content {
+        display: grid !important;
+
+        grid-template-columns:
+            minmax(0, 1.15fr)
+            minmax(0, 0.85fr) !important;
+
+        min-height: 360px !important;
+
+        gap: 24px !important;
+
+        align-items: center !important;
+    }
+
+    .loans-hero__text {
+        min-width: 0;
+    }
+
+    .loans-hero__illustration {
+        min-width: 0;
+
+        min-height: 0 !important;
+
+        margin: 0 !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        justify-content: center !important;
+    }
+
+    .loans-illustration {
+        max-width: 100%;
+
+        transform: scale(0.75);
+    }
+}
+
+
+/* =========================================================
+   Mobile
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .loans-hero__content {
+        display: grid !important;
+
+        grid-template-columns:
+            minmax(0, 1.25fr)
+            minmax(100px, 0.75fr) !important;
+
+        gap: 12px !important;
+
+        min-height: 0 !important;
+
+        align-items: center !important;
+    }
+
+    .loans-hero__text {
+        min-width: 0;
+
+        padding: 24px 0 0;
+    }
+
+    .loans-hero__illustration {
+        min-width: 0;
+
+        min-height: 0 !important;
+
+        margin: 0 !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        justify-content: center !important;
+    }
+
+    .loans-illustration {
+        width: 430px;
+
+        max-width: none;
+
+        transform: scale(0.55);
+    }
+}
+
+
+/* =========================================================
+   Very Small Mobile
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .loans-hero__content {
+        grid-template-columns:
+            minmax(0, 1.15fr)
+            minmax(85px, 0.85fr) !important;
+
+        gap: 8px !important;
+    }
+
+    .loans-illustration {
+        transform: scale(0.45);
+    }
+}
