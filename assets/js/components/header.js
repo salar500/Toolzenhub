@@ -16,124 +16,120 @@ export function renderHeader() {
 
         <div class="site-header">
 
-            <div class="container">
+            <nav
+                class="navbar"
+                aria-label="Main navigation"
+            >
 
-                <nav
-                    class="navbar"
-                    aria-label="Main navigation"
+                <!-- ======================================
+                     Brand
+                ======================================= -->
+
+                <a
+                    href="index.html"
+                    class="navbar__brand"
+                    aria-label="ToolZen Hub Home"
                 >
 
-                    <!-- ======================================
-                         Brand
-                    ======================================= -->
+                    <span class="brand-logo">
+                        <span aria-hidden="true">▦</span>
+                    </span>
 
-                    <a
-                        href="index.html"
-                        class="navbar__brand"
-                        aria-label="ToolZen Hub Home"
+
+                    <span class="brand-text">
+
+                        <span class="brand-title">
+                            ToolZen <span>Hub</span>
+                        </span>
+
+                        <span class="brand-subtitle">
+                            Smart Tools, Smarter You
+                        </span>
+
+                    </span>
+
+                </a>
+
+
+                <!-- ======================================
+                     Desktop Navigation
+                ======================================= -->
+
+                <div class="navbar__menu">
+
+                    <ul>
+
+                        <li>
+                            <a
+                                href="index.html"
+                                class="navbar__link"
+                                data-nav="home"
+                            >
+                                Home
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a
+                                href="categories.html"
+                                class="navbar__link"
+                                data-nav="categories"
+                            >
+                                Categories
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a
+                                href="articles.html"
+                                class="navbar__link"
+                                data-nav="articles"
+                            >
+                                Articles
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a
+                                href="about.html"
+                                class="navbar__link"
+                                data-nav="about"
+                            >
+                                About
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- ======================================
+                     Header Actions
+                ======================================= -->
+
+                <div class="navbar__actions">
+
+                    <button
+                        type="button"
+                        class="menu-toggle"
+                        data-action="menu"
+                        aria-label="Open navigation menu"
+                        aria-expanded="false"
                     >
 
-                        <span class="brand-logo">
-                            <span aria-hidden="true">▦</span>
-                        </span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
 
+                    </button>
 
-                        <span class="brand-text">
+                </div>
 
-                            <span class="brand-title">
-                                ToolZen <span>Hub</span>
-                            </span>
-
-                            <span class="brand-subtitle">
-                                Smart Tools, Smarter You
-                            </span>
-
-                        </span>
-
-                    </a>
-
-
-                    <!-- ======================================
-                         Desktop Navigation
-                    ======================================= -->
-
-                    <div class="navbar__menu">
-
-                        <ul>
-
-                            <li>
-                                <a
-                                    href="index.html"
-                                    class="navbar__link"
-                                    data-nav="home"
-                                >
-                                    Home
-                                </a>
-                            </li>
-
-
-                            <li>
-                                <a
-                                    href="categories.html"
-                                    class="navbar__link"
-                                    data-nav="categories"
-                                >
-                                    Categories
-                                </a>
-                            </li>
-
-
-                            <li>
-                                <a
-                                    href="articles.html"
-                                    class="navbar__link"
-                                    data-nav="articles"
-                                >
-                                    Articles
-                                </a>
-                            </li>
-
-
-                            <li>
-                                <a
-                                    href="about.html"
-                                    class="navbar__link"
-                                    data-nav="about"
-                                >
-                                    About
-                                </a>
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-
-                    <!-- ======================================
-                         Header Actions
-                    ======================================= -->
-
-                    <div class="navbar__actions">
-
-                        <button
-                            type="button"
-                            class="menu-toggle"
-                            data-action="menu"
-                            aria-label="Open navigation menu"
-                            aria-expanded="false"
-                        >
-
-                            <span></span>
-                            <span></span>
-                            <span></span>
-
-                        </button>
-
-                    </div>
-
-                </nav>
-
-            </div>
+            </nav>
 
         </div>
     `;
