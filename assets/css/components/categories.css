@@ -603,14 +603,14 @@
     }
 
 
-    .category-grid,
-    .calculator-grid {
-        gap: 10px;
+.category-grid,
+.calculator-grid {
+    gap: 10px;
 
-        margin-right: -16px;
+    margin-right: 0 !important;
 
-        padding-right: 16px;
-    }
+    padding-right: 0 !important;
+}
 
 
     .category-card {
