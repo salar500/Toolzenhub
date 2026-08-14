@@ -576,3 +576,69 @@ body {
         height: 38px;
     }
 }
+
+
+/* =========================================================
+   GLOBAL HEADER — FORCE CONSISTENT NAVIGATION GAP
+   Applies to Home, Categories, Articles, About, etc.
+   ========================================================= */
+
+.site-header .navbar__menu {
+    display: flex !important;
+    align-items: center !important;
+
+    margin-left: auto !important;
+    margin-right: 0 !important;
+
+    padding: 0 !important;
+}
+
+.site-header .navbar__menu ul {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+
+    gap: 20px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    list-style: none !important;
+}
+
+.site-header .navbar__menu li {
+    display: flex !important;
+    align-items: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.site-header .navbar__menu li + li {
+    margin-left: 0 !important;
+}
+
+.site-header .navbar__menu a {
+    display: inline-flex !important;
+    align-items: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    width: auto !important;
+
+    white-space: nowrap !important;
+}
+
+
+/* About → Hamburger */
+
+.site-header .navbar__actions {
+    display: flex !important;
+    align-items: center !important;
+
+    margin-left: 18px !important;
+    margin-right: 0 !important;
+
+    padding: 0 !important;
+}
