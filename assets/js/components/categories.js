@@ -43,12 +43,11 @@ export function renderCategories() {
                 <div class="category-grid">
 
 
-                    <!-- Loans -->
 
-                    <a
-                        href="categories.html#loans"
-                        class="category-card"
-                    >
+               <!-- Loans -->
+
+                   <a href="loans.html" class="category-card">
+                    
 
                         <div class="category-card__icon category-card__icon--loans">
                             🏠
@@ -71,7 +70,7 @@ export function renderCategories() {
                     <!-- Investment -->
 
                     <a
-                        href="categories.html#investment"
+                        href="investment.html"
                         class="category-card"
                     >
 
