@@ -8,8 +8,6 @@ import { renderHero } from "./components/hero.js";
 import { renderCategories } from "./components/categories.js";
 import { renderArticles } from "./components/articles.js";
 import { renderFooter } from "./components/footer.js";
-import { renderLoan } from
-    './calculators/loan-comparison/loan-comparison.js';
 
 
 function initializeApp() {
