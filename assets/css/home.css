@@ -1,6 +1,7 @@
 /* =========================================================
    TOOLZEN HUB — HOME PAGE FULL WIDTH
-   Full-width sections + safe mobile content
+   Full-width sections + mobile content alignment
+   HEADER IS NOT TOUCHED
 ========================================================= */
 
 
@@ -78,6 +79,9 @@ body {
     margin-left: 0 !important;
     margin-right: 0 !important;
 
+    position: relative;
+    left: 0 !important;
+
     box-sizing: border-box;
 }
 
@@ -92,6 +96,9 @@ body {
 
     margin-left: 0 !important;
     margin-right: 0 !important;
+
+    position: relative;
+    left: 0 !important;
 
     box-sizing: border-box;
 }
@@ -108,13 +115,16 @@ body {
     margin-left: 0 !important;
     margin-right: 0 !important;
 
+    position: relative;
+    left: 0 !important;
+
     box-sizing: border-box;
 }
 
 
 /* =========================================================
    HOME CONTAINERS
-   Full width — no extra page-side padding
+   Full width
 ========================================================= */
 
 #app .container {
@@ -130,7 +140,7 @@ body {
 
 /* =========================================================
    DESKTOP
-   Keep your current desktop appearance
+   Keep current desktop appearance
 ========================================================= */
 
 @media (min-width: 901px) {
@@ -146,6 +156,8 @@ body {
 
         margin-left: 0 !important;
         margin-right: 0 !important;
+
+        left: 0 !important;
     }
 
 
@@ -159,7 +171,7 @@ body {
 
 /* =========================================================
    TABLET / MOBILE
-   REMOVE THE EXTRA 16px HOME PADDING
+   HOME CONTENT ONLY
 ========================================================= */
 
 @media (max-width: 900px) {
@@ -175,8 +187,17 @@ body {
 
         margin-left: 0 !important;
         margin-right: 0 !important;
+
+        left: 0 !important;
+        right: auto !important;
+
+        transform: none !important;
     }
 
+
+    /* -----------------------------------------
+       Home containers
+    ----------------------------------------- */
 
     #app .container {
         width: 100% !important;
@@ -187,6 +208,45 @@ body {
 
         padding-left: 0 !important;
         padding-right: 0 !important;
+
+        box-sizing: border-box;
+    }
+
+
+    /* -----------------------------------------
+       Categories content
+    ----------------------------------------- */
+
+    #categories .category-grid {
+        margin-left: 0 !important;
+
+        direction: ltr !important;
+
+        box-sizing: border-box;
+    }
+
+
+    /* -----------------------------------------
+       Popular calculators content
+    ----------------------------------------- */
+
+    #popular-calculators .calculator-grid {
+        margin-left: 0 !important;
+
+        direction: ltr !important;
+
+        box-sizing: border-box;
+    }
+
+
+    /* -----------------------------------------
+       Prevent section content from shifting
+    ----------------------------------------- */
+
+    #categories *,
+    #popular-calculators *,
+    #latest-articles * {
+        box-sizing: border-box;
     }
 
 }
@@ -201,6 +261,12 @@ body {
     #app .container {
         padding-left: 0 !important;
         padding-right: 0 !important;
+    }
+
+
+    #categories .category-grid,
+    #popular-calculators .calculator-grid {
+        margin-left: 0 !important;
     }
 
 }
