@@ -1,6 +1,6 @@
 /* =========================================================
-   TOOLZEN HUB — HOME PAGE FULL WIDTH
-   Mobile content alignment fix
+   TOOLZEN HUB — HOME PAGE
+   MOBILE LEFT / RIGHT EDGE FIX
    HEADER IS NOT TOUCHED
 ========================================================= */
 
@@ -11,28 +11,26 @@
 
 html,
 body {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: 100%;
+    max-width: 100%;
 
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 0;
+    padding: 0;
 
     overflow-x: hidden;
 }
 
 
 /* =========================================================
-   MAIN HOME APPLICATION
+   HOME APP
 ========================================================= */
 
 #app {
-    display: block;
+    width: 100%;
+    max-width: 100%;
 
-    width: 100% !important;
-    max-width: 100% !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 0;
+    padding: 0;
 
     box-sizing: border-box;
 }
@@ -43,80 +41,43 @@ body {
 ========================================================= */
 
 #app > section {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: 100%;
+    max-width: 100%;
 
-    margin: 0 !important;
-
-    box-sizing: border-box;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-#hero {
-    width: 100% !important;
-    max-width: 100% !important;
-
-    margin: 0 !important;
+    margin: 0;
+    padding: 0;
 
     box-sizing: border-box;
 }
 
 
 /* =========================================================
-   CATEGORIES
+   INDIVIDUAL HOME SECTIONS
 ========================================================= */
 
-#categories {
-    width: 100% !important;
-    max-width: 100% !important;
-
-    margin: 0 !important;
-
-    box-sizing: border-box;
-}
-
-
-/* =========================================================
-   POPULAR CALCULATORS
-========================================================= */
-
-#popular-calculators {
-    width: 100% !important;
-    max-width: 100% !important;
-
-    margin: 0 !important;
-
-    box-sizing: border-box;
-}
-
-
-/* =========================================================
-   LATEST ARTICLES
-========================================================= */
-
+#hero,
+#categories,
+#popular-calculators,
 #latest-articles {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: 100%;
+    max-width: 100%;
 
-    margin: 0 !important;
-
+    margin: 0;
+    
     box-sizing: border-box;
 }
 
 
 /* =========================================================
-   HOME CONTAINERS
+   HOME CONTAINER
 ========================================================= */
 
 #app .container {
-    width: 100% !important;
-    max-width: none !important;
+    width: 100%;
+    max-width: none;
 
-    margin: 0 !important;
+    margin-left: 0;
+    margin-right: 0;
 
     box-sizing: border-box;
 }
@@ -124,27 +85,14 @@ body {
 
 /* =========================================================
    DESKTOP
-   DO NOT CHANGE CURRENT DESKTOP LOOK
+   KEEP DESKTOP AS IT IS
 ========================================================= */
 
 @media (min-width: 901px) {
 
-    #app,
-    #app > section,
-    #hero,
-    #categories,
-    #popular-calculators,
-    #latest-articles {
-        width: 100% !important;
-        max-width: 100% !important;
-
-        margin: 0 !important;
-    }
-
-
     #app .container {
-        padding-left: 24px !important;
-        padding-right: 24px !important;
+        padding-left: 24px;
+        padding-right: 24px;
     }
 
 }
@@ -152,14 +100,10 @@ body {
 
 /* =========================================================
    MOBILE
-   FIX CONTENT ALIGNMENT
+   FIX VIEWPORT EDGE CLIPPING
 ========================================================= */
 
 @media (max-width: 900px) {
-
-    /* -----------------------------------------
-       Main sections
-    ----------------------------------------- */
 
     #app,
     #app > section,
@@ -167,30 +111,25 @@ body {
     #categories,
     #popular-calculators,
     #latest-articles {
-        width: 100% !important;
-        max-width: 100% !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
 
-        margin: 0 !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
 
-        left: 0 !important;
-        right: auto !important;
+        box-sizing: border-box !important;
 
-        transform: none !important;
-
-        box-sizing: border-box;
+        overflow-x: hidden;
     }
 
 
     /* -----------------------------------------
-       ALL HOME CONTAINERS
-       Remove inherited layout padding
+       Home container
     ----------------------------------------- */
 
     #app .container {
         width: 100% !important;
-        max-width: none !important;
+        max-width: 100% !important;
 
         margin-left: 0 !important;
         margin-right: 0 !important;
@@ -198,106 +137,22 @@ body {
         padding-left: 0 !important;
         padding-right: 0 !important;
 
-        box-sizing: border-box;
+        box-sizing: border-box !important;
     }
 
 
     /* -----------------------------------------
-       CATEGORIES SECTION CONTENT
+       IMPORTANT:
+       Do NOT allow the individual grids to
+       create a viewport-wide overflow.
     ----------------------------------------- */
 
-    #categories .categories-section {
-        width: 100% !important;
-
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-
-        box-sizing: border-box;
-    }
-
-
-    /* -----------------------------------------
-       POPULAR SECTION CONTENT
-    ----------------------------------------- */
-
-    #popular-calculators .popular-section {
-        width: 100% !important;
-
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-
-        box-sizing: border-box;
-    }
-
-
-    /* -----------------------------------------
-       SECTION HEADERS
-       Keep every line aligned
-    ----------------------------------------- */
-
-    #categories .section-header,
-    #popular-calculators .section-header,
-    #latest-articles .section-header {
-        width: 100% !important;
-
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-
-        box-sizing: border-box;
-    }
-
-
-    /* -----------------------------------------
-       CATEGORY GRID
-    ----------------------------------------- */
-
-    #categories .category-grid {
-        width: 100% !important;
-
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-
-        padding-left: 0 !important;
-
-        box-sizing: border-box;
-
-        direction: ltr !important;
-    }
-
-
-    /* -----------------------------------------
-       CALCULATOR GRID
-    ----------------------------------------- */
-
+    #categories .category-grid,
     #popular-calculators .calculator-grid {
-        width: 100% !important;
+        box-sizing: border-box !important;
 
-        margin-left: 0 !important;
-        margin-right: 0 !important;
+        max-width: 100% !important;
 
-        padding-left: 0 !important;
-
-        box-sizing: border-box;
-
-        direction: ltr !important;
-    }
-
-
-    /* -----------------------------------------
-       FIRST CARD MUST START AT SAME X POSITION
-    ----------------------------------------- */
-
-    #categories .category-grid > :first-child,
-    #popular-calculators .calculator-grid > :first-child {
         margin-left: 0 !important;
     }
 
@@ -310,25 +165,16 @@ body {
 
 @media (max-width: 600px) {
 
-    #app .container,
-    #categories .categories-section,
-    #popular-calculators .popular-section {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
+    #app,
+    #app > section,
+    #hero,
+    #categories,
+    #popular-calculators,
+    #latest-articles {
+        width: 100vw !important;
+        max-width: 100vw !important;
 
-
-    #categories .section-header,
-    #popular-calculators .section-header {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
-
-
-    #categories .category-grid,
-    #popular-calculators .calculator-grid {
-        margin-left: 0 !important;
-        padding-left: 0 !important;
+        overflow-x: hidden !important;
     }
 
 }
@@ -340,9 +186,10 @@ body {
 
 @media (max-width: 380px) {
 
-    #app .container {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+    #app,
+    #app > section {
+        width: 100vw !important;
+        max-width: 100vw !important;
     }
 
 }
