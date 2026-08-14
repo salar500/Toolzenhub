@@ -14,110 +14,117 @@ import { renderFooter } from "../components/footer.js";
 const categories = [
 
     {
-        name: "Loans",
-        description: "EMI, Home Loan, Personal Loan and more",
+        id: "loans",
         icon: "🏠",
-        className: "loans",
-        href: "loans.html"
+        iconClass: "loans",
+        title: "Loans",
+        description: "EMI, Home Loan, Personal Loan and more"
     },
 
     {
-        name: "Investment",
-        description: "SIP, PPF, FD, CAGR and more",
+        id: "investment",
         icon: "📈",
-        className: "investment",
-        href: "investment.html"
+        iconClass: "investment",
+        title: "Investment",
+        description: "SIP, PPF, FD, CAGR and more"
     },
 
     {
-        name: "Tax",
-        description: "Income Tax, GST, TDS and more",
+        id: "tax",
         icon: "🧾",
-        className: "tax",
-        href: "tax.html"
+        iconClass: "tax",
+        title: "Tax",
+        description: "Income Tax, GST, TDS and more"
     },
 
     {
-        name: "Health",
-        description: "BMI, Calorie, BMR and more",
+        id: "health",
         icon: "♥",
-        className: "health",
-        href: "health.html"
+        iconClass: "health",
+        title: "Health",
+        description: "BMI, Calorie, BMR and more"
     },
 
     {
-        name: "Business",
-        description: "Profit, Margin, ROI and more",
+        id: "business",
         icon: "💼",
-        className: "business",
-        href: "business.html"
+        iconClass: "business",
+        title: "Business",
+        description: "Profit, Margin, ROI and more"
     },
 
     {
-        name: "Math",
-        description: "Percentage, Ratio, Age and more",
+        id: "math",
         icon: "🔢",
-        className: "math",
-        href: "math.html"
+        iconClass: "math",
+        title: "Math",
+        description: "Percentage, Ratio, Age and more"
     },
 
     {
-        name: "Converter",
-        description: "Unit, Currency, Date and more",
+        id: "converter",
         icon: "↻",
-        className: "converter",
-        href: "converter.html"
+        iconClass: "converter",
+        title: "Converter",
+        description: "Unit, Currency, Date and more"
     },
 
     {
-        name: "More",
-        description: "Explore all calculators and tools",
+        id: "more",
         icon: "▦",
-        className: "more",
-        href: "categories.html"
+        iconClass: "more",
+        title: "More",
+        description: "Explore all calculators and tools"
     }
 
 ];
 
 
 /* =========================================================
-   Render Categories
+   Render Category Cards
 ========================================================= */
 
-function renderCategories() {
+function renderCategoriesPage() {
 
-    const grid = document.getElementById("categories-grid");
+    const grid = document.getElementById(
+        "categories-grid"
+    );
 
     if (!grid) {
-        console.error("categories-grid not found");
         return;
     }
+
 
     grid.innerHTML = categories.map(category => `
 
         <a
-            href="${category.href}"
+            href="categories.html#${category.id}"
             class="category-page-card"
         >
 
-            <span
-                class="category-page-card__icon
-                       category-page-card__icon--${category.className}"
+            <div
+                class="
+                    category-page-card__icon
+                    category-page-card__icon--${category.iconClass}
+                "
+                aria-hidden="true"
             >
                 ${category.icon}
-            </span>
+            </div>
 
-            <span class="category-page-card__content">
 
-                <span class="category-page-card__title">
-                    ${category.name}
-                </span>
+            <div class="category-page-card__content">
 
-                <span class="category-page-card__description">
+                <h2 class="category-page-card__title">
+                    ${category.title}
+                </h2>
+
+                <p class="category-page-card__description">
                     ${category.description}
-                </span>
+                </p>
 
-            </span>
+            </div>
+
 
             <span
                 class="category-page-card__arrow"
@@ -136,61 +143,66 @@ function renderCategories() {
    Search
 ========================================================= */
 
-function setupSearch() {
+function initializeSearch() {
 
-    const form =
-        document.getElementById("categories-search-form");
+    const form = document.getElementById(
+        "categories-search-form"
+    );
 
-    const input =
-        document.getElementById("categories-search-input");
+    const input = document.getElementById(
+        "categories-search-input"
+    );
+
 
     if (!form || !input) {
-        console.error("Categories search elements not found");
         return;
     }
 
-    form.addEventListener("submit", event => {
+
+    form.addEventListener("submit", function(event) {
 
         event.preventDefault();
 
+
         const query = input.value.trim();
 
+
         if (!query) {
+            input.focus();
             return;
         }
+
 
         window.location.href =
             `search.html?q=${encodeURIComponent(query)}`;
 
     });
+
 }
 
 
 /* =========================================================
-   Initialize Page
+   Application
 ========================================================= */
 
-function initCategoriesPage() {
-
-    console.log("Categories page JS loaded");
+function initializeCategoriesPage() {
 
     renderHeader();
+
+    renderCategoriesPage();
+
+    initializeSearch();
+
     renderFooter();
 
-    renderCategories();
-    setupSearch();
 }
 
 
-if (document.readyState === "loading") {
+/* =========================================================
+   DOM Ready
+========================================================= */
 
-    document.addEventListener(
-        "DOMContentLoaded",
-        initCategoriesPage
-    );
-
-} else {
-
-    initCategoriesPage();
-
-}
+document.addEventListener(
+    "DOMContentLoaded",
+    initializeCategoriesPage
+);
