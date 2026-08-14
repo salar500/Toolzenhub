@@ -1,13 +1,12 @@
 /* =========================================================
    TOOLZEN HUB — GLOBAL HEADER
    SAME ON EVERY PAGE
-   ========================================================= */
+========================================================= */
 
 
 /* =========================================================
    GLOBAL RESET
-   Removes browser default 8px body margin
-   ========================================================= */
+========================================================= */
 
 html,
 body {
@@ -19,7 +18,7 @@ body {
 
 /* =========================================================
    GLOBAL HEADER
-   ========================================================= */
+========================================================= */
 
 .site-header {
     position: sticky;
@@ -49,9 +48,9 @@ body {
 
 /* =========================================================
    NAVBAR
-   BRAND = FAR LEFT
-   NAVIGATION = FAR RIGHT
-   ========================================================= */
+   BRAND LEFT
+   NAVIGATION RIGHT
+========================================================= */
 
 .navbar {
     width: 100%;
@@ -65,14 +64,13 @@ body {
     display: flex;
     align-items: center;
 
-    /* Brand stays left, menu pushed right */
     justify-content: flex-start;
 }
 
 
 /* =========================================================
    BRAND
-   ========================================================= */
+========================================================= */
 
 .navbar__brand {
     display: inline-flex;
@@ -97,7 +95,7 @@ body {
 
 /* =========================================================
    BRAND LOGO
-   ========================================================= */
+========================================================= */
 
 .brand-logo {
     width: 42px;
@@ -129,7 +127,7 @@ body {
 
 /* =========================================================
    BRAND TEXT
-   ========================================================= */
+========================================================= */
 
 .brand-text {
     display: flex;
@@ -181,9 +179,8 @@ body {
 
 
 /* =========================================================
-   NAVIGATION
-   BIG FLEXIBLE SPACE IS CREATED HERE
-   ========================================================= */
+   NAVIGATION WRAPPER
+========================================================= */
 
 .navbar__menu {
     display: flex;
@@ -202,7 +199,7 @@ body {
 
 /* =========================================================
    NAVIGATION LIST
-   ========================================================= */
+========================================================= */
 
 .navbar__menu ul {
     display: flex;
@@ -222,7 +219,7 @@ body {
 
 /* =========================================================
    NAVIGATION ITEMS
-   ========================================================= */
+========================================================= */
 
 .navbar__menu li {
     display: flex;
@@ -235,7 +232,7 @@ body {
 
 /* =========================================================
    NAVIGATION LINKS
-   ========================================================= */
+========================================================= */
 
 .navbar__menu a {
     position: relative;
@@ -274,7 +271,7 @@ body {
 
 /* =========================================================
    VISITED
-   ========================================================= */
+========================================================= */
 
 .navbar__menu a:visited {
     color: #344054;
@@ -283,7 +280,7 @@ body {
 
 /* =========================================================
    HOVER
-   ========================================================= */
+========================================================= */
 
 .navbar__menu a:hover {
     color: #0b9f58;
@@ -292,7 +289,7 @@ body {
 
 /* =========================================================
    CURRENT PAGE
-   ========================================================= */
+========================================================= */
 
 .navbar__menu a.active,
 .navbar__menu a[aria-current="page"] {
@@ -302,7 +299,7 @@ body {
 
 /* =========================================================
    CURRENT PAGE UNDERLINE
-   ========================================================= */
+========================================================= */
 
 .navbar__menu a.active::after,
 .navbar__menu a[aria-current="page"]::after {
@@ -325,8 +322,7 @@ body {
 
 /* =========================================================
    HEADER ACTIONS
-   SMALL GAP BETWEEN ABOUT AND HAMBURGER
-   ========================================================= */
+========================================================= */
 
 .navbar__actions {
     display: flex;
@@ -341,7 +337,7 @@ body {
 
 /* =========================================================
    HAMBURGER
-   ========================================================= */
+========================================================= */
 
 .menu-toggle {
     width: 40px;
@@ -384,7 +380,7 @@ body {
 
 /* =========================================================
    HAMBURGER LINES
-   ========================================================= */
+========================================================= */
 
 .menu-toggle span {
     display: block;
@@ -403,7 +399,7 @@ body {
 
 /* =========================================================
    DESKTOP
-   ========================================================= */
+========================================================= */
 
 @media (min-width: 901px) {
 
@@ -425,6 +421,7 @@ body {
 
         display: flex !important;
         align-items: center !important;
+
         justify-content: flex-start !important;
     }
 
@@ -471,7 +468,10 @@ body {
         margin: 0 !important;
         padding: 0 !important;
 
-        font-family: Georgia, "Times New Roman", serif !important;
+        font-family:
+            Georgia,
+            "Times New Roman",
+            serif !important;
     }
 
 
@@ -496,7 +496,7 @@ body {
 
 /* =========================================================
    MOBILE / TABLET
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 900px) {
 
@@ -539,7 +539,7 @@ body {
 
 /* =========================================================
    SMALL MOBILE
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 600px) {
 
@@ -579,66 +579,75 @@ body {
 
 
 /* =========================================================
-   GLOBAL HEADER — FORCE CONSISTENT NAVIGATION GAP
-   Applies to Home, Categories, Articles, About, etc.
-   ========================================================= */
+   DESKTOP NAVIGATION — FINAL CONSISTENCY
+   IMPORTANT:
+   This is intentionally inside desktop media query
+   so it NEVER overrides mobile menu hiding.
+========================================================= */
 
-.site-header .navbar__menu {
-    display: flex !important;
-    align-items: center !important;
+@media (min-width: 901px) {
 
-    margin-left: auto !important;
-    margin-right: 0 !important;
+    .site-header .navbar__menu {
+        display: flex !important;
+        align-items: center !important;
 
-    padding: 0 !important;
-}
+        margin-left: auto !important;
+        margin-right: 0 !important;
 
-.site-header .navbar__menu ul {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-
-    gap: 20px !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    list-style: none !important;
-}
-
-.site-header .navbar__menu li {
-    display: flex !important;
-    align-items: center !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-.site-header .navbar__menu li + li {
-    margin-left: 0 !important;
-}
-
-.site-header .navbar__menu a {
-    display: inline-flex !important;
-    align-items: center !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    width: auto !important;
-
-    white-space: nowrap !important;
-}
+        padding: 0 !important;
+    }
 
 
-/* About → Hamburger */
+    .site-header .navbar__menu ul {
+        display: flex !important;
 
-.site-header .navbar__actions {
-    display: flex !important;
-    align-items: center !important;
+        flex-direction: row !important;
 
-    margin-left: 18px !important;
-    margin-right: 0 !important;
+        align-items: center !important;
 
-    padding: 0 !important;
+        gap: 20px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        list-style: none !important;
+    }
+
+
+    .site-header .navbar__menu li {
+        display: flex !important;
+        align-items: center !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+
+    .site-header .navbar__menu li + li {
+        margin-left: 0 !important;
+    }
+
+
+    .site-header .navbar__menu a {
+        display: inline-flex !important;
+        align-items: center !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        width: auto !important;
+
+        white-space: nowrap !important;
+    }
+
+
+    .site-header .navbar__actions {
+        display: flex !important;
+        align-items: center !important;
+
+        margin-left: 18px !important;
+        margin-right: 0 !important;
+
+        padding: 0 !important;
+    }
 }
