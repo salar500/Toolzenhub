@@ -17,71 +17,209 @@ import {
 
 
 /* =========================================================
-   RENDER
+   MAIN RENDER
 ========================================================= */
 
 export function render() {
 
     const app = document.querySelector("#app");
 
-    if (!app) return;
-
+    if (!app) {
+        return;
+    }
 
     app.innerHTML = `
 
-        <section class="loan-calculator">
+        <div class="calculator-page">
 
-            <div class="loan-calculator__intro">
+            <!-- =========================================
+                 BREADCRUMB
+            ========================================== -->
 
-                <span class="loan-calculator__eyebrow">
-                    Finance Tool
-                </span>
+            <div class="calculator-breadcrumb">
 
-                <h1 class="loan-calculator__title">
+                <a href="/Toolzenhub/">
+                    Home
+                </a>
+
+                <span>›</span>
+
+                <a href="/Toolzenhub/loans/">
+                    Loans
+                </a>
+
+                <span>›</span>
+
+                <strong>
                     Loan Comparison Calculator
-                </h1>
-
-                <p class="loan-calculator__description">
-                    Compare two loans by EMI, interest rate,
-                    total interest and total repayment.
-                </p>
+                </strong>
 
             </div>
 
 
-            <div class="loan-calculator__grid">
+            <!-- =========================================
+                 PAGE INTRO
+            ========================================== -->
 
-                ${createLoanCard("a", "Loan A", "Option A", 8.5)}
+            <section class="calculator-intro">
 
-                ${createLoanCard("b", "Loan B", "Option B", 9)}
+                <div>
 
-            </div>
+                    <span class="calculator-eyebrow">
+                        Finance Tool
+                    </span>
 
+                    <h1>
+                        Loan Comparison Calculator
+                    </h1>
 
-            <button
-                id="compare-loans"
-                class="loan-compare-button"
-                type="button"
-            >
-                Compare Loans
-            </button>
-
-
-            <div class="loan-result">
-
-                <h2 class="loan-result__title">
-                    Loan Comparison
-                </h2>
-
-                <div id="comparison-result">
-
-                    Enter your loan details and compare.
+                    <p>
+                        Compare two loans by EMI, interest rate,
+                        total interest and total repayment.
+                    </p>
 
                 </div>
 
+                <div class="calculator-trust-card">
+
+                    <div class="calculator-trust-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            100% Free to Use
+                        </strong>
+
+                        <span>
+                            No sign-up required • Instant results
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================================
+                 CALCULATOR
+            ========================================== -->
+
+            <section class="loan-comparison-tool">
+
+                <div class="loan-comparison-grid">
+
+                    ${createLoanCard(
+                        "a",
+                        "Loan A",
+                        "Option A",
+                        8.5
+                    )}
+
+                    <div class="loan-vs">
+                        VS
+                    </div>
+
+                    ${createLoanCard(
+                        "b",
+                        "Loan B",
+                        "Option B",
+                        9
+                    )}
+
+                </div>
+
+
+                <div class="loan-actions">
+
+                    <button
+                        id="compare-loans"
+                        class="loan-primary-button"
+                        type="button"
+                    >
+                        Compare Loans
+                    </button>
+
+                    <button
+                        id="reset-loans"
+                        class="loan-reset-button"
+                        type="button"
+                    >
+                        ↻ Reset
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================================
+                 RESULTS
+            ========================================== -->
+
+            <section
+                id="comparison-result"
+                class="loan-results"
+            ></section>
+
+
+            <!-- =========================================
+                 HOW TO USE
+            ========================================== -->
+
+            ${renderHowToUse()}
+
+
+            <!-- =========================================
+                 WHY COMPARE
+            ========================================== -->
+
+            ${renderWhyCompare()}
+
+
+            <!-- =========================================
+                 HOW IT WORKS
+            ========================================== -->
+
+            ${renderHowItWorks()}
+
+
+            <!-- =========================================
+                 EXAMPLE
+            ========================================== -->
+
+            ${renderExample()}
+
+
+            <!-- =========================================
+                 CONSIDERATIONS + FAQ
+            ========================================== -->
+
+            <div class="loan-info-grid">
+
+                ${renderThingsToConsider()}
+
+                ${renderFAQ()}
+
             </div>
 
-        </section>
+
+            <!-- =========================================
+                 RELATED CALCULATORS
+            ========================================== -->
+
+            ${renderRelatedCalculators()}
+
+
+            <!-- =========================================
+                 RELATED ARTICLES
+            ========================================== -->
+
+            ${renderRelatedArticles()}
+
+        </div>
 
     `;
 
@@ -93,6 +231,14 @@ export function render() {
         ?.addEventListener(
             "click",
             compareLoans
+        );
+
+
+    document
+        .querySelector("#reset-loans")
+        ?.addEventListener(
+            "click",
+            resetLoans
         );
 
 
@@ -114,20 +260,26 @@ function createLoanCard(
 
     return `
 
-        <div class="loan-card">
+        <article class="loan-card">
 
-            <div class="loan-card__header">
+            <div class="loan-card-header">
 
-                <h2 class="loan-card__title">
-                    ${title}
-                </h2>
+                <div>
 
-                <span class="loan-card__badge">
-                    ${badge}
-                </span>
+                    <h2>
+                        ${title}
+                    </h2>
+
+                    <span class="loan-badge">
+                        ${badge}
+                    </span>
+
+                </div>
 
             </div>
 
+
+            <!-- Loan Amount -->
 
             <div class="loan-field">
 
@@ -135,7 +287,7 @@ function createLoanCard(
                     Loan Amount
                 </label>
 
-                <div class="loan-amount-row">
+                <div class="loan-input-row">
 
                     <select
                         id="${prefix}-amount"
@@ -144,7 +296,6 @@ function createLoanCard(
                         ${createAmountOptions()}
 
                     </select>
-
 
                     <select
                         id="${prefix}-unit"
@@ -173,37 +324,51 @@ function createLoanCard(
 
                 </div>
 
+                <div class="loan-slider-row">
 
-                <input
-                    id="${prefix}-amount-slider"
-                    class="loan-range"
-                    type="range"
-                    min="1"
-                    max="100"
-                    value="50"
-                >
+                    <input
+                        id="${prefix}-amount-slider"
+                        type="range"
+                        min="1"
+                        max="100"
+                        value="50"
+                    >
+
+                </div>
+
+                <small id="${prefix}-amount-display">
+                    ₹50,00,000
+                </small>
 
             </div>
 
+
+            <!-- Interest Rate -->
 
             <div class="loan-field">
 
                 <label>
-                    Interest Rate (%)
+                    Interest Rate (% p.a.)
                 </label>
 
-                <input
-                    id="${prefix}-rate"
-                    type="number"
-                    min="0"
-                    max="25"
-                    step="0.01"
-                    value="${rate}"
-                >
+                <div class="loan-number-input">
+
+                    <input
+                        id="${prefix}-rate"
+                        type="number"
+                        min="0"
+                        max="25"
+                        step="0.01"
+                        value="${rate}"
+                    >
+
+                    <span>%</span>
+
+                </div>
 
                 <input
                     id="${prefix}-rate-slider"
-                    class="loan-range"
+                    class="loan-slider"
                     type="range"
                     min="0"
                     max="25"
@@ -211,8 +376,17 @@ function createLoanCard(
                     value="${rate}"
                 >
 
+                <div class="loan-range-labels">
+
+                    <span>0</span>
+                    <span>25</span>
+
+                </div>
+
             </div>
 
+
+            <!-- Tenure -->
 
             <div class="loan-field">
 
@@ -222,25 +396,32 @@ function createLoanCard(
 
                 <input
                     id="${prefix}-years"
+                    class="loan-years-input"
                     type="number"
                     min="1"
                     max="100"
-                    step="1"
                     value="20"
                 >
 
                 <input
                     id="${prefix}-years-slider"
-                    class="loan-range"
+                    class="loan-slider"
                     type="range"
                     min="1"
                     max="100"
                     value="20"
                 >
 
+                <div class="loan-range-labels">
+
+                    <span>1</span>
+                    <span>100</span>
+
+                </div>
+
             </div>
 
-        </div>
+        </article>
 
     `;
 
@@ -278,8 +459,7 @@ function createAmountOptions() {
    INPUT INITIALIZATION
 ========================================================= */
 
-
-            function initializeLoanInputs() {
+function initializeLoanInputs() {
 
     ["a", "b"].forEach(prefix => {
 
@@ -319,9 +499,7 @@ function createAmountOptions() {
             );
 
 
-        /* ================================================
-           Amount
-        ================================================ */
+        /* Amount */
 
         amountSlider.addEventListener(
             "input",
@@ -329,6 +507,8 @@ function createAmountOptions() {
 
                 amount.value =
                     amountSlider.value;
+
+                updateAmountDisplay(prefix);
 
                 compareLoans();
 
@@ -343,6 +523,8 @@ function createAmountOptions() {
                 amountSlider.value =
                     amount.value;
 
+                updateAmountDisplay(prefix);
+
                 compareLoans();
 
             }
@@ -351,13 +533,17 @@ function createAmountOptions() {
 
         unit.addEventListener(
             "change",
-            compareLoans
+            () => {
+
+                updateAmountDisplay(prefix);
+
+                compareLoans();
+
+            }
         );
 
 
-        /* ================================================
-           Interest Rate
-        ================================================ */
+        /* Interest */
 
         rateSlider.addEventListener(
             "input",
@@ -385,9 +571,7 @@ function createAmountOptions() {
         );
 
 
-        /* ================================================
-           Tenure
-        ================================================ */
+        /* Tenure */
 
         yearsSlider.addEventListener(
             "input",
@@ -414,10 +598,47 @@ function createAmountOptions() {
             }
         );
 
+
+        updateAmountDisplay(prefix);
+
     });
 
-            }
+}
 
+
+/* =========================================================
+   AMOUNT DISPLAY
+========================================================= */
+
+function updateAmountDisplay(prefix) {
+
+    const amount =
+        Number(
+            document.querySelector(
+                `#${prefix}-amount`
+            ).value
+        );
+
+    const unit =
+        Number(
+            document.querySelector(
+                `#${prefix}-unit`
+            ).value
+        );
+
+    const display =
+        document.querySelector(
+            `#${prefix}-amount-display`
+        );
+
+    if (!display) {
+        return;
+    }
+
+    display.textContent =
+        formatINR(amount * unit);
+
+}
 
 
 /* =========================================================
@@ -457,8 +678,7 @@ function getLoanData(prefix) {
 
     return {
 
-        principal:
-            amount * unit,
+        principal: amount * unit,
 
         rate,
 
@@ -480,34 +700,6 @@ function compareLoans() {
 
     const loanB =
         getLoanData("b");
-
-
-    const output =
-        document.querySelector(
-            "#comparison-result"
-        );
-
-
-    if (
-        loanA.principal <= 0 ||
-        loanB.principal <= 0 ||
-        loanA.rate < 0 ||
-        loanB.rate < 0 ||
-        loanA.years <= 0 ||
-        loanB.years <= 0
-    ) {
-
-        output.innerHTML = `
-
-            <div class="loan-winner-box">
-                Please enter valid loan details.
-            </div>
-
-        `;
-
-        return;
-
-    }
 
 
     const emiA =
@@ -569,203 +761,259 @@ function compareLoans() {
         );
 
 
-    output.innerHTML = `
+    const result =
+        document.querySelector(
+            "#comparison-result"
+        );
 
-        <div class="loan-result__table-wrap">
 
-            <table>
+    result.innerHTML = `
 
-                <thead>
+        <div class="loan-summary-grid">
 
-                    <tr>
 
-                        <th>
-                            Metric
-                        </th>
+            <!-- Winner -->
 
-                        <th>
+            <div class="loan-summary-card loan-summary-winner">
+
+                <div class="loan-summary-icon">
+                    🏆
+                </div>
+
+                <span>
+                    Lower Interest Cost
+                </span>
+
+                <strong>
+                    ${winner}
+                </strong>
+
+                <small>
+                    Saves ${formatINR(savings)} in interest
+                </small>
+
+            </div>
+
+
+            <!-- EMI -->
+
+            <div class="loan-summary-card">
+
+                <span>
+                    EMI (Monthly)
+                </span>
+
+                <div class="loan-summary-values">
+
+                    <div>
+
+                        <small>
                             Loan A
-                        </th>
+                        </small>
 
-                        <th>
-                            Loan B
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-                    <tr>
-
-                        <td>
-                            EMI
-                        </td>
-
-                        <td class="${
-                            emiA < emiB
-                                ? "loan-winner"
-                                : ""
-                        }">
-
+                        <strong>
                             ${formatINR(emiA)}
+                        </strong>
 
-                        </td>
+                    </div>
 
-                        <td class="${
-                            emiB < emiA
-                                ? "loan-winner"
-                                : ""
-                        }">
+                    <div>
 
+                        <small>
+                            Loan B
+                        </small>
+
+                        <strong>
                             ${formatINR(emiB)}
+                        </strong>
 
-                        </td>
+                    </div>
 
-                    </tr>
+                </div>
+
+            </div>
 
 
-                    <tr>
+            <!-- Interest -->
 
-                        <td>
-                            Total Interest
-                        </td>
+            <div class="loan-summary-card">
 
-                        <td class="${
-                            interestA < interestB
-                                ? "loan-winner"
-                                : ""
-                        }">
+                <span>
+                    Total Interest
+                </span>
 
+                <div class="loan-summary-values">
+
+                    <div>
+
+                        <small>
+                            Loan A
+                        </small>
+
+                        <strong>
                             ${formatINR(interestA)}
+                        </strong>
 
-                        </td>
+                    </div>
 
-                        <td class="${
-                            interestB < interestA
-                                ? "loan-winner"
-                                : ""
-                        }">
+                    <div>
 
+                        <small>
+                            Loan B
+                        </small>
+
+                        <strong>
                             ${formatINR(interestB)}
+                        </strong>
 
-                        </td>
+                    </div>
 
-                    </tr>
+                </div>
+
+            </div>
 
 
-                    <tr>
+            <!-- Repayment -->
 
-                        <td>
-                            Total Repayment
-                        </td>
+            <div class="loan-summary-card">
 
-                        <td>
+                <span>
+                    Total Repayment
+                </span>
+
+                <div class="loan-summary-values">
+
+                    <div>
+
+                        <small>
+                            Loan A
+                        </small>
+
+                        <strong>
                             ${formatINR(repaymentA)}
-                        </td>
+                        </strong>
 
-                        <td>
+                    </div>
+
+                    <div>
+
+                        <small>
+                            Loan B
+                        </small>
+
+                        <strong>
                             ${formatINR(repaymentB)}
-                        </td>
+                        </strong>
 
-                    </tr>
+                    </div>
 
+                </div>
 
-                    <tr>
-
-                        <td>
-                            Interest Rate
-                        </td>
-
-                        <td>
-                            ${formatPercent(loanA.rate)}
-                        </td>
-
-                        <td>
-                            ${formatPercent(loanB.rate)}
-                        </td>
-
-                    </tr>
+            </div>
 
 
-                    <tr>
+            <!-- Difference -->
 
-                        <td>
-                            Tenure
-                        </td>
+            <div class="loan-summary-card">
 
-                        <td>
-                            ${loanA.years} years
-                        </td>
+                <span>
+                    Interest Difference
+                </span>
 
-                        <td>
-                            ${loanB.years} years
-                        </td>
+                <strong class="loan-saving-value">
+                    ${formatINR(savings)}
+                </strong>
 
-                    </tr>
+                <small>
+                    Potential interest saving
+                </small>
 
-                </tbody>
-
-            </table>
+            </div>
 
         </div>
 
 
-        <div class="loan-winner-box">
+        <!-- =========================================
+             AMORTIZATION
+        ========================================== -->
 
-            <strong>
-                🏆 Lower Interest Cost:
-            </strong>
+        <div class="loan-amortization-grid">
 
-            ${winner}
+            <div class="loan-content-card">
 
-            <br><br>
+                <h3>
+                    First 12 Months — Loan A
+                </h3>
 
-            Interest Difference:
+                ${renderAmortization(
+                    calculateAmortization(
+                        loanA.principal,
+                        loanA.rate,
+                        loanA.years
+                    )
+                )}
 
-            <strong>
-                ${formatINR(savings)}
-            </strong>
-
-        </div>
-
-
-        <div class="loan-result__table-wrap">
-
-            <h3>
-                First 12 Months — Loan A
-            </h3>
-
-            ${renderAmortization(
-                calculateAmortization(
-                    loanA.principal,
-                    loanA.rate,
-                    loanA.years
-                )
-            )}
-
-        </div>
+            </div>
 
 
-        <div class="loan-result__table-wrap">
+            <div class="loan-content-card">
 
-            <h3>
-                First 12 Months — Loan B
-            </h3>
+                <h3>
+                    First 12 Months — Loan B
+                </h3>
 
-            ${renderAmortization(
-                calculateAmortization(
-                    loanB.principal,
-                    loanB.rate,
-                    loanB.years
-                )
-            )}
+                ${renderAmortization(
+
+                   calculateAmortization(
+                        loanB.principal,
+                        loanB.rate,
+                        loanB.years
+                    )
+                )}
+
+            </div>
 
         </div>
+
+        <p class="loan-disclaimer">
+            Figures are approximate and for illustration purposes.
+            Actual loan costs may vary depending on lender terms,
+            fees, taxes and other charges.
+        </p>
 
     `;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetLoans() {
+
+    document.querySelector("#a-amount").value = 50;
+    document.querySelector("#a-unit").value = 100000;
+    document.querySelector("#a-rate").value = 8.5;
+    document.querySelector("#a-rate-slider").value = 8.5;
+    document.querySelector("#a-years").value = 20;
+    document.querySelector("#a-years-slider").value = 20;
+    document.querySelector("#a-amount-slider").value = 50;
+
+
+    document.querySelector("#b-amount").value = 50;
+    document.querySelector("#b-unit").value = 100000;
+    document.querySelector("#b-rate").value = 9;
+    document.querySelector("#b-rate-slider").value = 9;
+    document.querySelector("#b-years").value = 20;
+    document.querySelector("#b-years-slider").value = 20;
+    document.querySelector("#b-amount-slider").value = 50;
+
+
+    updateAmountDisplay("a");
+    updateAmountDisplay("b");
+
+    compareLoans();
 
 }
 
@@ -778,55 +1026,600 @@ function renderAmortization(schedule) {
 
     return `
 
-        <table>
+        <div class="loan-table-scroll">
 
-            <thead>
+            <table class="loan-amortization-table">
 
-                <tr>
+                <thead>
 
-                    <th>Month</th>
-                    <th>Principal</th>
-                    <th>Interest</th>
-                    <th>Balance</th>
+                    <tr>
 
-                </tr>
+                        <th>Month</th>
+                        <th>Principal</th>
+                        <th>Interest</th>
+                        <th>Balance</th>
 
-            </thead>
+                    </tr>
 
+                </thead>
 
-            <tbody>
+                <tbody>
 
-                ${schedule
-                    .slice(0, 12)
-                    .map(row => `
+                    ${schedule
+                        .slice(0, 12)
+                        .map(row => `
 
-                        <tr>
+                            <tr>
 
-                            <td>
-                                ${row.month}
-                            </td>
+                                <td>
+                                    ${row.month}
+                                </td>
 
-                            <td>
-                                ${formatINR(row.principal)}
-                            </td>
+                                <td>
+                                    ${formatINR(row.principal)}
+                                </td>
 
-                            <td>
-                                ${formatINR(row.interest)}
-                            </td>
+                                <td>
+                                    ${formatINR(row.interest)}
+                                </td>
 
-                            <td>
-                                ${formatINR(row.balance)}
-                            </td>
+                                <td>
+                                    ${formatINR(row.balance)}
+                                </td>
 
-                        </tr>
+                            </tr>
 
-                    `)
-                    .join("")}
+                        `)
+                        .join("")}
 
-            </tbody>
+                </tbody>
 
-        </table>
+            </table>
+
+        </div>
+
+        <button
+            type="button"
+            class="loan-view-link"
+        >
+            View Full Amortization Schedule →
+        </button>
 
     `;
 
 }
+
+
+/* =========================================================
+   HOW TO USE
+========================================================= */
+
+function renderHowToUse() {
+
+    return `
+
+        <section class="loan-info-card">
+
+            <div class="loan-info-icon">
+                🧮
+            </div>
+
+            <div>
+
+                <h2>
+                    How to Use This Calculator
+                </h2>
+
+                <ol>
+
+                    <li>
+                        Enter the loan details for Loan A.
+                    </li>
+
+                    <li>
+                        Enter the loan details for Loan B.
+                    </li>
+
+                    <li>
+                        Click <strong>Compare Loans</strong>.
+                    </li>
+
+                    <li>
+                        Review EMI, interest and repayment
+                        before choosing an option.
+                    </li>
+
+                </ol>
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+   WHY COMPARE
+========================================================= */
+
+function renderWhyCompare() {
+
+    return `
+
+        <section class="loan-info-card">
+
+            <div class="loan-info-icon">
+                ⚖️
+            </div>
+
+            <div>
+
+                <h2>
+                    Why Compare Loans?
+                </h2>
+
+                <p>
+                    Two loans can have similar EMIs but very
+                    different total costs. This calculator helps
+                    you compare the important numbers side by side.
+                </p>
+
+                <div class="loan-check-list">
+
+                    <span>✓ Monthly EMI</span>
+                    <span>✓ Interest Rate</span>
+                    <span>✓ Total Interest</span>
+                    <span>✓ Total Repayment</span>
+                    <span>✓ Loan Tenure</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+   HOW IT WORKS
+========================================================= */
+
+function renderHowItWorks() {
+
+    return `
+
+        <section class="loan-info-card">
+
+            <div class="loan-info-icon">
+                🧮
+            </div>
+
+            <div>
+
+                <h2>
+                    How Does Loan Comparison Work?
+                </h2>
+
+                <p>
+                    We calculate the EMI for each loan using the
+                    loan amount, annual interest rate and tenure.
+                </p>
+
+                <ul>
+
+                    <li>
+                        Total Repayment = EMI × Number of Payments
+                    </li>
+
+                    <li>
+                        Total Interest = Total Repayment − Principal
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+   EXAMPLE
+========================================================= */
+
+function renderExample() {
+
+    return `
+
+        <section class="loan-info-card loan-example-card">
+
+            <div class="loan-info-icon">
+                ₹
+            </div>
+
+            <div>
+
+                <h2>
+                    Example
+                </h2>
+
+                <p>
+                    Suppose you compare two ₹50 lakh loans
+                    for 20 years.
+                </p>
+
+                <div class="loan-example-grid">
+
+                    <div>
+                        <strong>Loan A</strong>
+                        <span>8.5%</span>
+                    </div>
+
+                    <div>
+                        <strong>Loan B</strong>
+                        <span>9%</span>
+                    </div>
+
+                </div>
+
+                <p>
+                    If Loan A has the lower total interest,
+                    it may be the cheaper option overall.
+                </p>
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+   THINGS TO CONSIDER
+========================================================= */
+
+function renderThingsToConsider() {
+
+    return `
+
+        <section class="loan-content-card">
+
+            <h2>
+                💡 Things to Consider
+            </h2>
+
+            <ul class="loan-consider-list">
+
+                <li>
+                    Don't compare using EMI alone.
+                </li>
+
+                <li>
+                    Check total interest and repayment.
+                </li>
+
+                <li>
+                    Consider processing fees and other charges.
+                </li>
+
+                <li>
+                    Check prepayment and foreclosure charges.
+                </li>
+
+                <li>
+                    Understand fixed vs floating interest rates.
+                </li>
+
+                <li>
+                    Choose a tenure that fits your financial goals.
+                </li>
+
+            </ul>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+function renderFAQ() {
+
+    return `
+
+        <section class="loan-content-card">
+
+            <h2>
+                ❓ FAQs
+            </h2>
+
+            <details>
+                <summary>
+                    What is a loan comparison calculator?
+                </summary>
+
+                <p>
+                    It compares two loans using EMI, interest,
+                    repayment and tenure.
+                </p>
+
+            </details>
+
+
+            <details>
+                <summary>
+                    Is a lower EMI always better?
+                </summary>
+
+                <p>
+                    No. A lower EMI can result from a longer
+                    tenure and may lead to higher total interest.
+                </p>
+
+            </details>
+
+
+            <details>
+                <summary>
+                    Should I compare interest rate or EMI?
+                </summary>
+
+                <p>
+                    Compare both, along with total interest,
+                    repayment and fees.
+                </p>
+
+            </details>
+
+
+            <details>
+                <summary>
+                    Can I compare loans with different tenures?
+                </summary>
+
+                <p>
+                    Yes. The calculator can compare different
+                    interest rates and loan periods.
+                </p>
+
+            </details>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+   RELATED CALCULATORS
+========================================================= */
+
+function renderRelatedCalculators() {
+
+    const calculators = [
+
+        {
+            icon: "▦",
+            title: "EMI Calculator",
+            description: "Calculate your monthly loan EMI.",
+            href: "/Toolzenhub/calculators/emi/"
+        },
+
+        {
+            icon: "⌂",
+            title: "Home Loan Calculator",
+            description: "Calculate home loan EMI and interest.",
+            href: "/Toolzenhub/calculators/home-loan/"
+        },
+
+        {
+            icon: "♙",
+            title: "Personal Loan Calculator",
+            description: "Calculate personal loan payments.",
+            href: "/Toolzenhub/calculators/personal-loan/"
+        },
+
+        {
+            icon: "▤",
+            title: "Loan Eligibility Calculator",
+            description: "Check how much loan you may qualify for.",
+            href: "/Toolzenhub/calculators/loan-eligibility/"
+        },
+
+        {
+            icon: "₹",
+            title: "Prepayment Calculator",
+            description: "Estimate savings from prepayment.",
+            href: "/Toolzenhub/calculators/prepayment/"
+        },
+
+        {
+            icon: "%",
+            title: "Interest Calculator",
+            description: "Calculate simple and compound interest.",
+            href: "/Toolzenhub/calculators/interest/"
+        }
+
+    ];
+
+
+    return `
+
+        <section class="loan-related-section">
+
+            <div class="loan-section-heading">
+
+                <h2>
+                    Related Calculators
+                </h2>
+
+                <a href="/Toolzenhub/calculators/">
+                    View all →
+                </a>
+
+            </div>
+
+
+            <div class="loan-related-grid">
+
+                ${calculators.map(item => `
+
+                    <a
+                        href="${item.href}"
+                        class="loan-related-card"
+                    >
+
+                        <div class="loan-related-icon">
+                            ${item.icon}
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                ${item.title}
+                            </strong>
+
+                            <span>
+                                ${item.description}
+                            </span>
+
+                        </div>
+
+                    </a>
+
+                `).join("")}
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+   RELATED ARTICLES
+========================================================= */
+
+function renderRelatedArticles() {
+
+    const articles = [
+
+        {
+            title:
+                "How to Reduce Your Home Loan Interest",
+
+            description:
+                "Practical ways to reduce your overall borrowing cost."
+        },
+
+        {
+            title:
+                "EMI vs Total Interest: What Should You Compare?",
+
+            description:
+                "Why EMI alone doesn't tell the complete story."
+        },
+
+        {
+            title:
+                "Fixed vs Floating Interest Rates",
+
+            description:
+                "Understand the difference before choosing a loan."
+        },
+
+        {
+            title:
+                "How Loan Tenure Affects Total Interest",
+
+            description:
+                "See why a longer tenure can increase borrowing cost."
+        },
+
+        {
+            title:
+                "What Is Loan Prepayment?",
+
+            description:
+                "Understand how prepayment can reduce interest."
+        },
+
+        {
+            title:
+                "How to Choose the Right Loan Tenure",
+
+            description:
+                "Balance monthly affordability with total cost."
+        }
+
+    ];
+
+
+    return `
+
+        <section class="loan-related-section">
+
+            <div class="loan-section-heading">
+
+                <h2>
+                    Related Articles
+                </h2>
+
+                <a href="/Toolzenhub/articles/">
+                    View all →
+                </a>
+
+            </div>
+
+
+            <div class="loan-articles-grid">
+
+                ${articles.map(article => `
+
+                    <article class="loan-article-card">
+
+                        <div class="loan-article-image">
+                            Finance
+                        </div>
+
+                        <div class="loan-article-content">
+
+                            <h3>
+                                ${article.title}
+                            </h3>
+
+                            <p>
+                                ${article.description}
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                `).join("")}
+
+            </div>
+
+        </section>
+
+    `;
+
+       }
+         
