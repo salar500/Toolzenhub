@@ -20,7 +20,7 @@ import {
    RENDER
 ========================================================= */
 
-export function renderLoanComparison() {
+export function render() {
 
     const app = document.querySelector("#app");
 
