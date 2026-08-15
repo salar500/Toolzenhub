@@ -89,6 +89,15 @@ export function calculateTotalInterest(
     years
 ) {
 
+    if (
+        principal <= 0 ||
+        years <= 0 ||
+        annualRate < 0
+    ) {
+        return 0;
+    }
+
+
     const total =
         calculateTotalRepayment(
             principal,
@@ -97,7 +106,10 @@ export function calculateTotalInterest(
         );
 
 
-    return total - principal;
+    return Math.max(
+        0,
+        total - principal
+    );
 
 }
 
