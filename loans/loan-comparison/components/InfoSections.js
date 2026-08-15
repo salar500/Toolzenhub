@@ -1,43 +1,4 @@
-/* =========================================================
-   Loan Comparison
-   Information Sections
-========================================================= */
-
-
-/* =========================================================
-   ALL INFORMATION
-========================================================= */
-
-export function renderInfoSections() {
-
-    return `
-
-        ${renderHowToUse()}
-
-        ${renderWhyCompare()}
-
-        ${renderHowItWorks()}
-
-        ${renderExample()}
-
-        <div class="loan-info-grid">
-
-            ${renderThingsToConsider()}
-
-            ${renderFAQ()}
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   HOW TO USE
-========================================================= */
-
-function renderHowToUse() {
+export function renderHowToUse() {
 
     return `
 
@@ -83,11 +44,7 @@ function renderHowToUse() {
 }
 
 
-/* =========================================================
-   WHY COMPARE
-========================================================= */
-
-function renderWhyCompare() {
+export function renderWhyCompare() {
 
     return `
 
@@ -128,11 +85,7 @@ function renderWhyCompare() {
 }
 
 
-/* =========================================================
-   HOW IT WORKS
-========================================================= */
-
-function renderHowItWorks() {
+export function renderHowItWorks() {
 
     return `
 
@@ -149,8 +102,8 @@ function renderHowItWorks() {
                 </h2>
 
                 <p>
-                    We calculate the EMI for each loan using
-                    the loan amount, annual interest rate and tenure.
+                    We calculate the EMI for each loan using the
+                    loan amount, annual interest rate and tenure.
                 </p>
 
                 <ul>
@@ -174,11 +127,7 @@ function renderHowItWorks() {
 }
 
 
-/* =========================================================
-   EXAMPLE
-========================================================= */
-
-function renderExample() {
+export function renderExample() {
 
     return `
 
@@ -202,27 +151,13 @@ function renderExample() {
                 <div class="loan-example-grid">
 
                     <div>
-
-                        <strong>
-                            Loan A
-                        </strong>
-
-                        <span>
-                            8.5%
-                        </span>
-
+                        <strong>Loan A</strong>
+                        <span>8.5%</span>
                     </div>
 
                     <div>
-
-                        <strong>
-                            Loan B
-                        </strong>
-
-                        <span>
-                            9%
-                        </span>
-
+                        <strong>Loan B</strong>
+                        <span>9%</span>
                     </div>
 
                 </div>
@@ -241,11 +176,7 @@ function renderExample() {
 }
 
 
-/* =========================================================
-   THINGS TO CONSIDER
-========================================================= */
-
-function renderThingsToConsider() {
+export function renderThingsToConsider() {
 
     return `
 
@@ -290,11 +221,7 @@ function renderThingsToConsider() {
 }
 
 
-/* =========================================================
-   FAQ
-========================================================= */
-
-function renderFAQ() {
+export function renderFAQ() {
 
     return `
 
@@ -312,8 +239,8 @@ function renderFAQ() {
                 </summary>
 
                 <p>
-                    It compares two loans using EMI,
-                    interest, repayment and tenure.
+                    It compares two loans using EMI, interest,
+                    repayment and tenure.
                 </p>
 
             </details>
