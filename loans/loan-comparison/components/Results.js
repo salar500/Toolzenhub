@@ -1,18 +1,11 @@
-/* =========================================================
-   Loan Comparison
-   Results Component
-========================================================= */
+import { formatINR } from "../../../../../assets/js/common/formatter.js";
 
 import {
-    formatINR
-} from "../../../assets/js/common/formatter.js";
+    calculateLoanComparison
+} from "../helpers/loanComparison.js";
 
 
-/* =========================================================
-   MAIN RESULTS
-========================================================= */
-
-export function renderResults(data) {
+export function compareLoans() {
 
     const result =
         document.querySelector(
@@ -23,13 +16,20 @@ export function renderResults(data) {
         return;
     }
 
+    renderResults(result);
+
+}
+
+
+export function renderResults(result) {
+
+    const data =
+        calculateLoanComparison();
+
 
     result.innerHTML = `
 
         <div class="loan-summary-grid">
-
-
-            <!-- Winner -->
 
             <div class="loan-summary-card loan-summary-winner">
 
@@ -46,89 +46,32 @@ export function renderResults(data) {
                 </strong>
 
                 <small>
-                    Saves ${formatINR(data.savings)}
-                    in interest
+                    Saves ${formatINR(data.savings)} in interest
                 </small>
 
             </div>
 
 
-            <!-- EMI -->
-
-            <div class="loan-summary-card">
-
-                <span>
-                    EMI (Monthly)
-                </span>
-
-                <div class="loan-summary-values">
-
-                    ${renderValue(
-                        "Loan A",
-                        data.emiA
-                    )}
-
-                    ${renderValue(
-                        "Loan B",
-                        data.emiB
-                    )}
-
-                </div>
-
-            </div>
+            ${renderComparisonCard(
+                "EMI (Monthly)",
+                data.emiA,
+                data.emiB
+            )}
 
 
-            <!-- Interest -->
-
-            <div class="loan-summary-card">
-
-                <span>
-                    Total Interest
-                </span>
-
-                <div class="loan-summary-values">
-
-                    ${renderValue(
-                        "Loan A",
-                        data.interestA
-                    )}
-
-                    ${renderValue(
-                        "Loan B",
-                        data.interestB
-                    )}
-
-                </div>
-
-            </div>
+            ${renderComparisonCard(
+                "Total Interest",
+                data.interestA,
+                data.interestB
+            )}
 
 
-            <!-- Repayment -->
+            ${renderComparisonCard(
+                "Total Repayment",
+                data.repaymentA,
+                data.repaymentB
+            )}
 
-            <div class="loan-summary-card">
-
-                <span>
-                    Total Repayment
-                </span>
-
-                <div class="loan-summary-values">
-
-                    ${renderValue(
-                        "Loan A",
-                        data.repaymentA
-                    )}
-
-                    ${renderValue(
-                        "Loan B",
-                        data.repaymentB
-                    )}
-
-                </div>
-
-            </div>
-
-
-            <!-- Difference -->
 
             <div class="loan-summary-card">
 
@@ -148,8 +91,6 @@ export function renderResults(data) {
 
         </div>
 
-
-        <!-- Amortization -->
 
         <div class="loan-amortization-grid">
 
@@ -182,51 +123,67 @@ export function renderResults(data) {
 
 
         <p class="loan-disclaimer">
-
-            Figures are approximate and for illustration
-            purposes. Actual loan costs may vary depending
-            on lender terms, fees, taxes and other charges.
-
+            Figures are approximate and for illustration purposes.
+            Actual loan costs may vary depending on lender terms,
+            fees, taxes and other charges.
         </p>
 
     `;
+
 }
 
 
-/* =========================================================
-   VALUE
-========================================================= */
-
-function renderValue(
-    label,
-    value
+function renderComparisonCard(
+    title,
+    valueA,
+    valueB
 ) {
 
     return `
 
-        <div>
+        <div class="loan-summary-card">
 
-            <small>
-                ${label}
-            </small>
+            <span>
+                ${title}
+            </span>
 
-            <strong>
-                ${formatINR(value)}
-            </strong>
+            <div class="loan-summary-values">
+
+                <div>
+
+                    <small>
+                        Loan A
+                    </small>
+
+                    <strong>
+                        ${formatINR(valueA)}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <small>
+                        Loan B
+                    </small>
+
+                    <strong>
+                        ${formatINR(valueB)}
+                    </strong>
+
+                </div>
+
+            </div>
 
         </div>
 
     `;
+
 }
 
 
-/* =========================================================
-   AMORTIZATION
-========================================================= */
-
-function renderAmortization(
-    schedule
-) {
+function renderAmortization(schedule) {
 
     return `
 
@@ -237,12 +194,10 @@ function renderAmortization(
                 <thead>
 
                     <tr>
-
                         <th>Month</th>
                         <th>Principal</th>
                         <th>Interest</th>
                         <th>Balance</th>
-
                     </tr>
 
                 </thead>
@@ -260,21 +215,15 @@ function renderAmortization(
                                 </td>
 
                                 <td>
-                                    ${formatINR(
-                                        row.principal
-                                    )}
+                                    ${formatINR(row.principal)}
                                 </td>
 
                                 <td>
-                                    ${formatINR(
-                                        row.interest
-                                    )}
+                                    ${formatINR(row.interest)}
                                 </td>
 
                                 <td>
-                                    ${formatINR(
-                                        row.balance
-                                    )}
+                                    ${formatINR(row.balance)}
                                 </td>
 
                             </tr>
@@ -287,6 +236,7 @@ function renderAmortization(
             </table>
 
         </div>
+
 
         <button
             type="button"
