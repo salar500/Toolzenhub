@@ -1,45 +1,40 @@
-/* =========================================================
-   ToolZen Hub
-   Loan Comparison Calculator
-========================================================= */
-
 import {
-    renderLoanCard
+    createLoanCard,
+    initializeLoanInputs,
+    resetLoanInputs
 } from "./components/LoanCard.js";
 
 import {
-    renderInfoSections
+    renderResults,
+    compareLoans
+} from "./components/Results.js";
+
+import {
+    renderHowToUse,
+    renderWhyCompare,
+    renderHowItWorks,
+    renderExample,
+    renderThingsToConsider,
+    renderFAQ
 } from "./components/InfoSections.js";
 
 import {
-    renderRelatedContent
+    renderRelatedCalculators,
+    renderRelatedArticles
 } from "./components/RelatedContent.js";
 
-import {
-    initializeLoanComparison
-} from "./helpers/loanComparison.js";
-
-
-/* =========================================================
-   RENDER
-========================================================= */
 
 export function render() {
 
-    const app =
-        document.querySelector("#app");
+    const app = document.querySelector("#app");
 
     if (!app) {
         return;
     }
 
-
     app.innerHTML = `
 
         <div class="calculator-page">
-
-
-            <!-- Breadcrumb -->
 
             <div class="calculator-breadcrumb">
 
@@ -62,8 +57,6 @@ export function render() {
             </div>
 
 
-            <!-- Intro -->
-
             <section class="calculator-intro">
 
                 <div>
@@ -82,7 +75,6 @@ export function render() {
                     </p>
 
                 </div>
-
 
                 <div class="calculator-trust-card">
 
@@ -107,26 +99,22 @@ export function render() {
             </section>
 
 
-            <!-- Calculator -->
-
             <section class="loan-comparison-tool">
 
                 <div class="loan-comparison-grid">
 
-                    ${renderLoanCard(
+                    ${createLoanCard(
                         "a",
                         "Loan A",
                         "Option A",
                         8.5
                     )}
 
-
                     <div class="loan-vs">
                         VS
                     </div>
 
-
-                    ${renderLoanCard(
+                    ${createLoanCard(
                         "b",
                         "Loan B",
                         "Option B",
@@ -146,7 +134,6 @@ export function render() {
                         Compare Loans
                     </button>
 
-
                     <button
                         id="reset-loans"
                         class="loan-reset-button"
@@ -160,30 +147,58 @@ export function render() {
             </section>
 
 
-            <!-- Results -->
-
             <section
                 id="comparison-result"
                 class="loan-results"
             ></section>
 
 
-            <!-- Information -->
+            ${renderHowToUse()}
 
-            ${renderInfoSections()}
+            ${renderWhyCompare()}
+
+            ${renderHowItWorks()}
+
+            ${renderExample()}
 
 
-            <!-- Related -->
+            <div class="loan-info-grid">
 
-            ${renderRelatedContent()}
+                ${renderThingsToConsider()}
+
+                ${renderFAQ()}
+
+            </div>
+
+
+            ${renderRelatedCalculators()}
+
+            ${renderRelatedArticles()}
 
         </div>
 
     `;
 
 
-    /* Initialize calculator */
+    initializeLoanInputs();
 
-    initializeLoanComparison();
+
+    document
+        .querySelector("#compare-loans")
+        ?.addEventListener(
+            "click",
+            compareLoans
+        );
+
+
+    document
+        .querySelector("#reset-loans")
+        ?.addEventListener(
+            "click",
+            resetLoanInputs
+        );
+
+
+    compareLoans();
 
 }
