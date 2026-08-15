@@ -3,7 +3,7 @@
    Loan Comparison Calculator
 ========================================================= */
 
-export function renderLoan() {
+export function render() {
 
     const app = document.querySelector("#app");
 
