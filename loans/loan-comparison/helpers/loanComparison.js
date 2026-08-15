@@ -3,7 +3,7 @@ import {
     calculateTotalRepayment,
     calculateTotalInterest,
     calculateAmortization
-} from "../../../assets/js/formulas/loan.js";
+} from "../../../assets/js/calculators/formulas/loan.js";
 
 
 export function getLoanData(prefix) {
