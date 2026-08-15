@@ -18,7 +18,7 @@ const loanCalculators = [
         icon: "⚖",
         title: "Loan Comparison Calculator",
         description: "Compare two loans side by side and find the best option.",
-        href: "loan-comparison.html"
+        href: "/Toolzenhub/calculators/loan-comparison/"
     },
 
     {
