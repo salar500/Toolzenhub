@@ -1,4 +1,4 @@
-import { formatINR } from "../../../../../assets/js/common/formatter.js";
+import { formatINR } from "../../../assets/js/calculators/common/formatter.js";
 
 import {
     compareLoans
