@@ -3,27 +3,77 @@
    Application Entry
 ========================================================= */
 
+import { currentPage } from "./core/router.js";
+
 import { renderHeader } from "./components/header.js";
 import { renderHero } from "./components/hero.js";
 import { renderCategories } from "./components/categories.js";
 import { renderArticles } from "./components/articles.js";
 import { renderFooter } from "./components/footer.js";
 
+import { renderCalculator }
+    from "./pages/calculator.js";
 
-function initializeApp() {
+
+/* =========================================================
+   Application
+========================================================= */
+
+async function initializeApp() {
+
+    const page = currentPage();
+
+
+    /* =====================================================
+       Global Header
+    ===================================================== */
 
     renderHeader();
 
-    renderHero();
 
-    renderCategories();
+    /* =====================================================
+       Calculator Page
+    ===================================================== */
 
-    renderArticles();
+    if (page.type === "calculator") {
+
+        await renderCalculator(
+            page.slug
+        );
+
+        renderFooter();
+
+        return;
+    }
+
+
+    /* =====================================================
+       Home Page
+    ===================================================== */
+
+    if (page.type === "home") {
+
+        renderHero();
+
+        renderCategories();
+
+        renderArticles();
+
+    }
+
+
+    /* =====================================================
+       Global Footer
+    ===================================================== */
 
     renderFooter();
 
 }
 
+
+/* =========================================================
+   DOM Ready
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
