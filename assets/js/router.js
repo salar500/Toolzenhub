@@ -5,11 +5,28 @@ export function currentPage() {
     const path = window.location.pathname;
 
     if (path === "/") {
+        return {
+            type: "home"
+        };
+    }
 
-        return "home";
+    const calculatorMatch =
+        path.match(
+            /\/calculators\/([^/]+)\/?$/
+        );
+
+    if (calculatorMatch) {
+
+        return {
+            type: "calculator",
+            slug: calculatorMatch[1]
+        };
 
     }
 
-    return path;
+    return {
+        type: "page",
+        path
+    };
 
 }
