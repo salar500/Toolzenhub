@@ -1,19 +1,41 @@
-// assets/js/core/router.js
+/* =========================================================
+   ToolZen Hub
+   Router
+========================================================= */
 
 export function currentPage() {
 
-    const path = window.location.pathname;
+    const path =
+        window.location.pathname
+            .replace(/\/+$/, "");
 
-    if (path === "/") {
+
+    /* =====================================================
+       HOME PAGE
+    ===================================================== */
+
+    if (
+        path === "" ||
+        path === "/index.html" ||
+        path.endsWith("/index.html")
+    ) {
+
         return {
             type: "home"
         };
+
     }
+
+
+    /* =====================================================
+       CALCULATOR PAGE
+    ===================================================== */
 
     const calculatorMatch =
         path.match(
-            /\/calculators\/([^/]+)\/?$/
+            /\/calculators\/([^/]+)$/
         );
+
 
     if (calculatorMatch) {
 
@@ -23,6 +45,11 @@ export function currentPage() {
         };
 
     }
+
+
+    /* =====================================================
+       OTHER PAGE
+    ===================================================== */
 
     return {
         type: "page",
