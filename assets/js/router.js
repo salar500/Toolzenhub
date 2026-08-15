@@ -5,17 +5,19 @@
 
 export function currentPage() {
 
-    const path = window.location.pathname;
+    const path =
+        window.location.pathname;
 
 
     /* =====================================================
-       HOME
+       HOME PAGE
     ===================================================== */
 
     if (
         path === "/" ||
-        path.endsWith("/index.html") ||
-        path.endsWith("/")
+        path === "/Toolzenhub/" ||
+        path === "/Toolzenhub" ||
+        path.endsWith("/index.html")
     ) {
 
         return {
@@ -26,13 +28,14 @@ export function currentPage() {
 
 
     /* =====================================================
-       CALCULATOR
+       CALCULATOR PAGE
     ===================================================== */
 
     const calculatorMatch =
         path.match(
             /\/calculators\/([^/]+)\/?$/
         );
+
 
     if (calculatorMatch) {
 
