@@ -1,52 +1,88 @@
-// assets/js/calculators/engine/calculatorEngine.js
+/* =========================================================
+   ToolZen Hub
+   Calculator Engine
+========================================================= */
 
-import { renderInputs } from "./inputRenderer.js";
-import { validateInputs } from "./validationEngine.js";
-import { executeFormula } from "./formulaExecutor.js";
-import { renderOutput } from "./outputRenderer.js";
+export function createCalculator(config = {}) {
 
-export class CalculatorEngine {
+    const {
+        calculate,
+        renderInput,
+        renderOutput,
+        validate
+    } = config;
 
-    constructor(schema) {
 
-        this.schema = schema;
+    function run(input) {
 
-        this.values = {};
+        if (typeof validate === "function") {
+
+            const validation =
+                validate(input);
+
+            if (!validation.valid) {
+                return {
+                    success: false,
+                    error: validation.error
+                };
+            }
+        }
+
+
+        if (typeof calculate !== "function") {
+
+            return {
+                success: false,
+                error: "Calculator formula is not configured."
+            };
+
+        }
+
+
+        const result =
+            calculate(input);
+
+
+        return {
+            success: true,
+            result
+        };
 
     }
 
-    init() {
 
-        renderInputs(this.schema.inputs);
+    function render(container, input) {
 
-        this.bindEvents();
-
-    }
-
-    bindEvents() {
-
-        document.addEventListener("input", (event) => {
-
-            if (!event.target.matches("[data-input]")) return;
-
-            this.values[event.target.name] = Number(event.target.value);
-
-            const validation = validateInputs(
-                this.schema.inputs,
-                this.values
+        if (
+            typeof renderInput === "function"
+        ) {
+            renderInput(
+                container,
+                input
             );
-
-            if (!validation.valid) return;
-
-            const result = executeFormula(
-                this.schema.formula,
-                this.values
-            );
-
-            renderOutput(result);
-
-        });
+        }
 
     }
+
+
+    function output(container, result) {
+
+        if (
+            typeof renderOutput === "function"
+        ) {
+            renderOutput(
+                container,
+                result
+            );
+        }
+
+    }
+
+
+    return {
+        run,
+        render,
+        output
+    };
 
 }
