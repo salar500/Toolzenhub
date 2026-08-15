@@ -278,7 +278,8 @@ function createAmountOptions() {
    INPUT INITIALIZATION
 ========================================================= */
 
-function initializeLoanInputs() {
+
+            function initializeLoanInputs() {
 
     ["a", "b"].forEach(prefix => {
 
@@ -318,7 +319,9 @@ function initializeLoanInputs() {
             );
 
 
-        /* Amount */
+        /* ================================================
+           Amount
+        ================================================ */
 
         amountSlider.addEventListener(
             "input",
@@ -335,7 +338,14 @@ function initializeLoanInputs() {
 
         amount.addEventListener(
             "change",
-            compareLoans
+            () => {
+
+                amountSlider.value =
+                    amount.value;
+
+                compareLoans();
+
+            }
         );
 
 
@@ -345,7 +355,9 @@ function initializeLoanInputs() {
         );
 
 
-        /* Rate */
+        /* ================================================
+           Interest Rate
+        ================================================ */
 
         rateSlider.addEventListener(
             "input",
@@ -373,7 +385,9 @@ function initializeLoanInputs() {
         );
 
 
-        /* Tenure */
+        /* ================================================
+           Tenure
+        ================================================ */
 
         yearsSlider.addEventListener(
             "input",
@@ -401,6 +415,8 @@ function initializeLoanInputs() {
         );
 
     });
+
+            }
 
 }
 
