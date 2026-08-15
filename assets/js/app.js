@@ -3,8 +3,7 @@
    Application Entry
 ========================================================= */
 
-import { currentPage } from "./core/router.js";
-
+import { currentPage } from "./router.js";
 import { renderHeader } from "./components/header.js";
 import { renderHero } from "./components/hero.js";
 import { renderCategories } from "./components/categories.js";
