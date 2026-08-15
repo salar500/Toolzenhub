@@ -1,8 +1,3 @@
-/* =========================================================
-   Loan Comparison
-   Logic / Events
-========================================================= */
-
 import {
     calculateEMI,
     calculateTotalRepayment,
@@ -10,288 +5,33 @@ import {
     calculateAmortization
 } from "../../../assets/js/formulas/loan.js";
 
-import {
-    formatINR
-} from "../../../assets/js/common/formatter.js";
 
-import {
-    renderResults
-} from "../components/Results.js";
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-export function initializeLoanComparison() {
-
-    ["a", "b"].forEach(
-        initializeLoanInputs
-    );
-
-    document
-        .querySelector("#compare-loans")
-        ?.addEventListener(
-            "click",
-            compareLoans
-        );
-
-    document
-        .querySelector("#reset-loans")
-        ?.addEventListener(
-            "click",
-            resetLoans
-        );
-
-    compareLoans();
-}
-
-
-/* =========================================================
-   INPUT INITIALIZATION
-========================================================= */
-
-function initializeLoanInputs(prefix) {
-
-    const amount =
-        getElement(`${prefix}-amount`);
-
-    const unit =
-        getElement(`${prefix}-unit`);
-
-    const amountSlider =
-        getElement(`${prefix}-amount-slider`);
-
-    const rate =
-        getElement(`${prefix}-rate`);
-
-    const rateSlider =
-        getElement(`${prefix}-rate-slider`);
-
-    const years =
-        getElement(`${prefix}-years`);
-
-    const yearsSlider =
-        getElement(`${prefix}-years-slider`);
-
-
-    if (
-        !amount ||
-        !unit ||
-        !amountSlider ||
-        !rate ||
-        !rateSlider ||
-        !years ||
-        !yearsSlider
-    ) {
-        return;
-    }
-
-
-    /* Amount slider */
-
-    amountSlider.addEventListener(
-        "input",
-        () => {
-
-            amount.value =
-                amountSlider.value;
-
-            updateAmountDisplay(prefix);
-
-            compareLoans();
-
-        }
-    );
-
-
-    /* Amount select */
-
-    amount.addEventListener(
-        "change",
-        () => {
-
-            amountSlider.value =
-                amount.value;
-
-            updateAmountDisplay(prefix);
-
-            compareLoans();
-
-        }
-    );
-
-
-    /* Unit */
-
-    unit.addEventListener(
-        "change",
-        () => {
-
-            updateAmountDisplay(prefix);
-
-            compareLoans();
-
-        }
-    );
-
-
-    /* Rate slider */
-
-    rateSlider.addEventListener(
-        "input",
-        () => {
-
-            rate.value =
-                rateSlider.value;
-
-            compareLoans();
-
-        }
-    );
-
-
-    /* Rate input */
-
-    rate.addEventListener(
-        "input",
-        () => {
-
-            rateSlider.value =
-                rate.value;
-
-            compareLoans();
-
-        }
-    );
-
-
-    /* Years slider */
-
-    yearsSlider.addEventListener(
-        "input",
-        () => {
-
-            years.value =
-                yearsSlider.value;
-
-            compareLoans();
-
-        }
-    );
-
-
-    /* Years input */
-
-    years.addEventListener(
-        "input",
-        () => {
-
-            yearsSlider.value =
-                years.value;
-
-            compareLoans();
-
-        }
-    );
-
-
-    updateAmountDisplay(prefix);
-}
-
-
-/* =========================================================
-   GET ELEMENT
-========================================================= */
-
-function getElement(id) {
-
-    return document.querySelector(
-        `#${id}`
-    );
-
-}
-
-
-/* =========================================================
-   AMOUNT DISPLAY
-========================================================= */
-
-function updateAmountDisplay(prefix) {
-
-    const amountElement =
-        getElement(`${prefix}-amount`);
-
-    const unitElement =
-        getElement(`${prefix}-unit`);
-
-    const display =
-        getElement(`${prefix}-amount-display`);
-
-
-    if (
-        !amountElement ||
-        !unitElement ||
-        !display
-    ) {
-        return;
-    }
-
-
-    const amount =
-        Number(amountElement.value);
-
-    const unit =
-        Number(unitElement.value);
-
-
-    display.textContent =
-        formatINR(
-            amount * unit
-        );
-
-}
-
-
-/* =========================================================
-   GET LOAN DATA
-========================================================= */
-
-function getLoanData(prefix) {
+export function getLoanData(prefix) {
 
     const amount =
         Number(
-            getElement(
-                `${prefix}-amount`
-            )?.value
+            document.querySelector(`#${prefix}-amount`).value
         );
 
     const unit =
         Number(
-            getElement(
-                `${prefix}-unit`
-            )?.value
+            document.querySelector(`#${prefix}-unit`).value
         );
 
     const rate =
         Number(
-            getElement(
-                `${prefix}-rate`
-            )?.value
+            document.querySelector(`#${prefix}-rate`).value
         );
 
     const years =
         Number(
-            getElement(
-                `${prefix}-years`
-            )?.value
+            document.querySelector(`#${prefix}-years`).value
         );
 
 
     return {
 
-        principal:
-            amount * unit,
+        principal: amount * unit,
 
         rate,
 
@@ -302,11 +42,7 @@ function getLoanData(prefix) {
 }
 
 
-/* =========================================================
-   COMPARE LOANS
-========================================================= */
-
-function compareLoans() {
+export function calculateLoanComparison() {
 
     const loanA =
         getLoanData("a");
@@ -321,6 +57,7 @@ function compareLoans() {
             loanA.rate,
             loanA.years
         );
+
 
     const emiB =
         calculateEMI(
@@ -337,6 +74,7 @@ function compareLoans() {
             loanA.years
         );
 
+
     const interestB =
         calculateTotalInterest(
             loanB.principal,
@@ -351,6 +89,7 @@ function compareLoans() {
             loanA.rate,
             loanA.years
         );
+
 
     const repaymentB =
         calculateTotalRepayment(
@@ -374,23 +113,10 @@ function compareLoans() {
         );
 
 
-    const amortizationA =
-        calculateAmortization(
-            loanA.principal,
-            loanA.rate,
-            loanA.years
-        );
+    return {
 
-
-    const amortizationB =
-        calculateAmortization(
-            loanB.principal,
-            loanB.rate,
-            loanB.years
-        );
-
-
-    renderResults({
+        loanA,
+        loanB,
 
         emiA,
         emiB,
@@ -405,74 +131,20 @@ function compareLoans() {
 
         savings,
 
-        amortizationA,
-        amortizationB
+        amortizationA:
+            calculateAmortization(
+                loanA.principal,
+                loanA.rate,
+                loanA.years
+            ),
 
-    });
+        amortizationB:
+            calculateAmortization(
+                loanB.principal,
+                loanB.rate,
+                loanB.years
+            )
 
-}
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-function resetLoans() {
-
-    setLoanDefaults(
-        "a",
-        8.5
-    );
-
-    setLoanDefaults(
-        "b",
-        9
-    );
-
-
-    updateAmountDisplay("a");
-    updateAmountDisplay("b");
-
-    compareLoans();
-
-}
-
-
-/* =========================================================
-   DEFAULT VALUES
-========================================================= */
-
-function setLoanDefaults(
-    prefix,
-    rate
-) {
-
-    getElement(
-        `${prefix}-amount`
-    ).value = 50;
-
-    getElement(
-        `${prefix}-unit`
-    ).value = 100000;
-
-    getElement(
-        `${prefix}-amount-slider`
-    ).value = 50;
-
-    getElement(
-        `${prefix}-rate`
-    ).value = rate;
-
-    getElement(
-        `${prefix}-rate-slider`
-    ).value = rate;
-
-    getElement(
-        `${prefix}-years`
-    ).value = 20;
-
-    getElement(
-        `${prefix}-years-slider`
-    ).value = 20;
+    };
 
 }
