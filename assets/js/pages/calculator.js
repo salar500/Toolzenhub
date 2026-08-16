@@ -6,7 +6,7 @@
 const calculatorRegistry = {
 
     "loan-comparison": () =>
-        import("../loans/loan-comparison/index.js")
+        import("../../../loans/loan-comparison/index.jss")
 
 };
 
