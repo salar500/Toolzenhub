@@ -28,6 +28,24 @@ export function currentPage() {
 
 
     /* =====================================================
+       ARTICLES PAGE
+    ===================================================== */
+
+    if (
+        path === "/articles.html" ||
+        path.endsWith("/articles.html") ||
+        path === "/articles/" ||
+        path.endsWith("/articles/")
+    ) {
+
+        return {
+            type: "articles"
+        };
+
+    }
+
+
+    /* =====================================================
        CALCULATOR PAGE
     ===================================================== */
 
@@ -42,44 +60,6 @@ export function currentPage() {
         return {
             type: "calculator",
             slug: calculatorMatch[1]
-        };
-
-    }
-
-
-    /* =====================================================
-       ARTICLES PAGE
-    ===================================================== */
-
-    if (
-        path === "/articles" ||
-        path === "/articles/" ||
-        path === "/Toolzenhub/articles" ||
-        path === "/Toolzenhub/articles/"
-    ) {
-
-        return {
-            type: "articles"
-        };
-
-    }
-
-
-    /* =====================================================
-       SINGLE ARTICLE PAGE
-    ===================================================== */
-
-    const articleMatch =
-        path.match(
-            /\/articles\/([^/]+)\/?$/
-        );
-
-
-    if (articleMatch) {
-
-        return {
-            type: "article",
-            slug: articleMatch[1]
         };
 
     }
