@@ -4,11 +4,21 @@
 ========================================================= */
 
 import { currentPage } from "./router.js";
-import { renderHeader } from "./components/header.js";
-import { renderHero } from "./components/hero.js";
-import { renderCategories } from "./components/categories.js";
-import { renderArticles } from "./components/articles.js";
-import { renderFooter } from "./components/footer.js";
+
+import { renderHeader }
+    from "./components/header.js";
+
+import { renderHero }
+    from "./components/hero.js";
+
+import { renderCategories }
+    from "./components/categories.js";
+
+import { renderArticles }
+    from "./components/articles.js";
+
+import { renderFooter }
+    from "./components/footer.js";
 
 import { renderCalculator }
     from "./pages/calculator.js";
@@ -31,7 +41,44 @@ async function initializeApp() {
 
 
     /* =====================================================
-       Calculator Page
+       HOME PAGE
+    ===================================================== */
+
+    if (page.type === "home") {
+
+        renderHero();
+
+        renderCategories();
+
+        renderArticles();
+
+        renderFooter();
+
+        return;
+    }
+
+
+    /* =====================================================
+       ARTICLES PAGE
+    ===================================================== */
+
+    if (page.type === "articles") {
+
+        /*
+         * articles.html already contains the complete
+         * article page HTML.
+         *
+         * We only render the global header and footer.
+         */
+
+        renderFooter();
+
+        return;
+    }
+
+
+    /* =====================================================
+       CALCULATOR PAGE
     ===================================================== */
 
     if (page.type === "calculator") {
@@ -47,52 +94,7 @@ async function initializeApp() {
 
 
     /* =====================================================
-       Articles Page
-    ===================================================== */
-
-    if (page.type === "articles") {
-
-        renderArticles();
-
-        renderFooter();
-
-        return;
-    }
-
-
-    /* =====================================================
-       Single Article Page
-    ===================================================== */
-
-    if (page.type === "article") {
-
-        renderArticles(
-            page.slug
-        );
-
-        renderFooter();
-
-        return;
-    }
-
-
-    /* =====================================================
-       Home Page
-    ===================================================== */
-
-    if (page.type === "home") {
-
-        renderHero();
-
-        renderCategories();
-
-        renderArticles();
-
-    }
-
-
-    /* =====================================================
-       Global Footer
+       OTHER PAGE
     ===================================================== */
 
     renderFooter();
@@ -101,7 +103,7 @@ async function initializeApp() {
 
 
 /* =========================================================
-   DOM Ready
+   DOM READY
 ========================================================= */
 
 document.addEventListener(
