@@ -52,7 +52,7 @@ async function initializeApp() {
 
     if (page.type === "articles") {
 
-        // Articles page will be connected here
+        renderArticles();
 
         renderFooter();
 
@@ -66,7 +66,9 @@ async function initializeApp() {
 
     if (page.type === "article") {
 
-        // Individual article will be connected here
+        renderArticles(
+            page.slug
+        );
 
         renderFooter();
 
