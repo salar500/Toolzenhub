@@ -4,27 +4,14 @@
 ========================================================= */
 
 import { currentPage } from "./router.js";
-
-import { renderHeader }
-    from "./components/header.js";
-
-import { renderHero }
-    from "./components/hero.js";
-
-import { renderCategories }
-    from "./components/categories.js";
-
-import { renderArticles }
-    from "./components/articles.js";
-
-import { renderFooter }
-    from "./components/footer.js";
+import { renderHeader } from "./components/header.js";
+import { renderHero } from "./components/hero.js";
+import { renderCategories } from "./components/categories.js";
+import { renderArticles } from "./components/articles.js";
+import { renderFooter } from "./components/footer.js";
 
 import { renderCalculator }
     from "./pages/calculator.js";
-
-import { renderArticlesPage }
-    from "./pages/articles.js";
 
 
 /* =========================================================
@@ -60,20 +47,6 @@ async function initializeApp() {
 
 
     /* =====================================================
-       Articles Page
-    ===================================================== */
-
-    if (page.type === "articles") {
-
-        renderArticlesPage();
-
-        renderFooter();
-
-        return;
-    }
-
-
-    /* =====================================================
        Home Page
     ===================================================== */
 
@@ -85,21 +58,12 @@ async function initializeApp() {
 
         renderArticles();
 
-        renderFooter();
-
-        return;
     }
 
 
     /* =====================================================
-       Fallback
+       Global Footer
     ===================================================== */
-
-    renderHero();
-
-    renderCategories();
-
-    renderArticles();
 
     renderFooter();
 
