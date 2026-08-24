@@ -16,7 +16,7 @@ const articles = [
         title: "How EMI is Calculated? A Complete Guide",
         description:
             "Understand the EMI calculation formula, factors involved and examples with easy explanations.",
-        date: "May 12, 2024",
+        date: "Aug 25, 2026",
         readTime: "6 min read",
         image:
             "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80",
@@ -29,7 +29,7 @@ const articles = [
         title: "Best SIP Strategies for Beginners",
         description:
             "Learn practical SIP investment strategies to build wealth consistently and work towards your financial goals.",
-        date: "May 10, 2024",
+        date: "Aug 25, 2026",
         readTime: "5 min read",
         image:
             "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80",
@@ -42,7 +42,7 @@ const articles = [
         title: "Tax Saving Guide: Save More, Legally",
         description:
             "Explore smart tax-saving options and understand ways to reduce taxable income legally.",
-        date: "May 8, 2024",
+        date: "Aug 25, 2026",
         readTime: "7 min read",
         image:
             "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80",
@@ -55,7 +55,7 @@ const articles = [
         title: "Home Loan Tips to Get the Best Deal",
         description:
             "Understand important factors that can help you compare home loans and choose a suitable option.",
-        date: "May 5, 2024",
+        date: " Aug 25, 2026 ",
         readTime: "6 min read",
         image:
             "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80",
@@ -68,7 +68,7 @@ const articles = [
         title: "ROI vs Profit: What's the Difference?",
         description:
             "Understand the difference between ROI and profit and when each metric is useful for business decisions.",
-        date: "May 2, 2024",
+        date: "  Aug 25, 2026 ",
         readTime: "4 min read",
         image:
             "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
@@ -81,7 +81,7 @@ const articles = [
         title: "How to Calculate Percentage Easily",
         description:
             "Learn simple percentage formulas with practical examples for everyday use.",
-        date: "April 30, 2024",
+        date: " Aug 25, 2026" ,
         readTime: "4 min read",
         image:
             "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80",
@@ -94,7 +94,7 @@ const articles = [
         title: "How to Calculate Your Daily Calorie Needs",
         description:
             "Understand the basics of calorie requirements and how simple calculations can help with everyday planning.",
-        date: "April 28, 2024",
+        date: "   Aug 25, 2026 ",
         readTime: "5 min read",
         image:
             "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80",
@@ -107,7 +107,7 @@ const articles = [
         title: "Easy Unit Conversion Guide",
         description:
             "Learn how to quickly convert common units used in everyday calculations, shopping and measurements.",
-        date: "April 25, 2024",
+        date: "August 25, 2026",
         readTime: "4 min read",
         image:
             "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
@@ -120,7 +120,7 @@ const articles = [
         title: "SIP vs Lump Sum: Which Is Better?",
         description:
             "Understand the key differences between SIP and lump-sum investing and when each approach may be useful.",
-        date: "April 22, 2024",
+        date: "Aug 25, 2026",
         readTime: "6 min read",
         image:
             "https://images.unsplash.com/photo-1559526324-593bc073d938?w=800&q=80",
@@ -133,7 +133,7 @@ const articles = [
         title: "How to Calculate Business Profit",
         description:
             "Learn how revenue, expenses and profit work together with a simple business profit calculation.",
-        date: "April 20, 2024",
+        date: "August 25, 2026",
         readTime: "5 min read",
         image:
             "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80",
@@ -146,7 +146,7 @@ const articles = [
         title: "How to Reduce Your Loan Interest",
         description:
             "Learn practical ways to compare loans, improve repayment strategies and reduce total interest costs.",
-        date: "April 18, 2024",
+        date: "Aug 25, 2026",
         readTime: "6 min read",
         image:
             "https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=800&q=80",
@@ -159,7 +159,7 @@ const articles = [
         title: "Simple Tax Planning Tips for Beginners",
         description:
             "Understand basic tax planning concepts and practical ways to organize your finances throughout the year.",
-        date: "April 15, 2024",
+        date: "Aug 25, 2026",
         readTime: "5 min read",
         image:
             "https://images.unsplash.com/photo-1554224155-a1487473ffd9?w=800&q=80",
@@ -235,62 +235,83 @@ export function renderArticlesPage() {
 
     app.innerHTML = `
 
-        <!-- ==========================================
-             ARTICLES HERO
-        =========================================== -->
+        <!-- =========================================================
+     ARTICLES HERO
+========================================================= -->
 
-        <section class="articles-hero">
+<section class="articles-hero">
 
-            <div class="articles-container articles-hero-inner">
+    <div class="articles-container">
 
-                <div class="articles-hero-content">
+        <div class="articles-hero-inner">
 
-                    <span class="articles-eyebrow">
-                        TOOLZEN HUB
-                    </span>
+            <!-- Text -->
 
-                    <h1>
-                        Articles & Guides
-                    </h1>
+            <div class="articles-hero-content">
 
-                    <p>
-                        Helpful guides, tips and insights to help you
-                        make smarter financial and everyday decisions.
-                    </p>
+                <h1>
+                    Articles & Guides
+                </h1>
 
-                </div>
+                <p>
+                    Helpful guides, tips and insights to help you
+                    make smarter financial and everyday decisions.
+                </p>
+
+            </div>
 
 
-                <div
-                    class="articles-hero-illustration"
-                    aria-hidden="true"
-                >
+            <!-- Book Illustration -->
 
-                    <div class="articles-books">
+            <div
+                class="articles-hero-illustration"
+                aria-hidden="true"
+            >
 
-                        <div class="book book-one"></div>
+                <div class="book-illustration">
 
-                        <div class="book book-two"></div>
+                    <div class="hero-book hero-book-back">
+                        <span>TOOLS</span>
+                    </div>
 
-                        <div class="book book-three"></div>
+                    <div class="hero-book hero-book-middle">
+                        <span>SMART</span>
+                    </div>
 
-                        <div class="plant-pot"></div>
+                    <div class="hero-book hero-book-front">
+                        <span>FINANCE</span>
+                    </div>
 
-                        <div class="plant">
+                    <div class="hero-book-page"></div>
 
-                            <span></span>
-                            <span></span>
-                            <span></span>
-
-                        </div>
-
+                    <div class="hero-sparkle">
+                        ✦
                     </div>
 
                 </div>
 
             </div>
 
-        </section>
+        </div>
+
+
+        <!-- All Articles directly below illustration -->
+
+        <div class="articles-hero-action">
+
+            <button
+                type="button"
+                class="article-filter active"
+                data-category="All"
+            >
+                All Articles
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
 
 
         <!-- ==========================================
