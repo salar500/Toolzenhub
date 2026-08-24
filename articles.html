@@ -1,1 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <!-- ==========================================
+         Meta
+    =========================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Articles & Guides | ToolZen Hub</title>
+
+    <meta
+        name="description"
+        content="Helpful financial, business, tax, investment and everyday guides from ToolZen Hub."
+    >
+
+    <meta
+        name="theme-color"
+        content="#00A651"
+    >
+
+    <!-- ==========================================
+         Favicon
+    =========================================== -->
+
+    <link
+        rel="icon"
+        type="image/svg+xml"
+        href="/favicon.svg"
+    >
+
+    <!-- ==========================================
+         Google Fonts
+    =========================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- ==========================================
+         Base CSS
+    =========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="assets/css/base/variables.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/base/reset.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/base/typography.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/base/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/base/animations.css"
+    >
+
+    <!-- ==========================================
+         Component CSS
+    =========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="assets/css/components/buttons.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/components/cards.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/components/header.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/components/navigation.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/components/articles.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/components/hero.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/components/forms.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/components/search.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/components/categories.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/components/footer.css"
+    >
+
+    <!-- ==========================================
+         Theme
+    =========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="assets/css/themes/light.css"
+    >
+
+    <!-- ==========================================
+         Article Page CSS
+    =========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="assets/css/pages/articles.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- ==========================================
+         Global Header
+         
+         Loaded by your existing application.
+         DO NOT duplicate header HTML here.
+    =========================================== -->
+
+    <header id="header"></header>
+
+
+    <!-- ==========================================
+         Main Article Page
+    =========================================== -->
+
+    <main id="articles-page">
+
+        <!-- ======================================
+             Articles Hero
+        ======================================= -->
+
+        <section class="articles-hero">
+
+            <div class="container articles-hero-inner">
+
+                <div class="articles-hero-content">
+
+                    <span class="articles-eyebrow">
+                        TOOLZEN HUB GUIDES
+                    </span>
+
+                    <h1>
+                        Articles & Guides
+                    </h1>
+
+                    <p>
+                        Helpful guides, tips and insights to help you
+                        make smarter financial and everyday decisions.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="articles-hero-visual"
+                    aria-hidden="true"
+                >
+
+                    <div class="book book-one"></div>
+
+                    <div class="book book-two"></div>
+
+                    <div class="book book-three"></div>
+
+                    <div class="plant-pot"></div>
+
+                    <div class="plant-leaf leaf-one"></div>
+
+                    <div class="plant-leaf leaf-two"></div>
+
+                    <div class="plant-leaf leaf-three"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================
+             Articles Content
+        ======================================= -->
+
+        <section class="articles-section">
+
+            <div class="container">
+
+
+                <!-- ==================================
+                     Category Filters
+                =================================== -->
+
+                <div class="article-filters">
+
+                    <button
+                        type="button"
+                        class="article-filter active"
+                        data-category="all"
+                    >
+                        All Articles
+                    </button>
+
+                    <button
+                        type="button"
+                        class="article-filter"
+                        data-category="loans"
+                    >
+                        Loans
+                    </button>
+
+                    <button
+                        type="button"
+                        class="article-filter"
+                        data-category="investment"
+                    >
+                        Investment
+                    </button>
+
+                    <button
+                        type="button"
+                        class="article-filter"
+                        data-category="tax"
+                    >
+                        Tax
+                    </button>
+
+                    <button
+                        type="button"
+                        class="article-filter"
+                        data-category="business"
+                    >
+                        Business
+                    </button>
+
+                    <button
+                        type="button"
+                        class="article-filter"
+                        data-category="health"
+                    >
+                        Health
+                    </button>
+
+                    <button
+                        type="button"
+                        class="article-filter"
+                        data-category="math"
+                    >
+                        Math
+                    </button>
+
+                    <button
+                        type="button"
+                        class="article-filter"
+                        data-category="converter"
+                    >
+                        Converter
+                    </button>
+
+                </div>
+
+
+                <!-- ==================================
+                     Two Column Layout
+                =================================== -->
+
+                <div class="articles-layout">
+
+
+                    <!-- ==================================
+                         Main Articles
+                    =================================== -->
+
+                    <div class="articles-main">
+
+
+                        <!-- Article 1 -->
+
+                        <article
+                            class="article-card"
+                            data-category="loans"
+                        >
+
+                            <a
+                                href="#"
+                                class="article-image-link"
+                            >
+
+                                <img
+                                    src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=700&q=80"
+                                    alt="House model representing a home loan"
+                                    class="article-image"
+                                    loading="lazy"
+                                >
+
+                            </a>
+
+
+                            <div class="article-card-content">
+
+                                <span class="article-category">
+                                    LOANS
+                                </span>
+
+                                <h2 class="article-title">
+
+                                    <a href="#">
+                                        How EMI Is Calculated?
+                                        A Complete Guide
+                                    </a>
+
+                                </h2>
+
+                                <p class="article-excerpt">
+                                    Understand the EMI calculation formula,
+                                    factors involved and examples with easy
+                                    explanations.
+                                </p>
+
+
+                                <div class="article-meta">
+
+                                    <span>
+                                        May 12, 2024
+                                    </span>
+
+                                    <span>
+                                        6 min read
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- Article 2 -->
+
+                        <article
+                            class="article-card"
+                            data-category="investment"
+                        >
+
+                            <a
+                                href="#"
+                                class="article-image-link"
+                            >
+
+                                <img
+                                    src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=700&q=80"
+                                    alt="Coins with a growing plant representing investment"
+                                    class="article-image"
+                                    loading="lazy"
+                                >
+
+                            </a>
+
+
+                            <div class="article-card-content">
+
+                                <span class="article-category">
+                                    INVESTMENT
+                                </span>
+
+                                <h2 class="article-title">
+
+                                    <a href="#">
+                                        Best SIP Strategies
+                                        for 2024
+                                    </a>
+
+                                </h2>
+
+                                <p class="article-excerpt">
+                                    Top SIP investment strategies to build
+                                    wealth consistently and achieve your
+                                    financial goals.
+                                </p>
+
+
+                                <div class="article-meta">
+
+                                    <span>
+                                        May 10, 2024
+                                    </span>
+
+                                    <span>
+                                        5 min read
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- Article 3 -->
+
+                        <article
+                            class="article-card"
+                            data-category="tax"
+                        >
+
+                            <a
+                                href="#"
+                                class="article-image-link"
+                            >
+
+                                <img
+                                    src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=700&q=80"
+                                    alt="Tax planning documents and calculator"
+                                    class="article-image"
+                                    loading="lazy"
+                                >
+
+                            </a>
+
+
+                            <div class="article-card-content">
+
+                                <span class="article-category">
+                                    TAX
+                                </span>
+
+                                <h2 class="article-title">
+
+                                    <a href="#">
+                                        Tax Saving Guide:
+                                        Save More, Legally
+                                    </a>
+
+                                </h2>
+
+                                <p class="article-excerpt">
+                                    Smart tax-saving tips and investment options
+                                    to help reduce your taxable income.
+                                </p>
+
+
+                                <div class="article-meta">
+
+                                    <span>
+                                        May 8, 2024
+                                    </span>
+
+                                    <span>
+                                        7 min read
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- Article 4 -->
+
+                        <article
+                            class="article-card"
+                            data-category="loans"
+                        >
+
+                            <a
+                                href="#"
+                                class="article-image-link"
+                            >
+
+                                <img
+                                    src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=700&q=80"
+                                    alt="House model and home loan concept"
+                                    class="article-image"
+                                    loading="lazy"
+                                >
+
+                            </a>
+
+
+                            <div class="article-card-content">
+
+                                <span class="article-category">
+                                    LOANS
+                                </span>
+
+                                <h2 class="article-title">
+
+                                    <a href="#">
+                                        Home Loan Tips to
+                                        Get the Best Deal
+                                    </a>
+
+                                </h2>
+
+                                <p class="article-excerpt">
+                                    Expert tips to get the lowest interest
+                                    rate and find better home loan offers.
+                                </p>
+
+
+                                <div class="article-meta">
+
+                                    <span>
+                                        May 5, 2024
+                                    </span>
+
+                                    <span>
+                                        6 min read
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- Article 5 -->
+
+                        <article
+                            class="article-card"
+                            data-category="business"
+                        >
+
+                            <a
+                                href="#"
+                                class="article-image-link"
+                            >
+
+                                <img
+                                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80"
+                                    alt="Business analytics dashboard"
+                                    class="article-image"
+                                    loading="lazy"
+                                >
+
+                            </a>
+
+
+                            <div class="article-card-content">
+
+                                <span class="article-category">
+                                    BUSINESS
+                                </span>
+
+                                <h2 class="article-title">
+
+                                    <a href="#">
+                                        ROI vs Profit:
+                                        What's the Difference?
+                                    </a>
+
+                                </h2>
+
+                                <p class="article-excerpt">
+                                    Understand the key difference between ROI
+                                    and profit and when to use each metric.
+                                </p>
+
+
+                                <div class="article-meta">
+
+                                    <span>
+                                        May 2, 2024
+                                    </span>
+
+                                    <span>
+                                        4 min read
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <!-- ==================================
+                             Pagination
+                        =================================== -->
+
+                        <nav
+                            class="article-pagination"
+                            aria-label="Articles pagination"
+                        >
+
+                            <button
+                                type="button"
+                                class="pagination-number active"
+                            >
+                                1
+                            </button>
+
+                            <button
+                                type="button"
+                                class="pagination-number"
+                            >
+                                2
+                            </button>
+
+                            <button
+                                type="button"
+                                class="pagination-number"
+                            >
+                                3
+                            </button>
+
+                            <span class="pagination-dots">
+                                ...
+                            </span>
+
+                            <button
+                                type="button"
+                                class="pagination-number"
+                            >
+                                12
+                            </button>
+
+                            <button
+                                type="button"
+                                class="pagination-next"
+                            >
+                                Next
+                                <span aria-hidden="true">
+                                    →
+                                </span>
+                            </button>
+
+                        </nav>
+
+                    </div>
+
+
+                    <!-- ==================================
+                         Sidebar
+                    =================================== -->
+
+                    <aside class="articles-sidebar">
+
+
+                      
