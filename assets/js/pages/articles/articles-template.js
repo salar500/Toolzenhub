@@ -1,4 +1,3 @@
-
 /* =========================================================
    ToolZen Hub
    Articles Template
@@ -21,6 +20,11 @@ function renderHero() {
 
                 <div class="articles-hero-inner">
 
+
+                    <!-- =====================================
+                         HERO CONTENT
+                    ====================================== -->
+
                     <div class="articles-hero-content">
 
                         <h1>
@@ -35,7 +39,9 @@ function renderHero() {
                     </div>
 
 
-                    <!-- BOOKS ILLUSTRATION -->
+                    <!-- =====================================
+                         HERO VISUAL
+                    ====================================== -->
 
                     <div class="articles-hero-visual">
 
@@ -44,36 +50,153 @@ function renderHero() {
                             aria-hidden="true"
                         >
 
-                            <div class="articles-books">
 
-                                <div class="book book-one"></div>
+                            <!-- =================================
+                                 BACKGROUND DECORATIONS
+                            ================================== -->
 
-                                <div class="book book-two"></div>
+                            <div class="articles-hero-dots"></div>
 
-                                <div class="book book-three"></div>
+                            <span class="articles-hero-plus articles-hero-plus-one">
+                                +
+                            </span>
 
-                                <div class="book-page"></div>
+                            <span class="articles-hero-plus articles-hero-plus-two">
+                                +
+                            </span>
 
-                                <div class="book-dots"></div>
+                            <span class="articles-hero-plus articles-hero-plus-three">
+                                +
+                            </span>
 
-                                <div class="plant-pot"></div>
 
-                                <div class="plant">
+                            <!-- =================================
+                                 CURVED PLATFORM
+                            ================================== -->
 
-                                    <span class="plant-stem"></span>
+                            <div class="articles-hero-platform"></div>
 
-                                    <span class="leaf leaf-one"></span>
 
-                                    <span class="leaf leaf-two"></span>
+                            <!-- =================================
+                                 3D OBJECT GROUP
+                            ================================== -->
 
-                                    <span class="leaf leaf-three"></span>
+                            <div class="articles-hero-objects">
+
+
+                                <!-- =============================
+                                     BOOK STACK
+                                ============================== -->
+
+                                <div class="articles-books">
+
+
+                                    <!-- Dark bottom book -->
+
+                                    <div class="book book-three">
+
+                                        <span class="book-cover"></span>
+
+                                    </div>
+
+
+                                    <!-- Green middle/top book -->
+
+                                    <div class="book book-two">
+
+                                        <span class="book-cover"></span>
+
+                                    </div>
+
+
+                                    <!-- Light book/page detail -->
+
+                                    <div class="book book-one">
+
+                                        <span class="book-cover"></span>
+
+                                    </div>
+
+
+                                    <!-- Book pages -->
+
+                                    <div class="book-page"></div>
+
+                                    <div class="book-dots"></div>
+
 
                                 </div>
 
+
+                                <!-- =============================
+                                     PLANT
+                                ============================== -->
+
+                                <div class="articles-hero-plant">
+
+
+                                    <div class="plant-pot">
+
+                                        <div class="plant-pot-rim"></div>
+
+                                    </div>
+
+
+                                    <div class="plant">
+
+                                        <span class="plant-stem"></span>
+
+                                        <span class="leaf leaf-one"></span>
+
+                                        <span class="leaf leaf-two"></span>
+
+                                        <span class="leaf leaf-three"></span>
+
+                                        <span class="leaf leaf-four"></span>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <!-- =============================
+                                     COFFEE MUG
+                                ============================== -->
+
+                                <div class="articles-hero-mug">
+
+                                    <div class="mug-body">
+
+                                        <div class="mug-highlight"></div>
+
+                                    </div>
+
+                                    <div class="mug-handle"></div>
+
+                                    <div class="mug-rim"></div>
+
+                                    <div class="mug-coffee"></div>
+
+                                </div>
+
+
                             </div>
+
+
+                            <!-- =================================
+                                 SOFT GROUND SHADOW
+                            ================================== -->
+
+                            <div class="articles-hero-shadow"></div>
+
 
                         </div>
 
+
+                        <!-- =====================================
+                             HERO ACTION
+                        ====================================== -->
 
                         <div class="articles-hero-action">
 
@@ -86,6 +209,7 @@ function renderHero() {
                             </button>
 
                         </div>
+
 
                     </div>
 
