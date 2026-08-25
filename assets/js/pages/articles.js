@@ -55,7 +55,7 @@ const articles = [
         title: "Home Loan Tips to Get the Best Deal",
         description:
             "Understand important factors that can help you compare home loans and choose a suitable option.",
-        date: " Aug 25, 2026 ",
+        date: "Aug 25, 2026",
         readTime: "6 min read",
         image:
             "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80",
@@ -68,7 +68,7 @@ const articles = [
         title: "ROI vs Profit: What's the Difference?",
         description:
             "Understand the difference between ROI and profit and when each metric is useful for business decisions.",
-        date: "  Aug 25, 2026 ",
+        date: "Aug 25, 2026",
         readTime: "4 min read",
         image:
             "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
@@ -81,7 +81,7 @@ const articles = [
         title: "How to Calculate Percentage Easily",
         description:
             "Learn simple percentage formulas with practical examples for everyday use.",
-        date: " Aug 25, 2026" ,
+        date: "Aug 25, 2026",
         readTime: "4 min read",
         image:
             "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80",
@@ -94,7 +94,7 @@ const articles = [
         title: "How to Calculate Your Daily Calorie Needs",
         description:
             "Understand the basics of calorie requirements and how simple calculations can help with everyday planning.",
-        date: "   Aug 25, 2026 ",
+        date: "Aug 25, 2026",
         readTime: "5 min read",
         image:
             "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80",
@@ -107,7 +107,7 @@ const articles = [
         title: "Easy Unit Conversion Guide",
         description:
             "Learn how to quickly convert common units used in everyday calculations, shopping and measurements.",
-        date: "August 25, 2026",
+        date: "Aug 25, 2026",
         readTime: "4 min read",
         image:
             "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
@@ -133,7 +133,7 @@ const articles = [
         title: "How to Calculate Business Profit",
         description:
             "Learn how revenue, expenses and profit work together with a simple business profit calculation.",
-        date: "August 25, 2026",
+        date: "Aug 25, 2026",
         readTime: "5 min read",
         image:
             "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80",
@@ -221,6 +221,17 @@ const categories = [
 
 
 /* =========================================================
+   STATE
+========================================================= */
+
+let selectedCategory = "All";
+
+let currentPage = 1;
+
+const articlesPerPage = 5;
+
+
+/* =========================================================
    RENDER ARTICLES PAGE
 ========================================================= */
 
@@ -235,284 +246,463 @@ export function renderArticlesPage() {
 
     app.innerHTML = `
 
-        <!-- =========================================================
-     ARTICLES HERO
-========================================================= -->
+        <!-- =================================================
+             ARTICLES PAGE
+        ================================================== -->
 
-<section class="articles-hero">
-
-    <div class="articles-container">
-
-        <div class="articles-hero-inner">
-
-            <!-- Text -->
-
-            <div class="articles-hero-content">
-
-                <h1>
-                    Articles & Guides
-                </h1>
-
-                <p>
-                    Helpful guides, tips and insights to help you
-                    make smarter financial and everyday decisions.
-                </p>
-
-            </div>
+        <div id="articles-page">
 
 
-            <!-- Book Illustration -->
+            <!-- =============================================
+                 HERO
+            ============================================== -->
 
-            <div
-                class="articles-hero-illustration"
-                aria-hidden="true"
-            >
+            <section class="articles-hero">
 
-                <div class="book-illustration">
+                <div class="articles-container">
 
-                    <div class="hero-book hero-book-back">
-                        <span>TOOLS</span>
-                    </div>
+                    <div class="articles-hero-inner">
 
-                    <div class="hero-book hero-book-middle">
-                        <span>SMART</span>
-                    </div>
 
-                    <div class="hero-book hero-book-front">
-                        <span>FINANCE</span>
-                    </div>
+                        <!-- =================================
+                             HERO TEXT
+                        ================================== -->
 
-                    <div class="hero-book-page"></div>
+                        <div class="articles-hero-content">
 
-                    <div class="hero-sparkle">
-                        ✦
+                            <h1>
+                                Articles & Guides
+                            </h1>
+
+                            <p>
+                                Helpful guides, tips and insights to help you
+                                make smarter financial and everyday decisions.
+                            </p>
+
+                        </div>
+
+
+                        <!-- =================================
+                             HERO VISUAL
+                        ================================== -->
+
+                        <div class="articles-hero-visual">
+
+                            <div
+                                class="articles-hero-illustration"
+                                aria-hidden="true"
+                            >
+
+                                <div class="articles-books">
+
+                                    <div class="book book-one"></div>
+
+                                    <div class="book book-two"></div>
+
+                                    <div class="book book-three"></div>
+
+                                    <div class="book-page"></div>
+
+                                    <div class="book-dots"></div>
+
+
+                                    <div class="plant-pot"></div>
+
+                                    <div class="plant">
+
+                                        <span class="plant-stem"></span>
+
+                                        <span class="leaf leaf-one"></span>
+
+                                        <span class="leaf leaf-two"></span>
+
+                                        <span class="leaf leaf-three"></span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- =================================
+                                 ALL ARTICLES BUTTON
+                            ================================== -->
+
+                            <div class="articles-hero-action">
+
+                                <button
+                                    type="button"
+                                    class="article-filter active"
+                                    data-category="All"
+                                >
+                                    All Articles
+                                </button>
+
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </div>
 
-            </div>
-
-        </div>
+            </section>
 
 
-        <!-- All Articles directly below illustration -->
+            <!-- =============================================
+                 MAIN ARTICLES
+            ============================================== -->
 
-        <div class="articles-hero-action">
-
-            <button
-                type="button"
-                class="article-filter active"
-                data-category="All"
-            >
-                All Articles
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
+            <main class="articles-container articles-main">
 
 
-        <!-- ==========================================
-             ARTICLES MAIN
-        =========================================== -->
+                <!-- =========================================
+                     FILTER BAR
+                ========================================== -->
 
-        <main class="articles-container articles-main">
+                <div class="articles-filter-bar">
 
-
-            <!-- ======================================
-                 FILTER BAR
-            ======================================= -->
-
-            <div class="articles-filter-bar">
-
-                <button
-                    type="button"
-                    class="article-filter active"
-                    data-category="All"
-                >
-                    All Articles
-                </button>
-
-
-                <button
-                    type="button"
-                    class="article-filter"
-                    data-category="Loans"
-                >
-                    Loans
-                </button>
-
-
-                <button
-                    type="button"
-                    class="article-filter"
-                    data-category="Investment"
-                >
-                    Investment
-                </button>
-
-
-                <button
-                    type="button"
-                    class="article-filter"
-                    data-category="Tax"
-                >
-                    Tax
-                </button>
-
-
-                <button
-                    type="button"
-                    class="article-filter"
-                    data-category="Business"
-                >
-                    Business
-                </button>
-
-
-                <button
-                    type="button"
-                    class="article-filter"
-                    data-category="Health"
-                >
-                    Health
-                </button>
-
-
-                <button
-                    type="button"
-                    class="article-filter"
-                    data-category="More"
-                >
-                    More
-                    <span aria-hidden="true">⌄</span>
-                </button>
-
-            </div>
-
-
-            <!-- ======================================
-                 CONTENT LAYOUT
-            ======================================= -->
-
-            <div class="articles-layout">
-
-
-                <!-- ==================================
-                     MAIN FEED
-                =================================== -->
-
-                <section class="articles-feed">
-
-                    <div
-                        id="articles-list"
-                        class="articles-list"
-                    ></div>
-
-
-                    <!-- ==================================
-                         PAGINATION
-                    =================================== -->
-
-                    <nav
-                        class="articles-pagination"
-                        aria-label="Articles pagination"
+                    <button
+                        type="button"
+                        class="article-filter active"
+                        data-category="All"
                     >
+                        All Articles
+                    </button>
 
-                        <button
-                            type="button"
-                            class="pagination-button active"
-                            data-page="1"
+
+                    <button
+                        type="button"
+                        class="article-filter"
+                        data-category="Loans"
+                    >
+                        Loans
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="article-filter"
+                        data-category="Investment"
+                    >
+                        Investment
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="article-filter"
+                        data-category="Tax"
+                    >
+                        Tax
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="article-filter"
+                        data-category="Business"
+                    >
+                        Business
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="article-filter"
+                        data-category="Health"
+                    >
+                        Health
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="article-filter"
+                        data-category="Math"
+                    >
+                        Math
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="article-filter"
+                        data-category="Converter"
+                    >
+                        Converter
+                    </button>
+
+                </div>
+
+
+                <!-- =========================================
+                     CONTENT LAYOUT
+                ========================================== -->
+
+                <div class="articles-layout">
+
+
+                    <!-- =====================================
+                         ARTICLES FEED
+                    ====================================== -->
+
+                    <section class="articles-feed">
+
+                        <div
+                            id="articles-list"
+                            class="articles-list"
+                        ></div>
+
+
+                        <!-- =================================
+                             PAGINATION
+                        ================================== -->
+
+                        <nav
+                            class="articles-pagination"
+                            aria-label="Articles pagination"
                         >
-                            1
-                        </button>
 
-
-                        <button
-                            type="button"
-                            class="pagination-button"
-                            data-page="2"
-                        >
-                            2
-                        </button>
-
-
-                        <button
-                            type="button"
-                            class="pagination-button"
-                            data-page="3"
-                        >
-                            3
-                        </button>
-
-
-                        <span class="pagination-dots">
-                            ...
-                        </span>
-
-
-                        <button
-                            type="button"
-                            class="pagination-button"
-                            data-page="12"
-                        >
-                            12
-                        </button>
-
-
-                        <button
-                            type="button"
-                            class="pagination-next"
-                            data-page="next"
-                        >
-                            Next
-                            <span aria-hidden="true">
-                                →
-                            </span>
-                        </button>
-
-                    </nav>
-
-                </section>
-
-
-                <!-- ==================================
-                     SIDEBAR
-                =================================== -->
-
-                <aside class="articles-sidebar">
-
-
-                    <!-- ==================================
-                         SEARCH
-                    =================================== -->
-
-                    <div class="article-sidebar-search">
-
-                        <form id="article-search-form">
-
-                            <label
-                                for="article-search"
-                                class="sr-only"
+                            <button
+                                type="button"
+                                class="pagination-button active"
+                                data-page="1"
                             >
-                                Search articles
-                            </label>
-
-
-                            <input
-                                id="article-search"
-                                type="search"
-                                placeholder="Search articles..."
-                                autocomplete="off"
-                            >
+                                1
+                            </button>
 
 
                             <button
-                                type="submit"
-                                aria-label="Search articles"
+                                type="button"
+                                class="pagination-button"
+                                data-page="2"
                             >
+                                2
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="pagination-button"
+                                data-page="3"
+                            >
+                                3
+                            </button>
+
+
+                            <span class="pagination-dots">
+                                ...
+                            </span>
+
+
+                            <button
+                                type="button"
+                                class="pagination-button"
+                                data-page="12"
+                            >
+                                12
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="pagination-next"
+                                data-page="next"
+                            >
+                                Next
+                                <span aria-hidden="true">
+                                    →
+                                </span>
+                            </button>
+
+                        </nav>
+
+                    </section>
+
+
+                    <!-- =====================================
+                         SIDEBAR
+                    ====================================== -->
+
+                    <aside class="articles-sidebar">
+
+
+                        <!-- =================================
+                             SEARCH
+                        ================================== -->
+
+                        <div class="article-sidebar-search">
+
+                            <form id="article-search-form">
+
+                                <label
+                                    for="article-search"
+                                    class="sr-only"
+                                >
+                                    Search articles
+                                </label>
+
+
+                                <input
+                                    id="article-search"
+                                    type="search"
+                                    placeholder="Search articles..."
+                                    autocomplete="off"
+                                >
+
+
+                                <button
+                                    type="submit"
+                                    aria-label="Search articles"
+                                >
+
+                                    <svg
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+
+                                        <path
+                                            d="M21 21l-4.35-4.35m1.35-5.15a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+                                        />
+
+                                    </svg>
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+
+                        <!-- =================================
+                             CATEGORIES
+                        ================================== -->
+
+                        <div class="article-sidebar-card">
+
+                            <div class="article-sidebar-heading">
+
+                                <h2>
+                                    Categories
+                                </h2>
+
+                            </div>
+
+
+                            <div class="article-category-list">
+
+                                ${categories.map(category => `
+
+                                    <a
+                                        href="#"
+                                        class="article-category-item"
+                                        data-sidebar-category="${category.name}"
+                                    >
+
+                                        <span class="article-category-name">
+
+                                            <span class="article-category-icon">
+                                                ${category.icon}
+                                            </span>
+
+                                            ${category.name}
+
+                                        </span>
+
+
+                                        <span class="article-category-count">
+
+                                            ${category.count}
+
+                                            <span aria-hidden="true">
+                                                →
+                                            </span>
+
+                                        </span>
+
+                                    </a>
+
+                                `).join("")}
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="article-more-categories"
+                            >
+                                More Categories
+
+                                <span aria-hidden="true">
+                                    ⌄
+                                </span>
+
+                            </button>
+
+                        </div>
+
+
+                        <!-- =================================
+                             POPULAR ARTICLES
+                        ================================== -->
+
+                        <div class="article-sidebar-card">
+
+                            <div class="article-sidebar-heading">
+
+                                <h2>
+                                    Popular Articles
+                                </h2>
+
+                            </div>
+
+
+                            <div class="popular-articles">
+
+                                ${articles.slice(0, 4).map(article => `
+
+                                    <a
+                                        href="#"
+                                        class="popular-article"
+                                    >
+
+                                        <img
+                                            src="${article.image}"
+                                            alt="${article.alt}"
+                                            loading="lazy"
+                                        >
+
+
+                                        <div>
+
+                                            <h3>
+                                                ${article.title}
+                                            </h3>
+
+                                            <span>
+                                                ${article.date}
+                                            </span>
+
+                                        </div>
+
+                                    </a>
+
+                                `).join("")}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================
+                             NEWSLETTER
+                        ================================== -->
+
+                        <div class="article-newsletter">
+
+                            <div class="newsletter-icon">
 
                                 <svg
                                     viewBox="0 0 24 24"
@@ -520,427 +710,340 @@ export function renderArticlesPage() {
                                 >
 
                                     <path
-                                        d="M21 21l-4.35-4.35m1.35-5.15a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+                                        d="M3 6.5A2.5 2.5 0 015.5 4h13A2.5 2.5 0 0121 6.5v11a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 17.5v-11zm2 .5l7 5 7-5"
                                     />
 
                                 </svg>
 
-                            </button>
-
-                        </form>
-
-                    </div>
+                            </div>
 
 
-                    <!-- ==================================
-                         CATEGORIES
-                    =================================== -->
+                            <div class="newsletter-content">
 
-                    <div class="article-sidebar-card">
+                                <h2>
+                                    Stay Updated
+                                </h2>
 
-                        <div class="article-sidebar-heading">
+                                <p>
+                                    Get the latest articles and updates
+                                    in your inbox.
+                                </p>
 
-                            <h2>
-                                Categories
-                            </h2>
-
-                        </div>
+                            </div>
 
 
-                        <div class="article-category-list">
+                            <form class="newsletter-form">
 
-                            ${categories.map(category => `
+                                <label
+                                    for="newsletter-email"
+                                    class="sr-only"
+                                >
+                                    Email address
+                                </label>
 
-                                <a
-                                    href="#"
-                                    class="article-category-item"
-                                    data-sidebar-category="${category.name}"
+
+                                <input
+                                    id="newsletter-email"
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    required
                                 >
 
-                                    <span class="article-category-name">
 
-                                        <span class="article-category-icon">
-                                            ${category.icon}
-                                        </span>
+                                <button type="submit">
+                                    Subscribe
+                                </button>
 
-                                        ${category.name}
-
-                                    </span>
-
-
-                                    <span class="article-category-count">
-
-                                        ${category.count}
-
-                                        <span aria-hidden="true">
-                                            →
-                                        </span>
-
-                                    </span>
-
-                                </a>
-
-                            `).join("")}
+                            </form>
 
                         </div>
 
+                    </aside>
 
-                        <button
-                            type="button"
-                            class="article-more-categories"
-                        >
-                            More Categories
-                            <span aria-hidden="true">
-                                ⌄
-                            </span>
-                        </button>
+                </div>
 
-                    </div>
+            </main>
 
-
-                    <!-- ==================================
-                         POPULAR ARTICLES
-                    =================================== -->
-
-                    <div class="article-sidebar-card">
-
-                        <div class="article-sidebar-heading">
-
-                            <h2>
-                                Popular Articles
-                            </h2>
-
-                        </div>
-
-
-                        <div class="popular-articles">
-
-                            ${articles.slice(0, 4).map(article => `
-
-                                <a
-                                    href="#"
-                                    class="popular-article"
-                                >
-
-                                    <img
-                                        src="${article.image}"
-                                        alt="${article.alt}"
-                                        loading="lazy"
-                                    >
-
-
-                                    <div>
-
-                                        <h3>
-                                            ${article.title}
-                                        </h3>
-
-                                        <span>
-                                            ${article.date}
-                                        </span>
-
-                                    </div>
-
-                                </a>
-
-                            `).join("")}
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- ==================================
-                         NEWSLETTER
-                    =================================== -->
-
-                    <div class="article-newsletter">
-
-                        <div class="newsletter-icon">
-
-                            <svg
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                            >
-
-                                <path
-                                    d="M3 6.5A2.5 2.5 0 015.5 4h13A2.5 2.5 0 0121 6.5v11a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 17.5v-11zm2 .5l7 5 7-5"
-                                />
-
-                            </svg>
-
-                        </div>
-
-
-                        <div class="newsletter-content">
-
-                            <h2>
-                                Stay Updated
-                            </h2>
-
-                            <p>
-                                Get the latest articles and updates
-                                in your inbox.
-                            </p>
-
-                        </div>
-
-
-                        <form class="newsletter-form">
-
-                            <label
-                                for="newsletter-email"
-                                class="sr-only"
-                            >
-                                Email address
-                            </label>
-
-
-                            <input
-                                id="newsletter-email"
-                                type="email"
-                                placeholder="Enter your email"
-                                required
-                            >
-
-
-                            <button type="submit">
-                                Subscribe
-                            </button>
-
-                        </form>
-
-                    </div>
-
-                </aside>
-
-            </div>
-
-        </main>
+        </div>
 
     `;
 
 
-    renderArticleCards();
-
-    initializeArticleInteractions();
+    initializeArticlesPage();
 
 }
 
 
 /* =========================================================
-   ARTICLE CARDS
+   RENDER ARTICLE CARDS
 ========================================================= */
 
 function renderArticleCards(
-    selectedCategory = "All",
+    category = selectedCategory,
     searchTerm = ""
 ) {
 
-    const container =
+    const list =
         document.getElementById("articles-list");
 
-    if (!container) {
+
+    if (!list) {
         return;
     }
+
+
+    selectedCategory = category;
 
 
     const normalizedSearch =
         searchTerm.trim().toLowerCase();
 
 
-    const filteredArticles =
+    let filteredArticles =
         articles.filter(article => {
 
-            const categoryMatch =
-                selectedCategory === "All" ||
-                article.category === selectedCategory;
+            const matchesCategory =
+                category === "All" ||
+                article.category === category;
 
 
-            const searchMatch =
+            const matchesSearch =
                 !normalizedSearch ||
-                article.title
-                    .toLowerCase()
-                    .includes(normalizedSearch) ||
-
-                article.description
-                    .toLowerCase()
-                    .includes(normalizedSearch) ||
-
-                article.category
-                    .toLowerCase()
-                    .includes(normalizedSearch);
+                article.title.toLowerCase().includes(normalizedSearch) ||
+                article.description.toLowerCase().includes(normalizedSearch) ||
+                article.category.toLowerCase().includes(normalizedSearch);
 
 
-            return categoryMatch && searchMatch;
+            return (
+                matchesCategory &&
+                matchesSearch
+            );
 
         });
 
 
-    /* =====================================================
-       EMPTY STATE
-    ===================================================== */
+    const totalPages =
+        Math.max(
+            1,
+            Math.ceil(
+                filteredArticles.length /
+                articlesPerPage
+            )
+        );
 
-    if (!filteredArticles.length) {
 
-        container.innerHTML = `
+    if (currentPage > totalPages) {
+        currentPage = totalPages;
+    }
+
+
+    const startIndex =
+        (currentPage - 1) *
+        articlesPerPage;
+
+
+    const visibleArticles =
+        filteredArticles.slice(
+            startIndex,
+            startIndex + articlesPerPage
+        );
+
+
+    if (!visibleArticles.length) {
+
+        list.innerHTML = `
 
             <div class="articles-empty">
 
-                <div class="articles-empty-icon">
-                    🔎
+                <div>
+
+                    <div class="articles-empty-icon">
+                        🔎
+                    </div>
+
+                    <h2>
+                        No articles found
+                    </h2>
+
+                    <p>
+                        Try another category or search term.
+                    </p>
+
                 </div>
-
-
-                <h2>
-                    No articles found
-                </h2>
-
-
-                <p>
-                    Try another search term or choose
-                    a different category.
-                </p>
 
             </div>
 
         `;
 
-        return;
-    }
+    } else {
 
+        list.innerHTML =
+            visibleArticles.map(article => `
 
-    /* =====================================================
-       ARTICLE CARDS
-    ===================================================== */
+                <article class="article-card">
 
-    container.innerHTML =
-
-        filteredArticles.map(article => `
-
-            <article
-                class="article-card"
-                data-category="${article.category}"
-            >
-
-
-                <!-- ======================================
-                     ARTICLE IMAGE
-                ======================================= -->
-
-                <a
-                    href="#"
-                    class="article-card-image-link"
-                    aria-label="Read ${article.title}"
-                >
-
-                    <img
-                        src="${article.image}"
-                        alt="${article.alt}"
-                        class="article-card-image"
-                        loading="lazy"
+                    <a
+                        href="#"
+                        class="article-card-image-link"
+                        aria-label="${article.title}"
                     >
 
-                </a>
+                        <img
+                            class="article-card-image"
+                            src="${article.image}"
+                            alt="${article.alt}"
+                            loading="lazy"
+                        >
+
+                    </a>
 
 
-                <!-- ======================================
-                     ARTICLE CONTENT
-                ======================================= -->
+                    <div class="article-card-content">
 
-                <div class="article-card-content">
+                        <div>
 
-
-                    <div>
-
-                        <span class="article-card-category">
-                            ${article.category}
-                        </span>
-
-
-                        <h2>
-
-                            <a href="#">
-                                ${article.title}
-                            </a>
-
-                        </h2>
-
-
-                        <p>
-                            ${article.description}
-                        </p>
-
-                    </div>
-
-
-                    <!-- ==================================
-                         ARTICLE META
-                    =================================== -->
-
-                    <div class="article-card-meta">
-
-
-                        <div class="article-meta-items">
-
-                            <span>
-
-                                <span aria-hidden="true">
-                                    📅
-                                </span>
-
-                                ${article.date}
-
+                            <span class="article-card-category">
+                                ${article.category}
                             </span>
 
 
-                            <span>
+                            <h2>
 
-                                <span aria-hidden="true">
-                                    ◷
-                                </span>
+                                <a href="#">
+                                    ${article.title}
+                                </a>
 
-                                ${article.readTime}
+                            </h2>
 
-                            </span>
+
+                            <p>
+                                ${article.description}
+                            </p>
 
                         </div>
 
 
-                        <span
-                            class="article-arrow"
-                            aria-hidden="true"
-                        >
-                            →
-                        </span>
+                        <div class="article-card-meta">
+
+                            <div class="article-meta-items">
+
+                                <span>
+                                    📅
+                                    ${article.date}
+                                </span>
+
+                                <span>
+                                    ◷
+                                    ${article.readTime}
+                                </span>
+
+                            </div>
+
+
+                            <span
+                                class="article-arrow"
+                                aria-hidden="true"
+                            >
+                                →
+                            </span>
+
+                        </div>
 
                     </div>
 
-                </div>
+                </article>
 
-            </article>
+            `).join("");
 
-        `).join("");
+    }
+
+
+    updatePagination(totalPages);
 
 }
 
 
 /* =========================================================
-   ARTICLE INTERACTIONS
+   PAGINATION
 ========================================================= */
 
-function initializeArticleInteractions() {
+function updatePagination(totalPages) {
 
-    let selectedCategory = "All";
+    const pagination =
+        document.querySelector(
+            ".articles-pagination"
+        );
+
+
+    if (!pagination) {
+        return;
+    }
+
+
+    const pageButtons =
+        pagination.querySelectorAll(
+            ".pagination-button"
+        );
+
+
+    pageButtons.forEach(button => {
+
+        const page =
+            Number(button.dataset.page);
+
+
+        button.classList.toggle(
+            "active",
+            page === currentPage
+        );
+
+
+        button.disabled =
+            page > totalPages;
+
+    });
+
+}
+
+
+/* =========================================================
+   INITIALIZE PAGE
+========================================================= */
+
+function initializeArticlesPage() {
+
+    currentPage = 1;
+
+    selectedCategory = "All";
+
+
+    const filterButtons =
+        document.querySelectorAll(
+            ".article-filter"
+        );
+
+
+    const searchInput =
+        document.getElementById(
+            "article-search"
+        );
+
+
+    const searchForm =
+        document.getElementById(
+            "article-search-form"
+        );
+
+
+    renderArticleCards(
+        "All",
+        ""
+    );
 
 
     /* =====================================================
-       CATEGORY FILTERS
+       FILTER BUTTONS
     ===================================================== */
-
-    const filterButtons =
-        document.querySelectorAll(".article-filter");
-
 
     filterButtons.forEach(button => {
 
@@ -952,39 +1055,56 @@ function initializeArticleInteractions() {
                     button.dataset.category;
 
 
-                /*
-                 * "More" is reserved for
-                 * additional categories.
-                 */
-
-                if (category === "More") {
+                if (!category) {
                     return;
                 }
 
 
-                selectedCategory = category;
+                selectedCategory =
+                    category;
 
 
-                filterButtons.forEach(item => {
-
-                    item.classList.remove("active");
-
-                });
+                currentPage = 1;
 
 
-                button.classList.add("active");
+                filterButtons.forEach(
+                    filterButton => {
 
+                        filterButton.classList.toggle(
+                            "active",
+                            filterButton.dataset.category ===
+                            selectedCategory
+                        );
 
-                const searchInput =
-                    document.getElementById(
-                        "article-search"
-                    );
+                    }
+                );
 
 
                 renderArticleCards(
                     selectedCategory,
                     searchInput?.value || ""
                 );
+
+
+                const articlesMain =
+                    document.querySelector(
+                        ".articles-main"
+                    );
+
+
+                if (
+                    button.closest(
+                        ".articles-hero-action"
+                    ) &&
+                    articlesMain
+                ) {
+
+                    articlesMain.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }
 
             }
         );
@@ -996,18 +1116,6 @@ function initializeArticleInteractions() {
        SEARCH
     ===================================================== */
 
-    const searchForm =
-        document.getElementById(
-            "article-search-form"
-        );
-
-
-    const searchInput =
-        document.getElementById(
-            "article-search"
-        );
-
-
     if (searchForm) {
 
         searchForm.addEventListener(
@@ -1016,6 +1124,7 @@ function initializeArticleInteractions() {
 
                 event.preventDefault();
 
+                currentPage = 1;
 
                 renderArticleCards(
                     selectedCategory,
@@ -1028,15 +1137,13 @@ function initializeArticleInteractions() {
     }
 
 
-    /* =====================================================
-       LIVE SEARCH
-    ===================================================== */
-
     if (searchInput) {
 
         searchInput.addEventListener(
             "input",
             () => {
+
+                currentPage = 1;
 
                 renderArticleCards(
                     selectedCategory,
@@ -1050,16 +1157,145 @@ function initializeArticleInteractions() {
 
 
     /* =====================================================
-       SIDEBAR CATEGORY FILTERS
+       PAGINATION
     ===================================================== */
 
-    const sidebarCategories =
+    const pagination =
+        document.querySelector(
+            ".articles-pagination"
+        );
+
+
+    if (pagination) {
+
+        pagination.addEventListener(
+            "click",
+            event => {
+
+                const button =
+                    event.target.closest(
+                        "button"
+                    );
+
+
+                if (!button) {
+                    return;
+                }
+
+
+                const page =
+                    button.dataset.page;
+
+
+                if (!page) {
+                    return;
+                }
+
+
+                if (page === "next") {
+
+                    currentPage += 1;
+
+                } else {
+
+                    currentPage =
+                        Number(page);
+
+                }
+
+
+                const totalFiltered =
+                    articles.filter(article => {
+
+                        const matchesCategory =
+                            selectedCategory === "All" ||
+                            article.category === selectedCategory;
+
+
+                        const searchTerm =
+                            searchInput?.value
+                                .trim()
+                                .toLowerCase() || "";
+
+
+                        const matchesSearch =
+                            !searchTerm ||
+                            article.title
+                                .toLowerCase()
+                                .includes(searchTerm) ||
+                            article.description
+                                .toLowerCase()
+                                .includes(searchTerm) ||
+                            article.category
+                                .toLowerCase()
+                                .includes(searchTerm);
+
+
+                        return (
+                            matchesCategory &&
+                            matchesSearch
+                        );
+
+                    }).length;
+
+
+                const totalPages =
+                    Math.max(
+                        1,
+                        Math.ceil(
+                            totalFiltered /
+                            articlesPerPage
+                        )
+                    );
+
+
+                if (currentPage > totalPages) {
+                    currentPage = 1;
+                }
+
+
+                if (currentPage < 1) {
+                    currentPage = 1;
+                }
+
+
+                renderArticleCards(
+                    selectedCategory,
+                    searchInput?.value || ""
+                );
+
+
+                const articlesMain =
+                    document.querySelector(
+                        ".articles-main"
+                    );
+
+
+                if (articlesMain) {
+
+                    articlesMain.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }
+
+            }
+        );
+
+           }
+
+    /* =====================================================
+       SIDEBAR CATEGORY LINKS
+    ===================================================== */
+
+    const sidebarCategoryItems =
         document.querySelectorAll(
             "[data-sidebar-category]"
         );
 
 
-    sidebarCategories.forEach(item => {
+    sidebarCategoryItems.forEach(item => {
 
         item.addEventListener(
             "click",
@@ -1072,22 +1308,25 @@ function initializeArticleInteractions() {
                     item.dataset.sidebarCategory;
 
 
-                selectedCategory = category;
+                if (!category) {
+                    return;
+                }
+
+
+                selectedCategory =
+                    category;
+
+
+                currentPage = 1;
 
 
                 filterButtons.forEach(button => {
 
-                    button.classList.remove("active");
-
-
-                    if (
+                    button.classList.toggle(
+                        "active",
                         button.dataset.category ===
-                        category
-                    ) {
-
-                        button.classList.add("active");
-
-                    }
+                        selectedCategory
+                    );
 
                 });
 
@@ -1117,118 +1356,6 @@ function initializeArticleInteractions() {
         );
 
     });
-
-
-    /* =====================================================
-       PAGINATION
-    ===================================================== */
-
-    const paginationButtons =
-        document.querySelectorAll(
-            ".pagination-button"
-        );
-
-
-    const nextButton =
-        document.querySelector(
-            ".pagination-next"
-        );
-
-
-    paginationButtons.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                paginationButtons.forEach(item => {
-
-                    item.classList.remove("active");
-
-                });
-
-
-                button.classList.add("active");
-
-
-                /*
-                 * Pagination is prepared for
-                 * future article pages.
-                 *
-                 * Current article dataset is
-                 * displayed as the available feed.
-                 */
-
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
-
-            }
-        );
-
-    });
-
-
-    if (nextButton) {
-
-        nextButton.addEventListener(
-            "click",
-            () => {
-
-                const activeButton =
-                    document.querySelector(
-                        ".pagination-button.active"
-                    );
-
-
-                const currentPage =
-                    Number(
-                        activeButton?.dataset.page || 1
-                    );
-
-
-                const nextPage =
-                    currentPage + 1;
-
-
-                const targetButton =
-                    document.querySelector(
-                        `.pagination-button[data-page="${nextPage}"]`
-                    );
-
-
-                if (targetButton) {
-
-                    targetButton.click();
-
-                    return;
-
-                }
-
-
-                /*
-                 * If the visible pagination jumps
-                 * from page 3 to page 12, move to
-                 * page 12 rather than breaking.
-                 */
-
-                const lastButton =
-                    paginationButtons[
-                        paginationButtons.length - 1
-                    ];
-
-
-                if (lastButton) {
-
-                    lastButton.click();
-
-                }
-
-            }
-        );
-
-    }
 
 
     /* =====================================================
@@ -1296,9 +1423,23 @@ function initializeArticleInteractions() {
 
     if (moreCategoriesButton) {
 
+        let categoriesExpanded = false;
+
+
         moreCategoriesButton.addEventListener(
             "click",
             () => {
+
+                const list =
+                    document.querySelector(
+                        ".article-category-list"
+                    );
+
+
+                if (!list) {
+                    return;
+                }
+
 
                 const hiddenCategories =
                     categories.filter(category => {
@@ -1309,7 +1450,9 @@ function initializeArticleInteractions() {
                             "Tax",
                             "Business",
                             "Health"
-                        ].includes(category.name);
+                        ].includes(
+                            category.name
+                        );
 
                     });
 
@@ -1319,112 +1462,210 @@ function initializeArticleInteractions() {
                 }
 
 
-                hiddenCategories.forEach(category => {
+                if (!categoriesExpanded) {
 
-                    const alreadyExists =
-                        document.querySelector(
-                            `[data-sidebar-category="${category.name}"]`
-                        );
+                    hiddenCategories.forEach(
+                        category => {
 
-
-                    if (alreadyExists) {
-                        return;
-                    }
+                            const alreadyExists =
+                                document.querySelector(
+                                    `[data-sidebar-category="${category.name}"]`
+                                );
 
 
-                    const list =
-                        document.querySelector(
-                            ".article-category-list"
-                        );
+                            if (alreadyExists) {
+                                return;
+                            }
 
 
-                    if (!list) {
-                        return;
-                    }
+                            const item =
+                                document.createElement(
+                                    "a"
+                                );
 
 
-                    const item =
-                        document.createElement("a");
+                            item.href = "#";
 
 
-                    item.href = "#";
-
-                    item.className =
-                        "article-category-item";
-
-                    item.dataset.sidebarCategory =
-                        category.name;
+                            item.className =
+                                "article-category-item";
 
 
-                    item.innerHTML = `
-
-                        <span class="article-category-name">
-
-                            <span class="article-category-icon">
-                                ${category.icon}
-                            </span>
-
-                            ${category.name}
-
-                        </span>
-
-
-                        <span class="article-category-count">
-
-                            ${category.count}
-
-                            <span aria-hidden="true">
-                                →
-                            </span>
-
-                        </span>
-
-                    `;
-
-
-                    list.appendChild(item);
-
-
-                    item.addEventListener(
-                        "click",
-                        event => {
-
-                            event.preventDefault();
-
-
-                            selectedCategory =
+                            item.dataset.sidebarCategory =
                                 category.name;
 
 
-                            filterButtons.forEach(button => {
+                            item.innerHTML = `
 
-                                button.classList.remove(
-                                    "active"
-                                );
+                                <span class="article-category-name">
 
-                            });
+                                    <span class="article-category-icon">
+                                        ${category.icon}
+                                    </span>
+
+                                    ${category.name}
+
+                                </span>
 
 
-                            renderArticleCards(
-                                selectedCategory,
-                                searchInput?.value || ""
+                                <span class="article-category-count">
+
+                                    ${category.count}
+
+                                    <span aria-hidden="true">
+                                        →
+                                    </span>
+
+                                </span>
+
+                            `;
+
+
+                            list.appendChild(item);
+
+
+                            item.addEventListener(
+                                "click",
+                                event => {
+
+                                    event.preventDefault();
+
+
+                                    selectedCategory =
+                                        category.name;
+
+
+                                    currentPage = 1;
+
+
+                                    filterButtons.forEach(
+                                        button => {
+
+                                            button.classList.toggle(
+                                                "active",
+                                                button.dataset.category ===
+                                                selectedCategory
+                                            );
+
+                                        }
+                                    );
+
+
+                                    renderArticleCards(
+                                        selectedCategory,
+                                        searchInput?.value || ""
+                                    );
+
+                                }
                             );
 
                         }
                     );
 
-                });
+
+                    categoriesExpanded = true;
 
 
-                moreCategoriesButton.innerHTML = `
-                    Fewer Categories
-                    <span aria-hidden="true">⌃</span>
-                `;
+                    moreCategoriesButton.innerHTML = `
+                        Fewer Categories
+                        <span aria-hidden="true">
+                            ⌃
+                        </span>
+                    `;
+
+                } else {
+
+                    hiddenCategories.forEach(
+                        category => {
+
+                            const item =
+                                document.querySelector(
+                                    `[data-sidebar-category="${category.name}"]`
+                                );
+
+
+                            if (item) {
+                                item.remove();
+                            }
+
+                        }
+                    );
+
+
+                    categoriesExpanded = false;
+
+
+                    moreCategoriesButton.innerHTML = `
+                        More Categories
+                        <span aria-hidden="true">
+                            ⌄
+                        </span>
+                    `;
+
+                }
 
             }
         );
 
     }
+
+
+    /* =====================================================
+       POPULAR ARTICLE LINKS
+    ===================================================== */
+
+    const popularLinks =
+        document.querySelectorAll(
+            ".popular-article"
+        );
+
+
+    popularLinks.forEach(link => {
+
+        link.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+                /*
+                 * Article detail routing can be
+                 * connected here later.
+                 */
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       ARTICLE LINKS
+    ===================================================== */
+
+    const articleLinks =
+        document.querySelectorAll(
+            ".article-card a"
+        );
+
+
+    articleLinks.forEach(link => {
+
+        link.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+                /*
+                 * Article detail routing can be
+                 * connected here later.
+                 */
+
+            }
+        );
+
+    });
 
 }
 
@@ -1480,4 +1721,3 @@ document.addEventListener(
 
     }
 );
-
