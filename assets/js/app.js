@@ -3,25 +3,36 @@
    Application Entry
 ========================================================= */
 
-import { currentPage } from "./router.js";
+import { currentPage }
+    from "./router.js";
+
 
 import { renderHeader }
     from "./components/header.js";
 
+
 import { renderHero }
     from "./components/hero.js";
+
 
 import { renderCategories }
     from "./components/categories.js";
 
+
 import { renderArticles }
     from "./components/articles.js";
+
 
 import { renderFooter }
     from "./components/footer.js";
 
+
 import { renderCalculator }
     from "./pages/calculator.js";
+
+
+import { renderArticlesPage }
+    from "./pages/articles/articles.js";
 
 
 /* =========================================================
@@ -30,11 +41,12 @@ import { renderCalculator }
 
 async function initializeApp() {
 
-    const page = currentPage();
+    const page =
+        currentPage();
 
 
     /* =====================================================
-       Global Header
+       GLOBAL HEADER
     ===================================================== */
 
     renderHeader();
@@ -64,12 +76,7 @@ async function initializeApp() {
 
     if (page.type === "articles") {
 
-        /*
-         * articles.html already contains the complete
-         * article page HTML.
-         *
-         * We only render the global header and footer.
-         */
+        renderArticlesPage();
 
         renderFooter();
 
