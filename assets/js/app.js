@@ -36,7 +36,7 @@ import { renderArticlesPage }
 
 
 /* =========================================================
-   Application
+   APPLICATION
 ========================================================= */
 
 async function initializeApp() {
