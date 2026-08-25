@@ -1,8 +1,12 @@
-
 /* =========================================================
    ToolZen Hub
    Articles Page
    Main Entry
+========================================================= */
+
+
+/* =========================================================
+   TEMPLATE
 ========================================================= */
 
 import {
@@ -10,15 +14,27 @@ import {
 } from "./articles-template.js";
 
 
+/* =========================================================
+   STATE
+========================================================= */
+
 import {
     articlesState
 } from "./articles-state.js";
 
 
+/* =========================================================
+   ARTICLE RENDERING
+========================================================= */
+
 import {
     renderArticleCards
 } from "./articles-render.js";
 
+
+/* =========================================================
+   FILTERS & SEARCH
+========================================================= */
 
 import {
     initializeArticleFilters,
@@ -26,10 +42,18 @@ import {
 } from "./articles-filters.js";
 
 
+/* =========================================================
+   PAGINATION
+========================================================= */
+
 import {
     initializePagination
 } from "./articles-pagination.js";
 
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
 
 import {
     initializeSidebarCategories,
@@ -54,9 +78,9 @@ export function renderArticlesPage() {
     }
 
 
-    /*
-     * Reset page state
-     */
+    /* =====================================================
+       RESET PAGE STATE
+    ===================================================== */
 
     articlesState.selectedCategory =
         "All";
@@ -74,17 +98,17 @@ export function renderArticlesPage() {
         false;
 
 
-    /*
-     * Render page HTML
-     */
+    /* =====================================================
+       RENDER PAGE HTML
+    ===================================================== */
 
     app.innerHTML =
         renderArticlesTemplate();
 
 
-    /*
-     * Initialize components
-     */
+    /* =====================================================
+       INITIALIZE PAGE
+    ===================================================== */
 
     initializeArticlesPage();
 
@@ -97,77 +121,59 @@ export function renderArticlesPage() {
 
 function initializeArticlesPage() {
 
+    /* =====================================================
+       ARTICLE CARDS
+    ===================================================== */
+
     renderArticleCards();
 
+
+    /* =====================================================
+       FILTERS
+    ===================================================== */
 
     initializeArticleFilters();
 
 
+    /* =====================================================
+       SEARCH
+    ===================================================== */
+
     initializeArticleSearch();
 
+
+    /* =====================================================
+       PAGINATION
+    ===================================================== */
 
     initializePagination();
 
 
+    /* =====================================================
+       SIDEBAR CATEGORIES
+    ===================================================== */
+
     initializeSidebarCategories();
 
+
+    /* =====================================================
+       MORE CATEGORIES
+    ===================================================== */
 
     initializeMoreCategories();
 
 
+    /* =====================================================
+       NEWSLETTER
+    ===================================================== */
+
     initializeNewsletter();
 
+
+    /* =====================================================
+       ARTICLE LINKS
+    ===================================================== */
 
     initializeArticleLinks();
 
 }
-
-
-/* =========================================================
-   AUTO INITIALIZATION
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        const articlesPage =
-            document.getElementById(
-                "articles-page"
-            );
-
-
-        const app =
-            document.getElementById(
-                "app"
-            );
-
-
-        /*
-         * If Articles page already exists,
-         * don't render it again.
-         */
-
-        if (articlesPage) {
-            return;
-        }
-
-
-        /*
-         * Automatically render Articles page
-         * when URL contains "articles".
-         */
-
-        if (
-            app &&
-            window.location.pathname
-                .toLowerCase()
-                .includes("articles")
-        ) {
-
-            renderArticlesPage();
-
-        }
-
-    }
-);
