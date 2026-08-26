@@ -5,7 +5,6 @@
 
 import { articles, categories } from "./articles-data.js";
 
-
 /* =========================================================
    HERO
 ========================================================= */
@@ -19,11 +18,6 @@ function renderHero() {
             <div class="articles-container">
 
                 <div class="articles-hero-inner">
-
-
-                    <!-- =====================================
-                         HERO CONTENT
-                    ====================================== -->
 
                     <div class="articles-hero-content">
 
@@ -39,16 +33,28 @@ function renderHero() {
                     </div>
 
 
-                    <!-- =====================================
-                         HERO VISUAL
-                    ====================================== -->
+                    <!-- ======================================
+                         HERO 3D ILLUSTRATION
+                    ======================================= -->
 
                     <div class="articles-hero-visual">
 
-                        <div
-                            class="articles-hero-illustration"
-                            aria-hidden="true"
+                        <img
+                            class="articles-hero-image"
+                            src="assets/images/articles-hero.png"
+                            alt="Books, plant and coffee mug representing learning and financial growth"
                         >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    `;
+}
 
 
                             <!-- =================================
