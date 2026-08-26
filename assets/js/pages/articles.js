@@ -281,48 +281,20 @@ export function renderArticlesPage() {
 
                         </div>
 
+<!-- HERO IMAGE -->
 
-                        <!-- =================================
-                             HERO VISUAL
-                        ================================== -->
+<div class="articles-hero-visual">
 
-                        <div class="articles-hero-visual">
+    <div class="articles-hero-illustration">
 
-                            <div
-                                class="articles-hero-illustration"
-                                aria-hidden="true"
-                            >
+        <img
+            class="articles-hero-image"
+            src="./assets/images/articles-hero.png"
+            alt=""
+            aria-hidden="true"
+        >
 
-                                <div class="articles-books">
-
-                                    <div class="book book-one"></div>
-
-                                    <div class="book book-two"></div>
-
-                                    <div class="book book-three"></div>
-
-                                    <div class="book-page"></div>
-
-                                    <div class="book-dots"></div>
-
-
-                                    <div class="plant-pot"></div>
-
-                                    <div class="plant">
-
-                                        <span class="plant-stem"></span>
-
-                                        <span class="leaf leaf-one"></span>
-
-                                        <span class="leaf leaf-two"></span>
-
-                                        <span class="leaf leaf-three"></span>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
+    </div>
 
 
                             <!-- =================================
