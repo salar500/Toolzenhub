@@ -40,24 +40,14 @@ function renderHero() {
 
                             <img
                                 class="articles-hero-image"
-                                src="/assets/images/articles-hero.png"
+                                src="assets/Images/articles-hero.png"
                                 alt="Books, plant and coffee mug representing learning and financial growth"
                             >
 
                         </div>
 
 
-                        <div class="articles-hero-action">
-
-                            <button
-                                type="button"
-                                class="article-filter active"
-                                data-category="All"
-                            >
-                                All Articles
-                            </button>
-
-                        </div>
+                     
 
 
                     </div>
