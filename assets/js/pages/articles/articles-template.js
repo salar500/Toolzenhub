@@ -40,7 +40,7 @@ function renderHero() {
 
                             <img
                                 class="articles-hero-image"
-                                src="assets/images/articles-hero.png"
+                                src="/assets/images/articles-hero.png"
                                 alt="Books, plant and coffee mug representing learning and financial growth"
                             >
 
