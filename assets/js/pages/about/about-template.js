@@ -441,45 +441,228 @@ function renderOfferSection() {
 
                         <div class="about-category">
 
-                            <strong>
-                                Unit Converters
-                            </strong>
+/* =========================================================
+   WHAT WE OFFER
+========================================================= */
 
-                            <p>
-                                Quickly convert common measurements
-                                between different units.
-                            </p>
+function renderOfferSection() {
 
-                        </div>
+    return `
+
+        <section class="about-offer">
+
+            <div class="about-container">
+
+                <div class="about-offer-card">
 
 
-                        <div class="about-category">
+                    <div class="about-offer-content">
 
-                            <strong>
-                                Currency Tools
-                            </strong>
+                        <span class="about-section-eyebrow">
+                            What We Offer
+                        </span>
 
-                            <p>
-                                Tools designed to make common
-                                currency calculations easier.
-                            </p>
+
+                        <h2>
+                            Tools for everyday decisions
+                        </h2>
+
+
+                        <p>
+                            From financial planning to health,
+                            business and everyday calculations,
+                            ToolZen Hub brings useful tools together
+                            in one convenient place.
+                        </p>
+
+
+                        <ul class="about-offer-list">
+
+                            <li>
+                                <span
+                                    class="about-offer-bullet"
+                                    aria-hidden="true"
+                                >✓</span>
+
+                                <a href="loans.html">
+                                    Loans
+                                </a>
+
+                                <span>
+                                    — EMI, Home Loan, Personal Loan
+                                    and more
+                                </span>
+                            </li>
+
+
+                            <li>
+                                <span
+                                    class="about-offer-bullet"
+                                    aria-hidden="true"
+                                >✓</span>
+
+                                <a href="investment.html">
+                                    Investment
+                                </a>
+
+                                <span>
+                                    — SIP, PPF, FD, CAGR
+                                    and more
+                                </span>
+                            </li>
+
+
+                            <li>
+                                <span
+                                    class="about-offer-bullet"
+                                    aria-hidden="true"
+                                >✓</span>
+
+                                <a href="categories.html#tax">
+                                    Tax
+                                </a>
+
+                                <span>
+                                    — Income Tax, GST
+                                    and more
+                                </span>
+                            </li>
+
+
+                            <li>
+                                <span
+                                    class="about-offer-bullet"
+                                    aria-hidden="true"
+                                >✓</span>
+
+                                <a href="categories.html#health">
+                                    Health
+                                </a>
+
+                                <span>
+                                    — BMI, Calorie, BMR
+                                    and more
+                                </span>
+                            </li>
+
+
+                            <li>
+                                <span
+                                    class="about-offer-bullet"
+                                    aria-hidden="true"
+                                >✓</span>
+
+                                <a href="categories.html#business">
+                                    Business
+                                </a>
+
+                                <span>
+                                    — Profit, Margin, ROI
+                                    and more
+                                </span>
+                            </li>
+
+
+                            <li>
+                                <span
+                                    class="about-offer-bullet"
+                                    aria-hidden="true"
+                                >✓</span>
+
+                                <a href="categories.html#math">
+                                    Math
+                                </a>
+
+                                <span>
+                                    — Percentage, Ratio,
+                                    Age and more
+                                </span>
+                            </li>
+
+
+                            <li>
+                                <span
+                                    class="about-offer-bullet"
+                                    aria-hidden="true"
+                                >✓</span>
+
+                                <a href="categories.html#converter">
+                                    Converter
+                                </a>
+
+                                <span>
+                                    — Unit, Currency,
+                                    Date and more
+                                </span>
+                            </li>
+
+
+                            <li>
+                                <span
+                                    class="about-offer-bullet"
+                                    aria-hidden="true"
+                                >✓</span>
+
+                                <a href="categories.html#more">
+                                    More
+                                </a>
+
+                                <span>
+                                    — Explore all calculators
+                                </span>
+                            </li>
+
+                        </ul>
+
+
+                        <div class="about-offer-action">
+
+                            <a
+                                href="categories.html"
+                                class="about-primary-button"
+                            >
+                                Explore All Categories
+
+                                <span aria-hidden="true">
+                                    →
+                                </span>
+
+                            </a>
 
                         </div>
 
                     </div>
 
 
-                    <div class="about-offer-action">
+                    <div
+                        class="about-offer-visual"
+                        aria-hidden="true"
+                    >
 
-                        <a
-                            href="index.html"
-                            class="about-primary-button"
-                        >
-                            Explore Calculators
-                            <span aria-hidden="true">→</span>
-                        </a>
+                        <div class="about-calculator-card">
+
+                            <div class="about-calculator-display">
+                                100+
+                            </div>
+
+                            <span>
+                                Free Tools
+                            </span>
+
+                        </div>
+
+
+                        <div class="about-floating-card about-floating-card-one">
+                            ✓ Accurate
+                        </div>
+
+
+                        <div class="about-floating-card about-floating-card-two">
+                            ⚡ Fast
+                        </div>
 
                     </div>
+
 
                 </div>
 
@@ -488,7 +671,7 @@ function renderOfferSection() {
         </section>
 
     `;
-}
+                                       }
 
 
 /* =========================================================
