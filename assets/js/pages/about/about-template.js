@@ -382,287 +382,230 @@ function renderOfferSection() {
 
                     <div class="about-category-grid">
 
-                        <div class="about-category">
+
+                        <!-- =====================================
+                             LOANS
+                        ====================================== -->
+
+                        <a
+                            href="loans.html"
+                            class="about-category"
+                        >
 
                             <strong>
-                                Financial Calculators
+                                Loans
                             </strong>
 
                             <p>
-                                Loans, EMI, investments, returns,
-                                interest, tax and other financial
-                                calculations.
+                                EMI, Home Loan, Personal Loan
+                                and more.
                             </p>
 
-                        </div>
+                            <span class="about-category-arrow">
+                                →
+                            </span>
+
+                        </a>
 
 
-                        <div class="about-category">
+                        <!-- =====================================
+                             INVESTMENT
+                        ====================================== -->
+
+                        <a
+                            href="investment.html"
+                            class="about-category"
+                        >
+
+                            <strong>
+                                Investment
+                            </strong>
+
+                            <p>
+                                SIP, PPF, FD, CAGR
+                                and more.
+                            </p>
+
+                            <span class="about-category-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <!-- =====================================
+                             TAX
+                        ====================================== -->
+
+                        <a
+                            href="categories.html#tax"
+                            class="about-category"
+                        >
+
+                            <strong>
+                                Tax
+                            </strong>
+
+                            <p>
+                                Income Tax, GST
+                                and more.
+                            </p>
+
+                            <span class="about-category-arrow">
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <!-- =====================================
+                             HEALTH
+                        ====================================== -->
+
+                        <a
+                            href="categories.html#health"
+                            class="about-category"
+                        >
 
                             <strong>
                                 Health & Fitness
                             </strong>
 
                             <p>
-                                Helpful calculators for common
-                                health and fitness-related calculations.
+                                BMI, Calorie, BMR
+                                and more.
                             </p>
 
-                        </div>
+                            <span class="about-category-arrow">
+                                →
+                            </span>
+
+                        </a>
 
 
-                        <div class="about-category">
+                        <!-- =====================================
+                             BUSINESS
+                        ====================================== -->
+
+                        <a
+                            href="categories.html#business"
+                            class="about-category"
+                        >
 
                             <strong>
-                                Business Tools
+                                Business
                             </strong>
 
                             <p>
-                                GST, business and other calculations
-                                useful for everyday work.
+                                Profit, Margin, ROI
+                                and more.
                             </p>
 
-                        </div>
+                            <span class="about-category-arrow">
+                                →
+                            </span>
+
+                        </a>
 
 
-                        <div class="about-category">
+                        <!-- =====================================
+                             MATH
+                        ====================================== -->
+
+                        <a
+                            href="categories.html#math"
+                            class="about-category"
+                        >
 
                             <strong>
                                 Math & Everyday
                             </strong>
 
                             <p>
-                                Percentages, dates, numbers and
-                                practical everyday calculations.
+                                Percentage, Ratio, Age
+                                and more.
                             </p>
 
-                        </div>
-
-
-                        <div class="about-category">
-
-/* =========================================================
-   WHAT WE OFFER
-========================================================= */
-
-function renderOfferSection() {
-
-    return `
-
-        <section class="about-offer">
-
-            <div class="about-container">
-
-                <div class="about-offer-card">
-
-
-                    <div class="about-offer-content">
-
-                        <span class="about-section-eyebrow">
-                            What We Offer
-                        </span>
-
-
-                        <h2>
-                            Tools for everyday decisions
-                        </h2>
-
-
-                        <p>
-                            From financial planning to health,
-                            business and everyday calculations,
-                            ToolZen Hub brings useful tools together
-                            in one convenient place.
-                        </p>
-
-
-                        <ul class="about-offer-list">
-
-                            <li>
-                                <span
-                                    class="about-offer-bullet"
-                                    aria-hidden="true"
-                                >✓</span>
-
-                                <a href="loans.html">
-                                    Loans
-                                </a>
-
-                                <span>
-                                    — EMI, Home Loan, Personal Loan
-                                    and more
-                                </span>
-                            </li>
-
-
-                            <li>
-                                <span
-                                    class="about-offer-bullet"
-                                    aria-hidden="true"
-                                >✓</span>
-
-                                <a href="investment.html">
-                                    Investment
-                                </a>
-
-                                <span>
-                                    — SIP, PPF, FD, CAGR
-                                    and more
-                                </span>
-                            </li>
-
-
-                            <li>
-                                <span
-                                    class="about-offer-bullet"
-                                    aria-hidden="true"
-                                >✓</span>
-
-                                <a href="categories.html#tax">
-                                    Tax
-                                </a>
-
-                                <span>
-                                    — Income Tax, GST
-                                    and more
-                                </span>
-                            </li>
-
-
-                            <li>
-                                <span
-                                    class="about-offer-bullet"
-                                    aria-hidden="true"
-                                >✓</span>
-
-                                <a href="categories.html#health">
-                                    Health
-                                </a>
-
-                                <span>
-                                    — BMI, Calorie, BMR
-                                    and more
-                                </span>
-                            </li>
-
-
-                            <li>
-                                <span
-                                    class="about-offer-bullet"
-                                    aria-hidden="true"
-                                >✓</span>
-
-                                <a href="categories.html#business">
-                                    Business
-                                </a>
-
-                                <span>
-                                    — Profit, Margin, ROI
-                                    and more
-                                </span>
-                            </li>
-
-
-                            <li>
-                                <span
-                                    class="about-offer-bullet"
-                                    aria-hidden="true"
-                                >✓</span>
-
-                                <a href="categories.html#math">
-                                    Math
-                                </a>
-
-                                <span>
-                                    — Percentage, Ratio,
-                                    Age and more
-                                </span>
-                            </li>
-
-
-                            <li>
-                                <span
-                                    class="about-offer-bullet"
-                                    aria-hidden="true"
-                                >✓</span>
-
-                                <a href="categories.html#converter">
-                                    Converter
-                                </a>
-
-                                <span>
-                                    — Unit, Currency,
-                                    Date and more
-                                </span>
-                            </li>
-
-
-                            <li>
-                                <span
-                                    class="about-offer-bullet"
-                                    aria-hidden="true"
-                                >✓</span>
-
-                                <a href="categories.html#more">
-                                    More
-                                </a>
-
-                                <span>
-                                    — Explore all calculators
-                                </span>
-                            </li>
-
-                        </ul>
-
-
-                        <div class="about-offer-action">
-
-                            <a
-                                href="categories.html"
-                                class="about-primary-button"
-                            >
-                                Explore All Categories
-
-                                <span aria-hidden="true">
-                                    →
-                                </span>
-
-                            </a>
-
-                        </div>
-
-                    </div>
-
-
-                    <div
-                        class="about-offer-visual"
-                        aria-hidden="true"
-                    >
-
-                        <div class="about-calculator-card">
-
-                            <div class="about-calculator-display">
-                                100+
-                            </div>
-
-                            <span>
-                                Free Tools
+                            <span class="about-category-arrow">
+                                →
                             </span>
 
-                        </div>
+                        </a>
 
 
-                        <div class="about-floating-card about-floating-card-one">
-                            ✓ Accurate
-                        </div>
+                        <!-- =====================================
+                             CONVERTER
+                        ====================================== -->
+
+                        <a
+                            href="categories.html#converter"
+                            class="about-category"
+                        >
+
+                            <strong>
+                                Converter
+                            </strong>
+
+                            <p>
+                                Unit, Currency, Date
+                                and more.
+                            </p>
+
+                            <span class="about-category-arrow">
+                                →
+                            </span>
+
+                        </a>
 
 
-                        <div class="about-floating-card about-floating-card-two">
-                            ⚡ Fast
-                        </div>
+                        <!-- =====================================
+                             MORE
+                        ====================================== -->
+
+                        <a
+                            href="categories.html#more"
+                            class="about-category"
+                        >
+
+                            <strong>
+                                More
+                            </strong>
+
+                            <p>
+                                Explore all calculators
+                                and useful tools.
+                            </p>
+
+                            <span class="about-category-arrow">
+                                →
+                            </span>
+
+                        </a>
+
 
                     </div>
 
+
+                    <!-- =====================================
+                         ACTION
+                    ====================================== -->
+
+                    <div class="about-offer-action">
+
+                        <a
+                            href="categories.html"
+                            class="about-primary-button"
+                        >
+
+                            Explore All Categories
+
+                            <span aria-hidden="true">
+                                →
+                            </span>
+
+                        </a>
+
+                    </div>
 
                 </div>
 
@@ -671,7 +614,7 @@ function renderOfferSection() {
         </section>
 
     `;
-                                       }
+}
 
 
 /* =========================================================
