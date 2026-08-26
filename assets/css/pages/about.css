@@ -677,3 +677,24 @@
     }
 
 }
+
+/* =========================================================
+   OFFER CATEGORY LINKS
+========================================================= */
+
+.about-offer-list li a {
+    color: var(--about-heading);
+    font-weight: 700;
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+
+.about-offer-list li a:hover {
+    color: var(--about-green);
+}
+
+
+.about-offer-list li > span:last-child {
+    color: #475569;
+}
