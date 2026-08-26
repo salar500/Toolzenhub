@@ -33,6 +33,7 @@ import { renderCalculator }
 
 import { renderArticlesPage }
     from "./pages/articles/articles.js";
+import { renderAboutPage } from "./pages/about/about.js";
 
 
 /* =========================================================
@@ -99,6 +100,14 @@ async function initializeApp() {
         return;
     }
 
+/* =====================================================
+       about PAGE
+    ===================================================== */
+
+   if (pathname === "/about" || pathname === "/about.html") {
+    renderAboutPage();
+    return;
+   }
 
     /* =====================================================
        OTHER PAGE
