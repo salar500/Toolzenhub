@@ -5,18 +5,21 @@
 
 
 /* =========================================================
-   ABOUT HERO
+   HERO / INTRO
 ========================================================= */
 
-function renderAboutHero() {
+function renderAboutIntro() {
 
     return `
 
-        <section class="about-hero">
+        <section class="about-intro">
 
             <div class="about-container">
 
-                <div class="about-breadcrumb">
+                <nav
+                    class="about-breadcrumb"
+                    aria-label="Breadcrumb"
+                >
 
                     <a href="index.html">
                         Home
@@ -30,10 +33,10 @@ function renderAboutHero() {
                         About
                     </span>
 
-                </div>
+                </nav>
 
 
-                <div class="about-hero-content">
+                <div class="about-intro-content">
 
                     <span class="about-eyebrow">
                         About ToolZen Hub
@@ -47,10 +50,20 @@ function renderAboutHero() {
 
 
                     <p>
-                        ToolZen Hub is your one-stop destination
-                        for free online calculators and useful tools.
-                        Our mission is to make calculations simple,
-                        fast and easy to understand for everyone.
+                        ToolZen Hub is a growing collection of free
+                        online calculators and practical tools designed
+                        to make everyday calculations faster, simpler,
+                        and easier to understand.
+                    </p>
+
+
+                    <p>
+                        Whether you are planning your finances,
+                        checking a health-related calculation,
+                        working out a business figure, or simply
+                        solving an everyday math problem, our goal
+                        is to give you a useful tool without unnecessary
+                        complexity.
                     </p>
 
                 </div>
@@ -71,37 +84,24 @@ function renderFeatures() {
 
     return `
 
-        <section class="about-features">
+        <section class="about-features-section">
 
             <div class="about-container">
 
-                <div class="about-features-grid">
+                <div class="about-features">
 
-
-                    <!-- =====================================
-                         MISSION
-                    ====================================== -->
 
                     <article class="about-feature-card">
 
                         <div class="about-feature-icon">
 
                             <svg
-                                width="32"
-                                height="32"
                                 viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
                                 aria-hidden="true"
                             >
-
                                 <path
                                     d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
                                 ></path>
-
                             </svg>
 
                         </div>
@@ -113,33 +113,21 @@ function renderFeatures() {
 
 
                         <p>
-                            Empower people with accurate and
-                            easy-to-use tools.
+                            Make useful calculations simple,
+                            accessible and easy to understand.
                         </p>
 
                     </article>
 
-
-                    <!-- =====================================
-                         FREE
-                    ====================================== -->
 
                     <article class="about-feature-card">
 
                         <div class="about-feature-icon">
 
                             <svg
-                                width="32"
-                                height="32"
                                 viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
                                 aria-hidden="true"
                             >
-
                                 <path
                                     d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"
                                 ></path>
@@ -157,38 +145,26 @@ function renderFeatures() {
 
 
                         <h2>
-                            100% Free
+                            Free to Use
                         </h2>
 
 
                         <p>
-                            Our tools are completely free
-                            to use.
+                            Our calculators and tools are designed
+                            to be freely accessible to everyone.
                         </p>
 
                     </article>
 
-
-                    <!-- =====================================
-                         ACCURACY
-                    ====================================== -->
 
                     <article class="about-feature-card">
 
                         <div class="about-feature-icon">
 
                             <svg
-                                width="32"
-                                height="32"
                                 viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
                                 aria-hidden="true"
                             >
-
                                 <path
                                     d="M22 11.08V12a10 10 0 1 1-5.93-9.14"
                                 ></path>
@@ -203,38 +179,26 @@ function renderFeatures() {
 
 
                         <h2>
-                            Trusted & Accurate
+                            Accuracy Matters
                         </h2>
 
 
                         <p>
-                            We aim to provide reliable results
-                            you can use with confidence.
+                            We focus on clear formulas, sensible
+                            inputs and reliable calculations.
                         </p>
 
                     </article>
 
-
-                    <!-- =====================================
-                         PRIVACY
-                    ====================================== -->
 
                     <article class="about-feature-card">
 
                         <div class="about-feature-icon">
 
                             <svg
-                                width="32"
-                                height="32"
                                 viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
                                 aria-hidden="true"
                             >
-
                                 <rect
                                     x="3"
                                     y="11"
@@ -254,17 +218,125 @@ function renderFeatures() {
 
 
                         <h2>
-                            Privacy First
+                            Privacy Conscious
                         </h2>
 
 
                         <p>
-                            We respect your privacy and aim to
-                            keep your information protected.
+                            We aim to keep the experience simple
+                            and respectful of your personal information.
                         </p>
 
                     </article>
 
+                </div>
+
+            </div>
+
+        </section>
+
+    `;
+}
+
+
+/* =========================================================
+   WHY TOOLZEN
+========================================================= */
+
+function renderWhySection() {
+
+    return `
+
+        <section class="about-content-section">
+
+            <div class="about-container">
+
+                <div class="about-content-card">
+
+                    <div class="about-section-heading">
+
+                        <span>
+                            Why ToolZen Hub?
+                        </span>
+
+                        <h2>
+                            Built for real-world calculations
+                        </h2>
+
+                        <p>
+                            Many calculations are easier when the
+                            right tool is available. ToolZen Hub brings
+                            commonly needed calculators together so you
+                            can get the result you need without searching
+                            through complicated spreadsheets or formulas.
+                        </p>
+
+                    </div>
+
+
+                    <div class="about-text-grid">
+
+                        <div>
+
+                            <h3>
+                                Simple by design
+                            </h3>
+
+                            <p>
+                                Enter your numbers, choose the relevant
+                                options and get a clear result. Our goal
+                                is to reduce unnecessary steps.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Useful across everyday life
+                            </h3>
+
+                            <p>
+                                From loan payments and investments to
+                                percentages, conversions and health
+                                calculations, our tools cover a wide
+                                range of everyday needs.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Designed for everyone
+                            </h3>
+
+                            <p>
+                                You don't need advanced mathematical or
+                                financial knowledge to use our tools.
+                                We aim to keep the interface approachable.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Continuously improving
+                            </h3>
+
+                            <p>
+                                ToolZen Hub is intended to grow over
+                                time with new calculators, improvements
+                                and helpful educational content.
+                            </p>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -284,102 +356,172 @@ function renderOfferSection() {
 
     return `
 
-        <section class="about-offer">
+        <section class="about-offer-section">
 
             <div class="about-container">
 
                 <div class="about-offer-card">
 
+                    <div class="about-section-heading">
 
-                    <div class="about-offer-content">
-
-                        <span class="about-section-eyebrow">
+                        <span>
                             What We Offer
                         </span>
 
-
                         <h2>
-                            Tools for everyday decisions
+                            A growing collection of useful tools
                         </h2>
 
-
                         <p>
-                            From financial planning to everyday
-                            calculations, ToolZen Hub brings useful
-                            tools together in one convenient place.
+                            ToolZen Hub brings different categories
+                            of calculators together in one place.
                         </p>
 
+                    </div>
 
-                        <ul class="about-offer-list">
 
-                            <li>
-                                Financial calculators such as
-                                loans, EMI, investment and tax tools
-                            </li>
+                    <div class="about-category-grid">
 
-                            <li>
-                                Health and fitness calculators
-                            </li>
+                        <div class="about-category">
 
-                            <li>
-                                Business and GST calculators
-                            </li>
+                            <strong>
+                                Financial Calculators
+                            </strong>
 
-                            <li>
-                                Math and everyday calculators
-                            </li>
+                            <p>
+                                Loans, EMI, investments, returns,
+                                interest, tax and other financial
+                                calculations.
+                            </p>
 
-                            <li>
-                                Unit and currency converters
-                            </li>
+                        </div>
 
-                        </ul>
 
+                        <div class="about-category">
+
+                            <strong>
+                                Health & Fitness
+                            </strong>
+
+                            <p>
+                                Helpful calculators for common
+                                health and fitness-related calculations.
+                            </p>
+
+                        </div>
+
+
+                        <div class="about-category">
+
+                            <strong>
+                                Business Tools
+                            </strong>
+
+                            <p>
+                                GST, business and other calculations
+                                useful for everyday work.
+                            </p>
+
+                        </div>
+
+
+                        <div class="about-category">
+
+                            <strong>
+                                Math & Everyday
+                            </strong>
+
+                            <p>
+                                Percentages, dates, numbers and
+                                practical everyday calculations.
+                            </p>
+
+                        </div>
+
+
+                        <div class="about-category">
+
+                            <strong>
+                                Unit Converters
+                            </strong>
+
+                            <p>
+                                Quickly convert common measurements
+                                between different units.
+                            </p>
+
+                        </div>
+
+
+                        <div class="about-category">
+
+                            <strong>
+                                Currency Tools
+                            </strong>
+
+                            <p>
+                                Tools designed to make common
+                                currency calculations easier.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="about-offer-action">
 
                         <a
                             href="index.html"
-                            class="about-button"
+                            class="about-primary-button"
                         >
                             Explore Calculators
-
-                            <span aria-hidden="true">
-                                →
-                            </span>
-
+                            <span aria-hidden="true">→</span>
                         </a>
 
                     </div>
 
+                </div>
 
-                    <div
-                        class="about-offer-visual"
-                        aria-hidden="true"
-                    >
+            </div>
 
-                        <div class="about-calculator-card">
+        </section>
 
-                            <div class="about-calculator-display">
-                                100+
-                            </div>
-
-                            <span>
-                                Free Tools
-                            </span>
-
-                        </div>
+    `;
+}
 
 
-                        <div class="about-floating-card about-floating-card-one">
-                            ✓ Accurate
-                        </div>
+/* =========================================================
+   ACCURACY / DISCLAIMER
+========================================================= */
 
+function renderDisclaimer() {
 
-                        <div class="about-floating-card about-floating-card-two">
-                            ⚡ Fast
-                        </div>
+    return `
 
-                    </div>
+        <section class="about-disclaimer-section">
 
+            <div class="about-container">
+
+                <div class="about-disclaimer">
+
+                    <h2>
+                        A note about calculator results
+                    </h2>
+
+                    <p>
+                        ToolZen Hub calculators are provided for
+                        informational and educational purposes.
+                        Results may depend on the information entered,
+                        assumptions used and applicable formulas.
+                    </p>
+
+                    <p>
+                        Financial, tax and health-related calculations
+                        should not be treated as professional advice.
+                        When making important decisions, consider
+                        consulting a qualified professional.
+                    </p>
 
                 </div>
 
@@ -401,11 +543,15 @@ export function renderAboutTemplate() {
 
         <div id="about-page">
 
-            ${renderAboutHero()}
+            ${renderAboutIntro()}
 
             ${renderFeatures()}
 
+            ${renderWhySection()}
+
             ${renderOfferSection()}
+
+            ${renderDisclaimer()}
 
         </div>
 
