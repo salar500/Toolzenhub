@@ -289,7 +289,7 @@ export function renderArticlesPage() {
 
         <img
             class="articles-hero-image"
-            src="/assets/images/articles-hero.png"
+            src="assets/images/articles-hero.png"
             alt=""
             aria-hidden="true"
         >
