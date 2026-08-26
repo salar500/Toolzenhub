@@ -103,11 +103,11 @@ async function initializeApp() {
 /* =====================================================
        about PAGE
     ===================================================== */
+if (currentPage === "about.html") {
 
-   if (pathname === "/about" || pathname === "/about.html") {
     renderAboutPage();
-    return;
-   }
+
+}
 
     /* =====================================================
        OTHER PAGE
