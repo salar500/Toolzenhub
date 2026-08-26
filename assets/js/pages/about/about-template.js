@@ -1,57 +1,56 @@
-import {
-    aboutFeatures,
-    aboutOfferings
-} from "./about-data.js";
+/* =========================================================
+   ToolZen Hub
+   About Page Template
+========================================================= */
 
 
-function renderBreadcrumb() {
+/* =========================================================
+   ABOUT HERO
+========================================================= */
 
-    return `
-
-        <nav
-            class="about-breadcrumb"
-            aria-label="Breadcrumb"
-        >
-
-            <a href="/">
-                Home
-            </a>
-
-            <span aria-hidden="true">
-                &gt;
-            </span>
-
-            <span>
-                About
-            </span>
-
-        </nav>
-
-    `;
-}
-
-
-function renderHero() {
+function renderAboutHero() {
 
     return `
 
-        <section class="about-intro">
+        <section class="about-hero">
 
             <div class="about-container">
 
-                ${renderBreadcrumb()}
+                <div class="about-breadcrumb">
 
-                <div class="about-intro-content">
+                    <a href="index.html">
+                        Home
+                    </a>
+
+                    <span aria-hidden="true">
+                        →
+                    </span>
+
+                    <span>
+                        About
+                    </span>
+
+                </div>
+
+
+                <div class="about-hero-content">
+
+                    <span class="about-eyebrow">
+                        About ToolZen Hub
+                    </span>
+
 
                     <h1>
-                        About ToolZen Hub
+                        Smart Tools,
+                        <span>Smarter You</span>
                     </h1>
 
+
                     <p>
-                        ToolZen Hub is your one-stop destination for
-                        100+ free online calculators and useful tools.
+                        ToolZen Hub is your one-stop destination
+                        for free online calculators and useful tools.
                         Our mission is to make calculations simple,
-                        fast and accurate for everyone.
+                        fast and easy to understand for everyone.
                     </p>
 
                 </div>
@@ -64,37 +63,208 @@ function renderHero() {
 }
 
 
+/* =========================================================
+   FEATURES
+========================================================= */
+
 function renderFeatures() {
 
     return `
 
-        <section class="about-features-section">
+        <section class="about-features">
 
             <div class="about-container">
 
-                <div class="about-features">
+                <div class="about-features-grid">
 
-                    ${aboutFeatures.map(feature => `
 
-                        <article class="about-feature-card">
+                    <!-- =====================================
+                         MISSION
+                    ====================================== -->
 
-                            <div class="about-feature-icon">
+                    <article class="about-feature-card">
 
-                                ${feature.icon}
+                        <div class="about-feature-icon">
 
-                            </div>
+                            <svg
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
 
-                            <h2>
-                                ${feature.title}
-                            </h2>
+                                <path
+                                    d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                                ></path>
 
-                            <p>
-                                ${feature.description}
-                            </p>
+                            </svg>
 
-                        </article>
+                        </div>
 
-                    `).join("")}
+
+                        <h2>
+                            Our Mission
+                        </h2>
+
+
+                        <p>
+                            Empower people with accurate and
+                            easy-to-use tools.
+                        </p>
+
+                    </article>
+
+
+                    <!-- =====================================
+                         FREE
+                    ====================================== -->
+
+                    <article class="about-feature-card">
+
+                        <div class="about-feature-icon">
+
+                            <svg
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+
+                                <path
+                                    d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"
+                                ></path>
+
+                                <line
+                                    x1="7"
+                                    y1="7"
+                                    x2="7.01"
+                                    y2="7"
+                                ></line>
+
+                            </svg>
+
+                        </div>
+
+
+                        <h2>
+                            100% Free
+                        </h2>
+
+
+                        <p>
+                            Our tools are completely free
+                            to use.
+                        </p>
+
+                    </article>
+
+
+                    <!-- =====================================
+                         ACCURACY
+                    ====================================== -->
+
+                    <article class="about-feature-card">
+
+                        <div class="about-feature-icon">
+
+                            <svg
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+
+                                <path
+                                    d="M22 11.08V12a10 10 0 1 1-5.93-9.14"
+                                ></path>
+
+                                <polyline
+                                    points="22 4 12 14.01 9 11.01"
+                                ></polyline>
+
+                            </svg>
+
+                        </div>
+
+
+                        <h2>
+                            Trusted & Accurate
+                        </h2>
+
+
+                        <p>
+                            We aim to provide reliable results
+                            you can use with confidence.
+                        </p>
+
+                    </article>
+
+
+                    <!-- =====================================
+                         PRIVACY
+                    ====================================== -->
+
+                    <article class="about-feature-card">
+
+                        <div class="about-feature-icon">
+
+                            <svg
+                                width="32"
+                                height="32"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+
+                                <rect
+                                    x="3"
+                                    y="11"
+                                    width="18"
+                                    height="11"
+                                    rx="2"
+                                    ry="2"
+                                ></rect>
+
+                                <path
+                                    d="M7 11V7a5 5 0 0 1 10 0v4"
+                                ></path>
+
+                            </svg>
+
+                        </div>
+
+
+                        <h2>
+                            Privacy First
+                        </h2>
+
+
+                        <p>
+                            We respect your privacy and aim to
+                            keep your information protected.
+                        </p>
+
+                    </article>
+
 
                 </div>
 
@@ -105,64 +275,111 @@ function renderFeatures() {
     `;
 }
 
+
+/* =========================================================
+   WHAT WE OFFER
+========================================================= */
 
 function renderOfferSection() {
 
     return `
 
-        <section class="about-offer-section">
+        <section class="about-offer">
 
             <div class="about-container">
 
                 <div class="about-offer-card">
 
-                    <div class="about-section-heading">
+
+                    <div class="about-offer-content">
+
+                        <span class="about-section-eyebrow">
+                            What We Offer
+                        </span>
+
 
                         <h2>
-                            What We Offer
+                            Tools for everyday decisions
                         </h2>
 
+
                         <p>
-                            Explore a growing collection of practical
-                            tools designed to make everyday calculations
-                            easier.
+                            From financial planning to everyday
+                            calculations, ToolZen Hub brings useful
+                            tools together in one convenient place.
                         </p>
 
-                    </div>
 
-
-                    <ul class="about-offer-list">
-
-                        ${aboutOfferings.map(item => `
+                        <ul class="about-offer-list">
 
                             <li>
-                                <span
-                                    class="about-offer-bullet"
-                                    aria-hidden="true"
-                                >
-                                    ✓
-                                </span>
-
-                                <span>
-                                    ${item}
-                                </span>
+                                Financial calculators such as
+                                loans, EMI, investment and tax tools
                             </li>
 
-                        `).join("")}
+                            <li>
+                                Health and fitness calculators
+                            </li>
 
-                    </ul>
+                            <li>
+                                Business and GST calculators
+                            </li>
 
+                            <li>
+                                Math and everyday calculators
+                            </li>
 
-                    <div class="about-offer-action">
+                            <li>
+                                Unit and currency converters
+                            </li>
+
+                        </ul>
+
 
                         <a
-                            href="/"
-                            class="about-primary-button"
+                            href="index.html"
+                            class="about-button"
                         >
                             Explore Calculators
+
+                            <span aria-hidden="true">
+                                →
+                            </span>
+
                         </a>
 
                     </div>
+
+
+                    <div
+                        class="about-offer-visual"
+                        aria-hidden="true"
+                    >
+
+                        <div class="about-calculator-card">
+
+                            <div class="about-calculator-display">
+                                100+
+                            </div>
+
+                            <span>
+                                Free Tools
+                            </span>
+
+                        </div>
+
+
+                        <div class="about-floating-card about-floating-card-one">
+                            ✓ Accurate
+                        </div>
+
+
+                        <div class="about-floating-card about-floating-card-two">
+                            ⚡ Fast
+                        </div>
+
+                    </div>
+
 
                 </div>
 
@@ -173,6 +390,10 @@ function renderOfferSection() {
     `;
 }
 
+
+/* =========================================================
+   FINAL TEMPLATE
+========================================================= */
 
 export function renderAboutTemplate() {
 
@@ -180,7 +401,7 @@ export function renderAboutTemplate() {
 
         <div id="about-page">
 
-            ${renderHero()}
+            ${renderAboutHero()}
 
             ${renderFeatures()}
 
