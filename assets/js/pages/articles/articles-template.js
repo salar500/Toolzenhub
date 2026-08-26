@@ -5,6 +5,7 @@
 
 import { articles, categories } from "./articles-data.js";
 
+
 /* =========================================================
    HERO
 ========================================================= */
@@ -33,176 +34,18 @@ function renderHero() {
                     </div>
 
 
-                    <!-- ======================================
-                         HERO 3D ILLUSTRATION
-                    ======================================= -->
-
                     <div class="articles-hero-visual">
 
-                        <img
-                            class="articles-hero-image"
-                            src="assets/images/articles-hero.png"
-                            alt="Books, plant and coffee mug representing learning and financial growth"
-                        >
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    `;
-}
-
-
-                            <!-- =================================
-                                 BACKGROUND DECORATIONS
-                            ================================== -->
-
-                            <div class="articles-hero-dots"></div>
-
-                            <span class="articles-hero-plus articles-hero-plus-one">
-                                +
-                            </span>
-
-                            <span class="articles-hero-plus articles-hero-plus-two">
-                                +
-                            </span>
-
-                            <span class="articles-hero-plus articles-hero-plus-three">
-                                +
-                            </span>
-
-
-                            <!-- =================================
-                                 CURVED PLATFORM
-                            ================================== -->
-
-                            <div class="articles-hero-platform"></div>
-
-
-                            <!-- =================================
-                                 3D OBJECT GROUP
-                            ================================== -->
-
-                            <div class="articles-hero-objects">
-
-
-                                <!-- =============================
-                                     BOOK STACK
-                                ============================== -->
-
-                                <div class="articles-books">
-
-
-                                    <!-- Dark bottom book -->
-
-                                    <div class="book book-three">
-
-                                        <span class="book-cover"></span>
-
-                                    </div>
-
-
-                                    <!-- Green middle/top book -->
-
-                                    <div class="book book-two">
-
-                                        <span class="book-cover"></span>
-
-                                    </div>
-
-
-                                    <!-- Light book/page detail -->
-
-                                    <div class="book book-one">
-
-                                        <span class="book-cover"></span>
-
-                                    </div>
-
-
-                                    <!-- Book pages -->
-
-                                    <div class="book-page"></div>
-
-                                    <div class="book-dots"></div>
-
-
-                                </div>
-
-
-                                <!-- =============================
-                                     PLANT
-                                ============================== -->
-
-                                <div class="articles-hero-plant">
-
-
-                                    <div class="plant-pot">
-
-                                        <div class="plant-pot-rim"></div>
-
-                                    </div>
-
-
-                                    <div class="plant">
-
-                                        <span class="plant-stem"></span>
-
-                                        <span class="leaf leaf-one"></span>
-
-                                        <span class="leaf leaf-two"></span>
-
-                                        <span class="leaf leaf-three"></span>
-
-                                        <span class="leaf leaf-four"></span>
-
-                                    </div>
-
-
-                                </div>
-
-
-                                <!-- =============================
-                                     COFFEE MUG
-                                ============================== -->
-
-                                <div class="articles-hero-mug">
-
-                                    <div class="mug-body">
-
-                                        <div class="mug-highlight"></div>
-
-                                    </div>
-
-                                    <div class="mug-handle"></div>
-
-                                    <div class="mug-rim"></div>
-
-                                    <div class="mug-coffee"></div>
-
-                                </div>
-
-
-                            </div>
-
-
-                            <!-- =================================
-                                 SOFT GROUND SHADOW
-                            ================================== -->
-
-                            <div class="articles-hero-shadow"></div>
-
+                        <div class="articles-hero-illustration">
+
+                            <img
+                                class="articles-hero-image"
+                                src="assets/images/articles-hero.png"
+                                alt="Books, plant and coffee mug representing learning and financial growth"
+                            >
 
                         </div>
 
-
-                        <!-- =====================================
-                             HERO ACTION
-                        ====================================== -->
 
                         <div class="articles-hero-action">
 
