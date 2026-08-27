@@ -651,3 +651,93 @@ body {
         padding: 0 !important;
     }
 }
+
+
+/* =========================================================
+   Desktop / Mobile Navigation
+========================================================= */
+
+/* Desktop */
+.mobile-navigation {
+    display: none;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+
+/* =========================================================
+   Mobile
+========================================================= */
+
+@media (max-width: 768px) {
+
+    /* Hide desktop navigation */
+    .navbar__menu {
+        display: none;
+    }
+
+
+    /* Show hamburger */
+    .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+    }
+
+
+    .menu-toggle span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        border-radius: 2px;
+        background: currentColor;
+    }
+
+
+    /* Mobile menu container */
+    .mobile-navigation {
+        display: block;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            max-height 0.25s ease,
+            opacity 0.2s ease,
+            visibility 0.25s ease;
+    }
+
+
+    /* Open state */
+    .mobile-navigation.is-open {
+        max-height: 400px;
+        opacity: 1;
+        visibility: visible;
+    }
+
+
+    /* Mobile links */
+    .mobile-navigation__menu {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 20px 20px;
+    }
+
+
+    .mobile-navigation__link {
+        display: block;
+        padding: 14px 0;
+        text-decoration: none;
+    }
+
+}
