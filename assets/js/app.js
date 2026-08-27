@@ -101,7 +101,7 @@ async function initializeApp() {
 
 if (page.type === "contact") {
 
-    initializeContactPage();
+   renderContactPage();
 
     renderFooter();
 
