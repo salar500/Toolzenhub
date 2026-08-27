@@ -1,59 +1,99 @@
 /* =========================================================
-   Contact Form
-   Frontend Test
+   ToolZen Hub
+   Contact Page
+   Page-Specific JavaScript
 ========================================================= */
 
-const contactForm = document.querySelector(".contact-form");
 
-if (contactForm) {
+/* =========================================================
+   CONTACT PAGE
+========================================================= */
 
-    contactForm.addEventListener("submit", (event) => {
+export function renderContactPage() {
 
-        event.preventDefault();
-
-        const nameInput =
-            contactForm.querySelector("#name");
-
-        const emailInput =
-            contactForm.querySelector("#email");
-
-        const messageInput =
-            contactForm.querySelector("#message");
+    const contactForm =
+        document.querySelector(".contact-form");
 
 
-        if (
-            !nameInput ||
-            !emailInput ||
-            !messageInput
-        ) {
-            return;
-        }
+    if (!contactForm) {
+        return;
+    }
 
 
-        const name =
-            nameInput.value.trim();
+    /* =====================================================
+       CONTACT FORM SUBMISSION
+    ===================================================== */
 
-        const email =
-            emailInput.value.trim();
+    contactForm.addEventListener(
+        "submit",
+        (event) => {
 
-        const message =
-            messageInput.value.trim();
-
-
-        if (!name || !email || !message) {
-            return;
-        }
+            event.preventDefault();
 
 
-        console.log(
-            "Contact form submission:",
-            {
-                name: name,
-                email: email,
-                message: message
+            const nameInput =
+                contactForm.querySelector("#name");
+
+
+            const emailInput =
+                contactForm.querySelector("#email");
+
+
+            const messageInput =
+                contactForm.querySelector("#message");
+
+
+            if (
+                !nameInput ||
+                !emailInput ||
+                !messageInput
+            ) {
+                return;
             }
-        );
 
-    });
+
+            const name =
+                nameInput.value.trim();
+
+
+            const email =
+                emailInput.value.trim();
+
+
+            const message =
+                messageInput.value.trim();
+
+
+            if (
+                !name ||
+                !email ||
+                !message
+            ) {
+                return;
+            }
+
+
+            /* =================================================
+               TEMPORARY TEST OUTPUT
+            ================================================= */
+
+            console.log(
+                "Contact form submission:",
+                {
+                    name,
+                    email,
+                    message
+                }
+            );
+
+
+            /* =================================================
+               RESET FORM
+            ================================================= */
+
+            contactForm.reset();
+
+        }
+    );
 
 }
