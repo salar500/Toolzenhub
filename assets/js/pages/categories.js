@@ -6,6 +6,10 @@
 import { renderHeader } from "../components/header.js";
 import { renderFooter } from "../components/footer.js";
 
+import {
+    searchCalculators
+} from "../utils/categories-search.js";
+
 
 /* =========================================================
    Category Data
@@ -81,7 +85,7 @@ const categories = [
 
 
 /* =========================================================
-   Render Category Cards
+   RENDER CATEGORY CARDS
 ========================================================= */
 
 function renderCategoriesPage() {
@@ -140,7 +144,216 @@ function renderCategoriesPage() {
 
 
 /* =========================================================
-   Search
+   RENDER CALCULATOR SEARCH RESULTS
+========================================================= */
+
+function renderCalculatorResults(query) {
+
+    const grid = document.getElementById(
+        "categories-grid"
+    );
+
+    if (!grid) {
+        return;
+    }
+
+
+    const results =
+        searchCalculators(query);
+
+
+    /* =====================================================
+       Empty Search
+    ===================================================== */
+
+    if (!query) {
+
+        renderCategoriesPage();
+
+        return;
+    }
+
+
+    /* =====================================================
+       No Results
+    ===================================================== */
+
+    if (!results.length) {
+
+        grid.innerHTML = `
+
+            <div class="category-page-card">
+
+                <div
+                    class="category-page-card__icon"
+                    aria-hidden="true"
+                >
+                    🔎
+                </div>
+
+
+                <div class="category-page-card__content">
+
+                    <h2 class="category-page-card__title">
+                        No calculators found
+                    </h2>
+
+                    <p class="category-page-card__description">
+                        No calculators matched "${escapeHtml(query)}".
+                        Try another search.
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    /* =====================================================
+       Results
+    ===================================================== */
+
+    grid.innerHTML = results.map(calculator => `
+
+        <a
+            href="${calculator.url}"
+            class="category-page-card"
+        >
+
+            <div
+                class="
+                    category-page-card__icon
+                    category-page-card__icon--${getCategoryIconClass(
+                        calculator.category
+                    )}
+                "
+                aria-hidden="true"
+            >
+                ${getCategoryIcon(calculator.category)}
+            </div>
+
+
+            <div class="category-page-card__content">
+
+                <span
+                    style="
+                        display:block;
+                        margin-bottom:4px;
+                        color:#0b9f58;
+                        font-size:10px;
+                        font-weight:700;
+                        text-transform:uppercase;
+                        letter-spacing:.4px;
+                    "
+                >
+                    ${escapeHtml(calculator.category)}
+                </span>
+
+
+                <h2 class="category-page-card__title">
+                    ${escapeHtml(calculator.title)}
+                </h2>
+
+
+                <p class="category-page-card__description">
+                    ${escapeHtml(calculator.description)}
+                </p>
+
+            </div>
+
+
+            <span
+                class="category-page-card__arrow"
+                aria-hidden="true"
+            >
+                →
+            </span>
+
+        </a>
+
+    `).join("");
+}
+
+
+/* =========================================================
+   CATEGORY ICON
+========================================================= */
+
+function getCategoryIcon(category) {
+
+    const icons = {
+
+        Loans: "🏠",
+
+        Investment: "📈",
+
+        Tax: "🧾",
+
+        Health: "♥",
+
+        Business: "💼",
+
+        Math: "🔢",
+
+        Converter: "↻"
+
+    };
+
+
+    return icons[category] || "▦";
+}
+
+
+/* =========================================================
+   CATEGORY ICON CLASS
+========================================================= */
+
+function getCategoryIconClass(category) {
+
+    const classes = {
+
+        Loans: "loans",
+
+        Investment: "investment",
+
+        Tax: "tax",
+
+        Health: "health",
+
+        Business: "business",
+
+        Math: "math",
+
+        Converter: "converter"
+
+    };
+
+
+    return classes[category] || "more";
+}
+
+
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
+
+function escapeHtml(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* =========================================================
+   SEARCH
 ========================================================= */
 
 function initializeSearch() {
@@ -159,30 +372,126 @@ function initializeSearch() {
     }
 
 
-    form.addEventListener("submit", function(event) {
+    /* =====================================================
+       READ SEARCH FROM URL
+    ===================================================== */
 
-        event.preventDefault();
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
 
 
-        const query = input.value.trim();
+    const urlQuery =
+        params.get("q")?.trim() || "";
 
 
-        if (!query) {
-            input.focus();
-            return;
+    if (urlQuery) {
+
+        input.value = urlQuery;
+
+        renderCalculatorResults(urlQuery);
+
+    }
+
+
+    /* =====================================================
+       SUBMIT
+    ===================================================== */
+
+    form.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const query =
+                input.value.trim();
+
+
+            if (!query) {
+
+                window.history.replaceState(
+                    {},
+                    "",
+                    "categories.html"
+                );
+
+
+                renderCategoriesPage();
+
+                input.focus();
+
+                return;
+            }
+
+
+            const newUrl =
+                `categories.html?q=${encodeURIComponent(query)}`;
+
+
+            window.history.pushState(
+                {},
+                "",
+                newUrl
+            );
+
+
+            renderCalculatorResults(query);
+
         }
+    );
 
 
-        window.location.href =
-            `search.html?q=${encodeURIComponent(query)}`;
+    /* =====================================================
+       LIVE SEARCH
+    ===================================================== */
 
-    });
+    input.addEventListener(
+        "input",
+        function() {
+
+            const query =
+                input.value.trim();
+
+
+            if (!query) {
+
+                window.history.replaceState(
+                    {},
+                    "",
+                    "categories.html"
+                );
+
+
+                renderCategoriesPage();
+
+                return;
+            }
+
+
+            const newUrl =
+                `categories.html?q=${encodeURIComponent(query)}`;
+
+
+            window.history.replaceState(
+                {},
+                "",
+                newUrl
+            );
+
+
+            renderCalculatorResults(query);
+
+        }
+    );
 
 }
 
 
 /* =========================================================
-   Application
+   APPLICATION
 ========================================================= */
 
 function initializeCategoriesPage() {
@@ -199,7 +508,7 @@ function initializeCategoriesPage() {
 
 
 /* =========================================================
-   DOM Ready
+   DOM READY
 ========================================================= */
 
 document.addEventListener(
