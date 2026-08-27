@@ -343,7 +343,7 @@ export function renderFooter() {
 
     /* =====================================================
        Newsletter Form
-       Prevent empty/default form submission
+       Prevent default submission
     ===================================================== */
 
     const newsletterForm =
@@ -359,6 +359,7 @@ export function renderFooter() {
             (event) => {
 
                 event.preventDefault();
+
 
                 const emailInput =
                     newsletterForm.querySelector(
