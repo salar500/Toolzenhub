@@ -11,6 +11,11 @@ export function renderHero() {
         return;
     }
 
+
+    /* =====================================================
+       HERO HTML
+    ===================================================== */
+
     hero.innerHTML = `
 
         <section class="hero">
@@ -62,12 +67,15 @@ export function renderHero() {
                         </p>
 
 
-                        <!-- Search -->
+                        <!-- =================================
+                             Calculator Search
+                        ================================== -->
 
                         <form
                             class="hero__search"
                             id="calculator-search"
                             role="search"
+                            novalidate
                         >
 
                             <span
@@ -97,6 +105,17 @@ export function renderHero() {
 
                         </form>
 
+
+                        <!-- =================================
+                             Search Results
+                        ================================== -->
+
+                        <div
+                            id="hero-calculator-search-results"
+                            class="calculator-search-results"
+                            aria-live="polite"
+                        ></div>
+
                     </div>
 
 
@@ -110,7 +129,7 @@ export function renderHero() {
                             src="/Toolzenhub/assets/Images/hero-calculators.png"
                             alt="Financial calculators, charts and money"
                             class="hero__image"
-                             loading="eager"
+                            loading="eager"
                         >
 
                     </div>
@@ -121,4 +140,96 @@ export function renderHero() {
 
         </section>
     `;
+
+
+    /* =====================================================
+       CALCULATOR SEARCH
+       Home Hero → Shared Calculator Search
+    ===================================================== */
+
+    const searchForm =
+        hero.querySelector("#calculator-search");
+
+
+    const searchInput =
+        searchForm?.querySelector('input[name="q"]');
+
+
+    if (!searchForm || !searchInput) {
+        return;
+    }
+
+
+    /* =====================================================
+       SUBMIT
+    ===================================================== */
+
+    searchForm.addEventListener(
+        "submit",
+        (event) => {
+
+            event.preventDefault();
+
+
+            const query =
+                searchInput.value.trim();
+
+
+            /* =============================================
+               Empty Search
+            ============================================= */
+
+            if (!query) {
+
+                searchInput.focus();
+
+                return;
+            }
+
+
+            /* =============================================
+               Send Calculator Search Event
+            ============================================= */
+
+            document.dispatchEvent(
+                new CustomEvent(
+                    "toolzen:calculator-search",
+                    {
+                        detail: {
+                            query
+                        }
+                    }
+                )
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       ENTER KEY / LIVE SEARCH SUPPORT
+    ===================================================== */
+
+    searchInput.addEventListener(
+        "input",
+        () => {
+
+            const query =
+                searchInput.value.trim();
+
+
+            document.dispatchEvent(
+                new CustomEvent(
+                    "toolzen:calculator-search",
+                    {
+                        detail: {
+                            query
+                        }
+                    }
+                )
+            );
+
+        }
+    );
+
 }
