@@ -1,42 +1,54 @@
 /* =========================================================
-   TOOLZEN HUB — HOME PAGE
-   MOBILE LEFT / RIGHT EDGE ALIGNMENT FIX
-   HEADER IS NOT TOUCHED
+   ToolZen Hub
+   Home Page
+   Responsive Layout
+   Does NOT interfere with Header / Footer
 ========================================================= */
 
 
 /* =========================================================
-   GLOBAL
+   BOX SIZING
 ========================================================= */
 
-html,
-body {
-    width: 100% !important;
-    max-width: 100% !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    overflow-x: hidden !important;
-
+html {
     box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
 }
 
 
 /* =========================================================
-   MAIN HOME APPLICATION
+   BODY
+========================================================= */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   MAIN APP
 ========================================================= */
 
 #app {
-    display: block;
+    width: 100%;
+    max-width: 100%;
 
-    width: 100% !important;
-    max-width: 100% !important;
+    margin: 0;
+    padding: 0;
 
-    margin: 0 !important;
-    padding: 0 !important;
-
-    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 
@@ -44,32 +56,59 @@ body {
    HOME SECTIONS
 ========================================================= */
 
-#app > section,
 #hero,
 #categories,
 #popular-calculators,
 #latest-articles {
+    width: 100%;
+    max-width: 100%;
 
-    width: 100% !important;
-    max-width: 100% !important;
-
-    margin: 0 !important;
+    margin: 0;
 
     box-sizing: border-box;
 }
 
 
 /* =========================================================
-   HOME CONTAINER
+   IMPORTANT
+   DO NOT REMOVE CONTAINER PADDING
+
+   The shared .container controls the correct
+   left/right alignment for desktop and mobile.
 ========================================================= */
 
 #app .container {
+    width: 100%;
 
-    width: 100% !important;
-    max-width: none !important;
+    margin-left: auto;
+    margin-right: auto;
 
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   GRID SAFETY
+========================================================= */
+
+#categories .category-grid,
+#popular-calculators .calculator-grid {
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   GRID CHILD SAFETY
+========================================================= */
+
+#categories .category-card,
+#popular-calculators .calculator-card {
+    min-width: 0;
 
     box-sizing: border-box;
 }
@@ -77,95 +116,65 @@ body {
 
 /* =========================================================
    MOBILE
-   IMPORTANT:
-   Use 100%, NOT 100vw
 ========================================================= */
 
 @media (max-width: 900px) {
 
-    #app {
-        width: 100% !important;
-        max-width: 100% !important;
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
 
-        margin: 0 !important;
-        padding: 0 !important;
-
-        overflow-x: hidden !important;
+        overflow-x: hidden;
     }
 
 
-    #app > section,
+    #app {
+        width: 100%;
+        max-width: 100%;
+
+        overflow-x: hidden;
+    }
+
+
     #hero,
     #categories,
     #popular-calculators,
     #latest-articles {
+        width: 100%;
+        max-width: 100%;
 
-        width: 100% !important;
-        max-width: 100% !important;
+        margin-left: 0;
+        margin-right: 0;
 
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-
-        left: auto !important;
-        right: auto !important;
-
-        transform: none !important;
-
-        box-sizing: border-box;
+        transform: none;
     }
 
 
-    /* =====================================================
-       HOME CONTAINER
-       Remove inherited desktop max-width/padding
-    ===================================================== */
+    /*
+     * Keep the shared container's horizontal
+     * spacing instead of forcing it to zero.
+     */
 
     #app .container {
+        width: 100%;
+        max-width: 1200px;
 
-        width: 100% !important;
-        max-width: none !important;
-
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+        margin-left: auto;
+        margin-right: auto;
 
         box-sizing: border-box;
     }
 
 
-    /* =====================================================
-       CATEGORY GRID
-       Grid itself stays inside viewport
-    ===================================================== */
-
-    #categories .category-grid {
-
-        width: 100% !important;
-        max-width: 100% !important;
-
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-
-        box-sizing: border-box;
-    }
-
-
-    /* =====================================================
-       CALCULATOR GRID
-    ===================================================== */
-
+    #categories .category-grid,
     #popular-calculators .calculator-grid {
+        width: 100%;
+        max-width: 100%;
 
-        width: 100% !important;
-        max-width: 100% !important;
-
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-
-        box-sizing: border-box;
+        min-width: 0;
     }
+
 }
 
 
@@ -175,32 +184,43 @@ body {
 
 @media (max-width: 600px) {
 
-    #app,
-    #app > section,
+    #app {
+        width: 100%;
+        max-width: 100%;
+    }
+
+
     #hero,
     #categories,
     #popular-calculators,
     #latest-articles {
-
-        width: 100% !important;
-        max-width: 100% !important;
-
-        margin-left: 0 !important;
-        margin-right: 0 !important;
+        width: 100%;
+        max-width: 100%;
     }
 
+
+    /*
+     * DO NOT use 100vw here.
+     *
+     * 100vw can create horizontal overflow because
+     * mobile browsers may include scrollbar space.
+     */
 
     #app .container {
+        width: 100%;
+        max-width: 1200px;
 
-        width: 100% !important;
-        max-width: none !important;
-
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+        margin-left: auto;
+        margin-right: auto;
     }
+
+
+    #categories .category-grid,
+    #popular-calculators .calculator-grid {
+        width: 100%;
+        max-width: 100%;
+    }
+
 }
 
 
@@ -211,13 +231,18 @@ body {
 @media (max-width: 380px) {
 
     #app,
-    #app > section,
     #hero,
     #categories,
     #popular-calculators,
     #latest-articles {
-
-        width: 100% !important;
-        max-width: 100% !important;
+        width: 100%;
+        max-width: 100%;
     }
+
+
+    #app .container {
+        width: 100%;
+        max-width: 1200px;
+    }
+
 }
