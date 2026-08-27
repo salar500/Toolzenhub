@@ -26,11 +26,6 @@ export function renderHero() {
 
                 <div class="hero__grid">
 
-
-                    <!-- =====================================
-                         Hero Content
-                    ====================================== -->
-
                     <div class="hero__content">
 
                         <div class="hero__eyebrow">
@@ -106,10 +101,6 @@ export function renderHero() {
                         </form>
 
 
-                        <!-- =================================
-                             Search Results
-                        ================================== -->
-
                         <div
                             id="hero-calculator-search-results"
                             class="calculator-search-results"
@@ -144,12 +135,11 @@ export function renderHero() {
 
     /* =====================================================
        CALCULATOR SEARCH
-       Home Hero → Shared Calculator Search
+       Home Hero → Categories Page
     ===================================================== */
 
     const searchForm =
         hero.querySelector("#calculator-search");
-
 
     const searchInput =
         searchForm?.querySelector('input[name="q"]');
@@ -159,42 +149,21 @@ export function renderHero() {
         return;
     }
 
-/* =====================================================
-   SUBMIT
-===================================================== */
 
-searchForm.addEventListener(
-    "submit",
-    (event) => {
+    /* =====================================================
+       SUBMIT
+    ===================================================== */
 
-        event.preventDefault();
+    searchForm.addEventListener(
+        "submit",
+        (event) => {
 
+            event.preventDefault();
 
-        const query =
-            searchInput.value.trim();
-
-
-        /* =============================================
-           Empty Search
-        ============================================= */
-
-        if (!query) {
-
-            searchInput.focus();
-
-            return;
-        }
+            const query =
+                searchInput.value.trim();
 
 
-        /* =============================================
-           Open Categories With Calculator Search
-        ============================================= */
-
-        window.location.href =
-            `/Toolzenhub/categories.html?q=${encodeURIComponent(query)}`;
-
-    }
-);
             /* =============================================
                Empty Search
             ============================================= */
@@ -208,46 +177,11 @@ searchForm.addEventListener(
 
 
             /* =============================================
-               Send Calculator Search Event
+               Open Categories Page With Search Query
             ============================================= */
 
-            document.dispatchEvent(
-                new CustomEvent(
-                    "toolzen:calculator-search",
-                    {
-                        detail: {
-                            query
-                        }
-                    }
-                )
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       ENTER KEY / LIVE SEARCH SUPPORT
-    ===================================================== */
-
-    searchInput.addEventListener(
-        "input",
-        () => {
-
-            const query =
-                searchInput.value.trim();
-
-
-            document.dispatchEvent(
-                new CustomEvent(
-                    "toolzen:calculator-search",
-                    {
-                        detail: {
-                            query
-                        }
-                    }
-                )
-            );
+            window.location.href =
+                `/Toolzenhub/categories.html?q=${encodeURIComponent(query)}`;
 
         }
     );
