@@ -7,7 +7,7 @@
    - Categories Page Search
 
    Purpose:
-   Search calculators and tools only.
+   Search calculators only.
 
    This is completely separate from article search.
 ========================================================= */
@@ -21,222 +21,178 @@ const calculators = [
 
     {
         title: "Loan Comparison",
-        description:
-            "Compare loans side by side",
+        description: "Compare loans side by side",
         category: "Loans",
-        keywords:
-            "loan comparison loans interest emi repayment",
-        url: "loan-comparison.html"
+        keywords: "loan comparison loans interest emi repayment",
+        url: "/Toolzenhub/calculators/loan-comparison/"
     },
 
     {
         title: "EMI Calculator",
-        description:
-            "Calculate your EMI instantly",
+        description: "Calculate your EMI instantly",
         category: "Loans",
-        keywords:
-            "emi loan monthly payment interest",
-        url: "emi-calculator.html"
+        keywords: "emi loan monthly payment interest",
+        url: "/Toolzenhub/calculators/emi/"
     },
 
     {
         title: "Home Loan Calculator",
-        description:
-            "Calculate your home loan eligibility",
+        description: "Calculate your home loan",
         category: "Loans",
-        keywords:
-            "home loan emi housing loan interest",
-        url: "home-loan.html"
+        keywords: "home loan housing loan emi interest",
+        url: "/Toolzenhub/calculators/home-loan/"
     },
 
     {
         title: "Personal Loan Calculator",
-        description:
-            "Calculate personal loan payments",
+        description: "Calculate personal loan payments",
         category: "Loans",
-        keywords:
-            "personal loan emi interest repayment",
-        url: "personal-loan.html"
+        keywords: "personal loan emi interest repayment",
+        url: "/Toolzenhub/calculators/personal-loan/"
     },
 
     {
         title: "SIP Calculator",
-        description:
-            "Plan your SIP investments",
+        description: "Plan your SIP investments",
         category: "Investment",
-        keywords:
-            "sip investment mutual fund returns",
-        url: "sip-calculator.html"
+        keywords: "sip investment mutual fund returns savings",
+        url: "/Toolzenhub/calculators/sip/"
     },
 
     {
         title: "PPF Calculator",
-        description:
-            "Calculate PPF investment returns",
+        description: "Calculate PPF investment returns",
         category: "Investment",
-        keywords:
-            "ppf investment returns savings",
-        url: "ppf-calculator.html"
+        keywords: "ppf investment returns savings",
+        url: "/Toolzenhub/calculators/ppf/"
     },
 
     {
         title: "FD Calculator",
-        description:
-            "Calculate fixed deposit returns",
+        description: "Calculate fixed deposit returns",
         category: "Investment",
-        keywords:
-            "fd fixed deposit investment interest",
-        url: "fd-calculator.html"
+        keywords: "fd fixed deposit investment interest",
+        url: "/Toolzenhub/calculators/fd/"
     },
 
     {
         title: "CAGR Calculator",
-        description:
-            "Calculate compound annual growth rate",
+        description: "Calculate compound annual growth rate",
         category: "Investment",
-        keywords:
-            "cagr growth investment return",
-        url: "cagr-calculator.html"
+        keywords: "cagr growth investment return",
+        url: "/Toolzenhub/calculators/cagr/"
     },
 
     {
         title: "GST Calculator",
-        description:
-            "Calculate GST easily and accurately",
+        description: "Calculate GST easily and accurately",
         category: "Tax",
-        keywords:
-            "gst tax goods services tax",
-        url: "gst-calculator.html"
+        keywords: "gst tax goods services tax calculation",
+        url: "/Toolzenhub/calculators/gst/"
     },
 
     {
         title: "Income Tax Calculator",
-        description:
-            "Estimate your income tax",
+        description: "Estimate your income tax",
         category: "Tax",
-        keywords:
-            "income tax tax calculation salary",
-        url: "income-tax.html"
+        keywords: "income tax tax calculation salary",
+        url: "/Toolzenhub/calculators/income-tax/"
     },
 
     {
         title: "BMI Calculator",
-        description:
-            "Check your body mass index",
+        description: "Check your body mass index",
         category: "Health",
-        keywords:
-            "bmi body mass index health weight",
-        url: "bmi-calculator.html"
+        keywords: "bmi health weight body mass index",
+        url: "/Toolzenhub/calculators/bmi/"
     },
 
     {
         title: "Calorie Calculator",
-        description:
-            "Estimate your daily calorie needs",
+        description: "Estimate your daily calorie needs",
         category: "Health",
-        keywords:
-            "calorie calories health diet daily",
-        url: "calorie-calculator.html"
+        keywords: "calorie calories health diet daily",
+        url: "/Toolzenhub/calculators/calorie/"
     },
 
     {
         title: "BMR Calculator",
-        description:
-            "Calculate your basal metabolic rate",
+        description: "Calculate your basal metabolic rate",
         category: "Health",
-        keywords:
-            "bmr basal metabolic rate calories",
-        url: "bmr-calculator.html"
+        keywords: "bmr basal metabolic rate calories",
+        url: "/Toolzenhub/calculators/bmr/"
     },
 
     {
         title: "Profit Calculator",
-        description:
-            "Calculate business profit",
+        description: "Calculate business profit",
         category: "Business",
-        keywords:
-            "profit business revenue cost",
-        url: "profit-calculator.html"
+        keywords: "profit business revenue cost",
+        url: "/Toolzenhub/calculators/profit/"
     },
 
     {
         title: "Margin Calculator",
-        description:
-            "Calculate profit margin",
+        description: "Calculate profit margin",
         category: "Business",
-        keywords:
-            "margin profit business percentage",
-        url: "margin-calculator.html"
+        keywords: "margin profit business percentage",
+        url: "/Toolzenhub/calculators/margin/"
     },
 
     {
         title: "ROI Calculator",
-        description:
-            "Calculate return on investment",
+        description: "Calculate return on investment",
         category: "Business",
-        keywords:
-            "roi return investment business",
-        url: "roi-calculator.html"
+        keywords: "roi return investment business",
+        url: "/Toolzenhub/calculators/roi/"
     },
 
     {
         title: "Percentage Calculator",
-        description:
-            "Calculate percentages easily",
+        description: "Calculate percentages easily",
         category: "Math",
-        keywords:
-            "percentage percent maths calculation",
-        url: "percentage-calculator.html"
+        keywords: "percentage percent maths calculation",
+        url: "/Toolzenhub/calculators/percentage/"
     },
 
     {
         title: "Ratio Calculator",
-        description:
-            "Calculate and simplify ratios",
+        description: "Calculate and simplify ratios",
         category: "Math",
-        keywords:
-            "ratio maths proportion calculation",
-        url: "ratio-calculator.html"
+        keywords: "ratio maths proportion calculation",
+        url: "/Toolzenhub/calculators/ratio/"
     },
 
     {
         title: "Age Calculator",
-        description:
-            "Calculate age accurately",
+        description: "Calculate age accurately",
         category: "Math",
-        keywords:
-            "age date birth calculation",
-        url: "age-calculator.html"
+        keywords: "age date birth calculation",
+        url: "/Toolzenhub/calculators/age/"
     },
 
     {
         title: "Unit Converter",
-        description:
-            "Convert common units quickly",
+        description: "Convert common units quickly",
         category: "Converter",
-        keywords:
-            "unit conversion length weight temperature",
-        url: "unit-converter.html"
+        keywords: "unit conversion length weight temperature",
+        url: "/Toolzenhub/calculators/unit-converter/"
     },
 
     {
         title: "Currency Converter",
-        description:
-            "Convert currencies easily",
+        description: "Convert currencies easily",
         category: "Converter",
-        keywords:
-            "currency exchange money conversion",
-        url: "currency-converter.html"
+        keywords: "currency exchange money conversion",
+        url: "/Toolzenhub/calculators/currency/"
     },
 
     {
         title: "Date Calculator",
-        description:
-            "Calculate dates and date differences",
+        description: "Calculate dates and date differences",
         category: "Converter",
-        keywords:
-            "date days calendar difference",
-        url: "date-calculator.html"
+        keywords: "date days calendar difference",
+        url: "/Toolzenhub/calculators/date/"
     }
 
 ];
@@ -260,7 +216,7 @@ export function searchCalculators(query) {
 
 
     return calculators.filter(
-        (calculator) => {
+        calculator => {
 
             const searchableText = [
 
@@ -297,111 +253,21 @@ export function getCalculators() {
 
 
 /* =========================================================
-   RENDER SEARCH RESULTS
+   CALCULATOR SEARCH URL
 ========================================================= */
 
-export function renderCalculatorSearchResults(
-    results,
-    container
-) {
+export function getCalculatorSearchUrl(query) {
 
-    if (!container) {
-        return;
+    const search =
+        String(query || "").trim();
+
+
+    if (!search) {
+        return "/Toolzenhub/categories.html";
     }
 
 
-    container.innerHTML = "";
-
-
-    if (!results.length) {
-
-        container.innerHTML = `
-
-            <div class="calculator-search-empty">
-
-                No calculators found.
-
-            </div>
-
-        `;
-
-        return;
-    }
-
-
-    const fragment =
-        document.createDocumentFragment();
-
-
-    results.forEach(
-        (calculator) => {
-
-            const link =
-                document.createElement("a");
-
-
-            link.href =
-                calculator.url;
-
-
-            link.className =
-                "calculator-search-result";
-
-
-            link.innerHTML = `
-
-                <div class="calculator-search-result__content">
-
-                    <strong>
-                        ${calculator.title}
-                    </strong>
-
-                    <span>
-                        ${calculator.description}
-                    </span>
-
-                    <small>
-                        ${calculator.category}
-                    </small>
-
-                </div>
-
-
-                <span
-                    class="calculator-search-result__arrow"
-                    aria-hidden="true"
-                >
-                    →
-                </span>
-
-            `;
-
-
-            fragment.appendChild(link);
-
-        }
-    );
-
-
-    container.appendChild(fragment);
-
-}
-
-
-/* =========================================================
-   CLEAR SEARCH RESULTS
-========================================================= */
-
-export function clearCalculatorSearchResults(
-    container
-) {
-
-    if (!container) {
-        return;
-    }
-
-
-    container.innerHTML = "";
+    return `/Toolzenhub/categories.html?q=${encodeURIComponent(search)}`;
 
 }
 
@@ -416,8 +282,6 @@ export default {
 
     getCalculators,
 
-    renderCalculatorSearchResults,
-
-    clearCalculatorSearchResults
+    getCalculatorSearchUrl
 
 };
