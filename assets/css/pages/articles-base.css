@@ -1,8 +1,7 @@
-
 /* =========================================================
    ToolZen Hub
    Articles
-   Base Styles
+   Base
 ========================================================= */
 
 
@@ -112,277 +111,37 @@
 
 
 /* =========================================================
-   ARTICLE CARD
-========================================================= */
-
-.article-card {
-    display: grid;
-    grid-template-columns:
-        190px
-        minmax(0, 1fr);
-
-    gap: 20px;
-
-    min-height: 175px;
-
-    padding: 15px;
-
-    border: 1px solid var(--articles-border);
-    border-radius: 12px;
-
-    background: var(--articles-white);
-
-    box-shadow:
-        0 3px 12px rgba(15, 23, 42, .04);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        border-color .2s ease;
-}
-
-
-.article-card:hover {
-    border-color: #B7E8CB;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 10px 25px rgba(15, 23, 42, .08);
-}
-
-
-/* =========================================================
-   ARTICLE IMAGE
-========================================================= */
-
-.article-card-image-link {
-    display: block;
-
-    overflow: hidden;
-
-    height: 145px;
-
-    border-radius: 9px;
-}
-
-
-.article-card-image {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-
-    transition:
-        transform .35s ease;
-}
-
-
-.article-card:hover .article-card-image {
-    transform: scale(1.04);
-}
-
-
-/* =========================================================
-   ARTICLE CONTENT
-========================================================= */
-
-.article-card-content {
-    display: flex;
-
-    min-width: 0;
-
-    flex-direction: column;
-
-    justify-content: space-between;
-
-    padding: 2px 0;
-}
-
-
-.article-card-category {
-    display: inline-block;
-
-    margin-bottom: 6px;
-
-    color: var(--articles-green);
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    letter-spacing: .09em;
-
-    text-transform: uppercase;
-}
-
-
-.article-card h2 {
-    margin: 0;
-
-    font-size: 17px;
-
-    line-height: 1.35;
-}
-
-
-.article-card h2 a {
-    color: var(--articles-heading);
-
-    text-decoration: none;
-
-    transition:
-        color .2s;
-}
-
-
-.article-card h2 a:hover {
-    color: var(--articles-green);
-}
-
-
-.article-card p {
-    display: -webkit-box;
-
-    margin: 7px 0 0;
-
-    overflow: hidden;
-
-    color: var(--articles-body);
-
-    font-size: 12px;
-
-    line-height: 1.55;
-
-    -webkit-box-orient: vertical;
-
-    -webkit-line-clamp: 2;
-}
-
-
-/* =========================================================
-   ARTICLE META
-========================================================= */
-
-.article-card-meta {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 15px;
-
-    margin-top: 12px;
-
-    padding-top: 9px;
-
-    border-top: 1px solid var(--articles-border-light);
-}
-
-
-.article-meta-items {
-    display: flex;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: 13px;
-}
-
-
-.article-meta-items span {
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 4px;
-
-    color: var(--articles-muted);
-
-    font-size: 10px;
-}
-
-
-.article-arrow {
-    flex: 0 0 auto;
-
-    color: var(--articles-green);
-
-    font-size: 17px;
-
-    font-weight: 700;
-
-    transition:
-        transform .2s;
-}
-
-
-.article-card:hover .article-arrow {
-    transform: translateX(4px);
-}
-
-
-/* =========================================================
-   ARTICLES LIST
-========================================================= */
-
-.articles-list {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 15px;
-}
-
-
-/* =========================================================
    EMPTY STATE
 ========================================================= */
 
 .articles-empty {
     display: grid;
-
     place-items: center;
-
     min-height: 280px;
-
     padding: 30px;
-
     border: 1px solid var(--articles-border);
-
     border-radius: 12px;
-
     background: var(--articles-white);
-
     text-align: center;
 }
 
 
 .articles-empty-icon {
     margin-bottom: 10px;
-
     font-size: 30px;
 }
 
 
 .articles-empty h2 {
     margin: 0;
-
     color: var(--articles-heading);
-
     font-size: 20px;
 }
 
 
 .articles-empty p {
     margin: 7px 0 0;
-
     color: var(--articles-body);
-
     font-size: 13px;
 }
 
@@ -393,13 +152,9 @@
 
 .articles-pagination {
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 7px;
-
     margin-top: 28px;
 }
 
@@ -407,27 +162,16 @@
 .pagination-button,
 .pagination-next {
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
     height: 36px;
-
     border: 1px solid var(--articles-border);
-
     border-radius: 7px;
-
     background: var(--articles-white);
-
     color: #475569;
-
     font: inherit;
-
     font-size: 11px;
-
     font-weight: 700;
-
     cursor: pointer;
 }
 
@@ -440,32 +184,26 @@
 .pagination-button:hover,
 .pagination-next:hover {
     border-color: #A7DDBD;
-
     background: #F1FBF5;
-
     color: var(--articles-green);
 }
 
 
 .pagination-button.active {
     border-color: var(--articles-green);
-
     background: var(--articles-green);
-
     color: #FFFFFF;
 }
 
 
 .pagination-next {
     gap: 7px;
-
     padding: 0 13px;
 }
 
 
 .pagination-dots {
     color: var(--articles-muted);
-
     font-size: 12px;
 }
 
@@ -476,20 +214,12 @@
 
 .sr-only {
     position: absolute;
-
     width: 1px;
-
     height: 1px;
-
     padding: 0;
-
     margin: -1px;
-
     overflow: hidden;
-
     clip: rect(0, 0, 0, 0);
-
     white-space: nowrap;
-
     border: 0;
 }
