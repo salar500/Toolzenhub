@@ -1,17 +1,28 @@
 /* =========================================================
    ToolZen Hub
    Privacy Policy Page
-   Page-Specific Styles 
+   Page-Specific Styles
 ========================================================= */
 
 
-.privacy-page {
+/* =========================================================
+   LEGAL PAGE
+========================================================= */
+
+.legal-page {
     width: 100%;
+
     box-sizing: border-box;
 }
 
 
-.privacy-hero {
+/* =========================================================
+   LEGAL HERO
+========================================================= */
+
+.legal-page__hero {
+    width: 100%;
+
     padding: 55px 20px 40px;
 
     text-align: center;
@@ -19,10 +30,22 @@
     background: #f7fbf9;
 
     border-bottom: 1px solid #e7eeeb;
+
+    box-sizing: border-box;
 }
 
 
-.privacy-hero__title {
+.legal-page__hero .container {
+    width: calc(100% - 40px);
+
+    max-width: 1100px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.legal-page__hero h1 {
     margin: 0 0 10px;
 
     color: #101828;
@@ -40,12 +63,7 @@
 }
 
 
-.privacy-hero__title span {
-    color: #0b9f58;
-}
-
-
-.privacy-hero__description {
+.legal-page__hero p {
     max-width: 650px;
 
     margin: 0 auto;
@@ -58,29 +76,49 @@
 }
 
 
-.privacy-content {
+/* =========================================================
+   LEGAL CONTENT
+========================================================= */
+
+.legal-page__content {
+    width: 100%;
+
+    box-sizing: border-box;
+}
+
+
+.legal-page__content .container {
     width: calc(100% - 40px);
 
     max-width: 850px;
 
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
 
-    padding: 50px 0 65px;
+    padding-top: 50px;
+    padding-bottom: 65px;
+
+    box-sizing: border-box;
 }
 
 
-.privacy-section {
-    margin-bottom: 32px;
+/* =========================================================
+   LEGAL ARTICLE
+========================================================= */
+
+.legal-page__article {
+    width: 100%;
+
+    color: #667085;
+
+    font-size: 14px;
+
+    line-height: 1.8;
 }
 
 
-.privacy-section:last-child {
-    margin-bottom: 0;
-}
-
-
-.privacy-section__title {
-    margin: 0 0 10px;
+.legal-page__article h2 {
+    margin: 32px 0 10px;
 
     color: #101828;
 
@@ -97,8 +135,13 @@
 }
 
 
-.privacy-section__text {
-    margin: 0 0 12px;
+.legal-page__article h2:first-of-type {
+    margin-top: 25px;
+}
+
+
+.legal-page__article p {
+    margin: 0 0 14px;
 
     color: #667085;
 
@@ -108,52 +151,38 @@
 }
 
 
-.privacy-section__list {
-    margin: 10px 0 0;
-
-    padding-left: 22px;
-
-    color: #667085;
-
-    font-size: 14px;
-
-    line-height: 1.8;
-}
-
-
-.privacy-section__list li {
-    margin-bottom: 6px;
-}
-
-
-.privacy-section__link {
+.legal-page__article a {
     color: #0b9f58;
 
-    text-decoration: none;
-
     font-weight: 600;
+
+    text-decoration: none;
 }
 
 
-.privacy-section__link:hover {
+.legal-page__article a:hover {
     text-decoration: underline;
 }
 
 
-.privacy-updated {
-    margin-top: 35px;
+/* =========================================================
+   LAST UPDATED
+========================================================= */
 
-    padding: 14px 16px;
+.legal-page__updated {
+    margin: 0 0 25px !important;
+
+    padding: 12px 15px;
 
     border-left: 3px solid #0b9f58;
 
     background: #f7fbf9;
 
-    color: #667085;
+    color: #667085 !important;
 
-    font-size: 12px;
+    font-size: 12px !important;
 
-    line-height: 1.6;
+    line-height: 1.6 !important;
 }
 
 
@@ -163,31 +192,53 @@
 
 @media (max-width: 600px) {
 
-    .privacy-hero {
+    .legal-page__hero {
         padding: 40px 16px 30px;
     }
 
 
-    .privacy-hero__title {
+    .legal-page__hero .container {
+        width: calc(100% - 24px);
+    }
+
+
+    .legal-page__hero h1 {
         font-size: 31px;
     }
 
 
-    .privacy-content {
-        width: calc(100% - 24px);
-
-        padding: 35px 0 45px;
+    .legal-page__hero p {
+        font-size: 13px;
     }
 
 
-    .privacy-section__title {
+    .legal-page__content .container {
+        width: calc(100% - 24px);
+
+        padding-top: 35px;
+        padding-bottom: 45px;
+    }
+
+
+    .legal-page__article {
+        font-size: 13px;
+    }
+
+
+    .legal-page__article h2 {
         font-size: 20px;
     }
 
 
-    .privacy-section__text,
-    .privacy-section__list {
+    .legal-page__article p {
         font-size: 13px;
+
+        line-height: 1.75;
+    }
+
+
+    .legal-page__updated {
+        font-size: 11px !important;
     }
 
 }
