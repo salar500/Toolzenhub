@@ -159,22 +159,42 @@ export function renderHero() {
         return;
     }
 
+/* =====================================================
+   SUBMIT
+===================================================== */
 
-    /* =====================================================
-       SUBMIT
-    ===================================================== */
+searchForm.addEventListener(
+    "submit",
+    (event) => {
 
-    searchForm.addEventListener(
-        "submit",
-        (event) => {
-
-            event.preventDefault();
-
-
-            const query =
-                searchInput.value.trim();
+        event.preventDefault();
 
 
+        const query =
+            searchInput.value.trim();
+
+
+        /* =============================================
+           Empty Search
+        ============================================= */
+
+        if (!query) {
+
+            searchInput.focus();
+
+            return;
+        }
+
+
+        /* =============================================
+           Open Categories With Calculator Search
+        ============================================= */
+
+        window.location.href =
+            `/Toolzenhub/categories.html?q=${encodeURIComponent(query)}`;
+
+    }
+);
             /* =============================================
                Empty Search
             ============================================= */
