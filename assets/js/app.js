@@ -95,6 +95,18 @@ async function initializeApp() {
         return;
     }
 
+   /* =========================================================
+   CONTACT PAGE
+========================================================= */
+
+if (page.type === "contact") {
+
+    initializeContactPage();
+
+    renderFooter();
+
+    return;
+}
 
     /* =====================================================
        CALCULATOR PAGE
