@@ -1162,3 +1162,46 @@
     }
 
 }
+
+
+/* =========================================================
+   MOBILE ARTICLES SIDEBAR WIDTH FIX
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .articles-sidebar {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .article-sidebar-search,
+    .article-sidebar-card,
+    .article-newsletter {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .article-sidebar-search form {
+        width: 100%;
+    }
+
+    .article-sidebar-search input {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .article-sidebar-card {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .article-newsletter {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+}
