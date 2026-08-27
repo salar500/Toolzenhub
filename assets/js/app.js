@@ -1,4 +1,4 @@
-/* =========================================================
+ /* =========================================================
    ToolZen Hub
    Application Entry
 ========================================================= */
@@ -20,6 +20,9 @@ import { renderArticles }
 
 import { renderFooter }
     from "./components/footer.js";
+
+import { initializeNewsletter }
+    from "./components/newsletter.js";
 
 import { renderCalculator }
     from "./pages/calculator.js";
@@ -64,6 +67,8 @@ async function initializeApp() {
 
         renderFooter();
 
+        initializeNewsletter();
+
         return;
     }
 
@@ -77,6 +82,8 @@ async function initializeApp() {
         renderArticlesPage();
 
         renderFooter();
+
+        initializeNewsletter();
 
         return;
     }
@@ -92,21 +99,27 @@ async function initializeApp() {
 
         renderFooter();
 
+        initializeNewsletter();
+
         return;
     }
 
-   /* =========================================================
-   CONTACT PAGE
-========================================================= */
 
-if (page.type === "contact") {
+    /* =====================================================
+       CONTACT PAGE
+    ===================================================== */
 
-   renderContactPage();
+    if (page.type === "contact") {
 
-    renderFooter();
+        renderContactPage();
 
-    return;
-}
+        renderFooter();
+
+        initializeNewsletter();
+
+        return;
+    }
+
 
     /* =====================================================
        CALCULATOR PAGE
@@ -120,6 +133,8 @@ if (page.type === "contact") {
 
         renderFooter();
 
+        initializeNewsletter();
+
         return;
     }
 
@@ -129,6 +144,8 @@ if (page.type === "contact") {
     ===================================================== */
 
     renderFooter();
+
+    initializeNewsletter();
 
 }
 
