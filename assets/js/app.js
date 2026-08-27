@@ -30,8 +30,8 @@ import { renderArticlesPage }
 import { renderAboutPage }
     from "./pages/about/about.js";
 
-import { initializeContactPage }
-    from "./pages/contact.js";
+import { renderContactPage }
+    from "./pages/contact/contact.js";
 
 
 /* =========================================================
