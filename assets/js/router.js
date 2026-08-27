@@ -83,6 +83,24 @@ export function currentPage() {
     }
 
 
+   /* =====================================================
+   CONTACT PAGE
+===================================================== */
+
+if (
+    path === "/contact.html" ||
+    path.endsWith("/contact.html") ||
+    path === "/contact/" ||
+    path.endsWith("/contact/")
+) {
+
+    return {
+        type: "contact"
+    };
+
+}
+   
+
     /* =====================================================
        OTHER PAGE
     ===================================================== */
