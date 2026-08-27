@@ -1205,3 +1205,30 @@
     }
 
 }
+
+
+@media (max-width: 650px) {
+
+    .articles-layout {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .articles-sidebar {
+        order: -1;
+        width: 100%;
+    }
+
+    .articles-feed {
+        order: 1;
+        width: 100%;
+    }
+
+    .article-sidebar-search,
+    .article-sidebar-card,
+    .article-newsletter {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+}
