@@ -7,7 +7,9 @@
    - Categories Page Search
 
    Purpose:
-   Search calculators only.
+   Search calculators and tools only.
+
+   This is completely separate from article search.
 ========================================================= */
 
 
@@ -18,131 +20,223 @@
 const calculators = [
 
     {
-        name: "Loan Comparison",
-        description: "Compare loans side by side",
+        title: "Loan Comparison",
+        description:
+            "Compare loans side by side",
         category: "Loans",
-        keywords: "loan comparison loans interest emi",
-        url: "#"
+        keywords:
+            "loan comparison loans interest emi repayment",
+        url: "loan-comparison.html"
     },
 
     {
-        name: "EMI Calculator",
-        description: "Calculate your EMI instantly",
+        title: "EMI Calculator",
+        description:
+            "Calculate your EMI instantly",
         category: "Loans",
-        keywords: "emi loan monthly payment interest",
-        url: "#"
+        keywords:
+            "emi loan monthly payment interest",
+        url: "emi-calculator.html"
     },
 
     {
-        name: "Home Loan Calculator",
-        description: "Calculate your home loan eligibility",
+        title: "Home Loan Calculator",
+        description:
+            "Calculate your home loan eligibility",
         category: "Loans",
-        keywords: "home loan housing loan mortgage emi",
-        url: "#"
+        keywords:
+            "home loan emi housing loan interest",
+        url: "home-loan.html"
     },
 
     {
-        name: "Personal Loan Calculator",
-        description: "Calculate personal loan EMI",
+        title: "Personal Loan Calculator",
+        description:
+            "Calculate personal loan payments",
         category: "Loans",
-        keywords: "personal loan emi repayment interest",
-        url: "#"
+        keywords:
+            "personal loan emi interest repayment",
+        url: "personal-loan.html"
     },
 
     {
-        name: "SIP Calculator",
-        description: "Plan your SIP investments",
+        title: "SIP Calculator",
+        description:
+            "Plan your SIP investments",
         category: "Investment",
-        keywords: "sip investment mutual fund returns",
-        url: "#"
+        keywords:
+            "sip investment mutual fund returns",
+        url: "sip-calculator.html"
     },
 
     {
-        name: "PPF Calculator",
-        description: "Calculate PPF investment and maturity",
+        title: "PPF Calculator",
+        description:
+            "Calculate PPF investment returns",
         category: "Investment",
-        keywords: "ppf investment savings maturity",
-        url: "#"
+        keywords:
+            "ppf investment returns savings",
+        url: "ppf-calculator.html"
     },
 
     {
-        name: "FD Calculator",
-        description: "Calculate fixed deposit returns",
+        title: "FD Calculator",
+        description:
+            "Calculate fixed deposit returns",
         category: "Investment",
-        keywords: "fd fixed deposit interest investment",
-        url: "#"
+        keywords:
+            "fd fixed deposit investment interest",
+        url: "fd-calculator.html"
     },
 
     {
-        name: "CAGR Calculator",
-        description: "Calculate compound annual growth rate",
+        title: "CAGR Calculator",
+        description:
+            "Calculate compound annual growth rate",
         category: "Investment",
-        keywords: "cagr growth investment return",
-        url: "#"
+        keywords:
+            "cagr growth investment return",
+        url: "cagr-calculator.html"
     },
 
     {
-        name: "GST Calculator",
-        description: "Calculate GST easily and accurately",
+        title: "GST Calculator",
+        description:
+            "Calculate GST easily and accurately",
         category: "Tax",
-        keywords: "gst tax goods services tax",
-        url: "#"
+        keywords:
+            "gst tax goods services tax",
+        url: "gst-calculator.html"
     },
 
     {
-        name: "Income Tax Calculator",
-        description: "Estimate your income tax",
+        title: "Income Tax Calculator",
+        description:
+            "Estimate your income tax",
         category: "Tax",
-        keywords: "income tax salary tax calculation",
-        url: "#"
+        keywords:
+            "income tax tax calculation salary",
+        url: "income-tax.html"
     },
 
     {
-        name: "BMI Calculator",
-        description: "Check your body mass index",
+        title: "BMI Calculator",
+        description:
+            "Check your body mass index",
         category: "Health",
-        keywords: "bmi body mass index weight health",
-        url: "#"
+        keywords:
+            "bmi body mass index health weight",
+        url: "bmi-calculator.html"
     },
 
     {
-        name: "Calorie Calculator",
-        description: "Estimate your daily calorie needs",
+        title: "Calorie Calculator",
+        description:
+            "Estimate your daily calorie needs",
         category: "Health",
-        keywords: "calorie calories diet nutrition health",
-        url: "#"
+        keywords:
+            "calorie calories health diet daily",
+        url: "calorie-calculator.html"
     },
 
     {
-        name: "BMR Calculator",
-        description: "Calculate your basal metabolic rate",
+        title: "BMR Calculator",
+        description:
+            "Calculate your basal metabolic rate",
         category: "Health",
-        keywords: "bmr metabolism calories health",
-        url: "#"
+        keywords:
+            "bmr basal metabolic rate calories",
+        url: "bmr-calculator.html"
     },
 
     {
-        name: "Percentage Calculator",
-        description: "Calculate percentages quickly",
-        category: "Math",
-        keywords: "percentage percent maths calculation",
-        url: "#"
+        title: "Profit Calculator",
+        description:
+            "Calculate business profit",
+        category: "Business",
+        keywords:
+            "profit business revenue cost",
+        url: "profit-calculator.html"
     },
 
     {
-        name: "Ratio Calculator",
-        description: "Calculate and simplify ratios",
-        category: "Math",
-        keywords: "ratio maths calculation",
-        url: "#"
+        title: "Margin Calculator",
+        description:
+            "Calculate profit margin",
+        category: "Business",
+        keywords:
+            "margin profit business percentage",
+        url: "margin-calculator.html"
     },
 
     {
-        name: "Age Calculator",
-        description: "Calculate your exact age",
+        title: "ROI Calculator",
+        description:
+            "Calculate return on investment",
+        category: "Business",
+        keywords:
+            "roi return investment business",
+        url: "roi-calculator.html"
+    },
+
+    {
+        title: "Percentage Calculator",
+        description:
+            "Calculate percentages easily",
         category: "Math",
-        keywords: "age date birth calculation",
-        url: "#"
+        keywords:
+            "percentage percent maths calculation",
+        url: "percentage-calculator.html"
+    },
+
+    {
+        title: "Ratio Calculator",
+        description:
+            "Calculate and simplify ratios",
+        category: "Math",
+        keywords:
+            "ratio maths proportion calculation",
+        url: "ratio-calculator.html"
+    },
+
+    {
+        title: "Age Calculator",
+        description:
+            "Calculate age accurately",
+        category: "Math",
+        keywords:
+            "age date birth calculation",
+        url: "age-calculator.html"
+    },
+
+    {
+        title: "Unit Converter",
+        description:
+            "Convert common units quickly",
+        category: "Converter",
+        keywords:
+            "unit conversion length weight temperature",
+        url: "unit-converter.html"
+    },
+
+    {
+        title: "Currency Converter",
+        description:
+            "Convert currencies easily",
+        category: "Converter",
+        keywords:
+            "currency exchange money conversion",
+        url: "currency-converter.html"
+    },
+
+    {
+        title: "Date Calculator",
+        description:
+            "Calculate dates and date differences",
+        category: "Converter",
+        keywords:
+            "date days calendar difference",
+        url: "date-calculator.html"
     }
 
 ];
@@ -170,7 +264,7 @@ export function searchCalculators(query) {
 
             const searchableText = [
 
-                calculator.name,
+                calculator.title,
 
                 calculator.description,
 
@@ -203,7 +297,7 @@ export function getCalculators() {
 
 
 /* =========================================================
-   RENDER CALCULATOR RESULTS
+   RENDER SEARCH RESULTS
 ========================================================= */
 
 export function renderCalculatorSearchResults(
@@ -259,7 +353,7 @@ export function renderCalculatorSearchResults(
                 <div class="calculator-search-result__content">
 
                     <strong>
-                        ${calculator.name}
+                        ${calculator.title}
                     </strong>
 
                     <span>
