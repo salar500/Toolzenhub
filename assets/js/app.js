@@ -38,16 +38,6 @@ import { renderContactPage }
 
 
 /* =========================================================
-   SEARCH UTILITIES
-========================================================= */
-
-import {
-    initializeCalculatorSearch
-}
-    from "./utils/categories-search.js";
-
-
-/* =========================================================
    APPLICATION
 ========================================================= */
 
@@ -75,14 +65,6 @@ async function initializeApp() {
         renderCategories();
 
         renderArticles();
-
-        /*
-           Initialize calculator search
-           after hero has been rendered.
-        */
-
-        initializeCalculatorSearch();
-
 
         renderFooter();
 
