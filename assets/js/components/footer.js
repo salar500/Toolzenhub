@@ -35,8 +35,9 @@ export function renderFooter() {
                         <div class="footer__brand">
 
                             <a
-                                href="#"
+                                href="index.html"
                                 class="footer__logo"
+                                aria-label="ToolZen Hub Home"
                             >
 
                                 <span class="footer__logo-mark">
@@ -58,6 +59,10 @@ export function renderFooter() {
                                 decisions every day.
                             </p>
 
+
+                            <!-- ==================================
+                                 Social Links
+                            =================================== -->
 
                             <div class="footer__social">
 
@@ -115,28 +120,28 @@ export function renderFooter() {
                             <ul class="footer__links">
 
                                 <li>
-                                    <a href="#">
+                                    <a href="index.html">
                                         Home
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="#">
+                                    <a href="categories.html">
                                         Categories
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="#">
+                                    <a href="articles.html">
                                         Articles
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="#">
+                                    <a href="about.html">
                                         About
                                     </a>
                                 </li>
@@ -160,28 +165,28 @@ export function renderFooter() {
                             <ul class="footer__links">
 
                                 <li>
-                                    <a href="#">
+                                    <a href="contact.html">
                                         Contact Us
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="#">
+                                    <a href="privacy.html">
                                         Privacy Policy
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="#">
+                                    <a href="terms.html">
                                         Terms & Conditions
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="#">
+                                    <a href="disclaimer.html">
                                         Disclaimer
                                     </a>
                                 </li>
@@ -205,28 +210,28 @@ export function renderFooter() {
                             <ul class="footer__links">
 
                                 <li>
-                                    <a href="#">
+                                    <a href="emi-calculator.html">
                                         EMI Calculator
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="#">
+                                    <a href="loan-comparison.html">
                                         Loan Comparison
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="#">
+                                    <a href="sip-calculator.html">
                                         SIP Calculator
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="#">
+                                    <a href="gst-calculator.html">
                                         GST Calculator
                                     </a>
                                 </li>
@@ -253,13 +258,17 @@ export function renderFooter() {
                             </p>
 
 
-                            <form class="footer__newsletter-form">
+                            <form
+                                class="footer__newsletter-form"
+                            >
 
                                 <input
                                     type="email"
                                     class="footer__newsletter-input"
                                     placeholder="Enter your email"
                                     aria-label="Email address"
+                                    autocomplete="email"
+                                    required
                                 >
 
 
@@ -303,17 +312,17 @@ export function renderFooter() {
                             aria-label="Legal"
                         >
 
-                            <a href="#">
+                            <a href="privacy.html">
                                 Privacy Policy
                             </a>
 
 
-                            <a href="#">
+                            <a href="terms.html">
                                 Terms & Conditions
                             </a>
 
 
-                            <a href="#">
+                            <a href="disclaimer.html">
                                 Disclaimer
                             </a>
 
@@ -328,5 +337,63 @@ export function renderFooter() {
 
 
         </footer>
+
     `;
+
+
+    /* =====================================================
+       Newsletter Form
+       Prevent empty/default form submission
+    ===================================================== */
+
+    const newsletterForm =
+        footer.querySelector(
+            ".footer__newsletter-form"
+        );
+
+
+    if (newsletterForm) {
+
+        newsletterForm.addEventListener(
+            "submit",
+            (event) => {
+
+                event.preventDefault();
+
+                const emailInput =
+                    newsletterForm.querySelector(
+                        ".footer__newsletter-input"
+                    );
+
+
+                if (!emailInput) {
+                    return;
+                }
+
+
+                const email =
+                    emailInput.value.trim();
+
+
+                if (!email) {
+                    emailInput.focus();
+                    return;
+                }
+
+
+                /*
+                 * Newsletter functionality can be
+                 * connected later.
+                 */
+
+                console.log(
+                    "Newsletter subscription:",
+                    email
+                );
+
+            }
+        );
+
+    }
+
 }
