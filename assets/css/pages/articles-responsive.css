@@ -1,1 +1,430 @@
 
+/* =========================================================
+   ToolZen Hub
+   Articles
+   Responsive Styles
+========================================================= */
+
+
+/* =========================================================
+   TABLET / SMALL DESKTOP
+========================================================= */
+
+@media (max-width: 900px) {
+
+    /* -----------------------------
+       Hero
+    ----------------------------- */
+
+    .articles-hero-inner {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+
+        text-align: center;
+    }
+
+
+    .articles-hero-content {
+        max-width: 700px;
+
+        margin: 0 auto;
+    }
+
+
+    .articles-hero-content p {
+        margin-left: auto;
+
+        margin-right: auto;
+    }
+
+
+    /* -----------------------------
+       Main Layout
+    ----------------------------- */
+
+    .articles-layout {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* -----------------------------
+       Sidebar
+    ----------------------------- */
+
+    .articles-sidebar {
+        display: grid;
+
+        grid-template-columns:
+            1fr 1fr;
+
+        align-items: start;
+    }
+
+
+    .article-sidebar-search {
+        grid-column: 1 / -1;
+    }
+
+
+    .article-newsletter {
+        grid-column: 1 / -1;
+    }
+}
+
+
+/* =========================================================
+   TABLET HERO
+========================================================= */
+
+@media (max-width: 992px) {
+
+    .articles-hero-inner {
+        grid-template-columns:
+            minmax(0, 1.1fr)
+            minmax(240px, .9fr);
+
+        gap: 25px;
+    }
+
+
+    .articles-hero-illustration {
+        min-height: 190px;
+    }
+
+
+    .articles-hero-image {
+        width:
+            min(100%, 380px);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    /* -----------------------------
+       Container
+    ----------------------------- */
+
+    .articles-container {
+        width:
+            min(100% - 20px, 1180px);
+    }
+
+
+    /* -----------------------------
+       Hero
+    ----------------------------- */
+
+    .articles-hero-inner {
+        grid-template-columns:
+            minmax(0, 1.15fr)
+            minmax(130px, .85fr);
+
+        gap: 15px;
+
+        min-height: 240px;
+
+        padding-top: 25px;
+
+        padding-bottom: 25px;
+
+        text-align: left;
+    }
+
+
+    .articles-hero-content {
+        text-align: left;
+    }
+
+
+    .articles-hero-content h1 {
+        font-size:
+            clamp(28px, 7vw, 38px);
+    }
+
+
+    .articles-hero-content p {
+        font-size: 13px;
+
+        line-height: 1.5;
+    }
+
+
+    .articles-hero-illustration {
+        min-height: 150px;
+    }
+
+
+    .articles-hero-image {
+        width: 100%;
+
+        max-width: 250px;
+    }
+
+
+    .articles-hero-action {
+        margin-top: -2px;
+
+        padding-bottom: 24px;
+    }
+
+
+    /* -----------------------------
+       Main
+    ----------------------------- */
+
+    .articles-main {
+        padding-top: 22px;
+
+        padding-bottom: 45px;
+    }
+
+
+    .articles-filter-bar {
+        margin-bottom: 18px;
+    }
+
+
+    /* -----------------------------
+       MOBILE ORDER
+       
+       Search
+       ↓
+       All Articles
+       ↓
+       Popular Articles
+       ↓
+       Categories
+       ↓
+       Stay Updated
+       ----------------------------- */
+
+    .articles-layout {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 24px;
+    }
+
+
+    /*
+       Turn sidebar into a transparent
+       layout container so its children
+       can participate in the mobile
+       flex order.
+    */
+
+    .articles-sidebar {
+        display: contents;
+    }
+
+
+    /* -----------------------------
+       Search
+    ----------------------------- */
+
+    .article-sidebar-search {
+        order: 1;
+
+        width: 100%;
+
+        min-width: 0;
+    }
+
+
+    .article-sidebar-search form {
+        width: 100%;
+    }
+
+
+    .article-sidebar-search input {
+        width: 100%;
+
+        box-sizing: border-box;
+    }
+
+
+    /* -----------------------------
+       All Articles
+    ----------------------------- */
+
+    .articles-feed {
+        order: 2;
+
+        width: 100%;
+
+        min-width: 0;
+    }
+
+
+    /* -----------------------------
+       Popular Articles
+    ----------------------------- */
+
+    /*
+       This selector targets the sidebar
+       card containing popular articles.
+       
+       If Popular Articles is inside
+       .article-sidebar-card, it will
+       follow the DOM order.
+    */
+
+    .article-sidebar-card {
+        width: 100%;
+
+        min-width: 0;
+
+        box-sizing: border-box;
+    }
+
+
+    /* -----------------------------
+       Newsletter
+    ----------------------------- */
+
+    .article-newsletter {
+        width: 100%;
+
+        min-width: 0;
+
+        box-sizing: border-box;
+    }
+
+
+    /* -----------------------------
+       Article Cards
+    ----------------------------- */
+
+    .article-card {
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+
+        padding: 12px;
+    }
+
+
+    .article-card-image-link {
+        height: 180px;
+    }
+
+
+    .article-card h2 {
+        font-size: 16px;
+    }
+
+
+    .article-card-meta {
+        margin-top: 16px;
+    }
+
+
+    /* -----------------------------
+       Sidebar Width
+    ----------------------------- */
+
+    .articles-sidebar {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+
+    .article-sidebar-card,
+    .article-newsletter {
+        width: 100%;
+
+        box-sizing: border-box;
+    }
+
+
+    /* -----------------------------
+       Pagination
+    ----------------------------- */
+
+    .articles-pagination {
+        flex-wrap: wrap;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .articles-hero-content h1 {
+        font-size: 29px;
+    }
+
+
+    .articles-hero-illustration {
+        min-height: 160px;
+    }
+
+
+    .articles-hero-image {
+        max-width: 190px;
+    }
+
+
+    .article-meta-items {
+        gap: 8px;
+    }
+
+
+    .article-meta-items span {
+        font-size: 9px;
+    }
+
+
+    .article-card-image-link {
+        height: 160px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .articles-hero-inner {
+        grid-template-columns:
+            minmax(0, 1.2fr)
+            minmax(95px, .8fr);
+
+        gap: 8px;
+
+        min-height: 220px;
+    }
+
+
+    .articles-hero-content h1 {
+        font-size: 25px;
+    }
+
+
+    .articles-hero-content p {
+        font-size: 12px;
+    }
+
+
+    .articles-hero-illustration {
+        min-height: 120px;
+    }
+
+
+    .articles-hero-image {
+        max-width: 190px;
+    }
+}
