@@ -12,6 +12,10 @@ export function renderHeader() {
     }
 
 
+    /* =====================================================
+       HEADER HTML
+    ===================================================== */
+
     header.innerHTML = `
 
         <div class="site-header">
@@ -22,7 +26,7 @@ export function renderHeader() {
             >
 
                 <!-- ======================================
-                     Brand
+                     BRAND
                 ======================================= -->
 
                 <a
@@ -52,7 +56,7 @@ export function renderHeader() {
 
 
                 <!-- ======================================
-                     Desktop Navigation
+                     DESKTOP NAVIGATION
                 ======================================= -->
 
                 <div class="navbar__menu">
@@ -108,7 +112,7 @@ export function renderHeader() {
 
 
                 <!-- ======================================
-                     Header Actions
+                     MOBILE MENU BUTTON
                 ======================================= -->
 
                 <div class="navbar__actions">
@@ -133,9 +137,9 @@ export function renderHeader() {
             </nav>
 
 
-            <!-- =========================================
-                 Mobile Navigation
-            ========================================== -->
+            <!-- ======================================
+                 MOBILE NAVIGATION
+            ======================================= -->
 
             <div
                 id="mobile-navigation"
@@ -144,78 +148,96 @@ export function renderHeader() {
             >
 
                 <nav
-                    class="mobile-navigation__menu"
                     aria-label="Mobile navigation"
                 >
 
-                    <a
-                        href="index.html"
-                        class="mobile-navigation__link"
-                        data-nav="home"
-                    >
-                        Home
-                    </a>
+                    <div class="mobile-navigation__menu">
+
+                        <a
+                            href="index.html"
+                            class="mobile-navigation__link"
+                            data-nav="home"
+                        >
+                            Home
+                        </a>
 
 
-                    <a
-                        href="categories.html"
-                        class="mobile-navigation__link"
-                        data-nav="categories"
-                    >
-                        Categories
-                    </a>
+                        <a
+                            href="categories.html"
+                            class="mobile-navigation__link"
+                            data-nav="categories"
+                        >
+                            Categories
+                        </a>
 
 
-                    <a
-                        href="articles.html"
-                        class="mobile-navigation__link"
-                        data-nav="articles"
-                    >
-                        Articles
-                    </a>
+                        <a
+                            href="articles.html"
+                            class="mobile-navigation__link"
+                            data-nav="articles"
+                        >
+                            Articles
+                        </a>
 
 
-                    <a
-                        href="about.html"
-                        class="mobile-navigation__link"
-                        data-nav="about"
-                    >
-                        About
-                    </a>
+                        <a
+                            href="about.html"
+                            class="mobile-navigation__link"
+                            data-nav="about"
+                        >
+                            About
+                        </a>
+
+                    </div>
 
                 </nav>
 
             </div>
 
         </div>
+
     `;
 
 
     /* =====================================================
-       Current Page
+       CURRENT PAGE
     ===================================================== */
 
-    const currentPage =
+    let currentPage =
         window.location.pathname
             .split("/")
-            .pop() || "index.html";
+            .pop();
+
+
+    if (!currentPage) {
+        currentPage = "index.html";
+    }
 
 
     /* =====================================================
-       Desktop Active Navigation
+       ALL NAVIGATION LINKS
     ===================================================== */
 
-    const navLinks =
+    const allNavLinks =
         header.querySelectorAll(
-            ".navbar__link"
+            ".navbar__link, .mobile-navigation__link"
         );
 
 
-    navLinks.forEach(link => {
+    allNavLinks.forEach(link => {
 
         const href =
             link.getAttribute("href");
 
+
+        /* Remove previous active state */
+
+        link.classList.remove("active");
+
+        link.removeAttribute("aria-current");
+
+
+        /* Add active state */
 
         if (
             href === currentPage ||
@@ -232,65 +254,13 @@ export function renderHeader() {
                 "page"
             );
 
-        } else {
-
-            link.classList.remove("active");
-
-            link.removeAttribute(
-                "aria-current"
-            );
-
         }
 
     });
 
 
     /* =====================================================
-       Mobile Active Navigation
-    ===================================================== */
-
-    const mobileLinks =
-        header.querySelectorAll(
-            ".mobile-navigation__link"
-        );
-
-
-    mobileLinks.forEach(link => {
-
-        const href =
-            link.getAttribute("href");
-
-
-        if (
-            href === currentPage ||
-            (
-                currentPage === "" &&
-                href === "index.html"
-            )
-        ) {
-
-            link.classList.add("active");
-
-            link.setAttribute(
-                "aria-current",
-                "page"
-            );
-
-        } else {
-
-            link.classList.remove("active");
-
-            link.removeAttribute(
-                "aria-current"
-            );
-
-        }
-
-    });
-
-
-    /* =====================================================
-       Mobile Menu Toggle
+       MOBILE MENU ELEMENTS
     ===================================================== */
 
     const menuButton =
@@ -313,6 +283,78 @@ export function renderHeader() {
     }
 
 
+    /* =====================================================
+       OPEN / CLOSE MOBILE MENU
+    ===================================================== */
+
+    function closeMobileMenu() {
+
+        mobileNavigation.classList.remove(
+            "is-open"
+        );
+
+
+        menuButton.classList.remove(
+            "is-open"
+        );
+
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+
+        menuButton.setAttribute(
+            "aria-label",
+            "Open navigation menu"
+        );
+
+
+        mobileNavigation.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+    }
+
+
+    function openMobileMenu() {
+
+        mobileNavigation.classList.add(
+            "is-open"
+        );
+
+
+        menuButton.classList.add(
+            "is-open"
+        );
+
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+
+        menuButton.setAttribute(
+            "aria-label",
+            "Close navigation menu"
+        );
+
+
+        mobileNavigation.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+    }
+
+
+    /* =====================================================
+       HAMBURGER BUTTON
+    ===================================================== */
+
     menuButton.addEventListener(
         "click",
         () => {
@@ -323,38 +365,29 @@ export function renderHeader() {
                 ) === "true";
 
 
-            menuButton.setAttribute(
-                "aria-expanded",
-                String(!isOpen)
-            );
+            if (isOpen) {
 
+                closeMobileMenu();
 
-            menuButton.setAttribute(
-                "aria-label",
-                isOpen
-                    ? "Open navigation menu"
-                    : "Close navigation menu"
-            );
+            } else {
 
+                openMobileMenu();
 
-            mobileNavigation.setAttribute(
-                "aria-hidden",
-                String(isOpen)
-            );
-
-
-            mobileNavigation.classList.toggle(
-                "is-open",
-                !isOpen
-            );
+            }
 
         }
     );
 
 
     /* =====================================================
-       Close Mobile Menu After Navigation
+       MOBILE LINKS
     ===================================================== */
+
+    const mobileLinks =
+        mobileNavigation.querySelectorAll(
+            ".mobile-navigation__link"
+        );
+
 
     mobileLinks.forEach(link => {
 
@@ -362,31 +395,54 @@ export function renderHeader() {
             "click",
             () => {
 
-                menuButton.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-
-                menuButton.setAttribute(
-                    "aria-label",
-                    "Open navigation menu"
-                );
-
-
-                mobileNavigation.setAttribute(
-                    "aria-hidden",
-                    "true"
-                );
-
-
-                mobileNavigation.classList.remove(
-                    "is-open"
-                );
+                closeMobileMenu();
 
             }
         );
 
     });
+
+
+    /* =====================================================
+       CLOSE MENU WHEN ESCAPE IS PRESSED
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Escape" &&
+                mobileNavigation.classList.contains(
+                    "is-open"
+                )
+            ) {
+
+                closeMobileMenu();
+
+                menuButton.focus();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       CLOSE MOBILE MENU WHEN RESIZING TO DESKTOP
+    ===================================================== */
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            if (window.innerWidth > 900) {
+
+                closeMobileMenu();
+
+            }
+
+        }
+    );
 
 }
