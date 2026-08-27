@@ -4,15 +4,12 @@
    Frontend JavaScript
 ========================================================= */
 
-
-/* =========================================================
-   NEWSLETTER
-========================================================= */
-
 export function initializeNewsletter() {
 
     const newsletterForm =
-        document.querySelector(".newsletter-form");
+        document.querySelector(
+            ".footer__newsletter-form"
+        );
 
 
     /* =====================================================
@@ -35,13 +32,15 @@ export function initializeNewsletter() {
             event.preventDefault();
 
 
-            /* =================================================
-               EMAIL INPUT
-            ================================================= */
-
             const emailInput =
                 newsletterForm.querySelector(
-                    'input[type="email"]'
+                    ".footer__newsletter-input"
+                );
+
+
+            const submitButton =
+                newsletterForm.querySelector(
+                    ".footer__newsletter-button"
                 );
 
 
@@ -55,28 +54,20 @@ export function initializeNewsletter() {
 
 
             /* =================================================
-               BASIC VALIDATION
+               VALIDATION
             ================================================= */
 
             if (!email) {
 
-                console.log(
-                    "Please enter your email address."
-                );
+                emailInput.focus();
 
                 return;
             }
 
 
             /* =================================================
-               SUBMIT BUTTON
+               BUTTON STATE
             ================================================= */
-
-            const submitButton =
-                newsletterForm.querySelector(
-                    'button[type="submit"]'
-                );
-
 
             if (submitButton) {
 
@@ -89,7 +80,7 @@ export function initializeNewsletter() {
 
 
             /* =================================================
-               SEND TO NETLIFY FUNCTION
+               SEND TO NETLIFY
             ================================================= */
 
             try {
@@ -147,7 +138,7 @@ export function initializeNewsletter() {
 
 
                 /* =================================================
-                   BREVO / SERVER ERROR
+                   ERROR
                 ================================================= */
 
                 console.error(
@@ -160,6 +151,8 @@ export function initializeNewsletter() {
 
                     submitButton.textContent =
                         "Try Again";
+
+                    submitButton.disabled = false;
 
                 }
 
@@ -183,18 +176,9 @@ export function initializeNewsletter() {
                     submitButton.textContent =
                         "Try Again";
 
+                    submitButton.disabled = false;
+
                 }
-
-            }
-
-
-            /* =====================================================
-               ENABLE BUTTON AGAIN
-            ===================================================== */
-
-            if (submitButton) {
-
-                submitButton.disabled = false;
 
             }
 
