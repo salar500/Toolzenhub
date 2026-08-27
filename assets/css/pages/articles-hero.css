@@ -11,10 +11,7 @@
 
 .articles-hero {
     padding: 0;
-
-    border-bottom:
-        1px solid var(--articles-border);
-
+    border-bottom: 1px solid var(--articles-border);
     background:
         linear-gradient(
             180deg,
@@ -26,17 +23,10 @@
 
 .articles-hero-inner {
     display: grid;
-
-    grid-template-columns:
-        minmax(0, 1fr)
-        minmax(340px, 430px);
-
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 430px);
     align-items: center;
-
     gap: 45px;
-
     min-height: 280px;
-
     padding: 34px 0 30px;
 }
 
@@ -52,27 +42,18 @@
 
 .articles-hero-content h1 {
     margin: 0;
-
     color: var(--articles-heading);
-
-    font-size:
-        clamp(34px, 4vw, 46px);
-
+    font-size: clamp(34px, 4vw, 46px);
     line-height: 1.1;
-
     letter-spacing: -.04em;
 }
 
 
 .articles-hero-content p {
     max-width: 600px;
-
     margin: 14px 0 0;
-
     color: var(--articles-body);
-
     font-size: 16px;
-
     line-height: 1.7;
 }
 
@@ -83,54 +64,34 @@
 
 .articles-hero-visual {
     position: relative;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     min-width: 0;
-
     width: 100%;
-
     z-index: 1;
 }
 
 
 .articles-hero-illustration {
     position: relative;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     width: 100%;
-
     max-width: 500px;
-
     min-height: 220px;
 }
 
 
 .articles-hero-image {
     display: block;
-
-    width:
-        min(100%, 500px);
-
+    width: min(100%, 500px);
     max-width: 100%;
-
     height: auto;
-
     object-fit: contain;
-
     user-select: none;
-
     -webkit-user-drag: none;
-
     filter:
         drop-shadow(
             0 16px 25px rgba(15, 23, 42, .08)
@@ -144,40 +105,25 @@
 
 .articles-hero-action {
     display: flex;
-
     justify-content: center;
-
     margin-top: -5px;
-
     padding-bottom: 25px;
 }
 
 
 .articles-hero-action .article-filter {
     height: 40px;
-
     padding: 0 19px;
-
-    border:
-        1px solid var(--articles-green);
-
+    border: 1px solid var(--articles-green);
     border-radius: 999px;
-
     background: var(--articles-green);
-
     color: #FFFFFF;
-
     font: inherit;
-
     font-size: 12px;
-
     font-weight: 700;
-
     cursor: pointer;
-
     box-shadow:
         0 5px 12px rgba(0, 166, 81, .15);
-
     transition:
         background .2s ease,
         transform .2s ease,
@@ -186,15 +132,9 @@
 
 
 .articles-hero-action .article-filter:hover {
-    background:
-        var(--articles-green-dark);
-
-    border-color:
-        var(--articles-green-dark);
-
-    transform:
-        translateY(-1px);
-
+    background: var(--articles-green-dark);
+    border-color: var(--articles-green-dark);
+    transform: translateY(-1px);
     box-shadow:
         0 8px 18px rgba(0, 166, 81, .20);
 }
