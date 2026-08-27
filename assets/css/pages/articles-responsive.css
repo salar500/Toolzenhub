@@ -1,63 +1,43 @@
-
 /* =========================================================
    ToolZen Hub
    Articles
-   Responsive Styles
+   Responsive
 ========================================================= */
 
 
 /* =========================================================
-   TABLET / SMALL DESKTOP
+   TABLET
 ========================================================= */
 
 @media (max-width: 900px) {
 
-    /* -----------------------------
-       Hero
-    ----------------------------- */
-
     .articles-hero-inner {
         grid-template-columns: 1fr;
-
         gap: 10px;
-
         text-align: center;
     }
 
 
     .articles-hero-content {
         max-width: 700px;
-
         margin: 0 auto;
     }
 
 
     .articles-hero-content p {
         margin-left: auto;
-
         margin-right: auto;
     }
 
-
-    /* -----------------------------
-       Main Layout
-    ----------------------------- */
 
     .articles-layout {
         grid-template-columns: 1fr;
     }
 
 
-    /* -----------------------------
-       Sidebar
-    ----------------------------- */
-
     .articles-sidebar {
         display: grid;
-
-        grid-template-columns:
-            1fr 1fr;
-
+        grid-template-columns: 1fr 1fr;
         align-items: start;
     }
 
@@ -70,11 +50,12 @@
     .article-newsletter {
         grid-column: 1 / -1;
     }
+
 }
 
 
 /* =========================================================
-   TABLET HERO
+   HERO - TABLET
 ========================================================= */
 
 @media (max-width: 992px) {
@@ -94,9 +75,9 @@
 
 
     .articles-hero-image {
-        width:
-            min(100%, 380px);
+        width: min(100%, 380px);
     }
+
 }
 
 
@@ -106,19 +87,14 @@
 
 @media (max-width: 650px) {
 
-    /* -----------------------------
-       Container
-    ----------------------------- */
-
     .articles-container {
-        width:
-            min(100% - 20px, 1180px);
+        width: min(100% - 20px, 1180px);
     }
 
 
-    /* -----------------------------
-       Hero
-    ----------------------------- */
+    /* -----------------------------------------------------
+       HERO
+    ----------------------------------------------------- */
 
     .articles-hero-inner {
         grid-template-columns:
@@ -130,10 +106,7 @@
         min-height: 240px;
 
         padding-top: 25px;
-
         padding-bottom: 25px;
-
-        text-align: left;
     }
 
 
@@ -143,14 +116,12 @@
 
 
     .articles-hero-content h1 {
-        font-size:
-            clamp(28px, 7vw, 38px);
+        font-size: clamp(28px, 7vw, 38px);
     }
 
 
     .articles-hero-content p {
         font-size: 13px;
-
         line-height: 1.5;
     }
 
@@ -162,25 +133,22 @@
 
     .articles-hero-image {
         width: 100%;
-
         max-width: 250px;
     }
 
 
     .articles-hero-action {
         margin-top: -2px;
-
         padding-bottom: 24px;
     }
 
 
-    /* -----------------------------
-       Main
-    ----------------------------- */
+    /* -----------------------------------------------------
+       MAIN
+    ----------------------------------------------------- */
 
     .articles-main {
         padding-top: 22px;
-
         padding-bottom: 45px;
     }
 
@@ -190,123 +158,89 @@
     }
 
 
-    /* -----------------------------
-       MOBILE ORDER
+    /* -----------------------------------------------------
+       MOBILE LAYOUT
        
-       Search
-       ↓
-       All Articles
-       ↓
-       Popular Articles
-       ↓
-       Categories
-       ↓
-       Stay Updated
-       ----------------------------- */
+       DOM order is preserved:
+       
+       Sidebar search
+       Feed
+       Sidebar cards
+       
+       display: contents lets the sidebar children
+       participate directly in the layout.
+    ----------------------------------------------------- */
 
     .articles-layout {
         display: flex;
-
         flex-direction: column;
-
         gap: 24px;
     }
 
-
-    /*
-       Turn sidebar into a transparent
-       layout container so its children
-       can participate in the mobile
-       flex order.
-    */
 
     .articles-sidebar {
         display: contents;
     }
 
 
-    /* -----------------------------
-       Search
-    ----------------------------- */
+    /* Search FIRST */
 
     .article-sidebar-search {
         order: 1;
-
         width: 100%;
-
-        min-width: 0;
     }
 
 
+    /* All Articles SECOND */
+
+    .articles-feed {
+        order: 2;
+        width: 100%;
+    }
+
+
+    /* Popular Articles THIRD */
+
+    .article-sidebar-card {
+        width: 100%;
+        box-sizing: border-box;
+        order: 3;
+    }
+
+
+    /* Newsletter FOURTH */
+
+    .article-newsletter {
+        width: 100%;
+        box-sizing: border-box;
+        order: 4;
+    }
+
+
+    /* -----------------------------------------------------
+       SEARCH WIDTH
+    ----------------------------------------------------- */
+
+    .article-sidebar-search,
     .article-sidebar-search form {
         width: 100%;
+        min-width: 0;
     }
 
 
     .article-sidebar-search input {
         width: 100%;
-
         box-sizing: border-box;
     }
 
 
-    /* -----------------------------
-       All Articles
-    ----------------------------- */
-
-    .articles-feed {
-        order: 2;
-
-        width: 100%;
-
-        min-width: 0;
-    }
-
-
-    /* -----------------------------
-       Popular Articles
-    ----------------------------- */
-
-    /*
-       This selector targets the sidebar
-       card containing popular articles.
-       
-       If Popular Articles is inside
-       .article-sidebar-card, it will
-       follow the DOM order.
-    */
-
-    .article-sidebar-card {
-        width: 100%;
-
-        min-width: 0;
-
-        box-sizing: border-box;
-    }
-
-
-    /* -----------------------------
-       Newsletter
-    ----------------------------- */
-
-    .article-newsletter {
-        width: 100%;
-
-        min-width: 0;
-
-        box-sizing: border-box;
-    }
-
-
-    /* -----------------------------
-       Article Cards
-    ----------------------------- */
+    /* -----------------------------------------------------
+       ARTICLE CARDS
+    ----------------------------------------------------- */
 
     .article-card {
         grid-template-columns: 1fr;
-
         gap: 14px;
-
         padding: 12px;
     }
 
@@ -326,32 +260,14 @@
     }
 
 
-    /* -----------------------------
-       Sidebar Width
-    ----------------------------- */
-
-    .articles-sidebar {
-        width: 100%;
-
-        min-width: 0;
-    }
-
-
-    .article-sidebar-card,
-    .article-newsletter {
-        width: 100%;
-
-        box-sizing: border-box;
-    }
-
-
-    /* -----------------------------
-       Pagination
-    ----------------------------- */
+    /* -----------------------------------------------------
+       PAGINATION
+    ----------------------------------------------------- */
 
     .articles-pagination {
         flex-wrap: wrap;
     }
+
 }
 
 
@@ -367,12 +283,12 @@
 
 
     .articles-hero-illustration {
-        min-height: 160px;
+        height: 160px;
     }
 
 
-    .articles-hero-image {
-        max-width: 190px;
+    .articles-books {
+        transform: scale(.76);
     }
 
 
@@ -389,11 +305,12 @@
     .article-card-image-link {
         height: 160px;
     }
+
 }
 
 
 /* =========================================================
-   VERY SMALL MOBILE
+   VERY SMALL MOBILE HERO
 ========================================================= */
 
 @media (max-width: 380px) {
@@ -427,4 +344,5 @@
     .articles-hero-image {
         max-width: 190px;
     }
+
 }
