@@ -89,7 +89,7 @@ export function searchArticles(query) {
 
 
     return articles.filter(
-        (article) => {
+        article => {
 
             const searchableText = [
 
@@ -121,6 +121,26 @@ export function searchArticles(query) {
 export function getArticles() {
 
     return [...articles];
+
+}
+
+
+/* =========================================================
+   ARTICLE SEARCH URL
+========================================================= */
+
+export function getArticleSearchUrl(query) {
+
+    const search =
+        String(query || "").trim();
+
+
+    if (!search) {
+        return "/Toolzenhub/articles.html";
+    }
+
+
+    return `/Toolzenhub/articles.html?q=${encodeURIComponent(search)}`;
 
 }
 
@@ -163,7 +183,7 @@ export function renderArticleSearchResults(
 
 
     results.forEach(
-        (article) => {
+        article => {
 
             const link =
                 document.createElement("a");
@@ -244,6 +264,8 @@ export default {
     searchArticles,
 
     getArticles,
+
+    getArticleSearchUrl,
 
     renderArticleSearchResults,
 
