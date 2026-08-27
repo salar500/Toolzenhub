@@ -31,7 +31,7 @@ import { renderAboutPage }
     from "./pages/about/about.js";
 
 import { renderContactPage }
-    from "./pages/contact/contact.js";
+    from "./pages/contact.js";
 
 
 /* =========================================================
