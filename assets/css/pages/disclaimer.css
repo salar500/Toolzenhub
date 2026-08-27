@@ -5,13 +5,24 @@
 ========================================================= */
 
 
-.disclaimer-page {
+/* =========================================================
+   LEGAL PAGE
+========================================================= */
+
+.legal-page {
     width: 100%;
+
     box-sizing: border-box;
 }
 
 
-.disclaimer-hero {
+/* =========================================================
+   LEGAL HERO
+========================================================= */
+
+.legal-page__hero {
+    width: 100%;
+
     padding: 55px 20px 40px;
 
     text-align: center;
@@ -19,10 +30,22 @@
     background: #f7fbf9;
 
     border-bottom: 1px solid #e7eeeb;
+
+    box-sizing: border-box;
 }
 
 
-.disclaimer-hero__title {
+.legal-page__hero .container {
+    width: calc(100% - 40px);
+
+    max-width: 1100px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.legal-page__hero h1 {
     margin: 0 0 10px;
 
     color: #101828;
@@ -40,12 +63,7 @@
 }
 
 
-.disclaimer-hero__title span {
-    color: #0b9f58;
-}
-
-
-.disclaimer-hero__description {
+.legal-page__hero p {
     max-width: 650px;
 
     margin: 0 auto;
@@ -58,29 +76,49 @@
 }
 
 
-.disclaimer-content {
+/* =========================================================
+   LEGAL CONTENT
+========================================================= */
+
+.legal-page__content {
+    width: 100%;
+
+    box-sizing: border-box;
+}
+
+
+.legal-page__content .container {
     width: calc(100% - 40px);
 
     max-width: 850px;
 
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
 
-    padding: 50px 0 65px;
+    padding-top: 50px;
+    padding-bottom: 65px;
+
+    box-sizing: border-box;
 }
 
 
-.disclaimer-section {
-    margin-bottom: 32px;
+/* =========================================================
+   LEGAL ARTICLE
+========================================================= */
+
+.legal-page__article {
+    width: 100%;
+
+    color: #667085;
+
+    font-size: 14px;
+
+    line-height: 1.8;
 }
 
 
-.disclaimer-section:last-child {
-    margin-bottom: 0;
-}
-
-
-.disclaimer-section__title {
-    margin: 0 0 10px;
+.legal-page__article h2 {
+    margin: 32px 0 10px;
 
     color: #101828;
 
@@ -97,8 +135,13 @@
 }
 
 
-.disclaimer-section__text {
-    margin: 0 0 12px;
+.legal-page__article h2:first-of-type {
+    margin-top: 25px;
+}
+
+
+.legal-page__article p {
+    margin: 0 0 14px;
 
     color: #667085;
 
@@ -108,63 +151,38 @@
 }
 
 
-.disclaimer-section__list {
-    margin: 10px 0 0;
-
-    padding-left: 22px;
-
-    color: #667085;
-
-    font-size: 14px;
-
-    line-height: 1.8;
-}
-
-
-.disclaimer-section__list li {
-    margin-bottom: 6px;
-}
-
-
-.disclaimer-section__link {
+.legal-page__article a {
     color: #0b9f58;
 
-    text-decoration: none;
-
     font-weight: 600;
+
+    text-decoration: none;
 }
 
 
-.disclaimer-section__link:hover {
+.legal-page__article a:hover {
     text-decoration: underline;
 }
 
 
 /* =========================================================
-   IMPORTANT NOTICE
+   LAST UPDATED
 ========================================================= */
 
-.disclaimer-notice {
-    margin: 0 0 35px;
+.legal-page__updated {
+    margin: 0 0 25px !important;
 
-    padding: 20px;
+    padding: 12px 15px;
 
-    border: 1px solid #dcebe3;
-
-    border-radius: 10px;
+    border-left: 3px solid #0b9f58;
 
     background: #f7fbf9;
 
-    color: #344054;
+    color: #667085 !important;
 
-    font-size: 14px;
+    font-size: 12px !important;
 
-    line-height: 1.7;
-}
-
-
-.disclaimer-notice strong {
-    color: #101828;
+    line-height: 1.6 !important;
 }
 
 
@@ -174,38 +192,48 @@
 
 @media (max-width: 600px) {
 
-    .disclaimer-hero {
+    .legal-page__hero {
         padding: 40px 16px 30px;
     }
 
 
-    .disclaimer-hero__title {
+    .legal-page__hero .container {
+        width: calc(100% - 24px);
+    }
+
+
+    .legal-page__hero h1 {
         font-size: 31px;
     }
 
 
-    .disclaimer-content {
-        width: calc(100% - 24px);
-
-        padding: 35px 0 45px;
+    .legal-page__hero p {
+        font-size: 13px;
     }
 
 
-    .disclaimer-section__title {
+    .legal-page__content .container {
+        width: calc(100% - 24px);
+
+        padding-top: 35px;
+        padding-bottom: 45px;
+    }
+
+
+    .legal-page__article h2 {
         font-size: 20px;
     }
 
 
-    .disclaimer-section__text,
-    .disclaimer-section__list {
+    .legal-page__article p {
         font-size: 13px;
+
+        line-height: 1.75;
     }
 
 
-    .disclaimer-notice {
-        padding: 16px;
-
-        font-size: 13px;
+    .legal-page__updated {
+        font-size: 11px !important;
     }
 
 }
