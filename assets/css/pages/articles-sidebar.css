@@ -1,4 +1,3 @@
-
 /* =========================================================
    ToolZen Hub
    Articles
@@ -12,15 +11,13 @@
 
 .articles-sidebar {
     display: flex;
-
     flex-direction: column;
-
     gap: 16px;
 }
 
 
 /* =========================================================
-   SIDEBAR SEARCH
+   SEARCH
 ========================================================= */
 
 .article-sidebar-search form {
@@ -30,29 +27,16 @@
 
 .article-sidebar-search input {
     width: 100%;
-
     height: 46px;
-
-    padding:
-        0 50px 0 14px;
-
-    border:
-        1px solid var(--articles-border);
-
+    padding: 0 50px 0 14px;
+    border: 1px solid var(--articles-border);
     border-radius: 9px;
-
     outline: none;
-
     background: var(--articles-white);
-
     color: var(--articles-heading);
-
     font: inherit;
-
     font-size: 12px;
-
     box-sizing: border-box;
-
     box-shadow:
         0 3px 12px rgba(15, 23, 42, .04);
 }
@@ -64,56 +48,37 @@
 
 
 .article-sidebar-search input:focus {
-    border-color:
-        var(--articles-green);
-
+    border-color: var(--articles-green);
     box-shadow:
-        0 0 0 3px
-        rgba(0, 166, 81, .10);
+        0 0 0 3px rgba(0, 166, 81, .10);
 }
 
 
 .article-sidebar-search button {
     position: absolute;
-
     top: 5px;
-
     right: 5px;
-
     display: grid;
-
     place-items: center;
-
     width: 36px;
-
     height: 36px;
-
     border: 0;
-
     border-radius: 7px;
-
-    background:
-        var(--articles-green);
-
+    background: var(--articles-green);
     cursor: pointer;
 }
 
 
 .article-sidebar-search button:hover {
-    background:
-        var(--articles-green-dark);
+    background: var(--articles-green-dark);
 }
 
 
 .article-sidebar-search svg {
     width: 17px;
-
     height: 17px;
-
     fill: none;
-
     stroke: #FFFFFF;
-
     stroke-width: 2;
 }
 
@@ -124,18 +89,11 @@
 
 .article-sidebar-card {
     padding: 19px;
-
-    border:
-        1px solid var(--articles-border);
-
+    border: 1px solid var(--articles-border);
     border-radius: 12px;
-
-    background:
-        var(--articles-white);
-
+    background: var(--articles-white);
     box-shadow:
-        0 3px 12px
-        rgba(15, 23, 42, .04);
+        0 3px 12px rgba(15, 23, 42, .04);
 }
 
 
@@ -146,10 +104,7 @@
 
 .article-sidebar-heading h2 {
     margin: 0;
-
-    color:
-        var(--articles-heading);
-
+    color: var(--articles-heading);
     font-size: 15px;
 }
 
@@ -160,110 +115,73 @@
 
 .article-category-list {
     display: flex;
-
     flex-direction: column;
-
     gap: 3px;
 }
 
 
 .article-category-item {
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
     min-height: 40px;
-
     color: #475569;
-
     font-size: 12px;
-
     text-decoration: none;
 }
 
 
 .article-category-item:hover {
-    color:
-        var(--articles-green);
+    color: var(--articles-green);
 }
 
 
 .article-category-name {
     display: flex;
-
     align-items: center;
-
     gap: 9px;
 }
 
 
 .article-category-icon {
     display: grid;
-
     place-items: center;
-
     width: 27px;
-
     height: 27px;
-
     border-radius: 7px;
-
-    background:
-        var(--articles-green-light);
-
-    color:
-        var(--articles-green);
-
+    background: var(--articles-green-light);
+    color: var(--articles-green);
     font-size: 13px;
 }
 
 
 .article-category-count {
     display: flex;
-
     align-items: center;
-
     gap: 5px;
-
-    color:
-        var(--articles-muted);
-
+    color: var(--articles-muted);
     font-size: 10px;
 }
 
 
 .article-more-categories {
     display: inline-flex;
-
     align-items: center;
-
     gap: 5px;
-
     margin-top: 10px;
-
     padding: 0;
-
     border: 0;
-
     background: transparent;
-
     color: #475569;
-
     font: inherit;
-
     font-size: 11px;
-
     font-weight: 700;
-
     cursor: pointer;
 }
 
 
 .article-more-categories:hover {
-    color:
-        var(--articles-green);
+    color: var(--articles-green);
 }
 
 
@@ -273,70 +191,49 @@
 
 .popular-articles {
     display: flex;
-
     flex-direction: column;
-
     gap: 15px;
 }
 
 
 .popular-article {
     display: flex;
-
     gap: 11px;
-
     color: inherit;
-
     text-decoration: none;
 }
 
 
 .popular-article img {
     width: 58px;
-
     height: 58px;
-
     flex: 0 0 auto;
-
     border-radius: 7px;
-
     object-fit: cover;
 }
 
 
 .popular-article h3 {
     display: -webkit-box;
-
     margin: 0;
-
     overflow: hidden;
-
     color: #1E293B;
-
     font-size: 11px;
-
     line-height: 1.45;
-
     -webkit-box-orient: vertical;
-
     -webkit-line-clamp: 2;
 }
 
 
 .popular-article:hover h3 {
-    color:
-        var(--articles-green);
+    color: var(--articles-green);
 }
 
 
 .popular-article span {
     display: block;
-
     margin-top: 4px;
-
-    color:
-        var(--articles-muted);
-
+    color: var(--articles-muted);
     font-size: 9px;
 }
 
@@ -347,138 +244,88 @@
 
 .article-newsletter {
     padding: 19px;
-
-    border:
-        1px solid #B7E8CB;
-
+    border: 1px solid #B7E8CB;
     border-radius: 12px;
-
-    background:
-        var(--articles-green-light);
+    background: var(--articles-green-light);
 }
 
 
 .newsletter-icon {
     display: grid;
-
     place-items: center;
-
     width: 39px;
-
     height: 39px;
-
     margin-bottom: 10px;
-
     border-radius: 10px;
-
     background: #CDEEDB;
 }
 
 
 .newsletter-icon svg {
     width: 19px;
-
     height: 19px;
-
     fill: none;
-
-    stroke:
-        var(--articles-green);
-
+    stroke: var(--articles-green);
     stroke-width: 1.7;
 }
 
 
 .newsletter-content h2 {
     margin: 0;
-
-    color:
-        var(--articles-heading);
-
+    color: var(--articles-heading);
     font-size: 14px;
 }
 
 
 .newsletter-content p {
     margin: 5px 0 0;
-
-    color:
-        var(--articles-body);
-
+    color: var(--articles-body);
     font-size: 11px;
-
     line-height: 1.5;
 }
 
 
 .newsletter-form {
     display: flex;
-
     flex-direction: column;
-
     gap: 8px;
-
     margin-top: 15px;
 }
 
 
 .newsletter-form input {
     width: 100%;
-
     height: 40px;
-
     padding: 0 11px;
-
-    border:
-        1px solid var(--articles-border);
-
+    border: 1px solid var(--articles-border);
     border-radius: 8px;
-
     outline: none;
-
-    background:
-        var(--articles-white);
-
-    color:
-        var(--articles-heading);
-
+    background: var(--articles-white);
+    color: var(--articles-heading);
     font: inherit;
-
     font-size: 11px;
-
     box-sizing: border-box;
 }
 
 
 .newsletter-form input:focus {
-    border-color:
-        var(--articles-green);
+    border-color: var(--articles-green);
 }
 
 
 .newsletter-form button {
     height: 40px;
-
     border: 0;
-
     border-radius: 8px;
-
-    background:
-        var(--articles-green);
-
+    background: var(--articles-green);
     color: #FFFFFF;
-
     font: inherit;
-
     font-size: 11px;
-
     font-weight: 700;
-
     cursor: pointer;
 }
 
 
 .newsletter-form button:hover {
-    background:
-        var(--articles-green-dark);
-  }
+    background: var(--articles-green-dark);
+}
