@@ -1,1 +1,28 @@
 
+/* =========================================================
+   ToolZen Hub
+   Articles
+   Main Layout
+========================================================= */
+
+
+/* =========================================================
+   ARTICLES LAYOUT
+========================================================= */
+
+.articles-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2fr)
+        minmax(300px, 1fr);
+
+    gap: 30px;
+
+    align-items: start;
+}
+
+
+.articles-feed {
+    min-width: 0;
+}
