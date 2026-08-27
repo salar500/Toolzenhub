@@ -1232,3 +1232,44 @@
     }
 
 }
+
+
+/* =========================================================
+   MOBILE ARTICLES ORDER
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .articles-layout {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Search first */
+    .article-sidebar-search {
+        order: 1;
+        width: 100%;
+    }
+
+    /* Articles second */
+    .articles-feed {
+        order: 2;
+        width: 100%;
+    }
+
+    /* Sidebar items after articles */
+    .articles-sidebar {
+        display: contents;
+    }
+
+    .article-sidebar-card {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .article-newsletter {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+}
