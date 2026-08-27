@@ -1,28 +1,186 @@
-
 /* =========================================================
    ToolZen Hub
    Articles
-   Main Layout
+   Layout + Cards
 ========================================================= */
 
 
 /* =========================================================
-   ARTICLES LAYOUT
+   LAYOUT
 ========================================================= */
 
 .articles-layout {
     display: grid;
-
     grid-template-columns:
         minmax(0, 2fr)
         minmax(300px, 1fr);
-
     gap: 30px;
-
     align-items: start;
 }
 
 
 .articles-feed {
     min-width: 0;
+}
+
+
+.articles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+/* =========================================================
+   ARTICLE CARD
+========================================================= */
+
+.article-card {
+    display: grid;
+    grid-template-columns:
+        190px
+        minmax(0, 1fr);
+    gap: 20px;
+    min-height: 175px;
+    padding: 15px;
+    border: 1px solid var(--articles-border);
+    border-radius: 12px;
+    background: var(--articles-white);
+    box-shadow:
+        0 3px 12px rgba(15, 23, 42, .04);
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+
+.article-card:hover {
+    border-color: #B7E8CB;
+    transform: translateY(-2px);
+    box-shadow:
+        0 10px 25px rgba(15, 23, 42, .08);
+}
+
+
+.article-card-image-link {
+    display: block;
+    overflow: hidden;
+    height: 145px;
+    border-radius: 9px;
+}
+
+
+.article-card-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform .35s ease;
+}
+
+
+.article-card:hover .article-card-image {
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+   ARTICLE CONTENT
+========================================================= */
+
+.article-card-content {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2px 0;
+}
+
+
+.article-card-category {
+    display: inline-block;
+    margin-bottom: 6px;
+    color: var(--articles-green);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+}
+
+
+.article-card h2 {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.35;
+}
+
+
+.article-card h2 a {
+    color: var(--articles-heading);
+    text-decoration: none;
+    transition: color .2s;
+}
+
+
+.article-card h2 a:hover {
+    color: var(--articles-green);
+}
+
+
+.article-card p {
+    display: -webkit-box;
+    margin: 7px 0 0;
+    overflow: hidden;
+    color: var(--articles-body);
+    font-size: 12px;
+    line-height: 1.55;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+
+/* =========================================================
+   ARTICLE META
+========================================================= */
+
+.article-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 12px;
+    padding-top: 9px;
+    border-top: 1px solid var(--articles-border-light);
+}
+
+
+.article-meta-items {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 13px;
+}
+
+
+.article-meta-items span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--articles-muted);
+    font-size: 10px;
+}
+
+
+.article-arrow {
+    flex: 0 0 auto;
+    color: var(--articles-green);
+    font-size: 17px;
+    font-weight: 700;
+    transition: transform .2s;
+}
+
+
+.article-card:hover .article-arrow {
+    transform: translateX(4px);
 }
