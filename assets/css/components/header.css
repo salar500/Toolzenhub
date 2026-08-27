@@ -1,6 +1,8 @@
 /* =========================================================
    TOOLZEN HUB — GLOBAL HEADER
-   SAME ON EVERY PAGE
+   RESPONSIVE HEADER
+   Desktop: Home | Categories | Articles | About
+   Mobile: Hamburger → Home | Categories | Articles | About
 ========================================================= */
 
 
@@ -48,8 +50,6 @@ body {
 
 /* =========================================================
    NAVBAR
-   BRAND LEFT
-   NAVIGATION RIGHT
 ========================================================= */
 
 .navbar {
@@ -57,7 +57,7 @@ body {
     height: 64px;
 
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 0 20px !important;
 
     box-sizing: border-box;
 
@@ -131,7 +131,6 @@ body {
 
 .brand-text {
     display: flex;
-
     flex-direction: column;
 
     margin: 0 !important;
@@ -173,13 +172,11 @@ body {
 
     font-size: 11px;
     font-weight: 400;
-
-    letter-spacing: 0;
 }
 
 
 /* =========================================================
-   NAVIGATION WRAPPER
+   DESKTOP NAVIGATION
 ========================================================= */
 
 .navbar__menu {
@@ -189,23 +186,15 @@ body {
     margin-left: auto !important;
     margin-right: 0 !important;
 
-    padding: 0 !important;
-
     height: 100%;
 
     flex-shrink: 0;
 }
 
 
-/* =========================================================
-   NAVIGATION LIST
-========================================================= */
-
 .navbar__menu ul {
     display: flex;
-
     flex-direction: row;
-
     align-items: center;
 
     gap: 20px;
@@ -217,10 +206,6 @@ body {
 }
 
 
-/* =========================================================
-   NAVIGATION ITEMS
-========================================================= */
-
 .navbar__menu li {
     display: flex;
     align-items: center;
@@ -229,10 +214,6 @@ body {
     padding: 0 !important;
 }
 
-
-/* =========================================================
-   NAVIGATION LINKS
-========================================================= */
 
 .navbar__menu a {
     position: relative;
@@ -252,7 +233,10 @@ body {
 
     background: transparent;
 
-    font-family: Georgia, "Times New Roman", serif;
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 
     font-size: 15px;
     font-weight: 600;
@@ -269,37 +253,21 @@ body {
 }
 
 
-/* =========================================================
-   VISITED
-========================================================= */
-
 .navbar__menu a:visited {
     color: #344054;
 }
 
-
-/* =========================================================
-   HOVER
-========================================================= */
 
 .navbar__menu a:hover {
     color: #0b9f58;
 }
 
 
-/* =========================================================
-   CURRENT PAGE
-========================================================= */
-
 .navbar__menu a.active,
 .navbar__menu a[aria-current="page"] {
     color: #0b9f58 !important;
 }
 
-
-/* =========================================================
-   CURRENT PAGE UNDERLINE
-========================================================= */
 
 .navbar__menu a.active::after,
 .navbar__menu a[aria-current="page"]::after {
@@ -325,10 +293,13 @@ body {
 ========================================================= */
 
 .navbar__actions {
-    display: flex;
+    display: none;
+
     align-items: center;
 
-    margin: 0 0 0 18px !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+
     padding: 0 !important;
 
     flex-shrink: 0;
@@ -336,14 +307,15 @@ body {
 
 
 /* =========================================================
-   HAMBURGER
+   HAMBURGER BUTTON
+   HIDDEN ON DESKTOP
 ========================================================= */
 
 .menu-toggle {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
 
-    display: inline-flex;
+    display: none;
 
     align-items: center;
     justify-content: center;
@@ -373,19 +345,14 @@ body {
 
 .menu-toggle:hover {
     background: #f1f8f5;
-
     color: #0b9f58;
 }
 
 
-/* =========================================================
-   HAMBURGER LINES
-========================================================= */
-
 .menu-toggle span {
     display: block;
 
-    width: 20px;
+    width: 22px;
     height: 2px;
 
     margin: 0;
@@ -394,145 +361,165 @@ body {
     border-radius: 4px;
 
     background: currentColor;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
 }
 
 
 /* =========================================================
-   DESKTOP
+   MOBILE NAVIGATION
+   HIDDEN BY DEFAULT
 ========================================================= */
 
-@media (min-width: 901px) {
+.mobile-navigation {
+    display: none;
 
-    .site-header {
-        width: 100% !important;
-        height: 64px !important;
+    width: 100%;
 
-        margin: 0 !important;
-        padding: 0 !important;
-    }
+    margin: 0;
+    padding: 0;
 
+    box-sizing: border-box;
 
-    .navbar {
-        width: 100% !important;
-        height: 64px !important;
+    background: #ffffff;
 
-        margin: 0 !important;
-        padding: 0 !important;
+    border-bottom: 1px solid #e8eceb;
 
-        display: flex !important;
-        align-items: center !important;
-
-        justify-content: flex-start !important;
-    }
-
-
-    .navbar__brand {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-    }
-
-
-    .navbar__menu {
-        display: flex !important;
-
-        margin-left: auto !important;
-        margin-right: 0 !important;
-    }
-
-
-    .navbar__menu ul {
-        display: flex !important;
-
-        flex-direction: row !important;
-
-        align-items: center !important;
-
-        gap: 20px !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-
-    .navbar__menu li {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-
-    .navbar__menu a {
-        display: inline-flex !important;
-
-        height: 64px !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-
-        font-family:
-            Georgia,
-            "Times New Roman",
-            serif !important;
-    }
-
-
-    .navbar__actions {
-        display: flex !important;
-
-        margin-left: 18px !important;
-        margin-right: 0 !important;
-
-        padding: 0 !important;
-    }
-
-
-    .menu-toggle {
-        display: inline-flex !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-    }
+    box-shadow:
+        0 8px 20px rgba(16, 24, 40, 0.06);
 }
 
 
 /* =========================================================
-   MOBILE / TABLET
+   MOBILE NAVIGATION MENU
+========================================================= */
+
+.mobile-navigation__menu {
+    display: flex;
+
+    flex-direction: column;
+
+    margin: 0;
+    padding: 8px 20px 16px;
+
+    list-style: none;
+}
+
+
+.mobile-navigation__link {
+    display: block;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px 4px;
+
+    color: #344054;
+
+    text-decoration: none;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    border-bottom: 1px solid #eef1f0;
+
+    transition:
+        color 0.2s ease,
+        padding-left 0.2s ease;
+}
+
+
+.mobile-navigation__link:last-child {
+    border-bottom: 0;
+}
+
+
+.mobile-navigation__link:hover,
+.mobile-navigation__link.active {
+    color: #0b9f58;
+}
+
+
+.mobile-navigation__link[aria-current="page"] {
+    color: #0b9f58;
+}
+
+
+/* =========================================================
+   MOBILE MENU OPEN STATE
+========================================================= */
+
+.mobile-navigation.is-open {
+    display: block;
+}
+
+
+/* =========================================================
+   MOBILE HAMBURGER ACTIVE STATE
+========================================================= */
+
+.menu-toggle.is-open {
+    background: #f1f8f5;
+    color: #0b9f58;
+}
+
+
+/* =========================================================
+   TABLET + MOBILE
+   900px and below
 ========================================================= */
 
 @media (max-width: 900px) {
 
     .site-header {
-        width: 100% !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
+        height: 64px;
     }
 
 
     .navbar {
-        width: 100% !important;
+        height: 64px;
 
-        margin: 0 !important;
-        padding: 0 !important;
-
-        justify-content: flex-start;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
     }
 
 
+    /* Hide desktop links */
     .navbar__menu {
         display: none !important;
     }
 
 
-    .navbar__menu ul {
-        display: none !important;
+    /* Show hamburger wrapper */
+    .navbar__actions {
+        display: flex !important;
+
+        margin-left: auto !important;
     }
 
 
-    .navbar__actions {
-        margin-left: auto !important;
-        margin-right: 0 !important;
+    /* Show hamburger */
+    .menu-toggle {
+        display: inline-flex !important;
+    }
 
-        padding: 0 !important;
+
+    /* Mobile menu remains hidden until JS adds .is-open */
+    .mobile-navigation {
+        display: none;
+    }
+
+
+    .mobile-navigation.is-open {
+        display: block;
     }
 }
 
@@ -544,12 +531,15 @@ body {
 @media (max-width: 600px) {
 
     .site-header {
-        height: 58px !important;
+        height: 58px;
     }
 
 
     .navbar {
-        height: 58px !important;
+        height: 58px;
+
+        padding-left: 12px !important;
+        padding-right: 12px !important;
     }
 
 
@@ -558,6 +548,11 @@ body {
         height: 38px;
 
         font-size: 20px;
+    }
+
+
+    .navbar__brand {
+        gap: 9px;
     }
 
 
@@ -572,172 +567,18 @@ body {
 
 
     .menu-toggle {
-        width: 38px;
-        height: 38px;
-    }
-}
-
-
-/* =========================================================
-   DESKTOP NAVIGATION — FINAL CONSISTENCY
-   IMPORTANT:
-   This is intentionally inside desktop media query
-   so it NEVER overrides mobile menu hiding.
-========================================================= */
-
-@media (min-width: 901px) {
-
-    .site-header .navbar__menu {
-        display: flex !important;
-        align-items: center !important;
-
-        margin-left: auto !important;
-        margin-right: 0 !important;
-
-        padding: 0 !important;
-    }
-
-
-    .site-header .navbar__menu ul {
-        display: flex !important;
-
-        flex-direction: row !important;
-
-        align-items: center !important;
-
-        gap: 20px !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-
-        list-style: none !important;
-    }
-
-
-    .site-header .navbar__menu li {
-        display: flex !important;
-        align-items: center !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-
-    .site-header .navbar__menu li + li {
-        margin-left: 0 !important;
-    }
-
-
-    .site-header .navbar__menu a {
-        display: inline-flex !important;
-        align-items: center !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-
-        width: auto !important;
-
-        white-space: nowrap !important;
-    }
-
-
-    .site-header .navbar__actions {
-        display: flex !important;
-        align-items: center !important;
-
-        margin-left: 18px !important;
-        margin-right: 0 !important;
-
-        padding: 0 !important;
-    }
-}
-
-
-/* =========================================================
-   Desktop / Mobile Navigation
-========================================================= */
-
-/* Desktop */
-.mobile-navigation {
-    display: none;
-}
-
-.menu-toggle {
-    display: none;
-}
-
-
-/* =========================================================
-   Mobile
-========================================================= */
-
-@media (max-width: 768px) {
-
-    /* Hide desktop navigation */
-    .navbar__menu {
-        display: none;
-    }
-
-
-    /* Show hamburger */
-    .menu-toggle {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
-        width: 42px;
-        height: 42px;
-        padding: 0;
-        border: 0;
-        background: transparent;
-        cursor: pointer;
+        width: 40px;
+        height: 40px;
     }
 
 
     .menu-toggle span {
-        display: block;
-        width: 24px;
-        height: 2px;
-        border-radius: 2px;
-        background: currentColor;
+        width: 21px;
     }
 
 
-    /* Mobile menu container */
-    .mobile-navigation {
-        display: block;
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        visibility: hidden;
-        transition:
-            max-height 0.25s ease,
-            opacity 0.2s ease,
-            visibility 0.25s ease;
-    }
-
-
-    /* Open state */
-    .mobile-navigation.is-open {
-        max-height: 400px;
-        opacity: 1;
-        visibility: visible;
-    }
-
-
-    /* Mobile links */
     .mobile-navigation__menu {
-        display: flex;
-        flex-direction: column;
-        padding: 10px 20px 20px;
+        padding-left: 16px;
+        padding-right: 16px;
     }
-
-
-    .mobile-navigation__link {
-        display: block;
-        padding: 14px 0;
-        text-decoration: none;
-    }
-
 }
