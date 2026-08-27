@@ -1,0 +1,211 @@
+/* =========================================================
+   ToolZen Hub
+   Disclaimer Page
+   Page-Specific Styles
+========================================================= */
+
+
+.disclaimer-page {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.disclaimer-hero {
+    padding: 55px 20px 40px;
+
+    text-align: center;
+
+    background: #f7fbf9;
+
+    border-bottom: 1px solid #e7eeeb;
+}
+
+
+.disclaimer-hero__title {
+    margin: 0 0 10px;
+
+    color: #101828;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 40px;
+
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+
+.disclaimer-hero__title span {
+    color: #0b9f58;
+}
+
+
+.disclaimer-hero__description {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    color: #667085;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+.disclaimer-content {
+    width: calc(100% - 40px);
+
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    padding: 50px 0 65px;
+}
+
+
+.disclaimer-section {
+    margin-bottom: 32px;
+}
+
+
+.disclaimer-section:last-child {
+    margin-bottom: 0;
+}
+
+
+.disclaimer-section__title {
+    margin: 0 0 10px;
+
+    color: #101828;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+
+.disclaimer-section__text {
+    margin: 0 0 12px;
+
+    color: #667085;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+
+.disclaimer-section__list {
+    margin: 10px 0 0;
+
+    padding-left: 22px;
+
+    color: #667085;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+
+.disclaimer-section__list li {
+    margin-bottom: 6px;
+}
+
+
+.disclaimer-section__link {
+    color: #0b9f58;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+
+.disclaimer-section__link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   IMPORTANT NOTICE
+========================================================= */
+
+.disclaimer-notice {
+    margin: 0 0 35px;
+
+    padding: 20px;
+
+    border: 1px solid #dcebe3;
+
+    border-radius: 10px;
+
+    background: #f7fbf9;
+
+    color: #344054;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+.disclaimer-notice strong {
+    color: #101828;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .disclaimer-hero {
+        padding: 40px 16px 30px;
+    }
+
+
+    .disclaimer-hero__title {
+        font-size: 31px;
+    }
+
+
+    .disclaimer-content {
+        width: calc(100% - 24px);
+
+        padding: 35px 0 45px;
+    }
+
+
+    .disclaimer-section__title {
+        font-size: 20px;
+    }
+
+
+    .disclaimer-section__text,
+    .disclaimer-section__list {
+        font-size: 13px;
+    }
+
+
+    .disclaimer-notice {
+        padding: 16px;
+
+        font-size: 13px;
+    }
+
+}
