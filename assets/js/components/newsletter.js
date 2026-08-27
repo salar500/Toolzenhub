@@ -1,355 +1,348 @@
-/* =========================================================
-   ToolZen Hub
-   Newsletter Subscription
-   Frontend Component
-========================================================= */
+ /* =========================================================
+    ToolZen Hub
+    Newsletter Subscription
+    Frontend JavaScript
+ ========================================================= */
 
 
-/* =========================================================
-   NEWSLETTER
-========================================================= */
+ /* =========================================================
+    NEWSLETTER
+ ========================================================= */
 
-export function initializeNewsletter() {
+ export function initializeNewsletter() {
 
-    const newsletterForms =
-        document.querySelectorAll(
-            ".footer__newsletter-form"
-        );
+     const newsletterForm =
+         document.querySelector(
+             ".footer__newsletter-form"
+         );
 
 
-    if (!newsletterForms.length) {
-        return;
-    }
+     /* =====================================================
+        FORM NOT FOUND
+     ===================================================== */
 
+     if (!newsletterForm) {
+         return;
+     }
 
-    newsletterForms.forEach(
-        (newsletterForm) => {
 
+     /* =====================================================
+        FORM SUBMISSION
+     ===================================================== */
 
-            /* =================================================
-               PREVENT DUPLICATE EVENT LISTENERS
-            ================================================= */
+     newsletterForm.addEventListener(
+         "submit",
+         async (event) => {
 
-            if (
-                newsletterForm.dataset.newsletterInitialized === "true"
-            ) {
-                return;
-            }
+             event.preventDefault();
 
 
-            newsletterForm.dataset.newsletterInitialized =
-                "true";
+             /* =================================================
+                EMAIL INPUT
+             ================================================= */
 
+             const emailInput =
+                 newsletterForm.querySelector(
+                     ".footer__newsletter-input"
+                 );
 
-            /* =================================================
-               SUBMIT
-            ================================================= */
 
-            newsletterForm.addEventListener(
-                "submit",
-                async (event) => {
+             if (!emailInput) {
+                 return;
+             }
 
-                    event.preventDefault();
 
+             const email =
+                 emailInput.value.trim();
 
-                    const emailInput =
-                        newsletterForm.querySelector(
-                            ".footer__newsletter-input"
-                        );
 
+             /* =================================================
+                BASIC VALIDATION
+             ================================================= */
 
-                    const submitButton =
-                        newsletterForm.querySelector(
-                            ".footer__newsletter-button"
-                        );
+             if (!email) {
 
+                 showNewsletterMessage(
+                     newsletterForm,
+                     "Please enter your email address.",
+                     "error"
+                 );
 
-                    if (!emailInput) {
-                        return;
-                    }
+                 emailInput.focus();
 
+                 return;
+             }
 
-                    const email =
-                        emailInput.value.trim();
 
+             /* =================================================
+                EMAIL VALIDATION
+             ================================================= */
 
-                    /* =================================================
-                       BASIC VALIDATION
-                    ================================================= */
+             const emailPattern =
+                 /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-                    if (!email) {
 
-                        showNewsletterMessage(
-                            newsletterForm,
-                            "Please enter your email address.",
-                            "error"
-                        );
+             if (!emailPattern.test(email)) {
 
-                        emailInput.focus();
+                 showNewsletterMessage(
+                     newsletterForm,
+                     "Please enter a valid email address.",
+                     "error"
+                 );
 
-                        return;
-                    }
+                 emailInput.focus();
 
+                 return;
+             }
 
-                    /* =================================================
-                       EMAIL FORMAT VALIDATION
-                    ================================================= */
 
-                    const emailPattern =
-                        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+             /* =================================================
+                SUBMIT BUTTON
+             ================================================= */
 
+             const submitButton =
+                 newsletterForm.querySelector(
+                     ".footer__newsletter-button"
+                 );
 
-                    if (!emailPattern.test(email)) {
 
-                        showNewsletterMessage(
-                            newsletterForm,
-                            "Please enter a valid email address.",
-                            "error"
-                        );
+             if (submitButton) {
 
-                        emailInput.focus();
+                 submitButton.disabled = true;
 
-                        return;
-                    }
+                 submitButton.textContent =
+                     "Subscribing...";
 
+             }
 
-                    /* =================================================
-                       LOADING STATE
-                    ================================================= */
 
-                    if (submitButton) {
+             showNewsletterMessage(
+                 newsletterForm,
+                 "Subscribing...",
+                 "loading"
+             );
 
-                        submitButton.disabled = true;
 
-                        submitButton.dataset.originalText =
-                            submitButton.textContent;
+             /* =================================================
+                SEND TO NETLIFY FUNCTION
+             ================================================= */
 
-                        submitButton.textContent =
-                            "Subscribing...";
-                    }
+             try {
 
+                 const response =
+                     await fetch(
+                         "/.netlify/functions/subscribe",
+                         {
+                             method: "POST",
 
-                    showNewsletterMessage(
-                        newsletterForm,
-                        "Subscribing...",
-                        "loading"
-                    );
+                             headers: {
+                                 "Content-Type":
+                                     "application/json"
+                             },
 
+                             body: JSON.stringify({
+                                 email: email
+                             })
+                         }
+                     );
 
-                    /* =================================================
-                       SEND TO NETLIFY FUNCTION
-                    ================================================= */
 
-                    try {
+                 /* =================================================
+                    READ RESPONSE
+                 ================================================= */
 
-                        const response =
-                            await fetch(
-                                "/.netlify/functions/subscribe",
-                                {
-                                    method: "POST",
+                 let result = null;
 
-                                    headers: {
-                                        "Content-Type":
-                                            "application/json"
-                                    },
 
-                                    body: JSON.stringify({
-                                        email: email
-                                    })
-                                }
-                            );
+                 try {
 
+                     result =
+                         await response.json();
 
-                        /* =================================================
-                           READ SERVER RESPONSE
-                        ================================================= */
+                 } catch (jsonError) {
 
-                        let result = null;
+                     console.error(
+                         "Invalid server response:",
+                         jsonError
+                     );
 
+                 }
 
-                        try {
 
-                            result =
-                                await response.json();
+                 /* =================================================
+                    SUCCESS
+                 ================================================= */
 
-                        } catch (jsonError) {
+                 if (
+                     response.ok &&
+                     result &&
+                     result.success
+                 ) {
 
-                            console.error(
-                                "Invalid server response:",
-                                jsonError
-                            );
+                     showNewsletterMessage(
+                         newsletterForm,
+                         result.message ||
+                         "Successfully subscribed!",
+                         "success"
+                     );
 
-                        }
 
+                     newsletterForm.reset();
 
-                        /* =================================================
-                           FAILED REQUEST
-                        ================================================= */
 
-                        if (!response.ok) {
+                     if (submitButton) {
 
-                            console.error(
-                                "Newsletter subscription failed:",
-                                result
-                            );
+                         submitButton.textContent =
+                             "Subscribed!";
 
+                     }
 
-                            showNewsletterMessage(
-                                newsletterForm,
-                                result?.message ||
-                                "Unable to subscribe right now. Please try again.",
-                                "error"
-                            );
 
+                     return;
+                 }
 
-                            return;
-                        }
 
+                 /* =================================================
+                    SERVER / BREVO ERROR
+                 ================================================= */
 
-                        /* =================================================
-                           SUCCESS
-                        ================================================= */
+                 console.error(
+                     "Newsletter subscription failed:",
+                     result?.message
+                 );
 
-                        showNewsletterMessage(
-                            newsletterForm,
-                            result?.message ||
-                            "You're subscribed successfully!",
-                            "success"
-                        );
 
+                 showNewsletterMessage(
+                     newsletterForm,
+                     result?.message ||
+                     "Unable to subscribe. Please try again.",
+                     "error"
+                 );
 
-                        /* =================================================
-                           RESET FORM
-                        ================================================= */
 
-                        newsletterForm.reset();
+                 if (submitButton) {
 
+                     submitButton.textContent =
+                         "Try Again";
 
-                    } catch (error) {
+                 }
 
-                        console.error(
-                            "Newsletter request error:",
-                            error
-                        );
+             }
 
 
-                        showNewsletterMessage(
-                            newsletterForm,
-                            "Something went wrong. Please try again.",
-                            "error"
-                        );
+             /* =====================================================
+                NETWORK ERROR
+             ===================================================== */
 
+             catch (error) {
 
-                    } finally {
+                 console.error(
+                     "Newsletter request error:",
+                     error
+                 );
 
-                        /* ================================================
-                           RESTORE BUTTON
-                        ================================================= */
 
-                        if (submitButton) {
+                 showNewsletterMessage(
+                     newsletterForm,
+                     "Something went wrong. Please try again.",
+                     "error"
+                 );
 
-                            submitButton.disabled = false;
 
-                            submitButton.textContent =
-                                submitButton.dataset.originalText ||
-                                "Subscribe";
-                        }
+                 if (submitButton) {
 
-                    }
+                     submitButton.textContent =
+                         "Try Again";
 
-                }
-            );
+                 }
 
-        }
-    );
+             }
 
-}
 
+             /* =====================================================
+                ENABLE BUTTON AGAIN
+             ===================================================== */
 
-/* =========================================================
-   SHOW NEWSLETTER MESSAGE
-========================================================= */
+             finally {
 
-function showNewsletterMessage(
-    form,
-    message,
-    type
-) {
+                 if (submitButton) {
 
-    let messageElement =
-        form.querySelector(
-            ".newsletter-message"
-        );
+                     submitButton.disabled = false;
 
+                 }
 
-    /* =====================================================
-       CREATE MESSAGE ELEMENT
-    ===================================================== */
+             }
 
-    if (!messageElement) {
+         }
+     );
 
-        messageElement =
-            document.createElement("div");
+ }
 
-        messageElement.className =
-            "newsletter-message";
 
-        messageElement.setAttribute(
-            "role",
-            "status"
-        );
+ /* =========================================================
+    SHOW NEWSLETTER MESSAGE
+ ========================================================= */
 
+ function showNewsletterMessage(
+     newsletterForm,
+     message,
+     type
+ ) {
 
-        form.appendChild(
-            messageElement
-        );
+     let messageElement =
+         newsletterForm.querySelector(
+             ".newsletter-message"
+         );
 
-    }
 
+     /* =====================================================
+        CREATE MESSAGE ELEMENT
+     ===================================================== */
 
-    /* =====================================================
-       MESSAGE TYPE
-    ===================================================== */
+     if (!messageElement) {
 
-    messageElement.className =
-        "newsletter-message newsletter-message--" +
-        type;
+         messageElement =
+             document.createElement("div");
 
+         messageElement.className =
+             "newsletter-message";
 
-    messageElement.textContent =
-        message;
 
+         newsletterForm.appendChild(
+             messageElement
+         );
 
-    messageElement.style.marginTop =
-        "10px";
+     }
 
 
-    messageElement.style.fontSize =
-        "14px";
+     /* =====================================================
+        MESSAGE
+     ===================================================== */
 
+     messageElement.textContent =
+         message;
 
-    messageElement.style.lineHeight =
-        "1.5";
 
+     messageElement.className =
+         "newsletter-message newsletter-message--" +
+         type;
 
-    /* =====================================================
-       ACCESSIBILITY
-    ===================================================== */
 
-    if (type === "success") {
+     messageElement.setAttribute(
+         "role",
+         "status"
+     );
 
-        messageElement.setAttribute(
-            "aria-live",
-            "polite"
-        );
 
-    } else {
+     messageElement.style.marginTop =
+         "10px";
 
-        messageElement.setAttribute(
-            "aria-live",
-            "assertive"
-        );
 
-    }
+     messageElement.style.fontSize =
+         "14px";
 
-}
+
+     messageElement.style.lineHeight =
+         "1.5";
+
+ }
