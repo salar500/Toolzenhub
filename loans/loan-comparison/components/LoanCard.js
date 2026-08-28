@@ -436,41 +436,6 @@ export function initializeLoanInputs() {
     });
 
 }
-
-```javascript
-/* =========================================================
-   SLIDER VISUAL FILL
-========================================================= */
-
-function updateSliderFill(slider) {
-
-    if (!slider) {
-        return;
-    }
-
-    const min = Number(slider.min);
-    const max = Number(slider.max);
-    const value = Number(slider.value);
-
-    if (
-        Number.isNaN(min) ||
-        Number.isNaN(max) ||
-        Number.isNaN(value) ||
-        max <= min
-    ) {
-        return;
-    }
-
-    const percentage =
-        ((value - min) / (max - min)) * 100;
-
-    slider.style.setProperty(
-        "--slider-progress",
-        `${percentage}%`
-    );
-}
-
-
 /* =========================================================
    SLIDER VISUAL FILL
 ========================================================= */
