@@ -1,3 +1,4 @@
+
 import { formatINR } from "../../../assets/js/calculators/common/formatter.js";
 
 
@@ -7,14 +8,37 @@ export function openAmortizationModal(
     loanName
 ) {
 
+    // Safety check
+    if (!loan || !schedule) {
+        console.error(
+            "Unable to open amortization modal:",
+            {
+                loan,
+                schedule,
+                loanName
+            }
+        );
+
+        return;
+    }
+
+
     const existingModal =
-        document.querySelector("#amortization-modal");
+        document.querySelector(
+            "#amortization-modal"
+        );
 
     if (existingModal) {
         existingModal.remove();
     }
 
 
+    /*
+     * EMI
+     *
+     * Every amortization row contains:
+     * principal + interest = EMI
+     */
     const emi =
         schedule.length > 0
             ? schedule[0].principal +
@@ -22,16 +46,22 @@ export function openAmortizationModal(
             : 0;
 
 
+    /*
+     * Total interest
+     */
     const totalInterest =
         schedule.reduce(
             (total, row) =>
-                total + row.interest,
+                total + Number(row.interest || 0),
             0
         );
 
 
+    /*
+     * Total repayment
+     */
     const totalRepayment =
-        loan.principal +
+        Number(loan.principal || 0) +
         totalInterest;
 
 
