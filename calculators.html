@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- =====================================================
+         ToolZen Hub
+         All Calculators Page
+    ====================================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Explore all ToolZen Hub calculators for finance, health, business, math, investment and everyday calculations."
+    >
+
+    <meta
+        name="theme-color"
+        content="#0b9f58"
+    >
+
+    <title>
+        All Calculators | ToolZen Hub
+    </title>
+
+
+    <!-- =====================================================
+         FAVICON
+    ====================================================== -->
+
+    <link
+        rel="icon"
+        href="favicon.ico"
+    >
+
+
+    <!-- =====================================================
+         GLOBAL COMPONENT CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="assets/css/components/header.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/components/footer.css"
+    >
+
+
+    <!-- =====================================================
+         PAGE CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="assets/css/pages/calculators.css"
+    >
+
+</head>
+
+
+<body class="calculators-page-body">
+
+
+    <!-- =====================================================
+         GLOBAL HEADER
+    ====================================================== -->
+
+    <div id="header"></div>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main id="calculators-page">
+
+        <section class="calculators-page__hero">
+
+            <div class="calculators-container">
+
+                <div class="calculators-page__intro">
+
+                    <span class="calculators-page__eyebrow">
+                        Calculators &amp; Tools
+                    </span>
+
+                    <h1 class="calculators-page__title">
+                        All Calculators
+                    </h1>
+
+                    <p class="calculators-page__description">
+                        Explore every calculator available on ToolZen Hub.
+                        Search instantly to find exactly what you need.
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                     SEARCH
+                ================================================== -->
+
+                <form
+                    class="calculators-search"
+                    id="calculators-search-form"
+                    role="search"
+                    novalidate
+                >
+
+                    <span
+                        class="calculators-search__icon"
+                        aria-hidden="true"
+                    >
+                        🔍
+                    </span>
+
+
+                    <input
+                        type="search"
+                        id="calculators-search-input"
+                        class="calculators-search__input"
+                        name="q"
+                        placeholder="Search calculators..."
+                        autocomplete="off"
+                        aria-label="Search calculators"
+                    >
+
+
+                    <button
+                        type="submit"
+                        class="calculators-search__button"
+                        aria-label="Search calculators"
+                    >
+                        Search
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CALCULATOR DIRECTORY
+        ====================================================== -->
+
+        <section class="calculators-directory">
+
+            <div class="calculators-container">
+
+                <div class="calculators-directory__header">
+
+                    <div>
+
+                        <span
+                            class="calculators-directory__eyebrow"
+                            id="calculators-results-label"
+                        >
+                            All Calculators
+                        </span>
+
+                        <h2>
+                            Explore our calculators
+                        </h2>
+
+                    </div>
+
+
+                    <span
+                        class="calculators-directory__count"
+                        id="calculators-results-count"
+                    ></span>
+
+                </div>
+
+
+                <!-- =================================================
+                     RESULTS
+                ================================================== -->
+
+                <div
+                    id="calculators-grid"
+                    class="calculators-grid"
+                ></div>
+
+
+                <!-- =================================================
+                     EMPTY STATE
+                ================================================== -->
+
+                <div
+                    id="calculators-empty"
+                    class="calculators-empty"
+                    hidden
+                >
+
+                    <div class="calculators-empty__icon">
+                        🔎
+                    </div>
+
+                    <h2>
+                        No calculators found
+                    </h2>
+
+                    <p>
+                        Try searching with another keyword.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         GLOBAL FOOTER
+    ====================================================== -->
+
+    <div id="footer"></div>
+
+
+    <!-- =====================================================
+         PAGE JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        type="module"
+        src="assets/js/pages/calculators.js"
+    ></script>
+
+</body>
+
+</html>
