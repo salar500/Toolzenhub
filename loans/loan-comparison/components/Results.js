@@ -130,6 +130,39 @@ export function renderResults(result) {
         </p>
 
     `;
+    result
+    .querySelectorAll(".loan-view-link")
+    .forEach((button, index) => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                if (index === 0) {
+
+                    openAmortizationModal(
+                        {
+                            amount: data.amountA,
+                            rate: data.rateA,
+                            years: data.yearsA,
+                            emi: data.emiA,
+                            amortization: data.amortizationA
+                        },
+                        {
+                            amount: data.amountB,
+                            rate: data.rateB,
+                            years: data.yearsB,
+                            emi: data.emiB,
+                            amortization: data.amortizationB
+                        }
+                    );
+
+                }
+
+            }
+        );
+
+    });
 
 }
 
