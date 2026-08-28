@@ -226,8 +226,20 @@ function renderComparisonCard(
 
 }
 
+function renderAmortization(
+    schedule,
+    loan,
+    emi,
+    interest,
+    repayment,
+    loanName
+) {
 
-function renderAmortization(schedule) {
+    const buttonId =
+        loanName === "Loan A"
+            ? "view-amortization-a"
+            : "view-amortization-b";
+
 
     return `
 
@@ -284,11 +296,11 @@ function renderAmortization(schedule) {
 
         <button
             type="button"
+            id="${buttonId}"
             class="loan-view-link"
         >
             View Full Amortization Schedule →
         </button>
 
     `;
-
 }
