@@ -1,14 +1,27 @@
+```javascript
 import { formatINR } from "../../../assets/js/calculators/common/formatter.js";
 
+import {
+    calculateEMI,
+    calculateTotalInterest,
+    calculateTotalRepayment,
+    calculateAmortization
+} from "../helpers/loanComparison.js";
 
-export function openAmortizationModal(
-    loan,
-    schedule,
-    loanName
-) {
+
+/* =========================================================
+   OPEN FULL AMORTIZATION MODAL
+========================================================= */
+
+export function openAmortizationModal(prefix) {
+
+    const data = getLoanData(prefix);
+
+    if (!data) {
+        return;
+    }
 
     closeAmortizationModal();
-
 
     const modal = document.createElement("div");
 
@@ -16,13 +29,13 @@ export function openAmortizationModal(
 
     modal.innerHTML = `
 
-        <div class="loan-amortization-backdrop"></div>
+        <div class="loan-modal-overlay"></div>
 
         <div
-            class="loan-amortization-dialog"
+            class="loan-modal-dialog"
             role="dialog"
             aria-modal="true"
-            aria-labelledby="loan-amortization-title"
+            aria-labelledby="loan-modal-title"
         >
 
             <div class="loan-modal-header">
@@ -30,17 +43,17 @@ export function openAmortizationModal(
                 <div>
 
                     <span class="loan-modal-eyebrow">
-                        ${loanName}
+                        ${data.title}
                     </span>
 
-                    <h2 id="loan-amortization-title">
+                    <h2 id="loan-modal-title">
                         Full Amortization Schedule
                     </h2>
 
                     <p>
-                        ${formatINR(loan.principal)}
-                        • ${loan.rate}% p.a.
-                        • ${loan.years} years
+                        ${formatINR(data.principal)}
+                        • ${data.rate}% p.a.
+                        • ${data.years} years
                     </p>
 
                 </div>
@@ -48,6 +61,7 @@ export function openAmortizationModal(
                 <button
                     type="button"
                     class="loan-modal-close"
+                    id="loan-modal-close"
                     aria-label="Close"
                 >
                     ×
@@ -58,48 +72,67 @@ export function openAmortizationModal(
 
             <div class="loan-modal-summary">
 
-                <div>
-                    <span>Monthly EMI</span>
+                <div class="loan-modal-summary-card">
+
+                    <span>
+                        Monthly EMI
+                    </span>
+
                     <strong>
-                        ${formatINR(loan.emi)}
+                        ${formatINR(data.emi)}
                     </strong>
+
                 </div>
 
-                <div>
-                    <span>Total Interest</span>
+
+                <div class="loan-modal-summary-card">
+
+                    <span>
+                        Total Interest
+                    </span>
+
                     <strong>
-                        ${formatINR(loan.interest)}
+                        ${formatINR(data.totalInterest)}
                     </strong>
+
                 </div>
 
-                <div>
-                    <span>Total Repayment</span>
+
+                <div class="loan-modal-summary-card">
+
+                    <span>
+                        Total Repayment
+                    </span>
+
                     <strong>
-                        ${formatINR(loan.repayment)}
+                        ${formatINR(data.totalRepayment)}
                     </strong>
+
                 </div>
 
             </div>
 
 
-            <div class="loan-modal-table-scroll">
+            <div class="loan-modal-table-wrapper">
 
-                <table class="loan-amortization-table">
+                <table class="loan-amortization-table loan-full-table">
 
                     <thead>
 
                         <tr>
+
                             <th>Month</th>
                             <th>Principal</th>
                             <th>Interest</th>
                             <th>Balance</th>
+
                         </tr>
 
                     </thead>
 
                     <tbody>
 
-                        ${schedule.map(row => `
+                        ${data.schedule.map(row => `
 
                             <tr>
 
@@ -133,12 +166,13 @@ export function openAmortizationModal(
             <div class="loan-modal-footer">
 
                 <span>
-                    ${schedule.length} monthly payments
+                    ${data.schedule.length} monthly payments
                 </span>
 
                 <button
                     type="button"
-                    class="loan-modal-close-button"
+                    class="loan-modal-footer-button"
+                    id="loan-modal-close-bottom"
                 >
                     Close
                 </button>
@@ -153,46 +187,47 @@ export function openAmortizationModal(
     document.body.appendChild(modal);
 
 
-    requestAnimationFrame(() => {
+    /* =====================================================
+       CLOSE BUTTON
+    ===================================================== */
 
-        modal.classList.add(
-            "is-open"
-        );
-
-    });
-
-
-    const closeButtons =
-        modal.querySelectorAll(
-            ".loan-modal-close, .loan-modal-close-button"
-        );
-
-
-    closeButtons.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            closeAmortizationModal
-        );
-
-    });
-
-
-    modal
-        .querySelector(
-            ".loan-amortization-backdrop"
-        )
+    document
+        .querySelector("#loan-modal-close")
         ?.addEventListener(
             "click",
             closeAmortizationModal
         );
 
 
+    document
+        .querySelector("#loan-modal-close-bottom")
+        ?.addEventListener(
+            "click",
+            closeAmortizationModal
+        );
+
+
+    document
+        .querySelector(".loan-modal-overlay")
+        ?.addEventListener(
+            "click",
+            closeAmortizationModal
+        );
+
+
+    /* =====================================================
+       ESC KEY
+    ===================================================== */
+
     document.addEventListener(
         "keydown",
-        handleEscape
+        handleModalEscape
     );
 
+
+    /* =====================================================
+       PREVENT BODY SCROLL
+    ===================================================== */
 
     document.body.classList.add(
         "loan-modal-open"
@@ -201,7 +236,41 @@ export function openAmortizationModal(
 }
 
 
-function handleEscape(event) {
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+export function closeAmortizationModal() {
+
+    const modal =
+        document.querySelector(
+            ".loan-amortization-modal"
+        );
+
+
+    if (modal) {
+        modal.remove();
+    }
+
+
+    document.body.classList.remove(
+        "loan-modal-open"
+    );
+
+
+    document.removeEventListener(
+        "keydown",
+        handleModalEscape
+    );
+
+}
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+function handleModalEscape(event) {
 
     if (event.key === "Escape") {
 
@@ -212,39 +281,114 @@ function handleEscape(event) {
 }
 
 
-export function closeAmortizationModal() {
+/* =========================================================
+   GET LOAN DATA
+========================================================= */
 
-    const modal =
+function getLoanData(prefix) {
+
+    const amountElement =
         document.querySelector(
-            ".loan-amortization-modal"
+            `#${prefix}-amount`
+        );
+
+    const unitElement =
+        document.querySelector(
+            `#${prefix}-unit`
+        );
+
+    const rateElement =
+        document.querySelector(
+            `#${prefix}-rate`
+        );
+
+    const yearsElement =
+        document.querySelector(
+            `#${prefix}-years`
         );
 
 
-    if (!modal) {
-        return;
+    if (
+        !amountElement ||
+        !unitElement ||
+        !rateElement ||
+        !yearsElement
+    ) {
+        return null;
     }
 
 
-    document.removeEventListener(
-        "keydown",
-        handleEscape
-    );
+    const amount =
+        Number(amountElement.value);
+
+    const unit =
+        Number(unitElement.value);
+
+    const rate =
+        Number(rateElement.value);
+
+    const years =
+        Number(yearsElement.value);
 
 
-    modal.classList.remove(
-        "is-open"
-    );
+    const principal =
+        amount * unit;
 
 
-    document.body.classList.remove(
-        "loan-modal-open"
-    );
+    const emi =
+        calculateEMI(
+            principal,
+            rate,
+            years
+        );
 
 
-    setTimeout(() => {
+    const totalInterest =
+        calculateTotalInterest(
+            principal,
+            rate,
+            years
+        );
 
-        modal.remove();
 
-    }, 200);
+    const totalRepayment =
+        calculateTotalRepayment(
+            principal,
+            rate,
+            years
+        );
+
+
+    const schedule =
+        calculateAmortization(
+            principal,
+            rate,
+            years
+        );
+
+
+    return {
+
+        title:
+            prefix === "a"
+                ? "Loan A"
+                : "Loan B",
+
+        principal,
+
+        rate,
+
+        years,
+
+        emi,
+
+        totalInterest,
+
+        totalRepayment,
+
+        schedule
+
+    };
 
 }
+```
