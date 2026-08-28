@@ -436,6 +436,7 @@ export function initializeLoanInputs() {
     });
 
 }
+
 /* =========================================================
    SLIDER VISUAL FILL
 ========================================================= */
@@ -451,9 +452,9 @@ function updateSliderFill(slider) {
     const value = Number(slider.value);
 
     if (
-        Number.isNaN(min) ||
-        Number.isNaN(max) ||
-        Number.isNaN(value) ||
+        !Number.isFinite(min) ||
+        !Number.isFinite(max) ||
+        !Number.isFinite(value) ||
         max <= min
     ) {
         return;
@@ -462,11 +463,18 @@ function updateSliderFill(slider) {
     const percentage =
         ((value - min) / (max - min)) * 100;
 
+    const progress =
+        `${Math.max(0, Math.min(100, percentage))}%`;
+
     slider.style.setProperty(
         "--slider-progress",
-        `${percentage}%`
+        progress
     );
+
+    /* Chrome / Edge / Safari */
+    slider.style.background = "transparent";
 }
+
 
 /* =========================================================
    AMOUNT DISPLAY
