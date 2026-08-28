@@ -1,3 +1,4 @@
+```javascript
 import { formatINR } from "../../../assets/js/calculators/common/formatter.js";
 
 import {
@@ -70,12 +71,20 @@ export function createLoanCard(
 
                     <input
                         id="${prefix}-amount-slider"
+                        class="loan-slider"
                         type="range"
                         min="1"
                         max="100"
+                        step="1"
                         value="50"
                     >
 
+                </div>
+
+
+                <div class="loan-range-labels">
+                    <span>1</span>
+                    <span>100</span>
                 </div>
 
 
@@ -120,8 +129,8 @@ export function createLoanCard(
 
 
                 <div class="loan-range-labels">
-                    <span>0</span>
-                    <span>25</span>
+                    <span>0%</span>
+                    <span>25%</span>
                 </div>
 
             </div>
@@ -139,6 +148,7 @@ export function createLoanCard(
                     type="number"
                     min="1"
                     max="100"
+                    step="1"
                     value="20"
                 >
 
@@ -149,6 +159,7 @@ export function createLoanCard(
                     type="range"
                     min="1"
                     max="100"
+                    step="1"
                     value="20"
                 >
 
@@ -215,87 +226,186 @@ export function initializeLoanInputs() {
             document.querySelector(`#${prefix}-years-slider`);
 
 
+        if (
+            !amount ||
+            !unit ||
+            !amountSlider ||
+            !rate ||
+            !rateSlider ||
+            !years ||
+            !yearsSlider
+        ) {
+            return;
+        }
+
+
+        /* ==========================================
+           LOAN AMOUNT SLIDER
+        =========================================== */
+
         amountSlider.addEventListener(
             "input",
             () => {
 
-                amount.value = amountSlider.value;
+                amount.value =
+                    amountSlider.value;
 
-                updateAmountDisplay(prefix);
+                updateSliderFill(
+                    amountSlider
+                );
+
+                updateAmountDisplay(
+                    prefix
+                );
 
                 compareLoans();
 
             }
         );
 
+
+        /* ==========================================
+           LOAN AMOUNT SELECT
+        =========================================== */
 
         amount.addEventListener(
             "change",
             () => {
 
-                amountSlider.value = amount.value;
+                amountSlider.value =
+                    amount.value;
 
-                updateAmountDisplay(prefix);
+                updateSliderFill(
+                    amountSlider
+                );
+
+                updateAmountDisplay(
+                    prefix
+                );
 
                 compareLoans();
 
             }
         );
 
+
+        /* ==========================================
+           UNIT
+        =========================================== */
 
         unit.addEventListener(
             "change",
             () => {
 
-                updateAmountDisplay(prefix);
+                updateAmountDisplay(
+                    prefix
+                );
 
                 compareLoans();
 
             }
         );
 
+
+        /* ==========================================
+           INTEREST RATE SLIDER
+        =========================================== */
 
         rateSlider.addEventListener(
             "input",
             () => {
 
-                rate.value = rateSlider.value;
+                rate.value =
+                    rateSlider.value;
+
+                updateSliderFill(
+                    rateSlider
+                );
 
                 compareLoans();
 
             }
         );
 
+
+        /* ==========================================
+           INTEREST RATE INPUT
+        =========================================== */
 
         rate.addEventListener(
             "input",
             () => {
 
-                rateSlider.value = rate.value;
+                let value =
+                    Number(rate.value);
+
+                if (value < 0) {
+                    value = 0;
+                }
+
+                if (value > 25) {
+                    value = 25;
+                }
+
+                rateSlider.value =
+                    value;
+
+                updateSliderFill(
+                    rateSlider
+                );
 
                 compareLoans();
 
             }
         );
 
+
+        /* ==========================================
+           TENURE SLIDER
+        =========================================== */
 
         yearsSlider.addEventListener(
             "input",
             () => {
 
-                years.value = yearsSlider.value;
+                years.value =
+                    yearsSlider.value;
+
+                updateSliderFill(
+                    yearsSlider
+                );
 
                 compareLoans();
 
             }
         );
 
+
+        /* ==========================================
+           TENURE INPUT
+        =========================================== */
 
         years.addEventListener(
             "input",
             () => {
 
-                yearsSlider.value = years.value;
+                let value =
+                    Number(years.value);
+
+                if (value < 1) {
+                    value = 1;
+                }
+
+                if (value > 100) {
+                    value = 100;
+                }
+
+                yearsSlider.value =
+                    value;
+
+                updateSliderFill(
+                    yearsSlider
+                );
 
                 compareLoans();
 
@@ -303,64 +413,243 @@ export function initializeLoanInputs() {
         );
 
 
-        updateAmountDisplay(prefix);
+        /* ==========================================
+           INITIAL STATE
+        =========================================== */
+
+        updateAmountDisplay(
+            prefix
+        );
+
+        updateSliderFill(
+            amountSlider
+        );
+
+        updateSliderFill(
+            rateSlider
+        );
+
+        updateSliderFill(
+            yearsSlider
+        );
 
     });
 
 }
 
 
+/* =========================================================
+   SLIDER VISUAL FILL
+========================================================= */
+
+function updateSliderFill(slider) {
+
+    if (!slider) {
+        return;
+    }
+
+
+    const min =
+        Number(slider.min);
+
+    const max =
+        Number(slider.max);
+
+    const value =
+        Number(slider.value);
+
+
+    if (
+        Number.isNaN(min) ||
+        Number.isNaN(max) ||
+        Number.isNaN(value) ||
+        max <= min
+    ) {
+        return;
+    }
+
+
+    const percentage =
+        ((value - min) / (max - min)) * 100;
+
+
+    slider.style.setProperty(
+        "--slider-progress",
+        `${percentage}%`
+    );
+
+}
+
+
+/* =========================================================
+   AMOUNT DISPLAY
+========================================================= */
+
 function updateAmountDisplay(prefix) {
 
     const amount =
         Number(
-            document.querySelector(`#${prefix}-amount`).value
+            document.querySelector(
+                `#${prefix}-amount`
+            ).value
         );
+
 
     const unit =
         Number(
-            document.querySelector(`#${prefix}-unit`).value
+            document.querySelector(
+                `#${prefix}-unit`
+            ).value
         );
+
 
     const display =
         document.querySelector(
             `#${prefix}-amount-display`
         );
 
+
     if (!display) {
         return;
     }
 
+
     display.textContent =
-        formatINR(amount * unit);
+        formatINR(
+            amount * unit
+        );
 
 }
 
 
+/* =========================================================
+   RESET
+========================================================= */
+
 export function resetLoanInputs() {
 
-    resetLoan("a", 8.5);
-    resetLoan("b", 9);
+    resetLoan(
+        "a",
+        8.5
+    );
 
-    updateAmountDisplay("a");
-    updateAmountDisplay("b");
+
+    resetLoan(
+        "b",
+        9
+    );
+
+
+    updateAmountDisplay(
+        "a"
+    );
+
+
+    updateAmountDisplay(
+        "b"
+    );
+
+
+    document
+        .querySelectorAll(".loan-slider")
+        .forEach(
+            slider => {
+                updateSliderFill(
+                    slider
+                );
+            }
+        );
+
 
     compareLoans();
 
 }
 
 
-function resetLoan(prefix, rate) {
+/* =========================================================
+   RESET INDIVIDUAL LOAN
+========================================================= */
 
-    document.querySelector(`#${prefix}-amount`).value = 50;
-    document.querySelector(`#${prefix}-unit`).value = 100000;
+function resetLoan(
+    prefix,
+    rate
+) {
 
-    document.querySelector(`#${prefix}-rate`).value = rate;
-    document.querySelector(`#${prefix}-rate-slider`).value = rate;
+    const amount =
+        document.querySelector(
+            `#${prefix}-amount`
+        );
 
-    document.querySelector(`#${prefix}-years`).value = 20;
-    document.querySelector(`#${prefix}-years-slider`).value = 20;
 
-    document.querySelector(`#${prefix}-amount-slider`).value = 50;
+    const unit =
+        document.querySelector(
+            `#${prefix}-unit`
+        );
+
+
+    const rateInput =
+        document.querySelector(
+            `#${prefix}-rate`
+        );
+
+
+    const rateSlider =
+        document.querySelector(
+            `#${prefix}-rate-slider`
+        );
+
+
+    const years =
+        document.querySelector(
+            `#${prefix}-years`
+        );
+
+
+    const yearsSlider =
+        document.querySelector(
+            `#${prefix}-years-slider`
+        );
+
+
+    const amountSlider =
+        document.querySelector(
+            `#${prefix}-amount-slider`
+        );
+
+
+    if (amount) {
+        amount.value = 50;
+    }
+
+
+    if (unit) {
+        unit.value = 100000;
+    }
+
+
+    if (rateInput) {
+        rateInput.value = rate;
+    }
+
+
+    if (rateSlider) {
+        rateSlider.value = rate;
+    }
+
+
+    if (years) {
+        years.value = 20;
+    }
+
+
+    if (yearsSlider) {
+        yearsSlider.value = 20;
+    }
+
+
+    if (amountSlider) {
+        amountSlider.value = 50;
+    }
 
 }
+```
