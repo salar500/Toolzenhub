@@ -217,7 +217,7 @@ export function renderFooter() {
 
 
                                 <li>
-                                    <a href="loan-comparison.html">
+                                    <a href="calculators/loan-comparison/">
                                         Loan Comparison
                                     </a>
                                 </li>
