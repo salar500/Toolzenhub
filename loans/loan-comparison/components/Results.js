@@ -1,10 +1,19 @@
-import { formatINR } from "../../../assets/js/calculators/common/formatter.js";
-import {  openAmortizationModal } from "./AmortizationModal.js";
+import {
+    formatINR
+} from "../../../assets/js/calculators/common/formatter.js";
 
 import {
     calculateLoanComparison
 } from "../helpers/loanComparison.js";
 
+import {
+    openAmortizationModal
+} from "./AmortizationModal.js";
+
+
+/* =========================================================
+   COMPARE LOANS
+========================================================= */
 
 export function compareLoans() {
 
@@ -21,6 +30,10 @@ export function compareLoans() {
 
 }
 
+
+/* =========================================================
+   RENDER RESULTS
+========================================================= */
 
 export function renderResults(result) {
 
@@ -95,23 +108,28 @@ export function renderResults(result) {
 
         <div class="loan-amortization-grid">
 
+
+            <!-- =================================================
+                 LOAN A
+            ================================================== -->
+
             <div class="loan-content-card">
 
                 <h3>
                     First 12 Months — Loan A
                 </h3>
 
-               ${renderAmortization(
-    data.amortizationA,
-    data.loanA,
-    data.emiA,
-    data.interestA,
-    data.repaymentA,
-    "Loan A"
-)}
+                ${renderAmortization(
+                    data.amortizationA,
+                    "a"
+                )}
 
             </div>
 
+
+            <!-- =================================================
+                 LOAN B
+            ================================================== -->
 
             <div class="loan-content-card">
 
@@ -119,63 +137,87 @@ export function renderResults(result) {
                     First 12 Months — Loan B
                 </h3>
 
-               ${renderAmortization(
-    data.amortizationB,
-    data.loanB,
-    data.emiB,
-    data.interestB,
-    data.repaymentB,
-    "Loan B"
-)}
+                ${renderAmortization(
+                    data.amortizationB,
+                    "b"
+                )}
 
             </div>
+
 
         </div>
 
 
         <p class="loan-disclaimer">
+
             Figures are approximate and for illustration purposes.
             Actual loan costs may vary depending on lender terms,
             fees, taxes and other charges.
+
         </p>
 
     `;
-    result
-    .querySelectorAll(".loan-view-link")
-    .forEach((button, index) => {
 
-        button.addEventListener(
-            "click",
-            () => {
 
-                if (index === 0) {
+    /* =========================================================
+       FULL AMORTIZATION — LOAN A
+    ========================================================= */
 
-                    openAmortizationModal(
-                        {
-                            amount: data.amountA,
-                            rate: data.rateA,
-                            years: data.yearsA,
-                            emi: data.emiA,
-                            amortization: data.amortizationA
-                        },
-                        {
-                            amount: data.amountB,
-                            rate: data.rateB,
-                            years: data.yearsB,
-                            emi: data.emiB,
-                            amortization: data.amortizationB
-                        }
-                    );
-
-                }
-
-            }
+    const buttonA =
+        result.querySelector(
+            "#view-amortization-a"
         );
 
-    });
+
+    buttonA?.addEventListener(
+        "click",
+        () => {
+
+            openAmortizationModal(
+                data.loanA,
+                data.amortizationA,
+                data.emiA,
+                data.interestA,
+                data.repaymentA,
+                "Loan A"
+            );
+
+        }
+    );
+
+
+    /* =========================================================
+       FULL AMORTIZATION — LOAN B
+    ========================================================= */
+
+    const buttonB =
+        result.querySelector(
+            "#view-amortization-b"
+        );
+
+
+    buttonB?.addEventListener(
+        "click",
+        () => {
+
+            openAmortizationModal(
+                data.loanB,
+                data.amortizationB,
+                data.emiB,
+                data.interestB,
+                data.repaymentB,
+                "Loan B"
+            );
+
+        }
+    );
 
 }
 
+
+/* =========================================================
+   COMPARISON CARD
+========================================================= */
 
 function renderComparisonCard(
     title,
@@ -226,17 +268,18 @@ function renderComparisonCard(
 
 }
 
+
+/* =========================================================
+   AMORTIZATION PREVIEW
+========================================================= */
+
 function renderAmortization(
     schedule,
-    loan,
-    emi,
-    interest,
-    repayment,
-    loanName
+    prefix
 ) {
 
     const buttonId =
-        loanName === "Loan A"
+        prefix === "a"
             ? "view-amortization-a"
             : "view-amortization-b";
 
@@ -250,13 +293,27 @@ function renderAmortization(
                 <thead>
 
                     <tr>
-                        <th>Month</th>
-                        <th>Principal</th>
-                        <th>Interest</th>
-                        <th>Balance</th>
+
+                        <th>
+                            Month
+                        </th>
+
+                        <th>
+                            Principal
+                        </th>
+
+                        <th>
+                            Interest
+                        </th>
+
+                        <th>
+                            Balance
+                        </th>
+
                     </tr>
 
                 </thead>
+
 
                 <tbody>
 
@@ -271,15 +328,21 @@ function renderAmortization(
                                 </td>
 
                                 <td>
-                                    ${formatINR(row.principal)}
+                                    ${formatINR(
+                                        row.principal
+                                    )}
                                 </td>
 
                                 <td>
-                                    ${formatINR(row.interest)}
+                                    ${formatINR(
+                                        row.interest
+                                    )}
                                 </td>
 
                                 <td>
-                                    ${formatINR(row.balance)}
+                                    ${formatINR(
+                                        row.balance
+                                    )}
                                 </td>
 
                             </tr>
@@ -299,8 +362,11 @@ function renderAmortization(
             id="${buttonId}"
             class="loan-view-link"
         >
+
             View Full Amortization Schedule →
+
         </button>
 
     `;
+
 }
