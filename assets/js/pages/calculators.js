@@ -1,3 +1,4 @@
+
 /* =========================================================
    ToolZen Hub
    All Calculators Page
@@ -45,7 +46,8 @@ function renderCalculators(calculators, query = "") {
 
         emptyState.hidden = false;
 
-        resultsCount.textContent = "0 calculators";
+        resultsCount.textContent =
+            "0 calculators";
 
         resultsLabel.textContent =
             query
@@ -115,6 +117,48 @@ function renderCalculators(calculators, query = "") {
 
         `
     ).join("");
+
+}
+
+
+/* =========================================================
+   UPDATE URL
+========================================================= */
+
+function updateSearchUrl(query) {
+
+    const url =
+        new URL(
+            window.location.href
+        );
+
+
+    const search =
+        String(query || "").trim();
+
+
+    if (search) {
+
+        url.searchParams.set(
+            "q",
+            search
+        );
+
+    } else {
+
+        url.searchParams.delete(
+            "q"
+        );
+
+    }
+
+
+    window.history.replaceState(
+        {},
+        "",
+        url
+    );
+
 }
 
 
@@ -122,11 +166,15 @@ function renderCalculators(calculators, query = "") {
    PERFORM SEARCH
 ========================================================= */
 
-function performSearch(query) {
+function performSearch(query, updateUrl = true) {
 
     const search =
         String(query || "").trim();
 
+
+    /* =====================================================
+       CLEAR SEARCH
+    ===================================================== */
 
     if (!search) {
 
@@ -134,14 +182,34 @@ function performSearch(query) {
             getCalculators()
         );
 
+
+        if (updateUrl) {
+
+            updateSearchUrl("");
+
+        }
+
+
         return;
     }
 
+
+    /* =====================================================
+       SEARCH RESULTS
+    ===================================================== */
 
     renderCalculators(
         searchCalculators(search),
         search
     );
+
+
+    if (updateUrl) {
+
+        updateSearchUrl(search);
+
+    }
+
 }
 
 
@@ -164,7 +232,9 @@ function initializeSearch() {
 
 
     if (!searchForm || !searchInput) {
+
         return;
+
     }
 
 
@@ -183,40 +253,9 @@ function initializeSearch() {
                 searchInput.value.trim();
 
 
-            performSearch(query);
-
-
-            /*
-             * Keep search query in URL.
-             * This allows direct links such as:
-             *
-             * calculators.html?q=emi
-             */
-
-            const url =
-                new URL(
-                    window.location.href
-                );
-
-
-            if (query) {
-
-                url.searchParams.set(
-                    "q",
-                    query
-                );
-
-            } else {
-
-                url.searchParams.delete("q");
-
-            }
-
-
-            window.history.replaceState(
-                {},
-                "",
-                url
+            performSearch(
+                query,
+                true
             );
 
         }
@@ -235,7 +274,35 @@ function initializeSearch() {
                 searchInput.value.trim();
 
 
-            performSearch(query);
+            performSearch(
+                query,
+                true
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       CLEAR SEARCH WITH ESCAPE
+    ===================================================== */
+
+    searchInput.addEventListener(
+        "search",
+        () => {
+
+            const query =
+                searchInput.value.trim();
+
+
+            if (!query) {
+
+                performSearch(
+                    "",
+                    true
+                );
+
+            }
 
         }
     );
@@ -257,9 +324,23 @@ function initializeSearch() {
 
     if (query) {
 
-        searchInput.value = query;
+        searchInput.value =
+            query;
 
-        performSearch(query);
+        performSearch(
+            query,
+            false
+        );
+
+    } else {
+
+        searchInput.value =
+            "";
+
+        performSearch(
+            "",
+            false
+        );
 
     }
 
@@ -297,7 +378,9 @@ function initializeCalculatorsPage() {
 
 
     if (!grid) {
+
         return;
+
     }
 
 
