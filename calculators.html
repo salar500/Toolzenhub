@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,12 +65,11 @@
         href="assets/css/pages/calculators.css"
     >
 
+    <link
+        rel="stylesheet"
+        href="assets/css/pages/calculators-empty.css"
+    >
 
-     <link
-    rel="stylesheet"
-    href="assets/css/pages/calculators-empty.css"
->   
-    
 </head>
 
 
@@ -88,6 +88,11 @@
     ====================================================== -->
 
     <main id="calculators-page">
+
+
+        <!-- =====================================================
+             HERO
+        ====================================================== -->
 
         <section class="calculators-page__hero">
 
@@ -203,52 +208,54 @@
                 <!-- =================================================
                      EMPTY STATE
                 ================================================== -->
-     ```html
-<div
-    id="calculators-empty"
-    class="calculators-empty"
-    hidden
->
 
-    <div class="calculators-empty__icon">
-        🔎
-    </div>
+                <div
+                    id="calculators-empty"
+                    class="calculators-empty"
+                    hidden
+                >
 
-
-    <h2>
-        No calculators found
-    </h2>
+                    <div class="calculators-empty__icon">
+                        🔎
+                    </div>
 
 
-    <p>
-        We couldn't find a calculator matching your search.
-        Try another keyword or browse our calculator categories.
-    </p>
+                    <h2>
+                        No calculators found
+                    </h2>
 
 
-    <div class="calculators-empty__help">
+                    <p>
+                        We couldn't find a calculator matching your search.
+                        Try another keyword or browse our calculator categories.
+                    </p>
 
-        <h3>
-            Can't find what you need?
-        </h3>
 
-        <p>
-            Tell us what you need. We can create or customize
-            a calculator specifically for you.
-        </p>
+                    <!-- =================================================
+                         CUSTOM CALCULATOR HELP
+                    ================================================== -->
 
-        <a
-            href="contact.html"
-            class="calculators-empty__contact"
-        >
-            Contact Us
-        </a>
+                    <div class="calculators-empty__help">
 
-    </div>
+                        <h3>
+                            Can't find what you need?
+                        </h3>
 
-</div>
-```
+                        <p>
+                            Tell us what you need. We can create or customize
+                            a calculator specifically for you.
+                        </p>
 
+                        <a
+                            href="contact.html"
+                            class="calculators-empty__contact"
+                        >
+                            Contact Us
+                        </a>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -276,3 +283,4 @@
 </body>
 
 </html>
+```
