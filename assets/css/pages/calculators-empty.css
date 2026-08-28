@@ -309,3 +309,16 @@
     }
 
 }
+
+/* =========================================================
+   HIDDEN STATE
+   Keep empty state completely invisible until JavaScript
+   explicitly shows it.
+========================================================= */
+
+.calculators-empty[hidden] {
+
+    display:
+        none !important;
+
+}
