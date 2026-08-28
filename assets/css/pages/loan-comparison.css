@@ -285,3 +285,318 @@
     }
 
 }
+
+
+/* =========================================================
+   FULL AMORTIZATION MODAL
+========================================================= */
+
+.loan-amortization-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition:
+        opacity .2s ease,
+        visibility .2s ease;
+}
+
+.loan-amortization-modal.is-open {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.loan-amortization-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, .55);
+    backdrop-filter: blur(3px);
+}
+
+
+.loan-amortization-dialog {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    width: min(1100px, 100%);
+    max-height: min(90vh, 900px);
+
+    overflow: hidden;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 25px 70px rgba(15, 23, 42, .22);
+
+    transform: translateY(12px) scale(.98);
+    transition: transform .2s ease;
+}
+
+.loan-amortization-modal.is-open
+.loan-amortization-dialog {
+    transform: translateY(0) scale(1);
+}
+
+
+/* HEADER */
+
+.loan-amortization-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+
+    padding: 24px 26px;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.loan-amortization-header h2 {
+    margin: 0 0 6px;
+
+    color: #0f172a;
+    font-size: 26px;
+}
+
+.loan-amortization-header p {
+    margin: 0;
+
+    color: #64748b;
+    font-size: 13px;
+}
+
+.loan-amortization-close {
+    display: grid;
+    place-items: center;
+
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 auto;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: #475569;
+
+    font-size: 24px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.loan-amortization-close:hover {
+    background: #f8fafc;
+}
+
+
+/* SUMMARY */
+
+.loan-amortization-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+
+    padding: 18px 26px;
+
+    background: #f8fafc;
+}
+
+.loan-amortization-summary-card {
+    padding: 16px;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+
+    background: #ffffff;
+}
+
+.loan-amortization-summary-title {
+    margin-bottom: 12px;
+
+    color: #2563eb;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.loan-amortization-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.loan-amortization-summary-grid span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #64748b;
+    font-size: 10px;
+}
+
+.loan-amortization-summary-grid strong {
+    display: block;
+
+    color: #0f172a;
+    font-size: 13px;
+}
+
+
+/* TABS */
+
+.loan-amortization-tabs {
+    display: flex;
+    gap: 4px;
+
+    padding: 0 26px;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.loan-amortization-tab {
+    padding: 13px 18px;
+
+    border: 0;
+    border-bottom: 2px solid transparent;
+
+    background: transparent;
+    color: #64748b;
+
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.loan-amortization-tab.active {
+    border-bottom-color: #2563eb;
+    color: #2563eb;
+}
+
+
+/* TABLE */
+
+.loan-amortization-table-container {
+    min-height: 0;
+    overflow: hidden;
+}
+
+.loan-amortization-panel {
+    display: none;
+    height: 100%;
+}
+
+.loan-amortization-panel.active {
+    display: block;
+}
+
+.loan-full-table-scroll {
+    max-height: 45vh;
+    overflow: auto;
+}
+
+.loan-full-table-scroll .loan-amortization-table {
+    min-width: 700px;
+}
+
+.loan-full-table-scroll .loan-amortization-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+
+/* EMPTY */
+
+.loan-amortization-empty {
+    padding: 50px;
+    text-align: center;
+    color: #64748b;
+}
+
+
+/* FOOTER */
+
+.loan-amortization-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    padding: 16px 26px;
+
+    border-top: 1px solid #e2e8f0;
+    background: #f8fafc;
+}
+
+.loan-amortization-footer p {
+    margin: 0;
+
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .loan-amortization-modal {
+        align-items: flex-end;
+        padding: 0;
+    }
+
+    .loan-amortization-dialog {
+        width: 100%;
+        max-height: 94vh;
+
+        border-radius: 16px 16px 0 0;
+    }
+
+    .loan-amortization-header {
+        padding: 20px;
+    }
+
+    .loan-amortization-header h2 {
+        font-size: 21px;
+    }
+
+    .loan-amortization-summary {
+        grid-template-columns: 1fr;
+        padding: 14px 20px;
+    }
+
+    .loan-amortization-summary-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .loan-amortization-tabs {
+        padding: 0 20px;
+    }
+
+    .loan-full-table-scroll {
+        max-height: 48vh;
+    }
+
+    .loan-amortization-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 20px;
+    }
+
+}
