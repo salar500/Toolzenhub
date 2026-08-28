@@ -1,4 +1,5 @@
 import { formatINR } from "../../../assets/js/calculators/common/formatter.js";
+import {  openAmortizationModal } from "./AmortizationModal.js";
 
 import {
     calculateLoanComparison
