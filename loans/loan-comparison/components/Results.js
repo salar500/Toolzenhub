@@ -101,9 +101,14 @@ export function renderResults(result) {
                     First 12 Months — Loan A
                 </h3>
 
-                ${renderAmortization(
-                    data.amortizationA
-                )}
+               ${renderAmortization(
+    data.amortizationA,
+    data.loanA,
+    data.emiA,
+    data.interestA,
+    data.repaymentA,
+    "Loan A"
+)}
 
             </div>
 
@@ -114,9 +119,14 @@ export function renderResults(result) {
                     First 12 Months — Loan B
                 </h3>
 
-                ${renderAmortization(
-                    data.amortizationB
-                )}
+               ${renderAmortization(
+    data.amortizationB,
+    data.loanB,
+    data.emiB,
+    data.interestB,
+    data.repaymentB,
+    "Loan B"
+)}
 
             </div>
 
