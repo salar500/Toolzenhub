@@ -1,66 +1,92 @@
 import { formatINR } from "../../../assets/js/calculators/common/formatter.js";
 
-import {
-    calculateEMI,
-    calculateTotalInterest,
-    calculateTotalRepayment,
-    calculateAmortization
-} from "../helpers/loanComparison.js";
 
+export function openAmortizationModal(
+    loan,
+    schedule,
+    loanName
+) {
 
-/* =========================================================
-   OPEN FULL AMORTIZATION MODAL
-========================================================= */
+    const existingModal =
+        document.querySelector("#amortization-modal");
 
-export function openAmortizationModal(prefix) {
-
-    const data = getLoanData(prefix);
-
-    if (!data) {
-        return;
+    if (existingModal) {
+        existingModal.remove();
     }
 
-    closeAmortizationModal();
 
-    const modal = document.createElement("div");
+    const emi =
+        schedule.length > 0
+            ? schedule[0].principal +
+              schedule[0].interest
+            : 0;
 
-    modal.className = "loan-amortization-modal";
+
+    const totalInterest =
+        schedule.reduce(
+            (total, row) =>
+                total + row.interest,
+            0
+        );
+
+
+    const totalRepayment =
+        loan.principal +
+        totalInterest;
+
+
+    const modal =
+        document.createElement("div");
+
+    modal.id =
+        "amortization-modal";
+
+    modal.className =
+        "loan-amortization-modal";
+
 
     modal.innerHTML = `
 
-        <div class="loan-modal-overlay"></div>
+        <div
+            class="loan-amortization-overlay"
+            data-close-amortization
+        ></div>
+
 
         <div
-            class="loan-modal-dialog"
+            class="loan-amortization-dialog"
             role="dialog"
             aria-modal="true"
-            aria-labelledby="loan-modal-title"
+            aria-labelledby="amortization-title"
         >
 
-            <div class="loan-modal-header">
+            <div class="loan-amortization-header">
 
                 <div>
 
-                    <span class="loan-modal-eyebrow">
-                        ${data.title}
+                    <span class="calculator-eyebrow">
+                        ${loanName}
                     </span>
 
-                    <h2 id="loan-modal-title">
+                    <h2 id="amortization-title">
                         Full Amortization Schedule
                     </h2>
 
                     <p>
-                        ${formatINR(data.principal)}
-                        • ${data.rate}% p.a.
-                        • ${data.years} years
+                        ${formatINR(loan.principal)}
+                        •
+                        ${loan.rate}% p.a.
+                        •
+                        ${loan.years} years
                     </p>
 
                 </div>
 
+
                 <button
                     type="button"
-                    class="loan-modal-close"
-                    id="loan-modal-close"
+                    class="loan-amortization-close"
+                    data-close-amortization
                     aria-label="Close"
                 >
                     ×
@@ -69,42 +95,42 @@ export function openAmortizationModal(prefix) {
             </div>
 
 
-            <div class="loan-modal-summary">
+            <div class="loan-amortization-summary">
 
-                <div class="loan-modal-summary-card">
+                <div>
 
                     <span>
                         Monthly EMI
                     </span>
 
                     <strong>
-                        ${formatINR(data.emi)}
+                        ${formatINR(emi)}
                     </strong>
 
                 </div>
 
 
-                <div class="loan-modal-summary-card">
+                <div>
 
                     <span>
                         Total Interest
                     </span>
 
                     <strong>
-                        ${formatINR(data.totalInterest)}
+                        ${formatINR(totalInterest)}
                     </strong>
 
                 </div>
 
 
-                <div class="loan-modal-summary-card">
+                <div>
 
                     <span>
                         Total Repayment
                     </span>
 
                     <strong>
-                        ${formatINR(data.totalRepayment)}
+                        ${formatINR(totalRepayment)}
                     </strong>
 
                 </div>
@@ -112,48 +138,55 @@ export function openAmortizationModal(prefix) {
             </div>
 
 
-            <div class="loan-modal-table-wrapper">
+            <div class="loan-table-scroll">
 
-                <table class="loan-amortization-table loan-full-table">
+                <table class="loan-amortization-table">
 
                     <thead>
 
                         <tr>
-
                             <th>Month</th>
                             <th>Principal</th>
                             <th>Interest</th>
                             <th>Balance</th>
-
                         </tr>
 
                     </thead>
 
+
                     <tbody>
 
-                        ${data.schedule.map(row => `
+                        ${schedule
+                            .map(row => `
 
-                            <tr>
+                                <tr>
 
-                                <td>
-                                    ${row.month}
-                                </td>
+                                    <td>
+                                        ${row.month}
+                                    </td>
 
-                                <td>
-                                    ${formatINR(row.principal)}
-                                </td>
+                                    <td>
+                                        ${formatINR(
+                                            row.principal
+                                        )}
+                                    </td>
 
-                                <td>
-                                    ${formatINR(row.interest)}
-                                </td>
+                                    <td>
+                                        ${formatINR(
+                                            row.interest
+                                        )}
+                                    </td>
 
-                                <td>
-                                    ${formatINR(row.balance)}
-                                </td>
+                                    <td>
+                                        ${formatINR(
+                                            row.balance
+                                        )}
+                                    </td>
 
-                            </tr>
+                                </tr>
 
-                        `).join("")}
+                            `)
+                            .join("")}
 
                     </tbody>
 
@@ -162,16 +195,16 @@ export function openAmortizationModal(prefix) {
             </div>
 
 
-            <div class="loan-modal-footer">
+            <div class="loan-amortization-footer">
 
-                <span>
-                    ${data.schedule.length} monthly payments
-                </span>
+                <strong>
+                    ${schedule.length} monthly payments
+                </strong>
 
                 <button
                     type="button"
-                    class="loan-modal-footer-button"
-                    id="loan-modal-close-bottom"
+                    class="loan-primary-button"
+                    data-close-amortization
                 >
                     Close
                 </button>
@@ -186,207 +219,65 @@ export function openAmortizationModal(prefix) {
     document.body.appendChild(modal);
 
 
-    /* =====================================================
-       CLOSE BUTTON
-    ===================================================== */
+    modal
+        .querySelectorAll(
+            "[data-close-amortization]"
+        )
+        .forEach(button => {
 
-    document
-        .querySelector("#loan-modal-close")
-        ?.addEventListener(
-            "click",
-            closeAmortizationModal
-        );
+            button.addEventListener(
+                "click",
+                closeAmortizationModal
+            );
 
+        });
 
-    document
-        .querySelector("#loan-modal-close-bottom")
-        ?.addEventListener(
-            "click",
-            closeAmortizationModal
-        );
-
-
-    document
-        .querySelector(".loan-modal-overlay")
-        ?.addEventListener(
-            "click",
-            closeAmortizationModal
-        );
-
-
-    /* =====================================================
-       ESC KEY
-    ===================================================== */
 
     document.addEventListener(
         "keydown",
-        handleModalEscape
+        handleEscape
     );
 
 
-    /* =====================================================
-       PREVENT BODY SCROLL
-    ===================================================== */
-
     document.body.classList.add(
-        "loan-modal-open"
+        "amortization-modal-open"
     );
 
 }
 
-
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
 
 export function closeAmortizationModal() {
 
     const modal =
         document.querySelector(
-            ".loan-amortization-modal"
+            "#amortization-modal"
         );
 
-
-    if (modal) {
-        modal.remove();
+    if (!modal) {
+        return;
     }
 
 
+    modal.remove();
+
+
     document.body.classList.remove(
-        "loan-modal-open"
+        "amortization-modal-open"
     );
 
 
     document.removeEventListener(
         "keydown",
-        handleModalEscape
+        handleEscape
     );
 
 }
 
 
-/* =========================================================
-   ESC KEY
-========================================================= */
-
-function handleModalEscape(event) {
+function handleEscape(event) {
 
     if (event.key === "Escape") {
-
         closeAmortizationModal();
-
     }
-
-}
-
-
-/* =========================================================
-   GET LOAN DATA
-========================================================= */
-
-function getLoanData(prefix) {
-
-    const amountElement =
-        document.querySelector(
-            `#${prefix}-amount`
-        );
-
-    const unitElement =
-        document.querySelector(
-            `#${prefix}-unit`
-        );
-
-    const rateElement =
-        document.querySelector(
-            `#${prefix}-rate`
-        );
-
-    const yearsElement =
-        document.querySelector(
-            `#${prefix}-years`
-        );
-
-
-    if (
-        !amountElement ||
-        !unitElement ||
-        !rateElement ||
-        !yearsElement
-    ) {
-        return null;
-    }
-
-
-    const amount =
-        Number(amountElement.value);
-
-    const unit =
-        Number(unitElement.value);
-
-    const rate =
-        Number(rateElement.value);
-
-    const years =
-        Number(yearsElement.value);
-
-
-    const principal =
-        amount * unit;
-
-
-    const emi =
-        calculateEMI(
-            principal,
-            rate,
-            years
-        );
-
-
-    const totalInterest =
-        calculateTotalInterest(
-            principal,
-            rate,
-            years
-        );
-
-
-    const totalRepayment =
-        calculateTotalRepayment(
-            principal,
-            rate,
-            years
-        );
-
-
-    const schedule =
-        calculateAmortization(
-            principal,
-            rate,
-            years
-        );
-
-
-    return {
-
-        title:
-            prefix === "a"
-                ? "Loan A"
-                : "Loan B",
-
-        principal,
-
-        rate,
-
-        years,
-
-        emi,
-
-        totalInterest,
-
-        totalRepayment,
-
-        schedule
-
-    };
 
 }
