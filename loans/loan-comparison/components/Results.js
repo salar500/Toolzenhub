@@ -107,7 +107,8 @@ export function renderResults(result) {
 
                 ${renderAmortization(
                     data.amortizationA,
-                    "a"
+                    data.loanA,
+                    "Loan A"
                 )}
 
             </div>
@@ -121,7 +122,8 @@ export function renderResults(result) {
 
                 ${renderAmortization(
                     data.amortizationB,
-                    "b"
+                    data.loanB,
+                    "Loan B"
                 )}
 
             </div>
@@ -138,14 +140,51 @@ export function renderResults(result) {
     `;
 
 
-    initializeAmortizationButtons();
+    /*
+     * FULL AMORTIZATION BUTTONS
+     */
+    result
+        .querySelectorAll(
+            ".loan-view-link"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const loanKey =
+                        button.dataset.loan;
+
+
+                    if (loanKey === "a") {
+
+                        openAmortizationModal(
+                            data.loanA,
+                            data.amortizationA,
+                            "Loan A"
+                        );
+
+                    }
+
+
+                    if (loanKey === "b") {
+
+                        openAmortizationModal(
+                            data.loanB,
+                            data.amortizationB,
+                            "Loan B"
+                        );
+
+                    }
+
+                }
+            );
+
+        });
 
 }
 
-
-/* =========================================================
-   COMPARISON CARD
-========================================================= */
 
 function renderComparisonCard(
     title,
@@ -197,13 +236,10 @@ function renderComparisonCard(
 }
 
 
-/* =========================================================
-   AMORTIZATION PREVIEW
-========================================================= */
-
 function renderAmortization(
     schedule,
-    prefix
+    loan,
+    loanKey
 ) {
 
     return `
@@ -216,14 +252,26 @@ function renderAmortization(
 
                     <tr>
 
-                        <th>Month</th>
-                        <th>Principal</th>
-                        <th>Interest</th>
-                        <th>Balance</th>
+                        <th>
+                            Month
+                        </th>
+
+                        <th>
+                            Principal
+                        </th>
+
+                        <th>
+                            Interest
+                        </th>
+
+                        <th>
+                            Balance
+                        </th>
 
                     </tr>
 
                 </thead>
+
 
                 <tbody>
 
@@ -238,15 +286,21 @@ function renderAmortization(
                                 </td>
 
                                 <td>
-                                    ${formatINR(row.principal)}
+                                    ${formatINR(
+                                        row.principal
+                                    )}
                                 </td>
 
                                 <td>
-                                    ${formatINR(row.interest)}
+                                    ${formatINR(
+                                        row.interest
+                                    )}
                                 </td>
 
                                 <td>
-                                    ${formatINR(row.balance)}
+                                    ${formatINR(
+                                        row.balance
+                                    )}
                                 </td>
 
                             </tr>
@@ -264,42 +318,11 @@ function renderAmortization(
         <button
             type="button"
             class="loan-view-link"
-            data-amortization="${prefix}"
+            data-loan="${loanKey}"
         >
             View Full Amortization Schedule →
         </button>
 
     `;
-
-}
-
-
-/* =========================================================
-   AMORTIZATION BUTTON EVENTS
-========================================================= */
-
-function initializeAmortizationButtons() {
-
-    document
-        .querySelectorAll(
-            "[data-amortization]"
-        )
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    const prefix =
-                        button.dataset.amortization;
-
-                    openAmortizationModal(
-                        prefix
-                    );
-
-                }
-            );
-
-        });
 
 }
