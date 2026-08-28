@@ -964,10 +964,10 @@
 
 
 /* =========================================================
-   AMORTIZATION MODAL
+   FULL AMORTIZATION MODAL
 ========================================================= */
 
-body.loan-modal-open {
+.loan-modal-open {
     overflow: hidden;
 }
 
@@ -975,48 +975,27 @@ body.loan-modal-open {
     position: fixed;
     inset: 0;
     z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    opacity: 0;
-    visibility: hidden;
-    transition:
-        opacity .2s ease,
-        visibility .2s ease;
 }
 
-.loan-amortization-modal.is-open {
-    opacity: 1;
-    visibility: visible;
-}
-
-.loan-amortization-backdrop {
+.loan-modal-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(15, 23, 42, .55);
+    background: rgba(15, 23, 42, .58);
     backdrop-filter: blur(3px);
 }
 
-.loan-amortization-dialog {
+.loan-modal-dialog {
     position: relative;
-    z-index: 1;
     display: flex;
     flex-direction: column;
-    width: min(1050px, 100%);
-    max-height: min(850px, 90vh);
+    width: min(1100px, calc(100% - 32px));
+    height: min(90vh, 850px);
+    margin: 5vh auto 0;
     overflow: hidden;
     border: 1px solid #e2e8f0;
-    border-radius: 16px;
+    border-radius: 14px;
     background: #ffffff;
     box-shadow: 0 25px 70px rgba(15, 23, 42, .25);
-    transform: translateY(15px) scale(.98);
-    transition: transform .2s ease;
-}
-
-.loan-amortization-modal.is-open
-.loan-amortization-dialog {
-    transform: translateY(0) scale(1);
 }
 
 
@@ -1027,9 +1006,11 @@ body.loan-modal-open {
 .loan-modal-header {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     gap: 20px;
     padding: 24px 26px;
     border-bottom: 1px solid #e2e8f0;
+    background: #ffffff;
 }
 
 .loan-modal-eyebrow {
@@ -1039,7 +1020,7 @@ body.loan-modal-open {
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: .08em;
+    letter-spacing: .06em;
 }
 
 .loan-modal-header h2 {
@@ -1055,20 +1036,22 @@ body.loan-modal-open {
 }
 
 .loan-modal-close {
+    display: grid;
+    place-items: center;
     flex: 0 0 auto;
     width: 38px;
     height: 38px;
-    border: 1px solid #e2e8f0;
-    border-radius: 50%;
-    background: #ffffff;
+    border: 0;
+    border-radius: 8px;
+    background: #f1f5f9;
     color: #475569;
-    font-size: 24px;
+    font-size: 25px;
     line-height: 1;
     cursor: pointer;
 }
 
 .loan-modal-close:hover {
-    background: #f8fafc;
+    background: #e2e8f0;
     color: #0f172a;
 }
 
@@ -1081,54 +1064,59 @@ body.loan-modal-open {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
-    padding: 18px 26px;
-    background: #f8fafc;
+    padding: 16px 26px;
     border-bottom: 1px solid #e2e8f0;
+    background: #f8fafc;
 }
 
-.loan-modal-summary > div {
-    padding: 14px;
+.loan-modal-summary-card {
+    padding: 13px 15px;
     border: 1px solid #e2e8f0;
-    border-radius: 10px;
+    border-radius: 9px;
     background: #ffffff;
 }
 
-.loan-modal-summary span {
+.loan-modal-summary-card span,
+.loan-modal-summary-card strong {
     display: block;
+}
+
+.loan-modal-summary-card span {
     margin-bottom: 5px;
     color: #64748b;
     font-size: 11px;
+    font-weight: 600;
 }
 
-.loan-modal-summary strong {
+.loan-modal-summary-card strong {
     color: #0f172a;
     font-size: 17px;
 }
 
 
 /* =========================================================
-   MODAL TABLE
+   TABLE
 ========================================================= */
 
-.loan-modal-table-scroll {
+.loan-modal-table-wrapper {
     flex: 1;
     overflow: auto;
+    min-height: 0;
 }
 
-.loan-modal-table-scroll
-.loan-amortization-table {
+.loan-full-table {
     min-width: 650px;
 }
 
-.loan-modal-table-scroll
-.loan-amortization-table thead {
+.loan-full-table thead th {
     position: sticky;
     top: 0;
     z-index: 2;
+    background: #f8fafc;
+    box-shadow: 0 1px 0 #e2e8f0;
 }
 
-.loan-modal-table-scroll
-.loan-amortization-table th {
+.loan-full-table tbody tr:hover {
     background: #f8fafc;
 }
 
@@ -1152,7 +1140,7 @@ body.loan-modal-open {
     font-size: 12px;
 }
 
-.loan-modal-close-button {
+.loan-modal-footer-button {
     min-width: 90px;
     height: 38px;
     padding: 0 16px;
@@ -1166,30 +1154,26 @@ body.loan-modal-open {
     cursor: pointer;
 }
 
-.loan-modal-close-button:hover {
+.loan-modal-footer-button:hover {
     background: #1d4ed8;
 }
 
 
 /* =========================================================
-   MOBILE MODAL
+   MOBILE
 ========================================================= */
 
 @media (max-width: 650px) {
 
-    .loan-amortization-modal {
-        align-items: flex-end;
-        padding: 0;
-    }
-
-    .loan-amortization-dialog {
-        width: 100%;
-        max-height: 94vh;
-        border-radius: 16px 16px 0 0;
+    .loan-modal-dialog {
+        width: calc(100% - 16px);
+        height: 94vh;
+        margin-top: 3vh;
+        border-radius: 12px;
     }
 
     .loan-modal-header {
-        padding: 20px;
+        padding: 18px;
     }
 
     .loan-modal-header h2 {
@@ -1198,11 +1182,15 @@ body.loan-modal-open {
 
     .loan-modal-summary {
         grid-template-columns: 1fr;
-        padding: 14px 20px;
+        padding: 12px 18px;
+    }
+
+    .loan-modal-table-wrapper {
+        overflow-x: auto;
     }
 
     .loan-modal-footer {
-        padding: 14px 20px;
+        padding: 13px 18px;
     }
 
 }
