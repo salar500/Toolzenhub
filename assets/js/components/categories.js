@@ -266,7 +266,7 @@ export function renderCategories() {
                     </h2>
 
                     <a
-                        href="categories.html"
+                        href="calculators.html"
                         class="section-link"
                     >
                         View all calculators
