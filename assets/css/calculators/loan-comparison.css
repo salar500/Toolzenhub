@@ -253,8 +253,9 @@
     transform: translateY(-50%);
 }
 
+
 /* =========================================================
-   SLIDERS
+   SLIDER
 ========================================================= */
 
 .loan-slider {
@@ -265,24 +266,21 @@
     padding: 0;
     appearance: none;
     -webkit-appearance: none;
+    border: 0;
     border-radius: 999px;
-    background:
-        linear-gradient(
-            to right,
-            #2563eb 0%,
-            #2563eb var(--slider-progress, 0%),
-            #e2e8f0 var(--slider-progress, 0%),
-            #e2e8f0 100%
-        );
+    background: linear-gradient(
+        to right,
+        #2563eb 0%,
+        #2563eb var(--slider-progress, 0%),
+        #e2e8f0 var(--slider-progress, 0%),
+        #e2e8f0 100%
+    );
     outline: none;
     cursor: pointer;
     box-sizing: border-box;
 }
 
-
-/* =========================================================
-   CHROME / EDGE / SAFARI
-========================================================= */
+/* Chrome / Edge / Safari */
 
 .loan-slider::-webkit-slider-runnable-track {
     width: 100%;
@@ -305,10 +303,7 @@
     cursor: pointer;
 }
 
-
-/* =========================================================
-   FIREFOX
-========================================================= */
+/* Firefox */
 
 .loan-slider::-moz-range-track {
     width: 100%;
