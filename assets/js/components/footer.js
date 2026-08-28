@@ -12,6 +12,32 @@ export function renderFooter() {
     }
 
 
+    /* =====================================================
+       SITE BASE PATH
+       Automatically detects:
+
+       /Toolzenhub/
+
+       This keeps footer links working from:
+
+       /Toolzenhub/index.html
+       /Toolzenhub/calculators.html
+       /Toolzenhub/calculators/loan-comparison/
+    ====================================================== */
+
+    const siteBase = new URL(
+        ".",
+        document.baseURI
+    ).origin + "/Toolzenhub/";
+
+
+    /* =====================================================
+       GLOBAL PATH HELPER
+    ====================================================== */
+
+    const page = path => `${siteBase}${path}`;
+
+
     footer.innerHTML = `
 
         <footer class="footer">
@@ -35,7 +61,7 @@ export function renderFooter() {
                         <div class="footer__brand">
 
                             <a
-                                href="index.html"
+                                href="${page("")}"
                                 class="footer__logo"
                                 aria-label="ToolZen Hub Home"
                             >
@@ -120,28 +146,28 @@ export function renderFooter() {
                             <ul class="footer__links">
 
                                 <li>
-                                    <a href="index.html">
+                                    <a href="${page("")}">
                                         Home
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="categories.html">
+                                    <a href="${page("categories.html")}">
                                         Categories
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="articles.html">
+                                    <a href="${page("articles.html")}">
                                         Articles
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="about.html">
+                                    <a href="${page("about.html")}">
                                         About
                                     </a>
                                 </li>
@@ -165,28 +191,28 @@ export function renderFooter() {
                             <ul class="footer__links">
 
                                 <li>
-                                    <a href="contact.html">
+                                    <a href="${page("contact.html")}">
                                         Contact Us
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="privacy.html">
+                                    <a href="${page("privacy.html")}">
                                         Privacy Policy
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="terms.html">
+                                    <a href="${page("terms.html")}">
                                         Terms & Conditions
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="disclaimer.html">
+                                    <a href="${page("disclaimer.html")}">
                                         Disclaimer
                                     </a>
                                 </li>
@@ -210,28 +236,28 @@ export function renderFooter() {
                             <ul class="footer__links">
 
                                 <li>
-                                    <a href="emi-calculator.html">
+                                    <a href="${page("calculators/emi-calculator/")}">
                                         EMI Calculator
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="calculators/loan-comparison/">
+                                    <a href="${page("calculators/loan-comparison/")}">
                                         Loan Comparison
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="sip-calculator.html">
+                                    <a href="${page("calculators/sip-calculator/")}">
                                         SIP Calculator
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a href="gst-calculator.html">
+                                    <a href="${page("calculators/gst-calculator/")}">
                                         GST Calculator
                                     </a>
                                 </li>
