@@ -1,13 +1,18 @@
 
-import { formatINR } from "../../../assets/js/calculators/common/formatter.js";
+import {
+    formatINR
+} from "../../../assets/js/calculators/common/formatter.js";
+
 
 import {
     calculateLoanComparison
 } from "../helpers/loanComparison.js";
 
+
 import {
     openAmortizationModal
 } from "./AmortizationModal.js";
+
 
 
 export function compareLoans() {
@@ -17,14 +22,23 @@ export function compareLoans() {
             "#comparison-result"
         );
 
+
     if (!result) {
         return;
     }
+
 
     renderResults(result);
 
 }
 
+
+
+/*
+ * =========================================================
+ * RENDER RESULTS
+ * =========================================================
+ */
 
 export function renderResults(result) {
 
@@ -34,27 +48,39 @@ export function renderResults(result) {
 
     result.innerHTML = `
 
+
+        <!-- SUMMARY CARDS -->
+
         <div class="loan-summary-grid">
 
-            <div class="loan-summary-card loan-summary-winner">
+
+            <div
+                class="loan-summary-card loan-summary-winner"
+            >
 
                 <div class="loan-summary-icon">
                     🏆
                 </div>
 
+
                 <span>
                     Lower Interest Cost
                 </span>
+
 
                 <strong>
                     ${data.winner}
                 </strong>
 
+
                 <small>
-                    Saves ${formatINR(data.savings)} in interest
+                    Saves
+                    ${formatINR(data.savings)}
+                    in interest
                 </small>
 
             </div>
+
 
 
             ${renderComparisonCard(
@@ -64,11 +90,13 @@ export function renderResults(result) {
             )}
 
 
+
             ${renderComparisonCard(
                 "Total Interest",
                 data.interestA,
                 data.interestB
             )}
+
 
 
             ${renderComparisonCard(
@@ -78,15 +106,22 @@ export function renderResults(result) {
             )}
 
 
+
             <div class="loan-summary-card">
 
                 <span>
                     Interest Difference
                 </span>
 
+
                 <strong class="loan-saving-value">
-                    ${formatINR(data.savings)}
+
+                    ${formatINR(
+                        data.savings
+                    )}
+
                 </strong>
+
 
                 <small>
                     Potential interest saving
@@ -94,70 +129,102 @@ export function renderResults(result) {
 
             </div>
 
+
         </div>
 
 
+
+        <!-- AMORTIZATION PREVIEW -->
+
         <div class="loan-amortization-grid">
 
+
+            <!-- LOAN A -->
+
             <div class="loan-content-card">
+
 
                 <h3>
                     First 12 Months — Loan A
                 </h3>
 
+
                 ${renderAmortization(
                     data.amortizationA,
-                    data.loanA,
-                    "Loan A"
+                    "a"
                 )}
+
 
             </div>
 
 
+
+            <!-- LOAN B -->
+
             <div class="loan-content-card">
+
 
                 <h3>
                     First 12 Months — Loan B
                 </h3>
 
+
                 ${renderAmortization(
                     data.amortizationB,
-                    data.loanB,
-                    "Loan B"
+                    "b"
                 )}
 
+
             </div>
+
 
         </div>
 
 
+
         <p class="loan-disclaimer">
-            Figures are approximate and for illustration purposes.
-            Actual loan costs may vary depending on lender terms,
-            fees, taxes and other charges.
+
+            Figures are approximate and for illustration
+            purposes. Actual loan costs may vary depending
+            on lender terms, fees, taxes and other charges.
+
         </p>
+
 
     `;
 
 
+
     /*
+     * =====================================================
      * FULL AMORTIZATION BUTTONS
+     * =====================================================
      */
+
     result
         .querySelectorAll(
             ".loan-view-link"
         )
         .forEach(button => {
 
+
             button.addEventListener(
                 "click",
                 () => {
+
 
                     const loanKey =
                         button.dataset.loan;
 
 
-                    if (loanKey === "a") {
+
+                    /*
+                     * LOAN A
+                     */
+
+                    if (
+                        loanKey === "a"
+                    ) {
 
                         openAmortizationModal(
                             data.loanA,
@@ -168,7 +235,14 @@ export function renderResults(result) {
                     }
 
 
-                    if (loanKey === "b") {
+
+                    /*
+                     * LOAN B
+                     */
+
+                    else if (
+                        loanKey === "b"
+                    ) {
 
                         openAmortizationModal(
                             data.loanB,
@@ -178,13 +252,23 @@ export function renderResults(result) {
 
                     }
 
+
                 }
             );
 
+
         });
+
 
 }
 
+
+
+/*
+ * =========================================================
+ * COMPARISON CARD
+ * =========================================================
+ */
 
 function renderComparisonCard(
     title,
@@ -194,19 +278,24 @@ function renderComparisonCard(
 
     return `
 
+
         <div class="loan-summary-card">
+
 
             <span>
                 ${title}
             </span>
 
+
             <div class="loan-summary-values">
+
 
                 <div>
 
                     <small>
                         Loan A
                     </small>
+
 
                     <strong>
                         ${formatINR(valueA)}
@@ -215,11 +304,13 @@ function renderComparisonCard(
                 </div>
 
 
+
                 <div>
 
                     <small>
                         Loan B
                     </small>
+
 
                     <strong>
                         ${formatINR(valueB)}
@@ -227,26 +318,55 @@ function renderComparisonCard(
 
                 </div>
 
+
             </div>
 
+
         </div>
+
 
     `;
 
 }
 
 
+
+/*
+ * =========================================================
+ * AMORTIZATION PREVIEW
+ * =========================================================
+ */
+
 function renderAmortization(
     schedule,
-    loan,
     loanKey
 ) {
 
+    /*
+     * Safety check
+     */
+
+    if (!Array.isArray(schedule)) {
+
+        return `
+
+            <p>
+                Amortization data unavailable.
+            </p>
+
+        `;
+
+    }
+
+
     return `
+
 
         <div class="loan-table-scroll">
 
+
             <table class="loan-amortization-table">
+
 
                 <thead>
 
@@ -273,7 +393,9 @@ function renderAmortization(
                 </thead>
 
 
+
                 <tbody>
+
 
                     ${schedule
                         .slice(0, 12)
@@ -285,17 +407,20 @@ function renderAmortization(
                                     ${row.month}
                                 </td>
 
+
                                 <td>
                                     ${formatINR(
                                         row.principal
                                     )}
                                 </td>
 
+
                                 <td>
                                     ${formatINR(
                                         row.interest
                                     )}
                                 </td>
+
 
                                 <td>
                                     ${formatINR(
@@ -308,11 +433,15 @@ function renderAmortization(
                         `)
                         .join("")}
 
+
                 </tbody>
+
 
             </table>
 
+
         </div>
+
 
 
         <button
@@ -320,8 +449,11 @@ function renderAmortization(
             class="loan-view-link"
             data-loan="${loanKey}"
         >
+
             View Full Amortization Schedule →
+
         </button>
+
 
     `;
 
