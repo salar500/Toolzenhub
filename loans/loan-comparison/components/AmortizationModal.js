@@ -1,5 +1,7 @@
+import {
+    formatINR
+} from "../../../assets/js/calculators/common/formatter.js";
 
-import { formatINR } from "../../../assets/js/calculators/common/formatter.js";
 
 
 export function openAmortizationModal(
@@ -8,9 +10,22 @@ export function openAmortizationModal(
     loanName
 ) {
 
+    console.log(
+        "openAmortizationModal called:",
+        {
+            loan,
+            schedule,
+            loanName
+        }
+    );
+
+
     /*
-     * Safety checks
+     * =====================================================
+     * SAFETY CHECKS
+     * =====================================================
      */
+
     if (!loan) {
 
         console.error(
@@ -24,7 +39,7 @@ export function openAmortizationModal(
     if (!Array.isArray(schedule)) {
 
         console.error(
-            "Amortization modal: schedule must be an array.",
+            "Amortization modal: schedule is not an array.",
             schedule
         );
 
@@ -33,8 +48,11 @@ export function openAmortizationModal(
 
 
     /*
-     * Remove an existing modal
+     * =====================================================
+     * REMOVE EXISTING MODAL
+     * =====================================================
      */
+
     const existingModal =
         document.querySelector(
             "#amortization-modal"
@@ -42,33 +60,47 @@ export function openAmortizationModal(
 
 
     if (existingModal) {
+
         existingModal.remove();
+
     }
 
 
     /*
-     * Calculate EMI from the first
-     * amortization row.
-     *
-     * Principal + Interest = EMI
+     * =====================================================
+     * EMI
+     * =====================================================
      */
+
     const emi =
         schedule.length > 0
-            ? Number(schedule[0].principal || 0) +
-              Number(schedule[0].interest || 0)
+
+            ? Number(
+                schedule[0].principal || 0
+            ) +
+              Number(
+                schedule[0].interest || 0
+            )
+
             : 0;
 
 
+
     /*
-     * Calculate total interest
+     * =====================================================
+     * TOTAL INTEREST
+     * =====================================================
      */
+
     const totalInterest =
         schedule.reduce(
             (total, row) => {
 
                 return (
                     total +
-                    Number(row.interest || 0)
+                    Number(
+                        row.interest || 0
+                    )
                 );
 
             },
@@ -76,19 +108,31 @@ export function openAmortizationModal(
         );
 
 
+
     /*
-     * Calculate total repayment
+     * =====================================================
+     * TOTAL REPAYMENT
+     * =====================================================
      */
+
     const totalRepayment =
-        Number(loan.principal || 0) +
+        Number(
+            loan.principal || 0
+        ) +
         totalInterest;
 
 
+
     /*
-     * Create modal
+     * =====================================================
+     * CREATE MODAL
+     * =====================================================
      */
+
     const modal =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     modal.id =
@@ -97,6 +141,7 @@ export function openAmortizationModal(
 
     modal.className =
         "loan-amortization-modal";
+
 
 
     modal.innerHTML = `
@@ -114,18 +159,23 @@ export function openAmortizationModal(
             aria-labelledby="amortization-title"
         >
 
-            <!-- HEADER -->
 
-            <div class="loan-amortization-header">
+            <div
+                class="loan-amortization-header"
+            >
 
                 <div>
 
-                    <span class="calculator-eyebrow">
+                    <span
+                        class="calculator-eyebrow"
+                    >
                         ${loanName}
                     </span>
 
 
-                    <h2 id="amortization-title">
+                    <h2
+                        id="amortization-title"
+                    >
                         Full Amortization Schedule
                     </h2>
 
@@ -161,9 +211,10 @@ export function openAmortizationModal(
             </div>
 
 
-            <!-- SUMMARY -->
 
-            <div class="loan-amortization-summary">
+            <div
+                class="loan-amortization-summary"
+            >
 
 
                 <div>
@@ -172,11 +223,13 @@ export function openAmortizationModal(
                         Monthly EMI
                     </span>
 
+
                     <strong>
                         ${formatINR(emi)}
                     </strong>
 
                 </div>
+
 
 
                 <div>
@@ -185,6 +238,7 @@ export function openAmortizationModal(
                         Total Interest
                     </span>
 
+
                     <strong>
                         ${formatINR(totalInterest)}
                     </strong>
@@ -192,11 +246,13 @@ export function openAmortizationModal(
                 </div>
 
 
+
                 <div>
 
                     <span>
                         Total Repayment
                     </span>
+
 
                     <strong>
                         ${formatINR(totalRepayment)}
@@ -208,11 +264,14 @@ export function openAmortizationModal(
             </div>
 
 
-            <!-- TABLE -->
 
-            <div class="loan-table-scroll">
+            <div
+                class="loan-table-scroll"
+            >
 
-                <table class="loan-amortization-table">
+                <table
+                    class="loan-amortization-table"
+                >
 
                     <thead>
 
@@ -245,35 +304,37 @@ export function openAmortizationModal(
                             schedule.length > 0
 
                                 ? schedule
-                                    .map(row => `
+                                    .map(
+                                        row => `
 
-                                        <tr>
+                                            <tr>
 
-                                            <td>
-                                                ${row.month}
-                                            </td>
+                                                <td>
+                                                    ${row.month}
+                                                </td>
 
-                                            <td>
-                                                ${formatINR(
-                                                    row.principal
-                                                )}
-                                            </td>
+                                                <td>
+                                                    ${formatINR(
+                                                        row.principal
+                                                    )}
+                                                </td>
 
-                                            <td>
-                                                ${formatINR(
-                                                    row.interest
-                                                )}
-                                            </td>
+                                                <td>
+                                                    ${formatINR(
+                                                        row.interest
+                                                    )}
+                                                </td>
 
-                                            <td>
-                                                ${formatINR(
-                                                    row.balance
-                                                )}
-                                            </td>
+                                                <td>
+                                                    ${formatINR(
+                                                        row.balance
+                                                    )}
+                                                </td>
 
-                                        </tr>
+                                            </tr>
 
-                                    `)
+                                        `
+                                    )
                                     .join("")
 
                                 : `
@@ -284,7 +345,10 @@ export function openAmortizationModal(
                                             colspan="4"
                                             style="text-align:center;"
                                         >
-                                            No amortization data available.
+
+                                            No amortization
+                                            data available.
+
                                         </td>
 
                                     </tr>
@@ -299,12 +363,14 @@ export function openAmortizationModal(
             </div>
 
 
-            <!-- FOOTER -->
 
-            <div class="loan-amortization-footer">
+            <div
+                class="loan-amortization-footer"
+            >
 
                 <strong>
-                    ${schedule.length} monthly payments
+                    ${schedule.length}
+                    monthly payments
                 </strong>
 
 
@@ -324,15 +390,25 @@ export function openAmortizationModal(
     `;
 
 
-    /*
-     * Add modal to page
-     */
-    document.body.appendChild(modal);
-
 
     /*
-     * Close buttons / overlay
+     * =====================================================
+     * APPEND MODAL
+     * =====================================================
      */
+
+    document.body.appendChild(
+        modal
+    );
+
+
+
+    /*
+     * =====================================================
+     * CLOSE BUTTONS
+     * =====================================================
+     */
+
     modal
         .querySelectorAll(
             "[data-close-amortization]"
@@ -347,23 +423,37 @@ export function openAmortizationModal(
         });
 
 
+
     /*
-     * Escape key
+     * =====================================================
+     * ESCAPE KEY
+     * =====================================================
      */
+
     document.addEventListener(
         "keydown",
         handleEscape
     );
 
 
+
     /*
-     * Prevent background scrolling
+     * =====================================================
+     * LOCK BACKGROUND SCROLL
+     * =====================================================
      */
+
     document.body.classList.add(
         "amortization-modal-open"
     );
 
+
+    console.log(
+        "Amortization modal opened successfully."
+    );
+
 }
+
 
 
 export function closeAmortizationModal() {
@@ -395,9 +485,12 @@ export function closeAmortizationModal() {
 }
 
 
+
 function handleEscape(event) {
 
-    if (event.key === "Escape") {
+    if (
+        event.key === "Escape"
+    ) {
 
         closeAmortizationModal();
 
