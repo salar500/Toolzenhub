@@ -1,4 +1,3 @@
-
 import {
     formatINR
 } from "../../../assets/js/calculators/common/formatter.js";
@@ -24,6 +23,11 @@ export function compareLoans() {
 
 
     if (!result) {
+
+        console.error(
+            "Comparison result container not found."
+        );
+
         return;
     }
 
@@ -46,10 +50,32 @@ export function renderResults(result) {
         calculateLoanComparison();
 
 
+    /*
+     * DEBUG
+     *
+     * Keep these for now.
+     * Check the browser console after clicking Compare.
+     */
+
+    console.log(
+        "Loan comparison data:",
+        data
+    );
+
+
+    console.log(
+        "Loan A amortization:",
+        data.amortizationA
+    );
+
+
+    console.log(
+        "Loan B amortization:",
+        data.amortizationB
+    );
+
+
     result.innerHTML = `
-
-
-        <!-- SUMMARY CARDS -->
 
         <div class="loan-summary-grid">
 
@@ -134,15 +160,12 @@ export function renderResults(result) {
 
 
 
-        <!-- AMORTIZATION PREVIEW -->
-
         <div class="loan-amortization-grid">
 
 
             <!-- LOAN A -->
 
             <div class="loan-content-card">
-
 
                 <h3>
                     First 12 Months — Loan A
@@ -154,7 +177,6 @@ export function renderResults(result) {
                     "a"
                 )}
 
-
             </div>
 
 
@@ -162,7 +184,6 @@ export function renderResults(result) {
             <!-- LOAN B -->
 
             <div class="loan-content-card">
-
 
                 <h3>
                     First 12 Months — Loan B
@@ -173,7 +194,6 @@ export function renderResults(result) {
                     data.amortizationB,
                     "b"
                 )}
-
 
             </div>
 
@@ -190,75 +210,83 @@ export function renderResults(result) {
 
         </p>
 
-
     `;
-
 
 
     /*
      * =====================================================
-     * FULL AMORTIZATION BUTTONS
+     * AMORTIZATION CLICK HANDLER
      * =====================================================
+     *
+     * Event delegation is used because the buttons are
+     * created dynamically with innerHTML.
      */
 
-    result
-        .querySelectorAll(
-            ".loan-view-link"
-        )
-        .forEach(button => {
+    result.onclick = function (event) {
 
-
-            button.addEventListener(
-                "click",
-                () => {
-
-
-                    const loanKey =
-                        button.dataset.loan;
-
-
-
-                    /*
-                     * LOAN A
-                     */
-
-                    if (
-                        loanKey === "a"
-                    ) {
-
-                        openAmortizationModal(
-                            data.loanA,
-                            data.amortizationA,
-                            "Loan A"
-                        );
-
-                    }
-
-
-
-                    /*
-                     * LOAN B
-                     */
-
-                    else if (
-                        loanKey === "b"
-                    ) {
-
-                        openAmortizationModal(
-                            data.loanB,
-                            data.amortizationB,
-                            "Loan B"
-                        );
-
-                    }
-
-
-                }
+        const button =
+            event.target.closest(
+                ".loan-view-link"
             );
 
 
-        });
+        if (!button) {
+            return;
+        }
 
+
+        const loanKey =
+            button.dataset.loan;
+
+
+        console.log(
+            "Amortization button clicked:",
+            loanKey
+        );
+
+
+        if (loanKey === "a") {
+
+            console.log(
+                "Opening Loan A modal"
+            );
+
+
+            openAmortizationModal(
+                data.loanA,
+                data.amortizationA,
+                "Loan A"
+            );
+
+
+            return;
+        }
+
+
+        if (loanKey === "b") {
+
+            console.log(
+                "Opening Loan B modal"
+            );
+
+
+            openAmortizationModal(
+                data.loanB,
+                data.amortizationB,
+                "Loan B"
+            );
+
+
+            return;
+        }
+
+
+        console.error(
+            "Unknown loan key:",
+            loanKey
+        );
+
+    };
 
 }
 
@@ -278,9 +306,7 @@ function renderComparisonCard(
 
     return `
 
-
         <div class="loan-summary-card">
-
 
             <span>
                 ${title}
@@ -321,9 +347,7 @@ function renderComparisonCard(
 
             </div>
 
-
         </div>
-
 
     `;
 
@@ -342,10 +366,6 @@ function renderAmortization(
     loanKey
 ) {
 
-    /*
-     * Safety check
-     */
-
     if (!Array.isArray(schedule)) {
 
         return `
@@ -359,14 +379,24 @@ function renderAmortization(
     }
 
 
-    return `
+    if (schedule.length === 0) {
 
+        return `
+
+            <p>
+                No amortization data available.
+            </p>
+
+        `;
+
+    }
+
+
+    return `
 
         <div class="loan-table-scroll">
 
-
             <table class="loan-amortization-table">
-
 
                 <thead>
 
@@ -393,9 +423,7 @@ function renderAmortization(
                 </thead>
 
 
-
                 <tbody>
-
 
                     ${schedule
                         .slice(0, 12)
@@ -433,15 +461,11 @@ function renderAmortization(
                         `)
                         .join("")}
 
-
                 </tbody>
-
 
             </table>
 
-
         </div>
-
 
 
         <button
@@ -453,7 +477,6 @@ function renderAmortization(
             View Full Amortization Schedule →
 
         </button>
-
 
     `;
 
