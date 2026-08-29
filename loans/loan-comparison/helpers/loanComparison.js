@@ -8,30 +8,55 @@ import {
 
 export function getLoanData(prefix) {
 
-    const amount =
-        Number(
-            document.querySelector(`#${prefix}-amount`).value
+    const amountInput =
+        document.querySelector(`#${prefix}-amount`);
+
+    const unitInput =
+        document.querySelector(`#${prefix}-unit`);
+
+    const rateInput =
+        document.querySelector(`#${prefix}-rate`);
+
+    const yearsInput =
+        document.querySelector(`#${prefix}-years`);
+
+
+    if (
+        !amountInput ||
+        !unitInput ||
+        !rateInput ||
+        !yearsInput
+    ) {
+
+        console.error(
+            `Loan ${prefix.toUpperCase()} input elements are missing.`
         );
+
+        return {
+            principal: 0,
+            rate: 0,
+            years: 0
+        };
+    }
+
+
+    const amount =
+        Number(amountInput.value);
 
     const unit =
-        Number(
-            document.querySelector(`#${prefix}-unit`).value
-        );
+        Number(unitInput.value);
 
     const rate =
-        Number(
-            document.querySelector(`#${prefix}-rate`).value
-        );
+        Number(rateInput.value);
 
     const years =
-        Number(
-            document.querySelector(`#${prefix}-years`).value
-        );
+        Number(yearsInput.value);
 
 
     return {
 
-        principal: amount * unit,
+        principal:
+            amount * unit,
 
         rate,
 
@@ -99,6 +124,22 @@ export function calculateLoanComparison() {
         );
 
 
+    const amortizationA =
+        calculateAmortization(
+            loanA.principal,
+            loanA.rate,
+            loanA.years
+        );
+
+
+    const amortizationB =
+        calculateAmortization(
+            loanB.principal,
+            loanB.rate,
+            loanB.years
+        );
+
+
     const winner =
         interestA < interestB
             ? "Loan A"
@@ -131,19 +172,9 @@ export function calculateLoanComparison() {
 
         savings,
 
-        amortizationA:
-            calculateAmortization(
-                loanA.principal,
-                loanA.rate,
-                loanA.years
-            ),
+        amortizationA,
 
-        amortizationB:
-            calculateAmortization(
-                loanB.principal,
-                loanB.rate,
-                loanB.years
-            )
+        amortizationB
 
     };
 
