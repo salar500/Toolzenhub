@@ -41,13 +41,14 @@ export async function generatePDF({
 
 } = {}) {
 
-
     try {
 
         /*
-         * Create document
+         * Create PDF
+         *
+         * This automatically loads
+         * jsPDF + AutoTable.
          */
-
         const doc =
             await createPDFDocument();
 
@@ -55,7 +56,6 @@ export async function generatePDF({
         /*
          * Title
          */
-
         addPDFTitle(
             doc,
             title,
@@ -66,7 +66,6 @@ export async function generatePDF({
         /*
          * Summary
          */
-
         if (
             Array.isArray(summary) &&
             summary.length > 0
@@ -83,7 +82,6 @@ export async function generatePDF({
         /*
          * Table
          */
-
         if (
             Array.isArray(columns) &&
             columns.length > 0 &&
@@ -103,7 +101,6 @@ export async function generatePDF({
         /*
          * Footer
          */
-
         addPDFFooter(
             doc,
             footer
@@ -113,7 +110,6 @@ export async function generatePDF({
         /*
          * Download
          */
-
         downloadPDF(
             doc,
             filename
@@ -121,7 +117,6 @@ export async function generatePDF({
 
 
         return true;
-
 
     } catch (error) {
 
