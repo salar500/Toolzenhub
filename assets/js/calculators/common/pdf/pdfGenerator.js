@@ -8,6 +8,10 @@ import {
 } from "./pdfDocument.js";
 
 import {
+    loadPdfLibraries
+} from "./pdfLoader.js";
+
+import {
     addPDFTitle,
     addPDFSummary,
     addPDFTable,
