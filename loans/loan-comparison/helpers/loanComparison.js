@@ -5,6 +5,9 @@ import {
     calculateAmortization
 } from "../../../assets/js/calculators/formulas/loan.js";
 
+import {
+    generatePDF
+} from "../common/pdf/pdfGenerator.js";
 
 export function getLoanData(prefix) {
 
