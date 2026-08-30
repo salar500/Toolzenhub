@@ -2,6 +2,9 @@ import {
     formatINR
 } from "../../../assets/js/calculators/common/formatter.js";
 
+import {
+    generatePDF
+} from "../../../assets/js/calculators/common/pdf/pdfGenerator.js";
 
 /* =========================================================
    OPEN AMORTIZATION MODAL
