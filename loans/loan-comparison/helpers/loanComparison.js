@@ -8,28 +8,36 @@ import {
 
 export function getLoanData(prefix) {
 
-    const amountInput =
-        document.querySelector(`#${prefix}-amount`);
+    const amountElement =
+        document.querySelector(
+            `#${prefix}-amount`
+        );
 
-    const unitInput =
-        document.querySelector(`#${prefix}-unit`);
+    const unitElement =
+        document.querySelector(
+            `#${prefix}-unit`
+        );
 
-    const rateInput =
-        document.querySelector(`#${prefix}-rate`);
+    const rateElement =
+        document.querySelector(
+            `#${prefix}-rate`
+        );
 
-    const yearsInput =
-        document.querySelector(`#${prefix}-years`);
+    const yearsElement =
+        document.querySelector(
+            `#${prefix}-years`
+        );
 
 
     if (
-        !amountInput ||
-        !unitInput ||
-        !rateInput ||
-        !yearsInput
+        !amountElement ||
+        !unitElement ||
+        !rateElement ||
+        !yearsElement
     ) {
 
         console.error(
-            `Loan ${prefix.toUpperCase()} input elements are missing.`
+            `Loan ${prefix.toUpperCase()} input fields are missing.`
         );
 
         return {
@@ -37,20 +45,21 @@ export function getLoanData(prefix) {
             rate: 0,
             years: 0
         };
+
     }
 
 
     const amount =
-        Number(amountInput.value);
+        Number(amountElement.value);
 
     const unit =
-        Number(unitInput.value);
+        Number(unitElement.value);
 
     const rate =
-        Number(rateInput.value);
+        Number(rateElement.value);
 
     const years =
-        Number(yearsInput.value);
+        Number(yearsElement.value);
 
 
     return {
@@ -66,6 +75,10 @@ export function getLoanData(prefix) {
 
 }
 
+
+/* =========================================================
+   LOAN COMPARISON
+========================================================= */
 
 export function calculateLoanComparison() {
 
