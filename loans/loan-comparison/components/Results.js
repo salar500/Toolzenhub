@@ -14,11 +14,9 @@ import {
 
 
 
-/*
- * =========================================================
- * COMPARE LOANS
- * =========================================================
- */
+/* =========================================================
+   COMPARE LOANS
+========================================================= */
 
 export function compareLoans() {
 
@@ -35,6 +33,7 @@ export function compareLoans() {
         );
 
         return;
+
     }
 
 
@@ -44,21 +43,15 @@ export function compareLoans() {
 
 
 
-/*
- * =========================================================
- * RENDER RESULTS
- * =========================================================
- */
+/* =========================================================
+   RENDER RESULTS
+========================================================= */
 
 export function renderResults(result) {
 
     const data =
         calculateLoanComparison();
 
-
-    /*
-     * DEBUG
-     */
 
     console.log(
         "Loan comparison data:",
@@ -67,51 +60,26 @@ export function renderResults(result) {
 
 
     console.log(
-        "Loan A:",
-        data.loanA
-    );
-
-
-    console.log(
-        "Loan B:",
-        data.loanB
-    );
-
-
-    console.log(
-        "Loan A amortization:",
+        "Loan A schedule:",
         data.amortizationA
     );
 
 
     console.log(
-        "Loan B amortization:",
+        "Loan B schedule:",
         data.amortizationB
     );
 
 
-    /*
-     * =====================================================
-     * RENDER RESULT HTML
-     * =====================================================
-     */
-
     result.innerHTML = `
 
-        <!-- =================================================
-             SUMMARY
-        ================================================== -->
+        <!-- SUMMARY -->
 
         <div class="loan-summary-grid">
 
 
-            <!-- WINNER -->
-
             <div
-                class="
-                    loan-summary-card
-                    loan-summary-winner
-                "
+                class="loan-summary-card loan-summary-winner"
             >
 
                 <div class="loan-summary-icon">
@@ -138,18 +106,12 @@ export function renderResults(result) {
             </div>
 
 
-
-            <!-- EMI -->
-
             ${renderComparisonCard(
                 "EMI (Monthly)",
                 data.emiA,
                 data.emiB
             )}
 
-
-
-            <!-- TOTAL INTEREST -->
 
             ${renderComparisonCard(
                 "Total Interest",
@@ -158,18 +120,12 @@ export function renderResults(result) {
             )}
 
 
-
-            <!-- TOTAL REPAYMENT -->
-
             ${renderComparisonCard(
                 "Total Repayment",
                 data.repaymentA,
                 data.repaymentB
             )}
 
-
-
-            <!-- INTEREST DIFFERENCE -->
 
             <div class="loan-summary-card">
 
@@ -179,11 +135,7 @@ export function renderResults(result) {
 
 
                 <strong class="loan-saving-value">
-
-                    ${formatINR(
-                        data.savings
-                    )}
-
+                    ${formatINR(data.savings)}
                 </strong>
 
 
@@ -193,24 +145,17 @@ export function renderResults(result) {
 
             </div>
 
-
         </div>
 
 
-
-        <!-- =================================================
-             AMORTIZATION PREVIEW
-        ================================================== -->
+        <!-- AMORTIZATION -->
 
         <div class="loan-amortization-grid">
 
 
-            <!-- =================================================
-                 LOAN A
-            ================================================== -->
+            <!-- LOAN A -->
 
             <div class="loan-content-card">
-
 
                 <h3>
                     First 12 Months — Loan A
@@ -222,17 +167,12 @@ export function renderResults(result) {
                     "a"
                 )}
 
-
             </div>
 
 
-
-            <!-- =================================================
-                 LOAN B
-            ================================================== -->
+            <!-- LOAN B -->
 
             <div class="loan-content-card">
-
 
                 <h3>
                     First 12 Months — Loan B
@@ -244,17 +184,11 @@ export function renderResults(result) {
                     "b"
                 )}
 
-
             </div>
 
 
         </div>
 
-
-
-        <!-- =================================================
-             DISCLAIMER
-        ================================================== -->
 
         <p class="loan-disclaimer">
 
@@ -267,36 +201,17 @@ export function renderResults(result) {
     `;
 
 
+    /* =====================================================
+       AMORTIZATION BUTTON
+    ===================================================== */
 
-    /*
-     * =========================================================
-     * AMORTIZATION BUTTON
-     * =========================================================
-     *
-     * The buttons above are created using innerHTML.
-     *
-     * Therefore event delegation is used here instead of
-     * attaching listeners before the buttons exist.
-     * =========================================================
-     */
-
-    result.onclick = function (event) {
-
-
-        /*
-         * Find the clicked amortization button
-         */
+    result.onclick = function(event) {
 
         const button =
             event.target.closest(
                 ".loan-view-link"
             );
 
-
-        /*
-         * Ignore clicks that are not
-         * amortization buttons.
-         */
 
         if (!button) {
 
@@ -305,9 +220,8 @@ export function renderResults(result) {
         }
 
 
-        /*
-         * Get Loan A / Loan B
-         */
+        event.preventDefault();
+
 
         const loanKey =
             button.dataset.loan;
@@ -319,33 +233,17 @@ export function renderResults(result) {
         );
 
 
-        /*
-         * =====================================================
-         * LOAN A
-         * =====================================================
-         */
+        /* -------------------------------------------------
+           LOAN A
+        ------------------------------------------------- */
 
-        if (loanKey === "a") {
-
-
-            if (
-                !Array.isArray(
-                    data.amortizationA
-                )
-            ) {
-
-                console.error(
-                    "Loan A amortization schedule is missing:",
-                    data.amortizationA
-                );
-
-                return;
-
-            }
-
+        if (
+            loanKey === "a"
+        ) {
 
             console.log(
-                "Opening Loan A amortization modal..."
+                "Opening Loan A schedule:",
+                data.amortizationA
             );
 
 
@@ -361,34 +259,17 @@ export function renderResults(result) {
         }
 
 
+        /* -------------------------------------------------
+           LOAN B
+        ------------------------------------------------- */
 
-        /*
-         * =====================================================
-         * LOAN B
-         * =====================================================
-         */
-
-        if (loanKey === "b") {
-
-
-            if (
-                !Array.isArray(
-                    data.amortizationB
-                )
-            ) {
-
-                console.error(
-                    "Loan B amortization schedule is missing:",
-                    data.amortizationB
-                );
-
-                return;
-
-            }
-
+        if (
+            loanKey === "b"
+        ) {
 
             console.log(
-                "Opening Loan B amortization modal..."
+                "Opening Loan B schedule:",
+                data.amortizationB
             );
 
 
@@ -404,13 +285,8 @@ export function renderResults(result) {
         }
 
 
-
-        /*
-         * Unknown button
-         */
-
         console.error(
-            "Unknown amortization loan key:",
+            "Unknown loan key:",
             loanKey
         );
 
@@ -420,11 +296,9 @@ export function renderResults(result) {
 
 
 
-/*
- * =========================================================
- * COMPARISON CARD
- * =========================================================
- */
+/* =========================================================
+   COMPARISON CARD
+========================================================= */
 
 function renderComparisonCard(
     title,
@@ -436,16 +310,12 @@ function renderComparisonCard(
 
         <div class="loan-summary-card">
 
-
             <span>
                 ${title}
             </span>
 
 
             <div class="loan-summary-values">
-
-
-                <!-- LOAN A -->
 
                 <div>
 
@@ -461,9 +331,6 @@ function renderComparisonCard(
                 </div>
 
 
-
-                <!-- LOAN B -->
-
                 <div>
 
                     <small>
@@ -477,7 +344,6 @@ function renderComparisonCard(
 
                 </div>
 
-
             </div>
 
         </div>
@@ -488,29 +354,18 @@ function renderComparisonCard(
 
 
 
-/*
- * =========================================================
- * AMORTIZATION PREVIEW
- * =========================================================
- */
+/* =========================================================
+   AMORTIZATION PREVIEW
+========================================================= */
 
 function renderAmortization(
     schedule,
     loanKey
 ) {
 
-
-    /*
-     * Safety check
-     */
-
-    if (!Array.isArray(schedule)) {
-
-        console.error(
-            "Invalid amortization schedule:",
-            schedule
-        );
-
+    if (
+        !Array.isArray(schedule)
+    ) {
 
         return `
 
@@ -523,12 +378,9 @@ function renderAmortization(
     }
 
 
-
-    /*
-     * Empty schedule
-     */
-
-    if (schedule.length === 0) {
+    if (
+        schedule.length === 0
+    ) {
 
         return `
 
@@ -540,13 +392,6 @@ function renderAmortization(
 
     }
 
-
-
-    /*
-     * =====================================================
-     * TABLE + BUTTON
-     * =====================================================
-     */
 
     return `
 
@@ -624,19 +469,12 @@ function renderAmortization(
         </div>
 
 
-
-        <!-- =================================================
-             VIEW FULL AMORTIZATION BUTTON
-        ================================================== -->
-
         <button
             type="button"
             class="loan-view-link"
             data-loan="${loanKey}"
         >
-
             View Full Amortization Schedule →
-
         </button>
 
     `;
