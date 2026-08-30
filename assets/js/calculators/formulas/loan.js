@@ -14,7 +14,14 @@ export function calculateEMI(
     years
 ) {
 
+    principal = Number(principal);
+    annualRate = Number(annualRate);
+    years = Number(years);
+
     if (
+        !Number.isFinite(principal) ||
+        !Number.isFinite(annualRate) ||
+        !Number.isFinite(years) ||
         principal <= 0 ||
         years <= 0 ||
         annualRate < 0
@@ -22,29 +29,15 @@ export function calculateEMI(
         return 0;
     }
 
-
-    const monthlyRate =
-        annualRate / 12 / 100;
-
-    const months =
-        years * 12;
-
-
-    /* Zero-interest loan */
+    const months = Math.round(years * 12);
+    const monthlyRate = annualRate / 12 / 100;
 
     if (monthlyRate === 0) {
-
         return principal / months;
-
     }
 
-
     const factor =
-        Math.pow(
-            1 + monthlyRate,
-            months
-        );
-
+        Math.pow(1 + monthlyRate, months);
 
     return (
         principal *
@@ -52,7 +45,6 @@ export function calculateEMI(
         factor /
         (factor - 1)
     );
-
 }
 
 
@@ -73,9 +65,10 @@ export function calculateTotalRepayment(
             years
         );
 
+    const months =
+        Math.round(Number(years) * 12);
 
-    return emi * years * 12;
-
+    return emi * months;
 }
 
 
@@ -89,28 +82,17 @@ export function calculateTotalInterest(
     years
 ) {
 
-    if (
-        principal <= 0 ||
-        years <= 0 ||
-        annualRate < 0
-    ) {
-        return 0;
-    }
-
-
-    const total =
+    const repayment =
         calculateTotalRepayment(
             principal,
             annualRate,
             years
         );
 
-
     return Math.max(
         0,
-        total - principal
+        repayment - Number(principal)
     );
-
 }
 
 
@@ -124,6 +106,30 @@ export function calculateAmortization(
     years
 ) {
 
+    principal = Number(principal);
+    annualRate = Number(annualRate);
+    years = Number(years);
+
+    if (
+        !Number.isFinite(principal) ||
+        !Number.isFinite(annualRate) ||
+        !Number.isFinite(years) ||
+        principal <= 0 ||
+        years <= 0 ||
+        annualRate < 0
+    ) {
+        return [];
+    }
+
+
+    const months =
+        Math.round(years * 12);
+
+
+    const monthlyRate =
+        annualRate / 12 / 100;
+
+
     const emi =
         calculateEMI(
             principal,
@@ -132,14 +138,8 @@ export function calculateAmortization(
         );
 
 
-    const months =
-        years * 12;
-
-    const monthlyRate =
-        annualRate / 12 / 100;
-
-
     const schedule = [];
+
 
     let balance =
         principal;
@@ -151,37 +151,41 @@ export function calculateAmortization(
         month++
     ) {
 
-        let interest;
+        const interest =
+            monthlyRate === 0
+                ? 0
+                : balance * monthlyRate;
 
-        let principalPaid;
+
+        let principalPaid =
+            emi - interest;
 
 
-        if (monthlyRate === 0) {
+        /*
+         * Final payment correction.
+         *
+         * Prevents a tiny floating-point
+         * balance from remaining.
+         */
 
-            interest = 0;
+        if (month === months) {
 
             principalPaid =
-                principal / months;
-
-        } else {
-
-            interest =
-                balance * monthlyRate;
-
-            principalPaid =
-                emi - interest;
+                balance;
 
         }
 
 
-        balance -= principalPaid;
+        balance =
+            balance - principalPaid;
 
 
         schedule.push({
 
             month,
 
-            emi,
+            emi:
+                principalPaid + interest,
 
             principal:
                 principalPaid,
@@ -190,8 +194,8 @@ export function calculateAmortization(
 
             balance:
                 Math.max(
-                    balance,
-                    0
+                    0,
+                    balance
                 )
 
         });
