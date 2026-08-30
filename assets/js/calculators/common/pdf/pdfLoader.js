@@ -6,108 +6,99 @@
 let pdfLibrariesPromise = null;
 
 
-/**
- * Load jsPDF + AutoTable only when required.
- *
- * This prevents the PDF libraries from loading on
- * every calculator/page visit.
- */
-export function loadPdfLibraries() {
+/* =========================================================
+   LOAD SCRIPT
+========================================================= */
 
-    if (pdfLibrariesPromise) {
-        return pdfLibrariesPromise;
-    }
+function loadScript(
+    src,
+    id
+) {
 
-
-    pdfLibrariesPromise = new Promise(
+    return new Promise(
         (resolve, reject) => {
 
             /*
              * Already loaded
              */
             if (
-                window.jspdf &&
-                window.jspdf.jsPDF
+                document.getElementById(id)
             ) {
 
-                resolve({
-                    jsPDF:
-                        window.jspdf.jsPDF
-                });
+                const existingScript =
+                    document.getElementById(id);
+
+                if (
+                    existingScript.dataset.loaded === "true"
+                ) {
+
+                    resolve();
+
+                    return;
+                }
+
+
+                existingScript.addEventListener(
+                    "load",
+                    resolve,
+                    { once: true }
+                );
+
+
+                existingScript.addEventListener(
+                    "error",
+                    () => {
+
+                        reject(
+                            new Error(
+                                `Failed to load ${src}`
+                            )
+                        );
+
+                    },
+                    { once: true }
+                );
 
                 return;
             }
 
 
             /*
-             * jsPDF
+             * Create script
              */
-            const jsPdfScript =
-                document.createElement("script");
-
-            jsPdfScript.src =
-                "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
-
-            jsPdfScript.onload = () => {
-
-                /*
-                 * AutoTable
-                 */
-                const autoTableScript =
-                    document.createElement("script");
-
-                autoTableScript.src =
-                    "https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js";
-
-
-                autoTableScript.onload = () => {
-
-                    if (
-                        !window.jspdf ||
-                        !window.jspdf.jsPDF
-                    ) {
-
-                        reject(
-                            new Error(
-                                "jsPDF failed to load."
-                            )
-                        );
-
-                        return;
-                    }
-
-
-                    resolve({
-                        jsPDF:
-                            window.jspdf.jsPDF
-                    });
-
-                };
-
-
-                autoTableScript.onerror = () => {
-
-                    reject(
-                        new Error(
-                            "jsPDF AutoTable failed to load."
-                        )
-                    );
-
-                };
-
-
-                document.head.appendChild(
-                    autoTableScript
+            const script =
+                document.createElement(
+                    "script"
                 );
+
+
+            script.id =
+                id;
+
+
+            script.src =
+                src;
+
+
+            script.async =
+                true;
+
+
+            script.onload = () => {
+
+                script.dataset.loaded =
+                    "true";
+
+                resolve();
 
             };
 
 
-            jsPdfScript.onerror = () => {
+            script.onerror = () => {
 
                 reject(
                     new Error(
-                        "jsPDF failed to load."
+                        `Failed to load ${src}`
                     )
                 );
 
@@ -115,12 +106,147 @@ export function loadPdfLibraries() {
 
 
             document.head.appendChild(
-                jsPdfScript
+                script
             );
 
         }
     );
 
+}
+
+
+/* =========================================================
+   LOAD PDF LIBRARIES
+========================================================= */
+
+export function loadPdfLibraries() {
+
+    /*
+     * Reuse existing loading process.
+     */
+    if (
+        pdfLibrariesPromise
+    ) {
+
+        return pdfLibrariesPromise;
+
+    }
+
+
+    pdfLibrariesPromise =
+        (async () => {
+
+            /*
+             * jsPDF
+             */
+            if (
+                !window.jspdf ||
+                !window.jspdf.jsPDF
+            ) {
+
+                await loadScript(
+                    "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js",
+                    "toolzen-jspdf"
+                );
+
+            }
+
+
+            /*
+             * AutoTable
+             */
+            if (
+                !window.jspdf ||
+                !window.jspdf.jsPDF
+            ) {
+
+                throw new Error(
+                    "jsPDF failed to load."
+                );
+
+            }
+
+
+            /*
+             * Check whether AutoTable
+             * is already available.
+             */
+            const {
+                jsPDF
+            } =
+                window.jspdf;
+
+
+            const testDoc =
+                new jsPDF();
+
+
+            if (
+                typeof testDoc.autoTable !==
+                "function"
+            ) {
+
+                await loadScript(
+                    "https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js",
+                    "toolzen-jspdf-autotable"
+                );
+
+            }
+
+
+            /*
+             * Final verification
+             */
+            if (
+                !window.jspdf ||
+                !window.jspdf.jsPDF
+            ) {
+
+                throw new Error(
+                    "jsPDF failed to load."
+                );
+
+            }
+
+
+            const verifyDoc =
+                new window.jspdf.jsPDF();
+
+
+            if (
+                typeof verifyDoc.autoTable !==
+                "function"
+            ) {
+
+                throw new Error(
+                    "jsPDF AutoTable plugin failed to load."
+                );
+
+            }
+
+
+            return {
+
+                jsPDF:
+                    window.jspdf.jsPDF
+
+            };
+
+        })()
+        .catch(error => {
+
+            /*
+             * Allow another attempt if
+             * loading failed.
+             */
+            pdfLibrariesPromise =
+                null;
+
+            throw error;
+
+        });
+
 
     return pdfLibrariesPromise;
+
 }
