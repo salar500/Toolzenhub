@@ -54,7 +54,9 @@ export async function generatePDF({
          * jsPDF + AutoTable.
          */
         const doc =
+            await loadPdfLibraries();
             await createPDFDocument();
+         
 
 
         /*
