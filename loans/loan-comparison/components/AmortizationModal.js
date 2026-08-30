@@ -3,29 +3,17 @@ import {
 } from "../../../assets/js/calculators/common/formatter.js";
 
 
-/* =========================================================
-   OPEN AMORTIZATION MODAL
-========================================================= */
-
 export function openAmortizationModal(
     loan,
     schedule,
-    loanName = "Loan"
+    loanName
 ) {
 
-    console.log(
-        "openAmortizationModal() called",
-        {
-            loan,
-            schedule,
-            loanName
-        }
-    );
-
-
-    /* -------------------------------------------------------
-       SAFETY CHECKS
-    ------------------------------------------------------- */
+    /*
+     * =====================================================
+     * SAFETY CHECKS
+     * =====================================================
+     */
 
     if (!loan) {
 
@@ -40,7 +28,7 @@ export function openAmortizationModal(
     if (!Array.isArray(schedule)) {
 
         console.error(
-            "Amortization modal: schedule is not an array.",
+            "Amortization modal: schedule must be an array.",
             schedule
         );
 
@@ -48,19 +36,11 @@ export function openAmortizationModal(
     }
 
 
-    if (schedule.length === 0) {
-
-        console.error(
-            "Amortization modal: schedule is empty."
-        );
-
-        return;
-    }
-
-
-    /* -------------------------------------------------------
-       REMOVE OLD MODAL
-    ------------------------------------------------------- */
+    /*
+     * =====================================================
+     * REMOVE EXISTING MODAL
+     * =====================================================
+     */
 
     const existingModal =
         document.querySelector(
@@ -75,22 +55,31 @@ export function openAmortizationModal(
     }
 
 
-    /* -------------------------------------------------------
-       EMI
-    ------------------------------------------------------- */
+    /*
+     * =====================================================
+     * CALCULATE EMI
+     * =====================================================
+     *
+     * Principal + Interest = EMI
+     *
+     */
 
     const emi =
-        Number(
-            schedule[0].principal || 0
-        ) +
-        Number(
-            schedule[0].interest || 0
-        );
+        schedule.length > 0
+            ? Number(
+                schedule[0].principal || 0
+            ) +
+              Number(
+                schedule[0].interest || 0
+            )
+            : 0;
 
 
-    /* -------------------------------------------------------
-       TOTAL INTEREST
-    ------------------------------------------------------- */
+    /*
+     * =====================================================
+     * TOTAL INTEREST
+     * =====================================================
+     */
 
     const totalInterest =
         schedule.reduce(
@@ -98,7 +87,9 @@ export function openAmortizationModal(
 
                 return (
                     total +
-                    Number(row.interest || 0)
+                    Number(
+                        row.interest || 0
+                    )
                 );
 
             },
@@ -106,9 +97,11 @@ export function openAmortizationModal(
         );
 
 
-    /* -------------------------------------------------------
-       TOTAL REPAYMENT
-    ------------------------------------------------------- */
+    /*
+     * =====================================================
+     * TOTAL REPAYMENT
+     * =====================================================
+     */
 
     const totalRepayment =
         Number(
@@ -117,44 +110,34 @@ export function openAmortizationModal(
         totalInterest;
 
 
-    /* -------------------------------------------------------
-       CREATE MODAL
-    ------------------------------------------------------- */
+    /*
+     * =====================================================
+     * CREATE MODAL
+     * =====================================================
+     */
 
     const modal =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     modal.id =
         "amortization-modal";
 
 
+    /*
+     * IMPORTANT:
+     *
+     * Do NOT add "is-open" here.
+     *
+     * It is added after the modal is inserted
+     * into the DOM below.
+     */
+
     modal.className =
         "loan-amortization-modal";
 
-
-    /*
-     * IMPORTANT
-     *
-     * These inline styles make sure the modal is visible
-     * even if your external CSS is missing or conflicting.
-     */
-
-    modal.style.position = "fixed";
-    modal.style.inset = "0";
-    modal.style.width = "100%";
-    modal.style.height = "100%";
-    modal.style.zIndex = "999999";
-    modal.style.display = "flex";
-    modal.style.alignItems = "center";
-    modal.style.justifyContent = "center";
-    modal.style.padding = "20px";
-    modal.style.boxSizing = "border-box";
-
-
-    /* -------------------------------------------------------
-       MODAL HTML
-    ------------------------------------------------------- */
 
     modal.innerHTML = `
 
@@ -163,12 +146,6 @@ export function openAmortizationModal(
         <div
             class="loan-amortization-overlay"
             data-close-amortization
-            style="
-                position:absolute;
-                inset:0;
-                background:rgba(0,0,0,0.65);
-                cursor:pointer;
-            "
         ></div>
 
 
@@ -179,63 +156,26 @@ export function openAmortizationModal(
             role="dialog"
             aria-modal="true"
             aria-labelledby="amortization-title"
-            style="
-                position:relative;
-                z-index:2;
-                width:min(1100px, 100%);
-                max-height:90vh;
-                background:#ffffff;
-                color:#111111;
-                border-radius:16px;
-                overflow:hidden;
-                display:flex;
-                flex-direction:column;
-                box-shadow:0 25px 80px rgba(0,0,0,0.35);
-            "
         >
 
 
             <!-- HEADER -->
 
-            <div
-                class="loan-amortization-header"
-                style="
-                    display:flex;
-                    align-items:flex-start;
-                    justify-content:space-between;
-                    gap:20px;
-                    padding:24px;
-                    border-bottom:1px solid #e5e7eb;
-                    flex-shrink:0;
-                "
-            >
+            <div class="loan-amortization-header">
 
                 <div>
 
-                    <span
-                        class="calculator-eyebrow"
-                    >
+                    <span class="calculator-eyebrow">
                         ${loanName}
                     </span>
 
 
-                    <h2
-                        id="amortization-title"
-                        style="
-                            margin:6px 0;
-                            font-size:24px;
-                        "
-                    >
+                    <h2 id="amortization-title">
                         Full Amortization Schedule
                     </h2>
 
 
-                    <p
-                        style="
-                            margin:0;
-                            color:#6b7280;
-                        "
-                    >
+                    <p>
 
                         ${formatINR(
                             loan.principal
@@ -259,15 +199,6 @@ export function openAmortizationModal(
                     class="loan-amortization-close"
                     data-close-amortization
                     aria-label="Close"
-                    style="
-                        border:0;
-                        background:transparent;
-                        font-size:30px;
-                        line-height:1;
-                        cursor:pointer;
-                        padding:4px 8px;
-                        color:#555;
-                    "
                 >
                     ×
                 </button>
@@ -277,285 +208,167 @@ export function openAmortizationModal(
 
             <!-- SUMMARY -->
 
-            <div
-                class="loan-amortization-summary"
-                style="
-                    display:grid;
-                    grid-template-columns:repeat(3,1fr);
-                    gap:1px;
-                    background:#e5e7eb;
-                    flex-shrink:0;
-                "
-            >
+            <div class="loan-amortization-summary">
 
-                <div
-                    style="
-                        background:#ffffff;
-                        padding:18px 20px;
-                    "
-                >
 
-                    <span
-                        style="
-                            display:block;
-                            font-size:13px;
-                            color:#6b7280;
-                            margin-bottom:5px;
-                        "
-                    >
+                <div>
+
+                    <span>
                         Monthly EMI
                     </span>
 
 
-                    <strong
-                        style="
-                            display:block;
-                            font-size:20px;
-                        "
-                    >
+                    <strong>
                         ${formatINR(emi)}
                     </strong>
 
                 </div>
 
 
-                <div
-                    style="
-                        background:#ffffff;
-                        padding:18px 20px;
-                    "
-                >
+                <div>
 
-                    <span
-                        style="
-                            display:block;
-                            font-size:13px;
-                            color:#6b7280;
-                            margin-bottom:5px;
-                        "
-                    >
+                    <span>
                         Total Interest
                     </span>
 
 
-                    <strong
-                        style="
-                            display:block;
-                            font-size:20px;
-                        "
-                    >
-                        ${formatINR(totalInterest)}
+                    <strong>
+                        ${formatINR(
+                            totalInterest
+                        )}
                     </strong>
 
                 </div>
 
 
-                <div
-                    style="
-                        background:#ffffff;
-                        padding:18px 20px;
-                    "
-                >
+                <div>
 
-                    <span
-                        style="
-                            display:block;
-                            font-size:13px;
-                            color:#6b7280;
-                            margin-bottom:5px;
-                        "
-                    >
+                    <span>
                         Total Repayment
                     </span>
 
 
-                    <strong
-                        style="
-                            display:block;
-                            font-size:20px;
-                        "
-                    >
-                        ${formatINR(totalRepayment)}
+                    <strong>
+                        ${formatINR(
+                            totalRepayment
+                        )}
                     </strong>
 
                 </div>
+
 
             </div>
 
 
             <!-- TABLE -->
 
-            <div
-                class="loan-table-scroll"
-                style="
-                    overflow:auto;
-                    flex:1;
-                    min-height:0;
-                "
-            >
+            <div class="loan-amortization-table-container">
 
-                <table
-                    class="loan-amortization-table"
-                    style="
-                        width:100%;
-                        border-collapse:collapse;
-                    "
-                >
+                <div class="loan-full-table-scroll">
 
-                    <thead>
+                    <table
+                        class="loan-amortization-table"
+                    >
 
-                        <tr>
+                        <thead>
 
-                            <th
-                                style="
-                                    position:sticky;
-                                    top:0;
-                                    background:#f8fafc;
-                                    padding:12px;
-                                    text-align:left;
-                                    border-bottom:1px solid #e5e7eb;
-                                "
-                            >
-                                Month
-                            </th>
+                            <tr>
+
+                                <th>
+                                    Month
+                                </th>
+
+                                <th>
+                                    Principal
+                                </th>
+
+                                <th>
+                                    Interest
+                                </th>
+
+                                <th>
+                                    Balance
+                                </th>
+
+                            </tr>
+
+                        </thead>
 
 
-                            <th
-                                style="
-                                    position:sticky;
-                                    top:0;
-                                    background:#f8fafc;
-                                    padding:12px;
-                                    text-align:right;
-                                    border-bottom:1px solid #e5e7eb;
-                                "
-                            >
-                                Principal
-                            </th>
+                        <tbody>
+
+                            ${
+                                schedule.length > 0
+
+                                    ? schedule
+                                        .map(
+                                            row => `
+
+                                                <tr>
+
+                                                    <td>
+                                                        ${row.month}
+                                                    </td>
 
 
-                            <th
-                                style="
-                                    position:sticky;
-                                    top:0;
-                                    background:#f8fafc;
-                                    padding:12px;
-                                    text-align:right;
-                                    border-bottom:1px solid #e5e7eb;
-                                "
-                            >
-                                Interest
-                            </th>
+                                                    <td>
+                                                        ${formatINR(
+                                                            row.principal
+                                                        )}
+                                                    </td>
 
 
-                            <th
-                                style="
-                                    position:sticky;
-                                    top:0;
-                                    background:#f8fafc;
-                                    padding:12px;
-                                    text-align:right;
-                                    border-bottom:1px solid #e5e7eb;
-                                "
-                            >
-                                Balance
-                            </th>
-
-                        </tr>
-
-                    </thead>
+                                                    <td>
+                                                        ${formatINR(
+                                                            row.interest
+                                                        )}
+                                                    </td>
 
 
-                    <tbody>
+                                                    <td>
+                                                        ${formatINR(
+                                                            row.balance
+                                                        )}
+                                                    </td>
 
-                        ${
-                            schedule
-                                .map(row => `
+                                                </tr>
 
-                                    <tr>
+                                            `
+                                        )
+                                        .join("")
 
-                                        <td
-                                            style="
-                                                padding:11px 12px;
-                                                border-bottom:1px solid #f1f5f9;
-                                            "
-                                        >
-                                            ${row.month}
-                                        </td>
+                                    : `
 
+                                        <tr>
 
-                                        <td
-                                            style="
-                                                padding:11px 12px;
-                                                text-align:right;
-                                                border-bottom:1px solid #f1f5f9;
-                                            "
-                                        >
-                                            ${formatINR(
-                                                row.principal
-                                            )}
-                                        </td>
+                                            <td
+                                                colspan="4"
+                                                class="loan-amortization-empty"
+                                            >
+                                                No amortization data available.
+                                            </td>
 
+                                        </tr>
 
-                                        <td
-                                            style="
-                                                padding:11px 12px;
-                                                text-align:right;
-                                                border-bottom:1px solid #f1f5f9;
-                                            "
-                                        >
-                                            ${formatINR(
-                                                row.interest
-                                            )}
-                                        </td>
+                                    `
+                            }
 
+                        </tbody>
 
-                                        <td
-                                            style="
-                                                padding:11px 12px;
-                                                text-align:right;
-                                                border-bottom:1px solid #f1f5f9;
-                                            "
-                                        >
-                                            ${formatINR(
-                                                row.balance
-                                            )}
-                                        </td>
+                    </table>
 
-                                    </tr>
-
-                                `)
-                                .join("")
-                        }
-
-                    </tbody>
-
-                </table>
+                </div>
 
             </div>
 
 
             <!-- FOOTER -->
 
-            <div
-                class="loan-amortization-footer"
-                style="
-                    display:flex;
-                    align-items:center;
-                    justify-content:space-between;
-                    gap:20px;
-                    padding:18px 24px;
-                    border-top:1px solid #e5e7eb;
-                    flex-shrink:0;
-                    background:#ffffff;
-                "
-            >
+            <div class="loan-amortization-footer">
 
                 <strong>
-
                     ${schedule.length}
                     monthly payments
-
                 </strong>
 
 
@@ -575,22 +388,51 @@ export function openAmortizationModal(
     `;
 
 
-    /* -------------------------------------------------------
-       ADD TO BODY
-    ------------------------------------------------------- */
+    /*
+     * =====================================================
+     * ADD MODAL TO BODY
+     * =====================================================
+     */
 
-    document.body.appendChild(modal);
-
-
-    console.log(
-        "Amortization modal added to DOM:",
+    document.body.appendChild(
         modal
     );
 
 
-    /* -------------------------------------------------------
-       CLOSE BUTTONS
-    ------------------------------------------------------- */
+    /*
+     * =====================================================
+     * IMPORTANT FIX
+     * =====================================================
+     *
+     * Your CSS hides the modal by default:
+     *
+     * .loan-amortization-modal {
+     *     visibility: hidden;
+     *     opacity: 0;
+     * }
+     *
+     * The CSS shows it only when:
+     *
+     * .loan-amortization-modal.is-open
+     *
+     * Therefore we add "is-open" after the modal
+     * has been inserted into the DOM.
+     */
+
+    requestAnimationFrame(() => {
+
+        modal.classList.add(
+            "is-open"
+        );
+
+    });
+
+
+    /*
+     * =====================================================
+     * CLOSE BUTTONS + OVERLAY
+     * =====================================================
+     */
 
     modal
         .querySelectorAll(
@@ -606,9 +448,11 @@ export function openAmortizationModal(
         });
 
 
-    /* -------------------------------------------------------
-       ESCAPE KEY
-    ------------------------------------------------------- */
+    /*
+     * =====================================================
+     * ESCAPE KEY
+     * =====================================================
+     */
 
     document.addEventListener(
         "keydown",
@@ -616,23 +460,43 @@ export function openAmortizationModal(
     );
 
 
-    /* -------------------------------------------------------
-       PREVENT BACKGROUND SCROLL
-    ------------------------------------------------------- */
+    /*
+     * =====================================================
+     * PREVENT BACKGROUND SCROLL
+     * =====================================================
+     */
 
     document.body.classList.add(
         "amortization-modal-open"
     );
 
 
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow =
+        "hidden";
+
+
+    /*
+     * DEBUG
+     */
+
+    console.log(
+        "Amortization modal opened:",
+        {
+            loan,
+            scheduleLength:
+                schedule.length,
+            loanName
+        }
+    );
 
 }
 
 
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
+/*
+ * =========================================================
+ * CLOSE MODAL
+ * =========================================================
+ */
 
 export function closeAmortizationModal() {
 
@@ -649,16 +513,47 @@ export function closeAmortizationModal() {
     }
 
 
-    modal.remove();
+    /*
+     * Remove open state first
+     * so the CSS closing animation can run.
+     */
 
+    modal.classList.remove(
+        "is-open"
+    );
+
+
+    /*
+     * Remove modal after animation.
+     */
+
+    setTimeout(() => {
+
+        if (modal) {
+
+            modal.remove();
+
+        }
+
+    }, 200);
+
+
+    /*
+     * Restore body scrolling.
+     */
 
     document.body.classList.remove(
         "amortization-modal-open"
     );
 
 
-    document.body.style.overflow = "";
+    document.body.style.overflow =
+        "";
 
+
+    /*
+     * Remove Escape listener.
+     */
 
     document.removeEventListener(
         "keydown",
@@ -668,11 +563,15 @@ export function closeAmortizationModal() {
 }
 
 
-/* =========================================================
-   ESCAPE
-========================================================= */
+/*
+ * =========================================================
+ * ESCAPE HANDLER
+ * =========================================================
+ */
 
-function handleEscape(event) {
+function handleEscape(
+    event
+) {
 
     if (
         event.key === "Escape"
