@@ -1,4 +1,3 @@
-
 /* =========================================================
    ToolZen Hub
    Global PDF Styles
@@ -36,7 +35,15 @@ export const PDF_COLORS = {
 
     border: [226, 232, 240],
 
-    white: [255, 255, 255]
+    white: [255, 255, 255],
+
+    /*
+     * Very light watermark color.
+     *
+     * It is intentionally subtle so it does not interfere
+     * with the amortization table.
+     */
+    watermark: [226, 232, 240]
 
 };
 
@@ -55,6 +62,41 @@ export const PDF_FONTS = {
 
     body: 9,
 
-    small: 8
+    small: 8,
+
+    watermark: 34
+
+};
+
+
+/* =========================================================
+   WATERMARK
+========================================================= */
+
+export const PDF_WATERMARK = {
+
+    text:
+        "TOOLZEN HUB",
+
+    angle:
+        35,
+
+    fontSize:
+        PDF_FONTS.watermark,
+
+    color:
+        PDF_COLORS.watermark
+
+};
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+export const PDF_FOOTER = {
+
+    offset:
+        10
 
 };
