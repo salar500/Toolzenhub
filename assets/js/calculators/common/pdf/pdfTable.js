@@ -6,7 +6,9 @@
 import {
     PDF_PAGE,
     PDF_COLORS,
-    PDF_FONTS
+    PDF_FONTS,
+    PDF_WATERMARK,
+    PDF_FOOTER
 } from "./pdfStyles.js";
 
 
@@ -14,14 +16,48 @@ import {
    CURRENT Y POSITION
 ========================================================= */
 
-function getY(doc) {
+function getY(
+    doc
+) {
 
-    return (
+    /*
+     * AutoTable has already created a table.
+     *
+     * Continue below it.
+     */
+    if (
         doc.lastAutoTable &&
         doc.lastAutoTable.finalY
-    )
-        ? doc.lastAutoTable.finalY + 10
-        : 40;
+    ) {
+
+        return (
+            doc.lastAutoTable.finalY +
+            10
+        );
+
+    }
+
+
+    /*
+     * If a summary was drawn before the table,
+     * use the position recorded by addPDFSummary().
+     */
+    if (
+        doc.__toolzenSummaryEndY
+    ) {
+
+        return (
+            doc.__toolzenSummaryEndY +
+            5
+        );
+
+    }
+
+
+    /*
+     * Default starting position.
+     */
+    return 40;
 
 }
 
@@ -59,7 +95,9 @@ export function addPDFTitle(
     );
 
 
-    if (subtitle) {
+    if (
+        subtitle
+    ) {
 
         doc.setFont(
             "helvetica",
@@ -77,11 +115,35 @@ export function addPDFTitle(
         );
 
 
+        /*
+         * Use splitTextToSize so a long subtitle
+         * does not run outside the page.
+         */
+        const availableWidth =
+            PDF_PAGE.width -
+            PDF_PAGE.margin * 2;
+
+
+        const subtitleLines =
+            doc.splitTextToSize(
+                String(subtitle),
+                availableWidth
+            );
+
+
         doc.text(
-            String(subtitle),
+            subtitleLines,
             PDF_PAGE.margin,
             30
         );
+
+
+        /*
+         * Save the position so the summary/table
+         * can be placed safely below it.
+         */
+        doc.__toolzenSubtitleLines =
+            subtitleLines.length;
 
     }
 
@@ -97,42 +159,48 @@ export function addPDFSummary(
     summary
 ) {
 
-    let y = 44;
+    if (
+        !Array.isArray(summary) ||
+        summary.length === 0
+    ) {
+
+        return;
+
+    }
 
 
     /*
-     * Summary heading
+     * IMPORTANT:
+     *
+     * We intentionally do NOT print the word
+     * "Summary".
+     *
+     * The report already has a title and the
+     * summary information is self-explanatory.
      */
 
-    doc.setFont(
-        "helvetica",
-        "bold"
-    );
 
-
-    doc.setFontSize(
-        PDF_FONTS.heading
-    );
-
-
-    doc.setTextColor(
-        ...PDF_COLORS.dark
-    );
-
-
-    doc.text(
-        "Summary",
-        PDF_PAGE.margin,
-        y
-    );
-
-
-    y += 8;
+    let y =
+        44;
 
 
     /*
-     * Summary rows
+     * If subtitle has multiple lines, move the
+     * summary slightly lower.
      */
+    if (
+        doc.__toolzenSubtitleLines &&
+        doc.__toolzenSubtitleLines > 1
+    ) {
+
+        y +=
+            (
+                doc.__toolzenSubtitleLines -
+                1
+            ) * 5;
+
+    }
+
 
     summary.forEach(
         item => {
@@ -145,6 +213,9 @@ export function addPDFSummary(
                 item.value ?? "";
 
 
+            /*
+             * Label
+             */
             doc.setFont(
                 "helvetica",
                 "normal"
@@ -168,6 +239,9 @@ export function addPDFSummary(
             );
 
 
+            /*
+             * Value
+             */
             doc.setFont(
                 "helvetica",
                 "bold"
@@ -186,12 +260,137 @@ export function addPDFSummary(
             );
 
 
-            y += 6;
+            y +=
+                6;
 
         }
     );
 
+
+    /*
+     * Store the ending position.
+     *
+     * addPDFTable() uses this so the table
+     * never overlaps the summary.
+     */
+    doc.__toolzenSummaryEndY =
+        y;
+
 }
+
+
+/* =========================================================
+   DIAGONAL WATERMARK
+========================================================= */
+
+export function addPDFWatermark(
+    doc
+) {
+
+    if (
+        !doc
+    ) {
+
+        return;
+
+    }
+
+
+    const pageCount =
+        doc.internal.getNumberOfPages();
+
+
+    for (
+        let page = 1;
+        page <= pageCount;
+        page++
+    ) {
+
+        doc.setPage(
+            page
+        );
+
+
+        const pageWidth =
+            doc.internal.pageSize.getWidth();
+
+
+        const pageHeight =
+            doc.internal.pageSize.getHeight();
+
+
+        /*
+         * Save the current graphics state
+         * when supported by the jsPDF version.
+         */
+        if (
+            typeof doc.saveGraphicsState ===
+            "function"
+        ) {
+
+            doc.saveGraphicsState();
+
+        }
+
+
+        doc.setFont(
+            "helvetica",
+            "bold"
+        );
+
+
+        doc.setFontSize(
+            PDF_WATERMARK.fontSize
+        );
+
+
+        doc.setTextColor(
+            ...PDF_WATERMARK.color
+        );
+
+
+        /*
+         * Center of page.
+         */
+        const x =
+            pageWidth / 2;
+
+
+        const y =
+            pageHeight / 2;
+
+
+        /*
+         * jsPDF supports text rotation
+         * through the angle option.
+         */
+        doc.text(
+            PDF_WATERMARK.text,
+            x,
+            y,
+            {
+                angle:
+                    PDF_WATERMARK.angle,
+
+                align:
+                    "center"
+            }
+        );
+
+
+        if (
+            typeof doc.restoreGraphicsState ===
+            "function"
+        ) {
+
+            doc.restoreGraphicsState();
+
+        }
+
+    }
+
+}
+
 
 /* =========================================================
    TABLE
@@ -258,18 +457,51 @@ export function addPDFTable(
         body,
 
         margin: {
-            left: PDF_PAGE.margin,
-            right: PDF_PAGE.margin
+
+            top:
+                15,
+
+            bottom:
+                20,
+
+            left:
+                PDF_PAGE.margin,
+
+            right:
+                PDF_PAGE.margin
+
         },
+
+        /*
+         * This callback executes whenever AutoTable
+         * starts drawing a page.
+         *
+         * Therefore the watermark is added to:
+         *
+         * Page 1
+         * Page 2
+         * Page 3
+         * ...
+         */
+        willDrawPage:
+            data => {
+
+                addPageWatermark(
+                    doc
+                );
+
+            },
 
         styles: {
 
-            font: "helvetica",
+            font:
+                "helvetica",
 
             fontSize:
                 PDF_FONTS.small,
 
-            cellPadding: 3,
+            cellPadding:
+                3,
 
             textColor:
                 PDF_COLORS.dark,
@@ -277,7 +509,8 @@ export function addPDFTable(
             lineColor:
                 PDF_COLORS.border,
 
-            lineWidth: 0.2
+            lineWidth:
+                0.2
 
         },
 
@@ -289,7 +522,8 @@ export function addPDFTable(
             textColor:
                 PDF_COLORS.white,
 
-            fontStyle: "bold"
+            fontStyle:
+                "bold"
 
         },
 
@@ -300,9 +534,78 @@ export function addPDFTable(
 
         },
 
-        theme: "grid"
+        theme:
+            "grid"
 
     });
+
+}
+
+
+/* =========================================================
+   PAGE WATERMARK
+========================================================= */
+
+function addPageWatermark(
+    doc
+) {
+
+    const pageWidth =
+        doc.internal.pageSize.getWidth();
+
+
+    const pageHeight =
+        doc.internal.pageSize.getHeight();
+
+
+    if (
+        typeof doc.saveGraphicsState ===
+        "function"
+    ) {
+
+        doc.saveGraphicsState();
+
+    }
+
+
+    doc.setFont(
+        "helvetica",
+        "bold"
+    );
+
+
+    doc.setFontSize(
+        PDF_WATERMARK.fontSize
+    );
+
+
+    doc.setTextColor(
+        ...PDF_WATERMARK.color
+    );
+
+
+    doc.text(
+        PDF_WATERMARK.text,
+        pageWidth / 2,
+        pageHeight / 2,
+        {
+            angle:
+                PDF_WATERMARK.angle,
+
+            align:
+                "center"
+        }
+    );
+
+
+    if (
+        typeof doc.restoreGraphicsState ===
+        "function"
+    ) {
+
+        doc.restoreGraphicsState();
+
+    }
 
 }
 
@@ -326,11 +629,17 @@ export function addPDFFooter(
         page++
     ) {
 
-        doc.setPage(page);
+        doc.setPage(
+            page
+        );
+
+
+        const pageWidth =
+            doc.internal.pageSize.getWidth();
 
 
         const pageHeight =
-            doc.internal.pageSize.height;
+            doc.internal.pageSize.getHeight();
 
 
         doc.setFont(
@@ -349,19 +658,29 @@ export function addPDFFooter(
         );
 
 
+        /*
+         * Footer text
+         */
         doc.text(
             String(text),
             PDF_PAGE.margin,
-            pageHeight - 10
+            pageHeight -
+            PDF_FOOTER.offset
         );
 
 
+        /*
+         * Page number
+         */
         doc.text(
             `Page ${page} of ${pageCount}`,
-            195,
-            pageHeight - 10,
+            pageWidth -
+            PDF_PAGE.margin,
+            pageHeight -
+            PDF_FOOTER.offset,
             {
-                align: "right"
+                align:
+                    "right"
             }
         );
 
@@ -371,11 +690,37 @@ export function addPDFFooter(
 
 
 /* =========================================================
-   HELPER
+   ADD WATERMARK TO PDF WITHOUT TABLE
 ========================================================= */
 
-function subtitleY(doc) {
+export function ensurePDFWatermark(
+    doc
+) {
 
-    return 34;
+    if (
+        !doc
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+     * If a table exists, its willDrawPage()
+     * callback already created the watermark.
+     *
+     * This function is mainly useful for PDFs
+     * that do not contain a table.
+     */
+    if (
+        !doc.lastAutoTable
+    ) {
+
+        addPDFWatermark(
+            doc
+        );
+
+    }
 
 }
