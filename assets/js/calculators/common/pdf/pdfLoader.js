@@ -18,16 +18,19 @@ function loadScript(
     return new Promise(
         (resolve, reject) => {
 
-            /*
-             * Already loaded
-             */
-            if (
-                document.getElementById(id)
-            ) {
+            /* =============================================
+               ALREADY EXISTS
+            ============================================= */
 
-                const existingScript =
-                    document.getElementById(id);
+            const existingScript =
+                document.getElementById(id);
 
+
+            if (existingScript) {
+
+                /*
+                 * Already successfully loaded
+                 */
                 if (
                     existingScript.dataset.loaded === "true"
                 ) {
@@ -35,13 +38,19 @@ function loadScript(
                     resolve();
 
                     return;
+
                 }
 
 
+                /*
+                 * Currently loading
+                 */
                 existingScript.addEventListener(
                     "load",
-                    resolve,
-                    { once: true }
+                    () => resolve(),
+                    {
+                        once: true
+                    }
                 );
 
 
@@ -56,16 +65,21 @@ function loadScript(
                         );
 
                     },
-                    { once: true }
+                    {
+                        once: true
+                    }
                 );
 
+
                 return;
+
             }
 
 
-            /*
-             * Create script
-             */
+            /* =============================================
+               CREATE SCRIPT
+            ============================================= */
+
             const script =
                 document.createElement(
                     "script"
@@ -84,15 +98,24 @@ function loadScript(
                 true;
 
 
+            /* =============================================
+               SUCCESS
+            ============================================= */
+
             script.onload = () => {
 
                 script.dataset.loaded =
                     "true";
 
+
                 resolve();
 
             };
 
+
+            /* =============================================
+               ERROR
+            ============================================= */
 
             script.onerror = () => {
 
@@ -122,7 +145,8 @@ function loadScript(
 export function loadPdfLibraries() {
 
     /*
-     * Reuse existing loading process.
+     * If another calculator is already loading
+     * the libraries, reuse the same Promise.
      */
     if (
         pdfLibrariesPromise
@@ -136,25 +160,31 @@ export function loadPdfLibraries() {
     pdfLibrariesPromise =
         (async () => {
 
-            /*
-             * jsPDF
-             */
+
+            /* =============================================
+               LOAD jsPDF
+            ============================================= */
+
             if (
                 !window.jspdf ||
                 !window.jspdf.jsPDF
             ) {
 
                 await loadScript(
+
                     "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js",
+
                     "toolzen-jspdf"
+
                 );
 
             }
 
 
-            /*
-             * AutoTable
-             */
+            /* =============================================
+               VERIFY jsPDF
+            ============================================= */
+
             if (
                 !window.jspdf ||
                 !window.jspdf.jsPDF
@@ -167,18 +197,12 @@ export function loadPdfLibraries() {
             }
 
 
-            /*
-             * Check whether AutoTable
-             * is already available.
-             */
-            const {
-                jsPDF
-            } =
-                window.jspdf;
-
+            /* =============================================
+               CHECK AUTOTABLE
+            ============================================= */
 
             const testDoc =
-                new jsPDF();
+                new window.jspdf.jsPDF();
 
 
             if (
@@ -187,27 +211,19 @@ export function loadPdfLibraries() {
             ) {
 
                 await loadScript(
+
                     "https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js",
+
                     "toolzen-jspdf-autotable"
+
                 );
 
             }
 
 
-            /*
-             * Final verification
-             */
-            if (
-                !window.jspdf ||
-                !window.jspdf.jsPDF
-            ) {
-
-                throw new Error(
-                    "jsPDF failed to load."
-                );
-
-            }
-
+            /* =============================================
+               FINAL AUTOTABLE VERIFICATION
+            ============================================= */
 
             const verifyDoc =
                 new window.jspdf.jsPDF();
@@ -225,6 +241,10 @@ export function loadPdfLibraries() {
             }
 
 
+            /* =============================================
+               RETURN LIBRARY
+            ============================================= */
+
             return {
 
                 jsPDF:
@@ -233,18 +253,21 @@ export function loadPdfLibraries() {
             };
 
         })()
-        .catch(error => {
+        .catch(
+            error => {
 
-            /*
-             * Allow another attempt if
-             * loading failed.
-             */
-            pdfLibrariesPromise =
-                null;
+                /*
+                 * Reset Promise so a future attempt
+                 * can try loading again.
+                 */
+                pdfLibrariesPromise =
+                    null;
 
-            throw error;
 
-        });
+                throw error;
+
+            }
+        );
 
 
     return pdfLibrariesPromise;
