@@ -8,6 +8,25 @@
    CURRENCY
 ========================================================= */
 
+/*
+ * IMPORTANT
+ *
+ * jsPDF's default Helvetica font does not reliably support
+ * the Unicode Indian Rupee symbol (₹).
+ *
+ * Therefore PDF currency is intentionally rendered as:
+ *
+ * INR 50,00,000
+ *
+ * instead of:
+ *
+ * ₹50,00,000
+ *
+ * This prevents the broken "¹" character appearing in PDFs.
+ *
+ * The normal website calculator formatting is NOT affected.
+ */
+
 export function formatPDFCurrency(
     value
 ) {
@@ -20,19 +39,19 @@ export function formatPDFCurrency(
         !Number.isFinite(number)
     ) {
 
-        return "₹0";
+        return "INR 0";
 
     }
 
 
-    return new Intl.NumberFormat(
-        "en-IN",
-        {
-            style: "currency",
-            currency: "INR",
-            maximumFractionDigits: 0
-        }
-    ).format(number);
+    return `INR ${
+        new Intl.NumberFormat(
+            "en-IN",
+            {
+                maximumFractionDigits: 0
+            }
+        ).format(number)
+    }`;
 
 }
 
@@ -90,5 +109,28 @@ export function formatPDFPercentage(
 
 
     return `${number}%`;
+
+}
+
+
+/* =========================================================
+   GENERIC PDF VALUE
+========================================================= */
+
+export function formatPDFValue(
+    value
+) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value);
 
 }
