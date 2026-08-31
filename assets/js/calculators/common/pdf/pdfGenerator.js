@@ -4,12 +4,12 @@
 ========================================================= */
 
 import {
-    createPDFDocument
-} from "./pdfDocument.js";
-
-import {
     loadPdfLibraries
 } from "./pdfLoader.js";
+
+import {
+    createPDFDocument
+} from "./pdfDocument.js";
 
 import {
     addPDFTitle,
@@ -47,21 +47,25 @@ export async function generatePDF({
 
     try {
 
-        /*
-         * Create PDF
-         *
-         * This automatically loads
-         * jsPDF + AutoTable.
-         */
+        /* =================================================
+           LOAD PDF LIBRARIES
+        ================================================= */
+
+        await loadPdfLibraries();
+
+
+        /* =================================================
+           CREATE PDF DOCUMENT
+        ================================================= */
+
         const doc =
-            await loadPdfLibraries();
             await createPDFDocument();
-         
 
 
-        /*
-         * Title
-         */
+        /* =================================================
+           TITLE
+        ================================================= */
+
         addPDFTitle(
             doc,
             title,
@@ -69,9 +73,10 @@ export async function generatePDF({
         );
 
 
-        /*
-         * Summary
-         */
+        /* =================================================
+           SUMMARY
+        ================================================= */
+
         if (
             Array.isArray(summary) &&
             summary.length > 0
@@ -85,9 +90,10 @@ export async function generatePDF({
         }
 
 
-        /*
-         * Table
-         */
+        /* =================================================
+           TABLE
+        ================================================= */
+
         if (
             Array.isArray(columns) &&
             columns.length > 0 &&
@@ -104,18 +110,20 @@ export async function generatePDF({
         }
 
 
-        /*
-         * Footer
-         */
+        /* =================================================
+           FOOTER
+        ================================================= */
+
         addPDFFooter(
             doc,
             footer
         );
 
 
-        /*
-         * Download
-         */
+        /* =================================================
+           DOWNLOAD
+        ================================================= */
+
         downloadPDF(
             doc,
             filename
