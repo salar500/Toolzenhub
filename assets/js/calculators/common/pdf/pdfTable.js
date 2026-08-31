@@ -97,12 +97,12 @@ export function addPDFSummary(
     summary
 ) {
 
-    let y =
-        subtitleY(doc);
+    let y = 44;
 
 
-    y += 8;
-
+    /*
+     * Summary heading
+     */
 
     doc.setFont(
         "helvetica",
@@ -129,6 +129,10 @@ export function addPDFSummary(
 
     y += 8;
 
+
+    /*
+     * Summary rows
+     */
 
     summary.forEach(
         item => {
@@ -188,7 +192,6 @@ export function addPDFSummary(
     );
 
 }
-
 
 /* =========================================================
    TABLE
