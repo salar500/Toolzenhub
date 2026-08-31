@@ -6,6 +6,7 @@ import {
     generatePDF
 } from "../../../assets/js/calculators/common/pdf/pdfGenerator.js";
 
+
 /* =========================================================
    OPEN AMORTIZATION MODAL
 ========================================================= */
@@ -129,20 +130,6 @@ export function openAmortizationModal(
         "amortization-modal";
 
 
-    /*
-     * IMPORTANT
-     *
-     * Add "is-open" immediately.
-     *
-     * Your CSS hides:
-     *
-     * .loan-amortization-modal
-     *
-     * and shows it only with:
-     *
-     * .loan-amortization-modal.is-open
-     */
-
     modal.className =
         "loan-amortization-modal is-open";
 
@@ -171,7 +158,9 @@ export function openAmortizationModal(
         >
 
 
-            <!-- HEADER -->
+            <!-- =================================================
+                 HEADER
+            ================================================= -->
 
             <div class="loan-amortization-header">
 
@@ -404,15 +393,36 @@ export function openAmortizationModal(
                 </strong>
 
 
-                <button
-                    type="button"
-                    class="loan-primary-button"
-                    data-close-amortization
+                <div
+                    class="loan-amortization-footer-actions"
                 >
 
-                    Close
+                    <!-- DOWNLOAD PDF -->
 
-                </button>
+                    <button
+                        type="button"
+                        class="loan-primary-button"
+                        data-download-amortization-pdf
+                    >
+
+                        Download PDF
+
+                    </button>
+
+
+                    <!-- CLOSE -->
+
+                    <button
+                        type="button"
+                        class="loan-primary-button"
+                        data-close-amortization
+                    >
+
+                        Close
+
+                    </button>
+
+                </div>
 
             </div>
 
@@ -452,6 +462,38 @@ export function openAmortizationModal(
 
 
     /* =====================================================
+       DOWNLOAD PDF BUTTON
+    ===================================================== */
+
+    const downloadButton =
+        modal.querySelector(
+            "[data-download-amortization-pdf]"
+        );
+
+
+    if (downloadButton) {
+
+        downloadButton.addEventListener(
+            "click",
+            async () => {
+
+                await downloadAmortizationPDF(
+                    loan,
+                    schedule,
+                    loanName,
+                    emi,
+                    totalInterest,
+                    totalRepayment,
+                    downloadButton
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
        ESCAPE KEY
     ===================================================== */
 
@@ -477,6 +519,278 @@ export function openAmortizationModal(
     console.log(
         "Amortization modal successfully added to DOM."
     );
+
+}
+
+
+/* =========================================================
+   DOWNLOAD AMORTIZATION PDF
+========================================================= */
+
+async function downloadAmortizationPDF(
+    loan,
+    schedule,
+    loanName,
+    emi,
+    totalInterest,
+    totalRepayment,
+    button
+) {
+
+    if (
+        !Array.isArray(schedule) ||
+        schedule.length === 0
+    ) {
+
+        console.error(
+            "Cannot generate PDF: amortization schedule is empty."
+        );
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       BUTTON STATE
+    ===================================================== */
+
+    const originalText =
+        button.textContent;
+
+
+    button.disabled =
+        true;
+
+
+    button.textContent =
+        "Preparing PDF...";
+
+
+    try {
+
+        /* =================================================
+           PDF TABLE ROWS
+        ================================================= */
+
+        const rows =
+            schedule.map(
+                row => ({
+
+                    month:
+                        row.month,
+
+                    principal:
+                        formatINR(
+                            row.principal
+                        ),
+
+                    interest:
+                        formatINR(
+                            row.interest
+                        ),
+
+                    balance:
+                        formatINR(
+                            row.balance
+                        )
+
+                })
+            );
+
+
+        /* =================================================
+           PDF SUMMARY
+        ================================================= */
+
+        const summary = [
+
+            {
+                label:
+                    "Loan Amount",
+
+                value:
+                    formatINR(
+                        loan.principal
+                    )
+            },
+
+            {
+                label:
+                    "Interest Rate",
+
+                value:
+                    `${loan.rate}% p.a.`
+            },
+
+            {
+                label:
+                    "Loan Tenure",
+
+                value:
+                    `${loan.years} years`
+            },
+
+            {
+                label:
+                    "Monthly EMI",
+
+                value:
+                    formatINR(
+                        emi
+                    )
+            },
+
+            {
+                label:
+                    "Total Interest",
+
+                value:
+                    formatINR(
+                        totalInterest
+                    )
+            },
+
+            {
+                label:
+                    "Total Repayment",
+
+                value:
+                    formatINR(
+                        totalRepayment
+                    )
+            }
+
+        ];
+
+
+        /* =================================================
+           GENERATE PDF
+        ================================================= */
+
+        const success =
+            await generatePDF({
+
+                filename:
+                    createPDFFileName(
+                        loanName
+                    ),
+
+                title:
+                    "Full Amortization Schedule",
+
+                subtitle:
+                    `${loanName} • ${formatINR(
+                        loan.principal
+                    )} • ${loan.rate}% p.a. • ${loan.years} years`,
+
+                summary,
+
+                columns: [
+
+                    {
+                        key:
+                            "month",
+
+                        label:
+                            "Month"
+                    },
+
+                    {
+                        key:
+                            "principal",
+
+                        label:
+                            "Principal"
+                    },
+
+                    {
+                        key:
+                            "interest",
+
+                        label:
+                            "Interest"
+                    },
+
+                    {
+                        key:
+                            "balance",
+
+                        label:
+                            "Balance"
+                    }
+
+                ],
+
+                rows,
+
+                footer:
+                    "Generated by ToolZen Hub"
+
+            });
+
+
+        if (!success) {
+
+            console.error(
+                "PDF generation was unsuccessful."
+            );
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Amortization PDF download failed:",
+            error
+        );
+
+    } finally {
+
+        /* =================================================
+           RESTORE BUTTON
+        ================================================= */
+
+        button.disabled =
+            false;
+
+
+        button.textContent =
+            originalText;
+
+    }
+
+}
+
+
+/* =========================================================
+   CREATE PDF FILENAME
+========================================================= */
+
+function createPDFFileName(
+    loanName
+) {
+
+    const safeName =
+        String(
+            loanName ||
+            "loan"
+        )
+        .trim()
+        .replace(
+            /[^a-z0-9]+/gi,
+            "-"
+        )
+        .replace(
+            /^-+|-+$/g,
+            ""
+        )
+        .toLowerCase();
+
+
+    return `${
+        safeName || "loan"
+    }-amortization-schedule.pdf`;
 
 }
 
