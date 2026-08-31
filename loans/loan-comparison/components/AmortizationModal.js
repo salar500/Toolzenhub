@@ -3,6 +3,10 @@ import {
 } from "../../../assets/js/calculators/common/formatter.js";
 
 import {
+    formatPDFCurrency
+} from "../../../assets/js/calculators/common/pdf/pdfFormatters.js";
+
+import {
     generatePDF
 } from "../../../assets/js/calculators/common/pdf/pdfGenerator.js";
 
@@ -48,7 +52,8 @@ export function openAmortizationModal(
         {
             loan,
             loanName,
-            scheduleLength: schedule.length
+            scheduleLength:
+                schedule.length
         }
     );
 
@@ -76,12 +81,14 @@ export function openAmortizationModal(
 
     const emi =
         schedule.length > 0
+
             ? Number(
                 schedule[0].principal || 0
             ) +
               Number(
                 schedule[0].interest || 0
             )
+
             : 0;
 
 
@@ -91,7 +98,10 @@ export function openAmortizationModal(
 
     const totalInterest =
         schedule.reduce(
-            (total, row) => {
+            (
+                total,
+                row
+            ) => {
 
                 return (
                     total +
@@ -478,13 +488,21 @@ export function openAmortizationModal(
             async () => {
 
                 await downloadAmortizationPDF(
+
                     loan,
+
                     schedule,
+
                     loanName,
+
                     emi,
+
                     totalInterest,
+
                     totalRepayment,
+
                     downloadButton
+
                 );
 
             }
@@ -580,18 +598,32 @@ async function downloadAmortizationPDF(
                     month:
                         row.month,
 
+                    /*
+                     * IMPORTANT:
+                     *
+                     * Use PDF-specific currency formatting.
+                     *
+                     * This produces:
+                     *
+                     * INR 86,925
+                     *
+                     * rather than the broken:
+                     *
+                     * ¹86,925
+                     */
+
                     principal:
-                        formatINR(
+                        formatPDFCurrency(
                             row.principal
                         ),
 
                     interest:
-                        formatINR(
+                        formatPDFCurrency(
                             row.interest
                         ),
 
                     balance:
-                        formatINR(
+                        formatPDFCurrency(
                             row.balance
                         )
 
@@ -610,7 +642,7 @@ async function downloadAmortizationPDF(
                     "Loan Amount",
 
                 value:
-                    formatINR(
+                    formatPDFCurrency(
                         loan.principal
                     )
             },
@@ -636,7 +668,7 @@ async function downloadAmortizationPDF(
                     "Monthly EMI",
 
                 value:
-                    formatINR(
+                    formatPDFCurrency(
                         emi
                     )
             },
@@ -646,7 +678,7 @@ async function downloadAmortizationPDF(
                     "Total Interest",
 
                 value:
-                    formatINR(
+                    formatPDFCurrency(
                         totalInterest
                     )
             },
@@ -656,12 +688,36 @@ async function downloadAmortizationPDF(
                     "Total Repayment",
 
                 value:
-                    formatINR(
+                    formatPDFCurrency(
                         totalRepayment
                     )
             }
 
         ];
+
+
+        /* =================================================
+           CREATE FILENAME
+        ================================================= */
+
+        const filename =
+            createPDFFileName(
+                loanName,
+                loan
+            );
+
+
+        /* =================================================
+           CREATE PDF SUBTITLE
+        ================================================= */
+
+        const subtitle =
+            `${loanName} • ` +
+            `${formatPDFCurrency(
+                loan.principal
+            )} • ` +
+            `${loan.rate}% p.a. • ` +
+            `${loan.years} years`;
 
 
         /* =================================================
@@ -671,18 +727,12 @@ async function downloadAmortizationPDF(
         const success =
             await generatePDF({
 
-                filename:
-                    createPDFFileName(
-                        loanName
-                    ),
+                filename,
 
                 title:
                     "Full Amortization Schedule",
 
-                subtitle:
-                    `${loanName} • ${formatINR(
-                        loan.principal
-                    )} • ${loan.rate}% p.a. • ${loan.years} years`,
+                subtitle,
 
                 summary,
 
@@ -725,7 +775,29 @@ async function downloadAmortizationPDF(
                 rows,
 
                 footer:
-                    "Generated by ToolZen Hub"
+                    "Generated by ToolZen Hub",
+
+                watermark:
+                    "TOOLZEN HUB",
+
+                metadata: {
+
+                    calculator:
+                        "Loan Comparison",
+
+                    loan:
+                        loanName,
+
+                    principal:
+                        loan.principal,
+
+                    interestRate:
+                        loan.rate,
+
+                    tenure:
+                        loan.years
+
+                }
 
             });
 
@@ -768,7 +840,8 @@ async function downloadAmortizationPDF(
 ========================================================= */
 
 function createPDFFileName(
-    loanName
+    loanName,
+    loan
 ) {
 
     const safeName =
@@ -788,9 +861,51 @@ function createPDFFileName(
         .toLowerCase();
 
 
+    const amount =
+        Number(
+            loan?.principal || 0
+        );
+
+
+    const safeAmount =
+        Number.isFinite(amount)
+            ? Math.round(amount)
+            : 0;
+
+
+    const rate =
+        Number(
+            loan?.rate || 0
+        );
+
+
+    const safeRate =
+        Number.isFinite(rate)
+            ? String(rate)
+            : "0";
+
+
+    const years =
+        Number(
+            loan?.years || 0
+        );
+
+
+    const safeYears =
+        Number.isFinite(years)
+            ? String(years)
+            : "0";
+
+
     return `${
         safeName || "loan"
-    }-amortization-schedule.pdf`;
+    }-${
+        safeAmount
+    }-${
+        safeRate
+    }-percent-${
+        safeYears
+    }-years-amortization-schedule.pdf`;
 
 }
 
