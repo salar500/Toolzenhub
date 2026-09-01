@@ -53,7 +53,7 @@ export function addPDFFooter(
 
 
         doc.setFont(
-            "helvetica",
+            "NotoSans",
             "normal"
         );
 
