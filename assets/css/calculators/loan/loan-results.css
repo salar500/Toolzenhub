@@ -1,1 +1,286 @@
+/* =========================================================
+   RESULTS
+========================================================= */
 
+.loan-results {
+    margin-top: 20px;
+}
+
+.loan-summary-grid {
+    display: grid;
+    grid-template-columns: 1.3fr repeat(4, 1fr);
+    gap: 12px;
+}
+
+.loan-summary-card {
+    min-height: 125px;
+    padding: 18px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 3px 12px rgba(15, 23, 42, .04);
+}
+
+.loan-summary-card > span {
+    display: block;
+    margin-bottom: 12px;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.loan-summary-card > strong {
+    display: block;
+    color: #0f172a;
+    font-size: 20px;
+}
+
+.loan-summary-card small {
+    color: #64748b;
+    font-size: 11px;
+}
+
+.loan-summary-winner {
+    background: linear-gradient(
+        135deg,
+        #ecfdf5,
+        #ffffff
+    );
+    border-color: #a7f3d0;
+}
+
+.loan-summary-icon {
+    float: left;
+    margin-right: 12px;
+    font-size: 30px;
+}
+
+.loan-summary-winner > strong {
+    color: #047857;
+}
+
+.loan-summary-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.loan-summary-values small,
+.loan-summary-values strong {
+    display: block;
+}
+
+.loan-summary-values strong {
+    color: #0f172a;
+    font-size: 15px;
+}
+
+.loan-saving-value {
+    color: #059669 !important;
+}
+
+
+/* =========================================================
+   AMORTIZATION
+========================================================= */
+
+.loan-amortization-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.loan-content-card {
+    padding: 22px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.loan-content-card h2,
+.loan-content-card h3 {
+    margin-top: 0;
+    color: #0f172a;
+}
+
+.loan-content-card h3 {
+    color: #2563eb;
+    font-size: 16px;
+}
+
+.loan-table-scroll {
+    overflow-x: auto;
+}
+
+.loan-amortization-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.loan-amortization-table th,
+.loan-amortization-table td {
+    padding: 9px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+}
+
+.loan-amortization-table th {
+    background: #f8fafc;
+    color: #475569;
+}
+
+.loan-view-link {
+    margin-top: 12px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #2563eb;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.loan-disclaimer {
+    margin: 12px 0;
+    color: #64748b;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   INFORMATION SECTIONS
+========================================================= */
+
+.loan-info-card {
+    display: flex;
+    gap: 18px;
+    margin-top: 18px;
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.loan-info-icon {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #eff6ff;
+    font-size: 22px;
+}
+
+.loan-info-card h2 {
+    margin: 0 0 10px;
+    color: #0f172a;
+    font-size: 19px;
+}
+
+.loan-info-card p,
+.loan-info-card li {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.loan-info-card p {
+    margin: 0 0 10px;
+}
+
+.loan-info-card ol,
+.loan-info-card ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+
+/* =========================================================
+   CHECK LIST
+========================================================= */
+
+.loan-check-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+    gap: 8px 25px;
+    color: #059669;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   EXAMPLE
+========================================================= */
+
+.loan-example-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 15px 0;
+}
+
+.loan-example-grid div {
+    padding: 14px;
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+.loan-example-grid strong,
+.loan-example-grid span {
+    display: block;
+}
+
+.loan-example-grid span {
+    margin-top: 4px;
+    color: #2563eb;
+}
+
+
+/* =========================================================
+   INFO GRID
+========================================================= */
+
+.loan-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.loan-info-grid .loan-content-card {
+    margin: 0;
+}
+
+.loan-consider-list {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.loan-consider-list li {
+    margin-bottom: 8px;
+}
+
+.loan-content-card details {
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.loan-content-card details:last-child {
+    border-bottom: 0;
+}
+
+.loan-content-card summary {
+    padding: 15px 0;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.loan-content-card details p {
+    padding-bottom: 10px;
+}
