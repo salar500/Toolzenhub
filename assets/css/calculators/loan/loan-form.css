@@ -1,1 +1,269 @@
+/* =========================================================
+   FORM FIELDS
+========================================================= */
 
+.loan-field {
+    margin-bottom: 26px;
+}
+
+.loan-field label {
+    display: block;
+    margin-bottom: 9px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.loan-input-row {
+    display: grid;
+    grid-template-columns: 1fr 120px;
+    gap: 10px;
+}
+
+.loan-field select,
+.loan-field input[type="number"] {
+    width: 100%;
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #0f172a;
+    font: inherit;
+    outline: none;
+}
+
+.loan-field select:focus,
+.loan-field input[type="number"]:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .1);
+}
+
+.loan-number-input {
+    position: relative;
+}
+
+.loan-number-input input {
+    padding-right: 35px !important;
+}
+
+.loan-number-input span {
+    position: absolute;
+    top: 50%;
+    right: 13px;
+    color: #64748b;
+    transform: translateY(-50%);
+}
+
+
+/* =========================================================
+   SLIDERS
+========================================================= */
+
+.loan-slider {
+    --slider-progress: 0%;
+
+    display: block;
+    width: 100%;
+    height: 18px;
+    margin: 15px 0 0;
+    padding: 0;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    border: 0;
+    outline: none;
+    background: transparent;
+
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CHROME / EDGE / SAFARI
+========================================================= */
+
+.loan-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+
+    border: 0;
+    border-radius: 999px;
+
+    background: linear-gradient(
+        to right,
+        #2563eb 0%,
+        #2563eb var(--slider-progress),
+        #e2e8f0 var(--slider-progress),
+        #e2e8f0 100%
+    );
+}
+
+.loan-slider::-webkit-slider-thumb {
+    width: 18px;
+    height: 18px;
+
+    margin-top: -6px;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+
+    background: #2563eb;
+
+    box-shadow:
+        0 2px 6px rgba(15, 23, 42, .18);
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   FIREFOX
+========================================================= */
+
+.loan-slider::-moz-range-track {
+    width: 100%;
+    height: 6px;
+
+    border: 0;
+    border-radius: 999px;
+
+    background: #e2e8f0;
+}
+
+.loan-slider::-moz-range-progress {
+    height: 6px;
+
+    border: 0;
+    border-radius: 999px;
+
+    background: #2563eb;
+}
+
+.loan-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+
+    background: #2563eb;
+
+    box-shadow:
+        0 2px 6px rgba(15, 23, 42, .18);
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.loan-slider:focus-visible {
+    outline: none;
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, .15);
+}
+
+
+/* =========================================================
+   SLIDER ROW
+========================================================= */
+
+.loan-slider-row {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.loan-slider-row .loan-slider {
+    display: block;
+    width: 100%;
+    margin: 0;
+}
+
+
+/* =========================================================
+   RANGE LABELS
+   Start = exact left
+   End   = exact right
+========================================================= */
+
+.loan-range-labels {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 7px;
+    padding: 0;
+    color: #94a3b8;
+    font-size: 11px;
+    line-height: 1.3;
+    box-sizing: border-box;
+}
+
+.loan-range-labels span:first-child {
+    text-align: left;
+}
+
+.loan-range-labels span:last-child {
+    text-align: right;
+}
+
+
+/* =========================================================
+   AMOUNT DISPLAY
+========================================================= */
+
+.loan-field small {
+    display: block;
+    margin-top: 6px;
+    color: #64748b;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.loan-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 24px;
+    border-top: 1px solid #e2e8f0;
+    background: #f8fafc;
+}
+
+.loan-primary-button {
+    min-width: 160px;
+    height: 46px;
+    padding: 0 22px;
+    border: 0;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(37, 99, 235, .22);
+}
+
+.loan-primary-button:hover {
+    background: #1d4ed8;
+}
+
+.loan-reset-button {
+    border: 0;
+    background: transparent;
+    color: #64748b;
+    font: inherit;
+    cursor: pointer;
+}
