@@ -63,7 +63,7 @@ export function getLoanDisplayUnit(
 
 
     /* =====================================================
-       FIND SELECT
+       FIND UNIT SELECTOR
     ===================================================== */
 
     const unitElement =
@@ -147,6 +147,69 @@ export function getLoanDisplayUnit(
 
 
 /* =========================================================
+   NORMALIZE UNIT LABEL
+========================================================= */
+
+function normalizeUnitLabel(
+    displayUnit
+) {
+
+    return String(
+        displayUnit?.label || "Rupees"
+    )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+/* =========================================================
+   CHECK INTERNATIONAL UNIT
+========================================================= */
+
+function isInternationalUnit(
+    displayUnit
+) {
+
+    const label =
+        normalizeUnitLabel(
+            displayUnit
+        );
+
+
+    return (
+        label === "million" ||
+        label === "billion"
+    );
+
+}
+
+
+/* =========================================================
+   GET CURRENCY SYMBOL
+========================================================= */
+
+export function getLoanCurrencySymbol(
+    displayUnit
+) {
+
+    if (
+        isInternationalUnit(
+            displayUnit
+        )
+    ) {
+
+        return "$";
+
+    }
+
+
+    return "₹";
+
+}
+
+
+/* =========================================================
    FORMAT LOAN CURRENCY FOR SCREEN
 ========================================================= */
 
@@ -206,70 +269,53 @@ export function formatLoanCurrency(
 
 
     /* =====================================================
-       NORMALIZE LABEL
+       GET UNIT
     ===================================================== */
 
     const label =
         String(
-            displayUnit.label || ""
-        )
-        .trim()
-        .toLowerCase();
+            displayUnit.label ||
+            ""
+        ).trim();
+
+
+    const normalizedLabel =
+        label.toLowerCase();
 
 
     /* =====================================================
-       INDIAN RUPEE UNITS
+       INDIAN UNITS
     ===================================================== */
 
     if (
-        label === "lakhs"
+        normalizedLabel === "lakhs" ||
+        normalizedLabel === "crores"
     ) {
 
-        return `₹${formatted} Lakhs`;
-
-    }
-
-
-    if (
-        label === "crores"
-    ) {
-
-        return `₹${formatted} Crores`;
+        return `₹${formatted} ${label}`;
 
     }
 
 
     /* =====================================================
-       MILLION
+       INTERNATIONAL UNITS
     ===================================================== */
 
     if (
-        label === "million"
+        normalizedLabel === "million" ||
+        normalizedLabel === "billion"
     ) {
 
-        return `$${formatted} Million`;
+        return `$${formatted} ${label}`;
 
     }
 
 
     /* =====================================================
-       BILLION
+       FALLBACK
     ===================================================== */
 
-    if (
-        label === "billion"
-    ) {
-
-        return `$${formatted} Billion`;
-
-    }
-
-
-    /* =====================================================
-       SAFE FALLBACK
-    ===================================================== */
-
-    return `₹${formatted} ${displayUnit.label}`;
+    return `₹${formatted} ${label}`;
 
 }
 
