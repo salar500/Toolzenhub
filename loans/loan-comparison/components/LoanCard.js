@@ -1,4 +1,3 @@
-
 import { formatINR } from "../../../assets/js/calculators/common/formatter.js";
 
 import {
@@ -46,20 +45,12 @@ export function createLoanCard(
 
                     <select id="${prefix}-unit">
 
-                        <option value="1000">
-                            Thousands
-                        </option>
-
                         <option value="100000" selected>
                             Lakhs
                         </option>
 
                         <option value="10000000">
                             Crores
-                        </option>
-
-                        <option value="1000000">
-                            Millions
                         </option>
 
                     </select>
