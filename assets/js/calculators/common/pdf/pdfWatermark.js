@@ -46,9 +46,10 @@ export function drawPDFWatermark(
     }
 
 
-    /*
-     * Very light watermark.
-     */
+    /* =====================================================
+       WATERMARK FONT
+    ===================================================== */
+
     doc.setFont(
         "helvetica",
         "bold"
@@ -65,19 +66,31 @@ export function drawPDFWatermark(
     );
 
 
+    /* =====================================================
+       CENTER POSITION
+    ===================================================== */
+
+    const centerX =
+        pageWidth / 2;
+
+
+    const centerY =
+        pageHeight / 2;
+
+
     /*
-     * Center of the A4 page.
+     * The watermark is deliberately positioned in the
+     * central area of the complete A4 page.
      *
-     * The watermark is intentionally drawn
-     * across the central content area.
+     * It is large and diagonal, but very light.
      */
     doc.text(
 
         PDF_WATERMARK.text,
 
-        pageWidth / 2,
+        centerX,
 
-        pageHeight / 2,
+        centerY,
 
         {
 
@@ -93,7 +106,7 @@ export function drawPDFWatermark(
 
 
     /*
-     * Restore previous graphics state.
+     * Restore graphics state.
      */
     if (
         typeof doc.restoreGraphicsState ===
