@@ -7,7 +7,6 @@ import {
 } from "../../../assets/js/calculators/common/pdf/pdfGenerator.js";
 
 import {
-    formatLoanCurrency,
     createPDFFileName
 } from "./AmortizationHelpers.js";
 
@@ -26,6 +25,10 @@ export async function downloadAmortizationPDF(
     displayUnit,
     button
 ) {
+
+    /* =====================================================
+       SAFETY CHECK
+    ===================================================== */
 
     if (
         !Array.isArray(schedule) ||
@@ -261,7 +264,10 @@ export async function downloadAmortizationPDF(
                         loan.rate,
 
                     tenure:
-                        loan.years
+                        loan.years,
+
+                    displayUnit:
+                        displayUnit?.label || "Rupees"
 
                 }
 
@@ -316,9 +322,12 @@ function formatPDFLoanCurrency(
         );
 
 
+    /* =====================================================
+       RUPEES
+    ===================================================== */
+
     if (
         !displayUnit ||
-        !displayUnit.multiplier ||
         displayUnit.multiplier === 1
     ) {
 
@@ -329,10 +338,18 @@ function formatPDFLoanCurrency(
     }
 
 
+    /* =====================================================
+       CONVERT TO SELECTED UNIT
+    ===================================================== */
+
     const converted =
         amount /
         displayUnit.multiplier;
 
+
+    /* =====================================================
+       FORMAT NUMBER
+    ===================================================== */
 
     const formatted =
         new Intl.NumberFormat(
@@ -349,12 +366,10 @@ function formatPDFLoanCurrency(
         );
 
 
-    /*
-     * Use plain text currency in PDF.
-     *
-     * This avoids the ₹ glyph/font problem
-     * that can produce broken characters.
-     */
+    /* =====================================================
+       PDF-SAFE CURRENCY TEXT
+    ===================================================== */
+
     return `INR ${formatted} ${displayUnit.label}`;
 
 }
