@@ -75,20 +75,17 @@ export async function downloadAmortizationPDF(
 
                     principal:
                         formatPDFLoanCurrency(
-                            row.principal,
-                            displayUnit
+                            row.principal
                         ),
 
                     interest:
                         formatPDFLoanCurrency(
-                            row.interest,
-                            displayUnit
+                            row.interest
                         ),
 
                     balance:
                         formatPDFLoanCurrency(
-                            row.balance,
-                            displayUnit
+                            row.balance
                         )
 
                 })
@@ -107,8 +104,7 @@ export async function downloadAmortizationPDF(
 
                 value:
                     formatPDFLoanCurrency(
-                        loan.principal,
-                        displayUnit
+                        loan.principal
                     )
             },
 
@@ -134,8 +130,7 @@ export async function downloadAmortizationPDF(
 
                 value:
                     formatPDFLoanCurrency(
-                        emi,
-                        displayUnit
+                        emi
                     )
             },
 
@@ -145,8 +140,7 @@ export async function downloadAmortizationPDF(
 
                 value:
                     formatPDFLoanCurrency(
-                        totalInterest,
-                        displayUnit
+                        totalInterest
                     )
             },
 
@@ -156,8 +150,7 @@ export async function downloadAmortizationPDF(
 
                 value:
                     formatPDFLoanCurrency(
-                        totalRepayment,
-                        displayUnit
+                        totalRepayment
                     )
             }
 
@@ -182,8 +175,7 @@ export async function downloadAmortizationPDF(
         const subtitle =
             `${loanName} • ` +
             `${formatPDFLoanCurrency(
-                loan.principal,
-                displayUnit
+                loan.principal
             )} • ` +
             `${loan.rate}% p.a. • ` +
             `${loan.years} years`;
@@ -267,7 +259,6 @@ export async function downloadAmortizationPDF(
                         loan.years,
 
                     displayUnit:
-                        displayUnit?.label ||
                         "Rupees"
 
                 }
@@ -309,12 +300,12 @@ export async function downloadAmortizationPDF(
 
 
 /* =========================================================
-   PDF CURRENCY WITH SELECTED UNIT
+   PDF CURRENCY
+   ALWAYS DISPLAY ACTUAL INDIAN RUPEES
 ========================================================= */
 
 function formatPDFLoanCurrency(
-    value,
-    displayUnit
+    value
 ) {
 
     const amount =
@@ -323,97 +314,8 @@ function formatPDFLoanCurrency(
         );
 
 
-    /* =====================================================
-       RUPEES
-    ===================================================== */
-
-    if (
-        !displayUnit ||
-        displayUnit.multiplier === 1
-    ) {
-
-        return formatPDFCurrency(
-            amount
-        );
-
-    }
-
-
-    /* =====================================================
-       CONVERT TO SELECTED UNIT
-    ===================================================== */
-
-    const converted =
-        amount /
-        displayUnit.multiplier;
-
-
-    /* =====================================================
-       FORMAT NUMBER
-    ===================================================== */
-
-    const formatted =
-        new Intl.NumberFormat(
-            "en-IN",
-            {
-                minimumFractionDigits:
-                    0,
-
-                maximumFractionDigits:
-                    2
-            }
-        ).format(
-            converted
-        );
-
-
-    /* =====================================================
-       GET UNIT LABEL
-    ===================================================== */
-
-    const label =
-        String(
-            displayUnit.label ||
-            ""
-        ).trim();
-
-
-    const normalizedLabel =
-        label.toLowerCase();
-
-
-    /* =====================================================
-       INDIAN UNITS
-    ===================================================== */
-
-    if (
-        normalizedLabel === "lakhs" ||
-        normalizedLabel === "crores"
-    ) {
-
-        return `INR ${formatted} ${label}`;
-
-    }
-
-
-    /* =====================================================
-       INTERNATIONAL UNITS
-    ===================================================== */
-
-    if (
-        normalizedLabel === "million" ||
-        normalizedLabel === "billion"
-    ) {
-
-        return `$${formatted} ${label}`;
-
-    }
-
-
-    /* =====================================================
-       FALLBACK
-    ===================================================== */
-
-    return `INR ${formatted} ${label}`;
+    return formatPDFCurrency(
+        amount
+    );
 
 }
