@@ -49,18 +49,31 @@ export async function downloadAmortizationPDF(
     ===================================================== */
 
     const originalText =
-        button.textContent;
+        button?.textContent || "Download PDF";
 
 
-    button.disabled =
-        true;
+    if (button) {
 
+        button.disabled = true;
 
-    button.textContent =
-        "Preparing PDF...";
+        button.textContent =
+            "Preparing PDF...";
+
+    }
 
 
     try {
+
+        /* =================================================
+           DEBUG
+           Remove later if not needed
+        ================================================= */
+
+        console.log(
+            "PDF displayUnit:",
+            displayUnit
+        );
+
 
         /* =================================================
            PDF TABLE ROWS
@@ -75,17 +88,20 @@ export async function downloadAmortizationPDF(
 
                     principal:
                         formatPDFLoanCurrency(
-                            row.principal
+                            row.principal,
+                            displayUnit
                         ),
 
                     interest:
                         formatPDFLoanCurrency(
-                            row.interest
+                            row.interest,
+                            displayUnit
                         ),
 
                     balance:
                         formatPDFLoanCurrency(
-                            row.balance
+                            row.balance,
+                            displayUnit
                         )
 
                 })
@@ -104,7 +120,8 @@ export async function downloadAmortizationPDF(
 
                 value:
                     formatPDFLoanCurrency(
-                        loan.principal
+                        loan.principal,
+                        displayUnit
                     )
             },
 
@@ -130,7 +147,8 @@ export async function downloadAmortizationPDF(
 
                 value:
                     formatPDFLoanCurrency(
-                        emi
+                        emi,
+                        displayUnit
                     )
             },
 
@@ -140,7 +158,8 @@ export async function downloadAmortizationPDF(
 
                 value:
                     formatPDFLoanCurrency(
-                        totalInterest
+                        totalInterest,
+                        displayUnit
                     )
             },
 
@@ -150,7 +169,8 @@ export async function downloadAmortizationPDF(
 
                 value:
                     formatPDFLoanCurrency(
-                        totalRepayment
+                        totalRepayment,
+                        displayUnit
                     )
             }
 
@@ -175,7 +195,8 @@ export async function downloadAmortizationPDF(
         const subtitle =
             `${loanName} • ` +
             `${formatPDFLoanCurrency(
-                loan.principal
+                loan.principal,
+                displayUnit
             )} • ` +
             `${loan.rate}% p.a. • ` +
             `${loan.years} years`;
@@ -259,7 +280,9 @@ export async function downloadAmortizationPDF(
                         loan.years,
 
                     displayUnit:
-                        "Rupees"
+                        getDisplayUnitLabel(
+                            displayUnit
+                        )
 
                 }
 
@@ -287,12 +310,14 @@ export async function downloadAmortizationPDF(
            RESTORE BUTTON
         ================================================= */
 
-        button.disabled =
-            false;
+        if (button) {
 
+            button.disabled = false;
 
-        button.textContent =
-            originalText;
+            button.textContent =
+                originalText;
+
+        }
 
     }
 
@@ -301,21 +326,545 @@ export async function downloadAmortizationPDF(
 
 /* =========================================================
    PDF CURRENCY
-   ALWAYS DISPLAY ACTUAL INDIAN RUPEES
-========================================================= */
+   SUPPORTS:
+   - Object
+   - Number
+   - String
+   ========================================================= */
 
 function formatPDFLoanCurrency(
-    value
+    value,
+    displayUnit
 ) {
 
     const amount =
-        Number(
-            value || 0
+        Number(value || 0);
+
+
+    /* =====================================================
+       NORMALIZE DISPLAY UNIT
+    ===================================================== */
+
+    const unit =
+        normalizeDisplayUnit(
+            displayUnit
         );
 
 
-    return formatPDFCurrency(
-        amount
+    /* =====================================================
+       RUPEES
+    ===================================================== */
+
+    if (
+        unit.multiplier === 1
+    ) {
+
+        return formatPDFCurrency(
+            amount
+        );
+
+    }
+
+
+    /* =====================================================
+       CONVERT
+    ===================================================== */
+
+    const converted =
+        amount /
+        unit.multiplier;
+
+
+    /* =====================================================
+       FORMAT
+    ===================================================== */
+
+    const formatted =
+        new Intl.NumberFormat(
+            "en-IN",
+            {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            }
+        ).format(
+            converted
+        );
+
+
+    /* =====================================================
+       INDIAN UNITS
+    ===================================================== */
+
+    if (
+        unit.type === "lakhs"
+    ) {
+
+        return `₹${formatted} Lakhs`;
+
+    }
+
+
+    if (
+        unit.type === "crores"
+    ) {
+
+        return `₹${formatted} Crores`;
+
+    }
+
+
+    if (
+        unit.type === "thousands"
+    ) {
+
+        return `₹${formatted} Thousands`;
+
+    }
+
+
+    if (
+        unit.type === "millions"
+    ) {
+
+        return `₹${formatted} Millions`;
+
+    }
+
+
+    if (
+        unit.type === "billions"
+    ) {
+
+        return `₹${formatted} Billions`;
+
+    }
+
+
+    /* =====================================================
+       FALLBACK
+    ===================================================== */
+
+    return `₹${formatted} ${unit.label}`;
+
+}
+
+
+/* =========================================================
+   NORMALIZE DISPLAY UNIT
+========================================================= */
+
+function normalizeDisplayUnit(
+    displayUnit
+) {
+
+    /* =====================================================
+       OBJECT
+    ===================================================== */
+
+    if (
+        displayUnit &&
+        typeof displayUnit === "object"
+    ) {
+
+        const multiplier =
+            Number(
+                displayUnit.multiplier
+            );
+
+
+        const label =
+            String(
+                displayUnit.label || ""
+            ).trim();
+
+
+        if (
+            Number.isFinite(multiplier) &&
+            multiplier > 0
+        ) {
+
+            return {
+                multiplier,
+                label,
+                type:
+                    detectUnitType(
+                        label,
+                        multiplier
+                    )
+            };
+
+        }
+
+    }
+
+
+    /* =====================================================
+       NUMBER
+       Example:
+       1
+       1000
+       100000
+       10000000
+    ===================================================== */
+
+    if (
+        typeof displayUnit === "number"
+    ) {
+
+        return normalizeMultiplier(
+            displayUnit
+        );
+
+    }
+
+
+    /* =====================================================
+       STRING
+       Example:
+       "Lakhs"
+       "Crores"
+       "100000"
+    ===================================================== */
+
+    if (
+        typeof displayUnit === "string"
+    ) {
+
+        const trimmed =
+            displayUnit
+                .trim();
+
+
+        const numeric =
+            Number(
+                trimmed
+            );
+
+
+        if (
+            Number.isFinite(numeric) &&
+            numeric > 0
+        ) {
+
+            return normalizeMultiplier(
+                numeric
+            );
+
+        }
+
+
+        const normalized =
+            trimmed.toLowerCase();
+
+
+        if (
+            normalized === "thousand" ||
+            normalized === "thousands"
+        ) {
+
+            return {
+                multiplier: 1000,
+                label: "Thousands",
+                type: "thousands"
+            };
+
+        }
+
+
+        if (
+            normalized === "lakh" ||
+            normalized === "lakhs"
+        ) {
+
+            return {
+                multiplier: 100000,
+                label: "Lakhs",
+                type: "lakhs"
+            };
+
+        }
+
+
+        if (
+            normalized === "crore" ||
+            normalized === "crores"
+        ) {
+
+            return {
+                multiplier: 10000000,
+                label: "Crores",
+                type: "crores"
+            };
+
+        }
+
+
+        if (
+            normalized === "million" ||
+            normalized === "millions"
+        ) {
+
+            return {
+                multiplier: 1000000,
+                label: "Millions",
+                type: "millions"
+            };
+
+        }
+
+
+        if (
+            normalized === "billion" ||
+            normalized === "billions"
+        ) {
+
+            return {
+                multiplier: 1000000000,
+                label: "Billions",
+                type: "billions"
+            };
+
+        }
+
+    }
+
+
+    /* =====================================================
+       DEFAULT
+    ===================================================== */
+
+    return {
+        multiplier: 1,
+        label: "Rupees",
+        type: "rupees"
+    };
+
+}
+
+
+/* =========================================================
+   NORMALIZE MULTIPLIER
+========================================================= */
+
+function normalizeMultiplier(
+    multiplier
+) {
+
+    if (
+        multiplier === 1000
+    ) {
+
+        return {
+            multiplier: 1000,
+            label: "Thousands",
+            type: "thousands"
+        };
+
+    }
+
+
+    if (
+        multiplier === 100000
+    ) {
+
+        return {
+            multiplier: 100000,
+            label: "Lakhs",
+            type: "lakhs"
+        };
+
+    }
+
+
+    if (
+        multiplier === 10000000
+    ) {
+
+        return {
+            multiplier: 10000000,
+            label: "Crores",
+            type: "crores"
+        };
+
+    }
+
+
+    if (
+        multiplier === 1000000
+    ) {
+
+        return {
+            multiplier: 1000000,
+            label: "Millions",
+            type: "millions"
+        };
+
+    }
+
+
+    if (
+        multiplier === 1000000000
+    ) {
+
+        return {
+            multiplier: 1000000000,
+            label: "Billions",
+            type: "billions"
+        };
+
+    }
+
+
+    return {
+        multiplier: 1,
+        label: "Rupees",
+        type: "rupees"
+    };
+
+}
+
+
+/* =========================================================
+   DETECT UNIT TYPE
+========================================================= */
+
+function detectUnitType(
+    label,
+    multiplier
+) {
+
+    const normalized =
+        String(
+            label || ""
+        )
+        .toLowerCase()
+        .trim();
+
+
+    if (
+        normalized.includes("lakh")
+    ) {
+
+        return "lakhs";
+
+    }
+
+
+    if (
+        normalized.includes("crore")
+    ) {
+
+        return "crores";
+
+    }
+
+
+    if (
+        normalized.includes("thousand")
+    ) {
+
+        return "thousands";
+
+    }
+
+
+    if (
+        normalized.includes("million")
+    ) {
+
+        return "millions";
+
+    }
+
+
+    if (
+        normalized.includes("billion")
+    ) {
+
+        return "billions";
+
+    }
+
+
+    return detectUnitTypeFromMultiplier(
+        multiplier
     );
+
+}
+
+
+/* =========================================================
+   DETECT FROM MULTIPLIER
+========================================================= */
+
+function detectUnitTypeFromMultiplier(
+    multiplier
+) {
+
+    if (
+        multiplier === 1000
+    ) {
+
+        return "thousands";
+
+    }
+
+
+    if (
+        multiplier === 100000
+    ) {
+
+        return "lakhs";
+
+    }
+
+
+    if (
+        multiplier === 10000000
+    ) {
+
+        return "crores";
+
+    }
+
+
+    if (
+        multiplier === 1000000
+    ) {
+
+        return "millions";
+
+    }
+
+
+    if (
+        multiplier === 1000000000
+    ) {
+
+        return "billions";
+
+    }
+
+
+    return "rupees";
+
+}
+
+
+/* =========================================================
+   DISPLAY UNIT LABEL
+========================================================= */
+
+function getDisplayUnitLabel(
+    displayUnit
+) {
+
+    const unit =
+        normalizeDisplayUnit(
+            displayUnit
+        );
+
+
+    return unit.label;
 
 }
