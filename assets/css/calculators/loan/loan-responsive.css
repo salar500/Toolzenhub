@@ -1,10 +1,12 @@
 /* =========================================================
    MOBILE
+
+
 ========================================================= */
 
 @media (max-width: 900px) {
 
-    .calculator-intro {
+    .calculator-intro {   
         align-items: flex-start;
         flex-direction: column;
     }
