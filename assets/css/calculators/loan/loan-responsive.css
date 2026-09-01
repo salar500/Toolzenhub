@@ -74,41 +74,4 @@
         grid-template-columns: 1fr;
     }
 
-}
-
-
-/* =========================================================
-   MODAL MOBILE
-========================================================= */
-
-@media (max-width: 650px) {
-
-    .loan-modal-dialog {
-        width: calc(100% - 16px);
-        height: 94vh;
-        margin-top: 3vh;
-        border-radius: 12px;
-    }
-
-    .loan-modal-header {
-        padding: 18px;
-    }
-
-    .loan-modal-header h2 {
-        font-size: 20px;
-    }
-
-    .loan-modal-summary {
-        grid-template-columns: 1fr;
-        padding: 12px 18px;
-    }
-
-    .loan-modal-table-wrapper {
-        overflow-x: auto;
-    }
-
-    .loan-modal-footer {
-        padding: 13px 18px;
-    }
-
-}
+  }
