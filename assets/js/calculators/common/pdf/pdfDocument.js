@@ -1,240 +1,134 @@
 /* =========================================================
    ToolZen Hub
-   Professional PDF Page Header
+   PDF Document
 ========================================================= */
 
 import {
-    PDF_PAGE,
-    PDF_COLORS,
-    PDF_FONTS,
-    PDF_HEADER
-} from "./pdfStyles.js";
+    loadPdfLibraries
+} from "./pdfLoader.js";
 
 
 /* =========================================================
-   ADD REPEATING PAGE HEADER
+   CREATE PDF DOCUMENT
 ========================================================= */
 
-export function addPDFPageHeader(
-    doc,
-    pageNumber
-) {
+export async function createPDFDocument() {
 
     /*
-     * Page 1 already has the main report title.
-     *
-     * Therefore the compact repeating header starts
-     * from page 2.
+     * Load jsPDF + AutoTable
      */
+    const {
+        jsPDF
+    } =
+        await loadPdfLibraries();
+
+
+    /*
+     * Create document
+     */
+    const doc =
+        new jsPDF({
+
+            orientation: "portrait",
+
+            unit: "mm",
+
+            format: "a4"
+
+        });
+
+
+    /*
+     * Load Unicode font
+     *
+     * Noto Sans supports the Indian Rupee symbol (₹).
+     */
+    const fontURL =
+        "https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts@main/hinted/ttf/NotoSans/NotoSans-Regular.ttf";
+
+
+    const response =
+        await fetch(
+            fontURL
+        );
+
+
     if (
-        pageNumber <= 1
+        !response.ok
     ) {
 
-        return;
+        throw new Error(
+            "Failed to load PDF Unicode font."
+        );
 
     }
 
 
-    if (
-        !PDF_HEADER.enabled
+    const fontBuffer =
+        await response.arrayBuffer();
+
+
+    const fontBytes =
+        new Uint8Array(
+            fontBuffer
+        );
+
+
+    let binary =
+        "";
+
+
+    const chunkSize =
+        0x8000;
+
+
+    for (
+        let i = 0;
+        i < fontBytes.length;
+        i += chunkSize
     ) {
 
-        return;
+        binary += String.fromCharCode(
+            ...fontBytes.subarray(
+                i,
+                i + chunkSize
+            )
+        );
 
     }
 
 
-    const pageWidth =
-        doc.internal.pageSize.getWidth();
+    const base64 =
+        btoa(
+            binary
+        );
 
 
-    /* =====================================================
-       BRAND
-    ===================================================== */
+    /*
+     * Register Unicode font
+     */
+    doc.addFileToVFS(
+        "NotoSans-Regular.ttf",
+        base64
+    );
 
+
+    doc.addFont(
+        "NotoSans-Regular.ttf",
+        "NotoSans",
+        "normal"
+    );
+
+
+    /*
+     * Use Unicode font throughout PDF
+     */
     doc.setFont(
         "NotoSans",
         "normal"
     );
 
 
-    doc.setFontSize(
-        PDF_FONTS.pageHeader
-    );
-
-
-    doc.setTextColor(
-        ...PDF_COLORS.gray
-    );
-
-
-    doc.text(
-        "TOOLZEN HUB",
-        PDF_PAGE.margin,
-        PDF_HEADER.top
-    );
-
-
-    /* =====================================================
-       REPORT TITLE
-    ===================================================== */
-
-    doc.setFont(
-        "NotoSans",
-        "normal"
-    );
-
-
-    doc.setFontSize(
-        PDF_FONTS.pageHeaderTitle
-    );
-
-
-    doc.setTextColor(
-        ...PDF_COLORS.dark
-    );
-
-
-    doc.text(
-
-        String(
-            doc.__toolzenTitle ||
-            "ToolZen Hub Report"
-        ),
-
-        PDF_PAGE.margin,
-
-        PDF_HEADER.titleY
-
-    );
-
-
-    /* =====================================================
-       SUBTITLE
-    ===================================================== */
-
-    if (
-        doc.__toolzenSubtitle
-    ) {
-
-        doc.setFont(
-            "NotoSans",
-            "normal"
-        );
-
-
-        doc.setFontSize(
-            PDF_FONTS.pageHeader
-        );
-
-
-        doc.setTextColor(
-            ...PDF_COLORS.gray
-        );
-
-
-        const availableWidth =
-            pageWidth -
-            PDF_PAGE.margin * 2 -
-            25;
-
-
-        const subtitleLines =
-            doc.splitTextToSize(
-
-                String(
-                    doc.__toolzenSubtitle
-                ),
-
-                availableWidth
-
-            );
-
-
-        /*
-         * Only one compact subtitle line
-         * is displayed in the repeating header.
-         */
-        doc.text(
-
-            subtitleLines[0],
-
-            PDF_PAGE.margin,
-
-            PDF_HEADER.subtitleY
-
-        );
-
-    }
-
-
-    /* =====================================================
-       PAGE NUMBER
-    ===================================================== */
-
-    doc.setFont(
-        "NotoSans",
-        "normal"
-    );
-
-
-    doc.setFontSize(
-        PDF_FONTS.pageHeader
-    );
-
-
-    doc.setTextColor(
-        ...PDF_COLORS.gray
-    );
-
-
-    doc.text(
-
-        `Page ${pageNumber}`,
-
-        pageWidth -
-        PDF_PAGE.margin,
-
-        PDF_HEADER.top,
-
-        {
-
-            align:
-                "right"
-
-        }
-
-    );
-
-
-    /* =====================================================
-       HEADER SEPARATOR
-    ===================================================== */
-
-    doc.setDrawColor(
-        ...(
-            PDF_COLORS.headerLine ||
-            PDF_COLORS.border
-        )
-    );
-
-
-    doc.setLineWidth(
-        0.25
-    );
-
-
-    doc.line(
-
-        PDF_PAGE.margin,
-
-        PDF_HEADER.lineY,
-
-        pageWidth -
-        PDF_PAGE.margin,
-
-        PDF_HEADER.lineY
-
-    );
+    return doc;
 
 }
