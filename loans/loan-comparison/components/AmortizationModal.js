@@ -1,8 +1,4 @@
 import {
-    formatINR
-} from "../../../assets/js/calculators/common/formatter.js";
-
-import {
     renderAmortizationModal
 } from "./AmortizationModalView.js";
 
@@ -81,13 +77,19 @@ export function openAmortizationModal(
 
 
     /* =====================================================
-       GET DISPLAY UNIT
+       GET SELECTED DISPLAY UNIT
     ===================================================== */
 
     const displayUnit =
         getLoanDisplayUnit(
             loanName
         );
+
+
+    console.log(
+        "Amortization display unit:",
+        displayUnit
+    );
 
 
     /* =====================================================
@@ -118,6 +120,10 @@ export function openAmortizationModal(
     modal.className =
         "loan-amortization-modal is-open";
 
+
+    /* =====================================================
+       RENDER MODAL VIEW
+    ===================================================== */
 
     modal.innerHTML =
         renderAmortizationModal({
@@ -303,4 +309,4 @@ function handleEscape(
 
     }
 
-}
+        }
