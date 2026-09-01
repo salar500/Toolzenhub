@@ -38,14 +38,16 @@ export const PDF_COLORS = {
     white: [255, 255, 255],
 
     /*
-     * Very light watermark.
+     * Extremely light watermark.
      *
-     * The watermark is intentionally subtle.
+     * The watermark is intentionally subtle so
+     * it remains visible without competing with
+     * report content.
      */
-    watermark: [226, 232, 240],
+    watermark: [224, 229, 236],
 
     /*
-     * Professional repeating page header.
+     * Professional repeating header line.
      */
     headerLine: [226, 232, 240]
 
@@ -68,8 +70,14 @@ export const PDF_FONTS = {
 
     small: 8,
 
-    watermark: 34,
+    /*
+     * Large watermark.
+     */
+    watermark: 38,
 
+    /*
+     * Repeating page header.
+     */
     pageHeader: 8,
 
     pageHeaderTitle: 10
@@ -78,7 +86,7 @@ export const PDF_FONTS = {
 
 
 /* =========================================================
-   WATERMARK
+   DIAGONAL WATERMARK
 ========================================================= */
 
 export const PDF_WATERMARK = {
@@ -87,11 +95,15 @@ export const PDF_WATERMARK = {
         "TOOLZEN HUB",
 
     /*
-     * Diagonal direction.
+     * Diagonal angle.
      */
     angle:
         35,
 
+    /*
+     * Large enough to cross the central
+     * portion of an A4 page.
+     */
     fontSize:
         PDF_FONTS.watermark,
 
@@ -108,26 +120,37 @@ export const PDF_WATERMARK = {
 export const PDF_HEADER = {
 
     /*
-     * Header is only shown on pages after
-     * the first report page.
+     * Enabled for pages after page 1.
      */
     enabled:
         true,
 
+    /*
+     * Small brand line.
+     */
     top:
         10,
 
+    /*
+     * Report title.
+     */
     titleY:
         16,
 
+    /*
+     * Report subtitle.
+     */
     subtitleY:
         22,
 
+    /*
+     * Separator line.
+     */
     lineY:
         27,
 
     /*
-     * Space reserved above tables.
+     * Table must start below the header.
      */
     tableTop:
         32
