@@ -1,6 +1,6 @@
 import {
-    formatLoanCurrency
-} from "./AmortizationHelpers.js";
+    formatINR
+} from "../../../assets/js/calculators/common/formatter.js";
 
 
 /* =========================================================
@@ -63,9 +63,8 @@ export function renderAmortizationModal(
 
                     <p>
 
-                        ${formatLoanCurrency(
-                            loan.principal,
-                            displayUnit
+                        ${formatINR(
+                            loan.principal
                         )}
 
                         •
@@ -110,9 +109,8 @@ export function renderAmortizationModal(
 
 
                     <strong>
-                        ${formatLoanCurrency(
-                            emi,
-                            displayUnit
+                        ${formatINR(
+                            emi
                         )}
                     </strong>
 
@@ -129,9 +127,8 @@ export function renderAmortizationModal(
 
 
                     <strong>
-                        ${formatLoanCurrency(
-                            totalInterest,
-                            displayUnit
+                        ${formatINR(
+                            totalInterest
                         )}
                     </strong>
 
@@ -148,9 +145,8 @@ export function renderAmortizationModal(
 
 
                     <strong>
-                        ${formatLoanCurrency(
-                            totalRepayment,
-                            displayUnit
+                        ${formatINR(
+                            totalRepayment
                         )}
                     </strong>
 
@@ -218,25 +214,22 @@ export function renderAmortizationModal(
 
 
                                                     <td>
-                                                        ${formatLoanCurrency(
-                                                            row.principal,
-                                                            displayUnit
+                                                        ${formatINR(
+                                                            row.principal
                                                         )}
                                                     </td>
 
 
                                                     <td>
-                                                        ${formatLoanCurrency(
-                                                            row.interest,
-                                                            displayUnit
+                                                        ${formatINR(
+                                                            row.interest
                                                         )}
                                                     </td>
 
 
                                                     <td>
-                                                        ${formatLoanCurrency(
-                                                            row.balance,
-                                                            displayUnit
+                                                        ${formatINR(
+                                                            row.balance
                                                         )}
                                                     </td>
 
