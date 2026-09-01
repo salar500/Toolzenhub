@@ -110,8 +110,8 @@ export function addPDFTitle(
 
 
     doc.setFont(
-        "helvetica",
-        "bold"
+        "NotoSans",
+        "normal"
     );
 
 
@@ -140,7 +140,7 @@ export function addPDFTitle(
     ) {
 
         doc.setFont(
-            "helvetica",
+            "NotoSans",
             "normal"
         );
 
@@ -248,7 +248,7 @@ export function addPDFSummary(
             ================================================= */
 
             doc.setFont(
-                "helvetica",
+                "NotoSans",
                 "normal"
             );
 
@@ -279,8 +279,8 @@ export function addPDFSummary(
             ================================================= */
 
             doc.setFont(
-                "helvetica",
-                "bold"
+                "NotoSans",
+                "normal"
             );
 
 
@@ -437,24 +437,8 @@ export function addPDFTable(
 
 
                 /*
-                 * IMPORTANT:
-                 *
                  * Draw watermark FIRST.
-                 *
-                 * AutoTable then draws its table content
-                 * over the watermark.
-                 *
-                 * This gives the correct visual hierarchy:
-                 *
-                 * PAGE
-                 *   ↓
-                 * WATERMARK
-                 *   ↓
-                 * TABLE
-                 *   ↓
-                 * TEXT / BORDERS
                  */
-
                 drawPDFWatermark(
                     doc
                 );
@@ -478,7 +462,10 @@ export function addPDFTable(
         styles: {
 
             font:
-                "helvetica",
+                "NotoSans",
+
+            fontStyle:
+                "normal",
 
             fontSize:
                 PDF_FONTS.small,
@@ -495,13 +482,6 @@ export function addPDFTable(
             lineWidth:
                 0.2,
 
-            /*
-             * Keep table cells visually clean.
-             *
-             * The watermark is extremely light, so it
-             * remains visible in the central page area
-             * without competing with table text.
-             */
             fillColor:
                 PDF_COLORS.white
 
@@ -520,8 +500,11 @@ export function addPDFTable(
             textColor:
                 PDF_COLORS.white,
 
+            font:
+                "NotoSans",
+
             fontStyle:
-                "bold"
+                "normal"
 
         },
 
