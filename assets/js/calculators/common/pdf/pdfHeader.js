@@ -53,8 +53,8 @@ export function addPDFPageHeader(
     ===================================================== */
 
     doc.setFont(
-        "helvetica",
-        "bold"
+        "NotoSans",
+        "normal"
     );
 
 
@@ -80,8 +80,8 @@ export function addPDFPageHeader(
     ===================================================== */
 
     doc.setFont(
-        "helvetica",
-        "bold"
+        "NotoSans",
+        "normal"
     );
 
 
@@ -118,7 +118,7 @@ export function addPDFPageHeader(
     ) {
 
         doc.setFont(
-            "helvetica",
+            "NotoSans",
             "normal"
         );
 
@@ -173,7 +173,7 @@ export function addPDFPageHeader(
     ===================================================== */
 
     doc.setFont(
-        "helvetica",
+        "NotoSans",
         "normal"
     );
 
