@@ -22,6 +22,10 @@ export function getLoanDisplayUnit(
         "";
 
 
+    /* =====================================================
+       DETERMINE LOAN PREFIX
+    ===================================================== */
+
     if (
         normalizedName.includes("loan a")
     ) {
@@ -39,6 +43,10 @@ export function getLoanDisplayUnit(
     }
 
 
+    /* =====================================================
+       FALLBACK
+    ===================================================== */
+
     if (!prefix) {
 
         return {
@@ -47,12 +55,16 @@ export function getLoanDisplayUnit(
                 1,
 
             label:
-                "INR"
+                "Rupees"
 
         };
 
     }
 
+
+    /* =====================================================
+       FIND SELECT
+    ===================================================== */
 
     const unitElement =
         document.querySelector(
@@ -62,24 +74,37 @@ export function getLoanDisplayUnit(
 
     if (!unitElement) {
 
+        console.warn(
+            `Loan ${prefix.toUpperCase()} unit selector not found.`
+        );
+
+
         return {
 
             multiplier:
                 1,
 
             label:
-                "INR"
+                "Rupees"
 
         };
 
     }
 
 
+    /* =====================================================
+       GET MULTIPLIER
+    ===================================================== */
+
     const multiplier =
         Number(
             unitElement.value
         );
 
+
+    /* =====================================================
+       GET SELECTED LABEL
+    ===================================================== */
 
     const selectedOption =
         unitElement.options[
@@ -93,16 +118,26 @@ export function getLoanDisplayUnit(
                 selectedOption.textContent ||
                 ""
             ).trim()
-            : "INR";
+            : "Rupees";
+
+
+    /* =====================================================
+       VALIDATE MULTIPLIER
+    ===================================================== */
+
+    const safeMultiplier =
+        Number.isFinite(multiplier) &&
+        multiplier > 0
+
+            ? multiplier
+
+            : 1;
 
 
     return {
 
         multiplier:
-            Number.isFinite(multiplier) &&
-            multiplier > 0
-                ? multiplier
-                : 1,
+            safeMultiplier,
 
         label
 
@@ -112,7 +147,7 @@ export function getLoanDisplayUnit(
 
 
 /* =========================================================
-   FORMAT LOAN CURRENCY
+   FORMAT LOAN CURRENCY FOR SCREEN
 ========================================================= */
 
 export function formatLoanCurrency(
@@ -126,9 +161,12 @@ export function formatLoanCurrency(
         );
 
 
+    /* =====================================================
+       RUPEES
+    ===================================================== */
+
     if (
         !displayUnit ||
-        !displayUnit.multiplier ||
         displayUnit.multiplier === 1
     ) {
 
@@ -139,10 +177,18 @@ export function formatLoanCurrency(
     }
 
 
+    /* =====================================================
+       CONVERT TO SELECTED UNIT
+    ===================================================== */
+
     const converted =
         amount /
         displayUnit.multiplier;
 
+
+    /* =====================================================
+       FORMAT NUMBER
+    ===================================================== */
 
     const formatted =
         new Intl.NumberFormat(
@@ -159,6 +205,10 @@ export function formatLoanCurrency(
         );
 
 
+    /* =====================================================
+       DISPLAY
+    ===================================================== */
+
     return `₹${formatted} ${displayUnit.label}`;
 
 }
@@ -173,18 +223,45 @@ export function getAmortizationTotals(
     schedule
 ) {
 
+    if (
+        !Array.isArray(schedule) ||
+        schedule.length === 0
+    ) {
+
+        return {
+
+            emi:
+                0,
+
+            totalInterest:
+                0,
+
+            totalRepayment:
+                Number(
+                    loan?.principal || 0
+                )
+
+        };
+
+    }
+
+
+    /* =====================================================
+       EMI
+    ===================================================== */
+
     const emi =
-        schedule.length > 0
+        Number(
+            schedule[0]?.principal || 0
+        ) +
+        Number(
+            schedule[0]?.interest || 0
+        );
 
-            ? Number(
-                schedule[0].principal || 0
-            ) +
-              Number(
-                schedule[0].interest || 0
-            )
 
-            : 0;
-
+    /* =====================================================
+       TOTAL INTEREST
+    ===================================================== */
 
     const totalInterest =
         schedule.reduce(
@@ -196,7 +273,7 @@ export function getAmortizationTotals(
                 return (
                     total +
                     Number(
-                        row.interest || 0
+                        row?.interest || 0
                     )
                 );
 
@@ -205,9 +282,13 @@ export function getAmortizationTotals(
         );
 
 
+    /* =====================================================
+       TOTAL REPAYMENT
+    ===================================================== */
+
     const totalRepayment =
         Number(
-            loan.principal || 0
+            loan?.principal || 0
         ) +
         totalInterest;
 
