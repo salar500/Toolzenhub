@@ -38,12 +38,16 @@ export const PDF_COLORS = {
     white: [255, 255, 255],
 
     /*
-     * Very light watermark color.
+     * Very light watermark.
      *
-     * It is intentionally subtle so it does not interfere
-     * with the amortization table.
+     * The watermark is intentionally subtle.
      */
-    watermark: [226, 232, 240]
+    watermark: [226, 232, 240],
+
+    /*
+     * Professional repeating page header.
+     */
+    headerLine: [226, 232, 240]
 
 };
 
@@ -64,7 +68,11 @@ export const PDF_FONTS = {
 
     small: 8,
 
-    watermark: 34
+    watermark: 34,
+
+    pageHeader: 8,
+
+    pageHeaderTitle: 10
 
 };
 
@@ -78,6 +86,9 @@ export const PDF_WATERMARK = {
     text:
         "TOOLZEN HUB",
 
+    /*
+     * Diagonal direction.
+     */
     angle:
         35,
 
@@ -86,6 +97,40 @@ export const PDF_WATERMARK = {
 
     color:
         PDF_COLORS.watermark
+
+};
+
+
+/* =========================================================
+   REPEATING PAGE HEADER
+========================================================= */
+
+export const PDF_HEADER = {
+
+    /*
+     * Header is only shown on pages after
+     * the first report page.
+     */
+    enabled:
+        true,
+
+    top:
+        10,
+
+    titleY:
+        16,
+
+    subtitleY:
+        22,
+
+    lineY:
+        27,
+
+    /*
+     * Space reserved above tables.
+     */
+    tableTop:
+        32
 
 };
 
