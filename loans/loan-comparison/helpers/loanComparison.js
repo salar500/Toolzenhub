@@ -5,6 +5,7 @@ import {
     calculateAmortization
 } from "../../../assets/js/calculators/formulas/loan.js";
 
+
 export function getLoanData(prefix) {
 
     const amountElement =
@@ -42,7 +43,9 @@ export function getLoanData(prefix) {
         return {
             principal: 0,
             rate: 0,
-            years: 0
+            years: 0,
+            unitMultiplier: 1,
+            unitLabel: "Rupees"
         };
 
     }
@@ -51,24 +54,65 @@ export function getLoanData(prefix) {
     const amount =
         Number(amountElement.value);
 
+
     const unit =
         Number(unitElement.value);
 
+
     const rate =
         Number(rateElement.value);
+
 
     const years =
         Number(yearsElement.value);
 
 
+    /*
+     * Keep the user's selected display unit.
+     *
+     * The actual calculation continues to use
+     * the full INR principal.
+     */
+    const selectedUnitOption =
+        unitElement.options[
+            unitElement.selectedIndex
+        ];
+
+
+    const unitLabel =
+        selectedUnitOption
+            ? String(
+                selectedUnitOption.textContent
+            ).trim()
+            : "Rupees";
+
+
     return {
 
+        /*
+         * IMPORTANT:
+         *
+         * This remains the actual INR value.
+         *
+         * Do NOT change this.
+         */
         principal:
             amount * unit,
 
         rate,
 
-        years
+        years,
+
+
+        /*
+         * Store the selected unit so the UI
+         * and amortization modal can display
+         * values in the same denomination.
+         */
+        unitMultiplier:
+            unit || 1,
+
+        unitLabel
 
     };
 
