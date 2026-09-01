@@ -8,7 +8,8 @@ import {
     PDF_COLORS,
     PDF_FONTS,
     PDF_WATERMARK,
-    PDF_FOOTER
+    PDF_FOOTER,
+    PDF_HEADER
 } from "./pdfStyles.js";
 
 
@@ -71,6 +72,25 @@ export function addPDFTitle(
     title,
     subtitle = ""
 ) {
+
+    /*
+     * Store title information on the document.
+     *
+     * This allows later PDF pages to use the
+     * same professional header without changing
+     * pdfGenerator.js.
+     */
+    doc.__toolzenTitle =
+        String(
+            title || ""
+        );
+
+
+    doc.__toolzenSubtitle =
+        String(
+            subtitle || ""
+        );
+
 
     doc.setTextColor(
         ...PDF_COLORS.dark
@@ -178,7 +198,6 @@ export function addPDFSummary(
      * The report already has a title and the
      * summary information is self-explanatory.
      */
-
 
     let y =
         44;
@@ -311,83 +330,302 @@ export function addPDFWatermark(
         );
 
 
-        const pageWidth =
-            doc.internal.pageSize.getWidth();
+        drawWatermarkOnCurrentPage(
+            doc
+        );
+
+    }
+
+}
 
 
-        const pageHeight =
-            doc.internal.pageSize.getHeight();
+/* =========================================================
+   DRAW WATERMARK ON CURRENT PAGE
+========================================================= */
+
+function drawWatermarkOnCurrentPage(
+    doc
+) {
+
+    const pageWidth =
+        doc.internal.pageSize.getWidth();
 
 
-        /*
-         * Save the current graphics state
-         * when supported by the jsPDF version.
-         */
-        if (
-            typeof doc.saveGraphicsState ===
-            "function"
-        ) {
+    const pageHeight =
+        doc.internal.pageSize.getHeight();
 
-            doc.saveGraphicsState();
+
+    /*
+     * Save graphics state when supported.
+     */
+    if (
+        typeof doc.saveGraphicsState ===
+        "function"
+    ) {
+
+        doc.saveGraphicsState();
+
+    }
+
+
+    doc.setFont(
+        "helvetica",
+        "bold"
+    );
+
+
+    doc.setFontSize(
+        PDF_WATERMARK.fontSize
+    );
+
+
+    doc.setTextColor(
+        ...PDF_WATERMARK.color
+    );
+
+
+    /*
+     * Keep the watermark centered.
+     *
+     * It is drawn BEFORE table cells, so table
+     * cells can cover it rather than the watermark
+     * appearing through the table.
+     */
+    doc.text(
+        PDF_WATERMARK.text,
+        pageWidth / 2,
+        pageHeight / 2,
+        {
+
+            angle:
+                PDF_WATERMARK.angle,
+
+            align:
+                "center"
 
         }
+    );
 
+
+    if (
+        typeof doc.restoreGraphicsState ===
+        "function"
+    ) {
+
+        doc.restoreGraphicsState();
+
+    }
+
+}
+
+
+/* =========================================================
+   PROFESSIONAL PAGE HEADER
+========================================================= */
+
+function addPageHeader(
+    doc,
+    pageNumber
+) {
+
+    /*
+     * Never add the repeating header to page 1.
+     *
+     * Page 1 already has the large report title.
+     */
+    if (
+        pageNumber <= 1
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        !PDF_HEADER.enabled
+    ) {
+
+        return;
+
+    }
+
+
+    const pageWidth =
+        doc.internal.pageSize.getWidth();
+
+
+    /*
+     * Header brand
+     */
+    doc.setFont(
+        "helvetica",
+        "bold"
+    );
+
+
+    doc.setFontSize(
+        PDF_FONTS.pageHeader
+    );
+
+
+    doc.setTextColor(
+        ...PDF_COLORS.gray
+    );
+
+
+    doc.text(
+        "TOOLZEN HUB",
+        PDF_PAGE.margin,
+        PDF_HEADER.top
+    );
+
+
+    /*
+     * Report title
+     */
+    doc.setFont(
+        "helvetica",
+        "bold"
+    );
+
+
+    doc.setFontSize(
+        PDF_FONTS.pageHeaderTitle
+    );
+
+
+    doc.setTextColor(
+        ...PDF_COLORS.dark
+    );
+
+
+    doc.text(
+        String(
+            doc.__toolzenTitle ||
+            "ToolZen Hub Report"
+        ),
+        PDF_PAGE.margin,
+        PDF_HEADER.titleY
+    );
+
+
+    /*
+     * Report subtitle
+     */
+    if (
+        doc.__toolzenSubtitle
+    ) {
 
         doc.setFont(
             "helvetica",
-            "bold"
+            "normal"
         );
 
 
         doc.setFontSize(
-            PDF_WATERMARK.fontSize
+            PDF_FONTS.pageHeader
         );
 
 
         doc.setTextColor(
-            ...PDF_WATERMARK.color
+            ...PDF_COLORS.gray
         );
 
 
+        const availableWidth =
+            pageWidth -
+            PDF_PAGE.margin * 2 -
+            25;
+
+
+        const subtitleLines =
+            doc.splitTextToSize(
+                String(
+                    doc.__toolzenSubtitle
+                ),
+                availableWidth
+            );
+
+
         /*
-         * Center of page.
-         */
-        const x =
-            pageWidth / 2;
-
-
-        const y =
-            pageHeight / 2;
-
-
-        /*
-         * jsPDF supports text rotation
-         * through the angle option.
+         * Keep only the first line in the
+         * compact repeating header.
          */
         doc.text(
-            PDF_WATERMARK.text,
-            x,
-            y,
-            {
-                angle:
-                    PDF_WATERMARK.angle,
-
-                align:
-                    "center"
-            }
+            subtitleLines[0],
+            PDF_PAGE.margin,
+            PDF_HEADER.subtitleY
         );
 
-
-        if (
-            typeof doc.restoreGraphicsState ===
-            "function"
-        ) {
-
-            doc.restoreGraphicsState();
-
-        }
-
     }
+
+
+    /*
+     * Page number in header.
+     */
+    doc.setFont(
+        "helvetica",
+        "normal"
+    );
+
+
+    doc.setFontSize(
+        PDF_FONTS.pageHeader
+    );
+
+
+    doc.setTextColor(
+        ...PDF_COLORS.gray
+    );
+
+
+    doc.text(
+        `Page ${pageNumber}`,
+        pageWidth -
+        PDF_PAGE.margin,
+        PDF_HEADER.top,
+        {
+            align:
+                "right"
+        }
+    );
+
+
+    /*
+     * Header separator.
+     */
+    doc.setDrawColor(
+        ...PDF_HEADER_LINE_COLOR()
+    );
+
+
+    doc.setLineWidth(
+        0.25
+    );
+
+
+    doc.line(
+        PDF_PAGE.margin,
+        PDF_HEADER.lineY,
+        pageWidth -
+        PDF_PAGE.margin,
+        PDF_HEADER.lineY
+    );
+
+}
+
+
+/* =========================================================
+   HEADER LINE COLOR
+========================================================= */
+
+function PDF_HEADER_LINE_COLOR() {
+
+    return (
+        PDF_COLORS.headerLine ||
+        PDF_COLORS.border
+    );
 
 }
 
@@ -456,10 +694,15 @@ export function addPDFTable(
 
         body,
 
+
         margin: {
 
+            /*
+             * Reserve room for the professional
+             * repeating header on pages 2+.
+             */
             top:
-                15,
+                PDF_HEADER.tableTop,
 
             bottom:
                 20,
@@ -472,25 +715,47 @@ export function addPDFTable(
 
         },
 
+
         /*
-         * This callback executes whenever AutoTable
-         * starts drawing a page.
+         * AutoTable calls willDrawPage before
+         * drawing the table on each page.
          *
-         * Therefore the watermark is added to:
+         * This means:
          *
-         * Page 1
-         * Page 2
-         * Page 3
-         * ...
+         * 1. Watermark is drawn first.
+         * 2. Header is drawn first.
+         * 3. Table is drawn afterward.
+         *
+         * Therefore the watermark cannot appear
+         * through table cells.
          */
         willDrawPage:
             data => {
 
-                addPageWatermark(
+                const pageNumber =
+                    data.pageNumber ||
+                    1;
+
+
+                /*
+                 * Draw watermark BEFORE table.
+                 */
+                drawWatermarkOnCurrentPage(
                     doc
                 );
 
+
+                /*
+                 * Draw professional header
+                 * on pages 2, 3, 4, etc.
+                 */
+                addPageHeader(
+                    doc,
+                    pageNumber
+                );
+
             },
+
 
         styles: {
 
@@ -510,9 +775,23 @@ export function addPDFTable(
                 PDF_COLORS.border,
 
             lineWidth:
-                0.2
+                0.2,
+
+            /*
+             * IMPORTANT:
+             *
+             * Every table cell receives a solid
+             * white background.
+             *
+             * This prevents the diagonal watermark
+             * from showing inside empty cells or
+             * between table text.
+             */
+            fillColor:
+                PDF_COLORS.white
 
         },
+
 
         headStyles: {
 
@@ -527,6 +806,7 @@ export function addPDFTable(
 
         },
 
+
         alternateRowStyles: {
 
             fillColor:
@@ -534,78 +814,11 @@ export function addPDFTable(
 
         },
 
+
         theme:
             "grid"
 
     });
-
-}
-
-
-/* =========================================================
-   PAGE WATERMARK
-========================================================= */
-
-function addPageWatermark(
-    doc
-) {
-
-    const pageWidth =
-        doc.internal.pageSize.getWidth();
-
-
-    const pageHeight =
-        doc.internal.pageSize.getHeight();
-
-
-    if (
-        typeof doc.saveGraphicsState ===
-        "function"
-    ) {
-
-        doc.saveGraphicsState();
-
-    }
-
-
-    doc.setFont(
-        "helvetica",
-        "bold"
-    );
-
-
-    doc.setFontSize(
-        PDF_WATERMARK.fontSize
-    );
-
-
-    doc.setTextColor(
-        ...PDF_WATERMARK.color
-    );
-
-
-    doc.text(
-        PDF_WATERMARK.text,
-        pageWidth / 2,
-        pageHeight / 2,
-        {
-            angle:
-                PDF_WATERMARK.angle,
-
-            align:
-                "center"
-        }
-    );
-
-
-    if (
-        typeof doc.restoreGraphicsState ===
-        "function"
-    ) {
-
-        doc.restoreGraphicsState();
-
-    }
 
 }
 
@@ -659,7 +872,7 @@ export function addPDFFooter(
 
 
         /*
-         * Footer text
+         * Footer text.
          */
         doc.text(
             String(text),
@@ -670,7 +883,7 @@ export function addPDFFooter(
 
 
         /*
-         * Page number
+         * Page number.
          */
         doc.text(
             `Page ${page} of ${pageCount}`,
@@ -707,20 +920,27 @@ export function ensurePDFWatermark(
 
 
     /*
-     * If a table exists, its willDrawPage()
-     * callback already created the watermark.
+     * If the PDF has a table, the watermark is
+     * already created by AutoTable's willDrawPage().
      *
-     * This function is mainly useful for PDFs
-     * that do not contain a table.
+     * This avoids drawing another watermark on top
+     * of the table.
      */
     if (
-        !doc.lastAutoTable
+        doc.lastAutoTable
     ) {
 
-        addPDFWatermark(
-            doc
-        );
+        return;
 
     }
 
-}
+
+    /*
+     * PDFs without tables still need a watermark
+     * on every page.
+     */
+    addPDFWatermark(
+        doc
+    );
+
+       }
