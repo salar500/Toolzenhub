@@ -267,7 +267,8 @@ export async function downloadAmortizationPDF(
                         loan.years,
 
                     displayUnit:
-                        displayUnit?.label || "Rupees"
+                        displayUnit?.label ||
+                        "Rupees"
 
                 }
 
@@ -367,9 +368,52 @@ function formatPDFLoanCurrency(
 
 
     /* =====================================================
-       PDF-SAFE CURRENCY TEXT
+       GET UNIT LABEL
     ===================================================== */
 
-    return `INR ${formatted} ${displayUnit.label}`;
+    const label =
+        String(
+            displayUnit.label ||
+            ""
+        ).trim();
+
+
+    const normalizedLabel =
+        label.toLowerCase();
+
+
+    /* =====================================================
+       INDIAN UNITS
+    ===================================================== */
+
+    if (
+        normalizedLabel === "lakhs" ||
+        normalizedLabel === "crores"
+    ) {
+
+        return `INR ${formatted} ${label}`;
+
+    }
+
+
+    /* =====================================================
+       INTERNATIONAL UNITS
+    ===================================================== */
+
+    if (
+        normalizedLabel === "million" ||
+        normalizedLabel === "billion"
+    ) {
+
+        return `$${formatted} ${label}`;
+
+    }
+
+
+    /* =====================================================
+       FALLBACK
+    ===================================================== */
+
+    return `INR ${formatted} ${label}`;
 
 }
