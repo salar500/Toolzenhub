@@ -369,6 +369,10 @@ export function addPDFTable(
         );
 
 
+    /* =====================================================
+       TABLE
+    ===================================================== */
+
     doc.autoTable({
 
         /* =================================================
@@ -402,8 +406,8 @@ export function addPDFTable(
         margin: {
 
             /*
-             * Reserve space for the repeating
-             * professional header.
+             * Reserve space for the professional
+             * repeating header.
              */
             top:
                 PDF_HEADER.tableTop,
@@ -433,12 +437,24 @@ export function addPDFTable(
 
 
                 /*
-                 * Draw the watermark first.
+                 * IMPORTANT:
                  *
-                 * The watermark is intentionally very
-                 * light and is placed in the central
-                 * page area.
+                 * Draw watermark FIRST.
+                 *
+                 * AutoTable then draws its table content
+                 * over the watermark.
+                 *
+                 * This gives the correct visual hierarchy:
+                 *
+                 * PAGE
+                 *   ↓
+                 * WATERMARK
+                 *   ↓
+                 * TABLE
+                 *   ↓
+                 * TEXT / BORDERS
                  */
+
                 drawPDFWatermark(
                     doc
                 );
@@ -480,8 +496,11 @@ export function addPDFTable(
                 0.2,
 
             /*
-             * Solid table background keeps table
-             * content clean.
+             * Keep table cells visually clean.
+             *
+             * The watermark is extremely light, so it
+             * remains visible in the central page area
+             * without competing with table text.
              */
             fillColor:
                 PDF_COLORS.white
@@ -524,20 +543,6 @@ export function addPDFTable(
 
     });
 
-
-    /*
-     * IMPORTANT:
-     *
-     * AutoTable has now finished creating all pages.
-     *
-     * We deliberately DO NOT draw another watermark here,
-     * because doing so would make the watermark sit above
-     * table text.
-     *
-     * The watermark was already placed during each page's
-     * willDrawPage() lifecycle.
-     */
-
 }
 
 
@@ -576,9 +581,8 @@ export function ensurePDFWatermark(
 
 
     /*
-     * If AutoTable has created pages, its
-     * willDrawPage() callback has already placed
-     * the watermark on each table page.
+     * If AutoTable has created pages, the watermark
+     * has already been drawn through willDrawPage().
      */
     if (
         doc.lastAutoTable
@@ -590,8 +594,8 @@ export function ensurePDFWatermark(
 
 
     /*
-     * For PDFs without tables, add the watermark
-     * to every existing page.
+     * PDFs without tables still receive a watermark
+     * on every existing page.
      */
     addPDFWatermark(
         doc
