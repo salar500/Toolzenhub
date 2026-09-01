@@ -206,7 +206,67 @@ export function formatLoanCurrency(
 
 
     /* =====================================================
-       DISPLAY
+       NORMALIZE LABEL
+    ===================================================== */
+
+    const label =
+        String(
+            displayUnit.label || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    /* =====================================================
+       INDIAN RUPEE UNITS
+    ===================================================== */
+
+    if (
+        label === "lakhs"
+    ) {
+
+        return `₹${formatted} Lakhs`;
+
+    }
+
+
+    if (
+        label === "crores"
+    ) {
+
+        return `₹${formatted} Crores`;
+
+    }
+
+
+    /* =====================================================
+       MILLION
+    ===================================================== */
+
+    if (
+        label === "million"
+    ) {
+
+        return `$${formatted} Million`;
+
+    }
+
+
+    /* =====================================================
+       BILLION
+    ===================================================== */
+
+    if (
+        label === "billion"
+    ) {
+
+        return `$${formatted} Billion`;
+
+    }
+
+
+    /* =====================================================
+       SAFE FALLBACK
     ===================================================== */
 
     return `₹${formatted} ${displayUnit.label}`;
