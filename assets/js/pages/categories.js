@@ -1,4 +1,3 @@
-
 /* =========================================================
    ToolZen Hub
    Categories Page
@@ -7,6 +6,10 @@
 import {
     searchCalculators
 } from "../utils/categories-search.js";
+
+import {
+    ROUTES
+} from "../routes.js";
 
 
 /* =========================================================
@@ -100,7 +103,7 @@ export function renderCategoriesPage() {
     grid.innerHTML = categories.map(category => `
 
         <a
-            href="categories.html#${category.id}"
+            href="${ROUTES.categories}#${category.id}"
             class="category-page-card"
         >
 
@@ -413,7 +416,7 @@ export function initializeSearch() {
                 window.history.replaceState(
                     {},
                     "",
-                    "categories.html"
+                    ROUTES.categories
                 );
 
 
@@ -426,7 +429,7 @@ export function initializeSearch() {
 
 
             const newUrl =
-                `categories.html?q=${encodeURIComponent(query)}`;
+                `${ROUTES.categories}?q=${encodeURIComponent(query)}`;
 
 
             window.history.pushState(
@@ -459,7 +462,7 @@ export function initializeSearch() {
                 window.history.replaceState(
                     {},
                     "",
-                    "categories.html"
+                    ROUTES.categories
                 );
 
 
@@ -470,7 +473,7 @@ export function initializeSearch() {
 
 
             const newUrl =
-                `categories.html?q=${encodeURIComponent(query)}`;
+                `${ROUTES.categories}?q=${encodeURIComponent(query)}`;
 
 
             window.history.replaceState(
