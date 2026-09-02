@@ -1,12 +1,9 @@
-/* =========================================================
-   ToolZen Hub
-   Loan Comparison Calculator
-   Main CSS
-========================================================= */
-
-@import "./loan-layout.css";
-@import "./loan-form.css";
-@import "./loan-results.css";
-@import "./loan-related.css";
-@import "./loan-responsive.css";
-@import "./loan-modal.css";
+/* ToolZen Hub — Loan Comparison Calculator */
+@import url("01-base-layout.css");
+@import url("02-loan-card.css");
+@import url("03-form-fields.css");
+@import url("04-results.css");
+@import url("05-info-sections.css");
+@import url("06-related-articles.css");
+@import url("07-responsive-main.css");
+@import url("08-modal.css");
