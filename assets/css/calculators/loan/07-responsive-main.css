@@ -1,0 +1,77 @@
+/* =========================================================
+   MOBILE (main page)
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .calculator-intro {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .calculator-trust-card {
+        width: 100%;
+    }
+
+    .loan-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .loan-amortization-grid,
+    .loan-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .loan-related-grid,
+    .loan-articles-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .calculator-page {
+        width: min(100% - 20px, 1180px);
+        padding-top: 18px;
+    }
+
+    .calculator-breadcrumb {
+        flex-wrap: wrap;
+    }
+
+    .calculator-intro h1 {
+        font-size: 32px;
+    }
+
+    .loan-comparison-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .loan-card:first-child {
+        border-right: 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .loan-vs {
+        top: 50%;
+    }
+
+    .loan-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .loan-related-grid,
+    .loan-articles-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .loan-input-row {
+        grid-template-columns: 1fr 110px;
+    }
+
+    .loan-check-list {
+        grid-template-columns: 1fr;
+    }
+
+}
