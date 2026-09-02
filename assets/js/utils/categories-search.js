@@ -12,6 +12,10 @@
    This is completely separate from article search.
 ========================================================= */
 
+import {
+    ROUTES
+} from "../routes.js";
+
 
 /* =========================================================
    CALCULATOR DATA
@@ -24,7 +28,7 @@ const calculators = [
         description: "Compare loans side by side",
         category: "Loans",
         keywords: "loan comparison loans interest emi repayment",
-        url: "/Toolzenhub/calculators/loan-comparison/"
+        url: ROUTES.calculator("loan-comparison")
     },
 
     {
@@ -32,7 +36,7 @@ const calculators = [
         description: "Calculate your EMI instantly",
         category: "Loans",
         keywords: "emi loan monthly payment interest",
-        url: "/Toolzenhub/calculators/emi/"
+        url: ROUTES.calculator("emi")
     },
 
     {
@@ -40,7 +44,7 @@ const calculators = [
         description: "Calculate your home loan",
         category: "Loans",
         keywords: "home loan housing loan emi interest",
-        url: "/Toolzenhub/calculators/home-loan/"
+        url: ROUTES.calculator("home-loan")
     },
 
     {
@@ -48,7 +52,7 @@ const calculators = [
         description: "Calculate personal loan payments",
         category: "Loans",
         keywords: "personal loan emi interest repayment",
-        url: "/Toolzenhub/calculators/personal-loan/"
+        url: ROUTES.calculator("personal-loan")
     },
 
     {
@@ -56,7 +60,7 @@ const calculators = [
         description: "Plan your SIP investments",
         category: "Investment",
         keywords: "sip investment mutual fund returns savings",
-        url: "/Toolzenhub/calculators/sip/"
+        url: ROUTES.calculator("sip")
     },
 
     {
@@ -64,7 +68,7 @@ const calculators = [
         description: "Calculate PPF investment returns",
         category: "Investment",
         keywords: "ppf investment returns savings",
-        url: "/Toolzenhub/calculators/ppf/"
+        url: ROUTES.calculator("ppf")
     },
 
     {
@@ -72,7 +76,7 @@ const calculators = [
         description: "Calculate fixed deposit returns",
         category: "Investment",
         keywords: "fd fixed deposit investment interest",
-        url: "/Toolzenhub/calculators/fd/"
+        url: ROUTES.calculator("fd")
     },
 
     {
@@ -80,7 +84,7 @@ const calculators = [
         description: "Calculate compound annual growth rate",
         category: "Investment",
         keywords: "cagr growth investment return",
-        url: "/Toolzenhub/calculators/cagr/"
+        url: ROUTES.calculator("cagr")
     },
 
     {
@@ -88,7 +92,7 @@ const calculators = [
         description: "Calculate GST easily and accurately",
         category: "Tax",
         keywords: "gst tax goods services tax calculation",
-        url: "/Toolzenhub/calculators/gst/"
+        url: ROUTES.calculator("gst")
     },
 
     {
@@ -96,7 +100,7 @@ const calculators = [
         description: "Estimate your income tax",
         category: "Tax",
         keywords: "income tax tax calculation salary",
-        url: "/Toolzenhub/calculators/income-tax/"
+        url: ROUTES.calculator("income-tax")
     },
 
     {
@@ -104,7 +108,7 @@ const calculators = [
         description: "Check your body mass index",
         category: "Health",
         keywords: "bmi health weight body mass index",
-        url: "/Toolzenhub/calculators/bmi/"
+        url: ROUTES.calculator("bmi")
     },
 
     {
@@ -112,7 +116,7 @@ const calculators = [
         description: "Estimate your daily calorie needs",
         category: "Health",
         keywords: "calorie calories health diet daily",
-        url: "/Toolzenhub/calculators/calorie/"
+        url: ROUTES.calculator("calorie")
     },
 
     {
@@ -120,7 +124,7 @@ const calculators = [
         description: "Calculate your basal metabolic rate",
         category: "Health",
         keywords: "bmr basal metabolic rate calories",
-        url: "/Toolzenhub/calculators/bmr/"
+        url: ROUTES.calculator("bmr")
     },
 
     {
@@ -128,7 +132,7 @@ const calculators = [
         description: "Calculate business profit",
         category: "Business",
         keywords: "profit business revenue cost",
-        url: "/Toolzenhub/calculators/profit/"
+        url: ROUTES.calculator("profit")
     },
 
     {
@@ -136,7 +140,7 @@ const calculators = [
         description: "Calculate profit margin",
         category: "Business",
         keywords: "margin profit business percentage",
-        url: "/Toolzenhub/calculators/margin/"
+        url: ROUTES.calculator("margin")
     },
 
     {
@@ -144,7 +148,7 @@ const calculators = [
         description: "Calculate return on investment",
         category: "Business",
         keywords: "roi return investment business",
-        url: "/Toolzenhub/calculators/roi/"
+        url: ROUTES.calculator("roi")
     },
 
     {
@@ -152,7 +156,7 @@ const calculators = [
         description: "Calculate percentages easily",
         category: "Math",
         keywords: "percentage percent maths calculation",
-        url: "/Toolzenhub/calculators/percentage/"
+        url: ROUTES.calculator("percentage")
     },
 
     {
@@ -160,7 +164,7 @@ const calculators = [
         description: "Calculate and simplify ratios",
         category: "Math",
         keywords: "ratio maths proportion calculation",
-        url: "/Toolzenhub/calculators/ratio/"
+        url: ROUTES.calculator("ratio")
     },
 
     {
@@ -168,7 +172,7 @@ const calculators = [
         description: "Calculate age accurately",
         category: "Math",
         keywords: "age date birth calculation",
-        url: "/Toolzenhub/calculators/age/"
+        url: ROUTES.calculator("age")
     },
 
     {
@@ -176,7 +180,7 @@ const calculators = [
         description: "Convert common units quickly",
         category: "Converter",
         keywords: "unit conversion length weight temperature",
-        url: "/Toolzenhub/calculators/unit-converter/"
+        url: ROUTES.calculator("unit-converter")
     },
 
     {
@@ -184,7 +188,7 @@ const calculators = [
         description: "Convert currencies easily",
         category: "Converter",
         keywords: "currency exchange money conversion",
-        url: "/Toolzenhub/calculators/currency/"
+        url: ROUTES.calculator("currency")
     },
 
     {
@@ -192,7 +196,7 @@ const calculators = [
         description: "Calculate dates and date differences",
         category: "Converter",
         keywords: "date days calendar difference",
-        url: "/Toolzenhub/calculators/date/"
+        url: ROUTES.calculator("date")
     }
 
 ];
@@ -263,11 +267,11 @@ export function getCalculatorSearchUrl(query) {
 
 
     if (!search) {
-        return "/Toolzenhub/categories.html";
+        return ROUTES.categories;
     }
 
 
-    return `/Toolzenhub/categories.html?q=${encodeURIComponent(search)}`;
+    return `${ROUTES.categories}?q=${encodeURIComponent(search)}`;
 
 }
 
