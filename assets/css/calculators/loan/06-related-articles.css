@@ -1,0 +1,129 @@
+/* =========================================================
+   RELATED CALCULATORS
+========================================================= */
+
+.loan-related-section {
+    margin-top: 38px;
+}
+
+.loan-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.loan-section-heading h2 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 22px;
+}
+
+.loan-section-heading a {
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.loan-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.loan-related-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 100px;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #ffffff;
+    text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.loan-related-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, .07);
+}
+
+.loan-related-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 20px;
+}
+
+.loan-related-card strong,
+.loan-related-card span {
+    display: block;
+}
+
+.loan-related-card strong {
+    color: #1e293b;
+    font-size: 13px;
+}
+
+.loan-related-card span {
+    margin-top: 4px;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+/* =========================================================
+   ARTICLES
+========================================================= */
+
+.loan-articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.loan-article-card {
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.loan-article-image {
+    display: grid;
+    place-items: center;
+    height: 130px;
+    background: linear-gradient(
+        135deg,
+        #dbeafe,
+        #eff6ff
+    );
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.loan-article-content {
+    padding: 16px;
+}
+
+.loan-article-content h3 {
+    margin: 0 0 7px;
+    color: #1e293b;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.loan-article-content p {
+    margin: 0;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.5;
+}
