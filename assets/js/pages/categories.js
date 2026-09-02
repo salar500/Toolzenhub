@@ -1,10 +1,8 @@
+
 /* =========================================================
    ToolZen Hub
    Categories Page
 ========================================================= */
-
-import { renderHeader } from "../components/header.js";
-import { renderFooter } from "../components/footer.js";
 
 import {
     searchCalculators
@@ -88,7 +86,7 @@ const categories = [
    RENDER CATEGORY CARDS
 ========================================================= */
 
-function renderCategoriesPage() {
+export function renderCategoriesPage() {
 
     const grid = document.getElementById(
         "categories-grid"
@@ -356,7 +354,7 @@ function escapeHtml(value) {
    SEARCH
 ========================================================= */
 
-function initializeSearch() {
+export function initializeSearch() {
 
     const form = document.getElementById(
         "categories-search-form"
@@ -488,30 +486,3 @@ function initializeSearch() {
     );
 
 }
-
-
-/* =========================================================
-   APPLICATION
-========================================================= */
-
-function initializeCategoriesPage() {
-
-    renderHeader();
-
-    renderCategoriesPage();
-
-    initializeSearch();
-
-    renderFooter();
-
-}
-
-
-/* =========================================================
-   DOM READY
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    initializeCategoriesPage
-);
