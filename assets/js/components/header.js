@@ -3,6 +3,9 @@
    Global Header Component
 ========================================================= */
 
+import { ROUTES } from "../routes.js";
+
+
 export function renderHeader() {
 
     const header = document.getElementById("header");
@@ -30,7 +33,7 @@ export function renderHeader() {
                 ======================================= -->
 
                 <a
-                    href="index.html"
+                    href="${ROUTES.home}"
                     class="navbar__brand"
                     aria-label="ToolZen Hub Home"
                 >
@@ -65,7 +68,7 @@ export function renderHeader() {
 
                         <li>
                             <a
-                                href="index.html"
+                                href="${ROUTES.home}"
                                 class="navbar__link"
                                 data-nav="home"
                             >
@@ -76,7 +79,7 @@ export function renderHeader() {
 
                         <li>
                             <a
-                                href="categories.html"
+                                href="${ROUTES.categories}"
                                 class="navbar__link"
                                 data-nav="categories"
                             >
@@ -87,7 +90,7 @@ export function renderHeader() {
 
                         <li>
                             <a
-                                href="articles.html"
+                                href="${ROUTES.articles}"
                                 class="navbar__link"
                                 data-nav="articles"
                             >
@@ -98,7 +101,7 @@ export function renderHeader() {
 
                         <li>
                             <a
-                                href="about.html"
+                                href="${ROUTES.about}"
                                 class="navbar__link"
                                 data-nav="about"
                             >
@@ -154,7 +157,7 @@ export function renderHeader() {
                     <div class="mobile-navigation__menu">
 
                         <a
-                            href="index.html"
+                            href="${ROUTES.home}"
                             class="mobile-navigation__link"
                             data-nav="home"
                         >
@@ -163,7 +166,7 @@ export function renderHeader() {
 
 
                         <a
-                            href="categories.html"
+                            href="${ROUTES.categories}"
                             class="mobile-navigation__link"
                             data-nav="categories"
                         >
@@ -172,7 +175,7 @@ export function renderHeader() {
 
 
                         <a
-                            href="articles.html"
+                            href="${ROUTES.articles}"
                             class="mobile-navigation__link"
                             data-nav="articles"
                         >
@@ -181,7 +184,7 @@ export function renderHeader() {
 
 
                         <a
-                            href="about.html"
+                            href="${ROUTES.about}"
                             class="mobile-navigation__link"
                             data-nav="about"
                         >
@@ -203,15 +206,8 @@ export function renderHeader() {
        CURRENT PAGE
     ===================================================== */
 
-    let currentPage =
-        window.location.pathname
-            .split("/")
-            .pop();
-
-
-    if (!currentPage) {
-        currentPage = "index.html";
-    }
+    const pathname =
+        window.location.pathname;
 
 
     /* =====================================================
@@ -240,10 +236,15 @@ export function renderHeader() {
         /* Add active state */
 
         if (
-            href === currentPage ||
+            pathname === href ||
             (
-                currentPage === "" &&
-                href === "index.html"
+                href === ROUTES.home &&
+                (
+                    pathname === "/Toolzenhub" ||
+                    pathname === "/Toolzenhub/" ||
+                    pathname === "/Toolzenhub/index.html" ||
+                    pathname === "/"
+                )
             )
         ) {
 
