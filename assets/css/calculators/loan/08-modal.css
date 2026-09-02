@@ -67,7 +67,12 @@
     flex-direction: column;
 
     width: min(1100px, 100%);
+    max-width: 100%;
+
     height: min(90vh, 850px);
+    max-height: 90vh;
+
+    min-width: 0;
 
     margin: 0;
 
@@ -80,6 +85,8 @@
 
     box-shadow:
         0 25px 70px rgba(15, 23, 42, .25);
+
+    box-sizing: border-box;
 }
 
 
@@ -101,6 +108,8 @@
     border-bottom: 1px solid #e2e8f0;
 
     background: #ffffff;
+
+    min-width: 0;
 }
 
 .loan-amortization-header .calculator-eyebrow {
@@ -186,6 +195,8 @@
     border-bottom: 1px solid #e2e8f0;
 
     background: #f8fafc;
+
+    min-width: 0;
 }
 
 .loan-amortization-summary-card {
@@ -195,6 +206,8 @@
     border-radius: 9px;
 
     background: #ffffff;
+
+    min-width: 0;
 }
 
 .loan-amortization-summary-card span,
@@ -225,23 +238,47 @@
 .loan-amortization-table-container {
     flex: 1 1 auto;
 
+    min-width: 0;
     min-height: 0;
+
+    width: 100%;
+    max-width: 100%;
 
     overflow: hidden;
 
     background: #ffffff;
+
+    box-sizing: border-box;
 }
+
+
+/* =========================================================
+   TABLE SCROLL AREA
+   Horizontal scrolling stays INSIDE this area only.
+========================================================= */
 
 .loan-full-table-scroll {
     width: 100%;
+    max-width: 100%;
     height: 100%;
 
-    overflow: auto;
+    min-width: 0;
+    min-height: 0;
+
+    overflow-x: auto;
+    overflow-y: auto;
+
+    box-sizing: border-box;
 }
 
+
+/* =========================================================
+   AMORTIZATION TABLE
+========================================================= */
+
 .loan-amortization-table {
-    width: 100%;
-    min-width: 650px;
+    width: max-content;
+    min-width: 100%;
 
     border-collapse: collapse;
 
@@ -255,6 +292,8 @@
     border-bottom: 1px solid #e2e8f0;
 
     text-align: left;
+
+    white-space: nowrap;
 }
 
 .loan-amortization-table thead th {
@@ -281,6 +320,8 @@
     color: #64748b;
 
     text-align: center !important;
+
+    white-space: normal !important;
 }
 
 
@@ -302,6 +343,8 @@
     border-top: 1px solid #e2e8f0;
 
     background: #ffffff;
+
+    min-width: 0;
 }
 
 .loan-amortization-footer strong {
@@ -359,7 +402,10 @@
 
     .loan-amortization-dialog {
         width: 100%;
+        max-width: 100%;
+
         height: 94vh;
+        max-height: 94vh;
 
         border-radius: 12px;
     }
@@ -379,10 +425,17 @@
     }
 
     .loan-amortization-table-container {
+        min-width: 0;
+        width: 100%;
+        max-width: 100%;
+
         overflow: hidden;
     }
 
     .loan-full-table-scroll {
+        width: 100%;
+        max-width: 100%;
+
         overflow-x: auto;
         overflow-y: auto;
     }
