@@ -36,6 +36,9 @@ import { renderAboutPage }
 import { renderContactPage }
     from "./pages/contact.js";
 
+import { renderCategoriesPage }
+    from "./pages/categories.js";
+
 
 /* =========================================================
    APPLICATION
@@ -65,6 +68,22 @@ async function initializeApp() {
         renderCategories();
 
         renderArticles();
+
+        renderFooter();
+
+        initializeNewsletter();
+
+        return;
+    }
+
+
+    /* =====================================================
+       CATEGORIES PAGE
+    ===================================================== */
+
+    if (page.type === "categories") {
+
+        renderCategoriesPage();
 
         renderFooter();
 
