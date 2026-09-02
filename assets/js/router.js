@@ -17,11 +17,29 @@ export function currentPage() {
         path === "/" ||
         path === "/Toolzenhub/" ||
         path === "/Toolzenhub" ||
-        path.endsWith("/index.html")
+        path === "/Toolzenhub/index.html"
     ) {
 
         return {
             type: "home"
+        };
+
+    }
+
+
+    /* =====================================================
+       CATEGORIES PAGE
+    ===================================================== */
+
+    if (
+        path === "/categories.html" ||
+        path.endsWith("/categories.html") ||
+        path === "/categories/" ||
+        path.endsWith("/categories/")
+    ) {
+
+        return {
+            type: "categories"
         };
 
     }
@@ -64,6 +82,24 @@ export function currentPage() {
 
 
     /* =====================================================
+       CONTACT PAGE
+    ===================================================== */
+
+    if (
+        path === "/contact.html" ||
+        path.endsWith("/contact.html") ||
+        path === "/contact/" ||
+        path.endsWith("/contact/")
+    ) {
+
+        return {
+            type: "contact"
+        };
+
+    }
+
+
+    /* =====================================================
        CALCULATOR PAGE
     ===================================================== */
 
@@ -82,24 +118,6 @@ export function currentPage() {
 
     }
 
-
-   /* =====================================================
-   CONTACT PAGE
-===================================================== */
-
-if (
-    path === "/contact.html" ||
-    path.endsWith("/contact.html") ||
-    path === "/contact/" ||
-    path.endsWith("/contact/")
-) {
-
-    return {
-        type: "contact"
-    };
-
-}
-   
 
     /* =====================================================
        OTHER PAGE
