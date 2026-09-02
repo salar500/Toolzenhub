@@ -3,12 +3,9 @@
    Calculator Page Controller
 ========================================================= */
 
-const calculatorRegistry = {
-
-    "loan-comparison": () =>
-        import("../../../loans/loan-comparison/index.js")
-
-};
+import {
+    calculatorRegistry
+} from "../calculator-registry.js";
 
 
 /* =========================================================
