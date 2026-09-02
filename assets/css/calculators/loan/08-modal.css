@@ -10,13 +10,21 @@
     position: fixed;
     inset: 0;
     z-index: 9999;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
     padding: 20px;
+    box-sizing: border-box;
+
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
+
     transition:
         opacity .2s ease,
         visibility .2s ease;
@@ -28,182 +36,316 @@
     pointer-events: auto;
 }
 
-.loan-modal-overlay {
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.loan-amortization-overlay {
     position: absolute;
     inset: 0;
+
+    width: 100%;
+    height: 100%;
+
     background: rgba(15, 23, 42, .58);
     backdrop-filter: blur(3px);
+
+    cursor: default;
 }
 
-.loan-modal-dialog {
+
+/* =========================================================
+   DIALOG
+========================================================= */
+
+.loan-amortization-dialog {
     position: relative;
+    z-index: 1;
+
     display: flex;
     flex-direction: column;
-    width: min(1100px, calc(100% - 32px));
+
+    width: min(1100px, 100%);
     height: min(90vh, 850px);
-    margin: 5vh auto 0;
+
+    margin: 0;
+
     overflow: hidden;
+
     border: 1px solid #e2e8f0;
     border-radius: 14px;
+
     background: #ffffff;
-    box-shadow: 0 25px 70px rgba(15, 23, 42, .25);
+
+    box-shadow:
+        0 25px 70px rgba(15, 23, 42, .25);
 }
+
 
 /* =========================================================
    MODAL HEADER
 ========================================================= */
 
-.loan-modal-header {
+.loan-amortization-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+
+    flex: 0 0 auto;
+
     gap: 20px;
+
     padding: 24px 26px;
+
     border-bottom: 1px solid #e2e8f0;
+
     background: #ffffff;
 }
 
-.loan-modal-eyebrow {
-    display: block;
+.loan-amortization-header .calculator-eyebrow {
+    display: inline-block;
+
     margin-bottom: 5px;
+
     color: #2563eb;
+
     font-size: 12px;
     font-weight: 700;
+
     text-transform: uppercase;
     letter-spacing: .06em;
 }
 
-.loan-modal-header h2 {
+.loan-amortization-header h2 {
     margin: 0;
+
     color: #0f172a;
+
     font-size: 24px;
 }
 
-.loan-modal-header p {
+.loan-amortization-header p {
     margin: 6px 0 0;
+
     color: #64748b;
+
     font-size: 13px;
 }
 
-.loan-modal-close {
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.loan-amortization-close {
     display: grid;
     place-items: center;
+
     flex: 0 0 auto;
+
     width: 38px;
     height: 38px;
+
+    padding: 0;
+
     border: 0;
     border-radius: 8px;
+
     background: #f1f5f9;
+
     color: #475569;
+
+    font: inherit;
     font-size: 25px;
     line-height: 1;
+
     cursor: pointer;
 }
 
-.loan-modal-close:hover {
+.loan-amortization-close:hover {
     background: #e2e8f0;
     color: #0f172a;
 }
+
 
 /* =========================================================
    MODAL SUMMARY
 ========================================================= */
 
-.loan-modal-summary {
+.loan-amortization-summary {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+
+    flex: 0 0 auto;
+
     gap: 12px;
+
     padding: 16px 26px;
+
     border-bottom: 1px solid #e2e8f0;
+
     background: #f8fafc;
 }
 
-.loan-modal-summary-card {
+.loan-amortization-summary-card {
     padding: 13px 15px;
+
     border: 1px solid #e2e8f0;
     border-radius: 9px;
+
     background: #ffffff;
 }
 
-.loan-modal-summary-card span,
-.loan-modal-summary-card strong {
+.loan-amortization-summary-card span,
+.loan-amortization-summary-card strong {
     display: block;
 }
 
-.loan-modal-summary-card span {
+.loan-amortization-summary-card span {
     margin-bottom: 5px;
+
     color: #64748b;
+
     font-size: 11px;
     font-weight: 600;
 }
 
-.loan-modal-summary-card strong {
+.loan-amortization-summary-card strong {
     color: #0f172a;
+
     font-size: 17px;
 }
 
+
 /* =========================================================
-   TABLE
+   TABLE CONTAINER
 ========================================================= */
 
-.loan-modal-table-wrapper {
-    flex: 1;
-    overflow: auto;
+.loan-amortization-table-container {
+    flex: 1 1 auto;
+
     min-height: 0;
+
+    overflow: hidden;
+
+    background: #ffffff;
 }
 
-.loan-full-table {
+.loan-full-table-scroll {
+    width: 100%;
+    height: 100%;
+
+    overflow: auto;
+}
+
+.loan-amortization-table {
+    width: 100%;
     min-width: 650px;
+
+    border-collapse: collapse;
+
+    font-size: 12px;
 }
 
-.loan-full-table thead th {
+.loan-amortization-table th,
+.loan-amortization-table td {
+    padding: 9px;
+
+    border-bottom: 1px solid #e2e8f0;
+
+    text-align: left;
+}
+
+.loan-amortization-table thead th {
     position: sticky;
     top: 0;
+
     z-index: 2;
+
     background: #f8fafc;
-    box-shadow: 0 1px 0 #e2e8f0;
+
+    color: #475569;
+
+    box-shadow:
+        0 1px 0 #e2e8f0;
 }
 
-.loan-full-table tbody tr:hover {
+.loan-amortization-table tbody tr:hover {
     background: #f8fafc;
 }
+
+.loan-amortization-empty {
+    padding: 30px !important;
+
+    color: #64748b;
+
+    text-align: center !important;
+}
+
 
 /* =========================================================
    MODAL FOOTER
 ========================================================= */
 
-.loan-modal-footer {
+.loan-amortization-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    flex: 0 0 auto;
+
     gap: 15px;
+
     padding: 15px 26px;
+
     border-top: 1px solid #e2e8f0;
+
     background: #ffffff;
 }
 
-.loan-modal-footer span {
-    color: #64748b;
+.loan-amortization-footer strong {
+    color: #475569;
+
     font-size: 12px;
 }
 
-.loan-modal-footer-button {
+.loan-amortization-footer-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.loan-amortization-footer .loan-primary-button {
     min-width: 90px;
     height: 38px;
+
     padding: 0 16px;
+
     border: 0;
     border-radius: 7px;
+
     background: #2563eb;
+
     color: #ffffff;
+
     font: inherit;
     font-size: 13px;
     font-weight: 700;
+
     cursor: pointer;
 }
 
-.loan-modal-footer-button:hover {
+.loan-amortization-footer .loan-primary-button:hover {
     background: #1d4ed8;
 }
+
+.loan-amortization-footer .loan-primary-button:disabled {
+    opacity: .65;
+    cursor: wait;
+}
+
 
 /* =========================================================
    MOBILE
@@ -215,32 +357,49 @@
         padding: 8px;
     }
 
-    .loan-modal-dialog {
-        width: calc(100% - 16px);
+    .loan-amortization-dialog {
+        width: 100%;
         height: 94vh;
-        margin-top: 3vh;
+
         border-radius: 12px;
     }
 
-    .loan-modal-header {
+    .loan-amortization-header {
         padding: 18px;
     }
 
-    .loan-modal-header h2 {
+    .loan-amortization-header h2 {
         font-size: 20px;
     }
 
-    .loan-modal-summary {
+    .loan-amortization-summary {
         grid-template-columns: 1fr;
+
         padding: 12px 18px;
     }
 
-    .loan-modal-table-wrapper {
-        overflow-x: auto;
+    .loan-amortization-table-container {
+        overflow: hidden;
     }
 
-    .loan-modal-footer {
+    .loan-full-table-scroll {
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+
+    .loan-amortization-footer {
+        flex-direction: column;
+        align-items: stretch;
+
         padding: 13px 18px;
+    }
+
+    .loan-amortization-footer-actions {
+        width: 100%;
+    }
+
+    .loan-amortization-footer .loan-primary-button {
+        flex: 1;
     }
 
 }
