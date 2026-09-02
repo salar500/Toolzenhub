@@ -10,6 +10,22 @@
     position: fixed;
     inset: 0;
     z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity .2s ease,
+        visibility .2s ease;
+}
+
+.loan-amortization-modal.is-open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .loan-modal-overlay {
@@ -194,6 +210,10 @@
 ========================================================= */
 
 @media (max-width: 650px) {
+
+    .loan-amortization-modal {
+        padding: 8px;
+    }
 
     .loan-modal-dialog {
         width: calc(100% - 16px);
