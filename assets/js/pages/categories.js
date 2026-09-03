@@ -113,16 +113,13 @@ export function renderCategoriesPage() {
 
         /* =================================================
            LOANS
-           Currently points to the developed
-           Loan Comparison calculator.
+           Goes to the Loans category landing page.
         ================================================= */
 
         if (category.id === "loans") {
 
             categoryUrl =
-                ROUTES.calculator(
-                    "loan-comparison"
-                );
+                ROUTES.loans;
 
         }
 
