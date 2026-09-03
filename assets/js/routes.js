@@ -8,20 +8,71 @@ const SITE_ROOT = "/Toolzenhub/";
 
 export const ROUTES = {
 
-    home: SITE_ROOT,
 
-    categories: `${SITE_ROOT}categories.html`,
+    /* =====================================================
+       HOME
+    ===================================================== */
 
-    articles: `${SITE_ROOT}articles.html`,
+    home:
+        SITE_ROOT,
 
-    about: `${SITE_ROOT}about.html`,
 
-    contact: `${SITE_ROOT}contact.html`,
+    /* =====================================================
+       CATEGORIES
+    ===================================================== */
 
-    calculators: `${SITE_ROOT}calculators.html`,
+    categories:
+        `${SITE_ROOT}categories.html`,
+
+
+    /* =====================================================
+       LOANS
+    ===================================================== */
+
+    loans:
+        `${SITE_ROOT}loans.html`,
+
+
+    /* =====================================================
+       ARTICLES
+    ===================================================== */
+
+    articles:
+        `${SITE_ROOT}articles.html`,
+
+
+    /* =====================================================
+       ABOUT
+    ===================================================== */
+
+    about:
+        `${SITE_ROOT}about.html`,
+
+
+    /* =====================================================
+       CONTACT
+    ===================================================== */
+
+    contact:
+        `${SITE_ROOT}contact.html`,
+
+
+    /* =====================================================
+       ALL CALCULATORS
+    ===================================================== */
+
+    calculators:
+        `${SITE_ROOT}calculators.html`,
+
+
+    /* =====================================================
+       INDIVIDUAL CALCULATOR
+    ===================================================== */
 
     calculator(slug) {
+
         return `${SITE_ROOT}calculators/${slug}/`;
+
     }
 
 };
