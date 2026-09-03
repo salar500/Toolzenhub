@@ -1,11 +1,14 @@
+
 /* =========================================================
    ToolZen Hub
    Related Content Component
 ========================================================= */
 
+
 import {
     ROUTES
-} from "../../routes.js";
+} from "../../../assets/js/routes.js";
+
 
 
 /* =========================================================
@@ -14,7 +17,9 @@ import {
 
 export function renderRelatedCalculators() {
 
+
     const calculators = [
+
 
         {
             icon: "▦",
@@ -23,12 +28,14 @@ export function renderRelatedCalculators() {
             href: ROUTES.calculator("emi")
         },
 
+
         {
             icon: "⌂",
             title: "Home Loan Calculator",
             description: "Calculate home loan EMI and interest.",
             href: ROUTES.calculator("home-loan")
         },
+
 
         {
             icon: "♙",
@@ -37,12 +44,14 @@ export function renderRelatedCalculators() {
             href: ROUTES.calculator("personal-loan")
         },
 
+
         {
             icon: "▤",
             title: "Loan Eligibility Calculator",
             description: "Check how much loan you may qualify for.",
             href: ROUTES.calculator("loan-eligibility")
         },
+
 
         {
             icon: "₹",
@@ -51,12 +60,14 @@ export function renderRelatedCalculators() {
             href: ROUTES.calculator("prepayment")
         },
 
+
         {
             icon: "%",
             title: "Interest Calculator",
             description: "Calculate simple and compound interest.",
             href: ROUTES.calculator("interest")
         }
+
 
     ];
 
@@ -70,6 +81,7 @@ export function renderRelatedCalculators() {
                 <h2>
                     Related Calculators
                 </h2>
+
 
                 <a href="${ROUTES.calculators}">
                     View all →
@@ -91,11 +103,13 @@ export function renderRelatedCalculators() {
                             ${item.icon}
                         </div>
 
+
                         <div>
 
                             <strong>
                                 ${item.title}
                             </strong>
+
 
                             <span>
                                 ${item.description}
@@ -116,13 +130,16 @@ export function renderRelatedCalculators() {
 }
 
 
+
 /* =========================================================
    Related Articles
 ========================================================= */
 
 export function renderRelatedArticles() {
 
+
     const articles = [
+
 
         {
             title: "How to Reduce Your Home Loan Interest",
@@ -130,11 +147,13 @@ export function renderRelatedArticles() {
                 "Practical ways to reduce your overall borrowing cost."
         },
 
+
         {
             title: "EMI vs Total Interest: What Should You Compare?",
             description:
                 "Why EMI alone doesn't tell the complete story."
         },
+
 
         {
             title: "Fixed vs Floating Interest Rates",
@@ -142,11 +161,13 @@ export function renderRelatedArticles() {
                 "Understand the difference before choosing a loan."
         },
 
+
         {
             title: "How Loan Tenure Affects Total Interest",
             description:
                 "See why a longer tenure can increase borrowing cost."
         },
+
 
         {
             title: "What Is Loan Prepayment?",
@@ -154,11 +175,13 @@ export function renderRelatedArticles() {
                 "Understand how prepayment can reduce interest."
         },
 
+
         {
             title: "How to Choose the Right Loan Tenure",
             description:
                 "Balance monthly affordability with total cost."
         }
+
 
     ];
 
@@ -172,6 +195,7 @@ export function renderRelatedArticles() {
                 <h2>
                     Related Articles
                 </h2>
+
 
                 <a href="${ROUTES.articles}">
                     View all →
@@ -190,11 +214,13 @@ export function renderRelatedArticles() {
                             Finance
                         </div>
 
+
                         <div class="loan-article-content">
 
                             <h3>
                                 ${article.title}
                             </h3>
+
 
                             <p>
                                 ${article.description}
