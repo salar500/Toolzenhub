@@ -1,3 +1,17 @@
+/* =========================================================
+   ToolZen Hub
+   Related Content Component
+========================================================= */
+
+import {
+    ROUTES
+} from "../../routes.js";
+
+
+/* =========================================================
+   Related Calculators
+========================================================= */
+
 export function renderRelatedCalculators() {
 
     const calculators = [
@@ -6,42 +20,42 @@ export function renderRelatedCalculators() {
             icon: "▦",
             title: "EMI Calculator",
             description: "Calculate your monthly loan EMI.",
-            href: "/Toolzenhub/calculators/emi/"
+            href: ROUTES.calculator("emi")
         },
 
         {
             icon: "⌂",
             title: "Home Loan Calculator",
             description: "Calculate home loan EMI and interest.",
-            href: "/Toolzenhub/calculators/home-loan/"
+            href: ROUTES.calculator("home-loan")
         },
 
         {
             icon: "♙",
             title: "Personal Loan Calculator",
             description: "Calculate personal loan payments.",
-            href: "/Toolzenhub/calculators/personal-loan/"
+            href: ROUTES.calculator("personal-loan")
         },
 
         {
             icon: "▤",
             title: "Loan Eligibility Calculator",
             description: "Check how much loan you may qualify for.",
-            href: "/Toolzenhub/calculators/loan-eligibility/"
+            href: ROUTES.calculator("loan-eligibility")
         },
 
         {
             icon: "₹",
             title: "Prepayment Calculator",
             description: "Estimate savings from prepayment.",
-            href: "/Toolzenhub/calculators/prepayment/"
+            href: ROUTES.calculator("prepayment")
         },
 
         {
             icon: "%",
             title: "Interest Calculator",
             description: "Calculate simple and compound interest.",
-            href: "/Toolzenhub/calculators/interest/"
+            href: ROUTES.calculator("interest")
         }
 
     ];
@@ -57,7 +71,7 @@ export function renderRelatedCalculators() {
                     Related Calculators
                 </h2>
 
-                <a href="/Toolzenhub/calculators/">
+                <a href="${ROUTES.calculators}">
                     View all →
                 </a>
 
@@ -101,6 +115,10 @@ export function renderRelatedCalculators() {
 
 }
 
+
+/* =========================================================
+   Related Articles
+========================================================= */
 
 export function renderRelatedArticles() {
 
@@ -155,7 +173,7 @@ export function renderRelatedArticles() {
                     Related Articles
                 </h2>
 
-                <a href="/Toolzenhub/articles/">
+                <a href="${ROUTES.articles}">
                     View all →
                 </a>
 
