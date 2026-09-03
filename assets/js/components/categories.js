@@ -3,6 +3,11 @@
    Categories + Popular Calculators Component
 ========================================================= */
 
+import {
+    ROUTES
+} from "../routes.js";
+
+
 export function renderCategories() {
 
     const categories = document.getElementById("categories");
@@ -30,7 +35,7 @@ export function renderCategories() {
                     </h2>
 
                     <a
-                        href="categories.html"
+                        href="${ROUTES.categories}"
                         class="section-link"
                     >
                         View all categories
@@ -44,10 +49,12 @@ export function renderCategories() {
 
 
 
-               <!-- Loans -->
+                    <!-- Loans -->
 
-                   <a href="loans.html" class="category-card">
-                    
+                    <a
+                        href="${ROUTES.loans}"
+                        class="category-card"
+                    >
 
                         <div class="category-card__icon category-card__icon--loans">
                             🏠
@@ -95,7 +102,7 @@ export function renderCategories() {
                     <!-- Tax -->
 
                     <a
-                        href="categories.html#tax"
+                        href="${ROUTES.categories}#tax"
                         class="category-card"
                     >
 
@@ -120,7 +127,7 @@ export function renderCategories() {
                     <!-- Health -->
 
                     <a
-                        href="categories.html#health"
+                        href="${ROUTES.categories}#health"
                         class="category-card"
                     >
 
@@ -145,7 +152,7 @@ export function renderCategories() {
                     <!-- Business -->
 
                     <a
-                        href="categories.html#business"
+                        href="${ROUTES.categories}#business"
                         class="category-card"
                     >
 
@@ -170,7 +177,7 @@ export function renderCategories() {
                     <!-- Math -->
 
                     <a
-                        href="categories.html#math"
+                        href="${ROUTES.categories}#math"
                         class="category-card"
                     >
 
@@ -195,7 +202,7 @@ export function renderCategories() {
                     <!-- Converter -->
 
                     <a
-                        href="categories.html#converter"
+                        href="${ROUTES.categories}#converter"
                         class="category-card"
                     >
 
@@ -220,7 +227,7 @@ export function renderCategories() {
                     <!-- More -->
 
                     <a
-                        href="categories.html#more"
+                        href="${ROUTES.categories}#more"
                         class="category-card"
                     >
 
@@ -266,7 +273,7 @@ export function renderCategories() {
                     </h2>
 
                     <a
-                        href="calculators.html"
+                        href="${ROUTES.calculators}"
                         class="section-link"
                     >
                         View all calculators
@@ -281,7 +288,10 @@ export function renderCategories() {
 
                     <!-- Loan Comparison -->
 
-                    <a href="#" class="calculator-card">
+                    <a
+                        href="${ROUTES.calculator("loan-comparison")}"
+                        class="calculator-card"
+                    >
 
                         <div class="calculator-card__icon calculator-card__icon--green">
                             ⚖
@@ -312,7 +322,10 @@ export function renderCategories() {
 
                     <!-- EMI -->
 
-                    <a href="#" class="calculator-card">
+                    <a
+                        href="#"
+                        class="calculator-card"
+                    >
 
                         <div class="calculator-card__icon calculator-card__icon--blue">
                             ▣
@@ -343,7 +356,10 @@ export function renderCategories() {
 
                     <!-- SIP -->
 
-                    <a href="#" class="calculator-card">
+                    <a
+                        href="#"
+                        class="calculator-card"
+                    >
 
                         <div class="calculator-card__icon calculator-card__icon--yellow">
                             ♜
@@ -374,7 +390,10 @@ export function renderCategories() {
 
                     <!-- GST -->
 
-                    <a href="#" class="calculator-card">
+                    <a
+                        href="#"
+                        class="calculator-card"
+                    >
 
                         <div class="calculator-card__icon calculator-card__icon--purple">
                             ▤
@@ -405,7 +424,10 @@ export function renderCategories() {
 
                     <!-- Home Loan -->
 
-                    <a href="#" class="calculator-card">
+                    <a
+                        href="#"
+                        class="calculator-card"
+                    >
 
                         <div class="calculator-card__icon calculator-card__icon--pink">
                             ⌂
@@ -436,7 +458,10 @@ export function renderCategories() {
 
                     <!-- BMI -->
 
-                    <a href="#" class="calculator-card">
+                    <a
+                        href="#"
+                        class="calculator-card"
+                    >
 
                         <div class="calculator-card__icon calculator-card__icon--teal">
                             ♙
