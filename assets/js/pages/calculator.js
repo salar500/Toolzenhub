@@ -3,6 +3,7 @@
    Calculator Page Controller
 ========================================================= */
 
+
 import {
     calculatorRegistry
 } from "../calculator-registry.js";
@@ -14,7 +15,14 @@ import {
 
 export async function renderCalculator(slug) {
 
-    const loader = calculatorRegistry[slug];
+
+    const loader =
+        calculatorRegistry[slug];
+
+
+    /* =====================================================
+       CALCULATOR NOT FOUND
+    ===================================================== */
 
     if (!loader) {
 
@@ -28,9 +36,21 @@ export async function renderCalculator(slug) {
 
     }
 
+
+    /* =====================================================
+       LOAD CALCULATOR MODULE
+    ===================================================== */
+
     try {
 
-        const module = await loader();
+
+        const module =
+            await loader();
+
+
+        /* =================================================
+           CHECK RENDER FUNCTION
+        ================================================= */
 
         if (
             typeof module.render !== "function"
@@ -46,14 +66,22 @@ export async function renderCalculator(slug) {
 
         }
 
+
+        /* =================================================
+           RENDER CALCULATOR
+        ================================================= */
+
         module.render();
 
+
     } catch (error) {
+
 
         console.error(
             `Failed to load calculator "${slug}":`,
             error
         );
+
 
         renderCalculatorError();
 
@@ -68,12 +96,15 @@ export async function renderCalculator(slug) {
 
 function renderCalculatorNotFound() {
 
+
     const app =
         document.getElementById("app");
+
 
     if (!app) {
         return;
     }
+
 
     app.innerHTML = `
 
@@ -99,12 +130,15 @@ function renderCalculatorNotFound() {
 
 function renderCalculatorError() {
 
+
     const app =
         document.getElementById("app");
+
 
     if (!app) {
         return;
     }
+
 
     app.innerHTML = `
 
