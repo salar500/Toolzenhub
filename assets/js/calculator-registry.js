@@ -8,9 +8,16 @@
    Each calculator is loaded dynamically only when needed.
 ========================================================= */
 
+
 export const calculatorRegistry = {
 
+
+    /* =====================================================
+       LOAN COMPARISON
+    ===================================================== */
+
     "loan-comparison": () =>
-        import("../loans/loan-comparison/index.js")
+        import("../../loans/loan-comparison/index.js")
+
 
 };
