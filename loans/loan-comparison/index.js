@@ -23,6 +23,10 @@ import {
     renderRelatedArticles
 } from "./components/RelatedContent.js";
 
+import {
+    ROUTES
+} from "../../assets/js/routes.js";
+
 
 export function render() {
 
@@ -38,13 +42,13 @@ export function render() {
 
             <div class="calculator-breadcrumb">
 
-                <a href="/Toolzenhub/">
+                <a href="${ROUTES.home}">
                     Home
                 </a>
 
                 <span>›</span>
 
-                <a href="/Toolzenhub/loans/">
+                <a href="${ROUTES.loans}">
                     Loans
                 </a>
 
