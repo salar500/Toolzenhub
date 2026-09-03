@@ -100,10 +100,37 @@ export function renderCategoriesPage() {
     }
 
 
-    grid.innerHTML = categories.map(category => `
+    grid.innerHTML = categories.map(category => {
+
+
+        /* =================================================
+           CATEGORY DESTINATION
+        ================================================= */
+
+        let categoryUrl =
+            `${ROUTES.categories}#${category.id}`;
+
+
+        /* =================================================
+           LOANS
+           Currently points to the developed
+           Loan Comparison calculator.
+        ================================================= */
+
+        if (category.id === "loans") {
+
+            categoryUrl =
+                ROUTES.calculator(
+                    "loan-comparison"
+                );
+
+        }
+
+
+        return `
 
         <a
-            href="${ROUTES.categories}#${category.id}"
+            href="${categoryUrl}"
             class="category-page-card"
         >
 
@@ -140,7 +167,9 @@ export function renderCategoriesPage() {
 
         </a>
 
-    `).join("");
+    `;
+
+    }).join("");
 }
 
 
