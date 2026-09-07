@@ -63,17 +63,19 @@ export function render() {
 
         <div class="calculator-page">
 
-            ${renderBreadcrumb({
+            ${renderBreadcrumb([
 
-                category: "Loans",
+                {
+                    label: "Loans",
+                    href: ROUTES.loans
+                },
 
-                categoryUrl:
-                    ROUTES.loans,
+                {
+                    label:
+                        "Loan Comparison Calculator"
+                }
 
-                title:
-                    "Loan Comparison Calculator"
-
-            })}
+            ])}
 
 
             <section class="calculator-intro">
