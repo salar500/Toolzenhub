@@ -1,4 +1,3 @@
-
 /* =========================================================
    ToolZen Hub
    All Calculators Page
@@ -12,6 +11,10 @@ import {
     searchCalculators
 } from "../utils/categories-search.js";
 
+import {
+    renderBreadcrumb
+} from "../components/breadcrumb.js";
+
 
 /* =========================================================
    DOM ELEMENTS
@@ -23,6 +26,32 @@ let searchInput;
 let resultsCount;
 let resultsLabel;
 let emptyState;
+
+
+/* =========================================================
+   RENDER BREADCRUMB
+========================================================= */
+
+function renderCalculatorsBreadcrumb() {
+
+    const breadcrumb =
+        document.getElementById(
+            "calculators-breadcrumb"
+        );
+
+    if (!breadcrumb) {
+        return;
+    }
+
+
+    breadcrumb.innerHTML =
+        renderBreadcrumb([
+            {
+                label: "Calculators"
+            }
+        ]);
+
+}
 
 
 /* =========================================================
@@ -382,6 +411,13 @@ function initializeCalculatorsPage() {
         return;
 
     }
+
+
+    /* =====================================================
+       BREADCRUMB
+    ===================================================== */
+
+    renderCalculatorsBreadcrumb();
 
 
     /* =====================================================
