@@ -1,4 +1,3 @@
-
 /* =========================================================
    ToolZen Hub
    All Calculators Page
@@ -24,6 +23,55 @@
 
     --calculators-border: #E2E8F0;
     --calculators-border-light: #F1F5F9;
+
+}
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+.calculators-breadcrumb {
+
+    margin-bottom:
+        22px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    font-size:
+        13px;
+
+    color:
+        #64748B;
+
+}
+
+
+.calculators-breadcrumb a {
+
+    color:
+        #0b9f58;
+
+    text-decoration:
+        none;
+
+}
+
+
+.calculators-breadcrumb strong {
+
+    color:
+        #334155;
+
+    font-weight:
+        600;
 
 }
 
