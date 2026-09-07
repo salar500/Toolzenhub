@@ -5,6 +5,15 @@
 
 
 /* =========================================================
+   BREADCRUMB
+========================================================= */
+
+import {
+    renderBreadcrumb
+} from "../../components/breadcrumb.js";
+
+
+/* =========================================================
    HERO / INTRO
 ========================================================= */
 
@@ -21,17 +30,11 @@ function renderAboutIntro() {
                     aria-label="Breadcrumb"
                 >
 
-                    <a href="index.html">
-                        Home
-                    </a>
-
-                    <span aria-hidden="true">
-                        →
-                    </span>
-
-                    <span>
-                        About
-                    </span>
+                    ${renderBreadcrumb([
+                        {
+                            label: "About"
+                        }
+                    ])}
 
                 </nav>
 
@@ -100,7 +103,7 @@ function renderFeatures() {
                                 aria-hidden="true"
                             >
                                 <path
-                                    d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                                    d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6-8 10-8 10z"
                                 ></path>
                             </svg>
 
