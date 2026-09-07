@@ -1,13 +1,21 @@
+/* =========================================================
+   ToolZen Hub
+   Loan Comparison Calculator
+========================================================= */
+
+
 import {
     createLoanCard,
     initializeLoanInputs,
     resetLoanInputs
 } from "./components/LoanCard.js";
 
+
 import {
     renderResults,
     compareLoans
 } from "./components/Results.js";
+
 
 import {
     renderHowToUse,
@@ -18,47 +26,54 @@ import {
     renderFAQ
 } from "./components/InfoSections.js";
 
+
 import {
     renderRelatedCalculators,
     renderRelatedArticles
 } from "./components/RelatedContent.js";
+
 
 import {
     ROUTES
 } from "../../assets/js/routes.js";
 
 
+import {
+    renderBreadcrumb
+} from "../../assets/js/components/breadcrumb.js";
+
+
+
+/* =========================================================
+   Render Calculator
+========================================================= */
+
 export function render() {
 
-    const app = document.querySelector("#app");
+    const app =
+        document.querySelector("#app");
+
 
     if (!app) {
         return;
     }
 
+
     app.innerHTML = `
 
         <div class="calculator-page">
 
-            <div class="calculator-breadcrumb">
+            ${renderBreadcrumb({
 
-                <a href="${ROUTES.home}">
-                    Home
-                </a>
+                category: "Loans",
 
-                <span>›</span>
+                categoryUrl:
+                    ROUTES.loans,
 
-                <a href="${ROUTES.loans}">
-                    Loans
-                </a>
+                title:
+                    "Loan Comparison Calculator"
 
-                <span>›</span>
-
-                <strong>
-                    Loan Comparison Calculator
-                </strong>
-
-            </div>
+            })}
 
 
             <section class="calculator-intro">
