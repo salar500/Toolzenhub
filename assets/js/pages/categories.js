@@ -11,6 +11,10 @@ import {
     ROUTES
 } from "../routes.js";
 
+import {
+    renderBreadcrumb
+} from "../components/breadcrumb.js";
+
 
 /* =========================================================
    Category Data
@@ -83,6 +87,32 @@ const categories = [
     }
 
 ];
+
+
+/* =========================================================
+   RENDER BREADCRUMB
+========================================================= */
+
+export function renderCategoriesBreadcrumb() {
+
+    const breadcrumb =
+        document.getElementById(
+            "categories-breadcrumb"
+        );
+
+    if (!breadcrumb) {
+        return;
+    }
+
+
+    breadcrumb.innerHTML =
+        renderBreadcrumb([
+            {
+                label: "Categories"
+            }
+        ]);
+
+}
 
 
 /* =========================================================
