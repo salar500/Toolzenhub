@@ -45,6 +45,48 @@
 }
 
 
+/* =========================================================
+   LEGAL BREADCRUMB
+========================================================= */
+
+.legal-breadcrumb {
+    width: 100%;
+
+    margin-bottom: 22px;
+
+    text-align: left;
+}
+
+
+.legal-breadcrumb .calculator-breadcrumb {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    gap: 8px;
+
+    font-size: 13px;
+
+    color: #667085;
+}
+
+
+.legal-breadcrumb .calculator-breadcrumb a {
+    color: #0b9f58;
+
+    text-decoration: none;
+}
+
+
+.legal-breadcrumb .calculator-breadcrumb strong {
+    color: #334155;
+
+    font-weight: 600;
+}
+
+
 .legal-page__hero h1 {
     margin: 0 0 10px;
 
