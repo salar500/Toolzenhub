@@ -46,10 +46,10 @@
 
 
 /* =========================================================
-   CONTACT BREADCRUMB
+   LEGAL BREADCRUMB
 ========================================================= */
 
-.contact-breadcrumb {
+.legal-breadcrumb {
     width: 100%;
 
     margin-bottom: 22px;
@@ -58,7 +58,7 @@
 }
 
 
-.contact-breadcrumb .calculator-breadcrumb {
+.legal-breadcrumb .calculator-breadcrumb {
     display: flex;
 
     align-items: center;
@@ -73,14 +73,14 @@
 }
 
 
-.contact-breadcrumb .calculator-breadcrumb a {
+.legal-breadcrumb .calculator-breadcrumb a {
     color: #0b9f58;
 
     text-decoration: none;
 }
 
 
-.contact-breadcrumb .calculator-breadcrumb strong {
+.legal-breadcrumb .calculator-breadcrumb strong {
     color: #334155;
 
     font-weight: 600;
