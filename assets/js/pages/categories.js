@@ -121,6 +121,9 @@ export function renderCategoriesBreadcrumb() {
 
 export function renderCategoriesPage() {
 
+    renderCategoriesBreadcrumb();
+
+
     const grid = document.getElementById(
         "categories-grid"
     );
