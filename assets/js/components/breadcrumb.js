@@ -1,12 +1,20 @@
 /* =========================================================
    ToolZen Hub
-   Calculator Breadcrumb Component
+   Global Breadcrumb Component
 
    Purpose:
-   Reusable breadcrumb for all calculator pages.
+   Reusable breadcrumb for all website pages.
 
-   Visual structure and CSS classes are kept identical
-   to the existing calculator breadcrumb.
+   Supports:
+   - Home → Categories
+   - Home → Calculators
+   - Home → Loans → Calculator
+   - Home → Articles
+   - Home → Articles → Article
+   - Home → About
+   - Home → Contact
+
+   Existing breadcrumb styling/classes are preserved.
 ========================================================= */
 
 
@@ -17,35 +25,62 @@ import {
 
 
 /* =========================================================
-   Render Calculator Breadcrumb
+   Render Breadcrumb
 ========================================================= */
 
-export function renderBreadcrumb({
-    category = "",
-    categoryUrl = ROUTES.categories,
-    title = ""
-} = {}) {
+export function renderBreadcrumb(
+    items = []
+) {
 
+
+    /* =====================================================
+       DEFAULT HOME
+    ===================================================== */
+
+    const breadcrumbItems = [
+
+        {
+            label: "Home",
+            href: ROUTES.home
+        },
+
+        ...items
+
+    ];
+
+
+    /* =====================================================
+       RENDER ITEMS
+    ===================================================== */
 
     return `
 
         <div class="calculator-breadcrumb">
 
-            <a href="${ROUTES.home}">
-                Home
-            </a>
+            ${breadcrumbItems.map(
+                (item, index) => `
 
-            <span>›</span>
+                    ${index > 0 ? `
+                        <span>›</span>
+                    ` : ""}
 
-            <a href="${categoryUrl}">
-                ${category}
-            </a>
 
-            <span>›</span>
+                    ${
+                        item.href
+                            ? `
+                                <a href="${item.href}">
+                                    ${item.label}
+                                </a>
+                            `
+                            : `
+                                <strong>
+                                    ${item.label}
+                                </strong>
+                            `
+                    }
 
-            <strong>
-                ${title}
-            </strong>
+                `
+            ).join("")}
 
         </div>
 
