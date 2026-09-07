@@ -86,7 +86,22 @@
 }
 
 
-.about-breadcrumb a {
+.about-breadcrumb .calculator-breadcrumb {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: inherit;
+
+    color: inherit;
+
+}
+
+
+.about-breadcrumb .calculator-breadcrumb a {
 
     color: var(--about-body);
 
@@ -95,12 +110,32 @@
 }
 
 
-.about-breadcrumb a:hover {
+.about-breadcrumb .calculator-breadcrumb a:hover {
 
     color: var(--about-green);
 
 }
 
+
+.about-breadcrumb .calculator-breadcrumb strong {
+
+    color: var(--about-muted);
+
+    font-weight: 500;
+
+}
+
+
+.about-breadcrumb > .calculator-breadcrumb > span {
+
+    color: var(--about-muted);
+
+}
+
+
+/* =========================================================
+   INTRO CONTENT
+========================================================= */
 
 .about-intro-content {
 
