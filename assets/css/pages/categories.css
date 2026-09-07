@@ -665,3 +665,30 @@
     }
 
 }
+
+
+
+/* =========================================================
+   Breadcrumb
+========================================================= */
+
+.categories-breadcrumb {
+    margin-bottom: 22px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 13px;
+    color: #64748b;
+}
+
+.categories-breadcrumb a {
+    color: #0b9f58;
+    text-decoration: none;
+}
+
+.categories-breadcrumb strong {
+    color: #334155;
+    font-weight: 600;
+}
