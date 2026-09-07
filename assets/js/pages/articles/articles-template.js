@@ -5,6 +5,36 @@
 
 import { articles, categories } from "./articles-data.js";
 
+import {
+    renderBreadcrumb
+} from "../../components/breadcrumb.js";
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+function renderArticlesBreadcrumb() {
+
+    return `
+
+        <div class="articles-container">
+
+            <div class="articles-breadcrumb">
+
+                ${renderBreadcrumb([
+                    {
+                        label: "Articles"
+                    }
+                ])}
+
+            </div>
+
+        </div>
+
+    `;
+}
+
 
 /* =========================================================
    HERO
@@ -396,6 +426,9 @@ export function renderArticlesTemplate() {
     return `
 
         <div id="articles-page">
+
+            ${renderArticlesBreadcrumb()}
+
 
             ${renderHero()}
 
