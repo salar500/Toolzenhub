@@ -29,6 +29,37 @@
 
 
 /* =========================================================
+   BREADCRUMB
+========================================================= */
+
+.articles-breadcrumb {
+    padding-top: 22px;
+    margin-bottom: 22px;
+}
+
+
+.articles-breadcrumb .calculator-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #64748B;
+}
+
+
+.articles-breadcrumb .calculator-breadcrumb a {
+    color: #0b9f58;
+    text-decoration: none;
+}
+
+
+.articles-breadcrumb .calculator-breadcrumb strong {
+    color: #334155;
+    font-weight: 600;
+}
+
+
+/* =========================================================
    PAGE
 ========================================================= */
 
