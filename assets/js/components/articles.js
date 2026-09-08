@@ -3,6 +3,11 @@
    Latest Articles Component
 ========================================================= */
 
+import {
+    ROUTES
+} from "../routes.js";
+
+
 export function renderArticles() {
 
     const articles = document.getElementById("latest-articles");
@@ -29,7 +34,7 @@ export function renderArticles() {
                     </h2>
 
                     <a
-                        href="#"
+                        href="${ROUTES.articles}"
                         class="section-link"
                     >
                         View all articles
