@@ -103,7 +103,7 @@
 
 .about-breadcrumb .calculator-breadcrumb a {
 
-    color: var(--about-body);
+    color: var(--about-green);
 
     text-decoration: none;
 
@@ -112,7 +112,7 @@
 
 .about-breadcrumb .calculator-breadcrumb a:hover {
 
-    color: var(--about-green);
+    color: var(--about-green-dark);
 
 }
 
