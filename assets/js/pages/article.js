@@ -10,7 +10,7 @@
    - Global Footer
    - Newsletter
    - Breadcrumb
-   - Article data rendering
+   - Article data loading
    - Article sections
    - Example
    - Things to Consider
@@ -18,6 +18,16 @@
    - Calculator CTA
    - Related Articles
    - Article SEO structured data
+
+   Architecture:
+
+   Article URL
+        ↓
+   Article Registry
+        ↓
+   Article Data Module
+        ↓
+   Shared Article Renderer
 ========================================================= */
 
 
@@ -46,13 +56,13 @@ import {
 
 
 /* =========================================================
-   Article Data
-
-   The individual article page can provide its data module
-   through window.ToolZenArticle before this engine loads.
-
-   This keeps the engine reusable for every article.
+   Article Registry
 ========================================================= */
+
+import {
+    articleRegistry
+} from "../data/articles/article-registry.js";
+
 
 
 /* =========================================================
@@ -68,6 +78,124 @@ function escapeHTML(value = "") {
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+
+}
+
+
+
+/* =========================================================
+   Get Article Route Key
+========================================================= */
+
+function getArticleRouteKey() {
+
+    const pathname =
+        window.location.pathname;
+
+
+    /*
+       Expected URL:
+
+       /Toolzenhub/articles/
+       loan-comparison/
+       how-to-reduce-home-loan-interest/
+
+       We remove:
+       - site root
+       - articles/
+       - trailing slash
+    */
+
+
+    const marker =
+        "/articles/";
+
+
+    const markerIndex =
+        pathname.indexOf(marker);
+
+
+    if (markerIndex === -1) {
+        return "";
+    }
+
+
+    const route =
+        pathname
+            .substring(
+                markerIndex + marker.length
+            )
+            .replace(
+                /^\/+|\/+$/g,
+                ""
+            );
+
+
+    return route;
+
+}
+
+
+
+/* =========================================================
+   Load Article
+========================================================= */
+
+async function loadArticle() {
+
+    const routeKey =
+        getArticleRouteKey();
+
+
+    if (!routeKey) {
+
+        console.error(
+            "ToolZen Hub: Article route could not be determined."
+        );
+
+        return null;
+
+    }
+
+
+    const loader =
+        articleRegistry[routeKey];
+
+
+    if (!loader) {
+
+        console.error(
+            `ToolZen Hub: No article registered for "${routeKey}".`
+        );
+
+        return null;
+
+    }
+
+
+    try {
+
+        const module =
+            await loader();
+
+
+        return (
+            module.default ||
+            module.article ||
+            null
+        );
+
+    } catch (error) {
+
+        console.error(
+            "ToolZen Hub: Failed to load article data.",
+            error
+        );
+
+
+        return null;
+
+    }
 
 }
 
@@ -479,7 +607,10 @@ function renderSidebar(
 
 
                 <h2 id="article-author-title">
-                    ${escapeHTML(article.author?.name || "ToolZen Hub")}
+                    ${escapeHTML(
+                        article.author?.name ||
+                        "ToolZen Hub"
+                    )}
                 </h2>
 
 
@@ -622,8 +753,12 @@ function renderArticle(
                                 >
 
                                     <img
-                                        src="${escapeHTML(article.image.src)}"
-                                        alt="${escapeHTML(article.image.alt)}"
+                                        src="${escapeHTML(
+                                            article.image.src
+                                        )}"
+                                        alt="${escapeHTML(
+                                            article.image.alt
+                                        )}"
                                         width="800"
                                         height="450"
                                         fetchpriority="high"
@@ -719,12 +854,16 @@ function initializeBreadcrumb(
         renderBreadcrumb([
 
             {
-                label: "Articles",
-                href: "/Toolzenhub/articles.html"
+                label:
+                    "Articles",
+
+                href:
+                    "/Toolzenhub/articles.html"
             },
 
             {
-                label: article.title
+                label:
+                    article.title
             }
 
         ]);
@@ -827,69 +966,9 @@ export function initializeArticlePage(
 ) {
 
     if (!article) {
+
         console.error(
             "ToolZen Hub: Article data was not provided."
         );
 
-        return;
-    }
-
-
-    /* =====================================================
-       Global Header
-    ===================================================== */
-
-    renderHeader();
-
-
-    /* =====================================================
-       Article
-    ===================================================== */
-
-    renderArticle(
-        article
-    );
-
-
-    /* =====================================================
-       Breadcrumb
-    ===================================================== */
-
-    initializeBreadcrumb(
-        article
-    );
-
-
-    /* =====================================================
-       FAQ Schema
-    ===================================================== */
-
-    generateFAQSchema(
-        article
-    );
-
-
-    /* =====================================================
-       Global Footer
-    ===================================================== */
-
-    renderFooter();
-
-
-    /* =====================================================
-       Newsletter
-    ===================================================== */
-
-    initializeNewsletter();
-
-}
-
-
-
-/* =========================================================
-   Default Export
-========================================================= */
-
-export default {
-    initializeArticlePage
-};
+   
