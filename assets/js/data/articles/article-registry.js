@@ -8,8 +8,17 @@
    The shared article engine uses the current URL to
    determine which article data module should be loaded.
 
+   Route format:
+
+   /Toolzenhub/articles/{topic}/{slug}/
+
+   Registry key format:
+
+   {topic}/{slug}
+
    This architecture scales to hundreds or thousands
-   of articles without creating a JS file for every page.
+   of articles without creating a JavaScript file
+   for every article page.
 ========================================================= */
 
 
@@ -19,6 +28,7 @@ export const articleRegistry = {
     /* =====================================================
        LOAN COMPARISON ARTICLES
     ===================================================== */
+
 
     "loan-comparison/how-to-reduce-home-loan-interest":
         () =>
@@ -60,6 +70,5 @@ export const articleRegistry = {
             import(
                 "./loan-comparison/choose-right-loan-tenure.js"
             )
-
 
 };
