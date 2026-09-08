@@ -42,6 +42,23 @@ export const ROUTES = {
 
 
     /* =====================================================
+       INDIVIDUAL ARTICLE
+    ===================================================== */
+
+    article(
+        topic,
+        slug
+    ) {
+
+        return (
+            `${SITE_ROOT}articles/` +
+            `${topic}/${slug}/`
+        );
+
+    },
+
+
+    /* =====================================================
        ABOUT
     ===================================================== */
 
@@ -69,9 +86,14 @@ export const ROUTES = {
        INDIVIDUAL CALCULATOR
     ===================================================== */
 
-    calculator(slug) {
+    calculator(
+        slug
+    ) {
 
-        return `${SITE_ROOT}calculators/${slug}/`;
+        return (
+            `${SITE_ROOT}calculators/` +
+            `${slug}/`
+        );
 
     }
 
