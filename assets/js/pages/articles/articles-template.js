@@ -34,7 +34,7 @@ BREADCRUMB
 
 function renderArticlesBreadcrumb() {
 
-```
+
 return `
 
     <div class="articles-container">
@@ -52,7 +52,7 @@ return `
     </div>
 
 `;
-```
+
 
 }
 
@@ -62,7 +62,7 @@ HERO
 
 function renderHero() {
 
-```
+
 return `
 
     <section class="articles-hero">
@@ -107,7 +107,7 @@ return `
     </section>
 
 `;
-```
+
 
 }
 
@@ -117,7 +117,7 @@ FILTER BAR
 
 function renderFilterBar() {
 
-```
+
 return `
 
     <div class="articles-filter-bar">
@@ -145,7 +145,6 @@ return `
     </div>
 
 `;
-```
 
 }
 
@@ -155,7 +154,6 @@ SEARCH
 
 function renderSearch() {
 
-```
 return `
 
     <div class="article-sidebar-search">
@@ -199,7 +197,7 @@ return `
     </div>
 
 `;
-```
+
 
 }
 
@@ -209,7 +207,7 @@ CATEGORIES SIDEBAR
 
 function renderCategories() {
 
-```
+
 const visibleCategories =
     categories.slice(0, 5);
 
@@ -286,7 +284,7 @@ return `
     </div>
 
 `;
-```
+
 
 }
 
@@ -298,7 +296,6 @@ function getArticleHref(
 article
 ) {
 
-```
 /*
  * Only articles with an individual article page
  * receive a real article URL.
@@ -318,7 +315,7 @@ return ROUTES.article(
     article.topic,
     article.slug
 );
-```
+
 
 }
 
@@ -328,7 +325,6 @@ POPULAR ARTICLES
 
 function renderPopularArticles() {
 
-```
 return `
 
     <div class="article-sidebar-card">
@@ -380,7 +376,7 @@ return `
     </div>
 
 `;
-```
+
 
 }
 
@@ -390,7 +386,7 @@ NEWSLETTER
 
 function renderNewsletter() {
 
-```
+
 return `
 
     <div class="article-newsletter">
@@ -452,7 +448,6 @@ return `
     </div>
 
 `;
-```
 
 }
 
@@ -462,7 +457,7 @@ SIDEBAR
 
 function renderSidebar() {
 
-```
+
 return `
 
     <aside class="articles-sidebar">
@@ -478,7 +473,7 @@ return `
     </aside>
 
 `;
-```
+
 
 }
 
@@ -488,7 +483,7 @@ MAIN PAGE TEMPLATE
 
 export function renderArticlesTemplate() {
 
-```
+
 return `
 
     <div id="articles-page">
