@@ -3,13 +3,33 @@
    Articles Sidebar
 ========================================================= */
 
-import { categories } from "./articles-data.js";
 
-import { articlesState } from "./articles-state.js";
+/* =========================================================
+   CATEGORY DATA
+========================================================= */
 
-import { setArticleCategory } from "./articles-filters.js";
+import {
+    categories
+} from "./articles-data.js";
 
-import { renderArticleCards } from "./articles-render.js";
+
+/* =========================================================
+   STATE
+========================================================= */
+
+import {
+    articlesState
+} from "./articles-state.js";
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+import {
+    setArticleCategory
+} from "./articles-filters.js";
+
 
 
 /* =========================================================
@@ -36,11 +56,14 @@ function scrollToArticles() {
 }
 
 
+
 /* =========================================================
    CATEGORY LINK
 ========================================================= */
 
-function initializeCategoryLink(item) {
+function initializeCategoryLink(
+    item
+) {
 
     item.addEventListener(
         "click",
@@ -63,10 +86,14 @@ function initializeCategoryLink(item) {
                 true
             );
 
+
+            scrollToArticles();
+
         }
     );
 
 }
+
 
 
 /* =========================================================
@@ -88,17 +115,28 @@ export function initializeSidebarCategories() {
 }
 
 
+
 /* =========================================================
    CREATE CATEGORY ITEM
 ========================================================= */
 
-function createCategoryItem(category) {
+function createCategoryItem(
+    category
+) {
 
     const item =
-        document.createElement("a");
+        document.createElement(
+            "a"
+        );
 
 
-    item.href = "#";
+    /*
+     * Category items are filters,
+     * not article navigation links.
+     */
+
+    item.href =
+        "#";
 
 
     item.className =
@@ -135,12 +173,15 @@ function createCategoryItem(category) {
     `;
 
 
-    initializeCategoryLink(item);
+    initializeCategoryLink(
+        item
+    );
 
 
     return item;
 
 }
+
 
 
 /* =========================================================
@@ -182,7 +223,9 @@ export function initializeMoreCategories() {
             if (
                 !hiddenCategories.length
             ) {
+
                 return;
+
             }
 
 
@@ -199,7 +242,9 @@ export function initializeMoreCategories() {
                             );
 
 
-                        list.appendChild(item);
+                        list.appendChild(
+                            item
+                        );
 
                     }
                 );
@@ -231,7 +276,9 @@ export function initializeMoreCategories() {
 
 
                         if (item) {
+
                             item.remove();
+
                         }
 
                     }
@@ -258,6 +305,7 @@ export function initializeMoreCategories() {
     );
 
 }
+
 
 
 /* =========================================================
@@ -298,7 +346,9 @@ export function initializeNewsletter() {
             if (
                 !emailInput.value.trim()
             ) {
+
                 return;
+
             }
 
 
@@ -306,7 +356,6 @@ export function initializeNewsletter() {
              * Newsletter backend
              * can be connected here later.
              */
-
 
             emailInput.value = "";
 
@@ -321,49 +370,27 @@ export function initializeNewsletter() {
 }
 
 
+
 /* =========================================================
    ARTICLE LINKS
 ========================================================= */
 
 export function initializeArticleLinks() {
 
-    const articleLinks =
-        document.querySelectorAll(
-            ".article-card a, .popular-article"
-        );
+    /*
+     * Article cards and popular articles now
+     * contain their real destination URLs directly
+     * in their href attributes.
+     *
+     * Do not prevent the default click behavior.
+     *
+     * This allows:
+     *
+     * /Toolzenhub/articles/{topic}/{slug}/
+     *
+     * to be handled naturally by the browser.
+     */
 
-
-    articleLinks.forEach(link => {
-
-        link.addEventListener(
-            "click",
-            event => {
-
-                event.preventDefault();
-
-
-                const articleId =
-                    link.dataset.articleId;
-
-
-                /*
-                 * Article detail routing
-                 * can be connected here later.
-                 *
-                 * Example:
-                 *
-                 * window.location.hash =
-                 *     `article/${articleId}`;
-                 */
-
-                console.log(
-                    "Article selected:",
-                    articleId
-                );
-
-            }
-        );
-
-    });
+    return;
 
 }
