@@ -988,3 +988,124 @@ function generateFAQSchema(
     );
 
 }
+
+
+/* =========================================================
+   Initialize Article Page
+========================================================= */
+
+export function initializeArticlePage(
+    article
+) {
+
+    if (!article) {
+
+        console.error(
+            "ToolZen Hub: Article data was not provided."
+        );
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       Global Header
+    ===================================================== */
+
+    renderHeader();
+
+
+    /* =====================================================
+       Article
+    ===================================================== */
+
+    renderArticle(
+        article
+    );
+
+
+    /* =====================================================
+       Breadcrumb
+    ===================================================== */
+
+    initializeBreadcrumb(
+        article
+    );
+
+
+    /* =====================================================
+       FAQ Schema
+    ===================================================== */
+
+    generateFAQSchema(
+        article
+    );
+
+
+    /* =====================================================
+       Global Footer
+    ===================================================== */
+
+    renderFooter();
+
+
+    /* =====================================================
+       Newsletter
+    ===================================================== */
+
+    initializeNewsletter();
+
+}
+
+
+
+/* =========================================================
+   Initialize From URL
+========================================================= */
+
+async function initializeFromURL() {
+
+    const article =
+        await loadArticle();
+
+
+    if (!article) {
+
+        console.error(
+            "ToolZen Hub: Article could not be loaded."
+        );
+
+        return;
+
+    }
+
+
+    initializeArticlePage(
+        article
+    );
+
+}
+
+
+
+/* =========================================================
+   DOM Ready
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    initializeFromURL
+);
+
+
+
+/* =========================================================
+   Default Export
+========================================================= */
+
+export default {
+
+    initializeArticlePage
+
+};
