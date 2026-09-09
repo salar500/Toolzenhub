@@ -3,11 +3,42 @@
    Articles Rendering
 ========================================================= */
 
-import { articles } from "./articles-data.js";
 
-import { articlesState } from "./articles-state.js";
+/* =========================================================
+   ARTICLE DATA
+========================================================= */
 
-import { updatePagination } from "./articles-pagination.js";
+import {
+    articles
+} from "./articles-data.js";
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+import {
+    articlesState
+} from "./articles-state.js";
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+import {
+    updatePagination
+} from "./articles-pagination.js";
+
+
+/* =========================================================
+   CENTRAL ROUTES
+========================================================= */
+
+import {
+    ROUTES
+} from "../../routes.js";
+
 
 
 /* =========================================================
@@ -58,18 +89,60 @@ export function getFilteredArticles() {
 }
 
 
+
+/* =========================================================
+   ARTICLE URL
+========================================================= */
+
+function getArticleHref(
+    article
+) {
+
+    /*
+     * Only articles with both a topic and slug
+     * have an individual article page.
+     *
+     * Articles without a detail page yet remain
+     * non-navigational until their pages are created.
+     */
+
+    if (
+        !article.topic ||
+        !article.slug
+    ) {
+
+        return "#";
+
+    }
+
+
+    return ROUTES.article(
+        article.topic,
+        article.slug
+    );
+
+}
+
+
+
 /* =========================================================
    ARTICLE CARD
 ========================================================= */
 
-function renderArticleCard(article) {
+function renderArticleCard(
+    article
+) {
+
+    const articleHref =
+        getArticleHref(article);
+
 
     return `
 
         <article class="article-card">
 
             <a
-                href="#"
+                href="${articleHref}"
                 class="article-card-image-link"
                 data-article-id="${article.id}"
                 aria-label="${article.title}"
@@ -97,7 +170,7 @@ function renderArticleCard(article) {
                     <h2>
 
                         <a
-                            href="#"
+                            href="${articleHref}"
                             data-article-id="${article.id}"
                         >
                             ${article.title}
@@ -148,6 +221,7 @@ function renderArticleCard(article) {
 }
 
 
+
 /* =========================================================
    EMPTY STATE
 ========================================================= */
@@ -179,6 +253,7 @@ function renderEmptyState() {
     `;
 
 }
+
 
 
 /* =========================================================
