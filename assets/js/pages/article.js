@@ -56,6 +56,15 @@ import {
 
 
 /* =========================================================
+   Central Routes
+========================================================= */
+
+import {
+    ROUTES
+} from "../routes.js";
+
+
+/* =========================================================
    Article Registry
 ========================================================= */
 
@@ -69,7 +78,9 @@ import {
    Utility
 ========================================================= */
 
-function escapeHTML(value = "") {
+function escapeHTML(
+    value = ""
+) {
 
     return String(value)
 
@@ -116,7 +127,9 @@ function getArticleRouteKey() {
 
 
     if (markerIndex === -1) {
+
         return "";
+
     }
 
 
@@ -209,30 +222,32 @@ function renderSections(
     sections = []
 ) {
 
-    return sections.map(section => `
+    return sections.map(
+        section => `
 
-        <section
-            class="article-section"
-            aria-labelledby="${escapeHTML(section.id)}"
-        >
+            <section
+                class="article-section"
+                aria-labelledby="${escapeHTML(section.id)}"
+            >
 
-            <h2 id="${escapeHTML(section.id)}">
-                ${escapeHTML(section.heading)}
-            </h2>
+                <h2 id="${escapeHTML(section.id)}">
+                    ${escapeHTML(section.heading)}
+                </h2>
 
-            ${(section.paragraphs || []).map(
-                paragraph => `
+                ${(section.paragraphs || []).map(
+                    paragraph => `
 
-                    <p>
-                        ${escapeHTML(paragraph)}
-                    </p>
+                        <p>
+                            ${escapeHTML(paragraph)}
+                        </p>
 
-                `
-            ).join("")}
+                    `
+                ).join("")}
 
-        </section>
+            </section>
 
-    `).join("");
+        `
+    ).join("");
 
 }
 
@@ -247,7 +262,9 @@ function renderExample(
 ) {
 
     if (!example) {
+
         return "";
+
     }
 
 
@@ -289,7 +306,9 @@ function renderConsiderations(
 ) {
 
     if (!considerations.length) {
+
         return "";
+
     }
 
 
@@ -346,7 +365,9 @@ function renderFAQ(
 ) {
 
     if (!faq.length) {
+
         return "";
+
     }
 
 
@@ -406,7 +427,9 @@ function renderCalculator(
 ) {
 
     if (!calculator) {
+
         return "";
+
     }
 
 
@@ -460,7 +483,9 @@ function renderRelatedArticles(
 ) {
 
     if (!articles.length) {
+
         return "";
+
     }
 
 
@@ -645,7 +670,9 @@ function renderArticle(
 
 
     if (!app) {
+
         return;
+
     }
 
 
@@ -846,7 +873,9 @@ function initializeBreadcrumb(
 
 
     if (!breadcrumb) {
+
         return;
+
     }
 
 
@@ -858,7 +887,7 @@ function initializeBreadcrumb(
                     "Articles",
 
                 href:
-                    "/Toolzenhub/articles.html"
+                    ROUTES.articles
             },
 
             {
@@ -869,7 +898,6 @@ function initializeBreadcrumb(
         ]);
 
 }
-
 
 
 /* =========================================================
@@ -884,7 +912,9 @@ function generateFAQSchema(
         !article.faq ||
         !article.faq.length
     ) {
+
         return;
+
     }
 
 
@@ -895,7 +925,9 @@ function generateFAQSchema(
 
 
     if (existing) {
+
         existing.remove();
+
     }
 
 
@@ -908,25 +940,27 @@ function generateFAQSchema(
             "FAQPage",
 
         "mainEntity":
-            article.faq.map(item => ({
-
-                "@type":
-                    "Question",
-
-                "name":
-                    item.question,
-
-                "acceptedAnswer": {
+            article.faq.map(
+                item => ({
 
                     "@type":
-                        "Answer",
+                        "Question",
 
-                    "text":
-                        item.answer
+                    "name":
+                        item.question,
 
-                }
+                    "acceptedAnswer": {
 
-            }))
+                        "@type":
+                            "Answer",
+
+                        "text":
+                            item.answer
+
+                    }
+
+                })
+            )
 
     };
 
@@ -954,21 +988,3 @@ function generateFAQSchema(
     );
 
 }
-
-
-
-/* =========================================================
-   Initialize Article Page
-========================================================= */
-
-export function initializeArticlePage(
-    article
-) {
-
-    if (!article) {
-
-        console.error(
-            "ToolZen Hub: Article data was not provided."
-        );
-
-   
