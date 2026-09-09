@@ -1,930 +1,536 @@
 /* =========================================================
-   ToolZen Hub
-   Articles Template
+ToolZen Hub
+Articles Template
 ========================================================= */
 
-
 /* =========================================================
-   ARTICLE DATA
+ARTICLE DATA
 ========================================================= */
 
 import {
-    articles,
-    categories
+articles,
+categories
 } from "./articles-data.js";
 
-
 /* =========================================================
-   CENTRAL ROUTES
+CENTRAL ROUTES
 ========================================================= */
 
 import {
-    ROUTES
+ROUTES
 } from "../../routes.js";
 
-
 /* =========================================================
-   BREADCRUMB
+BREADCRUMB
 ========================================================= */
 
 import {
-    renderBreadcrumb
+renderBreadcrumb
 } from "../../components/breadcrumb.js";
 
-
-
 /* =========================================================
-   BREADCRUMB
+BREADCRUMB
 ========================================================= */
 
 function renderArticlesBreadcrumb() {
 
-    return `
+```
+return `
 
-        <div class="articles-container">
+    <div class="articles-container">
 
-            <div class="articles-breadcrumb">
+        <div class="articles-breadcrumb">
 
-                ${renderBreadcrumb([
-                    {
-                        label: "Articles"
-                    }
-                ])}
-
-            </div>
+            ${renderBreadcrumb([
+                {
+                    label: "Articles"
+                }
+            ])}
 
         </div>
 
-    `;
+    </div>
+
+`;
+```
 
 }
 
-
-
 /* =========================================================
-   HERO
+HERO
 ========================================================= */
 
 function renderHero() {
 
-    return `
+```
+return `
 
-        <section class="articles-hero">
+    <section class="articles-hero">
 
-            <div class="articles-container">
+        <div class="articles-container">
 
-                <div class="articles-hero-inner">
+            <div class="articles-hero-inner">
 
-                    <div class="articles-hero-content">
+                <div class="articles-hero-content">
 
-                        <h1>
-                            Articles & Guides
-                        </h1>
+                    <h1>
+                        Articles & Guides
+                    </h1>
 
-                        <p>
-                            Helpful guides, tips and insights to help you
-                            make smarter financial and everyday decisions.
-                        </p>
+                    <p>
+                        Helpful guides, tips and insights to help you
+                        make smarter financial and everyday decisions.
+                    </p>
 
-                    </div>
+                </div>
 
 
-                    <div class="articles-hero-visual">
+                <div class="articles-hero-visual">
 
-                        <div class="articles-hero-illustration">
+                    <div class="articles-hero-illustration">
 
-                            <img
-                                class="articles-hero-image"
-                                src="assets/Images/articles-hero.png"
-                                alt="Books, plant and coffee mug representing learning and financial growth"
-                            >
-
-                        </div>
-
+                        <img
+                            class="articles-hero-image"
+                            src="assets/Images/articles-hero.png"
+                            alt="Books, plant and coffee mug representing learning and financial growth"
+                        >
 
                     </div>
+
 
                 </div>
 
             </div>
 
-        </section>
+        </div>
 
-    `;
+    </section>
+
+`;
+```
 
 }
 
-
-
 /* =========================================================
-   FILTER BAR
+FILTER BAR
 ========================================================= */
 
 function renderFilterBar() {
 
-    return `
+```
+return `
 
-        <div class="articles-filter-bar">
+    <div class="articles-filter-bar">
+
+        <button
+            type="button"
+            class="article-filter active"
+            data-category="All"
+        >
+            All Articles
+        </button>
+
+        ${categories.map(category => `
 
             <button
                 type="button"
-                class="article-filter active"
-                data-category="All"
+                class="article-filter"
+                data-category="${category.name}"
             >
-                All Articles
+                ${category.name}
             </button>
 
-            ${categories.map(category => `
+        `).join("")}
 
-                <button
-                    type="button"
-                    class="article-filter"
-                    data-category="${category.name}"
+    </div>
+
+`;
+```
+
+}
+
+/* =========================================================
+SEARCH
+========================================================= */
+
+function renderSearch() {
+
+```
+return `
+
+    <div class="article-sidebar-search">
+
+        <form id="article-search-form">
+
+            <label
+                for="article-search"
+                class="sr-only"
+            >
+                Search articles
+            </label>
+
+            <input
+                id="article-search"
+                type="search"
+                placeholder="Search articles..."
+                autocomplete="off"
+            >
+
+            <button
+                type="submit"
+                aria-label="Search articles"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
                 >
-                    ${category.name}
-                </button>
+
+                    <path
+                        d="M21 21l-4.35-4.35m1.35-5.15a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+                    />
+
+                </svg>
+
+            </button>
+
+        </form>
+
+    </div>
+
+`;
+```
+
+}
+
+/* =========================================================
+CATEGORIES SIDEBAR
+========================================================= */
+
+function renderCategories() {
+
+```
+const visibleCategories =
+    categories.slice(0, 5);
+
+
+return `
+
+    <div class="article-sidebar-card">
+
+        <div class="article-sidebar-heading">
+
+            <h2>
+                Categories
+            </h2>
+
+        </div>
+
+
+        <div class="article-category-list">
+
+            ${visibleCategories.map(category => `
+
+                <a
+                    href="#"
+                    class="article-category-item"
+                    data-sidebar-category="${category.name}"
+                >
+
+                    <span class="article-category-name">
+
+                        <span class="article-category-icon">
+                            ${category.icon}
+                        </span>
+
+                        ${category.name}
+
+                    </span>
+
+
+                    <span class="article-category-count">
+
+                        ${category.count}
+
+                        <span aria-hidden="true">
+                            →
+                        </span>
+
+                    </span>
+
+                </a>
 
             `).join("")}
 
         </div>
 
-    `;
 
-}
-
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-function renderSearch() {
-
-    return `
-
-        <div class="article-sidebar-search">
-
-            <form id="article-search-form">
-
-                <label
-                    for="article-search"
-                    class="sr-only"
-                >
-                    Search articles
-                </label>
-
-                <input
-                    id="article-search"
-                    type="search"
-                    placeholder="Search articles..."
-                    autocomplete="off"
-                >
-
-                <button
-                    type="submit"
-                    aria-label="Search articles"
-                >
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
+        ${
+            categories.length > 5
+                ? `
+                    <button
+                        type="button"
+                        class="article-more-categories"
                     >
+                        More Categories
 
-                        <path
-                            d="M21 21l-4.35-4.35m1.35-5.15a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
-                        />
-
-                    </svg>
-
-                </button>
-
-            </form>
-
-        </div>
-
-    `;
-
-}
-
-
-
-/* =========================================================
-   CATEGORIES SIDEBAR
-========================================================= */
-
-function renderCategories() {
-
-    const visibleCategories =
-        categories.slice(0, 5);
-
-
-    return `
-
-        <div class="article-sidebar-card">
-
-            <div class="article-sidebar-heading">
-
-                <h2>
-                    Categories
-                </h2>
-
-            </div>
-
-
-            <div class="article-category-list">
-
-                ${visibleCategories.map(category => `
-
-                    <a
-                        href="#"
-                        class="article-category-item"
-                        data-sidebar-category="${category.name}"
-                    >
-
-                        <span class="article-category-name">
-
-                            <span class="article-category-icon">
-                                ${category.icon}
-                            </span>
-
-                            ${category.name}
-
+                        <span aria-hidden="true">
+                            ⌄
                         </span>
 
+                    </button>
+                `
+                : ""
+        }
 
-                        <span class="article-category-count">
+    </div>
 
-                            ${category.count}
-
-                            <span aria-hidden="true">
-                                →
-                            </span>
-
-                        </span>
-
-                    </a>
-
-                `).join("")}
-
-            </div>
-
-
-            ${
-                categories.length > 5
-                    ? `
-                        <button
-                            type="button"
-                            class="article-more-categories"
-                        >
-                            More Categories
-
-                            <span aria-hidden="true">
-                                ⌄
-                            </span>
-
-                        </button>
-                    `
-                    : ""
-            }
-
-        </div>
-
-    `;
+`;
+```
 
 }
 
-
-
 /* =========================================================
-   ARTICLE URL
+ARTICLE URL
 ========================================================= */
 
 function getArticleHref(
-    article
+article
 ) {
 
-    /*
-     * Only articles with an individual article page
-     * receive a real article URL.
-     */
+```
+/*
+ * Only articles with an individual article page
+ * receive a real article URL.
+ */
 
-    if (
-        !article.topic ||
-        !article.slug
-    ) {
+if (
+    !article.topic ||
+    !article.slug
+) {
 
-        return "#";
-
-    }
-
-
-    return ROUTES.article(
-        article.topic,
-        article.slug
-    );
+    return "#";
 
 }
 
 
+return ROUTES.article(
+    article.topic,
+    article.slug
+);
+```
+
+}
 
 /* =========================================================
-   POPULAR ARTICLES
+POPULAR ARTICLES
 ========================================================= */
 
 function renderPopularArticles() {
 
-    return `
+```
+return `
 
-        <div class="article-sidebar-card">
+    <div class="article-sidebar-card">
 
-            <div class="article-sidebar-heading">
+        <div class="article-sidebar-heading">
 
-                <h2>
-                    Popular Articles
-                </h2>
+            <h2>
+                Popular Articles
+            </h2>
 
-            </div>
+        </div>
 
 
-            <div class="popular-articles">
+        <div class="popular-articles">
 
-                ${articles.slice(0, 4).map(article => `
+            ${articles.slice(0, 4).map(article => `
 
-                    <a
-                        href="${getArticleHref(article)}"
-                        class="popular-article"
-                        data-article-id="${article.id}"
+                <a
+                    href="${getArticleHref(article)}"
+                    class="popular-article"
+                    data-article-id="${article.id}"
+                >
+
+                    <img
+                        src="${article.image}"
+                        alt="${article.alt}"
+                        loading="lazy"
                     >
 
-                        <img
-                            src="${article.image}"
-                            alt="${article.alt}"
-                            loading="lazy"
-                        >
 
+                    <div>
 
-                        <div>
+                        <h3>
+                            ${article.title}
+                        </h3>
 
-                            <h3>
-                                ${article.title}
-                            </h3>
-
-                            <span>
-                                ${article.date}
-                            </span>
-
-                        </div>
-
-                    </a>
-
-                `).join("")}
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-
-/* =========================================================
-   NEWSLETTER
-========================================================= */
-
-function renderNewsletter() {
-
-    return `
-
-        <div class="article-newsletter">
-
-            <div class="newsletter-icon">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                >
-
-                    <path
-                        d="M3 6.5A2.5 2.5 0 015.5 4h13A2.5 2.5 0 0121 6.5v11a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 17.5v-11zm2 .5l7 5 7-5"
-                    />
-
-                </svg>
-
-            </div>
-
-
-            <div class="newsletter-content">
-
-                <h2>
-                    Stay Updated
-                </h2>
-
-                <p>
-                    Get the latest articles and updates
-                    in your inbox.
-                </p>
-
-            </div>
-
-
-            <form class="newsletter-form">
-
-                <label
-                    for="newsletter-email"
-                    class="sr-only"
-                >
-                    Email address
-                </label>
-
-
-                <input
-                    id="newsletter-email"
-                    type="email"
-                    placeholder="Enter your email"
-                    required
-                >
-
-
-                <button type="submit">
-                    Subscribe
-                </button>
-
-            </form>
-
-        </div>
-
-    `;
-
-}
-
-
-
-/* =========================================================
-   SIDEBAR
-========================================================= */
-
-function renderSidebar() {
-
-    return `
-
-        <aside class="articles-sidebar">
-
-            ${renderSearch()}
-
-            ${renderCategories()}
-
-            ${renderPopularArticles()}
-
-            ${renderNewsletter()}
-
-        </aside>
-
-    `;
-
-}
-
-
-
-/* =========================================================
-   MAIN PAGE TEMPLATE
-========================================================= */
-
-export function renderArticlesTemplate() {
-
-    return `
-
-        <div id="articles-page">
-
-            ${renderArticlesBreadcrumb()}
-
-
-            ${renderHero()}
-
-
-            <main class="articles-container articles-main">
-
-                ${renderFilterBar()}
-
-
-                <div class="articles-layout">
-
-
-                    <section class="articles-feed">
-
-                        <div
-                            id="articles-list"
-                            class="articles-list"
-                        ></div>
-
-
-                        <nav
-                            class="articles-pagination"
-                            aria-label="Articles pagination"
-                        ></nav>
-
-                    </section>
-
-
-                    ${renderSidebar()}
-
-                </div>
-
-            </main>
-
-        </div>
-
-    `;
-
-}
-                     
-
+                        <span>
+                            ${article.date}
+                        </span>
 
                     </div>
 
-                </div>
-
-            </div>
-
-        </section>
-
-    `;
-}
-
-
-/* =========================================================
-   FILTER BAR
-========================================================= */
-
-function renderFilterBar() {
-
-    return `
-
-        <div class="articles-filter-bar">
-
-            <button
-                type="button"
-                class="article-filter active"
-                data-category="All"
-            >
-                All Articles
-            </button>
-
-            ${categories.map(category => `
-
-                <button
-                    type="button"
-                    class="article-filter"
-                    data-category="${category.name}"
-                >
-                    ${category.name}
-                </button>
+                </a>
 
             `).join("")}
 
         </div>
 
-    `;
+    </div>
+
+`;
+```
+
 }
 
-
 /* =========================================================
-   SEARCH
-========================================================= */
-
-function renderSearch() {
-
-    return `
-
-        <div class="article-sidebar-search">
-
-            <form id="article-search-form">
-
-                <label
-                    for="article-search"
-                    class="sr-only"
-                >
-                    Search articles
-                </label>
-
-                <input
-                    id="article-search"
-                    type="search"
-                    placeholder="Search articles..."
-                    autocomplete="off"
-                >
-
-                <button
-                    type="submit"
-                    aria-label="Search articles"
-                >
-
-                    <svg
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                    >
-
-                        <path
-                            d="M21 21l-4.35-4.35m1.35-5.15a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
-                        />
-
-                    </svg>
-
-                </button>
-
-            </form>
-
-        </div>
-
-    `;
-}
-
-
-/* =========================================================
-   CATEGORIES SIDEBAR
-========================================================= */
-
-function renderCategories() {
-
-    const visibleCategories = categories.slice(0, 5);
-
-    return `
-
-        <div class="article-sidebar-card">
-
-            <div class="article-sidebar-heading">
-
-                <h2>
-                    Categories
-                </h2>
-
-            </div>
-
-
-            <div class="article-category-list">
-
-                ${visibleCategories.map(category => `
-
-                    <a
-                        href="#"
-                        class="article-category-item"
-                        data-sidebar-category="${category.name}"
-                    >
-
-                        <span class="article-category-name">
-
-                            <span class="article-category-icon">
-                                ${category.icon}
-                            </span>
-
-                            ${category.name}
-
-                        </span>
-
-
-                        <span class="article-category-count">
-
-                            ${category.count}
-
-                            <span aria-hidden="true">
-                                →
-                            </span>
-
-                        </span>
-
-                    </a>
-
-                `).join("")}
-
-            </div>
-
-
-            ${
-                categories.length > 5
-                    ? `
-                        <button
-                            type="button"
-                            class="article-more-categories"
-                        >
-                            More Categories
-
-                            <span aria-hidden="true">
-                                ⌄
-                            </span>
-
-                        </button>
-                    `
-                    : ""
-            }
-
-        </div>
-
-    `;
-}
-
-
-/* =========================================================
-   POPULAR ARTICLES
-========================================================= */
-
-function renderPopularArticles() {
-
-    return `
-
-        <div class="article-sidebar-card">
-
-            <div class="article-sidebar-heading">
-
-                <h2>
-                    Popular Articles
-                </h2>
-
-            </div>
-
-
-            <div class="popular-articles">
-
-                ${articles.slice(0, 4).map(article => `
-
-                    <a
-                        href="#"
-                        class="popular-article"
-                        data-article-id="${article.id}"
-                    >
-
-                        <img
-                            src="${article.image}"
-                            alt="${article.alt}"
-                            loading="lazy"
-                        >
-
-
-                        <div>
-
-                            <h3>
-                                ${article.title}
-                            </h3>
-
-                            <span>
-                                ${article.date}
-                            </span>
-
-                        </div>
-
-                    </a>
-
-                `).join("")}
-
-            </div>
-
-        </div>
-
-    `;
-}
-
-
-/* =========================================================
-   NEWSLETTER
+NEWSLETTER
 ========================================================= */
 
 function renderNewsletter() {
 
-    return `
+```
+return `
 
-        <div class="article-newsletter">
+    <div class="article-newsletter">
 
-            <div class="newsletter-icon">
+        <div class="newsletter-icon">
 
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                >
+            <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
 
-                    <path
-                        d="M3 6.5A2.5 2.5 0 015.5 4h13A2.5 2.5 0 0121 6.5v11a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 17.5v-11zm2 .5l7 5 7-5"
-                    />
+                <path
+                    d="M3 6.5A2.5 2.5 0 015.5 4h13A2.5 2.5 0 0121 6.5v11a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 17.5v-11zm2 .5l7 5 7-5"
+                />
 
-                </svg>
-
-            </div>
-
-
-            <div class="newsletter-content">
-
-                <h2>
-                    Stay Updated
-                </h2>
-
-                <p>
-                    Get the latest articles and updates
-                    in your inbox.
-                </p>
-
-            </div>
-
-
-            <form class="newsletter-form">
-
-                <label
-                    for="newsletter-email"
-                    class="sr-only"
-                >
-                    Email address
-                </label>
-
-
-                <input
-                    id="newsletter-email"
-                    type="email"
-                    placeholder="Enter your email"
-                    required
-                >
-
-
-                <button type="submit">
-                    Subscribe
-                </button>
-
-            </form>
+            </svg>
 
         </div>
 
-    `;
+
+        <div class="newsletter-content">
+
+            <h2>
+                Stay Updated
+            </h2>
+
+            <p>
+                Get the latest articles and updates
+                in your inbox.
+            </p>
+
+        </div>
+
+
+        <form class="newsletter-form">
+
+            <label
+                for="newsletter-email"
+                class="sr-only"
+            >
+                Email address
+            </label>
+
+
+            <input
+                id="newsletter-email"
+                type="email"
+                placeholder="Enter your email"
+                required
+            >
+
+
+            <button type="submit">
+                Subscribe
+            </button>
+
+        </form>
+
+    </div>
+
+`;
+```
+
 }
 
-
 /* =========================================================
-   SIDEBAR
+SIDEBAR
 ========================================================= */
 
 function renderSidebar() {
 
-    return `
+```
+return `
 
-        <aside class="articles-sidebar">
+    <aside class="articles-sidebar">
 
-            ${renderSearch()}
+        ${renderSearch()}
 
-            ${renderCategories()}
+        ${renderCategories()}
 
-            ${renderPopularArticles()}
+        ${renderPopularArticles()}
 
-            ${renderNewsletter()}
+        ${renderNewsletter()}
 
-        </aside>
+    </aside>
 
-    `;
+`;
+```
+
 }
 
-
 /* =========================================================
-   MAIN PAGE TEMPLATE
+MAIN PAGE TEMPLATE
 ========================================================= */
 
 export function renderArticlesTemplate() {
 
-    return `
+```
+return `
 
-        <div id="articles-page">
+    <div id="articles-page">
 
-            ${renderArticlesBreadcrumb()}
-
-
-            ${renderHero()}
+        ${renderArticlesBreadcrumb()}
 
 
-            <main class="articles-container articles-main">
-
-                ${renderFilterBar()}
+        ${renderHero()}
 
 
-                <div class="articles-layout">
+        <main class="articles-container articles-main">
+
+            ${renderFilterBar()}
 
 
-                    <section class="articles-feed">
-
-                        <div
-                            id="articles-list"
-                            class="articles-list"
-                        ></div>
+            <div class="articles-layout">
 
 
-                        <nav
-                            class="articles-pagination"
-                            aria-label="Articles pagination"
-                        ></nav>
+                <section class="articles-feed">
 
-                    </section>
+                    <div
+                        id="articles-list"
+                        class="articles-list"
+                    ></div>
 
 
-                    ${renderSidebar()}
+                    <nav
+                        class="articles-pagination"
+                        aria-label="Articles pagination"
+                    ></nav>
 
-                </div>
+                </section>
 
-            </main>
 
-        </div>
+                ${renderSidebar()}
 
-    `;
+            </div>
+
+        </main>
+
+    </div>
+
+`;
+
 }
