@@ -40,6 +40,14 @@ const article = {
         "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
 
 
+    datePublished:
+        "",
+
+
+    dateModified:
+        "",
+
+
     introduction:
         "A home loan can be one of the biggest financial commitments you make. Understanding how interest is calculated and taking the right steps can help reduce the total cost of borrowing.",
 
