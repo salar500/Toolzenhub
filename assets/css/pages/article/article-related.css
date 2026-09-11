@@ -1,1 +1,158 @@
+/* =========================================================
+   ToolZen Hub
+   Individual Article
+   Related Articles
+========================================================= */
 
+
+/* =========================================================
+   RELATED ARTICLES
+========================================================= */
+
+.article-related {
+
+    margin:
+        48px 0 0;
+
+    padding:
+        36px 0 50px;
+
+    border-top:
+        1px solid #e2e8f0;
+
+}
+
+
+.article-section-heading {
+
+    margin-bottom:
+        20px;
+
+}
+
+
+.article-related-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap:
+        18px;
+
+}
+
+
+.article-related-card {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    min-height:
+        170px;
+
+    padding:
+        20px;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius:
+        12px;
+
+    background:
+        #ffffff;
+
+    text-decoration:
+        none;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+
+}
+
+
+.article-related-card:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        #bbf7d0;
+
+    box-shadow:
+        0 8px 24px rgba(
+            15,
+            23,
+            42,
+            0.07
+        );
+
+}
+
+
+.article-related-category {
+
+    margin-bottom:
+        9px;
+
+    color:
+        #0b9f58;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+}
+
+
+.article-related-card h3 {
+
+    margin:
+        0;
+
+    color:
+        #1e293b;
+
+    font-size:
+        16px;
+
+    line-height:
+        1.45;
+
+    font-weight:
+        700;
+
+}
+
+
+.article-related-link {
+
+    margin-top:
+        auto;
+
+    padding-top:
+        18px;
+
+    color:
+        #0b9f58;
+
+    font-size:
+        13px;
+
+    font-weight:
+        700;
+
+}
