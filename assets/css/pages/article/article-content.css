@@ -1,1 +1,58 @@
+/* =========================================================
+   ToolZen Hub
+   Individual Article
+   Content
+========================================================= */
 
+
+/* =========================================================
+   ARTICLE SECTIONS
+========================================================= */
+
+.article-section {
+
+    margin-bottom:
+        32px;
+
+}
+
+
+.article-section h2,
+.article-example h2,
+.article-considerations h2,
+.article-calculator h2,
+.article-faq h2,
+.article-related h2 {
+
+    margin:
+        0 0 14px;
+
+    color:
+        #0f172a;
+
+    font-size:
+        24px;
+
+    line-height:
+        1.3;
+
+    font-weight:
+        750;
+
+}
+
+
+.article-section p {
+
+    margin:
+        0 0 14px;
+
+}
+
+
+.article-section p:last-child {
+
+    margin-bottom:
+        0;
+
+}
