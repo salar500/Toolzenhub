@@ -1,1 +1,228 @@
+/* =========================================================
+   ToolZen Hub
+   Individual Article
+   Sidebar
+========================================================= */
 
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.article-sidebar {
+
+    position:
+        sticky;
+
+    top:
+        24px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        20px;
+
+}
+
+
+.article-sidebar-widget {
+
+    padding:
+        20px;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius:
+        14px;
+
+    background:
+        #ffffff;
+
+}
+
+
+.article-sidebar-widget h2 {
+
+    margin:
+        0 0 16px;
+
+    color:
+        #0f172a;
+
+    font-size:
+        18px;
+
+    line-height:
+        1.3;
+
+    font-weight:
+        750;
+
+}
+
+
+/* =========================================================
+   SIDEBAR CALCULATOR
+========================================================= */
+
+.article-calculator-list {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+}
+
+
+.article-calculator-item {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        34px minmax(0, 1fr) auto;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    padding:
+        10px 0;
+
+    color:
+        #334155;
+
+    text-decoration:
+        none;
+
+    font-size:
+        13px;
+
+    font-weight:
+        600;
+
+}
+
+
+.article-calculator-item:hover {
+
+    color:
+        #0b9f58;
+
+}
+
+
+.article-calculator-icon {
+
+    width:
+        34px;
+
+    height:
+        34px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        8px;
+
+    background:
+        #ecfdf5;
+
+    color:
+        #0b9f58;
+
+    font-size:
+        16px;
+
+}
+
+
+/* =========================================================
+   AUTHOR SIDEBAR
+========================================================= */
+
+.article-author-widget {
+
+    text-align:
+        center;
+
+}
+
+
+.article-author-profile-avatar {
+
+    width:
+        56px;
+
+    height:
+        56px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin:
+        0 auto 12px;
+
+    border-radius:
+        50%;
+
+    background:
+        #ecfdf5;
+
+    color:
+        #0b9f58;
+
+    font-size:
+        16px;
+
+    font-weight:
+        800;
+
+}
+
+
+.article-author-widget h2 {
+
+    margin-bottom:
+        8px;
+
+}
+
+
+.article-author-widget p {
+
+    margin:
+        0;
+
+    color:
+        #64748B;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.65;
+
+}
