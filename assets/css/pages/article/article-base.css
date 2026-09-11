@@ -1,1 +1,100 @@
+/* =========================================================
+   ToolZen Hub
+   Individual Article
+   Base
+========================================================= */
 
+
+/* =========================================================
+   ARTICLE CONTAINER
+========================================================= */
+
+.article-container {
+
+    width:
+        min(
+            calc(100% - 40px),
+            1140px
+        );
+
+    margin:
+        0 auto;
+
+}
+
+
+/* =========================================================
+   ARTICLE LAYOUT
+========================================================= */
+
+.article-layout {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        minmax(0, 1fr) 300px;
+
+    gap:
+        40px;
+
+    align-items:
+        start;
+
+}
+
+
+/* =========================================================
+   MAIN ARTICLE
+========================================================= */
+
+.article {
+
+    min-width:
+        0;
+
+    background:
+        #ffffff;
+
+}
+
+
+/* =========================================================
+   ARTICLE CONTENT
+========================================================= */
+
+.article-content {
+
+    color:
+        #334155;
+
+    font-size:
+        16px;
+
+    line-height:
+        1.7;
+
+}
+
+
+/* =========================================================
+   LINKS / FOCUS
+========================================================= */
+
+.article a:focus-visible,
+.article-sidebar a:focus-visible,
+.article-related-card:focus-visible,
+.article-faq-item summary:focus-visible {
+
+    outline:
+        3px solid rgba(
+            11,
+            159,
+            88,
+            0.25
+        );
+
+    outline-offset:
+        3px;
+
+}
