@@ -1,1 +1,291 @@
+/* =========================================================
+   ToolZen Hub
+   Individual Article
+   Responsive
+========================================================= */
 
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (
+    max-width: 900px
+) {
+
+    .article-layout {
+
+        grid-template-columns:
+            minmax(0, 1fr);
+
+        gap:
+            32px;
+
+    }
+
+
+    .article-sidebar {
+
+        position:
+            static;
+
+        display:
+            grid;
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+        align-items:
+            start;
+
+    }
+
+
+    .article-related-grid {
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (
+    max-width: 768px
+) {
+
+    .article-container {
+
+        width:
+            min(
+                calc(100% - 28px),
+                1140px
+            );
+
+    }
+
+
+    .article-breadcrumb {
+
+        padding-top:
+            18px;
+
+        margin-bottom:
+            20px;
+
+    }
+
+
+    .article-title {
+
+        font-size:
+            32px;
+
+    }
+
+
+    .article-introduction {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .article-content {
+
+        font-size:
+            15px;
+
+    }
+
+
+    .article-section {
+
+        margin-bottom:
+            28px;
+
+    }
+
+
+    .article-section h2,
+    .article-example h2,
+    .article-considerations h2,
+    .article-calculator h2,
+    .article-faq h2,
+    .article-related h2 {
+
+        font-size:
+            21px;
+
+    }
+
+
+    .article-featured-image {
+
+        margin-bottom:
+            26px;
+
+    }
+
+
+    .article-example {
+
+        margin:
+            30px 0;
+
+        padding:
+            20px;
+
+    }
+
+
+    .article-considerations {
+
+        margin:
+            30px 0;
+
+        padding:
+            20px;
+
+    }
+
+
+    .article-calculator {
+
+        flex-direction:
+            column;
+
+        align-items:
+            stretch;
+
+        gap:
+            18px;
+
+        margin:
+            32px 0;
+
+        padding:
+            20px;
+
+    }
+
+
+    .article-calculator-button {
+
+        width:
+            100%;
+
+    }
+
+
+    .article-sidebar {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .article-related {
+
+        margin-top:
+            36px;
+
+        padding-top:
+            30px;
+
+    }
+
+
+    .article-related-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (
+    max-width: 480px
+) {
+
+    .article-container {
+
+        width:
+            calc(100% - 24px);
+
+    }
+
+
+    .article-title {
+
+        font-size:
+            28px;
+
+    }
+
+
+    .article-introduction {
+
+        font-size:
+            15px;
+
+    }
+
+
+    .article-meta {
+
+        margin-top:
+            18px;
+
+    }
+
+
+    .article-author-avatar {
+
+        width:
+            36px;
+
+        height:
+            36px;
+
+    }
+
+
+    .article-faq-item summary {
+
+        padding:
+            15px;
+
+        font-size:
+            14px;
+
+    }
+
+
+    .article-faq-answer {
+
+        padding:
+            0 15px 15px;
+
+    }
+
+}
