@@ -16,19 +16,30 @@ export function renderFooter() {
        SITE BASE PATH
        Automatically detects:
 
+       GitHub Pages:
        /Toolzenhub/
+
+       Hostinger:
+       /
 
        This keeps footer links working from:
 
        /Toolzenhub/index.html
        /Toolzenhub/calculators.html
        /Toolzenhub/calculators/loan-comparison/
+
+       And:
+
+       /index.html
+       /calculators.html
+       /calculators/loan-comparison/
     ====================================================== */
 
-    const siteBase = new URL(
-        ".",
-        document.baseURI
-    ).origin + "/Toolzenhub/";
+    const siteBase =
+        window.location.hostname ===
+        "salar500.github.io"
+            ? "/Toolzenhub/"
+            : "/";
 
 
     /* =====================================================
