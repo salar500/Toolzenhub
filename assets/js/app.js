@@ -8,6 +8,10 @@ import { currentPage }
     from "./router.js";
 
 
+import { ROUTES }
+    from "./routes.js";
+
+
 import { renderHeader }
     from "./components/header.js";
 
@@ -72,6 +76,25 @@ async function initializeApp() {
     ===================================================== */
 
     renderHeader();
+
+
+
+    /* =====================================================
+       STATIC PAGE BREADCRUMB
+    ===================================================== */
+
+    const breadcrumbHome =
+        document.getElementById(
+            "legal-breadcrumb-home"
+        );
+
+
+    if (breadcrumbHome) {
+
+        breadcrumbHome.href =
+            ROUTES.home;
+
+    }
 
 
 
@@ -196,7 +219,7 @@ async function initializeApp() {
 
     /* =====================================================
        STATIC LEGAL PAGES
-       
+
        Content already exists in the HTML.
        Do not replace or render page content here.
     ===================================================== */
