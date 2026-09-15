@@ -100,6 +100,60 @@ export function currentPage() {
 
 
     /* =====================================================
+       TERMS PAGE
+    ===================================================== */
+
+    if (
+        path === "/terms.html" ||
+        path.endsWith("/terms.html") ||
+        path === "/terms/" ||
+        path.endsWith("/terms/")
+    ) {
+
+        return {
+            type: "terms"
+        };
+
+    }
+
+
+    /* =====================================================
+       DISCLAIMER PAGE
+    ===================================================== */
+
+    if (
+        path === "/disclaimer.html" ||
+        path.endsWith("/disclaimer.html") ||
+        path === "/disclaimer/" ||
+        path.endsWith("/disclaimer/")
+    ) {
+
+        return {
+            type: "disclaimer"
+        };
+
+    }
+
+
+    /* =====================================================
+       PRIVACY POLICY PAGE
+    ===================================================== */
+
+    if (
+        path === "/privacy.html" ||
+        path.endsWith("/privacy.html") ||
+        path === "/privacy/" ||
+        path.endsWith("/privacy/")
+    ) {
+
+        return {
+            type: "privacy"
+        };
+
+    }
+
+
+    /* =====================================================
        CALCULATOR PAGE
     ===================================================== */
 
