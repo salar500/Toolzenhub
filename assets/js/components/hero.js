@@ -3,6 +3,9 @@
    Global / Home Hero Component
 ========================================================= */
 
+import { ROUTES } from "../routes.js";
+
+
 export function renderHero() {
 
     const hero = document.getElementById("hero");
@@ -117,7 +120,10 @@ export function renderHero() {
                     <div class="hero__visual">
 
                         <img
-                            src="/Toolzenhub/assets/Images/hero-calculators.png"
+                            src="${new URL(
+                                "assets/Images/hero-calculators.png",
+                                document.baseURI
+                            ).href}"
                             alt="Financial calculators, charts and money"
                             class="hero__image"
                             loading="eager"
@@ -181,7 +187,7 @@ export function renderHero() {
             ============================================= */
 
             window.location.href =
-                `/Toolzenhub/categories.html?q=${encodeURIComponent(query)}`;
+                `${ROUTES.categories}?q=${encodeURIComponent(query)}`;
 
         }
     );
