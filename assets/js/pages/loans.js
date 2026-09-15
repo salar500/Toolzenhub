@@ -6,6 +6,8 @@
 import { renderHeader } from "../components/header.js";
 import { renderFooter } from "../components/footer.js";
 
+import { ROUTES } from "../routes.js";
+
 
 /* =========================================================
    Loan Calculator Data
@@ -18,7 +20,7 @@ const loanCalculators = [
         icon: "⚖",
         title: "Loan Comparison Calculator",
         description: "Compare two loans side by side and find the best option.",
-        href: "/Toolzenhub/calculators/loan-comparison/"
+        href: ROUTES.calculator("loan-comparison")
     },
 
     {
