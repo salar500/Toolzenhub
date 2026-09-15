@@ -195,6 +195,32 @@ async function initializeApp() {
 
 
     /* =====================================================
+       STATIC LEGAL PAGES
+       
+       Content already exists in the HTML.
+       Do not replace or render page content here.
+    ===================================================== */
+
+    if (
+        page.type === "terms" ||
+        page.type === "disclaimer" ||
+        page.type === "privacy"
+    ) {
+
+
+        renderFooter();
+
+
+        initializeNewsletter();
+
+
+        return;
+
+    }
+
+
+
+    /* =====================================================
        CALCULATOR PAGE
     ===================================================== */
 
