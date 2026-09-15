@@ -218,6 +218,42 @@ function setActiveNavigation() {
 
 
 /* =========================================================
+   Breadcrumb Navigation
+========================================================= */
+
+function initializeBreadcrumb() {
+
+    const homeLink =
+        document.getElementById(
+            "loans-breadcrumb-home"
+        );
+
+
+    const categoriesLink =
+        document.getElementById(
+            "loans-breadcrumb-categories"
+        );
+
+
+    if (homeLink) {
+
+        homeLink.href =
+            ROUTES.home;
+
+    }
+
+
+    if (categoriesLink) {
+
+        categoriesLink.href =
+            ROUTES.categories;
+
+    }
+
+}
+
+
+/* =========================================================
    Application
 ========================================================= */
 
@@ -226,6 +262,8 @@ function initializeLoansPage() {
     renderHeader();
 
     setActiveNavigation();
+
+    initializeBreadcrumb();
 
     renderLoanCalculators();
 
