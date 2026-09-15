@@ -3,7 +3,7 @@
    Central Routes
 ========================================================= */
 
-const SITE_ROOT = "/Toolzenhub/";
+const SITE_ROOT = "/";
 
 
 export const ROUTES = {
