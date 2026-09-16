@@ -29,16 +29,19 @@ function getArticleRouteKey() {
 
 
     /*
-       Expected URL:
+       Expected:
+
+       GitHub Pages:
 
        /Toolzenhub/articles/
        loan-comparison/
        how-to-reduce-home-loan-interest/
 
-       We remove:
-       - site root
-       - articles/
-       - trailing slash
+       Production:
+
+       /articles/
+       loan-comparison/
+       how-to-reduce-home-loan-interest/
     */
 
 
@@ -47,7 +50,9 @@ function getArticleRouteKey() {
 
 
     const markerIndex =
-        pathname.indexOf(marker);
+        pathname.indexOf(
+            marker
+        );
 
 
     if (markerIndex === -1) {
@@ -96,7 +101,9 @@ export async function loadArticle() {
 
 
     const loader =
-        articleRegistry[routeKey];
+        articleRegistry[
+            routeKey
+        ];
 
 
     if (!loader) {
