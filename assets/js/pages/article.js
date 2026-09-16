@@ -8,7 +8,8 @@
    Handles:
    - Article loading
    - Article rendering
-   - SEO initialization
+   - Breadcrumb
+   - SEO
    - Global Header
    - Global Footer
    - Newsletter
@@ -134,7 +135,7 @@ export function initializeArticlePage(
 
 
 /* =========================================================
-   INITIALIZE ARTICLE FROM URL
+   Initialize Article From URL
 ========================================================= */
 
 export async function initializeArticlePageFromURL() {
@@ -156,31 +157,6 @@ export async function initializeArticlePageFromURL() {
 
     initializeArticlePage(
         article
-    );
-
-}
-
-
-
-/* =========================================================
-   STANDALONE DOM READY
-=========================================================
-
-   This allows article.js to work independently if needed.
-
-========================================================= */
-
-if (
-    document.readyState === "loading"
-) {
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        () => {
-
-            initializeArticlePageFromURL();
-
-        }
     );
 
 }
