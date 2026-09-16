@@ -155,13 +155,14 @@ export function currentPage() {
 
     /* =====================================================
        INDIVIDUAL ARTICLE PAGE
-       
-       Expected:
-       /articles/{topic}/{slug}/
 
-       Example:
-       /articles/loan-comparison/
-       how-to-reduce-home-loan-interest/
+       Expected:
+
+       /Toolzenhub/articles/{topic}/{slug}/
+
+       OR
+
+       /articles/{topic}/{slug}/
     ===================================================== */
 
     const articleMatch =
@@ -174,7 +175,8 @@ export function currentPage() {
 
         return {
 
-            type: "article",
+            type:
+                "article",
 
             topic:
                 articleMatch[1],
@@ -200,8 +202,13 @@ export function currentPage() {
     if (calculatorMatch) {
 
         return {
-            type: "calculator",
-            slug: calculatorMatch[1]
+
+            type:
+                "calculator",
+
+            slug:
+                calculatorMatch[1]
+
         };
 
     }
@@ -212,8 +219,12 @@ export function currentPage() {
     ===================================================== */
 
     return {
-        type: "page",
+
+        type:
+            "page",
+
         path
+
     };
 
 }
