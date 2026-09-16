@@ -136,7 +136,7 @@ export function currentPage() {
 
 
     /* =====================================================
-       PRIVACY POLICY PAGE
+       PRIVACY PAGE
     ===================================================== */
 
     if (
@@ -148,6 +148,40 @@ export function currentPage() {
 
         return {
             type: "privacy"
+        };
+
+    }
+
+
+    /* =====================================================
+       INDIVIDUAL ARTICLE PAGE
+       
+       Expected:
+       /articles/{topic}/{slug}/
+
+       Example:
+       /articles/loan-comparison/
+       how-to-reduce-home-loan-interest/
+    ===================================================== */
+
+    const articleMatch =
+        path.match(
+            /\/articles\/([^/]+)\/([^/]+)\/?$/
+        );
+
+
+    if (articleMatch) {
+
+        return {
+
+            type: "article",
+
+            topic:
+                articleMatch[1],
+
+            slug:
+                articleMatch[2]
+
         };
 
     }
