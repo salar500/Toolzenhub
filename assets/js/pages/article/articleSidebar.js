@@ -1,69 +1,38 @@
 /* =========================================================
 ToolZen Hub
-Article Sidebar
+Article Sidebar Renderer
 
-This file is controlled by:
+CHILD MODULE
 
-articleRenderer.js
-
-It handles ONLY the article sidebar.
+Handles ONLY:
+- Table of Contents
+- Sidebar Calculator
+- Sidebar Related Articles
+- Author
 ========================================================= */
+
+import { ROUTES } from "../../routes.js";
 
 
 /* =========================================================
-ROUTES
+HTML ESCAPE
 ========================================================= */
 
-import {
-    ROUTES
-} from "../../routes.js";
-
-
-/* =========================================================
-UTILITY
-========================================================= */
-
-function escapeHTML(
-    value = ""
-) {
-
+function escapeHTML(value = "") {
     return String(value)
-
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
-
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 }
 
 
 /* =========================================================
-ICON
+ICONS
 ========================================================= */
 
-function icon(
-    type
-) {
+function icon(type) {
 
     const icons = {
 
@@ -79,22 +48,23 @@ function icon(
                     height="18"
                     rx="2"
                 />
-
-                <path
-                    d="M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2M8 18h8"
-                />
+                <path d="M8 7h8"/>
+                <path d="M8 11h2"/>
+                <path d="M14 11h2"/>
+                <path d="M8 15h2"/>
+                <path d="M14 15h2"/>
+                <path d="M8 18h8"/>
             </svg>
         `,
-
 
         list: `
             <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
             >
-                <path
-                    d="M8 6h12M8 12h12M8 18h12"
-                />
+                <path d="M8 6h12"/>
+                <path d="M8 12h12"/>
+                <path d="M8 18h12"/>
 
                 <circle
                     cx="4"
@@ -118,14 +88,12 @@ function icon(
 
     };
 
-
     return icons[type] || "";
-
 }
 
 
 /* =========================================================
-SIDEBAR TABLE OF CONTENTS
+TABLE OF CONTENTS
 ========================================================= */
 
 function renderTableOfContents(
@@ -133,9 +101,7 @@ function renderTableOfContents(
 ) {
 
     if (!items.length) {
-
         return "";
-
     }
 
 
@@ -145,6 +111,7 @@ function renderTableOfContents(
             class="article-toc"
             aria-labelledby="article-toc-title"
         >
+
 
             <div class="article-toc-heading">
 
@@ -167,40 +134,44 @@ function renderTableOfContents(
                 aria-label="Article sections"
             >
 
-                ${items.map(
-                    (item, index) => `
 
-                        <a
-                            href="#${escapeHTML(item.id)}"
-                            class="${
-                                index === 0
-                                    ? "is-active"
-                                    : ""
-                            }"
+                ${items.map((item, index) => `
+
+                    <a
+                        href="#${escapeHTML(
+                            item.id
+                        )}"
+                        class="${
+                            index === 0
+                                ? "is-active"
+                                : ""
+                        }"
+                    >
+
+                        <span>
+                            ${escapeHTML(
+                                item.label
+                            )}
+                        </span>
+
+
+                        <span
+                            aria-hidden="true"
                         >
+                            →
+                        </span>
 
-                            <span>
-                                ${escapeHTML(
-                                    item.label
-                                )}
-                            </span>
+                    </a>
 
+                `).join("")}
 
-                            <span aria-hidden="true">
-                                →
-                            </span>
-
-                        </a>
-
-                    `
-                ).join("")}
 
             </nav>
+
 
         </section>
 
     `;
-
 }
 
 
@@ -213,9 +184,7 @@ function renderSidebarCalculator(
 ) {
 
     if (!calculator) {
-
         return "";
-
     }
 
 
@@ -228,11 +197,16 @@ function renderSidebarCalculator(
     return `
 
         <section
-            class="article-sidebar-widget article-sidebar-calculator"
+            class="article-sidebar-widget
+                   article-sidebar-calculator"
             aria-labelledby="sidebar-calculator-title"
         >
 
-            <div class="article-sidebar-widget-heading">
+
+            <div
+                class="article-sidebar-widget-heading"
+            >
+
 
                 <span
                     class="article-sidebar-widget-icon"
@@ -246,7 +220,8 @@ function renderSidebarCalculator(
 
                     <h2 id="sidebar-calculator-title">
                         ${escapeHTML(
-                            calculator.title
+                            calculator.title ||
+                            "Loan Calculator"
                         )}
                     </h2>
 
@@ -257,17 +232,20 @@ function renderSidebarCalculator(
 
                 </div>
 
+
             </div>
 
 
-            <div class="article-sidebar-calculator-fields">
+            <div
+                class="article-sidebar-calculator-fields"
+            >
+
 
                 <div>
 
                     <span>
                         Loan Amount
                     </span>
-
 
                     <strong>
                         ₹40,00,000
@@ -282,7 +260,6 @@ function renderSidebarCalculator(
                         Interest Rate
                     </span>
 
-
                     <strong>
                         8.5%
                     </strong>
@@ -296,12 +273,12 @@ function renderSidebarCalculator(
                         Tenure
                     </span>
 
-
                     <strong>
                         20 Years
                     </strong>
 
                 </div>
+
 
             </div>
 
@@ -313,17 +290,16 @@ function renderSidebarCalculator(
 
                 Calculate Now
 
-
                 <span aria-hidden="true">
                     →
                 </span>
 
             </a>
 
+
         </section>
 
     `;
-
 }
 
 
@@ -336,18 +312,18 @@ function renderSidebarRelated(
 ) {
 
     if (!articles.length) {
-
         return "";
-
     }
 
 
     return `
 
         <section
-            class="article-sidebar-widget article-sidebar-related"
+            class="article-sidebar-widget
+                   article-sidebar-related"
             aria-labelledby="sidebar-related-title"
         >
+
 
             <h2 id="sidebar-related-title">
                 Related Articles
@@ -358,69 +334,78 @@ function renderSidebarRelated(
                 class="article-sidebar-related-list"
             >
 
-                ${articles.slice(0, 4).map(
-                    article => `
 
-                        <a
-                            href="${escapeHTML(
-                                ROUTES.article(
-                                    article.topic,
-                                    article.slug
-                                )
-                            )}"
-                            class="article-sidebar-related-item"
+                ${articles.slice(0, 4).map(article => `
+
+                    <a
+                        href="${escapeHTML(
+                            ROUTES.article(
+                                article.topic,
+                                article.slug
+                            )
+                        )}"
+                        class="article-sidebar-related-item"
+                    >
+
+
+                        <span
+                            class="article-sidebar-related-category"
                         >
-
-                            <span
-                                class="article-sidebar-related-category"
-                            >
-                                ${escapeHTML(
-                                    article.category
-                                )}
-                            </span>
+                            ${escapeHTML(
+                                article.category || ""
+                            )}
+                        </span>
 
 
-                            <h3>
-                                ${escapeHTML(
-                                    article.title
-                                )}
-                            </h3>
+                        <h3>
+                            ${escapeHTML(
+                                article.title || ""
+                            )}
+                        </h3>
 
 
-                            <span
-                                class="article-sidebar-related-link"
-                            >
-                                Read article →
-                            </span>
+                        <span
+                            class="article-sidebar-related-link"
+                        >
+                            Read article →
+                        </span>
 
-                        </a>
 
-                    `
-                ).join("")}
+                    </a>
+
+                `).join("")}
+
 
             </div>
+
 
         </section>
 
     `;
-
 }
 
 
 /* =========================================================
-SIDEBAR AUTHOR
+AUTHOR
 ========================================================= */
 
 function renderSidebarAuthor(
     article
 ) {
 
+    const authorName =
+        article.author?.name ||
+        "ToolZen Hub";
+
+
     return `
 
         <section
-            class="article-sidebar-widget article-author-widget"
+            class="article-sidebar-widget
+                   article-author-widget"
             aria-labelledby="article-author-title"
         >
+
 
             <div
                 class="article-author-profile-avatar"
@@ -431,12 +416,7 @@ function renderSidebarAuthor(
 
 
             <h2 id="article-author-title">
-
-                ${escapeHTML(
-                    article.author?.name ||
-                    "ToolZen Hub"
-                )}
-
+                ${escapeHTML(authorName)}
             </h2>
 
 
@@ -447,20 +427,17 @@ function renderSidebarAuthor(
                 easier to understand.
             </p>
 
+
         </section>
 
     `;
-
 }
 
 
 /* =========================================================
-MAIN SIDEBAR CONTROLLER
+MAIN SIDEBAR FUNCTION
 
-articleRenderer.js calls this function.
-
-This function controls the order of every
-sidebar component.
+article render.js calls this function.
 ========================================================= */
 
 export function renderSidebar(
@@ -469,7 +446,9 @@ export function renderSidebar(
 
     return `
 
-        <aside class="article-sidebar">
+        <aside
+            class="article-sidebar"
+        >
 
 
             ${renderTableOfContents(
@@ -495,5 +474,4 @@ export function renderSidebar(
         </aside>
 
     `;
-
 }
