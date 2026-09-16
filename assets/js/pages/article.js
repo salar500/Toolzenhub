@@ -12,18 +12,6 @@
    - Global Header
    - Global Footer
    - Newsletter
-
-   Architecture:
-
-   Article URL
-        ↓
-   Article Loader
-        ↓
-   Article Data Module
-        ↓
-   Article Renderer
-        ↓
-   Article SEO
 ========================================================= */
 
 
@@ -95,14 +83,14 @@ export function initializeArticlePage(
 
 
     /* =====================================================
-       Global Header
+       GLOBAL HEADER
     ===================================================== */
 
     renderHeader();
 
 
     /* =====================================================
-       Article
+       ARTICLE
     ===================================================== */
 
     renderArticle(
@@ -111,7 +99,7 @@ export function initializeArticlePage(
 
 
     /* =====================================================
-       Breadcrumb
+       BREADCRUMB
     ===================================================== */
 
     initializeBreadcrumb(
@@ -129,14 +117,14 @@ export function initializeArticlePage(
 
 
     /* =====================================================
-       Global Footer
+       GLOBAL FOOTER
     ===================================================== */
 
     renderFooter();
 
 
     /* =====================================================
-       Newsletter
+       NEWSLETTER
     ===================================================== */
 
     initializeNewsletter();
@@ -146,10 +134,10 @@ export function initializeArticlePage(
 
 
 /* =========================================================
-   Initialize From URL
+   INITIALIZE ARTICLE FROM URL
 ========================================================= */
 
-async function initializeFromURL() {
+export async function initializeArticlePageFromURL() {
 
     const article =
         await loadArticle();
@@ -175,22 +163,38 @@ async function initializeFromURL() {
 
 
 /* =========================================================
-   DOM Ready
+   STANDALONE DOM READY
+=========================================================
+
+   This allows article.js to work independently if needed.
+
 ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    initializeFromURL
-);
+if (
+    document.readyState === "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        () => {
+
+            initializeArticlePageFromURL();
+
+        }
+    );
+
+}
 
 
 
 /* =========================================================
-   Default Export
+   DEFAULT EXPORT
 ========================================================= */
 
 export default {
 
-    initializeArticlePage
+    initializeArticlePage,
+
+    initializeArticlePageFromURL
 
 };
