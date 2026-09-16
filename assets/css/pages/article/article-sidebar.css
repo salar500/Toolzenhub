@@ -24,12 +24,65 @@
         column;
 
     gap:
-        20px;
+        18px;
 
 }
 
 
+/* =========================================================
+   GENERIC SIDEBAR WIDGET
+========================================================= */
+
 .article-sidebar-widget {
+
+    padding:
+        20px;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius:
+        14px;
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        0 4px 18px rgba(
+            15,
+            23,
+            42,
+            0.03
+        );
+
+}
+
+
+.article-sidebar-widget h2 {
+
+    margin:
+        0;
+
+    color:
+        #0f172a;
+
+    font-size:
+        17px;
+
+    line-height:
+        1.3;
+
+    font-weight:
+        750;
+
+}
+
+
+/* =========================================================
+   TABLE OF CONTENTS
+========================================================= */
+
+.article-toc {
 
     padding:
         20px;
@@ -46,19 +99,82 @@
 }
 
 
-.article-sidebar-widget h2 {
+.article-toc-heading {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+    margin-bottom:
+        15px;
+
+}
+
+
+.article-toc-icon {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        30px;
+
+    height:
+        30px;
+
+    border-radius:
+        8px;
+
+    background:
+        #eff6ff;
+
+    color:
+        #2563eb;
+
+}
+
+
+.article-toc-icon svg {
+
+    width:
+        17px;
+
+    height:
+        17px;
+
+    fill:
+        none;
+
+    stroke:
+        currentColor;
+
+    stroke-width:
+        1.8;
+
+}
+
+
+.article-toc h2 {
 
     margin:
-        0 0 16px;
+        0;
 
     color:
         #0f172a;
 
     font-size:
-        18px;
-
-    line-height:
-        1.3;
+        17px;
 
     font-weight:
         750;
@@ -66,11 +182,7 @@
 }
 
 
-/* =========================================================
-   SIDEBAR CALCULATOR
-========================================================= */
-
-.article-calculator-list {
+.article-toc nav {
 
     display:
         flex;
@@ -81,25 +193,28 @@
 }
 
 
-.article-calculator-item {
+.article-toc a {
 
     display:
-        grid;
-
-    grid-template-columns:
-        34px minmax(0, 1fr) auto;
+        flex;
 
     align-items:
         center;
+
+    justify-content:
+        space-between;
 
     gap:
         10px;
 
     padding:
-        10px 0;
+        10px 8px;
+
+    border-left:
+        2px solid transparent;
 
     color:
-        #334155;
+        #475569;
 
     text-decoration:
         none;
@@ -107,13 +222,25 @@
     font-size:
         13px;
 
-    font-weight:
-        600;
+    line-height:
+        1.4;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 
 }
 
 
-.article-calculator-item:hover {
+.article-toc a:hover,
+.article-toc a.is-active {
+
+    border-left-color:
+        #0b9f58;
+
+    background:
+        #f8fafc;
 
     color:
         #0b9f58;
@@ -121,13 +248,178 @@
 }
 
 
-.article-calculator-icon {
+/* =========================================================
+   SIDEBAR CALCULATOR
+========================================================= */
+
+.article-sidebar-calculator {
+
+    background:
+        #f8fbff;
+
+}
+
+
+.article-sidebar-widget-heading {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        10px;
+
+    margin-bottom:
+        17px;
+
+}
+
+
+.article-sidebar-widget-icon {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
 
     width:
         34px;
 
     height:
         34px;
+
+    flex-shrink:
+        0;
+
+    border-radius:
+        9px;
+
+    background:
+        #eff6ff;
+
+    color:
+        #2563eb;
+
+}
+
+
+.article-sidebar-widget-icon svg {
+
+    width:
+        19px;
+
+    height:
+        19px;
+
+    fill:
+        none;
+
+    stroke:
+        currentColor;
+
+    stroke-width:
+        1.7;
+
+}
+
+
+.article-sidebar-widget-heading h2 {
+
+    font-size:
+        16px;
+
+}
+
+
+.article-sidebar-widget-heading p {
+
+    margin:
+        3px 0 0;
+
+    color:
+        #64748B;
+
+    font-size:
+        12px;
+
+}
+
+
+.article-sidebar-calculator-fields {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        8px;
+
+    margin-bottom:
+        14px;
+
+}
+
+
+.article-sidebar-calculator-fields > div {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        10px;
+
+    padding:
+        10px;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius:
+        8px;
+
+    background:
+        #ffffff;
+
+}
+
+
+.article-sidebar-calculator-fields span {
+
+    color:
+        #64748B;
+
+    font-size:
+        12px;
+
+}
+
+
+.article-sidebar-calculator-fields strong {
+
+    color:
+        #1e293b;
+
+    font-size:
+        12px;
+
+}
+
+
+.article-sidebar-button {
 
     display:
         flex;
@@ -138,17 +430,175 @@
     justify-content:
         center;
 
+    gap:
+        7px;
+
+    width:
+        100%;
+
+    padding:
+        11px 14px;
+
     border-radius:
         8px;
 
     background:
-        #ecfdf5;
+        #2563eb;
+
+    color:
+        #ffffff;
+
+    text-decoration:
+        none;
+
+    font-size:
+        13px;
+
+    font-weight:
+        700;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.article-sidebar-button:hover {
+
+    opacity:
+        0.92;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/* =========================================================
+   RELATED ARTICLES SIDEBAR
+========================================================= */
+
+.article-sidebar-related h2 {
+
+    margin-bottom:
+        14px;
+
+}
+
+
+.article-sidebar-related-list {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+}
+
+
+.article-sidebar-related-item {
+
+    display:
+        block;
+
+    padding:
+        12px 0;
+
+    border-bottom:
+        1px solid #e2e8f0;
+
+    color:
+        inherit;
+
+    text-decoration:
+        none;
+
+}
+
+
+.article-sidebar-related-item:first-child {
+
+    padding-top:
+        0;
+
+}
+
+
+.article-sidebar-related-item:last-child {
+
+    padding-bottom:
+        0;
+
+    border-bottom:
+        0;
+
+}
+
+
+.article-sidebar-related-category {
+
+    display:
+        block;
+
+    margin-bottom:
+        5px;
 
     color:
         #0b9f58;
 
     font-size:
-        16px;
+        11px;
+
+    font-weight:
+        700;
+
+}
+
+
+.article-sidebar-related-item h3 {
+
+    margin:
+        0;
+
+    color:
+        #1e293b;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.45;
+
+    font-weight:
+        700;
+
+}
+
+
+.article-sidebar-related-link {
+
+    display:
+        block;
+
+    margin-top:
+        6px;
+
+    color:
+        #64748B;
+
+    font-size:
+        11px;
+
+}
+
+
+.article-sidebar-related-item:hover h3,
+.article-sidebar-related-item:hover .article-sidebar-related-link {
+
+    color:
+        #0b9f58;
 
 }
 
@@ -167,12 +617,6 @@
 
 .article-author-profile-avatar {
 
-    width:
-        56px;
-
-    height:
-        56px;
-
     display:
         flex;
 
@@ -181,6 +625,12 @@
 
     justify-content:
         center;
+
+    width:
+        56px;
+
+    height:
+        56px;
 
     margin:
         0 auto 12px;
@@ -205,8 +655,8 @@
 
 .article-author-widget h2 {
 
-    margin-bottom:
-        8px;
+    margin:
+        0 0 8px;
 
 }
 
