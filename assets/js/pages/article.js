@@ -8,7 +8,6 @@
    Handles:
    - Article loading
    - Article rendering
-   - Breadcrumb
    - SEO
    - Global Header
    - Global Footer
@@ -49,8 +48,7 @@ import {
 ========================================================= */
 
 import {
-    renderArticle,
-    initializeBreadcrumb
+    renderArticle
 } from "./article/article-render.js";
 
 
@@ -61,7 +59,6 @@ import {
 import {
     initializeArticleSEO
 } from "./article/article-seo.js";
-
 
 
 /* =========================================================
@@ -100,15 +97,6 @@ export function initializeArticlePage(
 
 
     /* =====================================================
-       BREADCRUMB
-    ===================================================== */
-
-    initializeBreadcrumb(
-        article
-    );
-
-
-    /* =====================================================
        SEO
     ===================================================== */
 
@@ -133,12 +121,16 @@ export function initializeArticlePage(
 }
 
 
-
 /* =========================================================
    Initialize Article From URL
 ========================================================= */
 
 export async function initializeArticlePageFromURL() {
+
+    console.log(
+        "ToolZen Hub: initializeArticlePageFromURL()"
+    );
+
 
     const article =
         await loadArticle();
@@ -160,7 +152,6 @@ export async function initializeArticlePageFromURL() {
     );
 
 }
-
 
 
 /* =========================================================
