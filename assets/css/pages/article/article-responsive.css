@@ -6,12 +6,79 @@
 
 
 /* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (
+    max-width: 1000px
+) {
+
+    .article-hero {
+
+        grid-template-columns:
+            minmax(0, 1fr) minmax(300px, 0.8fr);
+
+        gap:
+            26px;
+
+    }
+
+
+    .article-title {
+
+        font-size:
+            40px;
+
+    }
+
+
+    .article-layout {
+
+        grid-template-columns:
+            minmax(0, 1fr) 290px;
+
+        gap:
+            28px;
+
+    }
+
+}
+
+
+/* =========================================================
    TABLET
 ========================================================= */
 
 @media (
     max-width: 900px
 ) {
+
+    .article-hero {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            24px;
+
+    }
+
+
+    .article-hero-image {
+
+        order:
+            -1;
+
+    }
+
+
+    .article-hero-image img {
+
+        aspect-ratio:
+            16 / 8.5;
+
+    }
+
 
     .article-layout {
 
@@ -40,6 +107,14 @@
 
         align-items:
             start;
+
+    }
+
+
+    .article-toc {
+
+        grid-column:
+            1 / -1;
 
     }
 
@@ -82,15 +157,48 @@
             18px;
 
         margin-bottom:
-            20px;
+            18px;
+
+    }
+
+
+    .article-hero {
+
+        margin-bottom:
+            28px;
+
+    }
+
+
+    .article-hero-image {
+
+        order:
+            0;
+
+    }
+
+
+    .article-hero-image img {
+
+        aspect-ratio:
+            16 / 9;
+
+        border-radius:
+            12px;
 
     }
 
 
     .article-title {
 
+        margin:
+            13px 0 14px;
+
         font-size:
             32px;
+
+        line-height:
+            1.12;
 
     }
 
@@ -99,6 +207,36 @@
 
         font-size:
             16px;
+
+    }
+
+
+    .article-meta {
+
+        gap:
+            8px;
+
+        margin-top:
+            18px;
+
+        font-size:
+            12px;
+
+    }
+
+
+    .article-meta-divider {
+
+        display:
+            none;
+
+    }
+
+
+    .article-tags {
+
+        margin-top:
+            15px;
 
     }
 
@@ -122,12 +260,37 @@
     .article-section h2,
     .article-example h2,
     .article-considerations h2,
-    .article-calculator h2,
-    .article-faq h2,
-    .article-related h2 {
+    .article-bigger-picture h2 {
 
         font-size:
             21px;
+
+    }
+
+
+    .article-key-takeaways {
+
+        margin-bottom:
+            28px;
+
+        padding:
+            20px;
+
+    }
+
+
+    .article-key-takeaways h2 {
+
+        font-size:
+            18px;
+
+    }
+
+
+    .article-key-takeaways li {
+
+        font-size:
+            13px;
 
     }
 
@@ -151,6 +314,17 @@
     }
 
 
+    .article-bigger-picture {
+
+        margin:
+            30px 0;
+
+        padding:
+            20px;
+
+    }
+
+
     .article-considerations {
 
         margin:
@@ -164,14 +338,11 @@
 
     .article-calculator {
 
-        flex-direction:
-            column;
-
-        align-items:
-            stretch;
+        grid-template-columns:
+            1fr;
 
         gap:
-            18px;
+            14px;
 
         margin:
             32px 0;
@@ -194,6 +365,14 @@
 
         grid-template-columns:
             1fr;
+
+    }
+
+
+    .article-toc {
+
+        grid-column:
+            auto;
 
     }
 
@@ -235,10 +414,35 @@
     }
 
 
+    .article-breadcrumb .calculator-breadcrumb {
+
+        font-size:
+            12px;
+
+        gap:
+            6px;
+
+    }
+
+
+    .article-category {
+
+        padding:
+            5px 9px;
+
+        font-size:
+            11px;
+
+    }
+
+
     .article-title {
 
         font-size:
             28px;
+
+        letter-spacing:
+            -0.02em;
 
     }
 
@@ -253,19 +457,60 @@
 
     .article-meta {
 
-        margin-top:
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap:
+            7px;
+
+    }
+
+
+    .article-tags {
+
+        gap:
+            6px;
+
+    }
+
+
+    .article-tag {
+
+        padding:
+            5px 8px;
+
+        font-size:
+            11px;
+
+    }
+
+
+    .article-key-takeaways {
+
+        padding:
             18px;
 
     }
 
 
-    .article-author-avatar {
+    .article-section h2,
+    .article-example h2,
+    .article-considerations h2,
+    .article-bigger-picture h2 {
 
-        width:
-            36px;
+        font-size:
+            20px;
 
-        height:
-            36px;
+    }
+
+
+    .article-content-section-heading h2 {
+
+        font-size:
+            22px;
 
     }
 
@@ -285,6 +530,15 @@
 
         padding:
             0 15px 15px;
+
+    }
+
+
+    .article-sidebar-widget,
+    .article-toc {
+
+        padding:
+            17px;
 
     }
 
