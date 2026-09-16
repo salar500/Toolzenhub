@@ -5,20 +5,13 @@
    Purpose:
    Central registry for all individual articles.
 
-   The shared article engine uses the current URL to
-   determine which article data module should be loaded.
+   Route:
 
-   Route format:
+   /articles/{topic}/{slug}/
+
+   GitHub Pages:
 
    /Toolzenhub/articles/{topic}/{slug}/
-
-   Registry key format:
-
-   {topic}/{slug}
-
-   This architecture scales to hundreds or thousands
-   of articles without creating a JavaScript file
-   for every article page.
 ========================================================= */
 
 
@@ -28,7 +21,6 @@ export const articleRegistry = {
     /* =====================================================
        LOAN COMPARISON ARTICLES
     ===================================================== */
-
 
     "loan-comparison/how-to-reduce-home-loan-interest":
         () =>
