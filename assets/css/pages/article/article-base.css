@@ -33,7 +33,7 @@
         grid;
 
     grid-template-columns:
-        minmax(0, 1fr) 300px;
+        minmax(0, 1fr) 320px;
 
     gap:
         40px;
@@ -72,7 +72,7 @@
         16px;
 
     line-height:
-        1.7;
+        1.75;
 
 }
 
@@ -96,5 +96,17 @@
 
     outline-offset:
         3px;
+
+}
+
+
+/* =========================================================
+   SMOOTH ANCHOR SCROLL
+========================================================= */
+
+html {
+
+    scroll-behavior:
+        smooth;
 
 }
