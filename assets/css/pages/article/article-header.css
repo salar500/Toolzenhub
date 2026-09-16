@@ -15,7 +15,7 @@
         22px;
 
     margin-bottom:
-        24px;
+        22px;
 
 }
 
@@ -74,13 +74,37 @@
 
 
 /* =========================================================
-   ARTICLE HEADER
+   ARTICLE HERO
 ========================================================= */
 
-.article-header {
+.article-hero {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        minmax(0, 1.15fr) minmax(360px, 0.85fr);
+
+    gap:
+        34px;
+
+    align-items:
+        center;
 
     margin-bottom:
-        28px;
+        36px;
+
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.article-hero-content {
+
+    min-width:
+        0;
 
 }
 
@@ -95,6 +119,9 @@
 
     padding:
         6px 11px;
+
+    border:
+        1px solid #d1fae5;
 
     border-radius:
         999px;
@@ -117,6 +144,10 @@
 }
 
 
+/* =========================================================
+   ARTICLE TITLE
+========================================================= */
+
 .article-title {
 
     margin:
@@ -127,27 +158,31 @@
 
     font-size:
         clamp(
-            32px,
+            34px,
             4vw,
-            46px
+            48px
         );
 
     line-height:
-        1.12;
+        1.08;
 
     font-weight:
         800;
 
     letter-spacing:
-        -0.02em;
+        -0.025em;
 
 }
 
 
+/* =========================================================
+   INTRODUCTION
+========================================================= */
+
 .article-introduction {
 
     max-width:
-        820px;
+        700px;
 
     margin:
         0;
@@ -165,7 +200,7 @@
 
 
 /* =========================================================
-   ARTICLE META
+   META
 ========================================================= */
 
 .article-meta {
@@ -176,36 +211,42 @@
     align-items:
         center;
 
+    flex-wrap:
+        wrap;
+
+    gap:
+        10px;
+
     margin-top:
-        22px;
+        20px;
+
+    color:
+        #64748B;
+
+    font-size:
+        13px;
 
 }
 
 
-.article-author {
+.article-meta-item {
 
     display:
-        flex;
+        inline-flex;
 
     align-items:
         center;
 
     gap:
-        10px;
+        6px;
 
 }
 
 
-.article-author-avatar {
-
-    width:
-        40px;
-
-    height:
-        40px;
+.article-meta-icon {
 
     display:
-        flex;
+        inline-flex;
 
     align-items:
         center;
@@ -213,77 +254,115 @@
     justify-content:
         center;
 
-    flex-shrink:
-        0;
+    width:
+        16px;
 
-    border-radius:
-        50%;
-
-    background:
-        #ecfdf5;
+    height:
+        16px;
 
     color:
-        #0b9f58;
-
-    font-size:
-        13px;
-
-    font-weight:
-        800;
+        #475569;
 
 }
 
 
-.article-author strong {
+.article-meta-icon svg {
 
-    display:
-        block;
+    width:
+        16px;
 
-    color:
-        #1e293b;
+    height:
+        16px;
 
-    font-size:
-        14px;
+    fill:
+        none;
 
-    font-weight:
-        700;
+    stroke:
+        currentColor;
+
+    stroke-width:
+        1.7;
+
+    stroke-linecap:
+        round;
+
+    stroke-linejoin:
+        round;
 
 }
 
 
-.article-author span {
-
-    display:
-        block;
-
-    margin-top:
-        2px;
+.article-meta-divider {
 
     color:
-        #64748B;
-
-    font-size:
-        12px;
+        #cbd5e1;
 
 }
 
 
 /* =========================================================
-   FEATURED IMAGE
+   TAGS
 ========================================================= */
 
-.article-featured-image {
+.article-tags {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        8px;
+
+    margin-top:
+        18px;
+
+}
+
+
+.article-tag {
+
+    padding:
+        6px 10px;
+
+    border-radius:
+        999px;
+
+    background:
+        #f1f5f9;
+
+    color:
+        #475569;
+
+    font-size:
+        12px;
+
+    font-weight:
+        600;
+
+}
+
+
+/* =========================================================
+   HERO IMAGE
+========================================================= */
+
+.article-hero-image {
 
     width:
         100%;
 
     margin:
-        0 0 32px;
+        0;
 
 }
 
 
-.article-featured-image img {
+.article-hero-image img {
 
     display:
         block;
@@ -295,12 +374,20 @@
         auto;
 
     aspect-ratio:
-        16 / 9;
+        16 / 10;
 
     object-fit:
         cover;
 
     border-radius:
         14px;
+
+    box-shadow:
+        0 12px 32px rgba(
+            15,
+            23,
+            42,
+            0.08
+        );
 
 }
