@@ -4,53 +4,126 @@
 ========================================================= */
 
 
-import { currentPage }
-    from "./router.js";
+/* =========================================================
+   Router
+========================================================= */
+
+import {
+    currentPage
+} from "./router.js";
 
 
-import { ROUTES }
-    from "./routes.js";
+/* =========================================================
+   Central Routes
+========================================================= */
+
+import {
+    ROUTES
+} from "./routes.js";
 
 
-import { renderHeader }
-    from "./components/header.js";
+/* =========================================================
+   Global Header
+========================================================= */
+
+import {
+    renderHeader
+} from "./components/header.js";
 
 
-import { renderHero }
-    from "./components/hero.js";
+/* =========================================================
+   Hero
+========================================================= */
+
+import {
+    renderHero
+} from "./components/hero.js";
 
 
-import { renderCategories }
-    from "./components/categories.js";
+/* =========================================================
+   Home Categories
+========================================================= */
+
+import {
+    renderCategories
+} from "./components/categories.js";
 
 
-import { renderArticles }
-    from "./components/articles.js";
+/* =========================================================
+   Home Articles
+========================================================= */
+
+import {
+    renderArticles
+} from "./components/articles.js";
 
 
-import { renderFooter }
-    from "./components/footer.js";
+/* =========================================================
+   Global Footer
+========================================================= */
+
+import {
+    renderFooter
+} from "./components/footer.js";
 
 
-import { initializeNewsletter }
-    from "./components/newsletter.js";
+/* =========================================================
+   Newsletter
+========================================================= */
+
+import {
+    initializeNewsletter
+} from "./components/newsletter.js";
 
 
-import { renderCalculator }
-    from "./pages/calculator.js";
+/* =========================================================
+   Calculator
+========================================================= */
+
+import {
+    renderCalculator
+} from "./pages/calculator.js";
 
 
-import { renderArticlesPage }
-    from "./pages/articles/articles.js";
+/* =========================================================
+   Articles Listing Page
+========================================================= */
+
+import {
+    renderArticlesPage
+} from "./pages/articles/articles.js";
 
 
-import { renderAboutPage }
-    from "./pages/about/about.js";
+/* =========================================================
+   Individual Article Page
+========================================================= */
+
+import {
+    initializeArticlePageFromURL
+} from "./pages/article.js";
 
 
-import { renderContactPage }
-    from "./pages/contact.js";
+/* =========================================================
+   About
+========================================================= */
 
+import {
+    renderAboutPage
+} from "./pages/about/about.js";
+
+
+/* =========================================================
+   Contact
+========================================================= */
+
+import {
+    renderContactPage
+} from "./pages/contact.js";
+
+
+/* =========================================================
+   Categories Page
+========================================================= */
 
 import {
     renderCategoriesPage,
@@ -64,7 +137,6 @@ import {
 ========================================================= */
 
 async function initializeApp() {
-
 
     const page =
         currentPage();
@@ -80,7 +152,7 @@ async function initializeApp() {
 
 
     /* =====================================================
-       STATIC PAGE BREADCRUMB
+       STATIC PAGE BREADCRUMB HOME
     ===================================================== */
 
     const breadcrumbHome =
@@ -104,21 +176,15 @@ async function initializeApp() {
 
     if (page.type === "home") {
 
-
         renderHero();
-
 
         renderCategories();
 
-
         renderArticles();
-
 
         renderFooter();
 
-
         initializeNewsletter();
-
 
         return;
 
@@ -132,18 +198,13 @@ async function initializeApp() {
 
     if (page.type === "categories") {
 
-
         renderCategoriesPage();
-
 
         initializeSearch();
 
-
         renderFooter();
 
-
         initializeNewsletter();
-
 
         return;
 
@@ -157,15 +218,11 @@ async function initializeApp() {
 
     if (page.type === "articles") {
 
-
         renderArticlesPage();
-
 
         renderFooter();
 
-
         initializeNewsletter();
-
 
         return;
 
@@ -179,15 +236,11 @@ async function initializeApp() {
 
     if (page.type === "about") {
 
-
         renderAboutPage();
-
 
         renderFooter();
 
-
         initializeNewsletter();
-
 
         return;
 
@@ -201,15 +254,11 @@ async function initializeApp() {
 
     if (page.type === "contact") {
 
-
         renderContactPage();
-
 
         renderFooter();
 
-
         initializeNewsletter();
-
 
         return;
 
@@ -219,9 +268,6 @@ async function initializeApp() {
 
     /* =====================================================
        STATIC LEGAL PAGES
-
-       Content already exists in the HTML.
-       Do not replace or render page content here.
     ===================================================== */
 
     if (
@@ -230,12 +276,23 @@ async function initializeApp() {
         page.type === "privacy"
     ) {
 
-
         renderFooter();
-
 
         initializeNewsletter();
 
+        return;
+
+    }
+
+
+
+    /* =====================================================
+       INDIVIDUAL ARTICLE PAGE
+    ===================================================== */
+
+    if (page.type === "article") {
+
+        await initializeArticlePageFromURL();
 
         return;
 
@@ -249,17 +306,13 @@ async function initializeApp() {
 
     if (page.type === "calculator") {
 
-
         await renderCalculator(
             page.slug
         );
 
-
         renderFooter();
 
-
         initializeNewsletter();
-
 
         return;
 
@@ -272,7 +325,6 @@ async function initializeApp() {
     ===================================================== */
 
     renderFooter();
-
 
     initializeNewsletter();
 
