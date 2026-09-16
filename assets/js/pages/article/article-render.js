@@ -1,25 +1,32 @@
 /* =========================================================
-   ToolZen Hub
-   Article Renderer
+ToolZen Hub
+Article Renderer
 
-   Purpose:
-   Shared renderer for every individual article page.
+Main article page renderer.
 
-   Handles:
-   - Article HTML
-   - Breadcrumb
-   - Sections
-   - Example
-   - Things to Consider
-   - FAQ
-   - Calculator CTA
-   - Related Articles
-   - Sidebar
+This file controls:
+
+- Article hero
+- Breadcrumb
+- Metadata
+- Tags
+- Key takeaways
+- Article sections
+- Example
+- Bigger picture
+- Things to consider
+- Calculator CTA
+- FAQ
+- Sidebar
+- Related articles
+
+Sidebar rendering is controlled by:
+./articleSidebar.js
 ========================================================= */
 
 
 /* =========================================================
-   Central Routes
+CENTRAL ROUTES
 ========================================================= */
 
 import {
@@ -28,7 +35,7 @@ import {
 
 
 /* =========================================================
-   Breadcrumb
+BREADCRUMB
 ========================================================= */
 
 import {
@@ -36,9 +43,17 @@ import {
 } from "../../components/breadcrumb.js";
 
 
+/* =========================================================
+SIDEBAR CONTROLLER
+========================================================= */
+
+import {
+    renderSidebar
+} from "./articleSidebar.js";
+
 
 /* =========================================================
-   Utility
+UTILITY
 ========================================================= */
 
 function escapeHTML(
@@ -47,18 +62,320 @@ function escapeHTML(
 
     return String(value)
 
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
 
+/* =========================================================
+SITE ROOT
+========================================================= */
+
+function getSiteRoot() {
+
+    return (
+        window.location.hostname ===
+        "salar500.github.io"
+
+            ? "/Toolzenhub/"
+
+            : "/"
+    );
+
+}
+
 
 /* =========================================================
-   Render Article Sections
+RESOLVE ASSET
+========================================================= */
+
+function resolveAsset(
+    source
+) {
+
+    if (!source) {
+
+        return "";
+
+    }
+
+
+    if (
+        source.startsWith("http://") ||
+        source.startsWith("https://")
+    ) {
+
+        return source;
+
+    }
+
+
+    return new URL(
+
+        source.replace(
+            /^\/+/,
+            ""
+        ),
+
+        window.location.origin +
+        getSiteRoot()
+
+    ).href;
+
+}
+
+
+/* =========================================================
+ICON
+========================================================= */
+
+function icon(
+    type
+) {
+
+    const icons = {
+
+        calendar: `
+            <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+                <path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z"/>
+            </svg>
+        `,
+
+        clock: `
+            <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+                <circle
+                    cx="12"
+                    cy="12"
+                    r="8"
+                />
+                <path d="M12 7v5l3 2"/>
+            </svg>
+        `,
+
+        author: `
+            <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+                <circle
+                    cx="12"
+                    cy="8"
+                    r="3"
+                />
+                <path d="M5 20a7 7 0 0114 0"/>
+            </svg>
+        `,
+
+        check: `
+            <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+                <path d="M5 12l4 4L19 6"/>
+            </svg>
+        `,
+
+        info: `
+            <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+                <circle
+                    cx="12"
+                    cy="12"
+                    r="9"
+                />
+                <path d="M12 10v6M12 7h.01"/>
+            </svg>
+        `,
+
+        calculator: `
+            <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+                <rect
+                    x="5"
+                    y="3"
+                    width="14"
+                    height="18"
+                    rx="2"
+                />
+                <path d="M8 7h8M8 11h2M14 11h2M8 15h2M14 15h2M8 18h8"/>
+            </svg>
+        `,
+
+        list: `
+            <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+                <path d="M8 6h12M8 12h12M8 18h12"/>
+                <circle cx="4" cy="6" r="1"/>
+                <circle cx="4" cy="12" r="1"/>
+                <circle cx="4" cy="18" r="1"/>
+            </svg>
+        `,
+
+        arrow: `
+            <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+                <path d="M5 12h13M13 6l6 6-6 6"/>
+            </svg>
+        `
+
+    };
+
+
+    return icons[type] || "";
+
+}
+
+
+/* =========================================================
+RENDER TAGS
+========================================================= */
+
+function renderTags(
+    tags = []
+) {
+
+    if (!tags.length) {
+
+        return "";
+
+    }
+
+
+    return `
+
+        <div
+            class="article-tags"
+            aria-label="Article topics"
+        >
+
+            ${tags.map(
+                tag => `
+
+                    <span class="article-tag">
+                        ${escapeHTML(tag)}
+                    </span>
+
+                `
+            ).join("")}
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+RENDER KEY TAKEAWAYS
+========================================================= */
+
+function renderKeyTakeaways(
+    takeaways = []
+) {
+
+    if (!takeaways.length) {
+
+        return "";
+
+    }
+
+
+    return `
+
+        <section
+            class="article-key-takeaways"
+            aria-labelledby="article-takeaways-title"
+        >
+
+            <div class="article-takeaways-heading">
+
+                <div
+                    class="article-takeaways-icon"
+                    aria-hidden="true"
+                >
+                    ${icon("info")}
+                </div>
+
+
+                <h2 id="article-takeaways-title">
+                    Key Takeaways
+                </h2>
+
+            </div>
+
+
+            <ul>
+
+                ${takeaways.map(
+                    item => `
+
+                        <li>
+
+                            <span
+                                class="article-check-icon"
+                                aria-hidden="true"
+                            >
+                                ${icon("check")}
+                            </span>
+
+
+                            <span>
+                                ${escapeHTML(item)}
+                            </span>
+
+                        </li>
+
+                    `
+                ).join("")}
+
+            </ul>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+RENDER ARTICLE SECTIONS
 ========================================================= */
 
 function renderSections(
@@ -76,6 +393,7 @@ function renderSections(
                 <h2 id="${escapeHTML(section.id)}">
                     ${escapeHTML(section.heading)}
                 </h2>
+
 
                 ${(section.paragraphs || []).map(
                     paragraph => `
@@ -95,9 +413,8 @@ function renderSections(
 }
 
 
-
 /* =========================================================
-   Render Example
+RENDER EXAMPLE
 ========================================================= */
 
 function renderExample(
@@ -122,6 +439,7 @@ function renderExample(
                 ${escapeHTML(example.heading)}
             </h2>
 
+
             ${(example.paragraphs || []).map(
                 paragraph => `
 
@@ -139,9 +457,62 @@ function renderExample(
 }
 
 
+/* =========================================================
+RENDER BIGGER PICTURE
+========================================================= */
+
+function renderBiggerPicture(
+    biggerPicture
+) {
+
+    if (!biggerPicture) {
+
+        return "";
+
+    }
+
+
+    return `
+
+        <section
+            class="article-bigger-picture"
+            aria-labelledby="article-bigger-picture-title"
+        >
+
+            <div
+                class="article-bigger-picture-icon"
+                aria-hidden="true"
+            >
+                ${icon("arrow")}
+            </div>
+
+
+            <div>
+
+                <h2 id="article-bigger-picture-title">
+                    ${escapeHTML(
+                        biggerPicture.heading
+                    )}
+                </h2>
+
+
+                <p>
+                    ${escapeHTML(
+                        biggerPicture.text
+                    )}
+                </p>
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
 
 /* =========================================================
-   Render Considerations
+RENDER CONSIDERATIONS
 ========================================================= */
 
 function renderConsiderations(
@@ -177,8 +548,9 @@ function renderConsiderations(
                             <span
                                 aria-hidden="true"
                             >
-                                ✓
+                                ${icon("check")}
                             </span>
+
 
                             <span>
                                 ${escapeHTML(item)}
@@ -198,9 +570,89 @@ function renderConsiderations(
 }
 
 
+/* =========================================================
+RENDER CALCULATOR CTA
+========================================================= */
+
+function renderCalculator(
+    calculator
+) {
+
+    if (!calculator) {
+
+        return "";
+
+    }
+
+
+    const href =
+        ROUTES.calculator(
+            calculator.slug
+        );
+
+
+    return `
+
+        <section
+            class="article-calculator"
+            aria-labelledby="article-calculator-title"
+        >
+
+            <div class="article-calculator-visual">
+
+                <div
+                    class="article-calculator-icon-large"
+                    aria-hidden="true"
+                >
+                    ${icon("calculator")}
+                </div>
+
+            </div>
+
+
+            <div class="article-calculator-content">
+
+                <span class="article-calculator-label">
+                    ToolZen Hub Calculator
+                </span>
+
+
+                <h2 id="article-calculator-title">
+                    Compare Your Loan Options
+                </h2>
+
+
+                <p>
+                    ${escapeHTML(
+                        calculator.description
+                    )}
+                </p>
+
+            </div>
+
+
+            <a
+                class="article-calculator-button"
+                href="${escapeHTML(href)}"
+            >
+
+                Compare Loans
+
+                <span aria-hidden="true">
+                    →
+                </span>
+
+            </a>
+
+        </section>
+
+    `;
+
+}
+
 
 /* =========================================================
-   Render FAQ
+RENDER FAQ
 ========================================================= */
 
 function renderFAQ(
@@ -221,93 +673,66 @@ function renderFAQ(
             aria-labelledby="article-faq-title"
         >
 
-            <h2 id="article-faq-title">
-                Frequently Asked Questions
-            </h2>
+            <div class="article-content-section-heading">
 
-
-            ${faq.map(
-                item => `
-
-                    <details
-                        class="article-faq-item"
-                    >
-
-                        <summary>
-                            ${escapeHTML(item.question)}
-                        </summary>
-
-
-                        <div
-                            class="article-faq-answer"
-                        >
-
-                            <p>
-                                ${escapeHTML(item.answer)}
-                            </p>
-
-                        </div>
-
-                    </details>
-
-                `
-            ).join("")}
-
-        </section>
-
-    `;
-
-}
-
-
-
-/* =========================================================
-   Render Calculator CTA
-========================================================= */
-
-function renderCalculator(
-    calculator
-) {
-
-    if (!calculator) {
-
-        return "";
-
-    }
-
-
-    return `
-
-        <section
-            class="article-calculator"
-            aria-labelledby="article-calculator-title"
-        >
-
-            <div class="article-calculator-content">
-
-                <span>
-                    ${escapeHTML(calculator.title)}
+                <span class="article-section-kicker">
+                    Common Questions
                 </span>
 
 
-                <h2 id="article-calculator-title">
-                    Compare Your Loan Options
+                <h2 id="article-faq-title">
+                    Frequently Asked Questions
                 </h2>
-
-
-                <p>
-                    ${escapeHTML(calculator.description)}
-                </p>
 
             </div>
 
 
-            <a
-                class="article-calculator-button"
-                href="${escapeHTML(calculator.href)}"
-            >
-                Compare Loans →
-            </a>
+            <div class="article-faq-list">
+
+                ${faq.map(
+                    item => `
+
+                        <details
+                            class="article-faq-item"
+                        >
+
+                            <summary>
+
+                                <span>
+                                    ${escapeHTML(
+                                        item.question
+                                    )}
+                                </span>
+
+
+                                <span
+                                    class="article-faq-plus"
+                                    aria-hidden="true"
+                                >
+                                    +
+                                </span>
+
+                            </summary>
+
+
+                            <div
+                                class="article-faq-answer"
+                            >
+
+                                <p>
+                                    ${escapeHTML(
+                                        item.answer
+                                    )}
+                                </p>
+
+                            </div>
+
+                        </details>
+
+                    `
+                ).join("")}
+
+            </div>
 
         </section>
 
@@ -316,9 +741,8 @@ function renderCalculator(
 }
 
 
-
 /* =========================================================
-   Render Related Articles
+RENDER RELATED ARTICLES
 ========================================================= */
 
 function renderRelatedArticles(
@@ -341,9 +765,19 @@ function renderRelatedArticles(
 
             <div class="article-section-heading">
 
+                <span class="article-section-kicker">
+                    Continue Reading
+                </span>
+
+
                 <h2 id="article-related-title">
                     Related Articles
                 </h2>
+
+
+                <p>
+                    Explore more practical guides from ToolZen Hub.
+                </p>
 
             </div>
 
@@ -354,21 +788,34 @@ function renderRelatedArticles(
                     article => `
 
                         <a
-                            href="${escapeHTML(article.href)}"
+                            href="${escapeHTML(
+                                ROUTES.article(
+                                    article.topic,
+                                    article.slug
+                                )
+                            )}"
                             class="article-related-card"
                         >
 
-                            <span class="article-related-category">
-                                ${escapeHTML(article.category)}
+                            <span
+                                class="article-related-category"
+                            >
+                                ${escapeHTML(
+                                    article.category
+                                )}
                             </span>
 
 
                             <h3>
-                                ${escapeHTML(article.title)}
+                                ${escapeHTML(
+                                    article.title
+                                )}
                             </h3>
 
 
-                            <span class="article-related-link">
+                            <span
+                                class="article-related-link"
+                            >
                                 Read article →
                             </span>
 
@@ -386,120 +833,8 @@ function renderRelatedArticles(
 }
 
 
-
 /* =========================================================
-   Render Sidebar
-========================================================= */
-
-function renderSidebar(
-    article
-) {
-
-    const calculator =
-        article.calculator;
-
-
-    return `
-
-        <aside class="article-sidebar">
-
-
-            <!-- ==========================================
-                 Popular Calculator
-            =========================================== -->
-
-            <section
-                class="article-sidebar-widget"
-                aria-labelledby="popular-calculators"
-            >
-
-                <h2 id="popular-calculators">
-                    Popular Calculators
-                </h2>
-
-
-                ${
-                    calculator
-                        ? `
-
-                            <div class="article-calculator-list">
-
-                                <a
-                                    href="${escapeHTML(calculator.href)}"
-                                    class="article-calculator-item"
-                                >
-
-                                    <span
-                                        class="article-calculator-icon"
-                                        aria-hidden="true"
-                                    >
-                                        ⇄
-                                    </span>
-
-
-                                    <span>
-                                        ${escapeHTML(calculator.title)}
-                                    </span>
-
-
-                                    <span aria-hidden="true">
-                                        →
-                                    </span>
-
-                                </a>
-
-                            </div>
-
-                        `
-                        : ""
-                }
-
-            </section>
-
-
-            <!-- ==========================================
-                 ToolZen Hub Editorial Profile
-            =========================================== -->
-
-            <section
-                class="article-sidebar-widget article-author-widget"
-                aria-labelledby="article-author-title"
-            >
-
-                <div
-                    class="article-author-profile-avatar"
-                    aria-hidden="true"
-                >
-                    TZ
-                </div>
-
-
-                <h2 id="article-author-title">
-                    ${escapeHTML(
-                        article.author?.name ||
-                        "ToolZen Hub"
-                    )}
-                </h2>
-
-
-                <p>
-                    Helpful finance guides, calculators and practical
-                    explanations designed to make everyday financial
-                    decisions easier to understand.
-                </p>
-
-            </section>
-
-        </aside>
-
-    `;
-
-}
-
-
-
-/* =========================================================
-   Render Article
+RENDER ARTICLE
 ========================================================= */
 
 export function renderArticle(
@@ -519,13 +854,21 @@ export function renderArticle(
     }
 
 
+    const imageSource =
+        article.image
+            ? resolveAsset(
+                article.image.src
+            )
+            : "";
+
+
     app.innerHTML = `
 
         <div class="article-container">
 
 
             <!-- ==========================================
-                 Breadcrumb
+                 BREADCRUMB
             =========================================== -->
 
             <div
@@ -535,209 +878,106 @@ export function renderArticle(
 
 
             <!-- ==========================================
-                 Article Layout
+                 PREMIUM ARTICLE HERO
             =========================================== -->
 
-            <div class="article-layout">
+            <header class="article-hero">
+
+                <div class="article-hero-content">
 
 
-                <!-- ======================================
-                     Main Article
-                ======================================= -->
-
-                <article class="article">
-
-
-                    <!-- ==================================
-                         Article Header
-                    =================================== -->
-
-                    <header class="article-header">
-
-                        <span class="article-category">
-                            ${escapeHTML(article.category)}
-                        </span>
+                    <span class="article-category">
+                        ${escapeHTML(
+                            article.category
+                        )}
+                    </span>
 
 
-                        <h1 class="article-title">
-                            ${escapeHTML(article.title)}
-                        </h1>
+                    <h1 class="article-title">
+                        ${escapeHTML(
+                            article.title
+                        )}
+                    </h1>
 
 
-                        <p class="article-introduction">
-                            ${escapeHTML(article.introduction)}
-                        </p>
+                    <p class="article-introduction">
+                        ${escapeHTML(
+                            article.introduction
+                        )}
+                    </p>
 
 
-                        <div
-                            class="article-meta"
-                            aria-label="Article information"
-                        >
+                    <div
+                        class="article-meta"
+                        aria-label="Article information"
+                    >
 
-                            <div class="article-author">
+                        <div class="article-meta-item">
 
-                                <div
-                                    class="article-author-avatar"
-                                    aria-hidden="true"
-                                >
-                                    TZ
-                                </div>
-
-
-                                <div>
-
-                                    <strong>
-                                        ${escapeHTML(
-                                            article.author?.name ||
-                                            "ToolZen Hub"
-                                        )}
-                                    </strong>
+                            <span
+                                class="article-meta-icon"
+                                aria-hidden="true"
+                            >
+                                ${icon("calendar")}
+                            </span>
 
 
-                                    <span>
-                                        ${escapeHTML(
-                                            article.author?.role ||
-                                            "Finance & Calculator Guides"
-                                        )}
-                                    </span>
-
-                                </div>
-
-                            </div>
+                            <span>
+                                ${escapeHTML(
+                                    article.datePublished ||
+                                    "Updated recently"
+                                )}
+                            </span>
 
                         </div>
 
-                    </header>
+
+                        <div class="article-meta-divider">
+                            •
+                        </div>
 
 
-                    <!-- ==================================
-                         Featured Image
-                    =================================== -->
+                        <div class="article-meta-item">
 
-                    ${
-                        article.image
-                            ? `
-
-                                <figure
-                                    class="article-featured-image"
-                                >
-
-                                    <img
-                                        src="${escapeHTML(
-                                            article.image.src
-                                        )}"
-                                        alt="${escapeHTML(
-                                            article.image.alt
-                                        )}"
-                                        width="800"
-                                        height="450"
-                                        fetchpriority="high"
-                                    >
-
-                                </figure>
-
-                            `
-                            : ""
-                    }
+                            <span
+                                class="article-meta-icon"
+                                aria-hidden="true"
+                            >
+                                ${icon("clock")}
+                            </span>
 
 
-                    <!-- ==================================
-                         Article Content
-                    =================================== -->
+                            <span>
+                                ${escapeHTML(
+                                    article.readTime ||
+                                    "5 min read"
+                                )}
+                            </span>
 
-                    <div class="article-content">
-
-                        ${renderSections(
-                            article.sections
-                        )}
-
-
-                        ${renderExample(
-                            article.example
-                        )}
+                        </div>
 
 
-                        ${renderConsiderations(
-                            article.considerations
-                        )}
+                        <div class="article-meta-divider">
+                            •
+                        </div>
 
 
-                        ${renderCalculator(
-                            article.calculator
-                        )}
+                        <div class="article-meta-item">
+
+                            <span
+                                class="article-meta-icon"
+                                aria-hidden="true"
+                            >
+                                ${icon("author")}
+                            </span>
 
 
-                        ${renderFAQ(
-                            article.faq
-                        )}
+                            <span>
+                                By
+                                ${escapeHTML(
+                                    article.author?.name ||
+                                    "ToolZen Hub"
+                                )}
+                            </span>
 
-                    </div>
-
-                </article>
-
-
-                <!-- ======================================
-                     Sidebar
-                ======================================= -->
-
-                ${renderSidebar(article)}
-
-            </div>
-
-
-            <!-- ==========================================
-                 Related Articles
-            =========================================== -->
-
-            ${renderRelatedArticles(
-                article.relatedArticles
-            )}
-
-        </div>
-
-    `;
-
-}
-
-
-
-/* =========================================================
-   Render Breadcrumb
-========================================================= */
-
-export function initializeBreadcrumb(
-    article
-) {
-
-    const breadcrumb =
-        document.getElementById(
-            "article-breadcrumb"
-        );
-
-
-    if (!breadcrumb) {
-
-        return;
-
-    }
-
-
-    breadcrumb.innerHTML =
-        renderBreadcrumb([
-
-            {
-                label:
-                    "Articles",
-
-                href:
-                    ROUTES.articles
-            },
-
-            {
-                label:
-                    article.title
-            }
-
-        ]);
-
-}
+                  
