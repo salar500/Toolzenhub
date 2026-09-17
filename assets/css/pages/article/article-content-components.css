@@ -610,6 +610,8 @@
 }
 
 
+/* Hide native browser disclosure marker */
+
 .article-faq-item summary::-webkit-details-marker {
 
     display:
@@ -619,6 +621,18 @@
 
 
 .article-faq-item summary::marker {
+
+    content:
+        "";
+
+}
+
+
+.article-faq-item summary::before,
+.article-faq-item summary::after {
+
+    content:
+        none;
 
     display:
         none;
@@ -689,6 +703,14 @@
 
     justify-content:
         center;
+
+}
+
+
+.faq-plus {
+
+    display:
+        inline-flex;
 
 }
 
