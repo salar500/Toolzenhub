@@ -674,27 +674,56 @@ function renderRelatedArticles(
                         class="article-related-card"
                     >
 
-                        <span
-                            class="article-related-category"
-                        >
-                            ${escapeHTML(
-                                article.category || ""
-                            )}
-                        </span>
+                        ${
+                            article.image &&
+                            article.image.src
+                                ? `
+                                    <div
+                                        class="article-related-image"
+                                    >
+                                        <img
+                                            src="${escapeHTML(
+                                                article.image.src
+                                            )}"
+                                            alt="${escapeHTML(
+                                                article.image.alt ||
+                                                article.title ||
+                                                "Related article"
+                                            )}"
+                                            loading="lazy"
+                                            decoding="async"
+                                        >
+                                    </div>
+                                `
+                                : ""
+                        }
 
 
-                        <h3>
-                            ${escapeHTML(
-                                article.title || ""
-                            )}
-                        </h3>
+                        <div class="article-related-card-content">
+
+                            <span
+                                class="article-related-category"
+                            >
+                                ${escapeHTML(
+                                    article.category || ""
+                                )}
+                            </span>
 
 
-                        <span
-                            class="article-related-link"
-                        >
-                            Read article →
-                        </span>
+                            <h3>
+                                ${escapeHTML(
+                                    article.title || ""
+                                )}
+                            </h3>
+
+
+                            <span
+                                class="article-related-link"
+                            >
+                                Read article →
+                            </span>
+
+                        </div>
 
                     </a>
 
