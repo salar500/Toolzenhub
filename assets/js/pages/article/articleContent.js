@@ -1,39 +1,42 @@
 /* =========================================================
-ToolZen Hub
-Article Content Renderer
+   ToolZen Hub
+   Article Content Renderer
 
-CHILD MODULE
+   CHILD MODULE
 
-Handles:
-- Key Takeaways
-- Article sections
-- Examples
-- Bigger Picture
-- Things to Consider
-- Calculator CTA
-- FAQ
-- Related Articles
+   Handles:
+   - Table of Contents
+   - Key Takeaways
+   - Article sections
+   - Examples
+   - Bigger Picture
+   - Things to Consider
+   - Calculator CTA
+   - FAQ
+   - Related Articles
 ========================================================= */
 
 import { ROUTES } from "../../routes.js";
 
 
 /* =========================================================
-HTML ESCAPE
+   HTML ESCAPE
 ========================================================= */
 
 function escapeHTML(value = "") {
+
     return String(value)
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+
 }
 
 
 /* =========================================================
-ICONS
+   ICONS
 ========================================================= */
 
 function icon(type) {
@@ -84,24 +87,118 @@ function icon(type) {
             </svg>
         `,
 
-        arrow: `
+        list: `
             <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
             >
-                <path d="M5 12h13"/>
-                <path d="M13 6l6 6-6 6"/>
+                <path d="M8 6h12"/>
+                <path d="M8 12h12"/>
+                <path d="M8 18h12"/>
+
+                <circle
+                    cx="4"
+                    cy="6"
+                    r="1"
+                />
+
+                <circle
+                    cx="4"
+                    cy="12"
+                    r="1"
+                />
+
+                <circle
+                    cx="4"
+                    cy="18"
+                    r="1"
+                />
             </svg>
         `
 
     };
 
     return icons[type] || "";
+
 }
 
 
 /* =========================================================
-KEY TAKEAWAYS
+   TABLE OF CONTENTS
+========================================================= */
+
+function renderTableOfContents(
+    items = []
+) {
+
+    if (!items.length) {
+        return "";
+    }
+
+
+    return `
+
+        <section
+            class="article-toc"
+            aria-labelledby="article-toc-title"
+        >
+
+            <div class="article-toc-heading">
+
+                <span
+                    class="article-toc-icon"
+                    aria-hidden="true"
+                >
+                    ${icon("list")}
+                </span>
+
+                <h2 id="article-toc-title">
+                    Table of Contents
+                </h2>
+
+            </div>
+
+
+            <nav
+                aria-label="Article sections"
+            >
+
+                ${items.map((item, index) => `
+
+                    <a
+                        href="#${escapeHTML(item.id)}"
+                        class="${
+                            index === 0
+                                ? "is-active"
+                                : ""
+                        }"
+                    >
+
+                        <span>
+                            ${escapeHTML(
+                                item.label
+                            )}
+                        </span>
+
+                        <span aria-hidden="true">
+                            →
+                        </span>
+
+                    </a>
+
+                `).join("")}
+
+            </nav>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+   KEY TAKEAWAYS
 ========================================================= */
 
 function renderKeyTakeaways(
@@ -119,7 +216,6 @@ function renderKeyTakeaways(
             class="article-key-takeaways"
             aria-labelledby="article-takeaways-title"
         >
-
 
             <div class="article-takeaways-heading">
 
@@ -160,15 +256,15 @@ function renderKeyTakeaways(
 
             </ul>
 
-
         </section>
 
     `;
+
 }
 
 
 /* =========================================================
-ARTICLE SECTIONS
+   ARTICLE SECTIONS
 ========================================================= */
 
 function renderSections(
@@ -189,7 +285,6 @@ function renderSections(
             )}"
         >
 
-
             <h2 id="${escapeHTML(section.id)}">
                 ${escapeHTML(
                     section.heading || ""
@@ -205,15 +300,15 @@ function renderSections(
                 `)
                 .join("")}
 
-
         </section>
 
     `).join("");
+
 }
 
 
 /* =========================================================
-EXAMPLE
+   EXAMPLE
 ========================================================= */
 
 function renderExample(example) {
@@ -230,7 +325,6 @@ function renderExample(example) {
             aria-labelledby="article-example-title"
         >
 
-
             <h2 id="article-example-title">
                 ${escapeHTML(
                     example.heading || "Example"
@@ -246,15 +340,15 @@ function renderExample(example) {
                 `)
                 .join("")}
 
-
         </section>
 
     `;
+
 }
 
 
 /* =========================================================
-BIGGER PICTURE
+   BIGGER PICTURE
 ========================================================= */
 
 function renderBiggerPicture(
@@ -273,12 +367,11 @@ function renderBiggerPicture(
             aria-labelledby="article-bigger-picture-title"
         >
 
-
             <div
                 class="article-bigger-picture-icon"
                 aria-hidden="true"
             >
-                ${icon("arrow")}
+                →
             </div>
 
 
@@ -291,7 +384,6 @@ function renderBiggerPicture(
                     )}
                 </h2>
 
-
                 <p>
                     ${escapeHTML(
                         biggerPicture.text || ""
@@ -300,15 +392,15 @@ function renderBiggerPicture(
 
             </div>
 
-
         </section>
 
     `;
+
 }
 
 
 /* =========================================================
-THINGS TO CONSIDER
+   THINGS TO CONSIDER
 ========================================================= */
 
 function renderConsiderations(
@@ -327,25 +419,33 @@ function renderConsiderations(
             aria-labelledby="article-considerations-title"
         >
 
+            <div class="article-section-heading">
 
-            <h2 id="article-considerations-title">
-                Things to Consider
-            </h2>
+                <span class="article-section-kicker">
+                    Before You Decide
+                </span>
+
+                <h2 id="article-considerations-title">
+                    Things to Consider
+                </h2>
+
+            </div>
 
 
             <ul>
 
-                ${considerations.map(item => `
+                ${considerations.map((item, index) => `
 
                     <li>
 
                         <span
+                            class="article-consideration-number"
                             aria-hidden="true"
                         >
-                            ${icon("check")}
+                            ${index + 1}
                         </span>
 
-                        <span>
+                        <span class="article-consideration-text">
                             ${escapeHTML(item)}
                         </span>
 
@@ -355,15 +455,15 @@ function renderConsiderations(
 
             </ul>
 
-
         </section>
 
     `;
+
 }
 
 
 /* =========================================================
-CALCULATOR CTA
+   CALCULATOR CTA
 ========================================================= */
 
 function renderCalculator(
@@ -388,7 +488,6 @@ function renderCalculator(
             aria-labelledby="article-calculator-title"
         >
 
-
             <div class="article-calculator-visual">
 
                 <div
@@ -407,11 +506,9 @@ function renderCalculator(
                     ToolZen Hub Calculator
                 </span>
 
-
                 <h2 id="article-calculator-title">
                     Compare Your Loan Options
                 </h2>
-
 
                 <p>
                     ${escapeHTML(
@@ -434,15 +531,15 @@ function renderCalculator(
 
             </a>
 
-
         </section>
 
     `;
+
 }
 
 
 /* =========================================================
-FAQ
+   FAQ
 ========================================================= */
 
 function renderFAQ(
@@ -461,13 +558,11 @@ function renderFAQ(
             aria-labelledby="article-faq-title"
         >
 
-
-            <div class="article-content-section-heading">
+            <div class="article-section-heading">
 
                 <span class="article-section-kicker">
                     Common Questions
                 </span>
-
 
                 <h2 id="article-faq-title">
                     Frequently Asked Questions
@@ -478,36 +573,37 @@ function renderFAQ(
 
             <div class="article-faq-list">
 
-
-                ${faq.map(item => `
+                ${faq.map((item, index) => `
 
                     <details
                         class="article-faq-item"
                     >
 
-
                         <summary>
 
-                            <span>
+                            <span class="article-faq-question">
                                 ${escapeHTML(
                                     item.question
                                 )}
                             </span>
 
-
                             <span
-                                class="article-faq-plus"
+                                class="article-faq-toggle"
                                 aria-hidden="true"
                             >
-                                +
+                                <span class="faq-plus">
+                                    +
+                                </span>
+
+                                <span class="faq-minus">
+                                    −
+                                </span>
                             </span>
 
                         </summary>
 
 
-                        <div
-                            class="article-faq-answer"
-                        >
+                        <div class="article-faq-answer">
 
                             <p>
                                 ${escapeHTML(
@@ -517,23 +613,21 @@ function renderFAQ(
 
                         </div>
 
-
                     </details>
 
                 `).join("")}
 
-
             </div>
-
 
         </section>
 
     `;
+
 }
 
 
 /* =========================================================
-RELATED ARTICLES
+   RELATED ARTICLES
 ========================================================= */
 
 function renderRelatedArticles(
@@ -552,18 +646,15 @@ function renderRelatedArticles(
             aria-labelledby="article-related-title"
         >
 
-
             <div class="article-section-heading">
 
                 <span class="article-section-kicker">
                     Continue Reading
                 </span>
 
-
                 <h2 id="article-related-title">
                     Related Articles
                 </h2>
-
 
                 <p>
                     Explore more practical guides
@@ -574,7 +665,6 @@ function renderRelatedArticles(
 
 
             <div class="article-related-grid">
-
 
                 ${articles.map(article => `
 
@@ -587,7 +677,6 @@ function renderRelatedArticles(
                         )}"
                         class="article-related-card"
                     >
-
 
                         <span
                             class="article-related-category"
@@ -611,26 +700,21 @@ function renderRelatedArticles(
                             Read article →
                         </span>
 
-
                     </a>
 
                 `).join("")}
 
-
             </div>
-
 
         </section>
 
     `;
+
 }
 
 
 /* =========================================================
-MAIN CONTENT FUNCTION
-
-This is the only function article render.js
-needs from this file.
+   MAIN CONTENT FUNCTION
 ========================================================= */
 
 export function renderArticleContent(
@@ -638,6 +722,19 @@ export function renderArticleContent(
 ) {
 
     return `
+
+        <!-- =========================================
+             TABLE OF CONTENTS
+        ========================================== -->
+
+        ${renderTableOfContents(
+            article.tableOfContents
+        )}
+
+
+        <!-- =========================================
+             KEY TAKEAWAYS
+        ========================================== -->
 
         ${renderKeyTakeaways(
             article.keyTakeaways
@@ -647,42 +744,70 @@ export function renderArticleContent(
         <div class="article-content">
 
 
+            <!-- =====================================
+                 ARTICLE SECTIONS
+            ====================================== -->
+
             ${renderSections(
                 article.sections
             )}
 
+
+            <!-- =====================================
+                 EXAMPLE
+            ====================================== -->
 
             ${renderExample(
                 article.example
             )}
 
 
+            <!-- =====================================
+                 BIGGER PICTURE
+            ====================================== -->
+
             ${renderBiggerPicture(
                 article.biggerPicture
             )}
 
+
+            <!-- =====================================
+                 THINGS TO CONSIDER
+            ====================================== -->
 
             ${renderConsiderations(
                 article.considerations
             )}
 
 
+            <!-- =====================================
+                 SINGLE CALCULATOR LINK
+            ====================================== -->
+
             ${renderCalculator(
                 article.calculator
             )}
 
+
+            <!-- =====================================
+                 FAQ
+            ====================================== -->
 
             ${renderFAQ(
                 article.faq
             )}
 
 
+            <!-- =====================================
+                 RELATED ARTICLES
+            ====================================== -->
+
             ${renderRelatedArticles(
                 article.relatedArticles
             )}
 
-
         </div>
 
     `;
+
 }
