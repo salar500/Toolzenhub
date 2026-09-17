@@ -45,7 +45,7 @@
        TABLE OF CONTENTS
     ===================================================== */
 
-    .article-table-of-contents {
+    .article-toc {
 
         margin-bottom:
             28px;
@@ -59,7 +59,7 @@
     }
 
 
-    .article-toc-link {
+    .article-toc nav a {
 
         padding:
             8px 7px;
@@ -344,6 +344,37 @@
 
         font-size:
             14px;
+
+        list-style:
+            none;
+
+    }
+
+
+    .article-faq-item summary::-webkit-details-marker {
+
+        display:
+            none;
+
+    }
+
+
+    .article-faq-item summary::marker {
+
+        content:
+            "";
+
+    }
+
+
+    .article-faq-item summary::before,
+    .article-faq-item summary::after {
+
+        content:
+            none;
+
+        display:
+            none;
 
     }
 
