@@ -191,7 +191,7 @@
     }
 
 
-    .article-considerations li > span:first-child {
+    .article-consideration-number {
 
         width:
             21px;
@@ -254,6 +254,9 @@
         width:
             100%;
 
+        min-width:
+            0;
+
     }
 
 
@@ -287,14 +290,11 @@
         display:
             flex;
 
-        align-items:
-            center;
-
-        justify-content:
-            center;
-
         width:
             100%;
+
+        min-width:
+            0;
 
         min-height:
             44px;
@@ -322,6 +322,14 @@
 
         margin:
             32px 0;
+
+    }
+
+
+    .article-faq-list {
+
+        gap:
+            8px;
 
     }
 
@@ -390,21 +398,43 @@
     }
 
 
-    .article-related-link {
+    .article-related-grid {
 
-        padding:
-            13px 14px;
+        grid-template-columns:
+            1fr;
 
-        font-size:
-            13px;
+        gap:
+            10px;
 
     }
 
 
-    .article-related-link span:first-child {
+    .article-related-card {
 
-        overflow-wrap:
-            anywhere;
+        min-height:
+            0;
+
+        padding:
+            16px;
+
+    }
+
+
+    .article-related-card h3 {
+
+        font-size:
+            15px;
+
+    }
+
+
+    .article-related-link {
+
+        padding-top:
+            13px;
+
+        font-size:
+            13px;
 
     }
 
