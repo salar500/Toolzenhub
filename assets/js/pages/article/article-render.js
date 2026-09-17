@@ -1,62 +1,65 @@
 /* =========================================================
-ToolZen Hub
-Article Renderer
+   ToolZen Hub
+   Article Renderer
 
-MAIN CONTROLLER
+   MAIN CONTROLLER
 
-Controls:
-- Article hero
-- Breadcrumb
-- Metadata
-- Tags
-- Main article content
-- Sidebar
+   Controls:
+   - Article hero
+   - Breadcrumb
+   - Metadata
+   - Tags
+   - Main article content
 
-Child modules:
-- articleContent.js
-- articleSidebar.js
+   Child module:
+   - articleContent.js
 ========================================================= */
 
 import { ROUTES } from "../../routes.js";
 import { renderBreadcrumb } from "../../components/breadcrumb.js";
 
 import { renderArticleContent } from "./articleContent.js";
-import { renderSidebar } from "./articleSidebar.js";
 
 
 /* =========================================================
-HTML ESCAPE
+   HTML ESCAPE
 ========================================================= */
 
 function escapeHTML(value = "") {
+
     return String(value)
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+
 }
 
 
 /* =========================================================
-SITE ROOT
+   SITE ROOT
 ========================================================= */
 
 function getSiteRoot() {
+
     return window.location.hostname === "salar500.github.io"
         ? "/Toolzenhub/"
         : "/";
+
 }
 
 
 /* =========================================================
-ASSET RESOLVER
+   ASSET RESOLVER
 ========================================================= */
 
 function resolveAsset(source) {
+
     if (!source) {
         return "";
     }
+
 
     if (
         source.startsWith("http://") ||
@@ -65,15 +68,17 @@ function resolveAsset(source) {
         return source;
     }
 
+
     return new URL(
         source.replace(/^\/+/, ""),
         window.location.origin + getSiteRoot()
     ).href;
+
 }
 
 
 /* =========================================================
-ICONS
+   ICONS
 ========================================================= */
 
 function icon(type) {
@@ -86,6 +91,7 @@ function icon(type) {
                 aria-hidden="true"
             >
                 <path d="M7 3v3M17 3v3M4 9h16"/>
+
                 <rect
                     x="4"
                     y="5"
@@ -95,6 +101,7 @@ function icon(type) {
                 />
             </svg>
         `,
+
 
         clock: `
             <svg
@@ -106,9 +113,11 @@ function icon(type) {
                     cy="12"
                     r="8"
                 />
+
                 <path d="M12 7v5l3 2"/>
             </svg>
         `,
+
 
         author: `
             <svg
@@ -120,18 +129,21 @@ function icon(type) {
                     cy="8"
                     r="3"
                 />
+
                 <path d="M5 20a7 7 0 0114 0"/>
             </svg>
         `
 
     };
 
+
     return icons[type] || "";
+
 }
 
 
 /* =========================================================
-TAGS
+   TAGS
 ========================================================= */
 
 function renderTags(tags = []) {
@@ -140,32 +152,41 @@ function renderTags(tags = []) {
         return "";
     }
 
+
     return `
+
         <div
             class="article-tags"
             aria-label="Article topics"
         >
 
             ${tags.map(tag => `
+
                 <span class="article-tag">
                     ${escapeHTML(tag)}
                 </span>
+
             `).join("")}
 
         </div>
+
     `;
+
 }
 
 
 /* =========================================================
-ARTICLE RENDERER
+   ARTICLE RENDERER
 ========================================================= */
 
 export function renderArticle(article) {
 
-    const app = document.getElementById("app");
+    const app =
+        document.getElementById("app");
+
 
     if (!app) {
+
         console.error(
             "ToolZen Hub: #app element was not found."
         );
@@ -174,9 +195,10 @@ export function renderArticle(article) {
     }
 
 
-    const imageSource = article.image
-        ? resolveAsset(article.image.src)
-        : "";
+    const imageSource =
+        article.image
+            ? resolveAsset(article.image.src)
+            : "";
 
 
     app.innerHTML = `
@@ -185,7 +207,7 @@ export function renderArticle(article) {
 
 
             <!-- =========================================
-            BREADCRUMB
+                 BREADCRUMB
             ========================================== -->
 
             <div
@@ -195,7 +217,7 @@ export function renderArticle(article) {
 
 
             <!-- =========================================
-            ARTICLE HERO
+                 ARTICLE HERO
             ========================================== -->
 
             <header class="article-hero">
@@ -205,7 +227,8 @@ export function renderArticle(article) {
 
                     <span class="article-category">
                         ${escapeHTML(
-                            article.category || "Finance"
+                            article.category ||
+                            "Finance"
                         )}
                     </span>
 
@@ -231,7 +254,7 @@ export function renderArticle(article) {
 
 
                     <!-- =================================
-                    ARTICLE META
+                         ARTICLE META
                     ================================== -->
 
                     <div
@@ -324,20 +347,23 @@ export function renderArticle(article) {
 
 
                 <!-- =====================================
-                HERO IMAGE
+                     HERO IMAGE
                 ====================================== -->
 
                 ${
                     imageSource
                         ? `
-                            <figure class="article-hero-image">
+                            <figure
+                                class="article-hero-image"
+                            >
 
                                 <img
                                     src="${escapeHTML(
                                         imageSource
                                     )}"
                                     alt="${escapeHTML(
-                                        article.image?.alt || ""
+                                        article.image?.alt ||
+                                        ""
                                     )}"
                                     width="800"
                                     height="450"
@@ -354,28 +380,19 @@ export function renderArticle(article) {
 
 
             <!-- =========================================
-            ARTICLE LAYOUT
+                 ARTICLE CONTENT
             ========================================== -->
 
             <div class="article-layout">
 
 
-                <!-- =====================================
-                MAIN ARTICLE
-                ====================================== -->
-
                 <article class="article">
 
-                    ${renderArticleContent(article)}
+                    ${renderArticleContent(
+                        article
+                    )}
 
                 </article>
-
-
-                <!-- =====================================
-                SIDEBAR
-                ====================================== -->
-
-                ${renderSidebar(article)}
 
 
             </div>
@@ -386,17 +403,13 @@ export function renderArticle(article) {
     `;
 
 
-    /*
-     * Breadcrumb is rendered after the main HTML
-     * has been inserted into the page.
-     */
-
     initializeBreadcrumb(article);
+
 }
 
 
 /* =========================================================
-BREADCRUMB
+   BREADCRUMB
 ========================================================= */
 
 export function initializeBreadcrumb(article) {
@@ -412,63 +425,68 @@ export function initializeBreadcrumb(article) {
     }
 
 
-    breadcrumb.innerHTML = renderBreadcrumb([
+    breadcrumb.innerHTML =
+        renderBreadcrumb([
 
-        {
-            label: "Articles",
-            href: ROUTES.articles
-        },
+            {
+                label: "Articles",
+                href: ROUTES.articles
+            },
 
-        {
-            label:
-                article.category ||
-                "Articles"
-        },
+            {
+                label:
+                    article.category ||
+                    "Articles"
+            },
 
-        {
-            label:
-                article.title ||
-                ""
-        }
+            {
+                label:
+                    article.title ||
+                    ""
+            }
 
-    ]);
+        ]);
+
 }
 
 
 /* =========================================================
-TABLE OF CONTENTS CLICK HANDLER
+   TABLE OF CONTENTS CLICK HANDLER
 ========================================================= */
 
-document.addEventListener("click", event => {
+document.addEventListener(
+    "click",
+    event => {
 
-    const link =
-        event.target.closest(
-            ".article-toc a"
-        );
-
-
-    if (!link) {
-        return;
-    }
+        const link =
+            event.target.closest(
+                ".article-toc a"
+            );
 
 
-    const links =
-        document.querySelectorAll(
-            ".article-toc a"
-        );
+        if (!link) {
+            return;
+        }
 
 
-    links.forEach(item => {
+        const links =
+            document.querySelectorAll(
+                ".article-toc a"
+            );
 
-        item.classList.remove(
+
+        links.forEach(item => {
+
+            item.classList.remove(
+                "is-active"
+            );
+
+        });
+
+
+        link.classList.add(
             "is-active"
         );
 
-    });
-
-
-    link.classList.add(
-        "is-active"
-    );
-
-});
+    }
+);
