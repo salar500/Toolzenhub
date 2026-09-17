@@ -1,0 +1,508 @@
+/* =========================================================
+   ToolZen Hub
+   Individual Article
+   Content Base
+========================================================= */
+
+
+/* =========================================================
+   ARTICLE SECTIONS
+========================================================= */
+
+.article-section {
+
+    margin-bottom:
+        34px;
+
+}
+
+
+.article-section h2,
+.article-example h2,
+.article-considerations h2,
+.article-calculator h2,
+.article-faq h2,
+.article-bigger-picture h2 {
+
+    margin:
+        0 0 14px;
+
+    color:
+        #0f172a;
+
+    font-size:
+        24px;
+
+    line-height:
+        1.3;
+
+    font-weight:
+        750;
+
+}
+
+
+.article-section p {
+
+    margin:
+        0 0 14px;
+
+}
+
+
+.article-section p:last-child {
+
+    margin-bottom:
+        0;
+
+}
+
+
+/* =========================================================
+   CONTENT HEADING
+========================================================= */
+
+.article-content-section-heading {
+
+    margin-bottom:
+        20px;
+
+}
+
+
+.article-section-kicker {
+
+    display:
+        block;
+
+    margin-bottom:
+        6px;
+
+    color:
+        #0b9f58;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        0.06em;
+
+}
+
+
+.article-content-section-heading h2 {
+
+    margin:
+        0;
+
+    color:
+        #0f172a;
+
+    font-size:
+        25px;
+
+    line-height:
+        1.3;
+
+    font-weight:
+        750;
+
+}
+
+
+/* =========================================================
+   TABLE OF CONTENTS
+========================================================= */
+
+.article-table-of-contents {
+
+    margin:
+        0 0 34px;
+
+    padding:
+        22px 24px;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius:
+        14px;
+
+    background:
+        #ffffff;
+
+}
+
+
+.article-toc-heading {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    margin-bottom:
+        16px;
+
+}
+
+
+.article-toc-icon {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        34px;
+
+    height:
+        34px;
+
+    flex-shrink:
+        0;
+
+    border-radius:
+        9px;
+
+    background:
+        #f0fdf4;
+
+    color:
+        #0b9f58;
+
+}
+
+
+.article-toc-icon svg {
+
+    width:
+        19px;
+
+    height:
+        19px;
+
+    fill:
+        none;
+
+    stroke:
+        currentColor;
+
+    stroke-width:
+        1.8;
+
+}
+
+
+.article-table-of-contents h2 {
+
+    margin:
+        0;
+
+    color:
+        #0f172a;
+
+    font-size:
+        19px;
+
+    line-height:
+        1.35;
+
+    font-weight:
+        750;
+
+}
+
+
+.article-toc-list {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        7px;
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    list-style:
+        none;
+
+}
+
+
+.article-toc-list li {
+
+    margin:
+        0;
+
+}
+
+
+.article-toc-link {
+
+    display:
+        block;
+
+    padding:
+        8px 10px;
+
+    border-radius:
+        7px;
+
+    color:
+        #475569;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.5;
+
+    text-decoration:
+        none;
+
+}
+
+
+.article-toc-link:hover {
+
+    background:
+        #f0fdf4;
+
+    color:
+        #0b9f58;
+
+}
+
+
+/* =========================================================
+   KEY TAKEAWAYS
+========================================================= */
+
+.article-key-takeaways {
+
+    margin:
+        0 0 34px;
+
+    padding:
+        24px 26px;
+
+    border:
+        1px solid #dbeafe;
+
+    border-radius:
+        14px;
+
+    background:
+        #eff6ff;
+
+}
+
+
+.article-takeaways-heading {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        10px;
+
+    margin-bottom:
+        17px;
+
+}
+
+
+.article-takeaways-icon {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        34px;
+
+    height:
+        34px;
+
+    flex-shrink:
+        0;
+
+    border-radius:
+        9px;
+
+    background:
+        #ffffff;
+
+    color:
+        #2563eb;
+
+}
+
+
+.article-takeaways-icon svg {
+
+    width:
+        20px;
+
+    height:
+        20px;
+
+    fill:
+        none;
+
+    stroke:
+        currentColor;
+
+    stroke-width:
+        1.8;
+
+}
+
+
+.article-key-takeaways h2 {
+
+    margin:
+        0;
+
+    color:
+        #0f172a;
+
+    font-size:
+        20px;
+
+    font-weight:
+        750;
+
+}
+
+
+.article-key-takeaways ul {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        12px;
+
+    margin:
+        0;
+
+    padding:
+        0;
+
+    list-style:
+        none;
+
+}
+
+
+.article-key-takeaways li {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        10px;
+
+    color:
+        #334155;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.55;
+
+}
+
+
+.article-check-icon {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        19px;
+
+    height:
+        19px;
+
+    flex-shrink:
+        0;
+
+    margin-top:
+        1px;
+
+    border-radius:
+        50%;
+
+    background:
+        #10b981;
+
+    color:
+        #ffffff;
+
+}
+
+
+.article-check-icon svg {
+
+    width:
+        12px;
+
+    height:
+        12px;
+
+    fill:
+        none;
+
+    stroke:
+        currentColor;
+
+    stroke-width:
+        2.5;
+
+}
