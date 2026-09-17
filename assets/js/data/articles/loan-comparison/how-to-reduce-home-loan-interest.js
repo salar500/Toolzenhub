@@ -471,7 +471,17 @@ const article = {
                 "EMI vs Total Interest: What Should You Compare?",
 
             category:
-                "Finance"
+                "Finance",
+
+            image: {
+
+                src:
+                    "assets/Images/articles/emi-vs-total-interest.png",
+
+                alt:
+                    "EMI and total home loan interest comparison"
+
+            }
 
         },
 
@@ -488,7 +498,17 @@ const article = {
                 "Fixed vs Floating Interest Rates",
 
             category:
-                "Finance"
+                "Finance",
+
+            image: {
+
+                src:
+                    "assets/Images/articles/fixed-vs-floating-interest-rates.png",
+
+                alt:
+                    "Fixed and floating home loan interest rate comparison"
+
+            }
 
         },
 
@@ -505,7 +525,17 @@ const article = {
                 "How Loan Tenure Affects Total Interest",
 
             category:
-                "Finance"
+                "Finance",
+
+            image: {
+
+                src:
+                    "assets/Images/articles/loan-tenure-total-interest.png",
+
+                alt:
+                    "Loan tenure and total interest comparison"
+
+            }
 
         },
 
@@ -522,7 +552,17 @@ const article = {
                 "What Is Loan Prepayment?",
 
             category:
-                "Finance"
+                "Finance",
+
+            image: {
+
+                src:
+                    "assets/Images/articles/what-is-loan-prepayment.png",
+
+                alt:
+                    "Home loan prepayment and principal repayment"
+
+            }
 
         },
 
@@ -539,7 +579,17 @@ const article = {
                 "How to Choose the Right Loan Tenure",
 
             category:
-                "Finance"
+                "Finance",
+
+            image: {
+
+                src:
+                    "assets/Images/articles/choose-right-loan-tenure.png",
+
+                alt:
+                    "Choosing the right home loan tenure"
+
+            }
 
         }
 
