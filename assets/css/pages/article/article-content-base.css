@@ -120,7 +120,7 @@
    TABLE OF CONTENTS
 ========================================================= */
 
-.article-table-of-contents {
+.article-toc {
 
     margin:
         0 0 34px;
@@ -209,7 +209,7 @@
 }
 
 
-.article-table-of-contents h2 {
+.article-toc h2 {
 
     margin:
         0;
@@ -229,7 +229,7 @@
 }
 
 
-.article-toc-list {
+.article-toc nav {
 
     display:
         flex;
@@ -240,30 +240,25 @@
     gap:
         7px;
 
-    margin:
-        0;
-
-    padding:
-        0;
-
-    list-style:
-        none;
-
 }
 
 
-.article-toc-list li {
-
-    margin:
-        0;
-
-}
-
-
-.article-toc-link {
+.article-toc nav a {
 
     display:
-        block;
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        12px;
+
+    min-width:
+        0;
 
     padding:
         8px 10px;
@@ -286,7 +281,18 @@
 }
 
 
-.article-toc-link:hover {
+.article-toc nav a:hover {
+
+    background:
+        #f0fdf4;
+
+    color:
+        #0b9f58;
+
+}
+
+
+.article-toc nav a.is-active {
 
     background:
         #f0fdf4;
