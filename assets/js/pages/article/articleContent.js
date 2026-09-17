@@ -560,10 +560,6 @@ function renderFAQ(
 
             <div class="article-section-heading">
 
-                <span class="article-section-kicker">
-                    Common Questions
-                </span>
-
                 <h2 id="article-faq-title">
                     Frequently Asked Questions
                 </h2>
@@ -573,7 +569,7 @@ function renderFAQ(
 
             <div class="article-faq-list">
 
-                ${faq.map((item, index) => `
+                ${faq.map(item => `
 
                     <details
                         class="article-faq-item"
