@@ -1,0 +1,411 @@
+/* =========================================================
+   ToolZen Hub
+   Individual Article
+   Content Responsive
+========================================================= */
+
+
+@media (max-width: 700px) {
+
+
+    /* =====================================================
+       GENERAL
+    ===================================================== */
+
+    .article-section {
+
+        margin-bottom:
+            28px;
+
+    }
+
+
+    .article-section h2,
+    .article-example h2,
+    .article-considerations h2,
+    .article-calculator h2,
+    .article-faq h2,
+    .article-bigger-picture h2 {
+
+        font-size:
+            21px;
+
+    }
+
+
+    .article-content-section-heading h2 {
+
+        font-size:
+            22px;
+
+    }
+
+
+    /* =====================================================
+       TABLE OF CONTENTS
+    ===================================================== */
+
+    .article-table-of-contents {
+
+        margin-bottom:
+            28px;
+
+        padding:
+            18px;
+
+        border-radius:
+            12px;
+
+    }
+
+
+    .article-toc-link {
+
+        padding:
+            8px 7px;
+
+        font-size:
+            13px;
+
+    }
+
+
+    /* =====================================================
+       KEY TAKEAWAYS
+    ===================================================== */
+
+    .article-key-takeaways {
+
+        margin-bottom:
+            28px;
+
+        padding:
+            18px;
+
+        border-radius:
+            12px;
+
+    }
+
+
+    .article-key-takeaways li {
+
+        font-size:
+            13px;
+
+    }
+
+
+    /* =====================================================
+       EXAMPLE
+    ===================================================== */
+
+    .article-example {
+
+        margin:
+            28px 0;
+
+        padding:
+            18px;
+
+    }
+
+
+    /* =====================================================
+       BIGGER PICTURE
+    ===================================================== */
+
+    .article-bigger-picture {
+
+        gap:
+            12px;
+
+        margin:
+            28px 0;
+
+        padding:
+            18px;
+
+        border-radius:
+            12px;
+
+    }
+
+
+    .article-bigger-picture-icon {
+
+        width:
+            36px;
+
+        height:
+            36px;
+
+    }
+
+
+    .article-bigger-picture-icon svg {
+
+        width:
+            19px;
+
+        height:
+            19px;
+
+    }
+
+
+    /* =====================================================
+       THINGS TO CONSIDER
+    ===================================================== */
+
+    .article-considerations {
+
+        margin:
+            28px 0;
+
+        padding:
+            18px;
+
+        border-radius:
+            12px;
+
+    }
+
+
+    .article-considerations ul {
+
+        gap:
+            11px;
+
+    }
+
+
+    .article-considerations li {
+
+        gap:
+            9px;
+
+        font-size:
+            13px;
+
+    }
+
+
+    .article-considerations li > span:first-child {
+
+        width:
+            21px;
+
+        height:
+            21px;
+
+        flex:
+            0 0 21px;
+
+    }
+
+
+    /* =====================================================
+       CALCULATOR CTA
+    ===================================================== */
+
+    .article-calculator {
+
+        display:
+            flex;
+
+        flex-direction:
+            column;
+
+        align-items:
+            stretch;
+
+        gap:
+            14px;
+
+        width:
+            100%;
+
+        margin:
+            30px 0;
+
+        padding:
+            18px;
+
+        box-sizing:
+            border-box;
+
+        border-radius:
+            12px;
+
+    }
+
+
+    .article-calculator-visual {
+
+        justify-content:
+            flex-start;
+
+    }
+
+
+    .article-calculator-content {
+
+        width:
+            100%;
+
+    }
+
+
+    .article-calculator-content h2 {
+
+        font-size:
+            19px;
+
+        line-height:
+            1.35;
+
+    }
+
+
+    .article-calculator-content p {
+
+        font-size:
+            13px;
+
+        line-height:
+            1.6;
+
+        overflow-wrap:
+            anywhere;
+
+    }
+
+
+    .article-calculator-button {
+
+        display:
+            flex;
+
+        align-items:
+            center;
+
+        justify-content:
+            center;
+
+        width:
+            100%;
+
+        min-height:
+            44px;
+
+        box-sizing:
+            border-box;
+
+        padding:
+            12px 16px;
+
+        white-space:
+            normal;
+
+        text-align:
+            center;
+
+    }
+
+
+    /* =====================================================
+       FAQ
+    ===================================================== */
+
+    .article-faq {
+
+        margin:
+            32px 0;
+
+    }
+
+
+    .article-faq-item summary {
+
+        gap:
+            10px;
+
+        padding:
+            14px;
+
+        font-size:
+            14px;
+
+    }
+
+
+    .article-faq-question {
+
+        overflow-wrap:
+            anywhere;
+
+    }
+
+
+    .article-faq-toggle {
+
+        width:
+            27px;
+
+        height:
+            27px;
+
+        flex:
+            0 0 27px;
+
+    }
+
+
+    .article-faq-answer {
+
+        padding:
+            0 14px 15px;
+
+    }
+
+
+    .article-faq-answer p {
+
+        font-size:
+            13px;
+
+    }
+
+
+    /* =====================================================
+       RELATED ARTICLES
+    ===================================================== */
+
+    .article-related {
+
+        margin-top:
+            32px;
+
+    }
+
+
+    .article-related-link {
+
+        padding:
+            13px 14px;
+
+        font-size:
+            13px;
+
+    }
+
+
+    .article-related-link span:first-child {
+
+        overflow-wrap:
+            anywhere;
+
+    }
+
+}
