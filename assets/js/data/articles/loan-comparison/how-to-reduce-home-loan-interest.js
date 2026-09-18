@@ -85,7 +85,7 @@ const article = {
     image: {
 
         src:
-            "assets/Images/articles/how-to-reduce-home-loan-interest.png",
+            "/assets/Images/articles/how-to-reduce-home-loan-interest.png",
 
         alt:
             "Home loan interest calculation and financial planning"
@@ -476,7 +476,7 @@ const article = {
             image: {
 
                 src:
-                    "assets/Images/articles/emi-vs-total-interest.png",
+                    "/assets/Images/articles/emi-vs-total-interest.png",
 
                 alt:
                     "EMI and total home loan interest comparison"
@@ -503,7 +503,7 @@ const article = {
             image: {
 
                 src:
-                    "assets/Images/articles/fixed-vs-floating-interest-rates.png",
+                    "/assets/Images/articles/fixed-vs-floating-interest-rates.png",
 
                 alt:
                     "Fixed and floating home loan interest rate comparison"
@@ -530,7 +530,7 @@ const article = {
             image: {
 
                 src:
-                    "assets/Images/articles/loan-tenure-total-interest.png",
+                    "/assets/Images/articles/loan-tenure-total-interest.png",
 
                 alt:
                     "Loan tenure and total interest comparison"
@@ -557,7 +557,7 @@ const article = {
             image: {
 
                 src:
-                    "assets/Images/articles/what-is-loan-prepayment.png",
+                    "/assets/Images/articles/what-is-loan-prepayment.png",
 
                 alt:
                     "Home loan prepayment and principal repayment"
@@ -584,7 +584,7 @@ const article = {
             image: {
 
                 src:
-                    "assets/Images/articles/choose-right-loan-tenure.png",
+                    "/assets/Images/articles/choose-right-loan-tenure.png",
 
                 alt:
                     "Choosing the right home loan tenure"
