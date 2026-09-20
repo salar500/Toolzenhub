@@ -8,78 +8,13 @@ import { renderFooter } from "../components/footer.js";
 
 import { ROUTES } from "../routes.js";
 
+import {
+    getCalculatorsByCategory
+} from "../data/calculators.js";
 
-/* =========================================================
-   Loan Calculator Data
-========================================================= */
-
-const loanCalculators = [
-
-    {
-        id: "loan-comparison",
-        icon: "⚖",
-        title: "Loan Comparison Calculator",
-        description: "Compare two loans side by side and find the best option.",
-        href: ROUTES.calculator("loan-comparison")
-    },
-
-    {
-        id: "emi",
-        icon: "▦",
-        title: "EMI Calculator",
-        description: "Calculate your EMI for any loan amount.",
-        href: "emi-calculator.html"
-    },
-
-    {
-        id: "home-loan",
-        icon: "⌂",
-        title: "Home Loan Calculator",
-        description: "Calculate EMI, interest and payment schedule.",
-        href: "home-loan-calculator.html"
-    },
-
-    {
-        id: "personal-loan",
-        icon: "♙",
-        title: "Personal Loan Calculator",
-        description: "Calculate EMI and total payable for personal loan.",
-        href: "personal-loan-calculator.html"
-    },
-
-    {
-        id: "loan-eligibility",
-        icon: "▤",
-        title: "Loan Eligibility Calculator",
-        description: "Check your eligibility for various loans.",
-        href: "loan-eligibility-calculator.html"
-    },
-
-    {
-        id: "balance-transfer",
-        icon: "⟳",
-        title: "Balance Transfer Calculator",
-        description: "Check savings on balance transfer.",
-        href: "balance-transfer-calculator.html"
-    },
-
-    {
-        id: "interest",
-        icon: "%",
-        title: "Interest Calculator",
-        description: "Calculate simple and compound interest.",
-        href: "interest-calculator.html"
-    },
-
-    {
-        id: "prepayment",
-        icon: "₹",
-        title: "Prepayment Calculator",
-        description: "Calculate savings on part prepayment of loan.",
-        href: "prepayment-calculator.html"
-    }
-
-];
+import {
+    renderCalculatorCards
+} from "../components/calculator-card.js";
 
 
 /* =========================================================
@@ -97,47 +32,15 @@ function renderLoanCalculators() {
     }
 
 
-    grid.innerHTML = loanCalculators.map(calculator => `
-
-        <a
-            href="${calculator.href}"
-            class="loan-calculator-card"
-        >
-
-            <div
-                class="
-                    loan-calculator-card__icon
-                    loan-calculator-card__icon--${calculator.id}
-                "
-                aria-hidden="true"
-            >
-                ${calculator.icon}
-            </div>
+    const loanCalculators =
+        getCalculatorsByCategory("loans");
 
 
-            <div class="loan-calculator-card__content">
+    grid.innerHTML =
+        renderCalculatorCards(
+            loanCalculators
+        );
 
-                <h2 class="loan-calculator-card__title">
-                    ${calculator.title}
-                </h2>
-
-                <p class="loan-calculator-card__description">
-                    ${calculator.description}
-                </p>
-
-            </div>
-
-
-            <span
-                class="loan-calculator-card__arrow"
-                aria-hidden="true"
-            >
-                →
-            </span>
-
-        </a>
-
-    `).join("");
 }
 
 
@@ -161,26 +64,30 @@ function initializeSearch() {
     }
 
 
-    form.addEventListener("submit", function(event) {
+    form.addEventListener(
+        "submit",
+        function(event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
 
-        const query = input.value.trim();
+            const query =
+                input.value.trim();
 
 
-        if (!query) {
+            if (!query) {
 
-            input.focus();
+                input.focus();
 
-            return;
+                return;
+            }
+
+
+            window.location.href =
+                `search.html?q=${encodeURIComponent(query)}`;
+
         }
-
-
-        window.location.href =
-            `search.html?q=${encodeURIComponent(query)}`;
-
-    });
+    );
 
 }
 
@@ -192,14 +99,20 @@ function initializeSearch() {
 function setActiveNavigation() {
 
     const navigationLinks =
-        document.querySelectorAll(".navbar__link");
+        document.querySelectorAll(
+            ".navbar__link"
+        );
 
 
-    navigationLinks.forEach(link => {
+    navigationLinks.forEach(
+        link => {
 
-        link.classList.remove("active");
+            link.classList.remove(
+                "active"
+            );
 
-    });
+        }
+    );
 
 
     const categoriesLink =
@@ -210,7 +123,9 @@ function setActiveNavigation() {
 
     if (categoriesLink) {
 
-        categoriesLink.classList.add("active");
+        categoriesLink.classList.add(
+            "active"
+        );
 
     }
 
