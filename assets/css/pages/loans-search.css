@@ -1,0 +1,263 @@
+/* =========================================================
+   ToolZen Hub
+   Loans Page
+   Calculator Search
+========================================================= */
+
+
+/* =========================================================
+   Search Section
+========================================================= */
+
+.loans-search-section {
+
+    padding: 4px 0 18px;
+
+    background: #ffffff;
+}
+
+
+.loans-search {
+
+    min-height: 86px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    padding: 15px 20px;
+
+    border: 1px solid #dcebe4;
+
+    border-radius: 12px;
+
+    background: #f1faf6;
+}
+
+
+/* =========================================================
+   Search Icon
+========================================================= */
+
+.loans-search__icon {
+
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #dcf5e8;
+
+    font-size: 22px;
+}
+
+
+/* =========================================================
+   Search Content
+========================================================= */
+
+.loans-search__content {
+
+    min-width: 0;
+
+    flex: 0 0 42%;
+}
+
+
+.loans-search__content h2 {
+
+    margin: 0 0 4px;
+
+    color: #101828;
+
+    font-size: 17px;
+
+    font-weight: 750;
+
+    line-height: 1.3;
+}
+
+
+.loans-search__content p {
+
+    margin: 0;
+
+    color: #475467;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   Search Form
+========================================================= */
+
+.loans-search__form {
+
+    flex: 1;
+
+    min-width: 0;
+
+    height: 48px;
+
+    display: flex;
+
+    overflow: hidden;
+
+    border: 1px solid #d7e1dd;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 1px 3px rgba(16, 24, 40, 0.04);
+}
+
+
+.loans-search__input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 0 17px;
+
+    border: 0;
+
+    outline: 0;
+
+    background: #ffffff;
+
+    color: #101828;
+
+    font-family: inherit;
+
+    font-size: 13px;
+}
+
+
+.loans-search__input::placeholder {
+
+    color: #98a2b3;
+}
+
+
+.loans-search__button {
+
+    width: 72px;
+
+    flex-shrink: 0;
+
+    border: 0;
+
+    background: #0b9f58;
+
+    color: #ffffff;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease;
+}
+
+
+.loans-search__button:hover {
+
+    background: #087d46;
+}
+
+
+/* =========================================================
+   Tablet
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .loans-search__content {
+
+        flex-basis: 35%;
+    }
+
+}
+
+
+/* =========================================================
+   Mobile
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .loans-search-section {
+
+        padding-top: 4px;
+    }
+
+
+    .loans-search {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 12px;
+
+        padding: 15px;
+    }
+
+
+    .loans-search__icon {
+
+        display: none;
+    }
+
+
+    .loans-search__content {
+
+        flex: none;
+    }
+
+
+    .loans-search__content h2 {
+
+        font-size: 15px;
+    }
+
+
+    .loans-search__content p {
+
+        font-size: 11px;
+    }
+
+
+    .loans-search__form {
+
+        width: 100%;
+
+        height: 43px;
+    }
+
+
+    .loans-search__button {
+
+        width: 55px;
+
+        font-size: 18px;
+    }
+
+}
