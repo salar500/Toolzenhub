@@ -18,10 +18,12 @@ import {
 
 
 /* =========================================================
-   Render Calculator Cards
+   RENDER CALCULATOR CARDS
 ========================================================= */
 
-function renderLoanCalculators() {
+function renderLoanCalculators(
+    calculators
+) {
 
     const grid = document.getElementById(
         "loans-calculators-grid"
@@ -32,20 +34,32 @@ function renderLoanCalculators() {
     }
 
 
-    const loanCalculators =
-        getCalculatorsByCategory("loans");
+    if (!calculators.length) {
+
+        grid.innerHTML = `
+            <div class="loans-search-empty">
+                <h3>No calculators found</h3>
+
+                <p>
+                    Try another search term.
+                </p>
+            </div>
+        `;
+
+        return;
+    }
 
 
     grid.innerHTML =
         renderCalculatorCards(
-            loanCalculators
+            calculators
         );
 
 }
 
 
 /* =========================================================
-   Search
+   SEARCH
 ========================================================= */
 
 function initializeSearch() {
@@ -64,6 +78,68 @@ function initializeSearch() {
     }
 
 
+    const loanCalculators =
+        getCalculatorsByCategory(
+            "loans"
+        );
+
+
+    function performSearch(query) {
+
+        const search =
+            String(query || "")
+                .trim()
+                .toLowerCase();
+
+
+        if (!search) {
+
+            renderLoanCalculators(
+                loanCalculators
+            );
+
+            return;
+        }
+
+
+        const results =
+            loanCalculators.filter(
+                calculator => {
+
+                    const searchableText = [
+
+                        calculator.title,
+
+                        calculator.description,
+
+                        calculator.category,
+
+                        calculator.id
+
+                    ]
+                        .join(" ")
+                        .toLowerCase();
+
+
+                    return searchableText.includes(
+                        search
+                    );
+
+                }
+            );
+
+
+        renderLoanCalculators(
+            results
+        );
+
+    }
+
+
+    /* =====================================================
+       SUBMIT
+    ===================================================== */
+
     form.addEventListener(
         "submit",
         function(event) {
@@ -71,20 +147,25 @@ function initializeSearch() {
             event.preventDefault();
 
 
-            const query =
-                input.value.trim();
+            performSearch(
+                input.value
+            );
+
+        }
+    );
 
 
-            if (!query) {
+    /* =====================================================
+       LIVE SEARCH
+    ===================================================== */
 
-                input.focus();
+    input.addEventListener(
+        "input",
+        function() {
 
-                return;
-            }
-
-
-            window.location.href =
-                `search.html?q=${encodeURIComponent(query)}`;
+            performSearch(
+                input.value
+            );
 
         }
     );
@@ -93,7 +174,7 @@ function initializeSearch() {
 
 
 /* =========================================================
-   Header Navigation
+   HEADER NAVIGATION
 ========================================================= */
 
 function setActiveNavigation() {
@@ -133,7 +214,7 @@ function setActiveNavigation() {
 
 
 /* =========================================================
-   Breadcrumb Navigation
+   BREADCRUMB NAVIGATION
 ========================================================= */
 
 function initializeBreadcrumb() {
@@ -169,7 +250,7 @@ function initializeBreadcrumb() {
 
 
 /* =========================================================
-   Application
+   APPLICATION
 ========================================================= */
 
 function initializeLoansPage() {
@@ -180,7 +261,11 @@ function initializeLoansPage() {
 
     initializeBreadcrumb();
 
-    renderLoanCalculators();
+    renderLoanCalculators(
+        getCalculatorsByCategory(
+            "loans"
+        )
+    );
 
     initializeSearch();
 
@@ -190,7 +275,7 @@ function initializeLoansPage() {
 
 
 /* =========================================================
-   DOM Ready
+   DOM READY
 ========================================================= */
 
 document.addEventListener(
