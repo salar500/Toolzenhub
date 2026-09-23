@@ -5,12 +5,17 @@
    Used by:
    - Home Hero Search
    - Categories Page Search
+   - All Calculators Page Search
 
    Purpose:
-   Search calculators only.
+   Search calculators from the master calculator catalog.
 
    This is completely separate from article search.
 ========================================================= */
+
+import {
+    calculators
+} from "../data/calculators.js";
 
 import {
     ROUTES
@@ -18,188 +23,52 @@ import {
 
 
 /* =========================================================
-   CALCULATOR DATA
+   CATEGORY LABELS
 ========================================================= */
 
-const calculators = [
+const categoryLabels = {
 
-    {
-        title: "Loan Comparison",
-        description: "Compare loans side by side",
-        category: "Loans",
-        keywords: "loan comparison loans interest emi repayment",
-        url: ROUTES.calculator("loan-comparison")
-    },
+    loans: "Loans",
 
-    {
-        title: "EMI Calculator",
-        description: "Calculate your EMI instantly",
-        category: "Loans",
-        keywords: "emi loan monthly payment interest",
-        url: ROUTES.calculator("emi")
-    },
+    investment: "Investment",
 
-    {
-        title: "Home Loan Calculator",
-        description: "Calculate your home loan",
-        category: "Loans",
-        keywords: "home loan housing loan emi interest",
-        url: ROUTES.calculator("home-loan")
-    },
+    tax: "Tax",
 
-    {
-        title: "Personal Loan Calculator",
-        description: "Calculate personal loan payments",
-        category: "Loans",
-        keywords: "personal loan emi interest repayment",
-        url: ROUTES.calculator("personal-loan")
-    },
+    health: "Health",
 
-    {
-        title: "SIP Calculator",
-        description: "Plan your SIP investments",
-        category: "Investment",
-        keywords: "sip investment mutual fund returns savings",
-        url: ROUTES.calculator("sip")
-    },
+    business: "Business",
 
-    {
-        title: "PPF Calculator",
-        description: "Calculate PPF investment returns",
-        category: "Investment",
-        keywords: "ppf investment returns savings",
-        url: ROUTES.calculator("ppf")
-    },
+    math: "Math",
 
-    {
-        title: "FD Calculator",
-        description: "Calculate fixed deposit returns",
-        category: "Investment",
-        keywords: "fd fixed deposit investment interest",
-        url: ROUTES.calculator("fd")
-    },
+    converter: "Converter"
 
-    {
-        title: "CAGR Calculator",
-        description: "Calculate compound annual growth rate",
-        category: "Investment",
-        keywords: "cagr growth investment return",
-        url: ROUTES.calculator("cagr")
-    },
+};
 
-    {
-        title: "GST Calculator",
-        description: "Calculate GST easily and accurately",
-        category: "Tax",
-        keywords: "gst tax goods services tax calculation",
-        url: ROUTES.calculator("gst")
-    },
 
-    {
-        title: "Income Tax Calculator",
-        description: "Estimate your income tax",
-        category: "Tax",
-        keywords: "income tax tax calculation salary",
-        url: ROUTES.calculator("income-tax")
-    },
+/* =========================================================
+   CALCULATOR SEARCH DATA
+========================================================= */
 
-    {
-        title: "BMI Calculator",
-        description: "Check your body mass index",
-        category: "Health",
-        keywords: "bmi health weight body mass index",
-        url: ROUTES.calculator("bmi")
-    },
+function getSearchCalculators() {
 
-    {
-        title: "Calorie Calculator",
-        description: "Estimate your daily calorie needs",
-        category: "Health",
-        keywords: "calorie calories health diet daily",
-        url: ROUTES.calculator("calorie")
-    },
+    return calculators.map(
+        calculator => ({
 
-    {
-        title: "BMR Calculator",
-        description: "Calculate your basal metabolic rate",
-        category: "Health",
-        keywords: "bmr basal metabolic rate calories",
-        url: ROUTES.calculator("bmr")
-    },
+            ...calculator,
 
-    {
-        title: "Profit Calculator",
-        description: "Calculate business profit",
-        category: "Business",
-        keywords: "profit business revenue cost",
-        url: ROUTES.calculator("profit")
-    },
+            category:
+                categoryLabels[
+                    calculator.category
+                ] ||
+                calculator.category,
 
-    {
-        title: "Margin Calculator",
-        description: "Calculate profit margin",
-        category: "Business",
-        keywords: "margin profit business percentage",
-        url: ROUTES.calculator("margin")
-    },
+            url:
+                calculator.href
 
-    {
-        title: "ROI Calculator",
-        description: "Calculate return on investment",
-        category: "Business",
-        keywords: "roi return investment business",
-        url: ROUTES.calculator("roi")
-    },
+        })
+    );
 
-    {
-        title: "Percentage Calculator",
-        description: "Calculate percentages easily",
-        category: "Math",
-        keywords: "percentage percent maths calculation",
-        url: ROUTES.calculator("percentage")
-    },
-
-    {
-        title: "Ratio Calculator",
-        description: "Calculate and simplify ratios",
-        category: "Math",
-        keywords: "ratio maths proportion calculation",
-        url: ROUTES.calculator("ratio")
-    },
-
-    {
-        title: "Age Calculator",
-        description: "Calculate age accurately",
-        category: "Math",
-        keywords: "age date birth calculation",
-        url: ROUTES.calculator("age")
-    },
-
-    {
-        title: "Unit Converter",
-        description: "Convert common units quickly",
-        category: "Converter",
-        keywords: "unit conversion length weight temperature",
-        url: ROUTES.calculator("unit-converter")
-    },
-
-    {
-        title: "Currency Converter",
-        description: "Convert currencies easily",
-        category: "Converter",
-        keywords: "currency exchange money conversion",
-        url: ROUTES.calculator("currency")
-    },
-
-    {
-        title: "Date Calculator",
-        description: "Calculate dates and date differences",
-        category: "Converter",
-        keywords: "date days calendar difference",
-        url: ROUTES.calculator("date")
-    }
-
-];
+}
 
 
 /* =========================================================
@@ -219,7 +88,11 @@ export function searchCalculators(query) {
     }
 
 
-    return calculators.filter(
+    const searchCalculators =
+        getSearchCalculators();
+
+
+    return searchCalculators.filter(
         calculator => {
 
             const searchableText = [
@@ -228,16 +101,16 @@ export function searchCalculators(query) {
 
                 calculator.description,
 
-                calculator.category,
-
-                calculator.keywords
+                calculator.category
 
             ]
                 .join(" ")
                 .toLowerCase();
 
 
-            return searchableText.includes(search);
+            return searchableText.includes(
+                search
+            );
 
         }
     );
@@ -251,7 +124,7 @@ export function searchCalculators(query) {
 
 export function getCalculators() {
 
-    return [...calculators];
+    return getSearchCalculators();
 
 }
 
