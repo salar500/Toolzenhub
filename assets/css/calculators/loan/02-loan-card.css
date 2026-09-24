@@ -1,5 +1,11 @@
 /* =========================================================
-   MAIN TOOL / CARD / VS
+   Loan Comparison
+   Main Tool / Loan Cards / VS
+========================================================= */
+
+
+/* =========================================================
+   MAIN TOOL
 ========================================================= */
 
 .loan-comparison-tool {
@@ -10,11 +16,21 @@
     box-shadow: 0 8px 30px rgba(15, 23, 42, .06);
 }
 
+
+/* =========================================================
+   LOAN GRID
+========================================================= */
+
 .loan-comparison-grid {
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+
+
+/* =========================================================
+   LOAN CARD
+========================================================= */
 
 .loan-card {
     padding: 28px;
@@ -28,6 +44,11 @@
 .loan-card:last-child {
     border-top: 3px solid #10b981;
 }
+
+
+/* =========================================================
+   LOAN CARD HEADER
+========================================================= */
 
 .loan-card-header {
     margin-bottom: 24px;
@@ -45,6 +66,11 @@
     font-size: 22px;
 }
 
+
+/* =========================================================
+   LOAN BADGE
+========================================================= */
+
 .loan-badge {
     padding: 4px 8px;
     border-radius: 999px;
@@ -54,21 +80,34 @@
     font-weight: 700;
 }
 
+
+/* =========================================================
+   VS INDICATOR
+========================================================= */
+
 .loan-vs {
     position: absolute;
     top: 50%;
     left: 50%;
     z-index: 5;
+
     display: grid;
     place-items: center;
+
     width: 42px;
     height: 42px;
+
     border: 1px solid #dbeafe;
     border-radius: 50%;
+
     background: #ffffff;
     color: #1e3a8a;
+
     font-size: 12px;
     font-weight: 800;
+
     transform: translate(-50%, -50%);
-    box-shadow: 0 4px 14px rgba(15, 23, 42, .08);
+
+    box-shadow:
+        0 4px 14px rgba(15, 23, 42, .08);
 }
