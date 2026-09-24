@@ -4,6 +4,8 @@
 
 .loan-modal-open {
     overflow: hidden;
+    height: 100%;
+    touch-action: none;
 }
 
 .loan-amortization-modal {
@@ -16,7 +18,7 @@
     justify-content: center;
 
     width: 100%;
-    height: 100%;
+    height: 100dvh;
 
     padding: 20px;
     box-sizing: border-box;
@@ -24,6 +26,9 @@
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
+
+    overscroll-behavior: none;
+    touch-action: none;
 
     transition:
         opacity .2s ease,
@@ -36,11 +41,7 @@
     pointer-events: auto;
 }
 
-
-/* =========================================================
-   OVERLAY
-========================================================= */
-
+/* OVERLAY */
 .loan-amortization-overlay {
     position: absolute;
     inset: 0;
@@ -52,13 +53,12 @@
     backdrop-filter: blur(3px);
 
     cursor: default;
+
+    overscroll-behavior: none;
+    touch-action: none;
 }
 
-
-/* =========================================================
-   DIALOG
-========================================================= */
-
+/* DIALOG */
 .loan-amortization-dialog {
     position: relative;
     z-index: 1;
@@ -69,10 +69,12 @@
     width: min(1100px, 100%);
     max-width: 100%;
 
-    height: min(90vh, 850px);
-    max-height: 90vh;
+    height: min(90dvh, 850px);
+    max-height: 90dvh;
 
     min-width: 0;
+    min-height: 0;
+
     margin: 0;
 
     overflow: hidden;
@@ -86,13 +88,12 @@
         0 25px 70px rgba(15, 23, 42, .25);
 
     box-sizing: border-box;
+
+    overscroll-behavior: contain;
+    touch-action: manipulation;
 }
 
-
-/* =========================================================
-   MODAL HEADER
-========================================================= */
-
+/* HEADER */
 .loan-amortization-header {
     display: flex;
     justify-content: space-between;
@@ -101,6 +102,7 @@
     flex: 0 0 auto;
 
     gap: 20px;
+
     padding: 24px 26px;
 
     border-bottom: 1px solid #e2e8f0;
@@ -140,11 +142,7 @@
     font-size: 13px;
 }
 
-
-/* =========================================================
-   CLOSE BUTTON
-========================================================= */
-
+/* CLOSE BUTTON */
 .loan-amortization-close {
     display: grid;
     place-items: center;
@@ -160,7 +158,6 @@
     border-radius: 8px;
 
     background: #f1f5f9;
-
     color: #475569;
 
     font: inherit;
@@ -175,11 +172,7 @@
     color: #0f172a;
 }
 
-
-/* =========================================================
-   MODAL SUMMARY
-========================================================= */
-
+/* MODAL SUMMARY */
 .loan-amortization-summary {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -187,6 +180,7 @@
     flex: 0 0 auto;
 
     gap: 12px;
+
     padding: 16px 26px;
 
     border-bottom: 1px solid #e2e8f0;
@@ -227,11 +221,7 @@
     font-size: 17px;
 }
 
-
-/* =========================================================
-   TABLE CONTAINER
-========================================================= */
-
+/* TABLE CONTAINER */
 .loan-amortization-table-container {
     flex: 1 1 auto;
 
@@ -248,14 +238,11 @@
     box-sizing: border-box;
 }
 
-
-/* =========================================================
-   TABLE SCROLL AREA
-========================================================= */
-
+/* TABLE SCROLL */
 .loan-full-table-scroll {
     width: 100%;
     max-width: 100%;
+
     height: 100%;
 
     min-width: 0;
@@ -265,13 +252,13 @@
     overflow-y: auto;
 
     box-sizing: border-box;
+
+    overscroll-behavior: contain;
+
+    touch-action: pan-x pan-y;
 }
 
-
-/* =========================================================
-   AMORTIZATION TABLE
-========================================================= */
-
+/* TABLE */
 .loan-amortization-table {
     width: max-content;
     min-width: 100%;
@@ -298,7 +285,6 @@
     z-index: 2;
 
     background: #f8fafc;
-
     color: #475569;
 
     box-shadow:
@@ -319,11 +305,7 @@
     white-space: normal !important;
 }
 
-
-/* =========================================================
-   MODAL FOOTER
-========================================================= */
-
+/* FOOTER */
 .loan-amortization-footer {
     display: flex;
     justify-content: space-between;
@@ -332,6 +314,7 @@
     flex: 0 0 auto;
 
     gap: 15px;
+
     padding: 15px 26px;
 
     border-top: 1px solid #e2e8f0;
@@ -364,7 +347,6 @@
     border-radius: 7px;
 
     background: #2563eb;
-
     color: #ffffff;
 
     font: inherit;
@@ -383,7 +365,6 @@
     cursor: wait;
 }
 
-
 /* =========================================================
    MOBILE
 ========================================================= */
@@ -391,21 +372,37 @@
 @media (max-width: 650px) {
 
     .loan-amortization-modal {
-        padding: 8px;
+        align-items: stretch;
+        justify-content: stretch;
+
+        padding: 0;
+
+        height: 100dvh;
+
+        overflow: hidden;
+
+        overscroll-behavior: none;
     }
 
     .loan-amortization-dialog {
         width: 100%;
         max-width: 100%;
 
-        height: 94vh;
-        max-height: 94vh;
+        height: 100dvh;
+        max-height: 100dvh;
 
-        border-radius: 12px;
+        border: 0;
+        border-radius: 0;
+
+        box-shadow: none;
+
+        overscroll-behavior: none;
     }
 
     .loan-amortization-header {
         padding: 18px;
+
+        flex-shrink: 0;
     }
 
     .loan-amortization-header h2 {
@@ -416,22 +413,36 @@
         grid-template-columns: 1fr;
 
         padding: 12px 18px;
+
+        flex-shrink: 0;
     }
 
     .loan-amortization-table-container {
         min-width: 0;
+        min-height: 0;
+
         width: 100%;
         max-width: 100%;
 
         overflow: hidden;
+
+        flex: 1 1 auto;
     }
 
     .loan-full-table-scroll {
         width: 100%;
         max-width: 100%;
 
+        height: 100%;
+
         overflow-x: auto;
         overflow-y: auto;
+
+        overscroll-behavior: contain;
+
+        -webkit-overflow-scrolling: touch;
+
+        touch-action: pan-x pan-y;
     }
 
     .loan-amortization-footer {
@@ -439,6 +450,8 @@
         align-items: stretch;
 
         padding: 13px 18px;
+
+        flex-shrink: 0;
     }
 
     .loan-amortization-footer-actions {
@@ -448,5 +461,23 @@
     .loan-amortization-footer .loan-primary-button {
         flex: 1;
     }
+}
 
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .loan-amortization-header {
+        padding: 15px;
+    }
+
+    .loan-amortization-summary {
+        padding: 10px 15px;
+    }
+
+    .loan-amortization-footer {
+        padding: 11px 15px;
+    }
 }
