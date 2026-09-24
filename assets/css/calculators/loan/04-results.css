@@ -1,10 +1,21 @@
 /* =========================================================
+   Loan Comparison
+   Results / Amortization
+========================================================= */
+
+
+/* =========================================================
    RESULTS
 ========================================================= */
 
 .loan-results {
     margin-top: 20px;
 }
+
+
+/* =========================================================
+   SUMMARY GRID
+========================================================= */
 
 .loan-summary-grid {
     display: grid;
@@ -15,15 +26,20 @@
 .loan-summary-card {
     min-height: 125px;
     padding: 18px;
+
     border: 1px solid #e2e8f0;
     border-radius: 10px;
+
     background: #ffffff;
-    box-shadow: 0 3px 12px rgba(15, 23, 42, .04);
+
+    box-shadow:
+        0 3px 12px rgba(15, 23, 42, .04);
 }
 
 .loan-summary-card > span {
     display: block;
     margin-bottom: 12px;
+
     color: #64748b;
     font-size: 12px;
     font-weight: 600;
@@ -31,6 +47,7 @@
 
 .loan-summary-card > strong {
     display: block;
+
     color: #0f172a;
     font-size: 20px;
 }
@@ -40,12 +57,18 @@
     font-size: 11px;
 }
 
+
+/* =========================================================
+   SUMMARY WINNER
+========================================================= */
+
 .loan-summary-winner {
     background: linear-gradient(
         135deg,
         #ecfdf5,
         #ffffff
     );
+
     border-color: #a7f3d0;
 }
 
@@ -58,6 +81,11 @@
 .loan-summary-winner > strong {
     color: #047857;
 }
+
+
+/* =========================================================
+   SUMMARY VALUES
+========================================================= */
 
 .loan-summary-values {
     display: grid;
@@ -79,8 +107,9 @@
     color: #059669 !important;
 }
 
+
 /* =========================================================
-   AMORTIZATION
+   AMORTIZATION GRID
 ========================================================= */
 
 .loan-amortization-grid {
@@ -90,10 +119,17 @@
     margin-top: 18px;
 }
 
+
+/* =========================================================
+   CONTENT CARD
+========================================================= */
+
 .loan-content-card {
     padding: 22px;
+
     border: 1px solid #e2e8f0;
     border-radius: 12px;
+
     background: #ffffff;
 }
 
@@ -107,6 +143,11 @@
     color: #2563eb;
     font-size: 16px;
 }
+
+
+/* =========================================================
+   AMORTIZATION TABLE
+========================================================= */
 
 .loan-table-scroll {
     overflow-x: auto;
@@ -130,20 +171,35 @@
     color: #475569;
 }
 
+
+/* =========================================================
+   TABLE / RESULT ACTIONS
+========================================================= */
+
 .loan-view-link {
     margin-top: 12px;
     padding: 0;
+
     border: 0;
     background: transparent;
+
     color: #2563eb;
+
     font: inherit;
     font-size: 12px;
     font-weight: 700;
+
     cursor: pointer;
 }
 
+
+/* =========================================================
+   DISCLAIMER
+========================================================= */
+
 .loan-disclaimer {
     margin: 12px 0;
+
     color: #64748b;
     font-size: 12px;
 }
