@@ -73,7 +73,6 @@
     max-height: 90vh;
 
     min-width: 0;
-
     margin: 0;
 
     overflow: hidden;
@@ -102,7 +101,6 @@
     flex: 0 0 auto;
 
     gap: 20px;
-
     padding: 24px 26px;
 
     border-bottom: 1px solid #e2e8f0;
@@ -189,7 +187,6 @@
     flex: 0 0 auto;
 
     gap: 12px;
-
     padding: 16px 26px;
 
     border-bottom: 1px solid #e2e8f0;
@@ -254,7 +251,6 @@
 
 /* =========================================================
    TABLE SCROLL AREA
-   Horizontal scrolling stays INSIDE this area only.
 ========================================================= */
 
 .loan-full-table-scroll {
@@ -299,7 +295,6 @@
 .loan-amortization-table thead th {
     position: sticky;
     top: 0;
-
     z-index: 2;
 
     background: #f8fafc;
@@ -337,7 +332,6 @@
     flex: 0 0 auto;
 
     gap: 15px;
-
     padding: 15px 26px;
 
     border-top: 1px solid #e2e8f0;
