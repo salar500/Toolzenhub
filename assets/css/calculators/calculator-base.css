@@ -1,0 +1,608 @@
+/* =========================================================
+   ToolZen Hub
+   Shared Calculator Base
+========================================================= */
+
+
+/* =========================================================
+   CALCULATOR PAGE
+========================================================= */
+
+.calculator-page {
+
+    width:
+        min(
+            1180px,
+            calc(100% - 32px)
+        );
+
+    margin:
+        0 auto;
+
+    padding:
+        0 0 70px;
+
+    color:
+        #101828;
+
+}
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+.calculator-page .breadcrumb {
+
+    padding:
+        20px 0 12px;
+
+}
+
+
+/* =========================================================
+   CALCULATOR INTRO
+========================================================= */
+
+.calculator-intro {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    justify-content:
+        space-between;
+
+    gap:
+        30px;
+
+    padding:
+        28px 0 32px;
+
+}
+
+
+.calculator-intro > div:first-child {
+
+    min-width:
+        0;
+
+    flex:
+        1;
+
+}
+
+
+.calculator-eyebrow {
+
+    display:
+        inline-block;
+
+    margin-bottom:
+        9px;
+
+    color:
+        #0b9f58;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        .1em;
+
+    line-height:
+        1.3;
+
+    text-transform:
+        uppercase;
+
+}
+
+
+.calculator-intro h1 {
+
+    margin:
+        0;
+
+    color:
+        #101828;
+
+    font-size:
+        clamp(
+            30px,
+            4vw,
+            42px
+        );
+
+    font-weight:
+        800;
+
+    line-height:
+        1.12;
+
+    letter-spacing:
+        -.035em;
+
+}
+
+
+.calculator-intro p {
+
+    max-width:
+        700px;
+
+    margin:
+        12px 0 0;
+
+    color:
+        #667085;
+
+    font-size:
+        15px;
+
+    line-height:
+        1.65;
+
+}
+
+
+/* =========================================================
+   TRUST CARD
+========================================================= */
+
+.calculator-trust-card {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        11px;
+
+    flex:
+        0 0 auto;
+
+    max-width:
+        250px;
+
+    padding:
+        13px 15px;
+
+    border:
+        1px solid #dcefe4;
+
+    border-radius:
+        10px;
+
+    background:
+        #f5fbf7;
+
+}
+
+
+.calculator-trust-icon {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        32px;
+
+    height:
+        32px;
+
+    flex:
+        0 0 32px;
+
+    border-radius:
+        50%;
+
+    background:
+        #e1f5e9;
+
+    color:
+        #0b9f58;
+
+    font-size:
+        15px;
+
+    font-weight:
+        800;
+
+}
+
+
+.calculator-trust-card strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        2px;
+
+    color:
+        #101828;
+
+    font-size:
+        11px;
+
+    font-weight:
+        800;
+
+    line-height:
+        1.4;
+
+}
+
+
+.calculator-trust-card span {
+
+    display:
+        block;
+
+    color:
+        #667085;
+
+    font-size:
+        10px;
+
+    line-height:
+        1.4;
+
+}
+
+
+/* =========================================================
+   COMMON CALCULATOR SECTION
+========================================================= */
+
+.calculator-section {
+
+    margin-top:
+        28px;
+
+}
+
+
+.calculator-section__title {
+
+    margin:
+        0 0 10px;
+
+    color:
+        #101828;
+
+    font-size:
+        22px;
+
+    font-weight:
+        750;
+
+    line-height:
+        1.3;
+
+}
+
+
+.calculator-section__description {
+
+    margin:
+        0 0 18px;
+
+    color:
+        #667085;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.65;
+
+}
+
+
+/* =========================================================
+   COMMON INFO CONTENT
+========================================================= */
+
+.calculator-info {
+
+    margin-top:
+        30px;
+
+    padding:
+        26px;
+
+    border:
+        1px solid #e5ebe8;
+
+    border-radius:
+        12px;
+
+    background:
+        #ffffff;
+
+}
+
+
+.calculator-info h2 {
+
+    margin:
+        0 0 12px;
+
+    color:
+        #101828;
+
+    font-size:
+        21px;
+
+    line-height:
+        1.3;
+
+}
+
+
+.calculator-info h3 {
+
+    margin:
+        20px 0 8px;
+
+    color:
+        #101828;
+
+    font-size:
+        16px;
+
+    line-height:
+        1.4;
+
+}
+
+
+.calculator-info p {
+
+    margin:
+        0 0 12px;
+
+    color:
+        #475467;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.7;
+
+}
+
+
+.calculator-info ul,
+.calculator-info ol {
+
+    margin:
+        10px 0 14px;
+
+    padding-left:
+        20px;
+
+    color:
+        #475467;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.7;
+
+}
+
+
+.calculator-info li {
+
+    margin-bottom:
+        6px;
+
+}
+
+
+/* =========================================================
+   COMMON LINKS
+========================================================= */
+
+.calculator-page a {
+
+    color:
+        #0b9f58;
+
+}
+
+
+.calculator-page a:hover {
+
+    color:
+        #087f47;
+
+}
+
+
+/* =========================================================
+   COMMON DIVIDER
+========================================================= */
+
+.calculator-divider {
+
+    width:
+        100%;
+
+    height:
+        1px;
+
+    margin:
+        28px 0;
+
+    background:
+        #e5ebe8;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+
+    .calculator-page {
+
+        width:
+            min(
+                100% - 20px,
+                1180px
+            );
+
+        padding-bottom:
+            45px;
+
+    }
+
+
+    .calculator-page .breadcrumb {
+
+        padding:
+            14px 0 8px;
+
+    }
+
+
+    .calculator-intro {
+
+        flex-direction:
+            column;
+
+        gap:
+            18px;
+
+        padding:
+            22px 0 25px;
+
+    }
+
+
+    .calculator-intro h1 {
+
+        font-size:
+            30px;
+
+    }
+
+
+    .calculator-intro p {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .calculator-trust-card {
+
+        width:
+            100%;
+
+        max-width:
+            none;
+
+        box-sizing:
+            border-box;
+
+    }
+
+
+    .calculator-section {
+
+        margin-top:
+            22px;
+
+    }
+
+
+    .calculator-section__title {
+
+        font-size:
+            20px;
+
+    }
+
+
+    .calculator-info {
+
+        margin-top:
+            22px;
+
+        padding:
+            20px;
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .calculator-page {
+
+        width:
+            calc(100% - 20px);
+
+    }
+
+
+    .calculator-intro h1 {
+
+        font-size:
+            27px;
+
+    }
+
+
+    .calculator-intro p {
+
+        font-size:
+            13px;
+
+    }
+
+
+    .calculator-info {
+
+        padding:
+            17px;
+
+    }
+
+
+    .calculator-info h2 {
+
+        font-size:
+            19px;
+
+    }
+
+}
