@@ -1,4 +1,10 @@
 /* =========================================================
+   Loan Comparison
+   Form Fields / Sliders / Actions
+========================================================= */
+
+
+/* =========================================================
    FORM FIELDS
 ========================================================= */
 
@@ -39,6 +45,11 @@
     box-shadow: 0 0 0 3px rgba(37, 99, 235, .1);
 }
 
+
+/* =========================================================
+   NUMBER INPUT
+========================================================= */
+
 .loan-number-input {
     position: relative;
 }
@@ -54,6 +65,7 @@
     color: #64748b;
     transform: translateY(-50%);
 }
+
 
 /* =========================================================
    SLIDERS
@@ -79,7 +91,10 @@
     box-sizing: border-box;
 }
 
-/* Chrome / Edge / Safari */
+
+/* =========================================================
+   SLIDER TRACK — CHROME / EDGE / SAFARI
+========================================================= */
 
 .loan-slider::-webkit-slider-runnable-track {
     width: 100%;
@@ -100,7 +115,6 @@
 .loan-slider::-webkit-slider-thumb {
     width: 18px;
     height: 18px;
-
     margin-top: -6px;
 
     appearance: none;
@@ -117,7 +131,10 @@
     cursor: pointer;
 }
 
-/* Firefox */
+
+/* =========================================================
+   SLIDER TRACK — FIREFOX
+========================================================= */
 
 .loan-slider::-moz-range-track {
     width: 100%;
@@ -153,15 +170,22 @@
     cursor: pointer;
 }
 
-/* Focus */
+
+/* =========================================================
+   SLIDER FOCUS
+========================================================= */
 
 .loan-slider:focus-visible {
     outline: none;
+
     box-shadow:
         0 0 0 3px rgba(37, 99, 235, .15);
 }
 
-/* Slider row */
+
+/* =========================================================
+   SLIDER ROW
+========================================================= */
 
 .loan-slider-row {
     width: 100%;
@@ -174,18 +198,24 @@
     margin: 0;
 }
 
-/* Range labels */
+
+/* =========================================================
+   RANGE LABELS
+========================================================= */
 
 .loan-range-labels {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     width: 100%;
     margin-top: 7px;
     padding: 0;
+
     color: #94a3b8;
     font-size: 11px;
     line-height: 1.3;
+
     box-sizing: border-box;
 }
 
@@ -197,7 +227,10 @@
     text-align: right;
 }
 
-/* Amount display */
+
+/* =========================================================
+   AMOUNT DISPLAY
+========================================================= */
 
 .loan-field small {
     display: block;
@@ -205,6 +238,7 @@
     color: #64748b;
     font-size: 12px;
 }
+
 
 /* =========================================================
    ACTIONS
@@ -215,7 +249,9 @@
     justify-content: center;
     align-items: center;
     gap: 15px;
+
     padding: 18px 24px;
+
     border-top: 1px solid #e2e8f0;
     background: #f8fafc;
 }
@@ -224,14 +260,20 @@
     min-width: 160px;
     height: 46px;
     padding: 0 22px;
+
     border: 0;
     border-radius: 8px;
+
     background: #2563eb;
-    color: white;
+    color: #ffffff;
+
     font: inherit;
     font-weight: 700;
+
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(37, 99, 235, .22);
+
+    box-shadow:
+        0 5px 15px rgba(37, 99, 235, .22);
 }
 
 .loan-primary-button:hover {
