@@ -281,6 +281,20 @@
 }
 
 
+.calculator-card__category {
+    display: inline-block;
+    margin-bottom: 8px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #e7f7ee;
+    color: #0b9f58;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
 /* =========================================================
    Calculator Card Arrow
 ========================================================= */
