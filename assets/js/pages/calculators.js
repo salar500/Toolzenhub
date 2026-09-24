@@ -15,6 +15,10 @@ import {
     renderBreadcrumb
 } from "../components/breadcrumb.js";
 
+import {
+    renderCalculatorCards
+} from "../components/calculator-card.js";
+
 
 /* =========================================================
    DOM ELEMENTS
@@ -43,14 +47,12 @@ function renderCalculatorsBreadcrumb() {
         return;
     }
 
-
     breadcrumb.innerHTML =
         renderBreadcrumb([
             {
                 label: "Calculators"
             }
         ]);
-
 }
 
 
@@ -58,7 +60,10 @@ function renderCalculatorsBreadcrumb() {
    RENDER CALCULATORS
 ========================================================= */
 
-function renderCalculators(calculators, query = "") {
+function renderCalculators(
+    calculators,
+    query = ""
+) {
 
     if (!grid) {
         return;
@@ -73,15 +78,21 @@ function renderCalculators(calculators, query = "") {
 
         grid.innerHTML = "";
 
-        emptyState.hidden = false;
+        if (emptyState) {
+            emptyState.hidden = false;
+        }
 
-        resultsCount.textContent =
-            "0 calculators";
+        if (resultsCount) {
+            resultsCount.textContent =
+                "0 calculators";
+        }
 
-        resultsLabel.textContent =
-            query
-                ? `Search results for "${query}"`
-                : "All Calculators";
+        if (resultsLabel) {
+            resultsLabel.textContent =
+                query
+                    ? `Search results for "${query}"`
+                    : "All Calculators";
+        }
 
         return;
     }
@@ -91,62 +102,40 @@ function renderCalculators(calculators, query = "") {
        SHOW RESULTS
     ===================================================== */
 
-    emptyState.hidden = true;
+    if (emptyState) {
+        emptyState.hidden = true;
+    }
 
 
-    resultsCount.textContent =
-        `${calculators.length} ${
-            calculators.length === 1
-                ? "calculator"
-                : "calculators"
-        }`;
+    if (resultsCount) {
+        resultsCount.textContent =
+            `${calculators.length} ${
+                calculators.length === 1
+                    ? "calculator"
+                    : "calculators"
+            }`;
+    }
 
 
-    resultsLabel.textContent =
-        query
-            ? `Search results for "${query}"`
-            : "All Calculators";
+    if (resultsLabel) {
+        resultsLabel.textContent =
+            query
+                ? `Search results for "${query}"`
+                : "All Calculators";
+    }
 
 
-    grid.innerHTML = calculators.map(
-        calculator => `
+    /* =====================================================
+       SHARED CALCULATOR CARDS
+    ===================================================== */
 
-            <a
-                href="${calculator.url}"
-                class="calculator-card"
-            >
-
-                <div class="calculator-card__content">
-
-                    <span class="calculator-card__category">
-                        ${calculator.category}
-                    </span>
-
-
-                    <h3 class="calculator-card__title">
-                        ${calculator.title}
-                    </h3>
-
-
-                    <p class="calculator-card__description">
-                        ${calculator.description}
-                    </p>
-
-                </div>
-
-
-                <span
-                    class="calculator-card__arrow"
-                    aria-hidden="true"
-                >
-                    →
-                </span>
-
-            </a>
-
-        `
-    ).join("");
-
+    grid.innerHTML =
+        renderCalculatorCards(
+            calculators,
+            {
+                showCategory: true
+            }
+        );
 }
 
 
@@ -160,7 +149,6 @@ function updateSearchUrl(query) {
         new URL(
             window.location.href
         );
-
 
     const search =
         String(query || "").trim();
@@ -187,7 +175,6 @@ function updateSearchUrl(query) {
         "",
         url
     );
-
 }
 
 
@@ -195,7 +182,10 @@ function updateSearchUrl(query) {
    PERFORM SEARCH
 ========================================================= */
 
-function performSearch(query, updateUrl = true) {
+function performSearch(
+    query,
+    updateUrl = true
+) {
 
     const search =
         String(query || "").trim();
@@ -238,7 +228,6 @@ function performSearch(query, updateUrl = true) {
         updateSearchUrl(search);
 
     }
-
 }
 
 
@@ -253,7 +242,6 @@ function initializeSearch() {
             "calculators-search-form"
         );
 
-
     searchInput =
         document.getElementById(
             "calculators-search-input"
@@ -261,9 +249,7 @@ function initializeSearch() {
 
 
     if (!searchForm || !searchInput) {
-
         return;
-
     }
 
 
@@ -277,16 +263,13 @@ function initializeSearch() {
 
             event.preventDefault();
 
-
             const query =
                 searchInput.value.trim();
-
 
             performSearch(
                 query,
                 true
             );
-
         }
     );
 
@@ -302,12 +285,10 @@ function initializeSearch() {
             const query =
                 searchInput.value.trim();
 
-
             performSearch(
                 query,
                 true
             );
-
         }
     );
 
@@ -323,7 +304,6 @@ function initializeSearch() {
             const query =
                 searchInput.value.trim();
 
-
             if (!query) {
 
                 performSearch(
@@ -332,7 +312,6 @@ function initializeSearch() {
                 );
 
             }
-
         }
     );
 
@@ -345,7 +324,6 @@ function initializeSearch() {
         new URLSearchParams(
             window.location.search
         );
-
 
     const query =
         params.get("q");
@@ -372,7 +350,6 @@ function initializeSearch() {
         );
 
     }
-
 }
 
 
@@ -387,18 +364,15 @@ function initializeCalculatorsPage() {
             "calculators-grid"
         );
 
-
     resultsCount =
         document.getElementById(
             "calculators-results-count"
         );
 
-
     resultsLabel =
         document.getElementById(
             "calculators-results-label"
         );
-
 
     emptyState =
         document.getElementById(
@@ -407,9 +381,7 @@ function initializeCalculatorsPage() {
 
 
     if (!grid) {
-
         return;
-
     }
 
 
@@ -443,7 +415,6 @@ function initializeCalculatorsPage() {
     ===================================================== */
 
     initializeSearch();
-
 }
 
 
