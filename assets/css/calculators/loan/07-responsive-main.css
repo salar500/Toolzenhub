@@ -3,7 +3,6 @@
    Responsive Main Layout
 ========================================================= */
 
-
 /* =========================================================
    TABLET
 ========================================================= */
@@ -32,12 +31,96 @@
 
 @media (max-width: 650px) {
 
+    /* Prevent horizontal page overflow */
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* Main calculator page */
+    .calculator-page {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+        box-sizing: border-box;
+        overflow-x: hidden;
+    }
+
+    /* Breadcrumb */
     .calculator-breadcrumb {
         flex-wrap: wrap;
     }
 
+    /* Loan comparison tool */
+    .loan-comparison-tool {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    /* Loan cards */
+    .loan-comparison-grid {
+        width: 100%;
+        max-width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    .loan-card {
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .loan-card:first-child {
+        border-right: 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    /* VS badge */
+    .loan-vs {
+        top: 50%;
+    }
+
+    /* Results */
+    .loan-results {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .loan-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .loan-amortization-grid,
+    .loan-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Related content */
+    .loan-related-grid,
+    .loan-articles-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Form */
     .loan-input-row {
         grid-template-columns: 1fr 110px;
+    }
+
+    .loan-check-list {
+        grid-template-columns: 1fr;
+    }
+
+    /* Information sections */
+    .loan-info-card,
+    .loan-content-card {
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
 }
@@ -48,6 +131,11 @@
 ========================================================= */
 
 @media (max-width: 400px) {
+
+    .calculator-page {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
 
     .loan-input-row {
         grid-template-columns: 1fr 90px;
