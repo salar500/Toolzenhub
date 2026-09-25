@@ -17,7 +17,15 @@ export const calculatorRegistry = {
     ===================================================== */
 
     "loan-comparison": () =>
-        import("../../loans/loan-comparison/index.js")
+        import("../../loans/loan-comparison/index.js"),
+
+
+    /* =====================================================
+       EMI CALCULATOR
+    ===================================================== */
+
+    "emi": () =>
+        import("./calculators/emi/index.js")
 
 
 };
