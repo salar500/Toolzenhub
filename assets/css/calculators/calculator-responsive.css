@@ -1,0 +1,109 @@
+/* =========================================================
+   ToolZen Hub
+   Shared Calculator Responsive
+========================================================= */
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .calculator-page {
+        width: min(
+            100% - 24px,
+            1180px
+        );
+    }
+
+    .calculator-intro {
+        gap: 20px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .calculator-page {
+        width: calc(100% - 20px);
+        max-width: 1180px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    .calculator-intro {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+    }
+
+    .calculator-trust-card {
+        width: 100%;
+        max-width: none;
+        box-sizing: border-box;
+    }
+
+    .calculator-info {
+        padding: 20px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .calculator-page {
+        width: calc(100% - 16px);
+    }
+
+    .calculator-intro {
+        padding-top: 18px;
+        padding-bottom: 22px;
+    }
+
+    .calculator-intro h1 {
+        font-size: 28px;
+    }
+
+    .calculator-intro p {
+        font-size: 13px;
+    }
+
+    .calculator-info {
+        padding: 17px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .calculator-page {
+        width: calc(100% - 14px);
+    }
+
+    .calculator-intro h1 {
+        font-size: 26px;
+    }
+
+}
