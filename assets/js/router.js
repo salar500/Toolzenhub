@@ -191,11 +191,22 @@ export function currentPage() {
 
     /* =====================================================
        CALCULATOR PAGE
+
+       Supports:
+
+       /calculators/{slug}/
+
+       /calculators/{slug}/index.html
+
+       Examples:
+
+       /calculators/emi/
+       /calculators/emi/index.html
     ===================================================== */
 
     const calculatorMatch =
         path.match(
-            /\/calculators\/([^/]+)\/?$/
+            /\/calculators\/([^/]+)\/(?:index\.html)?\/?$/
         );
 
 
