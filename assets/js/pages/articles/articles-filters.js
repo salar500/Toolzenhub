@@ -1,4 +1,3 @@
-
 /* =========================================================
    ToolZen Hub
    Articles Filters
@@ -79,6 +78,37 @@ export function setArticleCategory(
         }
 
     }
+
+}
+
+
+/* =========================================================
+   INITIALIZE CATEGORY FROM URL
+========================================================= */
+
+export function initializeArticleCategoryFromURL() {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const category =
+        params.get(
+            "category"
+        );
+
+
+    if (!category) {
+        return;
+    }
+
+
+    setArticleCategory(
+        category,
+        false
+    );
 
 }
 
