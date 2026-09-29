@@ -1,4 +1,4 @@
-/* =========================================================
+ /* =========================================================
    ToolZen Hub
    Article Loader
 
@@ -17,12 +17,21 @@
 
 
 /* =========================================================
-   Article Registry
+   ARTICLE DATA LOADER REGISTRY
 ========================================================= */
 
 import {
-    articleRegistry
+    articleRegistry as articleLoaders
 } from "../../data/articles/article-registry.js";
+
+
+/* =========================================================
+   CENTRAL ARTICLE REGISTRY
+========================================================= */
+
+import {
+    articleRegistry as centralArticleRegistry
+} from "../../article-registry.js";
 
 
 /* =========================================================
@@ -74,7 +83,41 @@ function getArticleRouteKey() {
 
 
 /* =========================================================
-   Load Article
+   FIND CENTRAL ARTICLE
+========================================================= */
+
+function findCentralArticle(
+    routeKey
+) {
+
+    const parts =
+        routeKey.split("/");
+
+
+    if (parts.length !== 2) {
+        return null;
+    }
+
+
+    const topic =
+        parts[0];
+
+
+    const slug =
+        parts[1];
+
+
+    return centralArticleRegistry.find(
+        article =>
+            article.topic === topic &&
+            article.slug === slug
+    ) || null;
+
+}
+
+
+/* =========================================================
+   LOAD ARTICLE
 ========================================================= */
 
 export async function loadArticle() {
@@ -101,7 +144,7 @@ export async function loadArticle() {
 
 
     const loader =
-        articleRegistry[
+        articleLoaders[
             routeKey
         ];
 
@@ -115,7 +158,7 @@ export async function loadArticle() {
         console.log(
             "ToolZen Hub: Available article routes:",
             Object.keys(
-                articleRegistry
+                articleLoaders
             )
         );
 
@@ -150,6 +193,33 @@ export async function loadArticle() {
             );
 
             return null;
+
+        }
+
+
+        /* =================================================
+           CENTRAL CATEGORY
+        ================================================= */
+
+        const centralArticle =
+            findCentralArticle(
+                routeKey
+            );
+
+
+        /*
+         * The central registry is the source of truth
+         * for article category information.
+         *
+         * Keep the existing article data untouched,
+         * but add the central category name.
+         */
+
+        if (centralArticle) {
+
+            article.categoryName =
+                centralArticle.categoryName ||
+                centralArticle.category;
 
         }
 
