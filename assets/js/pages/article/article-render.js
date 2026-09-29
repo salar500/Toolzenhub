@@ -463,7 +463,12 @@ export function initializeBreadcrumb(article) {
 
             {
                 label:
-                    categoryName
+                    categoryName,
+
+                href:
+                    ROUTES.articleCategory(
+                        article.category
+                    )
             },
 
             {
