@@ -1,4 +1,4 @@
- /* =========================================================
+/* =========================================================
    ToolZen Hub
    Article Loader
 
@@ -211,11 +211,14 @@ export async function loadArticle() {
          * The central registry is the source of truth
          * for article category information.
          *
-         * Keep the existing article data untouched,
-         * but add the central category name.
+         * Keep both the category slug and the
+         * category display name synchronized.
          */
 
         if (centralArticle) {
+
+            article.category =
+                centralArticle.category;
 
             article.categoryName =
                 centralArticle.categoryName ||
