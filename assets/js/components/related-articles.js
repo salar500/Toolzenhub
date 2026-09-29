@@ -3,11 +3,20 @@
    Related Articles Component
 ========================================================= */
 
-export function renderRelatedArticles() {
+
+/* =========================================================
+   RENDER RELATED ARTICLES
+========================================================= */
+
+export function renderRelatedArticles(
+    currentSlug = ""
+) {
 
     const articles = [
 
         {
+            slug: "reduce-home-loan-interest",
+
             title:
                 "How to Reduce Your Home Loan Interest",
 
@@ -16,6 +25,8 @@ export function renderRelatedArticles() {
         },
 
         {
+            slug: "emi-vs-total-interest",
+
             title:
                 "EMI vs Total Interest: What Should You Compare?",
 
@@ -24,6 +35,8 @@ export function renderRelatedArticles() {
         },
 
         {
+            slug: "fixed-vs-floating-interest-rates",
+
             title:
                 "Fixed vs Floating Interest Rates",
 
@@ -32,6 +45,8 @@ export function renderRelatedArticles() {
         },
 
         {
+            slug: "loan-tenure-total-interest",
+
             title:
                 "How Loan Tenure Affects Total Interest",
 
@@ -40,6 +55,8 @@ export function renderRelatedArticles() {
         },
 
         {
+            slug: "loan-prepayment",
+
             title:
                 "What Is Loan Prepayment?",
 
@@ -48,6 +65,8 @@ export function renderRelatedArticles() {
         },
 
         {
+            slug: "choose-right-loan-tenure",
+
             title:
                 "How to Choose the Right Loan Tenure",
 
@@ -57,6 +76,21 @@ export function renderRelatedArticles() {
 
     ];
 
+
+    /* =====================================================
+       CURRENT ARTICLE / CALCULATOR RESERVED FOR FUTURE USE
+    ===================================================== */
+
+    const relatedArticles =
+        articles.filter(
+            article =>
+                article.slug !== currentSlug
+        );
+
+
+    /* =====================================================
+       RENDER
+    ===================================================== */
 
     return `
 
@@ -77,7 +111,8 @@ export function renderRelatedArticles() {
 
             <div class="loan-articles-grid">
 
-                ${articles.map(article => `
+                ${relatedArticles.map(
+                    article => `
 
                     <article class="loan-article-card">
 
@@ -106,4 +141,5 @@ export function renderRelatedArticles() {
         </section>
 
     `;
+
 }
