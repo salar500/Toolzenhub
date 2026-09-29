@@ -3,19 +3,18 @@
    Related Articles Component
 ========================================================= */
 
+import {
+    ROUTES
+} from "../routes.js";
 
-/* =========================================================
-   RENDER RELATED ARTICLES
-========================================================= */
 
-export function renderRelatedArticles(
-    currentSlug = ""
-) {
+export function renderRelatedArticles() {
 
     const articles = [
 
         {
-            slug: "reduce-home-loan-interest",
+            image:
+                "/Toolzenhub/assets/Images/articles/how-to-reduce-home-loan-interest.png",
 
             title:
                 "How to Reduce Your Home Loan Interest",
@@ -25,7 +24,8 @@ export function renderRelatedArticles(
         },
 
         {
-            slug: "emi-vs-total-interest",
+            image:
+                "/Toolzenhub/assets/Images/articles/emi-vs-total-interest.png",
 
             title:
                 "EMI vs Total Interest: What Should You Compare?",
@@ -35,7 +35,8 @@ export function renderRelatedArticles(
         },
 
         {
-            slug: "fixed-vs-floating-interest-rates",
+            image:
+                "/Toolzenhub/assets/Images/articles/fixed-vs-floating-interest-rate.png",
 
             title:
                 "Fixed vs Floating Interest Rates",
@@ -45,7 +46,8 @@ export function renderRelatedArticles(
         },
 
         {
-            slug: "loan-tenure-total-interest",
+            image:
+                "/Toolzenhub/assets/Images/articles/loan-tenure-total-interest.png",
 
             title:
                 "How Loan Tenure Affects Total Interest",
@@ -55,7 +57,8 @@ export function renderRelatedArticles(
         },
 
         {
-            slug: "loan-prepayment",
+            image:
+                "/Toolzenhub/assets/Images/articles/what-is-loan-prepayment.png",
 
             title:
                 "What Is Loan Prepayment?",
@@ -65,7 +68,8 @@ export function renderRelatedArticles(
         },
 
         {
-            slug: "choose-right-loan-tenure",
+            image:
+                "/Toolzenhub/assets/Images/articles/loan-tenure-total-interest.png",
 
             title:
                 "How to Choose the Right Loan Tenure",
@@ -77,50 +81,46 @@ export function renderRelatedArticles(
     ];
 
 
-    /* =====================================================
-       CURRENT ARTICLE / CALCULATOR RESERVED FOR FUTURE USE
-    ===================================================== */
-
-    const relatedArticles =
-        articles.filter(
-            article =>
-                article.slug !== currentSlug
-        );
-
-
-    /* =====================================================
-       RENDER
-    ===================================================== */
-
     return `
 
-        <section class="loan-related-section">
+        <section class="related-section">
 
-            <div class="loan-section-heading">
+            <div class="related-section__heading">
 
                 <h2>
                     Related Articles
                 </h2>
 
-                <a href="/Toolzenhub/articles/">
+                <a
+                    href="${ROUTES.articles}"
+                >
                     View all →
                 </a>
 
             </div>
 
 
-            <div class="loan-articles-grid">
+            <div class="related-articles-grid">
 
-                ${relatedArticles.map(
+                ${articles.map(
                     article => `
 
-                    <article class="loan-article-card">
+                    <article
+                        class="related-article-card"
+                    >
 
-                        <div class="loan-article-image">
-                            Finance
+                        <div class="related-article-image">
+
+                            <img
+                                src="${article.image}"
+                                alt="${article.title}"
+                                loading="lazy"
+                            >
+
                         </div>
 
-                        <div class="loan-article-content">
+
+                        <div class="related-article-content">
 
                             <h3>
                                 ${article.title}
@@ -134,7 +134,8 @@ export function renderRelatedArticles(
 
                     </article>
 
-                `).join("")}
+                `
+                ).join("")}
 
             </div>
 
