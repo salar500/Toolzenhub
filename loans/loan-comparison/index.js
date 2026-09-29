@@ -28,12 +28,6 @@ import {
 
 
 import {
-    renderRelatedCalculators,
-    renderRelatedArticles
-} from "./components/RelatedContent.js";
-
-
-import {
     ROUTES
 } from "../../assets/js/routes.js";
 
@@ -41,16 +35,6 @@ import {
 import {
     renderBreadcrumb
 } from "../../assets/js/components/breadcrumb.js";
-
-
-/* =========================================================
-   Related Content Control
-========================================================= */
-
-export const showRelatedCalculators = false;
-
-export const showRelatedArticles = false;
-
 
 
 /* =========================================================
@@ -200,10 +184,6 @@ export function render() {
 
             </div>
 
-
-            ${renderRelatedCalculators()}
-
-            ${renderRelatedArticles()}
 
         </div>
 
