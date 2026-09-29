@@ -21,6 +21,7 @@ export async function renderCalculator(slug) {
     const loader =
         calculatorRegistry[slug];
 
+
     if (!loader) {
 
         console.error(
@@ -54,38 +55,61 @@ export async function renderCalculator(slug) {
 
 
         /*
-         * Render the calculator itself first.
+         * Render calculator first.
          */
 
         module.render();
 
 
-        const app =
-            document.getElementById("app");
+        /*
+         * Special calculators can manage
+         * their own related content.
+         *
+         * Loan Comparison is one such calculator.
+         */
 
-
-        if (!app) {
+        if (
+            module.showRelatedCalculators === false &&
+            module.showRelatedArticles === false
+        ) {
             return;
         }
 
 
         /*
-         * Some special calculators already contain
-         * their own related content.
+         * IMPORTANT:
          *
-         * Those calculators can disable the global
-         * related sections by exporting:
+         * Related content must be inserted
+         * INSIDE the calculator page container.
          *
-         * showRelatedCalculators = false
-         * showRelatedArticles = false
+         * Otherwise it becomes full-width.
          */
 
+        const calculatorPage =
+            document.querySelector(
+                "#app .calculator-page"
+            );
+
+
+        if (!calculatorPage) {
+
+            console.warn(
+                "Calculator page container not found."
+            );
+
+            return;
+        }
+
+
+        /*
+         * Related Calculators
+         */
 
         if (
             module.showRelatedCalculators !== false
         ) {
 
-            app.insertAdjacentHTML(
+            calculatorPage.insertAdjacentHTML(
                 "beforeend",
                 renderRelatedCalculators(slug)
             );
@@ -93,11 +117,15 @@ export async function renderCalculator(slug) {
         }
 
 
+        /*
+         * Related Articles
+         */
+
         if (
             module.showRelatedArticles !== false
         ) {
 
-            app.insertAdjacentHTML(
+            calculatorPage.insertAdjacentHTML(
                 "beforeend",
                 renderRelatedArticles()
             );
@@ -118,6 +146,10 @@ export async function renderCalculator(slug) {
 
 }
 
+
+/* =========================================================
+   NOT FOUND
+========================================================= */
 
 function renderCalculatorNotFound() {
 
@@ -149,6 +181,10 @@ function renderCalculatorNotFound() {
 
 }
 
+
+/* =========================================================
+   ERROR
+========================================================= */
 
 function renderCalculatorError() {
 
