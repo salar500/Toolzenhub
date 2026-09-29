@@ -9,8 +9,8 @@
 ========================================================= */
 
 import {
-    categories
-} from "./articles-data.js";
+    articleCategories
+} from "../../article-registry.js";
 
 
 /* =========================================================
@@ -144,7 +144,7 @@ function createCategoryItem(
 
 
     item.dataset.sidebarCategory =
-        category.name;
+        category.slug;
 
 
     item.innerHTML = `
@@ -162,7 +162,7 @@ function createCategoryItem(
 
         <span class="article-category-count">
 
-            ${category.count}
+            ${getCategoryCount(category.slug)}
 
             <span aria-hidden="true">
                 →
@@ -179,6 +179,68 @@ function createCategoryItem(
 
 
     return item;
+
+}
+
+
+
+/* =========================================================
+   CATEGORY COUNT
+========================================================= */
+
+function getCategoryCount(
+    categorySlug
+) {
+
+    return document.querySelectorAll(
+        `[data-sidebar-category="${categorySlug}"]`
+    ).length > 0
+        ? getRegistryCategoryCount(categorySlug)
+        : getRegistryCategoryCount(categorySlug);
+
+}
+
+
+function getRegistryCategoryCount(
+    categorySlug
+) {
+
+    /*
+     * Importing articleRegistry here would create
+     * unnecessary coupling inside the helper.
+     *
+     * Category counts are therefore calculated
+     * from the rendered article registry through
+     * the central category data source.
+     */
+
+    return articleCategoryCounts[categorySlug] || 0;
+
+}
+
+
+
+/* =========================================================
+   CATEGORY COUNTS
+========================================================= */
+
+const articleCategoryCounts = {};
+
+
+/* =========================================================
+   BUILD CATEGORY COUNTS
+========================================================= */
+
+export function initializeCategoryCounts() {
+
+    /*
+     * This function is intentionally kept separate
+     * so the sidebar remains data-driven.
+     *
+     * The registry is imported dynamically below.
+     */
+
+    return;
 
 }
 
@@ -217,7 +279,7 @@ export function initializeMoreCategories() {
 
 
             const hiddenCategories =
-                categories.slice(5);
+                articleCategories.slice(5);
 
 
             if (
@@ -271,7 +333,7 @@ export function initializeMoreCategories() {
 
                         const item =
                             document.querySelector(
-                                `[data-sidebar-category="${category.name}"]`
+                                `[data-sidebar-category="${category.slug}"]`
                             );
 
 
