@@ -17,6 +17,38 @@ import {
 
 
 /* =========================================================
+   ARTICLE URL
+========================================================= */
+
+function getArticleHref(
+    article
+) {
+
+    /*
+     * Only articles with both a topic and slug
+     * have an individual article page.
+     *
+     * Articles without a detail page remain
+     * non-navigational until their pages are created.
+     */
+
+    if (
+        !article.topic ||
+        !article.slug
+    ) {
+        return "#";
+    }
+
+
+    return ROUTES.article(
+        article.topic,
+        article.slug
+    );
+
+}
+
+
+/* =========================================================
    RENDER RELATED ARTICLES
 ========================================================= */
 
@@ -92,38 +124,97 @@ export function renderRelatedArticles(
             <div class="related-articles-grid">
 
                 ${relatedArticles.map(
-                    article => `
+                    article => {
 
-                    <article
-                        class="related-article-card"
-                    >
+                        const articleHref =
+                            getArticleHref(
+                                article
+                            );
 
-                        <div class="related-article-image">
 
-                            <img
-                                src="${article.image}"
-                                alt="${article.title}"
-                                loading="lazy"
+                        /*
+                         * Articles with a real detail page
+                         * are rendered as clickable cards.
+                         *
+                         * Articles without topic + slug
+                         * remain non-clickable.
+                         */
+
+                        if (
+                            articleHref === "#"
+                        ) {
+
+                            return `
+
+                                <article
+                                    class="related-article-card"
+                                >
+
+                                    <div class="related-article-image">
+
+                                        <img
+                                            src="${article.image}"
+                                            alt="${article.alt || article.title}"
+                                            loading="lazy"
+                                        >
+
+                                    </div>
+
+
+                                    <div class="related-article-content">
+
+                                        <h3>
+                                            ${article.title}
+                                        </h3>
+
+                                        <p>
+                                            ${article.description}
+                                        </p>
+
+                                    </div>
+
+                                </article>
+
+                            `;
+
+                        }
+
+
+                        return `
+
+                            <a
+                                href="${articleHref}"
+                                class="related-article-card"
                             >
 
-                        </div>
+                                <div class="related-article-image">
+
+                                    <img
+                                        src="${article.image}"
+                                        alt="${article.alt || article.title}"
+                                        loading="lazy"
+                                    >
+
+                                </div>
 
 
-                        <div class="related-article-content">
+                                <div class="related-article-content">
 
-                            <h3>
-                                ${article.title}
-                            </h3>
+                                    <h3>
+                                        ${article.title}
+                                    </h3>
 
-                            <p>
-                                ${article.description}
-                            </p>
+                                    <p>
+                                        ${article.description}
+                                    </p>
 
-                        </div>
+                                </div>
 
-                    </article>
+                            </a>
 
-                `
+                        `;
+
+                    }
                 ).join("")}
 
             </div>
