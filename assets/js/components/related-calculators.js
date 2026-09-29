@@ -7,75 +7,142 @@ import {
     ROUTES
 } from "../routes.js";
 
+import {
+    calculatorMetadata
+} from "../calculator-registry.js";
+
+
+/* =========================================================
+   CALCULATOR INFORMATION
+========================================================= */
+
+const calculatorInfo = {
+
+
+    /* =====================================================
+       LOANS
+    ===================================================== */
+
+    "loan-comparison": {
+        icon: "⇄",
+        title: "Loan Comparison Calculator",
+        description:
+            "Compare two loans side by side."
+    },
+
+
+    "emi": {
+        icon: "▦",
+        title: "EMI Calculator",
+        description:
+            "Calculate your monthly loan EMI."
+    },
+
+
+    "home-loan": {
+        icon: "⌂",
+        title: "Home Loan Calculator",
+        description:
+            "Calculate home loan EMI and interest."
+    },
+
+
+    "personal-loan": {
+        icon: "♙",
+        title: "Personal Loan Calculator",
+        description:
+            "Calculate personal loan payments."
+    },
+
+
+    "loan-eligibility": {
+        icon: "▤",
+        title: "Loan Eligibility Calculator",
+        description:
+            "Check how much loan you may qualify for."
+    },
+
+
+    "prepayment": {
+        icon: "₹",
+        title: "Prepayment Calculator",
+        description:
+            "Estimate savings from prepayment."
+    },
+
+
+    "interest": {
+        icon: "%",
+        title: "Interest Calculator",
+        description:
+            "Calculate simple and compound interest."
+    }
+
+};
+
+
+/* =========================================================
+   RENDER RELATED CALCULATORS
+========================================================= */
 
 export function renderRelatedCalculators(
     currentSlug = ""
 ) {
 
-    const calculators = [
 
-        {
-            slug: "emi",
-            icon: "▦",
-            title: "EMI Calculator",
-            description:
-                "Calculate your monthly loan EMI.",
-            href: ROUTES.calculator("emi")
-        },
+    /*
+     * Find the category of the current calculator.
+     */
 
-        {
-            slug: "home-loan",
-            icon: "⌂",
-            title: "Home Loan Calculator",
-            description:
-                "Calculate home loan EMI and interest.",
-            href: ROUTES.calculator("home-loan")
-        },
-
-        {
-            slug: "personal-loan",
-            icon: "♙",
-            title: "Personal Loan Calculator",
-            description:
-                "Calculate personal loan payments.",
-            href: ROUTES.calculator("personal-loan")
-        },
-
-        {
-            slug: "loan-eligibility",
-            icon: "▤",
-            title: "Loan Eligibility Calculator",
-            description:
-                "Check how much loan you may qualify for.",
-            href: ROUTES.calculator("loan-eligibility")
-        },
-
-        {
-            slug: "prepayment",
-            icon: "₹",
-            title: "Prepayment Calculator",
-            description:
-                "Estimate savings from prepayment.",
-            href: ROUTES.calculator("prepayment")
-        },
-
-        {
-            slug: "interest",
-            icon: "%",
-            title: "Interest Calculator",
-            description:
-                "Calculate simple and compound interest.",
-            href: ROUTES.calculator("interest")
-        }
-
-    ];
+    const currentCalculator =
+        calculatorMetadata[currentSlug];
 
 
-    const filteredCalculators =
-        calculators.filter(
-            calculator =>
-                calculator.slug !== currentSlug
-        );
+    const category =
+        currentCalculator?.category;
+
+
+    /*
+     * If the calculator has no category,
+     * don't render the section.
+     */
+
+    if (!category) {
+        return "";
+    }
+
+
+    /*
+     * Find calculators belonging to the same category.
+     */
+
+    const relatedCalculators =
+        Object.entries(calculatorMetadata)
+            .filter(
+                ([slug, metadata]) =>
+                    metadata.category === category &&
+                    slug !== currentSlug
+            )
+            .map(
+                ([slug]) => ({
+                    slug,
+                    ...calculatorInfo[slug]
+                })
+            )
+            .filter(
+                calculator =>
+                    calculator.title
+            )
+            .slice(0, 6);
+
+
+    /*
+     * Don't render an empty section.
+     */
+
+    if (!relatedCalculators.length) {
+        return "";
+    }
 
 
     return `
@@ -99,11 +166,13 @@ export function renderRelatedCalculators(
 
             <div class="related-calculators-grid">
 
-                ${filteredCalculators.map(
+                ${relatedCalculators.map(
                     calculator => `
 
                     <a
-                        href="${calculator.href}"
+                        href="${ROUTES.calculator(
+                            calculator.slug
+                        )}"
                         class="related-calculator-card"
                     >
 
