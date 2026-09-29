@@ -78,6 +78,23 @@ function resolveAsset(source) {
 
 
 /* =========================================================
+   ARTICLE CATEGORY NAME
+========================================================= */
+
+function getArticleCategoryName(
+    article
+) {
+
+    return (
+        article.categoryName ||
+        article.category ||
+        "Articles"
+    );
+
+}
+
+
+/* =========================================================
    ICONS
 ========================================================= */
 
@@ -201,6 +218,12 @@ export function renderArticle(article) {
             : "";
 
 
+    const categoryName =
+        getArticleCategoryName(
+            article
+        );
+
+
     app.innerHTML = `
 
         <div class="article-container">
@@ -227,8 +250,7 @@ export function renderArticle(article) {
 
                     <span class="article-category">
                         ${escapeHTML(
-                            article.category ||
-                            "Finance"
+                            categoryName
                         )}
                     </span>
 
@@ -425,6 +447,12 @@ export function initializeBreadcrumb(article) {
     }
 
 
+    const categoryName =
+        getArticleCategoryName(
+            article
+        );
+
+
     breadcrumb.innerHTML =
         renderBreadcrumb([
 
@@ -435,8 +463,7 @@ export function initializeBreadcrumb(article) {
 
             {
                 label:
-                    article.category ||
-                    "Articles"
+                    categoryName
             },
 
             {
