@@ -9,8 +9,18 @@ import {
 } from "../calculator-registry.js";
 
 
+import {
+    renderRelatedCalculators
+} from "../components/related-calculators.js";
+
+
+import {
+    renderRelatedArticles
+} from "../components/related-articles.js";
+
+
 /* =========================================================
-   Load Calculator
+   LOAD CALCULATOR
 ========================================================= */
 
 export async function renderCalculator(slug) {
@@ -74,6 +84,51 @@ export async function renderCalculator(slug) {
         module.render();
 
 
+        /* =================================================
+           GET APP
+        ================================================= */
+
+        const app =
+            document.getElementById("app");
+
+
+        if (!app) {
+            return;
+        }
+
+
+        /* =================================================
+           RELATED CALCULATORS
+        ================================================= */
+
+        if (
+            module.showRelatedCalculators !== false
+        ) {
+
+            app.insertAdjacentHTML(
+                "beforeend",
+                renderRelatedCalculators(slug)
+            );
+
+        }
+
+
+        /* =================================================
+           RELATED ARTICLES
+        ================================================= */
+
+        if (
+            module.showRelatedArticles !== false
+        ) {
+
+            app.insertAdjacentHTML(
+                "beforeend",
+                renderRelatedArticles(slug)
+            );
+
+        }
+
+
     } catch (error) {
 
 
@@ -91,7 +146,7 @@ export async function renderCalculator(slug) {
 
 
 /* =========================================================
-   Calculator Not Found
+   CALCULATOR NOT FOUND
 ========================================================= */
 
 function renderCalculatorNotFound() {
@@ -125,7 +180,7 @@ function renderCalculatorNotFound() {
 
 
 /* =========================================================
-   Calculator Loading Error
+   CALCULATOR LOADING ERROR
 ========================================================= */
 
 function renderCalculatorError() {
