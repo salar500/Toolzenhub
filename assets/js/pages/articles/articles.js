@@ -38,7 +38,8 @@ import {
 
 import {
     initializeArticleFilters,
-    initializeArticleSearch
+    initializeArticleSearch,
+    initializeArticleCategoryFromURL
 } from "./articles-filters.js";
 
 
@@ -140,6 +141,13 @@ function initializeArticlesPage() {
     ===================================================== */
 
     initializeArticleSearch();
+
+
+    /* =====================================================
+       URL CATEGORY
+    ===================================================== */
+
+    initializeArticleCategoryFromURL();
 
 
     /* =====================================================
