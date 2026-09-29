@@ -127,7 +127,7 @@ export async function renderCalculator(slug) {
 
             calculatorPage.insertAdjacentHTML(
                 "beforeend",
-                renderRelatedArticles()
+                renderRelatedArticles(slug)
             );
 
         }
