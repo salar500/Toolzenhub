@@ -43,6 +43,15 @@ import {
 } from "../../assets/js/components/breadcrumb.js";
 
 
+/* =========================================================
+   Related Content Control
+========================================================= */
+
+export const showRelatedCalculators = false;
+
+export const showRelatedArticles = false;
+
+
 
 /* =========================================================
    Render Calculator
