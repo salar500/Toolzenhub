@@ -3,36 +3,23 @@
    Calculator Page Controller
 ========================================================= */
 
-
 import {
     calculatorRegistry
 } from "../calculator-registry.js";
 
-
 import {
     renderRelatedCalculators
 } from "../components/related-calculators.js";
-
 
 import {
     renderRelatedArticles
 } from "../components/related-articles.js";
 
 
-/* =========================================================
-   LOAD CALCULATOR
-========================================================= */
-
 export async function renderCalculator(slug) {
-
 
     const loader =
         calculatorRegistry[slug];
-
-
-    /* =====================================================
-       CALCULATOR NOT FOUND
-    ===================================================== */
 
     if (!loader) {
 
@@ -43,24 +30,14 @@ export async function renderCalculator(slug) {
         renderCalculatorNotFound();
 
         return;
-
     }
 
 
-    /* =====================================================
-       LOAD CALCULATOR MODULE
-    ===================================================== */
-
     try {
-
 
         const module =
             await loader();
 
-
-        /* =================================================
-           CHECK RENDER FUNCTION
-        ================================================= */
 
         if (
             typeof module.render !== "function"
@@ -73,20 +50,15 @@ export async function renderCalculator(slug) {
             renderCalculatorNotFound();
 
             return;
-
         }
 
 
-        /* =================================================
-           RENDER CALCULATOR
-        ================================================= */
+        /*
+         * Render the calculator itself first.
+         */
 
         module.render();
 
-
-        /* =================================================
-           GET APP
-        ================================================= */
 
         const app =
             document.getElementById("app");
@@ -97,9 +69,17 @@ export async function renderCalculator(slug) {
         }
 
 
-        /* =================================================
-           RELATED CALCULATORS
-        ================================================= */
+        /*
+         * Some special calculators already contain
+         * their own related content.
+         *
+         * Those calculators can disable the global
+         * related sections by exporting:
+         *
+         * showRelatedCalculators = false
+         * showRelatedArticles = false
+         */
+
 
         if (
             module.showRelatedCalculators !== false
@@ -113,17 +93,13 @@ export async function renderCalculator(slug) {
         }
 
 
-        /* =================================================
-           RELATED ARTICLES
-        ================================================= */
-
         if (
             module.showRelatedArticles !== false
         ) {
 
             app.insertAdjacentHTML(
                 "beforeend",
-                renderRelatedArticles(slug)
+                renderRelatedArticles()
             );
 
         }
@@ -131,12 +107,10 @@ export async function renderCalculator(slug) {
 
     } catch (error) {
 
-
         console.error(
             `Failed to load calculator "${slug}":`,
             error
         );
-
 
         renderCalculatorError();
 
@@ -145,12 +119,7 @@ export async function renderCalculator(slug) {
 }
 
 
-/* =========================================================
-   CALCULATOR NOT FOUND
-========================================================= */
-
 function renderCalculatorNotFound() {
-
 
     const app =
         document.getElementById("app");
@@ -165,7 +134,9 @@ function renderCalculatorNotFound() {
 
         <section class="calculator-error">
 
-            <h1>Calculator Not Found</h1>
+            <h1>
+                Calculator Not Found
+            </h1>
 
             <p>
                 The calculator you're looking for
@@ -179,12 +150,7 @@ function renderCalculatorNotFound() {
 }
 
 
-/* =========================================================
-   CALCULATOR LOADING ERROR
-========================================================= */
-
 function renderCalculatorError() {
-
 
     const app =
         document.getElementById("app");
@@ -199,7 +165,9 @@ function renderCalculatorError() {
 
         <section class="calculator-error">
 
-            <h1>Something went wrong</h1>
+            <h1>
+                Something went wrong
+            </h1>
 
             <p>
                 We couldn't load this calculator.
