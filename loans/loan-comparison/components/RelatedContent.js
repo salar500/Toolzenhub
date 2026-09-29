@@ -1,3 +1,144 @@
+ /* =========================================================
+   ToolZen Hub
+   Related Content Component
+========================================================= */
+
+
+import {
+    ROUTES
+} from "../../../assets/js/routes.js";
+
+
+
+/* =========================================================
+   Related Calculators
+========================================================= */
+
+export function renderRelatedCalculators() {
+
+    const calculators = [
+
+        {
+            icon: "▦",
+            title: "EMI Calculator",
+            description:
+                "Calculate your monthly loan EMI.",
+            href:
+                ROUTES.calculator("emi")
+        },
+
+
+        {
+            icon: "⌂",
+            title: "Home Loan Calculator",
+            description:
+                "Calculate home loan EMI and interest.",
+            href:
+                ROUTES.calculator("home-loan")
+        },
+
+
+        {
+            icon: "♙",
+            title: "Personal Loan Calculator",
+            description:
+                "Calculate personal loan payments.",
+            href:
+                ROUTES.calculator("personal-loan")
+        },
+
+
+        {
+            icon: "▤",
+            title: "Loan Eligibility Calculator",
+            description:
+                "Check how much loan you may qualify for.",
+            href:
+                ROUTES.calculator("loan-eligibility")
+        },
+
+
+        {
+            icon: "₹",
+            title: "Prepayment Calculator",
+            description:
+                "Estimate savings from prepayment.",
+            href:
+                ROUTES.calculator("prepayment")
+        },
+
+
+        {
+            icon: "%",
+            title: "Interest Calculator",
+            description:
+                "Calculate simple and compound interest.",
+            href:
+                ROUTES.calculator("interest")
+        }
+
+    ];
+
+
+    return `
+
+        <section class="loan-related-section">
+
+            <div class="loan-section-heading">
+
+                <h2>
+                    Related Calculators
+                </h2>
+
+
+                <a href="${ROUTES.calculators}">
+                    View all →
+                </a>
+
+            </div>
+
+
+            <div class="loan-related-grid">
+
+                ${calculators.map(item => `
+
+                    <a
+                        href="${item.href}"
+                        class="loan-related-card"
+                    >
+
+                        <div class="loan-related-icon">
+                            ${item.icon}
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                ${item.title}
+                            </strong>
+
+
+                            <span>
+                                ${item.description}
+                            </span>
+
+                        </div>
+
+                    </a>
+
+                `).join("")}
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
+
+
 /* =========================================================
    Related Articles
 ========================================================= */
