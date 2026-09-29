@@ -7,78 +7,67 @@ import {
     ROUTES
 } from "../routes.js";
 
+import {
+    calculatorMetadata
+} from "../calculator-registry.js";
 
-export function renderRelatedArticles() {
+import {
+    articleRegistry
+} from "../article-registry.js";
 
-    const articles = [
 
-        {
-            image:
-                "/Toolzenhub/assets/Images/articles/how-to-reduce-home-loan-interest.png",
+/* =========================================================
+   RENDER RELATED ARTICLES
+========================================================= */
 
-            title:
-                "How to Reduce Your Home Loan Interest",
+export function renderRelatedArticles(
+    currentSlug = ""
+) {
 
-            description:
-                "Practical ways to reduce your overall borrowing cost."
-        },
 
-        {
-            image:
-                "/Toolzenhub/assets/Images/articles/emi-vs-total-interest.png",
+    /*
+     * Find the category of the current calculator.
+     */
 
-            title:
-                "EMI vs Total Interest: What Should You Compare?",
+    const calculator =
+        calculatorMetadata[currentSlug];
 
-            description:
-                "Why EMI alone doesn't tell the complete story."
-        },
 
-        {
-            image:
-                "/Toolzenhub/assets/Images/articles/fixed-vs-floating-interest-rate.png",
+    const category =
+        calculator?.category;
 
-            title:
-                "Fixed vs Floating Interest Rates",
 
-            description:
-                "Understand the difference before choosing a loan."
-        },
+    /*
+     * If the calculator does not have a category,
+     * there is nothing relevant to display.
+     */
 
-        {
-            image:
-                "/Toolzenhub/assets/Images/articles/loan-tenure-total-interest.png",
+    if (!category) {
+        return "";
+    }
 
-            title:
-                "How Loan Tenure Affects Total Interest",
 
-            description:
-                "See why a longer tenure can increase borrowing cost."
-        },
+    /*
+     * Get articles belonging to the same category.
+     */
 
-        {
-            image:
-                "/Toolzenhub/assets/Images/articles/what-is-loan-prepayment.png",
+    const relatedArticles =
+        articleRegistry
+            .filter(
+                article =>
+                    article.category === category
+            )
+            .slice(0, 6);
 
-            title:
-                "What Is Loan Prepayment?",
 
-            description:
-                "Understand how prepayment can reduce interest."
-        },
+    /*
+     * If there are no articles for this category,
+     * don't render an empty section.
+     */
 
-        {
-            image:
-                "/Toolzenhub/assets/Images/articles/loan-tenure-total-interest.png",
-
-            title:
-                "How to Choose the Right Loan Tenure",
-
-            description:
-                "Balance monthly affordability with total cost."
-        }
-
-    ];
+    if (!relatedArticles.length) {
+        return "";
+    }
 
 
     return `
@@ -102,7 +91,7 @@ export function renderRelatedArticles() {
 
             <div class="related-articles-grid">
 
-                ${articles.map(
+                ${relatedArticles.map(
                     article => `
 
                     <article
