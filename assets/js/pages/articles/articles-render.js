@@ -9,8 +9,8 @@
 ========================================================= */
 
 import {
-    articles
-} from "./articles-data.js";
+    articleRegistry
+} from "../../article-registry.js";
 
 
 /* =========================================================
@@ -56,7 +56,7 @@ export function getFilteredArticles() {
             .toLowerCase();
 
 
-    return articles.filter(article => {
+    return articleRegistry.filter(article => {
 
         const matchesCategory =
             category === "All" ||
@@ -74,7 +74,7 @@ export function getFilteredArticles() {
                 .toLowerCase()
                 .includes(searchTerm) ||
 
-            article.category
+            article.categoryName
                 .toLowerCase()
                 .includes(searchTerm);
 
@@ -163,7 +163,7 @@ function renderArticleCard(
                 <div>
 
                     <span class="article-card-category">
-                        ${article.category}
+                        ${article.categoryName}
                     </span>
 
 
