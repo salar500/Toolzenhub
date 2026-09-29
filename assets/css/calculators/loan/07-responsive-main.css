@@ -3,6 +3,7 @@
    Responsive Main Layout
 ========================================================= */
 
+
 /* =========================================================
    TABLET
 ========================================================= */
@@ -22,6 +23,15 @@
         top: 50%;
     }
 
+    /*
+     * Global Related Content
+     */
+    .related-calculators-grid,
+    .related-articles-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
 }
 
 
@@ -38,6 +48,7 @@
         overflow-x: hidden;
     }
 
+
     /* Main calculator page */
     .calculator-page {
         width: 100%;
@@ -49,10 +60,12 @@
         overflow-x: hidden;
     }
 
+
     /* Breadcrumb */
     .calculator-breadcrumb {
         flex-wrap: wrap;
     }
+
 
     /* Loan comparison tool */
     .loan-comparison-tool {
@@ -62,6 +75,7 @@
         overflow: hidden;
     }
 
+
     /* Loan cards */
     .loan-comparison-grid {
         width: 100%;
@@ -69,20 +83,24 @@
         grid-template-columns: 1fr;
     }
 
+
     .loan-card {
         min-width: 0;
         box-sizing: border-box;
     }
+
 
     .loan-card:first-child {
         border-right: 0;
         border-bottom: 1px solid #e2e8f0;
     }
 
+
     /* VS badge */
     .loan-vs {
         top: 50%;
     }
+
 
     /* Results */
     .loan-results {
@@ -91,29 +109,40 @@
         overflow-x: hidden;
     }
 
+
     .loan-summary-grid {
         grid-template-columns: 1fr;
     }
+
 
     .loan-amortization-grid,
     .loan-info-grid {
         grid-template-columns: 1fr;
     }
 
-    /* Related content */
-    .loan-related-grid,
-    .loan-articles-grid {
+
+    /*
+     * Global Related Content
+     *
+     * These are the classes used by the new
+     * category-driven related-content system.
+     */
+    .related-calculators-grid,
+    .related-articles-grid {
         grid-template-columns: 1fr;
     }
+
 
     /* Form */
     .loan-input-row {
         grid-template-columns: 1fr 110px;
     }
 
+
     .loan-check-list {
         grid-template-columns: 1fr;
     }
+
 
     /* Information sections */
     .loan-info-card,
@@ -136,6 +165,7 @@
         padding-left: 8px;
         padding-right: 8px;
     }
+
 
     .loan-input-row {
         grid-template-columns: 1fr 90px;
