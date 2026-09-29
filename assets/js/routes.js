@@ -60,6 +60,22 @@ export const ROUTES = {
 
 
     /* =====================================================
+       ARTICLE CATEGORY
+    ===================================================== */
+
+    articleCategory(
+        category
+    ) {
+
+        return (
+            `${SITE_ROOT}articles.html` +
+            `?category=${encodeURIComponent(category)}`
+        );
+
+    },
+
+
+    /* =====================================================
        INDIVIDUAL ARTICLE
     ===================================================== */
 
