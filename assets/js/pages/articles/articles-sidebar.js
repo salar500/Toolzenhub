@@ -162,7 +162,7 @@ function createCategoryItem(
 
         <span class="article-category-count">
 
-            ${getCategoryCount(category.slug)}
+            ${category.count}
 
             <span aria-hidden="true">
                 →
@@ -179,68 +179,6 @@ function createCategoryItem(
 
 
     return item;
-
-}
-
-
-
-/* =========================================================
-   CATEGORY COUNT
-========================================================= */
-
-function getCategoryCount(
-    categorySlug
-) {
-
-    return document.querySelectorAll(
-        `[data-sidebar-category="${categorySlug}"]`
-    ).length > 0
-        ? getRegistryCategoryCount(categorySlug)
-        : getRegistryCategoryCount(categorySlug);
-
-}
-
-
-function getRegistryCategoryCount(
-    categorySlug
-) {
-
-    /*
-     * Importing articleRegistry here would create
-     * unnecessary coupling inside the helper.
-     *
-     * Category counts are therefore calculated
-     * from the rendered article registry through
-     * the central category data source.
-     */
-
-    return articleCategoryCounts[categorySlug] || 0;
-
-}
-
-
-
-/* =========================================================
-   CATEGORY COUNTS
-========================================================= */
-
-const articleCategoryCounts = {};
-
-
-/* =========================================================
-   BUILD CATEGORY COUNTS
-========================================================= */
-
-export function initializeCategoryCounts() {
-
-    /*
-     * This function is intentionally kept separate
-     * so the sidebar remains data-driven.
-     *
-     * The registry is imported dynamically below.
-     */
-
-    return;
 
 }
 
