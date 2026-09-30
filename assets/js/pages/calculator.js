@@ -4,8 +4,13 @@
 ========================================================= */
 
 import {
-    calculatorRegistry
+    calculatorRegistry,
+    calculatorMetadata
 } from "../calculator-registry.js";
+
+import {
+    renderToolBreadcrumb
+} from "../components/breadcrumb.js";
 
 import {
     renderRelatedCalculators
@@ -62,27 +67,7 @@ export async function renderCalculator(slug) {
 
 
         /*
-         * Special calculators can manage
-         * their own related content.
-         *
-         * Loan Comparison is one such calculator.
-         */
-
-        if (
-            module.showRelatedCalculators === false &&
-            module.showRelatedArticles === false
-        ) {
-            return;
-        }
-
-
-        /*
-         * IMPORTANT:
-         *
-         * Related content must be inserted
-         * INSIDE the calculator page container.
-         *
-         * Otherwise it becomes full-width.
+         * Find calculator page container.
          */
 
         const calculatorPage =
@@ -97,6 +82,39 @@ export async function renderCalculator(slug) {
                 "Calculator page container not found."
             );
 
+            return;
+        }
+
+
+        /*
+         * Render centralized breadcrumb.
+         */
+
+        const metadata =
+            calculatorMetadata[slug];
+
+
+        if (metadata) {
+
+            calculatorPage.insertAdjacentHTML(
+                "afterbegin",
+                renderToolBreadcrumb(metadata)
+            );
+
+        }
+
+
+        /*
+         * Special calculators can manage
+         * their own related content.
+         *
+         * Loan Comparison is one such calculator.
+         */
+
+        if (
+            module.showRelatedCalculators === false &&
+            module.showRelatedArticles === false
+        ) {
             return;
         }
 
