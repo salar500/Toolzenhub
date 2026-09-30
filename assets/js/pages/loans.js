@@ -246,6 +246,10 @@ function initializeBreadcrumb() {
         calculatorsLink.textContent =
             "Calculators";
 
+        calculatorsLink.classList.add(
+            "loans-breadcrumb__active"
+        );
+
     }
 
 }
