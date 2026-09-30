@@ -184,3 +184,33 @@
 .article-card:hover .article-arrow {
     transform: translateX(4px);
 }
+
+
+/* =========================================================
+   COMING SOON ARTICLE CARD
+   (articles without a published page yet)
+========================================================= */
+
+.article-card.article-card--soon {
+    cursor: default;
+    background: #F8FAF9;
+}
+
+.article-card.article-card--soon .article-card-image {
+    opacity: .6;
+}
+
+.article-card.article-card--soon:hover {
+    border-color: var(--articles-border);
+    transform: none;
+    box-shadow:
+        0 3px 12px rgba(15, 23, 42, .04);
+}
+
+.article-card.article-card--soon:hover .article-card-image {
+    transform: none;
+}
+
+.article-card--soon .article-card-meta .coming-soon-badge {
+    margin-top: 0;
+}

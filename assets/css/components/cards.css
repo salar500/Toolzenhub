@@ -663,6 +663,8 @@
     letter-spacing: 0.3px;
 
     text-transform: uppercase;
+
+    white-space: nowrap;
 }
 
 

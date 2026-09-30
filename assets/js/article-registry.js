@@ -17,6 +17,11 @@
    Add each article ONCE here.
 ========================================================= */
 
+/*
+ * published: true  -> the article page exists and is linked.
+ * no published flag -> shown as "Coming soon" (not clickable).
+ */
+
 export const articleRegistry = [
 
     /* =====================================================
@@ -25,6 +30,7 @@ export const articleRegistry = [
 
     {
         id: 1,
+        published: true,
         category: "loans",
         categoryName: "Loans",
         topic: "loan-comparison",
@@ -46,6 +52,7 @@ export const articleRegistry = [
 
     {
         id: 2,
+        published: true,
         category: "loans",
         categoryName: "Loans",
         topic: "loan-comparison",
@@ -67,6 +74,7 @@ export const articleRegistry = [
 
     {
         id: 3,
+        published: true,
         category: "loans",
         categoryName: "Loans",
         topic: "loan-comparison",
@@ -88,6 +96,7 @@ export const articleRegistry = [
 
     {
         id: 4,
+        published: true,
         category: "loans",
         categoryName: "Loans",
         topic: "loan-comparison",
@@ -109,6 +118,7 @@ export const articleRegistry = [
 
     {
         id: 5,
+        published: true,
         category: "loans",
         categoryName: "Loans",
         topic:
@@ -131,6 +141,7 @@ export const articleRegistry = [
 
     {
         id: 6,
+        published: true,
         category: "loans",
         categoryName: "Loans",
         topic:
@@ -369,6 +380,10 @@ export const articleCategories = [
 
 /* =========================================================
    CALCULATE CATEGORY COUNTS
+
+   Counts only include published articles. Articles
+   without published: true are shown as "Coming soon"
+   and are not counted.
 ========================================================= */
 
 articleCategories.forEach(
@@ -377,6 +392,7 @@ articleCategories.forEach(
         category.count =
             articleRegistry.filter(
                 article =>
+                    article.published === true &&
                     article.category ===
                     category.slug
             ).length;

@@ -302,11 +302,12 @@ function getArticleHref(
 ) {
 
     /*
-     * Only articles with an individual article page
-     * receive a real article URL.
+     * Only published articles with an individual
+     * article page receive a real article URL.
      */
 
     if (
+        article.published !== true ||
         !article.topic ||
         !article.slug
     ) {
@@ -347,6 +348,7 @@ function renderPopularArticles() {
             <div class="popular-articles">
 
                 ${articleRegistry
+                    .filter(article => article.published === true)
                     .slice(0, 4)
                     .map(article => `
 

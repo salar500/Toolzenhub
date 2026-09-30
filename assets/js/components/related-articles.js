@@ -25,14 +25,14 @@ function getArticleHref(
 ) {
 
     /*
-     * Only articles with both a topic and slug
+     * Only published articles with both a topic and slug
      * have an individual article page.
      *
-     * Articles without a detail page remain
-     * non-navigational until their pages are created.
+     * Unpublished articles ("Coming soon") have no link.
      */
 
     if (
+        article.published !== true ||
         !article.topic ||
         !article.slug
     ) {
@@ -87,6 +87,7 @@ export function renderRelatedArticles(
         articleRegistry
             .filter(
                 article =>
+                    article.published === true &&
                     article.category === category
             )
             .slice(0, 6);

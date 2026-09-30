@@ -99,19 +99,20 @@ function getArticleHref(
 ) {
 
     /*
-     * Only articles with both a topic and slug
+     * Only published articles with both a topic and slug
      * have an individual article page.
      *
-     * Articles without a detail page yet remain
-     * non-navigational until their pages are created.
+     * Unpublished articles are shown as "Coming soon"
+     * and have no link.
      */
 
     if (
+        article.published !== true ||
         !article.topic ||
         !article.slug
     ) {
 
-        return "#";
+        return null;
 
     }
 
@@ -135,6 +136,13 @@ function renderArticleCard(
 
     const articleHref =
         getArticleHref(article);
+
+
+    if (!articleHref) {
+
+        return renderComingSoonArticleCard(article);
+
+    }
 
 
     return `
@@ -208,6 +216,72 @@ function renderArticleCard(
                         aria-hidden="true"
                     >
                         →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+
+/* =========================================================
+   COMING SOON ARTICLE CARD
+========================================================= */
+
+function renderComingSoonArticleCard(
+    article
+) {
+
+    return `
+
+        <article
+            class="article-card article-card--soon"
+            aria-disabled="true"
+        >
+
+            <div class="article-card-image-link">
+
+                <img
+                    class="article-card-image"
+                    src="${article.image}"
+                    alt="${article.alt}"
+                    loading="lazy"
+                >
+
+            </div>
+
+
+            <div class="article-card-content">
+
+                <div>
+
+                    <span class="article-card-category">
+                        ${article.categoryName}
+                    </span>
+
+
+                    <h2>
+                        ${article.title}
+                    </h2>
+
+
+                    <p>
+                        ${article.description}
+                    </p>
+
+                </div>
+
+
+                <div class="article-card-meta">
+
+                    <span class="coming-soon-badge">
+                        Coming soon
                     </span>
 
                 </div>

@@ -7,12 +7,91 @@ import {
     ROUTES
 } from "../routes.js";
 
+import {
+    articleRegistry
+} from "../article-registry.js";
+
+
+/* =========================================================
+   LATEST ARTICLES
+
+   Shows the first published articles from the central
+   article registry. Articles without published: true
+   ("Coming soon") are never shown here.
+========================================================= */
+
+const LATEST_ARTICLES_LIMIT = 3;
+
+
+function renderArticleCard(article) {
+
+    return `
+                    <a
+                        href="${ROUTES.article(article.topic, article.slug)}"
+                        class="article-card"
+                    >
+
+                        <div class="article-card__image">
+
+                            <img
+                                src="${article.image}"
+                                alt="${article.alt}"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+                        <div class="article-card__content">
+
+                            <div class="article-card__category">
+                                ${article.categoryName}
+                            </div>
+
+                            <h3 class="article-card__title">
+                                ${article.title}
+                            </h3>
+
+                            <p class="article-card__description">
+                                ${article.description}
+                            </p>
+
+                            <div class="article-card__footer">
+
+                                <span class="article-card__read">
+                                    Read article
+                                </span>
+
+                                <span
+                                    class="article-card__arrow"
+                                    aria-hidden="true"
+                                >
+                                    →
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+    `;
+
+}
+
 
 export function renderArticles() {
 
     const articles = document.getElementById("latest-articles");
 
     if (!articles) {
+        return;
+    }
+
+    const latestArticles =
+        articleRegistry
+            .filter(article => article.published === true)
+            .slice(0, LATEST_ARTICLES_LIMIT);
+
+    if (!latestArticles.length) {
         return;
     }
 
@@ -46,178 +125,14 @@ export function renderArticles() {
 
                 <div class="articles-grid">
 
-
-                    <!-- Article 1 -->
-
-                    <a
-                        href="#"
-                        class="article-card"
-                    >
-
-                        <div class="article-card__image">
-
-                            <img
-                                src="assets/Images/article-financial-planning.jpg"
-                                alt="Financial planning and calculator"
-                                loading="lazy"
-                            >
-
-                        </div>
-
-
-                        <div class="article-card__content">
-
-                            <div class="article-card__category">
-                                Finance
-                            </div>
-
-
-                            <h3 class="article-card__title">
-                                How to Plan Your Finances Smarter
-                            </h3>
-
-
-                            <p class="article-card__description">
-                                Simple ways to understand your
-                                money, savings and financial goals.
-                            </p>
-
-
-                            <div class="article-card__footer">
-
-                                <span class="article-card__read">
-                                    Read article
-                                </span>
-
-                                <span
-                                    class="article-card__arrow"
-                                    aria-hidden="true"
-                                >
-                                    →
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- Article 2 -->
-
-                    <a
-                        href="#"
-                        class="article-card"
-                    >
-
-                        <div class="article-card__image">
-
-                            <img
-                                src="assets/Images/article-investment.jpg"
-                                alt="Investment growth and savings"
-                                loading="lazy"
-                            >
-
-                        </div>
-
-
-                        <div class="article-card__content">
-
-                            <div class="article-card__category">
-                                Investment
-                            </div>
-
-
-                            <h3 class="article-card__title">
-                                SIP vs Lump Sum: Which Is Better?
-                            </h3>
-
-
-                            <p class="article-card__description">
-                                Understand the difference between
-                                SIP and lump-sum investing.
-                            </p>
-
-
-                            <div class="article-card__footer">
-
-                                <span class="article-card__read">
-                                    Read article
-                                </span>
-
-                                <span
-                                    class="article-card__arrow"
-                                    aria-hidden="true"
-                                >
-                                    →
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- Article 3 -->
-
-                    <a
-                        href="#"
-                        class="article-card"
-                    >
-
-                        <div class="article-card__image">
-
-                            <img
-                                src="assets/Images/article-loan.jpg"
-                                alt="Loan and EMI planning"
-                                loading="lazy"
-                            >
-
-                        </div>
-
-
-                        <div class="article-card__content">
-
-                            <div class="article-card__category">
-                                Loans
-                            </div>
-
-
-                            <h3 class="article-card__title">
-                                How to Reduce Your Loan Interest
-                            </h3>
-
-
-                            <p class="article-card__description">
-                                Learn practical ways to compare
-                                loans and reduce interest costs.
-                            </p>
-
-
-                            <div class="article-card__footer">
-
-                                <span class="article-card__read">
-                                    Read article
-                                </span>
-
-                                <span
-                                    class="article-card__arrow"
-                                    aria-hidden="true"
-                                >
-                                    →
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </a>
+                    ${latestArticles.map(renderArticleCard).join("")}
 
                 </div>
 
             </div>
 
         </section>
+
     `;
+
 }
