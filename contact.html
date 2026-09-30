@@ -132,6 +132,16 @@
                     </p>
 
 
+                    <p
+                        class="contact-form__notice"
+                        role="note"
+                    >
+                        Our contact form isn't accepting messages yet.
+                        It will be enabled soon. Please don't rely on it
+                        for urgent requests.
+                    </p>
+
+
                     <form class="contact-form">
 
                         <div class="contact-form__group">
@@ -190,11 +200,21 @@
                         <button
                             type="submit"
                             class="contact-form__button"
+                            disabled
+                            aria-disabled="true"
                         >
-                            Send Message
+                            Sending unavailable
                         </button>
 
                     </form>
+
+
+                    <p
+                        id="contact-status"
+                        class="contact-form__status"
+                        role="status"
+                        aria-live="polite"
+                    ></p>
 
                 </div>
 

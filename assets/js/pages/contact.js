@@ -31,67 +31,24 @@ export function renderContactPage() {
             event.preventDefault();
 
 
-            const nameInput =
-                contactForm.querySelector("#name");
+            /*
+             * There is no contact backend connected yet, so the
+             * message is NOT sent. Tell the user clearly and keep
+             * what they typed instead of clearing the form.
+             */
+
+            const status =
+                document.getElementById("contact-status");
 
 
-            const emailInput =
-                contactForm.querySelector("#email");
+            if (status) {
 
+                status.textContent =
+                    "Your message was not sent. " +
+                    "The contact form isn't connected yet.";
 
-            const messageInput =
-                contactForm.querySelector("#message");
-
-
-            if (
-                !nameInput ||
-                !emailInput ||
-                !messageInput
-            ) {
-                return;
             }
 
-
-            const name =
-                nameInput.value.trim();
-
-
-            const email =
-                emailInput.value.trim();
-
-
-            const message =
-                messageInput.value.trim();
-
-
-            if (
-                !name ||
-                !email ||
-                !message
-            ) {
-                return;
-            }
-
-
-            /* =================================================
-               TEMPORARY TEST OUTPUT
-            ================================================= */
-
-            console.log(
-                "Contact form submission:",
-                {
-                    name,
-                    email,
-                    message
-                }
-            );
-
-
-            /* =================================================
-               RESET FORM
-            ================================================= */
-
-            contactForm.reset();
 
         }
     );
