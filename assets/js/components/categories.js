@@ -48,175 +48,26 @@ export function renderCategories() {
                 <div class="category-grid">
 
 
-
-                    <!-- Loans -->
+                    <!-- Calculators -->
 
                     <a
-                        href="${ROUTES.loans}"
+                        href="${ROUTES.calculators}"
                         class="category-card"
                     >
 
-                        <div class="category-card__icon category-card__icon--loans">
-                            🏠
+                        <div class="category-card__icon category-card__icon--calculators">
+                            🧮
                         </div>
 
                         <div class="category-card__content">
 
-                            <h3>Loans</h3>
+                            <h3>
+                                Calculators
+                            </h3>
 
                             <p>
-                                EMI, Home Loan, Personal
-                                Loan and more
-                            </p>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- Investment -->
-
-                    <a
-                        href="investment.html"
-                        class="category-card"
-                    >
-
-                        <div class="category-card__icon category-card__icon--investment">
-                            📈
-                        </div>
-
-                        <div class="category-card__content">
-
-                            <h3>Investment</h3>
-
-                            <p>
-                                SIP, PPF, FD, CAGR
-                                and more
-                            </p>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- Tax -->
-
-                    <a
-                        href="${ROUTES.categories}#tax"
-                        class="category-card"
-                    >
-
-                        <div class="category-card__icon category-card__icon--tax">
-                            🧾
-                        </div>
-
-                        <div class="category-card__content">
-
-                            <h3>Tax</h3>
-
-                            <p>
-                                Income Tax, GST
-                                and more
-                            </p>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- Health -->
-
-                    <a
-                        href="${ROUTES.categories}#health"
-                        class="category-card"
-                    >
-
-                        <div class="category-card__icon category-card__icon--health">
-                            ♥
-                        </div>
-
-                        <div class="category-card__content">
-
-                            <h3>Health</h3>
-
-                            <p>
-                                BMI, Calorie, BMR
-                                and more
-                            </p>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- Business -->
-
-                    <a
-                        href="${ROUTES.categories}#business"
-                        class="category-card"
-                    >
-
-                        <div class="category-card__icon category-card__icon--business">
-                            💼
-                        </div>
-
-                        <div class="category-card__content">
-
-                            <h3>Business</h3>
-
-                            <p>
-                                Profit, Margin, ROI
-                                and more
-                            </p>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- Math -->
-
-                    <a
-                        href="${ROUTES.categories}#math"
-                        class="category-card"
-                    >
-
-                        <div class="category-card__icon category-card__icon--math">
-                            🔢
-                        </div>
-
-                        <div class="category-card__content">
-
-                            <h3>Math</h3>
-
-                            <p>
-                                Percentage, Ratio,
-                                Age and more
-                            </p>
-
-                        </div>
-
-                    </a>
-
-
-                    <!-- Converter -->
-
-                    <a
-                        href="${ROUTES.categories}#converter"
-                        class="category-card"
-                    >
-
-                        <div class="category-card__icon category-card__icon--converter">
-                            ↻
-                        </div>
-
-                        <div class="category-card__content">
-
-                            <h3>Converter</h3>
-
-                            <p>
-                                Unit, Currency,
-                                Date and more
+                                Loans, Investment, Tax,
+                                Health, Math and more
                             </p>
 
                         </div>
@@ -237,11 +88,13 @@ export function renderCategories() {
 
                         <div class="category-card__content">
 
-                            <h3>More</h3>
+                            <h3>
+                                More
+                            </h3>
 
                             <p>
                                 Explore all
-                                calculators
+                                ToolZen Hub tools
                             </p>
 
                         </div>
