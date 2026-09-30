@@ -6,8 +6,14 @@
    Central registry for all calculators.
 
    Each calculator is loaded dynamically only when needed.
-   Category information is stored separately so the existing
-   dynamic loading system remains unchanged.
+
+   Metadata stores:
+   - Section
+   - Category
+   - Title
+
+   This allows the website to build breadcrumbs,
+   category pages, related tools and navigation centrally.
 ========================================================= */
 
 
@@ -45,16 +51,32 @@ export const calculatorMetadata = {
 
 
     /* =====================================================
-       LOANS
+       LOAN COMPARISON
     ===================================================== */
 
     "loan-comparison": {
-        category: "loans"
+
+        section: "Calculators",
+
+        category: "Loans",
+
+        title: "Loan Comparison Calculator"
+
     },
 
 
+    /* =====================================================
+       EMI CALCULATOR
+    ===================================================== */
+
     "emi": {
-        category: "loans"
+
+        section: "Calculators",
+
+        category: "Loans",
+
+        title: "EMI Calculator"
+
     }
 
 
