@@ -243,6 +243,7 @@ export function renderHeader() {
                     pathname === "/Toolzenhub" ||
                     pathname === "/Toolzenhub/" ||
                     pathname === "/Toolzenhub/index.html" ||
+                    pathname === "/index.html" ||
                     pathname === "/"
                 )
             )

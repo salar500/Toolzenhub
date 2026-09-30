@@ -38,41 +38,12 @@ function escapeHTML(value = "") {
 
 
 /* =========================================================
-   SITE ROOT
-========================================================= */
-
-function getSiteRoot() {
-
-    return window.location.hostname === "salar500.github.io"
-        ? "/Toolzenhub/"
-        : "/";
-
-}
-
-
-/* =========================================================
    ASSET RESOLVER
 ========================================================= */
 
 function resolveAsset(source) {
 
-    if (!source) {
-        return "";
-    }
-
-
-    if (
-        source.startsWith("http://") ||
-        source.startsWith("https://")
-    ) {
-        return source;
-    }
-
-
-    return new URL(
-        source.replace(/^\/+/, ""),
-        window.location.origin + getSiteRoot()
-    ).href;
+    return ROUTES.asset(source);
 
 }
 

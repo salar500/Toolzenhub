@@ -12,7 +12,7 @@
    SITE ROOT
 ========================================================= */
 
-const SITE_ROOT =
+export const SITE_ROOT =
     window.location.hostname ===
     "salar500.github.io"
         ? "/Toolzenhub/"
@@ -160,6 +160,38 @@ export const ROUTES = {
             `${SITE_ROOT}calculators/` +
             `${slug}/`
         );
+
+    },
+
+
+    /* =====================================================
+       ASSET
+
+       Resolves an asset path (for example
+       "/assets/Images/articles/x.png") against the site
+       root, so it also works under /Toolzenhub/ on
+       GitHub Pages. Absolute http(s) URLs pass through.
+    ===================================================== */
+
+    asset(
+        path
+    ) {
+
+        if (!path) {
+
+            return "";
+
+        }
+
+
+        if (/^https?:\/\//i.test(path)) {
+
+            return path;
+
+        }
+
+
+        return `${SITE_ROOT}${path.replace(/^\/+/, "")}`;
 
     }
 

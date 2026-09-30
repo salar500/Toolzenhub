@@ -683,7 +683,9 @@ function renderRelatedArticles(
                                     >
                                         <img
                                             src="${escapeHTML(
-                                                article.image.src
+                                                ROUTES.asset(
+                                                    article.image.src
+                                                )
                                             )}"
                                             alt="${escapeHTML(
                                                 article.image.alt ||

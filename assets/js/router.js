@@ -15,6 +15,7 @@ export function currentPage() {
 
     if (
         path === "/" ||
+        path === "/index.html" ||
         path === "/Toolzenhub/" ||
         path === "/Toolzenhub" ||
         path === "/Toolzenhub/index.html"

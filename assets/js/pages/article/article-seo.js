@@ -18,6 +18,9 @@
 ========================================================= */
 
 
+import { ROUTES } from "../../routes.js";
+
+
 /* =========================================================
    Site Information
 ========================================================= */
@@ -174,7 +177,7 @@ function getAbsoluteImageURL(
     try {
 
         return new URL(
-            image,
+            ROUTES.asset(image),
             window.location.origin
         ).href;
 
