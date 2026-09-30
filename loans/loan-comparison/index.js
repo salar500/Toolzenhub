@@ -12,7 +12,6 @@ import {
 
 
 import {
-    renderResults,
     compareLoans
 } from "./components/Results.js";
 
@@ -25,16 +24,6 @@ import {
     renderThingsToConsider,
     renderFAQ
 } from "./components/InfoSections.js";
-
-
-import {
-    ROUTES
-} from "../../assets/js/routes.js";
-
-
-import {
-    renderBreadcrumb
-} from "../../assets/js/components/breadcrumb.js";
 
 
 /* =========================================================
@@ -56,20 +45,6 @@ export function render() {
 
         <div class="calculator-page">
 
-            ${renderBreadcrumb([
-
-                {
-                    label: "Loans",
-                    href: ROUTES.loans
-                },
-
-                {
-                    label:
-                        "Loan Comparison Calculator"
-                }
-
-            ])}
-
 
             <section class="calculator-intro">
 
@@ -89,6 +64,7 @@ export function render() {
                     </p>
 
                 </div>
+
 
                 <div class="calculator-trust-card">
 
@@ -124,9 +100,11 @@ export function render() {
                         8.5
                     )}
 
+
                     <div class="loan-vs">
                         VS
                     </div>
+
 
                     ${createLoanCard(
                         "b",
@@ -147,6 +125,7 @@ export function render() {
                     >
                         Compare Loans
                     </button>
+
 
                     <button
                         id="reset-loans"
