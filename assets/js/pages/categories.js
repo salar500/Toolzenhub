@@ -108,7 +108,7 @@ export function renderCategoriesBreadcrumb() {
     breadcrumb.innerHTML =
         renderBreadcrumb([
             {
-                label: "Categories"
+                label: "Calculators"
             }
         ]);
 
