@@ -35,7 +35,7 @@ export function renderCategories() {
                     </h2>
 
                     <a
-                        href="${ROUTES.categories}"
+                        href="${ROUTES.calculatorCategories}"
                         class="section-link"
                     >
                         View all categories
@@ -51,7 +51,7 @@ export function renderCategories() {
                     <!-- Calculators -->
 
                     <a
-                        href="${ROUTES.calculators}"
+                        href="${ROUTES.calculatorCategories}"
                         class="category-card"
                     >
 
