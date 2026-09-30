@@ -80,15 +80,9 @@ const article = {
        FEATURED IMAGE
     ===================================================== */
 
-    image: {
-
-        src:
-            "/assets/Images/articles/choose-right-loan-tenure.png",
-
-        alt:
-            "Choosing the right home loan tenure"
-
-    },
+    // TODO(image): add assets/Images/articles/choose-right-loan-tenure.png,
+    // then restore image: { src, alt }. Until then the image is skipped.
+    image: null,
 
 
 
