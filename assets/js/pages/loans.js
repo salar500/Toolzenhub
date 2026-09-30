@@ -146,7 +146,6 @@ function initializeSearch() {
 
             event.preventDefault();
 
-
             performSearch(
                 input.value
             );
@@ -225,7 +224,7 @@ function initializeBreadcrumb() {
         );
 
 
-    const categoriesLink =
+    const calculatorsLink =
         document.getElementById(
             "loans-breadcrumb-categories"
         );
@@ -239,10 +238,13 @@ function initializeBreadcrumb() {
     }
 
 
-    if (categoriesLink) {
+    if (calculatorsLink) {
 
-        categoriesLink.href =
-            ROUTES.categories;
+        calculatorsLink.href =
+            ROUTES.calculatorCategories;
+
+        calculatorsLink.textContent =
+            "Calculators";
 
     }
 
