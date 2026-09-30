@@ -9,14 +9,6 @@ import {
     calculateTotalInterest
 } from "../formulas/loan.js";
 
-import {
-    ROUTES
-} from "../../routes.js";
-
-import {
-    renderBreadcrumb
-} from "../../components/breadcrumb.js";
-
 
 /* =========================================================
    FORMAT CURRENCY
@@ -53,16 +45,6 @@ export function render() {
     app.innerHTML = `
 
         <div class="calculator-page">
-
-            ${renderBreadcrumb([
-                {
-                    label: "Loans",
-                    href: ROUTES.loans
-                },
-                {
-                    label: "EMI Calculator"
-                }
-            ])}
 
 
             <!-- INTRO -->
