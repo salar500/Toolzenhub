@@ -196,7 +196,8 @@ export const articleRegistry = [
 
         categoryName: "Loans",
 
-        topic: "loan-comparison",
+        topic:
+            "loan-comparison",
 
         slug:
             "choose-right-loan-tenure",
@@ -417,44 +418,82 @@ export const articleCategories = [
 
     {
         slug: "loans",
+
         name: "Loans",
+
         icon: "🏠"
     },
 
+
     {
         slug: "investment",
+
         name: "Investment",
+
         icon: "📈"
     },
 
+
     {
         slug: "tax",
+
         name: "Tax",
+
         icon: "📄"
     },
 
+
     {
         slug: "business",
+
         name: "Business",
+
         icon: "💼"
     },
 
+
     {
         slug: "health",
+
         name: "Health",
+
         icon: "❤️"
     },
 
+
     {
         slug: "math",
+
         name: "Math",
+
         icon: "🧮"
     },
 
+
     {
         slug: "converter",
+
         name: "Converter",
+
         icon: "🔄"
     }
 
 ];
+
+
+/* =========================================================
+   CALCULATE CATEGORY COUNTS
+========================================================= */
+
+articleCategories.forEach(
+    category => {
+
+        category.count =
+            articleRegistry.filter(
+                article =>
+                    article.category ===
+                    category.slug
+            ).length;
+
+    }
+);
