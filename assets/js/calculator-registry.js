@@ -58,7 +58,7 @@ export const calculatorMetadata = {
 
         section: "Calculators",
 
-        category: "Loans",
+        category: "loans",
 
         title: "Loan Comparison Calculator"
 
@@ -73,7 +73,7 @@ export const calculatorMetadata = {
 
         section: "Calculators",
 
-        category: "Loans",
+        category: "loans",
 
         title: "EMI Calculator"
 
@@ -81,3 +81,4 @@ export const calculatorMetadata = {
 
 
 };
+
