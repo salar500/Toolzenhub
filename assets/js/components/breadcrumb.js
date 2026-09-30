@@ -3,16 +3,23 @@
    Global Breadcrumb Component
 
    Purpose:
-   Reusable breadcrumb for all website pages.
+   Central reusable breadcrumb system.
 
    Supports:
-   - Home → Categories
-   - Home → Calculators
-   - Home → Loans → Calculator
-   - Home → Articles
-   - Home → Articles → Article
-   - Home → About
-   - Home → Contact
+   - Home
+   - Section
+   - Category
+   - Individual tool
+
+   Examples:
+
+   Home → Calculators
+   Home → Calculators → Loans
+   Home → Calculators → Loans → EMI Calculator
+
+   Home → Timers → Countdown Timer
+
+   Home → Developer Tools → JSON Formatter
 
    Existing breadcrumb styling/classes are preserved.
 ========================================================= */
@@ -23,9 +30,8 @@ import {
 } from "../routes.js";
 
 
-
 /* =========================================================
-   Render Breadcrumb
+   RENDER BREADCRUMB
 ========================================================= */
 
 export function renderBreadcrumb(
@@ -85,5 +91,173 @@ export function renderBreadcrumb(
         </div>
 
     `;
+
+}
+
+
+/* =========================================================
+   RENDER TOOL BREADCRUMB
+========================================================= */
+
+/*
+ * Builds a breadcrumb automatically from tool metadata.
+ *
+ * Example:
+ *
+ * renderToolBreadcrumb({
+ *
+ *     section: "Calculators",
+ *
+ *     category: "Loans",
+ *
+ *     title: "Loan Comparison Calculator"
+ *
+ * });
+ *
+ * Result:
+ *
+ * Home → Calculators → Loans → Loan Comparison Calculator
+ *
+ */
+
+
+export function renderToolBreadcrumb(
+    metadata = {}
+) {
+
+    const items = [];
+
+
+    /* =====================================================
+       SECTION
+    ===================================================== */
+
+    if (metadata.section) {
+
+        items.push({
+
+            label:
+                metadata.section,
+
+            href:
+                getSectionRoute(
+                    metadata.section
+                )
+
+        });
+
+    }
+
+
+    /* =====================================================
+       CATEGORY
+    ===================================================== */
+
+    if (metadata.category) {
+
+        items.push({
+
+            label:
+                metadata.category,
+
+            href:
+                getCategoryRoute(
+                    metadata.category
+                )
+
+        });
+
+    }
+
+
+    /* =====================================================
+       TOOL
+    ===================================================== */
+
+    if (metadata.title) {
+
+        items.push({
+
+            label:
+                metadata.title
+
+        });
+
+    }
+
+
+    return renderBreadcrumb(items);
+
+}
+
+
+/* =========================================================
+   SECTION ROUTES
+========================================================= */
+
+function getSectionRoute(
+    section
+) {
+
+    const normalized =
+        String(section)
+            .trim()
+            .toLowerCase();
+
+
+    /* =====================================================
+       CALCULATORS
+    ===================================================== */
+
+    if (
+        normalized === "calculators"
+    ) {
+
+        return ROUTES.calculatorCategories;
+
+    }
+
+
+    /* =====================================================
+       DEFAULT
+    ===================================================== */
+
+    return null;
+
+}
+
+
+/* =========================================================
+   CATEGORY ROUTES
+========================================================= */
+
+function getCategoryRoute(
+    category
+) {
+
+    const normalized =
+        String(category)
+            .trim()
+            .toLowerCase();
+
+
+    /* =====================================================
+       LOANS
+    ===================================================== */
+
+    if (
+        normalized === "loans"
+    ) {
+
+        return ROUTES.loans;
+
+    }
+
+
+    /* =====================================================
+       FUTURE CATEGORIES
+    ===================================================== */
+
+    return null;
 
 }
