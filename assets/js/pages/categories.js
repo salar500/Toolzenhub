@@ -277,12 +277,55 @@ function renderCalculatorResults(query) {
        Results
     ===================================================== */
 
-    grid.innerHTML = results.map(calculator => `
+    grid.innerHTML = results.map(calculator => {
 
-        <a
+        /*
+         * Calculators that are not built yet have no URL.
+         * They are shown as non-clickable "Coming soon" cards.
+         */
+
+        const isAvailable =
+            Boolean(calculator.url);
+
+
+        const openTag =
+            isAvailable
+                ? `<a
             href="${calculator.url}"
             class="category-page-card"
-        >
+        >`
+                : `<div
+            class="category-page-card category-page-card--soon"
+            aria-disabled="true"
+        >`;
+
+
+        const closeTag =
+            isAvailable
+                ? "</a>"
+                : "</div>";
+
+
+        const soonBadge =
+            isAvailable
+                ? ""
+                : `<span class="coming-soon-badge">Coming soon</span>`;
+
+
+        const arrow =
+            isAvailable
+                ? `<span
+                class="category-page-card__arrow"
+                aria-hidden="true"
+            >
+                →
+            </span>`
+                : "";
+
+
+        return `
+
+        ${openTag}
 
             <div
                 class="
@@ -323,19 +366,18 @@ function renderCalculatorResults(query) {
                     ${escapeHtml(calculator.description)}
                 </p>
 
+                ${soonBadge}
+
             </div>
 
 
-            <span
-                class="category-page-card__arrow"
-                aria-hidden="true"
-            >
-                →
-            </span>
+            ${arrow}
 
-        </a>
+        ${closeTag}
 
-    `).join("");
+    `;
+
+    }).join("");
 }
 
 

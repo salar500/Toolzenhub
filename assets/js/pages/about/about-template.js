@@ -416,7 +416,7 @@ function renderOfferSection() {
                         ====================================== -->
 
                         <a
-                            href="investment.html"
+                            href="categories.html"
                             class="about-category"
                         >
 

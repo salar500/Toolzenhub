@@ -26,6 +26,7 @@ export const calculators = [
 
     {
         id: "loan-comparison",
+        available: true,
         category: "loans",
         type: "advanced",
         icon: "⚖",
@@ -37,6 +38,7 @@ export const calculators = [
 
     {
         id: "emi",
+        available: true,
         category: "loans",
         type: "simple",
         icon: "▦",

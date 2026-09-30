@@ -692,3 +692,54 @@
     color: #334155;
     font-weight: 600;
 }
+
+
+/* =========================================================
+   Coming Soon (calculators not built yet)
+========================================================= */
+
+.category-page-card .coming-soon-badge {
+
+    display: inline-block;
+
+    margin-top: 8px;
+
+    padding: 3px 10px;
+
+    border-radius: 999px;
+
+    background: #fef3c7;
+
+    color: #92400e;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    line-height: 1.5;
+
+    letter-spacing: 0.3px;
+
+    text-transform: uppercase;
+}
+
+
+.category-page-card.category-page-card--soon {
+
+    cursor: default;
+
+    opacity: 0.65;
+
+    background: #f8faf9;
+}
+
+
+.category-page-card.category-page-card--soon:hover {
+
+    transform: none;
+
+    border-color: #e4ebe8;
+
+    box-shadow:
+        0 3px 12px rgba(16, 24, 40, 0.045);
+}

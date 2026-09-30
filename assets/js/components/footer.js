@@ -247,7 +247,7 @@ export function renderFooter() {
                             <ul class="footer__links">
 
                                 <li>
-                                    <a href="${page("calculators/emi-calculator/")}">
+                                    <a href="${page("calculators/emi/")}">
                                         EMI Calculator
                                     </a>
                                 </li>
@@ -261,15 +261,8 @@ export function renderFooter() {
 
 
                                 <li>
-                                    <a href="${page("calculators/sip-calculator/")}">
-                                        SIP Calculator
-                                    </a>
-                                </li>
-
-
-                                <li>
-                                    <a href="${page("calculators/gst-calculator/")}">
-                                        GST Calculator
+                                    <a href="${page("calculators.html")}">
+                                        All Calculators
                                     </a>
                                 </li>
 

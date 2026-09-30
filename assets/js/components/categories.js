@@ -176,7 +176,7 @@ export function renderCategories() {
                     <!-- EMI -->
 
                     <a
-                        href="#"
+                        href="${ROUTES.calculator("emi")}"
                         class="calculator-card"
                     >
 
@@ -209,9 +209,9 @@ export function renderCategories() {
 
                     <!-- SIP -->
 
-                    <a
-                        href="#"
-                        class="calculator-card"
+                    <div
+                        class="calculator-card calculator-card--soon"
+                        aria-disabled="true"
                     >
 
                         <div class="calculator-card__icon calculator-card__icon--yellow">
@@ -229,23 +229,18 @@ export function renderCategories() {
                                 investments
                             </p>
 
+                            <span class="coming-soon-badge">Coming soon</span>
+
                         </div>
 
-                        <span
-                            class="calculator-card__arrow"
-                            aria-hidden="true"
-                        >
-                            →
-                        </span>
-
-                    </a>
+                    </div>
 
 
                     <!-- GST -->
 
-                    <a
-                        href="#"
-                        class="calculator-card"
+                    <div
+                        class="calculator-card calculator-card--soon"
+                        aria-disabled="true"
                     >
 
                         <div class="calculator-card__icon calculator-card__icon--purple">
@@ -263,23 +258,18 @@ export function renderCategories() {
                                 and accurately
                             </p>
 
+                            <span class="coming-soon-badge">Coming soon</span>
+
                         </div>
 
-                        <span
-                            class="calculator-card__arrow"
-                            aria-hidden="true"
-                        >
-                            →
-                        </span>
-
-                    </a>
+                    </div>
 
 
                     <!-- Home Loan -->
 
-                    <a
-                        href="#"
-                        class="calculator-card"
+                    <div
+                        class="calculator-card calculator-card--soon"
+                        aria-disabled="true"
                     >
 
                         <div class="calculator-card__icon calculator-card__icon--pink">
@@ -297,23 +287,18 @@ export function renderCategories() {
                                 loan eligibility
                             </p>
 
+                            <span class="coming-soon-badge">Coming soon</span>
+
                         </div>
 
-                        <span
-                            class="calculator-card__arrow"
-                            aria-hidden="true"
-                        >
-                            →
-                        </span>
-
-                    </a>
+                    </div>
 
 
                     <!-- BMI -->
 
-                    <a
-                        href="#"
-                        class="calculator-card"
+                    <div
+                        class="calculator-card calculator-card--soon"
+                        aria-disabled="true"
                     >
 
                         <div class="calculator-card__icon calculator-card__icon--teal">
@@ -331,16 +316,11 @@ export function renderCategories() {
                                 mass index
                             </p>
 
+                            <span class="coming-soon-badge">Coming soon</span>
+
                         </div>
 
-                        <span
-                            class="calculator-card__arrow"
-                            aria-hidden="true"
-                        >
-                            →
-                        </span>
-
-                    </a>
+                    </div>
 
                 </div>
 

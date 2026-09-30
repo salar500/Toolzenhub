@@ -63,7 +63,9 @@ function getSearchCalculators() {
                 calculator.category,
 
             url:
-                calculator.href
+                calculator.available
+                    ? calculator.href
+                    : null
 
         })
     );
