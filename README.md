@@ -20,8 +20,9 @@ The project is in early development. Only a small part of the planned catalogue 
 | Contact form | **Not connected to any backend.** The form is disabled and says so; no messages are sent. |
 | Known gap | The article "How to Choose the Right Loan Tenure" has no featured image yet (search for `TODO(image)`). |
 
-Some folders also contain empty placeholder files and unused code from earlier work. They
-are being reviewed and cleaned up gradually.
+Some folders still contain unused code from earlier work (for example an unused
+calculator-engine scaffold and older page modules). It is left in place for now and is being
+reviewed gradually.
 
 ## Technology
 
@@ -88,9 +89,8 @@ assets/
 
 loans/loan-comparison/                        Loan Comparison calculator code
                                               (components, helpers, entry module)
-data/                                         Small JSON files (mostly unused placeholders)
+data/                                         Small JSON files (mostly unused)
 netlify/functions/subscribe.js                Unused newsletter function (see above)
-tools/                                        Tooling placeholder
 ```
 
 Inside `assets/js/`:
