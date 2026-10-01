@@ -71,8 +71,10 @@
     </script>
 
 
-    <!-- Without JavaScript the site-root links cannot be built,
-         so hide them and show the fallback link instead. -->
+    <!-- Without JavaScript the site root cannot be determined from
+         an arbitrary-depth 404 URL, so the navigation links are
+         hidden. The error message itself is plain HTML and always
+         visible. -->
 
     <noscript>
         <style>
@@ -420,20 +422,6 @@
                 </ul>
 
             </div>
-
-
-            <!-- No-JavaScript fallback.
-
-                 This is the one deliberate hard-coded address on the
-                 page: the current GitHub Pages home. If the site moves
-                 to a custom domain, GitHub redirects the old address,
-                 and this link can be updated. -->
-
-            <noscript>
-                <a class="nf-btn" href="https://salar500.github.io/Toolzenhub/">
-                    Go to Home
-                </a>
-            </noscript>
 
         </section>
 
