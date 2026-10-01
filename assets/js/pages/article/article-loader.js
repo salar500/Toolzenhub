@@ -126,12 +126,6 @@ export async function loadArticle() {
         getArticleRouteKey();
 
 
-    console.log(
-        "ToolZen Hub: Article route key:",
-        routeKey
-    );
-
-
     if (!routeKey) {
 
         console.error(
@@ -155,26 +149,12 @@ export async function loadArticle() {
             `ToolZen Hub: No article registered for "${routeKey}".`
         );
 
-        console.log(
-            "ToolZen Hub: Available article routes:",
-            Object.keys(
-                articleLoaders
-            )
-        );
-
         return null;
 
     }
 
 
     try {
-
-        console.log(
-            "ToolZen Hub: Loading article:",
-            routeKey
-        );
-
-
         const module =
             await loader();
 
@@ -225,12 +205,6 @@ export async function loadArticle() {
                 centralArticle.category;
 
         }
-
-
-        console.log(
-            "ToolZen Hub: Article loaded successfully:",
-            article.title
-        );
 
 
         return article;

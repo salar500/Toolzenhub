@@ -52,24 +52,6 @@ export function renderResults(
         calculateLoanComparison();
 
 
-    console.log(
-        "Loan comparison data:",
-        data
-    );
-
-
-    console.log(
-        "Loan A amortization:",
-        data.amortizationA
-    );
-
-
-    console.log(
-        "Loan B amortization:",
-        data.amortizationB
-    );
-
-
     /* =====================================================
        RENDER HTML
     ===================================================== */
@@ -249,12 +231,6 @@ export function renderResults(
                 button.dataset.loan;
 
 
-            console.log(
-                "Amortization button clicked:",
-                loanKey
-            );
-
-
             /* =============================================
                LOAN A
             ============================================= */
@@ -262,24 +238,6 @@ export function renderResults(
             if (
                 loanKey === "a"
             ) {
-
-                console.log(
-                    "Opening Loan A schedule..."
-                );
-
-
-                console.log(
-                    "Loan A:",
-                    data.loanA
-                );
-
-
-                console.log(
-                    "Loan A schedule:",
-                    data.amortizationA
-                );
-
-
                 openAmortizationModal(
                     data.loanA,
                     data.amortizationA,
@@ -299,24 +257,6 @@ export function renderResults(
             if (
                 loanKey === "b"
             ) {
-
-                console.log(
-                    "Opening Loan B schedule..."
-                );
-
-
-                console.log(
-                    "Loan B:",
-                    data.loanB
-                );
-
-
-                console.log(
-                    "Loan B schedule:",
-                    data.amortizationB
-                );
-
-
                 openAmortizationModal(
                     data.loanB,
                     data.amortizationB,

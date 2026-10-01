@@ -48,17 +48,6 @@ export function openAmortizationModal(
     }
 
 
-    console.log(
-        "Opening amortization modal:",
-        {
-            loan,
-            loanName,
-            scheduleLength:
-                schedule.length
-        }
-    );
-
-
     /* =====================================================
        REMOVE EXISTING MODAL
     ===================================================== */
@@ -84,12 +73,6 @@ export function openAmortizationModal(
         getLoanDisplayUnit(
             loanName
         );
-
-
-    console.log(
-        "Amortization display unit:",
-        displayUnit
-    );
 
 
     /* =====================================================
@@ -241,11 +224,6 @@ export function openAmortizationModal(
     document.body.style.overflow =
         "hidden";
 
-
-    console.log(
-        "Amortization modal successfully added to DOM."
-    );
-
 }
 
 
@@ -283,11 +261,6 @@ export function closeAmortizationModal() {
     document.removeEventListener(
         "keydown",
         handleEscape
-    );
-
-
-    console.log(
-        "Amortization modal closed."
     );
 
 }

@@ -126,12 +126,6 @@ export function initializeArticlePage(
 ========================================================= */
 
 export async function initializeArticlePageFromURL() {
-
-    console.log(
-        "ToolZen Hub: initializeArticlePageFromURL()"
-    );
-
-
     const article =
         await loadArticle();
 
