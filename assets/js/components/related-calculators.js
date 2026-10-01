@@ -11,71 +11,34 @@ import {
     calculatorMetadata
 } from "../calculator-registry.js";
 
+import {
+    getCalculatorById
+} from "../data/calculators.js";
+
 
 /* =========================================================
-   CALCULATOR INFORMATION
+   RELATED-CARD COPY (presentation)
+
+   Tool identity (title, category, availability, route) comes
+   from the calculator catalog. The compact icon and one-line
+   blurb used on these small cards are presentation copy that
+   differs from the catalog's listing copy, so they stay here,
+   keyed by tool id. A tool without an entry falls back to its
+   catalog icon and description.
 ========================================================= */
 
-const calculatorInfo = {
-
-
-    /* =====================================================
-       LOANS
-    ===================================================== */
+const RELATED_CARD_COPY = {
 
     "loan-comparison": {
         icon: "⇄",
-        title: "Loan Comparison Calculator",
         description:
             "Compare two loans side by side."
     },
 
-
     "emi": {
         icon: "▦",
-        title: "EMI Calculator",
         description:
             "Calculate your monthly loan EMI."
-    },
-
-
-    "home-loan": {
-        icon: "⌂",
-        title: "Home Loan Calculator",
-        description:
-            "Calculate home loan EMI and interest."
-    },
-
-
-    "personal-loan": {
-        icon: "♙",
-        title: "Personal Loan Calculator",
-        description:
-            "Calculate personal loan payments."
-    },
-
-
-    "loan-eligibility": {
-        icon: "▤",
-        title: "Loan Eligibility Calculator",
-        description:
-            "Check how much loan you may qualify for."
-    },
-
-
-    "prepayment": {
-        icon: "₹",
-        title: "Prepayment Calculator",
-        description:
-            "Estimate savings from prepayment."
-    },
-
-
-    "interest": {
-        icon: "%",
-        title: "Interest Calculator",
-        description:
-            "Calculate simple and compound interest."
     }
 
 };
@@ -124,10 +87,21 @@ export function renderRelatedCalculators(
                     slug !== currentSlug
             )
             .map(
-                ([slug]) => ({
-                    slug,
-                    ...calculatorInfo[slug]
-                })
+                ([slug]) => {
+                    const tool =
+                        getCalculatorById(slug);
+                    const copy =
+                        RELATED_CARD_COPY[slug] || {};
+                    return {
+                        slug,
+                        icon:
+                            copy.icon ?? tool?.icon,
+                        title: tool?.title,
+                        description:
+                            copy.description ??
+                            tool?.description
+                    };
+                }
             )
             .filter(
                 calculator =>

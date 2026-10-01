@@ -197,3 +197,43 @@ test.describe("footer", () => {
     }
   });
 });
+
+test.describe("calculator catalog drives tool identity (M1)", () => {
+  test("home popular list: Loan Comparison and EMI link to their routes, the other four are Coming soon", async ({ page, go, siteRoot }) => {
+    await go("");
+    const cards = page.locator("#popular-calculators .calculator-card");
+    await expect(cards).toHaveCount(6);
+    const links = page.locator("#popular-calculators a.calculator-card");
+    await expect(links).toHaveCount(2);
+    await expect(links.nth(0)).toHaveAttribute("href", `${siteRoot}calculators/loan-comparison/`);
+    await expect(links.nth(0)).toContainText("Loan Comparison");
+    await expect(links.nth(1)).toHaveAttribute("href", `${siteRoot}calculators/emi/`);
+    await expect(links.nth(1)).toContainText("EMI Calculator");
+    const soon = page.locator("#popular-calculators .calculator-card--soon");
+    await expect(soon).toHaveCount(4);
+    await expect(soon.locator(".coming-soon-badge")).toHaveCount(4);
+    await expect(soon).toContainText(["SIP Calculator", "GST Calculator", "Home Loan Calculator", "BMI Calculator"]);
+    await expect(page.locator("#popular-calculators .calculator-card--soon a")).toHaveCount(0);
+  });
+
+  test("related calculators work in both directions (EMI <-> Loan Comparison)", async ({ page, go, siteRoot }) => {
+    await go("calculators/loan-comparison/");
+    const calcs = page.locator(".related-calculator-card");
+    await expect(calcs).toHaveCount(1);
+    await expect(calcs.first()).toHaveAttribute("href", `${siteRoot}calculators/emi/`);
+    await expect(calcs.first()).toContainText("EMI Calculator");
+  });
+
+  test("calculator code loads on demand: not on the home page, only on the calculator's own page", async ({ page, go }) => {
+    const seen = [];
+    page.on("request", (r) => seen.push(r.url()));
+    await go("");
+    await expect(page.locator("#popular-calculators")).toBeVisible();
+    expect(seen.filter((u) => /calculators\/emi\/index\.js|loan-comparison\/index\.js/.test(u))).toEqual([]);
+    seen.length = 0;
+    await go("calculators/emi/");
+    await expect(page.getByRole("heading", { level: 1, name: /EMI Calculator/ })).toBeVisible();
+    expect(seen.some((u) => /calculators\/emi\/index\.js/.test(u))).toBe(true);
+    expect(seen.some((u) => /loan-comparison\/index\.js/.test(u))).toBe(false);
+  });
+});

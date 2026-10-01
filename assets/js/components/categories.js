@@ -8,6 +8,76 @@ import {
 } from "../routes.js";
 
 
+import {
+    getCalculatorById
+} from "../data/calculators.js";
+
+
+/* =========================================================
+   POPULAR CALCULATORS (home page presentation)
+
+   Which tools are featured and in what order is a presentation
+   choice, kept here and referencing catalog tool ids. Whether a
+   tool is clickable, and where it links, comes from the
+   calculator catalog (status / href), never from this list:
+   a coming-soon tool always renders as a non-clickable card.
+   `title`, `blurb`, `icon` and `color` are card copy.
+========================================================= */
+
+const POPULAR_CALCULATORS = [
+    { id: "loan-comparison", title: "Loan Comparison", blurb: "Compare loans side by side", icon: "⚖", color: "green" },
+    { id: "emi", title: "EMI Calculator", blurb: "Calculate your EMI instantly", icon: "▣", color: "blue" },
+    { id: "sip", title: "SIP Calculator", blurb: "Plan your SIP investments", icon: "♜", color: "yellow" },
+    { id: "gst", title: "GST Calculator", blurb: "Calculate GST easily and accurately", icon: "▤", color: "purple" },
+    { id: "home-loan", title: "Home Loan Calculator", blurb: "Calculate your home loan eligibility", icon: "⌂", color: "pink" },
+    { id: "bmi", title: "BMI Calculator", blurb: "Check your body mass index", icon: "♙", color: "teal" }
+];
+
+
+function renderPopularCard(card) {
+
+    const tool = getCalculatorById(card.id);
+    const available = Boolean(tool?.available);
+
+    const body = `
+                        <div class="calculator-card__icon calculator-card__icon--${card.color}">
+                            ${card.icon}
+                        </div>
+                        <div class="calculator-card__content">
+                            <h3>
+                                ${card.title}
+                            </h3>
+                            <p>
+                                ${card.blurb}
+                            </p>${available ? "" : `
+                            <span class="coming-soon-badge">Coming soon</span>`}
+                        </div>`;
+
+    if (!available) {
+        return `
+                    <div
+                        class="calculator-card calculator-card--soon"
+                        aria-disabled="true"
+                    >${body}
+                    </div>`;
+    }
+
+    return `
+                    <a
+                        href="${tool.href}"
+                        class="calculator-card"
+                    >${body}
+                        <span
+                            class="calculator-card__arrow"
+                            aria-hidden="true"
+                        >
+                            →
+                        </span>
+                    </a>`;
+
+}
+
+
 export function renderCategories() {
 
     const categories = document.getElementById("categories");
@@ -139,188 +209,7 @@ export function renderCategories() {
                 <div class="calculator-grid">
 
 
-                    <!-- Loan Comparison -->
-
-                    <a
-                        href="${ROUTES.calculator("loan-comparison")}"
-                        class="calculator-card"
-                    >
-
-                        <div class="calculator-card__icon calculator-card__icon--green">
-                            ⚖
-                        </div>
-
-                        <div class="calculator-card__content">
-
-                            <h3>
-                                Loan Comparison
-                            </h3>
-
-                            <p>
-                                Compare loans side
-                                by side
-                            </p>
-
-                        </div>
-
-                        <span
-                            class="calculator-card__arrow"
-                            aria-hidden="true"
-                        >
-                            →
-                        </span>
-
-                    </a>
-
-
-                    <!-- EMI -->
-
-                    <a
-                        href="${ROUTES.calculator("emi")}"
-                        class="calculator-card"
-                    >
-
-                        <div class="calculator-card__icon calculator-card__icon--blue">
-                            ▣
-                        </div>
-
-                        <div class="calculator-card__content">
-
-                            <h3>
-                                EMI Calculator
-                            </h3>
-
-                            <p>
-                                Calculate your EMI
-                                instantly
-                            </p>
-
-                        </div>
-
-                        <span
-                            class="calculator-card__arrow"
-                            aria-hidden="true"
-                        >
-                            →
-                        </span>
-
-                    </a>
-
-
-                    <!-- SIP -->
-
-                    <div
-                        class="calculator-card calculator-card--soon"
-                        aria-disabled="true"
-                    >
-
-                        <div class="calculator-card__icon calculator-card__icon--yellow">
-                            ♜
-                        </div>
-
-                        <div class="calculator-card__content">
-
-                            <h3>
-                                SIP Calculator
-                            </h3>
-
-                            <p>
-                                Plan your SIP
-                                investments
-                            </p>
-
-                            <span class="coming-soon-badge">Coming soon</span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- GST -->
-
-                    <div
-                        class="calculator-card calculator-card--soon"
-                        aria-disabled="true"
-                    >
-
-                        <div class="calculator-card__icon calculator-card__icon--purple">
-                            ▤
-                        </div>
-
-                        <div class="calculator-card__content">
-
-                            <h3>
-                                GST Calculator
-                            </h3>
-
-                            <p>
-                                Calculate GST easily
-                                and accurately
-                            </p>
-
-                            <span class="coming-soon-badge">Coming soon</span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Home Loan -->
-
-                    <div
-                        class="calculator-card calculator-card--soon"
-                        aria-disabled="true"
-                    >
-
-                        <div class="calculator-card__icon calculator-card__icon--pink">
-                            ⌂
-                        </div>
-
-                        <div class="calculator-card__content">
-
-                            <h3>
-                                Home Loan Calculator
-                            </h3>
-
-                            <p>
-                                Calculate your home
-                                loan eligibility
-                            </p>
-
-                            <span class="coming-soon-badge">Coming soon</span>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- BMI -->
-
-                    <div
-                        class="calculator-card calculator-card--soon"
-                        aria-disabled="true"
-                    >
-
-                        <div class="calculator-card__icon calculator-card__icon--teal">
-                            ♙
-                        </div>
-
-                        <div class="calculator-card__content">
-
-                            <h3>
-                                BMI Calculator
-                            </h3>
-
-                            <p>
-                                Check your body
-                                mass index
-                            </p>
-
-                            <span class="coming-soon-badge">Coming soon</span>
-
-                        </div>
-
-                    </div>
+                    ${POPULAR_CALCULATORS.map(renderPopularCard).join("")}
 
                 </div>
 

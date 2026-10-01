@@ -12,81 +12,12 @@ import {
 } from "../routes.js";
 
 import {
+    categories
+} from "../data/categories.js";
+
+import {
     renderBreadcrumb
 } from "../components/breadcrumb.js";
-
-
-/* =========================================================
-   Category Data
-========================================================= */
-
-const categories = [
-
-    {
-        id: "loans",
-        icon: "🏠",
-        iconClass: "loans",
-        title: "Loans",
-        description: "EMI, Home Loan, Personal Loan and more"
-    },
-
-    {
-        id: "investment",
-        icon: "📈",
-        iconClass: "investment",
-        title: "Investment",
-        description: "SIP, PPF, FD, CAGR and more"
-    },
-
-    {
-        id: "tax",
-        icon: "🧾",
-        iconClass: "tax",
-        title: "Tax",
-        description: "Income Tax, GST, TDS and more"
-    },
-
-    {
-        id: "health",
-        icon: "♥",
-        iconClass: "health",
-        title: "Health",
-        description: "BMI, Calorie, BMR and more"
-    },
-
-    {
-        id: "business",
-        icon: "💼",
-        iconClass: "business",
-        title: "Business",
-        description: "Profit, Margin, ROI and more"
-    },
-
-    {
-        id: "math",
-        icon: "🔢",
-        iconClass: "math",
-        title: "Math",
-        description: "Percentage, Ratio, Age and more"
-    },
-
-    {
-        id: "converter",
-        icon: "↻",
-        iconClass: "converter",
-        title: "Converter",
-        description: "Unit, Currency, Date and more"
-    },
-
-    {
-        id: "more",
-        icon: "▦",
-        iconClass: "more",
-        title: "More",
-        description: "Explore all calculators and tools"
-    }
-
-];
 
 
 /* =========================================================

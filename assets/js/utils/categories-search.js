@@ -21,28 +21,23 @@ import {
     ROUTES
 } from "../routes.js";
 
+import {
+    categories
+} from "../data/categories.js";
+
 
 /* =========================================================
    CATEGORY LABELS
 ========================================================= */
 
-const categoryLabels = {
-
-    loans: "Loans",
-
-    investment: "Investment",
-
-    tax: "Tax",
-
-    health: "Health",
-
-    business: "Business",
-
-    math: "Math",
-
-    converter: "Converter"
-
-};
+const categoryLabels = Object.fromEntries(
+    categories.map(
+        category => [
+            category.id,
+            category.title
+        ]
+    )
+);
 
 
 /* =========================================================

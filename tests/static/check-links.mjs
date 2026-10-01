@@ -169,12 +169,14 @@ for (const key of ["categories", "loans", "articles", "about", "contact", "terms
 /* ---------------------------------------------------------------------------------------------- */
 const calcMod = await import(pathToFileURL(path.join(REPO, "assets/js/data/calculators.js")).href + "?c=1");
 const artMod = await import(pathToFileURL(path.join(REPO, "assets/js/article-registry.js")).href + "?c=1");
-const calcRegistrySrc = stripComments(read("assets/js/calculator-registry.js"));
+const calcRegistrySrc = stripComments(read("assets/js/data/calculators.js")); // loaders live in the catalog (M1)
 const articleLoaderSrc = stripComments(read("assets/js/data/articles/article-registry.js"));
 
 let routeChecks = 0;
 for (const c of calcMod.calculators) {
-  const built = c.available === true;
+  const built = c.status === "published";
+  if (!["published", "coming-soon"].includes(c.status)) fail("registry", `calculator "${c.id}": status must be "published" or "coming-soon" (got ${JSON.stringify(c.status)})`);
+  if (c.available !== built) fail("registry", `calculator "${c.id}": available (${c.available}) disagrees with status "${c.status}"`);
   const route = rootRoutes.calculator(c.id);
   const shell = checkUrlPath(route.slice(1));
   const loaderMatch = calcRegistrySrc.match(new RegExp(`"${c.id}"\\s*:\\s*\\(\\)\\s*=>\\s*import\\(\\s*"([^"]+)"`));
@@ -182,11 +184,11 @@ for (const c of calcMod.calculators) {
   if (built) {
     if (!shell.ok) fail("registry", `built calculator "${c.id}": no page at ${route}`);
     if (!liveUrlSet.has(route)) fail("registry", `built calculator "${c.id}": ${route} missing from URL inventory`);
-    if (!loaderMatch) fail("registry", `built calculator "${c.id}": no loader in calculator-registry.js`);
-    else if (!checkPath(resolveRef("assets/js/calculator-registry.js", loaderMatch[1])).ok) fail("registry", `built calculator "${c.id}": loader imports missing module ${loaderMatch[1]}`);
+    if (!loaderMatch) fail("registry", `built calculator "${c.id}": no loader in data/calculators.js`);
+    else if (!checkPath(resolveRef("assets/js/data/calculators.js", loaderMatch[1])).ok) fail("registry", `built calculator "${c.id}": loader imports missing module ${loaderMatch[1]}`);
     if (c.href !== route) fail("registry", `built calculator "${c.id}": catalogue href "${c.href}" differs from ROUTES.calculator "${route}"`);
   } else {
-    if (shell.ok) fail("registry", `Coming soon calculator "${c.id}" already has a page at ${route} (mark it available or remove the page)`);
+    if (shell.ok) fail("registry", `Coming soon calculator "${c.id}" already has a page at ${route} (mark it published or remove the page)`);
     if (loaderMatch) fail("registry", `Coming soon calculator "${c.id}" has a loader but is not available`);
   }
 }
@@ -208,7 +210,7 @@ for (const a of artMod.articleRegistry) {
 }
 // every live HTML shell under calculators/ and articles/ must be in a registry (no orphan pages)
 for (const p of inventory.live) {
-  if (p.type === "calculator" && !calcMod.calculators.some((c) => c.available === true && c.id === p.slug)) fail("registry", `orphan page ${p.url}: no 'available' calculator "${p.slug}" in data/calculators.js`);
+  if (p.type === "calculator" && !calcMod.calculators.some((c) => c.status === "published" && c.id === p.slug)) fail("registry", `orphan page ${p.url}: no 'available' calculator "${p.slug}" in data/calculators.js`);
   if (p.type === "article" && !artMod.articleRegistry.some((a) => a.published === true && a.topic === p.topic && a.slug === p.slug)) fail("registry", `orphan page ${p.url}: no published article in article-registry.js`);
 }
 

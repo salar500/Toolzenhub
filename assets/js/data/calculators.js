@@ -2,11 +2,18 @@
    ToolZen Hub
    Calculator Catalog
 
+   THE authoritative source of calculator identity.
+
    Responsibilities:
-   - Calculator metadata
-   - Category association
-   - Calculator type
+   - Calculator identity (id = URL slug), title, description
+   - Category association and section
+   - Availability: status "published" | "coming-soon"
    - Calculator URL
+   - Dynamic loaders for implemented calculators
+
+   Presentation choices (which tools the home page features,
+   in which order, with which short copy) live with the
+   component that shows them and reference tool ids.
 ========================================================= */
 
 import {
@@ -18,7 +25,7 @@ import {
    Calculator Catalog
 ========================================================= */
 
-export const calculators = [
+const catalog = [
 
     /* =====================================================
        LOANS
@@ -26,7 +33,7 @@ export const calculators = [
 
     {
         id: "loan-comparison",
-        available: true,
+        status: "published",
         category: "loans",
         type: "advanced",
         icon: "⚖",
@@ -38,7 +45,7 @@ export const calculators = [
 
     {
         id: "emi",
-        available: true,
+        status: "published",
         category: "loans",
         type: "simple",
         icon: "▦",
@@ -50,6 +57,7 @@ export const calculators = [
 
     {
         id: "home-loan",
+        status: "coming-soon",
         category: "loans",
         type: "simple",
         icon: "⌂",
@@ -61,6 +69,7 @@ export const calculators = [
 
     {
         id: "personal-loan",
+        status: "coming-soon",
         category: "loans",
         type: "simple",
         icon: "♙",
@@ -72,6 +81,7 @@ export const calculators = [
 
     {
         id: "loan-eligibility",
+        status: "coming-soon",
         category: "loans",
         type: "simple",
         icon: "▤",
@@ -83,6 +93,7 @@ export const calculators = [
 
     {
         id: "balance-transfer",
+        status: "coming-soon",
         category: "loans",
         type: "simple",
         icon: "⟳",
@@ -94,6 +105,7 @@ export const calculators = [
 
     {
         id: "interest",
+        status: "coming-soon",
         category: "loans",
         type: "simple",
         icon: "%",
@@ -105,6 +117,7 @@ export const calculators = [
 
     {
         id: "prepayment",
+        status: "coming-soon",
         category: "loans",
         type: "simple",
         icon: "₹",
@@ -121,6 +134,7 @@ export const calculators = [
 
     {
         id: "sip",
+        status: "coming-soon",
         category: "investment",
         type: "simple",
         icon: "◈",
@@ -132,6 +146,7 @@ export const calculators = [
 
     {
         id: "ppf",
+        status: "coming-soon",
         category: "investment",
         type: "simple",
         icon: "₹",
@@ -143,6 +158,7 @@ export const calculators = [
 
     {
         id: "fd",
+        status: "coming-soon",
         category: "investment",
         type: "simple",
         icon: "▣",
@@ -154,6 +170,7 @@ export const calculators = [
 
     {
         id: "cagr",
+        status: "coming-soon",
         category: "investment",
         type: "simple",
         icon: "↗",
@@ -170,6 +187,7 @@ export const calculators = [
 
     {
         id: "gst",
+        status: "coming-soon",
         category: "tax",
         type: "simple",
         icon: "%",
@@ -181,6 +199,7 @@ export const calculators = [
 
     {
         id: "income-tax",
+        status: "coming-soon",
         category: "tax",
         type: "simple",
         icon: "₹",
@@ -197,6 +216,7 @@ export const calculators = [
 
     {
         id: "bmi",
+        status: "coming-soon",
         category: "health",
         type: "simple",
         icon: "⚖",
@@ -208,6 +228,7 @@ export const calculators = [
 
     {
         id: "calorie",
+        status: "coming-soon",
         category: "health",
         type: "simple",
         icon: "◉",
@@ -219,6 +240,7 @@ export const calculators = [
 
     {
         id: "bmr",
+        status: "coming-soon",
         category: "health",
         type: "simple",
         icon: "♨",
@@ -235,6 +257,7 @@ export const calculators = [
 
     {
         id: "profit",
+        status: "coming-soon",
         category: "business",
         type: "simple",
         icon: "₹",
@@ -246,6 +269,7 @@ export const calculators = [
 
     {
         id: "margin",
+        status: "coming-soon",
         category: "business",
         type: "simple",
         icon: "%",
@@ -257,6 +281,7 @@ export const calculators = [
 
     {
         id: "roi",
+        status: "coming-soon",
         category: "business",
         type: "simple",
         icon: "↗",
@@ -273,6 +298,7 @@ export const calculators = [
 
     {
         id: "percentage",
+        status: "coming-soon",
         category: "math",
         type: "simple",
         icon: "%",
@@ -284,6 +310,7 @@ export const calculators = [
 
     {
         id: "ratio",
+        status: "coming-soon",
         category: "math",
         type: "simple",
         icon: "÷",
@@ -295,6 +322,7 @@ export const calculators = [
 
     {
         id: "age",
+        status: "coming-soon",
         category: "math",
         type: "simple",
         icon: "◷",
@@ -311,6 +339,7 @@ export const calculators = [
 
     {
         id: "unit-converter",
+        status: "coming-soon",
         category: "converter",
         type: "simple",
         icon: "↔",
@@ -322,6 +351,7 @@ export const calculators = [
 
     {
         id: "currency",
+        status: "coming-soon",
         category: "converter",
         type: "simple",
         icon: "¤",
@@ -333,6 +363,7 @@ export const calculators = [
 
     {
         id: "date",
+        status: "coming-soon",
         category: "converter",
         type: "simple",
         icon: "▣",
@@ -343,6 +374,58 @@ export const calculators = [
     }
 
 ];
+
+
+/* =========================================================
+   Section
+========================================================= */
+
+export const CALCULATORS_SECTION = "Calculators";
+
+
+/* =========================================================
+   Loaders (implemented calculators only)
+
+   Loaded on demand with import(): a calculator's JavaScript is
+   fetched only when its page is opened.
+========================================================= */
+
+const loaders = {
+
+    "loan-comparison": () =>
+        import("../../../loans/loan-comparison/index.js"),
+
+    "emi": () =>
+        import("../calculators/emi/index.js")
+
+};
+
+
+/* =========================================================
+   Calculators
+   Catalog entries + derived fields:
+   - section
+   - available  (status === "published"; read by cards/search)
+   - loader     (present only for published tools)
+========================================================= */
+
+export const calculators = catalog.map(
+    calculator => {
+
+        const published =
+            calculator.status === "published";
+
+        return {
+            ...calculator,
+            section: CALCULATORS_SECTION,
+            available: published,
+            ...(published && loaders[calculator.id]
+                ? { loader: loaders[calculator.id] }
+                : {})
+        };
+
+    }
+);
 
 
 /* =========================================================

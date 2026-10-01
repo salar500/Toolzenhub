@@ -87,7 +87,7 @@ async function loadComingSoon() {
   const calcMod = await import(pathToFileURL(path.join(REPO, "assets/js/data/calculators.js")).href);
   const artMod = await import(pathToFileURL(path.join(REPO, "assets/js/article-registry.js")).href);
   const calculators = calcMod.calculators
-    .filter((c) => c.available !== true)
+    .filter((c) => c.status !== "published")
     .map((c) => ({
       kind: "calculator",
       id: c.id,
@@ -108,7 +108,7 @@ async function loadComingSoon() {
       hasHtmlFile: fs.existsSync(path.join(REPO, "articles", a.topic, a.slug, "index.html")),
       mustReturn404: true,
     }));
-  const built = calcMod.calculators.filter((c) => c.available === true).map((c) => c.id);
+  const built = calcMod.calculators.filter((c) => c.status === "published").map((c) => c.id);
   const published = artMod.articleRegistry.filter((a) => a.published === true).map((a) => `${a.topic}/${a.slug}`);
   return { calculators, articles, built, published };
 }
