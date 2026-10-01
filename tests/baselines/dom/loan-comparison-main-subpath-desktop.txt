@@ -1,0 +1,256 @@
+--- match 1 of 2 ---
+section.loan-comparison-tool
+  div.loan-comparison-grid
+    article.loan-card
+      div.loan-card-header
+        div
+          h2 "Loan A"
+          span.loan-badge "Option A"
+      div.loan-field
+        label "Loan Amount"
+        div.loan-input-row
+          select#a-amount {100 options: "1"…"100", selected="50"}
+          select#a-unit {2 options: "Lakhs"…"Crores", selected="Lakhs"}
+        div.loan-slider-row
+          input#a-amount-slider.loan-slider [max="100" min="1" step="1" type="range" value="50"]
+        div.loan-range-labels
+          span "1"
+          span "100"
+        small#a-amount-display "₹50,00,000"
+      div.loan-field
+        label "Interest Rate (% p.a.)"
+        div.loan-number-input
+          input#a-rate [max="25" min="0" step="0.01" type="number" value="8.5"]
+          span "%"
+        input#a-rate-slider.loan-slider [max="25" min="0" step="0.01" type="range" value="8.5"]
+        div.loan-range-labels
+          span "0%"
+          span "25%"
+      div.loan-field
+        label "Tenure (Years)"
+        input#a-years.loan-years-input [max="100" min="1" step="1" type="number" value="20"]
+        input#a-years-slider.loan-slider [max="100" min="1" step="1" type="range" value="20"]
+        div.loan-range-labels
+          span "1"
+          span "100"
+    div.loan-vs "VS"
+    article.loan-card
+      div.loan-card-header
+        div
+          h2 "Loan B"
+          span.loan-badge "Option B"
+      div.loan-field
+        label "Loan Amount"
+        div.loan-input-row
+          select#b-amount {100 options: "1"…"100", selected="50"}
+          select#b-unit {2 options: "Lakhs"…"Crores", selected="Lakhs"}
+        div.loan-slider-row
+          input#b-amount-slider.loan-slider [max="100" min="1" step="1" type="range" value="50"]
+        div.loan-range-labels
+          span "1"
+          span "100"
+        small#b-amount-display "₹50,00,000"
+      div.loan-field
+        label "Interest Rate (% p.a.)"
+        div.loan-number-input
+          input#b-rate [max="25" min="0" step="0.01" type="number" value="9"]
+          span "%"
+        input#b-rate-slider.loan-slider [max="25" min="0" step="0.01" type="range" value="9"]
+        div.loan-range-labels
+          span "0%"
+          span "25%"
+      div.loan-field
+        label "Tenure (Years)"
+        input#b-years.loan-years-input [max="100" min="1" step="1" type="number" value="20"]
+        input#b-years-slider.loan-slider [max="100" min="1" step="1" type="range" value="20"]
+        div.loan-range-labels
+          span "1"
+          span "100"
+  div.loan-actions
+    button#compare-loans.loan-primary-button [type="button"] "Compare Loans"
+    button#reset-loans.loan-reset-button [type="button"] "↻ Reset"
+--- match 2 of 2 ---
+section#comparison-result.loan-results
+  div.loan-summary-grid
+    div.loan-summary-card.loan-summary-winner
+      div.loan-summary-icon "🏆"
+      span "Lower Interest Cost"
+      strong "Loan A"
+      small "Saves ₹3,82,833 in interest"
+    div.loan-summary-card
+      span "EMI (Monthly)"
+      div.loan-summary-values
+        div
+          small "Loan A"
+          strong "₹43,391"
+        div
+          small "Loan B"
+          strong "₹44,986"
+    div.loan-summary-card
+      span "Total Interest"
+      div.loan-summary-values
+        div
+          small "Loan A"
+          strong "₹54,13,879"
+        div
+          small "Loan B"
+          strong "₹57,96,711"
+    div.loan-summary-card
+      span "Total Repayment"
+      div.loan-summary-values
+        div
+          small "Loan A"
+          strong "₹1,04,13,879"
+        div
+          small "Loan B"
+          strong "₹1,07,96,711"
+    div.loan-summary-card
+      span "Interest Difference"
+      strong.loan-saving-value "₹3,82,833"
+      small "Potential interest saving"
+  div.loan-amortization-grid
+    div.loan-content-card
+      h3 "First 12 Months — Loan A"
+      div.loan-table-scroll
+        table.loan-amortization-table
+          thead
+            tr
+              th "Month"
+              th "Principal"
+              th "Interest"
+              th "Balance"
+          tbody
+            tr
+              td "1"
+              td "₹7,974"
+              td "₹35,417"
+              td "₹49,92,026"
+            tr
+              td "2"
+              td "₹8,031"
+              td "₹35,360"
+              td "₹49,83,995"
+            tr
+              td "3"
+              td "₹8,088"
+              td "₹35,303"
+              td "₹49,75,907"
+            tr
+              td "4"
+              td "₹8,145"
+              td "₹35,246"
+              td "₹49,67,762"
+            tr
+              td "5"
+              td "₹8,203"
+              td "₹35,188"
+              td "₹49,59,559"
+            tr
+              td "6"
+              td "₹8,261"
+              td "₹35,130"
+              td "₹49,51,298"
+            tr
+              td "7"
+              td "₹8,319"
+              td "₹35,072"
+              td "₹49,42,978"
+            tr
+              td "8"
+              td "₹8,378"
+              td "₹35,013"
+              td "₹49,34,600"
+            tr
+              td "9"
+              td "₹8,438"
+              td "₹34,953"
+              td "₹49,26,162"
+            tr
+              td "10"
+              td "₹8,498"
+              td "₹34,894"
+              td "₹49,17,665"
+            tr
+              td "11"
+              td "₹8,558"
+              td "₹34,833"
+              td "₹49,09,107"
+            tr
+              td "12"
+              td "₹8,618"
+              td "₹34,773"
+              td "₹49,00,489"
+      button.loan-view-link [data-loan="a" type="button"] "View Full Amortization Schedule →"
+    div.loan-content-card
+      h3 "First 12 Months — Loan B"
+      div.loan-table-scroll
+        table.loan-amortization-table
+          thead
+            tr
+              th "Month"
+              th "Principal"
+              th "Interest"
+              th "Balance"
+          tbody
+            tr
+              td "1"
+              td "₹7,486"
+              td "₹37,500"
+              td "₹49,92,514"
+            tr
+              td "2"
+              td "₹7,542"
+              td "₹37,444"
+              td "₹49,84,971"
+            tr
+              td "3"
+              td "₹7,599"
+              td "₹37,387"
+              td "₹49,77,372"
+            tr
+              td "4"
+              td "₹7,656"
+              td "₹37,330"
+              td "₹49,69,716"
+            tr
+              td "5"
+              td "₹7,713"
+              td "₹37,273"
+              td "₹49,62,003"
+            tr
+              td "6"
+              td "₹7,771"
+              td "₹37,215"
+              td "₹49,54,232"
+            tr
+              td "7"
+              td "₹7,830"
+              td "₹37,157"
+              td "₹49,46,402"
+            tr
+              td "8"
+              td "₹7,888"
+              td "₹37,098"
+              td "₹49,38,514"
+            tr
+              td "9"
+              td "₹7,947"
+              td "₹37,039"
+              td "₹49,30,566"
+            tr
+              td "10"
+              td "₹8,007"
+              td "₹36,979"
+              td "₹49,22,559"
+            tr
+              td "11"
+              td "₹8,067"
+              td "₹36,919"
+              td "₹49,14,492"
+            tr
+              td "12"
+              td "₹8,128"
+              td "₹36,859"
+              td "₹49,06,364"
+      button.loan-view-link [data-loan="b" type="button"] "View Full Amortization Schedule →"
+  p.loan-disclaimer "Figures are approximate and for illustration purposes. Actual loan costs may vary dependin…"

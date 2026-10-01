@@ -1,0 +1,8 @@
+div.calculator-breadcrumb
+  a [href="{ROOT}"] "Home"
+  span "›"
+  a [href="{ROOT}categories.html"] "Calculators"
+  span "›"
+  a [href="{ROOT}loans.html"] "loans"
+  span "›"
+  strong "Loan Comparison Calculator"

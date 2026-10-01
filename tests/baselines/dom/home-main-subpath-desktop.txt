@@ -1,0 +1,123 @@
+main#app
+  section#hero
+    section.hero
+      div.hero__background
+      div.container
+        div.hero__grid
+          div.hero__content
+            div.hero__eyebrow
+              span "100% Free"
+              span.hero__dot "•"
+              span "Accurate"
+              span.hero__dot "•"
+              span "Easy to Use"
+            h1.hero__title "Smart Financial &"
+              span.hero__title-highlight "Everyday Calculators"
+            p.hero__description "Calculate, compare and plan better for a smarter life."
+            form#calculator-search.hero__search [role="search"]
+              span.hero__search-icon [aria-hidden="true"] "⌕"
+              input [aria-label="Search calculators" name="q" placeholder="Search calculators..." type="search"]
+              button.hero__search-button [aria-label="Search calculators" type="submit"] "⌕"
+            div#hero-calculator-search-results.calculator-search-results [aria-live="polite"]
+          div.hero__visual
+            img.hero__image [alt="Financial calculators, charts and money" loading="eager" src="{ROOT}assets/Images/hero-calculators.png"]
+  section#categories.section
+    section.categories-section
+      div.container
+        div.section-header
+          h2.section-title "Browse Categories"
+          a.section-link [href="{ROOT}categories.html"] "View all categories"
+            span [aria-hidden="true"] "→"
+        div.category-grid
+          a.category-card [href="{ROOT}categories.html"]
+            div.category-card__icon.category-card__icon--calculators "🧮"
+            div.category-card__content
+              h3 "Calculators"
+              p "Loans, Investment, Tax, Health, Math and more"
+          a.category-card [href="{ROOT}categories.html#more"]
+            div.category-card__icon.category-card__icon--more "▦"
+            div.category-card__content
+              h3 "More"
+              p "Explore all ToolZen Hub tools"
+  section#popular-calculators.section
+    section.popular-section
+      div.container
+        div.section-header
+          h2.section-title "Popular Calculators"
+          a.section-link [href="{ROOT}calculators.html"] "View all calculators"
+            span [aria-hidden="true"] "→"
+        div.calculator-grid
+          a.calculator-card [href="{ROOT}calculators/loan-comparison/"]
+            div.calculator-card__icon.calculator-card__icon--green "⚖"
+            div.calculator-card__content
+              h3 "Loan Comparison"
+              p "Compare loans side by side"
+            span.calculator-card__arrow [aria-hidden="true"] "→"
+          a.calculator-card [href="{ROOT}calculators/emi/"]
+            div.calculator-card__icon.calculator-card__icon--blue "▣"
+            div.calculator-card__content
+              h3 "EMI Calculator"
+              p "Calculate your EMI instantly"
+            span.calculator-card__arrow [aria-hidden="true"] "→"
+          div.calculator-card.calculator-card--soon [aria-disabled="true"]
+            div.calculator-card__icon.calculator-card__icon--yellow "♜"
+            div.calculator-card__content
+              h3 "SIP Calculator"
+              p "Plan your SIP investments"
+              span.coming-soon-badge "Coming soon"
+          div.calculator-card.calculator-card--soon [aria-disabled="true"]
+            div.calculator-card__icon.calculator-card__icon--purple "▤"
+            div.calculator-card__content
+              h3 "GST Calculator"
+              p "Calculate GST easily and accurately"
+              span.coming-soon-badge "Coming soon"
+          div.calculator-card.calculator-card--soon [aria-disabled="true"]
+            div.calculator-card__icon.calculator-card__icon--pink "⌂"
+            div.calculator-card__content
+              h3 "Home Loan Calculator"
+              p "Calculate your home loan eligibility"
+              span.coming-soon-badge "Coming soon"
+          div.calculator-card.calculator-card--soon [aria-disabled="true"]
+            div.calculator-card__icon.calculator-card__icon--teal "♙"
+            div.calculator-card__content
+              h3 "BMI Calculator"
+              p "Check your body mass index"
+              span.coming-soon-badge "Coming soon"
+  section#latest-articles.section
+    section.articles-section
+      div.container
+        div.section-header
+          h2.section-title "Latest Articles"
+          a.section-link [href="{ROOT}articles.html"] "View all articles"
+            span [aria-hidden="true"] "→"
+        div.articles-grid
+          a.article-card [href="{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"]
+            div.article-card__image
+              img [alt="House model on desk" loading="lazy" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80"]
+            div.article-card__content
+              div.article-card__category "Loans"
+              h3.article-card__title "How to Reduce Your Home Loan Interest"
+              p.article-card__description "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save…"
+              div.article-card__footer
+                span.article-card__read "Read article"
+                span.article-card__arrow [aria-hidden="true"] "→"
+          a.article-card [href="{ROOT}articles/loan-comparison/emi-vs-total-interest/"]
+            div.article-card__image
+              img [alt="Loan and financial planning" loading="lazy" src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=800&q=80"]
+            div.article-card__content
+              div.article-card__category "Loans"
+              h3.article-card__title "EMI vs Total Interest: What Should You Compare?"
+              p.article-card__description "Understand why EMI alone does not tell the complete story when comparing loan options and …"
+              div.article-card__footer
+                span.article-card__read "Read article"
+                span.article-card__arrow [aria-hidden="true"] "→"
+          a.article-card [href="{ROOT}articles/loan-comparison/fixed-vs-floating-interest-rates/"]
+            div.article-card__image
+              img [alt="Financial planning and investment" loading="lazy" src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"]
+            div.article-card__content
+              div.article-card__category "Loans"
+              h3.article-card__title "Fixed vs Floating Interest Rates"
+              p.article-card__description "Understand the difference between fixed and floating interest rates before choosing a loan…"
+              div.article-card__footer
+                span.article-card__read "Read article"
+                span.article-card__arrow [aria-hidden="true"] "→"

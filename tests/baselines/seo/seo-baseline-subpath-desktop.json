@@ -1,0 +1,791 @@
+{
+  "(404 document)": {
+    "runtime": {
+      "title": "Page Not Found | ToolZen Hub",
+      "description": "The page you are looking for could not be found on ToolZen Hub.",
+      "canonical": null,
+      "robots": "noindex",
+      "openGraph": {},
+      "twitter": {},
+      "jsonLd": [],
+      "h1": [
+        "Page not found"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Page Not Found | ToolZen Hub",
+      "description": "The page you are looking for could not be found on ToolZen Hub.",
+      "canonical": null,
+      "robots": "noindex",
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 1,
+      "visibleTextChars": 269
+    }
+  },
+  "/": {
+    "runtime": {
+      "title": "ToolZen Hub | Smart Financial & Everyday Calculators",
+      "description": "Free online calculators for finance, investment, tax, health, business and more.",
+      "canonical": null,
+      "robots": null,
+      "openGraph": {},
+      "twitter": {},
+      "jsonLd": [],
+      "h1": [
+        "Smart Financial & Everyday Calculators"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "ToolZen Hub | Smart Financial & Everyday Calculators",
+      "description": "Free online calculators for finance, investment, tax, health, business and more.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 0,
+      "visibleTextChars": 0
+    }
+  },
+  "/about.html": {
+    "runtime": {
+      "title": "About ToolZen Hub | Smart Tools, Smarter You",
+      "description": "Learn about ToolZen Hub, our mission and the free calculators and useful tools we provide.",
+      "canonical": null,
+      "robots": null,
+      "openGraph": {},
+      "twitter": {},
+      "jsonLd": [],
+      "h1": [
+        "Smart Tools, Smarter You"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "About ToolZen Hub | Smart Tools, Smarter You",
+      "description": "Learn about ToolZen Hub, our mission and the free calculators and useful tools we provide.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 0,
+      "visibleTextChars": 0
+    }
+  },
+  "/articles.html": {
+    "runtime": {
+      "title": "Articles & Guides | ToolZen Hub",
+      "description": "Helpful guides, tips and insights about finance, investment, tax, business, health and everyday calculations.",
+      "canonical": null,
+      "robots": null,
+      "openGraph": {},
+      "twitter": {},
+      "jsonLd": [],
+      "h1": [
+        "Articles & Guides"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Articles & Guides | ToolZen Hub",
+      "description": "Helpful guides, tips and insights about finance, investment, tax, business, health and everyday calculations.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 0,
+      "visibleTextChars": 0
+    }
+  },
+  "/articles/loan-comparison/choose-right-loan-tenure/": {
+    "runtime": {
+      "title": "How to Choose the Right Loan Tenure | ToolZen Hub",
+      "description": "Learn how to balance monthly affordability with total borrowing cost when choosing a loan tenure.",
+      "canonical": "{ORIGIN}{ROOT}articles/loan-comparison/choose-right-loan-tenure/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Learn how to balance monthly affordability with total borrowing cost when choosing a loan tenure.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How to Choose the Right Loan Tenure | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "{ORIGIN}{ROOT}articles/loan-comparison/choose-right-loan-tenure/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Learn how to balance monthly affordability with total borrowing cost when choosing a loan tenure.",
+        "twitter:title": "How to Choose the Right Loan Tenure | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        }
+      ],
+      "h1": [
+        "How to Choose the Right Loan Tenure"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "../../../favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How to Choose the Right Loan Tenure | ToolZen Hub",
+      "description": "Learn how to balance monthly affordability with total borrowing cost when choosing a loan tenure.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 0,
+      "visibleTextChars": 0
+    }
+  },
+  "/articles/loan-comparison/emi-vs-total-interest/": {
+    "runtime": {
+      "title": "EMI vs Total Interest: What Should You Compare? | ToolZen Hub",
+      "description": "Understand why EMI alone does not tell the complete story when comparing loan options and borrowing costs.",
+      "canonical": "{ORIGIN}{ROOT}articles/loan-comparison/emi-vs-total-interest/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Understand why EMI alone does not tell the complete story when comparing loan options and borrowing costs.",
+        "og:image": "{ORIGIN}{ROOT}assets/Images/articles/emi-vs-total-interest.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "EMI vs Total Interest: What Should You Compare? | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "{ORIGIN}{ROOT}articles/loan-comparison/emi-vs-total-interest/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Understand why EMI alone does not tell the complete story when comparing loan options and borrowing costs.",
+        "twitter:image": "{ORIGIN}{ROOT}assets/Images/articles/emi-vs-total-interest.png",
+        "twitter:title": "EMI vs Total Interest: What Should You Compare? | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        }
+      ],
+      "h1": [
+        "EMI vs Total Interest: What Should You Compare?"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "../../../favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "EMI vs Total Interest: What Should You Compare? | ToolZen Hub",
+      "description": "Understand why EMI alone does not tell the complete story when comparing loan options and borrowing costs.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 0,
+      "visibleTextChars": 0
+    }
+  },
+  "/articles/loan-comparison/fixed-vs-floating-interest-rates/": {
+    "runtime": {
+      "title": "Fixed vs Floating Interest Rates | ToolZen Hub",
+      "description": "Understand the difference between fixed and floating interest rates before choosing a loan.",
+      "canonical": "{ORIGIN}{ROOT}articles/loan-comparison/fixed-vs-floating-interest-rates/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Understand the difference between fixed and floating interest rates before choosing a loan.",
+        "og:image": "{ORIGIN}{ROOT}assets/Images/articles/fixed-vs-floating-interest-rates.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Fixed vs Floating Interest Rates | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "{ORIGIN}{ROOT}articles/loan-comparison/fixed-vs-floating-interest-rates/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Understand the difference between fixed and floating interest rates before choosing a loan.",
+        "twitter:image": "{ORIGIN}{ROOT}assets/Images/articles/fixed-vs-floating-interest-rates.png",
+        "twitter:title": "Fixed vs Floating Interest Rates | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        }
+      ],
+      "h1": [
+        "Fixed vs Floating Interest Rates"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "../../../favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Fixed vs Floating Interest Rates | ToolZen Hub",
+      "description": "Understand the difference between fixed and floating interest rates before choosing a loan.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 0,
+      "visibleTextChars": 0
+    }
+  },
+  "/articles/loan-comparison/how-to-reduce-home-loan-interest/": {
+    "runtime": {
+      "title": "How to Reduce Your Home Loan Interest | ToolZen Hub",
+      "description": "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
+      "canonical": "{ORIGIN}{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
+        "og:image": "{ORIGIN}{ROOT}assets/Images/articles/how-to-reduce-home-loan-interest.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How to Reduce Your Home Loan Interest | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "{ORIGIN}{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
+        "twitter:image": "{ORIGIN}{ROOT}assets/Images/articles/how-to-reduce-home-loan-interest.png",
+        "twitter:title": "How to Reduce Your Home Loan Interest | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        }
+      ],
+      "h1": [
+        "How to Reduce Your Home Loan Interest"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "../../../favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How to Reduce Your Home Loan Interest | ToolZen Hub",
+      "description": "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 0,
+      "visibleTextChars": 0
+    }
+  },
+  "/articles/loan-comparison/loan-tenure-total-interest/": {
+    "runtime": {
+      "title": "How Loan Tenure Affects Total Interest | ToolZen Hub",
+      "description": "See why choosing a longer or shorter loan tenure can significantly affect your total interest cost.",
+      "canonical": "{ORIGIN}{ROOT}articles/loan-comparison/loan-tenure-total-interest/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "See why choosing a longer or shorter loan tenure can significantly affect your total interest cost.",
+        "og:image": "{ORIGIN}{ROOT}assets/Images/articles/loan-tenure-total-interest.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How Loan Tenure Affects Total Interest | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "{ORIGIN}{ROOT}articles/loan-comparison/loan-tenure-total-interest/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "See why choosing a longer or shorter loan tenure can significantly affect your total interest cost.",
+        "twitter:image": "{ORIGIN}{ROOT}assets/Images/articles/loan-tenure-total-interest.png",
+        "twitter:title": "How Loan Tenure Affects Total Interest | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        }
+      ],
+      "h1": [
+        "How Loan Tenure Affects Total Interest"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "../../../favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How Loan Tenure Affects Total Interest | ToolZen Hub",
+      "description": "See why choosing a longer or shorter loan tenure can significantly affect your total interest cost.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 0,
+      "visibleTextChars": 0
+    }
+  },
+  "/articles/loan-comparison/what-is-loan-prepayment/": {
+    "runtime": {
+      "title": "What Is Loan Prepayment? | ToolZen Hub",
+      "description": "Understand how loan prepayment works and how paying down your principal can potentially reduce interest.",
+      "canonical": "{ORIGIN}{ROOT}articles/loan-comparison/what-is-loan-prepayment/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Understand how loan prepayment works and how paying down your principal can potentially reduce interest.",
+        "og:image": "{ORIGIN}{ROOT}assets/Images/articles/what-is-loan-prepayment.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "What Is Loan Prepayment? | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "{ORIGIN}{ROOT}articles/loan-comparison/what-is-loan-prepayment/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Understand how loan prepayment works and how paying down your principal can potentially reduce interest.",
+        "twitter:image": "{ORIGIN}{ROOT}assets/Images/articles/what-is-loan-prepayment.png",
+        "twitter:title": "What Is Loan Prepayment? | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        }
+      ],
+      "h1": [
+        "What Is Loan Prepayment?"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "../../../favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "What Is Loan Prepayment? | ToolZen Hub",
+      "description": "Understand how loan prepayment works and how paying down your principal can potentially reduce interest.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 0,
+      "visibleTextChars": 0
+    }
+  },
+  "/calculators.html": {
+    "runtime": {
+      "title": "All Calculators | ToolZen Hub",
+      "description": "Explore all ToolZen Hub calculators for finance, health, business, math, investment and everyday calculations.",
+      "canonical": null,
+      "robots": null,
+      "openGraph": {},
+      "twitter": {},
+      "jsonLd": [],
+      "h1": [
+        "All Calculators"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#0b9f58",
+      "favicon": "favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "All Calculators | ToolZen Hub",
+      "description": "Explore all ToolZen Hub calculators for finance, health, business, math, investment and everyday calculations.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 1,
+      "visibleTextChars": 437
+    }
+  },
+  "/calculators/emi/": {
+    "runtime": {
+      "title": "EMI Calculator | ToolZen Hub",
+      "description": "Calculate your monthly EMI, total interest and total repayment for a loan.",
+      "canonical": null,
+      "robots": null,
+      "openGraph": {},
+      "twitter": {},
+      "jsonLd": [],
+      "h1": [
+        "EMI Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "../../favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "EMI Calculator | ToolZen Hub",
+      "description": "Calculate your monthly EMI, total interest and total repayment for a loan.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 0,
+      "visibleTextChars": 0
+    }
+  },
+  "/calculators/loan-comparison/": {
+    "runtime": {
+      "title": "Loan Comparison Calculator | ToolZenHub",
+      "description": "Compare two loans by EMI, interest rate, total interest and total repayment with ToolZenHub.",
+      "canonical": null,
+      "robots": null,
+      "openGraph": {},
+      "twitter": {},
+      "jsonLd": [],
+      "h1": [
+        "Loan Comparison Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "../../favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Loan Comparison Calculator | ToolZenHub",
+      "description": "Compare two loans by EMI, interest rate, total interest and total repayment with ToolZenHub.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 0,
+      "visibleTextChars": 21
+    }
+  },
+  "/categories.html": {
+    "runtime": {
+      "title": "All Categories | ToolZen Hub",
+      "description": "Explore all ToolZen Hub calculators and smart tools for finance, health, business, math and everyday life.",
+      "canonical": null,
+      "robots": null,
+      "openGraph": {},
+      "twitter": {},
+      "jsonLd": [],
+      "h1": [
+        "All Categories"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#0b9f58",
+      "favicon": "favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "All Categories | ToolZen Hub",
+      "description": "Explore all ToolZen Hub calculators and smart tools for finance, health, business, math and everyday life.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 1,
+      "visibleTextChars": 157
+    }
+  },
+  "/contact.html": {
+    "runtime": {
+      "title": "Contact Us | ToolZen Hub",
+      "description": "Contact ToolZen Hub for questions, feedback, suggestions, or support.",
+      "canonical": null,
+      "robots": null,
+      "openGraph": {},
+      "twitter": {},
+      "jsonLd": [],
+      "h1": [
+        "Contact Us"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Contact Us | ToolZen Hub",
+      "description": "Contact ToolZen Hub for questions, feedback, suggestions, or support.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 1,
+      "visibleTextChars": 378
+    }
+  },
+  "/disclaimer.html": {
+    "runtime": {
+      "title": "Disclaimer | ToolZen Hub",
+      "description": "Read the ToolZen Hub Disclaimer.",
+      "canonical": null,
+      "robots": null,
+      "openGraph": {},
+      "twitter": {},
+      "jsonLd": [],
+      "h1": [
+        "Disclaimer"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Disclaimer | ToolZen Hub",
+      "description": "Read the ToolZen Hub Disclaimer.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 1,
+      "visibleTextChars": 1322
+    }
+  },
+  "/loans.html": {
+    "runtime": {
+      "title": "Loans Calculators | ToolZen Hub",
+      "description": "Calculate, compare and plan your loans with ToolZen Hub loan calculators including EMI, Home Loan, Personal Loan and more.",
+      "canonical": null,
+      "robots": null,
+      "openGraph": {},
+      "twitter": {},
+      "jsonLd": [],
+      "h1": [
+        "Loans Calculators"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#0b9f58",
+      "favicon": "favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Loans Calculators | ToolZen Hub",
+      "description": "Calculate, compare and plan your loans with ToolZen Hub loan calculators including EMI, Home Loan, Personal Loan and more.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 1,
+      "visibleTextChars": 245
+    }
+  },
+  "/privacy.html": {
+    "runtime": {
+      "title": "Privacy Policy | ToolZen Hub",
+      "description": "Read the ToolZen Hub Privacy Policy and learn how information is handled.",
+      "canonical": null,
+      "robots": null,
+      "openGraph": {},
+      "twitter": {},
+      "jsonLd": [],
+      "h1": [
+        "Privacy Policy"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Privacy Policy | ToolZen Hub",
+      "description": "Read the ToolZen Hub Privacy Policy and learn how information is handled.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 1,
+      "visibleTextChars": 1372
+    }
+  },
+  "/terms.html": {
+    "runtime": {
+      "title": "Terms & Conditions | ToolZen Hub",
+      "description": "Read the ToolZen Hub Terms and Conditions.",
+      "canonical": null,
+      "robots": null,
+      "openGraph": {},
+      "twitter": {},
+      "jsonLd": [],
+      "h1": [
+        "Terms & Conditions"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Terms & Conditions | ToolZen Hub",
+      "description": "Read the ToolZen Hub Terms and Conditions.",
+      "canonical": null,
+      "robots": null,
+      "hasOpenGraph": false,
+      "hasTwitter": false,
+      "hasJsonLd": false,
+      "h1Count": 1,
+      "visibleTextChars": 1432
+    }
+  }
+}

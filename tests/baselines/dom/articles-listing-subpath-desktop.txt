@@ -1,0 +1,177 @@
+div#articles-page
+  div.articles-container
+    div.articles-breadcrumb
+      div.calculator-breadcrumb
+        a [href="{ROOT}"] "Home"
+        span "›"
+        strong "Articles"
+  section.articles-hero
+    div.articles-container
+      div.articles-hero-inner
+        div.articles-hero-content
+          h1 "Articles & Guides"
+          p "Helpful guides, tips and insights to help you make smarter financial and everyday decision…"
+        div.articles-hero-visual
+          div.articles-hero-illustration
+            img.articles-hero-image [alt="Books, plant and coffee mug representing learning and financial growth" src="{ROOT}assets/Images/articles-hero.png"]
+  main.articles-container.articles-main
+    div.articles-filter-bar
+      button.active.article-filter [data-category="All" type="button"] "All Articles"
+      button.article-filter [data-category="loans" type="button"] "Loans"
+      button.article-filter [data-category="investment" type="button"] "Investment"
+      button.article-filter [data-category="tax" type="button"] "Tax"
+      button.article-filter [data-category="business" type="button"] "Business"
+      button.article-filter [data-category="health" type="button"] "Health"
+      button.article-filter [data-category="math" type="button"] "Math"
+      button.article-filter [data-category="converter" type="button"] "Converter"
+    div.articles-layout
+      section.articles-feed
+        div#articles-list.articles-list
+          article.article-card
+            a.article-card-image-link [aria-label="How to Reduce Your Home Loan Interest" data-article-id="1" href="{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"]
+              img.article-card-image [alt="House model on desk" loading="lazy" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80"]
+            div.article-card-content
+              div
+                span.article-card-category "Loans"
+                h2
+                  a [data-article-id="1" href="{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"] "How to Reduce Your Home Loan Interest"
+                p "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save…"
+              div.article-card-meta
+                div.article-meta-items
+                  span "📅 Aug 25, 2026"
+                  span "◷ 6 min read"
+                span.article-arrow [aria-hidden="true"] "→"
+          article.article-card
+            a.article-card-image-link [aria-label="EMI vs Total Interest: What Should You Compare?" data-article-id="2" href="{ROOT}articles/loan-comparison/emi-vs-total-interest/"]
+              img.article-card-image [alt="Loan and financial planning" loading="lazy" src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=800&q=80"]
+            div.article-card-content
+              div
+                span.article-card-category "Loans"
+                h2
+                  a [data-article-id="2" href="{ROOT}articles/loan-comparison/emi-vs-total-interest/"] "EMI vs Total Interest: What Should You Compare?"
+                p "Understand why EMI alone does not tell the complete story when comparing loan options and …"
+              div.article-card-meta
+                div.article-meta-items
+                  span "📅 Aug 25, 2026"
+                  span "◷ 5 min read"
+                span.article-arrow [aria-hidden="true"] "→"
+          article.article-card
+            a.article-card-image-link [aria-label="Fixed vs Floating Interest Rates" data-article-id="3" href="{ROOT}articles/loan-comparison/fixed-vs-floating-interest-rates/"]
+              img.article-card-image [alt="Financial planning and investment" loading="lazy" src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"]
+            div.article-card-content
+              div
+                span.article-card-category "Loans"
+                h2
+                  a [data-article-id="3" href="{ROOT}articles/loan-comparison/fixed-vs-floating-interest-rates/"] "Fixed vs Floating Interest Rates"
+                p "Understand the difference between fixed and floating interest rates before choosing a loan…"
+              div.article-card-meta
+                div.article-meta-items
+                  span "📅 Aug 25, 2026"
+                  span "◷ 6 min read"
+                span.article-arrow [aria-hidden="true"] "→"
+          article.article-card
+            a.article-card-image-link [aria-label="How Loan Tenure Affects Total Interest" data-article-id="4" href="{ROOT}articles/loan-comparison/loan-tenure-total-interest/"]
+              img.article-card-image [alt="Financial analysis on laptop" loading="lazy" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"]
+            div.article-card-content
+              div
+                span.article-card-category "Loans"
+                h2
+                  a [data-article-id="4" href="{ROOT}articles/loan-comparison/loan-tenure-total-interest/"] "How Loan Tenure Affects Total Interest"
+                p "See why choosing a longer or shorter loan tenure can significantly affect your total inter…"
+              div.article-card-meta
+                div.article-meta-items
+                  span "📅 Aug 25, 2026"
+                  span "◷ 6 min read"
+                span.article-arrow [aria-hidden="true"] "→"
+          article.article-card
+            a.article-card-image-link [aria-label="What Is Loan Prepayment?" data-article-id="5" href="{ROOT}articles/loan-comparison/what-is-loan-prepayment/"]
+              img.article-card-image [alt="Financial documents and planning" loading="lazy" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80"]
+            div.article-card-content
+              div
+                span.article-card-category "Loans"
+                h2
+                  a [data-article-id="5" href="{ROOT}articles/loan-comparison/what-is-loan-prepayment/"] "What Is Loan Prepayment?"
+                p "Understand how loan prepayment works and how paying down your principal can potentially re…"
+              div.article-card-meta
+                div.article-meta-items
+                  span "📅 Aug 25, 2026"
+                  span "◷ 4 min read"
+                span.article-arrow [aria-hidden="true"] "→"
+        nav.articles-pagination [aria-label="Articles pagination"]
+          button.active.pagination-button [data-page="1" type="button"] "1"
+          button.pagination-button [data-page="2" type="button"] "2"
+          button.pagination-button [data-page="3" type="button"] "3"
+          button.pagination-next [data-page="next" type="button"] "Next"
+            span [aria-hidden="true"] "→"
+      aside.articles-sidebar
+        div.article-sidebar-search
+          form#article-search-form
+            label.sr-only [for="article-search"] "Search articles"
+            input#article-search [placeholder="Search articles..." type="search"]
+            button [aria-label="Search articles" type="submit"]
+              svg [aria-hidden="true"]
+        div.article-sidebar-card
+          div.article-sidebar-heading
+            h2 "Categories"
+          div.article-category-list
+            a.article-category-item [data-sidebar-category="loans" href="{ROOT}articles.html"]
+              span.article-category-name "Loans"
+                span.article-category-icon "🏠"
+              span.article-category-count "6"
+                span [aria-hidden="true"] "→"
+            a.article-category-item [data-sidebar-category="investment" href="{ROOT}articles.html"]
+              span.article-category-name "Investment"
+                span.article-category-icon "📈"
+              span.article-category-count "0"
+                span [aria-hidden="true"] "→"
+            a.article-category-item [data-sidebar-category="tax" href="{ROOT}articles.html"]
+              span.article-category-name "Tax"
+                span.article-category-icon "📄"
+              span.article-category-count "0"
+                span [aria-hidden="true"] "→"
+            a.article-category-item [data-sidebar-category="business" href="{ROOT}articles.html"]
+              span.article-category-name "Business"
+                span.article-category-icon "💼"
+              span.article-category-count "0"
+                span [aria-hidden="true"] "→"
+            a.article-category-item [data-sidebar-category="health" href="{ROOT}articles.html"]
+              span.article-category-name "Health"
+                span.article-category-icon "❤️"
+              span.article-category-count "0"
+                span [aria-hidden="true"] "→"
+          button.article-more-categories [type="button"] "More Categories"
+            span [aria-hidden="true"] "⌄"
+        div.article-sidebar-card
+          div.article-sidebar-heading
+            h2 "Popular Articles"
+          div.popular-articles
+            a.popular-article [data-article-id="1" href="{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"]
+              img [alt="House model on desk" loading="lazy" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80"]
+              div
+                h3 "How to Reduce Your Home Loan Interest"
+                span "Aug 25, 2026"
+            a.popular-article [data-article-id="2" href="{ROOT}articles/loan-comparison/emi-vs-total-interest/"]
+              img [alt="Loan and financial planning" loading="lazy" src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=800&q=80"]
+              div
+                h3 "EMI vs Total Interest: What Should You Compare?"
+                span "Aug 25, 2026"
+            a.popular-article [data-article-id="3" href="{ROOT}articles/loan-comparison/fixed-vs-floating-interest-rates/"]
+              img [alt="Financial planning and investment" loading="lazy" src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"]
+              div
+                h3 "Fixed vs Floating Interest Rates"
+                span "Aug 25, 2026"
+            a.popular-article [data-article-id="4" href="{ROOT}articles/loan-comparison/loan-tenure-total-interest/"]
+              img [alt="Financial analysis on laptop" loading="lazy" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"]
+              div
+                h3 "How Loan Tenure Affects Total Interest"
+                span "Aug 25, 2026"
+        div.article-newsletter
+          div.newsletter-icon
+            svg [aria-hidden="true"]
+          div.newsletter-content
+            h2 "Stay Updated"
+            p "Get the latest articles and updates in your inbox."
+          form.newsletter-form
+            label.sr-only [for="newsletter-email"] "Email address"
+            input#newsletter-email [placeholder="Enter your email" required type="email"]
+            button [type="submit"] "Subscribe"

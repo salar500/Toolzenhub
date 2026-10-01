@@ -1,0 +1,18 @@
+# Jekyll configuration used by GitHub Pages (deploy-from-branch).
+#
+# ToolZen Hub is plain static HTML/CSS/JS: Jekyll only copies the files, nothing is built or
+# transformed, and no URL changes. This file exists solely to keep DEVELOPMENT-ONLY files out of
+# the published website. They stay committed in the repository.
+#
+# Only literal paths relative to the repository root belong here. Do not exclude anything the
+# site serves (pages, assets/, calculators/, articles/, loans/, data/ ...).
+# `npm run test:assets` fails if an excluded path is used by a live page or if a dev-only path is
+# not excluded.
+exclude:
+  - tests
+  - node_modules
+  - package.json
+  - package-lock.json
+  - playwright.config.js
+  - test-results
+  - playwright-report

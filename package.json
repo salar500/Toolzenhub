@@ -1,0 +1,29 @@
+{
+  "name": "toolzenhub-regression-safety-net",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Development-only regression safety net for ToolZen Hub (M0). The website itself has no build step.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "npm run test:unit && npm run test:static && npm run test:browser",
+    "test:all": "npm test && npm run test:visual",
+    "test:unit": "node --test --test-reporter=spec tests/unit/",
+    "test:static": "npm run inventory:check && npm run test:links && npm run test:assets",
+    "test:links": "node tests/static/check-links.mjs",
+    "test:assets": "node tests/static/check-assets.mjs",
+    "test:browser": "playwright test --project=subpath-desktop --project=subpath-mobile --project=root-desktop",
+    "test:visual": "playwright test --project=visual-desktop --project=visual-mobile --project=visual-tablet --workers=1",
+    "inventory:generate": "node tests/inventory/generate-inventory.mjs",
+    "inventory:check": "node tests/inventory/generate-inventory.mjs --check",
+    "baseline:update": "playwright test --project=subpath-desktop --update-snapshots && playwright test --project=visual-desktop --project=visual-mobile --project=visual-tablet --workers=1 --update-snapshots",
+    "baseline:lighthouse": "node tests/lighthouse/run-lighthouse.mjs",
+    "test:mutation": "node tests/mutation/browser-mutations.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "lighthouse": "12.8.2"
+  }
+}

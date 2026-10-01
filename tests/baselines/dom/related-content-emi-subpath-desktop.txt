@@ -1,0 +1,53 @@
+--- match 1 of 2 ---
+section.related-section
+  div.related-section__heading
+    h2 "Related Calculators"
+    a [href="{ROOT}calculators.html"] "View all →"
+  div.related-calculators-grid
+    a.related-calculator-card [href="{ROOT}calculators/loan-comparison/"]
+      div.related-calculator-icon "⇄"
+      div.related-calculator-content
+        strong "Loan Comparison Calculator"
+        span "Compare two loans side by side."
+--- match 2 of 2 ---
+section.related-section
+  div.related-section__heading
+    h2 "Related Articles"
+    a [href="{ROOT}articles.html"] "View all →"
+  div.related-articles-grid
+    a.related-article-card [href="{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"]
+      div.related-article-image
+        img [alt="House model on desk" loading="lazy" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80"]
+      div.related-article-content
+        h3 "How to Reduce Your Home Loan Interest"
+        p "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save…"
+    a.related-article-card [href="{ROOT}articles/loan-comparison/emi-vs-total-interest/"]
+      div.related-article-image
+        img [alt="Loan and financial planning" loading="lazy" src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=800&q=80"]
+      div.related-article-content
+        h3 "EMI vs Total Interest: What Should You Compare?"
+        p "Understand why EMI alone does not tell the complete story when comparing loan options and …"
+    a.related-article-card [href="{ROOT}articles/loan-comparison/fixed-vs-floating-interest-rates/"]
+      div.related-article-image
+        img [alt="Financial planning and investment" loading="lazy" src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"]
+      div.related-article-content
+        h3 "Fixed vs Floating Interest Rates"
+        p "Understand the difference between fixed and floating interest rates before choosing a loan…"
+    a.related-article-card [href="{ROOT}articles/loan-comparison/loan-tenure-total-interest/"]
+      div.related-article-image
+        img [alt="Financial analysis on laptop" loading="lazy" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"]
+      div.related-article-content
+        h3 "How Loan Tenure Affects Total Interest"
+        p "See why choosing a longer or shorter loan tenure can significantly affect your total inter…"
+    a.related-article-card [href="{ROOT}articles/loan-comparison/what-is-loan-prepayment/"]
+      div.related-article-image
+        img [alt="Financial documents and planning" loading="lazy" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80"]
+      div.related-article-content
+        h3 "What Is Loan Prepayment?"
+        p "Understand how loan prepayment works and how paying down your principal can potentially re…"
+    a.related-article-card [href="{ROOT}articles/loan-comparison/choose-right-loan-tenure/"]
+      div.related-article-image
+        img [alt="House model with keys" loading="lazy" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80"]
+      div.related-article-content
+        h3 "How to Choose the Right Loan Tenure"
+        p "Learn how to balance monthly affordability with total borrowing cost when choosing a loan …"

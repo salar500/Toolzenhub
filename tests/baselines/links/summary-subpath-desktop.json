@@ -1,0 +1,151 @@
+{
+  "about.html": {
+    "internal": 31,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": [
+      "categories.html#business  (fragment on another page; target element not verified)",
+      "categories.html#converter  (fragment on another page; target element not verified)",
+      "categories.html#health  (fragment on another page; target element not verified)",
+      "categories.html#math  (fragment on another page; target element not verified)",
+      "categories.html#more  (fragment on another page; target element not verified)",
+      "categories.html#tax  (fragment on another page; target element not verified)"
+    ]
+  },
+  "articles.html": {
+    "internal": 90,
+    "external": [],
+    "placeholders": 27,
+    "deadFragments": []
+  },
+  "articles/loan-comparison/choose-right-loan-tenure/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/loan-comparison/emi-vs-total-interest/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/loan-comparison/fixed-vs-floating-interest-rates/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/loan-comparison/how-to-reduce-home-loan-interest/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/loan-comparison/loan-tenure-total-interest/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/loan-comparison/what-is-loan-prepayment/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators.html": {
+    "internal": 25,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators/emi/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators/loan-comparison/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "categories.html": {
+    "internal": 30,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": [
+      "/Toolzenhub/categories.html#business",
+      "/Toolzenhub/categories.html#converter",
+      "/Toolzenhub/categories.html#health",
+      "/Toolzenhub/categories.html#investment",
+      "/Toolzenhub/categories.html#math",
+      "/Toolzenhub/categories.html#more",
+      "/Toolzenhub/categories.html#tax"
+    ]
+  },
+  "contact.html": {
+    "internal": 22,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "disclaimer.html": {
+    "internal": 23,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "(home)": {
+    "internal": 31,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": [
+      "/Toolzenhub/categories.html#more  (fragment on another page; target element not verified)"
+    ]
+  },
+  "loans.html": {
+    "internal": 25,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "privacy.html": {
+    "internal": 23,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "terms.html": {
+    "internal": 23,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "categories.html?q=loan": {
+    "internal": 24,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators.html?q=emi": {
+    "internal": 25,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles.html?category=loans": {
+    "internal": 36,
+    "external": [],
+    "placeholders": 9,
+    "deadFragments": []
+  },
+  "articles.html?category=investment": {
+    "internal": 26,
+    "external": [],
+    "placeholders": 9,
+    "deadFragments": []
+  }
+}

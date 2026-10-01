@@ -1,0 +1,26 @@
+body
+  header.nf-header
+    div.nf-header__inner
+      span.nf-logo [aria-hidden="true"] "▦"
+      span.nf-brand "ToolZen"
+        span "Hub"
+  main.nf-main
+    section.nf-card
+      span.nf-code "Error 404"
+      h1 "Page not found"
+      p "Sorry, we couldn't find the page you were looking for. It may have been moved or removed, …"
+      div.nf-nav
+        a.nf-btn [data-route href="{ROOT}"] "Go to Home"
+        p.nf-explore "Or explore"
+        ul.nf-links
+          li
+            a [data-route="calculators.html" href="{ROOT}calculators.html"] "All Calculators"
+          li
+            a [data-route="categories.html" href="{ROOT}categories.html"] "Categories"
+          li
+            a [data-route="articles.html" href="{ROOT}articles.html"] "Articles"
+          li
+            a [data-route="about.html" href="{ROOT}about.html"] "About"
+          li
+            a [data-route="contact.html" href="{ROOT}contact.html"] "Contact"
+  footer.nf-footer "© ToolZen Hub · Smart Tools, Smarter You"

@@ -1,0 +1,48 @@
+--- match 1 of 2 ---
+form#emi-form.calculator-form
+  div.calculator-form__grid
+    div.calculator-form__group
+      label.calculator-form__label [for="emi-loan"] "Loan Amount"
+      div.calculator-form__field.calculator-form__field--unit
+        input#emi-loan.calculator-form__input [max="100000000" min="1000" required step="1000" type="number" value="1000000"]
+        span.calculator-form__unit "₹"
+      span.calculator-form__help "Enter the total loan amount."
+    div.calculator-form__group
+      label.calculator-form__label [for="emi-rate"] "Interest Rate"
+      div.calculator-form__field.calculator-form__field--unit
+        input#emi-rate.calculator-form__input [max="30" min="1" required step="0.01" type="number" value="8.5"]
+        span.calculator-form__unit "%"
+      span.calculator-form__help "Enter the annual interest rate."
+    div.calculator-form__group
+      label.calculator-form__label [for="emi-years"] "Loan Tenure"
+      div.calculator-form__field.calculator-form__field--unit
+        input#emi-years.calculator-form__input [max="40" min="1" required step="1" type="number" value="20"]
+        span.calculator-form__unit "Years"
+      span.calculator-form__help "Enter the repayment period."
+  div.calculator-form__actions
+    button.calculator-form__button [type="submit"] "Calculate EMI"
+    button#emi-reset.calculator-form__button.calculator-form__button--secondary [type="button"] "Reset"
+--- match 2 of 2 ---
+section#emi-results.calculator-results [aria-live="polite"]
+  div.calculator-results__card
+    div.calculator-results__header
+      span.calculator-results__eyebrow "Your Result"
+      h2.calculator-results__title "EMI Calculation"
+    div.calculator-results__grid
+      div.calculator-results__item.calculator-results__item--primary
+        span.calculator-results__label "Monthly EMI"
+        strong.calculator-results__value "₹8,678"
+      div.calculator-results__item
+        span.calculator-results__label "Total Interest"
+        strong.calculator-results__value "₹10,82,776"
+      div.calculator-results__item
+        span.calculator-results__label "Total Repayment"
+        strong.calculator-results__value "₹20,82,776"
+      div.calculator-results__item
+        span.calculator-results__label "Loan Tenure"
+        strong.calculator-results__value "20 years"
+    div.calculator-results__summary "For a loan of at annual interest for , your estimated monthly EMI is ."
+      strong "₹10,00,000"
+      strong "8.5%"
+      strong "20 years"
+      strong "₹8,678"

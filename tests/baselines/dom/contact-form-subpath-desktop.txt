@@ -1,0 +1,16 @@
+--- match 1 of 3 ---
+p.contact-form__notice [role="note"] "Our contact form isn't accepting messages yet. It will be enabled soon. Please don't rely …"
+--- match 2 of 3 ---
+form.contact-form
+  div.contact-form__group
+    label [for="name"] "Name"
+    input#name [name="name" placeholder="Your name" required type="text"]
+  div.contact-form__group
+    label [for="email"] "Email"
+    input#email [name="email" placeholder="Your email" required type="email"]
+  div.contact-form__group
+    label [for="message"] "Message"
+    textarea#message [name="message" placeholder="Write your message..." required]
+  button.contact-form__button [aria-disabled="true" disabled type="submit"] "Sending unavailable"
+--- match 3 of 3 ---
+p#contact-status.contact-form__status [aria-live="polite" role="status"]

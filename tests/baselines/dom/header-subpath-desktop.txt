@@ -1,0 +1,32 @@
+header#header
+  div.site-header
+    nav.navbar [aria-label="Main navigation"]
+      a.navbar__brand [aria-label="ToolZen Hub Home" href="{ROOT}"]
+        span.brand-logo
+          span [aria-hidden="true"] "▦"
+        span.brand-text
+          span.brand-title "ToolZen"
+            span "Hub"
+          span.brand-subtitle "Smart Tools, Smarter You"
+      div.navbar__menu
+        ul
+          li
+            a.active.navbar__link [aria-current="page" data-nav="home" href="{ROOT}"] "Home"
+          li
+            a.navbar__link [data-nav="categories" href="{ROOT}categories.html"] "Categories"
+          li
+            a.navbar__link [data-nav="articles" href="{ROOT}articles.html"] "Articles"
+          li
+            a.navbar__link [data-nav="about" href="{ROOT}about.html"] "About"
+      div.navbar__actions
+        button.menu-toggle [aria-controls="mobile-navigation" aria-expanded="false" aria-label="Open navigation menu" data-action="menu" type="button"]
+          span
+          span
+          span
+    div#mobile-navigation.mobile-navigation [aria-hidden="true"]
+      nav [aria-label="Mobile navigation"]
+        div.mobile-navigation__menu
+          a.active.mobile-navigation__link [aria-current="page" data-nav="home" href="{ROOT}"] "Home"
+          a.mobile-navigation__link [data-nav="categories" href="{ROOT}categories.html"] "Categories"
+          a.mobile-navigation__link [data-nav="articles" href="{ROOT}articles.html"] "Articles"
+          a.mobile-navigation__link [data-nav="about" href="{ROOT}about.html"] "About"

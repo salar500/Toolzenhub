@@ -1,0 +1,232 @@
+--- match 1 of 2 ---
+header.article-hero
+  div.article-hero-content
+    span.article-category "Loans"
+    h1.article-title "What Is Loan Prepayment?"
+    p.article-introduction "Loan prepayment means paying an additional amount toward your outstanding loan before the …"
+    div.article-meta [aria-label="Article information"]
+      div.article-meta-item
+        span.article-meta-icon [aria-hidden="true"]
+          svg [aria-hidden="true"]
+        span "Aug 25, 2026"
+      div.article-meta-divider [aria-hidden="true"] "•"
+      div.article-meta-item
+        span.article-meta-icon [aria-hidden="true"]
+          svg [aria-hidden="true"]
+        span "4 min read"
+      div.article-meta-divider [aria-hidden="true"] "•"
+      div.article-meta-item
+        span.article-meta-icon [aria-hidden="true"]
+          svg [aria-hidden="true"]
+        span "By ToolZen Hub"
+    div.article-tags [aria-label="Article topics"]
+      span.article-tag "Loan Prepayment"
+      span.article-tag "Loan Interest"
+      span.article-tag "Principal"
+      span.article-tag "Loan Planning"
+  figure.article-hero-image
+    img [alt="Home loan prepayment and principal repayment" src="{ROOT}assets/Images/articles/what-is-loan-prepayment.png"]
+--- match 2 of 2 ---
+article.article
+  section.article-toc [aria-labelledby="article-toc-title"]
+    div.article-toc-heading
+      span.article-toc-icon [aria-hidden="true"]
+        svg [aria-hidden="true"]
+      h2#article-toc-title "Table of Contents"
+    nav [aria-label="Article sections"]
+      a.is-active [href="{ROOT}articles/loan-comparison/what-is-loan-prepayment/#what-is-loan-prepayment"]
+        span "What Is Loan Prepayment?"
+        span [aria-hidden="true"] "→"
+      a [href="{ROOT}articles/loan-comparison/what-is-loan-prepayment/#how-prepayment-works"]
+        span "How Does Loan Prepayment Work?"
+        span [aria-hidden="true"] "→"
+      a [href="{ROOT}articles/loan-comparison/what-is-loan-prepayment/#how-prepayment-affects-interest"]
+        span "How Prepayment Can Affect Interest"
+        span [aria-hidden="true"] "→"
+      a [href="{ROOT}articles/loan-comparison/what-is-loan-prepayment/#reduce-tenure-or-emi"]
+        span "Reduce Tenure or EMI After Prepayment"
+        span [aria-hidden="true"] "→"
+      a [href="{ROOT}articles/loan-comparison/what-is-loan-prepayment/#when-prepayment-may-be-considered"]
+        span "When May Prepayment Be Considered?"
+        span [aria-hidden="true"] "→"
+      a [href="{ROOT}articles/loan-comparison/what-is-loan-prepayment/#things-to-check-before-prepayment"]
+        span "Things to Check Before Prepayment"
+        span [aria-hidden="true"] "→"
+      a [href="{ROOT}articles/loan-comparison/what-is-loan-prepayment/#article-faq-title"]
+        span "Frequently Asked Questions"
+        span [aria-hidden="true"] "→"
+  section.article-key-takeaways [aria-labelledby="article-takeaways-title"]
+    div.article-takeaways-heading
+      div.article-takeaways-icon [aria-hidden="true"]
+        svg [aria-hidden="true"]
+      h2#article-takeaways-title "Key Takeaways"
+    ul
+      li
+        span.article-check-icon [aria-hidden="true"]
+          svg [aria-hidden="true"]
+        span "Loan prepayment means paying additional money toward an outstanding loan before the schedu…"
+      li
+        span.article-check-icon [aria-hidden="true"]
+          svg [aria-hidden="true"]
+        span "A prepayment reduces the outstanding principal when applied to the loan."
+      li
+        span.article-check-icon [aria-hidden="true"]
+          svg [aria-hidden="true"]
+        span "A lower outstanding principal can reduce the interest charged over the remaining repayment…"
+      li
+        span.article-check-icon [aria-hidden="true"]
+          svg [aria-hidden="true"]
+        span "Borrowers may use prepayment to reduce their loan tenure, EMI or overall repayment cost de…"
+      li
+        span.article-check-icon [aria-hidden="true"]
+          svg [aria-hidden="true"]
+        span "Always check the lender's prepayment rules, charges and conditions before making an additi…"
+  div.article-content
+    section.article-section [aria-labelledby="what-is-loan-prepayment"]
+      h2#what-is-loan-prepayment "1. What Is Loan Prepayment?"
+      p "Loan prepayment is an additional payment made toward an outstanding loan before the origin…"
+      p "Instead of paying only the regular EMI, a borrower makes an extra payment that is applied …"
+    section.article-section [aria-labelledby="how-prepayment-works"]
+      h2#how-prepayment-works "2. How Does Loan Prepayment Work?"
+      p "When you make a prepayment, the amount is generally used to reduce the outstanding princip…"
+      p "After the principal is reduced, the remaining repayment schedule may change. Depending on …"
+    section.article-section [aria-labelledby="how-prepayment-affects-interest"]
+      h2#how-prepayment-affects-interest "3. How Prepayment Can Affect Interest"
+      p "Loan interest is generally calculated based on the outstanding principal and the applicabl…"
+      p "The potential interest saving depends on factors such as the amount prepaid, the remaining…"
+    section.article-section [aria-labelledby="reduce-tenure-or-emi"]
+      h2#reduce-tenure-or-emi "4. Reduce Tenure or EMI After Prepayment"
+      p "After a prepayment, some loan structures may allow the borrower to keep a similar EMI and …"
+      p "Another possible approach is to reduce the EMI while keeping a similar remaining tenure. T…"
+      p "Understanding both options can help you evaluate how a prepayment changes your monthly cas…"
+    section.article-section [aria-labelledby="when-prepayment-may-be-considered"]
+      h2#when-prepayment-may-be-considered "5. When May Prepayment Be Considered?"
+      p "A borrower may consider prepayment when they have surplus funds available and want to redu…"
+      p "Before using available savings for prepayment, it is important to consider emergency funds…"
+    section.article-section [aria-labelledby="things-to-check-before-prepayment"]
+      h2#things-to-check-before-prepayment "6. Things to Check Before Prepayment"
+      p "Before making a prepayment, check the loan agreement and confirm whether any prepayment ch…"
+      p "It can also be useful to compare the expected interest savings with the amount you plan to…"
+    section.article-example [aria-labelledby="article-example-title"]
+      h2#article-example-title "Example: Making an Additional Loan Payment"
+      p "Suppose you have an outstanding loan and receive an additional amount of money that you co…"
+      p "If the lender applies that payment to the outstanding principal, the remaining loan balanc…"
+      p "The actual impact depends on the amount prepaid, interest rate, remaining tenure and the l…"
+    section.article-bigger-picture [aria-labelledby="article-bigger-picture-title"]
+      div.article-bigger-picture-icon [aria-hidden="true"] "→"
+      div
+        h2#article-bigger-picture-title "The Bigger Picture"
+        p "Loan prepayment can be one way to reduce an outstanding debt earlier, but it should be con…"
+    section.article-considerations [aria-labelledby="article-considerations-title"]
+      div.article-section-heading
+        span.article-section-kicker "Before You Decide"
+        h2#article-considerations-title "Things to Consider"
+      ul
+        li
+          span.article-consideration-number [aria-hidden="true"] "1"
+          span.article-consideration-text "Check the lender's prepayment rules and applicable charges."
+        li
+          span.article-consideration-number [aria-hidden="true"] "2"
+          span.article-consideration-text "Understand how much of the payment will reduce the outstanding principal."
+        li
+          span.article-consideration-number [aria-hidden="true"] "3"
+          span.article-consideration-text "Compare the potential interest savings with your other financial priorities."
+        li
+          span.article-consideration-number [aria-hidden="true"] "4"
+          span.article-consideration-text "Maintain an appropriate emergency fund before using surplus cash for prepayment."
+        li
+          span.article-consideration-number [aria-hidden="true"] "5"
+          span.article-consideration-text "Check whether the prepayment changes your EMI, tenure or repayment schedule."
+    section.article-calculator [aria-labelledby="article-calculator-title"]
+      div.article-calculator-visual
+        div.article-calculator-icon-large [aria-hidden="true"]
+          svg [aria-hidden="true"]
+      div.article-calculator-content
+        span.article-calculator-label "ToolZen Hub Calculator"
+        h2#article-calculator-title "Compare Your Loan Options"
+        p "Compare EMI, interest rate, total interest and total repayment to understand the overall c…"
+      a.article-calculator-button [href="{ROOT}calculators/loan-comparison/"] "Compare Loans"
+        span [aria-hidden="true"] "→"
+    section.article-faq [aria-labelledby="article-faq-title"]
+      div.article-section-heading
+        h2#article-faq-title "Frequently Asked Questions"
+      div.article-faq-list
+        details.article-faq-item
+          summary
+            span.article-faq-question "What is loan prepayment?"
+            span.article-faq-toggle [aria-hidden="true"]
+              span.faq-plus "+"
+              span.faq-minus "−"
+          div.article-faq-answer
+            p "Loan prepayment is an additional payment made toward an outstanding loan before the schedu…"
+        details.article-faq-item
+          summary
+            span.article-faq-question "Can loan prepayment reduce interest?"
+            span.article-faq-toggle [aria-hidden="true"]
+              span.faq-plus "+"
+              span.faq-minus "−"
+          div.article-faq-answer
+            p "It can. Reducing the outstanding principal earlier may reduce the amount on which future i…"
+        details.article-faq-item
+          summary
+            span.article-faq-question "Does prepayment reduce EMI?"
+            span.article-faq-toggle [aria-hidden="true"]
+              span.faq-plus "+"
+              span.faq-minus "−"
+          div.article-faq-answer
+            p "Not necessarily. Depending on the lender and loan structure, a prepayment may reduce the r…"
+        details.article-faq-item
+          summary
+            span.article-faq-question "Should I always prepay my loan?"
+            span.article-faq-toggle [aria-hidden="true"]
+              span.faq-plus "+"
+              span.faq-minus "−"
+          div.article-faq-answer
+            p "Not necessarily. Consider the potential interest savings, applicable charges, emergency sa…"
+        details.article-faq-item
+          summary
+            span.article-faq-question "What should I check before making a prepayment?"
+            span.article-faq-toggle [aria-hidden="true"]
+              span.faq-plus "+"
+              span.faq-minus "−"
+          div.article-faq-answer
+            p "Check the loan agreement for prepayment charges, minimum payment requirements, eligibility…"
+    section.article-related [aria-labelledby="article-related-title"]
+      div.article-section-heading
+        span.article-section-kicker "Continue Reading"
+        h2#article-related-title "Related Articles"
+        p "Explore more practical guides from ToolZen Hub."
+      div.article-related-grid
+        a.article-related-card [href="{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"]
+          div.article-related-image
+            img [alt="Home loan interest calculation and financial planning" loading="lazy" src="{ROOT}assets/Images/articles/how-to-reduce-home-loan-interest.png"]
+          div.article-related-card-content
+            span.article-related-category "Finance"
+            h3 "How to Reduce Your Home Loan Interest"
+            span.article-related-link "Read article →"
+        a.article-related-card [href="{ROOT}articles/loan-comparison/emi-vs-total-interest/"]
+          div.article-related-image
+            img [alt="EMI and total home loan interest comparison" loading="lazy" src="{ROOT}assets/Images/articles/emi-vs-total-interest.png"]
+          div.article-related-card-content
+            span.article-related-category "Finance"
+            h3 "EMI vs Total Interest: What Should You Compare?"
+            span.article-related-link "Read article →"
+        a.article-related-card [href="{ROOT}articles/loan-comparison/fixed-vs-floating-interest-rates/"]
+          div.article-related-image
+            img [alt="Fixed and floating home loan interest rate comparison" loading="lazy" src="{ROOT}assets/Images/articles/fixed-vs-floating-interest-rates.png"]
+          div.article-related-card-content
+            span.article-related-category "Finance"
+            h3 "Fixed vs Floating Interest Rates"
+            span.article-related-link "Read article →"
+        a.article-related-card [href="{ROOT}articles/loan-comparison/loan-tenure-total-interest/"]
+          div.article-related-image
+            img [alt="Loan tenure and total interest comparison" loading="lazy" src="{ROOT}assets/Images/articles/loan-tenure-total-interest.png"]
+          div.article-related-card-content
+            span.article-related-category "Finance"
+            h3 "How Loan Tenure Affects Total Interest"
+            span.article-related-link "Read article →"
+        a.article-related-card [href="{ROOT}articles/loan-comparison/choose-right-loan-tenure/"]
+          div.article-related-card-content
+            span.article-related-category "Finance"
+            h3 "How to Choose the Right Loan Tenure"
+            span.article-related-link "Read article →"

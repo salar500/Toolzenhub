@@ -1,0 +1,58 @@
+footer#footer
+  footer.footer
+    div.footer__main
+      div.container
+        div.footer__main-grid
+          div.footer__brand
+            a.footer__logo [aria-label="ToolZen Hub Home" href="{ROOT}"]
+              span.footer__logo-mark "▦"
+              span "ToolZen"
+                span.footer__logo-highlight "Hub"
+            p.footer__description "Smart tools to make better decisions every day."
+            div.footer__social
+              a.footer__social-link [aria-label="Facebook" href="{ROOT}"] "f"
+              a.footer__social-link [aria-label="Twitter" href="{ROOT}"] "𝕏"
+              a.footer__social-link [aria-label="LinkedIn" href="{ROOT}"] "in"
+              a.footer__social-link [aria-label="Instagram" href="{ROOT}"] "◎"
+          div.footer__column
+            h3.footer__column-title "Quick Links"
+            ul.footer__links
+              li
+                a [href="{ROOT}"] "Home"
+              li
+                a [href="{ROOT}categories.html"] "Categories"
+              li
+                a [href="{ROOT}articles.html"] "Articles"
+              li
+                a [href="{ROOT}about.html"] "About"
+          div.footer__column
+            h3.footer__column-title "Resources"
+            ul.footer__links
+              li
+                a [href="{ROOT}contact.html"] "Contact Us"
+              li
+                a [href="{ROOT}privacy.html"] "Privacy Policy"
+              li
+                a [href="{ROOT}terms.html"] "Terms & Conditions"
+              li
+                a [href="{ROOT}disclaimer.html"] "Disclaimer"
+          div.footer__column
+            h3.footer__column-title "Popular Calculators"
+            ul.footer__links
+              li
+                a [href="{ROOT}calculators/emi/"] "EMI Calculator"
+              li
+                a [href="{ROOT}calculators/loan-comparison/"] "Loan Comparison"
+              li
+                a [href="{ROOT}calculators.html"] "All Calculators"
+          div.footer__newsletter
+            h3.footer__column-title "Subscribe to our newsletter"
+            p.footer__newsletter-text "Get updates, useful tips and new calculators directly in your inbox."
+            form.footer__newsletter-form
+              input.footer__newsletter-input [aria-label="Email address" placeholder="Enter your email" required type="email"]
+              button.footer__newsletter-button [type="submit"] "Subscribe"
+    div.footer__bottom
+      div.container
+        div.footer__bottom-inner
+          p.footer__copyright "© 2026 ToolZen Hub. All rights reserved."
+          nav.footer__legal [aria-label="Legal"]

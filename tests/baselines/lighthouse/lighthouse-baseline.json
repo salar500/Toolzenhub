@@ -1,0 +1,2033 @@
+{
+  "generatedWith": {
+    "lighthouse": "12.8.2",
+    "node": "v20.17.0",
+    "os": "Windows_NT 10.0.19045",
+    "cpu": "Intel(R) Core(TM) i3-6006U CPU @ 2.00GHz ×4",
+    "memoryGB": 3.9,
+    "note": "Scores are machine dependent; compare only against runs from the same machine. External hosts are blocked (first-party cost only)."
+  },
+  "settings": {
+    "mobileRuns": 3,
+    "desktopRuns": 1,
+    "blockedUrlPatterns": [
+      "*fonts.googleapis.com*",
+      "*fonts.gstatic.com*",
+      "*images.unsplash.com*",
+      "*cdnjs.cloudflare.com*",
+      "*cdn.jsdelivr.net*"
+    ],
+    "throttling": "lighthouse default (simulated)",
+    "categories": [
+      "performance",
+      "accessibility",
+      "best-practices",
+      "seo"
+    ]
+  },
+  "pages": {
+    "home": {
+      "url": "/Toolzenhub/",
+      "label": "Home",
+      "mobileMedian": {
+        "scores": {
+          "performance": 64,
+          "accessibility": 96,
+          "bestPractices": 76,
+          "seo": 100
+        },
+        "metrics": {
+          "firstContentfulPaintMs": 3002,
+          "largestContentfulPaintMs": 10403,
+          "totalBlockingTimeMs": 225,
+          "cumulativeLayoutShift": 0.07,
+          "speedIndexMs": 3002,
+          "interactiveMs": 10418,
+          "serverResponseTimeMs": 3,
+          "totalByteWeight": 1628150,
+          "domElements": 214,
+          "requests": 65
+        }
+      },
+      "mobileRuns": [
+        {
+          "scores": {
+            "performance": 62,
+            "accessibility": 96,
+            "bestPractices": 76,
+            "seo": 100
+          },
+          "metrics": {
+            "firstContentfulPaintMs": 3401,
+            "largestContentfulPaintMs": 10427,
+            "totalBlockingTimeMs": 209,
+            "cumulativeLayoutShift": 0,
+            "speedIndexMs": 4818,
+            "interactiveMs": 10442,
+            "serverResponseTimeMs": 9,
+            "totalByteWeight": 1628150,
+            "domElements": 214,
+            "requests": 65
+          },
+          "benchmarkIndex": 1134.5,
+          "warnings": []
+        },
+        {
+          "scores": {
+            "performance": 65,
+            "accessibility": 96,
+            "bestPractices": 76,
+            "seo": 100
+          },
+          "metrics": {
+            "firstContentfulPaintMs": 2998,
+            "largestContentfulPaintMs": 10397,
+            "totalBlockingTimeMs": 225,
+            "cumulativeLayoutShift": 0.07,
+            "speedIndexMs": 2998,
+            "interactiveMs": 10412,
+            "serverResponseTimeMs": 3,
+            "totalByteWeight": 1628150,
+            "domElements": 214,
+            "requests": 65
+          },
+          "benchmarkIndex": 1083.5,
+          "warnings": []
+        },
+        {
+          "scores": {
+            "performance": 64,
+            "accessibility": 96,
+            "bestPractices": 76,
+            "seo": 100
+          },
+          "metrics": {
+            "firstContentfulPaintMs": 3002,
+            "largestContentfulPaintMs": 10403,
+            "totalBlockingTimeMs": 243,
+            "cumulativeLayoutShift": 0.07,
+            "speedIndexMs": 3002,
+            "interactiveMs": 10418,
+            "serverResponseTimeMs": 2,
+            "totalByteWeight": 1628150,
+            "domElements": 214,
+            "requests": 65
+          },
+          "benchmarkIndex": 1117.5,
+          "warnings": []
+        }
+      ],
+      "desktop": {
+        "scores": {
+          "performance": 90,
+          "accessibility": 96,
+          "bestPractices": 79,
+          "seo": 100
+        },
+        "metrics": {
+          "firstContentfulPaintMs": 706,
+          "largestContentfulPaintMs": 2008,
+          "totalBlockingTimeMs": 36,
+          "cumulativeLayoutShift": 0.048,
+          "speedIndexMs": 831,
+          "interactiveMs": 2014,
+          "serverResponseTimeMs": 2,
+          "totalByteWeight": 1628150,
+          "domElements": 214,
+          "requests": 65
+        },
+        "benchmarkIndex": 1120.5,
+        "warnings": []
+      },
+      "diagnosticsMobile": [
+        {
+          "category": "accessibility",
+          "id": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "accessibility",
+          "id": "label-content-name-mismatch",
+          "title": "Elements with visible text labels do not have matching accessible names.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "58 insecure requests found",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "redirects-http",
+          "title": "Does not redirect HTTP traffic to HTTPS",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "font-size",
+          "title": "Document doesn't use legible font sizes",
+          "score": 0,
+          "displayValue": "19.89% legible text",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0,
+          "displayValue": "10.4 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "largest-contentful-paint-element",
+          "title": "Largest Contentful Paint element",
+          "score": 0,
+          "displayValue": "10,400 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-resources",
+          "title": "Eliminate render-blocking resources",
+          "score": 0,
+          "displayValue": "Est savings of 200 ms",
+          "savingsMs": 204,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "unminified-css",
+          "title": "Minify CSS",
+          "score": 0,
+          "displayValue": "Est savings of 48 KiB",
+          "savingsMs": 170,
+          "savingsBytes": 49330
+        },
+        {
+          "category": "performance",
+          "id": "unminified-javascript",
+          "title": "Minify JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 72 KiB",
+          "savingsMs": 500,
+          "savingsBytes": 73615
+        },
+        {
+          "category": "performance",
+          "id": "modern-image-formats",
+          "title": "Serve images in next-gen formats",
+          "score": 0,
+          "displayValue": "Est savings of 1,115 KiB",
+          "savingsMs": 5550,
+          "savingsBytes": 1141853
+        },
+        {
+          "category": "performance",
+          "id": "uses-text-compression",
+          "title": "Enable text compression",
+          "score": 0,
+          "displayValue": "Est savings of 280 KiB",
+          "savingsMs": 1370,
+          "savingsBytes": 286476
+        },
+        {
+          "category": "performance",
+          "id": "uses-responsive-images",
+          "title": "Properly size images",
+          "score": 0,
+          "displayValue": "Est savings of 1,185 KiB",
+          "savingsMs": 6000,
+          "savingsBytes": 1213899
+        },
+        {
+          "category": "performance",
+          "id": "uses-http2",
+          "title": "Use HTTP/2",
+          "score": 0,
+          "displayValue": "58 requests not served via HTTP/2",
+          "savingsMs": 490,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "score": 0,
+          "displayValue": "Est savings of 1,228 KiB",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "lcp-discovery-insight",
+          "title": "LCP request discovery",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "modern-http-insight",
+          "title": "Modern HTTP",
+          "score": 0,
+          "displayValue": "Est savings of 1,710 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-insight",
+          "title": "Render blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 1,020 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "score": 0.24,
+          "displayValue": "10.4 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "max-potential-fid",
+          "title": "Max Potential First Input Delay",
+          "score": 0.42,
+          "displayValue": "280 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.49,
+          "displayValue": "3.0 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "unsized-images",
+          "title": "Image elements do not have explicit `width` and `height`",
+          "score": 0.5,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "prioritize-lcp-image",
+          "title": "Preload Largest Contentful Paint image",
+          "score": 0.5,
+          "displayValue": "Est savings of -30 ms",
+          "savingsMs": -32,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 3 KiB",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "total-blocking-time",
+          "title": "Total Blocking Time",
+          "score": 0.85,
+          "displayValue": "240 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        }
+      ],
+      "diagnosticsDesktop": [
+        {
+          "category": "accessibility",
+          "id": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "accessibility",
+          "id": "label-content-name-mismatch",
+          "title": "Elements with visible text labels do not have matching accessible names.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "58 insecure requests found",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "redirects-http",
+          "title": "Does not redirect HTTP traffic to HTTPS",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "largest-contentful-paint-element",
+          "title": "Largest Contentful Paint element",
+          "score": 0,
+          "displayValue": "2,010 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "prioritize-lcp-image",
+          "title": "Preload Largest Contentful Paint image",
+          "score": 0,
+          "displayValue": "Est savings of 30 ms",
+          "savingsMs": 34,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-resources",
+          "title": "Eliminate render-blocking resources",
+          "score": 0,
+          "displayValue": "Est savings of 30 ms",
+          "savingsMs": 29,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "unminified-css",
+          "title": "Minify CSS",
+          "score": 0,
+          "displayValue": "Est savings of 48 KiB",
+          "savingsMs": 40,
+          "savingsBytes": 49330
+        },
+        {
+          "category": "performance",
+          "id": "unminified-javascript",
+          "title": "Minify JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 72 KiB",
+          "savingsMs": 30,
+          "savingsBytes": 73615
+        },
+        {
+          "category": "performance",
+          "id": "modern-image-formats",
+          "title": "Serve images in next-gen formats",
+          "score": 0,
+          "displayValue": "Est savings of 1,115 KiB",
+          "savingsMs": 880,
+          "savingsBytes": 1141853
+        },
+        {
+          "category": "performance",
+          "id": "uses-text-compression",
+          "title": "Enable text compression",
+          "score": 0,
+          "displayValue": "Est savings of 280 KiB",
+          "savingsMs": 150,
+          "savingsBytes": 286476
+        },
+        {
+          "category": "performance",
+          "id": "uses-responsive-images",
+          "title": "Properly size images",
+          "score": 0,
+          "displayValue": "Est savings of 978 KiB",
+          "savingsMs": 800,
+          "savingsBytes": 1001102
+        },
+        {
+          "category": "performance",
+          "id": "uses-http2",
+          "title": "Use HTTP/2",
+          "score": 0,
+          "displayValue": "58 requests not served via HTTP/2",
+          "savingsMs": 210,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "score": 0,
+          "displayValue": "Est savings of 1,178 KiB",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "lcp-discovery-insight",
+          "title": "LCP request discovery",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "modern-http-insight",
+          "title": "Modern HTTP",
+          "score": 0,
+          "displayValue": "Est savings of 450 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-insight",
+          "title": "Render blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 220 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "unsized-images",
+          "title": "Image elements do not have explicit `width` and `height`",
+          "score": 0.5,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 3 KiB",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0.62,
+          "displayValue": "2.0 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        }
+      ]
+    },
+    "emi": {
+      "url": "/Toolzenhub/calculators/emi/",
+      "label": "EMI Calculator",
+      "mobileMedian": {
+        "scores": {
+          "performance": 80,
+          "accessibility": 96,
+          "bestPractices": 79,
+          "seo": 100
+        },
+        "metrics": {
+          "firstContentfulPaintMs": 2979,
+          "largestContentfulPaintMs": 4232,
+          "totalBlockingTimeMs": 85,
+          "cumulativeLayoutShift": 0,
+          "speedIndexMs": 2979,
+          "interactiveMs": 4247,
+          "serverResponseTimeMs": 2,
+          "totalByteWeight": 375292,
+          "domElements": 237,
+          "requests": 71
+        }
+      },
+      "mobileRuns": [
+        {
+          "scores": {
+            "performance": 79,
+            "accessibility": 96,
+            "bestPractices": 79,
+            "seo": 100
+          },
+          "metrics": {
+            "firstContentfulPaintMs": 2996,
+            "largestContentfulPaintMs": 4265,
+            "totalBlockingTimeMs": 110,
+            "cumulativeLayoutShift": 0,
+            "speedIndexMs": 2996,
+            "interactiveMs": 4289,
+            "serverResponseTimeMs": 3,
+            "totalByteWeight": 375292,
+            "domElements": 237,
+            "requests": 71
+          },
+          "benchmarkIndex": 1122,
+          "warnings": []
+        },
+        {
+          "scores": {
+            "performance": 80,
+            "accessibility": 96,
+            "bestPractices": 79,
+            "seo": 100
+          },
+          "metrics": {
+            "firstContentfulPaintMs": 2979,
+            "largestContentfulPaintMs": 4232,
+            "totalBlockingTimeMs": 56,
+            "cumulativeLayoutShift": 0,
+            "speedIndexMs": 2979,
+            "interactiveMs": 4247,
+            "serverResponseTimeMs": 2,
+            "totalByteWeight": 375292,
+            "domElements": 237,
+            "requests": 71
+          },
+          "benchmarkIndex": 1097,
+          "warnings": []
+        },
+        {
+          "scores": {
+            "performance": 81,
+            "accessibility": 96,
+            "bestPractices": 79,
+            "seo": 100
+          },
+          "metrics": {
+            "firstContentfulPaintMs": 2933,
+            "largestContentfulPaintMs": 4174,
+            "totalBlockingTimeMs": 85,
+            "cumulativeLayoutShift": 0,
+            "speedIndexMs": 2933,
+            "interactiveMs": 4189,
+            "serverResponseTimeMs": 2,
+            "totalByteWeight": 375292,
+            "domElements": 237,
+            "requests": 71
+          },
+          "benchmarkIndex": 1110,
+          "warnings": []
+        }
+      ],
+      "desktop": {
+        "scores": {
+          "performance": 98,
+          "accessibility": 96,
+          "bestPractices": 79,
+          "seo": 100
+        },
+        "metrics": {
+          "firstContentfulPaintMs": 750,
+          "largestContentfulPaintMs": 1102,
+          "totalBlockingTimeMs": 0,
+          "cumulativeLayoutShift": 0,
+          "speedIndexMs": 750,
+          "interactiveMs": 1109,
+          "serverResponseTimeMs": 2,
+          "totalByteWeight": 375292,
+          "domElements": 237,
+          "requests": 71
+        },
+        "benchmarkIndex": 1095.5,
+        "warnings": []
+      },
+      "diagnosticsMobile": [
+        {
+          "category": "accessibility",
+          "id": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "accessibility",
+          "id": "label-content-name-mismatch",
+          "title": "Elements with visible text labels do not have matching accessible names.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "58 insecure requests found",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "redirects-http",
+          "title": "Does not redirect HTTP traffic to HTTPS",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "largest-contentful-paint-element",
+          "title": "Largest Contentful Paint element",
+          "score": 0,
+          "displayValue": "4,170 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-resources",
+          "title": "Eliminate render-blocking resources",
+          "score": 0,
+          "displayValue": "Est savings of 310 ms",
+          "savingsMs": 311,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "unminified-css",
+          "title": "Minify CSS",
+          "score": 0,
+          "displayValue": "Est savings of 41 KiB",
+          "savingsMs": 300,
+          "savingsBytes": 42005
+        },
+        {
+          "category": "performance",
+          "id": "unminified-javascript",
+          "title": "Minify JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 76 KiB",
+          "savingsMs": 600,
+          "savingsBytes": 77917
+        },
+        {
+          "category": "performance",
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 12 KiB",
+          "savingsMs": 140,
+          "savingsBytes": 11876
+        },
+        {
+          "category": "performance",
+          "id": "uses-text-compression",
+          "title": "Enable text compression",
+          "score": 0,
+          "displayValue": "Est savings of 286 KiB",
+          "savingsMs": 1500,
+          "savingsBytes": 293196
+        },
+        {
+          "category": "performance",
+          "id": "uses-http2",
+          "title": "Use HTTP/2",
+          "score": 0,
+          "displayValue": "58 requests not served via HTTP/2",
+          "savingsMs": 710,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "modern-http-insight",
+          "title": "Modern HTTP",
+          "score": 0,
+          "displayValue": "Est savings of 1,460 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-insight",
+          "title": "Render blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 990 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0.45,
+          "displayValue": "4.2 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 3 KiB",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.52,
+          "displayValue": "2.9 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "score": 0.86,
+          "displayValue": "4.2 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "max-potential-fid",
+          "title": "Max Potential First Input Delay",
+          "score": 0.88,
+          "displayValue": "140 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        }
+      ],
+      "diagnosticsDesktop": [
+        {
+          "category": "accessibility",
+          "id": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "accessibility",
+          "id": "label-content-name-mismatch",
+          "title": "Elements with visible text labels do not have matching accessible names.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "58 insecure requests found",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "redirects-http",
+          "title": "Does not redirect HTTP traffic to HTTPS",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "unminified-javascript",
+          "title": "Minify JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 76 KiB",
+          "savingsMs": 40,
+          "savingsBytes": 77917
+        },
+        {
+          "category": "performance",
+          "id": "uses-text-compression",
+          "title": "Enable text compression",
+          "score": 0,
+          "displayValue": "Est savings of 286 KiB",
+          "savingsMs": 140,
+          "savingsBytes": 293196
+        },
+        {
+          "category": "performance",
+          "id": "uses-http2",
+          "title": "Use HTTP/2",
+          "score": 0,
+          "displayValue": "58 requests not served via HTTP/2",
+          "savingsMs": 350,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "modern-http-insight",
+          "title": "Modern HTTP",
+          "score": 0,
+          "displayValue": "Est savings of 530 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-insight",
+          "title": "Render blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 220 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-resources",
+          "title": "Eliminate render-blocking resources",
+          "score": 0.5,
+          "displayValue": "Est savings of 20 ms",
+          "savingsMs": 24,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "unminified-css",
+          "title": "Minify CSS",
+          "score": 0.5,
+          "displayValue": "Est savings of 41 KiB",
+          "savingsMs": 20,
+          "savingsBytes": 42005
+        },
+        {
+          "category": "performance",
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0.5,
+          "displayValue": "Est savings of 12 KiB",
+          "savingsMs": 0,
+          "savingsBytes": 11876
+        },
+        {
+          "category": "performance",
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 3 KiB",
+          "savingsMs": null,
+          "savingsBytes": null
+        }
+      ]
+    },
+    "loan-comparison": {
+      "url": "/Toolzenhub/calculators/loan-comparison/",
+      "label": "Loan Comparison Calculator",
+      "mobileMedian": {
+        "scores": {
+          "performance": 75,
+          "accessibility": 88,
+          "bestPractices": 79,
+          "seo": 100
+        },
+        "metrics": {
+          "firstContentfulPaintMs": 2193,
+          "largestContentfulPaintMs": 5306,
+          "totalBlockingTimeMs": 197,
+          "cumulativeLayoutShift": 0.004,
+          "speedIndexMs": 2193,
+          "interactiveMs": 5330,
+          "serverResponseTimeMs": 2,
+          "totalByteWeight": 469150,
+          "domElements": 686,
+          "requests": 92
+        }
+      },
+      "mobileRuns": [
+        {
+          "scores": {
+            "performance": 74,
+            "accessibility": 88,
+            "bestPractices": 79,
+            "seo": 100
+          },
+          "metrics": {
+            "firstContentfulPaintMs": 2272,
+            "largestContentfulPaintMs": 5330,
+            "totalBlockingTimeMs": 203,
+            "cumulativeLayoutShift": 0.004,
+            "speedIndexMs": 2272,
+            "interactiveMs": 5347,
+            "serverResponseTimeMs": 3,
+            "totalByteWeight": 469150,
+            "domElements": 686,
+            "requests": 92
+          },
+          "benchmarkIndex": 1133.5,
+          "warnings": []
+        },
+        {
+          "scores": {
+            "performance": 75,
+            "accessibility": 88,
+            "bestPractices": 79,
+            "seo": 100
+          },
+          "metrics": {
+            "firstContentfulPaintMs": 2193,
+            "largestContentfulPaintMs": 5304,
+            "totalBlockingTimeMs": 197,
+            "cumulativeLayoutShift": 0.004,
+            "speedIndexMs": 2193,
+            "interactiveMs": 5325,
+            "serverResponseTimeMs": 2,
+            "totalByteWeight": 469150,
+            "domElements": 686,
+            "requests": 92
+          },
+          "benchmarkIndex": 1137,
+          "warnings": []
+        },
+        {
+          "scores": {
+            "performance": 76,
+            "accessibility": 88,
+            "bestPractices": 79,
+            "seo": 100
+          },
+          "metrics": {
+            "firstContentfulPaintMs": 2191,
+            "largestContentfulPaintMs": 5306,
+            "totalBlockingTimeMs": 178,
+            "cumulativeLayoutShift": 0.004,
+            "speedIndexMs": 2191,
+            "interactiveMs": 5330,
+            "serverResponseTimeMs": 2,
+            "totalByteWeight": 469150,
+            "domElements": 686,
+            "requests": 92
+          },
+          "benchmarkIndex": 1051.5,
+          "warnings": []
+        }
+      ],
+      "desktop": {
+        "scores": {
+          "performance": 97,
+          "accessibility": 88,
+          "bestPractices": 79,
+          "seo": 100
+        },
+        "metrics": {
+          "firstContentfulPaintMs": 572,
+          "largestContentfulPaintMs": 1245,
+          "totalBlockingTimeMs": 0,
+          "cumulativeLayoutShift": 0.003,
+          "speedIndexMs": 671,
+          "interactiveMs": 1247,
+          "serverResponseTimeMs": 2,
+          "totalByteWeight": 469150,
+          "domElements": 686,
+          "requests": 92
+        },
+        "benchmarkIndex": 1152.5,
+        "warnings": []
+      },
+      "diagnosticsMobile": [
+        {
+          "category": "accessibility",
+          "id": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "accessibility",
+          "id": "label-content-name-mismatch",
+          "title": "Elements with visible text labels do not have matching accessible names.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "accessibility",
+          "id": "label",
+          "title": "Form elements do not have associated labels",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "accessibility",
+          "id": "select-name",
+          "title": "Select elements do not have associated label elements.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "80 insecure requests found",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "redirects-http",
+          "title": "Does not redirect HTTP traffic to HTTPS",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "mainthread-work-breakdown",
+          "title": "Minimize main-thread work",
+          "score": 0,
+          "displayValue": "2.3 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "largest-contentful-paint-element",
+          "title": "Largest Contentful Paint element",
+          "score": 0,
+          "displayValue": "5,310 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-resources",
+          "title": "Eliminate render-blocking resources",
+          "score": 0,
+          "displayValue": "Est savings of 890 ms",
+          "savingsMs": 887,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "unminified-css",
+          "title": "Minify CSS",
+          "score": 0,
+          "displayValue": "Est savings of 37 KiB",
+          "savingsMs": 30,
+          "savingsBytes": 37619
+        },
+        {
+          "category": "performance",
+          "id": "unminified-javascript",
+          "title": "Minify JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 117 KiB",
+          "savingsMs": 780,
+          "savingsBytes": 119559
+        },
+        {
+          "category": "performance",
+          "id": "uses-text-compression",
+          "title": "Enable text compression",
+          "score": 0,
+          "displayValue": "Est savings of 351 KiB",
+          "savingsMs": 1650,
+          "savingsBytes": 359287
+        },
+        {
+          "category": "performance",
+          "id": "uses-http2",
+          "title": "Use HTTP/2",
+          "score": 0,
+          "displayValue": "80 requests not served via HTTP/2",
+          "savingsMs": 1490,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "modern-http-insight",
+          "title": "Modern HTTP",
+          "score": 0,
+          "displayValue": "Est savings of 2,040 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-insight",
+          "title": "Render blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 1,040 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0.22,
+          "displayValue": "5.3 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0.5,
+          "displayValue": "Est savings of 12 KiB",
+          "savingsMs": 20,
+          "savingsBytes": 11876
+        },
+        {
+          "category": "performance",
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 2 KiB",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "score": 0.73,
+          "displayValue": "5.3 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.78,
+          "displayValue": "2.2 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "max-potential-fid",
+          "title": "Max Potential First Input Delay",
+          "score": 0.85,
+          "displayValue": "150 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        }
+      ],
+      "diagnosticsDesktop": [
+        {
+          "category": "accessibility",
+          "id": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "accessibility",
+          "id": "label-content-name-mismatch",
+          "title": "Elements with visible text labels do not have matching accessible names.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "accessibility",
+          "id": "label",
+          "title": "Form elements do not have associated labels",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "accessibility",
+          "id": "select-name",
+          "title": "Select elements do not have associated label elements.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "80 insecure requests found",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "redirects-http",
+          "title": "Does not redirect HTTP traffic to HTTPS",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "largest-contentful-paint-element",
+          "title": "Largest Contentful Paint element",
+          "score": 0,
+          "displayValue": "1,240 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-resources",
+          "title": "Eliminate render-blocking resources",
+          "score": 0,
+          "displayValue": "Est savings of 220 ms",
+          "savingsMs": 224,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "unminified-css",
+          "title": "Minify CSS",
+          "score": 0,
+          "displayValue": "Est savings of 37 KiB",
+          "savingsMs": 60,
+          "savingsBytes": 37619
+        },
+        {
+          "category": "performance",
+          "id": "unminified-javascript",
+          "title": "Minify JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 117 KiB",
+          "savingsMs": 150,
+          "savingsBytes": 119559
+        },
+        {
+          "category": "performance",
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 12 KiB",
+          "savingsMs": 80,
+          "savingsBytes": 11876
+        },
+        {
+          "category": "performance",
+          "id": "uses-text-compression",
+          "title": "Enable text compression",
+          "score": 0,
+          "displayValue": "Est savings of 351 KiB",
+          "savingsMs": 210,
+          "savingsBytes": 359287
+        },
+        {
+          "category": "performance",
+          "id": "uses-http2",
+          "title": "Use HTTP/2",
+          "score": 0,
+          "displayValue": "80 requests not served via HTTP/2",
+          "savingsMs": 370,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "modern-http-insight",
+          "title": "Modern HTTP",
+          "score": 0,
+          "displayValue": "Est savings of 650 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-insight",
+          "title": "Render blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 260 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 2 KiB",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0.88,
+          "displayValue": "1.2 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        }
+      ]
+    },
+    "article": {
+      "url": "/Toolzenhub/articles/loan-comparison/what-is-loan-prepayment/",
+      "label": "Article: What Is Loan Prepayment?",
+      "mobileMedian": {
+        "scores": {
+          "performance": 69,
+          "accessibility": 96,
+          "bestPractices": 79,
+          "seo": 100
+        },
+        "metrics": {
+          "firstContentfulPaintMs": 2956,
+          "largestContentfulPaintMs": 10717,
+          "totalBlockingTimeMs": 86,
+          "cumulativeLayoutShift": 0,
+          "speedIndexMs": 2956,
+          "interactiveMs": 10717,
+          "serverResponseTimeMs": 5,
+          "totalByteWeight": 1719935,
+          "domElements": 359,
+          "requests": 62
+        }
+      },
+      "mobileRuns": [
+        {
+          "scores": {
+            "performance": 66,
+            "accessibility": 96,
+            "bestPractices": 79,
+            "seo": 100
+          },
+          "metrics": {
+            "firstContentfulPaintMs": 3185,
+            "largestContentfulPaintMs": 10698,
+            "totalBlockingTimeMs": 102,
+            "cumulativeLayoutShift": 0,
+            "speedIndexMs": 4738,
+            "interactiveMs": 10698,
+            "serverResponseTimeMs": 5,
+            "totalByteWeight": 1719935,
+            "domElements": 359,
+            "requests": 62
+          },
+          "benchmarkIndex": 1125,
+          "warnings": []
+        },
+        {
+          "scores": {
+            "performance": 69,
+            "accessibility": 96,
+            "bestPractices": 79,
+            "seo": 100
+          },
+          "metrics": {
+            "firstContentfulPaintMs": 2956,
+            "largestContentfulPaintMs": 10722,
+            "totalBlockingTimeMs": 86,
+            "cumulativeLayoutShift": 0,
+            "speedIndexMs": 2956,
+            "interactiveMs": 10722,
+            "serverResponseTimeMs": 8,
+            "totalByteWeight": 1719935,
+            "domElements": 359,
+            "requests": 62
+          },
+          "benchmarkIndex": 1142.5,
+          "warnings": []
+        },
+        {
+          "scores": {
+            "performance": 69,
+            "accessibility": 96,
+            "bestPractices": 79,
+            "seo": 100
+          },
+          "metrics": {
+            "firstContentfulPaintMs": 2942,
+            "largestContentfulPaintMs": 10717,
+            "totalBlockingTimeMs": 84,
+            "cumulativeLayoutShift": 0,
+            "speedIndexMs": 2942,
+            "interactiveMs": 10717,
+            "serverResponseTimeMs": 3,
+            "totalByteWeight": 1719935,
+            "domElements": 359,
+            "requests": 62
+          },
+          "benchmarkIndex": 1119,
+          "warnings": []
+        }
+      ],
+      "desktop": {
+        "scores": {
+          "performance": 90,
+          "accessibility": 96,
+          "bestPractices": 79,
+          "seo": 100
+        },
+        "metrics": {
+          "firstContentfulPaintMs": 765,
+          "largestContentfulPaintMs": 2062,
+          "totalBlockingTimeMs": 0,
+          "cumulativeLayoutShift": 0,
+          "speedIndexMs": 765,
+          "interactiveMs": 2062,
+          "serverResponseTimeMs": 3,
+          "totalByteWeight": 1719935,
+          "domElements": 359,
+          "requests": 62
+        },
+        "benchmarkIndex": 1129.5,
+        "warnings": []
+      },
+      "diagnosticsMobile": [
+        {
+          "category": "accessibility",
+          "id": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "accessibility",
+          "id": "label-content-name-mismatch",
+          "title": "Elements with visible text labels do not have matching accessible names.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "61 insecure requests found",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "redirects-http",
+          "title": "Does not redirect HTTP traffic to HTTPS",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0,
+          "displayValue": "10.7 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "largest-contentful-paint-element",
+          "title": "Largest Contentful Paint element",
+          "score": 0,
+          "displayValue": "10,720 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-resources",
+          "title": "Eliminate render-blocking resources",
+          "score": 0,
+          "displayValue": "Est savings of 220 ms",
+          "savingsMs": 220,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "unminified-css",
+          "title": "Minify CSS",
+          "score": 0,
+          "displayValue": "Est savings of 45 KiB",
+          "savingsMs": 300,
+          "savingsBytes": 45810
+        },
+        {
+          "category": "performance",
+          "id": "unminified-javascript",
+          "title": "Minify JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 78 KiB",
+          "savingsMs": 450,
+          "savingsBytes": 79936
+        },
+        {
+          "category": "performance",
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 12 KiB",
+          "savingsMs": 130,
+          "savingsBytes": 11876
+        },
+        {
+          "category": "performance",
+          "id": "modern-image-formats",
+          "title": "Serve images in next-gen formats",
+          "score": 0,
+          "displayValue": "Est savings of 1,181 KiB",
+          "savingsMs": 5850,
+          "savingsBytes": 1209265
+        },
+        {
+          "category": "performance",
+          "id": "uses-text-compression",
+          "title": "Enable text compression",
+          "score": 0,
+          "displayValue": "Est savings of 289 KiB",
+          "savingsMs": 1500,
+          "savingsBytes": 296415
+        },
+        {
+          "category": "performance",
+          "id": "uses-responsive-images",
+          "title": "Properly size images",
+          "score": 0,
+          "displayValue": "Est savings of 987 KiB",
+          "savingsMs": 4950,
+          "savingsBytes": 1010559
+        },
+        {
+          "category": "performance",
+          "id": "uses-http2",
+          "title": "Use HTTP/2",
+          "score": 0,
+          "displayValue": "61 requests not served via HTTP/2",
+          "savingsMs": 1100,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "score": 0,
+          "displayValue": "Est savings of 1,293 KiB",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "lcp-discovery-insight",
+          "title": "LCP request discovery",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "modern-http-insight",
+          "title": "Modern HTTP",
+          "score": 0,
+          "displayValue": "Est savings of 1,550 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-insight",
+          "title": "Render blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 1,060 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "interactive",
+          "title": "Time to Interactive",
+          "score": 0.22,
+          "displayValue": "10.7 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 3 KiB",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "first-contentful-paint",
+          "title": "First Contentful Paint",
+          "score": 0.51,
+          "displayValue": "2.9 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        }
+      ],
+      "diagnosticsDesktop": [
+        {
+          "category": "accessibility",
+          "id": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "accessibility",
+          "id": "label-content-name-mismatch",
+          "title": "Elements with visible text labels do not have matching accessible names.",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "is-on-https",
+          "title": "Does not use HTTPS",
+          "score": 0,
+          "displayValue": "61 insecure requests found",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "best-practices",
+          "id": "redirects-http",
+          "title": "Does not redirect HTTP traffic to HTTPS",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "largest-contentful-paint-element",
+          "title": "Largest Contentful Paint element",
+          "score": 0,
+          "displayValue": "2,060 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-resources",
+          "title": "Eliminate render-blocking resources",
+          "score": 0,
+          "displayValue": "Est savings of 50 ms",
+          "savingsMs": 47,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "unminified-css",
+          "title": "Minify CSS",
+          "score": 0,
+          "displayValue": "Est savings of 45 KiB",
+          "savingsMs": 40,
+          "savingsBytes": 45810
+        },
+        {
+          "category": "performance",
+          "id": "unminified-javascript",
+          "title": "Minify JavaScript",
+          "score": 0,
+          "displayValue": "Est savings of 78 KiB",
+          "savingsMs": 40,
+          "savingsBytes": 79936
+        },
+        {
+          "category": "performance",
+          "id": "unused-css-rules",
+          "title": "Reduce unused CSS",
+          "score": 0,
+          "displayValue": "Est savings of 12 KiB",
+          "savingsMs": 0,
+          "savingsBytes": 11876
+        },
+        {
+          "category": "performance",
+          "id": "modern-image-formats",
+          "title": "Serve images in next-gen formats",
+          "score": 0,
+          "displayValue": "Est savings of 1,181 KiB",
+          "savingsMs": 970,
+          "savingsBytes": 1209265
+        },
+        {
+          "category": "performance",
+          "id": "uses-text-compression",
+          "title": "Enable text compression",
+          "score": 0,
+          "displayValue": "Est savings of 289 KiB",
+          "savingsMs": 160,
+          "savingsBytes": 296415
+        },
+        {
+          "category": "performance",
+          "id": "uses-responsive-images",
+          "title": "Properly size images",
+          "score": 0,
+          "displayValue": "Est savings of 1,136 KiB",
+          "savingsMs": 920,
+          "savingsBytes": 1163662
+        },
+        {
+          "category": "performance",
+          "id": "uses-http2",
+          "title": "Use HTTP/2",
+          "score": 0,
+          "displayValue": "61 requests not served via HTTP/2",
+          "savingsMs": 370,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "bf-cache",
+          "title": "Page prevented back/forward cache restoration",
+          "score": 0,
+          "displayValue": "2 failure reasons",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "image-delivery-insight",
+          "title": "Improve image delivery",
+          "score": 0,
+          "displayValue": "Est savings of 1,282 KiB",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "lcp-discovery-insight",
+          "title": "LCP request discovery",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "modern-http-insight",
+          "title": "Modern HTTP",
+          "score": 0,
+          "displayValue": "Est savings of 480 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "network-dependency-tree-insight",
+          "title": "Network dependency tree",
+          "score": 0,
+          "displayValue": null,
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "render-blocking-insight",
+          "title": "Render blocking requests",
+          "score": 0,
+          "displayValue": "Est savings of 280 ms",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "document-latency-insight",
+          "title": "Document request latency",
+          "score": 0.5,
+          "displayValue": "Est savings of 3 KiB",
+          "savingsMs": null,
+          "savingsBytes": null
+        },
+        {
+          "category": "performance",
+          "id": "largest-contentful-paint",
+          "title": "Largest Contentful Paint",
+          "score": 0.61,
+          "displayValue": "2.1 s",
+          "savingsMs": null,
+          "savingsBytes": null
+        }
+      ]
+    }
+  },
+  "generatedAt": "2026-10-01T07:36:15.815Z"
+}

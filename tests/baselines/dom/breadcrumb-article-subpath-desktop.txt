@@ -1,0 +1,8 @@
+div.calculator-breadcrumb
+  a [href="{ROOT}"] "Home"
+  span "›"
+  a [href="{ROOT}articles.html"] "Articles"
+  span "›"
+  a [href="{ROOT}articles.html?category=loans"] "Loans"
+  span "›"
+  strong "What Is Loan Prepayment?"
