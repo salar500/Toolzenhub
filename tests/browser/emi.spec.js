@@ -158,4 +158,41 @@ test.describe("EMI calculator", () => {
     await expect(page.locator("#emi-form")).toBeVisible();
     await expectNoHorizontalOverflow(page);
   });
+
+  test("M3: exactly one breadcrumb, and identity comes from the catalog", async ({ page, go }) => {
+    await go("calculators/emi/");
+    await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
+    // breadcrumb is the first child of the page wrapper, related sections are last
+    const order = await page.locator("#app .calculator-page > *").evaluateAll((els) => els.map((e) => e.className));
+    expect(order[0]).toBe("calculator-breadcrumb");
+    expect(order.slice(-2)).toEqual(["related-section", "related-section"]);
+    // heading text derived from the catalog title must equal what it always said
+    await expect(page.locator("h1")).toHaveText("EMI Calculator");
+    await expect(page.getByRole("heading", { name: "How to Use the EMI Calculator" })).toHaveCount(1);
+    await expect(page.getByRole("heading", { name: "EMI Calculator FAQ" })).toHaveCount(1);
+    // recalculating never adds another breadcrumb
+    await page.getByRole("button", { name: "Calculate EMI" }).click();
+    await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
+  });
+
+  test("M3: golden values at the form limits (literals captured before the migration)", async ({ page, go }) => {
+    await go("calculators/emi/");
+    const run = async (loan, rate, years) => {
+      await page.getByLabel("Loan Amount").fill(loan);
+      await page.getByLabel("Interest Rate").fill(rate);
+      await page.getByLabel("Loan Tenure").fill(years);
+      await page.getByRole("button", { name: "Calculate EMI" }).click();
+    };
+    await run("1000", "1", "1"); // minimum of every field
+    await expect(result(page, "Monthly EMI")).toHaveText("₹84");
+    await expect(result(page, "Total Interest")).toHaveText("₹5");
+    await expect(result(page, "Total Repayment")).toHaveText("₹1,005");
+    await run("100000000", "30", "40"); // maximum of every field
+    await expect(result(page, "Monthly EMI")).toHaveText("₹25,00,018");
+    await expect(result(page, "Total Interest")).toHaveText("₹1,10,00,08,545");
+    await expect(result(page, "Total Repayment")).toHaveText("₹1,20,00,08,545");
+    await run("2500000", "7.25", "15");
+    await expect(result(page, "Total Interest")).toHaveText("₹16,07,883");
+    await expect(result(page, "Total Repayment")).toHaveText("₹41,07,883");
+  });
 });

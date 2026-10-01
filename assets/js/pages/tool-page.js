@@ -172,7 +172,17 @@ export async function renderToolPage(
         }
 
 
-        if (metadata) {
+        /*
+         * Exactly one breadcrumb: skip it if the tool
+         * already rendered its own.
+         */
+
+        if (
+            metadata &&
+            !page.querySelector(
+                ".calculator-breadcrumb"
+            )
+        ) {
 
             page.insertAdjacentHTML(
                 "afterbegin",

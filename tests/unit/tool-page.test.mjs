@@ -43,7 +43,7 @@ describe("tool module contract", () => {
 describe("renderToolPage placement", () => {
   function fakeDom() {
     const calls = [];
-    const page = { insertAdjacentHTML: (pos, html) => calls.push([pos, html]) };
+    const page = { insertAdjacentHTML: (pos, html) => calls.push([pos, html]), querySelector: () => null };
     const app = { innerHTML: "" };
     globalThis.document = { querySelector: (sel) => (sel === "#app" ? app : sel === "#app .calculator-page" ? page : null) };
     return { calls, app };
@@ -59,6 +59,17 @@ describe("renderToolPage placement", () => {
     assert.match(calls[0][1], /calculator-breadcrumb[\s\S]*Demo Tool/);
     assert.match(calls[1][1], /Related Calculators/);
     assert.match(calls[2][1], /Related Articles|related/i);
+  });
+
+  test("M3: a tool that already rendered a breadcrumb does not get a second one", async () => {
+    const calls = [];
+    const page = {
+      insertAdjacentHTML: (pos, html) => calls.push([pos, html]),
+      querySelector: (sel) => (sel === ".calculator-breadcrumb" ? {} : null),
+    };
+    globalThis.document = { querySelector: (sel) => (sel === "#app" ? {} : sel === "#app .calculator-page" ? page : null) };
+    await toolPage.renderToolPage("emi", { loader: async () => ({ render() {} }), metadata: meta });
+    assert.deepEqual(calls.map((c) => c[0]), ["beforeend", "beforeend"]);
   });
 
   test("opt-out suppresses both related sections but keeps the breadcrumb", async () => {

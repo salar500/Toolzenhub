@@ -10,22 +10,25 @@ import {
 } from "../formulas/loan.js";
 
 
+import {
+    formatINR as formatCurrency
+} from "../common/formatter.js";
+
+import {
+    getCalculatorById
+} from "../../data/calculators.js";
+
+
 /* =========================================================
-   FORMAT CURRENCY
+   IDENTITY
+
+   Title (and the headings derived from it) come from the
+   calculator catalog, the single source of tool identity.
+   Intro copy and the rest of the content stay with the tool.
 ========================================================= */
 
-function formatCurrency(value) {
-
-    return new Intl.NumberFormat(
-        "en-IN",
-        {
-            style: "currency",
-            currency: "INR",
-            maximumFractionDigits: 0
-        }
-    ).format(value);
-
-}
+const TITLE =
+    getCalculatorById("emi").title;
 
 
 /* =========================================================
@@ -58,7 +61,7 @@ export function render() {
                     </span>
 
                     <h1>
-                        EMI Calculator
+                        ${TITLE}
                     </h1>
 
                     <p>
@@ -274,7 +277,7 @@ export function render() {
             <section class="calculator-info">
 
                 <h2>
-                    How to Use the EMI Calculator
+                    How to Use the ${TITLE}
                 </h2>
 
                 <ol>
@@ -337,7 +340,7 @@ export function render() {
             <section class="calculator-info">
 
                 <h2>
-                    EMI Calculator FAQ
+                    ${TITLE} FAQ
                 </h2>
 
 
