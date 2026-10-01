@@ -3,6 +3,11 @@
    Global Footer Component
 ========================================================= */
 
+import {
+    SITE_ROOT
+} from "../routes.js";
+
+
 export function renderFooter() {
 
     const footer = document.getElementById("footer");
@@ -36,10 +41,7 @@ export function renderFooter() {
     ====================================================== */
 
     const siteBase =
-        window.location.hostname ===
-        "salar500.github.io"
-            ? "/Toolzenhub/"
-            : "/";
+        SITE_ROOT;
 
 
     /* =====================================================

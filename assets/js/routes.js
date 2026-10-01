@@ -8,15 +8,19 @@
 ========================================================= */
 
 
+import {
+    resolveSiteRoot
+} from "./site-config.js";
+
+
 /* =========================================================
    SITE ROOT
 ========================================================= */
 
 export const SITE_ROOT =
-    window.location.hostname ===
-    "salar500.github.io"
-        ? "/Toolzenhub/"
-        : "/";
+    resolveSiteRoot(
+        window.location.hostname
+    );
 
 
 

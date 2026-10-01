@@ -19,6 +19,7 @@
 
 
 import { ROUTES } from "../../routes.js";
+import { SITE } from "../../site-config.js";
 
 
 /* =========================================================
@@ -26,11 +27,11 @@ import { ROUTES } from "../../routes.js";
 ========================================================= */
 
 const SITE_NAME =
-    "ToolZen Hub";
+    SITE.name;
 
 
 const SITE_URL =
-    "https://salar500.github.io/Toolzenhub/";
+    SITE.url;
 
 
 const SITE_LOGO =
