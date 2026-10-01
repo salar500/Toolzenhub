@@ -1,1 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Page Not Found | ToolZen Hub</title>
+
+    <meta
+        name="description"
+        content="The page you are looking for could not be found on ToolZen Hub."
+    >
+
+    <meta name="robots" content="noindex">
+
+    <meta name="theme-color" content="#2563eb">
+
+
+    <!-- =====================================================
+         Favicon
+
+         GitHub Pages serves this file at whatever URL was
+         requested (for example /Toolzenhub/a/b/missing), so
+         page-relative paths cannot be trusted here. The
+         relative href is only the no-JavaScript fallback; the
+         script below replaces it with the correct site-root
+         path before the browser requests it.
+    ====================================================== -->
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <script>
+        /*
+         * Site root - same rule as assets/js/routes.js:
+         * GitHub Pages project site -> /Toolzenhub/
+         * any other host (custom / root domain) -> /
+         */
+        (function () {
+
+            var root =
+                window.location.hostname === "salar500.github.io"
+                    ? "/Toolzenhub/"
+                    : "/";
+
+            var icon =
+                document.querySelector('link[rel="icon"]');
+
+            if (icon) {
+                icon.setAttribute("href", root + "favicon.svg");
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+
+                var links =
+                    document.querySelectorAll("[data-route]");
+
+                for (var i = 0; i < links.length; i++) {
+
+                    links[i].setAttribute(
+                        "href",
+                        root + links[i].getAttribute("data-route")
+                    );
+
+                }
+
+            });
+
+        })();
+    </script>
+
+
+    <!-- Without JavaScript the site-root links cannot be built,
+         so hide them and show the fallback link instead. -->
+
+    <noscript>
+        <style>
+            .nf-nav { display: none; }
+        </style>
+    </noscript>
+
+
+    <!-- Fonts (absolute URL, works at any path depth) -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         Styles - inline on purpose: this page must not depend
+         on any relative stylesheet path.
+    ====================================================== -->
+
+    <style>
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+
+            background: #f8faf9;
+            color: #101828;
+
+            font-family:
+                "Inter",
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            line-height: 1.6;
+        }
+
+        .nf-header {
+            border-bottom: 1px solid #e4ebe8;
+            background: #ffffff;
+        }
+
+        .nf-header__inner {
+            width: calc(100% - 32px);
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 14px 0;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nf-logo {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+            background: #0b9f58;
+            color: #ffffff;
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+
+            box-shadow: 0 4px 12px rgba(11, 159, 88, 0.18);
+        }
+
+        .nf-brand {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: -0.6px;
+            color: #111827;
+        }
+
+        .nf-brand span {
+            color: #0b9f58;
+        }
+
+        .nf-main {
+            flex: 1;
+
+            width: calc(100% - 32px);
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 56px 0 72px;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .nf-card {
+            width: 100%;
+            padding: 40px 32px;
+
+            border: 1px solid #e4e9e7;
+            border-radius: 14px;
+            background: #ffffff;
+            text-align: center;
+
+            box-shadow: 0 8px 25px rgba(16, 24, 40, 0.05);
+        }
+
+        .nf-code {
+            display: inline-block;
+            margin-bottom: 8px;
+
+            color: #0b9f58;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .nf-card h1 {
+            margin: 0 0 12px;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 38px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .nf-card p {
+            max-width: 480px;
+            margin: 0 auto 26px;
+
+            color: #667085;
+            font-size: 15px;
+        }
+
+        .nf-btn {
+            display: inline-block;
+            padding: 12px 26px;
+
+            border-radius: 8px;
+            background: #0b9f58;
+            color: #ffffff;
+
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+
+            transition: background 0.2s ease;
+        }
+
+        .nf-btn:hover,
+        .nf-btn:focus-visible {
+            background: #087d46;
+        }
+
+        .nf-card p.nf-explore {
+            margin: 30px auto 10px;
+
+            color: #344054;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .nf-links {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .nf-links a {
+            display: inline-block;
+            padding: 8px 16px;
+
+            border: 1px solid #d9e0dd;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #344054;
+
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+
+            transition:
+                border-color 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .nf-links a:hover,
+        .nf-links a:focus-visible {
+            border-color: #0b9f58;
+            color: #0b9f58;
+        }
+
+        .nf-btn:focus-visible,
+        .nf-links a:focus-visible {
+            outline: 3px solid rgba(11, 159, 88, 0.35);
+            outline-offset: 2px;
+        }
+
+        .nf-footer {
+            padding: 18px 16px;
+
+            border-top: 1px solid #e4ebe8;
+            background: #ffffff;
+            color: #667085;
+
+            font-size: 12px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+
+            .nf-main {
+                padding: 32px 0 48px;
+            }
+
+            .nf-card {
+                padding: 30px 20px;
+            }
+
+            .nf-card h1 {
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         Header (brand only - not a link, because the site
+         root cannot be known without JavaScript)
+    ====================================================== -->
+
+    <header class="nf-header">
+
+        <div class="nf-header__inner">
+
+            <span class="nf-logo" aria-hidden="true">▦</span>
+
+            <span class="nf-brand">
+                ToolZen <span>Hub</span>
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         Content
+    ====================================================== -->
+
+    <main class="nf-main">
+
+        <section class="nf-card">
+
+            <span class="nf-code">Error 404</span>
+
+            <h1>Page not found</h1>
+
+            <p>
+                Sorry, we couldn't find the page you were looking for.
+                It may have been moved or removed, or the address may
+                be mistyped.
+            </p>
+
+
+            <!-- Links below are given their real href by the script
+                 in <head> (site root differs per host). -->
+
+            <div class="nf-nav">
+
+                <a class="nf-btn" data-route="" href="/">
+                    Go to Home
+                </a>
+
+                <p class="nf-explore">Or explore</p>
+
+                <ul class="nf-links">
+
+                    <li>
+                        <a data-route="calculators.html" href="/calculators.html">
+                            All Calculators
+                        </a>
+                    </li>
+
+                    <li>
+                        <a data-route="categories.html" href="/categories.html">
+                            Categories
+                        </a>
+                    </li>
+
+                    <li>
+                        <a data-route="articles.html" href="/articles.html">
+                            Articles
+                        </a>
+                    </li>
+
+                    <li>
+                        <a data-route="about.html" href="/about.html">
+                            About
+                        </a>
+                    </li>
+
+                    <li>
+                        <a data-route="contact.html" href="/contact.html">
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- No-JavaScript fallback.
+
+                 This is the one deliberate hard-coded address on the
+                 page: the current GitHub Pages home. If the site moves
+                 to a custom domain, GitHub redirects the old address,
+                 and this link can be updated. -->
+
+            <noscript>
+                <a class="nf-btn" href="https://salar500.github.io/Toolzenhub/">
+                    Go to Home
+                </a>
+            </noscript>
+
+        </section>
+
+    </main>
+
+
+    <footer class="nf-footer">
+        &copy; ToolZen Hub &middot; Smart Tools, Smarter You
+    </footer>
+
+</body>
+
+</html>
