@@ -170,7 +170,8 @@ for (const key of ["categories", "loans", "articles", "about", "contact", "terms
 const calcMod = await import(pathToFileURL(path.join(REPO, "assets/js/data/calculators.js")).href + "?c=1");
 const artMod = await import(pathToFileURL(path.join(REPO, "assets/js/article-registry.js")).href + "?c=1");
 const calcRegistrySrc = stripComments(read("assets/js/data/calculators.js")); // loaders live in the catalog (M1)
-const articleLoaderSrc = stripComments(read("assets/js/data/articles/article-registry.js"));
+const articleCatalogMod = await import(pathToFileURL(path.join(REPO, "assets/js/data/articles.js")).href + "?c=1");
+const articleLoaderSrc = stripComments(read("assets/js/data/articles.js")); // content loaders live in the article catalog (M5)
 
 let routeChecks = 0;
 for (const c of calcMod.calculators) {
@@ -192,6 +193,10 @@ for (const c of calcMod.calculators) {
     if (loaderMatch) fail("registry", `Coming soon calculator "${c.id}" has a loader but is not available`);
   }
 }
+for (const a of articleCatalogMod.articles) {
+  if (!["published", "coming-soon"].includes(a.status)) fail("registry", `article "${a.slug}": status must be "published" or "coming-soon" (got ${JSON.stringify(a.status)})`);
+  if (a.published !== (a.status === "published")) fail("registry", `article "${a.slug}": published (${a.published}) disagrees with status "${a.status}"`);
+}
 for (const a of artMod.articleRegistry) {
   const published = a.published === true;
   const route = rootRoutes.article(a.topic, a.slug);
@@ -201,8 +206,8 @@ for (const a of artMod.articleRegistry) {
   if (published) {
     if (!shell.ok) fail("registry", `published article "${a.slug}": no page at ${route}`);
     if (!liveUrlSet.has(route)) fail("registry", `published article "${a.slug}": ${route} missing from URL inventory`);
-    if (!loader) fail("registry", `published article "${a.slug}": no loader in data/articles/article-registry.js`);
-    else if (!checkPath(resolveRef("assets/js/data/articles/article-registry.js", loader[1])).ok) fail("registry", `published article "${a.slug}": loader imports missing module ${loader[1]}`);
+    if (!loader) fail("registry", `published article "${a.slug}": no loader in data/articles.js`);
+    else if (!checkPath(resolveRef("assets/js/data/articles.js", loader[1])).ok) fail("registry", `published article "${a.slug}": loader imports missing module ${loader[1]}`);
   } else {
     if (shell.ok) fail("registry", `Coming soon article "${a.slug}" already has a page at ${route}`);
     if (loader) fail("registry", `Coming soon article "${a.slug}" has a loader but is not published`);

@@ -2,6 +2,10 @@
    ToolZen Hub
    Article Data
 
+   Body content only. Metadata (slug, topic, title,
+   description, dates, read time, images, category,
+   related tools and articles) lives in data/articles.js.
+
    Article:
    How to Choose the Right Loan Tenure
 
@@ -17,43 +21,15 @@ const article = {
 
 
     /* =====================================================
-       BASIC INFORMATION
+       INTRODUCTION
     ===================================================== */
 
-    slug:
-        "choose-right-loan-tenure",
 
-
-    category:
-        "Finance",
-
-
-    topic:
-        "loan-comparison",
-
-
-    title:
-        "How to Choose the Right Loan Tenure",
-
-
-    description:
-        "Learn how to balance monthly affordability with total borrowing cost when choosing a loan tenure.",
 
 
     introduction:
         "Choosing a loan tenure involves more than selecting the lowest possible EMI. A longer tenure can make monthly payments easier to manage, while a shorter tenure can reduce the total interest paid. Understanding this trade-off can help you evaluate your repayment options.",
 
-
-    datePublished:
-        "Aug 25, 2026",
-
-
-    dateModified:
-        "Aug 25, 2026",
-
-
-    readTime:
-        "5 min read",
 
 
 
@@ -73,16 +49,6 @@ const article = {
             "Finance & Calculator Guides"
 
     },
-
-
-
-    /* =====================================================
-       FEATURED IMAGE
-    ===================================================== */
-
-    // TODO(image): add assets/Images/articles/choose-right-loan-tenure.png,
-    // then restore image: { src, alt }. Until then the image is skipped.
-    image: null,
 
 
 
@@ -129,12 +95,6 @@ const article = {
     ===================================================== */
 
     calculator: {
-
-        slug:
-            "loan-comparison",
-
-        title:
-            "Loan Comparison Calculator",
 
         description:
             "Compare EMI, interest rate, total interest and total repayment to understand the overall cost of different loan options."
@@ -473,149 +433,6 @@ const article = {
 
     ],
 
-
-
-    /* =====================================================
-       RELATED ARTICLES
-    ===================================================== */
-
-    relatedArticles: [
-
-        {
-
-            slug:
-                "how-to-reduce-home-loan-interest",
-
-            topic:
-                "loan-comparison",
-
-            title:
-                "How to Reduce Your Home Loan Interest",
-
-            category:
-                "Finance",
-
-            image: {
-
-                src:
-                    "/assets/Images/articles/how-to-reduce-home-loan-interest.png",
-
-                alt:
-                    "Home loan interest calculation and financial planning"
-
-            }
-
-        },
-
-
-        {
-
-            slug:
-                "emi-vs-total-interest",
-
-            topic:
-                "loan-comparison",
-
-            title:
-                "EMI vs Total Interest: What Should You Compare?",
-
-            category:
-                "Finance",
-
-            image: {
-
-                src:
-                    "/assets/Images/articles/emi-vs-total-interest.png",
-
-                alt:
-                    "EMI and total home loan interest comparison"
-
-            }
-
-        },
-
-
-        {
-
-            slug:
-                "fixed-vs-floating-interest-rates",
-
-            topic:
-                "loan-comparison",
-
-            title:
-                "Fixed vs Floating Interest Rates",
-
-            category:
-                "Finance",
-
-            image: {
-
-                src:
-                    "/assets/Images/articles/fixed-vs-floating-interest-rates.png",
-
-                alt:
-                    "Fixed and floating home loan interest rate comparison"
-
-            }
-
-        },
-
-
-        {
-
-            slug:
-                "loan-tenure-total-interest",
-
-            topic:
-                "loan-comparison",
-
-            title:
-                "How Loan Tenure Affects Total Interest",
-
-            category:
-                "Finance",
-
-            image: {
-
-                src:
-                    "/assets/Images/articles/loan-tenure-total-interest.png",
-
-                alt:
-                    "Loan tenure and total interest comparison"
-
-            }
-
-        },
-
-
-        {
-
-            slug:
-                "what-is-loan-prepayment",
-
-            topic:
-                "loan-comparison",
-
-            title:
-                "What Is Loan Prepayment?",
-
-            category:
-                "Finance",
-
-            image: {
-
-                src:
-                    "/assets/Images/articles/what-is-loan-prepayment.png",
-
-                alt:
-                    "Home loan prepayment and principal repayment"
-
-            }
-
-        }
-
-    ]
 
 };
 

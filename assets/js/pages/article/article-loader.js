@@ -3,8 +3,10 @@
    Article Loader
 
    Purpose:
-   Loads the correct article data module based on
-   the current article URL.
+   Resolves the current article URL to a published article in
+   the article catalog (data/articles.js), loads its content
+   module on demand, and joins metadata and content into the
+   article object the page renders (article-model.js).
 
    Expected URL:
 
@@ -17,21 +19,21 @@
 
 
 /* =========================================================
-   ARTICLE DATA LOADER REGISTRY
+   ARTICLE CATALOG
 ========================================================= */
 
 import {
-    articleRegistry as articleLoaders
-} from "../../data/articles/article-registry.js";
+    getArticleByKey
+} from "../../data/articles.js";
 
 
 /* =========================================================
-   CENTRAL ARTICLE REGISTRY
+   ARTICLE MODEL
 ========================================================= */
 
 import {
-    articleRegistry as centralArticleRegistry
-} from "../../article-registry.js";
+    buildArticle
+} from "./article-model.js";
 
 
 /* =========================================================
@@ -43,16 +45,13 @@ function getArticleRouteKey() {
     const pathname =
         window.location.pathname;
 
-
     const marker =
         "/articles/";
-
 
     const markerIndex =
         pathname.indexOf(
             marker
         );
-
 
     if (markerIndex === -1) {
 
@@ -65,7 +64,6 @@ function getArticleRouteKey() {
 
     }
 
-
     const route =
         pathname
             .substring(
@@ -76,42 +74,7 @@ function getArticleRouteKey() {
                 ""
             );
 
-
     return route;
-
-}
-
-
-/* =========================================================
-   FIND CENTRAL ARTICLE
-========================================================= */
-
-function findCentralArticle(
-    routeKey
-) {
-
-    const parts =
-        routeKey.split("/");
-
-
-    if (parts.length !== 2) {
-        return null;
-    }
-
-
-    const topic =
-        parts[0];
-
-
-    const slug =
-        parts[1];
-
-
-    return centralArticleRegistry.find(
-        article =>
-            article.topic === topic &&
-            article.slug === slug
-    ) || null;
 
 }
 
@@ -125,7 +88,6 @@ export async function loadArticle() {
     const routeKey =
         getArticleRouteKey();
 
-
     if (!routeKey) {
 
         console.error(
@@ -137,11 +99,18 @@ export async function loadArticle() {
     }
 
 
-    const loader =
-        articleLoaders[
-            routeKey
-        ];
+    /*
+     * Only published articles have a content loader.
+     * Coming-soon entries and unknown routes stop here.
+     */
 
+    const entry =
+        getArticleByKey(
+            routeKey
+        );
+
+    const loader =
+        entry?.content;
 
     if (!loader) {
 
@@ -155,17 +124,16 @@ export async function loadArticle() {
 
 
     try {
+
         const module =
             await loader();
 
-
-        const article =
+        const content =
             module.default ||
             module.article ||
             null;
 
-
-        if (!article) {
+        if (!content) {
 
             console.error(
                 "ToolZen Hub: Article module loaded but no article data was exported.",
@@ -176,38 +144,10 @@ export async function loadArticle() {
 
         }
 
-
-        /* =================================================
-           CENTRAL CATEGORY
-        ================================================= */
-
-        const centralArticle =
-            findCentralArticle(
-                routeKey
-            );
-
-
-        /*
-         * The central registry is the source of truth
-         * for article category information.
-         *
-         * Keep both the category slug and the
-         * category display name synchronized.
-         */
-
-        if (centralArticle) {
-
-            article.category =
-                centralArticle.category;
-
-            article.categoryName =
-                centralArticle.categoryName ||
-                centralArticle.category;
-
-        }
-
-
-        return article;
+        return buildArticle(
+            entry,
+            content
+        );
 
     } catch (error) {
 
@@ -215,7 +155,6 @@ export async function loadArticle() {
             "ToolZen Hub: Failed to load article data.",
             error
         );
-
 
         return null;
 

@@ -168,3 +168,53 @@ test.describe("articles listing page", () => {
     await expect(cards(page).first()).toBeVisible();
   });
 });
+
+
+/* ---------------------------------------------------------------------------------------------------------
+ * M5 — authoritative article catalog (assets/js/data/articles.js).
+ * Expected values are LITERALS captured from the live article objects BEFORE the migration (git a06e9bc..087dbc4),
+ * not derived from the code under test.
+ * ------------------------------------------------------------------------------------------------------- */
+const CATALOG = {
+  "how-to-reduce-home-loan-interest": { title: "How to Reduce Your Home Loan Interest", description: "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.", readTime: "6 min read", hero: "/assets/Images/articles/how-to-reduce-home-loan-interest.png", alt: "Home loan interest calculation and financial planning", related: ["emi-vs-total-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","what-is-loan-prepayment","choose-right-loan-tenure"] },
+  "emi-vs-total-interest": { title: "EMI vs Total Interest: What Should You Compare?", description: "Understand why EMI alone does not tell the complete story when comparing loan options and borrowing costs.", readTime: "5 min read", hero: "/assets/Images/articles/emi-vs-total-interest.png", alt: "EMI and total home loan interest comparison", related: ["how-to-reduce-home-loan-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","what-is-loan-prepayment","choose-right-loan-tenure"] },
+  "fixed-vs-floating-interest-rates": { title: "Fixed vs Floating Interest Rates", description: "Understand the difference between fixed and floating interest rates before choosing a loan.", readTime: "6 min read", hero: "/assets/Images/articles/fixed-vs-floating-interest-rates.png", alt: "Fixed and floating home loan interest rate comparison", related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","loan-tenure-total-interest","what-is-loan-prepayment","choose-right-loan-tenure"] },
+  "loan-tenure-total-interest": { title: "How Loan Tenure Affects Total Interest", description: "See why choosing a longer or shorter loan tenure can significantly affect your total interest cost.", readTime: "6 min read", hero: "/assets/Images/articles/loan-tenure-total-interest.png", alt: "Loan tenure and total interest comparison", related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","fixed-vs-floating-interest-rates","what-is-loan-prepayment","choose-right-loan-tenure"] },
+  "what-is-loan-prepayment": { title: "What Is Loan Prepayment?", description: "Understand how loan prepayment works and how paying down your principal can potentially reduce interest.", readTime: "4 min read", hero: "/assets/Images/articles/what-is-loan-prepayment.png", alt: "Home loan prepayment and principal repayment", related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","choose-right-loan-tenure"] },
+  "choose-right-loan-tenure": { title: "How to Choose the Right Loan Tenure", description: "Learn how to balance monthly affordability with total borrowing cost when choosing a loan tenure.", readTime: "5 min read", hero: null, alt: null, related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","what-is-loan-prepayment"] },
+};
+
+test.describe("M5 article metadata comes from the catalog and is unchanged", () => {
+  for (const [slug, want] of Object.entries(CATALOG)) {
+    test(slug, async ({ page, go, siteRoot, baseURL }) => {
+      await go(`articles/loan-comparison/${slug}/`);
+      await expect(page).toHaveTitle(`${want.title} | ToolZen Hub`);
+      await expect(page.locator(".article-hero h1")).toHaveText(want.title);
+      await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", want.description);
+      await expect(page.locator(".article-meta")).toContainText(want.readTime);
+      await expect(page.locator(".article-meta")).toContainText("Aug 25, 2026");
+
+      // JSON-LD carries the same metadata
+      const article = await page.locator('script[type="application/ld+json"]').evaluateAll((s) => s.map((x) => JSON.parse(x.textContent)).find((j) => j["@type"] === "Article"));
+      expect(article.headline).toBe(want.title);
+      expect(article.description).toBe(want.description);
+      expect(article.articleSection).toBe("loans");
+      expect(article.datePublished).toBe("Aug 25, 2026");
+      expect(article.dateModified).toBe("Aug 25, 2026");
+
+      // hero image (one article has none yet)
+      const hero = page.locator(".article-hero-image img");
+      if (want.hero) {
+        await expect(hero).toHaveAttribute("src", siteRoot + want.hero.replace(/^\//, ""));
+        await expect(hero).toHaveAttribute("alt", want.alt);
+      } else await expect(hero).toHaveCount(0);
+
+      // curated related articles: exactly these, in this order, each with its own title
+      const hrefs = await page.locator(".article-related-card").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
+      expect(hrefs).toEqual(want.related.map((s) => `${siteRoot}articles/loan-comparison/${s}/`));
+      const titles = await page.locator(".article-related-card h3").evaluateAll((l) => l.map((x) => x.textContent.trim()));
+      expect(titles).toEqual(want.related.map((s) => CATALOG[s].title));
+      await expect(page.locator(".article-related-category").first()).toHaveText("Finance");
+    });
+  }
+});

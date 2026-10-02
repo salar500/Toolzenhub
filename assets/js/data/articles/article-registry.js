@@ -1,9 +1,14 @@
 /* =========================================================
    ToolZen Hub
-   Article Registry
+   Article Content Loader Registry
 
    Purpose:
-   Central registry for all individual articles.
+   "topic/slug" -> () => import(content module)
+
+   DERIVED from the article catalog (data/articles.js), which
+   declares each published article's content loader once.
+   Coming-soon articles have no loader, so they have no
+   individual article page.
 
    Route:
 
@@ -14,53 +19,23 @@
    /Toolzenhub/articles/{topic}/{slug}/
 ========================================================= */
 
-
-export const articleRegistry = {
-
-
-    /* =====================================================
-       LOAN COMPARISON ARTICLES
-    ===================================================== */
-
-    "loan-comparison/how-to-reduce-home-loan-interest":
-        () =>
-            import(
-                "./loan-comparison/how-to-reduce-home-loan-interest.js"
-            ),
+import {
+    articles
+} from "../articles.js";
 
 
-    "loan-comparison/emi-vs-total-interest":
-        () =>
-            import(
-                "./loan-comparison/emi-vs-total-interest.js"
-            ),
-
-
-    "loan-comparison/fixed-vs-floating-interest-rates":
-        () =>
-            import(
-                "./loan-comparison/fixed-vs-floating-interest-rates.js"
-            ),
-
-
-    "loan-comparison/loan-tenure-total-interest":
-        () =>
-            import(
-                "./loan-comparison/loan-tenure-total-interest.js"
-            ),
-
-
-    "loan-comparison/what-is-loan-prepayment":
-        () =>
-            import(
-                "./loan-comparison/what-is-loan-prepayment.js"
-            ),
-
-
-    "loan-comparison/choose-right-loan-tenure":
-        () =>
-            import(
-                "./loan-comparison/choose-right-loan-tenure.js"
+export const articleRegistry =
+    Object.fromEntries(
+        articles
+            .filter(
+                article =>
+                    article.published &&
+                    typeof article.content === "function"
             )
-
-};
+            .map(
+                article => [
+                    article.key,
+                    article.content
+                ]
+            )
+    );
