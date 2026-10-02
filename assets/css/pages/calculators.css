@@ -21,7 +21,7 @@
     --calculators-body: #64748B;
     --calculators-muted: #94A3B8;
 
-    --calculators-border: #E2E8F0;
+    --calculators-border: var(--color-slate-200);
     --calculators-border-light: #F1F5F9;
 
 }
@@ -57,7 +57,7 @@
 .calculators-breadcrumb a {
 
     color:
-        #0b9f58;
+        var(--color-brand-green);
 
     text-decoration:
         none;

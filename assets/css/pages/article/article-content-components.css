@@ -18,7 +18,7 @@
         22px 24px;
 
     border-left:
-        4px solid #0b9f58;
+        4px solid var(--color-brand-green);
 
     border-radius:
         0 10px 10px 0;
@@ -105,7 +105,7 @@
         #ffffff;
 
     color:
-        #0b9f58;
+        var(--color-brand-green);
 
 }
 
@@ -171,7 +171,7 @@
         24px;
 
     border:
-        1px solid #e2e8f0;
+        1px solid var(--color-slate-200);
 
     border-radius:
         14px;
@@ -269,7 +269,7 @@
         #dcfce7;
 
     color:
-        #0b9f58;
+        var(--color-brand-green);
 
     font-size:
         11px;
@@ -371,7 +371,7 @@
         #ffffff;
 
     color:
-        #0b9f58;
+        var(--color-brand-green);
 
 }
 
@@ -413,7 +413,7 @@
         5px;
 
     color:
-        #0b9f58;
+        var(--color-brand-green);
 
     font-size:
         12px;
@@ -488,7 +488,7 @@
         8px;
 
     background:
-        #0b9f58;
+        var(--color-brand-green);
 
     color:
         #ffffff;
@@ -552,7 +552,7 @@
 .article-faq-item {
 
     border:
-        1px solid #e2e8f0;
+        1px solid var(--color-slate-200);
 
     border-radius:
         10px;
@@ -681,7 +681,7 @@
         #f0fdf4;
 
     color:
-        #0b9f58;
+        var(--color-brand-green);
 
     font-size:
         20px;
@@ -856,7 +856,7 @@
         18px;
 
     border:
-        1px solid #e2e8f0;
+        1px solid var(--color-slate-200);
 
     border-radius:
         12px;
@@ -901,7 +901,7 @@
         9px;
 
     color:
-        #0b9f58;
+        var(--color-brand-green);
 
     font-size:
         11px;
@@ -950,7 +950,7 @@
         16px;
 
     color:
-        #0b9f58;
+        var(--color-brand-green);
 
     font-size:
         13px;

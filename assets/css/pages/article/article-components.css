@@ -18,7 +18,7 @@
         22px 24px;
 
     border-left:
-        4px solid #0b9f58;
+        4px solid var(--color-brand-green);
 
     border-radius:
         0 10px 10px 0;
@@ -66,7 +66,7 @@
         24px;
 
     border:
-        1px solid #e2e8f0;
+        1px solid var(--color-slate-200);
 
     border-radius:
         14px;
@@ -155,7 +155,7 @@
         #dcfce7;
 
     color:
-        #0b9f58;
+        var(--color-brand-green);
 
     font-size:
         12px;
@@ -219,7 +219,7 @@
         6px;
 
     color:
-        #0b9f58;
+        var(--color-brand-green);
 
     font-size:
         13px;
@@ -279,7 +279,7 @@
         8px;
 
     background:
-        #0b9f58;
+        var(--color-brand-green);
 
     color:
         #ffffff;
@@ -329,7 +329,7 @@
         10px;
 
     border:
-        1px solid #e2e8f0;
+        1px solid var(--color-slate-200);
 
     border-radius:
         10px;
@@ -398,7 +398,7 @@
         0;
 
     color:
-        #0b9f58;
+        var(--color-brand-green);
 
     font-size:
         20px;

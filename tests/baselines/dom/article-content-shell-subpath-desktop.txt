@@ -25,7 +25,9 @@ header.article-hero
       span.article-tag "Principal"
       span.article-tag "Loan Planning"
   figure.article-hero-image
-    img [alt="Home loan prepayment and principal repayment" src="{ROOT}assets/Images/articles/what-is-loan-prepayment.png"]
+    picture
+      source [type="image/webp"]
+      img [alt="Home loan prepayment and principal repayment" src="{ROOT}assets/Images/articles/what-is-loan-prepayment.png"]
 --- match 2 of 2 ---
 article.article
   section.article-toc [aria-labelledby="article-toc-title"]

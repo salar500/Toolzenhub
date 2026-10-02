@@ -57,7 +57,7 @@
 
     height: var(--header-height);
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-size: 14px;
 
@@ -78,7 +78,7 @@
 
 .navbar__link:hover {
 
-    color: #0b9f58;
+    color: var(--color-brand-green);
 }
 
 
@@ -88,7 +88,7 @@
 
 .navbar__link.active {
 
-    color: #0b9f58;
+    color: var(--color-brand-green);
 }
 
 
@@ -111,7 +111,7 @@
 
     border-radius: 3px 3px 0 0;
 
-    background: #0b9f58;
+    background: var(--color-brand-green);
 }
 
 

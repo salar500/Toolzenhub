@@ -69,7 +69,7 @@
 .section-title {
     margin: 0;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-size: 18px;
 
@@ -222,7 +222,7 @@
 
 .category-card__icon--investment {
     background: #e6f6ed;
-    color: #0b9f58;
+    color: var(--color-brand-green);
 }
 
 .category-card__icon--tax {
@@ -272,7 +272,7 @@
 .category-card h3 {
     margin: 0 0 6px;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-size: 13px;
 
@@ -446,7 +446,7 @@
 .calculator-card h3 {
     margin: 1px 0 5px;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-size: 12px;
 
@@ -481,7 +481,7 @@
     right: 12px;
     bottom: 10px;
 
-    color: #0b9f58;
+    color: var(--color-brand-green);
 
     font-size: 20px;
 

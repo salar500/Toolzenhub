@@ -177,11 +177,11 @@ describe("static checkers detect injected faults", () => {
 
   it("links: a NEW file that hard-codes the GitHub Pages path is reported", () => {
     const root = makeCopy("hardcode");
-    edit(root, "assets/js/utils/dom.js", (s) => s + '\nexport const BAD = "/Toolzenhub/somewhere/";\n');
+    edit(root, "assets/js/utils/page-ready.js", (s) => s + '\nexport const BAD = "/Toolzenhub/somewhere/";\n');
     const r = run("check-links.mjs", root);
     assert.equal(r.code, 1);
     assert.match(r.out, /hardcoded-prefix/);
-    assert.match(r.out, /dom\.js/);
+    assert.match(r.out, /page-ready\.js/);
   });
 
   it("seo: a canonical on the preview host is reported", () => {

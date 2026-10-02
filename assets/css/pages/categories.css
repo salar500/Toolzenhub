@@ -76,7 +76,7 @@
 .categories-page__title {
     margin: 0 0 10px;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-size: clamp(32px, 4vw, 44px);
 
@@ -97,7 +97,7 @@
 
     margin: 0 auto;
 
-    color: #667085;
+    color: var(--color-ink-muted);
 
     font-size: 15px;
 
@@ -207,7 +207,7 @@
 .category-page-card__icon--investment {
     background: #e3f7eb;
 
-    color: #0b9f58;
+    color: var(--color-brand-green);
 }
 
 
@@ -271,7 +271,7 @@
 .category-page-card__title {
     margin: 0 0 6px;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-size: 16px;
 
@@ -303,7 +303,7 @@
 .category-page-card__arrow {
     flex-shrink: 0;
 
-    color: #0b9f58;
+    color: var(--color-brand-green);
 
     font-size: 23px;
 
@@ -364,7 +364,7 @@
 
     background: #dff5e9;
 
-    color: #0b9f58;
+    color: var(--color-brand-green);
 
     font-size: 25px;
 }
@@ -384,7 +384,7 @@
 .categories-search__content h2 {
     margin: 0 0 4px;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-size: 15px;
 
@@ -452,7 +452,7 @@
 
     background: #ffffff;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-family: inherit;
 
@@ -476,7 +476,7 @@
 
     border: 0;
 
-    background: #0b9f58;
+    background: var(--color-brand-green);
 
     color: #ffffff;
 
@@ -684,7 +684,7 @@
 }
 
 .categories-breadcrumb a {
-    color: #0b9f58;
+    color: var(--color-brand-green);
     text-decoration: none;
 }
 

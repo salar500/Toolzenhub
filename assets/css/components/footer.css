@@ -89,7 +89,7 @@ body.categories-page-body .footer__features {
 
     background: #e6f7ee;
 
-    color: #0b9f58;
+    color: var(--color-brand-green);
 
     font-size: 16px;
 }
@@ -103,7 +103,7 @@ body.categories-page-body .footer__features {
 .footer__feature-title {
     margin: 0 0 2px;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-size: 11px;
 
@@ -116,7 +116,7 @@ body.categories-page-body .footer__features {
 .footer__feature-text {
     margin: 0;
 
-    color: #667085;
+    color: var(--color-ink-muted);
 
     font-size: 9px;
 
@@ -211,7 +211,7 @@ body.categories-page-body .footer__features {
 
     border-radius: 50%;
 
-    background: #0b9f58;
+    background: var(--color-brand-green);
 
     color: #ffffff;
 
@@ -279,9 +279,9 @@ body.categories-page-body .footer__features {
 
 
 .footer__social-link:hover {
-    background: #0b9f58;
+    background: var(--color-brand-green);
 
-    border-color: #0b9f58;
+    border-color: var(--color-brand-green);
 
     color: #ffffff;
 }
@@ -422,7 +422,7 @@ body.categories-page-body .footer__features {
 
     border: 0;
 
-    background: #0b9f58;
+    background: var(--color-brand-green);
 
     color: #ffffff;
 

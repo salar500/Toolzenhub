@@ -46,7 +46,7 @@
 .article-breadcrumb .calculator-breadcrumb a {
 
     color:
-        #0b9f58;
+        var(--color-brand-green);
 
     text-decoration:
         none;
@@ -130,7 +130,7 @@
         #ecfdf5;
 
     color:
-        #0b9f58;
+        var(--color-brand-green);
 
     font-size:
         12px;

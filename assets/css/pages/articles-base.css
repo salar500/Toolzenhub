@@ -21,7 +21,7 @@
     --articles-body: #64748B;
     --articles-muted: #94A3B8;
 
-    --articles-border: #E2E8F0;
+    --articles-border: var(--color-slate-200);
     --articles-border-light: #F1F5F9;
 
     --articles-navy: #0F172A;
@@ -48,7 +48,7 @@
 
 
 .articles-breadcrumb .calculator-breadcrumb a {
-    color: #0b9f58;
+    color: var(--color-brand-green);
     text-decoration: none;
 }
 

@@ -16,7 +16,7 @@
     --about-body: #64748B;
     --about-muted: #94A3B8;
 
-    --about-border: #E2E8F0;
+    --about-border: var(--color-slate-200);
 
 }
 

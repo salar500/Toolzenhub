@@ -16,7 +16,7 @@
 
     .loan-card:first-child {
         border-right: 0;
-        border-bottom: 1px solid #e2e8f0;
+        border-bottom: 1px solid var(--color-slate-200);
     }
 
     .loan-vs {
@@ -92,7 +92,7 @@
 
     .loan-card:first-child {
         border-right: 0;
-        border-bottom: 1px solid #e2e8f0;
+        border-bottom: 1px solid var(--color-slate-200);
     }
 
 

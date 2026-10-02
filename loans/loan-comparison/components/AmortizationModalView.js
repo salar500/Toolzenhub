@@ -166,6 +166,9 @@ export function renderAmortizationModal(
 
                 <div
                     class="loan-full-table-scroll"
+                    tabindex="0"
+                    role="region"
+                    aria-label="Full amortization schedule table"
                 >
 
                     <table

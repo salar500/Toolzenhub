@@ -16,6 +16,19 @@ import path from "node:path";
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const fileUrl = (rel) => pathToFileURL(path.join(ROOT, rel)).href;
 
+// Paths inside assets/ used only while building (never requested by a browser).
+const BUILD_ONLY = [
+  "js/calculator-registry.js",
+  "js/components/related-articles.js",
+  "js/components/related-calculators.js",
+  "js/data/relationships.js",
+  "js/pages/tool-page.js",
+  "js/pages/article/article-model.js",
+  "js/pages/article/article-render.js",
+  "js/pages/article/articleContent.js",
+  "js/pages/about/about-template.js",
+];
+
 export function normalizeBase(base) {
   const trimmed = String(base || "/").trim().replace(/^\/+|\/+$/g, "");
   return trimmed ? `/${trimmed}/` : "/";
@@ -54,10 +67,12 @@ export function createConfig({ base, output }) {
         .sort((a, b) => group(a) - group(b) || (a.data.sitemapOrder ?? 0) - (b.data.sitemapOrder ?? 0) || a.url.localeCompare(b.url));
     });
 
-    // ---- files copied as they are (the browser modules, styles, images, favicon, legacy data files)
-    eleventyConfig.addPassthroughCopy({ assets: "assets" });
+    // ---- files copied as they are (the browser modules, styles, images, favicon)
+    // Modules the BUILD imports to write the pages (tool and article markup, related content, relationships)
+    // but that no browser page loads are left out of the output. If one were excluded by mistake the asset
+    // check and the browser tests would fail, because a page would then reference a missing file.
+    eleventyConfig.addPassthroughCopy({ assets: "assets" }, { filter: ["**/*", ...BUILD_ONLY.map((f) => `!${f}`)] });
     eleventyConfig.addPassthroughCopy({ "loans/loan-comparison": "loans/loan-comparison" });
-    eleventyConfig.addPassthroughCopy({ data: "data" });
     eleventyConfig.addPassthroughCopy({ "favicon.svg": "favicon.svg" });
 
     eleventyConfig.setQuietMode(true);

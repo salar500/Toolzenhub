@@ -231,7 +231,7 @@
 
     background: #e7f7ee;
 
-    color: #0b9f58;
+    color: var(--color-brand-green);
 
     font-size: 24px;
 
@@ -257,7 +257,7 @@
 
     margin: 2px 0 7px;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-size: 15px;
 
@@ -287,7 +287,7 @@
     padding: 4px 8px;
     border-radius: 999px;
     background: #e7f7ee;
-    color: #0b9f58;
+    color: var(--color-brand-green);
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 0.06em;
@@ -306,7 +306,7 @@
     right: 17px;
     bottom: 17px;
 
-    color: #0b9f58;
+    color: var(--color-brand-green);
 
     font-size: 23px;
 

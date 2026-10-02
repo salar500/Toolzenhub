@@ -150,7 +150,7 @@
 
     margin: 0 0 18px;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-size: clamp(40px, 4vw, 56px);
 
@@ -167,7 +167,7 @@
 .hero__title-highlight {
     display: block;
 
-    color: #0b9f58;
+    color: var(--color-brand-green);
 }
 
 
@@ -250,7 +250,7 @@
 
     background: transparent;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-family: inherit;
 
@@ -284,7 +284,7 @@
 
     border: 0;
 
-    background: #0b9f58;
+    background: var(--color-brand-green);
 
     color: #ffffff;
 

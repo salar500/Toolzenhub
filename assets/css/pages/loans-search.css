@@ -79,7 +79,7 @@
 
     margin: 0 0 4px;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-size: 17px;
 
@@ -142,7 +142,7 @@
 
     background: #ffffff;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-family: inherit;
 
@@ -164,7 +164,7 @@
 
     border: 0;
 
-    background: #0b9f58;
+    background: var(--color-brand-green);
 
     color: #ffffff;
 

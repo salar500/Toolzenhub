@@ -136,7 +136,7 @@
 
     margin-bottom: 8px;
 
-    color: #0b9f58;
+    color: var(--color-brand-green);
 
     font-size: 11px;
 
@@ -157,7 +157,7 @@
 .article-card__title {
     margin: 0 0 7px;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-size: 15px;
 
@@ -176,7 +176,7 @@
 .article-card__description {
     margin: 0;
 
-    color: #667085;
+    color: var(--color-ink-muted);
 
     font-size: 12px;
 
@@ -229,7 +229,7 @@
 ========================================================= */
 
 .article-card__arrow {
-    color: #0b9f58;
+    color: var(--color-brand-green);
 
     font-size: 18px;
 

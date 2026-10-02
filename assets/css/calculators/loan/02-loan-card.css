@@ -10,7 +10,7 @@
 
 .loan-comparison-tool {
     overflow: hidden;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--color-slate-200);
     border-radius: 14px;
     background: #ffffff;
     box-shadow: 0 8px 30px rgba(15, 23, 42, .06);
@@ -37,7 +37,7 @@
 }
 
 .loan-card:first-child {
-    border-right: 1px solid #e2e8f0;
+    border-right: 1px solid var(--color-slate-200);
     border-top: 3px solid #2563eb;
 }
 

@@ -93,11 +93,23 @@ function renderHero() {
 
                         <div class="articles-hero-illustration">
 
-                            <img
-                                class="articles-hero-image"
-                                src="assets/Images/articles-hero.png"
-                                alt="Books, plant and coffee mug representing learning and financial growth"
-                            >
+                            <picture>
+
+                                <source
+                                    type="image/webp"
+                                    srcset="assets/Images/articles-hero.webp"
+                                >
+
+                                <img
+                                    class="articles-hero-image"
+                                    src="assets/Images/articles-hero.png"
+                                    alt="Books, plant and coffee mug representing learning and financial growth"
+                                    width="1376"
+                                    height="768"
+                                    fetchpriority="high"
+                                >
+
+                            </picture>
 
                         </div>
 
@@ -505,7 +517,7 @@ export function renderArticlesTemplate() {
             ${renderHero()}
 
 
-            <main class="articles-container articles-main">
+            <div class="articles-container articles-main">
 
                 ${renderFilterBar()}
 
@@ -533,7 +545,7 @@ export function renderArticlesTemplate() {
 
                 </div>
 
-            </main>
+            </div>
 
         </div>
 

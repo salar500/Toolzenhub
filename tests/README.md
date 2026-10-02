@@ -46,6 +46,7 @@ Run one file: `npx playwright test --project=subpath-desktop tests/browser/emi.s
 - **Assets** (`check-assets.mjs`): every local JS/CSS/image/icon reference (HTML, CSS `@import`/`url()`, JS imports and asset-path strings) exists with **exact case**.
 - **Formulas** (`tests/unit/loan-formulas.test.mjs`): golden EMI values (independently computed), zero-interest, validation contract, total repayment/interest, amortization invariants.
 - **Flows**: EMI (`emi.spec.js`), Loan Comparison incl. the amortization modal (`loan-comparison.spec.js`), articles + listing (`articles.spec.js`), contact form (`contact.spec.js`), navigation/search/Coming-soon cards (`navigation.spec.js`).
+- **Accessibility** (`accessibility.spec.js`): Loan Comparison modal focus (in, Tab trap, Escape, restore, inert page behind), accessible names of form controls, visible keyboard focus, reduced motion, landmarks, WebP `<picture>` with PNG fallback. **Design tokens** (`tests/unit/design-tokens.test.mjs`).
 - **Baselines**: DOM structure of key regions (`tests/baselines/dom/`), SEO tags per page (`tests/baselines/seo/`), link-crawl summary (`tests/baselines/links/`), screenshots (`tests/baselines/visual/`), Lighthouse (`tests/baselines/lighthouse/`).
 - **The checkers are themselves tested**: `static-checkers.test.mjs` injects real faults (wrong-case image, deleted CSS, dead link, Coming-soon URL in the sitemap, new hard-coded prefix…) into a temp copy and asserts they are caught.
 
@@ -116,10 +117,10 @@ See `tests/static/known-issues.json` for the machine-readable list. In short:
 - 11 pages (home, about, articles list, both calculators, all six articles…) have no content in the raw HTML; canonical/Open Graph/JSON-LD exist only on article pages and only after JavaScript runs (`seo` baseline).
 - `<h1>`/tags: `theme-color` differs per page (`#2563eb`, `#0b9f58`, none); the Loan Comparison title uses "ToolZenHub".
 - A rate typed above the slider maximum (25%) is still used for the calculation (the slider only clamps visually).
-- The amortization modal fills the whole phone screen, so it has no clickable overlay on mobile; it has no focus trap.
+- The amortization modal fills the whole phone screen, so it has no clickable overlay on mobile. (M9: it now moves focus in, keeps Tab inside, closes on Escape and restores focus; see `accessibility.spec.js`.)
+- Known, not fixed in M9: brand-green text on white (about 3.4:1) fails WCAG AA contrast on 105 elements across the site, and the Loans listing jumps from `h1` to `h3`; both need a design decision. Four CSS custom properties are referenced but never defined (`--transition-fast`, `--transition-normal`, `--z-dropdown`, `--z-modal`), pinned by `design-tokens.test.mjs`. The mobile Categories page has a layout shift of 0.267 when its scripts load after the first paint (identical before M9).
 - `choose-right-loan-tenure` has no featured image (`TODO(image)`).
-- Unreachable legacy code: `assets/js/pages/articles.js` references a lowercase `assets/images/…` path (would 404 on a case-sensitive host).
-- 7 files hard-code the GitHub Pages path/host (listed in `known-issues.json`); the guard fails on any *new* one.
+- 3 files hard-code the GitHub Pages path/host (listed in `known-issues.json`); the guard fails on any *new* one.
 
 ## When to update what
 

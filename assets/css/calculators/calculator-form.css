@@ -95,7 +95,7 @@
 
     background: #ffffff;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font: inherit;
     font-size: 14px;
@@ -115,7 +115,7 @@
 .calculator-form__input:focus,
 .calculator-form__select:focus {
 
-    border-color: #0b9f58;
+    border-color: var(--color-brand-green);
 
     box-shadow:
         0 0 0 3px rgba(11, 159, 88, .10);
@@ -165,7 +165,7 @@
     top: 50%;
     right: 13px;
 
-    color: #667085;
+    color: var(--color-ink-muted);
 
     font-size: 12px;
     font-weight: 600;
@@ -189,7 +189,7 @@
 
     margin-top: 6px;
 
-    color: #667085;
+    color: var(--color-ink-muted);
 
     font-size: 11px;
 
@@ -263,7 +263,7 @@
 
     margin: 0;
 
-    accent-color: #0b9f58;
+    accent-color: var(--color-brand-green);
 
 }
 
@@ -299,7 +299,7 @@
     border: 0;
     border-radius: 8px;
 
-    background: #0b9f58;
+    background: var(--color-brand-green);
 
     color: #ffffff;
 
@@ -427,7 +427,7 @@
 
     border-radius: 50%;
 
-    background: #0b9f58;
+    background: var(--color-brand-green);
 
     box-shadow:
         0 2px 6px rgba(16, 24, 40, .18);
@@ -456,7 +456,7 @@
 
     border-radius: 50%;
 
-    background: #0b9f58;
+    background: var(--color-brand-green);
 
     box-shadow:
         0 2px 6px rgba(16, 24, 40, .18);

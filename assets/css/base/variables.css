@@ -22,6 +22,20 @@
     --color-info: #0ea5e9;
 
     /* ========================================
+       Colours the site actually uses most
+
+       --color-primary above is the original blue scale and is still
+       used where it is referenced. The visible brand is this green;
+       the three neutrals are the repeated text/border colours. Values
+       are exactly the literals they replaced.
+    ======================================== */
+
+    --color-brand-green: #0b9f58;
+    --color-slate-200: #e2e8f0;
+    --color-ink: #101828;
+    --color-ink-muted: #667085;
+
+    /* ========================================
        Neutral Colors
     ======================================== */
 

@@ -13,8 +13,10 @@ div#articles-page
           p "Helpful guides, tips and insights to help you make smarter financial and everyday decision…"
         div.articles-hero-visual
           div.articles-hero-illustration
-            img.articles-hero-image [alt="Books, plant and coffee mug representing learning and financial growth" src="{ROOT}assets/Images/articles-hero.png"]
-  main.articles-container.articles-main
+            picture
+              source [type="image/webp"]
+              img.articles-hero-image [alt="Books, plant and coffee mug representing learning and financial growth" src="{ROOT}assets/Images/articles-hero.png"]
+  div.articles-container.articles-main
     div.articles-filter-bar
       button.active.article-filter [data-category="All" type="button"] "All Articles"
       button.article-filter [data-category="loans" type="button"] "Loans"

@@ -28,13 +28,11 @@ const COMING_SOON = [
 // metadata that must live ONLY in the catalog, never in a content module
 const METADATA_KEYS = ["slug", "topic", "category", "categoryName", "title", "description", "datePublished", "dateModified", "readTime", "image", "relatedArticles"];
 
-let catalog, legacy, loaders, model, loaderMod, calcs;
+let catalog, legacy, model, calcs;
 before(async () => {
   catalog = await import("../../assets/js/data/articles.js");
   legacy = await import("../../assets/js/article-registry.js");
-  loaders = await import("../../assets/js/data/articles/article-registry.js");
   model = await import("../../assets/js/pages/article/article-model.js");
-  loaderMod = await import("../../assets/js/pages/article/article-loader.js");
   calcs = await import("../../assets/js/data/calculators.js");
 });
 
@@ -188,31 +186,5 @@ describe("derived views keep their old shape", () => {
     });
     assert.equal(legacy.articleRegistry.filter((a) => a.published === true).length, 6);
     assert.equal(legacy.articleRegistry.filter((a) => "published" in a).length, 6);
-  });
-
-  test("content loader registry has exactly the published keys", () => {
-    assert.deepEqual(Object.keys(loaders.articleRegistry), PUBLISHED);
-  });
-});
-
-describe("article loader", () => {
-  const at = async (pathname) => {
-    window.location.pathname = pathname;
-    const quiet = console.error;
-    console.error = () => {};
-    try { return await loaderMod.loadArticle(); } finally { console.error = quiet; }
-  };
-
-  test("a published URL loads the joined article", async () => {
-    const article = await at("/Toolzenhub/articles/loan-comparison/what-is-loan-prepayment/");
-    assert.equal(article.title, "What Is Loan Prepayment?");
-    assert.equal(article.categoryName, "Loans");
-    assert.equal(article.relatedArticles.length, 5);
-  });
-
-  test("a coming-soon URL and an unknown URL do not load (no route, no loader)", async () => {
-    assert.equal(await at("/Toolzenhub/articles/investment/best-sip-strategies-for-beginners/"), null);
-    assert.equal(await at("/Toolzenhub/articles/nope/nope/"), null);
-    assert.equal(await at("/Toolzenhub/calculators/emi/"), null);
   });
 });

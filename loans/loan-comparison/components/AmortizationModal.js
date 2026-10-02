@@ -13,6 +13,50 @@ import {
 
 
 /* =========================================================
+   FOCUS MANAGEMENT
+
+   - the element that opened the dialog gets focus back when it closes
+   - focus moves into the dialog when it opens, and Tab stays inside it
+   - the page behind the dialog is inert (not focusable, not read out)
+========================================================= */
+
+let openerElement = null;
+
+const BACKGROUND_SELECTORS = ["#header", "#app", "#footer"];
+
+const FOCUSABLE =
+    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function getFocusable(container) {
+
+    return [...container.querySelectorAll(FOCUSABLE)]
+        .filter(element => element.getClientRects().length > 0);
+
+}
+
+function setBackgroundInert(inert) {
+
+    BACKGROUND_SELECTORS.forEach(selector => {
+
+        const element =
+            document.querySelector(selector);
+
+        if (!element) {
+            return;
+        }
+
+        if (inert) {
+            element.setAttribute("inert", "");
+        } else {
+            element.removeAttribute("inert");
+        }
+
+    });
+
+}
+
+
+/* =========================================================
    OPEN AMORTIZATION MODAL
 ========================================================= */
 
@@ -61,6 +105,11 @@ export function openAmortizationModal(
     if (existingModal) {
 
         existingModal.remove();
+
+    } else {
+
+        openerElement =
+            document.activeElement;
 
     }
 
@@ -208,8 +257,22 @@ export function openAmortizationModal(
 
     document.addEventListener(
         "keydown",
-        handleEscape
+        handleKeydown
     );
+
+
+    /* =====================================================
+       FOCUS INTO THE DIALOG, PAGE BEHIND IT INERT
+    ===================================================== */
+
+    setBackgroundInert(true);
+
+    const dialog =
+        modal.querySelector(
+            ".loan-amortization-dialog"
+        ) || modal;
+
+    (getFocusable(dialog)[0] || dialog).focus();
 
 
     /* =====================================================
@@ -260,26 +323,95 @@ export function closeAmortizationModal() {
 
     document.removeEventListener(
         "keydown",
-        handleEscape
+        handleKeydown
     );
+
+    /*
+     * Make the page usable again, then give focus back to the
+     * control that opened the dialog.
+     */
+
+    setBackgroundInert(false);
+
+    if (
+        openerElement &&
+        document.contains(openerElement)
+    ) {
+        openerElement.focus();
+    }
+
+    openerElement = null;
 
 }
 
 
 /* =========================================================
-   ESCAPE KEY
+   KEYBOARD: ESCAPE CLOSES, TAB STAYS INSIDE THE DIALOG
 ========================================================= */
 
-function handleEscape(
+function handleKeydown(
     event
 ) {
 
-    if (
-        event.key === "Escape"
-    ) {
+    if (event.key === "Escape") {
 
         closeAmortizationModal();
 
+        return;
+
     }
 
-        }
+    if (event.key !== "Tab") {
+        return;
+    }
+
+    const modal =
+        document.querySelector(
+            "#amortization-modal"
+        );
+
+    if (!modal) {
+        return;
+    }
+
+    const dialog =
+        modal.querySelector(
+            ".loan-amortization-dialog"
+        ) || modal;
+
+    const items =
+        getFocusable(dialog);
+
+    if (!items.length) {
+
+        event.preventDefault();
+
+        return;
+
+    }
+
+    const first = items[0];
+    const last = items[items.length - 1];
+    const inside = dialog.contains(document.activeElement);
+
+    if (
+        event.shiftKey &&
+        (document.activeElement === first || !inside)
+    ) {
+
+        event.preventDefault();
+
+        last.focus();
+
+    } else if (
+        !event.shiftKey &&
+        (document.activeElement === last || !inside)
+    ) {
+
+        event.preventDefault();
+
+        first.focus();
+
+    }
+
+}

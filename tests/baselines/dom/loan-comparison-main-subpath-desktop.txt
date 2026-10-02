@@ -7,29 +7,29 @@ section.loan-comparison-tool
           h2 "Loan A"
           span.loan-badge "Option A"
       div.loan-field
-        label "Loan Amount"
+        label [for="a-amount"] "Loan Amount"
         div.loan-input-row
-          select#a-amount {100 options: "1"…"100", selected="50"}
-          select#a-unit {2 options: "Lakhs"…"Crores", selected="Lakhs"}
+          select#a-amount [aria-label="Loan A amount"] {100 options: "1"…"100", selected="50"}
+          select#a-unit [aria-label="Loan A amount unit"] {2 options: "Lakhs"…"Crores", selected="Lakhs"}
         div.loan-slider-row
-          input#a-amount-slider.loan-slider [max="100" min="1" step="1" type="range" value="50"]
+          input#a-amount-slider.loan-slider [aria-label="Loan A amount slider" max="100" min="1" step="1" type="range" value="50"]
         div.loan-range-labels
           span "1"
           span "100"
         small#a-amount-display "₹50,00,000"
       div.loan-field
-        label "Interest Rate (% p.a.)"
+        label [for="a-rate"] "Interest Rate (% p.a.)"
         div.loan-number-input
-          input#a-rate [max="25" min="0" step="0.01" type="number" value="8.5"]
+          input#a-rate [aria-label="Loan A interest rate (% per year)" max="25" min="0" step="0.01" type="number" value="8.5"]
           span "%"
-        input#a-rate-slider.loan-slider [max="25" min="0" step="0.01" type="range" value="8.5"]
+        input#a-rate-slider.loan-slider [aria-label="Loan A interest rate slider" max="25" min="0" step="0.01" type="range" value="8.5"]
         div.loan-range-labels
           span "0%"
           span "25%"
       div.loan-field
-        label "Tenure (Years)"
-        input#a-years.loan-years-input [max="100" min="1" step="1" type="number" value="20"]
-        input#a-years-slider.loan-slider [max="100" min="1" step="1" type="range" value="20"]
+        label [for="a-years"] "Tenure (Years)"
+        input#a-years.loan-years-input [aria-label="Loan A tenure (years)" max="100" min="1" step="1" type="number" value="20"]
+        input#a-years-slider.loan-slider [aria-label="Loan A tenure slider" max="100" min="1" step="1" type="range" value="20"]
         div.loan-range-labels
           span "1"
           span "100"
@@ -40,29 +40,29 @@ section.loan-comparison-tool
           h2 "Loan B"
           span.loan-badge "Option B"
       div.loan-field
-        label "Loan Amount"
+        label [for="b-amount"] "Loan Amount"
         div.loan-input-row
-          select#b-amount {100 options: "1"…"100", selected="50"}
-          select#b-unit {2 options: "Lakhs"…"Crores", selected="Lakhs"}
+          select#b-amount [aria-label="Loan B amount"] {100 options: "1"…"100", selected="50"}
+          select#b-unit [aria-label="Loan B amount unit"] {2 options: "Lakhs"…"Crores", selected="Lakhs"}
         div.loan-slider-row
-          input#b-amount-slider.loan-slider [max="100" min="1" step="1" type="range" value="50"]
+          input#b-amount-slider.loan-slider [aria-label="Loan B amount slider" max="100" min="1" step="1" type="range" value="50"]
         div.loan-range-labels
           span "1"
           span "100"
         small#b-amount-display "₹50,00,000"
       div.loan-field
-        label "Interest Rate (% p.a.)"
+        label [for="b-rate"] "Interest Rate (% p.a.)"
         div.loan-number-input
-          input#b-rate [max="25" min="0" step="0.01" type="number" value="9"]
+          input#b-rate [aria-label="Loan B interest rate (% per year)" max="25" min="0" step="0.01" type="number" value="9"]
           span "%"
-        input#b-rate-slider.loan-slider [max="25" min="0" step="0.01" type="range" value="9"]
+        input#b-rate-slider.loan-slider [aria-label="Loan B interest rate slider" max="25" min="0" step="0.01" type="range" value="9"]
         div.loan-range-labels
           span "0%"
           span "25%"
       div.loan-field
-        label "Tenure (Years)"
-        input#b-years.loan-years-input [max="100" min="1" step="1" type="number" value="20"]
-        input#b-years-slider.loan-slider [max="100" min="1" step="1" type="range" value="20"]
+        label [for="b-years"] "Tenure (Years)"
+        input#b-years.loan-years-input [aria-label="Loan B tenure (years)" max="100" min="1" step="1" type="number" value="20"]
+        input#b-years-slider.loan-slider [aria-label="Loan B tenure slider" max="100" min="1" step="1" type="range" value="20"]
         div.loan-range-labels
           span "1"
           span "100"

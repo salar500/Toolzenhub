@@ -1,0 +1,53 @@
+/* =========================================================
+   ToolZen Hub
+   Accessibility baseline
+
+   Loaded by every generated page AFTER its own stylesheets, so
+   these rules win over component rules that removed an outline.
+========================================================= */
+
+
+/* =========================================================
+   REDUCED MOTION
+
+   Visitors who ask their system for less motion get no
+   animation or smooth scrolling. (Durations become effectively
+   zero rather than "none" so any script waiting for an
+   animation or transition to end still completes.)
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+}
+
+
+/* =========================================================
+   KEYBOARD FOCUS
+
+   These controls set `outline: none` and showed nothing in its
+   place, so keyboard focus was invisible (found by tabbing
+   through every page). The ring appears for keyboard focus only.
+   !important: the component rules that removed the outline are
+   more specific than a single pseudo-class.
+========================================================= */
+
+.footer__newsletter-input:focus-visible,
+.hero__search input:focus-visible,
+.categories-search__input:focus-visible,
+.calculators-search__input:focus-visible,
+.loans-search__input:focus-visible,
+#article-search:focus-visible,
+#newsletter-email:focus-visible,
+.contact-form__button:focus-visible {
+    outline: 2px solid var(--color-brand-green) !important;
+    outline-offset: 2px;
+}

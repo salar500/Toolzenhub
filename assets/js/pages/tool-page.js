@@ -2,14 +2,14 @@
    ToolZen Hub
    Shared Tool Page
 
-   Owns everything around a tool, never the tool itself.
+   Composes the finished page around a tool, never the tool
+   itself. The site build calls buildToolPageHtml() to write the
+   page; in the browser, entries/tool.js loads the page's tool
+   module and calls its init().
 
    Shared (this file):
-   - loading the tool module on demand
-   - the tool mount (#app)
-   - breadcrumb placement (first child of the page wrapper)
-   - related tools and related articles (last children)
-   - the "not found" and "error" states
+   - the breadcrumb, placed as the first child of the page wrapper
+   - related tools and related articles, placed as the last children
 
    Tool-specific (the tool module):
    - its heading / intro, inputs, results and info sections
@@ -18,9 +18,9 @@
    TOOL MODULE CONTRACT
 
      export function render(mount)   REQUIRED
-         Render the tool into the mount element (#app). The
-         argument may be ignored; tools may also look up #app
-         themselves. The tool's markup must be wrapped in
+         Render the tool into the mount element (#app): markup()
+         followed by init(). Kept so a tool can be rendered on its
+         own. The tool's markup must be wrapped in
          <div class="calculator-page"> so the shared layer
          knows where to place the breadcrumb and related
          content.
@@ -34,9 +34,8 @@
          The split form of render(): markup() returns the tool's
          HTML (pure, no DOM), init() binds it. The site build
          calls markup() to put the finished page in the HTML
-         (buildToolPageHtml below); in the browser the shared
-         page then calls only init(). A tool without them still
-         works through render().
+         (buildToolPageHtml below); in the browser only init()
+         runs.
 
    A tool is addressed by id and described by metadata
    { section, category, title }, both supplied by the caller
@@ -55,13 +54,6 @@ import {
 import {
     renderRelatedArticles
 } from "../components/related-articles.js";
-
-
-export const TOOL_MOUNT_SELECTOR =
-    "#app";
-
-export const TOOL_PAGE_SELECTOR =
-    "#app .calculator-page";
 
 
 /* =========================================================
@@ -175,175 +167,3 @@ export function buildToolPageHtml(
     );
 
 }
-
-
-/* =========================================================
-   RENDER TOOL PAGE
-========================================================= */
-
-/*
- * loader:   () => Promise<module>   (undefined if unknown)
- * metadata: { section, category, title }  (optional)
- */
-
-export async function renderToolPage(
-    id,
-    {
-        loader,
-        metadata
-    } = {}
-) {
-
-    if (!loader) {
-
-        console.error(
-            `Calculator not found: ${id}`
-        );
-
-        renderToolNotFound();
-
-        return;
-    }
-
-
-    try {
-
-        const module =
-            await loader();
-
-
-        const contract =
-            readToolContract(module);
-
-
-        if (!contract) {
-
-            console.error(
-                `Calculator "${id}" does not export render().`
-            );
-
-            renderToolNotFound();
-
-            return;
-        }
-
-
-        /*
-         * A generated page already contains the finished markup
-         * (tool content, breadcrumb, related sections): bind it.
-         */
-
-        const mount =
-            document.querySelector(
-                TOOL_MOUNT_SELECTOR
-            );
-
-        if (
-            contract.init &&
-            mount?.querySelector(".calculator-page")
-        ) {
-
-            contract.init(mount);
-
-            return;
-
-        }
-
-
-        /*
-         * The tool renders its own content first.
-         */
-
-        contract.render(
-            document.querySelector(
-                TOOL_MOUNT_SELECTOR
-            )
-        );
-
-
-        const page =
-            document.querySelector(
-                TOOL_PAGE_SELECTOR
-            );
-
-
-        if (!page) {
-
-            console.warn(
-                "Calculator page container not found."
-            );
-
-            return;
-        }
-
-
-        /*
-         * Exactly one breadcrumb: skip it if the tool
-         * already rendered its own.
-         */
-
-        if (
-            metadata &&
-            !page.querySelector(
-                ".calculator-breadcrumb"
-            )
-        ) {
-
-            page.insertAdjacentHTML(
-                "afterbegin",
-                renderToolBreadcrumb(metadata)
-            );
-
-        }
-
-
-        if (contract.showRelatedTools) {
-
-            page.insertAdjacentHTML(
-                "beforeend",
-                renderRelatedCalculators(id)
-            );
-
-        }
-
-
-        if (contract.showRelatedArticles) {
-
-            page.insertAdjacentHTML(
-                "beforeend",
-                renderRelatedArticles(id)
-            );
-
-        }
-
-
-    } catch (error) {
-
-        console.error(
-            `Failed to load calculator "${id}":`,
-            error
-        );
-
-        renderToolError();
-
-    }
-
-}
-
-
-/* =========================================================
-   NOT FOUND / ERROR
-
-   Kept in tool-messages.js so a generated tool page can show
-   them without loading this whole module.
-========================================================= */
-
-export {
-    renderToolNotFound,
-    renderToolError
-} from "./tool-messages.js";
-
-import {
-    renderToolNotFound,
-    renderToolError
-} from "./tool-messages.js";

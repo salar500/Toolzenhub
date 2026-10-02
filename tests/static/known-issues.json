@@ -1,21 +1,22 @@
 {
   "$comment": "Pre-existing problems that existed BEFORE the M0 safety net was added. Static checkers do not fail on these; they fail on anything NEW. Remove an entry when the underlying issue is fixed. Do not add entries to hide new problems.",
-  "assets": [
-    {
-      "file": "assets/js/pages/articles.js",
-      "ref": "assets/images/articles-hero.png",
-      "reason": "Unreachable legacy monolith (superseded by assets/js/pages/articles/*). The lowercase 'images' folder was removed in Phase 0; the live code uses assets/Images/articles-hero.png. Would 404 on case-sensitive hosts if it were ever wired in."
-    }
-  ],
+  "assets": [],
   "links": [],
   "hardcodedSitePrefix": {
     "note": "Files that hard-code the GitHub Pages path (/Toolzenhub) or host (salar500.github.io) in source. The checker fails if a NEW file starts hard-coding it. Target architecture: derive everything from one site config.",
     "files": [
-      { "file": "assets/js/site-config.js", "reason": "M2: the single source of the GitHub Pages host, base path and production URL. routes.js, footer.js and article-seo.js now import it." },
-      { "file": "assets/js/components/header.js", "reason": "Active-link check hard-codes /Toolzenhub/ home variants." },
-      { "file": "assets/js/router.js", "reason": "Home-page match hard-codes /Toolzenhub/ variants." },
-      { "file": "404.html", "reason": "Self-contained page; its inline script repeats the SITE_ROOT rule on purpose (must not depend on any relative path)." },
-      { "file": "assets/js/utils/article-search.js", "reason": "Unreachable legacy helper; hard-codes /Toolzenhub/articles.html." }
+      {
+        "file": "assets/js/site-config.js",
+        "reason": "M2: the single source of the GitHub Pages host, base path and production URL. routes.js, footer.js and article-seo.js now import it."
+      },
+      {
+        "file": "assets/js/components/header.js",
+        "reason": "Active-link check hard-codes /Toolzenhub/ home variants."
+      },
+      {
+        "file": "assets/js/router.js",
+        "reason": "Home-page match hard-codes /Toolzenhub/ variants."
+      }
     ]
   }
 }

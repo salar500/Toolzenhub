@@ -69,7 +69,7 @@ const allowedTop = new Set([
   ...inventory.live.map((p) => p.file.split("/")[0]),
   inventory.notFound.file,
   ...inventory.resources.map((r) => r.slice(1).split("/")[0]),
-  "assets", "loans", "data", ".htaccess",
+  "assets", "loans", ".htaccess",
 ]);
 const deployFailures = [];
 for (const name of fs.readdirSync(REPO)) {

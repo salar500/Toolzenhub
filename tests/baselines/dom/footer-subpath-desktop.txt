@@ -1,4 +1,4 @@
-footer#footer
+div#footer
   footer.footer
     div.footer__main
       div.container

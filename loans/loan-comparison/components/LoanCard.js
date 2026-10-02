@@ -33,17 +33,23 @@ export function createLoanCard(
 
             <div class="loan-field">
 
-                <label>
+                <label for="${prefix}-amount">
                     Loan Amount
                 </label>
 
                 <div class="loan-input-row">
 
-                    <select id="${prefix}-amount">
+                    <select
+                        id="${prefix}-amount"
+                        aria-label="${title} amount"
+                    >
                         ${createAmountOptions()}
                     </select>
 
-                    <select id="${prefix}-unit">
+                    <select
+                        id="${prefix}-unit"
+                        aria-label="${title} amount unit"
+                    >
 
                         <option value="100000" selected>
                             Lakhs
@@ -62,6 +68,7 @@ export function createLoanCard(
 
                     <input
                         id="${prefix}-amount-slider"
+                        aria-label="${title} amount slider"
                         class="loan-slider"
                         type="range"
                         min="1"
@@ -88,7 +95,7 @@ export function createLoanCard(
 
             <div class="loan-field">
 
-                <label>
+                <label for="${prefix}-rate">
                     Interest Rate (% p.a.)
                 </label>
 
@@ -96,6 +103,7 @@ export function createLoanCard(
 
                     <input
                         id="${prefix}-rate"
+                        aria-label="${title} interest rate (% per year)"
                         type="number"
                         min="0"
                         max="25"
@@ -110,6 +118,7 @@ export function createLoanCard(
 
                 <input
                     id="${prefix}-rate-slider"
+                    aria-label="${title} interest rate slider"
                     class="loan-slider"
                     type="range"
                     min="0"
@@ -129,12 +138,13 @@ export function createLoanCard(
 
             <div class="loan-field">
 
-                <label>
+                <label for="${prefix}-years">
                     Tenure (Years)
                 </label>
 
                 <input
                     id="${prefix}-years"
+                    aria-label="${title} tenure (years)"
                     class="loan-years-input"
                     type="number"
                     min="1"
@@ -146,6 +156,7 @@ export function createLoanCard(
 
                 <input
                     id="${prefix}-years-slider"
+                    aria-label="${title} tenure slider"
                     class="loan-slider"
                     type="range"
                     min="1"

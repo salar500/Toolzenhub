@@ -61,7 +61,7 @@ for (const build of BUILDS) {
     it("has only the expected top-level entries", () => {
       const top = fs.readdirSync(build.dir).sort();
       const html = inventory.live.map((p) => p.file.split("/")[0]);
-      const allowed = new Set([...html, inventory.notFound.file, "assets", "loans", "data", "favicon.svg", "robots.txt", "sitemap.xml", ".htaccess"]);
+      const allowed = new Set([...html, inventory.notFound.file, "assets", "loans", "favicon.svg", "robots.txt", "sitemap.xml", ".htaccess"]);
       assert.deepEqual(top.filter((t) => !allowed.has(t)), []);
     });
 

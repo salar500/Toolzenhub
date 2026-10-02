@@ -57,6 +57,9 @@
 {% for sheet in styles %}
     <link rel="stylesheet" href="{{ sheet | url }}">
 {%- endfor %}
+
+    {#- After the page's own styles on purpose: it restores focus rings and honours reduced motion. #}
+    <link rel="stylesheet" href="{{ '/assets/css/base/accessibility.css' | url }}">
 {%- if clientRendered %}
 
     {#- After the stylesheets so it wins: without script the page never becomes "ready", so show the footer. #}
@@ -75,7 +78,8 @@
 
     {{ content | safe }}
 
-    <{{ footerTag or 'footer' }} id="footer">{% siteFooter %}</{{ footerTag or 'footer' }}>
+    {#- A div, not a footer: the generated footer markup already contains the page's one <footer>, and nesting two contentinfo landmarks is an accessibility defect. #}
+    <{{ footerTag or 'div' }} id="footer">{% siteFooter %}</{{ footerTag or 'div' }}>
 {% for script in scripts %}
     <script type="module" src="{{ script | url }}"></script>
 {%- endfor %}

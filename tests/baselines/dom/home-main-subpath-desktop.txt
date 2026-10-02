@@ -20,7 +20,9 @@ main#app
               button.hero__search-button [aria-label="Search calculators" type="submit"] "⌕"
             div#hero-calculator-search-results.calculator-search-results [aria-live="polite"]
           div.hero__visual
-            img.hero__image [alt="Financial calculators, charts and money" loading="eager" src="{ROOT}assets/Images/hero-calculators.png"]
+            picture
+              source [type="image/webp"]
+              img.hero__image [alt="Financial calculators, charts and money" loading="eager" src="{ROOT}assets/Images/hero-calculators.png"]
   section#categories.section
     section.categories-section
       div.container

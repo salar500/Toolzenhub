@@ -116,3 +116,10 @@ input:disabled {
 [hidden] {
     display: none !important;
 }
+
+
+/* A <picture> only chooses an image source; it adds no box of its own (layout is the same as a bare <img>) */
+
+picture {
+    display: contents;
+}

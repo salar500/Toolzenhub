@@ -27,7 +27,7 @@
     min-height: 125px;
     padding: 18px;
 
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--color-slate-200);
     border-radius: 10px;
 
     background: #ffffff;
@@ -127,7 +127,7 @@
 .loan-content-card {
     padding: 22px;
 
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--color-slate-200);
     border-radius: 12px;
 
     background: #ffffff;
@@ -162,7 +162,7 @@
 .loan-amortization-table th,
 .loan-amortization-table td {
     padding: 9px;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--color-slate-200);
     text-align: left;
 }
 

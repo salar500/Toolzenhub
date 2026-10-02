@@ -21,9 +21,9 @@ The project is in early development. Only a small part of the planned catalogue 
 | Contact form | **Not connected to any backend.** The form is disabled and says so; no messages are sent. |
 | Known gap | The article "How to Choose the Right Loan Tenure" has no featured image yet (search for `TODO(image)`). |
 
-Some folders still contain unused code from earlier work (for example an unused
-calculator-engine scaffold and older page modules). It is left in place for now and is being
-reviewed gradually.
+Earlier unused code (a calculator-engine scaffold, older page modules, duplicate stylesheets,
+sample data files and unreferenced images) was removed in M9 after checking that nothing, in
+either build or in the tests, referenced it.
 
 ## Technology
 
@@ -124,9 +124,20 @@ assets/
   js/                      Browser ES modules and the data catalogs (see below)
   Images/                  Local images (article illustrations, heroes)
 loans/loan-comparison/     Loan Comparison calculator code (components, helpers, entry module)
-favicon.svg, data/         Copied to the output as they are (data/ is mostly unused)
+favicon.svg                Copied to the output as it is
 tests/                     Regression safety net (not part of the output)
 ```
+
+Styling and images:
+
+- `assets/css/base/variables.css` holds the design tokens. Every generated page loads it first.
+  The four most repeated colours are tokens (`--color-brand-green`, `--color-ink`,
+  `--color-ink-muted`, `--color-slate-200`); a unit test keeps those literals out of the other stylesheets.
+- `assets/css/base/accessibility.css` is loaded last on every generated page: visible keyboard focus
+  for the search and newsletter inputs, and the `prefers-reduced-motion` rule.
+- Hero and article images ship a `.webp` next to the `.png` of the same name. Pages use
+  `<picture>` so browsers take the WebP; the PNG stays as the fallback and the social-sharing image.
+  When adding an article image, add both files.
 
 Inside `assets/js/`:
 
@@ -157,5 +168,5 @@ Inside `assets/js/`:
   breadcrumbs are generated. The **Home** page assembles four catalog-driven sections (hero search,
   categories, popular calculators, latest articles); pre-rendering it means splitting those
   components, which is left for a later change.
-- The older browser-side render paths (`pages/article.js`, `pages/calculator.js`) remain in the
-  code for use without a build but are no longer used by generated pages.
+- `netlify/functions/subscribe.js` and the newsletter form that calls it are an unfinished
+  feature (see the status table); the function is not part of any build output.

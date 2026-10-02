@@ -69,12 +69,12 @@
 
     font-size: 13px;
 
-    color: #667085;
+    color: var(--color-ink-muted);
 }
 
 
 .legal-breadcrumb .calculator-breadcrumb a {
-    color: #0b9f58;
+    color: var(--color-brand-green);
 
     text-decoration: none;
 }
@@ -90,7 +90,7 @@
 .legal-page__hero h1 {
     margin: 0 0 10px;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-family:
         Georgia,
@@ -110,7 +110,7 @@
 
     margin: 0 auto;
 
-    color: #667085;
+    color: var(--color-ink-muted);
 
     font-size: 14px;
 
@@ -151,7 +151,7 @@
 .legal-page__article {
     width: 100%;
 
-    color: #667085;
+    color: var(--color-ink-muted);
 
     font-size: 14px;
 
@@ -162,7 +162,7 @@
 .legal-page__article h2 {
     margin: 32px 0 10px;
 
-    color: #101828;
+    color: var(--color-ink);
 
     font-family:
         Georgia,
@@ -185,7 +185,7 @@
 .legal-page__article p {
     margin: 0 0 14px;
 
-    color: #667085;
+    color: var(--color-ink-muted);
 
     font-size: 14px;
 
@@ -194,7 +194,7 @@
 
 
 .legal-page__article a {
-    color: #0b9f58;
+    color: var(--color-brand-green);
 
     font-weight: 600;
 
@@ -216,11 +216,11 @@
 
     padding: 12px 15px;
 
-    border-left: 3px solid #0b9f58;
+    border-left: 3px solid var(--color-brand-green);
 
     background: #f7fbf9;
 
-    color: #667085 !important;
+    color: var(--color-ink-muted) !important;
 
     font-size: 12px !important;
 
