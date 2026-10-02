@@ -99,7 +99,7 @@ async function loadComingSoon() {
       id: c.id,
       title: c.title,
       category: c.category,
-      wouldBeUrl: `/calculators/${c.id}/`,
+      wouldBeUrl: c.sitePath,
       hasHtmlFile: fs.existsSync(path.join(REPO, "calculators", c.id, "index.html")),
       mustReturn404: true,
     }));

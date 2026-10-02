@@ -40,7 +40,8 @@ export default async function () {
     if (!html) throw new Error(`Tool "${tool.id}" has no markup(): cannot generate its page`);
     const style = toolStyles[tool.id];
     if (!style) throw new Error(`No stylesheet list for tool "${tool.id}" in src/_data/toolStyles.json`);
-    const sitePath = `/calculators/${tool.id}/`;
+    // derived from the tool's section (assets/js/data/calculators.js): /{section prefix}/{id}/
+    const sitePath = tool.sitePath;
     pages.push({
       id: tool.id,
       sitePath,

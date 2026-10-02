@@ -25,7 +25,7 @@ const labels = (html) => [...html.matchAll(/<(?:a|strong)[^>]*>\s*([^<]*?)\s*<\/
 
 describe("current hierarchy data", () => {
   test("one section: Calculators, landing on the categories page", () => {
-    assert.deepEqual(cats.sections, [{ id: "calculators", title: "Calculators", landing: "calculatorCategories" }]);
+    assert.deepEqual(cats.sections, [{ id: "calculators", title: "Calculators", landing: "calculatorCategories", pathPrefix: "calculators" }]);
     assert.equal(tax.getSectionUrl("Calculators"), `${ROOT}categories.html`);
     assert.equal(tax.getSectionUrl("calculators"), `${ROOT}categories.html`);
     assert.equal(tax.getSectionUrl("Articles"), null);
@@ -50,7 +50,7 @@ describe("current hierarchy data", () => {
   test("no subcategories are defined yet: every tool sits directly under its major category", () => {
     assert.deepEqual(cats.subcategories, []);
     for (const tool of calcs.calculators) assert.equal(tool.subcategory, undefined, tool.id);
-    assert.equal(tax.getDirectTools("loans").length, 8);
+    assert.deepEqual(tax.getDirectTools("loans"), tax.getToolsByCategory("loans"));
     assert.deepEqual(tax.getToolsByCategory("loans").map((t) => t.id), ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment"]);
   });
 
@@ -137,12 +137,13 @@ describe("subcategory support (exercised with a temporary subcategory)", () => {
   });
 
   test("a tool in a subcategory is found there, leaves the direct list, and still counts in its category", () => {
+    const loansTools = calcs.calculators.filter((t) => t.category === "loans").length;
     cats.subcategories.push(sub);
     calcs.getCalculatorById("emi").subcategory = "test-sub";
     assert.deepEqual(tax.getSubcategoriesOf("loans"), [sub]);
     assert.deepEqual(tax.getToolsBySubcategory("test-sub").map((t) => t.id), ["emi"]);
-    assert.equal(tax.getDirectTools("loans").length, 7);
-    assert.equal(tax.getToolsByCategory("loans").length, 8);
+    assert.equal(tax.getDirectTools("loans").length, loansTools - 1);
+    assert.equal(tax.getToolsByCategory("loans").length, loansTools);
     assert.equal(tax.getToolPath(calcs.getCalculatorById("emi")).subcategory.title, "Test Subcategory");
   });
 

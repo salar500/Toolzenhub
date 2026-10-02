@@ -60,7 +60,7 @@ export function createConfig({ base, output }) {
     // Coming-soon tools/articles have no page, so they can never appear. Static pages first (their
     // sitemapOrder), then tools, then articles, each alphabetical.
     eleventyConfig.addCollection("indexable", (api) => {
-      const group = (item) => (typeof item.data.sitemapOrder === "number" ? 0 : item.url.startsWith("/calculators/") ? 1 : 2);
+      const group = (item) => (typeof item.data.sitemapOrder === "number" ? 0 : item.data.tool ? 1 : 2);
       return api
         .getAll()
         .filter((item) => typeof item.url === "string" && /(\/|\.html)$/.test(item.url) && item.data.noindex !== true)

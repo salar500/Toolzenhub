@@ -148,6 +148,15 @@ Inside `assets/js/`:
 - `data/` – the catalogs: `calculators.js`, `articles.js`, `categories.js`, `taxonomy.js`,
   `relationships.js`, `search-index.js`. They are the source of truth for identity, status,
   titles, descriptions and relationships.
+
+  The content hierarchy is **Section → Category → optional Subcategory → Tool → supporting
+  Articles**, all linked by stable ids (`data/categories.js`, resolved in `data/taxonomy.js`).
+  **Calculators is currently the only section**, and all eight existing categories (Loans,
+  Investment, Tax, Health, Business, Math, Converter, More) belong to it through `sectionId`.
+  A tool names only its category: its section, its site path and its link are derived from it,
+  so a tool's URL is `/{section pathPrefix}/{id}/`, which for Calculators keeps every existing
+  URL (`/calculators/emi/`, `/calculators/loan-comparison/`). Other sections and subcategories
+  are supported by the data model but none exist yet, so there are no pages for them.
 - `components/`, `pages/` – header, footer, breadcrumb, related content, page modules.
 
 ## How it works

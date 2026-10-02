@@ -15,6 +15,8 @@
      description
      category      major category id
      categoryTitle
+     section       section id of the entry's category, or null
+     sectionTitle
      subcategory   subcategory id, or null
      subcategoryTitle
      aliases       optional alternative names (none defined yet)
@@ -57,7 +59,9 @@ import {
     getCategory,
     getSubcategory,
     getCategoryUrl,
-    getSubcategoryLandingUrl
+    getSubcategoryLandingUrl,
+    getSectionForCategory,
+    getSectionForTool
 } from "./taxonomy.js";
 
 
@@ -70,6 +74,23 @@ function titleOf(
 ) {
 
     return getCategory(categoryId)?.title || "";
+
+}
+
+
+/*
+ * The section is never stored on an entry's source item: it is
+ * derived from the item's category (tool -> category -> section).
+ */
+
+function sectionFields(
+    section
+) {
+
+    return {
+        section: section?.id || null,
+        sectionTitle: section?.title || ""
+    };
 
 }
 
@@ -122,6 +143,7 @@ function categoryEntries() {
             description: category.description,
             category: category.id,
             categoryTitle: category.title,
+            ...sectionFields(getSectionForCategory(category.id)),
             subcategory: null,
             subcategoryTitle: "",
             aliases: words(category.aliases),
@@ -145,6 +167,7 @@ function subcategoryEntries() {
             description: subcategory.description || "",
             category: subcategory.category,
             categoryTitle: titleOf(subcategory.category),
+            ...sectionFields(getSectionForCategory(subcategory.category)),
             subcategory: subcategory.id,
             subcategoryTitle: subcategory.title,
             aliases: words(subcategory.aliases),
@@ -168,6 +191,7 @@ function toolEntries() {
             description: tool.description,
             category: tool.category,
             categoryTitle: titleOf(tool.category),
+            ...sectionFields(getSectionForTool(tool)),
             subcategory: tool.subcategory || null,
             subcategoryTitle: subcategoryTitleOf(tool.subcategory),
             aliases: words(tool.aliases),
@@ -193,6 +217,7 @@ function articleEntries() {
             description: article.description,
             category: article.category,
             categoryTitle: titleOf(article.category),
+            ...sectionFields(getSectionForCategory(article.category)),
             subcategory: article.subcategory || null,
             subcategoryTitle: subcategoryTitleOf(article.subcategory),
             aliases: words(article.aliases),

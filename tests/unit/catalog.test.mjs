@@ -5,6 +5,9 @@
  */
 import { test, describe, before } from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
+
+const inventory = JSON.parse(fs.readFileSync(new URL("../inventory/url-inventory.json", import.meta.url), "utf8"));
 
 // routes.js decides the URL prefix from window.location (GitHub Pages project site vs root).
 globalThis.window = { location: { hostname: "salar500.github.io", pathname: "/Toolzenhub/" } };
@@ -20,17 +23,17 @@ before(async () => {
 });
 
 const PUBLISHED = ["loan-comparison", "emi"];
-const COUNTS = { loans: 8, investment: 4, tax: 2, health: 3, business: 3, math: 3, converter: 3 };
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment"];
 
 describe("catalog model", () => {
-  test("26 tools with unique ids and the expected per-category counts", () => {
+  test("tool ids are unique, and every tool recorded in the URL inventory is still in the catalog (same category)", () => {
     const ids = catalog.calculators.map((c) => c.id);
-    assert.equal(ids.length, 26);
-    assert.equal(new Set(ids).size, 26);
-    const counts = {};
-    for (const c of catalog.calculators) counts[c.category] = (counts[c.category] || 0) + 1;
-    assert.deepEqual(counts, COUNTS);
+    assert.equal(new Set(ids).size, ids.length);
+    // the committed inventory is an independent record of every tool that exists today; new tools may be added
+    for (const id of inventory.summary.builtCalculators) assert.ok(ids.includes(id), `published tool ${id} disappeared`);
+    for (const c of inventory.comingSoon.filter((x) => x.kind === "calculator")) {
+      assert.equal(catalog.getCalculatorById(c.id)?.category, c.category, `${c.id} disappeared or changed category`);
+    }
   });
 
   test("every tool has an explicit status of published or coming-soon", () => {
@@ -108,14 +111,14 @@ describe("search labels come from the category list", () => {
   test("search results carry the category title and a URL only for published tools", async () => {
     const search = await import("../../assets/js/utils/categories-search.js");
     const all = search.getCalculators();
-    assert.equal(all.length, 26);
+    assert.equal(all.length, catalog.calculators.length);
     const emi = all.find((c) => c.id === "emi");
     assert.equal(emi.category, "Loans");
     assert.equal(emi.url, `${ROOT}calculators/emi/`);
     const sip = all.find((c) => c.id === "sip");
     assert.equal(sip.category, "Investment");
     assert.equal(sip.url, null);
-    assert.equal(all.filter((c) => c.url).length, 2);
+    assert.equal(all.filter((c) => c.url).length, catalog.calculators.filter((c) => c.available).length);
     // same eight matches as before M7; M7 ranks them (title matches first), see search.test.mjs
     assert.deepEqual(search.searchCalculators("loan").map((c) => c.id), ["loan-comparison", "loan-eligibility", "home-loan", "personal-loan", "emi", "balance-transfer", "interest", "prepayment"]);
   });

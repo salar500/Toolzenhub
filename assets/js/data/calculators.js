@@ -7,12 +7,12 @@
    Responsibilities:
    - Calculator identity (id = URL slug), title, description
    - Category association (`category` = major category id,
-     data/categories.js) and section
+     data/categories.js). The section, the URL and the site
+     path are DERIVED from the category, never written here.
    - Optional `subcategory` (a subcategory id of that
      category). Omit it for a tool that sits directly under
      its major category, which is every tool today.
    - Availability: status "published" | "coming-soon"
-   - Calculator URL
    - `seo` (published tools): the page <title> and meta
      description, kept exactly as the page has always had them
    - Dynamic loaders for implemented calculators
@@ -25,6 +25,10 @@
 import {
     ROUTES
 } from "../routes.js";
+
+import {
+    getSectionForCategory
+} from "./categories.js";
 
 
 /* =========================================================
@@ -46,7 +50,6 @@ const catalog = [
         title: "Loan Comparison Calculator",
         description:
             "Compare two loans by EMI, interest rate, total interest and repayment.",
-        href: ROUTES.calculator("loan-comparison"),
         seo: {
             title:
                 "Loan Comparison Calculator | ToolZenHub",
@@ -64,7 +67,6 @@ const catalog = [
         title: "EMI Calculator",
         description:
             "Calculate your monthly EMI for any loan amount, interest rate and tenure.",
-        href: ROUTES.calculator("emi"),
         seo: {
             title:
                 "EMI Calculator | ToolZen Hub",
@@ -83,8 +85,7 @@ const catalog = [
         icon: "⌂",
         title: "Home Loan Calculator",
         description:
-            "Calculate home loan EMI, interest and total repayment.",
-        href: ROUTES.calculator("home-loan")
+            "Calculate home loan EMI, interest and total repayment."
     },
 
     {
@@ -95,8 +96,7 @@ const catalog = [
         icon: "♙",
         title: "Personal Loan Calculator",
         description:
-            "Calculate EMI and total repayment for a personal loan.",
-        href: ROUTES.calculator("personal-loan")
+            "Calculate EMI and total repayment for a personal loan."
     },
 
     {
@@ -107,8 +107,7 @@ const catalog = [
         icon: "▤",
         title: "Loan Eligibility Calculator",
         description:
-            "Estimate your eligibility for different types of loans.",
-        href: ROUTES.calculator("loan-eligibility")
+            "Estimate your eligibility for different types of loans."
     },
 
     {
@@ -119,8 +118,7 @@ const catalog = [
         icon: "⟳",
         title: "Balance Transfer Calculator",
         description:
-            "Estimate potential savings from transferring your existing loan.",
-        href: ROUTES.calculator("balance-transfer")
+            "Estimate potential savings from transferring your existing loan."
     },
 
     {
@@ -131,8 +129,7 @@ const catalog = [
         icon: "%",
         title: "Interest Calculator",
         description:
-            "Calculate simple and compound interest on your investment or loan.",
-        href: ROUTES.calculator("interest")
+            "Calculate simple and compound interest on your investment or loan."
     },
 
     {
@@ -143,8 +140,7 @@ const catalog = [
         icon: "₹",
         title: "Prepayment Calculator",
         description:
-            "Estimate interest savings from making a partial loan prepayment.",
-        href: ROUTES.calculator("prepayment")
+            "Estimate interest savings from making a partial loan prepayment."
     },
 
 
@@ -160,8 +156,7 @@ const catalog = [
         icon: "◈",
         title: "SIP Calculator",
         description:
-            "Plan your SIP investments.",
-        href: ROUTES.calculator("sip")
+            "Plan your SIP investments."
     },
 
     {
@@ -172,8 +167,7 @@ const catalog = [
         icon: "₹",
         title: "PPF Calculator",
         description:
-            "Calculate PPF investment returns.",
-        href: ROUTES.calculator("ppf")
+            "Calculate PPF investment returns."
     },
 
     {
@@ -184,8 +178,7 @@ const catalog = [
         icon: "▣",
         title: "FD Calculator",
         description:
-            "Calculate fixed deposit returns.",
-        href: ROUTES.calculator("fd")
+            "Calculate fixed deposit returns."
     },
 
     {
@@ -196,8 +189,7 @@ const catalog = [
         icon: "↗",
         title: "CAGR Calculator",
         description:
-            "Calculate compound annual growth rate.",
-        href: ROUTES.calculator("cagr")
+            "Calculate compound annual growth rate."
     },
 
 
@@ -213,8 +205,7 @@ const catalog = [
         icon: "%",
         title: "GST Calculator",
         description:
-            "Calculate GST easily and accurately.",
-        href: ROUTES.calculator("gst")
+            "Calculate GST easily and accurately."
     },
 
     {
@@ -225,8 +216,7 @@ const catalog = [
         icon: "₹",
         title: "Income Tax Calculator",
         description:
-            "Estimate your income tax.",
-        href: ROUTES.calculator("income-tax")
+            "Estimate your income tax."
     },
 
 
@@ -242,8 +232,7 @@ const catalog = [
         icon: "⚖",
         title: "BMI Calculator",
         description:
-            "Check your body mass index.",
-        href: ROUTES.calculator("bmi")
+            "Check your body mass index."
     },
 
     {
@@ -254,8 +243,7 @@ const catalog = [
         icon: "◉",
         title: "Calorie Calculator",
         description:
-            "Estimate your daily calorie needs.",
-        href: ROUTES.calculator("calorie")
+            "Estimate your daily calorie needs."
     },
 
     {
@@ -266,8 +254,7 @@ const catalog = [
         icon: "♨",
         title: "BMR Calculator",
         description:
-            "Calculate your basal metabolic rate.",
-        href: ROUTES.calculator("bmr")
+            "Calculate your basal metabolic rate."
     },
 
 
@@ -283,8 +270,7 @@ const catalog = [
         icon: "₹",
         title: "Profit Calculator",
         description:
-            "Calculate business profit.",
-        href: ROUTES.calculator("profit")
+            "Calculate business profit."
     },
 
     {
@@ -295,8 +281,7 @@ const catalog = [
         icon: "%",
         title: "Margin Calculator",
         description:
-            "Calculate profit margin.",
-        href: ROUTES.calculator("margin")
+            "Calculate profit margin."
     },
 
     {
@@ -307,8 +292,7 @@ const catalog = [
         icon: "↗",
         title: "ROI Calculator",
         description:
-            "Calculate return on investment.",
-        href: ROUTES.calculator("roi")
+            "Calculate return on investment."
     },
 
 
@@ -324,8 +308,7 @@ const catalog = [
         icon: "%",
         title: "Percentage Calculator",
         description:
-            "Calculate percentages easily.",
-        href: ROUTES.calculator("percentage")
+            "Calculate percentages easily."
     },
 
     {
@@ -336,8 +319,7 @@ const catalog = [
         icon: "÷",
         title: "Ratio Calculator",
         description:
-            "Calculate and simplify ratios.",
-        href: ROUTES.calculator("ratio")
+            "Calculate and simplify ratios."
     },
 
     {
@@ -348,8 +330,7 @@ const catalog = [
         icon: "◷",
         title: "Age Calculator",
         description:
-            "Calculate age accurately.",
-        href: ROUTES.calculator("age")
+            "Calculate age accurately."
     },
 
 
@@ -365,8 +346,7 @@ const catalog = [
         icon: "↔",
         title: "Unit Converter",
         description:
-            "Convert common units quickly.",
-        href: ROUTES.calculator("unit-converter")
+            "Convert common units quickly."
     },
 
     {
@@ -377,8 +357,7 @@ const catalog = [
         icon: "¤",
         title: "Currency Converter",
         description:
-            "Convert currencies easily.",
-        href: ROUTES.calculator("currency")
+            "Convert currencies easily."
     },
 
     {
@@ -389,18 +368,10 @@ const catalog = [
         icon: "▣",
         title: "Date Calculator",
         description:
-            "Calculate dates and date differences.",
-        href: ROUTES.calculator("date")
+            "Calculate dates and date differences."
     }
 
 ];
-
-
-/* =========================================================
-   Section
-========================================================= */
-
-export const CALCULATORS_SECTION = "Calculators";
 
 
 /* =========================================================
@@ -424,7 +395,13 @@ const loaders = {
 /* =========================================================
    Calculators
    Catalog entries + derived fields:
-   - section
+   - section    the title of the section of the tool's category
+                (data/categories.js); kept as the label that
+                breadcrumbs and the registry have always used
+   - sitePath   "/{section.pathPrefix}/{id}/": the page's path
+                from the site root, whatever the deployment base
+                (Calculators: /calculators/{id}/)
+   - href       the same page as a link for the current base
    - available  (status === "published"; read by cards/search)
    - loader     (present only for published tools)
 ========================================================= */
@@ -435,9 +412,31 @@ export const calculators = catalog.map(
         const published =
             calculator.status === "published";
 
+        const section =
+            getSectionForCategory(
+                calculator.category
+            );
+
+        if (!section) {
+
+            throw new Error(
+                `Tool "${calculator.id}": category ` +
+                `"${calculator.category}" has no section ` +
+                `(data/categories.js)`
+            );
+
+        }
+
         return {
             ...calculator,
-            section: CALCULATORS_SECTION,
+            section: section.title,
+            sitePath:
+                `/${section.pathPrefix}/${calculator.id}/`,
+            href:
+                ROUTES.tool(
+                    section.pathPrefix,
+                    calculator.id
+                ),
             available: published,
             ...(published && loaders[calculator.id]
                 ? { loader: loaders[calculator.id] }

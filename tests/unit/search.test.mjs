@@ -7,8 +7,12 @@
  */
 import { test, describe, before } from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
 
 globalThis.window = { location: { hostname: "salar500.github.io", pathname: "/Toolzenhub/" } };
+
+// The committed URL inventory is an independent record of what is published (see tests/inventory).
+const inventory = JSON.parse(fs.readFileSync(new URL("../inventory/url-inventory.json", import.meta.url), "utf8"));
 
 let idx, engine, calcs, articles, cats, legacy;
 before(async () => {
@@ -59,7 +63,7 @@ describe("index structure", () => {
   });
 
   test("an entry has exactly the documented fields", () => {
-    for (const e of idx.searchIndex) assert.deepEqual(Object.keys(e), ["key", "type", "id", "title", "description", "category", "categoryTitle", "subcategory", "subcategoryTitle", "aliases", "keywords", "route", "status"], e.key);
+    for (const e of idx.searchIndex) assert.deepEqual(Object.keys(e), ["key", "type", "id", "title", "description", "category", "categoryTitle", "section", "sectionTitle", "subcategory", "subcategoryTitle", "aliases", "keywords", "route", "status"], e.key);
   });
 
   test("literal entries: EMI tool, a published article, a coming-soon tool, the Loans category", () => {
@@ -67,7 +71,8 @@ describe("index structure", () => {
     assert.deepEqual(get("tool:emi"), {
       key: "tool:emi", type: "tool", id: "emi", title: "EMI Calculator",
       description: "Calculate your monthly EMI for any loan amount, interest rate and tenure.",
-      category: "loans", categoryTitle: "Loans", subcategory: null, subcategoryTitle: "", aliases: [], keywords: [],
+      category: "loans", categoryTitle: "Loans", section: "calculators", sectionTitle: "Calculators",
+      subcategory: null, subcategoryTitle: "", aliases: [], keywords: [],
       route: "/Toolzenhub/calculators/emi/", status: "published",
     });
     const art = get("article:2");
@@ -80,10 +85,10 @@ describe("index structure", () => {
     assert.equal(get("category:tax").route, "/Toolzenhub/categories.html#tax");
   });
 
-  test("status follows the catalogs: 2 published tools, 6 published articles, everything else coming-soon", () => {
+  test("status follows the catalogs: the published tools and articles of the URL inventory, everything else coming-soon", () => {
     const pub = (type) => idx.searchIndex.filter((e) => e.type === type && e.status === "published").length;
-    assert.equal(pub("tool"), 2);
-    assert.equal(pub("article"), 6);
+    assert.equal(pub("tool"), inventory.summary.builtCalculators.length);
+    assert.equal(pub("article"), inventory.summary.publishedArticles.length);
     for (const e of idx.searchIndex.filter((x) => x.status !== "published")) assert.equal(e.route, null, e.key);
   });
 

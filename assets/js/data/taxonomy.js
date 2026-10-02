@@ -12,18 +12,24 @@
 
    Relationships are stable ids:
 
+       category.sectionId -> section.id         (required)
        tool.category      -> category.id        (required)
        tool.subcategory   -> subcategory.id     (optional)
        subcategory.category -> category.id
        article.category   -> category.id
        article.tools[]    -> tool.id
 
+   A tool has no section of its own: it is derived
+   (tool -> category -> section). Calculators is the only
+   section today and every current category belongs to it.
+
    A tool may belong directly to a major category (no
    subcategory). No subcategories are defined yet; the
    functions below already handle them.
 
    The hierarchy is an information architecture. It does not
-   have to match URLs: tool URLs stay /calculators/{id}/.
+   have to match URLs: a tool's URL is built from its
+   section's route prefix (Calculators: /calculators/{id}/).
 ========================================================= */
 
 import {
@@ -33,7 +39,9 @@ import {
 import {
     sections,
     categories,
-    subcategories
+    subcategories,
+    getSectionById,
+    getSectionForCategory
 } from "./categories.js";
 
 import {
@@ -63,6 +71,59 @@ export function getSection(
             section.id === wanted ||
             section.title.toLowerCase() === wanted
     );
+
+}
+
+
+export function getSections() {
+
+    return sections;
+
+}
+
+
+/*
+ * By stable id only (getSection above also accepts a title,
+ * which older callers still pass).
+ */
+
+export {
+    getSectionById,
+    getSectionForCategory
+};
+
+
+export function getCategoriesBySection(
+    sectionId
+) {
+
+    return categories.filter(
+        category =>
+            category.sectionId === sectionId
+    );
+
+}
+
+
+/*
+ * tool -> category -> section. A tool carries only its
+ * category id; nothing is matched by label.
+ */
+
+export function getCategoryForTool(
+    tool
+) {
+
+    return getCategory(tool?.category);
+
+}
+
+
+export function getSectionForTool(
+    tool
+) {
+
+    return getSectionForCategory(tool?.category);
 
 }
 
@@ -265,7 +326,7 @@ export function getToolPath(
 
     return {
         section:
-            getSection(tool?.section) || null,
+            getSectionForTool(tool) || null,
         category:
             getCategory(tool?.category) || null,
         subcategory:

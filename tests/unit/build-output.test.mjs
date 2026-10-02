@@ -87,7 +87,7 @@ for (const build of BUILDS) {
 
     it("sitemap and robots are present and on the production origin", () => {
       const sitemap = fs.readFileSync(path.join(build.dir, "sitemap.xml"), "utf8");
-      assert.equal((sitemap.match(/<loc>/g) || []).length, 18);
+      assert.equal((sitemap.match(/<loc>/g) || []).length, inventory.summary.liveIndexable);
       assert.ok(!/github\.io|Toolzenhub/.test(sitemap));
       const robots = fs.readFileSync(path.join(build.dir, "robots.txt"), "utf8");
       assert.match(robots, /^Sitemap: https:\/\/toolzenhub\.in\/sitemap\.xml$/m);

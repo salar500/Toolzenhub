@@ -23,9 +23,9 @@
    Where each step links comes from the hierarchy data
    (data/taxonomy.js), not from this file.
 
-   Home → Timers → Countdown Timer
-
-   Home → Developer Tools → JSON Formatter
+   The trail is always Home → Section → Category →
+   (Subcategory) → Tool. Calculators is the only section
+   today.
 
    Existing breadcrumb styling/classes are preserved.
 ========================================================= */

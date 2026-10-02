@@ -200,6 +200,27 @@ export const ROUTES = {
 
 
     /* =====================================================
+       INDIVIDUAL TOOL (any section)
+
+       A tool page lives under its section's route prefix
+       (data/categories.js sections[].pathPrefix). For the
+       Calculators section this is exactly calculator(slug).
+    ===================================================== */
+
+    tool(
+        pathPrefix,
+        slug
+    ) {
+
+        return (
+            `${SITE_ROOT}${pathPrefix}/` +
+            `${slug}/`
+        );
+
+    },
+
+
+    /* =====================================================
        ASSET
 
        Resolves an asset path (for example
