@@ -15,6 +15,10 @@ import {
     articleRegistry
 } from "../article-registry.js";
 
+import {
+    getRelatedArticlesForTool
+} from "../data/relationships.js";
+
 
 /* =========================================================
    ARTICLE URL
@@ -80,17 +84,25 @@ export function renderRelatedArticles(
 
 
     /*
-     * Get articles belonging to the same category.
+     * Curated articles first, then articles that point at the
+     * tool, then the rest of its category
+     * (data/relationships.js). The cards are drawn from the
+     * listing view of each article.
      */
 
     const relatedArticles =
-        articleRegistry
-            .filter(
-                article =>
-                    article.published === true &&
-                    article.category === category
+        getRelatedArticlesForTool(
+            currentSlug,
+            { limit: 6 }
+        )
+            .map(
+                related =>
+                    articleRegistry.find(
+                        article =>
+                            article.id === related.id
+                    )
             )
-            .slice(0, 6);
+            .filter(Boolean);
 
 
     /*

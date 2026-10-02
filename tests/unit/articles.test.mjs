@@ -158,10 +158,16 @@ describe("article model (metadata + content -> page object)", () => {
     assert.equal(otherArticle.relatedArticles.find((r) => r.slug === "choose-right-loan-tenure").image, null);
   });
 
-  test("related targets that are not published are skipped", () => {
-    const entry = { ...catalog.getArticleByKey("loan-comparison/emi-vs-total-interest"), related: ["investment/best-sip-strategies-for-beginners", "loan-comparison/what-is-loan-prepayment", "nope/nope"] };
-    const article = model.buildArticle(entry, { calculator: { description: "x" } });
-    assert.deepEqual(article.relatedArticles.map((r) => r.slug), ["what-is-loan-prepayment"]);
+  test("related targets that are not published are skipped (curated list is read from the catalog)", async () => {
+    const entry = catalog.getArticleByKey("loan-comparison/emi-vs-total-interest");
+    const original = entry.related;
+    entry.related = ["investment/best-sip-strategies-for-beginners", "loan-comparison/what-is-loan-prepayment", "nope/nope"];
+    try {
+      const article = model.buildArticle(entry, { calculator: { description: "x" } });
+      assert.deepEqual(article.relatedArticles.map((r) => r.slug), ["what-is-loan-prepayment"]);
+    } finally {
+      entry.related = original;
+    }
   });
 });
 

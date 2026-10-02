@@ -15,13 +15,13 @@
 ========================================================= */
 
 import {
-    articleCategories,
-    getArticleByKey
+    articleCategories
 } from "../../data/articles.js";
 
 import {
-    getCalculatorById
-} from "../../data/calculators.js";
+    getRelatedArticles,
+    getRelatedToolsForArticle
+} from "../../data/relationships.js";
 
 
 /* =========================================================
@@ -36,11 +36,15 @@ function buildCalculator(
     content
 ) {
 
-    const calculatorId =
-        entry.tools?.[0];
+    /*
+     * The article's own (curated) tool first; the category's
+     * tools only if it names none (data/relationships.js).
+     */
 
     const calculator =
-        getCalculatorById(calculatorId);
+        getRelatedToolsForArticle(
+            entry.key
+        )[0];
 
     if (!calculator) {
         return undefined;
@@ -61,21 +65,16 @@ function buildCalculator(
 /* =========================================================
    RELATED ARTICLES
 
-   Curated, ordered keys in the catalog. Each card is built
-   from the target article's own metadata. Targets that are
-   not published are skipped.
+   Curated, ordered keys in the catalog (shown as written, not
+   padded). Each card is built from the target article's own
+   metadata. Targets that are not published are skipped.
 ========================================================= */
 
 function buildRelatedArticles(
     entry
 ) {
 
-    return (entry.related || [])
-        .map(getArticleByKey)
-        .filter(
-            target =>
-                target && target.published
-        )
+    return getRelatedArticles(entry.key)
         .map(
             target => ({
                 slug:

@@ -267,3 +267,54 @@ test.describe("M6 category hierarchy in the breadcrumbs @portable", () => {
   });
 });
 
+test.describe("M7 shared search: page experiences keep their UX and rank results @portable", () => {
+  const titlesOf = (page, sel) => page.locator(sel).evaluateAll((els) => els.map((e) => (e.querySelector("h2, h3, strong")?.textContent || "").trim()));
+
+  test("categories page: 'emi' puts the EMI Calculator first; Coming soon matches are still listed, not linked", async ({ page, go }) => {
+    await go("categories.html");
+    await page.locator("#categories-search-input").fill("emi");
+    await expect(page.locator("#categories-grid .category-page-card")).toHaveCount(4);
+    expect(await titlesOf(page, "#categories-grid .category-page-card")).toEqual(["EMI Calculator", "Loan Comparison Calculator", "Home Loan Calculator", "Personal Loan Calculator"]);
+    await expect(page.locator("#categories-grid .category-page-card--soon")).toHaveCount(2);
+    await page.locator("#categories-search-input").fill("loan");
+    expect(await titlesOf(page, "#categories-grid .category-page-card")).toEqual(["Loan Comparison Calculator", "Loan Eligibility Calculator", "Home Loan Calculator", "Personal Loan Calculator", "EMI Calculator", "Balance Transfer Calculator", "Interest Calculator", "Prepayment Calculator"]);
+  });
+
+  test("calculators page: same engine, same ranking, empty and no-result states unchanged", async ({ page, go }) => {
+    await go("calculators.html");
+    const input = page.locator("#calculators-search-input");
+    await input.fill("interest");
+    expect(await titlesOf(page, "#calculators-grid .calculator-card")).toEqual(["Interest Calculator", "Loan Comparison Calculator", "EMI Calculator", "Home Loan Calculator", "Prepayment Calculator"]);
+    await input.fill("zzzz-nothing");
+    await expect(page.locator("#calculators-empty")).toBeVisible();
+    await input.fill("");
+    await expect(page.locator("#calculators-grid .calculator-card")).toHaveCount(26);
+  });
+
+  test("Loans page: only Loans tools, ranked; a tool id still matches", async ({ page, go }) => {
+    await go("loans.html");
+    const input = page.locator("#loans-search-input");
+    await input.fill("interest");
+    expect(await titlesOf(page, "#loans-calculators-grid .calculator-card")).toEqual(["Interest Calculator", "Loan Comparison Calculator", "EMI Calculator", "Home Loan Calculator", "Prepayment Calculator"]);
+    await input.fill("loan-comp"); // matches the id only
+    expect(await titlesOf(page, "#loans-calculators-grid .calculator-card")).toEqual(["Loan Comparison Calculator"]);
+    await input.fill("sip"); // an Investment tool is never offered on the Loans page
+    await expect(page.locator("#loans-calculators-grid")).toContainText("No calculators found");
+    await input.fill("");
+    await expect(page.locator("#loans-calculators-grid .calculator-card")).toHaveCount(8);
+  });
+
+  test("articles listing: ranked within the category filter; pagination and empty state intact", async ({ page, go }) => {
+    await go("articles.html");
+    const search = page.locator("#article-search");
+    await search.fill("prepayment");
+    await expect(page.locator("#articles-list [data-article-id]").first()).toBeVisible();
+    await expect(page.locator("#articles-list")).toContainText("What Is Loan Prepayment?");
+    await page.locator('.article-filter[data-category="investment"]').click();
+    await search.fill("sip");
+    await expect(page.locator("#articles-list")).toContainText("Best SIP Strategies for Beginners"); // coming-soon placeholder still listed
+    await search.fill("zzzz-no-such-article");
+    await expect(page.locator("#articles-list")).not.toContainText("Best SIP Strategies");
+  });
+});
+

@@ -1,0 +1,216 @@
+/**
+ * M7: shared search index (data/search-index.js) and ranking (utils/search.js).
+ *
+ * The `OLD_*` functions below are LITERAL copies of the matching the pages used before M7
+ * (categories/calculators page, Loans page, articles listing), so parity is checked against the old
+ * behaviour, not against the code under test.
+ */
+import { test, describe, before } from "node:test";
+import assert from "node:assert/strict";
+
+globalThis.window = { location: { hostname: "salar500.github.io", pathname: "/Toolzenhub/" } };
+
+let idx, engine, calcs, articles, cats, legacy;
+before(async () => {
+  idx = await import("../../assets/js/data/search-index.js");
+  engine = await import("../../assets/js/utils/search.js");
+  calcs = await import("../../assets/js/data/calculators.js");
+  articles = await import("../../assets/js/data/articles.js");
+  cats = await import("../../assets/js/data/categories.js");
+  legacy = await import("../../assets/js/article-registry.js");
+  CORPUS = buildCorpus();
+});
+
+/* ---------- the matching the pages used before M7 ---------- */
+const catTitle = (id) => cats.categories.find((c) => c.id === id).title;
+const OLD_TOOLS = (q) => {          // categories + calculators pages
+  const s = String(q || "").trim().toLowerCase();
+  if (!s) return [];
+  return calcs.calculators.filter((c) => [c.title, c.description, catTitle(c.category)].join(" ").toLowerCase().includes(s)).map((c) => c.id);
+};
+const OLD_LOANS = (q) => {          // Loans page
+  const s = String(q || "").trim().toLowerCase();
+  return calcs.calculators.filter((c) => c.category === "loans").filter((c) => [c.title, c.description, c.category, c.id].join(" ").toLowerCase().includes(s)).map((c) => c.id);
+};
+const OLD_ARTICLES = (q, category = "All") => {   // articles listing
+  const s = String(q || "").trim().toLowerCase();
+  return legacy.articleRegistry.filter((a) => (category === "All" || a.category === category) && (!s || a.title.toLowerCase().includes(s) || a.description.toLowerCase().includes(s) || a.categoryName.toLowerCase().includes(s))).map((a) => a.id);
+};
+
+const TOOL_OPTS = { types: ["tool"], includeComingSoon: true };
+const ids = (results) => results.map((r) => r.id);
+const sorted = (xs) => [...xs].sort();
+
+// every word of every title/description, plus fragments and the queries the browser tests use
+let CORPUS;
+const buildCorpus = () => {
+  const words = new Set(["emi", "EMI", " emi ", "loan", "loan comparison", "interest", "home", "home loan", "calculator", "sip", "tax", "prepayment", "tenure", "fixed", "emi vs", "oans", "loans", "invest", "finance", "calc", "e", "a", "in", "zz", "zzzz-none", "x", "Loan", "LOANS", "loan-comparison", "personal"]);
+  for (const t of [...calcs.calculators, ...articles.articles]) {
+    for (const w of `${t.title} ${t.description}`.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean)) { words.add(w); words.add(w.slice(0, 3)); words.add(w.slice(1, 4)); }
+  }
+  return [...words];
+};
+
+describe("index structure", () => {
+  test("covers categories, tools and articles (no subcategories are defined yet)", () => {
+    const count = (type) => idx.searchIndex.filter((e) => e.type === type).length;
+    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 26, 12]);
+    assert.equal(new Set(idx.searchIndex.map((e) => e.key)).size, idx.searchIndex.length);
+  });
+
+  test("an entry has exactly the documented fields", () => {
+    for (const e of idx.searchIndex) assert.deepEqual(Object.keys(e), ["key", "type", "id", "title", "description", "category", "categoryTitle", "subcategory", "subcategoryTitle", "aliases", "keywords", "route", "status"], e.key);
+  });
+
+  test("literal entries: EMI tool, a published article, a coming-soon tool, the Loans category", () => {
+    const get = (key) => idx.searchIndex.find((e) => e.key === key);
+    assert.deepEqual(get("tool:emi"), {
+      key: "tool:emi", type: "tool", id: "emi", title: "EMI Calculator",
+      description: "Calculate your monthly EMI for any loan amount, interest rate and tenure.",
+      category: "loans", categoryTitle: "Loans", subcategory: null, subcategoryTitle: "", aliases: [], keywords: [],
+      route: "/Toolzenhub/calculators/emi/", status: "published",
+    });
+    const art = get("article:2");
+    assert.equal(art.title, "EMI vs Total Interest: What Should You Compare?");
+    assert.equal(art.route, "/Toolzenhub/articles/loan-comparison/emi-vs-total-interest/");
+    assert.equal(art.status, "published");
+    assert.equal(get("tool:sip").route, null);
+    assert.equal(get("tool:sip").status, "coming-soon");
+    assert.equal(get("category:loans").route, "/Toolzenhub/loans.html");
+    assert.equal(get("category:tax").route, "/Toolzenhub/categories.html#tax");
+  });
+
+  test("status follows the catalogs: 2 published tools, 6 published articles, everything else coming-soon", () => {
+    const pub = (type) => idx.searchIndex.filter((e) => e.type === type && e.status === "published").length;
+    assert.equal(pub("tool"), 2);
+    assert.equal(pub("article"), 6);
+    for (const e of idx.searchIndex.filter((x) => x.status !== "published")) assert.equal(e.route, null, e.key);
+  });
+
+  test("no invented aliases or keywords, and no article bodies in the index", () => {
+    for (const e of idx.searchIndex) { assert.deepEqual(e.aliases, [], e.key); assert.deepEqual(e.keywords, [], e.key); }
+    const bytes = JSON.stringify(idx.searchIndex).length;
+    assert.ok(bytes < 20000, `index is ${bytes} bytes`);
+  });
+});
+
+describe("ranking rules (fixture index)", () => {
+  const E = (id, over) => ({ key: `tool:${id}`, type: "tool", id, title: id, description: "", category: "c", categoryTitle: "", subcategory: null, subcategoryTitle: "", aliases: [], keywords: [], route: "/", status: "published", ...over });
+  const fixture = [
+    E("d", { title: "Other", description: "mentions widget here" }),                       // description   20
+    E("c", { title: "Other", categoryTitle: "Widget Tools" }),                              // category      30
+    E("k", { title: "Other", keywords: ["widgetry"] }),                                     // keyword       40
+    E("a", { title: "Other", aliases: ["the widget"] }),                                    // alias         50
+    E("m", { title: "Big widget maker" }),                                                  // contains      60
+    E("p", { title: "Widget Pro" }),                                                        // prefix        80
+    E("x", { title: "Widget" }),                                                            // exact        100
+  ];
+  const run = (q, o) => engine.search(q, { index: fixture, ...o });
+
+  test("exact title > title prefix > title contains > alias > keyword > category > description", () => {
+    const r = run("widget");
+    assert.deepEqual(ids(r), ["x", "p", "m", "a", "k", "c", "d"]);
+    assert.deepEqual(r.map((x) => x.score), [100, 80, 60, 50, 40, 30, 20]);
+  });
+
+  test("subcategory title counts as category", () => {
+    assert.equal(run("sub", { index: [E("s", { title: "Other", subcategoryTitle: "Sub Group" })] })[0].score, 30);
+  });
+
+  test("an id only matches when asked (matchId), below category and above description", () => {
+    const one = [E("zebra-tool", { title: "Other", description: "x" })];
+    assert.deepEqual(run("zebra", { index: one }), []);
+    assert.equal(run("zebra", { index: one, matchId: true })[0].score, 25);
+  });
+
+  test("equal scores: published before coming-soon, then catalog order", () => {
+    const tied = [E("s1", { title: "Same", status: "coming-soon" }), E("p1", { title: "Same" }), E("s2", { title: "Same", status: "coming-soon" }), E("p2", { title: "Same" })];
+    assert.deepEqual(ids(engine.search("same", { index: tied, includeComingSoon: true })), ["p1", "p2", "s1", "s2"]);
+  });
+
+  test("case, surrounding spaces and a repeat call do not change the result", () => {
+    assert.deepEqual(ids(run("  WIDGET ")), ids(run("widget")));
+    assert.deepEqual(run("widget"), run("widget"));
+  });
+
+  test("empty / blank / missing queries return nothing", () => {
+    for (const q of ["", "   ", null, undefined]) assert.deepEqual(run(q), []);
+  });
+
+  test("limit, types, category and subcategory scoping", () => {
+    assert.equal(run("widget", { limit: 2 }).length, 2);
+    assert.deepEqual(run("widget", { types: ["article"] }), []);
+    assert.deepEqual(run("widget", { category: "nope" }), []);
+    assert.equal(run("widget", { category: "c" }).length, 7);
+  });
+});
+
+describe("real data: policy and ranking", () => {
+  test("coming-soon items are NOT found unless the caller asks for them", () => {
+    assert.deepEqual(ids(engine.search("sip", { types: ["tool"] })), []);
+    assert.deepEqual(ids(engine.search("sip", { types: ["tool"], includeComingSoon: true })), ["sip"]);
+    assert.deepEqual(ids(engine.search("sip")), ["investment"]); // the published Investment category mentions SIP
+    assert.deepEqual(ids(engine.search("best sip strategies", { types: ["article"] })), []);
+    assert.equal(engine.search("emi").every((r) => r.status === "published"), true);
+  });
+
+  test("emi: the EMI tool first (title prefix), then the others that mention EMI", () => {
+    const r = engine.search("emi", TOOL_OPTS);
+    assert.deepEqual(ids(r), ["emi", "loan-comparison", "home-loan", "personal-loan"]);
+    assert.deepEqual(r.map((x) => x.score), [80, 20, 20, 20]);
+  });
+
+  test("loan: titles beginning with it, then titles containing it, then category matches", () => {
+    assert.deepEqual(ids(engine.search("loan", TOOL_OPTS)), ["loan-comparison", "loan-eligibility", "home-loan", "personal-loan", "emi", "balance-transfer", "interest", "prepayment"]);
+  });
+
+  test("loan comparison / interest / home", () => {
+    assert.deepEqual(ids(engine.search("loan comparison", TOOL_OPTS)), ["loan-comparison"]);
+    assert.deepEqual(ids(engine.search("interest", TOOL_OPTS)), ["interest", "loan-comparison", "emi", "home-loan", "prepayment"]);
+    assert.deepEqual(ids(engine.search("home", TOOL_OPTS)), ["home-loan"]);
+  });
+
+  test("article titles and partial matches (published articles only by default)", () => {
+    assert.deepEqual(ids(engine.search("tenure", { types: ["article"] })), [4, 6]);
+    assert.deepEqual(ids(engine.search("prepay", { types: ["article"] })), [5]);
+    assert.deepEqual(ids(engine.search("what is loan prepayment", { types: ["article"] })), [5]);
+    assert.deepEqual(ids(engine.search("fixed vs floating", { types: ["article"] })), [3]);
+  });
+
+  test("no-result queries", () => {
+    assert.deepEqual(engine.search("zzzz-none", { includeComingSoon: true }), []);
+    assert.deepEqual(engine.search("qwertyuiop"), []);
+  });
+
+  test("a mixed global search returns each type, published only", () => {
+    const r = engine.search("emi");
+    assert.deepEqual(r.map((x) => x.key), ["tool:emi", "article:2", "category:loans", "tool:loan-comparison"]);
+  });
+});
+
+describe("parity with the searches the pages used before M7 (same set of matches)", () => {
+  test("categories + calculators pages: identical sets for the whole corpus", () => {
+    for (const q of CORPUS) assert.deepEqual(sorted(ids(engine.search(q, TOOL_OPTS))), sorted(OLD_TOOLS(q)), `query "${q}"`);
+  });
+
+  test("Loans page: identical sets (id and category still match)", () => {
+    for (const q of CORPUS.filter((x) => x.trim())) {
+      const now = engine.search(q, { types: ["tool"], category: "loans", includeComingSoon: true, matchId: true });
+      assert.deepEqual(sorted(ids(now)), sorted(OLD_LOANS(q)), `query "${q}"`);
+    }
+  });
+
+  test("articles listing: identical sets for every category filter", () => {
+    for (const category of ["All", "loans", "investment", "tax"]) {
+      for (const q of CORPUS) {
+        const now = engine.search(q, { types: ["article"], category: category === "All" ? undefined : category, includeComingSoon: true });
+        assert.deepEqual(sorted(ids(now)), sorted(OLD_ARTICLES(q, category).filter(() => q.trim())), `${category} / "${q}"`);
+      }
+    }
+  });
+
+  test("the corpus is substantial and mostly non-trivial", () => {
+    assert.ok(CORPUS.length > 200, `${CORPUS.length} queries`);
+    assert.ok(CORPUS.filter((q) => OLD_TOOLS(q).length > 0).length > 100);
+  });
+});

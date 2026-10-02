@@ -12,6 +12,10 @@ import {
     articleRegistry
 } from "../../article-registry.js";
 
+import {
+    search
+} from "../../utils/search.js";
+
 
 /* =========================================================
    STATE
@@ -52,42 +56,62 @@ export function getFilteredArticles() {
 
     const searchTerm =
         articlesState.searchTerm
-            .trim()
-            .toLowerCase();
+            .trim();
 
 
-    return articleRegistry.filter(article => {
+    /*
+     * Category filter only: the registry's own order.
+     */
 
-        const matchesCategory =
-            category === "All" ||
-            article.category === category;
-
-
-        const matchesSearch =
-            !searchTerm ||
-
-            article.title
-                .toLowerCase()
-                .includes(searchTerm) ||
-
-            article.description
-                .toLowerCase()
-                .includes(searchTerm) ||
-
-            article.categoryName
-                .toLowerCase()
-                .includes(searchTerm);
-
-
-        return (
-            matchesCategory &&
-            matchesSearch
+    const inCategory =
+        articleRegistry.filter(
+            article =>
+                category === "All" ||
+                article.category === category
         );
 
-    });
+
+    if (!searchTerm) {
+
+        return inCategory;
+
+    }
+
+
+    /*
+     * Search: the shared engine (utils/search.js) ranks the
+     * matches. The listing has always shown Coming-soon
+     * articles as "Coming soon" cards, so it asks for them.
+     */
+
+    const byId =
+        new Map(
+            inCategory.map(
+                article => [
+                    article.id,
+                    article
+                ]
+            )
+        );
+
+    return search(
+        searchTerm,
+        {
+            types: ["article"],
+            category:
+                category === "All"
+                    ? undefined
+                    : category,
+            includeComingSoon: true
+        }
+    )
+        .map(
+            result =>
+                byId.get(result.id)
+        )
+        .filter(Boolean);
 
 }
-
 
 
 /* =========================================================

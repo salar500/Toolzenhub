@@ -18,6 +18,10 @@ import {
 } from "../data/taxonomy.js";
 
 import {
+    search as searchIndex
+} from "../utils/search.js";
+
+import {
     renderCalculatorCards
 } from "../components/calculator-card.js";
 
@@ -91,13 +95,12 @@ function initializeSearch() {
 
     function performSearch(query) {
 
-        const search =
+        const text =
             String(query || "")
-                .trim()
-                .toLowerCase();
+                .trim();
 
 
-        if (!search) {
+        if (!text) {
 
             renderLoanCalculators(
                 loanCalculators
@@ -107,36 +110,34 @@ function initializeSearch() {
         }
 
 
+        /*
+         * The shared search (utils/search.js), limited to this
+         * page's category. It always matched a tool's id here,
+         * and lists Coming-soon tools as cards.
+         */
+
         const results =
-            loanCalculators.filter(
-                calculator => {
-
-                    const searchableText = [
-
-                        calculator.title,
-
-                        calculator.description,
-
-                        calculator.category,
-
-                        calculator.id
-
-                    ]
-                        .join(" ")
-                        .toLowerCase();
-
-
-                    return searchableText.includes(
-                        search
-                    );
-
+            searchIndex(
+                text,
+                {
+                    types: ["tool"],
+                    category: "loans",
+                    includeComingSoon: true,
+                    matchId: true
                 }
+            ).map(
+                result =>
+                    loanCalculators.find(
+                        calculator =>
+                            calculator.id === result.id
+                    )
             );
 
 
         renderLoanCalculators(
             results
         );
+
 
     }
 

@@ -116,6 +116,7 @@ describe("search labels come from the category list", () => {
     assert.equal(sip.category, "Investment");
     assert.equal(sip.url, null);
     assert.equal(all.filter((c) => c.url).length, 2);
-    assert.deepEqual(search.searchCalculators("loan").map((c) => c.id).slice(0, 2), ["loan-comparison", "emi"]);
+    // same eight matches as before M7; M7 ranks them (title matches first), see search.test.mjs
+    assert.deepEqual(search.searchCalculators("loan").map((c) => c.id), ["loan-comparison", "loan-eligibility", "home-loan", "personal-loan", "emi", "balance-transfer", "interest", "prepayment"]);
   });
 });

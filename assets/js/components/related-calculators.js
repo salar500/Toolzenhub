@@ -15,6 +15,10 @@ import {
     getCalculatorById
 } from "../data/calculators.js";
 
+import {
+    getRelatedTools
+} from "../data/relationships.js";
+
 
 /* =========================================================
    RELATED-CARD COPY (presentation)
@@ -76,38 +80,34 @@ export function renderRelatedCalculators(
 
 
     /*
-     * Find calculators belonging to the same category.
+     * Curated related tools first, then the rest of the
+     * tool's category (data/relationships.js).
      */
 
     const relatedCalculators =
-        Object.entries(calculatorMetadata)
-            .filter(
-                ([slug, metadata]) =>
-                    metadata.category === category &&
-                    slug !== currentSlug
-            )
+        getRelatedTools(
+            currentSlug,
+            { limit: 6 }
+        )
             .map(
-                ([slug]) => {
-                    const tool =
-                        getCalculatorById(slug);
+                tool => {
                     const copy =
-                        RELATED_CARD_COPY[slug] || {};
+                        RELATED_CARD_COPY[tool.id] || {};
                     return {
-                        slug,
+                        slug: tool.id,
                         icon:
-                            copy.icon ?? tool?.icon,
-                        title: tool?.title,
+                            copy.icon ?? tool.icon,
+                        title: tool.title,
                         description:
                             copy.description ??
-                            tool?.description
+                            tool.description
                     };
                 }
             )
             .filter(
                 calculator =>
                     calculator.title
-            )
-            .slice(0, 6);
+            );
 
 
     /*

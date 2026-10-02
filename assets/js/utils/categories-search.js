@@ -25,6 +25,10 @@ import {
     categories
 } from "../data/categories.js";
 
+import {
+    search
+} from "./search.js";
+
 
 /* =========================================================
    CATEGORY LABELS
@@ -74,42 +78,31 @@ function getSearchCalculators() {
 
 export function searchCalculators(query) {
 
-    const search =
-        String(query || "")
-            .trim()
-            .toLowerCase();
+    /*
+     * Ranked by the shared search (utils/search.js). These
+     * pages have always listed Coming-soon tools (as "Coming
+     * soon" cards), so they ask for them explicitly.
+     */
 
+    const byId =
+        new Map(
+            getSearchCalculators().map(
+                calculator => [
+                    calculator.id,
+                    calculator
+                ]
+            )
+        );
 
-    if (!search) {
-        return [];
-    }
-
-
-    const searchCalculators =
-        getSearchCalculators();
-
-
-    return searchCalculators.filter(
-        calculator => {
-
-            const searchableText = [
-
-                calculator.title,
-
-                calculator.description,
-
-                calculator.category
-
-            ]
-                .join(" ")
-                .toLowerCase();
-
-
-            return searchableText.includes(
-                search
-            );
-
+    return search(
+        query,
+        {
+            types: ["tool"],
+            includeComingSoon: true
         }
+    ).map(
+        result =>
+            byId.get(result.id)
     );
 
 }
