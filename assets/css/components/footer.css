@@ -710,3 +710,19 @@ body.categories-page-body #footer .footer__bottom {
 
     margin-bottom: 0 !important;
 }
+
+
+/* =========================================================
+   FOOTER OF A PAGE STILL BEING BUILT
+
+   A page whose content is built in the browser is generated with
+   <html data-pending> (see assets/js/utils/page-ready.js). Its
+   footer is already in the HTML, so keep it out of the layout until
+   the content exists; otherwise the content arrives above it and
+   pushes it down (a layout shift). Without script the page script
+   never runs, so a <noscript> rule in the page shows the footer.
+========================================================= */
+
+html[data-pending] #footer {
+    display: none;
+}

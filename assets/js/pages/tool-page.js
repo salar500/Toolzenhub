@@ -29,6 +29,15 @@
      export const showRelatedArticles = false      OPTIONAL
          Opt out of a related section (default: shown).
 
+     export function markup()                      OPTIONAL
+     export function init(mount)                   OPTIONAL
+         The split form of render(): markup() returns the tool's
+         HTML (pure, no DOM), init() binds it. The site build
+         calls markup() to put the finished page in the HTML
+         (buildToolPageHtml below); in the browser the shared
+         page then calls only init(). A tool without them still
+         works through render().
+
    A tool is addressed by id and described by metadata
    { section, category, title }, both supplied by the caller
    (today: the calculator catalog). Nothing here knows about
@@ -83,6 +92,16 @@ export function readToolContract(
         render:
             module.render,
 
+        markup:
+            typeof module.markup === "function"
+                ? module.markup
+                : null,
+
+        init:
+            typeof module.init === "function"
+                ? module.init
+                : null,
+
         showRelatedTools:
             module.showRelatedCalculators !== false,
 
@@ -90,6 +109,70 @@ export function readToolContract(
             module.showRelatedArticles !== false
 
     };
+
+}
+
+
+/* =========================================================
+   BUILD TOOL PAGE HTML (pure)
+
+   The finished markup of a tool page: the tool's own markup
+   with the shared breadcrumb as the first child of the page
+   wrapper and the related sections as the last children, the
+   same placement renderToolPage() uses in the browser.
+   Used by the site build; returns "" if the module has no
+   markup().
+========================================================= */
+
+const PAGE_OPEN =
+    '<div class="calculator-page">';
+
+export function buildToolPageHtml(
+    id,
+    module,
+    metadata
+) {
+
+    const contract =
+        readToolContract(module);
+
+    if (!contract || !contract.markup) {
+        return "";
+    }
+
+    let html =
+        contract.markup();
+
+    const open =
+        html.indexOf(PAGE_OPEN);
+
+    const close =
+        html.lastIndexOf("</div>");
+
+    if (open === -1 || close === -1) {
+        return html;
+    }
+
+    const afterOpen =
+        open + PAGE_OPEN.length;
+
+    const related =
+        (contract.showRelatedTools
+            ? renderRelatedCalculators(id)
+            : "") +
+        (contract.showRelatedArticles
+            ? renderRelatedArticles(id)
+            : "");
+
+    return (
+        html.slice(0, afterOpen) +
+        (metadata
+            ? renderToolBreadcrumb(metadata)
+            : "") +
+        html.slice(afterOpen, close) +
+        related +
+        html.slice(close)
+    );
 
 }
 
@@ -142,6 +225,28 @@ export async function renderToolPage(
             renderToolNotFound();
 
             return;
+        }
+
+
+        /*
+         * A generated page already contains the finished markup
+         * (tool content, breadcrumb, related sections): bind it.
+         */
+
+        const mount =
+            document.querySelector(
+                TOOL_MOUNT_SELECTOR
+            );
+
+        if (
+            contract.init &&
+            mount?.querySelector(".calculator-page")
+        ) {
+
+            contract.init(mount);
+
+            return;
+
         }
 
 
@@ -227,65 +332,18 @@ export async function renderToolPage(
 
 
 /* =========================================================
-   NOT FOUND
+   NOT FOUND / ERROR
+
+   Kept in tool-messages.js so a generated tool page can show
+   them without loading this whole module.
 ========================================================= */
 
-export function renderToolNotFound() {
+export {
+    renderToolNotFound,
+    renderToolError
+} from "./tool-messages.js";
 
-    renderToolMessage(
-        "Calculator Not Found",
-        `The calculator you're looking for
-                doesn't exist.`
-    );
-
-}
-
-
-/* =========================================================
-   ERROR
-========================================================= */
-
-export function renderToolError() {
-
-    renderToolMessage(
-        "Something went wrong",
-        `We couldn't load this calculator.
-                Please try again.`
-    );
-
-}
-
-
-function renderToolMessage(
-    heading,
-    text
-) {
-
-    const app =
-        document.querySelector(
-            TOOL_MOUNT_SELECTOR
-        );
-
-
-    if (!app) {
-        return;
-    }
-
-
-    app.innerHTML = `
-
-        <section class="calculator-error">
-
-            <h1>
-                ${heading}
-            </h1>
-
-            <p>
-                ${text}
-            </p>
-
-        </section>
-
-    `;
-
-}
+import {
+    renderToolNotFound,
+    renderToolError
+} from "./tool-messages.js";

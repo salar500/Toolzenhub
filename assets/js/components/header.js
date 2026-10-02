@@ -6,20 +6,17 @@
 import { ROUTES } from "../routes.js";
 
 
-export function renderHeader() {
+/* =========================================================
+   HEADER MARKUP
 
-    const header = document.getElementById("header");
+   Pure: returns the header HTML. The site build calls it to
+   put the header into every generated page; renderHeader()
+   calls it only when a page does not already contain it.
+========================================================= */
 
-    if (!header) {
-        return;
-    }
+export function headerMarkup() {
 
-
-    /* =====================================================
-       HEADER HTML
-    ===================================================== */
-
-    header.innerHTML = `
+    return `
 
         <div class="site-header">
 
@@ -199,7 +196,45 @@ export function renderHeader() {
 
         </div>
 
-    `;
+`;
+
+}
+
+
+/* =========================================================
+   HEADER BEHAVIOUR
+
+   Binds the active link, the mobile menu and its listeners.
+   Safe to call more than once for the same header.
+========================================================= */
+
+const boundHeaders = new WeakSet();
+
+
+export function renderHeader() {
+
+    const header = document.getElementById("header");
+
+    if (!header) {
+        return;
+    }
+
+
+    /*
+     * Generated pages already contain the header.
+     */
+
+    if (!header.querySelector(".site-header")) {
+
+        header.innerHTML = headerMarkup();
+
+    } else if (boundHeaders.has(header)) {
+
+        return;
+
+    }
+
+    boundHeaders.add(header);
 
 
     /* =====================================================

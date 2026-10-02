@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"{% if clientRendered %} data-pending{% endif %}>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    {#- Where THIS build is deployed. Browser scripts read it (assets/js/routes.js). It is not a canonical. #}
+    <meta name="tz-site-base" content="{{ site.base }}">
+
+    <title>{{ title }}</title>
+
+    <meta name="description" content="{{ description }}">
+{%- if themeColor %}
+
+    <meta name="theme-color" content="{{ themeColor }}">
+{%- endif %}
+{%- if robots %}
+
+    <meta name="robots" content="{{ robots }}">
+{%- endif %}
+{%- if not noindex %}
+
+    {#- Canonical, Open Graph and Twitter use the PRODUCTION origin in every build, never the deployment base. #}
+    {%- set canonicalUrl = site.productionUrl(page.url) %}
+    <link rel="canonical" href="{{ canonicalUrl }}">
+
+    <meta property="og:type" content="{{ ogType or 'website' }}">
+    <meta property="og:site_name" content="{{ site.name }}">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ description }}">
+    <meta property="og:url" content="{{ canonicalUrl }}">
+    {%- if ogImage %}
+    <meta property="og:image" content="{{ ogImage }}">
+    {%- endif %}
+
+    <meta name="twitter:card" content="{{ 'summary_large_image' if ogImage else 'summary' }}">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:description" content="{{ description }}">
+    {%- if ogImage %}
+    <meta name="twitter:image" content="{{ ogImage }}">
+    {%- endif %}
+{%- endif %}
+
+    <link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | url }}">
+
+{%- if fonts %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{%- endif %}
+{% for sheet in styles %}
+    <link rel="stylesheet" href="{{ sheet | url }}">
+{%- endfor %}
+{%- if clientRendered %}
+
+    {#- After the stylesheets so it wins: without script the page never becomes "ready", so show the footer. #}
+    <noscript><style>html[data-pending] #footer { display: block; }</style></noscript>
+{%- endif %}
+{%- for block in jsonld %}
+
+    <script type="application/ld+json">{{ block | jsonLd | safe }}</script>
+{%- endfor %}
+
+</head>
+
+<body{% if bodyClass %} class="{{ bodyClass }}"{% endif %}>
+
+    <{{ headerTag or 'header' }} id="header">{% siteHeader %}</{{ headerTag or 'header' }}>
+
+    {{ content | safe }}
+
+    <{{ footerTag or 'footer' }} id="footer">{% siteFooter %}</{{ footerTag or 'footer' }}>
+{% for script in scripts %}
+    <script type="module" src="{{ script | url }}"></script>
+{%- endfor %}
+
+</body>
+
+</html>

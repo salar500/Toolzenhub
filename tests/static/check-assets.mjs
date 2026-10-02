@@ -20,8 +20,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildAssetGraph, REPO } from "./lib.mjs";
-import { readConfigExcludes, isExcluded } from "../helpers/jekyll-excludes.mjs";
+import { buildAssetGraph, REPO, SITE_BASE, read, resolveRef, checkPath } from "./lib.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const inventory = JSON.parse(fs.readFileSync(process.env.TZ_INVENTORY || path.join(HERE, "..", "inventory", "url-inventory.json"), "utf8"));
@@ -62,26 +61,37 @@ if (staleBaseline.length) {
 }
 
 // ---------------------------------------------------------------------------------------------
-// Deployment: _config.yml `exclude:` keeps development-only files out of the published site
-// (GitHub Pages builds from the branch with Jekyll). It must exclude every dev-only path that exists,
-// and must never exclude anything a live page needs.
+// Build output: exactly the deployable site. Nothing from the repository root (tests, node_modules,
+// package files, configs, sources) may be in it, and every tool module a page names must exist.
 // ---------------------------------------------------------------------------------------------
-const DEV_ONLY = ["tests", "node_modules", "package.json", "package-lock.json", "playwright.config.js", "test-results", "playwright-report"];
+const DEV_ONLY = ["tests", "node_modules", "package.json", "package-lock.json", "playwright.config.js", "test-results", "playwright-report", "src", "scripts", "eleventy.config.js", "eleventy.preview.config.js", "eleventy.shared.js", "_config.yml", ".git", ".gitignore"];
+const allowedTop = new Set([
+  ...inventory.live.map((p) => p.file.split("/")[0]),
+  inventory.notFound.file,
+  ...inventory.resources.map((r) => r.slice(1).split("/")[0]),
+  "assets", "loans", "data", ".htaccess",
+]);
 const deployFailures = [];
-const cfg = readConfigExcludes(REPO);
-if (!cfg) deployFailures.push("_config.yml is missing or has no `exclude:` list — development-only files would be published by GitHub Pages");
-else {
-  if (cfg.globs.length) deployFailures.push(`_config.yml uses glob entries that cannot be verified here: ${cfg.globs.join(", ")}`);
-  for (const d of DEV_ONLY) if (fs.existsSync(path.join(REPO, d)) && !isExcluded(d, REPO)) deployFailures.push(`development-only path "${d}" exists but is NOT excluded in _config.yml (it would be published)`);
-  const needed = new Set([...reachable, ...inventory.live.map((p) => p.file), inventory.notFound.file, ...inventory.resources.map((r) => r.slice(1))]);
-  for (const f of needed) if (isExcluded(f, REPO)) deployFailures.push(`"${f}" is used by the live site but is excluded from publishing by _config.yml / Jekyll defaults`);
+for (const name of fs.readdirSync(REPO)) {
+  if (DEV_ONLY.includes(name)) deployFailures.push(`development-only path "${name}" is in the build output`);
+  else if (!allowedTop.has(name)) deployFailures.push(`unexpected top-level entry "${name}" in the build output`);
+}
+if (SITE_BASE !== "/" && fs.existsSync(path.join(REPO, ".htaccess"))) deployFailures.push(".htaccess belongs to the root-domain build only");
+for (const page of inventory.live.filter((p) => p.type === "calculator")) {
+  const html = read(page.file);
+  const m = html.match(/data-tool-module="([^"]+)"/);
+  if (!m) { deployFailures.push(`${page.file}: no data-tool-module attribute`); continue; }
+  const target = resolveRef(page.file, m[1]);
+  const res = checkPath(target);
+  if (!res.ok) deployFailures.push(`${page.file}: tool module "${m[1]}" -> ${target} ${res.caseMismatch ? `CASE MISMATCH (${res.caseMismatch})` : "does not exist"}`);
+  if (!m[1].startsWith(SITE_BASE)) deployFailures.push(`${page.file}: tool module "${m[1]}" does not start with this build's base ${SITE_BASE}`);
 }
 console.log(`
-Deployment (_config.yml): ${cfg ? `${cfg.entries.length} excluded entries (${cfg.entries.join(", ")})` : "no config"}`);
+Build output (${path.basename(REPO)}, base ${SITE_BASE}): ${fs.readdirSync(REPO).length} top-level entries`);
 if (deployFailures.length) {
   failed = true;
   deployFailures.forEach((m) => console.log(`    ✗ ${m}`));
-} else console.log("    ✓ all development-only paths are excluded; no live page/asset is excluded");
+} else console.log("    ✓ only deployable site files; every tool module a page names exists");
 
 // informational: dead assets (files never referenced from any live page)
 const infoDead = files.filter((f) => /\.(png|jpe?g|webp|gif|svg|ico|css|js)$/i.test(f) && !reachable.has(f));

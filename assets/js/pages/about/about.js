@@ -19,6 +19,15 @@ export function renderAboutPage() {
     }
 
 
+    /*
+     * The site build already put the About content in the page.
+     */
+
+    if (app.children.length) {
+        return;
+    }
+
+
     app.innerHTML = renderAboutTemplate();
 
 }

@@ -4,7 +4,8 @@
 guides for finance and everyday decisions (loans, investment, tax, health, business,
 math and conversions).
 
-- Live site (GitHub Pages): <https://salar500.github.io/Toolzenhub/>
+- Production site: <https://toolzenhub.in/> (static hosting on Hostinger)
+- Preview / fallback (GitHub Pages): <https://salar500.github.io/Toolzenhub/>
 - Repository: <https://github.com/salar500/Toolzenhub>
 
 ## Current status
@@ -16,7 +17,7 @@ The project is in early development. Only a small part of the planned catalogue 
 | Calculators | **2 built:** EMI Calculator and Loan Comparison Calculator. The other 24 catalogue entries appear as non-clickable "Coming soon" cards. |
 | Articles | **6 published** (all in the Loans / loan-comparison topic). Another 6 are listed as non-clickable "Coming soon" entries. |
 | Pages | Home, Categories, All Calculators, Loans, Articles, About, Contact, Privacy Policy, Terms, Disclaimer, plus a 404 page. |
-| Newsletter | **Not working yet.** The footer form posts to a Netlify function that cannot run on GitHub Pages. A Brevo-hosted signup form is the intended replacement. |
+| Newsletter | **Not working yet.** The footer form posts to a Netlify function that cannot run on static hosting. A Brevo-hosted signup form is the intended replacement. |
 | Contact form | **Not connected to any backend.** The form is disabled and says so; no messages are sent. |
 | Known gap | The article "How to Choose the Right Loan Tenure" has no featured image yet (search for `TODO(image)`). |
 
@@ -26,122 +27,135 @@ reviewed gradually.
 
 ## Technology
 
-- Plain **HTML, CSS and JavaScript (ES modules)**. No framework, no bundler, no build step,
-  no `package.json`.
-- Pages are static HTML files. A shared script (`assets/js/app.js`) renders the header,
-  footer and page content in the browser.
+- A static site generated with **[Eleventy](https://www.11ty.dev/)** (`@11ty/eleventy`, a
+  development dependency). The build writes plain HTML, CSS and JavaScript files; there is
+  **no framework and no client-side runtime**.
+- Browser JavaScript is **vanilla ES modules** under `assets/js/`. A calculator page loads only
+  its own calculator; an article page needs only a tiny script for the table of contents.
 - Fonts: Inter from Google Fonts.
 - PDF export for the loan comparison loads **jsPDF** and **jsPDF-AutoTable** from cdnjs when
   needed, and a Noto Sans font from jsDelivr.
-- Article hero images in the registry use remote Unsplash photos; article page illustrations
-  are local files in `assets/Images/articles/`.
 - `netlify/functions/subscribe.js` (Brevo newsletter signup) is a leftover that is **not
-  used** on the current GitHub Pages hosting.
+  used** and is not part of the build output.
 
-## Hosting
+## Build and deploy
 
-The site is served by **GitHub Pages** as a *project site* at
-`https://salar500.github.io/Toolzenhub/`. No custom domain is configured in the repository, and there is no server-side code.
+```bash
+npm install            # once
+npm run dev            # development server with live reload, http://localhost:8080/ (site root "/")
+npm run build          # PRODUCTION build   -> dist/          (served from the root:      /)
+npm run build:preview  # GITHUB PAGES build -> dist-ghpages/  (served under:  /Toolzenhub/)
+npm run build:all      # both
+```
 
-### Important: the `/Toolzenhub/` path
+| Output | Base (where it is served) | Used for |
+| --- | --- | --- |
+| `dist/` | `/` | **Production** at <https://toolzenhub.in/>. Upload this to Hostinger. |
+| `dist-ghpages/` | `/Toolzenhub/` | GitHub Pages preview / fallback. |
 
-Because it is a project site, every page lives under the `/Toolzenhub/` path, not at the
-domain root. This matters in several ways:
+Both come from the **same source** (`src/` templates plus `assets/`); only the base differs.
+The base is chosen by the command (`eleventy.config.js` for production,
+`eleventy.preview.config.js` for the preview), never by editing files. Links, stylesheet and
+script URLs carry the build's base, and each page also declares it
+(`<meta name="tz-site-base">`) so browser scripts build the same links. Each build deletes its
+output folder first, so there are no stale files. Both folders are git-ignored.
 
-- Root-relative URLs such as `/assets/app.js` or `/favicon.svg` **break** on GitHub Pages,
-  because they point at `salar500.github.io/…` instead of `salar500.github.io/Toolzenhub/…`.
-- `assets/js/routes.js` is the single place that decides the site root: it uses
-  `/Toolzenhub/` when the hostname is `salar500.github.io` and `/` everywhere else. Build
-  links with `ROUTES` (for example `ROUTES.article(topic, slug)` or `ROUTES.asset(path)`)
-  instead of hard-coding paths.
-- Static HTML pages use **page-relative** paths for CSS, JS and the favicon (for example
-  `../../assets/…` from a calculator page), so they work under `/Toolzenhub/` and on a root
-  domain alike.
-- `404.html` is served by GitHub Pages at whatever URL was requested, so it is fully
-  self-contained (inline CSS, and a small script that works out the site root).
-- `robots.txt` and `sitemap.xml` are in the repository root. Search engines only read
-  `robots.txt` from the root of a *host*, so `robots.txt` has no automatic effect while the
-  site lives under `/Toolzenhub/`; it will once the site has its own domain. The sitemap can
-  be submitted directly in Google Search Console. Both files contain the absolute
-  `https://salar500.github.io/Toolzenhub/` address and must be updated if the site moves to a
-  custom domain.
+**Hostinger (production).** Run `npm run build` and upload the **contents** of `dist/` to the
+site's web root (`public_html`). The site then runs at the root, `https://toolzenhub.in/`. `dist/`
+is a plain static site: every page is an `index.html` or `*.html` file, so it needs no server
+rules, redirects or rewrites, and every URL works on any static host.
+
+*`dist/.htaccess` is optional.* It contains one line, `ErrorDocument 404 /404.html`, which only
+makes **unknown** URLs show the site's own 404 page on Apache-family servers (including
+LiteSpeed). Without it (not uploaded, hidden files skipped, or a non-Apache server) every valid URL
+works exactly the same, and unknown URLs still return a 404 status; visitors just see the host's
+default error page instead of ours. Nothing in the site, the build or the tests depends on it, and
+the preview build does not contain it.
+
+**GitHub Pages (preview).** `.github/workflows/pages.yml` runs `npm run build:preview` and
+deploys only `dist-ghpages/`, so source templates, tests and tooling are never published.
+One-time repository setting: *Settings → Pages → Build and deployment → Source: **GitHub
+Actions***.
+
+### The production domain
+
+`https://toolzenhub.in` is set in **one place**: `SITE.origin` in `assets/js/site-config.js`.
+Every canonical URL, Open Graph URL, sitemap entry, structured-data URL and the `robots.txt`
+sitemap line is built from it, in **both** builds: a GitHub Pages preview still declares
+`https://toolzenhub.in/...` as its canonical, so a preview is never a production canonical. To
+move the site to another domain, change that one value, run `npm run build`, and upload `dist/`
+again.
+
+### What is generated
+
+- Every page's `<head>` (title, description, canonical, Open Graph, Twitter, structured data),
+  the header and the footer.
+- The **whole article** (hero, key takeaways, sections, FAQ, related articles) for every
+  published article, and the **finished page** (tool markup, breadcrumb, related sections) for
+  every published calculator. Nothing important waits for JavaScript.
+- The **About** page content (static prose).
+- `sitemap.xml` (published, indexable pages only), `robots.txt`, and the optional `.htaccess`
+  (root build only, see above).
+- Coming-soon tools and unpublished articles have no page and appear in none of these.
+- Search is **not** a build artifact: the browser builds its in-memory index from the same catalogs
+  (`assets/js/data/search-index.js`). There is deliberately no second, generated copy of it.
+
+### Tests
+
+`npm test` rebuilds both outputs and tests what would be deployed: the preview build is served
+under `/Toolzenhub/` and the production build at `/`. See `tests/README.md`.
 
 ## Repository structure
 
 ```
-index.html, about.html, articles.html, calculators.html,
-categories.html, contact.html, loans.html,
-privacy.html, terms.html, disclaimer.html     Top-level pages (static HTML shells)
-404.html                                      Self-contained "page not found" page
-favicon.svg, robots.txt, sitemap.xml          Site-wide files
-
-calculators/
-  emi/index.html                              EMI Calculator page shell
-  loan-comparison/index.html                  Loan Comparison page shell
-articles/
-  loan-comparison/<slug>/index.html           One page shell per published article
+src/                       Eleventy input
+  _includes/layouts/       base, tool, article, listing, info
+  _data/                   site values, published tools and articles (from the catalogs), stylesheet lists
+  _lib/seo.js              build-time structured-data helpers
+  *.njk                    pages (home, categories, loans, about, ..., 404), the tool and article
+                           page generators, sitemap, robots, optional .htaccess
+eleventy.config.js         production build config        (base "/")
+eleventy.preview.config.js GitHub Pages build config      (base "/Toolzenhub/")
+eleventy.shared.js         what both builds share
+scripts/clean-output.mjs   clears dist/ and dist-ghpages/ before a build
 
 assets/
-  css/                                        Stylesheets: base/, components/, pages/,
-                                              calculators/, themes/
-  js/                                         ES modules (see below)
-  Images/                                     Local images (article illustrations, heroes)
-
-loans/loan-comparison/                        Loan Comparison calculator code
-                                              (components, helpers, entry module)
-data/                                         Small JSON files (mostly unused)
-netlify/functions/subscribe.js                Unused newsletter function (see above)
+  css/                     Stylesheets: base/, components/, pages/, calculators/, themes/
+  js/                      Browser ES modules and the data catalogs (see below)
+  Images/                  Local images (article illustrations, heroes)
+loans/loan-comparison/     Loan Comparison calculator code (components, helpers, entry module)
+favicon.svg, data/         Copied to the output as they are (data/ is mostly unused)
+tests/                     Regression safety net (not part of the output)
 ```
 
 Inside `assets/js/`:
 
-- `app.js` – entry point loaded by every page; picks what to render from the URL.
-- `router.js` / `routes.js` – work out which page is open, and build URLs (site root aware).
-- `components/` – header, footer, hero, cards, breadcrumb, related content, newsletter form.
-- `pages/` – page-specific rendering (articles list, article, about, contact, categories, …).
-- `data/calculators.js` – the calculator catalogue; entries with `available: true` are built.
-- `article-registry.js` – the article catalogue; entries with `published: true` have a page.
-- `calculator-registry.js` – loads the module for each built calculator.
-- `data/articles/` – the content of each published article.
-- `calculators/` – EMI formulas and shared PDF export code.
+- `entries/tool.js`, `entries/article.js` – the small entry scripts of generated tool and
+  article pages. `app.js` is the entry of the other pages (home, listings, about, contact, legal).
+- `site-config.js` – site name, **production origin**, preview host.
+- `routes.js` – the base of the page being viewed, and every URL builder.
+- `data/` – the catalogs: `calculators.js`, `articles.js`, `categories.js`, `taxonomy.js`,
+  `relationships.js`, `search-index.js`. They are the source of truth for identity, status,
+  titles, descriptions and relationships.
+- `components/`, `pages/` – header, footer, breadcrumb, related content, page modules.
 
 ## How it works
 
-1. Every page is a small static HTML file that loads its CSS and one module script.
-2. `app.js` reads `window.location.pathname` via `router.js` and decides which page it is
-   (home, categories, articles, an individual article, a calculator, …).
-3. It renders the shared header and footer and the page body into the HTML shell.
-4. Calculators are loaded on demand through `calculator-registry.js`. Individual articles are
-   loaded on demand through `data/articles/article-registry.js`.
-5. Catalogue entries that are not built or published yet are shown as "Coming soon" and are
-   not links.
+1. `npm run build` reads `src/` and the catalogs and writes static pages. The shared parts (head,
+   header, footer, tool pages, article pages) are produced by the same modules the browser
+   uses, so the generated HTML and the interactive page agree.
+2. A calculator page loads one entry script, which starts only that calculator's module.
+3. An article page loads one tiny script (header menu, newsletter form, table-of-contents highlight).
+4. Catalog entries that are not built or published yet are "Coming soon" cards and have no page.
 
-## Running it locally
+## Known limits
 
-There is nothing to install. The site uses ES modules, so it must be served over HTTP
-(opening the files directly with `file://` will not work). From the repository root:
-
-```bash
-python -m http.server 8000
-# or
-npx serve .
-```
-
-Then open <http://localhost:8000/>.
-
-Locally the site runs at the **root** of `localhost` (the `/Toolzenhub/` rule only applies on
-`salar500.github.io`), so it behaves like a root domain. To exercise the real GitHub Pages
-subpath behaviour you need to serve the repository under a `/Toolzenhub/` prefix and open it
-using the `salar500.github.io` hostname, or test on the deployed site.
-
-## Deployment
-
-The site is published from this repository through GitHub Pages (configured in the
-repository's Pages settings; there is no workflow or build configuration in the repo). There
-is no build step: the files in the repository are the files that are served.
-
-## Architecture
-
-The current approach (static pages plus browser-side rendering) is deliberately simple and is
-**planned to evolve later**. No new architecture is part of the current work, and this
-document describes the project as it is today.
+- Static now: every article, both calculators, and the About page. Their content is in the HTML.
+- Still built in the browser, on purpose: the **Categories**, **All Calculators**, **Loans** and
+  **Articles** listings are search/filter/pagination interfaces whose card grids are rendered from
+  the catalogs and replaced as the visitor types; their head, header, footer, headings and
+  breadcrumbs are generated. The **Home** page assembles four catalog-driven sections (hero search,
+  categories, popular calculators, latest articles); pre-rendering it means splitting those
+  components, which is left for a later change.
+- The older browser-side render paths (`pages/article.js`, `pages/calculator.js`) remain in the
+  code for use without a build but are no longer used by generated pages.

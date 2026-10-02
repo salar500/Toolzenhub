@@ -5,6 +5,7 @@
 
 import { renderHeader } from "../components/header.js";
 import { renderFooter } from "../components/footer.js";
+import { markPageReady } from "../utils/page-ready.js";
 
 import {
     getCalculators,
@@ -381,6 +382,7 @@ function initializeCalculatorsPage() {
 
 
     if (!grid) {
+        markPageReady();
         return;
     }
 
@@ -415,6 +417,8 @@ function initializeCalculatorsPage() {
     ===================================================== */
 
     initializeSearch();
+
+    markPageReady();
 }
 
 

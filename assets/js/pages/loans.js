@@ -22,6 +22,10 @@ import {
 } from "../utils/search.js";
 
 import {
+    markPageReady
+} from "../utils/page-ready.js";
+
+import {
     renderCalculatorCards
 } from "../components/calculator-card.js";
 
@@ -282,6 +286,8 @@ function initializeLoansPage() {
     initializeSearch();
 
     renderFooter();
+
+    markPageReady();
 
 }
 

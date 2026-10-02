@@ -35,17 +35,9 @@ const TITLE =
    RENDER
 ========================================================= */
 
-export function render() {
+export function markup() {
 
-    const app =
-        document.querySelector("#app");
-
-    if (!app) {
-        return;
-    }
-
-
-    app.innerHTML = `
+    return `
 
         <div class="calculator-page">
 
@@ -394,6 +386,40 @@ export function render() {
         </div>
 
     `;
+
+}
+
+
+/* =========================================================
+   RENDER
+
+   Puts the markup into the mount and starts the tool. The
+   site build already puts the markup in the generated page, so
+   the shared tool page calls init() alone there.
+========================================================= */
+
+export function render(
+    mount = document.querySelector("#app")
+) {
+
+    if (!mount) {
+        return;
+    }
+
+    mount.innerHTML = markup();
+
+    init();
+
+}
+
+
+/* =========================================================
+   INIT
+
+   Binds the form, reset and results to the markup above.
+========================================================= */
+
+export function init() {
 
 
     /* =====================================================

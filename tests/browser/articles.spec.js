@@ -1,8 +1,8 @@
 /**
  * M0.9 — Articles: every published article page, and the articles listing page.
  *
- * Article pages are rendered client-side from per-article data files; the SEO tags (canonical, Open
- * Graph, Twitter, JSON-LD) are injected at runtime. The "choose-right-loan-tenure" article currently
+ * Article pages are generated HTML (npm run build): the whole article and every SEO tag (canonical, Open
+ * Graph, Twitter, JSON-LD) are in the file, on the PRODUCTION origin https://toolzenhub.in in both builds. The "choose-right-loan-tenure" article currently
  * has NO featured image (image: null, TODO(image)) — that is asserted as the baseline.
  */
 import { test, expect, expectClean, settleImages, livePages, rel, expectNoHorizontalOverflow } from "../helpers/test-base.mjs";
@@ -62,11 +62,11 @@ test.describe("published article pages", () => {
         expect((await api.get(h)).status(), h).toBe(200);
       }
 
-      // runtime SEO (injected by article-seo.js): canonical + OG title + two JSON-LD blocks
-      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", new URL(a.url.replace(/^\//, ""), baseURL).href);
+      // SEO generated at build time: canonical on the production origin (never the preview host) + OG title + JSON-LD
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", `https://toolzenhub.in${a.url}`);
       await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", a.expectedTitle);
       const ld = await page.locator('script[type="application/ld+json"]').evaluateAll((s) => s.map((x) => JSON.parse(x.textContent)["@type"]));
-      expect(ld.sort()).toEqual(["Article", "FAQPage"]);
+      expect(ld.sort()).toEqual(["Article", "BreadcrumbList", "FAQPage"]); // M8 adds the breadcrumb trail
 
       expectClean(watch);
     });
@@ -199,8 +199,9 @@ test.describe("M5 article metadata comes from the catalog and is unchanged", () 
       expect(article.headline).toBe(want.title);
       expect(article.description).toBe(want.description);
       expect(article.articleSection).toBe("loans");
-      expect(article.datePublished).toBe("Aug 25, 2026");
-      expect(article.dateModified).toBe("Aug 25, 2026");
+      // M8: structured data now uses ISO 8601 (was "Aug 25, 2026"); the VISIBLE date above is unchanged
+      expect(article.datePublished).toBe("2026-08-25");
+      expect(article.dateModified).toBe("2026-08-25");
 
       // hero image (one article has none yet)
       const hero = page.locator(".article-hero-image img");

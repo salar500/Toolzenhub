@@ -70,7 +70,12 @@ test.describe("static resources @portable", () => {
     const res = await api.get("robots.txt");
     expect(res.status()).toBe(200);
     expect(res.headers()["content-type"]).toMatch(/text\/plain/);
-    expect(await res.text()).toMatch(/^Sitemap: https:\/\/salar500\.github\.io\/Toolzenhub\/sitemap\.xml$/m);
+    const body = await res.text();
+    // always the PRODUCTION sitemap, whichever build is being served
+    expect(body).toMatch(/^Sitemap: https:\/\/toolzenhub\.in\/sitemap\.xml$/m);
+    expect(body).not.toMatch(/github\.io/i);
+    // nothing is blocked: pages need their CSS, JavaScript and images to render
+    expect(body).not.toMatch(/^\s*Disallow:\s*\S/m);
   });
 
   test("sitemap.xml is XML and lists exactly the indexable pages", async ({ api }) => {
@@ -81,6 +86,10 @@ test.describe("static resources @portable", () => {
     expect(body).toMatch(/^<\?xml version="1\.0" encoding="UTF-8"\?>/);
     const locs = [...body.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
     expect(locs).toHaveLength(INVENTORY.summary.liveIndexable);
+    // exactly the live indexable pages, on the production origin, with no preview host or base
+    const want = INVENTORY.live.filter((p) => p.classification === "live-indexable").map((p) => `https://toolzenhub.in${p.url}`);
+    expect([...locs].sort()).toEqual([...want].sort());
+    for (const loc of locs) expect(loc).not.toMatch(/github\.io|\/Toolzenhub/);
   });
 
   test("favicon.svg", async ({ api }) => {
@@ -91,8 +100,8 @@ test.describe("static resources @portable", () => {
 });
 
 test.describe("development-only files are not published @portable", () => {
-  // The test server serves what GitHub Pages (Jekyll) would publish: _config.yml `exclude:` + Jekyll defaults.
-  for (const dev of ["tests/README.md", "tests/baselines/visual/home-visual-desktop.png", "tests/inventory/url-inventory.json", "package.json", "package-lock.json", "playwright.config.js", "node_modules/@playwright/test/package.json", "_config.yml"]) {
+  // The test server serves the BUILD OUTPUT, which is all that is deployed. Sources and tooling are not in it.
+  for (const dev of ["src/home.njk", "eleventy.config.js", "scripts/clean-output.mjs", "tests/README.md", "tests/baselines/visual/home-visual-desktop.png", "tests/inventory/url-inventory.json", "package.json", "package-lock.json", "playwright.config.js", "node_modules/@playwright/test/package.json", "_config.yml"]) {
     test(`/${dev} is a 404`, async ({ api }) => {
       expect((await api.get(dev)).status()).toBe(404);
     });

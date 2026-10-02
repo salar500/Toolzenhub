@@ -9,9 +9,18 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-export const REPO = process.env.TZ_REPO_ROOT
-  ? path.resolve(process.env.TZ_REPO_ROOT)
-  : path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
+/**
+ * The site under test is the BUILD OUTPUT (npm run build -> dist/, npm run build:preview -> dist-ghpages/),
+ * not the sources: the checks verify what would be deployed. TZ_REPO_ROOT picks another folder (the
+ * preview build, a deliberately broken copy ...); TZ_SITE_BASE says which base that build was made for.
+ */
+const PROJECT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
+export const REPO = path.resolve(process.env.TZ_REPO_ROOT || path.join(PROJECT, "dist"));
+export const SITE_BASE = process.env.TZ_SITE_BASE || "/";
+if (!fs.existsSync(REPO)) {
+  console.error(`✗ No build output at ${REPO}. Run  npm run build  (and  npm run build:preview  for the preview) first.`);
+  process.exit(2);
+}
 const SKIP_DIRS = new Set(["node_modules", "tests", "test-results", "playwright-report", ".git"]);
 // development tooling at the repo root — NOT part of the deployed site, so never scanned as site code
 const ROOT_TOOLING = new Set(["package.json", "package-lock.json", "playwright.config.js", ".gitignore"]);
@@ -106,7 +115,8 @@ export function resolveRef(fromFile, ref, { pageRelative = true } = {}) {
   if (r.startsWith("/")) target = r.slice(1);
   else if (pageRelative) target = path.posix.join(path.posix.dirname(fromFile), r);
   else target = r;
-  return path.posix.normalize(target).replace(/^\.\//, "");
+  const normalized = path.posix.normalize(target).replace(/^\.\//, "");
+  return normalized === "." ? "" : normalized; // "/" is the site root: its index.html
 }
 
 export function read(repoRel) {

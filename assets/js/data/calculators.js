@@ -13,6 +13,8 @@
      its major category, which is every tool today.
    - Availability: status "published" | "coming-soon"
    - Calculator URL
+   - `seo` (published tools): the page <title> and meta
+     description, kept exactly as the page has always had them
    - Dynamic loaders for implemented calculators
 
    Presentation choices (which tools the home page features,
@@ -44,7 +46,13 @@ const catalog = [
         title: "Loan Comparison Calculator",
         description:
             "Compare two loans by EMI, interest rate, total interest and repayment.",
-        href: ROUTES.calculator("loan-comparison")
+        href: ROUTES.calculator("loan-comparison"),
+        seo: {
+            title:
+                "Loan Comparison Calculator | ToolZenHub",
+            description:
+                "Compare two loans by EMI, interest rate, total interest and total repayment with ToolZenHub."
+        }
     },
 
     {
@@ -56,7 +64,15 @@ const catalog = [
         title: "EMI Calculator",
         description:
             "Calculate your monthly EMI for any loan amount, interest rate and tenure.",
-        href: ROUTES.calculator("emi")
+        href: ROUTES.calculator("emi"),
+        seo: {
+            title:
+                "EMI Calculator | ToolZen Hub",
+            description:
+                "Calculate your monthly EMI, total interest and total repayment for a loan.",
+            themeColor:
+                "#2563eb"
+        }
     },
 
     {

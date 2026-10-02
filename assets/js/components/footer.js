@@ -8,14 +8,15 @@ import {
 } from "../routes.js";
 
 
-export function renderFooter() {
+/* =========================================================
+   FOOTER MARKUP
 
-    const footer = document.getElementById("footer");
+   Pure: returns the footer HTML. The site build calls it to
+   put the footer into every generated page; renderFooter()
+   calls it only when a page does not already contain it.
+========================================================= */
 
-    if (!footer) {
-        return;
-    }
-
+export function footerMarkup() {
 
     /* =====================================================
        SITE BASE PATH
@@ -51,7 +52,7 @@ export function renderFooter() {
     const page = path => `${siteBase}${path}`;
 
 
-    footer.innerHTML = `
+    return `
 
         <footer class="footer">
 
@@ -357,5 +358,30 @@ export function renderFooter() {
         </footer>
 
     `;
+
+}
+
+
+/* =========================================================
+   RENDER FOOTER
+========================================================= */
+
+export function renderFooter() {
+
+    const footer = document.getElementById("footer");
+
+    if (!footer) {
+        return;
+    }
+
+    /*
+     * Generated pages already contain the footer.
+     */
+
+    if (!footer.querySelector(".footer")) {
+
+        footer.innerHTML = footerMarkup();
+
+    }
 
 }

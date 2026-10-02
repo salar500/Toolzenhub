@@ -49,20 +49,9 @@ const TITLE =
    Render Calculator
 ========================================================= */
 
-export function render(
-    mount = document.querySelector("#app")
-) {
+export function markup() {
 
-    const app =
-        mount;
-
-
-    if (!app) {
-        return;
-    }
-
-
-    app.innerHTML = `
+    return `
 
         <div class="calculator-page">
 
@@ -189,6 +178,81 @@ export function render(
 
     `;
 
+}
+
+
+/* =========================================================
+   Render
+
+   Puts the markup into the mount and starts the tool. The
+   site build already puts the markup in the generated page, so
+   the shared tool page calls init() alone there.
+========================================================= */
+
+export function render(
+    mount = document.querySelector("#app")
+) {
+
+    if (!mount) {
+        return;
+    }
+
+    mount.innerHTML = markup();
+
+    init();
+
+}
+
+
+/* =========================================================
+   Slider catch-up
+
+   A generated page is interactive HTML before this script has
+   loaded. If the visitor already typed into a field, bring the
+   slider that mirrors it into line. The card's own listeners
+   (and compareLoans below) take over from here and always work
+   from the current input values.
+========================================================= */
+
+function syncSlidersWithInputs() {
+
+    ["a", "b"].forEach(prefix => {
+
+        ["amount", "rate", "years"].forEach(field => {
+
+            const input =
+                document.querySelector(`#${prefix}-${field}`);
+
+            const slider =
+                document.querySelector(`#${prefix}-${field}-slider`);
+
+            if (
+                input &&
+                slider &&
+                input.value !== "" &&
+                slider.value !== input.value
+            ) {
+
+                slider.value =
+                    input.value;
+
+            }
+
+        });
+
+    });
+
+}
+
+
+/* =========================================================
+   Init
+========================================================= */
+
+export function init() {
+
+
+    syncSlidersWithInputs();
 
     initializeLoanInputs();
 

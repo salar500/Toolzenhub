@@ -17,7 +17,38 @@ import {
    SITE ROOT
 ========================================================= */
 
+function readBuiltBase() {
+
+    /*
+     * 1. The site build (Node) sets the base it is building for.
+     * 2. A generated page declares it: <meta name="tz-site-base">.
+     * 3. Otherwise (source files, unit tests) the host decides.
+     */
+
+    if (typeof globalThis.__TZ_SITE_BASE__ === "string") {
+        return globalThis.__TZ_SITE_BASE__;
+    }
+
+    if (typeof document !== "undefined") {
+
+        const base =
+            document
+                .querySelector('meta[name="tz-site-base"]')
+                ?.getAttribute("content");
+
+        if (base) {
+            return base;
+        }
+
+    }
+
+    return null;
+
+}
+
+
 export const SITE_ROOT =
+    readBuiltBase() ??
     resolveSiteRoot(
         window.location.hostname
     );

@@ -3,9 +3,11 @@
  *
  *   npm run baseline:lighthouse                 # all pages, 3 mobile runs + 1 desktop run each
  *   node tests/lighthouse/run-lighthouse.mjs --runs 1 --pages home,emi
+ *   node tests/lighthouse/run-lighthouse.mjs --site dist-ghpages --out lighthouse-m8.json --runs 1
  *
  * Reproducibility choices (so two runs on the same machine are comparable):
- *   - the site is served by the local GitHub-Pages-style test server under /Toolzenhub/ (production mode)
+ *   - the site is served by the local GitHub-Pages-style test server under /Toolzenhub/. --site names the
+ *     folder served: the GENERATED preview build (dist-ghpages, the default) or any other checkout.
  *   - EXTERNAL hosts (Google Fonts, Unsplash, CDNs) are blocked, so the numbers measure the FIRST-PARTY
  *     cost of the site only. Real-world scores will differ (they also pay for those third parties).
  *   - Lighthouse default MOBILE emulation + simulated throttling, median of N runs, plus one DESKTOP run
@@ -13,7 +15,7 @@
  * Scores depend on the machine's CPU speed (the run records Lighthouse's benchmarkIndex and warnings),
  * so compare baselines only against runs from the SAME machine.
  *
- * Output: tests/baselines/lighthouse/lighthouse-baseline.json
+ * Output: tests/baselines/lighthouse/lighthouse-baseline.json (or the file named by --out)
  */
 import fs from "node:fs";
 import os from "node:os";
@@ -97,7 +99,9 @@ function diagnostics(lhr) {
   return out.sort((x, y) => (x.category || "").localeCompare(y.category || "") || x.score - y.score);
 }
 
-const server = await startServer({ port: PORT, prefix: "/Toolzenhub" });
+const SITE_DIR = path.resolve(arg("--site", path.join(HERE, "..", "..", "dist-ghpages")));
+if (!fs.existsSync(SITE_DIR)) throw new Error(`No site to measure at ${SITE_DIR}. Run  npm run build:preview  first (or pass --site).`);
+const server = await startServer({ port: PORT, prefix: "/Toolzenhub", root: SITE_DIR });
 let chrome;
 const launch = async () => {
   chrome = await chromeLauncher.launch({
@@ -173,7 +177,7 @@ try {
 }
 
 fs.mkdirSync(OUT_DIR, { recursive: true });
-const file = path.join(OUT_DIR, "lighthouse-baseline.json");
+const file = path.join(OUT_DIR, arg("--out", "lighthouse-baseline.json"));
 result.generatedAt = new Date().toISOString();
 fs.writeFileSync(file, JSON.stringify(result, null, 2) + "\n");
 console.log(`\nWrote ${path.relative(process.cwd(), file)}`);

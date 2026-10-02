@@ -20,12 +20,16 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { REPO, rel, read, checkUrlPath, checkPath, isExternalOrSkippable, resolveRef, htmlRefs, jsHtmlHrefs, stripComments, buildAssetGraph } from "./lib.mjs";
+import { REPO, SITE_BASE, rel, read, checkUrlPath, checkPath, isExternalOrSkippable, resolveRef, htmlRefs, jsHtmlHrefs, stripComments, buildAssetGraph } from "./lib.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const inventory = JSON.parse(fs.readFileSync(process.env.TZ_INVENTORY || path.join(HERE, "..", "inventory", "url-inventory.json"), "utf8"));
 const knownAll = JSON.parse(fs.readFileSync(process.env.TZ_KNOWN || path.join(HERE, "known-issues.json"), "utf8"));
 const knownLinks = knownAll.links ?? [];
+
+// The production origin the sitemap and robots.txt must use: read from the BUILT site's own config.
+const { SITE } = await import(pathToFileURL(path.join(REPO, "assets/js/site-config.js")).href);
+const PRODUCTION_URL = SITE.url;
 
 const failures = [];
 const warnings = [];
@@ -46,15 +50,16 @@ for (const file of entryHtml) {
   for (const r of htmlRefs(read(file))) {
     if (r.tag !== "a") continue;
     const raw = r.value;
-    if (r.attrs["data-route"] !== undefined) continue; // 404 page: href is rewritten from data-route by its script (own browser test)
     if (raw.trim() === "#" || raw.trim() === "") {
       placeholders.push(`${file}`);
       continue;
     }
     if (isExternalOrSkippable(raw)) continue;
     anchorCount++;
-    if (raw.includes("/Toolzenhub")) fail("html-links", `${file}: hard-coded GitHub Pages path in href "${raw}"`);
-    if (raw.startsWith("/")) fail("html-links", `${file}: root-relative href "${raw}" breaks under a project-site prefix (use a page-relative or ROUTES-built URL)`);
+    // A build is made for ONE base (npm run build -> "/", npm run build:preview -> "/Toolzenhub/"). Every
+    // root-relative link must carry exactly that base; a link with another base would break the site.
+    if (SITE_BASE === "/" && raw.includes("/Toolzenhub")) fail("html-links", `${file}: the preview base leaked into the root-domain build: href "${raw}"`);
+    if (raw.startsWith("/") && SITE_BASE !== "/" && !(raw + (raw.endsWith("/") ? "" : "/")).startsWith(SITE_BASE)) fail("html-links", `${file}: href "${raw}" does not start with this build's base ${SITE_BASE}`);
     const target = resolveRef(file, raw);
     const res = checkUrlPath(target);
     if (res.ok) continue;
@@ -107,12 +112,13 @@ else {
   const locs = [...read("sitemap.xml").matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   sitemapCount = locs.length;
   const seen = new Set();
-  const asSitePath = (u) => "/" + u.replace(/^https?:\/\/[^/]+\/[^/]+\//, "");
+  const asSitePath = (u) => "/" + u.replace(/^https?:\/\/[^/]+\//, "");
   for (const loc of locs) {
     const p = asSitePath(loc);
     if (seen.has(p)) fail("sitemap", `duplicate <loc> ${loc}`);
     seen.add(p);
-    if (!/^https:\/\/salar500\.github\.io\/Toolzenhub\//.test(loc)) fail("sitemap", `<loc> ${loc} is not under https://salar500.github.io/Toolzenhub/`);
+    if (!loc.startsWith(PRODUCTION_URL)) fail("sitemap", `<loc> ${loc} is not under the production URL ${PRODUCTION_URL}`);
+    if (/github\.io|\/Toolzenhub/.test(loc)) fail("sitemap", `<loc> ${loc} contains the preview host or base`);
     const res = checkUrlPath(p.slice(1) === "" ? "index.html" : p.slice(1));
     if (!res.ok) fail("sitemap", `<loc> ${loc} -> ${p} does not exist${res.caseMismatch ? ` (case: ${res.caseMismatch})` : ""}`);
     if (!liveUrlSet.has(p)) fail("sitemap", `<loc> ${loc} is not a live page in the URL inventory`);
@@ -130,7 +136,9 @@ else {
 if (!checkPath("robots.txt").ok) fail("robots", "robots.txt is missing");
 else {
   const robots = read("robots.txt");
-  if (!/^\s*Sitemap:\s*https:\/\/salar500\.github\.io\/Toolzenhub\/sitemap\.xml\s*$/im.test(robots)) fail("robots", "robots.txt has no Sitemap: line for /Toolzenhub/sitemap.xml");
+  const sitemapLines = robots.split(/\r?\n/).map((l) => l.trim()).filter((l) => /^sitemap:/i.test(l));
+  if (!sitemapLines.some((l) => l.replace(/^sitemap:\s*/i, "") === `${PRODUCTION_URL}sitemap.xml`)) fail("robots", `robots.txt has no Sitemap: line for ${PRODUCTION_URL}sitemap.xml`);
+  if (/github\.io/.test(robots)) fail("robots", "robots.txt mentions the preview host");
   if (/^\s*Disallow:\s*\/\s*$/im.test(robots)) fail("robots", "robots.txt disallows the whole site");
   if (!/^\s*User-agent:\s*\*/im.test(robots)) fail("robots", "robots.txt has no 'User-agent: *' group");
 }
@@ -223,7 +231,8 @@ for (const p of inventory.live) {
 /* 7. hard-coded GitHub Pages path / host in source (guard against NEW occurrences)                 */
 /* ---------------------------------------------------------------------------------------------- */
 const hardcoded = [];
-const sourceFiles = [...jsFiles, ...entryHtml];
+// Built HTML legitimately carries its base (/Toolzenhub/ in the preview build), so HTML is only scanned in the root build.
+const sourceFiles = [...jsFiles, ...(SITE_BASE === "/" ? entryHtml : [])];
 for (const f of sourceFiles) {
   const src = f.endsWith(".js") ? stripComments(read(f)) : read(f).replace(/<!--[\s\S]*?-->/g, " ").replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
   const hits = [...src.matchAll(/\/Toolzenhub|salar500\.github\.io/g)].length;

@@ -1,0 +1,7 @@
+---
+layout: layouts/base.njk
+bodyClass: calculator-page-body
+scripts:
+  - /assets/js/entries/tool.js
+---
+<main id="app" data-tool-module="{{ tool.modulePath | url }}">{{ tool.html | safe }}</main>

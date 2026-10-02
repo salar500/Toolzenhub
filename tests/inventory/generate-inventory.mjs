@@ -21,7 +21,13 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const REPO = path.resolve(HERE, "..", "..");
+// SRC: the project (its data modules). SITE: the build output the inventory describes (npm run build).
+const SRC = path.resolve(HERE, "..", "..");
+const REPO = path.resolve(process.env.TZ_SITE_ROOT || path.join(SRC, "dist"));
+if (!fs.existsSync(REPO)) {
+  console.error(`✗ No build output at ${REPO}. Run  npm run build  first.`);
+  process.exit(2);
+}
 export const INVENTORY_PATH = path.join(HERE, "url-inventory.json");
 
 const SKIP_DIRS = new Set(["node_modules", "tests", "test-results", "playwright-report", ".git"]);
@@ -84,8 +90,8 @@ function describePage(file) {
 async function loadComingSoon() {
   // routes.js reads window.location at import time; give it a harmless stand-in.
   globalThis.window = { location: { hostname: "inventory.local", pathname: "/", search: "" } };
-  const calcMod = await import(pathToFileURL(path.join(REPO, "assets/js/data/calculators.js")).href);
-  const artMod = await import(pathToFileURL(path.join(REPO, "assets/js/article-registry.js")).href);
+  const calcMod = await import(pathToFileURL(path.join(SRC, "assets/js/data/calculators.js")).href);
+  const artMod = await import(pathToFileURL(path.join(SRC, "assets/js/article-registry.js")).href);
   const calculators = calcMod.calculators
     .filter((c) => c.status !== "published")
     .map((c) => ({
@@ -117,7 +123,7 @@ export async function buildInventory() {
   const sitemap = fs.readFileSync(path.join(REPO, "sitemap.xml"), "utf8");
   const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   // sitemap URLs are absolute on the production host; reduce to site-root-relative paths
-  const sitemapPaths = new Set(sitemapUrls.map((u) => "/" + u.replace(/^https?:\/\/[^/]+\/[^/]+\//, "")));
+  const sitemapPaths = new Set(sitemapUrls.map((u) => "/" + u.replace(/^https?:\/\/[^/]+\//, "")));
 
   const htmlFiles = walk(REPO)
     .filter((f) => f.endsWith(".html") && fs.statSync(f).size > 10)

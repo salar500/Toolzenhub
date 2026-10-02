@@ -1,7 +1,12 @@
 # Regression safety net (M0)
 
-Development-only tests that protect today's behaviour before any architectural change.
-The website itself has **no build step** and none of this ships to visitors.
+Development-only tests that protect the site's behaviour through every architectural change.
+None of this ships to visitors.
+
+**Since M8 the tests run against the GENERATED site**, exactly what would be deployed: every
+`npm test` / `test:visual` first builds both outputs (`npm run build:all`) and then serves
+`dist-ghpages/` under `/Toolzenhub/` and `dist/` at the root. The static checkers read the build
+output too (`tests/static/run-static.mjs` runs each of them against both builds).
 
 ## Run it
 
@@ -18,15 +23,17 @@ Individual pieces:
 | Command | What it runs |
 | --- | --- |
 | `npm run test:unit` | Loan-formula golden tests + mutation self-tests of the static checkers (Node's built-in runner) |
-| `npm run test:static` | `inventory:check` + `test:links` + `test:assets` (no browser, ~5 s) |
-| `npm run test:links` | Static link/route checker |
-| `npm run test:assets` | Static asset checker (exact-case) |
+| `npm run test:static` | `inventory:check` + `test:links` + `test:assets` + `test:seo` (no browser, ~10 s) |
+| `npm run test:links` | Static link/route checker, on both builds (base-aware; sitemap/robots on the production origin) |
+| `npm run test:assets` | Static asset checker (exact-case), on both builds; the build output contains only deployable files |
+| `npm run test:seo` | Generated-HTML SEO check on both builds: canonical / Open Graph / Twitter on https://toolzenhub.in, structured data, static article bodies, per-page scripts, sitemap, robots |
+| `npm run build:all` | `npm run build` (dist/, base `/`) + `npm run build:preview` (dist-ghpages/, base `/Toolzenhub/`) |
 | `npm run test:browser` | Playwright: smoke, 404, calculators, articles, contact, navigation, link crawl, DOM + SEO baselines — in `/Toolzenhub/` desktop + mobile and root-domain mode |
 | `npm run test:visual` | Playwright screenshots (desktop, mobile, tablet) |
 | `npm run inventory:generate` | Rebuild `tests/inventory/url-inventory.json` after pages are added/removed |
 | `npm run baseline:update` | Re-record DOM/SEO/link/visual baselines **after you have reviewed an intentional change** |
 | `npm run baseline:lighthouse` | Lighthouse baseline (slow, ~25 min on a laptop, informational) |
-| `npm run test:mutation` | Negative controls: breaks a copy of the site in 6 ways and checks the browser tests fail (~4 min) |
+| `npm run test:mutation` | Negative controls: breaks a copy of both builds in 8 ways and checks the browser tests fail (~5 min) |
 
 Run one file: `npx playwright test --project=subpath-desktop tests/browser/emi.spec.js`.
 
@@ -87,21 +94,17 @@ accessibility 96 / 96 / 88 / 96; best-practices 76–79 (HTTPS artifact); SEO 10
 
 ## Deployment note — development files are not published
 
-GitHub Pages (deploy-from-branch) builds the site with Jekyll, which copies **every** file in the repository unless it is
-excluded. The repository root therefore contains `_config.yml` with an `exclude:` list (`tests`, `node_modules`,
-`package.json`, `package-lock.json`, `playwright.config.js`, `test-results`, `playwright-report`). The files stay committed;
-they are simply not part of the published website, and no site URL changes (Jekyll copies the real site files untouched).
-`_config.yml` itself is not published either (Jekyll skips underscore files).
-
+Only the generated output is deployed (`dist/` to Hostinger, `dist-ghpages/` to GitHub Pages through
+`.github/workflows/pages.yml`), so sources, tests, `node_modules` and tooling can never be published.
 This is enforced, not assumed:
 
-- the test server serves only what Jekyll would publish (`_config.yml` + Jekyll's default excludes), so the whole browser
-  suite runs against the deployment configuration; `smoke.spec.js` asserts `/tests/…`, `/package.json`, `/playwright.config.js`,
-  `/node_modules/…` and `/_config.yml` are 404;
-- `npm run test:assets` fails if a dev-only path is not excluded, if `_config.yml` is missing, or if the config excludes anything a
-  live page uses (checked by mutation self-tests).
-
-If the Pages source is ever switched to a GitHub Actions workflow, `_config.yml` becomes inert and the workflow must publish only the site files.
+- `npm run test:assets` fails if the build output contains anything but site files (it lists an allowlist of top-level
+  entries and the development-only names it must never contain) and if a page names a tool module that is missing;
+- `tests/unit/build-output.test.mjs` checks the shape of both outputs (exactly 18 live pages + the 404, no Coming-soon
+  folder, `.htaccess` only in the root build, the same files in both builds);
+- `smoke.spec.js` asserts `/src/…`, `/eleventy.config.js`, `/tests/…`, `/package.json` and `/node_modules/…` are 404;
+- the checker self-tests (`static-checkers.test.mjs`) inject a stray file, a leaked preview base, a preview host in the
+  sitemap, and more, and assert each is reported.
 
 ## Known baseline issues (pre-existing, recorded — not fixed by M0)
 

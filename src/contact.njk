@@ -1,0 +1,191 @@
+---
+layout: layouts/info.njk
+permalink: "/contact.html"
+title: "Contact Us | ToolZen Hub"
+description: "Contact ToolZen Hub for questions, feedback, suggestions, or support."
+headerTag: div
+footerTag: div
+sitemapOrder: 6
+styles:
+  - "/assets/css/base/variables.css"
+  - "/assets/css/base/reset.css"
+  - "/assets/css/base/typography.css"
+  - "/assets/css/base/layout.css"
+  - "/assets/css/base/animations.css"
+  - "/assets/css/components/header.css"
+  - "/assets/css/components/footer.css"
+  - "/assets/css/themes/light.css"
+  - "/assets/css/pages/contact.css"
+scripts:
+  - "/assets/js/app.js"
+---
+    <!-- =====================================================
+         Main Content
+    ====================================================== -->
+
+    <main class="contact-page">
+
+        <section class="contact-page__hero">
+
+            <div class="container">
+
+                <!-- =================================================
+                     BREADCRUMB
+                ================================================== -->
+
+                <div
+                    class="legal-breadcrumb"
+                    aria-label="Breadcrumb"
+                >
+
+                    <div class="calculator-breadcrumb">
+
+                        <a
+                            href="#"
+                            id="legal-breadcrumb-home"
+                        >
+                            Home
+                        </a>
+
+                        <span aria-hidden="true">
+                            ›
+                        </span>
+
+                        <strong>
+                            Contact Us
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <h1>
+                    Contact Us
+                </h1>
+
+                <p>
+                    Have a question, suggestion, or feedback?
+                    We'd love to hear from you.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="contact-page__content">
+
+            <div class="container">
+
+                <div class="contact-page__card">
+
+                    <h2>
+                        Get in Touch
+                    </h2>
+
+                    <p>
+                        If you have questions about ToolZen Hub,
+                        our calculators, articles, or anything else,
+                        you can reach out to us.
+                    </p>
+
+
+                    <p
+                        class="contact-form__notice"
+                        role="note"
+                    >
+                        Our contact form isn't accepting messages yet.
+                        It will be enabled soon. Please don't rely on it
+                        for urgent requests.
+                    </p>
+
+
+                    <form class="contact-form">
+
+                        <div class="contact-form__group">
+
+                            <label for="name">
+                                Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Your name"
+                                autocomplete="name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="contact-form__group">
+
+                            <label for="email">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Your email"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="contact-form__group">
+
+                            <label for="message">
+                                Message
+                            </label>
+
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="6"
+                                placeholder="Write your message..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="contact-form__button"
+                            disabled
+                            aria-disabled="true"
+                        >
+                            Sending unavailable
+                        </button>
+
+                    </form>
+
+
+                    <p
+                        id="contact-status"
+                        class="contact-form__status"
+                        role="status"
+                        aria-live="polite"
+                    ></p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         Global Footer
+    ====================================================== -->
+
+    

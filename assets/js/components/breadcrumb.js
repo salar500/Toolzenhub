@@ -137,7 +137,7 @@ export function renderBreadcrumb(
  */
 
 
-export function renderToolBreadcrumb(
+export function toolBreadcrumbItems(
     metadata = {}
 ) {
 
@@ -229,7 +229,38 @@ export function renderToolBreadcrumb(
     }
 
 
-    return renderBreadcrumb(items);
+    return items;
+
+}
+
+
+export function renderToolBreadcrumb(
+    metadata = {}
+) {
+
+    return renderBreadcrumb(
+        toolBreadcrumbItems(metadata)
+    );
+
+}
+
+
+/*
+ * The full trail, Home first, as the visible breadcrumb shows
+ * it. Used for structured data so the two never disagree.
+ */
+
+export function breadcrumbTrail(
+    items = []
+) {
+
+    return [
+        {
+            label: "Home",
+            href: ROUTES.home
+        },
+        ...items
+    ];
 
 }
 

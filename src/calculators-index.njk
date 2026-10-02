@@ -1,0 +1,226 @@
+---
+layout: layouts/listing.njk
+permalink: "/calculators.html"
+title: "All Calculators | ToolZen Hub"
+description: "Explore all ToolZen Hub calculators for finance, health, business, math, investment and everyday calculations."
+themeColor: "#0b9f58"
+bodyClass: "calculators-page-body"
+headerTag: div
+footerTag: div
+sitemapOrder: 2
+styles:
+  - "/assets/css/base/variables.css"
+  - "/assets/css/base/reset.css"
+  - "/assets/css/base/typography.css"
+  - "/assets/css/base/layout.css"
+  - "/assets/css/base/animations.css"
+  - "/assets/css/components/header.css"
+  - "/assets/css/components/footer.css"
+  - "/assets/css/components/cards.css"
+  - "/assets/css/themes/light.css"
+  - "/assets/css/pages/calculators.css"
+  - "/assets/css/pages/calculators-empty.css"
+scripts:
+  - "/assets/js/pages/calculators.js"
+clientRendered: true
+---
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main id="calculators-page">
+
+
+        <!-- =====================================================
+             BREADCRUMB
+        ====================================================== -->
+
+        <div class="calculators-container">
+
+            <div
+                id="calculators-breadcrumb"
+                class="calculators-breadcrumb"
+            ></div>
+
+        </div>
+
+
+        <!-- =====================================================
+             HERO
+        ====================================================== -->
+
+        <section class="calculators-page__hero">
+
+            <div class="calculators-container">
+
+                <div class="calculators-page__intro">
+
+                    <span class="calculators-page__eyebrow">
+                        Calculators &amp; Tools
+                    </span>
+
+                    <h1 class="calculators-page__title">
+                        All Calculators
+                    </h1>
+
+                    <p class="calculators-page__description">
+                        Explore every calculator available on ToolZen Hub.
+                        Search instantly to find exactly what you need.
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                     SEARCH
+                ================================================== -->
+
+                <form
+                    class="calculators-search"
+                    id="calculators-search-form"
+                    role="search"
+                    novalidate
+                >
+
+                    <span
+                        class="calculators-search__icon"
+                        aria-hidden="true"
+                    >
+                        🔍
+                    </span>
+
+
+                    <input
+                        type="search"
+                        id="calculators-search-input"
+                        class="calculators-search__input"
+                        name="q"
+                        placeholder="Search calculators..."
+                        autocomplete="off"
+                        aria-label="Search calculators"
+                    >
+
+
+                    <button
+                        type="submit"
+                        class="calculators-search__button"
+                        aria-label="Search calculators"
+                    >
+                        Search
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CALCULATOR DIRECTORY
+        ====================================================== -->
+
+        <section class="calculators-directory">
+
+            <div class="calculators-container">
+
+                <div class="calculators-directory__header">
+
+                    <div>
+
+                        <span
+                            class="calculators-directory__eyebrow"
+                            id="calculators-results-label"
+                        >
+                            All Calculators
+                        </span>
+
+                        <h2>
+                            Explore our calculators
+                        </h2>
+
+                    </div>
+
+
+                    <span
+                        class="calculators-directory__count"
+                        id="calculators-results-count"
+                    ></span>
+
+                </div>
+
+
+                <!-- =================================================
+                     RESULTS
+                ================================================== -->
+
+                <div
+                    id="calculators-grid"
+                    class="calculators-grid"
+                ></div>
+
+
+                <!-- =================================================
+                     EMPTY STATE
+                ================================================== -->
+
+                <div
+                    id="calculators-empty"
+                    class="calculators-empty"
+                    hidden
+                >
+
+                    <div class="calculators-empty__icon">
+                        🔎
+                    </div>
+
+
+                    <h2>
+                        No calculators found
+                    </h2>
+
+
+                    <p>
+                        We couldn't find a calculator matching your search.
+                        Try another keyword or browse our calculator categories.
+                    </p>
+
+
+                    <!-- =================================================
+                         CUSTOM CALCULATOR HELP
+                    ================================================== -->
+
+                    <div class="calculators-empty__help">
+
+                        <h3>
+                            Can't find what you need?
+                        </h3>
+
+                        <p>
+                            Tell us what you need. We can create or customize
+                            a calculator specifically for you.
+                        </p>
+
+                        <a
+                            href="{{ '/contact.html' | url }}"
+                            class="calculators-empty__contact"
+                        >
+                            Contact Us
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         GLOBAL FOOTER
+    ====================================================== -->
+
+    

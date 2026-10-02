@@ -1,0 +1,327 @@
+---
+layout: layouts/listing.njk
+permalink: "/loans.html"
+title: "Loans Calculators | ToolZen Hub"
+description: "Calculate, compare and plan your loans with ToolZen Hub loan calculators including EMI, Home Loan, Personal Loan and more."
+themeColor: "#0b9f58"
+sitemapOrder: 3
+fonts: true
+styles:
+  - "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+  - "/assets/css/base/variables.css"
+  - "/assets/css/base/reset.css"
+  - "/assets/css/base/typography.css"
+  - "/assets/css/base/layout.css"
+  - "/assets/css/base/animations.css"
+  - "/assets/css/components/buttons.css"
+  - "/assets/css/components/cards.css"
+  - "/assets/css/components/header.css"
+  - "/assets/css/components/navigation.css"
+  - "/assets/css/components/forms.css"
+  - "/assets/css/components/search.css"
+  - "/assets/css/components/modal.css"
+  - "/assets/css/components/table.css"
+  - "/assets/css/components/footer.css"
+  - "/assets/css/themes/light.css"
+  - "/assets/css/pages/loans.css"
+scripts:
+  - "/assets/js/pages/loans.js"
+clientRendered: true
+---
+    <!-- =====================================================
+         Main
+    ====================================================== -->
+
+    <main id="app">
+
+
+        <!-- =================================================
+             Breadcrumb
+        ================================================== -->
+
+        <section class="loans-breadcrumb">
+
+            <div class="container">
+
+                <nav
+                    class="loans-breadcrumb__nav"
+                    aria-label="Breadcrumb"
+                >
+
+                    <a
+                        href="#"
+                        id="loans-breadcrumb-home"
+                        class="loans-breadcrumb__home"
+                    >
+                        <span aria-hidden="true">⌂</span>
+                        Home
+                    </a>
+
+                    <span
+                        class="loans-breadcrumb__separator"
+                        aria-hidden="true"
+                    >
+                        ›
+                    </span>
+
+                    <a
+                        href="#"
+                        id="loans-breadcrumb-categories"
+                        class="loans-breadcrumb__link"
+                    >
+                        Categories
+                    </a>
+
+                    <span
+                        class="loans-breadcrumb__separator"
+                        aria-hidden="true"
+                    >
+                        ›
+                    </span>
+
+                    <span class="loans-breadcrumb__current">
+                        Loans
+                    </span>
+
+                </nav>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             Hero
+        ================================================== -->
+
+        <section class="loans-hero">
+
+            <div class="container">
+
+                <div class="loans-hero__content">
+
+
+                    <!-- Left -->
+
+                    <div class="loans-hero__text">
+
+                        <h1 class="loans-hero__title">
+                            Loans Calculators
+                        </h1>
+
+                        <p class="loans-hero__description">
+                            Calculate, compare and plan your loans
+                            with our easy to use loan calculators.
+                        </p>
+
+
+                        <div class="loans-hero__trust">
+
+                            <span
+                                class="loans-hero__trust-icon"
+                                aria-hidden="true"
+                            >
+                                ✓
+                            </span>
+
+                            <span>100% Free</span>
+
+                            <span class="loans-hero__dot">
+                                •
+                            </span>
+
+                            <span>Accurate</span>
+
+                            <span class="loans-hero__dot">
+                                •
+                            </span>
+
+                            <span>Easy to Use</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Right illustration -->
+
+                    <div
+                        class="loans-hero__illustration"
+                        aria-hidden="true"
+                    >
+
+                        <div class="loans-illustration">
+
+                            <div class="loans-illustration__percent">
+                                %
+                            </div>
+
+                            <div class="loans-illustration__house">
+
+                                <div class="loans-illustration__roof"></div>
+
+                                <div class="loans-illustration__body">
+
+                                    <div class="loans-illustration__door"></div>
+
+                                    <div class="loans-illustration__window">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="loans-illustration__coins">
+
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                            </div>
+
+
+                            <div class="loans-illustration__clipboard">
+
+                                <div class="loans-illustration__clip"></div>
+
+                                <strong>LOAN</strong>
+
+                                <div>✓</div>
+                                <div>✓</div>
+                                <div>✓</div>
+
+                            </div>
+
+
+                            <div class="loans-illustration__calculator">
+
+                                <div class="loans-illustration__display">
+                                   
+                                </div>
+
+                                <div class="loans-illustration__keys">
+
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="loans-illustration__check">
+                                ✓
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             Calculator Cards
+        ================================================== -->
+
+        <section class="loans-calculators">
+
+            <div class="container">
+
+                <div
+                    id="loans-calculators-grid"
+                    class="loans-calculators__grid"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             Search
+        ================================================== -->
+
+        <section class="loans-search-section">
+
+            <div class="container">
+
+                <div class="loans-search">
+
+                    <div class="loans-search__icon">
+                        💡
+                    </div>
+
+
+                    <div class="loans-search__content">
+
+                        <h2>
+                            Can't find what you need?
+                        </h2>
+
+                        <p>
+                            Search from 100+ calculators and tools
+                        </p>
+
+                    </div>
+
+
+                    <form
+                        class="loans-search__form"
+                        id="loans-search-form"
+                    >
+
+                        <input
+                            type="search"
+                            id="loans-search-input"
+                            class="loans-search__input"
+                            placeholder="Search calculators..."
+                            autocomplete="off"
+                        >
+
+                        <button
+                            type="submit"
+                            class="loans-search__button"
+                            aria-label="Search calculators"
+                        >
+                            ⌕
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         Global Footer
+    ====================================================== -->
+
+    

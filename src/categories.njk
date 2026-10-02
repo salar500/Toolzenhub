@@ -1,0 +1,160 @@
+---
+layout: layouts/listing.njk
+permalink: "/categories.html"
+title: "All Categories | ToolZen Hub"
+description: "Explore all ToolZen Hub calculators and smart tools for finance, health, business, math and everyday life."
+themeColor: "#0b9f58"
+bodyClass: "categories-page-body"
+headerTag: div
+footerTag: div
+sitemapOrder: 1
+styles:
+  - "/assets/css/base/variables.css"
+  - "/assets/css/base/reset.css"
+  - "/assets/css/base/typography.css"
+  - "/assets/css/base/layout.css"
+  - "/assets/css/base/animations.css"
+  - "/assets/css/components/buttons.css"
+  - "/assets/css/components/cards.css"
+  - "/assets/css/components/header.css"
+  - "/assets/css/components/navigation.css"
+  - "/assets/css/components/forms.css"
+  - "/assets/css/components/table.css"
+  - "/assets/css/components/footer.css"
+  - "/assets/css/themes/light.css"
+  - "/assets/css/pages/categories.css"
+scripts:
+  - "/assets/js/app.js"
+clientRendered: true
+---
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main id="app">
+
+        <section class="categories-page">
+
+            <div class="container">
+
+
+                <!-- =================================================
+                     BREADCRUMB
+                ================================================== -->
+
+                <div
+                    id="categories-breadcrumb"
+                    class="categories-breadcrumb"
+                ></div>
+
+
+                <!-- =================================================
+                     PAGE INTRO
+                ================================================== -->
+
+                <div class="categories-page__intro">
+
+                    <span class="categories-page__eyebrow">
+                        Calculators &amp; Tools
+                    </span>
+
+
+                    <h1 class="categories-page__title">
+                        All Categories
+                    </h1>
+
+
+                    <p class="categories-page__description">
+                        Explore our wide range of calculators and smart tools
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                     CATEGORY GRID
+
+                     categories.js will insert the cards here.
+                ================================================== -->
+
+                <div
+                    id="categories-grid"
+                    class="categories-page__grid"
+                ></div>
+
+
+                <!-- =================================================
+                     SEARCH
+                ================================================== -->
+
+                <div class="categories-search">
+
+
+                    <!-- Search Icon -->
+
+                    <div
+                        class="categories-search__icon"
+                        aria-hidden="true"
+                    >
+                        💡
+                    </div>
+
+
+                    <!-- Search Content -->
+
+                    <div class="categories-search__content">
+
+                        <h2>
+                            Can't find what you need?
+                        </h2>
+
+
+                        <p>
+                            Search from 100+ calculators and tools
+                        </p>
+
+                    </div>
+
+
+                    <!-- Search Form -->
+
+                    <form
+                        class="categories-search__form"
+                        id="categories-search-form"
+                        role="search"
+                    >
+
+                        <input
+                            type="search"
+                            id="categories-search-input"
+                            class="categories-search__input"
+                            placeholder="Search calculators..."
+                            aria-label="Search calculators"
+                            autocomplete="off"
+                        >
+
+
+                        <button
+                            type="submit"
+                            class="categories-search__button"
+                            aria-label="Search"
+                        >
+                            🔍
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    

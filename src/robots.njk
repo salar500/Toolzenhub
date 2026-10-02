@@ -1,0 +1,15 @@
+---
+permalink: /robots.txt
+eleventyExcludeFromCollections: true
+scripts:
+  - "/assets/js/app.js"
+---
+# robots.txt for ToolZen Hub
+#
+# Everything is crawlable, including the CSS, JavaScript and images the pages need to render.
+# The sitemap is always the production one (the canonical origin set in assets/js/site-config.js).
+
+User-agent: *
+Allow: /
+
+Sitemap: {{ site.productionUrl('/sitemap.xml') }}

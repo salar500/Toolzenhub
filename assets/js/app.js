@@ -5,6 +5,15 @@
 
 
 /* =========================================================
+   Page ready (clears <html data-pending> once rendered)
+========================================================= */
+
+import {
+    markPageReady
+} from "./utils/page-ready.js";
+
+
+/* =========================================================
    Router
 ========================================================= */
 
@@ -338,5 +347,17 @@ async function initializeApp() {
 
 document.addEventListener(
     "DOMContentLoaded",
-    initializeApp
+    async () => {
+
+        try {
+
+            await initializeApp();
+
+        } finally {
+
+            markPageReady();
+
+        }
+
+    }
 );
