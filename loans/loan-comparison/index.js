@@ -26,14 +26,35 @@ import {
 } from "./components/InfoSections.js";
 
 
+import {
+    getCalculatorById
+} from "../../assets/js/data/calculators.js";
+
+
+/* =========================================================
+   IDENTITY
+
+   The title comes from the calculator catalog, the single
+   source of tool identity. The breadcrumb, related content
+   and error states are supplied by the shared tool page
+   (assets/js/pages/tool-page.js); everything below is
+   comparison-specific.
+========================================================= */
+
+const TITLE =
+    getCalculatorById("loan-comparison").title;
+
+
 /* =========================================================
    Render Calculator
 ========================================================= */
 
-export function render() {
+export function render(
+    mount = document.querySelector("#app")
+) {
 
     const app =
-        document.querySelector("#app");
+        mount;
 
 
     if (!app) {
@@ -55,7 +76,7 @@ export function render() {
                     </span>
 
                     <h1>
-                        Loan Comparison Calculator
+                        ${TITLE}
                     </h1>
 
                     <p>
