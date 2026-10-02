@@ -13,6 +13,11 @@ import {
 } from "../data/calculators.js";
 
 import {
+    getSection,
+    getSectionUrl
+} from "../data/taxonomy.js";
+
+import {
     renderCalculatorCards
 } from "../components/calculator-card.js";
 
@@ -241,10 +246,10 @@ function initializeBreadcrumb() {
     if (calculatorsLink) {
 
         calculatorsLink.href =
-            ROUTES.calculatorCategories;
+            getSectionUrl("calculators");
 
         calculatorsLink.textContent =
-            "Calculators";
+            getSection("calculators").title;
 
         calculatorsLink.classList.add(
             "loans-breadcrumb__active"

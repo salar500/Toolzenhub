@@ -16,6 +16,12 @@
    Home → Calculators
    Home → Calculators → Loans
    Home → Calculators → Loans → EMI Calculator
+   Home → Calculators → Loans → Subcategory → Tool
+           (the subcategory step appears only for tools that
+            have one; none do yet)
+
+   Where each step links comes from the hierarchy data
+   (data/taxonomy.js), not from this file.
 
    Home → Timers → Countdown Timer
 
@@ -28,6 +34,13 @@
 import {
     ROUTES
 } from "../routes.js";
+
+import {
+    getSectionUrl,
+    getCategoryLandingUrl,
+    getSubcategory,
+    getSubcategoryLandingUrl
+} from "../data/taxonomy.js";
 
 
 /* =========================================================
@@ -118,6 +131,9 @@ export function renderBreadcrumb(
  *
  * Home → Calculators → Loans → Loan Comparison Calculator
  *
+ * The category step shows metadata.category exactly as given
+ * (the catalog passes the id, so it reads "loans"). A
+ * `subcategory` id in the metadata adds one more step.
  */
 
 
@@ -171,6 +187,33 @@ export function renderToolBreadcrumb(
 
 
     /* =====================================================
+       SUBCATEGORY (optional)
+    ===================================================== */
+
+    if (metadata.subcategory) {
+
+        const subcategory =
+            getSubcategory(
+                metadata.subcategory
+            );
+
+        items.push({
+
+            label:
+                subcategory?.title ||
+                metadata.subcategory,
+
+            href:
+                getSubcategoryLandingUrl(
+                    metadata.subcategory
+                )
+
+        });
+
+    }
+
+
+    /* =====================================================
        TOOL
     ===================================================== */
 
@@ -199,65 +242,26 @@ function getSectionRoute(
     section
 ) {
 
-    const normalized =
-        String(section)
-            .trim()
-            .toLowerCase();
-
-
-    /* =====================================================
-       CALCULATORS
-    ===================================================== */
-
-    if (
-        normalized === "calculators"
-    ) {
-
-        return ROUTES.calculatorCategories;
-
-    }
-
-
-    /* =====================================================
-       DEFAULT
-    ===================================================== */
-
-    return null;
+    return getSectionUrl(section);
 
 }
 
 
 /* =========================================================
    CATEGORY ROUTES
+
+   Only categories with a landing page link (Loans today);
+   the others show as plain text.
 ========================================================= */
 
 function getCategoryRoute(
     category
 ) {
 
-    const normalized =
+    return getCategoryLandingUrl(
         String(category)
             .trim()
-            .toLowerCase();
-
-
-    /* =====================================================
-       LOANS
-    ===================================================== */
-
-    if (
-        normalized === "loans"
-    ) {
-
-        return ROUTES.loans;
-
-    }
-
-
-    /* =====================================================
-       FUTURE CATEGORIES
-    ===================================================== */
-
-    return null;
+            .toLowerCase()
+    );
 
 }

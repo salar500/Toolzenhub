@@ -46,55 +46,42 @@
 ========================================================= */
 
 
+import {
+    categories
+} from "./categories.js";
+
+
 /* =========================================================
    ARTICLE CATEGORIES
+
+   Articles use the same major categories as tools
+   (data/categories.js): the id and name come from there.
+   Article pages keep their own order and icons.
 ========================================================= */
 
-export const articleCategories = [
-
-    {
-        slug: "loans",
-        name: "Loans",
-        icon: "🏠"
-    },
-
-    {
-        slug: "investment",
-        name: "Investment",
-        icon: "📈"
-    },
-
-    {
-        slug: "tax",
-        name: "Tax",
-        icon: "📄"
-    },
-
-    {
-        slug: "business",
-        name: "Business",
-        icon: "💼"
-    },
-
-    {
-        slug: "health",
-        name: "Health",
-        icon: "❤️"
-    },
-
-    {
-        slug: "math",
-        name: "Math",
-        icon: "🧮"
-    },
-
-    {
-        slug: "converter",
-        name: "Converter",
-        icon: "🔄"
-    }
-
+const articleCategoryOrder = [
+    { slug: "loans", icon: "🏠" },
+    { slug: "investment", icon: "📈" },
+    { slug: "tax", icon: "📄" },
+    { slug: "business", icon: "💼" },
+    { slug: "health", icon: "❤️" },
+    { slug: "math", icon: "🧮" },
+    { slug: "converter", icon: "🔄" }
 ];
+
+
+export const articleCategories =
+    articleCategoryOrder.map(
+        ({ slug, icon }) => ({
+            slug,
+            name:
+                categories.find(
+                    category =>
+                        category.id === slug
+                )?.title || slug,
+            icon
+        })
+    );
 
 
 /* =========================================================

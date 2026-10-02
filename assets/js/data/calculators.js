@@ -6,7 +6,11 @@
 
    Responsibilities:
    - Calculator identity (id = URL slug), title, description
-   - Category association and section
+   - Category association (`category` = major category id,
+     data/categories.js) and section
+   - Optional `subcategory` (a subcategory id of that
+     category). Omit it for a tool that sits directly under
+     its major category, which is every tool today.
    - Availability: status "published" | "coming-soon"
    - Calculator URL
    - Dynamic loaders for implemented calculators

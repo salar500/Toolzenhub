@@ -16,6 +16,11 @@ import {
 } from "../data/categories.js";
 
 import {
+    getCategoryUrl,
+    getCategoryByTitle
+} from "../data/taxonomy.js";
+
+import {
     renderBreadcrumb
 } from "../components/breadcrumb.js";
 
@@ -69,24 +74,15 @@ export function renderCategoriesPage() {
 
         /* =================================================
            CATEGORY DESTINATION
+
+           The category's landing page (Loans today),
+           otherwise its anchor on this page.
         ================================================= */
 
-        let categoryUrl =
-            `${ROUTES.categories}#${category.id}`;
-
-
-        /* =================================================
-           LOANS
-           Goes to the Loans category landing page.
-        ================================================= */
-
-        if (category.id === "loans") {
-
-            categoryUrl =
-                ROUTES.loans;
-
-        }
-
+        const categoryUrl =
+            getCategoryUrl(
+                category.id
+            );
 
         return `
 
@@ -314,30 +310,18 @@ function renderCalculatorResults(query) {
 
 /* =========================================================
    CATEGORY ICON
+
+   Looked up from the category data by the category title the
+   search results carry. Unknown titles use the "More" look.
 ========================================================= */
 
 function getCategoryIcon(category) {
 
-    const icons = {
+    return (
+        getCategoryByTitle(category)?.icon ||
+        "▦"
+    );
 
-        Loans: "🏠",
-
-        Investment: "📈",
-
-        Tax: "🧾",
-
-        Health: "♥",
-
-        Business: "💼",
-
-        Math: "🔢",
-
-        Converter: "↻"
-
-    };
-
-
-    return icons[category] || "▦";
 }
 
 
@@ -347,26 +331,11 @@ function getCategoryIcon(category) {
 
 function getCategoryIconClass(category) {
 
-    const classes = {
+    return (
+        getCategoryByTitle(category)?.iconClass ||
+        "more"
+    );
 
-        Loans: "loans",
-
-        Investment: "investment",
-
-        Tax: "tax",
-
-        Health: "health",
-
-        Business: "business",
-
-        Math: "math",
-
-        Converter: "converter"
-
-    };
-
-
-    return classes[category] || "more";
 }
 
 

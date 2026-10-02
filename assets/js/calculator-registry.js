@@ -60,6 +60,9 @@ export const calculatorMetadata =
                 {
                     section: calculator.section,
                     category: calculator.category,
+                    ...(calculator.subcategory
+                        ? { subcategory: calculator.subcategory }
+                        : {}),
                     title: calculator.title
                 }
             ]

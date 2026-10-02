@@ -237,3 +237,33 @@ test.describe("calculator catalog drives tool identity (M1)", () => {
     expect(seen.some((u) => /loan-comparison\/index\.js/.test(u))).toBe(false);
   });
 });
+
+test.describe("M6 category hierarchy in the breadcrumbs @portable", () => {
+  for (const [slug, title] of [["emi", "EMI Calculator"], ["loan-comparison", "Loan Comparison Calculator"]]) {
+    test(`${slug}: one breadcrumb; its category link leads to the Loans page, which lists the tool`, async ({ page, go, siteRoot }) => {
+      await go(`calculators/${slug}/`);
+      await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
+      const crumb = page.locator(".calculator-breadcrumb");
+      expect(await crumb.locator("a, strong").allTextContents().then((t) => t.map((x) => x.trim()))).toEqual(["Home", "Calculators", "loans", title]);
+      await crumb.getByRole("link", { name: "loans" }).click();
+      await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}loans.html`);
+      await expect(page.locator(`#loans-calculators-grid a[href$="calculators/${slug}/"]`)).toHaveCount(1);
+      // the section link goes to the categories page
+      await page.goBack();
+      await page.locator(".calculator-breadcrumb").getByRole("link", { name: "Calculators" }).click();
+      await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}categories.html`);
+    });
+  }
+
+  test("categories page: every category card resolves from the category data; Coming soon tools are not links", async ({ page, go, siteRoot }) => {
+    await go("categories.html?q=tax");
+    await expect(page.locator("#categories-grid .category-page-card--soon").first()).toBeVisible();
+    expect(await page.locator("#categories-grid a.category-page-card").count()).toBe(0);
+    await go("categories.html?q=emi");
+    // search results show the tool's category icon, looked up from the category data
+    const emi = page.locator('#categories-grid a.category-page-card[href$="calculators/emi/"]');
+    await expect(emi).toHaveCount(1);
+    await expect(emi.locator(".category-page-card__icon--loans")).toHaveText("🏠");
+  });
+});
+
