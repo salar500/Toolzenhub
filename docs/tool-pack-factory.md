@@ -7,7 +7,8 @@ the reusable parts, and the decisions (what to build, what not to build) are not
 Read with: `docs/tool-pack-template.md` (what a pack changes and the visual quality rules),
 `docs/tool-packs/_spec-template.md` (the spec to fill in), `docs/content-clusters.md` (articles),
 `docs/shared-tool-ux.md` (shared UI), `docs/design-follow-ups.md` (known deferred design work). The worked
-examples are `docs/tool-packs/01-loan-prepayment.md` (built) and `docs/tool-packs/02-balance-transfer.md` (planned).
+examples are `docs/tool-packs/01-loan-prepayment.md` and `docs/tool-packs/02-balance-transfer.md` (both built);
+`docs/tool-packs/03-sip.md` is the planned third pack.
 
 ## 1. Factory map (what the first pack taught us)
 
@@ -196,5 +197,7 @@ files to touch. Not for formulas, metadata, articles or routes.
 ## 10. Order of tools
 
 The next pack is chosen from the existing catalog (Coming Soon entries keep their id and slug). The selection
-reasoning for Tool Pack 2 is in `docs/tool-packs/02-balance-transfer.md`. Do not start a pack without an
-approved spec.
+reasoning for Tool Pack 2 is in `docs/tool-packs/02-balance-transfer.md` and for Tool Pack 3 (the first pack in a
+second category, Investment) in `docs/tool-packs/03-sip.md`. After Pack 3 is built, review the repeated mechanical
+work across Packs 1 to 3 and decide whether a limited generator or shared print and comparison styles are now
+justified. Do not start a pack without an approved spec.

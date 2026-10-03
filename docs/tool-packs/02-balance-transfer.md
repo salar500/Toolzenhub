@@ -1,6 +1,6 @@
 # Tool Pack 02: Loan Balance Transfer Calculator
 
-Status: draft (planning only, not implemented, not approved for build)      Base commit: c7ba6e9
+Status: built (commit df994d6); see the implementation notes at the end      Planning base commit: c7ba6e9
 Reserved id and slug: `balance-transfer` (route `/calculators/balance-transfer/`, a Coming Soon entry today)
 Spec follows `docs/tool-packs/_spec-template.md`; the lifecycle and gate are in `docs/tool-pack-factory.md`.
 
@@ -251,3 +251,22 @@ verified, dated rule.
 ### 28. Commit checkpoint
 Commit subject: `feat: add loan balance transfer calculator and content cluster`. Afterwards run the exact-tree
 verification (`docs/tool-pack-factory.md`, section 8). Do not push.
+
+
+## Implementation notes (as built, commit `df994d6`)
+
+The tool shipped as planned. Where the build differs from, or settles, the plan above:
+
+| Topic | What was built |
+| --- | --- |
+| Title and slug | "Loan Balance Transfer Calculator"; `balance-transfer` kept. |
+| Defaults | ₹25,00,000; current 9.5% for 15 years; new 8.5% for 15 years; charges 0 at the current lender and ₹15,000 at the new one (the planning scenarios used ₹17,500). |
+| New tenure | follows the remaining tenure until the visitor edits it; Reset re-links it. |
+| Result states | "Potential saving", "Potential loss", "Lower EMI, higher overall cost" and "About the same"; break-even kinds immediate, months, never and none; the temporary saving is said in words. |
+| Same-tenure check | a third comparison card and a sentence that separates the rate's effect from the tenure's. |
+| Table | the yearly cumulative-position table with an "At the switch" row; no monthly detail, no chart, no CSV, as decided. |
+| Print | native `window.print()` with print CSS in `balance-transfer.css`; the second use of the print pattern (see Pack 3, section 24). |
+| Articles | published: "Is a Loan Balance Transfer Worth It? Use Break-Even to Decide" and "Loan Balance Transfer vs Prepayment: Which Saves More?". Not published: "Lower EMI Is Not Always Lower Cost" (it overlaps `emi-vs-total-interest` and `loan-tenure-total-interest`; its tenure-neutral point is in article 1 and the tool's own result) and the rule-dependent articles. |
+| Imagery | two charts drawn from the calculators' numbers (the 15-year against 20-year cumulative position; interest saved by prepaying, switching, or both for a large and a small rate drop). |
+| Catalog | the Prepayment tool now lists this tool among its related tools; EMI and Loan Comparison show it by category fallback. |
+| Verification | the browser suites were run spec by spec because full runs exceeded the machine's memory; stale `npm run dev` servers writing to `dist` were the likely cause of a one-off `/calculators/undefined/` build and an `ENOTEMPTY` error (not proven; neither recurred once they were stopped). |
