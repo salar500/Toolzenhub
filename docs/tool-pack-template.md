@@ -10,9 +10,11 @@ Tool Pack
  -> article cluster -> tests -> builds -> localhost verification -> commit
 ```
 
-Companion documents: `docs/content-clusters.md` (articles, linking, editorial standard) and
-`docs/shared-tool-ux.md` (the shared UI primitives and what not to abstract). A pack's spec lives in
-`docs/tool-packs/NN-<name>.md`. Nothing in `docs/` is published.
+Companion documents: `docs/tool-pack-factory.md` (the lifecycle, the quality gate, the checklist, the
+publishing touch-list and the regression gate; **start there**), `docs/content-clusters.md` (articles,
+linking, editorial standard) and `docs/shared-tool-ux.md` (the shared UI primitives and what not to abstract).
+A pack's spec lives in `docs/tool-packs/NN-<name>.md`, copied from `docs/tool-packs/_spec-template.md`.
+Nothing in `docs/` is published.
 
 ## What a pack changes in this repository
 
@@ -32,6 +34,9 @@ its category (by fallback), and the Coming Soon card turning into a live one. Ha
 **not** change unless edited: the footer's tool links and the home page's featured tools.
 
 ## 1. Product specification (written and approved before code)
+
+Fill in `docs/tool-packs/_spec-template.md` (28 sections; each is answered, or marked NOT NEEDED with a
+reason). The list below is the minimum content it covers.
 
 - Name, one-sentence purpose, target user, the problem solved, why it is worth building.
 - Route (`/{section prefix}/{id}/`), section, category, subcategory (usually none), `toolType`.
@@ -187,7 +192,8 @@ dependencies). One commit, one message describing the pack. Do not push from the
 
 ## Pack definition of done
 
-Spec approved - logic verified independently - page accessible and correct on desktop and mobile -
+Spec approved (every section answered or NOT NEEDED with a reason) - logic verified independently - page accessible and correct on desktop and mobile -
 visual quality rules met (actions, contrast, headings, concept-matching images) -
 catalog, search and relationships consistent - articles meet the editorial standard - tests, builds and
-localhost checklist pass - every difference in output explained - one local commit.
+localhost checklist pass - every difference in output explained - one local commit - and the factory quality
+gate in `docs/tool-pack-factory.md` section 4 is met.

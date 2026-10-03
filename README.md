@@ -198,6 +198,9 @@ Inside `assets/js/`:
   `docs/tool-packs/01-loan-prepayment.md` (the specification and implementation notes of the first tool,
   the Loan Prepayment Calculator) and `docs/design-follow-ups.md` (known design-quality items that are
   deliberately not fixed yet, such as the contrast of the brand green used as text).
+  The Tool Pack process (lifecycle, quality gate, checklist, regression gate) is in
+  `docs/tool-pack-factory.md`; the spec to fill in is `docs/tool-packs/_spec-template.md`, and the next
+  planned tool is specified in `docs/tool-packs/02-balance-transfer.md`.
 - `components/`, `pages/` – header, footer, breadcrumb, related content, page modules.
 
 ## How it works
