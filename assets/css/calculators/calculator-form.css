@@ -123,6 +123,20 @@
 
 
 /* =========================================================
+   INVALID
+   A field an error is connected to (ui/field.js). Never
+   present on a page until a tool marks a field invalid.
+========================================================= */
+
+.calculator-form__input[aria-invalid="true"],
+.calculator-form__select[aria-invalid="true"] {
+
+    border-color: var(--color-danger);
+
+}
+
+
+/* =========================================================
    PLACEHOLDER
 ========================================================= */
 

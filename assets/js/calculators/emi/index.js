@@ -15,6 +15,18 @@ import {
 } from "../common/formatter.js";
 
 import {
+    numberField,
+    setFieldsInvalid,
+    clearFieldsInvalid
+} from "../../ui/field.js";
+
+import {
+    resultMetric,
+    resultEmpty,
+    resultError
+} from "../../ui/result.js";
+
+import {
     getCalculatorById
 } from "../../data/calculators.js";
 
@@ -29,6 +41,21 @@ import {
 
 const TITLE =
     getCalculatorById("emi").title;
+
+
+/*
+ * The inputs, and the error element they point at when the
+ * entered values cannot be used (shared wiring: ui/field.js).
+ */
+
+const FIELD_IDS = [
+    "emi-loan",
+    "emi-rate",
+    "emi-years"
+];
+
+const ERROR_ID =
+    "emi-results-error";
 
 
 /* =========================================================
@@ -109,116 +136,43 @@ export function markup() {
 
                     <div class="calculator-form__grid">
 
-
                         <!-- LOAN AMOUNT -->
-
-                        <div class="calculator-form__group">
-
-                            <label
-                                class="calculator-form__label"
-                                for="emi-loan"
-                            >
-                                Loan Amount
-                            </label>
-
-                            <div class="calculator-form__field calculator-form__field--unit">
-
-                                <input
-                                    id="emi-loan"
-                                    class="calculator-form__input"
-                                    type="number"
-                                    min="1000"
-                                    max="100000000"
-                                    step="1000"
-                                    value="1000000"
-                                    required
-                                >
-
-                                <span class="calculator-form__unit">
-                                    ₹
-                                </span>
-
-                            </div>
-
-                            <span class="calculator-form__help">
-                                Enter the total loan amount.
-                            </span>
-
-                        </div>
+                        ${numberField({
+                            id: "emi-loan",
+                            label: "Loan Amount",
+                            unit: "₹",
+                            hint: "Enter the total loan amount.",
+                            min: 1000,
+                            max: 100000000,
+                            step: 1000,
+                            value: 1000000
+                        })}
 
 
                         <!-- INTEREST RATE -->
-
-                        <div class="calculator-form__group">
-
-                            <label
-                                class="calculator-form__label"
-                                for="emi-rate"
-                            >
-                                Interest Rate
-                            </label>
-
-                            <div class="calculator-form__field calculator-form__field--unit">
-
-                                <input
-                                    id="emi-rate"
-                                    class="calculator-form__input"
-                                    type="number"
-                                    min="1"
-                                    max="30"
-                                    step="0.01"
-                                    value="8.5"
-                                    required
-                                >
-
-                                <span class="calculator-form__unit">
-                                    %
-                                </span>
-
-                            </div>
-
-                            <span class="calculator-form__help">
-                                Enter the annual interest rate.
-                            </span>
-
-                        </div>
+                        ${numberField({
+                            id: "emi-rate",
+                            label: "Interest Rate",
+                            unit: "%",
+                            hint: "Enter the annual interest rate.",
+                            min: 1,
+                            max: 30,
+                            step: 0.01,
+                            value: 8.5
+                        })}
 
 
                         <!-- TENURE -->
-
-                        <div class="calculator-form__group">
-
-                            <label
-                                class="calculator-form__label"
-                                for="emi-years"
-                            >
-                                Loan Tenure
-                            </label>
-
-                            <div class="calculator-form__field calculator-form__field--unit">
-
-                                <input
-                                    id="emi-years"
-                                    class="calculator-form__input"
-                                    type="number"
-                                    min="1"
-                                    max="40"
-                                    step="1"
-                                    value="20"
-                                    required
-                                >
-
-                                <span class="calculator-form__unit">
-                                    Years
-                                </span>
-
-                            </div>
-
-                            <span class="calculator-form__help">
-                                Enter the repayment period.
-                            </span>
-
-                        </div>
+                        ${numberField({
+                            id: "emi-years",
+                            label: "Loan Tenure",
+                            unit: "Years",
+                            hint: "Enter the repayment period.",
+                            min: 1,
+                            max: 40,
+                            step: 1,
+                            value: 20
+                        })}
 
                     </div>
 
@@ -257,9 +211,7 @@ export function markup() {
                 aria-live="polite"
             >
 
-                <div class="calculator-results__empty">
-                    Enter your loan details and calculate your EMI.
-                </div>
+                ${resultEmpty("Enter your loan details and calculate your EMI.")}
 
             </section>
 
@@ -435,12 +387,23 @@ export function init() {
     const results =
         document.querySelector("#emi-results");
 
+    const inputs =
+        FIELD_IDS.map(
+            id =>
+                document.getElementById(id)
+        );
+
 
     /* =====================================================
        CALCULATE
     ===================================================== */
 
     function calculate() {
+
+        clearFieldsInvalid(
+            inputs,
+            ERROR_ID
+        );
 
         const loan =
             Number(
@@ -467,11 +430,16 @@ export function init() {
             years <= 0
         ) {
 
-            results.innerHTML = `
-                <div class="calculator-results__error">
-                    Please enter valid loan details.
-                </div>
-            `;
+            setFieldsInvalid(
+                inputs,
+                ERROR_ID
+            );
+
+            results.innerHTML =
+                resultError(
+                    "Please enter valid loan details.",
+                    { id: ERROR_ID }
+                );
 
             return;
         }
@@ -516,59 +484,28 @@ export function init() {
                 </div>
 
 
-                <div class="calculator-results__grid">
+                    <div class="calculator-results__grid">
 
+                        ${resultMetric({
+                            label: "Monthly EMI",
+                            value: formatCurrency(emi),
+                            primary: true
+                        })}
 
-                    <div class="calculator-results__item calculator-results__item--primary">
+                        ${resultMetric({
+                            label: "Total Interest",
+                            value: formatCurrency(totalInterest)
+                        })}
 
-                        <span class="calculator-results__label">
-                            Monthly EMI
-                        </span>
+                        ${resultMetric({
+                            label: "Total Repayment",
+                            value: formatCurrency(totalRepayment)
+                        })}
 
-                        <strong class="calculator-results__value">
-                            ${formatCurrency(emi)}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="calculator-results__item">
-
-                        <span class="calculator-results__label">
-                            Total Interest
-                        </span>
-
-                        <strong class="calculator-results__value">
-                            ${formatCurrency(totalInterest)}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="calculator-results__item">
-
-                        <span class="calculator-results__label">
-                            Total Repayment
-                        </span>
-
-                        <strong class="calculator-results__value">
-                            ${formatCurrency(totalRepayment)}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="calculator-results__item">
-
-                        <span class="calculator-results__label">
-                            Loan Tenure
-                        </span>
-
-                        <strong class="calculator-results__value">
-                            ${years} years
-                        </strong>
-
-                    </div>
+                        ${resultMetric({
+                            label: "Loan Tenure",
+                            value: `${years} years`
+                        })}
 
                 </div>
 
@@ -626,11 +563,15 @@ export function init() {
             document.querySelector("#emi-years").value =
                 20;
 
-            results.innerHTML = `
-                <div class="calculator-results__empty">
-                    Enter your loan details and calculate your EMI.
-                </div>
-            `;
+            clearFieldsInvalid(
+                inputs,
+                ERROR_ID
+            );
+
+            results.innerHTML =
+                resultEmpty(
+                    "Enter your loan details and calculate your EMI."
+                );
 
         }
     );

@@ -171,3 +171,68 @@ test.describe("WebP hero images", () => {
     expect(ok).toBe(true);
   });
 });
+
+
+test.describe("shared field and result primitives, as used by EMI @portable", () => {
+  const IDS = ["emi-loan", "emi-rate", "emi-years"];
+  const submit = () => document.querySelector("#emi-form").dispatchEvent(new Event("submit", { cancelable: true }));
+
+  test("every EMI input is described by its own hint, labels match, and no id is repeated", async ({ page, go }) => {
+    await go("calculators/emi/");
+    for (const id of IDS) {
+      await expect(page.locator(`#${id}`)).toHaveAttribute("aria-describedby", `${id}-hint`);
+      await expect(page.locator(`#${id}-hint`)).toHaveText(/Enter the/);
+      await expect(page.locator(`label[for="${id}"]`)).toHaveCount(1);
+    }
+    const repeated = await page.evaluate(() => {
+      const ids = [...document.querySelectorAll("[id]")].map((e) => e.id);
+      return ids.filter((x, i) => ids.indexOf(x) !== i);
+    });
+    expect(repeated).toEqual([]);
+  });
+
+  test("an error is connected to its fields, and cleared when the input is fixed and on Reset", async ({ page, go }) => {
+    await go("calculators/emi/");
+    await expect(page.locator("#emi-results .calculator-results__card")).toBeVisible();
+
+    // skip the browser's own range checks so the tool's validation (domain-owned) is what runs
+    await page.locator("#emi-loan").fill("0");
+    await page.evaluate(submit);
+    await expect(page.locator("#emi-results-error")).toHaveText("Please enter valid loan details.");
+    for (const id of IDS) {
+      await expect(page.locator(`#${id}`)).toHaveAttribute("aria-invalid", "true");
+      await expect(page.locator(`#${id}`)).toHaveAttribute("aria-describedby", `${id}-hint emi-results-error`);
+    }
+
+    // fixed: the error and the wiring go away, the hint link stays
+    await page.locator("#emi-loan").fill("500000");
+    await page.evaluate(submit);
+    await expect(page.locator("#emi-results-error")).toHaveCount(0);
+    await expect(page.locator("#emi-results .calculator-results__card")).toBeVisible();
+    for (const id of IDS) {
+      await expect(page.locator(`#${id}`)).not.toHaveAttribute("aria-invalid", /.*/);
+      await expect(page.locator(`#${id}`)).toHaveAttribute("aria-describedby", `${id}-hint`);
+    }
+
+    // invalid again, then Reset puts everything back
+    await page.locator("#emi-loan").fill("0");
+    await page.evaluate(submit);
+    await expect(page.locator("#emi-results-error")).toBeVisible();
+    await page.locator("#emi-reset").click();
+    await expect(page.locator("#emi-results .calculator-results__empty")).toHaveText("Enter your loan details and calculate your EMI.");
+    for (const id of IDS) {
+      await expect(page.locator(`#${id}`)).not.toHaveAttribute("aria-invalid", /.*/);
+      await expect(page.locator(`#${id}`)).toHaveAttribute("aria-describedby", `${id}-hint`);
+    }
+  });
+
+  test("the results keep their exact values after the move to shared primitives", async ({ page, go }) => {
+    await go("calculators/emi/");
+    const items = page.locator("#emi-results .calculator-results__item");
+    await expect(items).toHaveCount(4);
+    await expect(items.nth(0)).toHaveClass(/calculator-results__item--primary/);
+    await expect(items.nth(0).locator(".calculator-results__label")).toHaveText("Monthly EMI");
+    await expect(items.nth(0).locator(".calculator-results__value")).toHaveText("₹8,678");
+    await expect(items.nth(3).locator(".calculator-results__value")).toHaveText("20 years");
+  });
+});

@@ -184,6 +184,13 @@ Inside `assets/js/`:
   Current profiles: EMI = reset, validation, explanation, multipleInputs, localProcessing; Loan
   Comparison = compare, reset, realtime, table, schedule, modal, download, unitSelection,
   multipleInputs, explanation, examples, localProcessing.
+
+  **Shared tool UX** (`assets/js/ui/`). A deliberately small, framework-free layer for what tools
+  genuinely repeat: a labelled number field with its hint linked (`numberField`), connecting an error
+  to its fields (`setFieldsInvalid`), result pieces (`resultMetric`, `resultEmpty`, `resultError`) and
+  modal focus management (`activateDialog`). The tool still owns its formulas, validation rules,
+  messages and layout. Guidance, the pattern audit and what to avoid abstracting are in
+  `docs/shared-tool-ux.md`.
 - `components/`, `pages/` – header, footer, breadcrumb, related content, page modules.
 
 ## How it works

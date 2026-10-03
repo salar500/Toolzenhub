@@ -11,49 +11,20 @@ import {
     getAmortizationTotals
 } from "./AmortizationHelpers.js";
 
+import {
+    activateDialog
+} from "../../../assets/js/ui/dialog-focus.js";
+
 
 /* =========================================================
    FOCUS MANAGEMENT
 
-   - the element that opened the dialog gets focus back when it closes
-   - focus moves into the dialog when it opens, and Tab stays inside it
-   - the page behind the dialog is inert (not focusable, not read out)
+   The mechanics (focus in, Tab kept inside, Escape, inert page,
+   focus restored) are the shared dialog helper in ui/. This file
+   keeps only the handle of the dialog that is open.
 ========================================================= */
 
-let openerElement = null;
-
-const BACKGROUND_SELECTORS = ["#header", "#app", "#footer"];
-
-const FOCUSABLE =
-    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
-
-function getFocusable(container) {
-
-    return [...container.querySelectorAll(FOCUSABLE)]
-        .filter(element => element.getClientRects().length > 0);
-
-}
-
-function setBackgroundInert(inert) {
-
-    BACKGROUND_SELECTORS.forEach(selector => {
-
-        const element =
-            document.querySelector(selector);
-
-        if (!element) {
-            return;
-        }
-
-        if (inert) {
-            element.setAttribute("inert", "");
-        } else {
-            element.removeAttribute("inert");
-        }
-
-    });
-
-}
+let activeFocus = null;
 
 
 /* =========================================================
@@ -106,10 +77,9 @@ export function openAmortizationModal(
 
         existingModal.remove();
 
-    } else {
+        activeFocus?.release();
 
-        openerElement =
-            document.activeElement;
+        activeFocus = null;
 
     }
 
@@ -252,27 +222,20 @@ export function openAmortizationModal(
 
 
     /* =====================================================
-       ESCAPE KEY
+       FOCUS INTO THE DIALOG, PAGE BEHIND IT INERT (shared helper)
     ===================================================== */
-
-    document.addEventListener(
-        "keydown",
-        handleKeydown
-    );
-
-
-    /* =====================================================
-       FOCUS INTO THE DIALOG, PAGE BEHIND IT INERT
-    ===================================================== */
-
-    setBackgroundInert(true);
 
     const dialog =
         modal.querySelector(
             ".loan-amortization-dialog"
         ) || modal;
 
-    (getFocusable(dialog)[0] || dialog).focus();
+    activeFocus =
+        activateDialog({
+            dialog,
+            onEscape:
+                closeAmortizationModal
+        });
 
 
     /* =====================================================
@@ -321,97 +284,14 @@ export function closeAmortizationModal() {
         "";
 
 
-    document.removeEventListener(
-        "keydown",
-        handleKeydown
-    );
-
     /*
-     * Make the page usable again, then give focus back to the
-     * control that opened the dialog.
+     * Make the page usable again and give focus back to the
+     * control that opened the dialog (shared helper).
      */
 
-    setBackgroundInert(false);
+    activeFocus?.release();
 
-    if (
-        openerElement &&
-        document.contains(openerElement)
-    ) {
-        openerElement.focus();
-    }
-
-    openerElement = null;
+    activeFocus = null;
 
 }
 
-
-/* =========================================================
-   KEYBOARD: ESCAPE CLOSES, TAB STAYS INSIDE THE DIALOG
-========================================================= */
-
-function handleKeydown(
-    event
-) {
-
-    if (event.key === "Escape") {
-
-        closeAmortizationModal();
-
-        return;
-
-    }
-
-    if (event.key !== "Tab") {
-        return;
-    }
-
-    const modal =
-        document.querySelector(
-            "#amortization-modal"
-        );
-
-    if (!modal) {
-        return;
-    }
-
-    const dialog =
-        modal.querySelector(
-            ".loan-amortization-dialog"
-        ) || modal;
-
-    const items =
-        getFocusable(dialog);
-
-    if (!items.length) {
-
-        event.preventDefault();
-
-        return;
-
-    }
-
-    const first = items[0];
-    const last = items[items.length - 1];
-    const inside = dialog.contains(document.activeElement);
-
-    if (
-        event.shiftKey &&
-        (document.activeElement === first || !inside)
-    ) {
-
-        event.preventDefault();
-
-        last.focus();
-
-    } else if (
-        !event.shiftKey &&
-        (document.activeElement === last || !inside)
-    ) {
-
-        event.preventDefault();
-
-        first.focus();
-
-    }
-
-}
