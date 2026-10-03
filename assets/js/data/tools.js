@@ -1,0 +1,709 @@
+/* =========================================================
+   ToolZen Hub
+   Tool Catalog
+
+   THE authoritative source of tool metadata, for every kind of
+   tool (calculators today; converters, timers and other
+   utilities later). One entry per tool owns:
+
+   - id            the URL slug, unique across the catalog
+   - title, description
+   - status        "published" | "coming-soon" (the one place
+                   this is decided; `available` is derived)
+   - category      a major category id (data/categories.js)
+   - toolType      optional, default "calculator"
+   - capabilities  published tools only (data/tool-capabilities.js)
+   - loader        published tools only: () => import("...")
+                   This is the ONLY place a tool's module is
+                   named, and it stays a literal import() so a
+                   tool's code is fetched only when its page is
+                   opened. Every other place (the registry, the
+                   site build) reads this function; the build
+                   reads the path out of its source text, so keep
+                   it a plain literal.
+   - seo           published tools: the page <title> and meta
+                   description (and an optional themeColor)
+   - icon          the card icon
+   - relatedTools / relatedArticles   optional curated links by
+                   id (data/relationships.js)
+   - subcategory   optional (none today)
+
+   Derived, never written here:
+   - section    from the category (tool -> category -> section)
+   - sitePath   "/{section prefix}/{id}/" (Calculators:
+                /calculators/{id}/)
+   - href       that page as a link for the current base
+   - available  status === "published"
+
+   The catalog is validated when it loads (duplicate or
+   malformed ids, missing title, unknown category or status or
+   tool type, bad capabilities, a published tool without a
+   loader, a Coming Soon tool with one, clashing pages, unknown
+   related tools). A mistake stops the build.
+
+   data/calculators.js is a compatibility view of this catalog
+   for the Calculators section; nothing is stored twice.
+
+   Presentation choices (which tools the home page features,
+   in which order, with which short copy) live with the
+   component that shows them and reference tool ids.
+========================================================= */
+
+import {
+    ROUTES
+} from "../routes.js";
+
+import {
+    categories,
+    getSectionForCategory
+} from "./categories.js";
+
+import {
+    describeTool
+} from "./tool-capabilities.js";
+
+
+/* =========================================================
+   Catalog
+========================================================= */
+
+const catalog = [
+
+    /* =====================================================
+       LOANS
+    ===================================================== */
+
+    {
+        id: "loan-comparison",
+        status: "published",
+        loader: () =>
+            import("../../../loans/loan-comparison/index.js"),
+        category: "loans",
+        icon: "⚖",
+        title: "Loan Comparison Calculator",
+        description:
+            "Compare two loans by EMI, interest rate, total interest and repayment.",
+        capabilities: {
+            compare: true,
+            reset: true,
+            realtime: true,
+            multipleInputs: true,
+            unitSelection: true,
+            table: true,
+            schedule: true,
+            modal: true,
+            download: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Loan Comparison Calculator | ToolZenHub",
+            description:
+                "Compare two loans by EMI, interest rate, total interest and total repayment with ToolZenHub."
+        }
+    },
+
+    {
+        id: "emi",
+        status: "published",
+        loader: () =>
+            import("../calculators/emi/index.js"),
+        category: "loans",
+        icon: "▦",
+        title: "EMI Calculator",
+        description:
+            "Calculate your monthly EMI for any loan amount, interest rate and tenure.",
+        capabilities: {
+            reset: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "EMI Calculator | ToolZen Hub",
+            description:
+                "Calculate your monthly EMI, total interest and total repayment for a loan.",
+            themeColor:
+                "#2563eb"
+        }
+    },
+
+    {
+        id: "home-loan",
+        status: "coming-soon",
+        category: "loans",
+        icon: "⌂",
+        title: "Home Loan Calculator",
+        description:
+            "Calculate home loan EMI, interest and total repayment."
+    },
+
+    {
+        id: "personal-loan",
+        status: "coming-soon",
+        category: "loans",
+        icon: "♙",
+        title: "Personal Loan Calculator",
+        description:
+            "Calculate EMI and total repayment for a personal loan."
+    },
+
+    {
+        id: "loan-eligibility",
+        status: "coming-soon",
+        category: "loans",
+        icon: "▤",
+        title: "Loan Eligibility Calculator",
+        description:
+            "Estimate your eligibility for different types of loans."
+    },
+
+    {
+        id: "balance-transfer",
+        status: "coming-soon",
+        category: "loans",
+        icon: "⟳",
+        title: "Balance Transfer Calculator",
+        description:
+            "Estimate potential savings from transferring your existing loan."
+    },
+
+    {
+        id: "interest",
+        status: "coming-soon",
+        category: "loans",
+        icon: "%",
+        title: "Interest Calculator",
+        description:
+            "Calculate simple and compound interest on your investment or loan."
+    },
+
+    {
+        id: "prepayment",
+        status: "coming-soon",
+        category: "loans",
+        icon: "₹",
+        title: "Prepayment Calculator",
+        description:
+            "Estimate interest savings from making a partial loan prepayment."
+    },
+
+
+    /* =====================================================
+       INVESTMENT
+    ===================================================== */
+
+    {
+        id: "sip",
+        status: "coming-soon",
+        category: "investment",
+        icon: "◈",
+        title: "SIP Calculator",
+        description:
+            "Plan your SIP investments."
+    },
+
+    {
+        id: "ppf",
+        status: "coming-soon",
+        category: "investment",
+        icon: "₹",
+        title: "PPF Calculator",
+        description:
+            "Calculate PPF investment returns."
+    },
+
+    {
+        id: "fd",
+        status: "coming-soon",
+        category: "investment",
+        icon: "▣",
+        title: "FD Calculator",
+        description:
+            "Calculate fixed deposit returns."
+    },
+
+    {
+        id: "cagr",
+        status: "coming-soon",
+        category: "investment",
+        icon: "↗",
+        title: "CAGR Calculator",
+        description:
+            "Calculate compound annual growth rate."
+    },
+
+
+    /* =====================================================
+       TAX
+    ===================================================== */
+
+    {
+        id: "gst",
+        status: "coming-soon",
+        category: "tax",
+        icon: "%",
+        title: "GST Calculator",
+        description:
+            "Calculate GST easily and accurately."
+    },
+
+    {
+        id: "income-tax",
+        status: "coming-soon",
+        category: "tax",
+        icon: "₹",
+        title: "Income Tax Calculator",
+        description:
+            "Estimate your income tax."
+    },
+
+
+    /* =====================================================
+       HEALTH
+    ===================================================== */
+
+    {
+        id: "bmi",
+        status: "coming-soon",
+        category: "health",
+        icon: "⚖",
+        title: "BMI Calculator",
+        description:
+            "Check your body mass index."
+    },
+
+    {
+        id: "calorie",
+        status: "coming-soon",
+        category: "health",
+        icon: "◉",
+        title: "Calorie Calculator",
+        description:
+            "Estimate your daily calorie needs."
+    },
+
+    {
+        id: "bmr",
+        status: "coming-soon",
+        category: "health",
+        icon: "♨",
+        title: "BMR Calculator",
+        description:
+            "Calculate your basal metabolic rate."
+    },
+
+
+    /* =====================================================
+       BUSINESS
+    ===================================================== */
+
+    {
+        id: "profit",
+        status: "coming-soon",
+        category: "business",
+        icon: "₹",
+        title: "Profit Calculator",
+        description:
+            "Calculate business profit."
+    },
+
+    {
+        id: "margin",
+        status: "coming-soon",
+        category: "business",
+        icon: "%",
+        title: "Margin Calculator",
+        description:
+            "Calculate profit margin."
+    },
+
+    {
+        id: "roi",
+        status: "coming-soon",
+        category: "business",
+        icon: "↗",
+        title: "ROI Calculator",
+        description:
+            "Calculate return on investment."
+    },
+
+
+    /* =====================================================
+       MATH
+    ===================================================== */
+
+    {
+        id: "percentage",
+        status: "coming-soon",
+        category: "math",
+        icon: "%",
+        title: "Percentage Calculator",
+        description:
+            "Calculate percentages easily."
+    },
+
+    {
+        id: "ratio",
+        status: "coming-soon",
+        category: "math",
+        icon: "÷",
+        title: "Ratio Calculator",
+        description:
+            "Calculate and simplify ratios."
+    },
+
+    {
+        id: "age",
+        status: "coming-soon",
+        category: "math",
+        icon: "◷",
+        title: "Age Calculator",
+        description:
+            "Calculate age accurately."
+    },
+
+
+    /* =====================================================
+       CONVERTER
+    ===================================================== */
+
+    {
+        id: "unit-converter",
+        status: "coming-soon",
+        category: "converter",
+        icon: "↔",
+        title: "Unit Converter",
+        description:
+            "Convert common units quickly."
+    },
+
+    {
+        id: "currency",
+        status: "coming-soon",
+        category: "converter",
+        icon: "¤",
+        title: "Currency Converter",
+        description:
+            "Convert currencies easily."
+    },
+
+    {
+        id: "date",
+        status: "coming-soon",
+        category: "converter",
+        icon: "▣",
+        title: "Date Calculator",
+        description:
+            "Calculate dates and date differences."
+    }
+
+];
+
+
+/* =========================================================
+   Status
+========================================================= */
+
+const STATUSES = Object.freeze([
+    "published",
+    "coming-soon"
+]);
+
+const ID_PATTERN =
+    /^[a-z0-9]+(-[a-z0-9]+)*$/;
+
+
+/* =========================================================
+   Route
+   A tool's page lives under its section's route prefix
+   (data/categories.js). One resolver for every tool.
+========================================================= */
+
+export function getToolRoute(
+    tool
+) {
+
+    const section =
+        getSectionForCategory(
+            tool?.category
+        );
+
+    return ROUTES.tool(
+        section.pathPrefix,
+        tool.id
+    );
+
+}
+
+
+/* =========================================================
+   Tools
+   Catalog entries + derived fields (see the header), checked
+   as they are built. buildToolCatalog is exported so the
+   checks themselves can be tested with sample entries.
+========================================================= */
+
+function fail(
+    id,
+    message
+) {
+
+    throw new Error(
+        `Tool "${id}": ${message}`
+    );
+
+}
+
+function isText(
+    value
+) {
+
+    return (
+        typeof value === "string" &&
+        value.trim() !== ""
+    );
+
+}
+
+export function buildToolCatalog(
+    entries
+) {
+
+    const ids = new Set();
+
+    const sitePaths = new Map();
+
+    const built = entries.map(
+        entry => {
+
+            const id =
+                entry.id;
+
+            if (
+                typeof id !== "string" ||
+                !ID_PATTERN.test(id)
+            ) {
+
+                throw new Error(
+                    `Tool id ${JSON.stringify(id)} must be a ` +
+                    "lower-case slug (letters, digits, hyphens)"
+                );
+
+            }
+
+            if (ids.has(id)) {
+                fail(id, "duplicate id");
+            }
+
+            ids.add(id);
+
+            if (!isText(entry.title)) {
+                fail(id, "missing title");
+            }
+
+            if (!isText(entry.description)) {
+                fail(id, "missing description");
+            }
+
+            if (!STATUSES.includes(entry.status)) {
+
+                fail(
+                    id,
+                    `status must be ${STATUSES.join(" or ")}, ` +
+                    `not ${JSON.stringify(entry.status)}`
+                );
+
+            }
+
+            if (
+                !categories.some(
+                    category =>
+                        category.id === entry.category
+                )
+            ) {
+
+                fail(
+                    id,
+                    `unknown category ${JSON.stringify(entry.category)}`
+                );
+
+            }
+
+            if ("type" in entry) {
+
+                fail(
+                    id,
+                    "the old `type` field was removed; " +
+                    "use `toolType` (data/tool-capabilities.js)"
+                );
+
+            }
+
+            const published =
+                entry.status === "published";
+
+            if (
+                published &&
+                typeof entry.loader !== "function"
+            ) {
+
+                fail(
+                    id,
+                    "is published but has no loader " +
+                    "(loader: () => import(\"...\"))"
+                );
+
+            }
+
+            if (
+                !published &&
+                entry.loader !== undefined
+            ) {
+
+                fail(
+                    id,
+                    `is "${entry.status}", so it must not have a loader`
+                );
+
+            }
+
+            const section =
+                getSectionForCategory(
+                    entry.category
+                );
+
+            if (!section) {
+
+                fail(
+                    id,
+                    `category "${entry.category}" has no section ` +
+                    "(data/categories.js)"
+                );
+
+            }
+
+            const {
+                toolType,
+                capabilities
+            } = describeTool(entry);
+
+            const sitePath =
+                `/${section.pathPrefix}/${id}/`;
+
+            if (sitePaths.has(sitePath)) {
+
+                fail(
+                    id,
+                    `its page ${sitePath} is already used by ` +
+                    `"${sitePaths.get(sitePath)}"`
+                );
+
+            }
+
+            sitePaths.set(sitePath, id);
+
+            return {
+                ...entry,
+                toolType,
+                capabilities,
+                section: section.title,
+                sitePath,
+                href:
+                    getToolRoute(entry),
+                available: published
+            };
+
+        }
+    );
+
+    for (const tool of built) {
+
+        for (const related of tool.relatedTools ?? []) {
+
+            if (!ids.has(related)) {
+
+                fail(
+                    tool.id,
+                    `relatedTools names unknown tool "${related}"`
+                );
+
+            }
+
+        }
+
+    }
+
+    return built;
+
+}
+
+export const tools =
+    buildToolCatalog(catalog);
+
+
+/* =========================================================
+   Generic helpers (any kind of tool)
+========================================================= */
+
+export function getTools() {
+
+    return tools;
+
+}
+
+export function getPublishedTools() {
+
+    return tools.filter(
+        tool =>
+            tool.available
+    );
+
+}
+
+export function getToolById(
+    id
+) {
+
+    return tools.find(
+        tool =>
+            tool.id === id
+    );
+
+}
+
+export function getToolsByCategory(
+    categoryId
+) {
+
+    return tools.filter(
+        tool =>
+            tool.category === categoryId
+    );
+
+}
+
+
+/*
+ * What the shared tool page and the breadcrumb need to know
+ * about a tool: { section, category, subcategory?, title }.
+ */
+
+export function getToolMetadata(
+    tool
+) {
+
+    return {
+        section: tool.section,
+        category: tool.category,
+        ...(tool.subcategory
+            ? { subcategory: tool.subcategory }
+            : {}),
+        title: tool.title
+    };
+
+}

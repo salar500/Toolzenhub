@@ -5,9 +5,9 @@
    Purpose:
    Runtime view of the implemented (published) calculators.
 
-   Everything here is DERIVED from the calculator catalog
-   (data/calculators.js), which is the single source of truth
-   for calculator identity, category, title and availability.
+   Everything here is DERIVED from the tool catalog
+   (data/tools.js), which is the single source of truth for
+   tool identity, category, title, availability and loader.
    Nothing is declared twice.
 
    - calculatorRegistry:  slug -> () => import(...)  loader
@@ -21,14 +21,14 @@
 ========================================================= */
 
 import {
-    calculators
-} from "./data/calculators.js";
+    getPublishedTools,
+    getToolMetadata
+} from "./data/tools.js";
 
 
 const implemented =
-    calculators.filter(
+    getPublishedTools().filter(
         calculator =>
-            calculator.available &&
             typeof calculator.loader === "function"
     );
 
@@ -57,14 +57,7 @@ export const calculatorMetadata =
         implemented.map(
             calculator => [
                 calculator.id,
-                {
-                    section: calculator.section,
-                    category: calculator.category,
-                    ...(calculator.subcategory
-                        ? { subcategory: calculator.subcategory }
-                        : {}),
-                    title: calculator.title
-                }
+                getToolMetadata(calculator)
             ]
         )
     );

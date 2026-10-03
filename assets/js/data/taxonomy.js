@@ -7,7 +7,7 @@
        Section            data/categories.js   sections
          └─ Major category   data/categories.js   categories
               └─ Subcategory (optional)  data/categories.js   subcategories
-                   └─ Tool           data/calculators.js
+                   └─ Tool           data/tools.js
                         └─ supporting Articles   data/articles.js (article.tools)
 
    Relationships are stable ids:
@@ -45,8 +45,8 @@ import {
 } from "./categories.js";
 
 import {
-    calculators
-} from "./calculators.js";
+    tools
+} from "./tools.js";
 
 import {
     articles
@@ -260,7 +260,7 @@ export function getToolsByCategory(
     categoryId
 ) {
 
-    return calculators.filter(
+    return tools.filter(
         tool =>
             tool.category === categoryId
     );
@@ -272,7 +272,7 @@ export function getToolsBySubcategory(
     subcategoryId
 ) {
 
-    return calculators.filter(
+    return tools.filter(
         tool =>
             tool.subcategory === subcategoryId
     );

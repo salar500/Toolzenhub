@@ -145,7 +145,7 @@ describe("static checkers detect injected faults", () => {
 
   it("links: marking a Coming-soon calculator 'published' without a page is reported", () => {
     const root = makeCopy("soon-leak");
-    edit(root, "assets/js/data/calculators.js", (s) => s.replace(/(id: "sip",\s+)status: "coming-soon"/, '$1status: "published"'));
+    edit(root, "assets/js/data/tools.js", (s) => s.replace(/(id: "sip",\s+)status: "coming-soon"/, '$1status: "published",\n        loader: () => import("../calculators/emi/index.js")'));
     const r = run("check-links.mjs", root);
     assert.equal(r.code, 1);
     assert.match(r.out, /sip/);

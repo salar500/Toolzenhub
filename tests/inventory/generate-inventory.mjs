@@ -5,7 +5,7 @@
  *   - every non-empty HTML file (live pages + the 404 document)
  *   - sitemap.xml membership  -> indexable vs non-indexable
  *   - <meta name="robots"> in the HTML
- *   - assets/js/data/calculators.js       -> calculators that are NOT built ("Coming soon")
+ *   - assets/js/data/tools.js             -> tools that are NOT built ("Coming soon")
  *   - assets/js/article-registry.js       -> articles that are NOT published ("Coming soon")
  *
  * Usage:
@@ -90,17 +90,17 @@ function describePage(file) {
 async function loadComingSoon() {
   // routes.js reads window.location at import time; give it a harmless stand-in.
   globalThis.window = { location: { hostname: "inventory.local", pathname: "/", search: "" } };
-  const calcMod = await import(pathToFileURL(path.join(SRC, "assets/js/data/calculators.js")).href);
+  const calcMod = await import(pathToFileURL(path.join(SRC, "assets/js/data/tools.js")).href);
   const artMod = await import(pathToFileURL(path.join(SRC, "assets/js/article-registry.js")).href);
-  const calculators = calcMod.calculators
+  const calculators = calcMod.tools
     .filter((c) => c.status !== "published")
     .map((c) => ({
-      kind: "calculator",
+      kind: c.toolType,
       id: c.id,
       title: c.title,
       category: c.category,
       wouldBeUrl: c.sitePath,
-      hasHtmlFile: fs.existsSync(path.join(REPO, "calculators", c.id, "index.html")),
+      hasHtmlFile: fs.existsSync(path.join(REPO, c.sitePath.slice(1), "index.html")),
       mustReturn404: true,
     }));
   const articles = artMod.articleRegistry
@@ -114,7 +114,7 @@ async function loadComingSoon() {
       hasHtmlFile: fs.existsSync(path.join(REPO, "articles", a.topic, a.slug, "index.html")),
       mustReturn404: true,
     }));
-  const built = calcMod.calculators.filter((c) => c.status === "published").map((c) => c.id);
+  const built = calcMod.tools.filter((c) => c.status === "published").map((c) => c.id);
   const published = artMod.articleRegistry.filter((a) => a.published === true).map((a) => `${a.topic}/${a.slug}`);
   return { calculators, articles, built, published };
 }

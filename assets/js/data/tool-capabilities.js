@@ -24,7 +24,7 @@
 
    CAPABILITIES
      A flat set of yes/no flags, declared per published tool in
-     data/calculators.js:
+     data/tools.js:
 
          capabilities: {
              reset: true,

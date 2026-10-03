@@ -157,7 +157,7 @@ export const categories = [
        }
 
    and a tool opts in with `subcategory: "home-loans"`
-   (data/calculators.js). Ids must be unique across the site.
+   (data/tools.js). Ids must be unique across the site.
 ========================================================= */
 
 export const subcategories = [];

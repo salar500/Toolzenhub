@@ -48,8 +48,8 @@ import {
 } from "./categories.js";
 
 import {
-    calculators
-} from "./calculators.js";
+    tools
+} from "./tools.js";
 
 import {
     articles
@@ -182,7 +182,7 @@ function subcategoryEntries() {
 
 function toolEntries() {
 
-    return calculators.map(
+    return tools.map(
         tool => ({
             key: `tool:${tool.id}`,
             type: "tool",

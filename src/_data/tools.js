@@ -1,6 +1,6 @@
 /**
- * One entry per PUBLISHED tool, built from the calculator catalog (assets/js/data/calculators.js).
- * Coming-soon tools are not in the catalog's loaders, so no page is generated for them.
+ * One entry per PUBLISHED tool, built from the tool catalog (assets/js/data/tools.js), which owns the tool's
+ * identity, title, SEO text and loader. Coming-soon tools are not published, so no page is generated for them.
  *
  * `html` is the finished tool page content: the tool's own markup plus the shared breadcrumb and the
  * related sections, produced by the same functions the browser used to run (pages/tool-page.js).
@@ -8,8 +8,7 @@
 import path from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
 import fs from "node:fs";
-import { calculators } from "../../assets/js/data/calculators.js";
-import { calculatorMetadata } from "../../assets/js/calculator-registry.js";
+import { getPublishedTools, getToolMetadata } from "../../assets/js/data/tools.js";
 import { buildToolPageHtml } from "../../assets/js/pages/tool-page.js";
 import { toolBreadcrumbItems, breadcrumbTrail } from "../../assets/js/components/breadcrumb.js";
 import { breadcrumbLd } from "../_lib/seo.js";
@@ -31,16 +30,16 @@ function modulePathOf(tool) {
 }
 
 export default async function () {
-  const published = calculators.filter((tool) => tool.status === "published" && typeof tool.loader === "function");
+  const published = getPublishedTools();
   const pages = [];
   for (const tool of published) {
     const module = await import(pathToFileURL(path.join(ROOT, modulePathOf(tool))).href);
-    const metadata = calculatorMetadata[tool.id];
+    const metadata = getToolMetadata(tool);
     const html = buildToolPageHtml(tool.id, module, metadata);
     if (!html) throw new Error(`Tool "${tool.id}" has no markup(): cannot generate its page`);
     const style = toolStyles[tool.id];
     if (!style) throw new Error(`No stylesheet list for tool "${tool.id}" in src/_data/toolStyles.json`);
-    // derived from the tool's section (assets/js/data/calculators.js): /{section prefix}/{id}/
+    // derived from the tool's section (assets/js/data/tools.js): /{section prefix}/{id}/
     const sitePath = tool.sitePath;
     pages.push({
       id: tool.id,

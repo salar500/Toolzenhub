@@ -32,8 +32,8 @@
 ========================================================= */
 
 import {
-    calculators
-} from "./calculators.js";
+    tools
+} from "./tools.js";
 
 import {
     articles,
@@ -46,7 +46,7 @@ import {
 ========================================================= */
 
 const publishedTools = () =>
-    calculators.filter(
+    tools.filter(
         tool =>
             tool.available
     );
@@ -58,7 +58,7 @@ const publishedArticles = () =>
     );
 
 const toolById = id =>
-    calculators.find(
+    tools.find(
         tool =>
             tool.id === id
     );

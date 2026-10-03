@@ -174,13 +174,12 @@ describe("Coming Soon tools stay unbuilt", () => {
 });
 
 describe("backward compatibility: nothing else changed", () => {
-  test("a catalog entry keeps every field it had before E2", () => {
+  test("a catalog entry keeps every field it had before E2, except the unused `type` hint removed in E3", () => {
     const emi = calcs.getCalculatorById("emi");
-    for (const key of ["id", "status", "category", "type", "icon", "title", "description", "seo", "section", "sitePath", "href", "available", "loader"]) {
+    for (const key of ["id", "status", "category", "icon", "title", "description", "seo", "section", "sitePath", "href", "available", "loader"]) {
       assert.ok(key in emi, key);
     }
-    assert.equal(emi.type, "simple"); // the older complexity hint is untouched
-    assert.equal(calcs.getCalculatorById("loan-comparison").type, "advanced");
+    for (const tool of calcs.calculators) assert.ok(!("type" in tool), `${tool.id} still has the old type field`);
   });
 
   test("tool URLs are unchanged", () => {

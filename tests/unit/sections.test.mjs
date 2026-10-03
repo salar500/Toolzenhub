@@ -132,7 +132,7 @@ describe("tool -> category -> section", () => {
     const loans = cats.categories.find((c) => c.id === "loans");
     loans.sectionId = "nope";
     try {
-      const url = pathToFileURL(path.join(PROJECT, "assets", "js", "data", "calculators.js")).href + "?no-section";
+      const url = pathToFileURL(path.join(PROJECT, "assets", "js", "data", "tools.js")).href + "?no-section";
       await assert.rejects(import(url), /has no section/);
     } finally {
       loans.sectionId = "calculators";

@@ -145,9 +145,22 @@ Inside `assets/js/`:
   article pages. `app.js` is the entry of the other pages (home, listings, about, contact, legal).
 - `site-config.js` – site name, **production origin**, preview host.
 - `routes.js` – the base of the page being viewed, and every URL builder.
-- `data/` – the catalogs: `calculators.js`, `articles.js`, `categories.js`, `taxonomy.js`,
+- `data/` – the catalogs: `tools.js`, `articles.js`, `categories.js`, `taxonomy.js`,
   `relationships.js`, `search-index.js`. They are the source of truth for identity, status,
   titles, descriptions and relationships.
+
+  `tools.js` is the **one tool catalog**, for every kind of tool. Each entry owns the tool's id
+  (its URL slug), title, description, status (`published` or `coming-soon`), category, `toolType`,
+  capabilities, SEO title and description, icon, and its `loader`, the one place a tool's module
+  is named (`() => import("...")`, kept as a literal dynamic import so a tool's code loads only
+  when its page opens). Section, `sitePath`, link and `available` are derived. The catalog is
+  checked when it loads (duplicate or malformed ids, missing title, unknown category, status or
+  type, bad capabilities, a published tool with no loader, a Coming Soon tool with one, unknown
+  related tools), so a mistake stops the build. Search, relationships, taxonomy, the loader
+  registry, the site build and the URL inventory all derive from it. `calculators.js` is only a
+  thin compatibility view of the Calculators section's tools (the same objects), and
+  `calculator-registry.js` is a build-time view of the loaders and breadcrumb metadata; neither
+  stores anything.
 
   The content hierarchy is **Section → Category → optional Subcategory → Tool → supporting
   Articles**, all linked by stable ids (`data/categories.js`, resolved in `data/taxonomy.js`).
