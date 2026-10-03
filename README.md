@@ -157,6 +157,20 @@ Inside `assets/js/`:
   so a tool's URL is `/{section pathPrefix}/{id}/`, which for Calculators keeps every existing
   URL (`/calculators/emi/`, `/calculators/loan-comparison/`). Other sections and subcategories
   are supported by the data model but none exist yet, so there are no pages for them.
+
+  **Tool type and capabilities** (`data/tool-capabilities.js`). Every tool has a `toolType`, a
+  stable value from `calculator`, `converter`, `timer`, `timezone`, `developer`, `utility`
+  (default `calculator`; every current tool is one). A published tool may declare
+  `capabilities`, a flat set of true/false flags such as `reset`, `compare`, `table`, `modal`,
+  `download`, `validation`, `realtime`; whatever is not written is `false`. Unknown keys, values
+  other than `true`/`false`, an unknown type, or capabilities on a Coming Soon tool stop the
+  build. **A declared capability is not an implemented one:** metadata creates no functionality,
+  so a flag may be `true` only where the tool's own code does it. Nothing in the site reads the
+  flags yet (search, relationships, the tool page and the generated HTML are unaffected), so
+  today they are checked descriptions, kept honest by `tests/unit/tool-capabilities.test.mjs`.
+  Current profiles: EMI = reset, validation, explanation, multipleInputs, localProcessing; Loan
+  Comparison = compare, reset, realtime, table, schedule, modal, download, unitSelection,
+  multipleInputs, explanation, examples, localProcessing.
 - `components/`, `pages/` – header, footer, breadcrumb, related content, page modules.
 
 ## How it works

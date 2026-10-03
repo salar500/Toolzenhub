@@ -13,6 +13,10 @@
      category). Omit it for a tool that sits directly under
      its major category, which is every tool today.
    - Availability: status "published" | "coming-soon"
+   - Optional `toolType` (default "calculator") and, for
+     PUBLISHED tools only, `capabilities`: flags saying what
+     the tool's code supports (data/tool-capabilities.js).
+     Declaring a capability creates no functionality.
    - `seo` (published tools): the page <title> and meta
      description, kept exactly as the page has always had them
    - Dynamic loaders for implemented calculators
@@ -29,6 +33,10 @@ import {
 import {
     getSectionForCategory
 } from "./categories.js";
+
+import {
+    describeTool
+} from "./tool-capabilities.js";
 
 
 /* =========================================================
@@ -50,6 +58,20 @@ const catalog = [
         title: "Loan Comparison Calculator",
         description:
             "Compare two loans by EMI, interest rate, total interest and repayment.",
+        capabilities: {
+            compare: true,
+            reset: true,
+            realtime: true,
+            multipleInputs: true,
+            unitSelection: true,
+            table: true,
+            schedule: true,
+            modal: true,
+            download: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
         seo: {
             title:
                 "Loan Comparison Calculator | ToolZenHub",
@@ -67,6 +89,13 @@ const catalog = [
         title: "EMI Calculator",
         description:
             "Calculate your monthly EMI for any loan amount, interest rate and tenure.",
+        capabilities: {
+            reset: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
         seo: {
             title:
                 "EMI Calculator | ToolZen Hub",
@@ -402,6 +431,9 @@ const loaders = {
                 from the site root, whatever the deployment base
                 (Calculators: /calculators/{id}/)
    - href       the same page as a link for the current base
+   - toolType   "calculator" unless the entry says otherwise
+   - capabilities  one true/false per capability key
+                (everything not declared is false)
    - available  (status === "published"; read by cards/search)
    - loader     (present only for published tools)
 ========================================================= */
@@ -427,8 +459,15 @@ export const calculators = catalog.map(
 
         }
 
+        const {
+            toolType,
+            capabilities
+        } = describeTool(calculator);
+
         return {
             ...calculator,
+            toolType,
+            capabilities,
             section: section.title,
             sitePath:
                 `/${section.pathPrefix}/${calculator.id}/`,
