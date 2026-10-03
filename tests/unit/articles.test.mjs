@@ -96,11 +96,15 @@ describe("catalog model", () => {
     }
   });
 
-  test("hero images: five articles have /assets/Images/articles/<slug>.png; choose-right-loan-tenure has none yet", () => {
+  test("hero images: seven articles have /assets/Images/articles/<slug>.png; choose-right-loan-tenure has none (no image beats a weak one)", () => {
     for (const a of catalog.articles.filter((x) => x.published)) {
-      if (a.slug === "choose-right-loan-tenure") assert.equal(a.heroImage, null);
+      if (a.slug === "choose-right-loan-tenure") assert.equal(a.heroImage, null, a.slug);
       else assert.equal(a.heroImage.src, `/assets/Images/articles/${a.slug}.png`);
     }
+  });
+
+  test("hero images are explanatory charts with real alt text (not generic illustrations)", () => {
+    for (const a of catalog.articles.filter((x) => x.published && x.heroImage)) assert.ok(a.heroImage.alt.length > 30, a.slug);
   });
 
   test("every category exists; published counts are loans 8 and 0 elsewhere", () => {
@@ -159,7 +163,7 @@ describe("article model (metadata + content -> page object)", () => {
     assert.equal(article.datePublished, "Aug 25, 2026");
     assert.equal(article.dateModified, "Aug 25, 2026");
     assert.equal(article.readTime, "5 min read");
-    assert.deepEqual(article.image, { src: "/assets/Images/articles/emi-vs-total-interest.png", alt: "EMI and total home loan interest comparison" });
+    assert.deepEqual(article.image, { src: "/assets/Images/articles/emi-vs-total-interest.png", alt: "Chart of the EMI falling and the total interest rising as the loan tenure gets longer" });
     assert.deepEqual(Object.keys(article.calculator), ["slug", "title", "description"]);
     assert.equal(article.calculator.slug, "loan-comparison");
     assert.equal(article.calculator.title, "Loan Comparison Calculator");
@@ -168,7 +172,7 @@ describe("article model (metadata + content -> page object)", () => {
       topic: "loan-comparison",
       title: "How to Reduce Your Home Loan Interest",
       category: "Finance",
-      image: { src: "/assets/Images/articles/how-to-reduce-home-loan-interest.png", alt: "Home loan interest calculation and financial planning" },
+      image: { src: "/assets/Images/articles/how-to-reduce-home-loan-interest.png", alt: "Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate" },
     });
   });
 

@@ -27,7 +27,7 @@ header.article-hero
   figure.article-hero-image
     picture
       source [type="image/webp"]
-      img [alt="Home loan prepayment and principal repayment" src="{ROOT}assets/Images/articles/what-is-loan-prepayment.png"]
+      img [alt="Chart of a loan balance falling sooner after a one-time prepayment than without one" src="{ROOT}assets/Images/articles/what-is-loan-prepayment.png"]
 --- match 2 of 2 ---
 article.article
   section.article-toc [aria-labelledby="article-toc-title"]
@@ -215,21 +215,21 @@ article.article
             span.article-related-link "Read article →"
         a.article-related-card [href="{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"]
           div.article-related-image
-            img [alt="Home loan interest calculation and financial planning" loading="lazy" src="{ROOT}assets/Images/articles/how-to-reduce-home-loan-interest.png"]
+            img [alt="Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate" loading="lazy" src="{ROOT}assets/Images/articles/how-to-reduce-home-loan-interest.png"]
           div.article-related-card-content
             span.article-related-category "Finance"
             h3 "How to Reduce Your Home Loan Interest"
             span.article-related-link "Read article →"
         a.article-related-card [href="{ROOT}articles/loan-comparison/emi-vs-total-interest/"]
           div.article-related-image
-            img [alt="EMI and total home loan interest comparison" loading="lazy" src="{ROOT}assets/Images/articles/emi-vs-total-interest.png"]
+            img [alt="Chart of the EMI falling and the total interest rising as the loan tenure gets longer" loading="lazy" src="{ROOT}assets/Images/articles/emi-vs-total-interest.png"]
           div.article-related-card-content
             span.article-related-category "Finance"
             h3 "EMI vs Total Interest: What Should You Compare?"
             span.article-related-link "Read article →"
         a.article-related-card [href="{ROOT}articles/loan-comparison/loan-tenure-total-interest/"]
           div.article-related-image
-            img [alt="Loan tenure and total interest comparison" loading="lazy" src="{ROOT}assets/Images/articles/loan-tenure-total-interest.png"]
+            img [alt="Stacked bars showing how much interest is repaid on the same loan over tenures of 10 to 30 years" loading="lazy" src="{ROOT}assets/Images/articles/loan-tenure-total-interest.png"]
           div.article-related-card-content
             span.article-related-category "Finance"
             h3 "How Loan Tenure Affects Total Interest"

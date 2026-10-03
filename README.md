@@ -194,8 +194,10 @@ Inside `assets/js/`:
 
   **Planning documents** (not published, not built): `docs/content-clusters.md` (how a tool and its
   articles fit together, the editorial standard and the linking rules), `docs/tool-pack-template.md`
-  (the template every new tool follows) and `docs/tool-packs/01-loan-prepayment.md` (the specification
-  of the first planned tool; it is not implemented and its page does not exist).
+  (the template every new tool follows, including the visual quality rules),
+  `docs/tool-packs/01-loan-prepayment.md` (the specification and implementation notes of the first tool,
+  the Loan Prepayment Calculator) and `docs/design-follow-ups.md` (known design-quality items that are
+  deliberately not fixed yet, such as the contrast of the brand green used as text).
 - `components/`, `pages/` – header, footer, breadcrumb, related content, page modules.
 
 ## How it works

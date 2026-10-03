@@ -291,7 +291,7 @@ export function renderAmortizationModal(
 
                     <button
                         type="button"
-                        class="loan-primary-button"
+                        class="calculator-form__button"
                         data-download-amortization-pdf
                     >
 
@@ -304,7 +304,7 @@ export function renderAmortizationModal(
 
                     <button
                         type="button"
-                        class="loan-primary-button"
+                        class="calculator-form__button calculator-form__button--secondary"
                         data-close-amortization
                     >
 

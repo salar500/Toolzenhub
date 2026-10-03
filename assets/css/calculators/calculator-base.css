@@ -296,6 +296,25 @@
 
 }
 
+/* a short green rule under a section title: the one accent that marks "a new part of the tool" */
+
+.calculator-section__title::after {
+
+    content: "";
+
+    display: block;
+
+    width: 36px;
+    height: 3px;
+
+    margin-top: 8px;
+
+    border-radius: 2px;
+
+    background: var(--color-brand-green);
+
+}
+
 
 .calculator-section__description {
 

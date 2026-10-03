@@ -139,6 +139,15 @@
     color: #0f172a;
 }
 
+/* the same size as the other information titles on the page ("How to Use This Calculator") */
+
+.loan-content-card h2 {
+    margin-bottom: 12px;
+
+    font-size: 19px;
+    line-height: 1.3;
+}
+
 .loan-content-card h3 {
     color: #2563eb;
     font-size: 16px;

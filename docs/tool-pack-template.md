@@ -60,6 +60,69 @@ its category (by fallback), and the Coming Soon card turning into a live one. Ha
   scrolling tables in a labelled focusable region; reduced motion respected.
 - Keep the tool's own CSS out of other tools' stylesheets.
 
+### Visual quality rules (inherited, not rediscovered)
+
+These came out of reviewing the first three tools. A new tool gets them by using the shared classes and
+tokens; it does not re-implement them. A pack is not done while any of them is broken.
+
+**Actions and controls**
+
+1. **Enabled controls look enabled.** Buttons are `calculator-form__button` (primary) and
+   `calculator-form__button calculator-form__button--secondary`, defined once in
+   `assets/css/components/buttons.css`. Never a flat grey button for something clickable, never a text-only
+   "button", never a tool-specific button colour or a second button class.
+2. **Disabled controls look unmistakably unavailable.** Flat grey (`--color-control-disabled-*`), not-allowed
+   cursor, no shadow, whatever the button's role. Use `disabled` or `aria-disabled`, not a custom grey.
+3. **Primary and secondary need a clear hierarchy.** Primary is the strongest emphasis (solid action green).
+   Secondary is clearly clickable but quieter (white, green outline, green text). A tool whose results update
+   live may have no primary button; do not invent one. Where a tool has a main calculate or compare action it
+   keeps the primary treatment, and everything else on the page is secondary.
+4. **Text inside a control meets WCAG AA (4.5:1).** The general brand green (`--color-brand-green`, #0b9f58)
+   is 3.43:1 against white and does NOT qualify as a button background or as the text colour of a control.
+   Controls use the action tokens (`--color-action-green` and its hover, active, soft and pressed shades; 5.08,
+   5.94 and 6.62 for white on the three solid states). If a control needs a new colour, add an action-specific
+   token and extend `tests/unit/button-contrast.test.mjs`; do not change the brand colour globally.
+5. **Keyboard focus is obvious.** The shared green focus ring in `base/accessibility.css` (3:1 or better);
+   add any new interactive class to that list instead of removing an outline. Hover and focus look different.
+   State is never conveyed by colour alone (selected options carry a tick, disabled has its cursor and
+   attribute).
+
+**Page structure**
+
+6. **Headings use the shared hierarchy.** Page title with the "FINANCE TOOL" eyebrow and an intro; a section
+   title (`calculator-section__title`, with its green rule) and description; the "Your Result" eyebrow with the
+   result title; sub-section titles (divider, 16px, weight 750). Do not change heading levels to change size,
+   and never leave a heading at the browser default size: every information title on a page is the same size.
+7. **Results have a clear rhythm and hierarchy.** Inputs, the action, the primary result, the comparison or
+   detail, the schedule or export, the explanation, related content: in that order, with the shared section
+   spacing. The headline figure is visually first; detail never competes with it.
+
+**Images**
+
+8. **An image must explain the page's actual concept.** A reader should be able to glance at it and understand
+   what the article or tool is about. "Related to finance, loans or money" is not enough. Examples of a match:
+   loan tenure, shorter against longer repayment; fixed against floating, a steady rate against a changing one;
+   prepayment, a lump sum lowering the balance, tenure or interest; EMI, recurring instalments or the split
+   between principal and interest; loan comparison, two options side by side.
+9. **Preference order:** a purposeful explanatory diagram; a concept-specific illustration; a chart drawn from
+   the tool's own numbers; a genuinely relevant contextual image; no image. No image is better than a
+   misleading or low-quality one, and a template that supports an image is not a reason to add one.
+10. **Avoid:** generic people with money or cards, random laptops and calculators, floating coins or currency,
+    a generic house when housing is not the topic, fake dashboards, pseudo-text and made-up figures, the glossy
+    AI stock-art look, anything decorative that does not explain, and anything that implies a different concept.
+    A diagram with no numbers must say it is illustrative in its alt text; a chart must use real numbers from
+    the tool.
+11. **Alt text says what the image explains**, not what it looks like ("Comparison of shorter and longer loan
+    repayment tenures", not "Loan image"); no keyword stuffing; a purely decorative image gets an empty alt.
+    Charts and diagrams ship as a PNG plus a same-name WebP, with the right aspect ratio and lazy loading where
+    the template already does it.
+
+**Process**
+
+12. **Fix it once, in the right layer.** When a product or UX problem is found on one page, first decide
+    whether it belongs in the shared design system (buttons, focus, headings, spacing, tokens, images) and fix
+    it there for every tool; only tool-specific layout belongs in the tool's own CSS.
+
 ## 4. Metadata and route
 
 - Add the catalog entry: `status: "published"`, a literal `loader: () => import("...")`,
@@ -125,5 +188,6 @@ dependencies). One commit, one message describing the pack. Do not push from the
 ## Pack definition of done
 
 Spec approved - logic verified independently - page accessible and correct on desktop and mobile -
+visual quality rules met (actions, contrast, headings, concept-matching images) -
 catalog, search and relationships consistent - articles meet the editorial standard - tests, builds and
 localhost checklist pass - every difference in output explained - one local commit.

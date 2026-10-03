@@ -252,3 +252,24 @@ Timing convention: a prepayment "after k EMIs" is applied immediately after EMI 
 
 **Imagery.** The two new article images are plain charts built from the engine's own numbers, with no text, people or stock-style art. Older imagery that deserves a visual-quality cleanup later (not changed here): the five hero PNGs `what-is-loan-prepayment`, `emi-vs-total-interest`, `fixed-vs-floating-interest-rates`, `how-to-reduce-home-loan-interest` and `loan-tenure-total-interest`. They read as generated infographics with in-image text and are 1.1 to 1.3 MB each. The generic Unsplash card images on the article listing are also stock-looking.
 
+
+## 9. Design quality pass (DQ1)
+
+Fixed in the shared layer, so EMI, Loan Comparison and Loan Prepayment (and every future tool) agree. The rules are in `docs/tool-pack-template.md` ("Visual quality rules").
+
+- **Buttons.** Secondary buttons were flat light grey (EMI, Loan Prepayment) or grey text with no outline (Loan Comparison's Reset), which read as disabled. There is now one definition in `components/buttons.css`: primary solid action green (#087f47, white text 5.08:1; the brand green #0b9f58 is only 3.43:1 and is not used inside controls), secondary white with an action-green outline and text, disabled flat grey with a not-allowed cursor. Hover and pressed states were measured too (`tests/unit/button-contrast.test.mjs`). Loan Comparison's own blue `loan-primary-button` and `loan-reset-button` (and its schedule dialog buttons) now use the shared classes, so its primary button is the same action green as the other tools.
+- **Headings.** Section titles on EMI and Loan Prepayment get the short green rule; sub-section titles get a divider and a clearer size; Loan Comparison's "Things to Consider" and "FAQs" were sized by the browser default (about 44px, with an emoji) and now match the other information titles (19px).
+- **Focus.** The green focus ring now also covers Loan Comparison's schedule link and the dialog close button.
+- **Images.** Audit of the images the three tools' pages and articles use:
+
+| Image | Class | Decision |
+| --- | --- | --- |
+| `reduce-tenure-or-lower-emi-after-prepayment`, `early-vs-late-loan-prepayment` (hero) | A, chart from the engine | kept |
+| `what-is-loan-prepayment` (hero) | C, generic AI illustration with pseudo-text | replaced by a balance chart (with and without one prepayment) |
+| `emi-vs-total-interest` (hero) | C | replaced by a chart: EMI falls, total interest rises with tenure |
+| `how-to-reduce-home-loan-interest` (hero) | C | replaced by a bar chart: total interest as it is, with a prepayment, a shorter tenure, a lower rate |
+| `loan-tenure-total-interest` (hero) | C and mismatched (it showed a "prepayment effect" scene) | replaced by stacked bars: principal and interest for tenures of 10 to 30 years |
+| `fixed-vs-floating-interest-rates` (hero) | C | replaced by an illustrative diagram, with no numbers: a flat fixed rate against a floating rate that moves in steps (the alt text says it is illustrative) |
+| Unsplash card images on article cards | B, stock photos, loosely related | kept (hotlinked; a later visual-content pass could replace them with local charts) |
+
+The EMI page itself has no imagery. The new charts are PNG plus WebP, about 4 to 29 KB each, replacing images of 1.1 to 1.3 MB.

@@ -300,95 +300,10 @@
 
 
 /* =========================================================
-   PRIMARY BUTTON
+   BUTTONS
+   Defined once for every tool in components/buttons.css
+   (.calculator-form__button and its --secondary variant).
 ========================================================= */
-
-.calculator-form__button {
-
-    min-width: 150px;
-    height: 46px;
-
-    padding: 0 22px;
-
-    border: 0;
-    border-radius: 8px;
-
-    background: var(--color-brand-green);
-
-    color: #ffffff;
-
-    font: inherit;
-
-    font-size: 13px;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        background .2s ease,
-        transform .2s ease,
-        box-shadow .2s ease;
-}
-
-
-.calculator-form__button:hover {
-
-    background: #087f47;
-
-    transform:
-        translateY(-1px);
-
-    box-shadow:
-        0 5px 14px rgba(11, 159, 88, .18);
-
-}
-
-
-.calculator-form__button:active {
-
-    transform:
-        translateY(0);
-
-}
-
-
-/* =========================================================
-   SECONDARY BUTTON
-========================================================= */
-
-.calculator-form__button--secondary {
-
-    background: #f2f4f7;
-
-    color: #344054;
-
-}
-
-
-.calculator-form__button--secondary:hover {
-
-    background: #e4e7ec;
-
-    box-shadow: none;
-
-}
-
-
-/* =========================================================
-   DISABLED
-========================================================= */
-
-.calculator-form__button:disabled {
-
-    opacity: .6;
-
-    cursor: not-allowed;
-
-    transform: none;
-
-    box-shadow: none;
-
-}
 
 
 /* =========================================================

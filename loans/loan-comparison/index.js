@@ -130,7 +130,7 @@ export function markup() {
 
                     <button
                         id="compare-loans"
-                        class="loan-primary-button"
+                        class="calculator-form__button"
                         type="button"
                     >
                         Compare Loans
@@ -139,7 +139,7 @@ export function markup() {
 
                     <button
                         id="reset-loans"
-                        class="loan-reset-button"
+                        class="calculator-form__button calculator-form__button--secondary"
                         type="button"
                     >
                         ↻ Reset

@@ -337,31 +337,18 @@
     gap: 10px;
 }
 
-.loan-amortization-footer .loan-primary-button {
+/* the dialog's buttons are the shared tool buttons (components/buttons.css), a little smaller */
+
+.loan-amortization-footer .calculator-form__button {
     min-width: 90px;
     height: 38px;
 
     padding: 0 16px;
 
-    border: 0;
     border-radius: 7px;
-
-    background: #2563eb;
-    color: #ffffff;
-
-    font: inherit;
-    font-size: 13px;
-    font-weight: 700;
-
-    cursor: pointer;
 }
 
-.loan-amortization-footer .loan-primary-button:hover {
-    background: #1d4ed8;
-}
-
-.loan-amortization-footer .loan-primary-button:disabled {
-    opacity: .65;
+.loan-amortization-footer .calculator-form__button:disabled {
     cursor: wait;
 }
 
@@ -458,7 +445,7 @@
         width: 100%;
     }
 
-    .loan-amortization-footer .loan-primary-button {
+    .loan-amortization-footer .calculator-form__button {
         flex: 1;
     }
 }

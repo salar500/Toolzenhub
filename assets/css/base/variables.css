@@ -35,6 +35,22 @@
     --color-ink: #101828;
     --color-ink-muted: #667085;
 
+    /* Controls (buttons). The brand green above is 3.43:1 against white, too light for
+       the text inside a button (WCAG AA needs 4.5:1), so controls use this darker ACTION
+       green of the same hue. Do not use the brand green as a button background or as the
+       text colour of a control. Contrast with white / on the tints (tests/unit/button-contrast.test.mjs):
+       action 5.08, hover 5.94, active 6.62. */
+    --color-action-green: #087f47;
+    --color-action-green-hover: #07733f;
+    --color-action-green-active: #066b3b;
+    --color-action-green-soft: #ecfdf3;
+    --color-action-green-pressed: #e4f7ec;
+
+    /* The unmistakably "unavailable" look (exempt from contrast rules, as inactive).
+       An enabled control never uses this pair. */
+    --color-control-disabled-bg: #eaecf0;
+    --color-control-disabled-text: #98a2b3;
+
     /* ========================================
        Neutral Colors
     ======================================== */

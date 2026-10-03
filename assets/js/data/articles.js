@@ -117,7 +117,7 @@ const catalog = [
             src:
                 "/assets/Images/articles/how-to-reduce-home-loan-interest.png",
             alt:
-                "Home loan interest calculation and financial planning"
+                "Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate"
         },
         tools: ["loan-comparison"],
         related: [
@@ -153,7 +153,7 @@ const catalog = [
             src:
                 "/assets/Images/articles/emi-vs-total-interest.png",
             alt:
-                "EMI and total home loan interest comparison"
+                "Chart of the EMI falling and the total interest rising as the loan tenure gets longer"
         },
         tools: ["loan-comparison"],
         related: [
@@ -185,11 +185,12 @@ const catalog = [
             alt:
                 "Financial planning and investment"
         },
+        /* an illustrative diagram (no numbers): a flat fixed rate against a floating rate that moves in steps */
         heroImage: {
             src:
                 "/assets/Images/articles/fixed-vs-floating-interest-rates.png",
             alt:
-                "Fixed and floating home loan interest rate comparison"
+                "Illustrative diagram: a fixed interest rate stays flat while a floating rate moves up and down in steps over the life of a loan"
         },
         tools: ["loan-comparison"],
         related: [
@@ -225,7 +226,7 @@ const catalog = [
             src:
                 "/assets/Images/articles/loan-tenure-total-interest.png",
             alt:
-                "Loan tenure and total interest comparison"
+                "Stacked bars showing how much interest is repaid on the same loan over tenures of 10 to 30 years"
         },
         tools: ["loan-comparison"],
         related: [
@@ -261,7 +262,7 @@ const catalog = [
             src:
                 "/assets/Images/articles/what-is-loan-prepayment.png",
             alt:
-                "Home loan prepayment and principal repayment"
+                "Chart of a loan balance falling sooner after a one-time prepayment than without one"
         },
         tools: ["prepayment", "loan-comparison"],
         related: [

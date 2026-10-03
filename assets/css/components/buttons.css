@@ -128,3 +128,129 @@
     opacity: .6;
     cursor: not-allowed;
 }
+
+
+/* =========================================================
+   TOOL BUTTONS
+   The buttons of every tool page (form actions, schedule actions,
+   dialog actions). One definition, loaded by every tool, so a new
+   tool inherits it by using the classes:
+
+     calculator-form__button                       primary
+     calculator-form__button--secondary            secondary
+
+   Hierarchy: primary is solid action green (white text, 5.08:1);
+   secondary is a white button with a green outline and green text
+   (clearly clickable, quieter than primary); disabled is flat grey
+   with a not-allowed cursor, so it can never be mistaken for either.
+   Keyboard focus is the shared green ring in base/accessibility.css.
+   The action greens are darker than the brand green on purpose:
+   text inside a control must meet WCAG AA (4.5:1).
+========================================================= */
+
+.calculator-form__button {
+
+    box-sizing: border-box;
+
+    min-width: 150px;
+    height: 46px;
+
+    padding: 0 22px;
+
+    border: 1.5px solid transparent;
+    border-radius: 8px;
+
+    background: var(--color-action-green);
+
+    color: var(--color-white);
+
+    font: inherit;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+
+}
+
+.calculator-form__button:hover {
+
+    background: var(--color-action-green-hover);
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 5px 14px rgba(11, 159, 88, .18);
+
+}
+
+.calculator-form__button:active {
+
+    background: var(--color-action-green-active);
+
+    transform: translateY(0);
+
+    box-shadow: none;
+
+}
+
+/* secondary: outlined, never grey */
+
+.calculator-form__button--secondary {
+
+    border-color: var(--color-action-green);
+
+    background: var(--color-white);
+
+    color: var(--color-action-green);
+
+}
+
+.calculator-form__button--secondary:hover {
+
+    border-color: var(--color-action-green-hover);
+
+    background: var(--color-action-green-soft);
+
+    color: var(--color-action-green-hover);
+
+    transform: none;
+
+    box-shadow: none;
+
+}
+
+.calculator-form__button--secondary:active {
+
+    border-color: var(--color-action-green-active);
+
+    background: var(--color-action-green-pressed);
+
+    color: var(--color-action-green-active);
+
+}
+
+/* disabled: flat, grey, not clickable-looking, whatever the button's role */
+
+.calculator-form__button:disabled,
+.calculator-form__button[aria-disabled="true"] {
+
+    border-color: var(--color-control-disabled-bg);
+
+    background: var(--color-control-disabled-bg);
+
+    color: var(--color-control-disabled-text);
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+
+}

@@ -256,34 +256,3 @@
     background: #f8fafc;
 }
 
-.loan-primary-button {
-    min-width: 160px;
-    height: 46px;
-    padding: 0 22px;
-
-    border: 0;
-    border-radius: 8px;
-
-    background: #2563eb;
-    color: #ffffff;
-
-    font: inherit;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 5px 15px rgba(37, 99, 235, .22);
-}
-
-.loan-primary-button:hover {
-    background: #1d4ed8;
-}
-
-.loan-reset-button {
-    border: 0;
-    background: transparent;
-    color: #64748b;
-    font: inherit;
-    cursor: pointer;
-}
