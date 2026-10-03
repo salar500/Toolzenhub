@@ -218,3 +218,37 @@ tax effects; investment comparison inside the tool (that belongs in article 4, w
 6. **Presentation:** whether the footer's tool links and the home page's featured tools gain the tool.
 7. **Visual baselines:** accept the new page and the listings that turn a Coming Soon card into a link.
 8. **Articles 4 and 5 timing** and the review they need.
+
+## 7. Implementation notes (as built)
+
+The tool shipped at the existing id and URL (`prepayment`, `/calculators/prepayment/`) as the "Loan Prepayment Calculator". Where the build differs from the specification above, this is what was decided and why.
+
+| Topic | Decision |
+| --- | --- |
+| Prepayment charge input | **Omitted.** It does not change the mechanics (it is a subtraction from the saving), and charges vary by lender and loan type. The page states that interest saved is before any charge. |
+| Recurring extra monthly payment | **Omitted** from v1: it has no closed form, adds a second scenario to every comparison and was not needed for the lump-sum question. Article 3 ("What If You Pay a Little Extra Every Month?") is deferred with it. |
+| Tenure | Years and months fields, normalized to months (1 to 480) in the engine. |
+| "Make the prepayment after" | Default 0 EMIs (right away), because the inputs describe the current balance. |
+| EMI | Computed from balance, rate and remaining tenure; there is no "actual EMI" input. |
+| Prepayment at or above the balance | Allowed; treated as clearing the loan. Lowering the EMI is then not applicable. |
+| Visualization | No chart. A yearly balance table plus three comparison cards. |
+| Articles | Published: articles 1 and 2 of the cluster. Deferred: article 3 (above) and the rule-dependent articles 4 and 5. |
+| Tool page articles | The tool's curated `relatedArticles` list is shown as written (four), not padded. |
+
+Timing convention: a prepayment "after k EMIs" is applied immediately after EMI k (k = 0 means before the next EMI). The engine is `assets/js/calculators/formulas/prepayment.js`; its expected values come from the independent reference `tests/fixtures/prepayment-golden.py` (Python `decimal`, closed form and simulation required to agree) and are asserted in `tests/unit/prepayment-golden.test.mjs`.
+
+## 8. Refinement pass
+
+**Repayment schedule.** The first build showed only the balance at the end of each year, for the three outcomes side by side. That says how fast the balance falls but not what each year costs or where the prepayment lands, so it is replaced by a schedule that answers "what changes in my remaining loan?":
+
+- A native radio group chooses the outcome: without prepayment, prepay and keep the EMI (the default), prepay and lower the EMI. The choice survives recalculation, and Reset returns to the default.
+- The default view is by year (opening balance, EMIs paid, interest, principal, prepayment, closing balance). A "Show month-by-month detail" button opens the monthly rows in a box that scrolls on its own, so the page never gets hundreds of rows by default.
+- `buildSchedule` and `summarizeByYear` in `formulas/prepayment.js` build the rows from the EMIs `calculatePrepayment` already worked out. No existing formula changed. Tests tie the rows to the independent reference (year-end balances, total interest, everything repaid, the prepayment in month k only; a prepayment before the first EMI is a "Start" row in year 1).
+- The comparison cards gained "Time saved" (keep EMI) and "EMI change" (lower EMI). The three-way balance table is gone: the schedule's closing-balance column replaces it.
+
+**Buttons.** The shared calculator buttons had no keyboard focus style of their own. `.calculator-form__button:focus-visible` now uses the site's existing focus ring (2px brand green, 2px offset) in `base/accessibility.css`, which also covers the EMI and Loan Comparison buttons. Reset stays the secondary button (the results update live, so there is no primary action). The monthly toggle reuses the shared secondary button style.
+
+**Export: CSV and print (added after the refinement pass).** The schedule is an estimate for one "what if", so the export is deliberately plain. "Download CSV" saves the schedule that is selected (`prepayment/export.js`, native `Blob`, nothing leaves the browser): columns Period, Opening Balance, Payment, Principal, Interest, Prepayment, Closing Balance; plain two-decimal numbers (no rupee signs); a "Start" row for a prepayment before the first EMI; UTF-8 with a byte order mark and CRLF line ends; file names such as `loan-prepayment-keep-emi-schedule.csv`. "Print Summary" calls `window.print()`; print CSS in `prepayment.css` leaves out the site header and footer, form, guide text, related content and buttons, and prints the entered loan, the result, the comparison and the selected schedule. No PDF engine is built: the browser's "Save as PDF" does that.
+
+**Imagery.** The two new article images are plain charts built from the engine's own numbers, with no text, people or stock-style art. Older imagery that deserves a visual-quality cleanup later (not changed here): the five hero PNGs `what-is-loan-prepayment`, `emi-vs-total-interest`, `fixed-vs-floating-interest-rates`, `how-to-reduce-home-loan-interest` and `loan-tenure-total-interest`. They read as generated infographics with in-image text and are 1.1 to 1.3 MB each. The generic Unsplash card images on the article listing are also stock-looking.
+

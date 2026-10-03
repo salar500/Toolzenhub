@@ -24,6 +24,8 @@
    - seo           published tools: the page <title> and meta
                    description (and an optional themeColor)
    - icon          the card icon
+   - aliases / keywords   optional extra search words (only where
+                   they are accurate)
    - relatedTools / relatedArticles   optional curated links by
                    id (data/relationships.js)
    - subcategory   optional (none today)
@@ -184,12 +186,46 @@ const catalog = [
 
     {
         id: "prepayment",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/prepayment/index.js"),
         category: "loans",
         icon: "₹",
-        title: "Prepayment Calculator",
+        title: "Loan Prepayment Calculator",
         description:
-            "Estimate interest savings from making a partial loan prepayment."
+            "See how much interest and time a one-time loan prepayment can save, and what it does to your EMI.",
+        aliases: [
+            "part payment",
+            "early repayment"
+        ],
+        capabilities: {
+            reset: true,
+            compare: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            table: true,
+            schedule: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Loan Prepayment Calculator | ToolZen Hub",
+            description:
+                "See how much interest and time a loan prepayment can save, and how it changes your EMI. Compare keeping your EMI with lowering it."
+        },
+        relatedTools: [
+            "emi",
+            "loan-comparison"
+        ],
+        relatedArticles: [
+            "loan-comparison/what-is-loan-prepayment",
+            "loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment",
+            "loan-prepayment/early-vs-late-loan-prepayment",
+            "loan-comparison/how-to-reduce-home-loan-interest"
+        ]
     },
 
 

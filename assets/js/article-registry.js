@@ -26,6 +26,7 @@ import {
     articles,
     articleCategories
 } from "./data/articles.js";
+import { ROUTES } from "./routes.js";
 
 
 /*
@@ -67,8 +68,11 @@ export const articleRegistry =
                     article.listingDate,
                 readTime:
                     article.readTime,
+                /* a local card image is resolved against the site root (Unsplash URLs pass through) */
                 image:
-                    article.cardImage.src,
+                    ROUTES.asset(
+                        article.cardImage.src
+                    ),
                 alt:
                     article.cardImage.alt
             };

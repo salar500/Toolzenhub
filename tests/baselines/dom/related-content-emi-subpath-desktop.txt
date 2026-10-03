@@ -9,6 +9,11 @@ section.related-section
       div.related-calculator-content
         strong "Loan Comparison Calculator"
         span "Compare two loans side by side."
+    a.related-calculator-card [href="{ROOT}calculators/prepayment/"]
+      div.related-calculator-icon "₹"
+      div.related-calculator-content
+        strong "Loan Prepayment Calculator"
+        span "See how much interest and time a one-time loan prepayment can save, and what it does to yo…"
 --- match 2 of 2 ---
 section.related-section
   div.related-section__heading

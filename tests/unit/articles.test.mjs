@@ -1,7 +1,8 @@
 /**
  * M5: the article catalog (assets/js/data/articles.js) is the single source of article metadata.
  * Expected values are LITERALS captured from the site as it was before M5 (git 087dbc4), not derived
- * from the code under test.
+ * from the code under test. Tool Pack 1 (the Loan Prepayment Calculator) added two published articles, ids
+ * 13 and 14, under the topic "loan-prepayment"; the six original articles are unchanged.
  */
 import { test, describe, before } from "node:test";
 import assert from "node:assert/strict";
@@ -9,7 +10,7 @@ import assert from "node:assert/strict";
 // routes.js decides the URL prefix from window.location (GitHub Pages project site vs root).
 globalThis.window = { location: { hostname: "salar500.github.io", pathname: "/Toolzenhub/" } };
 
-const PUBLISHED = [
+const ORIGINAL_PUBLISHED = [
   "loan-comparison/how-to-reduce-home-loan-interest",
   "loan-comparison/emi-vs-total-interest",
   "loan-comparison/fixed-vs-floating-interest-rates",
@@ -17,6 +18,11 @@ const PUBLISHED = [
   "loan-comparison/what-is-loan-prepayment",
   "loan-comparison/choose-right-loan-tenure",
 ];
+const PREPAYMENT_PACK_PUBLISHED = [
+  "loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment",
+  "loan-prepayment/early-vs-late-loan-prepayment",
+];
+const PUBLISHED = [...ORIGINAL_PUBLISHED, ...PREPAYMENT_PACK_PUBLISHED];
 const COMING_SOON = [
   "investment/best-sip-strategies-for-beginners",
   "tax/tax-saving-guide-save-more-legally",
@@ -37,16 +43,17 @@ before(async () => {
 });
 
 describe("catalog model", () => {
-  test("12 entries with unique ids 1..12 and unique keys", () => {
-    assert.deepEqual(catalog.articles.map((a) => a.id), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-    assert.equal(new Set(catalog.articles.map((a) => a.key)).size, 12);
+  test("14 entries: the original ids 1..12 plus Tool Pack 1's 13 and 14, with unique ids and keys", () => {
+    assert.deepEqual(catalog.articles.map((a) => a.id), [1, 2, 3, 4, 5, 6, 13, 14, 7, 8, 9, 10, 11, 12]);
+    assert.equal(new Set(catalog.articles.map((a) => a.id)).size, 14);
+    assert.equal(new Set(catalog.articles.map((a) => a.key)).size, 14);
   });
 
   test("every entry has an explicit status of published or coming-soon", () => {
     for (const a of catalog.articles) assert.ok(["published", "coming-soon"].includes(a.status), `${a.key}: ${a.status}`);
   });
 
-  test("exactly the six loan-comparison articles are published; the other six are coming-soon", () => {
+  test("the six original loan articles and the two Loan Prepayment articles are published; the six placeholders are coming-soon", () => {
     assert.deepEqual(catalog.articles.filter((a) => a.status === "published").map((a) => a.key), PUBLISHED);
     assert.deepEqual(catalog.articles.filter((a) => a.status === "coming-soon").map((a) => a.key), COMING_SOON);
   });
@@ -66,12 +73,26 @@ describe("catalog model", () => {
     }
   });
 
-  test("published articles carry the dates, read time and card image they always had", () => {
-    for (const a of catalog.articles.filter((x) => x.published)) {
+  test("the original published articles carry the dates, read time and card image they always had", () => {
+    for (const key of ORIGINAL_PUBLISHED) {
+      const a = catalog.getArticleByKey(key);
       assert.equal(a.publishedAt, "Aug 25, 2026");
       assert.equal(a.updatedAt, "Aug 25, 2026");
       assert.match(a.readTime, /^\d min read$/);
       assert.match(a.cardImage.src, /^https:\/\/images\.unsplash\.com\//);
+    }
+  });
+
+  test("the Loan Prepayment articles: dated, with a LOCAL card image (no external image host)", () => {
+    for (const key of PREPAYMENT_PACK_PUBLISHED) {
+      const a = catalog.getArticleByKey(key);
+      assert.equal(a.topic, "loan-prepayment");
+      assert.equal(a.category, "loans");
+      assert.equal(a.publishedAt, "Oct 3, 2026");
+      assert.equal(a.updatedAt, "Oct 3, 2026");
+      assert.match(a.readTime, /^\d min read$/);
+      assert.equal(a.cardImage.src, `/assets/Images/articles/${a.slug}.png`);
+      assert.ok(a.cardImage.alt.length > 20 && a.heroImage.alt.length > 20);
     }
   });
 
@@ -82,31 +103,35 @@ describe("catalog model", () => {
     }
   });
 
-  test("every category exists; published counts are loans 6 and 0 elsewhere", () => {
+  test("every category exists; published counts are loans 8 and 0 elsewhere", () => {
     const slugs = catalog.articleCategories.map((c) => c.slug);
     for (const a of catalog.articles) assert.ok(slugs.includes(a.category), a.key);
-    assert.deepEqual(Object.fromEntries(catalog.articleCategories.map((c) => [c.slug, c.count])), { loans: 6, investment: 0, tax: 0, business: 0, health: 0, math: 0, converter: 0 });
+    assert.deepEqual(Object.fromEntries(catalog.articleCategories.map((c) => [c.slug, c.count])), { loans: 8, investment: 0, tax: 0, business: 0, health: 0, math: 0, converter: 0 });
   });
 });
 
 describe("relationships", () => {
-  test("related articles are curated, ordered, published, never the article itself, and 5 per article", () => {
+  test("related articles are curated, ordered, published and never the article itself: 5 per original article, 3 per Loan Prepayment article", () => {
     for (const a of catalog.articles.filter((x) => x.published)) {
-      assert.equal(a.related.length, 5, a.key);
-      assert.equal(new Set(a.related).size, 5, a.key);
+      const expected = PREPAYMENT_PACK_PUBLISHED.includes(a.key) ? 3 : 5;
+      assert.equal(a.related.length, expected, a.key);
+      assert.equal(new Set(a.related).size, expected, a.key);
       for (const key of a.related) {
         assert.notEqual(key, a.key);
         assert.equal(catalog.getArticleByKey(key)?.published, true, `${a.key} -> ${key}`);
       }
     }
+    // the guide now points at the two new articles first, in place of two that overlap it less
+    assert.deepEqual(catalog.getArticleByKey("loan-comparison/what-is-loan-prepayment").related.map((k) => k.split("/")[1]), ["reduce-tenure-or-lower-emi-after-prepayment", "early-vs-late-loan-prepayment", "how-to-reduce-home-loan-interest", "emi-vs-total-interest", "loan-tenure-total-interest"]);
     // order is curated data, not recomputed: spot-check two articles
     assert.deepEqual(catalog.getArticleByKey("loan-comparison/emi-vs-total-interest").related.map((k) => k.split("/")[1]), ["how-to-reduce-home-loan-interest", "fixed-vs-floating-interest-rates", "loan-tenure-total-interest", "what-is-loan-prepayment", "choose-right-loan-tenure"]);
     assert.deepEqual(catalog.getArticleByKey("loan-comparison/choose-right-loan-tenure").related.map((k) => k.split("/")[1]), ["how-to-reduce-home-loan-interest", "emi-vs-total-interest", "fixed-vs-floating-interest-rates", "loan-tenure-total-interest", "what-is-loan-prepayment"]);
   });
 
-  test("related tools point at published calculators", () => {
+  test("related tools point at published calculators; the first one is the article's primary tool", () => {
+    const expected = (key) => key === "loan-comparison/what-is-loan-prepayment" ? ["prepayment", "loan-comparison"] : PREPAYMENT_PACK_PUBLISHED.includes(key) ? ["prepayment"] : ["loan-comparison"];
     for (const a of catalog.articles.filter((x) => x.published)) {
-      assert.deepEqual(a.tools, ["loan-comparison"]);
+      assert.deepEqual(a.tools, expected(a.key), a.key);
       for (const id of a.tools) assert.equal(calcs.getCalculatorById(id)?.status, "published");
     }
   });
@@ -170,21 +195,21 @@ describe("article model (metadata + content -> page object)", () => {
 });
 
 describe("derived views keep their old shape", () => {
-  test("legacy listing registry: 12 entries, first entry literal, `published` only on published articles", () => {
-    assert.equal(legacy.articleRegistry.length, 12);
+  test("legacy listing registry: 14 entries, first entry literal, `published` only on published articles", () => {
+    assert.equal(legacy.articleRegistry.length, 14);
     assert.deepEqual(legacy.articleRegistry[0], {
       id: 1, published: true, category: "loans", categoryName: "Loans", topic: "loan-comparison", slug: "how-to-reduce-home-loan-interest",
       title: "How to Reduce Your Home Loan Interest",
       description: "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
       date: "Aug 25, 2026", readTime: "6 min read", image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80", alt: "House model on desk",
     });
-    assert.deepEqual(legacy.articleRegistry[6], {
+    assert.deepEqual(legacy.articleRegistry[8], {
       id: 7, category: "investment", categoryName: "Investment", topic: "investment", slug: "best-sip-strategies-for-beginners",
       title: "Best SIP Strategies for Beginners",
       description: "Learn practical SIP investment strategies to build wealth consistently and work towards your financial goals.",
       date: "Aug 25, 2026", readTime: "5 min read", image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80", alt: "Coins with plant growing",
     });
-    assert.equal(legacy.articleRegistry.filter((a) => a.published === true).length, 6);
-    assert.equal(legacy.articleRegistry.filter((a) => "published" in a).length, 6);
+    assert.equal(legacy.articleRegistry.filter((a) => a.published === true).length, 8);
+    assert.equal(legacy.articleRegistry.filter((a) => "published" in a).length, 8);
   });
 });

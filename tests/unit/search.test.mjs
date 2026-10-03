@@ -30,11 +30,12 @@ const catTitle = (id) => cats.categories.find((c) => c.id === id).title;
 const OLD_TOOLS = (q) => {          // categories + calculators pages
   const s = String(q || "").trim().toLowerCase();
   if (!s) return [];
-  return calcs.calculators.filter((c) => [c.title, c.description, catTitle(c.category)].join(" ").toLowerCase().includes(s)).map((c) => c.id);
+  // aliases are searchable too (Tool Pack 1 added the first ones), so they count as text the old pages would show
+  return calcs.calculators.filter((c) => [c.title, c.description, catTitle(c.category), ...(c.aliases ?? [])].join(" ").toLowerCase().includes(s)).map((c) => c.id);
 };
 const OLD_LOANS = (q) => {          // Loans page
   const s = String(q || "").trim().toLowerCase();
-  return calcs.calculators.filter((c) => c.category === "loans").filter((c) => [c.title, c.description, c.category, c.id].join(" ").toLowerCase().includes(s)).map((c) => c.id);
+  return calcs.calculators.filter((c) => c.category === "loans").filter((c) => [c.title, c.description, c.category, c.id, ...(c.aliases ?? [])].join(" ").toLowerCase().includes(s)).map((c) => c.id);
 };
 const OLD_ARTICLES = (q, category = "All") => {   // articles listing
   const s = String(q || "").trim().toLowerCase();
@@ -58,7 +59,7 @@ const buildCorpus = () => {
 describe("index structure", () => {
   test("covers categories, tools and articles (no subcategories are defined yet)", () => {
     const count = (type) => idx.searchIndex.filter((e) => e.type === type).length;
-    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 26, 12]);
+    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 26, 14]);
     assert.equal(new Set(idx.searchIndex.map((e) => e.key)).size, idx.searchIndex.length);
   });
 
@@ -92,8 +93,11 @@ describe("index structure", () => {
     for (const e of idx.searchIndex.filter((x) => x.status !== "published")) assert.equal(e.route, null, e.key);
   });
 
-  test("no invented aliases or keywords, and no article bodies in the index", () => {
-    for (const e of idx.searchIndex) { assert.deepEqual(e.aliases, [], e.key); assert.deepEqual(e.keywords, [], e.key); }
+  test("no invented aliases or keywords (only the Loan Prepayment Calculator's two), and no article bodies in the index", () => {
+    for (const e of idx.searchIndex) {
+      assert.deepEqual(e.aliases, e.key === "tool:prepayment" ? ["part payment", "early repayment"] : [], e.key);
+      assert.deepEqual(e.keywords, [], e.key);
+    }
     const bytes = JSON.stringify(idx.searchIndex).length;
     assert.ok(bytes < 20000, `index is ${bytes} bytes`);
   });
@@ -161,23 +165,23 @@ describe("real data: policy and ranking", () => {
 
   test("emi: the EMI tool first (title prefix), then the others that mention EMI", () => {
     const r = engine.search("emi", TOOL_OPTS);
-    assert.deepEqual(ids(r), ["emi", "loan-comparison", "home-loan", "personal-loan"]);
-    assert.deepEqual(r.map((x) => x.score), [80, 20, 20, 20]);
+    assert.deepEqual(ids(r), ["emi", "loan-comparison", "prepayment", "home-loan", "personal-loan"]);
+    assert.deepEqual(r.map((x) => x.score), [80, 20, 20, 20, 20]);
   });
 
   test("loan: titles beginning with it, then titles containing it, then category matches", () => {
-    assert.deepEqual(ids(engine.search("loan", TOOL_OPTS)), ["loan-comparison", "loan-eligibility", "home-loan", "personal-loan", "emi", "balance-transfer", "interest", "prepayment"]);
+    assert.deepEqual(ids(engine.search("loan", TOOL_OPTS)), ["loan-comparison", "prepayment", "loan-eligibility", "home-loan", "personal-loan", "emi", "balance-transfer", "interest"]);
   });
 
   test("loan comparison / interest / home", () => {
     assert.deepEqual(ids(engine.search("loan comparison", TOOL_OPTS)), ["loan-comparison"]);
-    assert.deepEqual(ids(engine.search("interest", TOOL_OPTS)), ["interest", "loan-comparison", "emi", "home-loan", "prepayment"]);
+    assert.deepEqual(ids(engine.search("interest", TOOL_OPTS)), ["interest", "loan-comparison", "emi", "prepayment", "home-loan"]);
     assert.deepEqual(ids(engine.search("home", TOOL_OPTS)), ["home-loan"]);
   });
 
   test("article titles and partial matches (published articles only by default)", () => {
-    assert.deepEqual(ids(engine.search("tenure", { types: ["article"] })), [4, 6]);
-    assert.deepEqual(ids(engine.search("prepay", { types: ["article"] })), [5]);
+    assert.deepEqual(ids(engine.search("tenure", { types: ["article"] })), [4, 6, 13]);
+    assert.deepEqual(ids(engine.search("prepay", { types: ["article"] })), [5, 13, 14]);
     assert.deepEqual(ids(engine.search("what is loan prepayment", { types: ["article"] })), [5]);
     assert.deepEqual(ids(engine.search("fixed vs floating", { types: ["article"] })), [3]);
   });
@@ -189,7 +193,10 @@ describe("real data: policy and ranking", () => {
 
   test("a mixed global search returns each type, published only", () => {
     const r = engine.search("emi");
-    assert.deepEqual(r.map((x) => x.key), ["tool:emi", "article:2", "category:loans", "tool:loan-comparison"]);
+    assert.deepEqual(r.map((x) => x.key), ["tool:emi", "article:2", "article:13", "category:loans", "tool:loan-comparison", "tool:prepayment"]);
+    // the new tool is found by its aliases and only as a published tool
+    assert.deepEqual(engine.search("part payment").map((x) => x.key), ["tool:prepayment"]);
+    assert.deepEqual(engine.search("early repayment").map((x) => x.key), ["tool:prepayment"]);
   });
 });
 

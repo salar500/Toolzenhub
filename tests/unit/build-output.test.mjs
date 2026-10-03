@@ -38,10 +38,10 @@ for (const build of BUILDS) {
       files = list(build.dir);
     });
 
-    it("has exactly the 18 live pages and the 404 document as HTML, once each", () => {
+    it("has exactly the live pages of the URL inventory and the 404 document as HTML, once each", () => {
       const html = files.filter((f) => f.endsWith(".html")).sort();
       const want = [...inventory.live.map((p) => p.file), inventory.notFound.file].sort();
-      assert.equal(html.length, 19);
+      assert.equal(html.length, inventory.summary.livePages + 1);
       assert.deepEqual(html, want);
       assert.equal(new Set(html).size, html.length);
     });

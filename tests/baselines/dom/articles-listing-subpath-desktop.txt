@@ -119,7 +119,7 @@ div#articles-page
             a.article-category-item [data-sidebar-category="loans" href="{ROOT}articles.html"]
               span.article-category-name "Loans"
                 span.article-category-icon "🏠"
-              span.article-category-count "6"
+              span.article-category-count "8"
                 span [aria-hidden="true"] "→"
             a.article-category-item [data-sidebar-category="investment" href="{ROOT}articles.html"]
               span.article-category-name "Investment"

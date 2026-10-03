@@ -145,9 +145,9 @@ article.article
           svg [aria-hidden="true"]
       div.article-calculator-content
         span.article-calculator-label "ToolZen Hub Calculator"
-        h2#article-calculator-title "Compare Your Loan Options"
-        p "Compare EMI, interest rate, total interest and total repayment to understand the overall c…"
-      a.article-calculator-button [href="{ROOT}calculators/loan-comparison/"] "Compare Loans"
+        h2#article-calculator-title "Try the Loan Prepayment Calculator"
+        p "Enter your loan balance, interest rate, remaining tenure and a prepayment amount to see ho…"
+      a.article-calculator-button [href="{ROOT}calculators/prepayment/"] "Open the Calculator"
         span [aria-hidden="true"] "→"
     section.article-faq [aria-labelledby="article-faq-title"]
       div.article-section-heading
@@ -199,6 +199,20 @@ article.article
         h2#article-related-title "Related Articles"
         p "Explore more practical guides from ToolZen Hub."
       div.article-related-grid
+        a.article-related-card [href="{ROOT}articles/loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment/"]
+          div.article-related-image
+            img [alt="Chart of the loan balance over time without a prepayment, with a prepayment and the EMI kept, and with a prepayment and a lower EMI" loading="lazy" src="{ROOT}assets/Images/articles/reduce-tenure-or-lower-emi-after-prepayment.png"]
+          div.article-related-card-content
+            span.article-related-category "Finance"
+            h3 "Reduce Tenure or Lower the EMI After Prepaying: Which Saves More?"
+            span.article-related-link "Read article →"
+        a.article-related-card [href="{ROOT}articles/loan-prepayment/early-vs-late-loan-prepayment/"]
+          div.article-related-image
+            img [alt="Bar chart showing the interest saved by the same prepayment falling as it is made later in the loan" loading="lazy" src="{ROOT}assets/Images/articles/early-vs-late-loan-prepayment.png"]
+          div.article-related-card-content
+            span.article-related-category "Finance"
+            h3 "Why When You Prepay Matters: Early vs Late Prepayment"
+            span.article-related-link "Read article →"
         a.article-related-card [href="{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"]
           div.article-related-image
             img [alt="Home loan interest calculation and financial planning" loading="lazy" src="{ROOT}assets/Images/articles/how-to-reduce-home-loan-interest.png"]
@@ -213,22 +227,10 @@ article.article
             span.article-related-category "Finance"
             h3 "EMI vs Total Interest: What Should You Compare?"
             span.article-related-link "Read article →"
-        a.article-related-card [href="{ROOT}articles/loan-comparison/fixed-vs-floating-interest-rates/"]
-          div.article-related-image
-            img [alt="Fixed and floating home loan interest rate comparison" loading="lazy" src="{ROOT}assets/Images/articles/fixed-vs-floating-interest-rates.png"]
-          div.article-related-card-content
-            span.article-related-category "Finance"
-            h3 "Fixed vs Floating Interest Rates"
-            span.article-related-link "Read article →"
         a.article-related-card [href="{ROOT}articles/loan-comparison/loan-tenure-total-interest/"]
           div.article-related-image
             img [alt="Loan tenure and total interest comparison" loading="lazy" src="{ROOT}assets/Images/articles/loan-tenure-total-interest.png"]
           div.article-related-card-content
             span.article-related-category "Finance"
             h3 "How Loan Tenure Affects Total Interest"
-            span.article-related-link "Read article →"
-        a.article-related-card [href="{ROOT}articles/loan-comparison/choose-right-loan-tenure/"]
-          div.article-related-card-content
-            span.article-related-category "Finance"
-            h3 "How to Choose the Right Loan Tenure"
             span.article-related-link "Read article →"

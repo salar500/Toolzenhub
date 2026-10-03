@@ -20,11 +20,11 @@ test.describe("generated pages carry their content without JavaScript @portable"
     test(`article ${a.slug}: whole body, takeaways, FAQ, related, breadcrumb, header, footer`, async ({ page, go }) => {
       await go(rel(a.url));
       await expect(page.locator(".article-hero h1")).toHaveText(a.expectedTitle.replace(/ \| ToolZen Hub$/, ""));
-      expect(await page.locator("article.article .article-section").count(), "content sections").toBeGreaterThanOrEqual(5);
+      expect(await page.locator("article.article .article-section").count(), "content sections").toBeGreaterThanOrEqual(4);
       expect(await page.locator(".article-key-takeaways li").count()).toBeGreaterThanOrEqual(3);
       expect(await page.locator(".article-faq details").count()).toBeGreaterThanOrEqual(3);
-      expect(await page.locator(".article-toc a").count()).toBeGreaterThanOrEqual(5);
-      await expect(page.locator(".article-related-card")).toHaveCount(5);
+      expect(await page.locator(".article-toc a").count()).toBeGreaterThanOrEqual(4);
+      await expect(page.locator(".article-related-card")).toHaveCount(a.url.includes("/loan-prepayment/") ? 3 : 5);
       await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
       await expect(page.locator(".article-calculator-button")).toHaveCount(1);
       await expect(page.locator(".site-header .navbar__link").first()).toBeAttached();
@@ -43,7 +43,7 @@ test.describe("generated pages carry their content without JavaScript @portable"
     await expect(page.locator(".calculator-info")).toHaveCount(3);
     await expect(page.locator(".calculator-info details")).toHaveCount(3);
     await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
-    await expect(page.locator(".related-calculator-card")).toHaveCount(1);
+    await expect(page.locator(".related-calculator-card")).toHaveCount(2);
     expect(await page.locator(".related-article-card").count()).toBeGreaterThanOrEqual(3);
     await expect(page.locator(".site-header")).toBeAttached();
   });
@@ -66,7 +66,7 @@ test.describe("generated pages carry their content without JavaScript @portable"
     await expect(page.locator("#compare-loans")).toBeAttached();
     await expect(page.locator(".loan-info-grid details").first()).toBeAttached();
     await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
-    await expect(page.locator(".related-calculator-card")).toHaveCount(1);
+    await expect(page.locator(".related-calculator-card")).toHaveCount(2);
     expect(await page.locator(".related-article-card").count()).toBeGreaterThanOrEqual(3);
   });
 });

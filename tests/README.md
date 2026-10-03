@@ -22,7 +22,7 @@ Individual pieces:
 
 | Command | What it runs |
 | --- | --- |
-| `npm run test:unit` | Loan-formula golden tests + mutation self-tests of the static checkers (Node's built-in runner) |
+| `npm run test:unit` | Loan-formula and prepayment golden tests + mutation self-tests of the static checkers (Node's built-in runner) |
 | `npm run test:static` | `inventory:check` + `test:links` + `test:assets` + `test:seo` (no browser, ~10 s) |
 | `npm run test:links` | Static link/route checker, on both builds (base-aware; sitemap/robots on the production origin) |
 | `npm run test:assets` | Static asset checker (exact-case), on both builds; the build output contains only deployable files |
@@ -48,6 +48,7 @@ Run one file: `npx playwright test --project=subpath-desktop tests/browser/emi.s
 - **Shared tool UX** (`tests/unit/shared-ui.test.mjs`, plus the "shared field and result primitives" tests in `accessibility.spec.js`): what `assets/js/ui/` emits (label/hint/error wiring, escaping), that it imports nothing from calculators or Loans and touches no DOM at import, that EMI and the Loan Comparison modal use it, and that it can describe a converter, a date tool, a developer utility, a timer and a loan-style calculator (synthetic markup only).
 - **Tool catalog** (`tests/unit/tool-catalog.test.mjs`): `data/tools.js` is the only owner of tool metadata and the calculator view/registry/search/site build/URL inventory derive from it; the catalog's validation (duplicate or malformed ids, missing title, unknown category/status/type, bad capabilities, loader rules, the removed `type` field, unknown related tools); loaders stay lazy and are named only in the catalog; the two real tools are unchanged.
 - **Tool capabilities** (`tests/unit/tool-capabilities.test.mjs`): allowed tool types, capability keys and defaults, loud failure on unknown keys / non-boolean values / unknown types / capabilities on a Coming Soon tool, the exact EMI and Loan Comparison profiles (and that features they lack are not claimed), and that URLs, search entries and the tool module contract are unchanged.
+- **Prepayment** (`tests/unit/prepayment-golden.test.mjs`): golden values from the independent Python reference `tests/fixtures/prepayment-golden.py` (re-run it with `python tests/fixtures/prepayment-golden.py` to regenerate), invariants over a grid, closed-form agreement, monotonicity, validation.
 - **Formulas** (`tests/unit/loan-formulas.test.mjs`): golden EMI values (independently computed), zero-interest, validation contract, total repayment/interest, amortization invariants.
 - **Flows**: EMI (`emi.spec.js`), Loan Comparison incl. the amortization modal (`loan-comparison.spec.js`), articles + listing (`articles.spec.js`), contact form (`contact.spec.js`), navigation/search/Coming-soon cards (`navigation.spec.js`).
 - **Accessibility** (`accessibility.spec.js`): Loan Comparison modal focus (in, Tab trap, Escape, restore, inert page behind), accessible names of form controls, visible keyboard focus, reduced motion, landmarks, WebP `<picture>` with PNG fallback. **Design tokens** (`tests/unit/design-tokens.test.mjs`).

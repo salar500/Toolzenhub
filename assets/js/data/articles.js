@@ -263,13 +263,13 @@ const catalog = [
             alt:
                 "Home loan prepayment and principal repayment"
         },
-        tools: ["loan-comparison"],
+        tools: ["prepayment", "loan-comparison"],
         related: [
+            "loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment",
+            "loan-prepayment/early-vs-late-loan-prepayment",
             "loan-comparison/how-to-reduce-home-loan-interest",
             "loan-comparison/emi-vs-total-interest",
-            "loan-comparison/fixed-vs-floating-interest-rates",
-            "loan-comparison/loan-tenure-total-interest",
-            "loan-comparison/choose-right-loan-tenure"
+            "loan-comparison/loan-tenure-total-interest"
         ],
         relatedLabel: "Finance"
     },
@@ -308,6 +308,80 @@ const catalog = [
             "loan-comparison/fixed-vs-floating-interest-rates",
             "loan-comparison/loan-tenure-total-interest",
             "loan-comparison/what-is-loan-prepayment"
+        ],
+        relatedLabel: "Finance"
+    },
+
+    /* =====================================================
+       LOAN PREPAYMENT  (published)
+       The cluster of the Loan Prepayment Calculator
+       (docs/tool-packs/01-loan-prepayment.md).
+    ===================================================== */
+
+    {
+        id: 13,
+        status: "published",
+        category: "loans",
+        topic: "loan-prepayment",
+        slug: "reduce-tenure-or-lower-emi-after-prepayment",
+        title:
+            "Reduce Tenure or Lower the EMI After Prepaying: Which Saves More?",
+        description:
+            "Compare keeping your EMI and finishing sooner with lowering your EMI after a loan prepayment, using worked figures and the reason they differ.",
+        publishedAt: "Oct 3, 2026",
+        updatedAt: "Oct 3, 2026",
+        readTime: "5 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/reduce-tenure-or-lower-emi-after-prepayment.png",
+            alt:
+                "Chart of the loan balance over time without a prepayment, with a prepayment and the EMI kept, and with a prepayment and a lower EMI"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/reduce-tenure-or-lower-emi-after-prepayment.png",
+            alt:
+                "Chart of the loan balance over time without a prepayment, with a prepayment and the EMI kept, and with a prepayment and a lower EMI"
+        },
+        tools: ["prepayment"],
+        related: [
+            "loan-comparison/what-is-loan-prepayment",
+            "loan-prepayment/early-vs-late-loan-prepayment",
+            "loan-comparison/loan-tenure-total-interest"
+        ],
+        relatedLabel: "Finance"
+    },
+
+    {
+        id: 14,
+        status: "published",
+        category: "loans",
+        topic: "loan-prepayment",
+        slug: "early-vs-late-loan-prepayment",
+        title:
+            "Why When You Prepay Matters: Early vs Late Prepayment",
+        description:
+            "See how the same loan prepayment saves very different amounts of interest depending on when it is made, with worked figures.",
+        publishedAt: "Oct 3, 2026",
+        updatedAt: "Oct 3, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/early-vs-late-loan-prepayment.png",
+            alt:
+                "Bar chart showing the interest saved by the same prepayment falling as it is made later in the loan"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/early-vs-late-loan-prepayment.png",
+            alt:
+                "Bar chart showing the interest saved by the same prepayment falling as it is made later in the loan"
+        },
+        tools: ["prepayment"],
+        related: [
+            "loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment",
+            "loan-comparison/what-is-loan-prepayment",
+            "loan-comparison/loan-tenure-total-interest"
         ],
         relatedLabel: "Finance"
     },
@@ -486,6 +560,18 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/loan-comparison/choose-right-loan-tenure.js"
+            ),
+
+    "loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment":
+        () =>
+            import(
+                "./articles/loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment.js"
+            ),
+
+    "loan-prepayment/early-vs-late-loan-prepayment":
+        () =>
+            import(
+                "./articles/loan-prepayment/early-vs-late-loan-prepayment.js"
             )
 
 };

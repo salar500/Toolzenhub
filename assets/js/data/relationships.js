@@ -187,7 +187,9 @@ export function getRelatedTools(
    TOOL -> RELATED ARTICLES
 
    Curated keys first, then articles that point at the tool,
-   then the rest of its category.
+   then the rest of its category. A tool that names its
+   articles (relatedArticles) shows exactly those, in that
+   order: the list is not padded.
 ========================================================= */
 
 export function getRelatedArticlesForTool(
@@ -224,10 +226,23 @@ export function getRelatedArticlesForTool(
         )
     ];
 
+    /*
+     * A curated list is shown as written and is NOT padded (as
+     * for an article's related list); a tool without one gets
+     * the automatic fill.
+     */
+
+    const hasCuratedList =
+        Array.isArray(tool.relatedArticles) &&
+        tool.relatedArticles.length > 0;
+
     return resolve(
         curated,
         automatic,
-        options
+        {
+            ...options,
+            fill: options.fill ?? !hasCuratedList
+        }
     );
 
 }

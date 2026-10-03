@@ -134,9 +134,11 @@ test.describe("EMI calculator", () => {
     await go("calculators/emi/");
     const calcs = page.locator(".related-calculator-card");
     await expect(page.getByRole("heading", { name: "Related Calculators" })).toBeVisible();
-    await expect(calcs).toHaveCount(1);
+    // Loan Comparison first, then the Loan Prepayment Calculator (Tool Pack 1)
+    await expect(calcs).toHaveCount(2);
     await expect(calcs.first()).toHaveAttribute("href", `${siteRoot}calculators/loan-comparison/`);
     await expect(calcs.first()).toContainText("Loan Comparison Calculator");
+    await expect(calcs.nth(1)).toHaveAttribute("href", `${siteRoot}calculators/prepayment/`);
 
     await expect(page.getByRole("heading", { name: "Related Articles" })).toBeVisible();
     const articles = page.locator(".related-article-card");

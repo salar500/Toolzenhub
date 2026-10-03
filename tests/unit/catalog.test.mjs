@@ -22,7 +22,7 @@ before(async () => {
   related = { categories: cats.categories };
 });
 
-const PUBLISHED = ["loan-comparison", "emi"];
+const PUBLISHED = ["loan-comparison", "emi", "prepayment"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment"];
 
 describe("catalog model", () => {
@@ -40,10 +40,10 @@ describe("catalog model", () => {
     for (const c of catalog.calculators) assert.ok(["published", "coming-soon"].includes(c.status), `${c.id}: ${c.status}`);
   });
 
-  test("exactly EMI and Loan Comparison are published; all other 24 are coming-soon", () => {
+  test("exactly EMI, Loan Comparison and the Loan Prepayment Calculator are published; all other 23 are coming-soon", () => {
     const pub = catalog.calculators.filter((c) => c.status === "published").map((c) => c.id).sort();
     assert.deepEqual(pub, [...PUBLISHED].sort());
-    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 24);
+    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 23);
   });
 
   test("`available` (read by cards and search) is exactly status === published", () => {
@@ -83,6 +83,11 @@ describe("catalog model", () => {
     const lc = catalog.getCalculatorById("loan-comparison");
     assert.equal(lc.title, "Loan Comparison Calculator");
     assert.equal(lc.category, "loans");
+    // the existing Coming Soon entry was promoted: same id and URL, new display title
+    const pp = catalog.getCalculatorById("prepayment");
+    assert.equal(pp.title, "Loan Prepayment Calculator");
+    assert.equal(pp.category, "loans");
+    assert.equal(pp.href, `${ROOT}calculators/prepayment/`);
   });
 });
 
@@ -103,6 +108,7 @@ describe("registry is derived from the catalog", () => {
     assert.deepEqual(registry.calculatorMetadata, {
       "loan-comparison": { section: "Calculators", category: "loans", title: "Loan Comparison Calculator" },
       emi: { section: "Calculators", category: "loans", title: "EMI Calculator" },
+      prepayment: { section: "Calculators", category: "loans", title: "Loan Prepayment Calculator" },
     });
   });
 });
@@ -119,7 +125,8 @@ describe("search labels come from the category list", () => {
     assert.equal(sip.category, "Investment");
     assert.equal(sip.url, null);
     assert.equal(all.filter((c) => c.url).length, catalog.calculators.filter((c) => c.available).length);
-    // same eight matches as before M7; M7 ranks them (title matches first), see search.test.mjs
-    assert.deepEqual(search.searchCalculators("loan").map((c) => c.id), ["loan-comparison", "loan-eligibility", "home-loan", "personal-loan", "emi", "balance-transfer", "interest", "prepayment"]);
+    // the same eight matches as before M7; M7 ranks them (title matches first, published before Coming Soon).
+    // "Loan Prepayment Calculator" now begins with "loan", so it ranks with the title-prefix matches.
+    assert.deepEqual(search.searchCalculators("loan").map((c) => c.id), ["loan-comparison", "prepayment", "loan-eligibility", "home-loan", "personal-loan", "emi", "balance-transfer", "interest"]);
   });
 });

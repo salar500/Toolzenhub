@@ -1,7 +1,7 @@
 /**
  * M0.12 — Visual baselines (full-page screenshots).
  *
- * Pages: Home, Categories, Loans, Calculators, EMI, Loan Comparison, Articles, one published article,
+ * Pages: Home, Categories, Loans, Calculators, EMI, Loan Comparison, Loan Prepayment, Articles, one published article,
  * Contact, 404.  Viewports: desktop (1280×800) and mobile (390×844) for all; tablet (820×1180) for the
  * four most important pages.
  *
@@ -21,6 +21,7 @@ const PAGES = [
   ["calculators", "calculators.html", "#calculators-grid .calculator-card", false],
   ["emi", "calculators/emi/", ".related-article-card", true],
   ["loan-comparison", "calculators/loan-comparison/", ".related-article-card", true],
+  ["prepayment", "calculators/prepayment/", ".related-article-card", true],
   ["articles", "articles.html", "#articles-list .article-card", false],
   ["article", "articles/loan-comparison/what-is-loan-prepayment/", ".article-related-card", true],
   ["contact", "contact.html", "form.contact-form", false],

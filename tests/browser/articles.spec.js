@@ -10,6 +10,9 @@ import { test, expect, expectClean, settleImages, livePages, rel, expectNoHorizo
 const articles = livePages.filter((p) => p.type === "article");
 const titleOf = (p) => p.expectedTitle.replace(/ \| ToolZen Hub$/, "");
 const NO_IMAGE = new Set(["choose-right-loan-tenure"]); // baseline: featured image is null
+// Tool Pack 1: these articles lead to the Loan Prepayment Calculator (the others still lead to Loan Comparison)
+const PREPAYMENT_TOOL = new Set(["what-is-loan-prepayment", "reduce-tenure-or-lower-emi-after-prepayment", "early-vs-late-loan-prepayment"]);
+const PREPAYMENT_PACK = new Set(["reduce-tenure-or-lower-emi-after-prepayment", "early-vs-late-loan-prepayment"]);
 
 test.describe("published article pages", () => {
   for (const a of articles) {
@@ -22,7 +25,7 @@ test.describe("published article pages", () => {
       await expect(page).toHaveTitle(a.expectedTitle);
       await expect(page.locator(".article-hero h1")).toHaveText(title);
       await expect(page.locator("article.article")).toBeVisible();
-      expect(await page.locator("article.article .article-section").count(), "content sections").toBeGreaterThanOrEqual(5);
+      expect(await page.locator("article.article .article-section").count(), "content sections").toBeGreaterThanOrEqual(4);
       expect(await page.locator(".article-key-takeaways li").count(), "key takeaways").toBeGreaterThanOrEqual(3);
 
       // breadcrumb: Home › Articles › Loans › <title>
@@ -34,7 +37,7 @@ test.describe("published article pages", () => {
 
       // table of contents: every entry points at a real heading on the page
       const toc = await page.locator(".article-toc a").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
-      expect(toc.length).toBeGreaterThanOrEqual(5);
+      expect(toc.length).toBeGreaterThanOrEqual(4);
       for (const h of toc) expect(await page.locator(h).count(), `TOC target ${h}`).toBeGreaterThan(0);
 
       // featured image (baseline: one article has none)
@@ -52,11 +55,11 @@ test.describe("published article pages", () => {
 
       // calculator link area
       const cta = page.locator(".article-calculator-button");
-      await expect(cta).toHaveAttribute("href", `${siteRoot}calculators/loan-comparison/`);
+      await expect(cta).toHaveAttribute("href", `${siteRoot}calculators/${PREPAYMENT_TOOL.has(a.slug) ? "prepayment" : "loan-comparison"}/`);
 
-      // related articles: the other five, all resolvable, none is the page itself
+      // related articles: the curated list (five; three for the two Loan Prepayment articles), all resolvable, none is the page itself
       const related = await page.locator(".article-related-card").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
-      expect(related).toHaveLength(5);
+      expect(related).toHaveLength(PREPAYMENT_PACK.has(a.slug) ? 3 : 5);
       for (const h of related) {
         expect(h).not.toBe(`${siteRoot}articles/${a.topic}/${a.slug}/`);
         expect((await api.get(h)).status(), h).toBe(200);
@@ -88,35 +91,35 @@ test.describe("articles listing page", () => {
     await expect(page.locator("h1")).toHaveText("Articles & Guides");
     await expect(cards(page)).toHaveCount(5);
     await expect(page.locator(".articles-pagination button[data-page]:not([data-page=next])")).toHaveCount(3);
-    // sidebar counts are published-only: Loans 6, everything else 0
+    // sidebar counts are published-only: Loans 8, everything else 0
     const counts = await page.locator(".article-category-count").evaluateAll((l) => l.map((x) => x.textContent.replace(/\D+/g, "")));
-    expect(counts).toEqual(["6", "0", "0", "0", "0"]);
+    expect(counts).toEqual(["8", "0", "0", "0", "0"]);
     // page 1 is the first five published articles, all clickable
     await expect(page.locator("#articles-list .article-card a[href]").first()).toBeVisible();
     await expect(soonCards(page)).toHaveCount(0);
     expectClean(watch);
   });
 
-  test("pagination: page 2 mixes one published article with Coming soon; page 3 is all Coming soon", async ({ page, go }) => {
+  test("pagination: page 2 mixes three published articles with Coming soon; page 3 is all Coming soon", async ({ page, go }) => {
     await go("articles.html");
     await page.locator('.articles-pagination button[data-page="2"]').click();
     await expect(page.locator('.articles-pagination button[data-page="2"]')).toHaveClass(/active/);
     await expect(cards(page)).toHaveCount(5);
-    await expect(soonCards(page)).toHaveCount(4);
-    await page.locator('.articles-pagination button[data-page="3"]').click();
-    await expect(cards(page)).toHaveCount(2);
     await expect(soonCards(page)).toHaveCount(2);
+    await page.locator('.articles-pagination button[data-page="3"]').click();
+    await expect(cards(page)).toHaveCount(4);
+    await expect(soonCards(page)).toHaveCount(4);
     await expect(page.locator(".articles-pagination .pagination-next")).toBeDisabled();
   });
 
-  test("filter by category: Loans shows only the 6 published articles", async ({ page, go }) => {
+  test("filter by category: Loans shows only the 8 published articles", async ({ page, go }) => {
     await go("articles.html");
     await page.locator('.article-filter[data-category="loans"]').click();
     await expect(page.locator('.article-filter[data-category="loans"]')).toHaveClass(/active/);
     await expect(cards(page)).toHaveCount(5);
     await expect(soonCards(page)).toHaveCount(0);
     await page.locator('.articles-pagination button[data-page="2"]').click();
-    await expect(cards(page)).toHaveCount(1);
+    await expect(cards(page)).toHaveCount(3);
     await expect(soonCards(page)).toHaveCount(0);
   });
 
@@ -180,9 +183,16 @@ const CATALOG = {
   "emi-vs-total-interest": { title: "EMI vs Total Interest: What Should You Compare?", description: "Understand why EMI alone does not tell the complete story when comparing loan options and borrowing costs.", readTime: "5 min read", hero: "/assets/Images/articles/emi-vs-total-interest.png", alt: "EMI and total home loan interest comparison", related: ["how-to-reduce-home-loan-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","what-is-loan-prepayment","choose-right-loan-tenure"] },
   "fixed-vs-floating-interest-rates": { title: "Fixed vs Floating Interest Rates", description: "Understand the difference between fixed and floating interest rates before choosing a loan.", readTime: "6 min read", hero: "/assets/Images/articles/fixed-vs-floating-interest-rates.png", alt: "Fixed and floating home loan interest rate comparison", related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","loan-tenure-total-interest","what-is-loan-prepayment","choose-right-loan-tenure"] },
   "loan-tenure-total-interest": { title: "How Loan Tenure Affects Total Interest", description: "See why choosing a longer or shorter loan tenure can significantly affect your total interest cost.", readTime: "6 min read", hero: "/assets/Images/articles/loan-tenure-total-interest.png", alt: "Loan tenure and total interest comparison", related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","fixed-vs-floating-interest-rates","what-is-loan-prepayment","choose-right-loan-tenure"] },
-  "what-is-loan-prepayment": { title: "What Is Loan Prepayment?", description: "Understand how loan prepayment works and how paying down your principal can potentially reduce interest.", readTime: "4 min read", hero: "/assets/Images/articles/what-is-loan-prepayment.png", alt: "Home loan prepayment and principal repayment", related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","choose-right-loan-tenure"] },
+  "what-is-loan-prepayment": { title: "What Is Loan Prepayment?", description: "Understand how loan prepayment works and how paying down your principal can potentially reduce interest.", readTime: "4 min read", hero: "/assets/Images/articles/what-is-loan-prepayment.png", alt: "Home loan prepayment and principal repayment", related: ["loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment","loan-prepayment/early-vs-late-loan-prepayment","how-to-reduce-home-loan-interest","emi-vs-total-interest","loan-tenure-total-interest"] },
   "choose-right-loan-tenure": { title: "How to Choose the Right Loan Tenure", description: "Learn how to balance monthly affordability with total borrowing cost when choosing a loan tenure.", readTime: "5 min read", hero: null, alt: null, related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","what-is-loan-prepayment"] },
 };
+
+// Tool Pack 1: the two new articles that the guide now points at (a "topic/slug" entry in a related list)
+const PACK_TITLES = {
+  "loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment": "Reduce Tenure or Lower the EMI After Prepaying: Which Saves More?",
+  "loan-prepayment/early-vs-late-loan-prepayment": "Why When You Prepay Matters: Early vs Late Prepayment",
+};
+const relatedPath = (s) => (s.includes("/") ? s : `loan-comparison/${s}`);
 
 test.describe("M5 article metadata comes from the catalog and is unchanged", () => {
   for (const [slug, want] of Object.entries(CATALOG)) {
@@ -212,9 +222,9 @@ test.describe("M5 article metadata comes from the catalog and is unchanged", () 
 
       // curated related articles: exactly these, in this order, each with its own title
       const hrefs = await page.locator(".article-related-card").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
-      expect(hrefs).toEqual(want.related.map((s) => `${siteRoot}articles/loan-comparison/${s}/`));
+      expect(hrefs).toEqual(want.related.map((s) => `${siteRoot}articles/${relatedPath(s)}/`));
       const titles = await page.locator(".article-related-card h3").evaluateAll((l) => l.map((x) => x.textContent.trim()));
-      expect(titles).toEqual(want.related.map((s) => CATALOG[s].title));
+      expect(titles).toEqual(want.related.map((s) => PACK_TITLES[s] ?? CATALOG[s].title));
       await expect(page.locator(".article-related-category").first()).toHaveText("Finance");
     });
   }

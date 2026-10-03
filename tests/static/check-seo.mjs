@@ -22,6 +22,15 @@ const inventory = JSON.parse(fs.readFileSync(process.env.TZ_INVENTORY || path.jo
 const { SITE } = await import(pathToFileURL(path.join(REPO, "assets/js/site-config.js")).href);
 const ORIGIN = SITE.origin;
 
+// The tools a page may belong to come from the tool catalog, the source the build itself uses, so a new
+// tool needs no change here. (routes.js reads window when it is imported; give it a harmless stand-in.)
+globalThis.window = { location: { hostname: "seo-check.local", pathname: "/", search: "" } };
+const { getPublishedTools } = await import(pathToFileURL(path.join(REPO, "assets/js/data/tools.js")).href);
+const publishedTools = getPublishedTools();
+const toolBySlug = new Map(publishedTools.map((tool) => [tool.id, tool]));
+// the tool module's path from the site root, read from the catalog loader's literal import()
+const moduleOf = (tool) => path.posix.normalize(path.posix.join("assets/js/data", String(tool.loader).match(/import\(\s*["']([^"']+)["']\s*\)/)[1]));
+
 const failures = [];
 const fail = (page, msg) => failures.push(`${page}: ${msg}`);
 const decode = (s) => s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#039;|&#39;/g, "'").replace(/&#x27;/g, "'");
@@ -132,7 +141,8 @@ for (const p of pages) {
     const article = byType("Article")[0];
     const body = (html.match(/<article class="article">([\s\S]*?)<\/article>/) || [])[1] ?? "";
     const text = squash(body.replace(/<[^>]+>/g, " "));
-    if (count(body, /class="article-section"/g) < 5 || text.length < 1500) fail(p.url, `article body is not in the HTML (${count(body, /class="article-section"/g)} sections, ${text.length} characters)`);
+    // A real article body, not an empty shell. How many sections an article has is an editorial choice.
+    if (count(body, /class="article-section"/g) < 3 || text.length < 1500) fail(p.url, `article body is not in the HTML (${count(body, /class="article-section"/g)} sections, ${text.length} characters)`);
     if (count(html, /class="article-key-takeaways"/g) < 1) fail(p.url, "article body: key takeaways missing from the HTML");
     if (squash((html.match(/<h1 class="article-title">([\s\S]*?)<\/h1>/) || [])[1] ?? "") !== p.expectedTitle.replace(/ \| ToolZen Hub$/, "")) fail(p.url, "the article <h1> is missing or differs from the title");
     if (article) {
@@ -152,15 +162,21 @@ for (const p of pages) {
   if (p.type === "calculator") {
     if (JSON.stringify(scripts) !== JSON.stringify([base("assets/js/entries/tool.js")])) fail(p.url, `scripts [${scripts}] should be only the tool entry`);
     if (count(html, /class="calculator-breadcrumb"/g) !== 1) fail(p.url, `needs exactly one breadcrumb (found ${count(html, /class="calculator-breadcrumb"/g)})`);
-    const own = { emi: "calculators/emi/index.js", "loan-comparison": "loans/loan-comparison/index.js" }[p.slug];
+    const tool = toolBySlug.get(p.slug);
     const declared = (html.match(/data-tool-module="([^"]+)"/) || [])[1];
-    if (declared !== base("assets/js/" + own).replace("assets/js/loans/", "loans/")) fail(p.url, `data-tool-module "${declared}" is not this tool's module`);
-    const finished = p.slug === "emi" ? 'id="emi-form"' : 'id="compare-loans"';
-    if (!html.includes(finished)) fail(p.url, `the tool markup (${finished}) is not in the HTML`);
-    if (!/class="related-section"/.test(html)) fail(p.url, "related sections are not in the HTML");
-    for (const other of Object.values({ emi: "calculators/emi/index.js", lc: "loans/loan-comparison/index.js" })) {
-      if (declared && !declared.endsWith(other) && html.includes(other)) fail(p.url, `the page references another tool's module ${other}`);
+    if (!tool) {
+      fail(p.url, `no published tool "${p.slug}" in the tool catalog`);
+    } else {
+      if (declared !== base(moduleOf(tool))) fail(p.url, `data-tool-module "${declared}" is not this tool's module`);
+      // the finished tool markup is in the HTML itself: every id the tool's own markup() declares is present
+      const ids = [...(await tool.loader()).markup().matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
+      const missing = ids.filter((id) => !html.includes(`id="${id}"`));
+      if (!ids.length || missing.length) fail(p.url, `the tool markup is not in the HTML (${ids.length ? `missing ids: ${missing.join(", ")}` : "markup() declares no ids"})`);
+      for (const other of publishedTools) {
+        if (other.id !== tool.id && html.includes(moduleOf(other))) fail(p.url, `the page references another tool's module ${moduleOf(other)}`);
+      }
     }
+    if (!/class="related-section"/.test(html)) fail(p.url, "related sections are not in the HTML");
   } else if (p.type === "article") {
     if (JSON.stringify(scripts) !== JSON.stringify([base("assets/js/entries/article.js")])) fail(p.url, `scripts [${scripts}] should be only the article entry`);
     if (count(html, /class="calculator-breadcrumb"/g) !== 1) fail(p.url, "needs exactly one breadcrumb");

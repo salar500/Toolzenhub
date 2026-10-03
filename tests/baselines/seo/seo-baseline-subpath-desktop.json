@@ -593,7 +593,157 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6900
+      "visibleTextChars": 6975
+    }
+  },
+  "/articles/loan-prepayment/early-vs-late-loan-prepayment/": {
+    "runtime": {
+      "title": "Why When You Prepay Matters: Early vs Late Prepayment | ToolZen Hub",
+      "description": "See how the same loan prepayment saves very different amounts of interest depending on when it is made, with worked figures.",
+      "canonical": "https://toolzenhub.in/articles/loan-prepayment/early-vs-late-loan-prepayment/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "See how the same loan prepayment saves very different amounts of interest depending on when it is made, with worked figures.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/early-vs-late-loan-prepayment.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Why When You Prepay Matters: Early vs Late Prepayment | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/loan-prepayment/early-vs-late-loan-prepayment/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "See how the same loan prepayment saves very different amounts of interest depending on when it is made, with worked figures.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/early-vs-late-loan-prepayment.png",
+        "twitter:title": "Why When You Prepay Matters: Early vs Late Prepayment | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Why When You Prepay Matters: Early vs Late Prepayment"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Why When You Prepay Matters: Early vs Late Prepayment | ToolZen Hub",
+      "description": "See how the same loan prepayment saves very different amounts of interest depending on when it is made, with worked figures.",
+      "canonical": "https://toolzenhub.in/articles/loan-prepayment/early-vs-late-loan-prepayment/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6464
+    }
+  },
+  "/articles/loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment/": {
+    "runtime": {
+      "title": "Reduce Tenure or Lower the EMI After Prepaying: Which Saves More? | ToolZen Hub",
+      "description": "Compare keeping your EMI and finishing sooner with lowering your EMI after a loan prepayment, using worked figures and the reason they differ.",
+      "canonical": "https://toolzenhub.in/articles/loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Compare keeping your EMI and finishing sooner with lowering your EMI after a loan prepayment, using worked figures and the reason they differ.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/reduce-tenure-or-lower-emi-after-prepayment.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Reduce Tenure or Lower the EMI After Prepaying: Which Saves More? | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Compare keeping your EMI and finishing sooner with lowering your EMI after a loan prepayment, using worked figures and the reason they differ.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/reduce-tenure-or-lower-emi-after-prepayment.png",
+        "twitter:title": "Reduce Tenure or Lower the EMI After Prepaying: Which Saves More? | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Reduce Tenure or Lower the EMI After Prepaying: Which Saves More?"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Reduce Tenure or Lower the EMI After Prepaying: Which Saves More? | ToolZen Hub",
+      "description": "Compare keeping your EMI and finishing sooner with lowering your EMI after a loan prepayment, using worked figures and the reason they differ.",
+      "canonical": "https://toolzenhub.in/articles/loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 7929
     }
   },
   "/calculators.html": {
@@ -682,7 +832,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2829
+      "visibleTextChars": 2956
     }
   },
   "/calculators/loan-comparison/": {
@@ -731,7 +881,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4021
+      "visibleTextChars": 4148
+    }
+  },
+  "/calculators/prepayment/": {
+    "runtime": {
+      "title": "Loan Prepayment Calculator | ToolZen Hub",
+      "description": "See how much interest and time a loan prepayment can save, and how it changes your EMI. Compare keeping your EMI with lowering it.",
+      "canonical": "https://toolzenhub.in/calculators/prepayment/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "See how much interest and time a loan prepayment can save, and how it changes your EMI. Compare keeping your EMI with lowering it.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Loan Prepayment Calculator | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/prepayment/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "See how much interest and time a loan prepayment can save, and how it changes your EMI. Compare keeping your EMI with lowering it.",
+        "twitter:title": "Loan Prepayment Calculator | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Loan Prepayment Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Loan Prepayment Calculator | ToolZen Hub",
+      "description": "See how much interest and time a loan prepayment can save, and how it changes your EMI. Compare keeping your EMI with lowering it.",
+      "canonical": "https://toolzenhub.in/calculators/prepayment/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5680
     }
   },
   "/categories.html": {

@@ -481,6 +481,24 @@ function renderCalculator(
         );
 
 
+    /*
+     * The wording was written for the Loan Comparison Calculator and is
+     * kept exactly for it. Any other calculator is named by its title.
+     */
+    const isComparison =
+        calculator.slug === "loan-comparison";
+
+    const heading =
+        isComparison
+            ? "Compare Your Loan Options"
+            : `Try the ${calculator.title || "Calculator"}`;
+
+    const buttonLabel =
+        isComparison
+            ? "Compare Loans"
+            : "Open the Calculator";
+
+
     return `
 
         <section
@@ -507,7 +525,7 @@ function renderCalculator(
                 </span>
 
                 <h2 id="article-calculator-title">
-                    Compare Your Loan Options
+                    ${escapeHTML(heading)}
                 </h2>
 
                 <p>
@@ -523,7 +541,7 @@ function renderCalculator(
                 class="article-calculator-button"
                 href="${escapeHTML(href)}"
             >
-                Compare Loans
+                ${escapeHTML(buttonLabel)}
 
                 <span aria-hidden="true">
                     →

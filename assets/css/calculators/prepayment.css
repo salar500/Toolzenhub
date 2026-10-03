@@ -1,0 +1,568 @@
+/* =========================================================
+   ToolZen Hub
+   Loan Prepayment Calculator
+
+   Only what the shared calculator styles do not already
+   provide: the paired tenure fields, the side-by-side
+   comparison cards and a few details of the results.
+   Loaded after calculator-responsive.css.
+========================================================= */
+
+
+/* =========================================================
+   TENURE (years + months)
+========================================================= */
+
+.prepay-tenure {
+
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+
+}
+
+.prepay-tenure legend {
+
+    padding: 0;
+
+}
+
+.prepay-pair {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+}
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.prepay-subtitle {
+
+    margin: 24px 0 12px;
+
+    color: var(--color-ink);
+
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.4;
+
+}
+
+#prepay-results .calculator-results__summary p {
+
+    margin: 0 0 8px;
+
+}
+
+#prepay-results .calculator-results__summary p:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+/* =========================================================
+   COMPARISON CARDS
+   Three columns where there is room, stacked on a phone.
+========================================================= */
+
+.prepay-compare {
+
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+
+}
+
+.prepay-compare__card {
+
+    padding: 16px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+
+    background: var(--color-white);
+
+}
+
+.prepay-compare__title {
+
+    margin: 0 0 2px;
+
+    color: var(--color-ink);
+
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.35;
+
+}
+
+.prepay-compare__tag {
+
+    margin: 0 0 10px;
+
+    color: var(--color-ink-muted);
+
+    font-size: 11px;
+    line-height: 1.4;
+
+}
+
+.prepay-compare__list {
+
+    margin: 0;
+
+}
+
+.prepay-compare__list > div {
+
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 8px 0;
+
+    border-top: 1px solid #eaecf0;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+}
+
+.prepay-compare__list dt {
+
+    color: #475467;
+
+}
+
+.prepay-compare__list dd {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-weight: 700;
+    text-align: right;
+
+}
+
+
+/* =========================================================
+   REPAYMENT SCHEDULE
+   A scenario picker (native radios), a yearly table and, on
+   request, a monthly table that scrolls inside its own box.
+========================================================= */
+
+.prepay-table th:not(:first-child),
+.prepay-table td {
+
+    text-align: right;
+
+}
+
+.prepay-table tbody th {
+
+    background: var(--color-white);
+
+    color: var(--color-ink);
+
+}
+
+/* the first column stays in view when a narrow screen scrolls the table sideways */
+
+.prepay-table th:first-child {
+
+    position: sticky;
+    left: 0;
+
+    text-align: left;
+
+    box-shadow: 1px 0 0 #eaecf0;
+
+}
+
+.prepay-table thead th:first-child {
+
+    background: #f9fafb;
+
+}
+
+.prepay-table tfoot td {
+
+    font-weight: 700;
+
+}
+
+.prepay-monthly__wrapper {
+
+    max-height: 26rem;
+
+    overflow-y: auto;
+
+}
+
+.prepay-monthly__wrapper thead th {
+
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    background: #f9fafb;
+
+}
+
+.prepay-monthly__wrapper thead th:first-child {
+
+    z-index: 2;
+
+}
+
+#prepay-monthly:not(:empty) {
+
+    margin-top: 12px;
+
+}
+
+.prepay-toggle {
+
+    min-width: 0;
+    height: 40px;
+
+    margin-top: 12px;
+
+    padding: 0 16px;
+
+}
+
+.prepay-note--lead {
+
+    margin: 0 0 10px;
+
+    color: #475467;
+
+    font-size: 12px;
+
+}
+
+.prepay-scenarios {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    min-width: 0;
+
+    margin: 0 0 12px;
+    padding: 0;
+
+    border: 0;
+
+}
+
+.prepay-scenarios__option {
+
+    position: relative;
+
+    display: inline-flex;
+
+    cursor: pointer;
+
+}
+
+/* the radio itself is hidden; its label is the control and keeps the focus ring */
+
+.prepay-scenarios__option input {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: 0;
+
+    opacity: 0;
+
+}
+
+.prepay-scenarios__option span {
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 8px 14px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 999px;
+
+    background: var(--color-white);
+
+    color: #344054;
+
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.3;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease;
+
+}
+
+.prepay-scenarios__option:hover span {
+
+    background: #f2f4f7;
+
+}
+
+/* selected: a tick and a heavier border, not colour alone */
+
+.prepay-scenarios__option input:checked + span {
+
+    border-color: var(--color-brand-green);
+
+    background: #ecfdf3;
+
+    color: var(--color-ink);
+
+    font-weight: 750;
+
+}
+
+.prepay-scenarios__option input:checked + span::before {
+
+    content: "\2713";
+
+    color: var(--color-brand-green);
+
+    font-weight: 800;
+
+}
+
+.prepay-scenarios__option input:focus-visible + span {
+
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+.prepay-note {
+
+    margin: 10px 0 0;
+
+    color: var(--color-ink-muted);
+
+    font-size: 11px;
+    line-height: 1.5;
+
+}
+
+#prepay-results .calculator-results__table-wrapper:focus-visible {
+
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+
+/* =========================================================
+   SCHEDULE ACTIONS
+   Monthly detail, CSV and print. All secondary buttons, so they
+   never compete with the figures; they wrap on a narrow screen.
+========================================================= */
+
+.prepay-actions {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-top: 12px;
+
+}
+
+.prepay-actions .prepay-toggle {
+
+    margin-top: 0;
+
+}
+
+
+/* =========================================================
+   PRINT / SAVE AS PDF
+   "Print Summary" opens the browser's print dialog. What is
+   printed: the heading, the loan and prepayment that were entered,
+   the result, the comparison and the schedule that is selected.
+   Left out: the site header and footer, the form, the guide
+   text, related content and every button.
+========================================================= */
+
+.prepay-print-only {
+
+    display: none;
+
+}
+
+@media print {
+
+    #header,
+    footer.footer,
+    .calculator-breadcrumb,
+    .calculator-intro,
+    .calculator-section,
+    .calculator-info,
+    .related-section,
+    .prepay-scenarios,
+    .prepay-actions,
+    #prepay-live {
+
+        display: none !important;
+
+    }
+
+    .prepay-print-only {
+
+        display: block;
+
+    }
+
+    body,
+    #prepay-results .calculator-results__card {
+
+        background: #ffffff;
+
+        box-shadow: none;
+
+    }
+
+    #prepay-results {
+
+        margin: 0;
+        padding: 0;
+
+    }
+
+    .prepay-print-brand {
+
+        margin: 0 0 8px;
+
+        font-size: 14pt;
+        font-weight: 800;
+
+    }
+
+    .prepay-print-inputs {
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px 24px;
+
+        margin: 0 0 14px;
+
+        font-size: 10pt;
+
+    }
+
+    .prepay-print-inputs > div {
+
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+
+    }
+
+    .prepay-print-inputs dd {
+
+        margin: 0;
+
+        font-weight: 700;
+
+    }
+
+    .prepay-compare {
+
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+
+    }
+
+    .prepay-compare__card,
+    .prepay-table tr {
+
+        break-inside: avoid;
+
+    }
+
+    #prepay-results .calculator-results__table-wrapper,
+    .prepay-monthly__wrapper {
+
+        max-height: none;
+
+        overflow: visible;
+
+    }
+
+    .prepay-table {
+
+        min-width: 0;
+
+        font-size: 8pt;
+
+    }
+
+    .prepay-table th,
+    .prepay-table td {
+
+        padding: 4px 6px;
+
+    }
+
+    .prepay-table th:first-child {
+
+        position: static;
+
+        box-shadow: none;
+
+    }
+
+    .prepay-table thead {
+
+        display: table-header-group;
+
+    }
+
+}
+
+
+/* =========================================================
+   TEXT FOR SCREEN READERS ONLY
+========================================================= */
+
+.prepay-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+
+    border: 0;
+
+}

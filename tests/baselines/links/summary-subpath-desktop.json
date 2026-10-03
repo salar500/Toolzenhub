@@ -13,7 +13,7 @@
     ]
   },
   "articles.html": {
-    "internal": 90,
+    "internal": 94,
     "external": [],
     "placeholders": 27,
     "deadFragments": []
@@ -54,19 +54,37 @@
     "placeholders": 4,
     "deadFragments": []
   },
-  "calculators.html": {
-    "internal": 25,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "calculators/emi/": {
+  "articles/loan-prepayment/early-vs-late-loan-prepayment/": {
     "internal": 33,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
+  "articles/loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment/": {
+    "internal": 34,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators.html": {
+    "internal": 26,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators/emi/": {
+    "internal": 34,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "calculators/loan-comparison/": {
+    "internal": 34,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators/prepayment/": {
     "internal": 33,
     "external": [],
     "placeholders": 4,
@@ -107,7 +125,7 @@
     ]
   },
   "loans.html": {
-    "internal": 25,
+    "internal": 26,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -125,13 +143,13 @@
     "deadFragments": []
   },
   "categories.html?q=loan": {
-    "internal": 24,
+    "internal": 25,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "calculators.html?q=emi": {
-    "internal": 25,
+    "internal": 26,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
