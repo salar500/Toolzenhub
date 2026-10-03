@@ -191,6 +191,11 @@ Inside `assets/js/`:
   modal focus management (`activateDialog`). The tool still owns its formulas, validation rules,
   messages and layout. Guidance, the pattern audit and what to avoid abstracting are in
   `docs/shared-tool-ux.md`.
+
+  **Planning documents** (not published, not built): `docs/content-clusters.md` (how a tool and its
+  articles fit together, the editorial standard and the linking rules), `docs/tool-pack-template.md`
+  (the template every new tool follows) and `docs/tool-packs/01-loan-prepayment.md` (the specification
+  of the first planned tool; it is not implemented and its page does not exist).
 - `components/`, `pages/` – header, footer, breadcrumb, related content, page modules.
 
 ## How it works
