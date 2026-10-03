@@ -389,6 +389,81 @@ const catalog = [
 
 
     /* =====================================================
+       LOAN BALANCE TRANSFER  (published)
+       The cluster of the Loan Balance Transfer Calculator
+       (docs/tool-packs/02-balance-transfer.md).
+    ===================================================== */
+
+    {
+        id: 15,
+        status: "published",
+        category: "loans",
+        topic: "balance-transfer",
+        slug: "is-a-loan-balance-transfer-worth-it",
+        title:
+            "Is a Loan Balance Transfer Worth It? Use Break-Even to Decide",
+        description:
+            "Learn how the charges, the time left and the new tenure decide whether moving your loan to a lower rate pays off, with worked break-even examples.",
+        publishedAt: "Oct 3, 2026",
+        updatedAt: "Oct 3, 2026",
+        readTime: "5 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/is-a-loan-balance-transfer-worth-it.png",
+            alt:
+                "Chart of the running saving from a balance transfer: over the same 15 years it climbs past zero and keeps rising, while over 20 years it climbs, then falls below zero"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/is-a-loan-balance-transfer-worth-it.png",
+            alt:
+                "Chart of the running saving from a balance transfer: over the same 15 years it climbs past zero and keeps rising, while over 20 years it climbs, then falls below zero"
+        },
+        tools: ["balance-transfer"],
+        related: [
+            "balance-transfer/balance-transfer-vs-prepayment",
+            "loan-comparison/loan-tenure-total-interest",
+            "loan-comparison/emi-vs-total-interest"
+        ],
+        relatedLabel: "Finance"
+    },
+
+    {
+        id: 16,
+        status: "published",
+        category: "loans",
+        topic: "balance-transfer",
+        slug: "balance-transfer-vs-prepayment",
+        title:
+            "Loan Balance Transfer vs Prepayment: Which Saves More?",
+        description:
+            "Compare moving your loan to a lower rate with paying part of it off, and see where the order flips, using one worked loan.",
+        publishedAt: "Oct 3, 2026",
+        updatedAt: "Oct 3, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/balance-transfer-vs-prepayment.png",
+            alt:
+                "Bars comparing the interest saved by prepaying only, switching only and switching then prepaying, for a large and for a small rate drop"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/balance-transfer-vs-prepayment.png",
+            alt:
+                "Bars comparing the interest saved by prepaying only, switching only and switching then prepaying, for a large and for a small rate drop"
+        },
+        tools: ["balance-transfer", "prepayment"],
+        related: [
+            "balance-transfer/is-a-loan-balance-transfer-worth-it",
+            "loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment",
+            "loan-comparison/what-is-loan-prepayment"
+        ],
+        relatedLabel: "Finance"
+    },
+
+
+    /* =====================================================
        COMING SOON  (listing placeholders: no route, no
        content module, not counted)
     ===================================================== */
@@ -573,6 +648,18 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/loan-prepayment/early-vs-late-loan-prepayment.js"
+            ),
+
+    "balance-transfer/is-a-loan-balance-transfer-worth-it":
+        () =>
+            import(
+                "./articles/balance-transfer/is-a-loan-balance-transfer-worth-it.js"
+            ),
+
+    "balance-transfer/balance-transfer-vs-prepayment":
+        () =>
+            import(
+                "./articles/balance-transfer/balance-transfer-vs-prepayment.js"
             )
 
 };

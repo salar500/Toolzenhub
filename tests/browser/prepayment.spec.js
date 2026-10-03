@@ -376,9 +376,10 @@ test.describe("Loan Prepayment Calculator", () => {
   test("related tools and the four curated articles", async ({ page, go, siteRoot }) => {
     await go("calculators/prepayment/");
     const tools = page.locator(".related-calculator-card");
-    await expect(tools).toHaveCount(2);
+    await expect(tools).toHaveCount(3);
     await expect(tools.nth(0)).toHaveAttribute("href", `${siteRoot}calculators/emi/`);
     await expect(tools.nth(1)).toHaveAttribute("href", `${siteRoot}calculators/loan-comparison/`);
+    await expect(tools.nth(2)).toHaveAttribute("href", `${siteRoot}calculators/balance-transfer/`);
     const cards = page.locator(".related-article-card");
     await expect(cards).toHaveCount(4);
     const hrefs = await cards.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));

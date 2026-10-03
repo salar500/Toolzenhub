@@ -22,6 +22,7 @@ const PAGES = [
   ["emi", "calculators/emi/", ".related-article-card", true],
   ["loan-comparison", "calculators/loan-comparison/", ".related-article-card", true],
   ["prepayment", "calculators/prepayment/", ".related-article-card", true],
+  ["balance-transfer", "calculators/balance-transfer/", ".related-article-card", true],
   ["articles", "articles.html", "#articles-list .article-card", false],
   ["article", "articles/loan-comparison/what-is-loan-prepayment/", ".article-related-card", true],
   ["contact", "contact.html", "form.contact-form", false],

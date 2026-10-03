@@ -1,0 +1,468 @@
+/* =========================================================
+   ToolZen Hub
+   Loan Balance Transfer Calculator
+
+   Only what the shared calculator styles do not already provide:
+   the grouped form, the paired tenure fields, the side-by-side
+   comparison cards, the notes and the year-by-year table, and the
+   print layout. Buttons, focus and headings come from the shared
+   layer (components/buttons.css, base/accessibility.css,
+   calculator-base.css). Loaded after calculator-responsive.css.
+========================================================= */
+
+
+/* =========================================================
+   FORM GROUPS (current loan / new offer / charges)
+========================================================= */
+
+.bt-group {
+
+    min-width: 0;
+
+    margin: 0 0 22px;
+    padding: 0;
+
+    border: 0;
+
+}
+
+.bt-group__title {
+
+    margin: 0 0 12px;
+    padding: 0;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 750;
+    line-height: 1.4;
+
+}
+
+.bt-tenure {
+
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+
+}
+
+.bt-tenure legend {
+
+    padding: 0;
+
+}
+
+.bt-pair {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+}
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.bt-subtitle {
+
+    margin: 28px 0 14px;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--color-slate-200);
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.4;
+
+}
+
+#bt-results .calculator-results__summary p {
+
+    margin: 0 0 8px;
+
+}
+
+#bt-results .calculator-results__summary p:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+/* =========================================================
+   NOTES
+   The "lower EMI, higher overall cost" note is calm: a left rule
+   and a tinted box, and it starts with the word "Note", so the
+   meaning never depends on colour.
+========================================================= */
+
+.bt-note {
+
+    margin: 10px 0 0;
+
+    color: var(--color-ink-muted);
+
+    font-size: 11px;
+    line-height: 1.5;
+
+}
+
+.bt-note--plain {
+
+    margin: 0 0 12px;
+
+    color: #475467;
+
+    font-size: 12px;
+
+}
+
+.bt-note--warning {
+
+    margin: 0 0 16px;
+    padding: 12px 14px;
+
+    border: 1px solid #fedf89;
+    border-left: 4px solid #f79009;
+    border-radius: 8px;
+
+    background: #fffcf5;
+
+    color: var(--color-ink);
+
+    font-size: 13px;
+    line-height: 1.55;
+
+}
+
+
+/* =========================================================
+   COMPARISON CARDS
+   Two or three columns where there is room, stacked on a phone.
+========================================================= */
+
+.bt-compare {
+
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+
+    margin-bottom: 14px;
+
+}
+
+.bt-compare__card {
+
+    padding: 16px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+
+    background: var(--color-white);
+
+}
+
+.bt-compare__title {
+
+    margin: 0 0 2px;
+
+    color: var(--color-ink);
+
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.35;
+
+}
+
+.bt-compare__tag {
+
+    margin: 0 0 10px;
+
+    color: var(--color-ink-muted);
+
+    font-size: 11px;
+    line-height: 1.4;
+
+}
+
+.bt-compare__list {
+
+    margin: 0;
+
+}
+
+.bt-compare__list > div {
+
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 8px 0;
+
+    border-top: 1px solid #eaecf0;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+}
+
+.bt-compare__list dt {
+
+    color: #475467;
+
+}
+
+.bt-compare__list dd {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-weight: 700;
+    text-align: right;
+
+}
+
+
+/* =========================================================
+   YEAR-BY-YEAR TABLE
+========================================================= */
+
+.bt-table th:not(:first-child),
+.bt-table td {
+
+    text-align: right;
+
+}
+
+.bt-table tbody th {
+
+    background: var(--color-white);
+
+    color: var(--color-ink);
+
+}
+
+/* the first column stays in view when a narrow screen scrolls the table sideways */
+
+.bt-table th:first-child {
+
+    position: sticky;
+    left: 0;
+
+    text-align: left;
+
+    box-shadow: 1px 0 0 #eaecf0;
+
+}
+
+.bt-table thead th:first-child {
+
+    background: #f9fafb;
+
+}
+
+#bt-results .calculator-results__table-wrapper:focus-visible {
+
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+
+/* =========================================================
+   ACTIONS
+   Print Summary is a secondary button; the row wraps on a phone.
+========================================================= */
+
+.bt-actions {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-top: 16px;
+
+}
+
+.bt-action {
+
+    min-width: 0;
+    height: 40px;
+
+    padding: 0 16px;
+
+}
+
+
+/* =========================================================
+   TEXT FOR SCREEN READERS ONLY
+========================================================= */
+
+.bt-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+
+/* =========================================================
+   PRINT / SAVE AS PDF
+   "Print Summary" opens the browser's print dialog. What is
+   printed: the heading, the loans and charges that were entered,
+   the result, the comparison and the table. Left out: the site
+   header and footer, the form, the guide text, related content
+   and every button.
+========================================================= */
+
+.bt-print-only {
+
+    display: none;
+
+}
+
+@media print {
+
+    #header,
+    footer.footer,
+    .calculator-breadcrumb,
+    .calculator-intro,
+    .calculator-section,
+    .calculator-info,
+    .related-section,
+    .bt-actions,
+    #bt-live {
+
+        display: none !important;
+
+    }
+
+    .bt-print-only {
+
+        display: block;
+
+    }
+
+    body,
+    #bt-results .calculator-results__card {
+
+        background: #ffffff;
+
+        box-shadow: none;
+
+    }
+
+    #bt-results {
+
+        margin: 0;
+        padding: 0;
+
+    }
+
+    .bt-print-brand {
+
+        margin: 0 0 8px;
+
+        font-size: 14pt;
+        font-weight: 800;
+
+    }
+
+    .bt-print-inputs {
+
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4px;
+
+        margin: 0 0 14px;
+
+        font-size: 10pt;
+
+    }
+
+    .bt-print-inputs > div {
+
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+
+    }
+
+    .bt-print-inputs dd {
+
+        margin: 0;
+
+        font-weight: 700;
+        text-align: right;
+
+    }
+
+    .bt-compare {
+
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+
+    }
+
+    .bt-compare__card,
+    .bt-table tr,
+    .bt-note--warning {
+
+        break-inside: avoid;
+
+    }
+
+    #bt-results .calculator-results__table-wrapper {
+
+        overflow: visible;
+
+    }
+
+    .bt-table {
+
+        min-width: 0;
+
+        font-size: 9pt;
+
+    }
+
+    .bt-table th,
+    .bt-table td {
+
+        padding: 4px 6px;
+
+    }
+
+    .bt-table th:first-child {
+
+        position: static;
+
+        box-shadow: none;
+
+    }
+
+}

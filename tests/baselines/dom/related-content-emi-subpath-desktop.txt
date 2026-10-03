@@ -9,6 +9,11 @@ section.related-section
       div.related-calculator-content
         strong "Loan Comparison Calculator"
         span "Compare two loans side by side."
+    a.related-calculator-card [href="{ROOT}calculators/balance-transfer/"]
+      div.related-calculator-icon "⟳"
+      div.related-calculator-content
+        strong "Loan Balance Transfer Calculator"
+        span "See whether moving your loan to a lower rate pays off after the charges, and when you earn…"
     a.related-calculator-card [href="{ROOT}calculators/prepayment/"]
       div.related-calculator-icon "₹"
       div.related-calculator-content

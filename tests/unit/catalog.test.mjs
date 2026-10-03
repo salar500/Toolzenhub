@@ -22,7 +22,7 @@ before(async () => {
   related = { categories: cats.categories };
 });
 
-const PUBLISHED = ["loan-comparison", "emi", "prepayment"];
+const PUBLISHED = ["loan-comparison", "emi", "prepayment", "balance-transfer"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment"];
 
 describe("catalog model", () => {
@@ -40,10 +40,10 @@ describe("catalog model", () => {
     for (const c of catalog.calculators) assert.ok(["published", "coming-soon"].includes(c.status), `${c.id}: ${c.status}`);
   });
 
-  test("exactly EMI, Loan Comparison and the Loan Prepayment Calculator are published; all other 23 are coming-soon", () => {
+  test("exactly EMI, Loan Comparison, Loan Prepayment and Loan Balance Transfer are published; all other 22 are coming-soon", () => {
     const pub = catalog.calculators.filter((c) => c.status === "published").map((c) => c.id).sort();
     assert.deepEqual(pub, [...PUBLISHED].sort());
-    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 23);
+    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 22);
   });
 
   test("`available` (read by cards and search) is exactly status === published", () => {
@@ -109,6 +109,7 @@ describe("registry is derived from the catalog", () => {
       "loan-comparison": { section: "Calculators", category: "loans", title: "Loan Comparison Calculator" },
       emi: { section: "Calculators", category: "loans", title: "EMI Calculator" },
       prepayment: { section: "Calculators", category: "loans", title: "Loan Prepayment Calculator" },
+      "balance-transfer": { section: "Calculators", category: "loans", title: "Loan Balance Transfer Calculator" },
     });
   });
 });
@@ -126,7 +127,7 @@ describe("search labels come from the category list", () => {
     assert.equal(sip.url, null);
     assert.equal(all.filter((c) => c.url).length, catalog.calculators.filter((c) => c.available).length);
     // the same eight matches as before M7; M7 ranks them (title matches first, published before Coming Soon).
-    // "Loan Prepayment Calculator" now begins with "loan", so it ranks with the title-prefix matches.
-    assert.deepEqual(search.searchCalculators("loan").map((c) => c.id), ["loan-comparison", "prepayment", "loan-eligibility", "home-loan", "personal-loan", "emi", "balance-transfer", "interest"]);
+    // "Loan Prepayment Calculator" and "Loan Balance Transfer Calculator" begin with "loan", so they rank with the title-prefix matches.
+    assert.deepEqual(search.searchCalculators("loan").map((c) => c.id), ["loan-comparison", "balance-transfer", "prepayment", "loan-eligibility", "home-loan", "personal-loan", "emi", "interest"]);
   });
 });

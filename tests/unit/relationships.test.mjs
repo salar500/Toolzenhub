@@ -38,12 +38,13 @@ let PUBLISHED;
 
 describe("current relationships (parity with the pre-M7 selection)", () => {
   test("tool -> related tools: same category, published, never itself", () => {
-    assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["loan-comparison", "prepayment"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("loan-comparison")), ["emi", "prepayment"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("prepayment")), ["emi", "loan-comparison"]); // curated order
+    assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["loan-comparison", "balance-transfer", "prepayment"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("loan-comparison")), ["emi", "balance-transfer", "prepayment"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("prepayment")), ["emi", "loan-comparison", "balance-transfer"]); // curated order
+    assert.deepEqual(toolIds(rel.getRelatedTools("balance-transfer")), ["prepayment", "emi", "loan-comparison"]); // curated order
     assert.deepEqual(rel.getRelatedTools("nope"), []);
     // parity with the pre-M7 rule for every tool without a curated list (the Loan Prepayment page curates its own order)
-    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => s !== "prepayment")) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
+    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
   });
 
   test("tool -> related articles: the first six published loan articles, in catalog order, for EMI and Loan Comparison", () => {
@@ -55,7 +56,11 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
   });
 
   test("article -> related tools: the curated primary tool first, then the rest of the category", () => {
-    const expected = (key) => key === "loan-comparison/what-is-loan-prepayment" ? ["prepayment", "loan-comparison", "emi"] : key.startsWith("loan-prepayment/") ? ["prepayment", "loan-comparison", "emi"] : ["loan-comparison", "emi", "prepayment"];
+    const expected = (key) => key === "loan-comparison/what-is-loan-prepayment" ? ["prepayment", "loan-comparison", "emi", "balance-transfer"]
+      : key.startsWith("loan-prepayment/") ? ["prepayment", "loan-comparison", "emi", "balance-transfer"]
+      : key === "balance-transfer/is-a-loan-balance-transfer-worth-it" ? ["balance-transfer", "loan-comparison", "emi", "prepayment"]
+      : key === "balance-transfer/balance-transfer-vs-prepayment" ? ["balance-transfer", "prepayment", "loan-comparison", "emi"]
+      : ["loan-comparison", "emi", "balance-transfer", "prepayment"];
     for (const key of PUBLISHED) assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(key)), expected(key), key);
     assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(PUBLISHED[0], { fill: false })), ["loan-comparison"]);
   });
@@ -64,7 +69,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     for (const key of PUBLISHED) {
       const entry = articles.getArticleByKey(key);
       assert.deepEqual(keys(rel.getRelatedArticles(key)), entry.related, key);
-      assert.equal(rel.getRelatedArticles(key).length, key.startsWith("loan-prepayment/") ? 3 : 5, key);
+      assert.equal(rel.getRelatedArticles(key).length, key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") ? 3 : 5, key);
     }
   });
 
@@ -102,6 +107,11 @@ describe("curated first, automatic second", () => {
     assert.deepEqual(got.slice(1), PUBLISHED.filter((k) => k !== "loan-comparison/choose-right-loan-tenure").slice(0, 5));
   });
 
+  test("the Balance Transfer page shows its four curated articles exactly, in order", () => {
+    assert.deepEqual(keys(rel.getRelatedArticlesForTool("balance-transfer", { limit: 6 })), calcs.getCalculatorById("balance-transfer").relatedArticles);
+    assert.equal(calcs.getCalculatorById("balance-transfer").relatedArticles.length, 4);
+  });
+
   test("a tool with a curated article list shows exactly that list, never padded (the Loan Prepayment page)", () => {
     const curated = calcs.getCalculatorById("prepayment").relatedArticles;
     assert.equal(curated.length, 4);
@@ -114,7 +124,7 @@ describe("curated first, automatic second", () => {
 
   test("curated tools are kept first; unpublished or unknown curated ids are skipped", () => {
     emi().relatedTools = ["home-loan", "nope", "loan-comparison"];
-    assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["loan-comparison", "prepayment"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["loan-comparison", "balance-transfer", "prepayment"]);
   });
 
   test("fill: false returns only the curated list (no automatic additions)", () => {
@@ -147,9 +157,9 @@ describe("curated first, automatic second", () => {
       home.available = true;          // temporarily "published"
       emi().subcategory = "test-sub";
       home.subcategory = "test-sub";
-      assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["home-loan", "loan-comparison", "prepayment"]);
+      assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["home-loan", "loan-comparison", "balance-transfer", "prepayment"]);
       delete home.subcategory;
-      assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["loan-comparison", "home-loan", "prepayment"]);
+      assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["loan-comparison", "home-loan", "balance-transfer", "prepayment"]);
     } finally {
       home.available = wasAvailable;
       delete home.subcategory;

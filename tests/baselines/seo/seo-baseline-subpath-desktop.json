@@ -149,6 +149,156 @@
       "visibleTextChars": 496
     }
   },
+  "/articles/balance-transfer/balance-transfer-vs-prepayment/": {
+    "runtime": {
+      "title": "Loan Balance Transfer vs Prepayment: Which Saves More? | ToolZen Hub",
+      "description": "Compare moving your loan to a lower rate with paying part of it off, and see where the order flips, using one worked loan.",
+      "canonical": "https://toolzenhub.in/articles/balance-transfer/balance-transfer-vs-prepayment/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Compare moving your loan to a lower rate with paying part of it off, and see where the order flips, using one worked loan.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/balance-transfer-vs-prepayment.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Loan Balance Transfer vs Prepayment: Which Saves More? | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/balance-transfer/balance-transfer-vs-prepayment/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Compare moving your loan to a lower rate with paying part of it off, and see where the order flips, using one worked loan.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/balance-transfer-vs-prepayment.png",
+        "twitter:title": "Loan Balance Transfer vs Prepayment: Which Saves More? | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Loan Balance Transfer vs Prepayment: Which Saves More?"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Loan Balance Transfer vs Prepayment: Which Saves More? | ToolZen Hub",
+      "description": "Compare moving your loan to a lower rate with paying part of it off, and see where the order flips, using one worked loan.",
+      "canonical": "https://toolzenhub.in/articles/balance-transfer/balance-transfer-vs-prepayment/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6998
+    }
+  },
+  "/articles/balance-transfer/is-a-loan-balance-transfer-worth-it/": {
+    "runtime": {
+      "title": "Is a Loan Balance Transfer Worth It? Use Break-Even to Decide | ToolZen Hub",
+      "description": "Learn how the charges, the time left and the new tenure decide whether moving your loan to a lower rate pays off, with worked break-even examples.",
+      "canonical": "https://toolzenhub.in/articles/balance-transfer/is-a-loan-balance-transfer-worth-it/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Learn how the charges, the time left and the new tenure decide whether moving your loan to a lower rate pays off, with worked break-even examples.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/is-a-loan-balance-transfer-worth-it.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Is a Loan Balance Transfer Worth It? Use Break-Even to Decide | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/balance-transfer/is-a-loan-balance-transfer-worth-it/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Learn how the charges, the time left and the new tenure decide whether moving your loan to a lower rate pays off, with worked break-even examples.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/is-a-loan-balance-transfer-worth-it.png",
+        "twitter:title": "Is a Loan Balance Transfer Worth It? Use Break-Even to Decide | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Is a Loan Balance Transfer Worth It? Use Break-Even to Decide"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Is a Loan Balance Transfer Worth It? Use Break-Even to Decide | ToolZen Hub",
+      "description": "Learn how the charges, the time left and the new tenure decide whether moving your loan to a lower rate pays off, with worked break-even examples.",
+      "canonical": "https://toolzenhub.in/articles/balance-transfer/is-a-loan-balance-transfer-worth-it/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 8382
+    }
+  },
   "/articles/loan-comparison/choose-right-loan-tenure/": {
     "runtime": {
       "title": "How to Choose the Right Loan Tenure | ToolZen Hub",
@@ -786,6 +936,55 @@
       "visibleTextChars": 934
     }
   },
+  "/calculators/balance-transfer/": {
+    "runtime": {
+      "title": "Loan Balance Transfer Calculator | ToolZen Hub",
+      "description": "See whether moving your loan to a lower interest rate pays off after the charges, when you earn them back, and whether a longer tenure is hiding a higher cost.",
+      "canonical": "https://toolzenhub.in/calculators/balance-transfer/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "See whether moving your loan to a lower interest rate pays off after the charges, when you earn them back, and whether a longer tenure is hiding a higher cost.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Loan Balance Transfer Calculator | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/balance-transfer/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "See whether moving your loan to a lower interest rate pays off after the charges, when you earn them back, and whether a longer tenure is hiding a higher cost.",
+        "twitter:title": "Loan Balance Transfer Calculator | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Loan Balance Transfer Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Loan Balance Transfer Calculator | ToolZen Hub",
+      "description": "See whether moving your loan to a lower interest rate pays off after the charges, when you earn them back, and whether a longer tenure is hiding a higher cost.",
+      "canonical": "https://toolzenhub.in/calculators/balance-transfer/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6807
+    }
+  },
   "/calculators/emi/": {
     "runtime": {
       "title": "EMI Calculator | ToolZen Hub",
@@ -832,7 +1031,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2956
+      "visibleTextChars": 3093
     }
   },
   "/calculators/loan-comparison/": {
@@ -881,7 +1080,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4148
+      "visibleTextChars": 4285
     }
   },
   "/calculators/prepayment/": {
@@ -930,7 +1129,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5680
+      "visibleTextChars": 5817
     }
   },
   "/categories.html": {

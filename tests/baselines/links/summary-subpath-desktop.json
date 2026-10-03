@@ -13,9 +13,21 @@
     ]
   },
   "articles.html": {
-    "internal": 94,
+    "internal": 98,
     "external": [],
     "placeholders": 27,
+    "deadFragments": []
+  },
+  "articles/balance-transfer/balance-transfer-vs-prepayment/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/balance-transfer/is-a-loan-balance-transfer-worth-it/": {
+    "internal": 34,
+    "external": [],
+    "placeholders": 4,
     "deadFragments": []
   },
   "articles/loan-comparison/choose-right-loan-tenure/": {
@@ -67,25 +79,31 @@
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 26,
+    "internal": 27,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators/balance-transfer/": {
+    "internal": 34,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "calculators/emi/": {
-    "internal": 34,
+    "internal": 35,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "calculators/loan-comparison/": {
-    "internal": 34,
+    "internal": 35,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "calculators/prepayment/": {
-    "internal": 33,
+    "internal": 34,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -125,7 +143,7 @@
     ]
   },
   "loans.html": {
-    "internal": 26,
+    "internal": 27,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -143,7 +161,7 @@
     "deadFragments": []
   },
   "categories.html?q=loan": {
-    "internal": 25,
+    "internal": 26,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

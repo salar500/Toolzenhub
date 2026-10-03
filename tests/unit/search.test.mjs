@@ -59,7 +59,7 @@ const buildCorpus = () => {
 describe("index structure", () => {
   test("covers categories, tools and articles (no subcategories are defined yet)", () => {
     const count = (type) => idx.searchIndex.filter((e) => e.type === type).length;
-    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 26, 14]);
+    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 26, 16]);
     assert.equal(new Set(idx.searchIndex.map((e) => e.key)).size, idx.searchIndex.length);
   });
 
@@ -93,9 +93,10 @@ describe("index structure", () => {
     for (const e of idx.searchIndex.filter((x) => x.status !== "published")) assert.equal(e.route, null, e.key);
   });
 
-  test("no invented aliases or keywords (only the Loan Prepayment Calculator's two), and no article bodies in the index", () => {
+  test("no invented aliases or keywords (only the Loan Prepayment and Balance Transfer calculators' own names), and no article bodies in the index", () => {
+    const ALIASES = { "tool:prepayment": ["part payment", "early repayment"], "tool:balance-transfer": ["loan transfer", "refinance", "switch loan"] };
     for (const e of idx.searchIndex) {
-      assert.deepEqual(e.aliases, e.key === "tool:prepayment" ? ["part payment", "early repayment"] : [], e.key);
+      assert.deepEqual(e.aliases, ALIASES[e.key] ?? [], e.key);
       assert.deepEqual(e.keywords, [], e.key);
     }
     const bytes = JSON.stringify(idx.searchIndex).length;
@@ -170,7 +171,7 @@ describe("real data: policy and ranking", () => {
   });
 
   test("loan: titles beginning with it, then titles containing it, then category matches", () => {
-    assert.deepEqual(ids(engine.search("loan", TOOL_OPTS)), ["loan-comparison", "prepayment", "loan-eligibility", "home-loan", "personal-loan", "emi", "balance-transfer", "interest"]);
+    assert.deepEqual(ids(engine.search("loan", TOOL_OPTS)), ["loan-comparison", "balance-transfer", "prepayment", "loan-eligibility", "home-loan", "personal-loan", "emi", "interest"]);
   });
 
   test("loan comparison / interest / home", () => {
@@ -180,8 +181,8 @@ describe("real data: policy and ranking", () => {
   });
 
   test("article titles and partial matches (published articles only by default)", () => {
-    assert.deepEqual(ids(engine.search("tenure", { types: ["article"] })), [4, 6, 13]);
-    assert.deepEqual(ids(engine.search("prepay", { types: ["article"] })), [5, 13, 14]);
+    assert.deepEqual(ids(engine.search("tenure", { types: ["article"] })), [4, 6, 13, 15]);
+    assert.deepEqual(ids(engine.search("prepay", { types: ["article"] })), [5, 13, 14, 16]);
     assert.deepEqual(ids(engine.search("what is loan prepayment", { types: ["article"] })), [5]);
     assert.deepEqual(ids(engine.search("fixed vs floating", { types: ["article"] })), [3]);
   });

@@ -166,12 +166,48 @@ const catalog = [
 
     {
         id: "balance-transfer",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/balance-transfer/index.js"),
         category: "loans",
         icon: "⟳",
-        title: "Balance Transfer Calculator",
+        title: "Loan Balance Transfer Calculator",
         description:
-            "Estimate potential savings from transferring your existing loan."
+            "See whether moving your loan to a lower rate pays off after the charges, and when you earn them back.",
+        aliases: [
+            "loan transfer",
+            "refinance",
+            "switch loan"
+        ],
+        capabilities: {
+            reset: true,
+            compare: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            table: true,
+            print: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Loan Balance Transfer Calculator | ToolZen Hub",
+            description:
+                "See whether moving your loan to a lower interest rate pays off after the charges, when you earn them back, and whether a longer tenure is hiding a higher cost."
+        },
+        relatedTools: [
+            "prepayment",
+            "emi",
+            "loan-comparison"
+        ],
+        relatedArticles: [
+            "balance-transfer/is-a-loan-balance-transfer-worth-it",
+            "balance-transfer/balance-transfer-vs-prepayment",
+            "loan-comparison/loan-tenure-total-interest",
+            "loan-comparison/emi-vs-total-interest"
+        ]
     },
 
     {
@@ -218,7 +254,8 @@ const catalog = [
         },
         relatedTools: [
             "emi",
-            "loan-comparison"
+            "loan-comparison",
+            "balance-transfer"
         ],
         relatedArticles: [
             "loan-comparison/what-is-loan-prepayment",

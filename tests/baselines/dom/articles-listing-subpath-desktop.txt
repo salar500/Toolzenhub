@@ -103,6 +103,7 @@ div#articles-page
           button.active.pagination-button [data-page="1" type="button"] "1"
           button.pagination-button [data-page="2" type="button"] "2"
           button.pagination-button [data-page="3" type="button"] "3"
+          button.pagination-button [data-page="4" type="button"] "4"
           button.pagination-next [data-page="next" type="button"] "Next"
             span [aria-hidden="true"] "→"
       aside.articles-sidebar
@@ -119,7 +120,7 @@ div#articles-page
             a.article-category-item [data-sidebar-category="loans" href="{ROOT}articles.html"]
               span.article-category-name "Loans"
                 span.article-category-icon "🏠"
-              span.article-category-count "8"
+              span.article-category-count "10"
                 span [aria-hidden="true"] "→"
             a.article-category-item [data-sidebar-category="investment" href="{ROOT}articles.html"]
               span.article-category-name "Investment"
