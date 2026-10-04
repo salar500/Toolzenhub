@@ -61,7 +61,7 @@ const buildCorpus = () => {
 describe("index structure", () => {
   test("covers categories, tools and articles (no subcategories are defined yet)", () => {
     const count = (type) => idx.searchIndex.filter((e) => e.type === type).length;
-    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 26, 26]);
+    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 26, 29]);
     assert.equal(new Set(idx.searchIndex.map((e) => e.key)).size, idx.searchIndex.length);
   });
 
@@ -99,7 +99,7 @@ describe("index structure", () => {
   });
 
   test("no invented aliases or keywords (only the Loan Prepayment and Balance Transfer calculators' own names), and no article bodies in the index", () => {
-    const ALIASES = { "tool:prepayment": ["part payment", "early repayment"], "tool:balance-transfer": ["loan transfer", "refinance", "switch loan"], "tool:sip": ["systematic investment plan", "step-up sip"], "tool:margin": ["profit margin calculator", "markup calculator", "selling price calculator"], "tool:profit": ["break-even calculator", "business profit calculator", "contribution margin calculator"] };
+    const ALIASES = { "tool:prepayment": ["part payment", "early repayment"], "tool:balance-transfer": ["loan transfer", "refinance", "switch loan"], "tool:sip": ["systematic investment plan", "step-up sip"], "tool:margin": ["profit margin calculator", "markup calculator", "selling price calculator"], "tool:profit": ["break-even calculator", "business profit calculator", "contribution margin calculator"], "tool:home-loan": ["home loan affordability", "how much loan can i afford", "loan amount calculator"] };
     for (const e of idx.searchIndex) {
       assert.deepEqual(e.aliases, ALIASES[e.key] ?? [], e.key);
       assert.deepEqual(e.keywords, [], e.key);
@@ -177,7 +177,7 @@ describe("real data: policy and ranking", () => {
 
   test("emi: the EMI tool first (title prefix), then the others that mention EMI", () => {
     const r = engine.search("emi", TOOL_OPTS);
-    assert.deepEqual(ids(r), ["emi", "loan-comparison", "prepayment", "home-loan", "personal-loan"]);
+    assert.deepEqual(ids(r), ["emi", "loan-comparison", "home-loan", "prepayment", "personal-loan"]); // Home Loan is published now: ties fall in catalog order
     assert.deepEqual(r.map((x) => x.score), [80, 20, 20, 20, 20]);
   });
 
@@ -187,12 +187,12 @@ describe("real data: policy and ranking", () => {
 
   test("loan comparison / interest / home", () => {
     assert.deepEqual(ids(engine.search("loan comparison", TOOL_OPTS)), ["loan-comparison"]);
-    assert.deepEqual(ids(engine.search("interest", TOOL_OPTS)), ["interest", "loan-comparison", "emi", "prepayment", "home-loan"]);
+    assert.deepEqual(ids(engine.search("interest", TOOL_OPTS)), ["interest", "loan-comparison", "emi", "home-loan", "prepayment"]);
     assert.deepEqual(ids(engine.search("home", TOOL_OPTS)), ["home-loan"]);
   });
 
   test("article titles and partial matches (published articles only by default)", () => {
-    assert.deepEqual(ids(engine.search("tenure", { types: ["article"] })), [4, 6, 13, 15]);
+    assert.deepEqual(ids(engine.search("tenure", { types: ["article"] })), [4, 6, 13, 28, 15, 29]);
     assert.deepEqual(ids(engine.search("prepay", { types: ["article"] })), [5, 13, 14, 16]);
     assert.deepEqual(ids(engine.search("what is loan prepayment", { types: ["article"] })), [5]);
     assert.deepEqual(ids(engine.search("fixed vs floating", { types: ["article"] })), [3]);
@@ -205,7 +205,7 @@ describe("real data: policy and ranking", () => {
 
   test("a mixed global search returns each type, published only", () => {
     const r = engine.search("emi");
-    assert.deepEqual(r.map((x) => x.key), ["tool:emi", "article:2", "article:13", "category:loans", "tool:loan-comparison", "tool:prepayment"]);
+    assert.deepEqual(r.map((x) => x.key), ["tool:emi", "article:2", "article:13", "article:27", "category:loans", "tool:loan-comparison", "tool:home-loan", "tool:prepayment", "article:28", "article:29"]);
     // the new tool is found by its aliases and only as a published tool
     assert.deepEqual(engine.search("part payment").map((x) => x.key), ["tool:prepayment"]);
     assert.deepEqual(engine.search("early repayment").map((x) => x.key), ["tool:prepayment"]);

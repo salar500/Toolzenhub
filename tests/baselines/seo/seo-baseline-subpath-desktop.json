@@ -299,6 +299,231 @@
       "visibleTextChars": 8382
     }
   },
+  "/articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/": {
+    "runtime": {
+      "title": "How Interest Rates Change the Home Loan You Can Borrow | ToolZen Hub",
+      "description": "Keep the EMI room and the tenure fixed and change only the rate to see how the loan that fits moves.",
+      "canonical": "https://toolzenhub.in/articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Keep the EMI room and the tenure fixed and change only the rate to see how the loan that fits moves.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/how-interest-rates-change-the-home-loan-you-can-borrow.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How Interest Rates Change the Home Loan You Can Borrow | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Keep the EMI room and the tenure fixed and change only the rate to see how the loan that fits moves.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/how-interest-rates-change-the-home-loan-you-can-borrow.png",
+        "twitter:title": "How Interest Rates Change the Home Loan You Can Borrow | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "How Interest Rates Change the Home Loan You Can Borrow"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How Interest Rates Change the Home Loan You Can Borrow | ToolZen Hub",
+      "description": "Keep the EMI room and the tenure fixed and change only the rate to see how the loan that fits moves.",
+      "canonical": "https://toolzenhub.in/articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5105
+    }
+  },
+  "/articles/home-loan/how-much-home-loan-fits-your-emi-budget/": {
+    "runtime": {
+      "title": "How Much Home Loan Fits Your EMI Budget? | ToolZen Hub",
+      "description": "Start from the monthly EMI you choose to carry and work out the loan that fits, step by step, on one worked example.",
+      "canonical": "https://toolzenhub.in/articles/home-loan/how-much-home-loan-fits-your-emi-budget/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Start from the monthly EMI you choose to carry and work out the loan that fits, step by step, on one worked example.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/how-much-home-loan-fits-your-emi-budget.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How Much Home Loan Fits Your EMI Budget? | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/home-loan/how-much-home-loan-fits-your-emi-budget/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Start from the monthly EMI you choose to carry and work out the loan that fits, step by step, on one worked example.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/how-much-home-loan-fits-your-emi-budget.png",
+        "twitter:title": "How Much Home Loan Fits Your EMI Budget? | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "How Much Home Loan Fits Your EMI Budget?"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How Much Home Loan Fits Your EMI Budget? | ToolZen Hub",
+      "description": "Start from the monthly EMI you choose to carry and work out the loan that fits, step by step, on one worked example.",
+      "canonical": "https://toolzenhub.in/articles/home-loan/how-much-home-loan-fits-your-emi-budget/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6541
+    }
+  },
+  "/articles/home-loan/longer-tenure-bigger-loan-much-more-interest/": {
+    "runtime": {
+      "title": "Longer Tenure, Bigger Loan, Much More Interest | ToolZen Hub",
+      "description": "Keep the monthly EMI the same and see how much more loan a longer tenure fits, and the interest that comes with it.",
+      "canonical": "https://toolzenhub.in/articles/home-loan/longer-tenure-bigger-loan-much-more-interest/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Keep the monthly EMI the same and see how much more loan a longer tenure fits, and the interest that comes with it.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/longer-tenure-bigger-loan-much-more-interest.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Longer Tenure, Bigger Loan, Much More Interest | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/home-loan/longer-tenure-bigger-loan-much-more-interest/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Keep the monthly EMI the same and see how much more loan a longer tenure fits, and the interest that comes with it.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/longer-tenure-bigger-loan-much-more-interest.png",
+        "twitter:title": "Longer Tenure, Bigger Loan, Much More Interest | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Longer Tenure, Bigger Loan, Much More Interest"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Longer Tenure, Bigger Loan, Much More Interest | ToolZen Hub",
+      "description": "Keep the monthly EMI the same and see how much more loan a longer tenure fits, and the interest that comes with it.",
+      "canonical": "https://toolzenhub.in/articles/home-loan/longer-tenure-bigger-loan-much-more-interest/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6016
+    }
+  },
   "/articles/loan-comparison/choose-right-loan-tenure/": {
     "runtime": {
       "title": "How to Choose the Right Loan Tenure | ToolZen Hub",
@@ -1732,7 +1957,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6807
+      "visibleTextChars": 6951
     }
   },
   "/calculators/emi/": {
@@ -1781,7 +2006,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3093
+      "visibleTextChars": 3237
+    }
+  },
+  "/calculators/home-loan/": {
+    "runtime": {
+      "title": "Home Loan Calculator: Loan Amount for Your EMI Budget | ToolZen Hub",
+      "description": "Work out the home loan that fits the monthly EMI you choose, with the interest it costs and what a different tenure does. Calculated from your numbers: not a lender's offer or decision.",
+      "canonical": "https://toolzenhub.in/calculators/home-loan/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Work out the home loan that fits the monthly EMI you choose, with the interest it costs and what a different tenure does. Calculated from your numbers: not a lender's offer or decision.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Home Loan Calculator: Loan Amount for Your EMI Budget | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/home-loan/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Work out the home loan that fits the monthly EMI you choose, with the interest it costs and what a different tenure does. Calculated from your numbers: not a lender's offer or decision.",
+        "twitter:title": "Home Loan Calculator: Loan Amount for Your EMI Budget | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Home Loan Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Home Loan Calculator: Loan Amount for Your EMI Budget | ToolZen Hub",
+      "description": "Work out the home loan that fits the monthly EMI you choose, with the interest it costs and what a different tenure does. Calculated from your numbers: not a lender&#39;s offer or decision.",
+      "canonical": "https://toolzenhub.in/calculators/home-loan/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6083
     }
   },
   "/calculators/loan-comparison/": {
@@ -1830,7 +2104,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4285
+      "visibleTextChars": 4429
     }
   },
   "/calculators/margin/": {
@@ -1928,7 +2202,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5817
+      "visibleTextChars": 5961
     }
   },
   "/calculators/profit/": {

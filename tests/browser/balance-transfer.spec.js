@@ -316,10 +316,11 @@ test.describe("Loan Balance Transfer Calculator", () => {
   test("related tools and the four curated articles", async ({ page, go, siteRoot }) => {
     await open(page, go);
     const tools = page.locator(".related-calculator-card");
-    await expect(tools).toHaveCount(3);
+    await expect(tools).toHaveCount(4); // the curated three, then Home Loan (Tool Pack 6) from the category
     await expect(tools.nth(0)).toHaveAttribute("href", `${siteRoot}calculators/prepayment/`);
     await expect(tools.nth(1)).toHaveAttribute("href", `${siteRoot}calculators/emi/`);
     await expect(tools.nth(2)).toHaveAttribute("href", `${siteRoot}calculators/loan-comparison/`);
+    await expect(tools.nth(3)).toHaveAttribute("href", `${siteRoot}calculators/home-loan/`);
     const cards = page.locator(".related-article-card");
     await expect(cards).toHaveCount(4);
     const hrefs = await cards.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));

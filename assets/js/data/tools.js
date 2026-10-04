@@ -136,12 +136,40 @@ const catalog = [
 
     {
         id: "home-loan",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/home-loan/index.js"),
         category: "loans",
         icon: "⌂",
         title: "Home Loan Calculator",
         description:
-            "Calculate home loan EMI, interest and total repayment."
+            "Work out the home loan that fits your monthly EMI budget, what it would cost in interest, and how the tenure changes it.",
+        aliases: [
+            "home loan affordability",
+            "how much loan can i afford",
+            "loan amount calculator"
+        ],
+        capabilities: {
+            reset: true,
+            table: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Home Loan Calculator: Loan Amount for Your EMI Budget | ToolZen Hub",
+            description:
+                "Work out the home loan that fits the monthly EMI you choose, with the interest it costs and what a different tenure does. Calculated from your numbers: not a lender's offer or decision."
+        },
+        relatedArticles: [
+            "home-loan/how-much-home-loan-fits-your-emi-budget",
+            "home-loan/longer-tenure-bigger-loan-much-more-interest",
+            "home-loan/how-interest-rates-change-the-home-loan-you-can-borrow"
+        ]
     },
 
     {

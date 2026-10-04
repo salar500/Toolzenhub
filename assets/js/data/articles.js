@@ -818,6 +818,115 @@ const catalog = [
 
 
     /* =====================================================
+       HOME LOAN  (published)
+       The cluster of the Home Loan Calculator
+       (docs/tool-packs/06-home-loan.md).
+    ===================================================== */
+
+    {
+        id: 27,
+        status: "published",
+        category: "loans",
+        topic: "home-loan",
+        slug: "how-much-home-loan-fits-your-emi-budget",
+        title:
+            "How Much Home Loan Fits Your EMI Budget?",
+        description:
+            "Start from the monthly EMI you choose to carry and work out the loan that fits, step by step, on one worked example.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "5 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/how-much-home-loan-fits-your-emi-budget.png",
+            alt:
+                "One monthly income bar split into existing EMIs, the new EMI room that a loan can use, and the rest of the income, drawn to scale for an income of 1,00,000"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/how-much-home-loan-fits-your-emi-budget.png",
+            alt:
+                "One monthly income bar split into existing EMIs, the new EMI room that a loan can use, and the rest of the income, drawn to scale for an income of 1,00,000"
+        },
+        tools: ["home-loan"],
+        related: [
+            "home-loan/longer-tenure-bigger-loan-much-more-interest",
+            "home-loan/how-interest-rates-change-the-home-loan-you-can-borrow",
+            "loan-comparison/emi-vs-total-interest"
+        ],
+        relatedLabel: "Finance"
+    },
+
+    {
+        id: 28,
+        status: "published",
+        category: "loans",
+        topic: "home-loan",
+        slug: "longer-tenure-bigger-loan-much-more-interest",
+        title:
+            "Longer Tenure, Bigger Loan, Much More Interest",
+        description:
+            "Keep the monthly EMI the same and see how much more loan a longer tenure fits, and the interest that comes with it.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/longer-tenure-bigger-loan-much-more-interest.png",
+            alt:
+                "Five pairs of columns for tenures of 10 to 30 years: the loan that fits, in green, rises slowly while the total interest, in slate, rises much faster"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/longer-tenure-bigger-loan-much-more-interest.png",
+            alt:
+                "Five pairs of columns for tenures of 10 to 30 years: the loan that fits, in green, rises slowly while the total interest, in slate, rises much faster"
+        },
+        tools: ["home-loan"],
+        related: [
+            "home-loan/how-much-home-loan-fits-your-emi-budget",
+            "home-loan/how-interest-rates-change-the-home-loan-you-can-borrow",
+            "loan-comparison/loan-tenure-total-interest"
+        ],
+        relatedLabel: "Finance"
+    },
+
+    {
+        id: 29,
+        status: "published",
+        category: "loans",
+        topic: "home-loan",
+        slug: "how-interest-rates-change-the-home-loan-you-can-borrow",
+        title:
+            "How Interest Rates Change the Home Loan You Can Borrow",
+        description:
+            "Keep the EMI room and the tenure fixed and change only the rate to see how the loan that fits moves.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/how-interest-rates-change-the-home-loan-you-can-borrow.png",
+            alt:
+                "Four horizontal bars for rates of 7.5%, 8.5%, 9.5% and 10.5%: the loan that fits the same EMI over the same tenure gets shorter as the rate rises"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/how-interest-rates-change-the-home-loan-you-can-borrow.png",
+            alt:
+                "Four horizontal bars for rates of 7.5%, 8.5%, 9.5% and 10.5%: the loan that fits the same EMI over the same tenure gets shorter as the rate rises"
+        },
+        tools: ["home-loan"],
+        related: [
+            "home-loan/how-much-home-loan-fits-your-emi-budget",
+            "home-loan/longer-tenure-bigger-loan-much-more-interest",
+            "loan-comparison/fixed-vs-floating-interest-rates"
+        ],
+        relatedLabel: "Finance"
+    },
+
+
+    /* =====================================================
        COMING SOON  (listing placeholders: no route, no
        content module, not counted)
     ===================================================== */
@@ -1074,6 +1183,24 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/profit/units-needed-for-a-target-profit.js"
+            ),
+
+    "home-loan/how-much-home-loan-fits-your-emi-budget":
+        () =>
+            import(
+                "./articles/home-loan/how-much-home-loan-fits-your-emi-budget.js"
+            ),
+
+    "home-loan/longer-tenure-bigger-loan-much-more-interest":
+        () =>
+            import(
+                "./articles/home-loan/longer-tenure-bigger-loan-much-more-interest.js"
+            ),
+
+    "home-loan/how-interest-rates-change-the-home-loan-you-can-borrow":
+        () =>
+            import(
+                "./articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow.js"
             )
 
 };

@@ -14,9 +14,9 @@ test.describe("home page", () => {
     await expect(page.locator("h1.hero__title")).toContainText("Smart Financial");
     await expect(page.locator("#categories .category-card")).toHaveCount(2);
     await expect(page.locator("#popular-calculators .calculator-card")).toHaveCount(6);
-    // the three built calculators (Loan Comparison, EMI and, since Tool Pack 3, SIP) are links, the other three are not
-    await expect(page.locator("#popular-calculators a.calculator-card")).toHaveCount(3);
-    await expect(page.locator("#popular-calculators .calculator-card--soon")).toHaveCount(3);
+    // the four built calculators (Loan Comparison, EMI, SIP since Tool Pack 3 and Home Loan since Tool Pack 6) are links, the other two are not
+    await expect(page.locator("#popular-calculators a.calculator-card")).toHaveCount(4);
+    await expect(page.locator("#popular-calculators .calculator-card--soon")).toHaveCount(2);
     await expect(page.locator("#popular-calculators a.calculator-card").first()).toHaveAttribute("href", `${siteRoot}calculators/loan-comparison/`);
     // latest articles: the first three published, linking into /articles/…
     const latest = page.locator("#latest-articles a.article-card");
@@ -86,13 +86,13 @@ test.describe("categories page", () => {
 });
 
 test.describe("calculators and loans listings", () => {
-  test("calculators page: 26 entries (7 built), search, empty state, deep link", async ({ page, go }) => {
+  test("calculators page: 26 entries (8 built), search, empty state, deep link", async ({ page, go }) => {
     await go("calculators.html");
     const cards = page.locator("#calculators-grid .calculator-card");
     await expect(cards).toHaveCount(26);
     await expect(page.locator("#calculators-results-count")).toHaveText("26 calculators");
-    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(7);
-    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(19);
+    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(8);
+    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(18);
 
     const input = page.locator("#calculators-search-input");
     await input.fill("sip");
@@ -108,16 +108,20 @@ test.describe("calculators and loans listings", () => {
     await expect(page.locator('#calculators-grid a[href$="calculators/emi/"]')).toHaveCount(1);
   });
 
-  test("loans page: 8 loan calculators (4 built), search filters within the category", async ({ page, go, siteRoot }) => {
+  test("loans page: 8 loan calculators (5 built), search filters within the category", async ({ page, go, siteRoot }) => {
     await go("loans.html");
     const cards = page.locator("#loans-calculators-grid .calculator-card");
     await expect(cards).toHaveCount(8);
-    await expect(page.locator("#loans-calculators-grid a.calculator-card")).toHaveCount(4);
-    await expect(page.locator("#loans-calculators-grid .calculator-card--soon")).toHaveCount(4);
+    await expect(page.locator("#loans-calculators-grid a.calculator-card")).toHaveCount(5);
+    await expect(page.locator("#loans-calculators-grid .calculator-card--soon")).toHaveCount(3);
     await expect(page.locator(".loans-breadcrumb")).toContainText("Loans");
     await page.locator("#loans-search-input").fill("home loan");
     await expect(cards).toHaveCount(1);
-    await expect(cards.first()).toHaveClass(/calculator-card--soon/);
+    await expect(cards.first()).not.toHaveClass(/calculator-card--soon/); // published since Tool Pack 6: a link
+    await expect(cards.first()).toHaveAttribute("href", `${siteRoot}calculators/home-loan/`);
+    await page.locator("#loans-search-input").fill("personal loan");
+    await expect(cards).toHaveCount(1);
+    await expect(cards.first()).toHaveClass(/calculator-card--soon/); // still Coming soon: listed, not linked
     await page.locator("#loans-search-input").fill("");
     await expect(cards).toHaveCount(8);
     await page.locator('#loans-calculators-grid a[href$="calculators/emi/"]').click();
@@ -127,9 +131,9 @@ test.describe("calculators and loans listings", () => {
 
 test.describe("Coming soon items are not clickable", () => {
   for (const [path, selector, expected] of [
-    ["", "#popular-calculators .calculator-card--soon", 3],
-    ["loans.html", "#loans-calculators-grid .calculator-card--soon", 4],
-    ["calculators.html", "#calculators-grid .calculator-card--soon", 19],
+    ["", "#popular-calculators .calculator-card--soon", 2],
+    ["loans.html", "#loans-calculators-grid .calculator-card--soon", 3],
+    ["calculators.html", "#calculators-grid .calculator-card--soon", 18],
   ]) {
     test(`${path || "home"}: ${expected} cards, no links, clicking does nothing`, async ({ page, go }) => {
       await go(path);
@@ -206,12 +210,12 @@ test.describe("footer", () => {
 });
 
 test.describe("calculator catalog drives tool identity (M1)", () => {
-  test("home popular list: Loan Comparison, EMI and SIP link to their routes, the other three are Coming soon", async ({ page, go, siteRoot }) => {
+  test("home popular list: Loan Comparison, EMI, SIP and Home Loan link to their routes, the other two are Coming soon", async ({ page, go, siteRoot }) => {
     await go("");
     const cards = page.locator("#popular-calculators .calculator-card");
     await expect(cards).toHaveCount(6);
     const links = page.locator("#popular-calculators a.calculator-card");
-    await expect(links).toHaveCount(3);
+    await expect(links).toHaveCount(4);
     await expect(links.nth(0)).toHaveAttribute("href", `${siteRoot}calculators/loan-comparison/`);
     await expect(links.nth(0)).toContainText("Loan Comparison");
     await expect(links.nth(1)).toHaveAttribute("href", `${siteRoot}calculators/emi/`);
@@ -220,21 +224,27 @@ test.describe("calculator catalog drives tool identity (M1)", () => {
     await expect(links.nth(2)).toHaveAttribute("href", `${siteRoot}calculators/sip/`);
     await expect(links.nth(2)).toContainText("SIP Calculator");
     await expect(links.nth(2).locator(".coming-soon-badge")).toHaveCount(0);
+    // Home Loan was also already in this hand-written list (as a Coming soon card): it turned into a link because the catalog published it, and was not added twice
+    await expect(links.nth(3)).toHaveAttribute("href", `${siteRoot}calculators/home-loan/`);
+    await expect(links.nth(3)).toContainText("Home Loan Calculator");
+    await expect(links.nth(3).locator(".coming-soon-badge")).toHaveCount(0);
+    await expect(page.locator("#popular-calculators .calculator-card:has-text('Home Loan Calculator')")).toHaveCount(1);
     const soon = page.locator("#popular-calculators .calculator-card--soon");
-    await expect(soon).toHaveCount(3);
-    await expect(soon.locator(".coming-soon-badge")).toHaveCount(3);
-    await expect(soon).toContainText(["GST Calculator", "Home Loan Calculator", "BMI Calculator"]);
+    await expect(soon).toHaveCount(2);
+    await expect(soon.locator(".coming-soon-badge")).toHaveCount(2);
+    await expect(soon).toContainText(["GST Calculator", "BMI Calculator"]);
     await expect(page.locator("#popular-calculators .calculator-card--soon a")).toHaveCount(0);
   });
 
   test("related calculators work in both directions (EMI <-> Loan Comparison), with the Loan Balance Transfer and Loan Prepayment Calculators beside them", async ({ page, go, siteRoot }) => {
     await go("calculators/loan-comparison/");
     const calcs = page.locator(".related-calculator-card");
-    await expect(calcs).toHaveCount(3);
+    await expect(calcs).toHaveCount(4);
     await expect(calcs.first()).toHaveAttribute("href", `${siteRoot}calculators/emi/`);
     await expect(calcs.first()).toContainText("EMI Calculator");
-    await expect(calcs.nth(1)).toContainText("Loan Balance Transfer Calculator");
-    await expect(calcs.nth(2)).toContainText("Loan Prepayment Calculator");
+    await expect(calcs.nth(1)).toContainText("Home Loan Calculator"); // published since Tool Pack 6
+    await expect(calcs.nth(2)).toContainText("Loan Balance Transfer Calculator");
+    await expect(calcs.nth(3)).toContainText("Loan Prepayment Calculator");
   });
 
   test("calculator code loads on demand: not on the home page, only on the calculator's own page", async ({ page, go }) => {
@@ -287,8 +297,8 @@ test.describe("M7 shared search: page experiences keep their UX and rank results
     await go("categories.html");
     await page.locator("#categories-search-input").fill("emi");
     await expect(page.locator("#categories-grid .category-page-card")).toHaveCount(5);
-    expect(await titlesOf(page, "#categories-grid .category-page-card")).toEqual(["EMI Calculator", "Loan Comparison Calculator", "Loan Prepayment Calculator", "Home Loan Calculator", "Personal Loan Calculator"]);
-    await expect(page.locator("#categories-grid .category-page-card--soon")).toHaveCount(2);
+    expect(await titlesOf(page, "#categories-grid .category-page-card")).toEqual(["EMI Calculator", "Loan Comparison Calculator", "Home Loan Calculator", "Loan Prepayment Calculator", "Personal Loan Calculator"]);
+    await expect(page.locator("#categories-grid .category-page-card--soon")).toHaveCount(1);
     await page.locator("#categories-search-input").fill("loan");
     expect(await titlesOf(page, "#categories-grid .category-page-card")).toEqual(["Loan Comparison Calculator", "Loan Balance Transfer Calculator", "Loan Prepayment Calculator", "Loan Eligibility Calculator", "Home Loan Calculator", "Personal Loan Calculator", "EMI Calculator", "Interest Calculator"]);
   });
@@ -297,7 +307,7 @@ test.describe("M7 shared search: page experiences keep their UX and rank results
     await go("calculators.html");
     const input = page.locator("#calculators-search-input");
     await input.fill("interest");
-    expect(await titlesOf(page, "#calculators-grid .calculator-card")).toEqual(["Interest Calculator", "Loan Comparison Calculator", "EMI Calculator", "Loan Prepayment Calculator", "Home Loan Calculator"]);
+    expect(await titlesOf(page, "#calculators-grid .calculator-card")).toEqual(["Interest Calculator", "Loan Comparison Calculator", "EMI Calculator", "Home Loan Calculator", "Loan Prepayment Calculator"]);
     await input.fill("zzzz-nothing");
     await expect(page.locator("#calculators-empty")).toBeVisible();
     await input.fill("");
@@ -308,7 +318,7 @@ test.describe("M7 shared search: page experiences keep their UX and rank results
     await go("loans.html");
     const input = page.locator("#loans-search-input");
     await input.fill("interest");
-    expect(await titlesOf(page, "#loans-calculators-grid .calculator-card")).toEqual(["Interest Calculator", "Loan Comparison Calculator", "EMI Calculator", "Loan Prepayment Calculator", "Home Loan Calculator"]);
+    expect(await titlesOf(page, "#loans-calculators-grid .calculator-card")).toEqual(["Interest Calculator", "Loan Comparison Calculator", "EMI Calculator", "Home Loan Calculator", "Loan Prepayment Calculator"]);
     await input.fill("loan-comp"); // matches the id only
     expect(await titlesOf(page, "#loans-calculators-grid .calculator-card")).toEqual(["Loan Comparison Calculator"]);
     await input.fill("sip"); // an Investment tool is never offered on the Loans page

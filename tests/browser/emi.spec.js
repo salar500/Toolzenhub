@@ -134,12 +134,13 @@ test.describe("EMI calculator", () => {
     await go("calculators/emi/");
     const calcs = page.locator(".related-calculator-card");
     await expect(page.getByRole("heading", { name: "Related Calculators" })).toBeVisible();
-    // Loan Comparison first, then the Loan Balance Transfer (Tool Pack 2) and Loan Prepayment (Tool Pack 1) calculators
-    await expect(calcs).toHaveCount(3);
+    // Loan Comparison first, then the Home Loan (Tool Pack 6), Loan Balance Transfer (Tool Pack 2) and Loan Prepayment (Tool Pack 1) calculators
+    await expect(calcs).toHaveCount(4);
     await expect(calcs.first()).toHaveAttribute("href", `${siteRoot}calculators/loan-comparison/`);
     await expect(calcs.first()).toContainText("Loan Comparison Calculator");
-    await expect(calcs.nth(1)).toHaveAttribute("href", `${siteRoot}calculators/balance-transfer/`);
-    await expect(calcs.nth(2)).toHaveAttribute("href", `${siteRoot}calculators/prepayment/`);
+    await expect(calcs.nth(1)).toHaveAttribute("href", `${siteRoot}calculators/home-loan/`);
+    await expect(calcs.nth(2)).toHaveAttribute("href", `${siteRoot}calculators/balance-transfer/`);
+    await expect(calcs.nth(3)).toHaveAttribute("href", `${siteRoot}calculators/prepayment/`);
 
     await expect(page.getByRole("heading", { name: "Related Articles" })).toBeVisible();
     const articles = page.locator(".related-article-card");

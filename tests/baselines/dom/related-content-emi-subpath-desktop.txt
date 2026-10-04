@@ -9,6 +9,11 @@ section.related-section
       div.related-calculator-content
         strong "Loan Comparison Calculator"
         span "Compare two loans side by side."
+    a.related-calculator-card [href="{ROOT}calculators/home-loan/"]
+      div.related-calculator-icon "⌂"
+      div.related-calculator-content
+        strong "Home Loan Calculator"
+        span "Work out the home loan that fits your monthly EMI budget, what it would cost in interest, …"
     a.related-calculator-card [href="{ROOT}calculators/balance-transfer/"]
       div.related-calculator-icon "⟳"
       div.related-calculator-content

@@ -30,6 +30,24 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/home-loan/how-much-home-loan-fits-your-emi-budget/": {
+    "internal": 34,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/home-loan/longer-tenure-bigger-loan-much-more-interest/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "articles/loan-comparison/choose-right-loan-tenure/": {
     "internal": 37,
     "external": [],
@@ -139,25 +157,31 @@
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 30,
+    "internal": 31,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "calculators/balance-transfer/": {
-    "internal": 34,
+    "internal": 35,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "calculators/emi/": {
-    "internal": 35,
+    "internal": 36,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators/home-loan/": {
+    "internal": 34,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "calculators/loan-comparison/": {
-    "internal": 35,
+    "internal": 36,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -169,7 +193,7 @@
     "deadFragments": []
   },
   "calculators/prepayment/": {
-    "internal": 34,
+    "internal": 35,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -213,7 +237,7 @@
     "deadFragments": []
   },
   "(home)": {
-    "internal": 32,
+    "internal": 33,
     "external": [],
     "placeholders": 4,
     "deadFragments": [
@@ -221,7 +245,7 @@
     ]
   },
   "loans.html": {
-    "internal": 27,
+    "internal": 28,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -239,13 +263,13 @@
     "deadFragments": []
   },
   "categories.html?q=loan": {
-    "internal": 26,
+    "internal": 27,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "calculators.html?q=emi": {
-    "internal": 26,
+    "internal": 27,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

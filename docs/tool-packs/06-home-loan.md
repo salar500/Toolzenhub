@@ -1,6 +1,6 @@
 # Tool Pack 06: Home Loan Calculator (the loan that fits an EMI budget)
 
-Status: draft (planning only, not implemented, not approved for build)      Base commit: 9951737
+Status: built and verified (commit pending)      Base commit: 2bce60c
 Reserved id and slug: `home-loan` (route `/calculators/home-loan/`, a Coming Soon entry today)
 Spec follows `docs/tool-packs/_spec-template.md`; lifecycle and gate in `docs/tool-pack-factory.md`; reuse rules in
 `docs/tool-pack-reuse-review.md`; the previous packs are `03-sip.md`, `04-margin.md` and `05-profit.md`.
@@ -419,3 +419,45 @@ EMIs X, share s, rate a, tenure N; the room B = I × s ÷ 100 − X.
 4. The three articles, figure tests and the three images; focused article tests.
 5. Pinned expectations, baselines and visual registration for the pages that change (the Home page and the affected Loans pages among them).
 6. Final Tool Pack gate once (section 25), then the commit.
+
+## Implementation notes (deviations from the plan and decisions made while building)
+
+- **Exact arithmetic with an exact power.** The engine keeps `(1 + r)^n` as a ratio of whole numbers (BigInt, rate scaled by 1e10, n up to
+  360) and takes the loan as a floored whole-number division, so the loan is never off by a rupee. The EMI, total repaid and interest are
+  integer divisions scaled by 1e8 and handed back as numbers. A test brackets every checked loan with a plain-double EMI: the EMI of the
+  loan is within the room and the EMI of one rupee more is above it.
+- **The reference grew to 17 scenarios** (the planned A to M plus: a 18-year tenure outside the five, existing EMIs above income, a
+  zero rate over 30 years, the smallest income and share, a zero own funds, a high rate with a high share and a loan with a room that is
+  not a whole rupee). The planning figures were all reproduced; the totals differ from the planning run only in the digits after the
+  paise (the planning run used a double-precision EMI, the reference an 80-digit one).
+- **The loan is the full-width primary card; the four supporting cards are a two-by-two block.** The plan said five metrics with no orphan;
+  in the shared two-column grid that needs the primary to span the row, done with one rule scoped to `#home-loan-results` in
+  `home-loan.css`. The shared grid is unchanged and nothing changes on a phone (one column). A browser test checks the layout at desktop widths.
+- **Related articles: three each, not two.** Each new article lists the other two and one existing Loans article
+  (`emi-vs-total-interest`, `loan-tenure-total-interest`, `fixed-vs-floating-interest-rates`), as the plan intended; the Margin and Profit
+  clusters, which had no other Business article, had two.
+- **Intended publication effects, all reviewed:** Home Loan joined the Home page's Popular Calculators (the existing Coming soon card became
+  a link; no card was added), the Loans landing page and the Calculators page; every Loans tool page now relates to four tools instead of three
+  (the Home Loan card is added), so the EMI, Loan Comparison, Prepayment and Balance Transfer specs, DOM, link and SEO baselines and visual
+  baselines changed on purpose; the Loans article count went from 10 to 13.
+- **A visual observation, not changed here:** with four related calculators the shared related-calculators grid shows three in a row and the
+  fourth alone on the next row at desktop width, on every Loans tool page. Fixing it is a shared layout decision (a four-column grid or a
+  limit of three) and is left for a separate, deliberate refinement.
+- **The Coming Soon helper followed the change** (its first pick is now Personal Loan). One test had used Home Loan as its example of an
+  unpublished tool (the curated-tools test in `relationships.test.mjs`); it now asks the helper for a Coming Soon Loans tool, keeping its purpose.
+- **Search ranking:** Home Loan is a published tool whose description mentions an EMI, so it now ranks among the published results (before
+  Loan Prepayment by catalog order) for "emi" and "interest", and the new article titles and descriptions match "emi" and "tenure". These pinned
+  rankings were reviewed and updated.
+- **Size.** Measured, gzipped: tool module 7.3 KB, formulas 3.3 KB (about 10.5 KB together), tool CSS 1.5 KB; no dependency, no chart. Images
+  (PNG / WebP): 3.9 KB / 2.9 KB, 5.2 KB / 4.6 KB and 4.3 KB / 3.9 KB. No size budget was set and none was chased.
+- **Not done (deferred, as planned):** a rate table, a repayment schedule, a co-applicant, print, CSV, a chart; the fourth article ("how existing
+  EMIs reduce the loan that fits"), whose numbers are covered inside the first article.
+- **Repetition observed (recorded, not extracted):** the `init()` skeleton, the notes, the definition-list card, the table and sr-only rules were
+  copied again from Profit and Margin; the BigInt helpers (`scaled`) are now in three engines; `toolStyles.json` gained another identical
+  22-line entry; the publication touch-list again needed the catalog, sections, search, taxonomy, articles and relationships tests, the
+  navigation counts, the articles listing pagination, and the accessibility, tool-controls and visual registrations. The Loans category touched
+  more pinned expectations than Business or Investment because four existing tools list each other.
+- **Final verification passed.** Engine golden 38, article figures 6, full unit 726; root and GitHub Pages builds; inventory (41 live pages, 24
+  Coming Soon), links, assets and SEO; visual desktop 16, mobile 16, tablet 10. Browser coverage was run spec by spec with `--workers=1` (monolithic
+  runs were stopped by memory pressure on this laptop in earlier packs), not as whole projects: `subpath-desktop` 19 specs (443 passed, 1 skipped),
+  `subpath-mobile` 17 specs (428 passed, 1 skipped) and `root-desktop` 6 specs (148 passed).

@@ -77,7 +77,7 @@ test.describe("form labels", () => {
   });
 
   test("no form control on the main pages is left without a name", async ({ page, go }) => {
-    for (const p of ["articles.html", "contact.html", "categories.html", "calculators.html", "loans.html", "calculators/emi/", "calculators/prepayment/", "calculators/balance-transfer/", "calculators/sip/", "calculators/margin/", "calculators/profit/"]) {
+    for (const p of ["articles.html", "contact.html", "categories.html", "calculators.html", "loans.html", "calculators/emi/", "calculators/prepayment/", "calculators/balance-transfer/", "calculators/sip/", "calculators/margin/", "calculators/profit/", "calculators/home-loan/"]) {
       await go(p);
       const unnamed = await page.evaluate(() =>
         [...document.querySelectorAll("input:not([type=hidden]), select, textarea")]
@@ -127,7 +127,7 @@ test.describe("reduced motion", () => {
 });
 
 test.describe("landmarks", () => {
-  for (const p of ["", "articles.html", "contact.html", "calculators/emi/", "calculators/prepayment/", "calculators/balance-transfer/", "calculators/sip/", "calculators/margin/", "calculators/profit/", "privacy.html"]) {
+  for (const p of ["", "articles.html", "contact.html", "calculators/emi/", "calculators/prepayment/", "calculators/balance-transfer/", "calculators/sip/", "calculators/margin/", "calculators/profit/", "calculators/home-loan/", "privacy.html"]) {
     test(`${p || "home"}: one banner-free footer landmark and at most one main`, async ({ page, go }) => {
       await go(p);
       expect(await page.locator("footer").count()).toBe(1);

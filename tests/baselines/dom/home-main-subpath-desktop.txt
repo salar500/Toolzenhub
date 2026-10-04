@@ -73,12 +73,12 @@ main#app
               h3 "GST Calculator"
               p "Calculate GST easily and accurately"
               span.coming-soon-badge "Coming soon"
-          div.calculator-card.calculator-card--soon [aria-disabled="true"]
+          a.calculator-card [href="{ROOT}calculators/home-loan/"]
             div.calculator-card__icon.calculator-card__icon--pink "⌂"
             div.calculator-card__content
               h3 "Home Loan Calculator"
               p "Calculate your home loan eligibility"
-              span.coming-soon-badge "Coming soon"
+            span.calculator-card__arrow [aria-hidden="true"] "→"
           div.calculator-card.calculator-card--soon [aria-disabled="true"]
             div.calculator-card__icon.calculator-card__icon--teal "♙"
             div.calculator-card__content

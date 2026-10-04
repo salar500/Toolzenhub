@@ -1,0 +1,259 @@
+/* =========================================================
+   ToolZen Hub
+   Home Loan Calculator
+
+   Only what the shared calculator styles do not already provide:
+   the notes, the own-funds card and the tenure table. Buttons, focus, fields and headings come from the shared
+   layer (components/buttons.css, base/accessibility.css,
+   calculator-base.css, calculator-form.css). Loaded after
+   calculator-responsive.css.
+========================================================= */
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.home-loan-subtitle {
+
+    margin: 28px 0 14px;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--color-slate-200);
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.4;
+
+}
+
+/*
+ * Five metrics sit in the shared two-column grid: the loan that fits (the primary figure) and four supporting figures. The loan
+ * spans the row so it stays visually dominant and the four supporting cards fall into a balanced two-by-two block. (On a phone the
+ * grid is one column and this has no effect.) Only this page's results are affected; the shared grid is unchanged.
+ */
+
+#home-loan-results .calculator-results__grid > .calculator-results__item--primary {
+
+    grid-column: 1 / -1;
+
+}
+
+#home-loan-results .calculator-results__summary p {
+
+    margin: 0 0 8px;
+
+}
+
+#home-loan-results .calculator-results__summary p:last-child {
+
+    home-loan-bottom: 0;
+
+}
+
+
+/* =========================================================
+   NOTES
+   The trust note is calm and starts with the words "Your own
+   planning", so its meaning never depends on colour.
+========================================================= */
+
+.home-loan-note {
+
+    margin: 10px 0 0;
+
+    color: var(--color-ink-muted);
+
+    font-size: 11px;
+    line-height: 1.5;
+
+}
+
+.home-loan-note--plain {
+
+    margin: 12px 0 12px;
+
+    color: #475467;
+
+    font-size: 12px;
+
+}
+
+.home-loan-note--trust {
+
+    margin: 16px 0 0;
+    padding: 12px 14px;
+
+    border: 1px solid #fedf89;
+    border-left: 4px solid #f79009;
+    border-radius: 8px;
+
+    background: #fffcf5;
+
+    color: var(--color-ink);
+
+    font-size: 13px;
+    line-height: 1.55;
+
+}
+
+
+/* =========================================================
+   BREAKDOWN AND TARGET CARDS
+========================================================= */
+
+.home-loan-compare {
+
+    home-loan-bottom: 14px;
+
+}
+
+.home-loan-compare__card {
+
+    box-sizing: border-box;
+
+    max-width: 460px;
+
+    padding: 16px;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+
+    background: var(--color-white);
+
+}
+
+.home-loan-compare__title {
+
+    margin: 0 0 2px;
+
+    color: var(--color-ink);
+
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.35;
+
+}
+
+.home-loan-compare__tag {
+
+    margin: 0 0 10px;
+
+    color: var(--color-ink-muted);
+
+    font-size: 11px;
+    line-height: 1.4;
+
+}
+
+.home-loan-compare__list {
+
+    margin: 0;
+
+}
+
+.home-loan-compare__list > div {
+
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 8px 0;
+
+    border-top: 1px solid #eaecf0;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+}
+
+.home-loan-compare__list dt {
+
+    color: #475467;
+
+}
+
+.home-loan-compare__list dd {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-weight: 700;
+
+    text-align: right;
+
+}
+
+
+/* =========================================================
+   WHAT-IF TABLE
+========================================================= */
+
+.home-loan-table th:not(:first-child),
+.home-loan-table td {
+
+    text-align: right;
+
+}
+
+.home-loan-table tbody th {
+
+    background: var(--color-white);
+
+    color: var(--color-ink);
+
+}
+
+/* the first column stays in view when a narrow screen scrolls the table sideways */
+
+.home-loan-table th:first-child {
+
+    position: sticky;
+    left: 0;
+
+    text-align: left;
+
+    box-shadow: 1px 0 0 #eaecf0;
+
+}
+
+.home-loan-table thead th:first-child {
+
+    background: #f9fafb;
+
+}
+
+#home-loan-results .calculator-results__table-wrapper:focus-visible {
+
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+
+/* =========================================================
+   TEXT FOR SCREEN READERS ONLY
+========================================================= */
+
+.home-loan-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
