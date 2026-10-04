@@ -208,4 +208,6 @@ justified. That review is recorded in `docs/tool-pack-reuse-review.md` (no gener
 Calculator, the first Business tool and a pricing decision tool, chosen over a second Investment tool; its spec is
 `docs/tool-packs/04-margin.md` (built). Tool Pack 5 is the Profit Calculator, the natural follow-up that takes the fixed costs and
 break-even that Margin left out (a second Business tool, chosen over CAGR and the rule-bound Tax and Health tools); its spec is
-`docs/tool-packs/05-profit.md` (draft). Do not start a pack without an approved spec.
+`docs/tool-packs/05-profit.md` (built). Tool Pack 6 is the Home Loan Calculator, the loan that fits an EMI budget: the question that comes
+before the four live Loans tools, chosen over ROI, CAGR and the lender-rule-bound Loan Eligibility; its spec is `docs/tool-packs/06-home-loan.md`
+(draft). Do not start a pack without an approved spec.
