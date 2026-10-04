@@ -206,4 +206,6 @@ second category, Investment) in `docs/tool-packs/03-sip.md`. After Pack 3 is bui
 work across Packs 1 to 3 and decide whether a limited generator or shared print and comparison styles are now
 justified. That review is recorded in `docs/tool-pack-reuse-review.md` (no generator yet). Tool Pack 4 is the Margin
 Calculator, the first Business tool and a pricing decision tool, chosen over a second Investment tool; its spec is
-`docs/tool-packs/04-margin.md` (draft). Do not start a pack without an approved spec.
+`docs/tool-packs/04-margin.md` (built). Tool Pack 5 is the Profit Calculator, the natural follow-up that takes the fixed costs and
+break-even that Margin left out (a second Business tool, chosen over CAGR and the rule-bound Tax and Health tools); its spec is
+`docs/tool-packs/05-profit.md` (draft). Do not start a pack without an approved spec.
