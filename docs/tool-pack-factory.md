@@ -187,6 +187,10 @@ partial run a pass. Visual and baseline updates are intentional, reviewed edits,
 
 ## 9. Generator decision
 
+**Reviewed after Tool Pack 3: NO GENERATOR YET.** See `docs/tool-pack-reuse-review.md` for the evidence, the
+rejected abstractions, the print and comparison-card decisions and the only scope a generator could ever have.
+The text below is the earlier deferral, kept for the reasoning.
+
 **DEFERRED.** A `create:tool` script would write about six mechanical edits (a catalog stub, a styles entry, a
 test stub). The work that costs time and carries risk is deciding the model, the fields, the articles and the
 imagery, and a generator must not do any of that. Two packs is too few to know which parts are really identical,
