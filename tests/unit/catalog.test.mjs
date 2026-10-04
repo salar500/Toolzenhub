@@ -24,7 +24,7 @@ before(async () => {
   related = { categories: cats.categories };
 });
 
-const PUBLISHED = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin"];
+const PUBLISHED = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment"];
 
 describe("catalog model", () => {
@@ -42,10 +42,10 @@ describe("catalog model", () => {
     for (const c of catalog.calculators) assert.ok(["published", "coming-soon"].includes(c.status), `${c.id}: ${c.status}`);
   });
 
-  test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP and Margin are published; all other 20 are coming-soon", () => {
+  test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP Margin and Profit are published; all other 19 are coming-soon", () => {
     const pub = catalog.calculators.filter((c) => c.status === "published").map((c) => c.id).sort();
     assert.deepEqual(pub, [...PUBLISHED].sort());
-    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 20);
+    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 19);
   });
 
   test("`available` (read by cards and search) is exactly status === published", () => {
@@ -114,6 +114,7 @@ describe("registry is derived from the catalog", () => {
       "balance-transfer": { section: "Calculators", category: "loans", title: "Loan Balance Transfer Calculator" },
       sip: { section: "Calculators", category: "investment", title: "SIP Calculator" },
       margin: { section: "Calculators", category: "business", title: "Margin Calculator" },
+      profit: { section: "Calculators", category: "business", title: "Profit Calculator" },
     });
   });
 });

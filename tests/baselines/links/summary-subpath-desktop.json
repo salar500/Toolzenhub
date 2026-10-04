@@ -96,6 +96,24 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "articles/profit/how-to-find-your-break-even-point/": {
+    "internal": 32,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/profit/price-cost-or-volume-which-matters-most/": {
+    "internal": 32,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/profit/units-needed-for-a-target-profit/": {
+    "internal": 32,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "articles/sip/how-a-sip-grows/": {
     "internal": 33,
     "external": [],
@@ -121,7 +139,7 @@
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 29,
+    "internal": 30,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -145,13 +163,19 @@
     "deadFragments": []
   },
   "calculators/margin/": {
-    "internal": 28,
+    "internal": 30,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "calculators/prepayment/": {
     "internal": 34,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators/profit/": {
+    "internal": 30,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

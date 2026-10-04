@@ -1,6 +1,6 @@
 # Tool Pack 05: Profit Calculator (profit and break-even for a period)
 
-Status: draft (planning only, not implemented, not approved for build)      Base commit: 87f3a0a
+Status: built and verified (commit pending)      Base commit: 0815e3c
 Reserved id and slug: `profit` (route `/calculators/profit/`, a Coming Soon entry today)
 Spec follows `docs/tool-packs/_spec-template.md`; lifecycle and gate in `docs/tool-pack-factory.md`; reuse rules in
 `docs/tool-pack-reuse-review.md`; the previous packs are `03-sip.md` and `04-margin.md`.
@@ -439,3 +439,45 @@ appears) and its visual baseline**; the Home page does not change (Profit is not
 the condition recorded in the Margin spec for considering a landing page; that is a separate, small decision for after the pack
 ships (what the page would hold, whether the existing category anchor already serves), not part of its scope. The Loans pages,
 SIP and the other tools do not change.
+
+## Implementation notes (deviations from the plan and decisions made while building)
+
+- **What-if units are rounded to whole units (a change from the plan).** The plan left a changed quantity unrounded (85.5 shown
+  as 85.5). Units are whole, so a what-if quantity is rounded to the nearest whole unit, half up (95 units less 10% is 86, more
+  10% is 105), and the table says so. The independent reference rounds the same way with `Decimal.quantize`; the engine does it
+  with whole-number arithmetic.
+- **Golden I was adjusted.** The planned target of ₹250 crore is above the tool's own ₹100 crore limit, so golden I uses a target of
+  ₹90 crore (2,334 units, already reached by the 5,000 sold). The planned fixed costs of ₹50 crore are kept.
+- **No break-even whenever the contribution is zero or negative, even with zero fixed costs.** The plan said "no break-even" for
+  a contribution of 0 or less; the reference now checks that first, so a price at or below the variable cost with no fixed costs is
+  not shown as "break-even at 0 units".
+- **The result shows five metrics:** profit (primary), break-even point, units above or short of break-even (or "Against break-even"
+  when it is at break-even or not applicable), contribution per unit, and profit as a share of revenue. In the shared two-column
+  grid the fifth card would sit alone in half a row, so a final refinement lets the last odd metric span the row, with one rule scoped
+  to `#profit-results` in `profit.css`. The shared results grid and the Margin and SIP pages are unchanged; on a phone the grid is
+  one column and the rule has no effect. The three Profit visual baselines were regenerated for it.
+- **Exact arithmetic** is the same whole-number approach as Margin (decimals as typed, scale 1e10; the what-if rows at a scale of
+  100 times that, so a whole-percent change is exact). A break-even of exactly 50 is never 51 because of floating point
+  (a test pins 0.3 − 0.1 = 0.2 against 10).
+- **Margin gains a related calculator (an intended publication effect).** Profit now appears on the Margin page and Margin on the
+  Profit page by the category relationship, with no code change to Margin. The Margin spec's "no related calculators" assertion, its
+  scope scan (which read the related card's text) and its visual baselines were updated on purpose. Business articles now relate to
+  both Business tools, `[margin, profit]` and `[profit, margin]`.
+- **Related articles: two per article**, as for Margin (a three-article cluster).
+- **Size.** Measured, gzipped: tool module 8.0 KB, formulas 3.4 KB (about 11.4 KB together), tool CSS 1.2 KB; no new dependency, no
+  chart. Images: 9.6 KB and 11.4 KB (break-even PNG and WebP), 4.9 KB and 3.6 KB (levers), 5.5 KB and 4.1 KB (target units). No size
+  budget was set and none was chased.
+- **A fourth article (fixed vs variable costs) was not published.** The distinction is explained inside the break-even article.
+- **No chart, print or CSV**, as planned; the break-even picture is the first article's image.
+- **Repetition observed (recorded, not extracted):** the `init()` skeleton, the notes, the definition-list card, the table and sr-only
+  rules were copied again from Margin; the BigInt helpers (`scaled`, `ceilDiv`, `ratio`) are now in two engines; `toolStyles.json`
+  gained another identical 22-line entry; the publication touch-list again needed the catalog, sections, search, taxonomy, articles
+  and relationships tests, the navigation counts, the articles listing pagination and the accessibility, tool-controls and visual
+  registrations. The Coming Soon helper meant no Coming Soon sample had to be swapped. Per-pack related-count rules had to be extended
+  once more (two per article for the Margin and Profit clusters).
+- **Final verification passed.** Engine golden 45, article figures 6, full unit 682; root and GitHub Pages builds; inventory (37 live
+  pages, 25 Coming Soon), links, assets and SEO; visual desktop 15, mobile 15, tablet 9. Browser coverage was run spec by spec with
+  `--workers=1` (monolithic runs were stopped by memory pressure on this laptop in earlier packs), not as whole projects:
+  `subpath-desktop` 18 specs (407 passed, 1 skipped), `subpath-mobile` 16 specs (392 passed, 1 skipped) and `root-desktop` 6 specs
+  (142 passed). After the fifth-card refinement only the Profit checks were rerun: `profit.spec.js` on `subpath-desktop` and
+  `subpath-mobile` (29 passed each) and the Profit visual test on desktop, mobile and tablet (1 passed each).

@@ -415,3 +415,6 @@ and the other tools do not change.
   spec by spec with `--workers=1` (a monolithic run was stopped twice by memory pressure on this laptop), not as whole
   projects: `subpath-desktop` 17 specs (366 passed, 1 skipped), `subpath-mobile` 15 specs (351 passed, 1 skipped) and
   `root-desktop` 6 specs (136 passed).
+- **Later effect (Tool Pack 5).** Once the Profit Calculator was published (`docs/tool-packs/05-profit.md`), the Margin page gained it as a
+  related calculator through the category relationship, with no change to Margin's code. The "no related calculators" assertion in the
+  Margin browser spec and the Margin visual baselines were updated on purpose, and Business article tools became `[margin, profit]`.

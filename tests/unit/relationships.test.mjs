@@ -62,7 +62,8 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
       : key === "balance-transfer/is-a-loan-balance-transfer-worth-it" ? ["balance-transfer", "loan-comparison", "emi", "prepayment"]
       : key === "balance-transfer/balance-transfer-vs-prepayment" ? ["balance-transfer", "prepayment", "loan-comparison", "emi"]
       : key.startsWith("sip/") ? ["sip"] // the only published Investment tool: no category fallback beyond it
-      : key.startsWith("margin/") ? ["margin"] // the only published Business tool: no category fallback beyond it
+      : key.startsWith("margin/") ? ["margin", "profit"] // the primary tool first, then the other published Business tool
+      : key.startsWith("profit/") ? ["profit", "margin"]
       : ["loan-comparison", "emi", "balance-transfer", "prepayment"];
     for (const key of PUBLISHED) assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(key)), expected(key), key);
     assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(PUBLISHED[0], { fill: false })), ["loan-comparison"]);
@@ -72,7 +73,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     for (const key of PUBLISHED) {
       const entry = articles.getArticleByKey(key);
       assert.deepEqual(keys(rel.getRelatedArticles(key)), entry.related, key);
-      assert.equal(rel.getRelatedArticles(key).length, key.startsWith("margin/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") ? 3 : 5, key); // Margin: a three-article cluster, no other Business article
+      assert.equal(rel.getRelatedArticles(key).length, key.startsWith("margin/") || key.startsWith("profit/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") ? 3 : 5, key); // Margin and Profit: three-article clusters, so two others
     }
   });
 
@@ -144,7 +145,7 @@ describe("curated first, automatic second", () => {
     savedRelated = first().related;
     first().related = [];
     // the other published articles of ITS category (Loans): the Investment and Business articles are not offered
-    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/")).slice(1));
+    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/") && !k.startsWith("profit/")).slice(1));
   });
 
   test("a curated article list is never replaced or padded by the automatic one", () => {

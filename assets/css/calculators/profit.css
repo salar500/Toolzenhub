@@ -1,0 +1,260 @@
+/* =========================================================
+   ToolZen Hub
+   Profit Calculator
+
+   Only what the shared calculator styles do not already provide:
+   the notes, the breakdown and target cards and the what-if
+   table. Buttons, focus, fields and headings come from the shared
+   layer (components/buttons.css, base/accessibility.css,
+   calculator-base.css, calculator-form.css). Loaded after
+   calculator-responsive.css.
+========================================================= */
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.profit-subtitle {
+
+    margin: 28px 0 14px;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--color-slate-200);
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.4;
+
+}
+
+/*
+ * Five metrics sit in the shared two-column grid: the primary and four supporting figures. The last one would be left alone
+ * on its row, half the width with nothing beside it, so it spans the row. (On a phone the grid is one column and this has no
+ * effect.) Only this page's results are affected; the shared grid is unchanged.
+ */
+
+#profit-results .calculator-results__grid > .calculator-results__item:last-child:nth-child(odd) {
+
+    grid-column: 1 / -1;
+
+}
+
+#profit-results .calculator-results__summary p {
+
+    margin: 0 0 8px;
+
+}
+
+#profit-results .calculator-results__summary p:last-child {
+
+    profit-bottom: 0;
+
+}
+
+
+/* =========================================================
+   NOTES
+   The trust note is calm and starts with the words "For the
+   numbers you entered", so its meaning never depends on colour.
+========================================================= */
+
+.profit-note {
+
+    margin: 10px 0 0;
+
+    color: var(--color-ink-muted);
+
+    font-size: 11px;
+    line-height: 1.5;
+
+}
+
+.profit-note--plain {
+
+    margin: 12px 0 12px;
+
+    color: #475467;
+
+    font-size: 12px;
+
+}
+
+.profit-note--trust {
+
+    margin: 16px 0 0;
+    padding: 12px 14px;
+
+    border: 1px solid #fedf89;
+    border-left: 4px solid #f79009;
+    border-radius: 8px;
+
+    background: #fffcf5;
+
+    color: var(--color-ink);
+
+    font-size: 13px;
+    line-height: 1.55;
+
+}
+
+
+/* =========================================================
+   BREAKDOWN AND TARGET CARDS
+========================================================= */
+
+.profit-compare {
+
+    profit-bottom: 14px;
+
+}
+
+.profit-compare__card {
+
+    box-sizing: border-box;
+
+    max-width: 460px;
+
+    padding: 16px;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+
+    background: var(--color-white);
+
+}
+
+.profit-compare__title {
+
+    margin: 0 0 2px;
+
+    color: var(--color-ink);
+
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.35;
+
+}
+
+.profit-compare__tag {
+
+    margin: 0 0 10px;
+
+    color: var(--color-ink-muted);
+
+    font-size: 11px;
+    line-height: 1.4;
+
+}
+
+.profit-compare__list {
+
+    margin: 0;
+
+}
+
+.profit-compare__list > div {
+
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 8px 0;
+
+    border-top: 1px solid #eaecf0;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+}
+
+.profit-compare__list dt {
+
+    color: #475467;
+
+}
+
+.profit-compare__list dd {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-weight: 700;
+
+    text-align: right;
+
+}
+
+
+/* =========================================================
+   WHAT-IF TABLE
+========================================================= */
+
+.profit-table th:not(:first-child),
+.profit-table td {
+
+    text-align: right;
+
+}
+
+.profit-table tbody th {
+
+    background: var(--color-white);
+
+    color: var(--color-ink);
+
+}
+
+/* the first column stays in view when a narrow screen scrolls the table sideways */
+
+.profit-table th:first-child {
+
+    position: sticky;
+    left: 0;
+
+    text-align: left;
+
+    box-shadow: 1px 0 0 #eaecf0;
+
+}
+
+.profit-table thead th:first-child {
+
+    background: #f9fafb;
+
+}
+
+#profit-results .calculator-results__table-wrapper:focus-visible {
+
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+
+/* =========================================================
+   TEXT FOR SCREEN READERS ONLY
+========================================================= */
+
+.profit-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}

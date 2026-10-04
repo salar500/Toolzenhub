@@ -408,12 +408,40 @@ const catalog = [
 
     {
         id: "profit",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/profit/index.js"),
         category: "business",
         icon: "₹",
         title: "Profit Calculator",
         description:
-            "Calculate business profit."
+            "Work out your profit for a period, the break-even point and the units a target needs, and see which of price, cost, volume or fixed costs moves profit most.",
+        aliases: [
+            "break-even calculator",
+            "business profit calculator",
+            "contribution margin calculator"
+        ],
+        capabilities: {
+            reset: true,
+            table: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Profit Calculator: Profit and Break-Even Point | ToolZen Hub",
+            description:
+                "Work out profit for a period from a selling price, a variable cost per unit, fixed costs and units sold, with the break-even point, the units a target profit needs and what a 10% change in price, cost, volume or fixed costs does. Calculated for the numbers you enter."
+        },
+        relatedArticles: [
+            "profit/how-to-find-your-break-even-point",
+            "profit/price-cost-or-volume-which-matters-most",
+            "profit/units-needed-for-a-target-profit"
+        ]
     },
 
     {

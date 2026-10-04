@@ -24,7 +24,7 @@ test.describe("generated pages carry their content without JavaScript @portable"
       expect(await page.locator(".article-key-takeaways li").count()).toBeGreaterThanOrEqual(3);
       expect(await page.locator(".article-faq details").count()).toBeGreaterThanOrEqual(3);
       expect(await page.locator(".article-toc a").count()).toBeGreaterThanOrEqual(4);
-      await expect(page.locator(".article-related-card")).toHaveCount(/\/margin\//.test(a.url) ? 2 : /\/(loan-prepayment|balance-transfer|sip)\//.test(a.url) ? 3 : 5);
+      await expect(page.locator(".article-related-card")).toHaveCount(/\/(margin|profit)\//.test(a.url) ? 2 : /\/(loan-prepayment|balance-transfer|sip)\//.test(a.url) ? 3 : 5);
       await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
       await expect(page.locator(".article-calculator-button")).toHaveCount(1);
       await expect(page.locator(".site-header .navbar__link").first()).toBeAttached();

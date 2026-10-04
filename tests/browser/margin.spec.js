@@ -392,10 +392,11 @@ test.describe("Margin Calculator", () => {
     for (const word of ["overheads", "fixed costs", "tax or GST", "returns", "other business costs", "without GST"]) await expect(trust).toContainText(word);
     await expect(trust).toContainText("not pricing advice");
     await fill(page, { discount: 10 });
-    const text = await page.locator("main").innerText();
+    // the tool's own content (the related Profit card, which is Profit's text, is not part of it)
+    const text = (await page.locator("#margin-results, .calculator-info").allInnerTexts()).join(" ");
     expect(text).not.toMatch(BANNED);
     // none of the out-of-scope features
-    await expect(page.locator("main")).not.toContainText(/break-even point|fixed cost per month|payback|ROI of/i);
+    expect(text).not.toMatch(/break-even point|fixed cost per month|payback|ROI of/i);
   });
 
   test("explanatory content, assumptions and the example", async ({ page, go }) => {
@@ -411,9 +412,13 @@ test.describe("Margin Calculator", () => {
     await expect(main).toContainText("1.67 times"); // the example's discount
   });
 
-  test("no related calculators in v1 (the other Business tools are not live) and three curated articles", async ({ page, go, siteRoot }) => {
+  test("Profit is its related calculator (the other Business tool that is live) and three curated articles", async ({ page, go, siteRoot }) => {
     await open(page, go);
-    await expect(page.locator(".related-calculator-card")).toHaveCount(0);
+    // since Tool Pack 5 the Profit Calculator is published, so Margin shows it; Coming soon ROI is not offered
+    const related = page.locator(".related-calculator-card");
+    await expect(related).toHaveCount(1);
+    await expect(related.first()).toContainText("Profit Calculator");
+    await expect(page.locator("a[href*='calculators/roi']")).toHaveCount(0);
     const cards = page.locator(".related-article-card");
     await expect(cards).toHaveCount(3);
     const hrefs = await cards.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
@@ -442,7 +447,7 @@ test.describe("Margin Calculator", () => {
     }
   });
 
-  test("search finds it by name and by its aliases; Coming soon Business tools are not offered as usable", async ({ page, go, siteRoot }) => {
+  test("search finds it by name and by its aliases; Coming soon ROI is not offered as usable", async ({ page, go, siteRoot }) => {
     await go("calculators.html");
     const input = page.locator("#calculators-search-input");
     for (const query of ["margin", "profit margin calculator", "markup calculator", "selling price calculator"]) {
@@ -451,8 +456,8 @@ test.describe("Margin Calculator", () => {
       await expect(card).toHaveCount(1);
       await expect(page.locator("#calculators-grid .calculator-card").first()).toContainText("Margin Calculator");
     }
-    await input.fill("profit calculator");
-    await expect(page.locator("#calculators-grid a.calculator-card[href*='calculators/profit']")).toHaveCount(0);
+    await input.fill("roi calculator");
+    await expect(page.locator("#calculators-grid a.calculator-card[href*='calculators/roi']")).toHaveCount(0); // Coming soon: not a link
   });
 
   test("responsive: no horizontal overflow with every optional block open, and readable tap targets", async ({ page, go }) => {

@@ -712,6 +712,112 @@ const catalog = [
 
 
     /* =====================================================
+       PROFIT  (published)
+       The cluster of the Profit Calculator
+       (docs/tool-packs/05-profit.md).
+    ===================================================== */
+
+    {
+        id: 24,
+        status: "published",
+        category: "business",
+        topic: "profit",
+        slug: "how-to-find-your-break-even-point",
+        title:
+            "How to Find Your Break-Even Point",
+        description:
+            "Find the number of units that cover your fixed costs from the price, the variable cost and the fixed costs, and see why the answer is rounded up.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/how-to-find-your-break-even-point.png",
+            alt:
+                "Chart of revenue, a solid line, and total cost, a dashed line, over units sold, crossing at the break-even point of 250 units, with a loss region before the crossing and a profit region after it"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/how-to-find-your-break-even-point.png",
+            alt:
+                "Chart of revenue, a solid line, and total cost, a dashed line, over units sold, crossing at the break-even point of 250 units, with a loss region before the crossing and a profit region after it"
+        },
+        tools: ["profit"],
+        related: [
+            "profit/price-cost-or-volume-which-matters-most",
+            "profit/units-needed-for-a-target-profit"
+        ],
+        relatedLabel: "Business"
+    },
+
+    {
+        id: 25,
+        status: "published",
+        category: "business",
+        topic: "profit",
+        slug: "price-cost-or-volume-which-matters-most",
+        title:
+            "Price, Cost or Volume: Which Matters Most?",
+        description:
+            "Move the selling price, the variable cost, the units sold and the fixed costs by 10% one at a time and see which moves the profit most on one example.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/price-cost-or-volume-which-matters-most.png",
+            alt:
+                "Bars showing the change in profit when each of the selling price, the variable cost, the units sold and the fixed costs falls or rises by 10%, from the longest bars for the price down to the shortest for the fixed costs"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/price-cost-or-volume-which-matters-most.png",
+            alt:
+                "Bars showing the change in profit when each of the selling price, the variable cost, the units sold and the fixed costs falls or rises by 10%, from the longest bars for the price down to the shortest for the fixed costs"
+        },
+        tools: ["profit"],
+        related: [
+            "profit/how-to-find-your-break-even-point",
+            "profit/units-needed-for-a-target-profit"
+        ],
+        relatedLabel: "Business"
+    },
+
+    {
+        id: 26,
+        status: "published",
+        category: "business",
+        topic: "profit",
+        slug: "units-needed-for-a-target-profit",
+        title:
+            "How Many Units Do You Need for a Target Profit?",
+        description:
+            "Work out how many units a target profit needs from the contribution per unit and the fixed costs, and compare it with the units you sold.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/units-needed-for-a-target-profit.png",
+            alt:
+                "Three bars for profit targets of 50,000, 1,00,000 and 2,00,000: each starts with the same 250 units that cover the fixed costs, followed by the further units the target needs, with a dashed line at the 400 units sold"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/units-needed-for-a-target-profit.png",
+            alt:
+                "Three bars for profit targets of 50,000, 1,00,000 and 2,00,000: each starts with the same 250 units that cover the fixed costs, followed by the further units the target needs, with a dashed line at the 400 units sold"
+        },
+        tools: ["profit"],
+        related: [
+            "profit/how-to-find-your-break-even-point",
+            "profit/price-cost-or-volume-which-matters-most"
+        ],
+        relatedLabel: "Business"
+    },
+
+
+    /* =====================================================
        COMING SOON  (listing placeholders: no route, no
        content module, not counted)
     ===================================================== */
@@ -950,6 +1056,24 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/margin/what-a-discount-really-costs-you.js"
+            ),
+
+    "profit/how-to-find-your-break-even-point":
+        () =>
+            import(
+                "./articles/profit/how-to-find-your-break-even-point.js"
+            ),
+
+    "profit/price-cost-or-volume-which-matters-most":
+        () =>
+            import(
+                "./articles/profit/price-cost-or-volume-which-matters-most.js"
+            ),
+
+    "profit/units-needed-for-a-target-profit":
+        () =>
+            import(
+                "./articles/profit/units-needed-for-a-target-profit.js"
             )
 
 };
