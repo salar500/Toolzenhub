@@ -896,6 +896,231 @@
       "visibleTextChars": 7929
     }
   },
+  "/articles/margin/margin-vs-markup/": {
+    "runtime": {
+      "title": "Margin vs Markup: Why They Are Not the Same | ToolZen Hub",
+      "description": "See why a 25% markup is only a 20% margin, how to convert between the two, and the pricing mistake that mixing them up causes.",
+      "canonical": "https://toolzenhub.in/articles/margin/margin-vs-markup/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "See why a 25% markup is only a 20% margin, how to convert between the two, and the pricing mistake that mixing them up causes.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/margin-vs-markup.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Margin vs Markup: Why They Are Not the Same | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/margin/margin-vs-markup/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "See why a 25% markup is only a 20% margin, how to convert between the two, and the pricing mistake that mixing them up causes.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/margin-vs-markup.png",
+        "twitter:title": "Margin vs Markup: Why They Are Not the Same | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Margin vs Markup: Why They Are Not the Same"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Margin vs Markup: Why They Are Not the Same | ToolZen Hub",
+      "description": "See why a 25% markup is only a 20% margin, how to convert between the two, and the pricing mistake that mixing them up causes.",
+      "canonical": "https://toolzenhub.in/articles/margin/margin-vs-markup/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6103
+    }
+  },
+  "/articles/margin/price-a-product-for-a-target-margin/": {
+    "runtime": {
+      "title": "How to Price a Product for a Target Margin | ToolZen Hub",
+      "description": "Work out the price for a target margin from the cost, see why it rises faster than the margin, and what a cost rise does to it.",
+      "canonical": "https://toolzenhub.in/articles/margin/price-a-product-for-a-target-margin/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Work out the price for a target margin from the cost, see why it rises faster than the margin, and what a cost rise does to it.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/price-a-product-for-a-target-margin.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How to Price a Product for a Target Margin | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/margin/price-a-product-for-a-target-margin/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Work out the price for a target margin from the cost, see why it rises faster than the margin, and what a cost rise does to it.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/price-a-product-for-a-target-margin.png",
+        "twitter:title": "How to Price a Product for a Target Margin | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "How to Price a Product for a Target Margin"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How to Price a Product for a Target Margin | ToolZen Hub",
+      "description": "Work out the price for a target margin from the cost, see why it rises faster than the margin, and what a cost rise does to it.",
+      "canonical": "https://toolzenhub.in/articles/margin/price-a-product-for-a-target-margin/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6196
+    }
+  },
+  "/articles/margin/what-a-discount-really-costs-you/": {
+    "runtime": {
+      "title": "What a Discount Really Costs You | ToolZen Hub",
+      "description": "See how many times today's sales a discount would need to earn the same total profit, and why a higher margin can afford a bigger discount.",
+      "canonical": "https://toolzenhub.in/articles/margin/what-a-discount-really-costs-you/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "See how many times today's sales a discount would need to earn the same total profit, and why a higher margin can afford a bigger discount.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/what-a-discount-really-costs-you.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "What a Discount Really Costs You | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/margin/what-a-discount-really-costs-you/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "See how many times today's sales a discount would need to earn the same total profit, and why a higher margin can afford a bigger discount.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/what-a-discount-really-costs-you.png",
+        "twitter:title": "What a Discount Really Costs You | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "What a Discount Really Costs You"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "What a Discount Really Costs You | ToolZen Hub",
+      "description": "See how many times today&#39;s sales a discount would need to earn the same total profit, and why a higher margin can afford a bigger discount.",
+      "canonical": "https://toolzenhub.in/articles/margin/what-a-discount-really-costs-you/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6205
+    }
+  },
   "/articles/sip/how-a-sip-grows/": {
     "runtime": {
       "title": "How a SIP Grows: Your Investment vs Estimated Growth | ToolZen Hub",
@@ -1381,6 +1606,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 4285
+    }
+  },
+  "/calculators/margin/": {
+    "runtime": {
+      "title": "Margin Calculator: Price, Margin and Markup | ToolZen Hub",
+      "description": "Work out a selling price from a target margin or markup, see margin and markup side by side, and see what a cost change or a discount does to profit per unit. Calculated for the numbers you enter.",
+      "canonical": "https://toolzenhub.in/calculators/margin/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Work out a selling price from a target margin or markup, see margin and markup side by side, and see what a cost change or a discount does to profit per unit. Calculated for the numbers you enter.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Margin Calculator: Price, Margin and Markup | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/margin/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Work out a selling price from a target margin or markup, see margin and markup side by side, and see what a cost change or a discount does to profit per unit. Calculated for the numbers you enter.",
+        "twitter:title": "Margin Calculator: Price, Margin and Markup | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Margin Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Margin Calculator: Price, Margin and Markup | ToolZen Hub",
+      "description": "Work out a selling price from a target margin or markup, see margin and markup side by side, and see what a cost change or a discount does to profit per unit. Calculated for the numbers you enter.",
+      "canonical": "https://toolzenhub.in/calculators/margin/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6177
     }
   },
   "/calculators/prepayment/": {

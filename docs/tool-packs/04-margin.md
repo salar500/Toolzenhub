@@ -1,6 +1,6 @@
 # Tool Pack 04: Margin Calculator (pricing and margin)
 
-Status: draft (planning only, not implemented, not approved for build)      Base commit: 7cbbc3d
+Status: built and verified (commit pending)      Base commit: a861e0a
 Reserved id and slug: `margin` (route `/calculators/margin/`, a Coming Soon entry today)
 Spec follows `docs/tool-packs/_spec-template.md`; lifecycle and gate in `docs/tool-pack-factory.md`; reuse rules in
 `docs/tool-pack-reuse-review.md`.
@@ -376,3 +376,42 @@ The Calculators and Categories cards for Margin and the Business category card b
 ranking for "margin", "markup", "selling price"; the Business article count (0 → 3) and the Articles listing; the
 Home page (check whether Margin is in the Popular Calculators list; today it is not). The Loans pages, the SIP page
 and the other tools do not change.
+
+## Implementation notes (deviations from the plan and decisions made while building)
+
+- **Exact arithmetic.** The engine works on the decimal text the visitor typed with whole numbers (BigInt, scale 1e10)
+  instead of doubles. Reason: `600 / (1 - 0.4)` is `1000.0000000000001` in floating point, which a round-up would turn
+  into 1,000.01. A test pins 600 at a 40% margin to exactly 1,000.00. Results are handed back as ordinary numbers.
+- **Discounted price rounding (not in the plan).** The discounted price is rounded to the nearest paisa (half up) and the
+  discount figures follow that rounded price, the same self-consistency rule as a derived price. The plan said nothing
+  was rounded; with 12.5% off a 512.82 price the exact figure is 448.7175, which cannot be charged. The reference
+  rounds the same way, by a different method (`Decimal.quantize`).
+- **Price to keep the margin** is computed as `price × new cost ÷ cost` rounded up (exactly the plan's
+  `new cost ÷ (1 − margin)`), because it needs no margin figure that is itself rounded; the reference finds it by
+  searching paise and asserts the two agree.
+- **Cost-change rows are not clamped** (10% under the smallest cost of ₹0.01 is ₹0.009), as written in the plan.
+- **Related articles: two, not three.** The cluster is three articles and Business has no other published article, so each
+  Margin article relates to the other two. The pinned tests record this (`MARGIN_PACK_PUBLISHED` gets 2).
+- **Basis switching** carries the current price, margin and markup into the other fields to 4 decimals (not 2), so a
+  price shown as a 33.3333% markup returns to exactly ₹800.00 after the round-up. With 2 decimals it drifted by 2 paise.
+- **Money is shown to the paisa** with a local `Intl.NumberFormat` in the tool, not the shared `formatINR`, which rounds to
+  whole rupees. The shared formatter was not changed.
+- **A fourth article (supplier cost increase) was not published.** The cost-rise numbers (5% and 10% on a ₹800 price)
+  are covered inside "How to price a product for a target margin", so a separate article would repeat it.
+- **No fifth cost-change control, chart, print or CSV**, as planned.
+- **Repetition observed (recorded, not extracted):** the compare-card CSS and the table CSS were copied again from the
+  SIP pack; the `init()` skeleton, the notes and the sr-only rules were copied again; `toolStyles.json` gained another
+  identical 22-line entry; the publication touch-list needed the same edits (catalog test, search test, sections test,
+  tool-catalog test, articles tests, navigation counts, accessibility, tool-controls and visual registrations). The
+  related-count rule had to be extended again because the cluster is smaller than three; the Coming Soon helper meant
+  no Coming Soon sample had to be swapped this time.
+- **Size (a deviation from the plan's "about 8 KB").** Measured, gzipped: tool module 8.5 KB, formulas 3.3 KB (about
+  11.9 KB together), tool CSS 1.7 KB (under the 2 KB estimate), no new dependency, no chart. Most of the JS is the page's
+  own copy (guide, assumptions, example, FAQ), which the SIP tool also carries (about 11.2 KB without its chart). It was
+  not trimmed to meet the estimate: the explanatory text is part of the product, and the size is in line with the other
+  tools.
+- **Final verification passed.** Engine golden 50, article figures 6, full unit 631; root and GitHub Pages builds; inventory
+  (33 live pages, 26 Coming Soon), links, assets and SEO; visual desktop 14, mobile 14, tablet 8. Browser coverage was run
+  spec by spec with `--workers=1` (a monolithic run was stopped twice by memory pressure on this laptop), not as whole
+  projects: `subpath-desktop` 17 specs (366 passed, 1 skipped), `subpath-mobile` 15 specs (351 passed, 1 skipped) and
+  `root-desktop` 6 specs (136 passed).

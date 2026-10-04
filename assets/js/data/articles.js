@@ -606,6 +606,112 @@ const catalog = [
 
 
     /* =====================================================
+       MARGIN  (published)
+       The cluster of the Margin Calculator
+       (docs/tool-packs/04-margin.md).
+    ===================================================== */
+
+    {
+        id: 21,
+        status: "published",
+        category: "business",
+        topic: "margin",
+        slug: "margin-vs-markup",
+        title:
+            "Margin vs Markup: Why They Are Not the Same",
+        description:
+            "See why a 25% markup is only a 20% margin, how to convert between the two, and the pricing mistake that mixing them up causes.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/margin-vs-markup.png",
+            alt:
+                "Three bars on one scale: the price split into cost and profit, the profit measured against the whole price as a margin, and the same profit measured against the cost alone as a larger markup"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/margin-vs-markup.png",
+            alt:
+                "Three bars on one scale: the price split into cost and profit, the profit measured against the whole price as a margin, and the same profit measured against the cost alone as a larger markup"
+        },
+        tools: ["margin"],
+        related: [
+            "margin/price-a-product-for-a-target-margin",
+            "margin/what-a-discount-really-costs-you"
+        ],
+        relatedLabel: "Business"
+    },
+
+    {
+        id: 22,
+        status: "published",
+        category: "business",
+        topic: "margin",
+        slug: "price-a-product-for-a-target-margin",
+        title:
+            "How to Price a Product for a Target Margin",
+        description:
+            "Work out the price for a target margin from the cost, see why it rises faster than the margin, and what a cost rise does to it.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/price-a-product-for-a-target-margin.png",
+            alt:
+                "Three price bars for one cost at target margins of 25%, 30% and 40%: the cost segment is the same length in each while the profit segment grows, and a dashed line marks where the cost ends"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/price-a-product-for-a-target-margin.png",
+            alt:
+                "Three price bars for one cost at target margins of 25%, 30% and 40%: the cost segment is the same length in each while the profit segment grows, and a dashed line marks where the cost ends"
+        },
+        tools: ["margin"],
+        related: [
+            "margin/margin-vs-markup",
+            "margin/what-a-discount-really-costs-you"
+        ],
+        relatedLabel: "Business"
+    },
+
+    {
+        id: 23,
+        status: "published",
+        category: "business",
+        topic: "margin",
+        slug: "what-a-discount-really-costs-you",
+        title:
+            "What a Discount Really Costs You",
+        description:
+            "See how many times today's sales a discount would need to earn the same total profit, and why a higher margin can afford a bigger discount.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/what-a-discount-really-costs-you.png",
+            alt:
+                "Chart of the sales multiple needed against the discount for a 25% margin product, a solid line that climbs steeply, and a 40% margin product, a dashed line that rises slowly, with a marker at 10% off on each"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/what-a-discount-really-costs-you.png",
+            alt:
+                "Chart of the sales multiple needed against the discount for a 25% margin product, a solid line that climbs steeply, and a 40% margin product, a dashed line that rises slowly, with a marker at 10% off on each"
+        },
+        tools: ["margin"],
+        related: [
+            "margin/margin-vs-markup",
+            "margin/price-a-product-for-a-target-margin"
+        ],
+        relatedLabel: "Business"
+    },
+
+
+    /* =====================================================
        COMING SOON  (listing placeholders: no route, no
        content module, not counted)
     ===================================================== */
@@ -826,6 +932,24 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/sip/how-much-sip-do-you-need-for-a-goal.js"
+            ),
+
+    "margin/margin-vs-markup":
+        () =>
+            import(
+                "./articles/margin/margin-vs-markup.js"
+            ),
+
+    "margin/price-a-product-for-a-target-margin":
+        () =>
+            import(
+                "./articles/margin/price-a-product-for-a-target-margin.js"
+            ),
+
+    "margin/what-a-discount-really-costs-you":
+        () =>
+            import(
+                "./articles/margin/what-a-discount-really-costs-you.js"
             )
 
 };

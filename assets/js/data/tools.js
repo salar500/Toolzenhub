@@ -418,12 +418,40 @@ const catalog = [
 
     {
         id: "margin",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/margin/index.js"),
         category: "business",
         icon: "%",
         title: "Margin Calculator",
         description:
-            "Calculate profit margin."
+            "Set a selling price from a target margin or markup, see margin and markup side by side, and see what a cost change or a discount does to your profit.",
+        aliases: [
+            "profit margin calculator",
+            "markup calculator",
+            "selling price calculator"
+        ],
+        capabilities: {
+            reset: true,
+            table: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Margin Calculator: Price, Margin and Markup | ToolZen Hub",
+            description:
+                "Work out a selling price from a target margin or markup, see margin and markup side by side, and see what a cost change or a discount does to profit per unit. Calculated for the numbers you enter."
+        },
+        relatedArticles: [
+            "margin/margin-vs-markup",
+            "margin/price-a-product-for-a-target-margin",
+            "margin/what-a-discount-really-costs-you"
+        ]
     },
 
     {

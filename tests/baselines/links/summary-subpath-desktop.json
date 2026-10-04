@@ -13,7 +13,7 @@
     ]
   },
   "articles.html": {
-    "internal": 106,
+    "internal": 108,
     "external": [],
     "placeholders": 27,
     "deadFragments": []
@@ -78,6 +78,24 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "articles/margin/margin-vs-markup/": {
+    "internal": 32,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/margin/price-a-product-for-a-target-margin/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/margin/what-a-discount-really-costs-you/": {
+    "internal": 32,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "articles/sip/how-a-sip-grows/": {
     "internal": 33,
     "external": [],
@@ -103,7 +121,7 @@
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 28,
+    "internal": 29,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -122,6 +140,12 @@
   },
   "calculators/loan-comparison/": {
     "internal": 35,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators/margin/": {
+    "internal": 28,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

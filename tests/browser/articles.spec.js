@@ -15,8 +15,8 @@ const NO_IMAGE = new Set(["choose-right-loan-tenure"]); // no featured image (no
 // the second when its category is not Loans). A topic missing from the maps fails the call-to-action or breadcrumb
 // assertion below, so a new pack cannot pass unnoticed. Which articles exist is pinned elsewhere (inventory, articles.test.mjs).
 const ORIGINAL_TOPIC = "loan-comparison";
-const PACK_TOOL = { "loan-prepayment": "prepayment", "balance-transfer": "balance-transfer", sip: "sip" }; // topic -> the tool its articles lead to
-const PACK_CATEGORY = { sip: { name: "Investment", slug: "investment" } }; // topic -> category, when it is not Loans
+const PACK_TOOL = { "loan-prepayment": "prepayment", "balance-transfer": "balance-transfer", sip: "sip", margin: "margin" }; // topic -> the tool its articles lead to
+const PACK_CATEGORY = { sip: { name: "Investment", slug: "investment" }, margin: { name: "Business", slug: "business" } }; // topic -> category, when it is not Loans
 const LEADS_TO = { "what-is-loan-prepayment": "prepayment" }; // an original guide that leads to a pack's tool
 const toolOf = (a) => LEADS_TO[a.slug] ?? PACK_TOOL[a.topic] ?? "loan-comparison";
 const categoryOf = (a) => PACK_CATEGORY[a.topic] ?? { name: "Loans", slug: "loans" };
@@ -67,7 +67,7 @@ test.describe("published article pages", () => {
 
       // related articles: the curated list (five; three for the Loan Prepayment and Balance Transfer articles), all resolvable, none is the page itself
       const related = await page.locator(".article-related-card").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
-      expect(related).toHaveLength(a.topic === ORIGINAL_TOPIC ? 5 : 3);
+      expect(related).toHaveLength(a.topic === ORIGINAL_TOPIC ? 5 : a.topic === "margin" ? 2 : 3); // Margin: a three-article cluster, so two others
       for (const h of related) {
         expect(h).not.toBe(`${siteRoot}articles/${a.topic}/${a.slug}/`);
         expect((await api.get(h)).status(), h).toBe(200);
@@ -98,17 +98,17 @@ test.describe("articles listing page", () => {
     await go("articles.html");
     await expect(page.locator("h1")).toHaveText("Articles & Guides");
     await expect(cards(page)).toHaveCount(5);
-    await expect(page.locator(".articles-pagination button[data-page]:not([data-page=next])")).toHaveCount(4);
-    // sidebar counts are published-only: Loans 10, Investment 4, everything else 0
+    await expect(page.locator(".articles-pagination button[data-page]:not([data-page=next])")).toHaveCount(5);
+    // sidebar counts are published-only: Loans 10, Investment 4, Business 3, everything else 0
     const counts = await page.locator(".article-category-count").evaluateAll((l) => l.map((x) => x.textContent.replace(/\D+/g, "")));
-    expect(counts).toEqual(["10", "4", "0", "0", "0"]);
+    expect(counts).toEqual(["10", "4", "0", "3", "0"]);
     // page 1 is the first five published articles, all clickable
     await expect(page.locator("#articles-list .article-card a[href]").first()).toBeVisible();
     await expect(soonCards(page)).toHaveCount(0);
     expectClean(watch);
   });
 
-  test("pagination: pages 1 and 2 are published articles; page 3 has the last four and the first placeholder; page 4 is all Coming soon", async ({ page, go }) => {
+  test("pagination: pages 1 to 3 are published articles; page 4 has the last two and three placeholders; page 5 is all Coming soon", async ({ page, go }) => {
     await go("articles.html");
     await page.locator('.articles-pagination button[data-page="2"]').click();
     await expect(page.locator('.articles-pagination button[data-page="2"]')).toHaveClass(/active/);
@@ -116,10 +116,13 @@ test.describe("articles listing page", () => {
     await expect(soonCards(page)).toHaveCount(0);
     await page.locator('.articles-pagination button[data-page="3"]').click();
     await expect(cards(page)).toHaveCount(5);
-    await expect(soonCards(page)).toHaveCount(1);
+    await expect(soonCards(page)).toHaveCount(0);
     await page.locator('.articles-pagination button[data-page="4"]').click();
     await expect(cards(page)).toHaveCount(5);
-    await expect(soonCards(page)).toHaveCount(5);
+    await expect(soonCards(page)).toHaveCount(3);
+    await page.locator('.articles-pagination button[data-page="5"]').click();
+    await expect(cards(page)).toHaveCount(3);
+    await expect(soonCards(page)).toHaveCount(3);
     await expect(page.locator(".articles-pagination .pagination-next")).toBeDisabled();
   });
 

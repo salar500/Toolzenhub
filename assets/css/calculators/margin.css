@@ -1,0 +1,381 @@
+/* =========================================================
+   ToolZen Hub
+   Margin Calculator
+
+   Only what the shared calculator styles do not already provide:
+   the pricing-basis control, the discount card, the notes and the
+   cost-change table. Buttons, focus and headings come from the
+   shared layer (components/buttons.css, base/accessibility.css,
+   calculator-base.css). Loaded after calculator-responsive.css.
+========================================================= */
+
+
+/* =========================================================
+   FORM
+   The basis control is a group of three radio buttons drawn as
+   large segments. The selected one has a tick and a heavier border
+   as well as a colour, so the choice never relies on colour alone.
+========================================================= */
+
+.margin-basis {
+
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+
+}
+
+.margin-basis legend {
+
+    padding: 0;
+
+}
+
+.margin-basis__options {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin: 6px 0 8px;
+
+}
+
+.margin-basis__option {
+
+    position: relative;
+
+    display: inline-flex;
+
+    flex: 1 1 140px;
+
+    cursor: pointer;
+
+}
+
+/* the radio itself is hidden; its label is the control and keeps the focus ring */
+
+.margin-basis__option input {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: 0;
+
+    opacity: 0;
+
+}
+
+.margin-basis__option span {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    box-sizing: border-box;
+
+    width: 100%;
+    min-height: 44px;
+
+    padding: 8px 14px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: var(--color-white);
+
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: center;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease;
+
+}
+
+.margin-basis__option:hover span {
+
+    background: #f2f4f7;
+
+}
+
+.margin-basis__option input:checked + span {
+
+    border: 2px solid var(--color-brand-green);
+
+    background: #ecfdf3;
+
+    color: var(--color-ink);
+
+    font-weight: 750;
+
+}
+
+.margin-basis__option input:checked + span::before {
+
+    content: "✓";
+    content: "✓" / "";
+
+    font-weight: 800;
+
+}
+
+.margin-basis__option input:focus-visible + span {
+
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+.margin-value[hidden] {
+
+    display: none;
+
+}
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.margin-subtitle {
+
+    margin: 28px 0 14px;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--color-slate-200);
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.4;
+
+}
+
+#margin-results .calculator-results__summary p {
+
+    margin: 0 0 8px;
+
+}
+
+#margin-results .calculator-results__summary p:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+/* =========================================================
+   NOTES
+   The trust note is calm and starts with the words "Per unit, for
+   the numbers you entered", so its meaning never depends on colour.
+========================================================= */
+
+.margin-note {
+
+    margin: 10px 0 0;
+
+    color: var(--color-ink-muted);
+
+    font-size: 11px;
+    line-height: 1.5;
+
+}
+
+.margin-note--plain {
+
+    margin: 12px 0 12px;
+
+    color: #475467;
+
+    font-size: 12px;
+
+}
+
+.margin-note--trust {
+
+    margin: 16px 0 0;
+    padding: 12px 14px;
+
+    border: 1px solid #fedf89;
+    border-left: 4px solid #f79009;
+    border-radius: 8px;
+
+    background: #fffcf5;
+
+    color: var(--color-ink);
+
+    font-size: 13px;
+    line-height: 1.55;
+
+}
+
+
+/* =========================================================
+   DISCOUNT CARD
+========================================================= */
+
+.margin-compare {
+
+    margin-bottom: 14px;
+
+}
+
+.margin-compare__card {
+
+    box-sizing: border-box;
+
+    max-width: 460px;
+
+    padding: 16px;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+
+    background: var(--color-white);
+
+}
+
+.margin-compare__title {
+
+    margin: 0 0 2px;
+
+    color: var(--color-ink);
+
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.35;
+
+}
+
+.margin-compare__tag {
+
+    margin: 0 0 10px;
+
+    color: var(--color-ink-muted);
+
+    font-size: 11px;
+    line-height: 1.4;
+
+}
+
+.margin-compare__list {
+
+    margin: 0;
+
+}
+
+.margin-compare__list > div {
+
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 8px 0;
+
+    border-top: 1px solid #eaecf0;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+}
+
+.margin-compare__list dt {
+
+    color: #475467;
+
+}
+
+.margin-compare__list dd {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-weight: 700;
+
+    text-align: right;
+
+}
+
+
+/* =========================================================
+   COST-CHANGE TABLE
+========================================================= */
+
+.margin-table th:not(:first-child),
+.margin-table td {
+
+    text-align: right;
+
+}
+
+.margin-table tbody th {
+
+    background: var(--color-white);
+
+    color: var(--color-ink);
+
+}
+
+/* the first column stays in view when a narrow screen scrolls the table sideways */
+
+.margin-table th:first-child {
+
+    position: sticky;
+    left: 0;
+
+    text-align: left;
+
+    box-shadow: 1px 0 0 #eaecf0;
+
+}
+
+.margin-table thead th:first-child {
+
+    background: #f9fafb;
+
+}
+
+#margin-results .calculator-results__table-wrapper:focus-visible {
+
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+
+/* =========================================================
+   TEXT FOR SCREEN READERS ONLY
+========================================================= */
+
+.margin-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}

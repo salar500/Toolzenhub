@@ -104,6 +104,7 @@ div#articles-page
           button.pagination-button [data-page="2" type="button"] "2"
           button.pagination-button [data-page="3" type="button"] "3"
           button.pagination-button [data-page="4" type="button"] "4"
+          button.pagination-button [data-page="5" type="button"] "5"
           button.pagination-next [data-page="next" type="button"] "Next"
             span [aria-hidden="true"] "→"
       aside.articles-sidebar
@@ -135,7 +136,7 @@ div#articles-page
             a.article-category-item [data-sidebar-category="business" href="{ROOT}articles.html"]
               span.article-category-name "Business"
                 span.article-category-icon "💼"
-              span.article-category-count "0"
+              span.article-category-count "3"
                 span [aria-hidden="true"] "→"
             a.article-category-item [data-sidebar-category="health" href="{ROOT}articles.html"]
               span.article-category-name "Health"
