@@ -19,6 +19,33 @@ export function formatINR(value) {
 }
 
 
+/*
+ * A short rupee amount for a chart axis, in the Indian units:
+ * 50000 -> "₹50,000", 1000000 -> "₹10L", 25000000 -> "₹2.5Cr".
+ */
+
+export function formatINRCompact(value) {
+
+    const amount = Number(value) || 0;
+
+    const trim = (n) =>
+        new Intl.NumberFormat("en-IN", {
+            maximumFractionDigits: 2
+        }).format(n);
+
+    if (Math.abs(amount) >= 10000000) {
+        return `₹${trim(amount / 10000000)}Cr`;
+    }
+
+    if (Math.abs(amount) >= 100000) {
+        return `₹${trim(amount / 100000)}L`;
+    }
+
+    return formatINR(amount);
+
+}
+
+
 export function formatNumber(
     value,
     decimals = 2

@@ -10,7 +10,7 @@ import { test, expect, expectClean } from "../helpers/test-base.mjs";
 const MISSING = [
   "definitely-missing",
   "a/b/c/d/e/missing.html",
-  "calculators/sip/", // Coming soon: not a route
+  "calculators/ppf/", // Coming soon: not a route (SIP was published in Tool Pack 3)
   "articles/investment/best-sip-strategies-for-beginners/", // Coming soon article
   "calculators/EMI/", // wrong case => 404 on GitHub Pages
   "assets/js/no-such-file.js",

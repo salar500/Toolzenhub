@@ -61,12 +61,12 @@ main#app
               h3 "EMI Calculator"
               p "Calculate your EMI instantly"
             span.calculator-card__arrow [aria-hidden="true"] "→"
-          div.calculator-card.calculator-card--soon [aria-disabled="true"]
+          a.calculator-card [href="{ROOT}calculators/sip/"]
             div.calculator-card__icon.calculator-card__icon--yellow "♜"
             div.calculator-card__content
               h3 "SIP Calculator"
               p "Plan your SIP investments"
-              span.coming-soon-badge "Coming soon"
+            span.calculator-card__arrow [aria-hidden="true"] "→"
           div.calculator-card.calculator-card--soon [aria-disabled="true"]
             div.calculator-card__icon.calculator-card__icon--purple "▤"
             div.calculator-card__content

@@ -69,10 +69,11 @@ describe("current hierarchy data", () => {
     }
   });
 
-  test("supporting articles: the six published articles point at Loan Comparison; none point at EMI yet", () => {
+  test("supporting articles: the six original articles point at Loan Comparison; the four SIP articles at SIP; none point at EMI or a Coming Soon tool", () => {
     assert.equal(tax.getArticlesForTool("loan-comparison").length, 6);
     assert.deepEqual(tax.getArticlesForTool("emi"), []);
-    assert.deepEqual(tax.getArticlesForTool("sip"), []);
+    assert.equal(tax.getArticlesForTool("sip").length, 4);
+    assert.deepEqual(tax.getArticlesForTool("ppf"), []);
   });
 });
 

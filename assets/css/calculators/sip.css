@@ -1,0 +1,599 @@
+/* =========================================================
+   ToolZen Hub
+   SIP Calculator
+
+   Only what the shared calculator styles do not already provide:
+   the paired period fields, the scenario and target cards, the
+   notes, the chart, the year-by-year table and the print layout.
+   Buttons, focus and headings come from the shared layer
+   (components/buttons.css, base/accessibility.css,
+   calculator-base.css). Loaded after calculator-responsive.css.
+========================================================= */
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.sip-tenure {
+
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+
+}
+
+.sip-tenure legend {
+
+    padding: 0;
+
+}
+
+.sip-pair {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+}
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.sip-subtitle {
+
+    margin: 28px 0 14px;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--color-slate-200);
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.4;
+
+}
+
+#sip-results .calculator-results__summary p {
+
+    margin: 0 0 8px;
+
+}
+
+#sip-results .calculator-results__summary p:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+/* =========================================================
+   NOTES
+   The trust note is calm and starts with the words "Projection,
+   not a forecast", so its meaning never depends on colour.
+========================================================= */
+
+.sip-note {
+
+    margin: 10px 0 0;
+
+    color: var(--color-ink-muted);
+
+    font-size: 11px;
+    line-height: 1.5;
+
+}
+
+.sip-note--plain {
+
+    margin: 0 0 12px;
+
+    color: #475467;
+
+    font-size: 12px;
+
+}
+
+.sip-note--trust {
+
+    margin: 16px 0 0;
+    padding: 12px 14px;
+
+    border: 1px solid #fedf89;
+    border-left: 4px solid #f79009;
+    border-radius: 8px;
+
+    background: #fffcf5;
+
+    color: var(--color-ink);
+
+    font-size: 13px;
+    line-height: 1.55;
+
+}
+
+
+/* =========================================================
+   SCENARIO AND TARGET CARDS
+   Two or three columns where there is room, stacked on a phone.
+   The "as assumed" card has a stronger border so it can be found,
+   without calling it the likely outcome.
+========================================================= */
+
+.sip-compare {
+
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+
+    margin-bottom: 14px;
+
+}
+
+.sip-compare--single {
+
+    grid-template-columns: minmax(0, 420px);
+
+}
+
+.sip-compare__card {
+
+    padding: 16px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+
+    background: var(--color-white);
+
+}
+
+.sip-compare__card--assumed {
+
+    border-width: 2px;
+    border-color: var(--color-action-green);
+
+    padding: 15px;
+
+}
+
+.sip-compare__title {
+
+    margin: 0 0 2px;
+
+    color: var(--color-ink);
+
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.35;
+
+}
+
+.sip-compare__tag {
+
+    margin: 0 0 10px;
+
+    color: var(--color-ink-muted);
+
+    font-size: 11px;
+    line-height: 1.4;
+
+}
+
+.sip-compare__list {
+
+    margin: 0;
+
+}
+
+.sip-compare__list > div {
+
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 8px 0;
+
+    border-top: 1px solid #eaecf0;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+}
+
+.sip-compare__list dt {
+
+    color: #475467;
+
+}
+
+.sip-compare__list dd {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-weight: 700;
+    text-align: right;
+
+}
+
+
+/* =========================================================
+   CHART
+   Two lines that differ by dash and end marker as well as by
+   colour, so the chart never relies on colour alone.
+========================================================= */
+
+.sip-figure {
+
+    margin: 0;
+
+}
+
+.sip-chart {
+
+    display: block;
+
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+
+}
+
+.sip-chart__grid {
+
+    stroke: var(--color-slate-200);
+    stroke-width: 1;
+
+}
+
+.sip-chart__axis {
+
+    stroke: #475467;
+    stroke-width: 1.5;
+
+}
+
+.sip-chart__label {
+
+    fill: #475467;
+
+    font-size: 13px;
+
+}
+
+.sip-chart__line {
+
+    fill: none;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+}
+
+.sip-chart__line--invested {
+
+    stroke: #475467;
+    stroke-width: 2.5;
+    stroke-dasharray: 7 5;
+
+}
+
+.sip-chart__line--value {
+
+    stroke: var(--color-action-green);
+    stroke-width: 3.5;
+
+}
+
+.sip-chart__marker--invested {
+
+    fill: #475467;
+
+}
+
+.sip-chart__marker--value {
+
+    fill: var(--color-action-green);
+
+}
+
+.sip-legend {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+
+    margin: 10px 0 8px;
+    padding: 0;
+
+    list-style: none;
+
+    color: #344054;
+
+    font-size: 12px;
+
+}
+
+.sip-legend li {
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+}
+
+.sip-legend__swatch {
+
+    display: inline-block;
+
+    width: 26px;
+    height: 0;
+
+    border-top-width: 3px;
+    border-top-style: solid;
+
+}
+
+.sip-legend__swatch--invested {
+
+    border-top-color: #475467;
+    border-top-style: dashed;
+
+}
+
+.sip-legend__swatch--value {
+
+    border-top-color: var(--color-action-green);
+    border-top-width: 4px;
+
+}
+
+
+/* =========================================================
+   YEAR-BY-YEAR TABLE
+========================================================= */
+
+.sip-table th:not(:first-child),
+.sip-table td {
+
+    text-align: right;
+
+}
+
+.sip-table tbody th {
+
+    background: var(--color-white);
+
+    color: var(--color-ink);
+
+}
+
+/* the first column stays in view when a narrow screen scrolls the table sideways */
+
+.sip-table th:first-child {
+
+    position: sticky;
+    left: 0;
+
+    text-align: left;
+
+    box-shadow: 1px 0 0 #eaecf0;
+
+}
+
+.sip-table thead th:first-child {
+
+    background: #f9fafb;
+
+}
+
+#sip-results .calculator-results__table-wrapper:focus-visible {
+
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+
+/* =========================================================
+   ACTIONS
+   Print Summary is a secondary button; the row wraps on a phone.
+========================================================= */
+
+.sip-actions {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-top: 16px;
+
+}
+
+.sip-action {
+
+    min-width: 0;
+    height: 40px;
+
+    padding: 0 16px;
+
+}
+
+
+/* =========================================================
+   TEXT FOR SCREEN READERS ONLY
+========================================================= */
+
+.sip-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+
+/* =========================================================
+   PRINT / SAVE AS PDF
+   "Print Summary" opens the browser's print dialog. What is
+   printed: the heading, the plan that was entered, the result,
+   the trust note, the scenarios, the target, the chart and the
+   table. Left out: the site header and footer, the form, the guide
+   text, related content and every button.
+========================================================= */
+
+.sip-print-only {
+
+    display: none;
+
+}
+
+@media print {
+
+    #header,
+    footer.footer,
+    .calculator-breadcrumb,
+    .calculator-intro,
+    .calculator-section,
+    .calculator-info,
+    .related-section,
+    .sip-actions,
+    #sip-live {
+
+        display: none !important;
+
+    }
+
+    .sip-print-only {
+
+        display: block;
+
+    }
+
+    body,
+    #sip-results .calculator-results__card {
+
+        background: #ffffff;
+
+        box-shadow: none;
+
+    }
+
+    #sip-results {
+
+        margin: 0;
+        padding: 0;
+
+    }
+
+    .sip-print-brand {
+
+        margin: 0 0 8px;
+
+        font-size: 14pt;
+        font-weight: 800;
+
+    }
+
+    .sip-print-inputs {
+
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4px;
+
+        margin: 0 0 14px;
+
+        font-size: 10pt;
+
+    }
+
+    .sip-print-inputs > div {
+
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+
+    }
+
+    .sip-print-inputs dd {
+
+        margin: 0;
+
+        font-weight: 700;
+        text-align: right;
+
+    }
+
+    .sip-compare {
+
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+
+    }
+
+    .sip-compare__card,
+    .sip-figure,
+    .sip-table tr,
+    .sip-note--trust {
+
+        break-inside: avoid;
+
+    }
+
+    .sip-chart {
+
+        max-width: 420px;
+
+    }
+
+    #sip-results .calculator-results__table-wrapper {
+
+        overflow: visible;
+
+    }
+
+    .sip-table {
+
+        min-width: 0;
+
+        font-size: 9pt;
+
+    }
+
+    .sip-table th,
+    .sip-table td {
+
+        padding: 4px 6px;
+
+    }
+
+    .sip-table th:first-child {
+
+        position: static;
+
+        box-shadow: none;
+
+    }
+
+}

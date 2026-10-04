@@ -896,6 +896,306 @@
       "visibleTextChars": 7929
     }
   },
+  "/articles/sip/how-a-sip-grows/": {
+    "runtime": {
+      "title": "How a SIP Grows: Your Investment vs Estimated Growth | ToolZen Hub",
+      "description": "See how a SIP projection splits into what you invest and the estimated growth, year by year, on one worked example.",
+      "canonical": "https://toolzenhub.in/articles/sip/how-a-sip-grows/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "See how a SIP projection splits into what you invest and the estimated growth, year by year, on one worked example.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/how-a-sip-grows.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How a SIP Grows: Your Investment vs Estimated Growth | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/sip/how-a-sip-grows/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "See how a SIP projection splits into what you invest and the estimated growth, year by year, on one worked example.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/how-a-sip-grows.png",
+        "twitter:title": "How a SIP Grows: Your Investment vs Estimated Growth | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "How a SIP Grows: Your Investment vs Estimated Growth"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How a SIP Grows: Your Investment vs Estimated Growth | ToolZen Hub",
+      "description": "See how a SIP projection splits into what you invest and the estimated growth, year by year, on one worked example.",
+      "canonical": "https://toolzenhub.in/articles/sip/how-a-sip-grows/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6485
+    }
+  },
+  "/articles/sip/how-much-sip-do-you-need-for-a-goal/": {
+    "runtime": {
+      "title": "How Much SIP Do You Need for a Goal? | ToolZen Hub",
+      "description": "Work backwards from a target to the starting monthly SIP it would need, and see how the answer moves with the return you assume.",
+      "canonical": "https://toolzenhub.in/articles/sip/how-much-sip-do-you-need-for-a-goal/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Work backwards from a target to the starting monthly SIP it would need, and see how the answer moves with the return you assume.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/how-much-sip-do-you-need-for-a-goal.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How Much SIP Do You Need for a Goal? | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/sip/how-much-sip-do-you-need-for-a-goal/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Work backwards from a target to the starting monthly SIP it would need, and see how the answer moves with the return you assume.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/how-much-sip-do-you-need-for-a-goal.png",
+        "twitter:title": "How Much SIP Do You Need for a Goal? | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "How Much SIP Do You Need for a Goal?"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How Much SIP Do You Need for a Goal? | ToolZen Hub",
+      "description": "Work backwards from a target to the starting monthly SIP it would need, and see how the answer moves with the return you assume.",
+      "canonical": "https://toolzenhub.in/articles/sip/how-much-sip-do-you-need-for-a-goal/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6189
+    }
+  },
+  "/articles/sip/how-return-assumptions-change-a-sip-projection/": {
+    "runtime": {
+      "title": "How Return Assumptions Change a SIP Projection | ToolZen Hub",
+      "description": "See how much the return you assume changes a SIP projection, with the same plan at a lower, an assumed and a higher return.",
+      "canonical": "https://toolzenhub.in/articles/sip/how-return-assumptions-change-a-sip-projection/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "See how much the return you assume changes a SIP projection, with the same plan at a lower, an assumed and a higher return.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/how-return-assumptions-change-a-sip-projection.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How Return Assumptions Change a SIP Projection | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/sip/how-return-assumptions-change-a-sip-projection/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "See how much the return you assume changes a SIP projection, with the same plan at a lower, an assumed and a higher return.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/how-return-assumptions-change-a-sip-projection.png",
+        "twitter:title": "How Return Assumptions Change a SIP Projection | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "How Return Assumptions Change a SIP Projection"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How Return Assumptions Change a SIP Projection | ToolZen Hub",
+      "description": "See how much the return you assume changes a SIP projection, with the same plan at a lower, an assumed and a higher return.",
+      "canonical": "https://toolzenhub.in/articles/sip/how-return-assumptions-change-a-sip-projection/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5869
+    }
+  },
+  "/articles/sip/step-up-sip-explained/": {
+    "runtime": {
+      "title": "Step-Up SIP: What Increasing Your SIP Each Year Changes | ToolZen Hub",
+      "description": "See what raising your SIP by a fixed percentage every year does to the amount invested and the estimated value, compared with a fixed SIP.",
+      "canonical": "https://toolzenhub.in/articles/sip/step-up-sip-explained/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "See what raising your SIP by a fixed percentage every year does to the amount invested and the estimated value, compared with a fixed SIP.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/step-up-sip-explained.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Step-Up SIP: What Increasing Your SIP Each Year Changes | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/sip/step-up-sip-explained/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "See what raising your SIP by a fixed percentage every year does to the amount invested and the estimated value, compared with a fixed SIP.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/step-up-sip-explained.png",
+        "twitter:title": "Step-Up SIP: What Increasing Your SIP Each Year Changes | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Step-Up SIP: What Increasing Your SIP Each Year Changes"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Step-Up SIP: What Increasing Your SIP Each Year Changes | ToolZen Hub",
+      "description": "See what raising your SIP by a fixed percentage every year does to the amount invested and the estimated value, compared with a fixed SIP.",
+      "canonical": "https://toolzenhub.in/articles/sip/step-up-sip-explained/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6159
+    }
+  },
   "/calculators.html": {
     "runtime": {
       "title": "All Calculators | ToolZen Hub",
@@ -1130,6 +1430,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 5817
+    }
+  },
+  "/calculators/sip/": {
+    "runtime": {
+      "title": "SIP Calculator | ToolZen Hub",
+      "description": "Estimate what a monthly SIP could grow to for an assumed return, with a yearly step-up, lower and higher return scenarios and a target. A projection, not a forecast.",
+      "canonical": "https://toolzenhub.in/calculators/sip/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Estimate what a monthly SIP could grow to for an assumed return, with a yearly step-up, lower and higher return scenarios and a target. A projection, not a forecast.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "SIP Calculator | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/sip/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Estimate what a monthly SIP could grow to for an assumed return, with a yearly step-up, lower and higher return scenarios and a target. A projection, not a forecast.",
+        "twitter:title": "SIP Calculator | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "SIP Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "SIP Calculator | ToolZen Hub",
+      "description": "Estimate what a monthly SIP could grow to for an assumed return, with a yearly step-up, lower and higher return scenarios and a target. A projection, not a forecast.",
+      "canonical": "https://toolzenhub.in/calculators/sip/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6030
     }
   },
   "/categories.html": {

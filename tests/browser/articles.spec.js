@@ -15,6 +15,8 @@ const PREPAYMENT_TOOL = new Set(["what-is-loan-prepayment", "reduce-tenure-or-lo
 const PREPAYMENT_PACK = new Set(["reduce-tenure-or-lower-emi-after-prepayment", "early-vs-late-loan-prepayment"]);
 // Tool Pack 2: these articles lead to the Loan Balance Transfer Calculator, and each has three curated related articles
 const BALANCE_TRANSFER_PACK = new Set(["is-a-loan-balance-transfer-worth-it", "balance-transfer-vs-prepayment"]);
+// Tool Pack 3: these articles lead to the SIP Calculator, and each has three curated related articles
+const SIP_PACK = new Set(["how-a-sip-grows", "how-return-assumptions-change-a-sip-projection", "step-up-sip-explained", "how-much-sip-do-you-need-for-a-goal"]);
 
 test.describe("published article pages", () => {
   for (const a of articles) {
@@ -30,12 +32,13 @@ test.describe("published article pages", () => {
       expect(await page.locator("article.article .article-section").count(), "content sections").toBeGreaterThanOrEqual(4);
       expect(await page.locator(".article-key-takeaways li").count(), "key takeaways").toBeGreaterThanOrEqual(3);
 
-      // breadcrumb: Home › Articles › Loans › <title>
+      // breadcrumb: Home › Articles › Loans (Investment for the SIP articles) › <title>
+      const category = SIP_PACK.has(a.slug) ? { name: "Investment", slug: "investment" } : { name: "Loans", slug: "loans" };
       const crumb = page.locator(".calculator-breadcrumb").first();
       await expect(crumb).toContainText(`Articles`);
-      await expect(crumb).toContainText("Loans");
+      await expect(crumb).toContainText(category.name);
       await expect(crumb).toContainText(title);
-      expect(await crumb.locator("a").evaluateAll((l) => l.map((x) => x.getAttribute("href")))).toEqual([siteRoot, `${siteRoot}articles.html`, `${siteRoot}articles.html?category=loans`]);
+      expect(await crumb.locator("a").evaluateAll((l) => l.map((x) => x.getAttribute("href")))).toEqual([siteRoot, `${siteRoot}articles.html`, `${siteRoot}articles.html?category=${category.slug}`]);
 
       // table of contents: every entry points at a real heading on the page
       const toc = await page.locator(".article-toc a").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
@@ -57,11 +60,11 @@ test.describe("published article pages", () => {
 
       // calculator link area
       const cta = page.locator(".article-calculator-button");
-      await expect(cta).toHaveAttribute("href", `${siteRoot}calculators/${BALANCE_TRANSFER_PACK.has(a.slug) ? "balance-transfer" : PREPAYMENT_TOOL.has(a.slug) ? "prepayment" : "loan-comparison"}/`);
+      await expect(cta).toHaveAttribute("href", `${siteRoot}calculators/${SIP_PACK.has(a.slug) ? "sip" : BALANCE_TRANSFER_PACK.has(a.slug) ? "balance-transfer" : PREPAYMENT_TOOL.has(a.slug) ? "prepayment" : "loan-comparison"}/`);
 
       // related articles: the curated list (five; three for the Loan Prepayment and Balance Transfer articles), all resolvable, none is the page itself
       const related = await page.locator(".article-related-card").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
-      expect(related).toHaveLength(PREPAYMENT_PACK.has(a.slug) || BALANCE_TRANSFER_PACK.has(a.slug) ? 3 : 5);
+      expect(related).toHaveLength(PREPAYMENT_PACK.has(a.slug) || BALANCE_TRANSFER_PACK.has(a.slug) || SIP_PACK.has(a.slug) ? 3 : 5);
       for (const h of related) {
         expect(h).not.toBe(`${siteRoot}articles/${a.topic}/${a.slug}/`);
         expect((await api.get(h)).status(), h).toBe(200);
@@ -93,16 +96,16 @@ test.describe("articles listing page", () => {
     await expect(page.locator("h1")).toHaveText("Articles & Guides");
     await expect(cards(page)).toHaveCount(5);
     await expect(page.locator(".articles-pagination button[data-page]:not([data-page=next])")).toHaveCount(4);
-    // sidebar counts are published-only: Loans 10, everything else 0
+    // sidebar counts are published-only: Loans 10, Investment 4, everything else 0
     const counts = await page.locator(".article-category-count").evaluateAll((l) => l.map((x) => x.textContent.replace(/\D+/g, "")));
-    expect(counts).toEqual(["10", "0", "0", "0", "0"]);
+    expect(counts).toEqual(["10", "4", "0", "0", "0"]);
     // page 1 is the first five published articles, all clickable
     await expect(page.locator("#articles-list .article-card a[href]").first()).toBeVisible();
     await expect(soonCards(page)).toHaveCount(0);
     expectClean(watch);
   });
 
-  test("pagination: pages 1 and 2 are the ten published articles; pages 3 and 4 are all Coming soon", async ({ page, go }) => {
+  test("pagination: pages 1 and 2 are published articles; page 3 has the last four and the first placeholder; page 4 is all Coming soon", async ({ page, go }) => {
     await go("articles.html");
     await page.locator('.articles-pagination button[data-page="2"]').click();
     await expect(page.locator('.articles-pagination button[data-page="2"]')).toHaveClass(/active/);
@@ -110,10 +113,10 @@ test.describe("articles listing page", () => {
     await expect(soonCards(page)).toHaveCount(0);
     await page.locator('.articles-pagination button[data-page="3"]').click();
     await expect(cards(page)).toHaveCount(5);
-    await expect(soonCards(page)).toHaveCount(5);
-    await page.locator('.articles-pagination button[data-page="4"]').click();
-    await expect(cards(page)).toHaveCount(1);
     await expect(soonCards(page)).toHaveCount(1);
+    await page.locator('.articles-pagination button[data-page="4"]').click();
+    await expect(cards(page)).toHaveCount(5);
+    await expect(soonCards(page)).toHaveCount(5);
     await expect(page.locator(".articles-pagination .pagination-next")).toBeDisabled();
   });
 
@@ -131,7 +134,8 @@ test.describe("articles listing page", () => {
   test("Coming soon articles are not clickable", async ({ page, go, siteRoot }) => {
     await go("articles.html");
     await page.locator('.article-filter[data-category="investment"]').click();
-    await expect(cards(page)).toHaveCount(1);
+    await expect(cards(page)).toHaveCount(5); // the four SIP articles and the one placeholder
+    await expect(soonCards(page)).toHaveCount(1);
     const soon = soonCards(page).first();
     await expect(soon).toBeVisible();
     await expect(soon).toContainText("Coming soon");
@@ -146,7 +150,7 @@ test.describe("articles listing page", () => {
 
   test("?category= in the URL pre-filters the list", async ({ page, go }) => {
     await go("articles.html?category=investment");
-    await expect(cards(page)).toHaveCount(1);
+    await expect(cards(page)).toHaveCount(5);
     await expect(soonCards(page)).toHaveCount(1);
     await expect(page.locator('.article-filter[data-category="investment"]')).toHaveClass(/active/);
   });

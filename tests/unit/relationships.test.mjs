@@ -52,7 +52,8 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
       assert.deepEqual(keys(rel.getRelatedArticlesForTool(slug, { limit: 6 })), PUBLISHED.slice(0, 6), slug);
       assert.deepEqual(rel.getRelatedArticlesForTool(slug, { limit: 6 }).map((a) => a.id), OLD_RELATED_ARTICLES(slug), slug);
     }
-    assert.deepEqual(rel.getRelatedArticlesForTool("sip"), []); // a tool with no category match and no articles
+    assert.deepEqual(rel.getRelatedArticlesForTool("gst"), []); // a Coming Soon tool in a category with no published articles
+    assert.deepEqual(keys(rel.getRelatedArticlesForTool("sip")), calcs.getCalculatorById("sip").relatedArticles); // curated, not padded
   });
 
   test("article -> related tools: the curated primary tool first, then the rest of the category", () => {
@@ -60,6 +61,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
       : key.startsWith("loan-prepayment/") ? ["prepayment", "loan-comparison", "emi", "balance-transfer"]
       : key === "balance-transfer/is-a-loan-balance-transfer-worth-it" ? ["balance-transfer", "loan-comparison", "emi", "prepayment"]
       : key === "balance-transfer/balance-transfer-vs-prepayment" ? ["balance-transfer", "prepayment", "loan-comparison", "emi"]
+      : key.startsWith("sip/") ? ["sip"] // the only published Investment tool: no category fallback beyond it
       : ["loan-comparison", "emi", "balance-transfer", "prepayment"];
     for (const key of PUBLISHED) assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(key)), expected(key), key);
     assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(PUBLISHED[0], { fill: false })), ["loan-comparison"]);
@@ -69,7 +71,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     for (const key of PUBLISHED) {
       const entry = articles.getArticleByKey(key);
       assert.deepEqual(keys(rel.getRelatedArticles(key)), entry.related, key);
-      assert.equal(rel.getRelatedArticles(key).length, key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") ? 3 : 5, key);
+      assert.equal(rel.getRelatedArticles(key).length, key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") ? 3 : 5, key);
     }
   });
 
@@ -140,7 +142,8 @@ describe("curated first, automatic second", () => {
   test("an article with no curated list falls back to the other published articles of its category", () => {
     savedRelated = first().related;
     first().related = [];
-    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.slice(1));
+    // the other published articles of ITS category (Loans): the Investment articles are not offered
+    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/")).slice(1));
   });
 
   test("a curated article list is never replaced or padded by the automatic one", () => {

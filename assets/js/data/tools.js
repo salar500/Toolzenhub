@@ -272,12 +272,43 @@ const catalog = [
 
     {
         id: "sip",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/sip/index.js"),
         category: "investment",
         icon: "◈",
         title: "SIP Calculator",
         description:
-            "Plan your SIP investments."
+            "Estimate what a monthly SIP could grow to for a return you assume, with a yearly step-up, return scenarios and a target.",
+        aliases: [
+            "systematic investment plan",
+            "step-up sip"
+        ],
+        capabilities: {
+            reset: true,
+            compare: true,
+            chart: true,
+            table: true,
+            print: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "SIP Calculator | ToolZen Hub",
+            description:
+                "Estimate what a monthly SIP could grow to for an assumed return, with a yearly step-up, lower and higher return scenarios and a target. A projection, not a forecast."
+        },
+        relatedArticles: [
+            "sip/how-a-sip-grows",
+            "sip/how-return-assumptions-change-a-sip-projection",
+            "sip/step-up-sip-explained",
+            "sip/how-much-sip-do-you-need-for-a-goal"
+        ]
     },
 
     {

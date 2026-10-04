@@ -22,7 +22,7 @@ before(async () => {
   related = { categories: cats.categories };
 });
 
-const PUBLISHED = ["loan-comparison", "emi", "prepayment", "balance-transfer"];
+const PUBLISHED = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment"];
 
 describe("catalog model", () => {
@@ -40,10 +40,10 @@ describe("catalog model", () => {
     for (const c of catalog.calculators) assert.ok(["published", "coming-soon"].includes(c.status), `${c.id}: ${c.status}`);
   });
 
-  test("exactly EMI, Loan Comparison, Loan Prepayment and Loan Balance Transfer are published; all other 22 are coming-soon", () => {
+  test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP are published; all other 21 are coming-soon", () => {
     const pub = catalog.calculators.filter((c) => c.status === "published").map((c) => c.id).sort();
     assert.deepEqual(pub, [...PUBLISHED].sort());
-    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 22);
+    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 21);
   });
 
   test("`available` (read by cards and search) is exactly status === published", () => {
@@ -110,6 +110,7 @@ describe("registry is derived from the catalog", () => {
       emi: { section: "Calculators", category: "loans", title: "EMI Calculator" },
       prepayment: { section: "Calculators", category: "loans", title: "Loan Prepayment Calculator" },
       "balance-transfer": { section: "Calculators", category: "loans", title: "Loan Balance Transfer Calculator" },
+      sip: { section: "Calculators", category: "investment", title: "SIP Calculator" },
     });
   });
 });
@@ -122,9 +123,14 @@ describe("search labels come from the category list", () => {
     const emi = all.find((c) => c.id === "emi");
     assert.equal(emi.category, "Loans");
     assert.equal(emi.url, `${ROOT}calculators/emi/`);
+    // PPF is a Coming Soon Investment tool: a category title, and no URL
+    const ppf = all.find((c) => c.id === "ppf");
+    assert.equal(ppf.category, "Investment");
+    assert.equal(ppf.url, null);
+    // SIP is published (Tool Pack 3): the same category, and a URL
     const sip = all.find((c) => c.id === "sip");
     assert.equal(sip.category, "Investment");
-    assert.equal(sip.url, null);
+    assert.equal(sip.url, `${ROOT}calculators/sip/`);
     assert.equal(all.filter((c) => c.url).length, catalog.calculators.filter((c) => c.available).length);
     // the same eight matches as before M7; M7 ranks them (title matches first, published before Coming Soon).
     // "Loan Prepayment Calculator" and "Loan Balance Transfer Calculator" begin with "loan", so they rank with the title-prefix matches.

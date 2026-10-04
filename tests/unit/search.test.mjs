@@ -59,7 +59,7 @@ const buildCorpus = () => {
 describe("index structure", () => {
   test("covers categories, tools and articles (no subcategories are defined yet)", () => {
     const count = (type) => idx.searchIndex.filter((e) => e.type === type).length;
-    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 26, 16]);
+    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 26, 20]);
     assert.equal(new Set(idx.searchIndex.map((e) => e.key)).size, idx.searchIndex.length);
   });
 
@@ -80,8 +80,10 @@ describe("index structure", () => {
     assert.equal(art.title, "EMI vs Total Interest: What Should You Compare?");
     assert.equal(art.route, "/Toolzenhub/articles/loan-comparison/emi-vs-total-interest/");
     assert.equal(art.status, "published");
-    assert.equal(get("tool:sip").route, null);
-    assert.equal(get("tool:sip").status, "coming-soon");
+    assert.equal(get("tool:ppf").route, null);
+    assert.equal(get("tool:ppf").status, "coming-soon");
+    assert.equal(get("tool:sip").route, "/Toolzenhub/calculators/sip/");
+    assert.equal(get("tool:sip").status, "published");
     assert.equal(get("category:loans").route, "/Toolzenhub/loans.html");
     assert.equal(get("category:tax").route, "/Toolzenhub/categories.html#tax");
   });
@@ -94,13 +96,14 @@ describe("index structure", () => {
   });
 
   test("no invented aliases or keywords (only the Loan Prepayment and Balance Transfer calculators' own names), and no article bodies in the index", () => {
-    const ALIASES = { "tool:prepayment": ["part payment", "early repayment"], "tool:balance-transfer": ["loan transfer", "refinance", "switch loan"] };
+    const ALIASES = { "tool:prepayment": ["part payment", "early repayment"], "tool:balance-transfer": ["loan transfer", "refinance", "switch loan"], "tool:sip": ["systematic investment plan", "step-up sip"] };
     for (const e of idx.searchIndex) {
       assert.deepEqual(e.aliases, ALIASES[e.key] ?? [], e.key);
       assert.deepEqual(e.keywords, [], e.key);
     }
     const bytes = JSON.stringify(idx.searchIndex).length;
-    assert.ok(bytes < 20000, `index is ${bytes} bytes`);
+    // metadata only (about 400 bytes an entry): 50 entries were under 20,000; 54 are about 21,600. Article bodies would be hundreds of kilobytes.
+    assert.ok(bytes < 30000, `index is ${bytes} bytes`);
   });
 });
 
@@ -157,9 +160,14 @@ describe("ranking rules (fixture index)", () => {
 
 describe("real data: policy and ranking", () => {
   test("coming-soon items are NOT found unless the caller asks for them", () => {
-    assert.deepEqual(ids(engine.search("sip", { types: ["tool"] })), []);
-    assert.deepEqual(ids(engine.search("sip", { types: ["tool"], includeComingSoon: true })), ["sip"]);
-    assert.deepEqual(ids(engine.search("sip")), ["investment"]); // the published Investment category mentions SIP
+    assert.deepEqual(ids(engine.search("ppf", { types: ["tool"] })), []);
+    assert.deepEqual(ids(engine.search("ppf", { types: ["tool"], includeComingSoon: true })), ["ppf"]);
+    assert.deepEqual(ids(engine.search("ppf")), ["investment"]); // the published Investment category mentions PPF
+    // SIP is published (Tool Pack 3): found by name and by its aliases, the tool first
+    assert.deepEqual(ids(engine.search("sip", { types: ["tool"] })), ["sip"]);
+    assert.deepEqual(ids(engine.search("systematic investment plan", { types: ["tool"] })), ["sip"]);
+    assert.deepEqual(ids(engine.search("step-up sip", { types: ["tool"] })), ["sip"]);
+    assert.equal(engine.search("sip")[0].key, "tool:sip");
     assert.deepEqual(ids(engine.search("best sip strategies", { types: ["article"] })), []);
     assert.equal(engine.search("emi").every((r) => r.status === "published"), true);
   });

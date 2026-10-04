@@ -145,15 +145,15 @@ describe("static checkers detect injected faults", () => {
 
   it("links: marking a Coming-soon calculator 'published' without a page is reported", () => {
     const root = makeCopy("soon-leak");
-    edit(root, "assets/js/data/tools.js", (s) => s.replace(/(id: "sip",\s+)status: "coming-soon"/, '$1status: "published",\n        loader: () => import("../calculators/emi/index.js")'));
+    edit(root, "assets/js/data/tools.js", (s) => s.replace(/(id: "ppf",\s+)status: "coming-soon"/, '$1status: "published",\n        loader: () => import("../calculators/emi/index.js")'));
     const r = run("check-links.mjs", root);
     assert.equal(r.code, 1);
-    assert.match(r.out, /sip/);
+    assert.match(r.out, /ppf/);
   });
 
   it("links: a Coming-soon URL leaking into sitemap.xml is reported", () => {
     const root = makeCopy("sitemap-leak");
-    edit(root, "sitemap.xml", (s) => s.replace("</urlset>", "  <url><loc>https://toolzenhub.in/calculators/sip/</loc></url>\n</urlset>"));
+    edit(root, "sitemap.xml", (s) => s.replace("</urlset>", "  <url><loc>https://toolzenhub.in/calculators/ppf/</loc></url>\n</urlset>"));
     const r = run("check-links.mjs", root);
     assert.equal(r.code, 1);
     assert.match(r.out, /sitemap/);

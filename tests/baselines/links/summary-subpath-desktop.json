@@ -13,7 +13,7 @@
     ]
   },
   "articles.html": {
-    "internal": 98,
+    "internal": 106,
     "external": [],
     "placeholders": 27,
     "deadFragments": []
@@ -78,8 +78,32 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "articles/sip/how-a-sip-grows/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/sip/how-much-sip-do-you-need-for-a-goal/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/sip/how-return-assumptions-change-a-sip-projection/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/sip/step-up-sip-explained/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "calculators.html": {
-    "internal": 27,
+    "internal": 28,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -104,6 +128,12 @@
   },
   "calculators/prepayment/": {
     "internal": 34,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators/sip/": {
+    "internal": 29,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -135,7 +165,7 @@
     "deadFragments": []
   },
   "(home)": {
-    "internal": 31,
+    "internal": 32,
     "external": [],
     "placeholders": 4,
     "deadFragments": [
@@ -179,7 +209,7 @@
     "deadFragments": []
   },
   "articles.html?category=investment": {
-    "internal": 26,
+    "internal": 34,
     "external": [],
     "placeholders": 9,
     "deadFragments": []

@@ -462,6 +462,148 @@ const catalog = [
         relatedLabel: "Finance"
     },
 
+    /* =====================================================
+       SIP  (published)
+       The cluster of the SIP Calculator
+       (docs/tool-packs/03-sip.md).
+    ===================================================== */
+
+    {
+        id: 17,
+        status: "published",
+        category: "investment",
+        topic: "sip",
+        slug: "how-a-sip-grows",
+        title:
+            "How a SIP Grows: Your Investment vs Estimated Growth",
+        description:
+            "See how a SIP projection splits into what you invest and the estimated growth, year by year, on one worked example.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "5 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/how-a-sip-grows.png",
+            alt:
+                "Chart of the total invested, a dashed line, against the estimated value, a solid line, over 15 years, with the gap between them widening"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/how-a-sip-grows.png",
+            alt:
+                "Chart of the total invested, a dashed line, against the estimated value, a solid line, over 15 years, with the gap between them widening"
+        },
+        tools: ["sip"],
+        related: [
+            "sip/how-return-assumptions-change-a-sip-projection",
+            "sip/step-up-sip-explained",
+            "sip/how-much-sip-do-you-need-for-a-goal"
+        ],
+        relatedLabel: "Investment"
+    },
+
+    {
+        id: 18,
+        status: "published",
+        category: "investment",
+        topic: "sip",
+        slug: "how-return-assumptions-change-a-sip-projection",
+        title:
+            "How Return Assumptions Change a SIP Projection",
+        description:
+            "See how much the return you assume changes a SIP projection, with the same plan at a lower, an assumed and a higher return.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/how-return-assumptions-change-a-sip-projection.png",
+            alt:
+                "Chart of the estimated value of the same SIP at assumed returns of 8%, 10% and 12%, with three lines fanning out over 15 years"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/how-return-assumptions-change-a-sip-projection.png",
+            alt:
+                "Chart of the estimated value of the same SIP at assumed returns of 8%, 10% and 12%, with three lines fanning out over 15 years"
+        },
+        tools: ["sip"],
+        related: [
+            "sip/how-a-sip-grows",
+            "sip/how-much-sip-do-you-need-for-a-goal",
+            "sip/step-up-sip-explained"
+        ],
+        relatedLabel: "Investment"
+    },
+
+    {
+        id: 19,
+        status: "published",
+        category: "investment",
+        topic: "sip",
+        slug: "step-up-sip-explained",
+        title:
+            "Step-Up SIP: What Increasing Your SIP Each Year Changes",
+        description:
+            "See what raising your SIP by a fixed percentage every year does to the amount invested and the estimated value, compared with a fixed SIP.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/step-up-sip-explained.png",
+            alt:
+                "Chart of the monthly SIP in each year for a fixed SIP and for yearly step-ups of 5% and 10%, drawn as staircases"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/step-up-sip-explained.png",
+            alt:
+                "Chart of the monthly SIP in each year for a fixed SIP and for yearly step-ups of 5% and 10%, drawn as staircases"
+        },
+        tools: ["sip"],
+        related: [
+            "sip/how-a-sip-grows",
+            "sip/how-much-sip-do-you-need-for-a-goal",
+            "sip/how-return-assumptions-change-a-sip-projection"
+        ],
+        relatedLabel: "Investment"
+    },
+
+    {
+        id: 20,
+        status: "published",
+        category: "investment",
+        topic: "sip",
+        slug: "how-much-sip-do-you-need-for-a-goal",
+        title:
+            "How Much SIP Do You Need for a Goal?",
+        description:
+            "Work backwards from a target to the starting monthly SIP it would need, and see how the answer moves with the return you assume.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/how-much-sip-do-you-need-for-a-goal.png",
+            alt:
+                "Chart of a SIP projection against a target line: a plan of 10,000 a month falls short, while the plan that starts at the SIP the target needs reaches it"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/how-much-sip-do-you-need-for-a-goal.png",
+            alt:
+                "Chart of a SIP projection against a target line: a plan of 10,000 a month falls short, while the plan that starts at the SIP the target needs reaches it"
+        },
+        tools: ["sip"],
+        related: [
+            "sip/how-a-sip-grows",
+            "sip/how-return-assumptions-change-a-sip-projection",
+            "sip/step-up-sip-explained"
+        ],
+        relatedLabel: "Investment"
+    },
+
 
     /* =====================================================
        COMING SOON  (listing placeholders: no route, no
@@ -660,6 +802,30 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/balance-transfer/balance-transfer-vs-prepayment.js"
+            ),
+
+    "sip/how-a-sip-grows":
+        () =>
+            import(
+                "./articles/sip/how-a-sip-grows.js"
+            ),
+
+    "sip/how-return-assumptions-change-a-sip-projection":
+        () =>
+            import(
+                "./articles/sip/how-return-assumptions-change-a-sip-projection.js"
+            ),
+
+    "sip/step-up-sip-explained":
+        () =>
+            import(
+                "./articles/sip/step-up-sip-explained.js"
+            ),
+
+    "sip/how-much-sip-do-you-need-for-a-goal":
+        () =>
+            import(
+                "./articles/sip/how-much-sip-do-you-need-for-a-goal.js"
             )
 
 };
