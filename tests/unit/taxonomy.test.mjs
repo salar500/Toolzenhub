@@ -6,6 +6,8 @@
 import { test, describe, before, afterEach } from "node:test";
 import assert from "node:assert/strict";
 
+import { getComingSoonTool } from "../helpers/coming-soon.mjs";
+
 globalThis.window = { location: { hostname: process.env.TZ_HOST || "salar500.github.io", pathname: "/" } };
 const ROOT = process.env.TZ_HOST ? "/" : "/Toolzenhub/";
 
@@ -73,7 +75,7 @@ describe("current hierarchy data", () => {
     assert.equal(tax.getArticlesForTool("loan-comparison").length, 6);
     assert.deepEqual(tax.getArticlesForTool("emi"), []);
     assert.equal(tax.getArticlesForTool("sip").length, 4);
-    assert.deepEqual(tax.getArticlesForTool("ppf"), []);
+    assert.deepEqual(tax.getArticlesForTool(getComingSoonTool().id), []);
   });
 });
 

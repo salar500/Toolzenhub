@@ -6,11 +6,12 @@
  * exact-case matching (calculators/EMI/ is a 404 on GitHub Pages).
  */
 import { test, expect, expectClean } from "../helpers/test-base.mjs";
+import { getComingSoonTool } from "../helpers/coming-soon.mjs";
 
 const MISSING = [
   "definitely-missing",
   "a/b/c/d/e/missing.html",
-  "calculators/ppf/", // Coming soon: not a route (SIP was published in Tool Pack 3)
+  getComingSoonTool().wouldBeUrl.slice(1), // a Coming soon tool: not a route
   "articles/investment/best-sip-strategies-for-beginners/", // Coming soon article
   "calculators/EMI/", // wrong case => 404 on GitHub Pages
   "assets/js/no-such-file.js",

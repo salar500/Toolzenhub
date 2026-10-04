@@ -9,6 +9,8 @@ import { test, describe, before } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 
+import { getComingSoonTool } from "../helpers/coming-soon.mjs";
+
 globalThis.window = { location: { hostname: "salar500.github.io", pathname: "/Toolzenhub/" } };
 
 // The committed URL inventory is an independent record of what is published (see tests/inventory).
@@ -80,8 +82,9 @@ describe("index structure", () => {
     assert.equal(art.title, "EMI vs Total Interest: What Should You Compare?");
     assert.equal(art.route, "/Toolzenhub/articles/loan-comparison/emi-vs-total-interest/");
     assert.equal(art.status, "published");
-    assert.equal(get("tool:ppf").route, null);
-    assert.equal(get("tool:ppf").status, "coming-soon");
+    const soon = getComingSoonTool();
+    assert.equal(get(`tool:${soon.id}`).route, null);
+    assert.equal(get(`tool:${soon.id}`).status, "coming-soon");
     assert.equal(get("tool:sip").route, "/Toolzenhub/calculators/sip/");
     assert.equal(get("tool:sip").status, "published");
     assert.equal(get("category:loans").route, "/Toolzenhub/loans.html");

@@ -127,7 +127,7 @@ describe("catalog model", () => {
 describe("relationships", () => {
   test("related articles are curated, ordered, published and never the article itself: 5 per original article, 3 per Tool Pack article", () => {
     for (const a of catalog.articles.filter((x) => x.published)) {
-      const expected = [...PREPAYMENT_PACK_PUBLISHED, ...BALANCE_TRANSFER_PACK_PUBLISHED, ...SIP_PACK_PUBLISHED].includes(a.key) ? 3 : 5;
+      const expected = ORIGINAL_PUBLISHED.includes(a.key) ? 5 : 3; // PUBLISHED above pins which articles exist; every one that is not an original belongs to a Tool Pack
       assert.equal(a.related.length, expected, a.key);
       assert.equal(new Set(a.related).size, expected, a.key);
       for (const key of a.related) {

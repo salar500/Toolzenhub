@@ -10,13 +10,16 @@ import { test, expect, expectClean, settleImages, livePages, rel, expectNoHorizo
 const articles = livePages.filter((p) => p.type === "article");
 const titleOf = (p) => p.expectedTitle.replace(/ \| ToolZen Hub$/, "");
 const NO_IMAGE = new Set(["choose-right-loan-tenure"]); // no featured image (none beats a weak one)
-// Tool Pack 1: these articles lead to the Loan Prepayment Calculator (the others still lead to Loan Comparison)
-const PREPAYMENT_TOOL = new Set(["what-is-loan-prepayment", "reduce-tenure-or-lower-emi-after-prepayment", "early-vs-late-loan-prepayment"]);
-const PREPAYMENT_PACK = new Set(["reduce-tenure-or-lower-emi-after-prepayment", "early-vs-late-loan-prepayment"]);
-// Tool Pack 2: these articles lead to the Loan Balance Transfer Calculator, and each has three curated related articles
-const BALANCE_TRANSFER_PACK = new Set(["is-a-loan-balance-transfer-worth-it", "balance-transfer-vs-prepayment"]);
-// Tool Pack 3: these articles lead to the SIP Calculator, and each has three curated related articles
-const SIP_PACK = new Set(["how-a-sip-grows", "how-return-assumptions-change-a-sip-projection", "step-up-sip-explained", "how-much-sip-do-you-need-for-a-goal"]);
+// The original articles (topic "loan-comparison") have five curated related articles and lead to Loan Comparison; the
+// articles of each Tool Pack have three and lead to that pack's tool. A new pack adds ONE line to the first map (and to
+// the second when its category is not Loans). A topic missing from the maps fails the call-to-action or breadcrumb
+// assertion below, so a new pack cannot pass unnoticed. Which articles exist is pinned elsewhere (inventory, articles.test.mjs).
+const ORIGINAL_TOPIC = "loan-comparison";
+const PACK_TOOL = { "loan-prepayment": "prepayment", "balance-transfer": "balance-transfer", sip: "sip" }; // topic -> the tool its articles lead to
+const PACK_CATEGORY = { sip: { name: "Investment", slug: "investment" } }; // topic -> category, when it is not Loans
+const LEADS_TO = { "what-is-loan-prepayment": "prepayment" }; // an original guide that leads to a pack's tool
+const toolOf = (a) => LEADS_TO[a.slug] ?? PACK_TOOL[a.topic] ?? "loan-comparison";
+const categoryOf = (a) => PACK_CATEGORY[a.topic] ?? { name: "Loans", slug: "loans" };
 
 test.describe("published article pages", () => {
   for (const a of articles) {
@@ -33,7 +36,7 @@ test.describe("published article pages", () => {
       expect(await page.locator(".article-key-takeaways li").count(), "key takeaways").toBeGreaterThanOrEqual(3);
 
       // breadcrumb: Home › Articles › Loans (Investment for the SIP articles) › <title>
-      const category = SIP_PACK.has(a.slug) ? { name: "Investment", slug: "investment" } : { name: "Loans", slug: "loans" };
+      const category = categoryOf(a);
       const crumb = page.locator(".calculator-breadcrumb").first();
       await expect(crumb).toContainText(`Articles`);
       await expect(crumb).toContainText(category.name);
@@ -60,11 +63,11 @@ test.describe("published article pages", () => {
 
       // calculator link area
       const cta = page.locator(".article-calculator-button");
-      await expect(cta).toHaveAttribute("href", `${siteRoot}calculators/${SIP_PACK.has(a.slug) ? "sip" : BALANCE_TRANSFER_PACK.has(a.slug) ? "balance-transfer" : PREPAYMENT_TOOL.has(a.slug) ? "prepayment" : "loan-comparison"}/`);
+      await expect(cta).toHaveAttribute("href", `${siteRoot}calculators/${toolOf(a)}/`);
 
       // related articles: the curated list (five; three for the Loan Prepayment and Balance Transfer articles), all resolvable, none is the page itself
       const related = await page.locator(".article-related-card").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
-      expect(related).toHaveLength(PREPAYMENT_PACK.has(a.slug) || BALANCE_TRANSFER_PACK.has(a.slug) || SIP_PACK.has(a.slug) ? 3 : 5);
+      expect(related).toHaveLength(a.topic === ORIGINAL_TOPIC ? 5 : 3);
       for (const h of related) {
         expect(h).not.toBe(`${siteRoot}articles/${a.topic}/${a.slug}/`);
         expect((await api.get(h)).status(), h).toBe(200);

@@ -4,6 +4,7 @@
  *   header links + active state, mobile menu, and "Coming soon" cards being non-clickable.
  */
 import { test, expect, expectClean } from "../helpers/test-base.mjs";
+import { getComingSoonTool } from "../helpers/coming-soon.mjs";
 
 const CATEGORY_IDS = ["loans", "investment", "tax", "health", "business", "math", "converter", "more"];
 
@@ -71,9 +72,10 @@ test.describe("categories page", () => {
     await expect(page.locator("#categories-grid .category-page-card")).toHaveCount(8);
     await expect(page).toHaveURL((u) => !u.searchParams.has("q"));
 
-    // a Coming soon tool is listed but not linked (PPF; SIP is published since Tool Pack 3)
-    await go("categories.html?q=ppf");
-    await expect(input).toHaveValue("ppf");
+    // a Coming soon tool is listed but not linked
+    const soon = getComingSoonTool();
+    await go(`categories.html?q=${encodeURIComponent(soon.title)}`);
+    await expect(input).toHaveValue(soon.title);
     await expect(page.locator("#categories-grid .category-page-card--soon")).toHaveCount(1);
     await expect(page.locator("#categories-grid a")).toHaveCount(0);
     // and a published one is linked

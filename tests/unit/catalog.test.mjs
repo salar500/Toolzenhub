@@ -7,6 +7,8 @@ import { test, describe, before } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 
+import { getComingSoonTool } from "../helpers/coming-soon.mjs";
+
 const inventory = JSON.parse(fs.readFileSync(new URL("../inventory/url-inventory.json", import.meta.url), "utf8"));
 
 // routes.js decides the URL prefix from window.location (GitHub Pages project site vs root).
@@ -123,10 +125,10 @@ describe("search labels come from the category list", () => {
     const emi = all.find((c) => c.id === "emi");
     assert.equal(emi.category, "Loans");
     assert.equal(emi.url, `${ROOT}calculators/emi/`);
-    // PPF is a Coming Soon Investment tool: a category title, and no URL
-    const ppf = all.find((c) => c.id === "ppf");
-    assert.equal(ppf.category, "Investment");
-    assert.equal(ppf.url, null);
+    // a Coming Soon Investment tool: a category title, and no URL
+    const soon = all.find((c) => c.id === getComingSoonTool({ category: "investment" }).id);
+    assert.equal(soon.category, "Investment");
+    assert.equal(soon.url, null);
     // SIP is published (Tool Pack 3): the same category, and a URL
     const sip = all.find((c) => c.id === "sip");
     assert.equal(sip.category, "Investment");

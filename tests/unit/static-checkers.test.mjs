@@ -13,6 +13,8 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
+import { getComingSoonTool } from "../helpers/coming-soon.mjs";
+
 const PROJECT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const DIST = path.join(PROJECT, "dist");
 const PREVIEW = path.join(PROJECT, "dist-ghpages");
@@ -145,15 +147,17 @@ describe("static checkers detect injected faults", () => {
 
   it("links: marking a Coming-soon calculator 'published' without a page is reported", () => {
     const root = makeCopy("soon-leak");
-    edit(root, "assets/js/data/tools.js", (s) => s.replace(/(id: "ppf",\s+)status: "coming-soon"/, '$1status: "published",\n        loader: () => import("../calculators/emi/index.js")'));
+    const soon = getComingSoonTool();
+    edit(root, "assets/js/data/tools.js", (s) => s.replace(new RegExp(`(id: "${soon.id}",\\s+)status: "coming-soon"`), '$1status: "published",\n        loader: () => import("../calculators/emi/index.js")'));
     const r = run("check-links.mjs", root);
     assert.equal(r.code, 1);
-    assert.match(r.out, /ppf/);
+    assert.match(r.out, new RegExp(soon.id));
   });
 
   it("links: a Coming-soon URL leaking into sitemap.xml is reported", () => {
     const root = makeCopy("sitemap-leak");
-    edit(root, "sitemap.xml", (s) => s.replace("</urlset>", "  <url><loc>https://toolzenhub.in/calculators/ppf/</loc></url>\n</urlset>"));
+    const soon = getComingSoonTool();
+    edit(root, "sitemap.xml", (s) => s.replace("</urlset>", `  <url><loc>https://toolzenhub.in${soon.wouldBeUrl}</loc></url>\n</urlset>`));
     const r = run("check-links.mjs", root);
     assert.equal(r.code, 1);
     assert.match(r.out, /sitemap/);
