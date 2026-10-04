@@ -204,4 +204,6 @@ The next pack is chosen from the existing catalog (Coming Soon entries keep thei
 reasoning for Tool Pack 2 is in `docs/tool-packs/02-balance-transfer.md` and for Tool Pack 3 (the first pack in a
 second category, Investment) in `docs/tool-packs/03-sip.md`. After Pack 3 is built, review the repeated mechanical
 work across Packs 1 to 3 and decide whether a limited generator or shared print and comparison styles are now
-justified. Do not start a pack without an approved spec.
+justified. That review is recorded in `docs/tool-pack-reuse-review.md` (no generator yet). Tool Pack 4 is the Margin
+Calculator, the first Business tool and a pricing decision tool, chosen over a second Investment tool; its spec is
+`docs/tool-packs/04-margin.md` (draft). Do not start a pack without an approved spec.
