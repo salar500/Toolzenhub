@@ -207,5 +207,32 @@
       "/assets/css/calculators/calculator-responsive.css",
       "/assets/css/calculators/home-loan.css"
     ]
+  },
+  "fd": {
+    "fonts": true,
+    "styles": [
+      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
+      "/assets/css/base/variables.css",
+      "/assets/css/base/reset.css",
+      "/assets/css/base/typography.css",
+      "/assets/css/base/layout.css",
+      "/assets/css/base/animations.css",
+      "/assets/css/components/buttons.css",
+      "/assets/css/components/cards.css",
+      "/assets/css/components/header.css",
+      "/assets/css/components/navigation.css",
+      "/assets/css/components/forms.css",
+      "/assets/css/components/search.css",
+      "/assets/css/components/modal.css",
+      "/assets/css/components/table.css",
+      "/assets/css/components/footer.css",
+      "/assets/css/components/related-content.css",
+      "/assets/css/themes/light.css",
+      "/assets/css/calculators/calculator-base.css",
+      "/assets/css/calculators/calculator-form.css",
+      "/assets/css/calculators/calculator-results.css",
+      "/assets/css/calculators/calculator-responsive.css",
+      "/assets/css/calculators/fd.css"
+    ]
   }
 }

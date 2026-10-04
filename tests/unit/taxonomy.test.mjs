@@ -71,14 +71,55 @@ describe("current hierarchy data", () => {
     }
   });
 
-  test("supporting articles: the six original articles point at Loan Comparison; the four SIP articles at SIP; the three Margin articles at Margin; the three Profit articles at Profit; the three Home Loan articles at Home Loan; none point at EMI or a Coming Soon tool", () => {
+  test("supporting articles: the six original articles point at Loan Comparison; the four SIP articles at SIP; the three Margin articles at Margin; the three Profit articles at Profit; the three Home Loan articles at Home Loan; the two FD articles at FD; none point at EMI or a Coming Soon tool", () => {
     assert.equal(tax.getArticlesForTool("loan-comparison").length, 6);
     assert.deepEqual(tax.getArticlesForTool("emi"), []);
     assert.equal(tax.getArticlesForTool("sip").length, 4);
     assert.equal(tax.getArticlesForTool("margin").length, 3);
     assert.equal(tax.getArticlesForTool("profit").length, 3);
     assert.equal(tax.getArticlesForTool("home-loan").length, 3);
+    assert.equal(tax.getArticlesForTool("fd").length, 2);
     assert.deepEqual(tax.getArticlesForTool(getComingSoonTool().id), []);
+  });
+});
+
+describe("Investment is a category inside Calculators (Tool Pack 7 pins SIP and FD, not only the page's appearance)", () => {
+  const tool = (id) => calcs.getCalculatorById(id);
+
+  test("SIP and FD: section = Calculators, category = Investment; no subcategory", () => {
+    for (const id of ["sip", "fd"]) {
+      assert.equal(tool(id).category, "investment", id);
+      assert.equal(tool(id).subcategory, undefined, id);
+      const path = tax.getToolPath(tool(id));
+      assert.equal(path.section.id, "calculators", id);
+      assert.equal(path.section.title, "Calculators", id);
+      assert.equal(path.category.id, "investment", id);
+      assert.equal(path.category.title, "Investment", id); // the human-facing name is "Investment", never "Investments"
+      assert.equal(path.subcategory, null, id);
+      assert.equal(tax.getSectionForTool(tool(id)).id, "calculators", id);
+      assert.equal(tax.getCategoryForTool(tool(id)).id, "investment", id);
+    }
+  });
+
+  test("Investment is a category of the Calculators section, not a section of its own", () => {
+    assert.deepEqual(cats.sections.map((s) => s.id), ["calculators"]);
+    assert.equal(cats.categories.find((c) => c.id === "investment").sectionId, "calculators");
+    assert.equal(cats.categories.find((c) => c.id === "investment").title, "Investment");
+    assert.deepEqual(tax.getToolsByCategory("investment").map((t) => t.id), ["sip", "ppf", "fd", "cagr"]);
+    assert.deepEqual(tax.getToolsByCategory("investment").filter((t) => t.available).map((t) => t.id), ["sip", "fd"]);
+  });
+
+  test("the search index, the registry and the breadcrumb agree: Calculators > Investment > the tool", async () => {
+    const idx = await import("../../assets/js/data/search-index.js");
+    for (const [id, title] of [["sip", "SIP Calculator"], ["fd", "FD Calculator"]]) {
+      const entry = idx.searchIndex.find((e) => e.key === `tool:${id}`);
+      assert.equal(entry.sectionTitle, "Calculators", id);
+      assert.equal(entry.categoryTitle, "Investment", id);
+      assert.deepEqual(registry.calculatorMetadata[id], { section: "Calculators", category: "investment", title }, id);
+      // the shared breadcrumb prints the category id (styled to read "Investment"); Home is added by the renderer, so the page reads
+      // Home > Calculators > investment > <tool>
+      assert.deepEqual(crumb.toolBreadcrumbItems(registry.calculatorMetadata[id]).map((i) => i.label), ["Calculators", "investment", title], id);
+    }
   });
 });
 

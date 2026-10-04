@@ -106,6 +106,7 @@ div#articles-page
           button.pagination-button [data-page="4" type="button"] "4"
           button.pagination-button [data-page="5" type="button"] "5"
           button.pagination-button [data-page="6" type="button"] "6"
+          button.pagination-button [data-page="7" type="button"] "7"
           button.pagination-next [data-page="next" type="button"] "Next"
             span [aria-hidden="true"] "→"
       aside.articles-sidebar
@@ -127,7 +128,7 @@ div#articles-page
             a.article-category-item [data-sidebar-category="investment" href="{ROOT}articles.html"]
               span.article-category-name "Investment"
                 span.article-category-icon "📈"
-              span.article-category-count "4"
+              span.article-category-count "6"
                 span [aria-hidden="true"] "→"
             a.article-category-item [data-sidebar-category="tax" href="{ROOT}articles.html"]
               span.article-category-name "Tax"

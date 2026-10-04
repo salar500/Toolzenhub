@@ -47,7 +47,11 @@ const HOME_LOAN_PACK_PUBLISHED = [
   "home-loan/longer-tenure-bigger-loan-much-more-interest",
   "home-loan/how-interest-rates-change-the-home-loan-you-can-borrow",
 ];
-const PUBLISHED = [...ORIGINAL_PUBLISHED, ...PREPAYMENT_PACK_PUBLISHED, ...BALANCE_TRANSFER_PACK_PUBLISHED, ...SIP_PACK_PUBLISHED, ...MARGIN_PACK_PUBLISHED, ...PROFIT_PACK_PUBLISHED, ...HOME_LOAN_PACK_PUBLISHED];
+const FD_PACK_PUBLISHED = [
+  "fd/how-compounding-frequency-changes-an-fd-maturity",
+  "fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison",
+];
+const PUBLISHED = [...ORIGINAL_PUBLISHED, ...PREPAYMENT_PACK_PUBLISHED, ...BALANCE_TRANSFER_PACK_PUBLISHED, ...SIP_PACK_PUBLISHED, ...MARGIN_PACK_PUBLISHED, ...PROFIT_PACK_PUBLISHED, ...HOME_LOAN_PACK_PUBLISHED, ...FD_PACK_PUBLISHED];
 const COMING_SOON = [
   "investment/best-sip-strategies-for-beginners",
   "tax/tax-saving-guide-save-more-legally",
@@ -68,17 +72,17 @@ before(async () => {
 });
 
 describe("catalog model", () => {
-  test("29 entries: the original ids 1..12 plus the Tool Pack articles 13 to 29, with unique ids and keys", () => {
-    assert.deepEqual(catalog.articles.map((a) => a.id), [1, 2, 3, 4, 5, 6, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 7, 8, 9, 10, 11, 12]);
-    assert.equal(new Set(catalog.articles.map((a) => a.id)).size, 29);
-    assert.equal(new Set(catalog.articles.map((a) => a.key)).size, 29);
+  test("31 entries: the original ids 1..12 plus the Tool Pack articles 13 to 31, with unique ids and keys", () => {
+    assert.deepEqual(catalog.articles.map((a) => a.id), [1, 2, 3, 4, 5, 6, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 7, 8, 9, 10, 11, 12]);
+    assert.equal(new Set(catalog.articles.map((a) => a.id)).size, 31);
+    assert.equal(new Set(catalog.articles.map((a) => a.key)).size, 31);
   });
 
   test("every entry has an explicit status of published or coming-soon", () => {
     for (const a of catalog.articles) assert.ok(["published", "coming-soon"].includes(a.status), `${a.key}: ${a.status}`);
   });
 
-  test("the six original loan articles, the two Loan Prepayment articles and the two Balance Transfer articles the four SIP articles, the three Margin articles, the three Profit articles and the three Home Loan articles are published; the six placeholders are coming-soon", () => {
+  test("the six original loan articles, the two Loan Prepayment articles and the two Balance Transfer articles the four SIP articles, the three Margin articles, the three Profit articles, the three Home Loan articles and the two FD articles are published; the six placeholders are coming-soon", () => {
     assert.deepEqual(catalog.articles.filter((a) => a.status === "published").map((a) => a.key), PUBLISHED);
     assert.deepEqual(catalog.articles.filter((a) => a.status === "coming-soon").map((a) => a.key), COMING_SOON);
   });
@@ -132,19 +136,19 @@ describe("catalog model", () => {
     for (const a of catalog.articles.filter((x) => x.published && x.heroImage)) assert.ok(a.heroImage.alt.length > 30, a.slug);
   });
 
-  test("every category exists; published counts are loans 13, investment 4, business 6 and 0 elsewhere", () => {
+  test("every category exists; published counts are loans 13, investment 6, business 6 and 0 elsewhere", () => {
     const slugs = catalog.articleCategories.map((c) => c.slug);
     for (const a of catalog.articles) assert.ok(slugs.includes(a.category), a.key);
-    assert.deepEqual(Object.fromEntries(catalog.articleCategories.map((c) => [c.slug, c.count])), { loans: 13, investment: 4, tax: 0, business: 6, health: 0, math: 0, converter: 0 });
+    assert.deepEqual(Object.fromEntries(catalog.articleCategories.map((c) => [c.slug, c.count])), { loans: 13, investment: 6, tax: 0, business: 6, health: 0, math: 0, converter: 0 });
   });
 });
 
 describe("relationships", () => {
   test("related articles are curated, ordered, published and never the article itself: 5 per original article, 3 per Tool Pack article", () => {
     for (const a of catalog.articles.filter((x) => x.published)) {
-      // PUBLISHED above pins which articles exist; every one that is not an original belongs to a Tool Pack. The Margin and Profit clusters
+      // PUBLISHED above pins which articles exist; every one that is not an original belongs to a Tool Pack. The FD cluster is two articles, each relating to the other and to one SIP article. The Margin and Profit clusters
       // are three articles each and the other Business cluster is a different tool's, so each article relates to the other two of its own cluster.
-      const expected = ORIGINAL_PUBLISHED.includes(a.key) ? 5 : [...MARGIN_PACK_PUBLISHED, ...PROFIT_PACK_PUBLISHED].includes(a.key) ? 2 : 3;
+      const expected = ORIGINAL_PUBLISHED.includes(a.key) ? 5 : [...MARGIN_PACK_PUBLISHED, ...PROFIT_PACK_PUBLISHED, ...FD_PACK_PUBLISHED].includes(a.key) ? 2 : 3;
       assert.equal(a.related.length, expected, a.key);
       assert.equal(new Set(a.related).size, expected, a.key);
       for (const key of a.related) {
@@ -168,6 +172,7 @@ describe("relationships", () => {
       : MARGIN_PACK_PUBLISHED.includes(key) ? ["margin"]
       : PROFIT_PACK_PUBLISHED.includes(key) ? ["profit"]
       : HOME_LOAN_PACK_PUBLISHED.includes(key) ? ["home-loan"]
+      : FD_PACK_PUBLISHED.includes(key) ? ["fd"]
       : ["loan-comparison"];
     for (const a of catalog.articles.filter((x) => x.published)) {
       assert.deepEqual(a.tools, expected(a.key), a.key);
@@ -234,21 +239,21 @@ describe("article model (metadata + content -> page object)", () => {
 });
 
 describe("derived views keep their old shape", () => {
-  test("legacy listing registry: 29 entries, first entry literal, `published` only on published articles", () => {
-    assert.equal(legacy.articleRegistry.length, 29);
+  test("legacy listing registry: 31 entries, first entry literal, `published` only on published articles", () => {
+    assert.equal(legacy.articleRegistry.length, 31);
     assert.deepEqual(legacy.articleRegistry[0], {
       id: 1, published: true, category: "loans", categoryName: "Loans", topic: "loan-comparison", slug: "how-to-reduce-home-loan-interest",
       title: "How to Reduce Your Home Loan Interest",
       description: "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
       date: "Aug 25, 2026", readTime: "6 min read", image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80", alt: "House model on desk",
     });
-    assert.deepEqual(legacy.articleRegistry[23], {
+    assert.deepEqual(legacy.articleRegistry[25], {
       id: 7, category: "investment", categoryName: "Investment", topic: "investment", slug: "best-sip-strategies-for-beginners",
       title: "Best SIP Strategies for Beginners",
       description: "Learn practical SIP investment strategies to build wealth consistently and work towards your financial goals.",
       date: "Aug 25, 2026", readTime: "5 min read", image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80", alt: "Coins with plant growing",
     });
-    assert.equal(legacy.articleRegistry.filter((a) => a.published === true).length, 23);
-    assert.equal(legacy.articleRegistry.filter((a) => "published" in a).length, 23);
+    assert.equal(legacy.articleRegistry.filter((a) => a.published === true).length, 25);
+    assert.equal(legacy.articleRegistry.filter((a) => "published" in a).length, 25);
   });
 });

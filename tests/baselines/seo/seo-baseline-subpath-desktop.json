@@ -299,6 +299,156 @@
       "visibleTextChars": 8382
     }
   },
+  "/articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison/": {
+    "runtime": {
+      "title": "Comparing Two Fixed Deposits: A Higher Rate Is Not the Whole Comparison | ToolZen Hub",
+      "description": "See why two fixed deposit quotes with different tenures cannot be compared on the maturity amount alone, with one worked pair of offers.",
+      "canonical": "https://toolzenhub.in/articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "See why two fixed deposit quotes with different tenures cannot be compared on the maturity amount alone, with one worked pair of offers.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Comparing Two Fixed Deposits: A Higher Rate Is Not the Whole Comparison | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "See why two fixed deposit quotes with different tenures cannot be compared on the maturity amount alone, with one worked pair of offers.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison.png",
+        "twitter:title": "Comparing Two Fixed Deposits: A Higher Rate Is Not the Whole Comparison | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Comparing Two Fixed Deposits: A Higher Rate Is Not the Whole Comparison"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Comparing Two Fixed Deposits: A Higher Rate Is Not the Whole Comparison | ToolZen Hub",
+      "description": "See why two fixed deposit quotes with different tenures cannot be compared on the maturity amount alone, with one worked pair of offers.",
+      "canonical": "https://toolzenhub.in/articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6432
+    }
+  },
+  "/articles/fd/how-compounding-frequency-changes-an-fd-maturity/": {
+    "runtime": {
+      "title": "How Much Does Compounding Frequency Change an FD's Maturity? | ToolZen Hub",
+      "description": "Take one fixed deposit and change only how often interest is added, to see what monthly, quarterly, half-yearly and yearly compounding do to the maturity and the effective annual yield.",
+      "canonical": "https://toolzenhub.in/articles/fd/how-compounding-frequency-changes-an-fd-maturity/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Take one fixed deposit and change only how often interest is added, to see what monthly, quarterly, half-yearly and yearly compounding do to the maturity and the effective annual yield.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/how-compounding-frequency-changes-an-fd-maturity.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How Much Does Compounding Frequency Change an FD's Maturity? | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/fd/how-compounding-frequency-changes-an-fd-maturity/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Take one fixed deposit and change only how often interest is added, to see what monthly, quarterly, half-yearly and yearly compounding do to the maturity and the effective annual yield.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/how-compounding-frequency-changes-an-fd-maturity.png",
+        "twitter:title": "How Much Does Compounding Frequency Change an FD's Maturity? | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "How Much Does Compounding Frequency Change an FD's Maturity?"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How Much Does Compounding Frequency Change an FD&#39;s Maturity? | ToolZen Hub",
+      "description": "Take one fixed deposit and change only how often interest is added, to see what monthly, quarterly, half-yearly and yearly compounding do to the maturity and the effective annual yield.",
+      "canonical": "https://toolzenhub.in/articles/fd/how-compounding-frequency-changes-an-fd-maturity/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6718
+    }
+  },
   "/articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/": {
     "runtime": {
       "title": "How Interest Rates Change the Home Loan You Can Borrow | ToolZen Hub",
@@ -2009,6 +2159,55 @@
       "visibleTextChars": 3237
     }
   },
+  "/calculators/fd/": {
+    "runtime": {
+      "title": "FD Calculator: Maturity & Compare Deposits | ToolZen Hub",
+      "description": "Work out what a fixed deposit matures to, its interest and effective annual yield, and compare two offers. Calculated from your numbers: not a bank's quote or a guaranteed amount.",
+      "canonical": "https://toolzenhub.in/calculators/fd/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Work out what a fixed deposit matures to, its interest and effective annual yield, and compare two offers. Calculated from your numbers: not a bank's quote or a guaranteed amount.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "FD Calculator: Maturity & Compare Deposits | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/fd/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Work out what a fixed deposit matures to, its interest and effective annual yield, and compare two offers. Calculated from your numbers: not a bank's quote or a guaranteed amount.",
+        "twitter:title": "FD Calculator: Maturity & Compare Deposits | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "FD Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "FD Calculator: Maturity &amp; Compare Deposits | ToolZen Hub",
+      "description": "Work out what a fixed deposit matures to, its interest and effective annual yield, and compare two offers. Calculated from your numbers: not a bank&#39;s quote or a guaranteed amount.",
+      "canonical": "https://toolzenhub.in/calculators/fd/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6257
+    }
+  },
   "/calculators/home-loan/": {
     "runtime": {
       "title": "Home Loan Calculator: Loan Amount for Your EMI Budget | ToolZen Hub",
@@ -2300,7 +2499,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6030
+      "visibleTextChars": 6220
     }
   },
   "/categories.html": {

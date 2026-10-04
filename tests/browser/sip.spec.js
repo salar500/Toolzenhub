@@ -388,9 +388,13 @@ test.describe("SIP Calculator", () => {
     await expect(main).toContainText("₹23,928"); // the starting SIP for ₹1 crore
   });
 
-  test("no related calculators in v1 (no other Investment tool is live) and four curated articles", async ({ page, go, siteRoot }) => {
+  test("FD is the one related calculator (the other live Investment tool; Coming soon PPF and CAGR are not offered) and four curated articles", async ({ page, go, siteRoot }) => {
     await open(page, go);
-    await expect(page.locator(".related-calculator-card")).toHaveCount(0);
+    const related = page.locator(".related-calculator-card");
+    await expect(related).toHaveCount(1);
+    const toolHrefs = await related.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
+    expect(toolHrefs).toEqual([`${siteRoot}calculators/fd/`]);
+    await expect(page.locator("a[href*='calculators/ppf'], a[href*='calculators/cagr']")).toHaveCount(0);
     const cards = page.locator(".related-article-card");
     await expect(cards).toHaveCount(4);
     const hrefs = await cards.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));

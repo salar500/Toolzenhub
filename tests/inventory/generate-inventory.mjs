@@ -43,7 +43,7 @@ function walk(dir, out = []) {
 }
 
 const rel = (f) => path.relative(REPO, f).split(path.sep).join("/");
-const decode = (s) => s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#039;/g, "'");
+const decode = (s) => s.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#0?39;/g, "'");
 const squash = (s) => decode(s).replace(/\s+/g, " ").trim();
 
 function htmlMeta(file) {

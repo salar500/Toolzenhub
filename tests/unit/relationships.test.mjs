@@ -46,6 +46,9 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.deepEqual(toolIds(rel.getRelatedTools("prepayment")), ["emi", "loan-comparison", "balance-transfer", "home-loan"]); // curated order, then the category
     assert.deepEqual(toolIds(rel.getRelatedTools("balance-transfer")), ["prepayment", "emi", "loan-comparison", "home-loan"]); // curated order, then the category
     assert.deepEqual(toolIds(rel.getRelatedTools("home-loan")), ["loan-comparison", "emi", "balance-transfer", "prepayment"]);
+    // FD (Tool Pack 7) is the second published Investment tool: SIP and FD relate to each other through the category, and only to each other
+    assert.deepEqual(toolIds(rel.getRelatedTools("sip")), ["fd"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("fd")), ["sip"]);
     assert.deepEqual(rel.getRelatedTools("nope"), []);
     // parity with the pre-M7 rule for every tool without a curated list (the Loan Prepayment page curates its own order)
     for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
@@ -58,6 +61,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     }
     assert.deepEqual(rel.getRelatedArticlesForTool("gst"), []); // a Coming Soon tool in a category with no published articles
     assert.deepEqual(keys(rel.getRelatedArticlesForTool("sip")), calcs.getCalculatorById("sip").relatedArticles); // curated, not padded
+    assert.deepEqual(keys(rel.getRelatedArticlesForTool("fd")), calcs.getCalculatorById("fd").relatedArticles);
   });
 
   test("article -> related tools: the curated primary tool first, then the rest of the category", () => {
@@ -66,7 +70,8 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
       : key === "balance-transfer/is-a-loan-balance-transfer-worth-it" ? ["balance-transfer", "loan-comparison", "emi", "home-loan", "prepayment"]
       : key === "balance-transfer/balance-transfer-vs-prepayment" ? ["balance-transfer", "prepayment", "loan-comparison", "emi", "home-loan"]
       : key.startsWith("home-loan/") ? ["home-loan", "loan-comparison", "emi", "balance-transfer", "prepayment"]
-      : key.startsWith("sip/") ? ["sip"] // the only published Investment tool: no category fallback beyond it
+      : key.startsWith("sip/") ? ["sip", "fd"] // the primary tool first, then the other published Investment tool
+      : key.startsWith("fd/") ? ["fd", "sip"]
       : key.startsWith("margin/") ? ["margin", "profit"] // the primary tool first, then the other published Business tool
       : key.startsWith("profit/") ? ["profit", "margin"]
       : ["loan-comparison", "emi", "home-loan", "balance-transfer", "prepayment"];
@@ -78,7 +83,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     for (const key of PUBLISHED) {
       const entry = articles.getArticleByKey(key);
       assert.deepEqual(keys(rel.getRelatedArticles(key)), entry.related, key);
-      assert.equal(rel.getRelatedArticles(key).length, key.startsWith("margin/") || key.startsWith("profit/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") || key.startsWith("home-loan/") ? 3 : 5, key); // Margin and Profit: three-article clusters, so two others
+      assert.equal(rel.getRelatedArticles(key).length, key.startsWith("margin/") || key.startsWith("profit/") || key.startsWith("fd/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") || key.startsWith("home-loan/") ? 3 : 5, key); // Margin and Profit: three-article clusters, so two others
     }
   });
 
@@ -151,7 +156,7 @@ describe("curated first, automatic second", () => {
     savedRelated = first().related;
     first().related = [];
     // the other published articles of ITS category (Loans): the Investment and Business articles are not offered
-    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/") && !k.startsWith("profit/")).slice(1));
+    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/") && !k.startsWith("profit/") && !k.startsWith("fd/")).slice(1));
   });
 
   test("a curated article list is never replaced or padded by the automatic one", () => {

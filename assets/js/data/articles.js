@@ -925,6 +925,72 @@ const catalog = [
         relatedLabel: "Finance"
     },
 
+    {
+        id: 30,
+        status: "published",
+        category: "investment",
+        topic: "fd",
+        slug: "how-compounding-frequency-changes-an-fd-maturity",
+        title:
+            "How Much Does Compounding Frequency Change an FD's Maturity?",
+        description:
+            "Take one fixed deposit and change only how often interest is added, to see what monthly, quarterly, half-yearly and yearly compounding do to the maturity and the effective annual yield.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/how-compounding-frequency-changes-an-fd-maturity.png",
+            alt:
+                "Four rows, each one year split into equal periods: yearly compounding marks one moment when interest is added, half-yearly two, quarterly four and monthly twelve"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/how-compounding-frequency-changes-an-fd-maturity.png",
+            alt:
+                "Four rows, each one year split into equal periods: yearly compounding marks one moment when interest is added, half-yearly two, quarterly four and monthly twelve"
+        },
+        tools: ["fd"],
+        related: [
+            "fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison",
+            "sip/how-a-sip-grows"
+        ],
+        relatedLabel: "Finance"
+    },
+
+    {
+        id: 31,
+        status: "published",
+        category: "investment",
+        topic: "fd",
+        slug: "comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison",
+        title:
+            "Comparing Two Fixed Deposits: A Higher Rate Is Not the Whole Comparison",
+        description:
+            "See why two fixed deposit quotes with different tenures cannot be compared on the maturity amount alone, with one worked pair of offers.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison.png",
+            alt:
+                "Two horizontal bars on a years axis: one deposit runs for three years and the other for five, with the two extra years that only the second deposit runs set apart and bracketed"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison.png",
+            alt:
+                "Two horizontal bars on a years axis: one deposit runs for three years and the other for five, with the two extra years that only the second deposit runs set apart and bracketed"
+        },
+        tools: ["fd"],
+        related: [
+            "fd/how-compounding-frequency-changes-an-fd-maturity",
+            "sip/how-return-assumptions-change-a-sip-projection"
+        ],
+        relatedLabel: "Finance"
+    },
+
 
     /* =====================================================
        COMING SOON  (listing placeholders: no route, no
@@ -1201,6 +1267,18 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow.js"
+            ),
+
+    "fd/how-compounding-frequency-changes-an-fd-maturity":
+        () =>
+            import(
+                "./articles/fd/how-compounding-frequency-changes-an-fd-maturity.js"
+            ),
+
+    "fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison":
+        () =>
+            import(
+                "./articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison.js"
             )
 
 };

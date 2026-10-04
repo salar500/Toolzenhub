@@ -351,12 +351,39 @@ const catalog = [
 
     {
         id: "fd",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/fd/index.js"),
         category: "investment",
         icon: "▣",
         title: "FD Calculator",
         description:
-            "Calculate fixed deposit returns."
+            "Work out what a fixed deposit matures to for a rate and tenure you enter, see its effective annual yield, and compare two offers side by side.",
+        aliases: [
+            "fixed deposit calculator",
+            "fd maturity calculator",
+            "fd comparison"
+        ],
+        capabilities: {
+            reset: true,
+            table: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "FD Calculator: Maturity & Compare Deposits | ToolZen Hub",
+            description:
+                "Work out what a fixed deposit matures to, its interest and effective annual yield, and compare two offers. Calculated from your numbers: not a bank's quote or a guaranteed amount."
+        },
+        relatedArticles: [
+            "fd/how-compounding-frequency-changes-an-fd-maturity",
+            "fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison"
+        ]
     },
 
     {
