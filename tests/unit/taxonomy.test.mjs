@@ -71,7 +71,7 @@ describe("current hierarchy data", () => {
     }
   });
 
-  test("supporting articles: the six original articles point at Loan Comparison; the four SIP articles at SIP; the three Margin articles at Margin; the three Profit articles at Profit; the three Home Loan articles at Home Loan; the two FD articles at FD; none point at EMI or a Coming Soon tool", () => {
+  test("supporting articles: the six original articles point at Loan Comparison; the four SIP articles at SIP; the three Margin articles at Margin; the three Profit articles at Profit; the three Home Loan articles at Home Loan; the two FD articles at FD; the two GST articles at GST; none point at EMI or a Coming Soon tool", () => {
     assert.equal(tax.getArticlesForTool("loan-comparison").length, 6);
     assert.deepEqual(tax.getArticlesForTool("emi"), []);
     assert.equal(tax.getArticlesForTool("sip").length, 4);
@@ -79,6 +79,7 @@ describe("current hierarchy data", () => {
     assert.equal(tax.getArticlesForTool("profit").length, 3);
     assert.equal(tax.getArticlesForTool("home-loan").length, 3);
     assert.equal(tax.getArticlesForTool("fd").length, 2);
+    assert.equal(tax.getArticlesForTool("gst").length, 2);
     assert.deepEqual(tax.getArticlesForTool(getComingSoonTool().id), []);
   });
 });
@@ -120,6 +121,44 @@ describe("Investment is a category inside Calculators (Tool Pack 7 pins SIP and 
       // Home > Calculators > investment > <tool>
       assert.deepEqual(crumb.toolBreadcrumbItems(registry.calculatorMetadata[id]).map((i) => i.label), ["Calculators", "investment", title], id);
     }
+  });
+});
+
+describe("Tax is a category inside Calculators (Tool Pack 8 pins GST and Income Tax, not only the page's appearance)", () => {
+  const tool = (id) => calcs.getCalculatorById(id);
+
+  test("GST and Income Tax: section = Calculators, category = Tax; no subcategory; GST is live, Income Tax is Coming Soon", () => {
+    for (const id of ["gst", "income-tax"]) {
+      assert.equal(tool(id).category, "tax", id);
+      assert.equal(tool(id).subcategory, undefined, id);
+      const path = tax.getToolPath(tool(id));
+      assert.equal(path.section.id, "calculators", id);
+      assert.equal(path.category.id, "tax", id);
+      assert.equal(path.category.title, "Tax", id);
+      assert.equal(path.subcategory, null, id);
+    }
+    assert.equal(tool("gst").available, true);
+    assert.equal(tool("income-tax").available, false);
+    assert.equal(tool("income-tax").loader, undefined);
+  });
+
+  test("Tax is a category of the Calculators section, not a section of its own; GST is its only live tool", () => {
+    assert.deepEqual(cats.sections.map((s) => s.id), ["calculators"]);
+    assert.equal(cats.categories.find((c) => c.id === "tax").sectionId, "calculators");
+    assert.deepEqual(tax.getToolsByCategory("tax").map((t) => t.id), ["gst", "income-tax"]);
+    assert.deepEqual(tax.getToolsByCategory("tax").filter((t) => t.available).map((t) => t.id), ["gst"]);
+  });
+
+  test("the search index, the registry and the breadcrumb agree: Calculators > Tax > GST Calculator", async () => {
+    const idx = await import("../../assets/js/data/search-index.js");
+    const entry = idx.searchIndex.find((e) => e.key === "tool:gst");
+    assert.equal(entry.sectionTitle, "Calculators");
+    assert.equal(entry.categoryTitle, "Tax");
+    assert.deepEqual(registry.calculatorMetadata.gst, { section: "Calculators", category: "tax", title: "GST Calculator" });
+    // the shared breadcrumb prints the category id (styled to read "Tax"); Home is added by the renderer: Home > Calculators > tax > GST Calculator
+    assert.deepEqual(crumb.toolBreadcrumbItems(registry.calculatorMetadata.gst).map((i) => i.label), ["Calculators", "tax", "GST Calculator"]);
+    assert.equal(idx.searchIndex.find((e) => e.key === "tool:income-tax").status, "coming-soon");
+    assert.equal("income-tax" in registry.calculatorMetadata, false);
   });
 });
 

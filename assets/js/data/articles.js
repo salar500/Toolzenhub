@@ -991,6 +991,72 @@ const catalog = [
         relatedLabel: "Finance"
     },
 
+    {
+        id: 32,
+        status: "published",
+        category: "tax",
+        topic: "gst",
+        slug: "adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways",
+        title:
+            "Adding and Removing GST: Why the Tax Is Not the Same Share Both Ways",
+        description:
+            "Work one example both ways to see why taking the rate off a GST-inclusive total gives the wrong amount, and why the tax is a smaller share of the final amount.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways.png",
+            alt:
+                "One bar of 118 units made of a base of 100 and a tax of 18, then the same 18-unit tax shown as a part of a bar of 100 and as a part of a longer bar of 118"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways.png",
+            alt:
+                "One bar of 118 units made of a base of 100 and a tax of 18, then the same 18-unit tax shown as a part of a bar of 100 and as a part of a longer bar of 118"
+        },
+        tools: ["gst"],
+        related: [
+            "gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates",
+            "margin/price-a-product-for-a-target-margin"
+        ],
+        relatedLabel: "Finance"
+    },
+
+    {
+        id: 33,
+        status: "published",
+        category: "tax",
+        topic: "gst",
+        slug: "gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates",
+        title:
+            "GST on a Mixed Invoice: How the Tax Adds Up Across Rates",
+        description:
+            "Follow one invoice with items at two rates, grouped by rate and rounded item by item, to see how the tax adds up to the invoice total.",
+        publishedAt: "Oct 4, 2026",
+        updatedAt: "Oct 4, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates.png",
+            alt:
+                "Three item blocks sized by amount flow into two rate groups, a smaller 5 percent group and a larger 18 percent group, which merge into one invoice total"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates.png",
+            alt:
+                "Three item blocks sized by amount flow into two rate groups, a smaller 5 percent group and a larger 18 percent group, which merge into one invoice total"
+        },
+        tools: ["gst"],
+        related: [
+            "gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways",
+            "profit/price-cost-or-volume-which-matters-most"
+        ],
+        relatedLabel: "Finance"
+    },
+
 
     /* =====================================================
        COMING SOON  (listing placeholders: no route, no
@@ -1279,6 +1345,18 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison.js"
+            ),
+
+    "gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways":
+        () =>
+            import(
+                "./articles/gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways.js"
+            ),
+
+    "gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates":
+        () =>
+            import(
+                "./articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates.js"
             )
 
 };

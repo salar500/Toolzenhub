@@ -1,6 +1,6 @@
 # Tool Pack 08: GST Calculator (add or remove GST across the items of an invoice)
 
-Status: draft (planning only, not implemented, not approved for build)      Base commit: 5d37d6c
+Status: built and verified (commit pending)      Base commit: 5d37d6c
 Reserved id and slug: `gst` (route `/calculators/gst/`, a Coming Soon entry today)
 Spec follows `docs/tool-packs/_spec-template.md`; lifecycle and gate in `docs/tool-pack-factory.md`; reuse rules in
 `docs/tool-pack-reuse-review.md`; the previous packs are `03-sip.md` to `07-fd.md`.
@@ -166,8 +166,8 @@ Rupees held as whole paise; rate r a percentage with up to two decimals; amount 
   1.53 of tax item by item and 1.52 on the total.)
 - **GST share of the amount with GST** = GST ÷ with, as a percentage to two decimals (18% → 15.25%, 5% → 4.76%, 28% → 21.88%); shown for the whole invoice.
 - **By-rate table:** items with the same rate are merged (sums of the per-item figures), rows ordered by ascending rate, with a total row.
-- **Round trip:** Add then Remove with the same rate returns the original amount in all but rare one-paisa cases; the reference measures how often (section 22) and the page claims no more
-  than "usually".
+- **Round trip (planning wording, superseded by the measurement in the implementation notes):** the planning draft expected Add then Remove to return the original "usually"; the reference measured it instead (section 22 and the implementation notes).
+  The page claims only what was measured, within the tested domain.
 - **Zero rate:** GST 0.00, before = with.
 - **Impossible states:** none beyond validation.
 
@@ -269,7 +269,7 @@ Design quality: the answer the visitor asked for is the first and largest figure
 ### 22. Tests (risk-based) and independent verification
 **Independent reference:** `tests/fixtures/gst-golden.py` (Python `decimal` and `fractions`). It does **not** reuse the engine's integer formulas: it works in exact `Fraction`s and rounds half up with
 `ROUND_HALF_UP`, computes Remove mode by **integer search over whole paise** (the paise `b` for which `b` is the nearest to `with × 100 ÷ (100 + r)`), checks `before + GST = with` for every case, and
-**exhaustively** compares the closed forms over amounts from 0.01 to 2,000.00 at several rates, reporting how often Add-then-Remove fails to return the original (the page's "usually"). It prints every figure
+**exhaustively** compares the closed forms over amounts from 0.01 to 2,000.00 at several rates, reporting how often Add-then-Remove returns the original (planning expected "usually"; the measured result is in the implementation notes). It prints every figure
 quoted in the articles. The JSON is embedded as `GOLDEN` in `tests/unit/gst-golden.test.mjs`; no figure is copied from the JavaScript.
 **During implementation, run only what the change can break; never the whole site:**
 - formula change: `tests/unit/gst-golden.test.mjs` only;
@@ -305,7 +305,7 @@ Computed with Python `decimal` (half up to the paisa); amounts in rupees.
 | G | Add, 0.01 at 18% (smallest) | GST 0.00; with 0.01 |
 | H | Remove, 0.01 at 18% (smallest) | before 0.01; GST 0.00 |
 | I | Add, 1,00,00,000 at 28% | GST 28,00,000.00; with 1,28,00,000.00; share 21.88% |
-| J | Add, 99,99,99,999.99 at 28% (largest) | GST 28,00,00,000.00 (to the paisa: 279,999,999.9972 rounds to 280,000,000.00); with 1,27,99,99,999.99 |
+| J | Add, 99,99,99,999.99 at 28% (largest) | GST ₹2,80,00,00,000.00 (2,799,999,999.9972 rounds to 2,800,000,000.00); with GST ₹12,79,99,99,999.99. *(This row corrects the earlier planning value, which had the wrong digit grouping and magnitude: "28,00,00,000.00" and "1,27,99,99,999.99" were wrong and are superseded.)* |
 | K | Remove, 12,345.67 at 12% | before 11,022.92; GST 1,322.75; share 10.71% |
 | L | Add, three items: 1,000 at 5%; 2,000 at 18%; 500 at 18% | GST 50.00, 360.00, 90.00; by rate 5%: 1,000.00 / 50.00 / 1,050.00; 18%: 2,500.00 / 450.00 / 2,950.00; total 3,500.00 / 500.00 / 4,000.00 |
 | M | Remove, the same three as inclusive 1,050 at 5%; 2,360 and 590 at 18% | before 1,000.00; 2,000.00; 500.00; GST 50.00; 360.00; 90.00; totals 3,500.00 / 500.00 / 4,000.00 |
@@ -383,8 +383,9 @@ These sharpen the sections above; where they differ, this section wins.
 9. **Zero rate.** Add and Remove are both valid at 0%: before = with, GST = ₹0.00, share = 0.00%.
 10. **Limits.** Amount ₹0.01 to ₹99,99,99,999.99 (exact paise, no overflow, negatives invalid); rate 0 to 50 with up to two decimals; the default 18% is labelled an example, never standard, current, common or
     official.
-11. **Round-trip plan.** For valid Add amounts the reference exhaustively checks every amount from ₹0.01 to ₹2,000.00 at several rates: Add gives T, Remove on T with the same rate recovers `before`; it
-    reports how often the original is not recovered exactly (expected rare, within one paisa) and the page claims only "usually". The implementation's goldens are re-derived from the reference, not copied.
+11. **Round-trip plan.** For valid Add amounts the reference exhaustively checks every amount from ₹0.01 to ₹2,000.00 at several rates: Add gives T, Remove on T with the same rate recovers `before`, and it reports
+    how often the original is recovered exactly. *(The planning draft expected recovery to be rare-miss and worded the page "usually"; that expectation is superseded by the measured result in the implementation notes.)*
+    The implementation's goldens are re-derived from the reference, not copied.
 12. **Added planning golden O (inherited rate).** Add, Item 1: ₹1,000.00 at 18%; Item 2: ₹500.00 with the rate left blank (inherits 18%): GST 180.00 and 90.00; one row at 18%: before 1,500.00, GST 270.00, with
     1,770.00. With goldens A to N this covers: Add 1,000 at 18%; Remove 1,180 and 1,000 at 18%; 0%; ₹0.01; the odd-paisa half-up case; a large and the largest amount; same-rate items (L); different-rate items (L);
     Add multi-item (L); Remove multi-item (M); inherited rate (O); and item-level against grand-total rounding (N).
@@ -399,3 +400,30 @@ These sharpen the sections above; where they differ, this section wins.
     image adds no explanatory value. No images in this checkpoint.
 17. **SEO.** Canonical `https://toolzenhub.in/calculators/gst/`; title direction "GST Calculator: Add or Remove GST on an Invoice | ToolZen Hub", trimmed to site conventions if needed; the emphasis is add GST,
     remove GST and the invoice breakdown, never latest rates, a rate finder or classification.
+
+## Implementation notes (Tool Pack 8 built; commit pending)
+
+- **Built as specified.** `assets/js/calculators/formulas/gst.js` (pure; whole-paise BigInt arithmetic, rates in hundredths of a percent), `assets/js/calculators/gst/index.js`,
+  `assets/css/calculators/gst.css`. A mode (Add GST / Remove GST) as Margin's segmented radio; Item 1 required and Items 2 to 4 optional as four fixed fieldsets built from the shared number field; the
+  answer plus three cards form a natural 2x2 block; the by-rate table appears when more than one item has an amount; no chart, Print or CSV.
+- **Remove mode** takes the nearest paisa to `with x 100 / (100 + rate)` (a tie going up) as the amount before GST and the GST is the remainder, so `before + GST = the amount entered` always. The page and
+  the first article state plainly that subtracting the rate (₹1,180 less 18% = ₹967.60) is wrong.
+- **Round trip: measured.** The reference ran Add then Remove over every amount from ₹0.01 to ₹2,000.00 (200,000 amounts) at seven rates (0, 0.25, 2.5, 5, 12, 18, 28): **all 200,000 amounts came back exactly at each of those
+  seven rates**, and Remove kept `before + GST = the amount entered` on every one. The engine's unit tests repeat a dense range at eight rates. The page words this only as far as it was verified ("In testing, every amount from
+  ₹0.01 to ₹2,000.00 at seven different rates came back exactly"); it is **not** claimed as a guarantee beyond that tested domain, and no proof is asserted here. (There is a reason to expect it, since Add moves the exact
+  value by at most half a paisa, but that argument has not been separately verified as a proof, so the tested domain is the claim.)
+- **Spec correction.** Golden J in the planning table was wrong and is corrected in the table itself (marked there as superseded): the GST on ₹99,99,99,999.99 at 28% is ₹2,80,00,00,000.00 and the amount with GST is ₹12,79,99,99,999.99.
+- **Independent reference** `tests/fixtures/gst-golden.py` (Fractions with half-up rounding; Remove found by a search over whole paise; a full unbounded search cross-checked on a range): 16 single-item scenarios,
+  6 invoices (mixed Add and Remove, inherited rate, rate formatting, four sorted rates, the item-by-item rounding example), the round trip (`--full` for the 2,000.00 range, about five minutes) and the article figures.
+  `tests/unit/gst-golden.test.mjs` (45 tests) embeds its output; `tests/unit/gst-articles.test.mjs` (7 tests) pins every article number; `tests/browser/gst.spec.js` has 30 tests.
+- **Two articles** (topic `gst`, category Tax). Image 1: a proportion diagram (a base of 100 and a tax of 18, then the same 18 as a part of 100 and as a part of 118); image 2: a grouping flow (three item blocks
+  into two rate groups into one total). No text and no figures in either; PNG and WebP, under 7 KB each.
+- **Taxonomy** pinned: `taxonomy.test.mjs` asserts GST and Income Tax are Calculators > Tax (GST live, Income Tax Coming Soon), through the catalog, the derived path, the search index, the registry and the breadcrumb
+  items; the built breadcrumb reads Home > Calculators > tax > GST Calculator.
+- **Publication effects reviewed and updated on purpose:** GST was already in the Home page's hand-written Popular Calculators list as a Coming Soon card, so it became a live link there (5 live, 1 Coming Soon; not added
+  twice); the Calculators listing (10 built, 16 Coming Soon); Tax articles 0 to 2; the curated Margin and Profit links on the GST page (Margin and Profit do not link back: deferred); inventory (47 live pages; 16 Coming
+  Soon calculators + 6 article placeholders = 22 entries); DOM, link, SEO and visual baselines (Home, Calculators, the new GST page).
+- **Layout note (GST-only CSS):** on wide screens Items 2 to 4 sit side by side so the optional part of the form is one short row; below 1000px they stack.
+- **Observed, not changed:** the years-and-months pair, radio-segment, table and page-skeleton CSS are now copied once more (Margin/FD/GST radios; FD/GST table, notes and screen-reader rules); the tool-publication
+  touch list (Home, navigation, articles listing, search, sections, taxonomy) is the same long list; the earlier unrelated observations (Home Loan `home-loan-bottom`, Articles pagination on a phone, the lowercase
+  breadcrumb category id, the Loans 3+1 grid) are untouched.

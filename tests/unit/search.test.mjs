@@ -61,7 +61,7 @@ const buildCorpus = () => {
 describe("index structure", () => {
   test("covers categories, tools and articles (no subcategories are defined yet)", () => {
     const count = (type) => idx.searchIndex.filter((e) => e.type === type).length;
-    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 26, 31]);
+    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 26, 33]);
     assert.equal(new Set(idx.searchIndex.map((e) => e.key)).size, idx.searchIndex.length);
   });
 
@@ -99,7 +99,7 @@ describe("index structure", () => {
   });
 
   test("no invented aliases or keywords (only the Loan Prepayment and Balance Transfer calculators' own names), and no article bodies in the index", () => {
-    const ALIASES = { "tool:prepayment": ["part payment", "early repayment"], "tool:balance-transfer": ["loan transfer", "refinance", "switch loan"], "tool:sip": ["systematic investment plan", "step-up sip"], "tool:margin": ["profit margin calculator", "markup calculator", "selling price calculator"], "tool:profit": ["break-even calculator", "business profit calculator", "contribution margin calculator"], "tool:home-loan": ["home loan affordability", "how much loan can i afford", "loan amount calculator"], "tool:fd": ["fixed deposit calculator", "fd maturity calculator", "fd comparison"] };
+    const ALIASES = { "tool:prepayment": ["part payment", "early repayment"], "tool:balance-transfer": ["loan transfer", "refinance", "switch loan"], "tool:sip": ["systematic investment plan", "step-up sip"], "tool:margin": ["profit margin calculator", "markup calculator", "selling price calculator"], "tool:profit": ["break-even calculator", "business profit calculator", "contribution margin calculator"], "tool:home-loan": ["home loan affordability", "how much loan can i afford", "loan amount calculator"], "tool:fd": ["fixed deposit calculator", "fd maturity calculator", "fd comparison"], "tool:gst": ["add gst", "remove gst", "gst inclusive exclusive", "reverse gst calculator"] };
     for (const e of idx.searchIndex) {
       assert.deepEqual(e.aliases, ALIASES[e.key] ?? [], e.key);
       assert.deepEqual(e.keywords, [], e.key);

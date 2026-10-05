@@ -1,0 +1,385 @@
+/* =========================================================
+   ToolZen Hub
+   GST Calculator
+
+   Only what the shared calculator styles do not already provide:
+   the mode choice, the item rows, the notes and the by-rate table.
+   Buttons, focus, fields and headings come from the shared layer
+   (components/buttons.css, base/accessibility.css, calculator-base.css,
+   calculator-form.css). Loaded after calculator-responsive.css.
+========================================================= */
+
+
+/* =========================================================
+   FORM
+   The mode is two radio buttons drawn as large segments. The
+   selected one has a tick and a heavier border as well as a
+   colour, so the choice never relies on colour alone. Each item is
+   a fieldset of an amount and a rate side by side.
+========================================================= */
+
+.gst-mode,
+.gst-item {
+
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+
+}
+
+.gst-mode {
+
+    margin-bottom: 20px;
+
+}
+
+.gst-mode legend,
+.gst-item legend {
+
+    padding: 0;
+
+}
+
+.gst-item {
+
+    grid-column: 1 / -1;
+
+}
+
+.gst-pair {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+}
+
+.gst-mode__options {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin: 6px 0 8px;
+
+}
+
+.gst-mode__option {
+
+    position: relative;
+
+    display: inline-flex;
+
+    flex: 1 1 160px;
+
+    cursor: pointer;
+
+}
+
+/* the radio itself is hidden; its label is the control and keeps the focus ring */
+
+.gst-mode__option input {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: 0;
+
+    opacity: 0;
+
+}
+
+.gst-mode__option span {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    box-sizing: border-box;
+
+    width: 100%;
+    min-height: 44px;
+
+    padding: 8px 14px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: var(--color-white);
+
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: center;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease;
+
+}
+
+.gst-mode__option:hover span {
+
+    background: #f2f4f7;
+
+}
+
+.gst-mode__option input:checked + span {
+
+    border: 2px solid var(--color-brand-green);
+
+    background: #ecfdf3;
+
+    color: var(--color-ink);
+
+    font-weight: 750;
+
+}
+
+.gst-mode__option input:checked + span::before {
+
+    content: "✓";
+    content: "✓" / "";
+
+    font-weight: 800;
+
+}
+
+.gst-mode__option input:focus-visible + span {
+
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+/* the optional items sit under the first, set apart by a rule and a heading */
+
+.gst-more {
+
+    margin-top: 24px;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--color-slate-200);
+
+}
+
+.gst-more__title {
+
+    margin: 0 0 4px;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.4;
+
+}
+
+.gst-more__text {
+
+    margin: 0 0 16px;
+
+    color: var(--color-ink-muted);
+
+    font-size: 13px;
+    line-height: 1.5;
+
+}
+
+
+/*
+ * On a wide screen the three optional items sit side by side (each an amount over a rate), so the optional part of the form is
+ * one short row and the result stays close to the first screen. On narrower screens they stack as before.
+ */
+
+@media (min-width: 1000px) {
+
+    .gst-more .calculator-form__grid {
+
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+
+    .gst-more .gst-item {
+
+        grid-column: auto;
+
+    }
+
+    .gst-more .gst-pair {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.gst-subtitle {
+
+    margin: 28px 0 14px;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--color-slate-200);
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.4;
+
+}
+
+#gst-results .calculator-results__summary p {
+
+    margin: 0 0 8px;
+
+}
+
+#gst-results .calculator-results__summary p:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+/* =========================================================
+   NOTES
+   The trust note is calm and starts with words, so its meaning
+   never depends on colour. The different-tenure note is plain
+   text in a neutral box; it is information, not an error.
+========================================================= */
+
+.gst-note {
+
+    margin: 10px 0 0;
+
+    color: var(--color-ink-muted);
+
+    font-size: 11px;
+    line-height: 1.5;
+
+}
+
+.gst-note--plain {
+
+    margin: 12px 0 12px;
+
+    color: #475467;
+
+    font-size: 12px;
+
+}
+
+.gst-note--trust {
+
+    margin: 16px 0 0;
+    padding: 12px 14px;
+
+    border: 1px solid #fedf89;
+    border-left: 4px solid #f79009;
+    border-radius: 8px;
+
+    background: #fffcf5;
+
+    color: var(--color-ink);
+
+    font-size: 13px;
+    line-height: 1.55;
+
+}
+
+.gst-table tfoot th,
+.gst-table tfoot td {
+
+    border-top: 2px solid #d0d5dd;
+
+    color: var(--color-ink);
+
+    font-weight: 750;
+
+}
+
+
+/* =========================================================
+   BY-RATE TABLE
+========================================================= */
+
+.gst-table th:not(:first-child),
+.gst-table td {
+
+    text-align: right;
+
+}
+
+.gst-table tbody th,
+.gst-table tfoot th {
+
+    background: var(--color-white);
+
+    color: var(--color-ink);
+
+}
+
+/* the first column stays in view when a narrow screen scrolls the table sideways */
+
+.gst-table th:first-child {
+
+    position: sticky;
+    left: 0;
+
+    text-align: left;
+
+    box-shadow: 1px 0 0 #eaecf0;
+
+}
+
+.gst-table thead th:first-child {
+
+    background: #f9fafb;
+
+}
+
+#gst-results .calculator-results__table-wrapper:focus-visible {
+
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+
+/* =========================================================
+   TEXT FOR SCREEN READERS ONLY
+========================================================= */
+
+.gst-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}

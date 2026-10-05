@@ -14,9 +14,9 @@ test.describe("home page", () => {
     await expect(page.locator("h1.hero__title")).toContainText("Smart Financial");
     await expect(page.locator("#categories .category-card")).toHaveCount(2);
     await expect(page.locator("#popular-calculators .calculator-card")).toHaveCount(6);
-    // the four built calculators (Loan Comparison, EMI, SIP since Tool Pack 3 and Home Loan since Tool Pack 6) are links, the other two are not
-    await expect(page.locator("#popular-calculators a.calculator-card")).toHaveCount(4);
-    await expect(page.locator("#popular-calculators .calculator-card--soon")).toHaveCount(2);
+    // the five built calculators (Loan Comparison, EMI, SIP since Tool Pack 3, Home Loan since Tool Pack 6 and GST since Tool Pack 8) are links, the other one is not
+    await expect(page.locator("#popular-calculators a.calculator-card")).toHaveCount(5);
+    await expect(page.locator("#popular-calculators .calculator-card--soon")).toHaveCount(1);
     await expect(page.locator("#popular-calculators a.calculator-card").first()).toHaveAttribute("href", `${siteRoot}calculators/loan-comparison/`);
     // latest articles: the first three published, linking into /articles/…
     const latest = page.locator("#latest-articles a.article-card");
@@ -86,13 +86,13 @@ test.describe("categories page", () => {
 });
 
 test.describe("calculators and loans listings", () => {
-  test("calculators page: 26 entries (9 built), search, empty state, deep link", async ({ page, go }) => {
+  test("calculators page: 26 entries (10 built), search, empty state, deep link", async ({ page, go }) => {
     await go("calculators.html");
     const cards = page.locator("#calculators-grid .calculator-card");
     await expect(cards).toHaveCount(26);
     await expect(page.locator("#calculators-results-count")).toHaveText("26 calculators");
-    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(9);
-    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(17);
+    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(10);
+    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(16);
 
     const input = page.locator("#calculators-search-input");
     await input.fill("sip");
@@ -131,9 +131,9 @@ test.describe("calculators and loans listings", () => {
 
 test.describe("Coming soon items are not clickable", () => {
   for (const [path, selector, expected] of [
-    ["", "#popular-calculators .calculator-card--soon", 2],
+    ["", "#popular-calculators .calculator-card--soon", 1],
     ["loans.html", "#loans-calculators-grid .calculator-card--soon", 3],
-    ["calculators.html", "#calculators-grid .calculator-card--soon", 17],
+    ["calculators.html", "#calculators-grid .calculator-card--soon", 16],
   ]) {
     test(`${path || "home"}: ${expected} cards, no links, clicking does nothing`, async ({ page, go }) => {
       await go(path);
@@ -210,12 +210,12 @@ test.describe("footer", () => {
 });
 
 test.describe("calculator catalog drives tool identity (M1)", () => {
-  test("home popular list: Loan Comparison, EMI, SIP and Home Loan link to their routes, the other two are Coming soon", async ({ page, go, siteRoot }) => {
+  test("home popular list: Loan Comparison, EMI, SIP, Home Loan and GST link to their routes, the other one is Coming soon", async ({ page, go, siteRoot }) => {
     await go("");
     const cards = page.locator("#popular-calculators .calculator-card");
     await expect(cards).toHaveCount(6);
     const links = page.locator("#popular-calculators a.calculator-card");
-    await expect(links).toHaveCount(4);
+    await expect(links).toHaveCount(5);
     await expect(links.nth(0)).toHaveAttribute("href", `${siteRoot}calculators/loan-comparison/`);
     await expect(links.nth(0)).toContainText("Loan Comparison");
     await expect(links.nth(1)).toHaveAttribute("href", `${siteRoot}calculators/emi/`);
@@ -225,14 +225,20 @@ test.describe("calculator catalog drives tool identity (M1)", () => {
     await expect(links.nth(2)).toContainText("SIP Calculator");
     await expect(links.nth(2).locator(".coming-soon-badge")).toHaveCount(0);
     // Home Loan was also already in this hand-written list (as a Coming soon card): it turned into a link because the catalog published it, and was not added twice
-    await expect(links.nth(3)).toHaveAttribute("href", `${siteRoot}calculators/home-loan/`);
-    await expect(links.nth(3)).toContainText("Home Loan Calculator");
-    await expect(links.nth(3).locator(".coming-soon-badge")).toHaveCount(0);
+    await expect(links.nth(4)).toHaveAttribute("href", `${siteRoot}calculators/home-loan/`);
+    await expect(links.nth(4)).toContainText("Home Loan Calculator");
+    await expect(links.nth(4).locator(".coming-soon-badge")).toHaveCount(0);
     await expect(page.locator("#popular-calculators .calculator-card:has-text('Home Loan Calculator')")).toHaveCount(1);
+    // GST was also already in this hand-written list (as a Coming soon card): it turned into a link because the catalog published it, and was not added twice
+    const gst = page.locator("#popular-calculators a.calculator-card", { hasText: "GST Calculator" });
+    await expect(gst).toHaveCount(1);
+    await expect(gst).toHaveAttribute("href", `${siteRoot}calculators/gst/`);
+    await expect(gst.locator(".coming-soon-badge")).toHaveCount(0);
+    await expect(page.locator("#popular-calculators .calculator-card:has-text('GST Calculator')")).toHaveCount(1);
     const soon = page.locator("#popular-calculators .calculator-card--soon");
-    await expect(soon).toHaveCount(2);
-    await expect(soon.locator(".coming-soon-badge")).toHaveCount(2);
-    await expect(soon).toContainText(["GST Calculator", "BMI Calculator"]);
+    await expect(soon).toHaveCount(1);
+    await expect(soon.locator(".coming-soon-badge")).toHaveCount(1);
+    await expect(soon).toContainText(["BMI Calculator"]);
     await expect(page.locator("#popular-calculators .calculator-card--soon a")).toHaveCount(0);
   });
 
@@ -280,8 +286,12 @@ test.describe("M6 category hierarchy in the breadcrumbs @portable", () => {
 
   test("categories page: every category card resolves from the category data; Coming soon tools are not links", async ({ page, go, siteRoot }) => {
     await go("categories.html?q=tax");
+    // GST (live) is a link; Income Tax (Coming soon) is listed but is not
     await expect(page.locator("#categories-grid .category-page-card--soon").first()).toBeVisible();
-    expect(await page.locator("#categories-grid a.category-page-card").count()).toBe(0);
+    await expect(page.locator("#categories-grid .category-page-card--soon")).toContainText("Income Tax Calculator");
+    await expect(page.locator("#categories-grid .category-page-card--soon a")).toHaveCount(0);
+    await expect(page.locator('#categories-grid a.category-page-card[href$="calculators/gst/"]')).toHaveCount(1);
+    await expect(page.locator('#categories-grid a[href*="income-tax"]')).toHaveCount(0);
     await go("categories.html?q=emi");
     // search results show the tool's category icon, looked up from the category data
     const emi = page.locator('#categories-grid a.category-page-card[href$="calculators/emi/"]');

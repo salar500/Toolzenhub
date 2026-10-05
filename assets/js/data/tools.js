@@ -403,12 +403,44 @@ const catalog = [
 
     {
         id: "gst",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/gst/index.js"),
         category: "tax",
         icon: "%",
         title: "GST Calculator",
         description:
-            "Calculate GST easily and accurately."
+            "Add GST to an amount or take it out of one, for the rate you enter, across up to four items, with the tax by rate. Calculated from your numbers.",
+        aliases: [
+            "add gst",
+            "remove gst",
+            "gst inclusive exclusive",
+            "reverse gst calculator"
+        ],
+        capabilities: {
+            reset: true,
+            table: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        relatedTools: [
+            "margin",
+            "profit"
+        ],
+        relatedArticles: [
+            "gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways",
+            "gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates"
+        ],
+        seo: {
+            title:
+                "GST Calculator: Add or Remove GST on an Invoice | ToolZen Hub",
+            description:
+                "Add GST to an amount or take it out of one, with the amount before GST, the GST and the amount with GST for up to four items and the tax by rate. Calculated from the rate you enter: not tax advice."
+        }
     },
 
     {

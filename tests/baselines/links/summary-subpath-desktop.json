@@ -42,6 +42,18 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "articles/gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/": {
     "internal": 33,
     "external": [],
@@ -169,7 +181,7 @@
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 32,
+    "internal": 33,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -188,6 +200,12 @@
   },
   "calculators/fd/": {
     "internal": 29,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators/gst/": {
+    "internal": 30,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -255,7 +273,7 @@
     "deadFragments": []
   },
   "(home)": {
-    "internal": 33,
+    "internal": 34,
     "external": [],
     "placeholders": 4,
     "deadFragments": [

@@ -449,6 +449,156 @@
       "visibleTextChars": 6718
     }
   },
+  "/articles/gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways/": {
+    "runtime": {
+      "title": "Adding and Removing GST: Why the Tax Is Not the Same Share Both Ways | ToolZen Hub",
+      "description": "Work one example both ways to see why taking the rate off a GST-inclusive total gives the wrong amount, and why the tax is a smaller share of the final amount.",
+      "canonical": "https://toolzenhub.in/articles/gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Work one example both ways to see why taking the rate off a GST-inclusive total gives the wrong amount, and why the tax is a smaller share of the final amount.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Adding and Removing GST: Why the Tax Is Not the Same Share Both Ways | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Work one example both ways to see why taking the rate off a GST-inclusive total gives the wrong amount, and why the tax is a smaller share of the final amount.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways.png",
+        "twitter:title": "Adding and Removing GST: Why the Tax Is Not the Same Share Both Ways | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Adding and Removing GST: Why the Tax Is Not the Same Share Both Ways"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Adding and Removing GST: Why the Tax Is Not the Same Share Both Ways | ToolZen Hub",
+      "description": "Work one example both ways to see why taking the rate off a GST-inclusive total gives the wrong amount, and why the tax is a smaller share of the final amount.",
+      "canonical": "https://toolzenhub.in/articles/gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5793
+    }
+  },
+  "/articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates/": {
+    "runtime": {
+      "title": "GST on a Mixed Invoice: How the Tax Adds Up Across Rates | ToolZen Hub",
+      "description": "Follow one invoice with items at two rates, grouped by rate and rounded item by item, to see how the tax adds up to the invoice total.",
+      "canonical": "https://toolzenhub.in/articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Follow one invoice with items at two rates, grouped by rate and rounded item by item, to see how the tax adds up to the invoice total.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "GST on a Mixed Invoice: How the Tax Adds Up Across Rates | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Follow one invoice with items at two rates, grouped by rate and rounded item by item, to see how the tax adds up to the invoice total.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates.png",
+        "twitter:title": "GST on a Mixed Invoice: How the Tax Adds Up Across Rates | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "GST on a Mixed Invoice: How the Tax Adds Up Across Rates"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "GST on a Mixed Invoice: How the Tax Adds Up Across Rates | ToolZen Hub",
+      "description": "Follow one invoice with items at two rates, grouped by rate and rounded item by item, to see how the tax adds up to the invoice total.",
+      "canonical": "https://toolzenhub.in/articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5672
+    }
+  },
   "/articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/": {
     "runtime": {
       "title": "How Interest Rates Change the Home Loan You Can Borrow | ToolZen Hub",
@@ -2206,6 +2356,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 6257
+    }
+  },
+  "/calculators/gst/": {
+    "runtime": {
+      "title": "GST Calculator: Add or Remove GST on an Invoice | ToolZen Hub",
+      "description": "Add GST to an amount or take it out of one, with the amount before GST, the GST and the amount with GST for up to four items and the tax by rate. Calculated from the rate you enter: not tax advice.",
+      "canonical": "https://toolzenhub.in/calculators/gst/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Add GST to an amount or take it out of one, with the amount before GST, the GST and the amount with GST for up to four items and the tax by rate. Calculated from the rate you enter: not tax advice.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "GST Calculator: Add or Remove GST on an Invoice | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/gst/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Add GST to an amount or take it out of one, with the amount before GST, the GST and the amount with GST for up to four items and the tax by rate. Calculated from the rate you enter: not tax advice.",
+        "twitter:title": "GST Calculator: Add or Remove GST on an Invoice | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "GST Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "GST Calculator: Add or Remove GST on an Invoice | ToolZen Hub",
+      "description": "Add GST to an amount or take it out of one, with the amount before GST, the GST and the amount with GST for up to four items and the tax by rate. Calculated from the rate you enter: not tax advice.",
+      "canonical": "https://toolzenhub.in/calculators/gst/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5975
     }
   },
   "/calculators/home-loan/": {

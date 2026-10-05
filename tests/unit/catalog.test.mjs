@@ -24,7 +24,7 @@ before(async () => {
   related = { categories: cats.categories };
 });
 
-const PUBLISHED = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd"];
+const PUBLISHED = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment"];
 
 describe("catalog model", () => {
@@ -42,10 +42,10 @@ describe("catalog model", () => {
     for (const c of catalog.calculators) assert.ok(["published", "coming-soon"].includes(c.status), `${c.id}: ${c.status}`);
   });
 
-  test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP Margin, Profit, Home Loan and FD are published; all other 17 are coming-soon", () => {
+  test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP Margin, Profit, Home Loan, FD and GST are published; all other 16 are coming-soon", () => {
     const pub = catalog.calculators.filter((c) => c.status === "published").map((c) => c.id).sort();
     assert.deepEqual(pub, [...PUBLISHED].sort());
-    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 17);
+    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 16);
   });
 
   test("`available` (read by cards and search) is exactly status === published", () => {
@@ -117,6 +117,7 @@ describe("registry is derived from the catalog", () => {
       profit: { section: "Calculators", category: "business", title: "Profit Calculator" },
       "home-loan": { section: "Calculators", category: "loans", title: "Home Loan Calculator" },
       fd: { section: "Calculators", category: "investment", title: "FD Calculator" },
+      gst: { section: "Calculators", category: "tax", title: "GST Calculator" },
     });
   });
 });

@@ -49,9 +49,14 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     // FD (Tool Pack 7) is the second published Investment tool: SIP and FD relate to each other through the category, and only to each other
     assert.deepEqual(toolIds(rel.getRelatedTools("sip")), ["fd"]);
     assert.deepEqual(toolIds(rel.getRelatedTools("fd")), ["sip"]);
+    // GST (Tool Pack 8) is the first live Tax tool: it has no category neighbours, so its curated cross-category list is what it shows (Income Tax is Coming Soon and never offered);
+    // Margin and Profit do NOT link back to it (the reciprocal links are deferred)
+    assert.deepEqual(toolIds(rel.getRelatedTools("gst")), ["margin", "profit"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("margin")), ["profit"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("profit")), ["margin"]);
     assert.deepEqual(rel.getRelatedTools("nope"), []);
     // parity with the pre-M7 rule for every tool without a curated list (the Loan Prepayment page curates its own order)
-    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
+    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
   });
 
   test("tool -> related articles: the first six published loan articles, in catalog order, for EMI and Loan Comparison", () => {
@@ -59,9 +64,10 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
       assert.deepEqual(keys(rel.getRelatedArticlesForTool(slug, { limit: 6 })), PUBLISHED.slice(0, 6), slug);
       assert.deepEqual(rel.getRelatedArticlesForTool(slug, { limit: 6 }).map((a) => a.id), OLD_RELATED_ARTICLES(slug), slug);
     }
-    assert.deepEqual(rel.getRelatedArticlesForTool("gst"), []); // a Coming Soon tool in a category with no published articles
+    assert.deepEqual(rel.getRelatedArticlesForTool("bmi"), []); // a Coming Soon tool in a category with no published articles
     assert.deepEqual(keys(rel.getRelatedArticlesForTool("sip")), calcs.getCalculatorById("sip").relatedArticles); // curated, not padded
     assert.deepEqual(keys(rel.getRelatedArticlesForTool("fd")), calcs.getCalculatorById("fd").relatedArticles);
+    assert.deepEqual(keys(rel.getRelatedArticlesForTool("gst")), calcs.getCalculatorById("gst").relatedArticles);
   });
 
   test("article -> related tools: the curated primary tool first, then the rest of the category", () => {
@@ -72,6 +78,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
       : key.startsWith("home-loan/") ? ["home-loan", "loan-comparison", "emi", "balance-transfer", "prepayment"]
       : key.startsWith("sip/") ? ["sip", "fd"] // the primary tool first, then the other published Investment tool
       : key.startsWith("fd/") ? ["fd", "sip"]
+      : key.startsWith("gst/") ? ["gst"] // the only published Tax tool: no category fallback beyond it
       : key.startsWith("margin/") ? ["margin", "profit"] // the primary tool first, then the other published Business tool
       : key.startsWith("profit/") ? ["profit", "margin"]
       : ["loan-comparison", "emi", "home-loan", "balance-transfer", "prepayment"];
@@ -83,7 +90,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     for (const key of PUBLISHED) {
       const entry = articles.getArticleByKey(key);
       assert.deepEqual(keys(rel.getRelatedArticles(key)), entry.related, key);
-      assert.equal(rel.getRelatedArticles(key).length, key.startsWith("margin/") || key.startsWith("profit/") || key.startsWith("fd/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") || key.startsWith("home-loan/") ? 3 : 5, key); // Margin and Profit: three-article clusters, so two others
+      assert.equal(rel.getRelatedArticles(key).length, key.startsWith("margin/") || key.startsWith("profit/") || key.startsWith("fd/") || key.startsWith("gst/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") || key.startsWith("home-loan/") ? 3 : 5, key); // Margin and Profit: three-article clusters, so two others
     }
   });
 
@@ -156,7 +163,7 @@ describe("curated first, automatic second", () => {
     savedRelated = first().related;
     first().related = [];
     // the other published articles of ITS category (Loans): the Investment and Business articles are not offered
-    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/") && !k.startsWith("profit/") && !k.startsWith("fd/")).slice(1));
+    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/") && !k.startsWith("profit/") && !k.startsWith("fd/") && !k.startsWith("gst/")).slice(1));
   });
 
   test("a curated article list is never replaced or padded by the automatic one", () => {
