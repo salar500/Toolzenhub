@@ -40,13 +40,11 @@
    more specific than a single pseudo-class.
 ========================================================= */
 
-.footer__newsletter-input:focus-visible,
 .hero__search input:focus-visible,
 .categories-search__input:focus-visible,
 .calculators-search__input:focus-visible,
 .loans-search__input:focus-visible,
 #article-search:focus-visible,
-#newsletter-email:focus-visible,
 .calculator-form__button:focus-visible,
 .loan-view-link:focus-visible,
 .loan-amortization-close:focus-visible,

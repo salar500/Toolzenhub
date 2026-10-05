@@ -404,78 +404,6 @@ function renderPopularArticles() {
 
 
 /* =========================================================
-   NEWSLETTER
-========================================================= */
-
-function renderNewsletter() {
-
-    return `
-
-        <div class="article-newsletter">
-
-            <div class="newsletter-icon">
-
-                <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                >
-
-                    <path
-                        d="M3 6.5A2.5 2.5 0 015.5 4h13A2.5 2.5 0 0121 6.5v11a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 17.5v-11zm2 .5l7 5 7-5"
-                    />
-
-                </svg>
-
-            </div>
-
-
-            <div class="newsletter-content">
-
-                <h2>
-                    Stay Updated
-                </h2>
-
-                <p>
-                    Get the latest articles and updates
-                    in your inbox.
-                </p>
-
-            </div>
-
-
-            <form class="newsletter-form">
-
-                <label
-                    for="newsletter-email"
-                    class="sr-only"
-                >
-                    Email address
-                </label>
-
-
-                <input
-                    id="newsletter-email"
-                    type="email"
-                    placeholder="Enter your email"
-                    required
-                >
-
-
-                <button type="submit">
-                    Subscribe
-                </button>
-
-            </form>
-
-        </div>
-
-    `;
-
-}
-
-
-
-/* =========================================================
    SIDEBAR
 ========================================================= */
 
@@ -490,8 +418,6 @@ function renderSidebar() {
             ${renderCategories()}
 
             ${renderPopularArticles()}
-
-            ${renderNewsletter()}
 
         </aside>
 

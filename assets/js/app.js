@@ -77,15 +77,6 @@ import {
 
 
 /* =========================================================
-   Newsletter
-========================================================= */
-
-import {
-    initializeNewsletter
-} from "./components/newsletter.js";
-
-
-/* =========================================================
    Page modules
 
    Only the listing pages that this entry renders in the browser.
@@ -160,8 +151,6 @@ async function initializeApp() {
 
         renderFooter();
 
-        initializeNewsletter();
-
         return;
 
     }
@@ -180,8 +169,6 @@ async function initializeApp() {
 
         renderFooter();
 
-        initializeNewsletter();
-
         return;
 
     }
@@ -197,8 +184,6 @@ async function initializeApp() {
         renderArticlesPage();
 
         renderFooter();
-
-        initializeNewsletter();
 
         return;
 
@@ -216,8 +201,6 @@ async function initializeApp() {
 
         renderFooter();
 
-        initializeNewsletter();
-
         return;
 
     }
@@ -233,8 +216,6 @@ async function initializeApp() {
         renderContactPage();
 
         renderFooter();
-
-        initializeNewsletter();
 
         return;
 
@@ -253,8 +234,6 @@ async function initializeApp() {
     ) {
 
         renderFooter();
-
-        initializeNewsletter();
 
         return;
 
@@ -279,7 +258,6 @@ async function initializeApp() {
 
     renderFooter();
 
-    initializeNewsletter();
 
 }
 

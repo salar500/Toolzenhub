@@ -8,12 +8,12 @@ main#app
             div.hero__eyebrow
               span "100% Free"
               span.hero__dot "•"
-              span "Accurate"
+              span "No sign-up"
               span.hero__dot "•"
-              span "Easy to Use"
-            h1.hero__title "Smart Financial &"
-              span.hero__title-highlight "Everyday Calculators"
-            p.hero__description "Calculate, compare and plan better for a smarter life."
+              span "Works in your browser"
+            h1.hero__title "Practical calculators for"
+              span.hero__title-highlight "better everyday decisions"
+            p.hero__description "Calculate loan payments, compare options, plan investments and work through everyday GST, …"
             form#calculator-search.hero__search [role="search"]
               span.hero__search-icon [aria-hidden="true"] "⌕"
               input [aria-label="Search calculators" name="q" placeholder="Search calculators..." type="search"]
@@ -35,7 +35,7 @@ main#app
             div.category-card__icon.category-card__icon--calculators "🧮"
             div.category-card__content
               h3 "Calculators"
-              p "Loans, Investment, Tax, Health, Math and more"
+              p "Loans, investment, business, tax and math calculators"
   section#popular-calculators.section
     section.popular-section
       div.container

@@ -106,7 +106,7 @@ test.describe("each page loads only its own scripts @portable", () => {
     expect(has(js, "/pages/article")).toBe(false);
   });
 
-  test("article page: header, footer, newsletter and the table-of-contents script only", async ({ page, go }) => {
+  test("article page: header, footer and the table-of-contents script only", async ({ page, go }) => {
     const js = await scriptsLoaded(page, go, "articles/loan-comparison/emi-vs-total-interest/");
     expect(has(js, "/entries/article.js")).toBe(true);
     expect(has(js, "/pages/article/article-interactions.js")).toBe(true);

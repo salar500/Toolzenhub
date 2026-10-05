@@ -91,12 +91,10 @@ test.describe("form labels", () => {
 test.describe("keyboard focus is visible @portable", () => {
   const cases = [
     ["articles.html", "#article-search"],
-    ["articles.html", "#newsletter-email"],
     ["categories.html", ".categories-search__input"],
     ["calculators.html", ".calculators-search__input"],
     ["loans.html", ".loans-search__input"],
     ["index.html", ".hero__search input"],
-    ["index.html", ".footer__newsletter-input"],
   ];
   for (const [p, sel] of cases) {
     test(`${p} ${sel} shows a focus ring`, async ({ page, go }) => {

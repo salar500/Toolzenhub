@@ -847,7 +847,7 @@
       "file": "index.html",
       "classification": "live-indexable",
       "type": "home",
-      "expectedTitle": "ToolZen Hub | Smart Financial & Everyday Calculators",
+      "expectedTitle": "ToolZen Hub | Practical Calculators for Everyday Decisions",
       "primarySelector": "h1.hero__title",
       "expectsHeader": true,
       "expectsFooter": true,

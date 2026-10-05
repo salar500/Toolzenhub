@@ -274,49 +274,6 @@ export function footerMarkup() {
                         </div>
 
 
-                        <!-- ==================================
-                             Newsletter
-                        =================================== -->
-
-                        <div class="footer__newsletter">
-
-                            <h3 class="footer__column-title">
-                                Subscribe to our newsletter
-                            </h3>
-
-
-                            <p class="footer__newsletter-text">
-                                Get updates, useful tips and new
-                                calculators directly in your inbox.
-                            </p>
-
-
-                            <form
-                                class="footer__newsletter-form"
-                            >
-
-                                <input
-                                    type="email"
-                                    class="footer__newsletter-input"
-                                    placeholder="Enter your email"
-                                    aria-label="Email address"
-                                    autocomplete="email"
-                                    required
-                                >
-
-
-                                <button
-                                    type="submit"
-                                    class="footer__newsletter-button"
-                                >
-                                    Subscribe
-                                </button>
-
-                            </form>
-
-                        </div>
-
-
                     </div>
 
                 </div>

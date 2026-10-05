@@ -3,41 +3,41 @@ div#categories-grid.categories-page__grid
     div.category-page-card__icon.category-page-card__icon--loans [aria-hidden="true"] "🏠"
     div.category-page-card__content
       h2.category-page-card__title "Loans"
-      p.category-page-card__description "EMI, Home Loan, Personal Loan and more"
+      p.category-page-card__description "Calculate and compare loan payments, borrowing costs and repayment options"
     span.category-page-card__arrow [aria-hidden="true"] "→"
   a.category-page-card [href="{ROOT}categories.html#investment"]
     div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"] "📈"
     div.category-page-card__content
       h2.category-page-card__title "Investment"
-      p.category-page-card__description "SIP, PPF, FD, CAGR and more"
+      p.category-page-card__description "Explore investment growth, returns and savings scenarios"
     span.category-page-card__arrow [aria-hidden="true"] "→"
   a.category-page-card [href="{ROOT}categories.html#tax"]
     div.category-page-card__icon.category-page-card__icon--tax [aria-hidden="true"] "🧾"
     div.category-page-card__content
       h2.category-page-card__title "Tax"
-      p.category-page-card__description "Income Tax, GST, TDS and more"
+      p.category-page-card__description "Work through tax-related calculations with clear assumptions"
     span.category-page-card__arrow [aria-hidden="true"] "→"
   a.category-page-card [href="{ROOT}categories.html#health"]
     div.category-page-card__icon.category-page-card__icon--health [aria-hidden="true"] "♥"
     div.category-page-card__content
       h2.category-page-card__title "Health"
-      p.category-page-card__description "BMI, Calorie, BMR and more"
+      p.category-page-card__description "Health calculators are coming soon"
     span.category-page-card__arrow [aria-hidden="true"] "→"
   a.category-page-card [href="{ROOT}categories.html#business"]
     div.category-page-card__icon.category-page-card__icon--business [aria-hidden="true"] "💼"
     div.category-page-card__content
       h2.category-page-card__title "Business"
-      p.category-page-card__description "Profit, Margin, ROI and more"
+      p.category-page-card__description "Calculate margins, profit and other practical business metrics"
     span.category-page-card__arrow [aria-hidden="true"] "→"
   a.category-page-card [href="{ROOT}categories.html#math"]
     div.category-page-card__icon.category-page-card__icon--math [aria-hidden="true"] "🔢"
     div.category-page-card__content
       h2.category-page-card__title "Math"
-      p.category-page-card__description "Percentage, Ratio, Age and more"
+      p.category-page-card__description "Solve percentage and everyday math problems"
     span.category-page-card__arrow [aria-hidden="true"] "→"
   a.category-page-card [href="{ROOT}categories.html#converter"]
     div.category-page-card__icon.category-page-card__icon--converter [aria-hidden="true"] "↻"
     div.category-page-card__content
       h2.category-page-card__title "Converter"
-      p.category-page-card__description "Unit, Currency, Date and more"
+      p.category-page-card__description "Converter tools are coming soon"
     span.category-page-card__arrow [aria-hidden="true"] "→"

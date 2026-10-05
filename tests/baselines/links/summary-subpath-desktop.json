@@ -1,12 +1,10 @@
 {
   "about.html": {
-    "internal": 30,
+    "internal": 28,
     "external": [],
     "placeholders": 4,
     "deadFragments": [
       "categories.html#business  (fragment on another page; target element not verified)",
-      "categories.html#converter  (fragment on another page; target element not verified)",
-      "categories.html#health  (fragment on another page; target element not verified)",
       "categories.html#math  (fragment on another page; target element not verified)",
       "categories.html#tax  (fragment on another page; target element not verified)"
     ]

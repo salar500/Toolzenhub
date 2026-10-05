@@ -62,9 +62,9 @@ function renderAboutIntro() {
 
                     <p>
                         Whether you are planning your finances,
-                        checking a health-related calculation,
-                        working out a business figure, or simply
-                        solving an everyday math problem, our goal
+                        comparing loan options, working out a
+                        business figure, or simply solving an
+                        everyday percentage problem, our goal
                         is to give you a useful tool without unnecessary
                         complexity.
                     </p>
@@ -302,9 +302,9 @@ function renderWhySection() {
 
                             <p>
                                 From loan payments and investments to
-                                percentages, conversions and health
-                                calculations, our tools cover a wide
-                                range of everyday needs.
+                                GST, business margins and percentages,
+                                our calculators help with a range of
+                                everyday decisions.
                             </p>
 
                         </div>
@@ -400,8 +400,8 @@ function renderOfferSection() {
                             </strong>
 
                             <p>
-                                EMI, Home Loan, Personal Loan
-                                and more.
+                                Loan payments, borrowing costs
+                                and repayment options.
                             </p>
 
                             <span class="about-category-arrow">
@@ -425,8 +425,8 @@ function renderOfferSection() {
                             </strong>
 
                             <p>
-                                SIP, PPF, FD, CAGR
-                                and more.
+                                Investment growth, returns
+                                and savings scenarios.
                             </p>
 
                             <span class="about-category-arrow">
@@ -450,33 +450,8 @@ function renderOfferSection() {
                             </strong>
 
                             <p>
-                                Income Tax, GST
-                                and more.
-                            </p>
-
-                            <span class="about-category-arrow">
-                                →
-                            </span>
-
-                        </a>
-
-
-                        <!-- =====================================
-                             HEALTH
-                        ====================================== -->
-
-                        <a
-                            href="categories.html#health"
-                            class="about-category"
-                        >
-
-                            <strong>
-                                Health & Fitness
-                            </strong>
-
-                            <p>
-                                BMI, Calorie, BMR
-                                and more.
+                                Tax-related calculations
+                                with clear assumptions.
                             </p>
 
                             <span class="about-category-arrow">
@@ -500,8 +475,8 @@ function renderOfferSection() {
                             </strong>
 
                             <p>
-                                Profit, Margin, ROI
-                                and more.
+                                Margins, profit and other
+                                practical business metrics.
                             </p>
 
                             <span class="about-category-arrow">
@@ -525,33 +500,8 @@ function renderOfferSection() {
                             </strong>
 
                             <p>
-                                Percentage, Ratio, Age
-                                and more.
-                            </p>
-
-                            <span class="about-category-arrow">
-                                →
-                            </span>
-
-                        </a>
-
-
-                        <!-- =====================================
-                             CONVERTER
-                        ====================================== -->
-
-                        <a
-                            href="categories.html#converter"
-                            class="about-category"
-                        >
-
-                            <strong>
-                                Converter
-                            </strong>
-
-                            <p>
-                                Unit, Currency, Date
-                                and more.
+                                Percentages and everyday
+                                math problems.
                             </p>
 
                             <span class="about-category-arrow">

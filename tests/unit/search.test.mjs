@@ -171,7 +171,7 @@ describe("real data: policy and ranking", () => {
   test("coming-soon items are NOT found unless the caller asks for them", () => {
     assert.deepEqual(ids(engine.search("ppf", { types: ["tool"] })), []);
     assert.deepEqual(ids(engine.search("ppf", { types: ["tool"], includeComingSoon: true })), ["ppf"]);
-    assert.deepEqual(ids(engine.search("ppf")), ["investment"]); // the published Investment category mentions PPF
+    assert.deepEqual(ids(engine.search("ppf")), []); // the Investment category description no longer names tools, so a Coming soon tool is not found through it
     // SIP is published (Tool Pack 3): found by name and by its aliases, the tool first
     assert.deepEqual(ids(engine.search("sip", { types: ["tool"] })), ["sip"]);
     assert.deepEqual(ids(engine.search("systematic investment plan", { types: ["tool"] })), ["sip"]);
@@ -211,7 +211,7 @@ describe("real data: policy and ranking", () => {
 
   test("a mixed global search returns each type, published only", () => {
     const r = engine.search("emi");
-    assert.deepEqual(r.map((x) => x.key), ["tool:emi", "article:2", "article:13", "article:27", "category:loans", "tool:loan-comparison", "tool:home-loan", "tool:prepayment", "article:28", "article:29"]);
+    assert.deepEqual(r.map((x) => x.key), ["tool:emi", "article:2", "article:13", "article:27", "tool:loan-comparison", "tool:home-loan", "tool:prepayment", "article:28", "article:29"]);
     // the new tool is found by its aliases and only as a published tool
     assert.deepEqual(engine.search("part payment").map((x) => x.key), ["tool:prepayment"]);
     assert.deepEqual(engine.search("early repayment").map((x) => x.key), ["tool:prepayment"]);

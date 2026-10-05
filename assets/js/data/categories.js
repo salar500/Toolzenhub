@@ -58,7 +58,7 @@ export const categories = [
         icon: "🏠",
         iconClass: "loans",
         title: "Loans",
-        description: "EMI, Home Loan, Personal Loan and more",
+        description: "Calculate and compare loan payments, borrowing costs and repayment options",
         href: "loans.html",
         landing: "loans"
     },
@@ -70,7 +70,7 @@ export const categories = [
         icon: "📈",
         iconClass: "investment",
         title: "Investment",
-        description: "SIP, PPF, FD, CAGR and more",
+        description: "Explore investment growth, returns and savings scenarios",
         href: "investment.html"
     },
 
@@ -81,7 +81,7 @@ export const categories = [
         icon: "🧾",
         iconClass: "tax",
         title: "Tax",
-        description: "Income Tax, GST, TDS and more",
+        description: "Work through tax-related calculations with clear assumptions",
         href: "tax.html"
     },
 
@@ -92,7 +92,7 @@ export const categories = [
         icon: "♥",
         iconClass: "health",
         title: "Health",
-        description: "BMI, Calorie, BMR and more",
+        description: "Health calculators are coming soon",
         href: "health.html"
     },
 
@@ -103,7 +103,7 @@ export const categories = [
         icon: "💼",
         iconClass: "business",
         title: "Business",
-        description: "Profit, Margin, ROI and more",
+        description: "Calculate margins, profit and other practical business metrics",
         href: "business.html"
     },
 
@@ -114,7 +114,7 @@ export const categories = [
         icon: "🔢",
         iconClass: "math",
         title: "Math",
-        description: "Percentage, Ratio, Age and more",
+        description: "Solve percentage and everyday math problems",
         href: "math.html"
     },
 
@@ -125,7 +125,7 @@ export const categories = [
         icon: "↻",
         iconClass: "converter",
         title: "Converter",
-        description: "Unit, Currency, Date and more",
+        description: "Converter tools are coming soon",
         href: "converter.html"
     },
 

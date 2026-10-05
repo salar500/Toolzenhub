@@ -141,8 +141,8 @@ export function renderCategories() {
                             </h3>
 
                             <p>
-                                Loans, Investment, Tax,
-                                Health, Math and more
+                                Loans, investment, business,
+                                tax and math calculators
                             </p>
 
                         </div>

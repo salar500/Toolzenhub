@@ -144,8 +144,7 @@ body.categories-page-body .footer__features {
         1.4fr
         0.8fr
         1fr
-        1.2fr
-        1.5fr;
+        1.2fr;
 
     gap: 35px;
 
@@ -343,107 +342,6 @@ body.categories-page-body .footer__features {
 
 
 /* =========================================================
-   NEWSLETTER
-========================================================= */
-
-.footer__newsletter {
-    min-width: 0;
-}
-
-
-.footer__newsletter-text {
-    max-width: 240px;
-
-    margin: 0 0 10px;
-
-    color: #aab8c3;
-
-    font-size: 10px;
-
-    line-height: 1.45;
-}
-
-
-.footer__newsletter-form {
-    width: 100%;
-
-    max-width: 280px;
-
-    height: 36px;
-
-    display: flex;
-
-    align-items: stretch;
-
-    box-sizing: border-box;
-
-    overflow: hidden;
-
-    border: 1px solid rgba(255, 255, 255, 0.15);
-
-    border-radius: 6px;
-
-    background: rgba(255, 255, 255, 0.05);
-}
-
-
-.footer__newsletter-input {
-    flex: 1;
-
-    min-width: 0;
-
-    width: 100%;
-
-    padding: 0 10px;
-
-    border: 0;
-
-    outline: 0;
-
-    background: transparent;
-
-    color: #ffffff;
-
-    font-family: inherit;
-
-    font-size: 10px;
-}
-
-
-.footer__newsletter-input::placeholder {
-    color: #7f919f;
-}
-
-
-.footer__newsletter-button {
-    flex: 0 0 auto;
-
-    padding: 0 12px;
-
-    border: 0;
-
-    background: var(--color-brand-green);
-
-    color: #ffffff;
-
-    font-family: inherit;
-
-    font-size: 9px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: background 0.2s ease;
-}
-
-
-.footer__newsletter-button:hover {
-    background: #087d46;
-}
-
-
-/* =========================================================
    FOOTER BOTTOM
 ========================================================= */
 
@@ -593,10 +491,6 @@ body.categories-page-body .footer__features {
     }
 
 
-    .footer__newsletter {
-        grid-column: span 2;
-    }
-
 }
 
 
@@ -638,11 +532,6 @@ body.categories-page-body .footer__features {
 
 
     .footer__brand {
-        grid-column: span 2;
-    }
-
-
-    .footer__newsletter {
         grid-column: span 2;
     }
 

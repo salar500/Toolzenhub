@@ -37,21 +37,21 @@ export function renderHero() {
 
                             <span class="hero__dot">•</span>
 
-                            <span>Accurate</span>
+                            <span>No sign-up</span>
 
                             <span class="hero__dot">•</span>
 
-                            <span>Easy to Use</span>
+                            <span>Works in your browser</span>
 
                         </div>
 
 
                         <h1 class="hero__title">
 
-                            Smart Financial &
+                            Practical calculators for
 
                             <span class="hero__title-highlight">
-                                Everyday Calculators
+                                better everyday decisions
                             </span>
 
                         </h1>
@@ -59,8 +59,9 @@ export function renderHero() {
 
                         <p class="hero__description">
 
-                            Calculate, compare and plan better for a
-                            smarter life.
+                            Calculate loan payments, compare options,
+                            plan investments and work through everyday
+                            GST, margin and percentage questions.
 
                         </p>
 

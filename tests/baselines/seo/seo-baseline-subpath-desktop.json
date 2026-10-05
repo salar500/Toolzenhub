@@ -31,25 +31,25 @@
   },
   "/": {
     "runtime": {
-      "title": "ToolZen Hub | Smart Financial & Everyday Calculators",
-      "description": "Free online calculators for finance, investment, tax, health, business and more.",
+      "title": "ToolZen Hub | Practical Calculators for Everyday Decisions",
+      "description": "Free online calculators for loans, investments, GST, business margins and percentages. Calculated in your browser, with the assumptions shown.",
       "canonical": "https://toolzenhub.in/",
       "robots": null,
       "openGraph": {
-        "og:description": "Free online calculators for finance, investment, tax, health, business and more.",
+        "og:description": "Free online calculators for loans, investments, GST, business margins and percentages. Calculated in your browser, with the assumptions shown.",
         "og:site_name": "ToolZen Hub",
-        "og:title": "ToolZen Hub | Smart Financial & Everyday Calculators",
+        "og:title": "ToolZen Hub | Practical Calculators for Everyday Decisions",
         "og:type": "website",
         "og:url": "https://toolzenhub.in/"
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Free online calculators for finance, investment, tax, health, business and more.",
-        "twitter:title": "ToolZen Hub | Smart Financial & Everyday Calculators"
+        "twitter:description": "Free online calculators for loans, investments, GST, business margins and percentages. Calculated in your browser, with the assumptions shown.",
+        "twitter:title": "ToolZen Hub | Practical Calculators for Everyday Decisions"
       },
       "jsonLd": [],
       "h1": [
-        "Smart Financial & Everyday Calculators"
+        "Practical calculators for better everyday decisions"
       ],
       "lang": "en",
       "viewport": "width=device-width, initial-scale=1.0",
@@ -58,15 +58,15 @@
       "charset": "UTF-8"
     },
     "rawHtml": {
-      "title": "ToolZen Hub | Smart Financial &amp; Everyday Calculators",
-      "description": "Free online calculators for finance, investment, tax, health, business and more.",
+      "title": "ToolZen Hub | Practical Calculators for Everyday Decisions",
+      "description": "Free online calculators for loans, investments, GST, business margins and percentages. Calculated in your browser, with the assumptions shown.",
       "canonical": "https://toolzenhub.in/",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 0,
-      "visibleTextChars": 496
+      "visibleTextChars": 389
     }
   },
   "/about.html": {
@@ -106,7 +106,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 2968
+      "visibleTextChars": 2849
     }
   },
   "/articles.html": {
@@ -146,7 +146,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 0,
-      "visibleTextChars": 496
+      "visibleTextChars": 389
     }
   },
   "/articles/balance-transfer/balance-transfer-vs-prepayment/": {
@@ -221,7 +221,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6998
+      "visibleTextChars": 6891
     }
   },
   "/articles/balance-transfer/is-a-loan-balance-transfer-worth-it/": {
@@ -296,7 +296,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8382
+      "visibleTextChars": 8275
     }
   },
   "/articles/cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr/": {
@@ -371,7 +371,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6604
+      "visibleTextChars": 6497
     }
   },
   "/articles/cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate/": {
@@ -446,7 +446,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6347
+      "visibleTextChars": 6240
     }
   },
   "/articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison/": {
@@ -521,7 +521,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6432
+      "visibleTextChars": 6325
     }
   },
   "/articles/fd/how-compounding-frequency-changes-an-fd-maturity/": {
@@ -596,7 +596,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6718
+      "visibleTextChars": 6611
     }
   },
   "/articles/gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways/": {
@@ -671,7 +671,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5823
+      "visibleTextChars": 5716
     }
   },
   "/articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates/": {
@@ -746,7 +746,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5672
+      "visibleTextChars": 5565
     }
   },
   "/articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/": {
@@ -821,7 +821,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5105
+      "visibleTextChars": 4998
     }
   },
   "/articles/home-loan/how-much-home-loan-fits-your-emi-budget/": {
@@ -896,7 +896,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6541
+      "visibleTextChars": 6434
     }
   },
   "/articles/home-loan/longer-tenure-bigger-loan-much-more-interest/": {
@@ -971,7 +971,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6016
+      "visibleTextChars": 5909
     }
   },
   "/articles/loan-comparison/choose-right-loan-tenure/": {
@@ -1043,7 +1043,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6793
+      "visibleTextChars": 6686
     }
   },
   "/articles/loan-comparison/emi-vs-total-interest/": {
@@ -1118,7 +1118,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6067
+      "visibleTextChars": 5960
     }
   },
   "/articles/loan-comparison/fixed-vs-floating-interest-rates/": {
@@ -1193,7 +1193,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6884
+      "visibleTextChars": 6777
     }
   },
   "/articles/loan-comparison/how-to-reduce-home-loan-interest/": {
@@ -1268,7 +1268,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5478
+      "visibleTextChars": 5371
     }
   },
   "/articles/loan-comparison/loan-tenure-total-interest/": {
@@ -1343,7 +1343,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6344
+      "visibleTextChars": 6237
     }
   },
   "/articles/loan-comparison/what-is-loan-prepayment/": {
@@ -1418,7 +1418,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6975
+      "visibleTextChars": 6868
     }
   },
   "/articles/loan-prepayment/early-vs-late-loan-prepayment/": {
@@ -1493,7 +1493,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6464
+      "visibleTextChars": 6357
     }
   },
   "/articles/loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment/": {
@@ -1568,7 +1568,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7929
+      "visibleTextChars": 7822
     }
   },
   "/articles/margin/margin-vs-markup/": {
@@ -1643,7 +1643,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6103
+      "visibleTextChars": 5996
     }
   },
   "/articles/margin/price-a-product-for-a-target-margin/": {
@@ -1718,7 +1718,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6196
+      "visibleTextChars": 6089
     }
   },
   "/articles/margin/what-a-discount-really-costs-you/": {
@@ -1793,7 +1793,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6205
+      "visibleTextChars": 6098
     }
   },
   "/articles/percentage/how-to-find-the-original-price-before-a-percentage-change/": {
@@ -1865,7 +1865,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5389
+      "visibleTextChars": 5282
     }
   },
   "/articles/percentage/percent-vs-percentage-points/": {
@@ -1937,7 +1937,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5189
+      "visibleTextChars": 5082
     }
   },
   "/articles/percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back/": {
@@ -2009,7 +2009,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5628
+      "visibleTextChars": 5521
     }
   },
   "/articles/profit/how-to-find-your-break-even-point/": {
@@ -2084,7 +2084,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5968
+      "visibleTextChars": 5861
     }
   },
   "/articles/profit/price-cost-or-volume-which-matters-most/": {
@@ -2159,7 +2159,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6055
+      "visibleTextChars": 5948
     }
   },
   "/articles/profit/units-needed-for-a-target-profit/": {
@@ -2234,7 +2234,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5784
+      "visibleTextChars": 5677
     }
   },
   "/articles/sip/how-a-sip-grows/": {
@@ -2309,7 +2309,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6485
+      "visibleTextChars": 6378
     }
   },
   "/articles/sip/how-much-sip-do-you-need-for-a-goal/": {
@@ -2384,7 +2384,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6189
+      "visibleTextChars": 6082
     }
   },
   "/articles/sip/how-return-assumptions-change-a-sip-projection/": {
@@ -2459,7 +2459,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5869
+      "visibleTextChars": 5762
     }
   },
   "/articles/sip/step-up-sip-explained/": {
@@ -2534,7 +2534,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6159
+      "visibleTextChars": 6052
     }
   },
   "/calculators.html": {
@@ -2574,7 +2574,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 934
+      "visibleTextChars": 827
     }
   },
   "/calculators/balance-transfer/": {
@@ -2623,7 +2623,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6951
+      "visibleTextChars": 6844
     }
   },
   "/calculators/cagr/": {
@@ -2672,7 +2672,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6049
+      "visibleTextChars": 5942
     }
   },
   "/calculators/emi/": {
@@ -2721,7 +2721,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3237
+      "visibleTextChars": 3130
     }
   },
   "/calculators/fd/": {
@@ -2770,7 +2770,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6461
+      "visibleTextChars": 6354
     }
   },
   "/calculators/gst/": {
@@ -2819,7 +2819,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5995
+      "visibleTextChars": 5888
     }
   },
   "/calculators/home-loan/": {
@@ -2868,7 +2868,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6083
+      "visibleTextChars": 5976
     }
   },
   "/calculators/loan-comparison/": {
@@ -2917,7 +2917,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4429
+      "visibleTextChars": 4322
     }
   },
   "/calculators/margin/": {
@@ -2966,7 +2966,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6385
+      "visibleTextChars": 6278
     }
   },
   "/calculators/percentage/": {
@@ -3015,7 +3015,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5390
+      "visibleTextChars": 5283
     }
   },
   "/calculators/prepayment/": {
@@ -3064,7 +3064,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5961
+      "visibleTextChars": 5854
     }
   },
   "/calculators/profit/": {
@@ -3113,7 +3113,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6144
+      "visibleTextChars": 6037
     }
   },
   "/calculators/sip/": {
@@ -3162,7 +3162,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6424
+      "visibleTextChars": 6317
     }
   },
   "/categories.html": {
@@ -3202,7 +3202,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 654
+      "visibleTextChars": 537
     }
   },
   "/contact.html": {
@@ -3242,7 +3242,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 875
+      "visibleTextChars": 768
     }
   },
   "/disclaimer.html": {
@@ -3282,17 +3282,17 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 1819
+      "visibleTextChars": 1712
     }
   },
   "/loans.html": {
     "runtime": {
       "title": "Loans Calculators | ToolZen Hub",
-      "description": "Calculate, compare and plan your loans with ToolZen Hub loan calculators including EMI, Home Loan, Personal Loan and more.",
+      "description": "Calculate, compare and plan loans with ToolZen Hub tools for EMI, home loans, loan prepayment, balance transfer and loan comparison.",
       "canonical": "https://toolzenhub.in/loans.html",
       "robots": null,
       "openGraph": {
-        "og:description": "Calculate, compare and plan your loans with ToolZen Hub loan calculators including EMI, Home Loan, Personal Loan and more.",
+        "og:description": "Calculate, compare and plan loans with ToolZen Hub tools for EMI, home loans, loan prepayment, balance transfer and loan comparison.",
         "og:site_name": "ToolZen Hub",
         "og:title": "Loans Calculators | ToolZen Hub",
         "og:type": "website",
@@ -3300,7 +3300,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Calculate, compare and plan your loans with ToolZen Hub loan calculators including EMI, Home Loan, Personal Loan and more.",
+        "twitter:description": "Calculate, compare and plan loans with ToolZen Hub tools for EMI, home loans, loan prepayment, balance transfer and loan comparison.",
         "twitter:title": "Loans Calculators | ToolZen Hub"
       },
       "jsonLd": [],
@@ -3315,14 +3315,14 @@
     },
     "rawHtml": {
       "title": "Loans Calculators | ToolZen Hub",
-      "description": "Calculate, compare and plan your loans with ToolZen Hub loan calculators including EMI, Home Loan, Personal Loan and more.",
+      "description": "Calculate, compare and plan loans with ToolZen Hub tools for EMI, home loans, loan prepayment, balance transfer and loan comparison.",
       "canonical": "https://toolzenhub.in/loans.html",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 742
+      "visibleTextChars": 637
     }
   },
   "/privacy.html": {
@@ -3362,7 +3362,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 1869
+      "visibleTextChars": 1748
     }
   },
   "/terms.html": {
@@ -3402,7 +3402,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 1929
+      "visibleTextChars": 1822
     }
   }
 }

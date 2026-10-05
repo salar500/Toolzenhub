@@ -11,14 +11,12 @@
 
 import { renderHeader } from "../components/header.js";
 import { renderFooter } from "../components/footer.js";
-import { initializeNewsletter } from "../components/newsletter.js";
 import { renderToolError, renderToolNotFound } from "../pages/tool-messages.js";
 
 async function startTool() {
 
     renderHeader();
     renderFooter();
-    initializeNewsletter();
 
     const app =
         document.getElementById("app");

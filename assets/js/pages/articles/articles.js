@@ -59,7 +59,6 @@ import {
 import {
     initializeSidebarCategories,
     initializeMoreCategories,
-    initializeNewsletter,
     initializeArticleLinks
 } from "./articles-sidebar.js";
 
@@ -169,13 +168,6 @@ function initializeArticlesPage() {
     ===================================================== */
 
     initializeMoreCategories();
-
-
-    /* =====================================================
-       NEWSLETTER
-    ===================================================== */
-
-    initializeNewsletter();
 
 
     /* =====================================================

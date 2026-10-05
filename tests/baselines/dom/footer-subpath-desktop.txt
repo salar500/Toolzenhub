@@ -45,12 +45,6 @@ div#footer
                 a [href="{ROOT}calculators/loan-comparison/"] "Loan Comparison"
               li
                 a [href="{ROOT}calculators.html"] "All Calculators"
-          div.footer__newsletter
-            h3.footer__column-title "Subscribe to our newsletter"
-            p.footer__newsletter-text "Get updates, useful tips and new calculators directly in your inbox."
-            form.footer__newsletter-form
-              input.footer__newsletter-input [aria-label="Email address" placeholder="Enter your email" required type="email"]
-              button.footer__newsletter-button [type="submit"] "Subscribe"
     div.footer__bottom
       div.container
         div.footer__bottom-inner

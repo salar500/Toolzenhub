@@ -46,11 +46,6 @@
         grid-column: 1 / -1;
     }
 
-
-    .article-newsletter {
-        grid-column: 1 / -1;
-    }
-
 }
 
 
@@ -205,15 +200,6 @@
         width: 100%;
         box-sizing: border-box;
         order: 3;
-    }
-
-
-    /* Newsletter FOURTH */
-
-    .article-newsletter {
-        width: 100%;
-        box-sizing: border-box;
-        order: 4;
     }
 
 

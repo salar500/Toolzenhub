@@ -172,13 +172,3 @@ div#articles-page
               div
                 h3 "How Loan Tenure Affects Total Interest"
                 span "Aug 25, 2026"
-        div.article-newsletter
-          div.newsletter-icon
-            svg [aria-hidden="true"]
-          div.newsletter-content
-            h2 "Stay Updated"
-            p "Get the latest articles and updates in your inbox."
-          form.newsletter-form
-            label.sr-only [for="newsletter-email"] "Email address"
-            input#newsletter-email [placeholder="Enter your email" required type="email"]
-            button [type="submit"] "Subscribe"

@@ -309,69 +309,6 @@ export function initializeMoreCategories() {
 
 
 /* =========================================================
-   NEWSLETTER
-========================================================= */
-
-export function initializeNewsletter() {
-
-    const form =
-        document.querySelector(
-            ".newsletter-form"
-        );
-
-
-    if (!form) {
-        return;
-    }
-
-
-    form.addEventListener(
-        "submit",
-        event => {
-
-            event.preventDefault();
-
-
-            const emailInput =
-                form.querySelector(
-                    "input[type='email']"
-                );
-
-
-            if (!emailInput) {
-                return;
-            }
-
-
-            if (
-                !emailInput.value.trim()
-            ) {
-
-                return;
-
-            }
-
-
-            /*
-             * Newsletter backend
-             * can be connected here later.
-             */
-
-            emailInput.value = "";
-
-
-            alert(
-                "Thank you for subscribing!"
-            );
-
-        }
-    );
-
-}
-
-
-
-/* =========================================================
    ARTICLE LINKS
 ========================================================= */
 

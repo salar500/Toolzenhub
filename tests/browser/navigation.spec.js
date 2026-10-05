@@ -13,7 +13,7 @@ const SECTION_IDS = CATEGORY_IDS.filter((id) => id !== "loans"); // Loans has it
 test.describe("home page", () => {
   test("hero, category card, featured tools, latest articles", async ({ page, go, watch, siteRoot }) => {
     await go("");
-    await expect(page.locator("h1.hero__title")).toContainText("Smart Financial");
+    await expect(page.locator("h1.hero__title")).toContainText("Practical calculators");
     // one major section today (Calculators): one card, and no "More" card that opens nothing of its own
     await expect(page.locator("#categories .category-card")).toHaveCount(1);
     await expect(page.locator("#categories .category-card")).toContainText("Calculators");
