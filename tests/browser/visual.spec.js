@@ -29,6 +29,7 @@ const PAGES = [
   ["home-loan", "calculators/home-loan/", ".related-article-card", true],
   ["fd", "calculators/fd/", ".related-article-card", true],
   ["gst", "calculators/gst/", ".related-article-card", true],
+  ["cagr", "calculators/cagr/", ".related-article-card", true],
   ["articles", "articles.html", "#articles-list .article-card", false],
   ["article", "articles/loan-comparison/what-is-loan-prepayment/", ".article-related-card", true],
   ["contact", "contact.html", "form.contact-form", false],

@@ -86,13 +86,13 @@ test.describe("categories page", () => {
 });
 
 test.describe("calculators and loans listings", () => {
-  test("calculators page: 26 entries (10 built), search, empty state, deep link", async ({ page, go }) => {
+  test("calculators page: 26 entries (11 built), search, empty state, deep link", async ({ page, go }) => {
     await go("calculators.html");
     const cards = page.locator("#calculators-grid .calculator-card");
     await expect(cards).toHaveCount(26);
     await expect(page.locator("#calculators-results-count")).toHaveText("26 calculators");
-    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(10);
-    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(16);
+    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(11);
+    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(15);
 
     const input = page.locator("#calculators-search-input");
     await input.fill("sip");
@@ -133,7 +133,7 @@ test.describe("Coming soon items are not clickable", () => {
   for (const [path, selector, expected] of [
     ["", "#popular-calculators .calculator-card--soon", 1],
     ["loans.html", "#loans-calculators-grid .calculator-card--soon", 3],
-    ["calculators.html", "#calculators-grid .calculator-card--soon", 16],
+    ["calculators.html", "#calculators-grid .calculator-card--soon", 15],
   ]) {
     test(`${path || "home"}: ${expected} cards, no links, clicking does nothing`, async ({ page, go }) => {
       await go(path);

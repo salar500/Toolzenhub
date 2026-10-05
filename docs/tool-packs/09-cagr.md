@@ -1,6 +1,6 @@
 # Tool Pack 09: CAGR Calculator (the yearly growth rate an investment implies, and two investments compared on that footing)
 
-Status: draft (planning only, not implemented, not approved for build)      Base commit: 7093553
+Status: built and verified (commit pending)      Base commit: 7093553
 Reserved id and slug: `cagr` (route `/calculators/cagr/`, a Coming Soon entry today)
 Spec follows `docs/tool-packs/_spec-template.md`; lifecycle and gate in `docs/tool-pack-factory.md`; reuse rules in
 `docs/tool-pack-reuse-review.md`; the previous packs are `03-sip.md` to `08-gst.md`.
@@ -326,3 +326,28 @@ shared breadcrumb prints the lowercase category id; the Loans related-card grid 
 4. The two articles, figure tests and the two diagram images (checked individually for concept, size and alt text); focused article tests.
 5. Pinned expectations, baselines and visual registration for the pages that change.
 6. Final Tool Pack gate once (section 22), then the commit.
+
+## Implementation notes (Tool Pack 9 built; commit pending)
+
+- **Built as specified.** `assets/js/calculators/formulas/cagr.js` (pure: whole-paise values, an integer ratio test, a floating power for the root checked against the reference, half-up percentage display with
+  "-0.00" suppressed), `assets/js/calculators/cagr/index.js`, `assets/css/calculators/cagr.css`. Two modes (Looking back, Looking ahead) as Margin's segmented radio; the ending value is relabelled "Target Value" when
+  looking ahead; an optional Investment B (ending value; blank starting value and period are the first case's; with no ending value every other B field is ignored without a message); the CAGR plus three cards (total
+  growth, growth multiple, simple yearly average) form a natural 2x2 block; a seven-row comparison table appears only when Investment B has an ending value; no chart, Print or CSV.
+- **The simple yearly average is total growth divided by the years and nothing else.** The corrected spec's example (₹1,00,000 to ₹1,80,000 over 5 years: 80.00% total, 16.00% simple average, about 12.47% CAGR) is the
+  default, the example paragraph and article 1; a periodic-return example was removed because the tool models no series of returns. A browser test checks that no "arithmetic mean" or "average of yearly returns" wording
+  appears on the page.
+- **Independent reference** `tests/fixtures/cagr-golden.py` finds the rate by bisection on integer powers ((1 + g)^months = (end / start)^12), cross-checks with ln / exp, rounds the answer to 30 places so exact cases are exact,
+  and rounds displayed percentages half up: 17 scenarios (including the exact 10%, an exact +0.125% tie that shows 0.13 and a -0.125% tie that shows -0.13, no change, a loss, the largest and smallest allowed ratios, the shortest
+  and longest periods, paise values), 4 comparisons and the article figures. `tests/unit/cagr-golden.test.mjs` (44 tests) embeds its output; `tests/unit/cagr-articles.test.mjs` (7 tests) pins the article numbers;
+  `tests/browser/cagr.spec.js` has 31 tests.
+- **Two articles** (topic `cagr`, category Investment). Both first drafts of the diagrams read as ordinary bar charts and were replaced: image 1 is two end blocks of the same height, one built from the start plus five EQUAL
+  additive slices and one from the start plus five slices that each grow (about 12.47% of the value before); image 2 is two chains of yearly hops along one ruler (five larger hops and nine slightly smaller ones, to scale
+  of the two yearly rates). No text or figures in either; PNG and WebP (about 5.2 and 1.8 KB for image 1, 12.9 and 10.0 KB for image 2; the smaller of a lossy and a lossless WebP is kept). The two are visually distinct (stacked blocks against hops on a ruler) and from the FD and GST diagrams.
+- **Taxonomy** pinned: `taxonomy.test.mjs` asserts SIP, FD and CAGR are Calculators > Investment (catalog, derived path, search index, registry, breadcrumb items); the built breadcrumb reads
+  Home > Calculators > investment > CAGR Calculator. PPF stays Coming Soon and is never offered.
+- **Publication effects reviewed and updated on purpose:** the SIP page now shows FD and CAGR and the FD page shows SIP and CAGR as related calculators (the real consumers; their specs and visual baselines changed); the
+  Calculators listing (11 built, 15 Coming Soon); Investment articles 6 to 8 on the Articles listing; the search index size guard (30,000 to 45,000 bytes; it still excludes article bodies); inventory (50 live pages; 15
+  Coming Soon calculators + 6 article placeholders = 21 entries); DOM, link and SEO baselines. The Home page was not affected (CAGR is not in its Popular list) and was not retested.
+- **Observed, not changed:** the years-and-months pair, radio-segment and table CSS is copied again (SIP/FD/CAGR pair; Margin/FD/GST/CAGR radios; FD/GST/CAGR notes and tables); Investment now has three live tools and
+  still no landing page (a separate category-foundation phase); the earlier unrelated observations (Home Loan `home-loan-bottom`, Articles pagination on a phone, the lowercase breadcrumb category id, the Loans 3+1 grid)
+  are untouched.

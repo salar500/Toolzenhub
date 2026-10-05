@@ -19,6 +19,7 @@ const TOOLS = [
   ["calculators/home-loan/", null, "#home-loan-reset", "#home-loan-results .calculator-results__value"],
   ["calculators/fd/", null, "#fd-reset", "#fd-results .calculator-results__value"],
   ["calculators/gst/", null, "#gst-reset", "#gst-results .calculator-results__value"],
+  ["calculators/cagr/", null, "#cagr-reset", "#cagr-results .calculator-results__value"],
 ];
 
 const BRAND_GREEN = "rgb(11, 159, 88)"; // the brand green: focus ring, section rule (not text inside a control)
@@ -122,7 +123,7 @@ test.describe("tool buttons are one system across EMI, Loan Comparison and Loan 
 
 test.describe("heading hierarchy", () => {
   test("EMI and Loan Prepayment: a green rule marks each section title", async ({ page, go }) => {
-    for (const path of ["calculators/emi/", "calculators/prepayment/", "calculators/balance-transfer/", "calculators/sip/", "calculators/margin/", "calculators/profit/", "calculators/home-loan/", "calculators/fd/", "calculators/gst/"]) {
+    for (const path of ["calculators/emi/", "calculators/prepayment/", "calculators/balance-transfer/", "calculators/sip/", "calculators/margin/", "calculators/profit/", "calculators/home-loan/", "calculators/fd/", "calculators/gst/", "calculators/cagr/"]) {
       await go(path);
       const rule = await page.locator(".calculator-section__title").first().evaluate((e) => {
         const c = getComputedStyle(e, "::after");

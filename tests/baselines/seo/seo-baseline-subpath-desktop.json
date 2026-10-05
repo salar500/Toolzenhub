@@ -299,6 +299,156 @@
       "visibleTextChars": 8382
     }
   },
+  "/articles/cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr/": {
+    "runtime": {
+      "title": "CAGR vs Simple Average Growth: Why 80% Growth Over 5 Years Is Not 16% CAGR | ToolZen Hub",
+      "description": "Work one example to see why dividing total growth by the years is not the compound annual growth rate, and what the CAGR actually measures.",
+      "canonical": "https://toolzenhub.in/articles/cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Work one example to see why dividing total growth by the years is not the compound annual growth rate, and what the CAGR actually measures.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "CAGR vs Simple Average Growth: Why 80% Growth Over 5 Years Is Not 16% CAGR | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Work one example to see why dividing total growth by the years is not the compound annual growth rate, and what the CAGR actually measures.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr.png",
+        "twitter:title": "CAGR vs Simple Average Growth: Why 80% Growth Over 5 Years Is Not 16% CAGR | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "CAGR vs Simple Average Growth: Why 80% Growth Over 5 Years Is Not 16% CAGR"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "CAGR vs Simple Average Growth: Why 80% Growth Over 5 Years Is Not 16% CAGR | ToolZen Hub",
+      "description": "Work one example to see why dividing total growth by the years is not the compound annual growth rate, and what the CAGR actually measures.",
+      "canonical": "https://toolzenhub.in/articles/cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6604
+    }
+  },
+  "/articles/cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate/": {
+    "runtime": {
+      "title": "Comparing Two Investments Over Different Periods: A Bigger Gain Is Not a Higher Yearly Rate | ToolZen Hub",
+      "description": "See why a larger total gain over a longer period can have a lower yearly growth rate, with one worked pair of cases.",
+      "canonical": "https://toolzenhub.in/articles/cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "See why a larger total gain over a longer period can have a lower yearly growth rate, with one worked pair of cases.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Comparing Two Investments Over Different Periods: A Bigger Gain Is Not a Higher Yearly Rate | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "See why a larger total gain over a longer period can have a lower yearly growth rate, with one worked pair of cases.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate.png",
+        "twitter:title": "Comparing Two Investments Over Different Periods: A Bigger Gain Is Not a Higher Yearly Rate | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Comparing Two Investments Over Different Periods: A Bigger Gain Is Not a Higher Yearly Rate"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Comparing Two Investments Over Different Periods: A Bigger Gain Is Not a Higher Yearly Rate | ToolZen Hub",
+      "description": "See why a larger total gain over a longer period can have a lower yearly growth rate, with one worked pair of cases.",
+      "canonical": "https://toolzenhub.in/articles/cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6347
+    }
+  },
   "/articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison/": {
     "runtime": {
       "title": "Comparing Two Fixed Deposits: A Higher Rate Is Not the Whole Comparison | ToolZen Hub",
@@ -521,7 +671,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5793
+      "visibleTextChars": 5823
     }
   },
   "/articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates/": {
@@ -2260,6 +2410,55 @@
       "visibleTextChars": 6951
     }
   },
+  "/calculators/cagr/": {
+    "runtime": {
+      "title": "CAGR Calculator: Annual Growth Rate and Compare Investments | ToolZen Hub",
+      "description": "Find the compound annual growth rate between two values, see how it differs from a simple average, and compare two investments. Calculated from your numbers: not a forecast or advice.",
+      "canonical": "https://toolzenhub.in/calculators/cagr/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Find the compound annual growth rate between two values, see how it differs from a simple average, and compare two investments. Calculated from your numbers: not a forecast or advice.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "CAGR Calculator: Annual Growth Rate and Compare Investments | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/cagr/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Find the compound annual growth rate between two values, see how it differs from a simple average, and compare two investments. Calculated from your numbers: not a forecast or advice.",
+        "twitter:title": "CAGR Calculator: Annual Growth Rate and Compare Investments | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "CAGR Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "CAGR Calculator: Annual Growth Rate and Compare Investments | ToolZen Hub",
+      "description": "Find the compound annual growth rate between two values, see how it differs from a simple average, and compare two investments. Calculated from your numbers: not a forecast or advice.",
+      "canonical": "https://toolzenhub.in/calculators/cagr/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6049
+    }
+  },
   "/calculators/emi/": {
     "runtime": {
       "title": "EMI Calculator | ToolZen Hub",
@@ -2355,7 +2554,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6257
+      "visibleTextChars": 6461
     }
   },
   "/calculators/gst/": {
@@ -2404,7 +2603,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5975
+      "visibleTextChars": 5995
     }
   },
   "/calculators/home-loan/": {
@@ -2698,7 +2897,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6220
+      "visibleTextChars": 6424
     }
   },
   "/categories.html": {

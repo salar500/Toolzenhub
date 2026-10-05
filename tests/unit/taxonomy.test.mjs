@@ -71,7 +71,7 @@ describe("current hierarchy data", () => {
     }
   });
 
-  test("supporting articles: the six original articles point at Loan Comparison; the four SIP articles at SIP; the three Margin articles at Margin; the three Profit articles at Profit; the three Home Loan articles at Home Loan; the two FD articles at FD; the two GST articles at GST; none point at EMI or a Coming Soon tool", () => {
+  test("supporting articles: the six original articles point at Loan Comparison; the four SIP articles at SIP; the three Margin articles at Margin; the three Profit articles at Profit; the three Home Loan articles at Home Loan; the two FD articles at FD; the two GST articles at GST; the two CAGR articles at CAGR; none point at EMI or a Coming Soon tool", () => {
     assert.equal(tax.getArticlesForTool("loan-comparison").length, 6);
     assert.deepEqual(tax.getArticlesForTool("emi"), []);
     assert.equal(tax.getArticlesForTool("sip").length, 4);
@@ -80,6 +80,7 @@ describe("current hierarchy data", () => {
     assert.equal(tax.getArticlesForTool("home-loan").length, 3);
     assert.equal(tax.getArticlesForTool("fd").length, 2);
     assert.equal(tax.getArticlesForTool("gst").length, 2);
+    assert.equal(tax.getArticlesForTool("cagr").length, 2);
     assert.deepEqual(tax.getArticlesForTool(getComingSoonTool().id), []);
   });
 });
@@ -87,8 +88,8 @@ describe("current hierarchy data", () => {
 describe("Investment is a category inside Calculators (Tool Pack 7 pins SIP and FD, not only the page's appearance)", () => {
   const tool = (id) => calcs.getCalculatorById(id);
 
-  test("SIP and FD: section = Calculators, category = Investment; no subcategory", () => {
-    for (const id of ["sip", "fd"]) {
+  test("SIP, FD and CAGR: section = Calculators, category = Investment; no subcategory", () => {
+    for (const id of ["sip", "fd", "cagr"]) {
       assert.equal(tool(id).category, "investment", id);
       assert.equal(tool(id).subcategory, undefined, id);
       const path = tax.getToolPath(tool(id));
@@ -107,12 +108,12 @@ describe("Investment is a category inside Calculators (Tool Pack 7 pins SIP and 
     assert.equal(cats.categories.find((c) => c.id === "investment").sectionId, "calculators");
     assert.equal(cats.categories.find((c) => c.id === "investment").title, "Investment");
     assert.deepEqual(tax.getToolsByCategory("investment").map((t) => t.id), ["sip", "ppf", "fd", "cagr"]);
-    assert.deepEqual(tax.getToolsByCategory("investment").filter((t) => t.available).map((t) => t.id), ["sip", "fd"]);
+    assert.deepEqual(tax.getToolsByCategory("investment").filter((t) => t.available).map((t) => t.id), ["sip", "fd", "cagr"]);
   });
 
   test("the search index, the registry and the breadcrumb agree: Calculators > Investment > the tool", async () => {
     const idx = await import("../../assets/js/data/search-index.js");
-    for (const [id, title] of [["sip", "SIP Calculator"], ["fd", "FD Calculator"]]) {
+    for (const [id, title] of [["sip", "SIP Calculator"], ["fd", "FD Calculator"], ["cagr", "CAGR Calculator"]]) {
       const entry = idx.searchIndex.find((e) => e.key === `tool:${id}`);
       assert.equal(entry.sectionTitle, "Calculators", id);
       assert.equal(entry.categoryTitle, "Investment", id);

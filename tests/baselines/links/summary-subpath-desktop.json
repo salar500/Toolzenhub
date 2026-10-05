@@ -30,6 +30,18 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "articles/cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison/": {
     "internal": 33,
     "external": [],
@@ -181,13 +193,19 @@
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 33,
+    "internal": 34,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "calculators/balance-transfer/": {
     "internal": 35,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators/cagr/": {
+    "internal": 30,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -199,7 +217,7 @@
     "deadFragments": []
   },
   "calculators/fd/": {
-    "internal": 29,
+    "internal": 30,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -241,7 +259,7 @@
     "deadFragments": []
   },
   "calculators/sip/": {
-    "internal": 31,
+    "internal": 32,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

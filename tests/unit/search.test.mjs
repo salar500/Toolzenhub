@@ -61,7 +61,7 @@ const buildCorpus = () => {
 describe("index structure", () => {
   test("covers categories, tools and articles (no subcategories are defined yet)", () => {
     const count = (type) => idx.searchIndex.filter((e) => e.type === type).length;
-    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 26, 33]);
+    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 26, 35]);
     assert.equal(new Set(idx.searchIndex.map((e) => e.key)).size, idx.searchIndex.length);
   });
 
@@ -99,14 +99,20 @@ describe("index structure", () => {
   });
 
   test("no invented aliases or keywords (only the Loan Prepayment and Balance Transfer calculators' own names), and no article bodies in the index", () => {
-    const ALIASES = { "tool:prepayment": ["part payment", "early repayment"], "tool:balance-transfer": ["loan transfer", "refinance", "switch loan"], "tool:sip": ["systematic investment plan", "step-up sip"], "tool:margin": ["profit margin calculator", "markup calculator", "selling price calculator"], "tool:profit": ["break-even calculator", "business profit calculator", "contribution margin calculator"], "tool:home-loan": ["home loan affordability", "how much loan can i afford", "loan amount calculator"], "tool:fd": ["fixed deposit calculator", "fd maturity calculator", "fd comparison"], "tool:gst": ["add gst", "remove gst", "gst inclusive exclusive", "reverse gst calculator"] };
+    const ALIASES = { "tool:prepayment": ["part payment", "early repayment"], "tool:balance-transfer": ["loan transfer", "refinance", "switch loan"], "tool:sip": ["systematic investment plan", "step-up sip"], "tool:margin": ["profit margin calculator", "markup calculator", "selling price calculator"], "tool:profit": ["break-even calculator", "business profit calculator", "contribution margin calculator"], "tool:home-loan": ["home loan affordability", "how much loan can i afford", "loan amount calculator"], "tool:fd": ["fixed deposit calculator", "fd maturity calculator", "fd comparison"], "tool:gst": ["add gst", "remove gst", "gst inclusive exclusive", "reverse gst calculator"], "tool:cagr": ["compound annual growth rate", "annualized return calculator", "required cagr", "cagr comparison"] };
     for (const e of idx.searchIndex) {
       assert.deepEqual(e.aliases, ALIASES[e.key] ?? [], e.key);
       assert.deepEqual(e.keywords, [], e.key);
     }
+    // What these two bounds protect: the index holds METADATA ONLY. Two things keep an article body (about 5 KB of text each) out of it:
+    //  1. the exact field set, asserted in "an entry has exactly the documented fields" (there is no field a body could sit in), and
+    //  2. a ceiling on any ONE entry (the largest today is about 600 bytes; a body would be roughly nine times that). This is the meaningful
+    //     bound: it does not move as tools and articles are added.
+    // The total below is only a coarse backstop. It has to rise with the catalog (69 entries are about 30,500 bytes; 50 were under 20,000), so
+    // it has about 14 KB of headroom and would not catch one body on its own; the two checks above are what do.
+    for (const e of idx.searchIndex) assert.ok(JSON.stringify(e).length < 1000, `${e.key} is ${JSON.stringify(e).length} bytes: is a body in the index?`);
     const bytes = JSON.stringify(idx.searchIndex).length;
-    // metadata only (about 400 bytes an entry): 50 entries were under 20,000; 54 are about 21,600. Article bodies would be hundreds of kilobytes.
-    assert.ok(bytes < 30000, `index is ${bytes} bytes`);
+    assert.ok(bytes < 45000, `index is ${bytes} bytes`);
   });
 });
 

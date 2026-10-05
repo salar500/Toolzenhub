@@ -388,13 +388,13 @@ test.describe("SIP Calculator", () => {
     await expect(main).toContainText("₹23,928"); // the starting SIP for ₹1 crore
   });
 
-  test("FD is the one related calculator (the other live Investment tool; Coming soon PPF and CAGR are not offered) and four curated articles", async ({ page, go, siteRoot }) => {
+  test("FD and CAGR are the related calculators (the other live Investment tools; Coming soon PPF is not offered) and four curated articles", async ({ page, go, siteRoot }) => {
     await open(page, go);
     const related = page.locator(".related-calculator-card");
-    await expect(related).toHaveCount(1);
+    await expect(related).toHaveCount(2);
     const toolHrefs = await related.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
-    expect(toolHrefs).toEqual([`${siteRoot}calculators/fd/`]);
-    await expect(page.locator("a[href*='calculators/ppf'], a[href*='calculators/cagr']")).toHaveCount(0);
+    expect(toolHrefs).toEqual([`${siteRoot}calculators/fd/`, `${siteRoot}calculators/cagr/`]);
+    await expect(page.locator("a[href*='calculators/ppf']")).toHaveCount(0);
     const cards = page.locator(".related-article-card");
     await expect(cards).toHaveCount(4);
     const hrefs = await cards.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));

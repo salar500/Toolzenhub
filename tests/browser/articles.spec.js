@@ -15,8 +15,8 @@ const NO_IMAGE = new Set(["choose-right-loan-tenure"]); // no featured image (no
 // the second when its category is not Loans). A topic missing from the maps fails the call-to-action or breadcrumb
 // assertion below, so a new pack cannot pass unnoticed. Which articles exist is pinned elsewhere (inventory, articles.test.mjs).
 const ORIGINAL_TOPIC = "loan-comparison";
-const PACK_TOOL = { "loan-prepayment": "prepayment", "balance-transfer": "balance-transfer", sip: "sip", margin: "margin", profit: "profit", "home-loan": "home-loan", fd: "fd", gst: "gst" }; // topic -> the tool its articles lead to
-const PACK_CATEGORY = { sip: { name: "Investment", slug: "investment" }, margin: { name: "Business", slug: "business" }, profit: { name: "Business", slug: "business" }, fd: { name: "Investment", slug: "investment" }, gst: { name: "Tax", slug: "tax" } }; // topic -> category, when it is not Loans
+const PACK_TOOL = { "loan-prepayment": "prepayment", "balance-transfer": "balance-transfer", sip: "sip", margin: "margin", profit: "profit", "home-loan": "home-loan", fd: "fd", gst: "gst", cagr: "cagr" }; // topic -> the tool its articles lead to
+const PACK_CATEGORY = { sip: { name: "Investment", slug: "investment" }, margin: { name: "Business", slug: "business" }, profit: { name: "Business", slug: "business" }, fd: { name: "Investment", slug: "investment" }, gst: { name: "Tax", slug: "tax" }, cagr: { name: "Investment", slug: "investment" } }; // topic -> category, when it is not Loans
 const LEADS_TO = { "what-is-loan-prepayment": "prepayment" }; // an original guide that leads to a pack's tool
 const toolOf = (a) => LEADS_TO[a.slug] ?? PACK_TOOL[a.topic] ?? "loan-comparison";
 const categoryOf = (a) => PACK_CATEGORY[a.topic] ?? { name: "Loans", slug: "loans" };
@@ -67,7 +67,7 @@ test.describe("published article pages", () => {
 
       // related articles: the curated list (five; three for the Loan Prepayment and Balance Transfer articles), all resolvable, none is the page itself
       const related = await page.locator(".article-related-card").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
-      expect(related).toHaveLength(a.topic === ORIGINAL_TOPIC ? 5 : a.topic === "margin" || a.topic === "profit" || a.topic === "fd" || a.topic === "gst" ? 2 : 3); // Margin and Profit: three-article clusters, so two others; FD: a two-article cluster, so the other one (and one SIP article)
+      expect(related).toHaveLength(a.topic === ORIGINAL_TOPIC ? 5 : a.topic === "margin" || a.topic === "profit" || a.topic === "fd" || a.topic === "gst" || a.topic === "cagr" ? 2 : 3); // Margin and Profit: three-article clusters, so two others; FD: a two-article cluster, so the other one (and one SIP article)
       for (const h of related) {
         expect(h).not.toBe(`${siteRoot}articles/${a.topic}/${a.slug}/`);
         expect((await api.get(h)).status(), h).toBe(200);
@@ -99,16 +99,16 @@ test.describe("articles listing page", () => {
     await expect(page.locator("h1")).toHaveText("Articles & Guides");
     await expect(cards(page)).toHaveCount(5);
     await expect(page.locator(".articles-pagination button[data-page]:not([data-page=next])")).toHaveCount(7);
-    // sidebar counts are published-only: Loans 13, Investment 6, Tax 2, Business 6, everything else 0
+    // sidebar counts are published-only: Loans 13, Investment 8, Tax 2, Business 6, everything else 0
     const counts = await page.locator(".article-category-count").evaluateAll((l) => l.map((x) => x.textContent.replace(/\D+/g, "")));
-    expect(counts).toEqual(["13", "6", "2", "6", "0"]);
+    expect(counts).toEqual(["13", "8", "2", "6", "0"]);
     // page 1 is the first five published articles, all clickable
     await expect(page.locator("#articles-list .article-card a[href]").first()).toBeVisible();
     await expect(soonCards(page)).toHaveCount(0);
     expectClean(watch);
   });
 
-  test("pagination: pages 1 to 5 are published articles; page 6 has the last two and three placeholders; page 7 is the last three placeholders", async ({ page, go }) => {
+  test("pagination: pages 1 to 5 are published articles; page 6 has the last four and one placeholder; page 7 is the last five placeholders", async ({ page, go }) => {
     await go("articles.html");
     for (const n of [2, 3, 4, 5]) {
       await page.locator(`.articles-pagination button[data-page="${n}"]`).click();
@@ -118,10 +118,10 @@ test.describe("articles listing page", () => {
     }
     await page.locator('.articles-pagination button[data-page="6"]').click();
     await expect(cards(page)).toHaveCount(5);
-    await expect(soonCards(page)).toHaveCount(3);
+    await expect(soonCards(page)).toHaveCount(1);
     await page.locator('.articles-pagination button[data-page="7"]').click();
-    await expect(cards(page)).toHaveCount(3);
-    await expect(soonCards(page)).toHaveCount(3);
+    await expect(cards(page)).toHaveCount(5);
+    await expect(soonCards(page)).toHaveCount(5);
     await expect(page.locator(".articles-pagination .pagination-next")).toBeDisabled();
   });
 
@@ -142,10 +142,10 @@ test.describe("articles listing page", () => {
   test("Coming soon articles are not clickable", async ({ page, go, siteRoot }) => {
     await go("articles.html");
     await page.locator('.article-filter[data-category="investment"]').click();
-    await expect(cards(page)).toHaveCount(5); // the first five of the six published Investment articles (four SIP, two FD) ...
+    await expect(cards(page)).toHaveCount(5); // the first five of the eight published Investment articles (four SIP, two FD, two CAGR) ...
     await expect(soonCards(page)).toHaveCount(0);
     await page.locator('.articles-pagination button[data-page="2"]').click();
-    await expect(cards(page)).toHaveCount(2); // ... then the sixth and the one placeholder
+    await expect(cards(page)).toHaveCount(4); // ... then the last three and the one placeholder
     await expect(soonCards(page)).toHaveCount(1);
     const soon = soonCards(page).first();
     await expect(soon).toBeVisible();

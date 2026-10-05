@@ -1057,6 +1057,72 @@ const catalog = [
         relatedLabel: "Finance"
     },
 
+    {
+        id: 34,
+        status: "published",
+        category: "investment",
+        topic: "cagr",
+        slug: "cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr",
+        title:
+            "CAGR vs Simple Average Growth: Why 80% Growth Over 5 Years Is Not 16% CAGR",
+        description:
+            "Work one example to see why dividing total growth by the years is not the compound annual growth rate, and what the CAGR actually measures.",
+        publishedAt: "Oct 5, 2026",
+        updatedAt: "Oct 5, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr.png",
+            alt:
+                "A start block beside two end blocks of the same height: one built from the start plus five equal slices, the other from the start plus five slices that each grow larger"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr.png",
+            alt:
+                "A start block beside two end blocks of the same height: one built from the start plus five equal slices, the other from the start plus five slices that each grow larger"
+        },
+        tools: ["cagr"],
+        related: [
+            "cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate",
+            "sip/how-a-sip-grows"
+        ],
+        relatedLabel: "Finance"
+    },
+
+    {
+        id: 35,
+        status: "published",
+        category: "investment",
+        topic: "cagr",
+        slug: "comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate",
+        title:
+            "Comparing Two Investments Over Different Periods: A Bigger Gain Is Not a Higher Yearly Rate",
+        description:
+            "See why a larger total gain over a longer period can have a lower yearly growth rate, with one worked pair of cases.",
+        publishedAt: "Oct 5, 2026",
+        updatedAt: "Oct 5, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate.png",
+            alt:
+                "Two chains of yearly steps along one ruler of years: a row of five larger steps and a longer row of nine slightly smaller steps"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate.png",
+            alt:
+                "Two chains of yearly steps along one ruler of years: a row of five larger steps and a longer row of nine slightly smaller steps"
+        },
+        tools: ["cagr"],
+        related: [
+            "cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr",
+            "fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison"
+        ],
+        relatedLabel: "Finance"
+    },
+
 
     /* =====================================================
        COMING SOON  (listing placeholders: no route, no
@@ -1357,6 +1423,18 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates.js"
+            ),
+
+    "cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr":
+        () =>
+            import(
+                "./articles/cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr.js"
+            ),
+
+    "cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate":
+        () =>
+            import(
+                "./articles/cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate.js"
             )
 
 };

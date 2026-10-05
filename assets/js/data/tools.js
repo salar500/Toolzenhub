@@ -388,12 +388,40 @@ const catalog = [
 
     {
         id: "cagr",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/cagr/index.js"),
         category: "investment",
         icon: "↗",
         title: "CAGR Calculator",
         description:
-            "Calculate compound annual growth rate."
+            "Find the yearly growth rate that connects a starting and an ending value over a period, see how it differs from a simple average, and compare two investments on the same yearly footing.",
+        aliases: [
+            "compound annual growth rate",
+            "annualized return calculator",
+            "required cagr",
+            "cagr comparison"
+        ],
+        capabilities: {
+            reset: true,
+            table: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        relatedArticles: [
+            "cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr",
+            "cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate"
+        ],
+        seo: {
+            title:
+                "CAGR Calculator: Annual Growth Rate and Compare Investments | ToolZen Hub",
+            description:
+                "Find the compound annual growth rate between two values, see how it differs from a simple average, and compare two investments. Calculated from your numbers: not a forecast or advice."
+        }
     },
 
 
