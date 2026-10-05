@@ -38,10 +38,9 @@ test.describe("SIP Calculator", () => {
     const crumb = page.locator(".calculator-breadcrumb");
     await expect(crumb).toHaveCount(1);
     await expect(crumb).toContainText("SIP Calculator");
-    // Investment has no landing page of its own, so its crumb is plain text, not a dead link
-    await expect(crumb).toContainText(/investment/i);
+        await expect(crumb).toContainText(/investment/i);
     const hrefs = await crumb.locator("a").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
-    expect(hrefs).toEqual([siteRoot, `${siteRoot}categories.html`]);
+    expect(hrefs).toEqual([siteRoot, `${siteRoot}categories.html`, `${siteRoot}investment.html`]); // the category step links to the category page
 
     await expect(page.getByLabel("Monthly SIP Amount")).toHaveValue("10000");
     await expect(page.getByLabel("Assumed Annual Return")).toHaveValue("10");

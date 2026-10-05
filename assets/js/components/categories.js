@@ -9,8 +9,8 @@ import {
 
 
 import {
-    getCalculatorById
-} from "../data/calculators.js";
+    getToolById
+} from "../data/tools.js";
 
 
 /* =========================================================
@@ -20,8 +20,12 @@ import {
    no usage data, so it does not say "popular". Which tools are
    featured and in what order is a presentation choice, kept here
    and referencing catalog tool ids. It spans the live categories
-   rather than listing one category's tools. Whether a tool is
-   clickable, and where it links, comes from the calculator
+   rather than listing one category's tools: one or two tools from
+   each live category (Loans, Investment, Tax, Business, Math), the
+   broadest and most distinct job in each. A tool of any section may
+   be listed here: its link and status come from the tool catalog,
+   not from this file. Whether a tool is
+   clickable, and where it links, comes from the tool
    catalog (status / href), never from this list: a coming-soon
    tool would always render as a non-clickable card, so only live
    tools belong here.
@@ -33,14 +37,14 @@ const FEATURED_TOOLS = [
     { id: "sip", title: "SIP Calculator", blurb: "Plan your SIP investments", icon: "♜", color: "yellow" },
     { id: "gst", title: "GST Calculator", blurb: "Add or remove GST on an invoice", icon: "▤", color: "purple" },
     { id: "margin", title: "Margin Calculator", blurb: "Set a price from a target margin", icon: "%", color: "green" },
-    { id: "fd", title: "FD Calculator", blurb: "Compare fixed deposit maturities", icon: "◈", color: "teal" },
+    { id: "percentage", title: "Percentage Calculator", blurb: "Find a change, the start or the end value", icon: "±", color: "teal" },
     { id: "home-loan", title: "Home Loan Calculator", blurb: "Find the loan that fits your EMI budget", icon: "⌂", color: "pink" }
 ];
 
 
 function renderPopularCard(card) {
 
-    const tool = getCalculatorById(card.id);
+    const tool = getToolById(card.id);
     const available = Boolean(tool?.available);
 
     const body = `
@@ -108,13 +112,6 @@ export function renderCategories() {
                         Explore Tools
                     </h2>
 
-                    <a
-                        href="${ROUTES.tools}"
-                        class="section-link"
-                    >
-                        View all tools
-                        <span aria-hidden="true">→</span>
-                    </a>
 
                 </div>
 
@@ -174,10 +171,10 @@ export function renderCategories() {
                     </h2>
 
                     <a
-                        href="${ROUTES.calculators}"
+                        href="${ROUTES.tools}"
                         class="section-link"
                     >
-                        View all calculators
+                        View all tools
                         <span aria-hidden="true">→</span>
                     </a>
 

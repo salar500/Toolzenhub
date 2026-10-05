@@ -7,76 +7,80 @@ section.categories-page.directory-page
     div.categories-page__intro
       span.categories-page__eyebrow "Explore"
       h1.categories-page__title "All Tools"
-      p.categories-page__description "Every ToolZen Hub tool, by section and category."
-    form.directory-search [action="{ROOT}categories.html" method="get" role="search"]
-      label.directory-search__label [for="directory-search-input"] "Search calculators and tools"
+      p.categories-page__description "Search or browse every ToolZen Hub tool, by section and category."
+    form.directory-search [action="{ROOT}tools.html" data-tools-search method="get" role="search"]
+      label.directory-search__label [for="directory-search-input"] "Search tools"
       div.directory-search__row
-        input#directory-search-input.directory-search__input [name="q" placeholder="Search calculators..." type="search"]
+        input#directory-search-input.directory-search__input [name="q" placeholder="Search by name, for example EMI or GST" type="search"]
         button.directory-search__button [type="submit"] "Search"
-    section.directory-section [aria-labelledby="directory-calculators-heading"]
-      div.directory-section__header
-        h2#directory-calculators-heading.directory-section__title
-          a [href="{ROOT}categories.html"] "Calculators"
-        p.directory-section__text "Calculators for loans, investment, tax, business and math."
-      div.directory-groups
-        article.directory-group
-          h3.directory-group__title
-            a [href="{ROOT}loans.html"] "Loans"
-          p.directory-group__text "Calculate and compare loan payments, borrowing costs and repayment options"
-          ul.directory-group__tools
-            li
-              a [href="{ROOT}calculators/loan-comparison/"] "Loan Comparison Calculator"
-            li
-              a [href="{ROOT}calculators/emi/"] "EMI Calculator"
-            li
-              a [href="{ROOT}calculators/home-loan/"] "Home Loan Calculator"
-            li
-              a [href="{ROOT}calculators/balance-transfer/"] "Loan Balance Transfer Calculator"
-            li
-              a [href="{ROOT}calculators/prepayment/"] "Loan Prepayment Calculator"
-        article.directory-group
-          h3.directory-group__title
-            a [href="{ROOT}investment.html"] "Investment"
-          p.directory-group__text "Explore investment growth, returns and savings scenarios"
-          ul.directory-group__tools
-            li
-              a [href="{ROOT}calculators/sip/"] "SIP Calculator"
-            li
-              a [href="{ROOT}calculators/fd/"] "FD Calculator"
-            li
-              a [href="{ROOT}calculators/cagr/"] "CAGR Calculator"
-        article.directory-group
-          h3.directory-group__title
-            a [href="{ROOT}tax.html"] "Tax"
-          p.directory-group__text "Work through tax-related calculations with clear assumptions"
-          ul.directory-group__tools
-            li
-              a [href="{ROOT}calculators/gst/"] "GST Calculator"
-        article.directory-group
-          h3.directory-group__title
-            a [href="{ROOT}business.html"] "Business"
-          p.directory-group__text "Calculate margins, profit and other practical business metrics"
-          ul.directory-group__tools
-            li
-              a [href="{ROOT}calculators/profit/"] "Profit Calculator"
-            li
-              a [href="{ROOT}calculators/margin/"] "Margin Calculator"
-        article.directory-group
-          h3.directory-group__title
-            a [href="{ROOT}math.html"] "Math"
-          p.directory-group__text "Solve percentage and everyday math problems"
-          ul.directory-group__tools
-            li
-              a [href="{ROOT}calculators/percentage/"] "Percentage Calculator"
-        article.directory-group.directory-group--soon
-          h3.directory-group__title "Health"
-          p.directory-group__text "Health calculators are coming soon"
-          p.directory-group__soon
-            span.coming-soon-badge "Coming soon"
-        article.directory-group.directory-group--soon
-          h3.directory-group__title "Converter"
-          p.directory-group__text "Converter tools are coming soon"
-          p.directory-group__soon
-            span.coming-soon-badge "Coming soon"
-      p.directory-section__more
-        a [href="{ROOT}calculators.html"] "Browse all calculators →"
+    div#tools-results.directory-results [aria-live="polite" role="status"]
+    div#tools-directory
+      section.directory-section [aria-labelledby="directory-calculators-heading"]
+        div.directory-section__header
+          span.directory-section__label "Section"
+          h2#directory-calculators-heading.directory-section__title
+            a [href="{ROOT}categories.html"] "Calculators"
+          p.directory-section__text "Calculators for loans, investment, tax, business and math."
+            span.directory-section__count "12 tools"
+        div.directory-groups
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}loans.html"] "Loans"
+            p.directory-group__text "Calculate and compare loan payments, borrowing costs and repayment options"
+            ul.directory-group__tools
+              li
+                a [href="{ROOT}calculators/loan-comparison/"] "Loan Comparison Calculator"
+              li
+                a [href="{ROOT}calculators/emi/"] "EMI Calculator"
+              li
+                a [href="{ROOT}calculators/home-loan/"] "Home Loan Calculator"
+              li
+                a [href="{ROOT}calculators/balance-transfer/"] "Loan Balance Transfer Calculator"
+              li
+                a [href="{ROOT}calculators/prepayment/"] "Loan Prepayment Calculator"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}investment.html"] "Investment"
+            p.directory-group__text "Explore investment growth, returns and savings scenarios"
+            ul.directory-group__tools
+              li
+                a [href="{ROOT}calculators/sip/"] "SIP Calculator"
+              li
+                a [href="{ROOT}calculators/fd/"] "FD Calculator"
+              li
+                a [href="{ROOT}calculators/cagr/"] "CAGR Calculator"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tax.html"] "Tax"
+            p.directory-group__text "Work through tax-related calculations with clear assumptions"
+            ul.directory-group__tools
+              li
+                a [href="{ROOT}calculators/gst/"] "GST Calculator"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}business.html"] "Business"
+            p.directory-group__text "Calculate margins, profit and other practical business metrics"
+            ul.directory-group__tools
+              li
+                a [href="{ROOT}calculators/profit/"] "Profit Calculator"
+              li
+                a [href="{ROOT}calculators/margin/"] "Margin Calculator"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}math.html"] "Math"
+            p.directory-group__text "Solve percentage and everyday math problems"
+            ul.directory-group__tools
+              li
+                a [href="{ROOT}calculators/percentage/"] "Percentage Calculator"
+          article.directory-group.directory-group--soon
+            h3.directory-group__title "Health"
+            p.directory-group__text "Health calculators are coming soon"
+            p.directory-group__soon
+              span.coming-soon-badge "Coming soon"
+          article.directory-group.directory-group--soon
+            h3.directory-group__title "Converter"
+            p.directory-group__text "Converter tools are coming soon"
+            p.directory-group__soon
+              span.coming-soon-badge "Coming soon"
+        p.directory-section__more
+          a [href="{ROOT}calculators.html"] "Browse all calculators →"

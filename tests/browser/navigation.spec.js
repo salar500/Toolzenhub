@@ -14,7 +14,7 @@ const SOON_IDS = ["health", "converter"]; // no live tool: a Coming soon section
 test.describe("home page", () => {
   test("hero, category card, featured tools, latest articles", async ({ page, go, watch, siteRoot }) => {
     await go("");
-    await expect(page.locator("h1.hero__title")).toContainText("Practical calculators");
+    await expect(page.locator("h1.hero__title")).toContainText("Practical tools");
     // one major section today (Calculators): one card, and no "More" card that opens nothing of its own
     await expect(page.locator("#categories .category-card")).toHaveCount(1);
     await expect(page.locator("#categories .category-card")).toContainText("Calculators");
@@ -27,12 +27,16 @@ test.describe("home page", () => {
     await expect(page.locator("#popular-calculators a.calculator-card")).toHaveCount(6);
     await expect(page.locator("#popular-calculators .calculator-card--soon")).toHaveCount(0);
     await expect(page.locator("#popular-calculators a.calculator-card").first()).toHaveAttribute("href", `${siteRoot}calculators/emi/`);
-    // the two "view all" links keep their own, different meanings: the calculator categories page and the all-calculators listing
+    // the Home discovery actions each have one clear role: the section card opens the Calculators section, the hero search and
+    // "View all tools" open All Tools; there is no second "view all" that says the same thing
     await expect(page.locator("#categories .section-title")).toHaveText("Explore Tools");
-    await expect(page.locator("#categories .section-link")).toHaveAttribute("href", `${siteRoot}tools.html`);
-    await expect(page.locator("#categories .section-link")).toContainText("View all tools");
-    await expect(page.locator("#popular-calculators .section-link")).toHaveAttribute("href", `${siteRoot}calculators.html`);
-    await expect(page.locator("#popular-calculators .section-link")).toContainText("View all calculators");
+    await expect(page.locator("#categories .section-link")).toHaveCount(0);
+    await expect(page.locator("#popular-calculators .section-link")).toHaveAttribute("href", `${siteRoot}tools.html`);
+    await expect(page.locator("#popular-calculators .section-link")).toContainText("View all tools");
+    await expect(page.locator(".section-link", { hasText: /view all (categories|calculators)/i })).toHaveCount(0);
+    // Featured Tools is curated: one or two live tools from each live category, in a fixed order, and says nothing about popularity
+    expect(await page.locator("#popular-calculators a.calculator-card").evaluateAll((l) => l.map((x) => x.getAttribute("href")))).toEqual(["emi", "sip", "gst", "margin", "percentage", "home-loan"].map((id) => `${siteRoot}calculators/${id}/`));
+    await expect(page.locator("#popular-calculators")).not.toContainText(/popular|trending|most (used|searched)/i);
     // latest articles: the first three published, linking into /articles/…
     const latest = page.locator("#latest-articles a.article-card");
     await expect(latest).toHaveCount(3);
@@ -40,15 +44,27 @@ test.describe("home page", () => {
     expectClean(watch);
   });
 
-  test("hero search sends the query to the categories page and shows matching calculators", async ({ page, go, siteRoot }) => {
+  test("hero search sends the query to All Tools and shows the matching tool", async ({ page, go, siteRoot }) => {
     await go("");
     const input = page.locator('#calculator-search input[name="q"]');
+    await expect(input).toHaveAttribute("placeholder", "Search tools...");
     await input.fill("emi");
     await input.press("Enter");
-    await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}categories.html` && u.searchParams.get("q") === "emi");
-    const links = page.locator("#categories-grid a.category-page-card");
-    await expect(links.first()).toBeVisible();
-    await expect(page.locator('#categories-grid a[href$="calculators/emi/"]')).toHaveCount(1);
+    await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html` && u.searchParams.get("q") === "emi");
+    await expect(page.locator('.directory-result[href$="calculators/emi/"]')).toHaveCount(1);
+    await expect(page.locator("#tools-results")).toContainText("tools found for “emi”");
+  });
+
+  test("a hero search with no match shows a clear no-result state on All Tools, not a redirect", async ({ page, go, siteRoot }) => {
+    await go("");
+    const input = page.locator('#calculator-search input[name="q"]');
+    await input.fill("asdfgh");
+    await input.press("Enter");
+    await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html` && u.searchParams.get("q") === "asdfgh");
+    await expect(page.locator("#tools-results")).toContainText("No tools found for “asdfgh”");
+    await expect(page.locator("#tools-results a", { hasText: "Clear search" })).toHaveAttribute("href", `${siteRoot}tools.html`);
+    await expect(page.locator("#tools-directory")).toBeVisible(); // the directory stays, so the visitor can browse
+    await expect(page.locator(".directory-result")).toHaveCount(0);
   });
 
   test("an empty hero search does not navigate", async ({ page, go }) => {
@@ -310,7 +326,7 @@ test.describe("calculator catalog drives tool identity (M1)", () => {
     await go("");
     const links = page.locator("#popular-calculators a.calculator-card");
     await expect(links).toHaveCount(6);
-    const expected = [["emi", "EMI Calculator"], ["sip", "SIP Calculator"], ["gst", "GST Calculator"], ["margin", "Margin Calculator"], ["fd", "FD Calculator"], ["home-loan", "Home Loan Calculator"]];
+    const expected = [["emi", "EMI Calculator"], ["sip", "SIP Calculator"], ["gst", "GST Calculator"], ["margin", "Margin Calculator"], ["percentage", "Percentage Calculator"], ["home-loan", "Home Loan Calculator"]];
     for (const [i, [slug, title]] of expected.entries()) {
       await expect(links.nth(i)).toHaveAttribute("href", `${siteRoot}calculators/${slug}/`);
       await expect(links.nth(i)).toContainText(title);
@@ -437,7 +453,7 @@ test.describe("M7 shared search: page experiences keep their UX and rank results
 test.describe("All Tools and the calculator hierarchy", () => {
   test("Home > All Tools > Calculators > Investment > SIP, by clicking", async ({ page, go, siteRoot }) => {
     await go("");
-    await page.locator("#categories .section-link").click();
+    await page.locator("#popular-calculators .section-link").click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html`);
     await expect(page.locator("h1")).toHaveText("All Tools");
     await expect(page.locator(".navbar__menu .navbar__link.active, .mobile-navigation__link.active").first()).toBeAttached();
@@ -470,13 +486,86 @@ test.describe("All Tools and the calculator hierarchy", () => {
     expectClean(watch);
   });
 
-  test("the All Tools search is a plain form that opens the categories page search", async ({ page, go, siteRoot }) => {
+  test("the All Tools search is a plain GET form to /tools.html?q=: results are shareable, and Back works", async ({ page, go, siteRoot }) => {
     await go("tools.html");
-    await expect(page.getByLabel("Search calculators and tools")).toBeVisible();
-    await page.getByLabel("Search calculators and tools").fill("sip");
-    await page.getByLabel("Search calculators and tools").press("Enter");
-    await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}categories.html` && u.searchParams.get("q") === "sip");
-    await expect(page.locator('#categories-grid a[href$="calculators/sip/"]')).toHaveCount(1);
+    await expect(page.getByLabel("Search tools", { exact: true })).toBeVisible();
+    await expect(page.locator("form[data-tools-search]")).toHaveAttribute("method", "get");
+    await page.getByLabel("Search tools", { exact: true }).fill("sip");
+    await page.getByLabel("Search tools", { exact: true }).press("Enter");
+    await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html` && u.searchParams.get("q") === "sip");
+    await expect(page.locator(".directory-result")).toHaveCount(1);
+    await expect(page.locator(".directory-result")).toHaveAttribute("href", `${siteRoot}calculators/sip/`);
+    await expect(page.locator(".directory-result__meta")).toHaveText("Calculators › Investment");
+    await expect(page.getByLabel("Search tools", { exact: true })).toHaveValue("sip"); // the field keeps the query
+    await expect(page.locator("meta[name=robots]")).toHaveAttribute("content", "noindex, follow"); // a result URL is not a page to index
+    await expect(page.locator("link[rel=canonical]")).toHaveAttribute("href", "https://toolzenhub.in/tools.html");
+    await page.goBack();
+    await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html` && !u.searchParams.has("q"));
+  });
+
+  test("All Tools search matrix: names, partials, case, spacing and aliases find live tools; nothing else is found", async ({ page, go }) => {
+    const titles = async (q) => {
+      await go(`tools.html?q=${encodeURIComponent(q)}`);
+      await expect(page.locator("#tools-results")).not.toBeEmpty();
+      return page.locator(".directory-result__title").allInnerTexts();
+    };
+    for (const [q, first] of [["emi", "EMI Calculator"], ["sip", "SIP Calculator"], ["gst", "GST Calculator"], ["margin", "Margin Calculator"], ["percentage", "Percentage Calculator"], ["home loan", "Home Loan Calculator"], ["fd", "FD Calculator"], ["cagr", "CAGR Calculator"], ["profit", "Profit Calculator"], ["EMI", "EMI Calculator"], ["Sip", "SIP Calculator"], ["GST", "GST Calculator"], ["  emi  ", "EMI Calculator"], ["percent", "Percentage Calculator"], ["percentage change", "Percentage Calculator"], ["reverse percentage", "Percentage Calculator"], ["fixed deposit", "FD Calculator"]]) {
+      expect((await titles(q))[0], q).toBe(first);
+    }
+    expect((await titles("loan")).length).toBe(5);
+    expect(await titles("invest")).toEqual(expect.arrayContaining(["SIP Calculator", "FD Calculator", "CAGR Calculator"]));
+    for (const q of ["asdfgh", "xyztool", "timer", "ppf", "personal loan"]) {
+      expect(await titles(q), `${q}: no live tool`).toEqual([]);
+      await expect(page.locator("#tools-results")).toContainText(`No tools found for “${q}”`);
+      await expect(page.locator("#tools-directory")).toBeVisible();
+    }
+    // an empty query is the plain directory
+    await go("tools.html?q=");
+    await expect(page.locator("#tools-results")).toBeEmpty();
+    await expect(page.locator("#tools-directory")).toBeVisible();
+  });
+
+  test("All Tools search results are keyboard-reachable links with an accessible live region, and do not overflow", async ({ page, go }) => {
+    await go("tools.html?q=loan");
+    await expect(page.locator("#tools-results")).toHaveAttribute("aria-live", "polite");
+    await expect(page.locator("#tools-results")).toHaveAttribute("role", "status");
+    const first = page.locator(".directory-result").first();
+    await first.focus();
+    await expect(first).toBeFocused();
+    await expectNoHorizontalOverflow(page);
+    await go("tools.html?q=zzzz");
+    await expectNoHorizontalOverflow(page);
+  });
+
+  test("Home > View all tools > All Tools; All Tools > Business > Margin; Tax > GST; Math > Percentage; Loans > EMI", async ({ page, go, siteRoot }) => {
+    await go("");
+    await page.locator("#popular-calculators .section-link").click();
+    await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html`);
+    for (const [cat, tool] of [["business", "margin"], ["tax", "gst"], ["math", "percentage"]]) {
+      await go("tools.html");
+      await page.locator(`.directory-group__title a[href$="/${cat}.html"]`).click();
+      await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}${cat}.html`);
+      await page.locator(`.category-page-card[href$="calculators/${tool}/"]`).click();
+      await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}calculators/${tool}/`);
+    }
+    await go("tools.html");
+    await page.locator('.directory-group__title a[href$="/loans.html"]').click();
+    await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}loans.html`);
+    await page.locator('a[href$="calculators/emi/"]').first().click();
+    await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}calculators/emi/`);
+  });
+
+  test("the three destinations have different jobs: All Tools (platform), Calculator Categories (the section) and All Calculators (the flat list)", async ({ page, go }) => {
+    await go("tools.html");
+    await expect(page.locator(".directory-section__label")).toHaveText("Section");
+    await expect(page.locator(".directory-section__count")).toHaveText(/^\d+ tools$/);
+    await go("categories.html");
+    await expect(page.locator("h1")).toHaveText("Calculator Categories");
+    await expect(page.locator(".categories-search__content p")).toHaveText("Search calculators"); // this search is scoped to calculators, and says so
+    await go("calculators.html");
+    await expect(page.locator("#calculators-grid .calculator-card").first()).toBeVisible();
+    await go("loans.html");
+    await expect(page.locator(".loans-search__input")).toHaveAttribute("aria-label", "Search loan calculators");
   });
 
   test("the category pages have their own title, description and canonical on the production domain; Loans keeps its page and links back to Calculators", async ({ page, go, siteRoot }) => {

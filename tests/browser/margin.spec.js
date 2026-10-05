@@ -45,7 +45,7 @@ test.describe("Margin Calculator", () => {
     // Business has no landing page of its own, so its crumb is plain text, not a dead link
     await expect(crumb).toContainText(/business/i);
     const hrefs = await crumb.locator("a").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
-    expect(hrefs).toEqual([siteRoot, `${siteRoot}categories.html`]);
+    expect(hrefs).toEqual([siteRoot, `${siteRoot}categories.html`, `${siteRoot}business.html`]); // the category step links to the category page
 
     await expect(page.getByLabel("Cost per Unit")).toHaveValue("600");
     await expect(radio(page, "price")).toBeChecked();

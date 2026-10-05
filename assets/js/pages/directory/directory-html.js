@@ -59,16 +59,17 @@ function searchForm() {
     return `
                 <form
                     class="directory-search"
-                    action="${ROUTES.categories}"
+                    action="${ROUTES.tools}"
                     method="get"
                     role="search"
+                    data-tools-search
                 >
 
                     <label
                         class="directory-search__label"
                         for="directory-search-input"
                     >
-                        Search calculators and tools
+                        Search tools
                     </label>
 
                     <div class="directory-search__row">
@@ -78,7 +79,7 @@ function searchForm() {
                             id="directory-search-input"
                             name="q"
                             class="directory-search__input"
-                            placeholder="Search calculators..."
+                            placeholder="Search by name, for example EMI or GST"
                             autocomplete="off"
                         >
 
@@ -91,7 +92,14 @@ function searchForm() {
 
                     </div>
 
-                </form>`;
+                </form>
+
+                <div
+                    id="tools-results"
+                    class="directory-results"
+                    role="status"
+                    aria-live="polite"
+                ></div>`;
 
 }
 
@@ -119,6 +127,13 @@ function sectionBlock(section) {
     const sectionHref =
         ROUTES[section.landing];
 
+    const liveCount =
+        categories.reduce(
+            (total, category) =>
+                total + liveTools(category.id).length,
+            0
+        );
+
     return `
                 <section
                     class="directory-section"
@@ -126,6 +141,10 @@ function sectionBlock(section) {
                 >
 
                     <div class="directory-section__header">
+
+                        <span class="directory-section__label">
+                            Section
+                        </span>
 
                         <h2
                             class="directory-section__title"
@@ -136,6 +155,7 @@ function sectionBlock(section) {
 
                         <p class="directory-section__text">
                             ${escapeHTML(section.description)}
+                            <span class="directory-section__count">${liveCount} tools</span>
                         </p>
 
                     </div>
@@ -209,14 +229,16 @@ export function allToolsHtml() {
                     </h1>
 
                     <p class="categories-page__description">
-                        Every ToolZen Hub tool, by section and category.
+                        Search or browse every ToolZen Hub tool, by section and category.
                     </p>
 
                 </div>
 
                 ${searchForm()}
 
-                ${sections.map(sectionBlock).join("")}
+                <div id="tools-directory">
+                    ${sections.map(sectionBlock).join("")}
+                </div>
 
             </div>
 

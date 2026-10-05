@@ -237,13 +237,13 @@ export function footerMarkup() {
 
 
                         <!-- ==================================
-                             Popular Calculators
+                             Calculators
                         =================================== -->
 
                         <div class="footer__column">
 
                             <h3 class="footer__column-title">
-                                Popular Calculators
+                                Calculators
                             </h3>
 
 

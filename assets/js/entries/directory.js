@@ -4,8 +4,8 @@
 
    These pages are generated complete: breadcrumb, intro, the
    tools, the header, the footer and every SEO tag. The script
-   only binds the header menu and renders the footer's script
-   behaviour. It deliberately imports nothing else.
+   binds the header menu and the footer, and starts the search on
+   the All Tools page. Nothing else is loaded.
 ========================================================= */
 
 import { renderHeader } from "../components/header.js";
@@ -16,5 +16,13 @@ document.addEventListener(
     () => {
         renderHeader();
         renderFooter();
+
+        /* only the All Tools page has a search */
+        if (document.querySelector("[data-tools-search]")) {
+
+            import("../pages/directory/tools-search.js")
+                .then(module => module.initializeToolsSearch());
+
+        }
     }
 );

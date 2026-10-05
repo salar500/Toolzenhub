@@ -31,10 +31,12 @@ describe("All Tools", () => {
     assert.ok(links.includes("/Toolzenhub/calculators.html"));
   });
 
-  test("no tool that is not live is a link, and the search form is a plain GET to the categories page", () => {
+  test("no tool that is not live is a link, and the search form is a plain GET to All Tools", () => {
     const html = dir.allToolsHtml();
     for (const soon of ["ppf", "income-tax", "roi", "ratio", "age", "bmi", "currency", "date", "unit-converter", "personal-loan"]) assert.equal(html.includes(`calculators/${soon}/`), false, soon);
-    assert.match(html, /<form[^>]*action="\/Toolzenhub\/categories\.html"[^>]*method="get"/);
+    assert.match(html, /<form[^>]*action="\/Toolzenhub\/tools\.html"[^>]*method="get"/);
+    assert.match(html, /id="tools-results"/);
+    assert.match(html, /id="tools-directory"/);
     assert.match(html, /name="q"/);
   });
 });

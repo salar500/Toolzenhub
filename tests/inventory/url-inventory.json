@@ -861,7 +861,7 @@
       "file": "index.html",
       "classification": "live-indexable",
       "type": "home",
-      "expectedTitle": "ToolZen Hub | Practical Calculators for Everyday Decisions",
+      "expectedTitle": "ToolZen Hub | Practical Tools for Everyday Decisions",
       "primarySelector": "h1.hero__title",
       "expectsHeader": true,
       "expectsFooter": true,

@@ -115,6 +115,10 @@
 
 /* =========================================================
    A major section and its categories
+
+   A section reads as the larger thing: a left rule, a small
+   "Section" label, a bigger title and its tool count. The
+   categories inside it are the smaller cards below.
 ========================================================= */
 
 .directory-section {
@@ -122,15 +126,33 @@
 }
 
 .directory-section__header {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
+    padding-left: 16px;
+
+    border-left: 4px solid var(--color-brand-green);
+}
+
+.directory-section__label {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: var(--color-brand-green);
+
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: .08em;
+    line-height: 1.4;
+    text-transform: uppercase;
 }
 
 .directory-section__title {
     margin: 0 0 4px;
 
-    font-size: 24px;
-    font-weight: 780;
-    line-height: 1.25;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -.5px;
 }
 
 .directory-section__title a {
@@ -150,6 +172,22 @@
 
     font-size: 14px;
     line-height: 1.5;
+}
+
+.directory-section__count {
+    display: inline-block;
+
+    margin-left: 6px;
+    padding: 1px 9px;
+
+    border-radius: 999px;
+
+    background: #eaf8f2;
+
+    color: #168552;
+
+    font-size: 12px;
+    font-weight: 700;
 }
 
 .directory-groups {
@@ -264,7 +302,168 @@
 }
 
 
+/* =========================================================
+   Search results (All Tools)
+========================================================= */
+
+.directory-results {
+    max-width: 980px;
+
+    margin: 0 auto;
+}
+
+.directory-results:empty {
+    display: none;
+}
+
+.directory-results__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px 16px;
+
+    margin-bottom: 16px;
+}
+
+.directory-results__count {
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.directory-results__clear {
+    color: var(--color-brand-green);
+
+    font-size: 14px;
+    font-weight: 650;
+
+    text-decoration: none;
+}
+
+.directory-results__clear:hover {
+    text-decoration: underline;
+}
+
+.directory-results__grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 36px;
+}
+
+.directory-results__empty {
+    margin-bottom: 32px;
+    padding: 18px 20px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: #f9fafb;
+}
+
+.directory-results__empty p {
+    margin: 0 0 8px;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.directory-result {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    padding: 18px 40px 18px 18px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: var(--color-white);
+
+    text-decoration: none;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.directory-result:hover {
+    transform: translateY(-2px);
+
+    border-color: #cce5d9;
+
+    box-shadow:
+        0 10px 24px rgba(16, 24, 40, 0.08);
+}
+
+.directory-result:focus-visible {
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+}
+
+.directory-result__meta {
+    color: var(--color-brand-green);
+
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.directory-result__title {
+    color: var(--color-ink);
+
+    font-size: 17px;
+    font-weight: 750;
+    line-height: 1.3;
+}
+
+.directory-result__text {
+    display: -webkit-box;
+
+    overflow: hidden;
+
+    color: var(--color-ink-muted);
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.directory-result__arrow {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+
+    color: var(--color-brand-green);
+}
+
+#tools-directory[hidden] {
+    display: none;
+}
+
+
 @media (max-width: 960px) {
+
+    .directory-results__grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
 
     .directory-groups {
         grid-template-columns:
@@ -274,6 +473,15 @@
 }
 
 @media (max-width: 600px) {
+
+    .directory-results__grid {
+        grid-template-columns:
+            minmax(0, 1fr);
+    }
+
+    .directory-section__title {
+        font-size: 24px;
+    }
 
     .directory-groups {
         grid-template-columns:

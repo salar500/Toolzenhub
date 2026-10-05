@@ -11,13 +11,13 @@ main#app
               span "No sign-up"
               span.hero__dot "•"
               span "Works in your browser"
-            h1.hero__title "Practical calculators for"
+            h1.hero__title "Practical tools for"
               span.hero__title-highlight "better everyday decisions"
             p.hero__description "Calculate loan payments, compare options, plan investments and work through everyday GST, …"
             form#calculator-search.hero__search [role="search"]
               span.hero__search-icon [aria-hidden="true"] "⌕"
-              input [aria-label="Search calculators" name="q" placeholder="Search calculators..." type="search"]
-              button.hero__search-button [aria-label="Search calculators" type="submit"] "⌕"
+              input [aria-label="Search tools" name="q" placeholder="Search tools..." type="search"]
+              button.hero__search-button [aria-label="Search tools" type="submit"] "⌕"
             div#hero-calculator-search-results.calculator-search-results [aria-live="polite"]
           div.hero__visual
             picture
@@ -28,8 +28,6 @@ main#app
       div.container
         div.section-header
           h2.section-title "Explore Tools"
-          a.section-link [href="{ROOT}tools.html"] "View all tools"
-            span [aria-hidden="true"] "→"
         div.category-grid.category-grid--single
           a.category-card [href="{ROOT}categories.html"]
             div.category-card__icon.category-card__icon--calculators "🧮"
@@ -41,7 +39,7 @@ main#app
       div.container
         div.section-header
           h2.section-title "Featured Tools"
-          a.section-link [href="{ROOT}calculators.html"] "View all calculators"
+          a.section-link [href="{ROOT}tools.html"] "View all tools"
             span [aria-hidden="true"] "→"
         div.calculator-grid
           a.calculator-card [href="{ROOT}calculators/emi/"]
@@ -68,11 +66,11 @@ main#app
               h3 "Margin Calculator"
               p "Set a price from a target margin"
             span.calculator-card__arrow [aria-hidden="true"] "→"
-          a.calculator-card [href="{ROOT}calculators/fd/"]
-            div.calculator-card__icon.calculator-card__icon--teal "◈"
+          a.calculator-card [href="{ROOT}calculators/percentage/"]
+            div.calculator-card__icon.calculator-card__icon--teal "±"
             div.calculator-card__content
-              h3 "FD Calculator"
-              p "Compare fixed deposit maturities"
+              h3 "Percentage Calculator"
+              p "Find a change, the start or the end value"
             span.calculator-card__arrow [aria-hidden="true"] "→"
           a.calculator-card [href="{ROOT}calculators/home-loan/"]
             div.calculator-card__icon.calculator-card__icon--pink "⌂"

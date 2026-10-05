@@ -48,7 +48,7 @@ export function renderHero() {
 
                         <h1 class="hero__title">
 
-                            Practical calculators for
+                            Practical tools for
 
                             <span class="hero__title-highlight">
                                 better everyday decisions
@@ -88,16 +88,16 @@ export function renderHero() {
                             <input
                                 type="search"
                                 name="q"
-                                placeholder="Search calculators..."
+                                placeholder="Search tools..."
                                 autocomplete="off"
-                                aria-label="Search calculators"
+                                aria-label="Search tools"
                             >
 
 
                             <button
                                 type="submit"
                                 class="hero__search-button"
-                                aria-label="Search calculators"
+                                aria-label="Search tools"
                             >
                                 ⌕
                             </button>
@@ -157,7 +157,7 @@ export function renderHero() {
 
     /* =====================================================
        CALCULATOR SEARCH
-       Home Hero → Categories Page
+       Home Hero → All Tools search
     ===================================================== */
 
     const searchForm =
@@ -199,11 +199,11 @@ export function renderHero() {
 
 
             /* =============================================
-               Open Categories Page With Search Query
+               Open All Tools With the Search Query
             ============================================= */
 
             window.location.href =
-                `${ROUTES.categories}?q=${encodeURIComponent(query)}`;
+                `${ROUTES.tools}?q=${encodeURIComponent(query)}`;
 
         }
     );

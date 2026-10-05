@@ -42,7 +42,7 @@ test.describe("Profit Calculator", () => {
     await expect(crumb).toContainText("Profit Calculator");
     await expect(crumb).toContainText(/business/i);
     const hrefs = await crumb.locator("a").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
-    expect(hrefs).toEqual([siteRoot, `${siteRoot}categories.html`]);
+    expect(hrefs).toEqual([siteRoot, `${siteRoot}categories.html`, `${siteRoot}business.html`]); // the category step links to the category page
 
     await expect(page.getByLabel("Selling Price per Unit")).toHaveValue("800");
     await expect(page.getByLabel("Variable Cost per Unit")).toHaveValue("600");
