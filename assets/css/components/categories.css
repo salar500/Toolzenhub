@@ -137,6 +137,13 @@
     min-width: 0;
 }
 
+/* a single major section: one card at a readable width, at every screen size */
+
+.category-grid.category-grid--single {
+    grid-template-columns:
+        minmax(0, 340px);
+}
+
 
 /* =========================================================
    Category Card

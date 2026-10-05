@@ -41,9 +41,3 @@ div#categories-grid.categories-page__grid
       h2.category-page-card__title "Converter"
       p.category-page-card__description "Unit, Currency, Date and more"
     span.category-page-card__arrow [aria-hidden="true"] "→"
-  a.category-page-card [href="{ROOT}categories.html#more"]
-    div.category-page-card__icon.category-page-card__icon--more [aria-hidden="true"] "▦"
-    div.category-page-card__content
-      h2.category-page-card__title "More"
-      p.category-page-card__description "Explore all calculators and tools"
-    span.category-page-card__arrow [aria-hidden="true"] "→"

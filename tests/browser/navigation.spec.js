@@ -6,18 +6,30 @@
 import { test, expect, expectClean } from "../helpers/test-base.mjs";
 import { getComingSoonTool } from "../helpers/coming-soon.mjs";
 
-const CATEGORY_IDS = ["loans", "investment", "tax", "health", "business", "math", "converter", "more"];
+// the categories that have a card. "More" is still a category in the data (see the unit tests) but it has no tools, so it has no card.
+const CATEGORY_IDS = ["loans", "investment", "tax", "health", "business", "math", "converter"];
+const SECTION_IDS = CATEGORY_IDS.filter((id) => id !== "loans"); // Loans has its own page; the others open a section of the categories page
 
 test.describe("home page", () => {
-  test("hero, category cards, popular calculators, latest articles", async ({ page, go, watch, siteRoot }) => {
+  test("hero, category card, featured tools, latest articles", async ({ page, go, watch, siteRoot }) => {
     await go("");
     await expect(page.locator("h1.hero__title")).toContainText("Smart Financial");
-    await expect(page.locator("#categories .category-card")).toHaveCount(2);
+    // one major section today (Calculators): one card, and no "More" card that opens nothing of its own
+    await expect(page.locator("#categories .category-card")).toHaveCount(1);
+    await expect(page.locator("#categories .category-card")).toContainText("Calculators");
+    await expect(page.locator("#categories")).not.toContainText("More");
+    await expect(page.locator("#categories .category-card")).toHaveAttribute("href", `${siteRoot}categories.html`);
+    // Featured Tools: a short curated list of live tools (no usage data, so it is not called "popular"), all links
+    await expect(page.getByRole("heading", { name: "Featured Tools" })).toBeVisible();
+    await expect(page.locator("#popular-calculators").getByRole("heading", { name: "Popular Calculators" })).toHaveCount(0);
     await expect(page.locator("#popular-calculators .calculator-card")).toHaveCount(6);
-    // the five built calculators (Loan Comparison, EMI, SIP since Tool Pack 3, Home Loan since Tool Pack 6 and GST since Tool Pack 8) are links, the other one is not
-    await expect(page.locator("#popular-calculators a.calculator-card")).toHaveCount(5);
-    await expect(page.locator("#popular-calculators .calculator-card--soon")).toHaveCount(1);
-    await expect(page.locator("#popular-calculators a.calculator-card").first()).toHaveAttribute("href", `${siteRoot}calculators/loan-comparison/`);
+    await expect(page.locator("#popular-calculators a.calculator-card")).toHaveCount(6);
+    await expect(page.locator("#popular-calculators .calculator-card--soon")).toHaveCount(0);
+    await expect(page.locator("#popular-calculators a.calculator-card").first()).toHaveAttribute("href", `${siteRoot}calculators/emi/`);
+    // the two "view all" links keep their own, different meanings: the calculator categories page and the all-calculators listing
+    await expect(page.locator("#categories .section-link")).toHaveAttribute("href", `${siteRoot}categories.html`);
+    await expect(page.locator("#popular-calculators .section-link")).toHaveAttribute("href", `${siteRoot}calculators.html`);
+    await expect(page.locator("#popular-calculators .section-link")).toContainText("View all calculators");
     // latest articles: the first three published, linking into /articles/…
     const latest = page.locator("#latest-articles a.article-card");
     await expect(latest).toHaveCount(3);
@@ -45,15 +57,79 @@ test.describe("home page", () => {
 });
 
 test.describe("categories page", () => {
-  test("eight category cards; Loans goes to its page, the others to in-page anchors", async ({ page, go, siteRoot }) => {
+  test("seven category cards (no empty \"More\" card); Loans goes to its page, the others to their section of this page", async ({ page, go, siteRoot }) => {
     await go("categories.html");
     const cards = page.locator("#categories-grid a.category-page-card");
-    await expect(cards).toHaveCount(8);
+    await expect(cards).toHaveCount(7);
+    await expect(page.locator("#categories-grid")).not.toContainText("More");
     const hrefs = await cards.evaluateAll((l) => l.map((x) => x.getAttribute("href")));
     expect(hrefs).toEqual(CATEGORY_IDS.map((id) => (id === "loans" ? `${siteRoot}loans.html` : `${siteRoot}categories.html#${id}`)));
     await expect(page.locator(".calculator-breadcrumb")).toContainText("Calculators");
     await cards.first().click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}loans.html`);
+  });
+
+  test("every category card without a page of its own opens its section: the anchor exists, the heading is in view, and it lists the category's tools", async ({ page, go, siteRoot }) => {
+    await go("categories.html");
+    for (const id of SECTION_IDS) {
+      await go("categories.html");
+      await page.locator(`#categories-grid a[href$="categories.html#${id}"]`).click();
+      await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}categories.html` && u.hash === `#${id}`);
+      const heading = page.locator(`#${id}-heading`);
+      await expect(heading).toBeVisible();
+      const top = await heading.evaluate((el) => Math.round(el.getBoundingClientRect().top));
+      expect(top, `${id}: the heading is on screen after the jump`).toBeGreaterThanOrEqual(0);
+      expect(top, `${id}: the heading is on screen after the jump`).toBeLessThan(400);
+      expect(await page.locator(`#${id} .category-page-card`).count(), `${id}: lists its tools`).toBeGreaterThan(0);
+    }
+  });
+
+  test("a direct link with the hash lands on the section and focuses its heading; the section is a labelled region", async ({ page, go }) => {
+    await go("categories.html#tax");
+    const heading = page.locator("#tax-heading");
+    await expect(heading).toBeVisible();
+    await expect.poll(async () => heading.evaluate((el) => Math.round(el.getBoundingClientRect().top))).toBeLessThan(400);
+    await expect(heading).toBeFocused();
+    await expect(page.locator("#tax")).toHaveAttribute("aria-labelledby", "tax-heading");
+    await expect(page.getByRole("region", { name: "Tax" })).toHaveCount(1);
+  });
+
+  test("the sections list the live tools as links and the others as Coming soon cards that are not links (Investment and Tax)", async ({ page, go, siteRoot }) => {
+    await go("categories.html");
+    const links = (id) => page.locator(`#${id} a.category-page-card`).evaluateAll((l) => l.map((x) => x.getAttribute("href")));
+    expect(await links("investment")).toEqual([`${siteRoot}calculators/sip/`, `${siteRoot}calculators/fd/`, `${siteRoot}calculators/cagr/`]);
+    await expect(page.locator("#investment .category-page-card--soon")).toHaveCount(1);
+    await expect(page.locator("#investment .category-page-card--soon")).toContainText("PPF Calculator");
+    expect(await links("tax")).toEqual([`${siteRoot}calculators/gst/`]);
+    await expect(page.locator("#tax .category-page-card--soon")).toContainText("Income Tax Calculator");
+    expect(await links("business")).toEqual([`${siteRoot}calculators/profit/`, `${siteRoot}calculators/margin/`]);
+    for (const id of ["health", "math", "converter"]) {
+      expect(await links(id), `${id} has no live tool yet`).toEqual([]);
+      expect(await page.locator(`#${id} .category-page-card--soon`).count()).toBeGreaterThan(0);
+    }
+    // Loans has a page of its own, so it has no section here
+    await expect(page.locator("#loans")).toHaveCount(0);
+  });
+
+  test("a search hides the sections and clearing it brings them back", async ({ page, go }) => {
+    await go("categories.html");
+    await expect(page.locator("#categories-sections")).toBeVisible();
+    await page.locator("#categories-search-input").fill("emi");
+    await expect(page.locator("#categories-sections")).toBeHidden();
+    await page.locator("#categories-search-input").fill("");
+    await expect(page.locator("#categories-sections")).toBeVisible();
+    await expect(page.locator("#investment")).toBeVisible();
+  });
+
+  test("category cards and section cards are keyboard-reachable links, and a section jump leaves no dead focus target", async ({ page, go }) => {
+    await go("categories.html");
+    const card = page.locator('#categories-grid a[href$="categories.html#investment"]');
+    await card.focus();
+    await expect(card).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(page.locator("#investment-heading")).toBeVisible();
+    await page.keyboard.press("Tab");
+    await expect(page.locator("#investment a.category-page-card").first()).toBeFocused(); // focus continues from the section
   });
 
   test("live search: live results, Coming soon results, empty state, restore, ?q= deep link", async ({ page, go, siteRoot }) => {
@@ -69,7 +145,7 @@ test.describe("categories page", () => {
     await expect(page.locator("#categories-grid")).toContainText("No calculators found");
 
     await input.fill("");
-    await expect(page.locator("#categories-grid .category-page-card")).toHaveCount(8);
+    await expect(page.locator("#categories-grid .category-page-card")).toHaveCount(7);
     await expect(page).toHaveURL((u) => !u.searchParams.has("q"));
 
     // a Coming soon tool is listed but not linked
@@ -131,7 +207,7 @@ test.describe("calculators and loans listings", () => {
 
 test.describe("Coming soon items are not clickable", () => {
   for (const [path, selector, expected] of [
-    ["", "#popular-calculators .calculator-card--soon", 1],
+    ["categories.html", "#categories-sections .category-page-card--soon", 12],
     ["loans.html", "#loans-calculators-grid .calculator-card--soon", 3],
     ["calculators.html", "#calculators-grid .calculator-card--soon", 15],
   ]) {
@@ -210,36 +286,23 @@ test.describe("footer", () => {
 });
 
 test.describe("calculator catalog drives tool identity (M1)", () => {
-  test("home popular list: Loan Comparison, EMI, SIP, Home Loan and GST link to their routes, the other one is Coming soon", async ({ page, go, siteRoot }) => {
+  test("home Featured Tools: a curated list of live tools across the categories, each linking to its route, none Coming soon, none twice", async ({ page, go, siteRoot }) => {
     await go("");
-    const cards = page.locator("#popular-calculators .calculator-card");
-    await expect(cards).toHaveCount(6);
     const links = page.locator("#popular-calculators a.calculator-card");
-    await expect(links).toHaveCount(5);
-    await expect(links.nth(0)).toHaveAttribute("href", `${siteRoot}calculators/loan-comparison/`);
-    await expect(links.nth(0)).toContainText("Loan Comparison");
-    await expect(links.nth(1)).toHaveAttribute("href", `${siteRoot}calculators/emi/`);
-    await expect(links.nth(1)).toContainText("EMI Calculator");
-    // SIP was already in this hand-written list: it turned into a link only because the catalog published it
-    await expect(links.nth(2)).toHaveAttribute("href", `${siteRoot}calculators/sip/`);
-    await expect(links.nth(2)).toContainText("SIP Calculator");
-    await expect(links.nth(2).locator(".coming-soon-badge")).toHaveCount(0);
-    // Home Loan was also already in this hand-written list (as a Coming soon card): it turned into a link because the catalog published it, and was not added twice
-    await expect(links.nth(4)).toHaveAttribute("href", `${siteRoot}calculators/home-loan/`);
-    await expect(links.nth(4)).toContainText("Home Loan Calculator");
-    await expect(links.nth(4).locator(".coming-soon-badge")).toHaveCount(0);
-    await expect(page.locator("#popular-calculators .calculator-card:has-text('Home Loan Calculator')")).toHaveCount(1);
-    // GST was also already in this hand-written list (as a Coming soon card): it turned into a link because the catalog published it, and was not added twice
-    const gst = page.locator("#popular-calculators a.calculator-card", { hasText: "GST Calculator" });
-    await expect(gst).toHaveCount(1);
-    await expect(gst).toHaveAttribute("href", `${siteRoot}calculators/gst/`);
-    await expect(gst.locator(".coming-soon-badge")).toHaveCount(0);
-    await expect(page.locator("#popular-calculators .calculator-card:has-text('GST Calculator')")).toHaveCount(1);
-    const soon = page.locator("#popular-calculators .calculator-card--soon");
-    await expect(soon).toHaveCount(1);
-    await expect(soon.locator(".coming-soon-badge")).toHaveCount(1);
-    await expect(soon).toContainText(["BMI Calculator"]);
-    await expect(page.locator("#popular-calculators .calculator-card--soon a")).toHaveCount(0);
+    await expect(links).toHaveCount(6);
+    const expected = [["emi", "EMI Calculator"], ["sip", "SIP Calculator"], ["gst", "GST Calculator"], ["margin", "Margin Calculator"], ["fd", "FD Calculator"], ["home-loan", "Home Loan Calculator"]];
+    for (const [i, [slug, title]] of expected.entries()) {
+      await expect(links.nth(i)).toHaveAttribute("href", `${siteRoot}calculators/${slug}/`);
+      await expect(links.nth(i)).toContainText(title);
+      await expect(links.nth(i).locator(".coming-soon-badge")).toHaveCount(0);
+      await expect(page.locator(`#popular-calculators .calculator-card:has-text('${title}')`)).toHaveCount(1);
+    }
+    await expect(page.locator("#popular-calculators .calculator-card--soon")).toHaveCount(0);
+    await expect(page.locator("#popular-calculators .coming-soon-badge")).toHaveCount(0);
+    // it spans the live categories and is not led by Loans
+    expect(expected.filter(([slug]) => ["emi", "home-loan"].includes(slug)).length).toBeLessThan(3);
+    // the Home Loan card does not use eligibility wording (the tool is the visitor's own planning, not a lender's decision)
+    await expect(page.locator("#popular-calculators .calculator-card:has-text('Home Loan Calculator')")).not.toContainText(/eligib/i);
   });
 
   test("related calculators work in both directions (EMI <-> Loan Comparison), with the Loan Balance Transfer and Loan Prepayment Calculators beside them", async ({ page, go, siteRoot }) => {

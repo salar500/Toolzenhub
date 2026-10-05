@@ -385,7 +385,7 @@ test.describe("Profit Calculator", () => {
     await expect(page.locator("a[href*='calculators/roi']")).toHaveCount(0);
   });
 
-  test("three curated articles, and the Home Popular Calculators list does not change", async ({ page, go, siteRoot }) => {
+  test("three curated articles, and Profit is not on the Home Featured Tools list", async ({ page, go, siteRoot }) => {
     await open(page, go);
     const cards = page.locator(".related-article-card");
     await expect(cards).toHaveCount(3);

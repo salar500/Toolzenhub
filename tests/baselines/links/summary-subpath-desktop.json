@@ -1,6 +1,6 @@
 {
   "about.html": {
-    "internal": 31,
+    "internal": 30,
     "external": [],
     "placeholders": 4,
     "deadFragments": [
@@ -8,7 +8,6 @@
       "categories.html#converter  (fragment on another page; target element not verified)",
       "categories.html#health  (fragment on another page; target element not verified)",
       "categories.html#math  (fragment on another page; target element not verified)",
-      "categories.html#more  (fragment on another page; target element not verified)",
       "categories.html#tax  (fragment on another page; target element not verified)"
     ]
   },
@@ -265,18 +264,10 @@
     "deadFragments": []
   },
   "categories.html": {
-    "internal": 30,
+    "internal": 35,
     "external": [],
     "placeholders": 4,
-    "deadFragments": [
-      "/Toolzenhub/categories.html#business",
-      "/Toolzenhub/categories.html#converter",
-      "/Toolzenhub/categories.html#health",
-      "/Toolzenhub/categories.html#investment",
-      "/Toolzenhub/categories.html#math",
-      "/Toolzenhub/categories.html#more",
-      "/Toolzenhub/categories.html#tax"
-    ]
+    "deadFragments": []
   },
   "contact.html": {
     "internal": 22,
@@ -294,9 +285,7 @@
     "internal": 34,
     "external": [],
     "placeholders": 4,
-    "deadFragments": [
-      "/Toolzenhub/categories.html#more  (fragment on another page; target element not verified)"
-    ]
+    "deadFragments": []
   },
   "loans.html": {
     "internal": 28,
@@ -317,7 +306,7 @@
     "deadFragments": []
   },
   "categories.html?q=loan": {
-    "internal": 27,
+    "internal": 33,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

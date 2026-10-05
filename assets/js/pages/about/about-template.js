@@ -561,31 +561,6 @@ function renderOfferSection() {
                         </a>
 
 
-                        <!-- =====================================
-                             MORE
-                        ====================================== -->
-
-                        <a
-                            href="categories.html#more"
-                            class="about-category"
-                        >
-
-                            <strong>
-                                More
-                            </strong>
-
-                            <p>
-                                Explore all calculators
-                                and useful tools.
-                            </p>
-
-                            <span class="about-category-arrow">
-                                →
-                            </span>
-
-                        </a>
-
-
                     </div>
 
 

@@ -17,7 +17,9 @@ import {
 
 import {
     getCategoryUrl,
-    getCategoryByTitle
+    getCategoryLandingUrl,
+    getCategoryByTitle,
+    getToolsByCategory
 } from "../data/taxonomy.js";
 
 import {
@@ -55,6 +57,176 @@ export function renderCategoriesBreadcrumb() {
    RENDER CATEGORY CARDS
 ========================================================= */
 
+/*
+ * A category card is shown only when the category has tools to show (live or
+ * coming soon). A category with none, such as "More" today, stays in the data but
+ * has no card: it would open a page with nothing in it.
+ */
+function visibleCategories() {
+
+    return categories.filter(
+        category =>
+            getToolsByCategory(category.id).length > 0
+    );
+
+}
+
+
+/* =========================================================
+   TOOLS BY CATEGORY (the destination of a category card that has
+   no landing page of its own)
+
+   One section per such category, with the category id as its anchor
+   (categories.html#investment), listing its tools: live tools as
+   links, tools that are not built yet as non-clickable "Coming soon"
+   cards. A category with a landing page (Loans) links to it instead.
+========================================================= */
+
+function toolCard(tool, category) {
+
+    const available = Boolean(tool.available);
+
+    const open =
+        available
+            ? `<a
+            href="${tool.href}"
+            class="category-page-card"
+        >`
+            : `<div
+            class="category-page-card category-page-card--soon"
+            aria-disabled="true"
+        >`;
+
+    return `
+
+        ${open}
+
+            <div
+                class="
+                    category-page-card__icon
+                    category-page-card__icon--${category.iconClass}
+                "
+                aria-hidden="true"
+            >
+                ${tool.icon || category.icon}
+            </div>
+
+
+            <div class="category-page-card__content">
+
+                <h3 class="category-page-card__title">
+                    ${escapeHtml(tool.title)}
+                </h3>
+
+                <p class="category-page-card__description">
+                    ${escapeHtml(tool.description)}
+                </p>
+
+                ${available ? "" : `<span class="coming-soon-badge">Coming soon</span>`}
+
+            </div>
+
+            ${available
+                ? `<span
+                class="category-page-card__arrow"
+                aria-hidden="true"
+            >
+                →
+            </span>`
+                : ""}
+
+        ${available ? "</a>" : "</div>"}
+
+    `;
+
+}
+
+function renderCategorySections() {
+
+    const container = document.getElementById(
+        "categories-sections"
+    );
+
+    if (!container) {
+        return;
+    }
+
+    container.hidden = false;
+
+    container.innerHTML =
+        visibleCategories()
+            .filter(category => !getCategoryLandingUrl(category.id))
+            .map(category => `
+
+        <section
+            class="categories-detail"
+            id="${category.id}"
+            aria-labelledby="${category.id}-heading"
+        >
+
+            <div class="categories-detail__header">
+
+                <h2
+                    class="categories-detail__title"
+                    id="${category.id}-heading"
+                    tabindex="-1"
+                >
+                    ${escapeHtml(category.title)}
+                </h2>
+
+                <p class="categories-detail__text">
+                    ${escapeHtml(category.description)}
+                </p>
+
+            </div>
+
+            <div class="categories-detail__grid">
+                ${getToolsByCategory(category.id).map(tool => toolCard(tool, category)).join("")}
+            </div>
+
+        </section>
+
+    `).join("");
+
+}
+
+/* the page is drawn by script, so a link such as categories.html#investment is scrolled to once its section exists */
+function scrollToHash() {
+
+    const id =
+        decodeURIComponent(window.location.hash.slice(1));
+
+    const target =
+        id ? document.getElementById(id) : null;
+
+    if (!target || target.closest("[hidden]")) {
+        return;
+    }
+
+    target.scrollIntoView();
+
+    /*
+     * The browser also handles the fragment itself once the page has loaded, and
+     * that blurs whatever was focused, so the heading is focused after that.
+     */
+    const focusHeading = () =>
+        target
+            .querySelector('[tabindex="-1"]')
+            ?.focus({ preventScroll: true });
+
+    if (document.readyState === "complete") {
+        requestAnimationFrame(focusHeading);
+    } else {
+        window.addEventListener(
+            "load",
+            () => requestAnimationFrame(focusHeading),
+            { once: true }
+        );
+    }
+
+}
+
+
 export function renderCategoriesPage() {
 
     renderCategoriesBreadcrumb();
@@ -69,14 +241,14 @@ export function renderCategoriesPage() {
     }
 
 
-    grid.innerHTML = categories.map(category => {
+    grid.innerHTML = visibleCategories().map(category => {
 
 
         /* =================================================
            CATEGORY DESTINATION
 
            The category's landing page (Loans today),
-           otherwise its anchor on this page.
+           otherwise its section on this page.
         ================================================= */
 
         const categoryUrl =
@@ -127,6 +299,10 @@ export function renderCategoriesPage() {
     `;
 
     }).join("");
+
+    renderCategorySections();
+
+    scrollToHash();
 }
 
 
@@ -147,6 +323,12 @@ function renderCalculatorResults(query) {
 
     const results =
         searchCalculators(query);
+
+    const sections = document.getElementById("categories-sections");
+
+    if (sections) {
+        sections.hidden = Boolean(query);
+    }
 
 
     /* =====================================================

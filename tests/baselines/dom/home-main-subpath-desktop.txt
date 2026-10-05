@@ -30,31 +30,20 @@ main#app
           h2.section-title "Browse Categories"
           a.section-link [href="{ROOT}categories.html"] "View all categories"
             span [aria-hidden="true"] "→"
-        div.category-grid
+        div.category-grid.category-grid--single
           a.category-card [href="{ROOT}categories.html"]
             div.category-card__icon.category-card__icon--calculators "🧮"
             div.category-card__content
               h3 "Calculators"
               p "Loans, Investment, Tax, Health, Math and more"
-          a.category-card [href="{ROOT}categories.html#more"]
-            div.category-card__icon.category-card__icon--more "▦"
-            div.category-card__content
-              h3 "More"
-              p "Explore all ToolZen Hub tools"
   section#popular-calculators.section
     section.popular-section
       div.container
         div.section-header
-          h2.section-title "Popular Calculators"
+          h2.section-title "Featured Tools"
           a.section-link [href="{ROOT}calculators.html"] "View all calculators"
             span [aria-hidden="true"] "→"
         div.calculator-grid
-          a.calculator-card [href="{ROOT}calculators/loan-comparison/"]
-            div.calculator-card__icon.calculator-card__icon--green "⚖"
-            div.calculator-card__content
-              h3 "Loan Comparison"
-              p "Compare loans side by side"
-            span.calculator-card__arrow [aria-hidden="true"] "→"
           a.calculator-card [href="{ROOT}calculators/emi/"]
             div.calculator-card__icon.calculator-card__icon--blue "▣"
             div.calculator-card__content
@@ -71,20 +60,26 @@ main#app
             div.calculator-card__icon.calculator-card__icon--purple "▤"
             div.calculator-card__content
               h3 "GST Calculator"
-              p "Calculate GST easily and accurately"
+              p "Add or remove GST on an invoice"
+            span.calculator-card__arrow [aria-hidden="true"] "→"
+          a.calculator-card [href="{ROOT}calculators/margin/"]
+            div.calculator-card__icon.calculator-card__icon--green "%"
+            div.calculator-card__content
+              h3 "Margin Calculator"
+              p "Set a price from a target margin"
+            span.calculator-card__arrow [aria-hidden="true"] "→"
+          a.calculator-card [href="{ROOT}calculators/fd/"]
+            div.calculator-card__icon.calculator-card__icon--teal "◈"
+            div.calculator-card__content
+              h3 "FD Calculator"
+              p "Compare fixed deposit maturities"
             span.calculator-card__arrow [aria-hidden="true"] "→"
           a.calculator-card [href="{ROOT}calculators/home-loan/"]
             div.calculator-card__icon.calculator-card__icon--pink "⌂"
             div.calculator-card__content
               h3 "Home Loan Calculator"
-              p "Calculate your home loan eligibility"
+              p "Find the loan that fits your EMI budget"
             span.calculator-card__arrow [aria-hidden="true"] "→"
-          div.calculator-card.calculator-card--soon [aria-disabled="true"]
-            div.calculator-card__icon.calculator-card__icon--teal "♙"
-            div.calculator-card__content
-              h3 "BMI Calculator"
-              p "Check your body mass index"
-              span.coming-soon-badge "Coming soon"
   section#latest-articles.section
     section.articles-section
       div.container

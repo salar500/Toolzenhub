@@ -429,9 +429,11 @@ test.describe("Margin Calculator", () => {
     ]);
   });
 
-  test("the Home Popular Calculators list does not change: Margin is not in it", async ({ page, go }) => {
+  test("Margin is on the Home Featured Tools list as a live link", async ({ page, go, siteRoot }) => {
     await go("");
-    await expect(page.locator("#popular-calculators")).not.toContainText("Margin Calculator");
+    const card = page.locator(`#popular-calculators a.calculator-card[href='${siteRoot}calculators/margin/']`);
+    await expect(card).toHaveCount(1);
+    await expect(card).toContainText("Margin Calculator");
   });
 
   test("all three articles render from static HTML and lead to the tool", async ({ page, go, siteRoot }) => {

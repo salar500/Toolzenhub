@@ -1,6 +1,6 @@
 /* =========================================================
    ToolZen Hub
-   Categories + Popular Calculators Component
+   Home page: Browse Categories + Featured Tools
 ========================================================= */
 
 import {
@@ -14,23 +14,27 @@ import {
 
 
 /* =========================================================
-   POPULAR CALCULATORS (home page presentation)
+   FEATURED TOOLS (home page presentation)
 
-   Which tools are featured and in what order is a presentation
-   choice, kept here and referencing catalog tool ids. Whether a
-   tool is clickable, and where it links, comes from the
-   calculator catalog (status / href), never from this list:
-   a coming-soon tool always renders as a non-clickable card.
+   A CURATED short list of live tools, not a ranking: the site has
+   no usage data, so it does not say "popular". Which tools are
+   featured and in what order is a presentation choice, kept here
+   and referencing catalog tool ids. It spans the live categories
+   rather than listing one category's tools. Whether a tool is
+   clickable, and where it links, comes from the calculator
+   catalog (status / href), never from this list: a coming-soon
+   tool would always render as a non-clickable card, so only live
+   tools belong here.
    `title`, `blurb`, `icon` and `color` are card copy.
 ========================================================= */
 
-const POPULAR_CALCULATORS = [
-    { id: "loan-comparison", title: "Loan Comparison", blurb: "Compare loans side by side", icon: "⚖", color: "green" },
+const FEATURED_TOOLS = [
     { id: "emi", title: "EMI Calculator", blurb: "Calculate your EMI instantly", icon: "▣", color: "blue" },
     { id: "sip", title: "SIP Calculator", blurb: "Plan your SIP investments", icon: "♜", color: "yellow" },
-    { id: "gst", title: "GST Calculator", blurb: "Calculate GST easily and accurately", icon: "▤", color: "purple" },
-    { id: "home-loan", title: "Home Loan Calculator", blurb: "Calculate your home loan eligibility", icon: "⌂", color: "pink" },
-    { id: "bmi", title: "BMI Calculator", blurb: "Check your body mass index", icon: "♙", color: "teal" }
+    { id: "gst", title: "GST Calculator", blurb: "Add or remove GST on an invoice", icon: "▤", color: "purple" },
+    { id: "margin", title: "Margin Calculator", blurb: "Set a price from a target margin", icon: "%", color: "green" },
+    { id: "fd", title: "FD Calculator", blurb: "Compare fixed deposit maturities", icon: "◈", color: "teal" },
+    { id: "home-loan", title: "Home Loan Calculator", blurb: "Find the loan that fits your EMI budget", icon: "⌂", color: "pink" }
 ];
 
 
@@ -81,9 +85,9 @@ function renderPopularCard(card) {
 export function renderCategories() {
 
     const categories = document.getElementById("categories");
-    const popular = document.getElementById("popular-calculators");
+    const featured = document.getElementById("popular-calculators");   // the section keeps its id
 
-    if (!categories || !popular) {
+    if (!categories || !featured) {
         return;
     }
 
@@ -115,7 +119,8 @@ export function renderCategories() {
                 </div>
 
 
-                <div class="category-grid">
+                <!-- one major section today, so one card; the modifier lets it be a readable width instead of an eighth of the row (drop it when a second section exists) -->
+                <div class="category-grid category-grid--single">
 
 
                     <!-- Calculators -->
@@ -144,33 +149,6 @@ export function renderCategories() {
 
                     </a>
 
-
-                    <!-- More -->
-
-                    <a
-                        href="${ROUTES.categories}#more"
-                        class="category-card"
-                    >
-
-                        <div class="category-card__icon category-card__icon--more">
-                            ▦
-                        </div>
-
-                        <div class="category-card__content">
-
-                            <h3>
-                                More
-                            </h3>
-
-                            <p>
-                                Explore all
-                                ToolZen Hub tools
-                            </p>
-
-                        </div>
-
-                    </a>
-
                 </div>
 
             </div>
@@ -180,10 +158,10 @@ export function renderCategories() {
 
 
     /* =====================================================
-       Popular Calculators
+       Featured Tools
     ===================================================== */
 
-    popular.innerHTML = `
+    featured.innerHTML = `
 
         <section class="popular-section">
 
@@ -192,7 +170,7 @@ export function renderCategories() {
                 <div class="section-header">
 
                     <h2 class="section-title">
-                        Popular Calculators
+                        Featured Tools
                     </h2>
 
                     <a
@@ -209,7 +187,7 @@ export function renderCategories() {
                 <div class="calculator-grid">
 
 
-                    ${POPULAR_CALCULATORS.map(renderPopularCard).join("")}
+                    ${FEATURED_TOOLS.map(renderPopularCard).join("")}
 
                 </div>
 
