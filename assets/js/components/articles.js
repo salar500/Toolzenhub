@@ -31,7 +31,7 @@ function renderArticleCard(article) {
                         class="article-card"
                     >
 
-                        <div class="article-card__image">
+                        ${article.image ? `<div class="article-card__image">
 
                             <img
                                 src="${article.image}"
@@ -39,7 +39,7 @@ function renderArticleCard(article) {
                                 loading="lazy"
                             >
 
-                        </div>
+                        </div>` : ""}
 
                         <div class="article-card__content">
 

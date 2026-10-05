@@ -614,12 +614,45 @@ const catalog = [
 
     {
         id: "percentage",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/percentage/index.js"),
         category: "math",
         icon: "%",
         title: "Percentage Calculator",
         description:
-            "Calculate percentages easily."
+            "Fill in any two of a starting value, a percentage change and an ending value to work out the third, see the change that would undo it, and the effect of a second change.",
+        aliases: [
+            "percentage change calculator",
+            "percentage increase calculator",
+            "percentage decrease calculator",
+            "reverse percentage calculator",
+            "original price before increase"
+        ],
+        capabilities: {
+            reset: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        relatedTools: [
+            "gst",
+            "margin"
+        ],
+        relatedArticles: [
+            "percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back",
+            "percentage/how-to-find-the-original-price-before-a-percentage-change",
+            "percentage/percent-vs-percentage-points"
+        ],
+        seo: {
+            title:
+                "Percentage Calculator: Change, Reverse Percentage and Original Value | ToolZen Hub",
+            description:
+                "Work out a percentage change, an ending value or the original value before a change. Fill in any two values, see the change that undoes it and the effect of a second change."
+        }
     },
 
     {

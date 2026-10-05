@@ -370,11 +370,11 @@ function renderPopularArticles() {
                         data-article-id="${article.id}"
                     >
 
-                        <img
+                        ${article.image ? `<img
                             src="${article.image}"
                             alt="${article.alt}"
                             loading="lazy"
-                        >
+                        >` : ""}
 
 
                         <div>

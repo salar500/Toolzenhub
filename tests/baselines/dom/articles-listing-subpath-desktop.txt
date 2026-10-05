@@ -107,6 +107,7 @@ div#articles-page
           button.pagination-button [data-page="5" type="button"] "5"
           button.pagination-button [data-page="6" type="button"] "6"
           button.pagination-button [data-page="7" type="button"] "7"
+          button.pagination-button [data-page="8" type="button"] "8"
           button.pagination-next [data-page="next" type="button"] "Next"
             span [aria-hidden="true"] "→"
       aside.articles-sidebar

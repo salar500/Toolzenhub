@@ -163,7 +163,7 @@ export function renderRelatedArticles(
                                     class="related-article-card"
                                 >
 
-                                    <div class="related-article-image">
+                                    ${article.image ? `<div class="related-article-image">
 
                                         <img
                                             src="${article.image}"
@@ -171,7 +171,7 @@ export function renderRelatedArticles(
                                             loading="lazy"
                                         >
 
-                                    </div>
+                                    </div>` : ""}
 
 
                                     <div class="related-article-content">
@@ -200,7 +200,7 @@ export function renderRelatedArticles(
                                 class="related-article-card"
                             >
 
-                                <div class="related-article-image">
+                                ${article.image ? `<div class="related-article-image">
 
                                     <img
                                         src="${article.image}"
@@ -208,7 +208,7 @@ export function renderRelatedArticles(
                                         loading="lazy"
                                     >
 
-                                </div>
+                                </div>` : ""}
 
 
                                 <div class="related-article-content">

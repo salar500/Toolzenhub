@@ -11,7 +11,7 @@
 import { test, expect, livePages, rel } from "../helpers/test-base.mjs";
 
 const articles = livePages.filter((p) => p.type === "article");
-const NO_IMAGE = new Set(["choose-right-loan-tenure"]);
+const NO_IMAGE = new Set(["choose-right-loan-tenure", "why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back", "how-to-find-the-original-price-before-a-percentage-change", "percent-vs-percentage-points"]); // the Percentage articles have no image at all
 
 test.describe("generated pages carry their content without JavaScript @portable", () => {
   test.use({ javaScriptEnabled: false });
@@ -24,7 +24,7 @@ test.describe("generated pages carry their content without JavaScript @portable"
       expect(await page.locator(".article-key-takeaways li").count()).toBeGreaterThanOrEqual(3);
       expect(await page.locator(".article-faq details").count()).toBeGreaterThanOrEqual(3);
       expect(await page.locator(".article-toc a").count()).toBeGreaterThanOrEqual(4);
-      await expect(page.locator(".article-related-card")).toHaveCount(/\/(margin|profit|fd|gst|cagr)\//.test(a.url) ? 2 : /\/(loan-prepayment|balance-transfer|sip|home-loan)\//.test(a.url) ? 3 : 5);
+      await expect(page.locator(".article-related-card")).toHaveCount(/\/(margin|profit|fd|gst|cagr|percentage)\//.test(a.url) ? 2 : /\/(loan-prepayment|balance-transfer|sip|home-loan)\//.test(a.url) ? 3 : 5);
       await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
       await expect(page.locator(".article-calculator-button")).toHaveCount(1);
       await expect(page.locator(".site-header .navbar__link").first()).toBeAttached();

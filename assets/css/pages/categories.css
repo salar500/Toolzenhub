@@ -815,3 +815,9 @@
     }
 
 }
+
+/* the sections follow the search panel, with room between them */
+
+#categories-sections {
+    margin-top: 40px;
+}

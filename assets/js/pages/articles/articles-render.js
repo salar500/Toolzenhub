@@ -171,9 +171,9 @@ function renderArticleCard(
 
     return `
 
-        <article class="article-card">
+        <article class="article-card${article.image ? "" : " article-card--no-image"}">
 
-            <a
+            ${article.image ? `<a
                 href="${articleHref}"
                 class="article-card-image-link"
                 data-article-id="${article.id}"
@@ -187,7 +187,7 @@ function renderArticleCard(
                     loading="lazy"
                 >
 
-            </a>
+            </a>` : ""}
 
 
             <div class="article-card-content">

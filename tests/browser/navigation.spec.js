@@ -94,7 +94,7 @@ test.describe("categories page", () => {
     await expect(page.getByRole("region", { name: "Tax" })).toHaveCount(1);
   });
 
-  test("the sections list the live tools as links and the others as Coming soon cards that are not links (Investment and Tax)", async ({ page, go, siteRoot }) => {
+  test("the sections list the live tools as links and the others as Coming soon cards that are not links (Investment, Tax, Business and Math)", async ({ page, go, siteRoot }) => {
     await go("categories.html");
     const links = (id) => page.locator(`#${id} a.category-page-card`).evaluateAll((l) => l.map((x) => x.getAttribute("href")));
     expect(await links("investment")).toEqual([`${siteRoot}calculators/sip/`, `${siteRoot}calculators/fd/`, `${siteRoot}calculators/cagr/`]);
@@ -103,7 +103,10 @@ test.describe("categories page", () => {
     expect(await links("tax")).toEqual([`${siteRoot}calculators/gst/`]);
     await expect(page.locator("#tax .category-page-card--soon")).toContainText("Income Tax Calculator");
     expect(await links("business")).toEqual([`${siteRoot}calculators/profit/`, `${siteRoot}calculators/margin/`]);
-    for (const id of ["health", "math", "converter"]) {
+    // Math gained its first live tool in Tool Pack 10 (Ratio and Age stay Coming soon)
+    expect(await links("math")).toEqual([`${siteRoot}calculators/percentage/`]);
+    await expect(page.locator("#math .category-page-card--soon")).toHaveCount(2);
+    for (const id of ["health", "converter"]) {
       expect(await links(id), `${id} has no live tool yet`).toEqual([]);
       expect(await page.locator(`#${id} .category-page-card--soon`).count()).toBeGreaterThan(0);
     }
@@ -162,13 +165,13 @@ test.describe("categories page", () => {
 });
 
 test.describe("calculators and loans listings", () => {
-  test("calculators page: 26 entries (11 built), search, empty state, deep link", async ({ page, go }) => {
+  test("calculators page: 26 entries (12 built), search, empty state, deep link", async ({ page, go }) => {
     await go("calculators.html");
     const cards = page.locator("#calculators-grid .calculator-card");
     await expect(cards).toHaveCount(26);
     await expect(page.locator("#calculators-results-count")).toHaveText("26 calculators");
-    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(11);
-    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(15);
+    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(12);
+    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(14);
 
     const input = page.locator("#calculators-search-input");
     await input.fill("sip");
@@ -207,9 +210,9 @@ test.describe("calculators and loans listings", () => {
 
 test.describe("Coming soon items are not clickable", () => {
   for (const [path, selector, expected] of [
-    ["categories.html", "#categories-sections .category-page-card--soon", 12],
+    ["categories.html", "#categories-sections .category-page-card--soon", 11],
     ["loans.html", "#loans-calculators-grid .calculator-card--soon", 3],
-    ["calculators.html", "#calculators-grid .calculator-card--soon", 15],
+    ["calculators.html", "#calculators-grid .calculator-card--soon", 14],
   ]) {
     test(`${path || "home"}: ${expected} cards, no links, clicking does nothing`, async ({ page, go }) => {
       await go(path);

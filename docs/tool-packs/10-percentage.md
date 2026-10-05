@@ -1,6 +1,6 @@
 # Tool Pack 10: Percentage Calculator (the missing one of a start value, a percentage change and an end value, with the change that undoes it)
 
-Status: specification corrected (three-way interaction, related tools, Golden 12); not built      Base commit: 8ef0813
+Status: built and verified (commit pending)      Base commit: 1c29174
 Reserved id and slug: `percentage` (route `/calculators/percentage/`, a Coming Soon entry today)
 Spec follows `docs/tool-packs/_spec-template.md`; lifecycle and gate in `docs/tool-pack-factory.md`; reuse rules in `docs/tool-pack-reuse-review.md`; the previous packs are `03-sip.md` to `09-cagr.md`.
 
@@ -367,3 +367,29 @@ across tools; the shared breadcrumb prints the lowercase category id; the Loans 
 4. The articles, figure tests and the one diagram image (checked for concept, size and alt text); focused article tests.
 5. Pinned expectations, baselines and visual registration for the pages that change.
 6. Final Tool Pack gate once (section 22), then the commit.
+
+## Implementation notes (Tool Pack 10 built; commit pending)
+
+**Built as specified.** `formulas/percentage.js` (pure; BigInt fractions on integer hundredths; half-up display rounding; solved-range checks on the exact value), `percentage/index.js`, `percentage.css`,
+`toolStyles.json`, the catalog entry activated in place (title kept, description and aliases set, `relatedTools: ["gst", "margin"]`, one-way), three articles. The independent reference is
+`tests/fixtures/percentage-golden.py` (Fraction, nearest-hundredth search, invariants); its JSON is embedded in `tests/unit/percentage-golden.test.mjs` (53 tests); article figures are pinned by
+`tests/unit/percentage-articles.test.mjs`; the browser spec is `tests/browser/percentage.spec.js` (25 tests, desktop and mobile).
+
+**Deliberate refinements of the spec text:**
+- The Percentage change and Second change fields use `inputmode="text"`, not `"decimal"`: a decimal keypad on some phones has no minus sign, which would make a decrease impossible to type. The Start and End fields use `"decimal"`.
+- A half-typed value is judged when the visitor leaves the field (a polite "Enter a complete number" on that field); it is never an error while typing.
+- **No article has an image, and the three have no card image either.** The Articles listing, Home latest list, popular list and the related-article cards were written to assume an image. They now draw no image block when an
+  article has none (`cardImage: null`; the legacy registry returns `image: null` and an empty alt), and a listing card without an image uses one column (`article-card--no-image`). Existing cards are unchanged.
+  Consumers of that shared change: the Articles listing (and its pagination, now eight pages), the related-article cards, the popular list and the Home latest list (none of which shows a Percentage article today).
+- **The Article 1 formula-anatomy image was omitted.** Two equation cards would be text in a picture and add nothing to the body's worked example; no image is the approved outcome (see section 20).
+
+**A defect in the committed navigation cleanup was found and fixed here.** The "Tools by category" sections were inserted between the category grid and the search panel, which pushed the search panel down by about
+1,900 px after the script drew them (layout shift 0.20 against a limit of 0.10, caught by `build.spec.js` "categories.html: the footer is not a layout-shift source"). The sections now follow the search panel in
+`categories.njk`; the shift is back under the limit and the category anchors work unchanged.
+
+**Math category:** Percentage is its first live tool, Ratio and Age stay Coming Soon cards. The Calculators listing shows 12 built and 14 Coming Soon; the inventory is 54 live pages, 14 Coming Soon calculators and
+6 article placeholders (20 Coming Soon entries); 54 sitemap URLs. GST and Margin (and every other existing tool page) are unchanged.
+
+**Size:** page module 32,545 B (7,323 B gzip), engine 11,895 B (3,933 B gzip), CSS 3,603 B (1,110 B gzip); no image.
+
+**Observed repetition, not fixed here:** the tool page skeleton, field and note CSS remain repeated across tools; the shared breadcrumb prints the lowercase category id ("math"); the footer heading still reads "Popular Calculators".

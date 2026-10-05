@@ -55,6 +55,14 @@
 }
 
 
+/* an article with no image (no image beats a repetitive one) has no image column */
+.article-card.article-card--no-image {
+    grid-template-columns:
+        minmax(0, 1fr);
+    min-height: 0;
+}
+
+
 .article-card:hover {
     border-color: #B7E8CB;
     transform: translateY(-2px);

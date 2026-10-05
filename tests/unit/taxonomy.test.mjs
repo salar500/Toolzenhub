@@ -81,6 +81,7 @@ describe("current hierarchy data", () => {
     assert.equal(tax.getArticlesForTool("fd").length, 2);
     assert.equal(tax.getArticlesForTool("gst").length, 2);
     assert.equal(tax.getArticlesForTool("cagr").length, 2);
+    assert.equal(tax.getArticlesForTool("percentage").length, 3);
     assert.deepEqual(tax.getArticlesForTool(getComingSoonTool().id), []);
   });
 });
@@ -247,5 +248,37 @@ describe("subcategory support (exercised with a temporary subcategory)", () => {
     const html = crumb.renderToolBreadcrumb({ section: "Calculators", category: "loans", subcategory: "test-sub", title: "EMI Calculator" });
     assert.deepEqual(hrefs(html), [ROOT, `${ROOT}categories.html`, `${ROOT}loans.html`]);
     assert.equal(tax.getSubcategoryLandingUrl("test-sub"), null);
+  });
+});
+
+
+describe("Math is a category inside Calculators (Tool Pack 10 pins Percentage, the first live Math tool)", () => {
+  const tool = (id) => calcs.getCalculatorById(id);
+
+  test("Percentage: section = Calculators, category = Math; no subcategory; breadcrumb Calculators > math > Percentage Calculator", async () => {
+    assert.equal(tool("percentage").category, "math");
+    assert.equal(tool("percentage").subcategory, undefined);
+    const path = tax.getToolPath(tool("percentage"));
+    assert.equal(path.section.id, "calculators");
+    assert.equal(path.category.id, "math");
+    assert.equal(path.category.title, "Math");
+    assert.equal(path.subcategory, null);
+    assert.equal(tax.getSectionForTool(tool("percentage")).id, "calculators");
+    assert.equal(tax.getCategoryForTool(tool("percentage")).id, "math");
+    assert.equal(cats.categories.find((c) => c.id === "math").sectionId, "calculators");
+    assert.deepEqual(cats.sections.map((s) => s.id), ["calculators"]); // Math is not a section of its own
+    // the shared breadcrumb prints the category id (a deferred display issue); Home is added by the renderer
+    assert.deepEqual(crumb.toolBreadcrumbItems(registry.calculatorMetadata.percentage).map((i) => i.label), ["Calculators", "math", "Percentage Calculator"]);
+    assert.deepEqual(registry.calculatorMetadata.percentage, { section: "Calculators", category: "math", title: "Percentage Calculator" });
+    const idx = await import("../../assets/js/data/search-index.js");
+    const entry = idx.searchIndex.find((e) => e.key === "tool:percentage");
+    assert.equal(entry.sectionTitle, "Calculators");
+    assert.equal(entry.categoryTitle, "Math");
+  });
+
+  test("Math has one live tool; Ratio and Age stay Coming Soon and are never offered as usable", () => {
+    assert.deepEqual(tax.getToolsByCategory("math").map((t) => t.id), ["percentage", "ratio", "age"]);
+    assert.deepEqual(tax.getToolsByCategory("math").filter((t) => t.available).map((t) => t.id), ["percentage"]);
+    for (const id of ["ratio", "age"]) assert.equal(tool(id).status, "coming-soon", id);
   });
 });

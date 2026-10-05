@@ -149,6 +149,24 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "articles/percentage/how-to-find-the-original-price-before-a-percentage-change/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/percentage/percent-vs-percentage-points/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "articles/profit/how-to-find-your-break-even-point/": {
     "internal": 32,
     "external": [],
@@ -192,7 +210,7 @@
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 34,
+    "internal": 35,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -245,6 +263,12 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "calculators/percentage/": {
+    "internal": 31,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "calculators/prepayment/": {
     "internal": 35,
     "external": [],
@@ -264,7 +288,7 @@
     "deadFragments": []
   },
   "categories.html": {
-    "internal": 35,
+    "internal": 36,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -306,7 +330,7 @@
     "deadFragments": []
   },
   "categories.html?q=loan": {
-    "internal": 33,
+    "internal": 34,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

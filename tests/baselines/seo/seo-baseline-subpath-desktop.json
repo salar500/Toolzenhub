@@ -106,7 +106,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 3017
+      "visibleTextChars": 2968
     }
   },
   "/articles.html": {
@@ -1796,6 +1796,222 @@
       "visibleTextChars": 6205
     }
   },
+  "/articles/percentage/how-to-find-the-original-price-before-a-percentage-change/": {
+    "runtime": {
+      "title": "How to Find the Original Price Before a Percentage Change | ToolZen Hub",
+      "description": "Find the value before a percentage increase or decrease by dividing, not subtracting, and check the answer by going forward again.",
+      "canonical": "https://toolzenhub.in/articles/percentage/how-to-find-the-original-price-before-a-percentage-change/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Find the value before a percentage increase or decrease by dividing, not subtracting, and check the answer by going forward again.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How to Find the Original Price Before a Percentage Change | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/percentage/how-to-find-the-original-price-before-a-percentage-change/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Find the value before a percentage increase or decrease by dividing, not subtracting, and check the answer by going forward again.",
+        "twitter:title": "How to Find the Original Price Before a Percentage Change | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "How to Find the Original Price Before a Percentage Change"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How to Find the Original Price Before a Percentage Change | ToolZen Hub",
+      "description": "Find the value before a percentage increase or decrease by dividing, not subtracting, and check the answer by going forward again.",
+      "canonical": "https://toolzenhub.in/articles/percentage/how-to-find-the-original-price-before-a-percentage-change/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5389
+    }
+  },
+  "/articles/percentage/percent-vs-percentage-points/": {
+    "runtime": {
+      "title": "Percent vs Percentage Points | ToolZen Hub",
+      "description": "See why a rate moving from 5% to 7% is up 2 percentage points and also up 40%, and which one a figure is reporting.",
+      "canonical": "https://toolzenhub.in/articles/percentage/percent-vs-percentage-points/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "See why a rate moving from 5% to 7% is up 2 percentage points and also up 40%, and which one a figure is reporting.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Percent vs Percentage Points | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/percentage/percent-vs-percentage-points/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "See why a rate moving from 5% to 7% is up 2 percentage points and also up 40%, and which one a figure is reporting.",
+        "twitter:title": "Percent vs Percentage Points | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Percent vs Percentage Points"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Percent vs Percentage Points | ToolZen Hub",
+      "description": "See why a rate moving from 5% to 7% is up 2 percentage points and also up 40%, and which one a figure is reporting.",
+      "canonical": "https://toolzenhub.in/articles/percentage/percent-vs-percentage-points/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5189
+    }
+  },
+  "/articles/percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back/": {
+    "runtime": {
+      "title": "Why +20% Then −20% Doesn't Get You Back | ToolZen Hub",
+      "description": "Work one example to see why a 20% rise followed by a 20% fall leaves a lower number, and which percentage does take it back.",
+      "canonical": "https://toolzenhub.in/articles/percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Work one example to see why a 20% rise followed by a 20% fall leaves a lower number, and which percentage does take it back.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Why +20% Then −20% Doesn't Get You Back | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Work one example to see why a 20% rise followed by a 20% fall leaves a lower number, and which percentage does take it back.",
+        "twitter:title": "Why +20% Then −20% Doesn't Get You Back | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Why +20% Then −20% Doesn't Get You Back"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Why +20% Then −20% Doesn&#39;t Get You Back | ToolZen Hub",
+      "description": "Work one example to see why a 20% rise followed by a 20% fall leaves a lower number, and which percentage does take it back.",
+      "canonical": "https://toolzenhub.in/articles/percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5628
+    }
+  },
   "/articles/profit/how-to-find-your-break-even-point/": {
     "runtime": {
       "title": "How to Find Your Break-Even Point | ToolZen Hub",
@@ -2751,6 +2967,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 6385
+    }
+  },
+  "/calculators/percentage/": {
+    "runtime": {
+      "title": "Percentage Calculator: Change, Reverse Percentage and Original Value | ToolZen Hub",
+      "description": "Work out a percentage change, an ending value or the original value before a change. Fill in any two values, see the change that undoes it and the effect of a second change.",
+      "canonical": "https://toolzenhub.in/calculators/percentage/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Work out a percentage change, an ending value or the original value before a change. Fill in any two values, see the change that undoes it and the effect of a second change.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Percentage Calculator: Change, Reverse Percentage and Original Value | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/percentage/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Work out a percentage change, an ending value or the original value before a change. Fill in any two values, see the change that undoes it and the effect of a second change.",
+        "twitter:title": "Percentage Calculator: Change, Reverse Percentage and Original Value | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Percentage Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Percentage Calculator: Change, Reverse Percentage and Original Value | ToolZen Hub",
+      "description": "Work out a percentage change, an ending value or the original value before a change. Fill in any two values, see the change that undoes it and the effect of a second change.",
+      "canonical": "https://toolzenhub.in/calculators/percentage/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5390
     }
   },
   "/calculators/prepayment/": {

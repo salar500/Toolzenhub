@@ -1123,6 +1123,79 @@ const catalog = [
         relatedLabel: "Finance"
     },
 
+    /* =====================================================
+       MATH  (published, no article image: no image beats a repetitive one)
+    ===================================================== */
+
+    {
+        id: 36,
+        status: "published",
+        category: "math",
+        topic: "percentage",
+        slug: "why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back",
+        title:
+            "Why +20% Then −20% Doesn't Get You Back",
+        description:
+            "Work one example to see why a 20% rise followed by a 20% fall leaves a lower number, and which percentage does take it back.",
+        publishedAt: "Oct 5, 2026",
+        updatedAt: "Oct 5, 2026",
+        readTime: "4 min read",
+        cardImage: null,
+        heroImage: null,
+        tools: ["percentage"],
+        related: [
+            "percentage/how-to-find-the-original-price-before-a-percentage-change",
+            "percentage/percent-vs-percentage-points"
+        ],
+        relatedLabel: "Math"
+    },
+
+    {
+        id: 37,
+        status: "published",
+        category: "math",
+        topic: "percentage",
+        slug: "how-to-find-the-original-price-before-a-percentage-change",
+        title:
+            "How to Find the Original Price Before a Percentage Change",
+        description:
+            "Find the value before a percentage increase or decrease by dividing, not subtracting, and check the answer by going forward again.",
+        publishedAt: "Oct 5, 2026",
+        updatedAt: "Oct 5, 2026",
+        readTime: "4 min read",
+        cardImage: null,
+        heroImage: null,
+        tools: ["percentage"],
+        related: [
+            "percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back",
+            "percentage/percent-vs-percentage-points"
+        ],
+        relatedLabel: "Math"
+    },
+
+    {
+        id: 38,
+        status: "published",
+        category: "math",
+        topic: "percentage",
+        slug: "percent-vs-percentage-points",
+        title:
+            "Percent vs Percentage Points",
+        description:
+            "See why a rate moving from 5% to 7% is up 2 percentage points and also up 40%, and which one a figure is reporting.",
+        publishedAt: "Oct 5, 2026",
+        updatedAt: "Oct 5, 2026",
+        readTime: "4 min read",
+        cardImage: null,
+        heroImage: null,
+        tools: ["percentage"],
+        related: [
+            "percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back",
+            "percentage/how-to-find-the-original-price-before-a-percentage-change"
+        ],
+        relatedLabel: "Math"
+    },
+
 
     /* =====================================================
        COMING SOON  (listing placeholders: no route, no
@@ -1435,6 +1508,24 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate.js"
+            ),
+
+    "percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back":
+        () =>
+            import(
+                "./articles/percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back.js"
+            ),
+
+    "percentage/how-to-find-the-original-price-before-a-percentage-change":
+        () =>
+            import(
+                "./articles/percentage/how-to-find-the-original-price-before-a-percentage-change.js"
+            ),
+
+    "percentage/percent-vs-percentage-points":
+        () =>
+            import(
+                "./articles/percentage/percent-vs-percentage-points.js"
             )
 
 };
