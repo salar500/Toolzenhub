@@ -1,6 +1,6 @@
 /* =========================================================
    ToolZen Hub
-   Home page: Browse Categories + Featured Tools
+   Home page: Explore Tools + Featured Tools
 ========================================================= */
 
 import {
@@ -105,14 +105,14 @@ export function renderCategories() {
                 <div class="section-header">
 
                     <h2 class="section-title">
-                        Browse Categories
+                        Explore Tools
                     </h2>
 
                     <a
-                        href="${ROUTES.calculatorCategories}"
+                        href="${ROUTES.tools}"
                         class="section-link"
                     >
-                        View all categories
+                        View all tools
                         <span aria-hidden="true">→</span>
                     </a>
 

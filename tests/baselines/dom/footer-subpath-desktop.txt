@@ -20,7 +20,7 @@ div#footer
               li
                 a [href="{ROOT}"] "Home"
               li
-                a [href="{ROOT}categories.html"] "Categories"
+                a [href="{ROOT}tools.html"] "All Tools"
               li
                 a [href="{ROOT}articles.html"] "Articles"
               li

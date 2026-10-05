@@ -17,6 +17,8 @@ const PAGES = [
   // name, path, ready selector, include on tablet
   ["home", "", "#latest-articles a.article-card", true],
   ["categories", "categories.html", "#categories-grid .category-page-card", false],
+  ["tools", "tools.html", ".directory-group", false],
+  ["investment", "investment.html", ".category-page-card", false],
   ["loans", "loans.html", "#loans-calculators-grid .calculator-card", false],
   ["calculators", "calculators.html", "#calculators-grid .calculator-card", false],
   ["emi", "calculators/emi/", ".related-article-card", true],

@@ -14,6 +14,39 @@ import { ROUTES } from "../routes.js";
    calls it only when a page does not already contain it.
 ========================================================= */
 
+/* =========================================================
+   TOOLS AREA
+
+   "All Tools" is lit for the pages that sit under it: the
+   Calculators section, its category pages and its tools.
+========================================================= */
+
+const TOOLS_AREA_PAGES = [
+    "tools.html",
+    "categories.html",
+    "calculators.html",
+    "loans.html",
+    "investment.html",
+    "business.html",
+    "tax.html",
+    "math.html"
+];
+
+function inToolsArea(
+    pathname
+) {
+
+    return (
+        TOOLS_AREA_PAGES.some(
+            page =>
+                pathname.endsWith(`/${page}`)
+        ) ||
+        pathname.includes("/calculators/")
+    );
+
+}
+
+
 export function headerMarkup() {
 
     return `
@@ -76,11 +109,11 @@ export function headerMarkup() {
 
                         <li>
                             <a
-                                href="${ROUTES.categories}"
+                                href="${ROUTES.tools}"
                                 class="navbar__link"
-                                data-nav="categories"
+                                data-nav="tools"
                             >
-                                Categories
+                                All Tools
                             </a>
                         </li>
 
@@ -163,11 +196,11 @@ export function headerMarkup() {
 
 
                         <a
-                            href="${ROUTES.categories}"
+                            href="${ROUTES.tools}"
                             class="mobile-navigation__link"
-                            data-nav="categories"
+                            data-nav="tools"
                         >
-                            Categories
+                            All Tools
                         </a>
 
 
@@ -272,6 +305,10 @@ export function renderHeader() {
 
         if (
             pathname === href ||
+            (
+                href === ROUTES.tools &&
+                inToolsArea(pathname)
+            ) ||
             (
                 href === ROUTES.home &&
                 (

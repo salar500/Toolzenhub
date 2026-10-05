@@ -207,7 +207,7 @@ function setActiveNavigation() {
 
     const categoriesLink =
         document.querySelector(
-            '.navbar__link[data-nav="categories"]'
+            '.navbar__link[data-nav="tools"]'
         );
 
 

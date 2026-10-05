@@ -71,7 +71,20 @@ export const ROUTES = {
 
 
     /* =====================================================
+       ALL TOOLS
+
+       The entry point to every major section (Calculators
+       today; others later) and its categories.
+    ===================================================== */
+
+    tools:
+        `${SITE_ROOT}tools.html`,
+
+
+    /* =====================================================
        CATEGORIES
+
+       The Calculators section's own page: its categories.
     ===================================================== */
 
     categories:
@@ -92,6 +105,27 @@ export const ROUTES = {
 
     loans:
         `${SITE_ROOT}loans.html`,
+
+
+    /* =====================================================
+       CALCULATOR CATEGORY PAGES
+
+       One page per category that has live tools, named by
+       the category's `landing` in data/categories.js
+       (Loans keeps its own, older page above).
+    ===================================================== */
+
+    investment:
+        `${SITE_ROOT}investment.html`,
+
+    business:
+        `${SITE_ROOT}business.html`,
+
+    tax:
+        `${SITE_ROOT}tax.html`,
+
+    math:
+        `${SITE_ROOT}math.html`,
 
 
     /* =====================================================

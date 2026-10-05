@@ -88,7 +88,8 @@ describe("index structure", () => {
     assert.equal(get("tool:sip").route, "/Toolzenhub/calculators/sip/");
     assert.equal(get("tool:sip").status, "published");
     assert.equal(get("category:loans").route, "/Toolzenhub/loans.html");
-    assert.equal(get("category:tax").route, "/Toolzenhub/categories.html#tax");
+    assert.equal(get("category:tax").route, "/Toolzenhub/tax.html");
+    assert.equal(get("category:health").route, "/Toolzenhub/categories.html#health");
   });
 
   test("status follows the catalogs: the published tools and articles of the URL inventory, everything else coming-soon", () => {

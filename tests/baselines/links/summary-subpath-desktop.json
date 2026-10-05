@@ -207,6 +207,12 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "business.html": {
+    "internal": 26,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "calculators.html": {
     "internal": 35,
     "external": [],
@@ -220,7 +226,7 @@
     "deadFragments": []
   },
   "calculators/cagr/": {
-    "internal": 30,
+    "internal": 31,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -232,13 +238,13 @@
     "deadFragments": []
   },
   "calculators/fd/": {
-    "internal": 30,
+    "internal": 31,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "calculators/gst/": {
-    "internal": 30,
+    "internal": 31,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -256,13 +262,13 @@
     "deadFragments": []
   },
   "calculators/margin/": {
-    "internal": 30,
+    "internal": 31,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "calculators/percentage/": {
-    "internal": 31,
+    "internal": 32,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -274,19 +280,19 @@
     "deadFragments": []
   },
   "calculators/profit/": {
-    "internal": 30,
+    "internal": 31,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "calculators/sip/": {
-    "internal": 32,
+    "internal": 33,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "categories.html": {
-    "internal": 36,
+    "internal": 30,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -309,8 +315,20 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "investment.html": {
+    "internal": 27,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "loans.html": {
     "internal": 28,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "math.html": {
+    "internal": 25,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -321,14 +339,26 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "tax.html": {
+    "internal": 25,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "terms.html": {
     "internal": 23,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
+  "tools.html": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "categories.html?q=loan": {
-    "internal": 34,
+    "internal": 28,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

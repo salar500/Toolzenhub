@@ -26,6 +26,10 @@ import {
     renderBreadcrumb
 } from "../components/breadcrumb.js";
 
+import {
+    toolCardHtml
+} from "../components/category-tool-card.js";
+
 
 /* =========================================================
    RENDER BREADCRUMB
@@ -45,6 +49,10 @@ export function renderCategoriesBreadcrumb() {
 
     breadcrumb.innerHTML =
         renderBreadcrumb([
+            {
+                label: "All Tools",
+                href: ROUTES.tools
+            },
             {
                 label: "Calculators"
             }
@@ -81,65 +89,6 @@ function visibleCategories() {
    links, tools that are not built yet as non-clickable "Coming soon"
    cards. A category with a landing page (Loans) links to it instead.
 ========================================================= */
-
-function toolCard(tool, category) {
-
-    const available = Boolean(tool.available);
-
-    const open =
-        available
-            ? `<a
-            href="${tool.href}"
-            class="category-page-card"
-        >`
-            : `<div
-            class="category-page-card category-page-card--soon"
-            aria-disabled="true"
-        >`;
-
-    return `
-
-        ${open}
-
-            <div
-                class="
-                    category-page-card__icon
-                    category-page-card__icon--${category.iconClass}
-                "
-                aria-hidden="true"
-            >
-                ${tool.icon || category.icon}
-            </div>
-
-
-            <div class="category-page-card__content">
-
-                <h3 class="category-page-card__title">
-                    ${escapeHtml(tool.title)}
-                </h3>
-
-                <p class="category-page-card__description">
-                    ${escapeHtml(tool.description)}
-                </p>
-
-                ${available ? "" : `<span class="coming-soon-badge">Coming soon</span>`}
-
-            </div>
-
-            ${available
-                ? `<span
-                class="category-page-card__arrow"
-                aria-hidden="true"
-            >
-                →
-            </span>`
-                : ""}
-
-        ${available ? "</a>" : "</div>"}
-
-    `;
-
-}
 
 function renderCategorySections() {
 
@@ -181,7 +130,7 @@ function renderCategorySections() {
             </div>
 
             <div class="categories-detail__grid">
-                ${getToolsByCategory(category.id).map(tool => toolCard(tool, category)).join("")}
+                ${getToolsByCategory(category.id).map(tool => toolCardHtml(tool, category)).join("")}
             </div>
 
         </section>

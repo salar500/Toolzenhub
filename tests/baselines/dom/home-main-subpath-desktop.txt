@@ -27,8 +27,8 @@ main#app
     section.categories-section
       div.container
         div.section-header
-          h2.section-title "Browse Categories"
-          a.section-link [href="{ROOT}categories.html"] "View all categories"
+          h2.section-title "Explore Tools"
+          a.section-link [href="{ROOT}tools.html"] "View all tools"
             span [aria-hidden="true"] "→"
         div.category-grid.category-grid--single
           a.category-card [href="{ROOT}categories.html"]

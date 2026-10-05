@@ -27,6 +27,7 @@ const BUILD_ONLY = [
   "js/pages/article/article-render.js",
   "js/pages/article/articleContent.js",
   "js/pages/about/about-template.js",
+  "js/pages/directory/directory-html.js",
 ];
 
 export function normalizeBase(base) {

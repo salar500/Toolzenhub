@@ -39,6 +39,8 @@ export const sections = [
     {
         id: "calculators",
         title: "Calculators",
+        description:
+            "Calculators for loans, investment, tax, business and math.",
         landing: "calculatorCategories",
         pathPrefix: "calculators"
     }
@@ -71,7 +73,10 @@ export const categories = [
         iconClass: "investment",
         title: "Investment",
         description: "Explore investment growth, returns and savings scenarios",
-        href: "investment.html"
+        href: "investment.html",
+        landing: "investment",
+        seoDescription:
+            "Investment calculators from ToolZen Hub: plan a SIP, compare fixed deposit maturities, and find the yearly growth rate (CAGR) between two values."
     },
 
 
@@ -82,7 +87,10 @@ export const categories = [
         iconClass: "tax",
         title: "Tax",
         description: "Work through tax-related calculations with clear assumptions",
-        href: "tax.html"
+        href: "tax.html",
+        landing: "tax",
+        seoDescription:
+            "Tax calculators from ToolZen Hub: add GST to an amount or take it out, with the tax shown by rate across up to four items."
     },
 
 
@@ -104,7 +112,10 @@ export const categories = [
         iconClass: "business",
         title: "Business",
         description: "Calculate margins, profit and other practical business metrics",
-        href: "business.html"
+        href: "business.html",
+        landing: "business",
+        seoDescription:
+            "Business calculators from ToolZen Hub: set a price from a target margin or markup, and work out profit and break-even."
     },
 
 
@@ -115,7 +126,10 @@ export const categories = [
         iconClass: "math",
         title: "Math",
         description: "Solve percentage and everyday math problems",
-        href: "math.html"
+        href: "math.html",
+        landing: "math",
+        seoDescription:
+            "Math calculators from ToolZen Hub: work out a percentage change, an ending value, or the original value before a change."
     },
 
 

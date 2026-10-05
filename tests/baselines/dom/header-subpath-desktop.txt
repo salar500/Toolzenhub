@@ -13,7 +13,7 @@ header#header
           li
             a.active.navbar__link [aria-current="page" data-nav="home" href="{ROOT}"] "Home"
           li
-            a.navbar__link [data-nav="categories" href="{ROOT}categories.html"] "Categories"
+            a.navbar__link [data-nav="tools" href="{ROOT}tools.html"] "All Tools"
           li
             a.navbar__link [data-nav="articles" href="{ROOT}articles.html"] "Articles"
           li
@@ -27,6 +27,6 @@ header#header
       nav [aria-label="Mobile navigation"]
         div.mobile-navigation__menu
           a.active.mobile-navigation__link [aria-current="page" data-nav="home" href="{ROOT}"] "Home"
-          a.mobile-navigation__link [data-nav="categories" href="{ROOT}categories.html"] "Categories"
+          a.mobile-navigation__link [data-nav="tools" href="{ROOT}tools.html"] "All Tools"
           a.mobile-navigation__link [data-nav="articles" href="{ROOT}articles.html"] "Articles"
           a.mobile-navigation__link [data-nav="about" href="{ROOT}about.html"] "About"

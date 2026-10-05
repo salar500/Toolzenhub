@@ -167,8 +167,8 @@ export function footerMarkup() {
 
 
                                 <li>
-                                    <a href="${page("categories.html")}">
-                                        Categories
+                                    <a href="${page("tools.html")}">
+                                        All Tools
                                     </a>
                                 </li>
 

@@ -1,0 +1,39 @@
+section.categories-page.directory-page
+  div.container
+    div.calculator-breadcrumb
+      a [href="{ROOT}"] "Home"
+      span "›"
+      a [href="{ROOT}categories.html"] "Calculators"
+      span "›"
+      strong "Investment"
+    div.categories-page__intro
+      span.categories-page__eyebrow "Calculators"
+      h1.categories-page__title "Investment Calculators"
+      p.categories-page__description "Explore investment growth, returns and savings scenarios"
+    div.categories-detail__grid.directory-tools
+      a.category-page-card [href="{ROOT}calculators/sip/"]
+        div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"] "◈"
+        div.category-page-card__content
+          h3.category-page-card__title "SIP Calculator"
+          p.category-page-card__description "Estimate what a monthly SIP could grow to for a return you assume, with a yearly step-up, …"
+        span.category-page-card__arrow [aria-hidden="true"] "→"
+      div.category-page-card.category-page-card--soon [aria-disabled="true"]
+        div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"] "₹"
+        div.category-page-card__content
+          h3.category-page-card__title "PPF Calculator"
+          p.category-page-card__description "Calculate PPF investment returns."
+          span.coming-soon-badge "Coming soon"
+      a.category-page-card [href="{ROOT}calculators/fd/"]
+        div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"] "▣"
+        div.category-page-card__content
+          h3.category-page-card__title "FD Calculator"
+          p.category-page-card__description "Work out what a fixed deposit matures to for a rate and tenure you enter, see its effectiv…"
+        span.category-page-card__arrow [aria-hidden="true"] "→"
+      a.category-page-card [href="{ROOT}calculators/cagr/"]
+        div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"] "↗"
+        div.category-page-card__content
+          h3.category-page-card__title "CAGR Calculator"
+          p.category-page-card__description "Find the yearly growth rate that connects a starting and an ending value over a period, se…"
+        span.category-page-card__arrow [aria-hidden="true"] "→"
+    p.directory-section__more
+      a [href="{ROOT}categories.html"] "← All calculator categories"

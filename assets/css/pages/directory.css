@@ -1,0 +1,297 @@
+/* =========================================================
+   ToolZen Hub
+   Directory pages: All Tools and the calculator category pages
+
+   Only what the categories page styles do not already provide
+   (categories.css: the page, its intro, the tool cards and the
+   Coming soon badge). The pages are generated complete, so there
+   is nothing to wait for and nothing here moves after load.
+========================================================= */
+
+
+/* the breadcrumb is the shared one; its own rules live with the calculator pages, so they are repeated here */
+
+.directory-page .calculator-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 22px;
+
+    color: var(--color-ink-muted);
+
+    font-size: 13px;
+}
+
+.directory-page .calculator-breadcrumb a {
+    color: var(--color-brand-green);
+
+    text-decoration: none;
+}
+
+.directory-page .calculator-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.directory-page .calculator-breadcrumb strong {
+    color: var(--color-ink);
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   Search (a plain form: it works without script)
+========================================================= */
+
+.directory-search {
+    max-width: 640px;
+
+    margin: 0 auto 36px;
+}
+
+.directory-search__label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--color-ink);
+
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.directory-search__row {
+    display: flex;
+
+    gap: 8px;
+}
+
+.directory-search__input {
+    flex: 1;
+
+    min-width: 0;
+    height: 46px;
+
+    padding: 0 14px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: var(--color-white);
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 15px;
+}
+
+.directory-search__button {
+    flex: 0 0 auto;
+
+    height: 46px;
+
+    padding: 0 20px;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: var(--color-brand-green);
+
+    color: var(--color-white);
+
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.directory-search__button:hover {
+    background: #087d46;
+}
+
+
+/* =========================================================
+   A major section and its categories
+========================================================= */
+
+.directory-section {
+    margin-bottom: 36px;
+}
+
+.directory-section__header {
+    margin-bottom: 18px;
+}
+
+.directory-section__title {
+    margin: 0 0 4px;
+
+    font-size: 24px;
+    font-weight: 780;
+    line-height: 1.25;
+}
+
+.directory-section__title a {
+    color: var(--color-ink);
+
+    text-decoration: none;
+}
+
+.directory-section__title a:hover {
+    color: var(--color-brand-green);
+}
+
+.directory-section__text {
+    margin: 0;
+
+    color: var(--color-ink-muted);
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.directory-groups {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+.directory-group {
+    padding: 18px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: var(--color-white);
+}
+
+.directory-group--soon {
+    background: #f9fafb;
+}
+
+.directory-group__title {
+    margin: 0 0 4px;
+
+    font-size: 17px;
+    font-weight: 750;
+    line-height: 1.3;
+}
+
+.directory-group__title a {
+    color: var(--color-ink);
+
+    text-decoration: none;
+}
+
+.directory-group__title a:hover {
+    color: var(--color-brand-green);
+}
+
+.directory-group--soon .directory-group__title {
+    color: var(--color-ink-muted);
+}
+
+.directory-group__text {
+    margin: 0 0 12px;
+
+    color: var(--color-ink-muted);
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.directory-group__tools {
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.directory-group__tools li {
+    padding: 4px 0;
+}
+
+.directory-group__tools a {
+    color: var(--color-brand-green);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.directory-group__tools a:hover {
+    text-decoration: underline;
+}
+
+.directory-group__soon {
+    margin: 0;
+}
+
+.directory-group__soon .coming-soon-badge {
+    margin-top: 0;
+}
+
+.directory-section__more {
+    margin: 18px 0 0;
+
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.directory-section__more a {
+    color: var(--color-brand-green);
+
+    text-decoration: none;
+}
+
+.directory-section__more a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   Category page: the tool cards
+========================================================= */
+
+.directory-tools {
+    margin-top: 8px;
+}
+
+
+@media (max-width: 960px) {
+
+    .directory-groups {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .directory-groups {
+        grid-template-columns:
+            minmax(0, 1fr);
+    }
+
+    .directory-search__row {
+        flex-direction: column;
+    }
+
+    .directory-search__input {
+        flex: none;
+
+        width: 100%;
+    }
+
+    .directory-search__button {
+        width: 100%;
+    }
+
+}

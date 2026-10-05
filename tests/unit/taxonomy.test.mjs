@@ -27,7 +27,7 @@ const labels = (html) => [...html.matchAll(/<(?:a|strong)[^>]*>\s*([^<]*?)\s*<\/
 
 describe("current hierarchy data", () => {
   test("one section: Calculators, landing on the categories page", () => {
-    assert.deepEqual(cats.sections, [{ id: "calculators", title: "Calculators", landing: "calculatorCategories", pathPrefix: "calculators" }]);
+    assert.deepEqual(cats.sections, [{ id: "calculators", title: "Calculators", description: "Calculators for loans, investment, tax, business and math.", landing: "calculatorCategories", pathPrefix: "calculators" }]);
     assert.equal(tax.getSectionUrl("Calculators"), `${ROOT}categories.html`);
     assert.equal(tax.getSectionUrl("calculators"), `${ROOT}categories.html`);
     assert.equal(tax.getSectionUrl("Articles"), null);
@@ -38,11 +38,15 @@ describe("current hierarchy data", () => {
     assert.deepEqual(cats.categories.map((c) => c.title), ["Loans", "Investment", "Tax", "Health", "Business", "Math", "Converter", "More"]);
   });
 
-  test("only Loans has a landing page; every other category links to its anchor on the categories page", () => {
-    assert.deepEqual(cats.categories.filter((c) => c.landing).map((c) => c.id), ["loans"]);
+  test("Loans, Investment, Tax, Business and Math have a landing page; Health, Converter and More link to their anchor on the categories page", () => {
+    assert.deepEqual(cats.categories.filter((c) => c.landing).map((c) => c.id), ["loans", "investment", "tax", "business", "math"]);
     assert.equal(tax.getCategoryLandingUrl("loans"), `${ROOT}loans.html`);
     assert.equal(tax.getCategoryUrl("loans"), `${ROOT}loans.html`);
-    for (const id of CATEGORY_IDS.slice(1)) {
+    for (const id of ["investment", "tax", "business", "math"]) {
+      assert.equal(tax.getCategoryLandingUrl(id), `${ROOT}${id}.html`, id);
+      assert.equal(tax.getCategoryUrl(id), `${ROOT}${id}.html`, id);
+    }
+    for (const id of ["health", "converter", "more"]) {
       assert.equal(tax.getCategoryLandingUrl(id), null, id);
       assert.equal(tax.getCategoryUrl(id), `${ROOT}categories.html#${id}`, id);
     }
@@ -205,10 +209,12 @@ describe("breadcrumbs keep their labels and links", () => {
     assert.deepEqual(labels(html), ["Home", "Calculators", "loans", "Loan Comparison Calculator"]);
   });
 
-  test("a category without a landing page is plain text, not a link", () => {
+  test("a category with a landing page links to it in the breadcrumb; one without is plain text", () => {
     const html = crumb.renderToolBreadcrumb({ section: "Calculators", category: "tax", title: "Income Tax Calculator" });
-    assert.deepEqual(hrefs(html), [ROOT, `${ROOT}categories.html`]);
+    assert.deepEqual(hrefs(html), [ROOT, `${ROOT}categories.html`, `${ROOT}tax.html`]);
     assert.deepEqual(labels(html), ["Home", "Calculators", "tax", "Income Tax Calculator"]);
+    const none = crumb.renderToolBreadcrumb({ section: "Calculators", category: "health", title: "BMI Calculator" });
+    assert.deepEqual(hrefs(none), [ROOT, `${ROOT}categories.html`]);
   });
 
   test("calculator metadata is unchanged (no subcategory key while none is defined)", () => {

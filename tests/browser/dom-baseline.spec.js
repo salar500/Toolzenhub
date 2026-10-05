@@ -16,6 +16,8 @@ const REGIONS = [
   ["footer", "", "#footer .footer", "#footer"],
   ["home-main", "", "h1.hero__title", "#app"],
   ["categories-grid", "categories.html", "#categories-grid .category-page-card", "#categories-grid"],
+  ["tools-directory", "tools.html", ".directory-section", ".directory-page"],
+  ["investment-page", "investment.html", ".category-page-card", ".directory-page"],
   ["articles-listing", "articles.html", "#articles-list .article-card", "#articles-page"],
   ["breadcrumb-emi", "calculators/emi/", "#emi-form", ".calculator-breadcrumb"],
   ["emi-form-and-results", "calculators/emi/", "#emi-results .calculator-results__value", "#emi-form, #emi-results"],

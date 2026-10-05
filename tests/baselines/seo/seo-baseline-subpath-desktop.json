@@ -66,7 +66,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 0,
-      "visibleTextChars": 389
+      "visibleTextChars": 386
     }
   },
   "/about.html": {
@@ -106,7 +106,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 2849
+      "visibleTextChars": 2846
     }
   },
   "/articles.html": {
@@ -146,7 +146,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 0,
-      "visibleTextChars": 389
+      "visibleTextChars": 386
     }
   },
   "/articles/balance-transfer/balance-transfer-vs-prepayment/": {
@@ -221,7 +221,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6891
+      "visibleTextChars": 6888
     }
   },
   "/articles/balance-transfer/is-a-loan-balance-transfer-worth-it/": {
@@ -296,7 +296,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8275
+      "visibleTextChars": 8272
     }
   },
   "/articles/cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr/": {
@@ -371,7 +371,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6497
+      "visibleTextChars": 6494
     }
   },
   "/articles/cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate/": {
@@ -446,7 +446,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6240
+      "visibleTextChars": 6237
     }
   },
   "/articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison/": {
@@ -521,7 +521,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6325
+      "visibleTextChars": 6322
     }
   },
   "/articles/fd/how-compounding-frequency-changes-an-fd-maturity/": {
@@ -596,7 +596,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6611
+      "visibleTextChars": 6608
     }
   },
   "/articles/gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways/": {
@@ -671,7 +671,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5716
+      "visibleTextChars": 5713
     }
   },
   "/articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates/": {
@@ -746,7 +746,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5565
+      "visibleTextChars": 5562
     }
   },
   "/articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/": {
@@ -821,7 +821,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4998
+      "visibleTextChars": 4995
     }
   },
   "/articles/home-loan/how-much-home-loan-fits-your-emi-budget/": {
@@ -896,7 +896,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6434
+      "visibleTextChars": 6431
     }
   },
   "/articles/home-loan/longer-tenure-bigger-loan-much-more-interest/": {
@@ -971,7 +971,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5909
+      "visibleTextChars": 5906
     }
   },
   "/articles/loan-comparison/choose-right-loan-tenure/": {
@@ -1043,7 +1043,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6686
+      "visibleTextChars": 6683
     }
   },
   "/articles/loan-comparison/emi-vs-total-interest/": {
@@ -1118,7 +1118,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5960
+      "visibleTextChars": 5957
     }
   },
   "/articles/loan-comparison/fixed-vs-floating-interest-rates/": {
@@ -1193,7 +1193,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6777
+      "visibleTextChars": 6774
     }
   },
   "/articles/loan-comparison/how-to-reduce-home-loan-interest/": {
@@ -1268,7 +1268,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5371
+      "visibleTextChars": 5368
     }
   },
   "/articles/loan-comparison/loan-tenure-total-interest/": {
@@ -1343,7 +1343,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6237
+      "visibleTextChars": 6234
     }
   },
   "/articles/loan-comparison/what-is-loan-prepayment/": {
@@ -1418,7 +1418,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6868
+      "visibleTextChars": 6865
     }
   },
   "/articles/loan-prepayment/early-vs-late-loan-prepayment/": {
@@ -1493,7 +1493,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6357
+      "visibleTextChars": 6354
     }
   },
   "/articles/loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment/": {
@@ -1568,7 +1568,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7822
+      "visibleTextChars": 7819
     }
   },
   "/articles/margin/margin-vs-markup/": {
@@ -1643,7 +1643,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5996
+      "visibleTextChars": 5993
     }
   },
   "/articles/margin/price-a-product-for-a-target-margin/": {
@@ -1718,7 +1718,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6089
+      "visibleTextChars": 6086
     }
   },
   "/articles/margin/what-a-discount-really-costs-you/": {
@@ -1793,7 +1793,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6098
+      "visibleTextChars": 6095
     }
   },
   "/articles/percentage/how-to-find-the-original-price-before-a-percentage-change/": {
@@ -1865,7 +1865,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5282
+      "visibleTextChars": 5279
     }
   },
   "/articles/percentage/percent-vs-percentage-points/": {
@@ -1937,7 +1937,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5082
+      "visibleTextChars": 5079
     }
   },
   "/articles/percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back/": {
@@ -2009,7 +2009,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5521
+      "visibleTextChars": 5518
     }
   },
   "/articles/profit/how-to-find-your-break-even-point/": {
@@ -2084,7 +2084,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5861
+      "visibleTextChars": 5858
     }
   },
   "/articles/profit/price-cost-or-volume-which-matters-most/": {
@@ -2159,7 +2159,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5948
+      "visibleTextChars": 5945
     }
   },
   "/articles/profit/units-needed-for-a-target-profit/": {
@@ -2234,7 +2234,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5677
+      "visibleTextChars": 5674
     }
   },
   "/articles/sip/how-a-sip-grows/": {
@@ -2309,7 +2309,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6378
+      "visibleTextChars": 6375
     }
   },
   "/articles/sip/how-much-sip-do-you-need-for-a-goal/": {
@@ -2384,7 +2384,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6082
+      "visibleTextChars": 6079
     }
   },
   "/articles/sip/how-return-assumptions-change-a-sip-projection/": {
@@ -2459,7 +2459,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5762
+      "visibleTextChars": 5759
     }
   },
   "/articles/sip/step-up-sip-explained/": {
@@ -2534,7 +2534,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6052
+      "visibleTextChars": 6049
+    }
+  },
+  "/business.html": {
+    "runtime": {
+      "title": "Business Calculators | ToolZen Hub",
+      "description": "Business calculators from ToolZen Hub: set a price from a target margin or markup, and work out profit and break-even.",
+      "canonical": "https://toolzenhub.in/business.html",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Business calculators from ToolZen Hub: set a price from a target margin or markup, and work out profit and break-even.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Business Calculators | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/business.html"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Business calculators from ToolZen Hub: set a price from a target margin or markup, and work out profit and break-even.",
+        "twitter:title": "Business Calculators | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Business Calculators"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#0b9f58",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Business Calculators | ToolZen Hub",
+      "description": "Business calculators from ToolZen Hub: set a price from a target margin or markup, and work out profit and break-even.",
+      "canonical": "https://toolzenhub.in/business.html",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 952
     }
   },
   "/calculators.html": {
@@ -2574,7 +2623,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 827
+      "visibleTextChars": 824
     }
   },
   "/calculators/balance-transfer/": {
@@ -2623,7 +2672,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6844
+      "visibleTextChars": 6841
     }
   },
   "/calculators/cagr/": {
@@ -2672,7 +2721,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5942
+      "visibleTextChars": 5939
     }
   },
   "/calculators/emi/": {
@@ -2721,7 +2770,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3130
+      "visibleTextChars": 3127
     }
   },
   "/calculators/fd/": {
@@ -2770,7 +2819,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6354
+      "visibleTextChars": 6351
     }
   },
   "/calculators/gst/": {
@@ -2819,7 +2868,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5888
+      "visibleTextChars": 5885
     }
   },
   "/calculators/home-loan/": {
@@ -2868,7 +2917,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5976
+      "visibleTextChars": 5973
     }
   },
   "/calculators/loan-comparison/": {
@@ -2917,7 +2966,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4322
+      "visibleTextChars": 4319
     }
   },
   "/calculators/margin/": {
@@ -2966,7 +3015,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6278
+      "visibleTextChars": 6275
     }
   },
   "/calculators/percentage/": {
@@ -3015,7 +3064,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5283
+      "visibleTextChars": 5280
     }
   },
   "/calculators/prepayment/": {
@@ -3064,7 +3113,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5854
+      "visibleTextChars": 5851
     }
   },
   "/calculators/profit/": {
@@ -3113,7 +3162,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6037
+      "visibleTextChars": 6034
     }
   },
   "/calculators/sip/": {
@@ -3162,30 +3211,30 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6317
+      "visibleTextChars": 6314
     }
   },
   "/categories.html": {
     "runtime": {
-      "title": "All Categories | ToolZen Hub",
-      "description": "Explore all ToolZen Hub calculators and smart tools for finance, health, business, math and everyday life.",
+      "title": "Calculator Categories | ToolZen Hub",
+      "description": "Browse ToolZen Hub calculators by category: loans, investment, tax, business and math.",
       "canonical": "https://toolzenhub.in/categories.html",
       "robots": null,
       "openGraph": {
-        "og:description": "Explore all ToolZen Hub calculators and smart tools for finance, health, business, math and everyday life.",
+        "og:description": "Browse ToolZen Hub calculators by category: loans, investment, tax, business and math.",
         "og:site_name": "ToolZen Hub",
-        "og:title": "All Categories | ToolZen Hub",
+        "og:title": "Calculator Categories | ToolZen Hub",
         "og:type": "website",
         "og:url": "https://toolzenhub.in/categories.html"
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Explore all ToolZen Hub calculators and smart tools for finance, health, business, math and everyday life.",
-        "twitter:title": "All Categories | ToolZen Hub"
+        "twitter:description": "Browse ToolZen Hub calculators by category: loans, investment, tax, business and math.",
+        "twitter:title": "Calculator Categories | ToolZen Hub"
       },
       "jsonLd": [],
       "h1": [
-        "All Categories"
+        "Calculator Categories"
       ],
       "lang": "en",
       "viewport": "width=device-width, initial-scale=1.0",
@@ -3194,15 +3243,15 @@
       "charset": "UTF-8"
     },
     "rawHtml": {
-      "title": "All Categories | ToolZen Hub",
-      "description": "Explore all ToolZen Hub calculators and smart tools for finance, health, business, math and everyday life.",
+      "title": "Calculator Categories | ToolZen Hub",
+      "description": "Browse ToolZen Hub calculators by category: loans, investment, tax, business and math.",
       "canonical": "https://toolzenhub.in/categories.html",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 537
+      "visibleTextChars": 531
     }
   },
   "/contact.html": {
@@ -3242,7 +3291,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 768
+      "visibleTextChars": 765
     }
   },
   "/disclaimer.html": {
@@ -3282,7 +3331,56 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 1712
+      "visibleTextChars": 1709
+    }
+  },
+  "/investment.html": {
+    "runtime": {
+      "title": "Investment Calculators | ToolZen Hub",
+      "description": "Investment calculators from ToolZen Hub: plan a SIP, compare fixed deposit maturities, and find the yearly growth rate (CAGR) between two values.",
+      "canonical": "https://toolzenhub.in/investment.html",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Investment calculators from ToolZen Hub: plan a SIP, compare fixed deposit maturities, and find the yearly growth rate (CAGR) between two values.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Investment Calculators | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/investment.html"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Investment calculators from ToolZen Hub: plan a SIP, compare fixed deposit maturities, and find the yearly growth rate (CAGR) between two values.",
+        "twitter:title": "Investment Calculators | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Investment Calculators"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#0b9f58",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Investment Calculators | ToolZen Hub",
+      "description": "Investment calculators from ToolZen Hub: plan a SIP, compare fixed deposit maturities, and find the yearly growth rate (CAGR) between two values.",
+      "canonical": "https://toolzenhub.in/investment.html",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 1108
     }
   },
   "/loans.html": {
@@ -3322,7 +3420,56 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 637
+      "visibleTextChars": 635
+    }
+  },
+  "/math.html": {
+    "runtime": {
+      "title": "Math Calculators | ToolZen Hub",
+      "description": "Math calculators from ToolZen Hub: work out a percentage change, an ending value, or the original value before a change.",
+      "canonical": "https://toolzenhub.in/math.html",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Math calculators from ToolZen Hub: work out a percentage change, an ending value, or the original value before a change.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Math Calculators | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/math.html"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Math calculators from ToolZen Hub: work out a percentage change, an ending value, or the original value before a change.",
+        "twitter:title": "Math Calculators | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Math Calculators"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#0b9f58",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Math Calculators | ToolZen Hub",
+      "description": "Math calculators from ToolZen Hub: work out a percentage change, an ending value, or the original value before a change.",
+      "canonical": "https://toolzenhub.in/math.html",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 826
     }
   },
   "/privacy.html": {
@@ -3362,7 +3509,56 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 1748
+      "visibleTextChars": 1745
+    }
+  },
+  "/tax.html": {
+    "runtime": {
+      "title": "Tax Calculators | ToolZen Hub",
+      "description": "Tax calculators from ToolZen Hub: add GST to an amount or take it out, with the tax shown by rate across up to four items.",
+      "canonical": "https://toolzenhub.in/tax.html",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Tax calculators from ToolZen Hub: add GST to an amount or take it out, with the tax shown by rate across up to four items.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Tax Calculators | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tax.html"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Tax calculators from ToolZen Hub: add GST to an amount or take it out, with the tax shown by rate across up to four items.",
+        "twitter:title": "Tax Calculators | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Tax Calculators"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#0b9f58",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Tax Calculators | ToolZen Hub",
+      "description": "Tax calculators from ToolZen Hub: add GST to an amount or take it out, with the tax shown by rate across up to four items.",
+      "canonical": "https://toolzenhub.in/tax.html",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 754
     }
   },
   "/terms.html": {
@@ -3402,7 +3598,56 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 1822
+      "visibleTextChars": 1819
+    }
+  },
+  "/tools.html": {
+    "runtime": {
+      "title": "All Tools | ToolZen Hub",
+      "description": "Browse every ToolZen Hub tool by section and category: calculators for loans, investment, tax, business and math.",
+      "canonical": "https://toolzenhub.in/tools.html",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Browse every ToolZen Hub tool by section and category: calculators for loans, investment, tax, business and math.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "All Tools | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools.html"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Browse every ToolZen Hub tool by section and category: calculators for loans, investment, tax, business and math.",
+        "twitter:title": "All Tools | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "All Tools"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#0b9f58",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "All Tools | ToolZen Hub",
+      "description": "Browse every ToolZen Hub tool by section and category: calculators for loans, investment, tax, business and math.",
+      "canonical": "https://toolzenhub.in/tools.html",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 1286
     }
   }
 }

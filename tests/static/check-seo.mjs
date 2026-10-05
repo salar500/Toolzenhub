@@ -121,7 +121,7 @@ for (const p of pages) {
     }
   }
   const byType = (t) => blocks.filter((b) => b["@type"] === t);
-  const expectedTypes = p.type === "article" ? ["Article", "BreadcrumbList", "FAQPage"] : p.type === "calculator" ? ["BreadcrumbList"] : [];
+  const expectedTypes = p.type === "article" ? ["Article", "BreadcrumbList", "FAQPage"] : p.type === "calculator" || p.type === "directory" ? ["BreadcrumbList"] : [];
   const gotTypes = blocks.map((b) => b["@type"]).sort();
   if (JSON.stringify(gotTypes) !== JSON.stringify([...expectedTypes].sort())) fail(p.url, `structured data types [${gotTypes}] should be [${[...expectedTypes].sort()}]`);
   for (const crumb of byType("BreadcrumbList")) {
