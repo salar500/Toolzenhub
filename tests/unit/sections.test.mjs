@@ -53,7 +53,7 @@ describe("section model", () => {
     assert.equal(dev.landing, "developerTools");
     assert.equal(dev.pathPrefix, "tools");
     assert.deepEqual(tax.getCategoriesBySection("developer-tools"), []); // no categories and no subcategory layer yet
-    assert.deepEqual(tax.getToolsBySection("developer-tools").map((t) => t.id), ["json-formatter"]);
+    assert.deepEqual(tax.getToolsBySection("developer-tools").map((t) => t.id), ["json-formatter", "unix-timestamp-converter"]);
   });
 
   test("section ids are unique and every section names a landing page that exists in ROUTES", () => {
@@ -181,7 +181,7 @@ describe("routing: every registered tool keeps its URL", () => {
   });
 
   test("the calculator loader registry is unchanged: loaders only for the published tools, still lazy", () => {
-    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "countdown-timer", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "json-formatter", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip", "stopwatch"]);
+    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "countdown-timer", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "json-formatter", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip", "stopwatch", "unix-timestamp-converter"]);
     for (const loader of Object.values(registry.calculatorRegistry)) assert.equal(typeof loader, "function");
     assert.deepEqual(registry.calculatorMetadata.emi, { section: "Calculators", category: "loans", title: "EMI Calculator" });
     assert.deepEqual(registry.calculatorMetadata["date-difference"], { section: "Time Tools", title: "Date Difference Calculator" });
@@ -189,6 +189,7 @@ describe("routing: every registered tool keeps its URL", () => {
     assert.deepEqual(registry.calculatorMetadata["countdown-timer"], { section: "Time Tools", title: "Countdown Timer" });
     assert.deepEqual(registry.calculatorMetadata.stopwatch, { section: "Time Tools", title: "Stopwatch" });
     assert.deepEqual(registry.calculatorMetadata["json-formatter"], { section: "Developer Tools", title: "JSON Formatter & Validator" });
+    assert.deepEqual(registry.calculatorMetadata["unix-timestamp-converter"], { section: "Developer Tools", title: "Unix Timestamp Converter" });
   });
 });
 

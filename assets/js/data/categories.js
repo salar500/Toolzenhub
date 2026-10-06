@@ -81,9 +81,9 @@ export const sections = [
         description:
             "Browser-based tools for working with data and code.",
         seoDescription:
-            "Developer Tools from ToolZen Hub: a JSON formatter and validator that runs in your browser.",
+            "Developer Tools from ToolZen Hub: a JSON formatter and validator and a Unix timestamp converter that run in your browser.",
         summary:
-            "Format and validate JSON, in your browser",
+            "JSON and Unix timestamp tools, in your browser",
         icon: "{ }",
         landing: "developerTools",
         pathPrefix: "tools"

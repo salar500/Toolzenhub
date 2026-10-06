@@ -3297,11 +3297,11 @@
   "/developer-tools.html": {
     "runtime": {
       "title": "Developer Tools | ToolZen Hub",
-      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator that runs in your browser.",
+      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator and a Unix timestamp converter that run in your browser.",
       "canonical": "https://toolzenhub.in/developer-tools.html",
       "robots": null,
       "openGraph": {
-        "og:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator that runs in your browser.",
+        "og:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator and a Unix timestamp converter that run in your browser.",
         "og:site_name": "ToolZen Hub",
         "og:title": "Developer Tools | ToolZen Hub",
         "og:type": "website",
@@ -3309,7 +3309,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator that runs in your browser.",
+        "twitter:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator and a Unix timestamp converter that run in your browser.",
         "twitter:title": "Developer Tools | ToolZen Hub"
       },
       "jsonLd": [
@@ -3333,14 +3333,14 @@
     },
     "rawHtml": {
       "title": "Developer Tools | ToolZen Hub",
-      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator that runs in your browser.",
+      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator and a Unix timestamp converter that run in your browser.",
       "canonical": "https://toolzenhub.in/developer-tools.html",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 651
+      "visibleTextChars": 890
     }
   },
   "/disclaimer.html": {
@@ -3745,7 +3745,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2064
+      "visibleTextChars": 2300
     }
   },
   "/tools/countdown-timer/": {
@@ -3941,7 +3941,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4138
+      "visibleTextChars": 4223
     }
   },
   "/tools/stopwatch/": {
@@ -3991,6 +3991,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 3332
+    }
+  },
+  "/tools/unix-timestamp-converter/": {
+    "runtime": {
+      "title": "Unix Timestamp Converter | ToolZen Hub",
+      "description": "Free Unix timestamp converter: seconds, milliseconds, microseconds or nanoseconds to a date, and a date and time zone back to a timestamp. It flags daylight-saving gaps and overlaps, converts a batch and runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/unix-timestamp-converter/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free Unix timestamp converter: seconds, milliseconds, microseconds or nanoseconds to a date, and a date and time zone back to a timestamp. It flags daylight-saving gaps and overlaps, converts a batch and runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Unix Timestamp Converter | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/unix-timestamp-converter/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free Unix timestamp converter: seconds, milliseconds, microseconds or nanoseconds to a date, and a date and time zone back to a timestamp. It flags daylight-saving gaps and overlaps, converts a batch and runs in your browser.",
+        "twitter:title": "Unix Timestamp Converter | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Unix Timestamp Converter"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Unix Timestamp Converter | ToolZen Hub",
+      "description": "Free Unix timestamp converter: seconds, milliseconds, microseconds or nanoseconds to a date, and a date and time zone back to a timestamp. It flags daylight-saving gaps and overlaps, converts a batch and runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/unix-timestamp-converter/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5400
     }
   }
 }

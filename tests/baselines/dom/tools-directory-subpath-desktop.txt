@@ -114,9 +114,13 @@ section.categories-page.directory-page
           h2#directory-developer-tools-heading.directory-section__title
             a [href="{ROOT}developer-tools.html"] "Developer Tools"
           p.directory-section__text "Browser-based tools for working with data and code."
-            span.directory-section__count "1 tool"
+            span.directory-section__count "2 tools"
         div.directory-groups
           article.directory-group
             h3.directory-group__title
               a [href="{ROOT}tools/json-formatter/"] "JSON Formatter & Validator"
             p.directory-group__text "Check JSON against the strict standard, see exactly where it breaks, and format or minify …"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/unix-timestamp-converter/"] "Unix Timestamp Converter"
+            p.directory-group__text "Convert Unix timestamps in seconds, milliseconds, microseconds or nanoseconds to a date, a…"

@@ -46,6 +46,24 @@ const PAGES = [
   ["not-found", "no/such/page", ".nf-card h1", false],
 ];
 
+/*
+ * The Unix Timestamp Converter shows a live clock and the browser's own time zone, so its baseline pins both: a fixed, paused clock and
+ * a fixed zone. (The page is still screenshotted the same way as every other page.)
+ */
+test.describe("visual baselines @visual (clock and zone pinned)", () => {
+  test.use({ timezoneId: "Asia/Kolkata", locale: "en-US" });
+
+  test("unix-timestamp-converter", async ({ page, go }) => {
+    await page.clock.install({ time: new Date("2026-03-10T09:59:59Z") });
+    await page.clock.pauseAt(new Date("2026-03-10T10:00:01Z"));
+    await go("tools/unix-timestamp-converter/");
+    await expect(page.locator("#ts-panel")).toHaveAttribute("data-ready", "true");
+    await page.evaluate(() => document.fonts.ready);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(page).toHaveScreenshot(["visual", "unix-timestamp-converter.png"], { fullPage: true });
+  });
+});
+
 test.describe("visual baselines @visual", () => {
   for (const [name, path, ready, onTablet] of PAGES) {
     test(name, async ({ page, go }, testInfo) => {

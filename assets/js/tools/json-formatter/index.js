@@ -45,6 +45,9 @@ export const showRelatedArticles = false;
 const TITLE =
     getToolById("json-formatter").title;
 
+const TIMESTAMP_TOOL =
+    getToolById("unix-timestamp-converter");
+
 const LIVE_DELAY_MS = 600;
 
 const MAX_NOTES_SHOWN = 3;
@@ -446,6 +449,11 @@ export function markup() {
                     <li>Checking JSON that an AI assistant or a log gave you before you use it.</li>
                     <li>Minifying JSON to send or store it compactly.</li>
                 </ul>
+
+                <p>
+                    Payloads often hold Unix timestamps. To read one, use the
+                    <a href="${TIMESTAMP_TOOL.href}">${TIMESTAMP_TOOL.title}</a>.
+                </p>
 
             </section>
 

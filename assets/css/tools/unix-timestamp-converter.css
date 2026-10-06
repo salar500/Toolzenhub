@@ -1,0 +1,661 @@
+/* =========================================================
+   ToolZen Hub
+   Unix Timestamp Converter
+
+   Only what the shared tool styles do not already provide: the
+   live-time strip, the conversion cards, the result rows, the
+   zone table and the batch table. Buttons, fields, focus and
+   headings come from the shared layer. Loaded after
+   calculator-responsive.css.
+
+   Order of importance on the page: the time strip is compact, the
+   Timestamp to date card is dominant (a stronger border and a
+   larger title), the others are quieter. States are told in
+   words ("Not converted", "Which unit is this?"), never by colour
+   alone. Nothing animates.
+========================================================= */
+
+.ts-workspace [hidden] {
+
+    display: none !important;
+
+}
+
+.ts-workspace {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+
+}
+
+.ts-workspace > * {
+
+    min-width: 0;
+
+}
+
+.ts-label {
+
+    color: #475467;
+
+    font-size: 13px;
+    font-weight: 700;
+
+}
+
+.ts-mono {
+
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+
+}
+
+.ts-nowrap {
+
+    white-space: nowrap;
+
+}
+
+.ts-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+/* the live time */
+
+.ts-now {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px 20px;
+
+    padding: 16px 18px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: #f9fafb;
+
+}
+
+.ts-now__main {
+
+    min-width: 0;
+
+}
+
+.ts-now__seconds {
+
+    color: var(--color-ink);
+
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+    font-size: clamp(32px, 8vw, 48px);
+    font-weight: 700;
+    line-height: 1.15;
+    font-variant-numeric: tabular-nums;
+
+}
+
+.ts-now__detail {
+
+    margin: 4px 0 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+
+}
+
+.ts-now__sep {
+
+    margin: 0 6px;
+
+}
+
+.ts-now__actions {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+}
+
+.ts-button {
+
+    min-height: 44px;
+
+    font-size: 15px;
+
+}
+
+/* a card */
+
+.ts-card {
+
+    padding: 18px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: #ffffff;
+
+}
+
+.ts-card--primary {
+
+    padding: 22px 20px;
+
+    border: 2px solid var(--color-action-green);
+
+}
+
+.ts-card__title {
+
+    margin: 0 0 14px;
+
+    color: var(--color-ink);
+
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+
+}
+
+.ts-card--primary .ts-card__title {
+
+    font-size: 24px;
+
+}
+
+.ts-card__subtitle {
+
+    margin: 0 0 8px;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 700;
+
+}
+
+.ts-controls {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 230px);
+    gap: 0 14px;
+
+    align-items: start;
+
+}
+
+.ts-controls--batch {
+
+    grid-template-columns: minmax(0, 230px) 1fr;
+
+    align-items: end;
+
+}
+
+.ts-batch-input {
+
+    min-height: 140px;
+
+    font-size: 15px;
+    line-height: 1.5;
+    white-space: pre;
+    overflow: auto;
+    resize: vertical;
+
+}
+
+.ts-batch-actions {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-bottom: 20px;
+
+}
+
+/* a problem, in words */
+
+.ts-error {
+
+    margin: 10px 0 0;
+    padding: 10px 14px;
+
+    border: 1px solid #fda29b;
+    border-left-width: 6px;
+    border-radius: 10px;
+
+    background: #fef3f2;
+
+    color: #912018;
+
+    font-size: 15px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+
+}
+
+.ts-error::before {
+
+    content: "Not converted. ";
+
+    font-weight: 700;
+
+}
+
+/* results */
+
+.ts-out {
+
+    margin-top: 14px;
+
+}
+
+.ts-rows {
+
+    margin: 0;
+
+}
+
+.ts-row {
+
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    gap: 4px 16px;
+
+    align-items: center;
+
+    padding: 8px 0;
+
+    border-top: 1px solid var(--color-slate-200);
+
+}
+
+.ts-row__label {
+
+    color: #475467;
+
+    font-size: 14px;
+    font-weight: 600;
+
+}
+
+.ts-row__value {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 12px;
+
+    min-width: 0;
+
+    margin: 0;
+
+}
+
+.ts-row__text {
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+
+}
+
+.ts-row__sub {
+
+    order: 3;
+
+    width: 100%;
+
+    color: #475467;
+
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+
+}
+
+.ts-copy {
+
+    min-height: 44px;
+    padding: 0 14px;
+
+    font-size: 14px;
+
+}
+
+.ts-notes p {
+
+    margin: 4px 0;
+
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+}
+
+.ts-instant {
+
+    margin-top: 14px;
+
+}
+
+.ts-instant .ts-button {
+
+    margin-top: 10px;
+
+}
+
+/* ambiguity: stated, with the choice */
+
+.ts-ambiguous {
+
+    padding: 14px 16px;
+
+    border: 1px solid #fec84b;
+    border-radius: 12px;
+
+    background: #fffaeb;
+
+    color: #344054;
+
+    font-size: 15px;
+    line-height: 1.55;
+
+}
+
+.ts-ambiguous p {
+
+    margin: 0 0 8px;
+
+}
+
+.ts-ambiguous__title {
+
+    color: var(--color-ink);
+
+    font-weight: 700;
+
+}
+
+.ts-ambiguous__list {
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+}
+
+.ts-ambiguous__list li {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 12px;
+
+    padding: 8px 0;
+
+    border-top: 1px solid #fedf89;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ts-choose {
+
+    min-height: 44px;
+
+}
+
+/* tables */
+
+.ts-board {
+
+    margin-top: 22px;
+    padding-top: 18px;
+
+    border-top: 1px solid var(--color-slate-200);
+
+}
+
+/* position: relative keeps the screen-reader-only text inside the box that scrolls, so it cannot widen the page */
+.ts-scroll {
+
+    position: relative;
+
+    overflow-x: auto;
+
+}
+
+.ts-scroll[role="region"] {
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 12px;
+
+}
+
+.ts-scroll[role="region"]:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.ts-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+
+}
+
+.ts-table th,
+.ts-table td {
+
+    padding: 9px 10px;
+
+    border-top: 1px solid var(--color-slate-200);
+
+    text-align: left;
+    vertical-align: top;
+
+}
+
+.ts-table thead th {
+
+    border-top: 0;
+    border-bottom: 1px solid var(--color-slate-200);
+
+    color: #475467;
+
+    font-size: 13px;
+    font-weight: 600;
+
+}
+
+.ts-table tbody th {
+
+    color: var(--color-ink);
+
+    font-weight: 600;
+
+}
+
+.ts-table--batch {
+
+    min-width: 640px;
+
+}
+
+.ts-bad {
+
+    color: #912018;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ts-remove {
+
+    min-height: 44px;
+    padding: 0 8px;
+
+    border: 0;
+    background: none;
+
+    color: var(--color-action-green);
+
+    font: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+
+    cursor: pointer;
+
+}
+
+.ts-remove:focus-visible,
+.ts-remove:hover {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.ts-add {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 8px 12px;
+
+    margin-top: 14px;
+
+}
+
+.ts-add .ts-label {
+
+    flex-basis: 100%;
+
+}
+
+.ts-add select {
+
+    flex: 1 1 220px;
+
+    min-width: 0;
+
+}
+
+.ts-batch-status {
+
+    margin: 10px 0;
+
+    color: #344054;
+
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+
+}
+
+/* a wider screen has a pointer: copy buttons can be tighter (the phone keeps 44px) */
+
+@media (min-width: 641px) {
+
+    .ts-copy {
+
+        min-height: 36px;
+
+    }
+
+}
+
+/* a phone */
+
+@media (max-width: 640px) {
+
+    .ts-card,
+    .ts-card--primary {
+
+        padding: 16px 14px;
+
+    }
+
+    .ts-controls,
+    .ts-controls--batch {
+
+        grid-template-columns: minmax(0, 1fr);
+
+    }
+
+    .ts-row {
+
+        grid-template-columns: minmax(0, 1fr);
+
+    }
+
+    .ts-now__actions .ts-button {
+
+        flex: 1 1 140px;
+
+    }
+
+    .ts-batch-actions {
+
+        margin-bottom: 8px;
+
+    }
+
+    .ts-batch-actions .ts-button {
+
+        flex: 1 1 140px;
+
+    }
+
+    /* 16px so the browser does not zoom the page when a field is focused */
+
+    .ts-workspace .calculator-form__input,
+    .ts-workspace .calculator-form__select {
+
+        font-size: 16px;
+
+    }
+
+}

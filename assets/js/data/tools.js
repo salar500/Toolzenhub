@@ -861,6 +861,7 @@ const catalog = [
         title: "JSON Formatter & Validator",
         description:
             "Check JSON against the strict standard, see exactly where it breaks, and format or minify it. It runs in your browser.",
+        relatedTools: ["unix-timestamp-converter"],
         aliases: [
             "json formatter",
             "json validator",
@@ -885,6 +886,48 @@ const catalog = [
                 "JSON Formatter & Validator | ToolZen Hub",
             description:
                 "Free online JSON formatter and validator. Check strict JSON, see the line and column of an error, then format or minify it. It runs in your browser: your JSON is not uploaded."
+        }
+    },
+
+    {
+        id: "unix-timestamp-converter",
+        status: "published",
+        loader: () =>
+            import("../tools/unix-timestamp-converter/index.js"),
+        sectionId: "developer-tools",
+        icon: "⇄",
+        title: "Unix Timestamp Converter",
+        description:
+            "Convert Unix timestamps in seconds, milliseconds, microseconds or nanoseconds to a date, and a date and time zone back to a timestamp, with daylight-saving gaps and overlaps explained. It runs in your browser.",
+        relatedTools: ["json-formatter"],
+        aliases: [
+            "unix timestamp",
+            "epoch converter",
+            "epoch time",
+            "timestamp converter",
+            "unix time converter",
+            "timestamp to date",
+            "date to timestamp",
+            "epoch to date",
+            "milliseconds timestamp",
+            "unix milliseconds"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            table: true,
+            unitSelection: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            realtime: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Unix Timestamp Converter | ToolZen Hub",
+            description:
+                "Free Unix timestamp converter: seconds, milliseconds, microseconds or nanoseconds to a date, and a date and time zone back to a timestamp. It flags daylight-saving gaps and overlaps, converts a batch and runs in your browser."
         }
     }
 
