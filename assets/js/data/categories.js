@@ -68,6 +68,25 @@ export const sections = [
         icon: "📅",
         landing: "timeTools",
         pathPrefix: "tools"
+    },
+
+    /*
+     * Developer Tools, like Time Tools, has no categories: its tools sit
+     * directly under the section. One live tool does not need a grouping
+     * layer; subcategories (if ever) come only when several tools do.
+     */
+    {
+        id: "developer-tools",
+        title: "Developer Tools",
+        description:
+            "Browser-based tools for working with data and code.",
+        seoDescription:
+            "Developer Tools from ToolZen Hub: a JSON formatter and validator that runs in your browser.",
+        summary:
+            "Format and validate JSON, in your browser",
+        icon: "{ }",
+        landing: "developerTools",
+        pathPrefix: "tools"
     }
 
 ];

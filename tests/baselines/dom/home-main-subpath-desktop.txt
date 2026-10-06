@@ -39,6 +39,11 @@ main#app
             div.category-card__content
               h3 "Time Tools"
               p "Date tools, a countdown timer and a stopwatch"
+          a.category-card [href="{ROOT}developer-tools.html"]
+            div.category-card__icon.category-card__icon--developer-tools "{ }"
+            div.category-card__content
+              h3 "Developer Tools"
+              p "Format and validate JSON, in your browser"
   section#popular-calculators.section
     section.popular-section
       div.container

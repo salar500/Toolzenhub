@@ -16,13 +16,15 @@ test.describe("home page", () => {
   test("hero, category card, featured tools, latest articles", async ({ page, go, watch, siteRoot }) => {
     await go("");
     await expect(page.locator("h1.hero__title")).toContainText("Practical tools");
-    // two major sections with a live tool (Calculators, Time Tools): one card each, and no "More" card that opens nothing of its own
-    await expect(page.locator("#categories .category-card")).toHaveCount(2);
+    // three major sections with a live tool (Calculators, Time Tools, Developer Tools): one card each, and no "More" card that opens nothing of its own
+    await expect(page.locator("#categories .category-card")).toHaveCount(3);
     await expect(page.locator("#categories .category-card").nth(0)).toContainText("Calculators");
     await expect(page.locator("#categories .category-card").nth(1)).toContainText("Time Tools");
+    await expect(page.locator("#categories .category-card").nth(2)).toContainText("Developer Tools");
     await expect(page.locator("#categories")).not.toContainText("More");
     await expect(page.locator("#categories .category-card").nth(0)).toHaveAttribute("href", `${siteRoot}categories.html`);
     await expect(page.locator("#categories .category-card").nth(1)).toHaveAttribute("href", `${siteRoot}time-tools.html`);
+    await expect(page.locator("#categories .category-card").nth(2)).toHaveAttribute("href", `${siteRoot}developer-tools.html`);
     // Featured Tools: a short curated list of live tools (no usage data, so it is not called "popular"), all links
     await expect(page.getByRole("heading", { name: "Featured Tools" })).toBeVisible();
     await expect(page.locator("#popular-calculators").getByRole("heading", { name: "Popular Calculators" })).toHaveCount(0);

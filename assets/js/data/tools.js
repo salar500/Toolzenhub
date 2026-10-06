@@ -844,6 +844,48 @@ const catalog = [
             description:
                 "Free online stopwatch with start, pause, resume and lap times, showing each lap, the total and the fastest and slowest lap. It runs in your browser and keeps correct time in a background tab."
         }
+    },
+
+
+    /* =====================================================
+       DEVELOPER TOOLS
+    ===================================================== */
+
+    {
+        id: "json-formatter",
+        status: "published",
+        loader: () =>
+            import("../tools/json-formatter/index.js"),
+        sectionId: "developer-tools",
+        icon: "{ }",
+        title: "JSON Formatter & Validator",
+        description:
+            "Check JSON against the strict standard, see exactly where it breaks, and format or minify it. It runs in your browser.",
+        aliases: [
+            "json formatter",
+            "json validator",
+            "format json",
+            "pretty json",
+            "pretty print json",
+            "beautify json",
+            "minify json",
+            "validate json",
+            "json viewer"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "JSON Formatter & Validator | ToolZen Hub",
+            description:
+                "Free online JSON formatter and validator. Check strict JSON, see the line and column of an error, then format or minify it. It runs in your browser: your JSON is not uploaded."
+        }
     }
 
 ];

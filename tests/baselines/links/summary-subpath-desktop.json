@@ -303,6 +303,12 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "developer-tools.html": {
+    "internal": 25,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "disclaimer.html": {
     "internal": 23,
     "external": [],
@@ -310,7 +316,7 @@
     "deadFragments": []
   },
   "(home)": {
-    "internal": 34,
+    "internal": 35,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -358,7 +364,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 46,
+    "internal": 48,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -377,6 +383,12 @@
   },
   "tools/date-difference/": {
     "internal": 24,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/json-formatter/": {
+    "internal": 23,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

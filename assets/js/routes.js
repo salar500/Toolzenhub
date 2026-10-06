@@ -92,6 +92,16 @@ export const ROUTES = {
 
 
     /* =====================================================
+       DEVELOPER TOOLS
+
+       The section's own page (it has no categories).
+    ===================================================== */
+
+    developerTools:
+        `${SITE_ROOT}developer-tools.html`,
+
+
+    /* =====================================================
        CATEGORIES
 
        The Calculators section's own page: its categories.

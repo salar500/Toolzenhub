@@ -108,3 +108,15 @@ section.categories-page.directory-page
             h3.directory-group__title
               a [href="{ROOT}tools/stopwatch/"] "Stopwatch"
             p.directory-group__text "Measure elapsed time from zero with start, pause, resume and laps, showing each lap time, …"
+      section.directory-section [aria-labelledby="directory-developer-tools-heading"]
+        div.directory-section__header
+          span.directory-section__label "Section"
+          h2#directory-developer-tools-heading.directory-section__title
+            a [href="{ROOT}developer-tools.html"] "Developer Tools"
+          p.directory-section__text "Browser-based tools for working with data and code."
+            span.directory-section__count "1 tool"
+        div.directory-groups
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/json-formatter/"] "JSON Formatter & Validator"
+            p.directory-group__text "Check JSON against the strict standard, see exactly where it breaks, and format or minify …"

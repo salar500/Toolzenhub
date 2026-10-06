@@ -3294,6 +3294,55 @@
       "visibleTextChars": 757
     }
   },
+  "/developer-tools.html": {
+    "runtime": {
+      "title": "Developer Tools | ToolZen Hub",
+      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator that runs in your browser.",
+      "canonical": "https://toolzenhub.in/developer-tools.html",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator that runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Developer Tools | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/developer-tools.html"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator that runs in your browser.",
+        "twitter:title": "Developer Tools | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Developer Tools"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#0b9f58",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Developer Tools | ToolZen Hub",
+      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator that runs in your browser.",
+      "canonical": "https://toolzenhub.in/developer-tools.html",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 651
+    }
+  },
   "/disclaimer.html": {
     "runtime": {
       "title": "Disclaimer | ToolZen Hub",
@@ -3696,7 +3745,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1837
+      "visibleTextChars": 2064
     }
   },
   "/tools/countdown-timer/": {
@@ -3844,6 +3893,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 4008
+    }
+  },
+  "/tools/json-formatter/": {
+    "runtime": {
+      "title": "JSON Formatter & Validator | ToolZen Hub",
+      "description": "Free online JSON formatter and validator. Check strict JSON, see the line and column of an error, then format or minify it. It runs in your browser: your JSON is not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/json-formatter/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free online JSON formatter and validator. Check strict JSON, see the line and column of an error, then format or minify it. It runs in your browser: your JSON is not uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "JSON Formatter & Validator | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/json-formatter/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free online JSON formatter and validator. Check strict JSON, see the line and column of an error, then format or minify it. It runs in your browser: your JSON is not uploaded.",
+        "twitter:title": "JSON Formatter & Validator | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "JSON Formatter & Validator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "JSON Formatter &amp; Validator | ToolZen Hub",
+      "description": "Free online JSON formatter and validator. Check strict JSON, see the line and column of an error, then format or minify it. It runs in your browser: your JSON is not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/json-formatter/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 4138
     }
   },
   "/tools/stopwatch/": {

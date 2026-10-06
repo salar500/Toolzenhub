@@ -27,7 +27,7 @@ before(async () => {
 
 // the published tools of the Calculators section; Date Difference (Time Tools) is a published tool too, but it is not a calculator
 const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "percentage"];
-const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch"];
+const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment"];
 
 describe("catalog model", () => {
@@ -128,6 +128,7 @@ describe("registry is derived from the catalog", () => {
       "date-calculator": { section: "Time Tools", title: "Date Calculator" },
       "countdown-timer": { section: "Time Tools", title: "Countdown Timer" },
       stopwatch: { section: "Time Tools", title: "Stopwatch" },
+      "json-formatter": { section: "Developer Tools", title: "JSON Formatter & Validator" },
     });
   });
 });

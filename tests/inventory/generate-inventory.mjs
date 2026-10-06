@@ -67,6 +67,7 @@ function describePage(file) {
     "categories.html": { type: "category-index", primarySelector: "#categories-grid .category-page-card", interactive: true, rendered: "client", queryVariants: ["?q=<search term>"] },
     "loans.html": { type: "category", primarySelector: "#loans-calculators-grid .calculator-card", interactive: true, rendered: "client" },
     "time-tools.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
+    "developer-tools.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "tools.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "investment.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "business.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },

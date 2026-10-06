@@ -37,8 +37,8 @@ before(async () => {
 });
 
 describe("section model", () => {
-  test("two sections, each with a stable id, its landing page and its path prefix: Calculators and Time Tools", () => {
-    assert.deepEqual(tax.getSections().map((s) => s.id), ["calculators", "time-tools"]);
+  test("three sections, each with a stable id, its landing page and its path prefix: Calculators, Time Tools and Developer Tools", () => {
+    assert.deepEqual(tax.getSections().map((s) => s.id), ["calculators", "time-tools", "developer-tools"]);
     const section = tax.getSectionById("calculators");
     assert.equal(section.title, "Calculators");
     assert.equal(section.landing, "calculatorCategories");
@@ -48,6 +48,12 @@ describe("section model", () => {
     assert.equal(time.landing, "timeTools");
     assert.equal(time.pathPrefix, "tools"); // /tools/<id>/, so /calculators/<id>/ is never used by a non-calculator
     assert.deepEqual(tax.getCategoriesBySection("time-tools"), []); // no categories: its tools sit directly under it
+    const dev = tax.getSectionById("developer-tools");
+    assert.equal(dev.title, "Developer Tools");
+    assert.equal(dev.landing, "developerTools");
+    assert.equal(dev.pathPrefix, "tools");
+    assert.deepEqual(tax.getCategoriesBySection("developer-tools"), []); // no categories and no subcategory layer yet
+    assert.deepEqual(tax.getToolsBySection("developer-tools").map((t) => t.id), ["json-formatter"]);
   });
 
   test("section ids are unique and every section names a landing page that exists in ROUTES", () => {
@@ -70,7 +76,7 @@ describe("section model", () => {
   });
 
   test("no future section is active", () => {
-    for (const future of ["timers", "developer-tools", "converters"]) assert.equal(tax.getSectionById(future), undefined, future);
+    for (const future of ["timers", "converters"]) assert.equal(tax.getSectionById(future), undefined, future);
   });
 });
 
@@ -175,13 +181,14 @@ describe("routing: every registered tool keeps its URL", () => {
   });
 
   test("the calculator loader registry is unchanged: loaders only for the published tools, still lazy", () => {
-    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "countdown-timer", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip", "stopwatch"]);
+    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "countdown-timer", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "json-formatter", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip", "stopwatch"]);
     for (const loader of Object.values(registry.calculatorRegistry)) assert.equal(typeof loader, "function");
     assert.deepEqual(registry.calculatorMetadata.emi, { section: "Calculators", category: "loans", title: "EMI Calculator" });
     assert.deepEqual(registry.calculatorMetadata["date-difference"], { section: "Time Tools", title: "Date Difference Calculator" });
     assert.deepEqual(registry.calculatorMetadata["date-calculator"], { section: "Time Tools", title: "Date Calculator" });
     assert.deepEqual(registry.calculatorMetadata["countdown-timer"], { section: "Time Tools", title: "Countdown Timer" });
     assert.deepEqual(registry.calculatorMetadata.stopwatch, { section: "Time Tools", title: "Stopwatch" });
+    assert.deepEqual(registry.calculatorMetadata["json-formatter"], { section: "Developer Tools", title: "JSON Formatter & Validator" });
   });
 });
 

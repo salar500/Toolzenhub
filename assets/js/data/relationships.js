@@ -119,10 +119,12 @@ function byHierarchy(
     subject
 ) {
 
+    /* a tool without a category sits directly under its section: it is grouped with that section only, never with another section's uncategorised tools */
     const sameCategory =
         items.filter(
             item =>
-                item.category === subject.category
+                item.category === subject.category &&
+                item.sectionId === subject.sectionId
         );
 
     const sameSubcategory =

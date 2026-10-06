@@ -26,8 +26,8 @@ const hrefs = (html) => [...html.matchAll(/href="([^"]*)"/g)].map((m) => m[1]);
 const labels = (html) => [...html.matchAll(/<(?:a|strong)[^>]*>\s*([^<]*?)\s*<\/(?:a|strong)>/g)].map((m) => m[1]);
 
 describe("current hierarchy data", () => {
-  test("two sections: Calculators (landing on the categories page) and Time Tools (its own page, no categories)", () => {
-    assert.deepEqual(cats.sections.map((s) => [s.id, s.title, s.landing, s.pathPrefix]), [["calculators", "Calculators", "calculatorCategories", "calculators"], ["time-tools", "Time Tools", "timeTools", "tools"]]);
+  test("three sections: Calculators (landing on the categories page), Time Tools and Developer Tools (each its own page, no categories)", () => {
+    assert.deepEqual(cats.sections.map((s) => [s.id, s.title, s.landing, s.pathPrefix]), [["calculators", "Calculators", "calculatorCategories", "calculators"], ["time-tools", "Time Tools", "timeTools", "tools"], ["developer-tools", "Developer Tools", "developerTools", "tools"]]);
     assert.equal(cats.categories.filter((c) => c.sectionId === "time-tools").length, 0);
     assert.equal(tax.getSectionUrl("Calculators"), `${ROOT}categories.html`);
     assert.equal(tax.getSectionUrl("calculators"), `${ROOT}categories.html`);
@@ -110,7 +110,7 @@ describe("Investment is a category inside Calculators (Tool Pack 7 pins SIP and 
   });
 
   test("Investment is a category of the Calculators section, not a section of its own", () => {
-    assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools"]); // a category belongs to Calculators; Time Tools has none
+    assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools", "developer-tools"]); // a category belongs to Calculators; Time Tools and Developer Tools have none
     assert.equal(cats.categories.find((c) => c.id === "investment").sectionId, "calculators");
     assert.equal(cats.categories.find((c) => c.id === "investment").title, "Investment");
     assert.deepEqual(tax.getToolsByCategory("investment").map((t) => t.id), ["sip", "ppf", "fd", "cagr"]);
@@ -150,7 +150,7 @@ describe("Tax is a category inside Calculators (Tool Pack 8 pins GST and Income 
   });
 
   test("Tax is a category of the Calculators section, not a section of its own; GST is its only live tool", () => {
-    assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools"]); // a category belongs to Calculators; Time Tools has none
+    assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools", "developer-tools"]); // a category belongs to Calculators; Time Tools and Developer Tools have none
     assert.equal(cats.categories.find((c) => c.id === "tax").sectionId, "calculators");
     assert.deepEqual(tax.getToolsByCategory("tax").map((t) => t.id), ["gst", "income-tax"]);
     assert.deepEqual(tax.getToolsByCategory("tax").filter((t) => t.available).map((t) => t.id), ["gst"]);
@@ -273,7 +273,7 @@ describe("Math is a category inside Calculators (Tool Pack 10 pins Percentage, t
     assert.equal(tax.getSectionForTool(tool("percentage")).id, "calculators");
     assert.equal(tax.getCategoryForTool(tool("percentage")).id, "math");
     assert.equal(cats.categories.find((c) => c.id === "math").sectionId, "calculators");
-    assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools"]); // a category belongs to Calculators; Time Tools has none // Math is not a section of its own
+    assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools", "developer-tools"]); // a category belongs to Calculators; Time Tools and Developer Tools have none // Math is not a section of its own
     // the shared breadcrumb prints the category id (a deferred display issue); Home is added by the renderer
     assert.deepEqual(crumb.toolBreadcrumbItems(registry.calculatorMetadata.percentage).map((i) => i.label), ["Calculators", "math", "Percentage Calculator"]);
     assert.deepEqual(registry.calculatorMetadata.percentage, { section: "Calculators", category: "math", title: "Percentage Calculator" });
