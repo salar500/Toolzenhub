@@ -35,6 +35,7 @@ const PAGES = [
   ["percentage", "calculators/percentage/", ".related-article-card", true],
   ["time-tools", "time-tools.html", ".category-page-card, .directory-tools a", false],
   ["date-difference", "tools/date-difference/", ".calculator-info details", false],
+  ["date-calculator", "tools/date-calculator/", ".calculator-info details", false],
   ["articles", "articles.html", "#articles-list .article-card", false],
   ["article", "articles/loan-comparison/what-is-loan-prepayment/", ".article-related-card", true],
   ["contact", "contact.html", "form.contact-form", false],

@@ -435,7 +435,7 @@ test.describe("Percentage publication", () => {
     await expect(page.locator("#calculators-grid .calculator-card:has-text('Percentage Calculator')")).toHaveCount(1);
     await expect(page.locator("#calculators-grid .calculator-card--soon:has-text('Ratio Calculator')")).toHaveCount(1);
     await expect(page.locator("#calculators-grid .calculator-card--soon:has-text('Age Calculator')")).toHaveCount(1);
-    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(14);
+    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(13);
   });
 
   test("the three articles are listed under Math with no image block, and their pages render without a hero image", async ({ page, go, siteRoot }) => {

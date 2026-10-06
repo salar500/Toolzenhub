@@ -90,9 +90,13 @@ section.categories-page.directory-page
           h2#directory-time-tools-heading.directory-section__title
             a [href="{ROOT}time-tools.html"] "Time Tools"
           p.directory-section__text "Practical date and time utilities."
-            span.directory-section__count "1 tool"
+            span.directory-section__count "2 tools"
         div.directory-groups
           article.directory-group
             h3.directory-group__title
               a [href="{ROOT}tools/date-difference/"] "Date Difference Calculator"
             p.directory-group__text "Find how many days are between two calendar dates, with the difference in years, months an…"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/date-calculator/"] "Date Calculator"
+            p.directory-group__text "Add or subtract days, weeks, months and years from a date, and see the resulting date and …"

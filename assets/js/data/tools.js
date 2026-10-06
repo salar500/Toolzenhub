@@ -700,16 +700,6 @@ const catalog = [
             "Convert currencies easily."
     },
 
-    {
-        id: "date",
-        status: "coming-soon",
-        category: "converter",
-        icon: "▣",
-        title: "Date Calculator",
-        description:
-            "Calculate dates and date differences."
-    },
-
 
     /* =====================================================
        TIME TOOLS  (a section without categories: the tool
@@ -747,6 +737,42 @@ const catalog = [
                 "Date Difference Calculator: Days Between Two Dates | ToolZen Hub",
             description:
                 "Find the number of days between two dates, the difference in years, months and days, and in weeks. Calendar dates only: leap years and month lengths are handled, business days and holidays are not."
+        }
+    },
+
+    {
+        id: "date-calculator",
+        status: "published",
+        loader: () =>
+            import("../tools/date-calculator/index.js"),
+        sectionId: "time-tools",
+        icon: "⊞",
+        title: "Date Calculator",
+        description:
+            "Add or subtract days, weeks, months and years from a date, and see the resulting date and its weekday.",
+        aliases: [
+            "add days to date",
+            "subtract days from date",
+            "date after days",
+            "date before days",
+            "add months to date",
+            "subtract months from date",
+            "date arithmetic"
+        ],
+        capabilities: {
+            reset: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Date Calculator: Add or Subtract Days, Weeks, Months and Years | ToolZen Hub",
+            description:
+                "Add or subtract days, weeks, months and years from a date and see the resulting date and weekday. Calendar dates only: month ends and leap years are handled, weekends, business days and holidays are not."
         }
     }
 

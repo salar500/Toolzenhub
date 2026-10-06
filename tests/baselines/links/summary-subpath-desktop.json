@@ -352,13 +352,19 @@
     "deadFragments": []
   },
   "time-tools.html": {
-    "internal": 25,
+    "internal": 26,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 43,
+    "internal": 44,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/date-calculator/": {
+    "internal": 25,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
