@@ -486,7 +486,7 @@ test.describe("All Tools and the calculator hierarchy", () => {
     const live = await page.locator(".directory-group a").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
     for (const r of ["loans.html", "investment.html", "tax.html", "business.html", "math.html", "calculators/emi/", "calculators/sip/", "calculators/fd/", "calculators/cagr/", "calculators/margin/", "calculators/profit/", "calculators/gst/", "calculators/percentage/"]) expect(live).toContain(siteRoot + r);
     for (const bad of ["categories.html#health", "categories.html#converter", "calculators/ppf/", "calculators/income-tax/", "calculators/roi/"]) expect(live.some((h) => h.includes(bad)), bad).toBe(false);
-    await expect(page.locator(".directory-group")).toHaveCount(8); // the five live calculator categories and the three Time Tools tools
+    await expect(page.locator(".directory-group")).toHaveCount(9); // the five live calculator categories and the four Time Tools tools
     await expect(page.locator(".directory-soon__list li")).toHaveText([/Health\s*Coming soon/, /Converter\s*Coming soon/]);
     await expect(page.locator(".directory-soon .coming-soon-badge")).toHaveCount(2);
     await expect(page.locator(".directory-soon a")).toHaveCount(0);
@@ -528,7 +528,7 @@ test.describe("All Tools and the calculator hierarchy", () => {
     }
     expect((await titles("loan")).length).toBe(5);
     expect(await titles("invest")).toEqual(expect.arrayContaining(["SIP Calculator", "FD Calculator", "CAGR Calculator"]));
-    for (const q of ["asdfgh", "xyztool", "stopwatch", "ppf", "personal loan"]) {
+    for (const q of ["asdfgh", "xyztool", "pomodoro", "ppf", "personal loan"]) {
       expect(await titles(q), `${q}: no live tool`).toEqual([]);
       await expect(page.locator("#tools-results")).toContainText(`No tools found for “${q}”`);
       await expect(page.locator("#tools-directory")).toBeVisible();
@@ -572,7 +572,7 @@ test.describe("All Tools and the calculator hierarchy", () => {
   test("the three destinations have different jobs: All Tools (platform), Calculator Categories (the section) and All Calculators (the flat list)", async ({ page, go }) => {
     await go("tools.html");
     await expect(page.locator(".directory-section__label")).toHaveText(["Section", "Section"]);
-    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, /^3 tools$/]);
+    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, /^4 tools$/]);
     await go("categories.html");
     await expect(page.locator("h1")).toHaveText("Calculator Categories");
     await expect(page.locator(".categories-search__content p")).toHaveText("Search calculators"); // this search is scoped to calculators, and says so

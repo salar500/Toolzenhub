@@ -793,6 +793,7 @@ const catalog = [
             "study timer",
             "focus timer"
         ],
+        relatedTools: ["stopwatch"],
         capabilities: {
             reset: true,
             realtime: true,
@@ -807,6 +808,41 @@ const catalog = [
                 "Countdown Timer: Online Timer for Any Time up to 24 Hours | ToolZen Hub",
             description:
                 "Set hours, minutes and seconds and count down to zero, with pause, resume, presets and the time left in the tab title. It runs in your browser and keeps correct time in a background tab; it does not alert you if the page is closed."
+        }
+    },
+
+    {
+        id: "stopwatch",
+        status: "published",
+        loader: () =>
+            import("../tools/stopwatch/index.js"),
+        sectionId: "time-tools",
+        icon: "◴",
+        title: "Stopwatch",
+        description:
+            "Measure elapsed time from zero with start, pause, resume and laps, showing each lap time, the total and the fastest and slowest lap.",
+        aliases: [
+            "online stopwatch",
+            "lap timer",
+            "split timer",
+            "elapsed time",
+            "timer stopwatch"
+        ],
+        relatedTools: ["countdown-timer"],
+        capabilities: {
+            reset: true,
+            realtime: true,
+            multipleInputs: false,
+            validation: false,
+            explanation: true,
+            examples: false,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Online Stopwatch with Laps | ToolZen Hub",
+            description:
+                "Free online stopwatch with start, pause, resume and lap times, showing each lap, the total and the fastest and slowest lap. It runs in your browser and keeps correct time in a background tab."
         }
     }
 

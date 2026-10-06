@@ -38,7 +38,7 @@ main#app
             div.category-card__icon.category-card__icon--time-tools "📅"
             div.category-card__content
               h3 "Time Tools"
-              p "Date tools and a countdown timer"
+              p "Date tools, a countdown timer and a stopwatch"
   section#popular-calculators.section
     section.popular-section
       div.container

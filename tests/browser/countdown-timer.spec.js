@@ -14,8 +14,10 @@ const btn = (page, name) => page.getByRole("button", { name, exact: true });
 
 async function open(page, go) {
   await page.clock.install({ time: new Date("2026-03-10T10:00:00Z") });
+  await page.clock.pauseAt(new Date("2026-03-10T10:00:01Z")); // paused: time moves only when a test says so
   await go("tools/countdown-timer/");
   await expect(page.locator("#ct-start")).toBeVisible();
+  await expect(panel(page)).toHaveAttribute("data-ready", "true"); // the script has run
 }
 async function setTime(page, { hours = "", minutes = "", seconds = "" }) {
   await page.locator("#ct-hours").fill(String(hours));
@@ -83,6 +85,7 @@ test.describe("Countdown Timer", () => {
     await expect(page.locator("#ct-status")).toHaveText("Timer complete");
     expect(await buttonsShown(page)).toEqual(["Restart", "Reset"]);
     await expect(page).toHaveTitle(title); // the original title is back
+    await page.clock.runFor(100); // fires the 50 ms announcement timer
     await expect(page.locator("#ct-live")).toHaveText("Timer complete.");
     await page.clock.runFor(20_000); // it stays at zero: never negative
     await expect(display(page)).toHaveText("00:00");
@@ -210,14 +213,19 @@ test.describe("Countdown Timer", () => {
     await expect(page.locator("#ct-live")).toHaveAttribute("aria-live", "polite");
     await setTime(page, { seconds: 20 });
     await btn(page, "Start").click();
+    await page.clock.runFor(100); // fires the 50 ms announcement timer
     await expect(page.locator("#ct-live")).toHaveText("Timer started for 20 seconds.");
     await page.clock.runFor(5000);
+    await page.clock.runFor(100); // fires the 50 ms announcement timer
     await expect(page.locator("#ct-live")).toHaveText("Timer started for 20 seconds."); // five ticks later: unchanged
     await btn(page, "Pause").click();
+    await page.clock.runFor(100); // fires the 50 ms announcement timer
     await expect(page.locator("#ct-live")).toHaveText("Timer paused at 00:15.");
     await btn(page, "Resume").click();
+    await page.clock.runFor(100); // fires the 50 ms announcement timer
     await expect(page.locator("#ct-live")).toHaveText("Timer resumed.");
     await btn(page, "Reset").click();
+    await page.clock.runFor(100); // fires the 50 ms announcement timer
     await expect(page.locator("#ct-live")).toHaveText("Timer reset.");
   });
 

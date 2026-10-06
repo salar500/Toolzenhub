@@ -90,7 +90,7 @@ section.categories-page.directory-page
           h2#directory-time-tools-heading.directory-section__title
             a [href="{ROOT}time-tools.html"] "Time Tools"
           p.directory-section__text "Practical date and time utilities."
-            span.directory-section__count "3 tools"
+            span.directory-section__count "4 tools"
         div.directory-groups
           article.directory-group
             h3.directory-group__title
@@ -104,3 +104,7 @@ section.categories-page.directory-page
             h3.directory-group__title
               a [href="{ROOT}tools/countdown-timer/"] "Countdown Timer"
             p.directory-group__text "Set a time and count down to zero, with pause and resume, a large display and the time lef…"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/stopwatch/"] "Stopwatch"
+            p.directory-group__text "Measure elapsed time from zero with start, pause, resume and laps, showing each lap time, …"

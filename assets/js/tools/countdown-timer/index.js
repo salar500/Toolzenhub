@@ -74,6 +74,9 @@ const ERROR_ID = "ct-error";
 
 const TICK_MS = 250;
 
+const STOPWATCH =
+    getToolById("stopwatch");
+
 
 /* =========================================================
    MARKUP
@@ -403,8 +406,9 @@ export function markup() {
                 </ul>
 
                 <p>
-                    The longest time is 24 hours. To find the days between two
-                    dates, use the Date Difference Calculator instead.
+                    The longest time is 24 hours. To measure time that counts
+                    up from zero, with laps, use the
+                    <a href="${STOPWATCH.href}">${escapeHTML(STOPWATCH.title)}</a>.
                 </p>
 
             </section>
@@ -972,5 +976,8 @@ export function init() {
     window.addEventListener("pageshow", update);
 
     paint();
+
+    /* the page's script has run and the buttons work (tests wait for this) */
+    panel.dataset.ready = "true";
 
 }

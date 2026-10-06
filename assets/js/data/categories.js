@@ -62,9 +62,9 @@ export const sections = [
         description:
             "Practical date and time utilities.",
         seoDescription:
-            "Time Tools from ToolZen Hub: date utilities such as the days between two dates, and a countdown timer.",
+            "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer and a stopwatch.",
         summary:
-            "Date tools and a countdown timer",
+            "Date tools, a countdown timer and a stopwatch",
         icon: "📅",
         landing: "timeTools",
         pathPrefix: "tools"

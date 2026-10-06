@@ -352,19 +352,19 @@
     "deadFragments": []
   },
   "time-tools.html": {
-    "internal": 27,
+    "internal": 28,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 45,
+    "internal": 46,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "tools/countdown-timer/": {
-    "internal": 23,
+    "internal": 24,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -376,6 +376,12 @@
     "deadFragments": []
   },
   "tools/date-difference/": {
+    "internal": 24,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/stopwatch/": {
     "internal": 24,
     "external": [],
     "placeholders": 4,
