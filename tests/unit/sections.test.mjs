@@ -175,11 +175,12 @@ describe("routing: every registered tool keeps its URL", () => {
   });
 
   test("the calculator loader registry is unchanged: loaders only for the published tools, still lazy", () => {
-    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip"]);
+    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "countdown-timer", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip"]);
     for (const loader of Object.values(registry.calculatorRegistry)) assert.equal(typeof loader, "function");
     assert.deepEqual(registry.calculatorMetadata.emi, { section: "Calculators", category: "loans", title: "EMI Calculator" });
     assert.deepEqual(registry.calculatorMetadata["date-difference"], { section: "Time Tools", title: "Date Difference Calculator" });
     assert.deepEqual(registry.calculatorMetadata["date-calculator"], { section: "Time Tools", title: "Date Calculator" });
+    assert.deepEqual(registry.calculatorMetadata["countdown-timer"], { section: "Time Tools", title: "Countdown Timer" });
   });
 });
 

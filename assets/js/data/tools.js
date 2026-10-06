@@ -774,6 +774,40 @@ const catalog = [
             description:
                 "Add or subtract days, weeks, months and years from a date and see the resulting date and weekday. Calendar dates only: month ends and leap years are handled, weekends, business days and holidays are not."
         }
+    },
+
+    {
+        id: "countdown-timer",
+        status: "published",
+        loader: () =>
+            import("../tools/countdown-timer/index.js"),
+        sectionId: "time-tools",
+        icon: "◔",
+        title: "Countdown Timer",
+        description:
+            "Set a time and count down to zero, with pause and resume, a large display and the time left in the browser tab.",
+        aliases: [
+            "online timer",
+            "timer",
+            "minute timer",
+            "study timer",
+            "focus timer"
+        ],
+        capabilities: {
+            reset: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: false,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Countdown Timer: Online Timer for Any Time up to 24 Hours | ToolZen Hub",
+            description:
+                "Set hours, minutes and seconds and count down to zero, with pause, resume, presets and the time left in the tab title. It runs in your browser and keeps correct time in a background tab; it does not alert you if the page is closed."
+        }
     }
 
 ];

@@ -1,0 +1,305 @@
+/* =========================================================
+   ToolZen Hub
+   Countdown Timer
+
+   Only what the shared tool styles do not already provide: the
+   three time fields, the presets, the large display and the
+   state-aware buttons. Buttons, focus, fields and headings come
+   from the shared layer. Loaded after calculator-responsive.css.
+
+   Every state is told in words as well as by colour (Running,
+   Paused, Timer complete). Nothing moves, so there is no motion
+   to reduce.
+========================================================= */
+
+.ct-panel [hidden] {
+
+    display: none !important;
+
+}
+
+.ct-time {
+
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+
+}
+
+.ct-time legend {
+
+    padding: 0;
+
+}
+
+/* hours, minutes, seconds: always one row, each a comfortable tap target */
+
+.ct-fields {
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+
+}
+
+.ct-input {
+
+    min-height: 56px;
+
+    font-size: 22px;
+    font-weight: 650;
+    text-align: center;
+
+    font-variant-numeric: tabular-nums;
+
+}
+
+.ct-error {
+
+    margin: 12px 0 0;
+    padding: 10px 14px;
+
+    border: 1px solid #f04438;
+    border-radius: 10px;
+
+    background: #fef3f2;
+
+    color: #912018;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+
+}
+
+/* presets: quick starting points, never the only way in */
+
+.ct-presets {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 16px;
+
+}
+
+.ct-preset {
+
+    flex: 1 1 88px;
+
+    min-height: 44px;
+
+    padding: 8px 12px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: var(--color-white);
+
+    color: #344054;
+
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+.ct-preset:hover {
+
+    background: #f2f4f7;
+
+}
+
+.ct-preset[aria-pressed="true"] {
+
+    border: 2px solid var(--color-brand-green);
+
+    background: #ecfdf3;
+
+    color: var(--color-ink);
+
+}
+
+.ct-preset[aria-pressed="true"]::before {
+
+    content: "✓ ";
+    content: "✓ " / "";
+
+}
+
+.ct-preset:focus-visible {
+
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+/* the time left is the focal point */
+
+.ct-stage {
+
+    padding: 12px 0 4px;
+
+    text-align: center;
+
+}
+
+.ct-display {
+
+    color: var(--color-ink);
+
+    font-size: clamp(56px, 20vw, 128px);
+    font-weight: 750;
+    line-height: 1.05;
+    letter-spacing: 0;
+
+    font-variant-numeric: tabular-nums;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ct-status {
+
+    margin: 8px 0 0;
+
+    color: #475467;
+
+    font-size: 16px;
+    font-weight: 600;
+
+}
+
+.ct-panel[data-state="paused"] .ct-display {
+
+    color: var(--color-ink-muted);
+
+}
+
+.ct-panel[data-state="finished"] .ct-status {
+
+    color: #067647;
+
+    font-size: 20px;
+    font-weight: 750;
+
+}
+
+.ct-panel[data-state="finished"] .ct-status::before {
+
+    content: "✓ ";
+
+}
+
+/* buttons: only the ones that apply are shown, all clearly active */
+
+.ct-actions {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin-top: 20px;
+
+}
+
+.ct-panel[data-state="running"] .ct-actions,
+.ct-panel[data-state="paused"] .ct-actions,
+.ct-panel[data-state="finished"] .ct-actions {
+
+    justify-content: center;
+
+}
+
+.ct-button {
+
+    flex: 1 1 140px;
+
+    min-height: 56px;
+
+    font-size: 18px;
+
+}
+
+#ct-start {
+
+    flex-basis: 100%;
+
+}
+
+.ct-sound {
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-top: 18px;
+
+    color: #475467;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+}
+
+.ct-sound input {
+
+    width: 20px;
+    height: 20px;
+
+    margin: 0;
+
+    accent-color: var(--color-brand-green);
+
+}
+
+@media (max-width: 480px) {
+
+    .ct-fields {
+
+        gap: 8px;
+
+    }
+
+    .ct-input {
+
+        padding-right: 6px;
+        padding-left: 6px;
+
+    }
+
+    .ct-button {
+
+        flex-basis: 100%;
+
+    }
+
+}
+
+.ct-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}

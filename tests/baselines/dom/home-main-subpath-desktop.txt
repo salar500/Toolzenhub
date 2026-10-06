@@ -38,7 +38,7 @@ main#app
             div.category-card__icon.category-card__icon--time-tools "📅"
             div.category-card__content
               h3 "Time Tools"
-              p "Work out the time between two dates"
+              p "Date tools and a countdown timer"
   section#popular-calculators.section
     section.popular-section
       div.container
@@ -77,11 +77,11 @@ main#app
               h3 "Home Loan Calculator"
               p "Find the loan that fits your EMI budget"
             span.calculator-card__arrow [aria-hidden="true"] "→"
-          a.calculator-card [href="{ROOT}tools/date-difference/"]
-            div.calculator-card__icon.calculator-card__icon--blue "◷"
+          a.calculator-card [href="{ROOT}tools/countdown-timer/"]
+            div.calculator-card__icon.calculator-card__icon--blue "◔"
             div.calculator-card__content
-              h3 "Date Difference Calculator"
-              p "Count the days between two dates"
+              h3 "Countdown Timer"
+              p "Count down any time, with pause and resume"
             span.calculator-card__arrow [aria-hidden="true"] "→"
   section#latest-articles.section
     section.articles-section

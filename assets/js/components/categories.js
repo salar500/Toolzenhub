@@ -46,7 +46,7 @@ const FEATURED_TOOLS = [
     { id: "margin", title: "Margin Calculator", blurb: "Set a price from a target margin", icon: "%", color: "green" },
     { id: "percentage", title: "Percentage Calculator", blurb: "Find a change, the start or the end value", icon: "±", color: "teal" },
     { id: "home-loan", title: "Home Loan Calculator", blurb: "Find the loan that fits your EMI budget", icon: "⌂", color: "pink" },
-    { id: "date-difference", title: "Date Difference Calculator", blurb: "Count the days between two dates", icon: "◷", color: "blue" }
+    { id: "countdown-timer", title: "Countdown Timer", blurb: "Count down any time, with pause and resume", icon: "◔", color: "blue" }
 ];
 
 

@@ -59,8 +59,10 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.deepEqual(toolIds(rel.getRelatedTools("percentage")), ["gst", "margin"]);
     assert.equal(toolIds(rel.getRelatedTools("gst")).includes("percentage"), false);
     // the two Time Tools relate to each other (they are the only tools directly under that section); neither is a calculator
-    assert.deepEqual(toolIds(rel.getRelatedTools("date-difference")), ["date-calculator"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("date-calculator")), ["date-difference"]);
+    // (the Countdown Timer is also in that section; its page, like the date tools' pages, opts out of the related sections)
+    assert.deepEqual(toolIds(rel.getRelatedTools("date-difference")), ["date-calculator", "countdown-timer"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("date-calculator")), ["date-difference", "countdown-timer"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("countdown-timer")), ["date-difference", "date-calculator"]);
     assert.equal(toolIds(rel.getRelatedTools("margin")).includes("percentage"), false);
     assert.equal(toolIds(rel.getRelatedTools("profit")).includes("percentage"), false);
     assert.deepEqual(keys(rel.getRelatedArticlesForTool("percentage")), calcs.getCalculatorById("percentage").relatedArticles);
@@ -68,7 +70,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.deepEqual(toolIds(rel.getRelatedTools("profit")), ["margin"]);
     assert.deepEqual(rel.getRelatedTools("nope"), []);
     // parity with the pre-M7 rule for every tool without a curated list (the Loan Prepayment page curates its own order; GST and Percentage curate cross-category lists)
-    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
+    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
   });
 
   test("tool -> related articles: the first six published loan articles, in catalog order, for EMI and Loan Comparison", () => {

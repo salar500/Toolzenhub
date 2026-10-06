@@ -3604,11 +3604,11 @@
   "/time-tools.html": {
     "runtime": {
       "title": "Time Tools | ToolZen Hub",
-      "description": "Time Tools from ToolZen Hub: practical date utilities, such as the number of days between two dates.",
+      "description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, and a countdown timer.",
       "canonical": "https://toolzenhub.in/time-tools.html",
       "robots": null,
       "openGraph": {
-        "og:description": "Time Tools from ToolZen Hub: practical date utilities, such as the number of days between two dates.",
+        "og:description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, and a countdown timer.",
         "og:site_name": "ToolZen Hub",
         "og:title": "Time Tools | ToolZen Hub",
         "og:type": "website",
@@ -3616,7 +3616,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Time Tools from ToolZen Hub: practical date utilities, such as the number of days between two dates.",
+        "twitter:description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, and a countdown timer.",
         "twitter:title": "Time Tools | ToolZen Hub"
       },
       "jsonLd": [
@@ -3640,14 +3640,14 @@
     },
     "rawHtml": {
       "title": "Time Tools | ToolZen Hub",
-      "description": "Time Tools from ToolZen Hub: practical date utilities, such as the number of days between two dates.",
+      "description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, and a countdown timer.",
       "canonical": "https://toolzenhub.in/time-tools.html",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 748
+      "visibleTextChars": 880
     }
   },
   "/tools.html": {
@@ -3696,7 +3696,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1566
+      "visibleTextChars": 1694
+    }
+  },
+  "/tools/countdown-timer/": {
+    "runtime": {
+      "title": "Countdown Timer: Online Timer for Any Time up to 24 Hours | ToolZen Hub",
+      "description": "Set hours, minutes and seconds and count down to zero, with pause, resume, presets and the time left in the tab title. It runs in your browser and keeps correct time in a background tab; it does not alert you if the page is closed.",
+      "canonical": "https://toolzenhub.in/tools/countdown-timer/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Set hours, minutes and seconds and count down to zero, with pause, resume, presets and the time left in the tab title. It runs in your browser and keeps correct time in a background tab; it does not alert you if the page is closed.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Countdown Timer: Online Timer for Any Time up to 24 Hours | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/countdown-timer/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Set hours, minutes and seconds and count down to zero, with pause, resume, presets and the time left in the tab title. It runs in your browser and keeps correct time in a background tab; it does not alert you if the page is closed.",
+        "twitter:title": "Countdown Timer: Online Timer for Any Time up to 24 Hours | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Countdown Timer"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Countdown Timer: Online Timer for Any Time up to 24 Hours | ToolZen Hub",
+      "description": "Set hours, minutes and seconds and count down to zero, with pause, resume, presets and the time left in the tab title. It runs in your browser and keeps correct time in a background tab; it does not alert you if the page is closed.",
+      "canonical": "https://toolzenhub.in/tools/countdown-timer/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3076
     }
   },
   "/tools/date-calculator/": {
