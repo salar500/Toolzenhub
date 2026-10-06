@@ -61,7 +61,7 @@ export function renderHero() {
 
                             Calculate loan payments, compare options,
                             plan investments and work through everyday
-                            GST, margin and percentage questions.
+                            date, GST, margin and percentage questions.
 
                         </p>
 

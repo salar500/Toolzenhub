@@ -82,6 +82,16 @@ export const ROUTES = {
 
 
     /* =====================================================
+       TIME TOOLS
+
+       The section's own page (it has no categories).
+    ===================================================== */
+
+    timeTools:
+        `${SITE_ROOT}time-tools.html`,
+
+
+    /* =====================================================
        CATEGORIES
 
        The Calculators section's own page: its categories.

@@ -28,6 +28,8 @@ import {
     getCategory,
     getCategoriesBySection,
     getToolsByCategory,
+    getToolsBySection,
+    getDirectToolsBySection,
     getCategoryUrl
 } from "../../data/taxonomy.js";
 
@@ -115,7 +117,69 @@ function searchForm() {
    section is added here by adding it to data/categories.js.
 ========================================================= */
 
+const hasLiveTools = (section) =>
+    getToolsBySection(section.id).some(tool => tool.available);
+
 function sectionBlock(section) {
+
+    return getCategoriesBySection(section.id).length > 0
+        ? categorySectionBlock(section)
+        : directSectionBlock(section);
+
+}
+
+/* a section whose tools sit directly under it (no categories), such as Time Tools */
+function directSectionBlock(section) {
+
+    const live =
+        getDirectToolsBySection(section.id).filter(tool => tool.available);
+
+    return `
+                <section
+                    class="directory-section"
+                    aria-labelledby="directory-${section.id}-heading"
+                >
+
+                    <div class="directory-section__header">
+
+                        <span class="directory-section__label">
+                            Section
+                        </span>
+
+                        <h2
+                            class="directory-section__title"
+                            id="directory-${section.id}-heading"
+                        >
+                            <a href="${ROUTES[section.landing]}">${escapeHTML(section.title)}</a>
+                        </h2>
+
+                        <p class="directory-section__text">
+                            ${escapeHTML(section.description)}
+                            <span class="directory-section__count">${live.length} ${live.length === 1 ? "tool" : "tools"}</span>
+                        </p>
+
+                    </div>
+
+                    <div class="directory-groups">
+                        ${live.map(tool => `
+                        <article class="directory-group">
+
+                            <h3 class="directory-group__title">
+                                <a href="${tool.href}">${escapeHTML(tool.title)}</a>
+                            </h3>
+
+                            <p class="directory-group__text">
+                                ${escapeHTML(tool.description)}
+                            </p>
+
+                        </article>`).join("")}
+                    </div>
+
+                </section>`;
+
+}
+
+function categorySectionBlock(section) {
 
     /* the categories with live tools are the section's content; those with none are listed apart, as coming soon */
     const all = getCategoriesBySection(section.id).filter(hasTools);
@@ -133,6 +197,13 @@ function sectionBlock(section) {
                 total + liveTools(category.id).length,
             0
         );
+
+    const more =
+        section.id === "calculators"
+            ? `<p class="directory-section__more">
+                        <a href="${ROUTES.calculators}">Browse all calculators →</a>
+                    </p>`
+            : "";
 
     return `
                 <section
@@ -164,9 +235,7 @@ function sectionBlock(section) {
                         ${categories.map(categoryGroup).join("")}
                     </div>
 
-                    <p class="directory-section__more">
-                        <a href="${ROUTES.calculators}">Browse all calculators →</a>
-                    </p>
+                    ${more}
 
                     ${soon.length > 0 ? soonBlock(section, soon) : ""}
 
@@ -253,7 +322,7 @@ export function allToolsHtml() {
                 ${searchForm()}
 
                 <div id="tools-directory">
-                    ${sections.map(sectionBlock).join("")}
+                    ${sections.filter(hasLiveTools).map(sectionBlock).join("")}
                 </div>
 
             </div>
@@ -339,6 +408,86 @@ export function categoryPageHtml(categoryId) {
 
                 <p class="directory-section__more">
                     <a href="${ROUTES.categories}">← All calculator categories</a>
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>`;
+
+}
+
+
+/* =========================================================
+   SECTION PAGE
+
+   A section without categories has a page of its own that lists
+   its tools directly (Time Tools). The Calculators section's page
+   is the categories page, written by hand.
+========================================================= */
+
+export function sectionPageIds() {
+
+    return sections
+        .filter(
+            section =>
+                getCategoriesBySection(section.id).length === 0 &&
+                section.seoDescription &&
+                getDirectToolsBySection(section.id).some(tool => tool.available)
+        )
+        .map(section => section.id);
+
+}
+
+export function sectionPageHtml(sectionId) {
+
+    const section =
+        sections.find(item => item.id === sectionId);
+
+    const tools =
+        getDirectToolsBySection(sectionId);
+
+    /* the card icon takes its colour from this stand-in for a category */
+    const look = {
+        iconClass: "time",
+        icon: section.icon
+    };
+
+    return `
+    <main id="app">
+
+        <section class="categories-page directory-page">
+
+            <div class="container">
+
+                ${renderBreadcrumb([
+                    { label: "All Tools", href: ROUTES.tools },
+                    { label: section.title }
+                ])}
+
+                <div class="categories-page__intro">
+
+                    <span class="categories-page__eyebrow">
+                        Section
+                    </span>
+
+                    <h1 class="categories-page__title">
+                        ${escapeHTML(section.title)}
+                    </h1>
+
+                    <p class="categories-page__description">
+                        ${escapeHTML(section.description)}
+                    </p>
+
+                </div>
+
+                <div class="categories-detail__grid directory-tools">
+                    ${tools.map(tool => toolCardHtml(tool, look)).join("")}
+                </div>
+
+                <p class="directory-section__more">
+                    <a href="${ROUTES.tools}">← All tools</a>
                 </p>
 
             </div>

@@ -57,7 +57,7 @@ import {
 
 import {
     categories,
-    getSectionForCategory
+    getSectionForTool
 } from "./categories.js";
 
 import {
@@ -708,6 +708,46 @@ const catalog = [
         title: "Date Calculator",
         description:
             "Calculate dates and date differences."
+    },
+
+
+    /* =====================================================
+       TIME TOOLS  (a section without categories: the tool
+       names its section directly)
+    ===================================================== */
+
+    {
+        id: "date-difference",
+        status: "published",
+        loader: () =>
+            import("../tools/date-difference/index.js"),
+        sectionId: "time-tools",
+        icon: "◷",
+        title: "Date Difference Calculator",
+        description:
+            "Find how many days are between two calendar dates, with the difference in years, months and days and in weeks and days.",
+        aliases: [
+            "days between dates",
+            "date duration",
+            "weeks between dates",
+            "how many days between dates",
+            "calendar difference"
+        ],
+        capabilities: {
+            reset: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Date Difference Calculator: Days Between Two Dates | ToolZen Hub",
+            description:
+                "Find the number of days between two dates, the difference in years, months and days, and in weeks. Calendar dates only: leap years and month lengths are handled, business days and holidays are not."
+        }
     }
 
 ];
@@ -737,9 +777,7 @@ export function getToolRoute(
 ) {
 
     const section =
-        getSectionForCategory(
-            tool?.category
-        );
+        getSectionForTool(tool);
 
     return ROUTES.tool(
         section.pathPrefix,
@@ -828,7 +866,32 @@ export function buildToolCatalog(
 
             }
 
-            if (
+            /*
+             * A tool sits under a category (Calculators) or directly under a
+             * section (`sectionId`, for a section without categories), not both.
+             */
+
+            if (entry.sectionId !== undefined) {
+
+                if (entry.category !== undefined) {
+
+                    fail(
+                        id,
+                        "names a category and a sectionId; use one"
+                    );
+
+                }
+
+                if (!getSectionForTool(entry)) {
+
+                    fail(
+                        id,
+                        `unknown sectionId ${JSON.stringify(entry.sectionId)}`
+                    );
+
+                }
+
+            } else if (
                 !categories.some(
                     category =>
                         category.id === entry.category
@@ -881,9 +944,7 @@ export function buildToolCatalog(
             }
 
             const section =
-                getSectionForCategory(
-                    entry.category
-                );
+                getSectionForTool(entry);
 
             if (!section) {
 
@@ -1007,7 +1068,9 @@ export function getToolMetadata(
 
     return {
         section: tool.section,
-        category: tool.category,
+        ...(tool.category
+            ? { category: tool.category }
+            : {}),
         ...(tool.subcategory
             ? { subcategory: tool.subcategory }
             : {}),

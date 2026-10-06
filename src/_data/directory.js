@@ -5,12 +5,12 @@
  *
  * `html` is the finished <main> content, produced by assets/js/pages/directory/directory-html.js.
  */
-import { allToolsHtml, categoryPageHtml, categoryPageIds } from "../../assets/js/pages/directory/directory-html.js";
+import { allToolsHtml, categoryPageHtml, categoryPageIds, sectionPageHtml, sectionPageIds } from "../../assets/js/pages/directory/directory-html.js";
 import { getCategory } from "../../assets/js/data/taxonomy.js";
 import { breadcrumbTrail } from "../../assets/js/components/breadcrumb.js";
 import { sections } from "../../assets/js/data/categories.js";
 import { ROUTES } from "../../assets/js/routes.js";
-import { breadcrumbLd } from "../_lib/seo.js";
+import { breadcrumbLd, sitePath } from "../_lib/seo.js";
 
 export default function () {
   const categoryPages = categoryPageIds().map((id) => {
@@ -35,6 +35,19 @@ export default function () {
     };
   });
 
+  const sectionPages = sectionPageIds().map((id) => {
+    const section = sections.find((s) => s.id === id);
+    const permalink = sitePath(ROUTES[section.landing]);
+    return {
+      id,
+      permalink,
+      title: `${section.title} | ToolZen Hub`,
+      description: section.seoDescription,
+      html: sectionPageHtml(id),
+      jsonld: [breadcrumbLd(breadcrumbTrail([{ label: "All Tools", href: ROUTES.tools }, { label: section.title }]), permalink)],
+    };
+  });
+
   const allTools = {
     title: "All Tools | ToolZen Hub",
     description:
@@ -45,5 +58,5 @@ export default function () {
     ],
   };
 
-  return { allTools, categoryPages };
+  return { allTools, categoryPages, sectionPages };
 }

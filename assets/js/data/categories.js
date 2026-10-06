@@ -29,6 +29,8 @@
    id           stable identifier (categories refer to it)
    title        label shown to visitors
    landing      ROUTES key of the section's own page
+   summary      one line for the Home "Explore Tools" card
+   icon         the card's symbol
    pathPrefix   first URL segment of the section's tool pages:
                 /{pathPrefix}/{tool id}/  ("calculators" keeps
                 every existing tool URL as it is)
@@ -41,8 +43,31 @@ export const sections = [
         title: "Calculators",
         description:
             "Calculators for loans, investment, tax, business and math.",
+        summary:
+            "Loans, investment, business, tax and math calculators",
+        icon: "🧮",
         landing: "calculatorCategories",
         pathPrefix: "calculators"
+    },
+
+    /*
+     * Time Tools has no categories: its tools sit directly under the
+     * section (a tool names `sectionId: "time-tools"` instead of a
+     * category). Subcategories come only when several live tools make
+     * grouping help.
+     */
+    {
+        id: "time-tools",
+        title: "Time Tools",
+        description:
+            "Practical date and time utilities.",
+        seoDescription:
+            "Time Tools from ToolZen Hub: practical date utilities, such as the number of days between two dates.",
+        summary:
+            "Work out the time between two dates",
+        icon: "📅",
+        landing: "timeTools",
+        pathPrefix: "tools"
     }
 
 ];
@@ -191,6 +216,23 @@ export function getSectionById(
         section =>
             section.id === id
     );
+
+}
+
+
+/*
+ * A tool's section: the one its category belongs to, or, for a tool that
+ * sits directly under a section (no category), the one it names with
+ * `sectionId`.
+ */
+
+export function getSectionForTool(
+    tool
+) {
+
+    return tool?.sectionId
+        ? getSectionById(tool.sectionId)
+        : getSectionForCategory(tool?.category);
 
 }
 

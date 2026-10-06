@@ -78,7 +78,7 @@ describe("generic helpers", () => {
     for (const t of cat.getTools()) {
       assert.equal(cat.getToolRoute(t), t.href, t.id);
       assert.equal(t.href, `${ROOT}${tax.getSectionForTool(t).pathPrefix}/${t.id}/`, t.id);
-      assert.equal(t.sitePath, `/calculators/${t.id}/`, t.id);
+      assert.equal(t.sitePath, `/${tax.getSectionForTool(t).pathPrefix}/${t.id}/`, t.id);
     }
   });
 
@@ -255,7 +255,7 @@ describe("everything else derives from the catalog", () => {
     const file = path.join(PROJECT, "dist", "sitemap.xml");
     if (!fs.existsSync(file)) return t.skip("dist/ not built");
     const locs = [...fs.readFileSync(file, "utf8").matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-    const toolLocs = locs.filter((l) => l.startsWith("https://toolzenhub.in/calculators/")).sort();
+    const toolLocs = locs.filter((l) => /^https:\/\/toolzenhub\.in\/(calculators|tools)\/./.test(l)).sort();
     assert.deepEqual(toolLocs, cat.getPublishedTools().map((tool) => `https://toolzenhub.in${tool.sitePath}`).sort());
   });
 });

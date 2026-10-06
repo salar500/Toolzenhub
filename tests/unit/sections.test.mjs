@@ -24,11 +24,12 @@ const inventory = JSON.parse(fs.readFileSync(path.join(PROJECT, "tests", "invent
 const CATEGORY_IDS = ["loans", "investment", "tax", "health", "business", "math", "converter", "more"];
 const PUBLISHED_URLS = ["/calculators/balance-transfer/", "/calculators/cagr/", "/calculators/emi/", "/calculators/fd/", "/calculators/gst/", "/calculators/home-loan/", "/calculators/loan-comparison/", "/calculators/margin/", "/calculators/percentage/", "/calculators/prepayment/", "/calculators/profit/", "/calculators/sip/"];
 
-let cats, tax, calcs, routes, registry, idx, search;
+let cats, tax, calcs, routes, registry, idx, search, tools;
 before(async () => {
   cats = await import("../../assets/js/data/categories.js");
   tax = await import("../../assets/js/data/taxonomy.js");
   calcs = await import("../../assets/js/data/calculators.js");
+  tools = await import("../../assets/js/data/tools.js");
   routes = await import("../../assets/js/routes.js");
   registry = await import("../../assets/js/calculator-registry.js");
   idx = await import("../../assets/js/data/search-index.js");
@@ -36,12 +37,17 @@ before(async () => {
 });
 
 describe("section model", () => {
-  test("Calculators is the one active section, with a stable id, its landing page and its path prefix", () => {
-    assert.deepEqual(tax.getSections().map((s) => s.id), ["calculators"]);
+  test("two sections, each with a stable id, its landing page and its path prefix: Calculators and Time Tools", () => {
+    assert.deepEqual(tax.getSections().map((s) => s.id), ["calculators", "time-tools"]);
     const section = tax.getSectionById("calculators");
     assert.equal(section.title, "Calculators");
     assert.equal(section.landing, "calculatorCategories");
     assert.equal(section.pathPrefix, "calculators");
+    const time = tax.getSectionById("time-tools");
+    assert.equal(time.title, "Time Tools");
+    assert.equal(time.landing, "timeTools");
+    assert.equal(time.pathPrefix, "tools"); // /tools/<id>/, so /calculators/<id>/ is never used by a non-calculator
+    assert.deepEqual(tax.getCategoriesBySection("time-tools"), []); // no categories: its tools sit directly under it
   });
 
   test("section ids are unique and every section names a landing page that exists in ROUTES", () => {
@@ -169,9 +175,10 @@ describe("routing: every registered tool keeps its URL", () => {
   });
 
   test("the calculator loader registry is unchanged: loaders only for the published tools, still lazy", () => {
-    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "emi", "fd", "gst", "home-loan", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip"]);
+    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "date-difference", "emi", "fd", "gst", "home-loan", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip"]);
     for (const loader of Object.values(registry.calculatorRegistry)) assert.equal(typeof loader, "function");
     assert.deepEqual(registry.calculatorMetadata.emi, { section: "Calculators", category: "loans", title: "EMI Calculator" });
+    assert.deepEqual(registry.calculatorMetadata["date-difference"], { section: "Time Tools", title: "Date Difference Calculator" });
   });
 });
 
@@ -199,7 +206,7 @@ describe("optional subcategory", () => {
 describe("search derives the section from the data", () => {
   test("every index entry carries its section, taken from its category", () => {
     for (const e of idx.searchIndex) {
-      const section = tax.getSectionForCategory(e.category);
+      const section = e.type === "tool" ? tax.getSectionForTool(tools.getToolById(e.id)) : tax.getSectionForCategory(e.category);
       assert.equal(e.section, section?.id ?? null, e.key);
       assert.equal(e.sectionTitle, section?.title ?? "", e.key);
     }

@@ -137,11 +137,11 @@
     min-width: 0;
 }
 
-/* a single major section: one card at a readable width, at every screen size */
+/* the major sections: cards at a readable width instead of an eighth of the row */
 
-.category-grid.category-grid--single {
+.category-grid.category-grid--sections {
     grid-template-columns:
-        minmax(0, 340px);
+        repeat(auto-fill, minmax(min(100%, 260px), 340px));
 }
 
 

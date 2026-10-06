@@ -185,7 +185,7 @@ for (const c of calcMod.tools) {
   const built = c.status === "published";
   if (!["published", "coming-soon"].includes(c.status)) fail("registry", `calculator "${c.id}": status must be "published" or "coming-soon" (got ${JSON.stringify(c.status)})`);
   if (c.available !== built) fail("registry", `calculator "${c.id}": available (${c.available}) disagrees with status "${c.status}"`);
-  const route = rootRoutes.calculator(c.id);
+  const route = c.sitePath || rootRoutes.calculator(c.id); // a tool's page lives under its section's prefix (/calculators/..., /tools/...)
   const shell = checkUrlPath(route.slice(1));
   const loaderMatch = String(c.loader ?? "").match(/import\(\s*"([^"]+)"/); // the loader is part of the catalog entry (E3)
   routeChecks++;

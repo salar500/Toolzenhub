@@ -12,6 +12,14 @@ import {
     getToolById
 } from "../data/tools.js";
 
+import {
+    sections
+} from "../data/categories.js";
+
+import {
+    getToolsBySection
+} from "../data/taxonomy.js";
+
 
 /* =========================================================
    FEATURED TOOLS (home page presentation)
@@ -33,12 +41,12 @@ import {
 ========================================================= */
 
 const FEATURED_TOOLS = [
-    { id: "emi", title: "EMI Calculator", blurb: "Calculate your EMI instantly", icon: "▣", color: "blue" },
     { id: "sip", title: "SIP Calculator", blurb: "Plan your SIP investments", icon: "♜", color: "yellow" },
     { id: "gst", title: "GST Calculator", blurb: "Add or remove GST on an invoice", icon: "▤", color: "purple" },
     { id: "margin", title: "Margin Calculator", blurb: "Set a price from a target margin", icon: "%", color: "green" },
     { id: "percentage", title: "Percentage Calculator", blurb: "Find a change, the start or the end value", icon: "±", color: "teal" },
-    { id: "home-loan", title: "Home Loan Calculator", blurb: "Find the loan that fits your EMI budget", icon: "⌂", color: "pink" }
+    { id: "home-loan", title: "Home Loan Calculator", blurb: "Find the loan that fits your EMI budget", icon: "⌂", color: "pink" },
+    { id: "date-difference", title: "Date Difference Calculator", blurb: "Count the days between two dates", icon: "◷", color: "blue" }
 ];
 
 
@@ -86,6 +94,38 @@ function renderPopularCard(card) {
 }
 
 
+const hasLiveTool = (section) =>
+    getToolsBySection(section.id).some(tool => tool.available);
+
+function renderSectionCard(section) {
+
+    return `
+                    <a
+                        href="${ROUTES[section.landing]}"
+                        class="category-card"
+                    >
+
+                        <div class="category-card__icon category-card__icon--${section.id}">
+                            ${section.icon}
+                        </div>
+
+                        <div class="category-card__content">
+
+                            <h3>
+                                ${section.title}
+                            </h3>
+
+                            <p>
+                                ${section.summary}
+                            </p>
+
+                        </div>
+
+                    </a>`;
+
+}
+
+
 export function renderCategories() {
 
     const categories = document.getElementById("categories");
@@ -116,35 +156,10 @@ export function renderCategories() {
                 </div>
 
 
-                <!-- one major section today, so one card; the modifier lets it be a readable width instead of an eighth of the row (drop it when a second section exists) -->
-                <div class="category-grid category-grid--single">
+                <!-- one card per major section that has a live tool (data/categories.js); a section with none is not shown -->
+                <div class="category-grid category-grid--sections">
 
-
-                    <!-- Calculators -->
-
-                    <a
-                        href="${ROUTES.calculatorCategories}"
-                        class="category-card"
-                    >
-
-                        <div class="category-card__icon category-card__icon--calculators">
-                            🧮
-                        </div>
-
-                        <div class="category-card__content">
-
-                            <h3>
-                                Calculators
-                            </h3>
-
-                            <p>
-                                Loans, investment, business,
-                                tax and math calculators
-                            </p>
-
-                        </div>
-
-                    </a>
+                    ${sections.filter(hasLiveTool).map(renderSectionCard).join("")}
 
                 </div>
 

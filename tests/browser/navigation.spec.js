@@ -16,18 +16,20 @@ test.describe("home page", () => {
   test("hero, category card, featured tools, latest articles", async ({ page, go, watch, siteRoot }) => {
     await go("");
     await expect(page.locator("h1.hero__title")).toContainText("Practical tools");
-    // one major section today (Calculators): one card, and no "More" card that opens nothing of its own
-    await expect(page.locator("#categories .category-card")).toHaveCount(1);
-    await expect(page.locator("#categories .category-card")).toContainText("Calculators");
+    // two major sections with a live tool (Calculators, Time Tools): one card each, and no "More" card that opens nothing of its own
+    await expect(page.locator("#categories .category-card")).toHaveCount(2);
+    await expect(page.locator("#categories .category-card").nth(0)).toContainText("Calculators");
+    await expect(page.locator("#categories .category-card").nth(1)).toContainText("Time Tools");
     await expect(page.locator("#categories")).not.toContainText("More");
-    await expect(page.locator("#categories .category-card")).toHaveAttribute("href", `${siteRoot}categories.html`);
+    await expect(page.locator("#categories .category-card").nth(0)).toHaveAttribute("href", `${siteRoot}categories.html`);
+    await expect(page.locator("#categories .category-card").nth(1)).toHaveAttribute("href", `${siteRoot}time-tools.html`);
     // Featured Tools: a short curated list of live tools (no usage data, so it is not called "popular"), all links
     await expect(page.getByRole("heading", { name: "Featured Tools" })).toBeVisible();
     await expect(page.locator("#popular-calculators").getByRole("heading", { name: "Popular Calculators" })).toHaveCount(0);
     await expect(page.locator("#popular-calculators .calculator-card")).toHaveCount(6);
     await expect(page.locator("#popular-calculators a.calculator-card")).toHaveCount(6);
     await expect(page.locator("#popular-calculators .calculator-card--soon")).toHaveCount(0);
-    await expect(page.locator("#popular-calculators a.calculator-card").first()).toHaveAttribute("href", `${siteRoot}calculators/emi/`);
+    await expect(page.locator("#popular-calculators a.calculator-card").first()).toHaveAttribute("href", `${siteRoot}calculators/sip/`);
     // the Home discovery actions each have one clear role: the section card opens the Calculators section, the hero search and
     // "View all tools" open All Tools; there is no second "view all" that says the same thing
     await expect(page.locator("#categories .section-title")).toHaveText("Explore Tools");
@@ -36,7 +38,7 @@ test.describe("home page", () => {
     await expect(page.locator("#popular-calculators .section-link")).toContainText("View all tools");
     await expect(page.locator(".section-link", { hasText: /view all (categories|calculators)/i })).toHaveCount(0);
     // Featured Tools is curated: one or two live tools from each live category, in a fixed order, and says nothing about popularity
-    expect(await page.locator("#popular-calculators a.calculator-card").evaluateAll((l) => l.map((x) => x.getAttribute("href")))).toEqual(["emi", "sip", "gst", "margin", "percentage", "home-loan"].map((id) => `${siteRoot}calculators/${id}/`));
+    expect(await page.locator("#popular-calculators a.calculator-card").evaluateAll((l) => l.map((x) => x.getAttribute("href")))).toEqual([...["sip", "gst", "margin", "percentage", "home-loan"].map((id) => `${siteRoot}calculators/${id}/`), `${siteRoot}tools/date-difference/`]);
     await expect(page.locator("#popular-calculators")).not.toContainText(/popular|trending|most (used|searched)/i);
     // latest articles: the first three published, linking into /articles/…
     const latest = page.locator("#latest-articles a.article-card");
@@ -330,9 +332,9 @@ test.describe("calculator catalog drives tool identity (M1)", () => {
     await go("");
     const links = page.locator("#popular-calculators a.calculator-card");
     await expect(links).toHaveCount(6);
-    const expected = [["emi", "EMI Calculator"], ["sip", "SIP Calculator"], ["gst", "GST Calculator"], ["margin", "Margin Calculator"], ["percentage", "Percentage Calculator"], ["home-loan", "Home Loan Calculator"]];
+    const expected = [["calculators/sip", "SIP Calculator"], ["calculators/gst", "GST Calculator"], ["calculators/margin", "Margin Calculator"], ["calculators/percentage", "Percentage Calculator"], ["calculators/home-loan", "Home Loan Calculator"], ["tools/date-difference", "Date Difference Calculator"]];
     for (const [i, [slug, title]] of expected.entries()) {
-      await expect(links.nth(i)).toHaveAttribute("href", `${siteRoot}calculators/${slug}/`);
+      await expect(links.nth(i)).toHaveAttribute("href", `${siteRoot}${slug}/`);
       await expect(links.nth(i)).toContainText(title);
       await expect(links.nth(i).locator(".coming-soon-badge")).toHaveCount(0);
       await expect(page.locator(`#popular-calculators .calculator-card:has-text('${title}')`)).toHaveCount(1);
@@ -461,7 +463,7 @@ test.describe("All Tools and the calculator hierarchy", () => {
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html`);
     await expect(page.locator("h1")).toHaveText("All Tools");
     await expect(page.locator(".navbar__menu .navbar__link.active, .mobile-navigation__link.active").first()).toBeAttached();
-    await page.locator(".directory-section__title a").click();
+    await page.locator(".directory-section__title a").first().click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}categories.html`);
     await page.locator('#categories-grid a[href$="/investment.html"]').click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}investment.html`);
@@ -472,23 +474,25 @@ test.describe("All Tools and the calculator hierarchy", () => {
     expect(await page.locator(".calculator-breadcrumb a").evaluateAll((l) => l.map((x) => x.getAttribute("href")))).toEqual([siteRoot, `${siteRoot}categories.html`, `${siteRoot}investment.html`]);
   });
 
-  test("the All Tools page: one section today (Calculators), live tools as links, Health and Converter plain text with a Coming soon badge", async ({ page, go, siteRoot, watch }) => {
+  test("the All Tools page: two sections (Calculators, Time Tools), live tools as links, Health and Converter plain text with a Coming soon badge", async ({ page, go, siteRoot, watch }) => {
     await go("tools.html");
     await expect(page.locator("h1")).toHaveText("All Tools");
     await expect(page).toHaveTitle("All Tools | ToolZen Hub");
     await expect(page.locator(".calculator-breadcrumb")).toContainText("All Tools");
-    await expect(page.locator(".directory-section")).toHaveCount(1);
+    await expect(page.locator(".directory-section")).toHaveCount(2);
     await expect(page.getByRole("heading", { name: "Calculators", level: 2 })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Time Tools", level: 2 })).toBeVisible();
+    await expect(page.locator('.directory-section a[href$="tools/date-difference/"]')).toHaveCount(1);
     const live = await page.locator(".directory-group a").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
     for (const r of ["loans.html", "investment.html", "tax.html", "business.html", "math.html", "calculators/emi/", "calculators/sip/", "calculators/fd/", "calculators/cagr/", "calculators/margin/", "calculators/profit/", "calculators/gst/", "calculators/percentage/"]) expect(live).toContain(siteRoot + r);
     for (const bad of ["categories.html#health", "categories.html#converter", "calculators/ppf/", "calculators/income-tax/", "calculators/roi/"]) expect(live.some((h) => h.includes(bad)), bad).toBe(false);
-    await expect(page.locator(".directory-group")).toHaveCount(5); // the live categories only
+    await expect(page.locator(".directory-group")).toHaveCount(6); // the five live calculator categories and the one Time Tools tool
     await expect(page.locator(".directory-soon__list li")).toHaveText([/Health\s*Coming soon/, /Converter\s*Coming soon/]);
     await expect(page.locator(".directory-soon .coming-soon-badge")).toHaveCount(2);
     await expect(page.locator(".directory-soon a")).toHaveCount(0);
     await expect(page.getByRole("heading", { name: "Coming soon", level: 3 })).toBeVisible();
     // the Coming soon list sits below every live category
-    const last = await page.locator(".directory-group").last().boundingBox();
+    const last = await page.locator(".directory-group").nth(4).boundingBox();
     const soon = await page.locator(".directory-soon").boundingBox();
     expect(soon.y).toBeGreaterThan(last.y + last.height);
     await expect(page.locator(".directory-section__more a")).toHaveAttribute("href", `${siteRoot}calculators.html`);
@@ -567,8 +571,8 @@ test.describe("All Tools and the calculator hierarchy", () => {
 
   test("the three destinations have different jobs: All Tools (platform), Calculator Categories (the section) and All Calculators (the flat list)", async ({ page, go }) => {
     await go("tools.html");
-    await expect(page.locator(".directory-section__label")).toHaveText("Section");
-    await expect(page.locator(".directory-section__count")).toHaveText(/^\d+ tools$/);
+    await expect(page.locator(".directory-section__label")).toHaveText(["Section", "Section"]);
+    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, /^1 tool$/]);
     await go("categories.html");
     await expect(page.locator("h1")).toHaveText("Calculator Categories");
     await expect(page.locator(".categories-search__content p")).toHaveText("Search calculators"); // this search is scoped to calculators, and says so

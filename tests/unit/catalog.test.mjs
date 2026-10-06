@@ -15,21 +15,24 @@ const inventory = JSON.parse(fs.readFileSync(new URL("../inventory/url-inventory
 globalThis.window = { location: { hostname: "salar500.github.io", pathname: "/Toolzenhub/" } };
 
 const ROOT = "/Toolzenhub/";
-let catalog, registry, related;
+let catalog, registry, related, allTools;
 
 before(async () => {
   catalog = await import("../../assets/js/data/calculators.js");
   registry = await import("../../assets/js/calculator-registry.js");
+  allTools = await import("../../assets/js/data/tools.js");
   const cats = await import("../../assets/js/data/categories.js");
   related = { categories: cats.categories };
 });
 
-const PUBLISHED = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "percentage"];
+// the published tools of the Calculators section; Date Difference (Time Tools) is a published tool too, but it is not a calculator
+const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "percentage"];
+const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment"];
 
 describe("catalog model", () => {
   test("tool ids are unique, and every tool recorded in the URL inventory is still in the catalog (same category)", () => {
-    const ids = catalog.calculators.map((c) => c.id);
+    const ids = allTools.tools.map((c) => c.id); // every tool, in every section
     assert.equal(new Set(ids).size, ids.length);
     // the committed inventory is an independent record of every tool that exists today; new tools may be added
     for (const id of inventory.summary.builtCalculators) assert.ok(ids.includes(id), `published tool ${id} disappeared`);
@@ -44,7 +47,7 @@ describe("catalog model", () => {
 
   test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP Margin, Profit, Home Loan, FD, GST, CAGR and Percentage are published; all other 14 are coming-soon", () => {
     const pub = catalog.calculators.filter((c) => c.status === "published").map((c) => c.id).sort();
-    assert.deepEqual(pub, [...PUBLISHED].sort());
+    assert.deepEqual(pub, [...PUBLISHED_CALCULATORS].sort());
     assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 14);
   });
 
@@ -96,7 +99,7 @@ describe("catalog model", () => {
 describe("registry is derived from the catalog", () => {
   test("registry has loaders for exactly the published tools", () => {
     assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), [...PUBLISHED].sort());
-    for (const id of PUBLISHED) assert.equal(registry.calculatorRegistry[id], catalog.getCalculatorById(id).loader);
+    for (const id of PUBLISHED) assert.equal(registry.calculatorRegistry[id], allTools.getToolById(id).loader);
   });
 
   test("coming-soon tools are not in the registry or the metadata", () => {
@@ -120,6 +123,8 @@ describe("registry is derived from the catalog", () => {
       gst: { section: "Calculators", category: "tax", title: "GST Calculator" },
       cagr: { section: "Calculators", category: "investment", title: "CAGR Calculator" },
       percentage: { section: "Calculators", category: "math", title: "Percentage Calculator" },
+      // a tool directly under a section has no category at all
+      "date-difference": { section: "Time Tools", title: "Date Difference Calculator" },
     });
   });
 });

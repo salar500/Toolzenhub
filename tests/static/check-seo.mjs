@@ -176,7 +176,10 @@ for (const p of pages) {
         if (other.id !== tool.id && html.includes(moduleOf(other))) fail(p.url, `the page references another tool's module ${moduleOf(other)}`);
       }
     }
-    if (!/class="related-section"/.test(html)) fail(p.url, "related sections are not in the HTML");
+    // a tool that opts out of both related sections (no related tool or article exists yet) has none
+    const mod = tool ? await tool.loader() : null;
+    const optedOut = mod && mod.showRelatedCalculators === false && mod.showRelatedArticles === false;
+    if (!optedOut && !/class="related-section"/.test(html)) fail(p.url, "related sections are not in the HTML");
   } else if (p.type === "article") {
     if (JSON.stringify(scripts) !== JSON.stringify([base("assets/js/entries/article.js")])) fail(p.url, `scripts [${scripts}] should be only the article entry`);
     if (count(html, /class="calculator-breadcrumb"/g) !== 1) fail(p.url, "needs exactly one breadcrumb");

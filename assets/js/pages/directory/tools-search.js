@@ -36,7 +36,7 @@ function resultCard(entry) {
                         >
 
                             <span class="directory-result__meta">
-                                ${escapeHTML(entry.sectionTitle)} › ${escapeHTML(entry.categoryTitle)}
+                                ${escapeHTML(entry.categoryTitle ? `${entry.sectionTitle} › ${entry.categoryTitle}` : entry.sectionTitle)}
                             </span>
 
                             <span class="directory-result__title">

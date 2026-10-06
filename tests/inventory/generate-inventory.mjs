@@ -66,6 +66,7 @@ function describePage(file) {
     "index.html": { type: "home", primarySelector: "h1.hero__title", interactive: true, rendered: "client" },
     "categories.html": { type: "category-index", primarySelector: "#categories-grid .category-page-card", interactive: true, rendered: "client", queryVariants: ["?q=<search term>"] },
     "loans.html": { type: "category", primarySelector: "#loans-calculators-grid .calculator-card", interactive: true, rendered: "client" },
+    "time-tools.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "tools.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "investment.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "business.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
@@ -85,6 +86,10 @@ function describePage(file) {
   if ((g = file.match(/^calculators\/([^/]+)\/index\.html$/))) {
     const primary = { emi: "#emi-form", "loan-comparison": "#compare-loans" }[g[1]] || ".calculator-page";
     return { type: "calculator", slug: g[1], primarySelector: primary, interactive: true, rendered: "client" };
+  }
+  // a tool of a section other than Calculators: /tools/<slug>/ (a tool page like any other)
+  if ((g = file.match(/^tools\/([^/]+)\/index\.html$/))) {
+    return { type: "calculator", slug: g[1], primarySelector: ".calculator-page", interactive: true, rendered: "client" };
   }
   if ((g = file.match(/^articles\/([^/]+)\/([^/]+)\/index\.html$/))) {
     return { type: "article", topic: g[1], slug: g[2], primarySelector: ".article-hero h1", interactive: false, rendered: "client" };

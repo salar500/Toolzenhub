@@ -13,7 +13,7 @@ main#app
               span "Works in your browser"
             h1.hero__title "Practical tools for"
               span.hero__title-highlight "better everyday decisions"
-            p.hero__description "Calculate loan payments, compare options, plan investments and work through everyday GST, …"
+            p.hero__description "Calculate loan payments, compare options, plan investments and work through everyday date,…"
             form#calculator-search.hero__search.tz-search [role="search"]
               span.hero__search-icon.tz-search__icon [aria-hidden="true"] "⌕"
               input.tz-search__input [aria-label="Search tools" name="q" placeholder="Search tools..." type="search"]
@@ -28,12 +28,17 @@ main#app
       div.container
         div.section-header
           h2.section-title "Explore Tools"
-        div.category-grid.category-grid--single
+        div.category-grid.category-grid--sections
           a.category-card [href="{ROOT}categories.html"]
             div.category-card__icon.category-card__icon--calculators "🧮"
             div.category-card__content
               h3 "Calculators"
               p "Loans, investment, business, tax and math calculators"
+          a.category-card [href="{ROOT}time-tools.html"]
+            div.category-card__icon.category-card__icon--time-tools "📅"
+            div.category-card__content
+              h3 "Time Tools"
+              p "Work out the time between two dates"
   section#popular-calculators.section
     section.popular-section
       div.container
@@ -42,12 +47,6 @@ main#app
           a.section-link [href="{ROOT}tools.html"] "View all tools"
             span [aria-hidden="true"] "→"
         div.calculator-grid
-          a.calculator-card [href="{ROOT}calculators/emi/"]
-            div.calculator-card__icon.calculator-card__icon--blue "▣"
-            div.calculator-card__content
-              h3 "EMI Calculator"
-              p "Calculate your EMI instantly"
-            span.calculator-card__arrow [aria-hidden="true"] "→"
           a.calculator-card [href="{ROOT}calculators/sip/"]
             div.calculator-card__icon.calculator-card__icon--yellow "♜"
             div.calculator-card__content
@@ -77,6 +76,12 @@ main#app
             div.calculator-card__content
               h3 "Home Loan Calculator"
               p "Find the loan that fits your EMI budget"
+            span.calculator-card__arrow [aria-hidden="true"] "→"
+          a.calculator-card [href="{ROOT}tools/date-difference/"]
+            div.calculator-card__icon.calculator-card__icon--blue "◷"
+            div.calculator-card__content
+              h3 "Date Difference Calculator"
+              p "Count the days between two dates"
             span.calculator-card__arrow [aria-hidden="true"] "→"
   section#latest-articles.section
     section.articles-section

@@ -84,3 +84,15 @@ section.categories-page.directory-page
             li
               span.directory-soon__name "Converter"
               span.coming-soon-badge "Coming soon"
+      section.directory-section [aria-labelledby="directory-time-tools-heading"]
+        div.directory-section__header
+          span.directory-section__label "Section"
+          h2#directory-time-tools-heading.directory-section__title
+            a [href="{ROOT}time-tools.html"] "Time Tools"
+          p.directory-section__text "Practical date and time utilities."
+            span.directory-section__count "1 tool"
+        div.directory-groups
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/date-difference/"] "Date Difference Calculator"
+            p.directory-group__text "Find how many days are between two calendar dates, with the difference in years, months an…"

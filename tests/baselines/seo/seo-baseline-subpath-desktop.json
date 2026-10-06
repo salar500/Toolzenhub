@@ -3601,6 +3601,55 @@
       "visibleTextChars": 1811
     }
   },
+  "/time-tools.html": {
+    "runtime": {
+      "title": "Time Tools | ToolZen Hub",
+      "description": "Time Tools from ToolZen Hub: practical date utilities, such as the number of days between two dates.",
+      "canonical": "https://toolzenhub.in/time-tools.html",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Time Tools from ToolZen Hub: practical date utilities, such as the number of days between two dates.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Time Tools | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/time-tools.html"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Time Tools from ToolZen Hub: practical date utilities, such as the number of days between two dates.",
+        "twitter:title": "Time Tools | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Time Tools"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#0b9f58",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Time Tools | ToolZen Hub",
+      "description": "Time Tools from ToolZen Hub: practical date utilities, such as the number of days between two dates.",
+      "canonical": "https://toolzenhub.in/time-tools.html",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 625
+    }
+  },
   "/tools.html": {
     "runtime": {
       "title": "All Tools | ToolZen Hub",
@@ -3647,7 +3696,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1238
+      "visibleTextChars": 1446
+    }
+  },
+  "/tools/date-difference/": {
+    "runtime": {
+      "title": "Date Difference Calculator: Days Between Two Dates | ToolZen Hub",
+      "description": "Find the number of days between two dates, the difference in years, months and days, and in weeks. Calendar dates only: leap years and month lengths are handled, business days and holidays are not.",
+      "canonical": "https://toolzenhub.in/tools/date-difference/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Find the number of days between two dates, the difference in years, months and days, and in weeks. Calendar dates only: leap years and month lengths are handled, business days and holidays are not.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Date Difference Calculator: Days Between Two Dates | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/date-difference/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Find the number of days between two dates, the difference in years, months and days, and in weeks. Calendar dates only: leap years and month lengths are handled, business days and holidays are not.",
+        "twitter:title": "Date Difference Calculator: Days Between Two Dates | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Date Difference Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Date Difference Calculator: Days Between Two Dates | ToolZen Hub",
+      "description": "Find the number of days between two dates, the difference in years, months and days, and in weeks. Calendar dates only: leap years and month lengths are handled, business days and holidays are not.",
+      "canonical": "https://toolzenhub.in/tools/date-difference/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 4008
     }
   }
 }

@@ -100,10 +100,13 @@ export function searchCalculators(query) {
             types: ["tool"],
             includeComingSoon: true
         }
-    ).map(
-        result =>
-            byId.get(result.id)
-    );
+    )
+        /* the shared index also holds tools of other sections: these pages list calculators only */
+        .map(
+            result =>
+                byId.get(result.id)
+        )
+        .filter(Boolean);
 
 }
 

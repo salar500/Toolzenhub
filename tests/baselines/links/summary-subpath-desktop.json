@@ -310,7 +310,7 @@
     "deadFragments": []
   },
   "(home)": {
-    "internal": 33,
+    "internal": 34,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -351,8 +351,20 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "time-tools.html": {
+    "internal": 25,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "tools.html": {
-    "internal": 41,
+    "internal": 43,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/date-difference/": {
+    "internal": 24,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

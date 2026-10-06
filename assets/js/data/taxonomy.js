@@ -41,7 +41,8 @@ import {
     categories,
     subcategories,
     getSectionById,
-    getSectionForCategory
+    getSectionForCategory,
+    getSectionForTool as sectionOfTool
 } from "./categories.js";
 
 import {
@@ -93,6 +94,39 @@ export {
 };
 
 
+/*
+ * Every tool of a section, whether it sits under a category or directly
+ * under the section.
+ */
+
+export function getToolsBySection(
+    sectionId
+) {
+
+    return tools.filter(
+        tool =>
+            sectionOfTool(tool)?.id === sectionId
+    );
+
+}
+
+
+/*
+ * The tools that sit directly under a section (no category).
+ */
+
+export function getDirectToolsBySection(
+    sectionId
+) {
+
+    return tools.filter(
+        tool =>
+            tool.sectionId === sectionId
+    );
+
+}
+
+
 export function getCategoriesBySection(
     sectionId
 ) {
@@ -123,7 +157,7 @@ export function getSectionForTool(
     tool
 ) {
 
-    return getSectionForCategory(tool?.category);
+    return sectionOfTool(tool);
 
 }
 
