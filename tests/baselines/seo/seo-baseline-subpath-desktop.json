@@ -3251,7 +3251,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 513
+      "visibleTextChars": 514
     }
   },
   "/contact.html": {
@@ -3420,7 +3420,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 622
+      "visibleTextChars": 624
     }
   },
   "/math.html": {
@@ -3647,7 +3647,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1296
+      "visibleTextChars": 1238
     }
   }
 }

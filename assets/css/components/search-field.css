@@ -1,0 +1,159 @@
+/* =========================================================
+   ToolZen Hub
+   Search field
+
+   One look for every search box on the site: the Home hero,
+   All Tools, the calculator categories page and Loans. A search
+   box is a rounded field with a magnifier, the input, and a green
+   button with a magnifier. What each one searches stays with its
+   page (Home and All Tools search all live tools, the categories
+   page searches calculators, Loans searches loan calculators);
+   only the look is shared.
+
+   Markup (the classes are added to the box each page already has):
+       .tz-search            the box (a form, or a row inside one)
+       .tz-search__icon      the magnifier inside the box (decorative)
+       .tz-search__input     the text field
+       .tz-search__button    the submit button
+
+   The older per-page rules for these boxes stay in their own files;
+   the doubled class here is what lets this file decide the look no
+   matter which order the sheets load in, including their narrow
+   screen rules.
+========================================================= */
+
+.tz-search.tz-search {
+    position: relative;
+
+    display: flex;
+    align-items: stretch;
+
+    box-sizing: border-box;
+
+    width: 100%;
+    height: 52px;
+    min-height: 52px;
+
+    overflow: hidden;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: var(--color-white);
+
+    box-shadow:
+        0 2px 8px rgba(16, 24, 40, 0.05);
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.tz-search.tz-search:focus-within {
+    border-color: var(--color-brand-green);
+
+    box-shadow:
+        0 0 0 3px rgba(11, 159, 88, 0.16);
+}
+
+.tz-search .tz-search__icon {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+
+    padding: 0 0 0 16px;
+
+    color: #98a2b3;
+
+    font-size: 22px;
+    line-height: 1;
+}
+
+.tz-search .tz-search__input {
+    flex: 1;
+
+    box-sizing: border-box;
+
+    align-self: stretch;
+
+    width: 100%;
+    min-width: 0;
+    height: auto;
+
+    padding: 0 14px;
+
+    border: 0;
+    border-radius: 0;
+
+    background: transparent;
+
+    color: var(--color-ink);
+
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.tz-search .tz-search__input::placeholder {
+    color: #98a2b3;
+}
+
+.tz-search .tz-search__button {
+    display: flex;
+    flex: 0 0 56px;
+    align-items: center;
+    justify-content: center;
+
+    align-self: stretch;
+
+    width: 56px;
+    height: auto;
+
+    padding: 0;
+
+    border: 0;
+
+    background: var(--color-brand-green);
+
+    color: var(--color-white);
+
+    font-size: 22px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease;
+}
+
+.tz-search .tz-search__button:hover {
+    background: #087d46;
+}
+
+/* narrow screens: a little shorter, and 16px text so a phone does not zoom the page when the field is tapped */
+
+@media (max-width: 600px) {
+
+    .tz-search.tz-search {
+        height: 48px;
+        min-height: 48px;
+    }
+
+    .tz-search .tz-search__icon {
+        padding-left: 10px;
+
+        font-size: 19px;
+    }
+
+    .tz-search .tz-search__input {
+        padding: 0 8px;
+
+        font-size: 16px;
+    }
+
+    .tz-search .tz-search__button {
+        flex-basis: 46px;
+
+        width: 46px;
+    }
+
+}

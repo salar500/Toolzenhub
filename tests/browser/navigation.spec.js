@@ -7,7 +7,8 @@ import { test, expect, expectClean, expectNoHorizontalOverflow } from "../helper
 import { getComingSoonTool } from "../helpers/coming-soon.mjs";
 
 // the categories that have a card. "More" is still a category in the data (see the unit tests) but it has no tools, so it has no card.
-const CATEGORY_IDS = ["loans", "investment", "tax", "health", "business", "math", "converter"];
+// the categories that have a card: those with a LIVE tool. Health and Converter have none, so they are listed apart under "Coming soon". "More" is a category in the data but has no tools at all.
+const CATEGORY_IDS = ["loans", "investment", "tax", "business", "math"];
 const PAGE_IDS = ["investment", "tax", "business", "math"]; // category pages of their own (Loans keeps its older page)
 const SOON_IDS = ["health", "converter"]; // no live tool: a Coming soon section on the categories page, not a page of their own
 
@@ -76,16 +77,22 @@ test.describe("home page", () => {
 });
 
 test.describe("categories page", () => {
-  test("seven category cards (no empty \"More\" card); Loans, Investment, Tax, Business and Math go to their pages, Health and Converter to their Coming soon section", async ({ page, go, siteRoot }) => {
+  test("five category cards, only the live categories; Health and Converter are listed apart under Coming soon", async ({ page, go, siteRoot }) => {
     await go("categories.html");
     const cards = page.locator("#categories-grid a.category-page-card");
-    await expect(cards).toHaveCount(7);
-    await expect(page.locator("#categories-grid")).not.toContainText("More");
+    await expect(cards).toHaveCount(5);
+    await expect(page.locator("#categories-grid")).not.toContainText(/health|converter|more/i);
     const hrefs = await cards.evaluateAll((l) => l.map((x) => x.getAttribute("href")));
-    expect(hrefs).toEqual(CATEGORY_IDS.map((id) => (id === "loans" || PAGE_IDS.includes(id) ? `${siteRoot}${id}.html` : `${siteRoot}categories.html#${id}`)));
+    expect(hrefs).toEqual(CATEGORY_IDS.map((id) => `${siteRoot}${id}.html`));
     await expect(page.locator(".calculator-breadcrumb")).toContainText("All Tools");
     await expect(page.locator(".calculator-breadcrumb")).toContainText("Calculators");
     await expect(page.locator("h1")).toHaveText("Calculator Categories");
+    // the empty categories sit below the live ones, under their own heading, and are not links
+    const live = await page.locator("#categories-grid").boundingBox();
+    const soon = await page.locator("#categories-soon-heading").boundingBox();
+    expect(soon.y).toBeGreaterThan(live.y + live.height);
+    await expect(page.getByRole("heading", { name: "Coming soon", level: 2 })).toBeVisible();
+    await expect(page.locator(".categories-soon a")).toHaveCount(0);
     await cards.first().click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}loans.html`);
   });
@@ -103,22 +110,19 @@ test.describe("categories page", () => {
     }
   });
 
-  test("Health and Converter have no live tool: their cards lead to Coming soon sections; a direct hash link lands on the heading and focuses it", async ({ page, go, siteRoot }) => {
+  test("Health and Converter have no live tool: quieter Coming soon sections with non-clickable cards, still reachable by their anchor", async ({ page, go }) => {
+    await go("categories.html");
     for (const id of SOON_IDS) {
-      await go("categories.html");
-      await page.locator(`#categories-grid a[href$="categories.html#${id}"]`).click();
-      await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}categories.html` && u.hash === `#${id}`);
       const heading = page.locator(`#${id}-heading`);
       await expect(heading).toBeVisible();
-      await expect.poll(async () => heading.evaluate((el) => Math.round(el.getBoundingClientRect().top))).toBeLessThan(400);
       await expect(page.locator(`#${id}`)).toHaveAttribute("aria-labelledby", `${id}-heading`);
       await expect(page.locator(`#${id} .category-page-card--soon`).first()).toBeVisible();
-      await expect(page.locator(`#${id} a.category-page-card`)).toHaveCount(0);
+      await expect(page.locator(`#${id} a`)).toHaveCount(0);
     }
     await go("tools.html"); // a fresh load, so the hash is applied by the page's own script
     await go("categories.html#health");
     await expect(page.locator("#health-heading")).toBeFocused();
-    for (const id of PAGE_IDS) await expect(page.locator(`#${id}`)).toHaveCount(0); // the others have pages, so no section here
+    for (const id of PAGE_IDS) await expect(page.locator(`#${id}`)).toHaveCount(0); // the live ones have pages, so no section here
     await expect(page.locator("#loans")).toHaveCount(0);
   });
 
@@ -177,7 +181,7 @@ test.describe("categories page", () => {
     await expect(page.locator("#categories-grid")).toContainText("No calculators found");
 
     await input.fill("");
-    await expect(page.locator("#categories-grid .category-page-card")).toHaveCount(7);
+    await expect(page.locator("#categories-grid .category-page-card")).toHaveCount(5);
     await expect(page).toHaveURL((u) => !u.searchParams.has("q"));
 
     // a Coming soon tool is listed but not linked
@@ -478,9 +482,15 @@ test.describe("All Tools and the calculator hierarchy", () => {
     const live = await page.locator(".directory-group a").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
     for (const r of ["loans.html", "investment.html", "tax.html", "business.html", "math.html", "calculators/emi/", "calculators/sip/", "calculators/fd/", "calculators/cagr/", "calculators/margin/", "calculators/profit/", "calculators/gst/", "calculators/percentage/"]) expect(live).toContain(siteRoot + r);
     for (const bad of ["categories.html#health", "categories.html#converter", "calculators/ppf/", "calculators/income-tax/", "calculators/roi/"]) expect(live.some((h) => h.includes(bad)), bad).toBe(false);
-    await expect(page.locator(".directory-group--soon")).toHaveCount(2);
-    await expect(page.locator(".directory-group--soon .coming-soon-badge")).toHaveCount(2);
-    await expect(page.locator(".directory-group--soon a")).toHaveCount(0);
+    await expect(page.locator(".directory-group")).toHaveCount(5); // the live categories only
+    await expect(page.locator(".directory-soon__list li")).toHaveText([/Health\s*Coming soon/, /Converter\s*Coming soon/]);
+    await expect(page.locator(".directory-soon .coming-soon-badge")).toHaveCount(2);
+    await expect(page.locator(".directory-soon a")).toHaveCount(0);
+    await expect(page.getByRole("heading", { name: "Coming soon", level: 3 })).toBeVisible();
+    // the Coming soon list sits below every live category
+    const last = await page.locator(".directory-group").last().boundingBox();
+    const soon = await page.locator(".directory-soon").boundingBox();
+    expect(soon.y).toBeGreaterThan(last.y + last.height);
     await expect(page.locator(".directory-section__more a")).toHaveAttribute("href", `${siteRoot}calculators.html`);
     await expect(page.locator("h1, h2, h3").filter({ hasText: /^Popular/ })).toHaveCount(0);
     expectClean(watch);
@@ -594,5 +604,55 @@ test.describe("All Tools and the calculator hierarchy", () => {
       await go(path);
       await expectNoHorizontalOverflow(page);
     }
+  });
+});
+
+test.describe("search boxes share one look", () => {
+  const BOXES = [["", "#calculator-search"], ["tools.html", ".directory-search__row"], ["categories.html", "#categories-search-form"], ["loans.html", "#loans-search-form"]];
+
+  test("Home, All Tools, Calculator Categories and Loans: same height, border, radius, icon, field and green icon button", async ({ page, go }) => {
+    const looks = [];
+    for (const [path, sel] of BOXES) {
+      await go(path);
+      const box = page.locator(sel).first();
+      await expect(box).toBeVisible();
+      await expect(box).toHaveClass(/tz-search/);
+      looks.push(await box.evaluate((el) => {
+        const cs = getComputedStyle(el);
+        const button = el.querySelector(".tz-search__button");
+        const input = el.querySelector(".tz-search__input");
+        return {
+          height: Math.round(el.getBoundingClientRect().height), radius: cs.borderTopLeftRadius, border: cs.borderTopColor,
+          icon: Boolean(el.querySelector(".tz-search__icon")), button: getComputedStyle(button).backgroundColor, buttonLabel: button.getAttribute("aria-label"), inputFont: getComputedStyle(input).fontSize,
+        };
+      }));
+    }
+    const same = ({ buttonLabel, ...look }) => look; // the button's name differs on purpose: it says what that box searches
+    for (const look of looks.slice(1)) expect(same(look)).toEqual(same(looks[0]));
+    expect(looks[0].icon).toBe(true);
+    for (const look of looks) expect(look.buttonLabel).toBeTruthy(); // an icon button has an accessible name
+  });
+
+  test("on a phone each box keeps its height, uses the width it has and does not overflow", async ({ page, go, isMobile }) => {
+    test.skip(!isMobile, "narrow screens");
+    for (const [path, sel] of BOXES) {
+      await go(path);
+      const box = page.locator(sel).first();
+      const b = await box.boundingBox();
+      expect(b.height, path).toBeGreaterThanOrEqual(46);
+      const input = await box.locator(".tz-search__input").boundingBox();
+      expect(input.width, `${path}: the field is not squeezed`).toBeGreaterThan(80);
+      expect(b.x + b.width, path).toBeLessThanOrEqual(page.viewportSize().width);
+      await expectNoHorizontalOverflow(page);
+    }
+  });
+
+  test("the scope of each search stays what its label says", async ({ page, go }) => {
+    await go("");
+    await expect(page.locator('#calculator-search input[name="q"]')).toHaveAttribute("aria-label", "Search tools");
+    await go("categories.html");
+    await expect(page.locator("#categories-search-input")).toHaveAttribute("aria-label", "Search calculators");
+    await go("loans.html");
+    await expect(page.locator("#loans-search-input")).toHaveAttribute("aria-label", "Search loan calculators");
   });
 });

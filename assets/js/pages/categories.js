@@ -69,12 +69,36 @@ export function renderCategoriesBreadcrumb() {
  * A category card is shown only when the category has tools to show (live or
  * coming soon). A category with none, such as "More" today, stays in the data but
  * has no card: it would open a page with nothing in it.
+ *
+ * The cards in the main grid are the categories that have a LIVE tool. A category
+ * with only coming-soon tools is not given the same standing: it is listed apart,
+ * under "Coming soon" (renderCategorySections).
  */
 function visibleCategories() {
 
     return categories.filter(
         category =>
             getToolsByCategory(category.id).length > 0
+    );
+
+}
+
+function liveCategories() {
+
+    return visibleCategories().filter(
+        category =>
+            getToolsByCategory(category.id)
+                .some(tool => tool.available)
+    );
+
+}
+
+function soonCategories() {
+
+    return visibleCategories().filter(
+        category =>
+            !getToolsByCategory(category.id)
+                .some(tool => tool.available)
     );
 
 }
@@ -102,26 +126,45 @@ function renderCategorySections() {
 
     container.hidden = false;
 
-    container.innerHTML =
-        visibleCategories()
-            .filter(category => !getCategoryLandingUrl(category.id))
-            .map(category => `
+    const soon = soonCategories();
+
+    if (soon.length === 0) {
+        container.innerHTML = "";
+        return;
+    }
+
+    container.innerHTML = `
+
+        <div class="categories-soon">
+
+            <h2
+                class="categories-soon__title"
+                id="categories-soon-heading"
+            >
+                Coming soon
+            </h2>
+
+            <p class="categories-soon__text">
+                These categories have no live calculator yet.
+            </p>
+
+            ${soon.map(category => `
 
         <section
-            class="categories-detail"
+            class="categories-detail categories-detail--soon"
             id="${category.id}"
             aria-labelledby="${category.id}-heading"
         >
 
             <div class="categories-detail__header">
 
-                <h2
+                <h3
                     class="categories-detail__title"
                     id="${category.id}-heading"
                     tabindex="-1"
                 >
                     ${escapeHtml(category.title)}
-                </h2>
+                </h3>
 
                 <p class="categories-detail__text">
                     ${escapeHtml(category.description)}
@@ -135,7 +178,11 @@ function renderCategorySections() {
 
         </section>
 
-    `).join("");
+    `).join("")}
+
+        </div>
+
+    `;
 
 }
 
@@ -190,7 +237,7 @@ export function renderCategoriesPage() {
     }
 
 
-    grid.innerHTML = visibleCategories().map(category => {
+    grid.innerHTML = liveCategories().map(category => {
 
 
         /* =================================================

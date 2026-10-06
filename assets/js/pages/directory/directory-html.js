@@ -72,22 +72,25 @@ function searchForm() {
                         Search tools
                     </label>
 
-                    <div class="directory-search__row">
+                    <div class="directory-search__row tz-search">
+
+                        <span class="tz-search__icon" aria-hidden="true">⌕</span>
 
                         <input
                             type="search"
                             id="directory-search-input"
                             name="q"
-                            class="directory-search__input"
+                            class="directory-search__input tz-search__input"
                             placeholder="Search by name, for example EMI or GST"
                             autocomplete="off"
                         >
 
                         <button
                             type="submit"
-                            class="directory-search__button"
+                            class="directory-search__button tz-search__button"
+                            aria-label="Search"
                         >
-                            Search
+                            ⌕
                         </button>
 
                     </div>
@@ -114,15 +117,12 @@ function searchForm() {
 
 function sectionBlock(section) {
 
-    /* categories with live tools first, then those that are only coming soon */
-    const categories =
-        getCategoriesBySection(section.id)
-            .filter(hasTools)
-            .sort(
-                (a, b) =>
-                    Number(liveTools(b.id).length > 0) -
-                    Number(liveTools(a.id).length > 0)
-            );
+    /* the categories with live tools are the section's content; those with none are listed apart, as coming soon */
+    const all = getCategoriesBySection(section.id).filter(hasTools);
+
+    const categories = all.filter(category => liveTools(category.id).length > 0);
+
+    const soon = all.filter(category => liveTools(category.id).length === 0);
 
     const sectionHref =
         ROUTES[section.landing];
@@ -168,7 +168,35 @@ function sectionBlock(section) {
                         <a href="${ROUTES.calculators}">Browse all calculators →</a>
                     </p>
 
+                    ${soon.length > 0 ? soonBlock(section, soon) : ""}
+
                 </section>`;
+
+}
+
+function soonBlock(section, soon) {
+
+    return `
+                    <div class="directory-soon">
+
+                        <h3
+                            class="directory-soon__title"
+                            id="directory-${section.id}-soon"
+                        >
+                            Coming soon
+                        </h3>
+
+                        <ul
+                            class="directory-soon__list"
+                            aria-labelledby="directory-${section.id}-soon"
+                        >
+                            ${soon.map(category => `<li>
+                                <span class="directory-soon__name">${escapeHTML(category.title)}</span>
+                                <span class="coming-soon-badge">Coming soon</span>
+                            </li>`).join("")}
+                        </ul>
+
+                    </div>`;
 
 }
 
@@ -176,32 +204,20 @@ function categoryGroup(category) {
 
     const live = liveTools(category.id);
 
-    const heading =
-        live.length > 0
-            ? `<a href="${getCategoryUrl(category.id)}">${escapeHTML(category.title)}</a>`
-            : escapeHTML(category.title);
-
-    const body =
-        live.length > 0
-            ? `<ul class="directory-group__tools">
-                            ${live.map(tool => `<li><a href="${tool.href}">${escapeHTML(tool.title)}</a></li>`).join("\n                            ")}
-                        </ul>`
-            : `<p class="directory-group__soon">
-                            <span class="coming-soon-badge">Coming soon</span>
-                        </p>`;
-
     return `
-                        <article class="directory-group${live.length > 0 ? "" : " directory-group--soon"}">
+                        <article class="directory-group">
 
                             <h3 class="directory-group__title">
-                                ${heading}
+                                <a href="${getCategoryUrl(category.id)}">${escapeHTML(category.title)}</a>
                             </h3>
 
                             <p class="directory-group__text">
                                 ${escapeHTML(category.description)}
                             </p>
 
-                            ${body}
+                            <ul class="directory-group__tools">
+                                ${live.map(tool => `<li><a href="${tool.href}">${escapeHTML(tool.title)}</a></li>`).join("")}
+                            </ul>
 
                         </article>`;
 

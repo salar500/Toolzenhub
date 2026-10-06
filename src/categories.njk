@@ -23,6 +23,7 @@ styles:
   - "/assets/css/components/footer.css"
   - "/assets/css/themes/light.css"
   - "/assets/css/pages/categories.css"
+  - "/assets/css/components/search-field.css"
 scripts:
   - "/assets/js/app.js"
 clientRendered: true
@@ -119,15 +120,17 @@ clientRendered: true
                     <!-- Search Form -->
 
                     <form
-                        class="categories-search__form"
+                        class="categories-search__form tz-search"
                         id="categories-search-form"
                         role="search"
                     >
 
+                        <span class="tz-search__icon" aria-hidden="true">⌕</span>
+
                         <input
                             type="search"
                             id="categories-search-input"
-                            class="categories-search__input"
+                            class="categories-search__input tz-search__input"
                             placeholder="Search calculators..."
                             aria-label="Search calculators"
                             autocomplete="off"
@@ -136,10 +139,10 @@ clientRendered: true
 
                         <button
                             type="submit"
-                            class="categories-search__button"
-                            aria-label="Search"
+                            class="categories-search__button tz-search__button"
+                            aria-label="Search calculators"
                         >
-                            🔍
+                            ⌕
                         </button>
 
                     </form>

@@ -10,9 +10,10 @@ section.categories-page.directory-page
       p.categories-page__description "Search or browse every ToolZen Hub tool, by section and category."
     form.directory-search [action="{ROOT}tools.html" data-tools-search method="get" role="search"]
       label.directory-search__label [for="directory-search-input"] "Search tools"
-      div.directory-search__row
-        input#directory-search-input.directory-search__input [name="q" placeholder="Search by name, for example EMI or GST" type="search"]
-        button.directory-search__button [type="submit"] "Search"
+      div.directory-search__row.tz-search
+        span.tz-search__icon [aria-hidden="true"] "⌕"
+        input#directory-search-input.directory-search__input.tz-search__input [name="q" placeholder="Search by name, for example EMI or GST" type="search"]
+        button.directory-search__button.tz-search__button [aria-label="Search" type="submit"] "⌕"
     div#tools-results.directory-results [aria-live="polite" role="status"]
     div#tools-directory
       section.directory-section [aria-labelledby="directory-calculators-heading"]
@@ -72,15 +73,14 @@ section.categories-page.directory-page
             ul.directory-group__tools
               li
                 a [href="{ROOT}calculators/percentage/"] "Percentage Calculator"
-          article.directory-group.directory-group--soon
-            h3.directory-group__title "Health"
-            p.directory-group__text "Health calculators are coming soon"
-            p.directory-group__soon
-              span.coming-soon-badge "Coming soon"
-          article.directory-group.directory-group--soon
-            h3.directory-group__title "Converter"
-            p.directory-group__text "Converter tools are coming soon"
-            p.directory-group__soon
-              span.coming-soon-badge "Coming soon"
         p.directory-section__more
           a [href="{ROOT}calculators.html"] "Browse all calculators →"
+        div.directory-soon
+          h3#directory-calculators-soon.directory-soon__title "Coming soon"
+          ul.directory-soon__list [aria-labelledby="directory-calculators-soon"]
+            li
+              span.directory-soon__name "Health"
+              span.coming-soon-badge "Coming soon"
+            li
+              span.directory-soon__name "Converter"
+              span.coming-soon-badge "Coming soon"

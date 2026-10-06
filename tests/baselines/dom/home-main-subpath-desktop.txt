@@ -14,10 +14,10 @@ main#app
             h1.hero__title "Practical tools for"
               span.hero__title-highlight "better everyday decisions"
             p.hero__description "Calculate loan payments, compare options, plan investments and work through everyday GST, …"
-            form#calculator-search.hero__search [role="search"]
-              span.hero__search-icon [aria-hidden="true"] "⌕"
-              input [aria-label="Search tools" name="q" placeholder="Search tools..." type="search"]
-              button.hero__search-button [aria-label="Search tools" type="submit"] "⌕"
+            form#calculator-search.hero__search.tz-search [role="search"]
+              span.hero__search-icon.tz-search__icon [aria-hidden="true"] "⌕"
+              input.tz-search__input [aria-label="Search tools" name="q" placeholder="Search tools..." type="search"]
+              button.hero__search-button.tz-search__button [aria-label="Search tools" type="submit"] "⌕"
             div#hero-calculator-search-results.calculator-search-results [aria-live="polite"]
           div.hero__visual
             picture

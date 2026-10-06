@@ -71,14 +71,14 @@ export function renderHero() {
                         ================================== -->
 
                         <form
-                            class="hero__search"
+                            class="hero__search tz-search"
                             id="calculator-search"
                             role="search"
                             novalidate
                         >
 
                             <span
-                                class="hero__search-icon"
+                                class="hero__search-icon tz-search__icon"
                                 aria-hidden="true"
                             >
                                 ⌕
@@ -87,6 +87,7 @@ export function renderHero() {
 
                             <input
                                 type="search"
+                                class="tz-search__input"
                                 name="q"
                                 placeholder="Search tools..."
                                 autocomplete="off"
@@ -96,7 +97,7 @@ export function renderHero() {
 
                             <button
                                 type="submit"
-                                class="hero__search-button"
+                                class="hero__search-button tz-search__button"
                                 aria-label="Search tools"
                             >
                                 ⌕

@@ -27,7 +27,9 @@ describe("All Tools", () => {
     for (const page of ["loans", "investment", "tax", "business", "math"]) assert.ok(links.includes(`/Toolzenhub/${page}.html`), page);
     assert.equal(html.includes("categories.html#health"), false); // Health and Converter have no live tool: plain text with a Coming soon badge
     assert.equal(html.includes("categories.html#converter"), false);
-    assert.equal((html.match(/Coming soon/g) || []).length, 2);
+    assert.equal((html.match(/class="coming-soon-badge"/g) || []).length, 2); // one badge each for Health and Converter
+    assert.match(html, /directory-soon__title[^>]*>\s*Coming soon/); // listed apart from the live categories, under their own heading
+    assert.equal(html.includes("directory-group--soon"), false);
     assert.ok(links.includes("/Toolzenhub/calculators.html"));
   });
 

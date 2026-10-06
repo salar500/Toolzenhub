@@ -24,6 +24,7 @@ styles:
   - "/assets/css/components/footer.css"
   - "/assets/css/themes/light.css"
   - "/assets/css/pages/loans.css"
+  - "/assets/css/components/search-field.css"
 scripts:
   - "/assets/js/pages/loans.js"
 clientRendered: true
@@ -289,14 +290,16 @@ clientRendered: true
 
 
                     <form
-                        class="loans-search__form"
+                        class="loans-search__form tz-search"
                         id="loans-search-form"
                     >
+
+                        <span class="tz-search__icon" aria-hidden="true">⌕</span>
 
                         <input
                             type="search"
                             id="loans-search-input"
-                            class="loans-search__input"
+                            class="loans-search__input tz-search__input"
                             placeholder="Search calculators..."
                             aria-label="Search loan calculators"
                             autocomplete="off"
@@ -304,8 +307,8 @@ clientRendered: true
 
                         <button
                             type="submit"
-                            class="loans-search__button"
-                            aria-label="Search calculators"
+                            class="loans-search__button tz-search__button"
+                            aria-label="Search loan calculators"
                         >
                             ⌕
                         </button>

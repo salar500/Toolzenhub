@@ -115,7 +115,7 @@
     display: grid;
 
     grid-template-columns:
-        repeat(4, minmax(0, 1fr));
+        repeat(3, minmax(0, 1fr));
 
     gap: 18px;
 
@@ -820,4 +820,45 @@
 
 #categories-sections {
     margin-top: 40px;
+}
+
+
+/* =========================================================
+   Categories with no live calculator: apart from the live ones,
+   and quieter. Their cards are the Coming soon cards, not links.
+========================================================= */
+
+.categories-soon {
+    margin-top: 8px;
+    padding-top: 28px;
+
+    border-top: 1px dashed #d0d5dd;
+}
+
+.categories-soon__title {
+    margin: 0 0 4px;
+
+    color: var(--color-ink-muted);
+
+    font-size: 18px;
+    font-weight: 750;
+    line-height: 1.3;
+}
+
+.categories-soon__text {
+    margin: 0 0 22px;
+
+    color: var(--color-ink-muted);
+
+    font-size: 14px;
+}
+
+.categories-detail--soon .categories-detail__title {
+    color: var(--color-ink-muted);
+
+    font-size: 17px;
+}
+
+#categories-sections:empty {
+    display: none;
 }

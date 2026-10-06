@@ -17,12 +17,6 @@ div#categories-grid.categories-page__grid
       h2.category-page-card__title "Tax"
       p.category-page-card__description "Work through tax-related calculations with clear assumptions"
     span.category-page-card__arrow [aria-hidden="true"] "→"
-  a.category-page-card [href="{ROOT}categories.html#health"]
-    div.category-page-card__icon.category-page-card__icon--health [aria-hidden="true"] "♥"
-    div.category-page-card__content
-      h2.category-page-card__title "Health"
-      p.category-page-card__description "Health calculators are coming soon"
-    span.category-page-card__arrow [aria-hidden="true"] "→"
   a.category-page-card [href="{ROOT}business.html"]
     div.category-page-card__icon.category-page-card__icon--business [aria-hidden="true"] "💼"
     div.category-page-card__content
@@ -34,10 +28,4 @@ div#categories-grid.categories-page__grid
     div.category-page-card__content
       h2.category-page-card__title "Math"
       p.category-page-card__description "Solve percentage and everyday math problems"
-    span.category-page-card__arrow [aria-hidden="true"] "→"
-  a.category-page-card [href="{ROOT}categories.html#converter"]
-    div.category-page-card__icon.category-page-card__icon--converter [aria-hidden="true"] "↻"
-    div.category-page-card__content
-      h2.category-page-card__title "Converter"
-      p.category-page-card__description "Converter tools are coming soon"
     span.category-page-card__arrow [aria-hidden="true"] "→"
