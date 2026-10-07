@@ -1,0 +1,914 @@
+/* =========================================================
+   ToolZen Hub
+   Time Zone Converter
+
+   Only what the shared tool styles do not already provide: the
+   source card, the zone picker (a combobox with a list of
+   matches), the converted rows and the meeting section. Buttons,
+   focus and headings come from the shared layer. Loaded after
+   calculator-responsive.css.
+
+   Day relations ("Same day", "Next day") and every state are
+   words, never colour alone. Nothing animates.
+
+   Everything stacks on a phone. From 900px the date, time and
+   zone sit in one row. The page itself never scrolls sideways.
+========================================================= */
+
+.calculator-page [hidden] {
+
+    display: none !important;
+
+}
+
+.tz-sr {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+.tz-workspace {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+
+}
+
+.tz-card {
+
+    min-width: 0;
+    padding: 16px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: #ffffff;
+
+}
+
+.tz-card__title,
+.tz-result__title {
+
+    margin: 0 0 12px;
+
+    color: var(--color-ink);
+
+    font-size: 19px;
+    font-weight: 700;
+
+}
+
+.tz-source {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+
+}
+
+.tz-field {
+
+    min-width: 0;
+
+}
+
+.tz-label {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 700;
+
+}
+
+.tz-input {
+
+    display: block;
+
+    width: 100%;
+    min-height: 48px;
+    padding: 8px 12px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 16px;
+
+}
+
+.tz-input:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.tz-hint {
+
+    margin: 6px 0 0;
+
+    color: #475467;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+
+}
+
+/* the zone picker */
+
+.tz-combo {
+
+    position: relative;
+
+}
+
+.tz-list {
+
+    position: absolute;
+    z-index: 30;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+
+    max-height: 280px;
+    margin: 0;
+    padding: 4px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.16);
+
+    list-style: none;
+    overflow-y: auto;
+
+}
+
+.tz-list__option,
+.tz-list__none {
+
+    display: flex;
+    align-items: center;
+
+    min-height: 44px;
+    margin: 0;
+    padding: 6px 10px;
+
+    border-radius: 8px;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    overflow-wrap: anywhere;
+
+}
+
+.tz-list__none {
+
+    color: #475467;
+
+    cursor: default;
+
+}
+
+.tz-list__option[aria-selected="true"] {
+
+    background: #ecfdf3;
+
+    outline: 2px solid #067647;
+    outline-offset: -2px;
+
+    font-weight: 700;
+
+}
+
+.tz-row-actions,
+.tz-share,
+.tz-days {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+}
+
+.tz-row-actions {
+
+    margin-top: 14px;
+
+}
+
+.tz-button {
+
+    min-height: 48px;
+    padding-left: 18px;
+    padding-right: 18px;
+
+    font-size: 16px;
+
+}
+
+.tz-quick {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 12px;
+
+}
+
+.tz-chip {
+
+    min-height: 44px;
+    padding: 6px 14px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 999px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+.tz-chip:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.tz-message {
+
+    min-height: 20px;
+    margin: 10px 0 0;
+
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+}
+
+/* a time that does not exist, or happens twice */
+
+.tz-problem {
+
+    margin-top: 14px;
+    padding: 12px 14px;
+
+    border-left: 6px solid #b54708;
+    border-radius: 10px;
+
+    background: #fffaeb;
+
+    color: #7a2e0e;
+
+}
+
+.tz-workspace[data-state="invalid"] .tz-problem {
+
+    border-left-color: #b42318;
+
+    background: #fef3f2;
+
+    color: #912018;
+
+}
+
+.tz-problem p {
+
+    margin: 0;
+
+    font-size: 15px;
+    line-height: 1.55;
+
+}
+
+.tz-problem__title {
+
+    font-weight: 700;
+
+}
+
+.tz-problem__detail {
+
+    margin-top: 4px !important;
+
+}
+
+.tz-problem__detail:empty {
+
+    display: none;
+
+}
+
+.tz-choice {
+
+    margin: 10px 0 0;
+    padding: 0;
+
+    border: 0;
+
+}
+
+.tz-choice legend {
+
+    padding: 0;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 700;
+
+}
+
+.tz-choice__option {
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-height: 44px;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+}
+
+.tz-choice__option input {
+
+    flex: none;
+
+    width: 20px;
+    height: 20px;
+
+    accent-color: var(--color-action-green);
+
+}
+
+.tz-choice__option input:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+/* the converted times */
+
+.tz-result {
+
+    min-width: 0;
+
+}
+
+.tz-empty {
+
+    margin: 0;
+
+    color: #475467;
+
+    font-size: 15px;
+
+}
+
+.tz-board {
+
+    display: grid;
+    gap: 10px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+}
+
+.tz-row {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+
+    min-width: 0;
+    padding: 14px 16px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: #ffffff;
+
+}
+
+.tz-row--primary {
+
+    border: 3px solid var(--color-action-green);
+    padding: 12px 14px;
+
+}
+
+.tz-row__time {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 12px;
+
+}
+
+.tz-clock {
+
+    color: var(--color-ink);
+
+    font-size: 26px;
+    font-weight: 750;
+    line-height: 1.15;
+    font-variant-numeric: tabular-nums;
+
+}
+
+.tz-row--primary .tz-clock {
+
+    font-size: clamp(34px, 9vw, 48px);
+
+}
+
+.tz-relation {
+
+    display: inline-block;
+
+    padding: 2px 10px;
+
+    border: 1px solid #067647;
+    border-radius: 999px;
+
+    background: #ecfdf3;
+
+    color: #05603a;
+
+    font-size: 13px;
+    font-weight: 700;
+
+}
+
+.tz-row__meta {
+
+    display: grid;
+    gap: 2px;
+
+    min-width: 0;
+
+    color: #344054;
+
+    font-size: 15px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+
+}
+
+.tz-zone {
+
+    color: var(--color-ink);
+
+    font-weight: 700;
+
+}
+
+.tz-offset {
+
+    color: #475467;
+
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+
+}
+
+.tz-remove {
+
+    justify-self: start;
+
+    min-height: 44px;
+    padding: 6px 14px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+.tz-remove:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.tz-share {
+
+    align-items: center;
+
+    margin-top: 14px;
+
+}
+
+.tz-check {
+
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    min-height: 44px;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+}
+
+.tz-check input {
+
+    flex: none;
+
+    width: 20px;
+    height: 20px;
+
+    accent-color: var(--color-action-green);
+
+}
+
+.tz-check input:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+/* meeting overlap */
+
+.tz-meeting {
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: #ffffff;
+
+}
+
+.tz-meeting > summary {
+
+    min-height: 56px;
+    padding: 14px 16px;
+
+    color: var(--color-ink);
+
+    font-size: 17px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+.tz-meeting > summary:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.tz-meeting > :not(summary) {
+
+    margin-left: 16px;
+    margin-right: 16px;
+
+}
+
+.tz-meeting > :last-child {
+
+    margin-bottom: 16px;
+
+}
+
+.tz-meeting__intro,
+.tz-meeting__date,
+.tz-note {
+
+    margin-top: 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+}
+
+.tz-meeting__controls {
+
+    display: grid;
+    gap: 14px;
+
+    margin-top: 12px;
+
+}
+
+.tz-hours {
+
+    display: grid;
+    gap: 10px;
+
+    margin-top: 12px;
+
+}
+
+.tz-hours__row {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 6px 10px;
+
+    padding: 10px 12px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 12px;
+
+}
+
+.tz-hours__zone {
+
+    grid-column: 1 / -1;
+
+    color: var(--color-ink);
+
+    font-weight: 700;
+    overflow-wrap: anywhere;
+
+}
+
+.tz-hours__field {
+
+    display: grid;
+    gap: 4px;
+
+    min-width: 0;
+
+}
+
+.tz-hours__word {
+
+    color: #475467;
+
+    font-size: 13px;
+
+}
+
+.tz-input--time {
+
+    min-width: 0;
+
+}
+
+.tz-overlap {
+
+    margin-top: 16px;
+
+}
+
+.tz-overlap__title {
+
+    margin: 0 0 10px;
+
+    color: var(--color-ink);
+
+    font-size: 17px;
+    font-weight: 700;
+
+}
+
+.tz-windows {
+
+    display: grid;
+    gap: 10px;
+
+    margin: 0 0 12px;
+    padding: 0;
+
+    list-style: none;
+
+}
+
+.tz-window {
+
+    padding: 12px 14px;
+
+    border: 1px solid #067647;
+    border-radius: 12px;
+
+    background: #ecfdf3;
+
+}
+
+.tz-window__head {
+
+    margin: 0 0 8px;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    line-height: 1.5;
+
+}
+
+.tz-window__zones,
+.tz-preferred {
+
+    display: grid;
+    gap: 6px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+}
+
+.tz-window__zone,
+.tz-preferred__item {
+
+    display: grid;
+    gap: 2px;
+
+    font-size: 15px;
+    line-height: 1.5;
+
+}
+
+.tz-window__name {
+
+    color: var(--color-ink);
+
+    font-weight: 700;
+    overflow-wrap: anywhere;
+
+}
+
+.tz-window__times {
+
+    color: #344054;
+
+    font-variant-numeric: tabular-nums;
+
+}
+
+.tz-none {
+
+    margin: 0 0 8px;
+    padding: 10px 14px;
+
+    border-left: 6px solid #b54708;
+    border-radius: 10px;
+
+    background: #fffaeb;
+
+    color: #7a2e0e;
+
+    font-size: 15px;
+    font-weight: 600;
+
+}
+
+.tz-issues {
+
+    margin: 0;
+    padding-left: 20px;
+
+    color: #912018;
+
+    font-size: 15px;
+    line-height: 1.55;
+
+}
+
+@media (min-width: 640px) {
+
+    .tz-row {
+
+        grid-template-columns: minmax(150px, 220px) minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 6px 18px;
+
+    }
+
+    .tz-row--primary {
+
+        grid-template-columns: minmax(220px, 300px) minmax(0, 1fr) auto;
+
+    }
+
+    .tz-remove {
+
+        justify-self: end;
+
+    }
+
+    .tz-hours__row {
+
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
+        align-items: end;
+
+    }
+
+    .tz-hours__zone {
+
+        grid-column: auto;
+
+        align-self: center;
+
+    }
+
+    .tz-meeting__controls {
+
+        grid-template-columns: minmax(0, 260px) auto;
+        align-items: end;
+
+    }
+
+}
+
+@media (min-width: 900px) {
+
+    .tz-source {
+
+        grid-template-columns: 180px 140px minmax(0, 1fr);
+        align-items: start;
+
+    }
+
+}
+
+@media (max-width: 640px) {
+
+    .tz-button {
+
+        flex: 1 1 140px;
+
+    }
+
+    .tz-meeting > :not(summary) {
+
+        margin-left: 12px;
+        margin-right: 12px;
+
+    }
+
+}

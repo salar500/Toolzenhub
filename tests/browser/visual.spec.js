@@ -73,6 +73,16 @@ test.describe("visual baselines @visual (clock and zone pinned)", () => {
     await page.evaluate(() => window.scrollTo(0, 0));
     await expect(page).toHaveScreenshot(["visual", "text-diff.png"], { fullPage: true });
   });
+
+  test("time-zone-converter", async ({ page, go }) => {
+    await page.clock.install({ time: new Date("2026-10-13T09:29:59Z") });
+    await page.clock.pauseAt(new Date("2026-10-13T09:30:01Z")); // 15:00 in India, every time
+    await go("tools/time-zone-converter/?to=Europe/London,America/New_York,Australia/Sydney");
+    await expect(page.locator("#tz-panel")).toHaveAttribute("data-ready", "true");
+    await page.evaluate(() => document.fonts.ready);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(page).toHaveScreenshot(["visual", "time-zone-converter.png"], { fullPage: true });
+  });
 });
 
 test.describe("visual baselines @visual", () => {

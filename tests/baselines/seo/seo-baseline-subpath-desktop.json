@@ -3702,11 +3702,11 @@
   "/time-tools.html": {
     "runtime": {
       "title": "Time Tools | ToolZen Hub",
-      "description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer and a stopwatch.",
+      "description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer, a stopwatch and a time zone converter.",
       "canonical": "https://toolzenhub.in/time-tools.html",
       "robots": null,
       "openGraph": {
-        "og:description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer and a stopwatch.",
+        "og:description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer, a stopwatch and a time zone converter.",
         "og:site_name": "ToolZen Hub",
         "og:title": "Time Tools | ToolZen Hub",
         "og:type": "website",
@@ -3714,7 +3714,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer and a stopwatch.",
+        "twitter:description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer, a stopwatch and a time zone converter.",
         "twitter:title": "Time Tools | ToolZen Hub"
       },
       "jsonLd": [
@@ -3738,14 +3738,14 @@
     },
     "rawHtml": {
       "title": "Time Tools | ToolZen Hub",
-      "description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer and a stopwatch.",
+      "description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer, a stopwatch and a time zone converter.",
       "canonical": "https://toolzenhub.in/time-tools.html",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1027
+      "visibleTextChars": 1250
     }
   },
   "/tools.html": {
@@ -3794,7 +3794,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2496
+      "visibleTextChars": 2715
     }
   },
   "/tools/countdown-timer/": {
@@ -4089,6 +4089,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 3511
+    }
+  },
+  "/tools/time-zone-converter/": {
+    "runtime": {
+      "title": "Time Zone Converter and Meeting Time Planner | ToolZen Hub",
+      "description": "Free time zone converter: turn a date and time in one zone into others, with daylight-saving gaps and repeated hours explained, and find times inside everyone's preferred hours. It runs in your browser: nothing is uploaded and your location is not requested.",
+      "canonical": "https://toolzenhub.in/tools/time-zone-converter/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free time zone converter: turn a date and time in one zone into others, with daylight-saving gaps and repeated hours explained, and find times inside everyone's preferred hours. It runs in your browser: nothing is uploaded and your location is not requested.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Time Zone Converter and Meeting Time Planner | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/time-zone-converter/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free time zone converter: turn a date and time in one zone into others, with daylight-saving gaps and repeated hours explained, and find times inside everyone's preferred hours. It runs in your browser: nothing is uploaded and your location is not requested.",
+        "twitter:title": "Time Zone Converter and Meeting Time Planner | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Time Zone Converter"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Time Zone Converter and Meeting Time Planner | ToolZen Hub",
+      "description": "Free time zone converter: turn a date and time in one zone into others, with daylight-saving gaps and repeated hours explained, and find times inside everyone&#39;s preferred hours. It runs in your browser: nothing is uploaded and your location is not requested.",
+      "canonical": "https://toolzenhub.in/tools/time-zone-converter/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3816
     }
   },
   "/tools/unix-timestamp-converter/": {

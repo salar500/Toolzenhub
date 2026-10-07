@@ -369,13 +369,13 @@
     "deadFragments": []
   },
   "time-tools.html": {
-    "internal": 28,
+    "internal": 29,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 51,
+    "internal": 52,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -411,6 +411,12 @@
     "deadFragments": []
   },
   "tools/text-diff/": {
+    "internal": 24,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/time-zone-converter/": {
     "internal": 24,
     "external": [],
     "placeholders": 4,

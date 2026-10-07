@@ -312,7 +312,7 @@ test.describe("Stopwatch in Time Tools and search", () => {
     await expect(page.locator("main")).not.toContainText(/coming soon|timers|measurement/i);
     await go("tools.html");
     await expect(page.locator('.directory-section a[href$="tools/stopwatch/"]')).toHaveCount(1);
-    await expect(page.locator(".directory-section__count").last()).toHaveText("4 tools");
+    await expect(page.locator(".directory-section__count").nth(1)).toHaveText("5 tools"); // the Time Tools section is the second of three
     await go("tools/countdown-timer/");
     await expect(page.locator('main a[href$="tools/stopwatch/"]')).toHaveCount(1);
   });

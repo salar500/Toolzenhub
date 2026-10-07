@@ -883,6 +883,47 @@ const catalog = [
     },
 
 
+    {
+        id: "time-zone-converter",
+        status: "published",
+        loader: () =>
+            import("../tools/time-zone-converter/index.js"),
+        sectionId: "time-tools",
+        icon: "◷",
+        title: "Time Zone Converter",
+        description:
+            "Convert a date and time from one time zone to others, with daylight-saving gaps and repeated hours explained, and find times that fall inside everyone's preferred hours. It runs in your browser.",
+        autoRelated: false,
+        relatedTools: ["unix-timestamp-converter"],
+        aliases: [
+            "time zone converter",
+            "timezone converter",
+            "time converter",
+            "convert time zones",
+            "world time converter",
+            "meeting time converter",
+            "international time converter",
+            "time difference between countries",
+            "meeting overlap"
+        ],
+        capabilities: {
+            copy: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            realtime: true,
+            urlState: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Time Zone Converter and Meeting Time Planner | ToolZen Hub",
+            description:
+                "Free time zone converter: turn a date and time in one zone into others, with daylight-saving gaps and repeated hours explained, and find times inside everyone's preferred hours. It runs in your browser: nothing is uploaded and your location is not requested."
+        }
+    },
+
+
     /* =====================================================
        DEVELOPER TOOLS
     ===================================================== */

@@ -508,10 +508,10 @@ test.describe("Developer Tools in the site", () => {
     await expect(dev.locator(".directory-section__count")).toHaveText("3 tools");
     await expect(dev.locator('a[href$="tools/unix-timestamp-converter/"]')).toHaveCount(1);
     const time = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Time Tools")') });
-    await expect(time.locator(".directory-section__count")).toHaveText("4 tools");
+    await expect(time.locator(".directory-section__count")).toHaveText("5 tools");
     await expect(time.locator('a[href$="tools/unix-timestamp-converter/"]')).toHaveCount(0);
     await go("time-tools.html");
-    await expect(page.locator("main a[href*='tools/']")).toHaveCount(4);
+    await expect(page.locator("main a[href*='tools/']")).toHaveCount(5);
     await expect(page.locator("main")).not.toContainText(/timestamp|epoch|json/i);
   });
 
