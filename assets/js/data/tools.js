@@ -1046,6 +1046,47 @@ const catalog = [
             description:
                 "Free online text diff checker. Paste two versions to see added, removed and changed lines with the changed words marked, optionally ignore whitespace-only changes, and copy a unified diff. It runs in your browser: your text is not uploaded."
         }
+    },
+
+    {
+        id: "image-compressor-resizer",
+        status: "published",
+        loader: () =>
+            import("../tools/image-compressor-resizer/index.js"),
+        sectionId: "image-tools",
+        icon: "▣",
+        title: "Image Compressor & Resizer",
+        description:
+            "Make a JPEG, PNG or WebP smaller in dimensions and file size, or keep it under a size you choose, and see an honest before and after. It runs in your browser: nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: [],
+        aliases: [
+            "image compressor",
+            "compress image",
+            "image resizer",
+            "resize image",
+            "reduce image size",
+            "image size reducer",
+            "compress jpg",
+            "compress png",
+            "resize photo",
+            "compress image online"
+        ],
+        capabilities: {
+            reset: true,
+            download: true,
+            presets: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Image Compressor & Resizer | ToolZen Hub",
+            description:
+                "Free image compressor and resizer for JPEG, PNG and WebP. Set new dimensions, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your image is not uploaded."
+        }
     }
 
 ];

@@ -102,6 +102,16 @@ export const ROUTES = {
 
 
     /* =====================================================
+       IMAGE TOOLS
+
+       The section's own page (it has no categories).
+    ===================================================== */
+
+    imageTools:
+        `${SITE_ROOT}image-tools.html`,
+
+
+    /* =====================================================
        CATEGORIES
 
        The Calculators section's own page: its categories.

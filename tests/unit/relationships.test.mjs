@@ -73,8 +73,11 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.equal(toolIds(rel.getRelatedTools("unix-timestamp-converter")).includes("text-diff"), false);
     // the Time Zone Converter names the Unix converter (both read instants and zones); autoRelated is off, so it joins no other Time Tool's list and none of theirs are changed (asserted above)
     assert.deepEqual(toolIds(rel.getRelatedTools("time-zone-converter")), ["unix-timestamp-converter"]);
+    // the first Image Tools tool relates to nothing: no other tool is an image tool, and nothing is forced
+    assert.deepEqual(toolIds(rel.getRelatedTools("image-compressor-resizer")), []);
+    for (const id of ["json-formatter", "unix-timestamp-converter", "text-diff", "time-zone-converter", "stopwatch", "countdown-timer", "date-calculator", "date-difference", "gst", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("image-compressor-resizer"), false, id);
     for (const id of ["date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("time-zone-converter"), false, id);
-    for (const id of ["date-difference", "date-calculator", "countdown-timer", "stopwatch"]) assert.equal(toolIds(rel.getRelatedTools(id)).some((x) => ["json-formatter", "unix-timestamp-converter", "text-diff", "time-zone-converter"].includes(x)), false, id);
+    for (const id of ["date-difference", "date-calculator", "countdown-timer", "stopwatch"]) assert.equal(toolIds(rel.getRelatedTools(id)).some((x) => ["json-formatter", "unix-timestamp-converter", "text-diff", "time-zone-converter", "image-compressor-resizer"].includes(x)), false, id);
     // Income Tax (Tool Pack 17) shares the Tax category with GST but not its intent: it opts out of the automatic same-category lists (autoRelated: false),
     // so its related tools are exactly its curated Home Loan, it has no related articles from the GST category, and GST's list is unchanged
     assert.deepEqual(toolIds(rel.getRelatedTools("income-tax")), ["home-loan"]);
@@ -88,7 +91,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.deepEqual(toolIds(rel.getRelatedTools("profit")), ["margin"]);
     assert.deepEqual(rel.getRelatedTools("nope"), []);
     // parity with the pre-M7 rule for every tool without a curated list (the Loan Prepayment page curates its own order; GST and Percentage curate cross-category lists)
-    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "time-zone-converter", "income-tax"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
+    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "time-zone-converter", "image-compressor-resizer", "income-tax"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
   });
 
   test("tool -> related articles: the first six published loan articles, in catalog order, for EMI and Loan Comparison", () => {

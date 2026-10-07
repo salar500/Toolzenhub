@@ -44,6 +44,11 @@ main#app
             div.category-card__content
               h3 "Developer Tools"
               p "JSON, timestamp and text compare tools, in your browser"
+          a.category-card [href="{ROOT}image-tools.html"]
+            div.category-card__icon.category-card__icon--image-tools "🖼️"
+            div.category-card__content
+              h3 "Image Tools"
+              p "Compress and resize images in your browser"
   section#popular-calculators.section
     section.popular-section
       div.container

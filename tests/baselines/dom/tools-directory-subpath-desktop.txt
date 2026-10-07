@@ -134,3 +134,15 @@ section.categories-page.directory-page
             h3.directory-group__title
               a [href="{ROOT}tools/text-diff/"] "Text Diff / Compare"
             p.directory-group__text "Paste two versions of a text and see what was added, removed and changed, line by line wit…"
+      section.directory-section [aria-labelledby="directory-image-tools-heading"]
+        div.directory-section__header
+          span.directory-section__label "Section"
+          h2#directory-image-tools-heading.directory-section__title
+            a [href="{ROOT}image-tools.html"] "Image Tools"
+          p.directory-section__text "Private browser-based tools for resizing and optimizing images."
+            span.directory-section__count "1 tool"
+        div.directory-groups
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/image-compressor-resizer/"] "Image Compressor & Resizer"
+            p.directory-group__text "Make a JPEG, PNG or WebP smaller in dimensions and file size, or keep it under a size you …"

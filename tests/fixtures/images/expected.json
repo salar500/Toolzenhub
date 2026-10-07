@@ -1,0 +1,101 @@
+{
+ "alpha.webp": {
+  "bytes": 908,
+  "exifOrientation": 1,
+  "format": "WEBP",
+  "hasTransparentPixel": true,
+  "height": 100,
+  "mode": "RGBA",
+  "width": 200
+ },
+ "exif-secret.jpg": {
+  "bytes": 24675,
+  "exifOrientation": 1,
+  "format": "JPEG",
+  "hasTransparentPixel": false,
+  "height": 240,
+  "mode": "RGB",
+  "width": 320
+ },
+ "logo-alpha.png": {
+  "bytes": 663,
+  "exifOrientation": 1,
+  "format": "PNG",
+  "hasTransparentPixel": true,
+  "height": 100,
+  "mode": "RGBA",
+  "width": 200
+ },
+ "lossless.webp": {
+  "bytes": 39512,
+  "exifOrientation": 1,
+  "format": "WEBP",
+  "hasTransparentPixel": false,
+  "height": 120,
+  "mode": "RGB",
+  "width": 160
+ },
+ "lowq.jpg": {
+  "bytes": 19980,
+  "exifOrientation": 1,
+  "format": "JPEG",
+  "hasTransparentPixel": false,
+  "height": 480,
+  "mode": "RGB",
+  "width": 640
+ },
+ "opaque-rgba.png": {
+  "bytes": 541,
+  "exifOrientation": 1,
+  "format": "PNG",
+  "hasTransparentPixel": false,
+  "height": 100,
+  "mode": "RGBA",
+  "width": 200
+ },
+ "photo.jpg": {
+  "bytes": 96399,
+  "exifOrientation": 1,
+  "format": "JPEG",
+  "hasTransparentPixel": false,
+  "height": 480,
+  "mode": "RGB",
+  "width": 640
+ },
+ "photo.webp": {
+  "bytes": 20208,
+  "exifOrientation": 1,
+  "format": "WEBP",
+  "hasTransparentPixel": false,
+  "height": 240,
+  "mode": "RGB",
+  "width": 320
+ },
+ "png-named-jpg.jpg": {
+  "bytes": 25015,
+  "exifOrientation": 1,
+  "format": "PNG",
+  "hasTransparentPixel": false,
+  "height": 300,
+  "mode": "RGB",
+  "width": 400
+ },
+ "portrait-exif6.jpg": {
+  "bytes": 2566,
+  "exifOrientation": 6,
+  "format": "JPEG",
+  "hasTransparentPixel": false,
+  "height": 240,
+  "mode": "RGB",
+  "width": 320
+ },
+ "screenshot.png": {
+  "bytes": 25015,
+  "exifOrientation": 1,
+  "format": "PNG",
+  "hasTransparentPixel": false,
+  "height": 300,
+  "mode": "RGB",
+  "width": 400
+ }
+}

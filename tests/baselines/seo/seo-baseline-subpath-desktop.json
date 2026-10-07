@@ -3432,6 +3432,55 @@
       "visibleTextChars": 1701
     }
   },
+  "/image-tools.html": {
+    "runtime": {
+      "title": "Image Tools | ToolZen Hub",
+      "description": "Image Tools from ToolZen Hub: an image compressor and resizer that runs in your browser, so you can make a photo smaller without uploading it.",
+      "canonical": "https://toolzenhub.in/image-tools.html",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Image Tools from ToolZen Hub: an image compressor and resizer that runs in your browser, so you can make a photo smaller without uploading it.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Image Tools | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/image-tools.html"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Image Tools from ToolZen Hub: an image compressor and resizer that runs in your browser, so you can make a photo smaller without uploading it.",
+        "twitter:title": "Image Tools | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Image Tools"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#0b9f58",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Image Tools | ToolZen Hub",
+      "description": "Image Tools from ToolZen Hub: an image compressor and resizer that runs in your browser, so you can make a photo smaller without uploading it.",
+      "canonical": "https://toolzenhub.in/image-tools.html",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 714
+    }
+  },
   "/investment.html": {
     "runtime": {
       "title": "Investment Calculators | ToolZen Hub",
@@ -3794,7 +3843,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2715
+      "visibleTextChars": 3011
     }
   },
   "/tools/countdown-timer/": {
@@ -3942,6 +3991,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 4008
+    }
+  },
+  "/tools/image-compressor-resizer/": {
+    "runtime": {
+      "title": "Image Compressor & Resizer | ToolZen Hub",
+      "description": "Free image compressor and resizer for JPEG, PNG and WebP. Set new dimensions, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your image is not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/image-compressor-resizer/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free image compressor and resizer for JPEG, PNG and WebP. Set new dimensions, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your image is not uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Image Compressor & Resizer | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/image-compressor-resizer/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free image compressor and resizer for JPEG, PNG and WebP. Set new dimensions, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your image is not uploaded.",
+        "twitter:title": "Image Compressor & Resizer | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Image Compressor & Resizer"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Image Compressor &amp; Resizer | ToolZen Hub",
+      "description": "Free image compressor and resizer for JPEG, PNG and WebP. Set new dimensions, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your image is not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/image-compressor-resizer/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 4167
     }
   },
   "/tools/json-formatter/": {

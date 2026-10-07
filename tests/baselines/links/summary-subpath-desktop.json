@@ -326,8 +326,14 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "image-tools.html": {
+    "internal": 25,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "(home)": {
-    "internal": 35,
+    "internal": 36,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -375,7 +381,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 52,
+    "internal": 54,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -396,6 +402,12 @@
     "internal": 24,
     "external": [],
     "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/image-compressor-resizer/": {
+    "internal": 23,
+    "external": [],
+    "placeholders": 5,
     "deadFragments": []
   },
   "tools/json-formatter/": {

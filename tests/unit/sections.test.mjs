@@ -37,8 +37,8 @@ before(async () => {
 });
 
 describe("section model", () => {
-  test("three sections, each with a stable id, its landing page and its path prefix: Calculators, Time Tools and Developer Tools", () => {
-    assert.deepEqual(tax.getSections().map((s) => s.id), ["calculators", "time-tools", "developer-tools"]);
+  test("four sections, each with a stable id, its landing page and its path prefix: Calculators, Time Tools, Developer Tools and Image Tools", () => {
+    assert.deepEqual(tax.getSections().map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools"]);
     const section = tax.getSectionById("calculators");
     assert.equal(section.title, "Calculators");
     assert.equal(section.landing, "calculatorCategories");
@@ -54,6 +54,13 @@ describe("section model", () => {
     assert.equal(dev.pathPrefix, "tools");
     assert.deepEqual(tax.getCategoriesBySection("developer-tools"), []); // no categories and no subcategory layer yet
     assert.deepEqual(tax.getToolsBySection("developer-tools").map((t) => t.id), ["json-formatter", "unix-timestamp-converter", "text-diff"]);
+    const image = tax.getSectionById("image-tools");
+    assert.equal(image.title, "Image Tools");
+    assert.equal(image.landing, "imageTools");
+    assert.equal(image.pathPrefix, "tools"); // /tools/<id>/ like the other non-calculator sections
+    assert.equal(image.description, "Private browser-based tools for resizing and optimizing images.");
+    assert.deepEqual(tax.getCategoriesBySection("image-tools"), []); // flat: no categories, no placeholders
+    assert.deepEqual(tax.getToolsBySection("image-tools").map((t) => t.id), ["image-compressor-resizer"]);
   });
 
   test("section ids are unique and every section names a landing page that exists in ROUTES", () => {
@@ -181,7 +188,7 @@ describe("routing: every registered tool keeps its URL", () => {
   });
 
   test("the calculator loader registry is unchanged: loaders only for the published tools, still lazy", () => {
-    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "countdown-timer", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "income-tax", "json-formatter", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip", "stopwatch", "text-diff", "time-zone-converter", "unix-timestamp-converter"]);
+    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "countdown-timer", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "image-compressor-resizer", "income-tax", "json-formatter", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip", "stopwatch", "text-diff", "time-zone-converter", "unix-timestamp-converter"]);
     for (const loader of Object.values(registry.calculatorRegistry)) assert.equal(typeof loader, "function");
     assert.deepEqual(registry.calculatorMetadata.emi, { section: "Calculators", category: "loans", title: "EMI Calculator" });
     assert.deepEqual(registry.calculatorMetadata["income-tax"], { section: "Calculators", category: "tax", title: "Old vs New Tax Regime Calculator" });
@@ -193,6 +200,7 @@ describe("routing: every registered tool keeps its URL", () => {
     assert.deepEqual(registry.calculatorMetadata["unix-timestamp-converter"], { section: "Developer Tools", title: "Unix Timestamp Converter" });
     assert.deepEqual(registry.calculatorMetadata["text-diff"], { section: "Developer Tools", title: "Text Diff / Compare" });
     assert.deepEqual(registry.calculatorMetadata["time-zone-converter"], { section: "Time Tools", title: "Time Zone Converter" });
+    assert.deepEqual(registry.calculatorMetadata["image-compressor-resizer"], { section: "Image Tools", title: "Image Compressor & Resizer" });
   });
 });
 

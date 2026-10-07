@@ -40,6 +40,7 @@ const PAGES = [
   ["countdown-timer", "tools/countdown-timer/", ".calculator-info details", false],
   ["stopwatch", "tools/stopwatch/", ".calculator-info details", false],
   ["developer-tools", "developer-tools.html", ".category-page-card, .directory-tools a", false],
+  ["image-tools", "image-tools.html", ".category-page-card, .directory-tools a", false],
   ["json-formatter", "tools/json-formatter/", ".calculator-info details", false],
   ["articles", "articles.html", "#articles-list .article-card", false],
   ["article", "articles/loan-comparison/what-is-loan-prepayment/", ".article-related-card", true],
@@ -82,6 +83,19 @@ test.describe("visual baselines @visual (clock and zone pinned)", () => {
     await page.evaluate(() => document.fonts.ready);
     await page.evaluate(() => window.scrollTo(0, 0));
     await expect(page).toHaveScreenshot(["visual", "time-zone-converter.png"], { fullPage: true });
+  });
+
+  test("image-compressor-resizer", async ({ page, go }) => {
+    await go("tools/image-compressor-resizer/");
+    await expect(page.locator("#ic-panel")).toHaveAttribute("data-ready", "true");
+    await page.locator("#ic-file").setInputFiles("tests/fixtures/images/photo.jpg"); // a committed fixture, so the result is the same every time
+    await expect(page.locator("#ic-panel")).toHaveAttribute("data-state", "ready");
+    await page.getByRole("button", { name: "50%", exact: true }).click();
+    await page.getByRole("button", { name: "Compress image", exact: true }).click();
+    await expect(page.locator("#ic-panel")).toHaveAttribute("data-state", "done");
+    await page.evaluate(() => document.fonts.ready);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(page).toHaveScreenshot(["visual", "image-compressor-resizer.png"], { fullPage: true });
   });
 });
 

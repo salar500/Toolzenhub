@@ -356,7 +356,7 @@ test.describe("Developer Tools in the site", () => {
 
   test("All Tools shows three sections; Developer Tools holds the JSON tool and the timestamp converter; Time Tools is unchanged", async ({ page, go }) => {
     await go("tools.html");
-    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools"]);
+    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools"]);
     const dev = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Developer Tools")') });
     await expect(dev.locator(".directory-section__count")).toHaveText("3 tools");
     await expect(dev.locator('a[href$="tools/json-formatter/"]')).toHaveCount(1);

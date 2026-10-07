@@ -87,6 +87,25 @@ export const sections = [
         icon: "{ }",
         landing: "developerTools",
         pathPrefix: "tools"
+    },
+
+    /*
+     * Image Tools, like Time Tools and Developer Tools, has no categories: its
+     * tools sit directly under the section. It opens with one real tool and no
+     * placeholders; only image tools belong here.
+     */
+    {
+        id: "image-tools",
+        title: "Image Tools",
+        description:
+            "Private browser-based tools for resizing and optimizing images.",
+        seoDescription:
+            "Image Tools from ToolZen Hub: an image compressor and resizer that runs in your browser, so you can make a photo smaller without uploading it.",
+        summary:
+            "Compress and resize images in your browser",
+        icon: "🖼️",
+        landing: "imageTools",
+        pathPrefix: "tools"
     }
 
 ];
