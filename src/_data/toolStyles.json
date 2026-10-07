@@ -259,6 +259,7 @@
       "/assets/css/calculators/calculator-form.css",
       "/assets/css/calculators/calculator-results.css",
       "/assets/css/calculators/calculator-responsive.css",
+      "/assets/css/components/report-issue.css",
       "/assets/css/calculators/income-tax.css"
     ]
   },

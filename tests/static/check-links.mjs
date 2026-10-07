@@ -234,7 +234,8 @@ const hardcoded = [];
 const sourceFiles = [...jsFiles, ...(SITE_BASE === "/" ? entryHtml : [])];
 for (const f of sourceFiles) {
   const src = f.endsWith(".js") ? stripComments(read(f)) : read(f).replace(/<!--[\s\S]*?-->/g, " ").replace(/\/\*[\s\S]*?\*\//g, " ").replace(/^\s*\/\/.*$/gm, " ");
-  const hits = [...src.matchAll(/\/Toolzenhub|salar500\.github\.io/g)].length;
+  // the project's own github.com repository URL is an external link, not a site path
+  const hits = [...src.matchAll(/(?<!github\.com\/salar500)\/Toolzenhub|salar500\.github\.io/g)].length;
   if (hits) hardcoded.push({ file: f, hits, live: reachable.has(f) });
 }
 const baselineFiles = (knownAll.hardcodedSitePrefix?.files ?? []).map((x) => x.file);

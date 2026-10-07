@@ -1,0 +1,54 @@
+/* =========================================================
+   ToolZen Hub
+   Report-an-issue line. Quiet and secondary on purpose: plain
+   text with an underlined link, never a banner.
+========================================================= */
+
+.report-issue {
+
+    margin: 16px 0 0;
+
+    color: #344054;
+
+    font-size: 15px;
+    line-height: 1.6;
+
+}
+
+.report-issue a {
+
+    display: inline-block;
+
+    min-height: 24px;
+    padding: 10px 0;
+
+    color: var(--color-ink);
+
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+}
+
+.report-issue a:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.report-issue__ext {
+
+    font-weight: 400;
+
+}
+
+.report-issue__note {
+
+    display: block;
+
+    color: #475467;
+
+    font-size: 13px;
+
+}

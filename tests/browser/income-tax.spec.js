@@ -86,6 +86,40 @@ test.describe("Old vs New Tax Regime Calculator", () => {
     expect(watch.pageErrors).toEqual([]);
   });
 
+  test("a real, quiet way to report an issue sits under Rules and Sources, and the sources open safely", async ({ page, go, watch }) => {
+    await open(page, go);
+    const report = page.locator(".report-issue a");
+    await expect(report).toHaveCount(1);
+    await expect(report).toContainText("Report it");
+    await expect(report).toContainText("opens GitHub in a new tab");
+    await expect(report).toHaveAttribute("href", "https://github.com/salar500/Toolzenhub/issues/new?title=Income%20tax%20calculator%3A%20");
+    await expect(report).toHaveAttribute("target", "_blank");
+    expect(await report.getAttribute("rel")).toMatch(/noopener/);
+    // honest about what it is: public, needs an account; and nothing pretends to send
+    await expect(page.locator(".report-issue")).toContainText("public and need a free GitHub account");
+    await expect(page.locator("main")).not.toContainText(/guaranteed|100% accurate|verified by tax experts/i);
+    // it follows the sources, inside that section, and is not above the calculator
+    const section = page.locator(".calculator-info", { has: page.locator(".it-sources") });
+    await expect(section.locator(".report-issue")).toHaveCount(1);
+    const box = async (loc) => (await loc.boundingBox()).y;
+    expect(await box(page.locator(".report-issue"))).toBeGreaterThan(await box(page.locator(".it-sources")));
+    expect(await box(page.locator(".report-issue"))).toBeGreaterThan(await box(page.locator("#it-form")));
+    // source links: descriptive text, safe rel, same-tab https
+    for (const link of await page.locator(".it-sources a").all()) {
+      expect((await link.innerText()).trim().length).toBeGreaterThan(15);
+      expect(await link.getAttribute("rel")).toMatch(/noopener/);
+    }
+    // keyboard: reachable and visibly focused
+    await report.focus();
+    await expect(report).toBeFocused();
+    const outline = await report.evaluate((a) => getComputedStyle(a).outlineStyle + " " + getComputedStyle(a).outlineWidth);
+    expect(outline).toMatch(/solid 3px/);
+    // the touch target is comfortable
+    expect((await report.boundingBox()).height).toBeGreaterThanOrEqual(40);
+    await expectNoHorizontalOverflow(page);
+    expect(watch.pageErrors).toEqual([]);
+  });
+
   test("the tax year is never silently timeless: no banner during 2026-27, a clear one once the year has ended", async ({ page, go }) => {
     await open(page, go);
     await expect(page.locator("#it-stale")).toBeHidden();

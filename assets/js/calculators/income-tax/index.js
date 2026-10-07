@@ -27,6 +27,7 @@ import {
     calculate,
     FIELD_MAX
 } from "../formulas/income-tax.js";
+import { reportIssueMarkup } from "../../components/report-issue.js";
 
 import {
     ACTIVE_TAX_YEAR
@@ -601,6 +602,8 @@ export function markup() {
                     change during a year; this page states the year it covers
                     and does not claim to be the latest.
                 </p>
+
+${reportIssueMarkup({ toolName: "Income tax calculator", prompt: "Found a calculation or tax-rule issue, an outdated figure or a broken source link?", linkText: "Report it" })}
 
             </section>
 

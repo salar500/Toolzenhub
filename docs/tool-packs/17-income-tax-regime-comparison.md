@@ -106,7 +106,7 @@ Browser-local. No API, backend, account, storage or analytics of values (asserte
 
 ## Trust and disclaimer
 
-Visible, concise: an estimate for the stated tax year; the supported scope; not tax or legal advice; actual returns may differ; check complex cases against the official sources or with a qualified professional. Section numbers are those of the 2025 Act; the rebate in section 156 is the one called 87A in the earlier Act. **Known gap:** the site has no connected contact form or visible address, so a reader cannot report an error; this is recorded for follow-up (a correction channel should exist before the tool is promoted).
+Visible, concise: an estimate for the stated tax year; the supported scope; not tax or legal advice; actual returns may differ; check complex cases against the official sources or with a qualified professional. Section numbers are those of the 2025 Act; the rebate in section 156 is the one called 87A in the earlier Act. **Reporting:** the site has no connected contact form or published address, so the page links to the project public GitHub Issues page (components/report-issue.js, one constant to change if a real contact channel is ever connected), saying plainly that reports are public and need a free GitHub account. Revisit if a contact channel is connected.
 
 ## Platform changes (small)
 
