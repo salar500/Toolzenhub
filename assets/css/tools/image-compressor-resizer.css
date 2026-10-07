@@ -598,9 +598,14 @@
 
     margin-top: 16px;
 
+    /* the shared button is a fixed 46px tall with no side room: a long file name wraps onto several
+       lines and must grow the button, not spill out of it over what follows */
+    height: auto;
     min-height: 48px;
+    padding: 12px 16px;
 
     font-size: 16px;
+    line-height: 1.4;
     text-align: center;
     text-decoration: none;
 

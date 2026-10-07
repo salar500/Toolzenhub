@@ -9,7 +9,7 @@
  */
 import fs from "node:fs";
 import { test, expect, expectClean, expectNoHorizontalOverflow } from "../helpers/test-base.mjs";
-import { sniffFormat, readSize, formatBytes } from "../../assets/js/tools/image-compressor-resizer/image-engine.js";
+import { sniffFormat, readSize, formatBytes, outputFileName } from "../../assets/js/tools/image-compressor-resizer/image-engine.js";
 
 const FIX = "tests/fixtures/images/";
 const panel = (page) => page.locator("#ic-panel");
@@ -792,6 +792,50 @@ test.describe("Image Compressor & Resizer: accessibility and layout", () => {
       await choose(page, "logo-alpha.png"); // transparent preview
       await state(page, "ready");
       await expectNoHorizontalOverflow(page);
+    });
+  }
+
+  // real-device finding: a long download name wrapped inside a fixed-height button and spilled over the content below
+  for (const width of [320, 360, 390]) {
+    test(`${width} px: a very long file name stays inside its button and card, nothing overlaps, and the download keeps the full generated name`, async ({ page, go }) => {
+      await page.setViewportSize({ width, height: 740 });
+      await open(page, go);
+      const names = [
+        `IMG${"20240101123456789".repeat(9)}.jpg`, // 150+ characters, no break points at all
+        `${"holiday_photo_".repeat(11)}.jpg`,
+        `${"a-very-long-photo-name-".repeat(7)}.jpg`,
+        `Zażółć gęślą jaźń ${"word ".repeat(30)}.jpg`,
+      ];
+      for (const name of names) {
+        await chooseBuffer(page, { name, mimeType: "image/jpeg", buffer: fs.readFileSync(FIX + "photo.jpg") });
+        await state(page, "ready");
+        await compress(page);
+        const expectedName = outputFileName(name, "image/jpeg", false);
+        const link = page.locator("#ic-download");
+        await link.scrollIntoViewIfNeeded();
+        await expect(link).toBeVisible();
+        await expect(link).toHaveText(`Download ${expectedName}`); // the text is the full generated name
+        await expect(link).toHaveAttribute("download", expectedName); // and so is the saved one
+        await expectNoHorizontalOverflow(page);
+        const box = await page.evaluate(() => {
+          const rect = (s) => { const r = document.querySelector(s).getBoundingClientRect(); return { left: r.left, right: r.right, top: r.top, bottom: r.bottom }; };
+          const a = document.querySelector("#ic-download");
+          return { button: rect("#ic-download"), card: rect("#ic-result"), note: rect("#ic-result > p:last-of-type"), textFits: a.scrollHeight <= a.clientHeight + 1 && a.scrollWidth <= a.clientWidth + 1, height: a.getBoundingClientRect().height };
+        });
+        expect(box.textFits, "the text is inside the button").toBe(true);
+        expect(box.button.left).toBeGreaterThanOrEqual(box.card.left - 1);
+        expect(box.button.right).toBeLessThanOrEqual(box.card.right + 1);
+        expect(box.button.right).toBeLessThanOrEqual(width);
+        expect(box.height).toBeGreaterThanOrEqual(44);
+        expect(box.note.top, "the note below starts after the button ends").toBeGreaterThanOrEqual(box.button.bottom - 1);
+        expect(box.button.bottom).toBeLessThanOrEqual(box.card.bottom + 1);
+        // the result is still usable, and the real download carries the full name
+        await expect(page.locator("#ic-result-dimensions")).toHaveText("640 × 480");
+        const file = await download(page);
+        expect(file.name).toBe(expectedName);
+        expect(file.name.length).toBeGreaterThan(80);
+        expect(file.format).toBe("jpeg");
+      }
     });
   }
 
