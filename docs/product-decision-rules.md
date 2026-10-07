@@ -24,7 +24,7 @@ What does not belong here: commit hashes, test counts, byte sizes, phase-specifi
 4. **The AI-era test.** Before building, state why the tool still matters when an AI assistant exists. Valid reasons: an exact, deterministic answer; speed and no prompt; privacy of the data; repeatability; handling input an AI itself produced; a task that is faster done than described. If the honest answer is "an assistant does this just as well", do not build it. A tool that is only "paste input, click a button" is not enough: strengthen it around the real job (for example, exact error locations rather than a bare "invalid").
 5. **Browser-native and local-first where it helps.** Prefer processing in the browser: it is fast, private and needs no backend. Use it as an advantage in the tool's copy only where it is true.
 6. **Different job, not a variant.** A new tool must do a job no existing tool does (a countdown is not a stopwatch with a flag). If it is a variant, make it a mode of the existing tool or do not build it.
-7. **Do not continue a category mechanically.** After every tool or small cluster, compare opportunities across the whole platform (section 12) instead of defaulting to the next item in the same category. Category completion is never a reason.
+7. **Category balance never decides what is built next.** Do not continue a category mechanically, and do not build a tool because its section or category has fewer tools than another, to even out the catalog, or because completing a category feels due. A category having fewer tools is not sufficient justification for prioritizing another tool in it. Choose on user pain, usefulness, differentiation, repeat-use or decision value, architectural fit, implementation and maintenance risk, and platform-wide opportunity: after every tool or small cluster, compare opportunities across the whole platform (section 12). This cuts both ways: a candidate in the category just finished is neither favoured nor penalised, and wins only if it scores higher.
 8. **Start narrow, then widen.** One excellent version of a new kind of product comes first; scale only after it has proven itself.
 
 ## 2. Product types
@@ -45,6 +45,7 @@ Choose the format by the user's job. Do not build a calculator for an informatio
 4. **Say only what is true of the tool.** Privacy and processing claims are factual and narrow ("Your JSON is processed in your browser"), never broader than the code. Capability flags in the catalog describe only what is built.
 5. **Sensitive topics (money, tax, health, anything affecting a decision):** the tool computes and the content informs; neither tells the reader what to do with their money or health. Keep assumptions next to every number, avoid overclaiming ("guaranteed", "best", "always") and keep the existing disclaimer framing ("estimates, not advice").
 6. **Be accurate or silent.** A fact that depends on a changing rule is either sourced and dated, or the page says to check the current rules. It is never stated as settled.
+7. **Projections and scenarios are never forecasts.** A tool that models a future outcome from assumptions (an investment growing, a corpus being drawn down) keeps the visitor's contributions or withdrawals, the *assumed* return or rate, and the *estimated* result visibly apart, and says next to the result that it is a projection from assumptions, not a forecast, guarantee or advice. Use "assumed", "estimated", "projection" and "scenario"; never "guaranteed", "safe", "best" or "recommended", and never present a default as typical or expected. Say what is not modelled (taxes, charges, volatility, inflation). Show a lower and a higher scenario where the answer is sensitive to the assumption, framed as "if returns are lower or higher", never "worst or best case". The detailed wording standard is in `docs/tool-packs/03-sip.md` ("Trust standard for projections").
 
 ## 4. Information architecture
 
@@ -123,7 +124,7 @@ Choose the format by the user's job. Do not build a calculator for an informatio
 
 ## 12. Opportunity evaluation (choosing what to build next)
 
-After each tool or mini-cluster, rank opportunities **across the whole platform**, not within the category just finished. Candidates include tools, guides, trackers and comparisons, developer utilities, time utilities and other browser-native products. Another tool in the same section is chosen only if it clearly scores higher.
+After each tool or mini-cluster, rank opportunities **across the whole platform**, not within the category just finished. Candidates include tools, guides, trackers and comparisons, developer utilities, time utilities and other browser-native products. Another tool in the same section is chosen only if it clearly scores higher. How many tools a category or section already has is not a scoring criterion in either direction (rule 1.7).
 
 Score every candidate on:
 - real, recurring user pain;
@@ -174,15 +175,15 @@ If the answers do not support building it, stop and say why.
 ## 15. Maintaining this document
 
 - Add a rule only when it is a lasting policy; keep one-off instructions out.
+- **Rules travel with the change that creates them.** When a development phase introduces or approves a durable product, architecture, testing, UX, compatibility, content or engineering rule, the repository document that owns that kind of rule is updated as part of the same coherent change, when it applies, so the code and the written rule never drift apart. Product policy lives here; procedure lives in the document that owns it (`docs/tool-pack-factory.md` for the build lifecycle, `docs/shared-tool-ux.md` for shared UI, `docs/content-clusters.md` for articles, `tests/README.md` for test layers, the tool's own spec for decisions that belong to one tool). Do not create a new document for a rule that fits an existing one, and do not duplicate a rule across documents: state it once and link to it. Temporary implementation instructions and one-off task details are never promoted into permanent rules.
 - When a rule changes, change it here first and update the procedure documents it affects. Known drift to resolve: `docs/tool-pack-factory.md` and `docs/tool-pack-template.md` describe "one local commit; do not push" and a full per-pack regression gate; current policy is a normal push after focused, impact-based verification (sections 10 and 11), with a full regression reserved for release checkpoints or broad shared-risk changes.
-- Rules are reviewed when a phase reveals a gap, and every such change is a reviewed commit of its own.
+- Rules are reviewed when a phase reveals a gap. Every rule change is deliberate and reviewed, and is visible as such: the commit message names it, and it is never smuggled into an unrelated change.
 
 ### Changing this rulebook
 
 Changes to this file must be intentional and reviewed.
 
-- Update the rulebook in its own focused commit.
-- Do not casually modify it during ordinary feature work.
-- Combine a rulebook update with a feature commit only when that feature genuinely establishes a new durable product principle that cannot reasonably be separated from it.
+- A phase that establishes or approves a durable rule updates the rulebook in the same coherent change (see "Rules travel with the change that creates them"). A rules-only decision with no feature, such as a review of how we choose what to build, is its own focused commit.
+- Do not edit it casually: change it only for a lasting policy, and strengthen or clarify an existing rule rather than adding a near-duplicate.
 - Temporary implementation decisions, test counts, commit hashes and phase-specific instructions do not belong in the rulebook.
 - Repository truth and explicit user decisions override stale older procedural documents.

@@ -23,10 +23,12 @@ before(async () => {
 });
 
 /* ---------- how the pages chose related content before M7 ---------- */
+// tools with autoRelated: false are never offered as an automatic neighbour (the SWP Calculator, Tool Pack 21)
+const NOT_AUTO_RELATED = ["swp"];
 const OLD_RELATED_TOOLS = (slug) => {          // components/related-calculators.js
   const category = registry.calculatorMetadata[slug]?.category;
   if (!category) return [];
-  return Object.entries(registry.calculatorMetadata).filter(([s, m]) => m.category === category && s !== slug).map(([s]) => s).slice(0, 6);
+  return Object.entries(registry.calculatorMetadata).filter(([s, m]) => m.category === category && s !== slug && !NOT_AUTO_RELATED.includes(s)).map(([s]) => s).slice(0, 6);
 };
 const OLD_RELATED_ARTICLES = (slug) => {       // components/related-articles.js
   const category = registry.calculatorMetadata[slug]?.category;
@@ -51,6 +53,8 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.deepEqual(toolIds(rel.getRelatedTools("sip")), ["fd", "cagr"]);
     assert.deepEqual(toolIds(rel.getRelatedTools("fd")), ["sip", "cagr"]);
     assert.deepEqual(toolIds(rel.getRelatedTools("cagr")), ["sip", "fd"]);
+    // SWP (Tool Pack 21): one curated one-way relation to SIP (build the corpus, then draw it down); autoRelated is off, so it is not offered the other Investment tools and does not appear in theirs, and SIP does not link back
+    assert.deepEqual(toolIds(rel.getRelatedTools("swp")), ["sip"]);
     // GST (Tool Pack 8) is the first live Tax tool: it has no category neighbours, so its curated cross-category list is what it shows (Income Tax is Coming Soon and never offered);
     // Margin and Profit do NOT link back to it (the reciprocal links are deferred)
     assert.deepEqual(toolIds(rel.getRelatedTools("gst")), ["margin", "profit"]);
@@ -91,7 +95,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.deepEqual(toolIds(rel.getRelatedTools("profit")), ["margin"]);
     assert.deepEqual(rel.getRelatedTools("nope"), []);
     // parity with the pre-M7 rule for every tool without a curated list (the Loan Prepayment page curates its own order; GST and Percentage curate cross-category lists)
-    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "time-zone-converter", "image-compressor-resizer", "income-tax"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
+    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "time-zone-converter", "image-compressor-resizer", "income-tax", "swp"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
   });
 
   test("tool -> related articles: the first six published loan articles, in catalog order, for EMI and Loan Comparison", () => {

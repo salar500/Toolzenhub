@@ -22,7 +22,7 @@ section.categories-page.directory-page
           h2#directory-calculators-heading.directory-section__title
             a [href="{ROOT}categories.html"] "Calculators"
           p.directory-section__text "Calculators for loans, investment, tax, business and math."
-            span.directory-section__count "13 tools"
+            span.directory-section__count "14 tools"
         div.directory-groups
           article.directory-group
             h3.directory-group__title
@@ -50,6 +50,8 @@ section.categories-page.directory-page
                 a [href="{ROOT}calculators/fd/"] "FD Calculator"
               li
                 a [href="{ROOT}calculators/cagr/"] "CAGR Calculator"
+              li
+                a [href="{ROOT}calculators/swp/"] "SWP Calculator"
           article.directory-group
             h3.directory-group__title
               a [href="{ROOT}tax.html"] "Tax"

@@ -32,6 +32,7 @@ const PAGES = [
   ["fd", "calculators/fd/", ".related-article-card", true],
   ["gst", "calculators/gst/", ".related-article-card", true],
   ["cagr", "calculators/cagr/", ".related-article-card", true],
+  ["swp", "calculators/swp/", ".calculator-info details", false],
   ["percentage", "calculators/percentage/", ".related-article-card", true],
   ["income-tax", "calculators/income-tax/", ".calculator-info details", false],
   ["time-tools", "time-tools.html", ".category-page-card, .directory-tools a", false],

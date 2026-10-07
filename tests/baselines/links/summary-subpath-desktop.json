@@ -214,7 +214,7 @@
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 36,
+    "internal": 37,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -302,6 +302,12 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "calculators/swp/": {
+    "internal": 27,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "categories.html": {
     "internal": 28,
     "external": [],
@@ -339,7 +345,7 @@
     "deadFragments": []
   },
   "investment.html": {
-    "internal": 27,
+    "internal": 28,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -381,7 +387,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 54,
+    "internal": 55,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

@@ -95,7 +95,7 @@ describe("Investment is a category inside Calculators (Tool Pack 7 pins SIP and 
   const tool = (id) => calcs.getCalculatorById(id);
 
   test("SIP, FD and CAGR: section = Calculators, category = Investment; no subcategory", () => {
-    for (const id of ["sip", "fd", "cagr"]) {
+    for (const id of ["sip", "fd", "cagr", "swp"]) {
       assert.equal(tool(id).category, "investment", id);
       assert.equal(tool(id).subcategory, undefined, id);
       const path = tax.getToolPath(tool(id));
@@ -113,13 +113,13 @@ describe("Investment is a category inside Calculators (Tool Pack 7 pins SIP and 
     assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools"]); // a category belongs to Calculators; the other sections have none
     assert.equal(cats.categories.find((c) => c.id === "investment").sectionId, "calculators");
     assert.equal(cats.categories.find((c) => c.id === "investment").title, "Investment");
-    assert.deepEqual(tax.getToolsByCategory("investment").map((t) => t.id), ["sip", "ppf", "fd", "cagr"]);
-    assert.deepEqual(tax.getToolsByCategory("investment").filter((t) => t.available).map((t) => t.id), ["sip", "fd", "cagr"]);
+    assert.deepEqual(tax.getToolsByCategory("investment").map((t) => t.id), ["sip", "ppf", "fd", "cagr", "swp"]);
+    assert.deepEqual(tax.getToolsByCategory("investment").filter((t) => t.available).map((t) => t.id), ["sip", "fd", "cagr", "swp"]);
   });
 
   test("the search index, the registry and the breadcrumb agree: Calculators > Investment > the tool", async () => {
     const idx = await import("../../assets/js/data/search-index.js");
-    for (const [id, title] of [["sip", "SIP Calculator"], ["fd", "FD Calculator"], ["cagr", "CAGR Calculator"]]) {
+    for (const [id, title] of [["sip", "SIP Calculator"], ["fd", "FD Calculator"], ["cagr", "CAGR Calculator"], ["swp", "SWP Calculator"]]) {
       const entry = idx.searchIndex.find((e) => e.key === `tool:${id}`);
       assert.equal(entry.sectionTitle, "Calculators", id);
       assert.equal(entry.categoryTitle, "Investment", id);

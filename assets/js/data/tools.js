@@ -430,6 +430,42 @@ const catalog = [
         }
     },
 
+    {
+        id: "swp",
+        status: "published",
+        loader: () =>
+            import("../calculators/swp/index.js"),
+        category: "investment",
+        icon: "⇩",
+        title: "SWP Calculator",
+        description:
+            "Estimate how long a corpus could last under regular withdrawals, how much you could withdraw, or what corpus a withdrawal plan needs, for a return you assume.",
+        autoRelated: false,
+        relatedTools: ["sip"],
+        aliases: [
+            "systematic withdrawal plan",
+            "retirement withdrawal",
+            "retirement drawdown",
+            "withdrawal plan"
+        ],
+        capabilities: {
+            reset: true,
+            compare: true,
+            table: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "SWP Calculator: How Long Will a Corpus Last? | ToolZen Hub",
+            description:
+                "Estimate how long a corpus could last under regular withdrawals, how much you could withdraw, or what corpus a plan needs, for a return you assume. A projection, not a forecast."
+        }
+    },
 
     /* =====================================================
        TAX

@@ -48,9 +48,9 @@ describe("category pages", () => {
     assert.deepEqual(dir.categoryPageIds(), ["investment", "tax", "business", "math"]);
   });
 
-  test("Investment: SIP, FD and CAGR are links and PPF is a Coming soon card that is not", () => {
+  test("Investment: SIP, FD, CAGR and SWP are links and PPF is a Coming soon card that is not", () => {
     const html = dir.categoryPageHtml("investment");
-    assert.deepEqual(hrefs(html).filter((h) => h.includes("/calculators/")), ["/Toolzenhub/calculators/sip/", "/Toolzenhub/calculators/fd/", "/Toolzenhub/calculators/cagr/"]);
+    assert.deepEqual(hrefs(html).filter((h) => h.includes("/calculators/")), ["/Toolzenhub/calculators/sip/", "/Toolzenhub/calculators/fd/", "/Toolzenhub/calculators/cagr/", "/Toolzenhub/calculators/swp/"]);
     assert.match(html, /PPF Calculator/);
     assert.equal((html.match(/category-page-card--soon/g) || []).length, 1);
     assert.match(html, /<h1[^>]*>\s*Investment Calculators/);

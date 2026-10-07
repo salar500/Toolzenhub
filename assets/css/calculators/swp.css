@@ -1,0 +1,347 @@
+/* =========================================================
+   ToolZen Hub
+   SWP Calculator
+   Only what the shared calculator styles do not already provide:
+   the question and frequency choices, the hideable fields, the
+   scenario cards, the notes and the year-by-year table. Buttons,
+   focus, fields and headings come from the shared layer
+   (components/buttons.css, base/accessibility.css,
+   calculator-base.css, calculator-form.css). Loaded after
+   calculator-responsive.css.
+========================================================= */
+
+
+/* =========================================================
+   FORM
+   The question is a group of native radios drawn as full-width
+   options, stacked so three sentences fit at 320px. The
+   frequency is a row of the same options. The selected one has a
+   tick and a heavier border as well as a colour, so the choice
+   never relies on colour alone.
+========================================================= */
+
+.swp-choice {
+    min-width: 0;
+    margin: 0 0 18px;
+    padding: 0;
+    border: 0;
+}
+
+.swp-choice legend {
+    padding: 0;
+}
+
+.swp-field--full {
+    grid-column: 1 / -1;
+    margin: 0;
+}
+
+.swp-field {
+    min-width: 0;
+}
+
+.swp-choice__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 6px 0 8px;
+}
+
+.swp-choice__options--stack {
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.swp-choice__option {
+    position: relative;
+    display: inline-flex;
+    flex: 1 1 110px;
+    min-width: 0;
+    cursor: pointer;
+}
+
+.swp-choice__options--stack .swp-choice__option {
+    flex: 0 0 auto;
+}
+
+/* the radio itself is hidden; its label is the control and keeps the focus ring */
+
+.swp-choice__option input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+}
+
+.swp-choice__option span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 48px;
+    padding: 8px 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+    background: var(--color-white);
+    color: #344054;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: center;
+    transition:
+        background .2s ease,
+        border-color .2s ease;
+}
+
+.swp-choice__options--stack .swp-choice__option span {
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.swp-choice__option:hover span {
+    background: #f2f4f7;
+}
+
+.swp-choice__option input:checked + span {
+    padding: 7px 13px;
+    border: 2px solid var(--color-brand-green);
+    background: #ecfdf3;
+    color: var(--color-ink);
+    font-weight: 750;
+}
+
+.swp-choice__option input:checked + span::before {
+    content: "✓";
+    content: "✓" / "";
+    font-weight: 800;
+}
+
+.swp-choice__option input:focus-visible + span {
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   RESULTS
+   The headline answer takes the whole first row; the supporting
+   figures wrap under it. Long currency values break inside their
+   box instead of widening the page.
+========================================================= */
+
+#swp-results .swp-metrics .calculator-results__item--primary {
+    grid-column: 1 / -1;
+}
+
+#swp-results .calculator-results__value {
+    overflow-wrap: anywhere;
+}
+
+#swp-results .calculator-results__summary p {
+    margin: 0 0 8px;
+}
+
+#swp-results .calculator-results__summary p:last-child {
+    margin-bottom: 0;
+}
+
+.swp-subtitle {
+    margin: 28px 0 14px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-slate-200);
+    color: var(--color-ink);
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   NOTES
+   The trust note is calm and starts with the words "A scenario,
+   not a forecast", so its meaning never depends on colour.
+========================================================= */
+
+.swp-note {
+    margin: 10px 0 0;
+    color: var(--color-ink-muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.swp-note--plain {
+    margin: 0 0 12px;
+    color: #475467;
+}
+
+.swp-note--trust {
+    margin: 16px 0 0;
+    padding: 12px 14px;
+    border: 1px solid #fedf89;
+    border-left: 4px solid #f79009;
+    border-radius: 8px;
+    background: #fffcf5;
+    color: var(--color-ink);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   SCENARIO CARDS
+   Compact: two rows each, three columns where there is room,
+   stacked on a phone. The "as assumed" card has a stronger
+   border so it can be found, without calling it the likely
+   outcome.
+========================================================= */
+
+.swp-compare {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.swp-compare__card {
+    min-width: 0;
+    padding: 14px;
+    box-sizing: border-box;
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+    background: var(--color-white);
+}
+
+.swp-compare__card--assumed {
+    border-width: 2px;
+    border-color: var(--color-action-green);
+    padding: 13px;
+}
+
+.swp-compare__title {
+    margin: 0 0 2px;
+    color: var(--color-ink);
+    font-size: 14px;
+    font-weight: 750;
+    line-height: 1.35;
+}
+
+.swp-compare__tag {
+    margin: 0 0 8px;
+    color: var(--color-ink-muted);
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.swp-compare__list {
+    margin: 0;
+}
+
+.swp-compare__list > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 0;
+    border-top: 1px solid #eaecf0;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.swp-compare__list dt {
+    color: #475467;
+}
+
+/* a value too long to sit beside its label drops to its own line, whole, instead of breaking mid-number */
+
+.swp-compare__list dd {
+    min-width: 0;
+    margin: 0 0 0 auto;
+    color: var(--color-ink);
+    font-weight: 700;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   YEAR-BY-YEAR TABLE
+   Four columns. On a narrow screen the table scrolls inside its
+   own labelled region, never the page, and the Year column stays
+   in view.
+========================================================= */
+
+/* the shared table is 560px wide at least; four columns fit a phone without that */
+
+.calculator-results__table.swp-table {
+    min-width: 0;
+}
+
+.swp-table th:not(:first-child),
+.swp-table td {
+    text-align: right;
+}
+
+.swp-table tbody th {
+    background: var(--color-white);
+    color: var(--color-ink);
+}
+
+.swp-table th:first-child {
+    position: sticky;
+    left: 0;
+    text-align: left;
+    box-shadow: 1px 0 0 #eaecf0;
+}
+
+.swp-table thead th:first-child {
+    background: #f9fafb;
+}
+
+/* "(corpus used up)" wraps under the year instead of widening the first column */
+
+.swp-table th:first-child {
+    white-space: normal;
+}
+
+.swp-table__flag {
+    display: block;
+    font-weight: 600;
+    color: #475467;
+}
+
+#swp-results .calculator-results__table-wrapper:focus-visible {
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   TEXT FOR SCREEN READERS ONLY
+========================================================= */
+
+.swp-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+
+@media (max-width: 480px) {
+
+    .swp-table th,
+    .swp-table td {
+        padding: 8px 8px;
+        font-size: 13px;
+    }
+
+}

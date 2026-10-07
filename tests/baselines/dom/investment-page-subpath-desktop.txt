@@ -35,5 +35,11 @@ section.categories-page.directory-page
           h3.category-page-card__title "CAGR Calculator"
           p.category-page-card__description "Find the yearly growth rate that connects a starting and an ending value over a period, se…"
         span.category-page-card__arrow [aria-hidden="true"] "→"
+      a.category-page-card [href="{ROOT}calculators/swp/"]
+        div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"] "⇩"
+        div.category-page-card__content
+          h3.category-page-card__title "SWP Calculator"
+          p.category-page-card__description "Estimate how long a corpus could last under regular withdrawals, how much you could withdr…"
+        span.category-page-card__arrow [aria-hidden="true"] "→"
     p.directory-section__more
       a [href="{ROOT}categories.html"] "← All calculator categories"
