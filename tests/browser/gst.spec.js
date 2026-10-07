@@ -398,7 +398,7 @@ test.describe("GST Calculator", () => {
     await expect(page.locator("details")).toHaveCount(5);
   });
 
-  test("related: Margin and Profit are offered; Coming soon Income Tax and the other tools are not", async ({ page, go, siteRoot }) => {
+  test("related: Margin and Profit are offered; the Old vs New Tax Regime Calculator shares the Tax category but is not related (autoRelated: false) and the other tools are not", async ({ page, go, siteRoot }) => {
     await open(page, go);
     const related = page.locator(".related-calculator-card");
     const hrefs = await related.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
@@ -418,7 +418,8 @@ test.describe("GST Calculator", () => {
       await expect(page.locator(`#calculators-grid a.calculator-card[href='${siteRoot}calculators/gst/']`), query).toHaveCount(0);
     }
     await input.fill("income tax");
-    await expect(page.locator("#calculators-grid a.calculator-card[href*='income-tax']")).toHaveCount(0); // Coming soon: not a link
+    await expect(page.locator("#calculators-grid a.calculator-card[href*='income-tax']")).toHaveCount(1); // the live Old vs New Tax Regime Calculator
+    await expect(page.locator(`#calculators-grid a.calculator-card[href='${siteRoot}calculators/gst/']`)).toHaveCount(0);
   });
 
   test("responsive: no horizontal overflow with several items and the table open, and readable tap targets", async ({ page, go }) => {

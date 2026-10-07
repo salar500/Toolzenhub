@@ -119,10 +119,16 @@ function byHierarchy(
     subject
 ) {
 
+    /* a tool that opts out (autoRelated: false) has no automatic neighbours, and is no one else's */
+    if (subject.autoRelated === false) {
+        return [];
+    }
+
     /* a tool without a category sits directly under its section: it is grouped with that section only, never with another section's uncategorised tools */
     const sameCategory =
         items.filter(
             item =>
+                item.autoRelated !== false &&
                 item.category === subject.category &&
                 item.sectionId === subject.sectionId
         );

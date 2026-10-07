@@ -2920,6 +2920,55 @@
       "visibleTextChars": 5965
     }
   },
+  "/calculators/income-tax/": {
+    "runtime": {
+      "title": "Old vs New Tax Regime Calculator, Tax Year 2026-27 | ToolZen Hub",
+      "description": "Compare the estimated income tax under the old and the new regime for tax year 2026-27 (FY 2026-27): slabs, rebate, standard deduction, HRA, 80C and more, with the deductions the old regime needs to match. Calculated in your browser; an estimate, not tax advice.",
+      "canonical": "https://toolzenhub.in/calculators/income-tax/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Compare the estimated income tax under the old and the new regime for tax year 2026-27 (FY 2026-27): slabs, rebate, standard deduction, HRA, 80C and more, with the deductions the old regime needs to match. Calculated in your browser; an estimate, not tax advice.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Old vs New Tax Regime Calculator, Tax Year 2026-27 | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/income-tax/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Compare the estimated income tax under the old and the new regime for tax year 2026-27 (FY 2026-27): slabs, rebate, standard deduction, HRA, 80C and more, with the deductions the old regime needs to match. Calculated in your browser; an estimate, not tax advice.",
+        "twitter:title": "Old vs New Tax Regime Calculator, Tax Year 2026-27 | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Old vs New Tax Regime Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Old vs New Tax Regime Calculator, Tax Year 2026-27 | ToolZen Hub",
+      "description": "Compare the estimated income tax under the old and the new regime for tax year 2026-27 (FY 2026-27): slabs, rebate, standard deduction, HRA, 80C and more, with the deductions the old regime needs to match. Calculated in your browser; an estimate, not tax advice.",
+      "canonical": "https://toolzenhub.in/calculators/income-tax/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 8929
+    }
+  },
   "/calculators/loan-comparison/": {
     "runtime": {
       "title": "Loan Comparison Calculator | ToolZenHub",
@@ -3607,7 +3656,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 746
+      "visibleTextChars": 969
     }
   },
   "/terms.html": {
@@ -3745,7 +3794,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2300
+      "visibleTextChars": 2333
     }
   },
   "/tools/countdown-timer/": {

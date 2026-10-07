@@ -26,7 +26,7 @@ before(async () => {
 });
 
 // the published tools of the Calculators section; Date Difference (Time Tools) is a published tool too, but it is not a calculator
-const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "percentage"];
+const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "percentage", "income-tax"];
 const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment"];
 
@@ -45,10 +45,10 @@ describe("catalog model", () => {
     for (const c of catalog.calculators) assert.ok(["published", "coming-soon"].includes(c.status), `${c.id}: ${c.status}`);
   });
 
-  test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP Margin, Profit, Home Loan, FD, GST, CAGR and Percentage are published; all other 13 are coming-soon", () => {
+  test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP Margin, Profit, Home Loan, FD, GST, CAGR and Percentage, and Income Tax (the Old vs New Tax Regime Calculator) are published; all other 12 are coming-soon", () => {
     const pub = catalog.calculators.filter((c) => c.status === "published").map((c) => c.id).sort();
     assert.deepEqual(pub, [...PUBLISHED_CALCULATORS].sort());
-    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 13);
+    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 12);
   });
 
   test("`available` (read by cards and search) is exactly status === published", () => {
@@ -123,6 +123,7 @@ describe("registry is derived from the catalog", () => {
       gst: { section: "Calculators", category: "tax", title: "GST Calculator" },
       cagr: { section: "Calculators", category: "investment", title: "CAGR Calculator" },
       percentage: { section: "Calculators", category: "math", title: "Percentage Calculator" },
+      "income-tax": { section: "Calculators", category: "tax", title: "Old vs New Tax Regime Calculator" },
       // a tool directly under a section has no category at all
       "date-difference": { section: "Time Tools", title: "Date Difference Calculator" },
       "date-calculator": { section: "Time Tools", title: "Date Calculator" },

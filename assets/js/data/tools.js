@@ -29,6 +29,12 @@
    - relatedTools / relatedArticles   optional curated links by
                    id (data/relationships.js)
    - subcategory   optional (none today)
+   - autoRelated   optional; false keeps the tool out of the AUTOMATIC
+                   same-category related lists, both as the page that
+                   shows them and as a candidate in other tools' lists
+                   (data/relationships.js). Its curated relatedTools
+                   still apply. Used where two tools share a category
+                   but not an intent (Income Tax and GST).
 
    Derived, never written here:
    - section    from the category (tool -> category -> section)
@@ -473,12 +479,42 @@ const catalog = [
 
     {
         id: "income-tax",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/income-tax/index.js"),
         category: "tax",
         icon: "₹",
-        title: "Income Tax Calculator",
+        title: "Old vs New Tax Regime Calculator",
         description:
-            "Estimate your income tax."
+            "Compare the estimated income tax of the old and the new regime for tax year 2026-27, with the rebate, your deductions and the deductions the old regime needs to match. For resident individuals under 60 with salary or pension income up to ₹50 lakh.",
+        aliases: [
+            "income tax calculator",
+            "old vs new tax regime",
+            "tax regime comparison",
+            "new regime calculator",
+            "old regime calculator",
+            "salary tax calculator india",
+            "new vs old regime"
+        ],
+        autoRelated: false,
+        relatedTools: [
+            "home-loan"
+        ],
+        capabilities: {
+            reset: true,
+            compare: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Old vs New Tax Regime Calculator, Tax Year 2026-27 | ToolZen Hub",
+            description:
+                "Compare the estimated income tax under the old and the new regime for tax year 2026-27 (FY 2026-27): slabs, rebate, standard deduction, HRA, 80C and more, with the deductions the old regime needs to match. Calculated in your browser; an estimate, not tax advice."
+        }
     },
 
 

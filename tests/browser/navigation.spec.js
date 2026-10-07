@@ -138,8 +138,9 @@ test.describe("categories page", () => {
     await expect(page.locator(".category-page-card--soon")).toContainText("PPF Calculator");
     await expect(page.locator(".category-page-card--soon a")).toHaveCount(0);
     await go("tax.html");
-    expect(await links()).toEqual([`${siteRoot}calculators/gst/`]);
-    await expect(page.locator(".category-page-card--soon")).toContainText("Income Tax Calculator");
+    expect(await links()).toEqual([`${siteRoot}calculators/gst/`, `${siteRoot}calculators/income-tax/`]);
+    await expect(page.locator(".category-page-card--soon")).toHaveCount(0); // the Income Tax entry is now the live Old vs New Tax Regime Calculator
+    await expect(page.locator('a.category-page-card[href$="calculators/income-tax/"]')).toContainText("Old vs New Tax Regime Calculator");
     await go("business.html");
     expect(await links()).toEqual([`${siteRoot}calculators/profit/`, `${siteRoot}calculators/margin/`]);
     await go("math.html");
@@ -202,13 +203,13 @@ test.describe("categories page", () => {
 });
 
 test.describe("calculators and loans listings", () => {
-  test("calculators page: 25 entries (12 built), search, empty state, deep link", async ({ page, go }) => {
+  test("calculators page: 25 entries (13 built), search, empty state, deep link", async ({ page, go }) => {
     await go("calculators.html");
     const cards = page.locator("#calculators-grid .calculator-card");
     await expect(cards).toHaveCount(25);
     await expect(page.locator("#calculators-results-count")).toHaveText("25 calculators");
-    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(12);
-    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(13);
+    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(13);
+    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(12);
 
     const input = page.locator("#calculators-search-input");
     await input.fill("sip");
@@ -249,11 +250,10 @@ test.describe("Coming soon items are not clickable", () => {
   for (const [path, selector, expected] of [
     ["categories.html", "#categories-sections .category-page-card--soon", 5],
     ["investment.html", ".category-page-card--soon", 1],
-    ["tax.html", ".category-page-card--soon", 1],
     ["business.html", ".category-page-card--soon", 1],
     ["math.html", ".category-page-card--soon", 2],
     ["loans.html", "#loans-calculators-grid .calculator-card--soon", 3],
-    ["calculators.html", "#calculators-grid .calculator-card--soon", 13],
+    ["calculators.html", "#calculators-grid .calculator-card--soon", 12],
   ]) {
     test(`${path || "home"}: ${expected} cards, no links, clicking does nothing`, async ({ page, go }) => {
       await go(path);
@@ -393,12 +393,10 @@ test.describe("M6 category hierarchy in the breadcrumbs @portable", () => {
 
   test("categories page: every category card resolves from the category data; Coming soon tools are not links", async ({ page, go, siteRoot }) => {
     await go("categories.html?q=tax");
-    // GST (live) is a link; Income Tax (Coming soon) is listed but is not
-    await expect(page.locator("#categories-grid .category-page-card--soon").first()).toBeVisible();
-    await expect(page.locator("#categories-grid .category-page-card--soon")).toContainText("Income Tax Calculator");
-    await expect(page.locator("#categories-grid .category-page-card--soon a")).toHaveCount(0);
+    // GST and the Old vs New Tax Regime Calculator (the former Coming soon Income Tax entry) are live links; no Coming soon card matches "tax"
     await expect(page.locator('#categories-grid a.category-page-card[href$="calculators/gst/"]')).toHaveCount(1);
-    await expect(page.locator('#categories-grid a[href*="income-tax"]')).toHaveCount(0);
+    await expect(page.locator('#categories-grid a.category-page-card[href$="calculators/income-tax/"]')).toHaveCount(1);
+    await expect(page.locator("#categories-grid .category-page-card--soon a")).toHaveCount(0);
     await go("categories.html?q=emi");
     // search results show the tool's category icon, looked up from the category data
     const emi = page.locator('#categories-grid a.category-page-card[href$="calculators/emi/"]');
@@ -476,19 +474,20 @@ test.describe("All Tools and the calculator hierarchy", () => {
     expect(await page.locator(".calculator-breadcrumb a").evaluateAll((l) => l.map((x) => x.getAttribute("href")))).toEqual([siteRoot, `${siteRoot}categories.html`, `${siteRoot}investment.html`]);
   });
 
-  test("the All Tools page: two sections (Calculators, Time Tools), live tools as links, Health and Converter plain text with a Coming soon badge", async ({ page, go, siteRoot, watch }) => {
+  test("the All Tools page: three sections (Calculators, Time Tools, Developer Tools), live tools as links, Health and Converter plain text with a Coming soon badge", async ({ page, go, siteRoot, watch }) => {
     await go("tools.html");
     await expect(page.locator("h1")).toHaveText("All Tools");
     await expect(page).toHaveTitle("All Tools | ToolZen Hub");
     await expect(page.locator(".calculator-breadcrumb")).toContainText("All Tools");
-    await expect(page.locator(".directory-section")).toHaveCount(2);
+    await expect(page.locator(".directory-section")).toHaveCount(3);
     await expect(page.getByRole("heading", { name: "Calculators", level: 2 })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Time Tools", level: 2 })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Developer Tools", level: 2 })).toBeVisible();
     await expect(page.locator('.directory-section a[href$="tools/date-difference/"]')).toHaveCount(1);
     const live = await page.locator(".directory-group a").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
-    for (const r of ["loans.html", "investment.html", "tax.html", "business.html", "math.html", "calculators/emi/", "calculators/sip/", "calculators/fd/", "calculators/cagr/", "calculators/margin/", "calculators/profit/", "calculators/gst/", "calculators/percentage/"]) expect(live).toContain(siteRoot + r);
-    for (const bad of ["categories.html#health", "categories.html#converter", "calculators/ppf/", "calculators/income-tax/", "calculators/roi/"]) expect(live.some((h) => h.includes(bad)), bad).toBe(false);
-    await expect(page.locator(".directory-group")).toHaveCount(9); // the five live calculator categories and the four Time Tools tools
+    for (const r of ["loans.html", "investment.html", "tax.html", "business.html", "math.html", "calculators/emi/", "calculators/sip/", "calculators/fd/", "calculators/cagr/", "calculators/margin/", "calculators/profit/", "calculators/gst/", "calculators/percentage/", "calculators/income-tax/"]) expect(live).toContain(siteRoot + r);
+    for (const bad of ["categories.html#health", "categories.html#converter", "calculators/ppf/", "calculators/roi/"]) expect(live.some((h) => h.includes(bad)), bad).toBe(false);
+    await expect(page.locator(".directory-group")).toHaveCount(11); // the five live calculator categories, the four Time Tools tools and the two Developer Tools tools
     await expect(page.locator(".directory-soon__list li")).toHaveText([/Health\s*Coming soon/, /Converter\s*Coming soon/]);
     await expect(page.locator(".directory-soon .coming-soon-badge")).toHaveCount(2);
     await expect(page.locator(".directory-soon a")).toHaveCount(0);
@@ -573,8 +572,8 @@ test.describe("All Tools and the calculator hierarchy", () => {
 
   test("the three destinations have different jobs: All Tools (platform), Calculator Categories (the section) and All Calculators (the flat list)", async ({ page, go }) => {
     await go("tools.html");
-    await expect(page.locator(".directory-section__label")).toHaveText(["Section", "Section"]);
-    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, /^4 tools$/]);
+    await expect(page.locator(".directory-section__label")).toHaveText(["Section", "Section", "Section"]);
+    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, /^4 tools$/, /^2 tools$/]);
     await go("categories.html");
     await expect(page.locator("h1")).toHaveText("Calculator Categories");
     await expect(page.locator(".categories-search__content p")).toHaveText("Search calculators"); // this search is scoped to calculators, and says so

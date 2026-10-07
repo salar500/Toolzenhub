@@ -214,7 +214,7 @@
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 35,
+    "internal": 36,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -252,6 +252,16 @@
   "calculators/home-loan/": {
     "internal": 34,
     "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators/income-tax/": {
+    "internal": 27,
+    "external": [
+      "egazette.gov.in",
+      "www.incometax.gov.in",
+      "www.pib.gov.in"
+    ],
     "placeholders": 4,
     "deadFragments": []
   },
@@ -346,7 +356,7 @@
     "deadFragments": []
   },
   "tax.html": {
-    "internal": 25,
+    "internal": 26,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -364,7 +374,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 49,
+    "internal": 50,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

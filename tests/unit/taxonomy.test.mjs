@@ -134,7 +134,7 @@ describe("Investment is a category inside Calculators (Tool Pack 7 pins SIP and 
 describe("Tax is a category inside Calculators (Tool Pack 8 pins GST and Income Tax, not only the page's appearance)", () => {
   const tool = (id) => calcs.getCalculatorById(id);
 
-  test("GST and Income Tax: section = Calculators, category = Tax; no subcategory; GST is live, Income Tax is Coming Soon", () => {
+  test("GST and Income Tax: section = Calculators, category = Tax; no subcategory; both are live (Income Tax is the Old vs New Tax Regime Calculator)", () => {
     for (const id of ["gst", "income-tax"]) {
       assert.equal(tool(id).category, "tax", id);
       assert.equal(tool(id).subcategory, undefined, id);
@@ -145,15 +145,16 @@ describe("Tax is a category inside Calculators (Tool Pack 8 pins GST and Income 
       assert.equal(path.subcategory, null, id);
     }
     assert.equal(tool("gst").available, true);
-    assert.equal(tool("income-tax").available, false);
-    assert.equal(tool("income-tax").loader, undefined);
+    assert.equal(tool("income-tax").available, true);
+    assert.equal(typeof tool("income-tax").loader, "function");
+    assert.equal(tool("income-tax").title, "Old vs New Tax Regime Calculator");
   });
 
-  test("Tax is a category of the Calculators section, not a section of its own; GST is its only live tool", () => {
+  test("Tax is a category of the Calculators section, not a section of its own; GST and the Old vs New Tax Regime Calculator are its live tools", () => {
     assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools", "developer-tools"]); // a category belongs to Calculators; Time Tools and Developer Tools have none
     assert.equal(cats.categories.find((c) => c.id === "tax").sectionId, "calculators");
     assert.deepEqual(tax.getToolsByCategory("tax").map((t) => t.id), ["gst", "income-tax"]);
-    assert.deepEqual(tax.getToolsByCategory("tax").filter((t) => t.available).map((t) => t.id), ["gst"]);
+    assert.deepEqual(tax.getToolsByCategory("tax").filter((t) => t.available).map((t) => t.id), ["gst", "income-tax"]);
   });
 
   test("the search index, the registry and the breadcrumb agree: Calculators > Tax > GST Calculator", async () => {
@@ -164,8 +165,8 @@ describe("Tax is a category inside Calculators (Tool Pack 8 pins GST and Income 
     assert.deepEqual(registry.calculatorMetadata.gst, { section: "Calculators", category: "tax", title: "GST Calculator" });
     // the shared breadcrumb prints the category id (styled to read "Tax"); Home is added by the renderer: Home > Calculators > tax > GST Calculator
     assert.deepEqual(crumb.toolBreadcrumbItems(registry.calculatorMetadata.gst).map((i) => i.label), ["Calculators", "tax", "GST Calculator"]);
-    assert.equal(idx.searchIndex.find((e) => e.key === "tool:income-tax").status, "coming-soon");
-    assert.equal("income-tax" in registry.calculatorMetadata, false);
+    assert.equal(idx.searchIndex.find((e) => e.key === "tool:income-tax").status, "published");
+    assert.deepEqual(registry.calculatorMetadata["income-tax"], { section: "Calculators", category: "tax", title: "Old vs New Tax Regime Calculator" });
   });
 });
 

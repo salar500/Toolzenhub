@@ -35,7 +35,7 @@ describe("All Tools", () => {
 
   test("no tool that is not live is a link, and the search form is a plain GET to All Tools", () => {
     const html = dir.allToolsHtml();
-    for (const soon of ["ppf", "income-tax", "roi", "ratio", "age", "bmi", "currency", "date", "unit-converter", "personal-loan"]) assert.equal(html.includes(`calculators/${soon}/`), false, soon);
+    for (const soon of ["ppf", "roi", "ratio", "age", "bmi", "currency", "date", "unit-converter", "personal-loan"]) assert.equal(html.includes(`calculators/${soon}/`), false, soon);
     assert.match(html, /<form[^>]*action="\/Toolzenhub\/tools\.html"[^>]*method="get"/);
     assert.match(html, /id="tools-results"/);
     assert.match(html, /id="tools-directory"/);
@@ -59,7 +59,7 @@ describe("category pages", () => {
   test("Business, Tax and Math show exactly their live tools; Coming soon ones are not links", () => {
     const live = (id) => hrefs(dir.categoryPageHtml(id)).filter((h) => h.includes("/calculators/"));
     assert.deepEqual(live("business"), ["/Toolzenhub/calculators/profit/", "/Toolzenhub/calculators/margin/"]);
-    assert.deepEqual(live("tax"), ["/Toolzenhub/calculators/gst/"]);
+    assert.deepEqual(live("tax"), ["/Toolzenhub/calculators/gst/", "/Toolzenhub/calculators/income-tax/"]);
     assert.deepEqual(live("math"), ["/Toolzenhub/calculators/percentage/"]);
     assert.match(dir.categoryPageHtml("math"), /Ratio Calculator/);
     assert.match(dir.categoryPageHtml("math"), /Age Calculator/);

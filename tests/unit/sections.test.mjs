@@ -22,7 +22,7 @@ const PROJECT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..",
 const inventory = JSON.parse(fs.readFileSync(path.join(PROJECT, "tests", "inventory", "url-inventory.json"), "utf8"));
 
 const CATEGORY_IDS = ["loans", "investment", "tax", "health", "business", "math", "converter", "more"];
-const PUBLISHED_URLS = ["/calculators/balance-transfer/", "/calculators/cagr/", "/calculators/emi/", "/calculators/fd/", "/calculators/gst/", "/calculators/home-loan/", "/calculators/loan-comparison/", "/calculators/margin/", "/calculators/percentage/", "/calculators/prepayment/", "/calculators/profit/", "/calculators/sip/"];
+const PUBLISHED_URLS = ["/calculators/balance-transfer/", "/calculators/cagr/", "/calculators/emi/", "/calculators/fd/", "/calculators/gst/", "/calculators/home-loan/", "/calculators/income-tax/", "/calculators/loan-comparison/", "/calculators/margin/", "/calculators/percentage/", "/calculators/prepayment/", "/calculators/profit/", "/calculators/sip/"];
 
 let cats, tax, calcs, routes, registry, idx, search, tools;
 before(async () => {
@@ -181,9 +181,10 @@ describe("routing: every registered tool keeps its URL", () => {
   });
 
   test("the calculator loader registry is unchanged: loaders only for the published tools, still lazy", () => {
-    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "countdown-timer", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "json-formatter", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip", "stopwatch", "unix-timestamp-converter"]);
+    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "countdown-timer", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "income-tax", "json-formatter", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip", "stopwatch", "unix-timestamp-converter"]);
     for (const loader of Object.values(registry.calculatorRegistry)) assert.equal(typeof loader, "function");
     assert.deepEqual(registry.calculatorMetadata.emi, { section: "Calculators", category: "loans", title: "EMI Calculator" });
+    assert.deepEqual(registry.calculatorMetadata["income-tax"], { section: "Calculators", category: "tax", title: "Old vs New Tax Regime Calculator" });
     assert.deepEqual(registry.calculatorMetadata["date-difference"], { section: "Time Tools", title: "Date Difference Calculator" });
     assert.deepEqual(registry.calculatorMetadata["date-calculator"], { section: "Time Tools", title: "Date Calculator" });
     assert.deepEqual(registry.calculatorMetadata["countdown-timer"], { section: "Time Tools", title: "Countdown Timer" });

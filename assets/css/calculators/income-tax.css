@@ -1,0 +1,694 @@
+/* =========================================================
+   ToolZen Hub
+   Old vs New Tax Regime Calculator
+
+   Only what the shared calculator styles do not already provide:
+   the tax-year strip, the scope panel, the stepped form with its
+   disclosures, and the comparison result. Buttons, fields, focus
+   and headings come from the shared layer. Loaded after
+   calculator-responsive.css.
+
+   The primary result is two cards that STACK on a phone (no wide
+   table). The lower estimated tax is told in words ("Lower
+   estimated tax") and by a heavier border, never by colour alone.
+   Nothing animates.
+========================================================= */
+
+.calculator-page [hidden] {
+
+    display: none !important;
+
+}
+
+.it-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+/* the tax year, always visible */
+
+.it-year {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 14px;
+
+    margin: 0 0 16px;
+    padding: 10px 14px;
+
+    border: 1px solid #abefc6;
+    border-radius: 10px;
+
+    background: #ecfdf3;
+
+    color: #05603a;
+
+    font-size: 14px;
+
+}
+
+.it-year strong {
+
+    font-size: 16px;
+
+}
+
+/* what is supported, discoverable at the top */
+
+.it-scope {
+
+    margin: 0 0 20px;
+    padding: 14px 16px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 12px;
+
+    background: #f9fafb;
+
+}
+
+.it-scope__title {
+
+    margin: 0 0 6px;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 700;
+
+}
+
+.it-scope__list {
+
+    margin: 0;
+    padding-left: 20px;
+
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+}
+
+/* steps */
+
+.it-step__title {
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin: 8px 0 14px;
+
+    color: var(--color-ink);
+
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.3;
+
+}
+
+.it-step__number {
+
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    border-radius: 50%;
+
+    background: var(--color-action-green);
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+}
+
+.it-step {
+
+    margin-top: 22px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 12px;
+
+    background: #ffffff;
+
+}
+
+.it-step > summary {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+
+    min-height: 52px;
+    padding: 10px 14px;
+
+    color: var(--color-ink);
+
+    font-size: 17px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+.it-step > summary:focus-visible,
+.it-advanced > summary:focus-visible,
+.it-breakdown > summary:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.it-step__hint {
+
+    color: #475467;
+
+    font-size: 13px;
+    font-weight: 400;
+
+}
+
+.it-step > :not(summary) {
+
+    margin-left: 14px;
+    margin-right: 14px;
+
+}
+
+.it-step > :last-child {
+
+    margin-bottom: 14px;
+
+}
+
+.it-note {
+
+    margin: 10px 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.55;
+
+}
+
+.it-echo {
+
+    display: block;
+
+    min-height: 18px;
+    margin-top: 4px;
+
+    color: #475467;
+
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+
+}
+
+.it-hra {
+
+    margin: 18px 14px 0;
+    padding: 12px 14px 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 12px;
+
+}
+
+.it-hra legend {
+
+    padding: 0 6px;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 700;
+
+}
+
+.it-radios {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+
+    margin-bottom: 10px;
+
+}
+
+.it-hra__result {
+
+    margin: 10px 0 0;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 600;
+
+}
+
+.it-advanced {
+
+    margin-top: 16px;
+
+}
+
+.it-advanced > summary,
+.it-breakdown > summary {
+
+    min-height: 44px;
+    padding: 10px 0;
+
+    color: var(--color-ink);
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+/* the result */
+
+.it-results__year {
+
+    margin: 0 0 10px;
+
+    color: #475467;
+
+    font-size: 14px;
+    font-weight: 600;
+
+}
+
+.it-compare {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+
+}
+
+.it-card {
+
+    min-width: 0;
+    padding: 16px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: #ffffff;
+
+}
+
+/* the lower one: a heavier border AND the words "Lower estimated tax" */
+.it-card--lower {
+
+    border: 3px solid var(--color-action-green);
+    padding: 14px;
+
+}
+
+.it-card__title {
+
+    margin: 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+}
+
+.it-card__amount {
+
+    margin: 6px 0 0;
+
+    color: var(--color-ink);
+
+    font-size: clamp(30px, 8vw, 40px);
+    font-weight: 750;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+
+}
+
+.it-card__label {
+
+    margin: 2px 0 0;
+
+    color: #475467;
+
+    font-size: 14px;
+
+}
+
+.it-card__badge {
+
+    display: inline-block;
+
+    margin: 10px 0 0;
+    padding: 3px 10px;
+
+    border: 1px solid #067647;
+    border-radius: 999px;
+
+    background: #ecfdf3;
+
+    color: #05603a;
+
+    font-size: 13px;
+    font-weight: 700;
+
+}
+
+.it-card__meta {
+
+    margin: 10px 0 0;
+
+    color: #475467;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+}
+
+.it-difference {
+
+    margin: 14px 0 0;
+
+    color: #344054;
+
+    font-size: 16px;
+
+}
+
+.it-difference strong {
+
+    color: var(--color-ink);
+
+    font-size: 20px;
+    font-variant-numeric: tabular-nums;
+
+}
+
+.it-sentence {
+
+    margin: 6px 0 0;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+
+}
+
+.it-break {
+
+    margin-top: 18px;
+    padding: 14px 16px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 12px;
+
+    background: #f9fafb;
+
+    color: #344054;
+
+    font-size: 15px;
+    line-height: 1.55;
+
+}
+
+.it-break p {
+
+    margin: 6px 0 0;
+
+}
+
+.it-break__title,
+.it-breakdown__title {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 700;
+
+}
+
+.it-breakdown {
+
+    margin-top: 16px;
+
+}
+
+.it-breakdown__grid {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+
+    margin-top: 6px;
+
+}
+
+.it-rows {
+
+    margin: 8px 0 0;
+
+}
+
+.it-row {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px 14px;
+
+    padding: 8px 0;
+
+    border-top: 1px solid var(--color-slate-200);
+
+    font-size: 14px;
+    line-height: 1.45;
+
+}
+
+.it-row dt {
+
+    min-width: 0;
+
+    color: #344054;
+
+}
+
+.it-row dd {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+
+}
+
+.it-row__note {
+
+    display: block;
+
+    color: #475467;
+
+    font-size: 12px;
+
+}
+
+.it-assumptions {
+
+    margin: 16px 0 0;
+
+    color: #475467;
+
+    font-size: 13px;
+    line-height: 1.6;
+
+}
+
+.it-empty {
+
+    margin: 0;
+
+    color: #475467;
+
+    font-size: 15px;
+
+}
+
+/* a problem or a refusal, in words */
+
+.it-error,
+.it-notice {
+
+    padding: 12px 16px;
+
+    border-left: 6px solid #b42318;
+    border-radius: 10px;
+
+    background: #fef3f2;
+
+    color: #912018;
+
+    font-size: 15px;
+    line-height: 1.55;
+
+}
+
+.it-notice {
+
+    border-left-color: #b54708;
+
+    background: #fffaeb;
+
+    color: #7a2e0e;
+
+}
+
+.it-error__title,
+.it-notice__title {
+
+    margin: 0 0 4px;
+
+    font-weight: 700;
+
+}
+
+.it-error ul {
+
+    margin: 0;
+    padding-left: 20px;
+
+}
+
+/* the tax year has ended */
+.it-stale {
+
+    margin: 0 0 16px;
+    padding: 12px 16px;
+
+    border-left: 6px solid #b54708;
+    border-radius: 10px;
+
+    background: #fffaeb;
+
+    color: #7a2e0e;
+
+    font-size: 15px;
+    line-height: 1.55;
+
+}
+
+.it-notice p:last-child {
+
+    margin: 0;
+
+}
+
+.it-sources {
+
+    padding-left: 20px;
+
+}
+
+.it-sources li {
+
+    margin-bottom: 8px;
+
+    overflow-wrap: anywhere;
+
+}
+
+.it-source__meta {
+
+    display: block;
+
+    color: #475467;
+
+    font-size: 13px;
+
+}
+
+@media (min-width: 641px) {
+
+    .it-compare {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    }
+
+    .it-breakdown__grid {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    }
+
+}
+
+@media (max-width: 640px) {
+
+    .it-step > :not(summary) {
+
+        margin-left: 10px;
+        margin-right: 10px;
+
+    }
+
+    .it-hra {
+
+        margin-left: 10px;
+        margin-right: 10px;
+
+    }
+
+    /* 16px so the browser does not zoom the page when a field is focused */
+
+    .it-form-field input,
+    .calculator-form .calculator-form__input,
+    .calculator-form .calculator-form__select {
+
+        font-size: 16px;
+
+    }
+
+}
