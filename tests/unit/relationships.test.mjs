@@ -68,7 +68,10 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     // the two Developer Tools name each other (timestamps live in JSON payloads) and nothing else: the Time Tools are not related to them, nor they to the Time Tools
     assert.deepEqual(toolIds(rel.getRelatedTools("json-formatter")), ["unix-timestamp-converter"]);
     assert.deepEqual(toolIds(rel.getRelatedTools("unix-timestamp-converter")), ["json-formatter"]);
-    for (const id of ["date-difference", "date-calculator", "countdown-timer", "stopwatch"]) assert.equal(toolIds(rel.getRelatedTools(id)).some((x) => ["json-formatter", "unix-timestamp-converter"].includes(x)), false, id);
+    // Text Diff names the JSON Formatter (format two documents, then compare them) and nothing else (autoRelated is off, so the section does not fill it); the link is one way and the Unix converter is not related to it
+    assert.deepEqual(toolIds(rel.getRelatedTools("text-diff")), ["json-formatter"]);
+    assert.equal(toolIds(rel.getRelatedTools("unix-timestamp-converter")).includes("text-diff"), false);
+    for (const id of ["date-difference", "date-calculator", "countdown-timer", "stopwatch"]) assert.equal(toolIds(rel.getRelatedTools(id)).some((x) => ["json-formatter", "unix-timestamp-converter", "text-diff"].includes(x)), false, id);
     // Income Tax (Tool Pack 17) shares the Tax category with GST but not its intent: it opts out of the automatic same-category lists (autoRelated: false),
     // so its related tools are exactly its curated Home Loan, it has no related articles from the GST category, and GST's list is unchanged
     assert.deepEqual(toolIds(rel.getRelatedTools("income-tax")), ["home-loan"]);
@@ -82,7 +85,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.deepEqual(toolIds(rel.getRelatedTools("profit")), ["margin"]);
     assert.deepEqual(rel.getRelatedTools("nope"), []);
     // parity with the pre-M7 rule for every tool without a curated list (the Loan Prepayment page curates its own order; GST and Percentage curate cross-category lists)
-    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "income-tax"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
+    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "income-tax"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
   });
 
   test("tool -> related articles: the first six published loan articles, in catalog order, for EMI and Loan Comparison", () => {

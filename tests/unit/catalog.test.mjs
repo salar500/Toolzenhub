@@ -27,7 +27,7 @@ before(async () => {
 
 // the published tools of the Calculators section; Date Difference (Time Tools) is a published tool too, but it is not a calculator
 const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "percentage", "income-tax"];
-const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter"];
+const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment"];
 
 describe("catalog model", () => {
@@ -131,6 +131,7 @@ describe("registry is derived from the catalog", () => {
       stopwatch: { section: "Time Tools", title: "Stopwatch" },
       "json-formatter": { section: "Developer Tools", title: "JSON Formatter & Validator" },
       "unix-timestamp-converter": { section: "Developer Tools", title: "Unix Timestamp Converter" },
+      "text-diff": { section: "Developer Tools", title: "Text Diff / Compare" },
     });
   });
 });

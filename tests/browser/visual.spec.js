@@ -63,6 +63,16 @@ test.describe("visual baselines @visual (clock and zone pinned)", () => {
     await page.evaluate(() => window.scrollTo(0, 0));
     await expect(page).toHaveScreenshot(["visual", "unix-timestamp-converter.png"], { fullPage: true });
   });
+
+  test("text-diff", async ({ page, go }) => {
+    await go("tools/text-diff/");
+    await expect(page.locator("#td-panel")).toHaveAttribute("data-ready", "true");
+    await page.locator("#td-example").click(); // a fixed example, so the result is the same every time
+    await expect(page.locator("#td-panel")).toHaveAttribute("data-state", "result");
+    await page.evaluate(() => document.fonts.ready);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(page).toHaveScreenshot(["visual", "text-diff.png"], { fullPage: true });
+  });
 });
 
 test.describe("visual baselines @visual", () => {

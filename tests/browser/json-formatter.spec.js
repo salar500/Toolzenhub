@@ -344,8 +344,8 @@ test.describe("Developer Tools in the site", () => {
     await go("developer-tools.html");
     await expect(page.locator("h1")).toHaveText("Developer Tools");
     await expect(page.locator(`a[href$="tools/json-formatter/"]`)).toHaveCount(1);
-    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(2);
-    await expect(page.locator("main")).not.toContainText(/coming soon|base64|uuid|regex|diff/i);
+    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(3);
+    await expect(page.locator("main")).not.toContainText(/coming soon|base64|uuid|regex/i);
     const crumbs = (await page.locator(".calculator-breadcrumb").locator("a, strong").allInnerTexts()).map((t) => t.trim());
     expect(crumbs).toEqual(["Home", "All Tools", "Developer Tools"]);
     expect(await page.title()).toBe("Developer Tools | ToolZen Hub");
@@ -358,7 +358,7 @@ test.describe("Developer Tools in the site", () => {
     await go("tools.html");
     await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools"]);
     const dev = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Developer Tools")') });
-    await expect(dev.locator(".directory-section__count")).toHaveText("2 tools");
+    await expect(dev.locator(".directory-section__count")).toHaveText("3 tools");
     await expect(dev.locator('a[href$="tools/json-formatter/"]')).toHaveCount(1);
     const time = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Time Tools")') });
     await expect(time.locator(".directory-section__count")).toHaveText("4 tools");

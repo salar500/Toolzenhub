@@ -1,0 +1,1525 @@
+{
+"generator": "tests/fixtures/text-diff-golden.py",
+"cases": [
+{
+"original": "",
+"changed": "",
+"ignoreWhitespace": false,
+"originalLines": 0,
+"changedLines": 0,
+"shared": 0
+},
+{
+"original": "",
+"changed": "",
+"ignoreWhitespace": true,
+"originalLines": 0,
+"changedLines": 0,
+"shared": 0
+},
+{
+"original": "",
+"changed": "a\nb\n",
+"ignoreWhitespace": false,
+"originalLines": 0,
+"changedLines": 2,
+"shared": 0
+},
+{
+"original": "",
+"changed": "a\nb\n",
+"ignoreWhitespace": true,
+"originalLines": 0,
+"changedLines": 2,
+"shared": 0
+},
+{
+"original": "a\nb\n",
+"changed": "",
+"ignoreWhitespace": false,
+"originalLines": 2,
+"changedLines": 0,
+"shared": 0
+},
+{
+"original": "a\nb\n",
+"changed": "",
+"ignoreWhitespace": true,
+"originalLines": 2,
+"changedLines": 0,
+"shared": 0
+},
+{
+"original": "a\nb",
+"changed": "a\nb\n",
+"ignoreWhitespace": false,
+"originalLines": 2,
+"changedLines": 2,
+"shared": 2
+},
+{
+"original": "a\nb",
+"changed": "a\nb\n",
+"ignoreWhitespace": true,
+"originalLines": 2,
+"changedLines": 2,
+"shared": 2
+},
+{
+"original": "a\nb\n",
+"changed": "a\r\nb\r\n",
+"ignoreWhitespace": false,
+"originalLines": 2,
+"changedLines": 2,
+"shared": 2
+},
+{
+"original": "a\nb\n",
+"changed": "a\r\nb\r\n",
+"ignoreWhitespace": true,
+"originalLines": 2,
+"changedLines": 2,
+"shared": 2
+},
+{
+"original": "a\nb\n\n",
+"changed": "a\nb\n",
+"ignoreWhitespace": false,
+"originalLines": 3,
+"changedLines": 2,
+"shared": 2
+},
+{
+"original": "a\nb\n\n",
+"changed": "a\nb\n",
+"ignoreWhitespace": true,
+"originalLines": 3,
+"changedLines": 2,
+"shared": 2
+},
+{
+"original": "\n",
+"changed": "",
+"ignoreWhitespace": false,
+"originalLines": 1,
+"changedLines": 0,
+"shared": 0
+},
+{
+"original": "\n",
+"changed": "",
+"ignoreWhitespace": true,
+"originalLines": 1,
+"changedLines": 0,
+"shared": 0
+},
+{
+"original": "hello world",
+"changed": "helloworld",
+"ignoreWhitespace": false,
+"originalLines": 1,
+"changedLines": 1,
+"shared": 0
+},
+{
+"original": "hello world",
+"changed": "helloworld",
+"ignoreWhitespace": true,
+"originalLines": 1,
+"changedLines": 1,
+"shared": 0
+},
+{
+"original": "a  b",
+"changed": " a b",
+"ignoreWhitespace": false,
+"originalLines": 1,
+"changedLines": 1,
+"shared": 0
+},
+{
+"original": "a  b",
+"changed": " a b",
+"ignoreWhitespace": true,
+"originalLines": 1,
+"changedLines": 1,
+"shared": 1
+},
+{
+"original": "a\tb",
+"changed": "a b",
+"ignoreWhitespace": false,
+"originalLines": 1,
+"changedLines": 1,
+"shared": 0
+},
+{
+"original": "a\tb",
+"changed": "a b",
+"ignoreWhitespace": true,
+"originalLines": 1,
+"changedLines": 1,
+"shared": 1
+},
+{
+"original": "same\nsame\nsame",
+"changed": "same\nsame",
+"ignoreWhitespace": false,
+"originalLines": 3,
+"changedLines": 2,
+"shared": 2
+},
+{
+"original": "same\nsame\nsame",
+"changed": "same\nsame",
+"ignoreWhitespace": true,
+"originalLines": 3,
+"changedLines": 2,
+"shared": 2
+},
+{
+"original": "x\ny\nz",
+"changed": "z\ny\nx",
+"ignoreWhitespace": false,
+"originalLines": 3,
+"changedLines": 3,
+"shared": 1
+},
+{
+"original": "x\ny\nz",
+"changed": "z\ny\nx",
+"ignoreWhitespace": true,
+"originalLines": 3,
+"changedLines": 3,
+"shared": 1
+},
+{
+"original": "<script>alert(1)</script>",
+"changed": "<img src=x onerror=alert(1)>",
+"ignoreWhitespace": false,
+"originalLines": 1,
+"changedLines": 1,
+"shared": 0
+},
+{
+"original": "<script>alert(1)</script>",
+"changed": "<img src=x onerror=alert(1)>",
+"ignoreWhitespace": true,
+"originalLines": 1,
+"changedLines": 1,
+"shared": 0
+},
+{
+"original": "héllo 😀\n日本語",
+"changed": "héllo 😀\n日本語\n",
+"ignoreWhitespace": false,
+"originalLines": 2,
+"changedLines": 2,
+"shared": 2
+},
+{
+"original": "héllo 😀\n日本語",
+"changed": "héllo 😀\n日本語\n",
+"ignoreWhitespace": true,
+"originalLines": 2,
+"changedLines": 2,
+"shared": 2
+},
+{
+"original": "<b>tag</b>\n<b>tag</b>\n  indent\ngamma\n{\ntrailing \ntrailing \nthe quick brown fox\n<b>tag</b>\na b\nkey: value\ndelta\n}\n<b>tag</b>\n\n",
+"changed": "<b>tag</b>\ngamma  x\ntrailing \ntrailing \ny = 2\nthe quick brown fox\n<b>tag</b>\na b\nkey: value\n}\n<b>tag</b>\n\nbeta",
+"ignoreWhitespace": true,
+"originalLines": 15,
+"changedLines": 13,
+"shared": 10
+},
+{
+"original": "emoji 😀 line\r\nalpha\r\n",
+"changed": "emoji 😀 line",
+"ignoreWhitespace": true,
+"originalLines": 2,
+"changedLines": 1,
+"shared": 1
+},
+{
+"original": "epsilon\r\nreturn x\r\na  b\r\na  b\r\n\tindent\r\ntrailing\r\nepsilon\r\ngamma\r\nemoji 😀 line\r\na  b\r\ntrailing\r\n  indent\r\nbeta\r\nhéllo wörld\r\n}\r\n  indent\r\nhéllo wörld\r\ntrailing \r\nbeta\r\nSELECT 1;\r\nend\r\n  indent\r\n  indent\r\nkey: value\r\nreturn x\r\n",
+"changed": "return x\na  b\n\tindent\n  indent\nemoji 😀 line\ntrailing\n  indent\nbeta\nbeta\nhéllo wörld\n  indent\nhéllo wörld  x\ntrailing   x\nbeta\nSELECT 1;\nend\n  indent\n  indent\nkey: value\ntrailing \n",
+"ignoreWhitespace": true,
+"originalLines": 25,
+"changedLines": 20,
+"shared": 15
+},
+{
+"original": "}\r\nreturn x\r\n<b>tag</b>\r\ngamma\r\ndelta\r\n\tindent\r\nepsilon\r\n{\r\nhéllo wörld\r\n\tindent\r\ntrailing \r\na b\r\nx = 1\r\ntrailing\r\ny = 2\r\ntrailing \r\nbeta\r\nbeta\r\n  indent\r\ndelta\r\n}\r\na b\r\n\tindent\r\nhéllo wörld\r\nx = 1\r\ntrailing\r\nThe quick brown fox\r\nemoji 😀 line\r\nthe quick brown fox\r\nemoji 😀 line\r\nkey:  value\r\nepsilon\r\nThe quick brown fox\r\nthe quick brown fox\r\n<b>tag</b>",
+"changed": "}\nhéllo wörld\nreturn x\ngamma\ndelta  x\n\tindent\n\tindent\nepsilon\n{\nhéllo wörld\n\tindent\ntrailing \nThe quick brown fox\na b\nx = 1\ntrailing\ntrailing \nbeta\nbeta\n  indent\ndelta  x\n}\na b\n\tindent\nhéllo wörld\ntrailing\nemoji 😀 line\nThe quick brown fox\nemoji 😀 line\nemoji 😀 line\nkey:  value\nalpha\nThe quick brown fox\nthe quick brown fox\n<b>tag</b>\n",
+"ignoreWhitespace": false,
+"originalLines": 35,
+"changedLines": 35,
+"shared": 28
+},
+{
+"original": "end\n{\n日本語のテキスト\na  b\ny = 2\ndelta\nx = 1\nbeta\nreturn x\n<b>tag</b>\nSELECT 1;\n日本語のテキスト\nSELECT 1;\nx = 1\na b\n\ntrailing\n<b>tag</b>\na  b\nreturn x\n{\nkey: value\nthe quick brown fox\nSELECT 1;\na  b\ndelta\ndelta\nSELECT 1;\n<b>tag</b>\n",
+"changed": "end\r\n{\r\na  b\r\ny = 2\r\ndelta\r\nx = 1\r\nbeta\r\nSELECT 1;  x\r\nSELECT 1;\r\nx = 1\r\na b \r\n\r\ntrailing  x\r\n<b>tag</b>\r\na  b\r\n{\r\nkey: value\r\nthe quick brown fox\r\nSELECT 1;\r\na  b \r\ndelta\r\ndelta\r\nSELECT 1;\r\n<b>tag</b>",
+"ignoreWhitespace": true,
+"originalLines": 29,
+"changedLines": 24,
+"shared": 22
+},
+{
+"original": "The quick brown fox\nhéllo wörld\nemoji 😀 line\nThe quick brown fox\nreturn x\nkey:  value\nkey: value\nbeta\nthe quick brown fox\nepsilon\n\tindent\nend\nThe quick brown fox\na  b\nemoji 😀 line\nSELECT 1;\nend\nkey:  value\n",
+"changed": "The quick brown fox \nhéllo wörld\nemoji 😀 line \nThe quick brown fox\nreturn x\nkey:  value\nbeta\nthe quick brown fox\nepsilon \nalpha\n\tindent\nend\nThe quick brown fox\na  b\nemoji 😀 line\nSELECT 1;\nend\nkey:  value\n",
+"ignoreWhitespace": true,
+"originalLines": 18,
+"changedLines": 18,
+"shared": 17
+},
+{
+"original": "y = 2\r\n  indent\r\ndelta\r\na b\r\na b\r\nkey:  value\r\n}\r\n{\r\ndelta\r\nkey: value\r\n\tindent\r\n\r\nbeta\r\n",
+"changed": "  indent \ndelta\na b\ntrailing \na b\nkey:  value\n}\n{\ndelta\nkey: value\n\tindent\n \n",
+"ignoreWhitespace": false,
+"originalLines": 13,
+"changedLines": 12,
+"shared": 9
+},
+{
+"original": "key: value\r\nemoji 😀 line\r\nepsilon\r\n",
+"changed": "key: value\nemoji 😀 line\nepsilon  x\n",
+"ignoreWhitespace": true,
+"originalLines": 3,
+"changedLines": 3,
+"shared": 2
+},
+{
+"original": "\tindent\nbeta\na  b\nalpha\ntrailing \nreturn x\nalpha\n\tindent\nend\nhéllo wörld\n  indent\nemoji 😀 line\ngamma\n\tindent\nthe quick brown fox\nthe quick brown fox\nx = 1\nemoji 😀 line\nx = 1\n\tindent\nbeta\nreturn x\n}\nepsilon\ngamma\nreturn x\n\nkey: value\ngamma\n  indent\nkey: value\nkey: value\n日本語のテキスト\nreturn x\ntrailing \nkey: value\nSELECT 1;\ny = 2\nkey:  value\ngamma\n",
+"changed": "beta\na  b\nalpha\ntrailing \ngamma\nreturn x\nalpha\n\tindent\n  indent\nend\nbeta\nhéllo wörld\n  indent\ngamma\n\tindent\nthe quick brown fox\nthe quick brown fox\nx = 1\nemoji 😀 line\nx = 1\n\tindent  x\nbeta\nreturn x\n}\nepsilon\ngamma\nreturn x\n\nkey: value\ngamma\nkey: value\nkey: value\n日本語のテキスト\ntrailing \nkey: value\nSELECT 1;\nkey:  value\ngamma  x\nthe quick brown fox",
+"ignoreWhitespace": true,
+"originalLines": 40,
+"changedLines": 39,
+"shared": 33
+},
+{
+"original": "  indent\na b\nbeta\ndelta\nThe quick brown fox\nalpha\nalpha\nbeta\nemoji 😀 line\nalpha\ntrailing \ny = 2\n}\ny = 2\ny = 2\na  b\nkey:  value\nalpha\nx = 1\nkey:  value\nreturn x\n{\ndelta\nThe quick brown fox\nThe quick brown fox\nreturn x\na b\n日本語のテキスト\n\tindent\ndelta\nemoji 😀 line\nkey:  value\n",
+"changed": "  indent  x\na b\nbeta\ndelta\nThe quick brown fox\nalpha\nreturn x\nalpha\nbeta\nalpha\ntrailing \ny = 2\n} \ny = 2\ny = 2\ny = 2\na  b\nkey:  value\nalpha\nx = 1\n  indent\nkey:  value\nreturn x\n{  x\ny = 2\ndelta\nThe quick brown fox\na  b\nThe quick brown fox\n日本語のテキスト\n\tindent\nemoji 😀 line",
+"ignoreWhitespace": false,
+"originalLines": 32,
+"changedLines": 32,
+"shared": 24
+},
+{
+"original": "y = 2\rSELECT 1;\n日本語のテキスト\nhéllo wörld\nkey:  value\ny = 2\nbeta\n",
+"changed": "y = 2\r\nSELECT 1;\r\n日本語のテキスト\r\nhéllo wörld\r\nkey:  value\r\ny = 2\r\nbeta\r\nSELECT 1;",
+"ignoreWhitespace": true,
+"originalLines": 7,
+"changedLines": 8,
+"shared": 7
+},
+{
+"original": "日本語のテキスト\r\nthe quick brown fox\r\nalpha\r\nkey:  value\r\nend\r\nx = 1\r\nbeta\r\nkey:  value\r\n}\r\nend\r\nx = 1\r\na  b\r\na b\r\ngamma\r\nend\r\n\tindent\r\n日本語のテキスト\r\ndelta\r\na b",
+"changed": "delta\n\tindent\nkey: value\n\nkey: value\nx = 1\nkey:  value\ntrailing\nbeta\na b\nkey:  value\nx = 1\nbeta\nhéllo wörld\ntrailing\ngamma\n\tindent\ngamma\nthe quick brown fox\ngamma\n}\nreturn x\ny = 2\ntrailing \ndelta\n  indent\ny = 2\nThe quick brown fox\nhéllo wörld\ny = 2\n日本語のテキスト\nend\ndelta\n",
+"ignoreWhitespace": false,
+"originalLines": 19,
+"changedLines": 33,
+"shared": 8
+},
+{
+"original": "  indent\n\n{\nepsilon\nend\nend\nhéllo wörld\nThe quick brown fox\nSELECT 1;\nSELECT 1;\na  b\nthe quick brown fox\na  b\ndelta\nepsilon\ndelta\na b\nhéllo wörld\nkey:  value\n  indent\n<b>tag</b>\nemoji 😀 line\n日本語のテキスト\nThe quick brown fox\nend\nbeta\nend\nThe quick brown fox\nbeta\n  indent\na b\n  indent\ntrailing \na  b\nhéllo wörld\ngamma\n",
+"changed": "  indent\r\n\r\n{\r\nepsilon\r\nend\r\nend\r\nhéllo wörld\r\nThe quick brown fox\r\nSELECT 1;  x\r\nSELECT 1;\r\na  b\r\nthe quick brown fox\r\na  b  x\r\ndelta\r\nepsilon\r\ndelta  x\r\na b\r\nhéllo wörld\r\nkey:  value\r\nkey:  value\r\n  indent\r\n<b>tag</b>\r\nemoji 😀 line\r\n日本語のテキスト\r\nThe quick brown fox\r\nend\r\nbeta\r\nend  x\r\nThe quick brown fox\r\nbeta\r\n  indent  x\r\na b\r\n  indent\r\na  b\r\nhéllo wörld",
+"ignoreWhitespace": true,
+"originalLines": 36,
+"changedLines": 35,
+"shared": 29
+},
+{
+"original": "beta\r\ny = 2\r\ntrailing\r\nSELECT 1;\r\nkey:  value\r\nThe quick brown fox\r\ntrailing\r\nend\r\nend\r\nend",
+"changed": "beta\ny = 2\ntrailing\nSELECT 1;  x\nkey:  value\nThe quick brown fox \ntrailing\nend\nend\nend\n}\n",
+"ignoreWhitespace": true,
+"originalLines": 10,
+"changedLines": 11,
+"shared": 9
+},
+{
+"original": "gamma\r\ntrailing\r\na b\r\nend\r\nkey:  value\r\nend\r\nSELECT 1;\r\nThe quick brown fox\r\nx = 1\r\ntrailing\r\nSELECT 1;\r\nx = 1\r\n<b>tag</b>\r\n日本語のテキスト\r\nemoji 😀 line\r\ntrailing\r\na b\r\nhéllo wörld\r\ndelta\r\na  b\r\ntrailing\r\nhéllo wörld\r\n<b>tag</b>\r\ny = 2\r\nreturn x\r\nkey: value\r\ntrailing\r\n日本語のテキスト\r\nbeta\r\ndelta\r\ntrailing\r\na  b",
+"changed": "gamma\ntrailing\na b\nend\nkey:  value\nend\nSELECT 1;\nThe quick brown fox\nx = 1\ntrailing\nSELECT 1;\nx = 1\n<b>tag</b>  x\n日本語のテキスト\nemoji 😀 line  x\nalpha\ntrailing\na b\nhéllo wörld\ndelta\na  b\ntrailing\nhéllo wörld\n<b>tag</b>\nreturn x\nkey: value\n<b>tag</b>\ntrailing\n日本語のテキスト\nbeta\ndelta\ntrailing\na  b",
+"ignoreWhitespace": true,
+"originalLines": 32,
+"changedLines": 33,
+"shared": 29
+},
+{
+"original": "日本語のテキスト\r\n\r\n\r\ngamma\r\n日本語のテキスト",
+"changed": "SELECT 1;\n\tindent\n日本語のテキスト\n<b>tag</b>\ntrailing\nthe quick brown fox\nx = 1\nreturn x\n}\n}\na b\ndelta\n  indent\nend\n\n{\na  b\nSELECT 1;\nThe quick brown fox\n  indent\ngamma\ntrailing\nreturn x\ntrailing\nx = 1\n\n",
+"ignoreWhitespace": true,
+"originalLines": 5,
+"changedLines": 26,
+"shared": 3
+},
+{
+"original": "gamma\rSELECT 1;\n}\ntrailing \nalpha\nkey: value\nemoji 😀 line\nkey:  value\nhéllo wörld\n  indent\na  b\ndelta\ndelta\nhéllo wörld\nkey: value\n<b>tag</b>\n日本語のテキスト\n日本語のテキスト\nkey: value\nkey: value\ntrailing \nbeta\ny = 2\nkey: value\nend",
+"changed": "gamma\r\nSELECT 1;\r\n} \r\n\r\ntrailing \r\nalpha\r\nkey: value\r\nemoji 😀 line\r\nhéllo wörld\r\nreturn x\r\na  b\r\ndelta\r\ndelta\r\nhéllo wörld\r\n\tindent\r\nkey: value\r\n<b>tag</b>\r\n日本語のテキスト\r\nkey: value\r\ntrailing \r\nbeta\r\nkey: value\r\nend",
+"ignoreWhitespace": true,
+"originalLines": 25,
+"changedLines": 23,
+"shared": 20
+},
+{
+"original": "alpha\nkey: value\n日本語のテキスト\nkey: value\nend\na b\nSELECT 1;\nkey:  value\n日本語のテキスト\ntrailing\n}\n<b>tag</b>\n\nbeta\n\tindent\n}\nthe quick brown fox\n<b>tag</b>\nthe quick brown fox\ngamma\n\tindent\nkey:  value\ntrailing\ny = 2\ntrailing\nepsilon\nemoji 😀 line\nemoji 😀 line\nx = 1\ndelta\nemoji 😀 line\nthe quick brown fox\n{\ny = 2\nend\n\n",
+"changed": "SELECT 1;\r\nalpha\r\nkey: value\r\n日本語のテキスト\r\nkey: value\r\nend\r\na b\r\nkey:  value\r\n日本語のテキスト\r\ntrailing\r\n}\r\n<b>tag</b>  x\r\n\r\nbeta\r\n\tindent\r\n}\r\nreturn x\r\nthe quick brown fox\r\n<b>tag</b>\r\nthe quick brown fox\r\ngamma\r\n\tindent\r\nkey:  value\r\ntrailing\r\nepsilon\r\nemoji 😀 line\r\nemoji 😀 line\r\nx = 1 \r\ndelta\r\nemoji 😀 line\r\n{\r\ny = 2\r\n\r\nend",
+"ignoreWhitespace": true,
+"originalLines": 36,
+"changedLines": 34,
+"shared": 30
+},
+{
+"original": "key:  value\ndelta\ngamma\ntrailing\ndelta\nreturn x\ntrailing \nthe quick brown fox\nkey: value\n\n{\nkey: value\n\tindent\n<b>tag</b>\n日本語のテキスト\nreturn x\nepsilon\nkey: value\nemoji 😀 line\nSELECT 1;\n\n",
+"changed": "delta\r\nkey:  value\r\ndelta  x\r\ngamma\r\ntrailing\r\ndelta\r\nreturn x\r\ntrailing \r\nthe quick brown fox\r\nkey: value\r\n{\r\n\tindent\r\n<b>tag</b>\r\n日本語のテキスト\r\nreturn x\r\nepsilon\r\nkey: value\r\nemoji 😀 line\r\nSELECT 1;\r\n",
+"ignoreWhitespace": true,
+"originalLines": 21,
+"changedLines": 19,
+"shared": 17
+},
+{
+"original": "SELECT 1;\nbeta\n\tindent\nemoji 😀 line\n<b>tag</b>\nend\ny = 2\n日本語のテキスト\n{\nkey:  value\na b\ntrailing \nbeta\ndelta\n日本語のテキスト\n",
+"changed": "SELECT 1;\r\nbeta\r\n\tindent\r\n<b>tag</b>\r\nend\r\ny = 2\r\n日本語のテキスト\r\n{\r\na b\r\nbeta\r\ntrailing \r\nbeta\r\ndelta\r\n日本語のテキスト\r\n",
+"ignoreWhitespace": true,
+"originalLines": 15,
+"changedLines": 14,
+"shared": 13
+},
+{
+"original": "end\ntrailing\nalpha\nreturn x\nend\nreturn x\ngamma\nkey:  value\ndelta\ntrailing\nkey: value\ngamma\n{\ndelta\n日本語のテキスト\nkey:  value\n日本語のテキスト\n  indent\n",
+"changed": "\r\nend\r\ntrailing\r\nalpha\r\nreturn x\r\nend\r\nreturn x\r\ngamma\r\nkey:  value\r\ndelta\r\ntrailing\r\nkey: value\r\ngamma \r\n{\r\n日本語のテキスト\r\nkey:  value \r\n<b>tag</b>\r\n日本語のテキスト\r\n  indent",
+"ignoreWhitespace": true,
+"originalLines": 18,
+"changedLines": 19,
+"shared": 17
+},
+{
+"original": "trailing \n  indent\nbeta\n{\n",
+"changed": "trailing   x\n  indent\n{",
+"ignoreWhitespace": true,
+"originalLines": 4,
+"changedLines": 3,
+"shared": 2
+},
+{
+"original": "The quick brown fox\nkey:  value\ny = 2\nhéllo wörld\ntrailing\nSELECT 1;\na  b\na  b\n{\nkey:  value\na b\nhéllo wörld\na  b\na  b\n<b>tag</b>\nemoji 😀 line\nbeta\ndelta\nSELECT 1;\n}\ntrailing \n  indent",
+"changed": "The quick brown fox\r\n}\r\nkey:  value\r\ny = 2 \r\nhéllo wörld\r\ntrailing \r\nSELECT 1;\r\na  b\r\nThe quick brown fox\r\na  b\r\n{\r\na b\r\nhéllo wörld\r\na  b \r\na  b\r\n<b>tag</b>\r\nemoji 😀 line\r\nbeta\r\nSELECT 1;\r\n}\r\ntrailing \r\n  indent\r\nbeta\r\n",
+"ignoreWhitespace": false,
+"originalLines": 22,
+"changedLines": 23,
+"shared": 17
+},
+{
+"original": "}\nalpha\n<b>tag</b>\nemoji 😀 line\nemoji 😀 line\nThe quick brown fox\na b\n",
+"changed": "gamma\r\n}\r\nalpha\r\n<b>tag</b>\r\nemoji 😀 line\r\nemoji 😀 line\r\nThe quick brown fox\r\na b",
+"ignoreWhitespace": false,
+"originalLines": 7,
+"changedLines": 8,
+"shared": 7
+},
+{
+"original": "}\r\n  indent\r\n",
+"changed": "}\n  indent\n",
+"ignoreWhitespace": false,
+"originalLines": 2,
+"changedLines": 2,
+"shared": 2
+},
+{
+"original": "key: value\n}\ndelta\nreturn x\nhéllo wörld\ngamma\ndelta\n\tindent\ngamma\nkey:  value\ny = 2\nkey: value\nthe quick brown fox\nalpha\n  indent\ngamma\nemoji 😀 line\nSELECT 1;\n\tindent\nalpha\ngamma\nemoji 😀 line\ntrailing\nreturn x\nreturn x\ntrailing\n",
+"changed": "the quick brown fox\r\nThe quick brown fox\r\n  indent\r\nhéllo wörld\r\nend\r\na  b\r\n\r\nkey: value\r\nend\r\na b\r\n日本語のテキスト\r\nalpha\r\ny = 2\r\nalpha\r\ngamma\r\n\tindent\r\nbeta\r\n{\r\nThe quick brown fox\r\n日本語のテキスト\r\nThe quick brown fox\r\nkey: value\r\na  b\r\nkey:  value\r\ny = 2\r\nreturn x\r\nkey:  value\r\n{\r\nkey:  value\r\na b\r\ny = 2\r\nSELECT 1;\r\nend\r\na b\r\nThe quick brown fox\r\ny = 2\r\n",
+"ignoreWhitespace": false,
+"originalLines": 26,
+"changedLines": 36,
+"shared": 6
+},
+{
+"original": "x = 1\na b\nbeta",
+"changed": "x = 1  x\na b\nbeta  x",
+"ignoreWhitespace": true,
+"originalLines": 3,
+"changedLines": 3,
+"shared": 1
+},
+{
+"original": "beta\nThe quick brown fox\nthe quick brown fox\nend\nhéllo wörld\n}\nSELECT 1;\nThe quick brown fox\nkey: value\na  b\nx = 1\n日本語のテキスト\nend\nx = 1\na  b\nemoji 😀 line\nend\n}\ngamma\na  b\n{\ndelta\na b\nhéllo wörld\ntrailing\nx = 1\nend\ntrailing\nkey:  value\n",
+"changed": "beta\nThe quick brown fox\nthe quick brown fox\n}  x\nSELECT 1;\nThe quick brown fox\nkey: value\na  b\nx = 1\nend  x\nx = 1\na  b\nend\n}\ngamma\na  b  x\n{\ndelta\na b\n\tindent\nhéllo wörld\ntrailing\nend\n\tindent\ntrailing\nkey:  value\nalpha",
+"ignoreWhitespace": false,
+"originalLines": 29,
+"changedLines": 27,
+"shared": 21
+},
+{
+"original": "<b>tag</b>\nreturn x\ntrailing\nhéllo wörld\n日本語のテキスト\n{\n日本語のテキスト\n",
+"changed": "end\na  b\nbeta\na  b\nkey: value\nhéllo wörld\ndelta\nreturn x\nThe quick brown fox\nemoji 😀 line\nbeta\n",
+"ignoreWhitespace": false,
+"originalLines": 7,
+"changedLines": 11,
+"shared": 1
+},
+{
+"original": "  indent\n{\n<b>tag</b>\nSELECT 1;\n\n日本語のテキスト\ngamma\nkey:  value\nkey:  value\nthe quick brown fox\n<b>tag</b>\nend\nthe quick brown fox\nthe quick brown fox\nkey:  value\nSELECT 1;\nbeta\n<b>tag</b>\ndelta\n{\na  b\n<b>tag</b>\nThe quick brown fox\n}\na b\nepsilon\n日本語のテキスト\nSELECT 1;\n{\nemoji 😀 line",
+"changed": "  indent\n{ \n<b>tag</b>\nSELECT 1;\n  x\n日本語のテキスト\ngamma  x\nkey:  value\nkey:  value\nthe quick brown fox\nend \nthe quick brown fox\nthe quick brown fox\nkey:  value\nSELECT 1; \n<b>tag</b>\ndelta\n{\na  b\n<b>tag</b>\nThe quick brown fox\n}\nepsilon\n日本語のテキスト\nSELECT 1;\n{\nemoji 😀 line \nkey: value\n",
+"ignoreWhitespace": false,
+"originalLines": 30,
+"changedLines": 28,
+"shared": 21
+},
+{
+"original": "  indent\r\nemoji 😀 line\r\nend\r\n",
+"changed": "  indent\nemoji 😀 line\nend",
+"ignoreWhitespace": true,
+"originalLines": 3,
+"changedLines": 3,
+"shared": 3
+},
+{
+"original": "x = 1\r\nbeta\r\nend\r\ny = 2\r\nThe quick brown fox\r\nreturn x\r\nhéllo wörld\r\n\r\nepsilon\r\n\tindent\r\nSELECT 1;\r\n",
+"changed": "x = 1\nbeta\nend\ny = 2\nThe quick brown fox\nreturn x\n\nSELECT 1;\n  indent",
+"ignoreWhitespace": true,
+"originalLines": 11,
+"changedLines": 9,
+"shared": 8
+},
+{
+"original": "key: value\r\n\r\nhéllo wörld\r\ny = 2\r\n<b>tag</b>\r\nepsilon\r\ntrailing \r\nkey: value\r\nkey:  value\r\nkey:  value\r\nreturn x\r\n\tindent\r\nthe quick brown fox\r\nx = 1\r\na b\r\n}\r\na b\r\nalpha\r\n日本語のテキスト\r\nhéllo wörld\r\nemoji 😀 line\r\n}\r\nkey:  value\r\ngamma\r\n}\r\ntrailing\r\nend\r\n\r\n",
+"changed": "key: value\n\nhéllo wörld\ny = 2\n<b>tag</b>\ntrailing \nkey: value\nkey:  value\nkey:  value\n\tindent\nthe quick brown fox\na b \n}  x\na b\nalpha\n日本語のテキスト\nemoji 😀 line\n}\nkey:  value\ngamma\n}\ntrailing\nend\n  x\n",
+"ignoreWhitespace": false,
+"originalLines": 28,
+"changedLines": 24,
+"shared": 21
+},
+{
+"original": "The quick brown fox\n<b>tag</b>\nemoji 😀 line",
+"changed": "The quick brown fox  x\r\n<b>tag</b>\r\nemoji 😀 line",
+"ignoreWhitespace": true,
+"originalLines": 3,
+"changedLines": 3,
+"shared": 2
+},
+{
+"original": "The quick brown fox\ny = 2\nbeta\nalpha\nx = 1",
+"changed": "The quick brown fox\ny = 2\nbeta\nalpha\nx = 1\n",
+"ignoreWhitespace": false,
+"originalLines": 5,
+"changedLines": 5,
+"shared": 5
+},
+{
+"original": "key: value\nkey: value\nSELECT 1;\n{\ndelta\nend\n  indent\nthe quick brown fox\n{\nend\n\tindent\n}\ndelta\n日本語のテキスト\n\tindent\nemoji 😀 line\n日本語のテキスト\nalpha",
+"changed": "key: value\r\nSELECT 1;\r\n{\r\nend\r\n  indent  x\r\nthe quick brown fox\r\n\r\n{\r\nend\r\n}\r\ndelta\r\n日本語のテキスト\r\n\tindent\r\nemoji 😀 line\r\n日本語のテキスト\r\nalpha\r\na  b\r\n",
+"ignoreWhitespace": true,
+"originalLines": 18,
+"changedLines": 17,
+"shared": 14
+},
+{
+"original": "gamma\nreturn x\ny = 2\nx = 1\nend\nkey:  value\na b\nSELECT 1;\nepsilon\nthe quick brown fox\nkey: value\nreturn x\n{\n}\n\tindent\nbeta\nreturn x\nbeta\n}\n日本語のテキスト\n\tindent\nreturn x\nhéllo wörld\n\n{\ndelta\nemoji 😀 line\nalpha\nkey:  value\nkey:  value\nbeta\nThe quick brown fox\nbeta",
+"changed": "gamma\nreturn x\ny = 2  x\nx = 1\nend \nemoji 😀 line\nkey:  value\na b\nSELECT 1;\nthe quick brown fox\nkey: value \nreturn x\n{\nbeta\nbeta\n}\na  b\n日本語のテキスト\n\tindent\nreturn x\nhéllo wörld\n \n{\ndelta\nemoji 😀 line\nalpha\nkey:  value  x\nkey:  value\nbeta\nThe quick brown fox\nbeta\n",
+"ignoreWhitespace": false,
+"originalLines": 33,
+"changedLines": 31,
+"shared": 24
+},
+{
+"original": "trailing\nemoji 😀 line\nemoji 😀 line\n<b>tag</b>\ngamma\n",
+"changed": "trailing\nemoji 😀 line\nemoji 😀 line\n<b>tag</b>",
+"ignoreWhitespace": false,
+"originalLines": 5,
+"changedLines": 4,
+"shared": 4
+},
+{
+"original": "trailing \r\nkey:  value\r\nkey:  value\r\ntrailing\r\nbeta\r\n",
+"changed": "\nThe quick brown fox\nSELECT 1;\n<b>tag</b>\n{\nepsilon\ntrailing\nkey:  value\ntrailing\ngamma\n{\nbeta\n}\nThe quick brown fox\nhéllo wörld\nhéllo wörld\n<b>tag</b>\nkey: value\nThe quick brown fox\nkey: value\nkey: value\n}\n  indent\n\tindent\nx = 1\ny = 2\n{\na  b\n",
+"ignoreWhitespace": false,
+"originalLines": 5,
+"changedLines": 28,
+"shared": 3
+},
+{
+"original": "end\nSELECT 1;\nkey:  value\n<b>tag</b>\ndelta\nkey:  value\n\tindent\nbeta\ngamma\n日本語のテキスト\nbeta\n}\ngamma\nreturn x\nkey: value\n{\n<b>tag</b>\n日本語のテキスト\n}\nepsilon\nhéllo wörld\nhéllo wörld\nkey: value\ngamma\nkey:  value",
+"changed": "SELECT 1;\nkey:  value\n<b>tag</b>  x\ndelta\nemoji 😀 line\nkey:  value\n\tindent\nbeta\ngamma\n日本語のテキスト\nbeta\ngamma\nreturn x\nkey: value\n{\n<b>tag</b>\nkey: value\n日本語のテキスト\n}\ntrailing \nepsilon\nhéllo wörld\nhéllo wörld\nkey: value\ngamma\nkey:  value",
+"ignoreWhitespace": true,
+"originalLines": 25,
+"changedLines": 26,
+"shared": 22
+},
+{
+"original": "日本語のテキスト\r\n<b>tag</b>\r\ntrailing\r\nbeta\r\nkey: value\r\nkey: value\r\na b\r\n<b>tag</b>\r\nSELECT 1;\r\nend\r\na b\r\nalpha\r\nkey:  value\r\nepsilon\r\n\r\ndelta\r\nemoji 😀 line\r\n}\r\na b\r\na  b\r\na b\r\ntrailing\r\nkey:  value\r\n\r\nemoji 😀 line\r\n\r\nx = 1\r\ngamma\r\n日本語のテキスト\r\nthe quick brown fox\r\nhéllo wörld\r\nx = 1\r\n}\r\na b\r\n",
+"changed": "日本語のテキスト\r\n<b>tag</b>\r\ntrailing\r\nbeta\r\nkey: value\r\nkey: value\r\na b\r\n<b>tag</b>\r\nSELECT 1;\r\nend\r\na b \r\nalpha\r\nkey:  value\r\n\r\ndelta\r\nemoji 😀 line\r\ntrailing \r\n}\r\na b\r\na  b\r\na b\r\n  x\r\nemoji 😀 line\r\n\r\nx = 1\r\n日本語のテキスト\r\ngamma\r\n日本語のテキスト\r\nthe quick brown fox\r\nx = 1\r\nemoji 😀 line\r\n}\r\na b \r\nalpha\r\n",
+"ignoreWhitespace": false,
+"originalLines": 34,
+"changedLines": 34,
+"shared": 27
+},
+{
+"original": "alpha\nbeta\nepsilon\n\n",
+"changed": "alpha\nbeta\nepsilon\n\nepsilon",
+"ignoreWhitespace": true,
+"originalLines": 4,
+"changedLines": 5,
+"shared": 4
+},
+{
+"original": "The quick brown fox\r\n{\r\ngamma\r\ntrailing \r\nx = 1\r\na b\r\nkey:  value\r\ny = 2\r\n  indent\r\ntrailing \r\n<b>tag</b>\r\n\r\nreturn x\r\ntrailing \r\ntrailing\r\nx = 1\r\n日本語のテキスト\r\ndelta\r\nreturn x\r\ndelta\r\ntrailing\r\nThe quick brown fox\r\nkey:  value\r\n\r\nkey: value\r\nend\r\n}\r\n日本語のテキスト\r\ntrailing\r\nbeta\r\na  b\r\n\tindent\r\n  indent\r\na  b\r\n\r\n",
+"changed": "The quick brown fox\n{\ngamma\ntrailing \nx = 1\na b\nkey:  value\ny = 2\n  indent\ntrailing \n<b>tag</b>\n\nreturn x\ntrailing \ntrailing\nx = 1\n日本語のテキスト \ndelta\nhéllo wörld\nreturn x\ndelta\ntrailing\nThe quick brown fox\ndelta\nkey:  value\nSELECT 1;\n\nkey: value  x\nend\n}\n日本語のテキスト\ntrailing\nbeta\na  b\n\tindent\n  indent\na  b\n\nbeta\n",
+"ignoreWhitespace": true,
+"originalLines": 35,
+"changedLines": 39,
+"shared": 34
+},
+{
+"original": "return x\r\nbeta\r\nreturn x\r\n\r\n\r\nreturn x\r\n日本語のテキスト\r\nkey:  value\r\ntrailing \r\nbeta\r\ndelta\r\nbeta\r\nhéllo wörld\r\nSELECT 1;\r\n\r\n  indent\r\nthe quick brown fox\r\ndelta\r\nemoji 😀 line\r\nhéllo wörld\r\n  indent\r\nkey: value\r\n\r\n\tindent\r\n日本語のテキスト\r\ntrailing \r\n  indent\r\ndelta\r\na b\r\n  indent\r\ndelta\r\n<b>tag</b>\r\nreturn x\r\ndelta\r\n",
+"changed": "return x\r\nbeta\r\nreturn x\r\n\r\n\r\nreturn x\r\n日本語のテキスト\r\nbeta\r\ndelta\r\nbeta\r\nbeta\r\nhéllo wörld\r\nSELECT 1;\r\n\r\n  indent\r\nthe quick brown fox\r\ndelta\r\nemoji 😀 line\r\nhéllo wörld\r\n  indent\r\nkey: value\r\nreturn x\r\n\r\n\tindent\r\n日本語のテキスト\r\na b\r\n  indent \r\ndelta\r\n<b>tag</b>\r\ndelta\r\n",
+"ignoreWhitespace": false,
+"originalLines": 34,
+"changedLines": 30,
+"shared": 27
+},
+{
+"original": "emoji 😀 line\r\na b\r\nepsilon\r\na b\r\nreturn x\r\ngamma\r\nSELECT 1;\r\ndelta\r\nThe quick brown fox\r\n\r\n<b>tag</b>\r\nreturn x\r\nend\r\nemoji 😀 line\r\n{\r\nreturn x\r\n\r\n{\r\nend\r\nkey:  value\r\nreturn x\r\nkey:  value\r\nreturn x\r\n<b>tag</b>\r\nalpha\r\nhéllo wörld\r\na  b\r\nend\r\n\r\n",
+"changed": "emoji 😀 line\r\nepsilon\r\na b\r\nreturn x\r\ngamma\r\nSELECT 1;\r\ndelta\r\n\r\n<b>tag</b>\r\nreturn x\r\nend\r\nemoji 😀 line\r\n{\r\nreturn x\r\n\r\n{\r\nend\r\nkey:  value\r\nreturn x\r\nbeta\r\nkey:  value\r\nreturn x\r\n<b>tag</b>\r\nalpha\r\nhéllo wörld\r\na  b\r\nend \r\n\r\n",
+"ignoreWhitespace": false,
+"originalLines": 29,
+"changedLines": 28,
+"shared": 26
+},
+{
+"original": "  indent\r\ntrailing \r\n{\r\nThe quick brown fox\r\nbeta\r\nhéllo wörld",
+"changed": "<b>tag</b>\r\n  indent\r\n  indent\r\ntrailing \r\n{\r\nThe quick brown fox\r\nbeta\r\nhéllo wörld\r\n",
+"ignoreWhitespace": false,
+"originalLines": 6,
+"changedLines": 8,
+"shared": 6
+},
+{
+"original": "beta\nkey:  value\nepsilon\nreturn x\n}\nthe quick brown fox\nkey:  value\nepsilon\nemoji 😀 line\n}\ntrailing \na b\ny = 2\nSELECT 1;\ngamma\nthe quick brown fox\nbeta\n}\nend\nhéllo wörld\n\tindent\ngamma\n  indent\nepsilon\n  indent\nhéllo wörld\na b\ngamma\n}\n日本語のテキスト\nbeta\nSELECT 1;\n日本語のテキスト\n{\na b\ndelta\ngamma\nthe quick brown fox\n",
+"changed": "beta\nkey:  value\nepsilon\nreturn x  x\n}\nthe quick brown fox\nkey:  value\nemoji 😀 line\n} \ntrailing \n  indent\na b\ny = 2\nSELECT 1;\ngamma \nthe quick brown fox\nbeta  x\n}\nend\nhéllo wörld\n\tindent\ngamma\n  indent\nepsilon\n  indent\nhéllo wörld\na b\ngamma\n}\n日本語のテキスト\nbeta\nSELECT 1;\n日本語のテキスト\n{\na b\nalpha\ndelta\na  b\ngamma\nthe quick brown fox\ntrailing",
+"ignoreWhitespace": true,
+"originalLines": 38,
+"changedLines": 41,
+"shared": 35
+},
+{
+"original": "a  b\nend\nend\nemoji 😀 line\nThe quick brown fox\ntrailing\ntrailing ",
+"changed": "a  b \nend\nend\nemoji 😀 line\nThe quick brown fox\ntrailing\ntrailing \n",
+"ignoreWhitespace": false,
+"originalLines": 7,
+"changedLines": 7,
+"shared": 6
+},
+{
+"original": "}\nkey: value\nreturn x\n\tindent\ntrailing \nbeta\nend\nkey: value\n}\nend\nthe quick brown fox\n  indent\na  b\n日本語のテキスト\n\nreturn x\n}\nSELECT 1;\n  indent\nx = 1\nkey: value\ngamma\nalpha\nend\nSELECT 1;",
+"changed": "key: value\n  indent\nreturn x\nhéllo wörld\n",
+"ignoreWhitespace": false,
+"originalLines": 25,
+"changedLines": 4,
+"shared": 3
+},
+{
+"original": "\n{\na  b\na  b\nkey: value\ndelta\ntrailing \n日本語のテキスト\nalpha\ntrailing \nThe quick brown fox\nemoji 😀 line\nend\n日本語のテキスト\ndelta\nalpha\nhéllo wörld\ny = 2\nThe quick brown fox\nemoji 😀 line\n",
+"changed": "{\na  b\na  b\nkey: value\ndelta\ntrailing \n日本語のテキスト\na b\nalpha\ntrailing \nThe quick brown fox\nend\n日本語のテキスト\ndelta\nalpha\ny = 2\nThe quick brown fox\nemoji 😀 line",
+"ignoreWhitespace": false,
+"originalLines": 20,
+"changedLines": 18,
+"shared": 17
+},
+{
+"original": "delta\nhéllo wörld\nreturn x\nemoji 😀 line\nbeta\ndelta\ny = 2\nThe quick brown fox\nThe quick brown fox\nbeta\n\tindent\nepsilon\n",
+"changed": "beta\r\ndelta\r\nhéllo wörld\r\nreturn x  x\r\nemoji 😀 line\r\nbeta\r\ndelta\r\ny = 2  x\r\nThe quick brown fox\r\nThe quick brown fox\r\n\r\n\tindent\r\nepsilon\r\n",
+"ignoreWhitespace": false,
+"originalLines": 12,
+"changedLines": 13,
+"shared": 9
+},
+{
+"original": "日本語のテキスト\r\nbeta\r\n日本語のテキスト\r\n\tindent\r\n\tindent\r\n<b>tag</b>\r\nkey: value\r\n日本語のテキスト\r\n日本語のテキスト\r\n}\r\nemoji 😀 line\r\nkey: value\r\nend\r\n日本語のテキスト\r\nx = 1\r\n}\r\nSELECT 1;\r\n  indent\r\nkey: value\r\ndelta\r\nhéllo wörld\r\nbeta\r\n  indent\r\nepsilon\r\nSELECT 1;\r\nend\r\nepsilon\r\n日本語のテキスト\r\n\r\n",
+"changed": "日本語のテキスト\nbeta \n\tindent\n<b>tag</b>\nkey: value\n日本語のテキスト\n日本語のテキスト\nalpha\n}\nemoji 😀 line \nkey: value \nend\n日本語のテキスト\nx = 1\n}\nSELECT 1; \n  indent\ndelta\nhéllo wörld\nbeta\nSELECT 1;\nend\nepsilon\n日本語のテキスト\n\n",
+"ignoreWhitespace": false,
+"originalLines": 29,
+"changedLines": 25,
+"shared": 20
+},
+{
+"original": "日本語のテキスト\n{\n<b>tag</b>\n}\nepsilon\nepsilon\nreturn x\nbeta\nthe quick brown fox\nhéllo wörld\ntrailing \n\tindent\nkey:  value\nalpha\n日本語のテキスト\ntrailing \nepsilon\n\ngamma\ntrailing",
+"changed": "日本語のテキスト  x\n{\n<b>tag</b>\n}\nepsilon\nepsilon\nreturn x \nbeta\nthe quick brown fox\ntrailing \n\tindent\nkey:  value\nalpha\n日本語のテキスト\ntrailing \nepsilon\n}\ngamma\ntrailing\n",
+"ignoreWhitespace": false,
+"originalLines": 20,
+"changedLines": 19,
+"shared": 16
+},
+{
+"original": "end\na  b\n\n日本語のテキスト\nkey:  value\nend\nbeta\nepsilon\ntrailing\nthe quick brown fox\nThe quick brown fox\n<b>tag</b>\nthe quick brown fox\nend\n<b>tag</b>\nthe quick brown fox\ntrailing\nbeta\nkey: value\n",
+"changed": "end\n}\na  b\n\n日本語のテキスト\nkey:  value\nend\nbeta\nepsilon\na  b\ntrailing\nthe quick brown fox\n<b>tag</b>\nthe quick brown fox\nend  x\nthe quick brown fox\ntrailing\nkey: value",
+"ignoreWhitespace": false,
+"originalLines": 19,
+"changedLines": 18,
+"shared": 15
+},
+{
+"original": "\r\nemoji 😀 line\r\n}\r\nbeta\r\n}\r\na  b\r\nbeta\r\n<b>tag</b>\r\nalpha",
+"changed": "\nemoji 😀 line\n}\nbeta\n}\na  b\nbeta\n<b>tag</b>\nalpha\n日本語のテキスト\n",
+"ignoreWhitespace": false,
+"originalLines": 9,
+"changedLines": 10,
+"shared": 9
+},
+{
+"original": "SELECT 1;\ngamma\nalpha\n  indent\nkey:  value\ndelta\nThe quick brown fox\nhéllo wörld\nSELECT 1;\n  indent\n\n  indent\ngamma\nthe quick brown fox\nSELECT 1;\n<b>tag</b>\n}\n  indent\nx = 1\na b\nkey: value\nkey: value\nx = 1\nalpha",
+"changed": "\tindent\ra b\nreturn x\ntrailing\n<b>tag</b>\nepsilon\na b\n{\nthe quick brown fox\ny = 2\nSELECT 1;\nend\nThe quick brown fox\n",
+"ignoreWhitespace": true,
+"originalLines": 24,
+"changedLines": 13,
+"shared": 3
+},
+{
+"original": "gamma\r\na  b\r\n{\r\n\tindent\r\na b\r\ntrailing \r\nx = 1\r\nalpha\r\nepsilon\r\na b\r\nbeta\r\ntrailing \r\nx = 1\r\ndelta\r\nemoji 😀 line\r\n}\r\nSELECT 1;\r\nhéllo wörld\r\n\r\ntrailing \r\n  indent\r\ndelta\r\n",
+"changed": "gamma\r\na b\r\na  b\r\n\tindent\r\na b\r\ntrailing \r\nx = 1\r\nalpha\r\na b\r\nbeta\r\ntrailing \r\ndelta\r\nemoji 😀 line \r\n}\r\nSELECT 1;\r\nhéllo wörld\r\n\r\ntrailing \r\n  indent\r\ngamma\r\n",
+"ignoreWhitespace": false,
+"originalLines": 22,
+"changedLines": 20,
+"shared": 17
+},
+{
+"original": "{\nSELECT 1;\nhéllo wörld\n\ngamma\na  b\nSELECT 1;\nbeta\n}\ndelta\n\n\nkey: value\nkey:  value",
+"changed": "gamma\n<b>tag</b>\nepsilon\n<b>tag</b>\nx = 1\nbeta\n\n  indent\nkey: value\nbeta\n{\ntrailing \nend\nThe quick brown fox\n\n\tindent\ndelta\nkey: value\na b\n}\nbeta\nthe quick brown fox\n<b>tag</b>\nepsilon\n\nx = 1\n日本語のテキスト\nkey:  value\n{\n<b>tag</b>\nkey:  value",
+"ignoreWhitespace": true,
+"originalLines": 14,
+"changedLines": 31,
+"shared": 7
+},
+{
+"original": "The quick brown fox\r\n日本語のテキスト\r\na b\r\ngamma\r\nthe quick brown fox\r\nSELECT 1;\r\na  b\r\n  indent\r\n\r\nkey: value\r\nkey: value\r\nend\r\na b\r\nhéllo wörld\r\ny = 2\r\n",
+"changed": "The quick brown fox\r\n日本語のテキスト\r\na b\r\ngamma\r\nthe quick brown fox\r\nSELECT 1;\r\na  b\r\n  indent\r\n\r\nkey: value\r\nend\r\na b\r\nhéllo wörld \r\ny = 2\r\n",
+"ignoreWhitespace": false,
+"originalLines": 15,
+"changedLines": 14,
+"shared": 13
+},
+{
+"original": "\tindent\n{\nx = 1\ny = 2\ndelta\nepsilon\nend\nepsilon\nThe quick brown fox\ny = 2\nreturn x\ntrailing \n\tindent\nThe quick brown fox\nhéllo wörld\ntrailing \nkey:  value\nbeta\nkey:  value\n{\ngamma\nkey:  value\n<b>tag</b>\n\n{\nhéllo wörld\nthe quick brown fox\na b\nthe quick brown fox\nemoji 😀 line",
+"changed": "\tindent\n{\nx = 1\ny = 2 \ndelta\nepsilon\nepsilon\n{\ny = 2\n}\nreturn x\ntrailing \n\tindent\nThe quick brown fox\nhéllo wörld\nkey:  value  x\nkey:  value\n{\ngamma\nkey:  value\n<b>tag</b>\n \n{\nhéllo wörld\nthe quick brown fox\nthe quick brown fox \nemoji 😀 line",
+"ignoreWhitespace": false,
+"originalLines": 30,
+"changedLines": 27,
+"shared": 21
+},
+{
+"original": "trailing \ntrailing \nepsilon\n<b>tag</b>\nhéllo wörld\nkey:  value\ny = 2\n  indent",
+"changed": "trailing \r\ntrailing \r\nepsilon\r\n<b>tag</b> \r\na  b\r\nkey:  value\r\ny = 2\r\n  indent\r\n\r\n",
+"ignoreWhitespace": false,
+"originalLines": 8,
+"changedLines": 9,
+"shared": 6
+},
+{
+"original": "SELECT 1;\r\nkey: value\r\ndelta\r\nhéllo wörld\r\na  b\r\nemoji 😀 line\r\ntrailing\r\ngamma\r\n}\r\nhéllo wörld\r\n<b>tag</b>\r\nkey: value\r\nemoji 😀 line\r\nkey: value\r\n\r\nreturn x\r\nthe quick brown fox\r\nkey: value\r\n  indent\r\nreturn x\r\nThe quick brown fox\r\nThe quick brown fox\r\nkey: value\r\nalpha\r\nhéllo wörld\r\nbeta\r\n{\r\n日本語のテキスト\r\n{\r\na b\r\ngamma\r\nbeta\r\ny = 2\r\nepsilon\r\ntrailing",
+"changed": "SELECT 1;\r\nkey: value\r\ndelta\r\nhéllo wörld \r\na  b\r\nemoji 😀 line\r\ntrailing\r\nhéllo wörld\r\n<b>tag</b>\r\na  b\r\nkey: value\r\nemoji 😀 line\r\nkey: value\r\n\r\nreturn x\r\nthe quick brown fox\r\nkey: value\r\n  indent\r\nreturn x\r\nThe quick brown fox\r\nThe quick brown fox\r\nkey: value\r\n{\r\nhéllo wörld\r\nbeta\r\n{\r\n{\r\na b\r\ngamma\r\nbeta\r\n}\r\ny = 2\r\nepsilon\r\nemoji 😀 line\r\n",
+"ignoreWhitespace": false,
+"originalLines": 35,
+"changedLines": 34,
+"shared": 29
+},
+{
+"original": "trailing \ndelta\ntrailing \nepsilon\nkey: value\ntrailing \nthe quick brown fox\ngamma\nemoji 😀 line\nemoji 😀 line\nkey: value\n{\nend\n  indent\ndelta\n日本語のテキスト\ntrailing\nThe quick brown fox\ny = 2\ny = 2\nreturn x\ntrailing\n\tindent\na b\nreturn x\nhéllo wörld",
+"changed": "trailing  \r\ndelta\r\nbeta\r\ntrailing \r\nepsilon\r\nkey: value\r\ntrailing \r\nthe quick brown fox\r\ngamma\r\nemoji 😀 line\r\nemoji 😀 line\r\nkey: value\r\n{\r\nend\r\n  indent\r\ndelta\r\ntrailing\r\ny = 2\r\nreturn x\r\ntrailing\r\na  b\r\n\tindent\r\na b\r\nreturn x\r\nhéllo wörld\r\ntrailing",
+"ignoreWhitespace": true,
+"originalLines": 26,
+"changedLines": 26,
+"shared": 23
+},
+{
+"original": "héllo wörld\r\n\tindent\r\nbeta\r\n日本語のテキスト\r\n}\r\n<b>tag</b>\r\n<b>tag</b>\r\n<b>tag</b>\r\ngamma\r\nend\r\ndelta\r\ntrailing\r\n",
+"changed": "delta\nkey: value\nthe quick brown fox\n",
+"ignoreWhitespace": false,
+"originalLines": 12,
+"changedLines": 3,
+"shared": 1
+},
+{
+"original": "}\n\tindent\n  indent\n  indent\nkey:  value\nkey:  value\ngamma\na  b\n}\ntrailing \na b\nkey: value\na b\nemoji 😀 line\nreturn x\nThe quick brown fox",
+"changed": "beta\nhéllo wörld\n{\ntrailing\nThe quick brown fox\nemoji 😀 line\n\nepsilon\nSELECT 1;\n}\ny = 2\nreturn x\nThe quick brown fox\n\tindent\na b\ny = 2\n",
+"ignoreWhitespace": false,
+"originalLines": 16,
+"changedLines": 16,
+"shared": 3
+},
+{
+"original": "trailing \r\ndelta\r\nkey: value\r\na b\r\nalpha\r\nend\r\n}\r\nkey: value\r\ny = 2\r\na b\r\na  b\r\n\tindent\r\nkey: value\r\nbeta\r\ny = 2\r\na  b\r\nkey:  value\r\nreturn x\r\nend\r\na b\r\nSELECT 1;\r\n<b>tag</b>",
+"changed": "trailing   x\ndelta\na b\nalpha\nend\n}\nreturn x\ny = 2\na b\nx = 1\na  b\n\tindent\nkey: value\ny = 2 \na  b\nkey:  value\nreturn x\nend\na b\nSELECT 1;\n<b>tag</b>\ny = 2",
+"ignoreWhitespace": true,
+"originalLines": 22,
+"changedLines": 22,
+"shared": 18
+},
+{
+"original": "SELECT 1;\r\nalpha\r\nkey: value\r\na  b\r\na  b\r\nthe quick brown fox\r\ntrailing \r\ny = 2\r\nx = 1",
+"changed": "SELECT 1;\nalpha\nalpha\nkey: value\na  b \na  b\nthe quick brown fox\ntrailing \ny = 2\nalpha\nx = 1",
+"ignoreWhitespace": true,
+"originalLines": 9,
+"changedLines": 11,
+"shared": 9
+},
+{
+"original": "",
+"changed": "trailing \nalpha\nhéllo wörld\ngamma\nhéllo wörld\ntrailing\na b\nreturn x\ny = 2\n\n日本語のテキスト\nbeta\ntrailing\n\nhéllo wörld\nkey:  value",
+"ignoreWhitespace": false,
+"originalLines": 0,
+"changedLines": 16,
+"shared": 0
+},
+{
+"original": "\tindent\r\n}\r\nkey:  value\r\n<b>tag</b>\r\na  b\r\na b\r\n{\r\nThe quick brown fox\r\nSELECT 1;\r\nalpha\r\nx = 1\r\nhéllo wörld\r\n\tindent\r\na  b\r\ntrailing\r\nalpha\r\nthe quick brown fox\r\n日本語のテキスト\r\nreturn x\r\nbeta\r\nthe quick brown fox\r\nemoji 😀 line\r\n",
+"changed": "héllo wörld\n{\n\tindent\nend\ntrailing\na b\nhéllo wörld\nhéllo wörld\ngamma\nSELECT 1;\ntrailing\na b\ndelta\nkey:  value\nepsilon\nhéllo wörld\ntrailing \n{\ntrailing \n{\ngamma\nThe quick brown fox\nepsilon\n  indent\n<b>tag</b>\nthe quick brown fox\n<b>tag</b>\nend\n日本語のテキスト\n}\n}\n  indent\nThe quick brown fox\nThe quick brown fox\n}\nbeta\n{\na  b\nepsilon\n",
+"ignoreWhitespace": true,
+"originalLines": 22,
+"changedLines": 39,
+"shared": 9
+},
+{
+"original": "héllo wörld\na b\nkey:  value\ndelta\nend\na b\n\tindent\nx = 1\nalpha\nend\nepsilon\nalpha\ndelta\ntrailing \nSELECT 1;\nkey:  value\nx = 1\nend\n  indent\n  indent\nend\n\tindent\na  b",
+"changed": "héllo wörld \r\na b\r\nkey:  value \r\ndelta\r\nend\r\na b \r\na b\r\n\tindent\r\nx = 1 \r\nalpha\r\nend\r\nepsilon\r\nalpha\r\ndelta\r\ntrailing \r\nSELECT 1;\r\nkey:  value\r\nx = 1  x\r\nend\r\n  indent\r\n  indent\r\n\tindent \r\na  b\r\ntrailing",
+"ignoreWhitespace": false,
+"originalLines": 23,
+"changedLines": 24,
+"shared": 17
+},
+{
+"original": "a  b\r\ngamma\r\ngamma\r\na b\r\n\r\ntrailing\r\ndelta\r\nbeta\r\n\tindent\r\ntrailing \r\nx = 1\r\nThe quick brown fox\r\ntrailing \r\nreturn x\r\nalpha\r\nthe quick brown fox\r\nThe quick brown fox\r\nreturn x\r\nkey: value\r\ngamma\r\n\tindent\r\n<b>tag</b>\r\n{\r\nSELECT 1;\r\na  b\r\nkey:  value\r\ntrailing \r\ntrailing\r\na b\r\nthe quick brown fox\r\ndelta\r\n\tindent\r\nSELECT 1;\r\nbeta\r\ntrailing \r\na  b\r\ntrailing\r\nThe quick brown fox\r\n  indent\r\n\r\n",
+"changed": "SELECT 1;\na  b\ngamma\ngamma\n \ntrailing  x\nalpha\nbeta\n\tindent\na b\ntrailing \nThe quick brown fox\ntrailing \nreturn x\nalpha\nthe quick brown fox \nThe quick brown fox\nreturn x\nkey: value\na  b\n\tindent\n{\nSELECT 1;\na  b\nkey:  value\ntrailing \na b\nthe quick brown fox\ndelta \n\tindent\nSELECT 1; \nbeta\ntrailing \na  b  x\ntrailing\nThe quick brown fox\n  indent\n",
+"ignoreWhitespace": true,
+"originalLines": 40,
+"changedLines": 37,
+"shared": 31
+},
+{
+"original": "x = 1\ny = 2\na  b\na b\nepsilon\n",
+"changed": "x = 1 \na  b\nreturn x\na b\nepsilon\n",
+"ignoreWhitespace": false,
+"originalLines": 5,
+"changedLines": 5,
+"shared": 3
+},
+{
+"original": "beta\ry = 2\ntrailing \n",
+"changed": "beta\r\ny = 2\r\ntrailing \r\nSELECT 1;\r\n",
+"ignoreWhitespace": true,
+"originalLines": 3,
+"changedLines": 4,
+"shared": 3
+},
+{
+"original": "y = 2\r\ny = 2\r\ntrailing\r\nthe quick brown fox\r\na  b\r\ntrailing \r\nkey:  value\r\ntrailing\r\nreturn x\r\nhéllo wörld\r\nalpha\r\ngamma\r\n}",
+"changed": "y = 2\ny = 2\ntrailing\nend\na  b\ntrailing \nkey:  value\ntrailing\nreturn x\nend\nhéllo wörld\nalpha\ngamma\n}\nx = 1",
+"ignoreWhitespace": false,
+"originalLines": 13,
+"changedLines": 15,
+"shared": 12
+},
+{
+"original": "<b>tag</b>\nSELECT 1;\ntrailing \n{\nSELECT 1;\nend\ndelta\nthe quick brown fox\nalpha\nend\n{\nx = 1\na  b\nThe quick brown fox\nalpha\n{\nend\n\tindent\nepsilon\nreturn x\nhéllo wörld\n\nepsilon\nThe quick brown fox\n  indent\ntrailing \ngamma\nemoji 😀 line\na  b\nhéllo wörld\n\tindent\n  indent\n{\nkey:  value\nend\nbeta\na  b\nbeta\nkey: value\n",
+"changed": "<b>tag</b>\r\nSELECT 1;\r\ntrailing \r\n{\r\nend\r\ndelta\r\nthe quick brown fox\r\nalpha\r\nend\r\n{\r\nx = 1\r\na  b\r\nThe quick brown fox\r\nalpha \r\n{\r\nend\r\n\tindent\r\nepsilon\r\nreturn x\r\nhéllo wörld \r\n  x\r\nepsilon  x\r\nThe quick brown fox\r\n  indent\r\ntrailing \r\ngamma\r\nemoji 😀 line\r\nhéllo wörld\r\n\tindent\r\n  indent\r\n{\r\nkey:  value\r\nend\r\na  b\r\nbeta\r\nkey: value\r\nend",
+"ignoreWhitespace": true,
+"originalLines": 39,
+"changedLines": 37,
+"shared": 34
+},
+{
+"original": "key: value\rreturn x\n日本語のテキスト\nkey: value\n{\nemoji 😀 line\nx = 1\n\tindent\nkey: value\ntrailing\n}\nbeta\n}\nemoji 😀 line\ngamma\n{\nemoji 😀 line\n<b>tag</b>\ngamma\ntrailing \n日本語のテキスト\nalpha\nbeta\n\tindent\n<b>tag</b>\n\tindent\n日本語のテキスト\nalpha\na b\ndelta\ntrailing \nreturn x\nbeta\n",
+"changed": "trailing \ngamma\nemoji 😀 line\n<b>tag</b>\nx = 1\na  b\nthe quick brown fox\n日本語のテキスト\nepsilon\nbeta\nThe quick brown fox\n  indent\nkey:  value\nx = 1\nthe quick brown fox\nkey:  value\ntrailing \n<b>tag</b>\ntrailing\n  indent\ndelta\n\tindent\nreturn x\nepsilon\ntrailing\nhéllo wörld\n日本語のテキスト\na  b\nbeta\nemoji 😀 line\ndelta\na  b",
+"ignoreWhitespace": false,
+"originalLines": 33,
+"changedLines": 32,
+"shared": 9
+},
+{
+"original": "epsilon\ny = 2\nbeta\ndelta\ntrailing \nbeta\na  b\ntrailing\nalpha\nepsilon\ngamma\nepsilon\na  b\nkey:  value\n",
+"changed": "epsilon\r\ny = 2\r\nbeta  x\r\ndelta \r\ntrailing \r\n{\r\nbeta\r\na  b\r\ntrailing\r\nepsilon\r\ngamma\r\nepsilon\r\na  b\r\nkey:  value\r\n}\r\n",
+"ignoreWhitespace": true,
+"originalLines": 14,
+"changedLines": 15,
+"shared": 12
+},
+{
+"original": "\tindent\nkey: value\nThe quick brown fox\ntrailing \nthe quick brown fox\n}\nepsilon\ndelta\nthe quick brown fox\nalpha\na b\nx = 1\ndelta\na b\nbeta\nemoji 😀 line\n\nthe quick brown fox\ny = 2\n  indent\ntrailing \ndelta\nkey:  value\n\nThe quick brown fox\nthe quick brown fox\ndelta\ny = 2\ny = 2\nhéllo wörld\n  indent\n\tindent\n{\nSELECT 1;\n",
+"changed": "delta\ntrailing \n<b>tag</b>\na  b\n日本語のテキスト\nThe quick brown fox\nalpha\nthe quick brown fox\nalpha\n日本語のテキスト\ntrailing \n",
+"ignoreWhitespace": false,
+"originalLines": 34,
+"changedLines": 11,
+"shared": 4
+},
+{
+"original": "beta\n}\nreturn x\nreturn x\nend\nx = 1\nkey:  value\n  indent\n}\ny = 2\n\tindent\n<b>tag</b>\n日本語のテキスト\nend\n\nx = 1\nx = 1\nbeta\nThe quick brown fox\na  b\nkey: value\nthe quick brown fox\nSELECT 1;\n\n\ntrailing \nkey: value\n\n",
+"changed": "beta\r\n}\r\nreturn x\r\nreturn x\r\nend\r\nkey:  value\r\n  indent\r\n}\r\n日本語のテキスト\r\n\tindent\r\n<b>tag</b>\r\nend\r\n\r\n<b>tag</b>\r\nx = 1\r\nx = 1\r\nbeta \r\nThe quick brown fox\r\na  b\r\nkey: value\r\nthe quick brown fox\r\nSELECT 1;\r\n\r\ntrailing \r\nkey: value\r\n\r\nhéllo wörld",
+"ignoreWhitespace": false,
+"originalLines": 28,
+"changedLines": 27,
+"shared": 23
+},
+{
+"original": "y = 2\r\na b\r\n\tindent\r\ngamma\r\nkey: value\r\nthe quick brown fox\r\na b\r\ntrailing\r\na b\r\nalpha\r\nbeta\r\nx = 1\r\ntrailing \r\na  b\r\nalpha\r\nkey: value\r\na  b\r\na  b\r\ndelta\r\n日本語のテキスト\r\nthe quick brown fox\r\n日本語のテキスト",
+"changed": "a b\n\tindent\ngamma\nkey: value\nthe quick brown fox\na b\ntrailing\na b\nalpha\nbeta  x\nemoji 😀 line\nx = 1\ntrailing \na b\na  b\nalpha\nkey: value\na  b\na  b\ndelta\nthe quick brown fox\n日本語のテキスト  x\na  b",
+"ignoreWhitespace": true,
+"originalLines": 22,
+"changedLines": 23,
+"shared": 18
+},
+{
+"original": "y = 2\r\nkey: value\r\n{\r\nThe quick brown fox\r\n\tindent\r\nreturn x\r\na  b\r\nx = 1\r\n\tindent\r\ngamma\r\nbeta\r\nend\r\nreturn x\r\nx = 1\r\n日本語のテキスト\r\nkey: value\r\n\r\n日本語のテキスト\r\nbeta\r\ngamma\r\n  indent\r\nSELECT 1;\r\nreturn x\r\n}\r\nepsilon\r\nkey: value\r\n  indent\r\nSELECT 1;\r\n日本語のテキスト\r\nend\r\nbeta\r\nthe quick brown fox\r\n}\r\nemoji 😀 line\r\nhéllo wörld\r\n}\r\nbeta\r\n",
+"changed": "key: value\r\n{\r\nreturn x\r\na  b\r\nx = 1\r\n\tindent\r\ngamma\r\nbeta\r\nend\r\nx = 1\r\n日本語のテキスト\r\nkey: value\r\n\r\n  indent\r\n日本語のテキスト\r\nbeta\r\ngamma\r\n  indent  x\r\nSELECT 1;\r\nreturn x\r\n}\r\nepsilon\r\nkey: value\r\n  indent\r\nthe quick brown fox\r\n日本語のテキスト\r\nthe quick brown fox\r\n}\r\nemoji 😀 line\r\nhéllo wörld\r\n}\r\nbeta  x",
+"ignoreWhitespace": true,
+"originalLines": 37,
+"changedLines": 32,
+"shared": 28
+},
+{
+"original": "alpha\n}\nx = 1\nemoji 😀 line\nbeta\n}\ntrailing\nkey: value\nthe quick brown fox\nhéllo wörld\ndelta\ntrailing \n{\nthe quick brown fox\nend\nreturn x\n{\n\ntrailing\ntrailing \nepsilon\n{\nend\na  b\ntrailing \n",
+"changed": "alpha\nx = 1\nemoji 😀 line\n  indent\nbeta\ntrailing\nkey: value \nthe quick brown fox\nhéllo wörld\ndelta\nhéllo wörld\ntrailing \n{\nthe quick brown fox\nend\nreturn x\ndelta\n{\n\n}\ntrailing\ntrailing \nepsilon\n",
+"ignoreWhitespace": true,
+"originalLines": 25,
+"changedLines": 23,
+"shared": 19
+},
+{
+"original": "alpha\ntrailing\nkey:  value\na b\nreturn x\n  indent\nkey: value\nSELECT 1;\ny = 2\n日本語のテキスト\n  indent\nkey:  value\nalpha\nend\nepsilon\nhéllo wörld\n\nkey: value\n  indent\nkey: value\nemoji 😀 line\nSELECT 1;\nbeta\na  b\ngamma\na b\n}\nend\nhéllo wörld\nreturn x\nemoji 😀 line\nend\ntrailing\nkey: value\ny = 2\nalpha\ntrailing\nx = 1\nx = 1\na b",
+"changed": "<b>tag</b>\r\n\r\nx = 1\r\nepsilon\r\nThe quick brown fox\r\ny = 2\r\ndelta\r\nThe quick brown fox\r\n<b>tag</b>\r\n  indent\r\nkey: value\r\n<b>tag</b>\r\nend\r\nreturn x\r\nhéllo wörld\r\n日本語のテキスト\r\nalpha\r\nhéllo wörld\r\n",
+"ignoreWhitespace": true,
+"originalLines": 40,
+"changedLines": 18,
+"shared": 6
+},
+{
+"original": "a  b",
+"changed": "a  b ",
+"ignoreWhitespace": false,
+"originalLines": 1,
+"changedLines": 1,
+"shared": 0
+},
+{
+"original": "x = 1\nSELECT 1;\nkey:  value\n日本語のテキスト\ny = 2\nthe quick brown fox\nbeta\n\tindent\ntrailing \n{\nx = 1\nend\n\ngamma\nkey: value\nalpha\n}\nhéllo wörld\nSELECT 1;\nbeta\nSELECT 1;\nthe quick brown fox\n  indent\n日本語のテキスト\ngamma\n  indent\ntrailing\n\n",
+"changed": "x = 1\r\nSELECT 1;  x\r\nkey:  value\r\n日本語のテキスト\r\nthe quick brown fox\r\nbeta\r\n\tindent\r\ntrailing \r\n{\r\nx = 1\r\n\r\ngamma\r\nkey: value\r\nalpha\r\n}\r\nSELECT 1;  x\r\nbeta\r\nSELECT 1;\r\n日本語のテキスト\r\ngamma\r\n  indent\r\ntrailing\r\n",
+"ignoreWhitespace": false,
+"originalLines": 28,
+"changedLines": 22,
+"shared": 20
+},
+{
+"original": "y = 2\r\nemoji 😀 line\r\nemoji 😀 line\r\ndelta\r\nbeta\r\nkey:  value\r\nbeta\r\n\tindent\r\nemoji 😀 line\r\nend\r\nemoji 😀 line\r\nSELECT 1;\r\n<b>tag</b>\r\nthe quick brown fox\r\n{\r\n\r\na b\r\nalpha\r\ndelta\r\n  indent\r\ny = 2\r\nepsilon\r\ngamma\r\ngamma\r\ntrailing \r\n\tindent\r\nkey: value\r\nemoji 😀 line\r\nreturn x",
+"changed": "y = 2  x\r\nx = 1\r\nemoji 😀 line\r\nemoji 😀 line\r\nkey: value\r\ndelta\r\nkey:  value\r\nbeta\r\n\tindent\r\nemoji 😀 line\r\nend\r\nemoji 😀 line\r\nSELECT 1;\r\n<b>tag</b>\r\nThe quick brown fox\r\nthe quick brown fox\r\n\r\na b\r\nalpha \r\ndelta\r\n  indent  x\r\ny = 2\r\nepsilon\r\ngamma\r\ngamma \r\ntrailing \r\ndelta\r\n\tindent\r\nemoji 😀 line\r\nreturn x\r\nhéllo wörld\r\n",
+"ignoreWhitespace": true,
+"originalLines": 29,
+"changedLines": 31,
+"shared": 24
+},
+{
+"original": "end\r\ny = 2\r\ny = 2\r\ngamma\r\nemoji 😀 line\r\nkey:  value\r\ntrailing \r\nreturn x\r\nkey:  value\r\ndelta",
+"changed": "end\ny = 2  x\ny = 2\ngamma\nemoji 😀 line\ntrailing \nreturn x\nkey:  value\n",
+"ignoreWhitespace": false,
+"originalLines": 10,
+"changedLines": 8,
+"shared": 7
+},
+{
+"original": "a b\nSELECT 1;\nalpha\nkey: value\nalpha\na  b\n{\nalpha\nalpha\n日本語のテキスト\na  b\nSELECT 1;\nhéllo wörld\n\tindent\nreturn x\n{\nhéllo wörld\n\tindent\nbeta\n}\ndelta\n  indent\nkey:  value\nbeta\n日本語のテキスト\ntrailing\na b\nhéllo wörld\nepsilon\nend\ny = 2\n\tindent\n",
+"changed": "{\r\n}\r\nemoji 😀 line\r\n}\r\ntrailing \r\na b\r\n}\r\n\r\nx = 1\r\na b\r\ndelta\r\nkey:  value\r\nepsilon\r\n<b>tag</b>",
+"ignoreWhitespace": false,
+"originalLines": 32,
+"changedLines": 14,
+"shared": 5
+},
+{
+"original": "end\nSELECT 1;\nx = 1\nbeta\ny = 2\n日本語のテキスト\ngamma\n  indent\nreturn x\n\tindent\nx = 1\n  indent\na b\nepsilon\nThe quick brown fox\nhéllo wörld\ndelta\n  indent\nepsilon\nhéllo wörld\nThe quick brown fox\n日本語のテキスト\nThe quick brown fox\n  indent\na  b\nkey:  value\ndelta\n\n}\n日本語のテキスト\n  indent\nThe quick brown fox\nthe quick brown fox\nhéllo wörld\nx = 1\n",
+"changed": "end\nSELECT 1;\nx = 1\nbeta\n日本語のテキスト\ngamma\ntrailing \n  indent\nreturn x\n\tindent\nx = 1\n  indent\na b\nepsilon\ntrailing \nThe quick brown fox\nhéllo wörld\ndelta\n  indent  x\nepsilon\nThe quick brown fox\nThe quick brown fox\n  indent\na  b\nkey:  value\ndelta\nthe quick brown fox\n\n}\n日本語のテキスト\n  indent\nThe quick brown fox\nthe quick brown fox\nhéllo wörld\nx = 1\n",
+"ignoreWhitespace": true,
+"originalLines": 35,
+"changedLines": 35,
+"shared": 31
+},
+{
+"original": "SELECT 1;\nbeta\na b\na b\nbeta\n<b>tag</b>\n<b>tag</b>\n<b>tag</b>\nSELECT 1;\ntrailing\nthe quick brown fox\ny = 2\nhéllo wörld\nbeta\ny = 2\ndelta\nSELECT 1;\nSELECT 1;\na  b\nemoji 😀 line\n  indent\nthe quick brown fox\ntrailing\n}\ny = 2\nSELECT 1;\nreturn x\nbeta\nalpha\nkey:  value\ny = 2\nepsilon\nhéllo wörld\ntrailing\nSELECT 1;\n  indent\ntrailing \ntrailing ",
+"changed": "SELECT 1; \r\nbeta\r\na b\r\nbeta\r\n<b>tag</b>  x\r\n<b>tag</b>\r\n\tindent\r\nSELECT 1;\r\nthe quick brown fox  x\r\ny = 2\r\nhéllo wörld\r\nbeta\r\ny = 2\r\ndelta  x\r\ngamma\r\nSELECT 1;\r\nSELECT 1;\r\na  b \r\nemoji 😀 line\r\n  indent\r\nthe quick brown fox\r\ntrailing\r\n}\r\ny = 2\r\nSELECT 1;\r\nreturn x\r\nbeta\r\nalpha\r\nkey:  value\r\ny = 2 \r\nepsilon\r\nhéllo wörld\r\ntrailing\r\nSELECT 1;\r\n  indent\r\ntrailing \r\ntrailing \r\ndelta\r\n",
+"ignoreWhitespace": true,
+"originalLines": 38,
+"changedLines": 38,
+"shared": 32
+},
+{
+"original": "a  b\nbeta\n<b>tag</b>\nemoji 😀 line\na  b\n  indent\nreturn x\ngamma\nepsilon\na b\nkey:  value\nhéllo wörld\nreturn x\nemoji 😀 line\ngamma\ntrailing \ndelta\ngamma\n\tindent\nSELECT 1;\nbeta",
+"changed": "<b>tag</b>\nThe quick brown fox\na b\nend\nend\ny = 2\n<b>tag</b>\nx = 1\n  indent\n",
+"ignoreWhitespace": true,
+"originalLines": 21,
+"changedLines": 9,
+"shared": 3
+},
+{
+"original": "delta\na b\ntrailing \nbeta",
+"changed": "delta\r\na b\r\nbeta\r\n",
+"ignoreWhitespace": false,
+"originalLines": 4,
+"changedLines": 3,
+"shared": 3
+},
+{
+"original": "the quick brown fox\nreturn x\nkey:  value\ntrailing\nhéllo wörld\nhéllo wörld\nreturn x\n<b>tag</b>\n日本語のテキスト\nalpha\nepsilon\nhéllo wörld\nx = 1\nreturn x\n{\n",
+"changed": "the quick brown fox\nreturn x\nkey:  value\ntrailing  x\nhéllo wörld\nreturn x\n<b>tag</b>  x\ngamma\n日本語のテキスト\nalpha\nepsilon\nhéllo wörld\nx = 1\n{",
+"ignoreWhitespace": false,
+"originalLines": 15,
+"changedLines": 14,
+"shared": 11
+},
+{
+"original": "key:  value\r\n{\r\nreturn x\r\ngamma\r\na b\r\n<b>tag</b>\r\nThe quick brown fox\r\nx = 1\r\nhéllo wörld\r\n\tindent\r\n{\r\n\tindent\r\nkey: value\r\nkey:  value\r\nSELECT 1;\r\nreturn x\r\nkey: value\r\nend\r\nSELECT 1;\r\nreturn x\r\n\tindent\r\n\r\ngamma\r\n  indent\r\ngamma\r\n\tindent\r\ngamma\r\nkey:  value\r\n日本語のテキスト\r\nx = 1\r\n\r\nx = 1\r\nthe quick brown fox\r\n\r\ny = 2\r\nemoji 😀 line\r\n<b>tag</b>\r\nSELECT 1;\r\n",
+"changed": "gamma\r\nkey:  value\r\n{\r\nreturn x\r\ngamma\r\na b\r\nThe quick brown fox\r\nx = 1\r\nhéllo wörld\r\n{\r\n\tindent\r\nkey: value\r\nkey:  value\r\nSELECT 1;\r\nreturn x\r\nemoji 😀 line\r\nkey: value\r\nend  x\r\nSELECT 1;\r\nreturn x\r\n\tindent\r\n\r\ngamma\r\n  indent  x\r\ngamma\r\n\tindent\r\ngamma\r\nkey:  value\r\nx = 1\r\n\r\nx = 1\r\nthe quick brown fox\r\ny = 2\r\nemoji 😀 line\r\n<b>tag</b>\r\nSELECT 1;",
+"ignoreWhitespace": false,
+"originalLines": 38,
+"changedLines": 36,
+"shared": 32
+},
+{
+"original": "key:  value\rThe quick brown fox\ny = 2\na  b\nSELECT 1;",
+"changed": "y = 2\nreturn x\n  indent\n}\nbeta\nreturn x\nkey:  value\na  b\nreturn x\nhéllo wörld\ndelta\n  indent\nhéllo wörld\ngamma\ndelta\n{\ny = 2\nemoji 😀 line\n  indent\nkey:  value\ntrailing\nx = 1\n<b>tag</b>\nend\ntrailing\nreturn x\ny = 2\n日本語のテキスト\n<b>tag</b>\nemoji 😀 line\nSELECT 1;\ndelta\n",
+"ignoreWhitespace": false,
+"originalLines": 5,
+"changedLines": 32,
+"shared": 3
+},
+{
+"original": "SELECT 1;\n  indent\ndelta\nx = 1\nthe quick brown fox\nepsilon\nSELECT 1;\n<b>tag</b>\na b\nSELECT 1;\nepsilon",
+"changed": "gamma\r\nSELECT 1;\r\n  indent\r\ndelta\r\nx = 1\r\nthe quick brown fox\r\nepsilon\r\n<b>tag</b>\r\na b\r\nhéllo wörld\r\nSELECT 1;",
+"ignoreWhitespace": false,
+"originalLines": 11,
+"changedLines": 11,
+"shared": 9
+},
+{
+"original": "alpha\n",
+"changed": "alpha\r\nthe quick brown fox",
+"ignoreWhitespace": true,
+"originalLines": 1,
+"changedLines": 2,
+"shared": 1
+},
+{
+"original": "end\r\nemoji 😀 line\r\nbeta\r\n\tindent\r\n<b>tag</b>\r\n",
+"changed": "trailing \n<b>tag</b>\ngamma\ntrailing\nreturn x\nThe quick brown fox\ntrailing\nbeta\nSELECT 1;\nthe quick brown fox\nepsilon\nreturn x\nthe quick brown fox\nthe quick brown fox\ny = 2\ndelta\n}\n\tindent\nSELECT 1;\n{\nreturn x\na  b\nSELECT 1;\n\nhéllo wörld\nkey: value\n\tindent\nkey:  value\nhéllo wörld\n<b>tag</b>\nepsilon\nkey: value\nend\ndelta\n",
+"ignoreWhitespace": true,
+"originalLines": 5,
+"changedLines": 34,
+"shared": 3
+},
+{
+"original": "x = 1\nSELECT 1;\ntrailing\nThe quick brown fox\ny = 2\nepsilon\nemoji 😀 line\nepsilon\nThe quick brown fox\nend\ngamma\na b\ny = 2\nkey: value",
+"changed": "x = 1  x\nSELECT 1;\ntrailing\nThe quick brown fox\ny = 2\nepsilon\nemoji 😀 line\nepsilon\nThe quick brown fox\nend\na b\ny = 2\nkey: value\ny = 2",
+"ignoreWhitespace": true,
+"originalLines": 14,
+"changedLines": 14,
+"shared": 12
+},
+{
+"original": "héllo wörld\rdelta\r\n\r\nx = 1\r\ngamma\r\nemoji 😀 line\r\n\tindent\r\na b\r\nThe quick brown fox\r\nx = 1\r\nx = 1\r\n日本語のテキスト\r\ndelta\r\n\r\nend\r\nreturn x\r\nhéllo wörld\r\nreturn x\r\nepsilon\r\nbeta\r\nreturn x\r\nepsilon\r\n  indent\r\n}\r\ny = 2\r\n}\r\nthe quick brown fox\r\ndelta\r\nalpha\r\n}\r\n<b>tag</b>\r\ngamma\r\nkey:  value\r\n  indent\r\ndelta\r\nreturn x",
+"changed": "héllo wörld\r\ndelta \r\n\r\nx = 1\r\ngamma\r\n  indent\r\nemoji 😀 line\r\n\tindent\r\na b\r\nThe quick brown fox\r\n日本語のテキスト\r\ndelta\r\n\r\nreturn x \r\nhéllo wörld\r\nreturn x\r\nepsilon\r\ntrailing \r\nbeta\r\nreturn x\r\nepsilon\r\n  indent\r\n}\r\ny = 2\r\ntrailing \r\n}\r\nthe quick brown fox\r\ndelta\r\ny = 2\r\nalpha\r\n}\r\nkey:  value\r\nkey:  value\r\n  indent\r\ndelta\r\nreturn x  x\r\n",
+"ignoreWhitespace": true,
+"originalLines": 36,
+"changedLines": 36,
+"shared": 30
+},
+{
+"original": "SELECT 1;\ralpha\na  b\nkey:  value\ntrailing \nkey: value\n  indent\n}\n\tindent\nepsilon\nreturn x\nemoji 😀 line\nkey: value\n日本語のテキスト\n}\nalpha\nkey: value\nkey: value\nThe quick brown fox\ny = 2\nemoji 😀 line\ngamma\na  b\nemoji 😀 line\n日本語のテキスト\ndelta\nalpha\nkey: value\nThe quick brown fox\nreturn x\nreturn x\nepsilon\nkey: value\ntrailing\nkey:  value\nSELECT 1;\na b\n日本語のテキスト",
+"changed": "SELECT 1;\nalpha\nkey:  value\na  b\nkey:  value  x\ntrailing \nkey: value\n  indent\n}\n\tindent\nepsilon\nreturn x \nkey: value \n日本語のテキスト\n}\nalpha\nkey: value\nkey: value\nThe quick brown fox\ndelta\ny = 2\nemoji 😀 line\na  b\ngamma\nemoji 😀 line\n日本語のテキスト\ndelta \nalpha\nkey: value  x\nThe quick brown fox\nreturn x\nepsilon\nkey: value\ntrailing\nkey:  value\ntrailing \nSELECT 1;\na b\n日本語のテキスト\n}",
+"ignoreWhitespace": false,
+"originalLines": 38,
+"changedLines": 40,
+"shared": 30
+},
+{
+"original": "héllo wörld\ndelta\n  indent\nalpha\n\tindent\nx = 1\nend\nreturn x\n<b>tag</b>\na b\n\tindent\nx = 1\nkey:  value\na b\nalpha\nhéllo wörld",
+"changed": "héllo wörld  x\r\nhéllo wörld\r\ndelta\r\n  indent\r\nalpha\r\n\tindent \r\nx = 1 \r\nreturn x\r\n<b>tag</b>\r\n\tindent\r\nx = 1\r\nkey:  value\r\na b\r\nalpha\r\nhéllo wörld\r\n",
+"ignoreWhitespace": false,
+"originalLines": 16,
+"changedLines": 15,
+"shared": 12
+},
+{
+"original": "alpha\rThe quick brown fox\nepsilon\nSELECT 1;\nkey:  value\n",
+"changed": "alpha\nThe quick brown fox\nepsilon\nSELECT 1;\nthe quick brown fox\nkey:  value\n",
+"ignoreWhitespace": false,
+"originalLines": 5,
+"changedLines": 6,
+"shared": 5
+},
+{
+"original": "{\n}\ngamma\ntrailing\n\tindent\n日本語のテキスト\nepsilon\n<b>tag</b>\n{\nhéllo wörld",
+"changed": "{\r\n}\r\ngamma\r\ntrailing\r\n\tindent\r\n日本語のテキスト\r\nepsilon\r\n<b>tag</b>\r\nhéllo wörld\r\n",
+"ignoreWhitespace": true,
+"originalLines": 10,
+"changedLines": 9,
+"shared": 9
+},
+{
+"original": "trailing \r\n\tindent\r\ndelta\r\n{\r\nx = 1\r\nkey:  value\r\nkey:  value\r\n\tindent\r\na  b\r\ntrailing\r\n日本語のテキスト\r\nThe quick brown fox\r\ntrailing \r\na  b\r\n{\r\nemoji 😀 line\r\nthe quick brown fox\r\n日本語のテキスト\r\nthe quick brown fox\r\nepsilon\r\na b\r\nreturn x\r\na  b\r\n日本語のテキスト\r\na b\r\nkey: value\r\nemoji 😀 line\r\nbeta\r\n}\r\ntrailing\r\ntrailing\r\ntrailing\r\n\r\n<b>tag</b>",
+"changed": "trailing \n\tindent\ndelta\nx = 1\nkey:  value\nkey:  value\n\tindent\na  b\ntrailing\n日本語のテキスト\nThe quick brown fox\ntrailing \na  b  x\n{\nemoji 😀 line\nthe quick brown fox\n日本語のテキスト\nthe quick brown fox\nepsilon\na b\n日本語のテキスト \na b\nkey: value\nbeta\n}\ntrailing\ntrailing\n\n<b>tag</b> \n",
+"ignoreWhitespace": false,
+"originalLines": 34,
+"changedLines": 29,
+"shared": 26
+},
+{
+"original": "return x\na  b\nkey:  value\ngamma\nkey:  value\na  b\nend\nThe quick brown fox\nepsilon\nSELECT 1;\ntrailing \n日本語のテキスト\ntrailing\n\nSELECT 1;\nhéllo wörld\nepsilon\nbeta\nemoji 😀 line\n  indent\ndelta\n",
+"changed": "return x\r\na  b\r\nkey:  value\r\nbeta\r\ngamma\r\na  b\r\nend\r\nepsilon\r\nSELECT 1;\r\ny = 2\r\ntrailing \r\n日本語のテキスト\r\ntrailing\r\n\r\nSELECT 1;\r\nhéllo wörld\r\nepsilon\r\nbeta  x\r\nemoji 😀 line\r\n  indent\r\n  indent\r\ndelta\r\nreturn x",
+"ignoreWhitespace": false,
+"originalLines": 21,
+"changedLines": 23,
+"shared": 18
+},
+{
+"original": "alpha\ngamma\ngamma\n{\nthe quick brown fox",
+"changed": "the quick brown fox\nbeta\n",
+"ignoreWhitespace": false,
+"originalLines": 5,
+"changedLines": 2,
+"shared": 1
+},
+{
+"original": "日本語のテキスト\na b\n日本語のテキスト\ngamma\nreturn x\nbeta\nhéllo wörld\ngamma\nepsilon\na b\nkey: value\na  b\nbeta\n日本語のテキスト\nSELECT 1;\nemoji 😀 line\n  indent\ntrailing \nemoji 😀 line\nkey:  value\ntrailing \nbeta\nepsilon\nhéllo wörld\ndelta\ny = 2\ntrailing\nepsilon\ndelta\nalpha\nThe quick brown fox\ny = 2\nkey: value\nThe quick brown fox\n\n",
+"changed": "SELECT 1;\r\nthe quick brown fox\r\nalpha\r\ndelta\r\nkey:  value\r\n日本語のテキスト\r\ntrailing \r\ndelta\r\n<b>tag</b>\r\ngamma\r\na  b\r\ngamma\r\nemoji 😀 line\r\nemoji 😀 line\r\nSELECT 1;\r\nemoji 😀 line\r\nhéllo wörld\r\ntrailing\r\nkey:  value\r\ntrailing \r\n\r\nkey: value\r\na b\r\n",
+"ignoreWhitespace": true,
+"originalLines": 35,
+"changedLines": 23,
+"shared": 9
+},
+{
+"original": "delta\r\ngamma\r\nreturn x\r\nSELECT 1;\r\ntrailing\r\n}\r\na b\r\nreturn x\r\nbeta\r\n日本語のテキスト\r\n  indent\r\n}",
+"changed": "SELECT 1;\r\nkey:  value\r\nreturn x\r\nhéllo wörld\r\ndelta\r\nSELECT 1;\r\nbeta\r\n{\r\na b\r\ndelta\r\nemoji 😀 line\r\nThe quick brown fox\r\na b\r\n<b>tag</b>\r\nalpha\r\n日本語のテキスト\r\nbeta\r\nend\r\nend\r\nkey:  value\r\nThe quick brown fox\r\nkey:  value\r\nkey:  value\r\n\tindent\r\nkey: value\r\nend\r\n  indent\r\ny = 2\r\n日本語のテキスト\r\nreturn x\r\n日本語のテキスト",
+"ignoreWhitespace": true,
+"originalLines": 12,
+"changedLines": 31,
+"shared": 5
+},
+{
+"original": "héllo wörld\n\tindent\n\tindent\nx = 1\nSELECT 1;\nhéllo wörld\ntrailing \nkey:  value\ndelta\ntrailing \n<b>tag</b>\n\tindent\nemoji 😀 line\ndelta\nend\ntrailing\nkey: value\nbeta\ny = 2\nkey:  value\nkey:  value\n  indent\n  indent\n{\nkey: value\ndelta\nalpha\n}\nSELECT 1;\n\ndelta\nSELECT 1;\n\n  indent\nx = 1\n  indent\na b\n\tindent\nkey:  value\n",
+"changed": "héllo wörld\r\n\tindent\r\n\tindent\r\nSELECT 1;  x\r\n  indent\r\nhéllo wörld\r\ntrailing \r\nkey:  value\r\ndelta\r\n<b>tag</b>\r\ntrailing \r\n\tindent\r\nemoji 😀 line\r\ndelta\r\nend\r\ntrailing\r\nkey: value\r\nbeta\r\ny = 2\r\nkey:  value\r\n  indent\r\n  indent \r\n{\r\nkey: value\r\ndelta\r\nalpha\r\n}\r\nSELECT 1;\r\n\r\ndelta\r\nSELECT 1;\r\n\r\n  indent\r\nx = 1\r\n  indent\r\na b\r\n\tindent\r\ny = 2\r\nkey:  value\r\ntrailing \r\n",
+"ignoreWhitespace": false,
+"originalLines": 39,
+"changedLines": 40,
+"shared": 34
+},
+{
+"original": "a b\r\n}\r\nepsilon",
+"changed": "a b  x\n}\nepsilon\n",
+"ignoreWhitespace": false,
+"originalLines": 3,
+"changedLines": 3,
+"shared": 2
+},
+{
+"original": "return x\nbeta\n日本語のテキスト\nbeta\nkey:  value\n  indent\nkey: value\nend\nx = 1\nend\na b\n<b>tag</b>\n}\nkey:  value\n}\nemoji 😀 line\n\na b\nhéllo wörld\nend\ngamma\nbeta\nreturn x\ntrailing\na  b\ntrailing\ngamma\nSELECT 1;\n  indent\n  indent\na b\ntrailing \nend\n",
+"changed": "return x\r\nbeta\r\n日本語のテキスト\r\nbeta\r\nkey: value\r\nend\r\nx = 1\r\nend\r\na b\r\n<b>tag</b>\r\n}\r\nkey:  value \r\n}\r\nemoji 😀 line\r\n}\r\na b\r\nhéllo wörld\r\ngamma\r\nbeta\r\nreturn x\r\ntrailing\r\na  b\r\ntrailing\r\nemoji 😀 line\r\ngamma\r\nSELECT 1;\r\n  indent\r\n  indent\r\na b\r\ntrailing \r\nend\r\nThe quick brown fox",
+"ignoreWhitespace": false,
+"originalLines": 33,
+"changedLines": 32,
+"shared": 28
+},
+{
+"original": "héllo wörld\r\nhéllo wörld\r\n",
+"changed": "a b\n<b>tag</b>\nthe quick brown fox\n\tindent\nThe quick brown fox\nThe quick brown fox\n  indent\nthe quick brown fox\nepsilon\nSELECT 1;\nalpha\nepsilon\na  b\ntrailing\n<b>tag</b>\nepsilon\nx = 1\nend\nend\n\tindent\na b\na b\n{\n",
+"ignoreWhitespace": true,
+"originalLines": 2,
+"changedLines": 23,
+"shared": 0
+},
+{
+"original": "<b>tag</b>\r\nx = 1\r\n}\r\nx = 1\r\nthe quick brown fox\r\n<b>tag</b>\r\nkey: value\r\ndelta\r\ndelta\r\n  indent",
+"changed": "end\n<b>tag</b>\nx = 1\nkey: value\n}\nx = 1\nthe quick brown fox\n{\n<b>tag</b>\nkey: value\ndelta\n  indent\na b\n",
+"ignoreWhitespace": false,
+"originalLines": 10,
+"changedLines": 13,
+"shared": 9
+},
+{
+"original": "key: value\r\n日本語のテキスト\r\ndelta\r\nalpha\r\n}\r\n日本語のテキスト\r\nhéllo wörld\r\n\r\nhéllo wörld\r\nreturn x\r\ngamma\r\n{\r\n日本語のテキスト\r\ntrailing\r\n\tindent\r\na  b\r\n日本語のテキスト\r\nSELECT 1;\r\na b\r\nreturn x\r\na  b\r\nx = 1\r\n\tindent\r\ny = 2\r\n\r\n",
+"changed": "emoji 😀 line\r\n\r\n",
+"ignoreWhitespace": true,
+"originalLines": 25,
+"changedLines": 2,
+"shared": 1
+},
+{
+"original": "SELECT 1;",
+"changed": "SELECT 1;\n",
+"ignoreWhitespace": false,
+"originalLines": 1,
+"changedLines": 1,
+"shared": 1
+},
+{
+"original": "gamma",
+"changed": "  indent\n日本語のテキスト\nx = 1",
+"ignoreWhitespace": false,
+"originalLines": 1,
+"changedLines": 3,
+"shared": 0
+},
+{
+"original": "end\nThe quick brown fox\nbeta\nkey:  value\nbeta\nThe quick brown fox\n}\n\n\n}\nhéllo wörld\ndelta\ntrailing\n{\na b\ny = 2\nthe quick brown fox\ntrailing \nemoji 😀 line\ntrailing \nepsilon\n{\nbeta\ny = 2\na b\nreturn x\n<b>tag</b>\na  b\nkey: value\nThe quick brown fox\nkey: value\nkey:  value\n<b>tag</b>\na  b\nepsilon\nemoji 😀 line\n\tindent",
+"changed": "beta\r\nkey:  value\r\nbeta\r\nThe quick brown fox\r\n}\r\n\r\n\r\n}\r\nhéllo wörld\r\ndelta\r\ntrailing\r\n{\r\na b\r\ny = 2\r\nthe quick brown fox\r\ntrailing \r\nemoji 😀 line\r\ntrailing \r\nepsilon\r\n{\r\nbeta\r\ny = 2\r\nreturn x\r\na b\r\nreturn x\r\n<b>tag</b>\r\nreturn x\r\na  b\r\nkey: value\r\nThe quick brown fox\r\nkey: value\r\n}\r\nkey:  value\r\nthe quick brown fox\r\n<b>tag</b>\r\na  b\r\nepsilon\r\nemoji 😀 line\r\n\tindent\r\n",
+"ignoreWhitespace": false,
+"originalLines": 37,
+"changedLines": 39,
+"shared": 35
+},
+{
+"original": "the quick brown fox\nkey: value\n{\nkey:  value\n\n",
+"changed": "the quick brown fox\r\n{\r\nkey:  value \r\n\r\n",
+"ignoreWhitespace": false,
+"originalLines": 5,
+"changedLines": 4,
+"shared": 3
+},
+{
+"original": "SELECT 1;\nThe quick brown fox\nx = 1\na b\n",
+"changed": "the quick brown fox\nSELECT 1;\nThe quick brown fox\nx = 1\na b\n",
+"ignoreWhitespace": false,
+"originalLines": 4,
+"changedLines": 5,
+"shared": 4
+},
+{
+"original": "trailing \ndelta\n\tindent\ngamma\n  indent\na  b\n}\nx = 1\nhéllo wörld\n\tindent\n日本語のテキスト\nbeta\n\n\tindent\n",
+"changed": "trailing \n\tindent\na b\ngamma\n  indent\na  b\nx = 1\nhéllo wörld\nemoji 😀 line\n\tindent\n日本語のテキスト\nkey: value\nbeta\n\n\tindent\nbeta",
+"ignoreWhitespace": true,
+"originalLines": 14,
+"changedLines": 16,
+"shared": 12
+},
+{
+"original": "}\nThe quick brown fox\na b\ntrailing \nalpha\n\n",
+"changed": "}\r\nThe quick brown fox\r\na b\r\nalpha\r\n \r\n",
+"ignoreWhitespace": false,
+"originalLines": 6,
+"changedLines": 5,
+"shared": 4
+},
+{
+"original": "key:  value\n日本語のテキスト\n",
+"changed": "key:  value\n日本語のテキスト",
+"ignoreWhitespace": false,
+"originalLines": 2,
+"changedLines": 2,
+"shared": 2
+},
+{
+"original": "trailing\r\ntrailing\r\na b\r\nepsilon\r\nThe quick brown fox\r\nThe quick brown fox\r\ndelta\r\ny = 2\r\n  indent\r\nepsilon\r\nthe quick brown fox\r\ntrailing \r\nepsilon\r\ntrailing\r\ngamma\r\n<b>tag</b>\r\nkey:  value\r\n{",
+"changed": "trailing\ntrailing \na b \nepsilon\nThe quick brown fox\nThe quick brown fox \ndelta\ny = 2\n  indent\nepsilon\nthe quick brown fox\ntrailing \ndelta\nepsilon\ntrailing\ngamma\n<b>tag</b> \nkey:  value\n",
+"ignoreWhitespace": true,
+"originalLines": 18,
+"changedLines": 18,
+"shared": 17
+},
+{
+"original": "return x\nepsilon\nSELECT 1;\nSELECT 1;\nx = 1\nbeta\n\tindent\nkey: value\nhéllo wörld\nend\nhéllo wörld\nkey:  value\nkey:  value\ndelta\n\tindent\n\ny = 2\n",
+"changed": "return x\r\nepsilon\r\nSELECT 1;\r\nx = 1\r\nbeta\r\n\tindent\r\n{\r\nkey: value\r\nhéllo wörld\r\nend\r\nhéllo wörld\r\nkey:  value\r\nkey:  value\r\ndelta\r\nbeta\r\n\tindent\r\n\r\ny = 2",
+"ignoreWhitespace": true,
+"originalLines": 17,
+"changedLines": 18,
+"shared": 16
+},
+{
+"original": "SELECT 1;\nepsilon\nepsilon\ngamma\nalpha\nreturn x\ny = 2\nthe quick brown fox\nx = 1\n  indent\n\nkey: value\na b\nkey: value\n日本語のテキスト\nreturn x\nepsilon\nhéllo wörld\n",
+"changed": "SELECT 1;\nepsilon  x\nepsilon\ngamma\nreturn x\ny = 2\nthe quick brown fox\nx = 1\n  indent\n\nkey: value \na b\nkey: value\n日本語のテキスト \nreturn x  x\nhéllo wörld",
+"ignoreWhitespace": true,
+"originalLines": 18,
+"changedLines": 16,
+"shared": 14
+},
+{
+"original": "delta\nbeta\nhéllo wörld\ndelta\ntrailing\n{\n日本語のテキスト\n日本語のテキスト\n\tindent\n  indent\nreturn x\nhéllo wörld\n<b>tag</b>\ntrailing\n<b>tag</b>\nThe quick brown fox\n\nSELECT 1;\n<b>tag</b>\nx = 1\nepsilon\n  indent\nhéllo wörld\na  b\n",
+"changed": "delta\r\nbeta\r\nhéllo wörld\r\ndelta\r\ntrailing  x\r\n{\r\n日本語のテキスト\r\n日本語のテキスト\r\n\tindent\r\n  indent\r\nreturn x\r\nhéllo wörld\r\n<b>tag</b> \r\ntrailing\r\n<b>tag</b>\r\nThe quick brown fox\r\n\r\nSELECT 1;\r\nx = 1\r\n  indent  x\r\nhéllo wörld\r\n",
+"ignoreWhitespace": false,
+"originalLines": 24,
+"changedLines": 21,
+"shared": 18
+},
+{
+"original": "<b>tag</b>\n<b>tag</b>\nepsilon\n  indent\ny = 2\nbeta\ngamma\ntrailing\nthe quick brown fox\nhéllo wörld\n  indent\nend\nkey:  value\n{\nSELECT 1;\ntrailing \na  b\nkey: value\n  indent\n日本語のテキスト\n}\nSELECT 1;\nkey: value\nemoji 😀 line\ntrailing\ndelta\nepsilon\nx = 1\na b\nkey: value\n}\nend\n\tindent\nend",
+"changed": "<b>tag</b>\r\n<b>tag</b>\r\nepsilon\r\ny = 2\r\ngamma\r\ntrailing\r\nThe quick brown fox\r\nthe quick brown fox\r\nhéllo wörld\r\n  indent\r\nend\r\nkey:  value\r\n{\r\nSELECT 1; \r\na  b\r\nkey: value\r\n  indent\r\n日本語のテキスト\r\n}\r\nSELECT 1;\r\nkey: value  x\r\ntrailing\r\ndelta\r\nepsilon\r\nx = 1\r\na b\r\nkey: value\r\ndelta\r\n}\r\nend\r\n\tindent\r\nend",
+"ignoreWhitespace": false,
+"originalLines": 34,
+"changedLines": 32,
+"shared": 28
+},
+{
+"original": "}\na b\ndelta",
+"changed": "the quick brown fox\n}\ndelta\n",
+"ignoreWhitespace": false,
+"originalLines": 3,
+"changedLines": 3,
+"shared": 2
+},
+{
+"original": "emoji 😀 line\ny = 2\n  indent\nbeta\nSELECT 1;\n{\ntrailing \n  indent\n\n\nbeta\ntrailing \nhéllo wörld\nepsilon\nthe quick brown fox\nx = 1\nend",
+"changed": "emoji 😀 line\nThe quick brown fox\nemoji 😀 line\na b\n\tindent\n\nhéllo wörld\na  b\nend\n<b>tag</b>\ntrailing \nThe quick brown fox\n<b>tag</b>\nx = 1\n<b>tag</b>\nemoji 😀 line\ngamma\n\tindent\ntrailing \n",
+"ignoreWhitespace": false,
+"originalLines": 17,
+"changedLines": 19,
+"shared": 4
+},
+{
+"original": "delta\ndelta\nbeta\nkey:  value\nSELECT 1;\nkey:  value\n{\nthe quick brown fox\nreturn x\ntrailing\na  b\nThe quick brown fox\na  b\n<b>tag</b>\nthe quick brown fox\nthe quick brown fox\nThe quick brown fox\n\nx = 1\n\tindent\nalpha\ny = 2\n",
+"changed": "a  b\r\ndelta\r\nbeta\r\nkey:  value\r\nSELECT 1;\r\nkey:  value\r\n{\r\nthe quick brown fox\r\ntrailing\r\na  b\r\nThe quick brown fox\r\na  b\r\n<b>tag</b>\r\nthe quick brown fox\r\nthe quick brown fox\r\nx = 1\r\nepsilon\r\n\tindent\r\nalpha\r\ny = 2",
+"ignoreWhitespace": false,
+"originalLines": 22,
+"changedLines": 20,
+"shared": 18
+},
+{
+"original": "delta\n<b>tag</b>\nend\n日本語のテキスト\nemoji 😀 line\ndelta\nemoji 😀 line\nhéllo wörld\n日本語のテキスト\na  b\nSELECT 1;\n<b>tag</b>\ny = 2\n\n}\n\tindent\n  indent\ntrailing \nemoji 😀 line\n  indent\n<b>tag</b>\n",
+"changed": "key: value\r\ndelta\r\n<b>tag</b> \r\nend\r\nemoji 😀 line\r\ndelta\r\nemoji 😀 line\r\nhéllo wörld  x\r\n日本語のテキスト\r\na  b\r\nSELECT 1;\r\n<b>tag</b>\r\ny = 2\r\n\r\n}\r\n\tindent\r\n  indent\r\ntrailing \r\nemoji 😀 line\r\n  indent\r\n<b>tag</b>\r\n",
+"ignoreWhitespace": false,
+"originalLines": 21,
+"changedLines": 21,
+"shared": 18
+},
+{
+"original": "trailing\r\nbeta\r\ngamma\r\nSELECT 1;\r\n\tindent\r\nx = 1\r\n\tindent\r\n",
+"changed": "trailing\r\nbeta\r\ngamma\r\nSELECT 1;\r\nx = 1\r\n\tindent  x",
+"ignoreWhitespace": false,
+"originalLines": 7,
+"changedLines": 6,
+"shared": 5
+},
+{
+"original": "日本語のテキスト\n\tindent\nalpha\nkey:  value\na  b\nemoji 😀 line\nkey:  value\nThe quick brown fox\nx = 1\nhéllo wörld\ntrailing \n<b>tag</b>\na  b\nreturn x\ndelta\nkey:  value\n日本語のテキスト\nbeta\nthe quick brown fox\nemoji 😀 line\n日本語のテキスト\ny = 2\n日本語のテキスト\nkey: value\na  b\n}\n",
+"changed": "\tindent\r\nalpha\r\nemoji 😀 line\r\nThe quick brown fox\r\nkey:  value\r\nx = 1\r\nhéllo wörld\r\ntrailing \r\na  b\r\nreturn x\r\ndelta\r\nkey:  value \r\n日本語のテキスト\r\nbeta\r\nthe quick brown fox\r\nemoji 😀 line  x\r\n日本語のテキスト\r\ny = 2\r\n日本語のテキスト\r\nkey: value\r\na  b\r\n}  x",
+"ignoreWhitespace": true,
+"originalLines": 26,
+"changedLines": 22,
+"shared": 19
+},
+{
+"original": "gamma\r\nreturn x\r\nalpha\r\ngamma\r\ndelta\r\nemoji 😀 line\r\n\r\nhéllo wörld\r\ntrailing\r\n<b>tag</b>\r\n",
+"changed": "gamma\r\nreturn x\r\nalpha\r\ngamma\r\ndelta\r\nemoji 😀 line\r\n\r\nemoji 😀 line\r\nhéllo wörld\r\ntrailing\r\n<b>tag</b>\r\n",
+"ignoreWhitespace": false,
+"originalLines": 10,
+"changedLines": 11,
+"shared": 10
+},
+{
+"original": "x = 1\r\na b\r\ndelta\r\n\tindent\r\n  indent\r\nalpha\r\nkey:  value\r\ngamma\r\nx = 1\r\n}\r\nkey:  value\r\ntrailing\r\n  indent\r\n",
+"changed": "x = 1\r\na b\r\ndelta\r\n\tindent\r\n  indent  x\r\nalpha\r\nkey:  value\r\ngamma\r\nx = 1\r\n}\r\nkey:  value\r\nkey:  value\r\ntrailing",
+"ignoreWhitespace": true,
+"originalLines": 13,
+"changedLines": 13,
+"shared": 11
+},
+{
+"original": "SELECT 1;\na  b\nreturn x\n}\nThe quick brown fox\n}\n日本語のテキスト\ny = 2\ndelta",
+"changed": "SELECT 1;\na  b\nreturn x\n}\nThe quick brown fox\n}\n日本語のテキスト\ny = 2",
+"ignoreWhitespace": true,
+"originalLines": 9,
+"changedLines": 8,
+"shared": 8
+},
+{
+"original": "gamma\ndelta\nThe quick brown fox\n日本語のテキスト\n日本語のテキスト\nbeta",
+"changed": "日本語のテキスト\na  b\nbeta\ndelta\nThe quick brown fox\nhéllo wörld\ntrailing \n<b>tag</b>\n<b>tag</b>\ny = 2\nemoji 😀 line\n\tindent\n\n",
+"ignoreWhitespace": false,
+"originalLines": 6,
+"changedLines": 13,
+"shared": 2
+},
+{
+"original": "alpha\r\n}\r\nSELECT 1;\r\nemoji 😀 line\r\n\r\n  indent\r\nx = 1\r\ntrailing\r\nalpha\r\nkey: value\r\ntrailing\r\nhéllo wörld\r\nThe quick brown fox\r\ntrailing\r\nkey:  value\r\nx = 1\r\ny = 2\r\nend\r\ny = 2\r\nhéllo wörld\r\n\tindent\r\n}\r\n",
+"changed": "\tindent\r\nalpha\r\n}\r\nemoji 😀 line\r\n\r\n  indent \r\n\r\nx = 1\r\ntrailing\r\nalpha\r\nkey: value\r\ntrailing\r\nhéllo wörld\r\nkey:  value\r\nx = 1\r\nemoji 😀 line\r\ny = 2\r\ny = 2\r\nhéllo wörld\r\n\tindent\r\n}\r\n",
+"ignoreWhitespace": false,
+"originalLines": 22,
+"changedLines": 21,
+"shared": 17
+},
+{
+"original": "end\r\nx = 1\r\n  indent\r\n",
+"changed": "end\r\n  indent\r\n  indent\r\n",
+"ignoreWhitespace": true,
+"originalLines": 3,
+"changedLines": 3,
+"shared": 2
+},
+{
+"original": "}\r\nthe quick brown fox\r\na b\r\n{\r\nx = 1\r\n\r\nThe quick brown fox\r\ntrailing \r\n}\r\nthe quick brown fox\r\nreturn x\r\nthe quick brown fox\r\nx = 1\r\ny = 2\r\nkey:  value\r\nend\r\na  b\r\n日本語のテキスト\r\n日本語のテキスト\r\nthe quick brown fox\r\nhéllo wörld\r\nalpha\r\nalpha\r\nhéllo wörld\r\n}\r\ngamma\r\n日本語のテキスト\r\nthe quick brown fox\r\na  b\r\n",
+"changed": "} \r\nthe quick brown fox \r\nx = 1\r\na b\r\n{\r\nx = 1\r\n\r\nalpha\r\nThe quick brown fox\r\ntrailing \r\n}\r\nthe quick brown fox\r\nreturn x\r\nthe quick brown fox \r\ny = 2\r\nkey:  value\r\na  b\r\n日本語のテキスト\r\nkey: value\r\n日本語のテキスト\r\nbeta\r\nthe quick brown fox\r\nhéllo wörld\r\nalpha\r\nalpha\r\nhéllo wörld \r\n}\r\n<b>tag</b>\r\n日本語のテキスト\r\nthe quick brown fox\r\nthe quick brown fox\r\na  b",
+"ignoreWhitespace": false,
+"originalLines": 29,
+"changedLines": 32,
+"shared": 22
+},
+{
+"original": "  indent\nSELECT 1;\nx = 1\ndelta\na b\n\n}\nalpha\ngamma\nThe quick brown fox\nSELECT 1;\nepsilon\na  b\n日本語のテキスト\nalpha\ngamma\nreturn x\n{\nbeta\n\ntrailing\n}\nSELECT 1;\n\tindent\ntrailing \na b\na b\n",
+"changed": "  indent\nSELECT 1;\nx = 1 \ndelta\na b\n\n}\nalpha\ngamma\nThe quick brown fox\nSELECT 1;\na  b\n日本語のテキスト\nalpha\ngamma\nreturn x\n{\nbeta\n\ntrailing\n}\nSELECT 1;\n\tindent\ntrailing \na b\n",
+"ignoreWhitespace": true,
+"originalLines": 27,
+"changedLines": 25,
+"shared": 25
+},
+{
+"original": "emoji 😀 line\nalpha\n{\ndelta\nemoji 😀 line\nepsilon\nthe quick brown fox\nkey:  value\n\tindent\n日本語のテキスト\ny = 2\nkey:  value\nkey:  value\nSELECT 1;\nkey: value",
+"changed": "gamma\n日本語のテキスト\ntrailing\nx = 1\nalpha\n{\ntrailing\ntrailing \nthe quick brown fox\nThe quick brown fox\n<b>tag</b>\nSELECT 1;\n<b>tag</b>\ntrailing \na b\n\n",
+"ignoreWhitespace": false,
+"originalLines": 15,
+"changedLines": 16,
+"shared": 4
+},
+{
+"original": "",
+"changed": "",
+"ignoreWhitespace": false,
+"originalLines": 0,
+"changedLines": 0,
+"shared": 0
+},
+{
+"original": "",
+"changed": "",
+"ignoreWhitespace": true,
+"originalLines": 0,
+"changedLines": 0,
+"shared": 0
+},
+{
+"original": "the quick brown fox\n}\n  indent\ndelta\nend\ntrailing\ntrailing \n{\ntrailing \nThe quick brown fox\nThe quick brown fox\n\na b\n}\nThe quick brown fox\nemoji 😀 line\n<b>tag</b>\nthe quick brown fox\n\tindent\nkey: value\nalpha\nx = 1\nend\ny = 2\ntrailing \nkey: value\nreturn x\ngamma\ny = 2\nhéllo wörld\na  b\ngamma",
+"changed": "}\r\n  indent\r\ndelta\r\nend\r\ntrailing\r\ntrailing \r\n{\r\nThe quick brown fox\r\nThe quick brown fox\r\ny = 2\r\n\r\na b\r\n}\r\nalpha\r\nThe quick brown fox\r\nemoji 😀 line\r\n<b>tag</b>\r\nthe quick brown fox\r\n\tindent\r\nkey: value\r\nalpha\r\nx = 1\r\nend\r\ntrailing \r\n{\r\nkey: value\r\nreturn x\r\ngamma\r\ny = 2\r\nemoji 😀 line\r\nhéllo wörld\r\ngamma\r\nhéllo wörld",
+"ignoreWhitespace": false,
+"originalLines": 32,
+"changedLines": 33,
+"shared": 28
+},
+{
+"original": "\r\n}\r\n日本語のテキスト\r\n\tindent\r\nThe quick brown fox\r\nthe quick brown fox\r\nend\r\nkey:  value\r\ndelta\r\ntrailing\r\n}\r\n}\r\ndelta\r\na b\r\nemoji 😀 line\r\nthe quick brown fox\r\nbeta\r\n}",
+"changed": "\n}\n\tindent\n{\nThe quick brown fox\nthe quick brown fox \n{\nkey:  value\ndelta\ntrailing\n}\n}\ndelta\na b\nemoji 😀 line\n\tindent\nthe quick brown fox\nbeta\n}",
+"ignoreWhitespace": true,
+"originalLines": 18,
+"changedLines": 19,
+"shared": 16
+},
+{
+"original": "a  b\ntrailing \ndelta\nkey:  value\nkey: value\n}\n\ntrailing\n\nend\nend\nepsilon",
+"changed": "a  b\ntrailing  \ndelta\nkey:  value\nkey: value\n}\n\ntrailing\nend\nend  x\nepsilon\n",
+"ignoreWhitespace": true,
+"originalLines": 12,
+"changedLines": 11,
+"shared": 10
+},
+{
+"original": "y = 2\r\nThe quick brown fox\r\n\r\nbeta\r\nalpha\r\nkey:  value\r\nThe quick brown fox\r\n\tindent\r\nThe quick brown fox\r\ngamma\r\nthe quick brown fox\r\nhéllo wörld\r\ny = 2\r\nthe quick brown fox\r\n<b>tag</b>\r\nx = 1\r\n{\r\n<b>tag</b>\r\nkey:  value\r\ntrailing \r\n  indent\r\nalpha\r\na  b\r\nkey:  value\r\nepsilon\r\nbeta\r\nreturn x\r\na b\r\nepsilon\r\n<b>tag</b>\r\n",
+"changed": "y = 2\nbeta\nalpha  x\nkey:  value  x\nThe quick brown fox\n\tindent\ngamma\nThe quick brown fox\nthe quick brown fox\nhéllo wörld\ny = 2\nthe quick brown fox\nx = 1\n{\n<b>tag</b>\n  indent\nalpha\na  b\nepsilon\nbeta\nreturn x\na b\nepsilon\na  b\n",
+"ignoreWhitespace": false,
+"originalLines": 30,
+"changedLines": 24,
+"shared": 20
+},
+{
+"original": "\tindent\r\nreturn x\r\nSELECT 1;\r\ntrailing\r\nalpha\r\nkey: value\r\nepsilon\r\ntrailing \r\n\r\n  indent\r\ntrailing \r\n<b>tag</b>\r\ntrailing \r\na b\r\nkey:  value\r\ngamma\r\ndelta\r\n  indent\r\nepsilon\r\nalpha\r\nalpha\r\na  b\r\n  indent\r\nepsilon\r\ngamma\r\nx = 1\r\ndelta\r\nepsilon\r\nalpha\r\nSELECT 1;\r\na  b\r\n\tindent\r\ntrailing \r\na b\r\nThe quick brown fox\r\nreturn x",
+"changed": "y = 2\n}\ntrailing\n  indent\n}\nemoji 😀 line\n  indent\n\tindent\n\ndelta\na b\nkey:  value\nkey: value\nepsilon\ntrailing \n  indent\n  indent\ndelta\nalpha\nx = 1\n}\nThe quick brown fox\n{\n",
+"ignoreWhitespace": false,
+"originalLines": 36,
+"changedLines": 23,
+"shared": 9
+},
+{
+"original": "a  b\r\nx = 1\r\nhéllo wörld\r\nbeta\r\ngamma\r\n<b>tag</b>\r\nkey:  value\r\nemoji 😀 line\r\nreturn x\r\n}\r\nkey: value\r\nreturn x\r\nthe quick brown fox\r\nhéllo wörld\r\n{\r\nbeta\r\n\tindent\r\n\tindent\r\na b\r\ntrailing \r\n<b>tag</b>\r\nThe quick brown fox\r\nalpha\r\n\r\ndelta\r\nbeta\r\ndelta\r\ngamma\r\ngamma\r\ngamma\r\nepsilon\r\n{\r\nthe quick brown fox\r\nbeta\r\n日本語のテキスト\r\nhéllo wörld\r\ntrailing \r\n日本語のテキスト\r\nSELECT 1;\r\nkey: value\r\ndelta\r\n\tindent\r\n\r\na b\r\nemoji 😀 line\r\n\r\ntrailing\r\nend\r\nthe quick brown fox\r\nepsilon\r\nkey:  value\r\nSELECT 1;\r\n\r\ngamma\r\n\r\nx = 1\r\nkey: value\r\nx = 1\r\nthe quick brown fox\r\nhéllo wörld\r\ntrailing\r\n{\r\ngamma\r\nkey:  value\r\ngamma\r\nkey: value\r\nkey:  value\r\n<b>tag</b>\r\na  b\r\n\r\nThe quick brown fox\r\nemoji 😀 line\r\n<b>tag</b>\r\na b\r\n{\r\nepsilon\r\n}\r\n\r\nkey: value\r\ndelta\r\na  b\r\nkey:  value\r\n\r\ndelta\r\na b\r\na  b\r\nreturn x\r\ny = 2\r\nx = 1\r\nbeta\r\n{\r\na  b\r\nx = 1\r\nkey:  value\r\nThe quick brown fox\r\nepsilon\r\nhéllo wörld\r\nalpha\r\ntrailing\r\ngamma\r\n{\r\nhéllo wörld\r\nemoji 😀 line\r\n\r\ny = 2\r\n\r\nkey: value\r\n<b>tag</b>\r\ny = 2\r\nThe quick brown fox\r\n  indent\r\nthe quick brown fox\r\ny = 2\r\na b\r\n  indent\r\ny = 2\r\n{\r\n{\r\ndelta\r\nemoji 😀 line\r\n<b>tag</b>\r\ndelta\r\ny = 2\r\nalpha\r\na  b\r\nSELECT 1;\r\nthe quick brown fox\r\nThe quick brown fox\r\n\r\n{\r\nhéllo wörld\r\nthe quick brown fox\r\nSELECT 1;\r\ngamma\r\na b\r\n<b>tag</b>\r\na b\r\nkey:  value\r\nepsilon\r\nepsilon\r\nx = 1\r\n}\r\n  indent\r\na  b\r\n日本語のテキスト\r\n{\r\nkey: value\r\nkey:  value\r\ngamma\r\n\tindent\r\nThe quick brown fox\r\nalpha\r\ny = 2\r\n{\r\nepsilon\r\ntrailing\r\nend\r\nhéllo wörld\r\na  b\r\nemoji 😀 line\r\n\tindent\r\ntrailing \r\na  b\r\n<b>tag</b>\r\nend\r\na  b\r\ndelta\r\nx = 1\r\n\tindent\r\n<b>tag</b>\r\n{\r\n\r\ndelta\r\n<b>tag</b>\r\nalpha\r\n  indent\r\nx = 1\r\na b\r\nhéllo wörld\r\nreturn x\r\nThe quick brown fox\r\nend\r\nx = 1\r\nend\r\n  indent\r\n\tindent\r\na b\r\ngamma\r\ngamma\r\na b\r\ny = 2\r\nkey:  value\r\nkey: value\r\nend\r\nemoji 😀 line\r\nThe quick brown fox\r\nkey:  value\r\nThe quick brown fox\r\nx = 1\r\n<b>tag</b>\r\ngamma\r\nSELECT 1;\r\nalpha\r\nhéllo wörld\r\n\r\ny = 2\r\nalpha\r\n\r\n\tindent\r\n日本語のテキスト\r\nalpha\r\nthe quick brown fox\r\nkey: value\r\ny = 2\r\nemoji 😀 line\r\n日本語のテキスト\r\na  b\r\nemoji 😀 line\r\ny = 2\r\n  indent\r\ndelta\r\nkey: value\r\nemoji 😀 line\r\nend\r\nThe quick brown fox\r\n\r\ny = 2\r\n  indent\r\n}\r\nThe quick brown fox\r\nkey: value\r\nalpha\r\na  b\r\nThe quick brown fox\r\n}\r\ntrailing \r\ny = 2\r\n}\r\nemoji 😀 line\r\nthe quick brown fox\r\n{\r\ny = 2\r\n  indent\r\n  indent\r\nx = 1\r\nbeta\r\n{\r\n{\r\nepsilon\r\n\r\ndelta\r\nThe quick brown fox\r\nx = 1\r\ngamma\r\n{\r\nend\r\nemoji 😀 line\r\nkey:  value\r\ndelta\r\nalpha\r\ntrailing\r\nkey: value\r\ntrailing \r\ntrailing \r\n\tindent\r\nhéllo wörld\r\nthe quick brown fox\r\n日本語のテキスト\r\n<b>tag</b>\r\nbeta\r\ndelta\r\nkey:  value\r\nemoji 😀 line\r\n\tindent\r\na b\r\n{\r\nbeta\r\nbeta\r\na  b\r\nbeta\r\nthe quick brown fox\r\n<b>tag</b>\r\nthe quick brown fox\r\nSELECT 1;\r\nend\r\nthe quick brown fox\r\nend\r\nkey:  value\r\n  indent\r\nx = 1\r\n\r\n日本語のテキスト\r\nhéllo wörld\r\ndelta\r\nthe quick brown fox\r\ngamma\r\nkey: value\r\nkey: value\r\nSELECT 1;\r\nkey:  value\r\nThe quick brown fox\r\ntrailing\r\ngamma\r\nkey:  value\r\nThe quick brown fox\r\nhéllo wörld\r\nSELECT 1;\r\ndelta\r\ntrailing\r\n<b>tag</b>\r\ndelta\r\nend\r\nbeta\r\ndelta\r\nThe quick brown fox\r\n  indent\r\n日本語のテキスト\r\nSELECT 1;\r\ny = 2\r\n\r\nx = 1\r\nemoji 😀 line\r\nhéllo wörld\r\na  b\r\na b\r\n日本語のテキスト\r\nThe quick brown fox\r\n<b>tag</b>\r\nend\r\nend\r\ntrailing \r\n  indent\r\nthe quick brown fox\r\nend\r\ngamma\r\nThe quick brown fox\r\ngamma\r\n<b>tag</b>\r\nkey:  value\r\ngamma\r\n}\r\n{\r\n  indent\r\nSELECT 1;\r\ny = 2\r\na b\r\nreturn x\r\ngamma\r\ndelta\r\n  indent\r\ndelta\r\n  indent\r\nThe quick brown fox\r\nkey: value\r\nkey: value\r\nkey:  value\r\nSELECT 1;\r\nThe quick brown fox\r\ny = 2\r\ngamma\r\nThe quick brown fox\r\nemoji 😀 line\r\ny = 2\r\nSELECT 1;\r\n<b>tag</b>\r\na  b\r\nend\r\nemoji 😀 line\r\nepsilon\r\ndelta\r\nbeta\r\nalpha\r\nend\r\nkey:  value\r\nreturn x\r\na b\r\n<b>tag</b>\r\n日本語のテキスト\r\nhéllo wörld\r\nthe quick brown fox\r\nalpha\r\nalpha\r\na  b\r\ntrailing\r\nend\r\ndelta\r\n<b>tag</b>\r\n<b>tag</b>\r\nkey: value\r\ny = 2\r\nreturn x\r\nSELECT 1;\r\nhéllo wörld\r\nThe quick brown fox\r\nreturn x",
+"changed": "a  b\nx = 1\nhéllo wörld\nbeta \ngamma\n<b>tag</b>\nkey:  value\nemoji 😀 line\nreturn x\nkey: value  x\nreturn x\nthe quick brown fox \nhéllo wörld\n{\nbeta\n\tindent\n\tindent\na b\n<b>tag</b>\nThe quick brown fox \nalpha\n\ndelta\nbeta  x\ndelta \ngamma\ngamma\nepsilon\n{\nthe quick brown fox\nbeta\n日本語のテキスト\nhéllo wörld\ntrailing \n日本語のテキスト\nSELECT 1;\nkey: value\n\tindent\n\na b\nemoji 😀 line\ntrailing\nend \nkey:  value\nSELECT 1;\n日本語のテキスト\n\ngamma\n\nx = 1\nkey: value\nx = 1\nthe quick brown fox\nhéllo wörld  x\ntrailing\n{\na b\nkey:  value\ngamma  x\nkey: value\nkey:  value\n<b>tag</b>\na  b\n\nThe quick brown fox\nemoji 😀 line\n<b>tag</b>\na b\n{ \nepsilon\n}\n\na  b\nkey: value\ndelta\na  b\nkey:  value\n\ndelta\nkey:  value\na b\na  b\nreturn x\ny = 2 \nx = 1\na  b\ny = 2\nx = 1\nkey:  value\nThe quick brown fox\nhéllo wörld  x\nalpha  x\ntrailing\ngamma\n{  x\nhéllo wörld\nemoji 😀 line\na b\n\ny = 2\n\nkey: value\n<b>tag</b>\ny = 2\n  indent\nthe quick brown fox\ny = 2\na b\n  indent\ny = 2\n{\ndelta\n日本語のテキスト\nemoji 😀 line\ndelta\n\tindent\ny = 2\nalpha\na  b\nSELECT 1;\nthe quick brown fox\nThe quick brown fox\n\n{\nthe quick brown fox\ngamma\na b\n<b>tag</b>\na b\nx = 1\nkey:  value\nepsilon\nepsilon\nx = 1\n}\n  indent\na  b\n日本語のテキスト\n日本語のテキスト\n{\nkey: value\nkey:  value  x\n\tindent\nThe quick brown fox\nalpha\ny = 2 \n{\nepsilon\ntrailing\nend\nhéllo wörld\na  b\nemoji 😀 line\n\tindent\ntrailing \na  b\n<b>tag</b>\nend \na  b\n\tindent\ntrailing\n<b>tag</b>\n{\n\ndelta\n<b>tag</b>\nalpha\n  indent\nx = 1\na b\nreturn x\nThe quick brown fox\nend\nx = 1\nend\n  indent\n\tindent\na b\ngamma\ngamma\ny = 2\nkey:  value\nkey: value\nend\nemoji 😀 line  x\nThe quick brown fox\nkey:  value\nThe quick brown fox\nx = 1\n<b>tag</b>\ngamma \nSELECT 1;\nalpha\nhéllo wörld\n\ny = 2\nreturn x\n\n\tindent\n日本語のテキスト \nalpha\nthe quick brown fox\nkey: value\n{\ny = 2\nemoji 😀 line\n日本語のテキスト\na  b\nemoji 😀 line\ny = 2\n  indent\ndelta\nkey: value\nemoji 😀 line\nend\nThe quick brown fox\n\ny = 2\n}\nThe quick brown fox\nkey: value\nThe quick brown fox\nalpha\nThe quick brown fox\n} \ntrailing   x\ny = 2\nemoji 😀 line\nthe quick brown fox\n{\ny = 2\n  indent\n  indent\nx = 1\nbeta\n{\n{ \nepsilon\n\nThe quick brown fox\nx = 1\ngamma\n{\nkey: value\nemoji 😀 line\nkey:  value\ndelta\nalpha\ntrailing\nkey: value\ntrailing   x\ntrailing \n\tindent\nhéllo wörld\nthe quick brown fox\n日本語のテキスト\n<b>tag</b>\nbeta\ndelta\nkey:  value\nemoji 😀 line\n\tindent\na b\ny = 2\n{\nbeta\nbeta\na  b\nbeta\nthe quick brown fox\n<b>tag</b>\nthe quick brown fox\nSELECT 1;\nend\ny = 2\nthe quick brown fox\nkey:  value\n  indent\n\n日本語のテキスト\nhéllo wörld\ndelta\nthe quick brown fox\nkey: value\nkey: value \nSELECT 1;\nkey:  value\nThe quick brown fox\ntrailing\ngamma\nkey:  value  x\nThe quick brown fox\nhéllo wörld\n  indent\nSELECT 1;\ndelta\n<b>tag</b>\nend\nbeta\nThe quick brown fox\n  indent\na b\n日本語のテキスト\nSELECT 1;\ny = 2\n\nx = 1\nemoji 😀 line\nhéllo wörld\na  b\na b \n日本語のテキスト\nThe quick brown fox  x\n<b>tag</b> \nend\nend\ntrailing \nthe quick brown fox\nend\ngamma\ngamma\nkey:  value\ngamma\n}\n{\n  indent\ny = 2\na b\nreturn x\ngamma\ndelta\n  indent\ndelta\n  indent\nkey: value  x\nkey: value\nkey:  value \nSELECT 1;\nThe quick brown fox\ny = 2\ngamma\nThe quick brown fox\nemoji 😀 line\ny = 2\nSELECT 1;\n<b>tag</b>\n\na  b\nend\nemoji 😀 line\nepsilon\ndelta\n{\nbeta\nalpha\nend\nkey:  value \nreturn x\na b\n<b>tag</b>\n日本語のテキスト\nhéllo wörld\nthe quick brown fox\ngamma\nalpha\nreturn x\nalpha\ntrailing \nend\ndelta  x\n<b>tag</b>\n<b>tag</b>\n日本語のテキスト\nkey: value\ny = 2\ny = 2\nSELECT 1;\nhéllo wörld \nThe quick brown fox  x\nreturn x\n",
+"ignoreWhitespace": true,
+"originalLines": 395,
+"changedLines": 380,
+"shared": 339
+},
+{
+"original": "\tindent\nx = 1\n日本語のテキスト\nkey:  value\n日本語のテキスト\n日本語のテキスト\nkey: value\ny = 2\nkey:  value\ny = 2\ngamma\n日本語のテキスト\nSELECT 1;\nhéllo wörld\nreturn x\nThe quick brown fox\nThe quick brown fox\nreturn x\ntrailing\ndelta\nbeta\nx = 1\na  b\nx = 1\n<b>tag</b>\nthe quick brown fox\na  b\n  indent\nemoji 😀 line\ntrailing \nepsilon\n\ny = 2\n\nreturn x\n  indent\ntrailing \n{\nbeta\nend\n{\nThe quick brown fox\ngamma\nkey: value\nalpha\nemoji 😀 line\nkey: value\ndelta\ndelta\n<b>tag</b>\n}\nx = 1\n}\ny = 2\n  indent\n日本語のテキスト\nSELECT 1;\nx = 1\n<b>tag</b>\nalpha\nx = 1\nalpha\na  b\ntrailing \nthe quick brown fox\nkey:  value\nend\n\tindent\na b\nbeta\nThe quick brown fox\n\tindent\nemoji 😀 line\ngamma\ndelta\nhéllo wörld\ntrailing\na  b\nbeta\n<b>tag</b>\nhéllo wörld\ndelta\nbeta\n\tindent\n{\ntrailing\nhéllo wörld\nbeta\na b\ndelta\nSELECT 1;\ny = 2\ngamma\nSELECT 1;\ny = 2\nkey:  value\nkey:  value\nkey:  value\ngamma\nx = 1\nend\nx = 1\n}\na  b\nthe quick brown fox\n日本語のテキスト\n  indent\nkey: value\nkey: value\nSELECT 1;\ny = 2\ny = 2\n<b>tag</b>\nkey: value\na b\nreturn x\n\nalpha\nkey:  value\nSELECT 1;\n\n\tindent\n<b>tag</b>\nbeta\n\tindent\n\na b\nalpha\n\tindent\nbeta\n<b>tag</b>\na  b\nx = 1\n{\nthe quick brown fox\nkey: value\n<b>tag</b>\nSELECT 1;\nend\nepsilon\nbeta\nreturn x\n<b>tag</b>\n}\na  b\ntrailing \nkey:  value\nx = 1\na b\n{\n{\nkey:  value\na b\ntrailing\na b\n}\nreturn x\nend\ngamma\nbeta\n{\n  indent\nalpha\nThe quick brown fox\na b\na  b\ngamma\nkey:  value\nThe quick brown fox\n日本語のテキスト\nend\n}\nend\n\tindent\nend\n  indent\nkey: value\na b\n  indent\n日本語のテキスト\n日本語のテキスト\n\tindent\ndelta\nend\nSELECT 1;\nSELECT 1;\nThe quick brown fox\n  indent\nbeta\n日本語のテキスト\nreturn x\nthe quick brown fox\n\nend\nepsilon\nhéllo wörld\nemoji 😀 line\nkey:  value\na  b\ngamma\ntrailing\n\nkey:  value\nalpha\nkey:  value\nkey: value\ngamma\ndelta\nbeta\nkey: value\ntrailing \nepsilon\nkey:  value\n日本語のテキスト\na  b\ntrailing\nbeta\nend\nhéllo wörld\n\tindent\n  indent\nThe quick brown fox\ngamma\nepsilon\nSELECT 1;\ny = 2\nkey:  value\nthe quick brown fox\nx = 1\nend\nx = 1\nend\n{\nkey:  value\n}\nbeta\na  b\na b\nSELECT 1;\ntrailing \n  indent\ngamma\ntrailing \ntrailing \ntrailing\na  b\n日本語のテキスト\n日本語のテキスト\n日本語のテキスト\ntrailing \ngamma\n}\nx = 1\ngamma\n}\na  b\na b\nThe quick brown fox\ndelta\ndelta\nalpha\ngamma\nbeta",
+"changed": "\tindent\r\nx = 1\r\n日本語のテキスト\r\nkey:  value  x\r\n日本語のテキスト\r\n日本語のテキスト \r\nkey: value\r\ny = 2\r\nx = 1\r\nkey:  value\r\ny = 2\r\ngamma\r\n日本語のテキスト\r\nSELECT 1;  x\r\nhéllo wörld\r\nreturn x\r\nThe quick brown fox\r\nThe quick brown fox\r\nreturn x\r\ntrailing\r\ndelta\r\nbeta\r\nx = 1\r\na  b\r\n<b>tag</b>\r\nepsilon\r\nthe quick brown fox\r\na  b\r\n  indent\r\nemoji 😀 line\r\ntrailing \r\nepsilon\r\n\r\n\r\nreturn x\r\n  indent\r\n{\r\nbeta\r\n{\r\nThe quick brown fox\r\na b\r\nalpha\r\nemoji 😀 line\r\ny = 2\r\ndelta\r\ndelta\r\n<b>tag</b>\r\n}  x\r\n}\r\ny = 2\r\n  indent\r\ny = 2\r\n日本語のテキスト\r\nSELECT 1;\r\n\r\nx = 1\r\n<b>tag</b>\r\nalpha\r\nx = 1 \r\nalpha\r\na  b\r\ntrailing \r\nthe quick brown fox\r\nkey:  value\r\nend\r\n\tindent\r\nthe quick brown fox\r\na b\r\nbeta\r\nThe quick brown fox\r\n\tindent\r\nemoji 😀 line \r\ngamma\r\ndelta\r\na  b\r\nbeta\r\n<b>tag</b>\r\nhéllo wörld\r\n\r\ndelta\r\nbeta\r\na  b\r\n\tindent\r\n{ \r\ntrailing\r\nbeta \r\nSELECT 1;\r\ny = 2\r\ngamma\r\nSELECT 1;\r\ny = 2\r\nkey:  value\r\nkey:  value\r\nkey:  value\r\ngamma  x\r\nx = 1\r\nend  x\r\nx = 1\r\n}\r\na  b\r\nthe quick brown fox\r\n日本語のテキスト\r\n  indent\r\nkey: value\r\nkey: value\r\nSELECT 1;  x\r\ny = 2  x\r\ny = 2\r\n<b>tag</b>\r\nkey: value  x\r\na b\r\n\r\nalpha\r\nkey:  value\r\nSELECT 1;\r\n\r\n\tindent\r\n<b>tag</b>\r\nbeta\r\n\tindent\r\n\r\na b\r\nalpha\r\n\tindent\r\nbeta\r\n<b>tag</b> \r\na  b\r\nx = 1\r\n{\r\nthe quick brown fox\r\nkey: value\r\n<b>tag</b>\r\nSELECT 1;\r\nend\r\nbeta\r\nreturn x\r\n}\r\na  b  x\r\ntrailing \r\nkey:  value\r\nx = 1\r\na b\r\n{\r\nx = 1\r\n{\r\nkey:  value\r\na b\r\ntrailing\r\na b  x\r\n}\r\nreturn x\r\ngamma\r\nbeta\r\n  indent\r\nalpha\r\nThe quick brown fox\r\na b\r\na  b\r\ngamma\r\nkey:  value\r\nThe quick brown fox\r\n日本語のテキスト\r\nend\r\n} \r\nend \r\nkey: value\r\na b\r\n  indent \r\n日本語のテキスト  x\r\n日本語のテキスト\r\n\tindent\r\nend\r\nSELECT 1;\r\nSELECT 1;\r\nThe quick brown fox\r\n  indent  x\r\nbeta \r\n日本語のテキスト\r\nreturn x\r\nthe quick brown fox\r\nx = 1\r\n\r\nepsilon\r\nhéllo wörld\r\nemoji 😀 line\r\nkey:  value\r\na  b\r\ngamma\r\ntrailing\r\n\r\nkey:  value\r\nalpha\r\nkey:  value\r\nkey: value\r\ngamma\r\ndelta\r\nkey: value\r\ntrailing \r\nepsilon\r\n日本語のテキスト\r\n  indent\r\na  b\r\ntrailing\r\nbeta\r\nend\r\ntrailing\r\nhéllo wörld\r\n\tindent\r\n  indent\r\ngamma \r\nepsilon\r\nSELECT 1;\r\ny = 2\r\nkey:  value\r\nthe quick brown fox\r\nx = 1\r\nend\r\nend\r\n{\r\n}\r\nbeta\r\na  b\r\na b \r\ntrailing \r\ngamma\r\ntrailing \r\ntrailing \r\ntrailing\r\na  b  x\r\n日本語のテキスト\r\n日本語のテキスト\r\n日本語のテキスト\r\ntrailing \r\ngamma  x\r\n}\r\nx = 1 \r\ngamma\r\n}\r\na  b\r\nThe quick brown fox\r\ndelta\r\ndelta\r\nalpha\r\nbeta\r\nkey:  value\r\n",
+"ignoreWhitespace": true,
+"originalLines": 263,
+"changedLines": 245,
+"shared": 217
+},
+{
+"original": "delta\na  b\ntrailing\n{\nhéllo wörld\nthe quick brown fox\nreturn x\nThe quick brown fox\ntrailing \ny = 2\nemoji 😀 line\nSELECT 1;\n\nemoji 😀 line\nSELECT 1;\na  b\ndelta\n<b>tag</b>\ntrailing\n  indent\ndelta\n  indent\n<b>tag</b>\n}\ngamma\ntrailing \ngamma\nend\nThe quick brown fox\na  b\nkey: value\nend\nemoji 😀 line\nepsilon\nSELECT 1;\n<b>tag</b>\na  b\nkey:  value\nkey: value\nkey:  value\ny = 2\ntrailing \n  indent\ntrailing\n<b>tag</b>\nreturn x\nalpha\nkey:  value\na b\n<b>tag</b>\ndelta\ntrailing\ntrailing \nkey:  value\ngamma\nemoji 😀 line\n{\na b\nbeta\n日本語のテキスト\ntrailing\ny = 2\nhéllo wörld\n\tindent\n日本語のテキスト\ny = 2\ntrailing \n{\n{\nSELECT 1;\ndelta\nkey: value\ntrailing\n}\n}\n<b>tag</b>\nkey:  value\ntrailing\n  indent\nkey:  value\ntrailing\n  indent\nhéllo wörld\ntrailing \n  indent\na  b\nalpha\nkey:  value\ngamma\nemoji 😀 line\nalpha\nkey:  value\ntrailing\ntrailing \nalpha\nThe quick brown fox\na  b\nThe quick brown fox\n<b>tag</b>\n  indent\nkey:  value\nreturn x\n<b>tag</b>\nx = 1\nend\nhéllo wörld\nthe quick brown fox\n  indent\n\tindent\nthe quick brown fox\nx = 1\n  indent\ndelta\nx = 1\n\ny = 2\nThe quick brown fox\ntrailing\nhéllo wörld\ntrailing \nepsilon\ntrailing \nthe quick brown fox\n{\nhéllo wörld\nkey: value\ndelta\nalpha\nThe quick brown fox\nSELECT 1;\ngamma\n<b>tag</b>\na  b\n}\n\tindent\nalpha\ntrailing \n}\ngamma\ndelta\nThe quick brown fox\n日本語のテキスト\n}\nSELECT 1;\nthe quick brown fox\nkey: value\n\tindent\ntrailing \ntrailing\na b\n日本語のテキスト\nthe quick brown fox\n<b>tag</b>\ny = 2\ny = 2\nkey:  value\ntrailing\n  indent\n  indent\n\tindent\ntrailing \nkey:  value\n日本語のテキスト\nhéllo wörld\ngamma\ntrailing \n\ngamma\n\ndelta\ngamma\ndelta\n{\nkey: value\n日本語のテキスト\n\tindent\ntrailing \n{\n  indent\nreturn x\nx = 1\n\n\tindent\nkey:  value\ngamma\nhéllo wörld\n<b>tag</b>\nThe quick brown fox\nbeta\nthe quick brown fox\nThe quick brown fox\n{\nthe quick brown fox\na  b\ntrailing \nalpha\nepsilon\n}\nkey:  value\n\tindent\na  b\n",
+"changed": "delta\na  b\ntrailing\n{\nhéllo wörld\nthe quick brown fox \nreturn x\nThe quick brown fox\ndelta\ntrailing \ny = 2\nemoji 😀 line\nSELECT 1;\n\nemoji 😀 line\na  b\nSELECT 1;\na  b  x\ndelta \n<b>tag</b>\ntrailing\n  indent  x\ndelta\n<b>tag</b> \n}\ngamma\ntrailing \ngamma\nend\nThe quick brown fox\na  b \nkey: value\nemoji 😀 line\nepsilon\n<b>tag</b>\na  b\nkey:  value \nkey: value\nkey:  value  x\ny = 2\ntrailing \n  indent\ngamma\ntrailing\n<b>tag</b>\nreturn x\nalpha\nkey:  value\na b\n<b>tag</b>\ndelta\ntrailing\ntrailing \nkey:  value\ngamma\nemoji 😀 line\n{\n\na b\nbeta\n日本語のテキスト\ntrailing\ny = 2\nhéllo wörld\n日本語のテキスト\ny = 2\ntrailing \n{\n{\nSELECT 1;\n日本語のテキスト\ndelta\nkey: value\ntrailing \n}\n}\n<b>tag</b>\nkey:  value\ntrailing\n  indent\nkey:  value \ntrailing\n  indent\nhéllo wörld\ntrailing \n  indent\na  b\nalpha\nkey:  value\ngamma\nemoji 😀 line\nalpha\nkey:  value\n<b>tag</b>\ntrailing\ntrailing \nalpha\nThe quick brown fox\nThe quick brown fox\n<b>tag</b>\nkey:  value\nreturn x\n<b>tag</b>\nx = 1\nend\nhéllo wörld\nthe quick brown fox\n  indent \n\tindent\nthe quick brown fox\nx = 1\n  indent\n\ny = 2\nThe quick brown fox  x\nhéllo wörld\ntrailing \nepsilon\ntrailing \nthe quick brown fox\nepsilon\n{\nhéllo wörld\nkey: value\ndelta\nThe quick brown fox\ngamma  x\n<b>tag</b>\na  b\n}\n\tindent\nalpha\ntrailing \n}\ngamma\ndelta\nThe quick brown fox\n日本語のテキスト\n}\nepsilon\nSELECT 1;\nthe quick brown fox\nkey: value\n\tindent\ntrailing \ntrailing\na b\n日本語のテキスト\n日本語のテキスト\nthe quick brown fox\ntrailing \n<b>tag</b>\ny = 2 \ny = 2\ndelta\nkey:  value\ntrailing\nkey:  value\n日本語のテキスト\nhéllo wörld\ngamma\ntrailing \ngamma\n\ndelta\ngamma\ndelta\nThe quick brown fox\n{\nkey: value\n日本語のテキスト  x\n\tindent\ntrailing \n{\n  indent\nemoji 😀 line\nreturn x\n\n\tindent \nkey:  value\nalpha\ngamma\n<b>tag</b>\nThe quick brown fox  x\nbeta\nthe quick brown fox\nThe quick brown fox\n{\nthe quick brown fox\na  b\nepsilon\n}\nkey:  value\n\tindent\na  b\n日本語のテキスト\n",
+"ignoreWhitespace": true,
+"originalLines": 201,
+"changedLines": 196,
+"shared": 174
+},
+{
+"original": "\tindent\r\nbeta\r\nreturn x\r\nx = 1\r\n  indent\r\n日本語のテキスト\r\nemoji 😀 line\r\nalpha\r\n{\r\n日本語のテキスト\r\n日本語のテキスト\r\na  b\r\nSELECT 1;\r\nthe quick brown fox\r\n  indent\r\nthe quick brown fox\r\ny = 2\r\na  b\r\nthe quick brown fox\r\ny = 2\r\nbeta\r\n<b>tag</b>\r\n}\r\nkey:  value\r\ny = 2\r\nkey:  value\r\ndelta\r\ndelta\r\ny = 2\r\nhéllo wörld\r\nalpha\r\nThe quick brown fox\r\na  b\r\ny = 2\r\ny = 2\r\n\r\nkey: value\r\nx = 1\r\ntrailing \r\nbeta\r\nkey: value\r\na b\r\nepsilon\r\nreturn x\r\nThe quick brown fox\r\nThe quick brown fox\r\ny = 2\r\n{\r\nthe quick brown fox\r\nx = 1\r\nkey: value\r\n}\r\n<b>tag</b>\r\n\tindent\r\nThe quick brown fox\r\nalpha\r\ntrailing\r\nend\r\nkey:  value\r\nend\r\n\r\n{\r\nSELECT 1;\r\nthe quick brown fox\r\n\tindent\r\nepsilon\r\na b\r\n<b>tag</b>\r\nbeta\r\n日本語のテキスト\r\n\tindent\r\nkey: value\r\n{\r\nSELECT 1;\r\na b\r\ngamma\r\ndelta\r\ny = 2\r\nreturn x\r\ngamma\r\na  b\r\nepsilon\r\n{\r\nSELECT 1;\r\nSELECT 1;\r\n日本語のテキスト\r\ngamma\r\nThe quick brown fox\r\nalpha\r\n<b>tag</b>\r\nSELECT 1;\r\nkey: value\r\n日本語のテキスト\r\nbeta\r\nreturn x\r\ny = 2\r\nepsilon\r\nend\r\n\tindent\r\n\r\na b\r\nhéllo wörld\r\nreturn x\r\nSELECT 1;\r\nemoji 😀 line\r\nepsilon\r\na b\r\nhéllo wörld\r\nkey:  value\r\nreturn x\r\ny = 2\r\n\tindent\r\na  b\r\nepsilon\r\nthe quick brown fox\r\nepsilon\r\nkey:  value\r\nx = 1\r\n<b>tag</b>\r\n  indent\r\nThe quick brown fox\r\n}\r\na  b\r\ngamma\r\ntrailing\r\ntrailing\r\nhéllo wörld\r\n\r\nthe quick brown fox\r\nThe quick brown fox\r\n}\r\nhéllo wörld\r\nx = 1\r\nx = 1\r\nepsilon\r\nSELECT 1;\r\na b\r\nend\r\n<b>tag</b>\r\nSELECT 1;\r\nSELECT 1;\r\nemoji 😀 line\r\nepsilon\r\nalpha\r\n}\r\n  indent\r\nemoji 😀 line\r\nend\r\nbeta\r\nreturn x\r\ntrailing \r\n<b>tag</b>\r\n  indent\r\na b\r\n{\r\nx = 1\r\n日本語のテキスト\r\nbeta\r\nhéllo wörld\r\n\r\nbeta\r\n日本語のテキスト\r\n{\r\nemoji 😀 line\r\n\tindent\r\nkey: value\r\n  indent\r\ndelta\r\nthe quick brown fox\r\ngamma\r\nemoji 😀 line\r\n}\r\ndelta\r\nthe quick brown fox\r\nbeta\r\nthe quick brown fox\r\n\r\na b\r\nkey: value\r\nreturn x\r\nthe quick brown fox\r\n\tindent\r\na  b\r\ndelta\r\n<b>tag</b>\r\na  b\r\nreturn x\r\n<b>tag</b>\r\n日本語のテキスト\r\nkey: value\r\nepsilon\r\nkey:  value\r\nepsilon\r\n}\r\nkey:  value\r\n\tindent\r\ntrailing \r\n}\r\ndelta\r\n\r\na  b\r\na b\r\n<b>tag</b>\r\nreturn x\r\nepsilon\r\n日本語のテキスト\r\ny = 2\r\n}\r\nkey: value\r\nx = 1\r\ny = 2\r\nSELECT 1;\r\nepsilon\r\n\r\na  b\r\nThe quick brown fox\r\nepsilon\r\nkey:  value\r\nkey:  value\r\ntrailing\r\nepsilon\r\nSELECT 1;\r\nkey:  value\r\nepsilon\r\nend\r\nreturn x\r\nkey: value\r\nend\r\ntrailing\r\ngamma\r\nkey:  value\r\ntrailing\r\nkey:  value\r\nkey:  value\r\n{\r\nbeta\r\n{\r\ny = 2\r\na b\r\nkey:  value\r\nreturn x\r\nkey: value\r\nhéllo wörld\r\nkey: value\r\n{\r\nalpha\r\nthe quick brown fox\r\nkey: value\r\nbeta\r\n}\r\nend\r\nbeta\r\n\tindent\r\nepsilon\r\nthe quick brown fox\r\n{\r\ngamma\r\nalpha\r\n\r\ntrailing\r\nemoji 😀 line\r\nreturn x\r\nbeta\r\nalpha\r\nSELECT 1;\r\ndelta\r\nalpha\r\nhéllo wörld\r\n\r\n",
+"changed": "\tindent\r\nbeta  x\r\nreturn x\r\nx = 1\r\n  indent\r\n日本語のテキスト\r\nemoji 😀 line\r\nalpha\r\n{\r\n日本語のテキスト\r\n日本語のテキスト\r\na  b\r\nSELECT 1;\r\nthe quick brown fox \r\n  indent\r\nthe quick brown fox\r\nbeta\r\ny = 2\r\na  b  x\r\ngamma\r\ny = 2\r\nbeta\r\nbeta\r\n<b>tag</b>\r\nkey:  value  x\r\ny = 2\r\nkey:  value\r\ndelta\r\ndelta\r\ny = 2\r\nhéllo wörld\r\nemoji 😀 line\r\nalpha\r\nThe quick brown fox \r\na  b\r\ny = 2\r\ny = 2\r\n \r\nkey: value\r\nx = 1\r\ntrailing \r\nbeta\r\nepsilon\r\nreturn x\r\nThe quick brown fox  x\r\nThe quick brown fox\r\ny = 2\r\nx = 1\r\nkey: value\r\n}\r\n<b>tag</b> \r\n\tindent\r\nThe quick brown fox\r\nalpha \r\ntrailing  x\r\nend  x\r\nx = 1\r\nkey:  value\r\nend  x\r\n\r\n{\r\nSELECT 1;\r\nthe quick brown fox\r\n{\r\n\tindent\r\nepsilon\r\nhéllo wörld\r\nbeta\r\n日本語のテキスト\r\n\tindent\r\nkey: value  x\r\n{\r\nSELECT 1;\r\nbeta\r\na b\r\ngamma\r\ndelta\r\ny = 2\r\nreturn x\r\ngamma \r\nend\r\na  b\r\n{\r\ngamma\r\nThe quick brown fox\r\nalpha \r\nkey: value\r\n日本語のテキスト\r\nbeta\r\nreturn x\r\ny = 2\r\nepsilon\r\n\tindent\r\n  x\r\na b\r\nhéllo wörld\r\nreturn x\r\nSELECT 1;\r\nemoji 😀 line\r\nhéllo wörld  x\r\nkey:  value \r\ny = 2\r\n\tindent\r\na  b\r\nepsilon\r\nthe quick brown fox\r\nepsilon\r\nkey:  value\r\nx = 1\r\n<b>tag</b>\r\n  indent\r\nThe quick brown fox\r\n}\r\na  b\r\ngamma\r\ntrailing\r\ntrailing\r\nhéllo wörld \r\n\r\nthe quick brown fox\r\n}\r\nhéllo wörld\r\nx = 1\r\nepsilon\r\nSELECT 1;\r\na b\r\nend\r\n<b>tag</b>\r\nSELECT 1;\r\nepsilon\r\nalpha\r\n}\r\n  indent\r\nreturn x\r\ntrailing \r\n<b>tag</b>\r\n  indent\r\n{\r\nx = 1\r\n日本語のテキスト\r\nbeta\r\nhéllo wörld\r\n\r\nbeta \r\n{  x\r\nemoji 😀 line \r\n\tindent\r\nkey: value \r\n  indent\r\ndelta\r\nthe quick brown fox\r\n}  x\r\ndelta\r\nthe quick brown fox\r\nbeta\r\nthe quick brown fox\r\n\r\na b\r\nreturn x\r\n\tindent\r\na  b\r\ndelta\r\n<b>tag</b>\r\na  b\r\nreturn x \r\n<b>tag</b>\r\nhéllo wörld\r\n日本語のテキスト\r\nkey: value\r\nepsilon  x\r\nkey:  value\r\nepsilon\r\n}\r\nkey:  value\r\n\tindent\r\ntrailing \r\n}\r\ndelta\r\n\r\na  b\r\na b\r\nepsilon\r\nkey:  value\r\n日本語のテキスト\r\ny = 2\r\na  b\r\n}\r\nkey: value\r\nx = 1\r\ny = 2\r\nSELECT 1;\r\nepsilon\r\n\r\ntrailing\r\na  b\r\n  indent\r\nepsilon\r\nkey:  value\r\nkey:  value\r\ntrailing\r\nepsilon\r\nSELECT 1;\r\nkey:  value\r\nepsilon\r\nend\r\nreturn x\r\nkey: value\r\nend\r\ntrailing\r\ngamma \r\nkey:  value\r\ntrailing\r\nkey:  value\r\nkey:  value\r\n{\r\n{\r\ny = 2\r\nhéllo wörld\r\na b\r\nkey:  value\r\nkey: value\r\nhéllo wörld\r\nkey: value\r\n{  x\r\nthe quick brown fox\r\nkey: value  x\r\nbeta\r\n}\r\n}\r\nend\r\nbeta  x\r\n\tindent\r\nthe quick brown fox\r\n{\r\ngamma\r\nalpha\r\n  indent\r\n\r\ntrailing\r\nemoji 😀 line\r\nreturn x\r\nbeta\r\nalpha\r\nSELECT 1;\r\ndelta\r\nalpha\r\nhéllo wörld\r\n\r\nepsilon\r\n",
+"ignoreWhitespace": false,
+"originalLines": 269,
+"changedLines": 249,
+"shared": 201
+},
+{
+"original": "日本語のテキスト\nalpha\nepsilon\nSELECT 1;\nThe quick brown fox\na  b\nSELECT 1;\nend\nend\n\tindent\n}\ntrailing\nThe quick brown fox\n\nhéllo wörld\n\ngamma\na  b\ntrailing\ntrailing\n  indent\nx = 1\na b\nthe quick brown fox\nx = 1\n\tindent\nemoji 😀 line\nThe quick brown fox\nThe quick brown fox\ngamma\nkey:  value\nthe quick brown fox\n\tindent\nThe quick brown fox\nkey: value\nthe quick brown fox\nhéllo wörld\nThe quick brown fox\n日本語のテキスト\nkey: value\ntrailing \nemoji 😀 line\nkey:  value\ntrailing\nkey: value\na b\nhéllo wörld\nthe quick brown fox\nkey: value\n{\ny = 2\n日本語のテキスト\na b\nbeta\ntrailing \ny = 2\nthe quick brown fox\nhéllo wörld\n  indent\nthe quick brown fox\nreturn x\ntrailing \n  indent\n\nthe quick brown fox\nSELECT 1;\nbeta\ntrailing \nend\n<b>tag</b>\nend\ntrailing \nreturn x\n日本語のテキスト\ntrailing \ngamma\nkey: value\nepsilon\na  b\nbeta\nhéllo wörld\nkey:  value\nalpha\ntrailing\ngamma\n}\ntrailing\nepsilon\n  indent\ny = 2\nalpha\nx = 1\nemoji 😀 line\nkey: value\nSELECT 1;\nend\nend\nx = 1\n<b>tag</b>\nthe quick brown fox\n}\ndelta\ntrailing\n\ny = 2\ntrailing \nalpha\nbeta\nreturn x\nhéllo wörld\n日本語のテキスト\nkey:  value\nhéllo wörld\n日本語のテキスト\nkey:  value\nalpha\na b\na b\nx = 1\n<b>tag</b>\na  b\n\tindent\n\tindent\n{\ntrailing \n}\nthe quick brown fox\ntrailing \n\tindent\nbeta\ntrailing \nkey: value\nepsilon\nepsilon\nepsilon\nbeta\n日本語のテキスト\na b\nThe quick brown fox\nkey: value\ny = 2\na  b\ngamma\nalpha\nSELECT 1;\n}\ndelta\nreturn x\nthe quick brown fox\n}\ntrailing\na b\n  indent\ny = 2\nx = 1\ngamma\ntrailing \n<b>tag</b>\nbeta\nhéllo wörld\nemoji 😀 line\nSELECT 1;\n  indent\nThe quick brown fox\nreturn x\ntrailing\nepsilon\nalpha\ngamma\ny = 2\nx = 1\nalpha\n{\n}\nepsilon\n}\nhéllo wörld\nbeta\nx = 1\n}\nemoji 😀 line\na b\ndelta\nSELECT 1;\nSELECT 1;\n<b>tag</b>\n日本語のテキスト\n{\n\tindent\n\tindent\nSELECT 1;\nthe quick brown fox\nreturn x\nreturn x\nend\n}\nbeta\nThe quick brown fox\nthe quick brown fox\nkey:  value\na  b\nreturn x\nepsilon\nkey: value\n<b>tag</b>\n}\nSELECT 1;\n\ny = 2\nthe quick brown fox\nalpha\n日本語のテキスト\nhéllo wörld\nkey:  value\nkey: value\nbeta\ntrailing \nend\ndelta\n}\nreturn x\nemoji 😀 line\nepsilon\nkey:  value\n}\nepsilon\nalpha\n日本語のテキスト\ny = 2\n{\n\na b\na b\ndelta\na  b\na  b\n\n",
+"changed": "日本語のテキスト  x\r\nalpha\r\nepsilon \r\nSELECT 1;  x\r\ntrailing \r\nThe quick brown fox\r\na  b\r\nSELECT 1;\r\nend\r\nend\r\n\tindent\r\n}\r\ntrailing\r\nThe quick brown fox\r\n\r\nhéllo wörld\r\ngamma\r\na  b\r\ntrailing\r\n  indent\r\na b\r\nthe quick brown fox\r\nx = 1\r\n\tindent\r\nemoji 😀 line\r\nThe quick brown fox\r\nThe quick brown fox \r\ngamma\r\nkey:  value\r\nthe quick brown fox\r\n\tindent\r\nkey: value \r\nkey:  value\r\nthe quick brown fox\r\nhéllo wörld\r\n日本語のテキスト\r\nkey: value\r\nend\r\nemoji 😀 line\r\nkey:  value\r\ntrailing\r\nkey: value\r\na b\r\nhéllo wörld\r\nthe quick brown fox\r\nkey: value\r\n{  x\r\nepsilon\r\ny = 2\r\n日本語のテキスト\r\na b\r\nbeta\r\ny = 2\r\nthe quick brown fox\r\nhéllo wörld\r\nemoji 😀 line\r\nthe quick brown fox\r\nepsilon\r\nreturn x\r\ntrailing \r\n  indent\r\n\r\nthe quick brown fox\r\nSELECT 1;\r\nbeta\r\ntrailing \r\nend \r\n<b>tag</b>\r\nreturn x\r\n日本語のテキスト\r\ntrailing \r\ngamma\r\na  b\r\nbeta\r\nhéllo wörld\r\nkey:  value  x\r\nalpha\r\ntrailing\r\n}\r\ntrailing\r\nepsilon\r\n  indent\r\ny = 2\r\nalpha\r\nx = 1  x\r\nemoji 😀 line\r\nkey: value\r\nend\r\nend  x\r\nx = 1  x\r\n<b>tag</b>\r\nthe quick brown fox\r\n}  x\r\ndelta\r\ntrailing\r\n\r\ny = 2  x\r\ntrailing   x\r\nalpha\r\nbeta\r\nreturn x\r\nhéllo wörld\r\n日本語のテキスト\r\nkey:  value\r\nhéllo wörld\r\n日本語のテキスト\r\ndelta\r\nkey:  value\r\nalpha\r\na b\r\n<b>tag</b>\r\na  b\r\na b\r\n\tindent\r\n\tindent\r\n{\r\nthe quick brown fox\r\ntrailing \r\ntrailing \r\nkey: value\r\nepsilon\r\nepsilon\r\nepsilon  x\r\nbeta\r\na b \r\nThe quick brown fox \r\nkey: value\r\ny = 2\r\na  b \r\ngamma\r\nalpha\r\n}\r\ndelta\r\ndelta\r\nreturn x\r\nthe quick brown fox\r\n}\r\ntrailing\r\na b\r\n  indent\r\ny = 2\r\nx = 1\r\ngamma\r\ntrailing \r\n<b>tag</b>\r\nbeta\r\nhéllo wörld  x\r\nSELECT 1;\r\nThe quick brown fox \r\nreturn x\r\ntrailing\r\nepsilon\r\nalpha\r\ngamma\r\ny = 2\r\nx = 1\r\nalpha\r\n{\r\n}\r\nepsilon\r\n}\r\nhéllo wörld\r\na b\r\nbeta\r\nx = 1\r\n}\r\na b\r\ndelta\r\n\tindent\r\nSELECT 1;\r\nSELECT 1;\r\n<b>tag</b>\r\n日本語のテキスト\r\n{\r\n\tindent\r\nthe quick brown fox\r\n\tindent\r\nSELECT 1; \r\nthe quick brown fox\r\nreturn x  x\r\nreturn x\r\nend\r\n}\r\nbeta\r\nThe quick brown fox\r\nthe quick brown fox\r\nkey:  value  x\r\ntrailing\r\na  b\r\nreturn x\r\nkey: value\r\n<b>tag</b>\r\nSELECT 1;\r\n\r\ny = 2 \r\nthe quick brown fox\r\n日本語のテキスト\r\nhéllo wörld\r\nkey:  value\r\nkey: value\r\nbeta\r\ntrailing \r\nend\r\ndelta\r\n  indent\r\n}\r\nreturn x\r\nemoji 😀 line\r\nepsilon\r\nkey:  value\r\n}\r\nepsilon\r\nalpha\r\n日本語のテキスト\r\ny = 2\r\n \r\na b\r\na b\r\ndelta\r\na  b\r\na  b",
+"ignoreWhitespace": true,
+"originalLines": 237,
+"changedLines": 221,
+"shared": 193
+},
+{
+"original": "epsilon\r\nhéllo wörld\r\na b\r\nkey: value\r\nthe quick brown fox\r\ntrailing\r\nThe quick brown fox\r\nThe quick brown fox\r\n  indent\r\ntrailing \r\ny = 2\r\nThe quick brown fox\r\na b\r\nend\r\nbeta\r\ntrailing \r\ntrailing\r\nhéllo wörld\r\nreturn x\r\ntrailing\r\nemoji 😀 line\r\nemoji 😀 line\r\ngamma\r\nx = 1\r\na b\r\n日本語のテキスト\r\n\r\n日本語のテキスト\r\na b\r\nalpha\r\n日本語のテキスト\r\n}\r\nreturn x\r\n日本語のテキスト\r\n  indent\r\n}\r\nSELECT 1;\r\n日本語のテキスト\r\ntrailing\r\ndelta\r\nkey: value\r\ngamma\r\nemoji 😀 line\r\ntrailing\r\nthe quick brown fox\r\nhéllo wörld\r\nreturn x\r\nend\r\nalpha\r\nepsilon\r\nThe quick brown fox\r\nend\r\nreturn x\r\na b\r\nkey: value\r\n日本語のテキスト\r\n}\r\nemoji 😀 line\r\nemoji 😀 line\r\ndelta\r\nSELECT 1;\r\na b\r\ny = 2\r\ntrailing \r\nkey:  value\r\na b\r\n}\r\n}\r\nend\r\n日本語のテキスト\r\nthe quick brown fox\r\n  indent\r\nkey:  value\r\nemoji 😀 line\r\n\r\n{\r\nalpha\r\ny = 2\r\nkey: value\r\nepsilon\r\nend\r\n\tindent\r\n{\r\nkey:  value\r\nhéllo wörld\r\n\r\nepsilon\r\ntrailing \r\nend\r\na  b\r\nthe quick brown fox\r\nSELECT 1;\r\nhéllo wörld\r\na  b\r\n{\r\ngamma\r\n<b>tag</b>\r\n\r\nepsilon\r\ngamma\r\nhéllo wörld\r\nepsilon\r\nx = 1\r\nend\r\nthe quick brown fox\r\nreturn x\r\n  indent\r\ntrailing \r\nSELECT 1;\r\n\r\nepsilon\r\ny = 2\r\n\tindent\r\ny = 2\r\ntrailing \r\ntrailing \r\n\r\nSELECT 1;\r\ny = 2\r\nkey:  value\r\ngamma\r\na  b\r\n{\r\nx = 1\r\nalpha\r\nthe quick brown fox\r\na b\r\n日本語のテキスト\r\nemoji 😀 line\r\ntrailing\r\n}\r\ngamma\r\n{\r\n日本語のテキスト\r\na  b\r\ndelta\r\n日本語のテキスト\r\nThe quick brown fox\r\n}\r\nend\r\n  indent\r\n{\r\nx = 1\r\nepsilon\r\nhéllo wörld\r\ntrailing\r\nSELECT 1;\r\nepsilon\r\nalpha\r\n<b>tag</b>\r\nreturn x\r\ngamma\r\n\r\nhéllo wörld\r\n}\r\nSELECT 1;\r\ngamma\r\nhéllo wörld\r\nemoji 😀 line\r\n}\r\nThe quick brown fox\r\ntrailing\r\n}\r\n  indent\r\nkey:  value\r\n<b>tag</b>\r\nend\r\n日本語のテキスト\r\nThe quick brown fox\r\nhéllo wörld\r\nhéllo wörld\r\nx = 1\r\n日本語のテキスト\r\nalpha\r\n<b>tag</b>\r\nhéllo wörld\r\nreturn x\r\ntrailing \r\nthe quick brown fox\r\n\r\ngamma\r\nkey: value\r\n{\r\nreturn x\r\nkey:  value\r\nend\r\nepsilon\r\n\r\nalpha\r\n日本語のテキスト\r\n}\r\nepsilon\r\ndelta\r\ny = 2\r\ngamma\r\nThe quick brown fox\r\ntrailing \r\nbeta\r\ngamma\r\n\r\nkey: value\r\nbeta\r\na  b\r\nkey: value\r\nalpha\r\nend\r\n}\r\n<b>tag</b>\r\n日本語のテキスト\r\na  b\r\n  indent\r\nreturn x\r\ntrailing \r\ny = 2\r\na  b\r\ntrailing \r\n}\r\na b\r\ndelta\r\ntrailing\r\ntrailing\r\nSELECT 1;\r\ngamma\r\nhéllo wörld\r\nThe quick brown fox\r\n{\r\nkey:  value\r\nepsilon\r\nalpha\r\nThe quick brown fox\r\nkey:  value\r\na  b\r\n\r\ngamma\r\nbeta\r\nreturn x\r\nreturn x\r\nend\r\ntrailing \r\nhéllo wörld\r\nreturn x\r\nhéllo wörld\r\n}\r\nThe quick brown fox\r\nend\r\nend\r\ntrailing\r\nx = 1\r\n<b>tag</b>\r\n{\r\ndelta\r\n\tindent\r\nbeta\r\nepsilon\r\ngamma\r\nalpha\r\nkey: value\r\nbeta\r\na b\r\nreturn x\r\n  indent\r\nepsilon\r\nThe quick brown fox\r\ngamma\r\nthe quick brown fox\r\ntrailing \r\n}\r\ny = 2\r\nthe quick brown fox\r\nbeta\r\nThe quick brown fox\r\n\r\nepsilon\r\n日本語のテキスト\r\n{\r\nreturn x\r\n\tindent\r\nemoji 😀 line\r\n  indent\r\n\tindent\r\n",
+"changed": "epsilon\nhéllo wörld\na b\nthe quick brown fox\ntrailing\nThe quick brown fox\nThe quick brown fox\n  indent\ntrailing \ny = 2 \na b\nend\nbeta\ntrailing \ntrailing\nhéllo wörld\nreturn x\nemoji 😀 line\ngamma\nx = 1\nSELECT 1;\na b\n日本語のテキスト\n\n日本語のテキスト\na b\nalpha\n日本語のテキスト\n}\nThe quick brown fox\n日本語のテキスト\n  indent\n}\nSELECT 1;\ntrailing\ndelta\nkey: value\ngamma\nemoji 😀 line\ntrailing\nthe quick brown fox\nhéllo wörld\nreturn x \ntrailing\nend\nalpha\nepsilon\nThe quick brown fox  x\nend\nreturn x\na b\nkey: value  x\n日本語のテキスト\n}  x\nemoji 😀 line\n}\nemoji 😀 line\ndelta\nSELECT 1;\na b\ny = 2\ntrailing \nkey:  value\na b\n}\n}\nend\n日本語のテキスト  x\nthe quick brown fox\n  indent\nkey:  value\nemoji 😀 line\n\ny = 2\nkey: value\nepsilon\nend\n\tindent\n{\nhéllo wörld \n\nkey:  value\ntrailing \nend\na  b\n\tindent\nthe quick brown fox\na  b\n{\ngamma\n<b>tag</b>\ngamma\nhéllo wörld\nepsilon\nend\nthe quick brown fox  x\nreturn x\nhéllo wörld\n  indent\ntrailing \n\ny = 2\n\tindent \ny = 2  x\ntrailing \ntrailing \n\ny = 2\nkey:  value \ngamma\na  b\n{\nx = 1\nalpha\nthe quick brown fox\na b\n日本語のテキスト\nemoji 😀 line\n}\ngamma\n{  x\n日本語のテキスト\na  b\nSELECT 1;\ndelta\n\tindent\nThe quick brown fox\n}\nend\n  indent\n{\nx = 1\nepsilon \nhéllo wörld \ntrailing\nSELECT 1;\nepsilon\n<b>tag</b>\nreturn x\ngamma\n\nhéllo wörld\n}\nSELECT 1;\ngamma\nhéllo wörld\ngamma\nemoji 😀 line\n}\nThe quick brown fox\ntrailing\n}\n  indent \nkey:  value \n<b>tag</b> \nend\n日本語のテキスト\nepsilon\nThe quick brown fox\nhéllo wörld\nhéllo wörld \n日本語のテキスト\nalpha\ny = 2\n<b>tag</b>\nreturn x\ntrailing \nthe quick brown fox\n\nx = 1\ngamma\nkey: value\n{\nreturn x\nkey:  value\nend\nepsilon\n日本語のテキスト\ndelta\n  indent\ny = 2\ngamma\ntrailing \nbeta \ngamma\n\nkey: value\nbeta\na  b\nkey: value\nalpha  x\nhéllo wörld\nend\n}\nx = 1\n<b>tag</b>\n日本語のテキスト\na  b\nreturn x\ntrailing \ny = 2\na  b\ntrailing \n}\na b\ndelta\ntrailing \ntrailing\nSELECT 1;\ngamma\nhéllo wörld\nThe quick brown fox\n{  x\nkey:  value\nepsilon\nalpha\nThe quick brown fox\nkey:  value\na  b\n\ngamma\nbeta  x\nreturn x\ntrailing \nthe quick brown fox\nhéllo wörld\nreturn x\n}  x\nThe quick brown fox\nend\nend\n\ntrailing\nx = 1\n<b>tag</b>\n{\n\tindent\nbeta\nepsilon\ngamma\nalpha\nbeta\na b\n  indent\nepsilon\nThe quick brown fox\ngamma\nthe quick brown fox  x\ntrailing   x\nx = 1\n}\ny = 2\nthe quick brown fox\nbeta\nThe quick brown fox \n\nepsilon\n日本語のテキスト\n{\nreturn x\nemoji 😀 line\n  indent\n\tindent",
+"ignoreWhitespace": true,
+"originalLines": 280,
+"changedLines": 263,
+"shared": 231
+},
+{
+"original": "key: value\r\ny = 2\r\nalpha\r\ngamma\r\nthe quick brown fox\r\nemoji 😀 line\r\n}\r\nepsilon\r\n日本語のテキスト\r\ny = 2\r\n\r\ngamma\r\nend\r\n\tindent\r\n\r\nemoji 😀 line\r\nThe quick brown fox\r\ny = 2\r\nkey: value\r\n  indent\r\nkey:  value\r\n日本語のテキスト\r\ntrailing\r\nhéllo wörld\r\nbeta\r\ny = 2\r\nkey:  value\r\n\r\nhéllo wörld\r\nSELECT 1;\r\nbeta\r\nreturn x\r\n<b>tag</b>\r\nhéllo wörld\r\nepsilon\r\n日本語のテキスト\r\ndelta\r\nalpha\r\nreturn x\r\nThe quick brown fox\r\ntrailing\r\ny = 2\r\nx = 1\r\n\tindent\r\n\tindent\r\nbeta\r\n<b>tag</b>\r\nemoji 😀 line\r\nkey:  value\r\nend\r\nbeta\r\na  b\r\nhéllo wörld\r\ny = 2\r\n日本語のテキスト\r\ngamma\r\nalpha\r\ntrailing\r\nalpha\r\nkey:  value\r\ntrailing\r\nepsilon\r\na  b\r\nSELECT 1;\r\nbeta\r\n{\r\ntrailing\r\ny = 2\r\nkey: value\r\nreturn x\r\n日本語のテキスト\r\n\r\n日本語のテキスト\r\nepsilon\r\ntrailing \r\nend\r\nemoji 😀 line\r\nkey: value\r\n<b>tag</b>\r\nkey:  value\r\na  b\r\nreturn x\r\ndelta\r\nbeta\r\nSELECT 1;\r\nreturn x\r\n\r\ntrailing\r\nemoji 😀 line\r\nreturn x\r\nThe quick brown fox\r\nThe quick brown fox\r\nSELECT 1;\r\ntrailing\r\n<b>tag</b>\r\ntrailing\r\ny = 2\r\nepsilon\r\ngamma\r\n{\r\na  b\r\nkey: value\r\nSELECT 1;\r\nhéllo wörld\r\n\tindent\r\nhéllo wörld\r\nbeta\r\nbeta\r\nbeta\r\n\tindent\r\na  b\r\ngamma\r\ny = 2\r\na  b\r\nthe quick brown fox\r\nalpha\r\ntrailing \r\na b\r\nthe quick brown fox\r\ntrailing\r\n<b>tag</b>\r\nSELECT 1;\r\na b\r\n\tindent\r\nend\r\ny = 2\r\nthe quick brown fox\r\n}\r\nhéllo wörld\r\nthe quick brown fox\r\ntrailing \r\na  b\r\na b\r\n}\r\nhéllo wörld\r\n{\r\nSELECT 1;\r\nalpha\r\na b\r\ntrailing \r\n<b>tag</b>\r\ntrailing\r\nend\r\nhéllo wörld\r\nend\r\nkey: value\r\nepsilon\r\n{\r\n日本語のテキスト\r\nSELECT 1;\r\n\r\nend\r\nbeta\r\nalpha\r\ntrailing \r\nthe quick brown fox\r\nreturn x\r\ntrailing \r\na  b\r\n  indent\r\nemoji 😀 line\r\nalpha\r\nend\r\nkey:  value\r\ndelta\r\ngamma\r\ngamma\r\n{\r\ntrailing \r\n\tindent\r\nSELECT 1;\r\n<b>tag</b>\r\n}\r\n{\r\na b\r\nhéllo wörld\r\nepsilon\r\nx = 1\r\n日本語のテキスト\r\ntrailing \r\n\r\nreturn x\r\nkey: value\r\nbeta\r\n}\r\nalpha\r\nalpha\r\n  indent\r\ngamma\r\nSELECT 1;\r\nkey: value\r\n\r\ndelta\r\n日本語のテキスト\r\nkey:  value\r\nx = 1\r\ngamma\r\nbeta\r\nend\r\nepsilon\r\nepsilon\r\n  indent\r\n{\r\n日本語のテキスト\r\nemoji 😀 line\r\nend\r\ny = 2\r\na  b\r\ny = 2\r\nreturn x\r\n{\r\nepsilon\r\nhéllo wörld\r\nalpha\r\ngamma\r\nend\r\ndelta\r\nx = 1\r\n日本語のテキスト\r\nkey:  value\r\ntrailing \r\nkey:  value\r\ny = 2\r\nalpha\r\nSELECT 1;\r\nbeta\r\nhéllo wörld\r\n<b>tag</b>\r\nbeta\r\nepsilon\r\ny = 2\r\ntrailing \r\na b\r\nreturn x\r\ndelta\r\n日本語のテキスト\r\nhéllo wörld\r\nalpha\r\ngamma\r\n<b>tag</b>\r\nend\r\nthe quick brown fox\r\n\tindent\r\na  b\r\n日本語のテキスト\r\ntrailing\r\nbeta\r\nalpha\r\ntrailing\r\n}\r\nalpha\r\nkey: value\r\nend\r\nbeta\r\ny = 2\r\n  indent\r\nthe quick brown fox\r\n{\r\nalpha\r\nend\r\n  indent\r\nalpha\r\nSELECT 1;\r\nemoji 😀 line\r\ny = 2\r\n<b>tag</b>\r\ntrailing\r\ntrailing\r\nalpha\r\nkey:  value\r\nthe quick brown fox\r\n\r\nkey: value\r\na b\r\nhéllo wörld\r\nkey: value\r\na  b\r\nbeta\r\n",
+"changed": "key: value\nalpha\ngamma\n}\nepsilon\n日本語のテキスト\ny = 2\n{\n\ngamma\nend\n\tindent\n\nemoji 😀 line\nThe quick brown fox\ny = 2\n}\nkey: value\n  indent\nkey: value\nkey:  value\n日本語のテキスト\nkey:  value\ntrailing\nhéllo wörld\nbeta\ny = 2\nkey:  value\nhéllo wörld\nSELECT 1;\nbeta\nreturn x\n<b>tag</b>\n日本語のテキスト\ndelta\nalpha\nreturn x\nThe quick brown fox\ntrailing \ny = 2\nx = 1\nhéllo wörld\n\tindent\n\tindent\nbeta\n<b>tag</b>  x\nemoji 😀 line\nkey:  value\nx = 1\nend\nbeta\na  b\nhéllo wörld\ny = 2\n日本語のテキスト\nalpha  x\ntrailing\nalpha\nkey:  value\ntrailing\na  b\nSELECT 1;\nbeta\n{\ntrailing \nbeta\ny = 2\nkey: value\nreturn x\n日本語のテキスト\n\n日本語のテキスト\nthe quick brown fox\nepsilon\ntrailing \nend\nemoji 😀 line\nkey: value\ndelta\n<b>tag</b>\nkey:  value\na  b\nreturn x\nbeta\nSELECT 1;\nreturn x\n\ntrailing  x\ntrailing\nemoji 😀 line\nreturn x\nThe quick brown fox\nThe quick brown fox\nThe quick brown fox\ntrailing\n<b>tag</b>\ntrailing\ny = 2 \nepsilon\ngamma\n{\na  b\nkey: value\nSELECT 1;\nhéllo wörld\n\tindent\nhéllo wörld\nbeta \nbeta\nbeta\n\tindent\na  b\ngamma\ny = 2  x\na  b\nthe quick brown fox\nalpha\ntrailing \na b\nthe quick brown fox\ntrailing\nSELECT 1;\nkey: value\na b\n\tindent\nend  x\ny = 2\nthe quick brown fox\n}\nhéllo wörld\nthe quick brown fox\nx = 1\ntrailing \na  b\na b\n}\n}\nhéllo wörld\n{\nSELECT 1;\nalpha\ntrailing \n<b>tag</b>\nThe quick brown fox\ntrailing\nend\nhéllo wörld\nend\nkey: value\nepsilon\n{\n日本語のテキスト\nSELECT 1;\n \nend\nbeta\nalpha\ntrailing \nthe quick brown fox\nreturn x\ntrailing \na  b\n  indent\nemoji 😀 line \nalpha\nend\nkey:  value\ndelta\ngamma\ngamma\n{\ntrailing \n\tindent\nSELECT 1;  x\n<b>tag</b>\n}\nemoji 😀 line\n{\ntrailing\na b\nhéllo wörld\nepsilon\nx = 1\n日本語のテキスト\ntrailing \n\nreturn x\nreturn x\nbeta\nkey: value\nbeta\n}\nSELECT 1;\nalpha\nalpha\n\n  indent\ngamma\nSELECT 1;\ndelta\n日本語のテキスト\nkey:  value\nx = 1\nepsilon\nepsilon\n  indent\n{\n日本語のテキスト\nemoji 😀 line\nend\ny = 2\na  b\ny = 2\nreturn x\n{\nepsilon\nhéllo wörld\nalpha\nend\ndelta\nx = 1\n日本語のテキスト\nkey:  value\ntrailing \nkey:  value \ny = 2\nalpha\nSELECT 1;\nbeta\nhéllo wörld\n<b>tag</b>\nbeta\nepsilon\n  indent\ny = 2\ntrailing \na b \nreturn x\ndelta\n日本語のテキスト\nalpha \ngamma\n<b>tag</b>\nend\nthe quick brown fox\n\tindent\n{\na  b\n日本語のテキスト\ntrailing\nbeta\nalpha\ntrailing\n}\nalpha\nbeta\nkey: value\nend\nbeta\ny = 2\n  indent\nthe quick brown fox\n{\nalpha\n  indent\nalpha\nSELECT 1;\nemoji 😀 line\ny = 2\n<b>tag</b>\ntrailing\ntrailing\nalpha\nkey:  value\nthe quick brown fox\n  x\nkey: value\na b\nhéllo wörld\nkey: value\na  b\nreturn x\n",
+"ignoreWhitespace": false,
+"originalLines": 278,
+"changedLines": 282,
+"shared": 242
+},
+{
+"original": "trailing \n<b>tag</b>\n日本語のテキスト\nkey: value\nSELECT 1;\nkey: value\nemoji 😀 line\n\ngamma\n  indent\nemoji 😀 line\n<b>tag</b>\nalpha\nhéllo wörld\ntrailing \nreturn x\ntrailing \nhéllo wörld\n}\na b\n日本語のテキスト\nx = 1\nbeta\ntrailing\na  b\nthe quick brown fox\na  b\nhéllo wörld\nalpha\n{\nreturn x\nalpha\ntrailing\n<b>tag</b>\nSELECT 1;\nhéllo wörld\nx = 1\ny = 2\nend\nalpha\nepsilon\nend\nkey: value\ndelta\na  b\n}\nend\nend\n日本語のテキスト\nSELECT 1;\n日本語のテキスト\nemoji 😀 line\nSELECT 1;\n}\ntrailing \ntrailing\ndelta\n\nThe quick brown fox\ny = 2\ndelta\nbeta\nhéllo wörld\nkey: value\nThe quick brown fox\nepsilon\n\tindent\n\tindent\nbeta\nthe quick brown fox\nepsilon\ngamma\nkey:  value\ntrailing \n日本語のテキスト\ngamma\n\nepsilon\na  b\nThe quick brown fox\nThe quick brown fox\ntrailing \nkey: value\nx = 1\nemoji 😀 line\nepsilon\na  b\n{\na  b\nend\nThe quick brown fox\nhéllo wörld\n{\n\tindent\na b\nepsilon\ndelta\n日本語のテキスト\n\tindent\nThe quick brown fox\nThe quick brown fox\ngamma\ntrailing\n<b>tag</b>\nalpha\ndelta\n日本語のテキスト\nepsilon\ny = 2\ny = 2\n}\nemoji 😀 line\nkey:  value\nx = 1\nhéllo wörld\ny = 2\nemoji 😀 line\nbeta\nhéllo wörld\na b\nThe quick brown fox\nhéllo wörld\n{\n{\na  b\ntrailing\nend\ndelta\n}\na b\nSELECT 1;\nkey:  value\na  b\ntrailing \ngamma\nepsilon\nkey:  value\ntrailing \nkey: value\n\ndelta\ngamma\nthe quick brown fox\nhéllo wörld\ngamma\nSELECT 1;\n<b>tag</b>\na  b\n\tindent\ntrailing \n\tindent\na  b\nreturn x\nreturn x\nkey:  value\n}\n\tindent\ndelta\nx = 1\n}\nepsilon\na  b\n日本語のテキスト\n\ny = 2\nSELECT 1;\n日本語のテキスト\nSELECT 1;\n日本語のテキスト\nkey:  value\nbeta\ny = 2\nend\n\nreturn x\nkey: value\ntrailing \ngamma\nepsilon\n<b>tag</b>\na b\n  indent\nepsilon\nepsilon\n}\nhéllo wörld\nThe quick brown fox\nalpha\nemoji 😀 line\na b\n\nemoji 😀 line\n\n  indent\nhéllo wörld\nend\n日本語のテキスト\n\tindent\nreturn x\ntrailing \ntrailing\ny = 2\nSELECT 1;\ngamma\nthe quick brown fox\nthe quick brown fox\nbeta\nepsilon\ngamma\nepsilon\nend\n\tindent\n\nreturn x\nalpha\n  indent\nThe quick brown fox\n\nalpha\nthe quick brown fox\na b\ntrailing \n}\n\tindent\nepsilon\n{\nThe quick brown fox\nemoji 😀 line\ndelta\ntrailing \n日本語のテキスト\nend\na b\ny = 2\nhéllo wörld\nSELECT 1;\nSELECT 1;\ngamma\n\nbeta\nSELECT 1;\n<b>tag</b>\nkey:  value\nhéllo wörld\nkey:  value\nkey: value\n\tindent\nSELECT 1;\nx = 1\na b\nthe quick brown fox\nbeta\nkey:  value\na  b\n  indent\na b\nkey:  value\nSELECT 1;\n  indent\n<b>tag</b>\nx = 1\nemoji 😀 line\ndelta\na  b\n日本語のテキスト\n}\nx = 1\nx = 1\nThe quick brown fox\na  b\nhéllo wörld\n\nhéllo wörld\na b\nend\n日本語のテキスト\n\n  indent\n{\nthe quick brown fox\nkey:  value\n{\nx = 1\nreturn x\nkey: value\n{\nepsilon\nbeta\n\nkey:  value\ntrailing\nepsilon\nepsilon\ndelta\na b\nx = 1\nreturn x\ntrailing \n日本語のテキスト\nepsilon\nkey: value\n\tindent\ndelta\n日本語のテキスト\nkey: value\nepsilon\na b\nkey:  value\nemoji 😀 line\nkey: value\n日本語のテキスト\nalpha\nx = 1\nthe quick brown fox\nhéllo wörld\n日本語のテキスト\nend\ndelta\nemoji 😀 line\nthe quick brown fox\n日本語のテキスト\nthe quick brown fox\ny = 2\nhéllo wörld\nkey:  value\n\tindent\n{\n\n日本語のテキスト\nhéllo wörld\nSELECT 1;\nSELECT 1;\nhéllo wörld\n  indent\n{\nkey:  value\ndelta\nSELECT 1;\nalpha\ny = 2\ny = 2\nkey: value\na b\nthe quick brown fox\nend\ngamma\nreturn x\nx = 1\ntrailing \nSELECT 1;\nbeta\nkey: value\na b\nkey: value\ngamma\nepsilon\n  indent\ntrailing\n  indent\n  indent\n",
+"changed": "trailing \r\nkey: value\r\nSELECT 1;\r\nkey: value\r\nemoji 😀 line\r\n\r\ngamma\r\n  indent\r\nemoji 😀 line\r\n<b>tag</b>\r\nalpha\r\nhéllo wörld\r\ntrailing \r\nreturn x\r\ntrailing \r\nhéllo wörld\r\n}\r\na b\r\ngamma\r\nx = 1\r\n{\r\nbeta\r\ntrailing\r\na  b  x\r\nthe quick brown fox\r\ndelta\r\na  b\r\n<b>tag</b>\r\nhéllo wörld\r\nalpha  x\r\nreturn x\r\nalpha\r\ntrailing\r\nSELECT 1;\r\nhéllo wörld\r\nreturn x\r\nx = 1\r\ny = 2\r\nend\r\nalpha\r\nepsilon\r\nend\r\nkey: value\r\ndelta  x\r\na  b\r\nend\r\nend\r\n日本語のテキスト\r\nSELECT 1;\r\n日本語のテキスト\r\ndelta\r\nemoji 😀 line\r\nSELECT 1;\r\ntrailing \r\ntrailing\r\nSELECT 1;\r\ndelta\r\n\r\nThe quick brown fox  x\r\ny = 2\r\ndelta\r\nbeta \r\nhéllo wörld\r\nThe quick brown fox\r\nepsilon\r\n\tindent\r\nbeta\r\nthe quick brown fox \r\nepsilon  x\r\ngamma\r\nkey:  value\r\n日本語のテキスト\r\n日本語のテキスト\r\ngamma\r\n\r\na  b\r\nThe quick brown fox\r\ntrailing \r\nkey: value\r\nx = 1\r\nemoji 😀 line\r\nepsilon\r\na  b\r\n{\r\nepsilon\r\nend\r\nThe quick brown fox\r\nhéllo wörld\r\na b\r\nepsilon\r\n\tindent\r\nThe quick brown fox\r\nThe quick brown fox\r\ngamma\r\ntrailing\r\n<b>tag</b>\r\nalpha\r\n日本語のテキスト  x\r\nepsilon\r\ny = 2\r\nkey:  value\r\ny = 2\r\n}\r\nemoji 😀 line\r\nkey:  value\r\nhéllo wörld\r\nemoji 😀 line\r\nbeta\r\nhéllo wörld\r\na b\r\nThe quick brown fox\r\nhéllo wörld\r\nx = 1\r\n{\r\n{\r\na  b\r\ntrailing  x\r\nend\r\ndelta \r\n}\r\na b  x\r\nSELECT 1;\r\nkey:  value\r\na  b\r\ntrailing \r\nepsilon\r\nkey:  value\r\ntrailing \r\nkey: value\r\n\r\ndelta\r\nkey:  value\r\ngamma\r\nthe quick brown fox  x\r\nhéllo wörld\r\ngamma\r\nSELECT 1;\r\n<b>tag</b>\r\na  b\r\n\tindent\r\ntrailing \r\na  b\r\nreturn x\r\nreturn x  x\r\nkey:  value\r\n} \r\n\tindent\r\ndelta\r\n}\r\nepsilon\r\nhéllo wörld\r\na  b\r\n\r\n日本語のテキスト\r\n\r\ny = 2\r\nSELECT 1;\r\n日本語のテキスト\r\nSELECT 1;\r\n日本語のテキスト\r\nepsilon\r\nkey:  value\r\nbeta\r\ny = 2  x\r\nend\r\n\r\nreturn x\r\ntrailing  \r\ngamma  x\r\nepsilon\r\na b\r\n  indent  x\r\nepsilon\r\nepsilon\r\n}\r\nThe quick brown fox\r\nalpha\r\nemoji 😀 line \r\na b\r\nemoji 😀 line\r\n\r\n  indent\r\nhéllo wörld\r\nend\r\n日本語のテキスト\r\n\tindent\r\nreturn x\r\ntrailing \r\ntrailing \r\ngamma\r\nthe quick brown fox\r\nthe quick brown fox\r\ndelta\r\nbeta\r\nepsilon\r\ngamma\r\nend\r\na  b\r\n\tindent\r\n\r\nreturn x\r\nalpha\r\n  indent\r\n\r\nalpha\r\na b\r\ntrailing \r\n}\r\nepsilon\r\n{\r\nThe quick brown fox\r\ntrailing \r\n日本語のテキスト\r\nend  x\r\na b\r\n日本語のテキスト\r\ny = 2\r\nhéllo wörld\r\nSELECT 1;\r\nSELECT 1;\r\ngamma\r\n\r\nalpha\r\nbeta\r\nemoji 😀 line\r\nSELECT 1;\r\nkey:  value\r\nhéllo wörld \r\nkey:  value\r\nkey: value\r\n\tindent\r\nend\r\nSELECT 1;\r\nx = 1\r\na b\r\nthe quick brown fox\r\nbeta\r\nkey:  value \r\na  b\r\n  indent\r\na b\r\nkey:  value\r\nThe quick brown fox\r\n  indent\r\n<b>tag</b>\r\nx = 1\r\nemoji 😀 line\r\na  b\r\n日本語のテキスト\r\n}\r\nx = 1\r\nx = 1  x\r\n  indent\r\nThe quick brown fox\r\na  b\r\nhéllo wörld\r\n  x\r\nhéllo wörld\r\na b\r\nend\r\nx = 1\r\n\r\n{\r\nthe quick brown fox\r\nkey:  value\r\n{\r\nx = 1\r\nreturn x\r\nkey: value\r\n{\r\nepsilon \r\na b\r\nbeta\r\nkey:  value\r\ntrailing\r\ntrailing \r\nepsilon\r\ndelta\r\na b\r\nx = 1\r\nreturn x\r\ntrailing   x\r\n日本語のテキスト\r\nepsilon\r\nkey: value\r\n\tindent\r\ndelta\r\n日本語のテキスト\r\nkey: value \r\nepsilon\r\nkey:  value\r\nkey: value\r\n日本語のテキスト\r\nalpha  x\r\nx = 1\r\nthe quick brown fox\r\nhéllo wörld\r\n日本語のテキスト \r\nend\r\ndelta\r\nemoji 😀 line\r\nthe quick brown fox\r\n日本語のテキスト\r\nthe quick brown fox\r\ny = 2\r\nhéllo wörld\r\nkey:  value\r\n\tindent\r\n{\r\n日本語のテキスト\r\nhéllo wörld\r\nSELECT 1;\r\n  indent\r\n\tindent\r\n{\r\nkey:  value\r\ndelta\r\nSELECT 1;\r\nalpha\r\ny = 2\r\ny = 2\r\nkey: value\r\na b\r\nthe quick brown fox\r\nend\r\ngamma\r\nreturn x\r\nx = 1\r\ntrailing \r\nSELECT 1;\r\nbeta\r\nkey: value\r\na b\r\nkey: value \r\ngamma\r\nepsilon\r\n  indent\r\ntrailing\r\n  indent\r\n  indent\r\ndelta",
+"ignoreWhitespace": true,
+"originalLines": 360,
+"changedLines": 341,
+"shared": 295
+},
+{
+"original": "}\rdelta\nSELECT 1;\ny = 2\nend\nkey: value\nthe quick brown fox\ntrailing \n<b>tag</b>\nhéllo wörld\n\nx = 1\n  indent\nkey: value\nend\n\tindent\n\nemoji 😀 line\n<b>tag</b>\n<b>tag</b>\nx = 1\nkey: value\n日本語のテキスト\ndelta\ngamma\nkey: value\nx = 1\nThe quick brown fox\na b\na  b\nreturn x\nSELECT 1;\n\n\n<b>tag</b>\n日本語のテキスト\nthe quick brown fox\nkey: value\nkey:  value\nhéllo wörld\ngamma\nbeta\nthe quick brown fox\nSELECT 1;\nthe quick brown fox\nbeta\nkey:  value\nreturn x\n{\n  indent\n<b>tag</b>\na  b\ny = 2\na b\nreturn x\na b\nSELECT 1;\nx = 1\nalpha\na b\na b\nkey: value\nThe quick brown fox\n  indent\na  b\nhéllo wörld\nkey:  value\ny = 2\nSELECT 1;\nkey:  value\ntrailing\nkey:  value\n  indent\nthe quick brown fox\n日本語のテキスト\nThe quick brown fox\n}\nSELECT 1;\na  b\ngamma\nx = 1\n}\nemoji 😀 line\n{\na b\n日本語のテキスト\n{\ntrailing\nend\nepsilon\n{\n  indent\ngamma\nreturn x\ntrailing \n{\n  indent\nalpha\n\tindent\n  indent\nx = 1\nx = 1\nSELECT 1;\ndelta\ngamma\nthe quick brown fox\na  b\nepsilon\ngamma\n\ngamma\n\n\tindent\nalpha\nthe quick brown fox\nemoji 😀 line\n  indent\n{\ndelta\n<b>tag</b>\ntrailing \ny = 2\nalpha\ntrailing \nkey: value\ntrailing \n}\nkey:  value\n\tindent\ndelta\na b\n日本語のテキスト\ntrailing \nthe quick brown fox\nepsilon\nkey: value\ntrailing\nbeta\n}\na  b\nthe quick brown fox\n{\n\tindent\nx = 1\nreturn x\ndelta\na b\ny = 2\nkey:  value\n\nbeta\n\n日本語のテキスト\n  indent\nkey: value\ntrailing \n}\ntrailing \n日本語のテキスト\nalpha\nkey: value\nthe quick brown fox\n\tindent\ntrailing \nThe quick brown fox\nend\n}\ntrailing \n\nkey: value\n日本語のテキスト\ngamma\na b\n  indent\ntrailing\nend\ndelta\nkey:  value\nThe quick brown fox\na b\nend\nreturn x\nx = 1\n\n日本語のテキスト\nhéllo wörld\nkey:  value\na  b\nthe quick brown fox\nhéllo wörld\n  indent\nend\na b\ny = 2\nemoji 😀 line\nbeta\nepsilon\n\tindent\ny = 2\n<b>tag</b>\ny = 2\nkey: value\n日本語のテキスト\nkey:  value\nkey: value\nepsilon\nx = 1\nreturn x\ndelta\nx = 1\n\ntrailing \nthe quick brown fox\ndelta\n<b>tag</b>\nkey:  value\ntrailing\nemoji 😀 line\n\ngamma\nemoji 😀 line\nkey: value\ndelta\n  indent\n  indent\nemoji 😀 line\nthe quick brown fox\nhéllo wörld\nThe quick brown fox\n日本語のテキスト\n}\n\nkey:  value\nbeta\nalpha\ntrailing\nbeta\nkey:  value\n{\n{\n\ntrailing\nThe quick brown fox\nSELECT 1;\n",
+"changed": "}  x\ndelta\nSELECT 1;\ny = 2\nend\nkey: value\nthe quick brown fox\ntrailing \n<b>tag</b>\nhéllo wörld\n\nx = 1\n  indent\nkey: value\n\tindent\n\nemoji 😀 line\n<b>tag</b>\n<b>tag</b>\nx = 1\nkey: value\n日本語のテキスト\ndelta\ngamma\nkey: value\nx = 1\nThe quick brown fox  x\na b\na  b\nreturn x\nSELECT 1;\n\n\n<b>tag</b>\n日本語のテキスト  x\nthe quick brown fox \nkey: value\nhéllo wörld\ngamma\nend\nbeta\nthe quick brown fox\nreturn x\nSELECT 1;\nthe quick brown fox\nbeta\nreturn x\n{\n<b>tag</b>\na  b\ny = 2\na b\ngamma\nreturn x\nSELECT 1;\nx = 1  x\nalpha\na b\nkey: value\nThe quick brown fox\n  indent\na  b\nalpha\nhéllo wörld\nkey:  value\ny = 2\nSELECT 1;\nkey:  value\ntrailing\nkey:  value\n  indent  x\n日本語のテキスト\nThe quick brown fox\n}\nSELECT 1;\nemoji 😀 line\na  b\nalpha\ngamma\nx = 1\n}\nemoji 😀 line\n{\na b\n}\ntrailing\nend \nepsilon  x\n{\n  indent \ngamma\nreturn x\ntrailing \n{\n  indent\nalpha\n\tindent\n  indent\nx = 1\nx = 1\nSELECT 1;\ndelta\ngamma\n\nthe quick brown fox\nepsilon\nepsilon\ngamma\n\n\n\tindent\nalpha\nemoji 😀 line \ndelta \n<b>tag</b>\ny = 2\nalpha\ntrailing \n日本語のテキスト\nkey: value\ntrailing \n}\nkey:  value\n\tindent\ndelta\n日本語のテキスト\ntrailing \nthe quick brown fox\nepsilon\nkey: value\ntrailing\nbeta\n}\n<b>tag</b>\na  b\nthe quick brown fox\n{\n\tindent\nx = 1\nreturn x\ndelta\nbeta\n日本語のテキスト\nend\n  indent\ntrailing \n}\ntrailing \n日本語のテキスト \nalpha\nkey: value\nthe quick brown fox\ntrailing\n\tindent\ntrailing \nThe quick brown fox\n}  x\ntrailing  \n\nkey: value\n日本語のテキスト  x\ngamma\na b\n  indent\ntrailing\ndelta\nkey:  value\nThe quick brown fox\na b\nend\nx = 1\n\n日本語のテキスト\nhéllo wörld\nkey:  value\na  b\nthe quick brown fox  x\nhéllo wörld\n  indent\nend\nthe quick brown fox\na b\ny = 2\nemoji 😀 line\nbeta\nepsilon\n\tindent\ny = 2\n<b>tag</b>\ny = 2\nkey: value\n日本語のテキスト\nkey:  value\nkey: value\nepsilon\nreturn x\nkey: value\ndelta\nx = 1\n\ntrailing \nthe quick brown fox\ndelta\n<b>tag</b>\nkey:  value\ntrailing\nemoji 😀 line\n\ngamma  x\nemoji 😀 line \nkey: value\ndelta\n  indent\n  indent\nemoji 😀 line  x\nhéllo wörld\nalpha\nThe quick brown fox\n日本語のテキスト\n}  x\n\nkey:  value\nbeta\nalpha\ntrailing\nbeta\nkey:  value \n{\nx = 1\ntrailing\nThe quick brown fox ",
+"ignoreWhitespace": false,
+"originalLines": 244,
+"changedLines": 231,
+"shared": 192
+},
+{
+"original": "key:  value\ndelta\nreturn x\na  b\nepsilon\n{\nalpha\nhéllo wörld\nbeta\n{\ngamma\nreturn x\n\tindent\nemoji 😀 line\n\tindent\n\tindent\nalpha\n{\n\n  indent\na b\na  b\nThe quick brown fox\ngamma\n\na  b\n  indent\nkey: value\n\n  indent\nreturn x\n  indent\nkey:  value\nthe quick brown fox\na  b\na  b\n{\nkey:  value\nepsilon\n  indent\na  b\ntrailing\n\tindent\n  indent\n  indent\ngamma\ntrailing\ny = 2\nx = 1\nemoji 😀 line\nbeta\n  indent\ny = 2\na  b\ntrailing\nSELECT 1;\na b\nSELECT 1;\nend\nemoji 😀 line\nx = 1\n<b>tag</b>\nkey:  value\ngamma\nepsilon\nalpha\n\tindent\n}\nreturn x\nemoji 😀 line\n\tindent\n{\nkey: value\nThe quick brown fox\nkey: value\nx = 1\nSELECT 1;\nreturn x\nThe quick brown fox\nSELECT 1;\nreturn x\ntrailing\n}\ntrailing \nkey:  value\n  indent\nThe quick brown fox\nend\nx = 1\n<b>tag</b>\n\tindent\ndelta\na b\nx = 1\n{\ndelta\nthe quick brown fox\nalpha\n\ntrailing\n\tindent\nemoji 😀 line\nreturn x\nalpha\nkey:  value\nbeta\nThe quick brown fox\ntrailing \nemoji 😀 line\nkey:  value\nend\ny = 2\ny = 2\nthe quick brown fox\nreturn x\ntrailing \na  b\n}\ny = 2\nalpha\nend\nx = 1\nkey: value\nhéllo wörld\nhéllo wörld\ny = 2\nkey: value\nhéllo wörld\nThe quick brown fox\nemoji 😀 line\ngamma\ntrailing \n}\n  indent\na  b\ntrailing\n{\ngamma\nend\nemoji 😀 line\n\n}\nbeta\nreturn x\nx = 1\nreturn x\nthe quick brown fox\nbeta\n\tindent\nThe quick brown fox\nkey:  value\nSELECT 1;\n\nend\nhéllo wörld\ngamma\nbeta\nbeta\na b\ngamma\nalpha\na b\n{\n<b>tag</b>\nSELECT 1;\ndelta\ntrailing \nkey: value\n  indent\n日本語のテキスト\nalpha\nSELECT 1;\nepsilon\nkey:  value\nSELECT 1;\nbeta\nkey:  value\n\tindent\nreturn x\n{\ny = 2\nemoji 😀 line\n<b>tag</b>\nSELECT 1;\n日本語のテキスト\nx = 1\na b\nreturn x\nSELECT 1;\nkey: value\nkey: value\ntrailing\n日本語のテキスト\na b\nthe quick brown fox\nhéllo wörld\ny = 2\nx = 1\n日本語のテキスト\nkey:  value\nepsilon\ny = 2\nSELECT 1;\ntrailing \nkey: value\n{\nkey:  value\n<b>tag</b>\nthe quick brown fox\n}\ngamma\nSELECT 1;\ndelta\nhéllo wörld\nx = 1\nx = 1\ntrailing \nkey: value\n\tindent\nkey:  value\n\na b\nreturn x\nend\nend\nhéllo wörld\nSELECT 1;\nepsilon\ny = 2\nend\n日本語のテキスト\nemoji 😀 line\na  b\n\tindent\nThe quick brown fox\nend\n{\n日本語のテキスト\nhéllo wörld\n日本語のテキスト\nhéllo wörld\nkey:  value\n\tindent\n<b>tag</b>\ntrailing\na  b\na  b\nepsilon\n{\n{\n日本語のテキスト\na  b\n日本語のテキスト\ngamma\nalpha\nthe quick brown fox\nreturn x\ngamma\n日本語のテキスト\ny = 2\n  indent\n}\n\n{\n日本語のテキスト\nThe quick brown fox\n日本語のテキスト\nThe quick brown fox\nalpha\n  indent\ndelta\nalpha\nepsilon\nx = 1\nend\nx = 1\nThe quick brown fox\nalpha\nemoji 😀 line\nhéllo wörld\n<b>tag</b>\n\nepsilon\nkey: value\n\nreturn x\ndelta\nend\n  indent\n{\n{\nkey: value\nkey:  value\ndelta\nThe quick brown fox\n  indent\n\nthe quick brown fox\na  b\nbeta\nThe quick brown fox\n\tindent\nthe quick brown fox\nSELECT 1;\ndelta\n<b>tag</b>\nreturn x\na b",
+"changed": "key:  value\ndelta  x\nreturn x  x\na  b \nepsilon\n{\nalpha\nhéllo wörld\nbeta\n{\ngamma\nreturn x\n\tindent  x\nemoji 😀 line\n\tindent\n\tindent\nalpha\ndelta\n{\nThe quick brown fox\n\n  indent\na b\na  b\nThe quick brown fox\ngamma \n\nemoji 😀 line\na  b\n  indent\nkey: value\n日本語のテキスト\n\n  indent\n  indent\nkey:  value  x\nthe quick brown fox\na  b\na  b\n{\nkey:  value\nepsilon\na  b\ntrailing \n\tindent\n  indent\ntrailing\ny = 2\nx = 1\nemoji 😀 line\nbeta\ndelta\n  indent\ny = 2 \na  b\ntrailing\nSELECT 1; \na b \nSELECT 1;\nend  x\nx = 1  x\ngamma\n<b>tag</b>\nkey:  value\ngamma\nepsilon\nalpha\n\tindent\n}\nemoji 😀 line\ndelta\n\tindent\n{\nkey: value\nkey: value\nSELECT 1;\nreturn x\nThe quick brown fox\nSELECT 1;\ntrailing\n}\ntrailing \nkey:  value\n  indent\nThe quick brown fox\nend\nx = 1\n<b>tag</b>\n\tindent\ndelta\na b\nThe quick brown fox\nx = 1\n{\ndelta\nthe quick brown fox  x\nalpha\ntrailing\n\tindent\nemoji 😀 line\nreturn x\nalpha\nkey:  value\nbeta\nThe quick brown fox\ntrailing \nemoji 😀 line\nkey:  value\nend\ny = 2\ny = 2\nthe quick brown fox\nreturn x\ntrailing \na  b\n}\ny = 2\nx = 1\nkey: value\nhéllo wörld\nhéllo wörld\ny = 2\nkey: value\nThe quick brown fox \nemoji 😀 line\ngamma\ntrailing \n}\n  indent\na  b\ntrailing\n{\ngamma\nend\nemoji 😀 line\n\n}\nbeta\nreturn x\ngamma\nx = 1\nthe quick brown fox\nbeta\n\tindent\nThe quick brown fox\nreturn x\nkey:  value\nSELECT 1;\n\nend \nkey: value\nhéllo wörld\nbeta\nbeta\na b\ngamma\nalpha\na b\n{\n<b>tag</b>\nSELECT 1;\ndelta\ntrailing \nkey: value\n  indent\n日本語のテキスト\nalpha\nSELECT 1;\nkey:  value\nSELECT 1;\nbeta\ntrailing \nkey:  value\n\tindent\nreturn x\n{\ny = 2\nemoji 😀 line\n<b>tag</b>\nSELECT 1;\n日本語のテキスト\nx = 1\ny = 2\na b\nreturn x\nSELECT 1;\nkey: value\nkey: value\ntrailing\n日本語のテキスト\na b\nthe quick brown fox\nhéllo wörld\ny = 2\nx = 1\n日本語のテキスト\nkey:  value  x\nepsilon\ny = 2\nSELECT 1;\ntrailing \nkey: value\n{\nkey:  value\nthe quick brown fox\n}\ngamma\nSELECT 1;\ndelta\nhéllo wörld\nx = 1\nx = 1 \ntrailing \nkey: value\n\tindent\n\na b\nreturn x\nend\nend\nhéllo wörld\nepsilon\ny = 2\nend\n日本語のテキスト\nemoji 😀 line\na  b\nThe quick brown fox\nend \n{\n日本語のテキスト\nhéllo wörld\nhéllo wörld\nkey:  value\n\tindent\ntrailing\na  b\na  b\nepsilon\n{  x\nhéllo wörld\n{\n日本語のテキスト\na  b\n日本語のテキスト\ngamma  x\nalpha\nthe quick brown fox\nreturn x\ngamma\n}\n{\n日本語のテキスト\nThe quick brown fox\nepsilon\n日本語のテキスト\nThe quick brown fox\nalpha\n  indent \ndelta\nalpha \nepsilon\nend\nx = 1\nThe quick brown fox\nalpha\nreturn x\nemoji 😀 line\nhéllo wörld\n<b>tag</b>\n\nepsilon \nkey: value\nbeta\n\ndelta\nend\n  indent\n{\n{ \nkey: value\nkey:  value\ndelta \nThe quick brown fox\n<b>tag</b>\n  indent\n\nthe quick brown fox\na  b  x\nbeta\nThe quick brown fox\n\tindent\nthe quick brown fox\n{\nSELECT 1;\ndelta\n<b>tag</b>\nreturn x\na b  x\n",
+"ignoreWhitespace": true,
+"originalLines": 308,
+"changedLines": 299,
+"shared": 268
+},
+{
+"original": "héllo wörld\r\na b\r\nepsilon\r\na b\r\nkey: value\r\nkey:  value\r\nThe quick brown fox\r\nreturn x\r\ny = 2\r\nend\r\nThe quick brown fox\r\na b\r\nx = 1\r\n}\r\nalpha\r\nend\r\ntrailing\r\nreturn x\r\na  b\r\ntrailing\r\nkey:  value\r\na  b\r\ntrailing \r\nhéllo wörld\r\n\tindent\r\nhéllo wörld\r\na  b\r\nkey:  value\r\nepsilon\r\n\r\nThe quick brown fox\r\ntrailing\r\nhéllo wörld\r\nalpha\r\n日本語のテキスト\r\n  indent\r\na b\r\n}\r\n  indent\r\na b\r\ndelta\r\nkey: value\r\na  b\r\nSELECT 1;\r\nbeta\r\nhéllo wörld\r\n<b>tag</b>\r\nbeta\r\n\r\n\r\ntrailing \r\ntrailing\r\ndelta\r\n}\r\n<b>tag</b>\r\ngamma\r\nx = 1\r\ngamma\r\ny = 2\r\n\r\nSELECT 1;\r\na b\r\nemoji 😀 line\r\n}\r\nreturn x\r\n}\r\nend\r\nthe quick brown fox\r\n  indent\r\nemoji 😀 line\r\nhéllo wörld\r\nepsilon\r\n<b>tag</b>\r\nreturn x\r\nreturn x\r\nThe quick brown fox\r\n<b>tag</b>\r\nepsilon\r\nbeta\r\nepsilon\r\n<b>tag</b>\r\nhéllo wörld\r\na b\r\nkey: value\r\nemoji 😀 line\r\n\r\nend\r\nkey: value\r\n{\r\na b\r\ntrailing \r\nepsilon\r\nalpha\r\ntrailing \r\nthe quick brown fox\r\n\r\nkey: value\r\nkey: value\r\n}\r\nbeta\r\ny = 2\r\nreturn x\r\na b\r\nbeta\r\nend\r\n\r\nepsilon\r\na b\r\nalpha\r\nkey: value\r\n\tindent\r\ngamma\r\n\r\nThe quick brown fox\r\na  b\r\n\tindent\r\na  b\r\n<b>tag</b>\r\nThe quick brown fox\r\nSELECT 1;\r\nthe quick brown fox\r\nepsilon\r\nkey: value\r\nkey:  value\r\ngamma\r\na  b\r\na b\r\ntrailing \r\nemoji 😀 line\r\n\r\n  indent\r\n}\r\n{\r\n\tindent\r\nbeta\r\ntrailing\r\ngamma\r\nThe quick brown fox\r\n}\r\nbeta\r\nThe quick brown fox\r\nkey:  value\r\ngamma\r\ntrailing \r\nkey:  value\r\nalpha\r\ngamma\r\n<b>tag</b>\r\n\r\nreturn x\r\nhéllo wörld\r\n  indent\r\ntrailing \r\nthe quick brown fox\r\nx = 1\r\n}\r\nx = 1\r\nthe quick brown fox\r\n日本語のテキスト\r\na b\r\nreturn x\r\nend\r\ndelta\r\na b\r\nalpha\r\na b\r\ngamma\r\n\r\nepsilon\r\nemoji 😀 line\r\n<b>tag</b>\r\nreturn x\r\n  indent\r\n<b>tag</b>\r\ndelta\r\n}\r\ntrailing\r\nkey:  value\r\n{\r\n日本語のテキスト\r\ntrailing \r\nkey:  value\r\ndelta\r\na b\r\n日本語のテキスト\r\nThe quick brown fox\r\nkey: value\r\n  indent\r\ntrailing \r\nbeta\r\nalpha\r\nthe quick brown fox\r\nhéllo wörld\r\na  b\r\n{\r\nThe quick brown fox\r\nSELECT 1;\r\n{\r\n<b>tag</b>\r\nalpha\r\n\r\nreturn x\r\nemoji 😀 line\r\nkey: value\r\ndelta\r\ntrailing \r\na  b\r\nalpha\r\ngamma\r\ntrailing \r\n\r\ndelta\r\n<b>tag</b>\r\n<b>tag</b>\r\nalpha\r\ny = 2\r\n\tindent\r\nhéllo wörld\r\ngamma\r\nthe quick brown fox\r\n\tindent\r\nSELECT 1;\r\n  indent\r\n日本語のテキスト\r\nSELECT 1;\r\n\tindent\r\nSELECT 1;\r\nhéllo wörld\r\nThe quick brown fox\r\nkey: value\r\n日本語のテキスト\r\n日本語のテキスト\r\na  b\r\nemoji 😀 line\r\nalpha\r\ndelta\r\nkey: value\r\ntrailing\r\ntrailing \r\nbeta\r\n}\r\n日本語のテキスト\r\nalpha\r\nepsilon\r\nreturn x\r\nreturn x\r\nreturn x\r\nx = 1\r\n日本語のテキスト\r\ntrailing\r\n\tindent\r\nThe quick brown fox\r\nkey: value\r\nx = 1\r\nkey:  value\r\nemoji 😀 line\r\nalpha\r\n  indent\r\n\r\nalpha\r\ntrailing \r\nSELECT 1;\r\n<b>tag</b>\r\nthe quick brown fox\r\ngamma\r\ngamma\r\n}\r\ntrailing\r\ny = 2\r\nbeta\r\nkey: value\r\n\tindent\r\nepsilon\r\ntrailing\r\n\tindent\r\ndelta\r\n  indent\r\na  b\r\nx = 1\r\nbeta\r\nbeta\r\nkey: value\r\n日本語のテキスト\r\nalpha\r\n{\r\nreturn x\r\n\tindent\r\n<b>tag</b>\r\nend\r\ny = 2\r\n{\r\ntrailing\r\n\r\nemoji 😀 line\r\n  indent\r\na  b\r\nbeta\r\nhéllo wörld\r\nkey: value\r\nend\r\ntrailing \r\ntrailing \r\nSELECT 1;\r\n\r\nepsilon\r\nreturn x\r\nThe quick brown fox\r\nx = 1\r\nalpha\r\n}\r\n  indent\r\n{\r\n\r\ntrailing \r\nthe quick brown fox\r\nThe quick brown fox\r\ntrailing\r\nThe quick brown fox\r\nkey:  value\r\n  indent\r\ntrailing \r\nThe quick brown fox\r\n  indent\r\n{\r\nSELECT 1;\r\n\tindent\r\nreturn x\r\ngamma\r\nkey: value\r\n\r\n日本語のテキスト\r\nx = 1\r\nreturn x\r\ntrailing\r\n{\r\n\tindent\r\ngamma\r\nthe quick brown fox\r\na b\r\n日本語のテキスト\r\nend\r\ntrailing \r\n日本語のテキスト\r\n<b>tag</b>\r\n\tindent\r\nThe quick brown fox\r\ny = 2\r\na b\r\nepsilon\r\n\r\n\tindent\r\nkey: value\r\ndelta\r\nepsilon\r\na  b\r\na b\r\n<b>tag</b>\r\ngamma\r\ndelta\r\nend\r\nend\r\nend\r\nSELECT 1;\r\nSELECT 1;\r\n日本語のテキスト\r\n日本語のテキスト\r\na  b\r\nthe quick brown fox\r\nthe quick brown fox\r\nx = 1\r\nkey: value\r\n日本語のテキスト\r\nkey:  value\r\n}\r\ntrailing\r\nepsilon\r\nemoji 😀 line\r\nreturn x\r\nkey:  value\r\ntrailing \r\nbeta\r\ndelta\r\ngamma\r\n日本語のテキスト\r\n\tindent\r\nthe quick brown fox\r\n}\r\ny = 2\r\nalpha\r\nSELECT 1;\r\nemoji 😀 line\r\nreturn x\r\n日本語のテキスト\r\nbeta\r\ntrailing \r\n{\r\ntrailing \r\nthe quick brown fox\r\n\r\n",
+"changed": "héllo wörld\nepsilon\na b \nkey: value\n}\nkey:  value\nThe quick brown fox\nreturn x\ny = 2\nend \n}\ny = 2\nalpha\nend\ntrailing\na  b\ntrailing\na  b\ntrailing  \nhéllo wörld\n\tindent\nhéllo wörld\na  b\nepsilon\n\nThe quick brown fox\ntrailing\nhéllo wörld\nalpha\n日本語のテキスト\n  indent\na b\n}\n  indent\na b\ndelta\nkey: value\nSELECT 1;\nbeta\n<b>tag</b>\n\ntrailing \ntrailing\n}  x\n<b>tag</b>\ngamma\ny = 2\n\na b\nemoji 😀 line\n}\nreturn x\nend\nthe quick brown fox\n  indent\nemoji 😀 line\nhéllo wörld\nepsilon\n<b>tag</b> \nreturn x\nreturn x\n<b>tag</b>\nepsilon\nepsilon\n<b>tag</b>  x\nhéllo wörld\na b\nkey: value\nemoji 😀 line\n \nend\nkey: value\n{\na b\nepsilon  x\nalpha\ntrailing \nthe quick brown fox\n\nkey: value\ny = 2\nkey: value\n}\nreturn x\nbeta\ny = 2\nreturn x\nbeta\nend\n  x\nepsilon\na b\nkey: value\n\tindent\ngamma\nx = 1\n\nThe quick brown fox\na  b  x\n\tindent\na  b\n<b>tag</b>\nThe quick brown fox\nSELECT 1;\nthe quick brown fox\nepsilon\nkey:  value\ngamma\na  b\na b\ntrailing   x\nemoji 😀 line\n\n} \n{\n\tindent\ntrailing \ngamma\nThe quick brown fox\n<b>tag</b>\n}\nbeta\nThe quick brown fox\nkey:  value\ngamma\ntrailing \nkey:  value\nalpha\ny = 2\ngamma\n<b>tag</b>\n\nreturn x\n日本語のテキスト\nhéllo wörld\n  indent \ntrailing \n}\nx = 1\nthe quick brown fox\n日本語のテキスト\na b\ndelta\na b\nalpha\na b\n\nepsilon\nemoji 😀 line \n<b>tag</b>\nreturn x\n<b>tag</b>  x\ndelta\n}\ntrailing\nkey:  value  x\n{  x\n日本語のテキスト\nkey:  value\ndelta  x\ntrailing \na b\n<b>tag</b>\n日本語のテキスト\nThe quick brown fox\nkey: value\n  indent\ntrailing \nbeta\nthe quick brown fox\nhéllo wörld\na  b\n{\nThe quick brown fox\nSELECT 1; \n{\n<b>tag</b>\nalpha\n\nreturn x\nemoji 😀 line\nkey: value\ndelta\ntrailing \na  b\nalpha\ngamma\ntrailing \n\ndelta\n<b>tag</b>\nalpha\ny = 2\n\tindent\nhéllo wörld\ngamma\nthe quick brown fox\n\tindent\nSELECT 1;\n  indent\n日本語のテキスト\nSELECT 1;\n\tindent\nSELECT 1;\nhéllo wörld\nkey: value\n日本語のテキスト\n日本語のテキスト\na  b\nemoji 😀 line \nalpha\ndelta\nkey: value\ntrailing\ntrailing \nbeta\n日本語のテキスト\nalpha\nepsilon\nreturn x\nreturn x\nreturn x\nx = 1\n日本語のテキスト\ntrailing\n\tindent  x\nThe quick brown fox\nkey: value\nx = 1\nkey:  value  x\nemoji 😀 line\nalpha\n  indent\n\nalpha\ntrailing \nSELECT 1;\n<b>tag</b>\na b\nthe quick brown fox\ngamma\ngamma\n}\ntrailing\ny = 2\nbeta\nkey: value\n日本語のテキスト\n\tindent\nepsilon\ntrailing\n  indent\n\tindent\ndelta\n  indent\nx = 1\nbeta  x\nbeta\nkey: value\n日本語のテキスト\nalpha\n{\nreturn x\n\tindent\nend\ny = 2 \n{\ntrailing\n  x\nemoji 😀 line\n  indent\na  b\nbeta\nhéllo wörld  x\nkey: value\nend\nkey: value\ntrailing \ntrailing  \n\nepsilon\nreturn x\nThe quick brown fox\nx = 1\nalpha\n}\n  indent  x\ntrailing \nthe quick brown fox \nThe quick brown fox\ntrailing\nThe quick brown fox\nreturn x\nkey:  value\ny = 2\n  indent\ntrailing \nThe quick brown fox\n  indent\n{\n\tindent\ngamma\nkey: value\n\nx = 1\nreturn x\ntrailing\n{\n\tindent\ngamma\nthe quick brown fox\na b\n日本語のテキスト\nend\ntrailing \n日本語のテキスト\n\tindent\ny = 2\na b\n\n\tindent\nkey: value\ndelta\nepsilon\na  b\na b\n日本語のテキスト\n<b>tag</b>\ngamma\ndelta\nend\nend\nend\nSELECT 1;\n日本語のテキスト\n日本語のテキスト\nthe quick brown fox\nthe quick brown fox\nx = 1  x\n{\nkey: value\n日本語のテキスト\nkey:  value\nemoji 😀 line\nreturn x\nkey:  value\ntrailing \nbeta\ndelta\ngamma\nalpha\n日本語のテキスト\n\tindent\nthe quick brown fox\n}\ny = 2\nalpha  x\nemoji 😀 line\n{\nreturn x\n日本語のテキスト\nepsilon\nbeta\na b\ntrailing \n{\ntrailing \nthe quick brown fox\n\n",
+"ignoreWhitespace": true,
+"originalLines": 399,
+"changedLines": 369,
+"shared": 329
+},
+{
+"original": "key: value\rtrailing \r\ntrailing\r\nx = 1\r\ntrailing\r\n  indent\r\n<b>tag</b>\r\nThe quick brown fox\r\nhéllo wörld\r\nhéllo wörld\r\na  b\r\nkey:  value\r\na b\r\nreturn x\r\ndelta\r\nreturn x\r\nkey: value\r\n}\r\n日本語のテキスト\r\nSELECT 1;\r\n<b>tag</b>\r\nhéllo wörld\r\nx = 1\r\nemoji 😀 line\r\n<b>tag</b>\r\nreturn x\r\ntrailing\r\nend\r\nreturn x\r\na  b\r\nbeta\r\nkey: value\r\ntrailing \r\na b\r\n{\r\n\tindent\r\nhéllo wörld\r\nx = 1\r\nepsilon\r\ngamma\r\n日本語のテキスト\r\nkey:  value\r\nend\r\n}\r\n日本語のテキスト\r\ngamma\r\nx = 1\r\nx = 1\r\n{\r\nkey: value\r\nreturn x\r\n日本語のテキスト\r\na b\r\nx = 1\r\nreturn x\r\ny = 2\r\nemoji 😀 line\r\ndelta\r\nalpha\r\nbeta\r\ntrailing\r\nThe quick brown fox\r\nkey: value\r\nend\r\nhéllo wörld\r\nbeta\r\nkey:  value\r\n  indent\r\nbeta\r\nepsilon\r\ndelta\r\n\tindent\r\nemoji 😀 line\r\nThe quick brown fox\r\ngamma\r\ny = 2\r\ngamma\r\na b\r\nbeta\r\nreturn x\r\nSELECT 1;\r\ntrailing\r\nend\r\n}\r\n}\r\ntrailing \r\ndelta\r\n日本語のテキスト\r\nbeta\r\na  b\r\na b\r\nend\r\nalpha\r\nThe quick brown fox\r\ngamma\r\n{\r\n\tindent\r\nkey: value\r\nalpha\r\n}\r\n{\r\nSELECT 1;\r\n\tindent\r\nalpha\r\ndelta\r\nThe quick brown fox\r\nhéllo wörld\r\ny = 2\r\nepsilon\r\nreturn x\r\na b\r\nreturn x\r\nkey:  value\r\nThe quick brown fox\r\n}\r\nkey: value\r\nThe quick brown fox\r\nkey: value\r\nreturn x\r\n\tindent\r\nbeta\r\n<b>tag</b>\r\nThe quick brown fox\r\nalpha\r\ny = 2\r\nemoji 😀 line\r\ntrailing\r\n  indent\r\ntrailing \r\nx = 1\r\na  b\r\ngamma\r\nThe quick brown fox\r\nthe quick brown fox\r\nthe quick brown fox\r\nSELECT 1;\r\nbeta\r\n日本語のテキスト\r\nSELECT 1;\r\nhéllo wörld\r\nkey: value\r\nSELECT 1;\r\nreturn x\r\nemoji 😀 line\r\nemoji 😀 line\r\nepsilon\r\nreturn x\r\n{\r\n  indent\r\ny = 2\r\ngamma\r\nthe quick brown fox\r\nbeta\r\n<b>tag</b>\r\nx = 1\r\nreturn x\r\ny = 2\r\nemoji 😀 line\r\nkey: value\r\nalpha\r\ngamma\r\n  indent\r\nalpha\r\nThe quick brown fox\r\nreturn x\r\nThe quick brown fox\r\nend\r\n}\r\n\tindent\r\n}\r\nemoji 😀 line\r\n{\r\ntrailing\r\nemoji 😀 line\r\n  indent\r\ngamma\r\nThe quick brown fox\r\ndelta\r\n{\r\na b\r\n\r\nthe quick brown fox\r\n{\r\ntrailing \r\n\r\nend\r\n  indent\r\n<b>tag</b>\r\ntrailing \r\nkey:  value\r\nThe quick brown fox\r\n  indent\r\n{\r\ntrailing \r\nThe quick brown fox\r\n{\r\ndelta\r\nkey:  value\r\ny = 2\r\na b\r\n}\r\n{\r\nhéllo wörld\r\nx = 1\r\n\tindent\r\nthe quick brown fox\r\nhéllo wörld\r\n\tindent\r\n<b>tag</b>\r\nkey: value\r\n  indent\r\ngamma\r\n<b>tag</b>\r\ntrailing\r\n<b>tag</b>\r\na  b\r\nemoji 😀 line\r\ndelta\r\n\r\nSELECT 1;\r\nbeta\r\nend\r\n}\r\nalpha\r\nthe quick brown fox\r\na b\r\ntrailing \r\na  b\r\nend\r\nthe quick brown fox\r\n}\r\ndelta\r\ny = 2\r\nepsilon\r\nhéllo wörld\r\n<b>tag</b>\r\nepsilon\r\n\r\nSELECT 1;\r\n{\r\nSELECT 1;\r\nepsilon\r\nx = 1\r\ny = 2\r\n{\r\ndelta\r\n{\r\nbeta\r\ntrailing \r\ngamma\r\n}\r\n\tindent\r\n日本語のテキスト\r\n{\r\ngamma\r\nend\r\ntrailing \r\ny = 2\r\n}\r\n日本語のテキスト\r\nThe quick brown fox\r\nreturn x\r\ntrailing\r\nbeta\r\nthe quick brown fox\r\n日本語のテキスト\r\nhéllo wörld\r\n  indent\r\ntrailing\r\nepsilon\r\n}\r\ny = 2\r\nx = 1\r\nSELECT 1;\r\ndelta\r\nx = 1\r\n}\r\ngamma\r\nalpha\r\n{\r\ntrailing\r\n{\r\n\tindent\r\nepsilon\r\nthe quick brown fox\r\ntrailing \r\ntrailing \r\ngamma\r\nreturn x\r\n  indent\r\ngamma\r\nemoji 😀 line\r\nThe quick brown fox\r\ndelta\r\nSELECT 1;\r\nThe quick brown fox\r\n\r\n{\r\ny = 2\r\nthe quick brown fox\r\ntrailing \r\n  indent\r\nbeta\r\nreturn x\r\ngamma\r\nreturn x\r\na b\r\nepsilon\r\ny = 2\r\ntrailing \r\nkey:  value\r\n<b>tag</b>\r\n<b>tag</b>\r\n{\r\nalpha\r\n\r\nend\r\n\r\ny = 2\r\n  indent\r\nbeta\r\nreturn x\r\n}\r\nend\r\nhéllo wörld\r\nSELECT 1;\r\ndelta\r\ndelta\r\nreturn x\r\na  b\r\na  b\r\nbeta\r\nkey: value\r\n\r\ndelta\r\n{\r\n}\r\n",
+"changed": "key: value  x\r\nepsilon\r\ntrailing \r\ntrailing\r\nx = 1\r\ntrailing\r\n  indent\r\n<b>tag</b>\r\nThe quick brown fox\r\nhéllo wörld\r\nhéllo wörld\r\na  b\r\nkey:  value\r\na b\r\nreturn x\r\ndelta\r\nreturn x\r\nkey: value\r\na b\r\n}\r\n日本語のテキスト\r\nSELECT 1;\r\n<b>tag</b>\r\nhéllo wörld\r\nx = 1\r\nemoji 😀 line\r\n<b>tag</b>\r\nreturn x\r\nreturn x\r\na  b\r\nkey: value\r\ntrailing \r\na b\r\n\tindent\r\nhéllo wörld  x\r\nx = 1\r\nepsilon\r\ngamma\r\n日本語のテキスト\r\nkey:  value\r\nend\r\n}\r\n日本語のテキスト\r\ngamma\r\nx = 1\r\nkey: value\r\nreturn x\r\n日本語のテキスト\r\n  indent\r\na b\r\ntrailing\r\nx = 1\r\nreturn x\r\ny = 2 \r\ndelta\r\nalpha\r\nbeta\r\ntrailing\r\nThe quick brown fox\r\nkey: value\r\nend\r\nhéllo wörld\r\nbeta\r\nthe quick brown fox\r\nkey:  value\r\n  indent\r\nbeta\r\nepsilon \r\ndelta\r\nemoji 😀 line\r\nThe quick brown fox\r\ngamma\r\ny = 2\r\ngamma\r\na b\r\nbeta\r\nreturn x\r\nSELECT 1;\r\ntrailing\r\nend\r\n}  x\r\n}\r\ntrailing \r\n日本語のテキスト\r\nbeta\r\na b\r\nend\r\nbeta\r\nalpha\r\nThe quick brown fox\r\n{\r\n\tindent\r\n<b>tag</b>\r\nkey: value\r\nalpha\r\n}\r\n{\r\nSELECT 1;\r\n\tindent\r\nalpha  x\r\ndelta\r\nThe quick brown fox\r\nhéllo wörld\r\ny = 2\r\nepsilon\r\na b\r\nreturn x\r\nkey:  value\r\nThe quick brown fox\r\n}\r\nkey: value\r\nThe quick brown fox\r\nkey: value\r\nreturn x \r\n\tindent\r\nbeta\r\n<b>tag</b>\r\nThe quick brown fox\r\nalpha\r\ny = 2\r\nemoji 😀 line\r\ntrailing  x\r\n  indent\r\ntrailing \r\na  b\r\nThe quick brown fox\r\nthe quick brown fox\r\nthe quick brown fox\r\nSELECT 1;\r\nbeta\r\n日本語のテキスト\r\nSELECT 1;  x\r\nhéllo wörld\r\nSELECT 1;\r\nreturn x\r\n\tindent\r\nemoji 😀 line\r\nemoji 😀 line\r\nepsilon\r\n\tindent\r\nreturn x\r\n{\r\n  indent  x\r\ny = 2 \r\ngamma\r\nthe quick brown fox\r\n<b>tag</b>\r\nx = 1\r\ny = 2\r\nkey: value\r\nalpha\r\ngamma  x\r\n  indent\r\nalpha\r\nThe quick brown fox\r\nreturn x\r\nThe quick brown fox\r\nend\r\n}\r\n\tindent\r\n}\r\n{\r\ntrailing\r\nemoji 😀 line\r\n  indent\r\ngamma\r\nThe quick brown fox\r\ndelta\r\n{\r\ntrailing \r\na b\r\nthe quick brown fox\r\n{\r\ntrailing  \r\n\r\nend\r\n  indent\r\n<b>tag</b>  x\r\ntrailing \r\nkey:  value\r\nThe quick brown fox\r\na b\r\n  indent\r\n{\r\ntrailing \r\nThe quick brown fox\r\n{\r\ndelta\r\nThe quick brown fox\r\ny = 2\r\n}\r\n{\r\nhéllo wörld\r\nx = 1\r\n\tindent\r\nhéllo wörld\r\n<b>tag</b>\r\nkey: value\r\n  indent\r\ngamma\r\n  indent\r\n<b>tag</b>\r\ntrailing  x\r\n<b>tag</b>\r\na  b\r\nemoji 😀 line\r\ndelta\r\nSELECT 1;\r\nbeta\r\n}\r\nalpha\r\nthe quick brown fox\r\na b\r\nemoji 😀 line\r\na  b\r\nend\r\n  indent\r\nthe quick brown fox\r\n}\r\ny = 2\r\nepsilon\r\nhéllo wörld\r\nalpha\r\n<b>tag</b>\r\nepsilon\r\nend\r\n\r\nSELECT 1;\r\n{\r\nSELECT 1;\r\nepsilon\r\ndelta\r\nbeta\r\ntrailing \r\ngamma\r\n}\r\n\tindent\r\n日本語のテキスト\r\n{\r\ngamma\r\nend\r\ntrailing \r\ny = 2 \r\n}\r\n日本語のテキスト\r\nreturn x\r\nThe quick brown fox\r\ntrailing\r\nbeta\r\nthe quick brown fox\r\n日本語のテキスト \r\nhéllo wörld\r\n  indent\r\ntrailing\r\nepsilon\r\n}\r\ny = 2\r\nThe quick brown fox\r\nSELECT 1;\r\ndelta\r\nx = 1\r\nalpha\r\n{\r\ntrailing\r\n{\r\nepsilon\r\nthe quick brown fox\r\ntrailing \r\ntrailing \r\ngamma\r\na  b\r\nreturn x\r\n  indent\r\ngamma\r\ndelta\r\nSELECT 1;\r\nThe quick brown fox\r\n{\r\nbeta\r\ny = 2\r\nthe quick brown fox\r\ntrailing \r\n  indent\r\nbeta\r\nreturn x\r\ngamma  x\r\nreturn x\r\nkey:  value\r\na b\r\nepsilon\r\ny = 2\r\ntrailing \r\nkey:  value \r\n<b>tag</b>  x\r\n  indent\r\n<b>tag</b>\r\n{\r\nalpha\r\nend\r\n\r\ny = 2\r\nSELECT 1;\r\n  indent\r\nbeta\r\nreturn x\r\n}\r\nend\r\nhéllo wörld\r\nSELECT 1;\r\ndelta\r\nreturn x\r\na  b\r\na  b\r\nbeta\r\n\r\ndelta\r\n{\r\n}",
+"ignoreWhitespace": false,
+"originalLines": 337,
+"changedLines": 318,
+"shared": 274
+}
+]
+}

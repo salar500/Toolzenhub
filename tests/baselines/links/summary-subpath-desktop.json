@@ -259,6 +259,7 @@
     "internal": 27,
     "external": [
       "egazette.gov.in",
+      "github.com",
       "www.incometax.gov.in",
       "www.pib.gov.in"
     ],
@@ -314,7 +315,7 @@
     "deadFragments": []
   },
   "developer-tools.html": {
-    "internal": 26,
+    "internal": 27,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -374,7 +375,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 50,
+    "internal": 51,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -404,6 +405,12 @@
     "deadFragments": []
   },
   "tools/stopwatch/": {
+    "internal": 24,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/text-diff/": {
     "internal": 24,
     "external": [],
     "placeholders": 4,

@@ -116,7 +116,7 @@ section.categories-page.directory-page
           h2#directory-developer-tools-heading.directory-section__title
             a [href="{ROOT}developer-tools.html"] "Developer Tools"
           p.directory-section__text "Browser-based tools for working with data and code."
-            span.directory-section__count "2 tools"
+            span.directory-section__count "3 tools"
         div.directory-groups
           article.directory-group
             h3.directory-group__title
@@ -126,3 +126,7 @@ section.categories-page.directory-page
             h3.directory-group__title
               a [href="{ROOT}tools/unix-timestamp-converter/"] "Unix Timestamp Converter"
             p.directory-group__text "Convert Unix timestamps in seconds, milliseconds, microseconds or nanoseconds to a date, a…"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/text-diff/"] "Text Diff / Compare"
+            p.directory-group__text "Paste two versions of a text and see what was added, removed and changed, line by line wit…"

@@ -43,7 +43,7 @@ main#app
             div.category-card__icon.category-card__icon--developer-tools "{ }"
             div.category-card__content
               h3 "Developer Tools"
-              p "JSON and Unix timestamp tools, in your browser"
+              p "JSON, timestamp and text compare tools, in your browser"
   section#popular-calculators.section
     section.popular-section
       div.container

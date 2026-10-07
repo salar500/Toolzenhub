@@ -2966,7 +2966,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8929
+      "visibleTextChars": 9155
     }
   },
   "/calculators/loan-comparison/": {
@@ -3346,11 +3346,11 @@
   "/developer-tools.html": {
     "runtime": {
       "title": "Developer Tools | ToolZen Hub",
-      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator and a Unix timestamp converter that run in your browser.",
+      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter and a text diff checker that run in your browser.",
       "canonical": "https://toolzenhub.in/developer-tools.html",
       "robots": null,
       "openGraph": {
-        "og:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator and a Unix timestamp converter that run in your browser.",
+        "og:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter and a text diff checker that run in your browser.",
         "og:site_name": "ToolZen Hub",
         "og:title": "Developer Tools | ToolZen Hub",
         "og:type": "website",
@@ -3358,7 +3358,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator and a Unix timestamp converter that run in your browser.",
+        "twitter:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter and a text diff checker that run in your browser.",
         "twitter:title": "Developer Tools | ToolZen Hub"
       },
       "jsonLd": [
@@ -3382,14 +3382,14 @@
     },
     "rawHtml": {
       "title": "Developer Tools | ToolZen Hub",
-      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator and a Unix timestamp converter that run in your browser.",
+      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter and a text diff checker that run in your browser.",
       "canonical": "https://toolzenhub.in/developer-tools.html",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 890
+      "visibleTextChars": 1057
     }
   },
   "/disclaimer.html": {
@@ -3794,7 +3794,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2333
+      "visibleTextChars": 2496
     }
   },
   "/tools/countdown-timer/": {
@@ -4040,6 +4040,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 3332
+    }
+  },
+  "/tools/text-diff/": {
+    "runtime": {
+      "title": "Text Diff Checker: Compare Two Texts | ToolZen Hub",
+      "description": "Free online text diff checker. Paste two versions to see added, removed and changed lines with the changed words marked, optionally ignore whitespace-only changes, and copy a unified diff. It runs in your browser: your text is not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/text-diff/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free online text diff checker. Paste two versions to see added, removed and changed lines with the changed words marked, optionally ignore whitespace-only changes, and copy a unified diff. It runs in your browser: your text is not uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Text Diff Checker: Compare Two Texts | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/text-diff/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free online text diff checker. Paste two versions to see added, removed and changed lines with the changed words marked, optionally ignore whitespace-only changes, and copy a unified diff. It runs in your browser: your text is not uploaded.",
+        "twitter:title": "Text Diff Checker: Compare Two Texts | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Text Diff / Compare"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Text Diff Checker: Compare Two Texts | ToolZen Hub",
+      "description": "Free online text diff checker. Paste two versions to see added, removed and changed lines with the changed words marked, optionally ignore whitespace-only changes, and copy a unified diff. It runs in your browser: your text is not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/text-diff/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3511
     }
   },
   "/tools/unix-timestamp-converter/": {

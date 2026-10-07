@@ -965,6 +965,46 @@ const catalog = [
             description:
                 "Free Unix timestamp converter: seconds, milliseconds, microseconds or nanoseconds to a date, and a date and time zone back to a timestamp. It flags daylight-saving gaps and overlaps, converts a batch and runs in your browser."
         }
+    },
+
+    {
+        id: "text-diff",
+        status: "published",
+        loader: () =>
+            import("../tools/text-diff/index.js"),
+        sectionId: "developer-tools",
+        icon: "≠",
+        title: "Text Diff / Compare",
+        description:
+            "Paste two versions of a text and see what was added, removed and changed, line by line with the changed words marked. It runs in your browser.",
+        autoRelated: false,
+        relatedTools: ["json-formatter"],
+        aliases: [
+            "text diff",
+            "diff checker",
+            "compare text",
+            "text compare",
+            "compare two texts",
+            "difference between two texts",
+            "code diff",
+            "prompt comparison",
+            "compare versions"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            examples: true,
+            multipleInputs: true,
+            explanation: true,
+            realtime: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Text Diff Checker: Compare Two Texts | ToolZen Hub",
+            description:
+                "Free online text diff checker. Paste two versions to see added, removed and changed lines with the changed words marked, optionally ignore whitespace-only changes, and copy a unified diff. It runs in your browser: your text is not uploaded."
+        }
     }
 
 ];
