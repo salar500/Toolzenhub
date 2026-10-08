@@ -553,10 +553,10 @@ test.describe("Time Zone Converter: accessibility and layout", () => {
 });
 
 test.describe("Time Zone Converter in the site", () => {
-  test("Time Tools lists it as the fifth tool, flat, and Developer Tools does not", async ({ page, go }) => {
+  test("Time Tools lists it as one of its tools, flat, and Developer Tools does not", async ({ page, go }) => {
     await go("time-tools.html");
     await expect(page.locator(`a[href$="tools/time-zone-converter/"]`)).toHaveCount(1);
-    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(5);
+    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(6);
     await expect(page.locator("main")).not.toContainText(/coming soon/i);
     await expect(page.locator("main")).toContainText("Time Zone Converter");
     await go("developer-tools.html");
@@ -564,10 +564,10 @@ test.describe("Time Zone Converter in the site", () => {
     await expect(page.locator("main")).not.toContainText(/time zone converter/i);
   });
 
-  test("All Tools: Time Tools has 5 tools and Developer Tools still has 4", async ({ page, go }) => {
+  test("All Tools: Time Tools has 6 tools and Developer Tools still has 4", async ({ page, go }) => {
     await go("tools.html");
     const time = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Time Tools")') });
-    await expect(time.locator(".directory-section__count")).toHaveText("5 tools");
+    await expect(time.locator(".directory-section__count")).toHaveText("6 tools");
     await expect(time.locator('a[href$="tools/time-zone-converter/"]')).toHaveCount(1);
     const dev = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Developer Tools")') });
     await expect(dev.locator(".directory-section__count")).toHaveText("4 tools");

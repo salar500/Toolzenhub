@@ -1,0 +1,678 @@
+{
+ "vectors": [
+  {
+   "name": "standard day",
+   "rows": [
+    [
+     "09:00",
+     "17:00",
+     30
+    ]
+   ],
+   "states": [
+    "valid"
+   ],
+   "nets": [
+    450
+   ],
+   "counts": {
+    "empty": 0,
+    "incomplete": 0,
+    "invalid": 0,
+    "valid": 1
+   },
+   "totals": {
+    "gross": 480,
+    "break": 30,
+    "net": 450,
+    "hm": "7:30",
+    "decimal": "7.50",
+    "grossHm": "8:00",
+    "breakHm": "0:30"
+   }
+  },
+  {
+   "name": "overnight",
+   "rows": [
+    [
+     "22:00",
+     "06:00",
+     0
+    ]
+   ],
+   "states": [
+    "valid"
+   ],
+   "nets": [
+    480
+   ],
+   "counts": {
+    "empty": 0,
+    "incomplete": 0,
+    "invalid": 0,
+    "valid": 1
+   },
+   "totals": {
+    "gross": 480,
+    "break": 0,
+    "net": 480,
+    "hm": "8:00",
+    "decimal": "8.00",
+    "grossHm": "8:00",
+    "breakHm": "0:00"
+   }
+  },
+  {
+   "name": "zero break explicit and blank",
+   "rows": [
+    [
+     "08:15",
+     "12:45",
+     0
+    ],
+    [
+     "08:15",
+     "12:45",
+     null
+    ]
+   ],
+   "states": [
+    "valid",
+    "valid"
+   ],
+   "nets": [
+    270,
+    270
+   ],
+   "counts": {
+    "empty": 0,
+    "incomplete": 0,
+    "invalid": 0,
+    "valid": 2
+   },
+   "totals": {
+    "gross": 540,
+    "break": 0,
+    "net": 540,
+    "hm": "9:00",
+    "decimal": "9.00",
+    "grossHm": "9:00",
+    "breakHm": "0:00"
+   }
+  },
+  {
+   "name": "break equal to the shift",
+   "rows": [
+    [
+     "09:00",
+     "10:00",
+     60
+    ]
+   ],
+   "states": [
+    "valid"
+   ],
+   "nets": [
+    0
+   ],
+   "counts": {
+    "empty": 0,
+    "incomplete": 0,
+    "invalid": 0,
+    "valid": 1
+   },
+   "totals": {
+    "gross": 60,
+    "break": 60,
+    "net": 0,
+    "hm": "0:00",
+    "decimal": "0.00",
+    "grossHm": "1:00",
+    "breakHm": "1:00"
+   }
+  },
+  {
+   "name": "break longer than the shift",
+   "rows": [
+    [
+     "09:00",
+     "10:00",
+     61
+    ]
+   ],
+   "states": [
+    "invalid"
+   ],
+   "nets": [
+    null
+   ],
+   "counts": {
+    "empty": 0,
+    "incomplete": 0,
+    "invalid": 1,
+    "valid": 0
+   },
+   "totals": null
+  },
+  {
+   "name": "equal times",
+   "rows": [
+    [
+     "09:00",
+     "09:00",
+     0
+    ]
+   ],
+   "states": [
+    "invalid"
+   ],
+   "nets": [
+    null
+   ],
+   "counts": {
+    "empty": 0,
+    "incomplete": 0,
+    "invalid": 1,
+    "valid": 0
+   },
+   "totals": null
+  },
+  {
+   "name": "midnight boundaries",
+   "rows": [
+    [
+     "23:00",
+     "00:00",
+     0
+    ],
+    [
+     "23:59",
+     "00:00",
+     0
+    ],
+    [
+     "00:00",
+     "00:01",
+     0
+    ],
+    [
+     "12:00",
+     "11:59",
+     0
+    ]
+   ],
+   "states": [
+    "valid",
+    "valid",
+    "valid",
+    "valid"
+   ],
+   "nets": [
+    60,
+    1,
+    1,
+    1439
+   ],
+   "counts": {
+    "empty": 0,
+    "incomplete": 0,
+    "invalid": 0,
+    "valid": 4
+   },
+   "totals": {
+    "gross": 1501,
+    "break": 0,
+    "net": 1501,
+    "hm": "25:01",
+    "decimal": "25.02",
+    "grossHm": "25:01",
+    "breakHm": "0:00"
+   }
+  },
+  {
+   "name": "longest shift",
+   "rows": [
+    [
+     "00:00",
+     "23:59",
+     0
+    ]
+   ],
+   "states": [
+    "valid"
+   ],
+   "nets": [
+    1439
+   ],
+   "counts": {
+    "empty": 0,
+    "incomplete": 0,
+    "invalid": 0,
+    "valid": 1
+   },
+   "totals": {
+    "gross": 1439,
+    "break": 0,
+    "net": 1439,
+    "hm": "23:59",
+    "decimal": "23.98",
+    "grossHm": "23:59",
+    "breakHm": "0:00"
+   }
+  },
+  {
+   "name": "worked example",
+   "rows": [
+    [
+     "09:00",
+     "17:30",
+     30
+    ],
+    [
+     "22:00",
+     "06:00",
+     45
+    ],
+    [
+     "13:00",
+     "17:00",
+     0
+    ]
+   ],
+   "states": [
+    "valid",
+    "valid",
+    "valid"
+   ],
+   "nets": [
+    480,
+    435,
+    240
+   ],
+   "counts": {
+    "empty": 0,
+    "incomplete": 0,
+    "invalid": 0,
+    "valid": 3
+   },
+   "totals": {
+    "gross": 1230,
+    "break": 75,
+    "net": 1155,
+    "hm": "19:15",
+    "decimal": "19.25",
+    "grossHm": "20:30",
+    "breakHm": "1:15"
+   }
+  },
+  {
+   "name": "three twenty-minute shifts",
+   "rows": [
+    [
+     "09:00",
+     "09:20",
+     0
+    ],
+    [
+     "10:00",
+     "10:20",
+     0
+    ],
+    [
+     "11:00",
+     "11:20",
+     0
+    ]
+   ],
+   "states": [
+    "valid",
+    "valid",
+    "valid"
+   ],
+   "nets": [
+    20,
+    20,
+    20
+   ],
+   "counts": {
+    "empty": 0,
+    "incomplete": 0,
+    "invalid": 0,
+    "valid": 3
+   },
+   "totals": {
+    "gross": 60,
+    "break": 0,
+    "net": 60,
+    "hm": "1:00",
+    "decimal": "1.00",
+    "grossHm": "1:00",
+    "breakHm": "0:00"
+   }
+  },
+  {
+   "name": "excluded rows",
+   "rows": [
+    [
+     "09:00",
+     "17:00",
+     30
+    ],
+    [
+     "09:00",
+     null,
+     null
+    ],
+    [
+     "09:00",
+     "09:00",
+     0
+    ],
+    [
+     null,
+     null,
+     null
+    ],
+    [
+     null,
+     "17:00",
+     15
+    ]
+   ],
+   "states": [
+    "valid",
+    "incomplete",
+    "invalid",
+    "empty",
+    "incomplete"
+   ],
+   "nets": [
+    450,
+    null,
+    null,
+    null,
+    null
+   ],
+   "counts": {
+    "empty": 1,
+    "incomplete": 2,
+    "invalid": 1,
+    "valid": 1
+   },
+   "totals": {
+    "gross": 480,
+    "break": 30,
+    "net": 450,
+    "hm": "7:30",
+    "decimal": "7.50",
+    "grossHm": "8:00",
+    "breakHm": "0:30"
+   }
+  },
+  {
+   "name": "maximum rows",
+   "rows": [
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ],
+    [
+     "00:00",
+     "23:59",
+     0
+    ]
+   ],
+   "states": [
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid",
+    "valid"
+   ],
+   "nets": [
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439,
+    1439
+   ],
+   "counts": {
+    "empty": 0,
+    "incomplete": 0,
+    "invalid": 0,
+    "valid": 31
+   },
+   "totals": {
+    "gross": 44609,
+    "break": 0,
+    "net": 44609,
+    "hm": "743:29",
+    "decimal": "743.48",
+    "grossHm": "743:29",
+    "breakHm": "0:00"
+   }
+  }
+ ],
+ "decimals": {
+  "0": "0.00",
+  "1": "0.02",
+  "5": "0.08",
+  "10": "0.17",
+  "20": "0.33",
+  "30": "0.50",
+  "40": "0.67",
+  "59": "0.98",
+  "60": "1.00",
+  "61": "1.02",
+  "440": "7.33",
+  "470": "7.83",
+  "525": "8.75",
+  "1439": "23.98",
+  "1155": "19.25",
+  "44609": "743.48"
+ },
+ "maxTotal": 44609,
+ "digests": {
+  "pairs": "dda1d2ef202b92ee29a488081ef8bb5ff8d0f74310dbea0aacb46c72ab030420",
+  "totals": "e88c5686358088a35170b288942e1aa9c6d966556dc145274567fefbb93ff669",
+  "grid": "a1cc0e2fa2f5f11715110ec365d8e9b68a4040d42b6edf0dadb1dfde2fb14e33"
+ }
+}

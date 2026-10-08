@@ -960,6 +960,47 @@ const catalog = [
     },
 
 
+    {
+        id: "hours-calculator",
+        status: "published",
+        loader: () =>
+            import("../tools/hours-calculator/index.js"),
+        sectionId: "time-tools",
+        icon: "Σ",
+        title: "Hours & Timesheet Calculator",
+        description:
+            "Add up the hours you worked across several shifts: enter start and end times and unpaid breaks, including overnight shifts, and see each shift and the total in hours and minutes and in decimal hours. It runs in your browser.",
+        autoRelated: false,
+        relatedTools: [],
+        aliases: [
+            "hours calculator",
+            "hours worked calculator",
+            "work hours calculator",
+            "timesheet calculator",
+            "time card calculator",
+            "shift hours calculator",
+            "overnight hours calculator",
+            "calculate hours worked",
+            "total hours calculator"
+        ],
+        capabilities: {
+            reset: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            multipleInputs: true,
+            realtime: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Hours Worked Calculator: Shifts, Breaks and Total Hours | ToolZen Hub",
+            description:
+                "Free hours worked calculator: enter start and end times for each shift, take off unpaid breaks, including overnight shifts, and see each shift and the total in hours and minutes and in decimal hours. It runs in your browser."
+        }
+    },
+
+
     /* =====================================================
        DEVELOPER TOOLS
     ===================================================== */

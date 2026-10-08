@@ -38,7 +38,7 @@ main#app
             div.category-card__icon.category-card__icon--time-tools "📅"
             div.category-card__content
               h3 "Time Tools"
-              p "Date tools, timers and a time zone converter"
+              p "Date tools, timers, a time zone converter and an hours calculator"
           a.category-card [href="{ROOT}developer-tools.html"]
             div.category-card__icon.category-card__icon--developer-tools "{ }"
             div.category-card__content

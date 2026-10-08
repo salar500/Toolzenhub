@@ -94,7 +94,7 @@ section.categories-page.directory-page
           h2#directory-time-tools-heading.directory-section__title
             a [href="{ROOT}time-tools.html"] "Time Tools"
           p.directory-section__text "Practical date and time utilities."
-            span.directory-section__count "5 tools"
+            span.directory-section__count "6 tools"
         div.directory-groups
           article.directory-group
             h3.directory-group__title
@@ -116,6 +116,10 @@ section.categories-page.directory-page
             h3.directory-group__title
               a [href="{ROOT}tools/time-zone-converter/"] "Time Zone Converter"
             p.directory-group__text "Convert a date and time from one time zone to others, with daylight-saving gaps and repeat…"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/hours-calculator/"] "Hours & Timesheet Calculator"
+            p.directory-group__text "Add up the hours you worked across several shifts: enter start and end times and unpaid br…"
       section.directory-section [aria-labelledby="directory-developer-tools-heading"]
         div.directory-section__header
           span.directory-section__label "Section"

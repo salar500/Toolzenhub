@@ -873,7 +873,7 @@ test.describe("Image Tools in the site", () => {
   test("All Tools lists Image Tools as a fourth section with one tool, from the metadata; the other sections keep their counts", async ({ page, go }) => {
     await go("tools.html");
     await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools"]);
-    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, "5 tools", "4 tools", "1 tool"]);
+    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, "6 tools", "4 tools", "1 tool"]);
     const image = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Image Tools")') });
     await expect(image.locator('a[href$="tools/image-compressor-resizer/"]')).toHaveCount(1);
     for (const section of ["Calculators", "Time Tools", "Developer Tools"]) {
@@ -934,7 +934,7 @@ test.describe("Image Tools in the site", () => {
     await expect(page.locator("h1")).toHaveText("Calculator Categories");
     await go("time-tools.html");
     await expect(page.locator("h1")).toHaveText("Time Tools");
-    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(5);
+    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(6);
     await go("developer-tools.html");
     await expect(page.locator("h1")).toHaveText("Developer Tools");
     await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(4);

@@ -393,13 +393,13 @@
     "deadFragments": []
   },
   "time-tools.html": {
-    "internal": 29,
+    "internal": 30,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 56,
+    "internal": 57,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -417,6 +417,12 @@
     "deadFragments": []
   },
   "tools/date-difference/": {
+    "internal": 24,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/hours-calculator/": {
     "internal": 24,
     "external": [],
     "placeholders": 4,

@@ -1,0 +1,595 @@
+/* =========================================================
+   ToolZen Hub
+   Hours & Timesheet Calculator
+
+   Only what the shared tool styles do not already provide: the
+   shift cards, their status and message lines, the result lines
+   and the total card. Buttons, focus and headings come from the
+   shared layer. Loaded after calculator-responsive.css.
+
+   Every row says what it is in words (Counted, Incomplete,
+   Invalid) and every problem is a sentence under the row, never
+   colour alone. The total says how many rows it includes and how
+   many it leaves out. Nothing animates.
+
+   One column on a phone: a shift is a card with Start and End
+   side by side and the break below. From 640px the three fields
+   share a line; from 900px the shifts and the total sit in two
+   columns.
+========================================================= */
+
+.hc-workspace [hidden] {
+
+    display: none !important;
+
+}
+
+.hc-workspace {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+
+    min-width: 0;
+
+}
+
+.hc-limits {
+
+    margin: 0;
+    padding: 12px 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 10px;
+
+    background: #f9fafb;
+
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+
+}
+
+.hc-heading {
+
+    margin: 0;
+
+    font-size: 20px;
+
+}
+
+.hc-rows {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+
+    min-width: 0;
+
+}
+
+/* one shift */
+
+.hc-row {
+
+    min-width: 0;
+    padding: 14px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+
+    background: #ffffff;
+
+}
+
+.hc-row[data-state="valid"] {
+
+    border-color: #079455;
+
+}
+
+.hc-row[data-state="invalid"] {
+
+    border-color: #b42318;
+    border-width: 2px;
+    padding: 13px;
+
+}
+
+.hc-row__head {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 10px;
+
+    margin-bottom: 12px;
+
+}
+
+.hc-row__title {
+
+    margin: 0;
+
+    font-size: 16px;
+
+}
+
+.hc-row__status {
+
+    padding: 2px 10px;
+
+    border-radius: 999px;
+
+    background: #f2f4f7;
+
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 700;
+
+}
+
+.hc-row[data-state="valid"] .hc-row__status {
+
+    background: #ecfdf3;
+
+    color: #05603a;
+
+}
+
+.hc-row[data-state="invalid"] .hc-row__status {
+
+    background: #fef3f2;
+
+    color: #912018;
+
+}
+
+.hc-remove {
+
+    width: auto;
+    min-width: 0;
+    min-height: 44px;
+    margin-left: auto;
+    padding: 0 18px;
+
+    font-size: 15px;
+
+}
+
+.hc-fields {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+
+}
+
+.hc-field {
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    min-width: 0;
+
+}
+
+.hc-field--break {
+
+    grid-column: 1 / -1;
+
+}
+
+.hc-label {
+
+    color: var(--color-ink);
+
+    font-size: 14px;
+    font-weight: 600;
+
+}
+
+.hc-input {
+
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+
+    padding: 8px 12px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 16px;
+    font-variant-numeric: tabular-nums;
+
+}
+
+.hc-input:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.hc-input[aria-invalid="true"] {
+
+    border-color: #b42318;
+    border-width: 2px;
+    padding: 7px 11px;
+
+}
+
+/* the sentence under a row: a hint (incomplete) or a problem (invalid) */
+
+.hc-row__message {
+
+    margin: 10px 0 0;
+    padding: 8px 12px;
+
+    border-left: 4px solid #98a2b3;
+    border-radius: 6px;
+
+    background: #f9fafb;
+
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+
+}
+
+.hc-row[data-state="invalid"] .hc-row__message {
+
+    border-left-color: #b42318;
+
+    background: #fef3f2;
+
+    color: #912018;
+
+    font-weight: 600;
+
+}
+
+/* the row's result: three labelled times and the decimal */
+
+.hc-result {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 12px;
+
+    margin: 12px 0 0;
+    padding-top: 12px;
+
+    border-top: 1px solid var(--color-slate-200);
+
+}
+
+.hc-result__item {
+
+    min-width: 0;
+
+}
+
+.hc-result__item dt {
+
+    color: #475467;
+
+    font-size: 13px;
+
+}
+
+.hc-result__item dd {
+
+    margin: 2px 0 0;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-variant-numeric: tabular-nums;
+
+}
+
+.hc-result__item:nth-child(3) dd {
+
+    font-size: 18px;
+    font-weight: 700;
+
+}
+
+.hc-row__tag {
+
+    display: inline-block;
+
+    margin: 10px 0 0;
+    padding: 2px 10px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 999px;
+
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 600;
+
+}
+
+/* buttons: Add shift is the main action */
+
+.hc-actions {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+
+}
+
+.hc-button {
+
+    min-width: 0;
+    min-height: 48px;
+
+    font-size: 16px;
+
+}
+
+#hc-add {
+
+    grid-column: 1 / -1;
+
+}
+
+.hc-limit-note {
+
+    grid-column: 1 / -1;
+
+    margin: 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    text-align: center;
+
+}
+
+/* the total */
+
+.hc-total {
+
+    min-width: 0;
+    padding: 16px;
+
+    border: 2px solid #087f47;
+    border-radius: 14px;
+
+    background: #ffffff;
+
+}
+
+.hc-total h2 {
+
+    margin: 0 0 10px;
+
+    font-size: 18px;
+
+}
+
+.hc-total__empty {
+
+    margin: 0;
+
+    color: #475467;
+
+    font-size: 15px;
+    line-height: 1.55;
+
+}
+
+.hc-total__main {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 10px;
+
+    margin: 0 0 4px;
+
+}
+
+.hc-total__hm {
+
+    color: var(--color-ink);
+
+    font-size: 36px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.15;
+
+}
+
+.hc-total__unit {
+
+    color: #475467;
+
+    font-size: 15px;
+
+}
+
+.hc-total__list,
+.hc-counts {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 12px;
+
+    margin: 12px 0 0;
+
+}
+
+.hc-total__item {
+
+    min-width: 0;
+
+}
+
+.hc-total__item dt {
+
+    color: #475467;
+
+    font-size: 13px;
+
+}
+
+.hc-total__item dd {
+
+    margin: 2px 0 0;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+
+}
+
+.hc-counts {
+
+    padding-top: 12px;
+
+    border-top: 1px solid var(--color-slate-200);
+
+}
+
+.hc-excluded-note {
+
+    margin: 12px 0 0;
+    padding: 10px 12px;
+
+    border: 1px solid #fedf89;
+    border-left-width: 6px;
+    border-radius: 10px;
+
+    background: #fffcf5;
+
+    color: #4e3a05;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+
+}
+
+.hc-total__fine {
+
+    margin: 12px 0 0;
+
+    color: #475467;
+
+    font-size: 13px;
+    line-height: 1.55;
+
+}
+
+.hc-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+/* wider screens */
+
+@media (min-width: 640px) {
+
+    .hc-fields {
+
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    }
+
+    .hc-field--break {
+
+        grid-column: auto;
+
+    }
+
+    .hc-result {
+
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    }
+
+    .hc-actions {
+
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+
+    }
+
+    #hc-add {
+
+        grid-column: auto;
+
+    }
+
+}
+
+@media (min-width: 900px) {
+
+    .hc-workspace {
+
+        grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+        align-items: start;
+
+    }
+
+    .hc-limits,
+    .hc-heading,
+    .hc-actions,
+    .hc-rows {
+
+        grid-column: 1;
+
+    }
+
+    .hc-total {
+
+        grid-column: 2;
+        grid-row: 1 / span 4;
+
+        position: sticky;
+        top: 16px;
+
+    }
+
+}

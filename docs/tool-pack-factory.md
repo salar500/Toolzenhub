@@ -213,6 +213,21 @@ break-even that Margin left out (a second Business tool, chosen over CAGR and th
 before the four live Loans tools, chosen over ROI, CAGR and the lender-rule-bound Loan Eligibility; its spec is `docs/tool-packs/06-home-loan.md`
 (draft). Do not start a pack without an approved spec.
 
-**Candidate status (not a schedule).** Photos to PDF is the recommended next *feasibility-audit* candidate, subject to comparison with
-other candidates under the weighted criteria in `docs/product-decision-rules.md` section 12. It is not approved for
-development and not implemented; the audit comes first, then implementation approval.
+### Roadmap R1 (provisional; a planning record, not an authorization)
+
+Chosen under `docs/product-decision-rules.md` section 12 from a platform-wide candidate review (24 tools were published when it was made). The scores behind it are judgement: search, retention and competition were **hypotheses**, not data. It is bounded and revisable, and **it does not authorize implementing any of the eight tools**: each needs its own approval (a specification, or a feasibility audit first where marked) and its own risk-based automated verification. The order is a proposal and changes when audit findings justify it.
+
+| # | Candidate | Section | Status |
+| --- | --- | --- | --- |
+| 1 | Hours & Timesheet Calculator | Time Tools | High confidence. Implemented as Tool Pack 23 (`docs/tool-packs/23-hours-calculator.md`); Android and Safari checks wait for the milestone |
+| 2 | Credit Card Payoff Calculator | Calculators, Loans | High confidence. Candidate only |
+| 3 | Cron Expression Explainer | Developer Tools | High confidence. Candidate only (dialect decisions needed in its spec) |
+| 4 | PPF Calculator | Calculators, Investment | High confidence. Candidate only (the interest rate stays user-entered; it changes) |
+| 5 | Base64 Encoder/Decoder | Developer Tools | High confidence. Candidate only (a commodity: least differentiated) |
+| 6 | Salary / CTC to In-Hand | Calculators, Tax | Feasibility-dependent: audit first (rule-bound, upkeep) |
+| 7 | Photos to PDF | Image Tools | Feasibility-dependent: audit and a real-phone spike first (see the earlier audit) |
+| 8 | QR Code Generator | Image Tools | Feasibility-dependent: audit first (verifying an encoder) |
+
+Considered and not on the roadmap: the Unit Converter, Currency, Loan Eligibility, Personal Loan, Interest, ROI, RD, Age, Ratio, the Health tools, Regex Tester, Password Generator, Inflation and an EXIF tool (failed a mandatory gate, were variants of an existing tool, or had no fitting section).
+
+**Milestone counting (the roadmap's own).** For this roadmap the manual-testing milestone in section 10, item 13, counts only these eight tools: the 24 tools published before it are excluded from both numerator and denominator. A tool counts as completed when it is implemented, has passed its risk-based automated verification and has no known critical defect; an unfinished, unsafe or unverified implementation does not count. Device and Safari checks are the milestone's own job, not a precondition for counting a tool. Six completed tools of eight is 75%, which satisfies the approximately 70% checkpoint. If audits or product reviews change the scope, the denominator changes with it (the target is the smallest whole number of tools at or above 70% of the current scope). Critical blockers are addressed when found, never held for the milestone. Progress: 1 of 8 complete (Hours & Timesheet Calculator, Tool Pack 23); the checkpoint is 6 of 8, so 5 more tools remain before it.

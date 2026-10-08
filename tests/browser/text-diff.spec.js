@@ -539,7 +539,7 @@ test.describe("Text Diff / Compare in the site", () => {
     await expect(page.locator("main")).not.toContainText("Text Diff");
     await go("time-tools.html");
     await expect(page.locator("main")).not.toContainText(/diff checker|text diff/i);
-    await expect(page.locator("main a[href*='tools/']")).toHaveCount(5);
+    await expect(page.locator("main a[href*='tools/']")).toHaveCount(6);
   });
 
   test("it links the JSON Formatter, and the Unix converter is not related to it", async ({ page, go }) => {

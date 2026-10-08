@@ -361,11 +361,11 @@ test.describe("Developer Tools in the site", () => {
     await expect(dev.locator(".directory-section__count")).toHaveText("4 tools");
     await expect(dev.locator('a[href$="tools/json-formatter/"]')).toHaveCount(1);
     const time = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Time Tools")') });
-    await expect(time.locator(".directory-section__count")).toHaveText("5 tools");
+    await expect(time.locator(".directory-section__count")).toHaveText("6 tools");
     await expect(time.locator('a[href$="tools/json-formatter/"]')).toHaveCount(0);
     await go("time-tools.html");
     await expect(page.locator("main")).not.toContainText(/json/i);
-    await expect(page.locator("main a[href*='tools/']")).toHaveCount(5);
+    await expect(page.locator("main a[href*='tools/']")).toHaveCount(6);
   });
 
   test("Home to the tool by clicking: Home, All Tools, Developer Tools, JSON Formatter & Validator", async ({ page, go, siteRoot }) => {

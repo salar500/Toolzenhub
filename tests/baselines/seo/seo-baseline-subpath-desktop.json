@@ -3947,11 +3947,11 @@
   "/time-tools.html": {
     "runtime": {
       "title": "Time Tools | ToolZen Hub",
-      "description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer, a stopwatch and a time zone converter.",
+      "description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer, a stopwatch, a time zone converter and an hours calculator.",
       "canonical": "https://toolzenhub.in/time-tools.html",
       "robots": null,
       "openGraph": {
-        "og:description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer, a stopwatch and a time zone converter.",
+        "og:description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer, a stopwatch, a time zone converter and an hours calculator.",
         "og:site_name": "ToolZen Hub",
         "og:title": "Time Tools | ToolZen Hub",
         "og:type": "website",
@@ -3959,7 +3959,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer, a stopwatch and a time zone converter.",
+        "twitter:description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer, a stopwatch, a time zone converter and an hours calculator.",
         "twitter:title": "Time Tools | ToolZen Hub"
       },
       "jsonLd": [
@@ -3983,14 +3983,14 @@
     },
     "rawHtml": {
       "title": "Time Tools | ToolZen Hub",
-      "description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer, a stopwatch and a time zone converter.",
+      "description": "Time Tools from ToolZen Hub: date utilities such as the days between two dates, a countdown timer, a stopwatch, a time zone converter and an hours calculator.",
       "canonical": "https://toolzenhub.in/time-tools.html",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1250
+      "visibleTextChars": 1506
     }
   },
   "/tools.html": {
@@ -4039,7 +4039,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3194
+      "visibleTextChars": 3446
     }
   },
   "/tools/countdown-timer/": {
@@ -4187,6 +4187,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 4008
+    }
+  },
+  "/tools/hours-calculator/": {
+    "runtime": {
+      "title": "Hours Worked Calculator: Shifts, Breaks and Total Hours | ToolZen Hub",
+      "description": "Free hours worked calculator: enter start and end times for each shift, take off unpaid breaks, including overnight shifts, and see each shift and the total in hours and minutes and in decimal hours. It runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/hours-calculator/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free hours worked calculator: enter start and end times for each shift, take off unpaid breaks, including overnight shifts, and see each shift and the total in hours and minutes and in decimal hours. It runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Hours Worked Calculator: Shifts, Breaks and Total Hours | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/hours-calculator/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free hours worked calculator: enter start and end times for each shift, take off unpaid breaks, including overnight shifts, and see each shift and the total in hours and minutes and in decimal hours. It runs in your browser.",
+        "twitter:title": "Hours Worked Calculator: Shifts, Breaks and Total Hours | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Hours & Timesheet Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Hours Worked Calculator: Shifts, Breaks and Total Hours | ToolZen Hub",
+      "description": "Free hours worked calculator: enter start and end times for each shift, take off unpaid breaks, including overnight shifts, and see each shift and the total in hours and minutes and in decimal hours. It runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/hours-calculator/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5645
     }
   },
   "/tools/image-compressor-resizer/": {
