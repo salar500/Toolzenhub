@@ -129,19 +129,19 @@ CONTENT
 
 QUALITY
 [ ] update the intentional pinned expectations (section 7) and add the new tool's tests
-[ ] focused tests, then the regression gate (section 8), sequentially
+[ ] focused, risk-based tests (rulebook section 10); the section 8 gate only at a checkpoint or for broad shared risk
 [ ] visual: review each changed baseline by eye before updating; update only affected pages
 [ ] builds: both targets clean; links, assets, SEO checks; fingerprint explained
 [ ] diff review of every changed line; no debug code, temp files or unrelated changes
-[ ] one local commit; do not push
+[ ] one coherent commit; normal push only when the phase instructs (rulebook section 11)
 ```
 
 ## 6. Commit gate
 
 `git status` and `git diff --stat` reviewed; every changed line belongs to the pack; test-results and
-`tests/.tmp` removed; the last full regression ran on this exact tree; one commit; no push. After the commit,
-an exact-tree verification run on the committed tree (unit, static, three browser projects one at a time with
-`--workers=1`, visual, both builds) is the checkpoint.
+`tests/.tmp` removed; the focused, risk-based checks for this change passed on this exact tree; one commit. A full
+exact-tree run (unit, static, three browser projects one at a time with `--workers=1`, visual, both builds) is a
+checkpoint for milestones and broad shared-risk changes (rulebook section 10, items 11 and 12), not for every pack.
 
 ## 7. Publishing touch-list (what changes when a tool goes live)
 
@@ -164,7 +164,8 @@ From Tool Pack 1. Everything here is a reviewed, intentional edit; none is autom
 
 ## 8. Regression gate (memory-safe)
 
-Run sequentially; one Playwright project at a time with one worker, output to files:
+This is the full gate. Run it only at a deliberate checkpoint or for a broad shared-risk change, not after every pack
+(rulebook section 10). When it is run: sequentially; one Playwright project at a time with one worker, output to files:
 
 ```
 npm run build:all

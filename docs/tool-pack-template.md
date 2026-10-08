@@ -188,7 +188,7 @@ Run `npm run dev` and check in a browser, on desktop and a phone-width window:
 
 Review `git status`, `git diff --stat` and every changed line; confirm nothing outside the pack
 changed (formulas of other tools, other tools' behaviour, taxonomy, `SITE.origin`, workflow,
-dependencies). One commit, one message describing the pack. Do not push from the pack.
+dependencies). One commit, one message describing the pack. Push only when the phase instructs (rulebook section 11).
 
 ## Pack definition of done
 
