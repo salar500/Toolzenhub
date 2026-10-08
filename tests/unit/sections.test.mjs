@@ -53,7 +53,7 @@ describe("section model", () => {
     assert.equal(dev.landing, "developerTools");
     assert.equal(dev.pathPrefix, "tools");
     assert.deepEqual(tax.getCategoriesBySection("developer-tools"), []); // no categories and no subcategory layer yet
-    assert.deepEqual(tax.getToolsBySection("developer-tools").map((t) => t.id), ["json-formatter", "unix-timestamp-converter", "text-diff"]);
+    assert.deepEqual(tax.getToolsBySection("developer-tools").map((t) => t.id), ["json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder"]);
     const image = tax.getSectionById("image-tools");
     assert.equal(image.title, "Image Tools");
     assert.equal(image.landing, "imageTools");
@@ -188,7 +188,7 @@ describe("routing: every registered tool keeps its URL", () => {
   });
 
   test("the calculator loader registry is unchanged: loaders only for the published tools, still lazy", () => {
-    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "countdown-timer", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "image-compressor-resizer", "income-tax", "json-formatter", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip", "stopwatch", "swp", "text-diff", "time-zone-converter", "unix-timestamp-converter"]);
+    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "countdown-timer", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "image-compressor-resizer", "income-tax", "json-formatter", "jwt-decoder", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip", "stopwatch", "swp", "text-diff", "time-zone-converter", "unix-timestamp-converter"]);
     for (const loader of Object.values(registry.calculatorRegistry)) assert.equal(typeof loader, "function");
     assert.deepEqual(registry.calculatorMetadata.emi, { section: "Calculators", category: "loans", title: "EMI Calculator" });
     assert.deepEqual(registry.calculatorMetadata["income-tax"], { section: "Calculators", category: "tax", title: "Old vs New Tax Regime Calculator" });
@@ -199,6 +199,7 @@ describe("routing: every registered tool keeps its URL", () => {
     assert.deepEqual(registry.calculatorMetadata["json-formatter"], { section: "Developer Tools", title: "JSON Formatter & Validator" });
     assert.deepEqual(registry.calculatorMetadata["unix-timestamp-converter"], { section: "Developer Tools", title: "Unix Timestamp Converter" });
     assert.deepEqual(registry.calculatorMetadata["text-diff"], { section: "Developer Tools", title: "Text Diff / Compare" });
+    assert.deepEqual(registry.calculatorMetadata["jwt-decoder"], { section: "Developer Tools", title: "JWT Decoder" });
     assert.deepEqual(registry.calculatorMetadata["time-zone-converter"], { section: "Time Tools", title: "Time Zone Converter" });
     assert.deepEqual(registry.calculatorMetadata["image-compressor-resizer"], { section: "Image Tools", title: "Image Compressor & Resizer" });
   });

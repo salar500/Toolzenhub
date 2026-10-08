@@ -1,0 +1,100 @@
+{
+ "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlLmludmFsaWQiLCJzdWIiOiJleGFtcGxlLXVzZXItMDAxIiwiYXVkIjoiZXhhbXBsZS1hcHAiLCJuYW1lIjoiQWRhIEV4YW1wbGUiLCJpYXQiOjE3MDAwMDAwMDAsIm5iZiI6MTcwMDAwMDAwMCwiZXhwIjoxNzAwMDAzNjAwLCJqdGkiOiJleGFtcGxlLTAwMDEifQ.ZXhhbXBsZS1zaWduYXR1cmUtbm90LXJlYWwtMDAwMDAwMA",
+ "exampleHeader": "{\n  \"alg\": \"HS256\",\n  \"typ\": \"JWT\"\n}",
+ "examplePayload": "{\n  \"iss\": \"https://issuer.example.invalid\",\n  \"sub\": \"example-user-001\",\n  \"aud\": \"example-app\",\n  \"name\": \"Ada Example\",\n  \"iat\": 1700000000,\n  \"nbf\": 1700000000,\n  \"exp\": 1700003600,\n  \"jti\": \"example-0001\"\n}",
+ "padding": [
+  {
+   "payload": "{\"a\":\"xxxxx\"}",
+   "unpadded": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhIjoieHh4eHgifQ.ZXhhbXBsZS1zaWduYXR1cmUtbm90LXJlYWwtMDAwMDAwMA",
+   "padded": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhIjoieHh4eHgifQ==.ZXhhbXBsZS1zaWduYXR1cmUtbm90LXJlYWwtMDAwMDAwMA==",
+   "pretty": "{\n  \"a\": \"xxxxx\"\n}"
+  },
+  {
+   "payload": "{\"a\":\"xxxx\"}",
+   "unpadded": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhIjoieHh4eCJ9.ZXhhbXBsZS1zaWduYXR1cmUtbm90LXJlYWwtMDAwMDAwMA",
+   "padded": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhIjoieHh4eCJ9.ZXhhbXBsZS1zaWduYXR1cmUtbm90LXJlYWwtMDAwMDAwMA==",
+   "pretty": "{\n  \"a\": \"xxxx\"\n}"
+  },
+  {
+   "payload": "{\"a\":\"xxx\"}",
+   "unpadded": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhIjoieHh4In0.ZXhhbXBsZS1zaWduYXR1cmUtbm90LXJlYWwtMDAwMDAwMA",
+   "padded": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhIjoieHh4In0=.ZXhhbXBsZS1zaWduYXR1cmUtbm90LXJlYWwtMDAwMDAwMA==",
+   "pretty": "{\n  \"a\": \"xxx\"\n}"
+  }
+ ],
+ "unicode": [
+  {
+   "payload": "{\"name\":\"Ren\u00e9e\",\"city\":\"\u6771\u4eac\",\"mood\":\"\ud83d\ude00\"}",
+   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmVuw6llIiwiY2l0eSI6IuadseS6rCIsIm1vb2QiOiLwn5iAIn0.ZXhhbXBsZS1zaWduYXR1cmUtbm90LXJlYWwtMDAwMDAwMA",
+   "pretty": "{\n  \"name\": \"Ren\u00e9e\",\n  \"city\": \"\u6771\u4eac\",\n  \"mood\": \"\ud83d\ude00\"\n}"
+  },
+  {
+   "payload": "{\"name\":\"Ren\\u00e9e\",\"city\":\"\\u6771\\u4eac\",\"mood\":\"\\ud83d\\ude00\"}",
+   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiUmVuXHUwMGU5ZSIsImNpdHkiOiJcdTY3NzFcdTRlYWMiLCJtb29kIjoiXHVkODNkXHVkZTAwIn0.ZXhhbXBsZS1zaWduYXR1cmUtbm90LXJlYWwtMDAwMDAwMA",
+   "pretty": "{\n  \"name\": \"Ren\u00e9e\",\n  \"city\": \"\u6771\u4eac\",\n  \"mood\": \"\ud83d\ude00\"\n}"
+  }
+ ],
+ "unsigned": {
+  "token": "eyJhbGciOiJub25lIn0.eyJzdWIiOiJ4In0."
+ },
+ "times": [
+  {
+   "seconds": 0,
+   "utc": "1970-01-01T00:00:00Z",
+   "kolkata": "1970-01-01 05:30:00",
+   "newYorkWinter": "1969-12-31 19:00:00"
+  },
+  {
+   "seconds": 1,
+   "utc": "1970-01-01T00:00:01Z",
+   "kolkata": "1970-01-01 05:30:01",
+   "newYorkWinter": "1969-12-31 19:00:01"
+  },
+  {
+   "seconds": -1,
+   "utc": "1969-12-31T23:59:59Z",
+   "kolkata": "1970-01-01 05:29:59",
+   "newYorkWinter": "1969-12-31 18:59:59"
+  },
+  {
+   "seconds": 1700000000,
+   "utc": "2023-11-14T22:13:20Z",
+   "kolkata": "2023-11-15 03:43:20",
+   "newYorkWinter": "2023-11-14 17:13:20"
+  },
+  {
+   "seconds": 1700003600,
+   "utc": "2023-11-14T23:13:20Z",
+   "kolkata": "2023-11-15 04:43:20",
+   "newYorkWinter": "2023-11-14 18:13:20"
+  },
+  {
+   "seconds": 951782400,
+   "utc": "2000-02-29T00:00:00Z",
+   "kolkata": "2000-02-29 05:30:00",
+   "newYorkWinter": "2000-02-28 19:00:00"
+  },
+  {
+   "seconds": 253402300799,
+   "utc": "9999-12-31T23:59:59Z",
+   "kolkata": null,
+   "newYorkWinter": "9999-12-31 18:59:59"
+  },
+  {
+   "seconds": 1700000000.5,
+   "utc": "2023-11-14T22:13:20.5Z",
+   "kolkata": "2023-11-15 03:43:20",
+   "newYorkWinter": "2023-11-14 17:13:20"
+  }
+ ],
+ "newYork": {
+  "winter": {
+   "seconds": 1700000000,
+   "local": "2023-11-14 17:13:20"
+  },
+  "summer": {
+   "seconds": 1720000000,
+   "local": "2024-07-03 05:46:40"
+  }
+ }
+}

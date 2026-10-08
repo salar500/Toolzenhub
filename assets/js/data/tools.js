@@ -1085,6 +1085,45 @@ const catalog = [
     },
 
     {
+        id: "jwt-decoder",
+        status: "published",
+        loader: () =>
+            import("../tools/jwt-decoder/index.js"),
+        sectionId: "developer-tools",
+        icon: "JWT",
+        title: "JWT Decoder",
+        description:
+            "Read the header and payload of a JSON Web Token, see its claims explained and its times as dates. It does not check the signature. It runs in your browser.",
+        autoRelated: false,
+        relatedTools: ["json-formatter", "unix-timestamp-converter"],
+        aliases: [
+            "jwt decoder",
+            "decode jwt",
+            "jwt parser",
+            "jwt viewer",
+            "jwt payload viewer",
+            "jwt claims",
+            "jwt expiry",
+            "json web token decoder",
+            "jwt exp"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "JWT Decoder: Read a Token's Header and Claims | ToolZen Hub",
+            description:
+                "Free JWT decoder: paste a token to read its header and payload, see exp, nbf and iat as dates and compare them with your device clock. It does not verify the signature. It runs in your browser: your token is not uploaded."
+        }
+    },
+
+    {
         id: "image-compressor-resizer",
         status: "published",
         loader: () =>

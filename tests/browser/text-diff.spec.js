@@ -483,17 +483,17 @@ test.describe("Text Diff / Compare in the site", () => {
   test("Developer Tools lists it as the third tool, flat, with no future placeholders", async ({ page, go }) => {
     await go("developer-tools.html");
     await expect(page.locator(`a[href$="tools/text-diff/"]`)).toHaveCount(1);
-    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(3);
+    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(4);
     await expect(page.locator("main")).not.toContainText(/coming soon|base64|uuid|regex/i);
     await expect(page.locator("main")).toContainText("Text Diff / Compare");
     expect(await page.locator("h2, h3").allInnerTexts()).not.toContain("Subcategories");
   });
 
-  test("All Tools: Developer Tools has 3 tools; Time Tools and Calculators do not list it", async ({ page, go }) => {
+  test("All Tools: Developer Tools has 4 tools; Time Tools and Calculators do not list it", async ({ page, go }) => {
     await go("tools.html");
     await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools"]);
     const dev = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Developer Tools")') });
-    await expect(dev.locator(".directory-section__count")).toHaveText("3 tools");
+    await expect(dev.locator(".directory-section__count")).toHaveText("4 tools");
     await expect(dev.locator('a[href$="tools/text-diff/"]')).toHaveCount(1);
     for (const section of ["Calculators", "Time Tools"]) {
       const other = page.locator(".directory-section", { has: page.locator(`.directory-section__title a:text-is("${section}")`) });

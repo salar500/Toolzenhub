@@ -333,7 +333,7 @@
     "deadFragments": []
   },
   "developer-tools.html": {
-    "internal": 27,
+    "internal": 28,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -399,7 +399,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 55,
+    "internal": 56,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -430,6 +430,12 @@
   },
   "tools/json-formatter/": {
     "internal": 24,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/jwt-decoder/": {
+    "internal": 25,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

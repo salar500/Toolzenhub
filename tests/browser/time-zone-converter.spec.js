@@ -564,13 +564,13 @@ test.describe("Time Zone Converter in the site", () => {
     await expect(page.locator("main")).not.toContainText(/time zone converter/i);
   });
 
-  test("All Tools: Time Tools has 5 tools and Developer Tools still has 3", async ({ page, go }) => {
+  test("All Tools: Time Tools has 5 tools and Developer Tools still has 4", async ({ page, go }) => {
     await go("tools.html");
     const time = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Time Tools")') });
     await expect(time.locator(".directory-section__count")).toHaveText("5 tools");
     await expect(time.locator('a[href$="tools/time-zone-converter/"]')).toHaveCount(1);
     const dev = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Developer Tools")') });
-    await expect(dev.locator(".directory-section__count")).toHaveText("3 tools");
+    await expect(dev.locator(".directory-section__count")).toHaveText("4 tools");
     await expect(dev.locator('a[href$="tools/time-zone-converter/"]')).toHaveCount(0);
   });
 

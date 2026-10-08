@@ -435,7 +435,7 @@ test.describe("Percentage publication", () => {
     await expect(page.locator("#calculators-grid .calculator-card:has-text('Percentage Calculator')")).toHaveCount(1);
     await expect(page.locator("#calculators-grid .calculator-card--soon:has-text('Ratio Calculator')")).toHaveCount(1);
     await expect(page.locator("#calculators-grid .calculator-card--soon:has-text('Age Calculator')")).toHaveCount(1);
-    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(13);
+    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(12); // the catalog now has 12 Coming Soon calculators (this said 13 when it was written)
   });
 
   test("the three articles are listed under Math with no image block, and their pages render without a hero image", async ({ page, go, siteRoot }) => {

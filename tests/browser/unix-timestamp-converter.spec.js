@@ -492,20 +492,20 @@ test.describe("Unix Timestamp Converter", () => {
 });
 
 test.describe("Developer Tools in the site", () => {
-  test("the section page lists exactly the two real tools", async ({ page, go }) => {
+  test("the section page lists the real tools", async ({ page, go }) => {
     await go("developer-tools.html");
     await expect(page.locator("h1")).toHaveText("Developer Tools");
-    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(3);
+    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(4);
     for (const slug of ["json-formatter", "unix-timestamp-converter"]) await expect(page.locator(`a[href$="tools/${slug}/"]`)).toHaveCount(1);
     await expect(page.locator("main")).not.toContainText(/coming soon|base64|uuid|regex/i);
     expect(await page.locator('link[rel="canonical"]').getAttribute("href")).toBe("https://toolzenhub.in/developer-tools.html");
   });
 
-  test("All Tools: Developer Tools has 2 tools; Time Tools is unchanged and holds no developer tool", async ({ page, go }) => {
+  test("All Tools: Developer Tools has 4 tools; Time Tools is unchanged and holds no developer tool", async ({ page, go }) => {
     await go("tools.html");
     await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools"]);
     const dev = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Developer Tools")') });
-    await expect(dev.locator(".directory-section__count")).toHaveText("3 tools");
+    await expect(dev.locator(".directory-section__count")).toHaveText("4 tools");
     await expect(dev.locator('a[href$="tools/unix-timestamp-converter/"]')).toHaveCount(1);
     const time = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Time Tools")') });
     await expect(time.locator(".directory-section__count")).toHaveText("5 tools");

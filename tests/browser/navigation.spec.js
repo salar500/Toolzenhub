@@ -205,12 +205,13 @@ test.describe("categories page", () => {
 });
 
 test.describe("calculators and loans listings", () => {
-  test("calculators page: 25 entries (13 built), search, empty state, deep link", async ({ page, go }) => {
+  test("calculators page: 26 entries (14 built), search, empty state, deep link", async ({ page, go }) => {
     await go("calculators.html");
     const cards = page.locator("#calculators-grid .calculator-card");
-    await expect(cards).toHaveCount(25);
-    await expect(page.locator("#calculators-results-count")).toHaveText("25 calculators");
-    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(13);
+    // 14 published calculators (the SWP Calculator is the 14th) and 12 Coming Soon entries; the Time, Developer and Image tools are not calculators and are never listed here
+    await expect(cards).toHaveCount(26);
+    await expect(page.locator("#calculators-results-count")).toHaveText("26 calculators");
+    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(14);
     await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(12);
 
     const input = page.locator("#calculators-search-input");
@@ -220,7 +221,7 @@ test.describe("calculators and loans listings", () => {
     await input.fill("zzzz-nothing");
     await expect(page.locator("#calculators-empty")).toBeVisible();
     await input.fill("");
-    await expect(cards).toHaveCount(25);
+    await expect(cards).toHaveCount(26);
 
     await go("calculators.html?q=emi");
     await expect(input).toHaveValue("emi");
@@ -428,7 +429,7 @@ test.describe("M7 shared search: page experiences keep their UX and rank results
     await input.fill("zzzz-nothing");
     await expect(page.locator("#calculators-empty")).toBeVisible();
     await input.fill("");
-    await expect(page.locator("#calculators-grid .calculator-card")).toHaveCount(25);
+    await expect(page.locator("#calculators-grid .calculator-card")).toHaveCount(26);
   });
 
   test("Loans page: only Loans tools, ranked; a tool id still matches", async ({ page, go }) => {
@@ -489,7 +490,7 @@ test.describe("All Tools and the calculator hierarchy", () => {
     const live = await page.locator(".directory-group a").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
     for (const r of ["loans.html", "investment.html", "tax.html", "business.html", "math.html", "calculators/emi/", "calculators/sip/", "calculators/fd/", "calculators/cagr/", "calculators/margin/", "calculators/profit/", "calculators/gst/", "calculators/percentage/", "calculators/income-tax/"]) expect(live).toContain(siteRoot + r);
     for (const bad of ["categories.html#health", "categories.html#converter", "calculators/ppf/", "calculators/roi/"]) expect(live.some((h) => h.includes(bad)), bad).toBe(false);
-    await expect(page.locator(".directory-group")).toHaveCount(14); // the five live calculator categories, the five Time Tools tools, the three Developer Tools tools and the one Image Tools tool
+    await expect(page.locator(".directory-group")).toHaveCount(15); // the five live calculator categories, the five Time Tools tools, the four Developer Tools tools and the one Image Tools tool
     await expect(page.locator(".directory-soon__list li")).toHaveText([/Health\s*Coming soon/, /Converter\s*Coming soon/]);
     await expect(page.locator(".directory-soon .coming-soon-badge")).toHaveCount(2);
     await expect(page.locator(".directory-soon a")).toHaveCount(0);
@@ -575,7 +576,7 @@ test.describe("All Tools and the calculator hierarchy", () => {
   test("the three destinations have different jobs: All Tools (platform), Calculator Categories (the section) and All Calculators (the flat list)", async ({ page, go }) => {
     await go("tools.html");
     await expect(page.locator(".directory-section__label")).toHaveText(["Section", "Section", "Section", "Section"]);
-    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, /^5 tools$/, /^3 tools$/, /^1 tool$/]);
+    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, /^5 tools$/, /^4 tools$/, /^1 tool$/]);
     await go("categories.html");
     await expect(page.locator("h1")).toHaveText("Calculator Categories");
     await expect(page.locator(".categories-search__content p")).toHaveText("Search calculators"); // this search is scoped to calculators, and says so

@@ -3542,11 +3542,11 @@
   "/developer-tools.html": {
     "runtime": {
       "title": "Developer Tools | ToolZen Hub",
-      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter and a text diff checker that run in your browser.",
+      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker and a JWT decoder that run in your browser.",
       "canonical": "https://toolzenhub.in/developer-tools.html",
       "robots": null,
       "openGraph": {
-        "og:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter and a text diff checker that run in your browser.",
+        "og:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker and a JWT decoder that run in your browser.",
         "og:site_name": "ToolZen Hub",
         "og:title": "Developer Tools | ToolZen Hub",
         "og:type": "website",
@@ -3554,7 +3554,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter and a text diff checker that run in your browser.",
+        "twitter:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker and a JWT decoder that run in your browser.",
         "twitter:title": "Developer Tools | ToolZen Hub"
       },
       "jsonLd": [
@@ -3578,14 +3578,14 @@
     },
     "rawHtml": {
       "title": "Developer Tools | ToolZen Hub",
-      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter and a text diff checker that run in your browser.",
+      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker and a JWT decoder that run in your browser.",
       "canonical": "https://toolzenhub.in/developer-tools.html",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1057
+      "visibleTextChars": 1231
     }
   },
   "/disclaimer.html": {
@@ -4039,7 +4039,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3026
+      "visibleTextChars": 3194
     }
   },
   "/tools/countdown-timer/": {
@@ -4285,6 +4285,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 4223
+    }
+  },
+  "/tools/jwt-decoder/": {
+    "runtime": {
+      "title": "JWT Decoder: Read a Token's Header and Claims | ToolZen Hub",
+      "description": "Free JWT decoder: paste a token to read its header and payload, see exp, nbf and iat as dates and compare them with your device clock. It does not verify the signature. It runs in your browser: your token is not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/jwt-decoder/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free JWT decoder: paste a token to read its header and payload, see exp, nbf and iat as dates and compare them with your device clock. It does not verify the signature. It runs in your browser: your token is not uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "JWT Decoder: Read a Token's Header and Claims | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/jwt-decoder/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free JWT decoder: paste a token to read its header and payload, see exp, nbf and iat as dates and compare them with your device clock. It does not verify the signature. It runs in your browser: your token is not uploaded.",
+        "twitter:title": "JWT Decoder: Read a Token's Header and Claims | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "JWT Decoder"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "JWT Decoder: Read a Token&#39;s Header and Claims | ToolZen Hub",
+      "description": "Free JWT decoder: paste a token to read its header and payload, see exp, nbf and iat as dates and compare them with your device clock. It does not verify the signature. It runs in your browser: your token is not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/jwt-decoder/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5320
     }
   },
   "/tools/stopwatch/": {
