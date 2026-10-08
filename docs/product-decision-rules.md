@@ -132,19 +132,37 @@ Choose the format by the user's job. Do not build a calculator for an informatio
 
 After each tool or mini-cluster, rank opportunities **across the whole platform**, not within the category just finished. Candidates include tools, guides, trackers and comparisons, developer utilities, time utilities and other browser-native products. Another tool in the same section is chosen only if it clearly scores higher. How many tools a category or section already has is not a scoring criterion in either direction (rule 1.7).
 
-Score every candidate on:
-- real, recurring user pain;
-- repeat use and retention;
-- relevance in the AI era, and whether it is faster or better than asking an assistant;
-- browser-native advantage, and whether it needs no API or backend;
-- search demand and intent;
-- usefulness on a phone;
-- differentiation from what already exists;
-- maintenance burden;
-- ability to reach a polished, premium-quality experience;
-- natural internal-linking opportunity, without forcing it.
+Score every candidate from 0 to 5 on six dimensions. The weights are decision support, not mathematical truth; they guide the ranking and never replace the gates below or judgment.
 
-Rank the strongest handful, recommend **one**, and explain why it beats the others. Include the question in rule 13.11. Ranking is judgment, not measured demand: do not present scores as data. The recommendation is not implemented until the user selects it as a phase.
+| Dimension | Weight | What it asks |
+| --- | --- | --- |
+| Search demand and discoverability | 25% | Do people search for this job, with what intent, and can the page be found for it? |
+| Repeat use and retention | 25% | Will the same person come back, or is it one-off? |
+| Practical user usefulness | 20% | Does it solve a real, recurring pain well, including in the AI era (rule 1.4) and on a phone? |
+| Differentiation | 10% | Does it do something existing tools, here or elsewhere, do worse or not at all (rule 1.6)? |
+| Implementation and maintenance feasibility | 10% | Can it reach a polished standard at a reasonable, lasting cost? |
+| Trust, privacy and performance | 10% | Is the output reliable, is input kept in the browser, and is it fast and light? |
+
+Two points follow from the list above. Natural internal-linking opportunity is a tiebreaker, never forced. Strong search demand with weak user value does not automatically win, and modest demand with exceptional repeat usefulness may.
+
+**Evidence and uncertainty.**
+1. Each score is written with its reason, and every reason is labelled **verified** (observed this session: a live competitor, the existing catalog, a measured fact, a source consulted) or **hypothesis** (reasoned, not measured).
+2. Never invent search volumes, traffic projections, competition metrics or retention statistics. Without a data source, demand and retention are hypotheses, scored conservatively and said to be so. Scores are judgment, not data.
+3. Do not present a weighted total as a measurement. A candidate whose win depends on a hypothesis is called that, and the audit step below is the place to test it.
+
+**Mandatory gates.** A candidate that fails any gate is rejected or deferred however high it scores:
+- it does not solve a meaningful user problem;
+- it only duplicates an existing tool without a real improvement (rule 1.6);
+- it can give unreliable or misleading output;
+- its maintenance burden is disproportionate;
+- it needs a paid external API, against the browser-local strategy (rule 1.5);
+- it creates an unacceptable privacy or security risk (section 8);
+- it cannot deliver an acceptable mobile experience;
+- it is being added only to raise the tool count (rule 1.2).
+
+**Scope of the comparison.** Consider candidates across every established section, not the one most recently built (rules 1.7 and 12). Where research access exists, look at search intent and likely queries, competing tools and their weaknesses, a better experience, repeat-use scenarios, complexity, mobile-performance risk and upkeep. Compare roughly three to five credible candidates, recommend one, and say why each other was deferred. Include the question in rule 13.11. Articles are optional and need independent explanatory value (`docs/content-clusters.md`).
+
+**Lifecycle.** Candidate selection, then a focused feasibility audit, then implementation approval, then development, risk-based verification (section 10), deployment approval and, later, periodic product review. A selection is a recommendation: it is not implemented until the user selects it as a phase, and the audit does not itself approve development. Commit, push and production boundaries (section 11) are unchanged.
 
 ## 13. Trackers, comparisons and changing-data products
 

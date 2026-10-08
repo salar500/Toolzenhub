@@ -212,3 +212,7 @@ break-even that Margin left out (a second Business tool, chosen over CAGR and th
 `docs/tool-packs/05-profit.md` (built). Tool Pack 6 is the Home Loan Calculator, the loan that fits an EMI budget: the question that comes
 before the four live Loans tools, chosen over ROI, CAGR and the lender-rule-bound Loan Eligibility; its spec is `docs/tool-packs/06-home-loan.md`
 (draft). Do not start a pack without an approved spec.
+
+**Candidate status (not a schedule).** Photos to PDF is the recommended next *feasibility-audit* candidate, subject to comparison with
+other candidates under the weighted criteria in `docs/product-decision-rules.md` section 12. It is not approved for
+development and not implemented; the audit comes first, then implementation approval.
