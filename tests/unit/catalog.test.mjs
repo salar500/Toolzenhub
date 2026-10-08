@@ -26,9 +26,9 @@ before(async () => {
 });
 
 // the published tools of the Calculators section; Date Difference (Time Tools) is a published tool too, but it is not a calculator
-const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "swp", "percentage", "income-tax"];
+const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "swp", "percentage", "income-tax", "credit-card-payoff"];
 const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "time-zone-converter", "hours-calculator", "image-compressor-resizer"];
-const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment"];
+const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"];
 
 describe("catalog model", () => {
   test("tool ids are unique, and every tool recorded in the URL inventory is still in the catalog (same category)", () => {
@@ -76,7 +76,7 @@ describe("catalog model", () => {
     }
   });
 
-  test("Loans category lists the same 8 tools in the same order", () => {
+  test("Loans category lists the same 8 tools in the same order, then the Credit Card Payoff Calculator", () => {
     assert.deepEqual(catalog.getCalculatorsByCategory("loans").map((c) => c.id), LOANS);
   });
 
@@ -125,6 +125,7 @@ describe("registry is derived from the catalog", () => {
       swp: { section: "Calculators", category: "investment", title: "SWP Calculator" },
       percentage: { section: "Calculators", category: "math", title: "Percentage Calculator" },
       "income-tax": { section: "Calculators", category: "tax", title: "Old vs New Tax Regime Calculator" },
+      "credit-card-payoff": { section: "Calculators", category: "loans", title: "Credit Card Payoff Calculator" },
       // a tool directly under a section has no category at all
       "date-difference": { section: "Time Tools", title: "Date Difference Calculator" },
       "date-calculator": { section: "Time Tools", title: "Date Calculator" },
@@ -160,6 +161,6 @@ describe("search labels come from the category list", () => {
     assert.equal(all.filter((c) => c.url).length, catalog.calculators.filter((c) => c.available).length);
     // the same eight matches as before M7; M7 ranks them (title matches first, published before Coming Soon).
     // "Loan Prepayment Calculator" and "Loan Balance Transfer Calculator" begin with "loan", so they rank with the title-prefix matches.
-    assert.deepEqual(search.searchCalculators("loan").map((c) => c.id), ["loan-comparison", "balance-transfer", "prepayment", "loan-eligibility", "home-loan", "personal-loan", "emi", "interest"]);
+    assert.deepEqual(search.searchCalculators("loan").map((c) => c.id), ["loan-comparison", "balance-transfer", "prepayment", "loan-eligibility", "home-loan", "personal-loan", "emi", "credit-card-payoff", "interest"]);
   });
 });

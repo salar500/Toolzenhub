@@ -2819,7 +2819,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6833
+      "visibleTextChars": 7091
     }
   },
   "/calculators/cagr/": {
@@ -2871,6 +2871,55 @@
       "visibleTextChars": 5931
     }
   },
+  "/calculators/credit-card-payoff/": {
+    "runtime": {
+      "title": "Credit Card Payoff Calculator: Months and Interest | ToolZen Hub",
+      "description": "Estimate how many months a fixed monthly payment takes to clear a credit card balance, the interest you would pay, and what a larger payment changes. A simplified estimate, not a card statement. It runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/credit-card-payoff/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Estimate how many months a fixed monthly payment takes to clear a credit card balance, the interest you would pay, and what a larger payment changes. A simplified estimate, not a card statement. It runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Credit Card Payoff Calculator: Months and Interest | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/credit-card-payoff/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Estimate how many months a fixed monthly payment takes to clear a credit card balance, the interest you would pay, and what a larger payment changes. A simplified estimate, not a card statement. It runs in your browser.",
+        "twitter:title": "Credit Card Payoff Calculator: Months and Interest | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Credit Card Payoff Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Credit Card Payoff Calculator: Months and Interest | ToolZen Hub",
+      "description": "Estimate how many months a fixed monthly payment takes to clear a credit card balance, the interest you would pay, and what a larger payment changes. A simplified estimate, not a card statement. It runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/credit-card-payoff/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 7214
+    }
+  },
   "/calculators/emi/": {
     "runtime": {
       "title": "EMI Calculator | ToolZen Hub",
@@ -2917,7 +2966,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3119
+      "visibleTextChars": 3377
     }
   },
   "/calculators/fd/": {
@@ -3064,7 +3113,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5965
+      "visibleTextChars": 6223
     }
   },
   "/calculators/income-tax/": {
@@ -3162,7 +3211,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4311
+      "visibleTextChars": 4569
     }
   },
   "/calculators/margin/": {
@@ -3309,7 +3358,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5843
+      "visibleTextChars": 6101
     }
   },
   "/calculators/profit/": {
@@ -4039,7 +4088,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3446
+      "visibleTextChars": 3476
     }
   },
   "/tools/countdown-timer/": {

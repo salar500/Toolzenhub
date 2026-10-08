@@ -300,6 +300,50 @@ const catalog = [
     },
 
 
+    {
+        id: "credit-card-payoff",
+        status: "published",
+        loader: () =>
+            import("../calculators/credit-card-payoff/index.js"),
+        category: "loans",
+        icon: "◉",
+        title: "Credit Card Payoff Calculator",
+        description:
+            "Estimate how many months a fixed monthly payment takes to clear a credit card balance, the interest you would pay, and what a larger payment changes. It is a simplified estimate, not a card statement. It runs in your browser.",
+        aliases: [
+            "credit card payoff calculator",
+            "credit card repayment calculator",
+            "credit card payoff time",
+            "pay off credit card",
+            "how long to pay off credit card",
+            "credit card debt calculator"
+        ],
+        capabilities: {
+            reset: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            multipleInputs: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Credit Card Payoff Calculator: Months and Interest | ToolZen Hub",
+            description:
+                "Estimate how many months a fixed monthly payment takes to clear a credit card balance, the interest you would pay, and what a larger payment changes. A simplified estimate, not a card statement. It runs in your browser."
+        },
+        relatedTools: [
+            "balance-transfer",
+            "prepayment",
+            "emi"
+        ],
+        relatedArticles: [
+            "loan-comparison/loan-tenure-total-interest",
+            "loan-comparison/emi-vs-total-interest"
+        ]
+    },
+
+
     /* =====================================================
        INVESTMENT
     ===================================================== */

@@ -376,7 +376,8 @@ test.describe("Loan Prepayment Calculator", () => {
   test("related tools and the four curated articles", async ({ page, go, siteRoot }) => {
     await go("calculators/prepayment/");
     const tools = page.locator(".related-calculator-card");
-    await expect(tools).toHaveCount(4); // the curated three, then Home Loan (Tool Pack 6) from the category
+    await expect(tools).toHaveCount(5); // the curated three, then Home Loan (Tool Pack 6) and the Credit Card Payoff Calculator (Tool Pack 24) from the category
+    await expect(tools.nth(4)).toHaveAttribute("href", `${siteRoot}calculators/credit-card-payoff/`);
     await expect(tools.nth(0)).toHaveAttribute("href", `${siteRoot}calculators/emi/`);
     await expect(tools.nth(1)).toHaveAttribute("href", `${siteRoot}calculators/loan-comparison/`);
     await expect(tools.nth(2)).toHaveAttribute("href", `${siteRoot}calculators/balance-transfer/`);

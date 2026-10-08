@@ -135,7 +135,8 @@ test.describe("EMI calculator", () => {
     const calcs = page.locator(".related-calculator-card");
     await expect(page.getByRole("heading", { name: "Related Calculators" })).toBeVisible();
     // Loan Comparison first, then the Home Loan (Tool Pack 6), Loan Balance Transfer (Tool Pack 2) and Loan Prepayment (Tool Pack 1) calculators
-    await expect(calcs).toHaveCount(4);
+    await expect(calcs).toHaveCount(5); // ... and the Credit Card Payoff Calculator (Tool Pack 24), appended by the automatic Loans relationship
+    await expect(calcs.nth(4)).toHaveAttribute("href", `${siteRoot}calculators/credit-card-payoff/`);
     await expect(calcs.first()).toHaveAttribute("href", `${siteRoot}calculators/loan-comparison/`);
     await expect(calcs.first()).toContainText("Loan Comparison Calculator");
     await expect(calcs.nth(1)).toHaveAttribute("href", `${siteRoot}calculators/home-loan/`);

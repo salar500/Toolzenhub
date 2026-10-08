@@ -11,7 +11,7 @@
 import { test, expect, livePages, rel } from "../helpers/test-base.mjs";
 
 const articles = livePages.filter((p) => p.type === "article");
-const NO_IMAGE = new Set(["choose-right-loan-tenure", "why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back", "how-to-find-the-original-price-before-a-percentage-change", "percent-vs-percentage-points"]); // the Percentage articles have no image at all
+const NO_IMAGE = new Set(["choose-right-loan-tenure", "why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back", "how-to-find-the-original-price-before-a-percentage-change", "percent-vs-percentage-points", "what-changes-how-long-a-corpus-lasts"]); // the Percentage articles have no image at all; nor has the second SWP article (the first carries a diagram)
 
 test.describe("generated pages carry their content without JavaScript @portable", () => {
   test.use({ javaScriptEnabled: false });
@@ -24,7 +24,7 @@ test.describe("generated pages carry their content without JavaScript @portable"
       expect(await page.locator(".article-key-takeaways li").count()).toBeGreaterThanOrEqual(3);
       expect(await page.locator(".article-faq details").count()).toBeGreaterThanOrEqual(3);
       expect(await page.locator(".article-toc a").count()).toBeGreaterThanOrEqual(4);
-      await expect(page.locator(".article-related-card")).toHaveCount(/\/(margin|profit|fd|gst|cagr|percentage)\//.test(a.url) ? 2 : /\/(loan-prepayment|balance-transfer|sip|home-loan)\//.test(a.url) ? 3 : 5);
+      await expect(page.locator(".article-related-card")).toHaveCount(/\/(margin|profit|fd|gst|cagr|percentage|swp)\//.test(a.url) ? 2 : /\/(loan-prepayment|balance-transfer|sip|home-loan)\//.test(a.url) ? 3 : 5);
       await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
       await expect(page.locator(".article-calculator-button")).toHaveCount(1);
       await expect(page.locator(".site-header .navbar__link").first()).toBeAttached();
@@ -43,7 +43,7 @@ test.describe("generated pages carry their content without JavaScript @portable"
     await expect(page.locator(".calculator-info")).toHaveCount(3);
     await expect(page.locator(".calculator-info details")).toHaveCount(3);
     await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
-    await expect(page.locator(".related-calculator-card")).toHaveCount(4); // the other four Loans tools, Home Loan among them (Tool Pack 6)
+    await expect(page.locator(".related-calculator-card")).toHaveCount(5); // the other five Loans tools, Home Loan (Tool Pack 6) and the Credit Card Payoff Calculator (Tool Pack 24) among them
     expect(await page.locator(".related-article-card").count()).toBeGreaterThanOrEqual(3);
     await expect(page.locator(".site-header")).toBeAttached();
   });
@@ -66,7 +66,7 @@ test.describe("generated pages carry their content without JavaScript @portable"
     await expect(page.locator("#compare-loans")).toBeAttached();
     await expect(page.locator(".loan-info-grid details").first()).toBeAttached();
     await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
-    await expect(page.locator(".related-calculator-card")).toHaveCount(4); // the other four Loans tools, Home Loan among them (Tool Pack 6)
+    await expect(page.locator(".related-calculator-card")).toHaveCount(5); // the other five Loans tools, Home Loan (Tool Pack 6) and the Credit Card Payoff Calculator (Tool Pack 24) among them
     expect(await page.locator(".related-article-card").count()).toBeGreaterThanOrEqual(3);
   });
 });

@@ -58,7 +58,7 @@ describe("current hierarchy data", () => {
     assert.deepEqual(cats.subcategories, []);
     for (const tool of calcs.calculators) assert.equal(tool.subcategory, undefined, tool.id);
     assert.deepEqual(tax.getDirectTools("loans"), tax.getToolsByCategory("loans"));
-    assert.deepEqual(tax.getToolsByCategory("loans").map((t) => t.id), ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment"]);
+    assert.deepEqual(tax.getToolsByCategory("loans").map((t) => t.id), ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"]);
   });
 
   test("category lookups by id and by title", () => {

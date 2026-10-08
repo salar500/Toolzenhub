@@ -1,0 +1,252 @@
+/* =========================================================
+   ToolZen Hub
+   Credit Card Payoff Calculator
+
+   Only what the shared calculator styles do not already
+   provide: the stale marker, the outcome sentence, the side by
+   side comparison and the always-visible assumptions. Buttons,
+   fields, results cards and focus come from the shared layer.
+   Loaded after calculator-responsive.css.
+
+   The state of a result (pays off, does not reduce the balance,
+   still owed after 50 years) is a sentence, never colour alone.
+   One column on a phone; the two payments sit side by side from
+   700px. Nothing animates.
+========================================================= */
+
+.ccp-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+.ccp-stale {
+
+    margin: 0 0 12px;
+    padding: 10px 14px;
+
+    border: 1px solid #fedf89;
+    border-left-width: 6px;
+    border-radius: 10px;
+
+    background: #fffcf5;
+
+    color: #4e3a05;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+
+}
+
+.ccp-stale[hidden] {
+
+    display: none;
+
+}
+
+/* a result that no longer matches the inputs stays readable, with a dashed outline */
+
+.calculator-results[data-stale="true"] .ccp-result {
+
+    outline: 2px dashed #d0a315;
+    outline-offset: 2px;
+
+}
+
+.ccp-outcome {
+
+    margin: 0 0 14px;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ccp-subtitle {
+
+    margin: 22px 0 10px;
+
+    font-size: 17px;
+
+}
+
+.ccp-compare {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+
+}
+
+.ccp-side {
+
+    min-width: 0;
+    padding: 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 12px;
+
+    background: #ffffff;
+
+}
+
+.ccp-side__title {
+
+    margin: 0 0 10px;
+
+    font-size: 15px;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ccp-side__list {
+
+    display: grid;
+    gap: 8px;
+
+    margin: 0;
+
+}
+
+.ccp-side__item {
+
+    min-width: 0;
+
+}
+
+.ccp-side__item dt {
+
+    color: #475467;
+
+    font-size: 13px;
+
+}
+
+.ccp-side__item dd {
+
+    margin: 2px 0 0;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-variant-numeric: tabular-nums;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ccp-differences {
+
+    margin: 14px 0 0;
+    padding: 10px 14px 10px 32px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 10px;
+
+    background: #f9fafb;
+
+    color: #344054;
+
+    font-size: 15px;
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ccp-assumptions {
+
+    margin: 20px 0 0;
+    padding: 14px 16px;
+
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 12px;
+
+    background: #f9fafb;
+
+}
+
+.ccp-assumptions h2 {
+
+    margin: 0 0 8px;
+
+    font-size: 17px;
+
+}
+
+.ccp-assumptions ul {
+
+    margin: 0;
+    padding-left: 20px;
+
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+}
+
+.ccp-assumptions li + li {
+
+    margin-top: 4px;
+
+}
+
+.ccp-grid .calculator-form__input {
+
+    font-variant-numeric: tabular-nums;
+
+}
+
+@media (max-width: 640px) {
+
+    /* 16px so the browser does not zoom the page when a field is focused, and a comfortable tap height */
+    .ccp-grid .calculator-form__input {
+
+        min-height: 48px;
+
+        font-size: 16px;
+
+    }
+
+    .ccp-actions .calculator-form__button {
+
+        min-height: 48px;
+
+        font-size: 16px;
+
+    }
+
+}
+
+@media (min-width: 700px) {
+
+    .ccp-compare {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    }
+
+}

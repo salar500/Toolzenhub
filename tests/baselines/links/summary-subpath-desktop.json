@@ -226,13 +226,13 @@
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 37,
+    "internal": 38,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "calculators/balance-transfer/": {
-    "internal": 35,
+    "internal": 36,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -243,8 +243,14 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "calculators/credit-card-payoff/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "calculators/emi/": {
-    "internal": 36,
+    "internal": 37,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -262,7 +268,7 @@
     "deadFragments": []
   },
   "calculators/home-loan/": {
-    "internal": 34,
+    "internal": 35,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -279,7 +285,7 @@
     "deadFragments": []
   },
   "calculators/loan-comparison/": {
-    "internal": 36,
+    "internal": 37,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -297,7 +303,7 @@
     "deadFragments": []
   },
   "calculators/prepayment/": {
-    "internal": 35,
+    "internal": 36,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -363,7 +369,7 @@
     "deadFragments": []
   },
   "loans.html": {
-    "internal": 28,
+    "internal": 29,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -399,7 +405,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 57,
+    "internal": 58,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -471,7 +477,7 @@
     "deadFragments": []
   },
   "categories.html?q=loan": {
-    "internal": 28,
+    "internal": 29,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

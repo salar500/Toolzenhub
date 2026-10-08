@@ -22,7 +22,7 @@ section.categories-page.directory-page
           h2#directory-calculators-heading.directory-section__title
             a [href="{ROOT}categories.html"] "Calculators"
           p.directory-section__text "Calculators for loans, investment, tax, business and math."
-            span.directory-section__count "14 tools"
+            span.directory-section__count "15 tools"
         div.directory-groups
           article.directory-group
             h3.directory-group__title
@@ -39,6 +39,8 @@ section.categories-page.directory-page
                 a [href="{ROOT}calculators/balance-transfer/"] "Loan Balance Transfer Calculator"
               li
                 a [href="{ROOT}calculators/prepayment/"] "Loan Prepayment Calculator"
+              li
+                a [href="{ROOT}calculators/credit-card-payoff/"] "Credit Card Payoff Calculator"
           article.directory-group
             h3.directory-group__title
               a [href="{ROOT}investment.html"] "Investment"

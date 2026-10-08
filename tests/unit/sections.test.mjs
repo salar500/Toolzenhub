@@ -22,7 +22,7 @@ const PROJECT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..",
 const inventory = JSON.parse(fs.readFileSync(path.join(PROJECT, "tests", "inventory", "url-inventory.json"), "utf8"));
 
 const CATEGORY_IDS = ["loans", "investment", "tax", "health", "business", "math", "converter", "more"];
-const PUBLISHED_URLS = ["/calculators/balance-transfer/", "/calculators/cagr/", "/calculators/emi/", "/calculators/fd/", "/calculators/gst/", "/calculators/home-loan/", "/calculators/income-tax/", "/calculators/loan-comparison/", "/calculators/margin/", "/calculators/percentage/", "/calculators/prepayment/", "/calculators/profit/", "/calculators/sip/", "/calculators/swp/"];
+const PUBLISHED_URLS = ["/calculators/balance-transfer/", "/calculators/cagr/", "/calculators/credit-card-payoff/", "/calculators/emi/", "/calculators/fd/", "/calculators/gst/", "/calculators/home-loan/", "/calculators/income-tax/", "/calculators/loan-comparison/", "/calculators/margin/", "/calculators/percentage/", "/calculators/prepayment/", "/calculators/profit/", "/calculators/sip/", "/calculators/swp/"];
 
 let cats, tax, calcs, routes, registry, idx, search, tools;
 before(async () => {
@@ -188,7 +188,7 @@ describe("routing: every registered tool keeps its URL", () => {
   });
 
   test("the calculator loader registry is unchanged: loaders only for the published tools, still lazy", () => {
-    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "countdown-timer", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "hours-calculator", "image-compressor-resizer", "income-tax", "json-formatter", "jwt-decoder", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip", "stopwatch", "swp", "text-diff", "time-zone-converter", "unix-timestamp-converter"]);
+    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "cagr", "countdown-timer", "credit-card-payoff", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "hours-calculator", "image-compressor-resizer", "income-tax", "json-formatter", "jwt-decoder", "loan-comparison", "margin", "percentage", "prepayment", "profit", "sip", "stopwatch", "swp", "text-diff", "time-zone-converter", "unix-timestamp-converter"]);
     for (const loader of Object.values(registry.calculatorRegistry)) assert.equal(typeof loader, "function");
     assert.deepEqual(registry.calculatorMetadata.emi, { section: "Calculators", category: "loans", title: "EMI Calculator" });
     assert.deepEqual(registry.calculatorMetadata["income-tax"], { section: "Calculators", category: "tax", title: "Old vs New Tax Regime Calculator" });
@@ -199,6 +199,7 @@ describe("routing: every registered tool keeps its URL", () => {
     assert.deepEqual(registry.calculatorMetadata["json-formatter"], { section: "Developer Tools", title: "JSON Formatter & Validator" });
     assert.deepEqual(registry.calculatorMetadata["unix-timestamp-converter"], { section: "Developer Tools", title: "Unix Timestamp Converter" });
     assert.deepEqual(registry.calculatorMetadata["text-diff"], { section: "Developer Tools", title: "Text Diff / Compare" });
+    assert.deepEqual(registry.calculatorMetadata["credit-card-payoff"], { section: "Calculators", category: "loans", title: "Credit Card Payoff Calculator" });
     assert.deepEqual(registry.calculatorMetadata["jwt-decoder"], { section: "Developer Tools", title: "JWT Decoder" });
     assert.deepEqual(registry.calculatorMetadata["hours-calculator"], { section: "Time Tools", title: "Hours & Timesheet Calculator" });
     assert.deepEqual(registry.calculatorMetadata["time-zone-converter"], { section: "Time Tools", title: "Time Zone Converter" });

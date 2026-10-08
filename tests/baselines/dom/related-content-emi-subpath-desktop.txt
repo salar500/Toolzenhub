@@ -24,6 +24,11 @@ section.related-section
       div.related-calculator-content
         strong "Loan Prepayment Calculator"
         span "See how much interest and time a one-time loan prepayment can save, and what it does to yo…"
+    a.related-calculator-card [href="{ROOT}calculators/credit-card-payoff/"]
+      div.related-calculator-icon "◉"
+      div.related-calculator-content
+        strong "Credit Card Payoff Calculator"
+        span "Estimate how many months a fixed monthly payment takes to clear a credit card balance, the…"
 --- match 2 of 2 ---
 section.related-section
   div.related-section__heading
