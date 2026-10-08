@@ -207,6 +207,18 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "articles/swp/how-a-systematic-withdrawal-plan-works/": {
+    "internal": 34,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "articles/swp/what-changes-how-long-a-corpus-lasts/": {
+    "internal": 33,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "business.html": {
     "internal": 26,
     "external": [],
@@ -303,7 +315,7 @@
     "deadFragments": []
   },
   "calculators/swp/": {
-    "internal": 27,
+    "internal": 30,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

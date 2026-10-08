@@ -61,7 +61,7 @@ const buildCorpus = () => {
 describe("index structure", () => {
   test("covers categories, tools and articles (no subcategories are defined yet)", () => {
     const count = (type) => idx.searchIndex.filter((e) => e.type === type).length;
-    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 35, 38]);
+    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 35, 40]);
     assert.equal(new Set(idx.searchIndex.map((e) => e.key)).size, idx.searchIndex.length);
   });
 

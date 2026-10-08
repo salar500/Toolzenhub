@@ -79,8 +79,10 @@ Every article must:
 7. **Be accurate or silent.** If a fact depends on a rule that changes (a regulation, a tax rule, a
    bank policy), either cite a source that was checked when writing, or say "check your lender or
    current rules" and do not state it as fact.
-8. Have a **unique** title and description, a canonical URL on the production origin, and a hero image
-   (with a WebP next to the PNG).
+8. Have a **unique** title and description and a canonical URL on the production origin. A hero image
+   (with a WebP next to the PNG) only when it adds explanatory or contextual value, as rule 6.4 of
+   `docs/product-decision-rules.md` says; an article with no image is valid (the Percentage articles and
+   the second SWP article have none), and filler imagery is never added to fill a template.
 
 Sensitive topics (money, tax, health, anything affecting a decision) also:
 

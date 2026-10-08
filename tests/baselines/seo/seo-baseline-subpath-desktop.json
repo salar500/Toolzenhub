@@ -2537,6 +2537,153 @@
       "visibleTextChars": 6041
     }
   },
+  "/articles/swp/how-a-systematic-withdrawal-plan-works/": {
+    "runtime": {
+      "title": "How a Systematic Withdrawal Plan Works: Withdrawals, Growth and the Balance Left | ToolZen Hub",
+      "description": "Follow one month of a systematic withdrawal plan, from the withdrawal to the modeled growth and the balance left, and see why total withdrawals can exceed the starting corpus.",
+      "canonical": "https://toolzenhub.in/articles/swp/how-a-systematic-withdrawal-plan-works/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Follow one month of a systematic withdrawal plan, from the withdrawal to the modeled growth and the balance left, and see why total withdrawals can exceed the starting corpus.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/how-a-systematic-withdrawal-plan-works.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How a Systematic Withdrawal Plan Works: Withdrawals, Growth and the Balance Left | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/swp/how-a-systematic-withdrawal-plan-works/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Follow one month of a systematic withdrawal plan, from the withdrawal to the modeled growth and the balance left, and see why total withdrawals can exceed the starting corpus.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/how-a-systematic-withdrawal-plan-works.png",
+        "twitter:title": "How a Systematic Withdrawal Plan Works: Withdrawals, Growth and the Balance Left | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "How a Systematic Withdrawal Plan Works: Withdrawals, Growth and the Balance Left"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How a Systematic Withdrawal Plan Works: Withdrawals, Growth and the Balance Left | ToolZen Hub",
+      "description": "Follow one month of a systematic withdrawal plan, from the withdrawal to the modeled growth and the balance left, and see why total withdrawals can exceed the starting corpus.",
+      "canonical": "https://toolzenhub.in/articles/swp/how-a-systematic-withdrawal-plan-works/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 9017
+    }
+  },
+  "/articles/swp/what-changes-how-long-a-corpus-lasts/": {
+    "runtime": {
+      "title": "What Changes How Long a Corpus Lasts: Return, Withdrawal and Yearly Increase | ToolZen Hub",
+      "description": "Start from one plan, change the return, the withdrawal or a yearly increase one at a time, and see why a small change can move how long a corpus lasts by years.",
+      "canonical": "https://toolzenhub.in/articles/swp/what-changes-how-long-a-corpus-lasts/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Start from one plan, change the return, the withdrawal or a yearly increase one at a time, and see why a small change can move how long a corpus lasts by years.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "What Changes How Long a Corpus Lasts: Return, Withdrawal and Yearly Increase | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/swp/what-changes-how-long-a-corpus-lasts/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Start from one plan, change the return, the withdrawal or a yearly increase one at a time, and see why a small change can move how long a corpus lasts by years.",
+        "twitter:title": "What Changes How Long a Corpus Lasts: Return, Withdrawal and Yearly Increase | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "What Changes How Long a Corpus Lasts: Return, Withdrawal and Yearly Increase"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#2563eb",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "What Changes How Long a Corpus Lasts: Return, Withdrawal and Yearly Increase | ToolZen Hub",
+      "description": "Start from one plan, change the return, the withdrawal or a yearly increase one at a time, and see why a small change can move how long a corpus lasts by years.",
+      "canonical": "https://toolzenhub.in/articles/swp/what-changes-how-long-a-corpus-lasts/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 7623
+    }
+  },
   "/business.html": {
     "runtime": {
       "title": "Business Calculators | ToolZen Hub",
@@ -3309,7 +3456,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6739
+      "visibleTextChars": 7262
     }
   },
   "/categories.html": {

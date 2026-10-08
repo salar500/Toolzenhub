@@ -55,6 +55,10 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.deepEqual(toolIds(rel.getRelatedTools("cagr")), ["sip", "fd"]);
     // SWP (Tool Pack 21): one curated one-way relation to SIP (build the corpus, then draw it down); autoRelated is off, so it is not offered the other Investment tools and does not appear in theirs, and SIP does not link back
     assert.deepEqual(toolIds(rel.getRelatedTools("swp")), ["sip"]);
+    // the SWP content pack: its two articles reach the calculator through article.tools alone (no tool.relatedArticles, so there is no second list to disagree), mechanism first; the SIP page does not gain them
+    assert.deepEqual(rel.getRelatedArticlesForTool("swp").map((a) => a.key), ["swp/how-a-systematic-withdrawal-plan-works", "swp/what-changes-how-long-a-corpus-lasts"]);
+    assert.equal(calcs.getCalculatorById("swp").relatedArticles, undefined);
+    assert.ok(!rel.getRelatedArticlesForTool("sip").some((a) => a.topic === "swp"));
     // GST (Tool Pack 8) is the first live Tax tool: it has no category neighbours, so its curated cross-category list is what it shows (Income Tax is Coming Soon and never offered);
     // Margin and Profit do NOT link back to it (the reciprocal links are deferred)
     assert.deepEqual(toolIds(rel.getRelatedTools("gst")), ["margin", "profit"]);
@@ -118,6 +122,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
       : key.startsWith("sip/") ? ["sip", "fd", "cagr"] // the primary tool first, then the other published Investment tools
       : key.startsWith("fd/") ? ["fd", "sip", "cagr"]
       : key.startsWith("cagr/") ? ["cagr", "sip", "fd"]
+      : key.startsWith("swp/") ? ["swp", "sip", "fd", "cagr"] // the primary tool first, then the Investment tools; SWP is not auto-related, so it joins no other article's fallback
       : key.startsWith("percentage/") ? ["percentage"] // the only published Math tool: no category fallback beyond it
       : key.startsWith("gst/") ? ["gst"] // the only published Tax tool: no category fallback beyond it
       : key.startsWith("margin/") ? ["margin", "profit"] // the primary tool first, then the other published Business tool
@@ -131,7 +136,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     for (const key of PUBLISHED) {
       const entry = articles.getArticleByKey(key);
       assert.deepEqual(keys(rel.getRelatedArticles(key)), entry.related, key);
-      assert.equal(rel.getRelatedArticles(key).length, key.startsWith("margin/") || key.startsWith("profit/") || key.startsWith("fd/") || key.startsWith("gst/") || key.startsWith("cagr/") || key.startsWith("percentage/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") || key.startsWith("home-loan/") ? 3 : 5, key); // Margin and Profit: three-article clusters, so two others
+      assert.equal(rel.getRelatedArticles(key).length, key.startsWith("margin/") || key.startsWith("profit/") || key.startsWith("fd/") || key.startsWith("gst/") || key.startsWith("cagr/") || key.startsWith("percentage/") || key.startsWith("swp/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") || key.startsWith("home-loan/") ? 3 : 5, key); // Margin and Profit: three-article clusters, so two others
     }
   });
 
@@ -204,7 +209,7 @@ describe("curated first, automatic second", () => {
     savedRelated = first().related;
     first().related = [];
     // the other published articles of ITS category (Loans): the Investment and Business articles are not offered
-    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/") && !k.startsWith("profit/") && !k.startsWith("fd/") && !k.startsWith("gst/") && !k.startsWith("cagr/") && !k.startsWith("percentage/")).slice(1));
+    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/") && !k.startsWith("profit/") && !k.startsWith("fd/") && !k.startsWith("gst/") && !k.startsWith("cagr/") && !k.startsWith("percentage/") && !k.startsWith("swp/")).slice(1));
   });
 
   test("a curated article list is never replaced or padded by the automatic one", () => {

@@ -1,6 +1,6 @@
 # Tool Pack 21: SWP Calculator (withdrawal and corpus planning)
 
-Status: built and verified in Chrome (focused, impact-based checks); NOT yet committed; Android real-device verification PENDING; Safari/WebKit UNVERIFIED      Base commit: b723140
+Status: built and verified in Chrome (focused, impact-based checks); committed as `ba3f1ae` and pushed; GitHub Pages preview verified; Android real-device verification PASS; Safari/WebKit UNVERIFIED      Base commit: b723140
 Reserved id and slug: `swp` (route `/calculators/swp/`). It is **not** an existing Coming Soon entry; it would be a new catalog entry.
 Spec follows `docs/tool-packs/_spec-template.md`; the lifecycle and gate are in `docs/tool-pack-factory.md`; the trust wording standard is "Trust standard for projections" in `docs/tool-packs/03-sip.md` and rule 3.7 of `docs/product-decision-rules.md`.
 
@@ -469,6 +469,6 @@ The approved decisions in section 30 were implemented as written. Everything bel
 
 **Shared files touched (expectations only):** the catalog and styles registry (one entry each), the regenerated URL inventory, and the pinned expectations that count or list published tools (catalog, taxonomy, directory, sections, search, relationships tests, with `autoRelated: false` handled in the old-selection parity helper). The DOM baselines of the Tools directory and the Investment page, the SEO and links baselines and the Calculators, Tools and Investment visual baselines changed because one card was added; the SWP page has its own desktop and mobile visual baselines.
 
-**Verification still pending:** a real Android phone (typing, the three questions, the table region at narrow widths, Reset, the SIP link) and Safari/WebKit.
+**Real-device verification.** Android: **PASS**. The user opened the SWP calculator on the GitHub Pages preview on an Android phone, completed the requested real-device review (typing, the three questions, the table region at narrow widths, Reset, the SIP link) and reported "All good". The page loads and works on Android. No device model, Android version or browser version was supplied, so none is recorded. Safari/WebKit: **UNVERIFIED**; no Safari or WebKit run has been made.
 
 8. **Size.** Tool JS is about 14.6 KB gzipped (formulas 4.5 KB, page 10.1 KB) and CSS 2.3 KB: the JS is about 2.6 KB over the roughly 12 KB planned in section 24, because the page carries the three questions, the explanatory sections and the example. Left as it is (SIP pages are of the same order); trimming copy is the first lever if this is ever a concern.

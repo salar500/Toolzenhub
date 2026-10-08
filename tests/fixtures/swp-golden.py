@@ -16,7 +16,8 @@ NOT from the JavaScript. Three separate methods must agree before a value is pri
      on W against an unclamped forward run (its final balance falls as W rises), then compared with C / F.
 
 Run:  python tests/fixtures/swp-golden.py
-The printed JSON is what tests/unit/swp-golden.test.mjs embeds as GOLDEN.
+The printed JSON is what tests/unit/swp-golden.test.mjs embeds as GOLDEN; its "articles" block holds the figures
+quoted in the two SWP articles and is what tests/unit/swp-articles.test.mjs embeds as REF.
 """
 import json
 from decimal import Decimal as D, getcontext
@@ -193,7 +194,65 @@ BC = [
     mode_bc("B-10", 10000000, 50000, 10, 12, 25, 0),
 ]
 
+def article_figures():
+    """
+    The figures quoted in the two SWP articles (Tool Pack 21 content pack), from the SAME three methods as above.
+    Baseline of both articles: Rs 1 crore, Rs 80,000 a month, 8% a year (effective), no yearly increase.
+    """
+    corpus, w, rate, m = 10000000, 80000, 8, 12
+    i = period_return(rate, m)
+
+    # one period, as drawn in article 1: withdraw first, then the remainder grows by one period return
+    remaining = D(corpus) - w
+    growth = remaining * i
+    closing = remaining + growth
+    # the level at which one period's growth exactly replaces the withdrawal: (C - W)(1 + i) = C
+    threshold = D(corpus) * i / (1 + i)
+    assert abs((D(corpus) - threshold) * (1 + i) - D(corpus)) < D("1e-40"), "threshold"
+
+    # the same plan seen as the three questions (article 1): A = how long, B = how much, C = what corpus
+    _, bc = mode_bc("ART", corpus, w, rate, m, 25, 0)
+    total_withdrawn_25y = D(w) * 25 * 12
+    corpus_needed_up = D(int(D(bc["C"]["corpus"]).to_integral_value(rounding="ROUND_CEILING")))
+    growth_supplied = total_withdrawn_25y - corpus_needed_up
+
+    def a(label, c, wd, r, s):
+        _, out = mode_a(label, c, wd, r, 12, s)
+        return out
+
+    sens = {
+        "base": a("base", corpus, 80000, 8, 0),
+        "return6": a("return6", corpus, 80000, 6, 0),
+        "return9": a("return9", corpus, 80000, 9, 0),
+        "return10": a("return10", corpus, 80000, 10, 0),
+        "withdraw90k": a("withdraw90k", corpus, 90000, 8, 0),
+        "withdraw70k": a("withdraw70k", corpus, 70000, 8, 0),
+        "withdraw66k": a("withdraw66k", corpus, 66000, 8, 0),
+        "withdraw65k": a("withdraw65k", corpus, 65000, 8, 0),
+        "withdraw60k": a("withdraw60k", corpus, 60000, 8, 0),
+        "increase3": a("increase3", corpus, 80000, 8, 3),
+        "increase5": a("increase5", corpus, 80000, 8, 5),
+    }
+    return {
+        "baseline": {"corpus": corpus, "withdrawal": w, "rate": rate},
+        "monthlyReturnPercent": str((i * 100).quantize(D("0.0001"))),
+        "period": {"opening": q4(D(corpus)), "withdrawal": q4(D(w)), "remaining": q4(remaining),
+                   "growth": q4(growth), "closing": q4(closing)},
+        "threshold": q4(threshold),
+        "questions": {
+            "B_withdrawalFor25y": q4(D(bc["B"]["withdrawal"])),
+            "C_corpusFor25y": q4(D(bc["C"]["corpus"])),
+            "C_totalWithdrawn": q4(total_withdrawn_25y),
+            "C_growthSupplied": q4(growth_supplied),
+            "C_growthShare": str((growth_supplied / total_withdrawn_25y * 100).quantize(D("0.01"))),
+        },
+        "sensitivity": sens,
+        "increase5_year10_monthly": q4(D(w) * factor(5, 12, 109)),
+        "increase3_year2_monthly": q4(D(w) * factor(3, 12, 13)),
+    }
+
+
 if __name__ == "__main__":
-    print(json.dumps({"A": dict(A), "BC": dict(BC),
+    print(json.dumps({"A": dict(A), "BC": dict(BC), "articles": article_figures(),
                       "monthlyReturn8": str(period_return(8, 12)), "quarterlyReturn7": str(period_return(7, 4)),
                       "monthlyReturn12": str(period_return(12, 12))}, indent=1))

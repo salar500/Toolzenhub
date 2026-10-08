@@ -1198,6 +1198,72 @@ const catalog = [
 
 
     /* =====================================================
+       SWP  (published)
+       The cluster of the SWP Calculator: two articles, the
+       mechanism and the sensitivity
+       (docs/tool-packs/21-swp-calculator.md). The second has
+       no image: a comparison of durations reads better as
+       text than as a picture.
+    ===================================================== */
+
+    {
+        id: 39,
+        status: "published",
+        category: "investment",
+        topic: "swp",
+        slug: "how-a-systematic-withdrawal-plan-works",
+        title:
+            "How a Systematic Withdrawal Plan Works: Withdrawals, Growth and the Balance Left",
+        description:
+            "Follow one month of a systematic withdrawal plan, from the withdrawal to the modeled growth and the balance left, and see why total withdrawals can exceed the starting corpus.",
+        publishedAt: "Oct 8, 2026",
+        updatedAt: "Oct 8, 2026",
+        readTime: "5 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/how-a-systematic-withdrawal-plan-works.png",
+            alt:
+                "Diagram of one month of a withdrawal plan in five rows: Opening ₹1,00,00,000, minus the Withdrawal of ₹80,000, equals Remaining ₹99,20,000, plus Modeled growth of ₹63,826, equals Closing ₹99,83,826. Amounts are rounded to the nearest rupee"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/how-a-systematic-withdrawal-plan-works.png",
+            alt:
+                "Diagram of one month of a withdrawal plan in five rows: Opening ₹1,00,00,000, minus the Withdrawal of ₹80,000, equals Remaining ₹99,20,000, plus Modeled growth of ₹63,826, equals Closing ₹99,83,826. Amounts are rounded to the nearest rupee"
+        },
+        tools: ["swp"],
+        related: [
+            "swp/what-changes-how-long-a-corpus-lasts",
+            "sip/how-a-sip-grows"
+        ],
+        relatedLabel: "Investment"
+    },
+
+    {
+        id: 40,
+        status: "published",
+        category: "investment",
+        topic: "swp",
+        slug: "what-changes-how-long-a-corpus-lasts",
+        title:
+            "What Changes How Long a Corpus Lasts: Return, Withdrawal and Yearly Increase",
+        description:
+            "Start from one plan, change the return, the withdrawal or a yearly increase one at a time, and see why a small change can move how long a corpus lasts by years.",
+        publishedAt: "Oct 8, 2026",
+        updatedAt: "Oct 8, 2026",
+        readTime: "5 min read",
+        cardImage: null,
+        heroImage: null,
+        tools: ["swp"],
+        related: [
+            "swp/how-a-systematic-withdrawal-plan-works",
+            "sip/how-return-assumptions-change-a-sip-projection"
+        ],
+        relatedLabel: "Investment"
+    },
+
+
+    /* =====================================================
        COMING SOON  (listing placeholders: no route, no
        content module, not counted)
     ===================================================== */
@@ -1526,6 +1592,18 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/percentage/percent-vs-percentage-points.js"
+            ),
+
+    "swp/how-a-systematic-withdrawal-plan-works":
+        () =>
+            import(
+                "./articles/swp/how-a-systematic-withdrawal-plan-works.js"
+            ),
+
+    "swp/what-changes-how-long-a-corpus-lasts":
+        () =>
+            import(
+                "./articles/swp/what-changes-how-long-a-corpus-lasts.js"
             )
 
 };
