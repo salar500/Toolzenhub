@@ -242,10 +242,10 @@ describe("module hygiene", () => {
   const files = fs.readdirSync(MODULE_DIR).filter((f) => f.endsWith(".mjs"));
 
   test("the producer core exists as expected", () => {
-    assert.deepEqual(files.sort(), ["canonical.mjs", "items.mjs", "registry.mjs", "source-time.mjs", "text-policy.mjs", "validate.mjs"]);
+    assert.deepEqual(files.sort(), ["canonical.mjs", "items.mjs", "ledger.mjs", "registry.mjs", "source-time.mjs", "text-policy.mjs", "validate.mjs"]);
   });
 
-  for (const f of ["canonical.mjs", "source-time.mjs", "text-policy.mjs", "items.mjs", "validate.mjs", "registry.mjs"]) {
+  for (const f of ["canonical.mjs", "source-time.mjs", "text-policy.mjs", "items.mjs", "validate.mjs", "registry.mjs", "ledger.mjs"]) {
     const source = fs.readFileSync(new URL(f, MODULE_DIR), "utf8");
     test(`${f}: ASCII-only source, built-in imports only, no clock, randomness or locale APIs`, () => {
       for (const ch of source) assert.ok(ch === "\n" || (ch >= " " && ch <= "~"), `unexpected character U+${ch.codePointAt(0).toString(16)} in ${f}`);

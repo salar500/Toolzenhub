@@ -1,1 +1,2 @@
 tests/fixtures/growth-manifest/* -text
+scripts/growth-manifest/identity-ledger.json -text

@@ -1,0 +1,477 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "key": "loan-comparison/how-to-reduce-home-loan-interest",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 2,
+      "key": "loan-comparison/emi-vs-total-interest",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 3,
+      "key": "loan-comparison/fixed-vs-floating-interest-rates",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 4,
+      "key": "loan-comparison/loan-tenure-total-interest",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 5,
+      "key": "loan-comparison/what-is-loan-prepayment",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 6,
+      "key": "loan-comparison/choose-right-loan-tenure",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 7,
+      "key": "investment/best-sip-strategies-for-beginners",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 8,
+      "key": "tax/tax-saving-guide-save-more-legally",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 9,
+      "key": "business/roi-vs-profit-whats-the-difference",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 10,
+      "key": "health/how-to-calculate-your-daily-calorie-needs",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 11,
+      "key": "math/how-to-calculate-percentage-easily",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 12,
+      "key": "converter/easy-unit-conversion-guide",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 13,
+      "key": "loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 14,
+      "key": "loan-prepayment/early-vs-late-loan-prepayment",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 15,
+      "key": "balance-transfer/is-a-loan-balance-transfer-worth-it",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 16,
+      "key": "balance-transfer/balance-transfer-vs-prepayment",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 17,
+      "key": "sip/how-a-sip-grows",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 18,
+      "key": "sip/how-return-assumptions-change-a-sip-projection",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 19,
+      "key": "sip/step-up-sip-explained",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 20,
+      "key": "sip/how-much-sip-do-you-need-for-a-goal",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 21,
+      "key": "margin/margin-vs-markup",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 22,
+      "key": "margin/price-a-product-for-a-target-margin",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 23,
+      "key": "margin/what-a-discount-really-costs-you",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 24,
+      "key": "profit/how-to-find-your-break-even-point",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 25,
+      "key": "profit/price-cost-or-volume-which-matters-most",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 26,
+      "key": "profit/units-needed-for-a-target-profit",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 27,
+      "key": "home-loan/how-much-home-loan-fits-your-emi-budget",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 28,
+      "key": "home-loan/longer-tenure-bigger-loan-much-more-interest",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 29,
+      "key": "home-loan/how-interest-rates-change-the-home-loan-you-can-borrow",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 30,
+      "key": "fd/how-compounding-frequency-changes-an-fd-maturity",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 31,
+      "key": "fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 32,
+      "key": "gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 33,
+      "key": "gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 34,
+      "key": "cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 35,
+      "key": "cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 36,
+      "key": "percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 37,
+      "key": "percentage/how-to-find-the-original-price-before-a-percentage-change",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 38,
+      "key": "percentage/percent-vs-percentage-points",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 39,
+      "key": "swp/how-a-systematic-withdrawal-plan-works",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    },
+    {
+      "id": 40,
+      "key": "swp/what-changes-how-long-a-corpus-lasts",
+      "keyChanges": [],
+      "provenance": "history-verified",
+      "state": "active"
+    }
+  ],
+  "historyWindow": {
+    "firstCommit": "bf87b3d32c603bc157577720f413173d6f892754",
+    "scope": "Article ids and their topic/slug keys in assets/js/article-registry.js and assets/js/data/articles.js: 22 file versions in 19 commits from 2026-09-29. In that window no id changed key, no key was shared by two ids, no id was removed, and ids 1 to 40 have no gaps. Nothing before 2026-09-29 is claimed. Tool records carry no history claim: they were first observed at the ledger bootstrap.",
+    "startDate": "2026-09-29",
+    "verifiedAtCommit": "ca7b631c8bcb86e1f8ebd5576b3ee97abd72a052"
+  },
+  "nextArticleId": 41,
+  "readme": "Permanent content identity ledger for the Growth manifest. Edited only by a reviewed commit, never by a script. Rules and procedure: the header of scripts/growth-manifest/ledger.mjs and rulebook section 6.",
+  "schemaVersion": 1,
+  "tools": [
+    {
+      "id": "balance-transfer",
+      "module": "assets/js/calculators/balance-transfer/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "cagr",
+      "module": "assets/js/calculators/cagr/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "countdown-timer",
+      "module": "assets/js/tools/countdown-timer/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "credit-card-payoff",
+      "module": "assets/js/calculators/credit-card-payoff/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "date-calculator",
+      "module": "assets/js/tools/date-calculator/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "date-difference",
+      "module": "assets/js/tools/date-difference/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "emi",
+      "module": "assets/js/calculators/emi/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "fd",
+      "module": "assets/js/calculators/fd/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "gst",
+      "module": "assets/js/calculators/gst/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "home-loan",
+      "module": "assets/js/calculators/home-loan/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "hours-calculator",
+      "module": "assets/js/tools/hours-calculator/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "image-compressor-resizer",
+      "module": "assets/js/tools/image-compressor-resizer/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "income-tax",
+      "module": "assets/js/calculators/income-tax/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "json-formatter",
+      "module": "assets/js/tools/json-formatter/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "jwt-decoder",
+      "module": "assets/js/tools/jwt-decoder/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "loan-comparison",
+      "module": "loans/loan-comparison/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "margin",
+      "module": "assets/js/calculators/margin/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "percentage",
+      "module": "assets/js/calculators/percentage/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "prepayment",
+      "module": "assets/js/calculators/prepayment/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "profit",
+      "module": "assets/js/calculators/profit/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "sip",
+      "module": "assets/js/calculators/sip/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "stopwatch",
+      "module": "assets/js/tools/stopwatch/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "swp",
+      "module": "assets/js/calculators/swp/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "text-diff",
+      "module": "assets/js/tools/text-diff/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "time-zone-converter",
+      "module": "assets/js/tools/time-zone-converter/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "unix-timestamp-converter",
+      "module": "assets/js/tools/unix-timestamp-converter/index.js",
+      "moduleChanges": [],
+      "provenance": "bootstrap",
+      "state": "active"
+    }
+  ]
+}

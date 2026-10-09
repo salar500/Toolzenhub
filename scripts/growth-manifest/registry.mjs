@@ -16,6 +16,7 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { APPROVED_IMAGE_PREFIX, mapRegistry } from "./items.mjs";
+import { LEDGER_FILE, checkIdentities, parseLedgerText } from "./ledger.mjs";
 import { validateItems } from "./validate.mjs";
 
 export const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -68,8 +69,10 @@ function toolModuleFact(root, tool) {
   const file = path.resolve(root, "assets", "js", "data", match[1]);
   try {
     const real = fs.realpathSync(file);
-    if (!within(fs.realpathSync(root), real)) return { ok: false, error: "the module path leaves the repository" };
-    return fs.statSync(real).isFile() ? { ok: true } : { ok: false, error: "the module is not a file" };
+    const realRoot = fs.realpathSync(root);
+    if (!within(realRoot, real)) return { ok: false, error: "the module path leaves the repository" };
+    // `path` is the repository-relative location the identity ledger anchors a published tool to
+    return fs.statSync(real).isFile() ? { ok: true, path: path.relative(realRoot, real).split(path.sep).join("/") } : { ok: false, error: "the module is not a file" };
   } catch {
     return { ok: false, error: "the module file does not exist" };
   }
@@ -121,11 +124,32 @@ export async function loadRegistry({ root = REPO_ROOT } = {}) {
 }
 
 /**
- * Maps the real published registries to validated manifest items. Writes nothing and returns data only:
- * { ok, items, errors, notices, validation }. `ok` is true only when the mapper and the independent validator both pass.
+ * Reads and validates the identity ledger file (read-only; the ledger is only ever changed by a reviewed edit). Returns
+ * { ok, ledger, errors }; a missing, unreadable, malformed or non-canonical file is an error, never an empty ledger.
  */
-export async function exportPublishedItems(options) {
+export function readLedgerFile({ root = REPO_ROOT } = {}) {
+  let text;
+  try {
+    text = fs.readFileSync(path.join(root, LEDGER_FILE), "utf8");
+  } catch {
+    return { ok: false, ledger: null, errors: [{ code: "LEDGER_MISSING", id: "ledger", message: `${LEDGER_FILE} cannot be read` }] };
+  }
+  return parseLedgerText(text);
+}
+
+/**
+ * Maps the real published registries to validated manifest items. Writes nothing and returns data only:
+ * { ok, items, errors, notices, validation }. `ok` is true only when the identity ledger, the mapper and the independent
+ * validator all pass. The ledger is checked FIRST and fails closed: any identity problem returns no items.
+ * Options: `root`; `ledger` (a parsed ledger, default the file); `previousLedger` (the last committed ledger, supplied by the
+ * caller that reads Git, for the no-silent-change comparison).
+ */
+export async function exportPublishedItems(options = {}) {
   const registry = await loadRegistry(options);
+  const loaded = options.ledger !== undefined ? { ok: true, ledger: options.ledger, errors: [] } : readLedgerFile(options);
+  if (!loaded.ok) return { ok: false, items: [], errors: loaded.errors, notices: [], validation: null };
+  const identity = checkIdentities({ ledger: loaded.ledger, previousLedger: options.previousLedger ?? null, articles: registry.articles, tools: registry.tools, toolModules: registry.facts.toolModules });
+  if (!identity.ok) return { ok: false, items: [], errors: identity.errors, notices: [], validation: null };
   const mapped = mapRegistry(registry);
   if (!mapped.ok) return { ...mapped, validation: null };
   const validation = validateItems(mapped.items);
