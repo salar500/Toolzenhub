@@ -30,7 +30,7 @@ import { traceDependencies } from "./deps.mjs";
 import { LEDGER_FILE } from "./ledger.mjs";
 import { buildManifestBytes, retiredAdvisories } from "./manifest.mjs";
 import { REPO_ROOT as DEFAULT_ROOT, exportPublishedItems } from "./registry.mjs";
-import { checkWorkingTree, currentRevision, isGitIgnored, readCommittedLedger, readSourceIdentity, verifyLedgerLineage } from "./source-state.mjs";
+import { checkWorkingTree, isGitIgnored, readCommittedLedger, readSourceIdentity, verifyLedgerLineage, verifySnapshot } from "./source-state.mjs";
 import { OUTPUT_RELATIVE_PATH, inspectDestination, plannedOutput, writeManifestAtomically } from "./writer.mjs";
 
 /** The entry points the dependency trace starts from: this CLI (and so every producer module) and the four catalogs. */
@@ -41,6 +41,16 @@ export const TRACE_ROOTS = Object.freeze([
   "assets/js/data/categories.js",
   "assets/js/data/tool-capabilities.js",
 ]);
+/**
+ * How the dependency trace treats the code it reads. Every module the catalog loaders EXECUTE is followed, dynamic imports
+ * included; only the tool catalog's loaders are never called, so a tool implementation is a guarded file but its own imports
+ * are not followed. Outside the producer, a module that uses a construct the tracer cannot see through is refused.
+ */
+export const TRACE_OPTIONS = Object.freeze({
+  followDynamicFrom: (file) => file !== "assets/js/data/tools.js",
+  allowComputedDynamic: (file) => file === "scripts/growth-manifest/registry.mjs",
+  isProducer: (file) => file.startsWith("scripts/growth-manifest/"),
+});
 /** Data files the producer reads by path rather than by import. */
 export const EXPLICIT_READS = Object.freeze(["package.json", "src/_data/toolStyles.json", LEDGER_FILE]);
 
@@ -84,7 +94,7 @@ const refuse = (stage, errors, extra = {}) => ({ ok: false, stage, errors, notic
  * Runs the whole export for the repository at `root`. `mode` is "check" or "write". `nowMs` is required (it is only the
  * reference for the future-time check). Returns { ok, stage, errors, notices, report, wrote }; never throws for a refusal.
  */
-export async function runExport({ root = DEFAULT_ROOT, mode, nowMs, fsApi, expectedBranch = "main" } = {}) {
+export async function runExport({ root = DEFAULT_ROOT, mode, nowMs, fsApi, expectedBranch = "main", __afterMapping, __beforeOutput } = {}) {
   if (mode !== "check" && mode !== "write") return refuse("usage", [{ code: "USAGE", id: "mode", message: 'mode must be "check" or "write"' }]);
   if (typeof nowMs !== "number" || !Number.isFinite(nowMs)) return refuse("usage", [{ code: "USAGE", id: "nowMs", message: "a reference time is required for the future-commit check" }]);
 
@@ -97,8 +107,7 @@ export async function runExport({ root = DEFAULT_ROOT, mode, nowMs, fsApi, expec
   const traced = traceDependencies({
     roots: [...TRACE_ROOTS],
     readText: readTextFrom(repo),
-    followDynamicFrom: (file) => file === "assets/js/data/articles.js",
-    allowComputedDynamic: (file) => file === "scripts/growth-manifest/registry.mjs",
+    ...TRACE_OPTIONS,
   });
   if (!traced.ok) return refuse("tracing", traced.errors);
   const baseDependencies = [...new Set([...traced.files, ...EXPLICIT_READS])].sort();
@@ -124,18 +133,25 @@ export async function runExport({ root = DEFAULT_ROOT, mode, nowMs, fsApi, expec
   const mapped = await exportPublishedItems({ root: repo, previousLedger: committed.ledger });
   if (!mapped.ok) return refuse("mapping", mapped.errors, { notices: mapped.notices ?? [] });
 
-  // 6. gate the full dependency set now that the data-derived files are known, and make sure HEAD did not move
+  // 6. gate the full dependency set now that the data-derived files are known; nothing verified earlier may have changed
+  if (typeof __afterMapping === "function") await __afterMapping(); // test seam only; the command line never passes it
   const dataDependencies = [
     ...mapped.items.filter((i) => i.image !== null).map((i) => i.image.path.slice(1)),
     ...committed.ledger.tools.filter((t) => t.state === "active").map((t) => t.module),
   ];
   const fullGate = checkWorkingTree({ root: repo, dependencies: [...new Set([...baseDependencies, ...dataDependencies])].sort() });
   if (!fullGate.ok) return refuse("dirty-source", fullGate.errors, { notices: mapped.notices });
-  if (currentRevision(repo) !== identity.revision) return refuse("recheck", [{ code: "REVISION_CHANGED", id: "HEAD", message: "HEAD moved while the export was running" }], { notices: mapped.notices });
+  const moved = [...gate.hashes].filter(([file, sha]) => fullGate.hashes.get(file) !== sha).map(([file]) => ({ code: "SOURCE_CHANGED", id: file, message: "a file the export depends on changed while the catalogs were being loaded" }));
+  if (moved.length > 0) return refuse("recheck", moved, { notices: mapped.notices });
 
   // 7. the manifest bytes
   const built = buildManifestBytes({ items: mapped.items, revision: identity.revision, generatedAt: identity.generatedAt, retired: retiredAdvisories(committed.ledger) });
   if (!built.ok) return refuse("manifest", built.errors, { notices: mapped.notices });
+
+  // 7b. last look before anything is written: the guarded bytes and HEAD are exactly what was verified
+  if (typeof __beforeOutput === "function") await __beforeOutput(); // test seam only; the command line never passes it
+  const finalCheck = verifySnapshot({ root: repo, expected: fullGate.hashes, revision: identity.revision });
+  if (!finalCheck.ok) return refuse("recheck", finalCheck.errors, { notices: mapped.notices });
 
   // 8. the destination
   const planned = plannedOutput(repo);
@@ -154,7 +170,7 @@ export async function runExport({ root = DEFAULT_ROOT, mode, nowMs, fsApi, expec
     bytes: built.bytes.length,
     retired: built.manifest.retired?.length ?? 0,
     outputPath: planned.relativePath,
-    dependencies: gate.checked,
+    dependencies: fullGate.hashes.size,
     ledgerVersions: lineage.versions,
     categorylessSections: mapped.validation.categorylessSections,
   };
@@ -182,7 +198,7 @@ function printResult(result, write) {
   write(`  file sha256         ${r.fileHash}`);
   write(`  size                ${r.bytes} bytes`);
   write(`  output              ${r.outputPath}${result.wrote ? "" : " (not created)"}`);
-  write(`  guarded files       ${r.dependencies} (all clean and tracked); ledger versions verified: ${r.ledgerVersions}`);
+  write(`  guarded files       ${r.dependencies} (tracked, unmodified, bytes verified against HEAD); ledger versions verified: ${r.ledgerVersions}`);
   write(`  categoryless sections for Growth owner review: ${r.categorylessSections.join(", ") || "none"}`);
   write(`  notices             ${result.notices.length} (informational)`);
 }

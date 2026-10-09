@@ -29,10 +29,16 @@ function gitEnv() {
   return env;
 }
 
-/** Runs a read-only Git command in `root`. Returns { ok, out, code }. */
-export function git(root, args) {
+/**
+ * Settings that could make Git hide a change are forced to their strict values for every command, whatever the repository or
+ * user configuration says. (core.autocrlf and attributes are deliberately NOT forced: they define what "unchanged" means.)
+ */
+const STRICT_CONFIG = ["-c", "core.quotepath=off", "-c", "core.fsmonitor=false", "-c", "core.ignoreStat=false", "-c", "core.untrackedCache=false", "-c", "status.showUntrackedFiles=all", "-c", "core.sparseCheckout=false"];
+
+/** Runs a read-only Git command in `root` (optionally feeding `input` on stdin). Returns { ok, out, code }. */
+export function git(root, args, { input } = {}) {
   try {
-    const out = execFileSync("git", ["-c", "core.quotepath=off", ...args], { cwd: root, encoding: "utf8", env: gitEnv(), maxBuffer: 256 * 1024 * 1024, stdio: ["ignore", "pipe", "pipe"], windowsHide: true });
+    const out = execFileSync("git", [...STRICT_CONFIG, ...args], { cwd: root, encoding: "utf8", env: gitEnv(), input, maxBuffer: 256 * 1024 * 1024, stdio: [input === undefined ? "ignore" : "pipe", "pipe", "pipe"], windowsHide: true });
     return { ok: true, out, code: 0 };
   } catch (cause) {
     return { ok: false, out: "", code: typeof cause.status === "number" ? cause.status : -1 };
@@ -88,10 +94,40 @@ export function currentRevision(root) {
   return head.ok && REVISION.test(revision) ? revision : null;
 }
 
+/** Blob id and mode of every file at HEAD: Map path -> { mode, sha }. Null when it cannot be read. */
+function committedBlobs(root) {
+  const listed = git(root, ["ls-tree", "-r", "-z", "HEAD"]);
+  if (!listed.ok) return null;
+  const blobs = new Map();
+  for (const entry of listed.out.split("\0")) {
+    const tab = entry.indexOf("\t");
+    if (tab < 0) continue;
+    const [mode, , sha] = entry.slice(0, tab).split(" ");
+    blobs.set(entry.slice(tab + 1), { mode, sha });
+  }
+  return blobs;
+}
+
+/**
+ * The blob id Git would give each working-tree file, after the repository's own line-ending and attribute rules. This reads
+ * the bytes themselves, so it does not depend on Git's stat cache, the index flags or `git status`.
+ * Returns Map path -> sha, or null when Git cannot hash the files.
+ */
+export function workingTreeHashes(root, files) {
+  if (files.length === 0) return new Map();
+  const hashed = git(root, ["hash-object", "--stdin-paths"], { input: files.join("\n") + "\n" });
+  if (!hashed.ok) return null;
+  const lines = hashed.out.split("\n").filter(Boolean);
+  if (lines.length !== files.length) return null;
+  return new Map(files.map((file, i) => [file, lines[i]]));
+}
+
 /**
  * The dirty-source gate. `dependencies` are repository-relative posix paths. Every one must be an existing, tracked, regular
  * file that Git reports as unchanged (not modified, staged, deleted, renamed or conflicted, and not hidden with
- * assume-unchanged or skip-worktree), reached without a symbolic link in its path. Never changes anything.
+ * assume-unchanged or skip-worktree), reached without a symbolic link in its path, AND whose bytes hash to exactly the blob
+ * committed at HEAD (checked independently of Git's own change detection). Returns the working-tree hashes in `hashes` so a
+ * later call can prove nothing moved. Never changes anything.
  */
 export function checkWorkingTree({ root, dependencies }) {
   const errors = [];
@@ -154,7 +190,42 @@ export function checkWorkingTree({ root, dependencies }) {
       if (wanted.has(file)) add("DIRTY_DEPENDENCY", file, `a file the export depends on has uncommitted changes (git status ${JSON.stringify(code)}); commit or revert it first`);
     }
   }
-  return { ok: errors.length === 0, errors, checked: wanted.size };
+
+  // independent byte-level check against the committed blobs
+  let hashes = new Map();
+  const existing = [...wanted].filter((dep) => !errors.some((e) => e.id === dep && ["DEP_MISSING", "UNSAFE_SYMLINK", "DEP_UNSAFE"].includes(e.code))).sort();
+  const blobs = committedBlobs(realRoot);
+  const current = blobs === null ? null : workingTreeHashes(realRoot, existing);
+  if (blobs === null || current === null) add("GIT_UNAVAILABLE", "git", "the committed blobs or the working-tree hashes cannot be read, so the source bytes cannot be verified");
+  else {
+    hashes = current;
+    for (const dep of existing) {
+      const committed = blobs.get(dep);
+      if (committed === undefined) continue; // already reported as untracked
+      if (committed.mode !== "100644" && committed.mode !== "100755") add("UNSAFE_MODE", dep, `is committed as mode ${committed.mode}, not a regular file`);
+      else if (current.get(dep) !== committed.sha) add("CONTENT_MISMATCH", dep, "the bytes in the working tree do not match the blob committed at HEAD");
+    }
+  }
+  return { ok: errors.length === 0, errors, checked: wanted.size, hashes };
+}
+
+/**
+ * Proves the guarded files still hold the bytes verified earlier: re-hashes them, compares with `expected` (the hashes from
+ * checkWorkingTree) and with the committed blobs, and checks that HEAD is still `revision`. Used immediately before output.
+ */
+export function verifySnapshot({ root, expected, revision }) {
+  const errors = [];
+  if (currentRevision(root) !== revision) errors.push({ code: "REVISION_CHANGED", id: "HEAD", message: "HEAD moved while the export was running" });
+  const files = [...expected.keys()].sort();
+  const blobs = committedBlobs(root);
+  const now = workingTreeHashes(root, files);
+  if (blobs === null || now === null) errors.push({ code: "GIT_UNAVAILABLE", id: "git", message: "the source bytes cannot be re-verified" });
+  else {
+    for (const file of files) {
+      if (now.get(file) !== expected.get(file) || blobs.get(file)?.sha !== now.get(file)) errors.push({ code: "SOURCE_CHANGED", id: file, message: "a file the export depends on changed while the export was running" });
+    }
+  }
+  return { ok: errors.length === 0, errors };
 }
 
 /** The ledger as committed at HEAD (validated). */
@@ -170,7 +241,12 @@ export function readCommittedLedger({ root }) {
  * (compareLedgers), so a past commit that edited the catalog and the ledger together cannot have rewritten an identity unseen.
  */
 export function verifyLedgerLineage({ root }) {
-  const log = git(root, ["log", "--format=%H", "--reverse", "--", LEDGER_FILE]);
+  // History that is cut off cannot prove a lineage: refuse rather than verify a partial chain.
+  const shallow = git(root, ["rev-parse", "--is-shallow-repository"]);
+  if (!shallow.ok || shallow.out.trim() !== "false") return { ok: false, versions: 0, errors: [{ code: "LEDGER_LINEAGE_INCOMPLETE", id: "ledger", message: "the repository history is shallow or cannot be inspected, so the ledger's full lineage cannot be verified" }] };
+  // First-parent order is the mainline of the checked-out branch: parents always come before children, and a branch that was
+  // merged is compared as the single step the merge made. (Chronological order would mix unrelated branches.)
+  const log = git(root, ["log", "--first-parent", "--format=%H", "--reverse", "--", LEDGER_FILE]);
   const commits = log.out.split("\n").map((s) => s.trim()).filter(Boolean);
   if (!log.ok || commits.length === 0) return { ok: false, versions: 0, errors: [{ code: "LEDGER_LINEAGE_MISSING", id: "ledger", message: "the ledger has no committed history" }] };
   const errors = [];

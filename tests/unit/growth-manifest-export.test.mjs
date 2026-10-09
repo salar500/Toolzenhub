@@ -411,7 +411,7 @@ describe("the real repository (read-only)", () => {
       assert.equal(validateManifestFile(r.bytes).ok, true);
     } else {
       assert.equal(r.stage, "dirty-source", `unexpected refusal: ${JSON.stringify(r.errors.slice(0, 3))}`);
-      assert.ok(r.errors.every((e) => ["DIRTY_DEPENDENCY", "UNTRACKED_DEPENDENCY"].includes(e.code)));
+      assert.ok(r.errors.every((e) => ["DIRTY_DEPENDENCY", "UNTRACKED_DEPENDENCY", "CONTENT_MISMATCH"].includes(e.code)));
       assert.ok(r.errors.every((e) => !e.id.startsWith("docs/")), "a document never blocks the export");
     }
   });
@@ -433,7 +433,9 @@ describe("module hygiene", () => {
   test("no network, eval or machine-specific path anywhere", () => {
     for (const name of [...modules, "registry.mjs", "ledger.mjs", "items.mjs", "validate.mjs"]) {
       const c = code(name);
-      for (const token of ["fetch(", "node:http", "node:https", "node:net", "node:dgram", "node:dns", "node:tls", "WebSocket", "XMLHttpRequest", "eval(", "new Function", "C:\\\\", "/Users/", "/home/"]) assert.equal(c.includes(token), false, `${name} must not contain ${token}`);
+      // deps.mjs NAMES these APIs in the patterns it uses to refuse them; it does not call them
+      const named = name === "deps.mjs" ? ["WebSocket", "XMLHttpRequest"] : [];
+      for (const token of ["fetch(", "node:http", "node:https", "node:net", "node:dgram", "node:dns", "node:tls", "WebSocket", "XMLHttpRequest", "eval(", "new Function", "C:\\\\", "/Users/", "/home/"]) if (!named.includes(token)) assert.equal(c.includes(token), false, `${name} must not contain ${token}`);
     }
   });
 

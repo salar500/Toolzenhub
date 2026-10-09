@@ -9,7 +9,7 @@ import path from "node:path";
 
 import { findSpecifiers, stripComments, traceDependencies } from "../../scripts/growth-manifest/deps.mjs";
 import { REPO_ROOT } from "../../scripts/growth-manifest/registry.mjs";
-import { EXPLICIT_READS, TRACE_ROOTS } from "../../scripts/growth-manifest/export.mjs";
+import { EXPLICIT_READS, TRACE_OPTIONS, TRACE_ROOTS } from "../../scripts/growth-manifest/export.mjs";
 
 const fakeFiles = (map) => (file) => (Object.prototype.hasOwnProperty.call(map, file) ? map[file] : null);
 const trace = (map, roots, options = {}) => traceDependencies({ roots, readText: fakeFiles(map), ...options });
@@ -73,7 +73,7 @@ describe("tracing", () => {
   });
 
   test("Node built-ins are ignored", () => {
-    const r = trace({ "a.js": 'import fs from "node:fs"; const x = () => import("node:path");' }, ["a.js"]);
+    const r = trace({ "a.js": 'import path from "node:path"; const x = () => import("node:url");' }, ["a.js"]);
     assert.equal(r.ok, true);
     assert.deepEqual(r.files, ["a.js"]);
   });
@@ -92,7 +92,7 @@ describe("the real repository", () => {
       return null;
     }
   };
-  const real = traceDependencies({ roots: [...TRACE_ROOTS], readText: read, followDynamicFrom: (f) => f === "assets/js/data/articles.js", allowComputedDynamic: (f) => f === "scripts/growth-manifest/registry.mjs" });
+  const real = traceDependencies({ roots: [...TRACE_ROOTS], readText: read, ...TRACE_OPTIONS });
 
   test("every dependency is classified (nothing is unresolved)", () => {
     assert.equal(real.ok, true, JSON.stringify(real.errors.slice(0, 5)));
