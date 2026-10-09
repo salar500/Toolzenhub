@@ -242,7 +242,7 @@ describe("module hygiene", () => {
   const files = fs.readdirSync(MODULE_DIR).filter((f) => f.endsWith(".mjs"));
 
   test("the producer core exists as expected", () => {
-    assert.deepEqual(files.sort(), ["canonical.mjs", "items.mjs", "ledger.mjs", "registry.mjs", "source-time.mjs", "text-policy.mjs", "validate.mjs"]);
+    assert.deepEqual(files.sort(), ["canonical.mjs", "deps.mjs", "export.mjs", "items.mjs", "ledger.mjs", "manifest.mjs", "registry.mjs", "source-state.mjs", "source-time.mjs", "text-policy.mjs", "validate.mjs", "writer.mjs"]);
   });
 
   for (const f of ["canonical.mjs", "source-time.mjs", "text-policy.mjs", "items.mjs", "validate.mjs", "registry.mjs", "ledger.mjs"]) {

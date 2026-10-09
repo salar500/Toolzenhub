@@ -5,3 +5,6 @@ tests/.tmp/
 # build output (npm run build / build:preview)
 dist/
 dist-ghpages/
+
+# Growth manifest export (scripts/growth-manifest/export.mjs --write); never committed
+growth-export/
