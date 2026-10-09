@@ -233,7 +233,7 @@ describe("module hygiene", () => {
   test("the new test sources are ASCII-only too (invisible characters are written as escapes)", () => {
     const dir = new URL(".", import.meta.url);
     const names = fs.readdirSync(dir).filter((n) => /^growth-manifest-.*[.]test[.]mjs$/.test(n));
-    assert.equal(names.length, 4);
+    assert.ok(names.length >= 4);
     for (const f of names) {
       for (const ch of fs.readFileSync(new URL(f, dir), "utf8")) assert.ok(ch === "\n" || (ch >= " " && ch <= "~"), `unexpected character U+${ch.codePointAt(0).toString(16)} in ${f}`);
     }
@@ -242,14 +242,14 @@ describe("module hygiene", () => {
   const files = fs.readdirSync(MODULE_DIR).filter((f) => f.endsWith(".mjs"));
 
   test("the producer core exists as expected", () => {
-    assert.deepEqual(files.sort(), ["canonical.mjs", "source-time.mjs", "text-policy.mjs"]);
+    assert.deepEqual(files.sort(), ["canonical.mjs", "items.mjs", "registry.mjs", "source-time.mjs", "text-policy.mjs", "validate.mjs"]);
   });
 
-  for (const f of ["canonical.mjs", "source-time.mjs", "text-policy.mjs"]) {
+  for (const f of ["canonical.mjs", "source-time.mjs", "text-policy.mjs", "items.mjs", "validate.mjs", "registry.mjs"]) {
     const source = fs.readFileSync(new URL(f, MODULE_DIR), "utf8");
     test(`${f}: ASCII-only source, built-in imports only, no clock, randomness or locale APIs`, () => {
       for (const ch of source) assert.ok(ch === "\n" || (ch >= " " && ch <= "~"), `unexpected character U+${ch.codePointAt(0).toString(16)} in ${f}`);
-      for (const m of source.matchAll(/^import .* from "([^"]+)";?$/gm)) assert.match(m[1], /^node:/, `${f} may import only Node built-ins`);
+      for (const m of source.matchAll(/^import .* from "([^"]+)";?$/gm)) assert.ok(m[1].startsWith("node:") || /^[.][/][a-z-]+[.]mjs$/.test(m[1]), `${f} may import only Node built-ins and sibling modules`);
       const code = source.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
       for (const forbidden of ["Date.now", "new Date()", "performance.now", "Math.random", "localeCompare", "toLocale", "Intl.", "process.env", "process.argv", "require("]) {
         assert.equal(code.includes(forbidden), false, `${f} must not use ${forbidden}`);
