@@ -231,3 +231,42 @@ Chosen under `docs/product-decision-rules.md` section 12 from a platform-wide ca
 Considered and not on the roadmap: the Unit Converter, Currency, Loan Eligibility, Personal Loan, Interest, ROI, RD, Age, Ratio, the Health tools, Regex Tester, Password Generator, Inflation and an EXIF tool (failed a mandatory gate, were variants of an existing tool, or had no fitting section).
 
 **Milestone counting (the roadmap's own).** For this roadmap the manual-testing milestone in section 10, item 13, counts only these eight tools: the 24 tools published before it are excluded from both numerator and denominator. A tool counts as completed when it is implemented, has passed its risk-based automated verification and has no known critical defect; an unfinished, unsafe or unverified implementation does not count. Device and Safari checks are the milestone's own job, not a precondition for counting a tool. Six completed tools of eight is 75%, which satisfies the approximately 70% checkpoint. If audits or product reviews change the scope, the denominator changes with it (the target is the smallest whole number of tools at or above 70% of the current scope). Critical blockers are addressed when found, never held for the milestone. Progress: 2 of 8 complete (Hours & Timesheet Calculator, Tool Pack 23; Credit Card Payoff Calculator, Tool Pack 24); the checkpoint is 6 of 8, so 4 more tools remain before it.
+
+### Planning inventory P1 (candidates, not authorizations)
+
+Recorded 2026-10-11 from the user's master product strategy. It is a **planning record**: it names 30 candidates grouped for later evaluation, in the order the user gave, and **it authorizes nothing**, and it is not a build queue: no P1 tool is scheduled automatically, and existing published tools are improved rather than duplicated where research shows a real opportunity. No section is created, no route is reserved, nothing is published or scheduled, and **Roadmap R1 above is unchanged** (it keeps its eight tools and its own milestone denominator). Each candidate still goes through `docs/product-decision-rules.md` section 12 (a platform-wide comparison with labelled evidence and a verdict), then a feasibility audit, then its own approved spec (section 14 of the rulebook) before any build. Search demand, retention and competition for all 30 are **unknown or hypotheses**: no keyword volume, SEO difficulty, traffic, retention or revenue has been measured, and none is stated here. Priorities below are the user's intended order within each group; they are not scores.
+
+"Provisional home" is only where the candidate would live under the current sections (rulebook 4.2 and 4.7); the planning groups Software, Documents & Files and Time & Productivity are **not** sections. The "Existing in the repository" column was checked against the catalog and the specs on this date.
+
+| Group | # | Candidate | Priority | Provisional home | Existing in the repository (verified) |
+| --- | --- | --- | --- | --- | --- |
+| Software | 1 | SQL Practice Lab | Very high (1st of the group) | Undecided; not an existing section's fit by default | Nothing similar. Needs a browser-local SQL engine chosen by a feasibility audit; results validated by equivalent output, not one exact statement |
+| Software | 2 | QA Testing Practice Lab | Very high (2nd) | Undecided | Nothing similar |
+| Software | 3 | Excel Formula Practice & Troubleshooting | High (3rd) | Undecided | Nothing similar. No claim of full Excel compatibility without verified support |
+| Software | 4 | CSV Cleaning Workbench | High (4th) | Undecided | Nothing similar |
+| Software | 5 | Playwright Locator Playground | High (5th) | Undecided | Nothing similar |
+| Software | 6 | JSON Schema & JSONPath Lab | High (6th) | Developer Tools | JSON Formatter & Validator is published (Tool Pack 15); extend, do not duplicate |
+| Software | 7 | Spreadsheet & CSV Reconciliation | Secondary | Undecided | Text Diff / Compare is published (Tool Pack 18) for text, not keyed records |
+| Software | 8 | Regex Tester with Guided Debugging | Secondary | Developer Tools | Regex Tester is listed above as considered and not on Roadmap R1; that exclusion stands, and this listing does not override it |
+| Documents & Files | 1 | Merge PDF | First group (1st) | Undecided | None |
+| Documents & Files | 2 | Split PDF | First group (2nd) | Undecided | None |
+| Documents & Files | 3 | Images to PDF | First group (3rd) | Image Tools | Same job as Roadmap R1 item 7, Photos to PDF; one candidate, one route, the R1 audit and real-phone spike apply |
+| Documents & Files | 4 | Batch File Renamer | First group (4th) | Undecided | None; limited by browser file access |
+| Documents & Files | 5-7 | Extract, Reorder and Rotate PDF Pages | Secondary | Undecided | None; probably modes of one PDF tool (rulebook 1.6) |
+| Documents & Files | 8 | PDF to Images | Secondary | Undecided | None |
+| Documents & Files | 9 | Document Format Converter | Secondary | Undecided | None; no promise of perfect layout without proven support |
+| Documents & Files | 10 | Document Comparison Tool | Secondary | Undecided | Text Diff / Compare covers plain text; only a PDF or document comparison could be a different job |
+| Documents & Files | 11-12 | Blank PDF Page Remover; PDF Print Preparation | Secondary | Undecided | None; never delete an uncertain blank page silently |
+| Documents & Files | 13-14 | File Metadata Inspector; Duplicate File Finder | Secondary | Undecided | None |
+| Time & Productivity | 1 | Pomodoro Focus Timer | First group (1st) | Time Tools | Countdown Timer is published (Tool Pack 13); a Pomodoro must be a different job, and any saved history or preference is governed by rulebook 7.7 |
+| Time & Productivity | 2 | Time Zone Converter | First group (2nd) | Time Tools | **Already published** (Tool Pack 19); not a new candidate |
+| Time & Productivity | 3 | International Meeting Planner | First group (3rd) | Time Tools | Builds on the published Time Zone Converter; must do a job it does not |
+| Time & Productivity | 4 | Timesheet & Work Hours Tracker | First group (4th) | Time Tools | The Hours & Timesheet Calculator is published (Tool Pack 23); a tracker with stored entries needs its rulebook 7.7 reason |
+| Time & Productivity | 5 | World Clock | Second group | Time Tools | Tool Pack 19 deliberately did not build a world-clock dashboard |
+| Time & Productivity | 6 | Online Countdown Timer | Second group | Time Tools | **Already published** (Tool Pack 13) |
+| Time & Productivity | 7 | Stopwatch with Lap Tracking | Second group | Time Tools | **Already published** (Tool Pack 14, with laps) |
+| Time & Productivity | 8 | Shift Schedule Planner | Second group | Time Tools | None |
+
+**Research candidates only** (no evaluation done, none approved): Education & Practice, Business Operations, Writing & Language, Travel & Geography, Home & Everyday Life, and Career & Employment, each with the risks the user listed (strong competitors, content quality, changing regulations, persistence, overlap with Developer Tools or with existing business calculators). A future category follows the rulebook's section 4, item 7. Overlaps already in the catalog (a text difference checker, business finance calculators) are not rebuilt to fill a category.
+
+**Practice and learning tools** (SQL, QA, Excel, Playwright): the intended flow is learn, practise, validate, apply. Validation is deterministic and accepts every correct alternative; it does not require one exact answer, and it uses no AI API.
