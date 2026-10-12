@@ -1,6 +1,6 @@
 # Tool Pack 25: Cron Expression Explainer (the fifth Developer Tools tool)
 
-Status: **specification approved by the owner on 2026-10-12. Implementation NOT started; Phase 1 needs its own explicit go-ahead.** Revised 2026-10-12 (specification corrections only; nothing was built).
+Status: **specification approved by the owner on 2026-10-12; implemented in three phases (Phase 1 engine `f06cc47`, Phase 2 integration `571194a`, Phase 3 review and the Implementation notes in section 24). Not pushed, not deployed.** Android and Safari/WebKit are unverified.
 Repository baseline: written on `0189357`; re-checked against **HEAD `33d309b`** on 2026-10-12. `0189357` (Credit Card Payoff Calculator) is the last feature commit: the seven commits after it (all unpushed at the time of the check) are Growth manifest work and rulebook or planning documentation, and none changes the catalog, a tool module or a tool test. Counts re-verified on `33d309b`: 26 published tools, Developer Tools 4 (JSON Formatter and Validator, Unix Timestamp Converter, Text Diff / Compare, JWT Decoder), All Tools groups 16 (5 live calculator categories, 6 Time Tools, 4 Developer Tools, 1 Image Tools; `tests/browser/navigation.spec.js` line 494). Re-check these again at the start of the implementation.
 Roadmap: item 3 of Roadmap R1 (`docs/tool-pack-factory.md` section 10). The roadmap does not authorize this build; approval of this specification does. R1 progress when written: 2 of 8.
 Id and slug: `cron-expression-explainer` (route `/tools/cron-expression-explainer/`, the route convention of rulebook 4.3 and of the JWT Decoder)
@@ -330,3 +330,46 @@ Three focused phases, each needing its own approval before its commit (section 1
 
 ## 23. Rulebook note
 This specification proposes **no new permanent rule**. Pinning a third-party syntax to its source and verifying it against that source is recorded here as a tool decision. Rulebook references re-checked against `docs/product-decision-rules.md` on 2026-10-12: rule 1.4 (AI-era test), 4.2 (sections), 4.3 (routes), section 6 items 6 and 7 (Growth identity ledger and manifest export), section 10 items 5, 6 and 13 (visual tests, pinned expectations, manual testing at milestones), section 11 items 2 and 7 (flow and approval boundaries) and the eight mandatory gates of section 12 all exist as cited; `docs/tool-pack-factory.md` section 10 holds Roadmap R1, unchanged by this revision (2 of 8 complete).
+
+## 24. Implementation notes
+Written in Phase 3 (2026-10-12). Facts only; where something differs from the specification above, it is listed under "Deviations".
+
+**Architecture.**
+- `assets/js/tools/cron-explainer/cron-engine.js`: the pure engine (no DOM, network, storage, `Date`, regular expression or dependency). Four parts kept apart: civil-date routines (integer arithmetic), a hand-written scanner producing the intermediate result, the day rule and the next-run search, and the explanation (field meanings, a summary for a few exact shapes, notes). Exports `parseCron`, `nextRuns`, `explainCron`, `summarize`, `renderSummary`, `matchesDate`, `formatRun` and the calendar helpers.
+- `assets/js/tools/cron-explainer/index.js`: the page (`markup`, `render`, `init`; `showRelatedCalculators` and `showRelatedArticles` false). It calls `explainCron` once per Explain with `Date.now()` and repeats none of the engine's rules. All text from the expression is written with `textContent`.
+- `assets/css/tools/cron-explainer.css`, registered in `src/_data/toolStyles.json`.
+- Catalog: `assets/js/data/tools.js` (id `cron-expression-explainer`, Developer Tools, `autoRelated: false`, related `unix-timestamp-converter` only); `assets/js/data/categories.js` (`seoDescription` and `summary` of Developer Tools).
+- Growth ledger: `scripts/growth-manifest/identity-ledger.json`, one record (module `assets/js/tools/cron-explainer/index.js`, provenance `added`, state `active`), committed with the catalog entry. `node scripts/growth-manifest/export.mjs --check` passed after the Phase 2 commit (27 tools, 34 articles, 111 guarded files); it must be run again after the Phase 3 commit and before any push. `--write` was never run.
+- Build and inventory: 79 live pages (was 78) and the page is in the sitemap. Both builds (`dist`, `dist-ghpages`) are clean, and the link, asset and SEO checks pass.
+
+**Dialect.** Cronie crontab syntax with five time fields (section 3), the seven lowercase aliases, nothing else. No other dialect is read, and the page and the messages do not claim compatibility with other cron programs.
+
+**Engine and oracle provenance.**
+- Source: cronie `master` at `59a3d15672d5738f5b6f76c843f200ef40ac5810` (committed 2026-09-25), which the GitHub API reported as the head of `master` on 2026-10-12. `src/entry.c`, `src/cron.c`, `src/macros.h` and `man/crontab.5` were fetched at that exact revision; their SHA-256 hashes are recorded in `tests/fixtures/cron-golden.json`.
+- `tests/fixtures/cron-golden.py` is a line-by-line port of cronie's field parser (`load_entry`, `get_list`, `get_range`, `get_number`, `set_element`), a brute-force `datetime` next-run scan (minute by minute for a year and day by day over 146,097 days), and values from the manual page and the `cron.c` comment. It never reads or runs the JavaScript; only it writes the JSON. Two runs give byte-identical output.
+- The JavaScript caught one mistake in the oracle during Phase 1 (the Sunday 0/7 merge was not applied to `@weekly`); the oracle was fixed against the C source, and the engine had been right.
+- **No cronie binary was built or run.** Everything is source-level.
+
+**Testing performed.**
+- Phase 1: 75 unit tests against the reference (281 parse vectors: 143 accepted, 138 refused, 27 labelled "accepted by cronie, refused by V1"; 449 next-run vectors; the 12-row truth table; 68 summary vectors, with the matching minutes of 2026 re-derived from each structured form; 678 civil-date samples; 400 day-field pairs over a leap and a non-leap year; digests of two exhaustive sweeps of 66,429 and 111,110 strings) and 10 mutation tests, each caught.
+- Phase 2: a browser spec for the page (explain only on request, errors, Reset, keyboard, focus, live region, hostile text, copy, privacy, 320/360/390 px, related tool, search, refresh), the pinned unit and browser literals (Developer Tools 4 to 5, groups 16 to 17, 39 search tools), and the regenerated inventory and baselines (DOM, SEO, links, and five listing screenshots reviewed by eye). No dedicated visual baseline for the page (decision 11).
+- Phase 3: a fresh-seed differential run against the Python reference (3,512 expressions including 564 deliberately mutated ones, 2,948 five-run searches, no mismatch; run from the scratch area and not committed); Lighthouse on the page; in-browser timing under a 4x CPU slowdown (an Explain paints in under 70 ms after the first, including a full-cycle "never" search); a text-size test at 200%.
+- Not run: any real device, Safari/WebKit (none is installed here) and a real cronie.
+
+**Deviations from the specification.**
+1. `* * * * *` is summarised ("Every minute, every day"); the specification's list of shapes did not include it (owner-approved, decision A of Phase 1).
+2. The separate sentence "on days that are both ..." for one star field and one restricted field is not produced: a plain `*` already reads as "on Friday", and a star with a step is never summarised.
+3. The 32-item list limit can never be the reported error, because 33 items need 65 characters and a field is limited to 64 (owner-approved, decision B). The check stays in the engine as a defensive guard.
+4. Only space and tab are trimmed from the ends; any other whitespace is a "not allowed" error naming the character and position. Positions are 1-based in the text as typed.
+5. `nextRuns` and `explainCron` throw `RangeError` for a clock that is not a finite number within the range of a JavaScript date; the page always passes `Date.now()`.
+6. The summary sentence is shown with a closing full stop; the engine's sentence has none.
+7. The engine marks code in messages and notes with backticks (the strings the specification gives). The page shows that text as code and keeps the words, and its announcements leave the marks out; if the expression itself held a backtick, the message is shown exactly as it is. The engine's strings and error contract are unchanged.
+8. The dialect comparison on the page is the section 5 table reduced to sourced cells (a dash means no claim); the POSIX column is not shown.
+9. The Growth unit test `tests/unit/growth-manifest-ledger.test.mjs` now accepts the tool provenance `added` as well as `bootstrap`, as the ledger code and `docs/growth-manifest.md` allow (owner-approved in Phase 2).
+
+**Known limitations.**
+- UTC only; daylight saving is not modelled; "now" is the device clock.
+- Cronie `master` may differ from distribution builds, and other cron programs were not read.
+- Lighthouse accessibility is 93 (desktop and mobile) for the page, against 92 for the JWT Decoder and the JSON Formatter. Every finding is in the shared layer and also appears on those pages: the site's green link colour (`#0b9f58`) on the breadcrumb, the eyebrow label and in-text links (3.3 to 3.4:1), links in text distinguished by colour only, and the header brand and footer links whose accessible name omits their visible text. None is in this tool's own elements and none was changed here (rulebook 7.5: judge it in the shared layer first). Lighthouse mobile performance is 81 (JWT Decoder 76, JSON Formatter 85) under simulated throttling with fonts blocked; it is informational.
+
+**Remaining platform verification.** Real Android and Safari/WebKit stay unverified until tested at the Roadmap R1 milestone. Roadmap R1 is not changed by this work.

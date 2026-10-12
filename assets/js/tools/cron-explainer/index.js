@@ -825,6 +825,45 @@ export function init() {
 
     }
 
+    /*
+       The engine marks code in its messages and notes with backticks. On the page that is shown as code, never
+       as markup: the text between a pair of backticks goes into a <code> element with textContent. If the
+       expression itself held a backtick, the marks cannot be told apart, so the text is shown exactly as it is.
+    */
+    function fillRich(element, text, literal = false) {
+
+        element.replaceChildren();
+
+        const parts = text.split("`");
+
+        if (literal || (parts.length - 1) % 2 !== 0) {
+            element.textContent = text;
+            return;
+        }
+
+        parts.forEach((part, index) => {
+
+            if (part === "") {
+                return;
+            }
+
+            if (index % 2 === 1) {
+                element.append(node("code", "ce-code", part));
+            } else {
+                element.append(document.createTextNode(part));
+            }
+
+        });
+
+    }
+
+    /* what a screen reader should hear: the same words without the notation marks */
+    function spoken(text, literal = false) {
+
+        return literal ? text : text.split("`").join("");
+
+    }
+
     function row(list, term, ...details) {
 
         const wrap = node("div", "ce-row");
@@ -899,7 +938,9 @@ export function init() {
 
         shown = null;
 
-        errorMessage.textContent = error.message;
+        const typedBacktick = explainedFrom !== null && explainedFrom.includes("`");
+
+        fillRich(errorMessage, error.message, typedBacktick);
 
         if (typeof error.position === "number") {
             errorWhere.textContent = `Position ${error.position}`;
@@ -915,7 +956,7 @@ export function init() {
 
         setStatus("invalid", "Could not read this as a cron expression.");
 
-        announce(`Could not read this as a cron expression. ${error.message}`);
+        announce(`Could not read this as a cron expression. ${spoken(error.message, typedBacktick)}`);
 
         input.focus();
 
@@ -1011,7 +1052,11 @@ export function init() {
         notesList.replaceChildren();
 
         for (const note of result.notes) {
-            notesList.append(node("li", "", note.text));
+            const item = node("li");
+
+            fillRich(item, note.text);
+
+            notesList.append(item);
         }
 
         notesEmpty.hidden = result.notes.length > 0;

@@ -108,7 +108,7 @@ test.describe("Cron Expression Explainer", () => {
     await expect(cell(4, "Meaning")).toHaveText("Monday through Friday");
     await expect(cell(4, "Values")).toHaveText("1, 2, 3, 4 and 5");
     // a note that applies (one day field is a star and the other is restricted)
-    await expect(page.locator("#ce-notes li")).toHaveText(["A day field written with `*` (including `*/2`) makes cron require both day fields to match."]);
+    await expect(page.locator("#ce-notes li")).toHaveText(["A day field written with * (including */2) makes cron require both day fields to match."]);
     // the next five times, UTC, 24-hour, strictly after the (fixed) current time
     await expect(runs(page)).toHaveText([
       "Tue 13 Oct 2026, 04:30 UTC",
@@ -139,7 +139,7 @@ test.describe("Cron Expression Explainer", () => {
     await explain(page, "0 0 */2 * 1");
     await expect(page.locator("#ce-summary")).toHaveText("This schedule is explained field by field below.");
     await expect(page.locator(".ce-table__row")).toHaveCount(5);
-    await expect(page.locator("#ce-notes")).toContainText("A day field written with `*` (including `*/2`) makes cron require both day fields to match.");
+    await expect(page.locator("#ce-notes")).toContainText("A day field written with * (including */2) makes cron require both day fields to match.");
   });
 
   test("the day rule: when both day fields are restricted, the OR note and sentence appear", async ({ page, go }) => {
@@ -195,14 +195,14 @@ test.describe("Cron Expression Explainer", () => {
   test("unreadable input: a specific message tied to the box, no results, focus stays in the box, the text stays editable", async ({ page, go }) => {
     await open(page, go);
     const cases = [
-      ["0/35 * * * *", /Field 1 \(minute\).*a step must follow `\*` or a range, such as `0-59\/35`/, "Position 2"],
+      ["0/35 * * * *", /Field 1 \(minute\): 0\/35: in cronie crontab syntax, a step must follow \* or a range, such as 0-59\/35\./, "Position 2"],
       ["60 * * * *", /^Field 1 \(minute\): 60 is outside 0 to 59 for the minute field\.$/, "Position 1"],
       ["5-3 * * * *", /runs backwards\. In crontab the first number must be at most the second\./, "Position 1"],
-      ["0 0 ? * *", /`\?` is not valid in cronie crontab syntax/, "Position 5"],
+      ["0 0 ? * *", /\? is not valid in cronie crontab syntax/, "Position 5"],
       ["* * * * * *", /a sixth field is the command/, null],
       ["1 2 3 4", /needs five fields.*this has 4\./, null],
       ["@reboot", /no schedule to explain/, "Position 1"],
-      ["0 0 * * monday", /`monday` is not valid: use `mon`/, "Position 9"],
+      ["0 0 * * monday", /monday is not valid: use mon/, "Position 9"],
     ];
     for (const [text, message, where] of cases) {
       await explain(page, text);
@@ -228,6 +228,22 @@ test.describe("Cron Expression Explainer", () => {
     await expect(errorBox(page)).toBeHidden();
     await expect(status(page)).toHaveText("Enter an expression, or choose an example.");
     await expect(page.locator("#ce-live")).toContainText("There is no expression to explain.");
+  });
+
+  test("code in messages and notes is shown as code, not as literal backtick marks, and is not read aloud with them", async ({ page, go }) => {
+    await open(page, go);
+    await explain(page, "0/35 * * * *");
+    expect(await page.locator("#ce-error-message code").allInnerTexts()).toEqual(["0/35", "*", "0-59/35", "20/15", "0/15", "1/10"]);
+    expect(await page.locator("#ce-error-message").innerText()).not.toContain("`");
+    await expect(page.locator("#ce-live")).not.toContainText("`");
+    await expect(page.locator("#ce-live")).toContainText("a step must follow * or a range");
+    await explain(page, "0 0 */2 * 1");
+    expect(await page.locator("#ce-notes").innerText()).not.toContain("`");
+    expect(await page.locator("#ce-notes code").allInnerTexts()).toEqual(["*", "*/2"]);
+    // text that held its own backtick (so the marks do not pair up) is shown exactly as typed, and nothing is lost
+    await explain(page, "`x * * * *");
+    await expect(page.locator("#ce-error-message")).toContainText("`x");
+    expect(await page.locator("#ce-error-message code").count()).toBe(0);
   });
 
   test("the other dialects are refused, not guessed (Quartz, AWS, Kubernetes and GitHub forms)", async ({ page, go }) => {
@@ -478,6 +494,27 @@ for (const width of [320, 360, 390]) {
     });
   });
 }
+
+test.describe("Cron Expression Explainer with larger text", () => {
+  test.use({ viewport: { width: 390, height: 800 } });
+
+  test("text enlarged to 200%: the box, the result and the tables still fit the page and the buttons stay reachable", async ({ page, go }) => {
+    await open(page, go);
+    await page.addStyleTag({ content: "html { font-size: 200% !important; }" }); // the browser's text-size setting
+    await expectNoHorizontalOverflow(page);
+    await explain(page, "*/15 9-17 1,15 jan-mar mon,wed");
+    await expect(results(page)).toBeVisible();
+    await expectNoHorizontalOverflow(page);
+    for (const name of ["Explain", "Reset", "Copy expression", "Copy summary"]) {
+      const box = await btn(page, name).boundingBox();
+      expect(box.height, name).toBeGreaterThanOrEqual(44);
+      expect(box.x + box.width, name).toBeLessThanOrEqual(390);
+    }
+    await explain(page, "60 * * * *");
+    await expect(errorBox(page)).toBeVisible();
+    await expectNoHorizontalOverflow(page);
+  });
+});
 
 test.describe("Cron Expression Explainer in the Developer Tools section", () => {
   test("it is listed with the other four, and its related tool is the Unix converter only, linked from its own text", async ({ page, go, siteRoot }) => {
