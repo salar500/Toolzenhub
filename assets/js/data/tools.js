@@ -1209,6 +1209,43 @@ const catalog = [
     },
 
     {
+        id: "cron-expression-explainer",
+        status: "published",
+        loader: () =>
+            import("../tools/cron-explainer/index.js"),
+        sectionId: "developer-tools",
+        icon: "* * *",
+        title: "Cron Expression Explainer",
+        description:
+            "Paste a five-field cron expression written in cronie crontab syntax to see what each field means, a plain-language summary and the next five matching times in UTC. It checks the syntax, says what it does not support and runs in your browser.",
+        autoRelated: false,
+        relatedTools: ["unix-timestamp-converter"],
+        aliases: [
+            "cron expression explainer",
+            "explain cron expression",
+            "crontab explainer",
+            "cron expression",
+            "crontab syntax",
+            "cron schedule explained",
+            "cron next run times"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Cron Expression Explainer: Read a Crontab Schedule | ToolZen Hub",
+            description:
+                "Paste a five-field cron expression written in cronie crontab syntax to see what each field means, a plain-language summary and the next five matching times in UTC. It checks the syntax and runs in your browser."
+        }
+    },
+
+    {
         id: "image-compressor-resizer",
         status: "published",
         loader: () =>

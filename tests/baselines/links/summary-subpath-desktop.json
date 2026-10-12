@@ -339,7 +339,7 @@
     "deadFragments": []
   },
   "developer-tools.html": {
-    "internal": 28,
+    "internal": 29,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -405,12 +405,18 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 58,
+    "internal": 59,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "tools/countdown-timer/": {
+    "internal": 24,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/cron-expression-explainer/": {
     "internal": 24,
     "external": [],
     "placeholders": 4,

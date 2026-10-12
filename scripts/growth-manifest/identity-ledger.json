@@ -320,6 +320,13 @@
       "state": "active"
     },
     {
+      "id": "cron-expression-explainer",
+      "module": "assets/js/tools/cron-explainer/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "date-calculator",
       "module": "assets/js/tools/date-calculator/index.js",
       "moduleChanges": [],

@@ -1,0 +1,846 @@
+/* =========================================================
+   ToolZen Hub
+   Cron Expression Explainer
+
+   Only what the shared tool styles do not already provide: the
+   expression box with its example buttons, the status and error
+   panel, the result cards, the field table and the static tables.
+   Buttons, focus and headings come from the shared layer. Loaded
+   after calculator-responsive.css.
+
+   Explained and unreadable are told in words, never by colour
+   alone. Nothing animates.
+
+   Everything that came from an expression wraps (overflow-wrap:
+   anywhere), so a long value never widens the page. One column on
+   a phone; the field table is a stacked list below 700px and a
+   table from 700px; the cards sit in two columns from 900px.
+========================================================= */
+
+.ce-workspace [hidden] {
+
+    display: none !important;
+
+}
+
+.ce-workspace {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+
+}
+
+.ce-dialect {
+
+    margin: 0;
+    padding: 10px 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 10px;
+
+    background: #f9fafb;
+
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ce-pane {
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+}
+
+.ce-pane__head {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 12px;
+
+    margin-bottom: 8px;
+
+}
+
+.ce-label {
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 700;
+
+}
+
+.ce-meta {
+
+    color: #475467;
+
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+
+}
+
+.ce-input {
+
+    display: block;
+
+    width: 100%;
+    min-height: 48px;
+
+    padding: 10px 14px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+    font-size: 16px;
+    line-height: 1.4;
+
+}
+
+.ce-input:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.ce-input[aria-invalid="true"] {
+
+    border-color: #b42318;
+
+    box-shadow: inset 4px 0 0 #b42318;
+
+}
+
+.ce-hint {
+
+    margin: 8px 0 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.55;
+
+}
+
+.ce-hint code,
+.ce-dialect code,
+.calculator-info code {
+
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+    font-size: 0.92em;
+
+    overflow-wrap: anywhere;
+
+}
+
+/* the example buttons */
+
+.ce-examples-wrap {
+
+    min-width: 0;
+
+}
+
+.ce-examples-label {
+
+    margin: 0 0 8px;
+
+    color: #344054;
+
+    font-size: 14px;
+    font-weight: 700;
+
+}
+
+.ce-examples {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+}
+
+.ce-chip {
+
+    min-width: 0;
+    min-height: 44px;
+
+    padding: 8px 12px;
+
+    border: 1px solid #98a2b3;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ce-chip:hover {
+
+    background: #f2f4f7;
+
+}
+
+.ce-chip:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+/* buttons: Explain is the main action */
+
+.ce-actions {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+
+}
+
+.ce-button {
+
+    min-width: 0;
+    min-height: 48px;
+
+    font-size: 16px;
+
+}
+
+/* status and error */
+
+.ce-result {
+
+    min-width: 0;
+
+}
+
+.ce-status {
+
+    margin: 0;
+    padding: 10px 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 10px;
+
+    background: #f9fafb;
+
+    color: #344054;
+
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ce-workspace[data-state="explained"] .ce-status {
+
+    border-color: #067647;
+
+    background: #ecfdf3;
+
+    color: #054f31;
+
+}
+
+.ce-workspace[data-state="invalid"] .ce-status {
+
+    border-color: #b42318;
+
+    background: #fef3f2;
+
+    color: #912018;
+
+}
+
+.ce-stale {
+
+    margin: 8px 0 0;
+
+    color: #475467;
+
+    font-size: 13px;
+
+}
+
+.ce-error {
+
+    margin-top: 12px;
+    padding: 14px;
+
+    border: 1px solid #fda29b;
+    border-radius: 12px;
+
+    background: #ffffff;
+
+}
+
+.ce-error p {
+
+    margin: 0;
+
+}
+
+.ce-error__title {
+
+    color: #912018;
+
+    font-size: 16px;
+    font-weight: 700;
+
+}
+
+.ce-error__message {
+
+    margin-top: 6px !important;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ce-error__where {
+
+    margin-top: 6px !important;
+
+    color: #475467;
+
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+
+}
+
+.ce-results__heading:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+/* the result cards */
+
+.ce-results {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+
+    min-width: 0;
+
+}
+
+.ce-results__heading {
+
+    margin: 0;
+
+    font-size: 20px;
+
+}
+
+.ce-card {
+
+    min-width: 0;
+    padding: 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 12px;
+
+    background: #ffffff;
+
+}
+
+.ce-card h3 {
+
+    margin: 0 0 10px;
+
+    font-size: 16px;
+
+}
+
+.ce-card__head {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 12px;
+
+    margin-bottom: 10px;
+
+}
+
+.ce-card__head h3 {
+
+    margin: 0;
+
+}
+
+.ce-card__tools {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+}
+
+.ce-copy {
+
+    min-width: 0;
+    min-height: 44px;
+
+    font-size: 15px;
+
+}
+
+.ce-summary {
+
+    margin: 0 0 12px;
+
+    color: var(--color-ink);
+
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ce-list {
+
+    display: grid;
+    gap: 10px;
+
+    margin: 0;
+
+}
+
+.ce-row {
+
+    min-width: 0;
+
+}
+
+.ce-row dt {
+
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ce-row dd {
+
+    margin: 2px 0 0;
+
+    color: var(--color-ink);
+
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ce-row:first-child dd {
+
+    font-family: inherit;
+
+}
+
+.ce-mono {
+
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+
+}
+
+/* the field table: a stacked list on a phone, a table from 700px */
+
+.ce-fields {
+
+    min-width: 0;
+
+}
+
+.ce-table {
+
+    display: grid;
+    gap: 10px;
+
+    min-width: 0;
+
+}
+
+.ce-table__head {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+.ce-table__row {
+
+    display: grid;
+    gap: 4px;
+
+    min-width: 0;
+    padding: 10px 12px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 10px;
+
+    background: #f9fafb;
+
+}
+
+.ce-table__cell {
+
+    min-width: 0;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ce-table__cell::before {
+
+    content: attr(data-label) ": ";
+
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 700;
+
+}
+
+.ce-table__cell[data-label="Field"] {
+
+    font-weight: 700;
+
+}
+
+/* notes, runs and assumptions */
+
+.ce-notes {
+
+    margin: 0;
+    padding-left: 20px;
+
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ce-notes li + li {
+
+    margin-top: 6px;
+
+}
+
+.ce-runs {
+
+    margin: 0;
+    padding-left: 24px;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.8;
+
+}
+
+.ce-assumptions {
+
+    margin: 12px 0 0;
+    padding-left: 20px;
+
+    color: #475467;
+
+    font-size: 13px;
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ce-muted {
+
+    margin: 0 0 8px;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+
+}
+
+/* the static tables (syntax, the day rule, dialects) scroll inside their own box, never the page */
+
+.ce-scroll {
+
+    max-width: 100%;
+    margin: 12px 0;
+
+    overflow-x: auto;
+
+}
+
+.ce-scroll:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.ce-static-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    text-align: left;
+
+}
+
+.ce-static-table caption {
+
+    padding: 0 0 8px;
+
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+
+}
+
+.ce-static-table th,
+.ce-static-table td {
+
+    padding: 8px 10px;
+
+    border: 1px solid var(--color-slate-200);
+
+    vertical-align: top;
+
+}
+
+.ce-static-table thead th {
+
+    background: #f2f4f7;
+
+    color: #344054;
+
+    font-weight: 700;
+
+}
+
+.ce-static-table tbody th {
+
+    background: #f9fafb;
+
+    font-weight: 600;
+
+}
+
+.ce-dialects {
+
+    min-width: 720px;
+
+}
+
+.ce-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+/* wider screens: buttons side by side, the field table as a table */
+
+@media (min-width: 640px) {
+
+    .ce-actions {
+
+        grid-template-columns: repeat(auto-fit, minmax(150px, 220px));
+
+    }
+
+}
+
+@media (min-width: 700px) {
+
+    .ce-table {
+
+        gap: 0;
+
+        border: 1px solid var(--color-slate-200);
+        border-radius: 10px;
+
+        overflow: hidden;
+
+    }
+
+    .ce-table__head,
+    .ce-table__row {
+
+        display: grid;
+        grid-template-columns: 8rem 9rem minmax(0, 1.4fr) minmax(0, 1fr);
+        gap: 0;
+
+    }
+
+    .ce-table__head {
+
+        position: static;
+
+        width: auto;
+        height: auto;
+
+        margin: 0;
+
+        clip: auto;
+        overflow: visible;
+
+        white-space: normal;
+
+        background: #f2f4f7;
+
+    }
+
+    .ce-table__row {
+
+        padding: 0;
+
+        border: 0;
+        border-top: 1px solid var(--color-slate-200);
+        border-radius: 0;
+
+        background: #ffffff;
+
+    }
+
+    .ce-table__cell {
+
+        padding: 8px 10px;
+
+    }
+
+    .ce-table__cell::before {
+
+        content: none;
+
+    }
+
+    .ce-table__cell--head {
+
+        color: #344054;
+
+        font-size: 13px;
+        font-weight: 700;
+
+    }
+
+}
+
+@media (min-width: 900px) {
+
+    .ce-results {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    }
+
+    .ce-results__heading,
+    .ce-card--wide {
+
+        grid-column: 1 / -1;
+
+    }
+
+}

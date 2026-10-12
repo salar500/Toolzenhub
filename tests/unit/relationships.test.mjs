@@ -81,12 +81,15 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.equal(toolIds(rel.getRelatedTools("unix-timestamp-converter")).includes("text-diff"), false);
     // the JWT Decoder (Tool Pack 22) names the JSON Formatter (the payload is JSON) and the Unix Timestamp Converter (exp, nbf and iat are Unix times), and nothing else (autoRelated is off); the links are one way, so neither tool's list, nor any other tool's, gains it
     assert.deepEqual(toolIds(rel.getRelatedTools("jwt-decoder")), ["json-formatter", "unix-timestamp-converter"]);
+    // the Cron Expression Explainer (Tool Pack 25) names the Unix Timestamp Converter only (its next runs are Unix-time instants; autoRelated is off); the link is one way, so no other tool's list gains it, and the Time Zone Converter (another section) is not related
+    assert.deepEqual(toolIds(rel.getRelatedTools("cron-expression-explainer")), ["unix-timestamp-converter"]);
+    for (const id of ["json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "time-zone-converter", "image-compressor-resizer", "date-difference", "stopwatch", "swp", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("cron-expression-explainer"), false, id);
     // the Credit Card Payoff Calculator (Tool Pack 24) keeps the automatic Loans relationships on: its curated tools first (a balance moved to a lower rate, extra payments, a fixed payment over a term), then the rest of the category, and it is appended to every other Loans tool's list (asserted above)
     assert.deepEqual(toolIds(rel.getRelatedTools("credit-card-payoff")), ["balance-transfer", "prepayment", "emi", "loan-comparison", "home-loan"]);
     assert.deepEqual(keys(rel.getRelatedArticlesForTool("credit-card-payoff")), ["loan-comparison/loan-tenure-total-interest", "loan-comparison/emi-vs-total-interest"]); // curated, shown as written, not padded
     // the Hours & Timesheet Calculator (Tool Pack 23) relates to nothing (autoRelated is off and it names no tool), so it joins no other Time Tool's list and the four older Time Tools' lists above are unchanged
     assert.deepEqual(toolIds(rel.getRelatedTools("hours-calculator")), []);
-    for (const id of ["date-difference", "date-calculator", "countdown-timer", "stopwatch", "time-zone-converter", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "image-compressor-resizer", "swp", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("hours-calculator"), false, id);
+    for (const id of ["date-difference", "date-calculator", "countdown-timer", "stopwatch", "time-zone-converter", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "image-compressor-resizer", "swp", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("hours-calculator"), false, id);
     for (const id of ["json-formatter", "unix-timestamp-converter", "text-diff", "time-zone-converter", "image-compressor-resizer", "date-difference", "stopwatch", "swp", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("jwt-decoder"), false, id);
     // the Time Zone Converter names the Unix converter (both read instants and zones); autoRelated is off, so it joins no other Time Tool's list and none of theirs are changed (asserted above)
     assert.deepEqual(toolIds(rel.getRelatedTools("time-zone-converter")), ["unix-timestamp-converter"]);
@@ -108,7 +111,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.deepEqual(toolIds(rel.getRelatedTools("profit")), ["margin"]);
     assert.deepEqual(rel.getRelatedTools("nope"), []);
     // parity with the pre-M7 rule for every tool without a curated list (the Loan Prepayment page curates its own order; GST and Percentage curate cross-category lists)
-    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "time-zone-converter", "hours-calculator", "image-compressor-resizer", "income-tax", "swp", "credit-card-payoff"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
+    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "time-zone-converter", "hours-calculator", "image-compressor-resizer", "income-tax", "swp", "credit-card-payoff"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
   });
 
   test("tool -> related articles: the first six published loan articles, in catalog order, for EMI and Loan Comparison", () => {

@@ -3591,11 +3591,11 @@
   "/developer-tools.html": {
     "runtime": {
       "title": "Developer Tools | ToolZen Hub",
-      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker and a JWT decoder that run in your browser.",
+      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker, a JWT decoder and a cron expression explainer that run in your browser.",
       "canonical": "https://toolzenhub.in/developer-tools.html",
       "robots": null,
       "openGraph": {
-        "og:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker and a JWT decoder that run in your browser.",
+        "og:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker, a JWT decoder and a cron expression explainer that run in your browser.",
         "og:site_name": "ToolZen Hub",
         "og:title": "Developer Tools | ToolZen Hub",
         "og:type": "website",
@@ -3603,7 +3603,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker and a JWT decoder that run in your browser.",
+        "twitter:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker, a JWT decoder and a cron expression explainer that run in your browser.",
         "twitter:title": "Developer Tools | ToolZen Hub"
       },
       "jsonLd": [
@@ -3627,14 +3627,14 @@
     },
     "rawHtml": {
       "title": "Developer Tools | ToolZen Hub",
-      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker and a JWT decoder that run in your browser.",
+      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker, a JWT decoder and a cron expression explainer that run in your browser.",
       "canonical": "https://toolzenhub.in/developer-tools.html",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1231
+      "visibleTextChars": 1507
     }
   },
   "/disclaimer.html": {
@@ -4088,7 +4088,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3476
+      "visibleTextChars": 3744
     }
   },
   "/tools/countdown-timer/": {
@@ -4138,6 +4138,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 3069
+    }
+  },
+  "/tools/cron-expression-explainer/": {
+    "runtime": {
+      "title": "Cron Expression Explainer: Read a Crontab Schedule | ToolZen Hub",
+      "description": "Paste a five-field cron expression written in cronie crontab syntax to see what each field means, a plain-language summary and the next five matching times in UTC. It checks the syntax and runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/cron-expression-explainer/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Paste a five-field cron expression written in cronie crontab syntax to see what each field means, a plain-language summary and the next five matching times in UTC. It checks the syntax and runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Cron Expression Explainer: Read a Crontab Schedule | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/cron-expression-explainer/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Paste a five-field cron expression written in cronie crontab syntax to see what each field means, a plain-language summary and the next five matching times in UTC. It checks the syntax and runs in your browser.",
+        "twitter:title": "Cron Expression Explainer: Read a Crontab Schedule | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Cron Expression Explainer"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Cron Expression Explainer: Read a Crontab Schedule | ToolZen Hub",
+      "description": "Paste a five-field cron expression written in cronie crontab syntax to see what each field means, a plain-language summary and the next five matching times in UTC. It checks the syntax and runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/cron-expression-explainer/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 8476
     }
   },
   "/tools/date-calculator/": {

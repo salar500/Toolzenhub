@@ -411,7 +411,7 @@ describe("the real ledger", () => {
     for (const record of file.ledger.tools) {
       assert.equal(record.module, registry.facts.toolModules[record.id].path);
       assert.ok(fs.statSync(path.join(REPO_ROOT, record.module)).isFile(), record.module);
-      assert.equal(record.provenance, "bootstrap");
+      assert.ok(["bootstrap", "added"].includes(record.provenance), `${record.id}: ${record.provenance}`); // "added" is the provenance of a tool recorded after the bootstrap (docs/growth-manifest.md)
     }
   });
 
