@@ -218,6 +218,44 @@ None. If one is later wanted: a diagram of one year (monthly lowest-balance inte
 ## 24. Performance constraints
 Pure arithmetic over at most 50 years × 12 months (600 steps); no loop is unbounded; no new dependency; the tool's JS and CSS load only on its page; budget in line with the FD calculator's gzipped size.
 
+### Implementation notes (Phase 3, 2026-10-13)
+Facts only; nothing above this heading is changed. Where something differs from the specification it is listed under "Deviations".
+
+**Architecture.**
+- `assets/js/calculators/formulas/ppf.js`: the pure engine (validation, `calculatePpf`, `comparePpfPatterns`, year labels, rounding and `toDisplay`); no DOM, network, storage or `Date`.
+- `assets/js/calculators/ppf/index.js`: the page. It calls the engine and repeats none of its formulas. Shared primitives: `numberField`, `setFieldsInvalid`/`clearFieldsInvalid`, `resultMetric`/`resultEmpty`/`resultError`, `formatINR`.
+- `assets/css/calculators/ppf.css`, registered in `src/_data/toolStyles.json`.
+- Catalog: `assets/js/data/tools.js`, id `ppf` changed from Coming Soon to published (Calculators > Investment, automatic Investment relationship kept, no curated related list, no `relatedArticles`).
+- Growth ledger: one record (`id` `ppf`, module `assets/js/calculators/ppf/index.js`, provenance `added`, state `active`), committed with the catalog entry.
+- Commits (local only): specification `e4e79a0`; Phase 1 `27bc11b` (engine, oracle, 39 unit tests); Phase 2 `d014cf9` (page, catalog, ledger, style entry, browser spec, pinned unit and browser literals, URL inventory, DOM, links and SEO baselines).
+
+**Oracle methodology and coverage.**
+- `tests/fixtures/ppf-golden.py` (Python standard library, exact `Fraction` arithmetic) is independent of the JavaScript. Two models must agree exactly before a value is written: a day-level ledger model and the closed forms of section 7. It writes `tests/fixtures/ppf-golden.json` (400 vectors, 199 with year rows, 260 comparison-eligible, 8 near a half-rupee boundary; sha256 prefix `1054610c30c93f94`).
+- Phase 3 re-ran the oracle from a scratch copy: the regenerated file is byte-identical to the committed one. `tests/unit/ppf-golden.test.mjs`: 39 of 39 pass.
+- No official rounding convention was found (U3); the rounded variants in the oracle are informational only.
+
+**Testing performed.**
+- Phase 2: full `tests/unit/` (2,433 tests, 2,430 pass, 0 fail); static checks (inventory, links, assets, SEO) on both builds; `tests/browser/ppf.spec.js` 27 of 27 on subpath-desktop and on subpath-mobile (both patterns, year labels, comparison eligibility, rate 0 and extremes, validation with linked errors, stale marker, Reset, privacy, keyboard, 320/360/390 px, 200% text, listing, related tools, search, refresh); navigation, sip, fd, cagr, swp, notfound and smoke on desktop and mobile; DOM, links and SEO baselines reviewed and updated.
+- Phase 3: oracle regeneration and the 39 PPF unit tests; smoke and the rendered-link crawl on root-desktop (pass); size comparison; a 50-year, 15% calculation plus table render measured in the page (about 74 to 110 ms including the first frame); a computed-contrast sweep of the page's visible text (only the shared green link and eyebrow colours fall below 4.5:1, the known shared-layer observations, nothing PPF-specific); the five affected listing visual baselines compared, reviewed by eye and then refreshed (Phase 3A, see below); `export.mjs --check` passed (28 tools, 34 articles, 112 guarded files, ledger versions verified: 3).
+- Size (gzip): PPF 14.9 KB (page 8.7, engine 4.4, CSS 1.8) against FD 13.6 KB.
+
+**Growth.** `node scripts/growth-manifest/export.mjs --check` passed after the Phase 2 commit and again in Phase 3 (read-only; nothing written).
+
+**Deviations from the specification.**
+1. Reset restores the starting values (yearly 1,50,000; monthly 12,500; rate 7.1; 16 years; yearly pattern) instead of leaving the fields empty, clears the result and errors, and moves focus to the first field.
+2. The page's "Related Articles" block shows existing SIP and FD articles through the existing category fallback (none is about PPF, section 21); this follows the preserved automatic relationship (D12) and no curated list was added.
+
+**Known limitations.** As the decisions D4 to D13 above. The rate is the visitor's; no current-rate claim; April opening; one rate for all years; no withdrawals, loans, premature closure, tax, chart or export.
+
+**Deferred device checks.** Real Android and Safari/WebKit: UNVERIFIED (R1 milestone). No PPF-specific Lighthouse run was made in Phase 3.
+
+**Visual baselines (Phase 3A).** Five listing baselines were reviewed by eye and refreshed: `investment` (desktop, mobile), `calculators` (desktop, mobile) and `tools` (mobile). The PPF card becoming live explains the page-height growth (34 to 86 px) and the "16 tools" count. The `investment` desktop baseline (2026-10-05) also predated two earlier, intended site changes, so its refresh also records the SWP card (Tool Pack 21) and the footer column heading change from "Popular Calculators" to "Calculators"; the investment mobile baseline (2026-10-07) already contained both. After the refresh the five comparisons pass (desktop 2 of 2, mobile 3 of 3). No other baseline was touched.
+
+**Known unrelated failures (not caused by this tool pack).**
+- `smoke` for `/tools/image-compressor-resizer/` fails with "images that failed to load" (two `<img>` elements without `src`); it reproduces at `27bc11b`, before Phase 2, and is not repaired here.
+- The `home-loan` tablet visual baseline (2026-10-05) predates the Credit Card Payoff related card (Tool Pack 24) and differs for that reason; it is not caused by PPF and was not refreshed.
+- The whole suite is therefore not claimed to pass. Android, Safari and WebKit remain UNVERIFIED.
+
 ## 25. Tests
 - **Unit** (`tests/unit/ppf-golden.test.mjs`): vectors from `ppf-golden.py` (section 7: the golden table, including 1, 15, 16, 20, 25 and 30 years and the annual-versus-monthly comparison; the rounded variants are informational and never the expected result); **the numerical tolerance and the display-rounding, .5-boundary, rate-0, minimum, maximum and endpoint cases of section 7b**; the reconciliation rule (displayed balance = deposits + interest; each table row adds up); both closed forms; invariants; validation messages and boundaries (₹500, ₹1,50,000, multiples of 50, rate 0 and 15, the comparison's ₹600 rule); the year labels (before maturity, year 16, extension-block ends 21 to 46, inside a block); determinism; no `Date`, network or storage in the module.
 - **Browser** (`tests/browser/ppf.spec.js`, one worker): the example, each deposit pattern, errors with linked messages, Reset, keyboard path, the table region, the live region, privacy (no request, no storage), 320/360/390 px, direct URL and refresh.
