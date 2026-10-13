@@ -3640,11 +3640,11 @@
   "/developer-tools.html": {
     "runtime": {
       "title": "Developer Tools | ToolZen Hub",
-      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker, a JWT decoder and a cron expression explainer that run in your browser.",
+      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker, a JWT decoder, a cron expression explainer and a Base64 encoder and decoder that run in your browser.",
       "canonical": "https://toolzenhub.in/developer-tools.html",
       "robots": null,
       "openGraph": {
-        "og:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker, a JWT decoder and a cron expression explainer that run in your browser.",
+        "og:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker, a JWT decoder, a cron expression explainer and a Base64 encoder and decoder that run in your browser.",
         "og:site_name": "ToolZen Hub",
         "og:title": "Developer Tools | ToolZen Hub",
         "og:type": "website",
@@ -3652,7 +3652,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker, a JWT decoder and a cron expression explainer that run in your browser.",
+        "twitter:description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker, a JWT decoder, a cron expression explainer and a Base64 encoder and decoder that run in your browser.",
         "twitter:title": "Developer Tools | ToolZen Hub"
       },
       "jsonLd": [
@@ -3676,14 +3676,14 @@
     },
     "rawHtml": {
       "title": "Developer Tools | ToolZen Hub",
-      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker, a JWT decoder and a cron expression explainer that run in your browser.",
+      "description": "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker, a JWT decoder, a cron expression explainer and a Base64 encoder and decoder that run in your browser.",
       "canonical": "https://toolzenhub.in/developer-tools.html",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1507
+      "visibleTextChars": 1692
     }
   },
   "/disclaimer.html": {
@@ -4137,7 +4137,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3759
+      "visibleTextChars": 3939
+    }
+  },
+  "/tools/base64-encoder-decoder/": {
+    "runtime": {
+      "title": "Base64 Encoder & Decoder: Convert Text Online | ToolZen Hub",
+      "description": "Encode text to Base64 or decode Base64 back to text, with UTF-8 support and clear errors for invalid input. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/base64-encoder-decoder/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Encode text to Base64 or decode Base64 back to text, with UTF-8 support and clear errors for invalid input. It runs in your browser: nothing is uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Base64 Encoder & Decoder: Convert Text Online | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/base64-encoder-decoder/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Encode text to Base64 or decode Base64 back to text, with UTF-8 support and clear errors for invalid input. It runs in your browser: nothing is uploaded.",
+        "twitter:title": "Base64 Encoder & Decoder: Convert Text Online | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Base64 Encoder & Decoder"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Base64 Encoder &amp; Decoder: Convert Text Online | ToolZen Hub",
+      "description": "Encode text to Base64 or decode Base64 back to text, with UTF-8 support and clear errors for invalid input. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/base64-encoder-decoder/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 4237
     }
   },
   "/tools/countdown-timer/": {

@@ -1,0 +1,317 @@
+/* =========================================================
+   ToolZen Hub
+   Base64 Encoder & Decoder
+
+   Only what the shared tool styles do not already provide: the
+   direction choice, the text box and its result block, the status
+   and error panel and the static lists. Buttons, focus and
+   headings come from the shared layer. Loaded after
+   calculator-responsive.css.
+
+   Converted and refused are told in words, never by colour alone.
+   Everything that came from the input wraps (overflow-wrap:
+   anywhere), so a long value never widens the page. One column on
+   a phone. Nothing animates.
+========================================================= */
+
+.b64-workspace [hidden] {
+    display: none !important;
+}
+
+.b64-workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+}
+
+.b64-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.b64-note {
+    margin: 0;
+    padding: 10px 14px;
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 10px;
+    background: #f9fafb;
+    color: #344054;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.b64-mode {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.b64-mode legend {
+    padding: 0;
+}
+
+.b64-mode__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 6px 0 0;
+}
+
+.b64-mode__option {
+    position: relative;
+    display: inline-flex;
+    flex: 1 1 220px;
+    cursor: pointer;
+}
+
+.b64-mode__option input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+}
+
+.b64-mode__option span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 48px;
+    padding: 8px 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+    background: var(--color-white);
+    color: #344054;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.b64-mode__option:hover span {
+    background: #f2f4f7;
+}
+
+.b64-mode__option input:checked + span {
+    border: 2px solid var(--color-brand-green);
+    background: #ecfdf3;
+    color: var(--color-ink);
+    font-weight: 750;
+}
+
+.b64-mode__option input:checked + span::before {
+    content: "✓";
+    content: "✓" / "";
+    font-weight: 800;
+}
+
+.b64-mode__option input:focus-visible + span {
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+}
+
+.b64-pane {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.b64-pane__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 12px;
+    margin-bottom: 8px;
+}
+
+.b64-label,
+.b64-output-heading {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.b64-meta {
+    color: #475467;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+}
+
+.b64-input,
+.b64-output {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 10px 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+    background: #ffffff;
+    color: var(--color-ink);
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.b64-input {
+    min-height: 160px;
+    resize: vertical;
+}
+
+.b64-output {
+    max-height: 360px;
+    margin: 0;
+    overflow: auto;
+    white-space: pre-wrap;
+    background: #f9fafb;
+}
+
+.b64-input:focus-visible,
+.b64-output:focus-visible,
+.b64-copy:focus-visible {
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+}
+
+.b64-input[aria-invalid="true"] {
+    border-color: #b42318;
+    box-shadow: inset 4px 0 0 #b42318;
+}
+
+.b64-hint {
+    margin: 8px 0 0;
+    color: #475467;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.b64-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.b64-button,
+.b64-copy {
+    min-width: 0;
+    min-height: 48px;
+    font-size: 16px;
+}
+
+.b64-copy {
+    width: auto;
+}
+
+.b64-result {
+    min-width: 0;
+}
+
+.b64-status {
+    margin: 0;
+    padding: 10px 14px;
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 10px;
+    background: #f9fafb;
+    color: #344054;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.b64-workspace[data-state="done"] .b64-status {
+    border-color: #067647;
+    background: #ecfdf3;
+    color: #054f31;
+}
+
+.b64-workspace[data-state="invalid"] .b64-status {
+    border-color: #b42318;
+    background: #fef3f2;
+    color: #912018;
+}
+
+.b64-stale {
+    margin: 8px 0 0;
+    color: #475467;
+    font-size: 13px;
+}
+
+.b64-error {
+    margin-top: 12px;
+    padding: 14px;
+    border: 1px solid #fda29b;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.b64-error p {
+    margin: 0;
+}
+
+.b64-error__title {
+    color: #912018;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.b64-error__message {
+    margin-top: 6px;
+    color: #344054;
+    font-size: 15px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+}
+
+.b64-output-wrap {
+    min-width: 0;
+}
+
+.b64-meta-line {
+    margin: 10px 0 0;
+    color: #344054;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.b64-notes {
+    margin: 6px 0 0;
+    padding-left: 20px;
+    color: #475467;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.calculator-info code {
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+    font-size: 0.92em;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+
+    .b64-actions {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+}

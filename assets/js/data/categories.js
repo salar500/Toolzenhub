@@ -81,9 +81,9 @@ export const sections = [
         description:
             "Browser-based tools for working with data and code.",
         seoDescription:
-            "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker, a JWT decoder and a cron expression explainer that run in your browser.",
+            "Developer Tools from ToolZen Hub: a JSON formatter and validator, a Unix timestamp converter, a text diff checker, a JWT decoder, a cron expression explainer and a Base64 encoder and decoder that run in your browser.",
         summary:
-            "JSON, timestamp, text compare, JWT and cron tools, in your browser",
+            "JSON, timestamp, text compare, JWT, cron and Base64 tools, in your browser",
         icon: "{ }",
         landing: "developerTools",
         pathPrefix: "tools"

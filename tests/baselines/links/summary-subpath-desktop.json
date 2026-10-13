@@ -345,7 +345,7 @@
     "deadFragments": []
   },
   "developer-tools.html": {
-    "internal": 29,
+    "internal": 30,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -411,7 +411,13 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 60,
+    "internal": 61,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/base64-encoder-decoder/": {
+    "internal": 25,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

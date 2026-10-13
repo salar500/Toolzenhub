@@ -299,6 +299,13 @@
       "state": "active"
     },
     {
+      "id": "base64-encoder-decoder",
+      "module": "assets/js/tools/base64-encoder-decoder/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "cagr",
       "module": "assets/js/calculators/cagr/index.js",
       "moduleChanges": [],

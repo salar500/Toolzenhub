@@ -1272,6 +1272,43 @@ const catalog = [
     },
 
     {
+        id: "base64-encoder-decoder",
+        status: "published",
+        loader: () =>
+            import("../tools/base64-encoder-decoder/index.js"),
+        sectionId: "developer-tools",
+        icon: "64",
+        title: "Base64 Encoder & Decoder",
+        description:
+            "Encode text to Base64 or decode Base64 back to text, with UTF-8 support and a clear message for invalid input. It runs in your browser: nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: ["jwt-decoder", "json-formatter"],
+        aliases: [
+            "base64 encoder",
+            "base64 decoder",
+            "base64 encode",
+            "base64 decode",
+            "base64 converter",
+            "text to base64",
+            "base64 to text"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Base64 Encoder & Decoder: Convert Text Online | ToolZen Hub",
+            description:
+                "Encode text to Base64 or decode Base64 back to text, with UTF-8 support and clear errors for invalid input. It runs in your browser: nothing is uploaded."
+        }
+    },
+
+    {
         id: "image-compressor-resizer",
         status: "published",
         loader: () =>
