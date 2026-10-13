@@ -32,11 +32,11 @@ describe("getComingSoonTool", () => {
   });
 
   test("a category constraint is honoured and matches the catalog", () => {
-    const tool = getComingSoonTool({ category: "investment" });
-    assert.equal(tool.category, "investment");
+    const tool = getComingSoonTool({ category: "loans" }); // no Investment tool is Coming Soon any more (PPF is published)
+    assert.equal(tool.category, "loans");
     assert.equal(catalog.calculators.find((c) => c.id === tool.id).status, "coming-soon");
     const firstInCategory = catalog.calculators.find((c) => c.status === "coming-soon" && c.category === tool.category).id;
-    assert.equal(tool.id, firstInCategory, "the first Coming Soon Investment tool, in catalog order");
+    assert.equal(tool.id, firstInCategory, "the first Coming Soon Loans tool, in catalog order");
   });
 
   test("fails loudly, with what is left, when nothing matches", () => {

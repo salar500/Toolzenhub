@@ -404,7 +404,8 @@ test.describe("CAGR Calculator", () => {
     await open(page, go);
     await mode(page, "ahead");
     await fill(page, { bEnd: 240000, bYears: 9 });
-    const text = await page.locator(".calculator-page").innerText();
+    // the related-tools section is shared and describes other tools in their own words (the PPF card names the Public Provident Fund), so it is not this page's wording
+    const text = await page.locator(".calculator-page").evaluate((e) => { const c = e.cloneNode(true); c.querySelectorAll(".related-section").forEach((n) => n.remove()); return c.innerText || c.textContent; });
     expect(text).not.toMatch(BANNED);
     expect(unqualified(text, "achievable")).toEqual([]);
     expect(unqualified(text, "forecast")).toEqual([]);
@@ -426,8 +427,7 @@ test.describe("CAGR Calculator", () => {
     await open(page, go);
     const related = page.locator(".related-calculator-card");
     const hrefs = await related.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
-    expect(hrefs.sort()).toEqual([`${siteRoot}calculators/fd/`, `${siteRoot}calculators/sip/`]);
-    await expect(page.locator("a[href*='calculators/ppf']")).toHaveCount(0);
+    expect(hrefs.sort()).toEqual([`${siteRoot}calculators/fd/`, `${siteRoot}calculators/ppf/`, `${siteRoot}calculators/sip/`]); // PPF (Tool Pack 26) joins through the automatic Investment relationship
   });
 
   test("search finds it by name and by its aliases, not by XIRR or returns", async ({ page, go, siteRoot }) => {

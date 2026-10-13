@@ -1,0 +1,424 @@
+/* =========================================================
+   ToolZen Hub
+   PPF Calculator
+
+   Only what the shared calculator styles do not already
+   provide: the deposit-pattern choice, the stale marker, the
+   result sentences, the comparison figures, the year-by-year
+   table and the always-visible assumptions. Buttons, fields,
+   results cards and focus come from the shared layer. Loaded
+   after calculator-responsive.css.
+
+   What a year is (before maturity, the end of the first term, an
+   extension block) is a sentence and a table label, never colour
+   alone. One column on a phone; the table scrolls inside its own
+   focusable region and never widens the page. Nothing animates.
+========================================================= */
+
+.ppf-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+.ppf-pattern {
+
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+
+    grid-column: 1 / -1;
+
+}
+
+.ppf-pattern legend {
+
+    padding: 0;
+
+}
+
+.ppf-pattern__options {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin: 6px 0 8px;
+
+}
+
+.ppf-pattern__option {
+
+    position: relative;
+
+    display: inline-flex;
+
+    flex: 1 1 200px;
+
+    cursor: pointer;
+
+}
+
+/* the radio itself is hidden; its label is the control and keeps the focus ring */
+
+.ppf-pattern__option input {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: 0;
+
+    opacity: 0;
+
+}
+
+.ppf-pattern__option span {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    box-sizing: border-box;
+
+    width: 100%;
+    min-height: 48px;
+
+    padding: 8px 14px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: var(--color-white);
+
+    color: #344054;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: center;
+
+}
+
+.ppf-pattern__option:hover span {
+
+    background: #f2f4f7;
+
+}
+
+.ppf-pattern__option input:checked + span {
+
+    border: 2px solid var(--color-brand-green);
+
+    background: #ecfdf3;
+
+    color: var(--color-ink);
+
+    font-weight: 750;
+
+}
+
+.ppf-pattern__option input:checked + span::before {
+
+    content: "✓";
+    content: "✓" / "";
+
+    font-weight: 800;
+
+}
+
+.ppf-pattern__option input:focus-visible + span {
+
+    outline: 3px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+.ppf-grid [hidden] {
+
+    display: none !important;
+
+}
+
+.ppf-assumption {
+
+    margin: 16px 0 0;
+    padding: 10px 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 10px;
+
+    background: #f9fafb;
+
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.55;
+
+}
+
+.ppf-stale {
+
+    margin: 0 0 12px;
+    padding: 10px 14px;
+
+    border: 1px solid #fedf89;
+    border-left-width: 6px;
+    border-radius: 10px;
+
+    background: #fffcf5;
+
+    color: #4e3a05;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+
+}
+
+.ppf-stale[hidden] {
+
+    display: none;
+
+}
+
+/* a result that no longer matches the inputs stays readable, with a dashed outline */
+
+.calculator-results[data-stale="true"] .ppf-result {
+
+    outline: 2px dashed #d0a315;
+    outline-offset: 2px;
+
+}
+
+.ppf-lead {
+
+    margin: 0 0 14px;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ppf-kind {
+
+    margin: 14px 0 0;
+    padding: 10px 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 10px;
+
+    background: #f9fafb;
+
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ppf-subtitle {
+
+    margin: 22px 0 10px;
+
+    font-size: 17px;
+
+}
+
+.ppf-note {
+
+    margin: 12px 0 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+
+}
+
+.ppf-note--plain {
+
+    color: #344054;
+
+}
+
+.ppf-compare-grid {
+
+    margin-top: 6px;
+
+}
+
+.ppf-table-details {
+
+    margin-top: 22px;
+
+}
+
+.ppf-table-details summary {
+
+    min-height: 44px;
+
+    padding: 10px 0;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+.ppf-table-details summary:focus-visible {
+
+    outline: 3px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+.ppf-table th:not(:first-child):not(:nth-child(2)),
+.ppf-table td:not(:nth-child(2)) {
+
+    text-align: right;
+
+    font-variant-numeric: tabular-nums;
+
+}
+
+.ppf-table td:nth-child(2) {
+
+    min-width: 14rem;
+
+    text-align: left;
+
+}
+
+.ppf-table tbody th {
+
+    background: var(--color-white);
+
+    color: var(--color-ink);
+
+}
+
+/* the first column stays in view when a narrow screen scrolls the table sideways */
+
+.ppf-table th:first-child {
+
+    position: sticky;
+    left: 0;
+
+    text-align: left;
+
+    box-shadow: 1px 0 0 #eaecf0;
+
+}
+
+.ppf-table thead th:first-child {
+
+    background: #f9fafb;
+
+}
+
+.ppf-table-details .calculator-results__table-wrapper:focus-visible {
+
+    outline: 3px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+.ppf-assumptions {
+
+    margin: 20px 0 0;
+    padding: 14px 16px;
+
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 12px;
+
+    background: #f9fafb;
+
+}
+
+.ppf-assumptions h2 {
+
+    margin: 0 0 8px;
+
+    font-size: 17px;
+
+}
+
+.ppf-assumptions ul {
+
+    margin: 0;
+    padding-left: 20px;
+
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+}
+
+.ppf-assumptions li + li {
+
+    margin-top: 4px;
+
+}
+
+.ppf-grid .calculator-form__input {
+
+    font-variant-numeric: tabular-nums;
+
+}
+
+@media (max-width: 640px) {
+
+    /* 16px so the browser does not zoom the page when a field is focused, and a comfortable tap height */
+    .ppf-grid .calculator-form__input {
+
+        min-height: 48px;
+
+        font-size: 16px;
+
+    }
+
+    .ppf-actions .calculator-form__button {
+
+        min-height: 48px;
+
+        font-size: 16px;
+
+    }
+
+}

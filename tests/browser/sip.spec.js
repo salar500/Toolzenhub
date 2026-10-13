@@ -390,10 +390,9 @@ test.describe("SIP Calculator", () => {
   test("FD and CAGR are the related calculators (the other live Investment tools; Coming soon PPF is not offered) and four curated articles", async ({ page, go, siteRoot }) => {
     await open(page, go);
     const related = page.locator(".related-calculator-card");
-    await expect(related).toHaveCount(2);
+    await expect(related).toHaveCount(3);
     const toolHrefs = await related.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
-    expect(toolHrefs).toEqual([`${siteRoot}calculators/fd/`, `${siteRoot}calculators/cagr/`]);
-    await expect(page.locator("a[href*='calculators/ppf']")).toHaveCount(0);
+    expect(toolHrefs).toEqual([`${siteRoot}calculators/ppf/`, `${siteRoot}calculators/fd/`, `${siteRoot}calculators/cagr/`]); // PPF (Tool Pack 26) joins through the automatic Investment relationship
     const cards = page.locator(".related-article-card");
     await expect(cards).toHaveCount(4);
     const hrefs = await cards.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));

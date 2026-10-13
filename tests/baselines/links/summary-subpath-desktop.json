@@ -226,7 +226,7 @@
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 38,
+    "internal": 39,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -238,7 +238,7 @@
     "deadFragments": []
   },
   "calculators/cagr/": {
-    "internal": 31,
+    "internal": 32,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -256,7 +256,7 @@
     "deadFragments": []
   },
   "calculators/fd/": {
-    "internal": 31,
+    "internal": 32,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -302,6 +302,12 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "calculators/ppf/": {
+    "internal": 35,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "calculators/prepayment/": {
     "internal": 36,
     "external": [],
@@ -315,7 +321,7 @@
     "deadFragments": []
   },
   "calculators/sip/": {
-    "internal": 33,
+    "internal": 34,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -363,7 +369,7 @@
     "deadFragments": []
   },
   "investment.html": {
-    "internal": 28,
+    "internal": 29,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -405,7 +411,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 59,
+    "internal": 60,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

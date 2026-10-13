@@ -425,6 +425,13 @@
       "state": "active"
     },
     {
+      "id": "ppf",
+      "module": "assets/js/calculators/ppf/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "prepayment",
       "module": "assets/js/calculators/prepayment/index.js",
       "moduleChanges": [],

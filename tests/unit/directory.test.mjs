@@ -35,7 +35,7 @@ describe("All Tools", () => {
 
   test("no tool that is not live is a link, and the search form is a plain GET to All Tools", () => {
     const html = dir.allToolsHtml();
-    for (const soon of ["ppf", "roi", "ratio", "age", "bmi", "currency", "date", "unit-converter", "personal-loan"]) assert.equal(html.includes(`calculators/${soon}/`), false, soon);
+    for (const soon of ["roi", "ratio", "age", "bmi", "currency", "date", "unit-converter", "personal-loan"]) assert.equal(html.includes(`calculators/${soon}/`), false, soon);
     assert.match(html, /<form[^>]*action="\/Toolzenhub\/tools\.html"[^>]*method="get"/);
     assert.match(html, /id="tools-results"/);
     assert.match(html, /id="tools-directory"/);
@@ -48,11 +48,11 @@ describe("category pages", () => {
     assert.deepEqual(dir.categoryPageIds(), ["investment", "tax", "business", "math"]);
   });
 
-  test("Investment: SIP, FD, CAGR and SWP are links and PPF is a Coming soon card that is not", () => {
+  test("Investment: SIP, PPF, FD, CAGR and SWP are all links, and no Coming soon card is left", () => {
     const html = dir.categoryPageHtml("investment");
-    assert.deepEqual(hrefs(html).filter((h) => h.includes("/calculators/")), ["/Toolzenhub/calculators/sip/", "/Toolzenhub/calculators/fd/", "/Toolzenhub/calculators/cagr/", "/Toolzenhub/calculators/swp/"]);
+    assert.deepEqual(hrefs(html).filter((h) => h.includes("/calculators/")), ["/Toolzenhub/calculators/sip/", "/Toolzenhub/calculators/ppf/", "/Toolzenhub/calculators/fd/", "/Toolzenhub/calculators/cagr/", "/Toolzenhub/calculators/swp/"]);
     assert.match(html, /PPF Calculator/);
-    assert.equal((html.match(/category-page-card--soon/g) || []).length, 1);
+    assert.equal((html.match(/category-page-card--soon/g) || []).length, 0);
     assert.match(html, /<h1[^>]*>\s*Investment Calculators/);
   });
 

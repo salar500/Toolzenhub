@@ -2868,7 +2868,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5931
+      "visibleTextChars": 6295
     }
   },
   "/calculators/credit-card-payoff/": {
@@ -3015,7 +3015,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6343
+      "visibleTextChars": 6707
     }
   },
   "/calculators/gst/": {
@@ -3312,6 +3312,55 @@
       "visibleTextChars": 5272
     }
   },
+  "/calculators/ppf/": {
+    "runtime": {
+      "title": "PPF Calculator: Estimate Your PPF Balance Year by Year | ToolZen Hub",
+      "description": "Estimate a PPF balance from a yearly or monthly deposit, the interest rate you enter and the number of years, with a year-by-year table. A projection from your inputs, not a statement of any account.",
+      "canonical": "https://toolzenhub.in/calculators/ppf/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Estimate a PPF balance from a yearly or monthly deposit, the interest rate you enter and the number of years, with a year-by-year table. A projection from your inputs, not a statement of any account.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "PPF Calculator: Estimate Your PPF Balance Year by Year | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/ppf/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Estimate a PPF balance from a yearly or monthly deposit, the interest rate you enter and the number of years, with a year-by-year table. A projection from your inputs, not a statement of any account.",
+        "twitter:title": "PPF Calculator: Estimate Your PPF Balance Year by Year | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "PPF Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "PPF Calculator: Estimate Your PPF Balance Year by Year | ToolZen Hub",
+      "description": "Estimate a PPF balance from a yearly or monthly deposit, the interest rate you enter and the number of years, with a year-by-year table. A projection from your inputs, not a statement of any account.",
+      "canonical": "https://toolzenhub.in/calculators/ppf/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 10388
+    }
+  },
   "/calculators/prepayment/": {
     "runtime": {
       "title": "Loan Prepayment Calculator | ToolZen Hub",
@@ -3456,7 +3505,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6306
+      "visibleTextChars": 6670
     }
   },
   "/calculators/swp/": {
@@ -3772,7 +3821,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1278
+      "visibleTextChars": 1581
     }
   },
   "/loans.html": {
@@ -4088,7 +4137,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3744
+      "visibleTextChars": 3759
     }
   },
   "/tools/countdown-timer/": {

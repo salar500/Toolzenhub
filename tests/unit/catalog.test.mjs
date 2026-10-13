@@ -26,7 +26,7 @@ before(async () => {
 });
 
 // the published tools of the Calculators section; Date Difference (Time Tools) is a published tool too, but it is not a calculator
-const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "swp", "percentage", "income-tax", "credit-card-payoff"];
+const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "swp", "percentage", "income-tax", "credit-card-payoff", "ppf"];
 const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "time-zone-converter", "hours-calculator", "image-compressor-resizer"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"];
 
@@ -45,10 +45,10 @@ describe("catalog model", () => {
     for (const c of catalog.calculators) assert.ok(["published", "coming-soon"].includes(c.status), `${c.id}: ${c.status}`);
   });
 
-  test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP Margin, Profit, Home Loan, FD, GST, CAGR and Percentage, Income Tax (the Old vs New Tax Regime Calculator) and SWP are published; all other 12 are coming-soon", () => {
+  test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP Margin, Profit, Home Loan, FD, GST, CAGR and Percentage, Income Tax (the Old vs New Tax Regime Calculator), SWP, Credit Card Payoff and PPF are published; all other 11 are coming-soon", () => {
     const pub = catalog.calculators.filter((c) => c.status === "published").map((c) => c.id).sort();
     assert.deepEqual(pub, [...PUBLISHED_CALCULATORS].sort());
-    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 12);
+    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 11);
   });
 
   test("`available` (read by cards and search) is exactly status === published", () => {
@@ -120,6 +120,7 @@ describe("registry is derived from the catalog", () => {
       profit: { section: "Calculators", category: "business", title: "Profit Calculator" },
       "home-loan": { section: "Calculators", category: "loans", title: "Home Loan Calculator" },
       fd: { section: "Calculators", category: "investment", title: "FD Calculator" },
+      ppf: { section: "Calculators", category: "investment", title: "PPF Calculator" },
       gst: { section: "Calculators", category: "tax", title: "GST Calculator" },
       cagr: { section: "Calculators", category: "investment", title: "CAGR Calculator" },
       swp: { section: "Calculators", category: "investment", title: "SWP Calculator" },
@@ -151,9 +152,9 @@ describe("search labels come from the category list", () => {
     const emi = all.find((c) => c.id === "emi");
     assert.equal(emi.category, "Loans");
     assert.equal(emi.url, `${ROOT}calculators/emi/`);
-    // a Coming Soon Investment tool: a category title, and no URL
-    const soon = all.find((c) => c.id === getComingSoonTool({ category: "investment" }).id);
-    assert.equal(soon.category, "Investment");
+    // a Coming Soon tool (no Investment tool is Coming Soon any more: PPF is published): a category title, and no URL
+    const soon = all.find((c) => c.id === getComingSoonTool({ category: "loans" }).id);
+    assert.equal(soon.category, "Loans");
     assert.equal(soon.url, null);
     // SIP is published (Tool Pack 3): the same category, and a URL
     const sip = all.find((c) => c.id === "sip");

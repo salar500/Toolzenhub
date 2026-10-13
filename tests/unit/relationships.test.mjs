@@ -49,10 +49,12 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.deepEqual(toolIds(rel.getRelatedTools("balance-transfer")), ["prepayment", "emi", "loan-comparison", "home-loan", "credit-card-payoff"]); // curated order, then the category
     assert.deepEqual(toolIds(rel.getRelatedTools("home-loan")), ["loan-comparison", "emi", "balance-transfer", "prepayment", "credit-card-payoff"]);
     // FD (Tool Pack 7) is the second published Investment tool: SIP and FD relate to each other through the category, and only to each other
-    // CAGR (Tool Pack 9) is the third: the Investment tools relate to each other through the category (PPF is Coming Soon and never offered)
-    assert.deepEqual(toolIds(rel.getRelatedTools("sip")), ["fd", "cagr"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("fd")), ["sip", "cagr"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("cagr")), ["sip", "fd"]);
+    // CAGR (Tool Pack 9) is the third: the Investment tools relate to each other through the category
+    // PPF (Tool Pack 26) keeps the automatic Investment relationship (no curated list): it is offered the other auto-related Investment tools in catalog order, and it is added to theirs
+    assert.deepEqual(toolIds(rel.getRelatedTools("sip")), ["ppf", "fd", "cagr"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("fd")), ["sip", "ppf", "cagr"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("cagr")), ["sip", "ppf", "fd"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("ppf")), ["sip", "fd", "cagr"]);
     // SWP (Tool Pack 21): one curated one-way relation to SIP (build the corpus, then draw it down); autoRelated is off, so it is not offered the other Investment tools and does not appear in theirs, and SIP does not link back
     assert.deepEqual(toolIds(rel.getRelatedTools("swp")), ["sip"]);
     // the SWP content pack: its two articles reach the calculator through article.tools alone (no tool.relatedArticles, so there is no second list to disagree), mechanism first; the SIP page does not gain them
@@ -131,10 +133,10 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
       : key === "balance-transfer/is-a-loan-balance-transfer-worth-it" ? ["balance-transfer", "loan-comparison", "emi", "home-loan", "prepayment", "credit-card-payoff"]
       : key === "balance-transfer/balance-transfer-vs-prepayment" ? ["balance-transfer", "prepayment", "loan-comparison", "emi", "home-loan", "credit-card-payoff"]
       : key.startsWith("home-loan/") ? ["home-loan", "loan-comparison", "emi", "balance-transfer", "prepayment", "credit-card-payoff"]
-      : key.startsWith("sip/") ? ["sip", "fd", "cagr"] // the primary tool first, then the other published Investment tools
-      : key.startsWith("fd/") ? ["fd", "sip", "cagr"]
-      : key.startsWith("cagr/") ? ["cagr", "sip", "fd"]
-      : key.startsWith("swp/") ? ["swp", "sip", "fd", "cagr"] // the primary tool first, then the Investment tools; SWP is not auto-related, so it joins no other article's fallback
+      : key.startsWith("sip/") ? ["sip", "ppf", "fd", "cagr"] // the primary tool first, then the other published Investment tools (PPF, Tool Pack 26, is one)
+      : key.startsWith("fd/") ? ["fd", "sip", "ppf", "cagr"]
+      : key.startsWith("cagr/") ? ["cagr", "sip", "ppf", "fd"]
+      : key.startsWith("swp/") ? ["swp", "sip", "ppf", "fd", "cagr"] // the primary tool first, then the Investment tools; SWP is not auto-related, so it joins no other article's fallback
       : key.startsWith("percentage/") ? ["percentage"] // the only published Math tool: no category fallback beyond it
       : key.startsWith("gst/") ? ["gst"] // the only published Tax tool: no category fallback beyond it
       : key.startsWith("margin/") ? ["margin", "profit"] // the primary tool first, then the other published Business tool

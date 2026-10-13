@@ -114,7 +114,7 @@ describe("Investment is a category inside Calculators (Tool Pack 7 pins SIP and 
     assert.equal(cats.categories.find((c) => c.id === "investment").sectionId, "calculators");
     assert.equal(cats.categories.find((c) => c.id === "investment").title, "Investment");
     assert.deepEqual(tax.getToolsByCategory("investment").map((t) => t.id), ["sip", "ppf", "fd", "cagr", "swp"]);
-    assert.deepEqual(tax.getToolsByCategory("investment").filter((t) => t.available).map((t) => t.id), ["sip", "fd", "cagr", "swp"]);
+    assert.deepEqual(tax.getToolsByCategory("investment").filter((t) => t.available).map((t) => t.id), ["sip", "ppf", "fd", "cagr", "swp"]);
   });
 
   test("the search index, the registry and the breadcrumb agree: Calculators > Investment > the tool", async () => {

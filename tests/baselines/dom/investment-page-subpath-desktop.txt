@@ -17,12 +17,12 @@ section.categories-page.directory-page
           h3.category-page-card__title "SIP Calculator"
           p.category-page-card__description "Estimate what a monthly SIP could grow to for a return you assume, with a yearly step-up, …"
         span.category-page-card__arrow [aria-hidden="true"] "→"
-      div.category-page-card.category-page-card--soon [aria-disabled="true"]
+      a.category-page-card [href="{ROOT}calculators/ppf/"]
         div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"] "₹"
         div.category-page-card__content
           h3.category-page-card__title "PPF Calculator"
-          p.category-page-card__description "Calculate PPF investment returns."
-          span.coming-soon-badge "Coming soon"
+          p.category-page-card__description "Estimate the balance of a Public Provident Fund account from a yearly or monthly deposit, …"
+        span.category-page-card__arrow [aria-hidden="true"] "→"
       a.category-page-card [href="{ROOT}calculators/fd/"]
         div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"] "▣"
         div.category-page-card__content

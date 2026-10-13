@@ -391,12 +391,38 @@ const catalog = [
 
     {
         id: "ppf",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/ppf/index.js"),
         category: "investment",
         icon: "₹",
         title: "PPF Calculator",
         description:
-            "Calculate PPF investment returns."
+            "Estimate the balance of a Public Provident Fund account from a yearly or monthly deposit, the interest rate you enter and the number of years, with a year-by-year table and a comparison of one yearly deposit with the same total paid monthly. It uses the PPF rule that interest is worked out monthly and added once a year. It runs in your browser.",
+        aliases: [
+            "ppf calculator",
+            "public provident fund calculator",
+            "ppf maturity calculator",
+            "ppf interest calculator",
+            "ppf return calculator"
+        ],
+        capabilities: {
+            reset: true,
+            table: true,
+            schedule: true,
+            compare: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "PPF Calculator: Estimate Your PPF Balance Year by Year | ToolZen Hub",
+            description:
+                "Estimate a PPF balance from a yearly or monthly deposit, the interest rate you enter and the number of years, with a year-by-year table. A projection from your inputs, not a statement of any account."
+        }
     },
 
     {
