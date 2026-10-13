@@ -51,6 +51,20 @@ justification; "not needed" is a finished answer, not a gap.
 | | W. Quality gate | Section 4 |
 | | X. Commit gate | Section 6; exactly one local commit |
 
+### 2a. Fast tool pack (approved 2026-10-13)
+
+A faster path for routine tools. Every mandatory gate in section 4 and the rulebook still applies; only the number of approval rounds and the amount of ceremony change.
+
+- **Specification first, always.** Every tool needs an approved specification before implementation. A LOW or MEDIUM tool may use a compact specification that keeps every mandatory acceptance criterion (the decision, inputs and limits, model and rounding, validation, edge cases, accessibility, mobile, search and relationships, SEO, tests, deferred items); a HIGH tool uses the full template.
+- **One bounded scope.** An explicitly approved scope may include the engine, UI, catalog entry, Growth ledger record, style entry, affected tests, pinned expectations, inventory and baselines, verification and **one local commit**. Separate approvals for the internal steps are not needed once the whole scope is approved; the commit happens only if the approved scope is met.
+- **Tiers (proposed by the tool's risk, reconciled with rulebook sections 8 and 10).** LOW: simple converters and formatters. MEDIUM: ordinary calculators and interactive tools. HIGH: financial, tax, legal or unusually complex calculations. The specification names the tier and why; when unsure, take the higher.
+  - *Correctness.* LOW and MEDIUM: golden values from an independent method (closed form, hand calculation, published reference vectors) written into the unit test; a separate executable oracle only when justified by risk. HIGH: an independent oracle (a second implementation or a closed form that must agree exactly) and the checkpoints the specification names.
+  - *Scope of tests.* Focused during development; the touch-list in section 7 names the pinned unit and browser expectations, the inventory and the affected listing baselines in advance, and they are edited deliberately in the same pass. The final gate (sections 4 and 6, risk-based) runs **once**; earlier passing results are reused unless the code they cover changed.
+  - *Commits.* LOW and MEDIUM: one commit for the bounded scope. HIGH: an engine-and-oracle commit may be reviewed before integration, then the integration commit.
+- **Efficiency.** Read only the relevant source files and rulebook sections, once unless they change; keep progress messages and reports short (decisions, failures, final evidence); do not paste long test output; do not re-run a passed check without a cause.
+- **Stop conditions.** Stop and report on an unexpected change in the tree, an unresolved correctness question, a visual difference the change does not explain, a failing required check, or a conflict with a rule.
+- **Unchanged.** Pushing and any production deployment need separate explicit authorization; privacy, security, accessibility, SEO and the testing policy stand; no new framework or generator is introduced by this section (section 9 stands).
+
 ## 3. What the factory prevents
 
 - **Feature bloat.** Every control, output, chart, table, export and article must name the user need it
@@ -110,7 +124,7 @@ PRE-BUILD
 
 MODEL
 [ ] pure module in formulas/<name>.js; reuse formulas/loan.js and prepayment.js, never copy
-[ ] independent reference in tests/fixtures/<name>-golden.py (closed form and simulation must agree)
+[ ] correctness reference by tier (section 2a): HIGH keeps tests/fixtures/<name>-golden.py (closed form and simulation must agree); LOW and MEDIUM may use independently checked standard or reference vectors
 [ ] unit tests: golden values, invariants over a grid, validation messages, boundaries
 
 UI
@@ -130,10 +144,10 @@ CONTENT
 QUALITY
 [ ] update the intentional pinned expectations (section 7) and add the new tool's tests
 [ ] focused, risk-based tests (rulebook section 10); the section 8 gate only at a checkpoint or for broad shared risk
-[ ] visual: review each changed baseline by eye before updating; update only affected pages
+[ ] visual: name the affected snapshots from the touch-list during integration, review each changed baseline by eye, update only those in the same commit
 [ ] builds: both targets clean; links, assets, SEO checks; fingerprint explained
 [ ] diff review of every changed line; no debug code, temp files or unrelated changes
-[ ] one coherent commit; normal push only when the phase instructs (rulebook section 11)
+[ ] one coherent commit per approved bounded scope; push only when separately authorized (rulebook section 11)
 ```
 
 ## 6. Commit gate
@@ -156,7 +170,7 @@ From Tool Pack 1. Everything here is a reviewed, intentional edit; none is autom
   `loan-comparison.spec.js` (card and related-tool counts); `tests/inventory/url-inventory.json` (regenerate).
 - **Baselines (review, then update only what changed):** DOM (`articles-listing`, `related-content-*`,
   `article-content-shell`), links, SEO, and visual for the new page plus the listings and tool pages that now
-  show a new related card.
+  show a new related card. List the affected snapshots during integration (the investment, calculators, tools and category listings that gain the card), not afterwards.
 - **Visible side effects to review:** the Coming Soon card becoming a live card on Loans, All Calculators and
   Categories; related-tool cards on existing tools of the same category; search results and ranking; related
   articles on tools without a curated list; the home page and footer lists do **not** change unless edited.
@@ -222,7 +236,7 @@ Chosen under `docs/product-decision-rules.md` section 12 from a platform-wide ca
 | 1 | Hours & Timesheet Calculator | Time Tools | High confidence. Implemented as Tool Pack 23 (`docs/tool-packs/23-hours-calculator.md`); Android and Safari checks wait for the milestone |
 | 2 | Credit Card Payoff Calculator | Calculators, Loans | High confidence. Implemented as Tool Pack 24 (`docs/tool-packs/24-credit-card-payoff.md`); Android and Safari checks wait for the milestone |
 | 3 | Cron Expression Explainer | Developer Tools | High confidence. Implemented as Tool Pack 25 (`docs/tool-packs/25-cron-expression-explainer.md`); Android and Safari checks wait for the milestone (no real cronie binary has been run either) |
-| 4 | PPF Calculator | Calculators, Investment | High confidence. Candidate only (the interest rate stays user-entered; it changes) |
+| 4 | PPF Calculator | Calculators, Investment | High confidence. Implemented as Tool Pack 26 (`docs/tool-packs/26-ppf-calculator.md`, local commits only: not pushed or deployed); the interest rate stays user-entered; Android, Safari and WebKit checks wait for the milestone and are unverified |
 | 5 | Base64 Encoder/Decoder | Developer Tools | High confidence. Candidate only (a commodity: least differentiated) |
 | 6 | Salary / CTC to In-Hand | Calculators, Tax | Feasibility-dependent: audit first (rule-bound, upkeep) |
 | 7 | Photos to PDF | Image Tools | Feasibility-dependent: audit and a real-phone spike first (see the earlier audit) |
@@ -230,7 +244,7 @@ Chosen under `docs/product-decision-rules.md` section 12 from a platform-wide ca
 
 Considered and not on the roadmap: the Unit Converter, Currency, Loan Eligibility, Personal Loan, Interest, ROI, RD, Age, Ratio, the Health tools, Regex Tester, Password Generator, Inflation and an EXIF tool (failed a mandatory gate, were variants of an existing tool, or had no fitting section).
 
-**Milestone counting (the roadmap's own).** For this roadmap the manual-testing milestone in section 10, item 13, counts only these eight tools: the 24 tools published before it are excluded from both numerator and denominator. A tool counts as completed when it is implemented, has passed its risk-based automated verification and has no known critical defect; an unfinished, unsafe or unverified implementation does not count. Device and Safari checks are the milestone's own job, not a precondition for counting a tool. Six completed tools of eight is 75%, which satisfies the approximately 70% checkpoint. If audits or product reviews change the scope, the denominator changes with it (the target is the smallest whole number of tools at or above 70% of the current scope). Critical blockers are addressed when found, never held for the milestone. Progress: 3 of 8 complete (Hours & Timesheet Calculator, Tool Pack 23; Credit Card Payoff Calculator, Tool Pack 24; Cron Expression Explainer, Tool Pack 25); the checkpoint is 6 of 8, so 3 more tools remain before it.
+**Milestone counting (the roadmap's own).** For this roadmap the manual-testing milestone in section 10, item 13, counts only these eight tools: the 24 tools published before it are excluded from both numerator and denominator. A tool counts as completed when it is implemented, has passed its risk-based automated verification and has no known critical defect; an unfinished, unsafe or unverified implementation does not count. Device and Safari checks are the milestone's own job, not a precondition for counting a tool. Six completed tools of eight is 75%, which satisfies the approximately 70% checkpoint. If audits or product reviews change the scope, the denominator changes with it (the target is the smallest whole number of tools at or above 70% of the current scope). Critical blockers are addressed when found, never held for the milestone. Progress: 4 of 8 complete (Hours & Timesheet Calculator, Tool Pack 23; Credit Card Payoff Calculator, Tool Pack 24; Cron Expression Explainer, Tool Pack 25; PPF Calculator, Tool Pack 26); the checkpoint is 6 of 8, so 2 more tools remain before it.
 
 ### Planning inventory P1 (candidates, not authorizations)
 

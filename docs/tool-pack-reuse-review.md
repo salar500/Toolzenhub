@@ -121,7 +121,7 @@ per tool is cheap. Revisit only if a fifth tool still uses the identical list.
 
 ## 9. Golden-reference convention: DOCUMENT NOW
 
-Do not create shared financial helpers; each reference stays independent of the JavaScript. Standardise:
+Do not create shared financial helpers; each reference stays independent of the JavaScript. Standardise (for every executable oracle; the factory's section 2a requires one only for HIGH tools):
 
 - name `tests/fixtures/<id>-golden.py`; Python `decimal`, 60 digits; the docstring says what is simulated and what is
   asserted;
