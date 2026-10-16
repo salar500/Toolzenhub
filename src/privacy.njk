@@ -121,15 +121,41 @@ scripts:
 
 
                     <h2>
-                        Cookies
+                        Cookies and Analytics
                     </h2>
 
                     <p>
-                        ToolZen Hub may use cookies or similar
-                        technologies to improve website functionality,
-                        understand usage, and provide a better user
-                        experience.
+                        The calculators and tools run in your browser.
+                        What you type into them, and any file you
+                        choose, stays on your device and is not sent to
+                        us or to Google.
                     </p>
+
+                    <p>
+                        On toolzenhub.in we would like to use Google
+                        Analytics 4 to count visits and see which pages
+                        are useful. Google Analytics uses cookies and
+                        sends page and device information, such as the
+                        page address (without any query string), your
+                        approximate location, and your browser and
+                        device type, to Google. It stays switched off
+                        until you press &ldquo;Accept analytics&rdquo;
+                        in the notice shown on the site. If you press
+                        &ldquo;Reject analytics&rdquo;, Google Analytics
+                        is not loaded and no analytics cookies are set.
+                        Your choice is remembered in your browser&rsquo;s
+                        local storage, and you can change it at any
+                        time.
+                    </p>
+{%- if site.analyticsId %}
+
+                    <p>
+                        <span data-tz-analytics-status>Analytics: no choice made yet.</span>
+                        <button type="button" class="tz-consent__btn" data-tz-analytics-settings>
+                            Change analytics choice
+                        </button>
+                    </p>
+{%- endif %}
 
 
                     <h2>

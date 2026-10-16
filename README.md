@@ -60,6 +60,8 @@ script URLs carry the build's base, and each page also declares it
 (`<meta name="tz-site-base">`) so browser scripts build the same links. Each build deletes its
 output folder first, so there are no stale files. Both folders are git-ignored.
 
+**Analytics (production build only).** `dist/` includes `assets/js/analytics.js` and `assets/css/components/consent.css`, which `dist-ghpages/` does not. GA4 loads only after the visitor accepts; see rule 9.8 in `docs/product-decision-rules.md`. Check with `node --test tests/unit/analytics.test.mjs` and `npx playwright test tests/browser/analytics.spec.js --project=root-desktop --workers=1`. In the GA4 data stream, switch off enhanced measurement's "Page changes based on browser history events" and "Site search" (the categories page puts the search text in `?q=`).
+
 **Hostinger (production).** Run `npm run build` and upload the **contents** of `dist/` to the
 site's web root (`public_html`). The site then runs at the root, `https://toolzenhub.in/`. `dist/`
 is a plain static site: every page is an `index.html` or `*.html` file, so it needs no server

@@ -12,6 +12,11 @@
 
     {#- Where THIS build is deployed. Browser scripts read it (assets/js/routes.js). It is not a canonical. #}
     <meta name="tz-site-base" content="{{ site.base }}">
+{%- if site.analyticsId and not noindex %}
+
+    {#- Production build only. The script loads Google Analytics only after the visitor accepts (assets/js/analytics.js). #}
+    <meta name="tz-analytics-id" content="{{ site.analyticsId }}">
+{%- endif %}
 
     <title>{{ title }}</title>
 
@@ -60,6 +65,9 @@
 
     {#- After the page's own styles on purpose: it restores focus rings and honours reduced motion. #}
     <link rel="stylesheet" href="{{ '/assets/css/base/accessibility.css' | url }}">
+{%- if site.analyticsId and not noindex %}
+    <link rel="stylesheet" href="{{ '/assets/css/components/consent.css' | url }}">
+{%- endif %}
 {%- if clientRendered %}
 
     {#- After the stylesheets so it wins: without script the page never becomes "ready", so show the footer. #}
@@ -83,6 +91,9 @@
 {% for script in scripts %}
     <script type="module" src="{{ script | url }}"></script>
 {%- endfor %}
+{%- if site.analyticsId and not noindex %}
+    <script type="module" src="{{ '/assets/js/analytics.js' | url }}"></script>
+{%- endif %}
 
 </body>
 

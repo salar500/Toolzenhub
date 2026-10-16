@@ -97,7 +97,9 @@ for (const build of BUILDS) {
 
 describe("both builds are the same site", () => {
   it("the same files exist in both (apart from .htaccess), with the same sizes for everything that does not carry the base", () => {
-    const a = list(BUILDS[0].dir).filter((f) => f !== ".htaccess");
+    // .htaccess and the analytics consent files exist in the production build only (tests/unit/analytics.test.mjs owns them)
+    const PRODUCTION_ONLY = new Set([".htaccess", "assets/js/analytics.js", "assets/css/components/consent.css"]);
+    const a = list(BUILDS[0].dir).filter((f) => !PRODUCTION_ONLY.has(f));
     const b = list(BUILDS[1].dir);
     assert.deepEqual(a, b);
     // assets (CSS, images, JS modules) are byte-identical: only the generated HTML and artifacts carry the base

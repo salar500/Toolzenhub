@@ -49,7 +49,8 @@ const metaContent = (head, attr, name) => {
 };
 const links = (head, rel) => [...head.matchAll(/<link\b[^>]*>/g)].map((m) => m[0]).filter((t) => new RegExp(`rel="${rel}"`).test(t)).map((t) => decode((t.match(/href="([^"]*)"/) || [])[1] ?? ""));
 const jsonLd = (head) => [...head.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => m[1]);
-const scriptsOf = (html) => [...html.matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*>/g)].map((m) => m[1]);
+// the production-only consent module (assets/js/analytics.js) is on every tracked page; tests/unit/analytics.test.mjs owns its presence
+const scriptsOf = (html) => [...html.matchAll(/<script\b[^>]*\bsrc="([^"]+)"[^>]*>/g)].map((m) => m[1]).filter((s) => !s.endsWith("/assets/js/analytics.js"));
 const count = (html, re) => (html.match(re) || []).length;
 const visibleCrumb = (html) => {
   const m = html.match(/<div class="calculator-breadcrumb">([\s\S]*?)<\/div>/);

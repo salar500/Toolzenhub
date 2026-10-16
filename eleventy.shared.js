@@ -72,7 +72,9 @@ export function createConfig({ base, output }) {
     // Modules the BUILD imports to write the pages (tool and article markup, related content, relationships)
     // but that no browser page loads are left out of the output. If one were excluded by mistake the asset
     // check and the browser tests would fail, because a page would then reference a missing file.
-    eleventyConfig.addPassthroughCopy({ assets: "assets" }, { filter: ["**/*", ...BUILD_ONLY.map((f) => `!${f}`)] });
+    // The analytics consent files belong to the production build only; the preview build must not ship them.
+    const PRODUCTION_ONLY = siteBase === "/" ? [] : ["js/analytics.js", "css/components/consent.css"];
+    eleventyConfig.addPassthroughCopy({ assets: "assets" }, { filter: ["**/*", ...[...BUILD_ONLY, ...PRODUCTION_ONLY].map((f) => `!${f}`)] });
     eleventyConfig.addPassthroughCopy({ "loans/loan-comparison": "loans/loan-comparison" });
     eleventyConfig.addPassthroughCopy({ "favicon.svg": "favicon.svg" });
 
