@@ -1,6 +1,6 @@
 # Tool Pack 28: World Clock (Time Tools)
 
-Status: **Implemented locally on 2026-10-19 (base commit `fce61ba`) under the owner's authorization of this specification, then refined the same day (section 19: search, geographic discovery, add feedback); see sections 18 and 19 for the implementation notes.** Not pushed and not deployed; the city list and the icon await the owner's review before any release. The specification itself was finalized on 2026-10-19 (decisions OD1 to OD10 in section 16); until the implementation authorization it read: not authorized for implementation, a separate readiness phase and explicit authorization required.
+Status: **Implemented locally on 2026-10-19 (base commit `fce61ba`) under the owner's authorization of this specification, then refined the same day (section 19: search, geographic discovery, add feedback); see sections 18 and 19 for the implementation notes.** **World Clock 2.0 is specified in section 20 (specification only: not approved for implementation, not built).** Not pushed and not deployed; the city list and the icon await the owner's review before any release. The specification itself was finalized on 2026-10-19 (decisions OD1 to OD10 in section 16); until the implementation authorization it read: not authorized for implementation, a separate readiness phase and explicit authorization required.
 Roadmap: R2 item 1 (PROPOSED, a candidate, not an authorization; `docs/tool-pack-factory.md` section 10). R2 stays proposed; World Clock is not an approved roadmap item. The roadmap's wording is not changed by this specification.
 Tier: **MEDIUM**, with one part verified at HIGH rigor (the next-clock-change calculation has an independent oracle, section 7.4). A browser-local reference tool: no money, tax or legal content, no stored data. When unsure the factory says take the higher tier; the single risky calculation is the part that gets the higher treatment.
 Id, slug and route: `world-clock`, `/tools/world-clock/`. Section: **Time Tools** (`time-tools`, flat, no category).
@@ -666,3 +666,262 @@ Worst case, a keystroke in the first moments before the idle warm-up has run, is
 **Tests.** Unit, new: `world-clock-search` (21) and `world-clock-country-zones` (9); updated: engine 35, directory 19. The browser spec grew from 28 to 39 tests on each of subpath-desktop and subpath-mobile (new: aliases and false matches, abbreviations, continents, row times, Show all, add confirmation with keyboard and phone scrolling, contrast, warm-up and first keystroke under 60 ms, country data failing to load, browse by region and by country). The oracle and the Time Zone Converter contract tests are unchanged and pass. Baselines refreshed after review: SEO (one value, this page's visible text) and visual `world-clock` (desktop, mobile, tablet). The static checks, the build comparison and the growth manifest check are run at the commit. Known failures unrelated to this work are as recorded in section 18.
 
 **Limits and risks.** Real Android, Safari and WebKit, assistive technology (the combobox with its header, note and "Show all" rows; the browse panel's selects and buttons), and real-phone performance remain **unverified**. The country data lists zones and says nothing about which cities exist. `Intl.DisplayNames` is needed for names of countries the site does not list (older browsers fall back to the country code). Abbreviation search, UTC-offset search, "did you mean" suggestions and an expanded directory are deferred.
+
+
+## 20. World Clock 2.0: specification amendment (2026-10-19)
+
+**Status: SPECIFICATION ONLY. The specification and its defaults were approved on 2026-10-19; implementation is NOT authorized by that approval and needs a separate, explicit approval. Not built.** Sections 1 to 19 remain the record of what was built and what was decided; nothing in them is rewritten. This section extends them. **When World Clock 2.0 is implemented, the sections it names in 20.1 are superseded by this one**; everything else in sections 1 to 19 stays in force.
+
+Basis: the read-only design and feasibility review of 2026-10-19 (prototype measurements are quoted where used and labelled as measurements; sizes not yet built are labelled estimates) and the owner's decisions of the same day (20.16). The existing tool is **extended, not replaced**: the clock engine, the curated directory, country browsing, the shareable board, the time-zone correctness safeguards and the Time Zone Converter hand-off are kept.
+
+### 20.1 What changes and what is superseded
+| Existing behaviour | World Clock 2.0 |
+| --- | --- |
+| The popup search list (an ARIA combobox listbox) | **Replaced** by one inline results surface in the Explore view (20.8). Sections 6.3 and 19 (items 5 to 7, the popup and the Browse panel) are superseded. |
+| The Browse panel (Region, Country) | **Absorbed** into the Explore filters (20.9). |
+| A board only | The board becomes the **My clocks** view; a new **Explore cities** view is added (20.2). |
+| Search by name, country, continent, zone path | Kept (20.4), and extended with current-time, AM/PM, range and UTC-offset search. |
+| 12-clock limit | Kept **for the board only**; the directory has no limit. |
+| `cities=` and `ref=` | Unchanged (20.14). |
+
+### 20.2 The two views
+1. **Explore cities**: a complete, searchable, live worldwide directory (all 195 curated cities, plus a separate group of other browser-supported time zones).
+2. **My clocks**: the existing board of up to 12 uniform cards plus Your time, with Compare with, 24-hour, Copy link and the Time Zone Converter hand-off, unchanged in behaviour.
+
+**Page order:** heading, the live reference line (20.7), one search field with example chips, the view tabs, the active view. The search field and the reference line stay above the tabs so they are on screen in both views.
+
+**Tabs (ARIA tabs pattern):** a `tablist` with two `tab`s, "Explore cities (195)" and "My clocks (n)" (n is the number of selected cities; Your time is not counted), and one `tabpanel` each. Roving `tabindex`; Left and Right Arrow move between tabs, Home and End go to the first and last; the tab that receives focus is selected (automatic activation: both panels are local and light). The hidden panel has `hidden` and is not repainted on a minute tick; it repaints once when shown.
+
+**Which view shows first**
+- No `cities=` in the address, or one with no valid city: **Explore cities**.
+- A valid shared `cities=` (at least one valid city after validation, section 9): **My clocks**.
+- The board always starts with the starter cities when the address gives none (section 6.8), so "My clocks" is never empty at load.
+- The visitor's choice of view is **not** stored or put in the address.
+
+**Searching switches to Explore.** The first input in the search field while My clocks is showing selects Explore and says so once in the polite region ("Showing results in Explore cities"). It never moves focus out of the search field.
+
+**Adding** (from any row): the board changes, the "My clocks (n)" label changes, and the confirmation line (20.10) says so. The Explore list stays where it is; nothing scrolls.
+
+### 20.3 Reference line and search field
+- **Reference line:** "Your time", large digits, weekday and date, the browser zone shown with the modern spelling (Asia/Kolkata), and its current UTC offset. It is one `time` element, repainted on the minute tick, never a live region.
+- **One search field** (`type="search"`, in a `role="search"` form), label "Search cities, countries or times", placeholder "City, country, 8 PM, UTC+05:30". It filters the Explore results inline; it is not a combobox and has no popup.
+- **Example chips** (buttons): `8 PM`, `AM`, `UTC+05:30`, `Australia`, `Europe`, `Mumbai`. A chip puts its text in the field and runs the search; it never adds a clock.
+- **Keyboard:** Enter in the field moves focus to the first result's Add button (it does **not** add a result: a query may have hundreds of matches). Escape clears a non-empty field; in an empty field it does nothing. "/" is not bound.
+- **Updates while typing** run on every `input` event (coalesced to one per animation frame); there is no artificial debounce. Only the polite result summary (20.10) is debounced (700 ms after the last input).
+
+### 20.4 Universal search: grammar and precedence
+**Normalisation (all classes):** trim; lower case; collapse runs of spaces; "−", "–" and "—" read as "-"; dots removed from "a.m." and "p.m."; the words "noon" and "midnight" are accepted as hour words (20.5); accents removed for text as in section 8.4. The typed text is never shown back in a result heading except clipped to 12 characters (as for abbreviations) and only through `textContent`.
+
+**Classification: the first rule that applies wins.**
+| # | Class | It applies when the normalised query | Examples |
+| --- | --- | --- | --- |
+| 1 | Empty | is empty | (the unfiltered directory) |
+| 2 | **UTC offset** | is `utc` or `gmt`, or has an optional `utc`/`gmt` prefix followed by a sign and an offset (20.6) | `utc+08:00`, `+08:00`, `gmt-4`, `-4`, `+5:30`, `utc` |
+| 3 | **Time range** | is two time atoms joined by `-` or `to` | `08:00-10:00`, `9 am-12 pm`, `22:00-02:00` |
+| 4 | **Specific time** | is one time atom with minutes | `8:30 am`, `20:00`, `14:45`, `5:30` |
+| 5 | **Hour** | is one time atom without minutes, or is `noon` or `midnight` | `8`, `08`, `8 am`, `20`, `8pm`, `noon`, `midnight` |
+| 6 | **Period** | is exactly `am` or `pm` | `AM`, `pm` |
+| 7 | **Invalid time or offset** | starts with a digit or a sign but matches no rule above | `25:00`, `13 pm`, `8:75`, `123`, `+15` |
+| 8 | Abbreviation | is one of the known abbreviations (section 19, item 2) | `ist`, `est`, `cst` |
+| 9 | Continent or region | is a continent word (section 19, item 3) | `asia`, `north america`, `americas` |
+| 10 | Country | is one whole country name or alias (section 19, item 1) | `india`, `usa`, `uk` |
+| 11 | Zone path | contains a slash or an underscore | `asia/kolkata`, `america/new_york` |
+| 12 | Text | anything else | `mumbai`, `new yor`, `kath` |
+
+**Why this order keeps city names safe:** no city, alias or country name begins with a digit or a sign, so classes 2 to 5 and 7 cannot capture a name; "Time" classes are recognised only from their own grammar. The one real collision is class 6: "am" is also the start of Amman and Amsterdam. A bare `am` therefore shows the period results **with a notice** at the top ("Showing places where it is currently AM. Looking for Amman or Amsterdam? Keep typing."), and the next character (for example "ams") reclassifies the query as text. `pm` collides with no name.
+
+**Region and Country filters combine with every class by AND** (a region or country chosen in Filters narrows time, period and offset results too). Free text combined with a time (for example "8 pm europe") is **not** supported in v1: the whole query is one class.
+
+**Result headings (exact wording; the examples assume 12-hour display, and the 24-hour switch changes only how times are printed):**
+| Class | Heading |
+| --- | --- |
+| Hour (AM or PM given, or 24-hour) | "Places currently between 8:00 PM and 8:59 PM" |
+| Bare hour 1 to 12 | two headings, "Places currently between 8:00 AM and 8:59 AM" and "... 8:00 PM and 8:59 PM" |
+| Period | "Places where it is currently AM (midnight to 11:59 AM)" |
+| Specific time | "Places currently around 8:30 AM (8:15 to 8:45 AM, ±15 minutes)" |
+| Range | "Places currently between 8:00 AM and 10:00 AM" (adds "crossing midnight" when it does) |
+| Offset | "Places currently using UTC+05:30" |
+| Country | "Australia: multiple current time zones" (one zone: "India: one time zone") |
+| Continent | "Asia: 56 listed cities" |
+
+### 20.5 Time semantics (exact)
+**One shared instant.** Every time, period, range and offset match is decided from one instant `T`, read once per minute tick (and once when the query changes), and from each place's **actual** local clock at `T` (the Time Zone Converter's `wallAt`). Nothing is computed from fixed offsets, so daylight-saving changes, 30-minute and 45-minute offsets, Lord Howe's 30-minute shift and the Date Line are correct by construction. A place's *local minute* `m` is its local hour times 60 plus its local minute, 0 to 1439.
+
+**Time atoms.** `H` or `HH` (0 to 23), optionally `:MM` (00 to 59), optionally `am` or `pm` (a space before it is allowed, and none: `8pm`). With am/pm the hour is 1 to 12; otherwise 0 to 23.
+- **12-hour:** 12 AM is 00:00 (midnight) and belongs to AM; 12 PM is 12:00 (noon) and belongs to PM; 1 to 11 AM is 01:00 to 11:00; 1 to 11 PM is 13:00 to 23:00.
+- **24-hour:** a leading zero (`08`), an hour above 12 (`20`), or hour `0`/`00` reads on the 24-hour clock.
+- **`noon` and `midnight` (words).** As a whole query, `noon` means the **current local hour 12:00 to 12:59** (the same as `12 pm`) and `midnight` means the **current local hour 00:00 to 00:59** (the same as `12 am`). Neither means an exact minute, neither takes a tolerance, and neither is a specific time: the result heading says "Places currently between 12:00 PM and 12:59 PM" (or "...12:00 AM and 12:59 AM"). They are not accepted with minutes (`noon:30` is invalid). As a **range endpoint** the word means the time 12:00 or 00:00 (endpoints are times, below), so `midnight-6 am` is 00:00 up to 06:00. They are words, never city names, so they cannot capture a name.
+- **Bare 1 to 12 with no leading zero and no am/pm** (`8`, `5:30`, `12`) is read **both ways**, as the AM and the PM reading, shown as two separately labelled groups (AM group first). It is never silently one of them.
+
+**Matching contracts (all at minute granularity, all inclusive of the stated ends)**
+| Query | Place matches when |
+| --- | --- |
+| Hour `H` (resolved to 24-hour hour `h`) | `60h <= m <= 60h+59` (8 AM is 08:00 to 08:59; 8 PM is 20:00 to 20:59; `08` is 08:00 to 08:59) |
+| `AM` | `0 <= m <= 719` (midnight through 11:59) |
+| `PM` | `720 <= m <= 1439` (noon through 23:59) |
+| Specific time `t` with tolerance `k` | the circular distance between `m` and `t` is at most `k` minutes: the window `[t-k, t+k]`, both ends included, wrapping across midnight |
+| Range `a-b` | `a <= m <= b` when `a <= b`; otherwise `m >= a` or `m <= b` (crossing midnight). Both end minutes are included. |
+
+**Specific time and tolerance.** The default is **±15 minutes**, always **labelled "around"** in the heading with the window written out (20.4). Four optional controls (a segmented group labelled "Around by"): ±5, **±15 (selected by default)**, ±30, ±60 minutes. The choice applies to the current search only and is not stored. A specific time **never silently widens**. There is no "exactly" control in v1: the measurements behind this decision were that an exact-minute match returns anything in only 30 of 1,440 minutes (2.1%) across the 195 cities, because every place in a whole-hour zone shares the same minute, and that a ±15 window is empty in 41% of sampled minutes for the curated cities and 31% across all 419 zone identities (a ±30 window: 10% and 0%).
+
+**Ranges.** Endpoints are **times, not hour buckets**: `9 am-12 pm` is 09:00 up to and including 12:00 (not through 12:59); to include all of the 11 o'clock hour write `9 am-11:59 am`. An hour-only endpoint means the start of that hour. **No endpoint may be a bare 1-to-12** without am/pm and without a leading zero (`9-12`): that range is invalid with a hint ("Add AM or PM, or use 24-hour times such as 09:00-12:00"), because guessing the halves would silently change the answer. Equal endpoints (`8-8`) are invalid ("A range needs two different times"). A range is a time-of-day filter on **current** local clocks: it is not a time-zone conversion, a meeting search or a future or past time (those belong to the Time Zone Converter, with its own handling of dates).
+
+**Invalid and incomplete queries.** Class 7 shows one hint line, never a city fallback and never an empty list with no explanation: "That is not a time or offset we can read. Try 8 PM, 20:00, 8:30 AM, 9 AM-12 PM or UTC+05:30." A half-typed expression (`8:`, `utc+`, `-`) is class 7 and shows the same hint without an error style. Class 8 and the other name classes keep their existing messages.
+
+**Date changes.** Two places in the same clock window can be on different dates (the Date Line). Every row therefore shows the weekday (or Today, Tomorrow, Yesterday relative to the visitor's date) when its date differs from the visitor's, and the heading says nothing about dates.
+
+**Duplicates sharing a time zone.** Cities in one zone show the same time and all appear (Mumbai and Delhi both match). They are not collapsed in v1.
+
+**Refresh contract.** The shared timer (section 6.10) ticks once a minute, and while the page is hidden does nothing. On a tick: (1) times and day/night words are rewritten in place for the displayed rows; (2) for a **time, period, range or offset** query, or a **local-time sort**, the matching and the order are recomputed from the new instant. If keyboard focus is inside the results list, the recomputation is **deferred**: the list keeps its rows, a non-live button "Results changed. Update" appears under the heading, and the update applies on that button, on the next query change, or when focus leaves the list. No row is removed or moved under a focused control, and nothing is announced on a tick. The heading carries "Updated 7:50 PM" (the instant used).
+
+### 20.6 UTC-offset search
+- **Forms:** an optional `utc` or `gmt` prefix, a sign (`+`, `-`, `−`), hours (1 or 2 digits), optionally minutes with a colon or as two more digits (`+5:30`, `+05:30`, `+0530`). Bare `utc` or `gmt` means +00:00. Without a prefix a **sign is required** (so `5:30` is a time, `+5:30` is an offset).
+- **Valid offsets:** from -12:00 to +14:00 in 15-minute steps. Anything else is class 7 (for example `+15`, `+5:10`).
+- **Matching:** a place matches when its offset **at the shared instant** equals the typed one, in seconds. It is **not** a local-hour search and it is **not** a time-zone identity: the heading and a one-line note say "An offset can change with daylight saving, and one offset covers many time zones."
+- **`utc` / `gmt` alone:** the same, at +00:00, with an extra note that GMT is a time standard and that, for example, London is UTC+01:00 in summer.
+
+### 20.7 Counts, groups and wording
+Three different things are counted and never mixed:
+- **Listed cities:** curated directory entries that match.
+- **Time zones:** distinct zone identities (by the browser's identity for a zone, section 7.1).
+- **Other time zones:** zone identities the browser knows that **no listed city uses** and that match.
+
+A heading line states the scope exactly, for example "9 listed cities in 2 time zones, plus 0 other time zones" (the measured reading for `UTC+05:30` at 14:20 UTC on 2026-10-19: eight Indian cities in Asia/Kolkata and Colombo). A city count is **never** written as a time-zone count and never called "time zones". When the other-zones group is collapsed its count is still stated.
+
+**The other-time-zones group** is a separate, labelled, collapsible group below the listed cities ("Other time zones (no listed city): N"), a disclosure button with `aria-expanded`:
+- In the unfiltered directory it is **present and collapsed**, showing its count (269 identities in the review measurement).
+- It is **expanded automatically** for a country query, a zone-path query, a Country filter, and any query with no listed-city match; it is **present but collapsed** (with its count) for time, period, range and offset results, and the visitor expands it.
+- Its rows are titled by the zone's own place name with zone.tab's description, as in section 19, and carry the same time, offset, day/night and Add controls. They need the country data; if it did not load, the group shows "Other time zones could not be loaded" and nothing else about them is claimed.
+
+### 20.8 The Explore directory
+**Content.** All 195 curated cities in one list on one page, no ordinary pagination and no "page" navigation. The default order is **City (A to Z)** by the plain normalised comparison used elsewhere (never the browser's locale), ties by country.
+
+**Row.** A list item. Left: the city (bold) and the country (or, for a zone, its description). Right: the local time (weekday first when the date differs), the UTC offset, the approximate Daytime or Night-time word with its icon, and an **Add** button whose accessible name is "Add Sydney, Australia". Rows are a list, not a table; there is no second grid layout for the directory in v1 (the board's cards are the grid).
+- **Already on the board:** the Add button **stays in place** and becomes inert: visible text "On your board", `aria-disabled="true"`, and an accessible name that says so ("Sydney, Australia is on your board"). It is **not removed and not natively disabled**, so it stays focusable and **focus is not lost when you press Add**; activating it does nothing.
+- **Board full (12):** every other Add button becomes inert the same way, with the visible reason "Board full" (`aria-disabled="true"`, still focusable, with the reason in its accessible name), and one line under the search field says "The board is full (12 cities). Remove one in My clocks to add another." Pressing the Add that fills the board keeps focus on that button, now "On your board".
+- **Zone-only rows:** a place added from the other-zones group is a zone place exactly as in section 9 (token form), with the same 12-clock limit.
+
+**Sorting** (a labelled select "Sort by"; the choice lasts for the session only): **City**, **Country** (then city), **Local time** (earliest local clock first, 00:00 to 23:59, ties by city), **UTC offset** (west to east, ties by city). A query in classes 2 to 6 selects **Local time** by default (for a range that crosses midnight, ordered from the range start; for a specific time, nearest first). An explicit choice by the visitor is kept for the rest of the visit and never overridden.
+
+**Filters** (one disclosure, "Filters (n)" with n the number active, closed by default on a phone): **Region** (six), a dependent **Country**, and **Clear filters**. They combine with the query by AND. (Time and offset are searched, not filtered through separate controls: one source of truth, the search field.)
+
+**Result summary line** under the controls (visible text, not a live region): the heading of 20.4, the count line of 20.7, and "Updated H:MM" for time-sensitive results.
+
+**Progressive rendering (no pagination).** The first 40 rows are rendered synchronously; the rest are appended in chunks of 40 rows, one chunk per idle callback (`requestIdleCallback` with a 500 ms timeout; `setTimeout(0)` if it does not exist), with `aria-busy="true"` on the list while chunks are pending. A new query, filter or sort cancels pending chunks. Each row carries `content-visibility: auto` and `contain-intrinsic-size: auto 64px`; where a browser ignores the property the rows simply lay out normally and the chunking still applies. If chunking itself fails the list renders in one synchronous pass. Rows are keyed by place, so a refresh rewrites text in place and reorders only when the order changed.
+
+### 20.8a Progressive rendering, keyboard and assistive technology
+This pins down how the progressive rendering of 20.8 behaves for keyboard and screen-reader users. The rules add no machinery beyond what 20.8 already names.
+1. **The match set is computed first and is complete.** A query, filter or sort produces the whole ordered result set at once (a few milliseconds, 20.11); only the **DOM** is built progressively. Every count in the summary line, the headings and the tab labels comes from the full set and is **accurate from the first frame**, whatever has been rendered.
+2. **Chunks only append, never reorder.** A chunk adds rows after the last rendered row. No existing row is removed, moved or re-parented while chunks are added, so a focused row is never disturbed and focus is never moved by a chunk. Rows are keyed by place; the order of the set does not change during a render.
+3. **Every match is reachable by keyboard.** Each rendered row is in the normal Tab order (its Add button). On the first keyboard interaction inside the results region (`keydown` for Tab, an Arrow, Home or End, or `focusin` on a control in it) any **pending chunks are flushed immediately in one synchronous pass**, appended after the focused row without moving focus. A keyboard user therefore never reaches the end of the rendered rows while more are pending; with row containment this pass costs about 16 ms for 195 rows at 1x (a measurement, not a gate). Pointer and touch users reach later rows by scrolling, which the idle chunks and the same flush on first scroll-driven interaction keep ahead of them.
+4. **List semantics for an incomplete DOM.** The list is a native list (`ul`, `li`) with an accessible label. While chunks are pending each rendered `li` carries `aria-setsize` (the full count) and `aria-posinset` (its position), so assistive technology reports "3 of 195" before the rest exist; once complete the attributes may stay.
+5. **Loading and completion are visible and exposed, not announced per chunk.** The list has `aria-busy="true"` while chunks are pending and `"false"` when done. A visible, non-live line in the summary says "Showing 80 of 195" and becomes "All 195 shown" on completion (hidden or reduced to the count when complete is acceptable). The **polite region is not used per chunk**: it gets one message per query, after the 700 ms debounce, stating the full count ("195 places"), and nothing on completion unless a render takes longer than 2 seconds, when it adds "All 195 results are now shown" once.
+6. **Filtering never silently removes a focused result.** A **visitor-driven** change (typing, choosing a filter or a sort) happens while focus is in the search field, a select or a button outside the list, so it replaces the list freely and cancels pending chunks. A **tick-driven** recomputation (20.5) that would remove or reorder rows is **deferred while focus is inside the list**, with the non-live "Results changed. Update" button. Pressing Add never removes the row (20.8).
+7. **A refresh that does not change the set rewrites text in place** and touches no focus. A refresh that does change the set while focus is outside the list replaces only the rows that changed where possible; it may replace the whole list, because focus is not in it.
+8. **Fallbacks keep the same behaviour.** Without `requestIdleCallback` the chunks use `setTimeout(0)`; without `content-visibility` rows lay out normally; if neither scheduling call can be used, or a chunk throws, the remaining rows are rendered in one synchronous pass. Counts, order, focus handling and the flush in rule 3 do **not** depend on either feature.
+9. **Reduced motion.** Nothing in this section animates; scrolling to a row, if any, is instant.
+
+### 20.9 Empty states and nearest suggestions
+When no place matches a **time, period, range or offset** query:
+1. The primary area says, in the heading's own words, that no place matches: "No listed city is currently between 5:00 AM and 5:59 AM." (and the same for the other-zones group when it has no match either).
+2. **Nothing is silently broadened.** The primary results are empty.
+3. An explicit action offers a wider window **only where one exists**: for a specific time, a button "Widen to ±30 minutes" (the next tolerance); for an hour, period, range or offset, no automatic widening is offered.
+4. Optionally, a **separately labelled suggestion area** below: "Nearest places (not matches)" with at most 5 places closest in local clock to the requested time (or in offset), each row showing how far it is ("8 minutes after", "1 hour before"). Suggestions use a different heading, a visibly different style, and **never appear in the matches list or its counts**. They are omitted when there is nothing close (more than 3 hours away).
+For text, country and region queries the empty state is the existing no-match message with a link to Filters (section 19).
+
+### 20.10 Interaction, feedback and accessibility
+- **Confirmation line:** unchanged from section 19: the line under the search field says "Added London, United Kingdom. 5 of 12 cities.", with "Show clock" when the clock is off screen. "Show clock" selects My clocks, scrolls to the card and moves focus to the card's name, only because the visitor asked. A keyboard add never scrolls and never moves focus. The "Just added" mark is shown on the card until the next action.
+- **Announcements (one polite region):** the confirmation above; the result summary after a query change (debounced 700 ms): "20 places currently between 8:00 PM and 8:59 PM"; "Showing results in Explore cities"; and the existing board messages. **Never** on a tick, and never the list of rows.
+- **Tabs:** as in 20.2. Each tabpanel is labelled by its tab. Switching tabs does not move focus into the panel.
+- **Results:** a labelled region ("Results") containing the heading, the summary, the other-zones disclosure and the list; each row's Add button names its place; the sort and filter controls are native selects and buttons with visible labels.
+- **Targets and focus:** at least 44 px for every button and select on a phone; the visible 3 px focus ring; no keyboard trap; the "Results changed. Update" button is reachable by Tab and not announced.
+- **Contrast** 4.5:1 for text and 3:1 for outlines, with the action green for links and buttons (section 19, item 9); meaning is never carried by colour alone; **reduced motion** disables smooth scrolling and any transition.
+- **Phone layout (320, 360, 390 px; checked at 768 px):** the reference line and the search field are on screen without scrolling; example chips wrap; Filters are behind one disclosure; rows are two lines (name and place on the left, time, offset and a 44 px Add on the right) and never a compressed table; nothing is fixed to the screen edges; no horizontal scroll.
+
+### 20.11 Architecture and performance
+**Modules.**
+| Module | Role | Loaded |
+| --- | --- | --- |
+| `time-query.js` (new, pure) | the grammar (20.4 to 20.6), the matchers (20.5) and the tolerance windows; no DOM, no clock of its own | with the Explore module |
+| `explore.js` (new) | the Explore view: results, sorting, filters, other-zones group, progressive rendering, empty states | **separately**, by dynamic import |
+| `index.js` | the shell: reference line, search field, chips, tabs, the existing board, confirmation, the minute timer | initially |
+| `clock-engine.js` | existing functions kept; adds the per-zone snapshot, the count helpers and the nearest-place helper | initially |
+| `country-zones.js` | existing country data | on demand, as today |
+
+**Loading.** When Explore is the default view, its module is requested at the first paint and the panel shows a skeleton ("Loading the city directory...") until it arrives; when My clocks is the default, it is requested at idle after the warm-up, as the country data is. **Failure:** if the module cannot load, the Explore panel shows "The city directory could not be loaded." with a Retry button; the search field says it is unavailable; **My clocks, the board, the address and the hand-off keep working**; nothing falls back to the removed popup. If the country data cannot load, the existing "listed cities only" degradation applies (section 19).
+
+**Computation.** One snapshot per update: for each **distinct zone** (148 for the 195 cities; 419 for all zones) read `wallAt` once at `T`, then map to cities. A snapshot holds the local minute, the offset in seconds, the day number, the weekday and the day/night phase. There is no per-row timer, no frame loop, and no work while hidden.
+
+**Measured evidence (review prototype, this laptop, Chrome, 390 px viewport; "4x" is Chrome's CPU throttle, a rough proxy and not a device measurement; DOM per row about 10 nodes):**
+| Step | 1x | 4x |
+| --- | --- | --- |
+| Snapshot of 195 cities / 614 places | 3.7 / 7.0 ms | 13 / 47 ms |
+| Render 195 rows, no containment | 138 ms | 303 ms |
+| Render 195 rows, `content-visibility: auto` | 16 ms | 86 ms |
+| Render all 464 places, no containment / contained | 90 / 32 ms | 682 / 233 ms |
+| First 40 rows | 2 ms | 32 ms |
+| Rewrite all 195 times on a tick | 2.3 ms | 32 ms |
+| Time filter, 195 / 614 places, rebuild | 4.8 / 7.2 ms | 42 / 65 ms |
+| Sort 195 by local time, rebuild | 11 ms | 71 ms |
+| Nine keystrokes, rebuild each time (contained rows) | 44 ms | 270 ms |
+| Parser and matcher prototype, gzip, unminified | 1.75 KB | |
+These are evidence for the design, **not acceptance thresholds**.
+
+**Budgets (provisional targets, set before the code exists; measured at integration, and exceeding one is reported, not hidden).** Initial script: **no more than 31 KB gzip** (today 29.5 KB; the tab shell and reference line are the only additions). Explore chunk: about 8 KB gzip (an **estimate**) plus about 1.5 KB of CSS (an estimate). Country data unchanged (5.7 KB gzip). Interaction: the first 40 rows of a query visible within one frame budget on this laptop at 1x; a query change on a 195-row list within 50 ms at 1x (measured, 4x recorded, neither a gate). Layout shift: none caused by chunks arriving (rows carry their intrinsic size).
+
+### 20.12 Privacy, trust and wording
+Unchanged: browser-local, no request beyond the site's own files, no storage, no account, no geolocation, nothing typed is transmitted. The page states, in the "What This Covers" note, that: the directory is a **selection** of cities, not every city; offsets and local times come from the browser's time-zone data and the device clock; an offset is not a zone identity; Daytime and Night-time are approximate (06:00 to 17:59 by the local clock, not sunrise or sunset); and a time search shows **current** local times only (use the Time Zone Converter for a chosen date and time). No claim of complete coverage, accuracy beyond the data, demand, ranking or SEO effect is made anywhere on the page or in the metadata.
+
+### 20.13 What is preserved and not added
+**Not weakened:** the time-zone oracle tests and the America/Asuncion version-divergence safeguards; DST and unusual-offset correctness; the country and city mapping validation; the shareable address contract and its hostile-input handling; the 12-clock board and its comparison reference; the Time Zone Converter hand-off and its contract; the single minute timer and its hidden-page behaviour; the browser-local privacy protections; the abbreviation explanation; the country aliases; the idle warm-up; the optional clock-change line behind its switch.
+**Not added:** persistent favorites, accounts, meeting or future-time planning, analog clocks, maps, flags, photographs, a grid layout for the directory, an external API, a backend, a search library, free-text-plus-time queries, abbreviation search, "did you mean" suggestions, a stored view or query.
+
+### 20.14 Shareable address
+`cities=` and `ref=` are **unchanged** (section 9): the same tokens, limits, validation, `replaceState` writing and starter-board fallback. **Current-time queries, the Around tolerance, the sort, the filters and the active tab are not stored in the address in v1**: a time query describes the present instant, so a link carrying it would not mean the same thing later. A valid `cities=` only selects the **initial view** (20.2).
+
+### 20.15 Test specification (focused, impact-based; no unrelated full regression)
+**Unit, pure (new `time-query` test file and additions):** every row of the grammar table, including each precedence conflict (a city starting like a class, bare `am`, `utc`, `-4` against a range); atoms and normalisation ("8 a.m.", "8am", "noon", unicode minus); AM and PM boundaries at 11:59 and 12:00 and midnight; hour buckets including `12`, `00`, `08`, `20`; the both-ways bare reading and its two groups; specific time windows with each tolerance, both ends included, and the wrap across midnight; ranges, closed ends, `22:00-02:00`, endpoints needing am/pm, equal endpoints, invalid and half-typed input; offsets in every accepted form and every rejected one (`+15`, `+5:10`); offset equality at an instant before and after a DST change; Lord Howe, Kathmandu, Chatham and the Date Line at fixed instants; the counts of 20.7 (listed cities against zone identities against other zones, distinct zones not equal to cities); sorting keys and ties; the nearest-place helper and the 3-hour omission; that the matching never uses a clock of its own (the instant is an argument).
+**Unit, hour words:** `noon` is the hour 12:00 to 12:59 and `midnight` is 00:00 to 00:59 as whole queries, equal to `12 pm` and `12 am`; neither takes a tolerance or minutes (`noon:30` invalid); as range endpoints they are 12:00 and 00:00; both stay clear of the name classes.
+**Unit, data:** the full directory has 195 rows in the unfiltered result; every listed city is reachable through the unfiltered list and through a time or offset query that matches it; the other-zones group is disjoint from the zones of the listed cities.
+**Browser (focused, fake clock, subpath desktop and mobile; root desktop smoke):** ARIA tabs (roles, `aria-selected`, roving `tabindex`, Arrow, Home and End), the default view with and without a valid `cities=`, search switching to Explore without moving focus; the 195 rows present after progressive rendering and `aria-busy` clearing; sorting by each key; region and country filters; the other-zones disclosure (collapsed count, auto-expansion cases); each query class with its heading and a known result at a fixed instant (for example, `8 PM`, bare `8` with two groups, `AM`, `8:30 AM` with the four tolerance controls, a midnight-crossing range, `UTC+05:30`, `utc`); every empty state, with nothing broadened, the widen button, and suggestions kept out of the matches and counts; Add from a row, "On your board", the full-board state; the confirmation, "Show clock" and the keyboard case with no scroll; the minute tick rewriting times, **chunks only appending (a focused row keeps focus and position while chunks arrive), the flush on the first keyboard interaction (Tab to the last row reaches all 195 matches), accurate counts and `aria-busy` while rows are pending, `aria-setsize` and `aria-posinset`, the Add button staying focusable as "On your board" and as "Board full", rendering with idle scheduling and content-visibility removed,** re-filtering when focus is outside the list, and **deferring** with "Results changed. Update" when focus is inside; no announcement on a tick; Enter moving focus to the first Add; Escape clearing; the polite summary after a debounce; the Explore module failing to load (route aborted: the message, Retry, the board and the address still working) and the country data failing (listed cities only); no request other than the site's own; `cities=` and `ref=` round trips and hostile values; phone layouts at 320, 360 and 390 px with no overflow and the reference line and search on screen; reduced motion; contrast and 44 px targets.
+**Performance (recorded, not gated):** the measurements of 20.11 repeated on the built page at 1x and 4x, with the first-40-rows and query-change times; `content-visibility` present on rows.
+**Visual:** Explore and My clocks at desktop, mobile and tablet, reviewed by eye.
+**Existing tests affected:** the browser tests that drive the popup (`#wc-list`, `options`, the region box in Browse) are rewritten for the inline surface (about 15 of the current 39); the board tests, the URL tests, the hand-off, the timer and privacy tests are kept (adjusted for the tab shell); the unit tests for the engine, directory, country data, URL, contract and oracle are expected to pass unchanged. Run first: the world-clock unit files, then `world-clock.spec.js` on desktop and mobile; then the `world-clock` visual baselines and the SEO baseline (the static markup changes); the Time Tools listing and navigation specs only if the catalog description changes. Real Android, Safari/WebKit and assistive technology stay **unverified** until actually tested; `content-visibility` support in Safari is not verified.
+
+### 20.16 Decisions recorded (owner, 2026-10-19; the second table is the approval of the defaults proposed in 20.17)
+| # | Decision | Recorded |
+| --- | --- | --- |
+| 1 | Tabs against stacked sections | **Two tabs.** Explore cities is the default; My clocks when a valid shared `cities=` is opened. |
+| 2 | Exact-time search | **±15 minutes, labelled "Around"**, with ±5, ±15, ±30 and ±60 controls. |
+| 3 | Bare `8` | **Both 8 AM and 8 PM, in separately labelled groups**; `08` is 08:00 to 08:59. |
+| 4 | Grid or list | **A compact list for Explore**; the board keeps its uniform cards. |
+| 5 | Search results | **Inline**, replacing the popup, as one accessible search-and-directory experience. |
+| 6 | Other IANA zones | **A separate, collapsible group**, shown when relevant to a search or a country filter. |
+| 7 | Address | `cities=` and `ref=` kept; **current-time searches not stored in v1**. |
+| 8 | Explore module | **Loaded separately**; initial rendering stays fast. |
+| refinement | No match | **An honest empty state first**, then optional nearby suggestions; **out-of-interval places never mixed into the matches** (20.9). |
+
+Defaults approved by the owner on 2026-10-19:
+| Default | Recorded |
+| --- | --- |
+| Directory sort | **City A to Z** by default, with Country, Local time and UTC offset available. |
+| Example chips | **Six compact, responsive chips** (20.3). |
+| `noon` and `midnight` | **Accepted**, as the current local hours 12:00 to 12:59 and 00:00 to 00:59, never an exact minute (20.5). |
+| Board full | **Add actions disabled with a clear reason** (kept focusable, 20.8). |
+| Catalog and SEO wording | **May be updated in the separately approved implementation phase**, following existing conventions. |
+| Explore module | **Loaded separately**, with accessible loading, error and Retry states (20.11). |
+| Progressive rendering and keyboard use | **Resolved by 20.8a** before implementation. |
+
+**Implementation of World Clock 2.0 is not authorized by any decision in this section.**
+
+### 20.17 Resolved defaults, remaining risks and unverified items
+1. **Resolved (approved):** City A to Z by default; six chips; `noon` and `midnight` as current local hours; Add inert with a reason when the board is full; catalog and SEO wording at implementation; the lazy Explore module with loading, error and Retry states.
+2. **Automatic tab activation:** both panels are light; if the Explore module fails the tab still selects and shows the failure message.
+4. **Rewriting about 15 browser tests** is the largest test cost; the engine-level tests are kept.
+5. **Sparse windows:** an empty hour or window is common at some times of day (the review measured the "8 AM" hour at 0 listed cities at some moments, a median of 7, a maximum of 30), so the empty states are part of the design, not an edge case.
+6. **Unverified:** Safari and Android behaviour, assistive technology with the new tabs and results region, `content-visibility` in older browsers, and real-phone performance.
+7. **Size:** the Explore chunk and its CSS are estimates until built; the initial-script target of 31 KB is provisional.
+3. **Catalog and SEO text** may need a small update (the description mentions a clock board only); approved for the implementation phase only.
+
+### 20.18 Files expected to change at implementation (for scoping; not changed now)
+New: `assets/js/tools/world-clock/time-query.js`, `assets/js/tools/world-clock/explore.js`, their unit and browser tests. Changed: `index.js` (shell, tabs, reference line, search field; the popup removed), `clock-engine.js` (snapshot, counts, nearest), `assets/css/tools/world-clock.css`, `tests/browser/world-clock.spec.js`, `tests/browser/visual.spec.js`, the world-clock visual and SEO baselines, this document (implementation notes in a section 21). Not changed: the Time Zone Converter, the oracle and fixtures, the country-data generator, the other tools, the roadmap, GA4 and advertising.
