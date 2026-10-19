@@ -252,8 +252,8 @@ Proposed on 2026-10-19; it is **not an approved roadmap**. Roadmap R1 above and 
 
 | # | Candidate | Section | Status |
 | --- | --- | --- | --- |
-| 1 | World Clock | Time Tools (also a P1 candidate, Time & Productivity 5) | Proposed priority, candidate only. Tool Pack 19 (Time Zone Converter) is published and unchanged; **overlap with it must be resolved by a differentiation review** before any spec |
-| 2 | Gratuity Calculator | To be decided by the section 12 review | Proposed priority, candidate only. Not in P1 or P2; no research done |
+| 1 | World Clock | Time Tools (also a P1 candidate, Time & Productivity 5) | Proposed priority, candidate only. Tool Pack 19 (Time Zone Converter) is published and unchanged. The differentiation review was done on 2026-10-19 (a narrow live multi-city board; no meeting planner or conversion). Specification: `docs/tool-packs/28-world-clock.md`, finalized as documentation only and **not approved for implementation**; a build needs a separate explicit authorization |
+| 2 | Gratuity Calculator | To be decided by the section 12 review | Proposed priority, candidate only. Clarified by the user on 2026-10-19: the Indian employee gratuity benefit under applicable employment law, **not** a restaurant tip calculator. Any specification must independently verify current Indian legal requirements, applicability, formulas, exemptions, eligibility and effective dates from authoritative sources; no legal rule or limit is recorded here. Not in P1 or P2; no research done |
 
 **Provisional World Clock design guidance (not a specification; the detailed spec is not written):** uniform, polished clock cards; worldwide IANA time-zone support within documented browser capabilities; search and practical filtering; strong mobile UX and accessibility; multi-city comparison; clear differentiation from the Time Zone Converter. Browser-local persistence and expanded city aliases are **not** part of v1 by default: each is evaluated separately on demonstrable user value and maintenance cost.
 
