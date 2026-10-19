@@ -27,10 +27,10 @@
               one name never share an id.
      country  two-letter ISO code; COUNTRY_NAMES gives the English name.
      zone     IANA identifier (modern spelling).
-     region   Africa, Americas, Asia, Europe or Oceania. A browsing
-              aid only, taken from the zone's IANA area (Atlantic and
-              Indian zones are placed by hand below); not a statement
-              about any border.
+     region   Africa, Asia, Europe, North America, Oceania or South
+              America. A browsing aid only, taken from the zone's IANA
+              area (America splits by country; Atlantic and Indian zones
+              are placed by hand below); not a statement about any border.
      aliases  0 to 3 other names people use.
 
    Zones and countries are checked against a pinned copy of the IANA
@@ -40,7 +40,10 @@
 
 export const MAX_ALIASES = 3;
 
-export const REGIONS = Object.freeze(["Africa", "Americas", "Asia", "Europe", "Oceania"]);
+export const REGIONS = Object.freeze(["Africa", "Asia", "Europe", "North America", "Oceania", "South America"]);
+
+/* the countries whose America/ zones belong to South America; every other America/ zone is North America (which includes Central America and the Caribbean) */
+const SOUTH_AMERICA = new Set(["AR", "BO", "BR", "CL", "CO", "EC", "FK", "GF", "GS", "GY", "PE", "PY", "SR", "UY", "VE"]);
 
 export const COUNTRY_NAMES = Object.freeze({
     AE: "United Arab Emirates", AF: "Afghanistan", AM: "Armenia", AO: "Angola", AR: "Argentina",
@@ -74,27 +77,124 @@ export const COUNTRY_NAMES = Object.freeze({
     ZA: "South Africa", ZM: "Zambia", ZW: "Zimbabwe"
 });
 
-/* zones whose IANA area does not say the region */
+/* zones whose IANA area does not say the region (Atlantic and Indian zones are placed by hand; Antarctica and the Etc zones have no region) */
 const REGION_OVERRIDES = Object.freeze({
+    "Arctic/Longyearbyen": "Europe",
+    "Atlantic/Azores": "Europe",
+    "Atlantic/Bermuda": "North America",
+    "Atlantic/Canary": "Europe",
+    "Atlantic/Cape_Verde": "Africa",
+    "Atlantic/Faroe": "Europe",
+    "Atlantic/Madeira": "Europe",
     "Atlantic/Reykjavik": "Europe",
+    "Atlantic/South_Georgia": "South America",
+    "Atlantic/St_Helena": "Africa",
+    "Atlantic/Stanley": "South America",
+    "Indian/Antananarivo": "Africa",
+    "Indian/Chagos": "Asia",
+    "Indian/Christmas": "Asia",
+    "Indian/Cocos": "Asia",
+    "Indian/Comoro": "Africa",
+    "Indian/Mahe": "Africa",
     "Indian/Maldives": "Asia",
     "Indian/Mauritius": "Africa",
-    "Indian/Antananarivo": "Africa"
+    "Indian/Mayotte": "Africa",
+    "Indian/Reunion": "Africa"
 });
 
 const AREA_REGIONS = Object.freeze({
     Africa: "Africa",
-    America: "Americas",
     Asia: "Asia",
     Australia: "Oceania",
     Europe: "Europe",
     Pacific: "Oceania"
 });
 
-/* the region a zone belongs to by the rule above, or "" when the rule has no answer */
-export function regionOf(zone) {
-    return REGION_OVERRIDES[zone] ?? AREA_REGIONS[String(zone).split("/")[0]] ?? "";
+/*
+ * The region a zone belongs to by the rule above, or "" when the rule has no
+ * answer. A zone under America/ is North or South America by its country
+ * (pass the ISO code; with none given it is North America).
+ */
+export function regionOf(zone, country = "") {
+
+    const override = REGION_OVERRIDES[zone];
+
+    if (override) {
+        return override;
+    }
+
+    const area = String(zone).split("/")[0];
+
+    if (area === "America") {
+        return SOUTH_AMERICA.has(country) ? "South America" : "North America";
+    }
+
+    return AREA_REGIONS[area] ?? "";
+
 }
+
+/* the words a visitor types for a continent, mapped to the regions they mean ("americas" means both) */
+const REGION_WORDS = Object.freeze({
+    "africa": ["Africa"],
+    "asia": ["Asia"],
+    "europe": ["Europe"],
+    "oceania": ["Oceania"],
+    "north america": ["North America"],
+    "south america": ["South America"],
+    "americas": ["North America", "South America"]
+});
+
+/* the regions a typed continent word names, or null */
+export const regionsForWord = (normalized) =>
+    REGION_WORDS[normalized] ?? null;
+
+/*
+ * Other names for a country, each an exact whole-query match (never a substring), written the way
+ * normalizeText reads them ("U.K." becomes "u k"). Each points at ONE ISO country; a name that
+ * could mean two countries (Korea, Georgia) is deliberately absent.
+ */
+export const COUNTRY_ALIASES = Object.freeze({
+    "usa": "US",
+    "us": "US",
+    "u s a": "US",
+    "u s": "US",
+    "united states of america": "US",
+    "uk": "GB",
+    "u k": "GB",
+    "britain": "GB",
+    "great britain": "GB",
+    "england": "GB",
+    "scotland": "GB",
+    "wales": "GB",
+    "northern ireland": "GB",
+    "uae": "AE",
+    "u a e": "AE",
+    "emirates": "AE",
+    "holland": "NL",
+    "the netherlands": "NL",
+    "czech republic": "CZ",
+    "burma": "MM",
+    "ivory coast": "CI",
+    "cote d ivoire": "CI",
+    "turkiye": "TR",
+    "deutschland": "DE",
+    "espana": "ES",
+    "brasil": "BR",
+    "bharat": "IN",
+    "russian federation": "RU"
+});
+
+/*
+ * Time-zone abbreviations are NOT searched: IST, CST, BST and others are each used by more than one
+ * country, and the browser reports few of them. Typing one explains that instead of guessing.
+ */
+export const ABBREVIATIONS = Object.freeze(new Set([
+    "acst", "aedt", "aest", "akdt", "akst", "ast", "bst", "cdt", "cest", "cet", "cst", "edt", "eest", "eet", "est", "gmt",
+    "hkt", "hst", "ist", "jst", "kst", "mdt", "msk", "mst", "nzdt", "nzst", "pdt", "pkt", "pst", "sast", "sgt", "west", "wet", "wib"
+]));
+
+export const isAbbreviation = (normalized) =>
+    ABBREVIATIONS.has(normalized);
 
 /* lower case, accents removed, every run of other characters one space */
 export function normalizeText(text) {
@@ -325,7 +425,7 @@ export const DIRECTORY = Object.freeze(
             city,
             country,
             zone,
-            region: regionOf(zone),
+            region: regionOf(zone, country),
             aliases: Object.freeze([...aliases])
         })
     )
@@ -389,7 +489,8 @@ function wordMatchesName(word, name) {
         return true;
     }
 
-    return word.length >= 3 && name.includes(word);
+    /* inside a word only for four letters or more: "usa" must not find Jerusalem or Lusaka */
+    return word.length >= 4 && name.includes(word);
 
 }
 
@@ -423,7 +524,7 @@ export function searchDirectory(query, { region = "", limit = 10, entries = DIRE
 
     for (const entry of entries) {
 
-        if (region && entry.region !== region) {
+        if (region && !(Array.isArray(region) ? region : [region]).includes(entry.region)) {
             continue;
         }
 
@@ -439,7 +540,8 @@ export function searchDirectory(query, { region = "", limit = 10, entries = DIRE
                 continue;
             }
 
-            if (f.country.split(" ").some((part) => part.startsWith(word)) || word === f.code) {
+            /* a country by the start of its name from three letters ("uk" is not "Ukraine"; "uk" is the alias of the United Kingdom) or by its exact two-letter code */
+            if ((word.length >= 3 && f.country.split(" ").some((part) => part.startsWith(word))) || word === f.code) {
                 throughCountry = true;
                 continue;
             }
@@ -493,7 +595,7 @@ export function searchDirectory(query, { region = "", limit = 10, entries = DIRE
 export function browseRegion(region, { limit = 60, entries = DIRECTORY } = {}) {
 
     const all = entries
-        .filter((entry) => entry.region === region)
+        .filter((entry) => (Array.isArray(region) ? region : [region]).includes(entry.region))
         .sort((a, b) => {
             const x = normalizeText(a.city);
             const y = normalizeText(b.city);

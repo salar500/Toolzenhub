@@ -54,11 +54,12 @@
 
 /* ---------- toolbar ---------- */
 
-/* a phone: the search box takes the full width, Region and Compare with share the next row, so the first clock is reachable without scrolling far */
+/* a phone: the search box takes the full width, Compare with and Browse share the next row, so the first clock is reachable without scrolling far */
 .wc-toolbar {
 
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: end;
     gap: 12px;
 
     padding: 14px;
@@ -128,7 +129,7 @@
 .wc-input:focus-visible,
 .wc-check input:focus-visible,
 .wc-card__remove:focus-visible,
-.wc-plan:focus-visible {
+.calculator-page .wc-plan:focus-visible {
 
     outline: 3px solid var(--color-action-green);
     outline-offset: 2px;
@@ -197,7 +198,7 @@
     left: 0;
     right: 0;
 
-    max-height: 320px;
+    max-height: 360px;
     margin: 0;
     padding: 4px;
 
@@ -212,26 +213,98 @@
 
 }
 
-.wc-list__option {
+/* one place as a row (in the search list and in the browse list): its name and where it is on the left, its time and offset on the right */
+.wc-row {
 
     display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 2px 10px;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
 
     min-height: 44px;
     margin: 0;
     padding: 8px 10px;
 
-    border-radius: 8px;
-
     color: var(--color-ink);
 
     font-size: 15px;
+    text-align: left;
 
-    cursor: pointer;
+}
+
+.wc-row__text {
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
 
     overflow-wrap: anywhere;
+
+}
+
+.wc-row__main {
+
+    font-weight: 700;
+
+}
+
+.wc-row__sub {
+
+    color: #475467;
+
+    font-size: 13px;
+    line-height: 1.4;
+
+}
+
+.wc-row__time {
+
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: flex-end;
+
+    text-align: right;
+
+    font-variant-numeric: tabular-nums;
+
+}
+
+.wc-row__clock {
+
+    font-weight: 700;
+
+}
+
+.wc-row__offset {
+
+    color: #475467;
+
+    font-size: 12.5px;
+
+}
+
+.wc-row__badge {
+
+    margin-top: 2px;
+    padding: 1px 8px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: var(--radius-full);
+
+    color: #475467;
+
+    font-size: 12px;
+    font-weight: 600;
+
+}
+
+.wc-list__option {
+
+    border-radius: 8px;
+
+    cursor: pointer;
 
 }
 
@@ -244,32 +317,31 @@
 
 }
 
-.wc-list__main {
+.wc-list__more {
 
+    display: flex;
+    align-items: center;
+
+    min-height: 44px;
+    padding: 8px 10px;
+
+    color: var(--color-action-green);
+
+    font-size: 15px;
     font-weight: 700;
 
 }
 
-.wc-list__sub {
+.wc-list__header {
 
-    color: #475467;
+    margin: 0;
+    padding: 8px 10px 4px;
+
+    color: var(--color-ink);
 
     font-size: 13px;
-
-}
-
-.wc-list__badge {
-
-    margin-left: auto;
-    padding: 1px 8px;
-
-    border: 1px solid var(--color-slate-200);
-    border-radius: var(--radius-full);
-
-    color: #475467;
-
-    font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.01em;
 
 }
 
@@ -284,6 +356,157 @@
     line-height: 1.5;
 
     overflow-wrap: anywhere;
+
+}
+
+
+/* ---------- browse by region or country ---------- */
+
+.wc-browse-toggle {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    padding-top: 6px;
+    padding-bottom: 6px;
+
+    font-size: 15px;
+    line-height: 1.25;
+    text-align: left;
+
+    cursor: pointer;
+
+}
+
+.wc-browse-toggle[aria-expanded="true"] {
+
+    border-color: var(--color-action-green);
+
+}
+
+.wc-browse {
+
+    display: grid;
+    gap: 12px;
+
+    grid-column: 1 / -1;
+
+    padding-top: 12px;
+
+    border-top: 1px solid var(--color-slate-200);
+
+}
+
+.wc-browse__selects {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+
+}
+
+.wc-browse__bar {
+
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+
+}
+
+.wc-browse__header {
+
+    margin: 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+}
+
+.wc-browse__list {
+
+    display: grid;
+    gap: 6px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+}
+
+.wc-browse__row {
+
+    width: 100%;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+}
+
+.wc-browse__row:hover:not(:disabled) {
+
+    background: var(--color-action-green-soft);
+
+}
+
+.wc-browse__row:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.wc-browse__row:disabled {
+
+    background: var(--color-gray-50);
+
+    cursor: default;
+
+}
+
+/* a button that reads as a link, for the actions that sit inside a sentence */
+.wc-link-button {
+
+    display: inline;
+
+    margin: 0;
+    padding: 0 2px;
+
+    border: 0;
+    background: none;
+
+    color: var(--color-action-green);
+
+    font: inherit;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    cursor: pointer;
+
+}
+
+.wc-link-button:hover {
+
+    color: var(--color-action-green-hover);
+
+}
+
+.wc-link-button:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
 
 }
 
@@ -352,7 +575,7 @@
 
 }
 
-.wc-plan {
+.calculator-page .wc-plan {
 
     display: inline-flex;
     align-items: center;
@@ -369,7 +592,7 @@
 
 }
 
-.wc-plan:hover {
+.calculator-page .wc-plan:hover {
 
     color: var(--color-action-green-hover);
 
@@ -463,6 +686,30 @@
     line-height: 1.4;
 
     overflow-wrap: anywhere;
+
+}
+
+.wc-card__fresh {
+
+    display: inline-block;
+
+    margin-top: 4px;
+    padding: 1px 8px;
+
+    border-radius: var(--radius-full);
+
+    background: var(--color-action-green-soft);
+
+    color: var(--color-action-green);
+
+    font-size: 12px;
+    font-weight: 700;
+
+}
+
+.wc-card--new {
+
+    border-color: var(--color-action-green);
 
 }
 
@@ -576,7 +823,6 @@
     align-items: flex-start;
     gap: 6px;
 
-    margin-top: auto;
     padding-top: 6px;
 
 }
@@ -654,9 +900,15 @@
 
     .wc-toolbar {
 
-        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.3fr);
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
 
         padding: 16px;
+
+    }
+
+    .wc-browse__selects {
+
+        grid-template-columns: repeat(2, minmax(0, 280px));
 
     }
 

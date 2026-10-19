@@ -1,6 +1,6 @@
 # Tool Pack 28: World Clock (Time Tools)
 
-Status: **Implemented locally on 2026-10-19 (base commit `fce61ba`) under the owner's authorization of this specification; see section 18 for the implementation notes.** Not pushed and not deployed; the city list and the icon await the owner's review before any release. The specification itself was finalized on 2026-10-19 (decisions OD1 to OD10 in section 16); until the implementation authorization it read: not authorized for implementation, a separate readiness phase and explicit authorization required.
+Status: **Implemented locally on 2026-10-19 (base commit `fce61ba`) under the owner's authorization of this specification, then refined the same day (section 19: search, geographic discovery, add feedback); see sections 18 and 19 for the implementation notes.** Not pushed and not deployed; the city list and the icon await the owner's review before any release. The specification itself was finalized on 2026-10-19 (decisions OD1 to OD10 in section 16); until the implementation authorization it read: not authorized for implementation, a separate readiness phase and explicit authorization required.
 Roadmap: R2 item 1 (PROPOSED, a candidate, not an authorization; `docs/tool-pack-factory.md` section 10). R2 stays proposed; World Clock is not an approved roadmap item. The roadmap's wording is not changed by this specification.
 Tier: **MEDIUM**, with one part verified at HIGH rigor (the next-clock-change calculation has an independent oracle, section 7.4). A browser-local reference tool: no money, tax or legal content, no stored data. When unsure the factory says take the higher tier; the single risky calculation is the part that gets the higher treatment.
 Id, slug and route: `world-clock`, `/tools/world-clock/`. Section: **Time Tools** (`time-tools`, flat, no category).
@@ -619,3 +619,50 @@ Not measured: in-browser render and tick cost, anything on a phone, memory, batt
 | `apia-ws` | Apia | Samoa | `Pacific/Apia` | Oceania |  |
 | `nuku-alofa-to` | Nuku'alofa | Tonga | `Pacific/Tongatapu` | Oceania |  |
 | `kiritimati-ki` | Kiritimati | Kiribati | `Pacific/Kiritimati` | Oceania | Christmas Island |
+
+
+## 19. Refinement phase: search, geographic discovery and add feedback (2026-10-19)
+Facts only. Base commit `7c9db2f`; one bounded refinement, one local commit. It follows a read-only review that found seven essential usability problems and two small polish items. **Where this section differs from sections 6, 7.4 and 8 above, this section is what was built.** Not pushed, not deployed.
+
+**What changed.**
+1. **Search correctness.** A word is matched inside another word only from four letters ("usa" no longer finds Jerusalem or Lusaka); a country is matched by the start of its name from three letters ("uk" is no longer Ukraine). A whole query that names ONE country (its name or an alias) shows that country's places: aliases USA, US, UK, U.K., Britain, Great Britain, England, Scotland, Wales, Northern Ireland, UAE, Emirates, Holland, the Netherlands, Czech Republic, Burma, Ivory Coast, Côte d'Ivoire, Türkiye, Deutschland, España, Brasil, Bharat, Russian Federation. A name that could mean two countries (Korea, Georgia) is deliberately not an alias. A bare two-letter code is **not** a country query ("la" is Los Angeles, not Laos). "india" is the country (no America/Indiana zones).
+2. **Abbreviations are explained, not guessed.** Thirty-four common abbreviations (IST, EST, CST, BST, PST, CET, JST, AEST and others) return no places and a note: one abbreviation can mean several places, so abbreviations are not searched. Abbreviation search itself stays deferred.
+3. **Continent words are filters.** asia, europe, africa, oceania, north america, south america and americas list that region's listed cities with a count. "Americas" is split into **North America** (which includes Central America and the Caribbean) and **South America**; the region of a zone under America/ follows its country, and Atlantic and Indian zones are placed by hand.
+4. **Country browsing.** A country with several time zones (Australia 12, United States 29, Canada 23, Russia 26, Brazil 16) shows its listed cities first, then every other zone IANA lists for it that the browser knows, each with zone.tab's own description ("Mountain - ID (south)", "Western Australia (Eucla)"). The header counts distinct zones ("Australia · 12 time zones"). The first ten show; "Show all N" shows the rest (up to 60). Data: `assets/js/tools/world-clock/country-zones.js`, **generated** from the IANA zone.tab by `scripts/world-clock/generate-country-zones.py` (tzdata 2025a); it is product data, held to the pinned test fixture by a unit test (same countries, same zones, nothing added or missing). It is loaded by a dynamic import, after the page's first work and after the search warm-up, or on first need. Without it, the listed cities still work and the header says "(listed cities only)".
+6. **Rows show the time.** Every search or browse row shows the place's time and UTC offset now (with the weekday only where the date differs from the visitor's), "On your board" where it already is, and the zone's own description for a zone place. A 56-row list costs about 1.5 ms.
+7. **Browse places.** A button beside Compare with opens a panel with **Region** (six regions) and a dependent **Country** (the countries that have a zone in that region), an inline list of rows (each a button), a count line, Show all and Clear. It replaces the Region select that sat in the toolbar and that only narrowed the search; search is now always global, so it behaves the same whatever the panel holds. Closed, the panel costs no vertical space on a phone: the "Your time" card is still on screen at 390 x 844.
+8. **Add feedback.** The line under the search box (which never changes height) says "Added London, United Kingdom. 5 of 12 cities." (or that a place is already on the board), with a "Show clock" button when the clock is off screen. The new card carries a "Just added" mark and a green border until the next action (typing, adding, removing, changing the reference), with no timer. **Scrolling:** only a pointer or touch choice on a phone (viewport under 720 px) with the card off screen scrolls it into view (smooth unless the visitor prefers reduced motion); a keyboard choice never scrolls and never moves focus; "Show clock" scrolls and moves focus to the card's name because the visitor asked.
+9. **Hand-off link contrast.** `.calculator-page a` was giving it the brand green at 3.3:1; `.calculator-page .wc-plan` now gives the action green (rgb 8 127 71), at least 4.5:1, and the shared link colour elsewhere is unchanged (asserted).
+10. **First-search delay.** The search structures (the zone list, the usable directory entries, the zone identities, the browser's formatters for the directory zones) are built while the page is idle, in separate idle callbacks (`requestIdleCallback` with a 500 ms timeout, `setTimeout(0)` otherwise), after the first paint; the panel sets `data-warm="true"` when done. Search works before the warm-up has run. Entries sharing a zone are checked once (148 zones instead of 195 entries), and the zone list is searched only for three letters or more or a typed zone path.
+11. **Polish.** The visitor's own zone is shown as **Asia/Kolkata** (the browser's Asia/Calcutta stays the identity; five legacy names are mapped for display only, in the page's own table, and the Time Zone Converter import is unchanged). A card with no clock change **says nothing** ("No clock change found…" is gone; the line shows only when a change was verified); the status row no longer pushes the day badge to the bottom, so the badges align across cards.
+
+**Search before and after (this runtime; Node 20.17).**
+| Query | Before | After |
+| --- | --- | --- |
+| usa | Jerusalem, Lusaka | United States · 29 time zones: New York, Boston, … |
+| uk | Kyiv, a Pacific zone | United Kingdom: London, Birmingham, Edinburgh |
+| india | 8 Indian cities, America/Indiana/Knox, Indianapolis | India · 1 time zone: 8 cities |
+| ist / est | Istanbul, Kiritimati / Tallinn, Bucharest | an explanation, no places |
+| asia | Asia/Aden, Asia/Dili, … | Asia · 56 listed cities |
+| south america / oceania / americas | nothing | the region's listed cities |
+| australia | 9 cities, no times | Australia · 12 time zones: 9 cities and the other zones, each with its time |
+| united states | the first 10 of 20 cities, alphabetical | 20 cities then 21 more zones, 10 shown and "Show all 41" |
+| botswana | nothing | Botswana · 1 time zone: Gaborone |
+| england, uae, holland, czech republic, burma | nothing | the right country |
+
+**Country and zone coverage.** 247 countries from zone.tab; every zone this browser knows is reachable under its country (the audit measured 271 of 419 zone identities with no listed city, reachable before only by typing a path fragment). Unchanged: 195 listed cities, not exhaustive, and the page still says so. Contested territories follow IANA's own country listing; nothing is added or removed. Country names are the site's own wording for the listed countries and the browser's `Intl.DisplayNames` for the others, so a name can differ slightly between browsers.
+
+**Performance (this laptop, Chrome, local server without compression; 4x is Chrome's CPU throttle, a rough proxy for a low-end phone, not a device measurement).**
+| Measure | Before | After |
+| --- | --- | --- |
+| First search keystroke, 1x CPU | 98 ms | 19 to 32 ms |
+| First search keystroke, 4x CPU | 611 ms | 132 to 162 ms |
+| Later keystrokes, 1x | 3 to 8 ms | 3 to 11 ms |
+| Add a city, 1x | about 15 ms | about 18 to 30 ms (it now confirms, marks and checks the viewport) |
+| Page ready, 12 cities, 1x | 705 ms | about 700 ms |
+| Minute repaint | 0.3 to 0.7 ms | 0.3 ms |
+Worst case, a keystroke in the first moments before the idle warm-up has run, is still about 110 to 170 ms at 1x. **Size (gzip):** initial script 29.5 KB (index 12.7, engine 8.6, directory 8.3; it was 22.1 KB), CSS 2.7 KB (was 2.2 KB), and the country data **5.7 KB, loaded separately**. The provisional 16 KB target is exceeded further; most of the growth is the new browse and result code and the page text in `markup()`. This is reported, not optimised away.
+
+**Tests.** Unit, new: `world-clock-search` (21) and `world-clock-country-zones` (9); updated: engine 35, directory 19. The browser spec grew from 28 to 39 tests on each of subpath-desktop and subpath-mobile (new: aliases and false matches, abbreviations, continents, row times, Show all, add confirmation with keyboard and phone scrolling, contrast, warm-up and first keystroke under 60 ms, country data failing to load, browse by region and by country). The oracle and the Time Zone Converter contract tests are unchanged and pass. Baselines refreshed after review: SEO (one value, this page's visible text) and visual `world-clock` (desktop, mobile, tablet). The static checks, the build comparison and the growth manifest check are run at the commit. Known failures unrelated to this work are as recorded in section 18.
+
+**Limits and risks.** Real Android, Safari and WebKit, assistive technology (the combobox with its header, note and "Show all" rows; the browse panel's selects and buttons), and real-phone performance remain **unverified**. The country data lists zones and says nothing about which cities exist. `Intl.DisplayNames` is needed for names of countries the site does not list (older browsers fall back to the country code). Abbreviation search, UTC-offset search, "did you mean" suggestions and an expanded directory are deferred.

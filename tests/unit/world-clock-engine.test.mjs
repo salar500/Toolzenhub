@@ -12,7 +12,6 @@ import {
   MAX_CITIES, MAX_RESULTS, DAY_STARTS_AT, DAY_ENDS_AT, STARTER_IDS, STARTER_COUNT,
   placeFromEntry, placeFromZone, resolveToken, dayPhase, dayWord, dayRelation, differenceText, clockParts, msUntilNextMinute,
   buildCard, nextClockChange, clockChangeText, createClockChangeCache, searchPlaces, browsePlaces, defaultBoard, handoffQuery,
-  NO_CHANGE_TEXT,
 } from "../../assets/js/tools/world-clock/clock-engine.js";
 import { getEntry, DIRECTORY } from "../../assets/js/tools/world-clock/city-directory.js";
 import { wallAt } from "../../assets/js/tools/time-zone-converter/time-zone-engine.js";
@@ -158,8 +157,7 @@ describe("the next clock change (optional)", () => {
   test("a zone with no change in the window gives null and a plain statement, never a promise", () => {
     assert.equal(nextClockChange("Asia/Kolkata", NOW), null);
     assert.equal(nextClockChange("UTC", NOW), null);
-    assert.equal(clockChangeText(null), NO_CHANGE_TEXT);
-    assert.match(NO_CHANGE_TEXT, /this browser's data/);
+    assert.equal(clockChangeText(null), "", "a card with no change says nothing");
   });
 
   test("the window is bounded: a change beyond the horizon is not reported", () => {
@@ -232,12 +230,10 @@ describe("search over the directory and the browser's zones", () => {
   });
 
   test("a country name finds its cities, ranked after exact and prefix city matches", () => {
-    const india = keys("india");
+    // "india" names the country: its cities, and no America/Indiana zones
+    const india = keys("india", { limit: 20 });
     assert.ok(india.includes("mumbai-in") && india.includes("kolkata-in") && india.includes("bengaluru-in"));
-    // the directory's Indian cities come first; room left over goes to browser zones whose name contains "india" (America/Indiana/...)
-    const cities = india.filter((k) => !k.includes("/"));
-    assert.ok(cities.length >= 8 && cities.every((k) => k.endsWith("-in")));
-    assert.deepEqual(india, [...cities, ...india.filter((k) => k.includes("/"))]);
+    assert.ok(india.every((k) => k.endsWith("-in")), "only Indian cities");
   });
 
   test("two cities with one name are both returned, the better-known first, and are told apart by country", () => {
@@ -249,8 +245,8 @@ describe("search over the directory and the browser's zones", () => {
 
   test("a region narrows the directory results and hides the zone fallback", () => {
     assert.deepEqual(keys("london", { region: "Europe" }), ["london-gb"]);
-    assert.deepEqual(keys("london", { region: "Americas" }), ["london-ca"]);
-    assert.deepEqual(keys("knox", { region: "Americas" }), []);
+    assert.deepEqual(keys("london", { region: "North America" }), ["london-ca"]);
+    assert.deepEqual(keys("knox", { region: "North America" }), []);
   });
 
   test("the zone fallback adds zones no listed city covers, and leaves out the ones a city already does", () => {

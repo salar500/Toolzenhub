@@ -45,10 +45,12 @@ test.describe("World Clock", () => {
     expect(hrefs).toEqual([siteRoot, `${siteRoot}time-tools.html`]);
     await expect(page.getByLabel("Add a city", { exact: true })).toHaveCount(1);
     await expect(page.getByLabel("Region", { exact: true })).toHaveCount(1);
+    await expect(page.getByLabel("Country", { exact: true })).toHaveCount(1);
+    await expect(page.getByRole("button", { name: /Browse places/ })).toHaveCount(1);
     await expect(page.getByLabel("Compare with", { exact: true })).toHaveCount(1);
     await expect(page.getByLabel("24-hour clock", { exact: true })).toHaveCount(1);
     expect(await titles(page)).toEqual(["Your time", "New York", "London", "Dubai", "Singapore"]);
-    await expect(page.locator(".wc-card__sub").first()).toHaveText(/^Time zone · Asia\/(Kolkata|Calcutta)$/);
+    await expect(page.locator(".wc-card__sub").first()).toHaveText("Time zone · Asia/Kolkata"); // the modern spelling, although Chromium calls the zone Asia/Calcutta
     // 14:20 UTC is 19:50 in India
     await expect(card(page, "Your time").locator("time")).toHaveText("7:50 PM");
     await expect(card(page, "Your time").locator("time")).toHaveAttribute("datetime", "2026-10-19T19:50+05:30");
@@ -145,30 +147,65 @@ test.describe("World Clock", () => {
     await expect(card(page, "Knox").locator(".wc-card__offset")).toHaveText("UTC−05:00");
   });
 
-  test("no match: a clear message that says the list is not every city, and the region hint when a region is chosen", async ({ page, go }) => {
+  test("no match: a clear message that says the list is not every city, with a way into Browse places", async ({ page, go }) => {
     await open(page, go);
-    await search(page).fill("zzzzqq");
+    await search(page).fill("jaipur");
     await expect(options(page)).toHaveCount(0);
-    await expect(page.locator("#wc-list")).toContainText('No match for "zzzzqq"');
+    await expect(page.locator("#wc-list")).toContainText('No match for "jaipur"');
     await expect(page.locator("#wc-list")).toContainText("does not include every city in the world");
-    await expect(page.locator("#wc-list")).not.toContainText("Try All regions");
-    await page.locator("#wc-region").selectOption("Oceania");
-    await expect(page.locator("#wc-list")).toContainText("Try All regions");
+    await page.locator("#wc-list").getByRole("button", { name: "Browse by region or country" }).dispatchEvent("mousedown");
+    await expect(page.locator("#wc-browse")).toBeVisible();
+    await expect(page.locator("#wc-browse-toggle")).toHaveAttribute("aria-expanded", "true");
+    await expect(page.locator("#wc-list")).toBeHidden();
   });
 
-  test("a region narrows the results and, with an empty box, lists that region's cities alphabetically", async ({ page, go }) => {
+  test("Browse places by region: six regions, the region's listed cities alphabetically with their times, and a Clear that resets", async ({ page, go }) => {
     await open(page, go);
+    await expect(page.locator("#wc-browse")).toBeHidden();
+    await page.locator("#wc-browse-toggle").click();
+    await expect(page.locator("#wc-browse")).toBeVisible();
+    await expect(page.locator("#wc-region option")).toHaveText(["All regions", "Africa", "Asia", "Europe", "North America", "Oceania", "South America"]);
+    await expect(page.locator("#wc-browse-header")).toHaveText("Choose a region or country to list places.");
     await page.locator("#wc-region").selectOption("Oceania");
-    await search(page).click();
-    await expect(options(page).first()).toContainText("Adelaide");
-    const names = await options(page).locator(".wc-list__main").allInnerTexts();
-    expect(names.length).toBeGreaterThan(10);
+    await expect(page.locator("#wc-browse-header")).toContainText("Oceania · 22 listed cities");
+    await expect(live(page)).toContainText("Oceania · 22 listed cities");
+    const names = await page.locator(".wc-browse__row .wc-row__main").allInnerTexts();
+    expect(names).toHaveLength(10);
     expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b, "en")));
-    await search(page).fill("london");
-    await expect(options(page)).toHaveCount(0);
-    await page.locator("#wc-region").selectOption("Europe");
-    await expect(options(page)).toHaveCount(1);
-    await expect(options(page).first()).toContainText("United Kingdom");
+    await expect(page.locator(".wc-browse__row").first()).toContainText("Adelaide");
+    await expect(page.locator(".wc-browse__row").first()).toContainText("UTC+10:30");
+    await page.locator("#wc-browse-more").click();
+    await expect(page.locator(".wc-browse__row")).toHaveCount(22);
+    await expect(page.locator("#wc-browse-more")).toBeHidden();
+    await page.locator("#wc-browse-clear").click();
+    await expect(page.locator(".wc-browse__row")).toHaveCount(0);
+    await expect(page.locator("#wc-region")).toHaveValue("");
+    await expect(page.locator("#wc-browse-clear")).toBeHidden();
+  });
+
+  test("Browse places by country: the countries of a region, then a country's cities and every other zone with its own time; choosing a row adds it", async ({ page, go }) => {
+    await open(page, go);
+    await page.locator("#wc-browse-toggle").click();
+    await expect(page.locator("#wc-country")).toBeEnabled();
+    const all = await page.locator("#wc-country option").allInnerTexts();
+    expect(all.length).toBeGreaterThan(200);
+    await page.locator("#wc-region").selectOption("South America");
+    const sa = await page.locator("#wc-country option").allInnerTexts();
+    expect(sa).toEqual(expect.arrayContaining(["Brazil", "Argentina", "Peru"]));
+    expect(sa).not.toContain("Mexico");
+    await page.locator("#wc-region").selectOption("");
+    await page.locator("#wc-country").selectOption("AU");
+    await expect(page.locator("#wc-browse-header")).toHaveText("Australia · 12 time zones");
+    await expect(page.locator(".wc-browse__row")).toHaveCount(10);
+    await page.locator("#wc-browse-more").click();
+    await expect(page.locator(".wc-browse__row")).toHaveCount(13);
+    await expect(page.locator(".wc-browse__row", { hasText: "Eucla" })).toContainText("Western Australia (Eucla)");
+    await expect(page.locator(".wc-browse__row", { hasText: "Perth" })).toContainText("UTC+08:00");
+    await page.locator(".wc-browse__row", { hasText: "Perth" }).click();
+    await expect(card(page, "Perth")).toBeVisible();
+    await expect(page.locator("#wc-search-hint")).toContainText("Added Perth, Australia. 5 of 12 cities.");
+    await expect(page.locator(".wc-browse__row", { hasText: "Perth" })).toBeDisabled();
+    await expect(page.locator(".wc-browse__row", { hasText: "Perth" })).toContainText("On your board");
   });
 
   test("the board holds 12 cities besides Your time: then the box is off, a message says so, and removing one restores it", async ({ page, go }) => {
@@ -233,12 +270,13 @@ test.describe("World Clock", () => {
     await expect(card(page, "New York").locator(".wc-card__change")).toContainText("(at 2:00 AM)");
   });
 
-  test("the optional clock-change line appears after the first paint, says what the browser's data says, and says so when none was found", async ({ page, go }) => {
+  test("the optional clock-change line appears after the first paint for a zone that has a change, and a card with none says nothing", async ({ page, go }) => {
     await open(page, go);
     await expect(card(page, "New York").locator(".wc-card__change")).toHaveText("Clocks change Sun 1 Nov: UTC−04:00 → UTC−05:00 (at 2:00 AM)");
     await expect(card(page, "London").locator(".wc-card__change")).toHaveText("Clocks change Sun 25 Oct: UTC+01:00 → UTC+00:00 (at 2:00 AM)");
-    await expect(card(page, "Dubai").locator(".wc-card__change")).toHaveText("No clock change found in the next 13 months (this browser's data)");
-    await expect(card(page, "Your time").locator(".wc-card__change")).toContainText("No clock change found");
+    await expect(card(page, "Dubai").locator(".wc-card__change")).toBeHidden();
+    await expect(card(page, "Your time").locator(".wc-card__change")).toBeHidden();
+    await expect(page.locator("#wc-board")).not.toContainText("No clock change found");
   });
 
   test("the address: valid cities and a reference load exactly; it is kept tidy without adding history; every add and remove updates it", async ({ page, go }) => {
@@ -426,7 +464,7 @@ test.describe("World Clock", () => {
     await expect(box).toHaveValue("sou");
     await page.keyboard.press("ArrowDown");
     await expect(page.locator("#wc-list")).toBeVisible();
-    const name = await options(page).first().locator(".wc-list__main").innerText();
+    const name = await options(page).first().locator(".wc-row__main").innerText();
     await page.keyboard.press("Enter");
     await expect(card(page, name)).toBeVisible();
     await expect(box).toBeFocused();
@@ -500,5 +538,181 @@ test.describe("World Clock", () => {
     await expect(options(page).first()).toContainText("Tokyo");
     await search(page).fill("kolkata");
     await expect(options(page).first()).toContainText("Kolkata");
+  });
+
+  test("country names and aliases give the country's places, never a word found inside another: USA, UK, UAE, England, India", async ({ page, go }) => {
+    await open(page, go);
+    await search(page).fill("usa");
+    await expect(page.locator(".wc-list__header")).toHaveText("United States · 29 time zones");
+    await expect(options(page).first()).toContainText("New York");
+    await expect(page.locator("#wc-list")).not.toContainText("Jerusalem");
+    await expect(page.locator("#wc-list")).not.toContainText("Lusaka");
+    await search(page).fill("UK");
+    await expect(page.locator(".wc-list__header")).toHaveText("United Kingdom · 1 time zone");
+    await expect(options(page).first()).toContainText("London");
+    await expect(page.locator("#wc-list")).not.toContainText("Kyiv");
+    for (const [typed, header] of [["UAE", "United Arab Emirates · 1 time zone"], ["England", "United Kingdom · 1 time zone"], ["Holland", "Netherlands · 1 time zone"], ["Czech Republic", "Czechia · 1 time zone"], ["india", "India · 1 time zone"]]) {
+      await search(page).fill(typed);
+      await expect(page.locator(".wc-list__header"), typed).toHaveText(header);
+    }
+    await expect(page.locator("#wc-list")).not.toContainText("Indiana");
+    await expect(page.locator("#wc-list")).not.toContainText("Knox");
+    // "la" is a short name for Los Angeles, not the country code for Laos
+    await search(page).fill("la");
+    await expect(options(page).first()).toContainText("Los Angeles");
+  });
+
+  test("a time-zone abbreviation is explained, not guessed", async ({ page, go }) => {
+    await open(page, go);
+    for (const word of ["IST", "EST", "pst"]) {
+      await search(page).fill(word);
+      await expect(options(page), word).toHaveCount(0);
+      await expect(page.locator("#wc-list")).toContainText("time-zone abbreviation");
+      await expect(page.locator("#wc-list")).toContainText("Search for a city or country instead");
+    }
+    await search(page).fill("istanbul");
+    await expect(options(page).first()).toContainText("Istanbul");
+  });
+
+  test("a continent word lists that region's cities, without zone fragments", async ({ page, go }) => {
+    await open(page, go);
+    await search(page).fill("asia");
+    await expect(page.locator(".wc-list__header")).toHaveText("Asia · 56 listed cities");
+    await expect(page.locator("#wc-list")).not.toContainText("Asia/");
+    await expect(page.locator("#wc-list")).not.toContainText("Time zone ·");
+    await expect(options(page)).toHaveCount(11); // ten cities and "Show all 56"
+    await search(page).fill("south america");
+    await expect(page.locator(".wc-list__header")).toHaveText("South America · 13 listed cities");
+    await search(page).fill("americas");
+    await expect(page.locator(".wc-list__header")).toContainText("North America and South America · 53 listed cities");
+  });
+
+  test("results show each place's time and UTC offset now, and the weekday only where the date differs from yours", async ({ page, go }) => {
+    await open(page, go);
+    await search(page).fill("australia");
+    await expect(page.locator(".wc-list__header")).toHaveText("Australia · 12 time zones");
+    const row = (name) => options(page).filter({ hasText: name }).first();
+    await expect(row("Sydney")).toContainText("Tue 1:20 AM");
+    await expect(row("Sydney")).toContainText("UTC+11:00");
+    await expect(row("Adelaide")).toContainText("Tue 12:50 AM");
+    await expect(row("Adelaide")).toContainText("UTC+10:30");
+    await expect(row("Darwin")).toContainText("Mon 11:50 PM".replace("Mon ", "")); // the same date as Kolkata: no weekday
+    await expect(row("Darwin")).not.toContainText("Mon");
+    await expect(row("Darwin")).toContainText("UTC+09:30");
+    await search(page).fill("kathmandu");
+    await expect(options(page).first()).toContainText("UTC+05:45");
+    await page.getByLabel("24-hour clock").check();
+    await search(page).fill("sydney");
+    await expect(options(page).first()).toContainText("01:20");
+  });
+
+  test("Show all: the first ten, then every match; the keyboard reaches it and keeps the box focused", async ({ page, go }) => {
+    await open(page, go);
+    await search(page).fill("united states");
+    await expect(options(page)).toHaveCount(11);
+    await expect(options(page).last()).toHaveText("Show all 41");
+    await page.keyboard.press("End");
+    await expect(options(page).last()).toHaveAttribute("aria-selected", "true");
+    await page.keyboard.press("Enter");
+    await expect(search(page)).toBeFocused();
+    await expect(page.locator("#wc-list")).toBeVisible();
+    await expect(options(page)).toHaveCount(41);
+    await expect(options(page).filter({ hasText: "Boise" })).toContainText("Mountain - ID (south)");
+    await expect(options(page).filter({ hasText: "Boise" })).toContainText("UTC−06:00");
+    await expect(options(page).filter({ hasText: "Show all" })).toHaveCount(0);
+    expect(await cards(page).count()).toBe(5);
+    await options(page).filter({ hasText: "Boise" }).click();
+    await expect(card(page, "Boise")).toBeVisible();
+    await expect(card(page, "Boise").locator(".wc-card__sub")).toHaveText("America/Boise");
+  });
+
+  test("adding is confirmed where you are looking, marks the new clock, and never moves a keyboard user", async ({ page, go }) => {
+    await open(page, go);
+    await search(page).fill("sydney");
+    await page.keyboard.press("ArrowDown");
+    const before = await page.evaluate(() => scrollY);
+    await page.keyboard.press("Enter");
+    await expect(page.locator("#wc-search-hint")).toContainText("Added Sydney, Australia. 5 of 12 cities.");
+    await expect(live(page)).toHaveText("Added Sydney, Australia. 5 of 12 cities.");
+    await expect(card(page, "Sydney")).toHaveClass(/wc-card--new/);
+    await expect(card(page, "Sydney").locator(".wc-card__fresh")).toHaveText("Just added");
+    expect(await page.evaluate(() => scrollY)).toBe(before);
+    await expect(search(page)).toBeFocused();
+    // the next thing you do clears the mark and the confirmation
+    await search(page).fill("t");
+    await expect(page.locator("#wc-search-hint")).toContainText("Search well-known cities");
+    await expect(card(page, "Sydney")).not.toHaveClass(/wc-card--new/);
+    await expect(card(page, "Sydney").locator(".wc-card__fresh")).toBeHidden();
+    // an existing clock is said so, in the same place
+    await search(page).fill("london");
+    await page.keyboard.press("Enter"); // the first match, London in the United Kingdom, is highlighted already
+    await expect(page.locator("#wc-search-hint")).toHaveText("London, United Kingdom is already on your board.");
+    await expect(cards(page)).toHaveCount(6);
+  });
+
+  test("on a phone, a touch or mouse choice scrolls the off-screen new clock into view; a 'Show clock' button does it on request and moves focus to the clock", async ({ page, go }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await open(page, go);
+    await search(page).fill("tokyo");
+    await options(page).first().click();
+    await expect(card(page, "Tokyo")).toBeVisible();
+    await expect.poll(async () => card(page, "Tokyo").evaluate((li) => { const r = li.getBoundingClientRect(); return r.top >= 0 && r.top < innerHeight; })).toBe(true);
+    // a keyboard choice with the clock off screen: no scroll, but the offer is there
+    await page.evaluate(() => scrollTo(0, 0));
+    await search(page).fill("seoul");
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press("Enter");
+    expect(await page.evaluate(() => scrollY)).toBe(0);
+    const show = page.locator("#wc-search-hint").getByRole("button", { name: "Show clock" });
+    await expect(show).toBeVisible();
+    await show.click();
+    await expect(card(page, "Seoul").locator(".wc-card__title")).toBeFocused();
+    await expect.poll(async () => card(page, "Seoul").evaluate((li) => { const r = li.getBoundingClientRect(); return r.top >= 0 && r.top < innerHeight; })).toBe(true);
+  });
+
+  test("the hand-off link meets the text contrast requirement and keeps the action colour", async ({ page, go }) => {
+    await open(page, go);
+    const result = await page.locator("#wc-plan").evaluate((a) => {
+      const lum = (c) => { const [r, g, b] = c.match(/\d+/g).slice(0, 3).map(Number).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+      let bg = "rgba(0, 0, 0, 0)"; for (let el = a; el && bg === "rgba(0, 0, 0, 0)"; el = el.parentElement) bg = getComputedStyle(el).backgroundColor;
+      const fg = getComputedStyle(a).color;
+      const [hi, lo] = [lum(fg), lum(bg === "rgba(0, 0, 0, 0)" ? "rgb(255, 255, 255)" : bg)].sort((x, y) => y - x);
+      return { fg, ratio: (hi + 0.05) / (lo + 0.05) };
+    });
+    expect(result.fg).toBe("rgb(8, 127, 71)");
+    expect(result.ratio).toBeGreaterThanOrEqual(4.5);
+    // the rest of the page's links keep the shared theme colour
+    expect(await page.locator(".calculator-info a").first().evaluate((a) => getComputedStyle(a).color)).toBe("rgb(11, 159, 88)");
+  });
+
+  test("the search is warmed while the page is idle, so the first keystroke is quick; the country data follows only after that", async ({ page, go }) => {
+    const requested = [];
+    page.on("request", (r) => { if (/country-zones\.js/.test(r.url())) requested.push(r.url()); });
+    await open(page, go);
+    expect(requested).toEqual([]); // not with the first paint
+    await page.clock.runFor(3000);
+    await expect(panel(page)).toHaveAttribute("data-warm", "true");
+    await expect.poll(() => requested.length).toBe(1);
+    const ms = await page.evaluate(() => { const input = document.querySelector("#wc-search"); input.focus(); input.value = "l"; const a = performance.now(); input.dispatchEvent(new Event("input", { bubbles: true })); return performance.now() - a; });
+    expect(ms, `the first keystroke took ${ms.toFixed(0)} ms`).toBeLessThan(60);
+  });
+
+  test("if the country data cannot load, the board, the city search and the listed countries still work, and Browse says so", async ({ page, go }) => {
+    await page.route("**/country-zones.js", (route) => route.abort());
+    await open(page, go);
+    await page.clock.runFor(3000);
+    await search(page).fill("sydney");
+    await expect(options(page).first()).toContainText("Sydney");
+    await search(page).fill("australia");
+    await expect(page.locator(".wc-list__header")).toHaveText("Australia · 8 time zones (listed cities only)");
+    await expect(options(page).filter({ hasText: "Eucla" })).toHaveCount(0);
+    await search(page).fill("botswana");
+    await expect(page.locator("#wc-list")).toContainText('No match for "botswana"');
+    await page.keyboard.press("Escape"); // the open list covers the toggle on a phone
+    await page.locator("#wc-browse-toggle").click();
+    await expect(page.locator("#wc-country")).toBeDisabled();
+    await expect(page.locator("#wc-country option").first()).toHaveText("Country list unavailable");
+    await page.locator("#wc-region").selectOption("Africa"); // regions still work without the country data
+    await expect(page.locator("#wc-browse-header")).toContainText("Africa · 24 listed cities");
   });
 });

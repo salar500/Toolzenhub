@@ -67,10 +67,10 @@ describe("shape and bounds", () => {
       assert.ok(COUNTRY_NAMES[e.country], `${e.id}: no country name`);
       assert.ok(snapshot.countries.includes(e.country), `${e.id}: ${e.country} is not an ISO 3166-1 code`);
       assert.ok(REGIONS.includes(e.region), e.id);
-      assert.equal(e.region, regionOf(e.zone), e.id);
+      assert.equal(e.region, regionOf(e.zone, e.country), e.id);
     }
     for (const code of Object.keys(COUNTRY_NAMES)) assert.ok(DIRECTORY.some((e) => e.country === code), `${code} is named but has no city`);
-    assert.deepEqual(REGIONS, ["Africa", "Americas", "Asia", "Europe", "Oceania"]);
+    assert.deepEqual(REGIONS, ["Africa", "Asia", "Europe", "North America", "Oceania", "South America"]);
   });
 
   test("0 to 3 aliases, none equal to another entry's city, none empty, none repeated inside an entry", () => {

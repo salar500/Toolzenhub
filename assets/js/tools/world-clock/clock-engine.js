@@ -44,9 +44,15 @@ import {
 
 import {
     DIRECTORY,
+    COUNTRY_NAMES,
+    COUNTRY_ALIASES,
     getEntry,
     countryName,
     placeName,
+    normalizeText,
+    regionOf,
+    regionsForWord,
+    isAbbreviation,
     searchDirectory,
     browseRegion
 } from "./city-directory.js";
@@ -93,14 +99,27 @@ const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "
 const ID_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*-[a-z]{2}$/;
 const MAX_ID_CHARS = 40;
 
-export const NO_CHANGE_TEXT = "No clock change found in the next 13 months (this browser's data)";
-
 
 /* ---------- places: what a card is about ---------- */
 
 const zoneWords = (zone) => String(zone).replace(/_/g, " ");
 
-/* { key, kind, title, subtitle, label, zone } */
+/*
+ * Browsers still list a few zones under an old spelling (Chromium says Asia/Calcutta for India). The page SHOWS the modern name;
+ * the zone's identity (what is stored in the address and handed to the Time Zone Converter) is untouched.
+ */
+const LEGACY_ZONE_NAMES = Object.freeze({
+    "Asia/Calcutta": "Asia/Kolkata",
+    "Asia/Katmandu": "Asia/Kathmandu",
+    "Asia/Saigon": "Asia/Ho_Chi_Minh",
+    "Asia/Rangoon": "Asia/Yangon",
+    "Europe/Kiev": "Europe/Kyiv"
+});
+
+export const displayZone = (zone) =>
+    LEGACY_ZONE_NAMES[zone] ?? zone;
+
+/* { key, kind, title, subtitle, label, zone } (a zone place also has the IANA description and country when the search knows them) */
 export function placeFromEntry(entry) {
 
     return {
@@ -114,17 +133,21 @@ export function placeFromEntry(entry) {
 
 }
 
-export function placeFromZone(zone) {
+export function placeFromZone(zone, { note = "", country = "" } = {}) {
 
-    const last = String(zone).split("/").pop();
+    const shown = displayZone(zone);
+
+    const last = String(shown).split("/").pop();
 
     return {
         key: zone,
         kind: "zone",
         title: zoneWords(last),
-        subtitle: zone,
-        label: zoneWords(zone),
-        zone
+        subtitle: shown,
+        label: zoneWords(shown),
+        zone,
+        note,
+        country
     };
 
 }
@@ -263,6 +286,27 @@ export function buildCard({ nowMs, place, ref, refLabel, isReference = false, ho
 }
 
 
+/* what a search or browse row shows beside a place: its time, weekday and offset now (null when the browser cannot read the zone) */
+export function describeRow(place, nowMs, hour12 = false) {
+
+    try {
+
+        const w = wallAt(nowMs, place.zone);
+
+        return {
+            time: formatClock(w.h, w.mi, hour12),
+            weekday: WEEKDAYS[w.weekdayIndex],
+            offset: offsetLabel(w.offsetSeconds),
+            dayNumber: w.dayNumber
+        };
+
+    } catch (problem) {
+        return null;
+    }
+
+}
+
+
 /* ---------- the next clock change (optional) ---------- */
 
 /*
@@ -314,7 +358,7 @@ export function nextClockChange(zone, fromMs, { stepHours = CHANGE_STEP_HOURS, h
 export function clockChangeText(change, hour12 = false) {
 
     if (!change) {
-        return NO_CHANGE_TEXT;
+        return "";
     }
 
     const local = new Date(change.atMs + change.fromOffset * 1000);
@@ -396,23 +440,44 @@ export function createClockChangeCache(compute = nextClockChange) {
 }
 
 
-/* ---------- search: the directory first, then the browser's zones ---------- */
+/* ---------- search ---------- */
 
 const usableCache = new WeakMap();
 
-/* the directory entries whose zone THIS browser accepts, and the zones they cover */
+/*
+ * The directory entries whose zone THIS browser accepts, and the zones they cover. Entries share zones (eight
+ * Indian cities keep Asia/Kolkata), so each zone is checked once, not once per entry.
+ */
 function usable(directory) {
 
     let cached = usableCache.get(directory);
 
     if (!cached) {
 
-        const entries = directory.filter((entry) => isValidZone(entry.zone));
+        const valid = new Map();
+        const identity = new Map();
 
-        cached = {
-            entries,
-            represented: new Set(entries.map((entry) => canonicalZone(entry.zone)))
-        };
+        const entries = directory.filter((entry) => {
+
+            if (!valid.has(entry.zone)) {
+                valid.set(entry.zone, isValidZone(entry.zone));
+            }
+
+            return valid.get(entry.zone);
+
+        });
+
+        const represented = new Set(entries.map((entry) => {
+
+            if (!identity.has(entry.zone)) {
+                identity.set(entry.zone, canonicalZone(entry.zone));
+            }
+
+            return identity.get(entry.zone);
+
+        }));
+
+        cached = { entries, represented };
 
         usableCache.set(directory, cached);
 
@@ -422,25 +487,220 @@ function usable(directory) {
 
 }
 
+/* the zones this browser lists, as a Set; a zone it does not list but still accepts is checked directly */
+let zoneSetCache = null;
+
+function zoneKnown(zone) {
+
+    if (zoneSetCache === null) {
+        zoneSetCache = new Set(listZones());
+    }
+
+    return zoneSetCache.has(zone) || isValidZone(zone);
+
+}
+
+/* the two pieces of work the first search would otherwise do itself, so the page can do them while it is idle */
+export function warmZoneList() {
+    zoneKnown("UTC");
+    return listZones().length;
+}
+
+export function warmDirectory(directory = DIRECTORY) {
+
+    const { entries } = usable(directory);
+
+    /* reading each zone once also builds the browser's formatter for it, which a row or a card would otherwise build on first sight */
+    const now = Date.now();
+
+    for (const zone of new Set(entries.map((entry) => entry.zone))) {
+
+        try {
+            wallAt(now, zone);
+        } catch (problem) {
+            /* a zone the browser cannot read is simply not warmed */
+        }
+
+    }
+
+    return entries.length;
+
+}
+
+/* ---------- countries ---------- */
+
+let regionNames = null;
+
+/* the English name of a country: this site's own wording for the countries it lists, else the browser's, else the code */
+export function countryLabel(code) {
+
+    if (COUNTRY_NAMES[code]) {
+        return COUNTRY_NAMES[code];
+    }
+
+    try {
+
+        regionNames ??= new Intl.DisplayNames(["en"], { type: "region" });
+
+        const name = regionNames.of(code);
+
+        /* ICU answers "Unknown Region" for a code it does not know */
+        return name && name !== "Unknown Region" ? name : code;
+
+    } catch (problem) {
+        return code;
+    }
+
+}
+
+const NO_DATA = {};
+const indexCache = new WeakMap();
+
+/* every country the search can name: the listed ones, and (once the country data has loaded) all of IANA's */
+function countryIndex(countryData) {
+
+    const key = countryData ?? NO_DATA;
+
+    let index = indexCache.get(key);
+
+    if (!index) {
+
+        const codes = new Set(Object.keys(COUNTRY_NAMES));
+
+        if (countryData) {
+
+            for (const code of Object.keys(countryData.COUNTRY_ZONES)) {
+                codes.add(code);
+            }
+
+        }
+
+        index = { codes, byName: new Map([...codes].map((code) => [normalizeText(countryLabel(code)), code])) };
+
+        indexCache.set(key, index);
+
+    }
+
+    return index;
+
+}
+
+/* a whole query that names ONE country (its name, or an alias such as "usa" or "uk"), else null */
+export function resolveCountry(normalized, countryData = null) {
+
+    const index = countryIndex(countryData);
+
+    const alias = COUNTRY_ALIASES[normalized];
+
+    if (alias && index.codes.has(alias)) {
+        return alias;
+    }
+
+    const named = index.byName.get(normalized);
+
+    if (named) {
+        return named;
+    }
+
+    /* a bare two-letter code is NOT a country query: "la" is Los Angeles, "in" and "it" are ordinary words */
+    return null;
+
+}
+
 /*
- * Places matching the query: directory cities first (a region narrows only
- * these), then time zones the browser lists that no listed city already covers.
+ * A country's places: the listed cities first (the directory's own order), then every other zone IANA lists for it
+ * that this browser knows, each with zone.tab's own description. `zoneCount` counts distinct zones.
  */
-export function searchPlaces(query, { region = "", limit = MAX_RESULTS, directory = DIRECTORY, zones = listZones() } = {}) {
+export function countryPlaces(code, { directory = DIRECTORY, countryData = null } = {}) {
+
+    const { entries } = usable(directory);
+
+    const cities = entries.filter((entry) => entry.country === code).map(placeFromEntry);
+
+    const seen = new Set(cities.map((place) => canonicalZone(place.zone)));
+
+    const zones = [];
+
+    for (const item of countryData?.COUNTRY_ZONES?.[code] ?? []) {
+
+        const [zone, note = ""] = item.split("|");
+
+        if (!zoneKnown(zone)) {
+            continue;
+        }
+
+        const identity = canonicalZone(zone);
+
+        if (seen.has(identity)) {
+            continue;
+        }
+
+        seen.add(identity);
+
+        zones.push(placeFromZone(zone, { note, country: code }));
+
+    }
+
+    return { cities, zones, zoneCount: seen.size };
+
+}
+
+/* the countries (as { code, name }, by name) that have a zone in a region, or all of them when no region is given; needs the country data */
+export function countriesIn(region, countryData) {
+
+    if (!countryData) {
+        return [];
+    }
+
+    const wanted = region ? (Array.isArray(region) ? region : [region]) : null;
+
+    const found = [];
+
+    for (const [code, items] of Object.entries(countryData.COUNTRY_ZONES)) {
+
+        const has = items.some((item) => {
+
+            const zone = item.split("|")[0];
+
+            return zoneKnown(zone) && (wanted === null || wanted.includes(regionOf(zone, code)));
+
+        });
+
+        if (has) {
+            found.push({ code, name: countryLabel(code) });
+        }
+
+    }
+
+    return found.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+
+}
+
+/* ---------- searching ---------- */
+
+export const abbreviationNote = (typed) =>
+    `"${String(typed).slice(0, 12)}" is a time-zone abbreviation, and one abbreviation can mean several places (IST, CST and BST are each shared by more than one country), so abbreviations are not searched. Search for a city or country instead, such as Kolkata, Chicago or London.`;
+
+const plural = (n, word) =>
+    `${n} ${word}${n === 1 ? "" : "s"}`;
+
+/* directory cities first, then time zones the browser lists that no listed city already covers */
+function genericSearch(query, { region, cap, directory, zones }) {
 
     const { entries, represented } = usable(directory);
 
-    const places = searchDirectory(query, { region, limit, entries }).map(placeFromEntry);
+    const places = searchDirectory(query, { region, limit: cap, entries }).map(placeFromEntry);
 
-    if (region || places.length >= limit || String(query).trim() === "") {
+    /* the zone list is searched for three letters or more, or a typed zone path: one or two letters match nearly every zone and help nobody */
+    if (region || places.length >= cap || (normalizeText(query).length < 3 && !/[/_]/.test(String(query)))) {
         return places;
     }
 
     const seen = new Set();
 
-    for (const zone of searchZones(query, zones, limit * 4)) {
+    for (const zone of searchZones(query, zones, cap * 2)) {
 
-        if (places.length >= limit) {
+        if (places.length >= cap) {
             break;
         }
 
@@ -460,7 +720,76 @@ export function searchPlaces(query, { region = "", limit = MAX_RESULTS, director
 
 }
 
-/* a region's cities, alphabetical, capped; `total` is the uncapped count */
+/*
+ * What a typed query means, and what to show for it.
+ *   { mode, places, total, header, note }
+ *   mode "abbreviation"  a time-zone abbreviation: nothing is searched, `note` explains why
+ *   mode "region"        a continent word (asia, north america, americas): that region's listed cities
+ *   mode "country"       a whole country name, alias or code: its cities, then every other zone it has
+ *   mode "cities"        anything else: city, alias, country-prefix and zone-path matches
+ *   mode "empty"         nothing typed
+ * `places` holds up to `cap` places; `total` is how many there are before that cap. `countryData` is the
+ * lazily loaded country module (or null: country queries then see only the listed cities).
+ */
+export function runSearch(query, { region = "", cap = MAX_BROWSE, directory = DIRECTORY, zones = null, countryData = null } = {}) {
+
+    const normalized = normalizeText(query ?? "");
+
+    if (normalized === "") {
+        return { mode: "empty", places: [], total: 0, header: "", note: "" };
+    }
+
+    if (isAbbreviation(normalized)) {
+        return { mode: "abbreviation", places: [], total: 0, header: "", note: abbreviationNote(String(query).trim()) };
+    }
+
+    const regions = region ? null : regionsForWord(normalized);
+
+    if (regions) {
+
+        const found = browsePlaces(regions, { limit: cap, directory });
+
+        return { mode: "region", places: found.places, total: found.total, header: `${regions.join(" and ")} · ${found.total} listed ${found.total === 1 ? "city" : "cities"}`, note: "" };
+
+    }
+
+    const code = region ? null : resolveCountry(normalized, countryData);
+
+    if (code) {
+
+        const found = countryPlaces(code, { directory, countryData });
+
+        const places = [...found.cities, ...found.zones];
+
+        if (places.length) {
+
+            return {
+                mode: "country",
+                country: code,
+                places: places.slice(0, cap),
+                total: places.length,
+                header: `${countryLabel(code)} · ${plural(found.zoneCount, "time zone")}${countryData ? "" : " (listed cities only)"}`,
+                note: ""
+            };
+
+        }
+
+    }
+
+    const places = genericSearch(query, { region, cap, directory, zones: zones ?? listZones() });
+
+    return { mode: "cities", places, total: places.length, header: "", note: "" };
+
+}
+
+/* the places matching a query (the list of runSearch), at most `limit` */
+export function searchPlaces(query, { region = "", limit = MAX_RESULTS, directory = DIRECTORY, zones = null, countryData = null } = {}) {
+
+    return runSearch(query, { region, cap: limit, directory, zones, countryData }).places;
+
+}
+
+/* a region's (or several regions') cities, alphabetical, capped; `total` is the uncapped count */
 export function browsePlaces(region, { limit = MAX_BROWSE, directory = DIRECTORY } = {}) {
 
     const { entries } = usable(directory);

@@ -107,7 +107,7 @@ test.describe("visual baselines @visual (clock and zone pinned)", () => {
     await page.clock.runFor(8000); // past the first minute tick, and long enough for the deferred clock-change lines
     await page.clock.pauseAt(new Date("2026-10-19T14:20:30Z"));
     await expect(page.locator("#wc-board > .wc-card")).toHaveCount(5);
-    await expect(page.locator("#wc-board .wc-card__change:visible")).toHaveCount(5);
+    await expect(page.locator("#wc-board .wc-card__change:visible")).toHaveCount(2); // New York and London have a change in the window; the other cards say nothing
     await expect(page.locator("#wc-board .wc-card").first().locator("time")).toHaveText("7:50 PM");
     await page.evaluate(() => document.fonts.ready);
     await page.evaluate(() => window.scrollTo(0, 0));
