@@ -1,0 +1,679 @@
+/* =========================================================
+   ToolZen Hub
+   World Clock
+
+   Only what the shared tool styles do not already provide: the
+   toolbar, the city picker (a combobox with a list of matches) and
+   the clock cards. Buttons, focus and headings come from the shared
+   layer. Loaded after calculator-responsive.css.
+
+   Every card has the same five rows; only the words differ. Day and
+   night, ahead and behind, Today and Tomorrow are always words, never
+   colour alone. Nothing animates.
+
+   One column on a phone, two from 560px, as many 260px columns as fit
+   from 900px. The page itself never scrolls sideways.
+========================================================= */
+
+.calculator-page [hidden] {
+
+    display: none !important;
+
+}
+
+.wc-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+.wc-workspace {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+
+    min-width: 0;
+
+}
+
+
+/* ---------- toolbar ---------- */
+
+/* a phone: the search box takes the full width, Region and Compare with share the next row, so the first clock is reachable without scrolling far */
+.wc-toolbar {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+
+    padding: 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: #ffffff;
+
+}
+
+.wc-field {
+
+    min-width: 0;
+
+}
+
+.wc-field--search {
+
+    grid-column: 1 / -1;
+
+}
+
+.wc-board-head {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px 16px;
+
+}
+
+.wc-label {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 700;
+
+}
+
+.wc-input {
+
+    display: block;
+
+    width: 100%;
+    min-height: 48px;
+    padding: 8px 12px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 16px;
+
+}
+
+.wc-input:focus-visible,
+.wc-check input:focus-visible,
+.wc-card__remove:focus-visible,
+.wc-plan:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.wc-input:disabled {
+
+    background: var(--color-control-disabled-bg);
+    color: var(--color-control-disabled-text);
+
+}
+
+.wc-hint {
+
+    margin: 6px 0 0;
+
+    color: #475467;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+
+}
+
+.wc-check {
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-height: 44px;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+
+}
+
+.wc-check input {
+
+    flex: 0 0 auto;
+
+    width: 22px;
+    height: 22px;
+
+    accent-color: var(--color-action-green);
+
+}
+
+
+/* ---------- the city picker ---------- */
+
+.wc-combo {
+
+    position: relative;
+
+}
+
+.wc-list {
+
+    position: absolute;
+    z-index: 30;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+
+    max-height: 320px;
+    margin: 0;
+    padding: 4px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: #ffffff;
+    box-shadow: var(--shadow-lg);
+
+    list-style: none;
+    overflow-y: auto;
+
+}
+
+.wc-list__option {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 10px;
+
+    min-height: 44px;
+    margin: 0;
+    padding: 8px 10px;
+
+    border-radius: 8px;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    overflow-wrap: anywhere;
+
+}
+
+.wc-list__option[aria-selected="true"] {
+
+    background: var(--color-action-green-soft);
+
+    outline: 2px solid #067647;
+    outline-offset: -2px;
+
+}
+
+.wc-list__main {
+
+    font-weight: 700;
+
+}
+
+.wc-list__sub {
+
+    color: #475467;
+
+    font-size: 13px;
+
+}
+
+.wc-list__badge {
+
+    margin-left: auto;
+    padding: 1px 8px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: var(--radius-full);
+
+    color: #475467;
+
+    font-size: 12px;
+    font-weight: 600;
+
+}
+
+.wc-list__note {
+
+    margin: 0;
+    padding: 10px;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+
+}
+
+
+/* ---------- messages, empty state, actions ---------- */
+
+.wc-message {
+
+    margin: 0;
+    padding: 10px 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 10px;
+
+    background: var(--color-gray-50);
+
+    color: var(--color-ink);
+
+    font-size: 14px;
+    line-height: 1.5;
+
+}
+
+.wc-board-heading {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-size: 20px;
+    font-weight: 700;
+
+}
+
+.wc-board-heading:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 4px;
+
+}
+
+.wc-empty {
+
+    padding: 16px;
+
+    border: 1px dashed #d0d5dd;
+    border-radius: 14px;
+
+    color: #475467;
+
+}
+
+.wc-empty p {
+
+    margin: 0 0 12px;
+
+}
+
+.wc-quick,
+.wc-actions {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 16px;
+
+}
+
+.wc-plan {
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    min-height: 44px;
+
+    color: var(--color-action-green);
+
+    font-weight: 700;
+    line-height: 1.4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+}
+
+.wc-plan:hover {
+
+    color: var(--color-action-green-hover);
+
+}
+
+.wc-link-box {
+
+    max-width: 560px;
+
+}
+
+
+/* ---------- the clock cards ---------- */
+
+.wc-board {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+}
+
+.wc-card {
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    min-width: 0;
+    min-height: 212px;
+    padding: 16px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    box-shadow: var(--shadow-sm);
+
+}
+
+.wc-card--reference {
+
+    border-color: var(--color-action-green);
+
+    box-shadow: inset 0 3px 0 var(--color-action-green);
+
+}
+
+.wc-card__head {
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+
+}
+
+.wc-card__names {
+
+    min-width: 0;
+
+}
+
+.wc-card__title {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.25;
+
+    overflow-wrap: anywhere;
+
+}
+
+.wc-card__sub {
+
+    margin: 2px 0 0;
+
+    color: #475467;
+
+    font-size: 13px;
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+
+}
+
+.wc-card__remove {
+
+    flex: 0 0 auto;
+
+    min-width: 44px;
+    min-height: 44px;
+    margin: -8px -8px 0 0;
+    padding: 0 10px;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: #475467;
+
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+.wc-card__remove:hover {
+
+    background: var(--color-gray-100);
+
+    color: var(--color-ink);
+
+}
+
+.wc-card__time {
+
+    margin: 4px 0 0;
+
+    color: var(--color-ink);
+
+    font-size: var(--font-3xl);
+    font-weight: 700;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+
+}
+
+.wc-time__ampm {
+
+    margin-left: 2px;
+
+    font-size: 0.5em;
+    font-weight: 600;
+
+    color: #475467;
+
+}
+
+.wc-card__date {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 10px;
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+
+}
+
+.wc-card__relation {
+
+    color: #475467;
+
+    font-weight: 600;
+
+}
+
+.wc-card__offset {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-size: 14px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+
+}
+
+.wc-card__difference {
+
+    margin: 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+
+}
+
+.wc-card__status {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+
+    margin-top: auto;
+    padding-top: 6px;
+
+}
+
+.wc-day {
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 2px 10px 2px 8px;
+
+    border-radius: var(--radius-full);
+
+    background: var(--color-gray-100);
+
+    color: var(--color-ink);
+
+    font-size: 13px;
+    font-weight: 600;
+
+}
+
+.wc-card[data-phase="day"] .wc-day {
+
+    background: #fff4d6;
+
+}
+
+.wc-day__icon {
+
+    display: inline-flex;
+
+}
+
+.wc-card__change {
+
+    margin: 0;
+
+    color: #475467;
+
+    font-size: 12.5px;
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+
+}
+
+.wc-card[data-state="error"] .wc-card__date {
+
+    color: var(--color-danger);
+
+}
+
+
+/* ---------- wider screens ---------- */
+
+@media (min-width: 560px) {
+
+    .wc-board {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    }
+
+    .wc-card__time {
+
+        font-size: var(--font-4xl);
+
+    }
+
+}
+
+@media (min-width: 720px) {
+
+    .wc-toolbar {
+
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1.3fr);
+
+        padding: 16px;
+
+    }
+
+    .wc-field--search {
+
+        grid-column: auto;
+
+    }
+
+}
+
+@media (min-width: 900px) {
+
+    .wc-board {
+
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+
+    }
+
+}

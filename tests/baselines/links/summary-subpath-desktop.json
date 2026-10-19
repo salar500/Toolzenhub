@@ -405,13 +405,13 @@
     "deadFragments": []
   },
   "time-tools.html": {
-    "internal": 30,
+    "internal": 31,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 61,
+    "internal": 62,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -490,6 +490,12 @@
   },
   "tools/unix-timestamp-converter/": {
     "internal": 24,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/world-clock/": {
+    "internal": 25,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

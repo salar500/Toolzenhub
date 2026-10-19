@@ -1031,6 +1031,44 @@ const catalog = [
 
 
     {
+        id: "world-clock",
+        status: "published",
+        loader: () =>
+            import("../tools/world-clock/index.js"),
+        sectionId: "time-tools",
+        icon: "◶",
+        title: "World Clock",
+        description:
+            "See the current time in several cities at once, with each city's date, UTC offset and how far ahead of or behind you it is. It runs in your browser.",
+        autoRelated: false,
+        relatedTools: ["time-zone-converter"],
+        aliases: [
+            "world clock",
+            "world time",
+            "current time in cities",
+            "city clocks",
+            "multiple clocks",
+            "time in different cities"
+        ],
+        capabilities: {
+            share: true,
+            urlState: true,
+            realtime: true,
+            timer: true,
+            multipleInputs: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "World Clock: Live Time in Cities and Time Zones | ToolZen Hub",
+            description:
+                "Free world clock: see the current time, date and UTC offset in several cities at once and how far ahead or behind each is. Search well-known cities or any time zone your browser supports. It runs in your browser."
+        }
+    },
+
+
+    {
         id: "hours-calculator",
         status: "published",
         loader: () =>

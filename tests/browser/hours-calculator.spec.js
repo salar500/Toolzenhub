@@ -357,7 +357,7 @@ test.describe("Hours & Timesheet Calculator in Time Tools", () => {
   test("it is listed with the other Time Tools, not with Calculators, and has no related-tools block", async ({ page, go, siteRoot }) => {
     await go("time-tools.html");
     await expect(page.locator(`a[href$="tools/hours-calculator/"]`)).toHaveCount(1);
-    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(6);
+    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(7);
     await go("calculators.html");
     await expect(page.locator(`#calculators-grid a[href*="hours-calculator"]`)).toHaveCount(0);
     await go("tools/hours-calculator/");

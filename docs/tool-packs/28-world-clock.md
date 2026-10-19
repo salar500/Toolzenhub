@@ -1,6 +1,6 @@
 # Tool Pack 28: World Clock (Time Tools)
 
-Status: **Specification finalized as documentation on 2026-10-19 (base commit `397b674`); decisions OD1 to OD10 recorded in section 16. NOT authorized for implementation:** the user's approval covers this document and a local documentation commit only. A build needs a separate, explicit implementation authorization (an "implementation readiness" phase), including the prerequisites listed at the end of section 16.
+Status: **Implemented locally on 2026-10-19 (base commit `fce61ba`) under the owner's authorization of this specification; see section 18 for the implementation notes.** Not pushed and not deployed; the city list and the icon await the owner's review before any release. The specification itself was finalized on 2026-10-19 (decisions OD1 to OD10 in section 16); until the implementation authorization it read: not authorized for implementation, a separate readiness phase and explicit authorization required.
 Roadmap: R2 item 1 (PROPOSED, a candidate, not an authorization; `docs/tool-pack-factory.md` section 10). R2 stays proposed; World Clock is not an approved roadmap item. The roadmap's wording is not changed by this specification.
 Tier: **MEDIUM**, with one part verified at HIGH rigor (the next-clock-change calculation has an independent oracle, section 7.4). A browser-local reference tool: no money, tax or legal content, no stored data. When unsure the factory says take the higher tier; the single risky calculation is the part that gets the higher treatment.
 Id, slug and route: `world-clock`, `/tools/world-clock/`. Section: **Time Tools** (`time-tools`, flat, no category).
@@ -375,3 +375,247 @@ Follows the established policy: focused correctness, security and integration ch
 
 ## 17. Commit checkpoint (for the future implementation, not this phase)
 Subject proposal: `feat: add World Clock`. Exact-tree verification afterwards: working tree clean apart from the intended files; unit set for time-zone, directory, URL and contract tests; the focused browser specs on subpath desktop and mobile; static checks on both builds; Growth manifest `--check`; no `localStorage` in the tool; budgets recorded. Push and any deployment need separate explicit authorization; production is never touched.
+
+
+## 18. Implementation notes (2026-10-19)
+Facts only. Tier MEDIUM; one bounded scope; one local commit (`feat: add World Clock`). Specification status at this point: **implemented locally; not pushed, not deployed; the city list and the icon are still awaiting the owner's review before any release.**
+
+**What was built.** `assets/js/tools/world-clock/{index.js, clock-engine.js, city-directory.js}`, `assets/css/tools/world-clock.css`; the catalog entry after the Time Zone Converter (`id: "world-clock"`, `autoRelated: false`, `relatedTools: ["time-zone-converter"]`, one way); the style entry; the Growth ledger record; the regenerated URL inventory. The Time Zone Converter is **unchanged**. Imported from it (the contract of section 7.3): `isValidZone, canonicalZone, sameZone, localZone, listZones, searchZones, offsetSecondsAt, wallAt, offsetLabel, formatClock`.
+
+**Catalog metadata as implemented.** Icon `◶` (U+25F6; compared in a browser beside the existing Time Tools icons, where it reads as part of the same circle-and-quadrant family and is distinct from `◷` (used twice), `◴` and `◔`; rendering on Android, iOS and Safari is unverified). Capability flags: `share, urlState, realtime, timer, multipleInputs, explanation, localProcessing` (no `copy`, no `validation`). SEO title "World Clock: Live Time in Cities and Time Zones | ToolZen Hub" and the description of section 1; the static checks pass. The six aliases of section 1; none collides with the Time Zone Converter's.
+
+**Deviations from this specification (each deliberate).**
+1. **Toolbar and board header.** To keep the "Your time" card on screen at 390 x 844 (section 6.1), Region and Compare with share a row on a phone, the region hint paragraph was removed (its sentence moved into the "How to Read" note), and the 24-hour checkbox sits beside the "Your clocks" heading instead of in the toolbar. In a browser at 390 x 844 the first card's time and date are visible without scrolling.
+2. **Search hint** is shorter than the draft: "Search well-known cities, or any time zone your browser supports, such as America/Chicago. Not every city is listed." The sentence about shared zones is in the "What This Covers" note.
+3. **A typed zone path finds cities.** The hint invites "America/Chicago", but the zone fallback leaves out zones a listed city already covers, so that query found nothing. Directory search now also matches a word of the city's IANA zone name **only when the query contains a slash or underscore**; the city that gives the zone its name (Chicago for America/Chicago, Tokyo for Asia/Tokyo) ranks first. A plain name such as "london" does not list every city on Europe/London.
+4. **Search order.** Cities of one name follow the directory's own order, which lists the better-known city first (London, United Kingdom before London, Canada), instead of country-code order (which would put Canada first).
+5. **The snapshot** `tests/fixtures/zone-country.json` also holds the list of valid ISO country codes, besides the zone to country map and the tzdata release.
+6. **Deferred clock-change work** uses `requestIdleCallback` (timeout 500 ms) where it exists and `setTimeout(0)` otherwise, one card per callback.
+7. **Test hook:** the panel sets `data-ready="true"` once it has painted, as the other tools do.
+8. **The visitor's own zone is shown as the browser names it** (Chromium says Asia/Calcutta for India), as the Time Zone Converter does.
+9. **Sort control: not built** (OD3, deferred).
+
+**Time-zone oracle (independent Python zoneinfo, tzdata 2025a).** `tests/fixtures/world-clock-golden.py` and `.json`: 32 zones x 8 fixed instants = 256 strict cases (offset, local date, time, weekday and the next clock change found by an hourly scan then a minute refinement) and 2 divergent cases. On this machine (Node 20.17, ICU 75.1, tz data 2024a) **all 256 strict cases agree**; the divergent zone (America/Asuncion) behaves as documented (the runtime shows the 2027-03-28 change, the pin has none), passes through the version-divergence rule (7.4a) and stays in the suite. **This is agreement on the tested cases, not proof for every zone, date or future rule.** The clock-change line is **included** (OD2's condition is met for the tested cases) behind `SHOW_NEXT_CLOCK_CHANGE`.
+
+**Measured (this laptop; timings in Node; sizes gzip level 9).**
+| Item | Value | Provisional target |
+| --- | --- | --- |
+| World Clock JS: index 9.4 KB + engine 5.8 KB + directory 7.0 KB | **22.1 KB** | 16 KB: **exceeded** (reported, not changed) |
+| World Clock CSS | 2.2 KB | 3.5 KB: met |
+| Time Zone Converter engine (imported) | 9.3 KB | not in the budget |
+| Directory search over 195 entries | about 0.6 ms per call | "immediate" |
+| Directory search plus the zone fallback | about 4.8 ms per call | "immediate" |
+| Next clock change for one zone | about 1.5 ms (audit measurement) | after first paint |
+Not measured: in-browser render and tick cost, anything on a phone, memory, battery, Lighthouse.
+
+**Tests run (focused; no full browser regression).** Unit, new: engine 35, directory 19, URL 13, contract 9, oracle 7. Browser, new (`tests/browser/world-clock.spec.js`): 28 tests, passing on subpath-desktop and subpath-mobile. Pinned expectations updated deliberately: the `catalog`, `sections`, `relationships`, `search` and `tool-capabilities` unit tests; the Time Tools counts (6 to 7) and the directory-group count (18 to 19) in the `hours-calculator`, `image-compressor-resizer`, `json-formatter`, `navigation`, `stopwatch`, `text-diff`, `time-zone-converter` and `unix-timestamp-converter` browser specs; the link crawl now allows the one World Clock to Time Zone Converter hand-off query (`from`, `to`). Baselines refreshed after review: DOM `tools-directory`, the links summary, the SEO baseline (the new page and three visibleTextChars values on listings), visual `time-tools` and `tools` (desktop and mobile). New visual baselines: `world-clock` (desktop, mobile, tablet).
+
+**Failures that are not from this change (left as they are).** The `sip`, `fd` and `cagr` visual baselines (desktop and mobile) already fail on the commit before this change (checked by building that commit in a temporary worktree: the same three fail there, while `tools` and `time-tools` pass). Several tablet baselines do not exist; Playwright writes a new image on the first run, and the four it wrote for other tools during this work were deleted. The image-compressor smoke test and the `home-loan` tablet baseline are the earlier known cases and were not re-run.
+
+**Not verified.** Real Android, Safari and WebKit; assistive technology (the combobox, focus placement and the silent-tick policy are tested in Chromium only); `Intl` details on older engines (a zone a browser rejects hides that directory entry, so Europe/Kyiv needs tz data from 2022b or later, otherwise Kyiv is simply not offered); the icon's rendering on other platforms; Lighthouse.
+
+**Risks to review.**
+1. **JS budget exceeded** (22.1 KB against 16 KB). Most of it is the static page text inside `markup()` (about 11 KB raw of index.js) and the directory data (7 KB gzip). Trimming is possible (a shorter FAQ, a leaner entry encoding) and is the owner's decision.
+2. **Directory content** is for the owner's review before release (table below).
+3. **No persistence:** a repeat visitor rebuilds the board from the address or a bookmark.
+4. The clock-change line states what the browser's data says and cannot see two changes within one 72-hour step.
+
+**City directory review table (195 entries).** By region: Africa 24, Americas 53, Asia 56, Europe 40, Oceania 22. Every zone is accepted by this runtime and is listed in the pinned zone.tab (tzdata 2025a) for the entry's country; no exception is needed. Same-name pairs, told apart by country: London (United Kingdom, Canada), Birmingham (United Kingdom, United States), Hyderabad (India, Pakistan), San Jose (United States) and San José (Costa Rica). Region follows the zone's IANA area (Istanbul is Europe; Nicosia is Asia; Honolulu, Guam and Pago Pago are Oceania; Reykjavik is Europe; Malé is Asia; Port Louis and Antananarivo are Africa). America/Asuncion is listed deliberately (the version-divergence case).
+
+| id | City | Country | Zone | Region | Aliases |
+| --- | --- | --- | --- | --- | --- |
+| `mumbai-in` | Mumbai | India | `Asia/Kolkata` | Asia | Bombay |
+| `delhi-in` | Delhi | India | `Asia/Kolkata` | Asia | New Delhi |
+| `bengaluru-in` | Bengaluru | India | `Asia/Kolkata` | Asia | Bangalore |
+| `chennai-in` | Chennai | India | `Asia/Kolkata` | Asia | Madras |
+| `kolkata-in` | Kolkata | India | `Asia/Kolkata` | Asia | Calcutta |
+| `hyderabad-in` | Hyderabad | India | `Asia/Kolkata` | Asia |  |
+| `pune-in` | Pune | India | `Asia/Kolkata` | Asia | Poona |
+| `ahmedabad-in` | Ahmedabad | India | `Asia/Kolkata` | Asia |  |
+| `karachi-pk` | Karachi | Pakistan | `Asia/Karachi` | Asia |  |
+| `lahore-pk` | Lahore | Pakistan | `Asia/Karachi` | Asia |  |
+| `islamabad-pk` | Islamabad | Pakistan | `Asia/Karachi` | Asia |  |
+| `hyderabad-pk` | Hyderabad | Pakistan | `Asia/Karachi` | Asia |  |
+| `dhaka-bd` | Dhaka | Bangladesh | `Asia/Dhaka` | Asia | Dacca |
+| `colombo-lk` | Colombo | Sri Lanka | `Asia/Colombo` | Asia |  |
+| `kathmandu-np` | Kathmandu | Nepal | `Asia/Kathmandu` | Asia | Katmandu |
+| `thimphu-bt` | Thimphu | Bhutan | `Asia/Thimphu` | Asia |  |
+| `kabul-af` | Kabul | Afghanistan | `Asia/Kabul` | Asia |  |
+| `tashkent-uz` | Tashkent | Uzbekistan | `Asia/Tashkent` | Asia |  |
+| `almaty-kz` | Almaty | Kazakhstan | `Asia/Almaty` | Asia |  |
+| `tehran-ir` | Tehran | Iran | `Asia/Tehran` | Asia | Teheran |
+| `baghdad-iq` | Baghdad | Iraq | `Asia/Baghdad` | Asia |  |
+| `dubai-ae` | Dubai | United Arab Emirates | `Asia/Dubai` | Asia |  |
+| `abu-dhabi-ae` | Abu Dhabi | United Arab Emirates | `Asia/Dubai` | Asia |  |
+| `doha-qa` | Doha | Qatar | `Asia/Qatar` | Asia |  |
+| `riyadh-sa` | Riyadh | Saudi Arabia | `Asia/Riyadh` | Asia |  |
+| `jeddah-sa` | Jeddah | Saudi Arabia | `Asia/Riyadh` | Asia |  |
+| `kuwait-city-kw` | Kuwait City | Kuwait | `Asia/Kuwait` | Asia |  |
+| `muscat-om` | Muscat | Oman | `Asia/Muscat` | Asia |  |
+| `manama-bh` | Manama | Bahrain | `Asia/Bahrain` | Asia |  |
+| `tel-aviv-il` | Tel Aviv | Israel | `Asia/Jerusalem` | Asia | Tel Aviv-Yafo |
+| `jerusalem-il` | Jerusalem | Israel | `Asia/Jerusalem` | Asia |  |
+| `amman-jo` | Amman | Jordan | `Asia/Amman` | Asia |  |
+| `beirut-lb` | Beirut | Lebanon | `Asia/Beirut` | Asia |  |
+| `nicosia-cy` | Nicosia | Cyprus | `Asia/Nicosia` | Asia |  |
+| `baku-az` | Baku | Azerbaijan | `Asia/Baku` | Asia |  |
+| `tbilisi-ge` | Tbilisi | Georgia | `Asia/Tbilisi` | Asia |  |
+| `yerevan-am` | Yerevan | Armenia | `Asia/Yerevan` | Asia |  |
+| `bangkok-th` | Bangkok | Thailand | `Asia/Bangkok` | Asia |  |
+| `hanoi-vn` | Hanoi | Vietnam | `Asia/Ho_Chi_Minh` | Asia |  |
+| `ho-chi-minh-city-vn` | Ho Chi Minh City | Vietnam | `Asia/Ho_Chi_Minh` | Asia | Saigon |
+| `phnom-penh-kh` | Phnom Penh | Cambodia | `Asia/Phnom_Penh` | Asia |  |
+| `yangon-mm` | Yangon | Myanmar | `Asia/Yangon` | Asia | Rangoon |
+| `kuala-lumpur-my` | Kuala Lumpur | Malaysia | `Asia/Kuala_Lumpur` | Asia | KL |
+| `singapore-sg` | Singapore | Singapore | `Asia/Singapore` | Asia |  |
+| `jakarta-id` | Jakarta | Indonesia | `Asia/Jakarta` | Asia |  |
+| `manila-ph` | Manila | Philippines | `Asia/Manila` | Asia |  |
+| `hong-kong-hk` | Hong Kong | Hong Kong | `Asia/Hong_Kong` | Asia | HK |
+| `beijing-cn` | Beijing | China | `Asia/Shanghai` | Asia | Peking |
+| `shanghai-cn` | Shanghai | China | `Asia/Shanghai` | Asia |  |
+| `shenzhen-cn` | Shenzhen | China | `Asia/Shanghai` | Asia |  |
+| `taipei-tw` | Taipei | Taiwan | `Asia/Taipei` | Asia |  |
+| `seoul-kr` | Seoul | South Korea | `Asia/Seoul` | Asia |  |
+| `tokyo-jp` | Tokyo | Japan | `Asia/Tokyo` | Asia |  |
+| `osaka-jp` | Osaka | Japan | `Asia/Tokyo` | Asia |  |
+| `ulaanbaatar-mn` | Ulaanbaatar | Mongolia | `Asia/Ulaanbaatar` | Asia | Ulan Bator |
+| `male-mv` | Malé | Maldives | `Indian/Maldives` | Asia |  |
+| `london-gb` | London | United Kingdom | `Europe/London` | Europe |  |
+| `birmingham-gb` | Birmingham | United Kingdom | `Europe/London` | Europe |  |
+| `edinburgh-gb` | Edinburgh | United Kingdom | `Europe/London` | Europe |  |
+| `dublin-ie` | Dublin | Ireland | `Europe/Dublin` | Europe |  |
+| `lisbon-pt` | Lisbon | Portugal | `Europe/Lisbon` | Europe | Lisboa |
+| `madrid-es` | Madrid | Spain | `Europe/Madrid` | Europe |  |
+| `barcelona-es` | Barcelona | Spain | `Europe/Madrid` | Europe |  |
+| `paris-fr` | Paris | France | `Europe/Paris` | Europe |  |
+| `brussels-be` | Brussels | Belgium | `Europe/Brussels` | Europe |  |
+| `amsterdam-nl` | Amsterdam | Netherlands | `Europe/Amsterdam` | Europe |  |
+| `luxembourg-lu` | Luxembourg | Luxembourg | `Europe/Luxembourg` | Europe |  |
+| `berlin-de` | Berlin | Germany | `Europe/Berlin` | Europe |  |
+| `frankfurt-de` | Frankfurt | Germany | `Europe/Berlin` | Europe |  |
+| `munich-de` | Munich | Germany | `Europe/Berlin` | Europe | München |
+| `zurich-ch` | Zurich | Switzerland | `Europe/Zurich` | Europe |  |
+| `geneva-ch` | Geneva | Switzerland | `Europe/Zurich` | Europe |  |
+| `vienna-at` | Vienna | Austria | `Europe/Vienna` | Europe | Wien |
+| `rome-it` | Rome | Italy | `Europe/Rome` | Europe | Roma |
+| `milan-it` | Milan | Italy | `Europe/Rome` | Europe | Milano |
+| `athens-gr` | Athens | Greece | `Europe/Athens` | Europe |  |
+| `copenhagen-dk` | Copenhagen | Denmark | `Europe/Copenhagen` | Europe |  |
+| `stockholm-se` | Stockholm | Sweden | `Europe/Stockholm` | Europe |  |
+| `oslo-no` | Oslo | Norway | `Europe/Oslo` | Europe |  |
+| `helsinki-fi` | Helsinki | Finland | `Europe/Helsinki` | Europe |  |
+| `reykjavik-is` | Reykjavik | Iceland | `Atlantic/Reykjavik` | Europe |  |
+| `warsaw-pl` | Warsaw | Poland | `Europe/Warsaw` | Europe |  |
+| `prague-cz` | Prague | Czechia | `Europe/Prague` | Europe |  |
+| `budapest-hu` | Budapest | Hungary | `Europe/Budapest` | Europe |  |
+| `bucharest-ro` | Bucharest | Romania | `Europe/Bucharest` | Europe |  |
+| `sofia-bg` | Sofia | Bulgaria | `Europe/Sofia` | Europe |  |
+| `belgrade-rs` | Belgrade | Serbia | `Europe/Belgrade` | Europe |  |
+| `zagreb-hr` | Zagreb | Croatia | `Europe/Zagreb` | Europe |  |
+| `riga-lv` | Riga | Latvia | `Europe/Riga` | Europe |  |
+| `tallinn-ee` | Tallinn | Estonia | `Europe/Tallinn` | Europe |  |
+| `vilnius-lt` | Vilnius | Lithuania | `Europe/Vilnius` | Europe |  |
+| `kyiv-ua` | Kyiv | Ukraine | `Europe/Kyiv` | Europe | Kiev |
+| `minsk-by` | Minsk | Belarus | `Europe/Minsk` | Europe |  |
+| `moscow-ru` | Moscow | Russia | `Europe/Moscow` | Europe |  |
+| `saint-petersburg-ru` | Saint Petersburg | Russia | `Europe/Moscow` | Europe | St Petersburg |
+| `istanbul-tr` | Istanbul | Turkey | `Europe/Istanbul` | Europe |  |
+| `cairo-eg` | Cairo | Egypt | `Africa/Cairo` | Africa |  |
+| `lagos-ng` | Lagos | Nigeria | `Africa/Lagos` | Africa |  |
+| `accra-gh` | Accra | Ghana | `Africa/Accra` | Africa |  |
+| `abidjan-ci` | Abidjan | Ivory Coast | `Africa/Abidjan` | Africa |  |
+| `dakar-sn` | Dakar | Senegal | `Africa/Dakar` | Africa |  |
+| `casablanca-ma` | Casablanca | Morocco | `Africa/Casablanca` | Africa |  |
+| `algiers-dz` | Algiers | Algeria | `Africa/Algiers` | Africa |  |
+| `tunis-tn` | Tunis | Tunisia | `Africa/Tunis` | Africa |  |
+| `tripoli-ly` | Tripoli | Libya | `Africa/Tripoli` | Africa |  |
+| `khartoum-sd` | Khartoum | Sudan | `Africa/Khartoum` | Africa |  |
+| `addis-ababa-et` | Addis Ababa | Ethiopia | `Africa/Addis_Ababa` | Africa |  |
+| `nairobi-ke` | Nairobi | Kenya | `Africa/Nairobi` | Africa |  |
+| `kampala-ug` | Kampala | Uganda | `Africa/Kampala` | Africa |  |
+| `dar-es-salaam-tz` | Dar es Salaam | Tanzania | `Africa/Dar_es_Salaam` | Africa |  |
+| `kinshasa-cd` | Kinshasa | DR Congo | `Africa/Kinshasa` | Africa |  |
+| `luanda-ao` | Luanda | Angola | `Africa/Luanda` | Africa |  |
+| `lusaka-zm` | Lusaka | Zambia | `Africa/Lusaka` | Africa |  |
+| `harare-zw` | Harare | Zimbabwe | `Africa/Harare` | Africa |  |
+| `maputo-mz` | Maputo | Mozambique | `Africa/Maputo` | Africa |  |
+| `windhoek-na` | Windhoek | Namibia | `Africa/Windhoek` | Africa |  |
+| `johannesburg-za` | Johannesburg | South Africa | `Africa/Johannesburg` | Africa | Joburg |
+| `cape-town-za` | Cape Town | South Africa | `Africa/Johannesburg` | Africa |  |
+| `port-louis-mu` | Port Louis | Mauritius | `Indian/Mauritius` | Africa |  |
+| `antananarivo-mg` | Antananarivo | Madagascar | `Indian/Antananarivo` | Africa |  |
+| `new-york-us` | New York | United States | `America/New_York` | Americas | NYC, New York City |
+| `boston-us` | Boston | United States | `America/New_York` | Americas |  |
+| `washington-d-c-us` | Washington, D.C. | United States | `America/New_York` | Americas | Washington DC, DC |
+| `philadelphia-us` | Philadelphia | United States | `America/New_York` | Americas |  |
+| `atlanta-us` | Atlanta | United States | `America/New_York` | Americas |  |
+| `miami-us` | Miami | United States | `America/New_York` | Americas |  |
+| `detroit-us` | Detroit | United States | `America/Detroit` | Americas |  |
+| `chicago-us` | Chicago | United States | `America/Chicago` | Americas |  |
+| `houston-us` | Houston | United States | `America/Chicago` | Americas |  |
+| `dallas-us` | Dallas | United States | `America/Chicago` | Americas |  |
+| `birmingham-us` | Birmingham | United States | `America/Chicago` | Americas |  |
+| `denver-us` | Denver | United States | `America/Denver` | Americas |  |
+| `phoenix-us` | Phoenix | United States | `America/Phoenix` | Americas |  |
+| `los-angeles-us` | Los Angeles | United States | `America/Los_Angeles` | Americas | LA |
+| `san-francisco-us` | San Francisco | United States | `America/Los_Angeles` | Americas | SF |
+| `san-jose-us` | San Jose | United States | `America/Los_Angeles` | Americas |  |
+| `seattle-us` | Seattle | United States | `America/Los_Angeles` | Americas |  |
+| `las-vegas-us` | Las Vegas | United States | `America/Los_Angeles` | Americas |  |
+| `anchorage-us` | Anchorage | United States | `America/Anchorage` | Americas |  |
+| `toronto-ca` | Toronto | Canada | `America/Toronto` | Americas |  |
+| `ottawa-ca` | Ottawa | Canada | `America/Toronto` | Americas |  |
+| `montreal-ca` | Montreal | Canada | `America/Toronto` | Americas |  |
+| `london-ca` | London | Canada | `America/Toronto` | Americas |  |
+| `winnipeg-ca` | Winnipeg | Canada | `America/Winnipeg` | Americas |  |
+| `calgary-ca` | Calgary | Canada | `America/Edmonton` | Americas |  |
+| `edmonton-ca` | Edmonton | Canada | `America/Edmonton` | Americas |  |
+| `vancouver-ca` | Vancouver | Canada | `America/Vancouver` | Americas |  |
+| `halifax-ca` | Halifax | Canada | `America/Halifax` | Americas |  |
+| `st-john-s-ca` | St. John's | Canada | `America/St_Johns` | Americas | Saint John's, St Johns |
+| `mexico-city-mx` | Mexico City | Mexico | `America/Mexico_City` | Americas | Ciudad de México |
+| `guadalajara-mx` | Guadalajara | Mexico | `America/Mexico_City` | Americas |  |
+| `monterrey-mx` | Monterrey | Mexico | `America/Monterrey` | Americas |  |
+| `tijuana-mx` | Tijuana | Mexico | `America/Tijuana` | Americas |  |
+| `guatemala-city-gt` | Guatemala City | Guatemala | `America/Guatemala` | Americas |  |
+| `san-jose-cr` | San José | Costa Rica | `America/Costa_Rica` | Americas |  |
+| `panama-city-pa` | Panama City | Panama | `America/Panama` | Americas |  |
+| `havana-cu` | Havana | Cuba | `America/Havana` | Americas | La Habana |
+| `kingston-jm` | Kingston | Jamaica | `America/Jamaica` | Americas |  |
+| `santo-domingo-do` | Santo Domingo | Dominican Republic | `America/Santo_Domingo` | Americas |  |
+| `san-juan-pr` | San Juan | Puerto Rico | `America/Puerto_Rico` | Americas |  |
+| `bogota-co` | Bogotá | Colombia | `America/Bogota` | Americas |  |
+| `quito-ec` | Quito | Ecuador | `America/Guayaquil` | Americas |  |
+| `lima-pe` | Lima | Peru | `America/Lima` | Americas |  |
+| `caracas-ve` | Caracas | Venezuela | `America/Caracas` | Americas |  |
+| `la-paz-bo` | La Paz | Bolivia | `America/La_Paz` | Americas |  |
+| `santiago-cl` | Santiago | Chile | `America/Santiago` | Americas |  |
+| `buenos-aires-ar` | Buenos Aires | Argentina | `America/Argentina/Buenos_Aires` | Americas |  |
+| `montevideo-uy` | Montevideo | Uruguay | `America/Montevideo` | Americas |  |
+| `asuncion-py` | Asunción | Paraguay | `America/Asuncion` | Americas |  |
+| `sao-paulo-br` | São Paulo | Brazil | `America/Sao_Paulo` | Americas |  |
+| `rio-de-janeiro-br` | Rio de Janeiro | Brazil | `America/Sao_Paulo` | Americas | Rio |
+| `brasilia-br` | Brasília | Brazil | `America/Sao_Paulo` | Americas |  |
+| `manaus-br` | Manaus | Brazil | `America/Manaus` | Americas |  |
+| `sydney-au` | Sydney | Australia | `Australia/Sydney` | Oceania |  |
+| `canberra-au` | Canberra | Australia | `Australia/Sydney` | Oceania |  |
+| `melbourne-au` | Melbourne | Australia | `Australia/Melbourne` | Oceania |  |
+| `brisbane-au` | Brisbane | Australia | `Australia/Brisbane` | Oceania |  |
+| `adelaide-au` | Adelaide | Australia | `Australia/Adelaide` | Oceania |  |
+| `darwin-au` | Darwin | Australia | `Australia/Darwin` | Oceania |  |
+| `perth-au` | Perth | Australia | `Australia/Perth` | Oceania |  |
+| `hobart-au` | Hobart | Australia | `Australia/Hobart` | Oceania |  |
+| `lord-howe-island-au` | Lord Howe Island | Australia | `Australia/Lord_Howe` | Oceania |  |
+| `auckland-nz` | Auckland | New Zealand | `Pacific/Auckland` | Oceania |  |
+| `wellington-nz` | Wellington | New Zealand | `Pacific/Auckland` | Oceania |  |
+| `chatham-islands-nz` | Chatham Islands | New Zealand | `Pacific/Chatham` | Oceania |  |
+| `suva-fj` | Suva | Fiji | `Pacific/Fiji` | Oceania |  |
+| `port-moresby-pg` | Port Moresby | Papua New Guinea | `Pacific/Port_Moresby` | Oceania |  |
+| `noumea-nc` | Noumea | New Caledonia | `Pacific/Noumea` | Oceania |  |
+| `papeete-pf` | Papeete | French Polynesia | `Pacific/Tahiti` | Oceania |  |
+| `honolulu-us` | Honolulu | United States | `Pacific/Honolulu` | Oceania |  |
+| `hagatna-gu` | Hagåtña | Guam | `Pacific/Guam` | Oceania | Guam |
+| `pago-pago-as` | Pago Pago | American Samoa | `Pacific/Pago_Pago` | Oceania |  |
+| `apia-ws` | Apia | Samoa | `Pacific/Apia` | Oceania |  |
+| `nuku-alofa-to` | Nuku'alofa | Tonga | `Pacific/Tongatapu` | Oceania |  |
+| `kiritimati-ki` | Kiritimati | Kiribati | `Pacific/Kiritimati` | Oceania | Christmas Island |

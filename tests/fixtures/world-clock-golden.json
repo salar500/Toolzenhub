@@ -1,0 +1,2882 @@
+{
+ "tzdata": "2025a",
+ "horizonDays": 400,
+ "note": "Independent reference for the World Clock: Python datetime and zoneinfo. See the header of tests/fixtures/world-clock-golden.py.",
+ "knownDivergentZones": {
+  "America/Asuncion": {
+   "reason": "Paraguay moved to permanent UTC-03:00 (tzdata 2025a). Runtimes with tz data 2024a still show the 2027-03-28 change and UTC-04:00 in winter.",
+   "pinnedAnswer": "no change in the window from 2026-10-19; UTC-03:00 all year",
+   "olderRuntimeSeen": "Node 20.17 (ICU 75.1, tz 2024a): change on 2027-03-28T03:00Z, UTC-03:00 to UTC-04:00"
+  }
+ },
+ "strict": [
+  {
+   "zone": "UTC",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "12:00",
+   "weekday": 4,
+   "offsetSeconds": 0,
+   "next": null
+  },
+  {
+   "zone": "UTC",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "06:30",
+   "weekday": 0,
+   "offsetSeconds": 0,
+   "next": null
+  },
+  {
+   "zone": "UTC",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "00:30",
+   "weekday": 0,
+   "offsetSeconds": 0,
+   "next": null
+  },
+  {
+   "zone": "UTC",
+   "ms": 1782086340000,
+   "date": "2026-06-21",
+   "time": "23:59",
+   "weekday": 0,
+   "offsetSeconds": 0,
+   "next": null
+  },
+  {
+   "zone": "UTC",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "14:20",
+   "weekday": 1,
+   "offsetSeconds": 0,
+   "next": null
+  },
+  {
+   "zone": "UTC",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "05:59",
+   "weekday": 0,
+   "offsetSeconds": 0,
+   "next": null
+  },
+  {
+   "zone": "UTC",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "12:00",
+   "weekday": 0,
+   "offsetSeconds": 0,
+   "next": null
+  },
+  {
+   "zone": "UTC",
+   "ms": 1830295800000,
+   "date": "2027-12-31",
+   "time": "23:30",
+   "weekday": 5,
+   "offsetSeconds": 0,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kolkata",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "17:30",
+   "weekday": 4,
+   "offsetSeconds": 19800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kolkata",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "12:00",
+   "weekday": 0,
+   "offsetSeconds": 19800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kolkata",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "06:00",
+   "weekday": 0,
+   "offsetSeconds": 19800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kolkata",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "05:29",
+   "weekday": 1,
+   "offsetSeconds": 19800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kolkata",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "19:50",
+   "weekday": 1,
+   "offsetSeconds": 19800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kolkata",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "11:29",
+   "weekday": 0,
+   "offsetSeconds": 19800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kolkata",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "17:30",
+   "weekday": 0,
+   "offsetSeconds": 19800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kolkata",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "05:00",
+   "weekday": 6,
+   "offsetSeconds": 19800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kathmandu",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "17:45",
+   "weekday": 4,
+   "offsetSeconds": 20700,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kathmandu",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "12:15",
+   "weekday": 0,
+   "offsetSeconds": 20700,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kathmandu",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "06:15",
+   "weekday": 0,
+   "offsetSeconds": 20700,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kathmandu",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "05:44",
+   "weekday": 1,
+   "offsetSeconds": 20700,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kathmandu",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "20:05",
+   "weekday": 1,
+   "offsetSeconds": 20700,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kathmandu",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "11:44",
+   "weekday": 0,
+   "offsetSeconds": 20700,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kathmandu",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "17:45",
+   "weekday": 0,
+   "offsetSeconds": 20700,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kathmandu",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "05:15",
+   "weekday": 6,
+   "offsetSeconds": 20700,
+   "next": null
+  },
+  {
+   "zone": "Australia/Adelaide",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "22:30",
+   "weekday": 4,
+   "offsetSeconds": 37800,
+   "next": {
+    "atMs": 1775320200000,
+    "fromOffset": 37800,
+    "toOffset": 34200
+   }
+  },
+  {
+   "zone": "Australia/Adelaide",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "17:00",
+   "weekday": 0,
+   "offsetSeconds": 37800,
+   "next": {
+    "atMs": 1775320200000,
+    "fromOffset": 37800,
+    "toOffset": 34200
+   }
+  },
+  {
+   "zone": "Australia/Adelaide",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "11:00",
+   "weekday": 0,
+   "offsetSeconds": 37800,
+   "next": {
+    "atMs": 1775320200000,
+    "fromOffset": 37800,
+    "toOffset": 34200
+   }
+  },
+  {
+   "zone": "Australia/Adelaide",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "09:29",
+   "weekday": 1,
+   "offsetSeconds": 34200,
+   "next": {
+    "atMs": 1791045000000,
+    "fromOffset": 34200,
+    "toOffset": 37800
+   }
+  },
+  {
+   "zone": "Australia/Adelaide",
+   "ms": 1792419600000,
+   "date": "2026-10-20",
+   "time": "00:50",
+   "weekday": 2,
+   "offsetSeconds": 37800,
+   "next": {
+    "atMs": 1806769800000,
+    "fromOffset": 37800,
+    "toOffset": 34200
+   }
+  },
+  {
+   "zone": "Australia/Adelaide",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "16:29",
+   "weekday": 0,
+   "offsetSeconds": 37800,
+   "next": {
+    "atMs": 1806769800000,
+    "fromOffset": 37800,
+    "toOffset": 34200
+   }
+  },
+  {
+   "zone": "Australia/Adelaide",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "22:30",
+   "weekday": 0,
+   "offsetSeconds": 37800,
+   "next": {
+    "atMs": 1806769800000,
+    "fromOffset": 37800,
+    "toOffset": 34200
+   }
+  },
+  {
+   "zone": "Australia/Adelaide",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "10:00",
+   "weekday": 6,
+   "offsetSeconds": 37800,
+   "next": {
+    "atMs": 1838219400000,
+    "fromOffset": 37800,
+    "toOffset": 34200
+   }
+  },
+  {
+   "zone": "Australia/Darwin",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "21:30",
+   "weekday": 4,
+   "offsetSeconds": 34200,
+   "next": null
+  },
+  {
+   "zone": "Australia/Darwin",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "16:00",
+   "weekday": 0,
+   "offsetSeconds": 34200,
+   "next": null
+  },
+  {
+   "zone": "Australia/Darwin",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "10:00",
+   "weekday": 0,
+   "offsetSeconds": 34200,
+   "next": null
+  },
+  {
+   "zone": "Australia/Darwin",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "09:29",
+   "weekday": 1,
+   "offsetSeconds": 34200,
+   "next": null
+  },
+  {
+   "zone": "Australia/Darwin",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "23:50",
+   "weekday": 1,
+   "offsetSeconds": 34200,
+   "next": null
+  },
+  {
+   "zone": "Australia/Darwin",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "15:29",
+   "weekday": 0,
+   "offsetSeconds": 34200,
+   "next": null
+  },
+  {
+   "zone": "Australia/Darwin",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "21:30",
+   "weekday": 0,
+   "offsetSeconds": 34200,
+   "next": null
+  },
+  {
+   "zone": "Australia/Darwin",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "09:00",
+   "weekday": 6,
+   "offsetSeconds": 34200,
+   "next": null
+  },
+  {
+   "zone": "Australia/Lord_Howe",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "23:00",
+   "weekday": 4,
+   "offsetSeconds": 39600,
+   "next": {
+    "atMs": 1775314800000,
+    "fromOffset": 39600,
+    "toOffset": 37800
+   }
+  },
+  {
+   "zone": "Australia/Lord_Howe",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "17:30",
+   "weekday": 0,
+   "offsetSeconds": 39600,
+   "next": {
+    "atMs": 1775314800000,
+    "fromOffset": 39600,
+    "toOffset": 37800
+   }
+  },
+  {
+   "zone": "Australia/Lord_Howe",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "11:30",
+   "weekday": 0,
+   "offsetSeconds": 39600,
+   "next": {
+    "atMs": 1775314800000,
+    "fromOffset": 39600,
+    "toOffset": 37800
+   }
+  },
+  {
+   "zone": "Australia/Lord_Howe",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "10:29",
+   "weekday": 1,
+   "offsetSeconds": 37800,
+   "next": {
+    "atMs": 1791041400000,
+    "fromOffset": 37800,
+    "toOffset": 39600
+   }
+  },
+  {
+   "zone": "Australia/Lord_Howe",
+   "ms": 1792419600000,
+   "date": "2026-10-20",
+   "time": "01:20",
+   "weekday": 2,
+   "offsetSeconds": 39600,
+   "next": {
+    "atMs": 1806764400000,
+    "fromOffset": 39600,
+    "toOffset": 37800
+   }
+  },
+  {
+   "zone": "Australia/Lord_Howe",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "16:59",
+   "weekday": 0,
+   "offsetSeconds": 39600,
+   "next": {
+    "atMs": 1806764400000,
+    "fromOffset": 39600,
+    "toOffset": 37800
+   }
+  },
+  {
+   "zone": "Australia/Lord_Howe",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "23:00",
+   "weekday": 0,
+   "offsetSeconds": 39600,
+   "next": {
+    "atMs": 1806764400000,
+    "fromOffset": 39600,
+    "toOffset": 37800
+   }
+  },
+  {
+   "zone": "Australia/Lord_Howe",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "10:30",
+   "weekday": 6,
+   "offsetSeconds": 39600,
+   "next": {
+    "atMs": 1838214000000,
+    "fromOffset": 39600,
+    "toOffset": 37800
+   }
+  },
+  {
+   "zone": "Pacific/Chatham",
+   "ms": 1768478400000,
+   "date": "2026-01-16",
+   "time": "01:45",
+   "weekday": 5,
+   "offsetSeconds": 49500,
+   "next": {
+    "atMs": 1775311200000,
+    "fromOffset": 49500,
+    "toOffset": 45900
+   }
+  },
+  {
+   "zone": "Pacific/Chatham",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "20:15",
+   "weekday": 0,
+   "offsetSeconds": 49500,
+   "next": {
+    "atMs": 1775311200000,
+    "fromOffset": 49500,
+    "toOffset": 45900
+   }
+  },
+  {
+   "zone": "Pacific/Chatham",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "14:15",
+   "weekday": 0,
+   "offsetSeconds": 49500,
+   "next": {
+    "atMs": 1775311200000,
+    "fromOffset": 49500,
+    "toOffset": 45900
+   }
+  },
+  {
+   "zone": "Pacific/Chatham",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "12:44",
+   "weekday": 1,
+   "offsetSeconds": 45900,
+   "next": {
+    "atMs": 1790431200000,
+    "fromOffset": 45900,
+    "toOffset": 49500
+   }
+  },
+  {
+   "zone": "Pacific/Chatham",
+   "ms": 1792419600000,
+   "date": "2026-10-20",
+   "time": "04:05",
+   "weekday": 2,
+   "offsetSeconds": 49500,
+   "next": {
+    "atMs": 1806760800000,
+    "fromOffset": 49500,
+    "toOffset": 45900
+   }
+  },
+  {
+   "zone": "Pacific/Chatham",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "19:44",
+   "weekday": 0,
+   "offsetSeconds": 49500,
+   "next": {
+    "atMs": 1806760800000,
+    "fromOffset": 49500,
+    "toOffset": 45900
+   }
+  },
+  {
+   "zone": "Pacific/Chatham",
+   "ms": 1805025600000,
+   "date": "2027-03-15",
+   "time": "01:45",
+   "weekday": 1,
+   "offsetSeconds": 49500,
+   "next": {
+    "atMs": 1806760800000,
+    "fromOffset": 49500,
+    "toOffset": 45900
+   }
+  },
+  {
+   "zone": "Pacific/Chatham",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "13:15",
+   "weekday": 6,
+   "offsetSeconds": 49500,
+   "next": {
+    "atMs": 1838210400000,
+    "fromOffset": 49500,
+    "toOffset": 45900
+   }
+  },
+  {
+   "zone": "America/St_Johns",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "08:30",
+   "weekday": 4,
+   "offsetSeconds": -12600,
+   "next": {
+    "atMs": 1772947800000,
+    "fromOffset": -12600,
+    "toOffset": -9000
+   }
+  },
+  {
+   "zone": "America/St_Johns",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "04:00",
+   "weekday": 0,
+   "offsetSeconds": -9000,
+   "next": {
+    "atMs": 1793507400000,
+    "fromOffset": -9000,
+    "toOffset": -12600
+   }
+  },
+  {
+   "zone": "America/St_Johns",
+   "ms": 1774744200000,
+   "date": "2026-03-28",
+   "time": "22:00",
+   "weekday": 6,
+   "offsetSeconds": -9000,
+   "next": {
+    "atMs": 1793507400000,
+    "fromOffset": -9000,
+    "toOffset": -12600
+   }
+  },
+  {
+   "zone": "America/St_Johns",
+   "ms": 1782086340000,
+   "date": "2026-06-21",
+   "time": "21:29",
+   "weekday": 0,
+   "offsetSeconds": -9000,
+   "next": {
+    "atMs": 1793507400000,
+    "fromOffset": -9000,
+    "toOffset": -12600
+   }
+  },
+  {
+   "zone": "America/St_Johns",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "11:50",
+   "weekday": 1,
+   "offsetSeconds": -9000,
+   "next": {
+    "atMs": 1793507400000,
+    "fromOffset": -9000,
+    "toOffset": -12600
+   }
+  },
+  {
+   "zone": "America/St_Johns",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "02:29",
+   "weekday": 0,
+   "offsetSeconds": -12600,
+   "next": {
+    "atMs": 1805002200000,
+    "fromOffset": -12600,
+    "toOffset": -9000
+   }
+  },
+  {
+   "zone": "America/St_Johns",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "09:30",
+   "weekday": 0,
+   "offsetSeconds": -9000,
+   "next": {
+    "atMs": 1825561800000,
+    "fromOffset": -9000,
+    "toOffset": -12600
+   }
+  },
+  {
+   "zone": "America/St_Johns",
+   "ms": 1830295800000,
+   "date": "2027-12-31",
+   "time": "20:00",
+   "weekday": 5,
+   "offsetSeconds": -12600,
+   "next": {
+    "atMs": 1836451800000,
+    "fromOffset": -12600,
+    "toOffset": -9000
+   }
+  },
+  {
+   "zone": "Asia/Tehran",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "15:30",
+   "weekday": 4,
+   "offsetSeconds": 12600,
+   "next": null
+  },
+  {
+   "zone": "Asia/Tehran",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "10:00",
+   "weekday": 0,
+   "offsetSeconds": 12600,
+   "next": null
+  },
+  {
+   "zone": "Asia/Tehran",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "04:00",
+   "weekday": 0,
+   "offsetSeconds": 12600,
+   "next": null
+  },
+  {
+   "zone": "Asia/Tehran",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "03:29",
+   "weekday": 1,
+   "offsetSeconds": 12600,
+   "next": null
+  },
+  {
+   "zone": "Asia/Tehran",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "17:50",
+   "weekday": 1,
+   "offsetSeconds": 12600,
+   "next": null
+  },
+  {
+   "zone": "Asia/Tehran",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "09:29",
+   "weekday": 0,
+   "offsetSeconds": 12600,
+   "next": null
+  },
+  {
+   "zone": "Asia/Tehran",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "15:30",
+   "weekday": 0,
+   "offsetSeconds": 12600,
+   "next": null
+  },
+  {
+   "zone": "Asia/Tehran",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "03:00",
+   "weekday": 6,
+   "offsetSeconds": 12600,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kabul",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "16:30",
+   "weekday": 4,
+   "offsetSeconds": 16200,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kabul",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "11:00",
+   "weekday": 0,
+   "offsetSeconds": 16200,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kabul",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "05:00",
+   "weekday": 0,
+   "offsetSeconds": 16200,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kabul",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "04:29",
+   "weekday": 1,
+   "offsetSeconds": 16200,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kabul",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "18:50",
+   "weekday": 1,
+   "offsetSeconds": 16200,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kabul",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "10:29",
+   "weekday": 0,
+   "offsetSeconds": 16200,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kabul",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "16:30",
+   "weekday": 0,
+   "offsetSeconds": 16200,
+   "next": null
+  },
+  {
+   "zone": "Asia/Kabul",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "04:00",
+   "weekday": 6,
+   "offsetSeconds": 16200,
+   "next": null
+  },
+  {
+   "zone": "Asia/Yangon",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "18:30",
+   "weekday": 4,
+   "offsetSeconds": 23400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Yangon",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "13:00",
+   "weekday": 0,
+   "offsetSeconds": 23400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Yangon",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "07:00",
+   "weekday": 0,
+   "offsetSeconds": 23400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Yangon",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "06:29",
+   "weekday": 1,
+   "offsetSeconds": 23400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Yangon",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "20:50",
+   "weekday": 1,
+   "offsetSeconds": 23400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Yangon",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "12:29",
+   "weekday": 0,
+   "offsetSeconds": 23400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Yangon",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "18:30",
+   "weekday": 0,
+   "offsetSeconds": 23400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Yangon",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "06:00",
+   "weekday": 6,
+   "offsetSeconds": 23400,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Kiritimati",
+   "ms": 1768478400000,
+   "date": "2026-01-16",
+   "time": "02:00",
+   "weekday": 5,
+   "offsetSeconds": 50400,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Kiritimati",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "20:30",
+   "weekday": 0,
+   "offsetSeconds": 50400,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Kiritimati",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "14:30",
+   "weekday": 0,
+   "offsetSeconds": 50400,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Kiritimati",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "13:59",
+   "weekday": 1,
+   "offsetSeconds": 50400,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Kiritimati",
+   "ms": 1792419600000,
+   "date": "2026-10-20",
+   "time": "04:20",
+   "weekday": 2,
+   "offsetSeconds": 50400,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Kiritimati",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "19:59",
+   "weekday": 0,
+   "offsetSeconds": 50400,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Kiritimati",
+   "ms": 1805025600000,
+   "date": "2027-03-15",
+   "time": "02:00",
+   "weekday": 1,
+   "offsetSeconds": 50400,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Kiritimati",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "13:30",
+   "weekday": 6,
+   "offsetSeconds": 50400,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Pago_Pago",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "01:00",
+   "weekday": 4,
+   "offsetSeconds": -39600,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Pago_Pago",
+   "ms": 1772951400000,
+   "date": "2026-03-07",
+   "time": "19:30",
+   "weekday": 6,
+   "offsetSeconds": -39600,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Pago_Pago",
+   "ms": 1774744200000,
+   "date": "2026-03-28",
+   "time": "13:30",
+   "weekday": 6,
+   "offsetSeconds": -39600,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Pago_Pago",
+   "ms": 1782086340000,
+   "date": "2026-06-21",
+   "time": "12:59",
+   "weekday": 0,
+   "offsetSeconds": -39600,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Pago_Pago",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "03:20",
+   "weekday": 1,
+   "offsetSeconds": -39600,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Pago_Pago",
+   "ms": 1793512740000,
+   "date": "2026-10-31",
+   "time": "18:59",
+   "weekday": 6,
+   "offsetSeconds": -39600,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Pago_Pago",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "01:00",
+   "weekday": 0,
+   "offsetSeconds": -39600,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Pago_Pago",
+   "ms": 1830295800000,
+   "date": "2027-12-31",
+   "time": "12:30",
+   "weekday": 5,
+   "offsetSeconds": -39600,
+   "next": null
+  },
+  {
+   "zone": "America/New_York",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "07:00",
+   "weekday": 4,
+   "offsetSeconds": -18000,
+   "next": {
+    "atMs": 1772953200000,
+    "fromOffset": -18000,
+    "toOffset": -14400
+   }
+  },
+  {
+   "zone": "America/New_York",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "01:30",
+   "weekday": 0,
+   "offsetSeconds": -18000,
+   "next": {
+    "atMs": 1772953200000,
+    "fromOffset": -18000,
+    "toOffset": -14400
+   }
+  },
+  {
+   "zone": "America/New_York",
+   "ms": 1774744200000,
+   "date": "2026-03-28",
+   "time": "20:30",
+   "weekday": 6,
+   "offsetSeconds": -14400,
+   "next": {
+    "atMs": 1793512800000,
+    "fromOffset": -14400,
+    "toOffset": -18000
+   }
+  },
+  {
+   "zone": "America/New_York",
+   "ms": 1782086340000,
+   "date": "2026-06-21",
+   "time": "19:59",
+   "weekday": 0,
+   "offsetSeconds": -14400,
+   "next": {
+    "atMs": 1793512800000,
+    "fromOffset": -14400,
+    "toOffset": -18000
+   }
+  },
+  {
+   "zone": "America/New_York",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "10:20",
+   "weekday": 1,
+   "offsetSeconds": -14400,
+   "next": {
+    "atMs": 1793512800000,
+    "fromOffset": -14400,
+    "toOffset": -18000
+   }
+  },
+  {
+   "zone": "America/New_York",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "01:59",
+   "weekday": 0,
+   "offsetSeconds": -14400,
+   "next": {
+    "atMs": 1793512800000,
+    "fromOffset": -14400,
+    "toOffset": -18000
+   }
+  },
+  {
+   "zone": "America/New_York",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "08:00",
+   "weekday": 0,
+   "offsetSeconds": -14400,
+   "next": {
+    "atMs": 1825567200000,
+    "fromOffset": -14400,
+    "toOffset": -18000
+   }
+  },
+  {
+   "zone": "America/New_York",
+   "ms": 1830295800000,
+   "date": "2027-12-31",
+   "time": "18:30",
+   "weekday": 5,
+   "offsetSeconds": -18000,
+   "next": {
+    "atMs": 1836457200000,
+    "fromOffset": -18000,
+    "toOffset": -14400
+   }
+  },
+  {
+   "zone": "America/Los_Angeles",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "04:00",
+   "weekday": 4,
+   "offsetSeconds": -28800,
+   "next": {
+    "atMs": 1772964000000,
+    "fromOffset": -28800,
+    "toOffset": -25200
+   }
+  },
+  {
+   "zone": "America/Los_Angeles",
+   "ms": 1772951400000,
+   "date": "2026-03-07",
+   "time": "22:30",
+   "weekday": 6,
+   "offsetSeconds": -28800,
+   "next": {
+    "atMs": 1772964000000,
+    "fromOffset": -28800,
+    "toOffset": -25200
+   }
+  },
+  {
+   "zone": "America/Los_Angeles",
+   "ms": 1774744200000,
+   "date": "2026-03-28",
+   "time": "17:30",
+   "weekday": 6,
+   "offsetSeconds": -25200,
+   "next": {
+    "atMs": 1793523600000,
+    "fromOffset": -25200,
+    "toOffset": -28800
+   }
+  },
+  {
+   "zone": "America/Los_Angeles",
+   "ms": 1782086340000,
+   "date": "2026-06-21",
+   "time": "16:59",
+   "weekday": 0,
+   "offsetSeconds": -25200,
+   "next": {
+    "atMs": 1793523600000,
+    "fromOffset": -25200,
+    "toOffset": -28800
+   }
+  },
+  {
+   "zone": "America/Los_Angeles",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "07:20",
+   "weekday": 1,
+   "offsetSeconds": -25200,
+   "next": {
+    "atMs": 1793523600000,
+    "fromOffset": -25200,
+    "toOffset": -28800
+   }
+  },
+  {
+   "zone": "America/Los_Angeles",
+   "ms": 1793512740000,
+   "date": "2026-10-31",
+   "time": "22:59",
+   "weekday": 6,
+   "offsetSeconds": -25200,
+   "next": {
+    "atMs": 1793523600000,
+    "fromOffset": -25200,
+    "toOffset": -28800
+   }
+  },
+  {
+   "zone": "America/Los_Angeles",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "05:00",
+   "weekday": 0,
+   "offsetSeconds": -25200,
+   "next": {
+    "atMs": 1825578000000,
+    "fromOffset": -25200,
+    "toOffset": -28800
+   }
+  },
+  {
+   "zone": "America/Los_Angeles",
+   "ms": 1830295800000,
+   "date": "2027-12-31",
+   "time": "15:30",
+   "weekday": 5,
+   "offsetSeconds": -28800,
+   "next": {
+    "atMs": 1836468000000,
+    "fromOffset": -28800,
+    "toOffset": -25200
+   }
+  },
+  {
+   "zone": "America/Chicago",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "06:00",
+   "weekday": 4,
+   "offsetSeconds": -21600,
+   "next": {
+    "atMs": 1772956800000,
+    "fromOffset": -21600,
+    "toOffset": -18000
+   }
+  },
+  {
+   "zone": "America/Chicago",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "00:30",
+   "weekday": 0,
+   "offsetSeconds": -21600,
+   "next": {
+    "atMs": 1772956800000,
+    "fromOffset": -21600,
+    "toOffset": -18000
+   }
+  },
+  {
+   "zone": "America/Chicago",
+   "ms": 1774744200000,
+   "date": "2026-03-28",
+   "time": "19:30",
+   "weekday": 6,
+   "offsetSeconds": -18000,
+   "next": {
+    "atMs": 1793516400000,
+    "fromOffset": -18000,
+    "toOffset": -21600
+   }
+  },
+  {
+   "zone": "America/Chicago",
+   "ms": 1782086340000,
+   "date": "2026-06-21",
+   "time": "18:59",
+   "weekday": 0,
+   "offsetSeconds": -18000,
+   "next": {
+    "atMs": 1793516400000,
+    "fromOffset": -18000,
+    "toOffset": -21600
+   }
+  },
+  {
+   "zone": "America/Chicago",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "09:20",
+   "weekday": 1,
+   "offsetSeconds": -18000,
+   "next": {
+    "atMs": 1793516400000,
+    "fromOffset": -18000,
+    "toOffset": -21600
+   }
+  },
+  {
+   "zone": "America/Chicago",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "00:59",
+   "weekday": 0,
+   "offsetSeconds": -18000,
+   "next": {
+    "atMs": 1793516400000,
+    "fromOffset": -18000,
+    "toOffset": -21600
+   }
+  },
+  {
+   "zone": "America/Chicago",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "07:00",
+   "weekday": 0,
+   "offsetSeconds": -18000,
+   "next": {
+    "atMs": 1825570800000,
+    "fromOffset": -18000,
+    "toOffset": -21600
+   }
+  },
+  {
+   "zone": "America/Chicago",
+   "ms": 1830295800000,
+   "date": "2027-12-31",
+   "time": "17:30",
+   "weekday": 5,
+   "offsetSeconds": -21600,
+   "next": {
+    "atMs": 1836460800000,
+    "fromOffset": -21600,
+    "toOffset": -18000
+   }
+  },
+  {
+   "zone": "Europe/London",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "12:00",
+   "weekday": 4,
+   "offsetSeconds": 0,
+   "next": {
+    "atMs": 1774746000000,
+    "fromOffset": 0,
+    "toOffset": 3600
+   }
+  },
+  {
+   "zone": "Europe/London",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "06:30",
+   "weekday": 0,
+   "offsetSeconds": 0,
+   "next": {
+    "atMs": 1774746000000,
+    "fromOffset": 0,
+    "toOffset": 3600
+   }
+  },
+  {
+   "zone": "Europe/London",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "00:30",
+   "weekday": 0,
+   "offsetSeconds": 0,
+   "next": {
+    "atMs": 1774746000000,
+    "fromOffset": 0,
+    "toOffset": 3600
+   }
+  },
+  {
+   "zone": "Europe/London",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "00:59",
+   "weekday": 1,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1792890000000,
+    "fromOffset": 3600,
+    "toOffset": 0
+   }
+  },
+  {
+   "zone": "Europe/London",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "15:20",
+   "weekday": 1,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1792890000000,
+    "fromOffset": 3600,
+    "toOffset": 0
+   }
+  },
+  {
+   "zone": "Europe/London",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "05:59",
+   "weekday": 0,
+   "offsetSeconds": 0,
+   "next": {
+    "atMs": 1806195600000,
+    "fromOffset": 0,
+    "toOffset": 3600
+   }
+  },
+  {
+   "zone": "Europe/London",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "12:00",
+   "weekday": 0,
+   "offsetSeconds": 0,
+   "next": {
+    "atMs": 1806195600000,
+    "fromOffset": 0,
+    "toOffset": 3600
+   }
+  },
+  {
+   "zone": "Europe/London",
+   "ms": 1830295800000,
+   "date": "2027-12-31",
+   "time": "23:30",
+   "weekday": 5,
+   "offsetSeconds": 0,
+   "next": {
+    "atMs": 1837645200000,
+    "fromOffset": 0,
+    "toOffset": 3600
+   }
+  },
+  {
+   "zone": "Europe/Berlin",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "13:00",
+   "weekday": 4,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1774746000000,
+    "fromOffset": 3600,
+    "toOffset": 7200
+   }
+  },
+  {
+   "zone": "Europe/Berlin",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "07:30",
+   "weekday": 0,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1774746000000,
+    "fromOffset": 3600,
+    "toOffset": 7200
+   }
+  },
+  {
+   "zone": "Europe/Berlin",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "01:30",
+   "weekday": 0,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1774746000000,
+    "fromOffset": 3600,
+    "toOffset": 7200
+   }
+  },
+  {
+   "zone": "Europe/Berlin",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "01:59",
+   "weekday": 1,
+   "offsetSeconds": 7200,
+   "next": {
+    "atMs": 1792890000000,
+    "fromOffset": 7200,
+    "toOffset": 3600
+   }
+  },
+  {
+   "zone": "Europe/Berlin",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "16:20",
+   "weekday": 1,
+   "offsetSeconds": 7200,
+   "next": {
+    "atMs": 1792890000000,
+    "fromOffset": 7200,
+    "toOffset": 3600
+   }
+  },
+  {
+   "zone": "Europe/Berlin",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "06:59",
+   "weekday": 0,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1806195600000,
+    "fromOffset": 3600,
+    "toOffset": 7200
+   }
+  },
+  {
+   "zone": "Europe/Berlin",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "13:00",
+   "weekday": 0,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1806195600000,
+    "fromOffset": 3600,
+    "toOffset": 7200
+   }
+  },
+  {
+   "zone": "Europe/Berlin",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "00:30",
+   "weekday": 6,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1837645200000,
+    "fromOffset": 3600,
+    "toOffset": 7200
+   }
+  },
+  {
+   "zone": "Europe/Dublin",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "12:00",
+   "weekday": 4,
+   "offsetSeconds": 0,
+   "next": {
+    "atMs": 1774746000000,
+    "fromOffset": 0,
+    "toOffset": 3600
+   }
+  },
+  {
+   "zone": "Europe/Dublin",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "06:30",
+   "weekday": 0,
+   "offsetSeconds": 0,
+   "next": {
+    "atMs": 1774746000000,
+    "fromOffset": 0,
+    "toOffset": 3600
+   }
+  },
+  {
+   "zone": "Europe/Dublin",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "00:30",
+   "weekday": 0,
+   "offsetSeconds": 0,
+   "next": {
+    "atMs": 1774746000000,
+    "fromOffset": 0,
+    "toOffset": 3600
+   }
+  },
+  {
+   "zone": "Europe/Dublin",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "00:59",
+   "weekday": 1,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1792890000000,
+    "fromOffset": 3600,
+    "toOffset": 0
+   }
+  },
+  {
+   "zone": "Europe/Dublin",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "15:20",
+   "weekday": 1,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1792890000000,
+    "fromOffset": 3600,
+    "toOffset": 0
+   }
+  },
+  {
+   "zone": "Europe/Dublin",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "05:59",
+   "weekday": 0,
+   "offsetSeconds": 0,
+   "next": {
+    "atMs": 1806195600000,
+    "fromOffset": 0,
+    "toOffset": 3600
+   }
+  },
+  {
+   "zone": "Europe/Dublin",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "12:00",
+   "weekday": 0,
+   "offsetSeconds": 0,
+   "next": {
+    "atMs": 1806195600000,
+    "fromOffset": 0,
+    "toOffset": 3600
+   }
+  },
+  {
+   "zone": "Europe/Dublin",
+   "ms": 1830295800000,
+   "date": "2027-12-31",
+   "time": "23:30",
+   "weekday": 5,
+   "offsetSeconds": 0,
+   "next": {
+    "atMs": 1837645200000,
+    "fromOffset": 0,
+    "toOffset": 3600
+   }
+  },
+  {
+   "zone": "Australia/Sydney",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "23:00",
+   "weekday": 4,
+   "offsetSeconds": 39600,
+   "next": {
+    "atMs": 1775318400000,
+    "fromOffset": 39600,
+    "toOffset": 36000
+   }
+  },
+  {
+   "zone": "Australia/Sydney",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "17:30",
+   "weekday": 0,
+   "offsetSeconds": 39600,
+   "next": {
+    "atMs": 1775318400000,
+    "fromOffset": 39600,
+    "toOffset": 36000
+   }
+  },
+  {
+   "zone": "Australia/Sydney",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "11:30",
+   "weekday": 0,
+   "offsetSeconds": 39600,
+   "next": {
+    "atMs": 1775318400000,
+    "fromOffset": 39600,
+    "toOffset": 36000
+   }
+  },
+  {
+   "zone": "Australia/Sydney",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "09:59",
+   "weekday": 1,
+   "offsetSeconds": 36000,
+   "next": {
+    "atMs": 1791043200000,
+    "fromOffset": 36000,
+    "toOffset": 39600
+   }
+  },
+  {
+   "zone": "Australia/Sydney",
+   "ms": 1792419600000,
+   "date": "2026-10-20",
+   "time": "01:20",
+   "weekday": 2,
+   "offsetSeconds": 39600,
+   "next": {
+    "atMs": 1806768000000,
+    "fromOffset": 39600,
+    "toOffset": 36000
+   }
+  },
+  {
+   "zone": "Australia/Sydney",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "16:59",
+   "weekday": 0,
+   "offsetSeconds": 39600,
+   "next": {
+    "atMs": 1806768000000,
+    "fromOffset": 39600,
+    "toOffset": 36000
+   }
+  },
+  {
+   "zone": "Australia/Sydney",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "23:00",
+   "weekday": 0,
+   "offsetSeconds": 39600,
+   "next": {
+    "atMs": 1806768000000,
+    "fromOffset": 39600,
+    "toOffset": 36000
+   }
+  },
+  {
+   "zone": "Australia/Sydney",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "10:30",
+   "weekday": 6,
+   "offsetSeconds": 39600,
+   "next": {
+    "atMs": 1838217600000,
+    "fromOffset": 39600,
+    "toOffset": 36000
+   }
+  },
+  {
+   "zone": "Pacific/Auckland",
+   "ms": 1768478400000,
+   "date": "2026-01-16",
+   "time": "01:00",
+   "weekday": 5,
+   "offsetSeconds": 46800,
+   "next": {
+    "atMs": 1775311200000,
+    "fromOffset": 46800,
+    "toOffset": 43200
+   }
+  },
+  {
+   "zone": "Pacific/Auckland",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "19:30",
+   "weekday": 0,
+   "offsetSeconds": 46800,
+   "next": {
+    "atMs": 1775311200000,
+    "fromOffset": 46800,
+    "toOffset": 43200
+   }
+  },
+  {
+   "zone": "Pacific/Auckland",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "13:30",
+   "weekday": 0,
+   "offsetSeconds": 46800,
+   "next": {
+    "atMs": 1775311200000,
+    "fromOffset": 46800,
+    "toOffset": 43200
+   }
+  },
+  {
+   "zone": "Pacific/Auckland",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "11:59",
+   "weekday": 1,
+   "offsetSeconds": 43200,
+   "next": {
+    "atMs": 1790431200000,
+    "fromOffset": 43200,
+    "toOffset": 46800
+   }
+  },
+  {
+   "zone": "Pacific/Auckland",
+   "ms": 1792419600000,
+   "date": "2026-10-20",
+   "time": "03:20",
+   "weekday": 2,
+   "offsetSeconds": 46800,
+   "next": {
+    "atMs": 1806760800000,
+    "fromOffset": 46800,
+    "toOffset": 43200
+   }
+  },
+  {
+   "zone": "Pacific/Auckland",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "18:59",
+   "weekday": 0,
+   "offsetSeconds": 46800,
+   "next": {
+    "atMs": 1806760800000,
+    "fromOffset": 46800,
+    "toOffset": 43200
+   }
+  },
+  {
+   "zone": "Pacific/Auckland",
+   "ms": 1805025600000,
+   "date": "2027-03-15",
+   "time": "01:00",
+   "weekday": 1,
+   "offsetSeconds": 46800,
+   "next": {
+    "atMs": 1806760800000,
+    "fromOffset": 46800,
+    "toOffset": 43200
+   }
+  },
+  {
+   "zone": "Pacific/Auckland",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "12:30",
+   "weekday": 6,
+   "offsetSeconds": 46800,
+   "next": {
+    "atMs": 1838210400000,
+    "fromOffset": 46800,
+    "toOffset": 43200
+   }
+  },
+  {
+   "zone": "America/Sao_Paulo",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "09:00",
+   "weekday": 4,
+   "offsetSeconds": -10800,
+   "next": null
+  },
+  {
+   "zone": "America/Sao_Paulo",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "03:30",
+   "weekday": 0,
+   "offsetSeconds": -10800,
+   "next": null
+  },
+  {
+   "zone": "America/Sao_Paulo",
+   "ms": 1774744200000,
+   "date": "2026-03-28",
+   "time": "21:30",
+   "weekday": 6,
+   "offsetSeconds": -10800,
+   "next": null
+  },
+  {
+   "zone": "America/Sao_Paulo",
+   "ms": 1782086340000,
+   "date": "2026-06-21",
+   "time": "20:59",
+   "weekday": 0,
+   "offsetSeconds": -10800,
+   "next": null
+  },
+  {
+   "zone": "America/Sao_Paulo",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "11:20",
+   "weekday": 1,
+   "offsetSeconds": -10800,
+   "next": null
+  },
+  {
+   "zone": "America/Sao_Paulo",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "02:59",
+   "weekday": 0,
+   "offsetSeconds": -10800,
+   "next": null
+  },
+  {
+   "zone": "America/Sao_Paulo",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "09:00",
+   "weekday": 0,
+   "offsetSeconds": -10800,
+   "next": null
+  },
+  {
+   "zone": "America/Sao_Paulo",
+   "ms": 1830295800000,
+   "date": "2027-12-31",
+   "time": "20:30",
+   "weekday": 5,
+   "offsetSeconds": -10800,
+   "next": null
+  },
+  {
+   "zone": "Africa/Casablanca",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "13:00",
+   "weekday": 4,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1771120800000,
+    "fromOffset": 3600,
+    "toOffset": 0
+   }
+  },
+  {
+   "zone": "Africa/Casablanca",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "06:30",
+   "weekday": 0,
+   "offsetSeconds": 0,
+   "next": {
+    "atMs": 1774144800000,
+    "fromOffset": 0,
+    "toOffset": 3600
+   }
+  },
+  {
+   "zone": "Africa/Casablanca",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "01:30",
+   "weekday": 0,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1801965600000,
+    "fromOffset": 3600,
+    "toOffset": 0
+   }
+  },
+  {
+   "zone": "Africa/Casablanca",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "00:59",
+   "weekday": 1,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1801965600000,
+    "fromOffset": 3600,
+    "toOffset": 0
+   }
+  },
+  {
+   "zone": "Africa/Casablanca",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "15:20",
+   "weekday": 1,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1801965600000,
+    "fromOffset": 3600,
+    "toOffset": 0
+   }
+  },
+  {
+   "zone": "Africa/Casablanca",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "06:59",
+   "weekday": 0,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1801965600000,
+    "fromOffset": 3600,
+    "toOffset": 0
+   }
+  },
+  {
+   "zone": "Africa/Casablanca",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "13:00",
+   "weekday": 0,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1832205600000,
+    "fromOffset": 3600,
+    "toOffset": 0
+   }
+  },
+  {
+   "zone": "Africa/Casablanca",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "00:30",
+   "weekday": 6,
+   "offsetSeconds": 3600,
+   "next": {
+    "atMs": 1832205600000,
+    "fromOffset": 3600,
+    "toOffset": 0
+   }
+  },
+  {
+   "zone": "Africa/Cairo",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "14:00",
+   "weekday": 4,
+   "offsetSeconds": 7200,
+   "next": {
+    "atMs": 1776981600000,
+    "fromOffset": 7200,
+    "toOffset": 10800
+   }
+  },
+  {
+   "zone": "Africa/Cairo",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "08:30",
+   "weekday": 0,
+   "offsetSeconds": 7200,
+   "next": {
+    "atMs": 1776981600000,
+    "fromOffset": 7200,
+    "toOffset": 10800
+   }
+  },
+  {
+   "zone": "Africa/Cairo",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "02:30",
+   "weekday": 0,
+   "offsetSeconds": 7200,
+   "next": {
+    "atMs": 1776981600000,
+    "fromOffset": 7200,
+    "toOffset": 10800
+   }
+  },
+  {
+   "zone": "Africa/Cairo",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "02:59",
+   "weekday": 1,
+   "offsetSeconds": 10800,
+   "next": {
+    "atMs": 1793307600000,
+    "fromOffset": 10800,
+    "toOffset": 7200
+   }
+  },
+  {
+   "zone": "Africa/Cairo",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "17:20",
+   "weekday": 1,
+   "offsetSeconds": 10800,
+   "next": {
+    "atMs": 1793307600000,
+    "fromOffset": 10800,
+    "toOffset": 7200
+   }
+  },
+  {
+   "zone": "Africa/Cairo",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "07:59",
+   "weekday": 0,
+   "offsetSeconds": 7200,
+   "next": {
+    "atMs": 1809036000000,
+    "fromOffset": 7200,
+    "toOffset": 10800
+   }
+  },
+  {
+   "zone": "Africa/Cairo",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "14:00",
+   "weekday": 0,
+   "offsetSeconds": 7200,
+   "next": {
+    "atMs": 1809036000000,
+    "fromOffset": 7200,
+    "toOffset": 10800
+   }
+  },
+  {
+   "zone": "Africa/Cairo",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "01:30",
+   "weekday": 6,
+   "offsetSeconds": 7200,
+   "next": {
+    "atMs": 1840485600000,
+    "fromOffset": 7200,
+    "toOffset": 10800
+   }
+  },
+  {
+   "zone": "Asia/Tokyo",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "21:00",
+   "weekday": 4,
+   "offsetSeconds": 32400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Tokyo",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "15:30",
+   "weekday": 0,
+   "offsetSeconds": 32400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Tokyo",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "09:30",
+   "weekday": 0,
+   "offsetSeconds": 32400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Tokyo",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "08:59",
+   "weekday": 1,
+   "offsetSeconds": 32400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Tokyo",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "23:20",
+   "weekday": 1,
+   "offsetSeconds": 32400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Tokyo",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "14:59",
+   "weekday": 0,
+   "offsetSeconds": 32400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Tokyo",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "21:00",
+   "weekday": 0,
+   "offsetSeconds": 32400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Tokyo",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "08:30",
+   "weekday": 6,
+   "offsetSeconds": 32400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Dubai",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "16:00",
+   "weekday": 4,
+   "offsetSeconds": 14400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Dubai",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "10:30",
+   "weekday": 0,
+   "offsetSeconds": 14400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Dubai",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "04:30",
+   "weekday": 0,
+   "offsetSeconds": 14400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Dubai",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "03:59",
+   "weekday": 1,
+   "offsetSeconds": 14400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Dubai",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "18:20",
+   "weekday": 1,
+   "offsetSeconds": 14400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Dubai",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "09:59",
+   "weekday": 0,
+   "offsetSeconds": 14400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Dubai",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "16:00",
+   "weekday": 0,
+   "offsetSeconds": 14400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Dubai",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "03:30",
+   "weekday": 6,
+   "offsetSeconds": 14400,
+   "next": null
+  },
+  {
+   "zone": "Asia/Singapore",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "20:00",
+   "weekday": 4,
+   "offsetSeconds": 28800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Singapore",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "14:30",
+   "weekday": 0,
+   "offsetSeconds": 28800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Singapore",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "08:30",
+   "weekday": 0,
+   "offsetSeconds": 28800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Singapore",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "07:59",
+   "weekday": 1,
+   "offsetSeconds": 28800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Singapore",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "22:20",
+   "weekday": 1,
+   "offsetSeconds": 28800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Singapore",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "13:59",
+   "weekday": 0,
+   "offsetSeconds": 28800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Singapore",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "20:00",
+   "weekday": 0,
+   "offsetSeconds": 28800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Singapore",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "07:30",
+   "weekday": 6,
+   "offsetSeconds": 28800,
+   "next": null
+  },
+  {
+   "zone": "America/Havana",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "07:00",
+   "weekday": 4,
+   "offsetSeconds": -18000,
+   "next": {
+    "atMs": 1772946000000,
+    "fromOffset": -18000,
+    "toOffset": -14400
+   }
+  },
+  {
+   "zone": "America/Havana",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "02:30",
+   "weekday": 0,
+   "offsetSeconds": -14400,
+   "next": {
+    "atMs": 1793509200000,
+    "fromOffset": -14400,
+    "toOffset": -18000
+   }
+  },
+  {
+   "zone": "America/Havana",
+   "ms": 1774744200000,
+   "date": "2026-03-28",
+   "time": "20:30",
+   "weekday": 6,
+   "offsetSeconds": -14400,
+   "next": {
+    "atMs": 1793509200000,
+    "fromOffset": -14400,
+    "toOffset": -18000
+   }
+  },
+  {
+   "zone": "America/Havana",
+   "ms": 1782086340000,
+   "date": "2026-06-21",
+   "time": "19:59",
+   "weekday": 0,
+   "offsetSeconds": -14400,
+   "next": {
+    "atMs": 1793509200000,
+    "fromOffset": -14400,
+    "toOffset": -18000
+   }
+  },
+  {
+   "zone": "America/Havana",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "10:20",
+   "weekday": 1,
+   "offsetSeconds": -14400,
+   "next": {
+    "atMs": 1793509200000,
+    "fromOffset": -14400,
+    "toOffset": -18000
+   }
+  },
+  {
+   "zone": "America/Havana",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "00:59",
+   "weekday": 0,
+   "offsetSeconds": -18000,
+   "next": {
+    "atMs": 1805000400000,
+    "fromOffset": -18000,
+    "toOffset": -14400
+   }
+  },
+  {
+   "zone": "America/Havana",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "08:00",
+   "weekday": 0,
+   "offsetSeconds": -14400,
+   "next": {
+    "atMs": 1825563600000,
+    "fromOffset": -14400,
+    "toOffset": -18000
+   }
+  },
+  {
+   "zone": "America/Havana",
+   "ms": 1830295800000,
+   "date": "2027-12-31",
+   "time": "18:30",
+   "weekday": 5,
+   "offsetSeconds": -18000,
+   "next": {
+    "atMs": 1836450000000,
+    "fromOffset": -18000,
+    "toOffset": -14400
+   }
+  },
+  {
+   "zone": "America/Santiago",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "09:00",
+   "weekday": 4,
+   "offsetSeconds": -10800,
+   "next": {
+    "atMs": 1775358000000,
+    "fromOffset": -10800,
+    "toOffset": -14400
+   }
+  },
+  {
+   "zone": "America/Santiago",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "03:30",
+   "weekday": 0,
+   "offsetSeconds": -10800,
+   "next": {
+    "atMs": 1775358000000,
+    "fromOffset": -10800,
+    "toOffset": -14400
+   }
+  },
+  {
+   "zone": "America/Santiago",
+   "ms": 1774744200000,
+   "date": "2026-03-28",
+   "time": "21:30",
+   "weekday": 6,
+   "offsetSeconds": -10800,
+   "next": {
+    "atMs": 1775358000000,
+    "fromOffset": -10800,
+    "toOffset": -14400
+   }
+  },
+  {
+   "zone": "America/Santiago",
+   "ms": 1782086340000,
+   "date": "2026-06-21",
+   "time": "19:59",
+   "weekday": 0,
+   "offsetSeconds": -14400,
+   "next": {
+    "atMs": 1788667200000,
+    "fromOffset": -14400,
+    "toOffset": -10800
+   }
+  },
+  {
+   "zone": "America/Santiago",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "11:20",
+   "weekday": 1,
+   "offsetSeconds": -10800,
+   "next": {
+    "atMs": 1806807600000,
+    "fromOffset": -10800,
+    "toOffset": -14400
+   }
+  },
+  {
+   "zone": "America/Santiago",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "02:59",
+   "weekday": 0,
+   "offsetSeconds": -10800,
+   "next": {
+    "atMs": 1806807600000,
+    "fromOffset": -10800,
+    "toOffset": -14400
+   }
+  },
+  {
+   "zone": "America/Santiago",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "09:00",
+   "weekday": 0,
+   "offsetSeconds": -10800,
+   "next": {
+    "atMs": 1806807600000,
+    "fromOffset": -10800,
+    "toOffset": -14400
+   }
+  },
+  {
+   "zone": "America/Santiago",
+   "ms": 1830295800000,
+   "date": "2027-12-31",
+   "time": "20:30",
+   "weekday": 5,
+   "offsetSeconds": -10800,
+   "next": {
+    "atMs": 1838257200000,
+    "fromOffset": -10800,
+    "toOffset": -14400
+   }
+  },
+  {
+   "zone": "Pacific/Honolulu",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "02:00",
+   "weekday": 4,
+   "offsetSeconds": -36000,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Honolulu",
+   "ms": 1772951400000,
+   "date": "2026-03-07",
+   "time": "20:30",
+   "weekday": 6,
+   "offsetSeconds": -36000,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Honolulu",
+   "ms": 1774744200000,
+   "date": "2026-03-28",
+   "time": "14:30",
+   "weekday": 6,
+   "offsetSeconds": -36000,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Honolulu",
+   "ms": 1782086340000,
+   "date": "2026-06-21",
+   "time": "13:59",
+   "weekday": 0,
+   "offsetSeconds": -36000,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Honolulu",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "04:20",
+   "weekday": 1,
+   "offsetSeconds": -36000,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Honolulu",
+   "ms": 1793512740000,
+   "date": "2026-10-31",
+   "time": "19:59",
+   "weekday": 6,
+   "offsetSeconds": -36000,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Honolulu",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "02:00",
+   "weekday": 0,
+   "offsetSeconds": -36000,
+   "next": null
+  },
+  {
+   "zone": "Pacific/Honolulu",
+   "ms": 1830295800000,
+   "date": "2027-12-31",
+   "time": "13:30",
+   "weekday": 5,
+   "offsetSeconds": -36000,
+   "next": null
+  },
+  {
+   "zone": "Europe/Istanbul",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "15:00",
+   "weekday": 4,
+   "offsetSeconds": 10800,
+   "next": null
+  },
+  {
+   "zone": "Europe/Istanbul",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "09:30",
+   "weekday": 0,
+   "offsetSeconds": 10800,
+   "next": null
+  },
+  {
+   "zone": "Europe/Istanbul",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "03:30",
+   "weekday": 0,
+   "offsetSeconds": 10800,
+   "next": null
+  },
+  {
+   "zone": "Europe/Istanbul",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "02:59",
+   "weekday": 1,
+   "offsetSeconds": 10800,
+   "next": null
+  },
+  {
+   "zone": "Europe/Istanbul",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "17:20",
+   "weekday": 1,
+   "offsetSeconds": 10800,
+   "next": null
+  },
+  {
+   "zone": "Europe/Istanbul",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "08:59",
+   "weekday": 0,
+   "offsetSeconds": 10800,
+   "next": null
+  },
+  {
+   "zone": "Europe/Istanbul",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "15:00",
+   "weekday": 0,
+   "offsetSeconds": 10800,
+   "next": null
+  },
+  {
+   "zone": "Europe/Istanbul",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "02:30",
+   "weekday": 6,
+   "offsetSeconds": 10800,
+   "next": null
+  },
+  {
+   "zone": "Asia/Jerusalem",
+   "ms": 1768478400000,
+   "date": "2026-01-15",
+   "time": "14:00",
+   "weekday": 4,
+   "offsetSeconds": 7200,
+   "next": {
+    "atMs": 1774569600000,
+    "fromOffset": 7200,
+    "toOffset": 10800
+   }
+  },
+  {
+   "zone": "Asia/Jerusalem",
+   "ms": 1772951400000,
+   "date": "2026-03-08",
+   "time": "08:30",
+   "weekday": 0,
+   "offsetSeconds": 7200,
+   "next": {
+    "atMs": 1774569600000,
+    "fromOffset": 7200,
+    "toOffset": 10800
+   }
+  },
+  {
+   "zone": "Asia/Jerusalem",
+   "ms": 1774744200000,
+   "date": "2026-03-29",
+   "time": "03:30",
+   "weekday": 0,
+   "offsetSeconds": 10800,
+   "next": {
+    "atMs": 1792882800000,
+    "fromOffset": 10800,
+    "toOffset": 7200
+   }
+  },
+  {
+   "zone": "Asia/Jerusalem",
+   "ms": 1782086340000,
+   "date": "2026-06-22",
+   "time": "02:59",
+   "weekday": 1,
+   "offsetSeconds": 10800,
+   "next": {
+    "atMs": 1792882800000,
+    "fromOffset": 10800,
+    "toOffset": 7200
+   }
+  },
+  {
+   "zone": "Asia/Jerusalem",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "17:20",
+   "weekday": 1,
+   "offsetSeconds": 10800,
+   "next": {
+    "atMs": 1792882800000,
+    "fromOffset": 10800,
+    "toOffset": 7200
+   }
+  },
+  {
+   "zone": "Asia/Jerusalem",
+   "ms": 1793512740000,
+   "date": "2026-11-01",
+   "time": "07:59",
+   "weekday": 0,
+   "offsetSeconds": 7200,
+   "next": {
+    "atMs": 1806019200000,
+    "fromOffset": 7200,
+    "toOffset": 10800
+   }
+  },
+  {
+   "zone": "Asia/Jerusalem",
+   "ms": 1805025600000,
+   "date": "2027-03-14",
+   "time": "14:00",
+   "weekday": 0,
+   "offsetSeconds": 7200,
+   "next": {
+    "atMs": 1806019200000,
+    "fromOffset": 7200,
+    "toOffset": 10800
+   }
+  },
+  {
+   "zone": "Asia/Jerusalem",
+   "ms": 1830295800000,
+   "date": "2028-01-01",
+   "time": "01:30",
+   "weekday": 6,
+   "offsetSeconds": 7200,
+   "next": {
+    "atMs": 1837468800000,
+    "fromOffset": 7200,
+    "toOffset": 10800
+   }
+  }
+ ],
+ "divergent": [
+  {
+   "zone": "America/Asuncion",
+   "ms": 1792419600000,
+   "date": "2026-10-19",
+   "time": "11:20",
+   "weekday": 1,
+   "offsetSeconds": -10800,
+   "next": null
+  },
+  {
+   "zone": "America/Asuncion",
+   "ms": 1813060800000,
+   "date": "2027-06-15",
+   "time": "09:00",
+   "weekday": 2,
+   "offsetSeconds": -10800,
+   "next": null
+  }
+ ]
+}

@@ -97,7 +97,9 @@ test.describe("rendered link crawl @portable", () => {
           }
           if (url.search) {
             const q = url.searchParams;
-            const okQuery = relPath === "articles.html" && CATEGORY_SLUGS.includes(q.get("category"));
+            // the World Clock's hand-off to the Time Zone Converter carries the visitor's zone and the board's zones (from, to)
+            const handoff = entry === "tools/world-clock/" && relPath === "tools/time-zone-converter/" && q.has("from") && [...q.keys()].every((k) => k === "from" || k === "to");
+            const okQuery = (relPath === "articles.html" && CATEGORY_SLUGS.includes(q.get("category"))) || handoff;
             if (!okQuery) failures.push(`${entry}: link "${raw}" has an unexpected query string`);
           }
         }

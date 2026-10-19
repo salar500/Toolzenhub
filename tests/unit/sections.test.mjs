@@ -188,7 +188,7 @@ describe("routing: every registered tool keeps its URL", () => {
   });
 
   test("the calculator loader registry is unchanged: loaders only for the published tools, still lazy", () => {
-    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "base64-encoder-decoder", "cagr", "countdown-timer", "credit-card-payoff", "cron-expression-explainer", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "hours-calculator", "image-compressor-resizer", "income-tax", "json-formatter", "jwt-decoder", "loan-comparison", "margin", "percentage", "ppf", "prepayment", "profit", "sip", "stopwatch", "swp", "text-diff", "time-zone-converter", "unix-timestamp-converter"]);
+    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "base64-encoder-decoder", "cagr", "countdown-timer", "credit-card-payoff", "cron-expression-explainer", "date-calculator", "date-difference", "emi", "fd", "gst", "home-loan", "hours-calculator", "image-compressor-resizer", "income-tax", "json-formatter", "jwt-decoder", "loan-comparison", "margin", "percentage", "ppf", "prepayment", "profit", "sip", "stopwatch", "swp", "text-diff", "time-zone-converter", "unix-timestamp-converter", "world-clock"]);
     for (const loader of Object.values(registry.calculatorRegistry)) assert.equal(typeof loader, "function");
     assert.deepEqual(registry.calculatorMetadata.emi, { section: "Calculators", category: "loans", title: "EMI Calculator" });
     assert.deepEqual(registry.calculatorMetadata["income-tax"], { section: "Calculators", category: "tax", title: "Old vs New Tax Regime Calculator" });

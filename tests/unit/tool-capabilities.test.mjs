@@ -170,7 +170,7 @@ describe("Coming Soon tools stay unbuilt", () => {
 
   test("the published set is still exactly the URL inventory's built tools", () => {
     // the inventory lists every built tool page; Date Difference (Time Tools) is not in the calculator view
-    assert.deepEqual(calcs.calculators.filter((t) => t.available).map((t) => t.id).sort(), inventory.summary.builtCalculators.filter((id) => !["date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "time-zone-converter", "hours-calculator", "image-compressor-resizer"].includes(id)).sort());
+    assert.deepEqual(calcs.calculators.filter((t) => t.available).map((t) => t.id).sort(), inventory.summary.builtCalculators.filter((id) => !["date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer"].includes(id)).sort());
   });
 });
 

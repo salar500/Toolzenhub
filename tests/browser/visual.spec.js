@@ -98,6 +98,21 @@ test.describe("visual baselines @visual (clock and zone pinned)", () => {
     await page.evaluate(() => window.scrollTo(0, 0));
     await expect(page).toHaveScreenshot(["visual", "image-compressor-resizer.png"], { fullPage: true });
   });
+
+  test("world-clock", async ({ page, go }) => {
+    // Monday 2026-10-19 14:20 UTC (19:50 in India), the clock paused after the first minute tick and the clock-change lines have been filled in
+    await page.clock.install({ time: new Date("2026-10-19T14:19:58Z") });
+    await go("tools/world-clock/");
+    await expect(page.locator("#wc-panel")).toHaveAttribute("data-ready", "true");
+    await page.clock.runFor(8000); // past the first minute tick, and long enough for the deferred clock-change lines
+    await page.clock.pauseAt(new Date("2026-10-19T14:20:30Z"));
+    await expect(page.locator("#wc-board > .wc-card")).toHaveCount(5);
+    await expect(page.locator("#wc-board .wc-card__change:visible")).toHaveCount(5);
+    await expect(page.locator("#wc-board .wc-card").first().locator("time")).toHaveText("7:50 PM");
+    await page.evaluate(() => document.fonts.ready);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(page).toHaveScreenshot(["visual", "world-clock.png"], { fullPage: true });
+  });
 });
 
 test.describe("visual baselines @visual", () => {
