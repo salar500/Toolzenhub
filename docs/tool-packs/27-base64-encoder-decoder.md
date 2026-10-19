@@ -1,7 +1,7 @@
 # Tool Pack 27: Base64 Encoder & Decoder (Developer Tools)
 
-Status: **approved 2026-10-13 (decisions D1 to D7)** and implemented as one bounded scope under factory section 2a (compact format); see section 14 for the implementation notes. The roadmap is not changed by this pack.
-Roadmap: R1 item 5 (a candidate, not an authorization; this specification and its approval are what authorize the build).
+Status: **approved 2026-10-13 (decisions D1 to D7)** and implemented as one bounded scope under factory section 2a (compact format); see section 14 for the implementation notes. The roadmap was not changed by this pack when it was implemented; it was updated afterward, in a separate documentation phase (2026-10-19), to record this pack as completed.
+Roadmap: R1 item 5 (it was a candidate, not an authorization, when this pack was specified: this specification and its approval are what authorized the build). R1 now records it as completed (5 of 8).
 Tier: **LOW** (a text converter with fixed, public rules; no money, tax or legal content, no stored data).
 Id, slug and route: `base64-encoder-decoder`, `/tools/base64-encoder-decoder/` (decision D1). Section: **Developer Tools** (`developer-tools`, flat, no category), the sixth tool after the JSON Formatter, Unix Timestamp Converter, Text Diff, JWT Decoder and Cron Expression Explainer.
 
