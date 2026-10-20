@@ -6,7 +6,7 @@
    directory of 195 cities and the other time zones, in explore.js) and
    My clocks (a board of up to 12 city clocks plus the visitor's own).
    This file is the page shell: the live "Your time" line, the one
-   search field with its example chips, the two tabs, the board, and
+   search field with its time shortcuts, the two tabs, the board, and
    the one minute timer. The calculations are in clock-engine.js (with
    the Time Zone Converter's pure engine behind it) and time-query.js
    (what "8 PM" or "UTC+05:30" means); the cities are in
@@ -91,7 +91,18 @@ const COVERAGE_HINT =
     "Search a city or country, a time such as 8 PM or 9 AM-12 PM, or a UTC offset. Not every city is listed.";
 
 /* example searches: each fills the field and searches; none adds a clock */
-const CHIPS = Object.freeze(["8 PM", "AM", "UTC+05:30", "Australia", "Europe", "Mumbai"]);
+/*
+ * The time shortcuts (section 22.5). Each label is itself a query the Explore grammar knows as a whole phrase, so a
+ * shortcut only writes its label into the search field: the field is the one place the query lives.
+ */
+const SHORTCUTS = Object.freeze([
+    { label: "Before noon", primary: true },
+    { label: "12 PM onward", primary: true },
+    { label: "Evening", primary: true },
+    { label: "Night", primary: true },
+    { label: "Morning", primary: false },
+    { label: "Afternoon", primary: false }
+]);
 
 
 /* =========================================================
@@ -101,9 +112,12 @@ const CHIPS = Object.freeze(["8 PM", "AM", "UTC+05:30", "Australia", "Europe", "
 
 export function markup() {
 
-    const chips = CHIPS.map((chip) =>
-        `<button type="button" class="wc-chip" data-chip="${chip}">${chip}</button>`
-    ).join("");
+    const shortcut = (item) =>
+        `<button type="button" class="wc-chip" data-shortcut="${item.label}" aria-pressed="false">${item.label}</button>`;
+
+    const primaryShortcuts = SHORTCUTS.filter((item) => item.primary).map(shortcut).join("");
+
+    const moreShortcuts = SHORTCUTS.filter((item) => !item.primary).map(shortcut).join("");
 
     return `
         <div class="calculator-page">
@@ -229,10 +243,33 @@ export function markup() {
                         </div>
 
                         <div
-                            class="wc-chips"
+                            class="wc-shortcuts"
                             role="group"
-                            aria-label="Example searches"
-                        >${chips}</div>
+                            aria-labelledby="wc-shortcuts-label"
+                        >
+
+                            <p
+                                id="wc-shortcuts-label"
+                                class="wc-shortcuts__label"
+                            >
+                                Find places where it is now
+                            </p>
+
+                            <div class="wc-chips">${primaryShortcuts}<button
+                                type="button"
+                                id="wc-more-toggle"
+                                class="wc-chip wc-chip--more"
+                                aria-expanded="false"
+                                aria-controls="wc-more-times"
+                            >More times</button></div>
+
+                            <div
+                                id="wc-more-times"
+                                class="wc-chips"
+                                hidden
+                            >${moreShortcuts}</div>
+
+                        </div>
 
                         <p
                             id="wc-search-hint"
@@ -1612,6 +1649,19 @@ export function init() {
                     isFull,
                     add: (place, via) => addPlace(place, via),
                     announce,
+                    clearQuery: () => {
+
+                        searchInput.value = "";
+
+                        syncClear();
+
+                        clearFresh();
+
+                        restoreHint();
+
+                        searchInput.focus();
+
+                    },
                     countryData: () => countryData,
                     countryState: () => countryStatus,
                     loadCountryData
@@ -1645,7 +1695,7 @@ export function init() {
     }
 
 
-    /* ---------- the search field and its chips ---------- */
+    /* ---------- the search field and its time shortcuts ---------- */
 
     let frame = null;
 
@@ -1683,8 +1733,19 @@ export function init() {
 
     const searchClear = $("#wc-search-clear");
 
+    /* the query as the grammar reads a phrase: trimmed, lower case, spaces collapsed */
+    const fieldPhrase = () => searchInput.value.trim().toLowerCase().replace(/s+/g, " ");
+
     function syncClear() {
+
         searchClear.hidden = searchInput.value === "";
+
+        const phrase = fieldPhrase();
+
+        for (const button of searchForm.querySelectorAll("[data-shortcut]")) {
+            button.setAttribute("aria-pressed", String(button.dataset.shortcut.toLowerCase() === phrase));
+        }
+
     }
 
     searchInput.addEventListener("input", () => {
@@ -1744,11 +1805,12 @@ export function init() {
 
     });
 
-    for (const chip of searchForm.querySelectorAll("[data-chip]")) {
+    /* a shortcut writes its label into the field and runs the search; pressing it again clears the field */
+    for (const button of searchForm.querySelectorAll("[data-shortcut]")) {
 
-        chip.addEventListener("click", () => {
+        button.addEventListener("click", () => {
 
-            searchInput.value = chip.dataset.chip;
+            searchInput.value = fieldPhrase() === button.dataset.shortcut.toLowerCase() ? "" : button.dataset.shortcut;
 
             syncClear();
 
@@ -1761,6 +1823,20 @@ export function init() {
         });
 
     }
+
+    const moreToggle = $("#wc-more-toggle");
+
+    const moreTimes = $("#wc-more-times");
+
+    moreToggle.addEventListener("click", () => {
+
+        const open = moreToggle.getAttribute("aria-expanded") !== "true";
+
+        moreToggle.setAttribute("aria-expanded", String(open));
+
+        moreTimes.hidden = !open;
+
+    });
 
 
     /* ---------- the other controls ---------- */

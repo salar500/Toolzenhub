@@ -12,9 +12,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { runExplore, snapshotPlaces, cityPlaces, otherZonePlaces, sameAnswer, countLine } from "../../assets/js/tools/world-clock/explore-model.js";
+import { runExplore, snapshotPlaces, cityPlaces, otherZonePlaces, sameAnswer, countLine, REGION_CHOICES, regionDataFor, regionLabel } from "../../assets/js/tools/world-clock/explore-model.js";
 import * as countryData from "../../assets/js/tools/world-clock/country-zones.js";
-import { DIRECTORY } from "../../assets/js/tools/world-clock/city-directory.js";
+import { DIRECTORY, normalizeText } from "../../assets/js/tools/world-clock/city-directory.js";
 import { canonicalZone } from "../../assets/js/tools/time-zone-converter/time-zone-engine.js";
 
 const PROJECT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -90,7 +90,7 @@ describe("the directory", () => {
     assert.ok(europe.groups[0].rows.every((r) => r.place.region === "Europe"));
     const india = run("", { country: "IN" });
     assert.equal(india.counts.cities, 8);
-    assert.equal(india.others.expanded, india.counts.others > 0);
+    assert.equal("expanded" in india.others, false); // the view never opens the other zones by itself (section 22.3)
     const none = run("tokyo", { region: "Europe" });
     assert.equal(none.counts.places, 0);
   });
@@ -211,7 +211,7 @@ describe("names, countries, continents, abbreviations and invalid times", () => 
     const a = run("Australia");
     assert.equal(a.mode, "country");
     assert.ok(a.counts.cities >= 4);
-    assert.equal(a.others.expanded, a.counts.others > 0);
+    assert.equal("expanded" in a.others, false); // the other zones are counted, never opened for the visitor (section 22.3)
     assert.match(a.headings[0], /Australia · \d+ time zones/);
   });
   test("a continent word lists that region's cities, with its other zones collapsed", () => {
@@ -260,5 +260,165 @@ describe("answers over time", () => {
   test("the count line is worded exactly", () => {
     assert.equal(countLine(1, 1, 1), "1 listed city in 1 time zone, plus 1 other time zone");
     assert.equal(countLine(9, 2, 0), "9 listed cities in 2 time zones, plus 0 other time zones");
+  });
+});
+
+describe("Step 2 (section 22): sorting, region groups, per-view messages, named periods", () => {
+  const norm = (text) => text.toLowerCase();
+
+  test("ordinary browsing is ordered by the local time of day, 00:00 to 23:59, ties by city then key", () => {
+    for (const query of ["", "India", "Europe", "Australia", "Canada"]) {
+      const rows = run(query).groups.flatMap((g) => g.rows);
+      assert.ok(rows.length > 1, query);
+      for (let i = 1; i < rows.length; i++) {
+        const a = rows[i - 1];
+        const b = rows[i];
+        assert.ok(a.local <= b.local, `${query}: ${a.place.title} ${a.local} before ${b.place.title} ${b.local}`);
+        if (a.local === b.local) {
+          const ka = norm(a.place.title);
+          const kb = norm(b.place.title);
+          assert.ok(ka < kb || (ka === kb && a.place.key < b.place.key), `${query}: tie ${a.place.title} / ${b.place.title}`);
+        }
+      }
+    }
+    const all = run("").groups[0].rows;
+    assert.ok(all[0].local < 60 * 3 && all.at(-1).local > 60 * 20, "starts after midnight somewhere and ends before it somewhere");
+  });
+
+  test("the same instant always gives the same order, and the other time zones use the same key", () => {
+    assert.deepEqual(titles(run("")), titles(run("")));
+    const others = run("").others.rows;
+    for (let i = 1; i < others.length; i++) assert.ok(others[i - 1].local <= others[i].local);
+  });
+
+  test("an explicit sort is honoured; a typed name keeps its best match order until a sort is chosen", () => {
+    const byCity = titles(run("", { sort: "city" }));
+    const key = (text) => normalizeText(text);
+    assert.deepEqual(byCity, [...byCity].sort((a, b) => (key(a) < key(b) ? -1 : key(a) > key(b) ? 1 : 0)));
+    const byOffset = run("", { sort: "offset" }).groups[0].rows;
+    for (let i = 1; i < byOffset.length; i++) assert.ok(byOffset[i - 1].offsetSeconds <= byOffset[i].offsetSeconds);
+    const typed = run("london");
+    assert.equal(typed.relevance, true);
+    assert.equal(run("london", { sort: "time" }).relevance, true); // the view decides; the model still reports it is a typed name
+  });
+
+  test("across the US, European and Lord Howe clock changes the order follows each zone's real clock, checked against Intl", () => {
+    const wall = (zone, ms) => {
+      const parts = new Intl.DateTimeFormat("en-US", { timeZone: zone, hourCycle: "h23", hour: "2-digit", minute: "2-digit" }).formatToParts(ms);
+      return Number(parts.find((p) => p.type === "hour").value) * 60 + Number(parts.find((p) => p.type === "minute").value);
+    };
+    let instants = 0;
+    for (const start of [Date.UTC(2026, 9, 25, 0, 0), Date.UTC(2026, 10, 1, 4, 0), Date.UTC(2026, 3, 4, 14, 0)]) {
+      for (let t = 0; t < 10; t++) {
+        const nowMs = start + t * 45 * 60000;
+        const rows = runExplore({ query: "", nowMs, countryData }).groups[0].rows;
+        for (let i = 0; i < rows.length; i++) {
+          assert.equal(rows[i].local, wall(rows[i].place.zone, nowMs), `${rows[i].place.title} at ${new Date(nowMs).toISOString()}`);
+          if (i > 0) assert.ok(rows[i - 1].local <= rows[i].local);
+        }
+        instants++;
+      }
+    }
+    assert.equal(instants, 30);
+  });
+
+  test("a time query keeps its own order: a range from its start, so a range across midnight starts at its start", () => {
+    const rows = run("21:00-05:59").groups[0].rows;
+    const keys = rows.map((r) => (r.local - 1260 + 1440) % 1440);
+    for (let i = 1; i < keys.length; i++) assert.ok(keys[i - 1] <= keys[i]);
+  });
+
+  test("region choices are labels over the data regions: Americas is North and South America, Australia & Pacific is Oceania", () => {
+    const americas = run("", { region: "Americas" });
+    assert.equal(americas.counts.cities, 53);
+    assert.equal(americas.counts.others, 112);
+    assert.ok(americas.groups[0].rows.every((r) => ["North America", "South America"].includes(r.place.region)));
+    const pacific = run("", { region: "Australia & Pacific" });
+    assert.equal(pacific.counts.cities, 22);
+    assert.equal(pacific.counts.others, 29);
+    // a data region's own name still works as a filter
+    assert.equal(run("", { region: "Oceania" }).counts.cities, 22);
+    assert.equal(run("", { region: "North America" }).counts.cities, 40);
+    assert.equal(REGION_CHOICES.join("|"), "Africa|Asia|Europe|Americas|Australia & Pacific");
+    assert.deepEqual(regionDataFor("Americas"), ["North America", "South America"]);
+    assert.deepEqual(regionDataFor(""), []);
+    assert.equal(regionLabel("Oceania"), "Australia & Pacific");
+    assert.equal(regionLabel("South America"), "Americas");
+  });
+
+  test("the region choices cover every listed city once; unclassified other zones appear only under all regions", () => {
+    const all = run("");
+    assert.equal(all.counts.cities, 195);
+    const sum = (field) => REGION_CHOICES.reduce((n, region) => n + run("", { region }).counts[field], 0);
+    assert.equal(sum("cities"), 195);
+    const unclassified = all.others.rows.filter((r) => !r.place.region).length;
+    assert.ok(unclassified > 0);
+    assert.equal(sum("others"), all.counts.others - unclassified);
+  });
+
+  test("a region and a country combine with the query by AND in both views", () => {
+    const a = run("", { region: "Americas", country: "US" });
+    assert.ok(a.counts.cities > 0 && a.groups[0].rows.every((r) => r.place.country === "US"));
+    assert.ok(a.others.rows.every((r) => r.place.country === "US"));
+    assert.equal(run("tokyo", { region: "Americas" }).counts.places, 0);
+  });
+
+  test("a continent heading uses the visible label; the typed word oceania still works", () => {
+    assert.match(run("oceania").headings[0], /^Australia & Pacific · 22 listed cities/);
+    assert.match(run("Oceania").announce, /^Australia & Pacific/);
+    assert.match(run("americas").headings[0], /^Americas · 53 listed cities/);
+    assert.match(run("north america").headings[0], /^North America · 40 listed cities/);
+    assert.match(run("asia").headings[0], /^Asia · /);
+  });
+
+  test("no result set is ever marked as expanded: the view never opens the other zones by itself", () => {
+    for (const query of ["", "India", "Australia", "America/Indiana", "8 pm", "evening"]) assert.equal("expanded" in run(query).others, false, query);
+  });
+
+  test("each view has its own sentence for no match; invalid and abbreviation queries have none", () => {
+    const none = run("xyzzy");
+    assert.equal(none.noneIn.cities, 'No listed city matches "xyzzy".');
+    assert.equal(none.noneIn.others, 'No other time zone matches "xyzzy".');
+    assert.match(run("xyzzy", { region: "Asia" }).noneIn.cities, /in Asia\.$/);
+    assert.match(run("xyzzy", { region: "Americas", country: "US" }).noneIn.cities, /in United States, Americas\.$/);
+    const time = run("08:00-08:01", { hour12: true });
+    assert.equal(time.counts.places, 0);
+    assert.match(time.noneIn.cities, /^No listed city is currently between 8:00 AM and 8:01 AM/);
+    assert.match(time.noneIn.others, /^No other time zone is currently between 8:00 AM and 8:01 AM/);
+    assert.equal(run("25:00").noneIn ?? null, null);
+    assert.equal(run("ist").noneIn ?? null, null);
+  });
+
+  test("named periods give the listed cities and other zones whose local clock is inside the interval, across a whole day", () => {
+    const spans = { "before noon": [0, 719], "12 pm onward": [720, 1439], morning: [360, 719], afternoon: [720, 1079], evening: [1080, 1259], night: [1260, 359] };
+    for (const [phrase, [start, end]] of Object.entries(spans)) {
+      const inside = (m) => (start <= end ? m >= start && m <= end : m >= start || m <= end);
+      for (let t = 0; t < 24 * 60; t += 53) {
+        const a = runExplore({ query: phrase, nowMs: NOW + t * 60000, countryData });
+        assert.equal(a.mode, "time", phrase);
+        assert.equal(a.timeKind, "named", phrase);
+        assert.equal(a.groups.length, 1);
+        for (const r of [...a.groups[0].rows, ...a.others.rows]) assert.ok(inside(r.local), `${phrase}: ${r.place.title} at ${r.local}`);
+        const outside = snapshotPlaces(cityPlaces().list, NOW + t * 60000).filter((r) => !inside(r.local)).length;
+        assert.equal(a.counts.cities + outside, 195, `${phrase}: every city is inside or outside`);
+      }
+    }
+  });
+
+  test("a named period equals the period or range it stands for, and a fragment is a name search", () => {
+    const same = (phrase, query) => assert.deepEqual(titles(run(phrase)), titles(run(query)), phrase);
+    same("before noon", "am");
+    same("12 PM onward", "pm");
+    same("Evening", "18:00-20:59");
+    same("  night ", "21:00-05:59");
+    same("Morning", "06:00-11:59");
+    same("afternoon", "12:00-17:59");
+    for (const fragment of ["even", "morn", "after", "before", "night shift"]) assert.notEqual(run(fragment).timeKind, "named", fragment);
+    assert.equal(run("evening").empty?.widenTo ?? null, null);
+  });
+
+  test("the headings, in 12-hour and 24-hour display, say exactly which interval", () => {
+    assert.equal(run("evening", { hour12: true }).headings[0], "Places where it is currently evening (6:00 PM to 8:59 PM)");
+    assert.equal(run("evening", { hour12: false }).headings[0], "Places where it is currently evening (18:00 to 20:59)");
   });
 });

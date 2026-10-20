@@ -735,6 +735,29 @@
 
 }
 
+.wc-shortcuts {
+
+    margin-top: 12px;
+
+}
+
+.wc-shortcuts__label {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 700;
+
+}
+
+.wc-shortcuts .wc-chips {
+
+    margin-top: 8px;
+
+}
+
 .wc-chips {
 
     display: flex;
@@ -765,6 +788,30 @@
 
 }
 
+/* the active shortcut: a thicker border and a tick as well as a tint, never colour alone */
+.wc-chip[aria-pressed="true"] {
+
+    padding: 5px 13px;
+
+    border: 2px solid var(--color-action-green);
+
+    background: var(--color-action-green-soft);
+
+}
+
+.wc-chip[aria-pressed="true"]::before {
+
+    content: "\2713\00a0";
+    content: "\2713\00a0" / "";
+
+}
+
+.wc-chip--more {
+
+    border-style: dashed;
+
+}
+
 .wc-chip:hover {
 
     border-color: var(--color-action-green);
@@ -777,7 +824,6 @@
 .wc-tab:focus-visible,
 .wc-xrow__add:focus-visible,
 .wc-filters-toggle:focus-visible,
-.wc-others__toggle:focus-visible,
 .wc-x-stale:focus-visible {
 
     outline: 3px solid var(--color-action-green);
@@ -833,6 +879,165 @@
     gap: 16px;
 
     min-width: 0;
+
+}
+
+/* ---------- Explore: the results selector (Cities or Other time zones) ---------- */
+
+.wc-show {
+
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+
+}
+
+.wc-show__legend {
+
+    margin: 0 0 6px;
+    padding: 0;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 700;
+
+}
+
+.wc-show__choices {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+
+}
+
+.wc-show__choice {
+
+    position: relative;
+
+    display: block;
+
+    min-width: 0;
+
+}
+
+/* the native radio covers its segment, so the segment is the target and the keyboard and arrow keys are the browser's own */
+.wc-show__choice input {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    margin: 0;
+
+    opacity: 0;
+
+    cursor: pointer;
+
+}
+
+.wc-show__text {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 48px;
+    padding: 6px 10px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+
+    overflow-wrap: break-word;
+
+}
+
+.wc-show__choice input:checked + .wc-show__text {
+
+    padding: 5px 9px;
+
+    border: 2px solid var(--color-action-green);
+
+    background: var(--color-action-green-soft);
+
+}
+
+/* a tick as well as the border and tint: the choice is never carried by colour alone (the radio itself says "checked") */
+.wc-show__choice input:checked + .wc-show__text::before {
+
+    content: "\2713\00a0";
+    content: "\2713\00a0" / "";
+
+}
+
+.wc-show__choice input:focus-visible + .wc-show__text {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+/* ---------- Explore: the active line and Reset all ---------- */
+
+.wc-x-active {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2px 12px;
+
+}
+
+.wc-x-active__text {
+
+    flex: 1 1 160px;
+
+    min-width: 0;
+    margin: 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+
+}
+
+/* a long search text is clipped with an ellipsis on this line (it is still all there for a screen reader, and in the search field); the Region and the Country are never clipped */
+.wc-x-active__query {
+
+    display: inline-block;
+
+    max-width: min(100%, 18em);
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    vertical-align: bottom;
+
+}
+
+.wc-x-reset {
+
+    min-height: 44px;
+    padding: 0 8px;
 
 }
 
@@ -935,6 +1140,12 @@
 .wc-x-notes:empty {
 
     display: none;
+
+}
+
+.wc-x-others-note {
+
+    color: #475467;
 
 }
 
@@ -1204,57 +1415,9 @@
 
 }
 
-/* ---------- Explore: other time zones ---------- */
+/* ---------- Explore: the other time zones list ---------- */
 
-.wc-others {
-
-    display: grid;
-    gap: 8px;
-
-}
-
-.wc-others__toggle {
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-
-    width: 100%;
-    min-height: 48px;
-    padding: 8px 12px;
-
-    border: 1px solid #d0d5dd;
-    border-radius: 10px;
-
-    background: var(--color-gray-50);
-
-    color: var(--color-ink);
-
-    font: inherit;
-    font-size: 15px;
-    font-weight: 700;
-    text-align: left;
-
-    cursor: pointer;
-
-}
-
-.wc-others__toggle:disabled {
-
-    color: var(--color-control-disabled-text);
-
-    cursor: default;
-
-}
-
-.wc-others__toggle[aria-expanded="true"] span:last-child {
-
-    transform: rotate(180deg);
-
-}
-
-.wc-others__body {
+.wc-x-others {
 
     display: grid;
     gap: 8px;
@@ -1321,16 +1484,6 @@
     .wc-x-list {
 
         grid-template-columns: repeat(3, minmax(0, 1fr));
-
-    }
-
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-    .wc-others__toggle[aria-expanded="true"] span:last-child {
-
-        transform: none;
 
     }
 

@@ -16,6 +16,8 @@
                 two groups; "noon" and "midnight" are the hours 12:00 to
                 12:59 and 00:00 to 00:59
      period     "am" is 00:00 to 11:59, "pm" is 12:00 to 23:59
+     named      "before noon", "12 pm onward", "morning", "afternoon", "evening" and "night": the whole query must be
+                exactly one of these phrases (section 22.5); a fragment such as "even" is not a time query
      time       "8:30 am": around 08:30, by default within 15 minutes,
                 both ends included, wrapping across midnight; never
                 widened silently
@@ -35,6 +37,21 @@ export const widerTolerance = (tolerance) =>
     TOLERANCES.find((value) => value > tolerance) ?? null;
 
 const DAY = 1440;
+
+/*
+ * The named periods (section 22.5): a phrase, its interval (minutes of the local day, both ends included, may wrap), and
+ * the words of its heading. They overlap on purpose. The phrase must be the WHOLE normalised query.
+ */
+const clock = (minute, hour12) => formatMinute(minute, hour12);
+
+export const NAMED_PERIODS = Object.freeze([
+    { id: "before-noon", label: "Before noon", phrase: "before noon", start: 0, end: 719, words: "before noon", span: (h) => `midnight to ${clock(719, h)}` },
+    { id: "noon-onward", label: "12 PM onward", phrase: "12 pm onward", start: 720, end: 1439, words: "12 PM onward", span: (h) => `noon to ${clock(1439, h)}` },
+    { id: "morning", label: "Morning", phrase: "morning", start: 360, end: 719, words: "morning", span: (h) => `${clock(360, h)} to ${clock(719, h)}` },
+    { id: "afternoon", label: "Afternoon", phrase: "afternoon", start: 720, end: 1079, words: "afternoon", span: (h) => `${clock(720, h)} to ${clock(1079, h)}` },
+    { id: "evening", label: "Evening", phrase: "evening", start: 1080, end: 1259, words: "evening", span: (h) => `${clock(1080, h)} to ${clock(1259, h)}` },
+    { id: "night", label: "Night", phrase: "night", start: 1260, end: 359, words: "night", span: (h) => `${clock(1260, h)} to ${clock(359, h)}, crossing midnight` }
+]);
 
 /* lower case, one dash, a.m. as am, spaces collapsed */
 export function normalizeQuery(raw) {
@@ -111,6 +128,7 @@ function readAtom(text) {
  *   { kind: "time", minutes: [m] or [m, m+720] }            a time with minutes (two readings when bare)
  *   { kind: "hour", hours: [h] or [h, h+12], word }         an hour (two readings when bare)
  *   { kind: "period", period: "am" | "pm" }
+ *   { kind: "named", id }                                   one of the NAMED_PERIODS, as a whole query
  *   { kind: "invalid", hint }                               looks like a time or offset but is not one
  */
 export function parseTimeQuery(raw) {
@@ -196,6 +214,13 @@ export function parseTimeQuery(raw) {
     /* 6: AM or PM on its own */
     if (q === "am" || q === "pm") {
         return { kind: "period", period: q };
+    }
+
+    /* 6a: a named period, only as the whole query ("12 pm onward" would otherwise read as an invalid time) */
+    const named = NAMED_PERIODS.find((period) => period.phrase === q);
+
+    if (named) {
+        return { kind: "named", id: named.id };
     }
 
     /* 7: it starts like a time or an offset, or is noon or midnight with something after it, but is none */
@@ -291,6 +316,16 @@ export function buildGroups(parsed, tolerance = DEFAULT_TOLERANCE) {
             return [parsed.period === "am"
                 ? windowGroup("am", 0, 719, (hour12) => `Places where it is currently AM (midnight to ${formatMinute(719, hour12)})`, 0)
                 : windowGroup("pm", 720, 1439, (hour12) => `Places where it is currently PM (noon to ${formatMinute(1439, hour12)})`, 720)];
+
+        case "named": {
+
+            const named = NAMED_PERIODS.find((period) => period.id === parsed.id);
+
+            return [windowGroup(`named-${named.id}`, named.start, named.end,
+                (hour12) => `Places where it is currently ${named.words} (${named.span(hour12)})`,
+                named.start)];
+
+        }
 
         case "time":
             return parsed.minutes.map((target) => {

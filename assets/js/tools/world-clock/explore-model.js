@@ -54,6 +54,32 @@ import {
 
 export const SORTS = Object.freeze(["city", "country", "time", "offset"]);
 
+/*
+ * The region choices a visitor sees (section 22.6). They are labels over the directory's own six data regions, which
+ * are not renamed: "Americas" holds North America and South America, "Australia & Pacific" is Oceania.
+ */
+export const REGION_GROUPS = Object.freeze({
+    "Africa": Object.freeze(["Africa"]),
+    "Asia": Object.freeze(["Asia"]),
+    "Europe": Object.freeze(["Europe"]),
+    "Americas": Object.freeze(["North America", "South America"]),
+    "Australia & Pacific": Object.freeze(["Oceania"])
+});
+
+export const REGION_CHOICES = Object.freeze(Object.keys(REGION_GROUPS));
+
+/* the data regions a choice stands for; a data region's own name stands for itself; nothing chosen is an empty list */
+export const regionDataFor = (choice) =>
+    !choice ? [] : Object.hasOwn(REGION_GROUPS, choice) ? REGION_GROUPS[choice] : [choice];
+
+/* the visible label of a data region, or of a label */
+export const regionLabel = (name) =>
+    REGION_CHOICES.find((choice) => REGION_GROUPS[choice].includes(name)) ?? name;
+
+/* a continent heading in the visible words ("Oceania" is shown as "Australia & Pacific") */
+const relabel = (text) =>
+    text.replace("North America and South America", "Americas").replace("Oceania", "Australia & Pacific");
+
 const MAX_SUGGESTIONS = 5;
 
 /* a suggestion must be within this many minutes of the request, or there is none */
@@ -244,7 +270,8 @@ function orderRows(rows, sort, groupKey, keep = false) {
         return rows.sort((a, b) => groupKey(a.local, a.offsetSeconds) - groupKey(b.local, b.offsetSeconds) || COMPARERS.city(a, b));
     }
 
-    return rows.sort(COMPARERS.city);
+    /* ordinary browsing: the local time of day, 00:00 to 23:59, ties by city (section 22.4) */
+    return rows.sort(COMPARERS.time);
 
 }
 
@@ -272,6 +299,29 @@ function noneSentence(heading) {
 
 }
 
+/* what each view says when it has no match (section 22.3): { cities, others } */
+function noneMessages(headings, raw, region, country) {
+
+    if (headings) {
+
+        const none = headings.map(noneSentence).join(" ");
+
+        return { cities: none, others: none.replace(/No listed city/g, "No other time zone") };
+
+    }
+
+    const typed = raw.trim();
+
+    const clipped = typed.length > 40 ? `${typed.slice(0, 40)}…` : typed;
+
+    const scope = [country ? countryLabel(country) : "", region ? regionLabel(region) : ""].filter(Boolean);
+
+    const about = `${typed ? ` "${clipped}"` : ""}${scope.length ? ` in ${scope.join(", ")}` : typed ? "" : " the current filters"}`;
+
+    return { cities: `No listed city matches${about}.`, others: `No other time zone matches${about}.` };
+
+}
+
 const wording = (n, heading) =>
     `${places(n)} ${lowerFirst(heading).replace(/^places /, "")}`;
 
@@ -280,17 +330,18 @@ const wording = (n, heading) =>
 /*
  * runExplore: the whole answer for one state of the page.
  * options: { query, region, country, sort, tolerance, nowMs, countryData, directory, hour12 }
- *   sort: "" (not chosen: the query's own order, else City) or one of SORTS
+ *   sort: "" (not chosen: the query's own order, else the local time of day) or one of SORTS
  * returns {
  *   mode,          "all" | "time" | "invalid" | "abbreviation" | "region" | "country" | "cities" | "none"
- *   timeKind,      "hour" | "time" | "range" | "period" | "offset" | null
+ *   timeKind,      "hour" | "time" | "range" | "period" | "named" | "offset" | null
  *   groups,        [{ id, heading, rows }]   the listed cities that match, in groups (two for a bare hour)
- *   others,        { rows, count, expanded } the other time zones that match
+ *   others,        { rows, count }           the other time zones that match
  *   counts,        { cities, zones, others, places }
  *   headings,      [heading]                 one per group, or the mode's own heading
  *   notes,         [text]                    explanations shown with the results
  *   hint,          text                      for an invalid query
  *   countLine, announce, instant, sort, tolerance,
+ *   noneIn         { cities, others } what each view says when it has no match (null for an invalid or abbreviation query)
  *   empty          null, or { message, widenTo, suggestions }
  * }
  */
@@ -314,14 +365,16 @@ export function runExplore(options) {
 
     const others = otherZonePlaces(countryData, directory);
 
+    const regionList = regionDataFor(region);
+
     const wanted = (place) =>
-        (!region || place.region === region) && (!country || place.country === country);
+        (regionList.length === 0 || regionList.includes(place.region)) && (!country || place.country === country);
 
     const result = {
         mode: "all",
         timeKind: null,
         groups: [],
-        others: { rows: [], count: 0, expanded: false },
+        others: { rows: [], count: 0 },
         counts: { cities: 0, zones: 0, others: 0, places: 0 },
         headings: [],
         notes: [],
@@ -346,6 +399,10 @@ export function runExplore(options) {
         result.others.count = result.others.rows.length;
 
         result.countLine = countLine(result.counts.cities, result.counts.zones, result.counts.others);
+
+        if (result.mode !== "invalid" && result.mode !== "abbreviation") {
+            result.noneIn = noneMessages(result.mode === "time" ? result.headings : null, raw, region, country);
+        }
 
         return result;
 
@@ -418,9 +475,7 @@ export function runExplore(options) {
             ? wording(total, result.headings[0])
             : `${places(total)}, in ${result.headings.length} groups`;
 
-        result.others.expanded = result.counts.cities === 0 && result.counts.others > 0;
-
-        /* no LISTED city matches: say so in the heading's own words, even when other time zones match (they are shown, expanded, below) */
+        /* no LISTED city matches: say so in the heading's own words, even when other time zones match (the view offers the other time zones, it never switches to them) */
         if (result.counts.cities === 0) {
 
             const none = result.headings.map(noneSentence).join(" ");
@@ -506,19 +561,15 @@ export function runExplore(options) {
     result.headings = found.header ? [found.header.replace(/ \(listed cities only\)$/, "")] : [];
 
     if (found.mode === "region" || found.mode === "country") {
-        result.headings = [found.header];
+        result.headings = [relabel(found.header)];
     }
 
     finish();
 
     const total = result.counts.places;
 
-    const asksForZones = found.mode === "country" || /[/_]/.test(raw) || Boolean(country);
-
-    result.others.expanded = result.counts.others > 0 && (asksForZones || result.counts.cities === 0);
-
     result.announce = found.header
-        ? `${found.header}: ${places(total)}`
+        ? `${relabel(found.header)}: ${places(total)}`
         : raw.trim() === "" ? places(total) : `${places(total)} for "${raw.trim().slice(0, 30)}"`;
 
     if (total === 0 && found.mode !== "all") {

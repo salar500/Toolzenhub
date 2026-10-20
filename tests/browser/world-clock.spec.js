@@ -23,7 +23,21 @@ const cards = (page) => page.locator("#wc-board > .wc-card");
 const card = (page, title) => cards(page).filter({ has: page.locator(".wc-card__title", { hasText: new RegExp(`^${title}$`) }) });
 const live = (page) => page.locator("#wc-live");
 const search = (page) => page.locator("#wc-search");
-const rows = (page) => page.locator(".wc-x-groups .wc-xrow, .wc-others__body .wc-xrow");
+const rows = (page) => page.locator(".wc-x-groups .wc-xrow, .wc-x-others .wc-xrow");
+const othersRows = (page) => page.locator(".wc-x-others .wc-xrow");
+const showCities = (page) => page.locator("#wc-show-cities");
+const showOthers = (page) => page.locator("#wc-show-others");
+const showLabel = (page, which) => page.locator(".wc-show__choice", { has: page.locator(`#wc-show-${which}`) }).locator(".wc-show__text");
+const chooseOthers = (page) => showOthers(page).check();
+const chooseCities = (page) => showCities(page).check();
+const resetAll = (page) => page.getByRole("button", { name: "Reset all" });
+const shortcut = (page, label) => page.locator(`[data-shortcut="${label}"]`);
+/* the local clock of a row as minutes of the day, from the text it shows ("Tue 1:20 AM", "7:50 PM", "13:05") */
+const minuteOf = (text) => {
+  const m = /(\d{1,2}):(\d\d)(?:\s*(AM|PM))?/.exec(text);
+  const h = Number(m[1]) % (m[3] ? 12 : 24) + (m[3] === "PM" ? 12 : 0);
+  return h * 60 + Number(m[2]);
+};
 const listed = (page) => page.locator(".wc-x-groups .wc-xrow");
 const row = (page, name) => page.locator(".wc-xrow").filter({ has: page.locator(".wc-xrow__main", { hasText: new RegExp(`^${name}$`) }) }).first();
 const names = async (loc) => (await loc.locator(".wc-xrow__main").allTextContents()).map((t) => t.trim());
@@ -103,17 +117,99 @@ test.describe("World Clock: views and the page", () => {
     expectClean(watch);
   });
 
-  test("the six example chips run a search and never add a clock", async ({ page, go }) => {
+  test("the time shortcuts: four first and two under More times; each writes its own label into the field, runs the search, shows its state, and never adds a clock", async ({ page, go }) => {
     await openExplore(page, go);
-    const chips = page.locator(".wc-chip");
-    expect((await chips.allTextContents()).map((t) => t.trim())).toEqual(["8 PM", "AM", "UTC+05:30", "Australia", "Europe", "Mumbai"]);
-    await chips.filter({ hasText: "UTC+05:30" }).click();
-    await expect(search(page)).toHaveValue("UTC+05:30");
-    await expect(heading(page)).toHaveText("Places currently using UTC+05:30");
-    await chips.filter({ hasText: "Mumbai" }).click();
-    await expect(names(page.locator(".wc-x-groups"))).resolves.toEqual(["Mumbai"]);
+    await expect(page.locator("#wc-shortcuts-label")).toHaveText("Find places where it is now");
+    await expect(page.locator(".wc-shortcuts")).toHaveAttribute("role", "group");
+    expect((await page.locator("[data-shortcut]:visible").allTextContents()).map((t) => t.trim())).toEqual(["Before noon", "12 PM onward", "Evening", "Night"]);
+    const more = page.locator("#wc-more-toggle");
+    await expect(more).toHaveText("More times");
+    await expect(more).toHaveAttribute("aria-expanded", "false");
+    await expect(page.locator("#wc-more-times")).toBeHidden();
+    await more.click();
+    await expect(more).toHaveAttribute("aria-expanded", "true");
+    expect((await page.locator("#wc-more-times [data-shortcut]").allTextContents()).map((t) => t.trim())).toEqual(["Morning", "Afternoon"]);
+    const evening = shortcut(page, "Evening");
+    await expect(evening).toHaveAttribute("aria-pressed", "false");
+    await evening.click();
+    await expect(search(page)).toHaveValue("Evening");
+    await expect(evening).toHaveAttribute("aria-pressed", "true");
+    await expect(heading(page)).toHaveText("Places where it is currently evening (6:00 PM to 8:59 PM)");
+    await expect(heading(page)).not.toContainText("18:00");
+    await expect(evening).toBeFocused();
+    await shortcut(page, "Night").click();
+    await expect(search(page)).toHaveValue("Night");
+    await expect(evening).toHaveAttribute("aria-pressed", "false");
+    await expect(heading(page)).toHaveText("Places where it is currently night (9:00 PM to 5:59 AM, crossing midnight)");
+    await shortcut(page, "Night").click(); // pressing the active shortcut again clears the field
+    await expect(search(page)).toHaveValue("");
+    await expect(shortcut(page, "Night")).toHaveAttribute("aria-pressed", "false");
+    await expect(heading(page)).toHaveText("All listed cities");
     expect(await titles(page)).toEqual(["Your time", "New York", "London", "Dubai", "Singapore"]);
     await expect(clocksTab(page)).toHaveText("My clocks (4)");
+  });
+
+  test("the headings say the exact interval for all six shortcuts, and a shortcut shows the 24-hour reading when that switch is on", async ({ page, go }) => {
+    await openExplore(page, go);
+    const expected = {
+      "Before noon": "Places where it is currently before noon (midnight to 11:59 AM)",
+      "12 PM onward": "Places where it is currently 12 PM onward (noon to 11:59 PM)",
+      "Morning": "Places where it is currently morning (6:00 AM to 11:59 AM)",
+      "Afternoon": "Places where it is currently afternoon (12:00 PM to 5:59 PM)",
+      "Evening": "Places where it is currently evening (6:00 PM to 8:59 PM)",
+      "Night": "Places where it is currently night (9:00 PM to 5:59 AM, crossing midnight)"
+    };
+    await page.locator("#wc-more-toggle").click();
+    for (const [label, text] of Object.entries(expected)) {
+      await shortcut(page, label).click();
+      await expect(heading(page), label).toHaveText(text);
+    }
+  });
+
+  test("a typed named period equals its shortcut in any case and spacing; a fragment or an extra word is only a name search; the existing hour and period searches are unchanged", async ({ page, go }) => {
+    await openExplore(page, go);
+    await type(page, "  EVENING ");
+    await expect(heading(page)).toHaveText("Places where it is currently evening (6:00 PM to 8:59 PM)");
+    await expect(shortcut(page, "Evening")).toHaveAttribute("aria-pressed", "true");
+    const viaPhrase = await names(page.locator(".wc-x-groups"));
+    await shortcut(page, "Evening").click(); // pressed: clears
+    await shortcut(page, "Evening").click();
+    expect(await names(page.locator(".wc-x-groups"))).toEqual(viaPhrase);
+    for (const fragment of ["even", "morn", "after", "before", "night shift", "evening star"]) {
+      await type(page, fragment);
+      await expect(heading(page), fragment).not.toContainText("currently");
+      await expect(page.locator("[data-shortcut][aria-pressed='true']"), fragment).toHaveCount(0);
+    }
+    await type(page, "12 pm onward");
+    await expect(heading(page)).toHaveText("Places where it is currently 12 PM onward (noon to 11:59 PM)");
+    await type(page, "12 pm");
+    await expect(heading(page)).toHaveText("Places currently between 12:00 PM and 12:59 PM");
+    await type(page, "PM");
+    await expect(heading(page)).toHaveText("Places where it is currently PM (noon to 11:59 PM)");
+    await type(page, "before noon");
+    await expect(countLine(page)).toContainText("73 listed cities"); // the same cities as AM
+  });
+
+  test("a shortcut combines with Region and Country, Clear empties only the shortcut, and Escape clears it too", async ({ page, go }) => {
+    await openExplore(page, go);
+    await page.locator("#wc-filters-toggle").click();
+    await page.locator("#wc-region").selectOption("Asia");
+    await shortcut(page, "Evening").click();
+    const asiaEvening = Number((await countLine(page).innerText()).match(/^(\d+)/)[1]);
+    await shortcut(page, "Evening").click();
+    const asia = Number((await countLine(page).innerText()).match(/^(\d+)/)[1]);
+    expect(asia).toBe(56);
+    expect(asiaEvening).toBeLessThan(asia);
+    await shortcut(page, "Evening").click();
+    await page.locator("#wc-search-clear").click();
+    await expect(search(page)).toHaveValue("");
+    await expect(shortcut(page, "Evening")).toHaveAttribute("aria-pressed", "false");
+    await expect(page.locator("#wc-region")).toHaveValue("Asia");
+    await shortcut(page, "Night").click();
+    await search(page).focus();
+    await page.keyboard.press("Escape");
+    await expect(search(page)).toHaveValue("");
+    await expect(shortcut(page, "Night")).toHaveAttribute("aria-pressed", "false");
   });
 
   test("a valid shared address opens My clocks; none, or none valid, opens Explore; the choice of view is not remembered or put in the address", async ({ page, go }) => {
@@ -196,14 +292,21 @@ test.describe("World Clock: views and the page", () => {
 });
 
 test.describe("World Clock: the Explore directory", () => {
-  test("every one of the 195 cities is listed once, with its country, time, offset and a day or night word; the default order is City A to Z", async ({ page, go }) => {
+  test("every one of the 195 cities is listed once, with its country, time, offset and a day or night word; the default order is the local time of day", async ({ page, go }) => {
     await openExplore(page, go);
     await expect(listed(page)).toHaveCount(195);
     const keys = await listed(page).evaluateAll((lis) => lis.map((li) => li.dataset.key));
     expect(new Set(keys).size).toBe(195);
-    const mains = await names(page.locator(".wc-x-groups"));
     const plain = (t) => t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-    expect(mains.map(plain)).toEqual([...mains.map(plain)].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0)));
+    const clocks = (await listed(page).locator(".wc-xrow__clock").allTextContents()).map(minuteOf);
+    const mains = (await names(page.locator(".wc-x-groups"))).map(plain);
+    expect(clocks.length).toBe(195);
+    for (let i = 1; i < clocks.length; i += 1) {
+      expect(clocks[i - 1], `row ${i}: ${mains[i - 1]} then ${mains[i]}`).toBeLessThanOrEqual(clocks[i]);
+      if (clocks[i - 1] === clocks[i]) expect(mains[i - 1] <= mains[i], `tie ${mains[i - 1]} / ${mains[i]}`).toBe(true);
+    }
+    expect(clocks[0]).toBeLessThan(180); // starts just after midnight somewhere
+    expect(clocks.at(-1)).toBeGreaterThan(1200); // and ends before it somewhere
     const sydney = row(page, "Sydney");
     await expect(sydney.locator(".wc-xrow__sub")).toHaveText("Australia");
     await expect(sydney.locator(".wc-xrow__clock")).toHaveText("Tue 1:20 AM");
@@ -211,30 +314,93 @@ test.describe("World Clock: the Explore directory", () => {
     await expect(sydney.locator(".wc-xrow__word")).toHaveText("Night-time");
     await expect(row(page, "London").locator(".wc-xrow__word")).toHaveText("Daytime");
     await expect(row(page, "Kolkata").locator(".wc-xrow__clock")).toHaveText("7:50 PM"); // same date as yours: no weekday
-    await expect(page.locator("#wc-sort")).toHaveValue("city");
+    await expect(page.locator("#wc-sort")).toHaveValue("time");
+    expect(await page.locator("#wc-sort option").allTextContents()).toEqual(["Local time (00:00 to 23:59)", "City (A to Z)", "Country", "UTC offset"]);
     for (const li of await page.locator(".wc-xrow").all()) await expect(li.locator(".wc-xrow__add")).toHaveAttribute("aria-label", /^(Add .+, .+|.+ is on your board)$/);
   });
 
-  test("other time zones are a separate, collapsed group with their own count; opening it lists zones no listed city uses, each addable", async ({ page, go }) => {
+  test("the results selector: Cities (195) and Other time zones with live counts; only the chosen list is drawn; zones no listed city uses are each addable", async ({ page, go }) => {
     await openExplore(page, go);
-    const toggle = page.locator(".wc-others__toggle");
-    await expect(toggle).toHaveText(/^Other time zones \(no listed city\): \d+/);
-    await expect(toggle).toHaveAttribute("aria-expanded", "false");
-    await expect(page.locator(".wc-others__body")).toBeHidden();
-    const count = Number((await toggle.innerText()).match(/: (\d+)/)[1]);
+    await expect(page.locator(".wc-show__legend")).toHaveText("Show");
+    await expect(showCities(page)).toBeChecked();
+    await expect(showOthers(page)).not.toBeChecked();
+    await expect(showLabel(page, "cities")).toHaveText(/^Cities \(195\)$/);
+    await expect(showLabel(page, "others")).toHaveText(/^Other time zones \(\d+\)$/);
+    const count = Number((await showLabel(page, "others").innerText()).match(/\((\d+)\)/)[1]);
     expect(count).toBeGreaterThan(200);
     await expect(countLine(page)).toContainText(`plus ${count} other time zones`);
-    await toggle.click();
-    await expect(toggle).toHaveAttribute("aria-expanded", "true");
-    await expect(page.locator(".wc-others__body .wc-xrow").first()).toBeVisible();
-    await expect(page.locator(".wc-others__body .wc-xrow")).toHaveCount(count);
-    await expect(page.locator(".wc-x-groups .wc-xrow")).toHaveCount(195); // the listed cities are not mixed with them
-    await toggle.click();
-    await expect(page.locator(".wc-others__body")).toBeHidden();
+    await expect(page.locator(".wc-others__toggle")).toHaveCount(0); // no collapsible group any more
+    await expect(othersRows(page)).toHaveCount(0); // not drawn until chosen
+    await chooseOthers(page);
+    await expect(othersRows(page).first()).toBeVisible();
+    await expect(othersRows(page)).toHaveCount(count);
+    await expect(page.locator(".wc-x-groups .wc-xrow")).toHaveCount(0); // one list at a time
+    await expect(page.locator(".wc-x-others-note")).toContainText("not a list of every time zone");
+    await expect(page.locator(".wc-x-others-note")).toContainText("zones used by a listed city appear under Cities");
+    const otherClocks = (await othersRows(page).locator(".wc-xrow__clock").allTextContents()).map(minuteOf); // the same default order in this list
+    for (let i = 1; i < otherClocks.length; i += 1) expect(otherClocks[i - 1], `other zone row ${i}`).toBeLessThanOrEqual(otherClocks[i]);
+    await expect(showLabel(page, "cities")).toHaveText(/^Cities \(195\)$/); // both counts stay visible
+    await expect(live(page)).not.toContainText("Showing"); // choosing a list says nothing extra: the radio names its own state
+    await chooseCities(page);
+    await expect(listed(page)).toHaveCount(195);
+    await expect(othersRows(page)).toHaveCount(0);
+    await expect(page.locator(".wc-x-others-note")).toHaveCount(0);
+  });
+
+  test("the selector is a native radio group: one Tab stop, arrow keys, no ARIA tabs of its own, and focus stays on it while the list changes", async ({ page, go }) => {
+    await openExplore(page, go);
+    await expect(page.locator("fieldset.wc-show")).toHaveCount(1);
+    await expect(page.locator("fieldset.wc-show input[type=radio]")).toHaveCount(2);
+    await expect(page.locator("[role=tablist]")).toHaveCount(1); // only Explore / My clocks
+    await showCities(page).focus();
+    await page.keyboard.press("ArrowRight");
+    await expect(showOthers(page)).toBeFocused();
+    await expect(showOthers(page)).toBeChecked();
+    await expect(othersRows(page).first()).toBeVisible();
+    await expect(showOthers(page)).toBeFocused();
+    await page.keyboard.press("ArrowLeft");
+    await expect(showCities(page)).toBeChecked();
+    await expect(listed(page).first()).toBeVisible();
+    await expect(showCities(page)).toBeFocused();
+    for (const target of [showCities(page), showOthers(page)]) expect((await target.boundingBox()).height).toBeGreaterThanOrEqual(44);
+  });
+
+  test("the selection is never changed for the visitor: a query, a country or a filter keeps it, and an empty view offers the other one as a button", async ({ page, go }) => {
+    await openExplore(page, go);
+    await type(page, "indiana knox"); // no listed city, one other time zone
+    await expect(showCities(page)).toBeChecked();
+    await expect(showLabel(page, "cities")).toHaveText("Cities (0)");
+    await expect(showLabel(page, "others")).toHaveText("Other time zones (1)");
+    await expect(page.locator(".wc-x-empty__message")).toHaveText('No listed city matches "indiana knox".');
+    await expect(listed(page)).toHaveCount(0);
+    const offer = page.locator(".wc-x-empty").getByRole("button", { name: "Show 1 other time zone" });
+    await expect(offer).toBeVisible();
+    await offer.click();
+    await expect(showOthers(page)).toBeChecked();
+    await expect(showOthers(page)).toBeFocused();
+    await expect(othersRows(page)).toHaveCount(1);
+    await expect(live(page)).toHaveText("Showing 1 other time zone");
+    // a new query does not switch back by itself, and the other view says so when it has nothing
+    await type(page, "india");
+    await expect(showOthers(page)).toBeChecked();
+    await expect(page.locator(".wc-x-empty__message")).toHaveText('No other time zone matches "india".');
+    await expect(page.locator(".wc-x-empty").getByRole("button", { name: /^Show 8 listed cities$/ })).toBeVisible();
+    await page.locator(".wc-x-empty").getByRole("button", { name: /^Show 8 listed cities$/ }).click();
+    await expect(showCities(page)).toBeChecked();
+    await expect(showCities(page)).toBeFocused();
+    await expect(listed(page)).toHaveCount(8);
+    // a country query used to open the other zones by itself; now only the count tells
+    await type(page, "usa");
+    await expect(showCities(page)).toBeChecked();
+    await expect(showLabel(page, "others")).toHaveText("Other time zones (21)");
+    await expect(othersRows(page)).toHaveCount(0);
   });
 
   test("sorting: City, Country, Local time and UTC offset each order the list; the choice is kept while you search", async ({ page, go }) => {
     await openExplore(page, go);
+    await page.locator("#wc-sort").selectOption("city");
+    const alphabetical = (await names(page.locator(".wc-x-groups"))).map((t) => t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase());
+    expect(alphabetical).toEqual([...alphabetical].sort((a, b) => (a < b ? -1 : a > b ? 1 : 0)));
     await page.locator("#wc-sort").selectOption("offset");
     const offsets = await listed(page).locator(".wc-xrow__offset").allTextContents();
     const num = (t) => (t.includes("−") ? -1 : 1) * (Number(t.slice(4, 6)) * 60 + Number(t.slice(7, 9)));
@@ -249,32 +415,136 @@ test.describe("World Clock: the Explore directory", () => {
     expect(subs.slice(0, 3)).toEqual(["Afghanistan", "Algeria", "American Samoa"]);
     await type(page, "asia");
     await expect(page.locator("#wc-sort")).toHaveValue("country");
+    await chooseOthers(page); // the choice is kept across the two lists too
+    await expect(page.locator("#wc-sort")).toHaveValue("country");
+    await chooseCities(page);
+    await expect(page.locator("#wc-sort")).toHaveValue("country");
   });
 
-  test("filters: region and country combine with the search; Clear filters resets them; the label counts what is active", async ({ page, go }) => {
+  test("a result summary still pending when the visitor changes the list is cancelled, never late or doubled; the next query is announced once", async ({ page, go }) => {
+    await openExplore(page, go);
+    await type(page, "india");
+    await chooseOthers(page); // inside the 700 ms window
+    await page.clock.runFor(1500);
+    await expect(live(page)).not.toContainText("places");
+    await expect(live(page)).not.toContainText("India");
+    await type(page, "usa");
+    await page.clock.runFor(1500);
+    await expect(live(page)).toContainText("United States");
+    await expect(live(page)).toContainText("places");
+    await page.clock.runFor(3000);
+    await expect(live(page)).toContainText("United States"); // still the one message
+  });
+
+  test("filters: Region shows plain labels over the data regions, Region and Country combine with the search and with both lists, and Reset all clears them and returns to Cities; the label counts what is active", async ({ page, go }) => {
     await openExplore(page, go);
     const toggle = page.locator("#wc-filters-toggle");
     await expect(toggle).toHaveText(/^Filters/);
     await expect(page.locator("#wc-filters")).toBeHidden();
+    await expect(resetAll(page)).toBeHidden(); // nothing is active
     await toggle.click();
-    await expect(page.locator("#wc-region option")).toHaveText(["All regions", "Africa", "Asia", "Europe", "North America", "Oceania", "South America"]);
-    await page.locator("#wc-region").selectOption("Oceania");
+    await expect(page.locator("#wc-region option")).toHaveText(["All regions", "Africa", "Asia", "Europe", "Americas", "Australia & Pacific"]);
+    await page.locator("#wc-region").selectOption("Americas");
+    await expect(countLine(page)).toContainText("53 listed cities");
+    await expect(showLabel(page, "cities")).toHaveText("Cities (53)");
+    await expect(showLabel(page, "others")).toHaveText("Other time zones (112)");
+    await page.locator("#wc-region").selectOption("Australia & Pacific");
     await expect(toggle).toHaveText(/Filters \(1\)/);
     await expect(countLine(page)).toContainText("22 listed cities");
+    await expect(showLabel(page, "others")).toHaveText("Other time zones (29)");
+    await expect(page.locator(".wc-x-active__text")).toHaveText("Showing: Australia & Pacific");
     await expect(page.locator("#wc-country")).toBeEnabled();
     await page.locator("#wc-country").selectOption("AU");
     await expect(toggle).toHaveText(/Filters \(2\)/);
     await expect(countLine(page)).toContainText("9 listed cities");
-    await expect(page.locator(".wc-others__toggle")).toHaveAttribute("aria-expanded", "true"); // a country filter shows its other zones
-    await expect(page.locator(".wc-others__body .wc-xrow", { hasText: "Eucla" })).toContainText("Western Australia (Eucla)");
-    await page.locator("#wc-clear-filters, .wc-filters .wc-link-button").first().click();
+    await expect(page.locator(".wc-x-active__text")).toHaveText("Showing: Australia & Pacific · Australia");
+    await expect(showCities(page)).toBeChecked(); // a country filter does not open the other zones
+    await chooseOthers(page);
+    await expect(othersRows(page).filter({ hasText: "Eucla" })).toContainText("Western Australia (Eucla)");
+    // a sort the visitor chose and a query both exist when everything is reset
+    await page.locator("#wc-sort").selectOption("offset");
+    await type(page, "sydney");
+    await resetAll(page).click();
     await expect(toggle).toHaveText(/^Filters(?! \()/);
-    await expect(countLine(page)).toContainText("195 listed cities");
+    await expect(search(page)).toHaveValue("");
+    await expect(search(page)).toBeFocused();
     await expect(page.locator("#wc-region")).toHaveValue("");
+    await expect(showCities(page)).toBeChecked();
+    await expect(countLine(page)).toContainText("195 listed cities");
+    await expect(page.locator("#wc-sort")).toHaveValue("offset"); // the sort preference stays
+    await expect(resetAll(page)).toBeHidden();
     // a filter AND a query
     await page.locator("#wc-region").selectOption("Europe");
     await type(page, "8 pm");
     await expect(countLine(page)).toContainText("0 listed cities");
+  });
+
+  test("Reset all clears the search text or shortcut, Region, Country and the list choice, and keeps the sort, the tolerance, the board and the clock style; Clear search clears only the text", async ({ page, go }) => {
+    await openExplore(page, go);
+    await page.locator("#wc-filters-toggle").click();
+    await page.locator("#wc-region").selectOption("Asia");
+    await page.locator("#wc-sort").selectOption("country");
+    await type(page, "3:07 AM");
+    await page.locator("#wc-tolerance").selectOption("30");
+    await chooseOthers(page);
+    await expect(page.locator(".wc-x-active__text")).toHaveText("Showing: 3:07 AM · Asia");
+    // Clear search: only the text goes
+    await page.locator("#wc-search-clear").click();
+    await expect(page.locator("#wc-region")).toHaveValue("Asia");
+    await expect(showOthers(page)).toBeChecked();
+    await expect(page.locator(".wc-x-active__text")).toHaveText("Showing: Asia");
+    await type(page, "3:07 AM");
+    await page.locator("#wc-tolerance").selectOption("30");
+    await resetAll(page).click();
+    await expect(search(page)).toHaveValue("");
+    await expect(page.locator("#wc-region")).toHaveValue("");
+    await expect(showCities(page)).toBeChecked();
+    await expect(page.locator("#wc-sort")).toHaveValue("country");
+    await expect(page.locator("#wc-tolerance")).toHaveValue("30"); // the tolerance preference is kept
+    await expect(clocksTab(page)).toHaveText("My clocks (4)");
+    await type(page, "3:07 AM");
+    await expect(page.locator("#wc-tolerance")).toHaveValue("15"); // a new query starts at the default window, as before
+    await expect(page.locator(".wc-x-active__text")).toHaveText("Showing: 3:07 AM");
+  });
+
+  test("the active line keeps the whole typed text, the Region and the Country in the page, clips only a long query visually, never overflows, and is absent when nothing is active", async ({ page, go }) => {
+    await openExplore(page, go);
+    await expect(page.locator(".wc-x-active")).toBeHidden();
+    await page.setViewportSize({ width: 320, height: 700 });
+    await page.locator("#wc-filters-toggle").click();
+    await page.locator("#wc-region").selectOption("Asia");
+    await page.locator("#wc-country").selectOption("IN");
+    await type(page, "a very long search text that goes on and on and on and on and on");
+    await expect(page.locator(".wc-x-active__text")).toHaveText("Showing: a very long search text that goes on and on and on and on and on · Asia · India");
+    await expect(page.locator(".wc-x-active__query")).toHaveCSS("text-overflow", "ellipsis");
+    const [queryBox, line] = await Promise.all([page.locator(".wc-x-active__query").boundingBox(), page.locator(".wc-x-active").boundingBox()]);
+    expect(queryBox.width, "the query is clipped to the line").toBeLessThanOrEqual(line.width + 1);
+    for (const item of ["Asia", "India"]) {
+      const box = await page.locator(".wc-x-active__item", { hasText: new RegExp(`^${item}$`) }).boundingBox();
+      expect(box.width, `${item} is shown whole`).toBeGreaterThan(20);
+      expect(box.x + box.width, `${item} stays inside the line`).toBeLessThanOrEqual(line.x + line.width + 1);
+    }
+    await expectNoHorizontalOverflow(page);
+    await resetAll(page).click();
+    await expect(page.locator(".wc-x-active")).toBeHidden();
+    await type(page, "a very long search text that goes on and on");
+    await expect(page.locator(".wc-x-empty__message")).toContainText("No match for");
+    await expect(resetAll(page)).toBeVisible();
+    expect((await resetAll(page).boundingBox()).height).toBeGreaterThanOrEqual(44);
+    await resetAll(page).click();
+    await expect(page.locator(".wc-x-active")).toBeHidden();
+  });
+
+  test("a continent heading uses the visible label: Americas and Australia & Pacific, while oceania, north america and south america are still understood", async ({ page, go }) => {
+    await openExplore(page, go);
+    await type(page, "oceania");
+    await expect(heading(page)).toHaveText("Australia & Pacific · 22 listed cities");
+    await type(page, "americas");
+    await expect(heading(page)).toHaveText("Americas · 53 listed cities");
+    await type(page, "north america");
+    await expect(heading(page)).toHaveText("North America · 40 listed cities");
+    await type(page, "south america");
+    await expect(heading(page)).toHaveText("South America · 13 listed cities");
   });
 });
 
@@ -308,7 +578,8 @@ test.describe("World Clock: searching by name", () => {
     await type(page, "usa");
     await expect(heading(page)).toHaveText("United States · 29 time zones");
     await expect(countLine(page)).toHaveText("20 listed cities in 8 time zones, plus 21 other time zones");
-    await expect(page.locator(".wc-others__toggle")).toHaveAttribute("aria-expanded", "true"); // a country query shows its other zones
+    await expect(showLabel(page, "others")).toHaveText("Other time zones (21)"); // a country query counts its other zones, it does not open them
+    await expect(showCities(page)).toBeChecked();
     await expect(page.locator(".wc-x-groups")).not.toContainText("Jerusalem");
     await expect(page.locator(".wc-x-groups")).not.toContainText("Lusaka");
     await type(page, "UK");
@@ -321,25 +592,27 @@ test.describe("World Clock: searching by name", () => {
     await expect(page.locator("main")).not.toContainText("Indiana");
   });
 
-  test("a continent word lists that region's listed cities and keeps its other zones collapsed, without zone fragments", async ({ page, go }) => {
+  test("a continent word lists that region's listed cities and counts its other zones without opening them, without zone fragments", async ({ page, go }) => {
     await openExplore(page, go);
     await type(page, "asia");
     await expect(heading(page)).toHaveText("Asia · 56 listed cities");
     await expect(listed(page)).toHaveCount(56);
     await expect(page.locator(".wc-x-groups")).not.toContainText("Asia/");
-    await expect(page.locator(".wc-others__toggle")).toHaveAttribute("aria-expanded", "false");
+    await expect(showLabel(page, "others")).toHaveText("Other time zones (47)");
+    await expect(othersRows(page)).toHaveCount(0);
     await type(page, "south america");
     await expect(heading(page)).toHaveText("South America · 13 listed cities");
     await type(page, "americas");
-    await expect(heading(page)).toContainText("North America and South America · 53 listed cities");
+    await expect(heading(page)).toHaveText("Americas · 53 listed cities");
   });
 
-  test("a time zone that no listed city covers is found by its name, shown under other time zones, and can be added", async ({ page, go }) => {
+  test("a time zone that no listed city covers is found by its name, offered under other time zones, and can be added", async ({ page, go }) => {
     await openExplore(page, go);
     await type(page, "indiana knox");
     await expect(countLine(page)).toHaveText("0 listed cities in 0 time zones, plus 1 other time zone");
-    await expect(page.locator(".wc-others__toggle")).toHaveAttribute("aria-expanded", "true");
-    const knox = page.locator(".wc-others__body .wc-xrow").first();
+    await expect(showCities(page)).toBeChecked();
+    await page.locator(".wc-x-empty").getByRole("button", { name: "Show 1 other time zone" }).click();
+    const knox = othersRows(page).first();
     await expect(knox).toContainText("Knox");
     await expect(knox).toContainText("Central - IN (Starke)");
     await expect(knox).toContainText("UTC−05:00");
@@ -393,8 +666,8 @@ test.describe("World Clock: searching by the time it is now", () => {
     await expect(page.locator(".wc-x-updated")).toHaveText("Updated 7:50 PM");
     await expect(row(page, "Kathmandu").locator(".wc-xrow__clock")).toHaveText("8:05 PM");
     await expect(page.locator("#wc-sort")).toHaveValue("time"); // a time query sorts by local time unless you chose otherwise
-    await expect(page.locator(".wc-others__toggle")).toHaveAttribute("aria-expanded", "false"); // collapsed, with its count stated
-    await expect(page.locator(".wc-others__toggle")).toHaveText(/: 5/);
+    await expect(showLabel(page, "others")).toHaveText("Other time zones (5)"); // not drawn, with its count stated
+    await expect(othersRows(page)).toHaveCount(0);
     expect(page.url()).not.toMatch(/[?&]q=|8%20|8+PM/i);
   });
 
@@ -426,7 +699,11 @@ test.describe("World Clock: searching by the time it is now", () => {
     await type(page, "noon");
     await expect(heading(page)).toHaveText("Places currently between 12:00 PM and 12:59 PM");
     await expect(page.locator(".wc-x-empty__message")).toHaveText("No listed city is currently between 12:00 PM and 12:59 PM.");
-    await expect(page.locator(".wc-others__toggle")).toHaveAttribute("aria-expanded", "true"); // other zones match, so they are shown
+    await expect(showCities(page)).toBeChecked(); // other zones match, but the visitor is not switched to them
+    await expect(page.locator(".wc-x-empty").getByRole("button", { name: /^Show \d+ other time zones?$/ })).toBeVisible();
+    await expect(othersRows(page)).toHaveCount(0);
+    await page.locator(".wc-x-empty").getByRole("button", { name: /^Show \d+ other time zones?$/ }).click();
+    await expect(othersRows(page).first()).toBeVisible();
     await expect(page.locator("#wc-tolerance")).toBeHidden(); // no tolerance for an hour
     await type(page, "midnight");
     await expect(heading(page)).toHaveText("Places currently between 12:00 AM and 12:59 AM");
@@ -668,12 +945,12 @@ test.describe("World Clock: progressive rendering, focus and fallbacks", () => {
     await stubIdle(page, () => { window.__idle = []; window.requestIdleCallback = (fn) => { window.__idle.push(fn); return window.__idle.length; }; window.cancelIdleCallback = () => {}; });
     await openExplore(page, go);
     await expect(listed(page)).toHaveCount(40);
-    const top = () => page.locator(".wc-others__toggle").evaluate((el) => el.getBoundingClientRect().top + scrollY);
+    const top = () => page.locator(".wc-x-others").evaluate((el) => el.getBoundingClientRect().top + scrollY);
     const before = await top();
     await listed(page).first().locator(".wc-xrow__add").focus(); // the first keyboard interaction draws everything pending
     await expect(listed(page)).toHaveCount(195);
     const after = await top();
-    expect(Math.abs(after - before), `the toggle moved ${after - before}px`).toBeLessThan(120);
+    expect(Math.abs(after - before), `what is below the list moved ${after - before}px`).toBeLessThan(120);
     await expect(page.locator(".wc-x-groups .wc-x-list")).not.toHaveAttribute("data-pending", /.*/);
   });
 
@@ -776,12 +1053,16 @@ test.describe("World Clock: the Explore module loads separately", () => {
     await expect(listed(page)).toHaveCount(195);
   });
 
-  test("if the country data cannot load, the 195 cities, the search and the time queries still work, and the other-time-zones group says so", async ({ page, go }) => {
+  test("if the country data cannot load, the 195 cities, the search and the time queries still work, and the other-time-zones list says so", async ({ page, go }) => {
     await page.route("**/country-zones.js", (route) => route.abort());
     await openExplore(page, go);
     await page.clock.runFor(3000);
-    await expect(page.locator(".wc-others__toggle")).toContainText("Other time zones could not be loaded");
-    await expect(page.locator(".wc-others__toggle")).toBeDisabled();
+    await expect(showLabel(page, "others")).toHaveText("Other time zones (unavailable)");
+    await expect(showOthers(page)).toBeEnabled(); // still reachable: it says why instead of hiding
+    await chooseOthers(page);
+    await expect(page.locator(".wc-x-others")).toContainText("Other time zones could not be loaded");
+    await expect(othersRows(page)).toHaveCount(0);
+    await chooseCities(page);
     await type(page, "8 PM");
     await expect(countLine(page)).toContainText("4 listed cities");
     await type(page, "australia");
@@ -818,7 +1099,7 @@ test.describe("World Clock: phones and accessibility", () => {
     expect(here.y + here.height).toBeLessThan(844);
     expect(box.y + box.height).toBeLessThan(844);
     await expect(search(page)).toHaveCSS("font-size", "16px");
-    for (const target of await page.locator(".wc-chip, .wc-tab, .wc-input, .wc-check, .wc-xrow__add").all()) {
+    for (const target of await page.locator(".wc-chip, .wc-tab, .wc-input, .wc-check, .wc-xrow__add, .wc-show__text").all()) {
       const b = await target.boundingBox();
       if (b) expect(b.height, "touch target height").toBeGreaterThanOrEqual(44);
     }
@@ -848,7 +1129,7 @@ test.describe("World Clock: phones and accessibility", () => {
 
   test("reduced motion: nothing animates or transitions in the new surface", async ({ page, go }) => {
     await openExplore(page, go);
-    const transitions = await page.locator(".wc-tab, .wc-chip, .wc-xrow, .wc-xrow__add, .wc-others__toggle").evaluateAll((els) => els.map((el) => getComputedStyle(el).transitionDuration + "|" + getComputedStyle(el).animationName));
+    const transitions = await page.locator(".wc-tab, .wc-chip, .wc-xrow, .wc-xrow__add, .wc-show__text").evaluateAll((els) => els.map((el) => getComputedStyle(el).transitionDuration + "|" + getComputedStyle(el).animationName));
     for (const t of transitions) {
       const [duration, animation] = t.split("|");
       expect(Math.max(...duration.split(",").map((d) => parseFloat(d))), t).toBeLessThan(0.001);
@@ -1250,10 +1531,9 @@ test.describe("World Clock: readable rows, Clear search and stable progressive r
   }
 
   async function openOthers(page) {
-    const toggle = page.locator(".wc-others__toggle");
-    await expect(toggle).toBeEnabled();
-    if ((await toggle.getAttribute("aria-expanded")) !== "true") await toggle.click();
-    await expect(toggle).toHaveAttribute("aria-expanded", "true");
+    await expect(showOthers(page)).toBeEnabled();
+    await chooseOthers(page);
+    await expect(showOthers(page)).toBeChecked();
   }
 
   for (const width of [320, 360, 390]) {
@@ -1266,19 +1546,22 @@ test.describe("World Clock: readable rows, Clear search and stable progressive r
         await expectReadableRows(page, listed(page));
         await expectNoHorizontalOverflow(page);
       }
-      // other time zones: opened, and each of its first rows readable
+      // other time zones: chosen, and each of its first rows readable
       await search(page).fill("Australia");
       await openOthers(page);
-      await expectReadableRows(page, page.locator(".wc-others__body .wc-xrow"));
+      await expectReadableRows(page, othersRows(page));
       await expectNoHorizontalOverflow(page);
+      await chooseCities(page);
       // a long zone path: it may wrap, but it stays a readable column
       await search(page).fill("America/Argentina");
       await expect(page.locator(".wc-xrow").first()).toBeVisible();
-      if (await page.locator(".wc-others__toggle").isEnabled()) await openOthers(page);
+      await expectReadableRows(page, page.locator(".wc-xrow:visible"), 6); // the one listed city (Buenos Aires)
+      await openOthers(page); // and the other zones, whose names are the long zone paths
       const longest = Math.max(...(await rows(page).locator(".wc-xrow__main, .wc-xrow__sub").allTextContents()).map((t) => t.length));
       expect(longest).toBeGreaterThan(15);
       await expectReadableRows(page, page.locator(".wc-xrow:visible"), 6);
       await expectNoHorizontalOverflow(page);
+      await chooseCities(page);
     });
   }
 
@@ -1333,9 +1616,9 @@ test.describe("World Clock: readable rows, Clear search and stable progressive r
     await expect(search(page)).toHaveValue("");
     await expect(search(page)).toBeFocused();
     await expect(clear).toBeHidden();
-    // an example chip shows it, Escape hides it
-    await page.locator('[data-chip="8 PM"]').click();
-    await expect(search(page)).toHaveValue("8 PM");
+    // a time shortcut shows it, Escape hides it
+    await page.locator('[data-shortcut="Evening"]').click();
+    await expect(search(page)).toHaveValue("Evening");
     await expect(clear).toBeVisible();
     await search(page).focus();
     await page.keyboard.press("Escape");
@@ -1353,7 +1636,7 @@ test.describe("World Clock: readable rows, Clear search and stable progressive r
       await expect(page.locator(".wc-x-progress")).toHaveText("Showing 40 of 195");
       await expect(page.locator(".wc-x-groups .wc-x-list")).toHaveAttribute("data-pending", /.*/);
       await expectNoHorizontalOverflow(page);
-      const top = () => page.locator(".wc-others__toggle").evaluate((el) => el.getBoundingClientRect().top + scrollY);
+      const top = () => page.locator(".wc-x-others").evaluate((el) => el.getBoundingClientRect().top + scrollY);
       const before = await top();
       // keyboard: Enter in the search goes to the first Add; Tab then walks the Add buttons row by row
       await search(page).focus();
@@ -1365,7 +1648,7 @@ test.describe("World Clock: readable rows, Clear search and stable progressive r
         await expect(listed(page).nth(i).locator(".wc-xrow__add")).toBeFocused();
       }
       const after = await top();
-      expect(Math.abs(after - before), `the toggle moved ${after - before}px`).toBeLessThan(120);
+      expect(Math.abs(after - before), `what is below the list moved ${after - before}px`).toBeLessThan(120);
       await expect(page.locator(".wc-x-progress")).toHaveText("All 195 shown");
       await expect(page.locator(".wc-x-groups .wc-x-list")).not.toHaveAttribute("data-pending", /.*/);
       await expectNoHorizontalOverflow(page);

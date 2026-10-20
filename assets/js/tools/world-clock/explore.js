@@ -27,10 +27,6 @@ import {
 } from "../time-zone-converter/time-zone-engine.js";
 
 import {
-    REGIONS
-} from "./city-directory.js";
-
-import {
     countriesIn,
     clockParts,
     dayPhase,
@@ -41,7 +37,8 @@ import {
     runExplore,
     sameAnswer,
     cityPlaces,
-    SORTS
+    REGION_CHOICES,
+    regionDataFor
 } from "./explore-model.js";
 
 import {
@@ -55,12 +52,17 @@ const CHUNK = 40;
 const ROW_HEIGHT = 116;
 const ROW_GAP = 8;
 
+/* the order of the sort control: the default (the local time of day) first */
+const SORT_ORDER = Object.freeze(["time", "city", "country", "offset"]);
+
 const SORT_LABELS = Object.freeze({
+    time: "Local time (00:00 to 23:59)",
     city: "City (A to Z)",
     country: "Country",
-    time: "Local time",
     offset: "UTC offset"
 });
+
+const OTHERS_NOTE = "These are additional time zones that no listed city uses, such as country-specific zones like Antigua or Anguilla. It is not a list of every time zone: zones used by a listed city appear under Cities.";
 
 const WEEKDAY = Object.freeze(["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]);
 
@@ -115,7 +117,7 @@ export function mountExplore(panel, context) {
         country: "",
         sortChoice: "",
         tolerance: DEFAULT_TOLERANCE,
-        othersOpen: false
+        show: "cities"
     };
 
     let answer = null;
@@ -158,7 +160,7 @@ export function mountExplore(panel, context) {
 
     const sortSelect = element("select", "wc-input wc-select");
 
-    for (const key of SORTS) {
+    for (const key of SORT_ORDER) {
 
         const option = element("option", "", SORT_LABELS[key]);
 
@@ -229,7 +231,7 @@ export function mountExplore(panel, context) {
 
     regionSelect.append(allRegions);
 
-    for (const region of REGIONS) {
+    for (const region of REGION_CHOICES) {
 
         const option = element("option", "", region);
 
@@ -241,18 +243,59 @@ export function mountExplore(panel, context) {
 
     const countrySelect = element("select", "wc-input wc-select");
 
-    const clearFilters = element("button", "wc-link-button", "Clear filters");
-
-    clearFilters.type = "button";
-    clearFilters.hidden = true;
-
     filters.append(
         field("Region", regionSelect, "wc-region"),
-        field("Country", countrySelect, "wc-country"),
-        clearFilters
+        field("Country", countrySelect, "wc-country")
     );
 
     controls.append(sortField, toleranceField, filtersWrap);
+
+    /* ---------- the results selector: Cities or Other time zones (section 22.3) ---------- */
+
+    const showSet = element("fieldset", "wc-show");
+
+    showSet.append(element("legend", "wc-show__legend", "Show"));
+
+    const choicesWrap = element("div", "wc-show__choices");
+
+    const choices = {};
+
+    for (const [value, id] of [["cities", "wc-show-cities"], ["others", "wc-show-others"]]) {
+
+        const label = element("label", "wc-show__choice");
+
+        const input = element("input");
+
+        input.type = "radio";
+        input.name = "wc-show";
+        input.value = value;
+        input.id = id;
+
+        const text = element("span", "wc-show__text");
+
+        label.append(input, text);
+
+        choicesWrap.append(label);
+
+        choices[value] = { input, text };
+
+    }
+
+    showSet.append(choicesWrap);
+
+    /* ---------- the active line and Reset all (section 22.8) ---------- */
+
+    const activeEl = element("div", "wc-x-active");
+
+    activeEl.hidden = true;
+
+    const activeText = element("p", "wc-x-active__text");
+
+    const resetAll = element("button", "wc-link-button wc-x-reset", "Reset all");
+
+    resetAll.type = "button";
+
+    activeEl.append(activeText, resetAll);
 
     /* ---------- the results region ---------- */
 
@@ -291,7 +334,7 @@ export function mountExplore(panel, context) {
 
     results.append(heading, countLine, progress, updated, stale, notes, empty, groupsEl, othersEl, suggestEl);
 
-    panel.append(controls, filters, results);
+    panel.append(showSet, controls, filters, activeEl, results);
 
     /* ---------- rows ---------- */
 
@@ -696,19 +739,69 @@ export function mountExplore(panel, context) {
 
     }
 
-    function othersLabel(a) {
+    /* the two choices, with the full filtered counts (never the rendered rows) */
+    function paintShow(a) {
 
         const state = context.countryState();
 
-        if (state === "failed") {
-            return "Other time zones could not be loaded";
+        const others = state === "failed" ? "unavailable" : state !== "ready" ? "loading" : String(a.counts.others);
+
+        setText(choices.cities.text, `Cities (${a.counts.cities})`);
+
+        setText(choices.others.text, `Other time zones (${others})`);
+
+        choices.cities.input.checked = view.show === "cities";
+        choices.others.input.checked = view.show === "others";
+
+    }
+
+    /* the line that says what is narrowing the results, only while something is */
+    function paintActive() {
+
+        const items = [];
+
+        const typed = view.query.trim();
+
+        /* the full text is kept for assistive technology; only the query can be long, and the layout clips it (CSS ellipsis) */
+        if (typed) {
+            items.push({ text: typed, query: true });
         }
 
-        if (state !== "ready") {
-            return "Loading other time zones…";
+        if (view.region) {
+            items.push({ text: view.region });
         }
 
-        return `Other time zones (no listed city): ${a.counts.others}`;
+        if (view.country) {
+            items.push({ text: Array.from(countrySelect.options).find((option) => option.value === view.country)?.textContent || view.country });
+        }
+
+        activeEl.hidden = items.length === 0;
+
+        const signature = JSON.stringify(items.map((item) => item.text));
+
+        if (activeText.dataset.signature === signature) {
+            return;
+        }
+
+        activeText.dataset.signature = signature;
+
+        activeText.replaceChildren();
+
+        if (items.length === 0) {
+            return;
+        }
+
+        activeText.append("Showing: ");
+
+        items.forEach((item, index) => {
+
+            if (index > 0) {
+                activeText.append(" · ");
+            }
+
+            activeText.append(element("span", item.query ? "wc-x-active__item wc-x-active__query" : "wc-x-active__item", item.text));
+
+        });
 
     }
 
@@ -725,6 +818,10 @@ export function mountExplore(panel, context) {
         pendingAnswer = null;
 
         stale.hidden = true;
+
+        paintShow(a);
+
+        paintActive();
 
         latest = new Map();
         drawn = new Map();
@@ -770,8 +867,8 @@ export function mountExplore(panel, context) {
         bestMatch.disabled = !a.relevance;
 
         const effectiveSort = view.sortChoice === "relevance" && !a.relevance
-            ? "city"
-            : view.sortChoice || (a.mode === "time" ? "time" : a.relevance ? "relevance" : "city");
+            ? "time"
+            : view.sortChoice || (a.relevance ? "relevance" : "time");
 
         sortSelect.value = effectiveSort;
 
@@ -799,7 +896,11 @@ export function mountExplore(panel, context) {
 
         const multi = a.groups.length > 1;
 
-        a.groups.forEach((group, index) => {
+        const showingOthers = view.show === "others";
+
+        const selected = showingOthers ? a.counts.others : a.counts.cities;
+
+        (showingOthers ? [] : a.groups).forEach((group, index) => {
 
             if (multi) {
 
@@ -829,113 +930,86 @@ export function mountExplore(panel, context) {
 
         });
 
-        drawOthers(a);
+        if (showingOthers) {
+            drawOthers(a);
+        }
 
-        if (a.empty) {
-            drawEmpty(a);
+        if (selected === 0 && (!showingOthers || context.countryState() === "ready")) {
+            drawEmpty(a, showingOthers);
         }
 
         startChunks();
 
     }
 
+    /* the other time zones, as the one list shown while that choice is selected */
     function drawOthers(a) {
 
         const state = context.countryState();
 
-        if (a.mode === "invalid") {
+        if (state === "failed") {
+            othersEl.append(element("p", "wc-x-none", "Other time zones could not be loaded"));
             return;
         }
 
-        const wrap = element("div", "wc-others");
-
-        const toggle = element("button", "wc-others__toggle");
-
-        toggle.type = "button";
-
-        const ready = state === "ready";
-
-        const open = ready && view.othersOpen && a.others.rows.length > 0;
-
-        toggle.setAttribute("aria-expanded", String(open));
-
-        toggle.disabled = !ready;
-
-        toggle.append(element("span", "", othersLabel(a)), element("span", "", "▾"));
-
-        toggle.lastChild.setAttribute("aria-hidden", "true");
-
-        wrap.append(toggle);
-
-        const body = element("div", "wc-others__body");
-
-        body.hidden = !open;
-
-        body.id = "wc-others-body";
-
-        toggle.setAttribute("aria-controls", "wc-others-body");
-
-        wrap.append(body);
-
-        if (ready) {
-
-            if (a.others.rows.length === 0) {
-                body.append(element("p", "wc-x-none", "No other time zone matches."));
-            }
-
+        if (state !== "ready") {
+            othersEl.append(element("p", "wc-x-none", "Loading other time zones…"));
+            return;
         }
 
-        let built = false;
+        othersEl.append(element("p", "wc-x-note wc-x-others-note", OTHERS_NOTE));
 
-        const build = (force) => {
-
-            if (built || !ready || a.others.rows.length === 0) {
-                return;
-            }
-
-            built = true;
-
-            body.append(addList(a.others.rows, "Other time zones", true, force));
-
-            startChunks();
-
-        };
-
-        if (open) {
-            build(false);
+        if (a.others.rows.length > 0) {
+            othersEl.append(addList(a.others.rows, "Other time zones", true));
         }
-
-        toggle.addEventListener("click", () => {
-
-            if (toggle.disabled) {
-                return;
-            }
-
-            const nowOpen = toggle.getAttribute("aria-expanded") !== "true";
-
-            view.othersOpen = nowOpen;
-
-            toggle.setAttribute("aria-expanded", String(nowOpen));
-
-            body.hidden = !nowOpen;
-
-            if (nowOpen) {
-                build(true);
-            }
-
-        });
-
-        othersEl.append(wrap);
 
     }
 
-    function drawEmpty(a) {
+    function drawEmpty(a, showingOthers) {
 
         empty.hidden = false;
 
-        const message = element("p", "wc-x-empty__message", a.empty.message);
+        /* nothing matches anywhere: the query's own wording, its widening and its nearest places; otherwise this view's sentence */
+        const nothing = a.counts.places === 0 && a.empty;
 
-        empty.append(message);
+        const text = nothing ? a.empty.message : showingOthers ? a.noneIn.others : a.noneIn.cities;
+
+        empty.append(element("p", "wc-x-empty__message", text));
+
+        /* the other view has matches: say so and offer it, never switch for the visitor (section 22.3) */
+        const otherCount = showingOthers ? a.counts.cities : a.counts.others;
+
+        if (!nothing && otherCount > 0) {
+
+            const target = showingOthers ? "cities" : "others";
+
+            const label = showingOthers
+                ? `Show ${otherCount} listed ${otherCount === 1 ? "city" : "cities"}`
+                : `Show ${otherCount} other time ${otherCount === 1 ? "zone" : "zones"}`;
+
+            const button = element("button", "calculator-form__button calculator-form__button--secondary wc-button", label);
+
+            button.type = "button";
+
+            button.addEventListener("click", () => {
+
+                view.show = target;
+
+                draw(compute(Date.now()));
+
+                choices[target].input.focus();
+
+                context.announce(`Showing ${otherCount} ${target === "cities" ? (otherCount === 1 ? "listed city" : "listed cities") : (otherCount === 1 ? "other time zone" : "other time zones")}`);
+
+            });
+
+            empty.append(button);
+
+        }
+
+        if (!nothing) {
+            return;
+        }
 
         if (a.empty.widenTo) {
 
@@ -1001,14 +1075,10 @@ export function mountExplore(panel, context) {
 
         const next = compute(nowMs);
 
-        if (visitor) {
-            view.othersOpen = next.others.expanded;
-        }
-
         draw(next);
 
         if (visitor) {
-            scheduleSummary(next);
+            scheduleSummary();
         }
 
     }
@@ -1019,14 +1089,19 @@ export function mountExplore(panel, context) {
 
     }
 
-    function scheduleSummary(a) {
+    /*
+     * One polite summary, 700 ms after the last visitor-driven change. It says what the answer is AT THAT MOMENT (a minute
+     * tick that rewrote the rows in the meantime must not cancel it, and one that changed them must not make it stale), and
+     * anything else announced, or a change of list, cancels it (cancelSummary): there is never a late or doubled message.
+     */
+    function scheduleSummary() {
 
         clearTimeout(summaryTimer);
 
         summaryTimer = setTimeout(() => {
 
-            if (a === answer) {
-                context.announce(a.announce);
+            if (answer) {
+                context.announce(answer.announce);
             }
 
         }, 700);
@@ -1132,6 +1207,47 @@ export function mountExplore(panel, context) {
 
     /* ---------- the controls' behaviour ---------- */
 
+    for (const value of ["cities", "others"]) {
+
+        /* a visitor's choice from outside the list: the list is replaced, nothing is announced (the radio says its own state) */
+        choices[value].input.addEventListener("change", () => {
+
+            if (choices[value].input.checked && view.show !== value) {
+
+                view.show = value;
+
+                cancelSummary();
+
+                rebuild(false);
+
+            }
+
+        });
+
+    }
+
+    /* clears the query, the region, the country and the choice of list; keeps the sort, the tolerance, the board and the clock style */
+    resetAll.addEventListener("click", () => {
+
+        view.query = "";
+        view.region = "";
+        view.country = "";
+        view.show = "cities";
+
+        regionSelect.value = "";
+
+        populateCountries();
+
+        paintFilterLabel();
+
+        if (typeof context.clearQuery === "function") {
+            context.clearQuery();
+        }
+
+        rebuild(true);
+
+    });
+
     sortSelect.addEventListener("change", () => {
 
         view.sortChoice = sortSelect.value;
@@ -1174,8 +1290,6 @@ export function mountExplore(panel, context) {
 
         setText(filtersLabel, n ? `Filters (${n})` : "Filters");
 
-        clearFilters.hidden = n === 0;
-
     }
 
     function populateCountries() {
@@ -1198,7 +1312,7 @@ export function mountExplore(panel, context) {
 
         }
 
-        const countries = countriesIn(view.region || null, data);
+        const countries = countriesIn(view.region ? regionDataFor(view.region) : null, data);
 
         for (const country of countries) {
 
@@ -1242,23 +1356,6 @@ export function mountExplore(panel, context) {
 
     });
 
-    clearFilters.addEventListener("click", () => {
-
-        view.region = "";
-        view.country = "";
-
-        regionSelect.value = "";
-
-        populateCountries();
-
-        paintFilterLabel();
-
-        rebuild(true);
-
-        regionSelect.focus();
-
-    });
-
     populateCountries();
 
     paintFilterLabel();
@@ -1283,8 +1380,6 @@ export function mountExplore(panel, context) {
             return;
 
         }
-
-        view.othersOpen = view.othersOpen || next.others.expanded;
 
         draw(next);
 

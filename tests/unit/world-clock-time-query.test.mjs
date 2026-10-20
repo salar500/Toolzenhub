@@ -9,9 +9,13 @@
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
 
+import { DIRECTORY, normalizeText } from "../../assets/js/tools/world-clock/city-directory.js";
+import { countryLabel } from "../../assets/js/tools/world-clock/clock-engine.js";
+import * as countryData from "../../assets/js/tools/world-clock/country-zones.js";
+
 import {
   parseTimeQuery, buildGroups, normalizeQuery, formatMinute, formatOffset, widerTolerance, describeSpan,
-  DEFAULT_TOLERANCE, TOLERANCES, HINTS,
+  DEFAULT_TOLERANCE, TOLERANCES, HINTS, NAMED_PERIODS,
 } from "../../assets/js/tools/world-clock/time-query.js";
 
 const kind = (q) => parseTimeQuery(q)?.kind ?? null;
@@ -264,5 +268,99 @@ describe("wording and helpers", () => {
     assert.equal(g.gap(mins(6, 7)), 8);
     const [wrap] = buildGroups(parseTimeQuery("00:00-01:00"));
     assert.equal(wrap.gap(mins(23, 50)), 10);
+  });
+});
+
+describe("named periods (section 22.5)", () => {
+  const PHRASES = ["before noon", "12 pm onward", "morning", "afternoon", "evening", "night"];
+
+  test("the six phrases are recognised only as the whole query, in any case and spacing", () => {
+    assert.deepEqual(NAMED_PERIODS.map((p) => p.phrase), PHRASES);
+    for (const phrase of PHRASES) {
+      for (const variant of [phrase, phrase.toUpperCase(), `  ${phrase}  `, phrase.replace(/ /g, "   ")]) {
+        assert.equal(kind(variant), "named", JSON.stringify(variant));
+      }
+    }
+    assert.equal(parseTimeQuery("Before Noon").id, "before-noon");
+    assert.equal(parseTimeQuery("12 PM onward").id, "noon-onward");
+  });
+
+  test("a fragment, or the phrase with anything added, is not a named period", () => {
+    for (const text of ["even", "eve", "evenin", "morn", "mornin", "after", "afternoo", "before", "before no", "nigh", "night shift", "evening star", "the evening", "good morning", "afternoons"]) {
+      assert.notEqual(kind(text), "named", text);
+      assert.equal(kind(text), null, text); // an ordinary name search: not a time query at all
+    }
+    // starting with a digit, an unfinished "12 pm onward" is the existing invalid-time hint, never a named period
+    for (const text of ["12 pm onw", "12 pm onward now", "12 onward"]) assert.notEqual(kind(text), "named", text);
+  });
+
+  test("the existing classes are unchanged", () => {
+    assert.equal(kind("12 pm"), "hour");
+    assert.equal(kind("12 PM"), "hour");
+    assert.equal(kind("am"), "period");
+    assert.equal(kind("pm"), "period");
+    assert.equal(kind("noon"), "hour");
+    assert.equal(kind("midnight"), "hour");
+    assert.equal(kind("8 pm"), "hour");
+    assert.equal(kind("8:30 am"), "time");
+    assert.equal(kind("9 am-12 pm"), "range");
+    assert.equal(kind("utc+05:30"), "offset");
+    assert.equal(kind("25:00"), "invalid");
+    assert.equal(kind("mumbai"), null);
+    assert.equal(kind("australia"), null);
+  });
+
+  test("each interval includes both ends and excludes the minute outside, and Night wraps midnight", () => {
+    const edges = {
+      "before noon": [[0, 719], [-1, 720]],
+      "12 pm onward": [[720, 1439], [719, 0]],
+      morning: [[360, 719], [359, 720]],
+      afternoon: [[720, 1079], [719, 1080]],
+      evening: [[1080, 1259], [1079, 1260]],
+      night: [[1260, 359], [1259, 360]]
+    };
+    for (const [phrase, [[start, end], [before, after]]] of Object.entries(edges)) {
+      const [g] = buildGroups(parseTimeQuery(phrase));
+      const at = (m) => ((m % 1440) + 1440) % 1440;
+      assert.equal(g.test(at(start)), true, `${phrase} start`);
+      assert.equal(g.test(at(end)), true, `${phrase} end`);
+      assert.equal(g.test(at(before)), false, `${phrase} just before`);
+      assert.equal(g.test(at(after)), false, `${phrase} just after`);
+    }
+    const [night] = buildGroups(parseTimeQuery("night"));
+    for (const m of [1260, 1380, 1439, 0, 120, 359]) assert.equal(night.test(m), true, String(m));
+    for (const m of [360, 720, 1080, 1259]) assert.equal(night.test(m), false, String(m));
+  });
+
+  test("the overlaps are deliberate: Before noon holds Morning, 12 PM onward holds Afternoon and Evening", () => {
+    const inside = (phrase, m) => buildGroups(parseTimeQuery(phrase))[0].test(m);
+    for (let m = 0; m < 1440; m++) {
+      if (inside("morning", m)) assert.equal(inside("before noon", m), true, String(m));
+      if (inside("afternoon", m) || inside("evening", m)) assert.equal(inside("12 pm onward", m), true, String(m));
+      assert.equal(inside("before noon", m) !== inside("12 pm onward", m), true, `exactly one half at ${m}`);
+    }
+  });
+
+  test("the headings say the interval in 12-hour and in 24-hour display", () => {
+    const heading = (phrase, hour12) => buildGroups(parseTimeQuery(phrase))[0].heading(hour12);
+    assert.equal(heading("before noon", true), "Places where it is currently before noon (midnight to 11:59 AM)");
+    assert.equal(heading("12 pm onward", true), "Places where it is currently 12 PM onward (noon to 11:59 PM)");
+    assert.equal(heading("morning", true), "Places where it is currently morning (6:00 AM to 11:59 AM)");
+    assert.equal(heading("afternoon", true), "Places where it is currently afternoon (12:00 PM to 5:59 PM)");
+    assert.equal(heading("evening", true), "Places where it is currently evening (6:00 PM to 8:59 PM)");
+    assert.equal(heading("night", true), "Places where it is currently night (9:00 PM to 5:59 AM, crossing midnight)");
+    assert.equal(heading("night", false), "Places where it is currently night (21:00 to 05:59, crossing midnight)");
+    assert.equal(heading("evening", false), "Places where it is currently evening (18:00 to 20:59)");
+  });
+
+  test("collision guard: no city, alias or country name is one of the six phrases", () => {
+    const names = new Set();
+    for (const entry of DIRECTORY) {
+      names.add(normalizeText(entry.city));
+      names.add(normalizeText(entry.country));
+      for (const alias of entry.aliases ?? []) names.add(normalizeText(alias));
+    }
+    for (const code of Object.keys(countryData.COUNTRY_ZONES)) names.add(normalizeText(countryLabel(code)));
+    for (const phrase of PHRASES) assert.equal(names.has(phrase), false, `a place is named "${phrase}"`);
   });
 });
