@@ -1,0 +1,53 @@
+# World Clock focused browser verification (manual only).
+#
+# Runs ONLY tests/browser/world-clock.spec.js on the phone project (subpath-mobile, 390px), one worker, so the browser
+# tests do not have to run on a low-memory development machine. Start it from the Actions tab and pick the branch to test.
+#
+# It cannot deploy anything: read-only permissions, no Pages or deployment steps, no id-token. It does not update
+# screenshots or baselines. Nothing is published except the test report and traces, kept for 7 days.
+name: World Clock verification
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: world-clock-verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+        timeout-minutes: 5
+      # the tests serve dist/ and dist-ghpages/ themselves (tests/helpers/global-setup.mjs); both must exist
+      - run: npm run build:all
+        timeout-minutes: 5
+      # the browser is the Chrome already installed on the GitHub-hosted runner (channel "chrome" in playwright.config.js)
+      - name: World Clock spec, phone project
+        run: npx playwright test tests/browser/world-clock.spec.js --project=subpath-mobile --workers=1 --retries=0 --reporter=list,html --trace=retain-on-failure
+        timeout-minutes: 10
+        env:
+          CI: "true"
+          PLAYWRIGHT_HTML_OPEN: never
+      - name: Upload report and traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: world-clock-verify
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7

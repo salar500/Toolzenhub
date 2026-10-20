@@ -203,18 +203,30 @@ export function markup() {
                             Search cities, countries or times
                         </label>
 
-                        <input
-                            type="search"
-                            id="wc-search"
-                            class="wc-input"
-                            aria-describedby="wc-search-hint"
-                            autocomplete="off"
-                            autocapitalize="off"
-                            autocorrect="off"
-                            spellcheck="false"
-                            enterkeyhint="search"
-                            placeholder="City, country, 8 PM, UTC+05:30"
-                        >
+                        <div class="wc-search-field">
+
+                            <input
+                                type="search"
+                                id="wc-search"
+                                class="wc-input"
+                                aria-describedby="wc-search-hint"
+                                autocomplete="off"
+                                autocapitalize="off"
+                                autocorrect="off"
+                                spellcheck="false"
+                                enterkeyhint="search"
+                                placeholder="City, country, 8 PM, UTC+05:30"
+                            >
+
+                            <button
+                                type="button"
+                                id="wc-search-clear"
+                                class="wc-search-clear"
+                                aria-label="Clear search"
+                                hidden
+                            ><span aria-hidden="true">×</span></button>
+
+                        </div>
 
                         <div
                             class="wc-chips"
@@ -1669,13 +1681,38 @@ export function init() {
 
     }
 
+    const searchClear = $("#wc-search-clear");
+
+    function syncClear() {
+        searchClear.hidden = searchInput.value === "";
+    }
+
     searchInput.addEventListener("input", () => {
+
+        syncClear();
 
         clearFresh();
 
         restoreHint();
 
         queueSearch();
+
+    });
+
+    /* empties only the search text: the region and country filters belong to the directory and stay */
+    searchClear.addEventListener("click", () => {
+
+        searchInput.value = "";
+
+        syncClear();
+
+        clearFresh();
+
+        restoreHint();
+
+        runSearchNow();
+
+        searchInput.focus();
 
     });
 
@@ -1699,6 +1736,8 @@ export function init() {
 
             searchInput.value = "";
 
+            syncClear();
+
             queueSearch();
 
         }
@@ -1710,6 +1749,8 @@ export function init() {
         chip.addEventListener("click", () => {
 
             searchInput.value = chip.dataset.chip;
+
+            syncClear();
 
             clearFresh();
 
