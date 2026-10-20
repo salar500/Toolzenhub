@@ -1387,7 +1387,8 @@ export function mountExplore(panel, context) {
 
     /* ---------- the handle ---------- */
 
-    rebuild(true);
+    /* the first draw is not something the visitor did: it announces nothing (a later query, sort or filter does) */
+    rebuild(false);
 
     return {
 
