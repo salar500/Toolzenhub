@@ -123,7 +123,7 @@ section.categories-page.directory-page
           article.directory-group
             h3.directory-group__title
               a [href="{ROOT}tools/world-clock/"] "World Clock"
-            p.directory-group__text "See the current time in several cities at once, with each city's date, UTC offset and how …"
+            p.directory-group__text "Browse the current time in 195 cities and other time zones, search by city, country or the…"
           article.directory-group
             h3.directory-group__title
               a [href="{ROOT}tools/hours-calculator/"] "Hours & Timesheet Calculator"

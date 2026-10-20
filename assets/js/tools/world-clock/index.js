@@ -2,60 +2,59 @@
    ToolZen Hub
    World Clock (Time Tools)
 
-   A live board of up to 12 city clocks plus the visitor's own, each
-   showing its time, date, UTC offset and how far ahead of or behind a
-   reference it is. The calculations are in clock-engine.js (with the
-   Time Zone Converter's pure engine behind it); the cities are in
+   Two views of the world's clocks: Explore cities (a searchable live
+   directory of 195 cities and the other time zones, in explore.js) and
+   My clocks (a board of up to 12 city clocks plus the visitor's own).
+   This file is the page shell: the live "Your time" line, the one
+   search field with its example chips, the two tabs, the board, and
+   the one minute timer. The calculations are in clock-engine.js (with
+   the Time Zone Converter's pure engine behind it) and time-query.js
+   (what "8 PM" or "UTC+05:30" means); the cities are in
    city-directory.js; the country data (loaded only when needed) is in
-   country-zones.js; this file is the page around them.
+   country-zones.js.
 
    Behaviour that matters:
    - One shared reference instant per paint and ONE timer, aimed at
-     the next minute. No interval, no per-card timers, no frame loop.
-     The timer stops while the page is hidden and the board is redrawn
-     at once when it is shown again.
+     the next minute. No interval, no per-card or per-row timers, no
+     frame loop. The timer stops while the page is hidden and the
+     visible view is redrawn at once when it is shown again. A view
+     that is not showing is not repainted; it repaints when shown.
    - Nothing is announced on a tick. The polite region speaks only
-     for adding, removing, changing the reference and similar actions.
+     for adding, removing, changing the reference, a new search and
+     similar actions.
+   - The Explore module is a separate file, loaded when needed. If it
+     cannot load, the board, the address and the hand-off keep working.
    - The optional "next clock change" line is computed AFTER the first
      paint, one card at a time, and cached; the board is complete
      without it, and a card with no change says nothing.
-   - The search structures are warmed while the page is idle, so the
-     first keystroke does not pay for them; search still works if
-     the warm-up has not run.
    - Adding a clock is confirmed where the visitor is looking (the line
-     under the search box). The page scrolls to the new clock only for
-     a pointer or touch choice on a phone when it is off screen, and
-     never moves focus or scrolls for a keyboard choice.
+     under the search box). The page never scrolls or moves focus for
+     an add; "Show clock" does both, only because the visitor asked.
    - The address (cities= and ref=) is validated; everything from it
      and from the search box reaches the page through textContent.
+     Searches are never put in the address.
    - No request beyond the site's own files, no geolocation, no storage.
 ========================================================= */
 
 import {
     MAX_CITIES,
-    MAX_BROWSE,
     SHOW_NEXT_CLOCK_CHANGE,
     createClockChangeCache,
     clockChangeText,
     buildCard,
     msUntilNextMinute,
-    runSearch,
-    browsePlaces,
-    countryPlaces,
-    countriesIn,
-    countryLabel,
     defaultBoard,
     parseBoardQuery,
     buildBoardQuery,
     handoffQuery,
-    describeRow,
     displayZone,
     warmZoneList,
-    warmDirectory
+    warmDirectory,
+    usable
 } from "./clock-engine.js";
 
 import {
-    REGIONS
+    DIRECTORY
 } from "./city-directory.js";
 
 import {
@@ -84,18 +83,15 @@ const YOU_KEY = "__you__";
 
 const MINUTE_MARGIN_MS = 50;
 
-/* rows shown before "Show all" */
-const VISIBLE_ROWS = 10;
-
 const SUN = `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
 
 const MOON = `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>`;
 
 const COVERAGE_HINT =
-    "Search well-known cities, or any time zone your browser supports, such as America/Chicago. Not every city is listed.";
+    "Search a city or country, a time such as 8 PM or 9 AM-12 PM, or a UTC offset. Not every city is listed.";
 
-const BROWSE_HINT =
-    "Choose a region or country to list places.";
+/* example searches: each fills the field and searches; none adds a clock */
+const CHIPS = Object.freeze(["8 PM", "AM", "UTC+05:30", "Australia", "Europe", "Mumbai"]);
 
 
 /* =========================================================
@@ -105,8 +101,8 @@ const BROWSE_HINT =
 
 export function markup() {
 
-    const regionOptions = REGIONS.map((region) =>
-        `<option value="${region}">${region}</option>`
+    const chips = CHIPS.map((chip) =>
+        `<button type="button" class="wc-chip" data-chip="${chip}">${chip}</button>`
     ).join("");
 
     return `
@@ -127,9 +123,9 @@ export function markup() {
                     </h1>
 
                     <p>
-                        See the current time in several cities at once, with
-                        each city's date, UTC offset and how far ahead of or
-                        behind you it is.
+                        Browse the current time in 195 cities and other time
+                        zones, search by city, country or the time it is now,
+                        and keep your own board of clocks.
                     </p>
 
                 </div>
@@ -157,7 +153,7 @@ export function markup() {
             </section>
 
 
-            <!-- THE BOARD -->
+            <!-- THE TOOL -->
 
             <section class="calculator-section">
 
@@ -167,193 +163,21 @@ export function markup() {
                     data-state="loading"
                 >
 
-                    <div class="wc-toolbar">
+                    <div class="wc-here">
 
-                        <div class="wc-field wc-field--search">
+                        <div class="wc-here__main">
 
-                            <label
-                                for="wc-search"
-                                class="wc-label"
-                            >
-                                Add a city
-                            </label>
+                            <span class="wc-here__label">Your time</span>
 
-                            <div class="wc-combo">
+                            <p class="wc-here__time">
+                                <time id="wc-here-time"><span id="wc-here-digits" class="wc-time__digits"></span> <span id="wc-here-ampm" class="wc-time__ampm"></span></time>
+                            </p>
 
-                                <input
-                                    type="text"
-                                    id="wc-search"
-                                    class="wc-input"
-                                    role="combobox"
-                                    aria-autocomplete="list"
-                                    aria-haspopup="listbox"
-                                    aria-expanded="false"
-                                    aria-controls="wc-list"
-                                    aria-describedby="wc-search-hint"
-                                    autocomplete="off"
-                                    autocapitalize="off"
-                                    autocorrect="off"
-                                    spellcheck="false"
-                                    placeholder="City, country or time zone"
-                                >
+                            <p id="wc-here-date" class="wc-here__date"></p>
 
-                                <ul
-                                    id="wc-list"
-                                    class="wc-list"
-                                    role="listbox"
-                                    aria-label="Matching places"
-                                    hidden
-                                ></ul>
-
-                            </div>
-
-                            <p
-                                id="wc-search-hint"
-                                class="wc-hint"
-                            >${COVERAGE_HINT}</p>
+                            <p id="wc-here-zone" class="wc-here__zone"></p>
 
                         </div>
-
-                        <div class="wc-field">
-
-                            <label
-                                for="wc-ref"
-                                class="wc-label"
-                            >
-                                Compare with
-                            </label>
-
-                            <select
-                                id="wc-ref"
-                                class="wc-input wc-select"
-                            >
-                                <option value="">Your time</option>
-                            </select>
-
-                        </div>
-
-                        <div class="wc-field">
-
-                            <span
-                                id="wc-browse-label"
-                                class="wc-label"
-                            >
-                                Browse places
-                            </span>
-
-                            <button
-                                type="button"
-                                id="wc-browse-toggle"
-                                class="wc-input wc-browse-toggle"
-                                aria-expanded="false"
-                                aria-controls="wc-browse"
-                                aria-labelledby="wc-browse-label wc-browse-toggle"
-                            >
-                                <span>Region or country</span>
-                                <span aria-hidden="true">▾</span>
-                            </button>
-
-                        </div>
-
-                        <div
-                            id="wc-browse"
-                            class="wc-browse"
-                            hidden
-                        >
-
-                            <div class="wc-browse__selects">
-
-                                <div class="wc-field">
-
-                                    <label
-                                        for="wc-region"
-                                        class="wc-label"
-                                    >
-                                        Region
-                                    </label>
-
-                                    <select
-                                        id="wc-region"
-                                        class="wc-input wc-select"
-                                    >
-                                        <option value="">All regions</option>
-                                        ${regionOptions}
-                                    </select>
-
-                                </div>
-
-                                <div class="wc-field">
-
-                                    <label
-                                        for="wc-country"
-                                        class="wc-label"
-                                    >
-                                        Country
-                                    </label>
-
-                                    <select
-                                        id="wc-country"
-                                        class="wc-input wc-select"
-                                        disabled
-                                    >
-                                        <option value="">All countries</option>
-                                    </select>
-
-                                </div>
-
-                            </div>
-
-                            <div class="wc-browse__bar">
-
-                                <p
-                                    id="wc-browse-header"
-                                    class="wc-browse__header"
-                                >${BROWSE_HINT}</p>
-
-                                <button
-                                    type="button"
-                                    id="wc-browse-clear"
-                                    class="wc-link-button"
-                                    hidden
-                                >
-                                    Clear
-                                </button>
-
-                            </div>
-
-                            <ul
-                                id="wc-browse-list"
-                                class="wc-browse__list"
-                            ></ul>
-
-                            <button
-                                type="button"
-                                id="wc-browse-more"
-                                class="calculator-form__button calculator-form__button--secondary wc-button"
-                                hidden
-                            >
-                                Show all
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                    <p
-                        id="wc-message"
-                        class="wc-message"
-                        hidden
-                    ></p>
-
-                    <div class="wc-board-head">
-
-                        <h2
-                            id="wc-board-heading"
-                            class="wc-board-heading"
-                            tabindex="-1"
-                        >
-                            Your clocks
-                        </h2>
 
                         <label class="wc-check">
                             <input
@@ -365,67 +189,206 @@ export function markup() {
 
                     </div>
 
-                    <ul
-                        id="wc-board"
-                        class="wc-board"
-                        aria-label="World clocks"
-                    ></ul>
-
-                    <div
-                        id="wc-empty"
-                        class="wc-empty"
-                        hidden
-                    >
-
-                        <p>Add a city above to see its time here.</p>
-
-                        <div
-                            id="wc-quick"
-                            class="wc-quick"
-                        ></div>
-
-                    </div>
-
-                    <div class="wc-actions">
-
-                        <button
-                            type="button"
-                            id="wc-copy"
-                            class="calculator-form__button calculator-form__button--secondary wc-button"
-                        >
-                            Copy link to this board
-                        </button>
-
-                        <a
-                            id="wc-plan"
-                            class="wc-plan"
-                            href="${TZ_TOOL.href}"
-                        >
-                            Plan a meeting or convert a specific time across these cities
-                            <span aria-hidden="true">→</span>
-                        </a>
-
-                    </div>
-
-                    <div
-                        id="wc-link-box"
-                        class="wc-link-box"
-                        hidden
+                    <form
+                        id="wc-search-form"
+                        class="wc-search"
+                        role="search"
+                        action="#"
                     >
 
                         <label
-                            for="wc-link"
+                            for="wc-search"
                             class="wc-label"
                         >
-                            Copy this link
+                            Search cities, countries or times
                         </label>
 
                         <input
-                            type="text"
-                            id="wc-link"
+                            type="search"
+                            id="wc-search"
                             class="wc-input"
-                            readonly
+                            aria-describedby="wc-search-hint"
+                            autocomplete="off"
+                            autocapitalize="off"
+                            autocorrect="off"
+                            spellcheck="false"
+                            enterkeyhint="search"
+                            placeholder="City, country, 8 PM, UTC+05:30"
                         >
+
+                        <div
+                            class="wc-chips"
+                            role="group"
+                            aria-label="Example searches"
+                        >${chips}</div>
+
+                        <p
+                            id="wc-search-hint"
+                            class="wc-hint"
+                        >${COVERAGE_HINT}</p>
+
+                    </form>
+
+                    <p
+                        id="wc-message"
+                        class="wc-message"
+                        hidden
+                    ></p>
+
+                    <div class="wc-tabs">
+
+                        <div
+                            class="wc-tablist"
+                            role="tablist"
+                            aria-label="World Clock views"
+                        >
+
+                            <button
+                                type="button"
+                                role="tab"
+                                id="wc-tab-explore"
+                                class="wc-tab"
+                                aria-selected="true"
+                                aria-controls="wc-view-explore"
+                                tabindex="0"
+                            >Explore cities</button>
+
+                            <button
+                                type="button"
+                                role="tab"
+                                id="wc-tab-clocks"
+                                class="wc-tab"
+                                aria-selected="false"
+                                aria-controls="wc-view-clocks"
+                                tabindex="-1"
+                            >My clocks</button>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="wc-view-explore"
+                        class="wc-view wc-view--explore"
+                        role="tabpanel"
+                        aria-labelledby="wc-tab-explore"
+                    >
+
+                        <div
+                            id="wc-explore"
+                            class="wc-explore"
+                        >
+
+                            <p
+                                id="wc-explore-loading"
+                                class="wc-x-loading"
+                            >Loading the city directory…</p>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="wc-view-clocks"
+                        class="wc-view wc-view--clocks"
+                        role="tabpanel"
+                        aria-labelledby="wc-tab-clocks"
+                        hidden
+                    >
+
+                        <div class="wc-board-head">
+
+                            <h2
+                                id="wc-board-heading"
+                                class="wc-board-heading"
+                                tabindex="-1"
+                            >
+                                Your clocks
+                            </h2>
+
+                            <div class="wc-field wc-field--ref">
+
+                                <label
+                                    for="wc-ref"
+                                    class="wc-label"
+                                >
+                                    Compare with
+                                </label>
+
+                                <select
+                                    id="wc-ref"
+                                    class="wc-input wc-select"
+                                >
+                                    <option value="">Your time</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <ul
+                            id="wc-board"
+                            class="wc-board"
+                            aria-label="World clocks"
+                        ></ul>
+
+                        <div
+                            id="wc-empty"
+                            class="wc-empty"
+                            hidden
+                        >
+
+                            <p>Add a city from Explore cities to see its time here.</p>
+
+                            <div
+                                id="wc-quick"
+                                class="wc-quick"
+                            ></div>
+
+                        </div>
+
+                        <div class="wc-actions">
+
+                            <button
+                                type="button"
+                                id="wc-copy"
+                                class="calculator-form__button calculator-form__button--secondary wc-button"
+                            >
+                                Copy link to this board
+                            </button>
+
+                            <a
+                                id="wc-plan"
+                                class="wc-plan"
+                                href="${TZ_TOOL.href}"
+                            >
+                                Plan a meeting or convert a specific time across these cities
+                                <span aria-hidden="true">→</span>
+                            </a>
+
+                        </div>
+
+                        <div
+                            id="wc-link-box"
+                            class="wc-link-box"
+                            hidden
+                        >
+
+                            <label
+                                for="wc-link"
+                                class="wc-label"
+                            >
+                                Copy this link
+                            </label>
+
+                            <input
+                                type="text"
+                                id="wc-link"
+                                class="wc-input"
+                                readonly
+                            >
+
+                        </div>
 
                     </div>
 
@@ -450,12 +413,13 @@ export function markup() {
                 </h2>
 
                 <ul>
-                    <li><strong>Your time</strong> is the first card. It uses the time zone your browser reports; nothing is sent anywhere to find it.</li>
-                    <li>Each other card shows that place's time, weekday and date, its UTC offset right now, and how far ahead of or behind the comparison it is. Choose <em>Compare with</em> to measure against any city on the board instead of yourself.</li>
-                    <li><strong>Browse places</strong> lists cities by region, or every time zone of a country. A country with several time zones, such as Australia or the United States, shows each one with its own time. Regions are a way to find places, not a statement about any border.</li>
+                    <li><strong>Your time</strong> is shown at the top. It uses the time zone your browser reports; nothing is sent anywhere to find it.</li>
+                    <li><strong>Explore cities</strong> lists every city in the directory with its time, UTC offset and whether it is daytime there. Filter by region or country, or sort by city, country, local time or UTC offset. Regions are a way to find places, not a statement about any border.</li>
+                    <li><strong>Search by time.</strong> Type <em>8 PM</em> to see where it is currently between 8:00 and 8:59 PM, <em>AM</em> or <em>PM</em> for half a day, <em>8:30 AM</em> for places within a stated window of that time, <em>9 AM-12 PM</em> for a range, or <em>UTC+05:30</em> for places on that offset right now. A bare <em>8</em> shows both 8 AM and 8 PM. Matches are what is true now: they change as the clocks move.</li>
+                    <li><strong>My clocks</strong> is your own board of up to ${MAX_CITIES} cities. Each card shows that place's time, weekday and date, its UTC offset now, and how far ahead of or behind the comparison it is. Choose <em>Compare with</em> to measure against any city on the board instead of yourself.</li>
                     <li><strong>Today, Tomorrow and Yesterday</strong> refer to the date at the comparison, so you can see at a glance when a city is already on the next day.</li>
                     <li><strong>Daytime and Night-time are approximate.</strong> Daytime means the local clock reads from 06:00 to 17:59. It is not sunrise or sunset and ignores the season and the latitude.</li>
-                    <li>Where a city's clocks are due to change, a short line says when and by how much. It reports what this browser's time-zone data says, and nothing is shown when no change was found in the next 13 months.</li>
+                    <li>Where a city's clocks are due to change, a short line on its card says when and by how much. It reports what this browser's time-zone data says, and nothing is shown when no change was found in the next 13 months.</li>
                 </ul>
 
             </section>
@@ -470,12 +434,11 @@ export function markup() {
                 </h2>
 
                 <p>
-                    The list holds a <strong>selection of well-known cities</strong>,
-                    not every city in the world. You can also add any time zone your
-                    browser supports by typing its name, such as
-                    <code>America/Indiana/Knox</code>, or by choosing a country under
-                    <em>Browse places</em>. If a city is not listed it often shares a
-                    time zone with one that is.
+                    The directory holds <strong>195 well-known cities</strong>,
+                    not every city in the world. Below them, a separate group lists
+                    the other time zones your browser knows that none of those
+                    cities uses; you can add any of them too. If a city is not
+                    listed it often shares a time zone with one that is.
                 </p>
 
                 <p>
@@ -483,7 +446,9 @@ export function markup() {
                     time-zone database, which can lag a recent change by a
                     government and can differ between browsers. Every time shown
                     comes from your device's clock: if that clock is wrong, every
-                    card is wrong by the same amount.
+                    card is wrong by the same amount. Time searches use the time
+                    now in each place, including daylight saving, and are not a
+                    prediction for another day.
                 </p>
 
                 <p>
@@ -510,7 +475,7 @@ export function markup() {
                     <p>
                         No. The page reads your browser's time-zone name to show your
                         own time. It does not ask for your location, send anything
-                        to a server, or store your choices.
+                        to a server, or store your choices or your searches.
                     </p>
                 </details>
 
@@ -520,9 +485,22 @@ export function markup() {
                     </summary>
                     <p>
                         The address in your browser changes as you add and remove
-                        cities. Bookmark it or press Copy link to this board. The link
-                        holds only the cities you chose, and everyone who opens it sees
-                        the differences from their own time.
+                        cities. Bookmark it or press Copy link to this board in My
+                        clocks. The link holds only the cities you chose, and everyone
+                        who opens it sees the differences from their own time.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>
+                        Why does my search for a time show so few cities?
+                    </summary>
+                    <p>
+                        A time search lists the places where the local clock reads
+                        that hour right now, and at some moments few cities do. The
+                        page never widens the search by itself: for a specific time
+                        you can choose a wider window, and places that are merely
+                        close are shown separately and are not counted as matches.
                     </p>
                 </details>
 
@@ -531,9 +509,9 @@ export function markup() {
                         Why is a city missing from the list?
                     </summary>
                     <p>
-                        The list is a selection. Open Browse places, choose its country
-                        and pick the time zone it uses, or type the name of the zone.
-                        Two cities in the same zone always show the same time.
+                        The list is a selection. Search its country, open the group of
+                        other time zones and pick the zone it uses, or type the name of
+                        the zone. Two cities in the same zone always show the same time.
                     </p>
                 </details>
 
@@ -564,8 +542,8 @@ export function markup() {
                         Is there a limit on cities?
                     </summary>
                     <p>
-                        Yes: ${MAX_CITIES} cities besides your own, so the board stays
-                        readable and fast.
+                        Browsing is not limited. Your board holds ${MAX_CITIES} cities
+                        besides your own, so it stays readable and fast.
                     </p>
                 </details>
 
@@ -607,7 +585,7 @@ export function init() {
     const $ = (selector) => document.querySelector(selector);
 
     const searchInput = $("#wc-search");
-    const list = $("#wc-list");
+    const searchForm = $("#wc-search-form");
     const refSelect = $("#wc-ref");
     const twentyFour = $("#wc-24h");
     const message = $("#wc-message");
@@ -621,14 +599,12 @@ export function init() {
     const linkField = $("#wc-link");
     const live = $("#wc-live");
     const hint = $("#wc-search-hint");
-    const browseToggle = $("#wc-browse-toggle");
-    const browsePanel = $("#wc-browse");
-    const regionSelect = $("#wc-region");
-    const countrySelect = $("#wc-country");
-    const browseHeader = $("#wc-browse-header");
-    const browseClear = $("#wc-browse-clear");
-    const browseList = $("#wc-browse-list");
-    const browseMore = $("#wc-browse-more");
+    const exploreHost = $("#wc-explore");
+    const hereDigits = $("#wc-here-digits");
+    const hereAmpm = $("#wc-here-ampm");
+    const hereTime = $("#wc-here-time");
+    const hereDate = $("#wc-here-date");
+    const hereZone = $("#wc-here-zone");
 
     const supported =
         typeof Intl === "object"
@@ -643,6 +619,8 @@ export function init() {
         board.hidden = true;
 
         boardHeading.hidden = true;
+
+        searchInput.disabled = true;
 
         message.hidden = false;
 
@@ -695,17 +673,13 @@ export function init() {
     let announceTimer = null;
     let minuteTimer = null;
 
-    /* the open search list: what it was built from, whether "Show all" was chosen, and its options */
-    let current = { result: null, expanded: false };
-    let optionPlaces = [];
-    let active = -1;
-
     /* the lazily loaded country data (null until it arrives, or if it cannot) */
     let countryData = null;
     let countryLoad = null;
+    let countryStatus = "loading";
 
-    /* the browse panel */
-    const browse = { open: false, region: "", country: "", expanded: false };
+    /* how many listed cities this browser can read (the Explore tab's count) */
+    const cityTotal = usable(DIRECTORY).entries.length;
 
     let freshKey = null;
 
@@ -741,6 +715,11 @@ export function init() {
     }
 
     function announce(text) {
+
+        /* a pending search summary must not land after, and replace, a newer message */
+        if (exploreHandle) {
+            exploreHandle.cancelSummary();
+        }
 
         clearTimeout(announceTimer);
 
@@ -789,7 +768,7 @@ export function init() {
 
         hint.replaceChildren(
             isFull()
-                ? `The board is full (${MAX_CITIES} cities). Remove one to add another.`
+                ? `The board is full (${MAX_CITIES} cities). Remove one in My clocks to add another.`
                 : COVERAGE_HINT
         );
 
@@ -829,6 +808,8 @@ export function init() {
         if (!parts) {
             return;
         }
+
+        selectView("clocks");
 
         parts.li.scrollIntoView({ block: "center", behavior: prefersReducedMotion() ? "auto" : "smooth" });
 
@@ -1050,8 +1031,39 @@ export function init() {
 
     }
 
+    /* the large "Your time" line above the tabs */
+    function paintHere(nowMs) {
+
+        let model;
+
+        try {
+
+            const ref = wallAt(nowMs, here);
+
+            model = buildCard({ nowMs, place: you, ref, refLabel: "Your time", isReference: true, hour12: state.hour12 });
+
+        } catch (problem) {
+            return;
+        }
+
+        setText(hereDigits, model.timeMain);
+        setText(hereAmpm, model.timeSuffix);
+
+        hereAmpm.hidden = model.timeSuffix === "";
+
+        if (hereTime.getAttribute("datetime") !== model.isoLocal) {
+            hereTime.setAttribute("datetime", model.isoLocal);
+        }
+
+        setText(hereDate, model.dateText);
+        setText(hereZone, `${displayZone(here)} · ${model.offset}`);
+
+    }
+
     /* every card from ONE instant */
     function paint(nowMs = Date.now()) {
+
+        paintHere(nowMs);
 
         const reference = refPlace();
 
@@ -1095,7 +1107,7 @@ export function init() {
 
         syncRefOptions();
 
-        searchInput.disabled = isFull();
+        paintTabLabels();
 
         restoreHint();
 
@@ -1253,11 +1265,27 @@ export function init() {
 
     }
 
+    function repaintVisible(nowMs) {
+
+        if (activeView === "clocks") {
+            paint(nowMs);
+        } else {
+
+            paintHere(nowMs);
+
+            if (exploreHandle) {
+                exploreHandle.tick(nowMs);
+            }
+
+        }
+
+    }
+
     function tick() {
 
         minuteTimer = null;
 
-        paint(Date.now());
+        repaintVisible(Date.now());
 
         arm();
 
@@ -1275,7 +1303,7 @@ export function init() {
 
         }
 
-        paint(Date.now());
+        repaintVisible(Date.now());
 
         arm();
 
@@ -1285,7 +1313,7 @@ export function init() {
 
         if (event.persisted) {
 
-            paint(Date.now());
+            repaintVisible(Date.now());
 
             arm();
 
@@ -1323,6 +1351,7 @@ export function init() {
 
         syncBoard();
 
+        /* a card that is not showing is painted once, so it is complete when its view is opened */
         paint(Date.now());
 
         writeAddress();
@@ -1331,7 +1360,8 @@ export function init() {
 
         const parts = cards.get(place.key);
 
-        const off = parts ? isOffscreen(parts.li) : false;
+        /* in Explore the new clock is in the other view: "Show clock" is always offered, and nothing scrolls */
+        const off = activeView === "explore" ? true : (parts ? isOffscreen(parts.li) : false);
 
         const text = `Added ${place.label}. ${countText()}.`;
 
@@ -1339,12 +1369,12 @@ export function init() {
 
         announce(text);
 
-        if (parts && off && via === "pointer" && typeof matchMedia === "function" && matchMedia("(max-width: 719px)").matches) {
+        if (parts && off && via === "pointer" && activeView === "clocks" && typeof matchMedia === "function" && matchMedia("(max-width: 719px)").matches) {
             parts.li.scrollIntoView({ block: "center", behavior: prefersReducedMotion() ? "auto" : "smooth" });
         }
 
-        if (browse.open) {
-            renderBrowse();
+        if (exploreHandle) {
+            exploreHandle.refreshButtons();
         }
 
     }
@@ -1389,8 +1419,8 @@ export function init() {
                 : `Removed ${gone.label}. ${countText()}.`
         );
 
-        if (browse.open) {
-            renderBrowse();
+        if (exploreHandle) {
+            exploreHandle.refreshButtons();
         }
 
     }
@@ -1405,9 +1435,13 @@ export function init() {
             countryLoad = import("./country-zones.js")
                 .then((module) => {
                     countryData = module;
+                    countryStatus = "ready";
                     return module;
                 })
-                .catch(() => null);
+                .catch(() => {
+                    countryStatus = "failed";
+                    return null;
+                });
 
         }
 
@@ -1416,265 +1450,222 @@ export function init() {
     }
 
 
-    /* ---------- one place as a row: its name, where it is, and its time now ---------- */
+    /* ---------- the two views (ARIA tabs) ---------- */
 
-    function rowNodes(place, now, yourDay) {
+    const tabs = {
+        explore: { tab: $("#wc-tab-explore"), panel: $("#wc-view-explore") },
+        clocks: { tab: $("#wc-tab-clocks"), panel: $("#wc-view-clocks") }
+    };
 
-        const text = element("span", "wc-row__text");
+    let activeView = "explore";
 
-        text.append(element("span", "wc-row__main", place.title));
+    function paintTabLabels() {
 
-        text.append(element("span", "wc-row__sub", place.kind === "zone" ? (place.note || `Time zone · ${place.subtitle}`) : place.subtitle));
+        tabs.explore.tab.textContent = `Explore cities (${cityTotal})`;
 
-        const time = element("span", "wc-row__time");
-
-        const info = describeRow(place, now, state.hour12);
-
-        if (info) {
-
-            time.append(element("span", "wc-row__clock", `${info.dayNumber !== yourDay ? `${info.weekday} ` : ""}${info.time}`));
-
-            time.append(element("span", "wc-row__offset", info.offset));
-
-        }
-
-        if (onBoard(place)) {
-            time.append(element("span", "wc-row__badge", "On your board"));
-        }
-
-        return [text, time];
+        tabs.clocks.tab.textContent = `My clocks (${state.places.length})`;
 
     }
 
+    /* `focus` moves focus to the tab (arrow keys); a click or a search that switches views never moves it */
+    function selectView(name, { focus = false } = {}) {
 
-    /* ---------- the picker (an ARIA combobox) ---------- */
-
-    const optionId = (index) =>
-        `wc-option-${index}`;
-
-    function closeList() {
-
-        list.hidden = true;
-
-        searchInput.setAttribute("aria-expanded", "false");
-        searchInput.removeAttribute("aria-activedescendant");
-
-        active = -1;
-
-    }
-
-    function setActive(index) {
-
-        active = index;
-
-        const options = [...list.querySelectorAll("[role='option']")];
-
-        options.forEach((node, i) => {
-            node.setAttribute("aria-selected", i === index ? "true" : "false");
-        });
-
-        if (index >= 0 && options[index]) {
-
-            searchInput.setAttribute("aria-activedescendant", options[index].id);
-
-            options[index].scrollIntoView({ block: "nearest" });
-
-        } else {
-
-            searchInput.removeAttribute("aria-activedescendant");
-
-        }
-
-    }
-
-    function listRow(className, text) {
-
-        const row = element("li", className, text);
-
-        row.setAttribute("role", "presentation");
-
-        list.append(row);
-
-        return row;
-
-    }
-
-    /* build the open list from the current result; `keepActive` holds the highlighted option across "Show all" */
-    function renderList(keepActive = -1) {
-
-        const { result, expanded } = current;
-
-        list.replaceChildren();
-
-        optionPlaces = [];
-
-        if (!result || result.mode === "empty") {
-
-            closeList();
-
+        if (!tabs[name]) {
             return;
+        }
+
+        const changed = activeView !== name;
+
+        activeView = name;
+
+        for (const [key, parts] of Object.entries(tabs)) {
+
+            const on = key === name;
+
+            parts.tab.setAttribute("aria-selected", String(on));
+
+            parts.tab.tabIndex = on ? 0 : -1;
+
+            parts.panel.hidden = !on;
 
         }
 
-        const now = Date.now();
-
-        const yourDay = wallAt(now, here).dayNumber;
-
-        if (result.header) {
-            listRow("wc-list__header", result.header);
+        if (focus) {
+            tabs[name].tab.focus();
         }
 
-        if (result.note) {
-            listRow("wc-list__note", result.note);
+        /* the panel that was hidden did not repaint on the ticks; it repaints once now */
+        if (changed) {
+
+            if (name === "clocks") {
+                paint(Date.now());
+            } else if (exploreHandle) {
+                exploreHandle.tick(Date.now());
+            }
+
         }
 
-        const limit = expanded ? MAX_BROWSE : VISIBLE_ROWS;
+    }
 
-        const shown = result.places.slice(0, limit);
+    for (const [name, parts] of Object.entries(tabs)) {
 
-        if (shown.length === 0 && result.mode !== "abbreviation") {
+        parts.tab.addEventListener("click", () => selectView(name));
 
-            const typed = searchInput.value.trim();
+        parts.tab.addEventListener("keydown", (event) => {
 
-            const clipped = typed.length > 60 ? `${typed.slice(0, 60)}…` : typed;
+            const order = ["explore", "clocks"];
 
-            const row = listRow(
-                "wc-list__note",
-                `No match for "${clipped}". Try a city name such as Lisbon, a country such as Kenya, or a time-zone name such as America/Chicago. This list does not include every city in the world. `
-            );
+            const at = order.indexOf(name);
 
-            const button = element("button", "wc-link-button", "Browse by region or country");
+            let to = null;
 
-            button.type = "button";
+            if (event.key === "ArrowRight") {
+                to = order[(at + 1) % order.length];
+            } else if (event.key === "ArrowLeft") {
+                to = order[(at - 1 + order.length) % order.length];
+            } else if (event.key === "Home") {
+                to = order[0];
+            } else if (event.key === "End") {
+                to = order[order.length - 1];
+            }
 
-            /* mousedown, so the box keeps focus and the list is not closed before the click lands */
-            button.addEventListener("mousedown", (event) => {
+            if (to) {
 
                 event.preventDefault();
 
-                closeList();
+                selectView(to, { focus: true });
 
-                setBrowseOpen(true);
-
-            });
-
-            row.append(button);
-
-        }
-
-        shown.forEach((place) => {
-
-            const index = optionPlaces.length;
-
-            const item = element("li", "wc-list__option wc-row");
-
-            item.id = optionId(index);
-            item.setAttribute("role", "option");
-            item.setAttribute("aria-selected", "false");
-
-            item.append(...rowNodes(place, now, yourDay));
-
-            /* mousedown so the box keeps focus until the choice is made */
-            item.addEventListener("mousedown", (event) => {
-                event.preventDefault();
-                choose(place, "pointer");
-            });
-
-            list.append(item);
-
-            optionPlaces.push(place);
+            }
 
         });
 
-        if (!expanded && result.total > shown.length) {
+    }
 
-            const index = optionPlaces.length;
 
-            const item = element("li", "wc-list__option wc-list__more");
+    /* ---------- the Explore module (loaded separately) ---------- */
 
-            item.id = optionId(index);
-            item.setAttribute("role", "option");
-            item.setAttribute("aria-selected", "false");
+    let exploreHandle = null;
+    let exploreLoad = null;
+    let retries = 0;
 
-            item.textContent = `Show all ${result.total}`;
+    function showExploreFailure() {
 
-            item.addEventListener("mousedown", (event) => {
-                event.preventDefault();
-                expand();
-            });
+        exploreHost.replaceChildren();
 
-            list.append(item);
+        const box = element("div", "wc-x-failed");
 
-            optionPlaces.push({ more: true });
+        box.append(element("p", "", "The city directory could not be loaded."));
 
-        } else if (expanded && result.total > shown.length) {
+        const retry = element("button", "calculator-form__button calculator-form__button--secondary wc-button", "Retry");
 
-            listRow("wc-list__note", `Showing ${shown.length} of ${result.total}. Type to narrow.`);
+        retry.type = "button";
 
-        }
+        retry.addEventListener("click", () => {
+            exploreLoad = null;
+            loadExplore();
+        });
 
-        list.hidden = false;
+        box.append(retry);
 
-        searchInput.setAttribute("aria-expanded", "true");
+        exploreHost.append(box);
 
-        setActive(keepActive >= 0 && keepActive < optionPlaces.length ? keepActive : optionPlaces.length ? 0 : -1);
+        hint.replaceChildren("City search is unavailable right now. My clocks still works.");
 
     }
 
-    function expand() {
+    function loadExplore() {
 
-        current.expanded = true;
-
-        renderList(0);
-
-    }
-
-    function open() {
-
-        const query = searchInput.value.trim();
-
-        if (query === "") {
-
-            current = { result: null, expanded: false };
-
-            closeList();
-
-            return;
-
+        if (exploreHandle || exploreLoad) {
+            return exploreLoad;
         }
 
-        current = { result: runSearch(query, { countryData }), expanded: false };
+        exploreHost.replaceChildren(element("p", "wc-x-loading", "Loading the city directory…"));
 
-        renderList();
+        exploreHost.setAttribute("aria-busy", "true");
 
-        /* a country the directory does not list is found once the country data is in: search again then, if the box has not changed */
-        if (!countryData) {
+        /* a failed dynamic import is remembered by the browser for that address, so a retry asks for a fresh one */
+        retries++;
 
-            loadCountryData().then((loaded) => {
+        exploreLoad = import(retries > 1 ? `./explore.js?retry=${retries}` : "./explore.js")
+            .then((module) => {
 
-                if (loaded && searchInput.value.trim() === query && !list.hidden) {
+                exploreHost.replaceChildren();
 
-                    current = { result: runSearch(query, { countryData }), expanded: false };
+                exploreHandle = module.mountExplore(exploreHost, {
+                    here,
+                    icons: { day: SUN, night: MOON },
+                    max: MAX_CITIES,
+                    hour12: () => state.hour12,
+                    onBoard,
+                    isFull,
+                    add: (place, via) => addPlace(place, via),
+                    announce,
+                    countryData: () => countryData,
+                    countryState: () => countryStatus,
+                    loadCountryData
+                });
 
-                    renderList();
+                exploreHost.removeAttribute("aria-busy");
 
+                if (searchInput.value.trim() !== "") {
+                    exploreHandle.setQuery(searchInput.value);
                 }
 
+                restoreHint();
+
+                return exploreHandle;
+
+            })
+            .catch(() => {
+
+                exploreHost.removeAttribute("aria-busy");
+
+                exploreLoad = null;
+
+                showExploreFailure();
+
+                return null;
+
             });
 
+        return exploreLoad;
+
+    }
+
+
+    /* ---------- the search field and its chips ---------- */
+
+    let frame = null;
+
+    function runSearchNow() {
+
+        frame = null;
+
+        if (activeView !== "explore") {
+
+            selectView("explore");
+
+            announce("Showing results in Explore cities");
+
+        }
+
+        if (exploreHandle) {
+            exploreHandle.setQuery(searchInput.value);
+        } else {
+            loadExplore();
         }
 
     }
 
-    function choose(place, via) {
+    function queueSearch() {
 
-        closeList();
+        if (frame !== null) {
+            return;
+        }
 
-        searchInput.value = "";
-
-        current = { result: null, expanded: false };
-
-        addPlace(place, via);
+        frame = typeof requestAnimationFrame === "function"
+            ? requestAnimationFrame(runSearchNow)
+            : setTimeout(runSearchNow, 0);
 
     }
 
@@ -1682,285 +1673,53 @@ export function init() {
 
         clearFresh();
 
-        if (!isFull()) {
-            restoreHint();
-        }
+        restoreHint();
 
-        open();
+        queueSearch();
 
+    });
+
+    searchForm.addEventListener("submit", (event) => {
+        event.preventDefault();
     });
 
     searchInput.addEventListener("keydown", (event) => {
 
-        const count = optionPlaces.length;
-
-        if (event.key === "ArrowDown") {
+        if (event.key === "Enter") {
 
             event.preventDefault();
 
-            if (list.hidden) {
-                open();
-            } else if (count) {
-                setActive((active + 1) % count);
+            if (activeView === "explore" && exploreHandle) {
+                exploreHandle.focusFirstResult();
             }
 
-        } else if (event.key === "ArrowUp") {
+        } else if (event.key === "Escape" && searchInput.value !== "") {
 
             event.preventDefault();
 
-            if (!list.hidden && count) {
-                setActive((active - 1 + count) % count);
-            }
+            searchInput.value = "";
 
-        } else if (event.key === "Home" && !list.hidden && count) {
-
-            event.preventDefault();
-
-            setActive(0);
-
-        } else if (event.key === "End" && !list.hidden && count) {
-
-            event.preventDefault();
-
-            setActive(count - 1);
-
-        } else if (event.key === "Enter") {
-
-            if (!list.hidden && active >= 0 && optionPlaces[active]) {
-
-                event.preventDefault();
-
-                if (optionPlaces[active].more) {
-                    expand();
-                } else {
-                    choose(optionPlaces[active], "keyboard");
-                }
-
-            }
-
-        } else if (event.key === "Escape") {
-
-            if (!list.hidden) {
-
-                event.preventDefault();
-
-                closeList();
-
-            }
+            queueSearch();
 
         }
 
     });
 
-    searchInput.addEventListener("blur", closeList);
+    for (const chip of searchForm.querySelectorAll("[data-chip]")) {
 
+        chip.addEventListener("click", () => {
 
-    /* ---------- browse by region or country ---------- */
+            searchInput.value = chip.dataset.chip;
 
-    function populateCountries() {
+            clearFresh();
 
-        const keep = browse.country;
+            restoreHint();
 
-        countrySelect.replaceChildren();
+            runSearchNow();
 
-        const all = element("option", "", "All countries");
-
-        all.value = "";
-
-        countrySelect.append(all);
-
-        if (!countryData) {
-
-            countrySelect.disabled = true;
-
-            all.textContent = countryLoad ? "Loading countries…" : "All countries";
-
-            return;
-
-        }
-
-        const countries = countriesIn(browse.region || null, countryData);
-
-        for (const country of countries) {
-
-            const option = element("option", "", country.name);
-
-            option.value = country.code;
-
-            countrySelect.append(option);
-
-        }
-
-        countrySelect.disabled = false;
-
-        const stillThere = countries.some((country) => country.code === keep);
-
-        browse.country = stillThere ? keep : "";
-
-        countrySelect.value = browse.country;
+        });
 
     }
-
-    function renderBrowse() {
-
-        browseList.replaceChildren();
-
-        let places = [];
-        let header = BROWSE_HINT;
-
-        if (browse.country) {
-
-            const found = countryPlaces(browse.country, { countryData });
-
-            places = [...found.cities, ...found.zones];
-
-            header = `${countryLabel(browse.country)} · ${plural(found.zoneCount, "time zone")}`;
-
-        } else if (browse.region) {
-
-            const found = browsePlaces(browse.region, { limit: MAX_BROWSE });
-
-            places = found.places;
-
-            header = `${browse.region} · ${found.total} listed ${found.total === 1 ? "city" : "cities"}. Choose a country to see every time zone it has.`;
-
-        }
-
-        setText(browseHeader, header);
-
-        browseClear.hidden = !(browse.region || browse.country);
-
-        const shown = browse.expanded ? places : places.slice(0, VISIBLE_ROWS);
-
-        const now = Date.now();
-
-        const yourDay = wallAt(now, here).dayNumber;
-
-        for (const place of shown) {
-
-            const item = element("li", "wc-browse__item");
-
-            const button = element("button", "wc-row wc-browse__row");
-
-            button.type = "button";
-
-            const spoken = element("span", "wc-sr-only", "Add ");
-
-            button.append(spoken, ...rowNodes(place, now, yourDay));
-
-            if (onBoard(place)) {
-                button.disabled = true;
-            } else {
-                button.addEventListener("click", (event) => addPlace(place, event.detail === 0 ? "keyboard" : "pointer"));
-            }
-
-            item.append(button);
-
-            browseList.append(item);
-
-        }
-
-        const more = places.length - shown.length;
-
-        browseMore.hidden = more <= 0;
-
-        if (more > 0) {
-            browseMore.textContent = `Show all ${places.length}`;
-        }
-
-    }
-
-    function setBrowseOpen(open) {
-
-        browse.open = open;
-
-        browsePanel.hidden = !open;
-
-        browseToggle.setAttribute("aria-expanded", String(open));
-
-        if (open) {
-
-            populateCountries();
-
-            renderBrowse();
-
-            if (!countryData) {
-
-                loadCountryData().then((loaded) => {
-
-                    if (loaded) {
-
-                        populateCountries();
-
-                        renderBrowse();
-
-                    } else {
-
-                        countrySelect.disabled = true;
-
-                        countrySelect.options[0].textContent = "Country list unavailable";
-
-                    }
-
-                });
-
-            }
-
-        }
-
-    }
-
-    browseToggle.addEventListener("click", () => setBrowseOpen(!browse.open));
-
-    regionSelect.addEventListener("change", () => {
-
-        browse.region = regionSelect.value;
-
-        browse.expanded = false;
-
-        populateCountries();
-
-        renderBrowse();
-
-        announce(browseHeader.textContent);
-
-    });
-
-    countrySelect.addEventListener("change", () => {
-
-        browse.country = countrySelect.value;
-
-        browse.expanded = false;
-
-        renderBrowse();
-
-        announce(browseHeader.textContent);
-
-    });
-
-    browseClear.addEventListener("click", () => {
-
-        browse.region = "";
-        browse.country = "";
-        browse.expanded = false;
-
-        regionSelect.value = "";
-
-        populateCountries();
-
-        renderBrowse();
-
-        regionSelect.focus();
-
-    });
-
-    browseMore.addEventListener("click", () => {
-
-        browse.expanded = true;
-
-        renderBrowse();
-
-    });
 
 
     /* ---------- the other controls ---------- */
@@ -1983,15 +1742,11 @@ export function init() {
 
         state.hour12 = !twentyFour.checked;
 
-        /* the cards and the change lines (which carry a clock reading) are both redrawn, and so are open rows */
+        /* the cards and the change lines (which carry a clock reading) are both redrawn, and so are the Explore rows */
         paint(Date.now());
 
-        if (!list.hidden) {
-            renderList(active);
-        }
-
-        if (browse.open) {
-            renderBrowse();
+        if (exploreHandle) {
+            exploreHandle.restyle();
         }
 
     });
@@ -2051,11 +1806,18 @@ export function init() {
 
     syncBoard();
 
+    /* a valid shared board opens My clocks; anything else opens Explore (and is never stored or put in the address) */
+    selectView(parsed.places.length ? "clocks" : "explore");
+
     paint(Date.now());
 
     planLink.setAttribute("href", `${TZ_TOOL.href}${handoffQuery(state.places, here)}`);
 
     arm();
+
+    if (activeView === "explore") {
+        loadExplore();
+    }
 
     /* keep an address the visitor arrived with tidy (only valid values remain), without adding history */
     if (parsed.present) {
@@ -2076,7 +1838,14 @@ export function init() {
             panel.dataset.warm = "true";
 
             idleCallback(() => {
+
                 loadCountryData();
+
+                /* a failed load waits for the visitor's Retry instead of trying again by itself */
+                if (!exploreHandle && retries === 0) {
+                    loadExplore();
+                }
+
             });
 
         });

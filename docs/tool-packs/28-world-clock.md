@@ -1,6 +1,6 @@
 # Tool Pack 28: World Clock (Time Tools)
 
-Status: **Implemented locally on 2026-10-19 (base commit `fce61ba`) under the owner's authorization of this specification, then refined the same day (section 19: search, geographic discovery, add feedback); see sections 18 and 19 for the implementation notes.** **World Clock 2.0 is specified in section 20 (specification only: not approved for implementation, not built).** Not pushed and not deployed; the city list and the icon await the owner's review before any release. The specification itself was finalized on 2026-10-19 (decisions OD1 to OD10 in section 16); until the implementation authorization it read: not authorized for implementation, a separate readiness phase and explicit authorization required.
+Status: **Implemented locally on 2026-10-19 (base commit `fce61ba`) under the owner's authorization of this specification, then refined the same day (section 19: search, geographic discovery, add feedback); see sections 18 and 19 for the implementation notes.** **World Clock 2.0 was specified in section 20 and implemented locally on 2026-10-20 (section 21: what was built, differences, measurements); not pushed and not deployed.** Not pushed and not deployed; the city list and the icon await the owner's review before any release. The specification itself was finalized on 2026-10-19 (decisions OD1 to OD10 in section 16); until the implementation authorization it read: not authorized for implementation, a separate readiness phase and explicit authorization required.
 Roadmap: R2 item 1 (PROPOSED, a candidate, not an authorization; `docs/tool-pack-factory.md` section 10). R2 stays proposed; World Clock is not an approved roadmap item. The roadmap's wording is not changed by this specification.
 Tier: **MEDIUM**, with one part verified at HIGH rigor (the next-clock-change calculation has an independent oracle, section 7.4). A browser-local reference tool: no money, tax or legal content, no stored data. When unsure the factory says take the higher tier; the single risky calculation is the part that gets the higher treatment.
 Id, slug and route: `world-clock`, `/tools/world-clock/`. Section: **Time Tools** (`time-tools`, flat, no category).
@@ -670,7 +670,7 @@ Worst case, a keystroke in the first moments before the idle warm-up has run, is
 
 ## 20. World Clock 2.0: specification amendment (2026-10-19)
 
-**Status: SPECIFICATION ONLY. The specification and its defaults were approved on 2026-10-19; implementation is NOT authorized by that approval and needs a separate, explicit approval. Not built.** Sections 1 to 19 remain the record of what was built and what was decided; nothing in them is rewritten. This section extends them. **When World Clock 2.0 is implemented, the sections it names in 20.1 are superseded by this one**; everything else in sections 1 to 19 stays in force.
+**Status: SPECIFICATION, IMPLEMENTED LOCALLY (see section 21). The specification and its defaults were approved on 2026-10-19; implementation was authorized separately by the owner for a local phase only, with no push and no deployment.** Sections 1 to 19 remain the record of what was built and what was decided; nothing in them is rewritten. This section extends them. **When World Clock 2.0 is implemented, the sections it names in 20.1 are superseded by this one**; everything else in sections 1 to 19 stays in force.
 
 Basis: the read-only design and feasibility review of 2026-10-19 (prototype measurements are quoted where used and labelled as measurements; sizes not yet built are labelled estimates) and the owner's decisions of the same day (20.16). The existing tool is **extended, not replaced**: the clock engine, the curated directory, country browsing, the shareable board, the time-zone correctness safeguards and the Time Zone Converter hand-off are kept.
 
@@ -925,3 +925,43 @@ Defaults approved by the owner on 2026-10-19:
 
 ### 20.18 Files expected to change at implementation (for scoping; not changed now)
 New: `assets/js/tools/world-clock/time-query.js`, `assets/js/tools/world-clock/explore.js`, their unit and browser tests. Changed: `index.js` (shell, tabs, reference line, search field; the popup removed), `clock-engine.js` (snapshot, counts, nearest), `assets/css/tools/world-clock.css`, `tests/browser/world-clock.spec.js`, `tests/browser/visual.spec.js`, the world-clock visual and SEO baselines, this document (implementation notes in a section 21). Not changed: the Time Zone Converter, the oracle and fixtures, the country-data generator, the other tools, the roadmap, GA4 and advertising.
+
+
+## 21. World Clock 2.0: implementation record (2026-10-20)
+
+**Status: IMPLEMENTED LOCALLY under the owner's authorization of 2026-10-19 (base commit `b9a5708`). Not pushed, not deployed, nothing sent to production.** Section 20 remains the specification; this section records what was built, where it differs from or adds to section 20, and what was measured. Nothing in sections 1 to 20 is rewritten.
+
+### 21.1 What was built
+- **Explore cities** (default view) and **My clocks** as two ARIA tabs; a valid shared `cities=` address opens My clocks; the view is never stored or put in the address.
+- **Your time** line above the search, **one search field** with six example chips, Enter to the first result's Add, Escape to clear, no popup.
+- **Explore directory:** the 195 cities on one page (progressive rendering with the keyboard, focus and screen-reader rules of 20.8a), a separate collapsible **other time zones** group, sorting (City, Country, Local time, UTC offset), Region and Country filters, accurate counts, honest empty states with a "Widen to" button for a specific time and a separate "Nearest places (not matches)" area.
+- **Search grammar** (`time-query.js`, pure): hour, bare 1 to 12 as two groups, AM and PM, specific time with ±5/±15/±30/±60 minutes, ranges (24-hour ends, or AM/PM on both ends; midnight-crossing), UTC offsets, `noon` and `midnight` as hours, invalid-input hints. Names, aliases, countries, continents, zone paths and abbreviation explanations reuse the existing engine.
+- **Modules:** `time-query.js` (grammar), `explore-model.js` (matching, groups, counts, ordering, suggestions: pure), `explore.js` (the view; loaded separately by dynamic import, with a loading state, a failure message and a Retry button). `index.js` is now the shell; `clock-engine.js` only exports `usable` and `zoneKnown`.
+
+### 21.2 Differences from, and additions to, section 20 (for the owner's review)
+1. **"Best match" sort.** Section 20.8 names City A to Z as the default for every list. For a *typed name* (for example `LA`, `london`) City A to Z lost the relevance order the search has always had (Los Angeles first for `LA`, London in the United Kingdom first for `london`; verified by the earlier tests). So a typed name is listed **Best match first** and a "Best match" entry appears in the sort control only while a name is searched; the directory, countries and continents stay City A to Z, and time queries stay Local time. An explicit sort choice is kept as in 20.8. **Proposed, not an approved decision: it adds a sort option beyond 20.8.**
+2. **Space for rows not yet drawn.** The first implementation let rows appended later (or the flush of 20.8a) push everything below the list down by more than 800 px. A list with rows pending now keeps empty space of the same height at its end, so nothing below it moves (tested: the other-zones toggle moves less than 120 px when 155 rows arrive). `contain-intrinsic-size` is 74px because it is the content box (74 + 20 padding + 2 border = the 96px of a drawn row).
+3. **"No listed city" message when other zones match.** When no listed city matches a time query but other time zones do, the primary area still says "No listed city is currently ..." and the other-zones group opens (20.9 item 1 and 20.7). The widen button and the nearest places appear in the empty case only when nothing matches at all.
+4. **Range ends.** An end that is a bare 1 to 12 is refused ("add AM or PM to both ends") unless the other end is plainly 24-hour, so `08:00-10:00` and `9:00-17:00` work and `9-12` does not. This is the reading of 20.4 that never guesses.
+5. **Retry.** A failed dynamic import is remembered by the browser for that address, so Retry asks for the module again under a fresh address (`explore.js?retry=n`). The page does not retry by itself after a failure. If a file the module imports failed, a reload is still needed.
+6. **A pending search summary never overwrites a newer message** ("Added Mumbai", "Link copied"): any other announcement cancels it.
+7. **Pre-existing defect found and fixed.** `regionsForWord` looked words up in a plain object, so typing `constructor` or `__proto__` threw (a TypeError in the search). It now uses an own-property check. The 1.0 popup had the same defect.
+8. **Catalog and SEO wording** (approved for this phase in 20.16): the catalog description and the SEO description now describe 195 cities, time search and a shareable board; the DOM and SEO baselines for the Tools directory and the World Clock page were re-recorded for that wording only.
+
+### 21.3 Measured
+| Item | Result |
+| --- | --- |
+| Initial script, gzip (index 12.6 + engine 8.6 + directory 8.3) | **29.5 KB** (target 31 KB; the TP19 engine, 9.3 KB, is shared and counted as before) |
+| Explore chunk, gzip (`explore.js` 8.0 + `explore-model.js` 5.6 + `time-query.js` 4.4) | **18.0 KB** against an **estimate of 8 KB: exceeded** (the estimate counted the grammar only; the view and the model are the rest) |
+| Page CSS, gzip | 3.5 KB for the whole file (the estimate was 1.5 KB for the Explore part alone) |
+| Query change on the 195-row list, desktop Chrome, 1x, including two animation frames | 20 to 48 ms, inside the 50 ms target (4x and phones **not measured**) |
+| Rows | 195 drawn in the order of the first 40 at once, then chunks of 40 at idle |
+
+### 21.4 Tests (this phase)
+- **Unit:** `world-clock-time-query.test.mjs` (32 tests: every grammar row, window boundaries, tolerances, midnight wrap, offset limits, noon and midnight, wording) and `world-clock-explore.test.mjs` (32 tests: agreement with the independent Python reference for every strict case, the 195 cities, counts, groups, sorting, filters, empty states, a full day of instants). The existing World Clock unit tests (engine, directory, URL, contract, oracle, search, country zones) are unchanged and pass. Whole unit suite: 2,634 tests, 1 timing-sensitive test failed once and passed on the rerun.
+- **Browser** (`world-clock.spec.js`, rewritten for the inline design: 68 tests, run on subpath-desktop, subpath-mobile and root-desktop = 138 runs, all passing): tabs and keyboard, the whole directory, sorting and filters, every search class, empty states, adding and focus, inert Add buttons, a full board, progressive rendering with idle scheduling stubbed and removed, the keyboard flush, no layout shift, tick behaviour and the deferred "Results changed. Update", module failure and Retry, country-data failure, overflow at 320, 360, 390 and 768 px, 44 px targets, privacy, the address, the hand-off, the board and the site's catalog and search.
+- **Visual:** the World Clock baseline now shows Explore with the search `8 PM`; a second baseline shows My clocks (desktop, mobile, tablet).
+- **Static and baselines:** URL inventory, link, asset and SEO checks pass; accessibility, links, navigation and smoke specs pass on desktop and mobile except the smoke test of the Image Compressor page (images failed to load), which this change does not touch and which was not investigated.
+
+### 21.5 Not verified
+Safari/WebKit and Android Chrome; assistive technology (screen readers) with the tabs, the results region and progressive rendering; `content-visibility` in older browsers; real-phone performance and the 4x rows of 20.11; Lighthouse. The Playwright tests exercise keyboard behaviour and ARIA attributes, not a screen reader.

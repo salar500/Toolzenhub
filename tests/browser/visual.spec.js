@@ -100,18 +100,36 @@ test.describe("visual baselines @visual (clock and zone pinned)", () => {
   });
 
   test("world-clock", async ({ page, go }) => {
-    // Monday 2026-10-19 14:20 UTC (19:50 in India), the clock paused after the first minute tick and the clock-change lines have been filled in
+    // Monday 2026-10-19 14:20 UTC (19:50 in India), the clock paused after the first minute tick and the clock-change lines have been filled in.
+    // Explore cities with the search "8 PM" (a short, deterministic result: the whole 195-city directory would make the picture enormous).
     await page.clock.install({ time: new Date("2026-10-19T14:19:58Z") });
     await go("tools/world-clock/");
     await expect(page.locator("#wc-panel")).toHaveAttribute("data-ready", "true");
+    await expect(page.locator(".wc-xrow").first()).toBeVisible();
+    await page.locator("#wc-search").fill("8 PM");
+    await expect(page.locator("#wc-x-heading")).toHaveText("Places currently between 8:00 PM and 8:59 PM");
     await page.clock.runFor(8000); // past the first minute tick, and long enough for the deferred clock-change lines
     await page.clock.pauseAt(new Date("2026-10-19T14:20:30Z"));
+    await expect(page.locator(".wc-x-groups .wc-xrow")).toHaveCount(4);
+    await expect(page.locator("#wc-here-time")).toHaveText("7:50 PM");
+    await page.evaluate(() => document.fonts.ready);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect(page).toHaveScreenshot(["visual", "world-clock.png"], { fullPage: true });
+  });
+
+  test("world-clock my clocks", async ({ page, go }) => {
+    await page.clock.install({ time: new Date("2026-10-19T14:19:58Z") });
+    await go("tools/world-clock/?cities=new-york-us,london-gb,dubai-ae,singapore-sg");
+    await expect(page.locator("#wc-panel")).toHaveAttribute("data-ready", "true");
+    await page.clock.runFor(8000);
+    await page.clock.pauseAt(new Date("2026-10-19T14:20:30Z"));
+    await expect(page.locator("#wc-tab-clocks")).toHaveAttribute("aria-selected", "true");
     await expect(page.locator("#wc-board > .wc-card")).toHaveCount(5);
     await expect(page.locator("#wc-board .wc-card__change:visible")).toHaveCount(2); // New York and London have a change in the window; the other cards say nothing
     await expect(page.locator("#wc-board .wc-card").first().locator("time")).toHaveText("7:50 PM");
     await page.evaluate(() => document.fonts.ready);
     await page.evaluate(() => window.scrollTo(0, 0));
-    await expect(page).toHaveScreenshot(["visual", "world-clock.png"], { fullPage: true });
+    await expect(page).toHaveScreenshot(["visual", "world-clock-clocks.png"], { fullPage: true });
   });
 });
 

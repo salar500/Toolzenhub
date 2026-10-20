@@ -146,7 +146,7 @@ const REGION_WORDS = Object.freeze({
 
 /* the regions a typed continent word names, or null */
 export const regionsForWord = (normalized) =>
-    REGION_WORDS[normalized] ?? null;
+    Object.hasOwn(REGION_WORDS, normalized) ? REGION_WORDS[normalized] : null;
 
 /*
  * Other names for a country, each an exact whole-query match (never a substring), written the way

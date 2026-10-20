@@ -2,17 +2,22 @@
    ToolZen Hub
    World Clock
 
-   Only what the shared tool styles do not already provide: the
-   toolbar, the city picker (a combobox with a list of matches) and
-   the clock cards. Buttons, focus and headings come from the shared
-   layer. Loaded after calculator-responsive.css.
+   Only what the shared tool styles do not already provide: the live
+   "Your time" line, the search field and its chips, the two tabs
+   (Explore cities and My clocks), the Explore results and the clock
+   cards. Buttons, focus and headings come from the shared layer.
+   Loaded after calculator-responsive.css.
 
    Every card has the same five rows; only the words differ. Day and
    night, ahead and behind, Today and Tomorrow are always words, never
    colour alone. Nothing animates.
 
+   Explore rows are two lines (name and place on the left, time and
+   offset and a 44px button on the right), never a compressed table;
+   rows carry content-visibility so a long directory stays cheap.
    One column on a phone, two from 560px, as many 260px columns as fit
-   from 900px. The page itself never scrolls sideways.
+   from 900px for the clock cards. The page itself never scrolls
+   sideways.
 ========================================================= */
 
 .calculator-page [hidden] {
@@ -52,34 +57,11 @@
 }
 
 
-/* ---------- toolbar ---------- */
-
-/* a phone: the search box takes the full width, Compare with and Browse share the next row, so the first clock is reachable without scrolling far */
-.wc-toolbar {
-
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: end;
-    gap: 12px;
-
-    padding: 14px;
-
-    border: 1px solid var(--color-slate-200);
-    border-radius: 14px;
-
-    background: #ffffff;
-
-}
+/* ---------- fields ---------- */
 
 .wc-field {
 
     min-width: 0;
-
-}
-
-.wc-field--search {
-
-    grid-column: 1 / -1;
 
 }
 
@@ -182,300 +164,6 @@
 }
 
 
-/* ---------- the city picker ---------- */
-
-.wc-combo {
-
-    position: relative;
-
-}
-
-.wc-list {
-
-    position: absolute;
-    z-index: 30;
-    top: calc(100% + 4px);
-    left: 0;
-    right: 0;
-
-    max-height: 360px;
-    margin: 0;
-    padding: 4px;
-
-    border: 1px solid #d0d5dd;
-    border-radius: 10px;
-
-    background: #ffffff;
-    box-shadow: var(--shadow-lg);
-
-    list-style: none;
-    overflow-y: auto;
-
-}
-
-/* one place as a row (in the search list and in the browse list): its name and where it is on the left, its time and offset on the right */
-.wc-row {
-
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
-
-    min-height: 44px;
-    margin: 0;
-    padding: 8px 10px;
-
-    color: var(--color-ink);
-
-    font-size: 15px;
-    text-align: left;
-
-}
-
-.wc-row__text {
-
-    display: flex;
-    flex-direction: column;
-
-    min-width: 0;
-
-    overflow-wrap: anywhere;
-
-}
-
-.wc-row__main {
-
-    font-weight: 700;
-
-}
-
-.wc-row__sub {
-
-    color: #475467;
-
-    font-size: 13px;
-    line-height: 1.4;
-
-}
-
-.wc-row__time {
-
-    display: flex;
-    flex: 0 0 auto;
-    flex-direction: column;
-    align-items: flex-end;
-
-    text-align: right;
-
-    font-variant-numeric: tabular-nums;
-
-}
-
-.wc-row__clock {
-
-    font-weight: 700;
-
-}
-
-.wc-row__offset {
-
-    color: #475467;
-
-    font-size: 12.5px;
-
-}
-
-.wc-row__badge {
-
-    margin-top: 2px;
-    padding: 1px 8px;
-
-    border: 1px solid var(--color-slate-200);
-    border-radius: var(--radius-full);
-
-    color: #475467;
-
-    font-size: 12px;
-    font-weight: 600;
-
-}
-
-.wc-list__option {
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-}
-
-.wc-list__option[aria-selected="true"] {
-
-    background: var(--color-action-green-soft);
-
-    outline: 2px solid #067647;
-    outline-offset: -2px;
-
-}
-
-.wc-list__more {
-
-    display: flex;
-    align-items: center;
-
-    min-height: 44px;
-    padding: 8px 10px;
-
-    color: var(--color-action-green);
-
-    font-size: 15px;
-    font-weight: 700;
-
-}
-
-.wc-list__header {
-
-    margin: 0;
-    padding: 8px 10px 4px;
-
-    color: var(--color-ink);
-
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-
-}
-
-.wc-list__note {
-
-    margin: 0;
-    padding: 10px;
-
-    color: #475467;
-
-    font-size: 14px;
-    line-height: 1.5;
-
-    overflow-wrap: anywhere;
-
-}
-
-
-/* ---------- browse by region or country ---------- */
-
-.wc-browse-toggle {
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-
-    padding-top: 6px;
-    padding-bottom: 6px;
-
-    font-size: 15px;
-    line-height: 1.25;
-    text-align: left;
-
-    cursor: pointer;
-
-}
-
-.wc-browse-toggle[aria-expanded="true"] {
-
-    border-color: var(--color-action-green);
-
-}
-
-.wc-browse {
-
-    display: grid;
-    gap: 12px;
-
-    grid-column: 1 / -1;
-
-    padding-top: 12px;
-
-    border-top: 1px solid var(--color-slate-200);
-
-}
-
-.wc-browse__selects {
-
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-
-}
-
-.wc-browse__bar {
-
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
-
-}
-
-.wc-browse__header {
-
-    margin: 0;
-
-    color: #475467;
-
-    font-size: 14px;
-    line-height: 1.5;
-
-}
-
-.wc-browse__list {
-
-    display: grid;
-    gap: 6px;
-
-    margin: 0;
-    padding: 0;
-
-    list-style: none;
-
-}
-
-.wc-browse__row {
-
-    width: 100%;
-
-    border: 1px solid var(--color-slate-200);
-    border-radius: 10px;
-
-    background: #ffffff;
-
-    font-family: inherit;
-
-    cursor: pointer;
-
-}
-
-.wc-browse__row:hover:not(:disabled) {
-
-    background: var(--color-action-green-soft);
-
-}
-
-.wc-browse__row:focus-visible {
-
-    outline: 3px solid var(--color-action-green);
-    outline-offset: 2px;
-
-}
-
-.wc-browse__row:disabled {
-
-    background: var(--color-gray-50);
-
-    cursor: default;
-
-}
-
-/* a button that reads as a link, for the actions that sit inside a sentence */
 .wc-link-button {
 
     display: inline;
@@ -896,25 +584,663 @@
 
 }
 
-@media (min-width: 720px) {
+@media (min-width: 900px) {
 
-    .wc-toolbar {
+    .wc-board {
 
-        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
-
-        padding: 16px;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 
     }
 
-    .wc-browse__selects {
+}
+
+
+/* =========================================================
+   WORLD CLOCK 2.0
+========================================================= */
+
+/* ---------- Your time ---------- */
+
+.wc-here {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 8px 16px;
+
+    padding: 16px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: linear-gradient(135deg, #ffffff 0%, var(--color-action-green-soft) 100%);
+
+}
+
+.wc-here__main {
+
+    min-width: 0;
+
+}
+
+.wc-here__label {
+
+    color: #475467;
+
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+}
+
+.wc-here__time {
+
+    margin: 2px 0 0;
+
+    color: var(--color-ink);
+
+    font-size: var(--font-3xl);
+    font-weight: 800;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+
+}
+
+.wc-here__date,
+.wc-here__zone {
+
+    margin: 2px 0 0;
+
+    color: #475467;
+
+    font-size: 14px;
+
+}
+
+/* ---------- search ---------- */
+
+.wc-search {
+
+    padding: 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: #ffffff;
+
+}
+
+.wc-chips {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 10px;
+
+}
+
+.wc-chip {
+
+    min-height: 44px;
+    padding: 6px 14px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: var(--radius-full);
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+.wc-chip:hover {
+
+    border-color: var(--color-action-green);
+
+    background: var(--color-action-green-soft);
+
+}
+
+.wc-chip:focus-visible,
+.wc-tab:focus-visible,
+.wc-xrow__add:focus-visible,
+.wc-filters-toggle:focus-visible,
+.wc-others__toggle:focus-visible,
+.wc-x-stale:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+/* ---------- tabs ---------- */
+
+.wc-tablist {
+
+    display: flex;
+    gap: 4px;
+
+    border-bottom: 2px solid var(--color-slate-200);
+
+}
+
+.wc-tab {
+
+    flex: 1 1 0;
+
+    min-height: 48px;
+    padding: 8px 12px;
+
+    border: 0;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+
+    background: none;
+
+    color: #475467;
+
+    font: inherit;
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+.wc-tab[aria-selected="true"] {
+
+    border-bottom-color: var(--color-action-green);
+
+    color: var(--color-ink);
+
+}
+
+.wc-view {
+
+    display: grid;
+    gap: 16px;
+
+    min-width: 0;
+
+}
+
+/* ---------- Explore: controls and summary ---------- */
+
+.wc-explore,
+.wc-x-results {
+
+    display: grid;
+    gap: 12px;
+
+    min-width: 0;
+
+}
+
+.wc-x-controls {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: end;
+    gap: 12px;
+
+}
+
+.wc-filters-toggle {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+}
+
+.wc-filters {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: end;
+    gap: 12px;
+
+    padding: 12px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 12px;
+
+    background: var(--color-gray-50);
+
+}
+
+.wc-x-heading {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+
+    overflow-wrap: anywhere;
+
+}
+
+.wc-x-countline,
+.wc-x-progress,
+.wc-x-updated,
+.wc-x-note,
+.wc-x-none,
+.wc-x-group-count {
+
+    margin: 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+}
+
+.wc-x-note--hint,
+.wc-x-empty__message {
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+
+}
+
+.wc-x-notes {
+
+    display: grid;
+    gap: 6px;
+
+}
+
+.wc-x-notes:empty {
+
+    display: none;
+
+}
+
+.wc-x-stale {
+
+    justify-self: start;
+
+    min-height: 44px;
+
+}
+
+.wc-x-empty {
+
+    display: grid;
+    justify-items: start;
+    gap: 10px;
+
+    padding: 16px;
+
+    border: 1px dashed #d0d5dd;
+    border-radius: 14px;
+
+}
+
+.wc-x-empty__message {
+
+    margin: 0;
+
+}
+
+.wc-x-loading,
+.wc-x-failed {
+
+    margin: 0;
+    padding: 16px;
+
+    border: 1px dashed #d0d5dd;
+    border-radius: 14px;
+
+    color: #475467;
+
+}
+
+.wc-x-failed p {
+
+    margin: 0 0 10px;
+
+}
+
+.wc-x-group-heading,
+.wc-x-suggest__heading {
+
+    margin: 8px 0 0;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 700;
+
+}
+
+/* ---------- Explore: rows ---------- */
+
+.wc-x-groups {
+
+    display: grid;
+    gap: 8px;
+
+}
+
+.wc-x-list {
+
+    --wc-pending-height: 0px;
+
+    display: grid;
+    gap: 8px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+}
+
+/* room kept for rows that are not drawn yet (explore.js sets the height), so nothing below shifts when they arrive */
+.wc-x-list[data-pending]::after {
+
+    content: "";
+
+    grid-column: 1 / -1;
+
+    height: var(--wc-pending-height, 0);
+
+}
+
+.wc-xrow {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+        "text time"
+        "text add";
+    align-items: center;
+    gap: 4px 12px;
+
+    padding: 10px 12px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    /* the intrinsic size is the content box: 74px plus 20px of padding and 2px of border is the 96px of a drawn row */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 74px;
+
+}
+
+.wc-xrow__text {
+
+    display: flex;
+    flex-direction: column;
+    grid-area: text;
+
+    min-width: 0;
+
+    overflow-wrap: anywhere;
+
+}
+
+.wc-xrow__main {
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 700;
+
+}
+
+.wc-xrow__sub {
+
+    color: #475467;
+
+    font-size: 13px;
+    line-height: 1.4;
+
+}
+
+.wc-xrow__near {
+
+    margin-top: 2px;
+
+    color: #7a2e0e;
+
+    font-size: 13px;
+    font-weight: 700;
+
+}
+
+.wc-x-list--near .wc-xrow {
+
+    border-style: dashed;
+
+    background: var(--color-gray-50);
+
+}
+
+.wc-xrow__time {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: flex-end;
+    grid-area: time;
+    gap: 2px 8px;
+
+    text-align: right;
+
+    font-variant-numeric: tabular-nums;
+
+}
+
+.wc-xrow__clock {
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 700;
+
+}
+
+.wc-xrow__offset {
+
+    color: #475467;
+
+    font-size: 12.5px;
+
+}
+
+.wc-xrow__day {
+
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    color: #475467;
+
+    font-size: 12.5px;
+    font-weight: 600;
+
+}
+
+.wc-xrow__icon {
+
+    display: inline-flex;
+
+}
+
+.wc-xrow__add {
+
+    grid-area: add;
+    justify-self: end;
+
+    min-width: 44px;
+    min-height: 44px;
+    padding: 6px 14px;
+
+    border: 1px solid var(--color-action-green);
+    border-radius: 10px;
+
+    background: var(--color-action-green);
+
+    color: #ffffff;
+
+    font: inherit;
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+.wc-xrow__add:hover {
+
+    background: var(--color-action-green-hover);
+
+}
+
+/* "On your board" and "Board full": still a focusable button, visibly inert */
+.wc-xrow__add--inert,
+.wc-xrow__add--inert:hover {
+
+    border-color: #d0d5dd;
+
+    background: var(--color-gray-100);
+
+    color: #475467;
+
+    cursor: default;
+
+}
+
+/* ---------- Explore: other time zones ---------- */
+
+.wc-others {
+
+    display: grid;
+    gap: 8px;
+
+}
+
+.wc-others__toggle {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+
+    width: 100%;
+    min-height: 48px;
+    padding: 8px 12px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: var(--color-gray-50);
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: left;
+
+    cursor: pointer;
+
+}
+
+.wc-others__toggle:disabled {
+
+    color: var(--color-control-disabled-text);
+
+    cursor: default;
+
+}
+
+.wc-others__toggle[aria-expanded="true"] span:last-child {
+
+    transform: rotate(180deg);
+
+}
+
+.wc-others__body {
+
+    display: grid;
+    gap: 8px;
+
+}
+
+.wc-x-suggest {
+
+    display: grid;
+    gap: 8px;
+
+}
+
+/* ---------- My clocks ---------- */
+
+.wc-board-head .wc-field--ref {
+
+    min-width: 200px;
+
+}
+
+@media (min-width: 560px) {
+
+    .wc-here {
+
+        padding: 20px;
+
+    }
+
+    .wc-here__time {
+
+        font-size: var(--font-4xl);
+
+    }
+
+    .wc-x-controls {
+
+        grid-template-columns: repeat(3, minmax(0, 220px));
+
+    }
+
+    .wc-filters {
 
         grid-template-columns: repeat(2, minmax(0, 280px));
 
     }
 
-    .wc-field--search {
+    .wc-x-list {
 
-        grid-column: auto;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    }
+
+    .wc-x-list--near {
+
+        grid-template-columns: minmax(0, 1fr);
 
     }
 
@@ -922,9 +1248,19 @@
 
 @media (min-width: 900px) {
 
-    .wc-board {
+    .wc-x-list {
 
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .wc-others__toggle[aria-expanded="true"] span:last-child {
+
+        transform: none;
 
     }
 

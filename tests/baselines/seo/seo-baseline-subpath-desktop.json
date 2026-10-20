@@ -4088,7 +4088,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1675
+      "visibleTextChars": 1697
     }
   },
   "/tools.html": {
@@ -4137,7 +4137,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4104
+      "visibleTextChars": 4126
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -4780,11 +4780,11 @@
   "/tools/world-clock/": {
     "runtime": {
       "title": "World Clock: Live Time in Cities and Time Zones | ToolZen Hub",
-      "description": "Free world clock: see the current time, date and UTC offset in several cities at once and how far ahead or behind each is. Search well-known cities or any time zone your browser supports. It runs in your browser.",
+      "description": "Free world clock: browse the time in 195 cities, search by city or by the time it is now, such as 8 PM, and keep a shareable board. Runs in your browser.",
       "canonical": "https://toolzenhub.in/tools/world-clock/",
       "robots": null,
       "openGraph": {
-        "og:description": "Free world clock: see the current time, date and UTC offset in several cities at once and how far ahead or behind each is. Search well-known cities or any time zone your browser supports. It runs in your browser.",
+        "og:description": "Free world clock: browse the time in 195 cities, search by city or by the time it is now, such as 8 PM, and keep a shareable board. Runs in your browser.",
         "og:site_name": "ToolZen Hub",
         "og:title": "World Clock: Live Time in Cities and Time Zones | ToolZen Hub",
         "og:type": "website",
@@ -4792,7 +4792,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Free world clock: see the current time, date and UTC offset in several cities at once and how far ahead or behind each is. Search well-known cities or any time zone your browser supports. It runs in your browser.",
+        "twitter:description": "Free world clock: browse the time in 195 cities, search by city or by the time it is now, such as 8 PM, and keep a shareable board. Runs in your browser.",
         "twitter:title": "World Clock: Live Time in Cities and Time Zones | ToolZen Hub"
       },
       "jsonLd": [
@@ -4816,14 +4816,14 @@
     },
     "rawHtml": {
       "title": "World Clock: Live Time in Cities and Time Zones | ToolZen Hub",
-      "description": "Free world clock: see the current time, date and UTC offset in several cities at once and how far ahead or behind each is. Search well-known cities or any time zone your browser supports. It runs in your browser.",
+      "description": "Free world clock: browse the time in 195 cities, search by city or by the time it is now, such as 8 PM, and keep a shareable board. Runs in your browser.",
       "canonical": "https://toolzenhub.in/tools/world-clock/",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4176
+      "visibleTextChars": 5038
     }
   }
 }

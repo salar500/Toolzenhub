@@ -1039,7 +1039,7 @@ const catalog = [
         icon: "◶",
         title: "World Clock",
         description:
-            "See the current time in several cities at once, with each city's date, UTC offset and how far ahead of or behind you it is. It runs in your browser.",
+            "Browse the current time in 195 cities and other time zones, search by city, country or the time it is now, and keep a shareable board of city clocks. It runs in your browser.",
         autoRelated: false,
         relatedTools: ["time-zone-converter"],
         aliases: [
@@ -1063,7 +1063,7 @@ const catalog = [
             title:
                 "World Clock: Live Time in Cities and Time Zones | ToolZen Hub",
             description:
-                "Free world clock: see the current time, date and UTC offset in several cities at once and how far ahead or behind each is. Search well-known cities or any time zone your browser supports. It runs in your browser."
+                "Free world clock: browse the time in 195 cities, search by city or by the time it is now, such as 8 PM, and keep a shareable board. Runs in your browser."
         }
     },
 

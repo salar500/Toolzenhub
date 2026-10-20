@@ -448,7 +448,7 @@ const usableCache = new WeakMap();
  * The directory entries whose zone THIS browser accepts, and the zones they cover. Entries share zones (eight
  * Indian cities keep Asia/Kolkata), so each zone is checked once, not once per entry.
  */
-function usable(directory) {
+export function usable(directory) {
 
     let cached = usableCache.get(directory);
 
@@ -490,7 +490,7 @@ function usable(directory) {
 /* the zones this browser lists, as a Set; a zone it does not list but still accepts is checked directly */
 let zoneSetCache = null;
 
-function zoneKnown(zone) {
+export function zoneKnown(zone) {
 
     if (zoneSetCache === null) {
         zoneSetCache = new Set(listZones());
