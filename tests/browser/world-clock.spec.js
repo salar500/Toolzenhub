@@ -315,7 +315,7 @@ test.describe("World Clock: the Explore directory", () => {
     await expect(row(page, "London").locator(".wc-xrow__word")).toHaveText("Daytime");
     await expect(row(page, "Kolkata").locator(".wc-xrow__clock")).toHaveText("7:50 PM"); // same date as yours: no weekday
     await expect(page.locator("#wc-sort")).toHaveValue("time");
-    expect(await page.locator("#wc-sort option").allTextContents()).toEqual(["Local time (00:00 to 23:59)", "City (A to Z)", "Country", "UTC offset"]);
+    expect(await page.locator("#wc-sort option:not([hidden])").allTextContents()).toEqual(["Local time (00:00 to 23:59)", "City (A to Z)", "Country", "UTC offset"]);
     for (const li of await page.locator(".wc-xrow").all()) await expect(li.locator(".wc-xrow__add")).toHaveAttribute("aria-label", /^(Add .+, .+|.+ is on your board)$/);
   });
 
@@ -705,6 +705,7 @@ test.describe("World Clock: searching by the time it is now", () => {
     await page.locator(".wc-x-empty").getByRole("button", { name: /^Show \d+ other time zones?$/ }).click();
     await expect(othersRows(page).first()).toBeVisible();
     await expect(page.locator("#wc-tolerance")).toBeHidden(); // no tolerance for an hour
+    await chooseCities(page); // the choice of list is kept across queries, so go back to the cities before reading them
     await type(page, "midnight");
     await expect(heading(page)).toHaveText("Places currently between 12:00 AM and 12:59 AM");
     expect(await names(page.locator(".wc-x-groups"))).toHaveLength(4);
