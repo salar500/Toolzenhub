@@ -51,8 +51,8 @@ import {
 
 const CHUNK = 40;
 
-/* the height of a row and the gap between rows (world-clock.css), for the space kept for rows not yet drawn */
-const ROW_HEIGHT = 96;
+/* the fallback height of a row and the gap between rows (world-clock.css), for the space kept for rows not yet drawn */
+const ROW_HEIGHT = 116;
 const ROW_GAP = 8;
 
 const SORT_LABELS = Object.freeze({
@@ -485,7 +485,14 @@ export function mountExplore(panel, context) {
 
             const columns = Math.max(1, getComputedStyle(list).gridTemplateColumns.split(" ").length);
 
-            list.style.setProperty("--wc-pending-height", `${Math.ceil(pending / columns) * (ROW_HEIGHT + ROW_GAP) - ROW_GAP}px`);
+            /* a drawn row's real height (names and times wrap differently on every width) beats a fixed guess */
+            const drawn = list.querySelector(".wc-xrow");
+
+            const measured = drawn ? drawn.getBoundingClientRect().height : 0;
+
+            const rowHeight = measured >= 60 && measured <= 400 ? measured : ROW_HEIGHT;
+
+            list.style.setProperty("--wc-pending-height", `${Math.ceil(pending / columns) * (rowHeight + ROW_GAP) - ROW_GAP}px`);
 
             list.setAttribute("data-pending", "");
 

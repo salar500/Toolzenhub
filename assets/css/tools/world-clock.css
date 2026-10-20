@@ -672,6 +672,69 @@
 
 }
 
+.wc-search-field {
+
+    position: relative;
+
+}
+
+/* room on the right for the Clear button; the browser's own cross is hidden so there is only one */
+.wc-search-field .wc-input {
+
+    padding-right: 52px;
+
+}
+
+.wc-search-field .wc-input::-webkit-search-cancel-button,
+.wc-search-field .wc-input::-webkit-search-decoration {
+
+    -webkit-appearance: none;
+    appearance: none;
+
+}
+
+.wc-search-clear {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+    padding: 0;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: #475467;
+
+    font: inherit;
+    font-size: 22px;
+    line-height: 1;
+
+    cursor: pointer;
+
+}
+
+.wc-search-clear:hover {
+
+    color: var(--color-ink);
+
+}
+
+.wc-search-clear:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: -3px;
+
+}
+
 .wc-chips {
 
     display: flex;
@@ -970,12 +1033,16 @@
 .wc-xrow {
 
     display: grid;
+    /*
+     * The name always has the full width of the row; the time and the button sit on a second line. (A side column
+     * sized "auto" took the whole one-line width of the time, offset and day label and left the name a sliver.)
+     */
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
-        "text time"
-        "text add";
+        "text text"
+        "time add";
     align-items: center;
-    gap: 4px 12px;
+    gap: 6px 12px;
 
     padding: 10px 12px;
 
@@ -984,9 +1051,9 @@
 
     background: #ffffff;
 
-    /* the intrinsic size is the content box: 74px plus 20px of padding and 2px of border is the 96px of a drawn row */
+    /* the intrinsic size is the content box: 94px plus 20px of padding and 2px of border is the 116px of a drawn row with a one-line place */
     content-visibility: auto;
-    contain-intrinsic-size: auto 74px;
+    contain-intrinsic-size: auto 94px;
 
 }
 
@@ -998,7 +1065,8 @@
 
     min-width: 0;
 
-    overflow-wrap: anywhere;
+    /* break at spaces and slashes first; a single long word may still break so nothing overflows */
+    overflow-wrap: break-word;
 
 }
 
@@ -1044,11 +1112,13 @@
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
-    justify-content: flex-end;
+    justify-content: flex-start;
     grid-area: time;
-    gap: 2px 8px;
+    gap: 2px 10px;
 
-    text-align: right;
+    min-width: 0;
+
+    text-align: left;
 
     font-variant-numeric: tabular-nums;
 

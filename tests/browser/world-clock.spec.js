@@ -1198,3 +1198,177 @@ test.describe("World Clock: time, timers and the site", () => {
     await expect(page.locator("main a", { hasText: "Time Zone Converter" }).first()).toBeVisible();
   });
 });
+
+/*
+ * Step 1 corrections: a row's name has the whole row (it used to be squeezed to one letter per line beside a wide time column),
+ * the search field has its own Clear button, and the space kept for rows not drawn yet follows the real row height.
+ * Geometry and computed style, not screenshots.
+ */
+test.describe("World Clock: readable rows, Clear search and stable progressive rendering on a phone", () => {
+  /* the first `limit` rows: the name is readable, the time, offset and Add are shown and do not overlap */
+  async function expectReadableRows(page, locator, limit = 4) {
+    const total = await locator.count();
+    expect(total, "rows to check").toBeGreaterThan(0);
+    for (let i = 0; i < Math.min(total, limit); i += 1) {
+      const li = locator.nth(i);
+      await li.scrollIntoViewIfNeeded();
+      const m = await li.evaluate((el) => {
+        const box = (selector) => { const r = el.querySelector(selector).getBoundingClientRect(); return { x: r.x, y: r.y, w: r.width, h: r.height, r: r.right, b: r.bottom }; };
+        const own = el.getBoundingClientRect();
+        const main = el.querySelector(".wc-xrow__main");
+        return {
+          row: { x: own.x, w: own.width, r: own.right, b: own.bottom },
+          text: box(".wc-xrow__text"),
+          main: box(".wc-xrow__main"),
+          mainLine: parseFloat(getComputedStyle(main).lineHeight) || 25,
+          clock: box(".wc-xrow__clock"),
+          offset: box(".wc-xrow__offset"),
+          add: box(".wc-xrow__add"),
+          offsetText: el.querySelector(".wc-xrow__offset").textContent,
+          clockText: el.querySelector(".wc-xrow__clock").textContent,
+          scrollOverflow: el.scrollWidth - el.clientWidth
+        };
+      });
+      const q = `row ${i}: ${JSON.stringify(m)}`;
+      expect(m.text.w, `${q}: the name column has the row`).toBeGreaterThanOrEqual(m.row.w - 40);
+      expect(m.main.w, `${q}: a readable width`).toBeGreaterThanOrEqual(140);
+      expect(m.main.h / m.mainLine, `${q}: at most three lines`).toBeLessThanOrEqual(3.2);
+      expect(m.clockText.trim(), q).not.toBe("");
+      expect(m.offsetText, q).toMatch(/^UTC[+−]\d\d:\d\d$/);
+      expect(m.clock.w, q).toBeGreaterThan(20);
+      expect(m.add.h, `${q}: touch target`).toBeGreaterThanOrEqual(44);
+      expect(m.add.w, q).toBeGreaterThanOrEqual(44);
+      // inside the row, below the name, and the time never runs under the button
+      expect(m.add.r, q).toBeLessThanOrEqual(m.row.r + 0.5);
+      expect(m.add.b, q).toBeLessThanOrEqual(m.row.b + 0.5);
+      expect(m.clock.y, q).toBeGreaterThanOrEqual(m.text.b - 1);
+      expect(m.offset.y, q).toBeGreaterThanOrEqual(m.text.b - 1);
+      const sameLine = Math.min(m.clock.b, m.add.b) > Math.max(m.clock.y, m.add.y);
+      if (sameLine) expect(m.offset.r, q).toBeLessThanOrEqual(m.add.x + 0.5);
+      expect(m.scrollOverflow, `${q}: nothing spills out of the row`).toBeLessThanOrEqual(1);
+    }
+  }
+
+  async function openOthers(page) {
+    const toggle = page.locator(".wc-others__toggle");
+    await expect(toggle).toBeEnabled();
+    if ((await toggle.getAttribute("aria-expanded")) !== "true") await toggle.click();
+    await expect(toggle).toHaveAttribute("aria-expanded", "true");
+  }
+
+  for (const width of [320, 360, 390]) {
+    test(`${width}px: listed cities and other time zones keep readable two-line rows for UTC+05:30, UTC+08:00, India, Australia and a long zone path`, async ({ page, go }) => {
+      await page.setViewportSize({ width, height: 800 });
+      await openExplore(page, go);
+      for (const query of ["UTC+05:30", "UTC+08:00", "India", "Australia"]) {
+        await search(page).fill(query);
+        await expect(heading(page)).not.toHaveText("All listed cities");
+        await expectReadableRows(page, listed(page));
+        await expectNoHorizontalOverflow(page);
+      }
+      // other time zones: opened, and each of its first rows readable
+      await search(page).fill("Australia");
+      await openOthers(page);
+      await expectReadableRows(page, page.locator(".wc-others__body .wc-xrow"));
+      await expectNoHorizontalOverflow(page);
+      // a long zone path: it may wrap, but it stays a readable column
+      await search(page).fill("America/Argentina");
+      await expect(page.locator(".wc-xrow").first()).toBeVisible();
+      if (await page.locator(".wc-others__toggle").isEnabled()) await openOthers(page);
+      const longest = Math.max(...(await rows(page).locator(".wc-xrow__main, .wc-xrow__sub").allTextContents()).map((t) => t.length));
+      expect(longest).toBeGreaterThan(15);
+      await expectReadableRows(page, page.locator(".wc-xrow:visible"), 6);
+      await expectNoHorizontalOverflow(page);
+    });
+  }
+
+  test("Clear search: shown only with text, named, empties only the query, keeps the filters, returns focus, and the native cross is hidden", async ({ page, go }) => {
+    await page.setViewportSize({ width: 360, height: 800 });
+    await openExplore(page, go);
+    const clear = page.locator("#wc-search-clear");
+    await expect(clear).toBeHidden();
+    await page.locator("#wc-filters-toggle").click();
+    await page.locator("#wc-region").selectOption("Asia");
+    const filteredCount = await countLine(page).textContent();
+    await search(page).fill("india");
+    await expect(clear).toBeVisible();
+    await expect(clear).toHaveAccessibleName("Clear search");
+    await expect(clear).toHaveAttribute("type", "button");
+    const box = await clear.boundingBox();
+    expect(Math.min(box.width, box.height)).toBeGreaterThanOrEqual(44);
+    const field = await search(page).boundingBox();
+    expect(box.x + box.width).toBeLessThanOrEqual(field.x + field.width + 1);
+    expect(box.x).toBeGreaterThanOrEqual(field.x);
+    // the browser draws its own cross inside a type=search field. getComputedStyle cannot read a browser-built pseudo-element, so read the
+    // author rule that removes it from the loaded stylesheet (this proves the rule is served and parsed, not what the browser paints)
+    const nativeHidden = await page.evaluate(() => {
+      const found = [];
+      for (const sheet of document.styleSheets) {
+        let list = [];
+        try { list = [...sheet.cssRules]; } catch { continue; }
+        for (const rule of list) {
+          if (rule.selectorText && rule.selectorText.includes("::-webkit-search-cancel-button") && rule.selectorText.includes(".wc-input")) {
+            found.push((rule.style.getPropertyValue("appearance") || rule.style.getPropertyValue("-webkit-appearance")).trim());
+          }
+        }
+      }
+      return found;
+    });
+    expect(nativeHidden, "a rule that removes the native cross").toEqual(["none"]);
+    await expect(heading(page)).toContainText(/india/i);
+    await clear.click();
+    await expect(search(page)).toHaveValue("");
+    await expect(search(page)).toBeFocused();
+    await expect(clear).toBeHidden();
+    await expect(heading(page)).not.toContainText(/india/i);
+    await expect(page.locator("#wc-region")).toHaveValue("Asia");
+    await expect(countLine(page)).toHaveText(filteredCount);
+    // keyboard: Tab from the field reaches Clear; Enter clears
+    await search(page).fill("tokyo");
+    await search(page).focus();
+    await page.keyboard.press("Tab");
+    await expect(clear).toBeFocused();
+    expect(await clear.evaluate((el) => getComputedStyle(el).outlineWidth)).toBe("3px");
+    await page.keyboard.press("Enter");
+    await expect(search(page)).toHaveValue("");
+    await expect(search(page)).toBeFocused();
+    await expect(clear).toBeHidden();
+    // an example chip shows it, Escape hides it
+    await page.locator('[data-chip="8 PM"]').click();
+    await expect(search(page)).toHaveValue("8 PM");
+    await expect(clear).toBeVisible();
+    await search(page).focus();
+    await page.keyboard.press("Escape");
+    await expect(search(page)).toHaveValue("");
+    await expect(clear).toBeHidden();
+  });
+
+  for (const width of [320, 360]) {
+    test(`${width}px: while rows arrive in chunks the count stays right, nothing overflows, nothing below moves, and Tab walks the results`, async ({ page, go }) => {
+      await page.setViewportSize({ width, height: 800 });
+      await stubIdle(page, () => { window.__idle = []; window.requestIdleCallback = (fn) => { window.__idle.push(fn); return window.__idle.length; }; window.cancelIdleCallback = () => {}; });
+      await openExplore(page, go);
+      await expect(listed(page)).toHaveCount(40);
+      await expect(countLine(page)).toContainText("195 listed cities");
+      await expect(page.locator(".wc-x-progress")).toHaveText("Showing 40 of 195");
+      await expect(page.locator(".wc-x-groups .wc-x-list")).toHaveAttribute("data-pending", /.*/);
+      await expectNoHorizontalOverflow(page);
+      const top = () => page.locator(".wc-others__toggle").evaluate((el) => el.getBoundingClientRect().top + scrollY);
+      const before = await top();
+      // keyboard: Enter in the search goes to the first Add; Tab then walks the Add buttons row by row
+      await search(page).focus();
+      await page.keyboard.press("Enter");
+      await expect(listed(page).first().locator(".wc-xrow__add")).toBeFocused();
+      await expect(listed(page)).toHaveCount(195);
+      for (let i = 1; i <= 4; i += 1) {
+        await page.keyboard.press("Tab");
+        await expect(listed(page).nth(i).locator(".wc-xrow__add")).toBeFocused();
+      }
+      const after = await top();
+      expect(Math.abs(after - before), `the toggle moved ${after - before}px`).toBeLessThan(120);
+      await expect(page.locator(".wc-x-progress")).toHaveText("All 195 shown");
+      await expect(page.locator(".wc-x-groups .wc-x-list")).not.toHaveAttribute("data-pending", /.*/);
+      await expectNoHorizontalOverflow(page);
+    });
+  }
+});
