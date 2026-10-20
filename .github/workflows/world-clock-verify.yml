@@ -1,4 +1,4 @@
-# World Clock focused browser verification (manual only).
+# World Clock focused browser verification (manual, or a push to the temporary branch wc-verify/step1 only).
 #
 # Runs ONLY tests/browser/world-clock.spec.js on the phone project (subpath-mobile, 390px), one worker, so the browser
 # tests do not have to run on a low-memory development machine. Start it from the Actions tab and pick the branch to test.
@@ -8,6 +8,9 @@
 name: World Clock verification
 
 on:
+  push:
+    branches:
+      - wc-verify/step1
   workflow_dispatch:
 
 permissions:
