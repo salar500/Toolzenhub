@@ -1299,7 +1299,22 @@ test.describe("World Clock: readable rows, Clear search and stable progressive r
     const field = await search(page).boundingBox();
     expect(box.x + box.width).toBeLessThanOrEqual(field.x + field.width + 1);
     expect(box.x).toBeGreaterThanOrEqual(field.x);
-    expect(await search(page).evaluate((el) => getComputedStyle(el, "::-webkit-search-cancel-button").appearance)).toBe("none");
+    // the browser draws its own cross inside a type=search field. getComputedStyle cannot read a browser-built pseudo-element, so read the
+    // author rule that removes it from the loaded stylesheet (this proves the rule is served and parsed, not what the browser paints)
+    const nativeHidden = await page.evaluate(() => {
+      const found = [];
+      for (const sheet of document.styleSheets) {
+        let list = [];
+        try { list = [...sheet.cssRules]; } catch { continue; }
+        for (const rule of list) {
+          if (rule.selectorText && rule.selectorText.includes("::-webkit-search-cancel-button") && rule.selectorText.includes(".wc-input")) {
+            found.push((rule.style.getPropertyValue("appearance") || rule.style.getPropertyValue("-webkit-appearance")).trim());
+          }
+        }
+      }
+      return found;
+    });
+    expect(nativeHidden, "a rule that removes the native cross").toEqual(["none"]);
     await expect(heading(page)).toContainText(/india/i);
     await clear.click();
     await expect(search(page)).toHaveValue("");
