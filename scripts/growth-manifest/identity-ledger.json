@@ -362,6 +362,13 @@
       "state": "active"
     },
     {
+      "id": "gratuity",
+      "module": "assets/js/calculators/gratuity/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "gst",
       "module": "assets/js/calculators/gst/index.js",
       "moduleChanges": [],

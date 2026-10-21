@@ -623,6 +623,42 @@ const catalog = [
         }
     },
 
+    {
+        id: "gratuity",
+        status: "published",
+        loader: () =>
+            import("../calculators/gratuity/index.js"),
+        category: "tax",
+        icon: "₹",
+        title: "Gratuity Calculator (India)",
+        description:
+            "Estimate gratuity under the Code on Social Security, 2020 from your qualifying monthly wages and your joining and exit dates, with how the figure was worked out and what it assumes. For exits from 21 November 2025.",
+        aliases: [
+            "gratuity calculator",
+            "gratuity calculator india",
+            "gratuity calculation",
+            "gratuity formula",
+            "gratuity eligibility"
+        ],
+        autoRelated: false,
+        relatedTools: [
+            "income-tax"
+        ],
+        capabilities: {
+            reset: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Gratuity Calculator India (Code on Social Security) | ToolZen Hub",
+            description:
+                "Estimate gratuity under the Code on Social Security, 2020 from your qualifying monthly wages and joining and exit dates, with how it was worked out and what it assumes. For exits from 21 November 2025. An estimate, not legal advice."
+        }
+    },
+
 
     /* =====================================================
        HEALTH
