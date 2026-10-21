@@ -199,9 +199,11 @@ test.describe("Gratuity Calculator in a browser (G6)", () => {
     await expect(page.locator("#gratuity-error-wages-second")).toContainText("out of date");
     await expect(page.locator("#gratuity-compare-output")).toBeEmpty();
     expect(await page.evaluate(() => window.__copied.length)).toBe(0);
-    await btn(page, "Copy summary").click();
+    // the control is aria-disabled on purpose, so Playwright's normal click would wait for it to be enabled: force the click to exercise the handler
+    await btn(page, "Copy summary").click({ force: true });
     await expect(page.locator("#gratuity-copy-status")).toContainText("out of date");
     expect(await page.evaluate(() => window.__copied.length)).toBe(0);
+    await expect(page.locator("#gratuity-copy-text")).toHaveCount(0);
     // a new Calculate makes everything current again
     await btn(page, "Calculate").click();
     await expect(page.locator("#gratuity-stale")).toBeHidden();
@@ -210,6 +212,13 @@ test.describe("Gratuity Calculator in a browser (G6)", () => {
     await expect(btn(page, "Compare")).toBeEnabled();
     await expect(btn(page, "Copy summary")).toBeEnabled();
     await expect(page.locator("#gratuity-compare-output")).toBeEmpty();
+    // Copy works again, from the new calculation only
+    await btn(page, "Copy summary").click();
+    await expect(page.locator("#gratuity-copy-status")).toHaveText("Summary copied to the clipboard.");
+    const copied = await page.evaluate(() => window.__copied);
+    expect(copied).toHaveLength(1);
+    expect(copied[0]).toContain("Qualifying monthly wages: ₹60,000.00");
+    expect(copied[0]).not.toContain("₹50,000.00");
   });
 
   test("Reset clears the fields, the result, the features and the stale marker, and focuses the first field", async ({ page, go }) => {
