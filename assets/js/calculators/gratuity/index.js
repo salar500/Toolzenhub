@@ -32,7 +32,9 @@
 ========================================================= */
 
 import {
-    calculateGratuity
+    calculateGratuity,
+    exploreExitDates,
+    compareWages
 } from "../formulas/gratuity.js";
 
 import {
@@ -93,6 +95,8 @@ const ERROR_IDS = {
 
 const EMPTY_MESSAGE = "Choose the employee type, enter your details and press Calculate.";
 const STALE_MESSAGE = "You have changed a value. The result below is out of date until you press Calculate.";
+export const STALE_COMPARE_MESSAGE = "The result above is out of date. Press Calculate first, then compare wages.";
+export const STALE_COPY_MESSAGE = "The result above is out of date. Press Calculate first, then copy the summary.";
 const RESET_MESSAGE = "Cleared. Choose the employee type, enter your details and press Calculate.";
 const SUMMARY_ERROR_ID = "gratuity-error-summary";
 
@@ -451,25 +455,289 @@ export function renderResultHtml(view) {
 
 
 /* =========================================================
+   P1 FEATURES (G6): the date explorer, the wage comparison and the
+   copied summary. All three show only what the engine returns
+   (exploreExitDates, compareWages, calculateGratuity); nothing is
+   recalculated here. Pure; exported for the tests.
+========================================================= */
+
+const EXPLORER_LABELS = Object.freeze({
+    FIVE_YEAR_DATE: "On the calendar five-year date",
+    PLUS_6_MONTHS: "Six months after your exit date",
+    PLUS_12_MONTHS: "One year after your exit date"
+});
+
+const EXPLORER_NOTE = "These are hypothetical exit dates with the same joining date and wages. They show how the dates and the figures change, not what is due, and they are not advice on when to leave. A row that shows five calendar years reached is not a promise of gratuity: continuous service and the other conditions still apply.";
+
+const COMPARE_NOTE = "The same dates and rules are used for both wages. A higher gross salary does not necessarily raise the qualifying wages, so compare the wages your employer counts for gratuity.";
+
+const EMPLOYEE_TYPE_TEXT = Object.freeze({
+    [EMPLOYEE_TYPES.regular]: "Regular employee (including an employee of a contractor)",
+    [EMPLOYEE_TYPES.fixedTerm]: "Fixed-term employee, engaged directly by the employer"
+});
+
+const CONTRACT_END_TEXT = Object.freeze({
+    [CONTRACT_ENDS.expires]: "The contract runs to its end (it expires)"
+});
+
+/* the explorer table of an engine exploration; null when there is nothing to show (not a regular employee, or invalid) */
+export function describeExplorer(exploration) {
+
+    if (!exploration || exploration.status !== STATUS.ok || !Array.isArray(exploration.rows) || !exploration.rows.length) {
+        return null;
+    }
+
+    const rows = exploration.rows.map((row) => {
+
+        const view = describeResult(row.result);
+
+        return {
+            id: row.id,
+            label: EXPLORER_LABELS[row.id] ?? "Hypothetical exit date",
+            dateText: formatIsoDate(row.exitDate),
+            short: view.short,
+            serviceLine: view.working ? view.working[1][1] : "",
+            amount: view.amount,
+            notes: view.notes
+        };
+
+    });
+
+    const wagesPaise = exploration.base.trace.inputs.wagesPaise;
+
+    return {
+        rows,
+        wageLine: `Wages used for every row: ${formatPaise(wagesPaise)} a month.`,
+        notes: [...new Set(rows.flatMap((row) => row.notes))]
+    };
+
+}
+
+/* the comparison of two wages; the difference is the engine's, shown as a word and an amount, never a signed number */
+export function describeComparison(comparison) {
+
+    const ok = (r) => r && r.status === STATUS.ok;
+
+    if (!ok(comparison.first)) {
+        return { errors: [], unavailable: true };
+    }
+
+    if (comparison.second.status === STATUS.incomplete || comparison.second.status === STATUS.invalid) {
+        return {
+            errors: comparison.second.errors
+                .filter((error) => error.field === "wages")
+                .map((error) => errorMessage("wages", error.code)),
+            unavailable: false
+        };
+    }
+
+    if (!ok(comparison.second) || comparison.differencePaise === null
+        || comparison.first.amount.paise === null || comparison.second.amount.paise === null) {
+        return { errors: [], unavailable: true };
+    }
+
+    const first = comparison.first;
+    const second = comparison.second;
+    const illustrative = first.amount.kind === AMOUNT_KINDS.illustrative || second.amount.kind === AMOUNT_KINDS.illustrative;
+    const noun = illustrative ? "illustrative amounts" : "estimates";
+
+    const difference = comparison.differencePaise;
+    const amount = formatPaise(Math.abs(difference));
+
+    const sentence = difference === 0
+        ? `The two ${noun} are the same.`
+        : `The second ${illustrative ? "illustrative amount" : "estimate"} is ${amount} ${difference > 0 ? "higher" : "lower"} than the first.`;
+
+    return {
+        errors: [],
+        unavailable: false,
+        illustrative,
+        rows: [
+            ["First wages (as calculated)", `${formatPaise(first.trace.inputs.wagesPaise)} a month`, formatPaise(first.amount.paise), first.amount.ceilingApplied === true],
+            ["Second wages", `${formatPaise(second.trace.inputs.wagesPaise)} a month`, formatPaise(second.amount.paise), second.amount.ceilingApplied === true]
+        ],
+        amountLabel: first.amount.kind === second.amount.kind ? AMOUNT_LABELS[first.amount.kind] : AMOUNT_LABELS[AMOUNT_KINDS.illustrative],
+        sentence,
+        announcement: `Comparison: ${sentence}`
+    };
+
+}
+
+/* the plain-text summary for the clipboard: only the calculated, valid inputs; every qualification kept */
+export function summaryText(result, inputs) {
+
+    const view = describeResult(result);
+
+    if (result.status !== STATUS.ok || !inputs) {
+        return "";
+    }
+
+    const fixed = inputs.employeeType === EMPLOYEE_TYPES.fixedTerm;
+
+    const lines = [
+        "Gratuity estimate (ToolZen Hub Gratuity Calculator)",
+        `An estimate under the Code on Social Security, 2020, for exits on or after 21 November 2025. Rules checked on ${formatIsoDate(RULES_CHECKED_ON)}.`,
+        "",
+        "What was entered",
+        `- Employee type: ${EMPLOYEE_TYPE_TEXT[inputs.employeeType] ?? ""}`
+    ];
+
+    if (fixed && CONTRACT_END_TEXT[inputs.contractEnd]) {
+        lines.push(`- Contract end: ${CONTRACT_END_TEXT[inputs.contractEnd]}`);
+    }
+
+    lines.push(
+        `- Qualifying monthly wages: ${formatPaise(result.trace.inputs.wagesPaise)}`,
+        `- ${fixed ? "Contract start date" : "Joining date"}: ${formatIsoDate(result.trace.inputs.joiningDate)}`,
+        `- ${fixed ? "Contract end date" : "Exit date"}: ${formatIsoDate(result.trace.inputs.exitDate)}`,
+        "",
+        "Result",
+        view.statement
+    );
+
+    if (view.fiveYearSentence) {
+        lines.push(view.fiveYearSentence);
+    }
+
+    if (view.amount) {
+        lines.push(`${view.amount.label}: ${view.amount.text}`);
+    }
+
+    if (view.working) {
+        lines.push("", "How it was worked out");
+        for (const [label, value] of view.working) {
+            lines.push(`- ${label}: ${value}`);
+        }
+    }
+
+    const section = (title, items) => {
+        if (items.length) {
+            lines.push("", title, ...items.map((item) => `- ${item}`));
+        }
+    };
+
+    section("Notes", view.notes);
+    section("What this estimate assumes", view.assumptions);
+    section("Check with your employer or payroll", view.checks);
+
+    lines.push("", "This is an estimate, not legal advice and not a determination of entitlement. Your employer decides the actual payment.");
+
+    return lines.join("\n");
+
+}
+
+/* ---- markup for the three features ---- */
+
+export function renderExplorerHtml(explorer) {
+
+    if (!explorer) {
+        return "";
+    }
+
+    const rows = explorer.rows.map((row) => `
+                    <li class="gratuity-explorer__row">
+                        <h4 class="gratuity-explorer__date">${escapeHTML(row.label)}: ${escapeHTML(row.dateText)}</h4>
+                        <p>${escapeHTML(row.short)}</p>
+                        <p>${escapeHTML(row.serviceLine)}</p>
+                        ${row.amount ? `<p class="gratuity-explorer__amount" data-kind="${escapeHTML(row.amount.kind)}"><span>${escapeHTML(row.amount.label)}</span> <strong>${escapeHTML(row.amount.text)}</strong></p>` : "<p>No amount is shown for these dates.</p>"}
+                    </li>`).join("");
+
+    return `
+            <section class="gratuity-panel gratuity-explorer" aria-labelledby="gratuity-explorer-heading">
+                <h3 id="gratuity-explorer-heading">If your exit date were later (hypothetical)</h3>
+                <p class="gratuity-panel__note">${escapeHTML(EXPLORER_NOTE)}</p>
+                <p>${escapeHTML(explorer.wageLine)}</p>
+                <ol class="gratuity-explorer__list">${rows}
+                </ol>
+                ${explorer.notes.map((note) => `<p class="gratuity-note">${escapeHTML(note)}</p>`).join("")}
+            </section>`;
+
+}
+
+export function renderCompareFormHtml() {
+
+    return `
+            <section class="gratuity-panel gratuity-compare" aria-labelledby="gratuity-compare-heading">
+                <h3 id="gratuity-compare-heading">Compare other monthly wages</h3>
+                <p class="gratuity-panel__note">${escapeHTML(COMPARE_NOTE)}</p>
+                <form id="gratuity-compare-form" novalidate>
+                    <label class="calculator-form__label" for="gratuity-wages-second">Second qualifying monthly wages (₹ a month)</label>
+                    <input
+                        id="gratuity-wages-second"
+                        class="calculator-form__input"
+                        type="text"
+                        inputmode="decimal"
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-describedby="gratuity-wages-second-hint"
+                    >
+                    <p class="calculator-form__help" id="gratuity-wages-second-hint">Digits only, for example 150000 or 150000.50.</p>
+                    <p class="gratuity-field-error" id="gratuity-error-wages-second" hidden></p>
+                    <button type="submit" class="calculator-form__button calculator-form__button--secondary" data-needs-current>Compare</button>
+                </form>
+                <div id="gratuity-compare-output"></div>
+            </section>`;
+
+}
+
+export function renderComparisonHtml(view) {
+
+    if (view.unavailable) {
+        return `<p class="gratuity-note">No amount can be compared for these wages.</p>`;
+    }
+
+    const rows = view.rows.map(([label, wages, amount, capped]) => `
+                        <div class="gratuity-compare__row">
+                            <dt>${escapeHTML(label)}</dt>
+                            <dd>${escapeHTML(wages)}: <strong>${escapeHTML(amount)}</strong>${capped ? ` (${escapeHTML(DISCLOSURE_TEXT[DISCLOSURES.ceilingApplied])})` : ""}</dd>
+                        </div>`).join("");
+
+    return `
+                <div class="gratuity-compare__result">
+                    <p class="gratuity-compare__label">${escapeHTML(view.amountLabel)}</p>
+                    <dl>${rows}
+                    </dl>
+                    <p class="gratuity-compare__difference"><strong>${escapeHTML(view.sentence)}</strong></p>
+                </div>`;
+
+}
+
+export function renderCopyHtml() {
+
+    return `
+            <section class="gratuity-panel gratuity-copy" aria-labelledby="gratuity-copy-heading">
+                <h3 id="gratuity-copy-heading">Copy a summary</h3>
+                <p class="gratuity-panel__note">Plain text you can paste into an email to your employer's HR. It is copied only when you press the button, and nothing is sent anywhere.</p>
+                <button type="button" class="calculator-form__button calculator-form__button--secondary" id="gratuity-copy" data-needs-current>Copy summary</button>
+                <p class="gratuity-copy__status" id="gratuity-copy-status"></p>
+                <div id="gratuity-copy-fallback"></div>
+            </section>`;
+
+}
+
+
+/* =========================================================
    WHAT THE PAGE SHOWS (pure; exported for the tests)
    A result is current until a field is edited; an edit after a
    result that shows a figure or an explanation marks it out of
    date; a Calculate replaces it; a Reset clears everything.
+   The inputs the result was calculated from are kept with it, so
+   the features below it never read the fields as they are now.
 ========================================================= */
 
-export const INITIAL_STATE = Object.freeze({ result: null, stale: false });
+export const INITIAL_STATE = Object.freeze({ result: null, stale: false, inputs: null });
 
 export function reduceState(state, action) {
 
     switch (action.type) {
 
         case "calculate":
-            return { result: action.result, stale: false };
+            return { result: action.result, stale: false, inputs: action.inputs ?? null };
 
         case "edit":
             /* validation messages are not figures: editing after them marks nothing out of date */
             return state.result && (state.result.status === STATUS.ok || state.result.status === STATUS.unsupported)
-                ? { result: state.result, stale: true }
+                ? { result: state.result, stale: true, inputs: state.inputs }
                 : state;
 
         case "reset":
@@ -931,6 +1199,18 @@ export function init(mount) {
             delete results.dataset.stale;
         }
 
+        /* the features under the result work from the calculated inputs: they wait for a new Calculate */
+        /* aria-disabled, not disabled: a disabled default button stops Enter from submitting the compare form, so Enter could not explain; the handlers refuse while stale */
+        for (const button of results.querySelectorAll("[data-needs-current]")) {
+
+            if (state.stale) {
+                button.setAttribute("aria-disabled", "true");
+            } else {
+                button.removeAttribute("aria-disabled");
+            }
+
+        }
+
     }
 
     function calculate() {
@@ -938,22 +1218,33 @@ export function init(mount) {
         clearErrors();
 
         let result;
+        let exploration = null;
+
+        const inputs = collect();
 
         try {
 
-            result = calculateGratuity(collect());
+            result = calculateGratuity(inputs);
+
+            if (result.status === STATUS.ok && inputs.employeeType === EMPLOYEE_TYPES.regular) {
+                exploration = describeExplorer(exploreExitDates(inputs));
+            }
 
         } catch (error) {
 
             result = { status: STATUS.error, code: CODES.internalError, errors: [] };
+            exploration = null;
 
         }
 
-        state = reduceState(state, { type: "calculate", result });
+        state = reduceState(state, { type: "calculate", result, inputs });
 
         const view = describeResult(result);
 
-        results.innerHTML = renderResultHtml(view);
+        results.innerHTML = renderResultHtml(view)
+            + (result.status === STATUS.ok
+                ? renderExplorerHtml(exploration) + (view.amount ? renderCompareFormHtml() : "") + renderCopyHtml()
+                : "");
 
         showState();
 
@@ -978,6 +1269,152 @@ export function init(mount) {
         event.preventDefault();
 
         calculate();
+
+    });
+
+    /* the second wages: an explicit Compare, from the inputs the result was calculated from */
+
+    function compare() {
+
+        const input = results.querySelector("#gratuity-wages-second");
+        const message = results.querySelector("#gratuity-error-wages-second");
+        const output = results.querySelector("#gratuity-compare-output");
+
+        if (!input || !message || !output || !state.inputs) {
+            return;
+        }
+
+        /* while the result is out of date Compare is aria-disabled: say why nothing changed */
+        if (state.stale) {
+
+            message.innerHTML = `<strong>Error:</strong> ${escapeHTML(STALE_COMPARE_MESSAGE)}`;
+            message.hidden = false;
+            announceNow(STALE_COMPARE_MESSAGE);
+
+            return;
+
+        }
+
+        message.hidden = true;
+        message.textContent = "";
+        clearFieldsInvalid([input], message.id);
+        output.innerHTML = "";
+
+        let view;
+
+        try {
+
+            view = describeComparison(compareWages(state.inputs, input.value));
+
+        } catch (error) {
+
+            view = { errors: [], unavailable: true };
+
+        }
+
+        if (view.errors.length) {
+
+            message.innerHTML = `<strong>Error:</strong> ${escapeHTML(view.errors[0])}`;
+            message.hidden = false;
+            setFieldsInvalid([input], message.id);
+            input.focus();
+            announceNow(view.errors[0]);
+
+            return;
+
+        }
+
+        output.innerHTML = renderComparisonHtml(view);
+
+        announceNow(view.unavailable ? "No amount can be compared for these wages." : view.announcement);
+
+    }
+
+    /* the summary: written to the clipboard only on a click; when that is not possible the text is shown for manual copy */
+
+    async function copySummary() {
+
+        const status = results.querySelector("#gratuity-copy-status");
+        const fallback = results.querySelector("#gratuity-copy-fallback");
+
+        if (!status || !fallback || !state.result) {
+            return;
+        }
+
+        if (state.stale) {
+
+            status.textContent = STALE_COPY_MESSAGE;
+            fallback.innerHTML = "";
+            announceNow(STALE_COPY_MESSAGE);
+
+            return;
+
+        }
+
+        const text = summaryText(state.result, state.inputs);
+
+        status.textContent = "";
+        fallback.innerHTML = "";
+
+        let copied = false;
+
+        try {
+
+            if (text && typeof navigator !== "undefined" && navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+                await navigator.clipboard.writeText(text);
+                copied = true;
+            }
+
+        } catch (error) {
+
+            copied = false;
+
+        }
+
+        if (copied) {
+
+            status.textContent = "Summary copied to the clipboard.";
+            announceNow("Summary copied to the clipboard.");
+
+            return;
+
+        }
+
+        status.textContent = "The summary could not be copied automatically. Select the text below and copy it yourself.";
+
+        fallback.innerHTML = `
+            <label class="calculator-form__label" for="gratuity-copy-text">Summary text</label>
+            <textarea id="gratuity-copy-text" class="gratuity-copy__text" rows="10" readonly></textarea>`;
+
+        const area = fallback.querySelector("textarea");
+
+        area.value = text;
+        area.focus();
+        area.select();
+
+        announceNow("The summary could not be copied automatically. The text is shown for you to copy.");
+
+    }
+
+    results.addEventListener("submit", (event) => {
+
+        if (event.target && event.target.id === "gratuity-compare-form") {
+
+            event.preventDefault();
+
+            compare();
+
+        }
+
+    });
+
+    results.addEventListener("click", (event) => {
+
+        const target = event.target && typeof event.target.closest === "function" ? event.target.closest("#gratuity-copy") : null;
+
+        if (target) {
+            copySummary();
+        }
 
     });
 

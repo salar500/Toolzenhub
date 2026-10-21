@@ -227,7 +227,7 @@
 
 .calculator-results[data-stale="true"] {
 
-    opacity: 0.6;
+    opacity: 0.7;
 
     outline: 2px dashed #b54708;
     outline-offset: 4px;
@@ -463,5 +463,250 @@
         font-size: 16px;
 
     }
+
+}
+
+/* =========================================================
+   P1 panels: the date explorer, the wage comparison and the
+   copied summary. Each row is a list item that wraps to the
+   width of the screen; nothing is meant by colour alone.
+========================================================= */
+
+.gratuity-panel {
+
+    min-width: 0;
+
+    margin: 16px 0 0;
+    padding: 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 10px;
+
+    background: var(--color-white);
+
+}
+
+.gratuity-panel h3 {
+
+    margin: 0 0 8px;
+
+    font-size: 16px;
+
+}
+
+.gratuity-panel p {
+
+    overflow-wrap: anywhere;
+
+}
+
+.gratuity-panel__note {
+
+    margin: 0 0 10px;
+
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+}
+
+.gratuity-explorer__list {
+
+    display: grid;
+    gap: 10px;
+
+    margin: 10px 0 0;
+    padding: 0;
+
+    list-style: none;
+
+}
+
+.gratuity-explorer__row {
+
+    padding: 10px 12px;
+
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 8px;
+
+    background: #f9fafb;
+
+    font-size: 14px;
+    line-height: 1.55;
+
+}
+
+.gratuity-explorer__row p {
+
+    margin: 4px 0 0;
+
+}
+
+.gratuity-explorer__date {
+
+    margin: 0;
+
+    font-size: 15px;
+
+    overflow-wrap: anywhere;
+
+}
+
+.gratuity-explorer__amount strong {
+
+    display: block;
+
+    font-size: 18px;
+    font-variant-numeric: tabular-nums;
+
+    overflow-wrap: anywhere;
+
+}
+
+.gratuity-explorer__amount[data-kind="illustrative"] {
+
+    padding: 6px 8px;
+
+    border: 1px dashed #667085;
+    border-radius: 6px;
+
+}
+
+.gratuity-compare label {
+
+    display: block;
+
+    margin: 0 0 6px;
+
+}
+
+.gratuity-compare .calculator-form__input {
+
+    box-sizing: border-box;
+
+    width: 100%;
+    min-height: 48px;
+
+    font-size: 16px;
+    font-variant-numeric: tabular-nums;
+
+}
+
+.gratuity-compare .calculator-form__button,
+.gratuity-copy .calculator-form__button {
+
+    min-height: 48px;
+
+    margin-top: 10px;
+
+}
+
+.gratuity-compare__result {
+
+    margin: 12px 0 0;
+
+}
+
+.gratuity-compare__label {
+
+    margin: 0 0 6px;
+
+    color: var(--color-ink-muted);
+
+    font-size: 13px;
+    font-weight: 700;
+
+}
+
+.gratuity-compare dl {
+
+    margin: 0;
+
+}
+
+.gratuity-compare__row + .gratuity-compare__row {
+
+    margin-top: 8px;
+
+}
+
+.gratuity-compare dt {
+
+    color: var(--color-ink-muted);
+
+    font-size: 13px;
+    font-weight: 700;
+
+}
+
+.gratuity-compare dd {
+
+    margin: 2px 0 0;
+
+    font-size: 14px;
+    line-height: 1.55;
+    font-variant-numeric: tabular-nums;
+
+    overflow-wrap: anywhere;
+
+}
+
+.gratuity-compare__difference {
+
+    margin: 10px 0 0;
+
+    font-size: 15px;
+
+}
+
+.gratuity-copy__status {
+
+    margin: 10px 0 0;
+
+    font-size: 14px;
+    font-weight: 600;
+
+}
+
+.gratuity-copy__status:empty {
+
+    display: none;
+
+}
+
+.gratuity-copy__text {
+
+    box-sizing: border-box;
+
+    width: 100%;
+    min-height: 220px;
+
+    padding: 10px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+
+}
+
+.gratuity-panel button[aria-disabled="true"] {
+
+    cursor: not-allowed;
+
+    opacity: 0.5;
+
+}
+
+.gratuity-panel button:focus-visible,
+.gratuity-panel input:focus-visible,
+.gratuity-panel textarea:focus-visible {
+
+    outline: 3px solid var(--color-brand-green);
+    outline-offset: 2px;
 
 }

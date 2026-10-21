@@ -1,0 +1,56 @@
+# Gratuity Calculator G6 focused browser verification (TEMPORARY; never merge to main).
+#
+# Runs ONLY tests/browser/gratuity-g6-verify.spec.js on the subpath-desktop project (the phone widths are set inside the
+# tests), one worker, no retries, on a GitHub-hosted runner so the browser does not have to run on a low-memory machine. It
+# starts only on a push to the temporary branch gratuity-g6-verify.
+#
+# It cannot deploy anything: read-only permissions, no Pages or deployment steps, no id-token. It does not update
+# screenshots or baselines. Only the test report and traces are kept, for 7 days.
+name: Gratuity G6 verification
+
+on:
+  push:
+    branches:
+      - gratuity-g6-verify
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gratuity-g6-verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+        timeout-minutes: 5
+      # the tests serve dist/ and dist-ghpages/ themselves (tests/helpers/global-setup.mjs); both must exist
+      - run: npm run build:all
+        timeout-minutes: 5
+      # the browser is the Chrome already installed on the GitHub-hosted runner (channel "chrome" in playwright.config.js)
+      - name: Gratuity G6 spec
+        run: npx playwright test tests/browser/gratuity-g6-verify.spec.js --project=subpath-desktop --workers=1 --retries=0 --reporter=list,html --trace=retain-on-failure
+        timeout-minutes: 15
+        env:
+          CI: "true"
+          PLAYWRIGHT_HTML_OPEN: never
+      - name: Upload report and traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gratuity-g6-verify
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
