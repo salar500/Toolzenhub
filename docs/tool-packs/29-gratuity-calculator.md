@@ -342,3 +342,290 @@ The rounding convention is accepted. The wage assistant, death and disablement, 
 
 ## 32. Readiness classification
 **READY FOR OWNER REVIEW AND G3 DESIGN. NOT IMPLEMENTATION-READY.** Owner decisions were recorded on 2026-10-21 (29.1). The **regular-employee core** is legally grounded in primary text but still needs a **final D10 choice** (the month-end dependence for joins on the 29th to 31st, 7.1 and 29.2) and acceptance of the four-year presentation line. The ceiling carries a **release gate** (B6), the **fixed-term amount is illustrative only** (B3b), and **no independent review has occurred** (B11). **G3 design can proceed; G4 calculation code cannot.**
+## 33. Detailed Architecture and UX Design (G3)
+
+Status: **G3 design, written 2026-10-21 as documentation only. DESIGN COMPLETE, LEGAL DECISIONS PENDING.** Base commit: 075c302 (Sections 1 to 32 are unchanged). Nothing in this section is implemented, built or tested, and **no test described here has been run**. Reconciled on 2026-10-21 against Sections 5, 11 and 29 (the changes are listed in 33.19). Labels as in the header: [APPROVED], [VERIFIED] (read in the repository this session), [CONDITIONAL], [PROPOSED], [BLOCKED].
+
+### 33.1 G3 scope and authoritative references
+- **Authority:** this specification (Sections 0 to 32) and `docs/product-decision-rules.md` (sections 7 to 11 read for this phase). The G3 Design Prompt Pack (a reference ZIP) was used as a checklist only; it does not override either document.
+- **Phase numbering [APPROVED by the owner 2026-10-21]:** the committed G0 to G13 sequence of Section 30 governs. The pack's G0 to G15 map is a planning convention and is mapped, not adopted, in 33.18. Section 30 is not renumbered.
+- **What G3 does:** designs the architecture, the pure-engine contracts, the input and result contracts, the UX, the accessibility behaviour, the test design and the file plan, so that G4 to G7 can be implemented without rediscovering decisions. It writes no application code.
+- **What G3 does not do:** settle **D10** (option A with disclosure, or C′; Section 29.2) or the **four-year status line and wording** (Section 7.3), add component-based wage inputs, choose a legal interpretation, or authorize G4. **The single qualifying-wages field is preserved [APPROVED, D1].** The wage assistant, fixed-term early exit and renewals, death and disablement, and tax stay out of scope (Sections 4 and 27).
+- **Legal references (not repeated here):** the legal findings are L1 to L17 (0.2), the conflicts 0.3, the blockers B1 to B12 (0.4), the rules of Section 7 and the owner decisions of 29.1. This section cites them by number.
+
+### 33.2 Requirements-to-design traceability
+| ID | Requirement (source) | Design (this section) | Future module or file (PROPOSED) | Test (33.13) | Readiness |
+| --- | --- | --- | --- | --- | --- |
+| R1 | Single qualifying-wages field, no gross-salary label (Sec 5, D1) | 33.5, 33.9 | `gratuity/index.js`; `gratuity.js` (`parseWages`) | T-VAL-1 to 5 | **READY** |
+| R2 | Employee type; fixed-term "how the contract ends" (Sec 5, 7.5) | 33.5, 33.6 | `gratuity/index.js`; `gratuity.js` (applicability) | T-APP-1 to 10 | **READY** |
+| R3 | Joining and exit dates; exit on or after 21 Nov 2025 (D4) | 33.5, 33.8 | `gratuity-rules.js`; `gratuity-calendar.js` | T-VAL-6 to 12 | **READY** |
+| R4 | Service-duration convention (7.1, D10) | 33.7 | `gratuity-calendar.js` (one isolated function) | T-CAL-1 to 14 | **BLOCKED on D10** |
+| R5 | Counted years N, amount only (7.2) | 33.7 | `gratuity.js` | T-CAL-8 to 12 | **CONDITIONAL on D10** |
+| R6 | Eligibility statuses, four-year line (7.3, D9) | 33.6, 33.8 | `gratuity-rules.js`; `gratuity.js` | T-ELG-1 to 8 | **BLOCKED on the four-year line and wording** |
+| R7 | Amount, ceiling, labels (7.4, B6) | 33.7, 33.8 | `gratuity.js`; `gratuity-rules.js` | T-AMT-1 to 10 | **CONDITIONAL**; ceiling gate before release |
+| R8 | Fixed-term F1 to F8 (7.5) | 33.6 | `gratuity.js` | T-FT-1 to 8 | F1, F2, F4, F8 READY; F3, F7 CONDITIONAL; F5, F6 UNSUPPORTED |
+| R9 | Rounding at display only (7.6, B8) | 33.7 | `gratuity.js`; `gratuity/index.js` | T-AMT-5 to 8 | **READY** (accepted) |
+| R10 | Six result blocks (Sec 6, 12) | 33.9 | `gratuity/index.js` | M-series (33.12) | READY except wording of block 1 (R6) |
+| R11 | Milestone explorer and wage comparison reuse one engine (Sec 13) | 33.7, 33.9 | `gratuity.js` (`explore`, `compareWages`) | T-SCN-1 to 6 | READY once R4 and R6 are decided (G6) |
+| R12 | Copy summary (Sec 15, conditional) | 33.9 | `gratuity/index.js` | M-series | CONDITIONAL (G6) |
+| R13 | Local processing, no storage, URL or analytics values (8.8, Sec 8) | 33.14 | all | T-SEC-1 to 6 | **READY** |
+| R14 | Mobile, accessibility (Sec 17, 18) | 33.10, 33.11 | `gratuity.css`; `gratuity/index.js` | M-series | READY |
+| R15 | Catalog, route, SEO, relationships (Sec 1, 19 to 23) | 33.15 | `tools.js` and pinned files | static checks | READY; final category D5 |
+| R16 | Oracle and golden tests (7.7, 25) | 33.13 | `gratuity-golden.py/.json/.test.mjs` | all T-series | READY; expected values for R4 to R6 cases PENDING |
+
+### 33.3 Existing architecture findings [VERIFIED by inspecting the repository]
+- **Catalog (single source of truth):** `assets/js/data/tools.js`. A published entry carries `id`, `status: "published"`, a literal lazy `loader: () => import("../calculators/<id>/index.js")`, `category`, `icon`, `title`, `description`, `aliases`, `capabilities`, `seo { title, description }`, and optionally `relatedTools`, `relatedArticles` and `toolType` (fields named in the header comments of `tools.js` and `data/relationships.js`). PPF's entry is the nearest model. No `gratuity` entry exists.
+- **Derived views (not edited for a new tool):** `assets/js/calculator-registry.js` derives `calculatorRegistry` and `calculatorMetadata` from published catalog entries that have a `loader`; `assets/js/data/calculators.js` is a compatibility view that returns the same objects; `data/taxonomy.js` and `data/categories.js` derive the section, category, breadcrumb and listing hierarchy; `data/relationships.js` derives related tools and articles (curated first, then the same category).
+- **Page generation:** `src/tool-pages.njk` paginates `tools` and writes each page at `tool.sitePath` (the Calculators prefix is `/calculators/{id}/`); `src/tool-pages.11tydata.js` and `src/_includes/layouts/tool.njk` supply the shell. The finished page contains the tool's markup, breadcrumb and related sections, the header and footer and every SEO tag.
+- **Page load:** `assets/js/entries/tool.js` reads `data-tool-module` from the page, imports only that tool's module and calls its `init(app)`; on failure it shows `renderToolError()` or `renderToolNotFound()` from `pages/tool-messages.js`. **`assets/js/pages/calculator.js` does not exist**; the shared logic is `assets/js/pages/tool-page.js`.
+- **Tool module contract (`pages/tool-page.js`):** `export function render(mount)` is **required**; `markup()` (pure, returns the tool's HTML for the build) and `init(mount)` are optional but used by every published calculator; `showRelatedCalculators` and `showRelatedArticles` may opt out. The tool's markup must be wrapped in `<div class="calculator-page">`; the shared layer places the **centralized breadcrumb** (`components/breadcrumb.js`) as its first child and the related sections as its last children. **A tool must not draw its own breadcrumb.**
+- **Per-tool styles:** `assets/css/calculators/<id>.css` plus the shared `calculator-base.css`, `calculator-form.css`, `calculator-results.css` and `calculator-responsive.css`; each tool's stylesheet list lives in `src/_data/toolStyles.json` (PPF's entry lists the base, component and calculator sheets and its own).
+- **Shared UI helpers:** `ui/field.js` (`fieldShell`, `numberField` which renders `type="number"`, `setFieldsInvalid`, `clearFieldsInvalid`, `hintIdOf`), `ui/result.js` (`resultMetric`, `resultEmpty`, `resultError`), `ui/escape.js` (`escapeHTML`), `calculators/common/formatter.js` (`formatINR`, `formatNumber`, `formatDuration`). User text is written as escaped text.
+- **Nearest pattern (PPF):** `calculators/formulas/ppf.js` (pure model, validation, constants) plus `calculators/ppf/index.js` (the page around it) plus `ppf.css`; explicit Calculate; an edit after a result marks it out of date instead of silently recalculating (`ppf-stale`); a `role="status" aria-live="polite"` region with a debounced `announce` and an immediate `announceNow`; Reset restores the starting values, announces "Reset to the starting values." and focuses the first field; values and assumptions in plain view; nothing stored or sent. **Existing calculators announce the result in the live region and do not move focus on Calculate.**
+- **Date precedent:** `assets/js/tools/date-difference/date-engine.js` is pure (no DOM, no clock, no JavaScript `Date`), reads `YYYY-MM-DD` strictly (rejects impossible dates), and defines `addMonths(date, n)` with the day clamped to the end of a shorter month and the breakdown "largest n with addMonths(A, n) ≤ B". **This is the same clamp anniversary as option A**, but it measures from the earlier date to the later one (the later date is not counted). `date-difference` and `date-calculator` use `<input type="date">`.
+- **Tests:** `tests/unit/<id>-golden.test.mjs` with `tests/fixtures/<id>-golden.py` and `.json` (a Python reference); `tests/browser/<id>.spec.js`; the touch-list of `docs/tool-pack-factory.md` section 7 names the pinned unit tests, baselines and inventory that registering a tool changes.
+- **Analytics:** GA4 is production-only, consent-gated and loaded by the shared layer (`analytics.js`); tool code never calls it (rulebook 8.8).
+
+### 33.4 Module and responsibility boundaries [PROPOSED]
+Existing files stay untouched except the pinned registration files of 33.15. Five new files; **no shared-system change is required**.
+| Module | Responsibility | Inputs → outputs | Depends on | Failure behaviour | Spec reference | Pending-decision impact |
+| --- | --- | --- | --- | --- | --- | --- |
+| `assets/js/calculators/formulas/gratuity-rules.js` | Constants and metadata only: the 21 Nov 2025 date, the ceiling in paise with its source and date, limits, status and message identifiers, "rules checked on" date | none → frozen constants | none | none (constants) | 7.4, 0.2 | Ceiling (B6 gate); the four-year line value lives here as one constant |
+| `assets/js/calculators/formulas/gratuity-calendar.js` | Pure calendar arithmetic: strict `YYYY-MM-DD` parsing, day numbers, the **single `anniversary(join, m)` function**, completed months and days, the calendar five-year date, date addition for the explorer | strings or `{y,m,d}` → `{y,m,d}` or numbers | none (no `Date`, no clock) | Returns `{state:"invalid"}` for impossible dates; never normalizes | 7.1 | **D10 changes only `anniversary`** |
+| `assets/js/calculators/formulas/gratuity.js` | The model: `validateGratuityInputs`, applicability, service measurement, counted years, eligibility status, integer-paise amount, ceiling, labels, structured result, `explore`, `compareWages` | raw input object → frozen result object | the two modules above | Structured errors; never a success-shaped amount for an error | 5 to 7, 13 | Status boundaries (four-year), D10 via calendar |
+| `assets/js/calculators/gratuity/index.js` | The page: `markup()`, `init()`, `render()`; reads the DOM; calls the engine; formats with `formatINR` and the approved text; stale marking, announce, Reset, scenario panels, copy summary | DOM events → DOM | engine, `ui/*`, `formatter.js`, `data/calculators.js` | A thrown engine error becomes a visible error block, not a blank page | 6, 11 | Wording of status 2 and the assumption lines |
+| `assets/css/calculators/gratuity.css` | Layout the tool alone needs; tokens from the shared layer | none | shared calculator CSS | none | 17 | none |
+- **Cross-tool date helper decision [PROPOSED; owner choice, G3 gate item P1 in 33.19].** Options: (a) import `dayNumber`, `addMonths`, `parseDate` from `tools/date-difference/date-engine.js`; (b) a **small independent calendar module** (about 60 lines: `daysInMonth`, `dayNumber`, `parseDate`, `anniversary`); (c) extract a shared helper (edits an existing tool, so rulebook 9.3 approval). **Owner direction (2026-10-21): (b), subject to the approved date-counting contract (D10).** A legal-money result must not change because a different tool's engine is edited (rulebook 9.3), the duplication is small and specific (rulebook 9.4), option C′ needs its own anniversary function anyway, and the gratuity golden tests pin the behaviour. The independent oracle (7.7) is the check that the two engines agree where they should.
+- **Dependency rule:** `index.js` imports the engine; the engine imports only the rules and calendar modules; no module reads the DOM, storage, cookies, the URL, the clock, locale or analytics except `index.js` (DOM only).
+
+### 33.5 Single-field input contract [PROPOSED; wage model APPROVED]
+Raw values are strings from the form; the engine normalizes them. Nothing is defaulted silently, nothing is coerced, and invalid values are never "fixed".
+| Field | Control and semantics | Required | Raw → normalized → derived | Dependencies | Invalid behaviour |
+| --- | --- | --- | --- | --- | --- |
+| Employee type | `fieldset` + `legend`, three native radios: Regular (including a contractor's employee) / Fixed-term, engaged directly / Other | Yes | string → one of `regular`, `fixedTerm`, `other` | Selects the path | Unselected → "Choose the employee type" |
+| Fixed-term: contract end | `fieldset`, two radios, **rendered only for fixed-term** | Yes when shown | → `expires`, `earlier` | Shown only for `fixedTerm`; hidden fields are not read, validated or announced (the PPF pattern) | Missing → required message |
+| Qualifying monthly wages | `<input type="text" inputmode="decimal" autocomplete="off">`, a rupee prefix label, hint text per 5; **not** `type="number"` (the wheel cannot change it and the entered text is kept exactly as typed) | Yes (not for "Other") | text → integer **paise**, parsed by digit arithmetic and **never through floating point**; digits with one optional decimal point and at most two decimals (the constraints of Section 5); **separators such as commas or spaces are rejected** (owner decision 2026-10-21, P3b) with a helpful message; anything else is refused with a message that shows an example | Hidden for "Other" | Blank → required; letters, symbols, separators, negative, zero or more than two decimals → a specific message with an example (for separators: "Enter digits only, with no commas or spaces, for example 150000 or 150000.50"); the entered text stays |
+| Joining date | `<input type="date">` (precedent in `date-difference`) | Yes (not for "Other") | `YYYY-MM-DD` → `{y,m,d}` by strict parse | Contract start for fixed-term | Blank or impossible → message |
+| Exit date | `<input type="date">` | Yes (not for "Other") | same | Contract end for fixed-term; on or after 21 Nov 2025 | Before joining → message at the exit field; before 21 Nov 2025 → the D4 unsupported state (not an error) |
+- **Wage guidance:** the hint of Section 5 is used as written: not gross salary; basic pay + dearness allowance + retaining allowance; the excess over half of remuneration may be added; ask payroll for wages as defined in section 2(88); no automatic addition. **No Basic, DA or other component fields are added; no component-summing helper.**
+- **Defaults:** no personal value is prefilled, and **no employee type is preselected** (owner direction, 2026-10-21; P4): the visitor makes an explicit choice, which hides no assumption.
+- **Limits, in three separate classes [reconciled 2026-10-21; P5]:**
+  - **Statutory restriction (the only one):** an exit date before 21 November 2025 is outside the supported scope (D4, not an error), and the type determines the rule path. No statutory limit on wages or on service length is claimed, because none was found in the sources read.
+  - **Technical safety limits (derived, not opinions):** the calendar accepts years 1 to 9999, the range of the existing `date-difference` engine, so counted years are below 10,000; the amount arithmetic `2 × wagesPaise × 15 × N + 26` must stay within the safe-integer range (2^53 − 1, about 9.0e15), so the maximum wages in paise is derived as `floor((2^53 − 1 − 26) / (30 × maximum counted years))`, which for 9,999 counted years is about 3.0e10 paise (about ₹30 crore a month). Anything above that is refused with the message "This amount is too large to calculate exactly". The engine states the derivation in a comment and a guard test pins it.
+  - **Plausibility limits (product choice; owner decision 2026-10-21: retained provisionally):** Section 5 proposes refusing wages above ₹1,00,00,000 a month as "a sanity limit, confirmed in G3". **The owner retains that Section 5 limit provisionally and it is reviewed before implementation (G4 and G5)**; it is not statutory and not technical, and G3 does not change it. The first G3 text also proposed a joining year from 1950 and service up to 70 years; **those two are withdrawn as unsupported inventions.** The technical limits above apply in any case.
+- **No clock:** the engine never reads "today". Future exit dates are valid planning dates; a future joining date is valid only with a later exit date.
+
+### 33.6 Legal applicability design [PROPOSED; every branch cites Sections 0 and 7]
+Decision order (the first matching rule wins); status and message identifiers are **stable codes**, so a wording change after the four-year decision never changes engine behaviour. Wording shown here is **placeholder text taken from Section 7.3 and is not final**.
+| Step | Condition | Result code (proposed) | Amount | Depends on |
+| --- | --- | --- | --- | --- |
+| 1 | A field required for the chosen type is missing (the type itself, or any field shown for it) | `INCOMPLETE` | none | none |
+| 2 | A field is invalid, or exit is before joining | `INVALID` (field errors) | none | none |
+| 3 | Type is `other` | `UNSUPPORTED_OTHER_TYPE` (explains L3, L7: government, seasonal, piece-rated, journalist) | none | none |
+| 4 | Exit date is before 21 Nov 2025 | `UNSUPPORTED_EARLIER_LAW` (D4) | none | none |
+| 5 | `fixedTerm` and contract ends earlier | `UNSUPPORTED_FT_EARLY_END` (F5) | none | none |
+| 6 | `fixedTerm`, expires, service under 1 year | `FT_UNDER_ONE_YEAR` (F4) | none | D10 (service) |
+| 7 | `fixedTerm`, expires, at least 1 year | `FT_ONE_YEAR_MET` (F1, F2) | **illustrative** (F3, B3b) | D10 |
+| 8 | `regular`, service at least 5 years | `STATUS_FIVE_YEARS_REACHED` (7.3 item 1) | "estimated" | D10 |
+| 9 | `regular`, service at least the four-year line and under 5 years | `STATUS_FIFTH_YEAR_UNDETERMINED` (7.3 item 2) | **illustrative** | D10, **four-year line** |
+| 10 | `regular`, below the four-year line | `STATUS_THRESHOLD_NOT_REACHED` (7.3 item 3) | none; the explorer shows the calendar five-year date | D10, **four-year line** |
+- **Successive or renewed contracts (F6)** are not an input: the fixed-term path states, in its assumptions, that service under a single contract is measured and that renewals are not summed.
+- **Contractor staff (F8):** the radio label says "Regular employee (including an employee of a contractor)"; the page notes that a contractor's employee on a written fixed-term contract with the contractor is not covered by this verification.
+- **Uncertainty is never ineligibility:** codes 9 and 10 never say "not eligible"; unsupported is never rendered as a status.
+- **Establishment coverage (L13)** and **continuity of service (s.54(A))** are assumptions listed in the "check with payroll" block, not inputs.
+
+### 33.7 Service-duration and formula design dependencies
+- **Data flow:** raw inputs → normalize (wages to paise, dates to `{y,m,d}`) → validate → applicability (33.6) → service measurement → counted years N → eligibility status → amount (integer paise) → ceiling → structured result → presentation. **Rounding occurs once, at the end of the amount calculation (7.6); currency formatting occurs only in `index.js`.**
+- **Service measurement** (`gratuity-calendar.js`): exclusive end = exit date + 1 day (both days counted); completed months *m* = largest *m* with `anniversary(join, m)` on or before the exclusive end; years, months, days as in 7.1. Everything else in the engine consumes only `{months, years, remMonths, days}`, so **D10 is isolated to one function** (`anniversary`): option A returns the same day or the last day of the month; option C′ returns the same day or **the first day of the next month**. The tests, the oracle and the expected values of 7.7 change with it; the module boundaries do not.
+- **Site-consistency note for the disclosure:** `date-difference` already uses the option-A clamp anniversary but does not count the later date, so the same two dates can read one day differently in the two tools. The gratuity page states that it counts both the joining and the exit day.
+- **Counted years N (7.2):** `N = years + 1` if the remaining period is more than six months, else `N = years`; **N feeds only the amount, never a status.**
+- **Status boundaries (7.3):** status is a function of total completed months: `≥ 60` status 1; `≥ FOURTH_YEAR_LINE_MONTHS` (a single constant in `gratuity-rules.js`, **value pending the four-year decision; 48 is the Section 7.3 proposal**) and `< 60` status 2; below that, status 3. Changing the line or the wording is a constants-and-text change only.
+- **Money (integer paise contract):** wages are integer paise from the digit parse. The exact amount is the fraction `wagesPaise × 15 × N ÷ 26`. **Ceiling comparison is an integer comparison before any rounding:** the ceiling applies when `wagesPaise × 15 × N > 26 × ceilingPaise`; `ceilingApplied` is true only then, and the amount is then exactly `ceilingPaise`. **Display rounding is half up to the nearest paisa:** `floor((2 × wagesPaise × 15 × N + 26) / 52)`, which equals `floor((x + 13) / 26)` for `x = wagesPaise × 15 × N`; an exact tie occurs when `x` leaves remainder 13 on division by 26. An exact value less than half a paisa below the ceiling can round up to the ceiling without `ceilingApplied` being true, which is the specified behaviour. All values are Numbers holding safe integers; the bound of 33.5 guarantees `2 × wagesPaise × 15 × N + 26` never exceeds 2^53 − 1, so **no BigInt is needed**; a guard test at the derived maximum pins it. The derived maximum is a technical limit, not a legal one.
+- **Calendar five-year date and explorer targets:** the calendar five-year date is `anniversary(join, 60) − 1 day` (option-dependent). Explorer targets are the entered exit date plus 6 months and plus 12 months, labelled hypothetical. **The rule for adding months to an exit date is itself a calendar convention and is decided together with D10**: under option A it is the same day or the last day of the target month (the `addMonths` clamp); for option C′ the equivalent rule is **not yet defined** and must be settled before G6, so that the explorer never shows a date that the chosen convention would treat differently. Each explorer row calls the **same** measurement, status and amount functions; there is no second implementation.
+- **Wage comparison:** two wages, the same dates and rules; the difference is the difference of the **two displayed amounts** (7.6).
+- **Not in G3 or the first release:** the wage assistant, the fixed-term "pro rata" beyond F3's labelled reading, death and disablement.
+
+
+### 33.8 Validation and structured result states [PROPOSED]
+**Validation matrix** (the first problem per field is shown beside it; the first invalid field takes focus on Calculate, using `setFieldsInvalid` as the other calculators do):
+| Field | Condition | Message class |
+| --- | --- | --- |
+| Employee type | Not chosen | Required |
+| Contract end (fixed-term) | Not chosen | Required |
+| Wages | Blank; letters, symbols or separators; negative; zero; more than two decimals; above the derived technical maximum (and above any plausibility limit the owner sets, P5) | Required / format / must be above zero / too large to calculate exactly |
+| Joining date | Blank; not a real calendar date; before the minimum year | Required / not a real date / out of range |
+| Exit date | Blank; not a real date; before the joining date | Required / not a real date / "cannot be before the joining date" |
+| Exit date | On or after joining but before 21 Nov 2025 | **Not an error**: the D4 unsupported state |
+Messages are specific, located and actionable; the typed text stays editable (rulebook 8.6). Partial or conflicting inputs (for example a fixed-term contract end chosen, then the type changed) clear the hidden field's value and its error.
+
+**Structured result (shape only, no code; field names are PROPOSED for G4 review):**
+- `status`: one of `ok`, `incomplete`, `invalid`, `unsupported`, `error` (an unexpected exception inside the engine).
+- `code`: the stable identifier of 33.6 (for example `STATUS_FIVE_YEARS_REACHED`) or an error code.
+- `eligibility`: `{ id, subjectToConditions: true }` for the regular path, or the fixed-term code; **never a boolean "eligible"**.
+- `service`: `{ totalMonths, years, months, days, conventionId, exclusiveEnd }`; `countedYears` (the amount only).
+- `amount`: `{ kind: "estimated" | "illustrative" | "none", paise: integer | null, ceilingApplied: boolean, ceilingPaise, exactNumerator, exactDenominator }`; **`paise` is `null` whenever `kind` is `none`; an error or unsupported result is never a zero amount.**
+- `trace`: the normalized inputs, the rule-set "checked on" date and the formula identifier.
+- `assumptions`, `checkWithPayroll`, `disclosures`: arrays of stable identifiers; the page owns the sentences.
+- `errors`: `[ { field, code } ]` when `status` is `invalid` or `incomplete`.
+- **Contract rules:** the result is frozen; the input is never mutated; repeated calls are identical; no `NaN` or `Infinity` can appear; the engine returns identifiers and numbers, the page formats and words them.
+
+**State table (what the page shows, announces and focuses):**
+| State | Heading and amount | Announcement (live region, polite) | Focus |
+| --- | --- | --- | --- |
+| Initial | "Enter your details and press Calculate"; no amount; **no announcement** | none | none |
+| Valid, status 1 | Status sentence; "Estimated gratuity" (subject to the conditions) | The status and the amount, once | **result heading, per Section 11** (see 33.11) |
+| Valid, status 2 | Status sentence; "Illustrative amount, not an entitlement" | The status and "illustrative" | result heading |
+| Valid, status 3 or fixed-term under one year | Status sentence; no amount; calendar five-year date | The status | result heading |
+| Fixed-term met (F1) | One-year status; "Illustrative amount, not an entitlement" | as above | result heading |
+| Unsupported (three codes: other type, earlier law, fixed-term early end) | Explanation of why and what to ask; no amount | The explanation title | result heading |
+| Incomplete or invalid | Inline errors; no result | "Check the highlighted fields" | **first invalid field** |
+| Stale (an edit after a result) | The old result stays visible, labelled out of date (the PPF behaviour); never shown as current | "Result is out of date" (debounced) | unchanged |
+| Reset | Starting state | "Reset to the starting values." (immediate) | first field |
+| Technical error | The shared tool error message; the form is not left blank | n/a | n/a |
+
+### 33.9 Form and result UX [PROPOSED]
+**Page order (shared shell around it, one `<h1>`):** breadcrumb (shared; not drawn by the tool) → H1 "Gratuity Calculator (India)" with one sentence of purpose and scope ("an estimate under the Code on Social Security, 2020 for exits from 21 November 2025") and the **"Rules checked on" date** → form card → result region → "How this was worked out" (collapsible) → "Check with your employer or payroll" → Assumptions → collapsed "Explore other exit dates" and "Compare another wage" (P1, G6) → a short "Questions people ask" block only if G7 justifies it → shared related tools and articles → footer.
+**Text wireframe, 390 px:**
+```
+[Breadcrumb]
+Gratuity Calculator (India)
+Estimate under the Code on Social Security, 2020, for exits from 21 Nov 2025.
+Rules checked on <date>
+-----------------------------------
+Who are you?  ( ) Regular employee (incl. a contractor's)
+              ( ) Fixed-term, engaged directly
+              ( ) Other
+[fixed-term only] How does the contract end?  ( ) It expires  ( ) Earlier
+Monthly wages for gratuity (₹)  [ ______ ]  hint: not gross salary ...
+Joining date [ date ]     Exit date [ date ]
+[ Calculate ]  [ Reset ]
+-----------------------------------
+<status sentence>
+<Estimated gratuity | Illustrative amount>   ₹ 1,44,230.77
+Ceiling note (only when it applied)
+Check with your employer or payroll  (list)
+v How this was worked out   (service, counted years, formula with numbers)
+v Assumptions
+v Explore other exit dates     v Compare another wage
+```
+Desktop: the same order in the shared calculator layout, form and result side by side only if the existing calculator layout already does so (to be checked against `calculator-responsive.css` in G5); no new layout system.
+- **Calculate and Reset:** Calculate is the primary button, Reset the secondary, both with the shared `calculator-form__button` classes and visibly distinct enabled states. Calculate validates, computes, renders, announces and, per Section 11, moves focus to the result heading (33.11). An edit after a result marks it stale; **it never recalculates silently and never shows a figure for inputs it was not calculated from.** Reset clears every field and error, removes the result and the scenario panels, announces, and focuses the first field.
+- **Result blocks (Section 6):** eligibility explanation, amount line, ceiling, working, assumptions, "check with payroll". On a phone the first view is the status sentence and the amount line; the rest follows in short blocks, with the working collapsible. **Status wording is placeholder text from Section 7.3 and stays marked "pending the four-year decision" until it is recorded.**
+- **P1 panels (G6):** the explorer table (regular employees only) and the comparison reuse the engine; **Copy summary** (conditional) writes plain text to the clipboard **on an explicit click only**, never to a URL or storage; if the clipboard is unavailable the text is shown for manual copy.
+- **No** PDF, history, account, share link or saved scenario (rulebook 7.7).
+
+### 33.10 Mobile and responsive design [PROPOSED]
+- **320, 360 and 390 px:** one column; full-width controls; radio options as full-width rows of about 44 px height; native date inputs; the decimal keypad for wages; the amount line large enough to read and wrapping at the thousands separators rather than clipping (`overflow-wrap`), checked with the longest value `₹20,00,000.00` and a long illustrative line; buttons stacked at 320 px and side by side from the existing breakpoint; **no page-level horizontal scroll**; the explorer table becomes stacked rows below the existing small breakpoint (PPF wraps its table in a focusable, labelled scroll region: `role="region"`, `tabindex="0"`, `aria-label`).
+- **Tablet and desktop:** the shared calculator container and tokens (Inter and the green action colour from the shared token layer, **to be re-read from `variables.css` in G5, not assumed**); no new breakpoints, no global restyle.
+- **Tool CSS** holds only what this tool alone needs (the six-block result, the status line, the stale label), in `gratuity.css`.
+
+### 33.11 Accessibility and focus behaviour [PROPOSED]
+- One `<h1>`; headings in order; radio groups in `fieldset` with `legend`; every input has a visible `<label>`; hints and errors are linked with `aria-describedby`; invalid inputs carry `aria-invalid`; hidden fields (fixed-term contract end, the "Other" case) are removed from the tab order and are not announced.
+- **Tab order** follows the visual order: type, contract end, wages, joining date, exit date, Calculate, Reset, then the result sections and panels.
+- **Announcements:** one polite live region (`role="status"`), **no announcement on load**, one announcement per Calculate, a debounced "out of date" announcement after an edit, an immediate announcement on Reset.
+- **Focus [P2; Section 11 governs]:** Section 11 states: "After Calculate, focus moves to the result heading and a polite live region announces the status once; after Reset, focus returns to the first field." **That committed contract takes precedence, and this design follows it**: the result heading carries `tabindex="-1"` and receives focus on a successful Calculate; the live region announces the status once; on an invalid Calculate focus goes to the first invalid field; after Reset it goes to the first field. **Reported difference:** the existing calculators inspected (PPF, SWP) announce in the live region and leave focus on the button (33.3). That is a site convention, not an approved rule for this tool, and it is **not** applied silently. **Owner decision (2026-10-21): Section 11 is kept unchanged, and neither wording proposed in 33.19 is applied**, so that no second accessibility behaviour is introduced before the real interface has been tested. Whether heading focus plus the live region speaks the status twice is to be examined on the built page (owner manual check, G9).
+- Visible focus and 4.5:1 and 3:1 contrast from the shared tokens; reduced motion honoured (no animation is added); no meaning by colour alone (the status is text, the stale state is a text label).
+- **No claim** of screen-reader compliance is made: assistive-technology behaviour is unverified until tested.
+
+### 33.12 Manual-first verification strategy [PROPOSED]
+Follows rulebook 10.13. **Claude (focused, automated):** syntax and static checks, the pure-module tests of 33.13, and a narrow pinned-expectation check when registration changes shared listings. **Owner (manual):** appearance and interaction on a phone at the three widths, the keyboard basics, the consent banner, the related links. **No** routine Playwright suite, Lighthouse or full regression; substantial browser automation needs explicit approval and would run on a GitHub-hosted runner.
+**Owner checklist (G9; URL when staged: `https://salar500.github.io/Toolzenhub/calculators/gratuity/`, route per the Calculators prefix; to be confirmed after registration).** Cases M1 to M11 and M5b of Section 25 carry the exact inputs and expected values; expected values for rows marked CONDITIONAL are recomputed after D10 and the four-year decision. For each case: open the page, enter the values, press Calculate, compare the status sentence and the amount, then **Pass** if both match and nothing overflows horizontally, **Fail** otherwise (screenshot at 320 and 390 px). Add: the validation messages (blank, zero, reversed dates), Reset, the stale label after an edit, keyboard-only completion, the explorer and comparison panels (G6), and the related links. **Manual acceptance does not establish numerical or legal correctness.**
+
+### 33.13 Mandatory numerical correctness test design [PROPOSED]
+- **Files (G4):** `tests/fixtures/gratuity-golden.py` (the independent oracle: `fractions.Fraction` money, a **month-walking** date method, neither shares code with the engine), `tests/fixtures/gratuity-golden.json` (its output), `tests/unit/gratuity-golden.test.mjs` (table-driven, reads the JSON, calls the pure engine). Expected values come from the oracle and from direct arithmetic, **never from the function under test**; no tolerance is used to weaken a comparison.
+- **Groups and identifiers** (the numbered ranges used in 33.2 are indicative; individual case identifiers are allocated in G4 within each group):
+  - T-VAL (validation): wages blank, zero, negative, above the **derived technical maximum** (and exactly at it), three decimals, letters, **comma and space separators refused** (until P3b is approved), a fraction of a rupee, the digit-arithmetic parse (for example 0.07 and 1234567.89 give exact paise with no floating-point drift); dates blank, impossible (30 February, month 13, day 0), reversed; the 21 Nov 2025 boundary; the hidden-field rule.
+  - T-CAL (service): **PENDING on D10**: the 14 regular and 5 fixed-term rows of 7.7, 29 February and month-end joins, leap-year spans, the 60-month and 59-month boundaries, exact anniversaries and plus or minus one day, counted years at remainders of 5 months, exactly 6 months, 6 months 1 day, 7 and 11 months, timezone invariance (the engine uses no `Date`; the test runs under two `TZ` values).
+  - T-ELG (status): status 1, 2 and 3 at the boundaries, **PENDING on the four-year line**; N never altering a status.
+  - T-AMT (amount): N = 4, 5, 6, 8; wages ₹50,000, ₹30,000 and ₹1,00,000; the half-up paisa threshold with an exact tie; the ceiling below, at and above ₹20,00,000 with the integer comparison `x > 26 × ceilingPaise`, **including a case where the exact value is less than half a paisa below the ceiling** (rounds up to the ceiling, `ceilingApplied` false) and one just above it (`ceilingApplied` true); exact half-paisa ties built from `x` with remainder 13 modulo 26; the "difference of displayed amounts" rule; the safe-integer guard (the maximum wages and service).
+  - T-FT (fixed-term): F1 to F8 incl. 11 months, exactly 12, 1 year 6 months, 1 year 6 months 1 day, "ends earlier", and the contractor mapping.
+  - T-APP (applicability order): the ten steps of 33.6 in order, including "Other" ignoring hidden fields.
+  - T-SCN (scenarios): explorer rows and the comparison use the same engine; row targets by the clamp date rule; a wage difference is the difference of displayed amounts.
+  - T-SEC (safety): inputs as strings of unexpected shapes (objects, arrays, very long strings, `__proto__` keys), frozen input unchanged, repeated calls equal, no `NaN`, `Infinity`, `-0`.
+- **Pending rule:** every case whose expected value depends on D10 or the four-year line is stored with the flag `pending` and **not asserted** until the decision is recorded; none is invented.
+- **Failure handling:** classify a failure as a product defect, a wrong test, an ambiguous specification or an evidence conflict; fix minimally; never weaken an assertion to pass. High-risk correctness is never deferred to a milestone (rulebook 10.11).
+
+### 33.14 Security and privacy boundaries [PROPOSED]
+All calculation is in the browser; the engine has no network, storage, cookie, URL, clock or analytics access; values never enter the URL, `localStorage`, `sessionStorage`, logs or the console; user text is written with `textContent` or `escapeHTML`, never `innerHTML`; the copy summary uses the clipboard only on an explicit click. The engine accepts untrusted strings and must not trust prototypes or coerce types. **Truthful statement for the page:** the calculation does not send your inputs anywhere; the site may load consent-controlled analytics that sees only the page address (rulebook 8.8), so the page does not claim "no network at all".
+
+### 33.15 Integration impact matrix [PROPOSED; paths marked existing were verified]
+| File | Existing or new | Change | Consumers at risk | Focused verification | Rollback |
+| --- | --- | --- | --- | --- | --- |
+| `assets/js/calculators/formulas/gratuity-rules.js`, `gratuity-calendar.js`, `gratuity.js` | new | The engine | none until registered | the T-series | delete the files |
+| `assets/js/calculators/gratuity/index.js`, `assets/css/calculators/gratuity.css` | new | The page | none until registered | owner manual checks | delete the files |
+| `assets/js/data/tools.js` | **existing** | One new entry (`id: "gratuity"`, loader, category per D5, aliases, capabilities verified against `data/tool-capabilities.js`, seo) | listings, search, relationships, sitemap, related cards on the category | the pinned unit tests below | `git revert` |
+| `src/_data/toolStyles.json` | **existing** | One entry listing the shared and tool stylesheets | the generated page only | the page loads its styles | `git revert` |
+| `scripts/growth-manifest/identity-ledger.json` | **existing** | The Growth identity record (as PPF did) | the Growth manifest tests | the manifest check | `git revert` |
+| Pinned tests: `tests/unit/catalog`, `sections`, `relationships`, `search`, `taxonomy`, `directory` tests | **existing** | Counts and lists | themselves | those tests | `git revert` |
+| Baselines and inventory: `tests/inventory/url-inventory.json`, the DOM, links and SEO baselines, `tests/browser/navigation.spec.js` | **existing** | Reviewed edits, listing only what changed | the category and directory listings | review each changed baseline by eye; no blanket update | `git revert` |
+| Routes, registry, breadcrumb, `tool-page.js`, `entries/tool.js`, `data/calculators.js`, `calculator-registry.js`, shared UI helpers, shared CSS | **existing** | **No change** | none | none | none |
+The touch-list of `docs/tool-pack-factory.md` section 7 is the checklist; the affected listing baselines are named during G7, not afterwards. Registering the tool does **not** add a breadcrumb, because the shared shell owns it.
+
+### 33.16 Proposed implementation file matrix by milestone
+G4: `gratuity-rules.js`, `gratuity-calendar.js`, `gratuity.js`, `gratuity-golden.py`, `gratuity-golden.json`, `gratuity-golden.test.mjs`. G5: `gratuity/index.js`, `gratuity.css`. G6: panels inside `gratuity/index.js` and the engine's `explore` and `compareWages` (already in G4 so one engine is tested once). G7: the existing registration and pinned files of 33.15, then supporting content only if unblocked. No other file is touched.
+
+### 33.17 Risk and blocker register
+| # | Risk or blocker | Likelihood | Impact | Mitigation | Verification | Blocking |
+| --- | --- | --- | --- | --- | --- | --- |
+| K1 | D10 unsettled: month-end results differ for joins on the 29th to 31st | Certain until decided | One counted year (₹28,846.15 at ₹50,000) | Isolate `anniversary`; decide before G4 | T-CAL | **Blocks G4** |
+| K2 | Four-year line and status wording unsettled | Certain until decided | Misleading eligibility copy | Constant plus stable codes; no "eligible" wording | T-ELG | **Blocks G4 status code and G5 wording** |
+| K3 | Ceiling notification not read in the gazette | Medium | Wrong cap | Constant with source and date; release gate | Gazette check before release | Release gate |
+| K4 | Wrong legal reading in a contested case | Medium | Wrong money or status | Statuses never assert eligibility; illustrative labels; review recommended (D8) | Review, if done | Not G3; advisory |
+| K5 | Wage misunderstanding (gross entered) | High | Overstated figure | Hint, "check with payroll", no gross label | Owner manual read | No |
+| K6 | Date edge errors (leap, month-end) | Medium | Wrong N | Independent oracle; boundary table | T-CAL | Blocks G4 until D10 |
+| K7 | Float or rounding errors | Low | Paise errors | Integer paise; half-up at the end; guard test | T-AMT | No |
+| K8 | Misleading success-shaped result for an error | Low | Trust | Result contract: `paise: null` for none; tests | T-SEC, T-APP | No |
+| K9 | Shared registration regressions (listings, counts) | Medium | Broken pinned tests | Touch-list; named baselines; narrow checks | Pinned tests | No |
+| K10 | Cross-tool date helper coupling | Low if (b) is chosen | Silent drift | Independent module and tests | T-CAL | Owner choice P1 |
+| K11 | Mobile overflow of long rupee figures | Medium | Unreadable result | `overflow-wrap`; check at 320 px | Owner manual | No |
+| K12 | Assistive-technology behaviour unknown | Medium | Inaccessible result | Follow existing patterns; announce honestly; test later | Owner or later AT check | No |
+| K13 | Privacy overclaim | Low | Trust | Truthful wording (33.14) | Wording review | No |
+| K14 | Packaging or deployment mistakes | Low | Production risk | Separate approvals G10 to G12; backup first | G11 checklist | Release gate |
+| K15 | No independent review (D8) | Certain | Residual interpretation risk | Recommend before release; never claim | Evidence only | Advisory |
+| K16 | Section 11's focus contract differs from the PPF and SWP convention | Certain | Inconsistent behaviour across tools | Follow Section 11, unchanged (owner decision 2026-10-21); examine the heading focus and live region together on the built page | Owner manual check of focus and announcement (G9) | No |
+| K17 | The wage plausibility limit (Section 5, ₹1,00,00,000) is provisional | Certain until reviewed | A typing slip yields a very large estimate, or a legitimate value is refused | Retained provisionally; technical limits apply in any case; review before implementation | T-VAL | No (review item before G4 and G5) |
+
+### 33.18 Mapping to the authoritative G0 to G13 milestones (Section 30)
+The pack's G0 to G15 map is **not adopted**. Correspondence by name and number:
+| Pack phase (planning only) | Authoritative milestone (Section 30) |
+| --- | --- |
+| G0 Discovery, G1 Legal, G2 Functional specification | **G0, G1, G2** (done) |
+| G3 Detailed design | **G3** (this section) |
+| Owner decision gate | The gate before **G4** (33.19) |
+| G4 Calculation engine | **G4** |
+| G5 Interface | **G5** |
+| (no pack equivalent) | **G6** Approved P1 features (explorer, comparison, copy) |
+| G6 Integration | **G7** Catalog, search, sitemap, relationships, pinned tests |
+| G9 Supporting content and SEO | **G7** (articles only if unblocked) |
+| G7 Focused verification | **G8** Focused correctness verification |
+| G8 Owner manual acceptance | **G9** Owner manual acceptance |
+| G11 Staging | **G10** Staging release |
+| G10 Release readiness, G12 Production package | **G11** Release package, backup and rollback |
+| G13 Hostinger deployment, G14 Production verification | **G12** Production deployment (with its post-release checks) |
+| G15 Closure | **G13** Feedback and law-change review (and closure record) |
+A future pack handoff that names "G6 integration" means **G7**; "G8 acceptance" means **G9**; "G11 staging" means **G10**.
+
+### 33.19 Approval requirements for the next milestone (G4) and G3 decisions
+**Technical decisions P1 to P6** (none is a legal decision; D10, the four-year line and the ceiling verification are separate). The owner's decisions of 2026-10-21 (the G3 commit authorization) are recorded below; D10, the four-year line and the ceiling verification remain **unresolved**.
+| # | Definition and alternatives (as raised in G3) | Owner direction, 2026-10-21 | Treatment in Section 33 |
+| --- | --- | --- | --- |
+| P1 | **Date helper:** (a) import `dayNumber`, `addMonths`, `parseDate` from `tools/date-difference/date-engine.js`; (b) a small independent `gratuity-calendar.js`; (c) extract a shared helper (edits an existing tool, rulebook 9.3 approval) | **Decided 2026-10-21:** a dedicated `gratuity-calendar.js`, subject to the approved date-counting contract | (b) is the design; the contract (D10) is still pending; (a) and (c) are not pursued |
+| P2 | **Focus after Calculate:** (i) Section 11 as committed; (ii) the existing calculators' convention (announce in the live region, keep focus on the button) | **Decided 2026-10-21:** keep Section 11 unchanged: focus moves to the result heading after Calculate; no second accessibility behaviour before the real interface is tested | The design follows (i); (ii) and the proposed additions are recorded, **not applied**; **Section 11 is unchanged** |
+| P3 | **Wages control:** a text input with `inputmode="decimal"` and a strict parser, or the shared `numberField` (`type="number"`) | **Decided 2026-10-21:** a text input with strict parsing, matching the G2 constraints | Adopted. **P3b decided 2026-10-21:** comma and space separators (a pasted "1,50,000") are **rejected for now** with a helpful validation message (rulebook 8.5: never silently change what was typed); revisit only by a later decision |
+| P4 | **Employee type preselection:** none, or "Regular" | **Decided 2026-10-21:** no preselection; an intentional choice | Adopted (33.5) |
+| P5 | **Limits:** restated 2026-10-21 in three classes (33.5): statutory (only the D4 date), technical (derived from safe-integer arithmetic and the engine's calendar range), plausibility (product choices) | **Decided 2026-10-21:** retain Section 5's ₹1,00,00,000 specification limit **provisionally**, reviewed before implementation; no invented legal, salary or service thresholds | Technical limits derived and stated; the first G3 figures for the joining year (1950) and service (70 years) **withdrawn**; the ₹1,00,00,000 limit is a provisional product limit, not statutory and not technical |
+| P6 | **Supporting content:** a short "Questions people ask" block | **Decided 2026-10-21:** defer to the authoritative **G7**; keep it concise and tied to verified behaviour | Deferred to **G7** (supporting content only if unblocked) of the authoritative plan; never filler |
+
+**P2 in detail.** The conflicting statements are: Section 11, "After Calculate, focus moves to the result heading and a polite live region announces the status once; after Reset, focus returns to the first field" (repeated by reference in Section 18), against the PPF and SWP behaviour in 33.3. The first G3 draft of 33.8 and 33.11 followed the PPF convention and so contradicted Section 11; **that is corrected**. If the owner **keeps** Section 11, the smallest wording change is an addition, proposed and **not applied**: "The result heading takes focus and the live region announces only the amount line, so the status is not spoken twice." If the owner prefers the site convention, the smallest replacement is, proposed and **not applied**: "After Calculate, a polite live region announces the status once and focus stays on Calculate; after Reset, focus returns to the first field." Either way Section 33.8, 33.9 and 33.11 are the only places to adjust. **Owner decision 2026-10-21: Section 11 is kept unchanged and neither proposed wording is applied**, to avoid introducing a second accessibility behaviour before the actual interface is tested.
+
+**Before G4 may start (all required):**
+1. The owner reviews and approves this G3 design (a commit approval is separate).
+2. **D10 is decided** (A with disclosure, or C′) and recorded in Section 29.
+3. **The four-year line and the status wording are decided** and recorded in Section 7.3 and 29.
+4. P1 to P6 are decided (2026-10-21); the provisional wage limit of P5 is reviewed before implementation.
+5. The ceiling is carried as the drafting constant with its source and date; the gazette check stays a **release** gate (B6).
+6. G4 is authorized in a separate instruction, with the phase numbering of Section 30.
+**G4 is BLOCKED until 2 and 3 are done.** G4 changes only the six files of 33.16, leaves them uncommitted for review, runs only the focused pure-module tests of 33.13, and stops.
+
+### 33.20 G3 readiness
+**DESIGN COMPLETE, LEGAL DECISIONS PENDING.** All four G3 blocks are covered: architecture and integration (33.3, 33.4, 33.15, 33.16), calculation, legal and validation design (33.5 to 33.8, 33.13), UX, mobile and accessibility (33.9 to 33.12), and verification, risks and gates (33.12, 33.13, 33.17 to 33.19). D10 and the four-year line remain open and are not chosen here.
