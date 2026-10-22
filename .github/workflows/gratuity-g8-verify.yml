@@ -1,0 +1,73 @@
+# Gratuity Calculator G8 focused integration verification (TEMPORARY; never merge to main).
+#
+# Runs ONLY the browser specs that read the places a catalog registration reaches (smoke over the URL inventory, the SEO, links
+# and DOM baselines, navigation and the listings) plus tests/browser/gratuity-g8-verify.spec.js, on the subpath-desktop and
+# root-desktop projects, one worker, no retries, on a GitHub-hosted runner so the browser does not have to run on a low-memory
+# machine. It does NOT repeat the G6 interaction suite, and it does NOT run the visual project: the PNG baselines were made on
+# another platform (tests/browser/visual.spec.js) and cannot be compared here.
+#
+# It starts only on a push to the temporary branch gratuity-g8-verify. It cannot deploy anything: read-only permissions, no
+# Pages or deployment steps, no id-token, no secrets. It never updates a snapshot. Baseline differences are reported as failures
+# and kept, with the actual files, in the uploaded test-results for review (7 days).
+name: Gratuity G8 verification
+
+on:
+  push:
+    branches:
+      - gratuity-g8-verify
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gratuity-g8-verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+        timeout-minutes: 5
+      # the tests serve dist/ and dist-ghpages/ themselves (tests/helpers/global-setup.mjs); both must exist
+      - run: npm run build:all
+        timeout-minutes: 5
+      # the unit pins and the inventory/static checks read the same build; they are cheap, so they run here too
+      - name: Inventory check
+        run: npm run inventory:check
+        timeout-minutes: 3
+      # the browser is the Chrome already installed on the GitHub-hosted runner (channel "chrome" in playwright.config.js)
+      - name: Gratuity G8 browser specs
+        run: >
+          npx playwright test
+          tests/browser/smoke.spec.js
+          tests/browser/seo-baseline.spec.js
+          tests/browser/links.spec.js
+          tests/browser/dom-baseline.spec.js
+          tests/browser/navigation.spec.js
+          tests/browser/gratuity-g8-verify.spec.js
+          --project=subpath-desktop --project=root-desktop
+          --workers=1 --retries=0 --reporter=list,html,json --trace=retain-on-failure
+        timeout-minutes: 20
+        env:
+          CI: "true"
+          PLAYWRIGHT_HTML_OPEN: never
+          PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-report/results.json
+      - name: Upload report, traces and baseline actuals
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gratuity-g8-verify
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
