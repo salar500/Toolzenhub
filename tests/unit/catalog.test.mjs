@@ -26,7 +26,7 @@ before(async () => {
 });
 
 // the published tools of the Calculators section; Date Difference (Time Tools) is a published tool too, but it is not a calculator
-const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "swp", "percentage", "income-tax", "credit-card-payoff", "ppf"];
+const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "swp", "percentage", "income-tax", "credit-card-payoff", "ppf", "gratuity"];
 const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"];
 
@@ -45,7 +45,7 @@ describe("catalog model", () => {
     for (const c of catalog.calculators) assert.ok(["published", "coming-soon"].includes(c.status), `${c.id}: ${c.status}`);
   });
 
-  test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP Margin, Profit, Home Loan, FD, GST, CAGR and Percentage, Income Tax (the Old vs New Tax Regime Calculator), SWP, Credit Card Payoff and PPF are published; all other 11 are coming-soon", () => {
+  test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP Margin, Profit, Home Loan, FD, GST, CAGR and Percentage, Income Tax (the Old vs New Tax Regime Calculator), SWP, Credit Card Payoff, PPF and Gratuity (India) are published; all other 11 are coming-soon", () => {
     const pub = catalog.calculators.filter((c) => c.status === "published").map((c) => c.id).sort();
     assert.deepEqual(pub, [...PUBLISHED_CALCULATORS].sort());
     assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 11);
@@ -121,6 +121,7 @@ describe("registry is derived from the catalog", () => {
       "home-loan": { section: "Calculators", category: "loans", title: "Home Loan Calculator" },
       fd: { section: "Calculators", category: "investment", title: "FD Calculator" },
       ppf: { section: "Calculators", category: "investment", title: "PPF Calculator" },
+      gratuity: { section: "Calculators", category: "tax", title: "Gratuity Calculator (India)" },
       gst: { section: "Calculators", category: "tax", title: "GST Calculator" },
       cagr: { section: "Calculators", category: "investment", title: "CAGR Calculator" },
       swp: { section: "Calculators", category: "investment", title: "SWP Calculator" },
