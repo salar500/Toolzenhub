@@ -798,3 +798,34 @@
     line-height: 1.5;
 
 }
+
+/* =========================================================
+   The "Out of date" label that sits with a figure (G9 correction).
+   Text on a bordered panel, so it does not depend on colour or
+   dimming; hidden while the result is current.
+========================================================= */
+
+.gratuity-stale-badge {
+
+    margin: 0 0 10px;
+    padding: 8px 12px;
+
+    border: 1px solid #fedf89;
+    border-left-width: 6px;
+    border-radius: 8px;
+
+    background: #fffcf5;
+
+    color: #4e3a05;
+
+    font-size: 15px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+
+}
+
+.gratuity-stale-badge[hidden] {
+
+    display: none;
+
+}

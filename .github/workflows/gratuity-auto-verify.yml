@@ -1,10 +1,12 @@
 # Gratuity Calculator G9 automatic-calculation verification (TEMPORARY; never merge to main).
 #
-# Runs ONLY the browser checks for the change in b7261c7 (the result updates by itself, no Calculate button, the service block):
-#   1. tests/browser/gratuity-auto.spec.js on the subpath-desktop, subpath-mobile and root-desktop projects;
-#   2. the Gratuity page's smoke test and the SEO baseline (which carries the page's raw text count), on the desktop projects.
-# One worker, no retries, on a GitHub-hosted runner so the browser does not have to run on a low-memory machine. It does not
-# repeat the unit tests (159 passed locally), the G8 checks or the visual project.
+# Round 1 ran the browser checks for the change in b7261c7 (the result updates by itself, no Calculate button, the service block);
+# round 2 runs only the corrected cases of 21e3ff4 (see the step comment):
+#   1. tests/browser/gratuity-auto.spec.js, those cases only, on the subpath-desktop, subpath-mobile and root-desktop projects;
+#   2. npm run inventory:check, once.
+# The Gratuity smoke and SEO baseline passed in round 1 and the correction does not change the static page. One worker, no
+# retries, on a GitHub-hosted runner so the browser does not have to run on a low-memory machine. It does not repeat the unit
+# tests (166 passed locally), the G8 checks or the visual project.
 #
 # It starts only on a push to the temporary branch gratuity-auto-verify. It cannot deploy anything: read-only permissions, no
 # Pages or deployment steps, no id-token, no secrets. It never updates a snapshot; a baseline difference is a failure, and the
@@ -41,10 +43,13 @@ jobs:
       - run: npm run build:all
         timeout-minutes: 5
       # the browser is the Chrome already installed on the GitHub-hosted runner (channel "chrome" in playwright.config.js)
-      - name: Automatic calculation spec
+      # Round 2 (correction 21e3ff4): only the three groups that failed in run 39728971533 (the Out of date label at 320, 360 and
+      # 390 px; the invalid exit date and its focus; the fixed-term early end), on all three projects. The 54 that passed are not repeated.
+      - name: Automatic calculation spec (the corrected cases only)
         run: >
           npx playwright test
           tests/browser/gratuity-auto.spec.js
+          -g "Out of date|exit date before the joining date|fixed-term that ends earlier"
           --project=subpath-desktop --project=subpath-mobile --project=root-desktop
           --workers=1 --retries=0 --reporter=list,html,json --trace=retain-on-failure
         timeout-minutes: 15
@@ -52,20 +57,11 @@ jobs:
           CI: "true"
           PLAYWRIGHT_HTML_OPEN: never
           PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-report/results-auto.json
-      # runs even if the spec failed, so one failure does not hide the SEO and smoke results
-      - name: Gratuity page smoke and SEO baseline
+      # once, after the build; runs even if the spec step failed
+      - name: Inventory check
         if: always()
-        run: >
-          npx playwright test
-          tests/browser/smoke.spec.js
-          tests/browser/seo-baseline.spec.js
-          -g "calculators/gratuity/|record title"
-          --project=subpath-desktop --project=root-desktop
-          --workers=1 --retries=0 --reporter=list,json --trace=retain-on-failure
-        timeout-minutes: 10
-        env:
-          CI: "true"
-          PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-report/results-seo-smoke.json
+        run: npm run inventory:check
+        timeout-minutes: 3
       - name: Upload report, traces and baseline actuals
         if: always()
         uses: actions/upload-artifact@v4

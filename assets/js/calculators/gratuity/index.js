@@ -104,6 +104,15 @@ const RESET_MESSAGE = "Cleared. Choose the employee type and enter your wages an
 /* the owner-approved sentence next to the counted years (G9, 2026-10-22), verbatim */
 export const COUNTED_YEARS_NOTE = "Years counted for the formula may differ from your actual service duration. This rounding does not determine eligibility.";
 
+/*
+ * The label that sits with every figure of an out-of-date result (G9 correction, 2026-10-22). The general message above the
+ * results can be scrolled out of sight while an old amount is still on screen, so the words travel with the figures. It is
+ * text, not only colour or dimming, and it is hidden while the result is current.
+ */
+export const STALE_BADGE_LABEL = "Out of date";
+export const STALE_BADGE_TEXT = "These figures are not your current estimate.";
+export const staleBadgeHtml = () => `<p class="gratuity-stale-badge" data-stale-badge hidden><strong>${STALE_BADGE_LABEL}.</strong> ${STALE_BADGE_TEXT}</p>`;
+
 /* =========================================================
    AUTOMATIC CALCULATION (pure helpers; exported for the tests)
    The page calculates by itself once the entries are complete and valid. Typed wages wait for a short pause; a chosen
@@ -459,6 +468,7 @@ export function renderResultHtml(view) {
 
     const amount = view.amount
         ? `
+                ${staleBadgeHtml()}
                 <div class="calculator-results__grid gratuity-amount" data-kind="${escapeHTML(view.amount.kind)}">
                     ${resultMetric({ label: view.amount.label, value: view.amount.text, primary: true })}
                 </div>`
@@ -522,6 +532,7 @@ export function renderResultHtml(view) {
 
                 </div>
 
+                ${view.amount ? "" : staleBadgeHtml()}
                 <p class="gratuity-status">${escapeHTML(view.statement)}</p>
                 ${view.fiveYearSentence ? `<p class="gratuity-status">${escapeHTML(view.fiveYearSentence)}</p>` : ""}
                 ${amount}${serviceBlock}${notes}${checks}${working}${assumptions}
@@ -721,6 +732,7 @@ export function renderExplorerHtml(explorer) {
     return `
             <section class="gratuity-panel gratuity-explorer" aria-labelledby="gratuity-explorer-heading">
                 <h3 id="gratuity-explorer-heading">If your exit date were later (hypothetical)</h3>
+                ${staleBadgeHtml()}
                 <p class="gratuity-panel__note">${escapeHTML(EXPLORER_NOTE)}</p>
                 <p>${escapeHTML(explorer.wageLine)}</p>
                 <ol class="gratuity-explorer__list">${rows}
@@ -770,6 +782,7 @@ export function renderComparisonHtml(view) {
 
     return `
                 <div class="gratuity-compare__result">
+                    ${staleBadgeHtml()}
                     <p class="gratuity-compare__label">${escapeHTML(view.amountLabel)}</p>
                     <dl>${rows}
                     </dl>
@@ -1283,6 +1296,11 @@ export function init(mount) {
             results.dataset.stale = "true";
         } else {
             delete results.dataset.stale;
+        }
+
+        /* the label beside each figure is shown exactly while the result is out of date */
+        for (const badge of results.querySelectorAll("[data-stale-badge]")) {
+            badge.hidden = !state.stale;
         }
 
         /* the features under the result work from the calculated inputs: they wait for the result to update */

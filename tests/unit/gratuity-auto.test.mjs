@@ -163,6 +163,43 @@ describe("the service in the main result", () => {
   });
 });
 
+describe("the Out of date label that travels with the figures (G9 correction)", () => {
+  test("it is text, hidden by default, directly before the amount, and says the figures are not the current estimate", () => {
+    const html = ui.renderResultHtml(view({}));
+    const badge = html.match(/<p class="gratuity-stale-badge" data-stale-badge hidden>[\s\S]*?<\/p>/);
+    assert.ok(badge, "present");
+    assert.match(badge[0], /Out of date/);
+    assert.match(badge[0], /not your current estimate/);
+    assert.equal((html.match(/data-stale-badge/g) || []).length, 1, "one beside the amount, not two");
+    assert.ok(html.indexOf("data-stale-badge") < html.indexOf('class="calculator-results__grid gratuity-amount"'));
+    assert.equal(ui.STALE_BADGE_LABEL, "Out of date");
+  });
+
+  test("a result with no amount (below the threshold, an explanation) carries it at the top of the card instead", () => {
+    for (const input of [{ joiningDate: "2022-01-01", exitDate: "2025-12-30" }, { employeeType: "other" }]) {
+      const html = ui.renderResultHtml(ui.describeResult(engine.calculateGratuity({ ...regular, ...input })));
+      assert.equal((html.match(/data-stale-badge/g) || []).length, 1, JSON.stringify(input));
+      assert.ok(html.indexOf("data-stale-badge") < html.indexOf('class="gratuity-status"'));
+    }
+  });
+
+  test("the explorer and the comparison carry it too, so no old figure is without it", () => {
+    const explorer = ui.renderExplorerHtml(ui.describeExplorer(engine.exploreExitDates(regular)));
+    assert.equal((explorer.match(/data-stale-badge/g) || []).length, 1);
+    const comparison = ui.renderComparisonHtml(ui.describeComparison(engine.compareWages(regular, "100000")));
+    assert.equal((comparison.match(/data-stale-badge/g) || []).length, 1);
+  });
+
+  test("an invalid entry still produces no figure in the view (the label is for the earlier result only)", () => {
+    for (const input of [{ exitDate: "2020-12-31" }, { wages: "0" }, { wages: "abc" }]) {
+      const v = view(input);
+      assert.equal(v.amount, null);
+      assert.equal(v.service, null);
+      assert.ok(!/data-stale-badge/.test(ui.renderResultHtml(v)));
+    }
+  });
+});
+
 describe("the markup contract after this change", () => {
   test("no Calculate button; Reset is kept and is not a submit button; the form cannot reload the page", () => {
     const html = ui.markup();

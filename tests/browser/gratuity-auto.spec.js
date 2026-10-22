@@ -131,7 +131,13 @@ test.describe("Gratuity Calculator: automatic calculation (G9) @portable", () =>
     await expect(results(page)).toHaveAttribute("data-stale", "true");
     await expect(results(page)).toContainText("₹1,44,230.77"); // the earlier result, labelled out of date
     await expect(page.locator("#gratuity-stale")).toBeVisible();
-    await expect(page.locator("#gratuity-exit")).not.toBeFocused();
+    // the contract: an automatic update never moves focus. The person is editing the exit date, so focus stays in that field
+    // (Playwright's fill puts it there); it does not jump to the message, the result heading or another field.
+    await expect(page.locator("#gratuity-exit")).toBeFocused();
+    await expect(page.locator("#gratuity-result-heading")).not.toBeFocused();
+    // no figure for the invalid entries: the only amount on screen is the earlier one, labelled out of date
+    await expect(page.locator(".gratuity-amount")).toHaveCount(1);
+    await expect(page.locator(".gratuity-result [data-stale-badge]").first()).toBeVisible();
   });
 
   test("a wage of zero or letters is reported after the pause, and the amount does not change", async ({ page, go }) => {
@@ -255,35 +261,48 @@ test.describe("Gratuity Calculator: automatic calculation (G9) @portable", () =>
   });
 
   for (const [width, height] of [[320, 640], [360, 740], [390, 844]]) {
-    test(`phone width ${width}px: the out-of-date warning is on screen together with the old amount, and the old result is visibly dimmed and outlined`, async ({ page, go }) => {
+    test(`phone width ${width}px: an "Out of date" label sits with the old amount, on screen together with it, and the old result is dimmed and outlined`, async ({ page, go }) => {
       await page.setViewportSize({ width, height });
       await open(page, go);
       await fillM2(page);
       await expect(results(page)).toContainText("₹1,44,230.77");
+      // current: no label beside the amount
+      await expect(page.locator(".gratuity-result [data-stale-badge]:visible")).toHaveCount(0);
       await page.locator("#gratuity-exit").fill(""); // incomplete: the old result stays, labelled out of date
 
-      const stale = page.locator("#gratuity-stale");
-      await expect(stale).toBeVisible();
-      await expect(stale).toContainText("out of date");
+      await expect(page.locator("#gratuity-stale")).toContainText("out of date");
       await expect(results(page)).toHaveAttribute("data-stale", "true");
       const look = await results(page).evaluate((el) => { const c = getComputedStyle(el); return { opacity: c.opacity, outline: c.outlineStyle }; });
       expect(Number(look.opacity), "dimmed").toBeLessThan(1);
       expect(look.outline, "outlined").not.toBe("none");
 
-      // a reader scrolled to the amount (its top a little below the top of the screen) still sees the warning
+      // the label travels with the figure: it is text, directly above the amount, in the same block
+      const badge = page.locator(".gratuity-result [data-stale-badge]").first();
+      await expect(badge).toBeVisible();
+      await expect(badge).toContainText("Out of date");
+      await expect(badge).toContainText("not your current estimate");
       const amount = page.locator(".gratuity-amount").first();
+
+      // a reader scrolled to the amount (its top a little below the top of the screen) sees the label with it
       await amount.evaluate((el) => el.scrollIntoView({ block: "start" }));
       await page.evaluate(() => window.scrollBy(0, -120));
       const a = await amount.boundingBox();
-      const s = await stale.boundingBox();
+      const b = await badge.boundingBox();
       expect(a.y, "the amount is on screen").toBeGreaterThanOrEqual(0);
       expect(a.y + a.height, "the amount is on screen").toBeLessThanOrEqual(height);
-      expect(s.y, "the out-of-date warning starts on screen").toBeGreaterThanOrEqual(0);
-      expect(s.y + s.height, "the out-of-date warning ends on screen").toBeLessThanOrEqual(height);
-      expect(s.x).toBeGreaterThanOrEqual(0);
-      expect(s.x + s.width).toBeLessThanOrEqual(width);
-      const size = await stale.evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
+      expect(b.y, "the label starts on screen").toBeGreaterThanOrEqual(0);
+      expect(b.y + b.height, "the label is directly above the amount").toBeLessThanOrEqual(a.y + 1);
+      expect(a.y - (b.y + b.height), "and close to it").toBeLessThan(40);
+      expect(b.x).toBeGreaterThanOrEqual(0);
+      expect(b.x + b.width, "no sideways overflow").toBeLessThanOrEqual(width);
+      const size = await badge.evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
       expect(size, "readable").toBeGreaterThanOrEqual(14);
+      await expectNoHorizontalOverflow(page);
+
+      // current again: the label goes
+      await page.locator("#gratuity-exit").fill("2026-06-30");
+      await expect(results(page)).not.toHaveAttribute("data-stale", "true");
+      await expect(page.locator("[data-stale-badge]:visible")).toHaveCount(0);
     });
   }
 
@@ -314,8 +333,18 @@ test.describe("Gratuity Calculator: automatic calculation (G9) @portable", () =>
     await choose(page, "gratuity-type-fixed");
     await expect(results(page)).toContainText("Still needed: how the contract ends");
     await choose(page, "gratuity-end-earlier");
+    // the engine checks the wages and the dates before it gives the early-end explanation, so the page says what is still needed
+    await expect(results(page)).toContainText("Still needed: the qualifying monthly wages, the contract start date and the contract end date.");
+    await expect(page.locator("#gratuity-result-heading")).toHaveCount(0);
+    await page.locator("#gratuity-wages").fill("50000");
+    await page.locator("#gratuity-joining").fill("2025-01-01");
+    await page.locator("#gratuity-exit").fill("2025-12-31");
+    // then the approved explanation, and no figure
     await expect(page.locator("#gratuity-result-heading")).toBeVisible();
+    await expect(results(page)).toContainText("When a fixed-term contract ends before its full term, whether gratuity is due depends on the contract and on your employer.");
     await expect(page.locator(".gratuity-amount")).toHaveCount(0);
+    await expect(page.locator(".gratuity-service")).toHaveCount(0);
+    await expect(results(page)).not.toContainText("₹");
   });
 
   test("Enter in the wages field does not leave or reload the page, and asks for the answer now", async ({ page, go }) => {
