@@ -230,6 +230,63 @@ test.describe("Gratuity Calculator: automatic calculation (G9) @portable", () =>
     await expect(page.locator(".gratuity-working")).toHaveAttribute("open", "");
   });
 
+  test("editing the wages: the earlier amount stays, labelled out of date, until the pause; no amount from half-typed digits is ever shown", async ({ page, go }) => {
+    await open(page, go);
+    await fillM2(page);
+    await expect(results(page)).toContainText("₹1,44,230.77");
+    // every amount the page shows from now on, as it changes
+    await page.evaluate(() => {
+      window.__amounts = new Set();
+      const region = document.querySelector("#gratuity-results");
+      const grab = () => { for (const el of region.querySelectorAll(".gratuity-amount")) window.__amounts.add(el.textContent.replace(/\s+/g, " ").trim()); };
+      grab();
+      new MutationObserver(grab).observe(region, { childList: true, subtree: true, characterData: true });
+    });
+    await page.locator("#gratuity-wages").fill("");
+    await page.locator("#gratuity-wages").pressSequentially("60000", { delay: 150 }); // 6, 60, 600, 6000: none may be shown
+    await expect(results(page)).toHaveAttribute("data-stale", "true");
+    await expect(results(page)).toContainText("₹1,44,230.77");
+    // 60000 x 15 x 5 / 26 = 1,73,076.92 (the specification's formula)
+    await expect(results(page)).toContainText("₹1,73,076.92");
+    await expect(results(page)).not.toHaveAttribute("data-stale", "true");
+    const shown = await page.evaluate(() => [...window.__amounts]);
+    expect(shown.length, "the amounts that were on screen").toBe(2);
+    for (const text of shown) expect(text).toMatch(/₹1,44,230\.77|₹1,73,076\.92/);
+  });
+
+  for (const [width, height] of [[320, 640], [360, 740], [390, 844]]) {
+    test(`phone width ${width}px: the out-of-date warning is on screen together with the old amount, and the old result is visibly dimmed and outlined`, async ({ page, go }) => {
+      await page.setViewportSize({ width, height });
+      await open(page, go);
+      await fillM2(page);
+      await expect(results(page)).toContainText("₹1,44,230.77");
+      await page.locator("#gratuity-exit").fill(""); // incomplete: the old result stays, labelled out of date
+
+      const stale = page.locator("#gratuity-stale");
+      await expect(stale).toBeVisible();
+      await expect(stale).toContainText("out of date");
+      await expect(results(page)).toHaveAttribute("data-stale", "true");
+      const look = await results(page).evaluate((el) => { const c = getComputedStyle(el); return { opacity: c.opacity, outline: c.outlineStyle }; });
+      expect(Number(look.opacity), "dimmed").toBeLessThan(1);
+      expect(look.outline, "outlined").not.toBe("none");
+
+      // a reader scrolled to the amount (its top a little below the top of the screen) still sees the warning
+      const amount = page.locator(".gratuity-amount").first();
+      await amount.evaluate((el) => el.scrollIntoView({ block: "start" }));
+      await page.evaluate(() => window.scrollBy(0, -120));
+      const a = await amount.boundingBox();
+      const s = await stale.boundingBox();
+      expect(a.y, "the amount is on screen").toBeGreaterThanOrEqual(0);
+      expect(a.y + a.height, "the amount is on screen").toBeLessThanOrEqual(height);
+      expect(s.y, "the out-of-date warning starts on screen").toBeGreaterThanOrEqual(0);
+      expect(s.y + s.height, "the out-of-date warning ends on screen").toBeLessThanOrEqual(height);
+      expect(s.x).toBeGreaterThanOrEqual(0);
+      expect(s.x + s.width).toBeLessThanOrEqual(width);
+      const size = await stale.evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
+      expect(size, "readable").toBeGreaterThanOrEqual(14);
+    });
+  }
+
   test("'Other' shows its explanation at once, with no amount and no service block", async ({ page, go }) => {
     await open(page, go);
     await choose(page, "gratuity-type-other");
