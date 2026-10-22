@@ -398,8 +398,9 @@ describe("the static markup", () => {
     assert.equal(errorIds.length, 5);
   });
 
-  test("Calculate submits, Reset does not; one polite status region; the stale marker starts hidden", () => {
-    assert.match(page(), /<button\s+type="submit"\s+id="gratuity-calculate"/);
+  test("there is no Calculate button (the result updates by itself); one polite status region; the stale marker starts hidden", () => {
+    assert.ok(!/gratuity-calculate/.test(page()) && !/type="submit"/.test(page()), "no Calculate or submit button");
+    assert.ok(!/press Calculate/i.test(page()), "no instruction to press Calculate");
     assert.match(page(), /<button\s+type="button"\s+id="gratuity-reset"/);
     assert.equal(count(/aria-live="polite"/g), 1);
     assert.match(page(), /id="gratuity-live"\s+class="gratuity-sr-only"\s+role="status"/);
@@ -408,7 +409,7 @@ describe("the static markup", () => {
   });
 
   test("the page starts with the empty state, the rules-checked date and the privacy line", () => {
-    assert.match(page(), /Choose the employee type, enter your details and press Calculate\./);
+    assert.match(page(), /Choose the employee type and enter your wages and dates\. The result appears here as soon as they are complete\./);
     assert.match(page(), /Rules checked on 21 October 2026\./);
     assert.match(page(), /Calculated in your browser/);
     assert.ok(!page().includes("₹0.00"));

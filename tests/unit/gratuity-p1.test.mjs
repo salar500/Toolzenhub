@@ -297,13 +297,15 @@ describe("stale and Reset", () => {
 describe("review corrections", () => {
   test("Enter in the second-wages field while the result is out of date explains why nothing changed, in plain words", () => {
     assert.match(ui.STALE_COMPARE_MESSAGE, /out of date/);
-    assert.match(ui.STALE_COMPARE_MESSAGE, /Press Calculate first/);
+    assert.match(ui.STALE_COMPARE_MESSAGE, /updates when your entries are complete and valid/);
+    assert.ok(!/Calculate/.test(ui.STALE_COMPARE_MESSAGE), "there is no Calculate button to press");
     assert.ok(!/guarantee|payable|eligible/i.test(ui.STALE_COMPARE_MESSAGE));
   });
 
   test("the out-of-date messages for Compare and Copy name the action and promise nothing", () => {
     assert.match(ui.STALE_COPY_MESSAGE, /out of date/);
-    assert.match(ui.STALE_COPY_MESSAGE, /Press Calculate first/);
+    assert.match(ui.STALE_COPY_MESSAGE, /updates when your entries are complete and valid/);
+    assert.ok(!/Calculate/.test(ui.STALE_COPY_MESSAGE), "there is no Calculate button to press");
     assert.ok(!/guarantee|payable|eligible/i.test(ui.STALE_COPY_MESSAGE));
   });
 

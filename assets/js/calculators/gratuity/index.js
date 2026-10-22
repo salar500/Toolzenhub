@@ -12,17 +12,19 @@
    docs/tool-packs/29-gratuity-calculator.md (sections 6, 7, 11, 33
    and 34).
 
-   - Results appear when the visitor presses Calculate. Editing a field
-     afterwards marks the result as out of date until it is calculated
-     again; the page never shows a figure for inputs it was not
-     calculated from.
+   - Results appear by themselves once the entries are complete and
+     valid (G9, owner-approved 2026-10-22; there is no Calculate button).
+     Editing a field marks the result as out of date until the new
+     entries give a new one; the page never shows a figure for inputs it
+     was not calculated from, and incomplete or invalid entries never
+     produce one.
    - The page words the status, the assumptions and the disclosures
      from the engine's stable identifiers. It never says that anyone IS
      eligible, never calls a computed figure "payable", and shows an
      illustrative amount only as illustrative.
-   - After Calculate, focus moves to the result heading and a polite
-     live region announces the status once (specification section 11);
-     after Reset, focus returns to the first field.
+   - An automatic update never moves focus. A polite live region
+     announces a settled change once (not while typing); after Reset,
+     focus returns to the first field (specification section 11).
    - Money is formatted from integer paise by digit grouping, never
      through a floating-point value: formatINR rounds to whole rupees
      and would hide the paise.
@@ -93,11 +95,62 @@ const ERROR_IDS = {
     exitDate: "gratuity-error-exit"
 };
 
-const EMPTY_MESSAGE = "Choose the employee type, enter your details and press Calculate.";
-const STALE_MESSAGE = "You have changed a value. The result below is out of date until you press Calculate.";
-export const STALE_COMPARE_MESSAGE = "The result above is out of date. Press Calculate first, then compare wages.";
-export const STALE_COPY_MESSAGE = "The result above is out of date. Press Calculate first, then copy the summary.";
-const RESET_MESSAGE = "Cleared. Choose the employee type, enter your details and press Calculate.";
+const EMPTY_MESSAGE = "Choose the employee type and enter your wages and dates. The result appears here as soon as they are complete.";
+const STALE_MESSAGE = "You have changed a value. The result below is out of date and will update when your entries are complete and valid.";
+export const STALE_COMPARE_MESSAGE = "The result above is out of date, so wages cannot be compared yet. It updates when your entries are complete and valid.";
+export const STALE_COPY_MESSAGE = "The result above is out of date, so the summary cannot be copied yet. It updates when your entries are complete and valid.";
+const RESET_MESSAGE = "Cleared. Choose the employee type and enter your wages and dates.";
+
+/* the owner-approved sentence next to the counted years (G9, 2026-10-22), verbatim */
+export const COUNTED_YEARS_NOTE = "Years counted for the formula may differ from your actual service duration. This rounding does not determine eligibility.";
+
+/* =========================================================
+   AUTOMATIC CALCULATION (pure helpers; exported for the tests)
+   The page calculates by itself once the entries are complete and valid. Typed wages wait for a short pause; a chosen
+   type or date is read at once. Incomplete or invalid entries never produce a new figure.
+========================================================= */
+
+export const AUTO_DELAY_MS = 600;
+export const ANNOUNCE_DELAY_MS = 1000;
+
+/* the entries a result was calculated from, as one comparable text (so unchanged entries are not calculated twice) */
+export function inputsKey(inputs) {
+
+    return JSON.stringify([inputs.employeeType, inputs.contractEnd, String(inputs.wages ?? "").trim(), inputs.joiningDate, inputs.exitDate]);
+
+}
+
+/* "show" when the engine gave something to display (a result, an explanation, or its own error); "hold" when the entries are not complete and valid yet */
+export function autoOutcome(result) {
+
+    return result && (result.status === STATUS.incomplete || result.status === STATUS.invalid) ? "hold" : "show";
+
+}
+
+const FIELD_PHRASES = Object.freeze({
+    employeeType: () => "the employee type",
+    contractEnd: () => "how the contract ends",
+    wages: () => "the qualifying monthly wages",
+    joiningDate: (fixed) => (fixed ? "the contract start date" : "the joining date"),
+    exitDate: (fixed) => (fixed ? "the contract end date" : "the exit date")
+});
+
+/* the guidance shown in place of a result while the entries are not ready: what is still needed, never a figure */
+export function holdMessage(view, employeeType) {
+
+    const errors = view && Array.isArray(view.errors) ? view.errors : [];
+    if (errors.some((error) => error.code !== ERRORS.required)) {
+        return "Check the highlighted fields. The result appears here as soon as they are complete and valid.";
+    }
+    const fixed = employeeType === EMPLOYEE_TYPES.fixedTerm;
+    const missing = errors.map((error) => (FIELD_PHRASES[error.field] ? FIELD_PHRASES[error.field](fixed) : null)).filter(Boolean);
+    if (!missing.length) {
+        return EMPTY_MESSAGE;
+    }
+    const text = missing.length === 1 ? missing[0] : `${missing.slice(0, -1).join(", ")} and ${missing[missing.length - 1]}`;
+    return `Still needed: ${text}. The result appears here as soon as they are complete.`;
+
+}
 const SUMMARY_ERROR_ID = "gratuity-error-summary";
 
 
@@ -295,6 +348,7 @@ export function describeResult(result) {
         short: SHORT[code] ?? SHORT[CODES.internalError],
         fiveYearSentence: null,
         amount: null,
+        service: null,
         working: null,
         assumptions: [],
         checks: [],
@@ -341,6 +395,15 @@ export function describeResult(result) {
 
     }
 
+    const fixedTerm = inputs.employeeType === EMPLOYEE_TYPES.fixedTerm;
+    view.service = {
+        startLabel: fixedTerm ? "Contract start date" : "Joining date",
+        endLabel: fixedTerm ? "Contract end date" : "Exit date",
+        start: formatIsoDate(inputs.joiningDate),
+        end: formatIsoDate(inputs.exitDate),
+        duration: serviceText(service),
+        countedYears: view.amount && result.countedYears !== null ? String(result.countedYears) : null
+    };
     if (service.calendarFiveYearDate && result.code === CODES.thresholdNotReached) {
         view.fiveYearSentence = `Five calendar years of service are completed on ${formatIsoDate(service.calendarFiveYearDate)} for these dates.`;
     }
@@ -401,6 +464,19 @@ export function renderResultHtml(view) {
                 </div>`
         : "";
 
+    const serviceBlock = view.service
+        ? `
+                <section class="gratuity-service" aria-labelledby="gratuity-service-heading">
+                    <h3 id="gratuity-service-heading">Your service</h3>
+                    <dl class="gratuity-service__grid">
+                        <div><dt>${escapeHTML(view.service.startLabel)}</dt><dd>${escapeHTML(view.service.start)}</dd></div>
+                        <div><dt>${escapeHTML(view.service.endLabel)}</dt><dd>${escapeHTML(view.service.end)}</dd></div>
+                        <div class="gratuity-service__wide"><dt>Service on these dates</dt><dd class="gratuity-service__duration">${escapeHTML(view.service.duration)}</dd></div>
+                        ${view.service.countedYears !== null ? `<div><dt>Years counted for the formula</dt><dd>${escapeHTML(view.service.countedYears)}</dd></div>` : ""}
+                    </dl>
+                    ${view.service.countedYears !== null ? `<p class="gratuity-service__note">${escapeHTML(COUNTED_YEARS_NOTE)}</p>` : ""}
+                </section>`
+        : "";
     const notes = view.notes.map((note) => `
                 <p class="gratuity-note">${escapeHTML(note)}</p>`).join("");
 
@@ -448,7 +524,7 @@ export function renderResultHtml(view) {
 
                 <p class="gratuity-status">${escapeHTML(view.statement)}</p>
                 ${view.fiveYearSentence ? `<p class="gratuity-status">${escapeHTML(view.fiveYearSentence)}</p>` : ""}
-                ${amount}${notes}${checks}${working}${assumptions}
+                ${amount}${serviceBlock}${notes}${checks}${working}${assumptions}
             </div>`;
 
 }
@@ -720,7 +796,8 @@ export function renderCopyHtml() {
    WHAT THE PAGE SHOWS (pure; exported for the tests)
    A result is current until a field is edited; an edit after a
    result that shows a figure or an explanation marks it out of
-   date; a Calculate replaces it; a Reset clears everything.
+   date; the next complete, valid entries replace it; a Reset clears
+   everything.
    The inputs the result was calculated from are kept with it, so
    the features below it never read the fields as they are now.
 ========================================================= */
@@ -830,9 +907,10 @@ export function markup() {
                 </div>
 
                 <p class="calculator-section__description">
-                    Choose the employee type, enter your qualifying monthly
-                    wages and your dates, then press Calculate. The values you
-                    enter are not stored or sent anywhere.
+                    Choose the employee type and enter your qualifying monthly
+                    wages and your dates. The result appears by itself once
+                    they are complete. The values you enter are not stored or
+                    sent anywhere.
                 </p>
 
                 <form
@@ -928,13 +1006,6 @@ export function markup() {
 
                     <div class="calculator-form__actions gratuity-actions">
 
-                        <button
-                            type="submit"
-                            id="gratuity-calculate"
-                            class="calculator-form__button"
-                        >
-                            Calculate
-                        </button>
 
                         <button
                             type="button"
@@ -986,8 +1057,8 @@ export function markup() {
                     <li>Choose the employee type. A fixed-term employee is asked how the contract ends.</li>
                     <li>Enter your qualifying monthly wages as digits, for example 150000 or 150000.50, with no commas or spaces. They are not your gross salary.</li>
                     <li>Enter your joining date and your exit date (for a fixed-term contract, its start and its end).</li>
-                    <li>Press Calculate. The result says what the dates show, gives an estimate or an illustrative amount where the case allows one, and lists what to check with your employer.</li>
-                    <li>If you change a value after calculating, the result is marked out of date until you press Calculate. Reset clears everything.</li>
+                    <li>The result appears by itself once your entries are complete and valid. It says what the dates show, gives an estimate or an illustrative amount where the case allows one, and lists what to check with your employer.</li>
+                    <li>If you change a value, the result is marked out of date until the new entries are complete and valid, then it updates. Reset clears everything.</li>
                 </ol>
 
             </section>
@@ -1062,17 +1133,24 @@ export function init(mount) {
 
     let state = INITIAL_STATE;
     let announceTimer = null;
+    let debounceTimer = null;
+    let settleTimer = null;
+    let lastKey = null;
+    let lastAnnounced = "";
+    let secondWages = "";
+    let compareActive = false;
+    const touched = new Set();
 
     const chosen = (radios) => (radios.find((radio) => radio.checked) || { value: "" }).value;
 
-    function announce(text) {
+    function announce(text, delay = 400) {
 
         clearTimeout(announceTimer);
 
         announceTimer = setTimeout(() => {
             live.textContent = "";
             live.textContent = text;
-        }, 400);
+        }, delay);
 
     }
 
@@ -1143,9 +1221,13 @@ export function init(mount) {
 
     }
 
-    function showErrors(view) {
+    function showErrors(view, { focus = true, only = null } = {}) {
 
         for (const error of view.errors) {
+
+            if (only && !only(error.field)) {
+                continue;
+            }
 
             const control = controls[error.field];
 
@@ -1169,6 +1251,10 @@ export function init(mount) {
                 setFieldsInvalid([control.element], control.error);
             }
 
+        }
+
+        if (!focus) {
+            return;
         }
 
         const first = ORDER.find((field) => view.errors.some((error) => error.field === field));
@@ -1199,7 +1285,7 @@ export function init(mount) {
             delete results.dataset.stale;
         }
 
-        /* the features under the result work from the calculated inputs: they wait for a new Calculate */
+        /* the features under the result work from the calculated inputs: they wait for the result to update */
         /* aria-disabled, not disabled: a disabled default button stops Enter from submitting the compare form, so Enter could not explain; the handlers refuse while stale */
         for (const button of results.querySelectorAll("[data-needs-current]")) {
 
@@ -1213,29 +1299,67 @@ export function init(mount) {
 
     }
 
-    function calculate() {
-
-        clearErrors();
+    /* the engine's answer for the entries as they stand; nothing is shown here */
+    function run(inputs) {
 
         let result;
         let exploration = null;
 
-        const inputs = collect();
-
         try {
-
             result = calculateGratuity(inputs);
-
             if (result.status === STATUS.ok && inputs.employeeType === EMPLOYEE_TYPES.regular) {
                 exploration = describeExplorer(exploreExitDates(inputs));
             }
-
         } catch (error) {
-
             result = { status: STATUS.error, code: CODES.internalError, errors: [] };
             exploration = null;
-
         }
+
+        return { result, exploration };
+
+    }
+
+    /* one announcement per settled change: the same text is never announced twice in a row, and typing announces nothing */
+    function announceSettled(text) {
+
+        if (!text || text === lastAnnounced) {
+            return;
+        }
+
+        lastAnnounced = text;
+        announce(text, ANNOUNCE_DELAY_MS);
+
+    }
+
+    /* a field's message may be shown once the person has committed it (left it, or paused after typing) or when it holds a value */
+    const mayShowError = (inputs) => (field) => touched.has(field) || String(inputs[field] ?? "").trim() !== "";
+
+    /* the entries are not complete and valid yet: no new figure. An earlier result stays, labelled out of date; with none, say what is needed */
+    function hold(result, inputs, settled) {
+
+        const view = describeResult(result);
+
+        clearErrors();
+
+        if (!state.result) {
+            results.innerHTML = resultEmpty(holdMessage(view, inputs.employeeType));
+        }
+
+        const reveal = () => showErrors(view, { focus: false, only: mayShowError(inputs) });
+
+        if (settled) {
+            reveal();
+        } else {
+            settleTimer = setTimeout(reveal, AUTO_DELAY_MS);
+        }
+
+        showState();
+
+    }
+
+    function show(result, exploration, inputs) {
+
+        const workingOpen = results.querySelector(".gratuity-working")?.open === true;
 
         state = reduceState(state, { type: "calculate", result, inputs });
 
@@ -1246,35 +1370,71 @@ export function init(mount) {
                 ? renderExplorerHtml(exploration) + (view.amount ? renderCompareFormHtml() : "") + renderCopyHtml()
                 : "");
 
-        showState();
-
-        if (result.status === STATUS.incomplete || result.status === STATUS.invalid) {
-
-            showErrors(view);
-
-            announceNow(view.announcement);
-
-            return;
-
+        if (workingOpen) {
+            results.querySelector(".gratuity-working")?.setAttribute("open", "");
         }
 
-        announceNow(view.announcement);
+        showState();
 
-        root.querySelector("#gratuity-result-heading")?.focus();
+        /* the comparison wages the person typed stay; a comparison that was showing is worked out again for the new result */
+        const second = results.querySelector("#gratuity-wages-second");
+
+        if (second) {
+            second.value = secondWages;
+            if (compareActive && secondWages.trim() !== "") {
+                compare({ silent: true });
+            }
+        } else {
+            compareActive = false;
+        }
+
+        announceSettled(view.announcement);
 
     }
 
+    /* calculates for the entries as they stand: a result when they are complete and valid, otherwise nothing new is shown */
+    function evaluate({ settled }) {
+
+        clearTimeout(debounceTimer);
+        clearTimeout(settleTimer);
+        debounceTimer = null;
+        settleTimer = null;
+
+        const inputs = collect();
+        const key = inputsKey(inputs);
+
+        if (state.result && key === lastKey) {
+            /* back to the entries the shown result used: it is current again, and nothing is calculated twice */
+            clearErrors();
+            state = reduceState(state, { type: "calculate", result: state.result, inputs: state.inputs });
+            showState();
+            return;
+        }
+
+        const { result, exploration } = run(inputs);
+
+        if (autoOutcome(result) === "hold") {
+            hold(result, inputs, settled);
+            return;
+        }
+
+        clearErrors();
+        lastKey = key;
+        show(result, exploration, inputs);
+
+    }
+
+    /* Enter never submits the page; it only asks for the answer now, with any messages */
     form.addEventListener("submit", (event) => {
 
         event.preventDefault();
-
-        calculate();
+        evaluate({ settled: true });
 
     });
 
     /* the second wages: an explicit Compare, from the inputs the result was calculated from */
 
-    function compare() {
+    function compare({ silent = false } = {}) {
 
         const input = results.querySelector("#gratuity-wages-second");
         const message = results.querySelector("#gratuity-error-wages-second");
@@ -1289,7 +1449,10 @@ export function init(mount) {
 
             message.innerHTML = `<strong>Error:</strong> ${escapeHTML(STALE_COMPARE_MESSAGE)}`;
             message.hidden = false;
-            announceNow(STALE_COMPARE_MESSAGE);
+
+            if (!silent) {
+                announceNow(STALE_COMPARE_MESSAGE);
+            }
 
             return;
 
@@ -1303,13 +1466,9 @@ export function init(mount) {
         let view;
 
         try {
-
             view = describeComparison(compareWages(state.inputs, input.value));
-
         } catch (error) {
-
             view = { errors: [], unavailable: true };
-
         }
 
         if (view.errors.length) {
@@ -1317,16 +1476,23 @@ export function init(mount) {
             message.innerHTML = `<strong>Error:</strong> ${escapeHTML(view.errors[0])}`;
             message.hidden = false;
             setFieldsInvalid([input], message.id);
-            input.focus();
-            announceNow(view.errors[0]);
+            compareActive = false;
+
+            if (!silent) {
+                input.focus();
+                announceNow(view.errors[0]);
+            }
 
             return;
 
         }
 
         output.innerHTML = renderComparisonHtml(view);
+        compareActive = !view.unavailable;
 
-        announceNow(view.unavailable ? "No amount can be compared for these wages." : view.announcement);
+        if (!silent) {
+            announceNow(view.unavailable ? "No amount can be compared for these wages." : view.announcement);
+        }
 
     }
 
@@ -1418,28 +1584,107 @@ export function init(mount) {
 
     });
 
-    /* an edit after a result makes it out of date: it stays visible, labelled, until Calculate is pressed */
+    /* the comparison wages are remembered; changing them clears the figures that belonged to the old wages */
+    results.addEventListener("input", (event) => {
 
-    const onEdit = () => {
+        if (event.target && event.target.id === "gratuity-wages-second") {
 
-        syncType();
+            secondWages = event.target.value;
+            compareActive = false;
 
-        const before = state.stale;
+            const output = results.querySelector("#gratuity-compare-output");
 
-        state = reduceState(state, { type: "edit" });
+            if (output) {
+                output.innerHTML = "";
+            }
 
-        showState();
-
-        if (state.stale && !before) {
-            announce(STALE_MESSAGE);
         }
 
-    };
+    });
 
-    form.addEventListener("input", onEdit);
-    form.addEventListener("change", onEdit);
+    const fieldOf = (target) => (target === wages ? "wages"
+        : target === joining ? "joiningDate"
+        : target === exit ? "exitDate"
+        : typeRadios.includes(target) ? "employeeType"
+        : endRadios.includes(target) ? "contractEnd"
+        : null);
+
+    /* an edit makes a shown result out of date at once; it stays visible, labelled, until the new entries give a new one */
+    function markEdit() {
+
+        syncType();
+        state = reduceState(state, { type: "edit" });
+        showState();
+
+    }
+
+    form.addEventListener("input", (event) => {
+
+        const field = fieldOf(event.target);
+
+        markEdit();
+
+        if (field) {
+            clearOne(field);
+        }
+
+        /* typed wages wait for a pause; the date pickers and the choices report when they are done (the change event) */
+        if (field === "wages") {
+
+            clearTimeout(debounceTimer);
+            clearTimeout(settleTimer);
+
+            debounceTimer = setTimeout(() => {
+
+                if (wages.value.trim() !== "") {
+                    touched.add("wages");
+                }
+
+                evaluate({ settled: true });
+
+            }, AUTO_DELAY_MS);
+
+        }
+
+    });
+
+    form.addEventListener("change", (event) => {
+
+        const field = fieldOf(event.target);
+
+        markEdit();
+
+        if (field) {
+            touched.add(field);
+        }
+
+        evaluate({ settled: field === "wages" });
+
+    });
+
+    wages.addEventListener("keydown", (event) => {
+
+        if (event.key === "Enter") {
+
+            event.preventDefault();
+
+            if (wages.value.trim() !== "") {
+                touched.add("wages");
+            }
+
+            evaluate({ settled: true });
+
+        }
+
+    });
 
     root.querySelector("#gratuity-reset")?.addEventListener("click", () => {
+
+        clearTimeout(debounceTimer);
+        clearTimeout(settleTimer);
+        clearTimeout(announceTimer);
+        debounceTimer = null;
+        settleTimer = null;
 
         for (const radio of [...typeRadios, ...endRadios]) {
             radio.checked = false;
@@ -1449,18 +1694,18 @@ export function init(mount) {
         joining.value = "";
         exit.value = "";
 
+        touched.clear();
+        lastKey = null;
+        lastAnnounced = "";
+        secondWages = "";
+        compareActive = false;
+
         clearErrors();
-
         state = reduceState(state, { type: "reset" });
-
         syncType();
-
         showState();
-
         results.innerHTML = resultEmpty(EMPTY_MESSAGE);
-
         announceNow(RESET_MESSAGE);
-
         typeRadios[0]?.focus();
 
     });
