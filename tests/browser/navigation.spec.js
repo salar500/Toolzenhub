@@ -138,7 +138,7 @@ test.describe("categories page", () => {
     expect(await links()).toEqual([`${siteRoot}calculators/sip/`, `${siteRoot}calculators/ppf/`, `${siteRoot}calculators/fd/`, `${siteRoot}calculators/cagr/`, `${siteRoot}calculators/swp/`]);
     await expect(page.locator(".category-page-card--soon")).toHaveCount(0); // PPF (Tool Pack 26) is live: no Investment tool is Coming soon
     await go("tax.html");
-    expect(await links()).toEqual([`${siteRoot}calculators/gst/`, `${siteRoot}calculators/income-tax/`, `${siteRoot}calculators/gratuity/`]);
+    expect(await links()).toEqual([`${siteRoot}calculators/gst/`, `${siteRoot}calculators/income-tax/`, `${siteRoot}calculators/gratuity/`, `${siteRoot}calculators/salary-in-hand/`]);
     await expect(page.locator(".category-page-card--soon")).toHaveCount(0); // the Income Tax entry is now the live Old vs New Tax Regime Calculator
     await expect(page.locator('a.category-page-card[href$="calculators/income-tax/"]')).toContainText("Old vs New Tax Regime Calculator");
     await go("business.html");
@@ -203,13 +203,13 @@ test.describe("categories page", () => {
 });
 
 test.describe("calculators and loans listings", () => {
-  test("calculators page: 28 entries (17 built), search, empty state, deep link", async ({ page, go }) => {
+  test("calculators page: 29 entries (18 built), search, empty state, deep link", async ({ page, go }) => {
     await go("calculators.html");
     const cards = page.locator("#calculators-grid .calculator-card");
-    // 17 published calculators (the Gratuity Calculator (India) is the 17th, Tool Pack 29) and 11 Coming Soon entries; the Time, Developer and Image tools are not calculators and are never listed here
-    await expect(cards).toHaveCount(28);
-    await expect(page.locator("#calculators-results-count")).toHaveText("28 calculators");
-    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(17);
+    // 18 published calculators (the Gratuity Calculator (India) is the 17th, Tool Pack 29, and the Salary / CTC to In-Hand Calculator (India) the 18th, Tool Pack 30) and 11 Coming Soon entries; the Time, Developer and Image tools are not calculators and are never listed here
+    await expect(cards).toHaveCount(29);
+    await expect(page.locator("#calculators-results-count")).toHaveText("29 calculators");
+    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(18);
     await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(11);
 
     const input = page.locator("#calculators-search-input");
@@ -219,7 +219,7 @@ test.describe("calculators and loans listings", () => {
     await input.fill("zzzz-nothing");
     await expect(page.locator("#calculators-empty")).toBeVisible();
     await input.fill("");
-    await expect(cards).toHaveCount(28);
+    await expect(cards).toHaveCount(29);
 
     await go("calculators.html?q=emi");
     await expect(input).toHaveValue("emi");
@@ -427,7 +427,7 @@ test.describe("M7 shared search: page experiences keep their UX and rank results
     await input.fill("zzzz-nothing");
     await expect(page.locator("#calculators-empty")).toBeVisible();
     await input.fill("");
-    await expect(page.locator("#calculators-grid .calculator-card")).toHaveCount(28);
+    await expect(page.locator("#calculators-grid .calculator-card")).toHaveCount(29);
   });
 
   test("Loans page: only Loans tools, ranked; a tool id still matches", async ({ page, go }) => {

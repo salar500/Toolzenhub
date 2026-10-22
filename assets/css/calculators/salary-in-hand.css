@@ -1,0 +1,637 @@
+/* =========================================================
+   ToolZen Hub
+   Salary / CTC to In-Hand Calculator (India)
+
+   Only what the shared calculator styles do not already
+   provide: the choice groups for the PF basis, gratuity and
+   city, the per-field messages, the out-of-date marker, the
+   breakdown table, and the notes and lists around the result.
+   Buttons, fields, result cards and focus come from the shared
+   layer. Loaded after calculator-responsive.css.
+
+   Nothing here carries meaning by colour alone: a chosen option
+   has a tick and a thicker border, an error message starts with
+   the word "Error", the out-of-date marker is a sentence. One
+   column on a phone; amounts and long sentences wrap and never
+   widen the page. Nothing animates.
+========================================================= */
+
+.sih-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+.sih-checked {
+
+    margin: 8px 0 0;
+
+    color: var(--color-ink-muted);
+
+    font-size: 14px;
+
+}
+
+/* one column: the hints are sentences and the options are sentences */
+
+.sih-grid {
+
+    grid-template-columns: minmax(0, 1fr);
+
+}
+
+.sih-grid [hidden] {
+
+    display: none !important;
+
+}
+
+.sih-grid .calculator-form__input {
+
+    font-variant-numeric: tabular-nums;
+
+}
+
+/* the hints are long: keep them readable rather than the 11px of the shared help text */
+
+.sih-grid .calculator-form__help {
+
+    font-size: 13px;
+
+    line-height: 1.55;
+
+}
+
+/* the shared input keeps room for a short unit on the right: "₹ a year" and "% of CTC" are wider, so a long amount must not run under them */
+
+.sih-grid .calculator-form__input {
+
+    padding-right: 84px;
+
+}
+
+.sih-choices {
+
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+
+}
+
+.sih-choices legend {
+
+    padding: 0;
+
+}
+
+.sih-legend-help {
+
+    display: block;
+
+    margin: 4px 0 8px;
+
+}
+
+.sih-choices__options {
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin: 6px 0 8px;
+
+}
+
+.sih-choices__options--row {
+
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.sih-choices__options--row .sih-choice {
+
+    flex: 1 1 160px;
+
+}
+
+.sih-choice {
+
+    position: relative;
+
+    display: flex;
+
+    cursor: pointer;
+
+}
+
+/* the radio itself is hidden; its label is the control and keeps the focus ring */
+
+.sih-choice input {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: 0;
+
+    opacity: 0;
+
+}
+
+.sih-choice span {
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    box-sizing: border-box;
+
+    width: 100%;
+    min-height: 48px;
+
+    padding: 10px 14px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: var(--color-white);
+
+    color: #344054;
+
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+
+    overflow-wrap: anywhere;
+
+}
+
+.sih-choice:hover span {
+
+    background: #f2f4f7;
+
+}
+
+.sih-choice input:checked + span {
+
+    padding: 9px 13px;
+
+    border: 2px solid var(--color-brand-green);
+
+    background: #ecfdf3;
+
+    color: var(--color-ink);
+
+    font-weight: 750;
+
+}
+
+.sih-choice input:checked + span::before {
+
+    content: "✓";
+    content: "✓" / "";
+
+    flex: 0 0 auto;
+
+    font-weight: 800;
+
+}
+
+.sih-choice input:focus-visible + span {
+
+    outline: 3px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+.sih-optional {
+
+    display: grid;
+    gap: 16px;
+
+    min-width: 0;
+
+}
+
+.sih-optional__title {
+
+    margin: 8px 0 0;
+
+    font-size: 16px;
+
+}
+
+.sih-old-group {
+
+    display: grid;
+    gap: 8px;
+
+    min-width: 0;
+
+    padding-top: 8px;
+
+    border-top: 1px solid var(--color-slate-200);
+
+}
+
+.sih-old-fields {
+
+    display: grid;
+    gap: 16px;
+
+    min-width: 0;
+
+}
+
+.sih-toggle {
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-height: 48px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+.sih-toggle input {
+
+    flex: 0 0 auto;
+
+    width: 22px;
+    height: 22px;
+
+    margin: 0;
+
+    accent-color: var(--color-action-green);
+
+}
+
+.sih-toggle input:focus-visible {
+
+    outline: 3px solid var(--color-brand-green);
+    outline-offset: 2px;
+
+}
+
+.sih-field-error {
+
+    margin: 6px 0 0;
+
+    padding: 8px 12px;
+
+    border: 1px solid #fda29b;
+    border-left-width: 6px;
+    border-radius: 8px;
+
+    background: #fef3f2;
+
+    color: #912018;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+}
+
+.sih-field-error[hidden] {
+
+    display: none;
+
+}
+
+.sih-expired {
+
+    margin: 0 0 12px;
+    padding: 10px 14px;
+
+    border: 1px solid #fda29b;
+    border-left-width: 6px;
+    border-radius: 10px;
+
+    background: #fef3f2;
+
+    color: #912018;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+
+}
+
+.sih-expired[hidden] {
+
+    display: none;
+
+}
+
+/* a result that is out of date stays visible but is dimmed with a dashed edge; the label with the figures and the sentence above say why */
+
+.calculator-results[data-stale="true"] {
+
+    opacity: 0.7;
+
+    outline: 2px dashed #b54708;
+    outline-offset: 4px;
+
+}
+
+.sih-stale {
+
+    margin: 0 0 12px;
+    padding: 10px 14px;
+
+    border: 1px solid #fedf89;
+    border-left-width: 6px;
+    border-radius: 10px;
+
+    background: #fffcf5;
+
+    color: #4e3a05;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+
+}
+
+.sih-stale[hidden] {
+
+    display: none;
+
+}
+
+.sih-stale-badge {
+
+    margin: 0 0 10px;
+    padding: 8px 12px;
+
+    border: 1px solid #fedf89;
+    border-left-width: 6px;
+    border-radius: 8px;
+
+    background: #fffcf5;
+
+    color: #4e3a05;
+
+    font-size: 15px;
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+
+}
+
+.sih-stale-badge[hidden] {
+
+    display: none;
+
+}
+
+.sih-result #sih-result-heading:focus {
+
+    outline: 3px solid var(--color-brand-green);
+    outline-offset: 4px;
+
+}
+
+.sih-metrics .calculator-results__value {
+
+    overflow-wrap: anywhere;
+
+    font-variant-numeric: tabular-nums;
+
+}
+
+.sih-metrics .calculator-results__item--primary .calculator-results__value {
+
+    font-size: 26px;
+
+}
+
+.sih-note {
+
+    margin: 12px 0 0;
+    padding: 10px 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 10px;
+
+    background: #f9fafb;
+
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    overflow-wrap: anywhere;
+
+}
+
+/* the breakdown: two columns, so it fits a 320px screen without scrolling; the wrapper scrolls only if a very long label ever needs it */
+
+.sih-table-wrap {
+
+    margin: 16px 0 0;
+
+    overflow-x: auto;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 10px;
+
+}
+
+.sih-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-size: 14px;
+    line-height: 1.45;
+
+}
+
+.sih-table caption {
+
+    padding: 10px 12px;
+
+    text-align: left;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    color: var(--color-ink-muted);
+
+}
+
+.sih-table th,
+.sih-table td {
+
+    padding: 9px 12px;
+
+    border-top: 1px solid var(--color-slate-200);
+
+    vertical-align: top;
+
+}
+
+.sih-table th {
+
+    text-align: left;
+
+    font-weight: 500;
+
+    overflow-wrap: anywhere;
+
+}
+
+.sih-table td {
+
+    text-align: right;
+
+    white-space: nowrap;
+
+    font-variant-numeric: tabular-nums;
+
+}
+
+.sih-table__row th {
+
+    color: #344054;
+
+}
+
+.sih-table__group td {
+
+    padding: 8px 12px;
+
+    background: #f2f4f7;
+
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-align: left;
+
+    white-space: normal;
+
+}
+
+.sih-table__total th,
+.sih-table__total td {
+
+    background: #f3fbf6;
+
+    color: var(--color-ink);
+
+    font-weight: 750;
+
+}
+
+.sih-working {
+
+    margin: 12px 0 0;
+    padding-left: 20px;
+
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+}
+
+.sih-block {
+
+    margin: 20px 0 0;
+
+}
+
+.sih-block h3 {
+
+    margin: 0 0 8px;
+
+    font-size: 16px;
+
+}
+
+.sih-block ul {
+
+    margin: 0;
+    padding-left: 20px;
+
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+}
+
+.sih-block li + li {
+
+    margin-top: 6px;
+
+}
+
+.sih-sources {
+
+    margin: 12px 0 0;
+
+    color: var(--color-ink-muted);
+
+    font-size: 13px;
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+
+}
+
+@media (max-width: 640px) {
+
+    /* 16px so the browser does not zoom the page when a field is focused, and a comfortable tap height */
+    .sih-grid .calculator-form__input {
+
+        min-height: 48px;
+
+        font-size: 16px;
+
+    }
+
+    .sih-actions .calculator-form__button {
+
+        min-height: 48px;
+
+        font-size: 16px;
+
+    }
+
+    .sih-metrics .calculator-results__item--primary .calculator-results__value {
+
+        font-size: 24px;
+
+    }
+
+}

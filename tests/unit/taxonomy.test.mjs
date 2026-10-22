@@ -153,8 +153,9 @@ describe("Tax is a category inside Calculators (Tool Pack 8 pins GST and Income 
   test("Tax is a category of the Calculators section, not a section of its own; GST and the Old vs New Tax Regime Calculator are its live tools", () => {
     assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools"]); // a category belongs to Calculators; the other sections have none
     assert.equal(cats.categories.find((c) => c.id === "tax").sectionId, "calculators");
-    assert.deepEqual(tax.getToolsByCategory("tax").map((t) => t.id), ["gst", "income-tax", "gratuity"]);
-    assert.deepEqual(tax.getToolsByCategory("tax").filter((t) => t.available).map((t) => t.id), ["gst", "income-tax", "gratuity"]);
+    assert.deepEqual(tax.getToolsByCategory("tax").map((t) => t.id), ["gst", "income-tax", "gratuity", "salary-in-hand"]);
+    assert.deepEqual(tax.getToolsByCategory("tax").filter((t) => t.available).map((t) => t.id), ["gst", "income-tax", "gratuity", "salary-in-hand"]);
+    assert.equal(tool("salary-in-hand").title, "Salary / CTC to In-Hand Calculator (India)"); // Tool Pack 30: the fourth live Tax tool
     assert.equal(tool("gratuity").title, "Gratuity Calculator (India)"); // Tool Pack 29: the third live Tax tool, after GST and the Old vs New Tax Regime Calculator
   });
 

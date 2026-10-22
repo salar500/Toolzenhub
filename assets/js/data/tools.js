@@ -659,6 +659,44 @@ const catalog = [
         }
     },
 
+    {
+        id: "salary-in-hand",
+        status: "published",
+        loader: () =>
+            import("../calculators/salary-in-hand/index.js"),
+        category: "tax",
+        icon: "₹",
+        title: "Salary / CTC to In-Hand Calculator (India)",
+        description:
+            "Estimate your take-home salary from your annual CTC for tax year 2026-27, step by step: employer PF and gratuity, your PF, professional tax and income tax, with what is cash and what is not. An estimate, not your payslip.",
+        aliases: [
+            "ctc to in hand",
+            "in hand salary",
+            "in hand salary calculator",
+            "take home salary",
+            "ctc to take home",
+            "salary calculator india"
+        ],
+        autoRelated: false,
+        relatedTools: [
+            "income-tax"
+        ],
+        capabilities: {
+            reset: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Salary / CTC to In-Hand Calculator India, Tax Year 2026-27 | ToolZen Hub",
+            description:
+                "Estimate your in-hand salary from your annual CTC for tax year 2026-27: employer PF, gratuity, your PF, professional tax and income tax, step by step. Calculated in your browser; an estimate, not your payslip or tax advice."
+        }
+    },
+
 
     /* =====================================================
        HEALTH

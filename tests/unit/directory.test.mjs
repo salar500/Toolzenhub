@@ -59,7 +59,7 @@ describe("category pages", () => {
   test("Business, Tax and Math show exactly their live tools; Coming soon ones are not links", () => {
     const live = (id) => hrefs(dir.categoryPageHtml(id)).filter((h) => h.includes("/calculators/"));
     assert.deepEqual(live("business"), ["/Toolzenhub/calculators/profit/", "/Toolzenhub/calculators/margin/"]);
-    assert.deepEqual(live("tax"), ["/Toolzenhub/calculators/gst/", "/Toolzenhub/calculators/income-tax/", "/Toolzenhub/calculators/gratuity/"]);
+    assert.deepEqual(live("tax"), ["/Toolzenhub/calculators/gst/", "/Toolzenhub/calculators/income-tax/", "/Toolzenhub/calculators/gratuity/", "/Toolzenhub/calculators/salary-in-hand/"]);
     assert.deepEqual(live("math"), ["/Toolzenhub/calculators/percentage/"]);
     assert.match(dir.categoryPageHtml("math"), /Ratio Calculator/);
     assert.match(dir.categoryPageHtml("math"), /Age Calculator/);

@@ -460,6 +460,13 @@
       "state": "active"
     },
     {
+      "id": "salary-in-hand",
+      "module": "assets/js/calculators/salary-in-hand/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "sip",
       "module": "assets/js/calculators/sip/index.js",
       "moduleChanges": [],
