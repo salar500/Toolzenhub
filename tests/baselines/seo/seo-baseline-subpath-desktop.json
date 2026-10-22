@@ -3018,6 +3018,55 @@
       "visibleTextChars": 6707
     }
   },
+  "/calculators/gratuity/": {
+    "runtime": {
+      "title": "Gratuity Calculator India (Code on Social Security) | ToolZen Hub",
+      "description": "Estimate gratuity under the Code on Social Security, 2020 from your qualifying monthly wages and joining and exit dates, with how it was worked out and what it assumes. For exits from 21 November 2025. An estimate, not legal advice.",
+      "canonical": "https://toolzenhub.in/calculators/gratuity/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Estimate gratuity under the Code on Social Security, 2020 from your qualifying monthly wages and joining and exit dates, with how it was worked out and what it assumes. For exits from 21 November 2025. An estimate, not legal advice.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Gratuity Calculator India (Code on Social Security) | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/gratuity/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Estimate gratuity under the Code on Social Security, 2020 from your qualifying monthly wages and joining and exit dates, with how it was worked out and what it assumes. For exits from 21 November 2025. An estimate, not legal advice.",
+        "twitter:title": "Gratuity Calculator India (Code on Social Security) | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Gratuity Calculator (India)"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Gratuity Calculator India (Code on Social Security) | ToolZen Hub",
+      "description": "Estimate gratuity under the Code on Social Security, 2020 from your qualifying monthly wages and joining and exit dates, with how it was worked out and what it assumes. For exits from 21 November 2025. An estimate, not legal advice.",
+      "canonical": "https://toolzenhub.in/calculators/gratuity/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3309
+    }
+  },
   "/calculators/gst/": {
     "runtime": {
       "title": "GST Calculator: Add or Remove GST on an Invoice | ToolZen Hub",

@@ -45,16 +45,14 @@ jobs:
         run: npm run inventory:check
         timeout-minutes: 3
       # the browser is the Chrome already installed on the GitHub-hosted runner (channel "chrome" in playwright.config.js)
-      # Round 2: only the five checks that failed in run 39716832532, plus the four settleImages tests. The 317 that passed are not repeated.
-      - name: Gratuity G8 round 2 (failed checks only)
+      # Round 3: only the three snapshot checks still failing in run 39719207219 (the Image Compressor smoke and settleImages tests passed there).
+      - name: Gratuity G8 round 3 (snapshot checks only)
         run: >
           npx playwright test
           tests/browser/dom-baseline.spec.js
           tests/browser/links.spec.js
           tests/browser/seo-baseline.spec.js
-          tests/browser/smoke.spec.js
-          tests/browser/gratuity-g8-verify.spec.js
-          -g "tools-directory|rendered link crawl|record title|image-compressor-resizer|settleImages"
+          -g "tools-directory|rendered link crawl|record title"
           --project=subpath-desktop --project=root-desktop
           --workers=1 --retries=0 --reporter=list,html,json --trace=retain-on-failure
         timeout-minutes: 20
