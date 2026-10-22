@@ -261,6 +261,12 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "calculators/gratuity/": {
+    "internal": 26,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "calculators/gst/": {
     "internal": 31,
     "external": [],
@@ -393,7 +399,7 @@
     "deadFragments": []
   },
   "tax.html": {
-    "internal": 26,
+    "internal": 27,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -411,7 +417,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 62,
+    "internal": 63,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

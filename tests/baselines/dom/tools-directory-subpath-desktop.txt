@@ -65,6 +65,8 @@ section.categories-page.directory-page
                 a [href="{ROOT}calculators/gst/"] "GST Calculator"
               li
                 a [href="{ROOT}calculators/income-tax/"] "Old vs New Tax Regime Calculator"
+              li
+                a [href="{ROOT}calculators/gratuity/"] "Gratuity Calculator (India)"
           article.directory-group
             h3.directory-group__title
               a [href="{ROOT}business.html"] "Business"
