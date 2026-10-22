@@ -97,11 +97,20 @@ function build() {
       if (sel === "#gratuity-result-heading") return /id="gratuity-result-heading"/.test(html) ? element({}) : null;
       return null;
     },
-    querySelectorAll() { return []; }
+    querySelectorAll(sel) {
+      /* one stand-in per out-of-date label in the markup, hidden at first as in the real markup */
+      if (sel === "[data-stale-badge]") {
+        const count = (this._html.match(/data-stale-badge/g) || []).length;
+        if (this._badges.length !== count) this._badges = Array.from({ length: count }, () => element({ hidden: true }));
+        return this._badges;
+      }
+      return [];
+    }
   });
+  results._badges = [];
   Object.defineProperty(results, "innerHTML", {
     get() { return this._html; },
-    set(value) { this._html = value; second.value = ""; compareOutput._html = ""; }
+    set(value) { this._html = value; this._badges = []; second.value = ""; compareOutput._html = ""; }
   });
   Object.defineProperty(compareOutput, "innerHTML", { get() { return this._html; }, set(v) { this._html = v; } });
 
@@ -304,6 +313,56 @@ describe("automatic calculation, wired", () => {
     let submitPrevented = 0;
     for (const fn of page.form.listeners.submit ?? []) fn({ preventDefault() { submitPrevented += 1; } });
     assert.equal(submitPrevented, 1);
+  });
+
+  test("the Out of date label beside the figures is shown exactly while the result is out of date", () => {
+    choose(page.typeRadios[0], page.typeRadios);
+    page.wages.value = "50000";
+    fire(page.form, "change", page.wages);
+    setDate(page.joining, "2021-01-01");
+    setDate(page.exit, "2026-06-30");
+    const badges = () => page.results.querySelectorAll("[data-stale-badge]");
+    assert.ok(badges().length >= 2, "one beside the amount and one in the explorer");
+    assert.ok(badges().every((b) => b.hidden === true), "hidden while the result is current");
+
+    setDate(page.exit, "");
+    assert.ok(badges().every((b) => b.hidden === false), "shown with every figure once an entry is incomplete");
+    setDate(page.exit, "2020-12-31");
+    assert.ok(badges().every((b) => b.hidden === false), "and while an entry is invalid");
+    setDate(page.exit, "2026-06-30");
+    assert.ok(badges().every((b) => b.hidden === true), "gone when the entries are back to the shown result");
+    setDate(page.exit, "2026-07-01");
+    assert.ok(badges().every((b) => b.hidden === true), "a new result is current");
+  });
+
+  test("an invalid exit date gives no figure, moves no focus and keeps the earlier amount labelled", () => {
+    choose(page.typeRadios[0], page.typeRadios);
+    page.wages.value = "50000";
+    fire(page.form, "change", page.wages);
+    setDate(page.joining, "2021-01-01");
+    setDate(page.exit, "2026-06-30");
+    const shown = html();
+    setDate(page.exit, "2020-12-31");
+    advance(5000);
+    assert.equal(html(), shown, "no new figure, no replacement");
+    assert.equal(page.focus, null, "nothing took focus");
+    assert.equal(page.announcements.filter((t) => /₹/.test(t)).length, 1, "only the first result was announced");
+  });
+
+  test("a fixed-term contract that ends earlier asks for the wages and dates first, then gives the approved explanation and no figure", () => {
+    choose(page.typeRadios[1], page.typeRadios);
+    choose(page.endRadios[1], page.endRadios);
+    assert.match(html(), /Still needed: the qualifying monthly wages, the contract start date and the contract end date\./);
+    assert.ok(!html().includes("gratuity-result-heading"));
+    page.wages.value = "50000";
+    fire(page.form, "change", page.wages);
+    setDate(page.joining, "2025-01-01");
+    setDate(page.exit, "2025-12-31");
+    assert.match(html(), /When a fixed-term contract ends before its full term, whether gratuity is due depends on the contract and on your employer\./);
+    assert.ok(!html().includes("gratuity-amount"));
+    assert.ok(!html().includes("gratuity-service"));
+    assert.ok(!html().includes("₹"));
+    assert.equal(page.focus, null);
   });
 
   test("the pause is the approved 600 ms and the announcement waits at least a second", () => {
