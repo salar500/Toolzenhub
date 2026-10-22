@@ -1,0 +1,206 @@
+# Salary / CTC to In-Hand Calculator (Tool Pack 30) S5 verification (TEMPORARY; never merge to main).
+#
+# One bounded run on a clean GitHub-hosted runner for the S4 commit (c06b8fd): both site builds, the new page's URL and base
+# paths, the inventory and static checks, the focused unit groups (including the tests that read dist/ and failed locally
+# because dist/ was stale), and the focused browser checks (the Salary spec, the changed listing counts in the navigation spec,
+# the Salary smoke test and the three baseline specs), one worker, no retries, run one after another. Every step keeps going
+# after a failure so that all the evidence is collected; the last step writes the results as annotations.
+#
+# It starts only on a push to the temporary branch salary-s5-verify. It cannot deploy anything: read-only permissions, no Pages
+# or deployment steps, no id-token, no secrets. It never updates a snapshot or a fixture, never regenerates the inventory, and
+# edits no source file. It does not run the full site regression or the visual project.
+name: Salary S5 verification
+
+on:
+  push:
+    branches:
+      - salary-s5-verify
+
+permissions:
+  contents: read
+
+concurrency:
+  group: salary-s5-verify-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: mkdir -p verify-logs
+      - run: npm ci
+        timeout-minutes: 5
+
+      # 1. both builds, from a clean runner
+      - id: build
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          npm run build:all 2>&1 | tee verify-logs/build.txt
+        timeout-minutes: 8
+
+      # 2. the new page exists in both targets, with the right base path in each
+      - id: urls
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          {
+            for t in dist dist-ghpages; do
+              f="$t/calculators/salary-in-hand/index.html"
+              test -s "$f" || { echo "MISSING $f"; exit 1; }
+              echo "$f exists ($(wc -c < "$f") bytes)"
+              echo "  calculator-page: $(grep -c 'class="calculator-page"' "$f")  canonical: $(grep -o '<link rel="canonical" href="[^"]*"' "$f")"
+              echo "  hrefs starting /Toolzenhub/: $(grep -o 'href="/Toolzenhub/' "$f" | wc -l)  src/href starting with a bare / (not /Toolzenhub/): $(grep -oE '(href|src)="/[^/T][^"]*"' "$f" | wc -l)"
+              echo "  stylesheet: $(grep -o '[^"]*salary-in-hand.css' "$f" | head -1)"
+            done
+            grep -q 'href="/Toolzenhub/' dist-ghpages/calculators/salary-in-hand/index.html || { echo "preview build has no /Toolzenhub/ links"; exit 1; }
+            ! grep -q '/Toolzenhub/' dist/calculators/salary-in-hand/index.html || { echo "root build contains /Toolzenhub/"; exit 1; }
+            grep -q 'salary-in-hand' dist/sitemap.xml || { echo "not in the root sitemap"; exit 1; }
+            echo "sitemap and base paths OK"
+          } 2>&1 | tee verify-logs/urls.txt
+
+      # 3. nothing outside the Salary files changed in the formulas: the tax engine, the Gratuity formulas and the S3 engine
+      - id: guard
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          {
+            echo "TP17 and Gratuity against the base commit 21e3ff4:"
+            git diff --stat 21e3ff4 HEAD -- assets/js/calculators/formulas/income-tax.js assets/js/calculators/formulas/income-tax-config.js assets/js/calculators/formulas/gratuity.js assets/js/calculators/formulas/gratuity-calendar.js assets/js/calculators/formulas/gratuity-rules.js assets/js/calculators/gratuity assets/css/calculators/gratuity.css tests/fixtures/income-tax-golden.py tests/fixtures/gratuity-golden.py tests/fixtures/gratuity-golden.json
+            echo "S3 engine and oracle against the S3 commit ff8d213:"
+            git diff --stat ff8d213 HEAD -- assets/js/calculators/formulas/salary-in-hand.js assets/js/calculators/formulas/salary-in-hand-config.js tests/fixtures/salary-in-hand-golden.py tests/fixtures/salary-in-hand-golden.json tests/unit/salary-in-hand-golden.test.mjs
+            git diff --quiet 21e3ff4 HEAD -- assets/js/calculators/formulas/income-tax.js assets/js/calculators/formulas/income-tax-config.js assets/js/calculators/formulas/gratuity.js assets/js/calculators/formulas/gratuity-calendar.js assets/js/calculators/formulas/gratuity-rules.js assets/js/calculators/gratuity assets/css/calculators/gratuity.css tests/fixtures/income-tax-golden.py tests/fixtures/gratuity-golden.py tests/fixtures/gratuity-golden.json
+            git diff --quiet ff8d213 HEAD -- assets/js/calculators/formulas/salary-in-hand.js assets/js/calculators/formulas/salary-in-hand-config.js tests/fixtures/salary-in-hand-golden.py tests/fixtures/salary-in-hand-golden.json tests/unit/salary-in-hand-golden.test.mjs
+            echo "no change"
+            echo "evidence for the design-token failure (the literal #667085 in gratuity.css):"
+            echo "  at the base commit 21e3ff4:"; git grep -n '#667085' 21e3ff4 -- assets/css | sed 's/^/    /' || true
+            echo "  at this commit:"; git grep -n '#667085' HEAD -- assets/css | sed 's/^/    /' || true
+          } 2>&1 | tee verify-logs/guard.txt
+
+      # 4. the inventory check, read-only: it compares the committed inventory with this build and never writes it
+      - id: inventory
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          npm run inventory:check 2>&1 | tee verify-logs/inventory.txt
+        timeout-minutes: 3
+
+      # 5. the existing static checks (links, assets, SEO), as they are
+      - id: static-links
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          npm run test:links 2>&1 | tee verify-logs/static-links.txt
+        timeout-minutes: 5
+      - id: static-assets
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          npm run test:assets 2>&1 | tee verify-logs/static-assets.txt
+        timeout-minutes: 5
+      - id: static-seo
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          npm run test:seo 2>&1 | tee verify-logs/static-seo.txt
+        timeout-minutes: 5
+
+      # 6. focused unit groups (node:test, one file at a time)
+      - id: unit-salary
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          node --test --test-reporter=tap --test-concurrency=1 tests/unit/salary-in-hand-golden.test.mjs tests/unit/salary-in-hand-ui.test.mjs tests/unit/income-tax-golden.test.mjs tests/unit/gratuity-ui.test.mjs tests/unit/gratuity-golden.test.mjs 2>&1 | tee verify-logs/unit-salary.txt
+        timeout-minutes: 5
+      - id: unit-integration
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          node --test --test-reporter=tap --test-concurrency=1 tests/unit/catalog.test.mjs tests/unit/directory.test.mjs tests/unit/relationships.test.mjs tests/unit/search.test.mjs tests/unit/taxonomy.test.mjs tests/unit/tool-page.test.mjs tests/unit/tool-capabilities.test.mjs 2>&1 | tee verify-logs/unit-integration.txt
+        timeout-minutes: 5
+      # the tests that read dist/ and dist-ghpages/ and failed locally because those folders were stale
+      - id: unit-dist
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          node --test --test-reporter=tap --test-concurrency=1 tests/unit/sections.test.mjs tests/unit/sections-root.test.mjs tests/unit/taxonomy-root.test.mjs tests/unit/tool-catalog.test.mjs tests/unit/design-tokens.test.mjs 2>&1 | tee verify-logs/unit-dist.txt
+        timeout-minutes: 5
+
+      # 7. focused browser checks: the browser is the Chrome already installed on the runner; one worker, no retries, in sequence
+      - id: browser-salary
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        run: >
+          npx playwright test tests/browser/salary-in-hand.spec.js
+          --project=subpath-desktop --project=subpath-mobile --project=root-desktop
+          --workers=1 --retries=0 --reporter=list,json --trace=retain-on-failure
+        timeout-minutes: 15
+        env:
+          CI: "true"
+          PLAYWRIGHT_JSON_OUTPUT_NAME: verify-logs/results-salary.json
+      - id: browser-smoke
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        run: >
+          npx playwright test tests/browser/smoke.spec.js -g "salary-in-hand"
+          --project=subpath-desktop --project=subpath-mobile --project=root-desktop
+          --workers=1 --retries=0 --reporter=list,json --trace=retain-on-failure
+        timeout-minutes: 5
+        env:
+          CI: "true"
+          PLAYWRIGHT_JSON_OUTPUT_NAME: verify-logs/results-smoke.json
+      - id: browser-navigation
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        run: >
+          npx playwright test tests/browser/navigation.spec.js
+          --project=subpath-desktop --project=subpath-mobile --project=root-desktop
+          --workers=1 --retries=0 --reporter=list,json --trace=retain-on-failure
+        timeout-minutes: 15
+        env:
+          CI: "true"
+          PLAYWRIGHT_JSON_OUTPUT_NAME: verify-logs/results-navigation.json
+      # the recorded baselines of every live page: a new page is expected to differ, and the difference is reported, not accepted
+      - id: browser-baselines
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        run: >
+          npx playwright test tests/browser/dom-baseline.spec.js tests/browser/seo-baseline.spec.js
+          --project=subpath-desktop
+          --workers=1 --retries=0 --reporter=list,json --trace=retain-on-failure
+        timeout-minutes: 10
+        env:
+          CI: "true"
+          PLAYWRIGHT_JSON_OUTPUT_NAME: verify-logs/results-baselines.json
+
+      - name: Results as annotations
+        if: always()
+        run: node .github/salary-s5-summary.cjs
+        env:
+          STEPS_JSON: ${{ toJSON(steps) }}
+
+      - name: Upload logs, reports and traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: salary-s5-verify
+          path: |
+            verify-logs/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
