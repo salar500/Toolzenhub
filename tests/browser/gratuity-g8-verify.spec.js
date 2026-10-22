@@ -9,7 +9,7 @@
  *
  * Not covered, and not claimed: the calculation itself, visual layout, other browsers, real devices.
  */
-import { test, expect, expectClean, rel } from "../helpers/test-base.mjs";
+import { test, expect, expectClean, rel, settleImages } from "../helpers/test-base.mjs";
 
 const PATH = "calculators/gratuity/";
 const TITLE = "Gratuity Calculator India (Code on Social Security) | ToolZen Hub";
@@ -108,5 +108,30 @@ test.describe("Gratuity Calculator: listings and search @portable", () => {
       await go(`calculators/${slug}/`);
       await expect(page.locator(".related-calculator-card a[href$='calculators/gratuity/'], a.related-calculator-card[href$='calculators/gratuity/']")).toHaveCount(0);
     }
+  });
+});
+
+/* the shared settleImages helper: hidden src-less placeholders are not broken; everything else that is broken still is */
+test.describe("settleImages tells a placeholder from a broken image @portable", () => {
+  const PIXEL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==";
+  const broken = async (page, body) => {
+    await page.setContent(`<body>${body}</body>`);
+    return settleImages(page);
+  };
+
+  test("a valid image and a src-less image inside a [hidden] ancestor are fine", async ({ page }) => {
+    expect(await broken(page, `<img src="${PIXEL}"><div hidden><img id="a"></div><section><div hidden><p><img id="b"></p></div></section>`)).toEqual([]);
+  });
+
+  test("a failing src is reported, hidden or not", async ({ page }) => {
+    expect(await broken(page, `<img src="data:image/png;base64,AAAA"><div hidden><img src="data:image/png;base64,AAAA"></div>`)).toEqual(["data:image/png;base64,AAAA", "data:image/png;base64,AAAA"]);
+  });
+
+  test("an empty src attribute is reported, hidden or not", async ({ page }) => {
+    expect(await broken(page, `<img src=""><div hidden><img src=""></div>`)).toEqual(["", ""]);
+  });
+
+  test("a visible image with no src is reported", async ({ page }) => {
+    expect(await broken(page, `<img><div><img></div>`)).toEqual([null, null]);
   });
 });

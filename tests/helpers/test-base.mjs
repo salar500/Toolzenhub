@@ -129,7 +129,12 @@ export function expectClean(watch, { allowFailedLocal = [], expected404 = 0 } = 
   expect(failed, "failed LOCAL requests (4xx/5xx/aborted)").toEqual([]);
 }
 
-/** force lazy images to load and wait until every <img> has settled; returns broken local ones */
+/**
+ * force lazy images to load and wait until every <img> has settled; returns broken local ones.
+ * An <img> with NO src attribute inside a [hidden] ancestor is an intentional placeholder (the Image Compressor's two preview
+ * images stay empty until a file is chosen), so it is not broken. Anything else still is: a src that fails or is empty ("")
+ * wherever it sits, and a visible <img> with no src.
+ */
 export async function settleImages(page) {
   return page.evaluate(async () => {
     const imgs = [...document.images];
@@ -137,7 +142,7 @@ export async function settleImages(page) {
     await Promise.all(
       imgs.map((i) => (i.complete ? Promise.resolve() : new Promise((r) => { i.addEventListener("load", r, { once: true }); i.addEventListener("error", r, { once: true }); }))),
     );
-    return imgs.filter((i) => !(i.complete && i.naturalWidth > 0)).map((i) => i.getAttribute("src"));
+    return imgs.filter((i) => !(i.complete && i.naturalWidth > 0) && (i.hasAttribute("src") || !i.closest("[hidden]"))).map((i) => i.getAttribute("src"));
   });
 }
 
