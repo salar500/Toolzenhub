@@ -38,7 +38,7 @@ import {
 
 
 /* No related calculator or article exists; the Date Difference Calculator is linked in the text. */
-export const showRelatedCalculators = false;
+export const showRelatedCalculators = true;
 export const showRelatedArticles = false;
 
 

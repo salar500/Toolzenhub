@@ -306,6 +306,13 @@
       "state": "active"
     },
     {
+      "id": "business-days",
+      "module": "assets/js/tools/business-days/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "cagr",
       "module": "assets/js/calculators/cagr/index.js",
       "moduleChanges": [],
@@ -404,6 +411,13 @@
       "state": "active"
     },
     {
+      "id": "interval-timer",
+      "module": "assets/js/tools/interval-timer/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "json-formatter",
       "module": "assets/js/tools/json-formatter/index.js",
       "moduleChanges": [],
@@ -429,6 +443,13 @@
       "module": "assets/js/calculators/margin/index.js",
       "moduleChanges": [],
       "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "meeting-planner",
+      "module": "assets/js/tools/meeting-planner/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
       "state": "active"
     },
     {
@@ -460,6 +481,13 @@
       "state": "active"
     },
     {
+      "id": "pomodoro-timer",
+      "module": "assets/js/tools/pomodoro-timer/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "ppf",
       "module": "assets/js/calculators/ppf/index.js",
       "moduleChanges": [],
@@ -483,6 +511,13 @@
     {
       "id": "salary-in-hand",
       "module": "assets/js/calculators/salary-in-hand/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
+      "id": "shift-planner",
+      "module": "assets/js/tools/shift-planner/index.js",
       "moduleChanges": [],
       "provenance": "added",
       "state": "active"
@@ -520,6 +555,13 @@
       "module": "assets/js/tools/text-diff/index.js",
       "moduleChanges": [],
       "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "time-duration",
+      "module": "assets/js/tools/time-duration/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
       "state": "active"
     },
     {

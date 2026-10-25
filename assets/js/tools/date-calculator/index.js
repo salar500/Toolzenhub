@@ -56,7 +56,7 @@ import {
 
 
 /* There is no related calculator, and no article about dates yet. */
-export const showRelatedCalculators = false;
+export const showRelatedCalculators = true;
 export const showRelatedArticles = false;
 
 

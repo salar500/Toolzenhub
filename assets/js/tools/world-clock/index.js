@@ -69,7 +69,7 @@ import {
 
 
 /* No related calculator or article exists; the Time Zone Converter is linked in the text and under the board. */
-export const showRelatedCalculators = false;
+export const showRelatedCalculators = true;
 export const showRelatedArticles = false;
 
 

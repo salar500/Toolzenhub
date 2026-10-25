@@ -58,7 +58,7 @@ import {
 
 
 /* No related calculator or article exists; the Unix converter is linked in the text. */
-export const showRelatedCalculators = false;
+export const showRelatedCalculators = true;
 export const showRelatedArticles = false;
 
 

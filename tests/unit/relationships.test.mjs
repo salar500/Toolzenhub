@@ -72,7 +72,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     // (the Countdown Timer is also in that section; its page, like the date tools' pages, opts out of the related sections)
     // The Countdown Timer and the Stopwatch name each other (curated, so each comes first); the date tools are only related by section.
     assert.deepEqual(toolIds(rel.getRelatedTools("date-difference")), ["date-calculator", "countdown-timer", "stopwatch"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("date-calculator")), ["date-difference", "countdown-timer", "stopwatch"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("date-calculator")), ["business-days", "date-difference", "countdown-timer", "stopwatch"]); // the Time Tools pilot: Business Days is curated first
     assert.deepEqual(toolIds(rel.getRelatedTools("countdown-timer")), ["stopwatch", "date-difference", "date-calculator"]);
     assert.deepEqual(toolIds(rel.getRelatedTools("stopwatch")), ["countdown-timer", "date-difference", "date-calculator"]);
     // the two Developer Tools name each other (timestamps live in JSON payloads) and nothing else: the Time Tools are not related to them, nor they to the Time Tools
@@ -90,12 +90,12 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.deepEqual(toolIds(rel.getRelatedTools("credit-card-payoff")), ["balance-transfer", "prepayment", "emi", "loan-comparison", "home-loan"]);
     assert.deepEqual(keys(rel.getRelatedArticlesForTool("credit-card-payoff")), ["loan-comparison/loan-tenure-total-interest", "loan-comparison/emi-vs-total-interest"]); // curated, shown as written, not padded
     // the Hours & Timesheet Calculator (Tool Pack 23) relates to nothing (autoRelated is off and it names no tool), so it joins no other Time Tool's list and the four older Time Tools' lists above are unchanged
-    assert.deepEqual(toolIds(rel.getRelatedTools("hours-calculator")), []);
+    assert.deepEqual(toolIds(rel.getRelatedTools("hours-calculator")), ["shift-planner"]); // the Time Tools pilot: one curated, one-way relation (autoRelated is off)
     for (const id of ["date-difference", "date-calculator", "countdown-timer", "stopwatch", "time-zone-converter", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "image-compressor-resizer", "swp", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("hours-calculator"), false, id);
     for (const id of ["json-formatter", "unix-timestamp-converter", "text-diff", "time-zone-converter", "image-compressor-resizer", "date-difference", "stopwatch", "swp", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("jwt-decoder"), false, id);
     // the Time Zone Converter names the Unix converter (both read instants and zones); autoRelated is off, so it joins no other Time Tool's list and none of theirs are changed (asserted above)
-    assert.deepEqual(toolIds(rel.getRelatedTools("time-zone-converter")), ["unix-timestamp-converter"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("world-clock")), ["time-zone-converter"]); // curated, one way: the Time Zone Converter does not link back
+    assert.deepEqual(toolIds(rel.getRelatedTools("time-zone-converter")), ["unix-timestamp-converter", "meeting-planner"]); // the pilot adds the Meeting Planner
+    assert.deepEqual(toolIds(rel.getRelatedTools("world-clock")), ["time-zone-converter", "meeting-planner"]); // curated, one way: the Time Zone Converter does not link back
     // the first Image Tools tool relates to nothing: no other tool is an image tool, and nothing is forced
     assert.deepEqual(toolIds(rel.getRelatedTools("image-compressor-resizer")), []);
     // Photos to PDF (Tool Pack 31) is the second Image Tools tool: autoRelated is off and its one curated, one-way relation is the Image Compressor & Resizer (shrink photos before combining); the compressor's own list stays empty and no other tool gains it
@@ -104,6 +104,15 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     for (const id of ["json-formatter", "unix-timestamp-converter", "text-diff", "time-zone-converter", "stopwatch", "countdown-timer", "date-calculator", "date-difference", "gst", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("image-compressor-resizer"), false, id);
     for (const id of ["date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("time-zone-converter"), false, id);
     for (const id of ["date-difference", "date-calculator", "countdown-timer", "stopwatch"]) assert.equal(toolIds(rel.getRelatedTools(id)).some((x) => ["json-formatter", "unix-timestamp-converter", "text-diff", "time-zone-converter", "image-compressor-resizer"].includes(x)), false, id);
+    // Time Tools related-navigation pilot: the six new Time Tools opt out of the automatic lists and name only tools of their own section, so no older Time Tool's list changes except where a curated relation is added above
+    assert.deepEqual(toolIds(rel.getRelatedTools("business-days")), ["date-calculator", "date-difference"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("time-duration")), ["hours-calculator", "date-difference"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("shift-planner")), ["hours-calculator", "date-calculator"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("pomodoro-timer")), ["interval-timer", "countdown-timer"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("interval-timer")), ["pomodoro-timer", "countdown-timer"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("meeting-planner")), ["time-zone-converter", "world-clock"]);
+    for (const id of ["business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner"]) for (const related of toolIds(rel.getRelatedTools(id))) assert.equal(registry.calculatorMetadata[related]?.section, "Time Tools", `${id} -> ${related} crosses a section`);
+    for (const id of ["date-difference", "countdown-timer", "stopwatch"]) for (const added of ["business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes(added), false, `${id} must not gain ${added}`);
     // Income Tax (Tool Pack 17) shares the Tax category with GST but not its intent: it opts out of the automatic same-category lists (autoRelated: false),
     // so its related tools are exactly its curated Home Loan, it has no related articles from the GST category, and GST's list is unchanged
     assert.deepEqual(toolIds(rel.getRelatedTools("income-tax")), ["home-loan"]);
@@ -130,7 +139,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.equal(toolIds(rel.getRelatedTools("photos-to-pdf")).some((id) => ["merge-pdf", "split-pdf", "pdf-pages"].includes(id)), false);
     assert.deepEqual(rel.getRelatedTools("nope"), []);
     // parity with the pre-M7 rule for every tool without a curated list (the Loan Prepayment page curates its own order; GST and Percentage curate cross-category lists)
-    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages", "income-tax", "swp", "credit-card-payoff", "gratuity", "salary-in-hand"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
+    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "income-tax", "swp", "credit-card-payoff", "gratuity", "salary-in-hand"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
   });
 
   test("tool -> related articles: the first six published loan articles, in catalog order, for EMI and Loan Comparison", () => {

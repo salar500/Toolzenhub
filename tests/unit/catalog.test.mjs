@@ -27,7 +27,7 @@ before(async () => {
 
 // the published tools of the Calculators section; Date Difference (Time Tools) is a published tool too, but it is not a calculator
 const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "swp", "percentage", "income-tax", "credit-card-payoff", "ppf", "gratuity", "salary-in-hand"];
-const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages"];
+const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"];
 
 describe("catalog model", () => {
@@ -134,6 +134,12 @@ describe("registry is derived from the catalog", () => {
       "date-calculator": { section: "Time Tools", title: "Date Calculator" },
       "countdown-timer": { section: "Time Tools", title: "Countdown Timer" },
       stopwatch: { section: "Time Tools", title: "Stopwatch" },
+      "business-days": { section: "Time Tools", title: "Business Days Calculator" },
+      "time-duration": { section: "Time Tools", title: "Time Duration Calculator" },
+      "shift-planner": { section: "Time Tools", title: "Shift Schedule Planner" },
+      "pomodoro-timer": { section: "Time Tools", title: "Pomodoro Focus Timer" },
+      "interval-timer": { section: "Time Tools", title: "Interval and Routine Timer" },
+      "meeting-planner": { section: "Time Tools", title: "International Meeting Planner" },
       "json-formatter": { section: "Developer Tools", title: "JSON Formatter & Validator" },
       "unix-timestamp-converter": { section: "Developer Tools", title: "Unix Timestamp Converter" },
       "text-diff": { section: "Developer Tools", title: "Text Diff / Compare" },

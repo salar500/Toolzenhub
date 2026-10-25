@@ -194,7 +194,7 @@ describe("routing: every registered tool keeps its URL", () => {
   });
 
   test("the calculator loader registry is unchanged: loaders only for the published tools, still lazy", () => {
-    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "base64-encoder-decoder", "cagr", "countdown-timer", "credit-card-payoff", "cron-expression-explainer", "date-calculator", "date-difference", "emi", "fd", "gratuity", "gst", "home-loan", "hours-calculator", "image-compressor-resizer", "income-tax", "json-formatter", "jwt-decoder", "loan-comparison", "margin", "merge-pdf", "pdf-pages", "percentage", "photos-to-pdf", "ppf", "prepayment", "profit", "salary-in-hand", "sip", "split-pdf", "stopwatch", "swp", "text-diff", "time-zone-converter", "unix-timestamp-converter", "world-clock"]);
+    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "base64-encoder-decoder", "business-days", "cagr", "countdown-timer", "credit-card-payoff", "cron-expression-explainer", "date-calculator", "date-difference", "emi", "fd", "gratuity", "gst", "home-loan", "hours-calculator", "image-compressor-resizer", "income-tax", "interval-timer", "json-formatter", "jwt-decoder", "loan-comparison", "margin", "meeting-planner", "merge-pdf", "pdf-pages", "percentage", "photos-to-pdf", "pomodoro-timer", "ppf", "prepayment", "profit", "salary-in-hand", "shift-planner", "sip", "split-pdf", "stopwatch", "swp", "text-diff", "time-duration", "time-zone-converter", "unix-timestamp-converter", "world-clock"]);
     for (const loader of Object.values(registry.calculatorRegistry)) assert.equal(typeof loader, "function");
     assert.deepEqual(registry.calculatorMetadata.emi, { section: "Calculators", category: "loans", title: "EMI Calculator" });
     assert.deepEqual(registry.calculatorMetadata["income-tax"], { section: "Calculators", category: "tax", title: "Old vs New Tax Regime Calculator" });
@@ -202,6 +202,12 @@ describe("routing: every registered tool keeps its URL", () => {
     assert.deepEqual(registry.calculatorMetadata["date-calculator"], { section: "Time Tools", title: "Date Calculator" });
     assert.deepEqual(registry.calculatorMetadata["countdown-timer"], { section: "Time Tools", title: "Countdown Timer" });
     assert.deepEqual(registry.calculatorMetadata.stopwatch, { section: "Time Tools", title: "Stopwatch" });
+    assert.deepEqual(registry.calculatorMetadata["business-days"], { section: "Time Tools", title: "Business Days Calculator" });
+    assert.deepEqual(registry.calculatorMetadata["time-duration"], { section: "Time Tools", title: "Time Duration Calculator" });
+    assert.deepEqual(registry.calculatorMetadata["shift-planner"], { section: "Time Tools", title: "Shift Schedule Planner" });
+    assert.deepEqual(registry.calculatorMetadata["pomodoro-timer"], { section: "Time Tools", title: "Pomodoro Focus Timer" });
+    assert.deepEqual(registry.calculatorMetadata["interval-timer"], { section: "Time Tools", title: "Interval and Routine Timer" });
+    assert.deepEqual(registry.calculatorMetadata["meeting-planner"], { section: "Time Tools", title: "International Meeting Planner" });
     assert.deepEqual(registry.calculatorMetadata["json-formatter"], { section: "Developer Tools", title: "JSON Formatter & Validator" });
     assert.deepEqual(registry.calculatorMetadata["unix-timestamp-converter"], { section: "Developer Tools", title: "Unix Timestamp Converter" });
     assert.deepEqual(registry.calculatorMetadata["text-diff"], { section: "Developer Tools", title: "Text Diff / Compare" });

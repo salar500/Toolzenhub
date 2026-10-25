@@ -966,6 +966,7 @@ const catalog = [
         title: "Date Calculator",
         description:
             "Add or subtract days, weeks, months and years from a date, and see the resulting date and its weekday.",
+        relatedTools: ["business-days"],
         aliases: [
             "add days to date",
             "subtract days from date",
@@ -1064,6 +1065,227 @@ const catalog = [
 
 
     {
+        id: "business-days",
+        status: "published",
+        loader: () =>
+            import("../tools/business-days/index.js"),
+        sectionId: "time-tools",
+        icon: "⌗",
+        title: "Business Days Calculator",
+        description:
+            "Add or subtract business days from a date, or count the business days between two dates, with the weekend days you choose and the holidays you type.",
+        autoRelated: false,
+        relatedTools: ["date-calculator", "date-difference"],
+        aliases: [
+            "business day calculator",
+            "working days calculator",
+            "add business days",
+            "workdays between dates",
+            "working day counter"
+        ],
+        capabilities: {
+            reset: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            multipleInputs: true,
+            realtime: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Business Days Calculator: Add, Subtract and Count Working Days | ToolZen Hub",
+            description:
+                "Free business days calculator: add or subtract working days from a date, or count the working days between two dates. Choose your weekend and type the holidays to skip. It runs in your browser."
+        }
+    },
+
+
+    {
+        id: "time-duration",
+        status: "published",
+        loader: () =>
+            import("../tools/time-duration/index.js"),
+        sectionId: "time-tools",
+        icon: "∑",
+        title: "Time Duration Calculator",
+        description:
+            "Add and subtract lengths of time such as 1:45 or 2h 30m, and read the total as hours, minutes and seconds and as decimal hours.",
+        autoRelated: false,
+        relatedTools: ["hours-calculator", "date-difference"],
+        aliases: [
+            "add time",
+            "time addition calculator",
+            "add hours and minutes",
+            "subtract time",
+            "hours minutes seconds calculator"
+        ],
+        capabilities: {
+            reset: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            multipleInputs: true,
+            realtime: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Time Duration Calculator: Add and Subtract Hours, Minutes and Seconds | ToolZen Hub",
+            description:
+                "Free time duration calculator: add and subtract lengths of time such as 1:45 or 2h 30m and see the total as hours, minutes and seconds, decimal hours and total minutes. It runs in your browser."
+        }
+    },
+
+
+    {
+        id: "shift-planner",
+        status: "published",
+        loader: () =>
+            import("../tools/shift-planner/index.js"),
+        sectionId: "time-tools",
+        icon: "▦",
+        title: "Shift Schedule Planner",
+        description:
+            "Place a repeating shift pattern such as 4 days on and 4 off on the calendar, with your shift times, and see each date as a day, evening, night or off shift.",
+        autoRelated: false,
+        relatedTools: ["hours-calculator", "date-calculator"],
+        aliases: [
+            "shift rotation calendar",
+            "shift pattern calendar",
+            "rota planner",
+            "4 on 4 off calendar",
+            "rotating shift schedule"
+        ],
+        capabilities: {
+            reset: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            multipleInputs: true,
+            realtime: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Shift Schedule Planner: Calendar for Rotating Shift Patterns | ToolZen Hub",
+            description:
+                "Free shift schedule planner: lay a repeating pattern such as 4 on 4 off or a day and night rotation onto the calendar and see every shift, the hours scheduled and the longest run on and off. It runs in your browser."
+        }
+    },
+
+
+    {
+        id: "pomodoro-timer",
+        status: "published",
+        loader: () =>
+            import("../tools/pomodoro-timer/index.js"),
+        sectionId: "time-tools",
+        icon: "◔",
+        title: "Pomodoro Focus Timer",
+        description:
+            "Work in timed focus periods with short breaks and a longer break after every few, with settings you can change and a count of the focus periods you completed.",
+        autoRelated: false,
+        relatedTools: ["interval-timer", "countdown-timer"],
+        aliases: [
+            "pomodoro timer",
+            "pomodoro technique timer",
+            "focus timer",
+            "study timer",
+            "work and break timer"
+        ],
+        capabilities: {
+            reset: true,
+            validation: true,
+            explanation: true,
+            realtime: true,
+            timer: true,
+            multipleInputs: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Pomodoro Timer: Focus Periods and Breaks | ToolZen Hub",
+            description:
+                "Free Pomodoro timer: focus periods, short breaks and a long break after every few, with lengths you set. It shows the time left in the tab title and keeps correct time in a background tab. It runs in your browser."
+        }
+    },
+
+
+    {
+        id: "interval-timer",
+        status: "published",
+        loader: () =>
+            import("../tools/interval-timer/index.js"),
+        sectionId: "time-tools",
+        icon: "◑",
+        title: "Interval and Routine Timer",
+        description:
+            "Repeat timed work and rest stages for a number of rounds, with an optional get-ready time and cool-down, and name your own stages for any routine.",
+        autoRelated: false,
+        relatedTools: ["pomodoro-timer", "countdown-timer"],
+        aliases: [
+            "interval timer",
+            "hiit timer",
+            "tabata timer",
+            "workout interval timer",
+            "routine timer"
+        ],
+        capabilities: {
+            reset: true,
+            validation: true,
+            explanation: true,
+            realtime: true,
+            timer: true,
+            multipleInputs: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Interval Timer: Work and Rest Rounds for Workouts and Routines | ToolZen Hub",
+            description:
+                "Free interval timer: repeat work and rest stages for any number of rounds, with get-ready and cool-down, and name your own stages. It shows the time left in the tab title and runs in your browser."
+        }
+    },
+
+
+    {
+        id: "meeting-planner",
+        status: "published",
+        loader: () =>
+            import("../tools/meeting-planner/index.js"),
+        sectionId: "time-tools",
+        icon: "⌖",
+        title: "International Meeting Planner",
+        description:
+            "Find meeting times inside everyone's own hours across time zones: two to four people, their days and hours (overnight allowed), up to 14 days, with clock changes handled.",
+        autoRelated: false,
+        relatedTools: ["time-zone-converter", "world-clock"],
+        aliases: [
+            "meeting time planner",
+            "schedule meeting across time zones",
+            "find a meeting time",
+            "international meeting scheduler",
+            "best time to meet"
+        ],
+        capabilities: {
+            reset: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            multipleInputs: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "International Meeting Planner: Find a Time Across Time Zones | ToolZen Hub",
+            description:
+                "Free meeting planner: add two to four people with their time zones, days and hours, and find the times that suit everyone over the next days. Handles overnight hours and clock changes. It runs in your browser."
+        }
+    },
+
+
+    {
         id: "time-zone-converter",
         status: "published",
         loader: () =>
@@ -1074,7 +1296,7 @@ const catalog = [
         description:
             "Convert a date and time from one time zone to others, with daylight-saving gaps and repeated hours explained, and find times that fall inside everyone's preferred hours. It runs in your browser.",
         autoRelated: false,
-        relatedTools: ["unix-timestamp-converter"],
+        relatedTools: ["unix-timestamp-converter", "meeting-planner"],
         aliases: [
             "time zone converter",
             "timezone converter",
@@ -1115,7 +1337,7 @@ const catalog = [
         description:
             "Browse the current time in 195 cities and other time zones, search by city, country or the time it is now, and keep a shareable board of city clocks. It runs in your browser.",
         autoRelated: false,
-        relatedTools: ["time-zone-converter"],
+        relatedTools: ["time-zone-converter", "meeting-planner"],
         aliases: [
             "world clock",
             "world time",
@@ -1153,7 +1375,7 @@ const catalog = [
         description:
             "Add up the hours you worked across several shifts: enter start and end times and unpaid breaks, including overnight shifts, and see each shift and the total in hours and minutes and in decimal hours. It runs in your browser.",
         autoRelated: false,
-        relatedTools: [],
+        relatedTools: ["shift-planner"],
         aliases: [
             "hours calculator",
             "hours worked calculator",

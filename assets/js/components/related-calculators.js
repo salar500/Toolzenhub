@@ -19,6 +19,14 @@ import {
     getRelatedTools
 } from "../data/relationships.js";
 
+import {
+    getToolById
+} from "../data/tools.js";
+
+import {
+    getSectionById
+} from "../data/categories.js";
+
 
 /* =========================================================
    RELATED-CARD COPY (presentation)
@@ -67,6 +75,15 @@ export function renderRelatedCalculators(
 
     const category =
         currentCalculator?.category;
+
+    /*
+     * A tool in a section that has no categories (the Time Tools
+     * pilot, rulebook 4.8) is related only to tools of its own
+     * section.
+     */
+    if (!category) {
+        return renderRelatedSectionTools(currentSlug);
+    }
 
 
     /*
@@ -176,6 +193,100 @@ export function renderRelatedCalculators(
 
         </section>
 
+    `;
+
+}
+
+
+/* =========================================================
+   RELATED TOOLS OF A SECTION WITHOUT CATEGORIES
+   The same markup and classes as the calculators' list, with
+   the section's name as the heading and a link to the section's
+   own page. The curated relations come from the catalog; a
+   related tool of another section is never shown.
+========================================================= */
+
+function renderRelatedSectionTools(
+    currentSlug
+) {
+
+    const current =
+        getToolById(currentSlug);
+
+    const section =
+        current && getSectionById(current.sectionId);
+
+    if (!section) {
+        return "";
+    }
+
+    const related =
+        getRelatedTools(
+            currentSlug,
+            { limit: 6 }
+        )
+            .filter(
+                tool =>
+                    tool.sectionId === current.sectionId
+            );
+
+    if (!related.length) {
+        return "";
+    }
+
+    return `
+        <section class="related-section">
+
+            <div class="related-section__heading">
+
+                <h2>
+                    Related ${section.title}
+                </h2>
+
+                <a
+                    href="${ROUTES[section.landing]}"
+                >
+                    View all →
+                </a>
+
+            </div>
+
+
+            <div class="related-calculators-grid">
+
+                ${related.map(
+                    tool => `
+
+                    <a
+                        href="${tool.href}"
+                        class="related-calculator-card"
+                    >
+
+                        <div class="related-calculator-icon">
+                            ${tool.icon}
+                        </div>
+
+
+                        <div class="related-calculator-content">
+
+                            <strong>
+                                ${tool.title}
+                            </strong>
+
+                            <span>
+                                ${tool.description}
+                            </span>
+
+                        </div>
+
+                    </a>
+
+                `
+                ).join("")}
+
+            </div>
+
+        </section>
     `;
 
 }
