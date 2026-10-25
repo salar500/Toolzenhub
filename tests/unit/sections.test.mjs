@@ -60,7 +60,7 @@ describe("section model", () => {
     assert.equal(image.pathPrefix, "tools"); // /tools/<id>/ like the other non-calculator sections
     assert.equal(image.description, "Private browser-based tools for resizing and optimizing images.");
     assert.deepEqual(tax.getCategoriesBySection("image-tools"), []); // flat: no categories, no placeholders
-    assert.deepEqual(tax.getToolsBySection("image-tools").map((t) => t.id), ["image-compressor-resizer"]);
+    assert.deepEqual(tax.getToolsBySection("image-tools").map((t) => t.id), ["image-compressor-resizer", "photos-to-pdf"]); // Photos to PDF (Tool Pack 31) is the second Image Tools tool
   });
 
   test("section ids are unique and every section names a landing page that exists in ROUTES", () => {
@@ -188,7 +188,7 @@ describe("routing: every registered tool keeps its URL", () => {
   });
 
   test("the calculator loader registry is unchanged: loaders only for the published tools, still lazy", () => {
-    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "base64-encoder-decoder", "cagr", "countdown-timer", "credit-card-payoff", "cron-expression-explainer", "date-calculator", "date-difference", "emi", "fd", "gratuity", "gst", "home-loan", "hours-calculator", "image-compressor-resizer", "income-tax", "json-formatter", "jwt-decoder", "loan-comparison", "margin", "percentage", "ppf", "prepayment", "profit", "salary-in-hand", "sip", "stopwatch", "swp", "text-diff", "time-zone-converter", "unix-timestamp-converter", "world-clock"]);
+    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "base64-encoder-decoder", "cagr", "countdown-timer", "credit-card-payoff", "cron-expression-explainer", "date-calculator", "date-difference", "emi", "fd", "gratuity", "gst", "home-loan", "hours-calculator", "image-compressor-resizer", "income-tax", "json-formatter", "jwt-decoder", "loan-comparison", "margin", "percentage", "photos-to-pdf", "ppf", "prepayment", "profit", "salary-in-hand", "sip", "stopwatch", "swp", "text-diff", "time-zone-converter", "unix-timestamp-converter", "world-clock"]);
     for (const loader of Object.values(registry.calculatorRegistry)) assert.equal(typeof loader, "function");
     assert.deepEqual(registry.calculatorMetadata.emi, { section: "Calculators", category: "loans", title: "EMI Calculator" });
     assert.deepEqual(registry.calculatorMetadata["income-tax"], { section: "Calculators", category: "tax", title: "Old vs New Tax Regime Calculator" });
@@ -205,6 +205,7 @@ describe("routing: every registered tool keeps its URL", () => {
     assert.deepEqual(registry.calculatorMetadata["hours-calculator"], { section: "Time Tools", title: "Hours & Timesheet Calculator" });
     assert.deepEqual(registry.calculatorMetadata["time-zone-converter"], { section: "Time Tools", title: "Time Zone Converter" });
     assert.deepEqual(registry.calculatorMetadata["image-compressor-resizer"], { section: "Image Tools", title: "Image Compressor & Resizer" });
+    assert.deepEqual(registry.calculatorMetadata["photos-to-pdf"], { section: "Image Tools", title: "Photos to PDF" });
   });
 });
 

@@ -1,6 +1,6 @@
 # Tool Pack 31: Photos to PDF (Image Tools; Roadmap R1 item 7)
 
-Status: **DRAFT — IMPLEMENTATION NOT APPROVED.** Feasibility and specification written 2026-10-25 (documentation only; no code, no catalog entry, no route, no dependency added). The Roadmap R1 row for this candidate is **unchanged** ("Feasibility-dependent: audit and a real-phone spike first"). The real-phone spike (section 12) has **not** been run, so the mobile gate is open.
+Status: **P0 IMPLEMENTED LOCALLY (2026-10-25), PREVIEW AND PRODUCTION RELEASE NOT APPROVED.** The owner approved the bounded P0 implementation after the section 15 spike (Block 4); it is committed locally only (not pushed, not deployed), and the implementation notes are in section 16. The Roadmap R1 row for this candidate is **unchanged** in this phase (a roadmap status edit is a separate documentation step). The real-phone check (section 12) has **not** been run, so the mobile gate is open and no phone capacity is claimed.
 Tier: **MEDIUM** (an interactive file tool with no money, tax or legal content; it produces a binary file, so structural correctness is verified independently).
 Proposed id, slug and route: `photos-to-pdf`, `/tools/photos-to-pdf/` (catalog convention: id = slug; Image Tools tools live under `/tools/`). Section: **Image Tools** (`image-tools`, flat), the second tool after the Image Compressor & Resizer. Tool Pack number 31 was verified unused (the highest existing spec is 30). Nothing named `photos-to-pdf` or `qr-code` exists in `assets/`, `src/` or `tests/`.
 Evidence labels: **VERIFIED** (observed this session), **PUBLIC** (a vendor or documentation page, cited, not independently verified), **HYPOTHESIS**, **UNKNOWN**.
@@ -46,7 +46,7 @@ Drag-and-drop reordering, N-up layouts, compression levels or DPI settings, pass
 
 ## 3. Behaviour and rules
 
-**Files.** Accepted: JPEG, PNG, WebP by content, not name. Limits proposed (**PROVISIONAL**, to be settled by the spike): 25 MB per file (the existing `MAX_FILE_BYTES`), 40,000,000 pixels and 16,384 px per side (the existing `MAX_INPUT_PIXELS` and `MAX_INPUT_SIDE`), at most **30 images**, at most **150 MB in total**. Over a limit: that file is refused with a named reason and the others are kept. A duplicate file (same name and size) is accepted and shown; it is not silently dropped.
+**Files.** Accepted: JPEG, PNG, WebP by content, not name. Limits proposed (**PROVISIONAL**, to be settled by the spike): 25 MB per file (the existing `MAX_FILE_BYTES`), 40,000,000 pixels and 16,384 px per side (the existing `MAX_INPUT_PIXELS` and `MAX_INPUT_SIDE`), at most **30 images**, at most **100 MB in total** (lowered from 150 MB at implementation; see section 16). Over a limit: that file is refused with a named reason and the others are kept. A duplicate file (same name and size) is accepted and shown; it is not silently dropped.
 **Per-image processing.**
 1. A baseline or progressive 8-bit JPEG with 1 or 3 components and no EXIF turn is **embedded as the original bytes** (DCTDecode), so quality is not reduced and large images stay as small as the original.
 2. Anything else is decoded by the browser (`createImageBitmap`, which applies the EXIF turn, INFERRED from the note at `image-pipeline.js:229` and not tested for this tool), drawn on a canvas, and encoded as JPEG at a fixed quality (proposed 0.92). Transparent PNG/WebP pixels are placed on **white**, and the page says so.
@@ -129,7 +129,7 @@ On one real Android phone (and, if available, an iPhone): (1) build a PDF from 5
 | --- | --- | --- |
 | D1 | Approve a bounded implementation after the spike? | Run the spike first; approve only if it passes |
 | D2 | PDF assembly: pdf-lib vendored and lazy-loaded (revised 2026-10-25 after the spike), an own minimal writer, or jsPDF from the CDN? | pdf-lib vendored (no CDN, offline, original JPEG bytes kept). Adds about 525 KB (207 KB gzip) loaded only on this page. |
-| D3 | Provisional limits: 30 images, 25 MB each, 150 MB total | Keep until the spike |
+| D3 | Provisional limits: 30 images, 25 MB each, 100 MB total (implemented; was 150 MB in the draft) | Keep until a phone has been measured |
 | D4 | Enlarge small images to fit the page? | Yes (assumption A1) |
 | D5 | Rotate in V1 (P1) or P0? | P1 |
 | D6 | Differentiation is only a hypothesis; accept that risk? | Owner's call |
@@ -161,3 +161,32 @@ Scope: a bounded feasibility spike with **synthetic images only**, run outside t
 **Not established (UNVERIFIED):** any physical phone (Android or iOS) behaviour, mobile browser memory limits, how a phone delivers the download, Safari and Firefox, real camera photos of 3–12 MB (the synthetic JPEGs are small except the padded ones), PNG embedding at scale (pdf-lib decodes PNG in JavaScript), and whole-process memory (the figure above is the JS heap only and excludes external buffers). The provisional limits in section 3 (30 images, 25 MB each, 150 MB total) are **therefore not yet validated**; the desktop run supports the 60 MB case technically but says nothing about phones. The mobile gate stays **open**.
 
 **Engineering decisions recorded:** (1) use pdf-lib rather than a custom writer, because the spike shows it keeps the original bytes with negligible overhead, so a custom writer would not be clearly better; (2) keep the EXIF re-encode rule; (3) set neutral PDF metadata; (4) self-host the library and add a notices file; (5) no change to the roadmap, the verdict (still **B**) or the approval status.
+
+## 16. Implementation notes (P0, 2026-10-25, local only)
+
+Scope built: exactly the P0 list in section 2, nothing from P1 or P2. Id and route `photos-to-pdf`, `/tools/photos-to-pdf/`, section Image Tools (the second tool there), `autoRelated: false`, one curated one-way relation to the Image Compressor & Resizer (the compressor's own list stays empty and is pinned by a test).
+
+**Files.** `assets/js/tools/photos-to-pdf/` (`pdf-rules.js` pure rules, `pdf-build.js` PDF assembly with the injected library, `image-prep.js` browser decoding and previews, `index.js` the page), `assets/css/tools/photos-to-pdf.css`, `assets/js/vendor/pdf-lib/` (the unmodified upstream build, `NOTICE.txt`, `LICENSE.txt`), the catalog entry, `src/_data/toolStyles.json`, the Growth ledger record, tests (below).
+
+**Decisions made while building (consequential ones only).**
+1. **Total limit 100 MB, not 150 MB**: while a PDF is built the browser holds about twice the input plus the output, so the draft figure was lowered for caution. Still provisional; no phone has been measured.
+2. **"Same shape as each image"** fixes the longest side of the picture area at 841.89 pt (an A4 long edge) and adds the margin around it, so a 4000 px photo does not become a page tens of inches wide. The direction setting is disabled and says so.
+3. **Redraw size cap**: a photo that must be redrawn (PNG, WebP, EXIF-turned, CMYK, 12-bit, lossless or Adobe-RGB JPEG) is drawn at most 16.7 megapixels; larger ones are reduced in proportion and the result says so. A JPEG that is kept is never decoded by the page.
+4. **Previews are canvases**, not object URLs. The only object URL is the finished PDF; it is revoked when replaced, when the list or a setting changes, on Reset and on `pagehide`.
+5. **Editing is locked while a PDF is built** (the editable cards are `inert`); only Cancel and Reset work. Cancel and Reset drop a late result; a photo that cannot be read fails the build with its name instead of producing a partial PDF.
+6. **No Calculate-style automatic run**: the explicit Create PDF button is kept (section 2).
+7. **Neutral file**: no creator, producer or date is written (`updateMetadata: false`); a test fails if one appears.
+8. **Library files**: the licence file is named `LICENSE.txt` because the build-output check rejects `.md` files in the deployed site.
+
+**Evidence ledger (this phase).** Base `61c87b7`; environment: Windows 10, Node 20.17.0, Chrome driven by Playwright 1.63, `--workers=1`; synthetic fixtures made by Pillow 10.4.0.
+
+| Check | Scope | Result |
+| --- | --- | --- |
+| `tests/unit/photos-to-pdf.test.mjs` | 26 tests: JPEG reading and the keep/redraw rule on 11 fixtures, limits, ordering, hand-calculated layout and properties, PDF read back by an independent reader (pages, order, MediaBox, placement matrix, original bytes), a second reader in Python, 30 x 1 MB, cancel, failure, no creator or date, vendored file hash against its notice, no network or storage in the tool's code | 26 pass |
+| `tests/browser/photos-to-pdf.spec.js` | 13 tests in Chrome desktop and again in the mobile emulation project: flow, reorder, remove, keyboard, redraw of PNG/WebP/EXIF/CMYK in a real decoder (EXIF turn applied), refusals, stale result and object URL cleanup, limit of 30, no external request, three phone widths | 13 pass (desktop) and 13 pass (mobile emulation) |
+| Affected existing unit tests | catalog, sections (also root mode), relationships, search, taxonomy (also root), directory, tool-catalog, tool-capabilities, tool-page, build-output, articles, image-engine, growth manifest (registry, items, source-state, manifest), shared-ui, workflow | updated where they pin the published set; all pass except `design-tokens` "colour tokens", which fails on `calculators/gratuity.css` (a pre-existing finding in a file this change does not touch) |
+| Static checks | URL inventory, links, assets (including the vendored import path), SEO, on both builds | pass |
+| Navigation, DOM, SEO and links baselines | `navigation.spec.js` (All Tools counts), `dom-baseline.spec.js` (tools directory), `seo-baseline.spec.js`, `links.spec.js` | The two counts were updated for the second Image Tools tool. The DOM, SEO and links baselines were refreshed; their diffs also absorbed earlier drift that was already failing on `main` (the Salary / CTC page and its listing entry, and text-length changes on SIP, Investment and Terms), so they now describe the current site |
+
+**Not run (by design for this phase):** the full regression, the visual baselines (no visual baseline exists for this page yet), Lighthouse, the other browser specs, Safari/WebKit and Firefox, any physical phone, screen readers.
+**Still unverified:** everything listed under "Not established" in section 15. In particular the 30-photo, 25 MB and 100 MB limits are not validated on any phone, and how a phone delivers the download is unknown.

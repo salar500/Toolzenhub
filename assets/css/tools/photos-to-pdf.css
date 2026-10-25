@@ -1,0 +1,588 @@
+/* =========================================================
+   ToolZen Hub
+   Photos to PDF
+
+   Only what the shared tool styles do not already provide: the
+   file chooser, the photo list with its small previews, the page
+   settings and the result. Buttons, focus and headings come from the
+   shared layer (.calculator-form__button and its --secondary
+   variant). Loaded after calculator-responsive.css.
+
+   One column on a phone; from 900px the settings sit beside the
+   list. Nothing animates. Every button is at least 44px tall.
+========================================================= */
+
+.calculator-page [hidden] {
+
+    display: none !important;
+
+}
+
+.pp-sr {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+.pp-workspace {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+
+}
+
+.pp-editable {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+
+}
+
+.pp-card {
+
+    min-width: 0;
+    padding: 16px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: #ffffff;
+
+}
+
+.pp-card__title {
+
+    margin: 0 0 12px;
+    padding: 0;
+
+    color: var(--color-ink);
+
+    font-size: 19px;
+    font-weight: 700;
+
+}
+
+.pp-card__title:focus {
+
+    outline: none;
+
+}
+
+.pp-card__title:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 4px;
+
+}
+
+/* the file chooser */
+
+.pp-drop {
+
+    padding: 18px 16px;
+
+    border: 2px dashed #d0d5dd;
+    border-radius: 12px;
+
+    background: #f9fafb;
+
+}
+
+.pp-drop__label {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 700;
+
+}
+
+.pp-file {
+
+    display: block;
+
+    width: 100%;
+    min-height: 48px;
+    padding: 10px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 16px;
+
+}
+
+.pp-file:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.pp-hint {
+
+    margin: 8px 0 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.55;
+
+}
+
+.pp-error {
+
+    margin: 12px 0 0;
+    padding: 12px 16px;
+
+    border-left: 6px solid #b42318;
+    border-radius: 10px;
+
+    background: #fef3f2;
+
+    color: #912018;
+
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.55;
+
+}
+
+.pp-error p {
+
+    margin: 0;
+
+}
+
+.pp-error p + p {
+
+    margin-top: 6px;
+
+}
+
+/* the list */
+
+.pp-summary {
+
+    margin: -4px 0 12px;
+
+    color: #475467;
+
+    font-size: 14px;
+
+}
+
+.pp-empty {
+
+    margin: 0;
+    padding: 14px 16px;
+
+    border-radius: 10px;
+
+    background: #f9fafb;
+
+    color: #475467;
+
+    font-size: 15px;
+    line-height: 1.55;
+
+}
+
+.pp-list {
+
+    display: grid;
+    gap: 10px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+}
+
+.pp-item {
+
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 4px 12px;
+    align-items: center;
+
+    padding: 10px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 12px;
+
+    background: #ffffff;
+
+}
+
+.pp-thumb {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 72px;
+    height: 72px;
+
+    border-radius: 8px;
+
+    background: #f2f4f7;
+
+    overflow: hidden;
+
+}
+
+.pp-thumb canvas {
+
+    display: block;
+
+    max-width: 100%;
+    max-height: 100%;
+
+}
+
+.pp-item__text {
+
+    min-width: 0;
+
+}
+
+.pp-item__name {
+
+    display: block;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.35;
+
+    overflow-wrap: anywhere;
+
+}
+
+.pp-item__meta {
+
+    display: block;
+
+    color: #475467;
+
+    font-size: 14px;
+
+}
+
+.pp-item__actions {
+
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+
+}
+
+.pp-mini {
+
+    min-width: 0;
+    height: auto;
+    min-height: 44px;
+    padding: 8px 6px;
+
+    font-size: 14px;
+    line-height: 1.25;
+
+}
+
+.pp-mini[aria-disabled="true"] {
+
+    background: var(--color-control-disabled-bg);
+
+    color: var(--color-control-disabled-text);
+
+    cursor: not-allowed;
+
+}
+
+/* page settings */
+
+.pp-fields {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+
+}
+
+.pp-field {
+
+    min-width: 0;
+
+}
+
+.pp-field label {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 700;
+
+}
+
+.pp-select {
+
+    display: block;
+
+    width: 100%;
+    min-height: 48px;
+    padding: 8px 12px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 16px;
+
+}
+
+.pp-select:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.pp-select:disabled {
+
+    background: var(--color-control-disabled-bg);
+
+    color: var(--color-control-disabled-text);
+
+}
+
+.pp-note {
+
+    margin: 6px 0 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+}
+
+.pp-note:empty {
+
+    display: none;
+
+}
+
+/* actions, progress, result */
+
+.pp-actions {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+
+}
+
+.pp-button {
+
+    min-width: 0;
+    min-height: 48px;
+
+    font-size: 16px;
+
+}
+
+#pp-create {
+
+    grid-column: 1 / -1;
+
+}
+
+.pp-button:disabled {
+
+    background: var(--color-control-disabled-bg);
+
+    color: var(--color-control-disabled-text);
+
+    cursor: not-allowed;
+
+}
+
+.pp-status {
+
+    margin: 12px 0 0;
+    padding: 12px 16px;
+
+    border-left: 6px solid #b54708;
+    border-radius: 10px;
+
+    background: #fffaeb;
+
+    color: #7a2e0e;
+
+    font-size: 16px;
+    font-weight: 700;
+
+}
+
+.pp-result {
+
+    border-color: #abefc6;
+
+    background: #f6fef9;
+
+}
+
+.pp-result__summary {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    line-height: 1.55;
+
+}
+
+.pp-download {
+
+    display: block;
+
+    margin-top: 16px;
+
+    /* the shared button is a fixed height: keep it growing instead of spilling */
+    height: auto;
+    min-height: 48px;
+    padding: 12px 16px;
+
+    font-size: 16px;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+
+}
+
+.pp-download,
+.pp-download:visited,
+.pp-download:hover,
+.pp-download:focus {
+
+    color: #ffffff;
+
+}
+
+.pp-notes {
+
+    margin: 10px 0 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.55;
+
+}
+
+@media (min-width: 640px) {
+
+    .pp-item {
+
+        grid-template-columns: 72px minmax(0, 1fr) auto;
+
+    }
+
+    .pp-item__actions {
+
+        grid-column: auto;
+        grid-template-columns: repeat(3, auto);
+
+    }
+
+    .pp-mini {
+
+        padding: 8px 12px;
+
+    }
+
+    .pp-fields {
+
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    }
+
+    .pp-actions {
+
+        grid-template-columns: 2fr 1fr 1fr;
+
+    }
+
+    #pp-create {
+
+        grid-column: auto;
+
+    }
+
+}
+
+@media (max-width: 380px) {
+
+    .pp-item {
+
+        grid-template-columns: 56px minmax(0, 1fr);
+
+    }
+
+    .pp-thumb {
+
+        width: 56px;
+        height: 56px;
+
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .pp-workspace * {
+
+        transition: none !important;
+        animation: none !important;
+
+    }
+
+}

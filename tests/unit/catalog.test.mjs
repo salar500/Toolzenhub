@@ -27,7 +27,7 @@ before(async () => {
 
 // the published tools of the Calculators section; Date Difference (Time Tools) is a published tool too, but it is not a calculator
 const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "swp", "percentage", "income-tax", "credit-card-payoff", "ppf", "gratuity", "salary-in-hand"];
-const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer"];
+const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"];
 
 describe("catalog model", () => {
@@ -144,6 +144,7 @@ describe("registry is derived from the catalog", () => {
       "time-zone-converter": { section: "Time Tools", title: "Time Zone Converter" },
       "world-clock": { section: "Time Tools", title: "World Clock" },
       "image-compressor-resizer": { section: "Image Tools", title: "Image Compressor & Resizer" },
+      "photos-to-pdf": { section: "Image Tools", title: "Photos to PDF" },
     });
   });
 });

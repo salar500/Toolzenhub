@@ -439,6 +439,13 @@
       "state": "active"
     },
     {
+      "id": "photos-to-pdf",
+      "module": "assets/js/tools/photos-to-pdf/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "ppf",
       "module": "assets/js/calculators/ppf/index.js",
       "moduleChanges": [],

@@ -98,6 +98,9 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.deepEqual(toolIds(rel.getRelatedTools("world-clock")), ["time-zone-converter"]); // curated, one way: the Time Zone Converter does not link back
     // the first Image Tools tool relates to nothing: no other tool is an image tool, and nothing is forced
     assert.deepEqual(toolIds(rel.getRelatedTools("image-compressor-resizer")), []);
+    // Photos to PDF (Tool Pack 31) is the second Image Tools tool: autoRelated is off and its one curated, one-way relation is the Image Compressor & Resizer (shrink photos before combining); the compressor's own list stays empty and no other tool gains it
+    assert.deepEqual(toolIds(rel.getRelatedTools("photos-to-pdf")), ["image-compressor-resizer"]);
+    for (const id of ["image-compressor-resizer", "json-formatter", "unix-timestamp-converter", "text-diff", "time-zone-converter", "stopwatch", "countdown-timer", "date-calculator", "date-difference", "gst", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("photos-to-pdf"), false, id);
     for (const id of ["json-formatter", "unix-timestamp-converter", "text-diff", "time-zone-converter", "stopwatch", "countdown-timer", "date-calculator", "date-difference", "gst", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("image-compressor-resizer"), false, id);
     for (const id of ["date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("time-zone-converter"), false, id);
     for (const id of ["date-difference", "date-calculator", "countdown-timer", "stopwatch"]) assert.equal(toolIds(rel.getRelatedTools(id)).some((x) => ["json-formatter", "unix-timestamp-converter", "text-diff", "time-zone-converter", "image-compressor-resizer"].includes(x)), false, id);
@@ -121,7 +124,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.deepEqual(toolIds(rel.getRelatedTools("profit")), ["margin"]);
     assert.deepEqual(rel.getRelatedTools("nope"), []);
     // parity with the pre-M7 rule for every tool without a curated list (the Loan Prepayment page curates its own order; GST and Percentage curate cross-category lists)
-    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "income-tax", "swp", "credit-card-payoff", "gratuity", "salary-in-hand"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
+    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "income-tax", "swp", "credit-card-payoff", "gratuity", "salary-in-hand"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
   });
 
   test("tool -> related articles: the first six published loan articles, in catalog order, for EMI and Loan Comparison", () => {

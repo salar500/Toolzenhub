@@ -22,7 +22,7 @@ section.categories-page.directory-page
           h2#directory-calculators-heading.directory-section__title
             a [href="{ROOT}categories.html"] "Calculators"
           p.directory-section__text "Calculators for loans, investment, tax, business and math."
-            span.directory-section__count "17 tools"
+            span.directory-section__count "18 tools"
         div.directory-groups
           article.directory-group
             h3.directory-group__title
@@ -67,6 +67,8 @@ section.categories-page.directory-page
                 a [href="{ROOT}calculators/income-tax/"] "Old vs New Tax Regime Calculator"
               li
                 a [href="{ROOT}calculators/gratuity/"] "Gratuity Calculator (India)"
+              li
+                a [href="{ROOT}calculators/salary-in-hand/"] "Salary / CTC to In-Hand Calculator (India)"
           article.directory-group
             h3.directory-group__title
               a [href="{ROOT}business.html"] "Business"
@@ -168,9 +170,13 @@ section.categories-page.directory-page
           h2#directory-image-tools-heading.directory-section__title
             a [href="{ROOT}image-tools.html"] "Image Tools"
           p.directory-section__text "Private browser-based tools for resizing and optimizing images."
-            span.directory-section__count "1 tool"
+            span.directory-section__count "2 tools"
         div.directory-groups
           article.directory-group
             h3.directory-group__title
               a [href="{ROOT}tools/image-compressor-resizer/"] "Image Compressor & Resizer"
             p.directory-group__text "Make a JPEG, PNG or WebP smaller in dimensions and file size, or keep it under a size you …"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/photos-to-pdf/"] "Photos to PDF"
+            p.directory-group__text "Put several photos into one PDF, in the order you choose, with a page size and margin you …"

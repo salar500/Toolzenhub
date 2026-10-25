@@ -226,7 +226,7 @@
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 40,
+    "internal": 41,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -326,6 +326,14 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "calculators/salary-in-hand/": {
+    "internal": 28,
+    "external": [
+      "github.com"
+    ],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "calculators/sip/": {
     "internal": 34,
     "external": [],
@@ -363,7 +371,7 @@
     "deadFragments": []
   },
   "image-tools.html": {
-    "internal": 25,
+    "internal": 26,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -399,7 +407,7 @@
     "deadFragments": []
   },
   "tax.html": {
-    "internal": 27,
+    "internal": 28,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -417,7 +425,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 63,
+    "internal": 65,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -474,6 +482,12 @@
     "internal": 25,
     "external": [],
     "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/photos-to-pdf/": {
+    "internal": 23,
+    "external": [],
+    "placeholders": 5,
     "deadFragments": []
   },
   "tools/stopwatch/": {

@@ -3508,6 +3508,55 @@
       "visibleTextChars": 6026
     }
   },
+  "/calculators/salary-in-hand/": {
+    "runtime": {
+      "title": "Salary / CTC to In-Hand Calculator India, Tax Year 2026-27 | ToolZen Hub",
+      "description": "Estimate your in-hand salary from your annual CTC for tax year 2026-27: employer PF, gratuity, your PF, professional tax and income tax, step by step. Calculated in your browser; an estimate, not your payslip or tax advice.",
+      "canonical": "https://toolzenhub.in/calculators/salary-in-hand/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Estimate your in-hand salary from your annual CTC for tax year 2026-27: employer PF, gratuity, your PF, professional tax and income tax, step by step. Calculated in your browser; an estimate, not your payslip or tax advice.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Salary / CTC to In-Hand Calculator India, Tax Year 2026-27 | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/salary-in-hand/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Estimate your in-hand salary from your annual CTC for tax year 2026-27: employer PF, gratuity, your PF, professional tax and income tax, step by step. Calculated in your browser; an estimate, not your payslip or tax advice.",
+        "twitter:title": "Salary / CTC to In-Hand Calculator India, Tax Year 2026-27 | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Salary / CTC to In-Hand Calculator (India)"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Salary / CTC to In-Hand Calculator India, Tax Year 2026-27 | ToolZen Hub",
+      "description": "Estimate your in-hand salary from your annual CTC for tax year 2026-27: employer PF, gratuity, your PF, professional tax and income tax, step by step. Calculated in your browser; an estimate, not your payslip or tax advice.",
+      "canonical": "https://toolzenhub.in/calculators/salary-in-hand/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 8245
+    }
+  },
   "/calculators/sip/": {
     "runtime": {
       "title": "SIP Calculator | ToolZen Hub",
@@ -3821,7 +3870,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 714
+      "visibleTextChars": 883
     }
   },
   "/investment.html": {
@@ -4048,7 +4097,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1216
+      "visibleTextChars": 1485
     }
   },
   "/terms.html": {
@@ -4186,7 +4235,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4154
+      "visibleTextChars": 4363
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -4628,6 +4677,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 5320
+    }
+  },
+  "/tools/photos-to-pdf/": {
+    "runtime": {
+      "title": "Photos to PDF: Combine Pictures into One PDF | ToolZen Hub",
+      "description": "Free photos to PDF tool for JPEG, PNG and WebP. Put several photos into one PDF in the order you choose, with A4, Letter or photo-sized pages. It runs in your browser: your photos are not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/photos-to-pdf/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free photos to PDF tool for JPEG, PNG and WebP. Put several photos into one PDF in the order you choose, with A4, Letter or photo-sized pages. It runs in your browser: your photos are not uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Photos to PDF: Combine Pictures into One PDF | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/photos-to-pdf/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free photos to PDF tool for JPEG, PNG and WebP. Put several photos into one PDF in the order you choose, with A4, Letter or photo-sized pages. It runs in your browser: your photos are not uploaded.",
+        "twitter:title": "Photos to PDF: Combine Pictures into One PDF | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Photos to PDF"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Photos to PDF: Combine Pictures into One PDF | ToolZen Hub",
+      "description": "Free photos to PDF tool for JPEG, PNG and WebP. Put several photos into one PDF in the order you choose, with A4, Letter or photo-sized pages. It runs in your browser: your photos are not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/photos-to-pdf/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3617
     }
   },
   "/tools/stopwatch/": {

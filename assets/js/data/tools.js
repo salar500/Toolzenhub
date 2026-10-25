@@ -1459,6 +1459,43 @@ const catalog = [
             description:
                 "Free image compressor and resizer for JPEG, PNG and WebP. Set new dimensions, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your image is not uploaded."
         }
+    },
+
+    {
+        id: "photos-to-pdf",
+        status: "published",
+        loader: () =>
+            import("../tools/photos-to-pdf/index.js"),
+        sectionId: "image-tools",
+        icon: "▤",
+        title: "Photos to PDF",
+        description:
+            "Put several photos into one PDF, in the order you choose, with a page size and margin you pick. It runs in your browser: your photos are not uploaded.",
+        autoRelated: false,
+        relatedTools: ["image-compressor-resizer"],
+        aliases: [
+            "photos to pdf",
+            "jpg to pdf",
+            "images to pdf",
+            "combine images into pdf",
+            "picture to pdf",
+            "photo to pdf",
+            "png to pdf"
+        ],
+        capabilities: {
+            reset: true,
+            download: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Photos to PDF: Combine Pictures into One PDF | ToolZen Hub",
+            description:
+                "Free photos to PDF tool for JPEG, PNG and WebP. Put several photos into one PDF in the order you choose, with A4, Letter or photo-sized pages. It runs in your browser: your photos are not uploaded."
+        }
     }
 
 ];
