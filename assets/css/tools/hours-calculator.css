@@ -593,3 +593,87 @@
     }
 
 }
+
+
+/* ---------- rounding option and copied summary ---------- */
+
+.hc-options {
+
+    display: grid;
+    gap: 12px;
+
+    margin: 16px 0 0;
+    padding: 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 10px;
+
+}
+
+.hc-options__row {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.hc-select {
+
+    min-height: 48px;
+    padding: 8px 12px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: #ffffff;
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 16px;
+
+}
+
+.hc-select:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.hc-select:disabled {
+
+    background: var(--color-control-disabled-bg);
+    color: var(--color-control-disabled-text);
+
+}
+
+.hc-rounded {
+
+    margin: 0;
+
+    color: #344054;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+
+}
+
+.hc-copy-status {
+
+    color: #344054;
+
+    font-size: 14px;
+
+}
+
+.hc-manual {
+
+    width: 100%;
+
+    font-family: inherit;
+    font-size: 14px;
+
+}

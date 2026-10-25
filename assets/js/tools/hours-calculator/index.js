@@ -29,12 +29,21 @@ import {
     decimalHours,
     describeRows,
     announcement,
-    EXAMPLE_ROWS
+    EXAMPLE_ROWS,
+    ROUNDING_STEPS,
+    applyRounding,
+    roundingWords,
+    differenceWords,
+    copySummary
 } from "./hours-engine.js";
 
 import {
     getToolById
 } from "../../data/tools.js";
+
+import {
+    copyToClipboard
+} from "../time-ui/time-ui.js";
 
 
 /* No related calculator or article exists; the Date Difference Calculator is linked in the text. */
@@ -241,6 +250,43 @@ export function markup() {
                             hidden
                         ></p>
 
+                        <div class="hc-options">
+
+                            <div class="hc-options__row">
+
+                                <label class="hc-label" for="hc-round-step">Round to the nearest</label>
+
+                                <select id="hc-round-step" class="hc-select">
+                                    ${ROUNDING_STEPS.map(step => `<option value="${step}">${step === 0 ? "Exact (no rounding)" : `${step} minutes`}</option>`).join("")}
+                                </select>
+
+                                <label class="hc-label" for="hc-round-scope">Applied to</label>
+
+                                <select id="hc-round-scope" class="hc-select">
+                                    <option value="shift">Each shift</option>
+                                    <option value="total">The total</option>
+                                </select>
+
+                            </div>
+
+                            <p id="hc-rounded" class="hc-rounded" hidden></p>
+
+                            <div class="hc-options__row">
+
+                                <button
+                                    type="button"
+                                    id="hc-copy"
+                                    class="calculator-form__button calculator-form__button--secondary"
+                                >
+                                    Copy summary
+                                </button>
+
+                                <span id="hc-copy-status" class="hc-copy-status" role="status" hidden></span>
+
+                            </div>
+
+                        </div>
+
                         <p class="hc-total__fine">
                             The total adds up only the rows marked Counted. Empty
                             rows are ignored. Each figure is worked out from exact
@@ -340,9 +386,12 @@ export function markup() {
                 </p>
 
                 <p>
-                    Decimal hours are shown to two places. Nothing else is
-                    rounded: shifts are not rounded to the nearest 5 or 15
-                    minutes, and every figure is worked out from exact minutes.
+                    Decimal hours are shown to two places. Nothing is rounded
+                    unless you choose it: the default is exact, and the
+                    "Round to the nearest" option below the total rounds each
+                    shift or the total to the nearest 5, 10, 15 or 30 minutes
+                    (halfway rounds up) and shows the exact total beside the
+                    rounded one. Every figure is worked out from exact minutes.
                     Because each figure is rounded for display on its own, the
                     decimal figures of the rows can differ from the decimal
                     figure of the total by a hundredth. To turn decimal hours
@@ -819,7 +868,53 @@ export function init() {
 
     }
 
+    /* ---------- rounding and the copied summary ---------- */
+
+    const roundStep = document.querySelector("#hc-round-step");
+    const roundScope = document.querySelector("#hc-round-scope");
+    const roundedLine = document.querySelector("#hc-rounded");
+    const copyButton = document.querySelector("#hc-copy");
+    const copyStatus = document.querySelector("#hc-copy-status");
+
+    let lastSummary = null;
+
+    const currentRounding = () =>
+        lastSummary ? applyRounding(lastSummary, Number(roundStep.value), roundScope.value) : null;
+
+    function paintRounding() {
+
+        const rounding = currentRounding();
+
+        roundScope.disabled = Number(roundStep.value) === 0;
+
+        copyButton.disabled = rounding === null;
+
+        if (rounding === null || rounding.step === 0) {
+
+            roundedLine.hidden = true;
+            roundedLine.textContent = "";
+
+            return;
+
+        }
+
+        roundedLine.hidden = false;
+
+        roundedLine.textContent = `${roundingWords(rounding)}: ${formatHM(rounding.rounded)} hours and minutes, ${decimalHours(rounding.rounded)} decimal hours (${differenceWords(rounding.difference)} against the exact total of ${formatHM(rounding.exact)}).`;
+
+    }
+
     function paintTotal(summary) {
+
+        lastSummary = summary;
+
+        paintTotalFigures(summary);
+
+        paintRounding();
+
+    }
+
+    function paintTotalFigures(summary) {
 
         const text = describeRows(summary);
 
@@ -1026,6 +1121,68 @@ export function init() {
     buttons.example.addEventListener("click", loadExample);
 
     buttons.clear.addEventListener("click", clearAll);
+
+    function onRoundingChange() {
+
+        copyStatus.hidden = true;
+
+        paintRounding();
+
+        const rounding = currentRounding();
+
+        if (rounding !== null) {
+            announce(rounding.step === 0 ? "Exact total, no rounding." : `${roundingWords(rounding)}: ${formatHM(rounding.rounded)}, ${differenceWords(rounding.difference)}.`);
+        }
+
+    }
+
+    roundStep.addEventListener("change", onRoundingChange);
+
+    roundScope.addEventListener("change", onRoundingChange);
+
+    /* the text is copied only when the button is pressed; if the browser refuses, it is shown to copy by hand */
+    copyButton.addEventListener("click", async () => {
+
+        const text = copySummary(lastSummary, currentRounding());
+
+        if (text === "") {
+            return;
+        }
+
+        const copied = await copyToClipboard(text);
+
+        copyStatus.hidden = false;
+
+        if (copied) {
+
+            copyStatus.textContent = "Copied to the clipboard.";
+
+            announceNow("Summary copied to the clipboard.");
+
+            return;
+
+        }
+
+        copyStatus.textContent = "Copying is not available here. Select the text below and copy it.";
+
+        let box = copyStatus.nextElementSibling;
+
+        if (!box || !box.classList.contains("hc-manual")) {
+
+            box = node("textarea", "hc-manual");
+            box.readOnly = true;
+            box.rows = 6;
+            box.setAttribute("aria-label", "Summary to copy");
+
+            copyStatus.after(box);
+
+        }
+
+        box.value = text;
+        box.focus();
+        box.select();
+
+    });
 
     setRows([null]);
 

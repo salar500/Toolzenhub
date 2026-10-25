@@ -40,6 +40,7 @@ import {
     searchZones,
     formatClock,
     nowInZone,
+    describeInZone,
     convert,
     swapSource,
     addZone,
@@ -51,6 +52,13 @@ import {
     meetingOverlap,
     addDays
 } from "./time-zone-engine.js";
+
+import {
+    zoneNotes,
+    differenceChanges,
+    describeChange,
+    differenceWords
+} from "./dst-info.js";
 
 import {
     getToolById
@@ -67,6 +75,9 @@ const TITLE =
 
 const UNIX_TOOL =
     getToolById("unix-timestamp-converter");
+
+const PLANNER =
+    getToolById("meeting-planner");
 
 const ANNOUNCE_DELAY_MS = 900;
 const MAX_PICKER_OPTIONS = 8;
@@ -362,6 +373,21 @@ ${picker("add", "Add a time zone", "Search, for example New York", "Search by th
 
                         </div>
 
+                        <section
+                            id="tz-dst"
+                            class="tz-dst"
+                            aria-labelledby="tz-dst-title"
+                            hidden
+                        >
+
+                            <h3 id="tz-dst-title">
+                                Clock Changes Around This Time
+                            </h3>
+
+                            <ul id="tz-dst-list" class="tz-dst__list"></ul>
+
+                        </section>
+
                     </div>
 
 
@@ -507,6 +533,20 @@ ${picker("add", "Add a time zone", "Search, for example New York", "Search by th
                     both and asks which you mean. Some places shift by 30
                     minutes rather than an hour, and some offsets are not whole
                     hours.
+                </p>
+
+                <p>
+                    Under the converted times, <em>Clock Changes Around This
+                    Time</em> lists, for each zone, the next and the latest
+                    clock change within 200 days of the time you chose, with
+                    its date, what the clock does and the offsets before and
+                    after. When two places change on different dates, it also
+                    says when the difference between them changes. The dates
+                    come from your browser's time zone data, not from a fixed
+                    list, so they follow the rules your browser knows. For a
+                    meeting with several people, hours that cross midnight and
+                    a weekly check through clock changes, use the
+                    <a href="${PLANNER.href}">${PLANNER.title}</a>.
                 </p>
 
             </section>
@@ -1152,7 +1192,84 @@ export function init() {
             empty.textContent = "Choose a time zone to convert to.";
         }
 
+        renderClockChanges(result);
+
         announce(message);
+
+    }
+
+
+    /* ---------- clock changes (daylight saving) around the converted time ---------- */
+
+    const dstBox = document.querySelector("#tz-dst");
+    const dstList = document.querySelector("#tz-dst-list");
+
+    const DAY_MS = 86400000;
+
+    function inDays(ms, from) {
+
+        const days = Math.round(Math.abs(ms - from) / DAY_MS);
+
+        return days === 0 ? "the same day" : `${days} ${days === 1 ? "day" : "days"} ${ms >= from ? "later" : "earlier"}`;
+
+    }
+
+    function renderClockChanges(converted) {
+
+        dstList.replaceChildren();
+
+        if (converted.status !== "ok" || converted.rows.length === 0) {
+            dstBox.hidden = true;
+            return;
+        }
+
+        const zones = [state.source, ...state.targets.filter(zone => zone !== state.source)];
+
+        const items = [];
+
+        for (const zone of zones) {
+
+            const notes = zoneNotes(zone, converted.ms);
+
+            if (notes.state === "none") {
+                items.push(`${zone}: no clock change within 200 days either side of this time.`);
+                continue;
+            }
+
+            for (const [label, change] of [["Next change", notes.next], ["Latest change", notes.previous]]) {
+
+                if (change) {
+
+                    const words = describeChange(change);
+
+                    items.push(`${zone}, ${label.toLowerCase()} (${inDays(change.ms, converted.ms)}): ${words.headline} (${words.offsets}).`);
+
+                }
+
+            }
+
+        }
+
+        for (const found of differenceChanges(state.source, state.targets, converted.ms)) {
+
+            const before = differenceWords(found.before);
+            const after = differenceWords(found.after);
+
+            items.push(`${found.target} against ${state.source}: ${before} now, then ${after} from ${describeInZone(found.ms, state.source).dateLabel}, because the clocks of ${found.cause === "source" ? state.source : found.target} change on a different date.`);
+
+        }
+
+        for (const text of items) {
+
+            const li = document.createElement("li");
+
+            li.textContent = text;
+
+            dstList.append(li);
+
+        }
+
+        dstBox.hidden = false;
 
     }
 

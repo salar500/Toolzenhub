@@ -27,7 +27,8 @@ import {
     durationText,
     clampText,
     displacementText,
-    parseAmount
+    parseAmount,
+    isoWeekOf
 } from "./date-arithmetic.js";
 
 import {
@@ -55,7 +56,7 @@ import {
 } from "../../ui/escape.js";
 
 
-/* There is no related calculator, and no article about dates yet. */
+/* The Time Tools related-tools pilot shows its curated tools; there is no article about dates yet. */
 export const showRelatedCalculators = true;
 export const showRelatedArticles = false;
 
@@ -65,6 +66,9 @@ const TITLE =
 
 const DIFFERENCE =
     getToolById("date-difference");
+
+const BUSINESS_DAYS =
+    getToolById("business-days");
 
 const IDS = {
     start: "dcalc-start",
@@ -110,6 +114,26 @@ function durationOf(input) {
         weeks: parseAmount(input.weeks).value ?? 0,
         days: parseAmount(input.days).value ?? 0
     };
+
+}
+
+/*
+ * The ISO 8601 week of the resulting date (weeks start on Monday; week 1 is the week with the year's
+ * first Thursday), so the week-year can differ from the calendar year around 1 January. Worked out
+ * by date-arithmetic.js and checked against Python's isocalendar().
+ */
+function isoWeekPanel(date) {
+
+    const iso = isoWeekOf(date);
+
+    const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    const text = `ISO week ${iso.week} of ${iso.weekYear}, ${weekdays[iso.weekday - 1]} (day ${iso.weekday} of the week). It is day ${iso.dayOfYear} of the calendar year ${date.year}, and ISO year ${iso.weekYear} has ${iso.weeksInWeekYear} weeks.`;
+
+    return `<div class="dcalc-iso" role="group" aria-label="ISO week of the resulting date">
+                    <strong>ISO week</strong>
+                    <span>${escapeHTML(text)}</span>
+                </div>`;
 
 }
 
@@ -159,6 +183,8 @@ function renderResults(result, input) {
                 <div class="calculator-results__summary">
                     <p>${escapeHTML(`${duration} ${verb === "added" ? "added to" : "subtracted from"} ${dateText(result.start)} (${result.startWeekday}) is ${dateText(result.result)} (${result.resultWeekday}).`)}</p>
                 </div>
+
+                ${isoWeekPanel(result.result)}
 
                 ${result.clamp ? `<p class="dcalc-note" role="note">${escapeHTML(clampText(result.clamp))}</p>` : ""}
 
@@ -529,6 +555,27 @@ export function markup() {
             </section>
 
 
+            <!-- ISO WEEKS -->
+
+            <section class="calculator-info">
+
+                <h2>
+                    ISO Week Numbers
+                </h2>
+
+                <p>
+                    Under the result, the calculator also gives the ISO 8601 week
+                    of the resulting date. ISO weeks start on Monday, and week 1
+                    is the week that contains the year's first Thursday, so the
+                    first days of January can belong to the last week of the year
+                    before, and the last days of December to week 1 of the next.
+                    A year has 52 or 53 ISO weeks. Other week-numbering systems,
+                    such as those that start the week on Sunday, can differ.
+                </p>
+
+            </section>
+
+
             <!-- FAQ -->
 
             <section class="calculator-info">
@@ -575,7 +622,9 @@ export function markup() {
                     </summary>
                     <p>
                         No. It counts every calendar day. Weekends, business
-                        days and holidays are not part of this calculator.
+                        days and holidays are not part of this calculator; for
+                        those, use the
+                        <a href="${BUSINESS_DAYS.href}">${escapeHTML(BUSINESS_DAYS.title)}</a>.
                     </p>
                 </details>
 

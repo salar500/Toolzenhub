@@ -53,11 +53,19 @@ import {
     escapeHTML
 } from "../../ui/escape.js";
 
+import {
+    wireTodayButtons,
+    todayButton
+} from "../time-ui/time-ui.js";
+
 
 /* There is nothing related to show yet: no other Time Tools tool, and no calculator is related to dates. */
 export const showRelatedCalculators = false;
 export const showRelatedArticles = false;
 
+
+const BUSINESS_DAYS =
+    getToolById("business-days");
 
 const TITLE =
     getToolById("date-difference").title;
@@ -206,7 +214,8 @@ function dateField({ id, label, hint }) {
                                     min="0001-01-01"
                                     max="9999-12-31"
                                     aria-describedby="${escapeHTML(id)}-hint"
-                                >`
+                                >
+                                ${todayButton(id)}`
     });
 
 }
@@ -339,7 +348,9 @@ export function markup() {
 
                 <ol>
                     <li>
-                        Choose the start date and the end date.
+                        Choose the start date and the end date. "Use today" fills
+                        a field with today's date from your device, only when
+                        you press it.
                     </li>
                     <li>
                         Read the total number of days, then the same gap as
@@ -523,7 +534,10 @@ export function markup() {
                     <p>
                         No. It counts every calendar day. Business days and
                         holidays depend on a country and a calendar, which this
-                        calculator does not use.
+                        calculator does not use. The
+                        <a href="${BUSINESS_DAYS.href}">${escapeHTML(BUSINESS_DAYS.title)}</a>
+                        counts them, with the weekend you choose and the
+                        holidays you type.
                     </p>
                 </details>
             </section>
@@ -693,6 +707,9 @@ export function init() {
             event.preventDefault();
         }
     );
+
+    /* a date is filled with today only when the button is pressed */
+    wireTodayButtons(form);
 
     resetButton?.addEventListener(
         "click",

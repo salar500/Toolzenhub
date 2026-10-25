@@ -1190,8 +1190,6 @@ const catalog = [
         aliases: [
             "pomodoro timer",
             "pomodoro technique timer",
-            "focus timer",
-            "study timer",
             "work and break timer"
         ],
         capabilities: {

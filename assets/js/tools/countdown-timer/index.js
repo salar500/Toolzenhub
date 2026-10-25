@@ -49,6 +49,12 @@ import {
     escapeHTML
 } from "../../ui/escape.js";
 
+import {
+    modeSwitchMarkup,
+    dateModeMarkup,
+    initDateMode
+} from "./date-mode.js";
+
 
 /* There is no related calculator and no article about timers. */
 export const showRelatedCalculators = false;
@@ -171,6 +177,7 @@ export function markup() {
             <!-- THE TIMER -->
 
             <section class="calculator-section">
+${modeSwitchMarkup()}
 
                 <div
                     id="ct-panel"
@@ -302,6 +309,7 @@ export function markup() {
                     </form>
 
                 </div>
+${dateModeMarkup()}
 
             </section>
 
@@ -358,6 +366,37 @@ export function markup() {
                     time it updates it shows the time between now and then.
                     Pausing keeps the time left, and resuming sets a new end
                     from it, so repeated pauses do not add or lose time.
+                </p>
+
+            </section>
+
+
+            <!-- COUNTING TO A DATE -->
+
+            <section class="calculator-info">
+
+                <h2>
+                    Counting Down to a Date
+                </h2>
+
+                <p>
+                    Choose "Count down to a date" to count to a moment on the
+                    calendar, such as a holiday or a launch: a date, a time on
+                    the clock and a time zone (this device's zone if you leave it
+                    blank). The time left is the exact time that will pass, with
+                    a day taken as 24 hours, so if the clocks change before then,
+                    a calendar day and a 24-hour day differ by an hour and the
+                    count includes that. A time that never happens, because the
+                    clocks skip it, is refused, and a time that happens twice is
+                    yours to choose between.
+                </p>
+
+                <p>
+                    The countdown is read from your device's clock, so it is
+                    correct when you return to a background tab, and wrong if
+                    the device's clock is wrong. Copy link puts the date, time,
+                    zone and event name in a link that restores the countdown;
+                    nothing is stored or sent.
                 </p>
 
             </section>
@@ -976,6 +1015,9 @@ export function init() {
     window.addEventListener("pageshow", update);
 
     paint();
+
+    /* the "count down to a date" mode (its own panel, form and display) */
+    initDateMode();
 
     /* the page's script has run and the buttons work (tests wait for this) */
     panel.dataset.ready = "true";

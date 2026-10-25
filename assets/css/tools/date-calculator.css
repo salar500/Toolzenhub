@@ -248,3 +248,31 @@
     border: 0;
 
 }
+
+
+/* the ISO week of the resulting date */
+
+.dcalc-iso {
+
+    display: grid;
+    gap: 4px;
+
+    margin: 14px 0 0;
+    padding: 12px 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 10px;
+
+    background: #f9fafb;
+    color: #344054;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+}
+
+.dcalc-iso strong {
+
+    color: var(--color-ink);
+
+}
