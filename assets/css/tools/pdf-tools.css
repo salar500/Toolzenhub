@@ -1,0 +1,719 @@
+/* =========================================================
+   ToolZen Hub
+   PDF Tools (Merge PDF, Split PDF, Extract, Reorder and Rotate PDF Pages)
+
+   Only what the shared tool styles do not already provide: the file
+   chooser, the file list, the page settings, the plan and the result.
+   Buttons, focus and headings come from the shared layer
+   (.calculator-form__button and its --secondary variant). Loaded after
+   calculator-responsive.css. Written for the three PDF tools together;
+   the classes carry the pt- prefix.
+
+   One column on a phone; from 640px the file actions sit beside the
+   name. Nothing animates. Every button is at least 44px tall.
+========================================================= */
+
+.calculator-page [hidden] {
+
+    display: none !important;
+
+}
+
+.pt-sr {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+.pt-workspace {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+
+}
+
+.pt-editable {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+
+}
+
+.pt-card {
+
+    min-width: 0;
+    padding: 16px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: #ffffff;
+
+}
+
+.pt-card__title {
+
+    margin: 0 0 12px;
+    padding: 0;
+
+    color: var(--color-ink);
+
+    font-size: 19px;
+    font-weight: 700;
+
+}
+
+.pt-card__title:focus {
+
+    outline: none;
+
+}
+
+.pt-card__title:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 4px;
+
+}
+
+/* the file chooser */
+
+.pt-drop {
+
+    padding: 18px 16px;
+
+    border: 2px dashed #d0d5dd;
+    border-radius: 12px;
+
+    background: #f9fafb;
+
+}
+
+.pt-drop__label {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    font-weight: 700;
+
+}
+
+.pt-file {
+
+    display: block;
+
+    width: 100%;
+    min-height: 48px;
+    padding: 10px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 16px;
+
+}
+
+.pt-file:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.pt-hint {
+
+    margin: 8px 0 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.55;
+
+}
+
+.pt-error {
+
+    margin: 12px 0 0;
+    padding: 12px 16px;
+
+    border-left: 6px solid #b42318;
+    border-radius: 10px;
+
+    background: #fef3f2;
+
+    color: #912018;
+
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.55;
+
+}
+
+.pt-error p {
+
+    margin: 0;
+
+}
+
+.pt-error p + p {
+
+    margin-top: 6px;
+
+}
+
+/* the list */
+
+.pt-summary {
+
+    margin: -4px 0 12px;
+
+    color: #475467;
+
+    font-size: 14px;
+
+}
+
+.pt-empty {
+
+    margin: 0;
+    padding: 14px 16px;
+
+    border-radius: 10px;
+
+    background: #f9fafb;
+
+    color: #475467;
+
+    font-size: 15px;
+    line-height: 1.55;
+
+}
+
+.pt-list {
+
+    display: grid;
+    gap: 10px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+}
+
+.pt-item {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px 12px;
+    align-items: center;
+
+    padding: 10px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 12px;
+
+    background: #ffffff;
+
+}
+
+.pt-item__text {
+
+    min-width: 0;
+
+}
+
+.pt-item__name {
+
+    display: block;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.35;
+
+    overflow-wrap: anywhere;
+
+}
+
+.pt-item__meta {
+
+    display: block;
+
+    color: #475467;
+
+    font-size: 14px;
+
+}
+
+.pt-item__actions {
+
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+
+}
+
+.pt-mini {
+
+    min-width: 0;
+    height: auto;
+    min-height: 44px;
+    padding: 8px 6px;
+
+    font-size: 14px;
+    line-height: 1.25;
+
+}
+
+.pt-mini[aria-disabled="true"] {
+
+    background: var(--color-control-disabled-bg);
+
+    color: var(--color-control-disabled-text);
+
+    cursor: not-allowed;
+
+}
+
+/* page settings */
+
+.pt-fields {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+
+}
+
+.pt-field {
+
+    min-width: 0;
+
+}
+
+.pt-field label {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 700;
+
+}
+
+.pt-select {
+
+    display: block;
+
+    width: 100%;
+    min-height: 48px;
+    padding: 8px 12px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 16px;
+
+}
+
+.pt-select:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.pt-select:disabled {
+
+    background: var(--color-control-disabled-bg);
+
+    color: var(--color-control-disabled-text);
+
+}
+
+.pt-note {
+
+    margin: 6px 0 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+}
+
+.pt-note:empty {
+
+    display: none;
+
+}
+
+/* actions, progress, result */
+
+.pt-actions {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+
+}
+
+.pt-button {
+
+    min-width: 0;
+    min-height: 48px;
+
+    font-size: 16px;
+
+}
+
+#pt-create {
+
+    grid-column: 1 / -1;
+
+}
+
+.pt-button:disabled {
+
+    background: var(--color-control-disabled-bg);
+
+    color: var(--color-control-disabled-text);
+
+    cursor: not-allowed;
+
+}
+
+.pt-status {
+
+    margin: 12px 0 0;
+    padding: 12px 16px;
+
+    border-left: 6px solid #b54708;
+    border-radius: 10px;
+
+    background: #fffaeb;
+
+    color: #7a2e0e;
+
+    font-size: 16px;
+    font-weight: 700;
+
+}
+
+.pt-result {
+
+    border-color: #abefc6;
+
+    background: #f6fef9;
+
+}
+
+.pt-result__summary {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    line-height: 1.55;
+
+}
+
+.pt-download {
+
+    display: block;
+
+    margin-top: 16px;
+
+    /* the shared button is a fixed height: keep it growing instead of spilling */
+    height: auto;
+    min-height: 48px;
+    padding: 12px 16px;
+
+    font-size: 16px;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+
+}
+
+/* .calculator-page a (shared) sets a link colour with higher specificity than a single class: restate the white text for every state */
+.calculator-page .pt-download,
+.calculator-page .pt-download:visited,
+.calculator-page .pt-download:hover,
+.calculator-page .pt-download:focus {
+
+    color: #ffffff;
+
+}
+
+.pt-notes {
+
+    margin: 10px 0 0;
+
+    color: #475467;
+
+    font-size: 14px;
+    line-height: 1.55;
+
+}
+
+
+/* text boxes, choices, the plan, the parts */
+
+.pt-input {
+
+    display: block;
+
+    width: 100%;
+    min-height: 48px;
+    padding: 8px 12px;
+
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 16px;
+
+}
+
+.pt-input:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+.pt-fieldset {
+
+    min-width: 0;
+    margin: 0 0 14px;
+    padding: 0;
+
+    border: 0;
+
+}
+
+.pt-fieldset legend {
+
+    margin: 0 0 6px;
+    padding: 0;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 700;
+
+}
+
+.pt-choice {
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-height: 44px;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+
+}
+
+.pt-choice input {
+
+    flex: none;
+
+    width: 22px;
+    height: 22px;
+
+    accent-color: var(--color-action-green);
+
+}
+
+.pt-field + .pt-field,
+.pt-fields + .pt-field,
+.pt-field + .pt-fields {
+
+    margin-top: 14px;
+
+}
+
+.pt-plan {
+
+    margin: 10px 0 0;
+    padding: 0 0 0 24px;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    line-height: 1.7;
+
+}
+
+.pt-facts {
+
+    margin-top: 14px;
+
+    color: #475467;
+
+    font-size: 14px;
+
+}
+
+.pt-facts summary {
+
+    min-height: 44px;
+
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+}
+
+.pt-facts__list {
+
+    margin: 0;
+    padding: 0 0 0 20px;
+
+    line-height: 1.7;
+
+}
+
+.pt-parts {
+
+    display: grid;
+    gap: 10px;
+
+    margin: 12px 0 0;
+    padding: 0;
+
+    list-style: none;
+
+}
+
+.pt-part {
+
+    display: grid;
+    gap: 8px;
+
+    padding: 10px;
+
+    border: 1px solid #abefc6;
+    border-radius: 12px;
+
+    background: #ffffff;
+
+}
+
+.pt-part__text {
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 700;
+
+    overflow-wrap: anywhere;
+
+}
+
+.pt-part .pt-download {
+
+    margin-top: 0;
+
+}
+
+@media (min-width: 640px) {
+
+    .pt-item {
+
+        grid-template-columns: minmax(0, 1fr) auto;
+
+    }
+
+    .pt-item__actions {
+
+        grid-column: auto;
+        grid-template-columns: repeat(3, auto);
+
+    }
+
+    .pt-mini {
+
+        padding: 8px 12px;
+
+    }
+
+    .pt-fields {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    }
+
+    .pt-actions {
+
+        grid-template-columns: 2fr 1fr 1fr;
+
+    }
+
+    #pt-create {
+
+        grid-column: auto;
+
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .pt-workspace * {
+
+        transition: none !important;
+        animation: none !important;
+
+    }
+
+}

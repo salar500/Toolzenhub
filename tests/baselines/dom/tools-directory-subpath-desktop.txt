@@ -180,3 +180,23 @@ section.categories-page.directory-page
             h3.directory-group__title
               a [href="{ROOT}tools/photos-to-pdf/"] "Photos to PDF"
             p.directory-group__text "Put several photos into one PDF, in the order you choose, with a page size and margin you …"
+      section.directory-section [aria-labelledby="directory-pdf-tools-heading"]
+        div.directory-section__header
+          span.directory-section__label "Section"
+          h2#directory-pdf-tools-heading.directory-section__title
+            a [href="{ROOT}pdf-tools.html"] "PDF Tools"
+          p.directory-section__text "Private browser-based tools for joining, splitting and rearranging PDF files."
+            span.directory-section__count "3 tools"
+        div.directory-groups
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/merge-pdf/"] "Merge PDF"
+            p.directory-group__text "Join several PDFs into one PDF, in the order you choose. It runs in your browser: your PDF…"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/split-pdf/"] "Split PDF"
+            p.directory-group__text "Cut one PDF into smaller PDFs, every few pages or at page ranges you choose. It runs in yo…"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/pdf-pages/"] "Extract, Reorder and Rotate PDF Pages"
+            p.directory-group__text "Make a new PDF from the pages you choose, in the order you choose, and turn sideways pages…"

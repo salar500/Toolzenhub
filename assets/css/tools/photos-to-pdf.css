@@ -498,10 +498,11 @@
 
 }
 
-.pp-download,
-.pp-download:visited,
-.pp-download:hover,
-.pp-download:focus {
+/* .calculator-page a (shared) sets a link colour with higher specificity than a single class: restate the white text for every state */
+.calculator-page .pp-download,
+.calculator-page .pp-download:visited,
+.calculator-page .pp-download:hover,
+.calculator-page .pp-download:focus {
 
     color: #ffffff;
 

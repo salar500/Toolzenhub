@@ -432,6 +432,20 @@
       "state": "active"
     },
     {
+      "id": "merge-pdf",
+      "module": "assets/js/tools/merge-pdf/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
+      "id": "pdf-pages",
+      "module": "assets/js/tools/pdf-pages/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "percentage",
       "module": "assets/js/calculators/percentage/index.js",
       "moduleChanges": [],
@@ -478,6 +492,13 @@
       "module": "assets/js/calculators/sip/index.js",
       "moduleChanges": [],
       "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "split-pdf",
+      "module": "assets/js/tools/split-pdf/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
       "state": "active"
     },
     {

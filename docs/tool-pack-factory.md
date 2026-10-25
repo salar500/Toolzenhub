@@ -273,11 +273,11 @@ Recorded 2026-10-11 from the user's master product strategy. It is a **planning 
 | Software | 6 | JSON Schema & JSONPath Lab | High (6th) | Developer Tools | JSON Formatter & Validator is published (Tool Pack 15); extend, do not duplicate |
 | Software | 7 | Spreadsheet & CSV Reconciliation | Secondary | Undecided | Text Diff / Compare is published (Tool Pack 18) for text, not keyed records |
 | Software | 8 | Regex Tester with Guided Debugging | Secondary | Developer Tools | Regex Tester is listed above as considered and not on Roadmap R1; that exclusion stands, and this listing does not override it |
-| Documents & Files | 1 | Merge PDF | First group (1st) | Undecided | None |
-| Documents & Files | 2 | Split PDF | First group (2nd) | Undecided | None |
+| Documents & Files | 1 | Merge PDF | First group (1st) | PDF Tools (section approved 2026-10-26; one-time batch, Tool Pack 33 `docs/tool-packs/33-pdf-tools-batch.md`) | Built locally as `merge-pdf` (Tool Pack 33; not pushed, not deployed) |
+| Documents & Files | 2 | Split PDF | First group (2nd) | PDF Tools (section approved 2026-10-26; one-time batch, Tool Pack 33 `docs/tool-packs/33-pdf-tools-batch.md`) | Built locally as `split-pdf` (Tool Pack 33; not pushed, not deployed) |
 | Documents & Files | 3 | Images to PDF | First group (3rd) | Image Tools | Same job as Roadmap R1 item 7, Photos to PDF; one candidate, one route, the R1 audit and real-phone spike apply |
 | Documents & Files | 4 | Batch File Renamer | First group (4th) | Undecided | None; limited by browser file access |
-| Documents & Files | 5-7 | Extract, Reorder and Rotate PDF Pages | Secondary | Undecided | None; probably modes of one PDF tool (rulebook 1.6) |
+| Documents & Files | 5-7 | Extract, Reorder and Rotate PDF Pages | Secondary | PDF Tools (section approved 2026-10-26; one-time batch, Tool Pack 33 `docs/tool-packs/33-pdf-tools-batch.md`) | Built locally as one tool, `pdf-pages` (Tool Pack 33; not pushed, not deployed) |
 | Documents & Files | 8 | PDF to Images | Secondary | Undecided | None |
 | Documents & Files | 9 | Document Format Converter | Secondary | Undecided | None; no promise of perfect layout without proven support |
 | Documents & Files | 10 | Document Comparison Tool | Secondary | Undecided | Text Diff / Compare covers plain text; only a PDF or document comparison could be a different job |

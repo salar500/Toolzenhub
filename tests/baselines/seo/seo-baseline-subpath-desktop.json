@@ -4011,6 +4011,55 @@
       "visibleTextChars": 818
     }
   },
+  "/pdf-tools.html": {
+    "runtime": {
+      "title": "PDF Tools | ToolZen Hub",
+      "description": "PDF Tools from ToolZen Hub: merge PDFs, split a PDF into parts, and extract, reorder or rotate pages. They run in your browser, so your files are not uploaded.",
+      "canonical": "https://toolzenhub.in/pdf-tools.html",
+      "robots": null,
+      "openGraph": {
+        "og:description": "PDF Tools from ToolZen Hub: merge PDFs, split a PDF into parts, and extract, reorder or rotate pages. They run in your browser, so your files are not uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "PDF Tools | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/pdf-tools.html"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "PDF Tools from ToolZen Hub: merge PDFs, split a PDF into parts, and extract, reorder or rotate pages. They run in your browser, so your files are not uploaded.",
+        "twitter:title": "PDF Tools | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "PDF Tools"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#0b9f58",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "PDF Tools | ToolZen Hub",
+      "description": "PDF Tools from ToolZen Hub: merge PDFs, split a PDF into parts, and extract, reorder or rotate pages. They run in your browser, so your files are not uploaded.",
+      "canonical": "https://toolzenhub.in/pdf-tools.html",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 966
+    }
+  },
   "/privacy.html": {
     "runtime": {
       "title": "Privacy Policy | ToolZen Hub",
@@ -4235,7 +4284,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4363
+      "visibleTextChars": 4906
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -4679,6 +4728,104 @@
       "visibleTextChars": 5320
     }
   },
+  "/tools/merge-pdf/": {
+    "runtime": {
+      "title": "Merge PDF: Combine PDF Files into One | ToolZen Hub",
+      "description": "Free merge PDF tool. Join several PDF files into one PDF in the order you choose. It runs in your browser: your PDFs are not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/merge-pdf/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free merge PDF tool. Join several PDF files into one PDF in the order you choose. It runs in your browser: your PDFs are not uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Merge PDF: Combine PDF Files into One | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/merge-pdf/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free merge PDF tool. Join several PDF files into one PDF in the order you choose. It runs in your browser: your PDFs are not uploaded.",
+        "twitter:title": "Merge PDF: Combine PDF Files into One | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Merge PDF"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Merge PDF: Combine PDF Files into One | ToolZen Hub",
+      "description": "Free merge PDF tool. Join several PDF files into one PDF in the order you choose. It runs in your browser: your PDFs are not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/merge-pdf/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3531
+    }
+  },
+  "/tools/pdf-pages/": {
+    "runtime": {
+      "title": "Extract, Reorder and Rotate PDF Pages | ToolZen Hub",
+      "description": "Free tool to extract, reorder, delete and rotate PDF pages. Choose the pages and their order, turn sideways pages, and download a new PDF. It runs in your browser: your PDF is not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/pdf-pages/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free tool to extract, reorder, delete and rotate PDF pages. Choose the pages and their order, turn sideways pages, and download a new PDF. It runs in your browser: your PDF is not uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Extract, Reorder and Rotate PDF Pages | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/pdf-pages/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free tool to extract, reorder, delete and rotate PDF pages. Choose the pages and their order, turn sideways pages, and download a new PDF. It runs in your browser: your PDF is not uploaded.",
+        "twitter:title": "Extract, Reorder and Rotate PDF Pages | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Extract, Reorder and Rotate PDF Pages"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Extract, Reorder and Rotate PDF Pages | ToolZen Hub",
+      "description": "Free tool to extract, reorder, delete and rotate PDF pages. Choose the pages and their order, turn sideways pages, and download a new PDF. It runs in your browser: your PDF is not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/pdf-pages/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 4069
+    }
+  },
   "/tools/photos-to-pdf/": {
     "runtime": {
       "title": "Photos to PDF: Combine Pictures into One PDF | ToolZen Hub",
@@ -4726,6 +4873,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 3617
+    }
+  },
+  "/tools/split-pdf/": {
+    "runtime": {
+      "title": "Split PDF: Cut a PDF into Parts | ToolZen Hub",
+      "description": "Free split PDF tool. Cut one PDF into smaller PDFs, every few pages or at page ranges you choose. It runs in your browser: your PDF is not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/split-pdf/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free split PDF tool. Cut one PDF into smaller PDFs, every few pages or at page ranges you choose. It runs in your browser: your PDF is not uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Split PDF: Cut a PDF into Parts | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/split-pdf/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free split PDF tool. Cut one PDF into smaller PDFs, every few pages or at page ranges you choose. It runs in your browser: your PDF is not uploaded.",
+        "twitter:title": "Split PDF: Cut a PDF into Parts | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Split PDF"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Split PDF: Cut a PDF into Parts | ToolZen Hub",
+      "description": "Free split PDF tool. Cut one PDF into smaller PDFs, every few pages or at page ranges you choose. It runs in your browser: your PDF is not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/split-pdf/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3511
     }
   },
   "/tools/stopwatch/": {

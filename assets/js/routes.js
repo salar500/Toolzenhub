@@ -112,6 +112,16 @@ export const ROUTES = {
 
 
     /* =====================================================
+       PDF TOOLS
+
+       The section's own page (it has no categories).
+    ===================================================== */
+
+    pdfTools:
+        `${SITE_ROOT}pdf-tools.html`,
+
+
+    /* =====================================================
        CATEGORIES
 
        The Calculators section's own page: its categories.

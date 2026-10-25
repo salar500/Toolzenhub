@@ -1,6 +1,6 @@
 # Tool Pack 33: PDF Tools batch (Merge PDF; Split PDF; Extract, Reorder and Rotate PDF Pages)
 
-Status: **REQUIREMENTS AND SPIKE COMPLETE (2026-10-26). IMPLEMENTATION BLOCKED AT ONE OWNER DECISION: which section these tools belong to (section 3). No application code, catalog entry or route exists.** Documentation only.
+Status: **P0 IMPLEMENTED LOCALLY (2026-10-26) FOR ALL THREE TOOLS; PREVIEW AND PRODUCTION RELEASE NOT APPROVED.** The owner approved the new "PDF Tools" section (section 3) and the bounded batch; nothing is pushed or deployed, no real phone, Safari or Firefox check has been run, and no phone capacity is claimed. Implementation notes and the evidence ledger are in sections 11 and 12.
 Tier: **MEDIUM** (interactive file tools, no money, tax or legal content; they produce binary files, so structure is verified by an independent reader).
 Evidence labels: **VERIFIED** (observed this session), **PUBLIC** (documentation, cited, not independently verified), **HYPOTHESIS**, **UNKNOWN**.
 
@@ -38,6 +38,8 @@ Options (the recommendation is first):
 3. **Keep PDF tools out of the catalog** until the group is larger.
 
 No other URL or existing tool changes under any option. If option 1 is chosen the batch also needs the section's description, icon and landing wiring (small, catalog-driven).
+
+**Decision (owner, 2026-10-26): option 1, a new section "PDF Tools".** Recorded in `docs/product-decision-rules.md` section 4, item 9. Section id `pdf-tools`, landing `/pdf-tools.html`, routes `/tools/<id>/`, flat. Photos to PDF stays in Image Tools. Rulebook 4.2 forbids a tool from appearing in another section's related lists, so the "cross-links" mentioned above are not catalog relations: the PDF tools relate to each other (curated, mutual) and name each other in their text; none links to or from Photos to PDF. The demand evidence for the section remains a HYPOTHESIS (open item 3).
 
 ## 4. Shared requirements (all three tools)
 
@@ -124,3 +126,40 @@ Environment: Windows 10, Node 20.17.0, pdf-lib 1.17.1 (the vendored build), read
 2. The Android acceptance of each tool is a separate release gate and is **not run**.
 3. Demand evidence for a "PDF Tools" section is a HYPOTHESIS (section 3, option 1).
 4. Copy for the "what is not kept" notice (bookmarks removed; forms, signatures and tags not preserved; link annotations to a page not verified).
+
+## 11. Implementation notes (P0, 2026-10-26, local only)
+
+Scope built: exactly the P0 list in section 5 for each tool; no thumbnails, no ZIP, no PDF.js, no P1 feature.
+
+**Files.** `assets/js/tools/pdf-shared/` (`pdf-rules.js` pure rules and wording, `pdf-ops.js` merge/split/page building with the library injected, `pdf-page.js` file reading, messenger, URL store and shared markup), `assets/js/tools/merge-pdf/`, `split-pdf/`, `pdf-pages/` (one `index.js` each), `assets/css/tools/pdf-tools.css` (shared, `pt-` classes), the section in `assets/js/data/categories.js` and `routes.js`, three catalog entries, `src/_data/toolStyles.json`, the Growth ledger records, the inventory generator line, fixtures and tests below. The vendored pdf-lib is unchanged and shared with Photos to PDF.
+
+**Decisions made while building (consequential ones only).**
+1. **Ids and routes:** `merge-pdf`, `split-pdf`, `pdf-pages` (the title of the third is the authorised name, "Extract, Reorder and Rotate PDF Pages"). Curated mutual relations; `autoRelated: false`. Tool pages do not render related lists (the convention for every non-calculator tool; each module exports `showRelatedCalculators = false`), so the relation is carried by the catalog data and by links in the tools' own text.
+2. **Order of checks:** header and `%%EOF` from the first and last kilobyte (so a truncated file is refused without reading it), then the library opens the file once (to count pages) and the bytes are dropped; the build re-reads each file. The page-count read happens inside the same `try` as the load: the library opens a file that has a PDF header and garbage after it without complaint and fails on the first page access (VERIFIED, defect 1 below).
+3. **Protected files:** every protected file is refused, including owner-only restrictions with an empty user password. The refusal text is one constant.
+4. **Merge:** serial add, per-file page count shown; Create needs two files; 20 files, 50 MB each, 100 MB and 1,000 pages in total.
+5. **Split:** "Every few pages" (default 1) or "At page ranges"; the parts that will be made are listed before Create; each part is its own download (no ZIP); at most 20 parts.
+6. **Pages tool:** the page list is the text field plus a plan preview (first 100 entries) and a collapsed list of the PDF's own page sizes (first 200). "Turn" is added to the page's own turn, always 0, 90, 180 or 270. A page chosen twice becomes two independent pages (one `copyPages` call; VERIFIED).
+7. **Announcements:** a message about a removed result is kept and spoken together with the next announcement, so a "Move up" announcement cannot hide "the PDF was removed" (defect 2).
+8. **Messages that name the limits:** "does not remove protection", "bookmarks are not kept", "forms, signatures and tagged structure are not preserved". Nothing claims offline use, privacy beyond "not uploaded by this tool", or compatibility with every PDF (a unit test scans the code for such phrases).
+
+## 12. Evidence ledger (this phase)
+
+Base `be25f1d` (plus the docs commit `80e1dbe`); environment: Windows 10, Node 20.17.0, Chrome driven by Playwright 1.63, one worker, zero retries; synthetic fixtures made with the vendored pdf-lib and pypdf 6.21.2 (a throwaway environment, not in the repository).
+
+| Check | Scope | Result |
+| --- | --- | --- |
+| `tests/unit/pdf-tools.test.mjs` | 32 tests: recognising a file, limits, the range grammar and every refusal message, Every-N and range plans, page plans and turn arithmetic, `openPdf` on good, protected (3 kinds) and garbage input, the truncated-file risk, merge (order, sizes, turns, bookmarks, 2 x 300 pages, failure index, one-at-a-time reads, cancel, page limit), split (parts, overlap, sum equals source, annotation kept, bookmarks not), page building (order, repeats, turns, deletion), a second reader (pypdf) on three outputs, no network or storage in the code, no unsupported claim in the text | 32 pass with pypdf installed; 31 pass and 1 skips (the pypdf comparison) without it |
+| `tests/browser/pdf-tools.spec.js` | 40 tests per project: for each tool, page, breadcrumb and labels, refusals by name, no external request, three phone widths, white text on the download button; Merge flow, reorder/remove, keyboard, stale result and address cleanup, cancel with a late result, a failure mid-job, the 20-file limit, 2 x 300 pages; Split plan and validation, two downloads read back, address cleanup, the 20-part limit, cancel; Pages plan, order and turns, deletion, Reset, cancel; the section page, Image Tools and All Tools listings, search, the Home card, links between the tools | 40 pass in `subpath-desktop` and 40 pass in `subpath-mobile` (emulation) |
+| Whole unit suite (`node --test tests/unit/*.test.mjs`) | 2,957 tests, run once after the pins were updated | 2,952 pass, 4 skipped, 1 fail: `design-tokens` "colour tokens" on `calculators/gratuity.css` (`#667085`), a file this work does not touch (it was already failing) |
+| Browser: navigation, smoke, build, links, DOM, SEO | `subpath-desktop` | pass (213 tests); `navigation` on `subpath-mobile` pass (42); the `root-desktop` portable subset passes (246) |
+| Static checks | inventory, links, assets, SEO, both builds | pass (89 live pages) |
+| Baselines | DOM (home, All Tools), SEO, links, visual (home desktop and tablet, All Tools, the new `pdf-tools` page) | refreshed or added; the diffs contain only the new section and tools |
+
+**Defects found by these tests and fixed in this phase.**
+1. A PDF header followed by garbage raised a `TypeError` from the library only on the first page access, outside the guarded load: now inside the guard, so it becomes the plain "damaged" message (unit test).
+2. The object URL of a finished file was not revoked when the list or a setting changed while the result card was visible (a short-circuit in `clearResult`); and a list announcement replaced the "removed" announcement. Both fixed in the three tools (browser tests).
+3. The download button's text was green on green at rest, because the shared `.calculator-page a` colour outranked a single class. Fixed in `pdf-tools.css`; the same defect existed in `photos-to-pdf.css` (Photos to PDF, committed `be25f1d` and on the preview), where the same one-selector fix was made and a colour assertion added to its browser spec.
+
+**Not run (by design for this phase):** the full browser regression across every existing tool, Lighthouse, Safari/WebKit and Firefox, any physical phone, screen readers, large image-heavy PDFs, and visual baselines of the tool pages themselves (none exist for these pages).
+**Still unverified:** everything under "Not established" in section 7, including how a phone delivers several downloads, forms, internal links, tagged and signed PDFs, and every limit on a real device.

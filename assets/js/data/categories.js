@@ -106,6 +106,26 @@ export const sections = [
         icon: "🖼️",
         landing: "imageTools",
         pathPrefix: "tools"
+    },
+
+    /*
+     * PDF Tools (owner-approved 2026-10-26, Tool Pack 33): tools that take a
+     * PDF and give a PDF. Like the sections above it has no categories. Making
+     * a PDF from photos stays in Image Tools (Photos to PDF), whose input is
+     * photos; the two cross-link.
+     */
+    {
+        id: "pdf-tools",
+        title: "PDF Tools",
+        description:
+            "Private browser-based tools for joining, splitting and rearranging PDF files.",
+        seoDescription:
+            "PDF Tools from ToolZen Hub: merge PDFs, split a PDF into parts, and extract, reorder or rotate pages. They run in your browser, so your files are not uploaded.",
+        summary:
+            "Merge, split and rearrange PDF pages in your browser",
+        icon: "📄",
+        landing: "pdfTools",
+        pathPrefix: "tools"
     }
 
 ];

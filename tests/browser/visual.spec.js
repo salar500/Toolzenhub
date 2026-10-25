@@ -42,6 +42,7 @@ const PAGES = [
   ["stopwatch", "tools/stopwatch/", ".calculator-info details", false],
   ["developer-tools", "developer-tools.html", ".category-page-card, .directory-tools a", false],
   ["image-tools", "image-tools.html", ".category-page-card, .directory-tools a", false],
+  ["pdf-tools", "pdf-tools.html", ".category-page-card, .directory-tools a", false],
   ["json-formatter", "tools/json-formatter/", ".calculator-info details", false],
   ["articles", "articles.html", "#articles-list .article-card", false],
   ["article", "articles/loan-comparison/what-is-loan-prepayment/", ".article-related-card", true],

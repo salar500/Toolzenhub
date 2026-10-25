@@ -138,6 +138,7 @@ test.describe("Photos to PDF", () => {
     }
     expect(pdf.hasProducer || pdf.hasCreationDate || pdf.mentionsLibrary).toBe(false);
     await expect(page.locator("#pp-result-summary")).toContainText("3 pages");
+    await expect(page.locator("#pp-download")).toHaveCSS("color", "rgb(255, 255, 255)"); // white text on the green button at rest
   });
 
   test("PNG, WebP, a JPEG turned by EXIF and a CMYK JPEG are redrawn upright as JPEG; the rest stays unchanged", async ({ page, go }) => {

@@ -377,7 +377,7 @@
     "deadFragments": []
   },
   "(home)": {
-    "internal": 36,
+    "internal": 37,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -396,6 +396,12 @@
   },
   "math.html": {
     "internal": 25,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "pdf-tools.html": {
+    "internal": 27,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -425,7 +431,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 65,
+    "internal": 69,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -484,10 +490,28 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "tools/merge-pdf/": {
+    "internal": 25,
+    "external": [],
+    "placeholders": 5,
+    "deadFragments": []
+  },
+  "tools/pdf-pages/": {
+    "internal": 25,
+    "external": [],
+    "placeholders": 5,
+    "deadFragments": []
+  },
   "tools/photos-to-pdf/": {
     "internal": 23,
     "external": [],
     "placeholders": 5,
+    "deadFragments": []
+  },
+  "tools/split-pdf/": {
+    "internal": 26,
+    "external": [],
+    "placeholders": 4,
     "deadFragments": []
   },
   "tools/stopwatch/": {

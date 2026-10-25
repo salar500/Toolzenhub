@@ -49,6 +49,11 @@ main#app
             div.category-card__content
               h3 "Image Tools"
               p "Compress and resize images in your browser"
+          a.category-card [href="{ROOT}pdf-tools.html"]
+            div.category-card__icon.category-card__icon--pdf-tools "📄"
+            div.category-card__content
+              h3 "PDF Tools"
+              p "Merge, split and rearrange PDF pages in your browser"
   section#popular-calculators.section
     section.popular-section
       div.container

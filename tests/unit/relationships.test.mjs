@@ -122,9 +122,15 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.deepEqual(keys(rel.getRelatedArticlesForTool("percentage")), calcs.getCalculatorById("percentage").relatedArticles);
     assert.deepEqual(toolIds(rel.getRelatedTools("margin")), ["profit"]);
     assert.deepEqual(toolIds(rel.getRelatedTools("profit")), ["margin"]);
+    // PDF Tools (Tool Pack 33): three curated, mutual relations inside the section. Nothing crosses a section (rulebook 4.2), so Photos to PDF in Image Tools gains no PDF Tools link and none links back
+    assert.deepEqual(toolIds(rel.getRelatedTools("merge-pdf")), ["split-pdf", "pdf-pages"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("split-pdf")), ["pdf-pages", "merge-pdf"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("pdf-pages")), ["merge-pdf", "split-pdf"]);
+    for (const id of ["merge-pdf", "split-pdf", "pdf-pages"]) for (const other of ["photos-to-pdf", "image-compressor-resizer", "json-formatter", "emi"]) assert.equal(toolIds(rel.getRelatedTools(other)).includes(id), false, `${other} -> ${id}`);
+    assert.equal(toolIds(rel.getRelatedTools("photos-to-pdf")).some((id) => ["merge-pdf", "split-pdf", "pdf-pages"].includes(id)), false);
     assert.deepEqual(rel.getRelatedTools("nope"), []);
     // parity with the pre-M7 rule for every tool without a curated list (the Loan Prepayment page curates its own order; GST and Percentage curate cross-category lists)
-    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "income-tax", "swp", "credit-card-payoff", "gratuity", "salary-in-hand"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
+    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages", "income-tax", "swp", "credit-card-payoff", "gratuity", "salary-in-hand"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
   });
 
   test("tool -> related articles: the first six published loan articles, in catalog order, for EMI and Loan Comparison", () => {

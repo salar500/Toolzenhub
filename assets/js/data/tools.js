@@ -1496,6 +1496,116 @@ const catalog = [
             description:
                 "Free photos to PDF tool for JPEG, PNG and WebP. Put several photos into one PDF in the order you choose, with A4, Letter or photo-sized pages. It runs in your browser: your photos are not uploaded."
         }
+    },
+
+    {
+        id: "merge-pdf",
+        status: "published",
+        loader: () =>
+            import("../tools/merge-pdf/index.js"),
+        sectionId: "pdf-tools",
+        icon: "⊕",
+        title: "Merge PDF",
+        description:
+            "Join several PDFs into one PDF, in the order you choose. It runs in your browser: your PDFs are not uploaded.",
+        autoRelated: false,
+        relatedTools: ["split-pdf", "pdf-pages"],
+        aliases: [
+            "merge pdf",
+            "combine pdf",
+            "join pdf",
+            "pdf merger",
+            "merge pdf files",
+            "combine pdf files",
+            "join pdf files"
+        ],
+        capabilities: {
+            reset: true,
+            download: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Merge PDF: Combine PDF Files into One | ToolZen Hub",
+            description:
+                "Free merge PDF tool. Join several PDF files into one PDF in the order you choose. It runs in your browser: your PDFs are not uploaded."
+        }
+    },
+
+    {
+        id: "split-pdf",
+        status: "published",
+        loader: () =>
+            import("../tools/split-pdf/index.js"),
+        sectionId: "pdf-tools",
+        icon: "⑂",
+        title: "Split PDF",
+        description:
+            "Cut one PDF into smaller PDFs, every few pages or at page ranges you choose. It runs in your browser: your PDF is not uploaded.",
+        autoRelated: false,
+        relatedTools: ["pdf-pages", "merge-pdf"],
+        aliases: [
+            "split pdf",
+            "pdf splitter",
+            "cut pdf",
+            "divide pdf",
+            "split pdf into parts",
+            "split pdf pages"
+        ],
+        capabilities: {
+            reset: true,
+            download: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Split PDF: Cut a PDF into Parts | ToolZen Hub",
+            description:
+                "Free split PDF tool. Cut one PDF into smaller PDFs, every few pages or at page ranges you choose. It runs in your browser: your PDF is not uploaded."
+        }
+    },
+
+    {
+        id: "pdf-pages",
+        status: "published",
+        loader: () =>
+            import("../tools/pdf-pages/index.js"),
+        sectionId: "pdf-tools",
+        icon: "⇅",
+        title: "Extract, Reorder and Rotate PDF Pages",
+        description:
+            "Make a new PDF from the pages you choose, in the order you choose, and turn sideways pages. It runs in your browser: your PDF is not uploaded.",
+        autoRelated: false,
+        relatedTools: ["merge-pdf", "split-pdf"],
+        aliases: [
+            "extract pdf pages",
+            "reorder pdf pages",
+            "rotate pdf pages",
+            "rotate pdf",
+            "delete pdf pages",
+            "remove pdf pages",
+            "rearrange pdf pages",
+            "organize pdf pages",
+            "pdf page organizer"
+        ],
+        capabilities: {
+            reset: true,
+            download: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Extract, Reorder and Rotate PDF Pages | ToolZen Hub",
+            description:
+                "Free tool to extract, reorder, delete and rotate PDF pages. Choose the pages and their order, turn sideways pages, and download a new PDF. It runs in your browser: your PDF is not uploaded."
+        }
     }
 
 ];
