@@ -1,0 +1,20 @@
+# 14. Decisions and open questions
+
+Only material owner decisions. Each has a recommended default. None is applied: this phase changed no rulebook, roadmap or Tool Pack (the review's own rule), so nothing below is recorded as approved.
+
+| ID | Decision needed | Why it matters | Recommended default |
+|---|---|---|---|
+| D1 | **Record the Time Tools Batch 2 approval.** The owner's prompts call International Meeting Planner, Pomodoro Focus Timer and Shift Schedule Planner "approved", but no repository document says so and none is built or specified | Rulebook 15: approved durable decisions belong in the owning document; otherwise a later session cannot tell approval from proposal | Record all three in the factory as owner-approved planning candidates, then write specs one tool at a time, starting with the Meeting Planner. Do not build until a spec is approved |
+| D2 | **Time Zone Converter's curated relation to Unix Timestamp Converter crosses sections** (Time Tools to Developer Tools), against rulebook 4.2. It is not displayed today | Once related tools are displayed (N1) it would show a cross-section link | Remove the curated relation and keep the body-text mention; relate the converter to World Clock instead |
+| D3 | **Which family pilots related-tools display** (Phase B) | Rulebook 4.8 asks for one pilot before any wider change | Developer Tools (clean data); Time Tools second |
+| D4 | **A release gate for built-but-unapproved tools.** Gratuity and Salary are `published` in the catalog (preview and sitemap) while specs 29 and 30 say release is not approved | A full `dist/` build contains them; production uploads are manual, so only process stops an accidental release | Keep the manual upload gate, add a written "do not include" list to the release procedure, and keep the specs' approval status as the authority |
+| D5 | **Cross-section mentions.** Rulebook 4.9 (written during the PDF batch) says a tool may name a neighbour from another section in its own text but not in a related list. That sentence was not separately reviewed by the owner | It decides whether Photos to PDF may mention Merge PDF (and cron or JWT may mention a time converter) | Confirm: body-text mentions allowed, related lists never cross sections |
+| D6 | **Pomodoro versus Countdown Timer.** A mandatory gate ("only duplicates an existing tool without a real improvement") is unresolved | Prevents building a renamed copy | Require a written differentiation (focus and break cycles with automatic switching and a session summary), else make it a mode of Countdown |
+| D7 | **Which prioritization method is authoritative.** The 2026-10-25 requests propose 13 criteria; rulebook 12 prescribes 6 weighted dimensions plus gates | Two methods would produce two rankings | Keep rulebook 12; use extra criteria as notes |
+| D8 | **Small documentation drifts to correct in existing documents**: Tool Pack 23 and 26 status lines (say "not implemented", tools are published); `docs/design-follow-ups.md` (misses articles 36, 37, 38, 40 without hero images); `assets/js/vendor/pdf-lib/NOTICE.txt` ("Used by: photos-to-pdf only", now also the three PDF tools) | Stale statements mislead later sessions | Approve a one-commit docs fix |
+| D9 | **Record the Android results** for Photos to PDF and the PDF batch in specs 31 and 33. The owner reported PASS in a prompt; no checklist outcome is in the repository | Device acceptance (status F) cannot be claimed without a record | The owner supplies the phone, browser, date and per-check result; Claude records it |
+| D10 | **World Map.** The owner calls it deferred; no repository document mentions it | Cannot be inventoried or evaluated | Add one line to the factory's deferred list, or leave unrecorded |
+
+## Open questions (not decisions)
+
+Demand for every candidate is unmeasured; the first measurable step is a Search Console export of non-branded queries per tool. Production state of unreleased tools stays the owner's call. Whether to run the Safari and real-device portfolio checkpoint now is also the owner's.
