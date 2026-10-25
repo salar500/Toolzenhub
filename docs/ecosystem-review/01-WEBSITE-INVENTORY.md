@@ -78,10 +78,10 @@ The 11 coming-soon entries are catalog data only. They are not counted as implem
 | World Clock | yes | yes | yes | **no (404)** | yes (spec 28, focused tests) | not recorded | **no**: a production ZIP was built 2026-10-20 and not deployed (owner memory note, not a repository document) |
 | Gratuity Calculator | yes | yes | yes | **no (404)** | engine golden tests (spec 29) | not recorded | **no**: spec 29 is a DRAFT, release not approved |
 | Salary / CTC to In-Hand | yes | yes | yes | **no (404)** | spec 30 records S3 and S4 oracle work | not recorded | **no**: spec 30 says "DRAFT, RELEASE NOT APPROVED" |
-| Photos to PDF | yes | yes | yes | **no (404)** | unit and browser (this project's ledger) | owner stated Android PASS in a prompt; no checklist is recorded in the repository | **no** |
-| Merge PDF, Split PDF, Extract/Reorder/Rotate PDF Pages | yes | yes | yes (Pages run for `8ece03a` succeeded; this sweep also returned 200) | **no (404)** | unit 32 and browser 40 per project (spec 33 ledger) | owner stated Android PASS in a prompt; no checklist is recorded in the repository | **no** |
+| Photos to PDF | yes | yes | yes | **no (404)** | unit and browser (this project's ledger) | OWNER-REPORTED Android PASS (device, browser, date and per-check results not supplied; specs 31 and 33 not updated) | **no** |
+| Merge PDF, Split PDF, Extract/Reorder/Rotate PDF Pages | yes | yes | yes (Pages run for `8ece03a` succeeded; this sweep also returned 200) | **no (404)** | unit 32 and browser 40 per project (spec 33 ledger) | OWNER-REPORTED Android PASS (device, browser, date and per-check results not supplied; specs 31 and 33 not updated) | **no** |
 
-Caution that follows from this table: Gratuity and Salary are `published` in the catalog, so they are in the preview, the sitemap and any production `dist/` build, while their own specs say release is not approved. Production uploads are manual and file by file, so the gate is procedural, not technical (see 14, decision D4).
+Caution that follows from this table: Gratuity and Salary are `published` in the catalog, so they are in the preview, the sitemap and any production `dist/` build, while their own specs say release is not approved. Production uploads are manual and file by file, so the gate is procedural, not technical (see 14, P1 (D4)).
 
 ## Coming-soon catalog entries (not implemented)
 

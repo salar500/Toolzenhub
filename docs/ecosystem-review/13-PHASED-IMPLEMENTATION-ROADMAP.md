@@ -8,8 +8,8 @@ This is a proposal. It changes no rulebook, roadmap or Tool Pack, schedules noth
 |---|---|
 | Why | 21 non-calculator tool pages show no related tools; the relation data is uneven and contains one rule conflict |
 | User value | A visible next step after finishing a task; no dead ends in tool families |
-| Scope | (1) Resolve N2 (the Time Zone Converter relation) per the owner's decision. (2) Add reciprocal curated relations listed in 12.A. (3) Update the relationship tests. No display change yet |
-| Dependencies | Decision D2 in 14 |
+| Scope | (1) Keep the Time Zone Converter and its link unchanged (14, D2); the dormant cross-section catalog entry is handled by the display rule in Phase B. (2) Add reciprocal curated relations listed in 12.A. (3) Update the relationship tests. No display change yet |
+| Dependencies | none open (14, D2 resolved) |
 | Acceptance | Relationship unit tests pass with no cross-section relation; no URL, title or calculation changes; only catalog data and tests change |
 | Risk | Low |
 | Verification | `node --test` on the relationship, catalog, taxonomy and search tests; no browser suite needed |
@@ -20,7 +20,7 @@ This is a proposal. It changes no rulebook, roadmap or Tool Pack, schedules noth
 | Item | Detail |
 |---|---|
 | Why | Rulebook 4.8: small steps, pilot one family before any wider change |
-| Scope | Render the existing related-tools component on the pages of **one** family (proposal: Developer Tools, because their data is already clean; Time Tools are the rulebook's example and the second choice). Flip the two module flags for that family only. Mobile layout without a sidebar |
+| Scope | Render the existing related-tools component on the pages of **one** family (proposal per 14, D3: Developer Tools; Time Tools second), showing same-section relations only. Flip the two module flags for that family only. Mobile layout without a sidebar |
 | Acceptance | Related tools appear only from the same section; keyboard order and focus are sensible; no horizontal scroll at 320 to 430 px; baselines updated only for the intended DOM diff; existing tests for the family pass |
 | Risk | Low to medium (shared component, DOM baselines) |
 | Verification | The family's browser specs, `navigation`, DOM and visual baselines on desktop and mobile emulation, one worker, zero retries |
@@ -32,7 +32,7 @@ Candidates, in no fixed order, each its own approval: Image Compressor target si
 
 ## Phase D: missing tools, in cohesive approved batches
 
-Only after the owner records an approval. First candidate: **International Meeting Planner** (a distinct job, reuses the time-zone engine). Pomodoro Focus Timer proceeds only when the Countdown differentiation gate is resolved in writing; Shift Schedule Planner only when its use case is confirmed. A JSON Schema and JSONPath tool needs a library audit first. A batch is 1 to 3 tools; complex ones are alone. The PDF Tools section stays small until the first three tools have device evidence.
+The three Time Tools are owner-authorized (14, D1); each still needs a spec before code. Order of specs: **International Meeting Planner** first, but only with the multi-person model in 04 (the Time Zone Converter already has a meeting-overlap section); if the spec cannot show it, it becomes a converter enhancement. Pomodoro Focus Timer follows the D6 spec condition (cycles, long break, session summary; no lead on Countdown queries). Shift Schedule Planner follows once its use case is confirmed in the spec. A JSON Schema and JSONPath tool needs a library audit first. A batch is 1 to 3 tools; complex ones are alone. The PDF Tools section stays small until the first three tools have device evidence.
 
 ## Phase E: distinct guides
 

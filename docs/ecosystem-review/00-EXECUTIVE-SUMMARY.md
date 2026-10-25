@@ -1,6 +1,6 @@
 # 00. Executive summary: ToolZenHub ecosystem review
 
-Status: **documentation only, 2026-10-25, repository `8ece03a`.** Nothing here changes the rulebook, the roadmap, a Tool Pack approval or any application code. Everything in it is a finding or a proposal until the owner approves it; decisions are in `14`. Where this package and `docs/product-decision-rules.md` differ, the rulebook wins.
+Status: **documentation only, 2026-10-25, repository `8ece03a`.** Nothing here changes the rulebook, the roadmap, a Tool Pack approval or any application code. Everything in it is a finding or a proposal until the owner approves it; decisions are in `14` (updated after the owner's continuation of 2026-10-25: resolved items and pending items are separated there). Where this package and `docs/product-decision-rules.md` differ, the rulebook wins.
 
 ## Package map
 
@@ -32,22 +32,22 @@ SEO and performance findings are in 11; navigation is in 08.
 | Live URLs in the inventory | 89 | verified |
 | On production (HTTP 200) | 81 of those 89 | verified (status only) |
 | Not on production (404) | Gratuity, Salary, World Clock, Photos to PDF, Merge PDF, Split PDF, Extract/Reorder/Rotate PDF Pages, and `/pdf-tools.html` | verified |
-| Time Tools Batch 2 (Meeting Planner, Pomodoro, Shift Planner) | **not built, not specified, not recorded as approved in any repository document** | verified |
+| Time Tools Batch 2 (Meeting Planner, Pomodoro, Shift Planner) | **owner-authorized for implementation (14, D1); not built, no spec, not in the catalog** | verified (repository); authorization per owner statement |
 | Gratuity, Salary | built and on the preview; their specs say release is NOT approved | verified |
-| Device acceptance on record in the repository | Image Compressor (Android pass, spec 20). Photos to PDF and the PDF batch: owner-reported pass, no record | verified |
+| Device acceptance | Image Compressor: Android pass in spec 20. Photos to PDF and the PDF batch: OWNER-REPORTED Android PASS, no details supplied | verified (spec) / owner-reported |
 
 ## Main findings
 
 1. **The biggest gap is not a missing tool.** All 21 non-calculator tool pages suppress the related-tools component, so a visitor who finishes a task sees no next step except a sentence of text. The data for related tools exists. Showing it is an approved direction (rulebook 4.8) that nobody has built. (08, N1)
-2. **One curated relation breaks section isolation**: Time Zone Converter to Unix Timestamp Converter. It must be settled before related tools are displayed. (14, D2)
-3. **Built does not mean releasable.** Two published-in-catalog tools (Gratuity, Salary) are gated only by process. (14, D4)
+2. **One dormant curated relation crosses sections** (Time Zone Converter to Unix Timestamp Converter, a deliberate link in spec 19). Resolved without changing the converter: the future display shows same-section relations only. (14, D2)
+3. **Built does not mean releasable.** Two published-in-catalog tools (Gratuity, Salary) are gated only by process. (14, P1 (D4))
 4. **24 of 36 tools have no guide**, and non-calculator tools could not display one. Guides worth writing are few and specific; rule-dependent ones are blocked on verified sources. (09)
-5. **Small documentation drifts** exist (Tool Pack 23 and 26 status lines, a vendor notice, a design follow-up). (14, D8)
-6. **Time Tools Batch 2 should be recorded before it is built**, and Pomodoro has an unresolved differentiation gate against Countdown. (14, D1, D6)
+5. **Small documentation drifts** exist (Tool Pack 23 and 26 status lines, a vendor notice, a design follow-up). (14, P4 (D8))
+6. **Time Tools Batch 2 is authorized but needs specs that prove differentiation**: the converter already finds shared meeting times, and Countdown already leads "focus timer". (04, 14 D1, D6)
 
 ## Top opportunities (provisional; scores are hypotheses)
 
-1. Phase A and B navigation work (reciprocal relations, then one pilot family). 2. International Meeting Planner, the strongest candidate new tool. 3. Image Compressor target size as an enhancement. 4. A handful of distinct guides. See 12 and 13.
+1. Phase A and B navigation work (reciprocal relations, then one pilot family). 2. International Meeting Planner, but only with a multi-person model: the Time Zone Converter already has a meeting-overlap section (04). 3. Image Compressor target size as an enhancement. 4. A handful of distinct guides. See 12 and 13.
 
 ## Unresolved risks
 

@@ -41,17 +41,17 @@ flowchart LR
 ```mermaid
 flowchart LR
   WC[World Clock] --> TZ[Time Zone Converter]
-  TZ -.-> MP[Meeting Planner, not built]
+  TZ -.-> MP[Meeting Planner, authorized, not built]
   CT[Countdown Timer] <--> SW[Stopwatch]
-  CT -.-> PO[Pomodoro, not built]
+  CT -.-> PO[Pomodoro, authorized, not built]
   DC[Date Calculator] --> DD[Date Difference]
   HC[Hours Calculator] --> DD
-  HC -.-> SH[Shift Planner, not built]
+  HC -.-> SH[Shift Planner, authorized, not built]
 ```
 
 | Journey | Class | Gap |
 |---|---|---|
-| Find the time elsewhere, then convert, then plan | PARTIAL / PROPOSED | The converter does not link back; the planner is not built |
+| Find the time elsewhere, then convert, then find a meeting time | EXISTING (World Clock to the converter, which has a meeting-overlap section) | The converter does not link back; the multi-person planner is authorized but not built |
 | Time something | EXISTING | none |
 | Dates | PARTIAL | one-way links |
 
@@ -89,7 +89,7 @@ flowchart LR
 | Combine PDFs and fix order | EXISTING | none |
 | Split a large file, keep needed pages | EXISTING | none |
 | Prepare photos, make a PDF | PARTIAL | compressor does not point to Photos to PDF; neither page renders related tools |
-| Photos to PDF, then merge with other PDFs | PROPOSED | cross-section; requires the decision in 14 (D5) |
+| Photos to PDF, then merge with other PDFs | PROPOSED | cross-section; requires the decision in 14, P3 (D5) |
 
 ## Cross-ecosystem observation
 

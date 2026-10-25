@@ -10,7 +10,7 @@ Method: the rulebook's own framework (section 12): six dimensions scored 0 to 5 
 |---|---|---|---|---|---|---|
 | 1 | N2 then N1 | Resolve the cross-section relation, then display related tools on non-calculator pages (pilot one family) | IMPROVE RELATED NAVIGATION | High: 21 tool pages have no next step | Low to medium; a shared component change with baseline diffs | Owner (rulebook 4.8, 11) |
 | 2 | C1, N3, I1, T2 | Reciprocal curated relations (SIP/SWP, CAGR/FD, compressor/Photos to PDF, Date Calculator/Date Difference, World Clock/Time Zone Converter, JSON/Text Diff, Unix/JWT) | IMPROVE RELATED NAVIGATION | Medium | Low (catalog data and relationship tests) | Owner, as part of the same phase |
-| 3 | C3 and D4 | A written release gate for built-but-unapproved tools (Gratuity, Salary) | process | High risk control | Low | Owner |
+| 3 | C3 and 14 P1 (D4) | A written release gate for built-but-unapproved tools (Gratuity, Salary) | process | High risk control | Low | Owner |
 | 4 | A3 | Read and audit the 34 article bodies | IMPROVE EXISTING GUIDE | Medium | Medium effort, no code | Owner |
 | 5 | U1 | Brand-green text contrast checkpoint | shared UX | Medium | Medium, many baselines | Owner |
 | 6 | Docs drift | Update stale status lines in Tool Packs 23 and 26 and the design follow-up for articles 36, 37, 38, 40 | documentation | Low | Trivial | Owner (existing documents, outside this phase's scope) |
@@ -20,7 +20,7 @@ Method: the rulebook's own framework (section 12): six dimensions scored 0 to 5 
 | Rank | Candidate | Section | Decision class | Search | Repeat | Useful | Diff | Feasible | Trust | Weighted /100 |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1 | Pomodoro Focus Timer | Time Tools | new tool or mode of Countdown | 4 | 4 | 3 | 1 | 4 | 4 | 70 |
-| 2 | International Meeting Planner | Time Tools | new tool | 3 | 3 | 4 | 3 | 3 | 4 | 66 |
+| 2 | International Meeting Planner | Time Tools | new tool only if distinct from the converter (see 04) | 3 | 3 | 4 | 2 | 3 | 4 | 64 |
 | 3 | JSON Schema & JSONPath Lab | Developer Tools | extend JSON Formatter or new tool | 3 | 3 | 4 | 3 | 2 | 4 | 64 |
 | 4 | Image Compressor: target size and output format | Image Tools | ENHANCE existing tool | 4 | 2 | 4 | 2 | 3 | 4 | 64 |
 | 5 | Debt Snowball vs Avalanche (extends Credit Card Payoff) | Calculators | MODE of existing tool | 2 | 3 | 3 | 3 | 4 | 4 | 59 |
@@ -32,8 +32,8 @@ Method: the rulebook's own framework (section 12): six dimensions scored 0 to 5 
 
 ## Reading the table
 
-- **Ranking is not a recommendation.** Pomodoro scores highest because search and repeat use are guessed high for a commodity, but its differentiation is 1 and a mandatory gate ("only duplicates an existing tool without a real improvement") is unresolved against the Countdown Timer. It cannot be treated as cleared.
-- **International Meeting Planner** is the strongest tool candidate on usefulness and differentiation, because it builds on the existing time-zone engine and does a job the Time Zone Converter and World Clock deliberately do not (rulebook R2 text). Its correctness risk (DST, cross-midnight) needs an independent oracle.
+- **Ranking is not a recommendation.** Pomodoro scores highest because search and repeat use are guessed high for a commodity, but its differentiation is 1 and the duplicate gate against the Countdown Timer is open; 14 (D6) sets the spec condition that would clear it.
+- **International Meeting Planner** is owner-authorized, but the first version of this review overstated its differentiation: the Time Zone Converter already has a meeting-overlap section. Differentiation is scored 2 and is conditional on a multi-person model (04). Usefulness stays high only if the spec delivers that. Correctness risk (DST, cross-midnight) needs an independent oracle; the existing converter engine and its Python reference (`time-zone-golden.py`) are the reuse base.
 - **JSON Schema & JSONPath Lab** needs a validator library chosen by audit (size, licence, maintenance); not researched here.
 - **Image Compressor target size** is an ENHANCE of an existing tool, not a new page. It must never promise an exact size.
 - **Guides** score low on repeat use by nature; they are cheap and carry little risk. They are not a substitute for N1.
@@ -43,7 +43,7 @@ Method: the rulebook's own framework (section 12): six dimensions scored 0 to 5 
 
 | Candidate | Verdict | Reason |
 |---|---|---|
-| International Meeting Planner | B (needs validation) | Owner stated approval; evidence is hypothesis; spec and spike still needed |
+| International Meeting Planner | B (needs validation) | Owner-authorized; distinct-workflow condition unproven; demand is an unverified hypothesis; spec needed |
 | Pomodoro Focus Timer | B | Gate against Countdown unresolved |
 | Shift Schedule Planner | B to C | Use case unconfirmed |
 | JSON Schema & JSONPath Lab | B | Library audit needed |

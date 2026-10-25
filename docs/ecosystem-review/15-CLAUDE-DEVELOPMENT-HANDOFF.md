@@ -16,6 +16,10 @@ A short guide for future sessions. It points to the owners of each rule and does
 | What is approved | The rulebook, the factory, each Tool Pack's status and decisions, and explicit owner statements recorded in them. A proposal, roadmap row or prompt is not approval |
 | What is released | The owner's manual production steps; check production with a GET, never by assumption. As of 2026-10-25 seven tools and `/pdf-tools.html` return 404 on production |
 
+## Do not include in any production package (documentation, 2026-10-25)
+
+Gratuity Calculator (`gratuity`) and Salary / CTC to In-Hand (`salary-in-hand`): built and on the preview, release NOT approved (specs 29 and 30). World Clock, Photos to PDF and the PDF Tools section are built but also not on production; each needs the owner's explicit release decision. Check this list and the specs before preparing any upload. Releasing any of them is the owner's decision (14, P1).
+
 ## Boundaries (summary of rulebook rules)
 
 - One section per tool; related lists never cross sections (4.2). A new section needs owner approval (4.7). Related-tools display on non-calculator tools is an approved direction, not built (4.8).

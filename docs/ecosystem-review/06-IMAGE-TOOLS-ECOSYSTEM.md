@@ -7,7 +7,7 @@ Scope: 2 published tools. Image Compressor & Resizer (`/tools/image-compressor-r
 | Tool | Input | Output | Notes (from specs and the module list) |
 |---|---|---|---|
 | Image Compressor & Resizer | One image file | One compressed or resized image | Android verification PASSED, with one layout issue fixed and retested (spec 20 status). Safari/WebKit unverified |
-| Photos to PDF | Several photos | One PDF built with the vendored pdf-lib 1.17.1 | Local tests per this project's ledger; owner reported Android PASS in a prompt, no checklist in the repository |
+| Photos to PDF | Several photos | One PDF built with the vendored pdf-lib 1.17.1 | Local tests per this project's ledger; OWNER-REPORTED Android PASS (device, browser, date and per-check results not supplied; recorded here, spec 31 not updated) |
 
 ## Journey
 
