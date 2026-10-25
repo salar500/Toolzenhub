@@ -341,3 +341,138 @@ export const EXAMPLE_ROWS = Object.freeze([
     Object.freeze({ start: "22:00", end: "06:00", breakText: "45" }),
     Object.freeze({ start: "13:00", end: "17:00", breakText: "" })
 ]);
+
+
+/* =========================================================
+   ROUNDING AND THE COPIED SUMMARY (Tool Pack 34)
+   Rounding is OFF unless the person chooses it, and it never
+   replaces the exact total: both are always shown. It is not a pay
+   rule and not a legal one: it is only the rounding some employers
+   ask for, applied the way the person picks.
+
+   Rounding is to the NEAREST step, and exactly halfway rounds UP
+   (7 minutes to the nearest 15 is 0; 8 is 15; 7.5 does not occur
+   because durations are whole minutes). It is applied either to
+   EACH SHIFT before adding up, or to the TOTAL once.
+========================================================= */
+
+export const ROUNDING_STEPS = Object.freeze([0, 5, 10, 15, 30]);
+
+export const ROUNDING_SCOPES = Object.freeze(["shift", "total"]);
+
+/* minutes rounded to the nearest `step` minutes, halfway up; step 0 means no rounding */
+export function roundMinutes(minutes, step) {
+
+    if (!ROUNDING_STEPS.includes(step) || step === 0) {
+        return minutes;
+    }
+
+    return Math.floor((2 * minutes + step) / (2 * step)) * step;
+
+}
+
+/*
+ * { step, scope, exact (minutes), rounded (minutes), difference (rounded - exact), changed }
+ * for a summary with at least one valid row; null otherwise.
+ */
+export function applyRounding(summary, step, scope) {
+
+    if (summary.totals === null) {
+        return null;
+    }
+
+    const exact = summary.totals.net;
+
+    const useStep = ROUNDING_STEPS.includes(step) ? step : 0;
+
+    const rounded = useStep === 0
+        ? exact
+        : scope === "shift"
+            ? summary.rows
+                .filter((row) => row.state === "valid")
+                .reduce((sum, row) => sum + roundMinutes(row.net, useStep), 0)
+            : roundMinutes(exact, useStep);
+
+    return {
+        step: useStep,
+        scope: scope === "shift" ? "shift" : "total",
+        exact,
+        rounded,
+        difference: rounded - exact,
+        changed: rounded !== exact
+    };
+
+}
+
+/* "Rounded to the nearest 15 minutes, each shift" */
+export function roundingWords(rounding) {
+
+    if (!rounding || rounding.step === 0) {
+        return "No rounding";
+    }
+
+    return `Rounded to the nearest ${rounding.step} minutes, ${rounding.scope === "shift" ? "each shift" : "the total"}`;
+
+}
+
+/* "+8 minutes", "-7 minutes", "no change" */
+export function differenceWords(minutes) {
+
+    if (minutes === 0) {
+        return "no change";
+    }
+
+    return `${minutes > 0 ? "+" : "-"}${plural(Math.abs(minutes), "minute", "minutes")}`;
+
+}
+
+/*
+ * The text copied for a timesheet: each counted shift, the total and, if chosen, the rounding.
+ * The exact total is always in it.
+ */
+export function copySummary(summary, rounding) {
+
+    if (summary.totals === null) {
+        return "";
+    }
+
+    const lines = ["Hours worked"];
+
+    let number = 0;
+
+    for (const row of summary.rows) {
+
+        if (row.state !== "valid") {
+            continue;
+        }
+
+        number += 1;
+
+        lines.push(
+            `${number}. ${row.start} to ${row.end}${row.overnight ? " (ends next day)" : ""}, break ${row.breakMinutes} min: ${formatHM(row.net)}`
+        );
+
+    }
+
+    const { net } = summary.totals;
+
+    lines.push(
+        "",
+        `Total: ${formatHM(net)} (${decimalHours(net)} decimal hours) from ${plural(summary.included, "shift", "shifts")}`
+    );
+
+    if (rounding && rounding.step > 0) {
+
+        lines.push(
+            `${roundingWords(rounding)}: ${formatHM(rounding.rounded)} (${decimalHours(rounding.rounded)} decimal hours), ${differenceWords(rounding.difference)}`
+        );
+
+    }
+
+    if (summary.excluded > 0) {
+        lines.push(`${plural(summary.excluded, "row", "rows")} not counted (incomplete or invalid)`);
+    }
+
+    return `${lines.join("\n")}\n`;
+
+}

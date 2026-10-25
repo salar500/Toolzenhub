@@ -267,4 +267,48 @@ export function displacementText(displacement) {
 
 }
 
+/* =========================================================
+   ISO 8601 WEEK
+   Weeks run Monday to Sunday and belong to the year that holds
+   their Thursday, so 1 January can be in week 52 or 53 of the
+   year before, and 31 December can be in week 1 of the next.
+   `weekday` is 1 (Monday) to 7 (Sunday). Returns
+   { weekYear, week, weekday, dayOfYear, weeksInWeekYear }.
+   Checked against Python's date.isocalendar()
+   (tests/fixtures/iso-week-golden.py).
+========================================================= */
+
+function isoWeekParts(date) {
+
+    const number = dayNumber(date);
+
+    const weekdayIndex = ((number + 3) % 7 + 7) % 7;
+
+    const thursday = number - weekdayIndex + 3;
+
+    const weekYear = dateFromDayNumber(thursday).year;
+
+    const week = Math.floor(
+        (thursday - dayNumber({ year: weekYear, month: 1, day: 1 })) / 7
+    ) + 1;
+
+    return { weekYear, week, weekday: weekdayIndex + 1 };
+
+}
+
+export function isoWeekOf(date) {
+
+    const { weekYear, week, weekday } = isoWeekParts(date);
+
+    return {
+        weekYear,
+        week,
+        weekday,
+        dayOfYear: dayNumber(date) - dayNumber({ year: date.year, month: 1, day: 1 }) + 1,
+        /* 28 December is always in the last week of its ISO year */
+        weeksInWeekYear: isoWeekParts({ year: weekYear, month: 12, day: 28 }).week
+    };
+
+}
+
 export { dateText };
