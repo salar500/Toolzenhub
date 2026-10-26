@@ -3781,7 +3781,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2181
+      "visibleTextChars": 2427
     }
   },
   "/disclaimer.html": {
@@ -4284,7 +4284,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6450
+      "visibleTextChars": 6690
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -4824,6 +4824,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 4223
+    }
+  },
+  "/tools/jsonpath-tester/": {
+    "runtime": {
+      "title": "JSONPath Tester: Run RFC 9535 JSONPath Queries on JSON | ToolZen Hub",
+      "description": "Run a JSONPath query on a JSON document and see the exact nodes it selects, with their paths and a trace of where an empty result stopped matching. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/jsonpath-tester/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Run a JSONPath query on a JSON document and see the exact nodes it selects, with their paths and a trace of where an empty result stopped matching. It runs in your browser: nothing is uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "JSONPath Tester: Run RFC 9535 JSONPath Queries on JSON | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/jsonpath-tester/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Run a JSONPath query on a JSON document and see the exact nodes it selects, with their paths and a trace of where an empty result stopped matching. It runs in your browser: nothing is uploaded.",
+        "twitter:title": "JSONPath Tester: Run RFC 9535 JSONPath Queries on JSON | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "JSONPath Tester"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "JSONPath Tester: Run RFC 9535 JSONPath Queries on JSON | ToolZen Hub",
+      "description": "Run a JSONPath query on a JSON document and see the exact nodes it selects, with their paths and a trace of where an empty result stopped matching. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/jsonpath-tester/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 4612
     }
   },
   "/tools/jwt-decoder/": {

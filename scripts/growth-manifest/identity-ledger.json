@@ -432,6 +432,13 @@
       "state": "active"
     },
     {
+      "id": "jsonpath-tester",
+      "module": "assets/js/tools/jsonpath-tester/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "jwt-decoder",
       "module": "assets/js/tools/jwt-decoder/index.js",
       "moduleChanges": [],

@@ -464,7 +464,7 @@ export function applyPatch(root, patchJson) {
 
 /* ---------- notes ---------- */
 
-function sideNotes(label, parsed) {
+export function sideNotes(label, parsed) {
 
     const notes = [];
 

@@ -1715,6 +1715,42 @@ const catalog = [
     },
 
     {
+        id: "jsonpath-tester",
+        status: "published",
+        loader: () =>
+            import("../tools/jsonpath-tester/index.js"),
+        sectionId: "developer-tools",
+        icon: "$.*",
+        title: "JSONPath Tester",
+        description:
+            "Run a JSONPath query (RFC 9535, without match() and search()) on a JSON document and see the exact nodes it selects with their paths, and where an empty result stopped matching. It runs in your browser: nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: ["json-formatter", "json-compare"],
+        aliases: [
+            "jsonpath",
+            "json path",
+            "jsonpath tester",
+            "jsonpath evaluator",
+            "json path query",
+            "rfc 9535"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "JSONPath Tester: Run RFC 9535 JSONPath Queries on JSON | ToolZen Hub",
+            description:
+                "Run a JSONPath query on a JSON document and see the exact nodes it selects, with their paths and a trace of where an empty result stopped matching. It runs in your browser: nothing is uploaded."
+        }
+    },
+
+    {
         id: "image-compressor-resizer",
         status: "published",
         loader: () =>

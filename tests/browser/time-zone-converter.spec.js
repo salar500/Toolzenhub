@@ -571,7 +571,7 @@ test.describe("Time Zone Converter in the site", () => {
     await expect(time.locator(".directory-section__count")).toHaveText("13 tools");
     await expect(time.locator('a[href$="tools/time-zone-converter/"]')).toHaveCount(1);
     const dev = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Developer Tools")') });
-    await expect(dev.locator(".directory-section__count")).toHaveText("8 tools");
+    await expect(dev.locator(".directory-section__count")).toHaveText("9 tools");
     await expect(dev.locator('a[href$="tools/time-zone-converter/"]')).toHaveCount(0);
   });
 
