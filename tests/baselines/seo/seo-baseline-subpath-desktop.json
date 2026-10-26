@@ -3781,7 +3781,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1692
+      "visibleTextChars": 1930
     }
   },
   "/disclaimer.html": {
@@ -4284,7 +4284,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5973
+      "visibleTextChars": 6205
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -5412,6 +5412,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 5400
+    }
+  },
+  "/tools/url-parser/": {
+    "runtime": {
+      "title": "URL Parser & Encoder: Parse, Encode and Decode URLs | ToolZen Hub",
+      "description": "Parse a URL into its parts and query parameters, see what the browser normalized, and percent-encode, decode or build query strings. It runs in your browser: no address is opened or sent.",
+      "canonical": "https://toolzenhub.in/tools/url-parser/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Parse a URL into its parts and query parameters, see what the browser normalized, and percent-encode, decode or build query strings. It runs in your browser: no address is opened or sent.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "URL Parser & Encoder: Parse, Encode and Decode URLs | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/url-parser/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Parse a URL into its parts and query parameters, see what the browser normalized, and percent-encode, decode or build query strings. It runs in your browser: no address is opened or sent.",
+        "twitter:title": "URL Parser & Encoder: Parse, Encode and Decode URLs | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "URL Parser & Encoder"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "URL Parser &amp; Encoder: Parse, Encode and Decode URLs | ToolZen Hub",
+      "description": "Parse a URL into its parts and query parameters, see what the browser normalized, and percent-encode, decode or build query strings. It runs in your browser: no address is opened or sent.",
+      "canonical": "https://toolzenhub.in/tools/url-parser/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5651
     }
   },
   "/tools/world-clock/": {

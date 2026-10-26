@@ -1641,6 +1641,45 @@ const catalog = [
     },
 
     {
+        id: "url-parser",
+        status: "published",
+        loader: () =>
+            import("../tools/url-parser/index.js"),
+        sectionId: "developer-tools",
+        icon: "://",
+        title: "URL Parser & Encoder",
+        description:
+            "Take a URL apart into its scheme, host, path, query parameters and fragment, see what the browser changed, and percent-encode, decode or build query strings. It runs in your browser: no address is opened or sent.",
+        autoRelated: false,
+        relatedTools: ["base64-encoder-decoder", "json-formatter"],
+        aliases: [
+            "url parser",
+            "parse url",
+            "url encoder",
+            "url decoder",
+            "url encode",
+            "url decode",
+            "percent encoding",
+            "query string parser",
+            "query string builder"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "URL Parser & Encoder: Parse, Encode and Decode URLs | ToolZen Hub",
+            description:
+                "Parse a URL into its parts and query parameters, see what the browser normalized, and percent-encode, decode or build query strings. It runs in your browser: no address is opened or sent."
+        }
+    },
+
+    {
         id: "image-compressor-resizer",
         status: "published",
         loader: () =>

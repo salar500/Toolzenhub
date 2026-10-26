@@ -359,7 +359,7 @@
     "deadFragments": []
   },
   "developer-tools.html": {
-    "internal": 30,
+    "internal": 31,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -431,7 +431,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 75,
+    "internal": 76,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -570,6 +570,12 @@
   },
   "tools/unix-timestamp-converter/": {
     "internal": 24,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/url-parser/": {
+    "internal": 25,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

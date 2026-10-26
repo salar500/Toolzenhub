@@ -579,6 +579,13 @@
       "state": "active"
     },
     {
+      "id": "url-parser",
+      "module": "assets/js/tools/url-parser/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "world-clock",
       "module": "assets/js/tools/world-clock/index.js",
       "moduleChanges": [],
