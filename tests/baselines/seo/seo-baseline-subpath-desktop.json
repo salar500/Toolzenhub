@@ -3781,7 +3781,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1930
+      "visibleTextChars": 2181
     }
   },
   "/disclaimer.html": {
@@ -4284,7 +4284,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6205
+      "visibleTextChars": 6450
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -4726,6 +4726,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 3899
+    }
+  },
+  "/tools/json-compare/": {
+    "runtime": {
+      "title": "JSON Compare: Find the Differences Between Two JSON Documents | ToolZen Hub",
+      "description": "Compare two JSON documents as data: see what was added, removed, changed or changed in type, with the path of each and a JSON Patch. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/json-compare/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Compare two JSON documents as data: see what was added, removed, changed or changed in type, with the path of each and a JSON Patch. It runs in your browser: nothing is uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "JSON Compare: Find the Differences Between Two JSON Documents | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/json-compare/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Compare two JSON documents as data: see what was added, removed, changed or changed in type, with the path of each and a JSON Patch. It runs in your browser: nothing is uploaded.",
+        "twitter:title": "JSON Compare: Find the Differences Between Two JSON Documents | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "JSON Compare"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "JSON Compare: Find the Differences Between Two JSON Documents | ToolZen Hub",
+      "description": "Compare two JSON documents as data: see what was added, removed, changed or changed in type, with the path of each and a JSON Patch. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/json-compare/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3873
     }
   },
   "/tools/json-formatter/": {

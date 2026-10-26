@@ -359,7 +359,7 @@
     "deadFragments": []
   },
   "developer-tools.html": {
-    "internal": 31,
+    "internal": 32,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -431,7 +431,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 76,
+    "internal": 77,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -486,6 +486,12 @@
   },
   "tools/interval-timer/": {
     "internal": 29,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/json-compare/": {
+    "internal": 25,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

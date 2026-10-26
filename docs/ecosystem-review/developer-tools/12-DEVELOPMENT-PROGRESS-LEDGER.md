@@ -27,7 +27,7 @@ Commits: one local commit per bounded Tool Pack (factory section 2a). The planni
 | --- | --- | --- | --- | --- |
 | DP-0 | Preparation | COMPLETED (reduced) | | no shared clipboard module (L1); open items for DP-1 and DP-2 (OPEN-03/04/05) are closed inside those packs |
 | DP-3 | URL Parser & Encoder (Tool Pack 37) | VERIFIED (local, AMBER) | see git log | spec `docs/tool-packs/37-url-parser-encoder.md`. FR-UP-001..026 implemented; AC-UP-001..035 covered by 31 unit + 18 browser tests (desktop and mobile projects pass). Older specs: 278 pass, 5 fail, all 5 the known stale tests (Image Tools page, Image Tools All Tools, All Tools in json-formatter, text-diff, unix-timestamp). Unit suite 3118 pass, 1 fail (known gratuity colour token). Static: inventory, links, assets, SEO pass. AMBER because Safari, Firefox, Android, screen reader, root-desktop project and the `tools` visual baseline (pre-existing mismatch, left untouched) were not verified |
-| DP-1 | JSON Compare (Tool Pack 35) | NOT_STARTED | | |
+| DP-1 | JSON Compare (Tool Pack 35) | VERIFIED (local, AMBER) | see git log | spec `docs/tool-packs/35-json-compare.md`. FR-JC-001..026 implemented; 34 unit + 21 browser tests (desktop and mobile projects pass). Shared tree module `json-tree` reuses the formatter scanner unchanged (L3). Not verified: Safari, Firefox, real Android, screen reader |
 | DP-2 | JSONPath Tester (Tool Pack 36) | NOT_STARTED | | |
 | DP-4 | Base64URL | BLOCKED | | OPEN-10 |
 | DP-5 | Integration / checkpoint | NOT_STARTED | | metadata only |
@@ -38,3 +38,4 @@ Commits: one local commit per bounded Tool Pack (factory section 2a). The planni
 | --- | --- | --- |
 | L1 | No new shared clipboard module; new tools reuse the established per-page copy pattern | The 04/08 proposal (SH-004) was optional "when reuse justifies it" (Block 1 section 10); a new shared file with no consumer in existing tools adds an untested abstraction. SH-004 is therefore not implemented; recorded here instead of silently dropped |
 | L2 | A mode switch keeps focus on the radio instead of moving to the first field (deviates from FR-UP-023 wording) | Found by the keyboard test: moving focus on `change` stops the arrow keys cycling the three modes, which FR-UP-024 requires. Tab reaches the first field; FR-UP-023 is corrected in doc 05 |
+| L3 | JSON Compare imports `validate` from the JSON Formatter engine and adds a separate `json-tree` module instead of editing the formatter | Rule 9.3 (no changes to existing tools without approval); the tree is also what JSONPath Tester needs |

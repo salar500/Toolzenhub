@@ -1680,6 +1680,41 @@ const catalog = [
     },
 
     {
+        id: "json-compare",
+        status: "published",
+        loader: () =>
+            import("../tools/json-compare/index.js"),
+        sectionId: "developer-tools",
+        icon: "{≠}",
+        title: "JSON Compare",
+        description:
+            "Compare two JSON documents as data: see what was added, removed, changed or changed in type, with the path of each and a JSON Patch. Key order and number formatting are not differences. It runs in your browser: nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: ["json-formatter", "text-diff"],
+        aliases: [
+            "json compare",
+            "compare json",
+            "json diff",
+            "json difference",
+            "json patch generator"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "JSON Compare: Find the Differences Between Two JSON Documents | ToolZen Hub",
+            description:
+                "Compare two JSON documents as data: see what was added, removed, changed or changed in type, with the path of each and a JSON Patch. It runs in your browser: nothing is uploaded."
+        }
+    },
+
+    {
         id: "image-compressor-resizer",
         status: "published",
         loader: () =>

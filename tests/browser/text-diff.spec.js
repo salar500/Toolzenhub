@@ -483,7 +483,7 @@ test.describe("Text Diff / Compare in the site", () => {
   test("Developer Tools lists it as the third tool, flat, with no future placeholders", async ({ page, go }) => {
     await go("developer-tools.html");
     await expect(page.locator(`a[href$="tools/text-diff/"]`)).toHaveCount(1);
-    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(7);
+    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(8);
     await expect(page.locator("main")).not.toContainText(/coming soon|uuid|regex/i); // Base64 is a live tool now (Tool Pack 27)
     await expect(page.locator("main")).toContainText("Text Diff / Compare");
     expect(await page.locator("h2, h3").allInnerTexts()).not.toContain("Subcategories");
@@ -493,7 +493,7 @@ test.describe("Text Diff / Compare in the site", () => {
     await go("tools.html");
     await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools"]);
     const dev = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Developer Tools")') });
-    await expect(dev.locator(".directory-section__count")).toHaveText("7 tools");
+    await expect(dev.locator(".directory-section__count")).toHaveText("8 tools");
     await expect(dev.locator('a[href$="tools/text-diff/"]')).toHaveCount(1);
     for (const section of ["Calculators", "Time Tools"]) {
       const other = page.locator(".directory-section", { has: page.locator(`.directory-section__title a:text-is("${section}")`) });
