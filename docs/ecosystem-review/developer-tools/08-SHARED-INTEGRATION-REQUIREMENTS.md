@@ -1,0 +1,37 @@
+# 08. Shared integration requirements
+
+PROJECT: ToolZenHub
+ECOSYSTEM: Developer Tools
+STATUS: PROPOSED — NOT APPROVED FOR IMPLEMENTATION
+PHASES: 0, 1 AND 2 (Ecosystem 2.0 revision, 2026-10-26)
+PURPOSE: Research and requirements baseline
+
+IDs: `SH-nnn`. Requirements for adding the proposed tools (and, if approved, the related-tools pilot) without disturbing the existing site. Facts about the current site are from 01.
+
+| ID | Area | Requirement |
+| --- | --- | --- |
+| SH-001 | Catalog | Each new tool is one entry in `assets/js/data/tools.js` with `id`, `status: "published"` only at release, `loader`, `sectionId: "developer-tools"`, `icon`, `title`, `description`, `autoRelated: false`, curated `relatedTools`, `aliases`, `capabilities`, `seo`; routes, listings, search and sitemap derive from it (rule 9.2). No fact is stored twice |
+| SH-002 | Affected consumers | In the **same phase** as the catalog entries, update every consumer listed in 01 section 4: the search unit test counts and size ceiling, `sections.test.mjs` list, the "6 tools" and `toHaveCount(6)` assertions in the json-formatter, text-diff, unix-timestamp-converter, time-zone-converter and image-compressor-resizer specs, the navigation counts (`.directory-group` 29 to 32 (three new P0 tools; each further P1 tool adds one more, recount at the time), section counts), the DOM, links and SEO baselines, the visual `tools` and `developer-tools` baselines (inspected, not blindly accepted), the regenerated `tests/inventory/url-inventory.json`, and the Growth `identity-ledger.json` (sorted by id, edited textually). Existing failures listed in 01 are not "fixed" by weakening any assertion |
+| SH-003 | Search | Aliases are chosen so that existing intents are not captured: `json formatter`, `json validator`, `format json` keep the JSON Formatter first; Text Diff keeps `text diff`, `diff checker`, `compare text`; JSON Compare takes `json compare`, `json diff`, `compare json`; JSONPath Tester takes `jsonpath`, `json path`, `jsonpath tester`, `jsonpath evaluator`; URL Parser & Encoder takes `url parser`, `parse url`, `url encode`, `url decode`, `percent encoding`, `query string`; the Base64 tool keeps `base64` first and gains `base64url` (as an alias of the existing tool, not a new page). Verified in both directions in a unit test and a browser search test |
+| SH-004 | Shared clipboard (S1) | One new module `assets/js/ui/clipboard.js` (copy with a selectable-text fallback and a returned status) used by the **new** tools only. Existing tools' own copy code is not touched (rule 9.3). The module has no DOM side effects beyond the fallback it is asked to render |
+| SH-005 | Related-tools pilot (S3) | **Only if the owner approves it as its own step (rule 4.8).** Set `showRelatedCalculators = true` on the nine Developer Tool modules (six existing, three new); the existing `renderRelatedSectionTools` renders "Related Developer Tools" with a "View all" link to `/developer-tools.html` (the planned relations are in 04 section 7); same-section links only; no sidebar; no cross-section list; no URL change; `showRelatedArticles` stays `false`. The Time Tools pilot is preserved unchanged. Changing an old module's flag is a one-line change per tool, stated in the commit; any other edit to an old module is out of scope |
+| SH-006 | Growth manifest | New tools are added to `scripts/growth-manifest/identity-ledger.json` and `export.mjs --check` passes after the commit |
+| SH-007 | Styles | Tool-specific CSS in `assets/css/tools/` listed in `src/_data/toolStyles.json`; shared tokens only; the pages load no new framework or font |
+| SH-008 | Page contract | The module exports `markup`, `render`, `init`, `showRelatedCalculators`, `showRelatedArticles`; the breadcrumb is first and the related section last; the h1 is the tool name; the static HTML contains the title, description, h1 and the help sections before scripts run |
+| SH-009 | SEO | One primary page per intent; unique title and description matching the page; canonical on the production origin in every build; the structured data pattern of existing tools; no keyword stuffing; sitemap inclusion once |
+| SH-010 | Analytics | No change. Analytics stay consent-based and production-only (rule 8.8); no tool passes user input to analytics |
+| SH-011 | Build compatibility | `npm run build:all` produces `dist/` and `dist-ghpages/`; the GitHub Pages base path `/Toolzenhub/` and the Hostinger root build both work; asset paths are relative or derived the same way as existing tools |
+| SH-012 | Preview and production safety | Development is verified on the local build and, only with approval, the GitHub Pages preview; **nothing in this program touches Hostinger production** (rule 11) |
+| SH-013 | URL preservation | No existing route changes; the six existing Developer Tools keep their routes, modules and engines |
+| SH-014 | Error handling consistency | Error and empty-state wording follows the existing Developer Tools pattern (specific, located, actionable; input left intact) |
+| SH-015 | Accessibility conventions | The announcer pattern (clear then set after about 50 ms) and Reset focus behaviour follow the Time Tools implementation (`time-ui.js` `createAnnouncer`), re-implemented in the new tool or in a small shared helper if the architecture phase finds real duplication (rule 9.4) |
+| SH-016 | Tests | New tools get unit, browser, security and mobile specs; existing specs are only edited for counts and lists; baselines are regenerated only after the diff is inspected; one Playwright worker, one project at a time |
+| SH-017 | Optional shared JSON tree (S2) | If both tools are approved, one pure module (proposed `assets/js/tools/json-tree/`) provides a lossless parser (exact number tokens, duplicate keys retained, source offsets), RFC 9535 Normalized Path and RFC 6901 pointer formatting. It does **not** modify `json-engine.js`; it may call `validate` for located errors if the architecture phase confirms the messages match. Whether this module is worth sharing is decided in the architecture phase (OPEN-01) |
+| SH-018 | Documentation | Each tool gets a Tool Pack from `docs/tool-packs/_spec-template.md` before code (rule 9.5); the rulebook is changed only for an approved durable decision (section 15) |
+| SH-019 | Base64URL enhancement (X1) | Changes only `assets/js/tools/base64-encoder-decoder/` (engine, page, its unit and browser specs, its tool pack addendum) and catalog `aliases`; the JWT Decoder, every other tool and all shared modules are untouched (AC-B64-009). The single changed existing assertion is listed in the pack. Needs owner approval (OPEN-10) |
+| SH-020 | Counts after P0 | Published tools 53 to 56 and Developer Tools 6 to 9, if all three new tools are released; the search unit test, `sections.test.mjs`, the navigation counts and the inventory are recomputed from the catalog, never hand-typed from this document. If a tool is released alone, the counts are those of that moment |
+| SH-021 | P1 tools | Each P1 tool repeats SH-001 to SH-018 in its own pack with its own consumer recount; none is bundled with another |
+
+## Consumers that must be re-checked after the work
+
+Time Tools pages (their related lists must not change), All Tools and Developer Tools listing pages, search (both directions), the sitemap, the Growth export, and the existing Developer Tool specs. The pilot's effect on the six existing pages is **visual** (a new section at the end) and is covered by AC-SHR-004 and the DOM/SEO baselines.
