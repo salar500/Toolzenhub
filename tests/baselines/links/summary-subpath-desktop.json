@@ -425,19 +425,25 @@
     "deadFragments": []
   },
   "time-tools.html": {
-    "internal": 31,
+    "internal": 37,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 69,
+    "internal": 75,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "tools/base64-encoder-decoder/": {
     "internal": 25,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/business-days/": {
+    "internal": 28,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -455,19 +461,19 @@
     "deadFragments": []
   },
   "tools/date-calculator/": {
-    "internal": 25,
+    "internal": 31,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "tools/date-difference/": {
-    "internal": 24,
+    "internal": 25,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "tools/hours-calculator/": {
-    "internal": 24,
+    "internal": 26,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -478,6 +484,12 @@
     "placeholders": 5,
     "deadFragments": []
   },
+  "tools/interval-timer/": {
+    "internal": 29,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "tools/json-formatter/": {
     "internal": 24,
     "external": [],
@@ -486,6 +498,12 @@
   },
   "tools/jwt-decoder/": {
     "internal": 25,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/meeting-planner/": {
+    "internal": 28,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -508,6 +526,18 @@
     "placeholders": 5,
     "deadFragments": []
   },
+  "tools/pomodoro-timer/": {
+    "internal": 29,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/shift-planner/": {
+    "internal": 28,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "tools/split-pdf/": {
     "internal": 26,
     "external": [],
@@ -526,8 +556,14 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "tools/time-duration/": {
+    "internal": 28,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "tools/time-zone-converter/": {
-    "internal": 24,
+    "internal": 27,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -539,7 +575,7 @@
     "deadFragments": []
   },
   "tools/world-clock/": {
-    "internal": 25,
+    "internal": 28,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

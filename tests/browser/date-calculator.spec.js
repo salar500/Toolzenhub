@@ -33,7 +33,7 @@ test.describe("Date Calculator", () => {
     await expect(page.getByRole("radio", { name: "Subtract" })).not.toBeChecked();
     await expect(page.locator("#dcalc-results")).toContainText("Choose a start date and enter how much to add or subtract.");
     await expect(page.getByRole("button", { name: "Reset" })).toBeEnabled();
-    await expect(page.locator(".related-section")).toHaveCount(0);
+    await expect(page.locator(".related-section a[href$=\"tools/business-days/\"]")).toHaveCount(1); // the Time Tools related-tools pilot
     await expect(page.getByRole("button", { name: /calculate/i })).toHaveCount(0);
 
     await enter(page, { start: "2026-03-10", weeks: 2, days: 3 });
@@ -129,9 +129,9 @@ test.describe("Date Calculator", () => {
       await expect(body.getByRole("heading", { name: h })).toBeVisible();
     }
     await expect(body.locator("details")).toHaveCount(5);
-    await expect(body.locator('a[href$="tools/date-difference/"]')).toHaveCount(1);
+    await expect(body.locator('.calculator-info a[href$="tools/date-difference/"]')).toHaveCount(1);
     await expect(body).toContainText("not part of this calculator");
-    await expect(body).not.toContainText(/100% accurate|most accurate|\bbest\b|age calculator|business days calculator/i);
+    await expect(body).not.toContainText(/100% accurate|most accurate|\bbest\b|age calculator/i);
   });
 
   test("the layout does not overflow and the amounts are not squeezed into one row on narrow screens", async ({ page, go }) => {

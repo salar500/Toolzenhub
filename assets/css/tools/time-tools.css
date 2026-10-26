@@ -874,3 +874,15 @@ fieldset.mp-person {
     }
 
 }
+
+/* the Countdown Timer's mode switch */
+
+.ct-modes {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+
+    margin: 0 0 14px !important;
+
+}

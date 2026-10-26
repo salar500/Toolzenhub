@@ -77,7 +77,8 @@ test.describe("Time Zone Converter", () => {
     await expect(rows(page)).toHaveCount(0);
     await expect(btn(page, "Swap")).toBeDisabled();
     await expect(page.locator("#tz-meeting")).not.toHaveAttribute("open", "");
-    await expect(page.locator(".related-section, .report-issue")).toHaveCount(0);
+    await expect(page.locator(".report-issue")).toHaveCount(0);
+    await expect(page.locator(".related-section a[href$=\"tools/meeting-planner/\"]")).toHaveCount(1); // the Time Tools related-tools pilot
     await expect(page.locator("main")).toContainText("Calculated in your browser");
     await expect(page.locator("main")).not.toContainText(/\bbest\b|most accurate|AI-powered|real-time global/i);
     expectClean(watch);
@@ -556,7 +557,7 @@ test.describe("Time Zone Converter in the site", () => {
   test("Time Tools lists it as one of its tools, flat, and Developer Tools does not", async ({ page, go }) => {
     await go("time-tools.html");
     await expect(page.locator(`a[href$="tools/time-zone-converter/"]`)).toHaveCount(1);
-    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(7);
+    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(13);
     await expect(page.locator("main")).not.toContainText(/coming soon/i);
     await expect(page.locator("main")).toContainText("Time Zone Converter");
     await go("developer-tools.html");
@@ -564,10 +565,10 @@ test.describe("Time Zone Converter in the site", () => {
     await expect(page.locator("main")).not.toContainText(/time zone converter/i);
   });
 
-  test("All Tools: Time Tools has 7 tools and Developer Tools has 6", async ({ page, go }) => {
+  test("All Tools: Time Tools has 13 tools and Developer Tools has 6", async ({ page, go }) => {
     await go("tools.html");
     const time = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Time Tools")') });
-    await expect(time.locator(".directory-section__count")).toHaveText("7 tools");
+    await expect(time.locator(".directory-section__count")).toHaveText("13 tools");
     await expect(time.locator('a[href$="tools/time-zone-converter/"]')).toHaveCount(1);
     const dev = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Developer Tools")') });
     await expect(dev.locator(".directory-section__count")).toHaveText("6 tools");

@@ -112,7 +112,8 @@ test.describe("World Clock: views and the page", () => {
     await expect(countLine(page)).toHaveText(/^195 listed cities in 148 time zones, plus \d+ other time zones$/);
     await expect(page.locator(".wc-x-groups .wc-xrow")).toHaveCount(195);
     await expect(page.locator(".wc-x-progress")).toHaveText("All 195 shown");
-    await expect(page.locator(".related-section, .report-issue")).toHaveCount(0);
+    await expect(page.locator(".report-issue")).toHaveCount(0);
+    await expect(page.locator(".related-section a[href$=\"tools/meeting-planner/\"]")).toHaveCount(1); // the Time Tools related-tools pilot
     await expect(page.locator("main")).not.toContainText(/\bbest\b|most accurate|AI-powered|real-time global|worldwide coverage|all cities/i);
     expectClean(watch);
   });
@@ -1468,10 +1469,10 @@ test.describe("World Clock: time, timers and the site", () => {
   test("its place in the site: Time Tools and All Tools list it, search finds it by its names, and the converter is unchanged", async ({ page, go }) => {
     await go("time-tools.html");
     await expect(page.locator(".category-page-card", { hasText: "World Clock" })).toHaveCount(1);
-    await expect(page.locator(".category-page-card")).toHaveCount(7);
+    await expect(page.locator(".category-page-card")).toHaveCount(13);
     await go("tools.html");
     const time = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Time Tools")') });
-    await expect(time.locator(".directory-section__count")).toHaveText("7 tools");
+    await expect(time.locator(".directory-section__count")).toHaveText("13 tools");
     for (const q of ["world clock", "city clocks", "multiple clocks"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
       await expect(page.locator("main a", { hasText: "World Clock" }).first(), q).toBeVisible();

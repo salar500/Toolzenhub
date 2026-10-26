@@ -57,7 +57,7 @@ const ERROR_ID = "cd-error";
 export function modeSwitchMarkup() {
 
     return `
-                <fieldset class="ct-modes" id="ct-modes">
+                <fieldset class="tt-choice ct-modes" id="ct-modes">
 
                     <legend class="tt-sr-only">What to count</legend>
 

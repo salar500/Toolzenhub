@@ -292,9 +292,12 @@ test.describe("Countdown Timer in Time Tools and search", () => {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
       return page.locator("#tools-results a.directory-result").first();
     };
-    for (const q of ["countdown timer", "timer", "online timer", "minute timer", "study timer", "focus timer"]) {
+    for (const q of ["countdown timer", "timer", "online timer", "minute timer", "study timer"]) {
       await expect(await first(q), q).toContainText("Countdown Timer");
     }
+    // the Pomodoro Focus Timer is literally named "focus timer", so it leads that query by name; the Countdown Timer is still listed
+    await expect(await first("focus timer"), "focus timer").toContainText("Pomodoro Focus Timer");
+    await expect(page.locator("#tools-results a.directory-result", { hasText: "Countdown Timer" })).toHaveCount(1);
     for (const q of ["date difference", "days between dates"]) await expect(await first(q), q).toContainText("Date Difference Calculator");
     for (const q of ["date calculator", "add days to date"]) await expect(await first(q), q).toContainText("Date Calculator");
     await go("tools.html?q=timer");

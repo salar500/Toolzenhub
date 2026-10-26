@@ -4235,7 +4235,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1697
+      "visibleTextChars": 2787
     }
   },
   "/tools.html": {
@@ -4284,7 +4284,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4906
+      "visibleTextChars": 5973
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -4336,6 +4336,55 @@
       "visibleTextChars": 4237
     }
   },
+  "/tools/business-days/": {
+    "runtime": {
+      "title": "Business Days Calculator: Add, Subtract and Count Working Days | ToolZen Hub",
+      "description": "Free business days calculator: add or subtract working days from a date, or count the working days between two dates. Choose your weekend and type the holidays to skip. It runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/business-days/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free business days calculator: add or subtract working days from a date, or count the working days between two dates. Choose your weekend and type the holidays to skip. It runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Business Days Calculator: Add, Subtract and Count Working Days | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/business-days/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free business days calculator: add or subtract working days from a date, or count the working days between two dates. Choose your weekend and type the holidays to skip. It runs in your browser.",
+        "twitter:title": "Business Days Calculator: Add, Subtract and Count Working Days | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Business Days Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Business Days Calculator: Add, Subtract and Count Working Days | ToolZen Hub",
+      "description": "Free business days calculator: add or subtract working days from a date, or count the working days between two dates. Choose your weekend and type the holidays to skip. It runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/business-days/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 4593
+    }
+  },
   "/tools/countdown-timer/": {
     "runtime": {
       "title": "Countdown Timer: Online Timer for Any Time up to 24 Hours | ToolZen Hub",
@@ -4382,7 +4431,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3069
+      "visibleTextChars": 4234
     }
   },
   "/tools/cron-expression-explainer/": {
@@ -4480,7 +4529,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3980
+      "visibleTextChars": 5097
     }
   },
   "/tools/date-difference/": {
@@ -4529,7 +4578,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4008
+      "visibleTextChars": 4211
     }
   },
   "/tools/hours-calculator/": {
@@ -4578,7 +4627,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5645
+      "visibleTextChars": 6159
     }
   },
   "/tools/image-compressor-resizer/": {
@@ -4628,6 +4677,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 4174
+    }
+  },
+  "/tools/interval-timer/": {
+    "runtime": {
+      "title": "Interval Timer: Work and Rest Rounds for Workouts and Routines | ToolZen Hub",
+      "description": "Free interval timer: repeat work and rest stages for any number of rounds, with get-ready and cool-down, and name your own stages. It shows the time left in the tab title and runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/interval-timer/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free interval timer: repeat work and rest stages for any number of rounds, with get-ready and cool-down, and name your own stages. It shows the time left in the tab title and runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Interval Timer: Work and Rest Rounds for Workouts and Routines | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/interval-timer/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free interval timer: repeat work and rest stages for any number of rounds, with get-ready and cool-down, and name your own stages. It shows the time left in the tab title and runs in your browser.",
+        "twitter:title": "Interval Timer: Work and Rest Rounds for Workouts and Routines | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Interval and Routine Timer"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Interval Timer: Work and Rest Rounds for Workouts and Routines | ToolZen Hub",
+      "description": "Free interval timer: repeat work and rest stages for any number of rounds, with get-ready and cool-down, and name your own stages. It shows the time left in the tab title and runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/interval-timer/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3899
     }
   },
   "/tools/json-formatter/": {
@@ -4726,6 +4824,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 5320
+    }
+  },
+  "/tools/meeting-planner/": {
+    "runtime": {
+      "title": "International Meeting Planner: Find a Time Across Time Zones | ToolZen Hub",
+      "description": "Free meeting planner: add two to four people with their time zones, days and hours, and find the times that suit everyone over the next days. Handles overnight hours and clock changes. It runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/meeting-planner/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free meeting planner: add two to four people with their time zones, days and hours, and find the times that suit everyone over the next days. Handles overnight hours and clock changes. It runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "International Meeting Planner: Find a Time Across Time Zones | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/meeting-planner/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free meeting planner: add two to four people with their time zones, days and hours, and find the times that suit everyone over the next days. Handles overnight hours and clock changes. It runs in your browser.",
+        "twitter:title": "International Meeting Planner: Find a Time Across Time Zones | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "International Meeting Planner"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "International Meeting Planner: Find a Time Across Time Zones | ToolZen Hub",
+      "description": "Free meeting planner: add two to four people with their time zones, days and hours, and find the times that suit everyone over the next days. Handles overnight hours and clock changes. It runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/meeting-planner/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 4540
     }
   },
   "/tools/merge-pdf/": {
@@ -4875,6 +5022,104 @@
       "visibleTextChars": 3617
     }
   },
+  "/tools/pomodoro-timer/": {
+    "runtime": {
+      "title": "Pomodoro Timer: Focus Periods and Breaks | ToolZen Hub",
+      "description": "Free Pomodoro timer: focus periods, short breaks and a long break after every few, with lengths you set. It shows the time left in the tab title and keeps correct time in a background tab. It runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/pomodoro-timer/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free Pomodoro timer: focus periods, short breaks and a long break after every few, with lengths you set. It shows the time left in the tab title and keeps correct time in a background tab. It runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Pomodoro Timer: Focus Periods and Breaks | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/pomodoro-timer/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free Pomodoro timer: focus periods, short breaks and a long break after every few, with lengths you set. It shows the time left in the tab title and keeps correct time in a background tab. It runs in your browser.",
+        "twitter:title": "Pomodoro Timer: Focus Periods and Breaks | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Pomodoro Focus Timer"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Pomodoro Timer: Focus Periods and Breaks | ToolZen Hub",
+      "description": "Free Pomodoro timer: focus periods, short breaks and a long break after every few, with lengths you set. It shows the time left in the tab title and keeps correct time in a background tab. It runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/pomodoro-timer/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 4130
+    }
+  },
+  "/tools/shift-planner/": {
+    "runtime": {
+      "title": "Shift Schedule Planner: Calendar for Rotating Shift Patterns | ToolZen Hub",
+      "description": "Free shift schedule planner: lay a repeating pattern such as 4 on 4 off or a day and night rotation onto the calendar and see every shift, the hours scheduled and the longest run on and off. It runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/shift-planner/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free shift schedule planner: lay a repeating pattern such as 4 on 4 off or a day and night rotation onto the calendar and see every shift, the hours scheduled and the longest run on and off. It runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Shift Schedule Planner: Calendar for Rotating Shift Patterns | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/shift-planner/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free shift schedule planner: lay a repeating pattern such as 4 on 4 off or a day and night rotation onto the calendar and see every shift, the hours scheduled and the longest run on and off. It runs in your browser.",
+        "twitter:title": "Shift Schedule Planner: Calendar for Rotating Shift Patterns | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Shift Schedule Planner"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Shift Schedule Planner: Calendar for Rotating Shift Patterns | ToolZen Hub",
+      "description": "Free shift schedule planner: lay a repeating pattern such as 4 on 4 off or a day and night rotation onto the calendar and see every shift, the hours scheduled and the longest run on and off. It runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/shift-planner/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3918
+    }
+  },
   "/tools/split-pdf/": {
     "runtime": {
       "title": "Split PDF: Cut a PDF into Parts | ToolZen Hub",
@@ -5022,6 +5267,55 @@
       "visibleTextChars": 3511
     }
   },
+  "/tools/time-duration/": {
+    "runtime": {
+      "title": "Time Duration Calculator: Add and Subtract Hours, Minutes and Seconds | ToolZen Hub",
+      "description": "Free time duration calculator: add and subtract lengths of time such as 1:45 or 2h 30m and see the total as hours, minutes and seconds, decimal hours and total minutes. It runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/time-duration/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free time duration calculator: add and subtract lengths of time such as 1:45 or 2h 30m and see the total as hours, minutes and seconds, decimal hours and total minutes. It runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Time Duration Calculator: Add and Subtract Hours, Minutes and Seconds | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/time-duration/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free time duration calculator: add and subtract lengths of time such as 1:45 or 2h 30m and see the total as hours, minutes and seconds, decimal hours and total minutes. It runs in your browser.",
+        "twitter:title": "Time Duration Calculator: Add and Subtract Hours, Minutes and Seconds | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Time Duration Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Time Duration Calculator: Add and Subtract Hours, Minutes and Seconds | ToolZen Hub",
+      "description": "Free time duration calculator: add and subtract lengths of time such as 1:45 or 2h 30m and see the total as hours, minutes and seconds, decimal hours and total minutes. It runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/time-duration/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3539
+    }
+  },
   "/tools/time-zone-converter/": {
     "runtime": {
       "title": "Time Zone Converter and Meeting Time Planner | ToolZen Hub",
@@ -5068,7 +5362,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3816
+      "visibleTextChars": 4665
     }
   },
   "/tools/unix-timestamp-converter/": {
@@ -5166,7 +5460,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5094
+      "visibleTextChars": 5544
     }
   }
 }
