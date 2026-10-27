@@ -1,0 +1,5 @@
+JSON-Schema-Test-Suite, commit 76b529ff69fa6f284d3e8916cb82cb2e93f82557
+https://github.com/json-schema-org/JSON-Schema-Test-Suite
+Files: tests/<draft>/*.json (top level only; the optional/ directories are not included).
+Licence: MIT, Copyright (c) 2012 Julian Berman (see LICENSE).
+Used as an independent conformance oracle for the JSON Schema Validator; treated as data.

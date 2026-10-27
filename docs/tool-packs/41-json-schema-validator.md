@@ -10,7 +10,7 @@ Candidate: `@cfworker/json-schema` 4.1.1 (chosen over Ajv because Ajv compiles s
 | Gate | Result | Evidence |
 | --- | --- | --- |
 | Licence | PASS | MIT. `LICENSE.md` (copyright 2020 Jeremy Danyow) and `THIRD_PARTY_NOTICES.md` (punycode.js MIT, ajv MIT) fetched from the upstream repository. The npm tarball itself carries no LICENSE file, so the upstream copies are what is kept. |
-| Provenance | PASS | npm tarball downloaded to its own directory and handled as data. sha256 `f3a8076b...0610203`; the sha512 integrity matches the registry value. The ES modules are vendored byte for byte (verified with `cmp`) in `assets/js/vendor/cfworker-json-schema/` with `PROVENANCE.md`. |
+| Provenance | PASS | npm tarball downloaded to its own directory and handled as data. sha256 `f3a8076b...0610203`; the sha512 integrity matches the registry value. The ES modules are vendored byte for byte (verified with `cmp`) in `tests/fixtures/candidates/cfworker-json-schema-4.1.1/` with `PROVENANCE.md`. |
 | Size and dependencies | PASS | 50,591 bytes of unminified ES modules across 9 files; no dependencies. |
 | No code execution, network or storage | PASS (static read) | No `eval`, `new Function`, `fetch`, `XMLHttpRequest`, dynamic `import`, `document`, `window`, storage or timers in `dist/esm`. |
 | Reference loading | PASS (static read) | `$ref` is looked up only in schemas supplied in the same document (`lookup[uri]`); an unknown reference throws "Unresolved $ref". Nothing is fetched. Relative `$id` values resolve against the page URL, which only produces keys. |
@@ -35,5 +35,5 @@ Decision needed from the owner: allow running the vendored library in tests (the
 
 ## Files currently in the working tree for this pack (uncommitted)
 
-- `assets/js/vendor/cfworker-json-schema/` (vendored library, licence, notices, provenance)
+- `tests/fixtures/candidates/cfworker-json-schema-4.1.1/` (the candidate library, licence, notices, provenance). It is kept outside `assets/` so that nothing unreferenced ships in `dist/`; if the gate is approved it moves to `assets/js/vendor/cfworker-json-schema/`.
 - `tests/fixtures/json-schema-test-suite/` (conformance data, licence, source note)

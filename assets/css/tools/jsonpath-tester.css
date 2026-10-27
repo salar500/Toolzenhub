@@ -396,7 +396,7 @@
 }
 
 .jp-value--none {
-    color: #667085;
+    color: var(--color-ink-muted);
 }
 
 .jp-row-note {

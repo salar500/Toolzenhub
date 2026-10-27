@@ -102,7 +102,7 @@
     padding: 0 4px;
     border: 0;
     background: none;
-    color: var(--color-action-green-dark, #067647);
+    color: var(--color-action-green);
     font: inherit;
     font-size: 15px;
     font-weight: 600;
