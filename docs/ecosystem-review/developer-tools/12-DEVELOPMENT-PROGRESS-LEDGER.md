@@ -13,9 +13,9 @@ The owner answered the single approval question in 11 with the Developer Tools E
 | Item | State | Reason |
 | --- | --- | --- |
 | P0 new tools: JSON Compare, URL Parser & Encoder, JSONPath Tester | AUTHORIZED | not conditional in 04 |
-| Base64URL mode (DP-4) | BLOCKED | DEC-OWN-5 / OPEN-10: reversing the spec-27 exclusion was never explicitly approved; the prompt requires explicit approval |
-| Developer Tools related-tools pilot | BLOCKED | DEC-OWN-3 not approved (rule 4.8); only invisible catalog metadata is done |
-| Release 2 (List Comparer, UUID, JSON/CSV, JSON Schema, Text Diff options, JSON Formatter indent) | NOT_STARTED | each needs its own go decision after Release 1 is verified, and Schema needs its library audit |
+| Base64URL mode (DP-4) | SUPERSEDED | owner approved on 2026-10-27; built (see section 2) |
+| Developer Tools related-tools pilot | SUPERSEDED | owner approved on 2026-10-27; built (DP-10) |
+| Release 2 (List Comparer, UUID, JSON/CSV, JSON Schema, Text Diff options, JSON Formatter indent) | SUPERSEDED | owner approved the 13-tool program on 2026-10-27; all built except JSON Schema (DP-9, BLOCKED) |
 | Regex Tester | EXCLUDED | binding |
 | Push, preview deploy, Hostinger | NOT AUTHORIZED | |
 
@@ -28,7 +28,7 @@ Commits: one local commit per bounded Tool Pack (factory section 2a). The planni
 | DP-0 | Preparation | COMPLETED (reduced) | | no shared clipboard module (L1); open items for DP-1 and DP-2 (OPEN-03/04/05) are closed inside those packs |
 | DP-3 | URL Parser & Encoder (Tool Pack 37) | VERIFIED (local, AMBER) | see git log | spec `docs/tool-packs/37-url-parser-encoder.md`. FR-UP-001..026 implemented; AC-UP-001..035 covered by 31 unit + 18 browser tests (desktop and mobile projects pass). Older specs: 278 pass, 5 fail, all 5 the known stale tests (Image Tools page, Image Tools All Tools, All Tools in json-formatter, text-diff, unix-timestamp). Unit suite 3118 pass, 1 fail (known gratuity colour token). Static: inventory, links, assets, SEO pass. AMBER because Safari, Firefox, Android, screen reader, root-desktop project and the `tools` visual baseline (pre-existing mismatch, left untouched) were not verified |
 | DP-1 | JSON Compare (Tool Pack 35) | VERIFIED (local, AMBER) | see git log | spec `docs/tool-packs/35-json-compare.md`. FR-JC-001..026 implemented; 34 unit + 21 browser tests (desktop and mobile projects pass). Shared tree module `json-tree` reuses the formatter scanner unchanged (L3). Not verified: Safari, Firefox, real Android, screen reader |
-| DP-2 | JSONPath Tester (Tool Pack 36) | VERIFIED (local, AMBER) | see git log | spec `docs/tool-packs/36-jsonpath-tester.md`. FR-JP-001..022 implemented; 43 unit + 22 browser tests (desktop and mobile projects pass). Compliance suite NOT run (AC-JP-029, L4); RFC-derived vectors used. Not verified: Safari, Firefox, real Android, screen reader |
+| DP-2 | JSONPath Tester (Tool Pack 36) | VERIFIED (local, AMBER) | see git log | spec `docs/tool-packs/36-jsonpath-tester.md`. FR-JP-001..022 implemented; 43 unit + 22 browser tests (desktop and mobile projects pass). Compliance suite run later: 659 pass, 0 fail, 56 match()/search() skipped (aae8233, L4); RFC-derived vectors used. Not verified: Safari, Firefox, real Android, screen reader |
 | DP-4 | Base64URL | VERIFIED (local) | aac1108 | owner-approved 2026-10-27; addendum §15 in pack 27; 7 unit + 5 browser tests |
 | X3 | JSON Formatter indentation | VERIFIED (local) | 773995d | owner-approved; addendum in pack 15; 6 unit + 4 browser tests; default output byte-identical |
 | X2 | Text Diff: ignore case, unchanged-lines setting | VERIFIED (local) | see git log | addendum in pack 18; 11 unit + 6 browser tests; keyboard-order assertion in text-diff.spec.js updated for the two new controls |
@@ -37,7 +37,7 @@ Commits: one local commit per bounded Tool Pack (factory section 2a). The planni
 | DP-8 | JSON and CSV Converter (Tool Pack 40) | VERIFIED (local) | see git log | spec `docs/tool-packs/40-json-csv-converter.md`; 21 unit tests (Python csv oracle, 150 seeded tables) + 14 browser tests (desktop and mobile pass); screenshot inspected at 375 px; counts pinned: tools 59, Developer Tools 12, directory groups 35 |
 | DP-9 | JSON Schema Validator (Tool Pack 41) | BLOCKED (library gate) | none | spec and audit in `docs/tool-packs/41-json-schema-validator.md`. Licence, provenance, size, static security and reference-loading checks pass; spec coverage (no draft 6, no `$dynamicRef`) and maintenance are AMBER; the hostile-pattern risk needs a Worker with a time limit. Conformance, timeout and browser gates need the vendored library to be run, which the permission classifier refused; owner decision needed (a second, explicit retry was refused too). No page, catalog entry or substitute was built |
 | DP-10 | Developer Tools related-tools pilot | VERIFIED (local) | see git log | owner-approved 2026-10-27. `showRelatedCalculators = true` on the twelve Developer Tool modules (one-line change in each older module); curated same-section `relatedTools` lists in the catalog; Time Tools pilot unchanged |
-| DP-5 | Integration / checkpoint | NOT_STARTED | | metadata only |
+| DP-5 | Integration / checkpoint | COMPLETED (local) | see git log | closure record in section 4 |
 
 ## 3. Decisions made during development
 
@@ -50,3 +50,21 @@ Commits: one local commit per bounded Tool Pack (factory section 2a). The planni
 | L5 | JSONPath adds a 4,000,000-visit work bound beside the 100,000-node working-set cap | Nested filters over a large document can be quadratic without touching the working-set cap |
 | L6 | The JSON Schema Validator is not shipped while its library gates are open; no hand-written partial validator is offered | A tool that claims JSON Schema validation but implements part of it would mislead (owner instruction: no misleading substitute) |
 | L7 | The Developer Tools related lists are curated per tool and one-way (a tool lists what it names, same section only) | Keeps each page's links relevant and testable; asserted in `relationships.test.mjs` and `developer-tools-related.spec.js` |
+
+## 4. Checkpoint closure (2026-10-27)
+
+Owner decision: Developer Tools Ecosystem 2.0 is closed at **12 implemented tools** for the current local checkpoint. Tool Pack 41 (JSON Schema Validator) stays BLOCKED and DEFERRED: its library execution was refused twice by the permission classifier, that refusal is respected, no permission settings were changed and no replacement validator exists. This is local implementation completion only; it is not release acceptance (nothing is pushed, previewed or deployed).
+
+**Inventory (12):** JSON Formatter, Unix Timestamp Converter, Text Diff, JWT Decoder, Cron Expression Explainer, Base64 Encoder & Decoder, URL Parser & Encoder, JSON Compare, JSONPath Tester, List Comparer, UUID Generator, JSON and CSV Converter. Pinned counts: tools 59, Developer Tools 12, `.directory-group` 35.
+
+**Enhancements:** Base64URL, JSON Formatter indentation, Text Diff ignore case and unchanged-lines setting, related-tools pilot on all 12 pages (curated, same-section, one-way; L7).
+
+**Evidence:** full unit run 3267 of 3275 pass (4 skipped); its 4 failures were the two caused by this work (hard-coded colour and undefined token in new styles; unreferenced candidate library in `dist/`), both fixed and re-verified by the design-token and build-output tests, plus the known gratuity colour-token failure. Browser: every new spec passes on desktop and mobile (Chromium); navigation and time-zone specs pass on both after the final fixes. JSONPath community suite 659/0/56. The mobile Developer Tools listing baseline was viewed: 12 cards, no overflow.
+
+**Known pre-existing failures (not from this work):** the gratuity colour-token unit test; the Image Tools page and Image Tools All Tools tests (2 per project); the All Tools assertions in the json-formatter, text-diff and unix-timestamp specs.
+
+**Unverified:** Safari and Firefox and real devices were not tested; only Chromium desktop and mobile projects. No visual check beyond the screenshots recorded per pack.
+
+**Deferred:** Tool Pack 41. It may resume only if the owner later permits running the candidate library (candidate and test-suite data are in `tests/fixtures/`).
+
+**Rule changes:** none to `docs/product-decision-rules.md`.
