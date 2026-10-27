@@ -39,7 +39,7 @@ test.describe("JSON Formatter & Validator", () => {
     await expect(btn(page, "Load an example")).toBeVisible();
     await expect(status(page)).toHaveText("Paste JSON, or load an example.");
     await expect(errorBox(page)).toBeHidden();
-    await expect(page.locator(".related-section")).toHaveCount(0);
+    await expect(page.locator(".related-section")).toHaveCount(1); // the Developer Tools related-tools pilot (developer-tools-related.spec.js checks the links)
     await expect(page.locator("main")).toContainText("Your JSON is processed in your browser");
     await expect(page.locator("main")).not.toContainText(/\bbest\b|ultimate|most accurate|AI-powered|smart/i);
     expectClean(watch);

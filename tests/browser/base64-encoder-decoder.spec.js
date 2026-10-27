@@ -342,10 +342,10 @@ test.describe("Base64 Encoder & Decoder in Developer Tools, search and related l
     await expect(page.locator(`.directory-section a[href$="tools/base64-encoder-decoder/"]`)).toHaveCount(1);
     await go("calculators.html");
     await expect(page.locator(`a[href*="base64"]`)).toHaveCount(0); // not a calculator
-    for (const id of ["jwt-decoder", "json-formatter"]) {
-      await go(`tools/${id}/`);
-      await expect(page.locator("main")).not.toContainText("Base64 Encoder"); // one-way: the older pages are unchanged
-    }
+    await go("tools/json-formatter/");
+    await expect(page.locator("main")).not.toContainText("Base64 Encoder"); // the JSON Formatter does not name it
+    await go("tools/jwt-decoder/");
+    await expect(page.locator(".related-section").getByRole("link", { name: /Base64 Encoder/ })).toHaveCount(1); // the Developer Tools pilot (2026-10-27) lists it
     await go("tools/base64-encoder-decoder/");
     await page.locator("main .calculator-info a", { hasText: "JWT Decoder" }).click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools/jwt-decoder/`);

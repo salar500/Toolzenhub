@@ -1417,7 +1417,7 @@ const catalog = [
         title: "JSON Formatter & Validator",
         description:
             "Check JSON against the strict standard, see exactly where it breaks, and format or minify it. It runs in your browser.",
-        relatedTools: ["unix-timestamp-converter"],
+        relatedTools: ["jsonpath-tester", "json-compare", "json-csv-converter", "unix-timestamp-converter"],
         aliases: [
             "json formatter",
             "json validator",
@@ -1455,7 +1455,7 @@ const catalog = [
         title: "Unix Timestamp Converter",
         description:
             "Convert Unix timestamps in seconds, milliseconds, microseconds or nanoseconds to a date, and a date and time zone back to a timestamp, with daylight-saving gaps and overlaps explained. It runs in your browser.",
-        relatedTools: ["json-formatter"],
+        relatedTools: ["jwt-decoder", "cron-expression-explainer", "json-formatter"],
         aliases: [
             "unix timestamp",
             "epoch converter",
@@ -1498,7 +1498,7 @@ const catalog = [
         description:
             "Paste two versions of a text and see what was added, removed and changed, line by line with the changed words marked. It runs in your browser.",
         autoRelated: false,
-        relatedTools: ["json-formatter"],
+        relatedTools: ["json-compare", "list-comparer", "json-formatter"],
         aliases: [
             "text diff",
             "diff checker",
@@ -1538,7 +1538,7 @@ const catalog = [
         description:
             "Read the header and payload of a JSON Web Token, see its claims explained and its times as dates. It does not check the signature. It runs in your browser.",
         autoRelated: false,
-        relatedTools: ["json-formatter", "unix-timestamp-converter"],
+        relatedTools: ["unix-timestamp-converter", "base64-encoder-decoder", "json-formatter"],
         aliases: [
             "jwt decoder",
             "decode jwt",
@@ -1614,7 +1614,7 @@ const catalog = [
         description:
             "Encode text to Base64 or decode Base64 back to text, with UTF-8 support and a clear message for invalid input. It runs in your browser: nothing is uploaded.",
         autoRelated: false,
-        relatedTools: ["jwt-decoder", "json-formatter"],
+        relatedTools: ["jwt-decoder", "url-parser", "json-formatter"],
         aliases: [
             "base64 encoder",
             "base64 decoder",
@@ -1691,7 +1691,7 @@ const catalog = [
         description:
             "Compare two JSON documents as data: see what was added, removed, changed or changed in type, with the path of each and a JSON Patch. Key order and number formatting are not differences. It runs in your browser: nothing is uploaded.",
         autoRelated: false,
-        relatedTools: ["json-formatter", "text-diff"],
+        relatedTools: ["json-formatter", "text-diff", "jsonpath-tester"],
         aliases: [
             "json compare",
             "compare json",

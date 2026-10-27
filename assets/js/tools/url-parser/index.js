@@ -36,7 +36,7 @@ import {
 
 
 /* The related tools are linked from the catalog's relatedTools; the page text links only these two. */
-export const showRelatedCalculators = false;
+export const showRelatedCalculators = true;
 export const showRelatedArticles = false;
 
 

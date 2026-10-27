@@ -387,11 +387,11 @@ test.describe("JWT Decoder in the Developer Tools section", () => {
     const hrefs = await page.locator("a[href*='/tools/']").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
     for (const id of ["json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder"]) expect(hrefs).toContain(`${siteRoot}tools/${id}/`);
     await expect(page.locator("body")).toContainText("JWT Decoder");
-    // the JSON Formatter and Unix converter pages are unchanged: they do not mention the new tool
-    for (const id of ["json-formatter", "unix-timestamp-converter"]) {
-      await go(`tools/${id}/`);
-      await expect(page.locator("main")).not.toContainText("JWT");
-    }
+    // the JSON Formatter page does not mention the tool; the Unix converter lists it since the Developer Tools pilot (2026-10-27)
+    await go("tools/json-formatter/");
+    await expect(page.locator("main")).not.toContainText("JWT");
+    await go("tools/unix-timestamp-converter/");
+    await expect(page.locator(".related-section").getByRole("link", { name: /JWT Decoder/ })).toHaveCount(1);
     // the JWT page links to both, in its own text
     await go("tools/jwt-decoder/");
     const links = await page.locator("main .calculator-info a").evaluateAll((a) => a.map((x) => x.getAttribute("href")));

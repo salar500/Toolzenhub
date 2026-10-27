@@ -523,10 +523,13 @@ test.describe("Cron Expression Explainer in the Developer Tools section", () => 
     for (const id of ["json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer"]) expect(hrefs).toContain(`${siteRoot}tools/${id}/`);
     await expect(page.locator("body")).toContainText("Cron Expression Explainer");
     // the older pages are unchanged: they do not mention the new tool
-    for (const id of ["json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder"]) {
+    for (const id of ["json-formatter", "text-diff", "jwt-decoder"]) {
       await go(`tools/${id}/`);
       await expect(page.locator("main")).not.toContainText("Cron Expression");
     }
+    // the Unix converter lists it since the Developer Tools pilot (2026-10-27)
+    await go("tools/unix-timestamp-converter/");
+    await expect(page.locator(".related-section").getByRole("link", { name: /Cron Expression Explainer/ })).toHaveCount(1);
     await go("tools/cron-expression-explainer/");
     const links = await page.locator("main .calculator-info a").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
     expect(links).toEqual([`${siteRoot}tools/unix-timestamp-converter/`]);

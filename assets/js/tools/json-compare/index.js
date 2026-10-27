@@ -44,7 +44,7 @@ import {
 
 
 /* The related tools are linked from the page text and the catalog's relatedTools; no related block is shown. */
-export const showRelatedCalculators = false;
+export const showRelatedCalculators = true;
 export const showRelatedArticles = false;
 
 

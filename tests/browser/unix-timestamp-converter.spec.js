@@ -51,7 +51,7 @@ test.describe("Unix Timestamp Converter", () => {
     await expect(page.locator("#ts-now-zone")).toContainText("UTC+05:30");
     await expect(aOut(page)).toBeHidden();
     await expect(page.locator("#ts-board")).toBeHidden();
-    await expect(page.locator(".related-section")).toHaveCount(0);
+    await expect(page.locator(".related-section")).toHaveCount(1); // the Developer Tools related-tools pilot (developer-tools-related.spec.js checks the links)
     await expect(page.locator("main")).toContainText("Your timestamps and dates are processed in your browser");
     await expect(page.locator("main")).not.toContainText(/\bbest\b|ultimate|most accurate|AI-powered|smart/i);
     expectClean(watch);
@@ -556,9 +556,9 @@ test.describe("Developer Tools in the site", () => {
 
   test("the JSON Formatter and the converter link each other, and no Time Tool links to either", async ({ page, go }) => {
     await go("tools/json-formatter/");
-    await expect(page.locator('main a[href$="tools/unix-timestamp-converter/"]')).toHaveCount(1);
+    await expect(page.locator('main a[href$="tools/unix-timestamp-converter/"]').first()).toBeVisible(); // a card in the related section
     await go("tools/unix-timestamp-converter/");
-    await expect(page.locator('main a[href$="tools/json-formatter/"]')).toHaveCount(1);
+    await expect(page.locator('main a[href$="tools/json-formatter/"]').first()).toBeVisible();
     for (const slug of ["date-difference", "date-calculator", "countdown-timer", "stopwatch"]) {
       await go(`tools/${slug}/`);
       await expect(page.locator('main a[href$="tools/unix-timestamp-converter/"], main a[href$="tools/json-formatter/"]')).toHaveCount(0);

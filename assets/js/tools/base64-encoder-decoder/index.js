@@ -33,7 +33,7 @@ import {
 
 
 /* No related calculator or article exists; the tool links the JWT Decoder and the JSON Formatter in its text. */
-export const showRelatedCalculators = false;
+export const showRelatedCalculators = true;
 export const showRelatedArticles = false;
 
 

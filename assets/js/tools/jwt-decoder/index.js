@@ -35,7 +35,7 @@ import {
 
 
 /* No related calculator or article exists; the tool links two Developer Tools in its text. */
-export const showRelatedCalculators = false;
+export const showRelatedCalculators = true;
 export const showRelatedArticles = false;
 
 

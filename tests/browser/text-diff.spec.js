@@ -59,7 +59,7 @@ test.describe("Text Diff / Compare", () => {
     await expect(page.locator(".td-limit")).toContainText("Up to 300,000 characters and 20,000 lines per side.");
     await expect(page.locator("#td-ignore")).not.toBeChecked();
     await expect(page.locator("#td-wrap")).toBeChecked();
-    await expect(page.locator(".related-section")).toHaveCount(0);
+    await expect(page.locator(".related-section")).toHaveCount(1); // the Developer Tools related-tools pilot (developer-tools-related.spec.js checks the links)
     await expect(page.locator(".report-issue")).toHaveCount(0);
     await expect(page.locator("main")).toContainText("Your text is compared in your browser");
     await expect(page.locator("main")).not.toContainText(/\bbest\b|ultimate|most accurate|AI-powered|intelligent|smart/i);
@@ -544,10 +544,10 @@ test.describe("Text Diff / Compare in the site", () => {
 
   test("it links the JSON Formatter, and the Unix converter is not related to it", async ({ page, go }) => {
     await go("tools/text-diff/");
-    await expect(page.locator('main a[href$="tools/json-formatter/"]')).toHaveCount(1);
+    await expect(page.locator('main a[href$="tools/json-formatter/"]').first()).toBeVisible(); // the text link and the related card
     await expect(page.locator('main a[href$="tools/unix-timestamp-converter/"]')).toHaveCount(0);
     await go("tools/unix-timestamp-converter/");
-    await expect(page.locator("main")).not.toContainText(/text diff/i);
+    await expect(page.locator('main a[href$="tools/text-diff/"]')).toHaveCount(0); // the pilot lists JWT, Cron and the JSON Formatter there
   });
 
   test("the two existing Developer Tools still load and work after the shared catalog change", async ({ page, go, watch }) => {

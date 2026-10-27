@@ -45,7 +45,7 @@ import {
 
 
 /* Its relation to the JSON Formatter is a sentence on the page; no calculator or article is related. */
-export const showRelatedCalculators = false;
+export const showRelatedCalculators = true;
 export const showRelatedArticles = false;
 
 

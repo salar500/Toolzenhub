@@ -41,7 +41,7 @@ const INDENT_WORDS = { two: "2 spaces", four: "4 spaces", tab: "tab indent" };
 
 
 /* No related tool or article exists yet; a relation is added when one genuinely does. */
-export const showRelatedCalculators = false;
+export const showRelatedCalculators = true;
 export const showRelatedArticles = false;
 
 

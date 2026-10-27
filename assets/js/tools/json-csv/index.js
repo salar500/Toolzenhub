@@ -32,7 +32,7 @@ import {
 } from "../../data/tools.js";
 
 
-export const showRelatedCalculators = false;
+export const showRelatedCalculators = true;
 export const showRelatedArticles = false;
 
 

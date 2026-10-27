@@ -76,23 +76,24 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.deepEqual(toolIds(rel.getRelatedTools("countdown-timer")), ["stopwatch", "date-difference", "date-calculator"]);
     assert.deepEqual(toolIds(rel.getRelatedTools("stopwatch")), ["countdown-timer", "date-difference", "date-calculator"]);
     // the two Developer Tools name each other (timestamps live in JSON payloads) and nothing else: the Time Tools are not related to them, nor they to the Time Tools
-    assert.deepEqual(toolIds(rel.getRelatedTools("json-formatter")), ["unix-timestamp-converter"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("unix-timestamp-converter")), ["json-formatter"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("json-formatter")), ["jsonpath-tester", "json-compare", "json-csv-converter", "unix-timestamp-converter"]); // the Developer Tools related-tools pilot (owner-approved 2026-10-27): curated, same section only
+    assert.deepEqual(toolIds(rel.getRelatedTools("unix-timestamp-converter")), ["jwt-decoder", "cron-expression-explainer", "json-formatter"]);
     // Text Diff names the JSON Formatter (format two documents, then compare them) and nothing else (autoRelated is off, so the section does not fill it); the link is one way and the Unix converter is not related to it
-    assert.deepEqual(toolIds(rel.getRelatedTools("text-diff")), ["json-formatter"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("text-diff")), ["json-compare", "list-comparer", "json-formatter"]);
     assert.equal(toolIds(rel.getRelatedTools("unix-timestamp-converter")).includes("text-diff"), false);
     // the JWT Decoder (Tool Pack 22) names the JSON Formatter (the payload is JSON) and the Unix Timestamp Converter (exp, nbf and iat are Unix times), and nothing else (autoRelated is off); the links are one way, so neither tool's list, nor any other tool's, gains it
-    assert.deepEqual(toolIds(rel.getRelatedTools("jwt-decoder")), ["json-formatter", "unix-timestamp-converter"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("jwt-decoder")), ["unix-timestamp-converter", "base64-encoder-decoder", "json-formatter"]);
     // the Cron Expression Explainer (Tool Pack 25) names the Unix Timestamp Converter only (its next runs are Unix-time instants; autoRelated is off); the link is one way, so no other tool's list gains it, and the Time Zone Converter (another section) is not related
     assert.deepEqual(toolIds(rel.getRelatedTools("cron-expression-explainer")), ["unix-timestamp-converter"]);
-    for (const id of ["json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "time-zone-converter", "image-compressor-resizer", "date-difference", "stopwatch", "swp", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("cron-expression-explainer"), false, id);
+    // the Unix converter names the Cron Explainer in the Developer Tools pilot
+    for (const id of ["json-formatter", "text-diff", "jwt-decoder", "time-zone-converter", "image-compressor-resizer", "date-difference", "stopwatch", "swp", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("cron-expression-explainer"), false, id);
     // the Credit Card Payoff Calculator (Tool Pack 24) keeps the automatic Loans relationships on: its curated tools first (a balance moved to a lower rate, extra payments, a fixed payment over a term), then the rest of the category, and it is appended to every other Loans tool's list (asserted above)
     assert.deepEqual(toolIds(rel.getRelatedTools("credit-card-payoff")), ["balance-transfer", "prepayment", "emi", "loan-comparison", "home-loan"]);
     assert.deepEqual(keys(rel.getRelatedArticlesForTool("credit-card-payoff")), ["loan-comparison/loan-tenure-total-interest", "loan-comparison/emi-vs-total-interest"]); // curated, shown as written, not padded
     // the Hours & Timesheet Calculator (Tool Pack 23) relates to nothing (autoRelated is off and it names no tool), so it joins no other Time Tool's list and the four older Time Tools' lists above are unchanged
     assert.deepEqual(toolIds(rel.getRelatedTools("hours-calculator")), ["shift-planner"]); // the Time Tools pilot: one curated, one-way relation (autoRelated is off)
     for (const id of ["date-difference", "date-calculator", "countdown-timer", "stopwatch", "time-zone-converter", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "image-compressor-resizer", "swp", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("hours-calculator"), false, id);
-    for (const id of ["json-formatter", "unix-timestamp-converter", "text-diff", "time-zone-converter", "image-compressor-resizer", "date-difference", "stopwatch", "swp", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("jwt-decoder"), false, id);
+    for (const id of ["json-formatter", "text-diff", "time-zone-converter", "image-compressor-resizer", "date-difference", "stopwatch", "swp", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("jwt-decoder"), false, id) // the Unix converter is not in this list: the pilot names the JWT Decoder there;
     // the Time Zone Converter names the Unix converter (both read instants and zones); autoRelated is off, so it joins no other Time Tool's list and none of theirs are changed (asserted above)
     assert.deepEqual(toolIds(rel.getRelatedTools("time-zone-converter")), ["unix-timestamp-converter", "meeting-planner"]); // the pilot adds the Meeting Planner
     assert.deepEqual(toolIds(rel.getRelatedTools("world-clock")), ["time-zone-converter", "meeting-planner"]); // curated, one way: the Time Zone Converter does not link back

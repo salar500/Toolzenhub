@@ -4333,7 +4333,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4831
+      "visibleTextChars": 5426
     }
   },
   "/tools/business-days/": {
@@ -4480,7 +4480,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8476
+      "visibleTextChars": 8748
     }
   },
   "/tools/date-calculator/": {
@@ -4774,7 +4774,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3873
+      "visibleTextChars": 4467
     }
   },
   "/tools/json-csv-converter/": {
@@ -4823,7 +4823,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3938
+      "visibleTextChars": 4372
     }
   },
   "/tools/json-formatter/": {
@@ -4872,7 +4872,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4320
+      "visibleTextChars": 5337
     }
   },
   "/tools/jsonpath-tester/": {
@@ -4921,7 +4921,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4612
+      "visibleTextChars": 5046
     }
   },
   "/tools/jwt-decoder/": {
@@ -4970,7 +4970,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5320
+      "visibleTextChars": 5927
     }
   },
   "/tools/list-comparer/": {
@@ -5019,7 +5019,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2910
+      "visibleTextChars": 3359
     }
   },
   "/tools/meeting-planner/": {
@@ -5460,7 +5460,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3653
+      "visibleTextChars": 4309
     }
   },
   "/tools/time-duration/": {
@@ -5607,7 +5607,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5400
+      "visibleTextChars": 6031
     }
   },
   "/tools/url-parser/": {
@@ -5656,7 +5656,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5651
+      "visibleTextChars": 6021
     }
   },
   "/tools/uuid-generator/": {
@@ -5705,7 +5705,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2816
+      "visibleTextChars": 3208
     }
   },
   "/tools/world-clock/": {
