@@ -425,6 +425,13 @@
       "state": "active"
     },
     {
+      "id": "json-csv-converter",
+      "module": "assets/js/tools/json-csv/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "json-formatter",
       "module": "assets/js/tools/json-formatter/index.js",
       "moduleChanges": [],

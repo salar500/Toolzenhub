@@ -1,0 +1,453 @@
+/* =========================================================
+   ToolZen Hub
+   JSON and CSV Converter
+
+   Only what the shared tool styles do not already provide: the two
+   list boxes, the options, the status line and the result groups.
+   Buttons, focus and headings come from the shared layer. Loaded
+   after calculator-responsive.css.
+
+   States are told in words, never by colour alone. Everything that
+   came from the input wraps (overflow-wrap: anywhere), so a long
+   line never widens the page. Nothing animates.
+========================================================= */
+
+.jc-workspace [hidden] {
+    display: none !important;
+}
+
+.jc-workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+}
+
+.jc-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.jc-boxes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.jc-field {
+    min-width: 0;
+}
+
+.jc-field__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 12px;
+    margin-bottom: 6px;
+}
+
+.jc-label {
+    margin: 0;
+    padding: 0;
+    color: var(--color-ink);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.jc-meta {
+    color: #475467;
+    font-size: 14px;
+}
+
+.jc-input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    min-height: 160px;
+    padding: 10px 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+    background: #ffffff;
+    color: var(--color-ink);
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    resize: vertical;
+}
+
+.jc-input:focus-visible,
+.jc-check input:focus-visible,
+.jc-link:focus-visible {
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+}
+
+.jc-linkline {
+    margin: 0;
+}
+
+.jc-link {
+    min-height: 44px;
+    padding: 0 4px;
+    border: 0;
+    background: none;
+    color: var(--color-action-green-dark, #067647);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.jc-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.jc-options legend {
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+.jc-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    color: var(--color-ink);
+    font-size: 15px;
+}
+
+.jc-check input {
+    width: 20px;
+    height: 20px;
+    flex: none;
+}
+
+.jc-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.jc-button {
+    min-width: 0;
+    min-height: 48px;
+    font-size: 16px;
+}
+
+.jc-button--small {
+    min-height: 44px;
+    padding: 6px 14px;
+    font-size: 14px;
+}
+
+.jc-status {
+    margin: 0;
+    padding: 10px 14px;
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 10px;
+    background: #f9fafb;
+    color: #344054;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.jc-status[data-state="done"] {
+    border-color: #067647;
+    background: #ecfdf3;
+    color: #054f31;
+}
+
+.jc-status[data-state="invalid"] {
+    border-color: #b42318;
+    background: #fef3f2;
+    color: #912018;
+}
+
+.jc-result-title {
+    margin: 0 0 8px;
+    font-size: 20px;
+}
+
+.jc-notes {
+    margin: 0 0 12px;
+    padding-left: 22px;
+    color: #344054;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.jc-group {
+    min-width: 0;
+    margin: 0 0 16px;
+}
+
+.jc-group__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 12px;
+}
+
+.jc-group__title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.jc-list {
+    max-height: 320px;
+    margin: 8px 0;
+    padding: 0;
+    overflow: auto;
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+    background: #f9fafb;
+    list-style: none;
+}
+
+.jc-list:empty::before {
+    content: "None";
+    display: block;
+    padding: 10px 14px;
+    color: #475467;
+    font-size: 14px;
+}
+
+.jc-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2px 12px;
+    padding: 6px 14px;
+    border-bottom: 1px solid #eaecf0;
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.jc-item:last-child {
+    border-bottom: 0;
+}
+
+.jc-item__text {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.jc-item__count {
+    color: #475467;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+
+    .jc-boxes {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .jc-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+.jc-note {
+    margin: 0;
+    padding: 10px 14px;
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 10px;
+    background: #f9fafb;
+    color: #344054;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.jc-versions {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.jc-versions legend {
+    padding: 0;
+}
+
+.jc-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.jc-choice {
+    display: flex;
+    flex: 1 1 200px;
+    align-items: flex-start;
+    gap: 10px;
+    min-height: 44px;
+    padding: 10px 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.jc-choice input {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    flex: none;
+}
+
+.jc-choice span {
+    display: grid;
+    gap: 2px;
+}
+
+.jc-choice small {
+    color: #475467;
+    font-size: 13px;
+}
+
+.jc-choice:has(input:checked) {
+    border-color: #067647;
+    box-shadow: inset 0 0 0 1px #067647;
+}
+
+.jc-choice:has(input:focus-visible) {
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+}
+
+.jc-number {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 180px;
+    min-height: 48px;
+    margin-top: 6px;
+    padding: 0 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+    background: #ffffff;
+    color: var(--color-ink);
+    font-size: 16px;
+}
+
+.jc-number:focus-visible {
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+}
+
+.jc-number[aria-invalid="true"] {
+    border-color: #b42318;
+    box-shadow: inset 4px 0 0 #b42318;
+}
+
+.jc-error {
+    margin: 6px 0 0;
+    color: #912018;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.jc-item__text {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.jc-item {
+    align-items: center;
+}
+
+.jc-select {
+    min-height: 44px;
+    max-width: 100%;
+    padding: 0 12px;
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+    background: #ffffff;
+    color: var(--color-ink);
+    font-size: 16px;
+}
+
+.jc-select:focus-visible,
+.jc-output:focus-visible {
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+}
+
+.jc-opts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 24px;
+}
+
+.jc-opt-select {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-ink);
+    font-size: 15px;
+}
+
+.jc-output {
+    box-sizing: border-box;
+    max-height: 360px;
+    margin: 0;
+    padding: 10px 14px;
+    overflow: auto;
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+    background: #f9fafb;
+    color: var(--color-ink);
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre;
+}
+
+.jc-notes {
+    margin: 0;
+    padding-left: 22px;
+    color: #344054;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.jc-hint {
+    color: #475467;
+    font-size: 14px;
+}

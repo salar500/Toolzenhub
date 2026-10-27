@@ -27,7 +27,7 @@ before(async () => {
 
 // the published tools of the Calculators section; Date Difference (Time Tools) is a published tool too, but it is not a calculator
 const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "swp", "percentage", "income-tax", "credit-card-payoff", "ppf", "gratuity", "salary-in-hand"];
-const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "list-comparer", "uuid-generator", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages"];
+const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "list-comparer", "uuid-generator", "json-csv-converter", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"];
 
 describe("catalog model", () => {
@@ -147,6 +147,7 @@ describe("registry is derived from the catalog", () => {
       "jsonpath-tester": { section: "Developer Tools", title: "JSONPath Tester" },
       "list-comparer": { section: "Developer Tools", title: "List Comparer" },
       "uuid-generator": { section: "Developer Tools", title: "UUID Generator" },
+      "json-csv-converter": { section: "Developer Tools", title: "JSON and CSV Converter" },
       "text-diff": { section: "Developer Tools", title: "Text Diff / Compare" },
       "jwt-decoder": { section: "Developer Tools", title: "JWT Decoder" },
       "cron-expression-explainer": { section: "Developer Tools", title: "Cron Expression Explainer" },

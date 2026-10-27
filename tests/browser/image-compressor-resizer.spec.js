@@ -937,7 +937,7 @@ test.describe("Image Tools in the site", () => {
     await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(13);
     await go("developer-tools.html");
     await expect(page.locator("h1")).toHaveText("Developer Tools");
-    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(11);
+    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(12);
     await go("tools/time-zone-converter/");
     await expect(page.locator("h1")).toHaveText("Time Zone Converter");
     expectClean(watch);

@@ -34,6 +34,7 @@ Commits: one local commit per bounded Tool Pack (factory section 2a). The planni
 | X2 | Text Diff: ignore case, unchanged-lines setting | VERIFIED (local) | see git log | addendum in pack 18; 11 unit + 6 browser tests; keyboard-order assertion in text-diff.spec.js updated for the two new controls |
 | DP-6 | List Comparer (Tool Pack 38) | VERIFIED (local) | see git log | spec `docs/tool-packs/38-list-comparer.md`; 14 unit + 15 browser tests (desktop and mobile pass); screenshots inspected at 1180 and 375 px; counts pinned: tools 57, Developer Tools 10, directory groups 33 |
 | DP-7 | UUID Generator (Tool Pack 39) | VERIFIED (local) | see git log | spec `docs/tool-packs/39-uuid-generator.md`; RFC 9562 layouts checked against the RFC text; 13 unit + 14 browser tests (desktop and mobile pass); screenshot inspected at 375 px; counts pinned: tools 58, Developer Tools 11, directory groups 34. The "no uuid on the Developer Tools page" assertions in three older browser specs were stale once this tool is live and were narrowed to "coming soon / regex" |
+| DP-8 | JSON and CSV Converter (Tool Pack 40) | VERIFIED (local) | see git log | spec `docs/tool-packs/40-json-csv-converter.md`; 21 unit tests (Python csv oracle, 150 seeded tables) + 14 browser tests (desktop and mobile pass); screenshot inspected at 375 px; counts pinned: tools 59, Developer Tools 12, directory groups 35 |
 | DP-5 | Integration / checkpoint | NOT_STARTED | | metadata only |
 
 ## 3. Decisions made during development

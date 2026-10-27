@@ -1829,6 +1829,45 @@ const catalog = [
         }
     },
 
+
+    {
+        id: "json-csv-converter",
+        status: "published",
+        loader: () =>
+            import("../tools/json-csv/index.js"),
+        sectionId: "developer-tools",
+        icon: "CSV",
+        title: "JSON and CSV Converter",
+        description:
+            "Convert a JSON array of objects to CSV, or CSV to JSON, with RFC 4180 quoting, a choice of delimiter, nested values never flattened silently and spreadsheet formulas neutralized. It runs in your browser: nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: ["json-formatter", "json-compare"],
+        aliases: [
+            "json to csv",
+            "csv to json",
+            "json csv",
+            "csv json",
+            "convert json to csv",
+            "convert csv to json",
+            "csv converter",
+            "json converter"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "JSON to CSV and CSV to JSON Converter | ToolZen Hub",
+            description:
+                "Convert a JSON array of objects to CSV or CSV to JSON with RFC 4180 quoting, delimiter choice and spreadsheet formula protection. It runs in your browser: nothing is uploaded."
+        }
+    },
+
     {
         id: "image-compressor-resizer",
         status: "published",
