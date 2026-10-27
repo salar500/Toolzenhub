@@ -16,7 +16,7 @@ Research and planning only, 2026-10-26. No application code, test, baseline, rul
 | Working tree | clean at the start of this phase |
 | Stack | Eleventy 3.1.6, vanilla ES modules, `package.json` has **no runtime dependencies** (dev only: Eleventy, Playwright 1.63.0, Lighthouse 12.8.2) |
 | Environments | GitHub Pages preview deploys from any push to `main` (`.github/workflows/pages.yml`); Hostinger production is manual and was not touched |
-| Time Tools state | 13 tools implemented; **Android acceptance is still pending** (owner); production not approved |
+| Time Tools state | 13 tools implemented; the owner reported on 2026-10-27 that the Time Tools GitHub Pages preview **passed Android acceptance** (owner-reported; Safari and Firefox were not tested); production not approved |
 
 ## 2. Existing Developer Tools inventory (VERIFIED from `assets/js/data/tools.js`, modules, specs and tests)
 

@@ -1622,7 +1622,8 @@ const catalog = [
             "base64 decode",
             "base64 converter",
             "text to base64",
-            "base64 to text"
+            "base64 to text",
+            "base64url"
         ],
         capabilities: {
             reset: true,

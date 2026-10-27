@@ -4,16 +4,22 @@
 
    Pure functions. No DOM, network, storage or Date.
 
-   Standard Base64 (RFC 4648 section 4: A-Z a-z 0-9 + /, padded with =)
-   of the UTF-8 bytes of a text. The table is implemented here
+   Base64 of the UTF-8 bytes of a text: the standard alphabet (RFC 4648
+   section 4: A-Z a-z 0-9 + /, padded with =) or, as an explicit
+   option, the URL-safe alphabet (section 5: - and _ instead of + and /,
+   padding omitted unless asked for). The table is implemented here
    because strict validation needs more control than atob gives.
 
    ENCODING  text -> UTF-8 bytes -> padded Base64, no line breaks.
+     URL-safe: the same, with - and _, and the = padding left off
+     unless options.keepPadding is set.
 
    DECODING  Base64 -> bytes -> strict UTF-8 text.
      1. Only ASCII space, tab, CR and LF are ignored (anywhere).
      2. Only the 64 alphabet characters and trailing = are allowed.
-        - and _ get a base64url hint.
+        - and _ get a base64url hint (URL-safe mode: + and / get a
+          standard-Base64 hint, and padding is optional but, when
+          present, must be correct).
      3. = may appear only at the end, at most two, and when present
         the data characters plus the = must make a multiple of 4.
         Missing padding is accepted (remainder 2 or 3); a remainder of
@@ -46,6 +52,16 @@ const DECODE_TABLE = new Uint8Array(128).fill(255);
 
 for (let i = 0; i < 64; i++) {
     DECODE_TABLE[ALPHABET.charCodeAt(i)] = i;
+}
+
+/* the URL-safe alphabet: - and _ in place of + and / */
+const URL_DECODE_TABLE = new Uint8Array(128).fill(255);
+
+for (let i = 0; i < 64; i++) {
+
+    const c = ALPHABET.charCodeAt(i);
+
+    URL_DECODE_TABLE[c === 0x2b ? 0x2d : c === 0x2f ? 0x5f : c] = i;
 }
 
 const IGNORED = new Set([0x20, 0x09, 0x0d, 0x0a]);
@@ -191,7 +207,7 @@ function sextetsToBytes(sextets, count) {
    ENCODE TEXT
 ========================================================= */
 
-export function encodeText(text) {
+export function encodeText(text, options = {}) {
 
     if (typeof text !== "string" || text.length === 0) {
         return fail("EMPTY", "Enter some text to encode.");
@@ -246,7 +262,16 @@ export function encodeText(text) {
         );
     }
 
-    const value = encodeBytes(bytes);
+    let value = encodeBytes(bytes);
+
+    if (options.urlSafe) {
+
+        value = value.replaceAll("+", "-").replaceAll("/", "_");
+
+        if (!options.keepPadding) {
+            value = value.replace(/=+$/, "");
+        }
+    }
 
     return {
         ok: true,
@@ -263,7 +288,10 @@ export function encodeText(text) {
    DECODE BASE64
 ========================================================= */
 
-export function decodeBase64(input) {
+export function decodeBase64(input, options = {}) {
+
+    const urlSafe = options.urlSafe === true;
+    const table = urlSafe ? URL_DECODE_TABLE : DECODE_TABLE;
 
     if (typeof input !== "string") {
         return fail("EMPTY", "Enter some Base64 to decode.");
@@ -316,21 +344,29 @@ export function decodeBase64(input) {
             );
         }
 
-        const value = cp < 128 ? DECODE_TABLE[cp] : 255;
+        const value = cp < 128 ? table[cp] : 255;
 
         if (value === 255) {
 
-            if (cp === 0x2d || cp === 0x5f) {
+            if (!urlSafe && (cp === 0x2d || cp === 0x5f)) {
                 return fail(
                     "BASE64URL",
-                    `"${ch}" at position ${position} is not part of standard Base64. This looks like base64url, which writes - and _ where Base64 writes + and /. This tool reads standard Base64 only.`,
+                    `"${ch}" at position ${position} is not part of standard Base64. This looks like base64url, which writes - and _ where Base64 writes + and /. Switch the alphabet to URL-safe.`,
+                    { position }
+                );
+            }
+
+            if (urlSafe && (cp === 0x2b || cp === 0x2f)) {
+                return fail(
+                    "STANDARD_BASE64",
+                    `"${ch}" at position ${position} is not part of URL-safe Base64. This looks like standard Base64. Switch the alphabet to Standard.`,
                     { position }
                 );
             }
 
             return fail(
                 "INVALID_CHARACTER",
-                `${describeChar(cp)} at position ${position} is not allowed in Base64. Only A-Z, a-z, 0-9, + and /, with = at the end, are read (and ASCII space, tab and line breaks are ignored).`,
+                `${describeChar(cp)} at position ${position} is not allowed in Base64. Only ${urlSafe ? "A-Z, a-z, 0-9, - and _" : "A-Z, a-z, 0-9, + and /"}, with = at the end, are read (and ASCII space, tab and line breaks are ignored).`,
                 { position }
             );
 
@@ -419,7 +455,7 @@ export function decodeBase64(input) {
         notes.push(`${countText(ignored)} of whitespace ${ignored === 1 ? "was" : "were"} ignored.`);
     }
 
-    if (padding === 0 && remainder !== 0) {
+    if (padding === 0 && remainder !== 0 && !urlSafe) {
         notes.push("Padding was missing and is assumed.");
     }
 

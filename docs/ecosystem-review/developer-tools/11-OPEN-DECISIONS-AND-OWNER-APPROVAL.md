@@ -2,9 +2,13 @@
 
 PROJECT: ToolZenHub
 ECOSYSTEM: Developer Tools
-STATUS: PROPOSED — NOT APPROVED FOR IMPLEMENTATION
+STATUS: OWNER SCOPE DECISION RECORDED 2026-10-27 (see section 0); the rest of this document is the original proposal text
 PHASES: 0, 1 AND 2 (Ecosystem 2.0 revision, 2026-10-26)
 PURPOSE: Research and requirements baseline
+
+## 0. Owner decisions recorded (2026-10-27)
+
+The owner approved, in the continuation authorization of 2026-10-27: **the Balanced scope of 13 tools** (DEC-OWN-1), the three P0 tools (earlier approval), the four P1 tools **List Comparer, UUID Generator, JSON ⇄ CSV and JSON Schema Validator** (the Schema Validator only if its library audit and the technical gates pass; a failed gate is recorded as a blocker, never replaced by a misleading substitute), **the Base64URL enhancement** (reversing the spec-27 "Out of V1" item for this functionality only; DEC-OWN-5), **the Developer Tools related-tools pilot** limited to genuinely relevant published tools (DEC-OWN-3), **Text Diff "ignore case" and "show only changes"**, and **the JSON Formatter indentation choice**. DEC-OWN-2 stays P0 (URL Parser built). DEC-OWN-4 is unchanged: the Regex Tester stays excluded. Production, push, PR and deployment remain unauthorized. The earlier "NOT AUTHORIZED" statements below are superseded by this section.
 
 ## 1. What is being asked (one consolidated decision)
 

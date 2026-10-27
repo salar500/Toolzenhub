@@ -60,7 +60,7 @@ const MODES = {
     decode: {
         label: "Base64 to decode",
         action: "Decode",
-        hint: `Paste standard Base64 (A-Z, a-z, 0-9, + and /, with = at the end). Spaces and line breaks are ignored and missing padding is accepted, but the check is strict otherwise: see how this tool reads your input below. The limit is ${MAX_DECODE_CHARS.toLocaleString("en-US")} characters. Then press Decode.`
+        hint: `Paste Base64 in the chosen alphabet (standard: A-Z, a-z, 0-9, + and /; URL-safe: - and _ instead of + and /; with = at the end). Spaces and line breaks are ignored and missing padding is accepted, but the check is strict otherwise: see how this tool reads your input below. The limit is ${MAX_DECODE_CHARS.toLocaleString("en-US")} characters. Then press Decode.`
     }
 };
 
@@ -171,6 +171,44 @@ export function markup() {
                             </label>
 
                         </div>
+
+                    </fieldset>
+
+                    <fieldset class="b64-mode">
+
+                        <legend class="b64-label">
+                            Alphabet
+                        </legend>
+
+                        <div class="b64-mode__options">
+
+                            <label class="b64-mode__option">
+                                <input
+                                    type="radio"
+                                    name="b64-alphabet"
+                                    id="b64-alphabet-standard"
+                                    value="standard"
+                                    checked
+                                >
+                                <span>Standard (+ and /)</span>
+                            </label>
+
+                            <label class="b64-mode__option">
+                                <input
+                                    type="radio"
+                                    name="b64-alphabet"
+                                    id="b64-alphabet-url"
+                                    value="url"
+                                >
+                                <span>URL-safe (- and _)</span>
+                            </label>
+
+                        </div>
+
+                        <label class="b64-mode__option" id="b64-padding-wrap" hidden>
+                            <input type="checkbox" id="b64-padding">
+                            <span>Keep = padding when encoding</span>
+                        </label>
 
                     </fieldset>
 
@@ -370,8 +408,8 @@ export function markup() {
                     protect a password or a token. The parts of a token are
                     Base64 text: the
                     <a href="${JWT_TOOL.href}">${JWT_TOOL.title}</a>
-                    reads them for you (a JWT uses the base64url variant,
-                    which this tool does not read), and the
+                    reads them for you (a JWT uses the URL-safe alphabet without
+                    padding, which this tool can also read and write), and the
                     <a href="${JSON_TOOL.href}">${JSON_TOOL.title}</a>
                     helps once the text inside is JSON.
                 </p>
@@ -390,7 +428,8 @@ export function markup() {
                 <p>
                     <strong>Encoding</strong> turns your text into UTF-8 bytes
                     exactly as typed (no trimming) and writes standard Base64
-                    with <code>=</code> padding and no line breaks. Accented
+                    with <code>=</code> padding and no line breaks (or the
+                    URL-safe alphabet, if you choose it). Accented
                     letters, other scripts and emoji are handled as UTF-8.
                 </p>
 
@@ -405,8 +444,18 @@ export function markup() {
                     <li>A single leftover character cannot encode a byte, so that is refused as probably cut short.</li>
                     <li>The unused bits of the last character must be zero, as an encoder writes them. <code>QR==</code> is refused even though some decoders read it as <code>A</code>: a stray bit usually means a typo or a truncated value.</li>
                     <li>The result must be valid UTF-8 text. Other bytes are reported as binary data and are not shown as garbled characters.</li>
-                    <li>- and _ belong to base64url, a different alphabet, and are refused with that hint.</li>
+                    <li>In the standard alphabet, - and _ belong to base64url, a different alphabet, and are refused with that hint.</li>
                 </ul>
+
+                <p>
+                    <strong>URL-safe (base64url, RFC 4648 section 5)</strong> writes
+                    - and _ where standard Base64 writes + and /, and usually leaves
+                    the <code>=</code> padding off. Choose it under Alphabet. Encoding
+                    omits the padding unless you tick "Keep = padding". Decoding accepts
+                    the padding either way, but padding that is present must be correct,
+                    and a + or / is refused with a hint to switch back. The same strict
+                    rules apply to the last character and to UTF-8.
+                </p>
 
             </section>
 
@@ -525,6 +574,9 @@ export function init() {
     const notes = document.querySelector("#b64-notes");
     const live = document.querySelector("#b64-live");
     const radios = [...document.querySelectorAll("input[name='b64-mode']")];
+    const alphabets = [...document.querySelectorAll("input[name='b64-alphabet']")];
+    const paddingWrap = document.querySelector("#b64-padding-wrap");
+    const padding = document.querySelector("#b64-padding");
 
     const buttons = {
         run: document.querySelector("#b64-run"),
@@ -543,6 +595,12 @@ export function init() {
 
     const mode = () =>
         radios.find((r) => r.checked).value;
+
+    const urlSafe = () =>
+        alphabets.find((r) => r.checked).value === "url";
+
+    const options = () =>
+        ({ urlSafe: urlSafe(), keepPadding: padding.checked });
 
     function announce(message) {
 
@@ -610,6 +668,8 @@ export function init() {
 
         buttons.run.textContent = m.action;
 
+        paddingWrap.hidden = !(urlSafe() && mode() === "encode");
+
     }
 
     function markStale() {
@@ -630,8 +690,8 @@ export function init() {
         const which = mode();
 
         const result = which === "encode"
-            ? encodeText(text)
-            : decodeBase64(text);
+            ? encodeText(text, options())
+            : decodeBase64(text, options());
 
         clearError();
 
@@ -738,6 +798,31 @@ export function init() {
 
     }
 
+    for (const control of [...alphabets, padding]) {
+
+        control.addEventListener("change", () => {
+
+            applyMode();
+
+            clearError();
+
+            clearResult();
+
+            setStatus(
+                "empty",
+                mode() === "encode"
+                    ? "Enter text, or choose Load example, then press Encode."
+                    : "Paste Base64, or choose Load example, then press Decode."
+            );
+
+            announce(control === padding
+                ? (padding.checked ? "Keep padding on." : "Keep padding off.")
+                : (urlSafe() ? "URL-safe alphabet selected." : "Standard alphabet selected."));
+
+        });
+
+    }
+
     buttons.example.addEventListener("click", () => {
 
         input.value = EXAMPLES[mode()];
@@ -757,6 +842,10 @@ export function init() {
     buttons.reset.addEventListener("click", () => {
 
         radios.find((r) => r.value === "encode").checked = true;
+
+        alphabets.find((r) => r.value === "standard").checked = true;
+
+        padding.checked = false;
 
         input.value = "";
 

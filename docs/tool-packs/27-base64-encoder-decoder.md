@@ -129,3 +129,13 @@ Baselines refreshed after reviewing each by eye: DOM `home-main` and `tools-dire
 - Elapsed wall time for the implementation run: about 94 minutes from the first command to the last test, of which roughly 24 minutes was one broad browser batch (a wider shared-spec selection than needed: it ran 11 spec files including the unrelated Cron and JWT specs, and the baselines specs, to catch the pinned counts) and about 10 minutes the unit and static runs; the rest was writing and focused reruns. A narrower first run (`-g` on the Developer Tools listing and count tests only) would have found the same 16 failures in a few minutes: the single most useful saving for the next pack.
 - Tests run versus reused: the unit suite was run in full 4 times (twice more than needed); the new spec ran on desktop and mobile once each after fixes; earlier PPF evidence was not reused for anything here (different tool).
 - Token usage: not available to the session; not measured. No saving is claimed.
+
+## 15. Addendum: Base64URL mode (owner-approved reversal of the "Out of V1" decision, 2026-10-27)
+
+The owner explicitly approved the Base64URL enhancement, reversing only this one "Out of V1" item (rule 9.3; DEC-OWN-5). Requirements: `docs/ecosystem-review/developer-tools/05` section E (FR-B64-001..009); tests in `tests/unit/base64url.test.mjs` and `tests/browser/base64url.spec.js`.
+
+- A labelled "Alphabet" radio group, **Standard** (default, behaviour unchanged) or **URL-safe (- and _)**. A "Keep = padding when encoding" checkbox appears only for URL-safe encoding.
+- URL-safe encode: `-` and `_`, no padding unless asked for. URL-safe decode: padding optional, correct when present; `+` and `/` are refused with "This looks like standard Base64. Switch the alphabet to Standard." and a position. The strict last-character check, UTF-8 rules and limits are unchanged.
+- **The one changed existing message** (FR-B64-005): the standard-alphabet refusal of `-` or `_` now ends "Switch the alphabet to URL-safe." instead of "This tool reads standard Base64 only." The existing assertions match only `/base64url/` and did not need editing.
+- The catalog gains the alias `base64url` (and the search unit test's alias map and an intent assertion). The JWT Decoder is untouched and still uses its own routine.
+- Known limitation updated: "standard Base64 only" no longer applies; URL-safe is supported on explicit selection. Text only, UTF-8 only, strict last character.
