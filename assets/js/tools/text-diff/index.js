@@ -185,11 +185,33 @@ ${pane("changed", "Changed", "The newer version")}
                             <label class="td-check">
                                 <input
                                     type="checkbox"
+                                    id="td-case"
+                                >
+                                <span>Ignore case</span>
+                            </label>
+
+                            <label class="td-check">
+                                <input
+                                    type="checkbox"
                                     id="td-wrap"
                                     checked
                                 >
                                 <span>Wrap long lines</span>
                             </label>
+
+                            <div class="td-context">
+
+                                <label for="td-context" class="td-context__label">Unchanged lines shown</label>
+
+                                <select id="td-context" class="td-context__select">
+                                    <option value="3" selected>3 lines around each change</option>
+                                    <option value="0">Only the changes</option>
+                                    <option value="1">1 line around each change</option>
+                                    <option value="10">10 lines around each change</option>
+                                    <option value="all">All lines</option>
+                                </select>
+
+                            </div>
 
                         </div>
 
@@ -495,6 +517,18 @@ export function init() {
     const originalMeta = document.querySelector("#td-original-meta");
     const changedMeta = document.querySelector("#td-changed-meta");
     const ignore = document.querySelector("#td-ignore");
+    const ignoreCase = document.querySelector("#td-case");
+    const contextSelect = document.querySelector("#td-context");
+
+    const contextValue = () =>
+        contextSelect.value === "all" ? Infinity : Number(contextSelect.value);
+
+    /* what the comparison ignored, in words (empty when nothing ignored changed the result) */
+    const ignoredNote = (result) =>
+        [
+            result.whitespaceOnly ? "Whitespace-only differences are ignored." : "",
+            result.caseOnly ? "Differences in letter case are ignored." : ""
+        ].filter(Boolean).join(" ");
     const wrap = document.querySelector("#td-wrap");
     const status = document.querySelector("#td-status");
     const summaryList = document.querySelector("#td-summary");
@@ -848,14 +882,14 @@ export function init() {
 
             setState("identical", "No differences found.");
 
-            if (result.whitespaceOnly) {
+            if (ignoredNote(result)) {
 
-                note.textContent = "Whitespace-only differences are ignored.";
+                note.textContent = ignoredNote(result);
                 note.hidden = false;
 
             }
 
-            announce("No differences found.");
+            announce(ignoredNote(result) ? `No differences found. ${ignoredNote(result)}` : "No differences found.");
 
             return;
 
@@ -872,9 +906,9 @@ export function init() {
             note.textContent = "These texts have very little in common, so part of the result is shown as a replaced block rather than a minimal diff.";
             note.hidden = false;
 
-        } else if (result.whitespaceOnly) {
+        } else if (ignoredNote(result)) {
 
-            note.textContent = "Whitespace-only differences are ignored.";
+            note.textContent = ignoredNote(result);
             note.hidden = false;
 
         } else if (original.value === "") {
@@ -889,7 +923,7 @@ export function init() {
 
         }
 
-        items = collapseRows(result.rows);
+        items = collapseRows(result.rows, contextValue());
         shown = 0;
 
         scroll.hidden = false;
@@ -960,7 +994,8 @@ export function init() {
         }
 
         const result = compare(original.value, changed.value, {
-            ignoreWhitespace: ignore.checked
+            ignoreWhitespace: ignore.checked,
+            ignoreCase: ignoreCase.checked
         });
 
         panel.removeAttribute("aria-busy");
@@ -1056,6 +1091,8 @@ export function init() {
         original.value = "";
         changed.value = "";
         ignore.checked = false;
+        ignoreCase.checked = false;
+        contextSelect.value = "3";
         wrap.checked = true;
 
         applyWrap();
@@ -1092,7 +1129,7 @@ export function init() {
             return;
         }
 
-        const text = toUnifiedDiff(current);
+        const text = toUnifiedDiff(current, { context: contextValue() });
 
         let copied = false;
 
@@ -1155,11 +1192,36 @@ export function init() {
 
     }
 
-    ignore.addEventListener("change", () => {
+    for (const option of [ignore, ignoreCase]) {
 
-        if (eitherFilled() && (current || (bothFilled() && autoEligible()))) {
-            run();
+        option.addEventListener("change", () => {
+
+            if (eitherFilled() && (current || (bothFilled() && autoEligible()))) {
+                run();
+            }
+
+        });
+
+    }
+
+    contextSelect.addEventListener("change", () => {
+
+        if (!current || current.summary.identical) {
+            return;
         }
+
+        items = collapseRows(current.rows, contextValue());
+        shown = 0;
+
+        lines.replaceChildren();
+
+        renderMore();
+
+        announce(contextSelect.value === "all"
+            ? "Showing all lines."
+            : contextSelect.value === "0"
+                ? "Showing only the changes."
+                : `Showing ${contextSelect.value} unchanged ${contextSelect.value === "1" ? "line" : "lines"} around each change.`);
 
     });
 

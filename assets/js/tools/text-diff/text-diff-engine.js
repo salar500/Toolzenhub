@@ -438,7 +438,7 @@ function segmentsOf(tokens, matched) {
    are: 2 x shared words / all words, counting words and punctuation
    but not spaces. null when the work budget for this pair ran out.
 */
-export function wordDiff(oldLine, newLine, ignoreWhitespace = false, budget = { left: PAIR_STEP_BUDGET }) {
+export function wordDiff(oldLine, newLine, ignoreWhitespace = false, budget = { left: PAIR_STEP_BUDGET }, ignoreCase = false) {
 
     const ta = tokenize(oldLine);
     const tb = tokenize(newLine);
@@ -447,7 +447,8 @@ export function wordDiff(oldLine, newLine, ignoreWhitespace = false, budget = { 
 
     const idOf = (token) => {
 
-        const key = ignoreWhitespace && isSpace(token) ? " " : token;
+        const spaced = ignoreWhitespace && isSpace(token) ? " " : token;
+        const key = ignoreCase ? spaced.toLowerCase() : spaced;
 
         let id = ids.get(key);
 
@@ -508,7 +509,7 @@ export function wordDiff(oldLine, newLine, ignoreWhitespace = false, budget = { 
    lines. Returns [{ oldIndex, newIndex, words }] with both
    indexes increasing.
 */
-function pairBlock(aLines, aFrom, aTo, bLines, bFrom, bTo, ignoreWhitespace, pairBudget) {
+function pairBlock(aLines, aFrom, aTo, bLines, bFrom, bTo, ignoreWhitespace, pairBudget, ignoreCase = false) {
 
     const pairs = [];
 
@@ -538,7 +539,7 @@ function pairBlock(aLines, aFrom, aTo, bLines, bFrom, bTo, ignoreWhitespace, pai
 
             const local = { left: Math.min(PAIR_STEP_BUDGET, pairBudget.left) };
 
-            const words = wordDiff(aLines[i], bLines[j], ignoreWhitespace, local);
+            const words = wordDiff(aLines[i], bLines[j], ignoreWhitespace, local, ignoreCase);
 
             pairBudget.left -= (aLines[i].length + bLines[j].length) / 8 + (Math.min(PAIR_STEP_BUDGET, pairBudget.left) - local.left) + 1;
 
@@ -562,14 +563,14 @@ function pairBlock(aLines, aFrom, aTo, bLines, bFrom, bTo, ignoreWhitespace, pai
 
 }
 
-function emitBlock(rows, aLines, aFrom, aTo, bLines, bFrom, bTo, ignoreWhitespace, pairBudget) {
+function emitBlock(rows, aLines, aFrom, aTo, bLines, bFrom, bTo, ignoreWhitespace, pairBudget, ignoreCase = false) {
 
     if (aFrom === aTo && bFrom === bTo) {
         return;
     }
 
     const pairs = (aFrom < aTo && bFrom < bTo)
-        ? pairBlock(aLines, aFrom, aTo, bLines, bFrom, bTo, ignoreWhitespace, pairBudget)
+        ? pairBlock(aLines, aFrom, aTo, bLines, bFrom, bTo, ignoreWhitespace, pairBudget, ignoreCase)
         : [];
 
     let i = aFrom;
@@ -615,15 +616,19 @@ function emitBlock(rows, aLines, aFrom, aTo, bLines, bFrom, bTo, ignoreWhitespac
  *
  * @param {string} original
  * @param {string} changed
- * @param {{ ignoreWhitespace?: boolean }} options
+ * @param {{ ignoreWhitespace?: boolean, ignoreCase?: boolean }} options
+ *   ignoreCase compares the lower-cased text (String.prototype.toLowerCase,
+ *   not locale-sensitive); the rows still carry the original text.
  * @returns {{ ok: false, message: string } | {
  *   ok: true, rows: object[], summary: object, approximate: boolean,
- *   ignoreWhitespace: boolean, whitespaceOnly: boolean
+ *   ignoreWhitespace: boolean, whitespaceOnly: boolean,
+ *   ignoreCase: boolean, caseOnly: boolean
  * }}
  */
 export function compare(original, changed, options = {}) {
 
     const ignoreWhitespace = Boolean(options.ignoreWhitespace);
+    const ignoreCase = Boolean(options.ignoreCase);
 
     const refused = checkLimits(original, changed);
 
@@ -638,7 +643,8 @@ export function compare(original, changed, options = {}) {
 
     const idOf = (line) => {
 
-        const key = ignoreWhitespace ? whitespaceKey(line) : line;
+        const spaced = ignoreWhitespace ? whitespaceKey(line) : line;
+        const key = ignoreCase ? spaced.toLowerCase() : spaced;
 
         let id = ids.get(key);
 
@@ -662,16 +668,25 @@ export function compare(original, changed, options = {}) {
     let i = 0;
     let j = 0;
     let whitespaceOnly = false;
+    let caseOnly = false;
 
     for (let t = 0; t < found.a.length; t++) {
 
         const ma = found.a[t];
         const mb = found.b[t];
 
-        emitBlock(rows, aLines, i, ma, bLines, j, mb, ignoreWhitespace, pairBudget);
+        emitBlock(rows, aLines, i, ma, bLines, j, mb, ignoreWhitespace, pairBudget, ignoreCase);
 
         if (aLines[ma] !== bLines[mb]) {
-            whitespaceOnly = true;
+
+            const a = ignoreWhitespace ? whitespaceKey(aLines[ma]) : aLines[ma];
+            const b = ignoreWhitespace ? whitespaceKey(bLines[mb]) : bLines[mb];
+
+            if (a === b) {
+                whitespaceOnly = true;
+            } else {
+                caseOnly = true;
+            }
         }
 
         rows.push({ kind: "same", a: ma + 1, b: mb + 1, aText: aLines[ma], bText: bLines[mb] });
@@ -681,7 +696,7 @@ export function compare(original, changed, options = {}) {
 
     }
 
-    emitBlock(rows, aLines, i, aLines.length, bLines, j, bLines.length, ignoreWhitespace, pairBudget);
+    emitBlock(rows, aLines, i, aLines.length, bLines, j, bLines.length, ignoreWhitespace, pairBudget, ignoreCase);
 
     const summary = { added: 0, removed: 0, changed: 0, unchanged: 0 };
 
@@ -704,7 +719,9 @@ export function compare(original, changed, options = {}) {
         summary,
         approximate: !found.complete,
         ignoreWhitespace,
-        whitespaceOnly: ignoreWhitespace && whitespaceOnly
+        whitespaceOnly: ignoreWhitespace && whitespaceOnly,
+        ignoreCase,
+        caseOnly: ignoreCase && caseOnly
     };
 
 }
@@ -770,7 +787,8 @@ export function collapseRows(rows, context = CONTEXT_LINES) {
 
         const hidden = run.length - keepBefore - keepAfter;
 
-        if (hidden >= MIN_HIDDEN_LINES) {
+        /* with no context at all, even a single unchanged line is hidden */
+        if (hidden >= (context === 0 ? 1 : MIN_HIDDEN_LINES)) {
 
             for (const row of run.slice(0, keepBefore)) items.push({ type: "row", row });
 

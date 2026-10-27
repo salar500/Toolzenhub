@@ -29,7 +29,9 @@ Commits: one local commit per bounded Tool Pack (factory section 2a). The planni
 | DP-3 | URL Parser & Encoder (Tool Pack 37) | VERIFIED (local, AMBER) | see git log | spec `docs/tool-packs/37-url-parser-encoder.md`. FR-UP-001..026 implemented; AC-UP-001..035 covered by 31 unit + 18 browser tests (desktop and mobile projects pass). Older specs: 278 pass, 5 fail, all 5 the known stale tests (Image Tools page, Image Tools All Tools, All Tools in json-formatter, text-diff, unix-timestamp). Unit suite 3118 pass, 1 fail (known gratuity colour token). Static: inventory, links, assets, SEO pass. AMBER because Safari, Firefox, Android, screen reader, root-desktop project and the `tools` visual baseline (pre-existing mismatch, left untouched) were not verified |
 | DP-1 | JSON Compare (Tool Pack 35) | VERIFIED (local, AMBER) | see git log | spec `docs/tool-packs/35-json-compare.md`. FR-JC-001..026 implemented; 34 unit + 21 browser tests (desktop and mobile projects pass). Shared tree module `json-tree` reuses the formatter scanner unchanged (L3). Not verified: Safari, Firefox, real Android, screen reader |
 | DP-2 | JSONPath Tester (Tool Pack 36) | VERIFIED (local, AMBER) | see git log | spec `docs/tool-packs/36-jsonpath-tester.md`. FR-JP-001..022 implemented; 43 unit + 22 browser tests (desktop and mobile projects pass). Compliance suite NOT run (AC-JP-029, L4); RFC-derived vectors used. Not verified: Safari, Firefox, real Android, screen reader |
-| DP-4 | Base64URL | BLOCKED | | OPEN-10 |
+| DP-4 | Base64URL | VERIFIED (local) | aac1108 | owner-approved 2026-10-27; addendum §15 in pack 27; 7 unit + 5 browser tests |
+| X3 | JSON Formatter indentation | VERIFIED (local) | 773995d | owner-approved; addendum in pack 15; 6 unit + 4 browser tests; default output byte-identical |
+| X2 | Text Diff: ignore case, unchanged-lines setting | VERIFIED (local) | see git log | addendum in pack 18; 11 unit + 6 browser tests; keyboard-order assertion in text-diff.spec.js updated for the two new controls |
 | DP-5 | Integration / checkpoint | NOT_STARTED | | metadata only |
 
 ## 3. Decisions made during development

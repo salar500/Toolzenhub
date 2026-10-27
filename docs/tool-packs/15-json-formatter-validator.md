@@ -115,3 +115,7 @@ Every item above holds; `json`, `json formatter`, `json validator` and `format j
 ## Known limitations
 
 Needs the page open (nothing is saved). The caret marker is exact for monospace single-column characters. 2,000,000 characters and 500 levels. No schema validation, repair or tree view. A browser may still be slow to scroll a very large output box.
+
+## Addendum (2026-10-27): Indentation choice (owner-approved)
+
+- A select "Indentation for Format" (2 spaces default, 4 spaces, Tab) sits after the action buttons so the keyboard order of the existing controls is unchanged. It affects Format only; Minify and Validate ignore it. The default output is byte-identical to before. The output meta names the choice ("Formatted, 4 spaces"). Clear does not reset it.

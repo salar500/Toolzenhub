@@ -110,3 +110,9 @@ Deviations from the plan above, and what was measured.
 - **Result status line:** with a result, the chips carry the summary and the status line is visually hidden but still read by a screen reader.
 - **Independent reference:** `tests/fixtures/text-diff-golden.py` (exact dynamic-programming LCS, 176 seeded cases with and without ignoring whitespace) pins the number of shared lines; the engine matches on every case, and also rebuilds both texts from its rows and applies its own unified diff.
 - **Test-environment note:** Playwright's `fill()` of several thousand lines takes many seconds on this machine (the JSON Formatter page behaves the same), so the large-input tests set the value directly and dispatch one input event, as a paste would.
+
+## Addendum (2026-10-27): Ignore case and unchanged-lines setting (owner-approved)
+
+- **Ignore case** (off by default): lines and words are compared as `toLowerCase()` text (not locale-sensitive); rows keep the original text. When it hides a difference the note says "Differences in letter case are ignored." (joined to the whitespace note when both apply). Compared with the default on lower-cased inputs, the row kinds and counts are identical (unit-tested).
+- **Unchanged lines shown** (select, default "3 lines around each change", so the default view is unchanged): "Only the changes" (0), 1, 3, 10, or "All lines". It re-renders the existing result without recomputing, announces the choice politely, and Copy diff uses the same context. With 0 context even one unchanged line is folded behind its expander. Reset restores both options.
+- Tab order is now: ignore whitespace, ignore case, wrap, unchanged lines, then the action buttons.

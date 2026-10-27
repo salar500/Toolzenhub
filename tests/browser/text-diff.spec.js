@@ -415,7 +415,7 @@ test.describe("Text Diff / Compare", () => {
     const outline = (loc) => loc.evaluate((el) => parseFloat(getComputedStyle(el).outlineWidth));
     await original(page).focus();
     expect(await outline(original(page))).toBeGreaterThanOrEqual(2);
-    for (const target of [changed(page), page.locator("#td-ignore"), page.locator("#td-wrap"), btn(page, "Compare"), btn(page, "Swap"), btn(page, "Copy diff"), btn(page, "Reset")]) {
+    for (const target of [changed(page), page.locator("#td-ignore"), page.locator("#td-case"), page.locator("#td-wrap"), page.locator("#td-context"), btn(page, "Compare"), btn(page, "Swap"), btn(page, "Copy diff"), btn(page, "Reset")]) {
       await page.keyboard.press("Tab");
       await expect(target).toBeFocused();
       expect(await outline(target)).toBeGreaterThanOrEqual(2);
