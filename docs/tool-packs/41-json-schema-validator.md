@@ -24,6 +24,8 @@ Candidate: `@cfworker/json-schema` 4.1.1 (chosen over Ajv because Ajv compiles s
 
 The remaining gates cannot be closed without executing the vendored third-party code: running the conformance suite, the hostile-pattern timeout test and the browser checks. The permission classifier refused the first command that would have run the vendored library (a Node script importing it), because it is downloaded external code. That was not worked around. The static audit above found nothing disqualifying.
 
+Authorization attempts: (1) a Node script importing the vendored library and running the suite files through it was refused; (2) after the owner asked for the request to be made through the normal mechanism, the same command was retried once, with only the library path updated (the files had meanwhile moved to `tests/fixtures/candidates/` for the `dist/` reason, not to avoid the classifier), and was refused again with the reason "Code from External". The tool offers no separate approval prompt for this; the classifier message says the user can add a permission rule for Bash in their settings. No workaround was attempted. Status: BLOCKED.
+
 Decision needed from the owner: allow running the vendored library in tests (the conformance run is a data-only Node script plus a Chromium page), or choose another route. Until then no validator page is shipped and no substitute (for example a hand-written partial validator) is offered: a tool that claims to validate against JSON Schema but implements part of it would mislead.
 
 ## If approved, the build plan
