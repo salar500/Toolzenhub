@@ -23,6 +23,7 @@
 
 import {
     analyze,
+    INDENTS,
     describeValid,
     describeNote,
     describeSize,
@@ -35,6 +36,8 @@ import {
 import {
     getToolById
 } from "../../data/tools.js";
+
+const INDENT_WORDS = { two: "2 spaces", four: "4 spaces", tab: "tab indent" };
 
 
 /* No related tool or article exists yet; a relation is added when one genuinely does. */
@@ -212,6 +215,19 @@ export function markup() {
                     </div>
 
 
+                    <div class="jf-indent">
+
+                        <label for="jf-indent" class="jf-indent__label">Indentation for Format</label>
+
+                        <select id="jf-indent" class="jf-indent__select">
+                            <option value="two" selected>2 spaces</option>
+                            <option value="four">4 spaces</option>
+                            <option value="tab">Tab</option>
+                        </select>
+
+                    </div>
+
+
                     <div class="jf-result">
 
                         <p
@@ -330,7 +346,7 @@ export function markup() {
                         Paste your JSON into the input box, or load the example.
                     </li>
                     <li>
-                        Press Format to lay it out with two-space indentation,
+                        Press Format to lay it out (two spaces by default; choose 4 spaces or a tab under Indentation for Format),
                         Minify to remove every unneeded space, or Validate to
                         only check it.
                     </li>
@@ -575,6 +591,8 @@ export function init() {
     const outputMeta = document.querySelector("#jf-output-meta");
     const live = document.querySelector("#jf-live");
 
+    const indentSelect = document.querySelector("#jf-indent");
+
     const buttons = {
         format: document.querySelector("#jf-format"),
         minify: document.querySelector("#jf-minify"),
@@ -724,7 +742,9 @@ export function init() {
 
         const text = input.value;
 
-        const result = analyze(text, mode);
+        const indentChoice = indentSelect.value;
+
+        const result = analyze(text, mode, { indent: INDENTS[indentChoice] });
 
         if (result.state === "empty") {
 
@@ -793,7 +813,7 @@ export function init() {
 
         output.value = result.output;
 
-        outputMeta.textContent = `${mode === "format" ? "Formatted, 2 spaces" : "Minified"} · ${describeSize(result.output.length)}`;
+        outputMeta.textContent = `${mode === "format" ? `Formatted, ${INDENT_WORDS[indentChoice]}` : "Minified"} · ${describeSize(result.output.length)}`;
 
         buttons.copy.disabled = false;
 

@@ -44,6 +44,9 @@ const MAX_NOTES = 50;
 
 const INDENT = "  ";
 
+/* the indentation choices of Format: two spaces (the default), four spaces or one tab */
+export const INDENTS = { two: "  ", four: "    ", tab: "\t" };
+
 
 /* =========================================================
    LOCATION AND CONTEXT
@@ -392,27 +395,40 @@ function readNumber(text, i) {
 
 }
 
-const pads = [""];
+const padders = new Map();
 
-const pad = (depth) => {
+/* the cached line prefix for each depth, one table per indentation string */
+function padderFor(indent) {
 
-    while (pads.length <= depth) {
-        pads.push(pads[pads.length - 1] + INDENT);
+    if (!padders.has(indent)) {
+
+        const pads = [""];
+
+        padders.set(indent, (depth) => {
+
+            while (pads.length <= depth) {
+                pads.push(pads[pads.length - 1] + indent);
+            }
+
+            return pads[depth];
+
+        });
     }
 
-    return pads[depth];
-
-};
+    return padders.get(indent);
+}
 
 const ROOT_TYPE = { "{": "object", "[": "array", '"': "string" };
 
 /*
  * mode "check"   only validate
- *      "format"  validate and lay out with two spaces
+ *      "format"  validate and lay out (two spaces unless an indent is given)
  *      "minify"  validate and remove every insignificant space
  * Returns { output, notes, noteTotal, rootType, rootCount, depth }; throws Fail.
  */
-function scan(text, mode) {
+function scan(text, mode, indent = INDENT) {
+
+    const pad = padderFor(indent);
 
     const n = text.length;
 
@@ -940,7 +956,7 @@ function scan(text, mode) {
  *
  * `output` is the formatted or minified text (null when mode is "check").
  */
-export function analyze(text, mode = "check") {
+export function analyze(text, mode = "check", options = {}) {
 
     const input = String(text ?? "");
 
@@ -954,7 +970,9 @@ export function analyze(text, mode = "check") {
 
     try {
 
-        const result = scan(input, mode);
+        const indent = Object.values(INDENTS).includes(options.indent) ? options.indent : INDENT;
+
+        const result = scan(input, mode, indent);
 
         return { state: "valid", ...result };
 
@@ -981,7 +999,7 @@ export function analyze(text, mode = "check") {
 
 }
 
-export const format = (text) => analyze(text, "format");
+export const format = (text, options) => analyze(text, "format", options);
 
 export const minify = (text) => analyze(text, "minify");
 

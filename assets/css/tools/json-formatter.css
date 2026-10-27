@@ -154,6 +154,43 @@
 
 /* buttons: Format is the main action; two columns on a phone, one row on a wide screen */
 
+.jf-indent {
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0 0;
+
+}
+
+.jf-indent__label {
+
+    color: var(--color-ink);
+    font-size: 14px;
+    font-weight: 700;
+
+}
+
+.jf-indent__select {
+
+    min-height: 44px;
+    padding: 0 12px;
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+    background: #ffffff;
+    color: var(--color-ink);
+    font-size: 16px;
+
+}
+
+.jf-indent__select:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
 .jf-actions {
 
     display: grid;
