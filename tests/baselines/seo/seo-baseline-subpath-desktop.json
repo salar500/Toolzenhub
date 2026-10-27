@@ -3781,7 +3781,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2651
+      "visibleTextChars": 2858
     }
   },
   "/disclaimer.html": {
@@ -4284,7 +4284,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6911
+      "visibleTextChars": 7113
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -5608,6 +5608,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 5651
+    }
+  },
+  "/tools/uuid-generator/": {
+    "runtime": {
+      "title": "UUID Generator: Version 4 and Version 7 UUIDs, Bulk and Formatted | ToolZen Hub",
+      "description": "Generate version 4 (random) or version 7 (time-ordered) UUIDs, or the nil UUID, one or many, with case, hyphen and brace options. It runs in your browser: nothing is sent or stored.",
+      "canonical": "https://toolzenhub.in/tools/uuid-generator/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Generate version 4 (random) or version 7 (time-ordered) UUIDs, or the nil UUID, one or many, with case, hyphen and brace options. It runs in your browser: nothing is sent or stored.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "UUID Generator: Version 4 and Version 7 UUIDs, Bulk and Formatted | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/uuid-generator/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Generate version 4 (random) or version 7 (time-ordered) UUIDs, or the nil UUID, one or many, with case, hyphen and brace options. It runs in your browser: nothing is sent or stored.",
+        "twitter:title": "UUID Generator: Version 4 and Version 7 UUIDs, Bulk and Formatted | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "UUID Generator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "UUID Generator: Version 4 and Version 7 UUIDs, Bulk and Formatted | ToolZen Hub",
+      "description": "Generate version 4 (random) or version 7 (time-ordered) UUIDs, or the nil UUID, one or many, with case, hyphen and brace options. It runs in your browser: nothing is sent or stored.",
+      "canonical": "https://toolzenhub.in/tools/uuid-generator/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 2816
     }
   },
   "/tools/world-clock/": {

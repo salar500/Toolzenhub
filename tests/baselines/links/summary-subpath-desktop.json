@@ -359,7 +359,7 @@
     "deadFragments": []
   },
   "developer-tools.html": {
-    "internal": 34,
+    "internal": 35,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -431,7 +431,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 79,
+    "internal": 80,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -594,6 +594,12 @@
   },
   "tools/url-parser/": {
     "internal": 25,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/uuid-generator/": {
+    "internal": 23,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

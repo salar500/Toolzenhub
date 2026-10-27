@@ -1,0 +1,389 @@
+/* =========================================================
+   ToolZen Hub
+   UUID Generator
+
+   Only what the shared tool styles do not already provide: the two
+   list boxes, the options, the status line and the result groups.
+   Buttons, focus and headings come from the shared layer. Loaded
+   after calculator-responsive.css.
+
+   States are told in words, never by colour alone. Everything that
+   came from the input wraps (overflow-wrap: anywhere), so a long
+   line never widens the page. Nothing animates.
+========================================================= */
+
+.ug-workspace [hidden] {
+    display: none !important;
+}
+
+.ug-workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+}
+
+.ug-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.ug-boxes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.ug-field {
+    min-width: 0;
+}
+
+.ug-field__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 12px;
+    margin-bottom: 6px;
+}
+
+.ug-label {
+    margin: 0;
+    padding: 0;
+    color: var(--color-ink);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.ug-meta {
+    color: #475467;
+    font-size: 14px;
+}
+
+.ug-input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    min-height: 160px;
+    padding: 10px 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+    background: #ffffff;
+    color: var(--color-ink);
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    resize: vertical;
+}
+
+.ug-input:focus-visible,
+.ug-check input:focus-visible,
+.ug-link:focus-visible {
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+}
+
+.ug-linkline {
+    margin: 0;
+}
+
+.ug-link {
+    min-height: 44px;
+    padding: 0 4px;
+    border: 0;
+    background: none;
+    color: var(--color-action-green-dark, #067647);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.ug-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.ug-options legend {
+    width: 100%;
+    margin-bottom: 4px;
+}
+
+.ug-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    color: var(--color-ink);
+    font-size: 15px;
+}
+
+.ug-check input {
+    width: 20px;
+    height: 20px;
+    flex: none;
+}
+
+.ug-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.ug-button {
+    min-width: 0;
+    min-height: 48px;
+    font-size: 16px;
+}
+
+.ug-button--small {
+    min-height: 44px;
+    padding: 6px 14px;
+    font-size: 14px;
+}
+
+.ug-status {
+    margin: 0;
+    padding: 10px 14px;
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 10px;
+    background: #f9fafb;
+    color: #344054;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.ug-status[data-state="done"] {
+    border-color: #067647;
+    background: #ecfdf3;
+    color: #054f31;
+}
+
+.ug-status[data-state="invalid"] {
+    border-color: #b42318;
+    background: #fef3f2;
+    color: #912018;
+}
+
+.ug-result-title {
+    margin: 0 0 8px;
+    font-size: 20px;
+}
+
+.ug-notes {
+    margin: 0 0 12px;
+    padding-left: 22px;
+    color: #344054;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.ug-group {
+    min-width: 0;
+    margin: 0 0 16px;
+}
+
+.ug-group__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 12px;
+}
+
+.ug-group__title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.ug-list {
+    max-height: 320px;
+    margin: 8px 0;
+    padding: 0;
+    overflow: auto;
+    border: 1px solid #e4e7ec;
+    border-radius: 12px;
+    background: #f9fafb;
+    list-style: none;
+}
+
+.ug-list:empty::before {
+    content: "None";
+    display: block;
+    padding: 10px 14px;
+    color: #475467;
+    font-size: 14px;
+}
+
+.ug-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2px 12px;
+    padding: 6px 14px;
+    border-bottom: 1px solid #eaecf0;
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.ug-item:last-child {
+    border-bottom: 0;
+}
+
+.ug-item__text {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.ug-item__count {
+    color: #475467;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+
+    .ug-boxes {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ug-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+.ug-note {
+    margin: 0;
+    padding: 10px 14px;
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 10px;
+    background: #f9fafb;
+    color: #344054;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.ug-versions {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.ug-versions legend {
+    padding: 0;
+}
+
+.ug-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.ug-choice {
+    display: flex;
+    flex: 1 1 200px;
+    align-items: flex-start;
+    gap: 10px;
+    min-height: 44px;
+    padding: 10px 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+.ug-choice input {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    flex: none;
+}
+
+.ug-choice span {
+    display: grid;
+    gap: 2px;
+}
+
+.ug-choice small {
+    color: #475467;
+    font-size: 13px;
+}
+
+.ug-choice:has(input:checked) {
+    border-color: #067647;
+    box-shadow: inset 0 0 0 1px #067647;
+}
+
+.ug-choice:has(input:focus-visible) {
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+}
+
+.ug-number {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 180px;
+    min-height: 48px;
+    margin-top: 6px;
+    padding: 0 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+    background: #ffffff;
+    color: var(--color-ink);
+    font-size: 16px;
+}
+
+.ug-number:focus-visible {
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+}
+
+.ug-number[aria-invalid="true"] {
+    border-color: #b42318;
+    box-shadow: inset 4px 0 0 #b42318;
+}
+
+.ug-error {
+    margin: 6px 0 0;
+    color: #912018;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.ug-item__text {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.ug-item {
+    align-items: center;
+}

@@ -1790,6 +1790,45 @@ const catalog = [
         }
     },
 
+
+    {
+        id: "uuid-generator",
+        status: "published",
+        loader: () =>
+            import("../tools/uuid-generator/index.js"),
+        sectionId: "developer-tools",
+        icon: "ID",
+        title: "UUID Generator",
+        description:
+            "Generate version 4 (random) or version 7 (time-ordered) UUIDs, or the nil UUID, one or many, with uppercase, hyphen and brace options. It runs in your browser: nothing is sent or stored.",
+        autoRelated: false,
+        relatedTools: ["base64-encoder-decoder", "jwt-decoder"],
+        aliases: [
+            "uuid generator",
+            "uuid",
+            "guid",
+            "guid generator",
+            "uuid v4",
+            "uuid v7",
+            "random uuid",
+            "generate uuid"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            validation: true,
+            explanation: true,
+            examples: false,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "UUID Generator: Version 4 and Version 7 UUIDs, Bulk and Formatted | ToolZen Hub",
+            description:
+                "Generate version 4 (random) or version 7 (time-ordered) UUIDs, or the nil UUID, one or many, with case, hyphen and brace options. It runs in your browser: nothing is sent or stored."
+        }
+    },
+
     {
         id: "image-compressor-resizer",
         status: "published",
