@@ -359,7 +359,7 @@
     "deadFragments": []
   },
   "developer-tools.html": {
-    "internal": 33,
+    "internal": 34,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -431,7 +431,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 78,
+    "internal": 79,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -510,6 +510,12 @@
   },
   "tools/jwt-decoder/": {
     "internal": 25,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/list-comparer/": {
+    "internal": 24,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

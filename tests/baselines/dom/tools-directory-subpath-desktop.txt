@@ -162,7 +162,7 @@ section.categories-page.directory-page
           h2#directory-developer-tools-heading.directory-section__title
             a [href="{ROOT}developer-tools.html"] "Developer Tools"
           p.directory-section__text "Browser-based tools for working with data and code."
-            span.directory-section__count "9 tools"
+            span.directory-section__count "10 tools"
         div.directory-groups
           article.directory-group
             h3.directory-group__title
@@ -200,6 +200,10 @@ section.categories-page.directory-page
             h3.directory-group__title
               a [href="{ROOT}tools/jsonpath-tester/"] "JSONPath Tester"
             p.directory-group__text "Run a JSONPath query (RFC 9535, without match() and search()) on a JSON document and see t…"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/list-comparer/"] "List Comparer"
+            p.directory-group__text "Compare two lists, one item per line: see what is only in the first, only in the second, i…"
       section.directory-section [aria-labelledby="directory-image-tools-heading"]
         div.directory-section__header
           span.directory-section__label "Section"

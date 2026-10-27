@@ -32,6 +32,7 @@ Commits: one local commit per bounded Tool Pack (factory section 2a). The planni
 | DP-4 | Base64URL | VERIFIED (local) | aac1108 | owner-approved 2026-10-27; addendum §15 in pack 27; 7 unit + 5 browser tests |
 | X3 | JSON Formatter indentation | VERIFIED (local) | 773995d | owner-approved; addendum in pack 15; 6 unit + 4 browser tests; default output byte-identical |
 | X2 | Text Diff: ignore case, unchanged-lines setting | VERIFIED (local) | see git log | addendum in pack 18; 11 unit + 6 browser tests; keyboard-order assertion in text-diff.spec.js updated for the two new controls |
+| DP-6 | List Comparer (Tool Pack 38) | VERIFIED (local) | see git log | spec `docs/tool-packs/38-list-comparer.md`; 14 unit + 15 browser tests (desktop and mobile pass); screenshots inspected at 1180 and 375 px; counts pinned: tools 57, Developer Tools 10, directory groups 33 |
 | DP-5 | Integration / checkpoint | NOT_STARTED | | metadata only |
 
 ## 3. Decisions made during development

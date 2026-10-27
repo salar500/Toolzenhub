@@ -1751,6 +1751,45 @@ const catalog = [
         }
     },
 
+
+    {
+        id: "list-comparer",
+        status: "published",
+        loader: () =>
+            import("../tools/list-comparer/index.js"),
+        sectionId: "developer-tools",
+        icon: "⇄",
+        title: "List Comparer",
+        description:
+            "Compare two lists, one item per line: see what is only in the first, only in the second, in both, and what is repeated, with case and spacing rules you choose. It runs in your browser: nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: ["text-diff", "json-compare"],
+        aliases: [
+            "list comparer",
+            "compare lists",
+            "list compare",
+            "list difference",
+            "list intersection",
+            "find duplicates",
+            "common items",
+            "set difference"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "List Comparer: Compare Two Lists and Find Differences and Duplicates | ToolZen Hub",
+            description:
+                "Compare two lists line by line: items only in the first, only in the second, in both, and repeated items, with case and spacing options. It runs in your browser: nothing is uploaded."
+        }
+    },
+
     {
         id: "image-compressor-resizer",
         status: "published",

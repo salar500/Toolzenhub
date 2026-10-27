@@ -3781,7 +3781,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2427
+      "visibleTextChars": 2651
     }
   },
   "/disclaimer.html": {
@@ -4284,7 +4284,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6690
+      "visibleTextChars": 6911
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -4333,7 +4333,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4237
+      "visibleTextChars": 4831
     }
   },
   "/tools/business-days/": {
@@ -4823,7 +4823,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4223
+      "visibleTextChars": 4320
     }
   },
   "/tools/jsonpath-tester/": {
@@ -4922,6 +4922,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 5320
+    }
+  },
+  "/tools/list-comparer/": {
+    "runtime": {
+      "title": "List Comparer: Compare Two Lists and Find Differences and Duplicates | ToolZen Hub",
+      "description": "Compare two lists line by line: items only in the first, only in the second, in both, and repeated items, with case and spacing options. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/list-comparer/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Compare two lists line by line: items only in the first, only in the second, in both, and repeated items, with case and spacing options. It runs in your browser: nothing is uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "List Comparer: Compare Two Lists and Find Differences and Duplicates | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/list-comparer/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Compare two lists line by line: items only in the first, only in the second, in both, and repeated items, with case and spacing options. It runs in your browser: nothing is uploaded.",
+        "twitter:title": "List Comparer: Compare Two Lists and Find Differences and Duplicates | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "List Comparer"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "List Comparer: Compare Two Lists and Find Differences and Duplicates | ToolZen Hub",
+      "description": "Compare two lists line by line: items only in the first, only in the second, in both, and repeated items, with case and spacing options. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/list-comparer/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 2910
     }
   },
   "/tools/meeting-planner/": {
@@ -5362,7 +5411,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3511
+      "visibleTextChars": 3653
     }
   },
   "/tools/time-duration/": {

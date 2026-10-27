@@ -446,6 +446,13 @@
       "state": "active"
     },
     {
+      "id": "list-comparer",
+      "module": "assets/js/tools/list-comparer/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "loan-comparison",
       "module": "loans/loan-comparison/index.js",
       "moduleChanges": [],
