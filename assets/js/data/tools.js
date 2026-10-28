@@ -1903,6 +1903,74 @@ const catalog = [
     },
 
     {
+        id: "jsonpath-challenge-lab",
+        status: "published",
+        loader: () =>
+            import("../tools/jsonpath-challenge-lab/index.js"),
+        sectionId: "developer-tools",
+        icon: "🎯",
+        title: "JSONPath Challenge Lab",
+        description:
+            "Practise writing JSONPath queries against a built-in document. Each query is run by an RFC 9535 engine and judged by the nodes it selects, with feedback on what you got and what you missed. It runs in your browser: nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: ["jsonpath-tester", "smart-flashcards"],
+        aliases: [
+            "jsonpath practice",
+            "jsonpath exercises",
+            "jsonpath challenges",
+            "learn jsonpath",
+            "jsonpath practice questions"
+        ],
+        capabilities: {
+            examples: true,
+            explanation: true,
+            localProcessing: true,
+            reset: true,
+            validation: true
+        },
+        seo: {
+            title:
+                "JSONPath Challenge Lab: Practise JSONPath Queries | ToolZen Hub",
+            description:
+                "Practise JSONPath with 19 exercises on a built-in document: child, wildcard, slice, descendant and filter selectors. An RFC 9535 engine checks the nodes you select. It runs in your browser: nothing is uploaded."
+        }
+    },
+
+    {
+        id: "cron-challenge-lab",
+        status: "published",
+        loader: () =>
+            import("../tools/cron-challenge-lab/index.js"),
+        sectionId: "developer-tools",
+        icon: "⏰",
+        title: "Cron Challenge Lab",
+        description:
+            "Practise writing cron expressions for described schedules. Each expression is read by a Cronie-dialect engine and judged by the schedule it describes, with its next run times shown. It runs in your browser: nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: ["cron-expression-explainer", "smart-flashcards"],
+        aliases: [
+            "cron practice",
+            "cron exercises",
+            "cron challenges",
+            "learn cron",
+            "crontab practice"
+        ],
+        capabilities: {
+            examples: true,
+            explanation: true,
+            localProcessing: true,
+            reset: true,
+            validation: true
+        },
+        seo: {
+            title:
+                "Cron Challenge Lab: Practise Cron Expressions | ToolZen Hub",
+            description:
+                "Practise writing cron expressions with 19 exercises, from every minute to leap days and the day-of-month rule. A Cronie-dialect engine checks the schedule. It runs in your browser: nothing is uploaded."
+        }
+    },
+
+    {
         id: "list-comparer",
         status: "published",
         loader: () =>

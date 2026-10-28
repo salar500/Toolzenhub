@@ -334,6 +334,13 @@
       "state": "active"
     },
     {
+      "id": "cron-challenge-lab",
+      "module": "assets/js/tools/cron-challenge-lab/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "cron-expression-explainer",
       "module": "assets/js/tools/cron-explainer/index.js",
       "moduleChanges": [],
@@ -443,6 +450,13 @@
       "module": "assets/js/tools/json-formatter/index.js",
       "moduleChanges": [],
       "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "jsonpath-challenge-lab",
+      "module": "assets/js/tools/jsonpath-challenge-lab/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
       "state": "active"
     },
     {

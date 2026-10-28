@@ -104,11 +104,12 @@ export function defineShellTests(cfg) {
 
     test("an answer over the limit is refused with the limit stated, and nothing is evaluated", async ({ page, go }) => {
       await openLab(page, go, cfg.route);
+      const limit = (cfg.limit ?? 20000).toLocaleString("en-US");
       await answerBox(page).fill("x".repeat(25000));
-      await expect(page.locator("[id^=lx-count-]")).toContainText("25,000 of 20,000 characters");
+      await expect(page.locator("[id^=lx-count-]")).toContainText(`25,000 of ${limit} characters`);
       await checkButton(page).click();
       await expect(verdictOf(page)).toHaveText("Cannot check");
-      await expect(page.locator(".lx-feedback")).toContainText("20,000");
+      await expect(page.locator(".lx-feedback")).toContainText(limit);
     });
 
     test("hostile text is shown as text and never run; the console stays clean and no request leaves the site", async ({ page, go, watch }) => {

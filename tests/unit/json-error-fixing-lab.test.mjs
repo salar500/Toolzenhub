@@ -43,6 +43,12 @@ describe("the exercise set", () => {
         assert.deepEqual([...new Set(set.exercises.map((e) => e.difficulty))].sort(), ["advanced", "beginner", "intermediate"]);
     });
 
+    it("the catalog and the set description state the real number of exercises", () => {
+        const tool = catalog.getToolById("json-error-fixing-lab");
+        assert.ok(tool.seo.description.includes(`with ${set.exercises.length} exercises`), tool.seo.description);
+        assert.ok(set.description.includes("Eighteen"), set.description);
+    });
+
     it("covers every fault the requirements list (hand-written map of fault to exercise)", () => {
         const FAULTS = {
             "trailing comma": "jef-trailing-comma", "single quotes": "jef-single-quotes", "unquoted key": "jef-unquoted-key",

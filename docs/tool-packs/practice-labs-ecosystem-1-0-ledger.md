@@ -22,7 +22,7 @@ Base commit: `df4dd66`. Owner scope: Option B, with the conditions recorded in d
 | 51 Smart Flashcards core, JSON deck, scheduler, opt-in progress | LP-1 | IMPLEMENTED (see below) | see git log |
 | 52 HTTP and APIs deck, Software testing deck | LP-2 | IMPLEMENTED (see below) | see git log |
 | 53 Lab shell and JSON Error-Fixing Lab | LP-3 | IMPLEMENTED (see below) | see git log |
-| 54 JSONPath and Cron Challenge Labs | LP-4 | NOT_STARTED | |
+| 54 JSONPath and Cron Challenge Labs | LP-4 | IMPLEMENTED (see below) | see git log |
 | 55 Test Design Lab | LP-5 | NOT_STARTED | |
 | 56 Integration and consolidated checkpoint | LP-6 | NOT_STARTED | |
 
@@ -98,3 +98,28 @@ Defects found and fixed in this pack:
 - A test expectation about the path of a key named `__proto__` was wrong (the path text is `$.__proto__`); the test, not the product, was corrected.
 
 Known limits: one author. The checker uses the JSON Formatter's engine, so the Python oracle is the independent evidence for the exercise data, not for the engine itself (the engine has its own tests).
+
+## Pack 54: JSONPath and Cron Challenge Labs
+
+Requirements: FR-JPC-001 to FR-JPC-006, FR-CRN-001 to FR-CRN-006, FR-LAB items through the shared shell.
+
+Implemented:
+- `tools/jsonpath-challenge-lab/`: 19 original exercises (6 beginner, 7 intermediate, 6 advanced) on one built-in library document. The evaluator runs the page's RFC 9535 engine and compares the selected nodes as Normalized Paths (multiset: a node selected twice is a difference; order matters only where the exercise says so; equal values at different nodes are different nodes). Wrong answers list up to five extra and five missing paths. Engine refusals (syntax, `match()`/`search()`, length) are Cannot check with the engine message and position; the engine's work bound is Cannot check as well.
+- `tools/cron-challenge-lab/`: 19 original exercises (5 beginner, 7 intermediate, 7 advanced) in the Cronie dialect, times in UTC. Equivalence is canonical, not a time window: minute, hour and month value sets plus a 31 by 7 day table built with Cronie's rule (both day fields must match when either is a star field, either one is enough otherwise). Wrong valid answers say which of minutes, hours, months or days differ and list the next three runs from the exercise's fixed reference time. The method and its limits (no time zones or DST, no never-running schedules) are stated on the page.
+- Catalog entries, stylesheet list, growth records.
+
+Content counts: planned about 16 and 14 (research minimums); authored and validated 19 and 19; published locally 38; deferred 0.
+
+Tests added or changed (deliberate):
+- NEW `tests/unit/jsonpath-challenge-lab.test.mjs`: 27 pass. Independent oracle: a JSONPath subset evaluator written in Python. Hand-written paths, Python and the page's engine agree on all 19 solutions, and Python and the engine agree on 28 further queries (slices with steps, unions, filters with and/or/not, count(), descendant, missing members). Values shown are checked against the hand-written paths by a plain walk.
+- NEW `tests/unit/cron-challenge-lab.test.mjs`: 27 pass. Independent oracle: a cron implementation in Python that walks real calendar dates. It lists the next three runs from each reference time (equal to the engine's for all 19 solutions) and decides sameness of 62 hand-written claims by comparing every run over four calendar years (2026 to 2029, including a leap day); the table, Python and the page's canonical comparison agree on all of them.
+- NEW `tests/browser/jsonpath-challenge-lab.spec.js` and `tests/browser/cron-challenge-lab.spec.js` (10 shared contract tests each plus 7 lab-specific): 17 of 17 each on subpath-desktop and subpath-mobile.
+- Stale-count guard added to the three lab unit tests (catalog SEO text and set description must state the real exercise count).
+- Changed pins: the five catalog-level unit tests, `developer-tools-related.spec.js`, the inventory (106 live pages).
+
+Defects found and fixed in this pack:
+- A block comment in the cron evaluator contained the characters that close a comment, a syntax error that made the module fail to load; the comment was reworded. Caught by the unit test run.
+- The JSONPath SEO text and spec said 18 exercises when there are 19; corrected and now guarded by a test.
+- One equivalence claim in the table was an invalid expression (hour 30) and so Cannot check, not Not yet; the claim was replaced.
+
+Known limits: one author. The Python JSONPath evaluator covers only the subset the exercises use. The cron comparison does not distinguish schedules that never match a real date and does not model time zones or daylight saving time; both are stated on the page.
