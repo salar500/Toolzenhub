@@ -21,7 +21,7 @@ Base commit: `df4dd66`. Owner scope: Option B, with the conditions recorded in d
 |---|---|---|---|
 | 51 Smart Flashcards core, JSON deck, scheduler, opt-in progress | LP-1 | IMPLEMENTED (see below) | see git log |
 | 52 HTTP and APIs deck, Software testing deck | LP-2 | IMPLEMENTED (see below) | see git log |
-| 53 Lab shell and JSON Error-Fixing Lab | LP-3 | NOT_STARTED | |
+| 53 Lab shell and JSON Error-Fixing Lab | LP-3 | IMPLEMENTED (see below) | see git log |
 | 54 JSONPath and Cron Challenge Labs | LP-4 | NOT_STARTED | |
 | 55 Test Design Lab | LP-5 | NOT_STARTED | |
 | 56 Integration and consolidated checkpoint | LP-6 | NOT_STARTED | |
@@ -75,3 +75,26 @@ Defects found and fixed in this pack:
 - A test regex lost its word-boundary escapes when written (control characters in the file); restored.
 
 Known limits: one reviewer (the author) for both decks, recorded in each deck's review record. HTTP card text describes RFC 9110 semantics; individual APIs may differ and the cards say so where it matters.
+
+## Pack 53: Lab shell and JSON Error-Fixing Lab
+
+Requirements: FR-LAB-001 to FR-LAB-014, FR-JEF-001 to FR-JEF-006, FR-LRN shared items as they apply.
+
+Implemented:
+- `learning/lab-shell.js` (the exercise list, one exercise at a time, explicit Check answer, hints up to three, solution, Reset exercise, Previous/Next, plain counts, the related-tool link; an evaluator that throws is a plain error state; a stale result is removed on edit; the same answer checked twice renders and announces once; a response that cannot be checked is not an attempt), `learning/lab-page.js` (static page text, validation of the exercise set, mounting).
+- `tools/json-error-fixing-lab/`: 18 original exercises (6 beginner, 7 intermediate, 5 advanced) covering every fault in FR-JEF-001, the evaluator on top of the JSON Formatter's strict engine (`analyze`) and `JSON.parse`, comparing values with no type coercion, array order kept, key order ignored, repeated keys refused, differences listed as paths without the expected values.
+- Catalog entry (Developer Tools), stylesheet list, growth ledger record.
+
+Content counts: planned about 24 in the research package; authored and validated 18 (the requirement minimum is 16); published locally 18; deferred 0.
+
+Tests added or changed (deliberate):
+- NEW `tests/unit/json-error-fixing-lab.test.mjs`: 27 pass. Independent oracle: Python's json module, strict (NaN, Infinity and duplicate keys refused), confirms all 18 starting texts are rejected and all 18 solutions parse to the expected value with types compared strictly. Also: every fault covered, layouts and key orders accepted, wrong types and values refused without leaking expected text values, hostile and oversized input, prototype keys, the shell's error and status rules.
+- NEW `tests/helpers/lab-contract.mjs`: the browser behaviour shared by every text lab (10 tests). NEW `tests/browser/json-error-fixing-lab.spec.js`: 5 lab-specific tests. 15 of 15 on subpath-desktop and on subpath-mobile.
+- Changed pins: the same five catalog-level unit tests and `developer-tools-related.spec.js` as pack 51, the search index coarse size backstop 58,000 to 62,000 bytes (the comment in that test says it must rise with the catalog), the regenerated inventory (104 live pages).
+
+Defects found and fixed in this pack:
+- A response that could not be checked (empty, over the limit) still marked the exercise as in progress; now only a real check does.
+- The exercise-set header required a description that the set lacked.
+- A test expectation about the path of a key named `__proto__` was wrong (the path text is `$.__proto__`); the test, not the product, was corrected.
+
+Known limits: one author. The checker uses the JSON Formatter's engine, so the Python oracle is the independent evidence for the exercise data, not for the engine itself (the engine has its own tests).

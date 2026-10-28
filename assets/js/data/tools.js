@@ -1868,6 +1868,41 @@ const catalog = [
     },
 
     {
+        id: "json-error-fixing-lab",
+        status: "published",
+        loader: () =>
+            import("../tools/json-error-fixing-lab/index.js"),
+        sectionId: "developer-tools",
+        icon: "🛠",
+        title: "JSON Error-Fixing Lab",
+        description:
+            "Practise repairing broken JSON: trailing commas, wrong quotes, missing brackets, bad escapes and more. Each repair is checked by a strict validator, and every exercise explains why. It runs in your browser: nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: ["json-formatter", "smart-flashcards"],
+        aliases: [
+            "fix invalid json",
+            "json practice",
+            "json exercises",
+            "json error practice",
+            "repair json",
+            "json validation practice"
+        ],
+        capabilities: {
+            examples: true,
+            explanation: true,
+            localProcessing: true,
+            reset: true,
+            validation: true
+        },
+        seo: {
+            title:
+                "JSON Error-Fixing Lab: Practise Repairing Invalid JSON | ToolZen Hub",
+            description:
+                "Practise fixing invalid JSON with 18 exercises: trailing commas, single quotes, bad escapes, truncated text and more. A strict validator checks each repair. It runs in your browser: nothing is uploaded."
+        }
+    },
+
+    {
         id: "list-comparer",
         status: "published",
         loader: () =>

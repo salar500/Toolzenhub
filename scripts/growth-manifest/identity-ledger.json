@@ -432,6 +432,13 @@
       "state": "active"
     },
     {
+      "id": "json-error-fixing-lab",
+      "module": "assets/js/tools/json-error-fixing-lab/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "json-formatter",
       "module": "assets/js/tools/json-formatter/index.js",
       "moduleChanges": [],
