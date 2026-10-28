@@ -146,10 +146,17 @@ test.describe("Smart Flashcards", () => {
     await btn(page, "Choose JSON").click();
     const boxes = page.locator("fieldset input[type=checkbox]");
     const count = await boxes.count();
-    for (let i = 0; i < count - 1; i += 1) await boxes.nth(i).uncheck();
-    await boxes.nth(count - 1).click(); // refused: the box stays checked
-    await expect(boxes.nth(count - 1)).toBeChecked();
-    await expect(page.getByText("Keep at least one topic selected.")).toBeVisible();
+    // the list is redrawn after every change, so address each box afresh and wait for the redraw to settle
+    for (let i = 0; i < count - 1; i += 1) {
+      await boxes.nth(i).click();
+      await expect(page.locator("fieldset input[type=checkbox]:checked")).toHaveCount(count - 1 - i);
+    }
+    const last = page.locator("fieldset input[type=checkbox]:checked");
+    await expect(last).toHaveCount(1);
+    await last.click(); // refused: the box stays checked
+    await expect(page.locator("fieldset input[type=checkbox]:checked")).toHaveCount(1);
+    // the message is also repeated in the live region for screen readers, so one or two copies are expected
+    await expect(page.getByText("Keep at least one topic selected.").first()).toBeVisible();
   });
 
   test("saving on: only tz-learn-v1 is written, with a box and a day per card and no answers; a reload restores it", async ({ page, go }) => {

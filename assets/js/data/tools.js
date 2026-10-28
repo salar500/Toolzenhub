@@ -1843,7 +1843,7 @@ const catalog = [
         description:
             "Revise JSON, HTTP and APIs, and software testing with short original flashcards. Think of the answer, check it and read why. Revision dates are saved only if you turn saving on. It runs in your browser: nothing is uploaded.",
         autoRelated: false,
-        relatedTools: ["json-formatter", "jsonpath-tester"],
+        relatedTools: ["json-formatter", "jsonpath-tester", "json-error-fixing-lab", "test-design-lab"],
         aliases: [
             "flashcards",
             "study flashcards",

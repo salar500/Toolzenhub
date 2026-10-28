@@ -138,9 +138,19 @@ export function markup() {
                     <strong>JSON</strong> covers what strict JSON allows and
                     rejects, strings and numbers, how JSON differs from a
                     JavaScript object, and what a valid response still does
-                    not prove. Each deck is written for this site and cites the
+                    not prove. <strong>HTTP and APIs</strong> covers methods, status
+                    codes, headers and bodies, caching and API practice.
+                    <strong>Software Testing</strong> covers basic terms,
+                    levels and types, test design, defects and reports, and
+                    practice and judgement. Each deck is written for this site and cites the
                     standard or documentation behind its answers. The cards are
                     revision aids, not a course and not a certification.
+                </p>
+
+                <p>
+                    To practise rather than revise, the Developer Tools section also has
+                    the JSON Error-Fixing Lab, the JSONPath Challenge Lab, the
+                    Cron Challenge Lab and the Test Design Lab.
                 </p>
 
             </section>

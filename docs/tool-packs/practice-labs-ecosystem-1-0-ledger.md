@@ -24,7 +24,7 @@ Base commit: `df4dd66`. Owner scope: Option B, with the conditions recorded in d
 | 53 Lab shell and JSON Error-Fixing Lab | LP-3 | IMPLEMENTED (see below) | see git log |
 | 54 JSONPath and Cron Challenge Labs | LP-4 | IMPLEMENTED (see below) | see git log |
 | 55 Test Design Lab | LP-5 | IMPLEMENTED (see below) | see git log |
-| 56 Integration and consolidated checkpoint | LP-6 | NOT_STARTED | |
+| 56 Integration and consolidated checkpoint | LP-6 | IMPLEMENTED (see below) | see git log |
 
 ## Pack 51: Smart Flashcards core, JSON deck, scheduler, opt-in progress
 
@@ -146,3 +146,21 @@ Defects found and fixed in this pack:
 - A first test for "no exam wording" matched the word "example"; it now matches whole words.
 
 Known limits: one author, so the specifications have not had the second reviewer FR-TDL-001 asks for; this is recorded here and in the set's review record. The technique is described as commonly taught and the page says the forms differ between textbooks.
+
+## Pack 56: Integration and consolidated checkpoint (LP-6)
+
+Changes:
+- Smart Flashcards: the "The Decks" copy now describes all three decks (topics taken from the deck data) and names the four labs in plain text. Its related list is now json-formatter, jsonpath-tester, json-error-fixing-lab, test-design-lab. No hard-coded href was added: the link checker resolves JS-template hrefs from the site root, so plain text was used (a first version with relative links failed the link check and was corrected).
+- Developer Tools section text in `categories.js` was NOT changed: it is pinned by the home DOM baseline and the SEO baseline, it is still true, and changing it would need baselines regenerated. Recorded as deferred (FR-INT-006 asks only for a minimal update).
+- Stale pins from earlier work corrected in six older specs: Developer Tools now lists 17 tools (was 12), and the All Tools section-title lists include PDF Tools, a section that predates this work. No assertion was weakened.
+- One flashcards test made deterministic (it addressed checkboxes that are redrawn after each change); it failed once on mobile under load, then passed 4 of 4 repeats.
+
+Checkpoint results (all local, system Chrome only):
+- Full unit suite: 3,577 tests, 3,573 pass, 0 fail, 4 skipped (skips are existing environment-dependent ones).
+- Learning and related browser specs on subpath-desktop: 88 of 88; on subpath-mobile: 68 of 69 on the first run, the one failure was the flaky test above, which then passed. New Test Design Lab spec: 20 of 20 on both projects.
+- Existing-tool regression (JSON Formatter, JSONPath Tester, Cron Explainer, analytics) on desktop: all pass after the stale-pin corrections; text-diff, unix-timestamp, time-zone and image tools listing tests re-run and pass.
+- Static: links pass, assets pass, SEO pass (108 pages, 107 sitemap URLs, production origin), inventory up to date (107 live pages).
+- SEO baseline spec: FAILS, and was not regenerated. Existing pages differ only in raw HTML (plus one runtime field on the image compressor), six pages are new (the five learning pages and /calculators/xirr/, which predates this work). Titles and canonicals of the new pages are correct and none is noindex. The baseline was last recorded before several earlier phases, so it needs a deliberate refresh by the owner after review.
+- Payload (gzip): shared learning code 15.4 KB; flashcards 30.9 KB including three decks; each lab 8.9 to 12.3 KB; learning.css 2.2 KB; each page HTML about 4.5 KB.
+
+Not done or not verified: real screen reader, real Android or Safari, Firefox and WebKit, second human reviewer, arrow-key flashcard navigation test, 768 and 1180 px visual checks beyond the existing desktop project. These are NOT RUN, not passed.

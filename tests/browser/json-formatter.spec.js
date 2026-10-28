@@ -344,7 +344,7 @@ test.describe("Developer Tools in the site", () => {
     await go("developer-tools.html");
     await expect(page.locator("h1")).toHaveText("Developer Tools");
     await expect(page.locator(`a[href$="tools/json-formatter/"]`)).toHaveCount(1);
-    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(12);
+    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(17);
     await expect(page.locator("main")).not.toContainText(/coming soon|regex/i); // UUID Generator is a live tool now (Tool Pack 39); Base64 is a live tool now (Tool Pack 27)
     const crumbs = (await page.locator(".calculator-breadcrumb").locator("a, strong").allInnerTexts()).map((t) => t.trim());
     expect(crumbs).toEqual(["Home", "All Tools", "Developer Tools"]);
@@ -356,9 +356,9 @@ test.describe("Developer Tools in the site", () => {
 
   test("All Tools shows three sections; Developer Tools holds the JSON tool and the timestamp converter; Time Tools is unchanged", async ({ page, go }) => {
     await go("tools.html");
-    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools"]);
+    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools"]);
     const dev = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Developer Tools")') });
-    await expect(dev.locator(".directory-section__count")).toHaveText("12 tools");
+    await expect(dev.locator(".directory-section__count")).toHaveText("17 tools");
     await expect(dev.locator('a[href$="tools/json-formatter/"]')).toHaveCount(1);
     const time = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Time Tools")') });
     await expect(time.locator(".directory-section__count")).toHaveText("13 tools");
