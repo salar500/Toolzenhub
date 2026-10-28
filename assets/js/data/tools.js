@@ -425,6 +425,7 @@ const catalog = [
             table: true,
             schedule: true,
             compare: true,
+            realtime: true,
             multipleInputs: true,
             validation: true,
             explanation: true,

@@ -19,7 +19,7 @@ Base commit: `6450f8f`. Owner scope: the approved Balanced option (Option B). Do
 |---|---|---|
 | 46 Loan Comparison tidy and PDF repair | IMPLEMENTED (see below) | see git log |
 | 45 EMI 2.0 | IMPLEMENTED (see below) | see git log |
-| 47 PPF automatic results | NOT_STARTED | |
+| 47 PPF automatic results | IMPLEMENTED (see below) | see git log |
 | 48 Inflation view (SIP, SWP) | NOT_STARTED | |
 | 49 XIRR Calculator | NOT_STARTED | |
 | 50 Navigation and aliases | NOT_STARTED | |
@@ -67,3 +67,18 @@ Verification (all on this machine, one worker):
 Observations:
 - The preview is served over plain http on a non-local host name, where the browser offers no clipboard; the copy test therefore installs a recording stand-in for the success path, and the fallback is the behaviour the browser actually showed.
 - The shared related-article cards on every calculator page load their thumbnails from images.unsplash.com. This predates this work and is outside the calculator code; it is recorded here because the privacy statement of the tools should not be read to cover it. The EMI network test excludes images for that reason.
+
+## Pack 47: PPF Calculator automatic results
+
+Requirements: FR-PPF-001 to FR-PPF-006.
+
+Official-rule check (FR-PPF-006), done 2026-10-28 before changing the page:
+- Source read: the text of the Public Provident Fund Scheme, 2019 (Gazette of India, Ministry of Finance, December 2019) as reproduced on taxguru.in. The official India Post PDF could not be read here (no PDF text tool), so the quotations are from that mirror and the reading has not been compared with the gazette file itself.
+- Para 7(1): interest is "eligible for a calendar month on the lowest balance at the credit of an account between the close of the fifth day and the end of the month". Para 7(2): "Interest shall be credited to the account at the end of each year." Para 4(1): a deposit of not less than ₹500 and not more than ₹1,50,000 in multiples of ₹50 in a year; para 5(2): in one lump sum or in instalments; no limit on the number of deposits is stated. Para 11(1): maturity after fifteen years from the end of the year of opening.
+- Result: the engine's V1 reading (lowest balance between the fifth and month end, credited yearly, ₹500 to ₹1,50,000, 15-year maturity) is consistent with these paragraphs. The division of the annual rate by 12 for a month is not stated in the Scheme text I read; the page already says it is this tool's assumption, and that stays. The 7.9% in the 2019 text is superseded by quarterly notification; the tool uses only the rate the visitor enters. No engine change was made or needed.
+
+Implemented (page only; `formulas/ppf.js` untouched):
+- No Calculate button and no out-of-date label (its markup, constants and CSS are removed). Results appear when the deposit, rate and years are complete and valid; empty fields give a prompt; an invalid value is reported when its field is left, and the previous figure is removed meanwhile; one polite announcement 600 ms after typing stops; focus is not moved; the year table keeps the open or folded state the visitor chose; Reset restores the starting values, shows the starting result, announces once and focuses the first field.
+- Catalog: `realtime: true`. The "how to use" steps were reworded.
+
+Verification: `tests/browser/ppf.spec.js` rewritten for live behaviour (including a live announcement test); 28/28 on `subpath-desktop` and 28/28 on `subpath-mobile`; related unit suites 213/213 (`ppf-golden` unchanged). Not run: `root-desktop` project for this spec; full regression.

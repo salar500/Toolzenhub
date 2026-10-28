@@ -43,9 +43,11 @@ async function openTable(page) {
   await expect(details).toHaveJSProperty("open", true);
 }
 
+// the page reports an invalid value when its field is left, not while it is being typed
+const leave = (page) => page.evaluate(() => document.activeElement && document.activeElement.blur());
+
 async function calculate(page, inputs) {
-  await setInputs(page, inputs);
-  await btn(page, "Calculate").click();
+  await setInputs(page, inputs); // results are live: there is nothing to press
   await expect(results(page).locator(".ppf-result")).toBeVisible();
 }
 
@@ -72,32 +74,34 @@ test.describe("PPF Calculator", () => {
     // the April opening is visible before any result, with no opening-month setting
     await expect(page.locator("#ppf-april")).toContainText("Assumes the account is opened in April");
     await expect(page.getByLabel(/opening month/i)).toHaveCount(0);
-    await expect(results(page)).toContainText("press Calculate");
+    await expect(btn(page, "Calculate")).toHaveCount(0); // results are live
+    await expect(results(page).locator(".ppf-result")).toBeVisible(); // the starting values already give a result
     // the assumptions sit beside the results area
     const a = page.locator(".ppf-assumptions");
     await expect(a).toBeVisible();
     for (const text of ["annual rate divided by 12", "lowest balance between the close of the 5th", "once, at the end of each financial year", "opened in April", "end of year 16", "Rounded to whole rupees", "not a forecast, a guarantee or advice"]) {
       await expect(a).toContainText(text);
     }
-    await expect(btn(page, "Calculate")).toBeEnabled();
     await expect(btn(page, "Reset")).toBeEnabled();
     const body = await page.locator("main").innerText();
     expect(body).not.toMatch(/current (ppf )?rate is|today'?s (ppf )?rate|guaranteed|risk-free|best (ppf|investment)/i);
     expectClean(watch);
   });
 
-  test("results appear only after Calculate; Enter in a field calculates", async ({ page, go }) => {
+  test("results are live: an empty field gives a prompt, a valid edit updates the result at once", async ({ page, go }) => {
     await open(page, go);
-    await F.rate(page).fill("8");
-    await expect(results(page)).toContainText("press Calculate");
-    await expect(results(page).locator(".ppf-result")).toHaveCount(0);
-    await F.rate(page).press("Enter");
     await expect(results(page).locator(".ppf-result")).toBeVisible();
+    await F.rate(page).fill("");
+    await expect(results(page)).toContainText("Enter the deposit, the interest rate and the number of years");
+    await expect(results(page).locator(".ppf-result")).toHaveCount(0);
+    await expect(page.locator("#ppf-error")).toHaveCount(0); // empty is not an error
+    await F.rate(page).fill("8");
+    await expect(results(page).locator(".ppf-result")).toBeVisible();
+    await expect(metric(page, "Estimated balance after 16 years")).not.toHaveText("₹45,17,702");
   });
 
   test("the default case: ₹1,50,000 in April for 16 years at 7.1% (the oracle's values)", async ({ page, go, watch }) => {
     await open(page, go);
-    await btn(page, "Calculate").click();
     await expect(metric(page, "Estimated balance after 16 years")).toHaveText("₹45,17,702");
     await expect(metric(page, "Total deposited")).toHaveText("₹24,00,000");
     await expect(metric(page, "Interest earned")).toHaveText("₹21,17,702");
@@ -106,13 +110,13 @@ test.describe("PPF Calculator", () => {
     await expect(kind(page)).toContainText("Year 16 is the end of the first term for an account opened in April");
     await expect(kind(page)).toContainText("earliest date on which the Scheme allows the account to be closed in full");
     await expect(page.locator("#ppf-results")).toContainText("Rounded to whole rupees. Actual credited balances can differ");
+    await F.years(page).fill("16"); // an edit (the first render is silent): one announcement follows
     await expect(live(page)).toHaveText("Estimated balance after 16 years: ₹45,17,702. Total deposited ₹24,00,000, interest earned ₹21,17,702. These are projections from your inputs.");
     expectClean(watch);
   });
 
   test("the year-by-year table: 16 rows, the first row, the labels, and the last row equals the headline", async ({ page, go }) => {
     await open(page, go);
-    await btn(page, "Calculate").click();
     await openTable(page);
     await expect(rows(page)).toHaveCount(16);
     const first = rows(page).first();
@@ -137,7 +141,6 @@ test.describe("PPF Calculator", () => {
     await pattern(page, "monthly").check();
     await expect(F.monthly(page)).toBeVisible();
     await expect(F.yearly(page)).toBeHidden();
-    await btn(page, "Calculate").click();
     await expect(metric(page, "Estimated balance after 16 years")).toHaveText("₹43,80,435");
     await expect(metric(page, "Total deposited")).toHaveText("₹24,00,000");
     await expect(page.locator("#ppf-results .ppf-lead")).toContainText("₹12,500 a month, each by the 5th for 16 financial years");
@@ -148,7 +151,6 @@ test.describe("PPF Calculator", () => {
 
   test("annual versus monthly for the same total: the displayed difference reconciles with the two displayed balances", async ({ page, go }) => {
     await open(page, go);
-    await btn(page, "Calculate").click();
     const compare = page.locator("#ppf-results .ppf-compare-grid");
     await expect(compare).toBeVisible();
     await expect(page.locator("#ppf-results .ppf-subtitle")).toHaveText("Annual versus monthly, for the same yearly total");
@@ -159,7 +161,6 @@ test.describe("PPF Calculator", () => {
     await expect(page.locator("#ppf-results .ppf-compare-grid + .ppf-note")).toHaveText("Depositing ₹1,50,000 in April each year gives about ₹1,37,267 more after 16 years than depositing ₹12,500 a month, because the money is in the account for more months. These are different deposit schedules, not the same investment, and this is not advice about when to deposit.");
     // 15 years
     await F.years(page).fill("15");
-    await btn(page, "Calculate").click();
     await expect(compare.locator(".calculator-results__value")).toHaveText(["₹40,68,209", "₹39,44,599", "₹1,23,610"]);
     // never ranked or called equivalent
     const text = await results(page).innerText();
@@ -246,7 +247,7 @@ test.describe("PPF Calculator", () => {
     ];
     for (const [inputs, message, field] of cases) {
       await setInputs(page, inputs);
-      await btn(page, "Calculate").click();
+      await leave(page);
       await expect(error).toBeVisible();
       await expect(error).toContainText(message);
       await expect(field(page)).toHaveAttribute("aria-invalid", "true");
@@ -255,41 +256,61 @@ test.describe("PPF Calculator", () => {
       await expect(live(page)).toContainText(message);
     }
     await setInputs(page, { mode: "monthly", amount: 12550 });
-    await btn(page, "Calculate").click();
+    await leave(page);
     await expect(error).toContainText("The monthly deposit must be between ₹50 and ₹12,500, in multiples of ₹50");
     // empty fields
     await pattern(page, "yearly").check();
     await F.yearly(page).fill("");
     await F.rate(page).fill("");
-    await btn(page, "Calculate").click();
-    await expect(error).toContainText("Enter the yearly deposit.");
-    await expect(error).toContainText("Enter an interest rate.");
+    await leave(page);
+    await expect(error).toHaveCount(0); // empty fields are a prompt, not an error
+    await expect(results(page)).toContainText("Enter the deposit, the interest rate and the number of years");
     // a valid calculation clears the error state completely
     await setInputs(page, { amount: 150000 });
-    await btn(page, "Calculate").click();
     await expect(page.locator("#ppf-error")).toHaveCount(0);
     for (const f of [F.yearly, F.rate, F.years]) await expect(f(page)).not.toHaveAttribute("aria-invalid", /.+/);
     expect(await F.yearly(page).getAttribute("aria-describedby")).toBe("ppf-yearly-hint");
   });
 
-  test("editing after a result marks it out of date until Calculate is pressed again", async ({ page, go }) => {
+  test("an edit replaces the result at once (nothing is marked out of date); an invalid edit removes it; the table stays open", async ({ page, go }) => {
     await open(page, go);
-    await btn(page, "Calculate").click();
-    await expect(page.locator("#ppf-stale")).toBeHidden();
+    await expect(page.locator("#ppf-stale")).toHaveCount(0);
+    await expect(metric(page, "Estimated balance after 16 years")).toHaveText("₹45,17,702");
+    await openTable(page);
     await F.rate(page).fill("8");
-    await expect(page.locator("#ppf-stale")).toBeVisible();
-    await expect(page.locator("#ppf-stale")).toContainText("The inputs have changed since this result was worked out");
-    await expect(results(page)).toHaveAttribute("data-stale", "true");
-    await expect(metric(page, "Estimated balance after 16 years")).toHaveText("₹45,17,702"); // the earlier figure stays, labelled
-    await btn(page, "Calculate").click();
-    await expect(page.locator("#ppf-stale")).toBeHidden();
     await expect(metric(page, "Estimated balance after 16 years")).not.toHaveText("₹45,17,702");
-    // changing the pattern marks it out of date too
+    await expect(results(page)).not.toHaveAttribute("data-stale", "true");
+    await expect(page.locator("#ppf-table-details")).toHaveJSProperty("open", true);
+    // an invalid value is not reported while its field has focus, and no old figure is left beside it
+    await F.rate(page).fill("15.1");
+    await expect(results(page).locator(".ppf-result")).toHaveCount(0);
+    await expect(page.locator("#ppf-error")).toHaveCount(0);
+    await leave(page);
+    await expect(page.locator("#ppf-error")).toContainText("The interest rate must be from 0% to 15%");
+    // changing the pattern updates the result too
+    await F.rate(page).fill("7.1");
     await pattern(page, "monthly").check();
-    await expect(page.locator("#ppf-stale")).toBeVisible();
+    await expect(results(page).locator(".ppf-lead")).toContainText("₹12,500 a month, each by the 5th");
   });
 
-  test("Reset puts the starting values back, clears the result and any error, and returns focus to the first field", async ({ page, go }) => {
+  test("typing announces at most once, and an update never moves focus", async ({ page, go }) => {
+    await open(page, go);
+    await page.evaluate(() => {
+      window.__live = [];
+      new MutationObserver(() => window.__live.push(document.querySelector("#ppf-live").textContent))
+        .observe(document.querySelector("#ppf-live"), { childList: true, characterData: true, subtree: true });
+    });
+    await F.rate(page).fill("");
+    await F.rate(page).pressSequentially("8.5", { delay: 20 });
+    await expect(results(page).locator(".ppf-result")).toBeVisible();
+    expect(await page.evaluate(() => document.activeElement.id)).toBe("ppf-rate");
+    await page.waitForTimeout(900);
+    const spoken = await page.evaluate(() => window.__live.filter((t) => t !== ""));
+    expect(spoken.length).toBeLessThanOrEqual(1);
+    expect(spoken[0]).toMatch(/^Estimated balance after 16 years/);
+  });
+
+  test("Reset puts the starting values back, shows the starting result, clears any error, and returns focus to the first field", async ({ page, go }) => {
     await open(page, go);
     await calculate(page, { mode: "monthly", amount: 5000, rate: "9.5", years: "30" });
     await btn(page, "Reset").click();
@@ -298,13 +319,11 @@ test.describe("PPF Calculator", () => {
     await expect(F.monthly(page)).toHaveValue("12500");
     await expect(F.rate(page)).toHaveValue("7.1");
     await expect(F.years(page)).toHaveValue("16");
-    await expect(results(page).locator(".ppf-result")).toHaveCount(0);
-    await expect(results(page)).toContainText("press Calculate");
-    await expect(page.locator("#ppf-stale")).toBeHidden();
+    await expect(metric(page, "Estimated balance after 16 years")).toHaveText("₹45,17,702"); // live: the starting values give the starting result
     await expect(F.yearly(page)).toBeFocused();
     await expect(live(page)).toHaveText("Reset to the starting values.");
     await setInputs(page, { amount: 499 });
-    await btn(page, "Calculate").click();
+    await leave(page);
     await expect(page.locator("#ppf-error")).toBeVisible();
     await btn(page, "Reset").click();
     await expect(page.locator("#ppf-error")).toHaveCount(0);
@@ -344,7 +363,6 @@ test.describe("PPF Calculator", () => {
     for (const label of ["Yearly Deposit", "Interest Rate (example)", "Financial Years of Deposits"]) await expect(page.getByLabel(label, { exact: true })).toHaveCount(1);
     await expect(page.locator("#ppf-live")).toHaveAttribute("aria-live", "polite");
     await expect(page.locator("#ppf-live")).toHaveAttribute("role", "status");
-    await btn(page, "Calculate").click();
     await openTable(page);
     const region = page.getByRole("region", { name: /Year-by-year balance/ });
     await expect(region).toHaveAttribute("tabindex", "0");
@@ -352,8 +370,8 @@ test.describe("PPF Calculator", () => {
     await region.focus();
     const outline = await region.evaluate((e) => { const s = getComputedStyle(e); return { style: s.outlineStyle, width: parseFloat(s.outlineWidth) }; });
     expect(outline.style !== "none" && outline.width > 0).toBe(true);
-    await btn(page, "Calculate").focus();
-    const calcOutline = await btn(page, "Calculate").evaluate((e) => { const s = getComputedStyle(e); return { style: s.outlineStyle, width: parseFloat(s.outlineWidth), shadow: s.boxShadow }; });
+    await btn(page, "Reset").focus();
+    const calcOutline = await btn(page, "Reset").evaluate((e) => { const s = getComputedStyle(e); return { style: s.outlineStyle, width: parseFloat(s.outlineWidth), shadow: s.boxShadow }; });
     expect((calcOutline.style !== "none" && calcOutline.width > 0) || calcOutline.shadow !== "none").toBe(true);
     const levels = await page.locator("main h1, main h2, main h3").evaluateAll((l) => l.map((h) => Number(h.tagName[1])));
     expect(levels.filter((n) => n === 1)).toHaveLength(1);
@@ -395,7 +413,7 @@ for (const width of [320, 360, 390]) {
       const sizes = await page.locator("#ppf-results .calculator-results__value, #ppf-results .ppf-lead, #ppf-results .ppf-kind, .ppf-assumptions li").evaluateAll((els) => els.map((e) => parseFloat(getComputedStyle(e).fontSize)));
       for (const s of sizes) expect(s).toBeGreaterThanOrEqual(13);
       expect(parseFloat(await F.yearly(page).evaluate((e) => getComputedStyle(e).fontSize))).toBeGreaterThanOrEqual(16);
-      for (const name of ["Calculate", "Reset"]) {
+      for (const name of ["Reset"]) {
         const box = await btn(page, name).boundingBox();
         expect(box.height, name).toBeGreaterThanOrEqual(44);
         expect(box.x + box.width, name).toBeLessThanOrEqual(width);
@@ -413,7 +431,7 @@ for (const width of [320, 360, 390]) {
       await open(page, go);
       await expectNoHorizontalOverflow(page);
       await setInputs(page, { amount: 499 });
-      await btn(page, "Calculate").click();
+      await leave(page);
       await expect(page.locator("#ppf-error")).toBeVisible();
       await expectNoHorizontalOverflow(page);
       await calculate(page, { amount: 150000 });
@@ -432,7 +450,7 @@ test.describe("PPF Calculator with larger text", () => {
     await expectNoHorizontalOverflow(page);
     await calculate(page, { amount: 150000 });
     await expectNoHorizontalOverflow(page);
-    for (const name of ["Calculate", "Reset"]) {
+    for (const name of ["Reset"]) {
       const box = await btn(page, name).boundingBox();
       expect(box.height, name).toBeGreaterThanOrEqual(44);
       expect(box.x + box.width, name).toBeLessThanOrEqual(390);
@@ -475,13 +493,13 @@ test.describe("PPF Calculator in the Investment listing, search and related tool
     }
   });
 
-  test("a direct visit and a refresh both load the page, and a refresh clears the result", async ({ page, go }) => {
+  test("a direct visit and a refresh both load the page, and a refresh forgets edits (nothing is stored)", async ({ page, go }) => {
     await open(page, go);
-    await btn(page, "Calculate").click();
+    await F.rate(page).fill("9");
     await expect(results(page).locator(".ppf-result")).toBeVisible();
     await page.reload({ waitUntil: "domcontentloaded" });
     await expect(page.locator("#ppf-form")).toHaveAttribute("data-ready", "true");
-    await expect(results(page).locator(".ppf-result")).toHaveCount(0);
+    await expect(results(page).locator(".ppf-result")).toBeVisible();
     await expect(F.rate(page)).toHaveValue("7.1");
     expect(page.url()).toMatch(/\/calculators\/ppf\/$/);
   });

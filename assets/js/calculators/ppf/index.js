@@ -10,10 +10,13 @@
    none of it. The approved specification is
    docs/tool-packs/26-ppf-calculator.md.
 
-   - Results appear when the visitor presses Calculate. Editing a
-     field afterwards marks the result as out of date until it is
-     calculated again; the page never shows a figure for inputs it
-     was not calculated from.
+   - Results appear as soon as the inputs are complete and valid, and
+     there is no Calculate button (Calculators Ecosystem 2.0, pack 47).
+     An empty field gives a prompt, not an error; a value that is not
+     valid is reported when its field is left, and the previous figure
+     is removed meanwhile, so the page never shows a figure for inputs
+     it was not calculated from. One short sentence is announced a
+     moment after typing stops. The engine is unchanged.
    - The rate is the visitor's. The page shows no current PPF rate,
      and the 7.1 it starts with is labelled an example.
    - The assumptions are always shown beside the result, with the
@@ -83,10 +86,7 @@ const DEFAULTS = Object.freeze({
 });
 
 const EMPTY_MESSAGE =
-    "Check the values above, then press Calculate.";
-
-const STALE_MESSAGE =
-    "The inputs have changed since this result was worked out. Press Calculate to update it.";
+    "Enter the deposit, the interest rate and the number of years to see the estimate.";
 
 const ROUNDING_NOTE =
     "Rounded to whole rupees. Actual credited balances can differ because of how interest is rounded in practice, which this tool does not claim to know, and because of other rules that apply to your account.";
@@ -495,14 +495,6 @@ export function markup() {
                     <div class="calculator-form__actions ppf-actions">
 
                         <button
-                            type="submit"
-                            id="ppf-calculate"
-                            class="calculator-form__button"
-                        >
-                            Calculate
-                        </button>
-
-                        <button
                             type="button"
                             id="ppf-reset"
                             class="calculator-form__button calculator-form__button--secondary"
@@ -518,12 +510,6 @@ export function markup() {
 
 
             <!-- RESULTS -->
-
-            <p
-                id="ppf-stale"
-                class="ppf-stale"
-                hidden
-            >${escapeHTML(STALE_MESSAGE)}</p>
 
             <section
                 id="ppf-results"
@@ -576,9 +562,9 @@ export function markup() {
                 <ol>
                     <li>Choose a yearly deposit made in April, or a monthly deposit made each month, and enter the amount.</li>
                     <li>Enter the interest rate that applies to you and the number of financial years. The page starts with 16 years and an example rate of 7.1%.</li>
-                    <li>Press Calculate. The result shows the estimated balance, what you deposited and the interest, and says what the final year is in the Scheme's terms.</li>
+                    <li>The result appears as soon as the values are complete. It shows the estimated balance, what you deposited and the interest, and says what the final year is in the Scheme's terms.</li>
                     <li>Open the year-by-year table to see each year. When the yearly total is a multiple of ₹600, the result also compares one deposit in April with the same total paid monthly.</li>
-                    <li>If you change a value after calculating, the result is marked out of date until you press Calculate. Reset puts the starting values back.</li>
+                    <li>Change any value and the result updates. Reset puts the starting values back.</li>
                 </ol>
 
             </section>
@@ -811,7 +797,6 @@ export function init() {
     const form = document.querySelector("#ppf-form");
     const results = document.querySelector("#ppf-results");
     const live = document.querySelector("#ppf-live");
-    const stale = document.querySelector("#ppf-stale");
     const yearlyGroup = document.querySelector("#ppf-yearly-group");
     const monthlyGroup = document.querySelector("#ppf-monthly-group");
 
@@ -828,63 +813,80 @@ export function init() {
     const radios = [...document.querySelectorAll(`input[name="${PATTERN_NAME}"]`)];
 
     let announceTimer = null;
-
-    /* true while the page shows a result worked out from the inputs as they were at the last Calculate */
-    let showing = false;
+    let spoken = "";
+    let shownHtml = null;
+    /* the table is open on a wide screen and folded on a phone, until the visitor opens or closes it */
+    let tableOpen = null;
 
     const chosenPattern = () =>
         (radios.find((radio) => radio.checked) || radios[0]).value;
 
     function syncPattern() {
-
         const monthly = chosenPattern() === PPF_PATTERNS.monthly;
-
         yearlyGroup.hidden = monthly;
         monthlyGroup.hidden = !monthly;
-
     }
 
-    function announce(text) {
-
+    /* one sentence a moment after typing stops, never per key, never the same sentence twice in a row */
+    function announce(text, delay = 600) {
         clearTimeout(announceTimer);
-
         announceTimer = setTimeout(() => {
-            live.textContent = "";
-            live.textContent = text;
-        }, 400);
-
+            if (text !== spoken) {
+                live.textContent = text;
+                spoken = text;
+            }
+        }, delay);
     }
 
-    function announceNow(text) {
-
+    function say(text) {
         clearTimeout(announceTimer);
-
-        live.textContent = "";
         live.textContent = text;
-
+        spoken = text;
     }
 
-    function clearStale() {
-
-        showing = false;
-
-        stale.hidden = true;
-
-        delete results.dataset.stale;
-
+    /* a result is put on the page only when it differs from what is there, so leaving a field does not fold the table */
+    function show(html) {
+        if (html === shownHtml) {
+            return;
+        }
+        shownHtml = html;
+        results.innerHTML = html;
+        const details = document.querySelector("#ppf-table-details");
+        if (details) {
+            details.open = tableOpen ?? window.matchMedia("(min-width: 700px)").matches;
+        }
     }
 
-    function showEmpty() {
+    results.addEventListener(
+        "toggle",
+        (event) => {
+            if (event.target.id === "ppf-table-details") {
+                tableOpen = event.target.open;
+            }
+        },
+        true
+    );
 
-        clearStale();
+    const blank = (input) => input.value.trim() === "" && !input.validity?.badInput;
 
-        results.innerHTML = resultEmpty(EMPTY_MESSAGE);
-
-    }
-
-    function run({ speak = true } = {}) {
-
+    /*
+     * final: true when a field has just been left, so every error is
+     * reported; while typing, the field that still has focus is given
+     * time to be finished.
+     */
+    function update({ final = false, speak = true } = {}) {
         clearFieldsInvalid(allInputs, ERROR_ID);
+
+        const monthly = chosenPattern() === PPF_PATTERNS.monthly;
+        const needed = [monthly ? inputs.monthly : inputs.yearly, inputs.rate, inputs.years];
+
+        if (needed.some(blank)) {
+            show(resultEmpty(EMPTY_MESSAGE));
+            if (speak) {
+                announce("");
+            }
+            return;
+        }
 
         const check = validatePpfInputs({
             pattern: chosenPattern(),
@@ -895,99 +897,65 @@ export function init() {
         });
 
         if (!check.ok) {
+            const field = (name) => inputs[name === "yearlyDeposit" ? "yearly" : name === "monthlyDeposit" ? "monthly" : name];
+            const focused = document.activeElement;
+            const shown = final
+                ? check.errors
+                : check.errors.filter((error) => !error.fields.some((name) => field(name) === focused));
 
-            clearStale();
-
-            const names = new Set(check.errors.flatMap((error) => error.fields));
-
-            setFieldsInvalid(
-                [...names].map((name) => inputs[name === "yearlyDeposit" ? "yearly" : name === "monthlyDeposit" ? "monthly" : name]),
-                ERROR_ID
-            );
-
-            const message = check.errors.map((error) => error.message).join(" ");
-
-            results.innerHTML = resultError(message, { id: ERROR_ID });
-
-            if (speak) {
-                announceNow(message);
+            if (!shown.length) {
+                show(resultEmpty(EMPTY_MESSAGE));
+                if (speak) {
+                    announce("");
+                }
+                return;
             }
 
+            setFieldsInvalid(
+                [...new Set(shown.flatMap((error) => error.fields))].map(field).filter(Boolean),
+                ERROR_ID
+            );
+            const message = shown.map((error) => error.message).join(" ");
+            show(resultError(message, { id: ERROR_ID }));
+            if (speak) {
+                announce(message);
+            }
             return;
-
         }
 
         const result = calculatePpf(check.values);
-
-        clearStale();
-
-        results.innerHTML = renderResults(check.values, result);
-
-        const details = document.querySelector("#ppf-table-details");
-
-        /* the table is open on a wide screen and folded on a phone */
-        if (details && window.matchMedia("(min-width: 700px)").matches) {
-            details.open = true;
-        }
-
-        showing = true;
-
+        show(renderResults(check.values, result));
         if (speak) {
-            announceNow(announcement(check.values, result));
+            announce(announcement(check.values, result));
         }
-
     }
 
-    form.addEventListener("submit", (event) => {
-
-        event.preventDefault();
-
-        run();
-
-    });
-
-    /* an edit after a result makes it out of date: it stays visible, labelled, until Calculate is pressed */
-
     form.addEventListener("input", () => {
-
         syncPattern();
-
-        if (!showing) {
-            return;
-        }
-
-        stale.hidden = false;
-
-        results.dataset.stale = "true";
-
-        announce(STALE_MESSAGE);
-
+        update();
     });
+
+    form.addEventListener("focusout", () => update({ final: true }));
+
+    form.addEventListener("submit", (event) => event.preventDefault());
 
     document.querySelector("#ppf-reset")?.addEventListener("click", () => {
-
         for (const radio of radios) {
             radio.checked = radio.value === DEFAULTS.pattern;
         }
-
         inputs.yearly.value = DEFAULTS.yearly;
         inputs.monthly.value = DEFAULTS.monthly;
         inputs.rate.value = DEFAULTS.rate;
         inputs.years.value = DEFAULTS.years;
-
+        tableOpen = null;
         syncPattern();
-
-        clearFieldsInvalid(allInputs, ERROR_ID);
-
-        showEmpty();
-
-        announceNow("Reset to the starting values.");
-
+        update({ final: true, speak: false });
+        say("Reset to the starting values.");
         inputs.yearly.focus();
-
     });
 
     syncPattern();
+    update({ final: true, speak: false });
 
     form.dataset.ready = "true";
 

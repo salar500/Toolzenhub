@@ -177,40 +177,6 @@
 
 }
 
-.ppf-stale {
-
-    margin: 0 0 12px;
-    padding: 10px 14px;
-
-    border: 1px solid #fedf89;
-    border-left-width: 6px;
-    border-radius: 10px;
-
-    background: #fffcf5;
-
-    color: #4e3a05;
-
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.5;
-
-}
-
-.ppf-stale[hidden] {
-
-    display: none;
-
-}
-
-/* a result that no longer matches the inputs stays readable, with a dashed outline */
-
-.calculator-results[data-stale="true"] .ppf-result {
-
-    outline: 2px dashed #d0a315;
-    outline-offset: 2px;
-
-}
-
 .ppf-lead {
 
     margin: 0 0 14px;
