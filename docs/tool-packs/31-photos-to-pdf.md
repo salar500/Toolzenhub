@@ -36,7 +36,7 @@ Competitor evidence (PUBLIC, vendor claims, privacy claims not verified; one sea
 - Limits and specific, per-file error messages. Correct upright orientation of phone photos.
 
 ### P1 (valuable, after P0 is verified on a phone)
-- Rotate an image by 90° steps (scanned pages shot sideways).
+- ~~Rotate an image by 90° steps (scanned pages shot sideways).~~ Built locally in Tool Pack 44 (section 17).
 - Lossless embedding of PNG (Flate) instead of re-encoding.
 - Editable file name.
 - Fill-the-page (crop) fit.
@@ -48,7 +48,7 @@ Drag-and-drop reordering, N-up layouts, compression levels or DPI settings, pass
 
 **Files.** Accepted: JPEG, PNG, WebP by content, not name. Limits proposed (**PROVISIONAL**, to be settled by the spike): 25 MB per file (the existing `MAX_FILE_BYTES`), 40,000,000 pixels and 16,384 px per side (the existing `MAX_INPUT_PIXELS` and `MAX_INPUT_SIDE`), at most **30 images**, at most **100 MB in total** (lowered from 150 MB at implementation; see section 16). Over a limit: that file is refused with a named reason and the others are kept. A duplicate file (same name and size) is accepted and shown; it is not silently dropped.
 **Per-image processing.**
-1. A baseline or progressive 8-bit JPEG with 1 or 3 components and no EXIF turn is **embedded as the original bytes** (DCTDecode), so quality is not reduced and large images stay as small as the original.
+1. A baseline or progressive 8-bit JPEG with 1 or 3 components and no EXIF turn is **embedded as the original picture data** (DCTDecode), so quality is not reduced and large images stay as small as the original. Since Tool Pack 44 its Exif/XMP (APP1) and IPTC (APP13) segments are removed first (section 17).
 2. Anything else is decoded by the browser (`createImageBitmap`, which applies the EXIF turn, INFERRED from the note at `image-pipeline.js:229` and not tested for this tool), drawn on a canvas, and encoded as JPEG at a fixed quality (proposed 0.92). Transparent PNG/WebP pixels are placed on **white**, and the page says so.
 3. CMYK JPEGs are re-encoded (the PDF colour model would otherwise need a Decode array).
 **Page layout.** Page sizes in points: A4 595.28 × 841.89, Letter 612 × 792. Margins: None 0, Small 18 pt, Medium 36 pt. The image is scaled to fit the printable area, centred, aspect ratio kept; **ASSUMPTION A1:** images are scaled to fit the printable area, so a small image is enlarged; this matches the expectation for document photos. The alternative (never upscale) is decision D4.
@@ -190,3 +190,16 @@ Scope built: exactly the P0 list in section 2, nothing from P1 or P2. Id and rou
 
 **Not run (by design for this phase):** the full regression, the visual baselines (no visual baseline exists for this page yet), Lighthouse, the other browser specs, Safari/WebKit and Firefox, any physical phone, screen readers.
 **Still unverified:** everything listed under "Not established" in section 15. In particular the 30-photo, 25 MB and 100 MB limits are not validated on any phone, and how a phone delivers the download is unknown.
+
+## 17. Tool Pack 44: rotate each photo, and location details in kept JPEGs (local, 2026-10-28)
+
+Status: **IMPLEMENTED LOCALLY, NOT PUSHED, NOT DEPLOYED.** Requirements FR-PP-001..012 and acceptance criteria AC-PP-001..009 are in `docs/ecosystem-review/image-pdf-tools/` (07, 09); the progress record is document 14 there. Both edits to this spec replace earlier wording rather than add beside it.
+
+**Finding (VERIFIED by test, 2026-10-28).** Before this pack, a kept JPEG was embedded as its whole original file, so a test photo carrying Exif text, GPS tags, an XMP packet and an IPTC block produced a PDF that still contained all three (`FINDING` test in `tests/unit/photos-to-pdf-turn-and-metadata.test.mjs`). The synthetic photos have invented markers; no real photograph was used.
+
+**Fix.** `jpeg-segments.js` (pure) copies a JPEG without its APP1 and APP13 segments. JFIF (APP0), the colour profile (APP2), Adobe (APP14), comments and every other byte, including the whole picture scan, are unchanged: checked segment by segment and byte for byte, and with Pillow (same pixels, same colour profile, Exif gone). A file the module cannot read safely (truncated, odd lengths) is redrawn instead of embedded. A photo the browser redraws (PNG, WebP, EXIF-turned and other JPEGs) was already saved again by a canvas, and the browser test shows that none of the markers reach the PDF. **Claim limit:** comments and vendor segments can remain, so the page says Exif, XMP and IPTC are removed and does not say that all information is gone.
+
+**Rotate.** Each row has Rotate left and Rotate right (clockwise quarter-turns kept per photo, travelling with it through Move up, Move down and Remove, cleared by Reset). A turn is applied by page placement, never by saving the picture again; the page takes the turned shape for Automatic and Fit. The PDF's own matrix is checked by `tests/fixtures/photos-to-pdf-turn-check.py` (Pillow and standard library only), which paints the page from the file and compares the four quadrants with Pillow's own rotation, for 0, 90, 180 and 270 degrees. The check was also run with the wrong turn and rejected it. An unturned photo produces a file byte-identical to the one before the pack, apart from the removed segments.
+
+**Not verified:** how real PDF viewers (Acrobat, phone viewers, Safari) draw a turned page; the check is the matrix in the file. Real phones, Safari and Firefox are unverified, as in section 15.
+

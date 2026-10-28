@@ -153,7 +153,7 @@ export function parsePdf(bytes) {
                 filter: /\/Filter\s*\/(\w+)/.exec(image)?.[1],
                 sha256: crypto.createHash("sha256").update(data).digest("hex")
             },
-            placement: { width: ctm[0], height: ctm[3], x: ctm[4], y: ctm[5] }
+            placement: { width: ctm[0], height: ctm[3], x: ctm[4], y: ctm[5], matrix: ctm }
         };
 
     });

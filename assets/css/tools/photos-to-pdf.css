@@ -267,6 +267,24 @@
 
 }
 
+.pp-thumb[data-turn="1"] canvas {
+
+    transform: rotate(90deg);
+
+}
+
+.pp-thumb[data-turn="2"] canvas {
+
+    transform: rotate(180deg);
+
+}
+
+.pp-thumb[data-turn="3"] canvas {
+
+    transform: rotate(270deg);
+
+}
+
 .pp-item__text {
 
     min-width: 0;
@@ -555,6 +573,16 @@
     #pp-create {
 
         grid-column: auto;
+
+    }
+
+}
+
+@media (min-width: 1000px) {
+
+    .pp-item__actions {
+
+        grid-template-columns: repeat(5, auto);
 
     }
 

@@ -128,6 +128,63 @@ export function computeLayout(imageWidth, imageHeight, settingsInput) {
 
 
 /* =========================================================
+   TURNING A PHOTO
+========================================================= */
+
+/*
+ * `turn` is a clockwise quarter-turn count of 0 to 3 (0, 90, 180, 270 degrees). The picture is
+ * never saved again to turn it: the page shows the same pixels, placed with a rotation, so quality
+ * and size are unchanged.
+ */
+export const TURN_LABELS = Object.freeze(["Not rotated", "Rotated 90 degrees right", "Rotated 180 degrees", "Rotated 90 degrees left"]);
+
+export function cleanTurn(turn) {
+
+    return Number.isInteger(turn) ? ((turn % 4) + 4) % 4 : 0;
+
+}
+
+/* width and height of the photo as it looks after the turn */
+export function turnedSize(width, height, turn) {
+
+    return cleanTurn(turn) % 2 === 1 ? { width: height, height: width } : { width, height };
+
+}
+
+/*
+ * Where and how to draw an upright picture so that it fills the box in `layout` (from
+ * computeLayout, worked out for the TURNED size) turned clockwise by `turn` quarter-turns.
+ * PDF coordinates grow upwards and drawImage's `rotateDegrees` is counter-clockwise about (x, y),
+ * so a clockwise turn of 90 is -90 about the box's top-left corner.
+ * Returns { x, y, width, height, rotateDegrees } for page.drawImage.
+ */
+export function placeTurned(layout, turn) {
+
+    const left = layout.x;
+    const bottom = layout.y;
+    const w = layout.width;
+    const h = layout.height;
+
+    switch (cleanTurn(turn)) {
+
+        case 1:
+            return { x: left, y: bottom + h, width: h, height: w, rotateDegrees: -90 };
+
+        case 2:
+            return { x: left + w, y: bottom + h, width: w, height: h, rotateDegrees: 180 };
+
+        case 3:
+            return { x: left + w, y: bottom, width: h, height: w, rotateDegrees: 90 };
+
+        default:
+            return { x: left, y: bottom, width: w, height: h, rotateDegrees: 0 };
+
+    }
+
+}
+
+
+/* =========================================================
    JPEG READING
 ========================================================= */
 

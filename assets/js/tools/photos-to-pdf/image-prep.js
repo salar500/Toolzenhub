@@ -13,6 +13,8 @@
 
 import { MIME_OF } from "../image-compressor-resizer/image-engine.js";
 
+import { stripJpegMetadata } from "./jpeg-segments.js";
+
 import {
     THUMB_SIDE,
     REDRAW_QUALITY,
@@ -65,7 +67,15 @@ export async function prepareImage(file) {
     const info = format === "jpeg" ? jpegInfo(original) : null;
 
     if (embedStrategy(format, info) === "keep") {
-        return { bytes: original, width: info.width, height: info.height, redrawn: false, reduced: false };
+
+        /* the original picture data, without its Exif/XMP and IPTC segments (they can hold the
+           place where the photo was taken); a file this cannot read safely is redrawn instead */
+        const stripped = stripJpegMetadata(original);
+
+        if (stripped) {
+            return { bytes: stripped.bytes, width: info.width, height: info.height, redrawn: false, reduced: false };
+        }
+
     }
 
     let bitmap;

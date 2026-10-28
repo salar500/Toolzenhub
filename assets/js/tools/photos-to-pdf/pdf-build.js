@@ -12,7 +12,7 @@
    are held in memory, and it stops between pictures when asked.
 ========================================================= */
 
-import { computeLayout, cleanSettings } from "./pdf-rules.js";
+import { computeLayout, cleanSettings, cleanTurn, turnedSize, placeTurned } from "./pdf-rules.js";
 
 /* the vendored library, fetched on first use */
 export function loadPdfLib() {
@@ -26,7 +26,8 @@ const yieldToBrowser = () => new Promise((resolve) => setTimeout(resolve, 0));
 
 /*
  * count          how many pictures
- * getImage(i)    async: { bytes: Uint8Array (a JPEG), reencoded?, reduced? } for picture i
+ * getImage(i)    async: { bytes: Uint8Array (a JPEG), redrawn?, reduced?, turn? } for picture i;
+ *                 turn is the clockwise quarter-turns (0 to 3) the user chose, applied by placement
  * settings       { pageSize, orientation, margin }
  * pdfLib         the pdf-lib module
  * onProgress     (done, count) after each picture
@@ -56,10 +57,17 @@ export async function buildPdf({ count, getImage, settings, pdfLib, onProgress =
         }
 
         const embedded = await doc.embedJpg(picture.bytes);
-        const layout = computeLayout(embedded.width, embedded.height, clean);
+        const turn = cleanTurn(picture.turn);
+        const shown = turnedSize(embedded.width, embedded.height, turn);
+        const layout = computeLayout(shown.width, shown.height, clean);
         const page = doc.addPage([layout.pageWidth, layout.pageHeight]);
+        const place = placeTurned(layout, turn);
 
-        page.drawImage(embedded, { x: layout.x, y: layout.y, width: layout.width, height: layout.height });
+        if (turn === 0) {
+            page.drawImage(embedded, { x: place.x, y: place.y, width: place.width, height: place.height });
+        } else {
+            page.drawImage(embedded, { x: place.x, y: place.y, width: place.width, height: place.height, rotate: pdfLib.degrees(place.rotateDegrees) });
+        }
 
         if (picture.redrawn) redrawn += 1;
         if (picture.reduced) reduced += 1;

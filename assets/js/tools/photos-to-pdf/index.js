@@ -37,7 +37,9 @@ import {
     moveItem,
     summariseRejections,
     describeResult,
-    formatBytes
+    formatBytes,
+    cleanTurn,
+    TURN_LABELS
 } from "./pdf-rules.js";
 
 import { buildPdf, loadPdfLib } from "./pdf-build.js";
@@ -388,8 +390,10 @@ export function markup() {
                         once, and you can add more later.
                     </li>
                     <li>
-                        Check the order. Use <strong>Move up</strong> and
-                        <strong>Move down</strong> to change it, or
+                        Check the order and the way up. Use
+                        <strong>Rotate left</strong> or <strong>Rotate right</strong>
+                        to turn a photo that is sideways, <strong>Move up</strong> and
+                        <strong>Move down</strong> to change the order, or
                         <strong>Remove</strong> to take a photo out.
                     </li>
                     <li>
@@ -422,9 +426,23 @@ export function markup() {
                 </p>
 
                 <p>
-                    A photo cannot be turned by hand in this version, so a page
-                    that was photographed sideways stays sideways. The PDF has no
-                    text to select or search: each page is a picture.
+                    Turning a photo with <strong>Rotate left</strong> or
+                    <strong>Rotate right</strong> turns it on its page: the
+                    photo is not saved again, so its quality does not change, and
+                    a page for a photo turned sideways becomes a tall or wide page
+                    to match. The PDF has no text to select or search: each page
+                    is a picture.
+                </p>
+
+                <p>
+                    A JPEG that goes in unchanged has its Exif, XMP and IPTC
+                    information removed first. That information can include the
+                    place where the photo was taken and the camera used. The
+                    picture itself and its colours are not changed. Other
+                    information, such as a comment, can remain, so do not rely on
+                    this for a document that must carry no details at all. A photo
+                    that is saved again as a JPEG, as described above, carries
+                    none of this information into the PDF.
                 </p>
 
             </section>
@@ -682,6 +700,7 @@ export function init() {
             li.dataset.id = String(item.id);
 
             thumb.className = "pp-thumb";
+            thumb.dataset.turn = String(item.turn);
             thumb.setAttribute("aria-hidden", "true");
             thumb.append(item.canvas);
 
@@ -689,7 +708,7 @@ export function init() {
             name.className = "pp-item__name";
             name.textContent = item.name;
             meta.className = "pp-item__meta";
-            meta.textContent = `Page ${index + 1} of ${state.items.length} · ${formatBytes(item.size)}`;
+            meta.textContent = `Page ${index + 1} of ${state.items.length} · ${formatBytes(item.size)}${item.turn ? ` · ${TURN_LABELS[item.turn]}` : ""}`;
             text.append(name, meta);
 
             actions.className = "pp-item__actions";
@@ -711,6 +730,8 @@ export function init() {
             };
 
             actions.append(
+                button("turn-left", "Rotate left", false),
+                button("turn-right", "Rotate right", false),
                 button("up", "Move up", index === 0),
                 button("down", "Move down", index === state.items.length - 1),
                 button("remove", "Remove", false)
@@ -784,7 +805,7 @@ export function init() {
                 continue;
             }
 
-            state.items.push({ id: state.nextId, file, name: file.name, size: file.size, canvas });
+            state.items.push({ id: state.nextId, file, name: file.name, size: file.size, canvas, turn: 0 });
             state.nextId += 1;
             added += 1;
 
@@ -837,6 +858,21 @@ export function init() {
             announce(`${removed.name} removed. ${state.items.length} ${state.items.length === 1 ? "photo" : "photos"} left.`);
 
             if (!next) fileInput.focus();
+
+            return;
+
+        }
+
+        if (action === "turn-left" || action === "turn-right") {
+
+            const photo = state.items[index];
+
+            photo.turn = cleanTurn(photo.turn + (action === "turn-right" ? 1 : 3));
+
+            renderList({ id: photo.id, action });
+            refresh();
+
+            announce(`${photo.name}: ${TURN_LABELS[photo.turn].toLowerCase()}.`);
 
             return;
 
@@ -897,7 +933,7 @@ export function init() {
                     progress.textContent = `Adding photo ${index + 1} of ${items.length}…`;
 
                     try {
-                        return await prepareImage(items[index].file);
+                        return { ...(await prepareImage(items[index].file)), turn: items[index].turn };
                     } catch (error) {
                         throw new Error(`${items[index].name}: ${error.message}`);
                     }
