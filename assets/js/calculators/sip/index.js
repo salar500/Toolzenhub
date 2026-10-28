@@ -81,17 +81,25 @@ const TITLE =
    FIELDS
 ========================================================= */
 
+import {
+    INFLATION_LIMITS,
+    validateInflation,
+    realValue,
+    realReturnPercent
+} from "../formulas/inflation.js";
+
 const IDS = {
     monthlySip: "sip-amount",
     annualReturn: "sip-return",
     years: "sip-years",
     months: "sip-months",
     stepUp: "sip-stepup",
-    target: "sip-target"
+    target: "sip-target",
+    inflation: "sip-inflation"
 };
 
 /* the fields that may be left empty: a blank step-up is 0 and a blank target means none */
-const OPTIONAL = ["stepUp", "target"];
+const OPTIONAL = ["stepUp", "target", "inflation"];
 
 const ERROR_ID =
     "sip-results-error";
@@ -102,7 +110,8 @@ const DEFAULTS = {
     years: 15,
     months: 0,
     stepUp: 0,
-    target: ""
+    target: "",
+    inflation: ""
 };
 
 const EMPTY_MESSAGE =
@@ -372,7 +381,8 @@ function yearlyTable(
 }
 
 function printSummary(
-    result
+    result,
+    inflation = null
 ) {
 
     const {
@@ -392,6 +402,10 @@ function printSummary(
 
     if (input.target !== null) {
         rows.push(["Target", rupees(input.target)]);
+    }
+    if (inflation !== null) {
+        rows.push(["Assumed inflation", `${rate(inflation)} a year`]);
+        rows.push(["Estimated value in today's money", rupees(realValue(result.plan.estimatedValue, inflation, input.months / 12))]);
     }
 
     return `
@@ -415,10 +429,44 @@ function printSummary(
 
 }
 
-function renderResults(
-    result
+/* the estimated value restated in today's money, only when an inflation rate was entered */
+function inflationBlock(
+    result,
+    inflation
 ) {
 
+    if (inflation === null) {
+        return "";
+    }
+
+    const { plan, input } = result;
+    const years = input.months / 12;
+    const real = realValue(plan.estimatedValue, inflation, years);
+    const after = realReturnPercent(input.annualReturn, inflation);
+
+    return `
+                <div class="sip-note sip-note--inflation" id="sip-inflation-view">
+                    <strong>In today's money</strong>
+                    <p>
+                        If prices rise ${escapeHTML(rate(inflation))} a year, the estimated value of
+                        ${escapeHTML(rupees(plan.estimatedValue))} would buy about
+                        <strong>${escapeHTML(rupees(real))}</strong> at today's prices after
+                        ${escapeHTML(formatDuration(input.months))}. An assumed return of
+                        ${escapeHTML(rate(input.annualReturn))} a year is about
+                        ${escapeHTML(rate(after))} a year after inflation.
+                    </p>
+                    <p>
+                        The inflation rate is your assumption, not a forecast. The figures above are
+                        unchanged; this restates the estimated value only.
+                    </p>
+                </div>`;
+
+}
+
+function renderResults(
+    result,
+    inflation = null
+) {
     const {
         plan,
         input
@@ -487,7 +535,7 @@ function renderResults(
 
                 </div>
 
-                ${printSummary(result)}
+                ${printSummary(result, inflation)}
 
                 <div class="calculator-results__grid">
                     ${metrics}
@@ -506,8 +554,8 @@ function renderResults(
                     included. This is not investment advice.
                 </div>
 
+                ${inflationBlock(result, inflation)}
                 ${scenariosSection(result)}
-
                 ${targetSection(result)}
 
                 ${chartSection(result)}
@@ -537,7 +585,8 @@ function renderResults(
 ========================================================= */
 
 function liveSummary(
-    result
+    result,
+    inflation = null
 ) {
 
     const {
@@ -545,8 +594,13 @@ function liveSummary(
         target
     } = result;
 
+    const today =
+        inflation === null
+            ? ""
+            : ` In today's money that is about ${rupees(realValue(plan.estimatedValue, inflation, result.input.months / 12))}, if prices rise ${rate(inflation)} a year.`;
+
     const base =
-        `The estimated value is ${rupees(plan.estimatedValue)} for ${rupees(plan.totalInvested)} invested, based on your assumed return.`;
+        `The estimated value is ${rupees(plan.estimatedValue)} for ${rupees(plan.totalInvested)} invested, based on your assumed return.${today}`;
 
     if (!target) {
         return base;
@@ -764,7 +818,17 @@ export function markup() {
                             value: DEFAULTS.target,
                             required: false
                         })}
-
+                        ${numberField({
+                            id: IDS.inflation,
+                            label: "Expected Inflation (optional)",
+                            unit: "% a year",
+                            hint: "An assumption, not a forecast. Enter one to also see the estimated value in today's money. Leave blank to skip.",
+                            min: INFLATION_LIMITS.min,
+                            max: INFLATION_LIMITS.max,
+                            step: 0.5,
+                            value: DEFAULTS.inflation,
+                            required: false
+                        })}
                     </div>
 
 
@@ -1155,6 +1219,19 @@ export function init() {
         const check =
             validateSipInputs(raw);
 
+        const infl =
+            validateInflation(raw.inflation);
+
+        if (check.ok && !infl.ok) {
+            setFieldsInvalid([inputs.inflation], ERROR_ID);
+            results.innerHTML =
+                resultError(infl.message, { id: ERROR_ID });
+            if (speak) {
+                announce(infl.message);
+            }
+            return;
+        }
+
         if (!check.ok) {
 
             const names =
@@ -1196,10 +1273,10 @@ export function init() {
             calculateSip(check.values);
 
         results.innerHTML =
-            renderResults(result);
+            renderResults(result, infl.value);
 
         if (speak) {
-            announce(liveSummary(result));
+            announce(liveSummary(result, infl.value));
         }
 
     }

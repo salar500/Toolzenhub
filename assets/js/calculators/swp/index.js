@@ -76,12 +76,20 @@ const TITLE =
    FIELDS
 ========================================================= */
 
+import {
+    INFLATION_LIMITS,
+    validateInflation,
+    realValue,
+    realReturnPercent
+} from "../formulas/inflation.js";
+
 const IDS = {
     corpus: "swp-corpus",
     withdrawal: "swp-withdrawal",
     years: "swp-years",
     annualReturn: "swp-return",
-    increase: "swp-increase"
+    increase: "swp-increase",
+    inflation: "swp-inflation"
 };
 
 const MODE_NAME = "swp-mode";
@@ -89,13 +97,13 @@ const FREQUENCY_NAME = "swp-frequency";
 
 /* which fields each mode shows: a hidden field is not read, validated or announced */
 const USES = {
-    lasts: ["corpus", "withdrawal", "annualReturn", "increase"],
-    withdraw: ["corpus", "years", "annualReturn", "increase"],
-    corpus: ["withdrawal", "years", "annualReturn", "increase"]
+    lasts: ["corpus", "withdrawal", "annualReturn", "increase", "inflation"],
+    withdraw: ["corpus", "years", "annualReturn", "increase", "inflation"],
+    corpus: ["withdrawal", "years", "annualReturn", "increase", "inflation"]
 };
 
 /* the fields that may be left empty: a blank increase is 0 */
-const OPTIONAL = ["increase"];
+const OPTIONAL = ["increase", "inflation"];
 
 const MODE_LABELS = {
     lasts: "How long will my corpus last?",
@@ -124,7 +132,8 @@ const DEFAULTS = {
     withdrawal: 80000,
     years: 25,
     annualReturn: 8,
-    increase: ""
+    increase: "",
+    inflation: ""
 };
 
 const EMPTY_MESSAGE =
@@ -470,12 +479,71 @@ function composeAnswer(
 
 }
 
+/*
+ * The figure that matters over time, restated in today's money: the
+ * withdrawal in the last year, or the balance left at the end of a plan
+ * that is not used up. Null when no inflation rate was entered.
+ */
+function inflationNote(
+    result,
+    inflation
+) {
+
+    if (inflation === null) {
+        return null;
+    }
+
+    const { mode, input, answer, totals } = result;
+    const m = input.periodsPerYear;
+    const g = 1 + (input.increase || 0) / 100;
+
+    let first = null;
+    let last = null;
+    let years = input.years;
+
+    if (mode === "withdraw") {
+        first = answer.firstWithdrawal;
+    } else if (mode === "corpus") {
+        first = input.withdrawal;
+    } else {
+        first = input.withdrawal;
+        years = Math.ceil(answer.months / 12);
+    }
+
+    if (mode === "lasts" && answer.state === "not-used-up") {
+        const balance = realValue(totals.ending, inflation, SWP_LIMITS.horizonYears);
+        return {
+            label: "Balance in today's money",
+            value: rupees(balance),
+            sentence: `If prices rise ${rate(inflation)} a year, the estimated balance of ${rupees(totals.ending)} after ${SWP_LIMITS.horizonYears} years would buy about ${rupees(balance)} at today's prices.`
+        };
+    }
+
+    if (!years || years < 1 || first === null) {
+        return null;
+    }
+
+    last = first * Math.pow(g, years - 1);
+    const real = realValue(last, inflation, years - 1);
+    const down = mode === "withdraw" ? rupeesDown : rupees;
+
+    return {
+        label: "Final-year withdrawal in today's money",
+        value: `${down(real)} ${EACH[m]}`,
+        sentence: `If prices rise ${rate(inflation)} a year, a withdrawal of ${down(last)} ${EACH[m]} in year ${years} would buy about ${down(real)} ${EACH[m]} at today's prices${input.increase > 0 ? "" : ", because the withdrawal itself stays the same"}.`
+    };
+
+}
+
 function renderResults(
-    result
+    result,
+    inflation = null
 ) {
 
     const composed =
         composeAnswer(result);
+
+    const today = inflationNote(result, inflation);
 
     const metrics = [
         resultMetric({
@@ -483,7 +551,8 @@ function renderResults(
             value: composed.primaryValue,
             primary: true
         }),
-        ...composed.supporting
+        ...composed.supporting,
+        ...(today ? [resultMetric({ label: today.label, value: today.value })] : [])
     ].join("");
 
     return `
@@ -509,6 +578,7 @@ function renderResults(
                     ${composed.sentences.map(line => `<p>${escapeHTML(line)}</p>`).join("\n                    ")}
                 </div>
 
+                ${today ? `<div class="swp-note swp-note--inflation" id="swp-inflation-view"><strong>In today's money.</strong> ${escapeHTML(today.sentence)} The inflation rate is your assumption, not a forecast; the figures above are unchanged.</div>` : ""}
                 <div class="swp-note swp-note--trust">
                     <strong>A scenario, not a forecast.</strong>
                     The return is an assumption you entered and is applied
@@ -534,7 +604,8 @@ function renderResults(
 ========================================================= */
 
 function liveSummary(
-    result
+    result,
+    inflation = null
 ) {
 
     const {
@@ -545,15 +616,18 @@ function liveSummary(
 
     const text = answerText(mode, answer, input.periodsPerYear);
 
+    const today = inflationNote(result, inflation);
+    const tail = today ? ` In today's money, ${today.label.toLowerCase().replace(" in today's money", "")} is about ${today.value}.` : "";
+
     if (mode === "lasts") {
         return answer.state === "first-exceeds"
             ? "The corpus is smaller than the first withdrawal."
-            : `The corpus is estimated to last ${text.toLowerCase()}, based on your assumptions.`;
+            : `The corpus is estimated to last ${text.toLowerCase()}, based on your assumptions.${tail}`;
     }
 
     return mode === "withdraw"
-        ? `The estimated first withdrawal is ${text}, based on your assumptions.`
-        : `The estimated corpus needed is ${text}, based on your assumptions.`;
+        ? `The estimated first withdrawal is ${text}, based on your assumptions.${tail}`
+        : `The estimated corpus needed is ${text}, based on your assumptions.${tail}`;
 
 }
 
@@ -823,6 +897,17 @@ export function markup() {
                             required: false
                         }))}
 
+                        ${modeField("inflation", numberField({
+                            id: IDS.inflation,
+                            label: "Expected Inflation (optional)",
+                            unit: "% a year",
+                            hint: "An assumption, not a forecast. Enter one to also see the final-year withdrawal (or the balance) in today's money. Leave blank to skip.",
+                            min: INFLATION_LIMITS.min,
+                            max: INFLATION_LIMITS.max,
+                            step: 0.5,
+                            value: DEFAULTS.inflation,
+                            required: false
+                        }))}
                     </div>
 
 
@@ -1260,6 +1345,19 @@ export function init() {
         const check =
             validateSwpInputs(raw);
 
+        const infl =
+            validateInflation(raw.inflation);
+
+        if (check.ok && !infl.ok) {
+            setFieldsInvalid([inputs.inflation], ERROR_ID);
+            results.innerHTML =
+                resultError(infl.message, { id: ERROR_ID });
+            if (speak) {
+                announce(infl.message);
+            }
+            return;
+        }
+
         if (!check.ok) {
 
             const names =
@@ -1300,10 +1398,10 @@ export function init() {
             calculateSwp(check.values);
 
         results.innerHTML =
-            renderResults(result);
+            renderResults(result, infl.value);
 
         if (speak) {
-            announce(liveSummary(result));
+            announce(liveSummary(result, infl.value));
         }
 
     }

@@ -20,7 +20,7 @@ Base commit: `6450f8f`. Owner scope: the approved Balanced option (Option B). Do
 | 46 Loan Comparison tidy and PDF repair | IMPLEMENTED (see below) | see git log |
 | 45 EMI 2.0 | IMPLEMENTED (see below) | see git log |
 | 47 PPF automatic results | IMPLEMENTED (see below) | see git log |
-| 48 Inflation view (SIP, SWP) | NOT_STARTED | |
+| 48 Inflation view (SIP, SWP) | IMPLEMENTED (see below) | see git log |
 | 49 XIRR Calculator | NOT_STARTED | |
 | 50 Navigation and aliases | NOT_STARTED | |
 
@@ -82,3 +82,18 @@ Implemented (page only; `formulas/ppf.js` untouched):
 - Catalog: `realtime: true`. The "how to use" steps were reworded.
 
 Verification: `tests/browser/ppf.spec.js` rewritten for live behaviour (including a live announcement test); 28/28 on `subpath-desktop` and 28/28 on `subpath-mobile`; related unit suites 213/213 (`ppf-golden` unchanged). Not run: `root-desktop` project for this spec; full regression.
+
+## Pack 48: inflation view in SIP and SWP
+
+Requirements: FR-INF-001 to FR-INF-010. No separate page.
+
+Implemented:
+- NEW pure module `formulas/inflation.js`: `validateInflation` (blank or 0 = off; 0 to 30 with up to 2 decimals), `realValue(nominal, f, years) = nominal / (1 + f)^years`, `realReturnPercent(r, f) = (1 + r) / (1 + f) - 1`. Neither engine (`sip.js`, `swp.js`) is changed; nominal figures are untouched and the golden tests pass unchanged.
+- SIP: optional field "Expected Inflation"; when set, a block "In today's money" restates the estimated value over the whole period and gives the return after inflation; the print summary and the announcement include it.
+- SWP: same optional field, shown for all three questions. It restates the final-year withdrawal in today's money (using the yearly increase, if any, and the inflation rate), or the balance after 40 years when the corpus is not used up.
+- Wording always says the rate is the visitor's assumption, not a forecast, and that the figures above are unchanged.
+- Deviation: the SWP view restates the final-year withdrawal (or the balance), not the remaining corpus in every mode, because the solving modes leave a corpus of about zero by design.
+
+Verification: `tests/unit/inflation.test.mjs` 7/7 (values from `formula-reference-check.py`: 31,18,047.27; 33,051.30; 5.6604%); new `tests/browser/inflation-view.spec.js` 8/8 on `subpath-desktop` and `subpath-mobile` (SIP 41,79,242.66 / 1.06^15 = 17,43,852; SWP 80,000 / 1.06^24 = 19,758 and 80,000 x 1.05^24 / 1.06^24 = 63,722, computed independently with `python -I`); `sip.spec.js` and `swp.spec.js` pass on `subpath-desktop` after the tab-order pins gained the new field; sip/swp golden and related unit suites pass; inventory, assets, SEO and link checks pass.
+Baselines changed deliberately: SIP desktop, mobile, tablet and SWP desktop, mobile, tablet visual images (new field; desktop images viewed). Normalised the line endings of the EMI DOM baseline working copy (content unchanged).
+Pre-existing, not fixed: `tools-directory` DOM baseline differs on the Image Compressor description (since commit `c718e9a`); `design-tokens` unit test (gratuity colour). Not run: Firefox/WebKit, root-desktop, full regression.

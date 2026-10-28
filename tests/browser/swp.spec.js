@@ -369,14 +369,14 @@ test.describe("SWP Calculator", () => {
     await page.keyboard.press("ArrowUp");
     await expect(mode(page, A)).toBeChecked();
 
-    // Tab order in question A: corpus, withdrawal, frequency (its selected option), return, increase, Reset
+    // Tab order in question A: corpus, withdrawal, frequency (its selected option), return, increase, inflation, Reset
     await page.locator("#swp-corpus").focus();
     const order = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
       await page.keyboard.press("Tab");
       order.push(await page.evaluate(() => document.activeElement?.id || document.activeElement?.getAttribute("name") + ":" + document.activeElement?.value));
     }
-    expect(order).toEqual(["swp-withdrawal", "swp-frequency:monthly", "swp-return", "swp-increase", "swp-reset"]);
+    expect(order).toEqual(["swp-withdrawal", "swp-frequency:monthly", "swp-return", "swp-increase", "swp-inflation", "swp-reset"]);
     await page.keyboard.press("Enter"); // Reset by keyboard
     await expect(mode(page, A)).toBeChecked();
 

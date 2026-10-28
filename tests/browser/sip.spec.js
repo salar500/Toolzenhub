@@ -333,7 +333,7 @@ test.describe("SIP Calculator", () => {
   test("keyboard: every control is reachable, reset and print work from the keyboard", async ({ page, go }) => {
     await open(page, go);
     await page.locator("#sip-amount").focus();
-    for (const id of ["sip-return", "sip-years", "sip-months", "sip-stepup", "sip-target", "sip-reset"]) {
+    for (const id of ["sip-return", "sip-years", "sip-months", "sip-stepup", "sip-target", "sip-inflation", "sip-reset"]) {
       await page.keyboard.press("Tab");
       await expect(page.locator(`#${id}`)).toBeFocused();
     }
