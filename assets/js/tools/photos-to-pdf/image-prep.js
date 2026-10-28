@@ -12,6 +12,7 @@
 ========================================================= */
 
 import { MIME_OF } from "../image-compressor-resizer/image-engine.js";
+import { makeThumbnail as drawThumbnail } from "../image-compressor-resizer/thumbnail.js";
 
 import { stripJpegMetadata } from "./jpeg-segments.js";
 
@@ -112,37 +113,8 @@ export async function prepareImage(file) {
  * Draw a preview of the file, THUMB_SIDE pixels on its longer side, into `canvas`.
  * Resolves to true when drawn, false when the browser could not decode it.
  */
-export async function makeThumbnail(file, canvas) {
+export function makeThumbnail(file, canvas) {
 
-    let bitmap;
-
-    try {
-
-        try {
-            bitmap = await createImageBitmap(file, { imageOrientation: "from-image", resizeWidth: THUMB_SIDE, resizeQuality: "low" });
-        } catch {
-            bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
-        }
-
-        const scale = Math.min(1, THUMB_SIDE / Math.max(bitmap.width, bitmap.height));
-        const width = Math.max(1, Math.round(bitmap.width * scale));
-        const height = Math.max(1, Math.round(bitmap.height * scale));
-
-        canvas.width = width;
-        canvas.height = height;
-
-        canvas.getContext("2d").drawImage(bitmap, 0, 0, width, height);
-
-        return true;
-
-    } catch {
-
-        return false;
-
-    } finally {
-
-        if (bitmap) bitmap.close();
-
-    }
+    return drawThumbnail(file, canvas, THUMB_SIDE);
 
 }

@@ -85,15 +85,15 @@ test.describe("Image Compressor & Resizer", () => {
     expect(hrefs).toEqual([siteRoot, `${siteRoot}image-tools.html`]);
     await state(page, "empty");
     const input = page.locator("#ic-file");
-    await expect(page.getByLabel("Choose a JPEG, PNG or WebP image")).toHaveCount(1);
+    await expect(page.getByLabel("Choose JPEG, PNG or WebP images")).toHaveCount(1);
     await expect(input).toHaveAttribute("accept", "image/jpeg,image/png,image/webp");
-    expect(await input.getAttribute("multiple")).toBeNull(); // one image at a time
+    expect(await input.getAttribute("multiple")).not.toBeNull(); // one image, or a batch (Tool Pack 42: tests/browser/image-batch.spec.js)
     await expect(page.locator("#ic-settings")).toBeHidden();
     await expect(page.locator("#ic-original")).toBeHidden();
     await expect(page.locator("#ic-result")).toBeHidden();
     await expect(page.locator("#ic-download")).toBeHidden();
-    await expect(page.locator("#ic-drop-hint")).toContainText("up to 25.0 MB and 40 megapixels");
-    await expect(page.locator("#ic-drop-hint")).toContainText("processed in your browser and is not uploaded by this tool");
+    await expect(page.locator("#ic-drop-hint")).toContainText("each up to 25.0 MB and 40 megapixels");
+    await expect(page.locator("#ic-drop-hint")).toContainText("processed in your browser and are not uploaded by this tool");
     await expect(page.locator(".related-section")).toHaveCount(0);
     await expect(page.locator("main")).not.toContainText(/lossless compression|no quality loss|zero quality loss|\bbest\b|AI-powered|AI optimi|guaranteed/i);
     expectClean(watch);
@@ -484,7 +484,7 @@ test.describe("Image Compressor & Resizer: refusals", () => {
     await expect(page.locator("#ic-settings")).toBeHidden();
   });
 
-  test("dropping several files is refused; dropping one image works; the file input remains the primary path", async ({ page, go }) => {
+  test("dropping several files starts a batch (Tool Pack 42); dropping one image works as before; the file input remains the primary path", async ({ page, go }) => {
     await open(page, go);
     const dropFiles = (names) => page.evaluate(async (names) => {
       const dt = new DataTransfer();
@@ -498,10 +498,15 @@ test.describe("Image Compressor & Resizer: refusals", () => {
     });
     const urls = await page.evaluate(() => window.__urls);
     await dropFiles([{ url: urls[0], name: "one.png", type: "image/png" }, { url: urls[1], name: "two.png", type: "image/png" }]);
-    await state(page, "error");
-    await expect(error(page)).toHaveText("Please add one image at a time.");
+    await state(page, "ready");
+    await expect(panel(page)).toHaveAttribute("data-mode", "batch");
+    await expect(page.locator("#ic-batch-list > li")).toHaveCount(2);
+    await expect(page.locator("#ic-batch-list .ic-batch__name")).toHaveText(["one.png", "two.png"]);
+    await expect(error(page)).toBeHidden();
     await dropFiles([{ url: urls[0], name: "dropped.png", type: "image/png" }]);
     await state(page, "ready");
+    await expect(panel(page)).not.toHaveAttribute("data-mode", "batch");
+    await expect(page.locator("#ic-batch")).toBeHidden();
     await expect(page.locator("#ic-original-name")).toHaveText("dropped.png");
     await expect(page.locator("#ic-original-dimensions")).toHaveText("40 × 30");
   });

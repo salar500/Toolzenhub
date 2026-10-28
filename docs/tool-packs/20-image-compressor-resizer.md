@@ -17,15 +17,15 @@ Hierarchy: Home → All Tools → Image Tools → Image Compressor & Resizer. No
 
 ## V1 scope (hard)
 
-One image at a time. Input JPEG, PNG, WebP. Output: same format, JPEG (where safe), WebP (where this browser encodes it), PNG. Resize by width and height with an aspect lock and a short preset list. JPEG/WebP quality presets and a bounded quality control, and an approximate "up to N KB" mode. A scaled preview, honest before and after numbers, and a download.
+One image at a time, or (since Tool Pack 42) a batch of up to 20 images (section "Batch" below). Input JPEG, PNG, WebP. Output: same format, JPEG (where safe), WebP (where this browser encodes it), PNG. Resize by width and height with an aspect lock and a short preset list. JPEG/WebP quality presets and a bounded quality control, and an approximate "up to N KB" mode. A scaled preview, honest before and after numbers, and a download.
 
-**Excluded:** batch, HEIC/HEIF, GIF, AVIF, SVG, crop, rotate, flip, filters, annotations, AI anything, clipboard paste, history, accounts, any backend or upload, URL state, persistence of images, automatic Featured placement, a codec or image library dependency (a Cancel button was added after benchmarking, see the notes).
+**Excluded:** HEIC/HEIF, GIF, AVIF, SVG, crop, rotate, flip, filters, annotations, AI anything, clipboard paste, history, accounts, any backend or upload, URL state, persistence of images, automatic Featured placement, a codec or image library dependency (a Cancel button was added after benchmarking, see the notes).
 
 ## Input rules
 
 - **Type is decided by the file's bytes, never the name or the label.** JPEG `FF D8 FF`, PNG `89 50 4E 47 0D 0A 1A 0A`, WebP `RIFF....WEBP`. A PNG named `.jpg` is treated as a PNG (the browser decodes by content too). The browser's decode must also succeed; a file that sniffs as JPEG but will not decode fails cleanly.
 - **Targeted refusals** by sniffing: HEIC/HEIF ("HEIC/HEIF isn't supported in this version. Export or save the image as JPEG, PNG or WebP first."), GIF ("GIF isn't supported because this tool does not preserve animation."), AVIF, SVG (text containing `<svg`; never rendered), anything else ("This file could not be decoded as a supported image.").
-- One file only: a second file selected replaces the first completely; dropping several files is refused ("Please add one image at a time.").
+- A new selection replaces the previous one completely. One file is handled as it always was; two or more start a batch (Tool Pack 42, section "Batch"). The old refusal of several files ("Please add one image at a time.") no longer exists.
 - **Limits (guardrails, not targets):** 25 MB file; 40,000,000 input pixels; 16,384 px on an input side; output at most 8,192 px per side and 16,777,216 pixels. The file size is checked before anything is read; the pixel count is read from the file **header** (JPEG start-of-frame, PNG IHDR, WebP chunk) and checked **before the image is decoded**, so a 100-megapixel file is refused without allocating its bitmap; the decoded size is checked again after decode and the requested output size before any output canvas is allocated. Limits are lowered, never raised, if real-device testing shows them unsafe.
 
 ## Resize model
@@ -111,3 +111,16 @@ What was measured, and the deviations from the plan above. Measurements are from
 **Open gates:** a real Android phone with a real gallery or camera photo (since done: see the Android review below); Safari/WebKit (not available here; the tool feature-detects the worker, `OffscreenCanvas`, `createImageBitmap` and each output type, and Safari is recorded as "pre-production compatibility verification still required").
 
 **Real Android review (first pass).** The user tested the preview on a real Android phone. Finding: after processing, a long download file name overlapped the content below it. Cause: the shared `.calculator-form__button` is a fixed 46 px tall with no vertical padding, so the long name wrapped onto several lines and spilled out of the Download link. The page was not widened sideways. Fix (CSS only, `.ic-download`): `height: auto`, `padding: 12px 16px`, `line-height: 1.4`, so the link grows with its text. The full generated name stays in the link text and in its `download` attribute (it wraps with `overflow-wrap: anywhere`; it is not shortened or truncated). A browser test at 320, 360 and 390 px with four long names (no break points, underscores, hyphens, accented words) checks the text sits inside the button, the button inside the card, nothing overlaps the note below, the page does not overflow, and the real download carries the full name. **Android retest (user, real device): PASSED.** The long generated file name stays contained, the Download button works, and the downloaded processed image opens correctly. The Android long-file-name issue is resolved. **Safari/WebKit: UNVERIFIED** (not available; not inferred from Chromium).
+
+## Batch (Tool Pack 42, local, 2026-10-28)
+
+Requirements FR-IB-001..018 and acceptance criteria AC-IB-* are in `docs/ecosystem-review/image-pdf-tools/` (07, 09); the progress record is document 14 there. Two or more images in one selection start a batch; one image keeps the page above unchanged.
+
+- **Limits (provisional, UNKNOWN on phones):** 20 images, 100 MB in all, each image still under the single-image limits. A file over a limit is named with its reason and the others continue.
+- **Controls:** the same output format (or "same format as each image"), quality or "Up to a file size", and either "Keep each image's size" or a **longest side** in pixels. Images are never enlarged and keep their ratio; the output limits still apply. An exact width and height, the aspect lock and the presets are for one image.
+- **Processing:** one image at a time, in list order, through the same pipeline (worker, or main thread), with a `fit` request so the output size is worked out from the decoded size. Progress reads "File n of N". A failure on one image is recorded on its row; the rest continue. A PNG or WebP that may have transparency is skipped with a reason when JPEG is chosen.
+- **Results:** per row before and after size, pixel size, format, the quality used, whether an "up to" size was reached; a total; per-row Download links (no ZIP, no Download all); a Preview button shows one result at a time. Names are the sanitised base plus -compressed or -resized and the real extension; repeats get -2, -3 (compared without regard to case).
+- **Cancel** stops the worker; finished results stay, the rest are marked Cancelled. **A change of any setting** removes all results (nothing stale can be downloaded). Remove, Reset and leaving the page revoke the object URLs.
+- **Announcements:** the polite live region speaks when a run starts, once when it ends ("12 of 14 images done; 2 skipped") and on a cancel, not per file.
+- **Code:** `batch-rules.js` (pure), `batch-ui.js` (list and controller), `thumbnail.js` (shared with Photos to PDF), a `fit` option in `processImage`.
+

@@ -28,3 +28,15 @@ IP-0 (fixtures), IP-3, IP-1, IP-2, IP-5, as the owner's prompt directed. IP-3 fi
 | Tests | New unit file `photos-to-pdf-turn-and-metadata.test.mjs`: 12 pass. Existing `photos-to-pdf.test.mjs`: 26 pass. New browser spec `photos-to-pdf-turn-metadata.spec.js`: 5 tests, 10 pass (desktop and mobile emulation, one worker). Existing `photos-to-pdf.spec.js`: 26 pass (desktop and mobile). |
 | Visual | Inspected the list at the desktop and mobile emulation widths: five buttons in one row at 1000 px and wider, three plus two on phones; the thumbnail turns correctly (quadrant colours checked by eye against the clockwise turn). No visual baseline exists for this page, so none was changed. |
 | Not verified | Real phones, Safari, Firefox, real PDF viewers' drawing of a turned page, 30 large photos on a phone. |
+
+## IP-1: Image Compressor batch (spec 42; recorded in spec 20, section "Batch")
+
+| Item | Result |
+|---|---|
+| Built | FR-IB-001..018 as written: 20 images and 100 MB (provisional), per-file checks, list with thumbnails (at most 160 px) and Remove, "same format" or one format for all, quality or Up to N KB, Keep size or Longest side (never enlarges), one image at a time, "File n of N", Cancel, failure isolation, per-row results and total, per-row Download (no ZIP), unique names, stale on any settings change, Reset, one announcement at start, end and cancel, 320/360/390 px. One image behaves as before. |
+| Code | `batch-rules.js` (pure), `batch-ui.js` (list and controller), `thumbnail.js` (shared with Photos to PDF), a `fit` option in `processImage`; `index.js` hands two or more images to the controller. |
+| Deviation | A new selection replaces the list (no "add more" later), matching "1 to 20 files in one selection". Result previews are one at a time through a Preview button. |
+| Unit | `image-batch.test.mjs` 9 pass (limits, worked example 1, sizes checked against Pillow, names, totals); `image-engine.test.mjs` 48 pass. |
+| Browser | New `image-batch.spec.js`: 12 tests, desktop 12 pass; the stale, Cancel, phone-width and list tests also pass in mobile emulation. The existing `image-compressor-resizer.spec.js` ran 46 pass, 4 fail on desktop: two are the assertions this pack intentionally changed (multiple attribute and hint wording; dropping several files), rewritten and re-run to pass on desktop and mobile; two are the known stale All Tools and Image Tools assertions (lines 858 and 873), untouched. |
+| Defect found in visual inspection | The Download link text was green on a green button (unreadable). Fixed with a more specific rule and a computed-colour assertion. |
+| Not verified | Phones (memory with 20 large photos: UNKNOWN), Safari, Firefox, the 20-image limit as a measured figure. |

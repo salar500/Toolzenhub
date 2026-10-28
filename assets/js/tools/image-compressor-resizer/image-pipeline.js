@@ -32,6 +32,8 @@ import {
     searchQuality
 } from "./image-engine.js";
 
+import { batchOutputSize } from "./batch-rules.js";
+
 
 export class PipelineError extends Error {
 
@@ -274,7 +276,9 @@ export async function inspectImage(request, env) {
 ========================================================= */
 
 /*
- * request { file, width, height, mime, quality, targetBytes, keepAlpha }
+ * request { file, width, height, mime, quality, targetBytes, keepAlpha, fit }
+ *   fit          optional { longestSide: number | null }: a batch asks for the size to be worked out from the
+ *                decoded image (batchOutputSize) instead of sending width and height
  *   quality      whole number 30..95 (ignored for PNG)
  *   targetBytes  when set (JPEG and WebP only), the bounded "up to N KB" search runs instead
  *
@@ -286,11 +290,15 @@ export async function processImage(request, env) {
 
     const started = env.now();
 
-    /* the output size is checked before anything is decoded or allocated */
-    const sizeCheck = checkOutputSize(request.width, request.height);
+    /* the output size is checked before anything is decoded or allocated; in a batch ("fit") it is worked out from the decoded size */
+    if (!request.fit) {
 
-    if (!sizeCheck.ok) {
-        throw new PipelineError("invalid-size", sizeCheck.message);
+        const sizeCheck = checkOutputSize(request.width, request.height);
+
+        if (!sizeCheck.ok) {
+            throw new PipelineError("invalid-size", sizeCheck.message);
+        }
+
     }
 
     const { mime } = request;
@@ -307,18 +315,36 @@ export async function processImage(request, env) {
 
         const decoded = env.now();
 
-        canvas = env.createCanvas(request.width, request.height);
+        let outWidth = request.width;
+        let outHeight = request.height;
+
+        if (request.fit) {
+
+            const fitted = batchOutputSize(bitmap.width, bitmap.height, request.fit.longestSide);
+
+            outWidth = fitted.width;
+            outHeight = fitted.height;
+
+            const sizeCheck = checkOutputSize(outWidth, outHeight);
+
+            if (!sizeCheck.ok) {
+                throw new PipelineError("invalid-size", sizeCheck.message);
+            }
+
+        }
+
+        canvas = env.createCanvas(outWidth, outHeight);
 
         const context = context2d(canvas);
 
         /* a transparent area must never come out black in a JPEG */
         if (mime === "image/jpeg") {
             context.fillStyle = "#ffffff";
-            context.fillRect(0, 0, request.width, request.height);
+            context.fillRect(0, 0, outWidth, outHeight);
         }
 
         context.imageSmoothingQuality = "high";
-        context.drawImage(bitmap, 0, 0, request.width, request.height);
+        context.drawImage(bitmap, 0, 0, outWidth, outHeight);
 
         const drawn = env.now();
 
@@ -379,12 +405,12 @@ export async function processImage(request, env) {
 
         const encoded = env.now();
 
-        const preview = await scaledPreview(canvas, request.width, request.height, env, Boolean(request.keepAlpha));
+        const preview = await scaledPreview(canvas, outWidth, outHeight, env, Boolean(request.keepAlpha));
 
         return {
             blob: chosen.blob,
-            width: request.width,
-            height: request.height,
+            width: outWidth,
+            height: outHeight,
             mime,
             size: chosen.size,
             quality: qualityUsed,

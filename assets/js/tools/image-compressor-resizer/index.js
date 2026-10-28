@@ -63,6 +63,10 @@ import {
     createMainEnv
 } from "./image-pipeline.js";
 
+import { batchCardMarkup, batchSizeMarkup, createBatchController } from "./batch-ui.js";
+
+import { MAX_BATCH_FILES, MAX_BATCH_BYTES } from "./batch-rules.js";
+
 import {
     getToolById
 } from "../../data/tools.js";
@@ -168,7 +172,7 @@ export function markup() {
                     <div class="ic-card">
 
                         <h2 class="ic-card__title">
-                            Choose an image
+                            Choose images
                         </h2>
 
                         <div
@@ -180,7 +184,7 @@ export function markup() {
                                 for="ic-file"
                                 class="ic-drop__label"
                             >
-                                Choose a JPEG, PNG or WebP image
+                                Choose JPEG, PNG or WebP images
                             </label>
 
                             <input
@@ -188,6 +192,7 @@ export function markup() {
                                 id="ic-file"
                                 class="ic-file"
                                 accept="image/jpeg,image/png,image/webp"
+                                multiple
                                 aria-describedby="ic-drop-hint"
                             >
 
@@ -195,10 +200,11 @@ export function markup() {
                                 id="ic-drop-hint"
                                 class="ic-hint"
                             >
-                                or drag one here. One image at a time, up to
+                                or drag them here. Choose one image, or up to
+                                ${MAX_BATCH_FILES} to process together, each up to
                                 ${formatBytes(MAX_FILE_BYTES)} and
-                                ${nf(MAX_INPUT_PIXELS / 1e6)} megapixels. Your image is
-                                processed in your browser and is not uploaded
+                                ${nf(MAX_INPUT_PIXELS / 1e6)} megapixels. Your images are
+                                processed in your browser and are not uploaded
                                 by this tool.
                             </p>
 
@@ -214,6 +220,7 @@ export function markup() {
                     </div>
 
 
+${batchCardMarkup()}
                     <div
                         id="ic-original"
                         class="ic-card"
@@ -277,7 +284,11 @@ export function markup() {
                                 Settings
                             </legend>
 
-                            <fieldset class="ic-group">
+${batchSizeMarkup()}
+                            <fieldset
+                                id="ic-size-group"
+                                class="ic-group"
+                            >
 
                                 <legend>Size in pixels</legend>
 
@@ -629,8 +640,8 @@ export function markup() {
 
                 <ol>
                     <li>
-                        Choose a JPEG, PNG or WebP image (or drag one onto the
-                        box on a computer).
+                        Choose a JPEG, PNG or WebP image, or several at once (or
+                        drag them onto the box on a computer).
                     </li>
                     <li>
                         Pick a new size, or leave it, and choose the output
@@ -692,19 +703,21 @@ export function markup() {
                 </h2>
 
                 <p>
-                    One image at a time: JPEG, PNG or WebP, up to
+                    JPEG, PNG or WebP, each up to
                     ${formatBytes(MAX_FILE_BYTES)} and
                     ${nf(MAX_INPUT_PIXELS / 1e6)} megapixels, output up to 8,192 pixels
-                    on a side. HEIC/HEIF, GIF (animation would be lost), AVIF
+                    on a side. Up to ${MAX_BATCH_FILES} images at a time, ${formatBytes(MAX_BATCH_BYTES)}
+                    in all, and they are processed one after another so a phone
+                    is not asked to hold them all. HEIC/HEIF, GIF (animation would be lost), AVIF
                     and SVG are not supported in this version. Large images
                     need a lot of memory on a phone, so the limits are
                     deliberately conservative.
                 </p>
 
                 <p>
-                    Your image is processed in your browser and is not uploaded
-                    by this tool. It is not saved, and the page address never
-                    contains it. Reloading the page clears it.
+                    Your images are processed in your browser and are not uploaded
+                    by this tool. They are not saved, and the page address never
+                    contains them. Reloading the page clears them.
                 </p>
 
             </section>
@@ -750,6 +763,21 @@ export function markup() {
                         Saving the image again normally drops the embedded
                         camera information, including location, but check the
                         downloaded file if that matters to you.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>
+                        How do I change many images at once?
+                    </summary>
+                    <p>
+                        Choose several images together. They are listed, and the
+                        same output format, quality (or "up to" size) and longest
+                        side are applied to each one, one after another. Each
+                        result has its own download link, and a result that
+                        failed or was skipped says why without stopping the
+                        others. A single exact width and height is
+                        available when you choose one image.
                     </p>
                 </details>
 
@@ -1123,6 +1151,70 @@ export function init() {
     }
 
 
+    /* ---------- several images at once (batch-ui.js); one image stays on the path below ---------- */
+
+    const batch = createBatchController({
+        $,
+        panel,
+        settings,
+        fileInput,
+        processButton,
+        status,
+        formatSelect,
+        targetInput,
+        qualityRange,
+        setState,
+        setBusy: (on) => setBusy(on),
+        showError,
+        clearError,
+        announce,
+        fieldError,
+        run: (op, request) => run(op, request),
+        tracker,
+        supported: () => state.supported,
+        encoders: () => encoders,
+        updateModeVisibility: () => updateModeVisibility()
+    });
+
+    /* two or more images: whatever one image had on the page is cleared first, then the batch takes over */
+    async function handleFiles(files) {
+
+        tracker.begin();
+
+        fields.disabled = false;
+        processButton.disabled = false;
+        cancelButton.hidden = true;
+        panel.removeAttribute("aria-busy");
+
+        releaseAll();
+        clearResult();
+        clearError();
+
+        originalCard.hidden = true;
+        settings.hidden = true;
+        status.hidden = true;
+
+        await batch.start(files);
+
+    }
+
+    function chosen(files) {
+
+        if (files.length === 0) {
+            return;
+        }
+
+        if (files.length === 1) {
+            batch.reset(true);
+            handleFile(files[0]);
+            return;
+        }
+
+        handleFiles(files);
+
+    }
+
+
     /* ---------- choosing a file ---------- */
 
     async function handleFile(file) {
@@ -1473,7 +1565,8 @@ export function init() {
 
     function updateModeVisibility() {
 
-        const lossyOutput = usesQuality(selectedMime());
+        /* "same format as each image" in a batch: JPEG and WebP files use the quality, a PNG ignores it */
+        const lossyOutput = panel.dataset.mode === "batch" && formatSelect.value === "same" ? true : usesQuality(selectedMime());
 
         lossy.hidden = !lossyOutput;
         pngNote.hidden = lossyOutput;
@@ -1738,6 +1831,12 @@ export function init() {
             entry.reject({ code: "cancelled", message: "Cancelled." });
         }
 
+        /* a batch marks its unfinished images and says what was done; the page does not */
+        if (batch.busy()) {
+            batch.cancel();
+            return;
+        }
+
         setBusy(false);
         setState("ready");
 
@@ -1753,6 +1852,8 @@ export function init() {
     function reset() {
 
         tracker.invalidate();
+
+        batch.reset(true);
 
         releaseAll();
         clearResult();
@@ -1784,17 +1885,9 @@ export function init() {
 
         const files = [...fileInput.files];
 
-        if (files.length === 0) {
-            return;
-        }
+        fileInput.value = "";
 
-        if (files.length > 1) {
-            setState("error");
-            showError(MESSAGES.many);
-            return;
-        }
-
-        handleFile(files[0]);
+        chosen(files);
 
     });
 
@@ -1823,19 +1916,7 @@ export function init() {
 
         drop.classList.remove("ic-drop--over");
 
-        const files = [...(event.dataTransfer?.files ?? [])];
-
-        if (files.length === 0) {
-            return;
-        }
-
-        if (files.length > 1) {
-            setState("error");
-            showError(MESSAGES.many);
-            return;
-        }
-
-        handleFile(files[0]);
+        chosen([...(event.dataTransfer?.files ?? [])]);
 
     });
 
@@ -1896,9 +1977,17 @@ export function init() {
 
         event.preventDefault();
 
-        compress();
+        if (batch.active()) {
+            batch.run();
+        } else {
+            compress();
+        }
 
     });
+
+    /* a changed setting makes an earlier batch's results stale */
+    settings.addEventListener("input", () => batch.markStale());
+    settings.addEventListener("change", () => batch.markStale());
 
     $("#ic-reset").addEventListener("click", reset);
     cancelButton.addEventListener("click", cancel);
@@ -1907,6 +1996,8 @@ export function init() {
     window.addEventListener("pagehide", () => {
 
         tracker.invalidate();
+
+        batch.reset(true);
 
         releaseAll();
 
