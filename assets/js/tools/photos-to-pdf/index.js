@@ -436,13 +436,16 @@ export function markup() {
 
                 <p>
                     A JPEG that goes in unchanged has its Exif, XMP and IPTC
-                    information removed first. That information can include the
-                    place where the photo was taken and the camera used. The
-                    picture itself and its colours are not changed. Other
-                    information, such as a comment, can remain, so do not rely on
-                    this for a document that must carry no details at all. A photo
-                    that is saved again as a JPEG, as described above, carries
-                    none of this information into the PDF.
+                    information, its comment, its vendor details and its small
+                    preview pictures removed first, along with anything stored
+                    after the picture. That information can include the place
+                    where the photo was taken and the camera used. The picture
+                    itself and its colours are not changed. The colour profile
+                    stays, and what the photo shows, such as a name on a sign, is
+                    still in the picture, so check a document that must carry no
+                    details at all. A photo that is saved again as a JPEG, as
+                    described above, carries none of this information into the
+                    PDF.
                 </p>
 
             </section>

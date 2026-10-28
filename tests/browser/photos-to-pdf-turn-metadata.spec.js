@@ -17,7 +17,7 @@ import { parsePdf } from "../helpers/pdf-structure.mjs";
 
 const IMG = "tests/fixtures/images/";
 const photo = (name) => ({ name, mimeType: "image/jpeg", buffer: fs.readFileSync(IMG + name) });
-const MARKERS = ["ZZ-EXIF-MARKER", "ZZ-XMP-MARKER", "ZZ-IPTC-MARKER", "SECRET-GPS-MARKER"];
+const MARKERS = ["ZZ-EXIF-MARKER", "ZZ-XMP-MARKER", "ZZ-IPTC-MARKER", "SECRET-GPS-MARKER", "ZZ-COM-MARKER"];
 
 const panel = (page) => page.locator("#pp-panel");
 const state = (page, value) => expect(panel(page)).toHaveAttribute("data-state", value);

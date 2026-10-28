@@ -77,7 +77,7 @@ test("FINDING: a kept JPEG put into a PDF as it is carries its Exif/GPS, XMP and
    The strip
 ========================================================= */
 
-test("stripJpegMetadata removes Exif/XMP (APP1) and IPTC (APP13) and nothing else", () => {
+test("stripJpegMetadata removes Exif/XMP (APP1), IPTC (APP13) and the comment (COM), and keeps JFIF, the colour profile and the picture", () => {
 
     const source = read("meta-keep.jpg");
     const before = segments(source);
@@ -87,10 +87,10 @@ test("stripJpegMetadata removes Exif/XMP (APP1) and IPTC (APP13) and nothing els
 
     const after = segments(result.bytes);
 
-    assert.deepEqual(result.removed.map((r) => r.marker).sort(), before.list.filter(([m]) => m === 0xe1 || m === 0xed).map(([m]) => m).sort(), "every APP1 and APP13 is reported");
+    assert.deepEqual(result.removed.map((r) => r.marker).sort(), before.list.filter(([m]) => m === 0xe1 || m === 0xed || m === 0xfe).map(([m]) => m).sort(), "every APP1, APP13 and COM is reported");
     assert.ok(result.removed.length >= 3, "Exif, XMP and IPTC");
 
-    const keptBefore = before.list.filter(([m]) => m !== 0xe1 && m !== 0xed);
+    const keptBefore = before.list.filter(([m]) => m !== 0xe1 && m !== 0xed && m !== 0xfe);
 
     assert.equal(after.list.length, keptBefore.length);
     after.list.forEach(([marker, bytes], i) => {
@@ -106,7 +106,7 @@ test("stripJpegMetadata removes Exif/XMP (APP1) and IPTC (APP13) and nothing els
 
     assert.ok(markers.includes(0xe0), "JFIF stays");
     assert.ok(markers.includes(0xe2) && has(result.bytes, "ICC_PROFILE"), "the colour profile stays");
-    assert.ok(has(result.bytes, "ZZ-COM-MARKER"), "a comment is not touched: no claim that all metadata is gone");
+    assert.ok(!has(result.bytes, "ZZ-COM-MARKER"), "the comment is removed too (Stage 3 audit; the residual cases are in photos-to-pdf-residual-metadata.test.mjs)");
 
 });
 

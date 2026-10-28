@@ -348,8 +348,8 @@ export function createGeometryController(ctx) {
 
         const s = scale();
 
-        box.style.left = `${state.rect.x * s}px`;
-        box.style.top = `${state.rect.y * s}px`;
+        box.style.left = `${canvas.offsetLeft + state.rect.x * s}px`;
+        box.style.top = `${canvas.offsetTop + state.rect.y * s}px`;
         box.style.width = `${state.rect.width * s}px`;
         box.style.height = `${state.rect.height * s}px`;
 
@@ -575,7 +575,12 @@ export function createGeometryController(ctx) {
     box.addEventListener("pointerup", onPointerUp);
     box.addEventListener("pointercancel", onPointerUp);
 
-    window.addEventListener("resize", placeBox);
+    /* the box follows the preview's real size (a window resize event can come before the layout settles) */
+    if (typeof ResizeObserver === "function") {
+        new ResizeObserver(() => placeBox()).observe(canvas);
+    } else {
+        window.addEventListener("resize", placeBox);
+    }
 
     fieldX.addEventListener("input", () => onField("x"));
     fieldY.addEventListener("input", () => onField("y"));

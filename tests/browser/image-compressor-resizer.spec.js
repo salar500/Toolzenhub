@@ -860,7 +860,7 @@ test.describe("Image Compressor & Resizer: accessibility and layout", () => {
 });
 
 test.describe("Image Tools in the site", () => {
-  test("the Image Tools page: one real tool, no placeholders, the right title and trail", async ({ page, go, siteRoot, watch }) => {
+  test("the Image Tools page: its two real tools (counts from the catalog), no placeholders, the right title and trail", async ({ page, go, siteRoot, watch }) => {
     await go("image-tools.html");
     await expect(page.locator("h1")).toHaveText("Image Tools");
     expect(await page.title()).toBe("Image Tools | ToolZen Hub");
@@ -868,17 +868,17 @@ test.describe("Image Tools in the site", () => {
     const crumbs = (await page.locator(".calculator-breadcrumb").locator("a, strong").allInnerTexts()).map((t) => t.trim());
     expect(crumbs).toEqual(["Home", "All Tools", "Image Tools"]);
     await expect(page.locator(`a[href$="tools/image-compressor-resizer/"]`)).toHaveCount(1);
-    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(1);
+    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(2);
     await expect(page.locator("main")).not.toContainText(/coming soon/i);
     await expect(page.locator("main")).toContainText("Private browser-based tools for resizing and optimizing images.");
     expectClean(watch);
     void siteRoot;
   });
 
-  test("All Tools lists Image Tools as a fourth section with one tool, from the metadata; the other sections keep their counts", async ({ page, go }) => {
+  test("All Tools lists Image Tools as a fourth section (then PDF Tools), with the catalog counts", async ({ page, go }) => {
     await go("tools.html");
-    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools"]);
-    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, "13 tools", "6 tools", "1 tool"]);
+    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools"]);
+    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, "13 tools", "12 tools", "2 tools", "3 tools"]);
     const image = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Image Tools")') });
     await expect(image.locator('a[href$="tools/image-compressor-resizer/"]')).toHaveCount(1);
     for (const section of ["Calculators", "Time Tools", "Developer Tools"]) {

@@ -290,6 +290,26 @@ test.describe("Image Compressor & Resizer: rotate, flip and crop", () => {
     expect(Math.abs(g2.bw / g2.s - Number(await val(page, "w").inputValue()))).toBeLessThanOrEqual(1.5);
   });
 
+  test("no corner handle is clipped, even when the box is the whole picture (Stage 3 defect)", async ({ page, go }) => {
+    await open(page, go);
+    await loadQuadrants(page);
+    await mode(page, "Aspect ratio"); // Free: the box starts as the whole picture
+    for (const width of [320, 390, 1000]) {
+      await page.setViewportSize({ width, height: 900 });
+      // the box follows the preview on resize: wait until it covers the whole picture again
+      await page.waitForFunction(() => { const c = document.querySelector("#ic-crop-canvas").getBoundingClientRect(); const b = document.querySelector("#ic-crop-box").getBoundingClientRect(); return Math.abs(c.left - b.left) < 1 && Math.abs(c.width - b.width) < 1; });
+      const stage = await page.locator("#ic-crop-stage").boundingBox();
+      for (const corner of ["nw", "ne", "sw", "se"]) {
+        const h = await page.locator(`.ic-crop-handle[data-corner="${corner}"]`).boundingBox();
+        expect(h.width).toBeGreaterThanOrEqual(44);
+        expect(h.x, `${width}px ${corner} left`).toBeGreaterThanOrEqual(stage.x);
+        expect(h.y, `${width}px ${corner} top`).toBeGreaterThanOrEqual(stage.y);
+        expect(h.x + h.width, `${width}px ${corner} right`).toBeLessThanOrEqual(stage.x + stage.width + 1);
+        expect(h.y + h.height, `${width}px ${corner} bottom`).toBeLessThanOrEqual(stage.y + stage.height + 1);
+      }
+    }
+  });
+
   test("a change to the picture removes the earlier result; Reset picture goes back; a new image starts clean", async ({ page, go }) => {
     await open(page, go);
     await loadQuadrants(page);
