@@ -67,7 +67,6 @@ section.loan-comparison-tool
           span "1"
           span "100"
   div.loan-actions
-    button#compare-loans.calculator-form__button [type="button"] "Compare Loans"
     button#reset-loans.calculator-form__button.calculator-form__button--secondary [type="button"] "↻ Reset"
 --- match 2 of 2 ---
 section#comparison-result.loan-results

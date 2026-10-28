@@ -129,15 +129,6 @@ export function markup() {
                 <div class="loan-actions">
 
                     <button
-                        id="compare-loans"
-                        class="calculator-form__button"
-                        type="button"
-                    >
-                        Compare Loans
-                    </button>
-
-
-                    <button
                         id="reset-loans"
                         class="calculator-form__button calculator-form__button--secondary"
                         type="button"
@@ -255,14 +246,6 @@ export function init() {
     syncSlidersWithInputs();
 
     initializeLoanInputs();
-
-
-    document
-        .querySelector("#compare-loans")
-        ?.addEventListener(
-            "click",
-            compareLoans
-        );
 
 
     document

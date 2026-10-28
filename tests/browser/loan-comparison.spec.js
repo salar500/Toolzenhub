@@ -69,7 +69,6 @@ test.describe("Loan Comparison calculator", () => {
     await go("calculators/loan-comparison/");
     await setLoan(page, "a", { amount: 30, rate: 8, years: 15 });
     await setLoan(page, "b", { amount: 30, rate: 9.5, years: 15 });
-    await page.locator("#compare-loans").click();
 
     const a = figures(30, LAKH, 8, 15);
     const b = figures(30, LAKH, 9.5, 15);
@@ -89,7 +88,6 @@ test.describe("Loan Comparison calculator", () => {
     // swap the rates: now Loan B wins
     await page.locator("#a-rate").fill("10");
     await page.locator("#b-rate").fill("7");
-    await page.locator("#compare-loans").click();
     await expect(out.locator(".loan-summary-card").first()).toContainText("Loan B");
     expectClean(watch);
   });
@@ -98,7 +96,6 @@ test.describe("Loan Comparison calculator", () => {
     await go("calculators/loan-comparison/");
     await setLoan(page, "a", { amount: 20, rate: 9, years: 10 });
     await setLoan(page, "b", { amount: 20, rate: 9, years: 10 });
-    await page.locator("#compare-loans").click();
     await expect(resultText(page).locator(".loan-summary-card").first()).toContainText("Both Loans");
   });
 
@@ -216,7 +213,8 @@ test.describe("Loan Comparison calculator", () => {
 
   test("layout fits the viewport (no horizontal scroll)", async ({ page, go }) => {
     await go("calculators/loan-comparison/");
-    await expect(page.locator("#compare-loans")).toBeVisible();
+    await expect(page.locator("#reset-loans")).toBeVisible();
+    await expect(page.locator("#compare-loans")).toHaveCount(0); // no redundant button: results are live
     await expectNoHorizontalOverflow(page);
   });
 });
@@ -237,7 +235,6 @@ test.describe("Loan Comparison — M4 shared architecture and regression", () =>
     expect(order.slice(-2)).toEqual(["related-section", "related-section"]);
     expect(order).toContain("loan-comparison-tool"); // tool-specific content stays in between
     await expect(page.locator("h1")).toHaveText("Loan Comparison Calculator");
-    await page.locator("#compare-loans").click();
     await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
   });
 
@@ -248,20 +245,17 @@ test.describe("Loan Comparison — M4 shared architecture and regression", () =>
     // different terms (same amount and rate): 10 vs 25 years
     await setLoan(page, "a", { amount: 50, rate: 8.5, years: 10 });
     await setLoan(page, "b", { amount: 50, rate: 8.5, years: 25 });
-    await page.locator("#compare-loans").click();
     for (const v of ["₹61,993", "₹40,261", "₹24,39,141", "₹70,78,406", "₹74,39,141", "₹1,20,78,406", "₹46,39,265"]) await expect(out).toContainText(v);
     await expect(out.locator(".loan-summary-card").first()).toContainText("Loan A");
 
     // lakh vs crore amounts
     await setLoan(page, "a", { amount: 25, rate: 8, years: 15 });
     await setLoan(page, "b", { amount: 90, unit: CRORE, rate: 8, years: 15 });
-    await page.locator("#compare-loans").click();
     for (const v of ["₹23,891", "₹86,00,869", "₹18,00,434", "₹64,81,56,377", "₹43,00,434", "₹1,54,81,56,377", "₹64,63,55,942"]) await expect(out).toContainText(v);
 
     // mixed units and terms
     await setLoan(page, "a", { amount: 12, rate: 7, years: 5 });
     await setLoan(page, "b", { amount: 90, unit: CRORE, rate: 11, years: 30 });
-    await page.locator("#compare-loans").click();
     for (const v of ["₹23,761", "₹85,70,911", "₹2,25,686", "₹2,18,55,27,802", "₹14,25,686", "₹3,08,55,27,802", "₹2,18,53,02,115"]) await expect(out).toContainText(v);
   });
 
@@ -269,7 +263,6 @@ test.describe("Loan Comparison — M4 shared architecture and regression", () =>
     await go("calculators/loan-comparison/");
     await setLoan(page, "a", { amount: 50, rate: 8.5, years: 10 });
     await setLoan(page, "b", { amount: 50, rate: 8.5, years: 25 });
-    await page.locator("#compare-loans").click();
     // preview tables: 12 rows each; Loan B (25y) month 1 = principal 4,845 / interest 35,417 / balance 49,95,155
     const previewB = resultText(page).locator(".loan-table-scroll").nth(1).locator("tbody tr");
     await expect(previewB).toHaveCount(12);
@@ -333,5 +326,19 @@ test.describe("Loan Comparison — M4 shared architecture and regression", () =>
     expect(table.body).toHaveLength(180);
     await expect(button).toHaveText(/Download PDF/); // restored after generation
     await expect(button).toBeEnabled();
+  });
+  test("PDF download (real jsPDF, vendored): a valid PDF is produced and no other host is contacted", async ({ page, go }) => {
+    const seen = [];
+    page.on("request", (r) => { if (/^https?:/.test(r.url())) seen.push(r.url()); });
+    await go("calculators/loan-comparison/");
+    await setLoan(page, "a", { amount: 30, rate: 8, years: 15 });
+    await page.locator('.loan-view-link[data-loan="a"]').click();
+    const [download] = await Promise.all([page.waitForEvent("download"), page.locator("[data-download-amortization-pdf]").click()]);
+    expect(download.suggestedFilename()).toBe("loan-a-3000000-8-percent-15-years-amortization-schedule.pdf");
+    const bytes = await (await import("node:fs/promises")).readFile(await download.path());
+    expect(bytes.subarray(0, 5).toString("latin1")).toBe("%PDF-");
+    expect(bytes.length).toBeGreaterThan(20000);
+    const origin = new URL(page.url()).origin;
+    expect(seen.filter((u) => new URL(u).origin !== origin), "no request to another host").toEqual([]);
   });
 });

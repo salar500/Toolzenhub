@@ -1,0 +1,36 @@
+jsPDF, jsPDF-AutoTable and Noto Sans (vendored, unmodified)
+=============================================================
+
+Used by: assets/js/calculators/common/pdf/ (Loan Comparison PDF download) only.
+Loaded at the moment a PDF is requested, from this folder. Nothing is requested from another host.
+Do not edit these files. To change one, replace it from upstream and update this notice and
+tests/unit/jspdf-vendor.test.mjs.
+
+jspdf.umd.min.js
+  Package:  jsPDF 2.5.1 (UMD minified build, built 2022-01-28)
+  Upstream: https://github.com/parallax/jsPDF
+  Licence:  MIT, Copyright (c) 2010-2021 James Hall and contributors
+  Obtained: 2026-10-28 from https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js
+  Integrity: sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==
+             (identical to the value published by the cdnjs API for this file)
+  SHA-256:  98ccf17aa10c20bb1301762618fcc9b6ab3a4e7f26b6071d64d0b41154df3875
+  The file carries its own licence header and the notices of the packages it bundles.
+
+jspdf.plugin.autotable.min.js
+  Package:  jsPDF-AutoTable 3.8.2
+  Upstream: https://github.com/simonbengtsson/jsPDF-AutoTable
+  Licence:  MIT, Copyright (c) 2024 Simon Bengtsson
+  Obtained: 2026-10-28 from https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js
+  Integrity: sha512-2/YdOMV+YNpanLCF5MdQwaoFRVbTmrJ4u4EpqS/USXAQNUDgI5uwYi6J98WVtJKcfe1AbgerygzDFToxAlOGEQ==
+             (identical to the value published by the cdnjs API for this file)
+  SHA-256:  27a9c3b61843c6312b87f142d40fe77c0f0f054c9f3cdeccc4bfd5f3322859c8
+
+NotoSans-Regular.ttf
+  Font:     Noto Sans Regular (hinted TTF)
+  Upstream: https://github.com/googlefonts/noto-fonts (hinted/ttf/NotoSans/NotoSans-Regular.ttf)
+  Licence:  SIL Open Font License, Version 1.1 (stated in the font's own name table);
+            the font may be bundled and redistributed with software, unmodified, with this notice.
+  Obtained: 2026-10-28 via https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts@main/... (the branch
+            the page used to request at run time). No upstream checksum was available to compare,
+            so provenance rests on this recorded SHA-256 and on the contents (rupee sign present).
+  SHA-256:  b85c38ecea8a7cfb39c24e395a4007474fa5a4fc864f6ee33309eb4948d232d5

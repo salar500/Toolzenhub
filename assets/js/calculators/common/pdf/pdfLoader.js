@@ -7,6 +7,21 @@ let pdfLibrariesPromise = null;
 
 
 /* =========================================================
+   LOCAL, PINNED FILES
+
+   jsPDF 2.5.1, jsPDF-AutoTable 3.8.2 and the Noto Sans font
+   are served from assets/js/vendor/jspdf/ (see NOTICE.txt
+   there); nothing is requested from another host.
+========================================================= */
+
+export const VENDOR_BASE =
+    new URL(
+        "../../../vendor/jspdf/",
+        import.meta.url
+    ).href;
+
+
+/* =========================================================
    LOAD SCRIPT
 ========================================================= */
 
@@ -172,7 +187,7 @@ export function loadPdfLibraries() {
 
                 await loadScript(
 
-                    "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js",
+                    VENDOR_BASE + "jspdf.umd.min.js",
 
                     "toolzen-jspdf"
 
@@ -212,7 +227,7 @@ export function loadPdfLibraries() {
 
                 await loadScript(
 
-                    "https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js",
+                    VENDOR_BASE + "jspdf.plugin.autotable.min.js",
 
                     "toolzen-jspdf-autotable"
 

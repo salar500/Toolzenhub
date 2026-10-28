@@ -843,7 +843,7 @@
       "type": "calculator",
       "slug": "loan-comparison",
       "expectedTitle": "Loan Comparison Calculator | ToolZenHub",
-      "primarySelector": "#compare-loans",
+      "primarySelector": "#reset-loans",
       "expectsHeader": true,
       "expectsFooter": true,
       "interactive": true,

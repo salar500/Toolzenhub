@@ -87,7 +87,7 @@ function describePage(file) {
   if (m[file]) return m[file];
   let g;
   if ((g = file.match(/^calculators\/([^/]+)\/index\.html$/))) {
-    const primary = { emi: "#emi-form", "loan-comparison": "#compare-loans" }[g[1]] || ".calculator-page";
+    const primary = { emi: "#emi-form", "loan-comparison": "#reset-loans" }[g[1]] || ".calculator-page";
     return { type: "calculator", slug: g[1], primarySelector: primary, interactive: true, rendered: "client" };
   }
   // a tool of a section other than Calculators: /tools/<slug>/ (a tool page like any other)

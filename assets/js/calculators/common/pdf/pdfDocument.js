@@ -4,7 +4,8 @@
 ========================================================= */
 
 import {
-    loadPdfLibraries
+    loadPdfLibraries,
+    VENDOR_BASE
 } from "./pdfLoader.js";
 
 
@@ -44,7 +45,7 @@ export async function createPDFDocument() {
      * Noto Sans supports the Indian Rupee symbol (₹).
      */
     const fontURL =
-        "https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts@main/hinted/ttf/NotoSans/NotoSans-Regular.ttf";
+        VENDOR_BASE + "NotoSans-Regular.ttf";
 
 
     const response =

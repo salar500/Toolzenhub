@@ -22,7 +22,7 @@ const REGIONS = [
   ["breadcrumb-emi", "calculators/emi/", "#emi-form", ".calculator-breadcrumb"],
   ["emi-form-and-results", "calculators/emi/", "#emi-results .calculator-results__value", "#emi-form, #emi-results"],
   ["related-content-emi", "calculators/emi/", ".related-section", ".related-section"],
-  ["breadcrumb-loan-comparison", "calculators/loan-comparison/", "#compare-loans", ".calculator-breadcrumb"],
+  ["breadcrumb-loan-comparison", "calculators/loan-comparison/", "#reset-loans", ".calculator-breadcrumb"],
   ["loan-comparison-main", "calculators/loan-comparison/", "#comparison-result .loan-summary-card", ".loan-comparison-tool, #comparison-result"],
   ["breadcrumb-article", "articles/loan-comparison/what-is-loan-prepayment/", "article.article", ".calculator-breadcrumb"],
   ["article-content-shell", "articles/loan-comparison/what-is-loan-prepayment/", "article.article", ".article-hero, article.article"],

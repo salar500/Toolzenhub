@@ -63,7 +63,8 @@ test.describe("generated pages carry their content without JavaScript @portable"
     await expect(page.locator("h1")).toHaveText("Loan Comparison Calculator");
     await expect(page.locator("#a-amount")).toBeAttached();
     await expect(page.locator("#b-amount")).toBeAttached();
-    await expect(page.locator("#compare-loans")).toBeAttached();
+    await expect(page.locator("#reset-loans")).toBeAttached();
+    await expect(page.locator("#compare-loans")).toHaveCount(0);
     await expect(page.locator(".loan-info-grid details").first()).toBeAttached();
     await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
     await expect(page.locator(".related-calculator-card")).toHaveCount(5); // the other five Loans tools, Home Loan (Tool Pack 6) and the Credit Card Payoff Calculator (Tool Pack 24) among them

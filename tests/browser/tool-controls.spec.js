@@ -10,7 +10,7 @@ import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.m
 const TOOLS = [
   // page, primary button (or null), secondary button, ready selector
   ["calculators/emi/", "button[type=submit].calculator-form__button", "#emi-reset", "#emi-results .calculator-results__value"],
-  ["calculators/loan-comparison/", "#compare-loans", "#reset-loans", "#comparison-result"],
+  ["calculators/loan-comparison/", null, "#reset-loans", "#comparison-result"],
   ["calculators/prepayment/", null, "#prepay-reset", "#prepay-results .calculator-results__value"],
   ["calculators/balance-transfer/", null, "#bt-reset", "#bt-results .calculator-results__value"],
   ["calculators/sip/", null, "#sip-reset", "#sip-results .calculator-results__value"],
@@ -103,7 +103,6 @@ test.describe("tool buttons are one system across EMI, Loan Comparison and Loan 
 
   test("Loan Comparison: the schedule dialog's buttons and the schedule link are shared buttons with a focus ring", async ({ page, go }) => {
     await go("calculators/loan-comparison/");
-    await page.locator("#compare-loans").click();
     const link = page.locator(".loan-view-link").first();
     await expect(link).toBeVisible();
     await link.focus();
