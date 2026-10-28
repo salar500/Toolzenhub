@@ -408,8 +408,9 @@ export function markup() {
                 <details>
                     <summary>Is my data stored or sent anywhere?</summary>
                     <p>
-                        No. Everything is worked out in your browser. Nothing is stored, sent to ToolZen Hub or placed in the
-                        address. Reloading the page clears every row.
+                        No. Everything is worked out in your browser. Nothing you type is stored, sent anywhere or placed in the
+                        address. Reloading the page clears every row. (The page itself still loads its own files and some article
+                        pictures from another site; see the privacy page.)
                     </p>
                 </details>
             </section>

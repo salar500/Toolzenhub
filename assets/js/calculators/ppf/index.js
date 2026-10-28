@@ -757,8 +757,10 @@ export function markup() {
                     </summary>
                     <p>
                         No. The figures are worked out in your browser, nothing
-                        is stored or sent to ToolZen Hub, and no account details
-                        are asked for. Reloading the page clears everything.
+                        you type is stored or sent anywhere, and no account details
+                        are asked for. Reloading the page clears everything. (The
+                        page itself still loads its own files and some article
+                        pictures from another site; see the privacy page.)
                     </p>
                 </details>
 

@@ -36,6 +36,7 @@ The cards on the Home page, the articles listing and the related-article rows us
 images, and they depend on a third-party host. The hero charts and diagrams already drawn for the articles could
 serve as card images (or the cards could have none), which would change the Home, Articles, Categories and Loans
 cards and their baselines. Not done in DQ1 because it is a site-wide visual change, not a tool-pack change.
+Related: hosting the images locally (instead of replacing them) is a separate future optimization that needs a licence review, a performance review and an integration review; the privacy page now discloses the third-party image host (see the Calculators Ecosystem 2.0 ledger).
 
 ## 3. Articles without a concept image
 
