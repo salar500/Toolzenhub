@@ -67,6 +67,10 @@ import { batchCardMarkup, batchSizeMarkup, createBatchController } from "./batch
 
 import { MAX_BATCH_FILES, MAX_BATCH_BYTES } from "./batch-rules.js";
 
+import { geometryMarkup, createGeometryController } from "./geometry-ui.js";
+
+import { describeEdit } from "./image-geometry.js";
+
 import {
     getToolById
 } from "../../data/tools.js";
@@ -284,6 +288,7 @@ ${batchCardMarkup()}
                                 Settings
                             </legend>
 
+${geometryMarkup()}
 ${batchSizeMarkup()}
                             <fieldset
                                 id="ic-size-group"
@@ -565,6 +570,12 @@ ${batchSizeMarkup()}
                             hidden
                         ></p>
 
+                        <p
+                            id="ic-edit-result"
+                            class="ic-notes"
+                            hidden
+                        ></p>
+
                         <figure class="ic-figure">
 
                             <img
@@ -776,8 +787,8 @@ ${batchSizeMarkup()}
                         side are applied to each one, one after another. Each
                         result has its own download link, and a result that
                         failed or was skipped says why without stopping the
-                        others. A single exact width and height is
-                        available when you choose one image.
+                        others. Rotate, flip, crop and a single exact
+                        width and height are available when you choose one image.
                     </p>
                 </details>
 
@@ -1016,6 +1027,8 @@ export function init() {
         state.file = null;
         state.info = null;
 
+        geometry.detach();
+
     }
 
     function clearResult() {
@@ -1175,6 +1188,65 @@ export function init() {
         encoders: () => encoders,
         updateModeVisibility: () => updateModeVisibility()
     });
+
+    /* rotate, flip and crop (geometry-ui.js): one image only */
+    const geometry = createGeometryController({
+        $,
+        previewImg: originalImg,
+        widthInput,
+        heightInput,
+        info: () => state.info,
+        announce,
+        fieldError,
+        onChange: () => onGeometry()
+    });
+
+    /* the size of the picture the output is made from: the crop, or the whole turned picture */
+    function picture() {
+
+        return state.info ? geometry.pictureSize() : { width: 1, height: 1 };
+
+    }
+
+    function onGeometry() {
+
+        const exact = geometry.isExact();
+
+        lock.disabled = exact;
+
+        if (exact) {
+
+            lock.checked = false;
+
+        } else {
+
+            lock.checked = true;
+
+            const start = fitToOutputLimits(picture().width, picture().height);
+
+            state.limited = start.width !== picture().width || start.height !== picture().height;
+
+            widthInput.value = String(start.width);
+            heightInput.value = String(start.height);
+
+            fieldError(widthInput, "");
+            fieldError(heightInput, "");
+
+        }
+
+        /* a change to the picture makes an earlier result stale */
+        if (!resultCard.hidden) {
+
+            clearResult();
+            setState("ready");
+
+            announce("The result was removed because the picture changed. Press Compress image again.");
+
+        }
+
+        updateSizeNotes();
+
+    }
 
     /* two or more images: whatever one image had on the page is cleared first, then the batch takes over */
     async function handleFiles(files) {
@@ -1348,6 +1420,8 @@ export function init() {
 
         initSettings();
 
+        geometry.attach();
+
         setState("ready");
 
         announce("Image loaded. Choose a size and an output, then press Compress image.");
@@ -1418,7 +1492,7 @@ export function init() {
 
     function updateSizeNotes() {
 
-        const { width, height } = state.info;
+        const { width, height } = picture();
 
         const { w, h } = currentSize();
 
@@ -1438,7 +1512,7 @@ export function init() {
             }
 
             if (w.value > width || h.value > height) {
-                notes.push(MESSAGES.enlarge);
+                notes.push(geometry.isEdited() ? "Enlarged: this can look soft." : MESSAGES.enlarge);
             }
 
         }
@@ -1472,11 +1546,13 @@ export function init() {
 
         if (parsed.ok && lock.checked) {
 
-            heightInput.value = String(heightFromWidth(parsed.value, state.info.width, state.info.height));
+            heightInput.value = String(heightFromWidth(parsed.value, picture().width, picture().height));
 
             fieldError(heightInput, "");
 
         }
+
+        geometry.exactChanged();
 
         updateSizeNotes();
 
@@ -1496,11 +1572,13 @@ export function init() {
 
         if (parsed.ok && lock.checked) {
 
-            widthInput.value = String(widthFromHeight(parsed.value, state.info.width, state.info.height));
+            widthInput.value = String(widthFromHeight(parsed.value, picture().width, picture().height));
 
             fieldError(widthInput, "");
 
         }
+
+        geometry.exactChanged();
 
         updateSizeNotes();
 
@@ -1508,7 +1586,7 @@ export function init() {
 
     function applyPreset(id) {
 
-        const preset = presetSize(id, state.info.width, state.info.height);
+        const preset = presetSize(id, picture().width, picture().height);
 
         if (!preset) {
             return;
@@ -1519,6 +1597,8 @@ export function init() {
 
         fieldError(widthInput, "");
         fieldError(heightInput, "");
+
+        geometry.exactChanged();
 
         updateSizeNotes();
 
@@ -1698,6 +1778,7 @@ export function init() {
 
             result = await run("process", {
                 file: state.file,
+                geometry: geometry.request(),
                 width: request.width,
                 height: request.height,
                 mime: request.mime,
@@ -1746,7 +1827,7 @@ export function init() {
         resultImg.width = result.preview.width;
         resultImg.height = result.preview.height;
 
-        const name = outputFileName(state.file.name, result.mime, result.width !== state.info.width || result.height !== state.info.height);
+        const name = outputFileName(state.file.name, result.mime, result.width !== state.info.width || result.height !== state.info.height, geometry.isEdited());
 
         download.href = setUrl("download", result.blob);
         download.setAttribute("download", name);
@@ -1773,6 +1854,14 @@ export function init() {
         if (result.quality !== null) {
             $("#ic-result-quality").textContent = String(result.quality);
         }
+
+        const editNote = $("#ic-edit-result");
+        const edit = geometry.describe();
+        const cropArea = picture();
+        const enlarged = geometry.isEdited() && (result.width > cropArea.width || result.height > cropArea.height);
+
+        editNote.textContent = [edit ? `Edit: ${edit}.` : "", enlarged ? "Enlarged: this can look soft." : ""].filter(Boolean).join(" ");
+        editNote.hidden = editNote.textContent === "";
 
         const targetNote = $("#ic-target-result");
 

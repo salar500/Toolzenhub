@@ -725,10 +725,10 @@ export function safeBaseName(name) {
 
 export const extensionFor = (mime) => FORMATS[mime]?.extension ?? "bin";
 
-/* "holiday.jpg" -> "holiday-compressed.webp"; the extension always matches the bytes */
-export function outputFileName(originalName, mime, resized) {
+/* "holiday.jpg" -> "holiday-compressed.webp"; "-cropped" when it was cropped, rotated or flipped; the extension always matches the bytes */
+export function outputFileName(originalName, mime, resized, edited = false) {
 
-    return `${safeBaseName(originalName)}-${resized ? "resized" : "compressed"}.${extensionFor(mime)}`;
+    return `${safeBaseName(originalName)}-${edited ? "cropped" : resized ? "resized" : "compressed"}.${extensionFor(mime)}`;
 
 }
 

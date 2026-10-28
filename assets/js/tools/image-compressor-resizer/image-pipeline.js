@@ -34,6 +34,8 @@ import {
 
 import { batchOutputSize } from "./batch-rules.js";
 
+import { sourceMatrix, turnedSize, validateRect } from "./image-geometry.js";
+
 
 export class PipelineError extends Error {
 
@@ -277,6 +279,9 @@ export async function inspectImage(request, env) {
 
 /*
  * request { file, width, height, mime, quality, targetBytes, keepAlpha, fit }
+ *   geometry     optional { turn, flipH, flipV, crop }: rotate (clockwise quarter turns), flip and crop, all in the
+ *                picture as the user sees it (EXIF turn applied); width and height are then the OUTPUT size and the
+ *                crop is scaled to it. Drawn straight from the decoded picture through one transform.
  *   fit          optional { longestSide: number | null }: a batch asks for the size to be worked out from the
  *                decoded image (batchOutputSize) instead of sending width and height
  *   quality      whole number 30..95 (ignored for PNG)
@@ -344,7 +349,31 @@ export async function processImage(request, env) {
         }
 
         context.imageSmoothingQuality = "high";
-        context.drawImage(bitmap, 0, 0, outWidth, outHeight);
+
+        if (request.geometry) {
+
+            const g = request.geometry;
+            const shown = turnedSize(bitmap.width, bitmap.height, g.turn);
+
+            if (g.crop) {
+
+                const checked = validateRect(g.crop, shown.width, shown.height);
+
+                if (!checked.ok) {
+                    throw new PipelineError("invalid-crop", checked.message);
+                }
+
+            }
+
+            context.setTransform(...sourceMatrix({ width: bitmap.width, height: bitmap.height, turn: g.turn, flipH: g.flipH, flipV: g.flipV, crop: g.crop, outWidth, outHeight }));
+            context.drawImage(bitmap, 0, 0);
+            context.setTransform(1, 0, 0, 1, 0, 0);
+
+        } else {
+
+            context.drawImage(bitmap, 0, 0, outWidth, outHeight);
+
+        }
 
         const drawn = env.now();
 

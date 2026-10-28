@@ -180,8 +180,8 @@ export function batchSizeMarkup() {
 
                                 <p class="ic-notes">
                                     Images are never enlarged and keep their shape.
-                                    An exact width and height is for one image at
-                                    a time.
+                                    Rotate, flip, crop and an exact width and height
+                                    are for one image at a time.
                                 </p>
 
                             </fieldset>
@@ -243,6 +243,8 @@ export function createBatchController(ctx) {
 
         sizeGroup.hidden = true;
         batchSize.hidden = false;
+
+        $("#ic-geometry").hidden = true;
 
         $("#ic-original").hidden = true;
         $("#ic-result").hidden = true;
@@ -308,6 +310,8 @@ export function createBatchController(ctx) {
 
         sizeGroup.hidden = false;
         batchSize.hidden = true;
+
+        $("#ic-geometry").hidden = false;
 
         ctx.processButton.textContent = "Compress image";
 

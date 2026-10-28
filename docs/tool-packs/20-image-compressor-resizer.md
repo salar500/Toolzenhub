@@ -17,9 +17,9 @@ Hierarchy: Home → All Tools → Image Tools → Image Compressor & Resizer. No
 
 ## V1 scope (hard)
 
-One image at a time, or (since Tool Pack 42) a batch of up to 20 images (section "Batch" below). Input JPEG, PNG, WebP. Output: same format, JPEG (where safe), WebP (where this browser encodes it), PNG. Resize by width and height with an aspect lock and a short preset list. JPEG/WebP quality presets and a bounded quality control, and an approximate "up to N KB" mode. A scaled preview, honest before and after numbers, and a download.
+One image at a time, or (since Tool Pack 42) a batch of up to 20 images (section "Batch" below). Input JPEG, PNG, WebP. Output: same format, JPEG (where safe), WebP (where this browser encodes it), PNG. Resize by width and height with an aspect lock and a short preset list. JPEG/WebP quality presets and a bounded quality control, and an approximate "up to N KB" mode. Rotate, flip, crop and an exact output size for one image (since Tool Pack 43, section "Rotate, flip and crop" below). A scaled preview, honest before and after numbers, and a download.
 
-**Excluded:** HEIC/HEIF, GIF, AVIF, SVG, crop, rotate, flip, filters, annotations, AI anything, clipboard paste, history, accounts, any backend or upload, URL state, persistence of images, automatic Featured placement, a codec or image library dependency (a Cancel button was added after benchmarking, see the notes).
+**Excluded:** HEIC/HEIF, GIF, AVIF, SVG, filters, annotations, AI anything, clipboard paste, history, accounts, any backend or upload, URL state, persistence of images, automatic Featured placement, a codec or image library dependency (a Cancel button was added after benchmarking, see the notes).
 
 ## Input rules
 
@@ -123,4 +123,15 @@ Requirements FR-IB-001..018 and acceptance criteria AC-IB-* are in `docs/ecosyst
 - **Cancel** stops the worker; finished results stay, the rest are marked Cancelled. **A change of any setting** removes all results (nothing stale can be downloaded). Remove, Reset and leaving the page revoke the object URLs.
 - **Announcements:** the polite live region speaks when a run starts, once when it ends ("12 of 14 images done; 2 skipped") and on a cancel, not per file.
 - **Code:** `batch-rules.js` (pure), `batch-ui.js` (list and controller), `thumbnail.js` (shared with Photos to PDF), a `fit` option in `processImage`.
+
+## Rotate, flip and crop (Tool Pack 43, local, 2026-10-28; one image only)
+
+Requirements FR-IC-001..018 and acceptance criteria AC-IC-* are in `docs/ecosystem-review/image-pdf-tools/` (07, 09). With two or more images the group is hidden and the batch says these controls are for one image.
+
+- **Picture as shown.** Every number is in pixels of the picture the user sees: the EXIF turn is already applied by the decoder, then the chosen rotate (clockwise quarter turns) and flip.
+- **Crop modes.** No crop; Aspect ratio (Free, 1:1, 4:3, 3:4, 3:2, 2:3, 16:9, 9:16, Custom W:H), which places the largest centred box of that shape (size rounded to the nearest pixel, position rounded down); Exact size, where the existing Width and Height fields are the output size, the aspect lock is off and disabled, and the picture is cropped to that shape then scaled ("cropped to fit, not stretched"; the shape differs from the target by less than one source pixel). No institution's size is built in; the page says to check the size the form asks for.
+- **Fields first.** Left, Top, Crop width and Crop height always work and refuse a value that is not whole, below 1 pixel, negative or outside the picture, keeping the last good box. With a fixed shape, changing one side changes the other. The box on the preview (drag, four corner handles of 44 px, arrow keys by 1 pixel and Shift by 10) is an addition and always equals the fields. Rotate or flip recentres the box.
+- **One transform.** `image-geometry.js` folds rotate, flip, crop and scale into a single canvas transform (`sourceMatrix`); the pipeline's `geometry` request draws the decoded picture through it, so there is no full-size intermediate canvas, and every run starts from the original file. The preview uses the same matrix on the 640 px preview.
+- **Output.** Limits, formats, quality, Up to N KB and the transparency rules are unchanged and apply after the crop. A larger output than the crop says "Enlarged: this can look soft." The file name ends -cropped when rotated, flipped or cropped. A change to the picture removes the earlier result.
+- **Verification.** The matrix is rendered pixel by pixel in Node and compared with Pillow's transpose, flip and crop for all 16 turn and flip combinations and several crops (`image-geometry.test.mjs`); in Chrome the downloaded files are decoded and the four quadrant colours checked for every rotate and flip, a numeric crop, a crop after a rotation and an exact size (`image-crop.spec.js`).
 

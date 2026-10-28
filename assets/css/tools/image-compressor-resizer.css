@@ -882,3 +882,95 @@
     }
 
 }
+
+
+/* rotate, flip and crop (Tool Pack 43) */
+
+.ic-crop-stage {
+
+    position: relative;
+
+    display: block;
+
+    max-width: 100%;
+    margin: 0 0 12px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 10px;
+
+    background: #f2f4f7;
+
+    line-height: 0;
+
+}
+
+.ic-crop-canvas {
+
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+}
+
+/* the box: its shadow darkens everything outside it; only the box and its corners capture touches */
+
+.ic-crop-box {
+
+    position: absolute;
+
+    box-sizing: border-box;
+
+    border: 2px solid #ffffff;
+    outline: 2px solid #067647;
+    box-shadow: 0 0 0 9999px rgba(16, 24, 40, 0.5);
+
+    cursor: move;
+    touch-action: none;
+
+}
+
+.ic-crop-box:focus-visible {
+
+    outline: 3px solid #b54708;
+    outline-offset: 2px;
+
+}
+
+.ic-crop-handle {
+
+    position: absolute;
+
+    width: 44px;
+    height: 44px;
+
+    touch-action: none;
+
+}
+
+.ic-crop-handle::after {
+
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 14px;
+    height: 14px;
+
+    border: 2px solid #067647;
+    border-radius: 3px;
+
+    background: #ffffff;
+
+    transform: translate(-50%, -50%);
+
+}
+
+.ic-crop-handle[data-corner="nw"] { top: -22px; left: -22px; cursor: nwse-resize; }
+.ic-crop-handle[data-corner="ne"] { top: -22px; right: -22px; cursor: nesw-resize; }
+.ic-crop-handle[data-corner="sw"] { bottom: -22px; left: -22px; cursor: nesw-resize; }
+.ic-crop-handle[data-corner="se"] { bottom: -22px; right: -22px; cursor: nwse-resize; }

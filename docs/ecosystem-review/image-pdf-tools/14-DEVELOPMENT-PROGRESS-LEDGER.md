@@ -40,3 +40,27 @@ IP-0 (fixtures), IP-3, IP-1, IP-2, IP-5, as the owner's prompt directed. IP-3 fi
 | Browser | New `image-batch.spec.js`: 12 tests, desktop 12 pass; the stale, Cancel, phone-width and list tests also pass in mobile emulation. The existing `image-compressor-resizer.spec.js` ran 46 pass, 4 fail on desktop: two are the assertions this pack intentionally changed (multiple attribute and hint wording; dropping several files), rewritten and re-run to pass on desktop and mobile; two are the known stale All Tools and Image Tools assertions (lines 858 and 873), untouched. |
 | Defect found in visual inspection | The Download link text was green on a green button (unreadable). Fixed with a more specific rule and a computed-colour assertion. |
 | Not verified | Phones (memory with 20 large photos: UNKNOWN), Safari, Firefox, the 20-image limit as a measured figure. |
+
+## IP-2: rotate, flip, crop and exact size (spec 43; recorded in spec 20, section "Rotate, flip and crop")
+
+| Item | Result |
+|---|---|
+| Built | FR-IC-001..018: one image only (hidden in a batch); Rotate left and right, Flip horizontally and vertically, Reset picture with a text state; No crop, Aspect ratio (nine shapes including Custom) and Exact size; four number fields that always work and refuse bad values on the field; a box on a small preview with drag, corner handles (44 px) and arrow keys (1 and 10 px), always equal to the fields; crop before resize; output limits unchanged; "Enlarged: this can look soft."; -cropped file name; a change removes the earlier result; one calm announcement of the crop. |
+| Code | `image-geometry.js` (pure: ratio box, validation, move, resize, one canvas transform, wording), `geometry-ui.js` (markup and controller), a `geometry` request in `processImage`, an `edited` flag for the file name. |
+| Pixel correctness | Unit: the transform rendered in Node agrees with Pillow's transpose, flip and crop pixel for pixel for 48 cases (all 16 turn and flip combinations, three crop choices each). Browser: the downloaded files decoded in Chrome and the quadrant colours checked for rotate left, right, 180, both flips, rotate plus flip, a numeric crop, a crop after a rotation, 1:1, and Exact size 100 x 100 and 200 x 230. Worked example 2 (4000x3000 to 200x230): crop 2609 x 3000 at x 695 (4000 minus 2609 is 1391; half, rounded down), then scaled; the test states the rectangle in advance. |
+| Tests | `image-geometry.test.mjs` 8 pass; `image-engine.test.mjs` 48 and `image-batch.test.mjs` 9 pass; new `image-crop.spec.js` 14 tests, 14 pass on desktop and 14 on mobile emulation (one worker). |
+| Visual | Inspected at desktop and phone width: the controls, the preview with the box and the number fields, and the size group with its lock off in Exact size. |
+| Limits | The pointer path was driven with a mouse; a real touch screen is **UNKNOWN**. The 44 px corner hit areas are clipped where the box touches the edge of the preview (the fields and the keyboard still work). Safari and Firefox unverified. |
+
+## IP-5: focused ecosystem checkpoint
+
+| Item | Result |
+|---|---|
+| Catalog | Compressor description, SEO text and aliases now say batch, rotate, flip, crop and conversion (png to jpg, jpg to png, webp to jpg, jpg to webp, convert image). No related-tool lists were added across sections (rule 4.2); no new tool or route. |
+| Pins updated | `search.test.mjs` alias pin for the Compressor, and its coarse total-size backstop raised from 56,000 to 58,000 bytes (index is 56,111; the per-entry ceiling, the real guard, is unchanged). |
+| Static | `inventory:check` (101 live pages), links, assets, SEO: pass after a rebuild. |
+| Unit | Catalog, directory, relationships, search, sections, taxonomy, capabilities, tool-page: pass. The wider unit run showed `colour tokens` failing and `growth-manifest-export` hitting the 100 s limit under memory pressure; neither was investigated here and neither touches this work (UNKNOWN whether pre-existing). |
+| Browser | `image-crop` and `image-batch` 26 pass on desktop after the rebuild. The full old Compressor spec was stopped by the harness for low memory at test 45 of 50 with no failure before it; the last five (including the two known stale assertions) were not run again. |
+| IP-4 | PDF to Images was **not** built, as instructed. |
+| Not run | Full visual baselines, full browser regression, real phones, Safari, Firefox. |
+

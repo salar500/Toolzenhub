@@ -1877,7 +1877,7 @@ const catalog = [
         icon: "▣",
         title: "Image Compressor & Resizer",
         description:
-            "Make a JPEG, PNG or WebP smaller in dimensions and file size, or keep it under a size you choose, and see an honest before and after. It runs in your browser: nothing is uploaded.",
+            "Make JPEG, PNG or WebP images smaller in dimensions and file size, keep them under a size you choose, rotate, flip or crop one, or change many at once, and see an honest before and after. It runs in your browser: nothing is uploaded.",
         autoRelated: false,
         relatedTools: [],
         aliases: [
@@ -1890,7 +1890,18 @@ const catalog = [
             "compress jpg",
             "compress png",
             "resize photo",
-            "compress image online"
+            "compress image online",
+            "compress multiple images",
+            "batch image compressor",
+            "batch resize images",
+            "crop image",
+            "rotate image",
+            "flip image",
+            "convert image",
+            "png to jpg",
+            "jpg to png",
+            "webp to jpg",
+            "jpg to webp"
         ],
         capabilities: {
             reset: true,
@@ -1905,7 +1916,7 @@ const catalog = [
             title:
                 "Image Compressor & Resizer | ToolZen Hub",
             description:
-                "Free image compressor and resizer for JPEG, PNG and WebP. Set new dimensions, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your image is not uploaded."
+                "Free image compressor and resizer for JPEG, PNG and WebP. Process one image or many, set new dimensions, rotate, flip or crop, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your images are not uploaded."
         }
     },
 
