@@ -68,9 +68,11 @@ export function countStatuses(states) {
 
 /**
  * @param {{root: HTMLElement, live: HTMLElement, lab: object}} options
- * lab: { id, limit, inputLabel, rows?, exercises, evaluate(exercise, value), input?, documentLabel?, startingOf?(exercise) }
+ * lab: { id, limit, inputLabel (text or function of the exercise), rows?, exercises, evaluate(exercise, value), input?, isEmpty?(value, exercise),
+ *        emptyMessage? (text or function of the exercise), toolNote?, documentLabel?, startingOf?(exercise) }
  *   exercise: { id, title, difficulty, objective, instructions, starting?, document?, hints[], solution, explanation, source, tool?, ... }
- *   input (optional): factory (exercise, value, onChange) => { node, get(), set(value), focus() } for labs whose response is not plain text
+ *   input (optional): factory (exercise, value, onChange) => { node, get(), set(value), focus() } for an exercise whose response is not plain text;
+ *                     it returns null for an exercise that uses the plain text area
  */
 export function mountLab({ root, live, lab }) {
 
@@ -155,8 +157,9 @@ export function mountLab({ root, live, lab }) {
                 drawNav();
             }
         };
-        if (lab.input) {
-            control = lab.input(ex, st.value, onChange);
+        const custom = lab.input ? lab.input(ex, st.value, onChange) : null;
+        if (custom) {
+            control = custom;
         } else {
             const area = el("textarea", {
                 id: inputId, class: "lx-textarea", rows: lab.rows ?? 8, spellcheck: "false", autocomplete: "off",
@@ -166,14 +169,14 @@ export function mountLab({ root, live, lab }) {
             area.addEventListener("input", onChange);
             control = {
                 node: el("div", {},
-                    el("div", { class: "lx-field-head" }, el("label", { class: "lx-label", for: inputId, text: lab.inputLabel }), counter),
+                    el("div", { class: "lx-field-head" }, el("label", { class: "lx-label", for: inputId, text: typeof lab.inputLabel === "function" ? lab.inputLabel(ex) : lab.inputLabel }), counter),
                     area),
                 get: () => area.value, set: (v) => { area.value = v; }, focus: () => area.focus(), area
             };
         }
 
         function updateCounter() {
-            if (lab.input) return;
+            if (custom) return;
             const n = control.get().length;
             counter.textContent = `${n.toLocaleString("en-US")} of ${limit.toLocaleString("en-US")} characters`;
         }
@@ -222,9 +225,10 @@ export function mountLab({ root, live, lab }) {
             const value = control.get();
             if (st.result && st.checkedValue === value) return; // same answer: shown once, announced once
             let outcome;
-            if (lab.isEmpty ? lab.isEmpty(value) : value.trim() === "") {
-                outcome = { verdict: "cannot-check", summary: lab.emptyMessage ?? "There is nothing to check yet. Type an answer first." };
-            } else if (!lab.input && value.length > limit) {
+            if (lab.isEmpty ? lab.isEmpty(value, ex) : value.trim() === "") {
+                const message = typeof lab.emptyMessage === "function" ? lab.emptyMessage(ex) : lab.emptyMessage;
+                outcome = { verdict: "cannot-check", summary: message ?? "There is nothing to check yet. Type an answer first." };
+            } else if (!custom && value.length > limit) {
                 outcome = { verdict: "cannot-check", summary: `The answer is ${value.length.toLocaleString("en-US")} characters. This lab checks up to ${limit.toLocaleString("en-US")}. Shorten it and check again.` };
             } else {
                 outcome = runEvaluator(lab.evaluate, ex, value);
@@ -292,7 +296,7 @@ export function mountLab({ root, live, lab }) {
                 hintBox,
                 solutionBox,
                 tool ? el("p", { class: "lx-meta" }, "Related tool: ", el("a", { href: tool.href, text: tool.title }),
-                    ". You can copy the starting text into it. Nothing is carried over for you.") : null,
+                    `. ${lab.toolNote ?? "You can copy the starting text into it. Nothing is carried over for you."}`) : null,
                 el("div", { class: "lx-actions" },
                     el("button", { type: "button", class: "calculator-form__button calculator-form__button--secondary lx-btn", disabled: index === 0, onclick: () => go(index - 1, true) }, "Previous exercise"),
                     el("button", { type: "button", class: "calculator-form__button calculator-form__button--secondary lx-btn", disabled: index === exercises.length - 1, onclick: () => go(index + 1, true) }, "Next exercise"))

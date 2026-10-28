@@ -1971,6 +1971,40 @@ const catalog = [
     },
 
     {
+        id: "test-design-lab",
+        status: "published",
+        loader: () =>
+            import("../tools/test-design-lab/index.js"),
+        sectionId: "developer-tools",
+        icon: "🧪",
+        title: "Test Design Lab",
+        description:
+            "Practise boundary value analysis and equivalence partitioning on whole numbers. Each exercise states its limits exactly, and your test values are checked against the rule. It runs in your browser: nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: ["smart-flashcards", "json-error-fixing-lab"],
+        aliases: [
+            "boundary value analysis",
+            "equivalence partitioning",
+            "test design practice",
+            "bva practice",
+            "software testing practice"
+        ],
+        capabilities: {
+            examples: true,
+            explanation: true,
+            localProcessing: true,
+            reset: true,
+            validation: true
+        },
+        seo: {
+            title:
+                "Test Design Lab: Boundary Values and Equivalence Partitions | ToolZen Hub",
+            description:
+                "Practise boundary value analysis and equivalence partitioning with 20 exercises on whole numbers, each with an exact specification and an explanation. It runs in your browser: nothing is uploaded."
+        }
+    },
+
+    {
         id: "list-comparer",
         status: "published",
         loader: () =>

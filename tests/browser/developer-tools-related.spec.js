@@ -21,7 +21,8 @@ const RELATED = {
   "smart-flashcards": ["json-formatter", "jsonpath-tester"],
   "json-error-fixing-lab": ["json-formatter", "smart-flashcards"],
   "jsonpath-challenge-lab": ["jsonpath-tester", "smart-flashcards"],
-  "cron-challenge-lab": ["cron-explainer", "smart-flashcards"]
+  "cron-challenge-lab": ["cron-explainer", "smart-flashcards"],
+  "test-design-lab": ["smart-flashcards", "json-error-fixing-lab"]
 };
 
 // the route of the Cron Explainer is its own slug in the catalog

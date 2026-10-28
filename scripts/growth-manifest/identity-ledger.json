@@ -607,6 +607,13 @@
       "state": "active"
     },
     {
+      "id": "test-design-lab",
+      "module": "assets/js/tools/test-design-lab/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "text-diff",
       "module": "assets/js/tools/text-diff/index.js",
       "moduleChanges": [],

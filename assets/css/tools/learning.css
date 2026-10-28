@@ -711,3 +711,33 @@
     }
 
 }
+
+
+/* ---------- the Test Design Lab: one labelled choice per value ---------- */
+
+.lx-part-row {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 14px;
+
+    margin-bottom: 10px;
+
+}
+
+.lx-part-row .lx-label {
+
+    flex: 0 0 8em;
+
+    margin: 0;
+
+}
+
+.lx-part-row .lx-select {
+
+    flex: 1 1 14em;
+
+    min-width: 0;
+
+}

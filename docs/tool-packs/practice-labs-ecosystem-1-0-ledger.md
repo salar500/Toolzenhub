@@ -23,7 +23,7 @@ Base commit: `df4dd66`. Owner scope: Option B, with the conditions recorded in d
 | 52 HTTP and APIs deck, Software testing deck | LP-2 | IMPLEMENTED (see below) | see git log |
 | 53 Lab shell and JSON Error-Fixing Lab | LP-3 | IMPLEMENTED (see below) | see git log |
 | 54 JSONPath and Cron Challenge Labs | LP-4 | IMPLEMENTED (see below) | see git log |
-| 55 Test Design Lab | LP-5 | NOT_STARTED | |
+| 55 Test Design Lab | LP-5 | IMPLEMENTED (see below) | see git log |
 | 56 Integration and consolidated checkpoint | LP-6 | NOT_STARTED | |
 
 ## Pack 51: Smart Flashcards core, JSON deck, scheduler, opt-in progress
@@ -123,3 +123,26 @@ Defects found and fixed in this pack:
 - One equivalence claim in the table was an invalid expression (hour 30) and so Cannot check, not Not yet; the claim was replaced.
 
 Known limits: one author. The Python JSONPath evaluator covers only the subset the exercises use. The cron comparison does not distinguish schedules that never match a real date and does not model time zones or daylight saving time; both are stated on the page.
+
+## Pack 55: Test Design Lab
+
+Requirements: FR-TDL-001 to FR-TDL-008, FR-LAB items through the shared shell.
+
+Implemented:
+- `tools/test-design-lab/`: 20 original exercises over whole numbers, ten on boundary values (3 beginner/intermediate/advanced mix, two-value and three-value forms stated per exercise) and ten on equivalence partitions. Every specification says whether each limit is included and that only whole numbers are meant.
+- The evaluator reads a declarative rule held in the exercise data. For boundary values it finds the first and last valid whole numbers from the minimum, the maximum and their inclusive flags, builds the required set (two or three values per boundary), accepts any answer that contains it, lists extras as neither wrong nor needed, and names missing values by role, not number. For partitions it places each sample value by interval and reports one word per value and a count. Input limits: 30 values, plain whole numbers up to 1,000,000,000 (no signs other than minus, no leading zeros), 2,000 characters.
+- Shell change (deliberate, shared): the response control and its label, the empty-answer test and message, and the related-tool note can now be chosen per exercise, so one lab can mix a text answer and labelled selects.
+- Page states the scope: whole numbers only, text, dates, decimals and field combinations not assessed, no certification, exam or syllabus claim, and that textbooks differ on two-value and three-value analysis.
+
+Content counts: planned 20 (10 + 10, the requirement minimums); authored and validated 20; published locally 20; deferred 0.
+
+Tests added or changed (deliberate):
+- NEW `tests/unit/test-design-lab.test.mjs`: 32 pass. Independent oracle: Python builds a yes/no predicate for each generated rule, scans the number line for every place validity changes, and reads the boundary values off those places. A seeded corpus of 2,000 generated rules with seven answers each (over 10,000 boundary cases, thousands of each verdict) gives the same required set, the same verdict and the same count of present values; 400 generated tilings give the same partition for every value. Also: every partition set tiles the integers exactly once (scanned over -2,500 to 2,500), labels state their own limits, every partition has a sample, wrong answers and input that is not usable behave as stated, no certification or exam wording.
+- NEW `tests/browser/test-design-lab.spec.js` (10 shared contract tests plus 10 lab-specific): 20 of 20 on subpath-desktop and on subpath-mobile.
+- Changed pins: the five catalog-level unit tests, `developer-tools-related.spec.js`, the inventory (107 live pages).
+
+Defects found and fixed in this pack:
+- A learner typing a thousands separator ("1,000") had it silently read as the two values 1 and 0. Tokens with leading zeros are now refused with the token named. Found by a test written for hostile input, not by a user.
+- A first test for "no exam wording" matched the word "example"; it now matches whole words.
+
+Known limits: one author, so the specifications have not had the second reviewer FR-TDL-001 asks for; this is recorded here and in the set's review record. The technique is described as commonly taught and the page says the forms differ between textbooks.
