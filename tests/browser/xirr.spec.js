@@ -324,4 +324,24 @@ test.describe("XIRR Calculator", () => {
       });
     });
   }
+  // Stage 3: hostile text in the paste box and in the fields is shown (or refused) as text and never becomes markup, a dialog or a request.
+  test("hostile paste and field text is inert: no markup, no dialog, no outside request, nothing stored", async ({ page, go }) => {
+    const dialogs = [];
+    const outside = [];
+    page.on("dialog", (d) => { dialogs.push(d.message()); d.dismiss(); });
+    await open(page, go);
+    await page.waitForLoadState("networkidle");
+    const origin = new URL(page.url()).origin;
+    page.on("request", (r) => { if (/^https?:/.test(r.url()) && new URL(r.url()).origin !== origin && r.resourceType() !== "image") outside.push(r.url()); });
+    await pasteRows(page, ['<img src=x onerror="alert(1)">', "2023-01-01 <script>alert(2)</script>", '"><svg onload=alert(3)> 5'].join("\n"));
+    await rows(page).nth(0).locator(".xirr-amount").fill("12");
+    await leave(page);
+    await page.waitForTimeout(900);
+    expect(await page.locator("#xirr-form img[src='x'], #xirr-results img, #xirr-form svg[onload], #xirr-form script").count()).toBe(0);
+    expect(dialogs).toEqual([]);
+    expect(outside).toEqual([]);
+    const stored = await page.evaluate(() => localStorage.length + sessionStorage.length + document.cookie.length);
+    expect(stored).toBe(0);
+    expect(new URL(page.url()).search).toBe("");
+  });
 });
