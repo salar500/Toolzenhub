@@ -22,7 +22,7 @@ section.categories-page.directory-page
           h2#directory-calculators-heading.directory-section__title
             a [href="{ROOT}categories.html"] "Calculators"
           p.directory-section__text "Calculators for loans, investment, tax, business and math."
-            span.directory-section__count "18 tools"
+            span.directory-section__count "19 tools"
         div.directory-groups
           article.directory-group
             h3.directory-group__title
@@ -56,6 +56,8 @@ section.categories-page.directory-page
                 a [href="{ROOT}calculators/cagr/"] "CAGR Calculator"
               li
                 a [href="{ROOT}calculators/swp/"] "SWP Calculator"
+              li
+                a [href="{ROOT}calculators/xirr/"] "XIRR Calculator"
           article.directory-group
             h3.directory-group__title
               a [href="{ROOT}tax.html"] "Tax"
@@ -223,7 +225,7 @@ section.categories-page.directory-page
           article.directory-group
             h3.directory-group__title
               a [href="{ROOT}tools/image-compressor-resizer/"] "Image Compressor & Resizer"
-            p.directory-group__text "Make a JPEG, PNG or WebP smaller in dimensions and file size, or keep it under a size you …"
+            p.directory-group__text "Make JPEG, PNG or WebP images smaller in dimensions and file size, keep them under a size …"
           article.directory-group
             h3.directory-group__title
               a [href="{ROOT}tools/photos-to-pdf/"] "Photos to PDF"

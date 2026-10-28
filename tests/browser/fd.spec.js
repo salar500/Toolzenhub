@@ -410,11 +410,11 @@ test.describe("FD Calculator", () => {
     await expect(page.locator("details")).toHaveCount(5);
   });
 
-  test("related: SIP and CAGR are the live related calculators; Coming soon PPF is not offered as usable", async ({ page, go, siteRoot }) => {
+  test("related: CAGR first (pack 50), then SIP, PPF and XIRR", async ({ page, go, siteRoot }) => {
     await open(page, go);
     const related = page.locator(".related-calculator-card");
     const hrefs = await related.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
-    expect(hrefs).toEqual([`${siteRoot}calculators/sip/`, `${siteRoot}calculators/ppf/`, `${siteRoot}calculators/cagr/`]); // PPF (Tool Pack 26) joins through the automatic Investment relationship
+    expect(hrefs).toEqual([`${siteRoot}calculators/cagr/`, `${siteRoot}calculators/sip/`, `${siteRoot}calculators/ppf/`, `${siteRoot}calculators/xirr/`]);
   });
 
   test("search finds it by name and by its aliases", async ({ page, go, siteRoot }) => {

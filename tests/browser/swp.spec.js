@@ -483,7 +483,7 @@ test.describe("SWP Calculator", () => {
     await expect(page.locator("canvas, svg.swp-chart")).toHaveCount(0);
   });
 
-  test("SIP is the one related calculator, one way: SIP does not offer the SWP Calculator", async ({ page, go, siteRoot }) => {
+  test("SIP is the one related calculator; since pack 50 the link is two-way: SIP offers the SWP Calculator first", async ({ page, go, siteRoot }) => {
     await open(page, go);
     const related = page.locator(".related-calculator-card");
     await expect(related).toHaveCount(1);
@@ -491,8 +491,8 @@ test.describe("SWP Calculator", () => {
     expect(href).toBe(`${siteRoot}calculators/sip/`);
     await related.click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}calculators/sip/`);
-    await expect(page.locator("a[href*='calculators/swp']")).toHaveCount(0); // SIP is unchanged
-    await expect(page.locator(".related-calculator-card")).toHaveCount(3); // still FD and CAGR, plus PPF (Tool Pack 26) through the automatic Investment relationship
+    await expect(page.locator(".related-calculator-card").first()).toHaveAttribute("href", `${siteRoot}calculators/swp/`); // SIP now names SWP first (curated, pack 50)
+    await expect(page.locator(".related-calculator-card")).toHaveCount(5); // then CAGR, plus PPF, FD and XIRR through the automatic Investment relationship
   });
 
   test("search finds it by name and by its four aliases, and does not take SIP's queries", async ({ page, go, siteRoot }) => {

@@ -191,12 +191,12 @@ test.describe("Loan Comparison calculator", () => {
     await go("calculators/loan-comparison/");
     const calcs = page.locator(".related-calculator-card");
     await expect(page.getByRole("heading", { name: "Related Calculators" })).toBeVisible();
-    await expect(calcs).toHaveCount(5); // EMI, then the Home Loan (Tool Pack 6), Balance Transfer (Tool Pack 2), Prepayment (Tool Pack 1) and Credit Card Payoff (Tool Pack 24) calculators
-    await expect(calcs.nth(4)).toHaveAttribute("href", `${siteRoot}calculators/credit-card-payoff/`);
+    await expect(calcs).toHaveCount(5); // the curated list (pack 50) first: EMI, Prepayment, Balance Transfer; then Home Loan and Credit Card Payoff from the automatic Loans relationship
     await expect(calcs.first()).toHaveAttribute("href", `${siteRoot}calculators/emi/`);
-    await expect(calcs.nth(1)).toHaveAttribute("href", `${siteRoot}calculators/home-loan/`);
+    await expect(calcs.nth(1)).toHaveAttribute("href", `${siteRoot}calculators/prepayment/`);
     await expect(calcs.nth(2)).toHaveAttribute("href", `${siteRoot}calculators/balance-transfer/`);
-    await expect(calcs.nth(3)).toHaveAttribute("href", `${siteRoot}calculators/prepayment/`);
+    await expect(calcs.nth(3)).toHaveAttribute("href", `${siteRoot}calculators/home-loan/`);
+    await expect(calcs.nth(4)).toHaveAttribute("href", `${siteRoot}calculators/credit-card-payoff/`);
     await expect(page.getByRole("heading", { name: "Related Articles" })).toBeVisible();
     const hrefs = await page.locator(".related-article-card").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
     expect(hrefs.length).toBeGreaterThanOrEqual(3);

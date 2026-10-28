@@ -89,6 +89,11 @@ const catalog = [
         category: "loans",
         icon: "⚖",
         title: "Loan Comparison Calculator",
+        relatedTools: [
+            "emi",
+            "prepayment",
+            "balance-transfer"
+        ],
         description:
             "Compare two loans by EMI, interest rate, total interest and repayment.",
         capabilities: {
@@ -121,6 +126,11 @@ const catalog = [
         category: "loans",
         icon: "▦",
         title: "EMI Calculator",
+        relatedTools: [
+            "loan-comparison",
+            "prepayment",
+            "home-loan"
+        ],
         description:
             "Calculate your monthly EMI for any loan amount, interest rate and tenure.",
         aliases: [
@@ -162,6 +172,10 @@ const catalog = [
         category: "loans",
         icon: "⌂",
         title: "Home Loan Calculator",
+        relatedTools: [
+            "emi",
+            "loan-comparison"
+        ],
         description:
             "Work out the home loan that fits your monthly EMI budget, what it would cost in interest, and how the tenure changes it.",
         aliases: [
@@ -370,6 +384,10 @@ const catalog = [
         category: "investment",
         icon: "◈",
         title: "SIP Calculator",
+        relatedTools: [
+            "swp",
+            "cagr"
+        ],
         description:
             "Estimate what a monthly SIP could grow to for a return you assume, with a yearly step-up, return scenarios and a target.",
         aliases: [
@@ -448,6 +466,9 @@ const catalog = [
         category: "investment",
         icon: "▣",
         title: "FD Calculator",
+        relatedTools: [
+            "cagr"
+        ],
         description:
             "Work out what a fixed deposit matures to for a rate and tenure you enter, see its effective annual yield, and compare two offers side by side.",
         aliases: [
@@ -485,6 +506,10 @@ const catalog = [
         category: "investment",
         icon: "↗",
         title: "CAGR Calculator",
+        relatedTools: [
+            "fd",
+            "sip"
+        ],
         description:
             "Find the yearly growth rate that connects a starting and an ending value over a period, see how it differs from a simple average, and compare two investments on the same yearly footing.",
         aliases: [
@@ -552,6 +577,46 @@ const catalog = [
         }
     },
 
+    {
+        id: "xirr",
+        status: "published",
+        loader: () =>
+            import("../calculators/xirr/index.js"),
+        category: "investment",
+        icon: "%",
+        title: "XIRR Calculator",
+        relatedTools: [
+            "cagr",
+            "sip"
+        ],
+        description:
+            "Find the yearly rate of return of money you put in and got back on different dates. Enter each amount with its date, or paste them, and see the annualised rate, the totals and the cash flows in date order. It runs in your browser and stores nothing.",
+        aliases: [
+            "xirr",
+            "xirr calculator",
+            "irregular cash flow return",
+            "internal rate of return with dates",
+            "irr with dates",
+            "annualised return with dates"
+        ],
+        capabilities: {
+            reset: true,
+            table: true,
+            realtime: true,
+            copy: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "XIRR Calculator: Annualised Return from Dated Cash Flows | ToolZen Hub",
+            description:
+                "Find the yearly rate of return of money paid and received on different dates. Enter or paste the dated amounts. Calculated from your figures: not a forecast or advice."
+        }
+    },
     /* =====================================================
        TAX
     ===================================================== */

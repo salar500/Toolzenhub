@@ -41,5 +41,11 @@ section.categories-page.directory-page
           h3.category-page-card__title "SWP Calculator"
           p.category-page-card__description "Estimate how long a corpus could last under regular withdrawals, how much you could withdr…"
         span.category-page-card__arrow [aria-hidden="true"] "→"
+      a.category-page-card [href="{ROOT}calculators/xirr/"]
+        div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"] "%"
+        div.category-page-card__content
+          h3.category-page-card__title "XIRR Calculator"
+          p.category-page-card__description "Find the yearly rate of return of money you put in and got back on different dates. Enter …"
+        span.category-page-card__arrow [aria-hidden="true"] "→"
     p.directory-section__more
       a [href="{ROOT}categories.html"] "← All calculator categories"

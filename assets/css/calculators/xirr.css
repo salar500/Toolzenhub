@@ -1,0 +1,210 @@
+/* =========================================================
+   ToolZen Hub
+   XIRR Calculator
+
+   Only what the shared calculator styles do not already provide:
+   the cash-flow rows, the paste box and the result extras.
+   Loaded after calculator-responsive.css.
+========================================================= */
+
+
+/* =========================================================
+   ROWS
+   A phone shows each row as a small card with visible labels;
+   a wide screen shows one line a row under one header line.
+========================================================= */
+
+.xirr-rows {
+    display: grid;
+    gap: 12px;
+    margin: 0 0 16px;
+}
+
+.xirr-head {
+    display: none;
+}
+
+.xirr-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid var(--color-slate-200);
+    border-radius: 10px;
+    background: var(--color-white);
+}
+
+.xirr-cell {
+    min-width: 0;
+}
+
+.xirr-label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.xirr-row .calculator-form__input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.xirr-remove {
+    min-height: 44px;
+    width: 100%;
+}
+
+@media (max-width: 480px) {
+
+    .xirr-row .calculator-form__input {
+        font-size: 16px;
+    }
+
+}
+
+@media (min-width: 760px) {
+
+    .xirr-head,
+    .xirr-row {
+        grid-template-columns: minmax(150px, 1.1fr) minmax(120px, 1fr) minmax(170px, 1.1fr) 110px;
+        gap: 12px;
+        align-items: center;
+    }
+
+    .xirr-head {
+        display: grid;
+        padding: 0 12px;
+        margin: 0 0 6px;
+        color: var(--color-ink-muted);
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .xirr-row {
+        padding: 8px 12px;
+    }
+
+    /* the header line labels the columns, so the per-field labels are for screen readers only */
+    .xirr-label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+}
+
+.xirr-controls {
+    flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   PASTE
+========================================================= */
+
+.xirr-paste {
+    margin-top: 20px;
+}
+
+.xirr-paste summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.xirr-paste-box {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 6px 0 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.xirr-paste-error {
+    margin: 0 0 10px;
+    color: var(--color-ink);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.xirr-paste-error:empty {
+    display: none;
+}
+
+
+/* =========================================================
+   RESULT EXTRAS
+========================================================= */
+
+.xirr-assumption,
+.xirr-note {
+    margin: 12px 0 0;
+    color: var(--color-ink-muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.xirr-note--caution {
+    padding: 10px 14px;
+    border: 1px solid #fedf89;
+    border-left-width: 6px;
+    border-radius: 10px;
+    background: #fffcf5;
+    color: var(--color-ink);
+    font-size: 14px;
+}
+
+.xirr-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.xirr-copy-note {
+    color: var(--color-ink-muted);
+    font-size: 13px;
+}
+
+.xirr-copy-fallback {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+}
+
+.xirr-flows {
+    margin-top: 16px;
+}
+
+.xirr-flows summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   TEXT FOR SCREEN READERS ONLY
+========================================================= */
+
+.xirr-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

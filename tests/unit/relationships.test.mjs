@@ -43,18 +43,21 @@ let PUBLISHED;
 describe("current relationships (parity with the pre-M7 selection)", () => {
   test("tool -> related tools: same category, published, never itself", () => {
     // Home Loan (Tool Pack 6) is a published Loans tool, so every Loans page relates to all the other Loans tools: the curated ones first, then the rest of the category in catalog order, which now ends with the Credit Card Payoff Calculator (Tool Pack 24)
-    assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["loan-comparison", "home-loan", "balance-transfer", "prepayment", "credit-card-payoff"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("loan-comparison")), ["emi", "home-loan", "balance-transfer", "prepayment", "credit-card-payoff"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["loan-comparison", "prepayment", "home-loan", "balance-transfer", "credit-card-payoff"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("loan-comparison")), ["emi", "prepayment", "balance-transfer", "home-loan", "credit-card-payoff"]);
     assert.deepEqual(toolIds(rel.getRelatedTools("prepayment")), ["emi", "loan-comparison", "balance-transfer", "home-loan", "credit-card-payoff"]); // curated order, then the category
     assert.deepEqual(toolIds(rel.getRelatedTools("balance-transfer")), ["prepayment", "emi", "loan-comparison", "home-loan", "credit-card-payoff"]); // curated order, then the category
-    assert.deepEqual(toolIds(rel.getRelatedTools("home-loan")), ["loan-comparison", "emi", "balance-transfer", "prepayment", "credit-card-payoff"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("home-loan")), ["emi", "loan-comparison", "balance-transfer", "prepayment", "credit-card-payoff"]);
+    // Calculators Ecosystem 2.0, pack 50: EMI, Loan Comparison and Home Loan gained curated lists (the same tools in a better order); the rest of each list is still the category in catalog order
     // FD (Tool Pack 7) is the second published Investment tool: SIP and FD relate to each other through the category, and only to each other
     // CAGR (Tool Pack 9) is the third: the Investment tools relate to each other through the category
     // PPF (Tool Pack 26) keeps the automatic Investment relationship (no curated list): it is offered the other auto-related Investment tools in catalog order, and it is added to theirs
-    assert.deepEqual(toolIds(rel.getRelatedTools("sip")), ["ppf", "fd", "cagr"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("fd")), ["sip", "ppf", "cagr"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("cagr")), ["sip", "ppf", "fd"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("ppf")), ["sip", "fd", "cagr"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("sip")), ["swp", "cagr", "ppf", "fd", "xirr"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("fd")), ["cagr", "sip", "ppf", "xirr"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("cagr")), ["fd", "sip", "ppf", "xirr"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("ppf")), ["sip", "fd", "cagr", "xirr"]);
+    // pack 50: SIP, FD, CAGR and XIRR have short curated lists (SIP to SWP and CAGR; FD to CAGR; CAGR to FD and SIP; XIRR to CAGR and SIP), then the other Investment tools in catalog order; SWP stays curated-only
+    assert.deepEqual(toolIds(rel.getRelatedTools("xirr")), ["cagr", "sip", "ppf", "fd"]);
     // SWP (Tool Pack 21): one curated one-way relation to SIP (build the corpus, then draw it down); autoRelated is off, so it is not offered the other Investment tools and does not appear in theirs, and SIP does not link back
     assert.deepEqual(toolIds(rel.getRelatedTools("swp")), ["sip"]);
     // the SWP content pack: its two articles reach the calculator through article.tools alone (no tool.relatedArticles, so there is no second list to disagree), mechanism first; the SIP page does not gain them
@@ -140,7 +143,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.equal(toolIds(rel.getRelatedTools("photos-to-pdf")).some((id) => ["merge-pdf", "split-pdf", "pdf-pages"].includes(id)), false);
     assert.deepEqual(rel.getRelatedTools("nope"), []);
     // parity with the pre-M7 rule for every tool without a curated list (the Loan Prepayment page curates its own order; GST and Percentage curate cross-category lists)
-    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "list-comparer", "uuid-generator", "json-csv-converter", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "income-tax", "swp", "credit-card-payoff", "gratuity", "salary-in-hand"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug);
+    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "list-comparer", "uuid-generator", "json-csv-converter", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "income-tax", "swp", "credit-card-payoff", "gratuity", "salary-in-hand", "emi", "loan-comparison", "home-loan", "sip", "fd", "cagr", "xirr"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug); // the tools with a curated list are pinned one by one in the first test (pack 50 added emi, loan-comparison, home-loan, sip, fd, cagr and xirr)
   });
 
   test("tool -> related articles: the first six published loan articles, in catalog order, for EMI and Loan Comparison", () => {
@@ -160,10 +163,10 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
       : key === "balance-transfer/is-a-loan-balance-transfer-worth-it" ? ["balance-transfer", "loan-comparison", "emi", "home-loan", "prepayment", "credit-card-payoff"]
       : key === "balance-transfer/balance-transfer-vs-prepayment" ? ["balance-transfer", "prepayment", "loan-comparison", "emi", "home-loan", "credit-card-payoff"]
       : key.startsWith("home-loan/") ? ["home-loan", "loan-comparison", "emi", "balance-transfer", "prepayment", "credit-card-payoff"]
-      : key.startsWith("sip/") ? ["sip", "ppf", "fd", "cagr"] // the primary tool first, then the other published Investment tools (PPF, Tool Pack 26, is one)
-      : key.startsWith("fd/") ? ["fd", "sip", "ppf", "cagr"]
-      : key.startsWith("cagr/") ? ["cagr", "sip", "ppf", "fd"]
-      : key.startsWith("swp/") ? ["swp", "sip", "ppf", "fd", "cagr"] // the primary tool first, then the Investment tools; SWP is not auto-related, so it joins no other article's fallback
+      : key.startsWith("sip/") ? ["sip", "ppf", "fd", "cagr", "xirr"] // the primary tool first, then the other published Investment tools (PPF, Tool Pack 26, is one)
+      : key.startsWith("fd/") ? ["fd", "sip", "ppf", "cagr", "xirr"]
+      : key.startsWith("cagr/") ? ["cagr", "sip", "ppf", "fd", "xirr"]
+      : key.startsWith("swp/") ? ["swp", "sip", "ppf", "fd", "cagr", "xirr"] // the primary tool first, then the Investment tools; SWP is not auto-related, so it joins no other article's fallback
       : key.startsWith("percentage/") ? ["percentage"] // the only published Math tool: no category fallback beyond it
       : key.startsWith("gst/") ? ["gst"] // the only published Tax tool: no category fallback beyond it
       : key.startsWith("margin/") ? ["margin", "profit"] // the primary tool first, then the other published Business tool
@@ -263,6 +266,7 @@ describe("curated first, automatic second", () => {
     cats.subcategories.push({ id: "test-sub", category: "loans", title: "Test" });
     const home = calcs.getCalculatorById("home-loan");
     const wasAvailable = home.available;
+    emi().relatedTools = undefined; // this test is about the automatic order, so EMI's curated list (pack 50) is set aside; the test restores the catalog afterwards
     try {
       home.available = true;          // temporarily "published"
       emi().subcategory = "test-sub";

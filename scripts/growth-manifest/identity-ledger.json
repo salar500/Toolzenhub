@@ -626,6 +626,13 @@
       "moduleChanges": [],
       "provenance": "added",
       "state": "active"
+    },
+    {
+      "id": "xirr",
+      "module": "assets/js/calculators/xirr/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
     }
   ]
 }
