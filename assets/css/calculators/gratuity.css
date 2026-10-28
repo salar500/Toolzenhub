@@ -569,7 +569,7 @@
 
     padding: 6px 8px;
 
-    border: 1px dashed #667085;
+    border: 1px dashed var(--color-ink-muted);
     border-radius: 6px;
 
 }
