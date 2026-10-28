@@ -51,7 +51,10 @@ export async function downloadAmortizationPDF(
     const originalText =
         button.textContent;
 
-
+    /* a message from an earlier attempt is cleared before a new one */
+    button.parentElement
+        ?.querySelector("[data-pdf-error]")
+        ?.remove();
     button.disabled =
         true;
 
@@ -276,20 +279,17 @@ export async function downloadAmortizationPDF(
 
 
         if (!success) {
-
             console.error(
                 "PDF generation was unsuccessful."
             );
-
+            showPDFError(button);
         }
-
     } catch (error) {
-
         console.error(
             "Amortization PDF download failed:",
             error
         );
-
+        showPDFError(button);
     } finally {
 
         /* =================================================
@@ -319,6 +319,44 @@ function formatPDFLoanCurrency(
 
     return formatPDFCurrency(
         Number(value || 0)
+    );
+
+}
+
+
+/* =========================================================
+   FAILURE MESSAGE
+   Plain words next to the button; the details stay in the
+   console. The text is fixed, so no value can reach the page
+   through it.
+========================================================= */
+
+function showPDFError(
+    button
+) {
+
+    const message =
+        document.createElement("p");
+
+    message.className =
+        "calculator-results__error";
+
+    message.setAttribute(
+        "data-pdf-error",
+        ""
+    );
+
+    message.setAttribute(
+        "role",
+        "alert"
+    );
+
+    message.textContent =
+        "The PDF could not be created. Check that nothing is blocking this site's files, then try again. Your figures on the page are not affected.";
+
+    button.insertAdjacentElement(
+        "afterend",
+        message
     );
 
 }

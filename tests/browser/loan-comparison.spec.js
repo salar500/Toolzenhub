@@ -328,11 +328,14 @@ test.describe("Loan Comparison — M4 shared architecture and regression", () =>
     await expect(button).toBeEnabled();
   });
   test("PDF download (real jsPDF, vendored): a valid PDF is produced and no other host is contacted", async ({ page, go }) => {
+    // Only what the export itself asks for is counted: requests made after the click, images excluded. The shared article thumbnails
+    // come from another host (a site-wide matter recorded in the ledger) and arrive at unpredictable times, so they are not part of this claim.
     const seen = [];
-    page.on("request", (r) => { if (/^https?:/.test(r.url())) seen.push(r.url()); });
     await go("calculators/loan-comparison/");
     await setLoan(page, "a", { amount: 30, rate: 8, years: 15 });
     await page.locator('.loan-view-link[data-loan="a"]').click();
+    await page.waitForLoadState("networkidle");
+    page.on("request", (r) => { if (/^https?:/.test(r.url()) && r.resourceType() !== "image") seen.push(r.url()); });
     const [download] = await Promise.all([page.waitForEvent("download"), page.locator("[data-download-amortization-pdf]").click()]);
     expect(download.suggestedFilename()).toBe("loan-a-3000000-8-percent-15-years-amortization-schedule.pdf");
     const bytes = await (await import("node:fs/promises")).readFile(await download.path());
@@ -340,5 +343,65 @@ test.describe("Loan Comparison — M4 shared architecture and regression", () =>
     expect(bytes.length).toBeGreaterThan(20000);
     const origin = new URL(page.url()).origin;
     expect(seen.filter((u) => new URL(u).origin !== origin), "no request to another host").toEqual([]);
+  });
+  // Stage 3: the vendored library is real here; only its text() calls are observed, so the figures that reach the page of the PDF are checked.
+  // Expected values: python -I, Decimal, 30,00,000 at 8% over 180 months: EMI 28,669.56; month 1 principal 8,670 and interest 20,000; month 180 principal 28,480 and interest 190; balance 0.
+  test("PDF content (real jsPDF, text observed): the summary and the first and last schedule rows match an independent calculation", async ({ page, go }) => {
+    await page.addInitScript(() => {
+      window.__text = [];
+      let lib;
+      let wrapped = false;
+      // the UMD build assigns an empty object first and fills it in afterwards, so the wrap happens on first read of a complete library
+      Object.defineProperty(window, "jspdf", {
+        configurable: true,
+        get: () => {
+          if (lib && lib.jsPDF && !wrapped) {
+            wrapped = true;
+            // jsPDF builds its methods per document, so the constructor is wrapped and each new document's text() is observed
+            const Original = lib.jsPDF;
+            const Spy = function (...args) {
+              const doc = new Original(...args);
+              const text = doc.text;
+              doc.text = function (t, ...rest) { window.__text.push(Array.isArray(t) ? t.join(" ") : String(t)); return text.call(this, t, ...rest); };
+              return doc;
+            };
+            Object.assign(Spy, Original);
+            Spy.API = Original.API;
+            Spy.prototype = Original.prototype;
+            lib.jsPDF = Spy;
+          }
+          return lib;
+        },
+        set: (v) => { lib = v; }
+      });
+    });
+    await go("calculators/loan-comparison/");
+    await setLoan(page, "a", { amount: 30, rate: 8, years: 15 });
+    await page.locator('.loan-view-link[data-loan="a"]').click();
+    await Promise.all([page.waitForEvent("download"), page.locator("[data-download-amortization-pdf]").click()]);
+    const text = (await page.evaluate(() => window.__text)).join(" | ");
+    for (const expected of ["₹30,00,000", "₹28,670", "₹21,60,521", "₹51,60,521", "8% p.a.", "15 years", "Full Amortization Schedule"]) {
+      expect(text, expected).toContain(expected);
+    }
+    // month 1 and month 180 rows (autoTable draws each cell with text())
+    for (const cell of ["₹8,670", "₹20,000", "₹29,91,330", "₹28,480", "₹190", "₹0"]) expect(text, cell).toContain(cell);
+    // no markup or script text can reach the document from a loan name
+    expect(text).not.toMatch(/<script|onerror|undefined|NaN|Infinity/);
+  });
+
+  test("PDF failure is explained on the page, the button is restored and no raw error text is shown", async ({ page, go }) => {
+    await page.route("**/vendor/jspdf/jspdf.umd.min.js", (route) => route.abort());
+    await go("calculators/loan-comparison/");
+    await setLoan(page, "a", { amount: 30, rate: 8, years: 15 });
+    await page.locator('.loan-view-link[data-loan="a"]').click();
+    const button = page.locator("[data-download-amortization-pdf]");
+    await button.click();
+    const alert = page.locator("[data-pdf-error]");
+    await expect(alert).toBeVisible();
+    await expect(alert).toHaveAttribute("role", "alert");
+    await expect(alert).toContainText("The PDF could not be created");
+    await expect(alert).not.toContainText(/Error|undefined|http/);
+    await expect(button).toBeEnabled();
+    await expect(button).toHaveText(/Download PDF/);
   });
 });

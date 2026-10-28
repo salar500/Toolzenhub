@@ -290,6 +290,35 @@ function scaled(x, flows, t) {
 }
 
 /*
+ * |NPV| at the rate, relative to the size of the terms, computed with the
+ * same rescaling as the solver so that a long period and a rate near
+ * -100% cannot overflow or underflow into NaN (the plain xnpv can).
+ */
+export function relativeResidual(rate, flows) {
+
+    const t = times(flows);
+    const x = Math.log(1 + rate);
+
+    let m = -Infinity;
+
+    for (let i = 0; i < t.length; i++) {
+        m = Math.max(m, -x * t[i]);
+    }
+
+    let net = 0;
+    let size = 0;
+
+    for (let i = 0; i < t.length; i++) {
+        const term = flows[i].amount * Math.exp(-x * t[i] - m);
+        net += term;
+        size += Math.abs(term);
+    }
+
+    return Math.abs(net) / size;
+
+}
+
+/*
  * flows must be valid and sorted by date.
  * Returns { state: "ok", rate, roots, residual } (rates are fractions)
  * or { state: "none" }.
@@ -360,13 +389,11 @@ export function solveXirr(flows) {
         (best, r) => (Math.abs(r) < Math.abs(best) ? r : best)
     );
 
-    const scale = flows.reduce((sum, flow) => sum + Math.abs(flow.amount), 0);
-
     return {
         state: "ok",
         rate,
         roots: rates,
-        residual: Math.abs(xnpv(rate, flows)) / scale
+        residual: relativeResidual(rate, flows)
     };
 
 }

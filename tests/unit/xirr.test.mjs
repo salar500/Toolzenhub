@@ -11,7 +11,8 @@ import {
     xnpv,
     summarise,
     twoFlowRate,
-    toFlow
+    toFlow,
+    relativeResidual
 } from "../../assets/js/calculators/formulas/xirr.js";
 
 /*
@@ -148,4 +149,14 @@ test("100 flows solve quickly", () => {
     const result = solve(rows);
     assert.equal(result.state, "ok");
     assert.ok(Date.now() - t0 < 1000);
+});
+
+test("stage 3: the residual stays finite when the plain NPV would overflow (long period, rate near -100%)", () => {
+    const rows = [
+        flow("1990-01-01", -1000), flow("1990-01-02", 1000.01),
+        flow("2090-01-01", -100), flow("2090-01-01", 100.01)
+    ];
+    assert.ok(Number.isFinite(relativeResidual(-0.99998, validateFlows(rows).values.flows)));
+    const result = solve(rows);
+    if (result.state === "ok") assert.ok(Number.isFinite(result.residual), String(result.residual));
 });
