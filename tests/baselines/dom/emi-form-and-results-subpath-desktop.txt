@@ -1,29 +1,59 @@
 --- match 1 of 2 ---
 form#emi-form.calculator-form
+  fieldset.emi-mode [aria-describedby="emi-mode-hint"]
+    legend.calculator-form__label "What do you want to find?"
+    div.emi-mode__options
+      label.emi-mode__option
+        input [name="emi-mode" type="radio" value="emi"]
+        span "Find the EMI"
+      label.emi-mode__option
+        input [name="emi-mode" type="radio" value="tenure"]
+        span "Find the tenure"
+      label.emi-mode__option
+        input [name="emi-mode" type="radio" value="rate"]
+        span "Find the rate"
+    span#emi-mode-hint.calculator-form__help "Find the EMI: I know the loan. Find the tenure: I know the EMI I can pay. Find the rate: I…"
   div.calculator-form__grid
-    div.calculator-form__group
-      label.calculator-form__label [for="emi-loan"] "Loan Amount"
-      div.calculator-form__field.calculator-form__field--unit
-        input#emi-loan.calculator-form__input [aria-describedby="emi-loan-hint" max="100000000" min="1000" required step="1000" type="number" value="1000000"]
-        span.calculator-form__unit "₹"
-      span#emi-loan-hint.calculator-form__help "Enter the total loan amount."
-    div.calculator-form__group
-      label.calculator-form__label [for="emi-rate"] "Interest Rate"
-      div.calculator-form__field.calculator-form__field--unit
-        input#emi-rate.calculator-form__input [aria-describedby="emi-rate-hint" max="30" min="1" required step="0.01" type="number" value="8.5"]
-        span.calculator-form__unit "%"
-      span#emi-rate-hint.calculator-form__help "Enter the annual interest rate."
-    div.calculator-form__group
-      label.calculator-form__label [for="emi-years"] "Loan Tenure"
-      div.calculator-form__field.calculator-form__field--unit
-        input#emi-years.calculator-form__input [aria-describedby="emi-years-hint" max="40" min="1" required step="1" type="number" value="20"]
-        span.calculator-form__unit "Years"
-      span#emi-years-hint.calculator-form__help "Enter the repayment period."
+    div.emi-field [data-modes="emi tenure rate"]
+      div.calculator-form__group
+        label.calculator-form__label [for="emi-loan"] "Loan Amount"
+        div.calculator-form__field.calculator-form__field--unit
+          input#emi-loan.calculator-form__input [aria-describedby="emi-loan-hint" max="100000000" min="1000" required step="any" type="number" value="1000000"]
+          span.calculator-form__unit "₹"
+        span#emi-loan-hint.calculator-form__help "Enter the total loan amount."
+    div.emi-field [data-modes="emi tenure"]
+      div.calculator-form__group
+        label.calculator-form__label [for="emi-rate"] "Interest Rate"
+        div.calculator-form__field.calculator-form__field--unit
+          input#emi-rate.calculator-form__input [aria-describedby="emi-rate-hint" max="30" min="0" required step="0.01" type="number" value="8.5"]
+          span.calculator-form__unit "%"
+        span#emi-rate-hint.calculator-form__help "Enter the annual interest rate."
+    div.emi-field [data-modes="emi rate"]
+      div.calculator-form__group
+        label.calculator-form__label [for="emi-years"] "Loan Tenure"
+        div.calculator-form__field.calculator-form__field--unit
+          input#emi-years.calculator-form__input [aria-describedby="emi-years-hint" max="40" min="1" required step="any" type="number" value="20"]
+          span.calculator-form__unit "Years"
+        span#emi-years-hint.calculator-form__help "Enter the repayment period."
+    div.emi-field [data-modes="tenure rate"]
+      div.calculator-form__group
+        label.calculator-form__label [for="emi-payment"] "Monthly EMI"
+        div.calculator-form__field.calculator-form__field--unit
+          input#emi-payment.calculator-form__input [aria-describedby="emi-payment-hint" max="100000000" min="1" required step="any" type="number" value="10000"]
+          span.calculator-form__unit "₹"
+        span#emi-payment-hint.calculator-form__help "The fixed amount you pay every month."
+  div.emi-start [aria-labelledby="emi-start-label" role="group"]
+    span#emi-start-label.calculator-form__label "Try a starting value"
+    div.emi-start__buttons
+      button.calculator-form__button.calculator-form__button--secondary.emi-start__button [data-start="0" type="button"] "Home loan"
+      button.calculator-form__button.calculator-form__button--secondary.emi-start__button [data-start="1" type="button"] "Personal loan"
+      button.calculator-form__button.calculator-form__button--secondary.emi-start__button [data-start="2" type="button"] "Car loan"
+      button.calculator-form__button.calculator-form__button--secondary.emi-start__button [data-start="3" type="button"] "Education loan"
+    span.calculator-form__help "These set only the loan amount and the tenure, as examples. Your lender's rate and fees de…"
   div.calculator-form__actions
-    button.calculator-form__button [type="submit"] "Calculate EMI"
     button#emi-reset.calculator-form__button.calculator-form__button--secondary [type="button"] "Reset"
 --- match 2 of 2 ---
-section#emi-results.calculator-results [aria-live="polite"]
+section#emi-results.calculator-results
   div.calculator-results__card
     div.calculator-results__header
       span.calculator-results__eyebrow "Your Result"
@@ -41,8 +71,140 @@ section#emi-results.calculator-results [aria-live="polite"]
       div.calculator-results__item
         span.calculator-results__label "Loan Tenure"
         strong.calculator-results__value "20 years"
+      div.calculator-results__item
+        span.calculator-results__label "Principal share of repayment"
+        strong.calculator-results__value "48%"
     div.calculator-results__summary "For a loan of at annual interest for , your estimated monthly EMI is ."
       strong "₹10,00,000"
       strong "8.5%"
       strong "20 years"
       strong "₹8,678"
+    p.emi-assumption "This is an estimate. It assumes a fixed rate on a reducing balance, with each payment made…"
+    div.emi-actions
+      button#emi-copy.calculator-form__button.calculator-form__button--secondary [type="button"] "Copy summary"
+      span#emi-copy-note.emi-copy-note
+    p.emi-next "Next: or ."
+      a [href="{ROOT}calculators/prepayment/"] "see what a part-payment would save"
+      a [href="{ROOT}calculators/loan-comparison/"] "compare two loans"
+    section.emi-schedule [aria-labelledby="emi-schedule-title"]
+      h3#emi-schedule-title "Repayment schedule"
+      div.calculator-results__table-wrapper [aria-label="Yearly repayment summary" role="region"]
+        table.calculator-results__table.emi-table
+          caption "Yearly summary"
+          thead
+            tr
+              th "Year"
+              th "Principal paid"
+              th "Interest paid"
+              th "Balance at year end"
+          tbody
+            tr
+              th "1"
+              td "₹19,902.29"
+              td "₹84,236.50"
+              td "₹9,80,097.71"
+            tr
+              th "2"
+              td "₹21,661.47"
+              td "₹82,477.31"
+              td "₹9,58,436.23"
+            tr
+              th "3"
+              td "₹23,576.15"
+              td "₹80,562.64"
+              td "₹9,34,860.08"
+            tr
+              th "4"
+              td "₹25,660.07"
+              td "₹78,478.72"
+              td "₹9,09,200.02"
+            tr
+              th "5"
+              td "₹27,928.18"
+              td "₹76,210.60"
+              td "₹8,81,271.83"
+            tr
+              th "6"
+              td "₹30,396.78"
+              td "₹73,742.01"
+              td "₹8,50,875.05"
+            tr
+              th "7"
+              td "₹33,083.58"
+              td "₹71,055.21"
+              td "₹8,17,791.47"
+            tr
+              th "8"
+              td "₹36,007.87"
+              td "₹68,130.92"
+              td "₹7,81,783.60"
+            tr
+              th "9"
+              td "₹39,190.64"
+              td "₹64,948.15"
+              td "₹7,42,592.96"
+            tr
+              th "10"
+              td "₹42,654.73"
+              td "₹61,484.05"
+              td "₹6,99,938.23"
+            tr
+              th "11"
+              td "₹46,425.02"
+              td "₹57,713.76"
+              td "₹6,53,513.20"
+            tr
+              th "12"
+              td "₹50,528.57"
+              td "₹53,610.21"
+              td "₹6,02,984.63"
+            tr
+              th "13"
+              td "₹54,994.84"
+              td "₹49,143.95"
+              td "₹5,47,989.79"
+            tr
+              th "14"
+              td "₹59,855.88"
+              td "₹44,282.90"
+              td "₹4,88,133.91"
+            tr
+              th "15"
+              td "₹65,146.60"
+              td "₹38,992.19"
+              td "₹4,22,987.31"
+            tr
+              th "16"
+              td "₹70,904.97"
+              td "₹33,233.82"
+              td "₹3,52,082.34"
+            tr
+              th "17"
+              td "₹77,172.32"
+              td "₹26,966.47"
+              td "₹2,74,910.02"
+            tr
+              th "18"
+              td "₹83,993.65"
+              td "₹20,145.14"
+              td "₹1,90,916.37"
+            tr
+              th "19"
+              td "₹91,417.93"
+              td "₹12,720.86"
+              td "₹99,498.44"
+            tr
+              th "20"
+              td "₹99,498.44"
+              td "₹4,640.35"
+              td "₹0.00"
+          tfoot
+            tr
+              th "Total"
+              td "₹10,00,000.00"
+              td "₹10,82,775.76"
+              td
+      details#emi-monthly.emi-monthly
+        summary "Monthly schedule (240 payments)"
+        div#emi-monthly-body
+      p.emi-note "Rows are rounded to the paisa for display. Totals are added from the unrounded amounts, so…"

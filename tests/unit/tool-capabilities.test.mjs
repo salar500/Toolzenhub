@@ -22,7 +22,7 @@ const EXPECTED_KEYS = [
   "savedState", "urlState", "unitSelection", "multipleInputs", "validation", "explanation", "examples",
   "schedule", "realtime", "timer", "localProcessing",
 ];
-const EMI_TRUE = ["explanation", "localProcessing", "multipleInputs", "reset", "validation"];
+const EMI_TRUE = ["copy", "examples", "explanation", "localProcessing", "multipleInputs", "presets", "realtime", "reset", "table", "validation"]; // Calculators 2.0 pack 45: live results, a schedule and starting values
 const LOAN_COMPARISON_TRUE = [
   "compare", "download", "examples", "explanation", "localProcessing", "modal", "multipleInputs",
   "realtime", "reset", "schedule", "table", "unitSelection",
@@ -134,10 +134,13 @@ describe("the two real tools", () => {
 
   test("features neither tool has are not claimed", () => {
     for (const id of ["emi", "loan-comparison"]) {
-      for (const key of NOT_BUILT) assert.equal(calcs.getCalculatorById(id).capabilities[key], false, `${id} ${key}`);
+      for (const key of NOT_BUILT) {
+        if (id === "emi" && ["copy", "presets"].includes(key)) continue; // EMI 2.0 has a copy summary and starting values
+        assert.equal(calcs.getCalculatorById(id).capabilities[key], false, `${id} ${key}`);
+      }
     }
     assert.equal(calcs.getCalculatorById("emi").capabilities.compare, false);
-    assert.equal(calcs.getCalculatorById("emi").capabilities.realtime, false); // EMI needs its Calculate button
+    assert.equal(calcs.getCalculatorById("emi").capabilities.realtime, true); // EMI 2.0 has no Calculate button
   });
 });
 

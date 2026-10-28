@@ -9,7 +9,7 @@ import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.m
 
 const TOOLS = [
   // page, primary button (or null), secondary button, ready selector
-  ["calculators/emi/", "button[type=submit].calculator-form__button", "#emi-reset", "#emi-results .calculator-results__value"],
+  ["calculators/emi/", null, "#emi-reset", "#emi-results .calculator-results__value"],
   ["calculators/loan-comparison/", null, "#reset-loans", "#comparison-result"],
   ["calculators/prepayment/", null, "#prepay-reset", "#prepay-results .calculator-results__value"],
   ["calculators/balance-transfer/", null, "#bt-reset", "#bt-results .calculator-results__value"],

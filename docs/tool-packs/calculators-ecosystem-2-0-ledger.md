@@ -18,7 +18,7 @@ Base commit: `6450f8f`. Owner scope: the approved Balanced option (Option B). Do
 | Pack | Status | Commit |
 |---|---|---|
 | 46 Loan Comparison tidy and PDF repair | IMPLEMENTED (see below) | see git log |
-| 45 EMI 2.0 | NOT_STARTED | |
+| 45 EMI 2.0 | IMPLEMENTED (see below) | see git log |
 | 47 PPF automatic results | NOT_STARTED | |
 | 48 Inflation view (SIP, SWP) | NOT_STARTED | |
 | 49 XIRR Calculator | NOT_STARTED | |
@@ -40,3 +40,30 @@ Tests added or changed (deliberate):
 - DOM baseline `tests/baselines/dom/loan-comparison-main-subpath-desktop.txt`: one line removed (the button). Diffed against the received outline before accepting.
 
 Known limitations: the font's provenance rests on the recorded SHA-256 and its embedded licence, not on an upstream checksum; the PDF still embeds the whole font (about 0.5 MB base64-expanded in memory at click time, as before).
+
+## Pack 45: EMI Calculator 2.0
+
+Requirements: FR-EMI-001 to FR-EMI-018.
+
+Implemented:
+- `assets/js/calculators/emi/index.js` rewritten around one form: no Calculate button; three modes (Find the EMI / tenure / rate); results appear when the needed fields are valid; empty fields give a prompt; an invalid value is reported when its field is left (not while it has focus), marks only that field, and removes the previous figure; one polite announcement 600 ms after typing stops (separate `#emi-live` status, the results region is no longer a live region); updates never move focus; Reset restores defaults, announces once and focuses the loan field.
+- NEW `assets/js/calculators/formulas/emi-solve.js` (pure): `payoffSchedule` (steps the balance month by month; states payoff / non-amortizing / beyond-horizon at 600 payments), `rateForEmi` (bisection on the monthly rate), `yearlySummary`. `loan.js` is unchanged.
+- Yearly summary table and a monthly table in a closed `<details>` that is built when first opened (and kept open across edits); totals row; a note on rounding. Starting-value buttons (Home, Personal, Car, Education) set only amount and tenure. Copy summary with a selected-text fallback. Plain links to Loan Prepayment and Loan Comparison (no values passed).
+- `assets/css/calculators/emi.css` (new, registered in `src/_data/toolStyles.json`); catalog: seven aliases, `realtime`, `table`, `copy`, `presets`, `examples` capabilities.
+
+Deviations from the requirement text (decided in development, recorded here):
+- FR-EMI-005 asks for two-decimal display. The headline figures keep the whole-rupee display the page always had (existing tests and golden literals depend on it); the schedules show two decimals. The two-decimal EMI is therefore visible only in the schedule.
+- Input limits: the rate may now be 0 (it was 1 in the form attributes, although the engine always handled 0); the loan amount and tenure no longer need to be round (`step="any"`; the old step of 1,000 rejected 12,34,567). Bounds are otherwise the old ones (loan 1,000 to 10,00,00,000; rate up to 30; tenure 1 to 40 years).
+- Mode labels are "Find the EMI / tenure / rate", so they cannot be mistaken for the field labels.
+- A fifth figure, the principal share of repayment, follows the original four.
+
+Verification (all on this machine, one worker):
+- Unit: `tests/unit/emi-solve.test.mjs` 12/12 (literals from `formula-reference-check.py`: 93 payments, last 11,496.54, interest 3,91,496.54; 29 payments; 9.004261%; non-amortizing and beyond-horizon cases; cross-check against `calculateAmortization`).
+- Browser: `tests/browser/emi.spec.js` 19/19 on `subpath-desktop` and 19/19 on `subpath-mobile`; the EMI tests in accessibility, tool-controls and build specs 37/37; DOM baselines for EMI (one updated after diffing; breadcrumb and related-content unchanged).
+- Visual baselines `emi-visual-{desktop,mobile,tablet}.png` replaced after viewing the desktop and mobile images (the page is intentionally different).
+- Pins changed deliberately: `search.test.mjs` (EMI aliases; the query "home" now also finds EMI through "home loan emi", after Home Loan), `tool-capabilities.test.mjs` (EMI capabilities), `shared-ui.test.mjs` (4 number fields, 15 result metrics).
+- Not run: Firefox/WebKit/real devices; the full browser regression; `root-desktop` project for the EMI spec.
+
+Observations:
+- The preview is served over plain http on a non-local host name, where the browser offers no clipboard; the copy test therefore installs a recording stand-in for the success path, and the fallback is the behaviour the browser actually showed.
+- The shared related-article cards on every calculator page load their thumbnails from images.unsplash.com. This predates this work and is outside the calculator code; it is recorded here because the privacy statement of the tools should not be read to cover it. The EMI network test excludes images for that reason.

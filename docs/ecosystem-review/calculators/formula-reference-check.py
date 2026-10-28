@@ -148,3 +148,23 @@ if __name__ == "__main__":
     multi = [(date(2023, 1, 1), -1000), (date(2024, 1, 1), 2300), (date(2024, 12, 31), -1320)]
     print("Two-root flows on days 0, 365, 730: NPV at 10% and 20% (both should be 0.00)")
     print("   NPV@10%:", money(xnpv(D("0.10"), multi)), " NPV@20%:", money(xnpv(D("0.20"), multi)))
+    # Stepped payoff at a fixed EMI (used by FR-EMI-006 golden values; added in Stage 2)
+    def stepped(p, annual, e):
+        r = D(annual) / 1200
+        bal = D(p)
+        n = 0
+        total_int = D(0)
+        while bal > D("1e-30"):
+            n += 1
+            i = bal * r
+            pay = min(D(e), bal + i)
+            total_int += i
+            bal = bal + i - pay
+        return n, pay, total_int
+    n, last, ti = stepped(1_000_000, "9", 15000)
+    print("Stepped payoff 10,00,000 at 9%, EMI 15,000: payments", n, " last payment", money(last), " total interest", money(ti))
+    n, last, ti = stepped(1_200_000, "0", 10000)
+    print("Stepped payoff 12,00,000 at 0%, EMI 10,000: payments", n, " last payment", money(last), " total interest", money(ti))
+    n, last, ti = stepped(500_000, "12", 20000)
+    print("Stepped payoff 5,00,000 at 12%, EMI 20,000: payments", n, " last payment", money(last), " total interest", money(ti))
+    print("EMI 1,20,000 over 12 months at 0%:", money(emi(120000, "0", 12)))

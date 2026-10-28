@@ -123,11 +123,25 @@ const catalog = [
         title: "EMI Calculator",
         description:
             "Calculate your monthly EMI for any loan amount, interest rate and tenure.",
+        aliases: [
+            "personal loan emi",
+            "car loan emi",
+            "education loan emi",
+            "home loan emi",
+            "loan tenure calculator",
+            "emi tenure calculator",
+            "loan amortization schedule"
+        ],
         capabilities: {
             reset: true,
+            table: true,
+            realtime: true,
+            copy: true,
+            presets: true,
             multipleInputs: true,
             validation: true,
             explanation: true,
+            examples: true,
             localProcessing: true
         },
         seo: {

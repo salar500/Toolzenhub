@@ -225,8 +225,8 @@ describe("independence and honesty", () => {
 
   test("EMI uses the shared field and result primitives instead of repeating their markup", () => {
     const emi = read("assets/js/calculators/emi/index.js");
-    assert.equal((emi.match(/numberField\(/g) || []).length, 3);
-    assert.equal((emi.match(/resultMetric\(/g) || []).length, 4);
+    assert.equal((emi.match(/numberField\(/g) || []).length, 4); // loan, rate, tenure and (Calculators 2.0) the monthly EMI
+    assert.equal((emi.match(/resultMetric\(/g) || []).length, 15); // five figures in each of the three modes (EMI, tenure, rate)
     for (const gone of ['class="calculator-form__group"', 'class="calculator-results__item', 'class="calculator-results__empty"', 'class="calculator-results__error"']) assert.ok(!emi.includes(gone), `${gone} still hand-written in EMI`);
   });
 

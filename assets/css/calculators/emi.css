@@ -1,0 +1,238 @@
+/* =========================================================
+   ToolZen Hub
+   EMI Calculator
+
+   Only what the shared calculator styles do not already provide:
+   the "what do you want to find" choice, the starting-value
+   buttons, the schedule and the copy control. Loaded after
+   calculator-responsive.css.
+========================================================= */
+
+
+/* a field that the chosen mode does not need is hidden; the rest sit in the shared grid */
+.emi-field {
+    display: contents;
+}
+
+.emi-field[hidden] {
+    display: none;
+}
+
+
+/* =========================================================
+   MODE
+   Three radio buttons drawn as large segments. The selected one
+   has a tick and a heavier border as well as a colour.
+========================================================= */
+
+.emi-mode {
+    min-width: 0;
+    margin: 0 0 20px;
+    padding: 0;
+    border: 0;
+}
+
+.emi-mode legend {
+    padding: 0;
+}
+
+.emi-mode__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 6px 0 8px;
+}
+
+.emi-mode__option {
+    position: relative;
+    display: inline-flex;
+    flex: 1 1 140px;
+    cursor: pointer;
+}
+
+.emi-mode__option input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+}
+
+.emi-mode__option span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 44px;
+    padding: 8px 14px;
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+    background: var(--color-white);
+    color: #344054;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: center;
+    transition:
+        background .2s ease,
+        border-color .2s ease;
+}
+
+.emi-mode__option:hover span {
+    background: #f2f4f7;
+}
+
+.emi-mode__option input:checked + span {
+    border: 2px solid var(--color-brand-green);
+    background: #ecfdf3;
+    color: var(--color-ink);
+    font-weight: 750;
+}
+
+.emi-mode__option input:checked + span::before {
+    content: "✓";
+    content: "✓" / "";
+    font-weight: 800;
+}
+
+.emi-mode__option input:focus-visible + span {
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   STARTING VALUES
+========================================================= */
+
+.emi-start {
+    margin-top: 20px;
+}
+
+.emi-start__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 6px 0 8px;
+}
+
+.emi-start__button {
+    min-height: 44px;
+}
+
+
+/* =========================================================
+   RESULT EXTRAS
+========================================================= */
+
+.emi-assumption,
+.emi-note {
+    margin: 12px 0 0;
+    color: var(--color-ink-muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.emi-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.emi-copy-note {
+    color: var(--color-ink-muted);
+    font-size: 13px;
+}
+
+.emi-copy-fallback {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+}
+
+.emi-next {
+    margin: 12px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SCHEDULE
+========================================================= */
+
+.emi-schedule {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-slate-200);
+}
+
+.emi-schedule h3 {
+    margin: 0 0 12px;
+    color: var(--color-ink);
+    font-size: 16px;
+    font-weight: 750;
+}
+
+.emi-table caption {
+    padding: 0 0 8px;
+    color: var(--color-ink-muted);
+    font-size: 13px;
+    text-align: left;
+}
+
+.emi-table th[scope="row"] {
+    font-weight: 600;
+}
+
+.emi-table tfoot th,
+.emi-table tfoot td {
+    font-weight: 700;
+}
+
+.emi-monthly {
+    margin-top: 16px;
+}
+
+.emi-monthly summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: var(--color-ink);
+    font-weight: 650;
+}
+
+.emi-monthly summary:focus-visible {
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+}
+
+
+/* on a phone a text field is at least 16px, so the browser does not zoom the page when it is focused */
+@media (max-width: 480px) {
+    #emi-form .calculator-form__input {
+        font-size: 16px;
+    }
+}
+
+
+/* =========================================================
+   TEXT FOR SCREEN READERS ONLY
+========================================================= */
+
+.emi-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
