@@ -558,6 +558,13 @@
       "state": "active"
     },
     {
+      "id": "smart-flashcards",
+      "module": "assets/js/tools/smart-flashcards/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "split-pdf",
       "module": "assets/js/tools/split-pdf/index.js",
       "moduleChanges": [],

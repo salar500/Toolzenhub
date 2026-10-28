@@ -1833,6 +1833,41 @@ const catalog = [
 
 
     {
+        id: "smart-flashcards",
+        status: "published",
+        loader: () =>
+            import("../tools/smart-flashcards/index.js"),
+        sectionId: "developer-tools",
+        icon: "🗂",
+        title: "Smart Flashcards",
+        description:
+            "Revise JSON, HTTP and APIs, and software testing with short original flashcards. Think of the answer, check it and read why. Revision dates are saved only if you turn saving on. It runs in your browser: nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: ["json-formatter", "jsonpath-tester"],
+        aliases: [
+            "flashcards",
+            "study flashcards",
+            "revision cards",
+            "spaced repetition flashcards",
+            "json flashcards",
+            "http flashcards",
+            "software testing flashcards"
+        ],
+        capabilities: {
+            download: true,
+            explanation: true,
+            localProcessing: true,
+            modal: true
+        },
+        seo: {
+            title:
+                "Smart Flashcards: JSON, HTTP and Software Testing Revision Cards | ToolZen Hub",
+            description:
+                "Revise JSON, HTTP and APIs, and software testing with short original flashcards that explain every answer. Progress is saved only if you choose. It runs in your browser: nothing is uploaded."
+        }
+    },
+
+    {
         id: "list-comparer",
         status: "published",
         loader: () =>

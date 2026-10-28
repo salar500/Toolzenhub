@@ -17,7 +17,8 @@ const RELATED = {
   "jsonpath-tester": ["json-formatter", "json-compare"],
   "list-comparer": ["text-diff", "json-compare"],
   "uuid-generator": ["base64-encoder-decoder", "jwt-decoder"],
-  "json-csv-converter": ["json-formatter", "json-compare"]
+  "json-csv-converter": ["json-formatter", "json-compare"],
+  "smart-flashcards": ["json-formatter", "jsonpath-tester"]
 };
 
 // the route of the Cron Explainer is its own slug in the catalog

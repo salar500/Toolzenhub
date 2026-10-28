@@ -1,0 +1,713 @@
+/* =========================================================
+   ToolZen Hub
+   Learning tools: Smart Flashcards and the four Practice Labs
+
+   Only what the shared tool styles do not already provide: the
+   study card, the lab workspace, the answer options, the feedback
+   panels and the progress panel. Buttons, headings and the page
+   frame come from the shared layer. Loaded after
+   calculator-responsive.css. Colours are the shared tokens.
+
+   Right, wrong, due and done are always told in words, never by
+   colour alone. Nothing animates.
+
+   Everything that came from content or from the visitor wraps
+   (overflow-wrap: anywhere), so a long value never widens the page.
+   Code scrolls inside its own box. One column on a phone; two from
+   900px where it helps.
+========================================================= */
+
+.lx-app [hidden] {
+
+    display: none !important;
+
+}
+
+.lx-app {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+
+    min-width: 0;
+
+}
+
+.lx-title {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-size: 22px;
+    line-height: 1.3;
+
+    overflow-wrap: anywhere;
+
+}
+
+.lx-title:focus-visible,
+.lx-prompt:focus-visible {
+
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+
+}
+
+.lx-meta {
+
+    margin: 0;
+
+    color: var(--color-ink-muted);
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+
+}
+
+.lx-note {
+
+    margin: 0;
+    padding: 10px 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-left-width: 6px;
+    border-radius: 10px;
+
+    background: var(--color-gray-50);
+
+    color: var(--color-gray-700);
+
+    font-size: 15px;
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+
+}
+
+.lx-sr-only {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+
+}
+
+
+/* ---------- decks ---------- */
+
+.lx-decks {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+}
+
+.lx-deck {
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    padding: 16px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: var(--bg-card);
+
+}
+
+.lx-deck h3 {
+
+    margin: 0;
+
+    font-size: 18px;
+
+}
+
+
+/* ---------- forms ---------- */
+
+.lx-fieldset {
+
+    min-width: 0;
+    margin: 0;
+    padding: 12px 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 12px;
+
+}
+
+.lx-fieldset legend {
+
+    padding: 0 6px;
+
+    color: var(--color-ink);
+
+    font-weight: 600;
+
+}
+
+.lx-check,
+.lx-option {
+
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    min-height: 44px;
+    padding: 6px 0;
+
+}
+
+.lx-check input,
+.lx-option input {
+
+    flex: 0 0 auto;
+
+    width: 22px;
+    height: 22px;
+    margin: 10px 0 0;
+
+}
+
+.lx-check label,
+.lx-option label {
+
+    flex: 1 1 auto;
+
+    min-width: 0;
+    padding: 10px 0;
+
+    color: var(--color-ink);
+
+    font-size: 16px;
+    line-height: 1.45;
+
+    overflow-wrap: anywhere;
+
+}
+
+.lx-check input:focus-visible,
+.lx-option input:focus-visible {
+
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+
+}
+
+.lx-actions {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+}
+
+.lx-btn {
+
+    min-height: 44px;
+
+}
+
+.lx-btn[disabled] {
+
+    cursor: not-allowed;
+
+}
+
+.lx-btn:focus-visible {
+
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+
+}
+
+@media (max-width: 480px) {
+
+    .lx-actions .lx-btn {
+
+        flex: 1 1 100%;
+
+    }
+
+}
+
+.lx-input,
+.lx-textarea {
+
+    box-sizing: border-box;
+
+    width: 100%;
+    min-width: 0;
+    padding: 10px 12px;
+
+    border: 1px solid var(--color-gray-300);
+    border-radius: 10px;
+
+    background: var(--color-white);
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 16px;
+    line-height: 1.5;
+
+}
+
+.lx-textarea {
+
+    min-height: 180px;
+
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 16px;
+
+    resize: vertical;
+
+    tab-size: 2;
+
+}
+
+.lx-input {
+
+    min-height: 44px;
+
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+}
+
+.lx-input:focus-visible,
+.lx-textarea:focus-visible {
+
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+
+}
+
+.lx-input[aria-invalid="true"],
+.lx-textarea[aria-invalid="true"] {
+
+    border-color: var(--color-danger);
+
+}
+
+.lx-label {
+
+    display: block;
+    margin-bottom: 6px;
+
+    color: var(--color-ink);
+
+    font-weight: 600;
+
+}
+
+.lx-field-head {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 6px 12px;
+
+}
+
+.lx-select {
+
+    box-sizing: border-box;
+
+    max-width: 100%;
+    min-height: 44px;
+    padding: 8px 10px;
+
+    border: 1px solid var(--color-gray-300);
+    border-radius: 10px;
+
+    background: var(--color-white);
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 16px;
+
+}
+
+
+/* ---------- the study card and the lab exercise ---------- */
+
+.lx-progress {
+
+    margin: 0;
+
+    color: var(--color-ink-muted);
+
+    font-size: 14px;
+
+}
+
+.lx-card {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+
+    min-width: 0;
+    padding: 18px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: var(--bg-card);
+
+}
+
+.lx-prompt {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-size: 20px;
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+
+}
+
+.lx-code {
+
+    box-sizing: border-box;
+
+    max-width: 100%;
+    margin: 0;
+    padding: 12px 14px;
+
+    overflow: auto;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 10px;
+
+    background: var(--color-gray-50);
+
+    color: var(--color-ink);
+
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.55;
+
+    white-space: pre;
+
+}
+
+.lx-code:focus-visible {
+
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+
+}
+
+.lx-answer,
+.lx-explanation,
+.lx-feedback {
+
+    padding: 12px 14px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 10px;
+
+    background: var(--color-gray-50);
+
+    overflow-wrap: anywhere;
+
+}
+
+.lx-answer h3,
+.lx-explanation h3,
+.lx-feedback h3 {
+
+    margin: 0 0 6px;
+
+    font-size: 16px;
+
+}
+
+.lx-answer p,
+.lx-explanation p,
+.lx-feedback p {
+
+    margin: 0 0 8px;
+
+}
+
+.lx-feedback ul {
+
+    margin: 0 0 8px;
+    padding-left: 22px;
+
+}
+
+.lx-feedback[data-verdict="correct"] {
+
+    border-left: 6px solid var(--color-success);
+
+}
+
+.lx-feedback[data-verdict="not-yet"] {
+
+    border-left: 6px solid var(--color-warning);
+
+}
+
+.lx-feedback[data-verdict="cannot-check"],
+.lx-feedback[data-verdict="error"] {
+
+    border-left: 6px solid var(--color-danger);
+
+}
+
+.lx-result {
+
+    margin: 0;
+
+    color: var(--color-ink);
+
+    font-weight: 600;
+
+    overflow-wrap: anywhere;
+
+}
+
+.lx-list {
+
+    margin: 0;
+    padding-left: 22px;
+
+}
+
+.lx-stale {
+
+    margin: 0;
+
+    color: var(--color-ink-muted);
+
+    font-size: 14px;
+
+}
+
+.lx-doc {
+
+    max-height: 320px;
+
+}
+
+.lx-two {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+
+}
+
+@media (min-width: 900px) {
+
+    .lx-decks {
+
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    }
+
+    .lx-two {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    }
+
+}
+
+.lx-tag {
+
+    display: inline-block;
+
+    padding: 2px 10px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 999px;
+
+    background: var(--color-gray-50);
+
+    color: var(--color-gray-700);
+
+    font-size: 13px;
+
+}
+
+.lx-exlist {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+}
+
+.lx-exbtn {
+
+    min-width: 44px;
+    min-height: 44px;
+    padding: 6px 12px;
+
+    border: 1px solid var(--color-gray-300);
+    border-radius: 10px;
+
+    background: var(--color-white);
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 15px;
+
+    cursor: pointer;
+
+}
+
+.lx-exbtn[aria-current="true"] {
+
+    border-width: 2px;
+    border-color: var(--color-primary);
+
+    font-weight: 700;
+
+}
+
+.lx-exbtn:focus-visible {
+
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+
+}
+
+.lx-table-wrap {
+
+    max-width: 100%;
+    overflow-x: auto;
+
+}
+
+.lx-table {
+
+    border-collapse: collapse;
+
+    font-size: 14px;
+
+}
+
+.lx-table th,
+.lx-table td {
+
+    padding: 6px 10px;
+
+    border: 1px solid var(--color-slate-200);
+
+    text-align: left;
+
+}
+
+
+/* ---------- the progress panel and its dialog ---------- */
+
+.lx-progress-panel {
+
+    display: grid;
+    gap: 10px;
+
+    padding: 16px;
+
+    border: 1px solid var(--color-slate-200);
+    border-radius: 14px;
+
+    background: var(--color-white);
+
+}
+
+.lx-progress-panel h2 {
+
+    margin: 0;
+
+    font-size: 18px;
+
+}
+
+.lx-backdrop {
+
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: grid;
+    place-items: center;
+
+    padding: 16px;
+
+    background: rgba(16, 24, 40, 0.55);
+
+}
+
+.lx-dialog {
+
+    box-sizing: border-box;
+
+    width: min(440px, 100%);
+    max-height: 100%;
+    overflow: auto;
+    padding: 20px;
+
+    border-radius: 14px;
+
+    background: var(--color-white);
+
+}
+
+.lx-dialog h2 {
+
+    margin: 0 0 8px;
+
+    font-size: 18px;
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .lx-app *,
+    .lx-backdrop * {
+
+        transition: none !important;
+        animation: none !important;
+
+    }
+
+}
