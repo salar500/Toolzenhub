@@ -20,7 +20,7 @@ Base commit: `df4dd66`. Owner scope: Option B, with the conditions recorded in d
 | Pack | Research name | Status | Commit |
 |---|---|---|---|
 | 51 Smart Flashcards core, JSON deck, scheduler, opt-in progress | LP-1 | IMPLEMENTED (see below) | see git log |
-| 52 HTTP and APIs deck, Software testing deck | LP-2 | NOT_STARTED | |
+| 52 HTTP and APIs deck, Software testing deck | LP-2 | IMPLEMENTED (see below) | see git log |
 | 53 Lab shell and JSON Error-Fixing Lab | LP-3 | NOT_STARTED | |
 | 54 JSONPath and Cron Challenge Labs | LP-4 | NOT_STARTED | |
 | 55 Test Design Lab | LP-5 | NOT_STARTED | |
@@ -52,3 +52,26 @@ Defects found and fixed in this pack:
 - A test helper assumed topic boxes keep their identity across redraws; the helper looks each one up again.
 
 Known limits: the deck has had one reviewer (the author); the review record says so. Arrow-key navigation is implemented but has no dedicated browser test yet (to be added at the checkpoint). Only system Chrome was used; no screen reader was used.
+
+## Pack 52: HTTP and APIs deck, Software Testing deck
+
+Requirements: FR-FC-027 to FR-FC-040 (the two further decks), FR-INT-003. No second page: the decks reuse the pack 51 engine, scheduler and progress store unchanged.
+
+Implemented:
+- `decks/http-apis.js`: 28 original cards over 5 topics (methods, status codes, headers and bodies, caching, API practice), sourced to RFC 9110, RFC 9111, RFC 5789 and RFC 6585.
+- `decks/software-testing.js`: 29 original cards over 5 topics (basic terms, levels and types, test design, defects and reports, practice and judgement), sourced to the ISTQB Glossary and ISO/IEC/IEEE 29119 and described as common usage; every boundary card states its own domain, inclusivity and (for decimals) step size.
+- Both are registered in the `DECKS` manifest (card counts 28 and 29). Saved progress now covers 87 cards across three decks; imports for the new deck ids are validated against their card ids.
+
+Content counts (honest): planned target for the three decks was about 90 cards in the research package; authored and validated 87 (30 + 28 + 29); published locally 87; deferred 0. The count is a target, not a quota (doc 18).
+
+Tests added or changed (deliberate):
+- `tests/unit/flashcards-content.test.mjs`: 52 pass (was 42). New independent checks: every "NNN Name" on an HTTP card against a status table written by hand from the RFCs; method properties; the boundary and partition cards are checked against a brute-force scan of a number line (finds where validity changes and reads the boundaries off, a different method from the two-value and three-value rules the cards state); decision table size.
+- `tests/browser/smart-flashcards.spec.js`: 20 of 20 on subpath-desktop (two new tests study a whole pass through each new deck and check a plain summary with no percentage).
+
+Defects found and fixed in this pack:
+- All 19 HTTP choice cards first had the correct answer in position 1, and 17 of 20 testing cards had it as the single longest option. Positions were rotated and options rebalanced; the existing tell checks (position spread, longest-option share at or below 60 percent) cover both decks.
+- One card said POST and PATCH are "not guaranteed" to be idempotent, tripping the banned-word check; reworded to "not defined as idempotent".
+- 401 card said the server "should" send WWW-Authenticate; the RFC says it must, so the wording now states what the response carries.
+- A test regex lost its word-boundary escapes when written (control characters in the file); restored.
+
+Known limits: one reviewer (the author) for both decks, recorded in each deck's review record. HTTP card text describes RFC 9110 semantics; individual APIs may differ and the cards say so where it matters.

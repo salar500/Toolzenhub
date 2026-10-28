@@ -51,6 +51,8 @@ test.describe("Smart Flashcards", () => {
     expect(labels).toEqual(["Home", "Developer Tools", "Smart Flashcards"]);
     await expect(page.getByRole("heading", { name: "Choose a deck" })).toBeVisible();
     await expect(page.getByText("30 cards")).toBeVisible();
+    await expect(page.getByText("28 cards")).toBeVisible();
+    await expect(page.getByText("29 cards")).toBeVisible();
     await expect(page.getByLabel("Save my progress on this device")).not.toBeChecked();
     await expect(page.getByText("Saving is off. Nothing is stored.")).toBeVisible();
     expectClean(watch);
@@ -307,4 +309,27 @@ test.describe("Smart Flashcards", () => {
       expect(box.width).toBeGreaterThanOrEqual(20);
     }
   });
+  for (const [name, heading, cards] of [["HTTP and APIs", "HTTP and APIs deck", 28], ["Software Testing", "Software Testing deck", 29]]) {
+    test(`${name} deck: opens, studies a pass of ${cards} cards with a plain summary, keeping to its own deck`, async ({ page, go, watch }) => {
+      await open(page, go);
+      await btn(page, `Choose ${name}`).click();
+      await expect(page.getByRole("heading", { name: heading })).toBeFocused();
+      await page.getByRole("button", { name: /^Start session/ }).click();
+      for (let i = 0; i < cards; i += 1) {
+        await expect(page.locator(".lx-prompt")).toBeVisible();
+        if (await page.getByRole("radio").count()) {
+          await page.getByRole("radio").first().check();
+          await page.getByRole("button", { name: "Check answer" }).click();
+        } else {
+          await page.getByRole("button", { name: /^Show answer/ }).click();
+          await page.getByRole("button", { name: /I knew it/ }).click();
+        }
+        const next = page.getByRole("button", { name: /^(Next card|See summary)/ });
+        await next.click();
+      }
+      await expect(page.getByRole("heading", { name: "Session complete" })).toBeVisible();
+      expect(await page.locator("#lx-app").innerText()).not.toMatch(/\d+\s?%/);
+      expectClean(watch);
+    });
+  }
 });

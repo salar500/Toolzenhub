@@ -240,3 +240,115 @@ describe("JSON deck: the claims the cards make", () => {
     });
 
 });
+
+describe("HTTP and APIs deck: the claims the cards make", () => {
+
+    /* status names written by hand from RFC 9110 and RFC 6585, not read from the cards or from Node */
+    const NAMES = {
+        200: "OK", 201: "Created", 202: "Accepted", 204: "No Content", 205: "Reset Content", 301: "Moved Permanently",
+        302: "Found", 304: "Not Modified", 307: "Temporary Redirect", 308: "Permanent Redirect", 400: "Bad Request",
+        401: "Unauthorized", 403: "Forbidden", 404: "Not Found", 406: "Not Acceptable", 408: "Request Timeout",
+        410: "Gone", 412: "Precondition Failed", 415: "Unsupported Media Type", 422: "Unprocessable Content",
+        429: "Too Many Requests", 500: "Internal Server Error", 503: "Service Unavailable", 507: "Insufficient Storage"
+    };
+
+    it("every 'NNN Name' written on a card is a real status with the right name", () => {
+        const seen = new Set();
+        for (const c of decks["http-apis"].cards) {
+            const text = [c.prompt, c.answer, c.explanation, ...(c.options ?? [])].join(" | ");
+            for (const m of text.matchAll(/\b([1-5]\d\d) ((?:[A-Z][a-z]+)(?: [A-Z][a-z]+)*)/g)) {
+                const code = Number(m[1]);
+                assert.ok(NAMES[code], `${c.id}: unknown status ${code}`);
+                assert.ok(m[2] === NAMES[code] || NAMES[code].startsWith(m[2]) || m[2].startsWith(NAMES[code]), `${c.id}: ${code} is called ${m[2]}, expected ${NAMES[code]}`);
+                seen.add(code);
+            }
+        }
+        assert.ok(seen.size >= 12);
+    });
+
+    it("the cards state the method properties the RFC gives (safe, idempotent)", () => {
+        const SAFE = ["GET", "HEAD", "OPTIONS", "TRACE"], IDEMPOTENT = ["PUT", "DELETE", ...SAFE], NOT_IDEMPOTENT = ["POST", "PATCH"];
+        const safe = decks["http-apis"].cards.find((c) => c.id === "http-safe-methods").answer;
+        for (const m of ["GET", "HEAD"]) assert.match(safe, new RegExp(m));
+        const idem = decks["http-apis"].cards.find((c) => c.id === "http-idempotent-methods").answer;
+        for (const m of IDEMPOTENT.filter((x) => !["OPTIONS", "TRACE"].includes(x))) assert.match(idem, new RegExp(m));
+        for (const m of NOT_IDEMPOTENT) assert.match(idem, new RegExp(m));
+    });
+
+    it("the permanent-redirect card does not call a temporary code permanent", () => {
+        const c = decks["http-apis"].cards.find((x) => x.id === "http-redirect-permanent");
+        assert.match(c.options[c.correct], /^301 Moved Permanently/);
+    });
+
+    it("the right option of each status choice card names a code of the stated class", () => {
+        const classes = { "http-404-missing": 4, "http-201-created": 2, "http-204-no-content": 2, "http-401-vs-403": 4, "http-500-vs-400": 5, "http-429-rate-limit": 4, "http-503-unavailable": 5, "http-redirect-permanent": 3 };
+        for (const [id, cls] of Object.entries(classes)) {
+            const c = decks["http-apis"].cards.find((x) => x.id === id);
+            const code = Number(c.options[c.correct].match(/\b([1-5]\d\d)\b/)[1]);
+            assert.equal(Math.floor(code / 100), cls, id);
+        }
+    });
+
+});
+
+describe("Software Testing deck: the boundary and partition cards", () => {
+
+    /* An independent oracle: scan a whole number line, find where validity changes, and read the boundary values off the scan. */
+    const scan = (valid, lo = -50, hi = 700) => {
+        const edges = [];
+        for (let x = lo; x < hi; x += 1) if (valid(x) !== valid(x + 1)) edges.push(valid(x) ? [x, x + 1] : [x + 1, x]); // [valid side, invalid side]
+        return edges;
+    };
+    const twoValue = (valid) => scan(valid).flatMap(([v, i]) => [v, i]).sort((a, b) => a - b);
+    const threeValue = (valid) => scan(valid).flatMap(([v, i]) => [v, i, v + (i > v ? -1 : 1)]).sort((a, b) => a - b);
+    const optionSet = (text) => text.split(",").map((t) => Number(t.trim()));
+    const card = (id) => decks["software-testing"].cards.find((c) => c.id === id);
+
+    it("age 18 to 65 inclusive: the two-value answer is 17, 18, 65, 66 and nothing else matches", () => {
+        const want = twoValue((x) => x >= 18 && x <= 65);
+        assert.deepEqual(want, [17, 18, 65, 66]);
+        const c = card("st-bva-two-value");
+        const matching = c.options.map((o, i) => [i, optionSet(o)]).filter(([, set]) => JSON.stringify(set) === JSON.stringify(want));
+        assert.deepEqual(matching.map(([i]) => i), [c.correct]);
+    });
+
+    it("age 18 to 65 inclusive: the three-value answer has six values and only the keyed option matches", () => {
+        const want = threeValue((x) => x >= 18 && x <= 65);
+        assert.deepEqual(want, [17, 18, 19, 64, 65, 66]);
+        const c = card("st-bva-three-value");
+        const matching = c.options.map((o, i) => [i, optionSet(o)]).filter(([, set]) => JSON.stringify(set) === JSON.stringify(want));
+        assert.deepEqual(matching.map(([i]) => i), [c.correct]);
+    });
+
+    it("over 100 and at most 500: the two-value answer is 100, 101, 500, 501 and only the keyed option matches", () => {
+        const want = twoValue((x) => x > 100 && x <= 500);
+        assert.deepEqual(want, [100, 101, 500, 501]);
+        const c = card("st-bva-exclusive");
+        const matching = c.options.map((o, i) => [i, optionSet(o)]).filter(([, set]) => JSON.stringify(set) === JSON.stringify(want));
+        assert.deepEqual(matching.map(([i]) => i), [c.correct]);
+    });
+
+    it("weight 0.5 to 20.0 in steps of 0.1: counting in tenths gives 0.4, 0.5, 20.0, 20.1", () => {
+        const tenths = twoValue((t) => t >= 5 && t <= 200).map((t) => (t / 10).toFixed(1));
+        assert.deepEqual(tenths, ["0.4", "0.5", "20.0", "20.1"]);
+        const a = card("st-bva-decimal").answer;
+        for (const v of tenths) assert.ok(a.includes(v), v);
+    });
+
+    it("quantity 1 to 10 has three partitions (below, inside, above), found by scanning", () => {
+        const valid = (x) => x >= 1 && x <= 10;
+        assert.equal(scan(valid).length + 1, 3);
+        const c = card("st-partitions-count");
+        assert.match(c.options[c.correct], /^Three/);
+    });
+
+    it("two yes/no conditions give four decision table columns; three would give eight", () => {
+        let n = 0;
+        for (const a of [false, true]) for (const b of [false, true]) n += 1;
+        assert.equal(n, 4);
+        const c = card("st-decision-table");
+        assert.equal(c.options[c.correct], "4");
+        assert.equal(2 ** 3, 8);
+    });
+
+});
