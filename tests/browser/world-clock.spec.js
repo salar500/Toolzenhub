@@ -1397,10 +1397,10 @@ test.describe("World Clock: the address, the hand-off and privacy", () => {
       const [hi, lo] = [lum(fg), lum(bg === "rgba(0, 0, 0, 0)" ? "rgb(255, 255, 255)" : bg)].sort((x, y) => y - x);
       return { fg, ratio: (hi + 0.05) / (lo + 0.05) };
     });
-    expect(result.fg).toBe("rgb(8, 127, 71)");
+    expect(result.fg).toBe("rgb(28, 25, 23)"); // the action ink
     expect(result.ratio).toBeGreaterThanOrEqual(4.5);
     // the rest of the page's links keep the shared theme colour
-    expect(await page.locator(".calculator-info a").first().evaluate((a) => getComputedStyle(a).color)).toBe("rgb(11, 159, 88)");
+    expect(await page.locator(".calculator-info a").first().evaluate((a) => getComputedStyle(a).color)).toBe("rgb(67, 56, 202)"); // the accent
   });
 });
 

@@ -467,7 +467,7 @@ test.describe("SWP Calculator", () => {
     expect(storage.session).toBe(0);
     expect(storage.cookie).toBe("");
     expect(requests, "no request at all while the calculator is used").toEqual([]);
-    expect(context.__external.filter((u) => !/fonts\.(googleapis|gstatic)\.com|unsplash/.test(String(u)))).toEqual([]);
+    expect(context.__external).toEqual([]);
     expect(await page.evaluate(() => [...document.querySelectorAll("a[href]")].some((a) => /12345678|77777/.test(a.href)))).toBe(false);
   });
 

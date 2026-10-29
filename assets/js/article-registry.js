@@ -68,7 +68,7 @@ export const articleRegistry =
                     article.listingDate,
                 readTime:
                     article.readTime,
-                /* a local card image is resolved against the site root (Unsplash URLs pass through); an article may have none (cardImage: null) and then its card has no image block */
+                /* a local card image is resolved against the site root; an article may have none (cardImage: null) and then its card has no image block */
                 image:
                     article.cardImage
                         ? ROUTES.asset(

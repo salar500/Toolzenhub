@@ -2,8 +2,8 @@
  * DQ1 — shared visual quality of tool pages: buttons, focus and headings are one system (components/buttons.css,
  * base/accessibility.css, calculators/calculator-base.css), so EMI, Loan Comparison and Loan Prepayment must agree.
  *
- * Colours are read from the computed styles and compared with the brand tokens' values (brand green #0b9f58,
- * the accessible action green #087f47, the disabled pair #eaecf0 / #98a2b3) written here as literals.
+ * Colours are read from the computed styles and compared with the tokens' values (accent #4338ca, the action ink
+ * #1c1917, the disabled pair #e7e5e4 / #a8a29e, Design System 2.0) written here as literals.
  */
 import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.mjs";
 
@@ -23,11 +23,11 @@ const TOOLS = [
   ["calculators/percentage/", null, "#percentage-reset", "#percentage-results .calculator-results__value"],
 ];
 
-const BRAND_GREEN = "rgb(11, 159, 88)"; // the brand green: focus ring, section rule (not text inside a control)
-const ACTION_GREEN = "rgb(8, 127, 71)"; // controls: white text on it is 5.08:1
+const BRAND_GREEN = "rgb(67, 56, 202)"; // the accent (indigo, Design System 2.0): focus ring, section rule (not text inside a control)
+const ACTION_GREEN = "rgb(28, 25, 23)"; // the action ink (Design System 2.0): controls; white text on it is 17.49:1
 const WHITE = "rgb(255, 255, 255)";
-const DISABLED_BG = "rgb(234, 236, 240)";
-const DISABLED_TEXT = "rgb(152, 162, 179)";
+const DISABLED_BG = "rgb(231, 229, 228)";
+const DISABLED_TEXT = "rgb(168, 162, 158)";
 
 const style = (locator, props) => locator.evaluate((e, p) => Object.fromEntries(p.map((k) => [k, getComputedStyle(e)[k]])), props);
 

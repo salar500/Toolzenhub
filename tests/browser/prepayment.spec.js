@@ -413,7 +413,7 @@ test.describe("Loan Prepayment Calculator", () => {
     await fill(page, { amount: 123000 });
     const storage = await page.evaluate(() => ({ local: localStorage.length, session: sessionStorage.length, cookie: document.cookie }));
     expect(storage).toEqual({ local: 0, session: 0, cookie: "" });
-    expect(context.__external.filter((u) => !/fonts\.(googleapis|gstatic)\.com|unsplash/.test(String(u)))).toEqual([]);
+    expect(context.__external).toEqual([]);
   });
 
   test("the guide article's call to action now opens this tool", async ({ page, go, siteRoot }) => {

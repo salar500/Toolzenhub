@@ -125,7 +125,8 @@ describe("catalog model", () => {
       assert.equal(a.publishedAt, "Aug 25, 2026");
       assert.equal(a.updatedAt, "Aug 25, 2026");
       assert.match(a.readTime, /^\d min read$/);
-      assert.match(a.cardImage.src, /^https:\/\/images\.unsplash\.com\//);
+      // a local article picture, or none: no card loads an image from another site
+      if (a.cardImage) assert.match(a.cardImage.src, /^\/assets\/Images\/articles\//);
     }
   });
 
@@ -266,13 +267,13 @@ describe("derived views keep their old shape", () => {
       id: 1, published: true, category: "loans", categoryName: "Loans", topic: "loan-comparison", slug: "how-to-reduce-home-loan-interest",
       title: "How to Reduce Your Home Loan Interest",
       description: "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
-      date: "Aug 25, 2026", readTime: "6 min read", image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80", alt: "House model on desk",
+      date: "Aug 25, 2026", readTime: "6 min read", image: "/Toolzenhub/assets/Images/articles/how-to-reduce-home-loan-interest.png", alt: "House model on desk",
     });
     assert.deepEqual(legacy.articleRegistry[34], {
       id: 7, category: "investment", categoryName: "Investment", topic: "investment", slug: "best-sip-strategies-for-beginners",
       title: "Best SIP Strategies for Beginners",
       description: "Learn practical SIP investment strategies to build wealth consistently and work towards your financial goals.",
-      date: "Aug 25, 2026", readTime: "5 min read", image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80", alt: "Coins with plant growing",
+      date: "Aug 25, 2026", readTime: "5 min read", image: null, alt: "",
     });
     assert.equal(legacy.articleRegistry.filter((a) => a.published === true).length, 34);
     assert.equal(legacy.articleRegistry.filter((a) => "published" in a).length, 34);

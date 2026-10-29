@@ -362,7 +362,7 @@ test.describe("Margin Calculator", () => {
       const c = getComputedStyle(el);
       return { bg: c.backgroundColor, color: c.color, cursor: c.cursor };
     });
-    expect(s).toEqual({ bg: "rgb(255, 255, 255)", color: "rgb(8, 127, 71)", cursor: "pointer" });
+    expect(s).toEqual({ bg: "rgb(255, 255, 255)", color: "rgb(28, 25, 23)", cursor: "pointer" });
     await expect(page.locator("button.calculator-form__button:not(.calculator-form__button--secondary)")).toHaveCount(0);
   });
 
@@ -381,7 +381,7 @@ test.describe("Margin Calculator", () => {
     await expect(live).toContainText(/Selling price .*margin .*markup/, { timeout: 5000 });
     const storage = await page.evaluate(() => ({ local: localStorage.length, session: sessionStorage.length, cookie: document.cookie }));
     expect(storage).toEqual({ local: 0, session: 0, cookie: "" });
-    expect(context.__external.filter((u) => !/fonts\.(googleapis|gstatic)\.com|unsplash/.test(String(u)))).toEqual([]);
+    expect(context.__external).toEqual([]);
   });
 
   test("the trust note and exclusions are visible next to the result; no advice or benchmark wording", async ({ page, go }) => {

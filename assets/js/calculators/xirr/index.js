@@ -409,8 +409,8 @@ export function markup() {
                     <summary>Is my data stored or sent anywhere?</summary>
                     <p>
                         No. Everything is worked out in your browser. Nothing you type is stored, sent anywhere or placed in the
-                        address. Reloading the page clears every row. (The page itself still loads its own files and some article
-                        pictures from another site; see the privacy page.)
+                        address. Reloading the page clears every row. (The page itself loads its own files from this site; see the
+                        privacy page.)
                     </p>
                 </details>
             </section>

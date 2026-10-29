@@ -50,7 +50,7 @@ test.describe("smoke: every live page loads @portable", () => {
       expect(broken, "images that failed to load").toEqual([]);
 
       expectClean(watch);
-      expect(watch.external.filter((x) => !/fonts\.googleapis\.com|images\.unsplash\.com/.test(x)), "unexpected external network use").toEqual([]);
+      expect(watch.external, "unexpected external network use").toEqual([]);
     });
   }
 });

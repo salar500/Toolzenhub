@@ -342,7 +342,7 @@ test.describe("GST Calculator", () => {
       const c = getComputedStyle(el);
       return { bg: c.backgroundColor, color: c.color, cursor: c.cursor };
     });
-    expect(s).toEqual({ bg: "rgb(255, 255, 255)", color: "rgb(8, 127, 71)", cursor: "pointer" });
+    expect(s).toEqual({ bg: "rgb(255, 255, 255)", color: "rgb(28, 25, 23)", cursor: "pointer" });
     await expect(page.locator("button.calculator-form__button:not(.calculator-form__button--secondary)")).toHaveCount(0);
   });
 
@@ -355,7 +355,7 @@ test.describe("GST Calculator", () => {
     await expect(live).toContainText("Amount with GST ₹1,180.00; GST ₹180.00.");
     const ids = await page.locator("[id]").evaluateAll((els) => els.map((e) => e.id));
     expect(new Set(ids).size).toBe(ids.length);
-    expect(context.__external.filter((u) => !/fonts\.(googleapis|gstatic)\.com|unsplash/.test(String(u)))).toEqual([]);
+    expect(context.__external).toEqual([]);
   });
 
   test("the default rate is labelled an example, and the trust note and exclusions sit next to the result", async ({ page, go }) => {

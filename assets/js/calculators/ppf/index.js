@@ -759,8 +759,8 @@ export function markup() {
                         No. The figures are worked out in your browser, nothing
                         you type is stored or sent anywhere, and no account details
                         are asked for. Reloading the page clears everything. (The
-                        page itself still loads its own files and some article
-                        pictures from another site; see the privacy page.)
+                        page itself loads its own files from this site; see the
+                        privacy page.)
                     </p>
                 </details>
 

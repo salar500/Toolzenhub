@@ -277,7 +277,7 @@ test.describe("Loan Balance Transfer Calculator", () => {
     for (const id of ["#bt-reset", "#bt-print"]) {
       await expect(page.locator(id)).toHaveClass(/calculator-form__button--secondary/);
       const s = await page.locator(id).evaluate((e) => { const c = getComputedStyle(e); return { bg: c.backgroundColor, color: c.color, cursor: c.cursor }; });
-      expect(s).toEqual({ bg: "rgb(255, 255, 255)", color: "rgb(8, 127, 71)", cursor: "pointer" });
+      expect(s).toEqual({ bg: "rgb(255, 255, 255)", color: "rgb(28, 25, 23)", cursor: "pointer" });
     }
     await expect(page.locator("button.calculator-form__button:not(.calculator-form__button--secondary)")).toHaveCount(0);
   });
@@ -296,7 +296,7 @@ test.describe("Loan Balance Transfer Calculator", () => {
     await fill(page, { newCharges: 12345 });
     const storage = await page.evaluate(() => ({ local: localStorage.length, session: sessionStorage.length, cookie: document.cookie }));
     expect(storage).toEqual({ local: 0, session: 0, cookie: "" });
-    expect(context.__external.filter((u) => !/fonts\.(googleapis|gstatic)\.com|unsplash/.test(String(u)))).toEqual([]);
+    expect(context.__external).toEqual([]);
   });
 
   test("explanatory content, assumptions, the example and the trust wording", async ({ page, go }) => {

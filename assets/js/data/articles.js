@@ -109,7 +109,7 @@ const catalog = [
         readTime: "6 min read",
         cardImage: {
             src:
-                "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80",
+                "/assets/Images/articles/how-to-reduce-home-loan-interest.png",
             alt:
                 "House model on desk"
         },
@@ -145,7 +145,7 @@ const catalog = [
         readTime: "5 min read",
         cardImage: {
             src:
-                "https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=800&q=80",
+                "/assets/Images/articles/emi-vs-total-interest.png",
             alt:
                 "Loan and financial planning"
         },
@@ -181,7 +181,7 @@ const catalog = [
         readTime: "6 min read",
         cardImage: {
             src:
-                "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80",
+                "/assets/Images/articles/fixed-vs-floating-interest-rates.png",
             alt:
                 "Financial planning and investment"
         },
@@ -218,7 +218,7 @@ const catalog = [
         readTime: "6 min read",
         cardImage: {
             src:
-                "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+                "/assets/Images/articles/loan-tenure-total-interest.png",
             alt:
                 "Financial analysis on laptop"
         },
@@ -254,7 +254,7 @@ const catalog = [
         readTime: "4 min read",
         cardImage: {
             src:
-                "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80",
+                "/assets/Images/articles/what-is-loan-prepayment.png",
             alt:
                 "Financial documents and planning"
         },
@@ -288,12 +288,7 @@ const catalog = [
         publishedAt: "Aug 25, 2026",
         updatedAt: "Aug 25, 2026",
         readTime: "5 min read",
-        cardImage: {
-            src:
-                "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80",
-            alt:
-                "House model with keys"
-        },
+        cardImage: null,
 
         /*
          * TODO(image): add assets/Images/articles/choose-right-loan-tenure.png,
@@ -1280,12 +1275,7 @@ const catalog = [
             "Learn practical SIP investment strategies to build wealth consistently and work towards your financial goals.",
         listingDate: "Aug 25, 2026",
         readTime: "5 min read",
-        cardImage: {
-            src:
-                "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80",
-            alt:
-                "Coins with plant growing"
-        }
+        cardImage: null
     },
 
     {
@@ -1300,12 +1290,7 @@ const catalog = [
             "Explore smart tax-saving options and understand ways to reduce taxable income legally.",
         listingDate: "Aug 25, 2026",
         readTime: "7 min read",
-        cardImage: {
-            src:
-                "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80",
-            alt:
-                "Tax planning documents"
-        }
+        cardImage: null
     },
 
     {
@@ -1320,12 +1305,7 @@ const catalog = [
             "Understand the difference between ROI and profit and when each metric is useful for business decisions.",
         listingDate: "Aug 25, 2026",
         readTime: "4 min read",
-        cardImage: {
-            src:
-                "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-            alt:
-                "Business analytics on laptop"
-        }
+        cardImage: null
     },
 
     {
@@ -1340,12 +1320,7 @@ const catalog = [
             "Understand the basics of calorie requirements and how simple calculations can help with everyday planning.",
         listingDate: "Aug 25, 2026",
         readTime: "5 min read",
-        cardImage: {
-            src:
-                "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80",
-            alt:
-                "Healthy food and nutrition"
-        }
+        cardImage: null
     },
 
     {
@@ -1360,12 +1335,7 @@ const catalog = [
             "Learn simple percentage formulas with practical examples for everyday use.",
         listingDate: "Aug 25, 2026",
         readTime: "4 min read",
-        cardImage: {
-            src:
-                "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80",
-            alt:
-                "Mathematics calculation"
-        }
+        cardImage: null
     },
 
     {
@@ -1380,12 +1350,7 @@ const catalog = [
             "Learn how to quickly convert common units used in everyday calculations, shopping and measurements.",
         listingDate: "Aug 25, 2026",
         readTime: "4 min read",
-        cardImage: {
-            src:
-                "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
-            alt:
-                "Measurements and calculations"
-        }
+        cardImage: null
     }
 
 ];
