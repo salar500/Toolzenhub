@@ -3,7 +3,7 @@ permalink: "/404.html"
 title: "Page Not Found | ToolZen Hub"
 description: "The page you are looking for could not be found on ToolZen Hub."
 robots: "noindex"
-themeColor: "#2563eb"
+themeColor: "#fafaf9"
 noindex: true
 ---
 <!DOCTYPE html>
@@ -39,28 +39,21 @@ noindex: true
 
     <noscript>
         <style>
+
             .nf-nav { display: none; }
         </style>
     </noscript>
 
 
-    <!-- Fonts (absolute URL, works at any path depth) -->
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-
-    <!-- =====================================================
-         Styles - inline on purpose: this page must not depend
-         on any relative stylesheet path.
-    ====================================================== -->
-
     <style>
+        /* Self-hosted Inter (SIL OFL 1.1); the URL is a site path with the build base */
+        @font-face {
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 400 700;
+            font-display: swap;
+            src: url("{{ '/assets/fonts/inter-var-latin.woff2' | url }}") format("woff2");
+        }
 
         *,
         *::before,
@@ -79,11 +72,12 @@ noindex: true
             display: flex;
             flex-direction: column;
 
-            background: #f8faf9;
-            color: #101828;
+            background: #fafaf9;
+            color: #1c1917;
 
             font-family:
                 "Inter",
+                "Inter Fallback",
                 system-ui,
                 -apple-system,
                 BlinkMacSystemFont,
@@ -94,7 +88,7 @@ noindex: true
         }
 
         .nf-header {
-            border-bottom: 1px solid #e4ebe8;
+            border-bottom: 1px solid #e7e5e4;
             background: #ffffff;
         }
 
@@ -118,27 +112,20 @@ noindex: true
             align-items: center;
             justify-content: center;
 
-            border-radius: 50%;
-            background: #0b9f58;
-            color: #ffffff;
-
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 22px;
-            font-weight: 700;
-
-            box-shadow: 0 4px 12px rgba(11, 159, 88, 0.18);
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         .nf-brand {
-            font-family: Georgia, "Times New Roman", serif;
+            font-family: inherit;
             font-size: 21px;
             font-weight: 800;
             letter-spacing: -0.6px;
-            color: #111827;
+            color: #1c1917;
         }
 
         .nf-brand span {
-            color: #0b9f58;
+            color: #4338ca;
         }
 
         .nf-main {
@@ -157,7 +144,7 @@ noindex: true
             width: 100%;
             padding: 40px 32px;
 
-            border: 1px solid #e4e9e7;
+            border: 1px solid #e7e5e4;
             border-radius: 14px;
             background: #ffffff;
             text-align: center;
@@ -169,7 +156,7 @@ noindex: true
             display: inline-block;
             margin-bottom: 8px;
 
-            color: #0b9f58;
+            color: #4338ca;
             font-size: 13px;
             font-weight: 800;
             letter-spacing: 0.14em;
@@ -179,7 +166,7 @@ noindex: true
         .nf-card h1 {
             margin: 0 0 12px;
 
-            font-family: Georgia, "Times New Roman", serif;
+            font-family: inherit;
             font-size: 38px;
             font-weight: 800;
             line-height: 1.2;
@@ -189,7 +176,7 @@ noindex: true
             max-width: 480px;
             margin: 0 auto 26px;
 
-            color: #667085;
+            color: #57534e;
             font-size: 15px;
         }
 
@@ -198,7 +185,7 @@ noindex: true
             padding: 12px 26px;
 
             border-radius: 8px;
-            background: #0b9f58;
+            background: #1c1917;
             color: #ffffff;
 
             font-size: 14px;
@@ -210,13 +197,13 @@ noindex: true
 
         .nf-btn:hover,
         .nf-btn:focus-visible {
-            background: #087d46;
+            background: #292524;
         }
 
         .nf-card p.nf-explore {
             margin: 30px auto 10px;
 
-            color: #344054;
+            color: #44403c;
             font-size: 12px;
             font-weight: 700;
             letter-spacing: 0.08em;
@@ -238,10 +225,10 @@ noindex: true
             display: inline-block;
             padding: 8px 16px;
 
-            border: 1px solid #d9e0dd;
+            border: 1px solid #78716c;
             border-radius: 999px;
             background: #ffffff;
-            color: #344054;
+            color: #44403c;
 
             font-size: 13px;
             font-weight: 600;
@@ -254,22 +241,22 @@ noindex: true
 
         .nf-links a:hover,
         .nf-links a:focus-visible {
-            border-color: #0b9f58;
-            color: #0b9f58;
+            border-color: #4338ca;
+            color: #4338ca;
         }
 
         .nf-btn:focus-visible,
         .nf-links a:focus-visible {
-            outline: 3px solid rgba(11, 159, 88, 0.35);
+            outline: 3px solid rgba(67, 56, 202, 0.5);
             outline-offset: 2px;
         }
 
         .nf-footer {
             padding: 18px 16px;
 
-            border-top: 1px solid #e4ebe8;
+            border-top: 1px solid #e7e5e4;
             background: #ffffff;
-            color: #667085;
+            color: #57534e;
 
             font-size: 12px;
             text-align: center;
@@ -307,7 +294,17 @@ noindex: true
 
         <div class="nf-header__inner">
 
-            <span class="nf-logo" aria-hidden="true">▦</span>
+            <span class="nf-logo" aria-hidden="true">
+                <svg viewBox="0 0 100 100" width="40" height="40" focusable="false">
+                    <rect width="100" height="100" rx="22" fill="#1c1917"/>
+                    <g fill="#fff">
+                        <rect x="20" y="20" width="28" height="28" rx="7"/>
+                        <rect x="20" y="52" width="28" height="28" rx="7"/>
+                        <rect x="52" y="52" width="28" height="28" rx="7"/>
+                    </g>
+                    <rect x="56.5" y="24.5" width="19" height="19" rx="4.5" transform="rotate(45 66 34)" fill="#a5b4fc"/>
+                </svg>
+            </span>
 
             <span class="nf-brand">
                 ToolZen <span>Hub</span>

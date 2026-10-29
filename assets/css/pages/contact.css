@@ -10,6 +10,7 @@
 ========================================================= */
 
 .contact-page {
+    font-family: var(--font-family);
     width: 100%;
 
     box-sizing: border-box;
@@ -92,10 +93,7 @@
 
     color: var(--color-ink);
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+    font-family: var(--font-family);
 
     font-size: 40px;
 
@@ -174,10 +172,7 @@
 
     color: var(--color-ink);
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+    font-family: var(--font-family);
 
     font-size: 25px;
 
