@@ -65,11 +65,11 @@ describe("static checkers detect injected faults", () => {
 
   it("assets: a wrong-CASE image reference is reported as CASE MISMATCH", () => {
     const root = makeCopy("case");
-    fs.renameSync(path.join(root, "assets/Images/hero-calculators.png"), path.join(root, "assets/Images/Hero-Calculators.png"));
+    fs.renameSync(path.join(root, "assets/Images/articles-hero.png"), path.join(root, "assets/Images/Articles-Hero.png"));
     const r = run("check-assets.mjs", root);
     assert.equal(r.code, 1);
     assert.match(r.out, /CASE MISMATCH/);
-    assert.match(r.out, /hero-calculators\.png/);
+    assert.match(r.out, /articles-hero\.png/);
   });
 
   it("assets: a deleted stylesheet that a live page links is reported MISSING", () => {

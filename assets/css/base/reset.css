@@ -123,3 +123,10 @@ input:disabled {
 picture {
     display: contents;
 }
+
+
+/* Design System 2.0: native checkboxes and radios take the accent */
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--accent);
+}
