@@ -27,9 +27,9 @@
 
     text-align: center;
 
-    background: #f7fbf9;
+    background: var(--surface-sunken);
 
-    border-bottom: 1px solid #e7eeeb;
+    border-bottom: 1px solid var(--line);
 
     box-sizing: border-box;
 }
@@ -112,7 +112,7 @@
 
 
 .legal-breadcrumb .calculator-breadcrumb strong {
-    color: #334155;
+    color: var(--color-gray-700);
 
     font-weight: 600;
 }
@@ -217,7 +217,7 @@
 
     border-left: 3px solid var(--color-brand-green);
 
-    background: #f7fbf9;
+    background: var(--surface-sunken);
 
     color: var(--color-ink-muted) !important;
 

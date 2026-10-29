@@ -39,10 +39,10 @@ body.categories-page-body .footer__features {
 
     box-sizing: border-box;
 
-    background: #f7fbf9;
+    background: var(--surface-sunken);
 
-    border-top: 1px solid #e7eeeb;
-    border-bottom: 1px solid #e7eeeb;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
 }
 
 
@@ -87,7 +87,7 @@ body.categories-page-body .footer__features {
 
     border-radius: 8px;
 
-    background: #e6f7ee;
+    background: var(--surface-sunken);
 
     color: var(--color-brand-green);
 
@@ -219,7 +219,7 @@ body.categories-page-body .footer__features {
 
 
 .footer__logo-highlight {
-    color: #20b968;
+    color: var(--accent-on-dark);
 }
 
 
@@ -337,7 +337,7 @@ body.categories-page-body .footer__features {
 
 
 .footer__links a:hover {
-    color: #35c878;
+    color: var(--accent-on-dark);
 }
 
 

@@ -24,7 +24,7 @@
         0 10px 10px 0;
 
     background:
-        #f8fafc;
+        var(--surface-page);
 
 }
 
@@ -67,13 +67,13 @@
         22px 24px;
 
     border:
-        1px solid #d1fae5;
+        1px solid var(--line);
 
     border-radius:
         14px;
 
     background:
-        #ecfdf5;
+        var(--accent-soft);
 
 }
 
@@ -147,7 +147,7 @@
         0;
 
     color:
-        #475569;
+        var(--ink-muted);
 
     font-size:
         14px;
@@ -177,7 +177,7 @@
         14px;
 
     background:
-        #f8fafc;
+        var(--surface-page);
 
 }
 
@@ -228,7 +228,7 @@
         0;
 
     color:
-        #475569;
+        var(--ink-muted);
 
     font-size:
         14px;
@@ -266,7 +266,7 @@
         50%;
 
     background:
-        #dcfce7;
+        var(--accent-soft);
 
     color:
         var(--color-brand-green);
@@ -319,13 +319,13 @@
         22px;
 
     border:
-        1px solid #bbf7d0;
+        1px solid var(--accent-line);
 
     border-radius:
         14px;
 
     background:
-        #f0fdf4;
+        var(--accent-soft);
 
 }
 
@@ -430,7 +430,7 @@
         0 0 7px;
 
     color:
-        #0f172a;
+        var(--ink);
 
     font-size:
         20px;
@@ -447,7 +447,7 @@
         0;
 
     color:
-        #475569;
+        var(--ink-muted);
 
     font-size:
         13px;
@@ -593,7 +593,7 @@
         pointer;
 
     color:
-        #1e293b;
+        var(--color-gray-800);
 
     font-size:
         15px;
@@ -672,13 +672,13 @@
         0 0 28px;
 
     border:
-        1px solid #bbf7d0;
+        1px solid var(--accent-line);
 
     border-radius:
         7px;
 
     background:
-        #f0fdf4;
+        var(--accent-soft);
 
     color:
         var(--color-brand-green);
@@ -753,7 +753,7 @@
         0;
 
     color:
-        #64748b;
+        var(--ink-subtle);
 
     font-size:
         14px;
@@ -809,7 +809,7 @@
         hidden;
 
     background:
-        #f1f5f9;
+        var(--surface-sunken);
 
 }
 
@@ -865,7 +865,7 @@
         #ffffff;
 
     color:
-        #1e293b;
+        var(--color-gray-800);
 
     text-decoration:
         none;
@@ -881,10 +881,10 @@
 .article-related-card:hover {
 
     border-color:
-        #bbf7d0;
+        var(--accent-line);
 
     background:
-        #f0fdf4;
+        var(--accent-soft);
 
     transform:
         translateY(-2px);
@@ -924,7 +924,7 @@
         0;
 
     color:
-        #0f172a;
+        var(--ink);
 
     font-size:
         16px;

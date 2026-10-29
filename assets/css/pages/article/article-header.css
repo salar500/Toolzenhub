@@ -38,7 +38,7 @@
         13px;
 
     color:
-        #64748B;
+        var(--ink-subtle);
 
 }
 
@@ -65,7 +65,7 @@
 .article-breadcrumb .calculator-breadcrumb strong {
 
     color:
-        #334155;
+        var(--color-gray-700);
 
     font-weight:
         600;
@@ -121,13 +121,13 @@
         6px 11px;
 
     border:
-        1px solid #d1fae5;
+        1px solid var(--line);
 
     border-radius:
         999px;
 
     background:
-        #ecfdf5;
+        var(--accent-soft);
 
     color:
         var(--color-brand-green);
@@ -154,7 +154,7 @@
         14px 0 16px;
 
     color:
-        #0f172a;
+        var(--ink);
 
     font-size:
         clamp(
@@ -188,7 +188,7 @@
         0;
 
     color:
-        #64748B;
+        var(--ink-subtle);
 
     font-size:
         17px;
@@ -221,7 +221,7 @@
         20px;
 
     color:
-        #64748B;
+        var(--ink-subtle);
 
     font-size:
         13px;
@@ -261,7 +261,7 @@
         16px;
 
     color:
-        #475569;
+        var(--ink-muted);
 
 }
 
@@ -333,10 +333,10 @@
         999px;
 
     background:
-        #f1f5f9;
+        var(--surface-sunken);
 
     color:
-        #475569;
+        var(--ink-muted);
 
     font-size:
         12px;

@@ -176,13 +176,13 @@
         13px 15px;
 
     border:
-        1px solid #dcefe4;
+        1px solid var(--line);
 
     border-radius:
         10px;
 
     background:
-        #f5fbf7;
+        var(--surface-sunken);
 
 }
 
@@ -211,7 +211,7 @@
         50%;
 
     background:
-        #e1f5e9;
+        var(--surface-sunken);
 
     color:
         var(--color-brand-green);
@@ -346,7 +346,7 @@
         26px;
 
     border:
-        1px solid #e5ebe8;
+        1px solid var(--line);
 
     border-radius:
         12px;
@@ -397,7 +397,7 @@
         0 0 12px;
 
     color:
-        #475467;
+        var(--ink-muted);
 
     font-size:
         13px;
@@ -418,7 +418,7 @@
         20px;
 
     color:
-        #475467;
+        var(--ink-muted);
 
     font-size:
         13px;
@@ -452,7 +452,7 @@
 .calculator-page a:hover {
 
     color:
-        #087f47;
+        var(--accent);
 
 }
 
@@ -473,7 +473,7 @@
         28px 0;
 
     background:
-        #e5ebe8;
+        var(--line);
 
 }
 

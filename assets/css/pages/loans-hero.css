@@ -18,7 +18,7 @@
     background:
         linear-gradient(
             180deg,
-            #f7faf9 0%,
+            var(--surface-sunken) 0%,
             #ffffff 100%
         );
 }
@@ -72,7 +72,7 @@
 
     margin: 0 0 20px;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 17px;
 
@@ -96,13 +96,13 @@
 
     padding: 9px 14px;
 
-    border: 1px solid #d8eee4;
+    border: 1px solid var(--accent-soft);
 
     border-radius: 999px;
 
-    background: #effaf4;
+    background: var(--surface-sunken);
 
-    color: #147a45;
+    color: var(--accent);
 
     font-size: 13px;
 
@@ -122,7 +122,7 @@
 
     border-radius: 50%;
 
-    background: #d7f3e3;
+    background: var(--surface-sunken);
 
     color: var(--color-brand-green);
 
@@ -134,7 +134,7 @@
 
 .loans-hero__dot {
 
-    color: #78b696;
+    color: var(--accent);
 }
 
 
@@ -184,8 +184,8 @@
     background:
         radial-gradient(
             circle,
-            #edf9f3 0%,
-            #f7fbf9 60%,
+            var(--surface-sunken) 0%,
+            var(--surface-sunken) 60%,
             transparent 72%
         );
 }
@@ -259,7 +259,7 @@
     width: 112px;
     height: 90px;
 
-    border: 5px solid #dbece4;
+    border: 5px solid var(--line);
 
     border-top: 0;
 
@@ -298,13 +298,13 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
 
-    border: 3px solid #9fd4bd;
+    border: 3px solid var(--line);
 }
 
 
 .loans-illustration__window span {
 
-    border: 1px solid #9fd4bd;
+    border: 1px solid var(--line);
 }
 
 
@@ -392,7 +392,7 @@
 
     margin: 7px 0;
 
-    color: #168552;
+    color: var(--accent);
 
     font-size: 14px;
 
@@ -456,7 +456,7 @@
 
     border-radius: 3px;
 
-    background: #142b24;
+    background: var(--surface-footer);
 }
 
 
@@ -502,7 +502,7 @@
 
     border-radius: 50%;
 
-    background: #1d9a59;
+    background: var(--action);
 
     color: #ffffff;
 
@@ -511,7 +511,7 @@
     font-weight: 800;
 
     box-shadow:
-        0 4px 10px rgba(11, 159, 88, 0.2);
+        0 4px 10px rgba(67, 56, 202, 0.2);
 }
 
 

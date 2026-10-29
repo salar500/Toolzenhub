@@ -92,7 +92,7 @@
 
 .td-meta {
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
     font-variant-numeric: tabular-nums;
@@ -101,7 +101,7 @@
 
 .td-meta[data-over="true"] {
 
-    color: #912018;
+    color: var(--state-error);
 
     font-weight: 700;
 
@@ -116,7 +116,7 @@
 
     padding: 12px 14px;
 
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line-control);
     border-radius: 12px;
 
     background: #ffffff;
@@ -143,7 +143,7 @@
 
 .td-text[aria-invalid="true"] {
 
-    border-color: #b42318;
+    border-color: var(--state-error);
     border-width: 2px;
     padding: 11px 13px;
 
@@ -153,7 +153,7 @@
 
     margin: 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 14px;
     line-height: 1.6;
@@ -222,7 +222,7 @@
     min-height: 44px;
     max-width: 100%;
     padding: 0 12px;
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line-control);
     border-radius: 12px;
     background: #ffffff;
     color: var(--color-ink);
@@ -298,7 +298,7 @@
 
     margin: 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
     text-align: center;
@@ -309,10 +309,10 @@
 
     padding: 1px 6px;
 
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line);
     border-radius: 6px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
     color: var(--color-ink);
 
@@ -350,9 +350,9 @@
     border-left-width: 6px;
     border-radius: 10px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 15px;
     font-weight: 600;
@@ -364,31 +364,31 @@
 
 .td-workspace[data-state="identical"] .td-status {
 
-    border-color: #067647;
+    border-color: var(--state-success);
 
-    background: #ecfdf3;
+    background: var(--state-success-soft);
 
-    color: #05603a;
+    color: var(--state-success);
 
 }
 
 .td-workspace[data-state="refused"] .td-status {
 
-    border-color: #b42318;
+    border-color: var(--state-error);
 
-    background: #fef3f2;
+    background: var(--state-error-soft);
 
-    color: #912018;
+    color: var(--state-error);
 
 }
 
 .td-workspace[data-state="busy"] .td-status {
 
-    border-color: #b54708;
+    border-color: var(--state-warning);
 
-    background: #fffaeb;
+    background: var(--state-warning-soft);
 
-    color: #7a2e0e;
+    color: var(--state-warning);
 
 }
 
@@ -434,25 +434,25 @@
 
 .td-chip--add {
 
-    border-color: #067647;
+    border-color: var(--state-success);
 
-    background: #ecfdf3;
+    background: var(--state-success-soft);
 
 }
 
 .td-chip--del {
 
-    border-color: #b42318;
+    border-color: var(--state-error);
 
-    background: #fef3f2;
+    background: var(--state-error-soft);
 
 }
 
 .td-chip--mod {
 
-    border-color: #b54708;
+    border-color: var(--state-warning);
 
-    background: #fffaeb;
+    background: var(--state-warning-soft);
 
 }
 
@@ -460,7 +460,7 @@
 
     margin: 10px 0 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 14px;
     line-height: 1.55;
@@ -546,7 +546,7 @@
     width: calc(var(--td-digits) * 1ch);
     padding: 0 6px;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 12px;
     text-align: right;
@@ -582,7 +582,7 @@
 
     display: block;
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     white-space: pre-wrap;
     overflow-wrap: anywhere;
@@ -599,7 +599,7 @@
 
 .td-blank {
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-style: italic;
 
@@ -607,29 +607,29 @@
 
 .td-line--add {
 
-    border-left-color: #067647;
+    border-left-color: var(--state-success);
 
-    background: #ecfdf3;
+    background: var(--state-success-soft);
 
 }
 
 .td-line--add .td-mark {
 
-    color: #05603a;
+    color: var(--state-success);
 
 }
 
 .td-line--del {
 
-    border-left-color: #b42318;
+    border-left-color: var(--state-error);
 
-    background: #fef3f2;
+    background: var(--state-error-soft);
 
 }
 
 .td-line--del .td-mark {
 
-    color: #912018;
+    color: var(--state-error);
 
 }
 
@@ -656,7 +656,7 @@
 
 del.td-w {
 
-    background: #fecdca;
+    background: var(--state-error-line);
 
     text-decoration: line-through;
     text-decoration-thickness: 2px;
@@ -681,7 +681,7 @@ ins.td-w {
     border-top: 1px dashed var(--color-slate-200);
     border-bottom: 1px dashed var(--color-slate-200);
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
 }
 

@@ -50,7 +50,7 @@
 .article-sidebar-search input:focus {
     border-color: var(--articles-green);
     box-shadow:
-        0 0 0 3px rgba(0, 166, 81, .10);
+        0 0 0 3px rgba(67, 56, 202, .10);
 }
 
 
@@ -125,7 +125,7 @@
     align-items: center;
     justify-content: space-between;
     min-height: 40px;
-    color: #475569;
+    color: var(--ink-muted);
     font-size: 12px;
     text-decoration: none;
 }
@@ -172,7 +172,7 @@
     padding: 0;
     border: 0;
     background: transparent;
-    color: #475569;
+    color: var(--ink-muted);
     font: inherit;
     font-size: 11px;
     font-weight: 700;
@@ -217,7 +217,7 @@
     display: -webkit-box;
     margin: 0;
     overflow: hidden;
-    color: #1E293B;
+    color: var(--color-gray-800);
     font-size: 11px;
     line-height: 1.45;
     -webkit-box-orient: vertical;

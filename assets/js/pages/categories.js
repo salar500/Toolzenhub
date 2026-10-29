@@ -451,7 +451,7 @@ function renderCalculatorResults(query) {
                     style="
                         display:block;
                         margin-bottom:4px;
-                        color:#0b9f58;
+                        color:var(--accent);
                         font-size:10px;
                         font-weight:700;
                         text-transform:uppercase;

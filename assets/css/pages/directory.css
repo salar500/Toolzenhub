@@ -134,9 +134,9 @@
 
     border-radius: 999px;
 
-    background: #eaf8f2;
+    background: var(--accent-soft);
 
-    color: #168552;
+    color: var(--accent);
 
     font-size: 12px;
     font-weight: 700;
@@ -161,7 +161,7 @@
 }
 
 .directory-group--soon {
-    background: #f9fafb;
+    background: var(--surface-page);
 }
 
 .directory-group__title {
@@ -318,7 +318,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 14px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 }
 
 .directory-results__empty p {
@@ -355,7 +355,7 @@
 .directory-result:hover {
     transform: translateY(-2px);
 
-    border-color: #cce5d9;
+    border-color: var(--line);
 
     box-shadow:
         0 10px 24px rgba(16, 24, 40, 0.08);
@@ -418,7 +418,7 @@
     margin-top: 28px;
     padding-top: 20px;
 
-    border-top: 1px dashed #d0d5dd;
+    border-top: 1px dashed var(--line);
 }
 
 .directory-soon__title {
@@ -453,7 +453,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 999px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 }
 
 .directory-soon__name {

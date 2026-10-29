@@ -15,7 +15,7 @@
     background:
         linear-gradient(
             135deg,
-            #f3fbf8 0%,
+            var(--surface-sunken) 0%,
             #f8fcfb 55%,
             #eef8f5 100%
         );
@@ -40,7 +40,7 @@
     background:
         radial-gradient(
             circle at 60% 45%,
-            rgba(11, 159, 88, 0.08),
+            rgba(67, 56, 202, 0.08),
             transparent 62%
         );
 
@@ -116,13 +116,13 @@
 
     padding: 9px 15px;
 
-    border: 1px solid #d9eee5;
+    border: 1px solid var(--line);
 
     border-radius: 999px;
 
     background: rgba(235, 249, 243, 0.9);
 
-    color: #0b8750;
+    color: var(--accent);
 
     font-size: 13px;
 
@@ -135,7 +135,7 @@
 
 
 .hero__dot {
-    color: #53b987;
+    color: var(--accent);
 }
 
 
@@ -182,7 +182,7 @@
 
     margin: 0 0 26px;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: clamp(16px, 1.4vw, 18px);
 
@@ -209,7 +209,7 @@
 
     overflow: hidden;
 
-    border: 1px solid #e2e8e6;
+    border: 1px solid var(--line);
 
     border-radius: 8px;
 
@@ -225,7 +225,7 @@
 
     padding-left: 17px;
 
-    color: #98a2b3;
+    color: var(--ink-subtle);
 
     font-size: 24px;
 }
@@ -259,7 +259,7 @@
 
 
 .hero__search input::placeholder {
-    color: #98a2b3;
+    color: var(--ink-subtle);
 }
 
 
@@ -298,7 +298,7 @@
 
 
 .hero__search-button:hover {
-    background: #087d46;
+    background: var(--action);
 }
 
 

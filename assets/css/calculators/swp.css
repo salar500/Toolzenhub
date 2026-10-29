@@ -83,10 +83,10 @@
     width: 100%;
     min-height: 48px;
     padding: 8px 14px;
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line-control);
     border-radius: 10px;
     background: var(--color-white);
-    color: #344054;
+    color: var(--color-gray-700);
     font-size: 14px;
     font-weight: 600;
     line-height: 1.3;
@@ -102,13 +102,13 @@
 }
 
 .swp-choice__option:hover span {
-    background: #f2f4f7;
+    background: var(--surface-sunken);
 }
 
 .swp-choice__option input:checked + span {
     padding: 7px 13px;
     border: 2px solid var(--color-brand-green);
-    background: #ecfdf3;
+    background: var(--accent-soft);
     color: var(--color-ink);
     font-weight: 750;
 }
@@ -174,16 +174,16 @@
 
 .swp-note--plain {
     margin: 0 0 12px;
-    color: #475467;
+    color: var(--ink-muted);
 }
 
 .swp-note--trust {
     margin: 16px 0 0;
     padding: 12px 14px;
-    border: 1px solid #fedf89;
-    border-left: 4px solid #f79009;
+    border: 1px solid var(--state-warning-line);
+    border-left: 4px solid var(--state-warning);
     border-radius: 8px;
-    background: #fffcf5;
+    background: var(--state-warning-soft);
     color: var(--color-ink);
     font-size: 13px;
     line-height: 1.55;
@@ -210,7 +210,7 @@
     min-width: 0;
     padding: 14px;
     box-sizing: border-box;
-    border: 1px solid #e4e7ec;
+    border: 1px solid var(--line);
     border-radius: 12px;
     background: var(--color-white);
 }
@@ -246,13 +246,13 @@
     justify-content: space-between;
     gap: 12px;
     padding: 8px 0;
-    border-top: 1px solid #eaecf0;
+    border-top: 1px solid var(--line);
     font-size: 13px;
     line-height: 1.4;
 }
 
 .swp-compare__list dt {
-    color: #475467;
+    color: var(--ink-muted);
 }
 
 /* a value too long to sit beside its label drops to its own line, whole, instead of breaking mid-number */
@@ -294,11 +294,11 @@
     position: sticky;
     left: 0;
     text-align: left;
-    box-shadow: 1px 0 0 #eaecf0;
+    box-shadow: 1px 0 0 var(--line);
 }
 
 .swp-table thead th:first-child {
-    background: #f9fafb;
+    background: var(--surface-page);
 }
 
 /* "(corpus used up)" wraps under the year instead of widening the first column */
@@ -310,7 +310,7 @@
 .swp-table__flag {
     display: block;
     font-weight: 600;
-    color: #475467;
+    color: var(--ink-muted);
 }
 
 #swp-results .calculator-results__table-wrapper:focus-visible {

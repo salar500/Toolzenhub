@@ -34,7 +34,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 10px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
     color: var(--color-ink);
 
@@ -95,7 +95,7 @@
 
 .percentage-more .calculator-form__input:disabled {
 
-    background: #f2f4f7;
+    background: var(--surface-sunken);
 
     cursor: not-allowed;
 
@@ -151,9 +151,9 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 10px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 13px;
     line-height: 1.6;

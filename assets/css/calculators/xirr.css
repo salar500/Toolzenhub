@@ -153,10 +153,10 @@
 
 .xirr-note--caution {
     padding: 10px 14px;
-    border: 1px solid #fedf89;
+    border: 1px solid var(--state-warning-line);
     border-left-width: 6px;
     border-radius: 10px;
-    background: #fffcf5;
+    background: var(--state-warning-soft);
     color: var(--color-ink);
     font-size: 14px;
 }

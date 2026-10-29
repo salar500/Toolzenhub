@@ -113,7 +113,7 @@ fieldset.mp-person {
     min-height: 44px;
     padding: 0 14px;
 
-    border: 1px solid #98a2b3;
+    border: 1px solid var(--line-control);
     border-radius: 10px;
 
     background: #ffffff;
@@ -185,8 +185,8 @@ fieldset.mp-person {
     border: 1px solid var(--color-slate-200);
     border-radius: 10px;
 
-    background: #f9fafb;
-    color: #344054;
+    background: var(--surface-page);
+    color: var(--color-gray-700);
 
     font-size: 14px;
     line-height: 1.55;
@@ -197,7 +197,7 @@ fieldset.mp-person {
 
     margin: 8px 0 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 14px;
 
@@ -208,11 +208,11 @@ fieldset.mp-person {
     margin: 12px 0 0;
     padding: 10px 14px;
 
-    border: 1px solid #b42318;
+    border: 1px solid var(--state-error);
     border-radius: 10px;
 
-    background: #fef3f2;
-    color: #912018;
+    background: var(--state-error-soft);
+    color: var(--state-error);
 
     font-size: 14px;
     font-weight: 600;
@@ -225,7 +225,7 @@ fieldset.mp-person {
     margin: 8px 0 0;
     padding-left: 20px;
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 14px;
     line-height: 1.6;
@@ -239,10 +239,10 @@ fieldset.mp-person {
     margin-left: 6px;
     padding: 1px 8px;
 
-    border: 1px solid #98a2b3;
+    border: 1px solid var(--line-control);
     border-radius: 999px;
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 12px;
     font-weight: 600;
@@ -282,7 +282,7 @@ fieldset.mp-person {
 
 .tt-status {
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 14px;
 
@@ -359,7 +359,7 @@ fieldset.mp-person {
 
     margin: 6px 0 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 16px;
 
@@ -412,7 +412,7 @@ fieldset.mp-person {
 
     margin: 12px 0 0;
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 14px;
     font-weight: 600;
@@ -470,7 +470,7 @@ fieldset.mp-person {
     min-height: 18px;
     margin-top: 4px;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
 
@@ -478,7 +478,7 @@ fieldset.mp-person {
 
 .td-hint--error {
 
-    color: #912018;
+    color: var(--state-error);
 
     font-weight: 600;
 
@@ -488,7 +488,7 @@ fieldset.mp-person {
 
     margin: 12px 0 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
 
@@ -571,7 +571,7 @@ fieldset.mp-person {
 
 .sp-head {
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 12px;
     font-weight: 600;
@@ -610,7 +610,7 @@ fieldset.mp-person {
 
     font-size: 11px;
 
-    color: #475467;
+    color: var(--ink-muted);
 
 }
 
@@ -631,9 +631,9 @@ fieldset.mp-person {
 
 .sp-cell--evening {
 
-    border-color: #b54708;
+    border-color: var(--state-warning);
 
-    background: #fffaeb;
+    background: var(--state-warning-soft);
 
 }
 
@@ -647,7 +647,7 @@ fieldset.mp-person {
 
 .sp-cell--off {
 
-    color: #475467;
+    color: var(--ink-muted);
 
 }
 
@@ -662,7 +662,7 @@ fieldset.mp-person {
 
     list-style: none;
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 14px;
 
@@ -675,7 +675,7 @@ fieldset.mp-person {
     min-width: 22px;
     padding: 0 4px;
 
-    border: 1px solid #98a2b3;
+    border: 1px solid var(--line-control);
     border-radius: 4px;
 
     font-weight: 700;
@@ -752,7 +752,7 @@ fieldset.mp-person {
 
     display: block;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 12px;
     font-weight: 400;
@@ -844,7 +844,7 @@ fieldset.mp-person {
 
         content: attr(data-label) ": ";
 
-        color: #475467;
+        color: var(--ink-muted);
 
     }
 

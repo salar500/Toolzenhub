@@ -31,11 +31,11 @@
 
     padding: 15px 20px;
 
-    border: 1px solid #dcebe4;
+    border: 1px solid var(--accent-soft);
 
     border-radius: 12px;
 
-    background: #f1faf6;
+    background: var(--surface-sunken);
 }
 
 
@@ -57,7 +57,7 @@
 
     border-radius: 50%;
 
-    background: #dcf5e8;
+    background: var(--surface-sunken);
 
     font-size: 22px;
 }
@@ -93,7 +93,7 @@
 
     margin: 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 12px;
 
@@ -117,7 +117,7 @@
 
     overflow: hidden;
 
-    border: 1px solid #d7e1dd;
+    border: 1px solid var(--line);
 
     border-radius: 8px;
 
@@ -152,7 +152,7 @@
 
 .loans-search__input::placeholder {
 
-    color: #98a2b3;
+    color: var(--ink-subtle);
 }
 
 
@@ -179,7 +179,7 @@
 
 .loans-search__button:hover {
 
-    background: #087d46;
+    background: var(--action);
 }
 
 

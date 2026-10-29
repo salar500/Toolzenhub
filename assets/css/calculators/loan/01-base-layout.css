@@ -14,7 +14,7 @@
     gap: 8px;
     margin-bottom: 22px;
     font-size: 13px;
-    color: #64748b;
+    color: var(--ink-subtle);
 }
 
 .calculator-breadcrumb a {
@@ -23,6 +23,6 @@
 }
 
 .calculator-breadcrumb strong {
-    color: #334155;
+    color: var(--color-gray-700);
     font-weight: 600;
 }

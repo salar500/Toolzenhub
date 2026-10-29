@@ -40,9 +40,9 @@
     border-left-width: 6px;
     border-radius: 10px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 14px;
     line-height: 1.55;
@@ -83,7 +83,7 @@
 
 .ce-meta {
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
     font-variant-numeric: tabular-nums;
@@ -99,7 +99,7 @@
 
     padding: 10px 14px;
 
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line-control);
     border-radius: 12px;
 
     background: #ffffff;
@@ -123,9 +123,9 @@
 
 .ce-input[aria-invalid="true"] {
 
-    border-color: #b42318;
+    border-color: var(--state-error);
 
-    box-shadow: inset 4px 0 0 #b42318;
+    box-shadow: inset 4px 0 0 var(--state-error);
 
 }
 
@@ -133,7 +133,7 @@
 
     margin: 8px 0 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 14px;
     line-height: 1.55;
@@ -160,7 +160,7 @@
 
     border-radius: 5px;
 
-    background: #f2f4f7;
+    background: var(--surface-sunken);
 
 }
 
@@ -176,7 +176,7 @@
 
     margin: 0 0 8px;
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 14px;
     font-weight: 700;
@@ -198,7 +198,7 @@
 
     padding: 8px 12px;
 
-    border: 1px solid #98a2b3;
+    border: 1px solid var(--line-control);
     border-radius: 10px;
 
     background: #ffffff;
@@ -218,7 +218,7 @@
 
 .ce-chip:hover {
 
-    background: #f2f4f7;
+    background: var(--surface-sunken);
 
 }
 
@@ -265,9 +265,9 @@
     border-left-width: 6px;
     border-radius: 10px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 15px;
     font-weight: 600;
@@ -279,21 +279,21 @@
 
 .ce-workspace[data-state="explained"] .ce-status {
 
-    border-color: #067647;
+    border-color: var(--state-success);
 
-    background: #ecfdf3;
+    background: var(--state-success-soft);
 
-    color: #054f31;
+    color: var(--state-success);
 
 }
 
 .ce-workspace[data-state="invalid"] .ce-status {
 
-    border-color: #b42318;
+    border-color: var(--state-error);
 
-    background: #fef3f2;
+    background: var(--state-error-soft);
 
-    color: #912018;
+    color: var(--state-error);
 
 }
 
@@ -301,7 +301,7 @@
 
     margin: 8px 0 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
 
@@ -312,7 +312,7 @@
     margin-top: 12px;
     padding: 14px;
 
-    border: 1px solid #fda29b;
+    border: 1px solid var(--state-error-line);
     border-radius: 12px;
 
     background: #ffffff;
@@ -327,7 +327,7 @@
 
 .ce-error__title {
 
-    color: #912018;
+    color: var(--state-error);
 
     font-size: 16px;
     font-weight: 700;
@@ -351,7 +351,7 @@
 
     margin-top: 6px !important;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 14px;
     font-variant-numeric: tabular-nums;
@@ -471,7 +471,7 @@
 
 .ce-row dt {
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 13px;
     font-weight: 700;
@@ -558,7 +558,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 10px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
 }
 
@@ -579,7 +579,7 @@
 
     content: attr(data-label) ": ";
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 13px;
     font-weight: 700;
@@ -599,7 +599,7 @@
     margin: 0;
     padding-left: 20px;
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 14px;
     line-height: 1.55;
@@ -632,7 +632,7 @@
     margin: 12px 0 0;
     padding-left: 20px;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
     line-height: 1.55;
@@ -645,7 +645,7 @@
 
     margin: 0 0 8px;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 14px;
     line-height: 1.55;
@@ -689,7 +689,7 @@
 
     padding: 0 0 8px;
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 13px;
     font-weight: 600;
@@ -710,9 +710,9 @@
 
 .ce-static-table thead th {
 
-    background: #f2f4f7;
+    background: var(--surface-sunken);
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-weight: 700;
 
@@ -720,7 +720,7 @@
 
 .ce-static-table tbody th {
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
     font-weight: 600;
 
@@ -800,7 +800,7 @@
 
         white-space: normal;
 
-        background: #f2f4f7;
+        background: var(--surface-sunken);
 
     }
 
@@ -830,7 +830,7 @@
 
     .ce-table__cell--head {
 
-        color: #344054;
+        color: var(--color-gray-700);
 
         font-size: 13px;
         font-weight: 700;

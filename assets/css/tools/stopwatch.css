@@ -56,7 +56,7 @@
 
     margin: 8px 0 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 16px;
     font-weight: 600;
@@ -67,7 +67,7 @@
 
     margin: 4px 0 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 16px;
     font-variant-numeric: tabular-nums;
@@ -105,7 +105,7 @@
 
     margin: 14px 0 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
     line-height: 1.7;
@@ -117,10 +117,10 @@
 
     padding: 1px 6px;
 
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line);
     border-radius: 6px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
     color: var(--color-ink);
 
@@ -177,7 +177,7 @@
     border-top: 0;
     border-bottom: 1px solid var(--color-slate-200);
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
     font-weight: 600;
@@ -215,13 +215,13 @@
 
 .sw-mark--fast {
 
-    color: #067647;
+    color: var(--state-success);
 
 }
 
 .sw-mark--slow {
 
-    color: #b42318;
+    color: var(--state-error);
 
 }
 
@@ -233,9 +233,9 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 10px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 14px;
     line-height: 1.5;

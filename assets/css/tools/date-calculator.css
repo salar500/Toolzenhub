@@ -104,12 +104,12 @@
 
     padding: 8px 14px;
 
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line-control);
     border-radius: 10px;
 
     background: var(--color-white);
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 14px;
     font-weight: 600;
@@ -124,7 +124,7 @@
 
 .dcalc-mode__option:hover span {
 
-    background: #f2f4f7;
+    background: var(--surface-sunken);
 
 }
 
@@ -132,7 +132,7 @@
 
     border: 2px solid var(--color-brand-green);
 
-    background: #ecfdf3;
+    background: var(--accent-soft);
 
     color: var(--color-ink);
 
@@ -186,9 +186,9 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 10px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 13px;
     line-height: 1.6;
@@ -263,8 +263,8 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 10px;
 
-    background: #f9fafb;
-    color: #344054;
+    background: var(--surface-page);
+    color: var(--color-gray-700);
 
     font-size: 14px;
     line-height: 1.6;

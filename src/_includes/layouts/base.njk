@@ -54,11 +54,7 @@
 
     <link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | url }}">
 
-{%- if fonts %}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-{%- endif %}
 {% for sheet in styles %}
     <link rel="stylesheet" href="{{ sheet | url }}">
 {%- endfor %}

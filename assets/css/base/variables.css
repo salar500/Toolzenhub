@@ -1,107 +1,179 @@
 /* =========================================================
-   ToolZen Hub Design System
+   ToolZen Hub Design System 2.0
    Variables
+
+   Approved direction: Design C, Premium Neutral + Indigo
+   (docs/ecosystem-review/ui-ux-design-system/05-COLOUR-AND-TYPOGRAPHY-OPTIONS.md).
+
+   Layers, top to bottom:
+   1. @font-face (self-hosted Inter, no third-party font request)
+   2. Semantic tokens: the values every new rule should read
+   3. Compatibility aliases: the older names still used by the
+      stylesheets, pointing at the semantic tokens. Remove an alias
+      only when no stylesheet reads it (tests/unit/design-tokens.test.mjs)
+   4. Scales: type, spacing, radius, shadow, layout, motion
 ========================================================= */
+
+/* One variable file, weights 400 to 700, Latin plus the rupee sign (U+20B9).
+   SIL Open Font License 1.1: assets/fonts/OFL.txt. */
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url("../../fonts/inter-var-latin.woff2") format("woff2");
+}
+
+/* The system face, scaled to Inter's metrics so the swap moves nothing. */
+@font-face {
+    font-family: "Inter Fallback";
+    src: local("Arial");
+    size-adjust: 107%;
+    ascent-override: 90%;
+    descent-override: 22%;
+    line-gap-override: 0%;
+}
 
 :root {
 
     /* ========================================
-       Brand Colors
+       Semantic tokens (light)
+       Measured contrast is in docs/ecosystem-review/ui-ux-design-system/
+       21-DEVELOPMENT-LEDGER.md and tests/unit/design-tokens.test.mjs
     ======================================== */
 
-    --color-primary: #2563eb;
-    --color-primary-dark: #1d4ed8;
-    --color-primary-light: #dbeafe;
+    /* Surfaces */
+    --surface-page: #fafaf9;
+    --surface-card: #ffffff;
+    --surface-sunken: #f5f5f4;
+    --surface-footer: #1c1917;
 
-    --color-secondary: #14b8a6;
-    --color-accent: #f59e0b;
+    /* Lines. --line is decoration; --line-control is the 3:1 boundary of an
+       input, checkbox or button outline (WCAG 1.4.11). */
+    --line: #e7e5e4;
+    --line-control: #78716c;
 
-    --color-success: #16a34a;
-    --color-warning: #f59e0b;
-    --color-danger: #dc2626;
-    --color-info: #0ea5e9;
+    /* Text */
+    --ink: #1c1917;
+    --ink-muted: #57534e;
+    --ink-subtle: #78716c;
+    --ink-on-footer: #e7e5e4;
+    --ink-muted-on-footer: #d6d3d1;
+
+    /* Primary action: near-black fill, the page's one strong colour is the accent */
+    --action: #1c1917;
+    --action-hover: #292524;
+    --action-active: #0c0a09;
+    --action-soft: #f5f5f4;
+    --action-pressed: #e7e5e4;
+    --on-action: #ffffff;
+
+    /* Accent: links, eyebrows, selected states, focus */
+    --accent: #4338ca;
+    --accent-hover: #3730a3;
+    --accent-active: #312e81;
+    --accent-soft: #eef2ff;
+    --accent-line: #c7d2fe;
+    --accent-on-dark: #a5b4fc;
+    --link: #4338ca;
+    --focus-ring: #4338ca;
+
+    /* State colours keep their meaning. Always paired with words or an icon. */
+    --state-success: #166534;
+    --state-success-soft: #f0fdf4;
+    --state-success-line: #86efac;
+    --state-error: #b91c1c;
+    --state-error-soft: #fef2f2;
+    --state-error-line: #fca5a5;
+    --state-warning: #92400e;
+    --state-warning-soft: #fffbeb;
+    --state-warning-line: #fcd34d;
+    --state-info: #4338ca;
+    --state-info-soft: #eef2ff;
+    --state-info-line: #c7d2fe;
+
+    /* The unmistakably "unavailable" look (exempt from contrast rules, as
+       inactive). An enabled control never uses this pair. */
+    --disabled-bg: #e7e5e4;
+    --disabled-text: #a8a29e;
 
     /* ========================================
-       Colours the site actually uses most
-
-       --color-primary above is the original blue scale and is still
-       used where it is referenced. The visible brand is this green;
-       the three neutrals are the repeated text/border colours. Values
-       are exactly the literals they replaced.
+       Compatibility aliases (older names, same roles)
     ======================================== */
 
-    --color-brand-green: #0b9f58;
-    --color-slate-200: #e2e8f0;
-    --color-ink: #101828;
-    --color-ink-muted: #667085;
+    --color-primary: var(--accent);
+    --color-primary-dark: var(--accent-hover);
+    --color-primary-light: var(--accent-soft);
+    --color-secondary: var(--accent);
+    --color-accent: var(--accent);
 
-    /* Controls (buttons). The brand green above is 3.43:1 against white, too light for
-       the text inside a button (WCAG AA needs 4.5:1), so controls use this darker ACTION
-       green of the same hue. Do not use the brand green as a button background or as the
-       text colour of a control. Contrast with white / on the tints (tests/unit/button-contrast.test.mjs):
-       action 5.08, hover 5.94, active 6.62. */
-    --color-action-green: #087f47;
-    --color-action-green-hover: #07733f;
-    --color-action-green-active: #066b3b;
-    --color-action-green-soft: #ecfdf3;
-    --color-action-green-pressed: #e4f7ec;
+    --color-success: var(--state-success);
+    --color-warning: var(--state-warning);
+    --color-danger: var(--state-error);
+    --color-info: var(--state-info);
 
-    /* The unmistakably "unavailable" look (exempt from contrast rules, as inactive).
-       An enabled control never uses this pair. */
-    --color-control-disabled-bg: #eaecf0;
-    --color-control-disabled-text: #98a2b3;
+    /* Brand colour wherever the old green marked "this is ToolZenHub" */
+    --color-brand-green: var(--accent);
+    --color-slate-200: var(--line);
+    --color-ink: var(--ink);
+    --color-ink-muted: var(--ink-muted);
 
-    /* ========================================
-       Neutral Colors
-    ======================================== */
+    --color-action-green: var(--action);
+    --color-action-green-hover: var(--action-hover);
+    --color-action-green-active: var(--action-active);
+    --color-action-green-soft: var(--action-soft);
+    --color-action-green-pressed: var(--action-pressed);
 
-    --color-white: #ffffff;
-    --color-black: #111827;
+    --color-control-disabled-bg: var(--disabled-bg);
+    --color-control-disabled-text: var(--disabled-text);
 
-    --color-gray-50: #f9fafb;
-    --color-gray-100: #f3f4f6;
-    --color-gray-200: #e5e7eb;
-    --color-gray-300: #d1d5db;
-    --color-gray-400: #9ca3af;
-    --color-gray-500: #6b7280;
-    --color-gray-600: #4b5563;
-    --color-gray-700: #374151;
-    --color-gray-800: #1f2937;
-    --color-gray-900: #111827;
+    --color-white: var(--surface-card);
+    --color-black: var(--ink);
 
-    /* ========================================
-       Background
-    ======================================== */
+    --color-gray-50: var(--surface-page);
+    --color-gray-100: var(--surface-sunken);
+    --color-gray-200: var(--line);
+    --color-gray-300: #d6d3d1;
+    --color-gray-400: #a8a29e;
+    --color-gray-500: var(--ink-subtle);
+    --color-gray-600: var(--ink-muted);
+    --color-gray-700: #44403c;
+    --color-gray-800: #292524;
+    --color-gray-900: var(--ink);
 
-    --bg-body: var(--color-gray-50);
-    --bg-card: var(--color-white);
-    --bg-header: rgba(255,255,255,0.92);
+    --bg-body: var(--surface-page);
+    --bg-card: var(--surface-card);
+    --bg-header: rgba(255, 255, 255, 0.94);
 
-    /* ========================================
-       Text
-    ======================================== */
+    --text-primary: var(--ink);
+    --text-secondary: var(--ink-muted);
+    --text-light: var(--ink-subtle);
 
-    --text-primary: var(--color-gray-900);
-    --text-secondary: var(--color-gray-600);
-    --text-light: var(--color-gray-400);
-
-    /* ========================================
-       Border
-    ======================================== */
-
-    --border-color: var(--color-gray-200);
+    --border-color: var(--line);
 
     /* ========================================
        Typography
+       Inter (self-hosted), then the metric-matched fallback, then the
+       system face. Monospace stays the system face.
     ======================================== */
 
     --font-family:
         "Inter",
+        "Inter Fallback",
         system-ui,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
+        Roboto,
         sans-serif;
+
+    --font-mono:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        "Liberation Mono",
+        monospace;
 
     --font-xs: .75rem;
     --font-sm: .875rem;
@@ -147,26 +219,38 @@
     --radius-full: 999px;
 
     /* ========================================
-       Shadows
+       Shadows (neutral, low)
     ======================================== */
 
-    --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+    --shadow-sm: 0 1px 2px rgba(28, 25, 23, .06);
 
-    --shadow-md: 0 6px 20px rgba(0,0,0,.08);
+    --shadow-md: 0 4px 14px rgba(28, 25, 23, .08);
 
-    --shadow-lg: 0 12px 35px rgba(0,0,0,.12);
+    --shadow-lg: 0 10px 28px rgba(28, 25, 23, .12);
 
     /* ========================================
-       Container
+       Layout
+       Breakpoints (media queries cannot read variables; kept here as the
+       one written list): 640px, 960px, 1280px.
+       Content widths: 720px reading, 1120px page, 1440px wide.
     ======================================== */
 
     --container-width: 1280px;
     --container-padding: 1rem;
 
-    /* ========================================
-       Header
-    ======================================== */
+    --width-reading: 720px;
+    --width-page: 1120px;
+    --width-wide: 1440px;
 
     --header-height: 72px;
 
+    /* Interactive controls: the touch target of rulebook 7.2 */
+    --target-size: 44px;
+
     /* ========================================
+       Motion (new components only; transform and opacity)
+    ======================================== */
+
+    --motion-fast: 120ms;
+    --motion-base: 180ms;
+}

@@ -95,7 +95,7 @@ describe("the two real tools are unchanged", () => {
     const t = cat.getToolById("emi");
     assert.deepEqual([t.id, t.title, t.status, t.category, t.toolType, t.sitePath, t.section], ["emi", "EMI Calculator", "published", "loans", "calculator", "/calculators/emi/", "Calculators"]);
     assert.equal(t.description, "Calculate your monthly EMI for any loan amount, interest rate and tenure.");
-    assert.deepEqual(t.seo, { title: "EMI Calculator | ToolZen Hub", description: "Calculate your monthly EMI, total interest and total repayment for a loan.", themeColor: "#2563eb" });
+    assert.deepEqual(t.seo, { title: "EMI Calculator | ToolZen Hub", description: "Calculate your monthly EMI, total interest and total repayment for a loan.", themeColor: "#fafaf9" });
   });
 
   test("Loan Comparison Calculator", () => {

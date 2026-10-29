@@ -5,16 +5,16 @@
 
 :root {
 
-    --about-green: #00A651;
-    --about-green-dark: #008C45;
-    --about-green-light: #E6F6ED;
+    --about-green: var(--accent);
+    --about-green-dark: var(--accent-hover);
+    --about-green-light: var(--accent-soft);
 
-    --about-bg: #F8FAFC;
+    --about-bg: var(--surface-page);
     --about-white: #FFFFFF;
 
-    --about-heading: #0F172A;
-    --about-body: #64748B;
-    --about-muted: #94A3B8;
+    --about-heading: var(--ink);
+    --about-body: var(--ink-subtle);
+    --about-muted: var(--color-gray-400);
 
     --about-border: var(--color-slate-200);
 
@@ -60,7 +60,7 @@
     background:
         linear-gradient(
             180deg,
-            #F8FAFC 0%,
+            var(--surface-page) 0%,
             #FFFFFF 100%
         );
 
@@ -574,7 +574,7 @@
 
     border-radius: 10px;
 
-    background: #F1F5F9;
+    background: var(--surface-sunken);
 
 }
 
@@ -731,5 +731,5 @@
 
 
 .about-offer-list li > span:last-child {
-    color: #475569;
+    color: var(--ink-muted);
 }

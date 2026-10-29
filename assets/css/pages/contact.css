@@ -27,9 +27,9 @@
 
     text-align: center;
 
-    background: #f7fbf9;
+    background: var(--surface-sunken);
 
-    border-bottom: 1px solid #e7eeeb;
+    border-bottom: 1px solid var(--line);
 
     box-sizing: border-box;
 }
@@ -81,7 +81,7 @@
 
 
 .legal-breadcrumb .calculator-breadcrumb strong {
-    color: #334155;
+    color: var(--color-gray-700);
 
     font-weight: 600;
 }
@@ -221,7 +221,7 @@
 
 
 .contact-form__group label {
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 12px;
 
@@ -237,7 +237,7 @@
 
     padding: 11px 12px;
 
-    border: 1px solid #d9e0dd;
+    border: 1px solid var(--line);
 
     border-radius: 7px;
 
@@ -266,7 +266,7 @@
 
 .contact-form__group input::placeholder,
 .contact-form__group textarea::placeholder {
-    color: #98a2b3;
+    color: var(--ink-subtle);
 }
 
 
@@ -275,7 +275,7 @@
     border-color: var(--color-brand-green);
 
     box-shadow:
-        0 0 0 3px rgba(11, 159, 88, 0.10);
+        0 0 0 3px rgba(67, 56, 202, 0.10);
 }
 
 
@@ -311,7 +311,7 @@
 
 
 .contact-form__button:hover {
-    background: #087d46;
+    background: var(--action);
 
     transform: translateY(-1px);
 }
@@ -332,7 +332,7 @@
 
     background: #fffbeb;
 
-    color: #92400e;
+    color: var(--state-warning);
 
     font-size: 13px;
 
@@ -343,7 +343,7 @@
 .contact-form__status {
     margin: 14px 0 0;
 
-    color: #b42318;
+    color: var(--state-error);
 
     font-size: 13px;
 
@@ -359,7 +359,7 @@
 
 
 .contact-form__button:disabled {
-    background: #98a2b3;
+    background: var(--ink-subtle);
 
     cursor: not-allowed;
 

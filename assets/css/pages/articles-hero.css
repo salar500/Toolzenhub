@@ -15,7 +15,7 @@
     background:
         linear-gradient(
             180deg,
-            #F8FAFC 0%,
+            var(--surface-page) 0%,
             #FFFFFF 100%
         );
 }
@@ -123,7 +123,7 @@
     font-weight: 700;
     cursor: pointer;
     box-shadow:
-        0 5px 12px rgba(0, 166, 81, .15);
+        0 5px 12px rgba(67, 56, 202, .15);
     transition:
         background .2s ease,
         transform .2s ease,
@@ -136,5 +136,5 @@
     border-color: var(--articles-green-dark);
     transform: translateY(-1px);
     box-shadow:
-        0 8px 18px rgba(0, 166, 81, .20);
+        0 8px 18px rgba(67, 56, 202, .20);
 }

@@ -91,7 +91,7 @@
 
     box-sizing: border-box;
 
-    border: 1px solid #e4e7ec;
+    border: 1px solid var(--line);
     border-radius: 12px;
 
     background: var(--color-white);
@@ -135,7 +135,7 @@
 
     padding: 8px 0;
 
-    border-top: 1px solid #eaecf0;
+    border-top: 1px solid var(--line);
 
     font-size: 12px;
     line-height: 1.4;
@@ -144,7 +144,7 @@
 
 .prepay-compare__list dt {
 
-    color: #475467;
+    color: var(--ink-muted);
 
 }
 
@@ -190,13 +190,13 @@
 
     text-align: left;
 
-    box-shadow: 1px 0 0 #eaecf0;
+    box-shadow: 1px 0 0 var(--line);
 
 }
 
 .prepay-table thead th:first-child {
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
 }
 
@@ -220,7 +220,7 @@
     top: 0;
     z-index: 1;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
 }
 
@@ -251,7 +251,7 @@
 
     margin: 0 0 10px;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 12px;
 
@@ -305,12 +305,12 @@
 
     padding: 8px 14px;
 
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line-control);
     border-radius: 999px;
 
     background: var(--color-white);
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 12px;
     font-weight: 600;
@@ -324,7 +324,7 @@
 
 .prepay-scenarios__option:hover span {
 
-    background: #f2f4f7;
+    background: var(--surface-sunken);
 
 }
 
@@ -334,7 +334,7 @@
 
     border-color: var(--color-brand-green);
 
-    background: #ecfdf3;
+    background: var(--accent-soft);
 
     color: var(--color-ink);
 

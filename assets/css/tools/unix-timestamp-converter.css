@@ -37,7 +37,7 @@
 
 .ts-label {
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
     font-weight: 700;
@@ -93,7 +93,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 14px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
 }
 
@@ -121,7 +121,7 @@
 
     margin: 4px 0 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 14px;
     line-height: 1.5;
@@ -249,13 +249,13 @@
     margin: 10px 0 0;
     padding: 10px 14px;
 
-    border: 1px solid #fda29b;
+    border: 1px solid var(--state-error-line);
     border-left-width: 6px;
     border-radius: 10px;
 
-    background: #fef3f2;
+    background: var(--state-error-soft);
 
-    color: #912018;
+    color: var(--state-error);
 
     font-size: 15px;
     line-height: 1.55;
@@ -301,7 +301,7 @@
 
 .ts-row__label {
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 14px;
     font-weight: 600;
@@ -337,7 +337,7 @@
 
     width: 100%;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-family:
         ui-monospace, SFMono-Regular, Menlo, Consolas,
@@ -360,7 +360,7 @@
 
     margin: 4px 0;
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 14px;
     line-height: 1.5;
@@ -388,9 +388,9 @@
     border: 1px solid #fec84b;
     border-radius: 12px;
 
-    background: #fffaeb;
+    background: var(--state-warning-soft);
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 15px;
     line-height: 1.55;
@@ -429,7 +429,7 @@
 
     padding: 8px 0;
 
-    border-top: 1px solid #fedf89;
+    border-top: 1px solid var(--state-warning-line);
 
     overflow-wrap: anywhere;
 
@@ -503,7 +503,7 @@
     border-top: 0;
     border-bottom: 1px solid var(--color-slate-200);
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
     font-weight: 600;
@@ -526,7 +526,7 @@
 
 .ts-bad {
 
-    color: #912018;
+    color: var(--state-error);
 
     overflow-wrap: anywhere;
 
@@ -587,7 +587,7 @@
 
     margin: 10px 0;
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 15px;
     font-weight: 600;

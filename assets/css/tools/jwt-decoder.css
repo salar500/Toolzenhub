@@ -63,7 +63,7 @@
 
 .jw-meta {
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
     font-variant-numeric: tabular-nums;
@@ -79,7 +79,7 @@
 
     padding: 12px 14px;
 
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line-control);
     border-radius: 12px;
 
     background: #ffffff;
@@ -109,7 +109,7 @@
 
     margin: 8px 0 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 14px;
 
@@ -170,7 +170,7 @@
 
     margin: 2px 0 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
     line-height: 1.7;
@@ -182,10 +182,10 @@
 
     padding: 1px 6px;
 
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line);
     border-radius: 6px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
     color: var(--color-ink);
 
@@ -202,13 +202,13 @@
     margin: 0;
     padding: 12px 14px;
 
-    border: 1px solid #fedf89;
+    border: 1px solid var(--state-warning-line);
     border-left-width: 6px;
     border-radius: 10px;
 
-    background: #fffcf5;
+    background: var(--state-warning-soft);
 
-    color: #4e3a05;
+    color: var(--state-warning);
 
     font-size: 14px;
     line-height: 1.55;
@@ -234,9 +234,9 @@
     border-left-width: 6px;
     border-radius: 10px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 15px;
     font-weight: 600;
@@ -248,11 +248,11 @@
 
 .jw-workspace[data-state="invalid"] .jw-status {
 
-    border-color: #b42318;
+    border-color: var(--state-error);
 
-    background: #fef3f2;
+    background: var(--state-error-soft);
 
-    color: #912018;
+    color: var(--state-error);
 
 }
 
@@ -260,7 +260,7 @@
 
     margin: 8px 0 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
 
@@ -271,7 +271,7 @@
     margin-top: 12px;
     padding: 14px;
 
-    border: 1px solid #fda29b;
+    border: 1px solid var(--state-error-line);
     border-radius: 12px;
 
     background: #ffffff;
@@ -286,7 +286,7 @@
 
 .jw-error__title {
 
-    color: #912018;
+    color: var(--state-error);
 
     font-size: 16px;
     font-weight: 700;
@@ -310,7 +310,7 @@
 
     margin-top: 6px !important;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 14px;
     font-variant-numeric: tabular-nums;
@@ -325,7 +325,7 @@
 
     border-radius: 8px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
     color: var(--color-ink);
 
@@ -359,7 +359,7 @@
 
     background: #ffffff;
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 14px;
     line-height: 1.55;
@@ -402,7 +402,7 @@
 
 .jw-card--quiet {
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
 }
 
@@ -450,7 +450,7 @@
 
     border-radius: 8px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
     color: var(--color-ink);
 
@@ -489,7 +489,7 @@
 
 .jw-row dt {
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 13px;
     font-weight: 700;
@@ -533,7 +533,7 @@
     margin: 12px 0 0;
     padding-left: 20px;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
     line-height: 1.55;
@@ -546,7 +546,7 @@
 
     margin: 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 14px;
     line-height: 1.55;
@@ -559,7 +559,7 @@
 
     margin: 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
     line-height: 1.55;

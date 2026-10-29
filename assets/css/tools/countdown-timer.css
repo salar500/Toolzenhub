@@ -63,12 +63,12 @@
     margin: 12px 0 0;
     padding: 10px 14px;
 
-    border: 1px solid #f04438;
+    border: 1px solid var(--state-error);
     border-radius: 10px;
 
-    background: #fef3f2;
+    background: var(--state-error-soft);
 
-    color: #912018;
+    color: var(--state-error);
 
     font-size: 14px;
     font-weight: 600;
@@ -96,12 +96,12 @@
 
     padding: 8px 12px;
 
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line-control);
     border-radius: 10px;
 
     background: var(--color-white);
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font: inherit;
     font-size: 14px;
@@ -113,7 +113,7 @@
 
 .ct-preset:hover {
 
-    background: #f2f4f7;
+    background: var(--surface-sunken);
 
 }
 
@@ -121,7 +121,7 @@
 
     border: 2px solid var(--color-brand-green);
 
-    background: #ecfdf3;
+    background: var(--accent-soft);
 
     color: var(--color-ink);
 
@@ -170,7 +170,7 @@
 
     margin: 8px 0 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 16px;
     font-weight: 600;
@@ -185,7 +185,7 @@
 
 .ct-panel[data-state="finished"] .ct-status {
 
-    color: #067647;
+    color: var(--state-success);
 
     font-size: 20px;
     font-weight: 750;
@@ -242,7 +242,7 @@
 
     margin-top: 18px;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 14px;
 

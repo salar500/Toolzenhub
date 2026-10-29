@@ -32,7 +32,7 @@
 
     border-radius: 50%;
 
-    background: #eff6ff;
+    background: var(--accent-soft);
 
     font-size: 22px;
 }
@@ -40,13 +40,13 @@
 .loan-info-card h2 {
     margin: 0 0 10px;
 
-    color: #0f172a;
+    color: var(--ink);
     font-size: 19px;
 }
 
 .loan-info-card p,
 .loan-info-card li {
-    color: #64748b;
+    color: var(--ink-subtle);
     font-size: 14px;
     line-height: 1.7;
 }
@@ -74,7 +74,7 @@
 
     gap: 8px 25px;
 
-    color: #059669;
+    color: var(--accent);
     font-size: 13px;
     font-weight: 600;
 }
@@ -100,7 +100,7 @@
 
     border-radius: 8px;
 
-    background: #f8fafc;
+    background: var(--surface-page);
 }
 
 .loan-example-grid strong,
@@ -110,7 +110,7 @@
 
 .loan-example-grid span {
     margin-top: 4px;
-    color: #2563eb;
+    color: var(--accent);
 }
 
 
@@ -163,7 +163,7 @@
 .loan-content-card summary {
     padding: 15px 0;
 
-    color: #334155;
+    color: var(--color-gray-700);
     font-size: 14px;
     font-weight: 600;
 

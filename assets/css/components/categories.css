@@ -38,7 +38,7 @@
     padding-top: 0;
     padding-bottom: 22px;
 
-    background: #f7fbf9;
+    background: var(--surface-sunken);
 }
 
 
@@ -96,7 +96,7 @@
 
     flex-shrink: 0;
 
-    color: #087d46;
+    color: var(--accent);
 
     font-size: 13px;
 
@@ -111,7 +111,7 @@
 
 
 .section-link:hover {
-    color: #056438;
+    color: var(--accent);
 
     gap: 9px;
 }
@@ -188,7 +188,7 @@
 .category-card:hover {
     transform: translateY(-2px);
 
-    border-color: #cfe8dc;
+    border-color: var(--accent-line);
 
     box-shadow:
         0 7px 18px rgba(16, 24, 40, 0.07);
@@ -223,18 +223,18 @@
 ========================================================= */
 
 .category-card__icon--loans {
-    background: #e9f8e9;
-    color: #159447;
+    background: var(--surface-sunken);
+    color: var(--accent);
 }
 
 .category-card__icon--investment {
-    background: #e6f6ed;
+    background: var(--accent-soft);
     color: var(--color-brand-green);
 }
 
 .category-card__icon--tax {
-    background: #eee8ff;
-    color: #7047d9;
+    background: var(--accent-soft);
+    color: var(--accent);
 }
 
 .category-card__icon--health {
@@ -253,8 +253,8 @@
 }
 
 .category-card__icon--converter {
-    background: #e3f7f4;
-    color: #158c7d;
+    background: var(--surface-sunken);
+    color: var(--accent);
 }
 
 .category-card__icon--more {
@@ -294,7 +294,7 @@
 .category-card p {
     margin: 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 11px;
 
@@ -345,7 +345,7 @@
 
     padding: 13px;
 
-    border: 1px solid #e5ebe8;
+    border: 1px solid var(--line);
 
     border-radius: 12px;
 
@@ -370,7 +370,7 @@
 .calculator-card:hover {
     transform: translateY(-2px);
 
-    border-color: #cfe8dc;
+    border-color: var(--accent-line);
 
     box-shadow:
         0 7px 18px rgba(16, 24, 40, 0.07);
@@ -405,8 +405,8 @@
 ========================================================= */
 
 .calculator-card__icon--green {
-    background: #eaf8df;
-    color: #3a9a40;
+    background: var(--surface-sunken);
+    color: var(--accent);
 }
 
 .calculator-card__icon--blue {
@@ -421,7 +421,7 @@
 
 .calculator-card__icon--purple {
     background: #eee7ff;
-    color: #7047d9;
+    color: var(--accent);
 }
 
 .calculator-card__icon--pink {
@@ -430,8 +430,8 @@
 }
 
 .calculator-card__icon--teal {
-    background: #e2f7f4;
-    color: #178c7d;
+    background: var(--accent-soft);
+    color: var(--accent);
 }
 
 
@@ -468,7 +468,7 @@
 .calculator-card p {
     margin: 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 10px;
 

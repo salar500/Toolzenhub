@@ -39,13 +39,13 @@
     margin: 0 0 12px;
     padding: 10px 14px;
 
-    border: 1px solid #fedf89;
+    border: 1px solid var(--state-warning-line);
     border-left-width: 6px;
     border-radius: 10px;
 
-    background: #fffcf5;
+    background: var(--state-warning-soft);
 
-    color: #4e3a05;
+    color: var(--state-warning);
 
     font-size: 14px;
     font-weight: 600;
@@ -137,7 +137,7 @@
 
 .ccp-side__item dt {
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 13px;
 
@@ -164,9 +164,9 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 10px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 15px;
     line-height: 1.55;
@@ -184,7 +184,7 @@
     border-left-width: 6px;
     border-radius: 12px;
 
-    background: #f9fafb;
+    background: var(--surface-page);
 
 }
 
@@ -201,7 +201,7 @@
     margin: 0;
     padding-left: 20px;
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     font-size: 14px;
     line-height: 1.6;

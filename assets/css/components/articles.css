@@ -49,7 +49,7 @@
 
     overflow: hidden;
 
-    border: 1px solid #e5ebe8;
+    border: 1px solid var(--line);
 
     border-radius: 12px;
 
@@ -72,7 +72,7 @@
 .article-card:hover {
     transform: translateY(-2px);
 
-    border-color: #cfe8dc;
+    border-color: var(--accent-line);
 
     box-shadow:
         0 7px 18px rgba(16, 24, 40, 0.07);
@@ -90,7 +90,7 @@
 
     overflow: hidden;
 
-    background: #eef5f2;
+    background: var(--surface-sunken);
 }
 
 
@@ -207,7 +207,7 @@
 ========================================================= */
 
 .article-card__read {
-    color: #087d46;
+    color: var(--accent);
 
     font-size: 12px;
 
@@ -220,7 +220,7 @@
 
 
 .article-card:hover .article-card__read {
-    color: #056438;
+    color: var(--accent);
 }
 
 

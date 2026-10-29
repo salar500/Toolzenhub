@@ -10,21 +10,21 @@
 ========================================================= */
 
 :root {
-    --articles-green: #00A651;
-    --articles-green-dark: #008C45;
-    --articles-green-light: #E6F6ED;
+    --articles-green: var(--accent);
+    --articles-green-dark: var(--accent-hover);
+    --articles-green-light: var(--accent-soft);
 
-    --articles-bg: #F8FAFC;
+    --articles-bg: var(--surface-page);
     --articles-white: #FFFFFF;
 
-    --articles-heading: #0F172A;
-    --articles-body: #64748B;
-    --articles-muted: #94A3B8;
+    --articles-heading: var(--ink);
+    --articles-body: var(--ink-subtle);
+    --articles-muted: var(--color-gray-400);
 
     --articles-border: var(--color-slate-200);
-    --articles-border-light: #F1F5F9;
+    --articles-border-light: var(--surface-sunken);
 
-    --articles-navy: #0F172A;
+    --articles-navy: var(--ink);
 }
 
 
@@ -43,7 +43,7 @@
     align-items: center;
     gap: 8px;
     font-size: 13px;
-    color: #64748B;
+    color: var(--ink-subtle);
 }
 
 
@@ -54,7 +54,7 @@
 
 
 .articles-breadcrumb .calculator-breadcrumb strong {
-    color: #334155;
+    color: var(--color-gray-700);
     font-weight: 600;
 }
 
@@ -115,7 +115,7 @@
     border: 1px solid var(--articles-border);
     border-radius: 999px;
     background: var(--articles-white);
-    color: #475569;
+    color: var(--ink-muted);
     font: inherit;
     font-size: 12px;
     font-weight: 700;
@@ -199,7 +199,7 @@
     border: 1px solid var(--articles-border);
     border-radius: 7px;
     background: var(--articles-white);
-    color: #475569;
+    color: var(--ink-muted);
     font: inherit;
     font-size: 11px;
     font-weight: 700;
@@ -214,8 +214,8 @@
 
 .pagination-button:hover,
 .pagination-next:hover {
-    border-color: #A7DDBD;
-    background: #F1FBF5;
+    border-color: var(--line);
+    background: var(--surface-sunken);
     color: var(--articles-green);
 }
 

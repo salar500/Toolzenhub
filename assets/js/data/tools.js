@@ -160,7 +160,7 @@ const catalog = [
             description:
                 "Calculate your monthly EMI, total interest and total repayment for a loan.",
             themeColor:
-                "#2563eb"
+                "#fafaf9"
         }
     },
 

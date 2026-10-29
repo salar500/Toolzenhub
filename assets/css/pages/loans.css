@@ -24,7 +24,7 @@
 
     padding: 22px 0 10px;
 
-    background: #f7faf9;
+    background: var(--surface-sunken);
 }
 
 
@@ -73,13 +73,13 @@
 
 .loans-breadcrumb__home {
 
-    color: #168552;
+    color: var(--accent);
 }
 
 
 .loans-breadcrumb__separator {
 
-    color: #98a2b3;
+    color: var(--ink-subtle);
 
     font-size: 18px;
 }
@@ -87,7 +87,7 @@
 
 .loans-breadcrumb__current {
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-weight: 500;
 }

@@ -2,7 +2,6 @@
   "emi": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -50,7 +49,6 @@
   "prepayment": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -77,7 +75,6 @@
   "balance-transfer": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -104,7 +101,6 @@
   "sip": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -131,7 +127,6 @@
   "margin": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -158,7 +153,6 @@
   "profit": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -185,7 +179,6 @@
   "home-loan": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -212,7 +205,6 @@
   "fd": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -239,7 +231,6 @@
   "ppf": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -266,7 +257,6 @@
   "gratuity": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -293,7 +283,6 @@
   "salary-in-hand": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -320,7 +309,6 @@
   "income-tax": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -348,7 +336,6 @@
   "gst": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -375,7 +362,6 @@
   "cagr": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -402,7 +388,6 @@
   "swp": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -429,7 +414,6 @@
   "credit-card-payoff": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -456,7 +440,6 @@
   "percentage": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -483,7 +466,6 @@
   "date-difference": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -511,7 +493,6 @@
   "date-calculator": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -538,7 +519,6 @@
   "countdown-timer": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -566,7 +546,6 @@
   "stopwatch": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -593,7 +572,6 @@
   "json-formatter": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -620,7 +598,6 @@
   "unix-timestamp-converter": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -647,7 +624,6 @@
   "text-diff": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -674,7 +650,6 @@
   "hours-calculator": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -701,7 +676,6 @@
   "jwt-decoder": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -728,7 +702,6 @@
   "cron-expression-explainer": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -755,7 +728,6 @@
   "base64-encoder-decoder": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -782,7 +754,6 @@
   "url-parser": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -809,7 +780,6 @@
   "json-compare": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -836,7 +806,6 @@
   "jsonpath-tester": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -863,7 +832,6 @@
   "test-design-lab": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -890,7 +858,6 @@
   "cron-challenge-lab": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -917,7 +884,6 @@
   "jsonpath-challenge-lab": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -944,7 +910,6 @@
   "json-error-fixing-lab": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -971,7 +936,6 @@
   "smart-flashcards": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -998,7 +962,6 @@
   "list-comparer": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1025,7 +988,6 @@
   "uuid-generator": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1052,7 +1014,6 @@
   "json-csv-converter": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1079,7 +1040,6 @@
   "time-zone-converter": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1106,7 +1066,6 @@
   "world-clock": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1133,7 +1092,6 @@
   "image-compressor-resizer": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1160,7 +1118,6 @@
   "photos-to-pdf": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1187,7 +1144,6 @@
   "merge-pdf": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1214,7 +1170,6 @@
   "split-pdf": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1241,7 +1196,6 @@
   "pdf-pages": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1268,7 +1222,6 @@
   "business-days": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1295,7 +1248,6 @@
   "time-duration": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1322,7 +1274,6 @@
   "shift-planner": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1349,7 +1300,6 @@
   "pomodoro-timer": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1376,7 +1326,6 @@
   "interval-timer": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1403,7 +1352,6 @@
   "meeting-planner": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",
@@ -1430,7 +1378,6 @@
   "xirr": {
     "fonts": true,
     "styles": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       "/assets/css/base/variables.css",
       "/assets/css/base/reset.css",
       "/assets/css/base/typography.css",

@@ -37,7 +37,7 @@ body {
 
     background: rgba(255, 255, 255, 0.96);
 
-    border-bottom: 1px solid #e8eceb;
+    border-bottom: 1px solid var(--line);
 
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
@@ -121,7 +121,7 @@ body {
     font-weight: 700;
 
     box-shadow:
-        0 4px 12px rgba(11, 159, 88, 0.18);
+        0 4px 12px rgba(67, 56, 202, 0.18);
 }
 
 
@@ -229,7 +229,7 @@ body {
     margin: 0 !important;
     padding: 0 !important;
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     background: transparent;
 
@@ -254,7 +254,7 @@ body {
 
 
 .navbar__menu a:visited {
-    color: #344054;
+    color: var(--color-gray-700);
 }
 
 
@@ -344,7 +344,7 @@ body {
 
 
 .menu-toggle:hover {
-    background: #f1f8f5;
+    background: var(--surface-sunken);
     color: var(--color-brand-green);
 }
 
@@ -385,7 +385,7 @@ body {
 
     background: #ffffff;
 
-    border-bottom: 1px solid #e8eceb;
+    border-bottom: 1px solid var(--line);
 
     box-shadow:
         0 8px 20px rgba(16, 24, 40, 0.06);
@@ -417,7 +417,7 @@ body {
 
     padding: 14px 4px;
 
-    color: #344054;
+    color: var(--color-gray-700);
 
     text-decoration: none;
 
@@ -467,7 +467,7 @@ body {
 ========================================================= */
 
 .menu-toggle.is-open {
-    background: #f1f8f5;
+    background: var(--surface-sunken);
     color: var(--color-brand-green);
 }
 

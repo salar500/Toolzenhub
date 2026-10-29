@@ -53,13 +53,13 @@
 
     padding: 5px 11px;
 
-    border: 1px solid #d8eee4;
+    border: 1px solid var(--accent-soft);
 
     border-radius: 999px;
 
-    background: #eaf8f2;
+    background: var(--accent-soft);
 
-    color: #168552;
+    color: var(--accent);
 
     font-size: 9px;
 
@@ -142,7 +142,7 @@
 
     padding: 20px;
 
-    border: 1px solid #e4ebe8;
+    border: 1px solid var(--line);
 
     border-radius: 14px;
 
@@ -163,7 +163,7 @@
 .category-page-card:hover {
     transform: translateY(-3px);
 
-    border-color: #cce5d9;
+    border-color: var(--line);
 
     box-shadow:
         0 10px 24px rgba(16, 24, 40, 0.08);
@@ -198,23 +198,23 @@
 ========================================================= */
 
 .category-page-card__icon--loans {
-    background: #e3f7eb;
+    background: var(--accent-soft);
 
-    color: #159447;
+    color: var(--accent);
 }
 
 
 .category-page-card__icon--investment {
-    background: #e3f7eb;
+    background: var(--accent-soft);
 
     color: var(--color-brand-green);
 }
 
 
 .category-page-card__icon--tax {
-    background: #eee8ff;
+    background: var(--accent-soft);
 
-    color: #7047d9;
+    color: var(--accent);
 }
 
 
@@ -242,14 +242,14 @@
 .category-page-card__icon--time {
     background: #e8f1ff;
 
-    color: #2563eb;
+    color: var(--accent);
 }
 
 
 .category-page-card__icon--converter {
-    background: #e2f7f4;
+    background: var(--accent-soft);
 
-    color: #168f80;
+    color: var(--accent);
 }
 
 
@@ -295,7 +295,7 @@
 .category-page-card__description {
     margin: 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 11px;
 
@@ -344,11 +344,11 @@
 
     padding: 16px 20px;
 
-    border: 1px solid #dcebe4;
+    border: 1px solid var(--accent-soft);
 
     border-radius: 12px;
 
-    background: #f2faf6;
+    background: var(--surface-sunken);
 }
 
 
@@ -369,7 +369,7 @@
 
     border-radius: 11px;
 
-    background: #dff5e9;
+    background: var(--surface-sunken);
 
     color: var(--color-brand-green);
 
@@ -404,7 +404,7 @@
 .categories-search__content p {
     margin: 0;
 
-    color: #475467;
+    color: var(--ink-muted);
 
     font-size: 11px;
 
@@ -429,7 +429,7 @@
 
     overflow: hidden;
 
-    border: 1px solid #d7e1dd;
+    border: 1px solid var(--line);
 
     border-radius: 8px;
 
@@ -468,7 +468,7 @@
 
 
 .categories-search__input::placeholder {
-    color: #98a2b3;
+    color: var(--ink-subtle);
 }
 
 
@@ -497,7 +497,7 @@
 
 
 .categories-search__button:hover {
-    background: #087d46;
+    background: var(--action);
 }
 
 
@@ -687,7 +687,7 @@
     gap: 8px;
 
     font-size: 13px;
-    color: #64748b;
+    color: var(--ink-subtle);
 }
 
 .categories-breadcrumb a {
@@ -696,7 +696,7 @@
 }
 
 .categories-breadcrumb strong {
-    color: #334155;
+    color: var(--color-gray-700);
     font-weight: 600;
 }
 
@@ -715,9 +715,9 @@
 
     border-radius: 999px;
 
-    background: #fef3c7;
+    background: var(--state-warning-soft);
 
-    color: #92400e;
+    color: var(--state-warning);
 
     font-size: 11px;
 
@@ -737,7 +737,7 @@
 
     opacity: 0.65;
 
-    background: #f8faf9;
+    background: var(--surface-sunken);
 }
 
 
@@ -745,7 +745,7 @@
 
     transform: none;
 
-    border-color: #e4ebe8;
+    border-color: var(--line);
 
     box-shadow:
         0 3px 12px rgba(16, 24, 40, 0.045);
@@ -839,7 +839,7 @@
     margin-top: 8px;
     padding-top: 28px;
 
-    border-top: 1px dashed #d0d5dd;
+    border-top: 1px dashed var(--line);
 }
 
 .categories-soon__title {

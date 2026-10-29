@@ -36,7 +36,7 @@
 
     overflow: hidden;
 
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line-control);
     border-radius: 10px;
 
     background: var(--color-white);
@@ -53,7 +53,7 @@
     border-color: var(--color-brand-green);
 
     box-shadow:
-        0 0 0 3px rgba(11, 159, 88, 0.16);
+        0 0 0 3px rgba(67, 56, 202, 0.16);
 }
 
 .tz-search .tz-search__icon {
@@ -63,7 +63,7 @@
 
     padding: 0 0 0 16px;
 
-    color: #98a2b3;
+    color: var(--ink-subtle);
 
     font-size: 22px;
     line-height: 1;
@@ -94,7 +94,7 @@
 }
 
 .tz-search .tz-search__input::placeholder {
-    color: #98a2b3;
+    color: var(--ink-subtle);
 }
 
 .tz-search .tz-search__button {
@@ -126,7 +126,7 @@
 }
 
 .tz-search .tz-search__button:hover {
-    background: #087d46;
+    background: var(--action);
 }
 
 /* narrow screens: a little shorter, and 16px text so a phone does not zoom the page when the field is tapped */

@@ -42,8 +42,8 @@
     border: 1px solid var(--color-slate-200);
     border-left-width: 6px;
     border-radius: 10px;
-    background: #f9fafb;
-    color: #344054;
+    background: var(--surface-page);
+    color: var(--color-gray-700);
     font-size: 14px;
     line-height: 1.55;
 }
@@ -90,10 +90,10 @@
     width: 100%;
     min-height: 48px;
     padding: 8px 14px;
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line-control);
     border-radius: 10px;
     background: var(--color-white);
-    color: #344054;
+    color: var(--color-gray-700);
     font-size: 14px;
     font-weight: 600;
     line-height: 1.3;
@@ -101,12 +101,12 @@
 }
 
 .b64-mode__option:hover span {
-    background: #f2f4f7;
+    background: var(--surface-sunken);
 }
 
 .b64-mode__option input:checked + span {
     border: 2px solid var(--color-brand-green);
-    background: #ecfdf3;
+    background: var(--accent-soft);
     color: var(--color-ink);
     font-weight: 750;
 }
@@ -146,7 +146,7 @@
 }
 
 .b64-meta {
-    color: #475467;
+    color: var(--ink-muted);
     font-size: 13px;
     font-variant-numeric: tabular-nums;
 }
@@ -158,7 +158,7 @@
     width: 100%;
     min-width: 0;
     padding: 10px 14px;
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line);
     border-radius: 12px;
     background: #ffffff;
     color: var(--color-ink);
@@ -180,7 +180,7 @@
     margin: 0;
     overflow: auto;
     white-space: pre-wrap;
-    background: #f9fafb;
+    background: var(--surface-page);
 }
 
 .b64-input:focus-visible,
@@ -191,13 +191,13 @@
 }
 
 .b64-input[aria-invalid="true"] {
-    border-color: #b42318;
-    box-shadow: inset 4px 0 0 #b42318;
+    border-color: var(--state-error);
+    box-shadow: inset 4px 0 0 var(--state-error);
 }
 
 .b64-hint {
     margin: 8px 0 0;
-    color: #475467;
+    color: var(--ink-muted);
     font-size: 14px;
     line-height: 1.55;
 }
@@ -229,8 +229,8 @@
     border: 1px solid var(--color-slate-200);
     border-left-width: 6px;
     border-radius: 10px;
-    background: #f9fafb;
-    color: #344054;
+    background: var(--surface-page);
+    color: var(--color-gray-700);
     font-size: 15px;
     font-weight: 600;
     line-height: 1.5;
@@ -238,27 +238,27 @@
 }
 
 .b64-workspace[data-state="done"] .b64-status {
-    border-color: #067647;
-    background: #ecfdf3;
-    color: #054f31;
+    border-color: var(--state-success);
+    background: var(--state-success-soft);
+    color: var(--state-success);
 }
 
 .b64-workspace[data-state="invalid"] .b64-status {
-    border-color: #b42318;
-    background: #fef3f2;
-    color: #912018;
+    border-color: var(--state-error);
+    background: var(--state-error-soft);
+    color: var(--state-error);
 }
 
 .b64-stale {
     margin: 8px 0 0;
-    color: #475467;
+    color: var(--ink-muted);
     font-size: 13px;
 }
 
 .b64-error {
     margin-top: 12px;
     padding: 14px;
-    border: 1px solid #fda29b;
+    border: 1px solid var(--state-error-line);
     border-radius: 12px;
     background: #ffffff;
 }
@@ -268,14 +268,14 @@
 }
 
 .b64-error__title {
-    color: #912018;
+    color: var(--state-error);
     font-size: 15px;
     font-weight: 700;
 }
 
 .b64-error__message {
     margin-top: 6px;
-    color: #344054;
+    color: var(--color-gray-700);
     font-size: 15px;
     line-height: 1.55;
     overflow-wrap: anywhere;
@@ -287,7 +287,7 @@
 
 .b64-meta-line {
     margin: 10px 0 0;
-    color: #344054;
+    color: var(--color-gray-700);
     font-size: 14px;
     font-weight: 600;
 }
@@ -295,7 +295,7 @@
 .b64-notes {
     margin: 6px 0 0;
     padding-left: 20px;
-    color: #475467;
+    color: var(--ink-muted);
     font-size: 14px;
     line-height: 1.55;
 }

@@ -51,10 +51,10 @@
     min-height: 44px;
     padding: .6rem 1.25rem;
 
-    border: 2px solid var(--color-action-green, #087f47);
+    border: 2px solid var(--color-action-green);
     border-radius: var(--radius-md, .75rem);
     background: var(--color-white, #ffffff);
-    color: var(--color-action-green, #087f47);
+    color: var(--color-action-green);
 
     font: inherit;
     font-weight: var(--fw-semibold, 600);
@@ -62,7 +62,7 @@
 }
 
 .tz-consent__btn:hover {
-    background: var(--color-action-green-soft, #ecfdf3);
+    background: var(--color-action-green-soft, var(--accent-soft));
 }
 
 .tz-consent__btn:focus-visible {

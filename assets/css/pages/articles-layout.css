@@ -64,7 +64,7 @@
 
 
 .article-card:hover {
-    border-color: #B7E8CB;
+    border-color: var(--line);
     transform: translateY(-2px);
     box-shadow:
         0 10px 25px rgba(15, 23, 42, .08);
@@ -201,7 +201,7 @@
 
 .article-card.article-card--soon {
     cursor: default;
-    background: #F8FAF9;
+    background: var(--surface-sunken);
 }
 
 .article-card.article-card--soon .article-card-image {

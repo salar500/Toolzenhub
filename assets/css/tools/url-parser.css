@@ -49,8 +49,8 @@
     border: 1px solid var(--color-slate-200);
     border-left-width: 6px;
     border-radius: 10px;
-    background: #f9fafb;
-    color: #344054;
+    background: var(--surface-page);
+    color: var(--color-gray-700);
     font-size: 14px;
     line-height: 1.55;
 }
@@ -97,10 +97,10 @@
     width: 100%;
     min-height: 48px;
     padding: 8px 14px;
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line-control);
     border-radius: 10px;
     background: var(--color-white);
-    color: #344054;
+    color: var(--color-gray-700);
     font-size: 14px;
     font-weight: 600;
     line-height: 1.3;
@@ -108,12 +108,12 @@
 }
 
 .up-choice:hover span {
-    background: #f2f4f7;
+    background: var(--surface-sunken);
 }
 
 .up-choice input:checked + span {
     border: 2px solid var(--color-brand-green);
-    background: #ecfdf3;
+    background: var(--accent-soft);
     color: var(--color-ink);
     font-weight: 750;
 }
@@ -158,7 +158,7 @@
 }
 
 .up-meta {
-    color: #475467;
+    color: var(--ink-muted);
     font-size: 13px;
     font-variant-numeric: tabular-nums;
 }
@@ -171,7 +171,7 @@
     width: 100%;
     min-width: 0;
     padding: 10px 14px;
-    border: 1px solid #d0d5dd;
+    border: 1px solid var(--line);
     border-radius: 12px;
     background: #ffffff;
     color: var(--color-ink);
@@ -197,7 +197,7 @@
     margin: 0 0 10px;
     overflow: auto;
     white-space: pre-wrap;
-    background: #f9fafb;
+    background: var(--surface-page);
 }
 
 .up-input:focus-visible,
@@ -210,13 +210,13 @@
 
 .up-input[aria-invalid="true"],
 .up-line[aria-invalid="true"] {
-    border-color: #b42318;
-    box-shadow: inset 4px 0 0 #b42318;
+    border-color: var(--state-error);
+    box-shadow: inset 4px 0 0 var(--state-error);
 }
 
 .up-hint {
     margin: 8px 0 0;
-    color: #475467;
+    color: var(--ink-muted);
     font-size: 14px;
     line-height: 1.55;
 }
@@ -228,7 +228,7 @@
 .up-base summary {
     min-height: 44px;
     cursor: pointer;
-    color: #344054;
+    color: var(--color-gray-700);
     font-size: 14px;
     font-weight: 600;
     line-height: 44px;
@@ -240,7 +240,7 @@
     gap: 10px;
     margin-top: 10px;
     min-height: 44px;
-    color: #344054;
+    color: var(--color-gray-700);
     font-size: 14px;
     line-height: 1.5;
 }
@@ -276,8 +276,8 @@
     border: 1px solid var(--color-slate-200);
     border-left-width: 6px;
     border-radius: 10px;
-    background: #f9fafb;
-    color: #344054;
+    background: var(--surface-page);
+    color: var(--color-gray-700);
     font-size: 15px;
     font-weight: 600;
     line-height: 1.5;
@@ -285,20 +285,20 @@
 }
 
 .up-status[data-state="done"] {
-    border-color: #067647;
-    background: #ecfdf3;
-    color: #054f31;
+    border-color: var(--state-success);
+    background: var(--state-success-soft);
+    color: var(--state-success);
 }
 
 .up-status[data-state="invalid"] {
-    border-color: #b42318;
-    background: #fef3f2;
-    color: #912018;
+    border-color: var(--state-error);
+    background: var(--state-error-soft);
+    color: var(--state-error);
 }
 
 .up-error {
     padding: 14px;
-    border: 1px solid #fda29b;
+    border: 1px solid var(--state-error-line);
     border-radius: 12px;
     background: #ffffff;
 }
@@ -308,14 +308,14 @@
 }
 
 .up-error__title {
-    color: #912018;
+    color: var(--state-error);
     font-size: 15px;
     font-weight: 700;
 }
 
 .up-error__message {
     margin-top: 6px;
-    color: #344054;
+    color: var(--color-gray-700);
     font-size: 15px;
     line-height: 1.55;
     overflow-wrap: anywhere;
@@ -328,7 +328,7 @@
 .up-list {
     margin: 6px 0 10px;
     padding-left: 22px;
-    color: #344054;
+    color: var(--color-gray-700);
     font-size: 14px;
     line-height: 1.6;
     overflow-wrap: anywhere;
@@ -349,13 +349,13 @@
 .up-table td {
     padding: 8px 10px;
     border-bottom: 1px solid var(--color-slate-200);
-    color: #344054;
+    color: var(--color-gray-700);
     text-align: left;
     vertical-align: top;
 }
 
 .up-table thead th {
-    background: #f9fafb;
+    background: var(--surface-page);
     font-weight: 700;
 }
 

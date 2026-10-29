@@ -40,7 +40,7 @@
     display: block;
     margin-bottom: 12px;
 
-    color: #64748b;
+    color: var(--ink-subtle);
     font-size: 12px;
     font-weight: 600;
 }
@@ -48,12 +48,12 @@
 .loan-summary-card > strong {
     display: block;
 
-    color: #0f172a;
+    color: var(--ink);
     font-size: 20px;
 }
 
 .loan-summary-card small {
-    color: #64748b;
+    color: var(--ink-subtle);
     font-size: 11px;
 }
 
@@ -65,11 +65,11 @@
 .loan-summary-winner {
     background: linear-gradient(
         135deg,
-        #ecfdf5,
+        var(--accent-soft),
         #ffffff
     );
 
-    border-color: #a7f3d0;
+    border-color: var(--line);
 }
 
 .loan-summary-icon {
@@ -79,7 +79,7 @@
 }
 
 .loan-summary-winner > strong {
-    color: #047857;
+    color: var(--accent);
 }
 
 
@@ -99,12 +99,12 @@
 }
 
 .loan-summary-values strong {
-    color: #0f172a;
+    color: var(--ink);
     font-size: 15px;
 }
 
 .loan-saving-value {
-    color: #059669 !important;
+    color: var(--accent) !important;
 }
 
 
@@ -136,7 +136,7 @@
 .loan-content-card h2,
 .loan-content-card h3 {
     margin-top: 0;
-    color: #0f172a;
+    color: var(--ink);
 }
 
 /* the same size as the other information titles on the page ("How to Use This Calculator") */
@@ -149,7 +149,7 @@
 }
 
 .loan-content-card h3 {
-    color: #2563eb;
+    color: var(--accent);
     font-size: 16px;
 }
 
@@ -176,8 +176,8 @@
 }
 
 .loan-amortization-table th {
-    background: #f8fafc;
-    color: #475569;
+    background: var(--surface-page);
+    color: var(--ink-muted);
 }
 
 
@@ -192,7 +192,7 @@
     border: 0;
     background: transparent;
 
-    color: #2563eb;
+    color: var(--accent);
 
     font: inherit;
     font-size: 12px;
@@ -209,6 +209,6 @@
 .loan-disclaimer {
     margin: 12px 0;
 
-    color: #64748b;
+    color: var(--ink-subtle);
     font-size: 12px;
 }
