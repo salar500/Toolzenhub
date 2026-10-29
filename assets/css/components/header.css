@@ -48,22 +48,12 @@ html {
     justify-content: space-between;
     gap: var(--space-4);
     width: 100%;
-    max-width: 1180px;
+    /* The same width and side padding as the page container, so the brand and the
+       page content share one left edge */
+    max-width: var(--container-width);
     height: var(--header-offset);
     margin: 0 auto;
-    padding: 0 var(--space-4);
-}
-
-@media (min-width: 640px) {
-    .navbar {
-        padding: 0 var(--space-6);
-    }
-}
-
-@media (min-width: 1280px) {
-    .navbar {
-        padding: 0;
-    }
+    padding: 0 var(--container-padding);
 }
 
 /* =========================================================

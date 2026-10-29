@@ -114,40 +114,6 @@ export function renderHero() {
 
                     </div>
 
-
-                    <!-- =====================================
-                         Hero Visual
-                    ====================================== -->
-
-                    <div class="hero__visual">
-
-                        <picture>
-
-                            <source
-                                type="image/webp"
-                                srcset="${new URL(
-                                    "assets/Images/hero-calculators.webp",
-                                    document.baseURI
-                                ).href}"
-                            >
-
-                            <img
-                                src="${new URL(
-                                    "assets/Images/hero-calculators.png",
-                                    document.baseURI
-                                ).href}"
-                                alt="Financial calculators, charts and money"
-                                class="hero__image"
-                                width="1254"
-                                height="1254"
-                                loading="eager"
-                                fetchpriority="high"
-                            >
-
-                        </picture>
-
-                    </div>
-
                 </div>
 
             </div>

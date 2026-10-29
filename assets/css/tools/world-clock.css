@@ -536,7 +536,7 @@
 
 .wc-card[data-phase="day"] .wc-day {
 
-    background: #fff4d6;
+    background: var(--state-warning-soft);
 
 }
 

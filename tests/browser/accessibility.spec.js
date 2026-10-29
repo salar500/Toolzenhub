@@ -135,15 +135,11 @@ test.describe("landmarks", () => {
 });
 
 test.describe("WebP hero images", () => {
-  test("home hero offers WebP with PNG fallback and the browser takes the WebP", async ({ page, go }) => {
+  test("home hero is compact and text-led: search first, no illustration (Design System 2.0)", async ({ page, go }) => {
     await go("");
-    const pic = page.locator(".hero__visual picture");
-    await expect(pic.locator('source[type="image/webp"]')).toHaveAttribute("srcset", /hero-calculators\.webp$/);
-    const img = pic.locator("img");
-    await expect(img).toHaveAttribute("src", /hero-calculators\.png$/);
-    await expect(img).toHaveAttribute("width", /\d+/);
-    await expect(img).toHaveAttribute("height", /\d+/);
-    await expect.poll(() => img.evaluate((e) => e.currentSrc)).toMatch(/\.webp$/);
+    await expect(page.locator(".hero__search input")).toBeVisible();
+    await expect(page.locator(".hero__visual")).toHaveCount(0);
+    await expect(page.locator(".hero picture, .hero img")).toHaveCount(0);
   });
 
   test("articles hero and a published article hero use WebP with PNG fallback", async ({ page, go }) => {
@@ -161,8 +157,8 @@ test.describe("WebP hero images", () => {
 
   test("when WebP is unavailable the PNG fallback loads", async ({ page, go }) => {
     await page.route("**/*.webp", (r) => r.abort());
-    await go("");
-    const img = page.locator(".hero__visual picture img");
+    await go("articles.html");
+    const img = page.locator(".articles-hero-illustration picture img");
     // the <source> is chosen by type, so an aborted WebP request would show a broken image;
     // the fallback guarantee is that the PNG file exists and decodes when requested directly
     const ok = await page.evaluate((src) => new Promise((res) => { const i = new Image(); i.onload = () => res(i.naturalWidth > 0); i.onerror = () => res(false); i.src = src; }), await img.getAttribute("src"));

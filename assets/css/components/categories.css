@@ -26,7 +26,7 @@
     padding-top: 22px;
     padding-bottom: 20px;
 
-    background: #ffffff;
+    background: var(--surface-page);
 }
 
 
@@ -38,7 +38,7 @@
     padding-top: 0;
     padding-bottom: 22px;
 
-    background: var(--surface-sunken);
+    background: var(--surface-page);
 }
 
 
@@ -141,7 +141,7 @@
 
 .category-grid.category-grid--sections {
     grid-template-columns:
-        repeat(auto-fill, minmax(min(100%, 260px), 340px));
+        repeat(auto-fill, minmax(min(100%, 260px), 1fr));
 }
 
 
@@ -222,46 +222,24 @@
    Category Icon Colors
 ========================================================= */
 
-.category-card__icon--loans {
-    background: var(--surface-sunken);
-    color: var(--accent);
-}
-
-.category-card__icon--investment {
+/* Design System 2.0: one accent chip, no per-category rainbow */
+.category-card__icon--loans,
+.category-card__icon--investment,
+.category-card__icon--tax,
+.category-card__icon--health,
+.category-card__icon--business,
+.category-card__icon--math,
+.category-card__icon--converter,
+.category-card__icon--more,
+.calculator-card__icon--green,
+.calculator-card__icon--blue,
+.calculator-card__icon--yellow,
+.calculator-card__icon--purple,
+.calculator-card__icon--pink,
+.calculator-card__icon--teal {
     background: var(--accent-soft);
-    color: var(--color-brand-green);
-}
-
-.category-card__icon--tax {
-    background: var(--accent-soft);
     color: var(--accent);
 }
-
-.category-card__icon--health {
-    background: #ffe8f0;
-    color: #e23d75;
-}
-
-.category-card__icon--business {
-    background: #e5f2ff;
-    color: #2475c7;
-}
-
-.category-card__icon--math {
-    background: #fff4df;
-    color: #c88a12;
-}
-
-.category-card__icon--converter {
-    background: var(--surface-sunken);
-    color: var(--accent);
-}
-
-.category-card__icon--more {
-    background: #edf1f5;
-    color: #496277;
-}
-
 
 /* =========================================================
    Category Content
@@ -403,37 +381,6 @@
 /* =========================================================
    Calculator Icon Colors
 ========================================================= */
-
-.calculator-card__icon--green {
-    background: var(--surface-sunken);
-    color: var(--accent);
-}
-
-.calculator-card__icon--blue {
-    background: #e6f2ff;
-    color: #2675c5;
-}
-
-.calculator-card__icon--yellow {
-    background: #fff4d8;
-    color: #b98208;
-}
-
-.calculator-card__icon--purple {
-    background: #eee7ff;
-    color: var(--accent);
-}
-
-.calculator-card__icon--pink {
-    background: #ffe8ef;
-    color: #db4774;
-}
-
-.calculator-card__icon--teal {
-    background: var(--accent-soft);
-    color: var(--accent);
-}
-
 
 /* =========================================================
    Calculator Content
@@ -773,4 +720,30 @@
         min-width: 0;
     }
 
+}
+
+
+/* Design System 2.0: the five section cards stack on a phone instead of scrolling sideways */
+@media (max-width: 760px) {
+
+    .category-grid.category-grid--sections {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        overflow-x: visible;
+        scroll-snap-type: none;
+    }
+
+    .category-grid--sections .category-card {
+        flex: none;
+        max-width: none;
+        min-height: 0;
+    }
+}
+
+
+@media (min-width: 1100px) {
+
+    .category-grid.category-grid--sections {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
 }

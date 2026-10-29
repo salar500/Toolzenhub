@@ -16,13 +16,7 @@
     padding-top: 42px;
     padding-bottom: 26px;
 
-    background:
-        linear-gradient(
-            180deg,
-            #f6fbf9 0%,
-            #ffffff 32%,
-            #ffffff 100%
-        );
+    background: var(--surface-page);
 }
 
 
@@ -196,69 +190,6 @@
 /* =========================================================
    Icon Colors
 ========================================================= */
-
-.category-page-card__icon--loans {
-    background: var(--accent-soft);
-
-    color: var(--accent);
-}
-
-
-.category-page-card__icon--investment {
-    background: var(--accent-soft);
-
-    color: var(--color-brand-green);
-}
-
-
-.category-page-card__icon--tax {
-    background: var(--accent-soft);
-
-    color: var(--accent);
-}
-
-
-.category-page-card__icon--health {
-    background: #ffe7ef;
-
-    color: #df326b;
-}
-
-
-.category-page-card__icon--business {
-    background: #e3f1ff;
-
-    color: #1769d1;
-}
-
-
-.category-page-card__icon--math {
-    background: #fff3df;
-
-    color: #cf8510;
-}
-
-
-.category-page-card__icon--time {
-    background: #e8f1ff;
-
-    color: var(--accent);
-}
-
-
-.category-page-card__icon--converter {
-    background: var(--accent-soft);
-
-    color: var(--accent);
-}
-
-
-.category-page-card__icon--more {
-    background: #edf2f7;
-
-    color: #35506d;
-}
-
 
 /* =========================================================
    Content
@@ -868,4 +799,20 @@
 
 #categories-sections:empty {
     display: none;
+}
+
+
+/* Design System 2.0: one accent chip for every category icon (no per-category rainbow) */
+.category-page-card__icon--loans,
+.category-page-card__icon--investment,
+.category-page-card__icon--tax,
+.category-page-card__icon--health,
+.category-page-card__icon--business,
+.category-page-card__icon--math,
+.category-page-card__icon--time,
+.category-page-card__icon--converter,
+.category-page-card__icon--more {
+    background: var(--accent-soft);
+
+    color: var(--accent);
 }

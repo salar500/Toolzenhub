@@ -499,3 +499,111 @@
     }
 
 }
+
+
+/* =========================================================
+   Design System 2.0: All Tools section index
+   A sticky rail from 960px; chips below. The only page that has one
+   (rulebook 4.8 exception).
+========================================================= */
+
+.directory-layout {
+    display: block;
+}
+
+.directory-layout__main {
+    min-width: 0;
+}
+
+.directory-rail__list {
+    display: flex;
+    gap: var(--space-2);
+    margin: 0 0 var(--space-6);
+    padding: 0 0 var(--space-2);
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.directory-rail__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--target-size);
+    padding: 0 var(--space-4);
+    border: 1px solid var(--line-control);
+    border-radius: var(--radius-full);
+    background: var(--surface-card);
+    color: var(--ink);
+    font-size: var(--font-sm);
+    font-weight: var(--fw-medium);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.directory-rail__link:hover {
+    background: var(--surface-sunken);
+}
+
+.directory-rail__link:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.directory-rail__count {
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 960px) {
+
+    .directory-layout {
+        display: grid;
+        grid-template-columns: 240px minmax(0, 1fr);
+        gap: var(--space-10);
+        align-items: start;
+    }
+
+    .directory-rail {
+        position: sticky;
+        top: calc(var(--header-offset) + var(--space-6));
+    }
+
+    .directory-rail__list {
+        flex-direction: column;
+        gap: var(--space-1);
+        margin: 0;
+        padding: 0;
+        overflow: visible;
+    }
+
+    .directory-rail__link {
+        justify-content: space-between;
+        border-color: transparent;
+        border-radius: var(--radius-sm);
+        background: transparent;
+    }
+
+    .directory-rail__link:hover {
+        background: var(--surface-sunken);
+        border-color: var(--line);
+    }
+}
+
+/* The intro and the search follow the left-aligned rail layout */
+.directory-page .categories-page__intro {
+    align-items: flex-start;
+    max-width: none;
+    margin-inline: 0;
+    text-align: left;
+}
+
+.directory-page .directory-search {
+    max-width: 640px;
+    margin: 0 0 var(--space-8);
+}
+
+.directory-page .categories-page__description {
+    max-width: none;
+    margin-inline: 0;
+}

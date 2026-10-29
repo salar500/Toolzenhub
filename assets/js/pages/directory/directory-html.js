@@ -292,7 +292,36 @@ function categoryGroup(category) {
 
 }
 
+/* The page-scoped section index (rulebook 4.8 exception): a sticky rail from 960px, chips below.
+   The counts are the live tools the sections themselves list, from the same catalog. */
+function sectionRail(visibleSections) {
+
+    return `
+                    <nav class="directory-rail" aria-label="Tool sections">
+
+                        <ul class="directory-rail__list">
+                            ${visibleSections.map(section => {
+
+                                const count =
+                                    getToolsBySection(section.id).filter(tool => tool.available).length;
+
+                                return `<li>
+                                <a class="directory-rail__link" href="#directory-${section.id}-heading">
+                                    <span class="directory-rail__name">${escapeHTML(section.title)}</span>
+                                    <span class="directory-rail__count">${count}</span>
+                                </a>
+                            </li>`;
+
+                            }).join("")}
+                        </ul>
+
+                    </nav>`;
+
+}
+
 export function allToolsHtml() {
+
+    const visibleSections = sections.filter(hasLiveTools);
 
     return `
     <main id="app">
@@ -319,10 +348,20 @@ export function allToolsHtml() {
 
                 </div>
 
-                ${searchForm()}
+                <div class="directory-layout">
 
-                <div id="tools-directory">
-                    ${sections.filter(hasLiveTools).map(sectionBlock).join("")}
+                    ${sectionRail(visibleSections)}
+
+                    <div class="directory-layout__main">
+
+                        ${searchForm()}
+
+                        <div id="tools-directory">
+                            ${visibleSections.map(sectionBlock).join("")}
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>

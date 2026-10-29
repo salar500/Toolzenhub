@@ -12,15 +12,9 @@
 
     box-sizing: border-box;
 
-    background:
-        linear-gradient(
-            135deg,
-            var(--surface-sunken) 0%,
-            #f8fcfb 55%,
-            #eef8f5 100%
-        );
+    background: var(--surface-page);
 
-    border-bottom: 1px solid #eef2f1;
+    border-bottom: 1px solid var(--line);
 }
 
 
@@ -116,11 +110,11 @@
 
     padding: 9px 15px;
 
-    border: 1px solid var(--line);
+    border: 1px solid var(--accent-line);
 
     border-radius: 999px;
 
-    background: rgba(235, 249, 243, 0.9);
+    background: var(--accent-soft);
 
     color: var(--accent);
 
@@ -724,4 +718,51 @@
         max-width: 190px;
     }
 
+}
+
+
+/* =========================================================
+   Design System 2.0: compact, text-led hero
+   One column, the search is the first action, no illustration.
+   This block comes last so it wins over the breakpoint rules above.
+========================================================= */
+
+.hero__background,
+.hero__visual {
+    display: none;
+}
+
+.hero__grid {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+    gap: 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.hero__content {
+    max-width: 720px;
+}
+
+.hero__title {
+    max-width: 720px;
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.hero__description {
+    max-width: 600px;
+}
+
+.hero__eyebrow {
+    white-space: normal;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 960px) {
+    .hero__grid {
+        padding-top: 64px;
+        padding-bottom: 64px;
+    }
 }
