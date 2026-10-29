@@ -747,3 +747,29 @@
         grid-template-columns: repeat(5, minmax(0, 1fr));
     }
 }
+
+
+/* Design System 2.0: the shared SVG icon inside the icon chips */
+.icon {
+    display: block;
+    flex-shrink: 0;
+}
+
+.category-card__icon .icon,
+.calculator-card__icon .icon,
+.category-page-card__icon .icon,
+.related-calculator-icon .icon {
+    width: 20px;
+    height: 20px;
+}
+
+.article-meta-items .icon {
+    display: inline-block;
+    vertical-align: -2px;
+    margin-right: 2px;
+}
+
+.article-category-icon .icon {
+    width: 18px;
+    height: 18px;
+}

@@ -246,3 +246,12 @@ body {
     }
 
 }
+
+
+/* Design System 2.0: one consistent vertical rhythm between the home sections */
+#categories.section,
+#popular-calculators.section,
+#latest-articles.section {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-4);
+}

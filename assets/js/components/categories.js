@@ -21,6 +21,7 @@ import {
 } from "../data/taxonomy.js";
 
 
+import { iconSvg, iconFor } from "../ui/icons.js";
 /* =========================================================
    FEATURED TOOLS (home page presentation)
 
@@ -41,12 +42,12 @@ import {
 ========================================================= */
 
 const FEATURED_TOOLS = [
-    { id: "sip", title: "SIP Calculator", blurb: "Plan your SIP investments", icon: "♜", color: "yellow" },
-    { id: "gst", title: "GST Calculator", blurb: "Add or remove GST on an invoice", icon: "▤", color: "purple" },
-    { id: "margin", title: "Margin Calculator", blurb: "Set a price from a target margin", icon: "%", color: "green" },
-    { id: "percentage", title: "Percentage Calculator", blurb: "Find a change, the start or the end value", icon: "±", color: "teal" },
-    { id: "home-loan", title: "Home Loan Calculator", blurb: "Find the loan that fits your EMI budget", icon: "⌂", color: "pink" },
-    { id: "countdown-timer", title: "Countdown Timer", blurb: "Count down any time, with pause and resume", icon: "◔", color: "blue" }
+    { id: "sip", title: "SIP Calculator", blurb: "Plan your SIP investments", icon: "trend", color: "yellow" },
+    { id: "gst", title: "GST Calculator", blurb: "Add or remove GST on an invoice", icon: "receipt", color: "purple" },
+    { id: "margin", title: "Margin Calculator", blurb: "Set a price from a target margin", icon: "percent", color: "green" },
+    { id: "percentage", title: "Percentage Calculator", blurb: "Find a change, the start or the end value", icon: "math", color: "teal" },
+    { id: "home-loan", title: "Home Loan Calculator", blurb: "Find the loan that fits your EMI budget", icon: "home", color: "pink" },
+    { id: "countdown-timer", title: "Countdown Timer", blurb: "Count down any time, with pause and resume", icon: "clock", color: "blue" }
 ];
 
 
@@ -57,7 +58,7 @@ function renderPopularCard(card) {
 
     const body = `
                         <div class="calculator-card__icon calculator-card__icon--${card.color}">
-                            ${card.icon}
+                            ${iconSvg(card.icon)}
                         </div>
                         <div class="calculator-card__content">
                             <h3>
@@ -106,7 +107,7 @@ function renderSectionCard(section) {
                     >
 
                         <div class="category-card__icon category-card__icon--${section.id}">
-                            ${section.icon}
+                            ${iconFor(section.id)}
                         </div>
 
                         <div class="category-card__content">

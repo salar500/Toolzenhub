@@ -28,6 +28,7 @@ import {
 } from "../data/categories.js";
 
 
+import { iconFor } from "../ui/icons.js";
 /* =========================================================
    RELATED-CARD COPY (presentation)
 
@@ -167,8 +168,8 @@ export function renderRelatedCalculators(
                         class="related-calculator-card"
                     >
 
-                        <div class="related-calculator-icon">
-                            ${calculator.icon}
+                        <div class="related-calculator-icon" aria-hidden="true">
+                            ${iconFor(calculator.category)}
                         </div>
 
 
@@ -262,8 +263,8 @@ function renderRelatedSectionTools(
                         class="related-calculator-card"
                     >
 
-                        <div class="related-calculator-icon">
-                            ${tool.icon}
+                        <div class="related-calculator-icon" aria-hidden="true">
+                            ${iconFor(tool.category)}
                         </div>
 
 

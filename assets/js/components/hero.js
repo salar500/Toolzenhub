@@ -4,6 +4,7 @@
 ========================================================= */
 
 import { ROUTES } from "../routes.js";
+import { iconSvg } from "../ui/icons.js";
 
 
 export function renderHero() {
@@ -81,7 +82,7 @@ export function renderHero() {
                                 class="hero__search-icon tz-search__icon"
                                 aria-hidden="true"
                             >
-                                ⌕
+                                ${iconSvg("search")}
                             </span>
 
 
@@ -100,7 +101,7 @@ export function renderHero() {
                                 class="hero__search-button tz-search__button"
                                 aria-label="Search tools"
                             >
-                                ⌕
+                                ${iconSvg("search")}
                             </button>
 
                         </form>

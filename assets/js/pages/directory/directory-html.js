@@ -16,6 +16,7 @@
    is not a link.
 ========================================================= */
 
+import { iconSvg } from "../../ui/icons.js";
 import {
     ROUTES
 } from "../../routes.js";
@@ -76,7 +77,7 @@ function searchForm() {
 
                     <div class="directory-search__row tz-search">
 
-                        <span class="tz-search__icon" aria-hidden="true">⌕</span>
+                        <span class="tz-search__icon" aria-hidden="true">${iconSvg("search")}</span>
 
                         <input
                             type="search"
@@ -92,7 +93,7 @@ function searchForm() {
                             class="directory-search__button tz-search__button"
                             aria-label="Search"
                         >
-                            ⌕
+                            ${iconSvg("search")}
                         </button>
 
                     </div>
@@ -490,7 +491,7 @@ export function sectionPageHtml(sectionId) {
     /* the card icon takes its colour from this stand-in for a category */
     const look = {
         iconClass: "time",
-        icon: section.icon
+        iconKey: section.id
     };
 
     return `

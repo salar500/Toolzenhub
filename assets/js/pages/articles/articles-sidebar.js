@@ -32,6 +32,7 @@ import {
 
 
 
+import { iconFor } from "../../ui/icons.js";
 /* =========================================================
    SCROLL TO ARTICLES
 ========================================================= */
@@ -152,7 +153,7 @@ function createCategoryItem(
         <span class="article-category-name">
 
             <span class="article-category-icon">
-                ${category.icon}
+                ${iconFor(String(category.slug || category.id || category.name || "").toLowerCase(), 18)}
             </span>
 
             ${category.name}

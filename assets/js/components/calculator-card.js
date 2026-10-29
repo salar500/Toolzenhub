@@ -1,4 +1,5 @@
-export function renderCalculatorCard(
+
+import { iconFor } from "../ui/icons.js";export function renderCalculatorCard(
     calculator,
     options = {}
 ) {
@@ -55,7 +56,7 @@ export function renderCalculatorCard(
                                 class="calculator-card__icon"
                                 aria-hidden="true"
                             >
-                                ${icon}
+                                ${iconFor(String(calculator.category).toLowerCase())}
                             </div>
                         `
                         : ""
@@ -99,7 +100,7 @@ export function renderCalculatorCard(
                             class="calculator-card__icon"
                             aria-hidden="true"
                         >
-                            ${icon}
+                            ${iconFor(String(calculator.category).toLowerCase())}
                         </div>
                     `
                     : ""

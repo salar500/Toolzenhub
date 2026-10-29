@@ -31,6 +31,7 @@ import {
 } from "../components/category-tool-card.js";
 
 
+import { iconSvg, iconFor } from "../ui/icons.js";
 /* =========================================================
    RENDER BREADCRUMB
 ========================================================= */
@@ -266,7 +267,7 @@ export function renderCategoriesPage() {
                 "
                 aria-hidden="true"
             >
-                ${category.icon}
+                ${iconFor(category.iconClass)}
             </div>
 
 
@@ -353,7 +354,7 @@ function renderCalculatorResults(query) {
                     class="category-page-card__icon"
                     aria-hidden="true"
                 >
-                    🔎
+                    ${iconSvg("search")}
                 </div>
 
 
@@ -441,7 +442,7 @@ function renderCalculatorResults(query) {
                 "
                 aria-hidden="true"
             >
-                ${getCategoryIcon(calculator.category)}
+                ${iconFor(getCategoryIconClass(calculator.category))}
             </div>
 
 

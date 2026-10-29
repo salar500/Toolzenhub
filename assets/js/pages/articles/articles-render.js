@@ -45,6 +45,7 @@ import {
 
 
 
+import { iconSvg } from "../../ui/icons.js";
 /* =========================================================
    FILTER ARTICLES
 ========================================================= */
@@ -223,12 +224,12 @@ function renderArticleCard(
                     <div class="article-meta-items">
 
                         <span>
-                            📅
+                            ${iconSvg("calendar", 14)}
                             ${article.date}
                         </span>
 
                         <span>
-                            ◷
+                            ${iconSvg("clock", 14)}
                             ${article.readTime}
                         </span>
 
@@ -333,7 +334,7 @@ function renderEmptyState() {
             <div>
 
                 <div class="articles-empty-icon">
-                    🔎
+                    ${iconSvg("search", 28)}
                 </div>
 
                 <h2>

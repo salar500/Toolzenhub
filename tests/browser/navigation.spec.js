@@ -408,7 +408,7 @@ test.describe("M6 category hierarchy in the breadcrumbs @portable", () => {
     // search results show the tool's category icon, looked up from the category data
     const emi = page.locator('#categories-grid a.category-page-card[href$="calculators/emi/"]');
     await expect(emi).toHaveCount(1);
-    await expect(emi.locator(".category-page-card__icon--loans")).toHaveText("🏠");
+    await expect(emi.locator(".category-page-card__icon--loans svg")).toHaveCount(1); // the shared SVG icon (Design System 2.0), not an emoji
   });
 });
 
