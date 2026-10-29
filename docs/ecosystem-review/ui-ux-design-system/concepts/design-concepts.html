@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ToolZen Hub design concepts (PROPOSED - NOT APPROVED)</title>
+<style>
+/* NON-PRODUCTION REVIEW ARTIFACT. Not linked from the site, not built by Eleventy (it lives under docs/). No external requests. */
+:root{--font:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mono:ui-monospace,Consolas,monospace}
+[data-opt=A]{--rc:14px;--rb:10px;--pc:16px;--hero-bg:var(--soft);--cardsh:0 1px 2px rgba(15,26,22,.06);--bg:#f6f8f7;--surface:#fff;--border:#7a8c84;--divider:#e1e8e4;--ink:#0f1a16;--muted:#475a52;--primary:#047857;--primary-h:#065f46;--on-primary:#fff;--soft:#ecfdf5;--accent:#b45309;--link:#047857;--focus:#047857;--ok:#166534;--err:#b42318;--warn:#92400e;--info:#1d4ed8;--dis-bg:#eaecf0;--dis-tx:#98a2b3;--foot:#0f1a16}
+[data-opt=B]{--rc:8px;--rb:6px;--pc:12px;--hdr-bg:#0f172a;--hdr-ink:#fff;--hdr-cur:#93c5fd;--cardsh:none;--bg:#f8fafc;--surface:#fff;--border:#64748b;--divider:#e2e8f0;--ink:#0f172a;--muted:#475569;--primary:#1d4ed8;--primary-h:#1e40af;--on-primary:#fff;--soft:#eff6ff;--accent:#0e7490;--link:#1d4ed8;--focus:#1d4ed8;--ok:#166534;--err:#b91c1c;--warn:#92400e;--info:#1d4ed8;--dis-bg:#e2e8f0;--dis-tx:#94a3b8;--foot:#0f172a}
+[data-opt=C]{--rc:14px;--rb:10px;--pc:20px;--cardsh:none;--bg:#fafaf9;--surface:#fff;--border:#78716c;--divider:#e7e5e4;--ink:#1c1917;--muted:#57534e;--primary:#1c1917;--primary-h:#292524;--on-primary:#fff;--soft:#f5f5f4;--accent:#4338ca;--link:#4338ca;--focus:#4338ca;--ok:#166534;--err:#b91c1c;--warn:#92400e;--info:#4338ca;--dis-bg:#e7e5e4;--dis-tx:#a8a29e;--foot:#1c1917}
+[data-opt=D]{--rc:12px;--rb:10px;--pc:16px;--hero-bg:var(--soft);--band:var(--soft);--cardsh:0 1px 2px rgba(11,31,35,.06);--bg:#f5f7f7;--surface:#fff;--border:#6b8285;--divider:#dde5e6;--ink:#0b1f23;--muted:#44585c;--primary:#0f766e;--primary-h:#115e59;--on-primary:#fff;--soft:#f0fdfa;--accent:#b45309;--link:#0f766e;--focus:#0f766e;--ok:#15803d;--err:#b91c1c;--warn:#92400e;--info:#0369a1;--dis-bg:#e4eaea;--dis-tx:#94a3a6;--foot:#0b1f23}
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 var(--font);background:#e9e9e7;color:#1c1917}
+.banner{background:#7c2d12;color:#fff;padding:10px 16px;font-weight:700;text-align:center}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px;background:#fff;border-bottom:1px solid #d6d3d1;position:sticky;top:0;z-index:5}
+.tabs button{font:600 14px var(--font);min-height:44px;padding:0 16px;border-radius:10px;border:1px solid #78716c;background:#fff;color:#1c1917;cursor:pointer}
+.tabs button[aria-pressed=true]{background:#1c1917;color:#fff}
+main{background:var(--bg);color:var(--ink);padding:24px 16px 64px}
+.wrap{max-width:1120px;margin:0 auto}
+h2.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:40px 0 12px;border-top:1px solid var(--divider);padding-top:16px}
+h1,h2,h3{line-height:1.2;margin:0 0 8px}
+a{color:var(--link)}
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.sw div{border:1px solid var(--divider);border-radius:10px;background:var(--surface);padding:8px;font-size:12px}
+.sw i{display:block;height:36px;border-radius:6px;border:1px solid var(--divider);margin-bottom:6px}
+.frame{background:var(--bg);border:1px solid var(--divider);border-radius:14px;overflow:hidden;margin-bottom:16px}
+.hdr{display:flex;align-items:center;gap:16px;padding:0 20px;height:64px;background:var(--hdr-bg,var(--surface));border-bottom:1px solid var(--divider)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;color:var(--hdr-ink,var(--ink));text-decoration:none}
+.brand svg{width:32px;height:32px;display:block}
+.hdr nav{margin-left:auto;display:flex;gap:4px}
+.hdr nav a{padding:10px 12px;color:var(--hdr-ink,var(--ink));text-decoration:none;font-weight:600;border-radius:8px}
+.hdr nav a[aria-current]{box-shadow:inset 0 -3px var(--hdr-cur,var(--primary))}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:var(--rb,10px);font:600 15px var(--font);border:1.5px solid transparent;cursor:pointer;text-decoration:none}
+.btn.p{background:var(--primary);color:var(--on-primary)}.btn.p.h{background:var(--primary-h)}
+.btn.s{background:var(--surface);color:var(--ink);border-color:var(--border)}.btn.s.h{background:var(--soft)}
+.btn.t{background:none;color:var(--link);text-decoration:underline}
+.btn.d{background:var(--surface);color:var(--err);border-color:var(--err)}
+.btn.x{background:var(--dis-bg);color:var(--dis-tx);cursor:not-allowed}
+.btn.f{outline:2px solid var(--focus);outline-offset:2px}
+.hero{padding:40px 24px 32px;max-width:none;background:var(--hero-bg,transparent)}.hero>*{max-width:720px}
+.hero h1{font-size:clamp(2rem,1.4rem + 2vw,2.75rem);letter-spacing:-.02em}
+.hero p{color:var(--muted);margin:0 0 20px}
+.search{display:flex;max-width:560px}
+.search input{flex:1;min-height:48px;border:1.5px solid var(--border);border-right:0;border-radius:10px 0 0 10px;padding:0 14px;font:16px var(--font);background:var(--surface);color:var(--ink)}
+.search .btn{border-radius:0 10px 10px 0}
+.cards{background:var(--band,transparent);padding-top:24px!important;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;padding:0 24px 24px}
+.card{background:var(--surface);border:1px solid var(--divider);border-radius:var(--rc,12px);box-shadow:var(--cardsh,none);padding:var(--pc,16px);min-height:96px;color:var(--ink);text-decoration:none;display:block}
+.card:hover{border-color:var(--border)}
+.card b{display:block}.card span{color:var(--muted);font-size:14px}.card em{font-style:normal;font-size:12px;font-weight:700;color:var(--accent);display:block;margin-top:6px}
+.dir{display:grid;grid-template-columns:240px 1fr;gap:24px;padding:24px}
+.rail{position:sticky;top:76px;align-self:start;background:var(--surface);border:1px solid var(--divider);border-radius:12px;padding:12px}
+.rail a{display:flex;justify-content:space-between;padding:10px 12px;border-radius:8px;color:var(--ink);text-decoration:none;font-weight:600;min-height:44px;align-items:center}
+.rail a[aria-current]{background:var(--soft);box-shadow:inset 3px 0 var(--primary)}
+.rail small{color:var(--muted);font-weight:600}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.tool{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;padding:24px}
+.panel{background:var(--surface);border:1px solid var(--divider);border-radius:var(--rc,14px);padding:calc(var(--pc,16px) + 4px)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+label{font-weight:600;font-size:14px;display:block;margin-bottom:6px}
+.field{margin-bottom:14px}.field input{width:100%;min-height:44px;border:1.5px solid var(--border);border-radius:10px;padding:0 12px;font:16px var(--font);background:var(--surface);color:var(--ink)}
+.hint{font-size:13px;color:var(--muted);margin-top:4px}
+.result{font-size:2.25rem;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.kv{display:flex;justify-content:space-between;border-top:1px solid var(--divider);padding:10px 0;font-variant-numeric:tabular-nums}
+.seg{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.seg .btn.on{background:var(--soft);border-color:var(--primary);color:var(--ink)}
+.editor{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:24px}
+textarea,pre{font:14px/1.5 var(--mono);width:100%;min-height:180px;border:1.5px solid var(--border);border-radius:10px;padding:12px;background:var(--surface);color:var(--ink);margin:0}
+.phones{display:flex;gap:20px;flex-wrap:wrap}
+.phone{width:390px;max-width:100%;height:640px;background:var(--bg);border:1px solid var(--border);border-radius:22px;overflow:hidden;position:relative}
+.phone .hdr{height:56px;padding:0 14px}.menu-btn{margin-left:auto;width:44px;height:44px;border:1.5px solid var(--border);border-radius:10px;background:var(--surface);display:grid;place-items:center}
+.drawer{position:absolute;left:0;right:0;top:56px;background:var(--surface);border-bottom:1px solid var(--divider);box-shadow:0 12px 24px rgba(0,0,0,.12)}
+.drawer a{display:block;padding:0 16px;line-height:48px;color:var(--ink);font-weight:600;text-decoration:none;border-top:1px solid var(--divider)}
+.scrim{position:absolute;inset:56px 0 0;background:rgba(0,0,0,.35)}
+.chips{display:flex;gap:8px;overflow:auto;padding:8px 16px}.chips a{white-space:nowrap;min-height:44px;display:inline-flex;align-items:center;padding:0 14px;border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--ink);text-decoration:none;font-weight:600}
+.chips a[aria-current]{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.alert{display:flex;gap:10px;padding:12px;border:1px solid;border-radius:10px;background:var(--surface);margin-bottom:8px}
+.logos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.lg{border:1px solid var(--divider);border-radius:12px;background:var(--surface);padding:16px}
+.row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:10px 0}
+.dark{background:#1c1917;color:#fff;padding:12px;border-radius:10px}
+.tab{display:flex;align-items:center;gap:8px;background:#dee1e6;border-radius:8px 8px 0 0;padding:6px 10px;font:12px system-ui;color:#202124;width:max-content}
+.tab.dk{background:#35363a;color:#e8eaed}
+.foot{background:var(--foot);color:#e7e5e4;padding:20px 24px;display:flex;gap:32px;flex-wrap:wrap}.foot a{color:#d6d3d1;display:block;padding:6px 0}
+.note{font-size:13px;color:var(--muted)}
+.card-q{max-width:560px;margin:0 auto}
+@media (max-width:960px){.dir,.tool,.editor{grid-template-columns:1fr}.rail{position:static}}
+.search input{min-width:0}
+.editor>*,.tool>*,.dir>*{min-width:0}
+pre{overflow:auto}
+@media (max-width:560px){.frame>.hdr nav{display:none}.dir,.tool,.editor,.hero,.cards{padding-left:12px;padding-right:12px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="banner">PROPOSED — NOT APPROVED. Non-production review artifact. Content is real ToolZen Hub wording; nothing here is implemented on the site.</div>
+<div class="tabs" role="group" aria-label="Design direction">
+  <button type="button" data-o="A" aria-pressed="false">A · Modern Emerald</button>
+  <button type="button" data-o="B" aria-pressed="false">B · Blue and Slate</button>
+  <button type="button" data-o="C" aria-pressed="true">C · Premium Neutral + Indigo (recommended)</button>
+  <button type="button" data-o="D" aria-pressed="false">D · Deep Teal and Ink</button>
+</div>
+
+<main data-opt="C" id="board"><div class="wrap">
+
+<h2 class="sec" style="margin-top:0">Palette (light mode)</h2>
+<div class="sw" id="swatches"></div>
+<p class="note" id="optnote"></p>
+
+<h2 class="sec">Logo concepts: header size, tab size, favicon, dark and monochrome</h2>
+<div class="logos">
+  <div class="lg"><b>Concept 1 · Hub</b> <span class="note">abstract utility hub</span>
+    <div class="row"><svg width="64" height="64" viewBox="0 0 100 100"><use href="#s-hub"/></svg><svg width="32" height="32" viewBox="0 0 100 100"><use href="#s-hub"/></svg><svg width="16" height="16" viewBox="0 0 100 100"><use href="#s-hub-fav"/></svg></div>
+    <div class="row"><span class="tab"><svg width="16" height="16" viewBox="0 0 100 100"><use href="#s-hub-fav"/></svg>ToolZen Hub</span><span class="tab dk"><svg width="16" height="16" viewBox="0 0 100 100"><use href="#s-hub-fav-d"/></svg>ToolZen Hub</span></div>
+    <div class="dark row"><svg width="32" height="32" viewBox="0 0 100 100"><use href="#s-hub-d"/></svg><b>ToolZen Hub</b><svg width="32" height="32" viewBox="0 0 100 100"><use href="#s-mono-hub"/></svg></div></div>
+  <div class="lg"><b>Concept 2 · Connected tools</b> <span class="note">precision grid, one tool offset</span>
+    <div class="row"><svg width="64" height="64" viewBox="0 0 100 100"><use href="#s-grid"/></svg><svg width="32" height="32" viewBox="0 0 100 100"><use href="#s-grid"/></svg><svg width="16" height="16" viewBox="0 0 100 100"><use href="#s-grid-fav"/></svg></div>
+    <div class="row"><span class="tab"><svg width="16" height="16" viewBox="0 0 100 100"><use href="#s-grid-fav"/></svg>ToolZen Hub</span><span class="tab dk"><svg width="16" height="16" viewBox="0 0 100 100"><use href="#s-grid-fav-d"/></svg>ToolZen Hub</span></div>
+    <div class="dark row"><svg width="32" height="32" viewBox="0 0 100 100"><use href="#s-grid-d"/></svg><b>ToolZen Hub</b><svg width="32" height="32" viewBox="0 0 100 100"><use href="#s-mono-grid"/></svg></div></div>
+  <div class="lg"><b>Concept 3 · Z monogram</b> <span class="note">minimal geometric</span>
+    <div class="row"><svg width="64" height="64" viewBox="0 0 100 100"><use href="#s-z"/></svg><svg width="32" height="32" viewBox="0 0 100 100"><use href="#s-z"/></svg><svg width="16" height="16" viewBox="0 0 100 100"><use href="#s-z-fav"/></svg></div>
+    <div class="row"><span class="tab"><svg width="16" height="16" viewBox="0 0 100 100"><use href="#s-z-fav"/></svg>ToolZen Hub</span><span class="tab dk"><svg width="16" height="16" viewBox="0 0 100 100"><use href="#s-z-fav-d"/></svg>ToolZen Hub</span></div>
+    <div class="dark row"><svg width="32" height="32" viewBox="0 0 100 100"><use href="#s-z-d"/></svg><b>ToolZen Hub</b><svg width="32" height="32" viewBox="0 0 100 100"><use href="#s-mono-z"/></svg></div></div>
+  <div class="lg"><b>Today (for comparison)</b> <span class="note">verified in the repository</span>
+    <div class="row"><span style="width:32px;height:32px;border-radius:50%;background:#0b9f58;color:#fff;display:grid;place-items:center">▦</span><span>header mark: text glyph in a green circle</span></div>
+    <div class="row"><svg width="32" height="32" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#14B8A6"/><path d="M22 25h56v16H58v34H42V41H22z" fill="#fff"/></svg><span>favicon.svg: white T on #14B8A6 (white on that teal is 2.49:1)</span></div></div>
+</div>
+
+<h2 class="sec">Header, homepage and section cards (desktop)</h2>
+<div class="frame">
+  <div class="hdr"><a class="brand" href="#"><svg viewBox="0 0 100 100"><use href="#s-hub"/></svg>ToolZen Hub</a>
+    <nav aria-label="Main"><a href="#" aria-current="page">Home</a><a href="#">All Tools</a><a href="#">Articles</a><a href="#">About</a></nav></div>
+  <div class="hero"><h1>Practical tools for better everyday decisions</h1>
+    <p>Calculate loan payments, compare options, plan investments and work through everyday date, GST, margin and percentage questions.</p>
+    <form class="search" onsubmit="return false"><input type="search" aria-label="Search tools" placeholder="Search by name, for example EMI or GST"><button class="btn p" type="submit">Search</button></form>
+    <p class="note" style="margin-top:10px">Runs in your browser. No sign-up.</p></div>
+  <div class="cards">
+    <a class="card" href="#"><b>Calculators</b><span>Loans, investment, business, tax and math</span><em>19 tools</em></a>
+    <a class="card" href="#"><b>Time Tools</b><span>Date tools, timers, time zones and hours</span><em>13 tools</em></a>
+    <a class="card" href="#"><b>Developer Tools</b><span>JSON, JWT, cron, text compare and practice labs</span><em>17 tools</em></a>
+    <a class="card" href="#"><b>Image Tools</b><span>Compress and resize images in your browser</span><em>2 tools</em></a>
+    <a class="card" href="#"><b>PDF Tools</b><span>Merge, split and rearrange PDF pages</span><em>3 tools</em></a>
+  </div>
+</div>
+
+<h2 class="sec">All Tools directory with category rail (desktop, 960 px and wider)</h2>
+<div class="frame">
+  <div class="hdr"><a class="brand" href="#"><svg viewBox="0 0 100 100"><use href="#s-hub"/></svg>ToolZen Hub</a><nav aria-label="Main"><a href="#">Home</a><a href="#" aria-current="page">All Tools</a><a href="#">Articles</a><a href="#">About</a></nav></div>
+  <div class="dir">
+    <aside class="rail" aria-label="Sections"><form class="search" style="margin-bottom:8px" onsubmit="return false"><input type="search" aria-label="Search tools" placeholder="Search tools" style="min-width:0"><button class="btn p" style="padding:0 12px">Go</button></form>
+      <a href="#" aria-current="true">Calculators <small>19</small></a><a href="#">Time Tools <small>13</small></a><a href="#">Developer Tools <small>17</small></a><a href="#">Image Tools <small>2</small></a><a href="#">PDF Tools <small>3</small></a></aside>
+    <div><div class="eyebrow">Section</div><h2>Developer Tools <small class="note">17 tools</small></h2>
+      <div class="grid3">
+        <a class="card" href="#"><b>JSON Formatter &amp; Validator</b><span>Check JSON, find exactly where it breaks, format or minify.</span></a>
+        <a class="card" href="#"><b>JSONPath Challenge Lab</b><span>Practise JSONPath queries against sample documents.</span></a>
+        <a class="card" href="#"><b>Cron Expression Explainer</b><span>Read a cron schedule in plain English.</span></a>
+        <a class="card" href="#"><b>Unix Timestamp Converter</b><span>Convert between epoch values and dates.</span></a>
+        <a class="card" href="#"><b>Smart Flashcards: JSON, HTTP and Software Testing Revision Cards</b><span>Short original revision cards.</span></a>
+        <a class="card" href="#"><b>JWT Decoder</b><span>Read a token's header and payload locally.</span></a>
+      </div></div></div>
+</div>
+
+<h2 class="sec">Calculator tool page (real figures: ₹10,00,000 at 8.5% for 20 years)</h2>
+<div class="frame">
+  <div style="padding:16px 24px 0" class="note">Home › Calculators › Loans › <b>EMI Calculator</b></div>
+  <div class="tool">
+    <div class="panel"><div class="eyebrow">Finance tool</div><h1 style="font-size:2rem">EMI Calculator</h1><p class="note" style="margin-top:0">Your inputs are calculated in your browser.</p>
+      <div class="seg" role="group" aria-label="What do you want to find?"><span class="btn s on">✓ Find the EMI</span><span class="btn s">Find the tenure</span><span class="btn s">Find the rate</span></div>
+      <div class="field"><label>Loan amount (₹)</label><input value="10,00,000" aria-label="Loan amount"><div class="hint">Enter the total loan amount.</div></div>
+      <div class="field"><label>Interest rate (% a year)</label><input value="8.5" aria-label="Rate"></div>
+      <div class="field"><label>Loan tenure (years)</label><input value="20" aria-label="Tenure"></div>
+      <div style="display:flex;gap:8px"><span class="btn s">Reset</span><span class="btn s">Copy result</span></div></div>
+    <div class="panel"><div class="eyebrow">Your result</div><div class="result">₹8,678 <span style="font-size:1rem;font-weight:600;color:var(--muted)">a month</span></div>
+      <div class="kv"><span>Total interest</span><b>₹10,82,776</b></div><div class="kv"><span>Total payment</span><b>₹20,82,776</b></div>
+      <p class="note">An estimate from the figures you entered, not advice or a lender's quote.</p></div></div>
+</div>
+
+<h2 class="sec">Developer tool page (JSON Formatter) with primary action in the first viewport</h2>
+<div class="frame">
+  <div style="padding:16px 24px 0" class="note">Home › Developer Tools › <b>JSON Formatter &amp; Validator</b></div>
+  <div style="padding:8px 24px 0"><div class="eyebrow">Developer tool</div><h1 style="font-size:2rem">JSON Formatter &amp; Validator</h1><p class="note">Check that JSON is valid, see exactly where it breaks, and format or minify it. Your JSON is processed in your browser.</p></div>
+  <div class="editor"><div><label for="ji">JSON input</label><textarea id="ji">{"loan":1000000,"rate":8.5,"years":20}</textarea>
+    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><span class="btn p">Format</span><span class="btn s">Minify</span><span class="btn s">Validate</span><span class="btn s">Copy output</span><span class="btn d">Clear</span></div></div>
+    <div><label>Output</label><pre>{
+  "loan": 1000000,
+  "rate": 8.5,
+  "years": 20
+}</pre><div class="alert" style="border-color:var(--ok);color:var(--ok);margin-top:10px"><b>Valid.</b><span style="color:var(--ink)">Strict JSON, 3 keys.</span></div></div></div>
+</div>
+
+<h2 class="sec">Mobile (390 px): header, drawer open with backdrop, All Tools section chips</h2>
+<div class="phones">
+  <div class="phone"><div class="hdr"><a class="brand" href="#" style="font-size:17px"><svg viewBox="0 0 100 100" style="width:28px;height:28px"><use href="#s-hub"/></svg>ToolZen Hub</a><span class="menu-btn" aria-hidden="true">☰</span></div>
+    <div style="padding:16px"><h1 style="font-size:1.9rem">Practical tools for better everyday decisions</h1><p class="note">Calculate loan payments, compare options and plan investments.</p>
+    <form class="search" onsubmit="return false"><input type="search" aria-label="Search tools" placeholder="Search tools"><button class="btn p" style="padding:0 14px">Go</button></form>
+    <div style="display:grid;gap:10px;margin-top:16px"><a class="card" href="#" style="min-height:64px"><b>Calculators</b><em>19 tools</em></a><a class="card" href="#" style="min-height:64px"><b>Time Tools</b><em>13 tools</em></a></div></div></div>
+  <div class="phone"><div class="hdr"><a class="brand" href="#" style="font-size:17px"><svg viewBox="0 0 100 100" style="width:28px;height:28px"><use href="#s-hub"/></svg>ToolZen Hub</a><span class="menu-btn" aria-hidden="true">✕</span></div>
+    <div style="padding:16px"><h1 style="font-size:1.9rem">JSON Formatter &amp; Validator</h1><p class="note">Check that JSON is valid...</p></div><div class="scrim"></div>
+    <div class="drawer"><a href="#">Home</a><a href="#" aria-current="page" style="color:var(--link)">All Tools</a><a href="#">Articles</a><a href="#">About</a></div></div>
+  <div class="phone"><div class="hdr"><a class="brand" href="#" style="font-size:17px"><svg viewBox="0 0 100 100" style="width:28px;height:28px"><use href="#s-hub"/></svg>ToolZen Hub</a><span class="menu-btn" aria-hidden="true">☰</span></div>
+    <div style="padding:16px 16px 0"><h1 style="font-size:1.9rem">All Tools</h1><form class="search" onsubmit="return false"><input type="search" aria-label="Search tools" placeholder="Search by name"><button class="btn p" style="padding:0 14px">Go</button></form></div>
+    <nav class="chips" aria-label="Sections"><a href="#" aria-current="true">Calculators 19</a><a href="#">Time 13</a><a href="#">Developer 17</a><a href="#">Image 2</a><a href="#">PDF 3</a></nav>
+    <div style="padding:8px 16px;display:grid;gap:10px"><a class="card" href="#" style="min-height:64px"><b>EMI Calculator</b><span>Monthly EMI, tenure or rate</span></a><a class="card" href="#" style="min-height:64px"><b>SIP Calculator</b><span>Plan SIP investments</span></a></div></div>
+</div>
+
+<h2 class="sec">Buttons, states, form feedback and alerts</h2>
+<div class="panel">
+  <div class="row"><span class="btn p">Primary</span><span class="btn p h">Primary hover</span><span class="btn p f">Primary focus</span><span class="btn x">Disabled</span></div>
+  <div class="row"><span class="btn s">Secondary (Reset, Download)</span><span class="btn s h">Secondary hover</span><span class="btn s f">Secondary focus</span><span class="btn t">Tertiary link</span><span class="btn d">Destructive</span></div>
+  <div class="field" style="max-width:360px"><label>Interest rate (% a year)</label><input aria-invalid="true" style="border-color:var(--err)" value="-3"><div class="hint" style="color:var(--err)">⚠ Error: enter a rate of 0 or more.</div></div>
+  <div class="alert" style="border-color:var(--ok);color:var(--ok)"><b>Success.</b><span style="color:var(--ink)">Merged 3 files. Your PDF is ready to download.</span></div>
+  <div class="alert" style="border-color:var(--warn);color:var(--warn)"><b>Note.</b><span style="color:var(--ink)">Results are estimates from your assumptions, not a forecast.</span></div>
+  <div class="alert" style="border-color:var(--info);color:var(--info)"><b>Info.</b><span style="color:var(--ink)">Files are processed in your browser.</span></div>
+</div>
+
+<h2 class="sec">Practice Lab verdict and Smart Flashcards reveal</h2>
+<div class="editor">
+  <div class="panel"><div class="eyebrow">JSONPath Challenge Lab</div><h3>Select every price below 10</h3><pre style="min-height:60px">$.store.book[?(@.price &lt; 10)].title</pre>
+    <div style="display:flex;gap:8px;margin-top:10px"><span class="btn p">Check</span><span class="btn s">Show hint</span></div>
+    <div class="alert" style="border-color:var(--ok);color:var(--ok);margin-top:10px"><b>✓ Correct.</b><span style="color:var(--ink)">2 of 2 expected values matched.</span></div></div>
+  <div class="panel"><div class="eyebrow">Smart Flashcards · JSON · card 4 of 30</div><h3>Which JSON value type cannot hold a comment?</h3><p class="note">Think of the answer first, then check it.</p>
+    <span class="btn p">Show answer</span><div style="margin-top:12px;border-top:1px solid var(--divider);padding-top:10px"><b>All of them.</b> Strict JSON has no comment syntax.</div>
+    <div style="display:flex;gap:8px;margin-top:10px"><span class="btn s">Again</span><span class="btn s">Got it</span></div></div>
+</div>
+
+<h2 class="sec">Footer</h2>
+<div class="frame"><div class="foot"><div><b>ToolZen Hub</b><div class="note" style="color:#d6d3d1">Smart tools to make better decisions every day.</div></div>
+  <div><b>Sections</b><a href="#">Calculators</a><a href="#">Time Tools</a><a href="#">Developer Tools</a><a href="#">Image Tools</a><a href="#">PDF Tools</a></div>
+  <div><b>Resources</b><a href="#">Articles</a><a href="#">About</a><a href="#">Contact</a></div><div><b>Legal</b><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">Disclaimer</a></div></div></div>
+
+</div></main>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="s-hub" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="var(--primary,#1c1917)"/><g stroke="#fff" stroke-width="5" stroke-linecap="round"><path d="M50 30v10M50 60v10M30 50h10M60 50h10"/></g><circle cx="50" cy="50" r="10" fill="none" stroke="#fff" stroke-width="6"/><g fill="#fff" fill-opacity=".92"><circle cx="50" cy="24" r="7"/><circle cx="50" cy="76" r="7"/><circle cx="24" cy="50" r="7"/><circle cx="76" cy="50" r="7"/></g></symbol>
+    <symbol id="s-hub-fav" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#1c1917"/><circle cx="50" cy="50" r="15" fill="none" stroke="#fff" stroke-width="10"/><g fill="#a5b4fc"><circle cx="50" cy="17" r="11"/><circle cx="50" cy="83" r="11"/><circle cx="17" cy="50" r="11"/><circle cx="83" cy="50" r="11"/></g></symbol>
+    <symbol id="s-hub-fav-d" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#fafaf9"/><circle cx="50" cy="50" r="15" fill="none" stroke="#1c1917" stroke-width="10"/><g fill="#4338ca"><circle cx="50" cy="17" r="11"/><circle cx="50" cy="83" r="11"/><circle cx="17" cy="50" r="11"/><circle cx="83" cy="50" r="11"/></g></symbol>
+    <symbol id="s-hub-d" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#fafaf9"/><g stroke="#1c1917" stroke-width="5" stroke-linecap="round"><path d="M50 30v10M50 60v10M30 50h10M60 50h10"/></g><circle cx="50" cy="50" r="10" fill="none" stroke="#1c1917" stroke-width="6"/><g fill="#4338ca"><circle cx="50" cy="24" r="7"/><circle cx="50" cy="76" r="7"/><circle cx="24" cy="50" r="7"/><circle cx="76" cy="50" r="7"/></g></symbol>
+    <symbol id="s-mono-hub" viewBox="0 0 100 100"><g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"><circle cx="50" cy="50" r="10"/><path d="M50 30v10M50 60v10M30 50h10M60 50h10"/></g><g fill="#fff"><circle cx="50" cy="20" r="8"/><circle cx="50" cy="80" r="8"/><circle cx="20" cy="50" r="8"/><circle cx="80" cy="50" r="8"/></g></symbol>
+    <symbol id="s-grid" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#1c1917"/><g fill="#fff"><rect x="21" y="21" width="26" height="26" rx="6"/><rect x="21" y="53" width="26" height="26" rx="6"/><rect x="53" y="53" width="26" height="26" rx="6"/></g><rect x="55" y="19" width="26" height="26" rx="6" fill="#a5b4fc" transform="rotate(45 68 32)"/></symbol>
+    <symbol id="s-grid-fav" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#1c1917"/><g fill="#fff"><rect x="15" y="15" width="30" height="30" rx="7"/><rect x="15" y="55" width="30" height="30" rx="7"/><rect x="55" y="55" width="30" height="30" rx="7"/></g><rect x="57" y="13" width="30" height="30" rx="7" fill="#a5b4fc" transform="rotate(45 72 28)"/></symbol>
+    <symbol id="s-grid-fav-d" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#fafaf9"/><g fill="#1c1917"><rect x="15" y="15" width="30" height="30" rx="7"/><rect x="15" y="55" width="30" height="30" rx="7"/><rect x="55" y="55" width="30" height="30" rx="7"/></g><rect x="57" y="13" width="30" height="30" rx="7" fill="#4338ca" transform="rotate(45 72 28)"/></symbol>
+    <symbol id="s-grid-d" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#fafaf9"/><g fill="#1c1917"><rect x="21" y="21" width="26" height="26" rx="6"/><rect x="21" y="53" width="26" height="26" rx="6"/><rect x="53" y="53" width="26" height="26" rx="6"/></g><rect x="55" y="19" width="26" height="26" rx="6" fill="#4338ca" transform="rotate(45 68 32)"/></symbol>
+    <symbol id="s-mono-grid" viewBox="0 0 100 100"><g fill="#fff"><rect x="18" y="18" width="28" height="28" rx="6"/><rect x="18" y="54" width="28" height="28" rx="6"/><rect x="54" y="54" width="28" height="28" rx="6"/><rect x="56" y="16" width="28" height="28" rx="6" transform="rotate(45 70 30)"/></g></symbol>
+    <symbol id="s-z" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#1c1917"/><path d="M25 27h50v13L46 62h29v11H25V60l29-22H25z" fill="#fff"/><circle cx="75" cy="27" r="7" fill="#a5b4fc"/></symbol>
+    <symbol id="s-z-fav" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#1c1917"/><path d="M20 22h60v17L48 62h32v16H20V61l32-23H20z" fill="#fff"/></symbol>
+    <symbol id="s-z-fav-d" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#fafaf9"/><path d="M20 22h60v17L48 62h32v16H20V61l32-23H20z" fill="#1c1917"/></symbol>
+    <symbol id="s-z-d" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#fafaf9"/><path d="M25 27h50v13L46 62h29v11H25V60l29-22H25z" fill="#1c1917"/><circle cx="75" cy="27" r="7" fill="#4338ca"/></symbol>
+    <symbol id="s-mono-z" viewBox="0 0 100 100"><path d="M22 24h56v15L47 62h31v14H22V61l31-23H22z" fill="#fff"/></symbol>
+  </defs>
+</svg>
+
+<script>
+(function(){
+  var NOTES={A:"A is the closest evolution of today's green identity. Primary #047857 is 5.48:1 on white; it replaces both the 3.43:1 brand green used as text and the #087f47 button green.",
+  B:"B is the conventional trusted-software palette. Strong contrast and familiarity, lowest distinctiveness.",
+  C:"C is ink-led: primary buttons are near-black, one indigo accent carries links, focus and active states. Colour is rare, so results and states stand out. Recommended.",
+  D:"D unifies the repository's two existing greens (header #0b9f58 and favicon #14B8A6) into one deep teal with a warm amber accent for eyebrows."};
+  var ROLES=[["bg","Page"],["surface","Card"],["divider","Divider"],["border","Control border"],["ink","Text"],["muted","Muted text"],["primary","Primary"],["primary-h","Primary hover"],["accent","Accent"],["link","Link"],["ok","Success"],["err","Error"],["warn","Warning"],["info","Info"],["focus","Focus ring"]];
+  function lum(h){var n=parseInt(h.slice(1),16),c=[n>>16,(n>>8)&255,n&255].map(function(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+  function cr(a,b){var x=lum(a),y=lum(b),m=Math.max(x,y),n=Math.min(x,y);return ((m+.05)/(n+.05)).toFixed(2)}
+  var board=document.getElementById("board");
+  function render(o){board.setAttribute("data-opt",o);var cs=getComputedStyle(board),html="";
+    ROLES.forEach(function(r){var v=cs.getPropertyValue("--"+r[0]).trim();html+='<div><i style="background:'+v+'"></i><b>'+r[1]+'</b><br>'+v+'<br>'+cr(v,"#ffffff")+':1 on white</div>'});
+    document.getElementById("swatches").innerHTML=html;document.getElementById("optnote").textContent=NOTES[o];
+    document.querySelectorAll(".tabs button").forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.o===o))})}
+  document.querySelectorAll(".tabs button").forEach(function(b){b.addEventListener("click",function(){render(b.dataset.o)})});
+  render("C");
+})();
+</script>
+</body>
+</html>
