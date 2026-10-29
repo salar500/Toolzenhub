@@ -68,8 +68,16 @@ export function headerMarkup() {
                     aria-label="ToolZen Hub Home"
                 >
 
-                    <span class="brand-logo">
-                        <span aria-hidden="true">▦</span>
+                    <span class="brand-logo" aria-hidden="true">
+                        <svg viewBox="0 0 100 100" focusable="false">
+                            <rect width="100" height="100" rx="22" fill="#1c1917"/>
+                            <g fill="#fff">
+                                <rect x="20" y="20" width="28" height="28" rx="7"/>
+                                <rect x="20" y="52" width="28" height="28" rx="7"/>
+                                <rect x="52" y="52" width="28" height="28" rx="7"/>
+                            </g>
+                            <rect x="56.5" y="24.5" width="19" height="19" rx="4.5" transform="rotate(45 66 34)" fill="#a5b4fc"/>
+                        </svg>
                     </span>
 
 
@@ -359,70 +367,132 @@ export function renderHeader() {
 
     /* =====================================================
        OPEN / CLOSE MOBILE MENU
+
+       The menu is modal while open: the rest of the page is made
+       inert (not reachable by keyboard or screen reader), Tab stays
+       inside the button and the links, the page does not scroll, and
+       a click on the dimmed backdrop closes it.
     ===================================================== */
 
-    function closeMobileMenu() {
+    const inertSiblings = [];
 
-        mobileNavigation.classList.remove(
-            "is-open"
-        );
+    function setPageInert(on) {
+
+        if (on) {
+
+            for (const el of document.body.children) {
+
+                if (
+                    el === header ||
+                    el.tagName === "SCRIPT" ||
+                    el.hasAttribute("inert")
+                ) {
+                    continue;
+                }
+
+                el.setAttribute("inert", "");
+                inertSiblings.push(el);
+
+            }
+
+        } else {
+
+            while (inertSiblings.length) {
+                inertSiblings.pop().removeAttribute("inert");
+            }
+
+        }
+
+    }
 
 
-        menuButton.classList.remove(
-            "is-open"
-        );
+    function closeMobileMenu(restoreFocus = false) {
 
+        const wasOpen =
+            mobileNavigation.classList.contains("is-open");
 
-        menuButton.setAttribute(
-            "aria-expanded",
-            "false"
-        );
+        mobileNavigation.classList.remove("is-open");
+        menuButton.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute("aria-label", "Open navigation menu");
+        mobileNavigation.setAttribute("aria-hidden", "true");
+        document.documentElement.classList.remove("menu-open");
+        setPageInert(false);
 
-
-        menuButton.setAttribute(
-            "aria-label",
-            "Open navigation menu"
-        );
-
-
-        mobileNavigation.setAttribute(
-            "aria-hidden",
-            "true"
-        );
+        if (wasOpen && restoreFocus) {
+            menuButton.focus();
+        }
 
     }
 
 
     function openMobileMenu() {
 
-        mobileNavigation.classList.add(
-            "is-open"
-        );
-
-
-        menuButton.classList.add(
-            "is-open"
-        );
-
-
-        menuButton.setAttribute(
-            "aria-expanded",
-            "true"
-        );
-
-
-        menuButton.setAttribute(
-            "aria-label",
-            "Close navigation menu"
-        );
-
-
-        mobileNavigation.setAttribute(
-            "aria-hidden",
-            "false"
-        );
+        mobileNavigation.classList.add("is-open");
+        menuButton.classList.add("is-open");
+        menuButton.setAttribute("aria-expanded", "true");
+        menuButton.setAttribute("aria-label", "Close navigation menu");
+        mobileNavigation.setAttribute("aria-hidden", "false");
+        document.documentElement.classList.add("menu-open");
+        setPageInert(true);
 
     }
+
+
+    /* Tab and Shift+Tab wrap between the button and the links */
+
+    function trapTab(event) {
+
+        if (
+            event.key !== "Tab" ||
+            !mobileNavigation.classList.contains("is-open")
+        ) {
+            return;
+        }
+
+        const stops = [
+            menuButton,
+            ...mobileNavigation.querySelectorAll(
+                ".mobile-navigation__link"
+            )
+        ];
+
+        const first = stops[0];
+        const last = stops[stops.length - 1];
+        const active = document.activeElement;
+
+        if (event.shiftKey && active === first) {
+
+            event.preventDefault();
+            last.focus();
+
+        } else if (!event.shiftKey && active === last) {
+
+            event.preventDefault();
+            first.focus();
+
+        } else if (!stops.includes(active)) {
+
+            event.preventDefault();
+            first.focus();
+
+        }
+
+    }
+
+
+    /* A click on the backdrop (the container, not the panel) closes */
+
+    mobileNavigation.addEventListener(
+        "click",
+        event => {
+
+            if (event.target === mobileNavigation) {
+                closeMobileMenu(true);
+            }
+
+        }
+    );
 
 
     /* =====================================================
@@ -441,7 +511,7 @@ export function renderHeader() {
 
             if (isOpen) {
 
-                closeMobileMenu();
+                closeMobileMenu(true);
 
             } else {
 
@@ -492,11 +562,11 @@ export function renderHeader() {
                 )
             ) {
 
-                closeMobileMenu();
-
-                menuButton.focus();
+                closeMobileMenu(true);
 
             }
+
+            trapTab(event);
 
         }
     );
@@ -510,7 +580,7 @@ export function renderHeader() {
         "resize",
         () => {
 
-            if (window.innerWidth > 900) {
+            if (window.innerWidth >= 960) {
 
                 closeMobileMenu();
 
