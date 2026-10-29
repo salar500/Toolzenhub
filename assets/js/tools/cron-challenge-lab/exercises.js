@@ -49,7 +49,7 @@ export const set = {
             starting: "0 * * * *",
             solution: "* * * * *",
             hints: ["A cron expression has five fields: minute, hour, day of month, month, day of week.", "A star matches every value of its field.", "Use a star in all five fields."],
-            explanation: "A star means every possible value. With a star in all five fields the job matches every minute of every day. The expression * * * * * is also what an empty new schedule looks like in many tools, which is why jobs written in a hurry run far more often than meant.",
+            explanation: "A star means every possible value. With a star in all five fields the job matches every minute of every day. The expression * * * * * is also the easiest one to write by mistake, and it runs far more often than most jobs need.",
             source: "crontab(5), Cronie"
         }),
         exercise({

@@ -46,7 +46,7 @@ export function markup() {
             {
                 heading: "What Counts as Correct",
                 paragraphs: [
-                    "An answer is correct when it is valid, strict JSON and its parsed value equals the value the exercise asks for. Spacing, indentation and the order of keys in an object do not matter. The order of items in an array does. Values are never converted: the number 1 is not the text \"1\", and true is not the text \"true\".",
+                    "An answer is correct when it is valid, strict JSON and its parsed value equals the value the exercise asks for. Spacing, indentation and the order of keys in an object do not matter. The order of items in an array does. Values are never converted: the number 1 is not the text \"1\", and true is not the text \"true\". Numbers are compared as ordinary double-precision numbers, so 1, 1.0 and 1e0 are the same number, and digits beyond about 15 significant figures are not told apart.",
                     "A text that repeats a key is not accepted, because what a repeated key means depends on the parser. Answers can be up to 20,000 characters. Nothing you type is run: it is only read as data."
                 ]
             },

@@ -13,6 +13,19 @@ export const answerBox = (page) => page.locator("#lx-app textarea");
 export const checkButton = (page) => page.getByRole("button", { name: "Check answer", exact: true });
 export const verdictOf = (page) => page.locator(".lx-feedback h4");
 
+/* A text node that is only the word null, undefined or NaN (or [object Object]) is a rendering defect (Node.append(null) writes "null"). */
+export async function strayWords(page) {
+  return page.evaluate(() => {
+    const out = [];
+    const walker = document.createTreeWalker(document.querySelector("#lx-app"), NodeFilter.SHOW_TEXT);
+    for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+      const t = n.textContent.trim();
+      if (t === "null" || t === "undefined" || t === "NaN" || t === "[object Object]" || t === "false") out.push(t);
+    }
+    return out;
+  });
+}
+
 export async function openLab(page, go, route) {
   await go(route);
   await expect(app(page)).toHaveAttribute("data-ready", "true");
@@ -136,6 +149,18 @@ export function defineShellTests(cfg) {
         expect(box.height, await b.innerText()).toBeGreaterThanOrEqual(43.5);
       }
       expect(await answerBox(page).evaluate((el) => parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(16);
+    });
+
+    test("no stray null, undefined or NaN text on the page, before and after a check, with a hint and with the solution", async ({ page, go }) => {
+      await openLab(page, go, cfg.route);
+      expect(await strayWords(page)).toEqual([]);
+      await answerBox(page).fill(cfg.wrong);
+      await checkButton(page).click();
+      expect(await strayWords(page)).toEqual([]);
+      await page.getByRole("button", { name: /^Show hint|^Hint/ }).first().click();
+      expect(await strayWords(page)).toEqual([]);
+      await page.getByRole("button", { name: "Show solution" }).click();
+      expect(await strayWords(page)).toEqual([]);
     });
 
     test("keyboard: the exercise buttons, Check answer and the hints work from the keyboard", async ({ page, go }) => {

@@ -191,9 +191,12 @@ describe("JSON deck: the claims the cards make", () => {
 
     it("the 'which is valid' cards have exactly the stated option valid", () => {
         const number = decks.json.cards.find((c) => c.id === "json-valid-number");
-        assert.deepEqual(number.options.map(strictlyValid), [false, false, false, true]);
+        // by the option's text and the card's own correct index, never by a fixed position
+        assert.deepEqual(number.options.map(strictlyValid), number.options.map((_, i) => i === number.correct));
+        assert.equal(number.options[number.correct], "-0.5e3");
         const empty = decks.json.cards.find((c) => c.id === "json-valid-empty");
-        assert.deepEqual(empty.options.map(strictlyValid), [true, false, false, false]);
+        assert.deepEqual(empty.options.map(strictlyValid), empty.options.map((_, i) => i === empty.correct));
+        assert.equal(empty.options[empty.correct], "{}");
     });
 
     it("the fix shown on the trailing-comma card is valid", () => {

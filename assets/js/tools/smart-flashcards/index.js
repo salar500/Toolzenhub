@@ -23,7 +23,7 @@
      deck files.
 ========================================================= */
 
-import { el, clear, codeBlock, announce, plural } from "../../learning/dom.js";
+import { el, put, clear, codeBlock, announce, plural } from "../../learning/dom.js";
 import { validateDeck } from "../../learning/content-schema.js";
 import {
     startPass, current, resultOf, gradeCurrent, canAdvance, advance, back,
@@ -172,7 +172,7 @@ export function markup() {
                     box and a card you do not know goes back to box 1. The
                     boxes wait ${INTERVAL_DAYS.join(", ")} days. These
                     intervals are a simple design choice for this tool. They
-                    are not a scientifically proven best schedule and they do
+                    are not a schedule shown to be the best one, and they do
                     not promise that you will remember a card.
                 </p>
 
@@ -372,7 +372,7 @@ export function init() {
         else if (ui.view === "study") drawStudy();
         else drawSummary();
 
-        root.append(drawProgressPanel());
+        put(root, drawProgressPanel());
 
         if (ui.focus === "heading") {
             root.querySelector("[data-focus='heading']")?.focus();
@@ -390,7 +390,7 @@ export function init() {
 
     function drawDecks() {
 
-        root.append(
+        put(root, 
             heading("Choose a deck"),
             ui.message ? el("p", { class: "lx-note", role: "alert", text: ui.message }) : null,
             el("ul", { class: "lx-decks" }, DECKS.map((meta) => el("li", { class: "lx-deck" },
@@ -433,7 +433,7 @@ export function init() {
             );
         });
 
-        root.append(
+        put(root, 
             heading(`${ui.deck.title} deck`),
             el("p", { text: ui.deck.description }),
             ui.message ? el("p", { class: "lx-note", role: "alert", text: ui.message }) : null,
@@ -485,19 +485,19 @@ export function init() {
             }
         });
 
-        article.append(
+        put(article, 
             el("p", { class: "lx-meta" },
                 `Card ${pass.index + 1} of ${total} · ${topic} · ${DIFFICULTY_LABEL[card.difficulty]}`),
             el("h2", { id: "lx-card-title", class: "lx-prompt", tabindex: "-1", "data-focus": "heading", text: card.prompt })
         );
 
-        if (card.code) article.append(codeBlock(card.code));
+        if (card.code) put(article, codeBlock(card.code));
 
         if (card.kind === "recall") drawRecall(article, card, result);
         else drawChoice(article, card, result);
 
         if (result) {
-            article.append(
+            put(article, 
                 el("div", { class: "lx-explanation" },
                     el("h3", { text: "Why" }),
                     el("p", { text: card.explanation }),
@@ -512,7 +512,7 @@ export function init() {
             disabled: canAdvance(pass) ? undefined : true, onclick: goNext
         }, pass.index === total - 1 ? "See summary" : "Next card");
 
-        article.append(
+        put(article, 
             el("div", { class: "lx-actions" },
                 el("button", {
                     type: "button", class: "calculator-form__button calculator-form__button--secondary lx-btn",
@@ -523,7 +523,7 @@ export function init() {
             !canAdvance(pass) ? el("p", { class: "lx-meta", text: "Next unlocks after you answer." }) : null
         );
 
-        root.append(
+        put(root, 
             el("p", { class: "lx-progress", text: `${plural(s.seen, "card")} done, ${s.remaining} left. To review: ${s.notKnown}.` }),
             article
         );
@@ -533,7 +533,7 @@ export function init() {
     function drawRecall(article, card, result) {
 
         if (!ui.revealed && !result) {
-            article.append(el("div", { class: "lx-actions" },
+            put(article, el("div", { class: "lx-actions" },
                 el("button", {
                     type: "button", class: "calculator-form__button lx-btn", "data-focus": "reveal-btn",
                     onclick: () => { ui.revealed = true; ui.focus = "knew"; say("Answer shown."); draw(); }
@@ -542,16 +542,16 @@ export function init() {
             return;
         }
 
-        article.append(
+        put(article, 
             el("div", { class: "lx-answer" }, el("h3", { text: "Answer" }), el("p", { text: card.answer }))
         );
 
         if (result) {
-            article.append(el("p", { class: "lx-result", text: result.known ? "You marked this: known." : "You marked this: not known. It is in your review list." }));
+            put(article, el("p", { class: "lx-result", text: result.known ? "You marked this: known." : "You marked this: not known. It is in your review list." }));
             return;
         }
 
-        article.append(
+        put(article, 
             el("div", { class: "lx-actions", role: "group", "aria-label": "Did you know this?" },
                 el("button", { type: "button", class: "calculator-form__button lx-btn", "data-focus": "knew", onclick: () => grade(true) }, "I knew it"),
                 el("button", { type: "button", class: "calculator-form__button calculator-form__button--secondary lx-btn", onclick: () => grade(false) }, "I did not know it")
@@ -588,10 +588,10 @@ export function init() {
             );
         });
 
-        article.append(el("fieldset", { class: "lx-fieldset" }, el("legend", { text: "Choose one answer" }), options));
+        put(article, el("fieldset", { class: "lx-fieldset" }, el("legend", { text: "Choose one answer" }), options));
 
         if (result) {
-            article.append(el("p", { class: "lx-result", role: "status", text: result.known ? "Correct." : `Not correct. The correct answer is: ${card.options[card.correct]}` }));
+            put(article, el("p", { class: "lx-result", role: "status", text: result.known ? "Correct." : `Not correct. The correct answer is: ${card.options[card.correct]}` }));
             return;
         }
 
@@ -610,7 +610,7 @@ export function init() {
             }
         }, "Check answer");
 
-        article.append(el("div", { class: "lx-actions" }, check));
+        put(article, el("div", { class: "lx-actions" }, check));
 
     }
 
@@ -646,7 +646,7 @@ export function init() {
             .filter((t) => s.byTopic[t.id])
             .map((t) => el("li", { text: `${t.title}: ${s.byTopic[t.id].known} known, ${s.byTopic[t.id].notKnown} not known` }));
 
-        root.append(
+        put(root, 
             heading("Session complete"),
             el("p", { class: "lx-result", text: `You went through ${plural(s.seen, "card")}: ${s.known} known, ${s.notKnown} not known.` }),
             el("p", { class: "lx-meta", text: "Recall cards count as known when you said so; choice cards count as known when the answer was correct." }),

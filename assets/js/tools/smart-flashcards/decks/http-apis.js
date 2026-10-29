@@ -31,12 +31,12 @@ export const deck = {
             id: "http-post-meaning", topic: "methods", kind: "choice", difficulty: "intermediate",
             prompt: "A client sends POST /orders with a JSON body. Which statement is accurate?",
             options: [
+                "POST must always create a new resource, and the server must always answer with 201 and the new record in the body.",
                 "POST asks the resource to process the enclosed data by its own rules; creating a record is a common use, not the only one.",
-                "POST must always create a new resource, and the server must always answer with 201.",
-                "POST is idempotent, so a client can repeat it freely without any effect.",
-                "POST requests are not allowed to carry a body, only a query string."
+                "POST is idempotent, so a client can repeat it freely without any effect on the server at all.",
+                "POST requests are not allowed to carry a body, only a query string in the address."
             ],
-            correct: 0,
+            correct: 1,
             explanation: "RFC 9110 defines POST as processing the enclosed representation according to the target resource's own semantics. That covers creating a record, but also submitting a form, running a search with a long query, or triggering an action. Because repeating a POST may repeat the effect, it is not treated as idempotent.",
             source: "RFC 9110 section 9.3.3"
         },
@@ -58,12 +58,12 @@ export const deck = {
             id: "http-put-vs-patch", topic: "methods", kind: "choice", difficulty: "intermediate",
             prompt: "A client wants to change only the email field of a user record. Which method was defined for a partial update?",
             options: [
+                "PATCH, which carries a description of the changes to apply.",
                 "PUT, which is defined to send only the field that changes.",
                 "GET, with the new email value added to the query string.",
-                "PATCH, which carries a description of the changes to apply.",
                 "HEAD, with the new email value in a request header."
             ],
-            correct: 2,
+            correct: 0,
             explanation: "PUT replaces the state of the target resource with the enclosed representation, so a PUT with only an email would normally mean a user that has only an email. PATCH (RFC 5789) was added for partial changes. Some APIs accept partial PUT bodies anyway, so always read the contract of the API you are using.",
             source: "RFC 9110 section 9.3.4; RFC 5789"
         },
@@ -72,11 +72,11 @@ export const deck = {
             prompt: "DELETE /items/7 removed the item. The client sends the identical request again. What does idempotence say about this?",
             options: [
                 "The second request must also return 204, otherwise the server breaks the standard.",
-                "The end state is the same, the item is gone, although the second response may be 404.",
                 "The second request must restore the item, because DELETE toggles the state.",
+                "The end state is the same, the item is gone, although the second response may be 404.",
                 "The second request is invalid because a client may send DELETE only once."
             ],
-            correct: 1,
+            correct: 2,
             explanation: "Idempotent means the intended effect on the server is the same after one request or several, not that the responses are identical. After the first DELETE the item is already gone, so a later DELETE leaves the same state even if the server answers 404 or 410 instead of 204.",
             source: "RFC 9110 section 9.2.2"
         },
@@ -97,12 +97,12 @@ export const deck = {
             id: "http-get-with-body", topic: "methods", kind: "choice", difficulty: "advanced",
             prompt: "May a GET request carry a body?",
             options: [
-                "Yes, and every server must use the body to filter the results.",
-                "No, a body on GET is a syntax error that every server must reject.",
+                "Yes, and every server must use the body of a GET request to filter the results that it returns, as it does for a query string.",
                 "It is not forbidden, but the body has no defined meaning, and some servers and proxies reject or ignore it, so avoid it.",
-                "Yes, but only when the Content-Length header is set to zero."
+                "No, a body on a GET request is a syntax error that every server and every proxy must reject at once with an error.",
+                "Yes, but only when the Content-Length header is set to zero and the request is sent over HTTPS to a known server."
             ],
-            correct: 2,
+            correct: 1,
             explanation: "RFC 9110 says content sent in a GET request has no generally defined semantics, may cause some implementations to reject the request, and might be dropped by intermediaries. For a search with many criteria, use query parameters, or POST to a search resource if the query is too large for a URL.",
             source: "RFC 9110 section 9.3.1"
         },
@@ -117,12 +117,12 @@ export const deck = {
             id: "http-404-missing", topic: "status", kind: "choice", difficulty: "beginner",
             prompt: "GET /users/9999 is requested, and no user with that id exists. Which status is the usual answer?",
             options: [
-                "400 Bad Request",
                 "404 Not Found",
+                "400 Bad Request",
                 "500 Internal Server Error",
                 "204 No Content"
             ],
-            correct: 1,
+            correct: 0,
             explanation: "404 says the server has no current representation for that target. The request itself was well formed, so 400 would blame the client's syntax, and 500 would claim that the server failed. Some APIs return 404 as well for a resource the caller is not allowed to know exists.",
             source: "RFC 9110 section 15 (404 Not Found)"
         },
@@ -130,12 +130,12 @@ export const deck = {
             id: "http-201-created", topic: "status", kind: "choice", difficulty: "intermediate",
             prompt: "A POST request successfully created a new resource. Which status is the usual answer, and which header often goes with it?",
             options: [
-                "201 Created, with a Location header giving the new resource's URL.",
                 "200 OK, with a Content-Length header giving the new id.",
                 "202 Accepted, with an Expires header giving the creation time.",
+                "201 Created, with a Location header giving the new resource's URL.",
                 "302 Found, with a Cookie header giving the new record."
             ],
-            correct: 0,
+            correct: 2,
             explanation: "201 means the request succeeded and led to one or more new resources, and the Location header names the primary one. A client can then GET that URL. 202 is for work that was accepted but not yet carried out, which is different from created.",
             source: "RFC 9110 section 15 (201 Created)"
         },
@@ -144,11 +144,11 @@ export const deck = {
             prompt: "A DELETE succeeded, and the server has nothing to put in the response body. Which status fits?",
             options: [
                 "201 Created",
+                "204 No Content",
                 "304 Not Modified",
-                "205 Reset Content, so the browser clears the form",
-                "204 No Content"
+                "205 Reset Content, so the browser clears the form"
             ],
-            correct: 3,
+            correct: 1,
             explanation: "204 says the action succeeded and the response has no body. A 204 response must not contain a body, so an API client should not try to parse JSON from it, a common source of an unexpected end of input error.",
             source: "RFC 9110 section 15 (204 No Content)"
         },
@@ -156,12 +156,12 @@ export const deck = {
             id: "http-401-vs-403", topic: "status", kind: "choice", difficulty: "intermediate",
             prompt: "A user is signed in, but the API refuses to delete an invoice because their role does not allow it. Which status fits best?",
             options: [
-                "401 Unauthorized, because the request has not been authenticated.",
                 "403 Forbidden, because the identity is known but not allowed.",
+                "401 Unauthorized, because the request has not been authenticated.",
                 "404 Not Found, because every refusal must look like a missing page.",
                 "400 Bad Request, because the user typed the invoice number wrongly."
             ],
-            correct: 1,
+            correct: 0,
             explanation: "Despite its name, 401 is about missing or invalid authentication: the server does not know who is asking, and the response carries a WWW-Authenticate challenge. 403 means the server understood the request and the caller's identity but refuses to authorise it.",
             source: "RFC 9110 section 15 (401 and 403)"
         },
@@ -171,10 +171,10 @@ export const deck = {
             options: [
                 "500 Internal Server Error, because the server cannot continue without the field.",
                 "404 Not Found, because the missing field cannot be found.",
-                "400 Bad Request or 422 Unprocessable Content, depending on the API's own convention.",
-                "301 Moved Permanently, because the form should be sent again."
+                "301 Moved Permanently, because the form should be sent again.",
+                "400 Bad Request or 422 Unprocessable Content, depending on the API's own convention."
             ],
-            correct: 2,
+            correct: 3,
             explanation: "Both codes are used in practice for validation errors. 400 is the general client error; 422 says the content is well formed but the server cannot process its instructions. What matters is that the API documents its choice, uses it consistently and returns a body that names the failing field.",
             source: "RFC 9110 section 15 (400 and 422)"
         },
@@ -184,10 +184,10 @@ export const deck = {
             options: [
                 "4xx, such as 400 Bad Request, because the client sent the request.",
                 "3xx, such as 302 Found, because the client should try again elsewhere.",
-                "2xx, such as 200 OK, because the request was received.",
-                "5xx, such as 500 Internal Server Error, because the server failed."
+                "5xx, such as 500 Internal Server Error, because the server failed.",
+                "2xx, such as 200 OK, because the request was received."
             ],
-            correct: 3,
+            correct: 2,
             explanation: "The class tells who is at fault. A request that the client could not have made any better and that still fails belongs to 5xx. In an API test, an unexpected 500 on a bad input is itself a defect: invalid input should produce a 4xx answer.",
             source: "RFC 9110 section 15 (500 Internal Server Error)"
         },
@@ -195,12 +195,12 @@ export const deck = {
             id: "http-redirect-permanent", topic: "status", kind: "choice", difficulty: "intermediate",
             prompt: "A page has moved permanently to a new URL. Which redirect status says so?",
             options: [
-                "301 Moved Permanently (or 308, which also keeps the request method).",
                 "302 Found, which tells clients the move may be temporary.",
                 "304 Not Modified, which sends the visitor to the cached copy.",
-                "307 Temporary Redirect, which keeps the method but not the move."
+                "307 Temporary Redirect, which keeps the method but not the move.",
+                "301 Moved Permanently (or 308, which also keeps the request method)."
             ],
-            correct: 0,
+            correct: 3,
             explanation: "301 and 308 mean the new URL is permanent, so clients and search engines may update their records. 302 and 307 mean the move may change, so the original URL stays in use. 308 and 307 differ from 301 and 302 in that they never allow a client to change a POST into a GET.",
             source: "RFC 9110 section 15 (3xx redirection)"
         },
@@ -208,12 +208,12 @@ export const deck = {
             id: "http-429-rate-limit", topic: "status", kind: "choice", difficulty: "intermediate",
             prompt: "A client sends requests faster than the API allows. Which status tells it to slow down?",
             options: [
-                "429 Too Many Requests, often with a Retry-After header.",
                 "408 Request Timeout, because the client was too slow.",
+                "429 Too Many Requests, often with a Retry-After header.",
                 "507 Insufficient Storage, because the quota is exhausted.",
                 "410 Gone, because the endpoint will no longer answer."
             ],
-            correct: 0,
+            correct: 1,
             explanation: "429 was added by RFC 6585 for rate limiting. The optional Retry-After header says how many seconds, or until what date, the client should wait. A well-behaved client backs off instead of retrying at once.",
             source: "RFC 6585 section 4"
         },
@@ -248,12 +248,12 @@ export const deck = {
             id: "http-authorization-header", topic: "headers", kind: "choice", difficulty: "intermediate",
             prompt: "Which request header usually carries credentials, such as a Bearer token?",
             options: [
-                "Content-Type",
                 "Authorization",
+                "Content-Type",
                 "Accept-Language",
                 "Host"
             ],
-            correct: 1,
+            correct: 0,
             explanation: "A request header such as Authorization: Bearer followed by a token is the standard place for credentials. It should be sent only over HTTPS, because anyone who can read the request can read the token.",
             source: "RFC 9110 section 11.6.2"
         },
@@ -261,12 +261,12 @@ export const deck = {
             id: "http-missing-content-type", topic: "headers", kind: "choice", difficulty: "intermediate",
             prompt: "A client sends a JSON body in a POST request but leaves out the Content-Type header. What may happen?",
             options: [
-                "The server always detects the format and treats the body as JSON without any problem.",
-                "The server always answers 304 Not Modified, because the label is missing.",
-                "The browser repairs the request by adding Accept: application/json.",
-                "The server may answer 415 Unsupported Media Type, or read the body in a way the client did not intend."
+                "The server always detects the format and treats the body as JSON without any problem or warning.",
+                "The server always answers 304 Not Modified, because the label is missing from the request.",
+                "The server may answer 415 Unsupported Media Type, or read the body in a way the client did not intend.",
+                "The browser repairs the request by adding Accept: application/json."
             ],
-            correct: 3,
+            correct: 2,
             explanation: "Servers are not required to guess the format of a body. Many frameworks only parse JSON when the label says so, and otherwise leave the body empty or reject it with 415. Setting the header is a basic step in API testing.",
             source: "RFC 9110 section 8.3 and section 15 (415)"
         },
@@ -274,12 +274,12 @@ export const deck = {
             id: "http-secret-in-url", topic: "headers", kind: "choice", difficulty: "intermediate",
             prompt: "Why should an API key not be sent in the query string of a URL?",
             options: [
-                "Query strings are limited to eight characters, which is too short for a key.",
-                "Browsers refuse to send any request whose URL contains an equals sign.",
+                "Query strings are limited to eight characters in total, which is too short for a key of any real length.",
                 "URLs are stored in server logs, browser history and Referer headers, so the key leaks.",
+                "Browsers refuse to send any request whose URL contains an equals sign.",
                 "HTTP forbids a query string on any request that has an Authorization header."
             ],
-            correct: 2,
+            correct: 1,
             explanation: "A URL is treated as public data by much surrounding software: it is logged by proxies and servers, kept in history, and sometimes passed on to other sites. Credentials belong in a header or in the body, sent over HTTPS.",
             source: "RFC 9110 section 17.9"
         },
@@ -288,11 +288,11 @@ export const deck = {
             prompt: "Which Cache-Control directive tells a cache not to store any part of the response?",
             options: [
                 "no-cache, which still allows storing, but needs revalidation before reuse.",
-                "no-store",
                 "max-age=0, which lets a cache keep the response for zero seconds.",
-                "private, which allows only the visitor's own browser to keep it."
+                "private, which allows only the visitor's own browser to keep it.",
+                "no-store"
             ],
-            correct: 1,
+            correct: 3,
             explanation: "The names are easy to mix up. no-store forbids storing the response at all, which suits sensitive data. no-cache allows a cache to store it but requires it to check with the server before each reuse. private and max-age=0 are different tools again.",
             source: "RFC 9111 section 5.2.2"
         },
@@ -335,7 +335,7 @@ export const deck = {
             prompt: "Why do some payment APIs accept an Idempotency-Key header on POST requests?",
             answer: "So that a request retried after a timeout is recognised as a repeat, and does not create a second payment.",
             explanation: "POST is not idempotent, but a client that never got an answer cannot tell whether the first attempt worked. A client-chosen key lets the server return the earlier result for a repeated key. This is a convention used by several APIs, so check the documentation of the one you use.",
-            source: "RFC 9110 section 9.2.2"
+            source: "RFC 9110 section 9.2.2 (idempotency). The Idempotency-Key header itself is a convention used by some APIs, not part of RFC 9110"
         }
     ]
 };

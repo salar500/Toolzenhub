@@ -2868,7 +2868,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6295
+      "visibleTextChars": 6563
     }
   },
   "/calculators/credit-card-payoff/": {
@@ -2966,7 +2966,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3377
+      "visibleTextChars": 4562
     }
   },
   "/calculators/fd/": {
@@ -3015,7 +3015,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6707
+      "visibleTextChars": 6975
     }
   },
   "/calculators/gratuity/": {
@@ -3260,7 +3260,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4569
+      "visibleTextChars": 4555
     }
   },
   "/calculators/margin/": {
@@ -3407,7 +3407,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 10388
+      "visibleTextChars": 10678
     }
   },
   "/calculators/prepayment/": {
@@ -3603,7 +3603,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6670
+      "visibleTextChars": 7269
     }
   },
   "/calculators/swp/": {
@@ -3652,7 +3652,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7262
+      "visibleTextChars": 7440
+    }
+  },
+  "/calculators/xirr/": {
+    "runtime": {
+      "title": "XIRR Calculator: Annualised Return from Dated Cash Flows | ToolZen Hub",
+      "description": "Find the yearly rate of return of money paid and received on different dates. Enter or paste the dated amounts. Calculated from your figures: not a forecast or advice.",
+      "canonical": "https://toolzenhub.in/calculators/xirr/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Find the yearly rate of return of money paid and received on different dates. Enter or paste the dated amounts. Calculated from your figures: not a forecast or advice.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "XIRR Calculator: Annualised Return from Dated Cash Flows | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/xirr/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Find the yearly rate of return of money paid and received on different dates. Enter or paste the dated amounts. Calculated from your figures: not a forecast or advice.",
+        "twitter:title": "XIRR Calculator: Annualised Return from Dated Cash Flows | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "XIRR Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "XIRR Calculator: Annualised Return from Dated Cash Flows | ToolZen Hub",
+      "description": "Find the yearly rate of return of money paid and received on different dates. Enter or paste the dated amounts. Calculated from your figures: not a forecast or advice.",
+      "canonical": "https://toolzenhub.in/calculators/xirr/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6688
     }
   },
   "/categories.html": {
@@ -3781,7 +3830,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3112
+      "visibleTextChars": 4367
     }
   },
   "/disclaimer.html": {
@@ -3870,7 +3919,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 883
+      "visibleTextChars": 937
     }
   },
   "/investment.html": {
@@ -3919,7 +3968,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1581
+      "visibleTextChars": 1851
     }
   },
   "/loans.html": {
@@ -4097,7 +4146,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 2341
+      "visibleTextChars": 3339
     }
   },
   "/tax.html": {
@@ -4284,7 +4333,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7361
+      "visibleTextChars": 8662
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -4432,6 +4481,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 4234
+    }
+  },
+  "/tools/cron-challenge-lab/": {
+    "runtime": {
+      "title": "Cron Challenge Lab: Practise Cron Expressions | ToolZen Hub",
+      "description": "Practise writing cron expressions with 19 exercises, from every minute to leap days and the day-of-month rule. A Cronie-dialect engine checks the schedule. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/cron-challenge-lab/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Practise writing cron expressions with 19 exercises, from every minute to leap days and the day-of-month rule. A Cronie-dialect engine checks the schedule. It runs in your browser: nothing is uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Cron Challenge Lab: Practise Cron Expressions | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/cron-challenge-lab/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Practise writing cron expressions with 19 exercises, from every minute to leap days and the day-of-month rule. A Cronie-dialect engine checks the schedule. It runs in your browser: nothing is uploaded.",
+        "twitter:title": "Cron Challenge Lab: Practise Cron Expressions | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Cron Challenge Lab"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Cron Challenge Lab: Practise Cron Expressions | ToolZen Hub",
+      "description": "Practise writing cron expressions with 19 exercises, from every minute to leap days and the day-of-month rule. A Cronie-dialect engine checks the schedule. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/cron-challenge-lab/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3800
     }
   },
   "/tools/cron-expression-explainer/": {
@@ -4633,11 +4731,11 @@
   "/tools/image-compressor-resizer/": {
     "runtime": {
       "title": "Image Compressor & Resizer | ToolZen Hub",
-      "description": "Free image compressor and resizer for JPEG, PNG and WebP. Set new dimensions, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your image is not uploaded.",
+      "description": "Free image compressor and resizer for JPEG, PNG and WebP. Process one image or many, set new dimensions, rotate, flip or crop, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your images are not uploaded.",
       "canonical": "https://toolzenhub.in/tools/image-compressor-resizer/",
       "robots": null,
       "openGraph": {
-        "og:description": "Free image compressor and resizer for JPEG, PNG and WebP. Set new dimensions, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your image is not uploaded.",
+        "og:description": "Free image compressor and resizer for JPEG, PNG and WebP. Process one image or many, set new dimensions, rotate, flip or crop, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your images are not uploaded.",
         "og:site_name": "ToolZen Hub",
         "og:title": "Image Compressor & Resizer | ToolZen Hub",
         "og:type": "website",
@@ -4645,7 +4743,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Free image compressor and resizer for JPEG, PNG and WebP. Set new dimensions, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your image is not uploaded.",
+        "twitter:description": "Free image compressor and resizer for JPEG, PNG and WebP. Process one image or many, set new dimensions, rotate, flip or crop, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your images are not uploaded.",
         "twitter:title": "Image Compressor & Resizer | ToolZen Hub"
       },
       "jsonLd": [
@@ -4669,14 +4767,14 @@
     },
     "rawHtml": {
       "title": "Image Compressor &amp; Resizer | ToolZen Hub",
-      "description": "Free image compressor and resizer for JPEG, PNG and WebP. Set new dimensions, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your image is not uploaded.",
+      "description": "Free image compressor and resizer for JPEG, PNG and WebP. Process one image or many, set new dimensions, rotate, flip or crop, choose a quality or keep the file under a size, and see the actual before and after. It runs in your browser: your images are not uploaded.",
       "canonical": "https://toolzenhub.in/tools/image-compressor-resizer/",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4174
+      "visibleTextChars": 5542
     }
   },
   "/tools/interval-timer/": {
@@ -4826,6 +4924,55 @@
       "visibleTextChars": 4372
     }
   },
+  "/tools/json-error-fixing-lab/": {
+    "runtime": {
+      "title": "JSON Error-Fixing Lab: Practise Repairing Invalid JSON | ToolZen Hub",
+      "description": "Practise fixing invalid JSON with 18 exercises: trailing commas, single quotes, bad escapes, truncated text and more. A strict validator checks each repair. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/json-error-fixing-lab/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Practise fixing invalid JSON with 18 exercises: trailing commas, single quotes, bad escapes, truncated text and more. A strict validator checks each repair. It runs in your browser: nothing is uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "JSON Error-Fixing Lab: Practise Repairing Invalid JSON | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/json-error-fixing-lab/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Practise fixing invalid JSON with 18 exercises: trailing commas, single quotes, bad escapes, truncated text and more. A strict validator checks each repair. It runs in your browser: nothing is uploaded.",
+        "twitter:title": "JSON Error-Fixing Lab: Practise Repairing Invalid JSON | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "JSON Error-Fixing Lab"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "JSON Error-Fixing Lab: Practise Repairing Invalid JSON | ToolZen Hub",
+      "description": "Practise fixing invalid JSON with 18 exercises: trailing commas, single quotes, bad escapes, truncated text and more. A strict validator checks each repair. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/json-error-fixing-lab/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3431
+    }
+  },
   "/tools/json-formatter/": {
     "runtime": {
       "title": "JSON Formatter & Validator | ToolZen Hub",
@@ -4873,6 +5020,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 5337
+    }
+  },
+  "/tools/jsonpath-challenge-lab/": {
+    "runtime": {
+      "title": "JSONPath Challenge Lab: Practise JSONPath Queries | ToolZen Hub",
+      "description": "Practise JSONPath with 19 exercises on a built-in document: child, wildcard, slice, descendant and filter selectors. An RFC 9535 engine checks the nodes you select. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/jsonpath-challenge-lab/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Practise JSONPath with 19 exercises on a built-in document: child, wildcard, slice, descendant and filter selectors. An RFC 9535 engine checks the nodes you select. It runs in your browser: nothing is uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "JSONPath Challenge Lab: Practise JSONPath Queries | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/jsonpath-challenge-lab/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Practise JSONPath with 19 exercises on a built-in document: child, wildcard, slice, descendant and filter selectors. An RFC 9535 engine checks the nodes you select. It runs in your browser: nothing is uploaded.",
+        "twitter:title": "JSONPath Challenge Lab: Practise JSONPath Queries | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "JSONPath Challenge Lab"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "JSONPath Challenge Lab: Practise JSONPath Queries | ToolZen Hub",
+      "description": "Practise JSONPath with 19 exercises on a built-in document: child, wildcard, slice, descendant and filter selectors. An RFC 9535 engine checks the nodes you select. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/jsonpath-challenge-lab/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3619
     }
   },
   "/tools/jsonpath-tester/": {
@@ -5215,7 +5411,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3617
+      "visibleTextChars": 4400
     }
   },
   "/tools/pomodoro-timer/": {
@@ -5316,6 +5512,55 @@
       "visibleTextChars": 3918
     }
   },
+  "/tools/smart-flashcards/": {
+    "runtime": {
+      "title": "Smart Flashcards: JSON, HTTP and Software Testing Revision Cards | ToolZen Hub",
+      "description": "Revise JSON, HTTP and APIs, and software testing with short original flashcards that explain every answer. Progress is saved only if you choose. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/smart-flashcards/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Revise JSON, HTTP and APIs, and software testing with short original flashcards that explain every answer. Progress is saved only if you choose. It runs in your browser: nothing is uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Smart Flashcards: JSON, HTTP and Software Testing Revision Cards | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/smart-flashcards/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Revise JSON, HTTP and APIs, and software testing with short original flashcards that explain every answer. Progress is saved only if you choose. It runs in your browser: nothing is uploaded.",
+        "twitter:title": "Smart Flashcards: JSON, HTTP and Software Testing Revision Cards | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Smart Flashcards"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Smart Flashcards: JSON, HTTP and Software Testing Revision Cards | ToolZen Hub",
+      "description": "Revise JSON, HTTP and APIs, and software testing with short original flashcards that explain every answer. Progress is saved only if you choose. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/smart-flashcards/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3625
+    }
+  },
   "/tools/split-pdf/": {
     "runtime": {
       "title": "Split PDF: Cut a PDF into Parts | ToolZen Hub",
@@ -5412,6 +5657,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 3332
+    }
+  },
+  "/tools/test-design-lab/": {
+    "runtime": {
+      "title": "Test Design Lab: Boundary Values and Equivalence Partitions | ToolZen Hub",
+      "description": "Practise boundary value analysis and equivalence partitioning with 20 exercises on whole numbers, each with an exact specification and an explanation. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/test-design-lab/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Practise boundary value analysis and equivalence partitioning with 20 exercises on whole numbers, each with an exact specification and an explanation. It runs in your browser: nothing is uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Test Design Lab: Boundary Values and Equivalence Partitions | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/test-design-lab/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Practise boundary value analysis and equivalence partitioning with 20 exercises on whole numbers, each with an exact specification and an explanation. It runs in your browser: nothing is uploaded.",
+        "twitter:title": "Test Design Lab: Boundary Values and Equivalence Partitions | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Test Design Lab"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Test Design Lab: Boundary Values and Equivalence Partitions | ToolZen Hub",
+      "description": "Practise boundary value analysis and equivalence partitioning with 20 exercises on whole numbers, each with an exact specification and an explanation. It runs in your browser: nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/tools/test-design-lab/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 4340
     }
   },
   "/tools/text-diff/": {

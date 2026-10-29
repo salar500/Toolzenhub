@@ -233,7 +233,7 @@ export const set = {
             ],
             samples: [39, 40, 59, 60, 74, 75, 100, 101, -1],
             hints: ["Each band includes both numbers it names.", "0 and 100 are valid marks.", "-1 and 101 are the nearest invalid marks."],
-            explanation: "Six partitions cover every whole number: two invalid ones and four grade bands. The nine values chosen are the last and first of neighbouring partitions. A wrong grade at one of these values would show up the defect that a typical comparison written with the wrong operator produces.",
+            explanation: "Six partitions cover every whole number: two invalid ones and four grade bands. The nine values chosen are the last value of one partition and the first of the next. A comparison written with the wrong operator, such as < where <= is meant, gives a wrong grade at exactly these values.",
             defect: "a band limit written with the wrong comparison operator"
         }),
         ep({

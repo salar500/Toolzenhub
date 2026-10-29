@@ -39,12 +39,12 @@ export const deck = {
             prompt: "Is the text below, on its own, a valid JSON document?",
             code: "42",
             options: [
-                "Yes. Since RFC 8259, any JSON value may stand alone at the top level.",
                 "No. The top level of every JSON text must be an object or an array, never a bare number.",
                 "No. A number must be inside quotation marks.",
+                "Yes. Since RFC 8259, any JSON value may stand alone at the top level.",
                 "Yes, but only if it ends with a semicolon."
             ],
-            correct: 0,
+            correct: 2,
             explanation: "The older RFC 4627 required an object or an array at the top level, which is why this is a common mistake. RFC 8259 allows any value, so 42, \"text\", true and null are all complete documents. Some older tools still refuse them, so API designers usually return an object anyway.",
             source: "RFC 8259 section 2", tool: "json-formatter"
         },
@@ -53,12 +53,12 @@ export const deck = {
             prompt: "Is this valid JSON?",
             code: "{\"name\":\"Alex\",\"age\":25,}",
             options: [
-                "Yes. A single trailing comma after the last member is ignored by JSON parsers.",
                 "No. A comma must be followed by another member.",
+                "Yes. A single trailing comma after the last member is ignored by JSON parsers.",
                 "Yes, but only in arrays.",
                 "No. Numbers cannot be last."
             ],
-            correct: 1,
+            correct: 0,
             explanation: "The grammar puts commas between members, never after the last one. The fix is to delete the final comma: {\"name\":\"Alex\",\"age\":25}. Trailing commas are accepted by JavaScript object literals and by some lenient parsers, which is why the mistake survives until a strict parser reads it.",
             source: "RFC 8259 section 4", tool: "json-formatter"
         },
@@ -82,11 +82,11 @@ export const deck = {
             code: "{name: \"Alex\"}",
             options: [
                 "The value should be written as a number, because names are always text values.",
-                "The key name must be a double-quoted string.",
                 "A JSON object cannot have only one member.",
-                "The braces should be square brackets."
+                "The braces should be square brackets.",
+                "The key name must be a double-quoted string."
             ],
-            correct: 1,
+            correct: 3,
             explanation: "In JSON every member name is a string in double quotation marks. JavaScript allows bare identifiers as keys in an object literal, but that is JavaScript syntax, not JSON.",
             source: "RFC 8259 section 4", tool: "json-formatter"
         },
@@ -94,12 +94,12 @@ export const deck = {
             id: "json-comments", topic: "syntax", kind: "choice", difficulty: "beginner",
             prompt: "What does JSON say about comments such as // note or /* note */?",
             options: [
+                "JSON has no comment syntax, so a strict parser rejects them.",
                 "Both forms are allowed anywhere whitespace is allowed, as in many programming languages.",
                 "Only the // form is allowed, and only at the end of a line of the document.",
-                "JSON has no comment syntax, so a strict parser rejects them.",
                 "Comments are allowed only inside arrays."
             ],
-            correct: 2,
+            correct: 0,
             explanation: "The JSON grammar has no comments. Configuration formats that look like JSON but allow comments (often called JSONC or JSON5) are different formats and need their own parsers. If you need a note inside real JSON, use a normal member such as \"_note\" and agree what it means.",
             source: "RFC 8259 section 2", tool: "json-formatter"
         },
@@ -108,12 +108,12 @@ export const deck = {
             prompt: "What is wrong with this text?",
             code: "{\"a\":1 \"b\":2}",
             options: [
-                "A comma is missing between the two members.",
                 "The key b must not be quoted.",
                 "Numbers must be written in quotation marks.",
-                "Nothing; it is valid."
+                "Nothing; it is valid.",
+                "A comma is missing between the two members."
             ],
-            correct: 0,
+            correct: 3,
             explanation: "Members of an object are separated by a comma. A strict parser stops at the second quotation mark, where it expected a comma or a closing brace. The fix is {\"a\":1,\"b\":2}.",
             source: "RFC 8259 section 4", tool: "json-formatter"
         },
@@ -122,12 +122,12 @@ export const deck = {
             prompt: "What is wrong with this text?",
             code: "{\"items\":[1,2,3}",
             options: [
-                "The array is closed with } instead of ].",
                 "Arrays cannot hold numbers.",
+                "The array is closed with } instead of ].",
                 "The key items must not be quoted.",
                 "There should be a comma after 3."
             ],
-            correct: 0,
+            correct: 1,
             explanation: "Every opening bracket needs its own matching closer. The array opened with [ must end with ], and only then can the object close with }. Counting openers and closers, or letting a formatter point at the first mismatch, is the quickest way to find this.",
             source: "RFC 8259 sections 4 and 5", tool: "json-formatter"
         },
@@ -137,11 +137,11 @@ export const deck = {
             code: "{\"a\":1}{\"b\":2}",
             options: [
                 "Yes. Several objects can be placed one after another in a single JSON document.",
-                "No. A JSON text is one value; two values need a wrapper such as an array.",
                 "Yes, as long as there is no whitespace between the closing and the opening brace.",
-                "No. Objects must contain arrays."
+                "No. Objects must contain arrays.",
+                "No. A JSON text is one value; two values need a wrapper such as an array."
             ],
-            correct: 1,
+            correct: 3,
             explanation: "A JSON text contains exactly one top-level value. Two objects in a row are two texts. Wrap them in an array ([{\"a\":1},{\"b\":2}]) or, for streams, use a line-based convention such as JSON Lines where each line is its own complete document.",
             source: "RFC 8259 section 2", tool: "json-formatter"
         },
@@ -176,12 +176,12 @@ export const deck = {
             prompt: "How should the inner quotation marks be written so this becomes valid JSON?",
             code: "{\"quote\":\"She said \"hi\"\"}",
             options: [
-                "Put a backslash before each inner quotation mark: \"She said \\\"hi\\\"\".",
                 "Replace the inner double quotation marks with single quotation marks and keep the outer ones.",
+                "Put a backslash before each inner quotation mark: \"She said \\\"hi\\\"\".",
                 "Double each inner quotation mark, writing two in a row, as spreadsheets and CSV files do.",
                 "Wrap the text in square brackets."
             ],
-            correct: 0,
+            correct: 1,
             explanation: "Inside a string, a double quotation mark must be escaped with a backslash, otherwise it ends the string early. Doubling the quote is the CSV convention, not JSON. Replacing with single quotes is valid JSON, but it changes the text rather than escaping it.",
             source: "RFC 8259 section 7", tool: "json-formatter"
         },
@@ -191,11 +191,11 @@ export const deck = {
             code: "{\"text\":\"line one\nline two\"}",
             options: [
                 "Yes. Strings may span lines.",
-                "No. Control characters such as a line break must be escaped, for example as \\n.",
                 "Yes, but only when the file uses Windows (CRLF) line endings and nowhere else.",
+                "No. Control characters such as a line break must be escaped, for example as \\n.",
                 "No. A string may never contain the letter n."
             ],
-            correct: 1,
+            correct: 2,
             explanation: "Characters from U+0000 to U+001F must not appear raw inside a string. Write the line break as the two characters \\n. Multi-line text pasted straight into a quoted value is one of the most frequent causes of a parse error.",
             source: "RFC 8259 section 7", tool: "json-formatter"
         },
@@ -210,12 +210,12 @@ export const deck = {
             id: "json-encoding", topic: "strings", kind: "choice", difficulty: "advanced",
             prompt: "Which character encoding does RFC 8259 require for JSON exchanged between systems?",
             options: [
-                "UTF-8",
                 "UTF-16 only",
+                "UTF-8",
                 "ISO-8859-1 (Latin-1)",
                 "Whatever the sender prefers, with no rule"
             ],
-            correct: 0,
+            correct: 1,
             explanation: "JSON text exchanged between systems that are not part of a closed ecosystem must be encoded as UTF-8. Earlier versions allowed UTF-16 and UTF-32 as well. A writer must not add a byte order mark at the start; a parser may ignore one rather than report an error.",
             source: "RFC 8259 section 8.1"
         },
@@ -225,24 +225,24 @@ export const deck = {
             code: "{\"id\":007}",
             options: [
                 "Yes. Leading zeros are ignored, so 007 is read as the number 7 everywhere.",
-                "No. A number cannot have leading zeros; 0 may only stand alone before a fraction or exponent.",
                 "Yes, and it means the octal number 7, which is the same as the decimal number 7.",
-                "No. The name id is a reserved word in JSON and cannot be used."
+                "No. The name id is a reserved word in JSON and cannot be used.",
+                "No. A number cannot have leading zeros; 0 may only stand alone before a fraction or exponent."
             ],
-            correct: 1,
-            explanation: "The number grammar forbids leading zeros so that 007 cannot be read as octal in one parser and decimal in another. If the leading zeros matter, such as in a code or a postcode, the value is an identifier and belongs in a string: \"007\".",
+            correct: 3,
+            explanation: "The number grammar does not allow leading zeros, which avoids the ambiguity of 007 being read as octal by one parser and as decimal by another. If the leading zeros matter, such as in a code or a postcode, the value is an identifier and belongs in a string: \"007\".",
             source: "RFC 8259 section 6", tool: "json-formatter"
         },
         {
             id: "json-valid-number", topic: "numbers", kind: "choice", difficulty: "intermediate",
             prompt: "Which of these is a valid JSON number?",
             options: [
+                "-0.5e3",
                 ".5",
                 "+5",
-                "0x1F",
-                "-0.5e3"
+                "0x1F"
             ],
-            correct: 3,
+            correct: 0,
             explanation: "A JSON number is an optional minus, an integer part, an optional fraction and an optional exponent. A leading plus, a missing integer part (.5) and hexadecimal notation are all rejected. -0.5e3 is minus, 0, fraction .5 and exponent e3, which equals -500.",
             source: "RFC 8259 section 6"
         },
@@ -251,11 +251,11 @@ export const deck = {
             prompt: "Can JSON write NaN or Infinity as a number?",
             options: [
                 "Yes, as NaN and Infinity.",
-                "Yes, but only inside arrays.",
                 "No. Such values are not part of JSON, so they are usually sent as null or as strings by agreement.",
+                "Yes, but only inside arrays.",
                 "Yes, as long as they are written inside single quotation marks instead of double ones."
             ],
-            correct: 2,
+            correct: 1,
             explanation: "The number grammar has no name for NaN or infinity. JavaScript's JSON.stringify turns both into null, which silently loses information. Agree with the other side how such values are sent, for example null or an explicit string.",
             source: "RFC 8259 section 6", tool: "json-formatter"
         },
@@ -264,11 +264,11 @@ export const deck = {
             prompt: "The number 12345678901234567890 appears in a JSON document that is read with JavaScript's JSON.parse. What can happen?",
             options: [
                 "Nothing; every integer is kept exactly.",
-                "It is rounded to the nearest double-precision value, so low digits are lost.",
                 "JSON.parse always throws an error for a number with more than fifteen digits in it.",
+                "It is rounded to the nearest double-precision value, so low digits are lost.",
                 "The number is converted to a string automatically, with all its digits kept as they were."
             ],
-            correct: 1,
+            correct: 2,
             explanation: "The JSON grammar puts no limit on the number of digits, but JavaScript stores numbers as 64-bit floating point, which is exact only up to 9007199254740991. The text above becomes 12345678901234567000. RFC 8259 warns that interoperability is only certain within that range, so large identifiers are safer as strings.",
             source: "RFC 8259 section 6", tool: "json-formatter"
         },
@@ -278,11 +278,11 @@ export const deck = {
             code: "{\"active\":True}",
             options: [
                 "Yes. True is accepted and means the same as the lowercase literal true in JSON.",
-                "No. The literal names are lowercase: true, false and null.",
                 "Yes, but only when it is the value of the first member and not of any later one.",
-                "No. Booleans are not allowed in JSON."
+                "No. Booleans are not allowed in JSON.",
+                "No. The literal names are lowercase: true, false and null."
             ],
-            correct: 1,
+            correct: 3,
             explanation: "The three literal names must be written in lowercase exactly. True and None are Python spellings, and a Python value printed with print() or str() is not valid JSON.",
             source: "RFC 8259 section 3", tool: "json-formatter"
         },
@@ -330,13 +330,13 @@ export const deck = {
             id: "json-key-type", topic: "keys", kind: "choice", difficulty: "beginner",
             prompt: "What type must the name of an object member have in JSON?",
             options: [
-                "A string in double quotation marks.",
                 "Any JSON value, including numbers.",
                 "A number only.",
+                "A string in double quotation marks.",
                 "A bare identifier with no quotation marks."
             ],
-            correct: 0,
-            explanation: "Member names are always strings. A key that looks like a number, such as \"1\", is still the string 1. The same is true after parsing in most languages: the key 1 and the key \"1\" are the same property.",
+            correct: 2,
+            explanation: "Member names are always strings. A key that looks like a number, such as \"1\", is still the string 1. In JavaScript, obj[1] and obj[\"1\"] reach the same property; other languages may treat an integer key and a text key as different, so a key from JSON is always text.",
             source: "RFC 8259 section 4"
         },
         {
@@ -344,12 +344,12 @@ export const deck = {
             prompt: "What happens with duplicate member names in one object?",
             code: "{\"a\":1,\"a\":2}",
             options: [
-                "It is a syntax error in every parser, so the text can never be read at all.",
-                "The syntax is accepted, but parsers differ: many keep the last value, others keep the first or reject the text.",
-                "Parsers always merge the two values into an array, here [1, 2], to keep both.",
-                "The first value always wins, because the specification says so explicitly."
+                "It is a syntax error in every parser, so the text can never be read at all by any program that follows the specification.",
+                "Parsers always merge the two values into an array, here [1, 2], to keep both, in the order in which they appear.",
+                "The first value always wins, because the specification says so explicitly, which is why every parser agrees.",
+                "The syntax is accepted, but parsers differ: many keep the last value, others reject the text or report every pair."
             ],
-            correct: 1,
+            correct: 3,
             explanation: "RFC 8259 says member names SHOULD be unique and that the behaviour of software receiving duplicates is unpredictable. JavaScript's JSON.parse keeps the last value, which is common, but other software may do something else. Treat duplicates as a defect in the data because two systems can read the same text differently.",
             source: "RFC 8259 section 4", tool: "json-formatter"
         },

@@ -36,6 +36,15 @@ export function el(tag, props = {}, ...children) {
 
 }
 
+/* Node.append(null) writes the word "null" into the page; this skips empty children (and flattens lists) the way el() does. */
+export function put(parent, ...children) {
+    for (const child of children.flat()) {
+        if (child === undefined || child === null || child === false) continue;
+        parent.append(child instanceof Node ? child : document.createTextNode(String(child)));
+    }
+    return parent;
+}
+
 export function clear(node) {
     node.replaceChildren();
     return node;

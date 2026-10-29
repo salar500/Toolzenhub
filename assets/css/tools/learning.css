@@ -67,6 +67,16 @@
 
 }
 
+/* a link inside muted text keeps its own colour and an underline, so it is not told apart by colour alone */
+.lx-meta a {
+
+    color: var(--color-primary-dark);
+
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+}
+
 .lx-note {
 
     margin: 0;

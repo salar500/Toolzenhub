@@ -8,6 +8,7 @@
  * progress validation and the decks are pinned by tests/unit/learning-*.test.mjs and flashcards-content.test.mjs.
  */
 import { test, expect, expectClean, expectNoHorizontalOverflow } from "../helpers/test-base.mjs";
+import { strayWords } from "../helpers/lab-contract.mjs";
 
 const app = (page) => page.locator("#lx-app");
 const btn = (page, name) => page.getByRole("button", { name, exact: true });
@@ -157,6 +158,74 @@ test.describe("Smart Flashcards", () => {
     await expect(page.locator("fieldset input[type=checkbox]:checked")).toHaveCount(1);
     // the message is also repeated in the live region for screen readers, so one or two copies are expected
     await expect(page.getByText("Keep at least one topic selected.").first()).toBeVisible();
+  });
+
+  test("arrows (FR-FC-014): Left and Right move between cards only with focus in the card; letters and digits do nothing", async ({ page, go }) => {
+    await open(page, go);
+    await startJson(page, { topics: ["Value types"] });
+    const meta = page.locator(".lx-meta").first();
+    await expect(meta).toContainText("Card 1 of");
+    const card = page.locator("article.lx-card");
+
+    // single printable keys trigger nothing, wherever focus is
+    await card.locator("h2").focus();
+    for (const key of ["a", "n", "j", "k", "1", "9", "?", "/", " "]) await page.keyboard.press(key);
+    await expect(meta).toContainText("Card 1 of");
+    await expect(page.locator(".lx-feedback, [data-role=result]")).toHaveCount(0);
+
+    // before the card is answered, Right cannot skip it
+    await page.keyboard.press("ArrowRight");
+    await expect(meta).toContainText("Card 1 of");
+
+    // after answering, Right advances while focus is inside the card, and Left returns
+    await answerCurrent(page, { knew: true });
+    await card.locator("h2").focus();
+    await page.keyboard.press("ArrowRight");
+    await expect(meta).toContainText("Card 2 of");
+    await card.locator("h2").focus();
+    await page.keyboard.press("ArrowLeft");
+    await expect(meta).toContainText("Card 1 of");
+
+    // with focus outside the card region the arrows do nothing
+    await page.locator("h1").evaluate((el) => { el.tabIndex = -1; el.focus(); });
+    await page.keyboard.press("ArrowRight");
+    await expect(meta).toContainText("Card 1 of");
+  });
+
+  test("no stray null, undefined or NaN text in any state: decks, setup, recall, choice, result and summary", async ({ page, go }) => {
+    await open(page, go);
+    expect(await strayWords(page)).toEqual([]);
+    await btn(page, "Choose Software Testing").click();
+    expect(await strayWords(page)).toEqual([]);
+    await page.getByRole("button", { name: /^Start session/ }).click();
+    for (let i = 0; i < 29; i += 1) {
+      expect(await strayWords(page), `card ${i + 1}`).toEqual([]);
+      await answerCurrent(page, { knew: i % 2 === 0 });
+      expect(await strayWords(page), `card ${i + 1} answered`).toEqual([]);
+      const next = page.getByRole("button", { name: /^Next|^Finish|^See/ }).first();
+      if (!(await next.count())) break;
+      await next.click();
+    }
+    expect(await strayWords(page), "summary").toEqual([]);
+  });
+
+  test("AC-FC-002: a 200-character code line scrolls inside its own region and never widens the page (320px)", async ({ page, go }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await open(page, go);
+    await btn(page, "Choose JSON").click();
+    await page.getByRole("button", { name: /^Start session/ }).click();
+    // a card's code is built by the same helper and class as this block; the real decks hold shorter lines, so a long one is added here
+    await page.evaluate(() => {
+      const pre = document.createElement("pre");
+      pre.className = "lx-code"; pre.tabIndex = 0; pre.setAttribute("role", "region"); pre.setAttribute("aria-label", "Test code");
+      const code = document.createElement("code"); code.textContent = `{"k":"${"x".repeat(200)}"}`; pre.append(code);
+      document.querySelector("article.lx-card").append(pre);
+    });
+    const m = await page.evaluate(() => { const pre = document.querySelector('pre[aria-label="Test code"]'); return { inner: pre.scrollWidth, box: pre.clientWidth, doc: document.documentElement.scrollWidth, view: window.innerWidth }; });
+    expect(m.inner).toBeGreaterThan(m.box);
+    expect(m.doc).toBeLessThanOrEqual(m.view);
+    await page.locator('pre[aria-label="Test code"]').focus();
+    await expect(page.locator('pre[aria-label="Test code"]')).toBeFocused();
   });
 
   test("saving on: only tz-learn-v1 is written, with a box and a day per card and no answers; a reload restores it", async ({ page, go }) => {

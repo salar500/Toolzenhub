@@ -21,7 +21,7 @@
    - Everything shown is put on the page as text, never as HTML.
 ========================================================= */
 
-import { el, clear, codeBlock, announce, plural } from "./dom.js";
+import { el, put, clear, codeBlock, announce, plural } from "./dom.js";
 import { getToolById } from "../data/tools.js";
 
 export const VERDICT_WORD = {
@@ -93,7 +93,7 @@ export function mountLab({ root, live, lab }) {
     const stage = el("div", { class: "lx-lab-stage" });
 
     clear(root);
-    root.append(
+    put(root, 
         el("h2", { class: "lx-title", text: "Exercises" }),
         nav,
         counts,
@@ -108,7 +108,7 @@ export function mountLab({ root, live, lab }) {
         clear(nav);
         exercises.forEach((ex, i) => {
             const status = statusOf(states[i]);
-            nav.append(el("li", {},
+            put(nav, el("li", {},
                 el("button", {
                     type: "button", class: "lx-exbtn", "aria-current": i === index ? "true" : null,
                     "aria-label": `Exercise ${i + 1}: ${ex.title}, ${DIFFICULTY_LABEL[ex.difficulty]}, ${STATUS_WORD[status]}`,
@@ -189,7 +189,7 @@ export function mountLab({ root, live, lab }) {
         function drawHints() {
             clear(hintBox);
             if (st.hints > 0) {
-                hintBox.append(el("h4", { text: "Hints" }), el("ol", { class: "lx-list" }, ex.hints.slice(0, st.hints).map((h) => el("li", { text: h }))));
+                put(hintBox, el("h4", { text: "Hints" }), el("ol", { class: "lx-list" }, ex.hints.slice(0, st.hints).map((h) => el("li", { text: h }))));
             }
             hintButton.textContent = st.hints >= ex.hints.length ? "All hints shown" : `Show hint ${st.hints + 1} of ${ex.hints.length}`;
             hintButton.disabled = st.hints >= ex.hints.length;
@@ -199,9 +199,9 @@ export function mountLab({ root, live, lab }) {
             clear(solutionBox);
             if (st.solutionViewed || (st.result && st.result.verdict === "correct")) {
                 const box = el("div", { class: "lx-explanation" });
-                if (st.solutionViewed) box.append(el("h4", { text: "Solution" }), codeBlock(ex.solution, "Solution"));
-                box.append(el("h4", { text: "Why" }), el("p", { text: ex.explanation }), el("p", { class: "lx-meta", text: `Source: ${ex.source}` }));
-                solutionBox.append(box);
+                if (st.solutionViewed) put(box, el("h4", { text: "Solution" }), codeBlock(ex.solution, "Solution"));
+                put(box, el("h4", { text: "Why" }), el("p", { text: ex.explanation }), el("p", { class: "lx-meta", text: `Source: ${ex.source}` }));
+                put(solutionBox, box);
             }
             solutionButton.disabled = st.solutionViewed;
             solutionButton.textContent = st.solutionViewed ? "Solution shown" : "Show solution";
@@ -215,10 +215,10 @@ export function mountLab({ root, live, lab }) {
                 el("h4", { text: VERDICT_WORD[r.verdict] }),
                 el("p", { text: r.summary })
             );
-            if (r.findings && r.findings.length) box.append(el("ul", {}, r.findings.map((f) => el("li", { text: f }))));
-            if (r.lines && r.lines.length) box.append(codeBlock(r.lines.join("\n"), "Details"));
-            if (r.verdict === "correct" && st.solutionViewed) box.append(el("p", { class: "lx-meta", text: "This exercise stays marked solution viewed." }));
-            result.append(box);
+            if (r.findings && r.findings.length) put(box, el("ul", {}, r.findings.map((f) => el("li", { text: f }))));
+            if (r.lines && r.lines.length) put(box, codeBlock(r.lines.join("\n"), "Details"));
+            if (r.verdict === "correct" && st.solutionViewed) put(box, el("p", { class: "lx-meta", text: "This exercise stays marked solution viewed." }));
+            put(result, box);
         }
 
         function check() {
@@ -279,7 +279,7 @@ export function mountLab({ root, live, lab }) {
         const tool = ex.tool ? getToolById(ex.tool) : null;
 
         clear(stage);
-        stage.append(
+        put(stage, 
             el("div", { class: "lx-card" },
                 el("p", { class: "lx-meta" }, el("span", { class: "lx-tag", text: DIFFICULTY_LABEL[ex.difficulty] }), ` Exercise ${index + 1} of ${exercises.length}`),
                 heading,

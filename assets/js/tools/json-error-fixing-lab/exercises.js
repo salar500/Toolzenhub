@@ -63,7 +63,7 @@ export const set = {
             expected: { status: "active", retries: 3 },
             solution: '{"status": "active", "retries": 3}',
             hints: [
-                "The message points at the first key.",
+                "The message refers to the first key.",
                 "In JSON every key is a string.",
                 "Wrap both keys in double quotes."
             ],
@@ -111,7 +111,7 @@ export const set = {
             expected: { max: 10 },
             solution: '{\n  "max": 10\n}',
             hints: [
-                "The message points at the slashes.",
+                "The message refers to the slashes.",
                 "JSON has no comment syntax at all.",
                 "Delete the whole comment line."
             ],
@@ -127,7 +127,7 @@ export const set = {
             expected: [1, 2, 3],
             solution: "[1, 2, 3]",
             hints: [
-                "The message points at the second comma.",
+                "The message refers to the second comma.",
                 "Between two commas the parser expects a value, and finds none.",
                 "Delete one of the two commas. Do not add a value."
             ],
@@ -143,7 +143,7 @@ export const set = {
             expected: { ratio: null, limit: null, note: null },
             solution: '{"ratio": null, "limit": null, "note": null}',
             hints: [
-                "The message points at the first word that is not a JSON value.",
+                "The message refers to the first word that is not a JSON value.",
                 "The only words JSON allows as values are true, false and null.",
                 "Replace each of the three words with null."
             ],
@@ -179,7 +179,7 @@ export const set = {
                 "Only a few letters can follow a backslash. U and a are not among them.",
                 "To write one backslash inside a string, write two."
             ],
-            explanation: "A backslash in a JSON string begins an escape. The valid escapes are backslash, slash, quote, b, f, n, r, t and u followed by four hex digits. To keep a literal backslash you write two. The common failure is a Windows path pasted straight into a JSON string.",
+            explanation: "A backslash in a JSON string begins an escape. The valid escapes are backslash, slash, quote, b, f, n, r, t and u followed by four hex digits. To keep a literal backslash you write two. The common failure is a Windows path pasted straight into a JSON string. Note that fixing only the invalid escapes is not enough here: the \n in notes.txt is a valid escape and would silently become a line break.",
             source: "RFC 8259 section 7 (strings)",
             tool: "json-formatter"
         },
@@ -191,7 +191,7 @@ export const set = {
             expected: { msg: "Line one\nline two" },
             solution: '{"msg": "Line one\\nline two"}',
             hints: [
-                "The message points at the place where the line breaks inside the quotes.",
+                "The message refers to the place where the line breaks inside the quotes.",
                 "A string must stay on one line of the text.",
                 "Write the line break as the two characters backslash and n."
             ],
@@ -207,7 +207,7 @@ export const set = {
             expected: { name: "Ravi" },
             solution: '{"name": "Ravi"}',
             hints: [
-                "The message points at the very first quote.",
+                "The message refers to the very first quote.",
                 "Word processors and chat apps replace the plain quote with a curly one.",
                 "Delete the curly quotes and type plain double quotes."
             ],
@@ -275,7 +275,7 @@ export const set = {
                 "The same key name should not appear twice in one object.",
                 "Remove the first id. Keep name, and keep the value 2."
             ],
-            explanation: "The JSON standard says key names within an object should be unique, and that the behaviour of software that receives duplicates is unpredictable. Most parsers keep the last value but some keep the first or report an error, so duplicates are a real source of bugs and of security problems.",
+            explanation: "The JSON standard says key names within an object should be unique, and that the behaviour of software that receives duplicates is unpredictable. Many parsers keep the last value, but some report an error or return every pair, so duplicates are a real source of bugs and of security problems.",
             source: "RFC 8259 section 4 (objects)",
             tool: "json-formatter"
         },
