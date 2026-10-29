@@ -664,6 +664,7 @@
 
 /* The native file picker button looks like the other secondary buttons */
 input[type="file"] {
+    min-height: var(--target-size);
     font-family: var(--font-family);
     color: var(--ink);
 }
