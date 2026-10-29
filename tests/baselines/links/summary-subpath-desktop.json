@@ -226,7 +226,7 @@
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 41,
+    "internal": 42,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -238,7 +238,7 @@
     "deadFragments": []
   },
   "calculators/cagr/": {
-    "internal": 32,
+    "internal": 33,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -256,7 +256,7 @@
     "deadFragments": []
   },
   "calculators/fd/": {
-    "internal": 32,
+    "internal": 33,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -309,7 +309,7 @@
     "deadFragments": []
   },
   "calculators/ppf/": {
-    "internal": 35,
+    "internal": 36,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -335,13 +335,19 @@
     "deadFragments": []
   },
   "calculators/sip/": {
-    "internal": 34,
+    "internal": 36,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
   },
   "calculators/swp/": {
     "internal": 30,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "calculators/xirr/": {
+    "internal": 36,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -359,7 +365,7 @@
     "deadFragments": []
   },
   "developer-tools.html": {
-    "internal": 36,
+    "internal": 41,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -383,7 +389,7 @@
     "deadFragments": []
   },
   "investment.html": {
-    "internal": 29,
+    "internal": 30,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -431,7 +437,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 81,
+    "internal": 87,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -450,6 +456,12 @@
   },
   "tools/countdown-timer/": {
     "internal": 24,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/cron-challenge-lab/": {
+    "internal": 26,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -502,8 +514,20 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "tools/json-error-fixing-lab/": {
+    "internal": 26,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "tools/json-formatter/": {
     "internal": 29,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/jsonpath-challenge-lab/": {
+    "internal": 26,
     "external": [],
     "placeholders": 4,
     "deadFragments": []
@@ -562,6 +586,12 @@
     "placeholders": 4,
     "deadFragments": []
   },
+  "tools/smart-flashcards/": {
+    "internal": 28,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
   "tools/split-pdf/": {
     "internal": 26,
     "external": [],
@@ -570,6 +600,12 @@
   },
   "tools/stopwatch/": {
     "internal": 24,
+    "external": [],
+    "placeholders": 4,
+    "deadFragments": []
+  },
+  "tools/test-design-lab/": {
+    "internal": 26,
     "external": [],
     "placeholders": 4,
     "deadFragments": []

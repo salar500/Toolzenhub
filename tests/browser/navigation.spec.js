@@ -360,10 +360,11 @@ test.describe("calculator catalog drives tool identity (M1)", () => {
     await expect(calcs).toHaveCount(5);
     await expect(calcs.first()).toHaveAttribute("href", `${siteRoot}calculators/emi/`);
     await expect(calcs.first()).toContainText("EMI Calculator");
-    await expect(calcs.nth(1)).toContainText("Home Loan Calculator"); // published since Tool Pack 6
+    // the curated list comes first (Calculators Ecosystem 2.0, pack 49: EMI, Prepayment, Balance Transfer), then the automatic Loans relationship fills the rest
+    await expect(calcs.nth(1)).toContainText("Loan Prepayment Calculator");
     await expect(calcs.nth(2)).toContainText("Loan Balance Transfer Calculator");
-    await expect(calcs.nth(3)).toContainText("Loan Prepayment Calculator");
-    await expect(calcs.nth(4)).toContainText("Credit Card Payoff Calculator"); // Tool Pack 24, appended by the automatic Loans relationship
+    await expect(calcs.nth(3)).toContainText("Home Loan Calculator");
+    await expect(calcs.nth(4)).toContainText("Credit Card Payoff Calculator");
   });
 
   test("calculator code loads on demand: not on the home page, only on the calculator's own page", async ({ page, go }) => {
@@ -494,7 +495,7 @@ test.describe("All Tools and the calculator hierarchy", () => {
     const live = await page.locator(".directory-group a").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
     for (const r of ["loans.html", "investment.html", "tax.html", "business.html", "math.html", "calculators/emi/", "calculators/sip/", "calculators/fd/", "calculators/cagr/", "calculators/ppf/", "calculators/margin/", "calculators/profit/", "calculators/gst/", "calculators/percentage/", "calculators/income-tax/"]) expect(live).toContain(siteRoot + r);
     for (const bad of ["categories.html#health", "categories.html#converter", "calculators/roi/"]) expect(live.some((h) => h.includes(bad)), bad).toBe(false);
-    await expect(page.locator(".directory-group")).toHaveCount(35); // the five live calculator categories, the thirteen Time Tools tools (Tool Pack 34), the nine Developer Tools tools, the two Image Tools tools (Photos to PDF is the second, Tool Pack 31) and the three PDF Tools tools (Tool Pack 33)
+    await expect(page.locator(".directory-group")).toHaveCount(40); // the five live calculator categories, the thirteen Time Tools tools (Tool Pack 34), the seventeen Developer Tools tools (twelve utilities and the five Practice Labs and Flashcards tools), the two Image Tools tools (Photos to PDF is the second, Tool Pack 31) and the three PDF Tools tools (Tool Pack 33)
     await expect(page.locator(".directory-soon__list li")).toHaveText([/Health\s*Coming soon/, /Converter\s*Coming soon/]);
     await expect(page.locator(".directory-soon .coming-soon-badge")).toHaveCount(2);
     await expect(page.locator(".directory-soon a")).toHaveCount(0);
@@ -582,7 +583,7 @@ test.describe("All Tools and the calculator hierarchy", () => {
   test("the three destinations have different jobs: All Tools (platform), Calculator Categories (the section) and All Calculators (the flat list)", async ({ page, go }) => {
     await go("tools.html");
     await expect(page.locator(".directory-section__label")).toHaveText(["Section", "Section", "Section", "Section", "Section"]);
-    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, /^13 tools$/, /^12 tools$/, /^2 tools$/, /^3 tools$/]);
+    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, /^13 tools$/, "17 tools", /^2 tools$/, /^3 tools$/]);
     await go("categories.html");
     await expect(page.locator("h1")).toHaveText("Calculator Categories");
     await expect(page.locator(".categories-search__content p")).toHaveText("Search calculators"); // this search is scoped to calculators, and says so

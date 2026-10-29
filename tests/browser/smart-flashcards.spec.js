@@ -250,6 +250,20 @@ test.describe("Smart Flashcards", () => {
     await expect(page.getByText(/Saving is on\. 1 card saved\./)).toBeVisible();
   });
 
+  test("the reset dialog closes on Escape pressed in the same instant it opens (the focus trap is not loaded late)", async ({ page, go }) => {
+    await open(page, go);
+    await page.getByLabel("Save my progress on this device").check();
+    await startJson(page, { topics: ["Value types"] });
+    await answerCurrent(page);
+    // one synchronous task: open the dialog, then press Escape before any promise can settle
+    const left = await page.evaluate(() => {
+      [...document.querySelectorAll("button")].find((b) => b.textContent.trim() === "Reset progress").click();
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+      return document.querySelectorAll('[role="dialog"]').length;
+    });
+    expect(left).toBe(0);
+  });
+
   test("reset asks first, cancel changes nothing, confirm clears only this tool's data", async ({ page, go }) => {
     await open(page, go);
     await page.evaluate(() => localStorage.setItem("other-site-data", "keep"));

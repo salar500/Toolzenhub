@@ -164,7 +164,7 @@ section.categories-page.directory-page
           h2#directory-developer-tools-heading.directory-section__title
             a [href="{ROOT}developer-tools.html"] "Developer Tools"
           p.directory-section__text "Browser-based tools for working with data and code."
-            span.directory-section__count "12 tools"
+            span.directory-section__count "17 tools"
         div.directory-groups
           article.directory-group
             h3.directory-group__title
@@ -202,6 +202,26 @@ section.categories-page.directory-page
             h3.directory-group__title
               a [href="{ROOT}tools/jsonpath-tester/"] "JSONPath Tester"
             p.directory-group__text "Run a JSONPath query (RFC 9535, without match() and search()) on a JSON document and see t…"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/smart-flashcards/"] "Smart Flashcards"
+            p.directory-group__text "Revise JSON, HTTP and APIs, and software testing with short original flashcards. Think of …"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/json-error-fixing-lab/"] "JSON Error-Fixing Lab"
+            p.directory-group__text "Practise repairing broken JSON: trailing commas, wrong quotes, missing brackets, bad escap…"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/jsonpath-challenge-lab/"] "JSONPath Challenge Lab"
+            p.directory-group__text "Practise writing JSONPath queries against a built-in document. Each query is run by an RFC…"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/cron-challenge-lab/"] "Cron Challenge Lab"
+            p.directory-group__text "Practise writing cron expressions for described schedules. Each expression is read by a Cr…"
+          article.directory-group
+            h3.directory-group__title
+              a [href="{ROOT}tools/test-design-lab/"] "Test Design Lab"
+            p.directory-group__text "Practise boundary value analysis and equivalence partitioning on whole numbers. Each exerc…"
           article.directory-group
             h3.directory-group__title
               a [href="{ROOT}tools/list-comparer/"] "List Comparer"

@@ -36,6 +36,7 @@ import {
     createStore, emptyState, readText, readImport, mergeStates, exportText, exportFileName, countCards, MAX_BYTES, KEY
 } from "../../learning/progress-store.js";
 import { getToolById } from "../../data/tools.js";
+import { activateDialog } from "../../ui/dialog-focus.js";
 
 export const showRelatedCalculators = true;
 export const showRelatedArticles = false;
@@ -790,11 +791,7 @@ export function init() {
         const backdrop = el("div", { class: "lx-backdrop" }, dialog);
         document.body.append(backdrop);
 
-        import("../../ui/dialog-focus.js").then(({ activateDialog }) => {
-            const trap = activateDialog({ dialog, onEscape: () => finish(false), restoreTo: opener });
-            backdrop._trap = trap;
-            if (backdrop._done) trap.release();
-        });
+        backdrop._trap = activateDialog({ dialog, onEscape: () => finish(false), restoreTo: opener });
 
         function finish(yes) {
             if (backdrop._done) return;
