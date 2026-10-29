@@ -115,6 +115,10 @@ export function renderRelatedCalculators(
                         slug: tool.id,
                         icon:
                             copy.icon ?? tool.icon,
+                        iconKey:
+                            tool.sectionId && tool.sectionId !== "calculators"
+                                ? tool.sectionId
+                                : String(tool.category || "").toLowerCase(),
                         title: tool.title,
                         description:
                             copy.description ??
@@ -169,7 +173,7 @@ export function renderRelatedCalculators(
                     >
 
                         <div class="related-calculator-icon" aria-hidden="true">
-                            ${iconFor(calculator.category)}
+                            ${iconFor(calculator.iconKey)}
                         </div>
 
 
@@ -264,7 +268,7 @@ function renderRelatedSectionTools(
                     >
 
                         <div class="related-calculator-icon" aria-hidden="true">
-                            ${iconFor(tool.category)}
+                            ${iconFor(tool.sectionId && tool.sectionId !== "calculators" ? tool.sectionId : String(tool.category || "").toLowerCase())}
                         </div>
 
 

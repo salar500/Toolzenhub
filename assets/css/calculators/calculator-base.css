@@ -400,7 +400,7 @@
         var(--ink-muted);
 
     font-size:
-        13px;
+        14px;
 
     line-height:
         1.7;
@@ -421,7 +421,7 @@
         var(--ink-muted);
 
     font-size:
-        13px;
+        14px;
 
     line-height:
         1.7;
@@ -624,4 +624,64 @@
 
     }
 
+}
+
+
+
+/* =========================================================
+   Design System 2.0: shared tool-page components
+   (these apply to every tool family that loads this file)
+========================================================= */
+
+/* The reset removes list markers; reading lists get them back */
+.calculator-info ul {
+    list-style: disc;
+}
+
+.calculator-info ol {
+    list-style: decimal;
+}
+
+.calculator-info li::marker {
+    color: var(--ink-subtle);
+}
+
+/* FAQ disclosure rows are 44px targets with a visible focus ring */
+.calculator-info summary,
+.calculator-page details > summary {
+    display: flex;
+    align-items: center;
+    min-height: var(--target-size);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+}
+
+.calculator-info summary:focus-visible,
+.calculator-page details > summary:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+/* The native file picker button looks like the other secondary buttons */
+input[type="file"] {
+    font-family: var(--font-family);
+    color: var(--ink);
+}
+
+input[type="file"]::file-selector-button {
+    min-height: 36px;
+    margin-right: var(--space-3);
+    padding: 0 var(--space-4);
+    border: 1px solid var(--action);
+    border-radius: var(--radius-sm);
+    background: var(--surface-card);
+    color: var(--action);
+    font-family: var(--font-family);
+    font-size: var(--font-sm);
+    font-weight: var(--fw-semibold);
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background: var(--action-soft);
 }
