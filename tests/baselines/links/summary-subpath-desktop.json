@@ -461,7 +461,7 @@
     "deadFragments": []
   },
   "tools/cron-challenge-lab/": {
-    "internal": 28,
+    "internal": 29,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -515,7 +515,7 @@
     "deadFragments": []
   },
   "tools/json-error-fixing-lab/": {
-    "internal": 28,
+    "internal": 29,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -527,7 +527,7 @@
     "deadFragments": []
   },
   "tools/jsonpath-challenge-lab/": {
-    "internal": 28,
+    "internal": 29,
     "external": [],
     "placeholders": 0,
     "deadFragments": []

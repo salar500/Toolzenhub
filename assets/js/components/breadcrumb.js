@@ -174,7 +174,9 @@ export function toolBreadcrumbItems(
         items.push({
 
             label:
-                metadata.category,
+                displayCategory(
+                    metadata.category
+                ),
 
             href:
                 getCategoryRoute(
@@ -274,6 +276,22 @@ function getSectionRoute(
 ) {
 
     return getSectionUrl(section);
+
+}
+
+
+/* A category id written in lower case ("loans") is shown capitalised ("Loans"); one already written
+   with capitals ("Time Tools") is shown as given. The visible step and the BreadcrumbList name both
+   come from this label, so they always agree. The route lookup below still uses the lower-case id. */
+function displayCategory(
+    category
+) {
+
+    const text = String(category).trim();
+
+    return text === text.toLowerCase()
+        ? text.charAt(0).toUpperCase() + text.slice(1)
+        : text;
 
 }
 

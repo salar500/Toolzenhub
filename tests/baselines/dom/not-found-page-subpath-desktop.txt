@@ -1,7 +1,8 @@
 body
   header.nf-header
     div.nf-header__inner
-      span.nf-logo [aria-hidden="true"] "▦"
+      span.nf-logo [aria-hidden="true"]
+        svg
       span.nf-brand "ToolZen"
         span "Hub"
   main.nf-main
@@ -9,7 +10,12 @@ body
       span.nf-code "Error 404"
       h1 "Page not found"
       p "Sorry, we couldn't find the page you were looking for. It may have been moved or removed, …"
-      div.nf-nav
+      form.nf-search [action="{ROOT}tools.html" method="get" role="search"]
+        label.nf-search__label [for="nf-q"] "Search all tools"
+        div.nf-search__row
+          input#nf-q.nf-search__input [name="q" placeholder="EMI, JSON, PDF" type="search"]
+          button.nf-search__btn [type="submit"] "Search"
+      nav.nf-nav [aria-label="Explore ToolZen Hub"]
         a.nf-btn [data-route href="{ROOT}"] "Go to Home"
         p.nf-explore "Or explore"
         ul.nf-links

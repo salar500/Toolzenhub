@@ -5,27 +5,32 @@ section.related-section
     a [href="{ROOT}calculators.html"] "View all →"
   div.related-calculators-grid
     a.related-calculator-card [href="{ROOT}calculators/loan-comparison/"]
-      div.related-calculator-icon "⇄"
+      div.related-calculator-icon [aria-hidden="true"]
+        svg [aria-hidden="true"]
       div.related-calculator-content
         strong "Loan Comparison Calculator"
         span "Compare two loans side by side."
     a.related-calculator-card [href="{ROOT}calculators/prepayment/"]
-      div.related-calculator-icon "₹"
+      div.related-calculator-icon [aria-hidden="true"]
+        svg [aria-hidden="true"]
       div.related-calculator-content
         strong "Loan Prepayment Calculator"
         span "See how much interest and time a one-time loan prepayment can save, and what it does to yo…"
     a.related-calculator-card [href="{ROOT}calculators/home-loan/"]
-      div.related-calculator-icon "⌂"
+      div.related-calculator-icon [aria-hidden="true"]
+        svg [aria-hidden="true"]
       div.related-calculator-content
         strong "Home Loan Calculator"
         span "Work out the home loan that fits your monthly EMI budget, what it would cost in interest, …"
     a.related-calculator-card [href="{ROOT}calculators/balance-transfer/"]
-      div.related-calculator-icon "⟳"
+      div.related-calculator-icon [aria-hidden="true"]
+        svg [aria-hidden="true"]
       div.related-calculator-content
         strong "Loan Balance Transfer Calculator"
         span "See whether moving your loan to a lower rate pays off after the charges, and when you earn…"
     a.related-calculator-card [href="{ROOT}calculators/credit-card-payoff/"]
-      div.related-calculator-icon "◉"
+      div.related-calculator-icon [aria-hidden="true"]
+        svg [aria-hidden="true"]
       div.related-calculator-content
         strong "Credit Card Payoff Calculator"
         span "Estimate how many months a fixed monthly payment takes to clear a credit card balance, the…"
@@ -37,37 +42,35 @@ section.related-section
   div.related-articles-grid
     a.related-article-card [href="{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"]
       div.related-article-image
-        img [alt="House model on desk" loading="lazy" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80"]
+        img [alt="Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate" loading="lazy" src="{ROOT}assets/Images/articles/how-to-reduce-home-loan-interest.png"]
       div.related-article-content
         h3 "How to Reduce Your Home Loan Interest"
         p "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save…"
     a.related-article-card [href="{ROOT}articles/loan-comparison/emi-vs-total-interest/"]
       div.related-article-image
-        img [alt="Loan and financial planning" loading="lazy" src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=800&q=80"]
+        img [alt="Chart of the EMI falling and the total interest rising as the loan tenure gets longer" loading="lazy" src="{ROOT}assets/Images/articles/emi-vs-total-interest.png"]
       div.related-article-content
         h3 "EMI vs Total Interest: What Should You Compare?"
         p "Understand why EMI alone does not tell the complete story when comparing loan options and …"
     a.related-article-card [href="{ROOT}articles/loan-comparison/fixed-vs-floating-interest-rates/"]
       div.related-article-image
-        img [alt="Financial planning and investment" loading="lazy" src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"]
+        img [alt="Illustrative diagram: a fixed interest rate stays flat while a floating rate moves up and down in steps over the life of a loan" loading="lazy" src="{ROOT}assets/Images/articles/fixed-vs-floating-interest-rates.png"]
       div.related-article-content
         h3 "Fixed vs Floating Interest Rates"
         p "Understand the difference between fixed and floating interest rates before choosing a loan…"
     a.related-article-card [href="{ROOT}articles/loan-comparison/loan-tenure-total-interest/"]
       div.related-article-image
-        img [alt="Financial analysis on laptop" loading="lazy" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"]
+        img [alt="Stacked bars showing how much interest is repaid on the same loan over tenures of 10 to 30 years" loading="lazy" src="{ROOT}assets/Images/articles/loan-tenure-total-interest.png"]
       div.related-article-content
         h3 "How Loan Tenure Affects Total Interest"
         p "See why choosing a longer or shorter loan tenure can significantly affect your total inter…"
     a.related-article-card [href="{ROOT}articles/loan-comparison/what-is-loan-prepayment/"]
       div.related-article-image
-        img [alt="Financial documents and planning" loading="lazy" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80"]
+        img [alt="Chart of a loan balance falling sooner after a one-time prepayment than without one" loading="lazy" src="{ROOT}assets/Images/articles/what-is-loan-prepayment.png"]
       div.related-article-content
         h3 "What Is Loan Prepayment?"
         p "Understand how loan prepayment works and how paying down your principal can potentially re…"
     a.related-article-card [href="{ROOT}articles/loan-comparison/choose-right-loan-tenure/"]
-      div.related-article-image
-        img [alt="House model with keys" loading="lazy" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80"]
       div.related-article-content
         h3 "How to Choose the Right Loan Tenure"
         p "Learn how to balance monthly affordability with total borrowing cost when choosing a loan …"

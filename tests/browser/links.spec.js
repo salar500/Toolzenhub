@@ -39,6 +39,8 @@ test.describe("rendered link crawl @portable", () => {
       const target = livePages.find((p) => rel(p.url) === entry);
       await go(entry);
       await page.waitForSelector(target ? target.primarySelector : "main, #app", { state: "visible" });
+      // related-content sections are drawn after the primary content: let the page settle so the count is the settled one, not a race
+      await page.waitForLoadState("networkidle");
 
       const collect = async () =>
         page.evaluate(() => ({

@@ -2,8 +2,8 @@ header#header
   div.site-header
     nav.navbar [aria-label="Main navigation"]
       a.navbar__brand [aria-label="ToolZen Hub Home" href="{ROOT}"]
-        span.brand-logo
-          span [aria-hidden="true"] "▦"
+        span.brand-logo [aria-hidden="true"]
+          svg
         span.brand-text
           span.brand-title "ToolZen"
             span "Hub"

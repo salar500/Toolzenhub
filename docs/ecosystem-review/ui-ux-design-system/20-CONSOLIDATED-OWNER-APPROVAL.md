@@ -93,3 +93,7 @@ Core Web Vitals; screen-reader output; real Android and Safari; every page in ev
 ## Counts for this package
 
 See `17-ACCEPTANCE-CRITERIA-AND-TRACEABILITY.md`: requirements, acceptance criteria and priority totals are generated there and validated by script.
+
+## Owner decision after Master Prompt 3 (2026-10-30)
+
+Breadcrumb category label: show "Loans" (title case) instead of "loans", with the matching BreadcrumbList name change only. URLs, hierarchy, canonicals and unrelated structured data are unchanged. This is a narrow exception to QA-04.2 (doc 17) and is recorded in rule 4.6 of `docs/product-decision-rules.md`.

@@ -15,14 +15,12 @@ main#app
               span.hero__title-highlight "better everyday decisions"
             p.hero__description "Calculate loan payments, compare options, plan investments and work through everyday date,…"
             form#calculator-search.hero__search.tz-search [role="search"]
-              span.hero__search-icon.tz-search__icon [aria-hidden="true"] "⌕"
+              span.hero__search-icon.tz-search__icon [aria-hidden="true"]
+                svg [aria-hidden="true"]
               input.tz-search__input [aria-label="Search tools" name="q" placeholder="Search tools..." type="search"]
-              button.hero__search-button.tz-search__button [aria-label="Search tools" type="submit"] "⌕"
+              button.hero__search-button.tz-search__button [aria-label="Search tools" type="submit"]
+                svg [aria-hidden="true"]
             div#hero-calculator-search-results.calculator-search-results [aria-live="polite"]
-          div.hero__visual
-            picture
-              source [type="image/webp"]
-              img.hero__image [alt="Financial calculators, charts and money" loading="eager" src="{ROOT}assets/Images/hero-calculators.png"]
   section#categories.section
     section.categories-section
       div.container
@@ -30,27 +28,32 @@ main#app
           h2.section-title "Explore Tools"
         div.category-grid.category-grid--sections
           a.category-card [href="{ROOT}categories.html"]
-            div.category-card__icon.category-card__icon--calculators "🧮"
+            div.category-card__icon.category-card__icon--calculators
+              svg [aria-hidden="true"]
             div.category-card__content
               h3 "Calculators"
               p "Loans, investment, business, tax and math calculators"
           a.category-card [href="{ROOT}time-tools.html"]
-            div.category-card__icon.category-card__icon--time-tools "📅"
+            div.category-card__icon.category-card__icon--time-tools
+              svg [aria-hidden="true"]
             div.category-card__content
               h3 "Time Tools"
               p "Date tools, timers, a time zone converter and an hours calculator"
           a.category-card [href="{ROOT}developer-tools.html"]
-            div.category-card__icon.category-card__icon--developer-tools "{ }"
+            div.category-card__icon.category-card__icon--developer-tools
+              svg [aria-hidden="true"]
             div.category-card__content
               h3 "Developer Tools"
               p "JSON, timestamp, text compare, JWT, cron and Base64 tools, in your browser"
           a.category-card [href="{ROOT}image-tools.html"]
-            div.category-card__icon.category-card__icon--image-tools "🖼️"
+            div.category-card__icon.category-card__icon--image-tools
+              svg [aria-hidden="true"]
             div.category-card__content
               h3 "Image Tools"
               p "Compress and resize images in your browser"
           a.category-card [href="{ROOT}pdf-tools.html"]
-            div.category-card__icon.category-card__icon--pdf-tools "📄"
+            div.category-card__icon.category-card__icon--pdf-tools
+              svg [aria-hidden="true"]
             div.category-card__content
               h3 "PDF Tools"
               p "Merge, split and rearrange PDF pages in your browser"
@@ -63,37 +66,43 @@ main#app
             span [aria-hidden="true"] "→"
         div.calculator-grid
           a.calculator-card [href="{ROOT}calculators/sip/"]
-            div.calculator-card__icon.calculator-card__icon--yellow "♜"
+            div.calculator-card__icon.calculator-card__icon--yellow
+              svg [aria-hidden="true"]
             div.calculator-card__content
               h3 "SIP Calculator"
               p "Plan your SIP investments"
             span.calculator-card__arrow [aria-hidden="true"] "→"
           a.calculator-card [href="{ROOT}calculators/gst/"]
-            div.calculator-card__icon.calculator-card__icon--purple "▤"
+            div.calculator-card__icon.calculator-card__icon--purple
+              svg [aria-hidden="true"]
             div.calculator-card__content
               h3 "GST Calculator"
               p "Add or remove GST on an invoice"
             span.calculator-card__arrow [aria-hidden="true"] "→"
           a.calculator-card [href="{ROOT}calculators/margin/"]
-            div.calculator-card__icon.calculator-card__icon--green "%"
+            div.calculator-card__icon.calculator-card__icon--green
+              svg [aria-hidden="true"]
             div.calculator-card__content
               h3 "Margin Calculator"
               p "Set a price from a target margin"
             span.calculator-card__arrow [aria-hidden="true"] "→"
           a.calculator-card [href="{ROOT}calculators/percentage/"]
-            div.calculator-card__icon.calculator-card__icon--teal "±"
+            div.calculator-card__icon.calculator-card__icon--teal
+              svg [aria-hidden="true"]
             div.calculator-card__content
               h3 "Percentage Calculator"
               p "Find a change, the start or the end value"
             span.calculator-card__arrow [aria-hidden="true"] "→"
           a.calculator-card [href="{ROOT}calculators/home-loan/"]
-            div.calculator-card__icon.calculator-card__icon--pink "⌂"
+            div.calculator-card__icon.calculator-card__icon--pink
+              svg [aria-hidden="true"]
             div.calculator-card__content
               h3 "Home Loan Calculator"
               p "Find the loan that fits your EMI budget"
             span.calculator-card__arrow [aria-hidden="true"] "→"
           a.calculator-card [href="{ROOT}tools/countdown-timer/"]
-            div.calculator-card__icon.calculator-card__icon--blue "◔"
+            div.calculator-card__icon.calculator-card__icon--blue
+              svg [aria-hidden="true"]
             div.calculator-card__content
               h3 "Countdown Timer"
               p "Count down any time, with pause and resume"
@@ -108,7 +117,7 @@ main#app
         div.articles-grid
           a.article-card [href="{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"]
             div.article-card__image
-              img [alt="House model on desk" loading="lazy" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80"]
+              img [alt="Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate" loading="lazy" src="{ROOT}assets/Images/articles/how-to-reduce-home-loan-interest.png"]
             div.article-card__content
               div.article-card__category "Loans"
               h3.article-card__title "How to Reduce Your Home Loan Interest"
@@ -118,7 +127,7 @@ main#app
                 span.article-card__arrow [aria-hidden="true"] "→"
           a.article-card [href="{ROOT}articles/loan-comparison/emi-vs-total-interest/"]
             div.article-card__image
-              img [alt="Loan and financial planning" loading="lazy" src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=800&q=80"]
+              img [alt="Chart of the EMI falling and the total interest rising as the loan tenure gets longer" loading="lazy" src="{ROOT}assets/Images/articles/emi-vs-total-interest.png"]
             div.article-card__content
               div.article-card__category "Loans"
               h3.article-card__title "EMI vs Total Interest: What Should You Compare?"
@@ -128,7 +137,7 @@ main#app
                 span.article-card__arrow [aria-hidden="true"] "→"
           a.article-card [href="{ROOT}articles/loan-comparison/fixed-vs-floating-interest-rates/"]
             div.article-card__image
-              img [alt="Financial planning and investment" loading="lazy" src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80"]
+              img [alt="Illustrative diagram: a fixed interest rate stays flat while a floating rate moves up and down in steps over the life of a loan" loading="lazy" src="{ROOT}assets/Images/articles/fixed-vs-floating-interest-rates.png"]
             div.article-card__content
               div.article-card__category "Loans"
               h3.article-card__title "Fixed vs Floating Interest Rates"

@@ -80,12 +80,17 @@
     cursor: pointer;
 }
 
+/* The invisible radio fills its label, so a click anywhere on the choice lands on the input itself
+   (a 1px input at a fractional column offset could sit under the label and not be reachable). */
 .up-choice input {
     position: absolute;
-    width: 1px;
-    height: 1px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     margin: 0;
     opacity: 0;
+    cursor: pointer;
 }
 
 .up-choice span {

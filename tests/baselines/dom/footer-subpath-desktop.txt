@@ -5,17 +5,26 @@ div#footer
         div.footer__main-grid
           div.footer__brand
             a.footer__logo [aria-label="ToolZen Hub Home" href="{ROOT}"]
-              span.footer__logo-mark "▦"
+              span.footer__logo-mark [aria-hidden="true"]
+                svg
               span "ToolZen"
                 span.footer__logo-highlight "Hub"
-            p.footer__description "Smart tools to make better decisions every day."
-            div.footer__social
-              a.footer__social-link [aria-label="Facebook" href="{ROOT}"] "f"
-              a.footer__social-link [aria-label="Twitter" href="{ROOT}"] "𝕏"
-              a.footer__social-link [aria-label="LinkedIn" href="{ROOT}"] "in"
-              a.footer__social-link [aria-label="Instagram" href="{ROOT}"] "◎"
+            p.footer__description "Practical tools for everyday decisions. Calculated in your browser, with the assumptions s…"
           div.footer__column
-            h3.footer__column-title "Quick Links"
+            h3.footer__column-title "Tools"
+            ul.footer__links
+              li
+                a [href="{ROOT}categories.html"] "Calculators"
+              li
+                a [href="{ROOT}time-tools.html"] "Time Tools"
+              li
+                a [href="{ROOT}developer-tools.html"] "Developer Tools"
+              li
+                a [href="{ROOT}image-tools.html"] "Image Tools"
+              li
+                a [href="{ROOT}pdf-tools.html"] "PDF Tools"
+          div.footer__column
+            h3.footer__column-title "Explore"
             ul.footer__links
               li
                 a [href="{ROOT}"] "Home"
@@ -26,7 +35,7 @@ div#footer
               li
                 a [href="{ROOT}about.html"] "About"
           div.footer__column
-            h3.footer__column-title "Resources"
+            h3.footer__column-title "Legal"
             ul.footer__links
               li
                 a [href="{ROOT}contact.html"] "Contact Us"
@@ -36,17 +45,7 @@ div#footer
                 a [href="{ROOT}terms.html"] "Terms & Conditions"
               li
                 a [href="{ROOT}disclaimer.html"] "Disclaimer"
-          div.footer__column
-            h3.footer__column-title "Calculators"
-            ul.footer__links
-              li
-                a [href="{ROOT}calculators/emi/"] "EMI Calculator"
-              li
-                a [href="{ROOT}calculators/loan-comparison/"] "Loan Comparison"
-              li
-                a [href="{ROOT}calculators.html"] "All Calculators"
     div.footer__bottom
       div.container
         div.footer__bottom-inner
           p.footer__copyright "© 2026 ToolZen Hub. All rights reserved."
-          nav.footer__legal [aria-label="Legal"]

@@ -126,7 +126,7 @@ describe("Investment is a category inside Calculators (Tool Pack 7 pins SIP and 
       assert.deepEqual(registry.calculatorMetadata[id], { section: "Calculators", category: "investment", title }, id);
       // the shared breadcrumb prints the category id (styled to read "Investment"); Home is added by the renderer, so the page reads
       // Home > Calculators > investment > <tool>
-      assert.deepEqual(crumb.toolBreadcrumbItems(registry.calculatorMetadata[id]).map((i) => i.label), ["Calculators", "investment", title], id);
+      assert.deepEqual(crumb.toolBreadcrumbItems(registry.calculatorMetadata[id]).map((i) => i.label), ["Calculators", "Investment", title], id);
     }
   });
 });
@@ -166,7 +166,7 @@ describe("Tax is a category inside Calculators (Tool Pack 8 pins GST and Income 
     assert.equal(entry.categoryTitle, "Tax");
     assert.deepEqual(registry.calculatorMetadata.gst, { section: "Calculators", category: "tax", title: "GST Calculator" });
     // the shared breadcrumb prints the category id (styled to read "Tax"); Home is added by the renderer: Home > Calculators > tax > GST Calculator
-    assert.deepEqual(crumb.toolBreadcrumbItems(registry.calculatorMetadata.gst).map((i) => i.label), ["Calculators", "tax", "GST Calculator"]);
+    assert.deepEqual(crumb.toolBreadcrumbItems(registry.calculatorMetadata.gst).map((i) => i.label), ["Calculators", "Tax", "GST Calculator"]);
     assert.equal(idx.searchIndex.find((e) => e.key === "tool:income-tax").status, "published");
     assert.deepEqual(registry.calculatorMetadata["income-tax"], { section: "Calculators", category: "tax", title: "Old vs New Tax Regime Calculator" });
   });
@@ -204,19 +204,19 @@ describe("breadcrumbs keep their labels and links", () => {
   test("EMI: Home > Calculators > loans > EMI Calculator", () => {
     const html = crumb.renderToolBreadcrumb(registry.calculatorMetadata.emi);
     assert.deepEqual(hrefs(html), [ROOT, `${ROOT}categories.html`, `${ROOT}loans.html`]);
-    assert.deepEqual(labels(html), ["Home", "Calculators", "loans", "EMI Calculator"]);
+    assert.deepEqual(labels(html), ["Home", "Calculators", "Loans", "EMI Calculator"]);
   });
 
   test("Loan Comparison: Home > Calculators > loans > Loan Comparison Calculator", () => {
     const html = crumb.renderToolBreadcrumb(registry.calculatorMetadata["loan-comparison"]);
     assert.deepEqual(hrefs(html), [ROOT, `${ROOT}categories.html`, `${ROOT}loans.html`]);
-    assert.deepEqual(labels(html), ["Home", "Calculators", "loans", "Loan Comparison Calculator"]);
+    assert.deepEqual(labels(html), ["Home", "Calculators", "Loans", "Loan Comparison Calculator"]);
   });
 
   test("a category with a landing page links to it in the breadcrumb; one without is plain text", () => {
     const html = crumb.renderToolBreadcrumb({ section: "Calculators", category: "tax", title: "Income Tax Calculator" });
     assert.deepEqual(hrefs(html), [ROOT, `${ROOT}categories.html`, `${ROOT}tax.html`]);
-    assert.deepEqual(labels(html), ["Home", "Calculators", "tax", "Income Tax Calculator"]);
+    assert.deepEqual(labels(html), ["Home", "Calculators", "Tax", "Income Tax Calculator"]);
     const none = crumb.renderToolBreadcrumb({ section: "Calculators", category: "health", title: "BMI Calculator" });
     assert.deepEqual(hrefs(none), [ROOT, `${ROOT}categories.html`]);
   });
@@ -248,7 +248,7 @@ describe("subcategory support (exercised with a temporary subcategory)", () => {
   test("the breadcrumb gains exactly one extra step: Home > Calculators > loans > Subcategory > Tool", () => {
     cats.subcategories.push({ ...sub, landing: "loans" });
     const html = crumb.renderToolBreadcrumb({ section: "Calculators", category: "loans", subcategory: "test-sub", title: "EMI Calculator" });
-    assert.deepEqual(labels(html), ["Home", "Calculators", "loans", "Test Subcategory", "EMI Calculator"]);
+    assert.deepEqual(labels(html), ["Home", "Calculators", "Loans", "Test Subcategory", "EMI Calculator"]);
     assert.deepEqual(hrefs(html), [ROOT, `${ROOT}categories.html`, `${ROOT}loans.html`, `${ROOT}loans.html`]);
     assert.equal((html.match(/calculator-breadcrumb"/g) || []).length, 1);
   });
@@ -278,7 +278,7 @@ describe("Math is a category inside Calculators (Tool Pack 10 pins Percentage, t
     assert.equal(cats.categories.find((c) => c.id === "math").sectionId, "calculators");
     assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools", "pdf-tools"]); // a category belongs to Calculators; the other sections have none // Math is not a section of its own
     // the shared breadcrumb prints the category id (a deferred display issue); Home is added by the renderer
-    assert.deepEqual(crumb.toolBreadcrumbItems(registry.calculatorMetadata.percentage).map((i) => i.label), ["Calculators", "math", "Percentage Calculator"]);
+    assert.deepEqual(crumb.toolBreadcrumbItems(registry.calculatorMetadata.percentage).map((i) => i.label), ["Calculators", "Math", "Percentage Calculator"]);
     assert.deepEqual(registry.calculatorMetadata.percentage, { section: "Calculators", category: "math", title: "Percentage Calculator" });
     const idx = await import("../../assets/js/data/search-index.js");
     const entry = idx.searchIndex.find((e) => e.key === "tool:percentage");

@@ -72,7 +72,8 @@ section.loan-comparison-tool
 section#comparison-result.loan-results
   div.loan-summary-grid
     div.loan-summary-card.loan-summary-winner
-      div.loan-summary-icon "🏆"
+      div.loan-summary-icon
+        svg [aria-hidden="true"]
       span "Lower Interest Cost"
       strong "Loan A"
       small "Saves ₹3,82,833 in interest"

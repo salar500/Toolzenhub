@@ -8,265 +8,291 @@ section.categories-page.directory-page
       span.categories-page__eyebrow "Explore"
       h1.categories-page__title "All Tools"
       p.categories-page__description "Search or browse every ToolZen Hub tool, by section and category."
-    form.directory-search [action="{ROOT}tools.html" data-tools-search method="get" role="search"]
-      label.directory-search__label [for="directory-search-input"] "Search tools"
-      div.directory-search__row.tz-search
-        span.tz-search__icon [aria-hidden="true"] "⌕"
-        input#directory-search-input.directory-search__input.tz-search__input [name="q" placeholder="Search by name, for example EMI or GST" type="search"]
-        button.directory-search__button.tz-search__button [aria-label="Search" type="submit"] "⌕"
-    div#tools-results.directory-results [aria-live="polite" role="status"]
-    div#tools-directory
-      section.directory-section [aria-labelledby="directory-calculators-heading"]
-        div.directory-section__header
-          span.directory-section__label "Section"
-          h2#directory-calculators-heading.directory-section__title
-            a [href="{ROOT}categories.html"] "Calculators"
-          p.directory-section__text "Calculators for loans, investment, tax, business and math."
-            span.directory-section__count "19 tools"
-        div.directory-groups
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}loans.html"] "Loans"
-            p.directory-group__text "Calculate and compare loan payments, borrowing costs and repayment options"
-            ul.directory-group__tools
-              li
-                a [href="{ROOT}calculators/loan-comparison/"] "Loan Comparison Calculator"
-              li
-                a [href="{ROOT}calculators/emi/"] "EMI Calculator"
-              li
-                a [href="{ROOT}calculators/home-loan/"] "Home Loan Calculator"
-              li
-                a [href="{ROOT}calculators/balance-transfer/"] "Loan Balance Transfer Calculator"
-              li
-                a [href="{ROOT}calculators/prepayment/"] "Loan Prepayment Calculator"
-              li
-                a [href="{ROOT}calculators/credit-card-payoff/"] "Credit Card Payoff Calculator"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}investment.html"] "Investment"
-            p.directory-group__text "Explore investment growth, returns and savings scenarios"
-            ul.directory-group__tools
-              li
-                a [href="{ROOT}calculators/sip/"] "SIP Calculator"
-              li
-                a [href="{ROOT}calculators/ppf/"] "PPF Calculator"
-              li
-                a [href="{ROOT}calculators/fd/"] "FD Calculator"
-              li
-                a [href="{ROOT}calculators/cagr/"] "CAGR Calculator"
-              li
-                a [href="{ROOT}calculators/swp/"] "SWP Calculator"
-              li
-                a [href="{ROOT}calculators/xirr/"] "XIRR Calculator"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tax.html"] "Tax"
-            p.directory-group__text "Work through tax-related calculations with clear assumptions"
-            ul.directory-group__tools
-              li
-                a [href="{ROOT}calculators/gst/"] "GST Calculator"
-              li
-                a [href="{ROOT}calculators/income-tax/"] "Old vs New Tax Regime Calculator"
-              li
-                a [href="{ROOT}calculators/gratuity/"] "Gratuity Calculator (India)"
-              li
-                a [href="{ROOT}calculators/salary-in-hand/"] "Salary / CTC to In-Hand Calculator (India)"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}business.html"] "Business"
-            p.directory-group__text "Calculate margins, profit and other practical business metrics"
-            ul.directory-group__tools
-              li
-                a [href="{ROOT}calculators/profit/"] "Profit Calculator"
-              li
-                a [href="{ROOT}calculators/margin/"] "Margin Calculator"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}math.html"] "Math"
-            p.directory-group__text "Solve percentage and everyday math problems"
-            ul.directory-group__tools
-              li
-                a [href="{ROOT}calculators/percentage/"] "Percentage Calculator"
-        p.directory-section__more
-          a [href="{ROOT}calculators.html"] "Browse all calculators →"
-        div.directory-soon
-          h3#directory-calculators-soon.directory-soon__title "Coming soon"
-          ul.directory-soon__list [aria-labelledby="directory-calculators-soon"]
-            li
-              span.directory-soon__name "Health"
-              span.coming-soon-badge "Coming soon"
-            li
-              span.directory-soon__name "Converter"
-              span.coming-soon-badge "Coming soon"
-      section.directory-section [aria-labelledby="directory-time-tools-heading"]
-        div.directory-section__header
-          span.directory-section__label "Section"
-          h2#directory-time-tools-heading.directory-section__title
-            a [href="{ROOT}time-tools.html"] "Time Tools"
-          p.directory-section__text "Practical date and time utilities."
-            span.directory-section__count "13 tools"
-        div.directory-groups
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/date-difference/"] "Date Difference Calculator"
-            p.directory-group__text "Find how many days are between two calendar dates, with the difference in years, months an…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/date-calculator/"] "Date Calculator"
-            p.directory-group__text "Add or subtract days, weeks, months and years from a date, and see the resulting date and …"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/countdown-timer/"] "Countdown Timer"
-            p.directory-group__text "Set a time and count down to zero, with pause and resume, a large display and the time lef…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/stopwatch/"] "Stopwatch"
-            p.directory-group__text "Measure elapsed time from zero with start, pause, resume and laps, showing each lap time, …"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/business-days/"] "Business Days Calculator"
-            p.directory-group__text "Add or subtract business days from a date, or count the business days between two dates, w…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/time-duration/"] "Time Duration Calculator"
-            p.directory-group__text "Add and subtract lengths of time such as 1:45 or 2h 30m, and read the total as hours, minu…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/shift-planner/"] "Shift Schedule Planner"
-            p.directory-group__text "Place a repeating shift pattern such as 4 days on and 4 off on the calendar, with your shi…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/pomodoro-timer/"] "Pomodoro Focus Timer"
-            p.directory-group__text "Work in timed focus periods with short breaks and a longer break after every few, with set…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/interval-timer/"] "Interval and Routine Timer"
-            p.directory-group__text "Repeat timed work and rest stages for a number of rounds, with an optional get-ready time …"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/meeting-planner/"] "International Meeting Planner"
-            p.directory-group__text "Find meeting times inside everyone's own hours across time zones: two to four people, thei…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/time-zone-converter/"] "Time Zone Converter"
-            p.directory-group__text "Convert a date and time from one time zone to others, with daylight-saving gaps and repeat…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/world-clock/"] "World Clock"
-            p.directory-group__text "Browse the current time in 195 cities and other time zones, search by city, country or the…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/hours-calculator/"] "Hours & Timesheet Calculator"
-            p.directory-group__text "Add up the hours you worked across several shifts: enter start and end times and unpaid br…"
-      section.directory-section [aria-labelledby="directory-developer-tools-heading"]
-        div.directory-section__header
-          span.directory-section__label "Section"
-          h2#directory-developer-tools-heading.directory-section__title
-            a [href="{ROOT}developer-tools.html"] "Developer Tools"
-          p.directory-section__text "Browser-based tools for working with data and code."
-            span.directory-section__count "17 tools"
-        div.directory-groups
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/json-formatter/"] "JSON Formatter & Validator"
-            p.directory-group__text "Check JSON against the strict standard, see exactly where it breaks, and format or minify …"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/unix-timestamp-converter/"] "Unix Timestamp Converter"
-            p.directory-group__text "Convert Unix timestamps in seconds, milliseconds, microseconds or nanoseconds to a date, a…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/text-diff/"] "Text Diff / Compare"
-            p.directory-group__text "Paste two versions of a text and see what was added, removed and changed, line by line wit…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/jwt-decoder/"] "JWT Decoder"
-            p.directory-group__text "Read the header and payload of a JSON Web Token, see its claims explained and its times as…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/cron-expression-explainer/"] "Cron Expression Explainer"
-            p.directory-group__text "Paste a five-field cron expression written in cronie crontab syntax to see what each field…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/base64-encoder-decoder/"] "Base64 Encoder & Decoder"
-            p.directory-group__text "Encode text to Base64 or decode Base64 back to text, with UTF-8 support and a clear messag…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/url-parser/"] "URL Parser & Encoder"
-            p.directory-group__text "Take a URL apart into its scheme, host, path, query parameters and fragment, see what the …"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/json-compare/"] "JSON Compare"
-            p.directory-group__text "Compare two JSON documents as data: see what was added, removed, changed or changed in typ…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/jsonpath-tester/"] "JSONPath Tester"
-            p.directory-group__text "Run a JSONPath query (RFC 9535, without match() and search()) on a JSON document and see t…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/smart-flashcards/"] "Smart Flashcards"
-            p.directory-group__text "Revise JSON, HTTP and APIs, and software testing with short original flashcards. Think of …"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/json-error-fixing-lab/"] "JSON Error-Fixing Lab"
-            p.directory-group__text "Practise repairing broken JSON: trailing commas, wrong quotes, missing brackets, bad escap…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/jsonpath-challenge-lab/"] "JSONPath Challenge Lab"
-            p.directory-group__text "Practise writing JSONPath queries against a built-in document. Each query is run by an RFC…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/cron-challenge-lab/"] "Cron Challenge Lab"
-            p.directory-group__text "Practise writing cron expressions for described schedules. Each expression is read by a Cr…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/test-design-lab/"] "Test Design Lab"
-            p.directory-group__text "Practise boundary value analysis and equivalence partitioning on whole numbers. Each exerc…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/list-comparer/"] "List Comparer"
-            p.directory-group__text "Compare two lists, one item per line: see what is only in the first, only in the second, i…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/uuid-generator/"] "UUID Generator"
-            p.directory-group__text "Generate version 4 (random) or version 7 (time-ordered) UUIDs, or the nil UUID, one or man…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/json-csv-converter/"] "JSON and CSV Converter"
-            p.directory-group__text "Convert a JSON array of objects to CSV, or CSV to JSON, with RFC 4180 quoting, a choice of…"
-      section.directory-section [aria-labelledby="directory-image-tools-heading"]
-        div.directory-section__header
-          span.directory-section__label "Section"
-          h2#directory-image-tools-heading.directory-section__title
-            a [href="{ROOT}image-tools.html"] "Image Tools"
-          p.directory-section__text "Private browser-based tools for resizing and optimizing images."
-            span.directory-section__count "2 tools"
-        div.directory-groups
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/image-compressor-resizer/"] "Image Compressor & Resizer"
-            p.directory-group__text "Make JPEG, PNG or WebP images smaller in dimensions and file size, keep them under a size …"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/photos-to-pdf/"] "Photos to PDF"
-            p.directory-group__text "Put several photos into one PDF, in the order you choose, with a page size and margin you …"
-      section.directory-section [aria-labelledby="directory-pdf-tools-heading"]
-        div.directory-section__header
-          span.directory-section__label "Section"
-          h2#directory-pdf-tools-heading.directory-section__title
-            a [href="{ROOT}pdf-tools.html"] "PDF Tools"
-          p.directory-section__text "Private browser-based tools for joining, splitting and rearranging PDF files."
-            span.directory-section__count "3 tools"
-        div.directory-groups
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/merge-pdf/"] "Merge PDF"
-            p.directory-group__text "Join several PDFs into one PDF, in the order you choose. It runs in your browser: your PDF…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/split-pdf/"] "Split PDF"
-            p.directory-group__text "Cut one PDF into smaller PDFs, every few pages or at page ranges you choose. It runs in yo…"
-          article.directory-group
-            h3.directory-group__title
-              a [href="{ROOT}tools/pdf-pages/"] "Extract, Reorder and Rotate PDF Pages"
-            p.directory-group__text "Make a new PDF from the pages you choose, in the order you choose, and turn sideways pages…"
+    div.directory-layout
+      nav.directory-rail [aria-label="Tool sections"]
+        ul.directory-rail__list
+          li
+            a.directory-rail__link [href="{ROOT}tools.html#directory-calculators-heading"]
+              span.directory-rail__name "Calculators"
+              span.directory-rail__count "19"
+          li
+            a.directory-rail__link [href="{ROOT}tools.html#directory-time-tools-heading"]
+              span.directory-rail__name "Time Tools"
+              span.directory-rail__count "13"
+          li
+            a.directory-rail__link [href="{ROOT}tools.html#directory-developer-tools-heading"]
+              span.directory-rail__name "Developer Tools"
+              span.directory-rail__count "17"
+          li
+            a.directory-rail__link [href="{ROOT}tools.html#directory-image-tools-heading"]
+              span.directory-rail__name "Image Tools"
+              span.directory-rail__count "2"
+          li
+            a.directory-rail__link [href="{ROOT}tools.html#directory-pdf-tools-heading"]
+              span.directory-rail__name "PDF Tools"
+              span.directory-rail__count "3"
+      div.directory-layout__main
+        form.directory-search [action="{ROOT}tools.html" data-tools-search method="get" role="search"]
+          label.directory-search__label [for="directory-search-input"] "Search tools"
+          div.directory-search__row.tz-search
+            span.tz-search__icon [aria-hidden="true"]
+              svg [aria-hidden="true"]
+            input#directory-search-input.directory-search__input.tz-search__input [name="q" placeholder="Search by name, for example EMI or GST" type="search"]
+            button.directory-search__button.tz-search__button [aria-label="Search" type="submit"]
+              svg [aria-hidden="true"]
+        div#tools-results.directory-results [aria-live="polite" role="status"]
+        div#tools-directory
+          section.directory-section [aria-labelledby="directory-calculators-heading"]
+            div.directory-section__header
+              span.directory-section__label "Section"
+              h2#directory-calculators-heading.directory-section__title
+                a [href="{ROOT}categories.html"] "Calculators"
+              p.directory-section__text "Calculators for loans, investment, tax, business and math."
+                span.directory-section__count "19 tools"
+            div.directory-groups
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}loans.html"] "Loans"
+                p.directory-group__text "Calculate and compare loan payments, borrowing costs and repayment options"
+                ul.directory-group__tools
+                  li
+                    a [href="{ROOT}calculators/loan-comparison/"] "Loan Comparison Calculator"
+                  li
+                    a [href="{ROOT}calculators/emi/"] "EMI Calculator"
+                  li
+                    a [href="{ROOT}calculators/home-loan/"] "Home Loan Calculator"
+                  li
+                    a [href="{ROOT}calculators/balance-transfer/"] "Loan Balance Transfer Calculator"
+                  li
+                    a [href="{ROOT}calculators/prepayment/"] "Loan Prepayment Calculator"
+                  li
+                    a [href="{ROOT}calculators/credit-card-payoff/"] "Credit Card Payoff Calculator"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}investment.html"] "Investment"
+                p.directory-group__text "Explore investment growth, returns and savings scenarios"
+                ul.directory-group__tools
+                  li
+                    a [href="{ROOT}calculators/sip/"] "SIP Calculator"
+                  li
+                    a [href="{ROOT}calculators/ppf/"] "PPF Calculator"
+                  li
+                    a [href="{ROOT}calculators/fd/"] "FD Calculator"
+                  li
+                    a [href="{ROOT}calculators/cagr/"] "CAGR Calculator"
+                  li
+                    a [href="{ROOT}calculators/swp/"] "SWP Calculator"
+                  li
+                    a [href="{ROOT}calculators/xirr/"] "XIRR Calculator"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tax.html"] "Tax"
+                p.directory-group__text "Work through tax-related calculations with clear assumptions"
+                ul.directory-group__tools
+                  li
+                    a [href="{ROOT}calculators/gst/"] "GST Calculator"
+                  li
+                    a [href="{ROOT}calculators/income-tax/"] "Old vs New Tax Regime Calculator"
+                  li
+                    a [href="{ROOT}calculators/gratuity/"] "Gratuity Calculator (India)"
+                  li
+                    a [href="{ROOT}calculators/salary-in-hand/"] "Salary / CTC to In-Hand Calculator (India)"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}business.html"] "Business"
+                p.directory-group__text "Calculate margins, profit and other practical business metrics"
+                ul.directory-group__tools
+                  li
+                    a [href="{ROOT}calculators/profit/"] "Profit Calculator"
+                  li
+                    a [href="{ROOT}calculators/margin/"] "Margin Calculator"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}math.html"] "Math"
+                p.directory-group__text "Solve percentage and everyday math problems"
+                ul.directory-group__tools
+                  li
+                    a [href="{ROOT}calculators/percentage/"] "Percentage Calculator"
+            p.directory-section__more
+              a [href="{ROOT}calculators.html"] "Browse all calculators →"
+            div.directory-soon
+              h3#directory-calculators-soon.directory-soon__title "Coming soon"
+              ul.directory-soon__list [aria-labelledby="directory-calculators-soon"]
+                li
+                  span.directory-soon__name "Health"
+                  span.coming-soon-badge "Coming soon"
+                li
+                  span.directory-soon__name "Converter"
+                  span.coming-soon-badge "Coming soon"
+          section.directory-section [aria-labelledby="directory-time-tools-heading"]
+            div.directory-section__header
+              span.directory-section__label "Section"
+              h2#directory-time-tools-heading.directory-section__title
+                a [href="{ROOT}time-tools.html"] "Time Tools"
+              p.directory-section__text "Practical date and time utilities."
+                span.directory-section__count "13 tools"
+            div.directory-groups
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/date-difference/"] "Date Difference Calculator"
+                p.directory-group__text "Find how many days are between two calendar dates, with the difference in years, months an…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/date-calculator/"] "Date Calculator"
+                p.directory-group__text "Add or subtract days, weeks, months and years from a date, and see the resulting date and …"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/countdown-timer/"] "Countdown Timer"
+                p.directory-group__text "Set a time and count down to zero, with pause and resume, a large display and the time lef…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/stopwatch/"] "Stopwatch"
+                p.directory-group__text "Measure elapsed time from zero with start, pause, resume and laps, showing each lap time, …"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/business-days/"] "Business Days Calculator"
+                p.directory-group__text "Add or subtract business days from a date, or count the business days between two dates, w…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/time-duration/"] "Time Duration Calculator"
+                p.directory-group__text "Add and subtract lengths of time such as 1:45 or 2h 30m, and read the total as hours, minu…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/shift-planner/"] "Shift Schedule Planner"
+                p.directory-group__text "Place a repeating shift pattern such as 4 days on and 4 off on the calendar, with your shi…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/pomodoro-timer/"] "Pomodoro Focus Timer"
+                p.directory-group__text "Work in timed focus periods with short breaks and a longer break after every few, with set…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/interval-timer/"] "Interval and Routine Timer"
+                p.directory-group__text "Repeat timed work and rest stages for a number of rounds, with an optional get-ready time …"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/meeting-planner/"] "International Meeting Planner"
+                p.directory-group__text "Find meeting times inside everyone's own hours across time zones: two to four people, thei…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/time-zone-converter/"] "Time Zone Converter"
+                p.directory-group__text "Convert a date and time from one time zone to others, with daylight-saving gaps and repeat…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/world-clock/"] "World Clock"
+                p.directory-group__text "Browse the current time in 195 cities and other time zones, search by city, country or the…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/hours-calculator/"] "Hours & Timesheet Calculator"
+                p.directory-group__text "Add up the hours you worked across several shifts: enter start and end times and unpaid br…"
+          section.directory-section [aria-labelledby="directory-developer-tools-heading"]
+            div.directory-section__header
+              span.directory-section__label "Section"
+              h2#directory-developer-tools-heading.directory-section__title
+                a [href="{ROOT}developer-tools.html"] "Developer Tools"
+              p.directory-section__text "Browser-based tools for working with data and code."
+                span.directory-section__count "17 tools"
+            div.directory-groups
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/json-formatter/"] "JSON Formatter & Validator"
+                p.directory-group__text "Check JSON against the strict standard, see exactly where it breaks, and format or minify …"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/unix-timestamp-converter/"] "Unix Timestamp Converter"
+                p.directory-group__text "Convert Unix timestamps in seconds, milliseconds, microseconds or nanoseconds to a date, a…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/text-diff/"] "Text Diff / Compare"
+                p.directory-group__text "Paste two versions of a text and see what was added, removed and changed, line by line wit…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/jwt-decoder/"] "JWT Decoder"
+                p.directory-group__text "Read the header and payload of a JSON Web Token, see its claims explained and its times as…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/cron-expression-explainer/"] "Cron Expression Explainer"
+                p.directory-group__text "Paste a five-field cron expression written in cronie crontab syntax to see what each field…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/base64-encoder-decoder/"] "Base64 Encoder & Decoder"
+                p.directory-group__text "Encode text to Base64 or decode Base64 back to text, with UTF-8 support and a clear messag…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/url-parser/"] "URL Parser & Encoder"
+                p.directory-group__text "Take a URL apart into its scheme, host, path, query parameters and fragment, see what the …"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/json-compare/"] "JSON Compare"
+                p.directory-group__text "Compare two JSON documents as data: see what was added, removed, changed or changed in typ…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/jsonpath-tester/"] "JSONPath Tester"
+                p.directory-group__text "Run a JSONPath query (RFC 9535, without match() and search()) on a JSON document and see t…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/smart-flashcards/"] "Smart Flashcards"
+                p.directory-group__text "Revise JSON, HTTP and APIs, and software testing with short original flashcards. Think of …"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/json-error-fixing-lab/"] "JSON Error-Fixing Lab"
+                p.directory-group__text "Practise repairing broken JSON: trailing commas, wrong quotes, missing brackets, bad escap…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/jsonpath-challenge-lab/"] "JSONPath Challenge Lab"
+                p.directory-group__text "Practise writing JSONPath queries against a built-in document. Each query is run by an RFC…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/cron-challenge-lab/"] "Cron Challenge Lab"
+                p.directory-group__text "Practise writing cron expressions for described schedules. Each expression is read by a Cr…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/test-design-lab/"] "Test Design Lab"
+                p.directory-group__text "Practise boundary value analysis and equivalence partitioning on whole numbers. Each exerc…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/list-comparer/"] "List Comparer"
+                p.directory-group__text "Compare two lists, one item per line: see what is only in the first, only in the second, i…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/uuid-generator/"] "UUID Generator"
+                p.directory-group__text "Generate version 4 (random) or version 7 (time-ordered) UUIDs, or the nil UUID, one or man…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/json-csv-converter/"] "JSON and CSV Converter"
+                p.directory-group__text "Convert a JSON array of objects to CSV, or CSV to JSON, with RFC 4180 quoting, a choice of…"
+          section.directory-section [aria-labelledby="directory-image-tools-heading"]
+            div.directory-section__header
+              span.directory-section__label "Section"
+              h2#directory-image-tools-heading.directory-section__title
+                a [href="{ROOT}image-tools.html"] "Image Tools"
+              p.directory-section__text "Private browser-based tools for resizing and optimizing images."
+                span.directory-section__count "2 tools"
+            div.directory-groups
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/image-compressor-resizer/"] "Image Compressor & Resizer"
+                p.directory-group__text "Make JPEG, PNG or WebP images smaller in dimensions and file size, keep them under a size …"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/photos-to-pdf/"] "Photos to PDF"
+                p.directory-group__text "Put several photos into one PDF, in the order you choose, with a page size and margin you …"
+          section.directory-section [aria-labelledby="directory-pdf-tools-heading"]
+            div.directory-section__header
+              span.directory-section__label "Section"
+              h2#directory-pdf-tools-heading.directory-section__title
+                a [href="{ROOT}pdf-tools.html"] "PDF Tools"
+              p.directory-section__text "Private browser-based tools for joining, splitting and rearranging PDF files."
+                span.directory-section__count "3 tools"
+            div.directory-groups
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/merge-pdf/"] "Merge PDF"
+                p.directory-group__text "Join several PDFs into one PDF, in the order you choose. It runs in your browser: your PDF…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/split-pdf/"] "Split PDF"
+                p.directory-group__text "Cut one PDF into smaller PDFs, every few pages or at page ranges you choose. It runs in yo…"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}tools/pdf-pages/"] "Extract, Reorder and Rotate PDF Pages"
+                p.directory-group__text "Make a new PDF from the pages you choose, in the order you choose, and turn sideways pages…"

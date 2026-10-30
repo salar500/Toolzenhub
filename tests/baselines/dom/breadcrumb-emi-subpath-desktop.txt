@@ -3,6 +3,6 @@ div.calculator-breadcrumb
   span "›"
   a [href="{ROOT}categories.html"] "Calculators"
   span "›"
-  a [href="{ROOT}loans.html"] "loans"
+  a [href="{ROOT}loans.html"] "Loans"
   span "›"
   strong "EMI Calculator"

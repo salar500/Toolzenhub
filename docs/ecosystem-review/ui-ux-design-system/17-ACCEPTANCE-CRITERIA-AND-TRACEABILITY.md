@@ -160,7 +160,7 @@ Each criterion is observable and checkable by the owner, a focused test or a mea
 | GL-05.2 | GL-05 | Chip hit areas are at least 44 px tall. |
 | GL-06.1 | GL-06 | On the pilot family the panel lists only same-section tools. |
 | GL-06.2 | GL-06 | A tool with no curated relation renders no empty panel. |
-| GL-07.1 | GL-07 | EMI Calculator breadcrumb shows 'Loans' (title case) in generated HTML. |
+| GL-07.1 | GL-07 | EMI Calculator breadcrumb shows 'Loans' (title case) in generated HTML. The matching BreadcrumbList label change is authorised by the QA-04.2 exception. |
 | GL-07.2 | GL-07 | At 320 px the breadcrumb does not cause horizontal page scroll on any tool page. |
 | GL-08.1 | GL-08 | Article text measure is between 60 and 75 characters at 1280 px. |
 | GL-08.2 | GL-08 | Text Diff and JSON Compare use the workspace width class; calculators use standard. |
@@ -236,7 +236,7 @@ Each criterion is observable and checkable by the owner, a focused test or a mea
 | QA-03.1 | QA-03 | Measured transfer and request counts are within budget for home, All Tools, a calculator, a developer tool, an article and a legal page. |
 | QA-03.2 | QA-03 | Lighthouse mobile performance is not lower than the recorded baseline on those pages. |
 | QA-04.1 | QA-04 | The URL inventory check passes with 107 sitemap URLs. |
-| QA-04.2 | QA-04 | A diff of titles, descriptions, canonicals and JSON-LD across all generated pages is empty. |
+| QA-04.2 | QA-04 | A diff of titles, descriptions, canonicals and JSON-LD across all generated pages is empty. Narrow owner-approved exception (2026-10-30): the category step name in BreadcrumbList on tool pages changes from the lowercase id to its title-case display label (for example "loans" to "Loans") so it matches the visible breadcrumb; no other JSON-LD field, URL, canonical or hierarchy changes. |
 | QA-05.1 | QA-05 | No generated page contacts a host other than the site itself (analytics after consent excepted). |
 | QA-05.2 | QA-05 | assets/js/analytics.js and src/_data/site.js are unchanged. |
 | QA-06.1 | QA-06 | package.json dependencies are unchanged. |
