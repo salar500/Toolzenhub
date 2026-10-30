@@ -683,3 +683,17 @@ test.describe("footer spacing", () => {
     expect(gap).toBeGreaterThanOrEqual(32);
   });
 });
+
+test.describe("home page rows on a phone", () => {
+  test("no sideways-scrolling container on the home page at 390px", async ({ page, go }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await go("");
+    await expect(page.locator("#popular-calculators .calculator-card").first()).toBeVisible();
+    await expect(page.locator("#latest-articles .article-card").first()).toBeVisible();
+    const scrollers = await page.evaluate(() => [...document.querySelectorAll("main *, #app *")].filter((e) => {
+      const cs = getComputedStyle(e);
+      return (cs.overflowX === "auto" || cs.overflowX === "scroll") && e.scrollWidth > e.clientWidth + 1;
+    }).map((e) => e.className.toString()));
+    expect(scrollers).toEqual([]);
+  });
+});

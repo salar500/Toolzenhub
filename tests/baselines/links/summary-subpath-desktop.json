@@ -1,8 +1,8 @@
 {
   "about.html": {
-    "internal": 28,
+    "internal": 30,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": [
       "categories.html#business  (fragment on another page; target element not verified)",
       "categories.html#math  (fragment on another page; target element not verified)",
@@ -10,670 +10,670 @@
     ]
   },
   "articles.html": {
-    "internal": 108,
+    "internal": 113,
     "external": [],
-    "placeholders": 27,
+    "placeholders": 15,
     "deadFragments": []
   },
   "articles/balance-transfer/balance-transfer-vs-prepayment/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/balance-transfer/is-a-loan-balance-transfer-worth-it/": {
-    "internal": 34,
+    "internal": 36,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/fd/how-compounding-frequency-changes-an-fd-maturity/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/home-loan/how-much-home-loan-fits-your-emi-budget/": {
-    "internal": 34,
+    "internal": 36,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/home-loan/longer-tenure-bigger-loan-much-more-interest/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/loan-comparison/choose-right-loan-tenure/": {
-    "internal": 37,
+    "internal": 39,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/loan-comparison/emi-vs-total-interest/": {
-    "internal": 37,
+    "internal": 39,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/loan-comparison/fixed-vs-floating-interest-rates/": {
-    "internal": 37,
+    "internal": 39,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/loan-comparison/how-to-reduce-home-loan-interest/": {
-    "internal": 37,
+    "internal": 39,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/loan-comparison/loan-tenure-total-interest/": {
-    "internal": 37,
+    "internal": 39,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/loan-comparison/what-is-loan-prepayment/": {
-    "internal": 37,
+    "internal": 39,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/loan-prepayment/early-vs-late-loan-prepayment/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment/": {
-    "internal": 34,
+    "internal": 36,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/margin/margin-vs-markup/": {
-    "internal": 32,
+    "internal": 34,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/margin/price-a-product-for-a-target-margin/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/margin/what-a-discount-really-costs-you/": {
-    "internal": 32,
+    "internal": 34,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/percentage/how-to-find-the-original-price-before-a-percentage-change/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/percentage/percent-vs-percentage-points/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/profit/how-to-find-your-break-even-point/": {
-    "internal": 32,
+    "internal": 34,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/profit/price-cost-or-volume-which-matters-most/": {
-    "internal": 32,
+    "internal": 34,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/profit/units-needed-for-a-target-profit/": {
-    "internal": 32,
+    "internal": 34,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/sip/how-a-sip-grows/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/sip/how-much-sip-do-you-need-for-a-goal/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/sip/how-return-assumptions-change-a-sip-projection/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/sip/step-up-sip-explained/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/swp/how-a-systematic-withdrawal-plan-works/": {
-    "internal": 34,
+    "internal": 36,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "articles/swp/what-changes-how-long-a-corpus-lasts/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "business.html": {
-    "internal": 26,
+    "internal": 28,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 42,
+    "internal": 44,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/balance-transfer/": {
-    "internal": 36,
+    "internal": 38,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/cagr/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/credit-card-payoff/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/emi/": {
-    "internal": 37,
+    "internal": 41,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/fd/": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/gratuity/": {
-    "internal": 26,
+    "internal": 28,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/gst/": {
-    "internal": 31,
+    "internal": 33,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/home-loan/": {
-    "internal": 35,
+    "internal": 37,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/income-tax/": {
-    "internal": 27,
+    "internal": 29,
     "external": [
       "egazette.gov.in",
       "github.com",
       "www.incometax.gov.in",
       "www.pib.gov.in"
     ],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/loan-comparison/": {
-    "internal": 37,
+    "internal": 39,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/margin/": {
-    "internal": 31,
+    "internal": 33,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/percentage/": {
-    "internal": 32,
+    "internal": 34,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/ppf/": {
-    "internal": 36,
+    "internal": 38,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/prepayment/": {
-    "internal": 36,
+    "internal": 38,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/profit/": {
-    "internal": 31,
+    "internal": 33,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/salary-in-hand/": {
-    "internal": 28,
+    "internal": 30,
     "external": [
       "github.com"
     ],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/sip/": {
-    "internal": 36,
+    "internal": 38,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/swp/": {
-    "internal": 30,
+    "internal": 32,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "calculators/xirr/": {
-    "internal": 36,
+    "internal": 38,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "categories.html": {
-    "internal": 28,
+    "internal": 30,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "contact.html": {
-    "internal": 22,
+    "internal": 24,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "developer-tools.html": {
-    "internal": 41,
+    "internal": 43,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "disclaimer.html": {
-    "internal": 23,
+    "internal": 25,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "image-tools.html": {
-    "internal": 26,
+    "internal": 28,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "(home)": {
-    "internal": 37,
+    "internal": 39,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "investment.html": {
-    "internal": 30,
+    "internal": 32,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "loans.html": {
-    "internal": 29,
+    "internal": 31,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "math.html": {
-    "internal": 25,
+    "internal": 27,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "pdf-tools.html": {
-    "internal": 27,
+    "internal": 29,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "privacy.html": {
-    "internal": 23,
+    "internal": 25,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tax.html": {
-    "internal": 28,
+    "internal": 30,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "terms.html": {
-    "internal": 23,
+    "internal": 25,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "time-tools.html": {
-    "internal": 37,
+    "internal": 39,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 87,
+    "internal": 94,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/base64-encoder-decoder/": {
-    "internal": 29,
+    "internal": 31,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/business-days/": {
-    "internal": 28,
+    "internal": 30,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/countdown-timer/": {
-    "internal": 24,
+    "internal": 26,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/cron-challenge-lab/": {
-    "internal": 26,
+    "internal": 28,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/cron-expression-explainer/": {
-    "internal": 26,
+    "internal": 28,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/date-calculator/": {
-    "internal": 31,
+    "internal": 33,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/date-difference/": {
-    "internal": 25,
+    "internal": 27,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/hours-calculator/": {
-    "internal": 26,
+    "internal": 28,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/image-compressor-resizer/": {
-    "internal": 23,
+    "internal": 25,
     "external": [],
-    "placeholders": 5,
+    "placeholders": 1,
     "deadFragments": []
   },
   "tools/interval-timer/": {
-    "internal": 29,
+    "internal": 31,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/json-compare/": {
-    "internal": 29,
+    "internal": 31,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/json-csv-converter/": {
-    "internal": 27,
+    "internal": 29,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/json-error-fixing-lab/": {
-    "internal": 26,
+    "internal": 28,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/json-formatter/": {
-    "internal": 29,
+    "internal": 31,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/jsonpath-challenge-lab/": {
-    "internal": 26,
+    "internal": 28,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/jsonpath-tester/": {
-    "internal": 28,
+    "internal": 30,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/jwt-decoder/": {
-    "internal": 29,
+    "internal": 31,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/list-comparer/": {
-    "internal": 27,
+    "internal": 29,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/meeting-planner/": {
-    "internal": 28,
+    "internal": 30,
     "external": [],
-    "placeholders": 4,
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/merge-pdf/": {
-    "internal": 25,
+    "internal": 27,
     "external": [],
-    "placeholders": 5,
+    "placeholders": 1,
     "deadFragments": []
   },
   "tools/pdf-pages/": {
-    "internal": 25,
+    "internal": 27,
     "external": [],
-    "placeholders": 5,
+    "placeholders": 1,
     "deadFragments": []
   },
   "tools/photos-to-pdf/": {
-    "internal": 23,
+    "internal": 25,
+    "external": [],
+    "placeholders": 1,
+    "deadFragments": []
+  },
+  "tools/pomodoro-timer/": {
+    "internal": 31,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/shift-planner/": {
+    "internal": 30,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/smart-flashcards/": {
+    "internal": 30,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/split-pdf/": {
+    "internal": 28,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/stopwatch/": {
+    "internal": 26,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/test-design-lab/": {
+    "internal": 29,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/text-diff/": {
+    "internal": 30,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/time-duration/": {
+    "internal": 30,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/time-zone-converter/": {
+    "internal": 29,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/unix-timestamp-converter/": {
+    "internal": 30,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/url-parser/": {
+    "internal": 30,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/uuid-generator/": {
+    "internal": 28,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/world-clock/": {
+    "internal": 30,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "categories.html?q=loan": {
+    "internal": 31,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "calculators.html?q=emi": {
+    "internal": 29,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles.html?category=loans": {
+    "internal": 38,
     "external": [],
     "placeholders": 5,
     "deadFragments": []
   },
-  "tools/pomodoro-timer/": {
-    "internal": 29,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "tools/shift-planner/": {
-    "internal": 28,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "tools/smart-flashcards/": {
-    "internal": 28,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "tools/split-pdf/": {
-    "internal": 26,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "tools/stopwatch/": {
-    "internal": 24,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "tools/test-design-lab/": {
-    "internal": 26,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "tools/text-diff/": {
-    "internal": 28,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "tools/time-duration/": {
-    "internal": 28,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "tools/time-zone-converter/": {
-    "internal": 27,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "tools/unix-timestamp-converter/": {
-    "internal": 28,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "tools/url-parser/": {
-    "internal": 28,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "tools/uuid-generator/": {
-    "internal": 26,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "tools/world-clock/": {
-    "internal": 28,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "categories.html?q=loan": {
-    "internal": 29,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "calculators.html?q=emi": {
-    "internal": 27,
-    "external": [],
-    "placeholders": 4,
-    "deadFragments": []
-  },
-  "articles.html?category=loans": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 9,
-    "deadFragments": []
-  },
   "articles.html?category=investment": {
-    "internal": 36,
+    "internal": 38,
     "external": [],
-    "placeholders": 9,
+    "placeholders": 5,
     "deadFragments": []
   }
 }

@@ -253,3 +253,13 @@ test.describe("M5 article metadata comes from the catalog and is unchanged", () 
     });
   }
 });
+
+test.describe("article reading measure (Design System 2.0, GL-08)", () => {
+  test("running text is capped to about 70 characters a line on a wide screen", async ({ page, go }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await go("articles/loan-comparison/what-is-loan-prepayment/");
+    const w = await page.locator(".article-section p").first().evaluate((p) => p.getBoundingClientRect().width);
+    expect(w).toBeLessThanOrEqual(580);
+    expect(w).toBeGreaterThanOrEqual(400);
+  });
+});

@@ -512,3 +512,11 @@
         2.5;
 
 }
+
+
+/* Design System 2.0 (GL-08): keep the reading measure to about 70 characters on wide screens.
+   The card stays as wide as before; only the line length of running text is capped. */
+.article-section p,
+.article-section li {
+    max-width: 35rem;
+}

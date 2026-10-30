@@ -405,3 +405,14 @@ test.describe("Loan Comparison — M4 shared architecture and regression", () =>
     await expect(button).toHaveText(/Download PDF/);
   });
 });
+
+test.describe("summary cards at tablet width (Design System 2.0)", () => {
+  test("all five summary cards fit inside the page at 820px", async ({ page, go }) => {
+    await page.setViewportSize({ width: 820, height: 900 });
+    await go("calculators/loan-comparison/");
+    const cards = page.locator(".loan-summary-card");
+    await expect(cards).toHaveCount(5);
+    const boxes = await cards.evaluateAll((els) => els.map((e) => { const r = e.getBoundingClientRect(); return { l: r.left, r: r.right }; }));
+    for (const b of boxes) { expect(b.l).toBeGreaterThanOrEqual(0); expect(b.r).toBeLessThanOrEqual(820); }
+  });
+});

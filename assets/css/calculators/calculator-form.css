@@ -205,7 +205,7 @@
 
     color: var(--color-ink-muted);
 
-    font-size: 11px;
+    font-size: 12px;
 
     line-height: 1.5;
 
@@ -224,7 +224,7 @@
 
     color: var(--state-error);
 
-    font-size: 11px;
+    font-size: 12px;
 
     line-height: 1.5;
 
@@ -409,7 +409,7 @@
 
     color: var(--ink-subtle);
 
-    font-size: 10px;
+    font-size: 12px;
 
 }
 
@@ -484,7 +484,7 @@
 
     .calculator-form__help {
 
-        font-size: 10px;
+        font-size: 12px;
 
     }
 

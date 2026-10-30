@@ -160,7 +160,7 @@
     align-items: center;
     gap: 5px;
     color: var(--articles-muted);
-    font-size: 10px;
+    font-size: 12px;
 }
 
 
@@ -174,7 +174,7 @@
     background: transparent;
     color: var(--ink-muted);
     font: inherit;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     cursor: pointer;
 }
@@ -218,7 +218,7 @@
     margin: 0;
     overflow: hidden;
     color: var(--color-gray-800);
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.45;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -234,5 +234,5 @@
     display: block;
     margin-top: 4px;
     color: var(--articles-muted);
-    font-size: 9px;
+    font-size: 12px;
 }

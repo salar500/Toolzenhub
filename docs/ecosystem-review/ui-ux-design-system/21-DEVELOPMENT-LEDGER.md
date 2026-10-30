@@ -115,3 +115,28 @@ Re-verified at the start: `main`, HEAD `528d22f`, 10 commits ahead of `origin/ma
 **Visual baselines (95 files).** `visual-desktop` was run in compare mode: 39 of 39 fail. Baselines were last touched by tool-pack commits before the redesign, so the whole set shows the old green design. Only `home` was reviewed (EXPECTED CHANGE, approved Design C; it exposed D1). The other 38 desktop, and all mobile and tablet baselines, are UNVERIFIED. No baseline was updated. Updating needs a reviewed batch per family and project.
 
 No engine, formula, parser, evaluator or URL change. Rules changed: none.
+
+## Master Prompt 3 continuation (2026-10-30): verdict AMBER
+
+Scope: continue the incomplete gates after `8dd0a77`. Nothing pushed, deployed or published. Rules changed: none.
+
+Defects fixed (all presentation, accessibility or stale tests; no engine, formula, parser or URL change):
+- Footer CLS 0.49 on five script-rendered pages: `html[data-pending] #footer` hold restored (home CLS 0.4947 to 0.0001).
+- Hidden Flashcards import input became 1x44 under the file-input rule: `:not(.lx-sr-only)`.
+- World Clock reserved-space over-reserved a row at 3 columns: arithmetic fixed.
+- Loan Comparison summary cards clipped at 820 px: two-column grid for 651-1100 px (test added).
+- Remaining emoji on categories, loans and loan-comparison replaced by the shared SVG icons.
+- 404 had no navigation landmark or search (CT-06.1): labelled nav and search form added (test added).
+- Article measure about 90-110 characters: capped at 35rem, about 70 (test added; GL-08.1).
+- Home Featured and Latest rows scrolled sideways at 390 px: stacked (DS-02.1, test added); Featured is three across from 641 px so descriptions run about 49 characters, not 16 (DS-03.1).
+- 73 font-size declarations of 9-11 px raised to 12 px across 39 stylesheets; a 78-page rendered scan then finds no text under 12 px apart from four superscripts.
+- Stale card-image alts (stock-photo descriptions) replaced with chart descriptions; the legacy-registry unit expectation updated to match.
+- Stale specs updated: income-tax, percentage, time-tools-enhancements.
+
+Visual baselines: all 98 reviewed at contact-sheet scale (not pixel level) and classified EXPECTED CHANGE (stale pre-redesign or intended Design C changes); updated in reviewed batches by name, never a global regenerate. Desktop 39/39, mobile 39/39, tablet 20/20 stable afterwards. Links and SEO baselines updated after diff review (only counts, placeholders 4 to 0, themeColor, visibleTextChars).
+
+Tests (independently run): unit 3623 tests, 0 fail, 4 skipped (final articles file 18/18 after the alt fix); `test:static` passes on the final build (107 live pages); earlier family runs passed before the 12 px change (calculators 502, Time 258, Developer 225, Image/PDF 134, Labs/Flashcards 131+49, root-desktop 264, mobile smoke/notfound 146, consolidated desktop 369 and mobile 234). After the 12 px change the 98 visual compares, the home/navigation/articles/notfound/loan-comparison specs on desktop and mobile passed.
+
+NOT COMPLETE: a full `subpath-desktop` regression after the 12 px change was started and stopped by the memory guard at 81 of 1714 tests (no failures in those). It was not restarted. This is recorded as an evidence gap, not a pass.
+
+Open items: GL-07.1 lowercase "loans" in the EMI breadcrumb (owner decision; capitalising changes BreadcrumbList JSON-LD and conflicts with QA-04.2); Flashcards desktop CLS 0.143 (cause not determined); categories CLS 0.075; `loans` category page keeps the old green hero art (P3); sliders lack aria-valuetext (P3); All Tools shows "Coming soon" category labels; screen reader testing NOT VERIFIED; Lighthouse single-run on 3 pages only; mobile family specs for calculators, Time and Developer tools not run; P0 matrix: doc 22 (29 PASS, 44 PARTIAL, 28 NOT RUN, 1 FAIL of 102).

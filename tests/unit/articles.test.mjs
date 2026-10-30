@@ -267,7 +267,7 @@ describe("derived views keep their old shape", () => {
       id: 1, published: true, category: "loans", categoryName: "Loans", topic: "loan-comparison", slug: "how-to-reduce-home-loan-interest",
       title: "How to Reduce Your Home Loan Interest",
       description: "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
-      date: "Aug 25, 2026", readTime: "6 min read", image: "/Toolzenhub/assets/Images/articles/how-to-reduce-home-loan-interest.png", alt: "House model on desk",
+      date: "Aug 25, 2026", readTime: "6 min read", image: "/Toolzenhub/assets/Images/articles/how-to-reduce-home-loan-interest.png", alt: "Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate",
     });
     assert.deepEqual(legacy.articleRegistry[34], {
       id: 7, category: "investment", categoryName: "Investment", topic: "investment", slug: "best-sip-strategies-for-beginners",

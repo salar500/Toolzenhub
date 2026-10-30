@@ -110,7 +110,7 @@
     display: inline-block;
     margin-bottom: 6px;
     color: var(--articles-green);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: .09em;
     text-transform: uppercase;
@@ -176,7 +176,7 @@
     align-items: center;
     gap: 4px;
     color: var(--articles-muted);
-    font-size: 10px;
+    font-size: 12px;
 }
 
 

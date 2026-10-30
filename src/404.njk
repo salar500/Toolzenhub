@@ -210,6 +210,55 @@ noindex: true
             text-transform: uppercase;
         }
 
+        .nf-search {
+            margin: 0 0 22px;
+            text-align: left;
+        }
+
+        .nf-search__label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: #57534e;
+        }
+
+        .nf-search__row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nf-search__input {
+            flex: 1;
+            min-width: 0;
+            min-height: 44px;
+            padding: 0 12px;
+            border: 1px solid #78716c;
+            border-radius: 8px;
+            font: inherit;
+            font-size: 16px;
+            color: #1c1917;
+            background: #fff;
+        }
+
+        .nf-search__btn {
+            min-height: 44px;
+            padding: 0 18px;
+            border: 0;
+            border-radius: 8px;
+            font: inherit;
+            font-weight: 600;
+            color: #fff;
+            background: #4338ca;
+            cursor: pointer;
+        }
+
+        .nf-search__input:focus-visible,
+        .nf-search__btn:focus-visible {
+            outline: 2px solid #4338ca;
+            outline-offset: 2px;
+        }
+
         .nf-links {
             margin: 0;
             padding: 0;
@@ -334,9 +383,18 @@ noindex: true
             </p>
 
 
+            <form class="nf-search" role="search" action="{{ '/tools.html' | url }}" method="get">
+                <label class="nf-search__label" for="nf-q">Search all tools</label>
+                <div class="nf-search__row">
+                    <input id="nf-q" class="nf-search__input" type="search" name="q" autocomplete="off" placeholder="EMI, JSON, PDF">
+                    <button class="nf-search__btn" type="submit">Search</button>
+                </div>
+            </form>
+
+
             <!-- Links below are written with the build base. -->
 
-            <div class="nf-nav">
+            <nav class="nf-nav" aria-label="Explore ToolZen Hub">
 
                 <a class="nf-btn" data-route="" href="{{ '/' | url }}">
                     Go to Home
@@ -378,7 +436,7 @@ noindex: true
 
                 </ul>
 
-            </div>
+            </nav>
 
         </section>
 

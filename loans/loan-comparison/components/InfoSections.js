@@ -1,3 +1,5 @@
+import { iconSvg } from "../../../assets/js/ui/icons.js";
+
 export function renderHowToUse() {
 
     return `
@@ -5,7 +7,7 @@ export function renderHowToUse() {
         <section class="loan-info-card">
 
             <div class="loan-info-icon">
-                🧮
+                ${iconSvg("calculator", 26)}
             </div>
 
             <div>
@@ -51,7 +53,7 @@ export function renderWhyCompare() {
         <section class="loan-info-card">
 
             <div class="loan-info-icon">
-                ⚖️
+                ${iconSvg("swap", 26)}
             </div>
 
             <div>
@@ -92,7 +94,7 @@ export function renderHowItWorks() {
         <section class="loan-info-card">
 
             <div class="loan-info-icon">
-                🧮
+                ${iconSvg("calculator", 26)}
             </div>
 
             <div>
@@ -183,7 +185,7 @@ export function renderThingsToConsider() {
         <section class="loan-content-card">
 
             <h2>
-                💡 Things to Consider
+                Things to Consider
             </h2>
 
             <ul class="loan-consider-list">

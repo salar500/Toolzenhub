@@ -1,3 +1,5 @@
+import { iconSvg } from "../../../assets/js/ui/icons.js";
+
 import {
     formatINR
 } from "../../../assets/js/calculators/common/formatter.js";
@@ -71,7 +73,7 @@ export function renderResults(
             >
 
                 <div class="loan-summary-icon">
-                    🏆
+                    ${iconSvg("check", 30)}
                 </div>
 
 

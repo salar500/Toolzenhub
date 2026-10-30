@@ -73,3 +73,16 @@ test.describe("404 document without JavaScript @portable", () => {
     await expect(page.locator(".nf-nav")).toBeHidden();
   });
 });
+
+test.describe("404 document: navigation landmark and search @portable", () => {
+  test("has a labelled navigation landmark and a search form that goes to All Tools", async ({ page, go, siteRoot }) => {
+    await go("404.html");
+    await expect(page.getByRole("navigation", { name: "Explore ToolZen Hub" })).toBeVisible();
+    const form = page.getByRole("search");
+    await expect(form).toHaveCount(1);
+    await expect(form.getByLabel("Search all tools")).toBeVisible();
+    await form.getByLabel("Search all tools").fill("emi");
+    await form.getByRole("button", { name: "Search" }).click();
+    await expect.poll(() => new URL(page.url()).pathname + new URL(page.url()).search).toBe(`${siteRoot}tools.html?q=emi`);
+  });
+});
