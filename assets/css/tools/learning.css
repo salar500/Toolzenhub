@@ -751,3 +751,23 @@
     min-width: 0;
 
 }
+
+
+/* Smart Flashcards: while only the "needs JavaScript" note is in the app area, keep roughly the height the deck
+   chooser takes once it mounts, so the explanation sections below do not jump down (layout shift). The values sit
+   just under the mounted heights measured at each layout, so no blank gap is left. It lifts when the tool mounts. */
+.lx-app[data-tool="smart-flashcards"]:has(> .lx-note:only-child) {
+    min-height: 920px;
+}
+
+@media (min-width: 481px) {
+    .lx-app[data-tool="smart-flashcards"]:has(> .lx-note:only-child) {
+        min-height: 780px;
+    }
+}
+
+@media (min-width: 900px) {
+    .lx-app[data-tool="smart-flashcards"]:has(> .lx-note:only-child) {
+        min-height: 440px;
+    }
+}

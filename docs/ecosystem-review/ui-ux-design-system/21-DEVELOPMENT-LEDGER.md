@@ -137,6 +137,32 @@ Visual baselines: all 98 reviewed at contact-sheet scale (not pixel level) and c
 
 Tests (independently run): unit 3623 tests, 0 fail, 4 skipped (final articles file 18/18 after the alt fix); `test:static` passes on the final build (107 live pages); earlier family runs passed before the 12 px change (calculators 502, Time 258, Developer 225, Image/PDF 134, Labs/Flashcards 131+49, root-desktop 264, mobile smoke/notfound 146, consolidated desktop 369 and mobile 234). After the 12 px change the 98 visual compares, the home/navigation/articles/notfound/loan-comparison specs on desktop and mobile passed.
 
-NOT COMPLETE: a full `subpath-desktop` regression after the 12 px change was started and stopped by the memory guard at 81 of 1714 tests (no failures in those). It was not restarted. This is recorded as an evidence gap, not a pass.
+The single full `subpath-desktop` regression after the 12 px change was stopped by the memory guard at 81 of 1714 tests and was not repeated as one run; it was replaced by bounded batches (see the final closure section below).
 
 Open items: GL-07.1 lowercase "loans" in the EMI breadcrumb (owner decision; capitalising changes BreadcrumbList JSON-LD and conflicts with QA-04.2); Flashcards desktop CLS 0.143 (cause not determined); categories CLS 0.075; `loans` category page keeps the old green hero art (P3); sliders lack aria-valuetext (P3); All Tools shows "Coming soon" category labels; screen reader testing NOT VERIFIED; Lighthouse single-run on 3 pages only; mobile family specs for calculators, Time and Developer tools not run; P0 matrix: doc 22 (29 PASS, 44 PARTIAL, 28 NOT RUN, 1 FAIL of 102).
+
+## Master Prompt 3 final closure (2026-10-30): verdict AMBER
+
+Owner decisions applied: breadcrumb category label "Loans" with the matching BreadcrumbList name only (narrow QA-04.2 exception, recorded in rule 4.6, doc 17 and doc 20; rules changed: that one sentence in 4.6). Nothing pushed, deployed or published.
+
+Corrections (local commits `00b5a10` and the closure commit):
+- Breadcrumb label: `displayCategory()` in the central component; visible text and JSON-LD agree; URLs, hierarchy and canonicals unchanged. Unit, DOM baseline and navigation expectations updated.
+- URL Parser: the invisible radios now fill their labels. After the tool container widening (8dd0a77) the 1px radio sat at a fractional offset under its label, so `check()` could not reach it; a real click worked. Spec 18/18 on desktop and mobile.
+- Flashcards CLS 0.1427 to 0.0001 at 1280 px (also 0.0000-0.0001 at 960, 768, 390, 320): the placeholder was one line and the mounted deck chooser 440-1010 px tall, pushing the explanation sections down. Space is reserved only while the placeholder is the sole child, scoped to Flashcards.
+- Link crawl: waits for network idle before counting; baseline holds the settled counts (3 lab pages +1 link each; all existing routes). Stable over three runs and on root-desktop.
+- 12 DOM baselines and the SEO record reviewed (icons to SVG, Unsplash and hero image removed, placeholder social links removed, 404 nav and search, All Tools rail with the same 66 links) and updated; only `visibleTextChars` changed in the SEO record.
+
+Measured, no change made: Categories CLS 0.075-0.078 on desktop (script-rendered cards push the "Can't find what you need?" search down 305 px; mobile 0.0000; under the 0.1 threshold, so left as is).
+
+Accessibility (sampled, built pages): nav link 7.63:1; card text 17.49:1 (9.93:1 hover); focus rings 18.22:1 (card), 8.77:1 (footer on dark), 7.9:1 (button); input border 4.8:1, invalid 6.47:1; JSON error text 5.91:1; disabled Copy output 2.01:1 (WCAG-exempt, distinct from enabled 17.49:1); invalid fields on EMI, GST and SIP have aria-invalid and a visible message linked by aria-describedby. Sliders (spacing exception) and inline "Load an example" (inline exception) keep their documented exceptions. Screen readers: NOT VERIFIED.
+
+Regression, run as bounded sequential batches (one worker, RAM checked before each, records in the batch log): all 73 non-visual spec files ran on `subpath-desktop` after the last CSS change (A1 152, A2 201, A3 155, B 150, C1 161, C2 130+, D 135, E 136, F 266+, G1 77, and re-runs below); `visual` is covered by its three projects (desktop 39, mobile 39, tablet 20, all stable). Mobile working-state batches on `subpath-mobile`: calculators 146, Time Tools 104, Developer Tools 145, Flashcards and learning 54, URL Parser 18, navigation 44. Unit 3623 tests, 3619 pass, 0 fail, 4 skipped. `test:static` passes. 320 px sweep: overflow 0 on 20 pages; no external requests.
+
+Open and recorded:
+- World Clock has an intermittent failure (a different width or step each full-file run; passes alone most of the time). The same block also failed 1 of 4 runs on the pre-programme commit 0c2ffe9 in an isolated comparison, so it is not shown to be introduced by this programme; the failure rate was not shown to be identical.
+- World Clock on mobile: the test "Add puts the city on the board ..." fails (scrollY moves 19-20 px because the search hint shrinks from two lines to one). It fails identically on 0c2ffe9, so it is pre-existing and was not fixed.
+- Not run: TX-04 (stopwatch CLS, World Clock node count), IX-06 (reduced motion), IX-08, focus order on the All Tools rail, full all-pages JSON-LD diff, Safari and real Android, Lighthouse beyond 3 pages.
+- Visual baselines still carry the lowercase breadcrumb pixels inside the comparison tolerance; they were not regenerated for a one-letter change.
+- GL-07.1 closed by the owner decision.
+
+Incident: while removing a temporary comparison worktree, `git worktree remove --force` followed a junction I had created and emptied the real `node_modules`. It was restored with `npm ci` from the unchanged lockfile (327 packages; Playwright 1.63.0, Eleventy 3.1.6, Lighthouse 12.8.2; `package.json` and `package-lock.json` unchanged) and the suites above were run after the restore. A second comparison used a nested worktree with no junction.

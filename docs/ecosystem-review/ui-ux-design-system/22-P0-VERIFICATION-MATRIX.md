@@ -4,7 +4,7 @@ Master Prompt 3, independent QA, 2026-10-30. Covers the 50 P0 requirements and t
 
 Status key: PASS = measured or asserted by a test in this programme; PARTIAL = checked on a sample or in part; FAIL = measured and failing; NOT RUN = not measured in this pass. No criterion is marked PASS without evidence. Screen-reader testing is NOT VERIFIED.
 
-Totals: FAIL 1, NOT RUN 28, PARTIAL 44, PASS 29 (of 102).
+Totals: NOT RUN 23, PARTIAL 49, PASS 30 (of 102).
 
 | Criterion | Text | Status | Evidence | Limitation |
 |---|---|---|---|---|
@@ -21,7 +21,7 @@ Totals: FAIL 1, NOT RUN 28, PARTIAL 44, PASS 29 (of 102).
 | BR-04.4 | Computed font-family of the header, legal pages and body resolves to the same family. | PARTIAL | body and header use the same family on sampled pages | legal pages not computed individually |
 | BR-06.1 | No emoji or Unicode symbol glyph (for example the abacus, calendar, picture and page emoji on the home cards) is used as an icon in generated HTML. | PASS | dist scan of built .html/.js (data files excluded): zero rendered emoji after fixes to categories, loans, loan-comparison | data-file icon strings are unrendered by design |
 | BR-06.2 | Icon-only buttons have an accessible name. | PARTIAL | Lighthouse accessibility 100 on 3 pages; accessibility specs pass | not an exhaustive scan of every icon-only button |
-| BR-09.1 | A scripted pass over the shared layer finds no text colour below 4.5:1 and no control border below 3:1 against its surface. | NOT RUN | Lighthouse a11y 100 on home, EMI, article only | no scripted shared-layer contrast pass; hover, focus, disabled and error states not measured |
+| BR-09.1 | A scripted pass over the shared layer finds no text colour below 4.5:1 and no control border below 3:1 against its surface. | PARTIAL | measured on built pages: rest, hover, focus, error and disabled states (see ledger); Lighthouse a11y 100 on 3 pages | no scripted pass over the whole shared layer |
 | BR-09.2 | Brand-green-as-text occurrences listed in design-follow-ups.md section 1 are all resolved or recorded as large text or non-text. | NOT RUN |  | green-as-text list not re-walked |
 | GL-01.1 | Every generated page has exactly one banner landmark and one main landmark. | PARTIAL | navigation and accessibility specs; one h1 and one main on 54 tool pages | banner count not asserted site-wide |
 | GL-01.2 | The active section link has aria-current and a non-colour cue (underline or weight). | PASS | navigation.spec asserts aria-current=page; underline visible in screenshots |  |
@@ -38,7 +38,7 @@ Totals: FAIL 1, NOT RUN 28, PARTIAL 44, PASS 29 (of 102).
 | GL-04.3 | At 1280 px the card grid is at least 720 px wide. | NOT RUN |  | grid width at 1280 not measured |
 | GL-05.1 | At 320 px every section is reachable by tap and by keyboard without horizontal page scroll. | PARTIAL | All Tools chips visible at 390; 320 sweep overflow 0 | keyboard reach not run |
 | GL-05.2 | Chip hit areas are at least 44 px tall. | PARTIAL | 44 px chip targets measured on a sampled page |  |
-| GL-07.1 | EMI Calculator breadcrumb shows 'Loans' (title case) in generated HTML. | FAIL | EMI breadcrumb shows lowercase "loans" (category used as given) | DEFECT D-GL07: capitalising would change BreadcrumbList JSON-LD, conflicting with QA-04.2; owner decision required |
+| GL-07.1 | EMI Calculator breadcrumb shows 'Loans' (title case) in generated HTML. | PASS | EMI and Loan Comparison breadcrumbs render "Loans" (DOM baselines, navigation spec desktop and mobile, unit tests); BreadcrumbList level-3 name is title case on every page (dist scan); owner decision 2026-10-30 |  |
 | GL-07.2 | At 320 px the breadcrumb does not cause horizontal page scroll on any tool page. | PARTIAL | 320 px sweep: overflow 0 on sampled tool pages | not every tool page |
 | GL-08.1 | Article text measure is between 60 and 75 characters at 1280 px. | PASS | measure capped at 35rem: 560 px, about 68-74 chars a line; articles.spec regression test |  |
 | GL-08.2 | Text Diff and JSON Compare use the workspace width class; calculators use standard. | NOT RUN |  | workspace width class not asserted |
@@ -85,24 +85,24 @@ Totals: FAIL 1, NOT RUN 28, PARTIAL 44, PASS 29 (of 102).
 | CT-06.1 | Requesting a missing URL returns 404 and the page contains a navigation landmark and a search field. | PASS | 404 has a labelled nav and a search form; notfound spec (subpath and root, new test) |  |
 | IX-01.1 | Every button in the shared layer is at least 44 px tall. | PARTIAL | 44 px measured on sampled pages and file inputs; coarse-pointer rules | not every shared-layer button |
 | IX-01.2 | Primary and secondary are distinguishable in greyscale (fill versus outline). | NOT RUN |  | greyscale distinction not rendered |
-| IX-02.1 | No enabled button uses the disabled token pair. | NOT RUN |  |  |
+| IX-02.1 | No enabled button uses the disabled token pair. | PARTIAL | sampled enabled buttons measure 17.49:1; the disabled Copy output button measures 2.01:1 (WCAG-exempt, distinct) | not every button audited |
 | IX-02.2 | Each variant has all listed states in the component sheet. | NOT RUN |  | component sheet states not checked |
 | IX-03.1 | The set of tools with a Calculate button is identical before and after the programme. | PARTIAL | no tool changed its calculate behaviour (protected-path diff) | before and after set not diffed |
-| IX-04.1 | Input border contrast against its surface is at least 3:1. | NOT RUN |  | input border contrast not measured |
-| IX-04.2 | Every invalid field has aria-invalid and an error message linked by aria-describedby. | PARTIAL | validation covered by calculator specs | aria-describedby not audited site-wide |
+| IX-04.1 | Input border contrast against its surface is at least 3:1. | PARTIAL | input border contrast 4.8:1 (EMI input), 6.47:1 invalid state; JSON error message text 5.91:1 | sampled on EMI and JSON Formatter, not every input |
+| IX-04.2 | Every invalid field has aria-invalid and an error message linked by aria-describedby. | PARTIAL | invalid fields on EMI, GST and SIP carry aria-invalid and a visible message linked by aria-describedby | three calculators; not every tool |
 | IX-05.1 | Tabbing through the home page shows a visible ring on every stop. | PARTIAL | accessibility spec keyboard coverage | full home tab-through not run |
-| IX-05.2 | Ring contrast is at least 3:1 on page background, card and footer. | NOT RUN |  | ring contrast not measured |
+| IX-05.2 | Ring contrast is at least 3:1 on page background, card and footer. | PARTIAL | focus ring contrast: 18.22:1 on a card on the page background, 8.77:1 on a footer link on dark, 7.9:1 on a button | sampled; card ring is 1px wide |
 | IX-06.1 | With reduced motion enabled no transition longer than 0 ms runs. | NOT RUN |  |  |
 | IX-06.2 | No animation uses width, height, top or left. | NOT RUN |  |  |
 | IX-08.1 | Each alert type has an icon and a lead word, so greyscale still conveys meaning. | NOT RUN |  |  |
 | QA-01.1 | Automated and manual checks in the checkpoint list no AA failure on the representative page set. | PARTIAL | Lighthouse accessibility 100 on home, EMI, article; a11y specs pass | no axe run; screen reader NOT VERIFIED |
 | QA-01.2 | Focused elements are not hidden behind the sticky header (scroll-padding set). | NOT RUN |  | sticky-header focus obscuring not tested |
-| QA-01.3 | Owner condition: contrast is verified on the built components (buttons, inputs, alerts, cards, selected states, footer) as rendered, not only on the p | NOT RUN |  | built-component contrast pass not done |
+| QA-01.3 | Owner condition: contrast is verified on the built components (buttons, inputs, alerts, cards, selected states, footer) as rendered, not only on the p | PARTIAL | contrast measured on buttons, inputs, error text, cards, nav and footer focus rings | alerts other than the JSON error and selected states not measured |
 | QA-02.1 | The same 20-page sample passes after every milestone that touches layout. | PARTIAL | 320 px sweep (20 pages) in this programme | not repeated after the final CSS change |
 | QA-03.1 | Measured transfer and request counts are within budget for home, All Tools, a calculator, a developer tool, an article and a legal page. | PARTIAL | static weights: CSS 647 KB, app JS 3675 KB, font 27 KB | request counts not measured; no budget numbers compared |
 | QA-03.2 | Lighthouse mobile performance is not lower than the recorded baseline on those pages. | PARTIAL | home 64 to 73, article 69 to 89, EMI 80 to 76 (single run vs median-of-3) | other pages not measured; single run |
 | QA-04.1 | The URL inventory check passes with 107 sitemap URLs. | PASS | test:static: 107 sitemap URLs |  |
-| QA-04.2 | A diff of titles, descriptions, canonicals and JSON-LD across all generated pages is empty. | PARTIAL | SEO baseline diff: only themeColor and visibleTextChars changed | baseline covers its page set, not all 110 |
+| QA-04.2 | A diff of titles, descriptions, canonicals and JSON-LD across all generated pages is empty. | PARTIAL | SEO record diff: only visibleTextChars changed on 4 pages; the one approved JSON-LD change is the category step name (exception recorded in doc 17 and rule 4.6) | full all-pages JSON-LD diff against the base was not produced |
 | QA-05.1 | No generated page contacts a host other than the site itself (analytics after consent excepted). | PASS | dist scan and runtime sweeps: no non-self host |  |
 | QA-05.2 | assets/js/analytics.js and src/_data/site.js are unchanged. | PASS | analytics.js and site.js unchanged since base 0c2ffe9 |  |
 | QA-06.1 | package.json dependencies are unchanged. | PASS | package.json unchanged |  |

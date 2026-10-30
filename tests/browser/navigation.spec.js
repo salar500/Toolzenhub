@@ -387,8 +387,8 @@ test.describe("M6 category hierarchy in the breadcrumbs @portable", () => {
       await go(`calculators/${slug}/`);
       await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
       const crumb = page.locator(".calculator-breadcrumb");
-      expect(await crumb.locator("a, strong").allTextContents().then((t) => t.map((x) => x.trim()))).toEqual(["Home", "Calculators", "loans", title]);
-      await crumb.getByRole("link", { name: "loans" }).click();
+      expect(await crumb.locator("a, strong").allTextContents().then((t) => t.map((x) => x.trim()))).toEqual(["Home", "Calculators", "Loans", title]);
+      await crumb.getByRole("link", { name: "Loans" }).click();
       await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}loans.html`);
       await expect(page.locator(`#loans-calculators-grid a[href$="calculators/${slug}/"]`)).toHaveCount(1);
       // the section link goes to the categories page
