@@ -4,7 +4,7 @@ Master Prompt 3, independent QA, 2026-10-30. Covers the 50 P0 requirements and t
 
 Status key: PASS = measured or asserted by a test in this programme; PARTIAL = checked on a sample or in part; FAIL = measured and failing; NOT RUN = not measured in this pass. No criterion is marked PASS without evidence. Screen-reader testing is NOT VERIFIED.
 
-Totals: NOT RUN 23, PARTIAL 49, PASS 30 (of 102).
+Totals: NOT RUN 13, PARTIAL 55, PASS 34 (of 102).
 
 | Criterion | Text | Status | Evidence | Limitation |
 |---|---|---|---|---|
@@ -25,7 +25,7 @@ Totals: NOT RUN 23, PARTIAL 49, PASS 30 (of 102).
 | BR-09.2 | Brand-green-as-text occurrences listed in design-follow-ups.md section 1 are all resolved or recorded as large text or non-text. | NOT RUN |  | green-as-text list not re-walked |
 | GL-01.1 | Every generated page has exactly one banner landmark and one main landmark. | PARTIAL | navigation and accessibility specs; one h1 and one main on 54 tool pages | banner count not asserted site-wide |
 | GL-01.2 | The active section link has aria-current and a non-colour cue (underline or weight). | PASS | navigation.spec asserts aria-current=page; underline visible in screenshots |  |
-| GL-01.3 | Header height at 320, 390 and 1280 px matches the specified values within 2 px. | NOT RUN |  | header heights not re-measured in MP3 (earlier report only) |
+| GL-01.3 | Header height at 320, 390 and 1280 px matches the specified values within 2 px. | PASS | navigation.spec asserts 56 px and not sticky at 390, 64 px and sticky at 1280; measured 56/56/64 at 320/390/1280 |  |
 | GL-02.1 | Generated HTML contains no href='#' in the footer. | PASS | dist scan: footer href="#" count 0 |  |
 | GL-02.2 | Footer section links equal the catalog sections with no hard-coded list. | PARTIAL | footer renders sections from the catalog on sampled pages | hard-coded list absence not audited |
 | GL-02.3 | Owner condition: any social link that remains points to a destination the owner has verified; no account or URL is invented, and unsupported links are | PARTIAL | no social links in the footer on sampled pages | owner verification record not applicable |
@@ -34,8 +34,8 @@ Totals: NOT RUN 23, PARTIAL 49, PASS 30 (of 102).
 | GL-03.3 | aria-expanded reflects state; the panel is not reachable by Tab when closed. | PARTIAL | aria-expanded asserted open and closed | unreachable-when-closed not asserted |
 | GL-03.4 | At 320 px no link text is clipped. | PARTIAL | 320 px sweep: no overflow on 20 pages | link clipping not individually inspected |
 | GL-04.1 | Rail section counts equal the catalog counts (19, 13, 17, 2, 3). | PARTIAL | counts visible on All Tools in screenshots | not asserted programmatically in MP3 |
-| GL-04.2 | Keyboard Tab order is rail then content; pressing a rail link moves focus to the section heading. | NOT RUN |  | rail focus order not run |
-| GL-04.3 | At 1280 px the card grid is at least 720 px wide. | NOT RUN |  | grid width at 1280 not measured |
+| GL-04.2 | Keyboard Tab order is rail then content; pressing a rail link moves focus to the section heading. | PASS | first Tab after the heading reaches the rail; Enter on a rail link moves focus to the section heading (navigation.spec) |  |
+| GL-04.3 | At 1280 px the card grid is at least 720 px wide. | PASS | content grid measured 968 px at 1280 (at least 720) | 960 px width not measured |
 | GL-05.1 | At 320 px every section is reachable by tap and by keyboard without horizontal page scroll. | PARTIAL | All Tools chips visible at 390; 320 sweep overflow 0 | keyboard reach not run |
 | GL-05.2 | Chip hit areas are at least 44 px tall. | PARTIAL | 44 px chip targets measured on a sampled page |  |
 | GL-07.1 | EMI Calculator breadcrumb shows 'Loans' (title case) in generated HTML. | PASS | EMI and Loan Comparison breadcrumbs render "Loans" (DOM baselines, navigation spec desktop and mobile, unit tests); BreadcrumbList level-3 name is title case on every page (dist scan); owner decision 2026-10-30 |  |
@@ -58,9 +58,9 @@ Totals: NOT RUN 23, PARTIAL 49, PASS 30 (of 102).
 | DS-06.2 | No coming-soon entry is rendered or linked. | PARTIAL | no coming-soon tool linked; category labels "Coming soon" (Health, Converter) are rendered | owner note needed on the labels |
 | DS-06.3 | The sitemap and canonical for /tools.html are unchanged. | PASS | SEO baseline: canonical and title unchanged for tools.html |  |
 | DS-07.1 | Cards contain exactly one link. | PARTIAL | tool cards on home and Time Tools hold one link; All Tools lists grouped text links, not cards | criterion wording does not match the directory layout |
-| DS-07.2 | Card hover and focus states do not change card dimensions. | NOT RUN |  | hover and focus dimension stability not measured |
+| DS-07.2 | Card hover and focus states do not change card dimensions. | PARTIAL | home popular-calculator card 405.3x110 and category card 236.8x150.1 identical at rest, hover and focus | two card types only |
 | DS-08.1 | Searching '<b>x' shows the characters literally. | PASS | "<b>x" search is escaped, not injected |  |
-| DS-08.2 | The no-result state offers all five section links. | NOT RUN |  | five section links in the no-result state not checked |
+| DS-08.2 | The no-result state offers all five section links. | PASS | navigation.spec: no-match search shows the echoed query as text, the five section links and Clear search |  |
 | DS-10.1 | No generated page links to a non-existent tool or article route. | PASS | test:static: link check and 107 live pages pass |  |
 | TX-01.1 | Every tool page shows exactly one h1 and a privacy note reviewed against its spec. | PARTIAL | 54 tool pages: exactly one h1 and one main | privacy note vs spec not re-reviewed |
 | TX-01.2 | Frame renders without horizontal scroll at 320 px for all 54 tools (sampled by family at the checkpoint). | PARTIAL | 320 px sweep on sampled tool pages, overflow 0 | not all 54 |
@@ -79,7 +79,7 @@ Totals: NOT RUN 23, PARTIAL 49, PASS 30 (of 102).
 | TX-07.2 | Export, Import and Reset look enabled once saving is on. | PARTIAL | file-input fix keeps Import and Export visible; learning-widths pass | enabled-looking state not asserted |
 | TX-08.1 | A touched tool stylesheet contains no new colour literal and no button rule that duplicates the shared button. | NOT RUN |  | new colour-literal audit not run |
 | CT-03.1 | At 320 px every table scrolls inside its region and the page does not. | PARTIAL | scroll cue added and measured on sampled tables | not every table at 320 px |
-| CT-03.2 | Amortization tables remain keyboard scrollable. | NOT RUN |  | keyboard scroll of amortization tables not run |
+| CT-03.2 | Amortization tables remain keyboard scrollable. | PARTIAL | EMI yearly table sits in a focusable (tabindex 0) labelled region that scrolls at 390 | other calculators not checked |
 | CT-05.1 | Computed font-family on Privacy, Terms and Disclaimer matches the site body font. | PARTIAL | legal pages use the body font on sampled pages |  |
 | CT-05.2 | Page text is byte-identical apart from markup structure (no wording change). | PARTIAL | privacy and terms wording changed only by the owner-approved Unsplash disclosure update | byte-diff not produced |
 | CT-06.1 | Requesting a missing URL returns 404 and the page contains a navigation landmark and a search field. | PASS | 404 has a labelled nav and a search form; notfound spec (subpath and root, new test) |  |
@@ -92,11 +92,11 @@ Totals: NOT RUN 23, PARTIAL 49, PASS 30 (of 102).
 | IX-04.2 | Every invalid field has aria-invalid and an error message linked by aria-describedby. | PARTIAL | invalid fields on EMI, GST and SIP carry aria-invalid and a visible message linked by aria-describedby | three calculators; not every tool |
 | IX-05.1 | Tabbing through the home page shows a visible ring on every stop. | PARTIAL | accessibility spec keyboard coverage | full home tab-through not run |
 | IX-05.2 | Ring contrast is at least 3:1 on page background, card and footer. | PARTIAL | focus ring contrast: 18.22:1 on a card on the page background, 8.77:1 on a footer link on dark, 7.9:1 on a button | sampled; card ring is 1px wide |
-| IX-06.1 | With reduced motion enabled no transition longer than 0 ms runs. | NOT RUN |  |  |
-| IX-06.2 | No animation uses width, height, top or left. | NOT RUN |  |  |
-| IX-08.1 | Each alert type has an icon and a lead word, so greyscale still conveys meaning. | NOT RUN |  |  |
+| IX-06.1 | With reduced motion enabled no transition longer than 0 ms runs. | PARTIAL | a prefers-reduced-motion block exists in base/accessibility.css (4 CSS files) | no browser run with reduced motion emulated |
+| IX-06.2 | No animation uses width, height, top or left. | PARTIAL | CSS scan: no transition on width, height, top, left, margin or padding; keyframes are in animations.css | keyframe properties not audited one by one |
+| IX-08.1 | Each alert type has an icon and a lead word, so greyscale still conveys meaning. | PARTIAL | shared calculator error carries a drawn bold lead word and aria-invalid/aria-describedby links (emi.spec) | icon not added; success, warning and info variants not unified |
 | QA-01.1 | Automated and manual checks in the checkpoint list no AA failure on the representative page set. | PARTIAL | Lighthouse accessibility 100 on home, EMI, article; a11y specs pass | no axe run; screen reader NOT VERIFIED |
-| QA-01.2 | Focused elements are not hidden behind the sticky header (scroll-padding set). | NOT RUN |  | sticky-header focus obscuring not tested |
+| QA-01.2 | Focused elements are not hidden behind the sticky header (scroll-padding set). | PARTIAL | scroll-padding-top is the header height plus 8 px (measured 64 px at 390, which is 56 + 8) | no scripted check that a focused control is never hidden under the sticky header |
 | QA-01.3 | Owner condition: contrast is verified on the built components (buttons, inputs, alerts, cards, selected states, footer) as rendered, not only on the p | PARTIAL | contrast measured on buttons, inputs, error text, cards, nav and footer focus rings | alerts other than the JSON error and selected states not measured |
 | QA-02.1 | The same 20-page sample passes after every milestone that touches layout. | PARTIAL | 320 px sweep (20 pages) in this programme | not repeated after the final CSS change |
 | QA-03.1 | Measured transfer and request counts are within budget for home, All Tools, a calculator, a developer tool, an article and a legal page. | PARTIAL | static weights: CSS 647 KB, app JS 3675 KB, font 27 KB | request counts not measured; no budget numbers compared |

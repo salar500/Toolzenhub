@@ -24,6 +24,23 @@ html {
     --header-offset: 64px;
 }
 
+/* GL-01: 56 px on phones, not sticky so the working area keeps its height; 64 px and sticky from 960 px.
+   The sticky element is #header, whose parent is the whole page: .site-header alone could not stick,
+   because its own parent (#header) is only as tall as the bar. */
+@media (max-width: 959px) {
+    :root {
+        --header-offset: 56px;
+    }
+}
+
+@media (min-width: 960px) {
+    #header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+}
+
 /* =========================================================
    Header bar
 ========================================================= */

@@ -166,3 +166,19 @@ Open and recorded:
 - GL-07.1 closed by the owner decision.
 
 Incident: while removing a temporary comparison worktree, `git worktree remove --force` followed a junction I had created and emptied the real `node_modules`. It was restored with `npm ci` from the unchanged lockfile (327 packages; Playwright 1.63.0, Eleventy 3.1.6, Lighthouse 12.8.2; `package.json` and `package-lock.json` unchanged) and the suites above were run after the restore. A second comparison used a nested worktree with no junction.
+
+## Final quality closure (2026-10-31): verdict AMBER
+
+Scope: the autonomous closure prompt. Nothing was pushed, deployed or published.
+
+Fixed (verified defects against the spec, GL-01, GL-04, DS-08, IX-08):
+- Header: 56 px on phones (not sticky) and 64 px from 960 px, where `#header` is now sticky. Before, the bar was 64 px everywhere and did not stay at the top, although the All Tools rail assumed it did. `--header-offset` follows the breakpoint, so the mobile panel and `scroll-padding-top` follow it too.
+- All Tools: a rail link moves focus to its section heading. A no-match search lists the section links (taken from the page's own section index) next to Clear search.
+- Shared calculator error shows a drawn bold lead word ("Check this:"); the element text is unchanged.
+- New tests: navigation.spec (header height and sticky, rail focus, no-match links) and emi.spec (error feedback). Mobile and tablet baselines (59) were re-reviewed at contact-sheet scale and updated for the 8 px header change; desktop baselines are unchanged (39/39).
+
+Verification after these changes (bounded, one worker): navigation + emi 67 passed on desktop and mobile; accessibility, dom-baseline, seo-baseline and links 50 passed on desktop; visual 39/39 desktop, 39/39 mobile, 20/20 tablet.
+
+World Clock flake (classification: resource-sensitive timing in test synchronisation, pre-existing). The "readable rows, Clear search" block fails intermittently at one narrow width with "Element is not attached" or a 45 s `scrollIntoViewIfNeeded` timeout in `expectReadableRows`. It passed alone on the base commit 3 of 4 times and failed identically on 0c2ffe9 under load; the page was stable when probed with and without the fake clock. No test change was made: the safe fix (wait for the explore list's `data-pending` to clear) was not established by a passing repeat run, and the run budget does not allow repeats. Affected: that block at 320, 360 and 390. Not marked PASS. Separately, "Add puts the city on the board" (mobile) fails because the search hint changes from 2 lines to 1 and scrollY moves about 20 px; also pre-existing on 0c2ffe9.
+
+Matrix after ten criteria were re-evidenced: 34 PASS, 55 PARTIAL, 13 NOT RUN, 0 FAIL (102). Still NOT RUN: BR-03.1/2/3 (favicon), BR-09.2, GL-08.2, GL-09.1, DS-05.1, TX-02.3, TX-04.1, TX-04.2, TX-08.1, IX-01.2, IX-02.2. TX-02.3 found no jump link on EMI at 390; that needs a spec decision, not a guess.

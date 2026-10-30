@@ -363,3 +363,18 @@ test.describe("EMI calculator", () => {
     });
   }
 });
+
+test.describe("EMI calculator: error feedback", () => {
+  test("an invalid amount shows a message with a drawn lead word, linked to the field", async ({ page, go }) => {
+    await go("calculators/emi/");
+    await page.locator("#emi-loan").fill("-5");
+    await page.locator("#emi-loan").press("Tab");
+    const error = page.locator("#emi-results-error");
+    await expect(error).toBeVisible();
+    await expect(error).toHaveText(/must be between/);
+    await expect(page.locator("#emi-loan")).toHaveAttribute("aria-invalid", "true");
+    await expect(page.locator("#emi-loan")).toHaveAttribute("aria-describedby", /emi-results-error/);
+    const lead = await error.evaluate((el) => getComputedStyle(el, "::before").content);
+    expect(lead).toContain("Check this");
+  });
+});

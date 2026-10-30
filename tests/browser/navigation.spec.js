@@ -697,3 +697,37 @@ test.describe("home page rows on a phone", () => {
     expect(scrollers).toEqual([]);
   });
 });
+
+test.describe("header and All Tools section index (Design System 2.0, GL-01 and GL-04)", () => {
+  test("the header is 56px on a phone and not sticky, and 64px and sticky from 960px", async ({ page, go }) => {
+    for (const [width, height, sticky] of [[390, 56, false], [1280, 64, true]]) {
+      await page.setViewportSize({ width, height: 800 });
+      await go("tools.html");
+      const bar = page.locator(".site-header");
+      expect(Math.round((await bar.boundingBox()).height), `${width}px header height`).toBe(height);
+      await page.evaluate(() => window.scrollTo(0, 900));
+      const top = Math.round((await bar.boundingBox()).y);
+      if (sticky) expect(top, "stays at the top while scrolling").toBe(0);
+      else expect(top, "scrolls away on a phone").toBeLessThan(0);
+    }
+  });
+
+  test("a section link in the All Tools rail moves focus to that section's heading", async ({ page, go }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await go("tools.html");
+    const link = page.locator("a.directory-rail__link", { hasText: "Time Tools" }).first();
+    await link.focus();
+    await page.keyboard.press("Enter");
+    await expect(page.locator("#directory-time-tools-heading")).toBeFocused();
+  });
+
+  test("a search with no match offers the five sections and a way back", async ({ page, go }) => {
+    await go("tools.html?q=zzzzqq");
+    const box = page.locator("#tools-results");
+    await expect(box).toContainText("No tools found");
+    const links = box.locator(".directory-results__sections a");
+    await expect(links).toHaveCount(5);
+    await expect(links).toContainText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools"]);
+    await expect(box.getByRole("link", { name: "Clear search" })).toBeVisible();
+  });
+});

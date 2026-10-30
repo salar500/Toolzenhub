@@ -59,6 +59,25 @@ function resultCard(entry) {
 }
 
 
+/* The section links of the no-result message, taken from the page's own section index (the rail or the chips),
+   so a section added to the catalog appears here without a second list. */
+function sectionLinks() {
+
+    const links = [...document.querySelectorAll("a.directory-rail__link")].map(a => {
+
+        const name = a.querySelector(".directory-rail__name");
+
+        return `<a href="${escapeHTML(a.getAttribute("href") || "")}">${escapeHTML((name ? name.textContent : a.textContent).trim())}</a>`;
+
+    });
+
+    return links.length
+        ? `<p class="directory-results__sections">Browse by section: ${links.join("")}</p>`
+        : "";
+
+}
+
+
 export async function initializeToolsSearch() {
 
     const params =
@@ -79,6 +98,27 @@ export async function initializeToolsSearch() {
     if (!input || !results || !directory) {
         return;
     }
+
+    /* A section link (the rail on a wide screen, the chips on a phone) scrolls to its heading; focus moves there
+       too, so a keyboard or screen-reader user continues from the section they chose, not from the link. */
+    document.addEventListener("click", event => {
+
+        const link = event.target.closest && event.target.closest("a.directory-rail__link");
+
+        if (!link) {
+            return;
+        }
+
+        const heading = document.getElementById((link.getAttribute("href") || "").replace(/^#/, ""));
+
+        if (!heading) {
+            return;
+        }
+
+        heading.setAttribute("tabindex", "-1");
+        heading.focus({ preventScroll: true });
+
+    });
 
     input.value = query;
 
@@ -112,6 +152,8 @@ export async function initializeToolsSearch() {
                         No tools found for “${shown}”.
                         Try another search, or browse all tools below.
                     </p>
+
+                    ${sectionLinks()}
 
                     <a
                         href="${ROUTES.tools}"

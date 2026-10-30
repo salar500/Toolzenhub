@@ -458,3 +458,10 @@
     }
 
 }
+
+/* Design System 2.0 (IX-08): an error carries a bold lead word, so it reads as an error without colour.
+   The text of the element is unchanged (only its drawn content), so tools and tests that read the message are unaffected. */
+.calculator-results__error::before {
+    content: "Check this: ";
+    font-weight: 750;
+}
