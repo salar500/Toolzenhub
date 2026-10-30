@@ -403,7 +403,8 @@ test.describe("Old vs New Tax Regime Calculator in the site", () => {
   test("the Tax category lists GST and the new tool, with no Coming soon card; All Calculators shows it as a link", async ({ page, go, siteRoot }) => {
     await go("tax.html");
     const links = await page.locator("a.category-page-card, a.calculator-card").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
-    expect(links).toEqual([`${siteRoot}calculators/gst/`, `${siteRoot}calculators/income-tax/`]);
+    // Gratuity and Salary were published after this was written; the Tax category now lists all four, in catalog order
+    expect(links).toEqual([`${siteRoot}calculators/gst/`, `${siteRoot}calculators/income-tax/`, `${siteRoot}calculators/gratuity/`, `${siteRoot}calculators/salary-in-hand/`]);
     await expect(page.locator(".category-page-card--soon")).toHaveCount(0);
     await go("calculators.html");
     await expect(page.locator(`#calculators-grid a.calculator-card[href='${siteRoot}calculators/income-tax/']`)).toContainText("Old vs New Tax Regime Calculator");

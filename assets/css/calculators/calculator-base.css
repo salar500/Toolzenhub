@@ -663,8 +663,11 @@
 }
 
 /* The native file picker button looks like the other secondary buttons */
-input[type="file"] {
+input[type="file"]:not(.lx-sr-only) {
     min-height: var(--target-size);
+}
+
+input[type="file"] {
     font-family: var(--font-family);
     color: var(--ink);
 }

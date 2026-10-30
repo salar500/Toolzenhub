@@ -529,13 +529,19 @@ export function mountExplore(panel, context) {
             const columns = Math.max(1, getComputedStyle(list).gridTemplateColumns.split(" ").length);
 
             /* a drawn row's real height (names and times wrap differently on every width) beats a fixed guess */
-            const drawn = list.querySelector(".wc-xrow");
+            /* the average of the rows drawn so far, not the first one: a long place name wraps and makes one row taller than the rest */
+            const drawnRows = Array.from(list.querySelectorAll(".wc-xrow"));
 
-            const measured = drawn ? drawn.getBoundingClientRect().height : 0;
+            const measured = drawnRows.length
+                ? drawnRows.reduce((sum, row) => sum + row.getBoundingClientRect().height, 0) / drawnRows.length
+                : 0;
 
             const rowHeight = measured >= 60 && measured <= 400 ? measured : ROW_HEIGHT;
 
-            list.style.setProperty("--wc-pending-height", `${Math.ceil(pending / columns) * (rowHeight + ROW_GAP) - ROW_GAP}px`);
+            /* rows still to come = all the rows' grid rows minus the grid rows already drawn (rounding each part up on its own over-reserves a row when the columns do not divide evenly) */
+            const pendingRows = Math.ceil((drawnRows.length + pending) / columns) - Math.ceil(drawnRows.length / columns);
+
+            list.style.setProperty("--wc-pending-height", `${Math.max(0, pendingRows * (rowHeight + ROW_GAP))}px`);
 
             list.setAttribute("data-pending", "");
 

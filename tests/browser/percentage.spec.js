@@ -415,16 +415,18 @@ test.describe("Percentage Calculator", () => {
 });
 
 test.describe("Percentage publication", () => {
-  test("Math category section: Percentage is a live link; Ratio and Age stay Coming soon and are not links", async ({ page, go, siteRoot }) => {
-    await go("categories.html#math");
-    const section = page.locator("#math");
-    await expect(section).toBeVisible();
-    await expect(section.locator(`a.category-page-card[href='${siteRoot}calculators/percentage/']`)).toHaveCount(1);
-    await expect(section.locator(".category-page-card--soon")).toHaveCount(2);
-    await expect(section.locator(".category-page-card--soon")).toContainText(["Ratio Calculator", "Age Calculator"]);
-    await expect(section.locator(".category-page-card--soon a")).toHaveCount(0);
+  test("Math category: a card on the categories page leads to a page with Percentage live and Ratio and Age as Coming soon, not links", async ({ page, go, siteRoot }) => {
+    // categories with a live tool are cards; only categories with nothing live get a "Coming soon" detail section
+    await go("categories.html");
+    await expect(page.locator(`#categories-grid a.category-page-card[href='${siteRoot}math.html']`)).toHaveCount(1);
+    await expect(page.locator("#math")).toHaveCount(0);
     await expect(page.locator("a[href*='categories.html#more']")).toHaveCount(0);
-    await expect(page.locator("#math-heading")).toBeFocused();
+    await go("math.html");
+    await expect(page.locator(`a.category-page-card[href='${siteRoot}calculators/percentage/'], a.calculator-card[href='${siteRoot}calculators/percentage/']`)).toHaveCount(1);
+    const soon = page.locator(".category-page-card--soon, .calculator-card--soon");
+    await expect(soon).toHaveCount(2);
+    await expect(soon).toContainText(["Ratio Calculator", "Age Calculator"]);
+    await expect(page.locator(".category-page-card--soon a, .calculator-card--soon a")).toHaveCount(0);
   });
 
   test("Calculators listing: a live Percentage card, no Coming soon badge, no duplicate; Ratio and Age stay Coming soon", async ({ page, go, siteRoot }) => {
@@ -435,7 +437,7 @@ test.describe("Percentage publication", () => {
     await expect(page.locator("#calculators-grid .calculator-card:has-text('Percentage Calculator')")).toHaveCount(1);
     await expect(page.locator("#calculators-grid .calculator-card--soon:has-text('Ratio Calculator')")).toHaveCount(1);
     await expect(page.locator("#calculators-grid .calculator-card--soon:has-text('Age Calculator')")).toHaveCount(1);
-    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(12); // the catalog now has 12 Coming Soon calculators (this said 13 when it was written)
+    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(11); // the catalog now has 11 Coming Soon calculators (13, then 12, when this was written)
   });
 
   test("the three articles are listed under Math with no image block, and their pages render without a hero image", async ({ page, go, siteRoot }) => {

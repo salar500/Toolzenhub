@@ -235,7 +235,8 @@ test.describe("Time Tools related-tools pilot", () => {
   }
 
   test("pages outside the pilot still show no related section", async ({ page, go }) => {
-    for (const path of ["tools/stopwatch/", "tools/json-formatter/"]) {
+    // JSON Formatter joined the related-tools rollout with the Developer Tools (tests/browser/developer-tools-related.spec.js)
+    for (const path of ["tools/stopwatch/"]) {
       await go(path);
       await expect(page.locator(".related-section")).toHaveCount(0);
     }
