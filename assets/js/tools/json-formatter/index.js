@@ -606,6 +606,20 @@ export function init() {
     let liveTimer = null;
     let announceTimer = null;
 
+    function revealIfOffscreen(element) {
+
+        if (!element) {
+            return;
+        }
+
+        const box = element.getBoundingClientRect();
+
+        if (box.top < 0 || box.bottom > window.innerHeight) {
+            element.scrollIntoView({ block: "nearest" });
+        }
+
+    }
+
     /* the error the panel is showing, so Go to error knows where to go */
     let shownError = null;
 
@@ -789,6 +803,9 @@ export function init() {
 
             setStatus("invalid", message);
             announce(`${message} ${result.error.message}`);
+
+            /* a short phone may hide the result below the buttons: bring it into view only if it is not already (never while typing) */
+            revealIfOffscreen(document.querySelector("#jf-status"));
 
             return;
 

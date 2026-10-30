@@ -405,3 +405,22 @@ test.describe("Developer Tools in the site", () => {
     await expect(page.locator("main")).not.toContainText("JSON");
   });
 });
+
+test.describe("JSON Formatter & Validator: the error is discoverable on a short phone", () => {
+  test("Validate on invalid JSON leaves the one-line result inside the viewport and announced", async ({ page, go }) => {
+    await page.setViewportSize({ width: 320, height: 480 });
+    await open(page, go);
+    await input(page).fill('{"a": 1,}');
+    const validate = btn(page, "Validate");
+    await validate.scrollIntoViewIfNeeded();
+    // a person who taps Validate with the button low on the screen: the result would sit below the fold
+    await validate.evaluate((el) => window.scrollBy(0, el.getBoundingClientRect().bottom - (window.innerHeight - 8)));
+    await validate.click();
+    await expect(page.locator("#jf-status")).toContainText("Not valid JSON. Line 1, column 8.");
+    const box = await page.locator("#jf-status").boundingBox();
+    expect(box.y).toBeGreaterThanOrEqual(0);
+    expect(box.y + box.height).toBeLessThanOrEqual(480);
+    await expect(live(page)).toContainText("Not valid JSON"); // announced politely
+    await expect(input(page)).toHaveAttribute("aria-invalid", "true");
+  });
+});

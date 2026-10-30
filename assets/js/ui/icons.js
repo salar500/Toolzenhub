@@ -13,6 +13,8 @@ const PATHS = {
     search: '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',
     calculator: '<rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/>',
     calendar: '<rect x="4" y="5" width="16" height="16" rx="2.5"/><path d="M4 10h16M8 3v4M16 3v4"/>',
+    globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.500 3 14.500 0 18M12 3c-3 3.500-3 14.500 0 18"/>',
+    timer: '<circle cx="12" cy="13" r="8"/><path d="M12 13V9M9.500 2.500h5M12 5V2.500"/>',
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     code: '<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 6l-3 12"/>',
     image: '<rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5-5-8 8"/>',
@@ -49,6 +51,24 @@ const FOR = {
     more: "grid"
 };
 
+/* Where a section's one icon would make several tools look identical, the tool gets its own */
+const FOR_TOOL = {
+    "date-difference": "calendar",
+    "date-calculator": "calendar",
+    "business-days": "calendar",
+    "shift-planner": "calendar",
+    "meeting-planner": "calendar",
+    "time-zone-converter": "globe",
+    "world-clock": "globe",
+    "countdown-timer": "timer",
+    "pomodoro-timer": "timer",
+    "interval-timer": "timer",
+    "stopwatch": "timer",
+    "smart-flashcards": "book",
+    "photos-to-pdf": "image",
+    "image-compressor-resizer": "image"
+};
+
 export function iconSvg(name, size = 20) {
 
     const paths = PATHS[name] || PATHS.tool;
@@ -61,5 +81,12 @@ export function iconSvg(name, size = 20) {
 export function iconFor(id, size = 20) {
 
     return iconSvg(FOR[id] || "tool", size);
+
+}
+
+/* The icon for one tool: its own where it has one, otherwise its section's or category's */
+export function iconForTool(toolId, fallbackKey, size = 20) {
+
+    return FOR_TOOL[toolId] ? iconSvg(FOR_TOOL[toolId], size) : iconFor(fallbackKey, size);
 
 }

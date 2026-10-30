@@ -671,3 +671,15 @@ test.describe("search boxes share one look", () => {
     await expect(page.locator("#loans-search-input")).toHaveAttribute("aria-label", "Search loan calculators");
   });
 });
+
+test.describe("footer spacing", () => {
+  test("the footer content does not touch the footer's top edge", async ({ page, go }) => {
+    await go("");
+    const gap = await page.evaluate(() => {
+      const f = document.querySelector("footer");
+      const first = f.querySelector(".footer__main-grid > *");
+      return first.getBoundingClientRect().top - f.getBoundingClientRect().top;
+    });
+    expect(gap).toBeGreaterThanOrEqual(32);
+  });
+});

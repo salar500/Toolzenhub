@@ -22,6 +22,8 @@
 }
 
 .footer__main-grid {
+    padding-top: var(--space-12);
+    padding-bottom: var(--space-8);
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-8);

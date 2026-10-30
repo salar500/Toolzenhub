@@ -91,3 +91,27 @@ GREEN implemented and verified within the stated local evidence scope. AMBER imp
 - **Coverage honesty.** Families received: tokens (all), shared component fixes (all tool pages), icons (cards and listings), and a layout review at working state (the families above). They did not receive per-tool layout redesigns; none was needed after review for the families viewed. Not viewed in a working state: Photos to PDF, Split PDF, PDF Pages, Cron, JSONPath, JWT, Text Diff, List Comparer, Meeting Planner, Shift Planner, Time Zone Converter, the other four calculators' results states, Practice Labs other than the JSON lab.
 
 - **All-pages sweep (addendum).** Every tool and calculator page in the sitemap (54) at 320 px, in a real browser: 0 px horizontal overflow on all, no request to any host but our own, no uncaught script error. Under-40 px controls: the range sliders on Loan Comparison (native control, left), two inline "Load an example" buttons in a sentence (inline-link exception, left), the Flashcards import file input (now 44 px through `input[type=file]`). Mobile project run: pdf-tools and accessibility specs 72/72.
+
+## Master Prompt 3: independent testing and local closure (2026-10-30), verdict AMBER
+
+Re-verified at the start: `main`, HEAD `528d22f`, 10 commits ahead of `origin/main` (local information only), tree clean. Free RAM about 515 MB of 3962 MB, so one worker and one project at a time throughout.
+
+**Independently re-run this session:** `build:all` (110 pages per build); `test:static` (107 live pages, 17 Coming-soon entries not routed); full unit run 3623 tests, 3619 pass, 0 fail, 4 skipped; Playwright `navigation`, `accessibility`, `json-formatter`, `tool-controls` on `subpath-desktop` and `subpath-mobile`, 127 passed and 2 skipped each.
+
+| Ref | Observation or defect | Result |
+|---|---|---|
+| O1 | Phone: JSON validation result below the action row | FIXED. Status line is scrolled into view only when off-screen after an explicit Validate (never while typing). The live region already announced it and the input already had `aria-invalid`. Regression test fails without the fix and passes with it. |
+| O2 | Yearly tables scroll sideways with no cue | FIXED (shared). Edge shadows plus a one-line hint under 640 px; no column or value changed. |
+| O3 | Header and footer wider than tool content | FIXED (shared). Tool, listing and article containers now 1248 px content width, left edges match the header and footer at 1280 and 1440. |
+| O4 | One clock icon for all Time Tools | FIXED. Per-tool icons (calendar, globe, timer) through `iconForTool`; section and category fallbacks unchanged. |
+| D1 | Footer content touched the footer's top edge (padding 0) | FIXED, P2. Regression test added in `navigation.spec.js`. |
+| D2 | Breadcrumb, "View all" and directory links 17 to 20 px tall on phones | FIXED. 44 px on coarse pointers and under 760 px; inline links in sentences left alone (WCAG 2.2 inline exception). |
+| O5 | Native range sliders | NOT RE-MEASURED. Left as is; browser-drawn control, to be judged against 2.5.8 in a later pass. |
+| O6 | Inline "Load an example" controls | NOT A DEFECT in principle (inline exception); not individually re-measured. |
+| O7 to O10, O14 | Image, PDF, other Developer, Time and Lab working states; screen reader | DEFERRED, not exercised this session. No screen-reader testing has been done. |
+| O12 | Lighthouse and CLS | DEFERRED. Memory too low to run Chrome-based audits safely. |
+| O13 | Mobile `smoke` and `notfound`, `root-desktop` | DEFERRED, not run. |
+
+**Visual baselines (95 files).** `visual-desktop` was run in compare mode: 39 of 39 fail. Baselines were last touched by tool-pack commits before the redesign, so the whole set shows the old green design. Only `home` was reviewed (EXPECTED CHANGE, approved Design C; it exposed D1). The other 38 desktop, and all mobile and tablet baselines, are UNVERIFIED. No baseline was updated. Updating needs a reviewed batch per family and project.
+
+No engine, formula, parser, evaluator or URL change. Rules changed: none.

@@ -12,8 +12,8 @@
 
     .calculator-page {
         width: min(
-            100% - 24px,
-            1180px
+            100% - 32px,
+            1248px
         );
     }
 
@@ -37,8 +37,8 @@
     }
 
     .calculator-page {
-        width: calc(100% - 20px);
-        max-width: 1180px;
+        width: calc(100% - 32px);
+        max-width: 1248px;
         margin: 0 auto;
         box-sizing: border-box;
     }

@@ -74,7 +74,7 @@
 ========================================================= */
 
 .articles-container {
-    width: min(1180px, calc(100% - 32px));
+    width: min(1248px, calc(100% - 32px));
     margin: 0 auto;
 }
 

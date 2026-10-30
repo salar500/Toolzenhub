@@ -1,5 +1,5 @@
 
-import { iconFor } from "../ui/icons.js";export function renderCalculatorCard(
+import { iconForTool } from "../ui/icons.js";export function renderCalculatorCard(
     calculator,
     options = {}
 ) {
@@ -56,7 +56,7 @@ import { iconFor } from "../ui/icons.js";export function renderCalculatorCard(
                                 class="calculator-card__icon"
                                 aria-hidden="true"
                             >
-                                ${iconFor(String(calculator.category).toLowerCase())}
+                                ${iconForTool(id, String(calculator.category).toLowerCase())}
                             </div>
                         `
                         : ""
@@ -100,7 +100,7 @@ import { iconFor } from "../ui/icons.js";export function renderCalculatorCard(
                             class="calculator-card__icon"
                             aria-hidden="true"
                         >
-                            ${iconFor(String(calculator.category).toLowerCase())}
+                            ${iconForTool(id, String(calculator.category).toLowerCase())}
                         </div>
                     `
                     : ""

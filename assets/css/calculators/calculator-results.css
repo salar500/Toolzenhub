@@ -312,6 +312,46 @@
     overflow-x: auto;
 
     -webkit-overflow-scrolling: touch;
+
+    /* Design System 2.0: a soft edge shows where more columns are hidden. The white
+       layers scroll with the content and cover the shadow once an edge is reached. */
+    background:
+        linear-gradient(to right, var(--surface-card) 30%, rgba(255, 255, 255, 0)) left center / 32px 100% no-repeat local,
+        linear-gradient(to left, var(--surface-card) 30%, rgba(255, 255, 255, 0)) right center / 32px 100% no-repeat local,
+        radial-gradient(farthest-side at 0 50%, rgba(28, 25, 23, 0.22), rgba(28, 25, 23, 0)) left center / 12px 100% no-repeat scroll,
+        radial-gradient(farthest-side at 100% 50%, rgba(28, 25, 23, 0.22), rgba(28, 25, 23, 0)) right center / 12px 100% no-repeat scroll;
+}
+
+.calculator-results__table-wrapper:focus-visible {
+
+    outline: 2px solid var(--focus-ring);
+
+    outline-offset: 2px;
+}
+
+/* On a phone the table is wider than the screen: say so, once, and keep the line in view */
+@media (max-width: 640px) {
+
+    .calculator-results__table-wrapper::before {
+
+        content: "Scroll sideways to see every column";
+
+        display: block;
+
+        position: sticky;
+
+        left: 0;
+
+        width: max-content;
+
+        max-width: 100%;
+
+        padding: 6px 10px;
+
+        color: var(--ink-muted);
+
+        font-size: var(--font-xs);
+    }
 }
 
 
@@ -323,7 +363,7 @@
 
     border-collapse: collapse;
 
-    font-size: 12px;
+    font-size: 13px;
 }
 
 

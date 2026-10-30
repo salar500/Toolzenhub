@@ -14,7 +14,7 @@ import {
 } from "../ui/escape.js";
 
 
-import { iconFor } from "../ui/icons.js";
+import { iconForTool } from "../ui/icons.js";
 /*
  * `tool` is a catalog entry (title, description, icon, href,
  * available); `category` supplies the icon colour.
@@ -46,7 +46,7 @@ export function toolCardHtml(tool, category) {
                 "
                 aria-hidden="true"
             >
-                ${iconFor(category.iconKey || category.iconClass)}
+                ${iconForTool(tool.id, category.iconKey || category.iconClass)}
             </div>
 
 

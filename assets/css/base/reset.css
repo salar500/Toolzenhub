@@ -130,3 +130,22 @@ input[type="checkbox"],
 input[type="radio"] {
     accent-color: var(--accent);
 }
+
+
+/* Design System 2.0: navigation links meet the 44px touch target on phones and touch screens.
+   Desktop pointers keep the compact spacing. Inline links inside sentences are left alone
+   (the WCAG 2.2 inline exception). */
+@media (pointer: coarse), (max-width: 760px) {
+
+    .calculator-breadcrumb a,
+    .calculator-breadcrumb strong,
+    .related-section__heading a,
+    .section-link,
+    .directory-group__tools a,
+    .directory-group__title a,
+    .directory-section__title a {
+        display: inline-flex;
+        align-items: center;
+        min-height: var(--target-size);
+    }
+}

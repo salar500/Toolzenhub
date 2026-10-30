@@ -83,7 +83,7 @@
 @media (max-width: 650px) {
 
     .articles-container {
-        width: min(100% - 20px, 1180px);
+        width: min(100% - 32px, 1248px);
     }
 
 
