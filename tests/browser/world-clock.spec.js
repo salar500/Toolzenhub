@@ -1490,6 +1490,9 @@ test.describe("World Clock: time, timers and the site", () => {
 test.describe("World Clock: readable rows, Clear search and stable progressive rendering on a phone", () => {
   /* the first `limit` rows: the name is readable, the time, offset and Add are shown and do not overlap */
   async function expectReadableRows(page, locator, limit = 4) {
+    // Rows are drawn in idle chunks and the list carries data-pending until the last chunk is in; measuring before
+    // that races the draw ("Element is not attached"), so wait for the list's own "finished" signal first.
+    await expect(page.locator(".wc-x-list[data-pending]")).toHaveCount(0);
     const total = await locator.count();
     expect(total, "rows to check").toBeGreaterThan(0);
     for (let i = 0; i < Math.min(total, limit); i += 1) {
@@ -1654,6 +1657,29 @@ test.describe("World Clock: readable rows, Clear search and stable progressive r
       await expect(page.locator(".wc-x-progress")).toHaveText("All 195 shown");
       await expect(page.locator(".wc-x-groups .wc-x-list")).not.toHaveAttribute("data-pending", /.*/);
       await expectNoHorizontalOverflow(page);
+    });
+  }
+});
+
+test.describe("World Clock: the line under the search box keeps its height on a phone", () => {
+  for (const width of [320, 360, 390]) {
+    test(`${width}px: adding a city does not move the page when the short confirmation replaces the coverage hint`, async ({ page, go }) => {
+      await page.setViewportSize({ width, height: 800 });
+      await openExplore(page, go);
+      await type(page, "sydney");
+      const hint = page.locator("#wc-search-hint");
+      const before = await hint.evaluate((el) => el.getBoundingClientRect().height);
+      const add = row(page, "Sydney").getByRole("button");
+      await add.focus();
+      const sydney = row(page, "Sydney");
+      const top = await sydney.evaluate((el) => el.getBoundingClientRect().top);
+      await page.keyboard.press("Enter");
+      await expect(hint).toContainText("Added Sydney, Australia.");
+      const after = await hint.evaluate((el) => el.getBoundingClientRect().height);
+      expect(after, "the line keeps the height it had").toBeGreaterThanOrEqual(before - 1);
+      expect(Math.abs((await sydney.evaluate((el) => el.getBoundingClientRect().top)) - top), "the row that was pressed stays where it was").toBeLessThanOrEqual(1);
+      await expect(live(page)).toHaveText("Added Sydney, Australia. 5 of 12 cities.");
+      await expect(add).toBeFocused();
     });
   }
 });

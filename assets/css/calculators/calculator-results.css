@@ -465,3 +465,18 @@
     content: "Check this: ";
     font-weight: 750;
 }
+
+/* Design System 2.0 (TX-02.3): the phone-only link to the result; outlines come from the global focus style */
+.jump-to-result {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target-size);
+    margin: 0 0 var(--space-3);
+    font-weight: 600;
+}
+
+@media (min-width: 960px) {
+    .jump-to-result {
+        display: none;
+    }
+}

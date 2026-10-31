@@ -12,6 +12,7 @@
 import { renderHeader } from "../components/header.js";
 import { renderFooter } from "../components/footer.js";
 import { renderToolError, renderToolNotFound } from "../pages/tool-messages.js";
+import { addJumpToResult } from "../ui/jump-link.js";
 
 async function startTool() {
 
@@ -50,6 +51,10 @@ async function startTool() {
         }
 
         module.init(app);
+
+        if (source.includes("/calculators/")) {
+            addJumpToResult(app);
+        }
 
     } catch (error) {
 

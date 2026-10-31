@@ -815,6 +815,8 @@ export function init() {
 
     function restoreHint() {
 
+        hint.style.minHeight = "";
+
         hint.replaceChildren(
             isFull()
                 ? `The board is full (${MAX_CITIES} cities). Remove one in My clocks to add another.`
@@ -824,6 +826,12 @@ export function init() {
     }
 
     function setHint(text, showKey = null) {
+
+        /* A short confirmation replaces the longer coverage hint: keep the height the line had, so the board and the
+           button the visitor just pressed do not move up the screen. restoreHint releases it. */
+        const held = parseFloat(hint.style.minHeight) || 0;
+
+        hint.style.minHeight = `${Math.max(held, hint.offsetHeight)}px`;
 
         hint.replaceChildren(text);
 

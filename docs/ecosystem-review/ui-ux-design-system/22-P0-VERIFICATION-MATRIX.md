@@ -4,7 +4,7 @@ Master Prompt 3, independent QA, 2026-10-30. Covers the 50 P0 requirements and t
 
 Status key: PASS = measured or asserted by a test in this programme; PARTIAL = checked on a sample or in part; FAIL = measured and failing; NOT RUN = not measured in this pass. No criterion is marked PASS without evidence. Screen-reader testing is NOT VERIFIED.
 
-Totals: NOT RUN 13, PARTIAL 55, PASS 34 (of 102).
+Totals: NOT RUN 12, PARTIAL 56, PASS 34 (of 102).
 
 | Criterion | Text | Status | Evidence | Limitation |
 |---|---|---|---|---|
@@ -66,7 +66,7 @@ Totals: NOT RUN 13, PARTIAL 55, PASS 34 (of 102).
 | TX-01.2 | Frame renders without horizontal scroll at 320 px for all 54 tools (sampled by family at the checkpoint). | PARTIAL | 320 px sweep on sampled tool pages, overflow 0 | not all 54 |
 | TX-02.1 | Calculators' outputs for the golden test values are unchanged. | PASS | calculators 502 passed and unit 3623 pass (golden values unchanged) |  |
 | TX-02.2 | The headline result is visually first in the result panel. | PARTIAL | result panel seen first in screenshots | not asserted |
-| TX-02.3 | Jump link moves keyboard focus to the result heading. | NOT RUN |  | jump-link focus not run |
+| TX-02.3 | Jump link moves keyboard focus to the result heading. | PARTIAL | Jump to result link on 18 of 19 calculators at 320 and 390 (44 px high, zero layout shift, one id each, no new ids); emi.spec asserts href, keyboard Enter moves focus to #emi-results, hidden at 1280 | asserted by spec on EMI only; the other 17 by script; Loan Comparison has no result section; not shown from 960 px because the result is below the form there, not beside it (TX-02 side-by-side layout not built) |
 | TX-03.1 | The primary action of JSON Formatter, Text Diff and JSONPath Tester is inside the first viewport at 390x844 and 1280x800 without scrolling. | PARTIAL | JSON Formatter short-phone test; sampled screenshots | Text Diff and JSONPath first-viewport action not asserted |
 | TX-03.2 | JSON, diff and path evaluators produce identical outputs on the existing unit fixtures. | PASS | developer tools 225 passed; unit fixtures pass |  |
 | TX-04.1 | Cumulative layout shift during one minute of a running Stopwatch is 0. | NOT RUN |  | one-minute stopwatch CLS not measured |

@@ -378,3 +378,22 @@ test.describe("EMI calculator: error feedback", () => {
     expect(lead).toContain("Check this");
   });
 });
+
+test.describe("EMI calculator: jump to result on a phone", () => {
+  test("a visible, focusable link goes to the result and moves focus there; it is not shown on a wide screen", async ({ page, go }) => {
+    await page.setViewportSize({ width: 390, height: 800 });
+    await go("calculators/emi/");
+    const link = page.getByRole("link", { name: "Jump to result" });
+    await expect(link).toHaveCount(1);
+    await expect(link).toHaveAttribute("href", "#emi-results");
+    await expect(page.locator("#emi-results")).toHaveCount(1);
+    expect((await link.boundingBox()).height).toBeGreaterThanOrEqual(44);
+    await link.focus();
+    await expect(link).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(page.locator("#emi-results")).toBeFocused();
+    expect(await page.locator("#emi-results").evaluate((el) => el.getBoundingClientRect().top)).toBeLessThan(400);
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await expect(link).toBeHidden();
+  });
+});
