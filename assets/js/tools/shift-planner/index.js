@@ -161,7 +161,7 @@ ${introMarkup({
                         ${fieldShell({
                             id: "sp-start",
                             label: "Start date",
-                            hint: "The first date of the schedule.",
+                            hint: "The first date of the schedule. Choose it from the calendar or type it.",
                             control: `<input
                                     id="sp-start"
                                     class="calculator-form__input tt-date-input"

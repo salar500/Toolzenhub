@@ -11,7 +11,7 @@
 import { test, expect, livePages, rel } from "../helpers/test-base.mjs";
 
 const articles = livePages.filter((p) => p.type === "article");
-const NO_IMAGE = new Set(["choose-right-loan-tenure", "why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back", "how-to-find-the-original-price-before-a-percentage-change", "percent-vs-percentage-points", "what-changes-how-long-a-corpus-lasts"]); // the Percentage articles have no image at all; nor has the second SWP article (the first carries a diagram)
+const NO_IMAGE = new Set(["what-changes-how-long-a-corpus-lasts"]); // only the second SWP article has no image (the first carries a diagram; every other article has its own)
 
 test.describe("generated pages carry their content without JavaScript @portable", () => {
   test.use({ javaScriptEnabled: false });

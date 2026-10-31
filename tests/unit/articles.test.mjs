@@ -143,10 +143,14 @@ describe("catalog model", () => {
     }
   });
 
-  test("hero images: seven articles have /assets/Images/articles/<slug>.png; choose-right-loan-tenure has none (no image beats a weak one)", () => {
+  test("hero images: every published article has /assets/Images/articles/<slug>.png except the SWP sensitivity article, which deliberately has none", () => {
     for (const a of catalog.articles.filter((x) => x.published)) {
-      if (a.slug === "choose-right-loan-tenure" || a.topic === "percentage" || a.slug === "what-changes-how-long-a-corpus-lasts") assert.equal(a.heroImage, null, a.slug); // the Percentage articles and the SWP sensitivity article have no image at all (concept clarity beats an image quota)
-      else assert.equal(a.heroImage.src, `/assets/Images/articles/${a.slug}.png`);
+      if (a.slug === "what-changes-how-long-a-corpus-lasts") assert.equal(a.heroImage, null, a.slug); // a comparison of durations reads better as text than as a generic chart (owner 2026-10-31: no repetitive generic charts)
+      else {
+        assert.equal(a.heroImage.src, `/assets/Images/articles/${a.slug}.png`, a.slug);
+        assert.equal(a.cardImage.src, a.heroImage.src, a.slug);
+        assert.ok(a.heroImage.alt.length > 40, `${a.slug}: the alt text states what the image shows`);
+      }
     }
   });
 
@@ -239,12 +243,12 @@ describe("article model (metadata + content -> page object)", () => {
   });
 
   test("an article without a hero image yields image: null, also as a related card", async () => {
-    const entry = catalog.getArticleByKey("loan-comparison/choose-right-loan-tenure");
+    const entry = catalog.getArticleByKey("swp/what-changes-how-long-a-corpus-lasts");
     const article = model.buildArticle(entry, (await entry.content()).default);
     assert.equal(article.image, null);
-    const other = catalog.getArticleByKey("loan-comparison/emi-vs-total-interest");
+    const other = catalog.getArticleByKey("swp/how-a-systematic-withdrawal-plan-works");
     const otherArticle = model.buildArticle(other, (await other.content()).default);
-    assert.equal(otherArticle.relatedArticles.find((r) => r.slug === "choose-right-loan-tenure").image, null);
+    assert.equal(otherArticle.relatedArticles.find((r) => r.slug === "what-changes-how-long-a-corpus-lasts").image, null);
   });
 
   test("related targets that are not published are skipped (curated list is read from the catalog)", async () => {
@@ -277,7 +281,8 @@ describe("derived views keep their old shape", () => {
     });
     assert.equal(legacy.articleRegistry.filter((a) => a.published === true).length, 34);
     assert.equal(legacy.articleRegistry.filter((a) => "published" in a).length, 34);
-    // the three Percentage articles have no card image: the registry says so (image null, no alt) and the cards then draw no image block
-    for (const a of legacy.articleRegistry.filter((x) => x.topic === "percentage" || x.slug === "what-changes-how-long-a-corpus-lasts")) assert.deepEqual([a.image, a.alt], [null, ""], a.slug);
+    // the SWP sensitivity article is the only published article without a card image: the registry says so (image null, no alt) and its card draws no image block
+    for (const a of legacy.articleRegistry.filter((x) => x.slug === "what-changes-how-long-a-corpus-lasts")) assert.deepEqual([a.image, a.alt], [null, ""], a.slug);
+    for (const a of legacy.articleRegistry.filter((x) => x.topic === "percentage")) assert.ok(a.image.endsWith(`/${a.slug}.png`) && a.alt.length > 40, a.slug);
   });
 });

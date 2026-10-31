@@ -93,6 +93,20 @@ export function addMonths(date, n) {
 
 }
 
+/* the date n calendar days after `date` (n may be negative); calendar fields only, so a daylight saving change cannot move it */
+export function addDays(date, n) {
+
+    const moved = new Date(0);
+    moved.setUTCFullYear(date.year, date.month - 1, date.day + n);
+
+    return {
+        year: moved.getUTCFullYear(),
+        month: moved.getUTCMonth() + 1,
+        day: moved.getUTCDate()
+    };
+
+}
+
 const isAfter = (a, b) => dayNumber(a) > dayNumber(b);
 
 

@@ -21,14 +21,14 @@ describe("All Tools", () => {
     const html = dir.allToolsHtml();
     assert.equal((html.match(/class="directory-section"/g) || []).length, cats.sections.length);
     assert.match(html, /<h1 class="categories-page__title">\s*All Tools/);
-    for (const title of ["Loans", "Investment", "Tax", "Business", "Math", "Health", "Converter"]) assert.ok(html.includes(`>${title}<`) || html.includes(`${title}\n`), title);
+    for (const title of ["Loans", "Investment", "Tax", "Business", "Math"]) assert.ok(html.includes(`>${title}<`) || html.includes(`${title}\n`), title);
     const links = hrefs(html);
     for (const route of ["/Toolzenhub/calculators/emi/", "/Toolzenhub/calculators/sip/", "/Toolzenhub/calculators/fd/", "/Toolzenhub/calculators/cagr/", "/Toolzenhub/calculators/margin/", "/Toolzenhub/calculators/profit/", "/Toolzenhub/calculators/gst/", "/Toolzenhub/calculators/percentage/"]) assert.ok(links.includes(route), route);
     for (const page of ["loans", "investment", "tax", "business", "math"]) assert.ok(links.includes(`/Toolzenhub/${page}.html`), page);
     assert.equal(html.includes("categories.html#health"), false); // Health and Converter have no live tool: plain text with a Coming soon badge
     assert.equal(html.includes("categories.html#converter"), false);
-    assert.equal((html.match(/class="coming-soon-badge"/g) || []).length, 2); // one badge each for Health and Converter
-    assert.match(html, /directory-soon__title[^>]*>\s*Coming soon/); // listed apart from the live categories, under their own heading
+    assert.equal((html.match(/class="coming-soon-badge"/g) || []).length, 0); // roadmap categories are hidden from the public directory (owner, 2026-10-31)
+    assert.equal(html.includes("directory-soon"), false);
     assert.equal(html.includes("directory-group--soon"), false);
     assert.ok(links.includes("/Toolzenhub/calculators.html"));
   });

@@ -95,11 +95,11 @@ const ERROR_IDS = {
     exitDate: "gratuity-error-exit"
 };
 
-const EMPTY_MESSAGE = "Choose the employee type and enter your wages and dates. The result appears here as soon as they are complete.";
+const EMPTY_MESSAGE = "Check the employee type and enter your wages and dates. The result appears here as soon as they are complete.";
 const STALE_MESSAGE = "You have changed a value. The result below is out of date and will update when your entries are complete and valid.";
 export const STALE_COMPARE_MESSAGE = "The result above is out of date, so wages cannot be compared yet. It updates when your entries are complete and valid.";
 export const STALE_COPY_MESSAGE = "The result above is out of date, so the summary cannot be copied yet. It updates when your entries are complete and valid.";
-const RESET_MESSAGE = "Cleared. Choose the employee type and enter your wages and dates.";
+const RESET_MESSAGE = "Cleared. Check the employee type and enter your wages and dates.";
 
 /* the owner-approved sentence next to the counted years (G9, 2026-10-22), verbatim */
 export const COUNTED_YEARS_NOTE = "Years counted for the formula may differ from your actual service duration. This rounding does not determine eligibility.";
@@ -846,11 +846,13 @@ export function reduceState(state, action) {
    Static HTML, rendered into the generated page by the site build.
 ========================================================= */
 
-const radio = ({ name, id, value, text }) => `
+const radio = ({ name, id, value, text, checked = false }) => `
                                 <label class="gratuity-choice">
-                                    <input type="radio" id="${id}" name="${name}" value="${value}">
+                                    <input type="radio" id="${id}" name="${name}" value="${value}"${checked ? " checked" : ""}>
                                     <span>${escapeHTML(text)}</span>
                                 </label>`;
+
+const TYPE_HINT = "Most private-sector employees, including those in software and IT, are regular employees. Choose Fixed-term only if you are engaged directly on a fixed-term contract. Choose Other if none of these fits.";
 
 const WAGES_HINT = "Enter the monthly wages your employer counts for gratuity, not your gross salary. Under the Code that is basic pay plus dearness allowance plus retaining allowance (if you get one). If your allowances and similar payments are more than half of your total remuneration, the excess is added to wages, so the figure can be higher than basic pay plus dearness allowance. The safest source is payroll: ask for your wages as defined in section 2(88) of the Code on Social Security, as last drawn. This calculator does not add HRA, bonus or overtime for you.";
 
@@ -941,10 +943,12 @@ export function markup() {
                             </legend>
 
                             <div class="gratuity-choices__options">
-                                ${radio({ name: TYPE_NAME, id: "gratuity-type-regular", value: EMPLOYEE_TYPES.regular, text: "Regular employee (including an employee of a contractor)" })}
+                                ${radio({ name: TYPE_NAME, id: "gratuity-type-regular", value: EMPLOYEE_TYPES.regular, checked: true, text: "Regular employee (including an employee of a contractor)" })}
                                 ${radio({ name: TYPE_NAME, id: "gratuity-type-fixed", value: EMPLOYEE_TYPES.fixedTerm, text: "Fixed-term employee, engaged directly by the employer" })}
                                 ${radio({ name: TYPE_NAME, id: "gratuity-type-other", value: EMPLOYEE_TYPES.other, text: "Other (a government post, seasonal, piece-rated, working journalist, or something else)" })}
                             </div>
+
+                            <p class="calculator-form__help" id="gratuity-type-hint">${escapeHTML(TYPE_HINT)}</p>
 
                             <p class="gratuity-field-error" id="${ERROR_IDS.employeeType}" hidden></p>
 
@@ -1704,8 +1708,13 @@ export function init(mount) {
         debounceTimer = null;
         settleTimer = null;
 
-        for (const radio of [...typeRadios, ...endRadios]) {
+        for (const radio of endRadios) {
             radio.checked = false;
+        }
+
+        /* the usual case is chosen again; the visitor can still pick any type */
+        for (const radio of typeRadios) {
+            radio.checked = radio.value === EMPLOYEE_TYPES.regular;
         }
 
         wages.value = "";

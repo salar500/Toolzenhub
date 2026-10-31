@@ -5,7 +5,7 @@
  *
  * `html` is the finished <main> content, produced by assets/js/pages/directory/directory-html.js.
  */
-import { allToolsHtml, categoryPageHtml, categoryPageIds, sectionPageHtml, sectionPageIds } from "../../assets/js/pages/directory/directory-html.js";
+import { allToolsHtml, categoryPageHtml, categoryPageIds, practiceLabsHtml, sectionPageHtml, sectionPageIds } from "../../assets/js/pages/directory/directory-html.js";
 import { getCategory } from "../../assets/js/data/taxonomy.js";
 import { breadcrumbTrail } from "../../assets/js/components/breadcrumb.js";
 import { sections } from "../../assets/js/data/categories.js";
@@ -58,5 +58,15 @@ export default function () {
     ],
   };
 
-  return { allTools, categoryPages, sectionPages };
+  const practiceLabs = {
+    title: "Practice Labs: JSON, APIs, Cron and Software Testing | ToolZen Hub",
+    description:
+      "Hands-on practice labs and flashcards for JSON, JSONPath, cron schedules and software test design. Each exercise checks your answer and explains it. They run in your browser and nothing is uploaded.",
+    html: practiceLabsHtml(),
+    jsonld: [
+      breadcrumbLd(breadcrumbTrail([{ label: "All Tools", href: ROUTES.tools }, { label: "Practice Labs" }]), "/practice-labs.html"),
+    ],
+  };
+
+  return { allTools, categoryPages, sectionPages, practiceLabs };
 }

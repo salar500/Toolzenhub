@@ -429,9 +429,9 @@ test.describe("Margin Calculator", () => {
     ]);
   });
 
-  test("Margin is on the Home Featured Tools list as a live link", async ({ page, go, siteRoot }) => {
-    await go("");
-    const card = page.locator(`#popular-calculators a.calculator-card[href='${siteRoot}calculators/margin/']`);
+  test("Margin is reachable from the Calculators page as a live link (it is not in the curated Home Featured Tools list)", async ({ page, go, siteRoot }) => {
+    await go("calculators.html");
+    const card = page.locator(`#calculators-grid a.calculator-card[href='${siteRoot}calculators/margin/']`);
     await expect(card).toHaveCount(1);
     await expect(card).toContainText("Margin Calculator");
   });

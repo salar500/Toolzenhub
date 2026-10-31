@@ -233,12 +233,12 @@ describe("automatic calculation, wired", () => {
     fire(page.reset, "click");
     advance(10000);
     assert.ok(!html().includes("gratuity-result-heading"));
-    assert.match(html(), /Choose the employee type and enter your wages and dates\./);
+    assert.match(html(), /Check the employee type and enter your wages and dates\./);
     assert.equal(page.wages.value, "");
     assert.equal(page.joining.value, "");
-    assert.ok(page.typeRadios.every((r) => !r.checked));
+    assert.deepEqual(page.typeRadios.map((r) => r.checked), [true, false, false]);
     assert.equal(page.focus, page.typeRadios[0]);
-    assert.deepEqual(page.announcements, ["Cleared. Choose the employee type and enter your wages and dates."]);
+    assert.deepEqual(page.announcements, ["Cleared. Check the employee type and enter your wages and dates."]);
   });
 
   test("Reset after a result forgets the result and the comparison wages", () => {

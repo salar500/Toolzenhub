@@ -107,7 +107,7 @@ export function dateModeMarkup() {
                                 ${fieldShell({
                                     id: "cd-date",
                                     label: "Date",
-                                    hint: "The day to count down to.",
+                                    hint: "The day to count down to. Choose it from the calendar or type it.",
                                     control: `<input
                                     id="cd-date"
                                     class="calculator-form__input tt-date-input"

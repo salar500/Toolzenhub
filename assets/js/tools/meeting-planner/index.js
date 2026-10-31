@@ -173,7 +173,7 @@ ${introMarkup({
                         ${fieldShell({
                             id: "mp-date",
                             label: "First date",
-                            hint: "The first day to look at, on the reference zone's calendar.",
+                            hint: "The first day to look at, on the reference zone's calendar. Choose it from the calendar or type it.",
                             control: `<input
                                     id="mp-date"
                                     class="calculator-form__input tt-date-input"

@@ -3,7 +3,7 @@
  *
  * REF holds values of the independent reference, tests/fixtures/percentage-golden.py (Python Fraction: the "article" block). The engine must
  * reproduce them, and every figure written in an article must appear in its text, so the text cannot drift from the maths. The articles have
- * no image (concept clarity beats an image quota), and the catalog says so.
+ * an image each since 2026-10-31: a diagram of the article's own worked example (owner direction: concept-specific, not generic charts).
  */
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
@@ -107,19 +107,20 @@ describe("trust and scope wording", () => {
   });
 });
 
-describe("the three articles have no image at all: concept clarity beats an image quota", () => {
-  test("the catalog has no hero or card image for them, and no image file was added for them", async () => {
+describe("the three articles each have a concept-specific diagram of their own worked example", () => {
+  test("the catalog names the image, the file exists, and the articles keep their topic, category and tool", async () => {
     const { articles } = await import("../../assets/js/data/articles.js");
     for (const s of SLUGS) {
       const a = articles.find((x) => x.slug === s);
-      assert.equal(a.heroImage, null, s);
-      assert.equal(a.cardImage, null, s);
+      assert.equal(a.heroImage.src, `/assets/Images/articles/${s}.png`, s);
+      assert.equal(a.cardImage.src, a.heroImage.src, s);
+      assert.ok(a.heroImage.alt.length > 40, s);
       assert.equal(a.topic, "percentage", s);
       assert.equal(a.category, "math", s);
       assert.deepEqual(a.tools, ["percentage"], s);
     }
     const dir = new URL("../../assets/Images/articles/", import.meta.url);
-    for (const s of SLUGS) for (const ext of ["png", "webp"]) assert.equal(fs.existsSync(new URL(`${s}.${ext}`, dir)), false, `${s}.${ext}`);
+    for (const s of SLUGS) assert.equal(fs.existsSync(new URL(`${s}.png`, dir)), true, `${s}.png`);
   });
 
   test("each lists the other two, and the tool lists all three in order", async () => {

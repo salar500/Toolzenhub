@@ -54,6 +54,17 @@
 
     box-shadow:
         0 0 0 3px rgba(67, 56, 202, 0.16);
+
+    /* the one visible focus indicator for the whole search field: a solid outline around the field (3:1 against white),
+       drawn on the wrapper because the input sits inside an overflow-clipped box */
+    outline: 2px solid var(--color-brand-green);
+    outline-offset: 2px;
+}
+
+/* the input's own ring is switched off inside the field, so a keyboard user sees one indicator, not two stacked ones */
+.tz-search .tz-search__input:focus,
+.tz-search .tz-search__input:focus-visible {
+    outline: none !important;
 }
 
 .tz-search .tz-search__icon {

@@ -886,3 +886,22 @@ fieldset.mp-person {
     margin: 0 0 14px !important;
 
 }
+
+/* a row of quick-fill buttons under the date fields */
+
+.date-presets {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin: 4px 0 16px;
+
+}
+
+.date-presets > p {
+
+    flex: 1 1 100%;
+    margin: 0;
+
+}

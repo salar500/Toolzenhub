@@ -218,6 +218,15 @@ export const ROUTES = {
 
 
     /* =====================================================
+       PRACTICE LABS (a hub page, not a section: the five
+       learning pages stay in Developer Tools)
+    ===================================================== */
+
+    practiceLabs:
+        `${SITE_ROOT}practice-labs.html`,
+
+
+    /* =====================================================
        CONTACT
     ===================================================== */
 

@@ -244,7 +244,7 @@ function startField() {
     return fieldShell({
         id: IDS.start,
         label: FIELD_LABELS.start,
-        hint: "The date to start from.",
+        hint: "The date to start from. Choose it from the calendar or type it.",
         control: `<input
                                     id="${IDS.start}"
                                     class="calculator-form__input dcalc-input"

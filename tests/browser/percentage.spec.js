@@ -364,8 +364,8 @@ test.describe("Percentage Calculator", () => {
     const articles = page.locator(".related-article-card");
     await expect(articles).toHaveCount(3);
     await expect(articles.first()).toContainText("Why +20% Then −20% Doesn't Get You Back");
-    // no image on these cards
-    await expect(page.locator(".related-article-card .related-article-image")).toHaveCount(0);
+    // each card carries its article's own diagram
+    await expect(page.locator(".related-article-card .related-article-image")).toHaveCount(3);
   });
 
   test("search finds it by name and by its aliases, not by percentage difference, CAGR or ROI", async ({ page, go, siteRoot }) => {
@@ -440,17 +440,17 @@ test.describe("Percentage publication", () => {
     await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(11); // the catalog now has 11 Coming Soon calculators (13, then 12, when this was written)
   });
 
-  test("the three articles are listed under Math with no image block, and their pages render without a hero image", async ({ page, go, siteRoot }) => {
+  test("the three articles are listed under Math with their own diagram, and their pages render the hero image", async ({ page, go, siteRoot }) => {
     await go("articles.html");
     await page.getByRole("button", { name: /^Math/ }).click();
     const cards = page.locator(".article-card:not(.article-card--soon)"); // the Math filter also lists one Coming soon placeholder
     await expect(cards).toHaveCount(3);
-    await expect(page.locator(".article-card:not(.article-card--soon) .article-card-image")).toHaveCount(0);
-    await expect(page.locator(".article-card.article-card--no-image")).toHaveCount(3);
+    await expect(page.locator(".article-card:not(.article-card--soon) .article-card-image")).toHaveCount(3);
+    await expect(page.locator(".article-card.article-card--no-image")).toHaveCount(0);
     await go("articles/percentage/percent-vs-percentage-points/");
     await expect(page.locator("h1")).toHaveText("Percent vs Percentage Points");
-    await expect(page.locator(".article-hero img, .article-image img")).toHaveCount(0);
+    await expect(page.locator(".article-hero-image img")).toHaveCount(1);
     await expect(page.locator(`a[href='${siteRoot}calculators/percentage/']`).first()).toBeVisible();
-    await expect(page.locator("meta[property='og:image']")).toHaveCount(0);
+    await expect(page.locator("meta[property='og:image']")).toHaveCount(1);
   });
 });

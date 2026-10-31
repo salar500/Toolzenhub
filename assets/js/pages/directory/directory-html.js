@@ -43,6 +43,10 @@ import {
 } from "../../components/category-tool-card.js";
 
 import {
+    getToolById
+} from "../../data/tools.js";
+
+import {
     escapeHTML
 } from "../../ui/escape.js";
 
@@ -163,7 +167,7 @@ function directSectionBlock(section) {
 
                     <div class="directory-groups">
                         ${live.map(tool => `
-                        <article class="directory-group">
+                        <article class="directory-group directory-group--tool">
 
                             <h3 class="directory-group__title">
                                 <a href="${tool.href}">${escapeHTML(tool.title)}</a>
@@ -176,18 +180,18 @@ function directSectionBlock(section) {
                         </article>`).join("")}
                     </div>
 
+                    ${section.id === "developer-tools" ? practiceLabsLink() : ""}
+
                 </section>`;
 
 }
 
 function categorySectionBlock(section) {
 
-    /* the categories with live tools are the section's content; those with none are listed apart, as coming soon */
-    const all = getCategoriesBySection(section.id).filter(hasTools);
-
-    const categories = all.filter(category => liveTools(category.id).length > 0);
-
-    const soon = all.filter(category => liveTools(category.id).length === 0);
+    /* only categories with live tools are shown; roadmap categories stay in the catalog but are not listed (owner, 2026-10-31) */
+    const categories = getCategoriesBySection(section.id)
+        .filter(hasTools)
+        .filter(category => liveTools(category.id).length > 0);
 
     const sectionHref =
         ROUTES[section.landing];
@@ -238,35 +242,7 @@ function categorySectionBlock(section) {
 
                     ${more}
 
-                    ${soon.length > 0 ? soonBlock(section, soon) : ""}
-
                 </section>`;
-
-}
-
-function soonBlock(section, soon) {
-
-    return `
-                    <div class="directory-soon">
-
-                        <h3
-                            class="directory-soon__title"
-                            id="directory-${section.id}-soon"
-                        >
-                            Coming soon
-                        </h3>
-
-                        <ul
-                            class="directory-soon__list"
-                            aria-labelledby="directory-${section.id}-soon"
-                        >
-                            ${soon.map(category => `<li>
-                                <span class="directory-soon__name">${escapeHTML(category.title)}</span>
-                                <span class="coming-soon-badge">Coming soon</span>
-                            </li>`).join("")}
-                        </ul>
-
-                    </div>`;
 
 }
 
@@ -286,7 +262,10 @@ function categoryGroup(category) {
                             </p>
 
                             <ul class="directory-group__tools">
-                                ${live.map(tool => `<li><a href="${tool.href}">${escapeHTML(tool.title)}</a></li>`).join("")}
+                                ${live.map(tool => `<li class="directory-tool">
+                                    <a href="${tool.href}">${escapeHTML(tool.title)}</a>
+                                    <span class="directory-tool__text">${escapeHTML(tool.description)}</span>
+                                </li>`).join("")}
                             </ul>
 
                         </article>`;
@@ -526,6 +505,8 @@ export function sectionPageHtml(sectionId) {
                     ${tools.map(tool => toolCardHtml(tool, look)).join("")}
                 </div>
 
+                ${sectionId === "developer-tools" ? practiceLabsLink() : ""}
+
                 <p class="directory-section__more">
                     <a href="${ROUTES.tools}">← All tools</a>
                 </p>
@@ -537,3 +518,87 @@ export function sectionPageHtml(sectionId) {
     </main>`;
 
 }
+
+
+/* =========================================================
+   PRACTICE LABS HUB
+
+   One page that gathers the learning experiences. It is not a
+   section and has no catalog record: the five pages stay where
+   they are, in Developer Tools, and this page only links to them.
+   The list is the catalog's own, so a lab that is not live never
+   appears.
+========================================================= */
+
+const PRACTICE_LAB_IDS = ["json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab"];
+const REVISION_IDS = ["smart-flashcards"];
+
+const liveByIds = ids => ids.map(id => getToolById(id)).filter(tool => tool && tool.available);
+
+export function practiceLabsHtml() {
+
+    const labs = liveByIds(PRACTICE_LAB_IDS);
+    const revision = liveByIds(REVISION_IDS);
+    const look = { iconClass: "time", iconKey: "developer-tools" };
+
+    const group = (title, text, tools) => tools.length === 0 ? "" : `
+                <section class="practice-labs__group" aria-labelledby="practice-labs-${title.toLowerCase()}">
+
+                    <h2 class="practice-labs__title" id="practice-labs-${title.toLowerCase()}">${escapeHTML(title)}</h2>
+
+                    <p class="practice-labs__text">${escapeHTML(text)}</p>
+
+                    <div class="categories-detail__grid directory-tools">
+                        ${tools.map(tool => toolCardHtml(tool, look)).join("")}
+                    </div>
+
+                </section>`;
+
+    return `
+    <main id="app">
+
+        <section class="categories-page directory-page">
+
+            <div class="container">
+
+                ${renderBreadcrumb([
+                    { label: "All Tools", href: ROUTES.tools },
+                    { label: "Practice Labs" }
+                ])}
+
+                <div class="categories-page__intro">
+
+                    <span class="categories-page__eyebrow">
+                        Learn by doing
+                    </span>
+
+                    <h1 class="categories-page__title">
+                        Practice Labs
+                    </h1>
+
+                    <p class="categories-page__description">
+                        Short hands-on exercises for JSON, APIs, scheduling and software testing. Each one checks your answer and explains it. They run in your browser and nothing is uploaded.
+                    </p>
+
+                </div>
+
+                ${group("Practice", "Exercises with an exact rule, so your answer is checked rather than guessed. The labs keep nothing: your answers are not stored or sent anywhere.", labs)}
+
+                ${group("Revision", "Original flashcards for revision. Revision dates are saved on this device only if you turn saving on.", revision)}
+
+                <p class="directory-section__more">
+                    <a href="${ROUTES.developerTools}">All Developer Tools →</a>
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>`;
+
+}
+
+const practiceLabsLink = () => `
+                <p class="directory-section__more">
+                    <a href="${ROUTES.practiceLabs}">Practice Labs: exercises and flashcards →</a>
+                </p>`;

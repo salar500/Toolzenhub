@@ -160,7 +160,7 @@ test.describe("Date Calculator in Time Tools and search", () => {
   test("All Tools lists it once; the old Converter Date Calculator entry is gone", async ({ page, go }) => {
     await go("tools.html");
     await expect(page.locator('.directory-section a[href$="tools/date-calculator/"]')).toHaveCount(1);
-    await expect(page.locator(".directory-soon")).not.toContainText(/date calculator/i);
+    await expect(page.locator(".directory-soon")).toHaveCount(0); // the Coming soon block is hidden from All Tools, so no Date Calculator entry can appear there
     await go("calculators.html");
     await expect(page.locator("#calculators-grid")).not.toContainText("Date Calculator");
   });

@@ -404,12 +404,8 @@ test.describe("SIP Calculator", () => {
     ]);
   });
 
-  test("the Home page's SIP card is live, by the catalog, with no Coming soon badge", async ({ page, go, siteRoot }) => {
+  test("the Home page does not show SIP as a Coming soon card (it is live, and not in the curated Featured Tools list)", async ({ page, go }) => {
     await go("");
-    const link = page.locator(`#popular-calculators a.calculator-card[href='${siteRoot}calculators/sip/']`);
-    await expect(link).toHaveCount(1);
-    await expect(link).toContainText("SIP Calculator");
-    await expect(link).not.toContainText("Coming soon");
     await expect(page.locator("#popular-calculators .calculator-card--soon:has-text('SIP Calculator')")).toHaveCount(0);
   });
 

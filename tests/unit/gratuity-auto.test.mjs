@@ -86,8 +86,8 @@ describe("the guidance while the entries are not ready", () => {
   });
 
   test("with nothing to name it falls back to the starting guidance", () => {
-    assert.match(ui.holdMessage({ errors: [] }, "regular"), /^Choose the employee type and enter your wages and dates\./);
-    assert.match(ui.holdMessage(undefined, "regular"), /^Choose the employee type/);
+    assert.match(ui.holdMessage({ errors: [] }, "regular"), /^Check the employee type and enter your wages and dates\./);
+    assert.match(ui.holdMessage(undefined, "regular"), /^Check the employee type/);
   });
 });
 

@@ -49,7 +49,7 @@ test.describe("Gratuity Calculator: automatic calculation (G9) @portable", () =>
     await recordLive(page);
     await expect(page.getByRole("button", { name: "Calculate" })).toHaveCount(0);
     await expect(resetButton(page)).toBeVisible();
-    await expect(results(page)).toContainText("Choose the employee type and enter your wages and dates.");
+    await expect(results(page)).toContainText("Check the employee type and enter your wages and dates.");
     await expect(page.locator("#gratuity-result-heading")).toHaveCount(0);
     expect(await liveLog(page)).toEqual([]);
     expectClean(watch);
@@ -162,9 +162,10 @@ test.describe("Gratuity Calculator: automatic calculation (G9) @portable", () =>
     await expect(page.locator("#gratuity-result-heading")).toHaveCount(0);
     await expect(page.locator("#gratuity-wages")).toHaveValue("");
     await expect(page.locator("#gratuity-joining")).toHaveValue("");
-    await expect(page.locator("input[name='gratuity-type']:checked")).toHaveCount(0);
+    await expect(page.locator("input[name='gratuity-type']:checked")).toHaveCount(1);
+    await expect(page.locator("#gratuity-type-regular")).toBeChecked();
     await expect(page.locator("#gratuity-type-regular")).toBeFocused();
-    await expect(results(page)).toContainText("Choose the employee type and enter your wages and dates.");
+    await expect(results(page)).toContainText("Check the employee type and enter your wages and dates.");
     const log = await liveLog(page);
     expect(log.filter((t) => /₹|Estimated/.test(t)), "no result announced after Reset").toEqual([]);
   });

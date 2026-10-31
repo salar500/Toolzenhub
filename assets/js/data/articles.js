@@ -288,14 +288,18 @@ const catalog = [
         publishedAt: "Aug 25, 2026",
         updatedAt: "Aug 25, 2026",
         readTime: "5 min read",
-        cardImage: null,
-
-        /*
-         * TODO(image): add assets/Images/articles/choose-right-loan-tenure.png,
-         * then set heroImage: { src, alt }. Until then the article
-         * page shows no hero image.
-         */
-        heroImage: null,
+        cardImage: {
+            src:
+                "/assets/Images/articles/choose-right-loan-tenure.png",
+            alt:
+                "Diagram: a shorter tenure means a higher monthly EMI and lower total interest; a longer tenure means a lower EMI and higher total interest"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/choose-right-loan-tenure.png",
+            alt:
+                "Diagram: a shorter tenure means a higher monthly EMI and lower total interest; a longer tenure means a lower EMI and higher total interest"
+        },
 
         tools: ["loan-comparison"],
         related: [
@@ -1119,7 +1123,7 @@ const catalog = [
     },
 
     /* =====================================================
-       MATH  (published, no article image: no image beats a repetitive one)
+       MATH  (published; each image is a worked-example diagram specific to its article)
     ===================================================== */
 
     {
@@ -1135,8 +1139,18 @@ const catalog = [
         publishedAt: "Oct 5, 2026",
         updatedAt: "Oct 5, 2026",
         readTime: "4 min read",
-        cardImage: null,
-        heroImage: null,
+        cardImage: {
+            src:
+                "/assets/Images/articles/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back.png",
+            alt:
+                "Diagram: 100 rises 20% to 120, then falls 20% of 120, which is 24, to 96, which is 4 below the start; getting back to 100 needs a 16.67% fall"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back.png",
+            alt:
+                "Diagram: 100 rises 20% to 120, then falls 20% of 120, which is 24, to 96, which is 4 below the start; getting back to 100 needs a 16.67% fall"
+        },
         tools: ["percentage"],
         related: [
             "percentage/how-to-find-the-original-price-before-a-percentage-change",
@@ -1158,8 +1172,18 @@ const catalog = [
         publishedAt: "Oct 5, 2026",
         updatedAt: "Oct 5, 2026",
         readTime: "4 min read",
-        cardImage: null,
-        heroImage: null,
+        cardImage: {
+            src:
+                "/assets/Images/articles/how-to-find-the-original-price-before-a-percentage-change.png",
+            alt:
+                "Diagram: a price of 2,400 after a 20% increase. Subtracting 20% gives 1,920, which is wrong; dividing by 1.20 gives 2,000, which is right"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/how-to-find-the-original-price-before-a-percentage-change.png",
+            alt:
+                "Diagram: a price of 2,400 after a 20% increase. Subtracting 20% gives 1,920, which is wrong; dividing by 1.20 gives 2,000, which is right"
+        },
         tools: ["percentage"],
         related: [
             "percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back",
@@ -1181,8 +1205,18 @@ const catalog = [
         publishedAt: "Oct 5, 2026",
         updatedAt: "Oct 5, 2026",
         readTime: "4 min read",
-        cardImage: null,
-        heroImage: null,
+        cardImage: {
+            src:
+                "/assets/Images/articles/percent-vs-percentage-points.png",
+            alt:
+                "Diagram: a rate moving from 5% to 7% is up 2 percentage points (7 minus 5) and up 40 percent (2 divided by 5)"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/percent-vs-percentage-points.png",
+            alt:
+                "Diagram: a rate moving from 5% to 7% is up 2 percentage points (7 minus 5) and up 40 percent (2 divided by 5)"
+        },
         tools: ["percentage"],
         related: [
             "percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back",

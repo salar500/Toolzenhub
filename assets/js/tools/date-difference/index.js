@@ -55,8 +55,14 @@ import {
 
 import {
     wireTodayButtons,
-    todayButton
+    todayButton,
+    todayIso
 } from "../time-ui/time-ui.js";
+
+import {
+    addDays,
+    parseDate
+} from "./date-engine.js";
 
 
 /* There is nothing related to show yet: no other Time Tools tool, and no calculator is related to dates. */
@@ -220,6 +226,10 @@ function dateField({ id, label, hint }) {
 
 }
 
+/* the yyyy-mm-dd value of a date input */
+const isoOf = ({ year, month, day }) =>
+    `${String(year).padStart(4, "0")}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
 export function markup() {
 
     return `
@@ -293,14 +303,27 @@ export function markup() {
                         ${dateField({
                             id: IDS.start,
                             label: "Start date",
-                            hint: "The first date."
+                            hint: "The first date. Choose it from the calendar or type it."
                         })}
 
                         ${dateField({
                             id: IDS.end,
                             label: "End date",
-                            hint: "The second date. It can be before the start date."
+                            hint: "The second date. It can be before the start date. Choose it from the calendar or type it."
                         })}
+
+                    </div>
+
+                    <div class="date-presets" role="group" aria-labelledby="date-presets-label">
+
+                        <p class="calculator-form__help" id="date-presets-label">
+                            Quick fill from today. Each button sets both dates; the gap is the number of days between them, so today to 6 days later is 6 days apart (7 if you count both end days).
+                        </p>
+
+                        <button type="button" class="tt-inline-button" data-preset="6">Today to 6 days later</button>
+                        <button type="button" class="tt-inline-button" data-preset="7">Today to 7 days later</button>
+                        <button type="button" class="tt-inline-button" data-preset="30">Today to 30 days later</button>
+                        <button type="button" class="tt-inline-button" data-preset="month">1st of this month to today</button>
 
                     </div>
 
@@ -710,6 +733,29 @@ export function init() {
 
     /* a date is filled with today only when the button is pressed */
     wireTodayButtons(form);
+
+    /* a preset fills both fields from today's date on this device, only when pressed */
+    for (const button of form.querySelectorAll("[data-preset]")) {
+
+        button.addEventListener("click", () => {
+
+            const today = parseDate(todayIso(new Date())).date;
+            const preset = button.dataset.preset;
+
+            const start = preset === "month" ? { ...today, day: 1 } : today;
+            const end = preset === "month" ? today : addDays(today, Number(preset));
+
+            inputs.start.value = isoOf(start);
+            inputs.end.value = isoOf(end);
+
+            inputs.start.dispatchEvent(new Event("input", { bubbles: true }));
+            inputs.end.dispatchEvent(new Event("change", { bubbles: true }));
+
+            button.focus();
+
+        });
+
+    }
 
     resetButton?.addEventListener(
         "click",

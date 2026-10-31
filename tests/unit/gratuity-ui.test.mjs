@@ -363,8 +363,11 @@ describe("the static markup", () => {
     assert.match(page(), /<h1>\s*Gratuity Calculator \(India\)\s*<\/h1>/);
   });
 
-  test("no employee type is preselected, and the contract-end group starts hidden", () => {
-    for (const input of page().match(/<input[\s\S]*?>/g)) assert.ok(!/\schecked(\s|>|=)/.test(input), input);
+  test("Regular employee is preselected (owner, 2026-10-31), nothing else is, and the contract-end group starts hidden", () => {
+    const checkedInputs = page().match(/<input[\s\S]*?>/g).filter((input) => /\schecked(\s|>|=)/.test(input));
+    assert.equal(checkedInputs.length, 1);
+    assert.match(checkedInputs[0], /id="gratuity-type-regular"/);
+    assert.match(page(), /id="gratuity-type-hint"[^>]*>[^<]*software and IT/);
     assert.match(page(), /<fieldset class="gratuity-choices" id="gratuity-end-group" hidden>/);
     assert.equal(count(/name="gratuity-type"/g), 3);
     assert.equal(count(/name="gratuity-end"/g), 2);
@@ -409,7 +412,7 @@ describe("the static markup", () => {
   });
 
   test("the page starts with the empty state, the rules-checked date and the privacy line", () => {
-    assert.match(page(), /Choose the employee type and enter your wages and dates\. The result appears here as soon as they are complete\./);
+    assert.match(page(), /Check the employee type and enter your wages and dates\. The result appears here as soon as they are complete\./);
     assert.match(page(), /Rules checked on 21 October 2026\./);
     assert.match(page(), /Calculated in your browser/);
     assert.ok(!page().includes("₹0.00"));

@@ -9,8 +9,8 @@ import { test, expect, expectClean, settleImages, livePages, rel, expectNoHorizo
 
 const articles = livePages.filter((p) => p.type === "article");
 const titleOf = (p) => p.expectedTitle.replace(/ \| ToolZen Hub$/, "");
-// no featured image (none beats a weak one): one original article, the three Percentage articles and the second SWP article, which also have no card image
-const NO_IMAGE = new Set(["choose-right-loan-tenure", "why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back", "how-to-find-the-original-price-before-a-percentage-change", "percent-vs-percentage-points", "what-changes-how-long-a-corpus-lasts"]);
+// no featured image (a text comparison reads better than a generic chart): only the second SWP article, which also has no card image
+const NO_IMAGE = new Set(["what-changes-how-long-a-corpus-lasts"]);
 // The original articles (topic "loan-comparison") have five curated related articles and lead to Loan Comparison; the
 // articles of each Tool Pack have three and lead to that pack's tool. A new pack adds ONE line to the first map (and to
 // the second when its category is not Loans). A topic missing from the maps fails the call-to-action or breadcrumb
@@ -208,7 +208,7 @@ const CATALOG = {
   "fixed-vs-floating-interest-rates": { title: "Fixed vs Floating Interest Rates", description: "Understand the difference between fixed and floating interest rates before choosing a loan.", readTime: "6 min read", hero: "/assets/Images/articles/fixed-vs-floating-interest-rates.png", alt: "Illustrative diagram: a fixed interest rate stays flat while a floating rate moves up and down in steps over the life of a loan", related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","loan-tenure-total-interest","what-is-loan-prepayment","choose-right-loan-tenure"] },
   "loan-tenure-total-interest": { title: "How Loan Tenure Affects Total Interest", description: "See why choosing a longer or shorter loan tenure can significantly affect your total interest cost.", readTime: "6 min read", hero: "/assets/Images/articles/loan-tenure-total-interest.png", alt: "Stacked bars showing how much interest is repaid on the same loan over tenures of 10 to 30 years", related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","fixed-vs-floating-interest-rates","what-is-loan-prepayment","choose-right-loan-tenure"] },
   "what-is-loan-prepayment": { title: "What Is Loan Prepayment?", description: "Understand how loan prepayment works and how paying down your principal can potentially reduce interest.", readTime: "4 min read", hero: "/assets/Images/articles/what-is-loan-prepayment.png", alt: "Chart of a loan balance falling sooner after a one-time prepayment than without one", related: ["loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment","loan-prepayment/early-vs-late-loan-prepayment","how-to-reduce-home-loan-interest","emi-vs-total-interest","loan-tenure-total-interest"] },
-  "choose-right-loan-tenure": { title: "How to Choose the Right Loan Tenure", description: "Learn how to balance monthly affordability with total borrowing cost when choosing a loan tenure.", readTime: "5 min read", hero: null, alt: null, related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","what-is-loan-prepayment"] },
+  "choose-right-loan-tenure": { title: "How to Choose the Right Loan Tenure", description: "Learn how to balance monthly affordability with total borrowing cost when choosing a loan tenure.", readTime: "5 min read", hero: "/assets/Images/articles/choose-right-loan-tenure.png", alt: "Diagram: a shorter tenure means a higher monthly EMI and lower total interest; a longer tenure means a lower EMI and higher total interest", related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","what-is-loan-prepayment"] },
 };
 
 // Tool Pack 1: the two new articles that the guide now points at (a "topic/slug" entry in a related list)
@@ -237,7 +237,7 @@ test.describe("M5 article metadata comes from the catalog and is unchanged", () 
       expect(article.datePublished).toBe("2026-08-25");
       expect(article.dateModified).toBe("2026-08-25");
 
-      // hero image (one article has none yet)
+      // hero image
       const hero = page.locator(".article-hero-image img");
       if (want.hero) {
         await expect(hero).toHaveAttribute("src", siteRoot + want.hero.replace(/^\//, ""));

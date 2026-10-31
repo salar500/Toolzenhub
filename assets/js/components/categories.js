@@ -42,12 +42,12 @@ import { iconSvg, iconFor } from "../ui/icons.js";
 ========================================================= */
 
 const FEATURED_TOOLS = [
-    { id: "sip", title: "SIP Calculator", blurb: "Plan your SIP investments", icon: "trend", color: "yellow" },
-    { id: "gst", title: "GST Calculator", blurb: "Add or remove GST on an invoice", icon: "receipt", color: "purple" },
-    { id: "margin", title: "Margin Calculator", blurb: "Set a price from a target margin", icon: "percent", color: "green" },
-    { id: "percentage", title: "Percentage Calculator", blurb: "Find a change, the start or the end value", icon: "math", color: "teal" },
     { id: "home-loan", title: "Home Loan Calculator", blurb: "Find the loan that fits your EMI budget", icon: "home", color: "pink" },
-    { id: "countdown-timer", title: "Countdown Timer", blurb: "Count down any time, with pause and resume", icon: "clock", color: "blue" }
+    { id: "gst", title: "GST Calculator", blurb: "Add or remove GST on an invoice", icon: "receipt", color: "purple" },
+    { id: "time-zone-converter", title: "Time Zone Converter", blurb: "Convert a time between places", icon: "globe", color: "blue" },
+    { id: "json-formatter", title: "JSON Formatter and Validator", blurb: "Format, check and minify JSON", icon: "code", color: "teal" },
+    { id: "merge-pdf", title: "Merge PDF", blurb: "Combine PDF files in your browser", icon: "file", color: "green" },
+    { id: "image-compressor-resizer", title: "Image Compressor and Resizer", blurb: "Shrink or resize photos on your device", icon: "image", color: "yellow" }
 ];
 
 

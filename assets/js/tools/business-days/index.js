@@ -180,7 +180,7 @@ ${introMarkup({
                         ${dateField({
                             id: IDS.start,
                             label: "Start date",
-                            hint: "The start date itself is never counted as one of the days added."
+                            hint: "The start date itself is never counted as one of the days added. Choose it from the calendar or type it."
                         })}
 
                         <div id="bd-add-fields" class="bd-add-fields">
@@ -226,7 +226,7 @@ ${introMarkup({
                             ${dateField({
                                 id: IDS.end,
                                 label: "End date",
-                                hint: "The end date is counted. It can be before the start date."
+                                hint: "The end date is counted. It can be before the start date. Choose it from the calendar or type it."
                             })}
 
                             <label class="tt-check bd-include">
