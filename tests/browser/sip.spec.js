@@ -390,9 +390,9 @@ test.describe("SIP Calculator", () => {
   test("related calculators: the curated SWP and CAGR first (pack 50), then PPF, FD and XIRR from the automatic Investment relationship; and four curated articles", async ({ page, go, siteRoot }) => {
     await open(page, go);
     const related = page.locator(".related-calculator-card");
-    await expect(related).toHaveCount(5);
+    await expect(related).toHaveCount(6);
     const toolHrefs = await related.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
-    expect(toolHrefs).toEqual([`${siteRoot}calculators/swp/`, `${siteRoot}calculators/cagr/`, `${siteRoot}calculators/ppf/`, `${siteRoot}calculators/fd/`, `${siteRoot}calculators/xirr/`]);
+    expect(toolHrefs).toEqual([`${siteRoot}calculators/swp/`, `${siteRoot}calculators/cagr/`, `${siteRoot}calculators/ppf/`, `${siteRoot}calculators/fd/`, `${siteRoot}calculators/xirr/`, `${siteRoot}calculators/risk-reward/`]);
     const cards = page.locator(".related-article-card");
     await expect(cards).toHaveCount(4);
     const hrefs = await cards.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));

@@ -128,6 +128,6 @@ describe("the three articles each have a concept-specific diagram of their own w
     const calcs = await import("../../assets/js/data/calculators.js");
     const keys = SLUGS.map((s) => `percentage/${s}`);
     SLUGS.forEach((s, i) => assert.deepEqual([...articles.find((x) => x.slug === s).related].sort(), keys.filter((_, j) => j !== i).sort()));
-    assert.deepEqual(calcs.getCalculatorById("percentage").relatedArticles, keys);
+    assert.deepEqual(calcs.getCalculatorById("percentage").relatedArticles, [...keys, "math/how-to-calculate-percentage-easily"]); // the fourth, the basics guide, was published 2026-11-01
   });
 });

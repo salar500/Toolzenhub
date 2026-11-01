@@ -49,10 +49,10 @@ test.describe("Credit Card Payoff Calculator", () => {
     expect(hrefs).toEqual([siteRoot, `${siteRoot}categories.html`, `${siteRoot}loans.html`]);
     await expect(page.locator(".calculator-breadcrumb")).toContainText("Credit Card Payoff Calculator");
     // exactly four inputs, none asking for card or personal details
-    await expect(page.locator("#ccp-form input")).toHaveCount(4);
+    await expect(page.locator("#ccp-form input:not(.calculator-form__slider)")).toHaveCount(4);
     for (const label of ["Outstanding Balance", "Annual Percentage Rate (APR)", "Monthly Payment", "Compare With Another Monthly Payment (optional)"]) await expect(page.getByLabel(label, { exact: true })).toHaveCount(1);
     expect(await page.locator("#ccp-form").innerText()).not.toMatch(/card number|account|issuer|name|phone|email|cvv/i);
-    for (const input of await page.locator("#ccp-form input").all()) await expect(input).toHaveValue("");
+    for (const input of await page.locator("#ccp-form input:not(.calculator-form__slider)").all()) await expect(input).toHaveValue("");
     await expect(results(page)).toContainText("press Calculate");
     // the assumptions are there before anything is calculated, beside the results area
     const a = page.locator(".ccp-assumptions");

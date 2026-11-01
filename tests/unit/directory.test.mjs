@@ -50,7 +50,7 @@ describe("category pages", () => {
 
   test("Investment: SIP, PPF, FD, CAGR, SWP and XIRR are all links, and no Coming soon card is left", () => {
     const html = dir.categoryPageHtml("investment");
-    assert.deepEqual(hrefs(html).filter((h) => h.includes("/calculators/")), ["/Toolzenhub/calculators/sip/", "/Toolzenhub/calculators/ppf/", "/Toolzenhub/calculators/fd/", "/Toolzenhub/calculators/cagr/", "/Toolzenhub/calculators/swp/", "/Toolzenhub/calculators/xirr/"]);
+    assert.deepEqual(hrefs(html).filter((h) => h.includes("/calculators/")), ["/Toolzenhub/calculators/sip/", "/Toolzenhub/calculators/ppf/", "/Toolzenhub/calculators/fd/", "/Toolzenhub/calculators/cagr/", "/Toolzenhub/calculators/swp/", "/Toolzenhub/calculators/xirr/", "/Toolzenhub/calculators/risk-reward/"]);
     assert.match(html, /PPF Calculator/);
     assert.equal((html.match(/category-page-card--soon/g) || []).length, 0);
     assert.match(html, /<h1[^>]*>\s*Investment Calculators/);

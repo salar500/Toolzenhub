@@ -137,7 +137,7 @@ test.describe("categories page", () => {
   test("the category pages list the live tools as links and the others as Coming soon cards that are not links", async ({ page, go, siteRoot }) => {
     const links = (id) => page.locator(`.category-page-card[href]`).evaluateAll((l) => l.map((x) => x.getAttribute("href")));
     await go("investment.html");
-    expect(await links()).toEqual([`${siteRoot}calculators/sip/`, `${siteRoot}calculators/ppf/`, `${siteRoot}calculators/fd/`, `${siteRoot}calculators/cagr/`, `${siteRoot}calculators/swp/`, `${siteRoot}calculators/xirr/`]);
+    expect(await links()).toEqual([`${siteRoot}calculators/sip/`, `${siteRoot}calculators/ppf/`, `${siteRoot}calculators/fd/`, `${siteRoot}calculators/cagr/`, `${siteRoot}calculators/swp/`, `${siteRoot}calculators/xirr/`, `${siteRoot}calculators/risk-reward/`]);
     await expect(page.locator(".category-page-card--soon")).toHaveCount(0); // PPF (Tool Pack 26) is live: no Investment tool is Coming soon
     await go("tax.html");
     expect(await links()).toEqual([`${siteRoot}calculators/gst/`, `${siteRoot}calculators/income-tax/`, `${siteRoot}calculators/gratuity/`, `${siteRoot}calculators/salary-in-hand/`]);
@@ -205,13 +205,13 @@ test.describe("categories page", () => {
 });
 
 test.describe("calculators and loans listings", () => {
-  test("calculators page: 30 entries (19 built), search, empty state, deep link", async ({ page, go }) => {
+  test("calculators page: 31 entries (20 built), search, empty state, deep link", async ({ page, go }) => {
     await go("calculators.html");
     const cards = page.locator("#calculators-grid .calculator-card");
-    // 18 published calculators (the Gratuity Calculator (India) is the 17th, Tool Pack 29, and the Salary / CTC to In-Hand Calculator (India) the 18th, Tool Pack 30, and the XIRR Calculator the 19th, pack 49) and 11 Coming Soon entries; the Time, Developer and Image tools are not calculators and are never listed here
-    await expect(cards).toHaveCount(30);
-    await expect(page.locator("#calculators-results-count")).toHaveText("30 calculators");
-    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(19);
+    // 18 published calculators (the Gratuity Calculator (India) is the 17th, Tool Pack 29, and the Salary / CTC to In-Hand Calculator (India) the 18th, Tool Pack 30, and the XIRR Calculator the 19th, pack 49) and 11 Coming Soon entries; the Time, Developer and Image tools are not calculators and are never listed here Risk-Reward (pack 51) is the 20th, so 31 entries with 20 built.
+    await expect(cards).toHaveCount(31);
+    await expect(page.locator("#calculators-results-count")).toHaveText("31 calculators");
+    await expect(page.locator("#calculators-grid a.calculator-card")).toHaveCount(20);
     await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(11);
 
     const input = page.locator("#calculators-search-input");
@@ -221,7 +221,7 @@ test.describe("calculators and loans listings", () => {
     await input.fill("zzzz-nothing");
     await expect(page.locator("#calculators-empty")).toBeVisible();
     await input.fill("");
-    await expect(cards).toHaveCount(30);
+    await expect(cards).toHaveCount(31);
 
     await go("calculators.html?q=emi");
     await expect(input).toHaveValue("emi");
@@ -433,7 +433,7 @@ test.describe("M7 shared search: page experiences keep their UX and rank results
     await input.fill("zzzz-nothing");
     await expect(page.locator("#calculators-empty")).toBeVisible();
     await input.fill("");
-    await expect(page.locator("#calculators-grid .calculator-card")).toHaveCount(30);
+    await expect(page.locator("#calculators-grid .calculator-card")).toHaveCount(31);
   });
 
   test("Loans page: only Loans tools, ranked; a tool id still matches", async ({ page, go }) => {
@@ -495,7 +495,7 @@ test.describe("All Tools and the calculator hierarchy", () => {
     const live = await page.locator(".directory-group a").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
     for (const r of ["loans.html", "investment.html", "tax.html", "business.html", "math.html", "calculators/emi/", "calculators/sip/", "calculators/fd/", "calculators/cagr/", "calculators/ppf/", "calculators/margin/", "calculators/profit/", "calculators/gst/", "calculators/percentage/", "calculators/income-tax/"]) expect(live).toContain(siteRoot + r);
     for (const bad of ["categories.html#health", "categories.html#converter", "calculators/roi/"]) expect(live.some((h) => h.includes(bad)), bad).toBe(false);
-    await expect(page.locator(".directory-group")).toHaveCount(40); // the five live calculator categories, the thirteen Time Tools tools (Tool Pack 34), the seventeen Developer Tools tools (twelve utilities and the five Practice Labs and Flashcards tools), the two Image Tools tools (Photos to PDF is the second, Tool Pack 31) and the three PDF Tools tools (Tool Pack 33)
+    await expect(page.locator(".directory-group")).toHaveCount(41); // the five live calculator categories, the thirteen Time Tools tools (Tool Pack 34), the seventeen Developer Tools tools (twelve utilities and the five Practice Labs and Flashcards tools), the two Image Tools tools (Photos to PDF is the second, Tool Pack 31) and the four PDF Tools tools (Tool Pack 33, and Tool Pack 52, PDF Page Numbers and Watermark)
     await expect(page.locator(".directory-soon")).toHaveCount(0);
     await expect(page.locator(".coming-soon-badge")).toHaveCount(0);
     await expect(page.getByRole("heading", { name: "Coming soon" })).toHaveCount(0);
@@ -579,7 +579,7 @@ test.describe("All Tools and the calculator hierarchy", () => {
   test("the three destinations have different jobs: All Tools (platform), Calculator Categories (the section) and All Calculators (the flat list)", async ({ page, go }) => {
     await go("tools.html");
     await expect(page.locator(".directory-section__label")).toHaveText(["Section", "Section", "Section", "Section", "Section"]);
-    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, /^13 tools$/, "17 tools", /^2 tools$/, /^3 tools$/]);
+    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, /^13 tools$/, "17 tools", /^2 tools$/, /^4 tools$/]);
     await go("categories.html");
     await expect(page.locator("h1")).toHaveText("Calculator Categories");
     await expect(page.locator(".categories-search__content p")).toHaveText("Search calculators"); // this search is scoped to calculators, and says so

@@ -22,7 +22,7 @@ const PROJECT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..",
 const inventory = JSON.parse(fs.readFileSync(path.join(PROJECT, "tests", "inventory", "url-inventory.json"), "utf8"));
 
 const CATEGORY_IDS = ["loans", "investment", "tax", "health", "business", "math", "converter", "more"];
-const PUBLISHED_URLS = ["/calculators/balance-transfer/", "/calculators/cagr/", "/calculators/credit-card-payoff/", "/calculators/emi/", "/calculators/fd/", "/calculators/gratuity/", "/calculators/gst/", "/calculators/home-loan/", "/calculators/income-tax/", "/calculators/loan-comparison/", "/calculators/margin/", "/calculators/percentage/", "/calculators/ppf/", "/calculators/prepayment/", "/calculators/profit/", "/calculators/salary-in-hand/", "/calculators/sip/", "/calculators/swp/", "/calculators/xirr/"];
+const PUBLISHED_URLS = ["/calculators/balance-transfer/", "/calculators/cagr/", "/calculators/credit-card-payoff/", "/calculators/emi/", "/calculators/fd/", "/calculators/gratuity/", "/calculators/gst/", "/calculators/home-loan/", "/calculators/income-tax/", "/calculators/loan-comparison/", "/calculators/margin/", "/calculators/percentage/", "/calculators/ppf/", "/calculators/prepayment/", "/calculators/profit/", "/calculators/risk-reward/", "/calculators/salary-in-hand/", "/calculators/sip/", "/calculators/swp/", "/calculators/xirr/"];
 
 let cats, tax, calcs, routes, registry, idx, search, tools;
 before(async () => {
@@ -66,7 +66,7 @@ describe("section model", () => {
     assert.equal(pdf.landing, "pdfTools");
     assert.equal(pdf.pathPrefix, "tools"); // /tools/<id>/ like the other non-calculator sections
     assert.deepEqual(tax.getCategoriesBySection("pdf-tools"), []); // flat: no categories
-    assert.deepEqual(tax.getToolsBySection("pdf-tools").map((t) => t.id), ["merge-pdf", "split-pdf", "pdf-pages"]); // Tool Pack 33; Photos to PDF stays in Image Tools
+    assert.deepEqual(tax.getToolsBySection("pdf-tools").map((t) => t.id), ["merge-pdf", "split-pdf", "pdf-pages", "pdf-marks"]); // Tool Pack 33; pack 52 adds Page Numbers and Watermark; Photos to PDF stays in Image Tools
   });
 
   test("section ids are unique and every section names a landing page that exists in ROUTES", () => {
@@ -194,7 +194,7 @@ describe("routing: every registered tool keeps its URL", () => {
   });
 
   test("the calculator loader registry is unchanged: loaders only for the published tools, still lazy", () => {
-    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "base64-encoder-decoder", "business-days", "cagr", "countdown-timer", "credit-card-payoff", "cron-challenge-lab", "cron-expression-explainer", "date-calculator", "date-difference", "emi", "fd", "gratuity", "gst", "home-loan", "hours-calculator", "image-compressor-resizer", "income-tax", "interval-timer", "json-compare", "json-csv-converter", "json-error-fixing-lab", "json-formatter", "jsonpath-challenge-lab", "jsonpath-tester", "jwt-decoder", "list-comparer", "loan-comparison", "margin", "meeting-planner", "merge-pdf", "pdf-pages", "percentage", "photos-to-pdf", "pomodoro-timer", "ppf", "prepayment", "profit", "salary-in-hand", "shift-planner", "sip", "smart-flashcards", "split-pdf", "stopwatch", "swp", "test-design-lab", "text-diff", "time-duration", "time-zone-converter", "unix-timestamp-converter", "url-parser", "uuid-generator", "world-clock", "xirr"]);
+    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["balance-transfer", "base64-encoder-decoder", "business-days", "cagr", "countdown-timer", "credit-card-payoff", "cron-challenge-lab", "cron-expression-explainer", "date-calculator", "date-difference", "emi", "fd", "gratuity", "gst", "home-loan", "hours-calculator", "image-compressor-resizer", "income-tax", "interval-timer", "json-compare", "json-csv-converter", "json-error-fixing-lab", "json-formatter", "jsonpath-challenge-lab", "jsonpath-tester", "jwt-decoder", "list-comparer", "loan-comparison", "margin", "meeting-planner", "merge-pdf", "pdf-marks", "pdf-pages", "percentage", "photos-to-pdf", "pomodoro-timer", "ppf", "prepayment", "profit", "risk-reward", "salary-in-hand", "shift-planner", "sip", "smart-flashcards", "split-pdf", "stopwatch", "swp", "test-design-lab", "text-diff", "time-duration", "time-zone-converter", "unix-timestamp-converter", "url-parser", "uuid-generator", "world-clock", "xirr"]);
     for (const loader of Object.values(registry.calculatorRegistry)) assert.equal(typeof loader, "function");
     assert.deepEqual(registry.calculatorMetadata.emi, { section: "Calculators", category: "loans", title: "EMI Calculator" });
     assert.deepEqual(registry.calculatorMetadata["income-tax"], { section: "Calculators", category: "tax", title: "Old vs New Tax Regime Calculator" });
@@ -221,6 +221,7 @@ describe("routing: every registered tool keeps its URL", () => {
     assert.deepEqual(registry.calculatorMetadata["merge-pdf"], { section: "PDF Tools", title: "Merge PDF" });
     assert.deepEqual(registry.calculatorMetadata["split-pdf"], { section: "PDF Tools", title: "Split PDF" });
     assert.deepEqual(registry.calculatorMetadata["pdf-pages"], { section: "PDF Tools", title: "Extract, Reorder and Rotate PDF Pages" });
+    assert.deepEqual(registry.calculatorMetadata["pdf-marks"], { section: "PDF Tools", title: "Add Page Numbers and Watermark to PDF" });
   });
 });
 

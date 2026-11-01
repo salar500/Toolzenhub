@@ -622,6 +622,45 @@ const catalog = [
     ===================================================== */
 
     {
+        id: "risk-reward",
+        status: "published",
+        loader: () =>
+            import("../calculators/risk-reward/index.js"),
+        category: "investment",
+        icon: "⚖",
+        title: "Risk-Reward and Position Size Calculator",
+        relatedTools: [
+            "cagr",
+            "xirr",
+            "sip"
+        ],
+        description:
+            "Enter an entry, stop-loss and target to see the risk and reward per unit, the risk-reward ratio and the break-even win rate, then size the position from your account size and the share you accept losing.",
+        aliases: [
+            "risk reward ratio",
+            "position size calculator",
+            "stop loss calculator",
+            "trade risk calculator"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        relatedArticles: [],
+        seo: {
+            title:
+                "Risk Reward Ratio and Position Size Calculator | ToolZen Hub",
+            description:
+                "Work out the risk and reward per unit, the risk-reward ratio, the break-even win rate and a position size from your entry, stop-loss, target, account size and risk percentage. Arithmetic on your numbers: not advice."
+        }
+    },
+
+    {
         id: "gst",
         status: "published",
         loader: () =>
@@ -941,7 +980,8 @@ const catalog = [
         relatedArticles: [
             "percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back",
             "percentage/how-to-find-the-original-price-before-a-percentage-change",
-            "percentage/percent-vs-percentage-points"
+            "percentage/percent-vs-percentage-points",
+            "math/how-to-calculate-percentage-easily"
         ],
         seo: {
             title:
@@ -2316,6 +2356,43 @@ const catalog = [
                 "Extract, Reorder and Rotate PDF Pages | ToolZen Hub",
             description:
                 "Free tool to extract, reorder, delete and rotate PDF pages. Choose the pages and their order, turn sideways pages, and download a new PDF. It runs in your browser: your PDF is not uploaded."
+        }
+    },
+
+    {
+        id: "pdf-marks",
+        status: "published",
+        loader: () =>
+            import("../tools/pdf-marks/index.js"),
+        sectionId: "pdf-tools",
+        icon: "#",
+        title: "Add Page Numbers and Watermark to PDF",
+        description:
+            "Add page numbers, a text watermark or both to a PDF and download a new copy. It runs in your browser: your PDF is not uploaded.",
+        autoRelated: false,
+        relatedTools: ["pdf-pages", "merge-pdf"],
+        aliases: [
+            "add page numbers to pdf",
+            "pdf page numbers",
+            "number pdf pages",
+            "pdf watermark",
+            "add watermark to pdf",
+            "watermark pdf",
+            "stamp pdf",
+            "bates numbering"
+        ],
+        capabilities: {
+            reset: true,
+            download: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Add Page Numbers and Watermark to PDF | ToolZen Hub",
+            description:
+                "Free tool to add page numbers and a text watermark to a PDF. Choose the format, position and strength, and download a new PDF. It runs in your browser: your PDF is not uploaded."
         }
     }
 

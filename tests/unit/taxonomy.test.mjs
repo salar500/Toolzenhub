@@ -86,7 +86,7 @@ describe("current hierarchy data", () => {
     assert.equal(tax.getArticlesForTool("fd").length, 2);
     assert.equal(tax.getArticlesForTool("gst").length, 2);
     assert.equal(tax.getArticlesForTool("cagr").length, 2);
-    assert.equal(tax.getArticlesForTool("percentage").length, 3);
+    assert.equal(tax.getArticlesForTool("percentage").length, 4); // the basics guide joined the three pack articles on 2026-11-01
     assert.deepEqual(tax.getArticlesForTool(getComingSoonTool().id), []);
   });
 });
@@ -113,8 +113,8 @@ describe("Investment is a category inside Calculators (Tool Pack 7 pins SIP and 
     assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools", "pdf-tools"]); // a category belongs to Calculators; the other sections have none
     assert.equal(cats.categories.find((c) => c.id === "investment").sectionId, "calculators");
     assert.equal(cats.categories.find((c) => c.id === "investment").title, "Investment");
-    assert.deepEqual(tax.getToolsByCategory("investment").map((t) => t.id), ["sip", "ppf", "fd", "cagr", "swp", "xirr"]);
-    assert.deepEqual(tax.getToolsByCategory("investment").filter((t) => t.available).map((t) => t.id), ["sip", "ppf", "fd", "cagr", "swp", "xirr"]);
+    assert.deepEqual(tax.getToolsByCategory("investment").map((t) => t.id), ["sip", "ppf", "fd", "cagr", "swp", "xirr", "risk-reward"]);
+    assert.deepEqual(tax.getToolsByCategory("investment").filter((t) => t.available).map((t) => t.id), ["sip", "ppf", "fd", "cagr", "swp", "xirr", "risk-reward"]);
   });
 
   test("the search index, the registry and the breadcrumb agree: Calculators > Investment > the tool", async () => {

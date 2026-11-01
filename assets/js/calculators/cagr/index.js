@@ -437,6 +437,7 @@ function periodFields({
 
                                 ${numberField({
                                     id: ids.years,
+                                    slider: { min: 1, max: 30, step: 1 },
                                     label: "Years",
                                     min: 0,
                                     max: CAGR_LIMITS.years.max,

@@ -54,6 +54,11 @@ async function startTool() {
 
         if (source.includes("/calculators/")) {
             addJumpToResult(app);
+
+            /* a slider beside a bounded field (rate, years) that opted in; the number input stays the source of truth */
+            if (app.querySelector("input[data-slider-max]")) {
+                (await import("../ui/field-slider.js")).enhanceSliders(app);
+            }
         }
 
     } catch (error) {

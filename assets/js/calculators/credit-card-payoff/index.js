@@ -280,6 +280,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.apr,
+                            slider: { min: 5, max: 60, step: 0.5 },
                             label: "Annual Percentage Rate (APR)",
                             unit: "% a year",
                             hint: "From 0% to 100%, with up to 2 decimal places. Use the rate your card states.",

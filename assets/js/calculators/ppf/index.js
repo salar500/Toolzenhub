@@ -461,6 +461,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.rate,
+                            slider: { min: 5, max: 10, step: 0.1 },
                             label: "Interest Rate (example)",
                             unit: "% a year",
                             hint: "Enter the rate that applies to you. The Government reviews it every quarter. The 7.1 shown is only an example, not the current rate. From 0 to 15, in steps of 0.1.",
@@ -472,6 +473,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.years,
+                            slider: { min: 1, max: 30, step: 1 },
                             label: "Financial Years of Deposits",
                             unit: "years",
                             hint: "From 1 to 50. 16 is the first term of an account opened in April; other years are projections.",

@@ -1799,6 +1799,81 @@
       "visibleTextChars": 6119
     }
   },
+  "/articles/math/how-to-calculate-percentage-easily/": {
+    "runtime": {
+      "title": "How to Calculate Percentage Easily | ToolZen Hub",
+      "description": "Four everyday percentage calculations with worked examples: a percentage of a number, what percentage one number is of another, a rise or a fall, and a percentage change.",
+      "canonical": "https://toolzenhub.in/articles/math/how-to-calculate-percentage-easily/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Four everyday percentage calculations with worked examples: a percentage of a number, what percentage one number is of another, a rise or a fall, and a percentage change.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/how-to-calculate-percentage-easily.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How to Calculate Percentage Easily | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/math/how-to-calculate-percentage-easily/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Four everyday percentage calculations with worked examples: a percentage of a number, what percentage one number is of another, a rise or a fall, and a percentage change.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/how-to-calculate-percentage-easily.png",
+        "twitter:title": "How to Calculate Percentage Easily | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "How to Calculate Percentage Easily"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#fafaf9",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How to Calculate Percentage Easily | ToolZen Hub",
+      "description": "Four everyday percentage calculations with worked examples: a percentage of a number, what percentage one number is of another, a rise or a fall, and a percentage change.",
+      "canonical": "https://toolzenhub.in/articles/math/how-to-calculate-percentage-easily/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6185
+    }
+  },
   "/articles/percentage/how-to-find-the-original-price-before-a-percentage-change/": {
     "runtime": {
       "title": "How to Find the Original Price Before a Percentage Change | ToolZen Hub",
@@ -2880,7 +2955,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6587
+      "visibleTextChars": 6832
     }
   },
   "/calculators/credit-card-payoff/": {
@@ -3027,7 +3102,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6999
+      "visibleTextChars": 7244
     }
   },
   "/calculators/gratuity/": {
@@ -3370,7 +3445,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5300
+      "visibleTextChars": 5506
     }
   },
   "/calculators/ppf/": {
@@ -3419,7 +3494,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 10667
+      "visibleTextChars": 10912
     }
   },
   "/calculators/prepayment/": {
@@ -3520,6 +3595,55 @@
       "visibleTextChars": 6056
     }
   },
+  "/calculators/risk-reward/": {
+    "runtime": {
+      "title": "Risk Reward Ratio and Position Size Calculator | ToolZen Hub",
+      "description": "Work out the risk and reward per unit, the risk-reward ratio, the break-even win rate and a position size from your entry, stop-loss, target, account size and risk percentage. Arithmetic on your numbers: not advice.",
+      "canonical": "https://toolzenhub.in/calculators/risk-reward/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Work out the risk and reward per unit, the risk-reward ratio, the break-even win rate and a position size from your entry, stop-loss, target, account size and risk percentage. Arithmetic on your numbers: not advice.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Risk Reward Ratio and Position Size Calculator | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/risk-reward/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Work out the risk and reward per unit, the risk-reward ratio, the break-even win rate and a position size from your entry, stop-loss, target, account size and risk percentage. Arithmetic on your numbers: not advice.",
+        "twitter:title": "Risk Reward Ratio and Position Size Calculator | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Risk-Reward and Position Size Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Risk Reward Ratio and Position Size Calculator | ToolZen Hub",
+      "description": "Work out the risk and reward per unit, the risk-reward ratio, the break-even win rate and a position size from your entry, stop-loss, target, account size and risk percentage. Arithmetic on your numbers: not advice.",
+      "canonical": "https://toolzenhub.in/calculators/risk-reward/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5393
+    }
+  },
   "/calculators/salary-in-hand/": {
     "runtime": {
       "title": "Salary / CTC to In-Hand Calculator India, Tax Year 2026-27 | ToolZen Hub",
@@ -3615,7 +3739,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7291
+      "visibleTextChars": 7536
     }
   },
   "/calculators/swp/": {
@@ -3713,7 +3837,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6677
+      "visibleTextChars": 6922
     }
   },
   "/categories.html": {
@@ -3980,7 +4104,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1871
+      "visibleTextChars": 2118
     }
   },
   "/loans.html": {
@@ -4118,7 +4242,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 992
+      "visibleTextChars": 1160
     }
   },
   "/practice-labs.html": {
@@ -4394,7 +4518,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 11958
+      "visibleTextChars": 12369
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -5375,6 +5499,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 3563
+    }
+  },
+  "/tools/pdf-marks/": {
+    "runtime": {
+      "title": "Add Page Numbers and Watermark to PDF | ToolZen Hub",
+      "description": "Free tool to add page numbers and a text watermark to a PDF. Choose the format, position and strength, and download a new PDF. It runs in your browser: your PDF is not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/pdf-marks/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Free tool to add page numbers and a text watermark to a PDF. Choose the format, position and strength, and download a new PDF. It runs in your browser: your PDF is not uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Add Page Numbers and Watermark to PDF | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/pdf-marks/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Free tool to add page numbers and a text watermark to a PDF. Choose the format, position and strength, and download a new PDF. It runs in your browser: your PDF is not uploaded.",
+        "twitter:title": "Add Page Numbers and Watermark to PDF | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Add Page Numbers and Watermark to PDF"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Add Page Numbers and Watermark to PDF | ToolZen Hub",
+      "description": "Free tool to add page numbers and a text watermark to a PDF. Choose the format, position and strength, and download a new PDF. It runs in your browser: your PDF is not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/pdf-marks/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3690
     }
   },
   "/tools/pdf-pages/": {

@@ -26,8 +26,8 @@ before(async () => {
 });
 
 // the published tools of the Calculators section; Date Difference (Time Tools) is a published tool too, but it is not a calculator
-const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "swp", "percentage", "income-tax", "credit-card-payoff", "ppf", "gratuity", "salary-in-hand", "xirr"];
-const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "smart-flashcards", "json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab", "list-comparer", "uuid-generator", "json-csv-converter", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages"];
+const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "swp", "percentage", "income-tax", "credit-card-payoff", "ppf", "gratuity", "salary-in-hand", "xirr", "risk-reward"];
+const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "smart-flashcards", "json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab", "list-comparer", "uuid-generator", "json-csv-converter", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages", "pdf-marks"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"];
 
 describe("catalog model", () => {
@@ -45,7 +45,7 @@ describe("catalog model", () => {
     for (const c of catalog.calculators) assert.ok(["published", "coming-soon"].includes(c.status), `${c.id}: ${c.status}`);
   });
 
-  test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP Margin, Profit, Home Loan, FD, GST, CAGR and Percentage, Income Tax (the Old vs New Tax Regime Calculator), SWP, Credit Card Payoff, PPF, Gratuity (India), Salary / CTC to In-Hand (India) and XIRR are published; all other 11 are coming-soon", () => {
+  test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP Margin, Profit, Home Loan, FD, GST, CAGR and Percentage, Income Tax (the Old vs New Tax Regime Calculator), SWP, Credit Card Payoff, PPF, Gratuity (India), Salary / CTC to In-Hand (India), XIRR and Risk-Reward and Position Size are published; all other 11 are coming-soon", () => {
     const pub = catalog.calculators.filter((c) => c.status === "published").map((c) => c.id).sort();
     assert.deepEqual(pub, [...PUBLISHED_CALCULATORS].sort());
     assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 11);
@@ -122,6 +122,7 @@ describe("registry is derived from the catalog", () => {
       fd: { section: "Calculators", category: "investment", title: "FD Calculator" },
       ppf: { section: "Calculators", category: "investment", title: "PPF Calculator" },
       xirr: { section: "Calculators", category: "investment", title: "XIRR Calculator" },
+      "risk-reward": { section: "Calculators", category: "investment", title: "Risk-Reward and Position Size Calculator" },
       gratuity: { section: "Calculators", category: "tax", title: "Gratuity Calculator (India)" },
       "salary-in-hand": { section: "Calculators", category: "tax", title: "Salary / CTC to In-Hand Calculator (India)" },
       gst: { section: "Calculators", category: "tax", title: "GST Calculator" },
@@ -166,6 +167,7 @@ describe("registry is derived from the catalog", () => {
       "merge-pdf": { section: "PDF Tools", title: "Merge PDF" },
       "split-pdf": { section: "PDF Tools", title: "Split PDF" },
       "pdf-pages": { section: "PDF Tools", title: "Extract, Reorder and Rotate PDF Pages" },
+      "pdf-marks": { section: "PDF Tools", title: "Add Page Numbers and Watermark to PDF" },
     });
   });
 });

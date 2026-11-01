@@ -477,7 +477,7 @@ test.describe("PPF Calculator in the Investment listing, search and related tool
   test("the established automatic Investment relationship: PPF offers SIP, FD, CAGR and XIRR, and they offer it; only live tools are linked", async ({ page, go, siteRoot }) => {
     await go("calculators/ppf/");
     const hrefs = await page.locator(".related-calculator-card").evaluateAll((l) => l.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
-    expect(hrefs).toEqual([`${siteRoot}calculators/sip/`, `${siteRoot}calculators/fd/`, `${siteRoot}calculators/cagr/`, `${siteRoot}calculators/xirr/`]);
+    expect(hrefs).toEqual([`${siteRoot}calculators/sip/`, `${siteRoot}calculators/fd/`, `${siteRoot}calculators/cagr/`, `${siteRoot}calculators/xirr/`, `${siteRoot}calculators/risk-reward/`]);
     for (const id of ["sip", "fd", "cagr", "xirr"]) {
       await go(`calculators/${id}/`);
       expect(await page.locator(".related-calculator-card a, a.related-calculator-card").evaluateAll((l) => l.map((e) => e.getAttribute("href")))).toContain(`${siteRoot}calculators/ppf/`);

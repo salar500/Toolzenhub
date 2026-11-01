@@ -671,6 +671,7 @@ function periodFields() {
 
                                     ${numberField({
                                         id: IDS.years,
+                                        slider: { min: 1, max: 40, step: 1 },
                                         label: "Years",
                                         min: L.years.min,
                                         max: L.years.max,

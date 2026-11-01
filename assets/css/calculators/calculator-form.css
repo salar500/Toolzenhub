@@ -489,3 +489,90 @@
     }
 
 }
+
+
+/* =========================================================
+   SLIDER BESIDE A NUMBER FIELD
+   ui/field-slider.js adds a range input under a bounded
+   field (a rate, a number of years) that opted in. The number
+   input above stays the source of truth.
+========================================================= */
+
+.calculator-form__slider {
+    --slider-progress: 0%;
+
+    display: block;
+    width: 100%;
+    height: 44px;
+    margin: 0;
+    padding: 0;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    border: 0;
+    background: transparent;
+
+    cursor: pointer;
+    box-sizing: border-box;
+    touch-action: pan-y;
+}
+
+.calculator-form__slider:disabled {
+    cursor: not-allowed;
+    opacity: .45;
+}
+
+.calculator-form__slider:focus-visible {
+    outline: 3px solid rgba(67, 56, 202, .35);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+.calculator-form__slider::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(
+        to right,
+        var(--color-brand-green) 0%,
+        var(--color-brand-green) var(--slider-progress),
+        var(--color-slate-200, #e2e8f0) var(--slider-progress),
+        var(--color-slate-200, #e2e8f0) 100%
+    );
+}
+
+.calculator-form__slider::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+    margin-top: -8px;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    background: var(--color-brand-green);
+    box-shadow: 0 2px 6px rgba(15, 23, 42, .22);
+}
+
+.calculator-form__slider::-moz-range-track {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--color-slate-200, #e2e8f0);
+}
+
+.calculator-form__slider::-moz-range-progress {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--color-brand-green);
+}
+
+.calculator-form__slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    background: var(--color-brand-green);
+    box-shadow: 0 2px 6px rgba(15, 23, 42, .22);
+}

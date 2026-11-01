@@ -11,7 +11,9 @@
    MARKUP (pure strings: usable while the site is built and in
    the browser)
        fieldShell(...)   the wrapper: label, control, unit, hint
-       numberField(...)  a number input inside that wrapper
+       numberField(...)  a number input inside that wrapper;
+                         `slider: { min, max, step }` opts the field in to
+                         a slider (ui/field-slider.js adds it in the browser)
 
    ACCESSIBILITY (needs the DOM; call from a tool's init())
        setFieldsInvalid / clearFieldsInvalid
@@ -102,6 +104,7 @@ export function numberField({
     max,
     step,
     value,
+    slider,
     required = true
 }) {
 
@@ -109,7 +112,10 @@ export function numberField({
         ["min", min],
         ["max", max],
         ["step", step],
-        ["value", value]
+        ["value", value],
+        ["data-slider-min", slider?.min],
+        ["data-slider-max", slider?.max],
+        ["data-slider-step", slider?.step]
     ]
         .filter(([, v]) => v !== undefined)
         .map(([name, v]) => `${name}="${escapeHTML(v)}"`)

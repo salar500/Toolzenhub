@@ -865,6 +865,7 @@ export function markup() {
 
                         ${modeField("years", numberField({
                             id: IDS.years,
+                            slider: { min: 1, max: 40, step: 1 },
                             label: "How Long",
                             unit: "years",
                             hint: "A whole number of years, up to 50.",

@@ -1292,6 +1292,39 @@ const catalog = [
     },
 
 
+    {
+        id: 11,
+        status: "published",
+        category: "math",
+        topic: "math",
+        slug: "how-to-calculate-percentage-easily",
+        title:
+            "How to Calculate Percentage Easily",
+        description:
+            "Four everyday percentage calculations with worked examples: a percentage of a number, what percentage one number is of another, a rise or a fall, and a percentage change.",
+        publishedAt: "Nov 1, 2026",
+        updatedAt: "Nov 1, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/how-to-calculate-percentage-easily.png",
+            alt:
+                "Diagram: 15% of 240 is 36 (10% is 24, 5% is 12, 24 plus 12); a change from 80 to 100 is +25% (a difference of 20 divided by the start, 80)"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/how-to-calculate-percentage-easily.png",
+            alt:
+                "Diagram: 15% of 240 is 36 (10% is 24, 5% is 12, 24 plus 12); a change from 80 to 100 is +25% (a difference of 20 divided by the start, 80)"
+        },
+        tools: ["percentage"],
+        related: [
+            "percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back",
+            "percentage/how-to-find-the-original-price-before-a-percentage-change"
+        ],
+        relatedLabel: "Math"
+    },
+
     /* =====================================================
        COMING SOON  (listing placeholders: no route, no
        content module, not counted)
@@ -1357,20 +1390,6 @@ const catalog = [
         cardImage: null
     },
 
-    {
-        id: 11,
-        status: "coming-soon",
-        category: "math",
-        topic: "math",
-        slug: "how-to-calculate-percentage-easily",
-        title:
-            "How to Calculate Percentage Easily",
-        description:
-            "Learn simple percentage formulas with practical examples for everyday use.",
-        listingDate: "Aug 25, 2026",
-        readTime: "4 min read",
-        cardImage: null
-    },
 
     {
         id: 12,
@@ -1597,6 +1616,12 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/swp/how-a-systematic-withdrawal-plan-works.js"
+            ),
+
+    "math/how-to-calculate-percentage-easily":
+        () =>
+            import(
+                "./articles/math/how-to-calculate-percentage-easily.js"
             ),
 
     "swp/what-changes-how-long-a-corpus-lasts":

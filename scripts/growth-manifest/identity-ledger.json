@@ -509,6 +509,13 @@
       "state": "active"
     },
     {
+      "id": "pdf-marks",
+      "module": "assets/js/tools/pdf-marks/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "pdf-pages",
       "module": "assets/js/tools/pdf-pages/index.js",
       "moduleChanges": [],
@@ -555,6 +562,13 @@
       "module": "assets/js/calculators/profit/index.js",
       "moduleChanges": [],
       "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "risk-reward",
+      "module": "assets/js/calculators/risk-reward/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
       "state": "active"
     },
     {

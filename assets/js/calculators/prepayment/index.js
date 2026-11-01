@@ -814,6 +814,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.rate,
+                            slider: { min: 1, max: 20, step: 0.1 },
                             label: "Interest Rate",
                             unit: "% a year",
                             hint: "Your loan's yearly rate. It is assumed to stay the same until the loan ends.",
@@ -839,6 +840,7 @@ export function markup() {
 
                                 ${numberField({
                                     id: IDS.years,
+                                    slider: { min: 1, max: 30, step: 1 },
                                     label: "Years",
                                     min: PREPAYMENT_LIMITS.years.min,
                                     max: PREPAYMENT_LIMITS.years.max,

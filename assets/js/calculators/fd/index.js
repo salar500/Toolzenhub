@@ -484,6 +484,7 @@ function periodFields({
 
                                 ${numberField({
                                     id: ids.years,
+                                    slider: { min: 1, max: 10, step: 1 },
                                     label: "Years",
                                     min: L.years.min,
                                     max: L.years.max,
@@ -638,6 +639,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.rate,
+                            slider: { min: 1, max: 12, step: 0.1 },
                             label: "Interest Rate",
                             unit: "% a year",
                             hint: "The rate you were quoted, held for the whole tenure. 7% is only an example.",
@@ -677,6 +679,7 @@ export function markup() {
 
                             ${numberField({
                                 id: IDS.bRate,
+                                slider: { min: 1, max: 12, step: 0.1 },
                                 label: "Option B Interest Rate",
                                 unit: "% a year",
                                 hint: "Leave blank to skip the comparison.",

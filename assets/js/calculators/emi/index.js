@@ -369,6 +369,7 @@ export function markup() {
 
                         ${fieldWrap("rate", numberField({
                             id: FIELDS.rate.id,
+                            slider: { min: 1, max: 20, step: 0.1 },
                             label: "Interest Rate",
                             unit: "%",
                             hint: "Enter the annual interest rate.",
@@ -380,6 +381,7 @@ export function markup() {
 
                         ${fieldWrap("years", numberField({
                             id: FIELDS.years.id,
+                            slider: { min: 1, max: 30, step: 1 },
                             label: "Loan Tenure",
                             unit: "Years",
                             hint: "Enter the repayment period.",

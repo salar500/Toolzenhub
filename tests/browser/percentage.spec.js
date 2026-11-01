@@ -360,12 +360,12 @@ test.describe("Percentage Calculator", () => {
     const hrefs = await related.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
     expect(hrefs).toEqual([`${siteRoot}calculators/gst/`, `${siteRoot}calculators/margin/`]);
     await expect(page.locator("a[href*='calculators/ratio'], a[href*='calculators/age'], a[href*='calculators/profit']")).toHaveCount(0);
-    // the three articles
+    // the four articles (the basics guide was added 2026-11-01)
     const articles = page.locator(".related-article-card");
-    await expect(articles).toHaveCount(3);
+    await expect(articles).toHaveCount(4);
     await expect(articles.first()).toContainText("Why +20% Then −20% Doesn't Get You Back");
     // each card carries its article's own diagram
-    await expect(page.locator(".related-article-card .related-article-image")).toHaveCount(3);
+    await expect(page.locator(".related-article-card .related-article-image")).toHaveCount(4);
   });
 
   test("search finds it by name and by its aliases, not by percentage difference, CAGR or ROI", async ({ page, go, siteRoot }) => {
@@ -440,12 +440,12 @@ test.describe("Percentage publication", () => {
     await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(11); // the catalog now has 11 Coming Soon calculators (13, then 12, when this was written)
   });
 
-  test("the three articles are listed under Math with their own diagram, and their pages render the hero image", async ({ page, go, siteRoot }) => {
+  test("the four articles are listed under Math with their own diagram, and their pages render the hero image", async ({ page, go, siteRoot }) => {
     await go("articles.html");
     await page.getByRole("button", { name: /^Math/ }).click();
-    const cards = page.locator(".article-card:not(.article-card--soon)"); // the Math filter also lists one Coming soon placeholder
-    await expect(cards).toHaveCount(3);
-    await expect(page.locator(".article-card:not(.article-card--soon) .article-card-image")).toHaveCount(3);
+    const cards = page.locator(".article-card:not(.article-card--soon)"); // the Math filter lists no placeholder any more
+    await expect(cards).toHaveCount(4);
+    await expect(page.locator(".article-card:not(.article-card--soon) .article-card-image")).toHaveCount(4);
     await expect(page.locator(".article-card.article-card--no-image")).toHaveCount(0);
     await go("articles/percentage/percent-vs-percentage-points/");
     await expect(page.locator("h1")).toHaveText("Percent vs Percentage Points");

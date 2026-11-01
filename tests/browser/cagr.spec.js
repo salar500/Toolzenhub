@@ -427,7 +427,7 @@ test.describe("CAGR Calculator", () => {
     await open(page, go);
     const related = page.locator(".related-calculator-card");
     const hrefs = await related.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
-    expect(hrefs).toEqual([`${siteRoot}calculators/fd/`, `${siteRoot}calculators/sip/`, `${siteRoot}calculators/ppf/`, `${siteRoot}calculators/xirr/`]);
+    expect(hrefs).toEqual([`${siteRoot}calculators/fd/`, `${siteRoot}calculators/sip/`, `${siteRoot}calculators/ppf/`, `${siteRoot}calculators/xirr/`, `${siteRoot}calculators/risk-reward/`]);
   });
 
   test("search finds it by name and by its aliases, not by XIRR or returns", async ({ page, go, siteRoot }) => {

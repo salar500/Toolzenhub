@@ -147,6 +147,12 @@
     "placeholders": 0,
     "deadFragments": []
   },
+  "articles/math/how-to-calculate-percentage-easily/": {
+    "internal": 36,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
   "articles/percentage/how-to-find-the-original-price-before-a-percentage-change/": {
     "internal": 35,
     "external": [],
@@ -226,7 +232,7 @@
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 44,
+    "internal": 45,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -238,7 +244,7 @@
     "deadFragments": []
   },
   "calculators/cagr/": {
-    "internal": 36,
+    "internal": 37,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -256,7 +262,7 @@
     "deadFragments": []
   },
   "calculators/fd/": {
-    "internal": 36,
+    "internal": 37,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -303,13 +309,13 @@
     "deadFragments": []
   },
   "calculators/percentage/": {
-    "internal": 35,
+    "internal": 36,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/ppf/": {
-    "internal": 39,
+    "internal": 40,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -326,6 +332,12 @@
     "placeholders": 0,
     "deadFragments": []
   },
+  "calculators/risk-reward/": {
+    "internal": 40,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
   "calculators/salary-in-hand/": {
     "internal": 31,
     "external": [
@@ -335,7 +347,7 @@
     "deadFragments": []
   },
   "calculators/sip/": {
-    "internal": 39,
+    "internal": 40,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -347,7 +359,7 @@
     "deadFragments": []
   },
   "calculators/xirr/": {
-    "internal": 39,
+    "internal": 40,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -389,7 +401,7 @@
     "deadFragments": []
   },
   "investment.html": {
-    "internal": 32,
+    "internal": 33,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -407,7 +419,7 @@
     "deadFragments": []
   },
   "pdf-tools.html": {
-    "internal": 29,
+    "internal": 30,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -443,7 +455,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 95,
+    "internal": 97,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -566,6 +578,12 @@
     "internal": 27,
     "external": [],
     "placeholders": 1,
+    "deadFragments": []
+  },
+  "tools/pdf-marks/": {
+    "internal": 27,
+    "external": [],
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/pdf-pages/": {

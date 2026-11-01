@@ -434,6 +434,7 @@ function itemFields(
 
                                 ${numberField({
                                     id: IDS[`rate${n}`],
+                                    slider: { min: 0, max: 28, step: 0.5 },
                                     label: "GST Rate",
                                     unit: "%",
                                     hint: first

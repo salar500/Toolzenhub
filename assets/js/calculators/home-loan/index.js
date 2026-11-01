@@ -525,6 +525,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.rate,
+                            slider: { min: 1, max: 20, step: 0.1 },
                             label: "Interest Rate",
                             unit: "% a year",
                             hint: "An assumption: the rate for the whole tenure. 8.5% is only an example.",
@@ -536,6 +537,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.years,
+                            slider: { min: 1, max: 30, step: 1 },
                             label: "Loan Tenure",
                             unit: "years",
                             hint: "Whole years, from 1 to 30.",

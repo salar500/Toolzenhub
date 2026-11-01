@@ -492,7 +492,7 @@ test.describe("SWP Calculator", () => {
     await related.click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}calculators/sip/`);
     await expect(page.locator(".related-calculator-card").first()).toHaveAttribute("href", `${siteRoot}calculators/swp/`); // SIP now names SWP first (curated, pack 50)
-    await expect(page.locator(".related-calculator-card")).toHaveCount(5); // then CAGR, plus PPF, FD and XIRR through the automatic Investment relationship
+    await expect(page.locator(".related-calculator-card")).toHaveCount(6); // then CAGR, plus PPF, FD, XIRR and Risk-Reward through the automatic Investment relationship
   });
 
   test("search finds it by name and by its four aliases, and does not take SIP's queries", async ({ page, go, siteRoot }) => {
