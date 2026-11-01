@@ -90,3 +90,11 @@ Not verified: the open PDF mobile test, Safari or real devices, screen reader, L
 Final verification (one worker, zero retries, one spec file per command): articles 49/49 and percentage 25/25 on subpath-desktop and subpath-mobile; pdf-tools 40/40 on both; learning-a11y plus accessibility 37/37; unit suite 3,625 tests, 3,621 pass, 0 fail, 4 skipped; links, assets, SEO and inventory pass (108 live pages).
 
 Still not verified: Safari or real devices, screen reader, Lighthouse and browser performance traces, a repeat of every other desktop spec after the final Flashcards change (only Flashcards, learning-a11y and accessibility were re-run), the SQL browser spike. Rule changes: none.
+
+## Full desktop regression on commit 3a8390e (2026-11-01)
+
+Project `subpath-desktop`, one worker, zero retries, one spec file per command in short foreground batches, RAM checked before each spec. A first attempt as one background job was stopped by the harness for low memory; some specs were also cut short by memory dips (gratuity-auto, gst, home-loan, hours-calculator, image-batch, image-compressor-resizer: INCOMPLETE, image-crop: BLOCKED at 426 MB free). Those were never counted as passed: each was re-run alone when memory recovered (0.9 to 1.7 GB free) and passed.
+
+**Result: 73 of 74 spec files PASS (1,711 tests passed, 0 failed, 0 skipped in these files). The 74th, `visual`, contains only `@visual` tests, which this project does not run (no tests found); its screenshots were verified separately in the visual-desktop, visual-mobile and visual-tablet projects (39, 39 and 20 passed, 19 skipped by design).** Smart Flashcards 24/24 and pdf-tools 40/40 were included. No product defect appeared in this run, so no code changed.
+
+Status: the committed build passes every desktop browser spec file. Still unverified: Safari and real devices, screen reader, Lighthouse and performance traces, the SQL spike in a real browser, and mobile and root-domain suites were last run before the final Flashcards and PDF-spec changes (only articles, percentage and pdf-tools were re-run on mobile). Rule changes: none.
