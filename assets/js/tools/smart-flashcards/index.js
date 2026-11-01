@@ -366,6 +366,12 @@ export function init() {
 
     function draw() {
 
+        /* a redraw that nobody asked for (saving finishing, a late load) must not drop the visitor's focus: remember where it is */
+        const active = document.activeElement;
+        const keep = active && root.contains(active) && active !== root
+            ? (active.dataset.focus ? `[data-focus='${active.dataset.focus}']` : active.id ? `#${CSS.escape(active.id)}` : null)
+            : null;
+
         clear(root);
 
         if (ui.view === "decks") drawDecks();
@@ -379,6 +385,8 @@ export function init() {
             root.querySelector("[data-focus='heading']")?.focus();
         } else if (ui.focus) {
             root.querySelector(`[data-focus='${ui.focus}']`)?.focus();
+        } else if (keep) {
+            root.querySelector(keep)?.focus();
         }
 
         ui.focus = null;

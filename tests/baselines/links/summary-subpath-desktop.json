@@ -10,7 +10,7 @@
     ]
   },
   "articles.html": {
-    "internal": 113,
+    "internal": 114,
     "external": [],
     "placeholders": 15,
     "deadFragments": []
@@ -232,55 +232,55 @@
     "deadFragments": []
   },
   "calculators/balance-transfer/": {
-    "internal": 38,
+    "internal": 39,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/cagr/": {
-    "internal": 35,
+    "internal": 36,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/credit-card-payoff/": {
-    "internal": 35,
+    "internal": 36,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/emi/": {
-    "internal": 41,
+    "internal": 42,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/fd/": {
-    "internal": 35,
+    "internal": 36,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/gratuity/": {
-    "internal": 28,
+    "internal": 29,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/gst/": {
-    "internal": 33,
+    "internal": 34,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/home-loan/": {
-    "internal": 37,
+    "internal": 38,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/income-tax/": {
-    "internal": 29,
+    "internal": 30,
     "external": [
       "egazette.gov.in",
       "github.com",
@@ -297,37 +297,37 @@
     "deadFragments": []
   },
   "calculators/margin/": {
-    "internal": 33,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "calculators/percentage/": {
     "internal": 34,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
+  "calculators/percentage/": {
+    "internal": 35,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
   "calculators/ppf/": {
-    "internal": 38,
+    "internal": 39,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/prepayment/": {
-    "internal": 38,
+    "internal": 39,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/profit/": {
-    "internal": 33,
+    "internal": 34,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/salary-in-hand/": {
-    "internal": 30,
+    "internal": 31,
     "external": [
       "github.com"
     ],
@@ -335,19 +335,19 @@
     "deadFragments": []
   },
   "calculators/sip/": {
-    "internal": 38,
+    "internal": 39,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/swp/": {
-    "internal": 32,
+    "internal": 33,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/xirr/": {
-    "internal": 38,
+    "internal": 39,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -365,7 +365,7 @@
     "deadFragments": []
   },
   "developer-tools.html": {
-    "internal": 43,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -412,6 +412,12 @@
     "placeholders": 0,
     "deadFragments": []
   },
+  "practice-labs.html": {
+    "internal": 31,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
   "privacy.html": {
     "internal": 25,
     "external": [],
@@ -437,7 +443,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 94,
+    "internal": 95,
     "external": [],
     "placeholders": 0,
     "deadFragments": []

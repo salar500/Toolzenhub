@@ -60,3 +60,33 @@ Full unit suite before the later edits: 3,625 tests, 3,621 passed, 0 failed, 4 s
 | Not in the run above: the other browser specs (e.g. the 100+ other tool specs), `subpath-mobile` and `root-desktop` projects, visual baselines, Lighthouse, real devices, screen reader | NOT RUN |
 
 Visual baseline specs (@visual) were not executed; baselines: none was updated. The new hub page and changed pages (All Tools, Home Featured cards, the four article pages, Gratuity, Date Difference) will differ from stored visual and DOM baselines; they must be reviewed by eye and refreshed in a memory-safe run. Nothing is committed, pushed or deployed. Status: **AMBER**, local only.
+
+## Verification continuation (after checkpoint commit e429bf7)
+
+Method: one worker, zero retries, one spec file per command, free RAM checked before each (all runs started with 1.0 to 1.4 GB free; no run was stopped).
+
+| Project | Result |
+|---|---|
+| subpath-desktop | every spec file executed: 73 files PASS (counts per file in the scratchpad ledger), `smart-flashcards` was FLAKY (22 to 23 of 24 in the full file); root cause found and fixed, see the closing section. The `visual` file has no non-visual tests |
+| subpath-mobile | 70 spec files PASS; `pdf-tools` was 39 of 40 (test-expectation defect, fixed: see the closing section); `dom-baseline` and `seo-baseline` have no mobile tests |
+| root-desktop | 9 of 9 portable spec files PASS |
+| visual-desktop / visual-mobile / visual-tablet | 39/39, 39/39, 20/20 (19 skipped by design) after review |
+
+Defects found and fixed in this continuation:
+1. **Real regression from my search-focus change**: `accessibility.spec` showed the Home, Categories and Loans search inputs lost their focus ring. Fixed: the single indicator is now an inset 2 px outline on the input (wrapper adds none). 32/32 pass.
+2. **Real defect in my article diagrams**: related-article cards show only the middle band of each image, clipping titles. Re-laid out all four diagrams inside the visible band and re-rendered PNG and WebP; viewed in the card.
+3. Specs that still pinned old behaviour (Featured list, Coming soon block, tenure article image, Date Calculator Coming soon check): updated without weakening assertions.
+
+Baselines reviewed by eye and accepted (each diff explained): DOM `home-main`, `tools-directory`, `related-content-emi`; links summary (22 pages: +1 on 19 calculators is the earlier "Jump to result" link, a stale baseline from commit 4716c48; +1 All Tools and Developer Tools for the hub link; +1 Articles for the tenure card image link; new `practice-labs.html`); SEO baseline (four articles gain `og:image` and a large Twitter card, new hub page entry); visual desktop `tools`, `percentage`, `date-difference`, `developer-tools`; visual mobile the same four plus `emi`, `loan-comparison`, `date-calculator`; visual tablet `percentage`.
+
+Not verified: the open PDF mobile test, Safari or real devices, screen reader, Lighthouse and browser performance traces, and a repeat run of the articles and percentage browser specs after the final diagram images (the static, asset, SEO and visual checks were repeated and pass). All work since commit e429bf7 is uncommitted.
+
+## Closing fixes and final verification (2026-11-01)
+
+**Split PDF mobile focus failure: test defect, not an application defect.** The assertion `#sp-file not.toBeFocused` after choosing a file pinned browser behaviour: with identical code, focus rested on the file input in some runs and on the body in others (sampled over 3 s on both projects). The application's deliberate behaviour is that Reset returns focus to the file input (as Merge PDF does), which the Split test never asserted. Fix: removed the unstable negative assertion (with a comment saying why) and added the positive `#sp-file toBeFocused` after Reset. This tightens the accessibility check. 4 of 4 isolated runs pass, then 40/40 on both projects.
+
+**Smart Flashcards intermittent failure: real application defect (focus stolen by an unrequested redraw).** Failures moved between tests (13, 14, 15, 7) but were always `toBeFocused` on the "JSON deck" heading, which existed but was inactive. Cause: enabling saving awaits `ensureKnown()` (dynamic deck imports) and then calls `draw()`; if the visitor has already chosen a deck, that late redraw rebuilt the view and dropped focus. Fix in `assets/js/tools/smart-flashcards/index.js`: `draw()` now remembers the focused element (by `data-focus` or `id`) and restores it when no explicit focus target was requested. Test change: the topics test now waits for the setup heading before counting boxes. Evidence: 8 of 8 isolated passes did not prove it; before the fix most full-file runs failed (4 of 5 observed); after rebuilding the output the full file passed 24 of 24 five times in a row. Note the tests serve the built output, so a source fix needs `npm run build:all` before it counts.
+
+Final verification (one worker, zero retries, one spec file per command): articles 49/49 and percentage 25/25 on subpath-desktop and subpath-mobile; pdf-tools 40/40 on both; learning-a11y plus accessibility 37/37; unit suite 3,625 tests, 3,621 pass, 0 fail, 4 skipped; links, assets, SEO and inventory pass (108 live pages).
+
+Still not verified: Safari or real devices, screen reader, Lighthouse and browser performance traces, a repeat of every other desktop spec after the final Flashcards change (only Flashcards, learning-a11y and accessibility were re-run), the SQL browser spike. Rule changes: none.

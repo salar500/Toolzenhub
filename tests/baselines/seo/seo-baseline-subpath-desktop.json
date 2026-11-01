@@ -982,14 +982,16 @@
       "robots": null,
       "openGraph": {
         "og:description": "Learn how to balance monthly affordability with total borrowing cost when choosing a loan tenure.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/choose-right-loan-tenure.png",
         "og:site_name": "ToolZen Hub",
         "og:title": "How to Choose the Right Loan Tenure | ToolZen Hub",
         "og:type": "article",
         "og:url": "https://toolzenhub.in/articles/loan-comparison/choose-right-loan-tenure/"
       },
       "twitter": {
-        "twitter:card": "summary",
+        "twitter:card": "summary_large_image",
         "twitter:description": "Learn how to balance monthly affordability with total borrowing cost when choosing a loan tenure.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/choose-right-loan-tenure.png",
         "twitter:title": "How to Choose the Right Loan Tenure | ToolZen Hub"
       },
       "jsonLd": [
@@ -1004,6 +1006,7 @@
             "datePublished",
             "description",
             "headline",
+            "image",
             "mainEntityOfPage",
             "publisher"
           ]
@@ -1804,14 +1807,16 @@
       "robots": null,
       "openGraph": {
         "og:description": "Find the value before a percentage increase or decrease by dividing, not subtracting, and check the answer by going forward again.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/how-to-find-the-original-price-before-a-percentage-change.png",
         "og:site_name": "ToolZen Hub",
         "og:title": "How to Find the Original Price Before a Percentage Change | ToolZen Hub",
         "og:type": "article",
         "og:url": "https://toolzenhub.in/articles/percentage/how-to-find-the-original-price-before-a-percentage-change/"
       },
       "twitter": {
-        "twitter:card": "summary",
+        "twitter:card": "summary_large_image",
         "twitter:description": "Find the value before a percentage increase or decrease by dividing, not subtracting, and check the answer by going forward again.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/how-to-find-the-original-price-before-a-percentage-change.png",
         "twitter:title": "How to Find the Original Price Before a Percentage Change | ToolZen Hub"
       },
       "jsonLd": [
@@ -1826,6 +1831,7 @@
             "datePublished",
             "description",
             "headline",
+            "image",
             "mainEntityOfPage",
             "publisher"
           ]
@@ -1876,14 +1882,16 @@
       "robots": null,
       "openGraph": {
         "og:description": "See why a rate moving from 5% to 7% is up 2 percentage points and also up 40%, and which one a figure is reporting.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/percent-vs-percentage-points.png",
         "og:site_name": "ToolZen Hub",
         "og:title": "Percent vs Percentage Points | ToolZen Hub",
         "og:type": "article",
         "og:url": "https://toolzenhub.in/articles/percentage/percent-vs-percentage-points/"
       },
       "twitter": {
-        "twitter:card": "summary",
+        "twitter:card": "summary_large_image",
         "twitter:description": "See why a rate moving from 5% to 7% is up 2 percentage points and also up 40%, and which one a figure is reporting.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/percent-vs-percentage-points.png",
         "twitter:title": "Percent vs Percentage Points | ToolZen Hub"
       },
       "jsonLd": [
@@ -1898,6 +1906,7 @@
             "datePublished",
             "description",
             "headline",
+            "image",
             "mainEntityOfPage",
             "publisher"
           ]
@@ -1948,14 +1957,16 @@
       "robots": null,
       "openGraph": {
         "og:description": "Work one example to see why a 20% rise followed by a 20% fall leaves a lower number, and which percentage does take it back.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back.png",
         "og:site_name": "ToolZen Hub",
         "og:title": "Why +20% Then −20% Doesn't Get You Back | ToolZen Hub",
         "og:type": "article",
         "og:url": "https://toolzenhub.in/articles/percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back/"
       },
       "twitter": {
-        "twitter:card": "summary",
+        "twitter:card": "summary_large_image",
         "twitter:description": "Work one example to see why a 20% rise followed by a 20% fall leaves a lower number, and which percentage does take it back.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back.png",
         "twitter:title": "Why +20% Then −20% Doesn't Get You Back | ToolZen Hub"
       },
       "jsonLd": [
@@ -1970,6 +1981,7 @@
             "datePublished",
             "description",
             "headline",
+            "image",
             "mainEntityOfPage",
             "publisher"
           ]
@@ -3064,7 +3076,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3503
+      "visibleTextChars": 3705
     }
   },
   "/calculators/gst/": {
@@ -3830,7 +3842,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4343
+      "visibleTextChars": 4385
     }
   },
   "/disclaimer.html": {
@@ -4109,6 +4121,55 @@
       "visibleTextChars": 992
     }
   },
+  "/practice-labs.html": {
+    "runtime": {
+      "title": "Practice Labs: JSON, APIs, Cron and Software Testing | ToolZen Hub",
+      "description": "Hands-on practice labs and flashcards for JSON, JSONPath, cron schedules and software test design. Each exercise checks your answer and explains it. They run in your browser and nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/practice-labs.html",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Hands-on practice labs and flashcards for JSON, JSONPath, cron schedules and software test design. Each exercise checks your answer and explains it. They run in your browser and nothing is uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Practice Labs: JSON, APIs, Cron and Software Testing | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/practice-labs.html"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Hands-on practice labs and flashcards for JSON, JSONPath, cron schedules and software test design. Each exercise checks your answer and explains it. They run in your browser and nothing is uploaded.",
+        "twitter:title": "Practice Labs: JSON, APIs, Cron and Software Testing | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Practice Labs"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#fafaf9",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Practice Labs: JSON, APIs, Cron and Software Testing | ToolZen Hub",
+      "description": "Hands-on practice labs and flashcards for JSON, JSONPath, cron schedules and software test design. Each exercise checks your answer and explains it. They run in your browser and nothing is uploaded.",
+      "canonical": "https://toolzenhub.in/practice-labs.html",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 2170
+    }
+  },
   "/privacy.html": {
     "runtime": {
       "title": "Privacy Policy | ToolZen Hub",
@@ -4333,7 +4394,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8764
+      "visibleTextChars": 11958
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -4431,7 +4492,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4621
+      "visibleTextChars": 4701
     }
   },
   "/tools/countdown-timer/": {
@@ -4480,7 +4541,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4266
+      "visibleTextChars": 4306
     }
   },
   "/tools/cron-challenge-lab/": {
@@ -4627,7 +4688,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5121
+      "visibleTextChars": 5161
     }
   },
   "/tools/date-difference/": {
@@ -4676,7 +4737,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4243
+      "visibleTextChars": 4586
     }
   },
   "/tools/hours-calculator/": {
@@ -5264,7 +5325,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4568
+      "visibleTextChars": 4608
     }
   },
   "/tools/merge-pdf/": {
@@ -5509,7 +5570,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3946
+      "visibleTextChars": 3986
     }
   },
   "/tools/smart-flashcards/": {

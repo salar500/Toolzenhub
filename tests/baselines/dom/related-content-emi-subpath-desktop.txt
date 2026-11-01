@@ -71,6 +71,8 @@ section.related-section
         h3 "What Is Loan Prepayment?"
         p "Understand how loan prepayment works and how paying down your principal can potentially re…"
     a.related-article-card [href="{ROOT}articles/loan-comparison/choose-right-loan-tenure/"]
+      div.related-article-image
+        img [alt="Diagram: a shorter tenure means a higher monthly EMI and lower total interest; a longer tenure means a lower EMI and higher total interest" loading="lazy" src="{ROOT}assets/Images/articles/choose-right-loan-tenure.png"]
       div.related-article-content
         h3 "How to Choose the Right Loan Tenure"
         p "Learn how to balance monthly affordability with total borrowing cost when choosing a loan …"

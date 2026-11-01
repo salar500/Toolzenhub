@@ -145,6 +145,7 @@ test.describe("Smart Flashcards", () => {
   test("topics: the last topic cannot be unchecked", async ({ page, go }) => {
     await open(page, go);
     await btn(page, "Choose JSON").click();
+    await expect(page.getByRole("heading", { name: "JSON deck" })).toBeFocused(); // the deck loads asynchronously: wait for the setup view before counting
     const boxes = page.locator("fieldset input[type=checkbox]");
     const count = await boxes.count();
     // the list is redrawn after every change, so address each box afresh and wait for the redraw to settle

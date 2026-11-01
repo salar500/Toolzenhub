@@ -51,20 +51,14 @@
 
 .tz-search.tz-search:focus-within {
     border-color: var(--color-brand-green);
-
-    box-shadow:
-        0 0 0 3px rgba(67, 56, 202, 0.16);
-
-    /* the one visible focus indicator for the whole search field: a solid outline around the field (3:1 against white),
-       drawn on the wrapper because the input sits inside an overflow-clipped box */
-    outline: 2px solid var(--color-brand-green);
-    outline-offset: 2px;
 }
 
-/* the input's own ring is switched off inside the field, so a keyboard user sees one indicator, not two stacked ones */
+/* the one visible focus indicator for the whole search field: a solid 2px outline on the input, drawn inside the field
+   (negative offset) because the wrapper clips anything outside it; the wrapper adds no second ring */
 .tz-search .tz-search__input:focus,
 .tz-search .tz-search__input:focus-visible {
-    outline: none !important;
+    outline: 2px solid var(--color-brand-green) !important;
+    outline-offset: -2px;
 }
 
 .tz-search .tz-search__icon {
