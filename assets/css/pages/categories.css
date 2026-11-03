@@ -816,3 +816,16 @@
 
     color: var(--accent);
 }
+
+/* the heading above a category or section page grid: the tool cards are h3, so they sit under an h2 (heading order). Not shown: the page title already names the group. */
+.categories-detail__heading {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}

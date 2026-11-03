@@ -491,7 +491,7 @@ export function markup() {
 
                     <div class="percentage-more">
 
-                        <h3 class="percentage-more__title">
+                        <h3 class="percentage-more__title" aria-level="2">
                             Then Another Change (optional)
                         </h3>
 

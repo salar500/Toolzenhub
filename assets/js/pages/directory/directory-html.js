@@ -421,6 +421,8 @@ export function categoryPageHtml(categoryId) {
 
                 </div>
 
+                <h2 class="categories-detail__heading">${escapeHTML(category.title)} calculators</h2>
+
                 <div class="categories-detail__grid directory-tools">
                     ${tools.map(tool => toolCardHtml(tool, category)).join("")}
                 </div>
@@ -500,6 +502,8 @@ export function sectionPageHtml(sectionId) {
                     </p>
 
                 </div>
+
+                <h2 class="categories-detail__heading">${escapeHTML(section.title)} tools</h2>
 
                 <div class="categories-detail__grid directory-tools">
                     ${tools.map(tool => toolCardHtml(tool, look)).join("")}

@@ -19,7 +19,7 @@
 
     --articles-heading: var(--ink);
     --articles-body: var(--ink-subtle);
-    --articles-muted: var(--color-gray-400);
+    --articles-muted: var(--ink-subtle);
 
     --articles-border: var(--color-slate-200);
     --articles-border-light: var(--surface-sunken);

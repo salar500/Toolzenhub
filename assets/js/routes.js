@@ -167,6 +167,12 @@ export const ROUTES = {
     math:
         `${SITE_ROOT}math.html`,
 
+    health:
+        `${SITE_ROOT}health.html`,
+
+    converter:
+        `${SITE_ROOT}converter.html`,
+
 
     /* =====================================================
        ARTICLES

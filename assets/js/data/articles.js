@@ -1325,6 +1325,99 @@ const catalog = [
         relatedLabel: "Math"
     },
 
+    {
+        id: 9,
+        status: "published",
+        category: "business",
+        topic: "business",
+        slug: "roi-vs-profit-whats-the-difference",
+        title:
+            "ROI vs Profit: What's the Difference?",
+        description:
+            "Profit is an amount of money and ROI compares it with what you put in. Worked examples show why the bigger profit can be the weaker return, how time changes ROI and how ROI differs from profit margin.",
+        publishedAt: "Nov 2, 2026",
+        updatedAt: "Nov 2, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/roi-vs-profit-whats-the-difference.png",
+            alt:
+                "Two bars for equal amounts invested, one with a profit segment of 20% and one of 5% of the amount, beside two columns for the profits themselves, 2,000 and 5,000, the smaller profit having the larger return"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/roi-vs-profit-whats-the-difference.png",
+            alt:
+                "Two bars for equal amounts invested, one with a profit segment of 20% and one of 5% of the amount, beside two columns for the profits themselves, 2,000 and 5,000, the smaller profit having the larger return"
+        },
+        tools: ["roi"],
+        related: [
+            "margin/margin-vs-markup",
+            "profit/how-to-find-your-break-even-point"
+        ],
+        relatedLabel: "Business"
+    },
+
+    {
+        id: 10,
+        status: "published",
+        category: "health",
+        topic: "health",
+        slug: "how-to-calculate-your-daily-calorie-needs",
+        title:
+            "How to Calculate Your Daily Calorie Needs",
+        description:
+            "How an estimate of daily energy use is built: the Mifflin-St Jeor equation for resting energy, an activity multiplier, a worked example and what the number cannot tell you. An estimate, not medical advice.",
+        publishedAt: "Nov 2, 2026",
+        updatedAt: "Nov 2, 2026",
+        readTime: "5 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/how-to-calculate-your-daily-calorie-needs.png",
+            alt:
+                "Three bars with the same resting energy, 1,780 kilocalories, followed by the extra energy of activity at factors 1.2, 1.55 and 1.9, from 2,136 to 3,382 kilocalories in all"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/how-to-calculate-your-daily-calorie-needs.png",
+            alt:
+                "Three bars with the same resting energy, 1,780 kilocalories, followed by the extra energy of activity at factors 1.2, 1.55 and 1.9, from 2,136 to 3,382 kilocalories in all"
+        },
+        tools: ["calorie", "bmr"],
+        related: [],
+        relatedLabel: "Health"
+    },
+
+    {
+        id: 12,
+        status: "published",
+        category: "converter",
+        topic: "converter",
+        slug: "easy-unit-conversion-guide",
+        title:
+            "Easy Unit Conversion Guide",
+        description:
+            "Convert units with one multiplication: check the direction, use exact factors, handle temperature with its formula and watch for units that share a name, such as the US and UK gallon.",
+        publishedAt: "Nov 2, 2026",
+        updatedAt: "Nov 2, 2026",
+        readTime: "4 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/easy-unit-conversion-guide.png",
+            alt:
+                "Three pairs of bars drawn to scale: a kilometre and the longer mile, a US gallon and the larger UK gallon, and a pound and the longer kilogram"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/easy-unit-conversion-guide.png",
+            alt:
+                "Three pairs of bars drawn to scale: a kilometre and the longer mile, a US gallon and the larger UK gallon, and a pound and the longer kilogram"
+        },
+        tools: ["unit-converter"],
+        related: [],
+        relatedLabel: "Converter"
+    },
+
     /* =====================================================
        COMING SOON  (listing placeholders: no route, no
        content module, not counted)
@@ -1357,52 +1450,6 @@ const catalog = [
             "Explore smart tax-saving options and understand ways to reduce taxable income legally.",
         listingDate: "Aug 25, 2026",
         readTime: "7 min read",
-        cardImage: null
-    },
-
-    {
-        id: 9,
-        status: "coming-soon",
-        category: "business",
-        topic: "business",
-        slug: "roi-vs-profit-whats-the-difference",
-        title:
-            "ROI vs Profit: What's the Difference?",
-        description:
-            "Understand the difference between ROI and profit and when each metric is useful for business decisions.",
-        listingDate: "Aug 25, 2026",
-        readTime: "4 min read",
-        cardImage: null
-    },
-
-    {
-        id: 10,
-        status: "coming-soon",
-        category: "health",
-        topic: "health",
-        slug: "how-to-calculate-your-daily-calorie-needs",
-        title:
-            "How to Calculate Your Daily Calorie Needs",
-        description:
-            "Understand the basics of calorie requirements and how simple calculations can help with everyday planning.",
-        listingDate: "Aug 25, 2026",
-        readTime: "5 min read",
-        cardImage: null
-    },
-
-
-    {
-        id: 12,
-        status: "coming-soon",
-        category: "converter",
-        topic: "converter",
-        slug: "easy-unit-conversion-guide",
-        title:
-            "Easy Unit Conversion Guide",
-        description:
-            "Learn how to quickly convert common units used in everyday calculations, shopping and measurements.",
-        listingDate: "Aug 25, 2026",
-        readTime: "4 min read",
         cardImage: null
     }
 
@@ -1622,6 +1669,24 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/math/how-to-calculate-percentage-easily.js"
+            ),
+
+    "business/roi-vs-profit-whats-the-difference":
+        () =>
+            import(
+                "./articles/business/roi-vs-profit-whats-the-difference.js"
+            ),
+
+    "health/how-to-calculate-your-daily-calorie-needs":
+        () =>
+            import(
+                "./articles/health/how-to-calculate-your-daily-calorie-needs.js"
+            ),
+
+    "converter/easy-unit-conversion-guide":
+        () =>
+            import(
+                "./articles/converter/easy-unit-conversion-guide.js"
             ),
 
     "swp/what-changes-how-long-a-corpus-lasts":

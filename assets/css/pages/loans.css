@@ -124,3 +124,16 @@
 
     font-weight: 600;
 }
+
+/* the heading that sits above the calculator cards (so the cards are h3 under an h2); the page already shows the section by its cards */
+.loans-calculators__title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}

@@ -37,6 +37,12 @@ async function startTool() {
 
     try {
 
+        /* start the slider module while the tool module loads, so a calculator's sliders are wired the moment its
+           form is drawn instead of one more network round trip later (the slider used to appear a second or two late) */
+        const sliderModule = source.includes("/calculators/")
+            ? import("../ui/field-slider.js")
+            : null;
+
         const module =
             await import(source);
 
@@ -57,7 +63,7 @@ async function startTool() {
 
             /* a slider beside a bounded field (rate, years) that opted in; the number input stays the source of truth */
             if (app.querySelector("input[data-slider-max]")) {
-                (await import("../ui/field-slider.js")).enhanceSliders(app);
+                (await sliderModule).enhanceSliders(app);
             }
         }
 

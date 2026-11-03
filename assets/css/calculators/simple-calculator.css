@@ -1,0 +1,26 @@
+/* =========================================================
+   Shared simple calculators (common/simple-calculator.js): layout only.
+   Buttons, fields, results and focus come from the shared layer.
+========================================================= */
+
+.sc-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.sc-note {
+    margin: 0.75rem 0 0;
+    font-size: 0.9rem;
+}
+
+.calculator-faq__item {
+    margin: 0 0 0.5rem;
+}
+
+.calculator-faq__item p {
+    margin: 0.5rem 0 0;
+}

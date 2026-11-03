@@ -198,7 +198,7 @@ export function markup() {
 
                     </div>
 
-                    <h3 class="rr-more__title">
+                    <h3 class="rr-more__title" aria-level="2">
                         Size the Position (optional)
                     </h3>
 

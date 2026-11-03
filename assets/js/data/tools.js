@@ -208,22 +208,80 @@ const catalog = [
 
     {
         id: "personal-loan",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/personal-loan/index.js"),
         category: "loans",
         icon: "♙",
         title: "Personal Loan Calculator",
+        relatedTools: [
+            "emi",
+            "loan-comparison",
+            "home-loan"
+        ],
         description:
-            "Calculate EMI and total repayment for a personal loan."
+            "Work out the monthly EMI, the total interest and the total cost, with an optional processing fee, of a personal loan.",
+        aliases: [
+            "personal loan emi",
+            "personal loan emi calculator",
+            "personal loan interest",
+            "personal loan cost"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        relatedArticles: [],
+        seo: {
+            title:
+                "Personal Loan EMI Calculator | ToolZen Hub",
+            description:
+                "Work out the monthly EMI, total interest and, with a processing fee, the total cost of a personal loan. Free, and it runs in your browser."
+        }
     },
 
     {
         id: "loan-eligibility",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/loan-eligibility/index.js"),
         category: "loans",
         icon: "▤",
         title: "Loan Eligibility Calculator",
+        relatedTools: [
+            "emi",
+            "home-loan",
+            "personal-loan"
+        ],
         description:
-            "Estimate your eligibility for different types of loans."
+            "Estimate the loan amount an EMI could repay from your income, existing EMIs and the share of income you choose.",
+        aliases: [
+            "loan eligibility",
+            "how much loan can i get",
+            "loan amount by income",
+            "foir calculator"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        relatedArticles: [],
+        seo: {
+            title:
+                "Loan Eligibility Calculator: How Much Loan Can an EMI Support | ToolZen Hub",
+            description:
+                "Estimate the loan an EMI could repay from your income, existing EMIs and the share of income you choose for loan payments. An estimate, not an approval. Free, and it runs in your browser."
+        }
     },
 
     {
@@ -274,12 +332,41 @@ const catalog = [
 
     {
         id: "interest",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/interest/index.js"),
         category: "loans",
         icon: "%",
         title: "Interest Calculator",
+        relatedTools: [
+            "emi",
+            "fd",
+            "cagr"
+        ],
         description:
-            "Calculate simple and compound interest on your investment or loan."
+            "Work out simple and compound interest on the same amount, rate and time, and see how much compounding adds.",
+        aliases: [
+            "simple interest calculator",
+            "compound interest calculator",
+            "simple and compound interest",
+            "interest on principal"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        relatedArticles: [],
+        seo: {
+            title:
+                "Simple and Compound Interest Calculator | ToolZen Hub",
+            description:
+                "Work out simple interest and compound interest on the same principal, yearly rate and time, with yearly to daily compounding, and see how much compounding adds. Free, and it runs in your browser."
+        }
     },
 
     {
@@ -823,32 +910,120 @@ const catalog = [
 
     {
         id: "bmi",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/bmi/index.js"),
         category: "health",
         icon: "⚖",
         title: "BMI Calculator",
+        relatedTools: [
+            "bmr",
+            "calorie"
+        ],
         description:
-            "Check your body mass index."
+            "Find your body mass index from weight and height, with the WHO adult categories and the Asian-population action points.",
+        aliases: [
+            "body mass index",
+            "bmi calculator",
+            "bmi for adults",
+            "bmi asian"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        relatedArticles: [],
+        seo: {
+            title:
+                "BMI Calculator: Body Mass Index for Adults | ToolZen Hub",
+            description:
+                "Find your body mass index from weight and height, with the WHO adult categories and the WHO action points for Asian populations. A screening number, not a diagnosis. Free, and it runs in your browser."
+        }
     },
 
     {
         id: "calorie",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/calorie/index.js"),
         category: "health",
         icon: "◉",
         title: "Calorie Calculator",
+        relatedTools: [
+            "bmr",
+            "bmi"
+        ],
         description:
-            "Estimate your daily calorie needs."
+            "Estimate the kilocalories your body uses in a day from your basal metabolic rate and activity level.",
+        aliases: [
+            "daily calorie needs",
+            "tdee calculator",
+            "maintenance calories",
+            "calorie calculator"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        relatedArticles: [
+            "health/how-to-calculate-your-daily-calorie-needs"
+        ],
+        seo: {
+            title:
+                "Calorie Calculator: Daily Calories Your Body Uses | ToolZen Hub",
+            description:
+                "Estimate the calories your body uses in a day from your BMR and activity level. An estimate, not a diet target. Free, and it runs in your browser."
+        }
     },
 
     {
         id: "bmr",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/bmr/index.js"),
         category: "health",
         icon: "♨",
         title: "BMR Calculator",
+        relatedTools: [
+            "bmi",
+            "calorie"
+        ],
         description:
-            "Calculate your basal metabolic rate."
+            "Estimate your basal metabolic rate, the energy your body uses at rest in a day, with the Mifflin-St Jeor equation.",
+        aliases: [
+            "basal metabolic rate",
+            "bmr calculator",
+            "resting metabolic rate",
+            "mifflin st jeor"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        relatedArticles: [
+            "health/how-to-calculate-your-daily-calorie-needs"
+        ],
+        seo: {
+            title:
+                "BMR Calculator: Basal Metabolic Rate | ToolZen Hub",
+            description:
+                "Estimate your basal metabolic rate with the Mifflin-St Jeor equation from age, sex, weight and height. An estimate, not a calorie target. Free, and it runs in your browser."
+        }
     },
 
 
@@ -934,12 +1109,43 @@ const catalog = [
 
     {
         id: "roi",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/roi/index.js"),
         category: "business",
         icon: "↗",
         title: "ROI Calculator",
+        relatedTools: [
+            "profit",
+            "margin",
+            "cagr"
+        ],
         description:
-            "Calculate return on investment."
+            "Find the return on investment, the profit or loss and an optional yearly rate from what you put in and what it is worth now.",
+        aliases: [
+            "return on investment calculator",
+            "roi percentage",
+            "investment return calculator",
+            "annualised return"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        relatedArticles: [
+            "business/roi-vs-profit-whats-the-difference"
+        ],
+        seo: {
+            title:
+                "ROI Calculator: Return on Investment | ToolZen Hub",
+            description:
+                "Find the return on investment as a percentage from the amount invested and the final value, with the profit or loss and an optional yearly rate. Free, and it runs in your browser."
+        }
     },
 
 
@@ -993,22 +1199,77 @@ const catalog = [
 
     {
         id: "ratio",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/ratio/index.js"),
         category: "math",
         icon: "÷",
         title: "Ratio Calculator",
+        relatedTools: [
+            "percentage"
+        ],
         description:
-            "Calculate and simplify ratios."
+            "Simplify a ratio to its lowest terms, see the multiples and shares, and scale it to find the missing term.",
+        aliases: [
+            "ratio simplifier",
+            "simplify ratio",
+            "proportion calculator",
+            "equivalent ratio"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        relatedArticles: [],
+        seo: {
+            title:
+                "Ratio Calculator: Simplify and Scale a Ratio | ToolZen Hub",
+            description:
+                "Simplify a ratio to its lowest terms, see it as multiples and shares, and find the missing term when scaling it. Free, and it runs in your browser."
+        }
     },
 
     {
         id: "age",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/age/index.js"),
         category: "math",
         icon: "◷",
         title: "Age Calculator",
+        relatedTools: [
+            "percentage",
+            "ratio"
+        ],
         description:
-            "Calculate age accurately."
+            "Find an exact age in years, months and days from a date of birth, with the total days and the next birthday.",
+        aliases: [
+            "age calculator by date of birth",
+            "exact age",
+            "how old am i",
+            "age in years months days"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        relatedArticles: [],
+        seo: {
+            title:
+                "Age Calculator: Exact Age in Years, Months and Days | ToolZen Hub",
+            description:
+                "Find an exact age in years, months and days from a date of birth, with total days and the next birthday. Free, and it runs in your browser."
+        }
     },
 
 
@@ -1018,12 +1279,43 @@ const catalog = [
 
     {
         id: "unit-converter",
-        status: "coming-soon",
+        status: "published",
+        loader: () =>
+            import("../calculators/unit-converter/index.js"),
         category: "converter",
         icon: "↔",
         title: "Unit Converter",
+        relatedTools: [
+            "percentage",
+            "ratio"
+        ],
         description:
-            "Convert common units quickly."
+            "Convert between common units of length, mass, area, volume, speed and temperature using exact defined factors.",
+        aliases: [
+            "unit conversion",
+            "convert units",
+            "length converter",
+            "temperature converter",
+            "weight converter"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        relatedArticles: [
+            "converter/easy-unit-conversion-guide"
+        ],
+        seo: {
+            title:
+                "Unit Converter: Length, Mass, Area, Volume, Speed, Temperature | ToolZen Hub",
+            description:
+                "Convert between common units of length, mass, area, volume, speed and temperature using exact defined factors. Free, and it runs in your browser."
+        }
     },
 
     {

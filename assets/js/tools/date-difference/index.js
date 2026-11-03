@@ -317,9 +317,11 @@ export function markup() {
                     <div class="date-presets" role="group" aria-labelledby="date-presets-label">
 
                         <p class="calculator-form__help" id="date-presets-label">
-                            Quick fill from today. Each button sets both dates; the gap is the number of days between them, so today to 6 days later is 6 days apart (7 if you count both end days).
+                            Quick fill from today. Each button sets both dates; the gap is the number of days between them, so today to 6 days later is 6 days apart (7 if you count both end days). "Last 7 days" ends today and starts 6 days earlier, so it covers 7 calendar days counting both ends; "Last 30 days" covers 30 the same way.
                         </p>
 
+                        <button type="button" class="tt-inline-button" data-preset="last7">Last 7 days</button>
+                        <button type="button" class="tt-inline-button" data-preset="last30">Last 30 days</button>
                         <button type="button" class="tt-inline-button" data-preset="6">Today to 6 days later</button>
                         <button type="button" class="tt-inline-button" data-preset="7">Today to 7 days later</button>
                         <button type="button" class="tt-inline-button" data-preset="30">Today to 30 days later</button>
@@ -742,8 +744,10 @@ export function init() {
             const today = parseDate(todayIso(new Date())).date;
             const preset = button.dataset.preset;
 
-            const start = preset === "month" ? { ...today, day: 1 } : today;
-            const end = preset === "month" ? today : addDays(today, Number(preset));
+            const back = preset === "last7" ? 6 : preset === "last30" ? 29 : 0;
+            const isBack = back > 0;
+            const start = preset === "month" ? { ...today, day: 1 } : isBack ? addDays(today, -back) : today;
+            const end = preset === "month" || isBack ? today : addDays(today, Number(preset));
 
             inputs.start.value = isoOf(start);
             inputs.end.value = isoOf(end);

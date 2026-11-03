@@ -292,6 +292,13 @@
   "schemaVersion": 1,
   "tools": [
     {
+      "id": "age",
+      "module": "assets/js/calculators/age/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "balance-transfer",
       "module": "assets/js/calculators/balance-transfer/index.js",
       "moduleChanges": [],
@@ -301,6 +308,20 @@
     {
       "id": "base64-encoder-decoder",
       "module": "assets/js/tools/base64-encoder-decoder/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
+      "id": "bmi",
+      "module": "assets/js/calculators/bmi/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
+      "id": "bmr",
+      "module": "assets/js/calculators/bmr/index.js",
       "moduleChanges": [],
       "provenance": "added",
       "state": "active"
@@ -317,6 +338,13 @@
       "module": "assets/js/calculators/cagr/index.js",
       "moduleChanges": [],
       "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "calorie",
+      "module": "assets/js/calculators/calorie/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
       "state": "active"
     },
     {
@@ -418,6 +446,13 @@
       "state": "active"
     },
     {
+      "id": "interest",
+      "module": "assets/js/calculators/interest/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "interval-timer",
       "module": "assets/js/tools/interval-timer/index.js",
       "moduleChanges": [],
@@ -488,6 +523,13 @@
       "state": "active"
     },
     {
+      "id": "loan-eligibility",
+      "module": "assets/js/calculators/loan-eligibility/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "margin",
       "module": "assets/js/calculators/margin/index.js",
       "moduleChanges": [],
@@ -530,6 +572,13 @@
       "state": "active"
     },
     {
+      "id": "personal-loan",
+      "module": "assets/js/calculators/personal-loan/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "photos-to-pdf",
       "module": "assets/js/tools/photos-to-pdf/index.js",
       "moduleChanges": [],
@@ -565,8 +614,22 @@
       "state": "active"
     },
     {
+      "id": "ratio",
+      "module": "assets/js/calculators/ratio/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "risk-reward",
       "module": "assets/js/calculators/risk-reward/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
+      "id": "roi",
+      "module": "assets/js/calculators/roi/index.js",
       "moduleChanges": [],
       "provenance": "added",
       "state": "active"
@@ -646,6 +709,13 @@
       "module": "assets/js/tools/time-zone-converter/index.js",
       "moduleChanges": [],
       "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "unit-converter",
+      "module": "assets/js/calculators/unit-converter/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
       "state": "active"
     },
     {

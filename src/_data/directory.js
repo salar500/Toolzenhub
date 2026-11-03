@@ -51,7 +51,7 @@ export default function () {
   const allTools = {
     title: "All Tools | ToolZen Hub",
     description:
-      "Browse every ToolZen Hub tool by section and category: calculators for loans, investment, tax, business and math.",
+      "Browse every ToolZen Hub tool by section and category: calculators for loans, investment, tax, health, business, math and converter.",
     html: allToolsHtml(),
     jsonld: [
       breadcrumbLd(breadcrumbTrail([{ label: "All Tools" }]), "/tools.html"),

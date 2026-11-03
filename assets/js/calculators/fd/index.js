@@ -666,7 +666,7 @@ export function markup() {
 
                     <div class="fd-option-b">
 
-                        <h3 class="fd-option-b__title">
+                        <h3 class="fd-option-b__title" aria-level="2">
                             Compare With Another Offer (optional)
                         </h3>
 

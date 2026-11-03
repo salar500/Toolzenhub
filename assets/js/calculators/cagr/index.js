@@ -619,7 +619,7 @@ export function markup() {
 
                     <div class="cagr-more">
 
-                        <h3 class="cagr-more__title">
+                        <h3 class="cagr-more__title" aria-level="2">
                             Compare With Another Investment (optional)
                         </h3>
 

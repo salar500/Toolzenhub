@@ -535,7 +535,7 @@ export function markup() {
 
                     <div class="gst-more">
 
-                        <h3 class="gst-more__title">
+                        <h3 class="gst-more__title" aria-level="2">
                             More Items (optional)
                         </h3>
 

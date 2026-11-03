@@ -19,7 +19,7 @@
 
     --calculators-heading: var(--ink);
     --calculators-body: var(--ink-subtle);
-    --calculators-muted: var(--color-gray-400);
+    --calculators-muted: var(--ink-subtle);
 
     --calculators-border: var(--color-slate-200);
     --calculators-border-light: var(--surface-sunken);

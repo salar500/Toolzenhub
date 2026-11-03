@@ -49,7 +49,7 @@ clientRendered: true
                 >
 
                     <a
-                        href="#"
+                        href="{{ '/' | url }}"
                         id="loans-breadcrumb-home"
                         class="loans-breadcrumb__home"
                     >
@@ -65,7 +65,7 @@ clientRendered: true
                     </span>
 
                     <a
-                        href="#"
+                        href="{{ '/calculators.html' | url }}"
                         id="loans-breadcrumb-categories"
                         class="loans-breadcrumb__link"
                     >
@@ -246,9 +246,11 @@ clientRendered: true
              Calculator Cards
         ================================================== -->
 
-        <section class="loans-calculators">
+        <section class="loans-calculators" aria-labelledby="loans-calculators-title">
 
             <div class="container">
+
+                <h2 id="loans-calculators-title" class="loans-calculators__title">Loan calculators</h2>
 
                 <div
                     id="loans-calculators-grid"

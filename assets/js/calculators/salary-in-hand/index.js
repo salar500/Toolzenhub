@@ -817,7 +817,7 @@ export function markup() {
 
                         <div class="sih-optional">
 
-                            <h3 class="sih-optional__title">Other Amounts (Optional)</h3>
+                            <h3 class="sih-optional__title" aria-level="2">Other Amounts (Optional)</h3>
 
                             ${fieldShell({
                                 id: IDS.professionalTax,

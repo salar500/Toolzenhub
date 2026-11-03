@@ -77,6 +77,15 @@ a:hover {
     color: var(--color-primary-dark);
 }
 
+/* A link inside running text or a breadcrumb is told apart from the text by more than its colour (WCAG 1.4.1: link and text
+   contrast is under 3:1). Low specificity on purpose: a component that styles its own links overrides this. */
+p a,
+.calculator-info li a,
+.calculator-breadcrumb a {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
 /* ========================================
    Small Text
 ======================================== */

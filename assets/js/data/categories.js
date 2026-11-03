@@ -44,7 +44,7 @@ export const sections = [
         description:
             "Calculators for loans, investment, tax, business and math.",
         summary:
-            "Loans, investment, business, tax and math calculators",
+            "Loans, investment, tax, health, business, math and converter calculators",
         icon: "🧮",
         landing: "calculatorCategories",
         pathPrefix: "calculators"
@@ -183,8 +183,11 @@ export const categories = [
         icon: "♥",
         iconClass: "health",
         title: "Health",
-        description: "Health calculators are coming soon",
-        href: "health.html"
+        description: "Estimate BMI, resting energy use and daily calories from your measurements",
+        href: "health.html",
+        landing: "health",
+        seoDescription:
+            "Health calculators from ToolZen Hub: body mass index with the WHO categories, basal metabolic rate and an estimate of the calories your body uses in a day. Screening estimates, not medical advice."
     },
 
 
@@ -208,11 +211,11 @@ export const categories = [
         icon: "🔢",
         iconClass: "math",
         title: "Math",
-        description: "Solve percentage and everyday math problems",
+        description: "Solve percentage, ratio, age and everyday math problems",
         href: "math.html",
         landing: "math",
         seoDescription:
-            "Math calculators from ToolZen Hub: work out a percentage change, an ending value, or the original value before a change."
+            "Math calculators from ToolZen Hub: work out a percentage change, simplify and scale a ratio, or find an exact age from a date of birth."
     },
 
 
@@ -222,8 +225,11 @@ export const categories = [
         icon: "↻",
         iconClass: "converter",
         title: "Converter",
-        description: "Converter tools are coming soon",
-        href: "converter.html"
+        description: "Convert common units of length, mass, area, volume, speed and temperature",
+        href: "converter.html",
+        landing: "converter",
+        seoDescription:
+            "Converter tools from ToolZen Hub: convert between common units of length, mass, area, volume, speed and temperature using exact defined factors."
     },
 
 

@@ -165,6 +165,48 @@ fieldset.mp-person {
 
 }
 
+/* the calendar icon and "Use today" under a date field: a clear gap from the field and from each other */
+
+.tt-date-actions {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 10px;
+
+}
+
+.tt-calendar-button {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 44px;
+    padding: 0 10px;
+
+}
+
+/* a row of quick-fill buttons: spaced, wrapping, the explanation on its own line */
+
+.date-presets {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 16px;
+
+}
+
+.date-presets > p {
+
+    flex: 0 0 100%;
+    margin: 0 0 2px;
+
+}
+
 .tt-answer {
 
     margin: 0 0 14px;

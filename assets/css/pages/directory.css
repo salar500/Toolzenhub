@@ -675,19 +675,45 @@
     outline: none;
 }
 
-.directory-group__tools .directory-tool {
-    padding: 6px 8px;
-    margin: 0 -8px;
+/* a calculator in a category card reads as a button-like row (border, arrow, hover), like a tool card, so it is
+   plain that the name opens the page */
+.directory-group__tools li.directory-tool {
+    margin: 0 0 8px;
+    padding: 10px 12px;
 
-    border-radius: 8px;
+    border: 1px solid var(--color-slate-200);
+    border-radius: 10px;
+
+    background: var(--color-white);
+
+    transition: border-color .15s ease, background-color .15s ease;
+}
+
+.directory-group__tools li.directory-tool:last-child {
+    margin-bottom: 0;
 }
 
 .directory-tool:hover {
+    border-color: var(--color-brand-green);
+
     background: var(--surface-page);
 }
 
 .directory-tool > a {
     display: block;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.directory-tool > a::before {
+    content: "→";
+
+    float: right;
+
+    margin-left: 8px;
+
+    color: var(--color-brand-green);
 }
 
 .directory-tool__text {
