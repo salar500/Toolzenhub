@@ -164,3 +164,200 @@ Memory 750 MB to 1.2 GB; one Playwright worker, one project at a time, no full b
 - **Performance finding (static, not a trace):** each calculator page loads about 22 render-blocking CSS files (about 110 KB), one 1 KB entry script and its tool module (18 to 41 KB); articles load 14 CSS files. A request-count cost on a high-latency host is plausible but UNMEASURED; no change made (no speculative performance edits).
 - **NOT RUN:** visual projects and baselines; subpath-mobile for navigation, build, links, seo and the 11 slider calculators' own specs; Safari, Firefox, any phone; a large or password-protected PDF through the browser; Growth `export.mjs --check`.
 Rule changes: none. Nothing committed.
+
+## Batch 4 (2026-11-02, resumed 2026-11-03): Website Completion phase, calculators, dates and three articles
+
+Base: `45fc888` (local commit), everything below uncommitted. Focused development checks only; no browser tests, no regression.
+
+- **Slider delay:** `entries/tool.js` now starts the slider module import together with the tool module (it was a second hop after the form). Reasoned from the code, NOT measured; the owner should confirm on a slow network.
+- **Dates:** shared calendar icon (`time-ui.js` `todayButton`, `tt-date-actions` CSS) under every date field of Date Difference, Business Days, Countdown, Meeting Planner and Shift Planner; spacing fixed; Date Difference presets "Last 7 days" and "Last 30 days" (end today, start 6 or 29 days earlier); boundary cases pinned in `date-difference-presets.test.mjs`.
+- **Gratuity:** already defaults to "Regular employee" with a software/IT hint; no change. B6, D8, G9 untouched.
+- **All Tools:** calculators inside category cards are bordered, arrowed rows (`pages/directory.css`).
+- **Ten calculators published** from the Coming Soon list (Tool Pack 53): Interest, ROI, Ratio, Age, Personal Loan, Loan Eligibility, BMI, BMR, Calorie, Unit Converter, on `common/simple-calculator.js`; Health and Converter category pages added. Only the Currency Converter remains Coming Soon (needs live rates; owner decision on a data source).
+- **Verified:** `simple-calculators.test.mjs` 36/36 (hand vectors); full unit suite after the calculators: 3,711 tests, 3,707 pass, 0 fail, 4 skipped; build:all, links, assets, SEO and URL inventory passed.
+- **Three articles published (text only, no images):** ROI vs Profit, Daily Calorie Needs, Easy Unit Conversion Guide (`assets/js/data/articles/{business,health,converter}/`, records 9, 10, 12 moved ahead of the two remaining placeholders, loaders and the tools' `relatedArticles` added). Unit pins edited deliberately (`articles.test.mjs`, `relationships.test.mjs`); the inventory is regenerated (126 live pages, 3 Coming Soon: Currency Converter and two articles). The Articles listing now has 38 published and 2 placeholders (Best SIP Strategies, Tax Saving Guide: no sourced content, left Coming Soon).
+- **Verified after the articles:** touched unit files pass; `build:all`, links, assets, SEO and `inventory:check` pass (full unit result below).
+- **NOT done in this phase:** PDF and Image tool expansion, Learning Labs separation (SQL, Excel), a Time Tools audit beyond the date controls, a performance trace. Browser pins for article pagination (`articles.spec.js`: page 8 now 3 published + 2 placeholders), listing counts, the links/SEO/DOM baselines and all visual baselines are STALE; no browser test was run. These belong to the testing phase.
+Rule changes: none. Nothing committed.
+
+## Quality completion checkpoint QC-1 (2026-11-02): baseline re-verification on the uncommitted tree
+
+Base `45fc888` plus the uncommitted Pack 53 tree; no source files changed in this checkpoint. Free memory at start about 720 MB.
+
+| ID | Check | Result |
+|---|---|---|
+| QC-1.1 | 10 touched unit files (simple-calculators, catalog, articles, taxonomy, relationships, search, directory, sections, coming-soon-helper, date-difference-presets) | 169 pass, 0 fail |
+| QC-1.2 | Full unit suite (`node --test tests/unit/`) | 3,711 tests, 3,707 pass, 0 fail, 4 skipped (about 5.7 min) |
+| QC-1.3 | `build` and `build:preview` | both pass: 130 and 129 files written |
+| QC-1.4 | Static links, assets, SEO (both bases), `inventory:check` | all pass: 127 pages, 126 sitemap URLs, 0 live asset problems |
+
+Observation (not yet a defect): the link check lists 17 `href="#"` placeholders (legal pages, Image/PDF tool pages, three JS templates). To be classified in the routing phase.
+Defect register: none open from QC-1. Browser pins and baselines STALE (see Batch 4 NOT done list): articles pagination, listing counts, links/SEO/DOM baselines.
+Next batch: classify the 17 `href="#"` placeholders, then update and run the stale browser pins one spec at a time (articles, navigation, build), subpath-desktop, one worker.
+Rule changes: none. Nothing committed.
+
+### QC-2 (2026-11-02): articles browser spec, Coming Soon survey
+
+Owner extended the assignment to unfinished features (Coming Soon calculators, tools, articles, images) where the intended behaviour is established by a specification or source material. Rulebook §11.7 approval for such packs is taken from that instruction only when a written spec exists.
+
+| ID | Item | Result |
+|---|---|---|
+| QC-2.1 | `articles.spec.js` subpath-desktop | first run 48 pass, 5 fail. All 5 were stale expectations, not application defects: the topic maps lacked the Tool Pack 53 topics (business ROI, health, converter), so category, call-to-action tool, related count and cover image were wrong; the sidebar counts and the page-8 placeholder count were pre-Pack-53 values. Pins edited deliberately (new topics mapped; ROI has 2 related, Health and Converter 0 because each is a one-article cluster; sidebar first five 13/10/2/7/1; page 8 has 2 placeholders). Re-run: 53 pass. |
+| QC-2.2 | Coming Soon survey | Tools: only Currency Converter (`currency`, converter). It needs live rates and "the Currency exclusion is binding" (02-PENDING). No spec: PRODUCT DECISION REQUIRED. Tool Pack 41 JSON Schema Validator is not in the catalog; its spec exists but is BLOCKED at the library gate (vendored third-party code could not be executed). Articles: Best SIP Strategies and Tax Saving Guide have no sourced content: PRODUCT DECISION REQUIRED, not fabricated. |
+| QC-2.3 | D-1 (P3) | Breadcrumb "Home" on contact, privacy, terms, disclaimer, loans is `href="#"` until JavaScript sets it; without JavaScript it goes nowhere. Open, not yet fixed. |
+| QC-2.4 | Gap | The ten Pack 53 calculators have unit tests (36 golden vectors) but no browser spec. They are published and linked. Image gap: the three Pack 53 articles have no cover image (text-only by design at publication). |
+
+Next batch: a bounded browser spec for the ten Pack 53 calculators (defaults, one golden result, invalid and empty input, reset, 320 px overflow), subpath-desktop then subpath-mobile; then the cover-image decision for the three articles; then D-1.
+Rule changes: none. Nothing committed.
+
+### QC-3 (2026-11-02): Pack 53 browser coverage, D-1, three article covers, stale pins
+
+Owner approved original text-free covers for the three Tool Pack 53 articles (supersedes the earlier "text only" decision of 2026-11-02 recorded in `articles.test.mjs`; no rulebook text stated it). Free memory about 700 MB; one worker throughout.
+
+| ID | Item | Result |
+|---|---|---|
+| QC-3.1 | New `tests/browser/simple-calculators.spec.js` (10 calculators: shell and labels, independently derived golden value, invalid input and Reset, 320 px overflow; plus Ratio scaling, Interest compounding, Personal Loan slider sync) | 43 pass on subpath-desktop and 43 on subpath-mobile. First run 5 failures, all faults in the new spec (slider inputs are aria-hidden by design, Reset focuses the first control, Unit Converter starts at a valid 1 km = mi so Copy is enabled), corrected without weakening an assertion. Golden values: Interest 2,100 / 12,100; ROI 50% and 22.47% a year; Ratio 3:5 and 10; Age 26; Personal Loan EMI 8,884.88; Loan Eligibility from a 50,000 EMI at 10% over 12 months; BMI 22.9; BMR 1,780; Calorie 2,759; Unit Converter 10 km = 6.2137 mi. |
+| QC-3.2 | D-1 (P3) fixed | `src/{contact,disclaimer,privacy,terms,loans}.njk`: Home (and Loans "Calculators") breadcrumb links now carry the real base-aware URL (`{{ '/' | url }}`), so they work without JavaScript. Built HTML checked in both bases (`/`, `/calculators.html`; `/Toolzenhub/`, `/Toolzenhub/calculators.html`). Placeholder `href="#"` in the link check fell from 17 to 11 (the rest are PDF and Image tool download links filled with a blob URL, and JS templates). |
+| QC-3.3 | Article covers | `assets/Images/articles/{roi-vs-profit-whats-the-difference, how-to-calculate-your-daily-calorie-needs, easy-unit-conversion-guide}.{png,webp}`, 1200 x 675, 3 to 4 KB each, same palette and card as the existing covers, every length proportional to a figure in the article (ROI 20% and 5% against profits of 2,000 and 5,000; 1,780 kcal resting plus activity at 1.2, 1.55, 1.9; km/mile, US/UK gallon, lb/kg). Generated by a script kept outside the repository; viewed after generation. `cardImage` and `heroImage` with alt text set in `articles.js`. Both builds and static assets/SEO/links pass; 6 files present in `dist` and `dist-ghpages`. |
+| QC-3.4 | Stale pins corrected (each checked against the new truth, none weakened) | `articles.spec.js`, `build.spec.js` (article related counts: Business 2, Health and Converter 0; EMI and Loan Comparison 6 related), `navigation.spec.js` (24 failures: seven live categories in catalog order, no Coming soon block, 30 built calculators and 1 Coming soon, all 9 Loans tools live, Health and Converter category pages, ranked-search orders now include Personal Loan and Loan Eligibility, 43 All Tools groups), `articles.test.mjs` (two image pins). Baselines accepted after a field-by-field diff: links (15 pages added, 17 pages gain links, nothing removed or lowered, no externals, placeholders or dead fragments changed) and SEO (15 pages added; only `visibleTextChars` on 13 pages and the Math and All Tools descriptions, which now name the new tools, changed). |
+| QC-3.5 | Results, subpath-desktop | articles 53, build 55, navigation 44 (+2 mobile-only skipped), links 1, seo-baseline 1: all pass. Unit: articles, relationships, catalog, search 69 pass. |
+
+NOT RUN yet: DOM baselines, subpath-mobile for articles/build/navigation/links/seo, root-desktop portable subset, visual projects (not authorised), full unit suite after the image and pin edits.
+Next: DOM baseline spec, then mobile for the changed specs one at a time, then the rest of the checkpoint (other tools, accessibility, responsive).
+Rule changes: none. Nothing committed.
+
+### QC-4 (2026-11-02): DOM baselines, mobile and root runs, final unit run of this checkpoint
+
+| ID | Item | Result |
+|---|---|---|
+| QC-4.1 | DOM baselines, subpath-desktop | 9 pass, 7 differed. Each diff reviewed line by line, then accepted: home category blurb names the seven categories; categories grid gains Health and Converter and the Math blurb gains "ratio, age"; All Tools rail counts (Calculators 19 to 30, Loans group 3 to 4) and new tool rows; Investment page gains Risk-Reward; articles sidebar counts (Business 6 to 7, Health 0 to 1); EMI form gains the shared rate and tenure sliders (aria-hidden, data-slider attributes) as designed in doc 13; EMI related list now Loan Comparison, Prepayment, Home Loan, Personal Loan, Loan Eligibility, Balance Transfer. Credit Card Payoff dropped out of EMI's automatic related list: a consequence of the deliberate limit of six in `related-calculators.js` once Personal Loan and Loan Eligibility joined the Loans category; Credit Card Payoff remains on the Loans page and in search. Recorded as an observation, not a defect. |
+| QC-4.2 | subpath-mobile: articles, build, navigation, links | no failed tests (status from `.last-run.json`; per-spec counts were not captured). seo-baseline is desktop-only. |
+| QC-4.3 | Time Tools consumers of the shared date helper (`time-ui.js`): date-difference, time-tools-new, time-tools-enhancements, countdown-timer, subpath-desktop | no failed tests (counts not captured). |
+| QC-4.4 | root-desktop portable subset: articles, build, navigation, links | 63 pass. |
+| QC-4.5 | Full unit suite after all edits | 3,711 tests, 3,707 pass, 0 fail, 4 skipped. `inventory:check` passes (126 live pages). |
+
+Verified in this checkpoint (QC-1 to QC-4), nothing committed: Pack 53 browser journeys (desktop and mobile), D-1 fixed, three article covers created and wired, stale expectations for articles, build, navigation, links, SEO and DOM corrected, both builds and all static checks passing.
+NOT RUN: visual projects and visual baselines (not authorised), Lighthouse, mutation suite, subpath-mobile and root-desktop for the DOM and SEO baselines (desktop-only), the full browser suite for the other tools beyond the consumers named above (their code is unchanged since the 624b3bb full desktop run of 1,711 tests), real Android and Safari/WebKit and Firefox.
+Remaining open items: Currency Converter (needs a live-rate decision, rulebook exclusion), Tool Pack 41 JSON Schema Validator (blocked at the library gate), Best SIP Strategies and Tax Saving Guide (no sourced content), tablet-width and axe checks of the ten Pack 53 pages (only 320 px and desktop covered), an accessibility scan of the new covers' alt text beyond length.
+Rule changes: none. Nothing committed.
+
+### QC-5 (2026-11-02): tablet and accessibility checks, shared accessibility fixes (in progress)
+
+Skipped unit tests, for the record (4 of 3,711, all environmental): three symlink tests ("symbolic links are not available here") and one pypdf cross-check ("pypdf is not installed"). Mobile counts in QC-4.2 and QC-4.3 were not captured; they are "no failed tests", not a quantified pass.
+
+New specs: `tests/browser/simple-calculators-a11y.spec.js` (10 calculators at 820 px with axe in start, result and error states, focus indicator, error wiring, heading order; 3 covered articles with axe, cover 1200 x 675 and fit) and `tests/browser/site-a11y.spec.js` (axe-core, WCAG 2.x A and AA plus best-practice, on all 126 live pages in the initial state).
+First sweep: 105 of 126 pages clean; 21 findings in 4 groups, all real and fixed at the shared layer (none silenced):
+- A-1 (P2) `link-in-text-block`, WCAG 1.4.1: breadcrumb links and links inside paragraphs and `.calculator-info` lists were indigo on near-black text with no underline (link/text contrast 2.2:1 and 1.03:1). Fix: `base/typography.css`, `p a`, `.calculator-info li a`, `.calculator-breadcrumb a` underlined at low specificity (page components that style their own links still win).
+- A-2 (P2) `color-contrast`: article card meta, sidebar counts and pagination dots (`--articles-muted` #a8a29e on white, 2.52:1), the calculators result count (`--calculators-muted`, same colour), the Loan Comparison range labels, and the About disclaimer text (#78716c on #f5f5f4, 4.39:1). Fix: the existing tokens `--ink-subtle` (4.8:1 on white) and `--ink-muted` (for the About panel).
+- A-3 (P2) `heading-order`: category and section pages put h3 tool cards directly under the h1 (10 pages) and Loans did the same. Fix: a visually hidden h2 above the grid in `directory-html.js` and `loans.njk` (classes `categories-detail__heading`, `loans-calculators__title`); six calculators (CAGR, FD, GST, Percentage, Risk-Reward, Salary in Hand) had an h3 before any h2: `aria-level="2"` on the existing h3, no visual change.
+Re-run: simple-calculators-a11y 13 of 13 pass; site-a11y 126 of 126 pass (desktop). Accepted baseline changes after diff review: `investment-page` DOM (one hidden h2 line) and the SEO baseline (text counts only; no title, description, canonical, robots, h1, Open Graph, Twitter or JSON-LD field changed). Stale pins corrected (not a11y related, Pack 53): `loan-comparison.spec.js` (six related, Credit Card Payoff no longer shown), `percentage.spec.js` (Ratio and Age live: related, Math page, calculators listing). Regression after the fixes: dom-baseline, seo-baseline, navigation (59 pass, 2 mobile-only skipped) and cagr, fd, gst, percentage, risk-reward, salary-in-hand, loan-comparison, calculators-stage3-responsive (all pass after the pin fixes).
+Not covered by these scans: states beyond the initial one on the other tools, mobile and tablet axe sweeps of all pages, screen-reader behaviour.
+Next: full subpath-desktop browser run of the remaining specs, in batches, then tablet and mobile axe of the page types, then the remaining tool audit.
+Rule changes: none. Nothing committed.
+
+### QC-5 checkpoint: full desktop run INTERRUPTED (2026-11-02)
+
+The four-batch subpath-desktop run of the 59 remaining specs (all browser specs not already re-run in QC-3 to QC-5; list: accessibility, analytics, balance-transfer, base64-encoder-decoder, base64url, contact, credit-card-payoff, cron-challenge-lab, cron-explainer, date-calculator, developer-tools-related, emi, field-slider, gratuity-auto, home-loan, hours-calculator, image-batch, image-compressor-resizer, image-crop, income-tax, inflation-view, json-compare, json-csv, json-error-fixing-lab, json-formatter, json-formatter-indent, jsonpath-challenge-lab, jsonpath-tester, jwt-decoder, learning-a11y, learning-resilience, learning-widths, list-comparer, margin, notfound, pdf-marks, pdf-tools, photos-to-pdf, photos-to-pdf-turn-metadata, ppf, prepayment, profit, sip, smart-flashcards, smoke, stopwatch, swp, swp-articles, test-design-lab, text-diff, text-diff-options, time-zone-converter, tool-controls, unix-timestamp-converter, url-parser, uuid-generator, visual (visual tag excluded here), world-clock, xirr) was started in the background and was STOPPED BY CLAUDE CODE because the machine was critically low on memory. Batch 00 (accessibility to json-compare group) reached test 82 of 254 (Base64 Encoder & Decoder at 390 px) with no end summary, so NO result from it counts as pass or fail. Batches 01 to 03 never started. Not restarted automatically, as instructed by the stop notice.
+Resume plan (resource-aware): close other applications first, check free memory once, then run the remaining specs in much smaller groups (about 6 to 8 specs, foreground, `--workers=1`, `--reporter=dot`), recording each group's exact result, in this order: (1) calculators: balance-transfer, credit-card-payoff, emi, home-loan, income-tax, margin, ppf, prepayment, profit, sip, swp, xirr, gratuity-auto, inflation-view, field-slider; (2) Time Tools: date-calculator, hours-calculator, stopwatch, time-zone-converter, unix-timestamp-converter, world-clock; (3) Developer Tools: base64*, json*, jwt-decoder, list-comparer, text-diff*, url-parser, uuid-generator, cron-explainer, developer-tools-related; (4) learning labs and flashcards: *-challenge-lab, json-error-fixing-lab, test-design-lab, smart-flashcards, learning-*; (5) Image and PDF: image-*, photos-to-pdf*, pdf-*; (6) shared: accessibility, analytics, contact, notfound, smoke, tool-controls, swp-articles.
+Rule changes: none. Nothing committed.
+
+### QC-6 (2026-11-02): correction to the QC-5 interruption note, and batch 00 triage
+
+CORRECTION: the QC-5 note said the background run "stopped at test 82". Reading the output files shows batch 00 actually FINISHED (exit 1, 3.7 minutes, 254 tests) and the wrapper script (`run-batches.sh`, bash PID 10836) kept going into batch 01 (Playwright PID 2904, worker 532, 8 automated Chrome processes) while Claude Code reported it as killed. At the start of QC-6 that orphan was still running, holding port 4173 (a new foreground run failed with `EADDRINUSE`) and about 600 MB. Claude was NOT permitted to end it (the permission classifier denied the stop and no workaround was attempted); the owner is asked to end it. Batch 01 output is partial and is discarded as interrupted; batches 02 and 03 did not start.
+
+Batch 00 (accessibility, analytics, balance-transfer, base64-encoder-decoder, base64url, contact, credit-card-payoff, cron-challenge-lab, cron-explainer, date-calculator, developer-tools-related, emi, field-slider, gratuity-auto, home-loan ... in the first quarter of the list; exact file list was `batch-00`), subpath-desktop, one worker: 254 tests, 116 passed, 138 failed. Classification of the 138:
+- 136 are NOT test failures: `Error: worker process exited unexpectedly (code=3221225794)` (0xC0000142, a Windows DLL initialisation failure), i.e. the browser worker could not start or died under memory exhaustion. They affected, in order, Cron Explainer and Cron Challenge Lab (all), EMI, Developer Tools related-tools pilot, slider-beside-a-number-field, Date Calculator and Gratuity automatic calculation, and are recorded as INTERRUPTED (not run to a verdict). They must be re-run in small batches once memory allows.
+- 2 are genuine assertion failures, both stale pins from Tool Pack 53 (not defects): `balance-transfer.spec.js:316` (related calculators now six: Prepayment, EMI, Loan Comparison, Home Loan, Personal Loan, Loan Eligibility) and `credit-card-payoff.spec.js:391` (its related list now ends with Personal Loan; and no calculator page shows Credit Card Payoff in its related cards any more because the page shows the first six and the unit-pinned order puts it last, so the old "other Loans tools offer it" check was replaced by the Loans listing, All Calculators and search, which are asserted in the same file). Expected values were read from the current build output, then the two pins edited; NOT yet re-run. Observation for the owner: if Credit Card Payoff should stay discoverable from a related card, add it to Balance Transfer's curated `relatedTools` (a catalog change that also changes `relationships.test.mjs`); no such change was made.
+Next: owner ends PID 10836 then PID 2904 (`taskkill /F /T`), then free memory is checked and the 136 interrupted tests plus the two edited pins are re-run in groups of 4 to 6 specs, foreground.
+Rule changes: none. Nothing committed.
+
+### QC-6 update (2026-11-02, 12:22): batch 01 result; strategy
+
+Owner decision: run slowly at low memory rather than stop. The orphaned wrapper was not ended, so it is allowed to finish batches 02 and 03 (it is the only browser process; Claude runs no browser in parallel and will not start one until it exits). Batch 01 completed cleanly at the higher free memory: subpath-desktop, 13 specs (home-loan, hours-calculator, image-batch, image-compressor-resizer, image-crop, income-tax, inflation-view, json-compare, json-csv, json-error-fixing-lab, json-formatter, json-formatter-indent, jsonpath-challenge-lab), 247 tests: 244 passed, 3 failed, 0 skipped, 0 crashed, 10.4 minutes.
+The 3 failures were all stale pre-Pack-53 pins, edited deliberately and NOT yet re-run: `home-loan.spec.js` related loan tools (Personal Loan and Loan Eligibility are live; the page shows six related cards and Prepayment is seventh in the pinned order) and the "eligibility" search (the Loan Eligibility card is now a link); `image-compressor-resizer.spec.js` All Tools counts (PDF Tools has 4 tools since Page Numbers and Watermark).
+Owner observations, no change made: with the limit of six related cards, Home Loan no longer shows Prepayment and Credit Card Payoff is no longer shown by any calculator (QC-6 above). A curated `relatedTools` entry in the catalog would restore either; that changes pinned unit expectations in `relationships.test.mjs`, so it is the owner's call.
+Re-run list once the wrapper exits: balance-transfer, credit-card-payoff, home-loan, image-compressor-resizer (the four edited specs) plus every spec whose tests crashed in batch 00 (cron-explainer, cron-challenge-lab, emi, developer-tools-related, field-slider, date-calculator, gratuity-auto and any others named by the batch 00 triage), in groups of 3 to 4 specs, foreground.
+Rule changes: none. Nothing committed.
+
+Owner decision (2026-11-02), recorded here and not as a rulebook rule: keep the six-card limit on related calculators. The missing cards (Prepayment on Home Loan, Credit Card Payoff on every calculator) are an OBSERVATION, not a defect, and an intentional product decision pending the final content and navigation relevance audit. No catalog relationship is changed; the old expectations are not restored. The corrected pins stand only after re-run.
+
+### QC-6 update 2 (2026-11-02, 12:34): batch 02 result, checkpoint while batch 03 runs
+
+Batch 02 (subpath-desktop, one worker; jsonpath-tester, jwt-decoder, learning-a11y, learning-resilience, learning-widths, list-comparer, margin, notfound, pdf-marks, pdf-tools, photos-to-pdf, photos-to-pdf-turn-metadata, ppf, prepayment, profit, sip): 319 tests, 314 passed, 5 failed, 0 skipped, 0 crashed, 11.2 minutes. The 5 failures were stale Tool Pack 53 pins, each verified against the built output and the unit-pinned relationships, edited deliberately and NOT yet re-run: `margin.spec.js` (related calculators Profit and ROI; search "roi calculator" finds the live ROI card), `profit.spec.js` (related Margin and ROI; same search), `prepayment.spec.js` (six related calculators: EMI, Loan Comparison, Balance Transfer, Home Loan, Personal Loan, Loan Eligibility). No application defect.
+Batch 03 (the last 16 specs of the list: smart-flashcards, smoke, stopwatch, swp, swp-articles, test-design-lab, text-diff, text-diff-options, time-zone-converter, tool-controls, unix-timestamp-converter, url-parser, uuid-generator, visual, world-clock, xirr) is still running in the orphaned wrapper at 12:33 (free memory about 610 MB). Result to be read from `desktop-batch-03.txt` in the scratchpad temp folder when `desktop-progress.txt` shows "batch 03 exit" and "ALLDONE".
+Specs edited and awaiting re-run (7): balance-transfer, credit-card-payoff, home-loan, image-compressor-resizer, margin, profit, prepayment. Specs with crashed tests from batch 00 awaiting re-run: cron-challenge-lab, cron-explainer, emi, developer-tools-related, field-slider, date-calculator, gratuity-auto and any others in the batch 00 failure list that carry `worker process exited` (the batch 00 file is the source). Run in groups of 3 to 4, foreground, `--reporter=dot`, free memory checked before each group.
+Tally so far (desktop, this session, counting only completed runs): batch 00 116 passed, 2 failed (stale), 136 interrupted; batch 01 244 passed, 3 failed (stale); batch 02 314 passed, 5 failed (stale); batch 03 pending.
+Rule changes: none. Nothing committed.
+
+### QC-6 update 3 (2026-11-02, 12:36): exact recovery list for the 136 interrupted batch 00 tests
+
+Batch 03 is still running in the orphaned wrapper (free memory about 690 MB); nothing else is running. The 136 tests that ended with `worker process exited unexpectedly (code=3221225794)` are interrupted, not failed, and belong to exactly these specs (count of interrupted tests): cron-explainer 32; gratuity-auto 23 (all of its G9 automatic-calculation tests); emi 21; developer-tools-related 19; date-calculator 12; cron-challenge-lab 18 (11 from the shared `tests/helpers/lab-contract.mjs` contract plus 7 of its own); field-slider 10; credit-card-payoff 1 (the same spec also had one stale pin). The other batch 00 specs ran to a verdict: accessibility, analytics, balance-transfer, base64-encoder-decoder, base64url, contact (their results are in the 116 passed, apart from the two stale-pin failures).
+Recovery order, foreground, one worker, `--reporter=dot`, memory checked before each group, one group at a time: (1) emi, field-slider, credit-card-payoff; (2) balance-transfer, home-loan, margin, profit; (3) prepayment, image-compressor-resizer, date-calculator; (4) gratuity-auto, developer-tools-related; (5) cron-explainer, cron-challenge-lab. Groups 1 to 3 also verify the seven corrected specs; a corrected spec counts as resolved only when it passes.
+Rule changes: none. Nothing committed.
+
+### QC-7 (2026-11-02, 12:53 to 13:20): batch 03, recovery of every interrupted test, desktop browser coverage complete
+
+Start state: branch `main`, HEAD `45fc888`, 100 working-tree entries (all uncommitted work preserved), the wrapper had finished ("ALLDONE"), no process left, port 4173 free, about 980 MB free.
+
+Wrapper results, subpath-desktop, one worker, each batch separate:
+| Batch | Specs | Tests | Passed | Failed | Interrupted |
+|---|---|---|---|---|---|
+| 00 | accessibility to gratuity-auto (14) | 254 | 116 | 2 (stale pins) | 136 (memory exhaustion, 0xC0000142) |
+| 01 | home-loan to jsonpath-challenge-lab (13) | 247 | 244 | 3 (stale pins) | 0 |
+| 02 | jsonpath-tester to sip (16) | 319 | 314 | 5 (stale pins) | 0 |
+| 03 | smart-flashcards to xirr (16) | 535 | 535 | 0 | 0 |
+
+Foreground recovery groups (memory 980 to 1,550 MB free before each group), all subpath-desktop, one worker, `--reporter=dot`:
+| Group | Specs | Result |
+|---|---|---|
+| 1 | emi, field-slider, credit-card-payoff | 53 passed, 1 failed: `emi.spec.js` related calculators, a stale pin (six cards: Loan Comparison, Prepayment, Home Loan, Personal Loan, Loan Eligibility, Balance Transfer). Corrected, re-run: passed. |
+| 2 | balance-transfer, home-loan, margin, profit | 106 passed |
+| 3 | prepayment, image-compressor-resizer, date-calculator | 89 passed |
+| 4 | gratuity-auto, developer-tools-related | 42 passed |
+| 5 | cron-explainer, cron-challenge-lab (with the shared lab contract) | 50 passed |
+Result: all 136 interrupted tests of batch 00 are recovered and passed (cron-explainer, gratuity-auto, emi, developer-tools-related, date-calculator, cron-challenge-lab, field-slider, credit-card-payoff); the seven corrected specs (balance-transfer, credit-card-payoff, home-loan, image-compressor-resizer, margin, profit, prepayment) pass, so their stale-pin items are RESOLVED. 11 stale pins in total across batches 00 to 02 were Tool Pack 53 consequences (ten calculators published, related lists capped at six, PDF Tools now four); no application defect was found in any batch. No catalog relationship changed.
+Subpath-desktop coverage now complete this session: every browser spec ran to a verdict (the `visual` spec is excluded from this project by design and was not run). Specs run earlier in QC-3 to QC-5 are listed there.
+Next: subpath-mobile in small groups, then a tablet-width sweep of the page types, then the tool audit phases that the specs do not cover (independent output checks of Image and PDF files, Time Tools edge cases), then the final regression and builds.
+Rule changes: none. Nothing committed.
+
+### QC-8 (2026-11-02, 13:25 to 14:10): subpath-mobile (390x844) coverage, foreground, one worker, groups of 3 to 7 specs
+| Group | Specs | Passed | Failed | Skipped |
+|---|---|---|---|---|
+| Loans | emi, balance-transfer, credit-card-payoff, home-loan, prepayment | 118 | 0 | 0 |
+| Investment | sip, swp, fd, cagr, ppf, xirr | 170 | 0 | 0 |
+| Tax, business, math | margin, profit, gst, percentage, income-tax, gratuity-auto, salary-in-hand | 172 | 0 | 0 |
+| Other calculators | loan-comparison, risk-reward, inflation-view, field-slider, calculators-stage3-responsive | 65 | 0 | 0 |
+| Time Tools | date-calculator, date-difference, hours-calculator, stopwatch, countdown-timer | 80 | 0 | 0 |
+| Time Tools | time-zone-converter, unix-timestamp-converter, world-clock, time-tools-new, time-tools-enhancements | 184 | 0 | 0 |
+| Developer Tools | base64-encoder-decoder, base64url, json-compare, json-csv, json-formatter | 84 | 0 | 0 |
+| Developer Tools | json-formatter-indent, jsonpath-tester, jwt-decoder, list-comparer, text-diff, text-diff-options | 100 | 0 | 0 |
+| Developer Tools | url-parser, uuid-generator, cron-explainer, developer-tools-related | 83 | 0 | 0 |
+| Labs | cron-challenge-lab, json-error-fixing-lab, jsonpath-challenge-lab, test-design-lab | 73 | 0 | 0 |
+| Flashcards and learning | smart-flashcards, learning-a11y, learning-resilience, learning-widths | 63 | 0 | 0 |
+| Image | image-batch, image-crop, image-compressor-resizer | 77 | 0 | 0 |
+| PDF | photos-to-pdf, photos-to-pdf-turn-metadata, pdf-marks, pdf-tools | 70 | 0 | 0 |
+| Shared | accessibility, analytics, contact, notfound, smoke, tool-controls, swp-articles | 250 | 0 | 0 |
+| Site | articles, build, navigation | 152 | 0 | 2 (navigation, desktop-only by design) |
+| Pack 53 | simple-calculators, simple-calculators-a11y, links | 56 | 1 | 0 |
+Defect register entry D-2 (P3, test only): `simple-calculators-a11y` Unit Converter failed axe colour-contrast on `#uc-copy` on both projects. Diagnosis by timeline probe: the Copy button is enabled by the default solve, then its colours slide from the disabled grey (rgb 168,162,158 on 231,229,228) to the enabled dark-on-white over about 200 ms; axe sampled mid-slide. Settled state: rgb 28,25,23 on white, axe clean. Not an application defect (a transient state, not a resting one). Fix: the scan now waits until every control's colours are stable before running axe (the failing runs had passed or failed depending on timing). Re-run: 13 of 13 passed on mobile and 13 of 13 on desktop. Two earlier fix attempts (one animation frame, then `getAnimations()`) did not work and were replaced.
+Mobile total 1,744 passed, 0 failed, 2 skipped by design, plus the D-2 spec now 13 of 13. Mobile specs not yet run: site-a11y (126 pages), jsonpath-challenge-lab was in Labs; the `visual` spec is excluded by design.
+Rule changes: none. Nothing committed.
+
+### QC-9 (2026-11-02, 14:10 to 14:55): tablet and mobile accessibility, final regression
+- `site-a11y` (axe, 126 live pages, initial state): desktop 126/126 (QC-5), mobile 126/126.
+- New `tests/browser/site-tablet.spec.js` (820 px, every live page: no horizontal overflow plus axe): 126/126 passed on subpath-desktop. Together with the Pack 53 tablet scans (QC-4/5) the three widths 390, 820 and 1280 are covered; 320 px is covered by the page specs and the simple-calculators spec. Not tested: real devices, Safari, Firefox, screen readers.
+- `smoke` (every live page: HTTP 200, title, images load, no console or page errors, no failed local requests): desktop (batch 03), mobile (shared group), root base (below).
+- Builds: `npm run build` 130 files and `npm run build:preview` 129 files, both pass. Static: links, assets (0 live problems; 4 unreachable legacy files are informational), SEO (127 pages, 126 sitemap URLs), inventory up to date (126 live, 3 Coming soon not routes).
+- Unit: 3,711 tests, 3,707 passed, 0 failed, 4 skipped (three symlink tests unavailable on this Windows setup, one pypdf cross-check because pypdf is not installed).
+- Root base (`root-desktop`, the @portable subset incl. smoke of all 126 pages): 274 passed, 0 failed.
+- Time Tools evidence reused (unchanged code): unit oracles for DST, leap years and independent zone conversion (dst-info, time-zone, world-clock-oracle, date-calculator-golden, scheduler-independent and others) plus the browser specs, all passing.
+Open items, none an application defect: Currency Converter (needs live rates, excluded), JSON Schema Validator (library gate blocked), Best SIP Strategies and Tax Saving Guide (no sourced content). Observation: Prepayment and Credit Card Payoff not shown as related cards (six-card limit; owner decision to keep, revisit at the final relevance audit). Not run by design: visual baselines, Lighthouse, mutation tests.
+Defects this session: D-1 broken `href="#"` home crumbs (fixed), axe contrast, link-in-text-block and heading-order findings (fixed at the shared layer), D-2 transient axe sample in a test (test fixed). 11 stale Pack 53 pins corrected after verification.
+Rule changes: none. Nothing committed, pushed or deployed.
+
+### RELEASE-1 (2026-11-03): release checkpoint, commit blocked, deployment package prepared
+State: branch `main`, HEAD `45fc888`, 5 local commits ahead of `origin/main` (0 behind, so no remote changes to reconcile), 102 uncommitted entries (65 modified, 37 new; none deleted). Secrets scan of changed and new text files: no findings. Ignored and not to be committed: node_modules, dist, dist-ghpages, test-results, tests/.tmp (confirmed by `git check-ignore`).
+Evidence carried forward (no repeat needed, code unchanged): QC-7 to QC-9 (unit 3,707/3,711 with 4 skipped for known reasons; every desktop spec complete; mobile 1,744 passed, 0 failed; site-a11y 126/126 desktop and mobile; site-tablet 126/126; root base 274/274; both builds, links, assets, SEO and inventory checks pass).
+Production output check (`dist/`): 127 HTML files, root paths (`/assets/...`), canonical `https://toolzenhub.in/`, robots.txt and sitemap point at `toolzenhub.in`, no source maps, env files or test files. Package: `C:\Users\DELL\Downloads\ToolZenHub-hostinger-dist-20261103-1428.zip` (610 files, 5.6 MB, SHA-256 A12191702E2E228180B6A1EF09C9D77526A647FD3D560D9AE8FD387826FDBE42, `index.html` at the zip root). Recovery asset: `ToolZenHub-backup-20261102-2311.zip` in Downloads.
+Blocked: the three planned commits (assets, src and scripts / tests / docs) were denied by the permission classifier on 2026-11-03; nothing was staged or committed and no workaround was attempted. Push, GitHub Pages verification, Hostinger upload (no credentials or browser access in this session) and live verification are therefore NOT done. Status: DEVELOPMENT COMPLETE, TESTING COMPLETE, PRODUCTION BUILD VERIFIED. Not reached: GITHUB SYNCED, PREVIEW VERIFIED, PRODUCTION DEPLOYED, LIVE VERIFICATION COMPLETE.
+Rule changes: none.
