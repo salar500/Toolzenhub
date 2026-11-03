@@ -14,7 +14,7 @@ section.categories-page.directory-page
           li
             a.directory-rail__link [href="{ROOT}tools.html#directory-calculators-heading"]
               span.directory-rail__name "Calculators"
-              span.directory-rail__count "19"
+              span.directory-rail__count "30"
           li
             a.directory-rail__link [href="{ROOT}tools.html#directory-time-tools-heading"]
               span.directory-rail__name "Time Tools"
@@ -30,7 +30,7 @@ section.categories-page.directory-page
           li
             a.directory-rail__link [href="{ROOT}tools.html#directory-pdf-tools-heading"]
               span.directory-rail__name "PDF Tools"
-              span.directory-rail__count "3"
+              span.directory-rail__count "4"
       div.directory-layout__main
         form.directory-search [action="{ROOT}tools.html" data-tools-search method="get" role="search"]
           label.directory-search__label [for="directory-search-input"] "Search tools"
@@ -48,7 +48,7 @@ section.categories-page.directory-page
               h2#directory-calculators-heading.directory-section__title
                 a [href="{ROOT}categories.html"] "Calculators"
               p.directory-section__text "Calculators for loans, investment, tax, business and math."
-                span.directory-section__count "19 tools"
+                span.directory-section__count "30 tools"
             div.directory-groups
               article.directory-group
                 h3.directory-group__title
@@ -65,8 +65,17 @@ section.categories-page.directory-page
                     a [href="{ROOT}calculators/home-loan/"] "Home Loan Calculator"
                     span.directory-tool__text "Work out the home loan that fits your monthly EMI budget, what it would cost in interest, …"
                   li.directory-tool
+                    a [href="{ROOT}calculators/personal-loan/"] "Personal Loan Calculator"
+                    span.directory-tool__text "Work out the monthly EMI, the total interest and the total cost, with an optional processi…"
+                  li.directory-tool
+                    a [href="{ROOT}calculators/loan-eligibility/"] "Loan Eligibility Calculator"
+                    span.directory-tool__text "Estimate the loan amount an EMI could repay from your income, existing EMIs and the share …"
+                  li.directory-tool
                     a [href="{ROOT}calculators/balance-transfer/"] "Loan Balance Transfer Calculator"
                     span.directory-tool__text "See whether moving your loan to a lower rate pays off after the charges, and when you earn…"
+                  li.directory-tool
+                    a [href="{ROOT}calculators/interest/"] "Interest Calculator"
+                    span.directory-tool__text "Work out simple and compound interest on the same amount, rate and time, and see how much …"
                   li.directory-tool
                     a [href="{ROOT}calculators/prepayment/"] "Loan Prepayment Calculator"
                     span.directory-tool__text "See how much interest and time a one-time loan prepayment can save, and what it does to yo…"
@@ -96,6 +105,9 @@ section.categories-page.directory-page
                   li.directory-tool
                     a [href="{ROOT}calculators/xirr/"] "XIRR Calculator"
                     span.directory-tool__text "Find the yearly rate of return of money you put in and got back on different dates. Enter …"
+                  li.directory-tool
+                    a [href="{ROOT}calculators/risk-reward/"] "Risk-Reward and Position Size Calculator"
+                    span.directory-tool__text "Enter an entry, stop-loss and target to see the risk and reward per unit, the risk-reward …"
               article.directory-group
                 h3.directory-group__title
                   a [href="{ROOT}tax.html"] "Tax"
@@ -115,6 +127,20 @@ section.categories-page.directory-page
                     span.directory-tool__text "Estimate your take-home salary from your annual CTC for tax year 2026-27, step by step: em…"
               article.directory-group
                 h3.directory-group__title
+                  a [href="{ROOT}health.html"] "Health"
+                p.directory-group__text "Estimate BMI, resting energy use and daily calories from your measurements"
+                ul.directory-group__tools
+                  li.directory-tool
+                    a [href="{ROOT}calculators/bmi/"] "BMI Calculator"
+                    span.directory-tool__text "Find your body mass index from weight and height, with the WHO adult categories and the As…"
+                  li.directory-tool
+                    a [href="{ROOT}calculators/calorie/"] "Calorie Calculator"
+                    span.directory-tool__text "Estimate the kilocalories your body uses in a day from your basal metabolic rate and activ…"
+                  li.directory-tool
+                    a [href="{ROOT}calculators/bmr/"] "BMR Calculator"
+                    span.directory-tool__text "Estimate your basal metabolic rate, the energy your body uses at rest in a day, with the M…"
+              article.directory-group
+                h3.directory-group__title
                   a [href="{ROOT}business.html"] "Business"
                 p.directory-group__text "Calculate margins, profit and other practical business metrics"
                 ul.directory-group__tools
@@ -124,14 +150,31 @@ section.categories-page.directory-page
                   li.directory-tool
                     a [href="{ROOT}calculators/margin/"] "Margin Calculator"
                     span.directory-tool__text "Set a selling price from a target margin or markup, see margin and markup side by side, an…"
+                  li.directory-tool
+                    a [href="{ROOT}calculators/roi/"] "ROI Calculator"
+                    span.directory-tool__text "Find the return on investment, the profit or loss and an optional yearly rate from what yo…"
               article.directory-group
                 h3.directory-group__title
                   a [href="{ROOT}math.html"] "Math"
-                p.directory-group__text "Solve percentage and everyday math problems"
+                p.directory-group__text "Solve percentage, ratio, age and everyday math problems"
                 ul.directory-group__tools
                   li.directory-tool
                     a [href="{ROOT}calculators/percentage/"] "Percentage Calculator"
                     span.directory-tool__text "Fill in any two of a starting value, a percentage change and an ending value to work out t…"
+                  li.directory-tool
+                    a [href="{ROOT}calculators/ratio/"] "Ratio Calculator"
+                    span.directory-tool__text "Simplify a ratio to its lowest terms, see the multiples and shares, and scale it to find t…"
+                  li.directory-tool
+                    a [href="{ROOT}calculators/age/"] "Age Calculator"
+                    span.directory-tool__text "Find an exact age in years, months and days from a date of birth, with the total days and …"
+              article.directory-group
+                h3.directory-group__title
+                  a [href="{ROOT}converter.html"] "Converter"
+                p.directory-group__text "Convert common units of length, mass, area, volume, speed and temperature"
+                ul.directory-group__tools
+                  li.directory-tool
+                    a [href="{ROOT}calculators/unit-converter/"] "Unit Converter"
+                    span.directory-tool__text "Convert between common units of length, mass, area, volume, speed and temperature using ex…"
             p.directory-section__more
               a [href="{ROOT}calculators.html"] "Browse all calculators →"
           section.directory-section [aria-labelledby="directory-time-tools-heading"]
@@ -294,7 +337,7 @@ section.categories-page.directory-page
               h2#directory-pdf-tools-heading.directory-section__title
                 a [href="{ROOT}pdf-tools.html"] "PDF Tools"
               p.directory-section__text "Private browser-based tools for joining, splitting and rearranging PDF files."
-                span.directory-section__count "3 tools"
+                span.directory-section__count "4 tools"
             div.directory-groups
               article.directory-group.directory-group--tool
                 h3.directory-group__title
@@ -308,3 +351,7 @@ section.categories-page.directory-page
                 h3.directory-group__title
                   a [href="{ROOT}tools/pdf-pages/"] "Extract, Reorder and Rotate PDF Pages"
                 p.directory-group__text "Make a new PDF from the pages you choose, in the order you choose, and turn sideways pages…"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/pdf-marks/"] "Add Page Numbers and Watermark to PDF"
+                p.directory-group__text "Add page numbers, a text watermark or both to a PDF and download a new copy. It runs in yo…"

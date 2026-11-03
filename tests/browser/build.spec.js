@@ -24,7 +24,7 @@ test.describe("generated pages carry their content without JavaScript @portable"
       expect(await page.locator(".article-key-takeaways li").count()).toBeGreaterThanOrEqual(3);
       expect(await page.locator(".article-faq details").count()).toBeGreaterThanOrEqual(3);
       expect(await page.locator(".article-toc a").count()).toBeGreaterThanOrEqual(4);
-      await expect(page.locator(".article-related-card")).toHaveCount(/\/(margin|profit|fd|gst|cagr|percentage|math|swp)\//.test(a.url) ? 2 : /\/(loan-prepayment|balance-transfer|sip|home-loan)\//.test(a.url) ? 3 : 5);
+      await expect(page.locator(".article-related-card")).toHaveCount(/\/(health|converter)\//.test(a.url) ? 0 : /\/(margin|profit|fd|gst|cagr|percentage|math|swp|business)\//.test(a.url) ? 2 : /\/(loan-prepayment|balance-transfer|sip|home-loan)\//.test(a.url) ? 3 : 5);
       await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
       await expect(page.locator(".article-calculator-button")).toHaveCount(1);
       await expect(page.locator(".site-header .navbar__link").first()).toBeAttached();
@@ -43,7 +43,7 @@ test.describe("generated pages carry their content without JavaScript @portable"
     await expect(page.locator(".calculator-info")).toHaveCount(3);
     await expect(page.locator(".calculator-info details")).toHaveCount(3);
     await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
-    await expect(page.locator(".related-calculator-card")).toHaveCount(5); // the other five Loans tools, Home Loan (Tool Pack 6) and the Credit Card Payoff Calculator (Tool Pack 24) among them
+    await expect(page.locator(".related-calculator-card")).toHaveCount(6); // the other Loans tools (six shown: Personal Loan and Loan Eligibility joined with Tool Pack 53), Home Loan (Tool Pack 6) and the Credit Card Payoff Calculator (Tool Pack 24) among them
     expect(await page.locator(".related-article-card").count()).toBeGreaterThanOrEqual(3);
     await expect(page.locator(".site-header")).toBeAttached();
   });
@@ -67,7 +67,7 @@ test.describe("generated pages carry their content without JavaScript @portable"
     await expect(page.locator("#compare-loans")).toHaveCount(0);
     await expect(page.locator(".loan-info-grid details").first()).toBeAttached();
     await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
-    await expect(page.locator(".related-calculator-card")).toHaveCount(5); // the other five Loans tools, Home Loan (Tool Pack 6) and the Credit Card Payoff Calculator (Tool Pack 24) among them
+    await expect(page.locator(".related-calculator-card")).toHaveCount(6); // the other Loans tools (six shown: Personal Loan and Loan Eligibility joined with Tool Pack 53), Home Loan (Tool Pack 6) and the Credit Card Payoff Calculator (Tool Pack 24) among them
     expect(await page.locator(".related-article-card").count()).toBeGreaterThanOrEqual(3);
   });
 });

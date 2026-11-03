@@ -76,6 +76,8 @@ function describePage(file) {
     "business.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "tax.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "math.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
+    "health.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
+    "converter.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "calculators.html": { type: "tool-index", primarySelector: "#calculators-grid .calculator-card", interactive: true, rendered: "client", queryVariants: ["?q=<search term>"] },
     "articles.html": { type: "article-index", primarySelector: "#articles-list .article-card", interactive: true, rendered: "client", queryVariants: ["?category=<category slug>"] },
     "about.html": { type: "info", primarySelector: "#app h1", interactive: false, rendered: "client" },

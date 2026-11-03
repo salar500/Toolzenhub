@@ -10,6 +10,7 @@ section.categories-page.directory-page
       span.categories-page__eyebrow "Calculators"
       h1.categories-page__title "Investment Calculators"
       p.categories-page__description "Explore investment growth, returns and savings scenarios"
+    h2.categories-detail__heading "Investment calculators"
     div.categories-detail__grid.directory-tools
       a.category-page-card [href="{ROOT}calculators/sip/"]
         div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
@@ -52,6 +53,13 @@ section.categories-page.directory-page
         div.category-page-card__content
           h3.category-page-card__title "XIRR Calculator"
           p.category-page-card__description "Find the yearly rate of return of money you put in and got back on different dates. Enter …"
+        span.category-page-card__arrow [aria-hidden="true"] "→"
+      a.category-page-card [href="{ROOT}calculators/risk-reward/"]
+        div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
+          svg [aria-hidden="true"]
+        div.category-page-card__content
+          h3.category-page-card__title "Risk-Reward and Position Size Calculator"
+          p.category-page-card__description "Enter an entry, stop-loss and target to see the risk and reward per unit, the risk-reward …"
         span.category-page-card__arrow [aria-hidden="true"] "→"
     p.directory-section__more
       a [href="{ROOT}categories.html"] "← All calculator categories"

@@ -412,13 +412,13 @@ test.describe("Margin Calculator", () => {
     await expect(main).toContainText("1.67 times"); // the example's discount
   });
 
-  test("Profit is its related calculator (the other Business tool that is live) and three curated articles", async ({ page, go, siteRoot }) => {
+  test("Profit and ROI (live since Tool Pack 53) are its related calculators, and three curated articles", async ({ page, go, siteRoot }) => {
     await open(page, go);
-    // since Tool Pack 5 the Profit Calculator is published, so Margin shows it; Coming soon ROI is not offered
+    // since Tool Pack 5 the Profit Calculator is published, and since Tool Pack 53 so is the ROI Calculator: the other Business tools
     const related = page.locator(".related-calculator-card");
-    await expect(related).toHaveCount(1);
+    await expect(related).toHaveCount(2);
     await expect(related.first()).toContainText("Profit Calculator");
-    await expect(page.locator("a[href*='calculators/roi']")).toHaveCount(0);
+    await expect(related.nth(1)).toContainText("ROI Calculator");
     const cards = page.locator(".related-article-card");
     await expect(cards).toHaveCount(3);
     const hrefs = await cards.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
@@ -449,7 +449,7 @@ test.describe("Margin Calculator", () => {
     }
   });
 
-  test("search finds it by name and by its aliases; Coming soon ROI is not offered as usable", async ({ page, go, siteRoot }) => {
+  test("search finds it by name and by its aliases; the ROI Calculator (live since Tool Pack 53) is a separate linked card", async ({ page, go, siteRoot }) => {
     await go("calculators.html");
     const input = page.locator("#calculators-search-input");
     for (const query of ["margin", "profit margin calculator", "markup calculator", "selling price calculator"]) {
@@ -459,7 +459,7 @@ test.describe("Margin Calculator", () => {
       await expect(page.locator("#calculators-grid .calculator-card").first()).toContainText("Margin Calculator");
     }
     await input.fill("roi calculator");
-    await expect(page.locator("#calculators-grid a.calculator-card[href*='calculators/roi']")).toHaveCount(0); // Coming soon: not a link
+    await expect(page.locator("#calculators-grid a.calculator-card[href*='calculators/roi']")).toHaveCount(1); // live: a link to its own page
   });
 
   test("responsive: no horizontal overflow with every optional block open, and readable tap targets", async ({ page, go }) => {

@@ -65,17 +65,21 @@ const PERCENTAGE_PACK_PUBLISHED = [
   "percentage/percent-vs-percentage-points",
 ];
 const PERCENTAGE_BASICS_PUBLISHED = ["math/how-to-calculate-percentage-easily"]; // published 2026-11-01 from the placeholder; listed after the other published articles
+// published 2026-11-02 from the placeholders, text only (no images: owner 2026-11-02), each beside the calculator built for it
+const COMPLETION_PUBLISHED = [
+  "business/roi-vs-profit-whats-the-difference",
+  "health/how-to-calculate-your-daily-calorie-needs",
+  "converter/easy-unit-conversion-guide",
+];
+const COMPLETION_TOOLS = { "business/roi-vs-profit-whats-the-difference": ["roi"], "health/how-to-calculate-your-daily-calorie-needs": ["calorie", "bmr"], "converter/easy-unit-conversion-guide": ["unit-converter"] };
 const SWP_PACK_PUBLISHED = [
   "swp/how-a-systematic-withdrawal-plan-works",
   "swp/what-changes-how-long-a-corpus-lasts",
 ];
-const PUBLISHED = [...ORIGINAL_PUBLISHED, ...PREPAYMENT_PACK_PUBLISHED, ...BALANCE_TRANSFER_PACK_PUBLISHED, ...SIP_PACK_PUBLISHED, ...MARGIN_PACK_PUBLISHED, ...PROFIT_PACK_PUBLISHED, ...HOME_LOAN_PACK_PUBLISHED, ...FD_PACK_PUBLISHED, ...GST_PACK_PUBLISHED, ...CAGR_PACK_PUBLISHED, ...PERCENTAGE_PACK_PUBLISHED, ...SWP_PACK_PUBLISHED, ...PERCENTAGE_BASICS_PUBLISHED];
+const PUBLISHED = [...ORIGINAL_PUBLISHED, ...PREPAYMENT_PACK_PUBLISHED, ...BALANCE_TRANSFER_PACK_PUBLISHED, ...SIP_PACK_PUBLISHED, ...MARGIN_PACK_PUBLISHED, ...PROFIT_PACK_PUBLISHED, ...HOME_LOAN_PACK_PUBLISHED, ...FD_PACK_PUBLISHED, ...GST_PACK_PUBLISHED, ...CAGR_PACK_PUBLISHED, ...PERCENTAGE_PACK_PUBLISHED, ...SWP_PACK_PUBLISHED, ...PERCENTAGE_BASICS_PUBLISHED, ...COMPLETION_PUBLISHED];
 const COMING_SOON = [
   "investment/best-sip-strategies-for-beginners",
   "tax/tax-saving-guide-save-more-legally",
-  "business/roi-vs-profit-whats-the-difference",
-  "health/how-to-calculate-your-daily-calorie-needs",
-  "converter/easy-unit-conversion-guide",
 ];
 // metadata that must live ONLY in the catalog, never in a content module
 const METADATA_KEYS = ["slug", "topic", "category", "categoryName", "title", "description", "datePublished", "dateModified", "readTime", "image", "relatedArticles"];
@@ -90,7 +94,7 @@ before(async () => {
 
 describe("catalog model", () => {
   test("40 entries: the original ids 1..12 plus the Tool Pack articles 13 to 40, with unique ids and keys", () => {
-    assert.deepEqual(catalog.articles.map((a) => a.id), [1, 2, 3, 4, 5, 6, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 11, 7, 8, 9, 10, 12]);
+    assert.deepEqual(catalog.articles.map((a) => a.id), [1, 2, 3, 4, 5, 6, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 11, 9, 10, 12, 7, 8]);
     assert.equal(new Set(catalog.articles.map((a) => a.id)).size, 40);
     assert.equal(new Set(catalog.articles.map((a) => a.key)).size, 40);
   });
@@ -145,6 +149,7 @@ describe("catalog model", () => {
 
   test("hero images: every published article has /assets/Images/articles/<slug>.png except the SWP sensitivity article, which deliberately has none", () => {
     for (const a of catalog.articles.filter((x) => x.published)) {
+      // the three Tool Pack 53 guides were first published text-only (owner 2026-11-02); the owner then approved original text-free diagram covers for them, so they follow the general rule below
       if (a.slug === "what-changes-how-long-a-corpus-lasts") assert.equal(a.heroImage, null, a.slug); // a comparison of durations reads better as text than as a generic chart (owner 2026-10-31: no repetitive generic charts)
       else {
         assert.equal(a.heroImage.src, `/assets/Images/articles/${a.slug}.png`, a.slug);
@@ -158,16 +163,21 @@ describe("catalog model", () => {
     for (const a of catalog.articles.filter((x) => x.published && x.heroImage)) assert.ok(a.heroImage.alt.length > 30, a.slug);
   });
 
-  test("every category exists; published counts are loans 13, investment 10, tax 2, business 6, math 4 and 0 elsewhere", () => {
+  test("every category exists; published counts are loans 13, investment 10, tax 2, business 7, health 1, math 4, converter 1", () => {
     const slugs = catalog.articleCategories.map((c) => c.slug);
     for (const a of catalog.articles) assert.ok(slugs.includes(a.category), a.key);
-    assert.deepEqual(Object.fromEntries(catalog.articleCategories.map((c) => [c.slug, c.count])), { loans: 13, investment: 10, tax: 2, business: 6, health: 0, math: 4, converter: 0 });
+    assert.deepEqual(Object.fromEntries(catalog.articleCategories.map((c) => [c.slug, c.count])), { loans: 13, investment: 10, tax: 2, business: 7, health: 1, math: 4, converter: 1 });
   });
 });
 
 describe("relationships", () => {
   test("related articles are curated, ordered, published and never the article itself: 5 per original article, 3 per Tool Pack article", () => {
     for (const a of catalog.articles.filter((x) => x.published)) {
+      if (COMPLETION_PUBLISHED.includes(a.key)) { // ROI vs Profit points at the Margin and Profit guides; the Health and Converter guides have no sibling yet
+        assert.equal(a.related.length, a.key.startsWith("business/") ? 2 : 0, a.key);
+        for (const key of a.related) assert.equal(catalog.getArticleByKey(key)?.published, true, `${a.key} -> ${key}`);
+        continue;
+      }
       // PUBLISHED above pins which articles exist; every one that is not an original belongs to a Tool Pack. The FD cluster is two articles, each relating to the other and to one SIP article. The Margin and Profit clusters
       // are three articles each and the other Business cluster is a different tool's, so each article relates to the other two of its own cluster.
       const expected = ORIGINAL_PUBLISHED.includes(a.key) ? 5 : [...MARGIN_PACK_PUBLISHED, ...PROFIT_PACK_PUBLISHED, ...FD_PACK_PUBLISHED, ...GST_PACK_PUBLISHED, ...CAGR_PACK_PUBLISHED, ...PERCENTAGE_PACK_PUBLISHED, ...PERCENTAGE_BASICS_PUBLISHED, ...SWP_PACK_PUBLISHED].includes(a.key) ? 2 : 3;
@@ -199,6 +209,7 @@ describe("relationships", () => {
       : CAGR_PACK_PUBLISHED.includes(key) ? ["cagr"]
       : PERCENTAGE_PACK_PUBLISHED.includes(key) || PERCENTAGE_BASICS_PUBLISHED.includes(key) ? ["percentage"]
       : SWP_PACK_PUBLISHED.includes(key) ? ["swp"]
+      : COMPLETION_TOOLS[key] ? COMPLETION_TOOLS[key]
       : ["loan-comparison"];
     for (const a of catalog.articles.filter((x) => x.published)) {
       assert.deepEqual(a.tools, expected(a.key), a.key);
@@ -273,16 +284,17 @@ describe("derived views keep their old shape", () => {
       description: "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
       date: "Aug 25, 2026", readTime: "6 min read", image: "/Toolzenhub/assets/Images/articles/how-to-reduce-home-loan-interest.png", alt: "Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate",
     });
-    assert.deepEqual(legacy.articleRegistry[35], {
+    assert.deepEqual(legacy.articleRegistry[38], {
       id: 7, category: "investment", categoryName: "Investment", topic: "investment", slug: "best-sip-strategies-for-beginners",
       title: "Best SIP Strategies for Beginners",
       description: "Learn practical SIP investment strategies to build wealth consistently and work towards your financial goals.",
       date: "Aug 25, 2026", readTime: "5 min read", image: null, alt: "",
     });
-    assert.equal(legacy.articleRegistry.filter((a) => a.published === true).length, 35);
-    assert.equal(legacy.articleRegistry.filter((a) => "published" in a).length, 35);
-    // the SWP sensitivity article is the only published article without a card image: the registry says so (image null, no alt) and its card draws no image block
+    assert.equal(legacy.articleRegistry.filter((a) => a.published === true).length, 38);
+    assert.equal(legacy.articleRegistry.filter((a) => "published" in a).length, 38);
+    // the SWP sensitivity article is the only published article without a card image (the three Tool Pack 53 guides have covers): the registry says so (image null, no alt) and its card draws no image block
     for (const a of legacy.articleRegistry.filter((x) => x.slug === "what-changes-how-long-a-corpus-lasts")) assert.deepEqual([a.image, a.alt], [null, ""], a.slug);
+    for (const a of legacy.articleRegistry.filter((x) => COMPLETION_PUBLISHED.some((k) => k.endsWith(`/${x.slug}`)))) assert.ok(a.image.endsWith(`/${a.slug}.png`) && a.alt.length > 40, a.slug); // covers approved by the owner after first publication
     for (const a of legacy.articleRegistry.filter((x) => x.topic === "percentage")) assert.ok(a.image.endsWith(`/${a.slug}.png`) && a.alt.length > 40, a.slug);
   });
 });

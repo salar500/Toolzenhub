@@ -351,15 +351,15 @@ test.describe("Home Loan Calculator", () => {
     await expect(main).toContainText("₹24,19,634"); // the example's 10-year loan
   });
 
-  test("related loan tools are live; Coming soon Personal Loan and Loan Eligibility are not offered as usable", async ({ page, go, siteRoot }) => {
+  test("related loan tools are live links, Personal Loan and Loan Eligibility (live since Tool Pack 53) among them", async ({ page, go, siteRoot }) => {
     await open(page, go);
     const related = page.locator(".related-calculator-card");
     const hrefs = await related.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
-    for (const tool of ["emi", "loan-comparison", "prepayment", "balance-transfer"]) {
+    for (const tool of ["emi", "loan-comparison", "personal-loan", "loan-eligibility", "balance-transfer"]) { // the page shows the first six related tools; Prepayment is later in the pinned order since Tool Pack 53
       expect(hrefs, tool).toContain(`${siteRoot}calculators/${tool}/`);
     }
-    expect(hrefs.some((h) => /personal-loan|loan-eligibility/.test(h))).toBe(false);
-    await expect(page.locator("a[href*='calculators/personal-loan'], a[href*='calculators/loan-eligibility']")).toHaveCount(0);
+    await expect(related).toHaveCount(6);
+    await expect(page.locator("a.related-calculator-card[href*='calculators/personal-loan'], a.related-calculator-card[href*='calculators/loan-eligibility']")).toHaveCount(2);
   });
 
   test("search finds it by name and by its aliases, not by 'eligibility'", async ({ page, go, siteRoot }) => {
@@ -372,7 +372,7 @@ test.describe("Home Loan Calculator", () => {
     }
     await input.fill("eligibility");
     await expect(page.locator(`#calculators-grid a.calculator-card[href='${siteRoot}calculators/home-loan/']`)).toHaveCount(0);
-    await expect(page.locator("#calculators-grid a.calculator-card[href*='loan-eligibility']")).toHaveCount(0); // Coming soon: not a link
+    await expect(page.locator("#calculators-grid a.calculator-card[href*='loan-eligibility']")).toHaveCount(1); // the Loan Eligibility Calculator is live (Tool Pack 53): found by "eligibility", and it is not the Home Loan card
   });
 
   test("the Home page's existing Home Loan card is live, with no Coming soon badge", async ({ page, go, siteRoot }) => {

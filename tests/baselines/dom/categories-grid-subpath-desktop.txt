@@ -20,6 +20,13 @@ div#categories-grid.categories-page__grid
       h2.category-page-card__title "Tax"
       p.category-page-card__description "Work through tax-related calculations with clear assumptions"
     span.category-page-card__arrow [aria-hidden="true"] "→"
+  a.category-page-card [href="{ROOT}health.html"]
+    div.category-page-card__icon.category-page-card__icon--health [aria-hidden="true"]
+      svg [aria-hidden="true"]
+    div.category-page-card__content
+      h2.category-page-card__title "Health"
+      p.category-page-card__description "Estimate BMI, resting energy use and daily calories from your measurements"
+    span.category-page-card__arrow [aria-hidden="true"] "→"
   a.category-page-card [href="{ROOT}business.html"]
     div.category-page-card__icon.category-page-card__icon--business [aria-hidden="true"]
       svg [aria-hidden="true"]
@@ -32,5 +39,12 @@ div#categories-grid.categories-page__grid
       svg [aria-hidden="true"]
     div.category-page-card__content
       h2.category-page-card__title "Math"
-      p.category-page-card__description "Solve percentage and everyday math problems"
+      p.category-page-card__description "Solve percentage, ratio, age and everyday math problems"
+    span.category-page-card__arrow [aria-hidden="true"] "→"
+  a.category-page-card [href="{ROOT}converter.html"]
+    div.category-page-card__icon.category-page-card__icon--converter [aria-hidden="true"]
+      svg [aria-hidden="true"]
+    div.category-page-card__content
+      h2.category-page-card__title "Converter"
+      p.category-page-card__description "Convert common units of length, mass, area, volume, speed and temperature"
     span.category-page-card__arrow [aria-hidden="true"] "→"

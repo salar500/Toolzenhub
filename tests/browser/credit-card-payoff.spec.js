@@ -397,12 +397,12 @@ test.describe("Credit Card Payoff Calculator in the Loans listing, search and re
     await expect(page.locator(`a[href*="credit-card-payoff"]`)).toHaveCount(0);
     await go("calculators/credit-card-payoff/");
     const hrefs = await page.locator(".related-calculator-card").evaluateAll((l) => l.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
-    expect(hrefs).toEqual([`${siteRoot}calculators/balance-transfer/`, `${siteRoot}calculators/prepayment/`, `${siteRoot}calculators/emi/`, `${siteRoot}calculators/loan-comparison/`, `${siteRoot}calculators/home-loan/`]);
+    expect(hrefs).toEqual([`${siteRoot}calculators/balance-transfer/`, `${siteRoot}calculators/prepayment/`, `${siteRoot}calculators/emi/`, `${siteRoot}calculators/loan-comparison/`, `${siteRoot}calculators/home-loan/`, `${siteRoot}calculators/personal-loan/`]); // six: the page shows the first six related tools
     const articles = await page.locator(".related-article-card").evaluateAll((l) => l.map((e) => e.getAttribute("href")));
     expect(articles).toEqual([`${siteRoot}articles/loan-comparison/loan-tenure-total-interest/`, `${siteRoot}articles/loan-comparison/emi-vs-total-interest/`]);
-    // the established automatic relationship: the other Loans tools offer it too (their pages are otherwise unchanged)
+    // the other Loans tools still list it after their curated tools in the automatic relationship (pinned in relationships.test.mjs), but since Tool Pack 53 a page shows only the first six related tools, so it is reached from the Loans listing, All Calculators and search, not from another tool's related cards
     await go("calculators/emi/");
-    expect(await page.locator(".related-calculator-card a, a.related-calculator-card").evaluateAll((l) => l.map((e) => e.getAttribute("href")))).toContain(`${siteRoot}calculators/credit-card-payoff/`);
+    expect(await page.locator(".related-calculator-card").count()).toBe(6);
   });
 
   test("search finds it by its own names", async ({ page, go, siteRoot }) => {

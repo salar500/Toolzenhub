@@ -26,7 +26,7 @@ before(async () => {
 });
 
 // the published tools of the Calculators section; Date Difference (Time Tools) is a published tool too, but it is not a calculator
-const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "swp", "percentage", "income-tax", "credit-card-payoff", "ppf", "gratuity", "salary-in-hand", "xirr", "risk-reward"];
+const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "swp", "percentage", "income-tax", "credit-card-payoff", "ppf", "gratuity", "salary-in-hand", "xirr", "risk-reward", "interest", "roi", "ratio", "age", "personal-loan", "loan-eligibility", "bmi", "bmr", "calorie", "unit-converter"];
 const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "smart-flashcards", "json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab", "list-comparer", "uuid-generator", "json-csv-converter", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages", "pdf-marks"];
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"];
 
@@ -45,10 +45,10 @@ describe("catalog model", () => {
     for (const c of catalog.calculators) assert.ok(["published", "coming-soon"].includes(c.status), `${c.id}: ${c.status}`);
   });
 
-  test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP Margin, Profit, Home Loan, FD, GST, CAGR and Percentage, Income Tax (the Old vs New Tax Regime Calculator), SWP, Credit Card Payoff, PPF, Gratuity (India), Salary / CTC to In-Hand (India), XIRR and Risk-Reward and Position Size are published; all other 11 are coming-soon", () => {
+  test("exactly EMI, Loan Comparison, Loan Prepayment, Loan Balance Transfer and SIP Margin, Profit, Home Loan, FD, GST, CAGR and Percentage, Income Tax (the Old vs New Tax Regime Calculator), SWP, Credit Card Payoff, PPF, Gratuity (India), Salary / CTC to In-Hand (India), XIRR, Risk-Reward and Position Size, Interest, ROI, Ratio, Age, Personal Loan, Loan Eligibility, BMI, BMR, Calorie and Unit Converter are published; only Currency Converter is coming-soon (it needs live rates)", () => {
     const pub = catalog.calculators.filter((c) => c.status === "published").map((c) => c.id).sort();
     assert.deepEqual(pub, [...PUBLISHED_CALCULATORS].sort());
-    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 11);
+    assert.equal(catalog.calculators.filter((c) => c.status === "coming-soon").length, 1);
   });
 
   test("`available` (read by cards and search) is exactly status === published", () => {
@@ -131,6 +131,16 @@ describe("registry is derived from the catalog", () => {
       percentage: { section: "Calculators", category: "math", title: "Percentage Calculator" },
       "income-tax": { section: "Calculators", category: "tax", title: "Old vs New Tax Regime Calculator" },
       "credit-card-payoff": { section: "Calculators", category: "loans", title: "Credit Card Payoff Calculator" },
+      "interest": { section: "Calculators", category: "loans", title: "Interest Calculator" },
+      "roi": { section: "Calculators", category: "business", title: "ROI Calculator" },
+      "ratio": { section: "Calculators", category: "math", title: "Ratio Calculator" },
+      "age": { section: "Calculators", category: "math", title: "Age Calculator" },
+      "personal-loan": { section: "Calculators", category: "loans", title: "Personal Loan Calculator" },
+      "loan-eligibility": { section: "Calculators", category: "loans", title: "Loan Eligibility Calculator" },
+      "bmi": { section: "Calculators", category: "health", title: "BMI Calculator" },
+      "bmr": { section: "Calculators", category: "health", title: "BMR Calculator" },
+      "calorie": { section: "Calculators", category: "health", title: "Calorie Calculator" },
+      "unit-converter": { section: "Calculators", category: "converter", title: "Unit Converter" },
       // a tool directly under a section has no category at all
       "date-difference": { section: "Time Tools", title: "Date Difference Calculator" },
       "date-calculator": { section: "Time Tools", title: "Date Calculator" },
@@ -180,17 +190,17 @@ describe("search labels come from the category list", () => {
     const emi = all.find((c) => c.id === "emi");
     assert.equal(emi.category, "Loans");
     assert.equal(emi.url, `${ROOT}calculators/emi/`);
-    // a Coming Soon tool (no Investment tool is Coming Soon any more: PPF is published): a category title, and no URL
-    const soon = all.find((c) => c.id === getComingSoonTool({ category: "loans" }).id);
-    assert.equal(soon.category, "Loans");
+    // a Coming Soon tool (only the Currency Converter is left: it needs live exchange rates): a category title, and no URL
+    const soon = all.find((c) => c.id === getComingSoonTool({ category: "converter" }).id);
+    assert.equal(soon.category, "Converter");
     assert.equal(soon.url, null);
     // SIP is published (Tool Pack 3): the same category, and a URL
     const sip = all.find((c) => c.id === "sip");
     assert.equal(sip.category, "Investment");
     assert.equal(sip.url, `${ROOT}calculators/sip/`);
     assert.equal(all.filter((c) => c.url).length, catalog.calculators.filter((c) => c.available).length);
-    // the same eight matches as before M7; M7 ranks them (title matches first, published before Coming Soon).
+    // the same matches as before M7 (plus the Loans calculators built since); M7 ranks them (title matches first, published before Coming Soon).
     // "Loan Prepayment Calculator" and "Loan Balance Transfer Calculator" begin with "loan", so they rank with the title-prefix matches.
-    assert.deepEqual(search.searchCalculators("loan").map((c) => c.id), ["loan-comparison", "balance-transfer", "prepayment", "loan-eligibility", "home-loan", "personal-loan", "emi", "credit-card-payoff", "interest"]);
+    assert.deepEqual(search.searchCalculators("loan").map((c) => c.id), ["loan-comparison", "loan-eligibility", "balance-transfer", "prepayment", "home-loan", "personal-loan", "emi", "interest", "credit-card-payoff"]);
   });
 });

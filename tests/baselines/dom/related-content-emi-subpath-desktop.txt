@@ -22,18 +22,24 @@ section.related-section
       div.related-calculator-content
         strong "Home Loan Calculator"
         span "Work out the home loan that fits your monthly EMI budget, what it would cost in interest, …"
+    a.related-calculator-card [href="{ROOT}calculators/personal-loan/"]
+      div.related-calculator-icon [aria-hidden="true"]
+        svg [aria-hidden="true"]
+      div.related-calculator-content
+        strong "Personal Loan Calculator"
+        span "Work out the monthly EMI, the total interest and the total cost, with an optional processi…"
+    a.related-calculator-card [href="{ROOT}calculators/loan-eligibility/"]
+      div.related-calculator-icon [aria-hidden="true"]
+        svg [aria-hidden="true"]
+      div.related-calculator-content
+        strong "Loan Eligibility Calculator"
+        span "Estimate the loan amount an EMI could repay from your income, existing EMIs and the share …"
     a.related-calculator-card [href="{ROOT}calculators/balance-transfer/"]
       div.related-calculator-icon [aria-hidden="true"]
         svg [aria-hidden="true"]
       div.related-calculator-content
         strong "Loan Balance Transfer Calculator"
         span "See whether moving your loan to a lower rate pays off after the charges, and when you earn…"
-    a.related-calculator-card [href="{ROOT}calculators/credit-card-payoff/"]
-      div.related-calculator-icon [aria-hidden="true"]
-        svg [aria-hidden="true"]
-      div.related-calculator-content
-        strong "Credit Card Payoff Calculator"
-        span "Estimate how many months a fixed monthly payment takes to clear a credit card balance, the…"
 --- match 2 of 2 ---
 section.related-section
   div.related-section__heading

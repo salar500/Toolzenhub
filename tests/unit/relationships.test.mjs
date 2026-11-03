@@ -43,11 +43,11 @@ let PUBLISHED;
 describe("current relationships (parity with the pre-M7 selection)", () => {
   test("tool -> related tools: same category, published, never itself", () => {
     // Home Loan (Tool Pack 6) is a published Loans tool, so every Loans page relates to all the other Loans tools: the curated ones first, then the rest of the category in catalog order, which now ends with the Credit Card Payoff Calculator (Tool Pack 24)
-    assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["loan-comparison", "prepayment", "home-loan", "balance-transfer", "credit-card-payoff"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("loan-comparison")), ["emi", "prepayment", "balance-transfer", "home-loan", "credit-card-payoff"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("prepayment")), ["emi", "loan-comparison", "balance-transfer", "home-loan", "credit-card-payoff"]); // curated order, then the category
-    assert.deepEqual(toolIds(rel.getRelatedTools("balance-transfer")), ["prepayment", "emi", "loan-comparison", "home-loan", "credit-card-payoff"]); // curated order, then the category
-    assert.deepEqual(toolIds(rel.getRelatedTools("home-loan")), ["emi", "loan-comparison", "balance-transfer", "prepayment", "credit-card-payoff"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["loan-comparison", "prepayment", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "credit-card-payoff"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("loan-comparison")), ["emi", "prepayment", "balance-transfer", "home-loan", "personal-loan", "loan-eligibility", "interest", "credit-card-payoff"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("prepayment")), ["emi", "loan-comparison", "balance-transfer", "home-loan", "personal-loan", "loan-eligibility", "interest", "credit-card-payoff"]); // curated order, then the category
+    assert.deepEqual(toolIds(rel.getRelatedTools("balance-transfer")), ["prepayment", "emi", "loan-comparison", "home-loan", "personal-loan", "loan-eligibility", "interest", "credit-card-payoff"]); // curated order, then the category
+    assert.deepEqual(toolIds(rel.getRelatedTools("home-loan")), ["emi", "loan-comparison", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"]);
     // Calculators Ecosystem 2.0, pack 50: EMI, Loan Comparison and Home Loan gained curated lists (the same tools in a better order); the rest of each list is still the category in catalog order
     // FD (Tool Pack 7) is the second published Investment tool: SIP and FD relate to each other through the category, and only to each other
     // CAGR (Tool Pack 9) is the third: the Investment tools relate to each other through the category
@@ -69,9 +69,9 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     // GST (Tool Pack 8) is the first live Tax tool: it has no category neighbours, so its curated cross-category list is what it shows (Income Tax is Coming Soon and never offered);
     // Margin and Profit do NOT link back to it (the reciprocal links are deferred)
     assert.deepEqual(toolIds(rel.getRelatedTools("gst")), ["margin", "profit"]);
-    // Percentage (Tool Pack 10) is the first live Math tool: no category neighbours, so its explicit one-way list is what it shows, in this order (Profit is not added; Ratio and Age are Coming Soon and never offered).
+    // Percentage (Tool Pack 10) is the first live Math tool: no category neighbours, so its explicit one-way list is what it shows, in this order (Profit is not added), then the other published Math tools (Ratio and Age) from the category.
     // The links are one way: GST and Margin do not offer Percentage and their own lists are unchanged.
-    assert.deepEqual(toolIds(rel.getRelatedTools("percentage")), ["gst", "margin"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("percentage")), ["gst", "margin", "ratio", "age"]);
     assert.equal(toolIds(rel.getRelatedTools("gst")).includes("percentage"), false);
     // the two Time Tools relate to each other (they are the only tools directly under that section); neither is a calculator
     // (the Countdown Timer is also in that section; its page, like the date tools' pages, opts out of the related sections)
@@ -93,7 +93,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     // the Unix converter names the Cron Explainer in the Developer Tools pilot
     for (const id of ["json-formatter", "text-diff", "jwt-decoder", "time-zone-converter", "image-compressor-resizer", "date-difference", "stopwatch", "swp", "emi"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("cron-expression-explainer"), false, id);
     // the Credit Card Payoff Calculator (Tool Pack 24) keeps the automatic Loans relationships on: its curated tools first (a balance moved to a lower rate, extra payments, a fixed payment over a term), then the rest of the category, and it is appended to every other Loans tool's list (asserted above)
-    assert.deepEqual(toolIds(rel.getRelatedTools("credit-card-payoff")), ["balance-transfer", "prepayment", "emi", "loan-comparison", "home-loan"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("credit-card-payoff")), ["balance-transfer", "prepayment", "emi", "loan-comparison", "home-loan", "personal-loan", "loan-eligibility", "interest"]);
     assert.deepEqual(keys(rel.getRelatedArticlesForTool("credit-card-payoff")), ["loan-comparison/loan-tenure-total-interest", "loan-comparison/emi-vs-total-interest"]); // curated, shown as written, not padded
     // the Hours & Timesheet Calculator (Tool Pack 23) relates to nothing (autoRelated is off and it names no tool), so it joins no other Time Tool's list and the four older Time Tools' lists above are unchanged
     assert.deepEqual(toolIds(rel.getRelatedTools("hours-calculator")), ["shift-planner"]); // the Time Tools pilot: one curated, one-way relation (autoRelated is off)
@@ -135,8 +135,8 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.equal(toolIds(rel.getRelatedTools("margin")).includes("percentage"), false);
     assert.equal(toolIds(rel.getRelatedTools("profit")).includes("percentage"), false);
     assert.deepEqual(keys(rel.getRelatedArticlesForTool("percentage")), calcs.getCalculatorById("percentage").relatedArticles);
-    assert.deepEqual(toolIds(rel.getRelatedTools("margin")), ["profit"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("profit")), ["margin"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("margin")), ["profit", "roi"]); // ROI (a Business tool) joins through the category
+    assert.deepEqual(toolIds(rel.getRelatedTools("profit")), ["margin", "roi"]);
     // PDF Tools (Tool Pack 33): three curated, mutual relations inside the section. Nothing crosses a section (rulebook 4.2), so Photos to PDF in Image Tools gains no PDF Tools link and none links back
     assert.deepEqual(toolIds(rel.getRelatedTools("merge-pdf")), ["split-pdf", "pdf-pages"]);
     assert.deepEqual(toolIds(rel.getRelatedTools("split-pdf")), ["pdf-pages", "merge-pdf"]);
@@ -146,7 +146,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     assert.equal(toolIds(rel.getRelatedTools("photos-to-pdf")).some((id) => ["merge-pdf", "split-pdf", "pdf-pages"].includes(id)), false);
     assert.deepEqual(rel.getRelatedTools("nope"), []);
     // parity with the pre-M7 rule for every tool without a curated list (the Loan Prepayment page curates its own order; GST and Percentage curate cross-category lists)
-    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "risk-reward", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "list-comparer", "uuid-generator", "test-design-lab", "cron-challenge-lab", "jsonpath-challenge-lab", "json-error-fixing-lab", "smart-flashcards", "json-csv-converter", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages", "pdf-marks", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "income-tax", "swp", "credit-card-payoff", "gratuity", "salary-in-hand", "emi", "loan-comparison", "home-loan", "sip", "fd", "cagr", "xirr"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug); // the tools with a curated list are pinned one by one in the first test (pack 50 added emi, loan-comparison, home-loan, sip, fd, cagr and xirr)
+    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "risk-reward", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "list-comparer", "uuid-generator", "test-design-lab", "cron-challenge-lab", "jsonpath-challenge-lab", "json-error-fixing-lab", "smart-flashcards", "json-csv-converter", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages", "pdf-marks", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "income-tax", "swp", "credit-card-payoff", "gratuity", "salary-in-hand", "emi", "loan-comparison", "home-loan", "sip", "fd", "cagr", "xirr", "interest", "roi", "ratio", "age", "personal-loan", "loan-eligibility", "bmi", "bmr", "calorie", "unit-converter"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug); // the tools with a curated list are pinned one by one in the first test (pack 50 added emi, loan-comparison, home-loan, sip, fd, cagr and xirr)
   });
 
   test("tool -> related articles: the first six published loan articles, in catalog order, for EMI and Loan Comparison", () => {
@@ -154,27 +154,30 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
       assert.deepEqual(keys(rel.getRelatedArticlesForTool(slug, { limit: 6 })), PUBLISHED.slice(0, 6), slug);
       assert.deepEqual(rel.getRelatedArticlesForTool(slug, { limit: 6 }).map((a) => a.id), OLD_RELATED_ARTICLES(slug), slug);
     }
-    assert.deepEqual(rel.getRelatedArticlesForTool("bmi"), []); // a Coming Soon tool in a category with no published articles
+    assert.deepEqual(keys(rel.getRelatedArticlesForTool("bmi")), ["health/how-to-calculate-your-daily-calorie-needs"]); // no curated list: the one published Health guide, by category
     assert.deepEqual(keys(rel.getRelatedArticlesForTool("sip")), calcs.getCalculatorById("sip").relatedArticles); // curated, not padded
     assert.deepEqual(keys(rel.getRelatedArticlesForTool("fd")), calcs.getCalculatorById("fd").relatedArticles);
     assert.deepEqual(keys(rel.getRelatedArticlesForTool("gst")), calcs.getCalculatorById("gst").relatedArticles);
   });
 
   test("article -> related tools: the curated primary tool first, then the rest of the category", () => {
-    const expected = (key) => key === "loan-comparison/what-is-loan-prepayment" ? ["prepayment", "loan-comparison", "emi", "home-loan", "balance-transfer", "credit-card-payoff"]
-      : key.startsWith("loan-prepayment/") ? ["prepayment", "loan-comparison", "emi", "home-loan", "balance-transfer", "credit-card-payoff"]
-      : key === "balance-transfer/is-a-loan-balance-transfer-worth-it" ? ["balance-transfer", "loan-comparison", "emi", "home-loan", "prepayment", "credit-card-payoff"]
-      : key === "balance-transfer/balance-transfer-vs-prepayment" ? ["balance-transfer", "prepayment", "loan-comparison", "emi", "home-loan", "credit-card-payoff"]
-      : key.startsWith("home-loan/") ? ["home-loan", "loan-comparison", "emi", "balance-transfer", "prepayment", "credit-card-payoff"]
+    const expected = (key) => key === "business/roi-vs-profit-whats-the-difference" ? ["roi", "profit", "margin"]
+      : key === "health/how-to-calculate-your-daily-calorie-needs" ? ["calorie", "bmr", "bmi"]
+      : key === "converter/easy-unit-conversion-guide" ? ["unit-converter"]
+      : key === "loan-comparison/what-is-loan-prepayment" ? ["prepayment", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "credit-card-payoff"]
+      : key.startsWith("loan-prepayment/") ? ["prepayment", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "credit-card-payoff"]
+      : key === "balance-transfer/is-a-loan-balance-transfer-worth-it" ? ["balance-transfer", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "interest", "prepayment", "credit-card-payoff"]
+      : key === "balance-transfer/balance-transfer-vs-prepayment" ? ["balance-transfer", "prepayment", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "interest", "credit-card-payoff"]
+      : key.startsWith("home-loan/") ? ["home-loan", "loan-comparison", "emi", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"]
       : key.startsWith("sip/") ? ["sip", "ppf", "fd", "cagr", "xirr", "risk-reward"] // the primary tool first, then the other published Investment tools (PPF, Tool Pack 26, is one)
       : key.startsWith("fd/") ? ["fd", "sip", "ppf", "cagr", "xirr", "risk-reward"]
       : key.startsWith("cagr/") ? ["cagr", "sip", "ppf", "fd", "xirr", "risk-reward"]
       : key.startsWith("swp/") ? ["swp", "sip", "ppf", "fd", "cagr", "xirr", "risk-reward"] // the primary tool first, then the Investment tools; SWP is not auto-related, so it joins no other article's fallback
-      : key.startsWith("percentage/") || key.startsWith("math/") ? ["percentage"] // the only published Math tool: no category fallback beyond it
+      : key.startsWith("percentage/") || key.startsWith("math/") ? ["percentage", "ratio", "age"] // the published Math tools: the primary tool first, then the others in catalog order
       : key.startsWith("gst/") ? ["gst"] // the only published Tax tool: no category fallback beyond it
-      : key.startsWith("margin/") ? ["margin", "profit"] // the primary tool first, then the other published Business tool
-      : key.startsWith("profit/") ? ["profit", "margin"]
-      : ["loan-comparison", "emi", "home-loan", "balance-transfer", "prepayment", "credit-card-payoff"];
+      : key.startsWith("margin/") ? ["margin", "profit", "roi"] // the primary tool first, then the other published Business tools
+      : key.startsWith("profit/") ? ["profit", "margin", "roi"]
+      : ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"];
     for (const key of PUBLISHED) assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(key)), expected(key), key);
     assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(PUBLISHED[0], { fill: false })), ["loan-comparison"]);
   });
@@ -183,7 +186,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     for (const key of PUBLISHED) {
       const entry = articles.getArticleByKey(key);
       assert.deepEqual(keys(rel.getRelatedArticles(key)), entry.related, key);
-      assert.equal(rel.getRelatedArticles(key).length, key.startsWith("margin/") || key.startsWith("profit/") || key.startsWith("fd/") || key.startsWith("gst/") || key.startsWith("cagr/") || key.startsWith("percentage/") || key.startsWith("math/") || key.startsWith("swp/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") || key.startsWith("home-loan/") ? 3 : 5, key); // Margin and Profit: three-article clusters, so two others
+      assert.equal(rel.getRelatedArticles(key).length, key === "business/roi-vs-profit-whats-the-difference" ? 2 : key.startsWith("health/") || key.startsWith("converter/") ? 0 : key.startsWith("margin/") || key.startsWith("profit/") || key.startsWith("fd/") || key.startsWith("gst/") || key.startsWith("cagr/") || key.startsWith("percentage/") || key.startsWith("math/") || key.startsWith("swp/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") || key.startsWith("home-loan/") ? 3 : 5, key); // Margin and Profit: three-article clusters, so two others
     }
   });
 
@@ -237,9 +240,9 @@ describe("curated first, automatic second", () => {
   });
 
   test("curated tools are kept first; unpublished or unknown curated ids are skipped", () => {
-    // a Coming Soon Loans tool (not named: whichever is first) and an unknown id are skipped; the published curated one stays first
-    emi().relatedTools = [getComingSoonTool({ category: "loans" }).id, "nope", "loan-comparison"];
-    assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["loan-comparison", "home-loan", "balance-transfer", "prepayment", "credit-card-payoff"]);
+    // a Coming Soon tool (not named: whichever is first) and an unknown id are skipped; the published curated one stays first
+    emi().relatedTools = [getComingSoonTool().id, "nope", "loan-comparison"];
+    assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["loan-comparison", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"]);
   });
 
   test("fill: false returns only the curated list (no automatic additions)", () => {
@@ -256,7 +259,7 @@ describe("curated first, automatic second", () => {
     savedRelated = first().related;
     first().related = [];
     // the other published articles of ITS category (Loans): the Investment and Business articles are not offered
-    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/") && !k.startsWith("profit/") && !k.startsWith("fd/") && !k.startsWith("gst/") && !k.startsWith("cagr/") && !k.startsWith("percentage/") && !k.startsWith("math/") && !k.startsWith("swp/")).slice(1));
+    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/") && !k.startsWith("profit/") && !k.startsWith("fd/") && !k.startsWith("gst/") && !k.startsWith("cagr/") && !k.startsWith("percentage/") && !k.startsWith("math/") && !k.startsWith("swp/") && !k.startsWith("business/") && !k.startsWith("health/") && !k.startsWith("converter/")).slice(1));
   });
 
   test("a curated article list is never replaced or padded by the automatic one", () => {
@@ -274,9 +277,9 @@ describe("curated first, automatic second", () => {
       home.available = true;          // temporarily "published"
       emi().subcategory = "test-sub";
       home.subcategory = "test-sub";
-      assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["home-loan", "loan-comparison", "balance-transfer", "prepayment", "credit-card-payoff"]);
+      assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["home-loan", "loan-comparison", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"]);
       delete home.subcategory;
-      assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["loan-comparison", "home-loan", "balance-transfer", "prepayment", "credit-card-payoff"]);
+      assert.deepEqual(toolIds(rel.getRelatedTools("emi")), ["loan-comparison", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"]);
     } finally {
       home.available = wasAvailable;
       delete home.subcategory;

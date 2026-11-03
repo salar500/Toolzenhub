@@ -32,7 +32,7 @@ main#app
               svg [aria-hidden="true"]
             div.category-card__content
               h3 "Calculators"
-              p "Loans, investment, business, tax and math calculators"
+              p "Loans, investment, tax, health, business, math and converter calculators"
           a.category-card [href="{ROOT}time-tools.html"]
             div.category-card__icon.category-card__icon--time-tools
               svg [aria-hidden="true"]

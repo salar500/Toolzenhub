@@ -354,12 +354,12 @@ test.describe("Percentage Calculator", () => {
     await expect(page.locator("#percentage-live")).toContainText("Ending value 600.00; the change that undoes it is −16.67%.", { timeout: 4000 });
   });
 
-  test("related: GST then Margin, in that order, and Coming soon Ratio and Age are not offered", async ({ page, go, siteRoot }) => {
+  test("related: GST, Margin, then Ratio and Age (live since Tool Pack 53), in that order; Profit is not offered", async ({ page, go, siteRoot }) => {
     await open(page, go);
     const related = page.locator(".related-calculator-card");
     const hrefs = await related.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
-    expect(hrefs).toEqual([`${siteRoot}calculators/gst/`, `${siteRoot}calculators/margin/`]);
-    await expect(page.locator("a[href*='calculators/ratio'], a[href*='calculators/age'], a[href*='calculators/profit']")).toHaveCount(0);
+    expect(hrefs).toEqual([`${siteRoot}calculators/gst/`, `${siteRoot}calculators/margin/`, `${siteRoot}calculators/ratio/`, `${siteRoot}calculators/age/`]);
+    await expect(page.locator("a[href*='calculators/profit']")).toHaveCount(0);
     // the four articles (the basics guide was added 2026-11-01)
     const articles = page.locator(".related-article-card");
     await expect(articles).toHaveCount(4);
@@ -415,7 +415,7 @@ test.describe("Percentage Calculator", () => {
 });
 
 test.describe("Percentage publication", () => {
-  test("Math category: a card on the categories page leads to a page with Percentage live and Ratio and Age as Coming soon, not links", async ({ page, go, siteRoot }) => {
+  test("Math category: a card on the categories page leads to a page with Percentage, Ratio and Age live (Ratio and Age since Tool Pack 53)", async ({ page, go, siteRoot }) => {
     // categories with a live tool are cards; only categories with nothing live get a "Coming soon" detail section
     await go("categories.html");
     await expect(page.locator(`#categories-grid a.category-page-card[href='${siteRoot}math.html']`)).toHaveCount(1);
@@ -423,21 +423,18 @@ test.describe("Percentage publication", () => {
     await expect(page.locator("a[href*='categories.html#more']")).toHaveCount(0);
     await go("math.html");
     await expect(page.locator(`a.category-page-card[href='${siteRoot}calculators/percentage/'], a.calculator-card[href='${siteRoot}calculators/percentage/']`)).toHaveCount(1);
-    const soon = page.locator(".category-page-card--soon, .calculator-card--soon");
-    await expect(soon).toHaveCount(2);
-    await expect(soon).toContainText(["Ratio Calculator", "Age Calculator"]);
-    await expect(page.locator(".category-page-card--soon a, .calculator-card--soon a")).toHaveCount(0);
+    await expect(page.locator(".category-page-card--soon, .calculator-card--soon")).toHaveCount(0);
+    for (const id of ["ratio", "age"]) await expect(page.locator(`a.category-page-card[href='${siteRoot}calculators/${id}/']`)).toHaveCount(1);
   });
 
-  test("Calculators listing: a live Percentage card, no Coming soon badge, no duplicate; Ratio and Age stay Coming soon", async ({ page, go, siteRoot }) => {
+  test("Calculators listing: a live Percentage card, no Coming soon badge, no duplicate; Ratio and Age are live", async ({ page, go, siteRoot }) => {
     await go("calculators.html");
     const live = page.locator(`#calculators-grid a.calculator-card[href='${siteRoot}calculators/percentage/']`);
     await expect(live).toHaveCount(1);
     await expect(live.locator(".coming-soon-badge")).toHaveCount(0);
     await expect(page.locator("#calculators-grid .calculator-card:has-text('Percentage Calculator')")).toHaveCount(1);
-    await expect(page.locator("#calculators-grid .calculator-card--soon:has-text('Ratio Calculator')")).toHaveCount(1);
-    await expect(page.locator("#calculators-grid .calculator-card--soon:has-text('Age Calculator')")).toHaveCount(1);
-    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(11); // the catalog now has 11 Coming Soon calculators (13, then 12, when this was written)
+    for (const id of ["ratio", "age"]) await expect(page.locator(`#calculators-grid a.calculator-card[href='${siteRoot}calculators/${id}/']`)).toHaveCount(1);
+    await expect(page.locator("#calculators-grid .calculator-card--soon")).toHaveCount(1); // only the Currency Converter is Coming soon (11, then 1 after Tool Pack 53)
   });
 
   test("the four articles are listed under Math with their own diagram, and their pages render the hero image", async ({ page, go, siteRoot }) => {

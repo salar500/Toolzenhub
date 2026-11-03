@@ -39,15 +39,15 @@ describe("current hierarchy data", () => {
     assert.deepEqual(cats.categories.map((c) => c.title), ["Loans", "Investment", "Tax", "Health", "Business", "Math", "Converter", "More"]);
   });
 
-  test("Loans, Investment, Tax, Business and Math have a landing page; Health, Converter and More link to their anchor on the categories page", () => {
-    assert.deepEqual(cats.categories.filter((c) => c.landing).map((c) => c.id), ["loans", "investment", "tax", "business", "math"]);
+  test("Loans, Investment, Tax, Health, Business, Math and Converter have a landing page; More links to its anchor on the categories page", () => {
+    assert.deepEqual(cats.categories.filter((c) => c.landing).map((c) => c.id), ["loans", "investment", "tax", "health", "business", "math", "converter"]);
     assert.equal(tax.getCategoryLandingUrl("loans"), `${ROOT}loans.html`);
     assert.equal(tax.getCategoryUrl("loans"), `${ROOT}loans.html`);
-    for (const id of ["investment", "tax", "business", "math"]) {
+    for (const id of ["investment", "tax", "health", "business", "math", "converter"]) {
       assert.equal(tax.getCategoryLandingUrl(id), `${ROOT}${id}.html`, id);
       assert.equal(tax.getCategoryUrl(id), `${ROOT}${id}.html`, id);
     }
-    for (const id of ["health", "converter", "more"]) {
+    for (const id of ["more"]) {
       assert.equal(tax.getCategoryLandingUrl(id), null, id);
       assert.equal(tax.getCategoryUrl(id), `${ROOT}categories.html#${id}`, id);
     }
@@ -217,7 +217,9 @@ describe("breadcrumbs keep their labels and links", () => {
     const html = crumb.renderToolBreadcrumb({ section: "Calculators", category: "tax", title: "Income Tax Calculator" });
     assert.deepEqual(hrefs(html), [ROOT, `${ROOT}categories.html`, `${ROOT}tax.html`]);
     assert.deepEqual(labels(html), ["Home", "Calculators", "Tax", "Income Tax Calculator"]);
-    const none = crumb.renderToolBreadcrumb({ section: "Calculators", category: "health", title: "BMI Calculator" });
+    const health = crumb.renderToolBreadcrumb({ section: "Calculators", category: "health", title: "BMI Calculator" });
+    assert.deepEqual(hrefs(health), [ROOT, `${ROOT}categories.html`, `${ROOT}health.html`]); // Health has a landing page now
+    const none = crumb.renderToolBreadcrumb({ section: "Calculators", category: "more", title: "Some Tool" });
     assert.deepEqual(hrefs(none), [ROOT, `${ROOT}categories.html`]);
   });
 
@@ -286,9 +288,9 @@ describe("Math is a category inside Calculators (Tool Pack 10 pins Percentage, t
     assert.equal(entry.categoryTitle, "Math");
   });
 
-  test("Math has one live tool; Ratio and Age stay Coming Soon and are never offered as usable", () => {
+  test("Math has three live tools: Percentage, Ratio and Age", () => {
     assert.deepEqual(tax.getToolsByCategory("math").map((t) => t.id), ["percentage", "ratio", "age"]);
-    assert.deepEqual(tax.getToolsByCategory("math").filter((t) => t.available).map((t) => t.id), ["percentage"]);
-    for (const id of ["ratio", "age"]) assert.equal(tool(id).status, "coming-soon", id);
+    assert.deepEqual(tax.getToolsByCategory("math").filter((t) => t.available).map((t) => t.id), ["percentage", "ratio", "age"]);
+    for (const id of ["ratio", "age"]) assert.equal(tool(id).status, "published", id);
   });
 });

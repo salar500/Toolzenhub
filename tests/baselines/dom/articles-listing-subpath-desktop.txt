@@ -149,12 +149,12 @@ div#articles-page
             a.article-category-item [data-sidebar-category="business" href="{ROOT}articles.html"]
               span.article-category-name "Business"
                 span.article-category-icon "💼"
-              span.article-category-count "6"
+              span.article-category-count "7"
                 span [aria-hidden="true"] "→"
             a.article-category-item [data-sidebar-category="health" href="{ROOT}articles.html"]
               span.article-category-name "Health"
                 span.article-category-icon "❤️"
-              span.article-category-count "0"
+              span.article-category-count "1"
                 span [aria-hidden="true"] "→"
           button.article-more-categories [type="button"] "More Categories"
             span [aria-hidden="true"] "⌄"

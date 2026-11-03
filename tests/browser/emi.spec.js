@@ -167,14 +167,15 @@ test.describe("EMI calculator", () => {
     await go("calculators/emi/");
     const calcs = page.locator(".related-calculator-card");
     await expect(page.getByRole("heading", { name: "Related Calculators" })).toBeVisible();
-    // the curated list (pack 50) first: Loan Comparison, Loan Prepayment, Home Loan; then Loan Balance Transfer and the Credit Card Payoff Calculator from the automatic Loans relationship
-    await expect(calcs).toHaveCount(5);
+    // the curated list (pack 50) first: Loan Comparison, Loan Prepayment, Home Loan; then Personal Loan, Loan Eligibility (Tool Pack 53) and Loan Balance Transfer from the automatic Loans relationship; six are shown, so Interest and Credit Card Payoff are not (owner decision: the limit of six stays)
+    await expect(calcs).toHaveCount(6);
     await expect(calcs.first()).toHaveAttribute("href", `${siteRoot}calculators/loan-comparison/`);
     await expect(calcs.first()).toContainText("Loan Comparison Calculator");
     await expect(calcs.nth(1)).toHaveAttribute("href", `${siteRoot}calculators/prepayment/`);
     await expect(calcs.nth(2)).toHaveAttribute("href", `${siteRoot}calculators/home-loan/`);
-    await expect(calcs.nth(3)).toHaveAttribute("href", `${siteRoot}calculators/balance-transfer/`);
-    await expect(calcs.nth(4)).toHaveAttribute("href", `${siteRoot}calculators/credit-card-payoff/`);
+    await expect(calcs.nth(3)).toHaveAttribute("href", `${siteRoot}calculators/personal-loan/`);
+    await expect(calcs.nth(4)).toHaveAttribute("href", `${siteRoot}calculators/loan-eligibility/`);
+    await expect(calcs.nth(5)).toHaveAttribute("href", `${siteRoot}calculators/balance-transfer/`);
 
     await expect(page.getByRole("heading", { name: "Related Articles" })).toBeVisible();
     const articles = page.locator(".related-article-card");

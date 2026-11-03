@@ -878,7 +878,7 @@ test.describe("Image Tools in the site", () => {
   test("All Tools lists Image Tools as a fourth section (then PDF Tools), with the catalog counts", async ({ page, go }) => {
     await go("tools.html");
     await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools"]);
-    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, "13 tools", "17 tools", "2 tools", "3 tools"]);
+    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, "13 tools", "17 tools", "2 tools", "4 tools"]);
     const image = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Image Tools")') });
     await expect(image.locator('a[href$="tools/image-compressor-resizer/"]')).toHaveCount(1);
     for (const section of ["Calculators", "Time Tools", "Developer Tools"]) {

@@ -17,15 +17,15 @@ before(async () => {
 const hrefs = (html) => [...html.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
 
 describe("All Tools", () => {
-  test("one major section today, Calculators, with its categories; a live tool is a link, Health and Converter are not", () => {
+  test("one major section today, Calculators, with its categories; a live tool is a link; Health and Converter have live tools and category pages", () => {
     const html = dir.allToolsHtml();
     assert.equal((html.match(/class="directory-section"/g) || []).length, cats.sections.length);
     assert.match(html, /<h1 class="categories-page__title">\s*All Tools/);
     for (const title of ["Loans", "Investment", "Tax", "Business", "Math"]) assert.ok(html.includes(`>${title}<`) || html.includes(`${title}\n`), title);
     const links = hrefs(html);
     for (const route of ["/Toolzenhub/calculators/emi/", "/Toolzenhub/calculators/sip/", "/Toolzenhub/calculators/fd/", "/Toolzenhub/calculators/cagr/", "/Toolzenhub/calculators/margin/", "/Toolzenhub/calculators/profit/", "/Toolzenhub/calculators/gst/", "/Toolzenhub/calculators/percentage/"]) assert.ok(links.includes(route), route);
-    for (const page of ["loans", "investment", "tax", "business", "math"]) assert.ok(links.includes(`/Toolzenhub/${page}.html`), page);
-    assert.equal(html.includes("categories.html#health"), false); // Health and Converter have no live tool: plain text with a Coming soon badge
+    for (const page of ["loans", "investment", "tax", "health", "business", "math", "converter"]) assert.ok(links.includes(`/Toolzenhub/${page}.html`), page);
+    assert.equal(html.includes("categories.html#health"), false); // Health and Converter now have live tools and their own category pages
     assert.equal(html.includes("categories.html#converter"), false);
     assert.equal((html.match(/class="coming-soon-badge"/g) || []).length, 0); // roadmap categories are hidden from the public directory (owner, 2026-10-31)
     assert.equal(html.includes("directory-soon"), false);
@@ -35,7 +35,7 @@ describe("All Tools", () => {
 
   test("no tool that is not live is a link, and the search form is a plain GET to All Tools", () => {
     const html = dir.allToolsHtml();
-    for (const soon of ["roi", "ratio", "age", "bmi", "currency", "date", "unit-converter", "personal-loan"]) assert.equal(html.includes(`calculators/${soon}/`), false, soon);
+    for (const soon of ["currency", "date"]) assert.equal(html.includes(`calculators/${soon}/`), false, soon);
     assert.match(html, /<form[^>]*action="\/Toolzenhub\/tools\.html"[^>]*method="get"/);
     assert.match(html, /id="tools-results"/);
     assert.match(html, /id="tools-directory"/);
@@ -45,7 +45,7 @@ describe("All Tools", () => {
 
 describe("category pages", () => {
   test("a page for each category with live tools and a landing route, except Loans (its own older page)", () => {
-    assert.deepEqual(dir.categoryPageIds(), ["investment", "tax", "business", "math"]);
+    assert.deepEqual(dir.categoryPageIds(), ["investment", "tax", "health", "business", "math", "converter"]);
   });
 
   test("Investment: SIP, PPF, FD, CAGR, SWP and XIRR are all links, and no Coming soon card is left", () => {
@@ -58,9 +58,9 @@ describe("category pages", () => {
 
   test("Business, Tax and Math show exactly their live tools; Coming soon ones are not links", () => {
     const live = (id) => hrefs(dir.categoryPageHtml(id)).filter((h) => h.includes("/calculators/"));
-    assert.deepEqual(live("business"), ["/Toolzenhub/calculators/profit/", "/Toolzenhub/calculators/margin/"]);
+    assert.deepEqual(live("business"), ["/Toolzenhub/calculators/profit/", "/Toolzenhub/calculators/margin/", "/Toolzenhub/calculators/roi/"]);
     assert.deepEqual(live("tax"), ["/Toolzenhub/calculators/gst/", "/Toolzenhub/calculators/income-tax/", "/Toolzenhub/calculators/gratuity/", "/Toolzenhub/calculators/salary-in-hand/"]);
-    assert.deepEqual(live("math"), ["/Toolzenhub/calculators/percentage/"]);
+    assert.deepEqual(live("math"), ["/Toolzenhub/calculators/percentage/", "/Toolzenhub/calculators/ratio/", "/Toolzenhub/calculators/age/"]);
     assert.match(dir.categoryPageHtml("math"), /Ratio Calculator/);
     assert.match(dir.categoryPageHtml("math"), /Age Calculator/);
   });

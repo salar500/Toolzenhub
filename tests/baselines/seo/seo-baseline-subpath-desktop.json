@@ -299,6 +299,81 @@
       "visibleTextChars": 8296
     }
   },
+  "/articles/business/roi-vs-profit-whats-the-difference/": {
+    "runtime": {
+      "title": "ROI vs Profit: What's the Difference? | ToolZen Hub",
+      "description": "Profit is an amount of money and ROI compares it with what you put in. Worked examples show why the bigger profit can be the weaker return, how time changes ROI and how ROI differs from profit margin.",
+      "canonical": "https://toolzenhub.in/articles/business/roi-vs-profit-whats-the-difference/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Profit is an amount of money and ROI compares it with what you put in. Worked examples show why the bigger profit can be the weaker return, how time changes ROI and how ROI differs from profit margin.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/roi-vs-profit-whats-the-difference.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "ROI vs Profit: What's the Difference? | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/business/roi-vs-profit-whats-the-difference/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Profit is an amount of money and ROI compares it with what you put in. Worked examples show why the bigger profit can be the weaker return, how time changes ROI and how ROI differs from profit margin.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/roi-vs-profit-whats-the-difference.png",
+        "twitter:title": "ROI vs Profit: What's the Difference? | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "ROI vs Profit: What's the Difference?"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#fafaf9",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "ROI vs Profit: What&#39;s the Difference? | ToolZen Hub",
+      "description": "Profit is an amount of money and ROI compares it with what you put in. Worked examples show why the bigger profit can be the weaker return, how time changes ROI and how ROI differs from profit margin.",
+      "canonical": "https://toolzenhub.in/articles/business/roi-vs-profit-whats-the-difference/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5988
+    }
+  },
   "/articles/cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr/": {
     "runtime": {
       "title": "CAGR vs Simple Average Growth: Why 80% Growth Over 5 Years Is Not 16% CAGR | ToolZen Hub",
@@ -447,6 +522,81 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 6261
+    }
+  },
+  "/articles/converter/easy-unit-conversion-guide/": {
+    "runtime": {
+      "title": "Easy Unit Conversion Guide | ToolZen Hub",
+      "description": "Convert units with one multiplication: check the direction, use exact factors, handle temperature with its formula and watch for units that share a name, such as the US and UK gallon.",
+      "canonical": "https://toolzenhub.in/articles/converter/easy-unit-conversion-guide/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Convert units with one multiplication: check the direction, use exact factors, handle temperature with its formula and watch for units that share a name, such as the US and UK gallon.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/easy-unit-conversion-guide.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Easy Unit Conversion Guide | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/converter/easy-unit-conversion-guide/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "Convert units with one multiplication: check the direction, use exact factors, handle temperature with its formula and watch for units that share a name, such as the US and UK gallon.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/easy-unit-conversion-guide.png",
+        "twitter:title": "Easy Unit Conversion Guide | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Easy Unit Conversion Guide"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#fafaf9",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Easy Unit Conversion Guide | ToolZen Hub",
+      "description": "Convert units with one multiplication: check the direction, use exact factors, handle temperature with its formula and watch for units that share a name, such as the US and UK gallon.",
+      "canonical": "https://toolzenhub.in/articles/converter/easy-unit-conversion-guide/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5141
     }
   },
   "/articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison/": {
@@ -747,6 +897,81 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 5586
+    }
+  },
+  "/articles/health/how-to-calculate-your-daily-calorie-needs/": {
+    "runtime": {
+      "title": "How to Calculate Your Daily Calorie Needs | ToolZen Hub",
+      "description": "How an estimate of daily energy use is built: the Mifflin-St Jeor equation for resting energy, an activity multiplier, a worked example and what the number cannot tell you. An estimate, not medical advice.",
+      "canonical": "https://toolzenhub.in/articles/health/how-to-calculate-your-daily-calorie-needs/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "How an estimate of daily energy use is built: the Mifflin-St Jeor equation for resting energy, an activity multiplier, a worked example and what the number cannot tell you. An estimate, not medical advice.",
+        "og:image": "https://toolzenhub.in/assets/Images/articles/how-to-calculate-your-daily-calorie-needs.png",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How to Calculate Your Daily Calorie Needs | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/health/how-to-calculate-your-daily-calorie-needs/"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:description": "How an estimate of daily energy use is built: the Mifflin-St Jeor equation for resting energy, an activity multiplier, a worked example and what the number cannot tell you. An estimate, not medical advice.",
+        "twitter:image": "https://toolzenhub.in/assets/Images/articles/how-to-calculate-your-daily-calorie-needs.png",
+        "twitter:title": "How to Calculate Your Daily Calorie Needs | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "image",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "How to Calculate Your Daily Calorie Needs"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#fafaf9",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How to Calculate Your Daily Calorie Needs | ToolZen Hub",
+      "description": "How an estimate of daily energy use is built: the Mifflin-St Jeor equation for resting energy, an activity multiplier, a worked example and what the number cannot tell you. An estimate, not medical advice.",
+      "canonical": "https://toolzenhub.in/articles/health/how-to-calculate-your-daily-calorie-needs/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5353
     }
   },
   "/articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/": {
@@ -2817,7 +3042,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 970
+      "visibleTextChars": 1074
     }
   },
   "/calculators.html": {
@@ -2858,6 +3083,55 @@
       "hasJsonLd": false,
       "h1Count": 1,
       "visibleTextChars": 842
+    }
+  },
+  "/calculators/age/": {
+    "runtime": {
+      "title": "Age Calculator: Exact Age in Years, Months and Days | ToolZen Hub",
+      "description": "Find an exact age in years, months and days from a date of birth, with total days and the next birthday. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/age/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Find an exact age in years, months and days from a date of birth, with total days and the next birthday. Free, and it runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Age Calculator: Exact Age in Years, Months and Days | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/age/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Find an exact age in years, months and days from a date of birth, with total days and the next birthday. Free, and it runs in your browser.",
+        "twitter:title": "Age Calculator: Exact Age in Years, Months and Days | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Age Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Age Calculator: Exact Age in Years, Months and Days | ToolZen Hub",
+      "description": "Find an exact age in years, months and days from a date of birth, with total days and the next birthday. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/age/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3872
     }
   },
   "/calculators/balance-transfer/": {
@@ -2906,7 +3180,105 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7113
+      "visibleTextChars": 7140
+    }
+  },
+  "/calculators/bmi/": {
+    "runtime": {
+      "title": "BMI Calculator: Body Mass Index for Adults | ToolZen Hub",
+      "description": "Find your body mass index from weight and height, with the WHO adult categories and the WHO action points for Asian populations. A screening number, not a diagnosis. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/bmi/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Find your body mass index from weight and height, with the WHO adult categories and the WHO action points for Asian populations. A screening number, not a diagnosis. Free, and it runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "BMI Calculator: Body Mass Index for Adults | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/bmi/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Find your body mass index from weight and height, with the WHO adult categories and the WHO action points for Asian populations. A screening number, not a diagnosis. Free, and it runs in your browser.",
+        "twitter:title": "BMI Calculator: Body Mass Index for Adults | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "BMI Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "BMI Calculator: Body Mass Index for Adults | ToolZen Hub",
+      "description": "Find your body mass index from weight and height, with the WHO adult categories and the WHO action points for Asian populations. A screening number, not a diagnosis. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/bmi/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3929
+    }
+  },
+  "/calculators/bmr/": {
+    "runtime": {
+      "title": "BMR Calculator: Basal Metabolic Rate | ToolZen Hub",
+      "description": "Estimate your basal metabolic rate with the Mifflin-St Jeor equation from age, sex, weight and height. An estimate, not a calorie target. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/bmr/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Estimate your basal metabolic rate with the Mifflin-St Jeor equation from age, sex, weight and height. An estimate, not a calorie target. Free, and it runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "BMR Calculator: Basal Metabolic Rate | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/bmr/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Estimate your basal metabolic rate with the Mifflin-St Jeor equation from age, sex, weight and height. An estimate, not a calorie target. Free, and it runs in your browser.",
+        "twitter:title": "BMR Calculator: Basal Metabolic Rate | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "BMR Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "BMR Calculator: Basal Metabolic Rate | ToolZen Hub",
+      "description": "Estimate your basal metabolic rate with the Mifflin-St Jeor equation from age, sex, weight and height. An estimate, not a calorie target. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/bmr/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3525
     }
   },
   "/calculators/cagr/": {
@@ -2958,6 +3330,55 @@
       "visibleTextChars": 6832
     }
   },
+  "/calculators/calorie/": {
+    "runtime": {
+      "title": "Calorie Calculator: Daily Calories Your Body Uses | ToolZen Hub",
+      "description": "Estimate the calories your body uses in a day from your BMR and activity level. An estimate, not a diet target. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/calorie/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Estimate the calories your body uses in a day from your BMR and activity level. An estimate, not a diet target. Free, and it runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Calorie Calculator: Daily Calories Your Body Uses | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/calorie/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Estimate the calories your body uses in a day from your BMR and activity level. An estimate, not a diet target. Free, and it runs in your browser.",
+        "twitter:title": "Calorie Calculator: Daily Calories Your Body Uses | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Calorie Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Calorie Calculator: Daily Calories Your Body Uses | ToolZen Hub",
+      "description": "Estimate the calories your body uses in a day from your BMR and activity level. An estimate, not a diet target. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/calorie/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3727
+    }
+  },
   "/calculators/credit-card-payoff/": {
     "runtime": {
       "title": "Credit Card Payoff Calculator: Months and Interest | ToolZen Hub",
@@ -3004,7 +3425,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7236
+      "visibleTextChars": 7379
     }
   },
   "/calculators/emi/": {
@@ -3053,7 +3474,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4584
+      "visibleTextChars": 4611
     }
   },
   "/calculators/fd/": {
@@ -3249,7 +3670,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6245
+      "visibleTextChars": 6275
     }
   },
   "/calculators/income-tax/": {
@@ -3301,6 +3722,55 @@
       "visibleTextChars": 9185
     }
   },
+  "/calculators/interest/": {
+    "runtime": {
+      "title": "Simple and Compound Interest Calculator | ToolZen Hub",
+      "description": "Work out simple interest and compound interest on the same principal, yearly rate and time, with yearly to daily compounding, and see how much compounding adds. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/interest/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Work out simple interest and compound interest on the same principal, yearly rate and time, with yearly to daily compounding, and see how much compounding adds. Free, and it runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Simple and Compound Interest Calculator | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/interest/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Work out simple interest and compound interest on the same principal, yearly rate and time, with yearly to daily compounding, and see how much compounding adds. Free, and it runs in your browser.",
+        "twitter:title": "Simple and Compound Interest Calculator | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Interest Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Simple and Compound Interest Calculator | ToolZen Hub",
+      "description": "Work out simple interest and compound interest on the same principal, yearly rate and time, with yearly to daily compounding, and see how much compounding adds. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/interest/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 4725
+    }
+  },
   "/calculators/loan-comparison/": {
     "runtime": {
       "title": "Loan Comparison Calculator | ToolZenHub",
@@ -3347,7 +3817,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4565
+      "visibleTextChars": 4592
+    }
+  },
+  "/calculators/loan-eligibility/": {
+    "runtime": {
+      "title": "Loan Eligibility Calculator: How Much Loan Can an EMI Support | ToolZen Hub",
+      "description": "Estimate the loan an EMI could repay from your income, existing EMIs and the share of income you choose for loan payments. An estimate, not an approval. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/loan-eligibility/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Estimate the loan an EMI could repay from your income, existing EMIs and the share of income you choose for loan payments. An estimate, not an approval. Free, and it runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Loan Eligibility Calculator: How Much Loan Can an EMI Support | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/loan-eligibility/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Estimate the loan an EMI could repay from your income, existing EMIs and the share of income you choose for loan payments. An estimate, not an approval. Free, and it runs in your browser.",
+        "twitter:title": "Loan Eligibility Calculator: How Much Loan Can an EMI Support | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Loan Eligibility Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Loan Eligibility Calculator: How Much Loan Can an EMI Support | ToolZen Hub",
+      "description": "Estimate the loan an EMI could repay from your income, existing EMIs and the share of income you choose for loan payments. An estimate, not an approval. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/loan-eligibility/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 4963
     }
   },
   "/calculators/margin/": {
@@ -3396,7 +3915,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6297
+      "visibleTextChars": 6437
     }
   },
   "/calculators/percentage/": {
@@ -3445,7 +3964,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5506
+      "visibleTextChars": 5754
+    }
+  },
+  "/calculators/personal-loan/": {
+    "runtime": {
+      "title": "Personal Loan EMI Calculator | ToolZen Hub",
+      "description": "Work out the monthly EMI, total interest and, with a processing fee, the total cost of a personal loan. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/personal-loan/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Work out the monthly EMI, total interest and, with a processing fee, the total cost of a personal loan. Free, and it runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Personal Loan EMI Calculator | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/personal-loan/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Work out the monthly EMI, total interest and, with a processing fee, the total cost of a personal loan. Free, and it runs in your browser.",
+        "twitter:title": "Personal Loan EMI Calculator | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Personal Loan Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Personal Loan EMI Calculator | ToolZen Hub",
+      "description": "Work out the monthly EMI, total interest and, with a processing fee, the total cost of a personal loan. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/personal-loan/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 4880
     }
   },
   "/calculators/ppf/": {
@@ -3543,7 +4111,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6123
+      "visibleTextChars": 6150
     }
   },
   "/calculators/profit/": {
@@ -3592,7 +4160,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6056
+      "visibleTextChars": 6196
+    }
+  },
+  "/calculators/ratio/": {
+    "runtime": {
+      "title": "Ratio Calculator: Simplify and Scale a Ratio | ToolZen Hub",
+      "description": "Simplify a ratio to its lowest terms, see it as multiples and shares, and find the missing term when scaling it. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/ratio/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Simplify a ratio to its lowest terms, see it as multiples and shares, and find the missing term when scaling it. Free, and it runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Ratio Calculator: Simplify and Scale a Ratio | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/ratio/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Simplify a ratio to its lowest terms, see it as multiples and shares, and find the missing term when scaling it. Free, and it runs in your browser.",
+        "twitter:title": "Ratio Calculator: Simplify and Scale a Ratio | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Ratio Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Ratio Calculator: Simplify and Scale a Ratio | ToolZen Hub",
+      "description": "Simplify a ratio to its lowest terms, see it as multiples and shares, and find the missing term when scaling it. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/ratio/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3973
     }
   },
   "/calculators/risk-reward/": {
@@ -3642,6 +4259,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 5393
+    }
+  },
+  "/calculators/roi/": {
+    "runtime": {
+      "title": "ROI Calculator: Return on Investment | ToolZen Hub",
+      "description": "Find the return on investment as a percentage from the amount invested and the final value, with the profit or loss and an optional yearly rate. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/roi/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Find the return on investment as a percentage from the amount invested and the final value, with the profit or loss and an optional yearly rate. Free, and it runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "ROI Calculator: Return on Investment | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/roi/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Find the return on investment as a percentage from the amount invested and the final value, with the profit or loss and an optional yearly rate. Free, and it runs in your browser.",
+        "twitter:title": "ROI Calculator: Return on Investment | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "ROI Calculator"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "ROI Calculator: Return on Investment | ToolZen Hub",
+      "description": "Find the return on investment as a percentage from the amount invested and the final value, with the profit or loss and an optional yearly rate. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/roi/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 4142
     }
   },
   "/calculators/salary-in-hand/": {
@@ -3791,6 +4457,55 @@
       "visibleTextChars": 7470
     }
   },
+  "/calculators/unit-converter/": {
+    "runtime": {
+      "title": "Unit Converter: Length, Mass, Area, Volume, Speed, Temperature | ToolZen Hub",
+      "description": "Convert between common units of length, mass, area, volume, speed and temperature using exact defined factors. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/unit-converter/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Convert between common units of length, mass, area, volume, speed and temperature using exact defined factors. Free, and it runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Unit Converter: Length, Mass, Area, Volume, Speed, Temperature | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/calculators/unit-converter/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Convert between common units of length, mass, area, volume, speed and temperature using exact defined factors. Free, and it runs in your browser.",
+        "twitter:title": "Unit Converter: Length, Mass, Area, Volume, Speed, Temperature | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Unit Converter"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Unit Converter: Length, Mass, Area, Volume, Speed, Temperature | ToolZen Hub",
+      "description": "Convert between common units of length, mass, area, volume, speed and temperature using exact defined factors. Free, and it runs in your browser.",
+      "canonical": "https://toolzenhub.in/calculators/unit-converter/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 4335
+    }
+  },
   "/calculators/xirr/": {
     "runtime": {
       "title": "XIRR Calculator: Annualised Return from Dated Cash Flows | ToolZen Hub",
@@ -3920,6 +4635,55 @@
       "visibleTextChars": 789
     }
   },
+  "/converter.html": {
+    "runtime": {
+      "title": "Converter Calculators | ToolZen Hub",
+      "description": "Converter tools from ToolZen Hub: convert between common units of length, mass, area, volume, speed and temperature using exact defined factors.",
+      "canonical": "https://toolzenhub.in/converter.html",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Converter tools from ToolZen Hub: convert between common units of length, mass, area, volume, speed and temperature using exact defined factors.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Converter Calculators | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/converter.html"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Converter tools from ToolZen Hub: convert between common units of length, mass, area, volume, speed and temperature using exact defined factors.",
+        "twitter:title": "Converter Calculators | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Converter Calculators"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#fafaf9",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Converter Calculators | ToolZen Hub",
+      "description": "Converter tools from ToolZen Hub: convert between common units of length, mass, area, volume, speed and temperature using exact defined factors.",
+      "canonical": "https://toolzenhub.in/converter.html",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 785
+    }
+  },
   "/developer-tools.html": {
     "runtime": {
       "title": "Developer Tools | ToolZen Hub",
@@ -3966,7 +4730,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4385
+      "visibleTextChars": 4407
     }
   },
   "/disclaimer.html": {
@@ -4007,6 +4771,55 @@
       "hasJsonLd": false,
       "h1Count": 1,
       "visibleTextChars": 1733
+    }
+  },
+  "/health.html": {
+    "runtime": {
+      "title": "Health Calculators | ToolZen Hub",
+      "description": "Health calculators from ToolZen Hub: body mass index with the WHO categories, basal metabolic rate and an estimate of the calories your body uses in a day. Screening estimates, not medical advice.",
+      "canonical": "https://toolzenhub.in/health.html",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Health calculators from ToolZen Hub: body mass index with the WHO categories, basal metabolic rate and an estimate of the calories your body uses in a day. Screening estimates, not medical advice.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Health Calculators | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/health.html"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Health calculators from ToolZen Hub: body mass index with the WHO categories, basal metabolic rate and an estimate of the calories your body uses in a day. Screening estimates, not medical advice.",
+        "twitter:title": "Health Calculators | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Health Calculators"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#fafaf9",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Health Calculators | ToolZen Hub",
+      "description": "Health calculators from ToolZen Hub: body mass index with the WHO categories, basal metabolic rate and an estimate of the calories your body uses in a day. Screening estimates, not medical advice.",
+      "canonical": "https://toolzenhub.in/health.html",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 982
     }
   },
   "/image-tools.html": {
@@ -4055,7 +4868,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 965
+      "visibleTextChars": 983
     }
   },
   "/investment.html": {
@@ -4104,7 +4917,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2118
+      "visibleTextChars": 2141
     }
   },
   "/loans.html": {
@@ -4144,17 +4957,17 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 649
+      "visibleTextChars": 666
     }
   },
   "/math.html": {
     "runtime": {
       "title": "Math Calculators | ToolZen Hub",
-      "description": "Math calculators from ToolZen Hub: work out a percentage change, an ending value, or the original value before a change.",
+      "description": "Math calculators from ToolZen Hub: work out a percentage change, simplify and scale a ratio, or find an exact age from a date of birth.",
       "canonical": "https://toolzenhub.in/math.html",
       "robots": null,
       "openGraph": {
-        "og:description": "Math calculators from ToolZen Hub: work out a percentage change, an ending value, or the original value before a change.",
+        "og:description": "Math calculators from ToolZen Hub: work out a percentage change, simplify and scale a ratio, or find an exact age from a date of birth.",
         "og:site_name": "ToolZen Hub",
         "og:title": "Math Calculators | ToolZen Hub",
         "og:type": "website",
@@ -4162,7 +4975,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Math calculators from ToolZen Hub: work out a percentage change, an ending value, or the original value before a change.",
+        "twitter:description": "Math calculators from ToolZen Hub: work out a percentage change, simplify and scale a ratio, or find an exact age from a date of birth.",
         "twitter:title": "Math Calculators | ToolZen Hub"
       },
       "jsonLd": [
@@ -4186,14 +4999,14 @@
     },
     "rawHtml": {
       "title": "Math Calculators | ToolZen Hub",
-      "description": "Math calculators from ToolZen Hub: work out a percentage change, an ending value, or the original value before a change.",
+      "description": "Math calculators from ToolZen Hub: work out a percentage change, simplify and scale a ratio, or find an exact age from a date of birth.",
       "canonical": "https://toolzenhub.in/math.html",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 844
+      "visibleTextChars": 1012
     }
   },
   "/pdf-tools.html": {
@@ -4242,7 +5055,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1160
+      "visibleTextChars": 1176
     }
   },
   "/practice-labs.html": {
@@ -4380,7 +5193,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1509
+      "visibleTextChars": 1525
     }
   },
   "/terms.html": {
@@ -4469,17 +5282,17 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2793
+      "visibleTextChars": 2810
     }
   },
   "/tools.html": {
     "runtime": {
       "title": "All Tools | ToolZen Hub",
-      "description": "Browse every ToolZen Hub tool by section and category: calculators for loans, investment, tax, business and math.",
+      "description": "Browse every ToolZen Hub tool by section and category: calculators for loans, investment, tax, health, business, math and converter.",
       "canonical": "https://toolzenhub.in/tools.html",
       "robots": null,
       "openGraph": {
-        "og:description": "Browse every ToolZen Hub tool by section and category: calculators for loans, investment, tax, business and math.",
+        "og:description": "Browse every ToolZen Hub tool by section and category: calculators for loans, investment, tax, health, business, math and converter.",
         "og:site_name": "ToolZen Hub",
         "og:title": "All Tools | ToolZen Hub",
         "og:type": "website",
@@ -4487,7 +5300,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Browse every ToolZen Hub tool by section and category: calculators for loans, investment, tax, business and math.",
+        "twitter:description": "Browse every ToolZen Hub tool by section and category: calculators for loans, investment, tax, health, business, math and converter.",
         "twitter:title": "All Tools | ToolZen Hub"
       },
       "jsonLd": [
@@ -4511,14 +5324,14 @@
     },
     "rawHtml": {
       "title": "All Tools | ToolZen Hub",
-      "description": "Browse every ToolZen Hub tool by section and category: calculators for loans, investment, tax, business and math.",
+      "description": "Browse every ToolZen Hub tool by section and category: calculators for loans, investment, tax, health, business, math and converter.",
       "canonical": "https://toolzenhub.in/tools.html",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 12369
+      "visibleTextChars": 13857
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -4861,7 +5674,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4586
+      "visibleTextChars": 4751
     }
   },
   "/tools/hours-calculator/": {
