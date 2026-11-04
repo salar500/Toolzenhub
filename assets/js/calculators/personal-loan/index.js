@@ -14,10 +14,10 @@ const calculator = createSimpleCalculator({
     emptyMessage: "Enter the loan amount, the interest rate and the tenure to see the EMI.",
     footnote: "Arithmetic on the numbers you entered, on a reducing balance. Your lender's offer and schedule decide the real figures. Not advice.",
     fields: [
-        { key: "amount", label: "Loan amount", hint: "The amount you borrow." },
+        { key: "amount", label: "Loan amount", hint: "The amount you borrow.", slider: { min: 50000, max: 5000000, step: 10000 } },
         { key: "rate", label: "Interest rate (a year)", unit: "%", hint: "The yearly rate the lender quotes, on a reducing balance.", slider: { min: 5, max: 30, step: 0.1 } },
         { key: "years", label: "Tenure", unit: "years", hint: "How long you take to repay. Personal loans are often 1 to 5 years.", slider: { min: 1, max: 10, step: 1 } },
-        { key: "fee", label: "Processing fee (optional)", unit: "%", hint: "The fee as a percentage of the loan amount, if the lender charges one." }
+        { key: "fee", label: "Processing fee (optional)", unit: "%", hint: "The fee as a percentage of the loan amount, if the lender charges one.", slider: { min: 0, max: 5, step: 0.1 } }
     ],
     solve: solvePersonalLoan,
     howTo: [

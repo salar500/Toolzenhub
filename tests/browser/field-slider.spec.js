@@ -115,4 +115,39 @@ test.describe("slider beside a number field", () => {
     await expect(slider(page, "sip-amount")).toHaveCount(1);
     await expect(page.locator("input.calculator-form__slider").first()).toBeVisible();
   });
+  // The audit of the remaining simple calculators: a slider for each bounded amount, percentage, age and body measure; none for
+  // ratio terms, the converter value (unbounded, may be negative), the any-of-three Percentage fields, selects or dates.
+  const AUDIT = {
+    "personal-loan": { pl: { amount: [50000, 5000000], rate: [5, 30], years: [1, 10], fee: [0, 5] } },
+    "loan-eligibility": { le: { income: [10000, 1000000], existing: [0, 500000], share: [10, 70], rate: [5, 20], years: [1, 30] } },
+    interest: { interest: { principal: [10000, 10000000], rate: [1, 20], years: [1, 30] } },
+    roi: { roi: { invested: [10000, 10000000], final: [10000, 20000000], years: [1, 30] } },
+    bmi: { bmi: { weight: [20, 300], height: [100, 250], age: [18, 100] } },
+    bmr: { bmr: { weight: [20, 300], height: [100, 250], age: [15, 100] } },
+    calorie: { cal: { weight: [20, 300], height: [100, 250], age: [15, 100] } },
+    ratio: { ratio: {} },
+    "unit-converter": { uc: {} }
+  };
+  for (const [slug, groups] of Object.entries(AUDIT)) {
+    test(`${slug}: sliders exactly on the audited fields, in step with the number field, with a safe range`, async ({ page, go }) => {
+      await go(`calculators/${slug}/`);
+      const [prefix, fields] = Object.entries(groups)[0];
+      const all = page.locator("input.calculator-form__slider");
+      await expect(all).toHaveCount(Object.keys(fields).length);
+      for (const [key, [min, max]] of Object.entries(fields)) {
+        const sl = slider(page, `${prefix}-${key}`);
+        await expect(sl).toHaveCount(1);
+        await expect(sl).toHaveAttribute("min", String(min));
+        await expect(sl).toHaveAttribute("max", String(max));
+        await expect(sl).toHaveAttribute("aria-hidden", "true");
+        const step = Number(await sl.getAttribute("step"));
+        const mid = String(+(min + Math.floor((max - min) / 2 / step) * step).toFixed(4));
+        await page.locator(`#${prefix}-${key}`).fill(mid);
+        await expect(sl).toHaveValue(mid);
+        await sl.fill(String(max));
+        await expect(page.locator(`#${prefix}-${key}`)).toHaveValue(String(max));
+      }
+      await expectNoHorizontalOverflow(page);
+    });
+  }
 });

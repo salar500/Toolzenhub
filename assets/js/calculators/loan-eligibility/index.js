@@ -14,8 +14,8 @@ const calculator = createSimpleCalculator({
     emptyMessage: "Enter your monthly income, the share for loan payments, the rate and the tenure to see an estimate.",
     footnote: "An estimate from the numbers you entered. It is not an approval or an offer: a lender also looks at credit history, employment, age and more.",
     fields: [
-        { key: "income", label: "Monthly income", hint: "The monthly income you want counted, for example your take-home pay or the figure a lender uses." },
-        { key: "existing", label: "Existing EMIs (optional)", hint: "The total of the loan and card EMIs you already pay each month." },
+        { key: "income", label: "Monthly income", hint: "The monthly income you want counted, for example your take-home pay or the figure a lender uses.", slider: { min: 10000, max: 1000000, step: 5000 } },
+        { key: "existing", label: "Existing EMIs (optional)", hint: "The total of the loan and card EMIs you already pay each month.", slider: { min: 0, max: 500000, step: 1000 } },
         { key: "share", label: "Share of income for loan payments", unit: "%", value: "50", hint: "Lenders usually limit total monthly loan payments to a share of income. Use the share a lender gives you, or your own limit. The 50% shown is only a starting value.", slider: { min: 10, max: 70, step: 1 } },
         { key: "rate", label: "Interest rate (a year)", unit: "%", hint: "The yearly rate you expect, on a reducing balance.", slider: { min: 5, max: 20, step: 0.1 } },
         { key: "years", label: "Tenure", unit: "years", hint: "How long you would take to repay.", slider: { min: 1, max: 30, step: 1 } }

@@ -14,9 +14,9 @@ const calculator = createSimpleCalculator({
     emptyMessage: "Enter your weight, height and age to see your BMI.",
     footnote: "A screening number, not a diagnosis or medical advice.",
     fields: [
-        { key: "weight", label: "Weight", unit: "kg", hint: "Your weight in kilograms, from 20 to 300." },
-        { key: "height", label: "Height", unit: "cm", hint: "Your height in centimetres, from 100 to 250." },
-        { key: "age", label: "Age", unit: "years", hint: "In whole years. The categories here are for adults aged 18 or more." }
+        { key: "weight", label: "Weight", unit: "kg", hint: "Your weight in kilograms, from 20 to 300.", slider: { min: 20, max: 300, step: 1 } },
+        { key: "height", label: "Height", unit: "cm", hint: "Your height in centimetres, from 100 to 250.", slider: { min: 100, max: 250, step: 1 } },
+        { key: "age", label: "Age", unit: "years", hint: "In whole years. The categories here are for adults aged 18 or more.", slider: { min: 18, max: 100, step: 1 } }
     ],
     solve: solveBmi,
     howTo: [

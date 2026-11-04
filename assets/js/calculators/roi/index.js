@@ -13,8 +13,8 @@ const calculator = createSimpleCalculator({
     emptyMessage: "Enter the amount invested and the final value to see the return on investment.",
     footnote: "Arithmetic on the numbers you entered. It is not advice and it includes no tax, fee or inflation.",
     fields: [
-        { key: "invested", label: "Amount invested", hint: "The total you put in, including costs you want counted." },
-        { key: "final", label: "Final value", hint: "What it is worth now, or what you received, including any income you want counted." },
+        { key: "invested", label: "Amount invested", hint: "The total you put in, including costs you want counted.", slider: { min: 10000, max: 10000000, step: 10000 } },
+        { key: "final", label: "Final value", hint: "What it is worth now, or what you received, including any income you want counted.", slider: { min: 10000, max: 20000000, step: 10000 } },
         { key: "years", label: "Years held (optional)", unit: "years", hint: "Add this to see the return as a yearly rate.", slider: { min: 1, max: 30, step: 1 } }
     ],
     solve: solveRoi,

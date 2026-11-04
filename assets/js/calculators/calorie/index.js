@@ -16,9 +16,9 @@ const calculator = createSimpleCalculator({
     footnote: "An estimate, not medical advice or a diet target.",
     fields: [
         { key: "sex", label: "Sex", kind: "select", value: "", options: SEX, hint: "The formula has a different constant for each." },
-        { key: "age", label: "Age", unit: "years", hint: "In whole years, from 15 to 100." },
-        { key: "weight", label: "Weight", unit: "kg", hint: "Your weight in kilograms, from 20 to 300." },
-        { key: "height", label: "Height", unit: "cm", hint: "Your height in centimetres, from 100 to 250." },
+        { key: "age", label: "Age", unit: "years", hint: "In whole years, from 15 to 100.", slider: { min: 15, max: 100, step: 1 } },
+        { key: "weight", label: "Weight", unit: "kg", hint: "Your weight in kilograms, from 20 to 300.", slider: { min: 20, max: 300, step: 1 } },
+        { key: "height", label: "Height", unit: "cm", hint: "Your height in centimetres, from 100 to 250.", slider: { min: 100, max: 250, step: 1 } },
         { key: "activity", label: "Activity level", kind: "select", value: "1.2", options: ACTIVITY, hint: "Pick the closest. People often overestimate how active they are." }
     ],
     solve: solveCalorie,

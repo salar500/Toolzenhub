@@ -13,7 +13,7 @@ const calculator = createSimpleCalculator({
     emptyMessage: "Enter the principal, the yearly rate and the time to see the interest.",
     footnote: "Arithmetic on the numbers you entered, before tax and fees. Not advice.",
     fields: [
-        { key: "principal", label: "Principal", hint: "The amount borrowed or invested." },
+        { key: "principal", label: "Principal", hint: "The amount borrowed or invested.", slider: { min: 10000, max: 10000000, step: 10000 } },
         { key: "rate", label: "Interest rate (a year)", unit: "%", hint: "The yearly rate, for example 8.5.", slider: { min: 1, max: 20, step: 0.1 } },
         { key: "years", label: "Time", unit: "years", hint: "For example 2.5 for two and a half years.", slider: { min: 1, max: 30, step: 1 } },
         { key: "frequency", label: "Compounded", kind: "select", value: "1", options: FREQUENCIES, hint: "How often the interest is added to the balance. Simple interest ignores this." }
