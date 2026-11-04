@@ -20,7 +20,7 @@ Source of truth for inventory: `tests/inventory/url-inventory.json` (generated; 
 | Cross-site | responsive, keyboard, names, focus, contrast, links, console errors, SEO, consent, analytics | `site-a11y` (axe, 126 pages), `site-tablet` (820 px), `accessibility`, `analytics`, `links`, `notfound`, `seo-baseline`, static checks |
 | Visual and performance | layout fidelity, Lighthouse | `visual.spec.js` (changed surfaces only), `npm run baseline:lighthouse` (informational) |
 
-Planned and Coming Soon, tracked separately and not tested as features: Currency Converter (needs live rates, product decision), Best SIP Strategies and Tax Saving Guide articles (no sourced content), JSON Schema Validator (Tool Pack 41, blocked at the library gate and not in the catalog), SQL/Excel/Power BI learning ecosystem (not implemented; no routes).
+Planned and Coming Soon, tracked separately and not tested as features: Currency Converter (needs live rates, product decision), JSON Schema Validator (Tool Pack 41, blocked at the library gate and not in the catalog), SQL/Excel/Power BI learning ecosystem (not implemented; no routes).
 
 ## Owner's manual QA findings as regression scenarios
 

@@ -326,7 +326,7 @@ test.describe("Percentage Calculator", () => {
     expect(body).not.toMatch(BANNED);
     await expect(results(page)).toContainText("each percentage taken of its own base");
     await expect(results(page)).toContainText("tax, fees, and the rounding a shop or an invoice may apply");
-    await expect(page.locator("details")).toHaveCount(5);
+    await expect(page.locator(".calculator-info details")).toHaveCount(5); // the FAQ; the section switcher is a sixth, separate disclosure
     await expect(page.locator(".calculator-info").filter({ hasText: "Assumptions and What Is Not Included" })).toContainText("percentage points");
     await expect(page.locator(".calculator-info").filter({ hasText: "Example" }).first()).toContainText("−4.00%");
     await expect(page.locator(".calculator-info a[href$='disclaimer.html']")).toHaveCount(1);
@@ -359,7 +359,7 @@ test.describe("Percentage Calculator", () => {
     const related = page.locator(".related-calculator-card");
     const hrefs = await related.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
     expect(hrefs).toEqual([`${siteRoot}calculators/gst/`, `${siteRoot}calculators/margin/`, `${siteRoot}calculators/ratio/`, `${siteRoot}calculators/age/`]);
-    await expect(page.locator("a[href*='calculators/profit']")).toHaveCount(0);
+    await expect(page.locator(".related-calculator-card[href*='calculators/profit'], .related-calculator-card a[href*='calculators/profit']")).toHaveCount(0); // the section switcher lists every Math tool; only the related cards are checked here
     // the four articles (the basics guide was added 2026-11-01)
     const articles = page.locator(".related-article-card");
     await expect(articles).toHaveCount(4);

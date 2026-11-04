@@ -504,7 +504,8 @@ const catalog = [
             "sip/how-a-sip-grows",
             "sip/how-return-assumptions-change-a-sip-projection",
             "sip/step-up-sip-explained",
-            "sip/how-much-sip-do-you-need-for-a-goal"
+            "sip/how-much-sip-do-you-need-for-a-goal",
+            "investment/best-sip-strategies-for-beginners"
         ]
     },
 
@@ -826,7 +827,10 @@ const catalog = [
                 "Old vs New Tax Regime Calculator, Tax Year 2026-27 | ToolZen Hub",
             description:
                 "Compare the estimated income tax under the old and the new regime for tax year 2026-27 (FY 2026-27): slabs, rebate, standard deduction, HRA, 80C and more, with the deductions the old regime needs to match. Calculated in your browser; an estimate, not tax advice."
-        }
+        },
+        relatedArticles: [
+            "tax/tax-saving-guide-save-more-legally"
+        ]
     },
 
     {

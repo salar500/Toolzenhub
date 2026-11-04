@@ -12,7 +12,6 @@ const MISSING = [
   "definitely-missing",
   "a/b/c/d/e/missing.html",
   getComingSoonTool().wouldBeUrl.slice(1), // a Coming soon tool: not a route
-  "articles/investment/best-sip-strategies-for-beginners/", // Coming soon article
   "calculators/EMI/", // wrong case => 404 on GitHub Pages
   "assets/js/no-such-file.js",
 ];

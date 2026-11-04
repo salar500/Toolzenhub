@@ -6,7 +6,7 @@ Severity: P0 blocks release, P1 before production, P2 should fix, P3 minor. Clas
 
 | ID | Sev | Description | Status |
 |---|---|---|---|
-| O-1 | P3 (product) | Best SIP Strategies and Tax Saving Guide articles are Coming Soon with no sourced content | PRODUCT DECISION REQUIRED; content must not be invented |
+| O-1 | P3 (product) | Best SIP Strategies and Tax Saving Guide articles were Coming Soon with no sourced content | RESOLVED 2026-11-05: both written and published (ids 7 and 8). The SIP figures come from the SIP Calculator model and `tests/fixtures/sip-golden.py`; the tax rules come from the frozen, source-cited tax-year 2026-27 configuration and Schedule XV of the Income-tax Act, 2025 as read from the Gazette. No second reviewer (T-15). |
 | O-2 | P3 (product) | Currency Converter Coming Soon; needs a live-rates decision | PRODUCT DECISION REQUIRED |
 | O-3 | P3 (observation) | Related cards limited to six: Credit Card Payoff and Prepayment no longer appear as automatic related cards on some Loans pages | owner decision; a curated `relatedTools` entry restores either and changes pinned unit expectations |
 

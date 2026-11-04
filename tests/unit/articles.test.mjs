@@ -76,11 +76,13 @@ const SWP_PACK_PUBLISHED = [
   "swp/how-a-systematic-withdrawal-plan-works",
   "swp/what-changes-how-long-a-corpus-lasts",
 ];
-const PUBLISHED = [...ORIGINAL_PUBLISHED, ...PREPAYMENT_PACK_PUBLISHED, ...BALANCE_TRANSFER_PACK_PUBLISHED, ...SIP_PACK_PUBLISHED, ...MARGIN_PACK_PUBLISHED, ...PROFIT_PACK_PUBLISHED, ...HOME_LOAN_PACK_PUBLISHED, ...FD_PACK_PUBLISHED, ...GST_PACK_PUBLISHED, ...CAGR_PACK_PUBLISHED, ...PERCENTAGE_PACK_PUBLISHED, ...SWP_PACK_PUBLISHED, ...PERCENTAGE_BASICS_PUBLISHED, ...COMPLETION_PUBLISHED];
-const COMING_SOON = [
+// published 2026-11-05 from the last two placeholders (ids 7 and 8); no Coming Soon article is left
+const LAST_PLACEHOLDERS_PUBLISHED = [
   "investment/best-sip-strategies-for-beginners",
   "tax/tax-saving-guide-save-more-legally",
 ];
+const PUBLISHED = [...ORIGINAL_PUBLISHED, ...PREPAYMENT_PACK_PUBLISHED, ...BALANCE_TRANSFER_PACK_PUBLISHED, ...SIP_PACK_PUBLISHED, ...MARGIN_PACK_PUBLISHED, ...PROFIT_PACK_PUBLISHED, ...HOME_LOAN_PACK_PUBLISHED, ...FD_PACK_PUBLISHED, ...GST_PACK_PUBLISHED, ...CAGR_PACK_PUBLISHED, ...PERCENTAGE_PACK_PUBLISHED, ...SWP_PACK_PUBLISHED, ...PERCENTAGE_BASICS_PUBLISHED, ...COMPLETION_PUBLISHED, ...LAST_PLACEHOLDERS_PUBLISHED];
+const COMING_SOON = [];
 // metadata that must live ONLY in the catalog, never in a content module
 const METADATA_KEYS = ["slug", "topic", "category", "categoryName", "title", "description", "datePublished", "dateModified", "readTime", "image", "relatedArticles"];
 
@@ -163,10 +165,10 @@ describe("catalog model", () => {
     for (const a of catalog.articles.filter((x) => x.published && x.heroImage)) assert.ok(a.heroImage.alt.length > 30, a.slug);
   });
 
-  test("every category exists; published counts are loans 13, investment 10, tax 2, business 7, health 1, math 4, converter 1", () => {
+  test("every category exists; published counts are loans 13, investment 11, tax 3, business 7, health 1, math 4, converter 1", () => {
     const slugs = catalog.articleCategories.map((c) => c.slug);
     for (const a of catalog.articles) assert.ok(slugs.includes(a.category), a.key);
-    assert.deepEqual(Object.fromEntries(catalog.articleCategories.map((c) => [c.slug, c.count])), { loans: 13, investment: 10, tax: 2, business: 7, health: 1, math: 4, converter: 1 });
+    assert.deepEqual(Object.fromEntries(catalog.articleCategories.map((c) => [c.slug, c.count])), { loans: 13, investment: 11, tax: 3, business: 7, health: 1, math: 4, converter: 1 });
   });
 });
 
@@ -176,6 +178,11 @@ describe("relationships", () => {
       if (COMPLETION_PUBLISHED.includes(a.key)) { // ROI vs Profit points at the Margin and Profit guides; the Health and Converter guides have no sibling yet
         assert.equal(a.related.length, a.key.startsWith("business/") ? 2 : 0, a.key);
         for (const key of a.related) assert.equal(catalog.getArticleByKey(key)?.published, true, `${a.key} -> ${key}`);
+        continue;
+      }
+      if (LAST_PLACEHOLDERS_PUBLISHED.includes(a.key)) { // the strategies guide points at three SIP guides; the tax guide at the two GST guides (the same Tax category)
+        assert.equal(a.related.length, a.key.startsWith("tax/") ? 2 : 3, a.key);
+        for (const key of a.related) { assert.equal(catalog.getArticleByKey(key)?.published, true, `${a.key} -> ${key}`); assert.notEqual(key, a.key); }
         continue;
       }
       // PUBLISHED above pins which articles exist; every one that is not an original belongs to a Tool Pack. The FD cluster is two articles, each relating to the other and to one SIP article. The Margin and Profit clusters
@@ -209,6 +216,7 @@ describe("relationships", () => {
       : CAGR_PACK_PUBLISHED.includes(key) ? ["cagr"]
       : PERCENTAGE_PACK_PUBLISHED.includes(key) || PERCENTAGE_BASICS_PUBLISHED.includes(key) ? ["percentage"]
       : SWP_PACK_PUBLISHED.includes(key) ? ["swp"]
+      : LAST_PLACEHOLDERS_PUBLISHED.includes(key) ? [key.startsWith("tax/") ? "income-tax" : "sip"]
       : COMPLETION_TOOLS[key] ? COMPLETION_TOOLS[key]
       : ["loan-comparison"];
     for (const a of catalog.articles.filter((x) => x.published)) {
@@ -265,7 +273,7 @@ describe("article model (metadata + content -> page object)", () => {
   test("related targets that are not published are skipped (curated list is read from the catalog)", async () => {
     const entry = catalog.getArticleByKey("loan-comparison/emi-vs-total-interest");
     const original = entry.related;
-    entry.related = ["investment/best-sip-strategies-for-beginners", "loan-comparison/what-is-loan-prepayment", "nope/nope"];
+    entry.related = ["nope/nope", "loan-comparison/what-is-loan-prepayment", "also/missing"]; // no Coming Soon article is left, so unknown keys stand in for "not published"
     try {
       const article = model.buildArticle(entry, { calculator: { description: "x" } });
       assert.deepEqual(article.relatedArticles.map((r) => r.slug), ["what-is-loan-prepayment"]);
@@ -285,16 +293,16 @@ describe("derived views keep their old shape", () => {
       date: "Aug 25, 2026", readTime: "6 min read", image: "/Toolzenhub/assets/Images/articles/how-to-reduce-home-loan-interest.png", alt: "Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate",
     });
     assert.deepEqual(legacy.articleRegistry[38], {
-      id: 7, category: "investment", categoryName: "Investment", topic: "investment", slug: "best-sip-strategies-for-beginners",
+      id: 7, published: true, category: "investment", categoryName: "Investment", topic: "investment", slug: "best-sip-strategies-for-beginners",
       title: "Best SIP Strategies for Beginners",
-      description: "Learn practical SIP investment strategies to build wealth consistently and work towards your financial goals.",
-      date: "Aug 25, 2026", readTime: "5 min read", image: null, alt: "",
-    });
-    assert.equal(legacy.articleRegistry.filter((a) => a.published === true).length, 38);
-    assert.equal(legacy.articleRegistry.filter((a) => "published" in a).length, 38);
+      description: "Practical SIP habits for a beginner, with worked examples at an assumed return: start from the goal, keep an amount you can pay, start early, raise it, stay through falls and mind the costs.",
+      date: "Nov 5, 2026", readTime: "6 min read", image: "/Toolzenhub/assets/Images/articles/best-sip-strategies-for-beginners.png", alt: "Two bars for the same 24,00,000 rupees invested: 10,000 a month for 20 years is estimated at 76,56,969 rupees and 20,000 a month for 10 years at 41,31,040 rupees, at an assumed 10% a year"
+    }); // published 2026-11-05 from the Coming Soon placeholder
+    assert.equal(legacy.articleRegistry.filter((a) => a.published === true).length, 40);
+    assert.equal(legacy.articleRegistry.filter((a) => "published" in a).length, 40);
     // the SWP sensitivity article is the only published article without a card image (the three Tool Pack 53 guides have covers): the registry says so (image null, no alt) and its card draws no image block
     for (const a of legacy.articleRegistry.filter((x) => x.slug === "what-changes-how-long-a-corpus-lasts")) assert.deepEqual([a.image, a.alt], [null, ""], a.slug);
-    for (const a of legacy.articleRegistry.filter((x) => COMPLETION_PUBLISHED.some((k) => k.endsWith(`/${x.slug}`)))) assert.ok(a.image.endsWith(`/${a.slug}.png`) && a.alt.length > 40, a.slug); // covers approved by the owner after first publication
+    for (const a of legacy.articleRegistry.filter((x) => [...COMPLETION_PUBLISHED, ...LAST_PLACEHOLDERS_PUBLISHED].some((k) => k.endsWith(`/${x.slug}`)))) assert.ok(a.image.endsWith(`/${a.slug}.png`) && a.alt.length > 40, a.slug); // covers approved by the owner after first publication
     for (const a of legacy.articleRegistry.filter((x) => x.topic === "percentage")) assert.ok(a.image.endsWith(`/${a.slug}.png`) && a.alt.length > 40, a.slug);
   });
 });

@@ -398,7 +398,7 @@ describe("the real ledger", () => {
   test("records every declared article id, published and coming-soon, with its current key", () => {
     const declared = registry.articles.map((a) => a.id).sort((a, b) => a - b);
     assert.deepEqual(file.ledger.articles.map((a) => a.id), declared);
-    assert.ok(registry.articles.some((a) => a.status !== "published"), "premise: coming-soon articles exist");
+    /* no Coming Soon article is left (the last two were published 2026-11-05); the status field still allows one */
     for (const a of registry.articles) assert.equal(file.ledger.articles.find((r) => r.id === a.id).key, `${a.topic}/${a.slug}`);
     assert.equal(file.ledger.nextArticleId, Math.max(...declared) + 1);
     assert.ok(file.ledger.articles.every((a) => a.state === "active" && a.keyChanges.length === 0));

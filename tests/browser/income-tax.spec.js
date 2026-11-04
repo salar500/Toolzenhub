@@ -437,11 +437,11 @@ test.describe("Old vs New Tax Regime Calculator in the site", () => {
     }
     for (const slug of ["gst", "home-loan", "emi"]) {
       await go(`calculators/${slug}/`);
-      await expect(page.locator("a[href*='calculators/income-tax']"), slug).toHaveCount(0);
+      await expect(page.locator(".related-calculator-card[href*='calculators/income-tax'], .related-calculator-card a[href*='calculators/income-tax']"), slug).toHaveCount(0); // related cards only: the section switcher lists every Tax tool
     }
     await go("calculators/income-tax/");
     const related = await page.locator(".related-calculator-card").evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
     expect(related).toEqual([`${siteRoot}calculators/home-loan/`]);
-    await expect(page.locator(`main a[href$="calculators/gst/"]`)).toHaveCount(0);
+    await expect(page.locator(`.related-calculator-card[href$="calculators/gst/"], .related-calculator-card a[href$="calculators/gst/"], .calculator-info a[href$="calculators/gst/"]`)).toHaveCount(0); // the section switcher lists GST; the related cards and the page text must not
   });
 });

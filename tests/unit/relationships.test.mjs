@@ -129,7 +129,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     // Salary / CTC to In-Hand (Tool Pack 30) is the fourth live Tax tool: autoRelated is off and its one curated, one-way relation is Income Tax; no other Tax tool or Income Tax's own list gains it
     assert.deepEqual(toolIds(rel.getRelatedTools("salary-in-hand")), ["income-tax"]);
     for (const other of ["gst", "income-tax", "gratuity"]) assert.equal(toolIds(rel.getRelatedTools(other)).includes("salary-in-hand"), false, other);
-    assert.deepEqual(rel.getRelatedArticlesForTool("income-tax"), []);
+    assert.deepEqual(rel.getRelatedArticlesForTool("income-tax").map((x) => x.key), ["tax/tax-saving-guide-save-more-legally"]); // published 2026-11-05
     assert.deepEqual(toolIds(rel.getRelatedTools("gst")), ["margin", "profit"]);
     for (const id of ["home-loan", "emi", "loan-comparison", "sip", "margin", "percentage"]) assert.equal(toolIds(rel.getRelatedTools(id)).includes("income-tax"), false, id);
     assert.equal(toolIds(rel.getRelatedTools("margin")).includes("percentage"), false);
@@ -169,6 +169,8 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
       : key === "balance-transfer/is-a-loan-balance-transfer-worth-it" ? ["balance-transfer", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "interest", "prepayment", "credit-card-payoff"]
       : key === "balance-transfer/balance-transfer-vs-prepayment" ? ["balance-transfer", "prepayment", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "interest", "credit-card-payoff"]
       : key.startsWith("home-loan/") ? ["home-loan", "loan-comparison", "emi", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"]
+      : key === "tax/tax-saving-guide-save-more-legally" ? ["income-tax", "gst"] // published 2026-11-05: its own calculator first, then GST, the other auto-related Tax tool
+      : key === "investment/best-sip-strategies-for-beginners" ? ["sip", "ppf", "fd", "cagr", "xirr", "risk-reward"] // published 2026-11-05: SIP first, then the other Investment tools
       : key.startsWith("sip/") ? ["sip", "ppf", "fd", "cagr", "xirr", "risk-reward"] // the primary tool first, then the other published Investment tools (PPF, Tool Pack 26, is one)
       : key.startsWith("fd/") ? ["fd", "sip", "ppf", "cagr", "xirr", "risk-reward"]
       : key.startsWith("cagr/") ? ["cagr", "sip", "ppf", "fd", "xirr", "risk-reward"]
@@ -186,7 +188,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     for (const key of PUBLISHED) {
       const entry = articles.getArticleByKey(key);
       assert.deepEqual(keys(rel.getRelatedArticles(key)), entry.related, key);
-      assert.equal(rel.getRelatedArticles(key).length, key === "business/roi-vs-profit-whats-the-difference" ? 2 : key.startsWith("health/") || key.startsWith("converter/") ? 0 : key.startsWith("margin/") || key.startsWith("profit/") || key.startsWith("fd/") || key.startsWith("gst/") || key.startsWith("cagr/") || key.startsWith("percentage/") || key.startsWith("math/") || key.startsWith("swp/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") || key.startsWith("home-loan/") ? 3 : 5, key); // Margin and Profit: three-article clusters, so two others
+      assert.equal(rel.getRelatedArticles(key).length, key === "business/roi-vs-profit-whats-the-difference" ? 2 : key.startsWith("health/") || key.startsWith("converter/") ? 0 : key === "tax/tax-saving-guide-save-more-legally" ? 2 : key === "investment/best-sip-strategies-for-beginners" ? 3 : key.startsWith("margin/") || key.startsWith("profit/") || key.startsWith("fd/") || key.startsWith("gst/") || key.startsWith("cagr/") || key.startsWith("percentage/") || key.startsWith("math/") || key.startsWith("swp/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") || key.startsWith("home-loan/") ? 3 : 5, key); // Margin and Profit: three-article clusters, so two others
     }
   });
 
@@ -259,7 +261,7 @@ describe("curated first, automatic second", () => {
     savedRelated = first().related;
     first().related = [];
     // the other published articles of ITS category (Loans): the Investment and Business articles are not offered
-    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/") && !k.startsWith("profit/") && !k.startsWith("fd/") && !k.startsWith("gst/") && !k.startsWith("cagr/") && !k.startsWith("percentage/") && !k.startsWith("math/") && !k.startsWith("swp/") && !k.startsWith("business/") && !k.startsWith("health/") && !k.startsWith("converter/")).slice(1));
+    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/") && !k.startsWith("profit/") && !k.startsWith("fd/") && !k.startsWith("gst/") && !k.startsWith("cagr/") && !k.startsWith("percentage/") && !k.startsWith("math/") && !k.startsWith("swp/") && !k.startsWith("investment/") && !k.startsWith("tax/") && !k.startsWith("business/") && !k.startsWith("health/") && !k.startsWith("converter/")).slice(1));
   });
 
   test("a curated article list is never replaced or padded by the automatic one", () => {

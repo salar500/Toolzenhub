@@ -99,6 +99,12 @@
     "placeholders": 0,
     "deadFragments": []
   },
+  "articles/investment/best-sip-strategies-for-beginners/": {
+    "internal": 39,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
   "articles/loan-comparison/choose-right-loan-tenure/": {
     "internal": 40,
     "external": [],
@@ -243,6 +249,12 @@
     "placeholders": 0,
     "deadFragments": []
   },
+  "articles/tax/tax-saving-guide-save-more-legally/": {
+    "internal": 38,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
   "business.html": {
     "internal": 30,
     "external": [],
@@ -328,7 +340,7 @@
     "deadFragments": []
   },
   "calculators/income-tax/": {
-    "internal": 61,
+    "internal": 63,
     "external": [
       "egazette.gov.in",
       "github.com",
@@ -419,7 +431,7 @@
     "deadFragments": []
   },
   "calculators/sip/": {
-    "internal": 71,
+    "internal": 72,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -515,7 +527,7 @@
     "deadFragments": []
   },
   "practice-labs.html": {
-    "internal": 33,
+    "internal": 35,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -545,7 +557,7 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 113,
+    "internal": 115,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -569,7 +581,7 @@
     "deadFragments": []
   },
   "tools/cron-challenge-lab/": {
-    "internal": 36,
+    "internal": 38,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -588,6 +600,12 @@
   },
   "tools/date-difference/": {
     "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/excel-practice-lab/": {
+    "internal": 37,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -623,7 +641,7 @@
     "deadFragments": []
   },
   "tools/json-error-fixing-lab/": {
-    "internal": 36,
+    "internal": 38,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -635,7 +653,7 @@
     "deadFragments": []
   },
   "tools/jsonpath-challenge-lab/": {
-    "internal": 36,
+    "internal": 38,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -694,6 +712,12 @@
     "placeholders": 0,
     "deadFragments": []
   },
+  "tools/power-bi-practice-lab/": {
+    "internal": 38,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
   "tools/shift-planner/": {
     "internal": 44,
     "external": [],
@@ -701,7 +725,7 @@
     "deadFragments": []
   },
   "tools/smart-flashcards/": {
-    "internal": 37,
+    "internal": 39,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -713,7 +737,7 @@
     "deadFragments": []
   },
   "tools/sql-practice-lab/": {
-    "internal": 35,
+    "internal": 37,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -725,7 +749,7 @@
     "deadFragments": []
   },
   "tools/test-design-lab/": {
-    "internal": 36,
+    "internal": 38,
     "external": [],
     "placeholders": 0,
     "deadFragments": []

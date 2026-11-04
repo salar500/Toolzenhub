@@ -200,7 +200,9 @@ describe("real data: policy and ranking", () => {
     assert.deepEqual(ids(engine.search("systematic investment plan", { types: ["tool"] })), ["sip"]);
     assert.deepEqual(ids(engine.search("step-up sip", { types: ["tool"] })), ["sip"]);
     assert.equal(engine.search("sip")[0].key, "tool:sip");
-    assert.deepEqual(ids(engine.search("best sip strategies", { types: ["article"] })), []);
+    // the last two placeholders were published on 2026-11-05: found as articles by their names
+    assert.deepEqual(ids(engine.search("best sip strategies", { types: ["article"] })), [7]);
+    assert.deepEqual(ids(engine.search("tax saving guide", { types: ["article"] })), [8]);
     assert.equal(engine.search("emi").every((r) => r.status === "published"), true);
   });
 

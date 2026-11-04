@@ -1419,38 +1419,75 @@ const catalog = [
     },
 
     /* =====================================================
-       COMING SOON  (listing placeholders: no route, no
-       content module, not counted)
+       PUBLISHED 2026-11-05 from the last two Coming Soon
+       placeholders (ids 7 and 8), each beside its tool
     ===================================================== */
 
     {
         id: 7,
-        status: "coming-soon",
+        status: "published",
         category: "investment",
         topic: "investment",
         slug: "best-sip-strategies-for-beginners",
         title:
             "Best SIP Strategies for Beginners",
         description:
-            "Learn practical SIP investment strategies to build wealth consistently and work towards your financial goals.",
-        listingDate: "Aug 25, 2026",
-        readTime: "5 min read",
-        cardImage: null
+            "Practical SIP habits for a beginner, with worked examples at an assumed return: start from the goal, keep an amount you can pay, start early, raise it, stay through falls and mind the costs.",
+        publishedAt: "Nov 5, 2026",
+        updatedAt: "Nov 5, 2026",
+        readTime: "6 min read",
+        cardImage: {
+            src:
+                "/assets/Images/articles/best-sip-strategies-for-beginners.png",
+            alt:
+                "Two bars for the same 24,00,000 rupees invested: 10,000 a month for 20 years is estimated at 76,56,969 rupees and 20,000 a month for 10 years at 41,31,040 rupees, at an assumed 10% a year"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/best-sip-strategies-for-beginners.png",
+            alt:
+                "Two bars for the same 24,00,000 rupees invested: 10,000 a month for 20 years is estimated at 76,56,969 rupees and 20,000 a month for 10 years at 41,31,040 rupees, at an assumed 10% a year"
+        },
+        tools: ["sip"],
+        related: [
+            "sip/how-a-sip-grows",
+            "sip/step-up-sip-explained",
+            "sip/how-much-sip-do-you-need-for-a-goal"
+        ],
+        relatedLabel: "Investment"
     },
 
     {
         id: 8,
-        status: "coming-soon",
+        status: "published",
         category: "tax",
         topic: "tax",
         slug: "tax-saving-guide-save-more-legally",
         title:
             "Tax Saving Guide: Save More, Legally",
         description:
-            "Explore smart tax-saving options and understand ways to reduce taxable income legally.",
-        listingDate: "Aug 25, 2026",
+            "How the old and new tax regimes work for tax year 2026-27, which payments can reduce an individual's tax, and how to compare both with your own numbers. Information from the Act, not tax advice.",
+        publishedAt: "Nov 5, 2026",
+        updatedAt: "Nov 5, 2026",
         readTime: "7 min read",
-        cardImage: null
+        cardImage: {
+            src:
+                "/assets/Images/articles/tax-saving-guide-save-more-legally.png",
+            alt:
+                "Bars for the new regime's rate on each slice of income in tax year 2026-27: nil to 4,00,000 rupees, then 5%, 10%, 15%, 20%, 25% and 30% above 24,00,000 rupees"
+        },
+        heroImage: {
+            src:
+                "/assets/Images/articles/tax-saving-guide-save-more-legally.png",
+            alt:
+                "Bars for the new regime's rate on each slice of income in tax year 2026-27: nil to 4,00,000 rupees, then 5%, 10%, 15%, 20%, 25% and 30% above 24,00,000 rupees"
+        },
+        tools: ["income-tax"],
+        related: [
+            "gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways",
+            "gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates"
+        ],
+        relatedLabel: "Tax"
     }
 
 ];
@@ -1543,6 +1580,18 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/sip/step-up-sip-explained.js"
+            ),
+
+    "investment/best-sip-strategies-for-beginners":
+        () =>
+            import(
+                "./articles/investment/best-sip-strategies-for-beginners.js"
+            ),
+
+    "tax/tax-saving-guide-save-more-legally":
+        () =>
+            import(
+                "./articles/tax/tax-saving-guide-save-more-legally.js"
             ),
 
     "sip/how-much-sip-do-you-need-for-a-goal":

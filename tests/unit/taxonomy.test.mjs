@@ -79,7 +79,7 @@ describe("current hierarchy data", () => {
   test("supporting articles: the six original articles point at Loan Comparison; the four SIP articles at SIP; the three Margin articles at Margin; the three Profit articles at Profit; the three Home Loan articles at Home Loan; the two FD articles at FD; the two GST articles at GST; the two CAGR articles at CAGR; none point at EMI or a Coming Soon tool", () => {
     assert.equal(tax.getArticlesForTool("loan-comparison").length, 6);
     assert.deepEqual(tax.getArticlesForTool("emi"), []);
-    assert.equal(tax.getArticlesForTool("sip").length, 4);
+    assert.equal(tax.getArticlesForTool("sip").length, 5); // the strategies guide joined the four pack articles on 2026-11-05
     assert.equal(tax.getArticlesForTool("margin").length, 3);
     assert.equal(tax.getArticlesForTool("profit").length, 3);
     assert.equal(tax.getArticlesForTool("home-loan").length, 3);

@@ -25,7 +25,7 @@ The 27 findings are the rows of `Q/MASTER_REGRESSION_CATALOG.md` (the single own
 | 12, 13, 14, 15 | JSON line numbers, suggested fixes, compare, long documents | DONE (14, 15 DONE-MANUAL) | compare reports differences by path, not by line: evaluate mapping a path to a line in Phase 10 |
 | 16, 17, 18 | Active states (header "All Tools") | DONE | the requested persistent sidebar is a separate item (2.2) |
 | 19 | Labs separation | DONE | rule 4.10; hub and breadcrumbs verified |
-| 20 | SIP and Tax articles | DEFERRED | stay Coming Soon unless sourced content exists (P5111 F, Part 5 Phase 11) |
+| 20 | SIP and Tax articles | DONE 2026-11-05 | published ids 7 (`/articles/investment/best-sip-strategies-for-beginners/`) and 8 (`/articles/tax/tax-saving-guide-save-more-legally/`) with original content, an image each, metadata, related links and tests; sources in the article files; not independently reviewed |
 | 21 | Broken article images | DONE | none |
 | 22 | All Tools search clearing | DONE | none |
 | 23 | Global search | PARTIAL | evaluate category-aware suggestions (P5111 4H) |
