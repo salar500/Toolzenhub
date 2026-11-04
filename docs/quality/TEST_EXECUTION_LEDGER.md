@@ -40,6 +40,10 @@ Not run: the other date-field consumers (`business-days`, `countdown-timer` date
 
 Pins changed deliberately: `countdown-timer.spec.js` finish state now lists "Stop sound" (the reminder sounds); two date-mode assertions now state the clock format. Not run: other time tools; no real-audio check (a fake Web Audio counts tones), so audibility is manual.
 
+## Q3-4 (WP5a, All Tools search clearing), base `b8dbc2b` plus uncommitted change
+
+Build pass. `navigation.spec.js` subpath-desktop 45 pass, 2 skipped by design (0 fail), one new test; subpath-mobile: the new test only. Time-tool sound audit (no code change): Stopwatch, Business Days, Time Duration and Shift Planner have no sound by design; Pomodoro and Interval share `cycle-controller.js`, which already has an opt-in single beep and a checkbox.
+
 ## Carried forward (not re-run at f5a1df4)
 
 These ran on the working tree that was committed as `6b01b85`..`f5a1df4` (RELEASE-1 records HEAD `45fc888` plus 102 uncommitted entries, 5,597 insertions across 102 files, now in the three commits). That equivalence is inferred from the records and a clean tree; it was not proved by diffing a saved copy.

@@ -49,7 +49,7 @@ Status key: AUTO = an automated spec covers it (matched by file and test name, n
 | 19 | Labs separation and navigation | AUTO+MANUAL | `developer-tools-related.spec.js`, `navigation.spec.js` |
 | 20 | Incomplete SIP and Tax articles | OPEN | two articles are Coming Soon with no route (404 asserted); product decision, content not fabricated |
 | 21 | Broken article images | AUTO | `smoke.spec.js` (images load, 126 pages), static asset check, three Pack 53 covers added |
-| 22 | All Tools search clearing | AUTO | `navigation.spec.js` (matched) |
+| 22 | All Tools search clearing | AUTO | WP5a: emptying or space-only input on All Tools now restores the unfiltered page, the URL and the robots hint at once (it previously needed a submit); `navigation.spec.js` |
 | 23 | Global search | AUTO | `navigation.spec.js`, `search.test.mjs` |
 | 24 | Homepage hero loading and accessibility | AUTO+MANUAL | `site-a11y`, `build`, `dom-baseline`; visual load by eye |
 | 25 | Responsive category workspace | AUTO+MANUAL | `site-tablet`, mobile runs (390, 820); feel manual |

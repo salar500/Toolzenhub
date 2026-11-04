@@ -122,6 +122,23 @@ export async function initializeToolsSearch() {
 
     input.value = query;
 
+    /* Emptying the box (or leaving only spaces) puts the normal, unfiltered page back at once: the results are not left
+       standing, the address loses ?q= and the noindex hint added for a result page goes with them. */
+    input.addEventListener("input", () => {
+
+        if (input.value.trim() !== "" || !results.innerHTML.trim()) {
+            return;
+        }
+
+        results.innerHTML = "";
+        directory.hidden = false;
+
+        document.head.querySelector("meta[data-directory-results]")?.remove();
+
+        window.history.replaceState(window.history.state, "", window.location.pathname);
+
+    });
+
     if (!query) {
         return;
     }
@@ -131,6 +148,7 @@ export async function initializeToolsSearch() {
 
     robots.name = "robots";
     robots.content = "noindex, follow";
+    robots.dataset.directoryResults = "";
 
     document.head.append(robots);
 

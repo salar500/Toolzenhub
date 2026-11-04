@@ -76,6 +76,25 @@ test.describe("home page", () => {
     await expect(page.locator(".directory-result")).toHaveCount(0);
   });
 
+  test("All Tools: emptying the search box (or leaving only spaces) restores the unfiltered page and the address (owner finding 22)", async ({ page, go, siteRoot }) => {
+    await go("tools.html?q=emi");
+    const input = page.locator("#directory-search-input");
+    await expect(page.locator("#tools-results")).toContainText("tools found for “emi”");
+    await expect(page.locator("#tools-directory")).toBeHidden();
+    await input.fill("");
+    await expect(page.locator("#tools-results")).toBeEmpty();
+    await expect(page.locator("#tools-directory")).toBeVisible();
+    await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html` && !u.search);
+    await expect(page.locator('meta[name="robots"][content^="noindex"]')).toHaveCount(0);
+    // a no-result search is cleared the same way, with spaces only
+    await input.fill("asdfgh");
+    await input.press("Enter");
+    await expect(page.locator("#tools-results")).toContainText("No tools found");
+    await input.fill("   ");
+    await expect(page.locator("#tools-results")).toBeEmpty();
+    await expect(page.locator("#tools-directory")).toBeVisible();
+  });
+
   test("an empty hero search does not navigate", async ({ page, go }) => {
     await go("");
     const url = page.url();
