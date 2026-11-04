@@ -61,6 +61,7 @@ test.describe("Countdown Timer: count down to a date", () => {
     await page.locator("#cd-time").fill("10:00");
     await page.locator("#cd-zone").fill("UTC");
     await btn(page, "Start countdown").click();
+    await page.getByLabel("24-hour").check();
     await expect(page.locator("#cd-panel")).toHaveAttribute("data-state", "running");
     await expect(page.locator("#cd-title")).toHaveText("Launch");
     await expect(page.locator("#cd-display")).toHaveText("1 day 23:59:59");
@@ -115,7 +116,7 @@ test.describe("Countdown Timer: count down to a date", () => {
     await expect(page.locator("#cd-panel")).toBeVisible();
     await expect(page.locator("#cd-title")).toHaveText("Holiday");
     await expect(page.locator("#cd-panel")).toHaveAttribute("data-state", "running");
-    await expect(page.locator("#cd-event")).toContainText("Friday, 25 December 2026, 09:30");
+    await expect(page.locator("#cd-event")).toContainText("Friday, 25 December 2026, 9:30 AM");  // the en-US device default is the 12-hour clock
   });
 
   test("a hostile name is shown as text only", async ({ page, go }) => {
@@ -240,5 +241,90 @@ test.describe("Time Tools related-tools pilot", () => {
       await go(path);
       await expect(page.locator(".related-section")).toHaveCount(0);
     }
+  });
+});
+
+test.describe("Countdown Timer: zone, clock format and reminder sound (owner findings 5 to 8)", () => {
+  // a fake Web Audio API that only counts the tones started, so the alert can be heard by the test
+  const fakeAudio = () => {
+    window.__tones = 0;
+    window.AudioContext = class {
+      constructor() { this.state = "running"; this.currentTime = 0; this.destination = {}; }
+      resume() {}
+      createGain() { return { gain: { setValueAtTime() {}, exponentialRampToValueAtTime() {} }, connect() {} }; }
+      createOscillator() { return { frequency: {}, connect() {}, start() { window.__tones++; }, stop() {}, addEventListener() {} }; }
+    };
+  };
+
+  async function openCd(page, go) {
+    await go("tools/countdown-timer/");
+    await expect(page.locator("#ct-panel")).toHaveAttribute("data-ready", "true");
+  }
+
+  test("the time zone field starts as this device's zone; the event line can switch between 12 and 24 hours", async ({ page, go }) => {
+    await openCd(page, go);
+    await page.getByLabel("Count down to a date").check();
+    await expect(page.locator("#cd-zone")).toHaveValue("Asia/Kolkata");
+    await page.locator("#cd-date").fill("2026-12-25");
+    await page.locator("#cd-time").fill("21:05");
+    await btn(page, "Start countdown").click();
+    await expect(page.getByLabel("12-hour (AM/PM)")).toBeChecked();
+    await expect(page.locator("#cd-event")).toContainText("Friday, 25 December 2026, 9:05 PM");
+    await page.getByLabel("24-hour").check();
+    await expect(page.locator("#cd-event")).toContainText("Friday, 25 December 2026, 21:05");
+  });
+
+  test("date mode: the reminder repeats for about 12 seconds, Stop sound ends it, and unticking the option prevents it", async ({ page, go }) => {
+    await page.addInitScript(fakeAudio);
+    await page.clock.install({ time: new Date("2026-03-01T12:00:00Z") });
+    await openCd(page, go);
+    await page.getByLabel("Count down to a date").check();
+    await page.locator("#cd-date").fill("2026-03-01");
+    await page.locator("#cd-time").fill("12:01");
+    await page.locator("#cd-zone").fill("UTC");
+    await btn(page, "Start countdown").click();
+    await page.clock.runFor(61_000);
+    await expect(page.locator("#cd-panel")).toHaveAttribute("data-state", "reached");
+    await expect(btn(page, "Stop sound")).toBeVisible();
+    const first = await page.evaluate(() => window.__tones);
+    expect(first).toBeGreaterThanOrEqual(3);
+    await page.clock.runFor(3_000);
+    expect(await page.evaluate(() => window.__tones)).toBeGreaterThan(first); // it repeats
+    await btn(page, "Stop sound").click();
+    await expect(btn(page, "Stop sound")).toBeHidden();
+    const stopped = await page.evaluate(() => window.__tones);
+    await page.clock.runFor(10_000);
+    expect(await page.evaluate(() => window.__tones)).toBe(stopped); // silence after Stop
+  });
+
+  test("date mode: with the sound option unticked nothing is played", async ({ page, go }) => {
+    await page.addInitScript(fakeAudio);
+    await page.clock.install({ time: new Date("2026-03-01T12:00:00Z") });
+    await openCd(page, go);
+    await page.getByLabel("Count down to a date").check();
+    await page.getByLabel(/Play a reminder sound when the time is reached/).uncheck();
+    await page.locator("#cd-date").fill("2026-03-01");
+    await page.locator("#cd-time").fill("12:01");
+    await page.locator("#cd-zone").fill("UTC");
+    await btn(page, "Start countdown").click();
+    await page.clock.runFor(62_000);
+    await expect(page.locator("#cd-panel")).toHaveAttribute("data-state", "reached");
+    expect(await page.evaluate(() => window.__tones)).toBe(0);
+    await expect(btn(page, "Stop sound")).toBeHidden();
+  });
+
+  test("length mode: the reminder lasts about 12 seconds and ends by itself", async ({ page, go }) => {
+    await page.addInitScript(fakeAudio);
+    await page.clock.install({ time: new Date("2026-03-01T12:00:00Z") });
+    await openCd(page, go);
+    await page.locator("#ct-seconds").fill("5");
+    await btn(page, "Start").click();
+    await page.clock.runFor(6_000);
+    await expect(btn(page, "Stop sound")).toBeVisible();
+    await page.clock.runFor(13_000);
+    await expect(btn(page, "Stop sound")).toBeHidden();
+    const total = await page.evaluate(() => window.__tones);
+    await page.clock.runFor(5_000);
+    expect(await page.evaluate(() => window.__tones)).toBe(total);
   });
 });

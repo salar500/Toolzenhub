@@ -55,6 +55,13 @@ import {
     initDateMode
 } from "./date-mode.js";
 
+import {
+    ALERT_SECONDS,
+    prepareSound,
+    startAlert,
+    stopAlert
+} from "./alert-sound.js";
+
 
 /* There is no related calculator and no article about timers. */
 export const showRelatedCalculators = false;
@@ -295,6 +302,15 @@ ${modeSwitchMarkup()}
                                 Reset
                             </button>
 
+                            <button
+                                type="button"
+                                id="ct-stop-sound"
+                                class="calculator-form__button calculator-form__button--secondary ct-button"
+                                hidden
+                            >
+                                Stop sound
+                            </button>
+
                         </div>
 
                         <label class="ct-sound">
@@ -303,7 +319,7 @@ ${modeSwitchMarkup()}
                                 id="ct-sound"
                                 checked
                             >
-                            <span>Play a short sound when the timer finishes</span>
+                            <span>Play a reminder sound when the timer finishes (about ${ALERT_SECONDS} seconds; Stop sound ends it)</span>
                         </label>
 
                     </form>
@@ -345,7 +361,8 @@ ${dateModeMarkup()}
                     </li>
                     <li>
                         At zero the timer says "Timer complete", and plays a
-                        short sound unless you have turned it off.
+                        reminder sound for about ${ALERT_SECONDS} seconds unless you have
+                        turned it off. Stop sound ends it at once.
                     </li>
                 </ol>
 
@@ -488,9 +505,10 @@ ${dateModeMarkup()}
                     </summary>
                     <p>
                         Yes. Untick the sound option under the buttons. The
-                        sound is a short beep that plays once when the timer
-                        finishes, and only if you started the timer on this
-                        page.
+                        sound is a short beep repeated for about ${ALERT_SECONDS} seconds when
+                        the timer finishes, and only if you started the timer on
+                        this page. Press Stop sound, Restart or Reset to end it
+                        sooner; unticking the option also stops it.
                     </p>
                 </details>
 
@@ -540,78 +558,6 @@ export function render(
 
 
 /* =========================================================
-   SOUND
-   One short beep (three tones), generated in the browser with the
-   Web Audio API: no file and no download. The audio context is
-   made in the Start click, because a browser only lets a page make
-   sound after the visitor has acted on it.
-========================================================= */
-
-let audio = null;
-
-function prepareSound() {
-
-    try {
-
-        const Context =
-            window.AudioContext || window.webkitAudioContext;
-
-        if (!Context) {
-            return;
-        }
-
-        audio = audio ?? new Context();
-
-        if (audio.state === "suspended") {
-            audio.resume();
-        }
-
-    } catch {
-
-        audio = null;
-
-    }
-
-}
-
-function playSound() {
-
-    if (!audio) {
-        return;
-    }
-
-    try {
-
-        const now = audio.currentTime;
-
-        [0, 0.28, 0.56].forEach(offset => {
-
-            const oscillator = audio.createOscillator();
-            const gain = audio.createGain();
-
-            oscillator.type = "sine";
-            oscillator.frequency.value = 880;
-
-            gain.gain.setValueAtTime(0.0001, now + offset);
-            gain.gain.exponentialRampToValueAtTime(0.12, now + offset + 0.02);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + offset + 0.2);
-
-            oscillator.connect(gain);
-            gain.connect(audio.destination);
-
-            oscillator.start(now + offset);
-            oscillator.stop(now + offset + 0.22);
-
-        });
-
-    } catch {
-        /* no sound is not an error: the finished state is on the screen */
-    }
-
-}
-
-
-/* =========================================================
    INIT
 ========================================================= */
 
@@ -637,7 +583,8 @@ export function init() {
         pause: document.querySelector("#ct-pause"),
         resume: document.querySelector("#ct-resume"),
         restart: document.querySelector("#ct-restart"),
-        reset: document.querySelector("#ct-reset")
+        reset: document.querySelector("#ct-reset"),
+        stopSound: document.querySelector("#ct-stop-sound")
     };
 
     const inputs = {};
@@ -799,7 +746,7 @@ export function init() {
         announce("Timer complete.");
 
         if (sound.checked) {
-            playSound();
+            buttons.stopSound.hidden = !startAlert(() => { buttons.stopSound.hidden = true; });
         }
 
         buttons.restart.focus();
@@ -877,6 +824,7 @@ export function init() {
 
         markPresets();
 
+        stopAlert();
         prepareSound();
 
         timer = start(timer, totalSeconds, now());
@@ -926,6 +874,8 @@ export function init() {
 
     function doRestart() {
 
+        stopAlert();
+
         timer = start(createTimer(), totalSeconds, now());
 
         prepareSound();
@@ -941,6 +891,8 @@ export function init() {
     }
 
     function doReset() {
+
+        stopAlert();
 
         stopTicking();
 
@@ -982,6 +934,8 @@ export function init() {
     buttons.resume.addEventListener("click", doResume);
     buttons.restart.addEventListener("click", doRestart);
     buttons.reset.addEventListener("click", doReset);
+    buttons.stopSound.addEventListener("click", () => { stopAlert(); buttons.restart.focus(); });
+    sound.addEventListener("change", () => { if (!sound.checked) { stopAlert(); } });
 
     for (const button of presets) {
 

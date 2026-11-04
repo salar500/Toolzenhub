@@ -28,6 +28,18 @@ Skipped, interrupted: none. Failed: none.
 
 Not run: the other date-field consumers (`business-days`, `countdown-timer` date mode, `gratuity`, `xirr`) use the same markup helper but have no date-icon assertion; mobile project not run for this change.
 
+## Q3-3 (WP3a, Countdown Timer), base `e49b020` plus uncommitted change, committed after this run
+
+| Run | Command | Result |
+|---|---|---|
+| Unit | `node --test tests/unit/countdown-target.test.mjs` | 11 pass |
+| Build | `npm run build:all` | pass (first attempt failed: the new module touched `window` at import, fixed) |
+| Browser, subpath-desktop, 1 worker | `time-tools-enhancements.spec.js`, `countdown-timer.spec.js` | 42 pass (4 new tests) |
+| Browser, subpath-mobile | same two specs | 42 pass |
+| Axe | `site-a11y.spec.js -g countdown` desktop | 1 pass |
+
+Pins changed deliberately: `countdown-timer.spec.js` finish state now lists "Stop sound" (the reminder sounds); two date-mode assertions now state the clock format. Not run: other time tools; no real-audio check (a fake Web Audio counts tones), so audibility is manual.
+
 ## Carried forward (not re-run at f5a1df4)
 
 These ran on the working tree that was committed as `6b01b85`..`f5a1df4` (RELEASE-1 records HEAD `45fc888` plus 102 uncommitted entries, 5,597 insertions across 102 files, now in the three commits). That equivalence is inferred from the records and a clean tree; it was not proved by diffing a saved copy.

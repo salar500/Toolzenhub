@@ -18,6 +18,13 @@
 ========================================================= */
 
 import {
+    ALERT_SECONDS,
+    prepareSound,
+    startAlert,
+    stopAlert
+} from "./alert-sound.js";
+
+import {
     NAME_LIMIT,
     parseTarget,
     remainingAt,
@@ -135,7 +142,7 @@ export function dateModeMarkup() {
                                 ${fieldShell({
                                     id: "cd-zone",
                                     label: "Time zone",
-                                    hint: "Blank means this device's time zone.",
+                                    hint: "Starts as this device's time zone. Change it to count to a moment in another zone; blank also means this device.",
                                     control: `<input
                                     id="cd-zone"
                                     class="calculator-form__input"
@@ -150,6 +157,11 @@ export function dateModeMarkup() {
                             </div>
 
                             <datalist id="cd-zones"></datalist>
+
+                            <label class="ct-sound">
+                                <input type="checkbox" id="cd-sound" checked>
+                                <span>Play a reminder sound when the time is reached (about ${ALERT_SECONDS} seconds; Stop sound ends it)</span>
+                            </label>
 
                             <fieldset id="cd-choice" class="tt-choice cd-choice" hidden>
                                 <legend class="calculator-form__label">That time happens twice (the clocks go back)</legend>
@@ -175,6 +187,13 @@ export function dateModeMarkup() {
 
                             <p id="cd-event" class="tt-next"></p>
 
+                            <fieldset class="tt-choice cd-clock" id="cd-clock">
+                                <legend class="calculator-form__label">Show the event time as</legend>
+                                <label class="tt-check"><input type="radio" name="cd-clock" value="12"><span>12-hour (AM/PM)</span></label>
+                                <label class="tt-check"><input type="radio" name="cd-clock" value="24" checked><span>24-hour</span></label>
+                            </fieldset>
+
+
                             <p id="cd-status" class="tt-status-line"></p>
 
                         </div>
@@ -183,6 +202,7 @@ export function dateModeMarkup() {
                             <button type="submit" id="cd-start" class="calculator-form__button tt-timer-button">Start countdown</button>
                             <button type="button" id="cd-link" class="calculator-form__button calculator-form__button--secondary tt-timer-button" hidden>Copy link</button>
                             <button type="button" id="cd-reset" class="calculator-form__button calculator-form__button--secondary tt-timer-button" hidden>Reset</button>
+                            <button type="button" id="cd-stop-sound" class="calculator-form__button calculator-form__button--secondary tt-timer-button" hidden>Stop sound</button>
                         </div>
 
                         <p id="cd-link-status" class="tt-status" role="status" hidden></p>
@@ -194,6 +214,15 @@ export function dateModeMarkup() {
                 <p id="cd-live" class="tt-sr-only" role="status" aria-live="polite"></p>`;
 
 }
+
+const CURRENT_ZONE_NAME = {
+    "Asia/Calcutta": "Asia/Kolkata",
+    "Asia/Katmandu": "Asia/Kathmandu",
+    "Asia/Saigon": "Asia/Ho_Chi_Minh",
+    "Asia/Rangoon": "Asia/Yangon",
+    "Europe/Kiev": "Europe/Kyiv",
+    "America/Buenos_Aires": "America/Argentina/Buenos_Aires"
+};
 
 /* wire the mode switch and the date panel; returns nothing */
 export function initDateMode() {
@@ -224,6 +253,9 @@ export function initDateMode() {
     const resetButton = $("cd-reset");
     const linkStatus = $("cd-link-status");
     const setup = $("cd-setup");
+    const soundBox = $("cd-sound");
+    const stopSoundButton = $("cd-stop-sound");
+    const hour12 = () => form.querySelector("input[name='cd-clock']:checked").value === "12";
 
     const speaker = createAnnouncer($("cd-live"));
 
@@ -233,6 +265,27 @@ export function initDateMode() {
         $("cd-zones").innerHTML = listZones().map(zone => `<option value="${escapeHTML(zone)}"></option>`).join("");
     } catch {
         /* typing a zone still works */
+    }
+
+    /* the zone starts as this device's zone, so it is visible and a copied link names it */
+    try {
+
+        const reported = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+        /* some browsers still report an old name for a zone (Asia/Calcutta); show the current one when the engine knows it */
+        const device = CURRENT_ZONE_NAME[reported] && isValidZone(CURRENT_ZONE_NAME[reported]) ? CURRENT_ZONE_NAME[reported] : reported;
+
+        if (device && isValidZone(device) && !zoneInput.value) {
+            zoneInput.value = device;
+        }
+
+        /* the event line follows the device's 12 or 24 hour habit until the visitor chooses */
+        if (Intl.DateTimeFormat(undefined, { hour: "numeric" }).resolvedOptions().hour12) {
+            form.querySelector("input[name='cd-clock'][value='12']").checked = true;
+        }
+
+    } catch {
+        /* a blank zone still means this device */
     }
 
     let target = null;
@@ -317,6 +370,10 @@ export function initDateMode() {
 
             statusEl.textContent = left.totalSeconds === 0 ? "The time has been reached." : `The time was reached ${spokenParts(left)} ago.`;
 
+            if (interval !== null && soundBox.checked) {
+                stopSoundButton.hidden = !startAlert(() => { stopSoundButton.hidden = true; });
+            }
+
             stopLoop();
 
         } else {
@@ -371,6 +428,9 @@ export function initDateMode() {
 
     function begin({ focus = true } = {}) {
 
+        stopAlert();
+        prepareSound();
+
         clearErrors();
 
         const zone = zoneInput.value.trim();
@@ -417,7 +477,7 @@ export function initDateMode() {
 
         titleEl.textContent = nameInput.value.trim() || "Countdown";
 
-        eventEl.textContent = eventText(parsed.ms, parsed.zone) + (parsed.ambiguous ? ` (${choice() === "later" ? "the second" : "the first"} time it happens)` : "");
+        eventEl.textContent = eventText(parsed.ms, parsed.zone, hour12()) + (parsed.ambiguous ? ` (${choice() === "later" ? "the second" : "the first"} time it happens)` : "");
 
         setup.hidden = true;
         stage.hidden = false;
@@ -438,6 +498,8 @@ export function initDateMode() {
     }
 
     function reset() {
+
+        stopAlert();
 
         stopLoop();
 
@@ -470,6 +532,13 @@ export function initDateMode() {
     });
 
     resetButton.addEventListener("click", reset);
+    stopSoundButton.addEventListener("click", () => { stopAlert(); resetButton.focus(); });
+    soundBox.addEventListener("change", () => { if (!soundBox.checked) { stopAlert(); } });
+
+    /* the event line is rewritten at once when the clock format changes */
+    for (const radio of form.querySelectorAll("input[name='cd-clock']")) {
+        radio.addEventListener("change", () => { if (target) { eventEl.textContent = eventText(target.ms, target.zone, hour12()); } });
+    }
 
     form.addEventListener("input", (event) => {
 
@@ -550,7 +619,7 @@ export function initDateMode() {
                 /* a link to a moment that has passed shows that it has been reached */
                 target = parsed;
                 titleEl.textContent = nameInput.value.trim() || "Countdown";
-                eventEl.textContent = eventText(parsed.ms, parsed.zone);
+                eventEl.textContent = eventText(parsed.ms, parsed.zone, hour12());
                 setup.hidden = true;
                 stage.hidden = false;
                 startButton.hidden = true;

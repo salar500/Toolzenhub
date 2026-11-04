@@ -141,13 +141,16 @@ export function remainingAt(targetMs, nowMs) {
 }
 
 /* "Friday, 25 December 2026, 09:30 GMT (UTC+00:00)" */
-export function eventText(ms, zone) {
+export function eventText(ms, zone, hour12 = false) {
 
     const d = describeInZone(ms, zone);
 
-    return `${d.dateLabel}, ${d.time} ${d.abbr} (${d.offset})`.replace(/\s+/g, " ");
+    return `${d.dateLabel}, ${hour12 ? formatClock12(d.h, d.mi) : d.time} ${d.abbr} (${d.offset})`.replace(/\s+/g, " ");
 
 }
+
+/* 9:30 AM, 12:00 PM, 12:05 AM */
+const formatClock12 = (h, mi) => `${h % 12 === 0 ? 12 : h % 12}:${String(mi).padStart(2, "0")} ${h < 12 ? "AM" : "PM"}`;
 
 const pad2 = (n) => String(n).padStart(2, "0");
 

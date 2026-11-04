@@ -43,7 +43,7 @@ test.describe("Countdown Timer", () => {
     expect(await buttonsShown(page)).toEqual(["Start"]);
     await expect(page.locator("#ct-stage")).toBeHidden();
     await expect(page.getByRole("group", { name: "Quick presets" }).getByRole("button")).toHaveText(["1 min", "5 min", "10 min", "25 min", "30 min", "60 min"]);
-    await expect(page.getByLabel("Play a short sound when the timer finishes")).toBeChecked();
+    await expect(page.getByLabel("Play a reminder sound when the timer finishes")).toBeChecked();
     await expect(page.locator(".related-section")).toHaveCount(0);
     expectClean(watch);
   });
@@ -83,7 +83,7 @@ test.describe("Countdown Timer", () => {
     await expect(panel(page)).toHaveAttribute("data-state", "finished");
     await expect(display(page)).toHaveText("00:00");
     await expect(page.locator("#ct-status")).toHaveText("Timer complete");
-    expect(await buttonsShown(page)).toEqual(["Restart", "Reset"]);
+    expect(await buttonsShown(page)).toEqual(["Restart", "Reset", "Stop sound"]); // the reminder is sounding
     await expect(page).toHaveTitle(title); // the original title is back
     await page.clock.runFor(100); // fires the 50 ms announcement timer
     await expect(page.locator("#ct-live")).toHaveText("Timer complete.");
