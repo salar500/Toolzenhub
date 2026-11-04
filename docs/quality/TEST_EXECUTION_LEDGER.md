@@ -96,6 +96,17 @@ New lab: own tokenizer, parser and evaluator (no eval, no library), 55 exercises
 | DOM and SEO baselines | regenerated; diff reviewed: one new directory card, counts 6 to 7, one new page entry, small text-length changes on two pages |
 | Not run | subpath-mobile and root-desktop for the new lab; full browser suite; visual spec (see ledger rules 10.7) |
 
+## Q3-16 (Phase 6, Power BI Practice Lab), base `bfc450c` plus uncommitted change
+
+New lab: own query-step engine, relationship checker and DAX subset (no eval, no library), 43 exercises, 13 lessons with 15 editable examples, a report preview and a 33-card deck. Expected values come from a separate Python script and hand-worked cases. Not compared with Power BI Desktop; no second reviewer (T-15).
+
+| Evidence | Result |
+|---|---|
+| Unit suite | 3,825 pass, 0 fail, 4 skipped, run before `power-bi-lessons.test.mjs` was added; that file passes 6/6 alone |
+| `power-bi-practice-lab.spec.js`, subpath-desktop | 24 passed: all 43 solutions on the real page, lesson examples, report preview, axe in six states, layout at 320/390/820/1180 |
+| `navigation`, `smart-flashcards`, `dom-baseline`, `seo-baseline`, subpath-desktop | passed after baseline regeneration; diffs reviewed: new directory card, counts 7 to 8, EMI loan slider attributes, one new page entry, small text-length changes |
+| Not run | subpath-mobile and root-desktop for the new lab; full browser suite; visual spec |
+
 ## Carried forward (not re-run at f5a1df4)
 
 These ran on the working tree that was committed as `6b01b85`..`f5a1df4` (RELEASE-1 records HEAD `45fc888` plus 102 uncommitted entries, 5,597 insertions across 102 files, now in the three commits). That equivalence is inferred from the records and a clean tree; it was not proved by diffing a saved copy.

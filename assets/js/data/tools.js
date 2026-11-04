@@ -2407,6 +2407,41 @@ const catalog = [
     },
 
     {
+        id: "power-bi-practice-lab",
+        status: "published",
+        loader: () =>
+            import("../tools/power-bi-practice-lab/index.js"),
+        sectionId: "practice-labs",
+        icon: "📊",
+        title: "Power BI Practice Lab",
+        description:
+            "Learn the path from raw data to a report: thirteen lessons, forty-three exercises and a sales project on cleaning data with query steps, building a star-schema model and writing DAX measures. An educational simulation, not Power BI. It runs in your browser: nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: ["sql-practice-lab", "excel-practice-lab", "smart-flashcards"],
+        aliases: [
+            "power bi practice",
+            "learn power bi",
+            "dax practice",
+            "power query practice",
+            "power bi exercises",
+            "data modelling practice"
+        ],
+        capabilities: {
+            examples: true,
+            explanation: true,
+            localProcessing: true,
+            reset: true,
+            validation: true
+        },
+        seo: {
+            title:
+                "Power BI Practice Lab: Learn DAX, Power Query and Modelling | ToolZen Hub",
+            description:
+                "Learn and practise Power BI skills: 13 lessons and 43 exercises on cleaning data with query steps, star-schema modelling and DAX measures, plus a sales project. A learning simulation that runs in your browser."
+        }
+    },
+
+    {
         id: "list-comparer",
         status: "published",
         loader: () =>

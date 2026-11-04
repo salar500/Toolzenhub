@@ -9,6 +9,7 @@ Carried from `docs/release-readiness-checkpoint.md` (2026-10-29) and the QC reco
 | T-3 | Google Fonts and Unsplash are external requests | P1 for production privacy wording | Not re-verified; decide to self-host or disclose |
 | T-4 | Loan Comparison slider target size was 18 px | P2 | Not re-verified; shared sliders were reworked in later commits (`45fc888`), so measure again before acting |
 | T-5 | Five tools had no related-tools list (`ppf`, `profit`, `margin`, `date-difference`, `image-compressor-resizer`) | P2 | Not re-verified; later curated lists may have fixed some |
+| T-15 | The SQL, Excel and Power BI labs and their three flashcard decks have had no second reviewer, and the Excel and Power BI engines were never compared with Microsoft Excel or Power BI Desktop (expected values come from separate Python scripts and hand-worked values) | P1 before claiming independent validation | Open; each set keeps "No second reviewer yet" in its review record and on its page |
 | T-6 | Topic-level flashcard deck links not built | P3 | Open |
 | T-7 | No performance measurement of the newer pages (Lighthouse is informational and was last baselined earlier) | P2 | Open; no performance claim is made |
 | T-8 | No screen-reader, Firefox, WebKit or real-device testing | P1 | Open; automated axe is clean on 126 pages at 390, 820 and 1280 px, which is not a WCAG compliance claim |

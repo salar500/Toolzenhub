@@ -48,7 +48,8 @@ export const DECKS = [
     { id: "http-apis", title: "HTTP and APIs", cardCount: 28, load: () => import("./decks/http-apis.js") },
     { id: "software-testing", title: "Software Testing", cardCount: 29, load: () => import("./decks/software-testing.js") },
     { id: "sql", title: "SQL", cardCount: 30, load: () => import("./decks/sql.js") },
-    { id: "excel", title: "Excel formulas", cardCount: 31, load: () => import("./decks/excel.js") }
+    { id: "excel", title: "Excel formulas", cardCount: 31, load: () => import("./decks/excel.js") },
+    { id: "power-bi", title: "Power BI", cardCount: 33, load: () => import("./decks/power-bi.js") }
 ];
 
 const DIFFICULTY_LABEL = { beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced" };

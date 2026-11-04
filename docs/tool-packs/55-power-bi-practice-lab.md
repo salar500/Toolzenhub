@@ -82,4 +82,13 @@ Add a function by adding it to the engine, the supported-function list on the pa
 
 ## Implementation record
 
-(Appended when built.)
+Built 2026-11-04 (local commit recorded in the ledger). As specified, with these differences and counts:
+
+- Exercises: 43 (21 query-step, 5 model, 14 DAX and 3 project stages: clean the orders, clean the customers, and a reconciliation measure); the brief figure of about 50 was not reached and the deck covers visuals instead of exercises.
+- Lessons: 13, with 15 runnable examples. Flashcards: 33 cards in 6 topics.
+- DAX subset as listed in section 3 except USERELATIONSHIP (not supported, stated on the page) and KEEPFILTERS. COUNTX, MAXX, MINX, AVERAGEX, SUMX, SELECTEDVALUE, HASONEVALUE, DATEADD (MONTH, YEAR), PREVIOUSMONTH, DATESYTD and TOTALYTD are implemented. A measure is evaluated in the filter context of the exercise's tested contexts (7 for most, 7 for the time-intelligence ones).
+- Time-intelligence functions replace all filters on the date table, which is how Power BI behaves with a marked date table.
+- The report preview (chart and table for a chosen measure and grouping) replaces the report canvas; report design is practised by flashcards and lessons only.
+- Not done: row-level security, bidirectional filtering, many-to-many, calculation groups (stated on the page).
+- Independence of the check: expected values from `pbi_gen.py` (plain Python, scratchpad), engine behaviour pinned by `tests/unit/power-bi-engines.test.mjs` (hand-worked on the Sakhi Stores data) and lesson results by `power-bi-lessons.test.mjs`.
+- Not independently reviewed; never compared with Power BI Desktop.

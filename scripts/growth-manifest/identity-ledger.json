@@ -600,6 +600,13 @@
       "state": "active"
     },
     {
+      "id": "power-bi-practice-lab",
+      "module": "assets/js/tools/power-bi-practice-lab/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "ppf",
       "module": "assets/js/calculators/ppf/index.js",
       "moduleChanges": [],

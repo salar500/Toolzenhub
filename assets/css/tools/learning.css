@@ -875,3 +875,21 @@
     gap: 8px;
     min-width: 0;
 }
+
+/* Power BI Practice Lab: the report preview chart. Colours come from the theme tokens so the chart follows dark mode. */
+.lx-chart {
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+}
+
+.lx-chart__bar {
+    fill: var(--color-primary);
+}
+
+.lx-chart__label,
+.lx-chart__value {
+    fill: var(--color-ink);
+    font-size: 13px;
+}

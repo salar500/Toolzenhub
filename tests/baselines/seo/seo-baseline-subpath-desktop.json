@@ -5104,7 +5104,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2786
+      "visibleTextChars": 3089
     }
   },
   "/privacy.html": {
@@ -5331,7 +5331,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 14598
+      "visibleTextChars": 14899
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -5527,7 +5527,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3951
+      "visibleTextChars": 3973
     }
   },
   "/tools/cron-expression-explainer/": {
@@ -5723,7 +5723,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 23824
+      "visibleTextChars": 23846
     }
   },
   "/tools/hours-calculator/": {
@@ -6017,7 +6017,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3731
+      "visibleTextChars": 3753
     }
   },
   "/tools/json-formatter/": {
@@ -6115,7 +6115,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3816
+      "visibleTextChars": 3838
     }
   },
   "/tools/jsonpath-tester/": {
@@ -6559,6 +6559,55 @@
       "visibleTextChars": 4470
     }
   },
+  "/tools/power-bi-practice-lab/": {
+    "runtime": {
+      "title": "Power BI Practice Lab: Learn DAX, Power Query and Modelling | ToolZen Hub",
+      "description": "Learn and practise Power BI skills: 13 lessons and 43 exercises on cleaning data with query steps, star-schema modelling and DAX measures, plus a sales project. A learning simulation that runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/power-bi-practice-lab/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Learn and practise Power BI skills: 13 lessons and 43 exercises on cleaning data with query steps, star-schema modelling and DAX measures, plus a sales project. A learning simulation that runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Power BI Practice Lab: Learn DAX, Power Query and Modelling | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/power-bi-practice-lab/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Learn and practise Power BI skills: 13 lessons and 43 exercises on cleaning data with query steps, star-schema modelling and DAX measures, plus a sales project. A learning simulation that runs in your browser.",
+        "twitter:title": "Power BI Practice Lab: Learn DAX, Power Query and Modelling | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Power BI Practice Lab"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Power BI Practice Lab: Learn DAX, Power Query and Modelling | ToolZen Hub",
+      "description": "Learn and practise Power BI skills: 13 lessons and 43 exercises on cleaning data with query steps, star-schema modelling and DAX measures, plus a sales project. A learning simulation that runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/power-bi-practice-lab/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 25443
+    }
+  },
   "/tools/shift-planner/": {
     "runtime": {
       "title": "Shift Schedule Planner: Calendar for Rotating Shift Patterns | ToolZen Hub",
@@ -6654,7 +6703,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3927
+      "visibleTextChars": 3949
     }
   },
   "/tools/split-pdf/": {
@@ -6752,7 +6801,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 30234
+      "visibleTextChars": 30256
     }
   },
   "/tools/stopwatch/": {
@@ -6850,7 +6899,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4528
+      "visibleTextChars": 4550
     }
   },
   "/tools/text-diff/": {

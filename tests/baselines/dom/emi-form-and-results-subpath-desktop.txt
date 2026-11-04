@@ -18,8 +18,9 @@ form#emi-form.calculator-form
       div.calculator-form__group
         label.calculator-form__label [for="emi-loan"] "Loan Amount"
         div.calculator-form__field.calculator-form__field--unit
-          input#emi-loan.calculator-form__input [aria-describedby="emi-loan-hint" max="100000000" min="1000" required step="any" type="number" value="1000000"]
+          input#emi-loan.calculator-form__input [aria-describedby="emi-loan-hint" data-slider-max="50000000" data-slider-min="100000" data-slider-ready="true" data-slider-step="50000" max="100000000" min="1000" required step="any" type="number" value="1000000"]
           span.calculator-form__unit "₹"
+        input.calculator-form__slider [aria-hidden="true" data-slider-for="emi-loan" max="50000000" min="100000" step="50000" type="range"]
         span#emi-loan-hint.calculator-form__help "Enter the total loan amount."
     div.emi-field [data-modes="emi tenure"]
       div.calculator-form__group
