@@ -21,6 +21,8 @@
      no storage and no analytics call carrying the text.
 ========================================================= */
 
+import { attachLineNumbers } from "../../ui/line-gutter.js";
+
 import {
     analyze,
     INDENTS,
@@ -579,6 +581,8 @@ export function init() {
 
     const input = document.querySelector("#jf-input");
     const output = document.querySelector("#jf-output");
+    const inputLines = attachLineNumbers(input);
+    attachLineNumbers(output);
     const count = document.querySelector("#jf-count");
     const hint = document.querySelector("#jf-hint");
     const statusText = document.querySelector("#jf-status-text");
@@ -654,6 +658,7 @@ export function init() {
         errorBox.dataset.stale = "false";
 
         input.removeAttribute("aria-invalid");
+        inputLines.markLine(null);
         input.removeAttribute("aria-describedby");
         input.setAttribute("aria-describedby", "jf-hint");
 
@@ -723,6 +728,7 @@ export function init() {
         errorBox.hidden = false;
 
         input.setAttribute("aria-invalid", "true");
+        inputLines.markLine(error.line);
         input.setAttribute("aria-describedby", "jf-hint jf-error-message jf-error-where");
 
     }

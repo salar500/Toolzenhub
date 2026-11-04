@@ -592,6 +592,7 @@
       "/assets/css/calculators/calculator-form.css",
       "/assets/css/calculators/calculator-results.css",
       "/assets/css/calculators/calculator-responsive.css",
+      "/assets/css/components/line-gutter.css",
       "/assets/css/tools/json-formatter.css"
     ]
   },
@@ -800,6 +801,7 @@
       "/assets/css/calculators/calculator-form.css",
       "/assets/css/calculators/calculator-results.css",
       "/assets/css/calculators/calculator-responsive.css",
+      "/assets/css/components/line-gutter.css",
       "/assets/css/tools/json-compare.css"
     ]
   },

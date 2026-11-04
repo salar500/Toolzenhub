@@ -111,6 +111,9 @@
 .jc-input {
     min-height: 96px;
     resize: vertical;
+    white-space: pre;
+    overflow: auto;
+    overflow-wrap: normal;
 }
 
 .jc-line {

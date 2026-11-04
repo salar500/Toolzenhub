@@ -1,0 +1,83 @@
+/* Line numbers drawn inside a plain textarea (assets/js/ui/line-gutter.js). The box does not wrap, so one number is one line. */
+
+.line-field {
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+}
+
+.line-field > textarea.has-line-numbers {
+
+    flex: 1;
+
+    padding-left: calc(var(--lg-width, 3ch) + 10px);
+
+    white-space: pre;
+    overflow: auto;
+    overflow-wrap: normal;
+
+}
+
+.line-field__gutter {
+
+    position: absolute;
+    top: 1px;
+    bottom: 1px;
+    left: 1px;
+
+    width: var(--lg-width, 3ch);
+
+    overflow: hidden;
+
+    border-radius: 11px 0 0 11px;
+    border-right: 1px solid var(--line-control);
+
+    background: var(--surface-page);
+
+    color: var(--ink-muted);
+
+    pointer-events: none;
+    user-select: none;
+
+}
+
+.line-field__inner {
+
+    position: relative;
+
+}
+
+.line-field__numbers {
+
+    margin: 0;
+    padding: calc(var(--lg-top, 12px) - 1px) 10px 0 0;
+
+    font-family: var(--lg-font, monospace);
+    font-size: var(--lg-size, 14px);
+    line-height: var(--lg-line, 1.55);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+
+}
+
+.line-field__mark {
+
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    height: var(--lg-line, 1.55em);
+
+    background: var(--state-error);
+    opacity: 0.16;
+
+}
+
+.line-field__mark:not([hidden]) + .line-field__numbers {
+
+    font-weight: 600;
+
+}

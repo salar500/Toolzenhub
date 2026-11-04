@@ -19,6 +19,8 @@
      logging of the input.
 ========================================================= */
 
+import { attachLineNumbers } from "../../ui/line-gutter.js";
+
 import {
     compareJson,
     summaryText,
@@ -86,6 +88,7 @@ function paneMarkup(side) {
                                 id="jc-${side.key}"
                                 class="jc-input"
                                 rows="10"
+                                wrap="off"
                                 spellcheck="false"
                                 autocomplete="off"
                                 autocapitalize="off"
@@ -322,6 +325,7 @@ export function init() {
     const live = $("live");
     const inputs = { first: $("first"), second: $("second") };
     const order = $("order");
+    const gutters = { first: attachLineNumbers(inputs.first), second: attachLineNumbers(inputs.second) };
 
     let announceTimer = null;
     let debounce = null;
@@ -359,6 +363,7 @@ export function init() {
             context.hidden = true;
             context.textContent = "";
             inputs[side.key].removeAttribute("aria-invalid");
+            gutters[side.key].markLine(null);
             inputs[side.key].setAttribute("aria-describedby", `jc-${side.key}-status`);
         }
     }
@@ -381,6 +386,7 @@ export function init() {
 
         context.hidden = true;
         input.removeAttribute("aria-invalid");
+        gutters[side.key].markLine(null);
         input.setAttribute("aria-describedby", `jc-${side.key}-status`);
 
         if (info.status === "valid") {
@@ -397,6 +403,7 @@ export function init() {
 
         status.dataset.state = "invalid";
         input.setAttribute("aria-invalid", "true");
+        gutters[side.key].markLine(info.error?.line);
 
         let message;
 
