@@ -64,6 +64,10 @@ Unit: `json-suggested-fix.test.mjs` 12 pass; full unit suite run once because th
 
 Static layer re-run on the final tree: `build:all`, links, assets, SEO, inventory all exit 0. `smoke.spec.js` subpath-desktop (every live page: status, title, images, console and network errors; shared `header.js` changed in WP1a): 143 pass. Not run at this checkpoint: the full unit suite after the CSS default fix (design-tokens re-run alone, 9 pass; the last full run was 3,718 pass, 1 fail since fixed, 4 skipped), the mobile and root projects for the whole site, the axe sweep of all 126 pages, visual baselines. These are the release-checkpoint items in `RELEASE_LEDGER.md`.
 
+## Q3-10 (Phase C, Practice Labs as a section), base `9dc8987` plus uncommitted change
+
+Shared catalog change (sections, tool `sectionId`, icons, directory pages), so consumers were tested. Unit: full suite 3,723 tests, 3,719 pass, 0 fail, 4 skipped after six stale section pins were updated deliberately. Static: `build:all`, links, assets, SEO, inventory exit 0 (126 pages, URLs unchanged). Browser subpath-desktop: `navigation` (+1 new test), `developer-tools-related` (+5 new), `smart-flashcards`, `dom-baseline`, `links`, `seo-baseline`, `learning-a11y` all pass after pins and baselines were updated; axe and 820 px sweeps for the hub, developer-tools, home and categories pass; subpath-mobile `navigation`, `developer-tools-related`, `smart-flashcards` 89 pass; root-desktop `navigation` 7 pass. Baselines accepted after diffing: DOM footer, home and tools-directory (Practice Labs link, card, rail row and group; Developer Tools 17 to 12), links (+1 internal link per page, +3 on Home), SEO (visibleTextChars only). Not run: `learning-widths`, `learning-resilience` (layout unchanged), visual baselines.
+
 ## Carried forward (not re-run at f5a1df4)
 
 These ran on the working tree that was committed as `6b01b85`..`f5a1df4` (RELEASE-1 records HEAD `45fc888` plus 102 uncommitted entries, 5,597 insertions across 102 files, now in the three commits). That equivalence is inferred from the records and a clean tree; it was not proved by diffing a saved copy.

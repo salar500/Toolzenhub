@@ -49,7 +49,7 @@ test.describe("Smart Flashcards", () => {
     await open(page, go);
     await expect(page.locator("h1")).toHaveText("Smart Flashcards");
     const labels = (await page.locator(".calculator-breadcrumb").locator("a, strong").allInnerTexts()).map((t) => t.trim());
-    expect(labels).toEqual(["Home", "Developer Tools", "Smart Flashcards"]);
+    expect(labels).toEqual(["Home", "Practice Labs", "Smart Flashcards"]);
     await expect(page.getByRole("heading", { name: "Choose a deck" })).toBeVisible();
     await expect(page.getByText("30 cards")).toBeVisible();
     await expect(page.getByText("28 cards")).toBeVisible();

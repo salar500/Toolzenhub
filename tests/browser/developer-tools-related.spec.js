@@ -18,10 +18,14 @@ const RELATED = {
   "list-comparer": ["text-diff", "json-compare"],
   "uuid-generator": ["base64-encoder-decoder", "jwt-decoder"],
   "json-csv-converter": ["json-formatter", "json-compare"],
-  "smart-flashcards": ["json-formatter", "jsonpath-tester", "json-error-fixing-lab", "test-design-lab"],
-  "json-error-fixing-lab": ["json-formatter", "smart-flashcards"],
-  "jsonpath-challenge-lab": ["jsonpath-tester", "smart-flashcards"],
-  "cron-challenge-lab": ["cron-explainer", "smart-flashcards"],
+};
+
+// The labs and flashcards moved to their own section, Practice Labs (2026-11-04); related lists stay inside one section (rule 4.2).
+const LAB_RELATED = {
+  "smart-flashcards": ["json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab"],
+  "json-error-fixing-lab": ["smart-flashcards", "jsonpath-challenge-lab"],
+  "jsonpath-challenge-lab": ["smart-flashcards", "json-error-fixing-lab"],
+  "cron-challenge-lab": ["smart-flashcards", "test-design-lab"],
   "test-design-lab": ["smart-flashcards", "json-error-fixing-lab"]
 };
 
@@ -50,6 +54,18 @@ test.describe("Developer Tools related-tools pilot", () => {
       for (const h of hrefs) expect(h).not.toMatch(/[?#]/);
       // the section is the last block of the page and there is no related-articles block
       await expect(page.locator(".related-articles-section, .related-articles")).toHaveCount(0);
+    });
+  }
+
+  for (const [id, expected] of Object.entries(LAB_RELATED)) {
+    test(`${id}: Related Practice Labs lists exactly its curated labs, in order, with a View all link to the hub`, async ({ page, go }) => {
+      await go(`tools/${id}/`);
+      const section = page.locator(".related-section");
+      await expect(section).toHaveCount(1);
+      await expect(section.locator("h2")).toHaveText("Related Practice Labs");
+      const hrefs = await section.locator(".related-calculator-card").evaluateAll((as) => as.map((a) => a.getAttribute("href")));
+      expect(hrefs.map((h) => h.replace(/\/$/, "").split("/").pop())).toEqual(expected);
+      await expect(section.getByRole("link", { name: /View all/ })).toHaveAttribute("href", /practice-labs\.html$/);
     });
   }
 

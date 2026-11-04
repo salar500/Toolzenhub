@@ -66,7 +66,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 0,
-      "visibleTextChars": 410
+      "visibleTextChars": 424
     }
   },
   "/about.html": {
@@ -106,7 +106,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 2870
+      "visibleTextChars": 2884
     }
   },
   "/articles.html": {
@@ -146,7 +146,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 0,
-      "visibleTextChars": 410
+      "visibleTextChars": 424
     }
   },
   "/articles/balance-transfer/balance-transfer-vs-prepayment/": {
@@ -221,7 +221,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6912
+      "visibleTextChars": 6926
     }
   },
   "/articles/balance-transfer/is-a-loan-balance-transfer-worth-it/": {
@@ -296,7 +296,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8296
+      "visibleTextChars": 8310
     }
   },
   "/articles/business/roi-vs-profit-whats-the-difference/": {
@@ -371,7 +371,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5988
+      "visibleTextChars": 6002
     }
   },
   "/articles/cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr/": {
@@ -446,7 +446,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6518
+      "visibleTextChars": 6532
     }
   },
   "/articles/cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate/": {
@@ -521,7 +521,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6261
+      "visibleTextChars": 6275
     }
   },
   "/articles/converter/easy-unit-conversion-guide/": {
@@ -596,7 +596,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5141
+      "visibleTextChars": 5155
     }
   },
   "/articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison/": {
@@ -671,7 +671,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6346
+      "visibleTextChars": 6360
     }
   },
   "/articles/fd/how-compounding-frequency-changes-an-fd-maturity/": {
@@ -746,7 +746,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6632
+      "visibleTextChars": 6646
     }
   },
   "/articles/gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways/": {
@@ -821,7 +821,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5737
+      "visibleTextChars": 5751
     }
   },
   "/articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates/": {
@@ -896,7 +896,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5586
+      "visibleTextChars": 5600
     }
   },
   "/articles/health/how-to-calculate-your-daily-calorie-needs/": {
@@ -971,7 +971,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5353
+      "visibleTextChars": 5367
     }
   },
   "/articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/": {
@@ -1046,7 +1046,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5019
+      "visibleTextChars": 5033
     }
   },
   "/articles/home-loan/how-much-home-loan-fits-your-emi-budget/": {
@@ -1121,7 +1121,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6455
+      "visibleTextChars": 6469
     }
   },
   "/articles/home-loan/longer-tenure-bigger-loan-much-more-interest/": {
@@ -1196,7 +1196,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5930
+      "visibleTextChars": 5944
     }
   },
   "/articles/loan-comparison/choose-right-loan-tenure/": {
@@ -1271,7 +1271,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6707
+      "visibleTextChars": 6721
     }
   },
   "/articles/loan-comparison/emi-vs-total-interest/": {
@@ -1346,7 +1346,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5981
+      "visibleTextChars": 5995
     }
   },
   "/articles/loan-comparison/fixed-vs-floating-interest-rates/": {
@@ -1421,7 +1421,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6798
+      "visibleTextChars": 6812
     }
   },
   "/articles/loan-comparison/how-to-reduce-home-loan-interest/": {
@@ -1496,7 +1496,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5392
+      "visibleTextChars": 5406
     }
   },
   "/articles/loan-comparison/loan-tenure-total-interest/": {
@@ -1571,7 +1571,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6258
+      "visibleTextChars": 6272
     }
   },
   "/articles/loan-comparison/what-is-loan-prepayment/": {
@@ -1646,7 +1646,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6889
+      "visibleTextChars": 6903
     }
   },
   "/articles/loan-prepayment/early-vs-late-loan-prepayment/": {
@@ -1721,7 +1721,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6378
+      "visibleTextChars": 6392
     }
   },
   "/articles/loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment/": {
@@ -1796,7 +1796,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7843
+      "visibleTextChars": 7857
     }
   },
   "/articles/margin/margin-vs-markup/": {
@@ -1871,7 +1871,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6017
+      "visibleTextChars": 6031
     }
   },
   "/articles/margin/price-a-product-for-a-target-margin/": {
@@ -1946,7 +1946,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6110
+      "visibleTextChars": 6124
     }
   },
   "/articles/margin/what-a-discount-really-costs-you/": {
@@ -2021,7 +2021,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6119
+      "visibleTextChars": 6133
     }
   },
   "/articles/math/how-to-calculate-percentage-easily/": {
@@ -2096,7 +2096,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6185
+      "visibleTextChars": 6199
     }
   },
   "/articles/percentage/how-to-find-the-original-price-before-a-percentage-change/": {
@@ -2171,7 +2171,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5303
+      "visibleTextChars": 5317
     }
   },
   "/articles/percentage/percent-vs-percentage-points/": {
@@ -2246,7 +2246,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5103
+      "visibleTextChars": 5117
     }
   },
   "/articles/percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back/": {
@@ -2321,7 +2321,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5542
+      "visibleTextChars": 5556
     }
   },
   "/articles/profit/how-to-find-your-break-even-point/": {
@@ -2396,7 +2396,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5882
+      "visibleTextChars": 5896
     }
   },
   "/articles/profit/price-cost-or-volume-which-matters-most/": {
@@ -2471,7 +2471,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5969
+      "visibleTextChars": 5983
     }
   },
   "/articles/profit/units-needed-for-a-target-profit/": {
@@ -2546,7 +2546,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5698
+      "visibleTextChars": 5712
     }
   },
   "/articles/sip/how-a-sip-grows/": {
@@ -2621,7 +2621,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6399
+      "visibleTextChars": 6413
     }
   },
   "/articles/sip/how-much-sip-do-you-need-for-a-goal/": {
@@ -2696,7 +2696,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6103
+      "visibleTextChars": 6117
     }
   },
   "/articles/sip/how-return-assumptions-change-a-sip-projection/": {
@@ -2771,7 +2771,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5783
+      "visibleTextChars": 5797
     }
   },
   "/articles/sip/step-up-sip-explained/": {
@@ -2846,7 +2846,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6073
+      "visibleTextChars": 6087
     }
   },
   "/articles/swp/how-a-systematic-withdrawal-plan-works/": {
@@ -2921,7 +2921,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 9049
+      "visibleTextChars": 9063
     }
   },
   "/articles/swp/what-changes-how-long-a-corpus-lasts/": {
@@ -2993,7 +2993,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7655
+      "visibleTextChars": 7669
     }
   },
   "/business.html": {
@@ -3042,7 +3042,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1074
+      "visibleTextChars": 1088
     }
   },
   "/calculators.html": {
@@ -3082,7 +3082,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 842
+      "visibleTextChars": 856
     }
   },
   "/calculators/age/": {
@@ -3131,7 +3131,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3872
+      "visibleTextChars": 3886
     }
   },
   "/calculators/balance-transfer/": {
@@ -3180,7 +3180,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7140
+      "visibleTextChars": 7154
     }
   },
   "/calculators/bmi/": {
@@ -3229,7 +3229,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3929
+      "visibleTextChars": 3943
     }
   },
   "/calculators/bmr/": {
@@ -3278,7 +3278,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3525
+      "visibleTextChars": 3539
     }
   },
   "/calculators/cagr/": {
@@ -3327,7 +3327,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6832
+      "visibleTextChars": 6846
     }
   },
   "/calculators/calorie/": {
@@ -3376,7 +3376,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3727
+      "visibleTextChars": 3741
     }
   },
   "/calculators/credit-card-payoff/": {
@@ -3425,7 +3425,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7379
+      "visibleTextChars": 7393
     }
   },
   "/calculators/emi/": {
@@ -3474,7 +3474,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4611
+      "visibleTextChars": 4625
     }
   },
   "/calculators/fd/": {
@@ -3523,7 +3523,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7244
+      "visibleTextChars": 7258
     }
   },
   "/calculators/gratuity/": {
@@ -3572,7 +3572,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3705
+      "visibleTextChars": 3719
     }
   },
   "/calculators/gst/": {
@@ -3621,7 +3621,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5905
+      "visibleTextChars": 5919
     }
   },
   "/calculators/home-loan/": {
@@ -3670,7 +3670,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6275
+      "visibleTextChars": 6289
     }
   },
   "/calculators/income-tax/": {
@@ -3719,7 +3719,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 9185
+      "visibleTextChars": 9199
     }
   },
   "/calculators/interest/": {
@@ -3768,7 +3768,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4725
+      "visibleTextChars": 4739
     }
   },
   "/calculators/loan-comparison/": {
@@ -3817,7 +3817,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4592
+      "visibleTextChars": 4606
     }
   },
   "/calculators/loan-eligibility/": {
@@ -3866,7 +3866,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4963
+      "visibleTextChars": 4977
     }
   },
   "/calculators/margin/": {
@@ -3915,7 +3915,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6437
+      "visibleTextChars": 6451
     }
   },
   "/calculators/percentage/": {
@@ -3964,7 +3964,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5754
+      "visibleTextChars": 5768
     }
   },
   "/calculators/personal-loan/": {
@@ -4013,7 +4013,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4880
+      "visibleTextChars": 4894
     }
   },
   "/calculators/ppf/": {
@@ -4062,7 +4062,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 10912
+      "visibleTextChars": 10926
     }
   },
   "/calculators/prepayment/": {
@@ -4111,7 +4111,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6150
+      "visibleTextChars": 6164
     }
   },
   "/calculators/profit/": {
@@ -4160,7 +4160,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6196
+      "visibleTextChars": 6210
     }
   },
   "/calculators/ratio/": {
@@ -4209,7 +4209,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3973
+      "visibleTextChars": 3987
     }
   },
   "/calculators/risk-reward/": {
@@ -4258,7 +4258,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5393
+      "visibleTextChars": 5407
     }
   },
   "/calculators/roi/": {
@@ -4307,7 +4307,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4142
+      "visibleTextChars": 4156
     }
   },
   "/calculators/salary-in-hand/": {
@@ -4356,7 +4356,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8275
+      "visibleTextChars": 8289
     }
   },
   "/calculators/sip/": {
@@ -4405,7 +4405,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7536
+      "visibleTextChars": 7550
     }
   },
   "/calculators/swp/": {
@@ -4454,7 +4454,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7470
+      "visibleTextChars": 7484
     }
   },
   "/calculators/unit-converter/": {
@@ -4503,7 +4503,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4335
+      "visibleTextChars": 4349
     }
   },
   "/calculators/xirr/": {
@@ -4552,7 +4552,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6922
+      "visibleTextChars": 6936
     }
   },
   "/categories.html": {
@@ -4592,7 +4592,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 539
+      "visibleTextChars": 553
     }
   },
   "/contact.html": {
@@ -4632,7 +4632,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 789
+      "visibleTextChars": 803
     }
   },
   "/converter.html": {
@@ -4681,7 +4681,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 785
+      "visibleTextChars": 799
     }
   },
   "/developer-tools.html": {
@@ -4730,7 +4730,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4407
+      "visibleTextChars": 3180
     }
   },
   "/disclaimer.html": {
@@ -4770,7 +4770,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 1733
+      "visibleTextChars": 1747
     }
   },
   "/health.html": {
@@ -4819,7 +4819,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 982
+      "visibleTextChars": 996
     }
   },
   "/image-tools.html": {
@@ -4868,7 +4868,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 983
+      "visibleTextChars": 997
     }
   },
   "/investment.html": {
@@ -4917,7 +4917,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2141
+      "visibleTextChars": 2155
     }
   },
   "/loans.html": {
@@ -4957,7 +4957,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 666
+      "visibleTextChars": 680
     }
   },
   "/math.html": {
@@ -5006,7 +5006,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1012
+      "visibleTextChars": 1026
     }
   },
   "/pdf-tools.html": {
@@ -5055,7 +5055,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1176
+      "visibleTextChars": 1190
     }
   },
   "/practice-labs.html": {
@@ -5104,7 +5104,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2170
+      "visibleTextChars": 2174
     }
   },
   "/privacy.html": {
@@ -5144,7 +5144,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 3362
+      "visibleTextChars": 3376
     }
   },
   "/tax.html": {
@@ -5193,7 +5193,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1525
+      "visibleTextChars": 1539
     }
   },
   "/terms.html": {
@@ -5233,7 +5233,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 1843
+      "visibleTextChars": 1857
     }
   },
   "/time-tools.html": {
@@ -5282,7 +5282,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2810
+      "visibleTextChars": 2824
     }
   },
   "/tools.html": {
@@ -5331,7 +5331,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 13857
+      "visibleTextChars": 13990
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -5380,7 +5380,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5446
+      "visibleTextChars": 5460
     }
   },
   "/tools/business-days/": {
@@ -5429,7 +5429,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4701
+      "visibleTextChars": 4715
     }
   },
   "/tools/countdown-timer/": {
@@ -5478,7 +5478,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4306
+      "visibleTextChars": 4748
     }
   },
   "/tools/cron-challenge-lab/": {
@@ -5527,7 +5527,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3823
+      "visibleTextChars": 3799
     }
   },
   "/tools/cron-expression-explainer/": {
@@ -5576,7 +5576,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8778
+      "visibleTextChars": 8792
     }
   },
   "/tools/date-calculator/": {
@@ -5625,7 +5625,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5161
+      "visibleTextChars": 5175
     }
   },
   "/tools/date-difference/": {
@@ -5674,7 +5674,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4751
+      "visibleTextChars": 4765
     }
   },
   "/tools/hours-calculator/": {
@@ -5723,7 +5723,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6189
+      "visibleTextChars": 6203
     }
   },
   "/tools/image-compressor-resizer/": {
@@ -5772,7 +5772,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5574
+      "visibleTextChars": 5588
     }
   },
   "/tools/interval-timer/": {
@@ -5821,7 +5821,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3927
+      "visibleTextChars": 3941
     }
   },
   "/tools/json-compare/": {
@@ -5870,7 +5870,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4489
+      "visibleTextChars": 4503
     }
   },
   "/tools/json-csv-converter/": {
@@ -5919,7 +5919,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4396
+      "visibleTextChars": 4410
     }
   },
   "/tools/json-error-fixing-lab/": {
@@ -5968,7 +5968,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3456
+      "visibleTextChars": 3579
     }
   },
   "/tools/json-formatter/": {
@@ -6017,7 +6017,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5355
+      "visibleTextChars": 5438
     }
   },
   "/tools/jsonpath-challenge-lab/": {
@@ -6066,7 +6066,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3644
+      "visibleTextChars": 3664
     }
   },
   "/tools/jsonpath-tester/": {
@@ -6115,7 +6115,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5070
+      "visibleTextChars": 5084
     }
   },
   "/tools/jwt-decoder/": {
@@ -6164,7 +6164,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5950
+      "visibleTextChars": 5964
     }
   },
   "/tools/list-comparer/": {
@@ -6213,7 +6213,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3385
+      "visibleTextChars": 3399
     }
   },
   "/tools/meeting-planner/": {
@@ -6262,7 +6262,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4608
+      "visibleTextChars": 4622
     }
   },
   "/tools/merge-pdf/": {
@@ -6311,7 +6311,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3563
+      "visibleTextChars": 3577
     }
   },
   "/tools/pdf-marks/": {
@@ -6360,7 +6360,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3690
+      "visibleTextChars": 3704
     }
   },
   "/tools/pdf-pages/": {
@@ -6409,7 +6409,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4101
+      "visibleTextChars": 4115
     }
   },
   "/tools/photos-to-pdf/": {
@@ -6458,7 +6458,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4432
+      "visibleTextChars": 4446
     }
   },
   "/tools/pomodoro-timer/": {
@@ -6507,7 +6507,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4158
+      "visibleTextChars": 4172
     }
   },
   "/tools/shift-planner/": {
@@ -6556,7 +6556,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3986
+      "visibleTextChars": 4000
     }
   },
   "/tools/smart-flashcards/": {
@@ -6605,7 +6605,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3643
+      "visibleTextChars": 3773
     }
   },
   "/tools/split-pdf/": {
@@ -6654,7 +6654,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3543
+      "visibleTextChars": 3557
     }
   },
   "/tools/stopwatch/": {
@@ -6703,7 +6703,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3364
+      "visibleTextChars": 3378
     }
   },
   "/tools/test-design-lab/": {
@@ -6752,7 +6752,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4366
+      "visibleTextChars": 4376
     }
   },
   "/tools/text-diff/": {
@@ -6801,7 +6801,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4331
+      "visibleTextChars": 4345
     }
   },
   "/tools/time-duration/": {
@@ -6850,7 +6850,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3567
+      "visibleTextChars": 3581
     }
   },
   "/tools/time-zone-converter/": {
@@ -6899,7 +6899,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4695
+      "visibleTextChars": 4709
     }
   },
   "/tools/unix-timestamp-converter/": {
@@ -6948,7 +6948,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6049
+      "visibleTextChars": 6063
     }
   },
   "/tools/url-parser/": {
@@ -6997,7 +6997,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6046
+      "visibleTextChars": 6060
     }
   },
   "/tools/uuid-generator/": {
@@ -7046,7 +7046,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3233
+      "visibleTextChars": 3247
     }
   },
   "/tools/world-clock/": {
@@ -7095,7 +7095,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5572
+      "visibleTextChars": 5586
     }
   }
 }

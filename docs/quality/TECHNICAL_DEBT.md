@@ -16,4 +16,5 @@ Carried from `docs/release-readiness-checkpoint.md` (2026-10-29) and the QC reco
 | T-10 | Related-cards limit of six hides Prepayment and Credit Card Payoff on some pages | P3 | Owner decision (see `DEFECT_LEDGER.md` O-3) |
 | T-11 | Process: the memory-limited machine cannot run a full browser regression unattended; the checkpoint was done in groups and one orphaned wrapper process once outlived its stop | P2 | Mitigated by foreground, grouped runs; rule 10.14 |
 | T-12 | Gratuity ceiling and legal-source verification; PPF official-source reading; second reviewer for the 163 learning items | P1 before production | Not re-verified |
-| T-13 | No persistent category sidebar or tool workspace exists; rulebook 4.8 asks for related-tool navigation in small steps first, and creating a section (Labs as its own) needs the owner's approval (11.7) | P2 | Deferred: see the final report |
+| T-13 | No persistent category sidebar or tool workspace exists; rulebook 4.8 asks for related-tool navigation in small steps first. Labs is now its own section (4.10, Phase C) | P2 | Sidebar deferred |
+| T-14 | The labs no longer list the utilities (JSON Formatter, JSONPath Tester, Cron Explainer) as related tools, because related lists stay in one section (rule 4.2); the link now has to live in each lab's text | P3 | Open |

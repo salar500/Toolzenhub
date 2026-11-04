@@ -22,7 +22,7 @@ section.categories-page.directory-page
           li
             a.directory-rail__link [href="{ROOT}tools.html#directory-developer-tools-heading"]
               span.directory-rail__name "Developer Tools"
-              span.directory-rail__count "17"
+              span.directory-rail__count "12"
           li
             a.directory-rail__link [href="{ROOT}tools.html#directory-image-tools-heading"]
               span.directory-rail__name "Image Tools"
@@ -31,6 +31,10 @@ section.categories-page.directory-page
             a.directory-rail__link [href="{ROOT}tools.html#directory-pdf-tools-heading"]
               span.directory-rail__name "PDF Tools"
               span.directory-rail__count "4"
+          li
+            a.directory-rail__link [href="{ROOT}tools.html#directory-practice-labs-heading"]
+              span.directory-rail__name "Practice Labs"
+              span.directory-rail__count "5"
       div.directory-layout__main
         form.directory-search [action="{ROOT}tools.html" data-tools-search method="get" role="search"]
           label.directory-search__label [for="directory-search-input"] "Search tools"
@@ -243,7 +247,7 @@ section.categories-page.directory-page
               h2#directory-developer-tools-heading.directory-section__title
                 a [href="{ROOT}developer-tools.html"] "Developer Tools"
               p.directory-section__text "Browser-based tools for working with data and code."
-                span.directory-section__count "17 tools"
+                span.directory-section__count "12 tools"
             div.directory-groups
               article.directory-group.directory-group--tool
                 h3.directory-group__title
@@ -283,26 +287,6 @@ section.categories-page.directory-page
                 p.directory-group__text "Run a JSONPath query (RFC 9535, without match() and search()) on a JSON document and see t…"
               article.directory-group.directory-group--tool
                 h3.directory-group__title
-                  a [href="{ROOT}tools/smart-flashcards/"] "Smart Flashcards"
-                p.directory-group__text "Revise JSON, HTTP and APIs, and software testing with short original flashcards. Think of …"
-              article.directory-group.directory-group--tool
-                h3.directory-group__title
-                  a [href="{ROOT}tools/json-error-fixing-lab/"] "JSON Error-Fixing Lab"
-                p.directory-group__text "Practise repairing broken JSON: trailing commas, wrong quotes, missing brackets, bad escap…"
-              article.directory-group.directory-group--tool
-                h3.directory-group__title
-                  a [href="{ROOT}tools/jsonpath-challenge-lab/"] "JSONPath Challenge Lab"
-                p.directory-group__text "Practise writing JSONPath queries against a built-in document. Each query is run by an RFC…"
-              article.directory-group.directory-group--tool
-                h3.directory-group__title
-                  a [href="{ROOT}tools/cron-challenge-lab/"] "Cron Challenge Lab"
-                p.directory-group__text "Practise writing cron expressions for described schedules. Each expression is read by a Cr…"
-              article.directory-group.directory-group--tool
-                h3.directory-group__title
-                  a [href="{ROOT}tools/test-design-lab/"] "Test Design Lab"
-                p.directory-group__text "Practise boundary value analysis and equivalence partitioning on whole numbers. Each exerc…"
-              article.directory-group.directory-group--tool
-                h3.directory-group__title
                   a [href="{ROOT}tools/list-comparer/"] "List Comparer"
                 p.directory-group__text "Compare two lists, one item per line: see what is only in the first, only in the second, i…"
               article.directory-group.directory-group--tool
@@ -313,8 +297,6 @@ section.categories-page.directory-page
                 h3.directory-group__title
                   a [href="{ROOT}tools/json-csv-converter/"] "JSON and CSV Converter"
                 p.directory-group__text "Convert a JSON array of objects to CSV, or CSV to JSON, with RFC 4180 quoting, a choice of…"
-            p.directory-section__more
-              a [href="{ROOT}practice-labs.html"] "Practice Labs: exercises and flashcards →"
           section.directory-section [aria-labelledby="directory-image-tools-heading"]
             div.directory-section__header
               span.directory-section__label "Section"
@@ -355,3 +337,33 @@ section.categories-page.directory-page
                 h3.directory-group__title
                   a [href="{ROOT}tools/pdf-marks/"] "Add Page Numbers and Watermark to PDF"
                 p.directory-group__text "Add page numbers, a text watermark or both to a PDF and download a new copy. It runs in yo…"
+          section.directory-section [aria-labelledby="directory-practice-labs-heading"]
+            div.directory-section__header
+              span.directory-section__label "Section"
+              h2#directory-practice-labs-heading.directory-section__title
+                a [href="{ROOT}practice-labs.html"] "Practice Labs"
+              p.directory-section__text "Hands-on exercises and flashcards that check your answer and explain it."
+                span.directory-section__count "5 tools"
+            div.directory-groups
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/smart-flashcards/"] "Smart Flashcards"
+                p.directory-group__text "Revise JSON, HTTP and APIs, and software testing with short original flashcards. Think of …"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/json-error-fixing-lab/"] "JSON Error-Fixing Lab"
+                p.directory-group__text "Practise repairing broken JSON: trailing commas, wrong quotes, missing brackets, bad escap…"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/jsonpath-challenge-lab/"] "JSONPath Challenge Lab"
+                p.directory-group__text "Practise writing JSONPath queries against a built-in document. Each query is run by an RFC…"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/cron-challenge-lab/"] "Cron Challenge Lab"
+                p.directory-group__text "Practise writing cron expressions for described schedules. Each expression is read by a Cr…"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/test-design-lab/"] "Test Design Lab"
+                p.directory-group__text "Practise boundary value analysis and equivalence partitioning on whole numbers. Each exerc…"
+            p.directory-section__more
+              a [href="{ROOT}practice-labs.html"] "Practice Labs: exercises and flashcards →"

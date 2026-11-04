@@ -57,6 +57,12 @@ main#app
             div.category-card__content
               h3 "PDF Tools"
               p "Merge, split and rearrange PDF pages in your browser"
+          a.category-card [href="{ROOT}practice-labs.html"]
+            div.category-card__icon.category-card__icon--practice-labs
+              svg [aria-hidden="true"]
+            div.category-card__content
+              h3 "Practice Labs"
+              p "Hands-on exercises and flashcards for JSON, cron and software testing"
   section#popular-calculators.section
     section.popular-section
       div.container

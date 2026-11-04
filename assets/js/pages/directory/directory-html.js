@@ -180,7 +180,7 @@ function directSectionBlock(section) {
                         </article>`).join("")}
                     </div>
 
-                    ${section.id === "developer-tools" ? practiceLabsLink() : ""}
+                    ${section.id === "practice-labs" ? practiceLabsLink() : ""}
 
                 </section>`;
 
@@ -527,9 +527,10 @@ export function sectionPageHtml(sectionId) {
 /* =========================================================
    PRACTICE LABS HUB
 
-   One page that gathers the learning experiences. It is not a
-   section and has no catalog record: the five pages stay where
-   they are, in Developer Tools, and this page only links to them.
+   The landing page of the Practice Labs section (2026-11-04: the
+   labs and flashcards left Developer Tools). It is written by hand
+   rather than generated as a section page, and lists the section's
+   tools.
    The list is the catalog's own, so a lab that is not live never
    appears.
 ========================================================= */
@@ -543,7 +544,7 @@ export function practiceLabsHtml() {
 
     const labs = liveByIds(PRACTICE_LAB_IDS);
     const revision = liveByIds(REVISION_IDS);
-    const look = { iconClass: "time", iconKey: "developer-tools" };
+    const look = { iconClass: "time", iconKey: "practice-labs" };
 
     const group = (title, text, tools) => tools.length === 0 ? "" : `
                 <section class="practice-labs__group" aria-labelledby="practice-labs-${title.toLowerCase()}">
@@ -591,7 +592,7 @@ export function practiceLabsHtml() {
                 ${group("Revision", "Original flashcards for revision. Revision dates are saved on this device only if you turn saving on.", revision)}
 
                 <p class="directory-section__more">
-                    <a href="${ROUTES.developerTools}">All Developer Tools →</a>
+                    <a href="${ROUTES.tools}">All Tools →</a>
                 </p>
 
             </div>

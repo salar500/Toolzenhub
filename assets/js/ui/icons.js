@@ -41,6 +41,7 @@ const FOR = {
     "developer-tools": "code",
     "image-tools": "image",
     "pdf-tools": "file",
+    "practice-labs": "check",
     loans: "home",
     investment: "trend",
     tax: "receipt",

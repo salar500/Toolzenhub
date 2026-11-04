@@ -37,8 +37,8 @@ before(async () => {
 });
 
 describe("section model", () => {
-  test("five sections, each with a stable id, its landing page and its path prefix: Calculators, Time Tools, Developer Tools, Image Tools and PDF Tools", () => {
-    assert.deepEqual(tax.getSections().map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools", "pdf-tools"]);
+  test("six sections, each with a stable id, its landing page and its path prefix: Calculators, Time Tools, Developer Tools, Image Tools, PDF Tools and Practice Labs", () => {
+    assert.deepEqual(tax.getSections().map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools", "pdf-tools", "practice-labs"]);
     const section = tax.getSectionById("calculators");
     assert.equal(section.title, "Calculators");
     assert.equal(section.landing, "calculatorCategories");
@@ -53,7 +53,9 @@ describe("section model", () => {
     assert.equal(dev.landing, "developerTools");
     assert.equal(dev.pathPrefix, "tools");
     assert.deepEqual(tax.getCategoriesBySection("developer-tools"), []); // no categories and no subcategory layer yet
-    assert.deepEqual(tax.getToolsBySection("developer-tools").map((t) => t.id), ["json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "smart-flashcards", "json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab", "list-comparer", "uuid-generator", "json-csv-converter"]);
+    assert.deepEqual(tax.getToolsBySection("developer-tools").map((t) => t.id), ["json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "list-comparer", "uuid-generator", "json-csv-converter"]); // the labs and flashcards moved to Practice Labs (2026-11-04)
+    assert.deepEqual(tax.getToolsBySection("practice-labs").map((t) => t.id), ["smart-flashcards", "json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab"]);
+    assert.deepEqual(tax.getCategoriesBySection("practice-labs"), []);
     const image = tax.getSectionById("image-tools");
     assert.equal(image.title, "Image Tools");
     assert.equal(image.landing, "imageTools");

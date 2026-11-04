@@ -2169,13 +2169,13 @@ const catalog = [
         status: "published",
         loader: () =>
             import("../tools/smart-flashcards/index.js"),
-        sectionId: "developer-tools",
+        sectionId: "practice-labs",
         icon: "🗂",
         title: "Smart Flashcards",
         description:
             "Revise JSON, HTTP and APIs, and software testing with short original flashcards. Think of the answer, check it and read why. Revision dates are saved only if you turn saving on. It runs in your browser: nothing is uploaded.",
         autoRelated: false,
-        relatedTools: ["json-formatter", "jsonpath-tester", "json-error-fixing-lab", "test-design-lab"],
+        relatedTools: ["json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab"],
         aliases: [
             "flashcards",
             "study flashcards",
@@ -2204,13 +2204,13 @@ const catalog = [
         status: "published",
         loader: () =>
             import("../tools/json-error-fixing-lab/index.js"),
-        sectionId: "developer-tools",
+        sectionId: "practice-labs",
         icon: "🛠",
         title: "JSON Error-Fixing Lab",
         description:
             "Practise repairing broken JSON: trailing commas, wrong quotes, missing brackets, bad escapes and more. Each repair is checked by a strict validator, and every exercise explains why. It runs in your browser: nothing is uploaded.",
         autoRelated: false,
-        relatedTools: ["json-formatter", "smart-flashcards"],
+        relatedTools: ["smart-flashcards", "jsonpath-challenge-lab"],
         aliases: [
             "fix invalid json",
             "json practice",
@@ -2239,13 +2239,13 @@ const catalog = [
         status: "published",
         loader: () =>
             import("../tools/jsonpath-challenge-lab/index.js"),
-        sectionId: "developer-tools",
+        sectionId: "practice-labs",
         icon: "🎯",
         title: "JSONPath Challenge Lab",
         description:
             "Practise writing JSONPath queries against a built-in document. Each query is run by an RFC 9535 engine and judged by the nodes it selects, with feedback on what you got and what you missed. It runs in your browser: nothing is uploaded.",
         autoRelated: false,
-        relatedTools: ["jsonpath-tester", "smart-flashcards"],
+        relatedTools: ["smart-flashcards", "json-error-fixing-lab"],
         aliases: [
             "jsonpath practice",
             "jsonpath exercises",
@@ -2273,13 +2273,13 @@ const catalog = [
         status: "published",
         loader: () =>
             import("../tools/cron-challenge-lab/index.js"),
-        sectionId: "developer-tools",
+        sectionId: "practice-labs",
         icon: "⏰",
         title: "Cron Challenge Lab",
         description:
             "Practise writing cron expressions for described schedules. Each expression is read by a Cronie-dialect engine and judged by the schedule it describes, with its next run times shown. It runs in your browser: nothing is uploaded.",
         autoRelated: false,
-        relatedTools: ["cron-expression-explainer", "smart-flashcards"],
+        relatedTools: ["smart-flashcards", "test-design-lab"],
         aliases: [
             "cron practice",
             "cron exercises",
@@ -2307,7 +2307,7 @@ const catalog = [
         status: "published",
         loader: () =>
             import("../tools/test-design-lab/index.js"),
-        sectionId: "developer-tools",
+        sectionId: "practice-labs",
         icon: "🧪",
         title: "Test Design Lab",
         description:

@@ -126,6 +126,23 @@ export const sections = [
         icon: "📄",
         landing: "pdfTools",
         pathPrefix: "tools"
+    },
+
+    /*
+     * Practice Labs: hands-on exercises and flashcards, separate from the utilities in Developer Tools (the owner asked for
+     * Labs to be their own place, 2026-11-04). No categories. Its landing is the hand-written hub (practice-labs.html), so
+     * it has no `seoDescription` and no generated section page. Tool URLs are unchanged (/tools/<id>/).
+     */
+    {
+        id: "practice-labs",
+        title: "Practice Labs",
+        description:
+            "Hands-on exercises and flashcards that check your answer and explain it.",
+        summary:
+            "Hands-on exercises and flashcards for JSON, cron and software testing",
+        icon: "🧪",
+        landing: "practiceLabs",
+        pathPrefix: "tools"
     }
 
 ];
