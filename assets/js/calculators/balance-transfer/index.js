@@ -768,6 +768,7 @@ export function markup() {
 
                             ${numberField({
                                 id: IDS.balance,
+                                slider: { min: 100000, max: 20000000, step: 50000 },
                                 label: "Outstanding Loan Balance",
                                 unit: "₹",
                                 hint: "The principal you still owe, as shown on your loan statement.",

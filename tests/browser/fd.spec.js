@@ -407,7 +407,7 @@ test.describe("FD Calculator", () => {
     }
     await expect(info.filter({ hasText: "Example" }).first()).toContainText("₹1,41,477.82");
     await expect(info.filter({ hasText: "Assumptions and What Is Not Included" })).toContainText("Actual FD maturity may differ");
-    await expect(page.locator("details")).toHaveCount(5);
+    await expect(page.locator(".calculator-info details")).toHaveCount(5);
   });
 
   test("related: CAGR first (pack 50), then SIP, PPF and XIRR", async ({ page, go, siteRoot }) => {

@@ -841,6 +841,7 @@ export function markup() {
 
                         ${modeField("corpus", numberField({
                             id: IDS.corpus,
+                            slider: { min: 100000, max: 50000000, step: 100000 },
                             label: "Starting Corpus",
                             unit: "₹",
                             hint: "The lump sum you start with.",
@@ -852,6 +853,7 @@ export function markup() {
 
                         ${modeField("withdrawal", numberField({
                             id: IDS.withdrawal,
+                            slider: { min: 1000, max: 500000, step: 1000 },
                             label: "Withdrawal Each Time",
                             unit: "₹",
                             hint: "What you take out each time, in the first year.",
@@ -877,6 +879,7 @@ export function markup() {
 
                         ${modeField("annualReturn", numberField({
                             id: IDS.annualReturn,
+                            slider: { min: 1, max: 20, step: 0.5 },
                             label: "Assumed Annual Return",
                             unit: "% a year",
                             hint: "An assumption you control, not a forecast. 8% is only an example; try a range.",
@@ -888,6 +891,7 @@ export function markup() {
 
                         ${modeField("increase", numberField({
                             id: IDS.increase,
+                            slider: { min: 0, max: 15, step: 1 },
                             label: "Yearly Increase in Withdrawal (optional)",
                             unit: "% a year",
                             hint: "A percentage you choose, for example to allow for rising costs. It is not a forecast of inflation. Leave blank for none.",
@@ -900,6 +904,7 @@ export function markup() {
 
                         ${modeField("inflation", numberField({
                             id: IDS.inflation,
+                            slider: { min: 0, max: 12, step: 0.5 },
                             label: "Expected Inflation (optional)",
                             unit: "% a year",
                             hint: "An assumption, not a forecast. Enter one to also see the final-year withdrawal (or the balance) in today's money. Leave blank to skip.",

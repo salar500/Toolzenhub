@@ -436,6 +436,7 @@ export function markup() {
                         <div id="ppf-yearly-group">
                             ${numberField({
                                 id: IDS.yearly,
+                                slider: { min: 500, max: 150000, step: 500 },
                                 label: "Yearly Deposit",
                                 unit: "₹ a year",
                                 hint: "From ₹500 to ₹1,50,000, in multiples of ₹50. The ₹1,50,000 limit covers all your PPF accounts, including one you hold for a minor.",
@@ -449,6 +450,7 @@ export function markup() {
                         <div id="ppf-monthly-group" hidden>
                             ${numberField({
                                 id: IDS.monthly,
+                                slider: { min: 50, max: 12500, step: 50 },
                                 label: "Monthly Deposit",
                                 unit: "₹ a month",
                                 hint: "From ₹50 to ₹12,500, in multiples of ₹50, so that twelve deposits stay within ₹1,50,000 a year.",

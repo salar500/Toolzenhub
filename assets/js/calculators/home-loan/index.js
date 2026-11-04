@@ -491,6 +491,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.income,
+                            slider: { min: 10000, max: 1000000, step: 5000 },
                             label: "Monthly Income",
                             unit: "₹",
                             hint: "The monthly income you want your EMI limit based on, for example your take-home pay.",
@@ -514,6 +515,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.share,
+                            slider: { min: 10, max: 80, step: 1 },
                             label: "Share of Income for EMIs",
                             unit: "% of income",
                             hint: "Your own limit, not a lender's. 40% is only an example; lenders set their own limits, which this does not know.",

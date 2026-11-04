@@ -628,6 +628,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.amount,
+                            slider: { min: 10000, max: 10000000, step: 10000 },
                             label: "Deposit Amount",
                             unit: "₹",
                             hint: "The amount you deposit.",

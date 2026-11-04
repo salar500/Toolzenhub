@@ -774,6 +774,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.monthlySip,
+                            slider: { min: 500, max: 200000, step: 500 },
                             label: "Monthly SIP Amount",
                             unit: "₹",
                             hint: "What you invest at the start of each month (in the first year, if you add a step-up).",
@@ -785,6 +786,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.annualReturn,
+                            slider: { min: 1, max: 30, step: 0.5 },
                             label: "Assumed Annual Return",
                             unit: "% a year",
                             hint: "An assumption you control, not a forecast. 10% is only an example; try a range.",
@@ -798,6 +800,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.stepUp,
+                            slider: { min: 0, max: 25, step: 1 },
                             label: "Yearly Step-Up (optional)",
                             unit: "% a year",
                             hint: "Raise the monthly SIP by this percentage once a year. 0 keeps it the same.",
@@ -821,6 +824,7 @@ export function markup() {
                         })}
                         ${numberField({
                             id: IDS.inflation,
+                            slider: { min: 0, max: 12, step: 0.5 },
                             label: "Expected Inflation (optional)",
                             unit: "% a year",
                             hint: "An assumption, not a forecast. Enter one to also see the estimated value in today's money. Leave blank to skip.",

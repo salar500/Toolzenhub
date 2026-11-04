@@ -358,6 +358,7 @@ export function markup() {
 
                         ${fieldWrap("loan", numberField({
                             id: FIELDS.loan.id,
+                            slider: { min: 100000, max: 50000000, step: 50000 },
                             label: "Loan Amount",
                             unit: "₹",
                             hint: "Enter the total loan amount.",

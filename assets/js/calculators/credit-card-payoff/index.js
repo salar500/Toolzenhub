@@ -270,6 +270,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.balance,
+                            slider: { min: 1000, max: 1000000, step: 1000 },
                             label: "Outstanding Balance",
                             unit: "₹",
                             hint: "What you owe now, from ₹100 to ₹1,00,00,000, with up to 2 decimal places.",
@@ -291,6 +292,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.payment,
+                            slider: { min: 500, max: 200000, step: 500 },
                             label: "Monthly Payment",
                             unit: "₹",
                             hint: "A fixed amount paid every month, from ₹1 to ₹1,00,00,000, with up to 2 decimal places.",

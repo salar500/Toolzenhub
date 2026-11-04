@@ -523,6 +523,7 @@ function valueFields() {
                         <div ${common("margin")}>
                             ${numberField({
                                 id: IDS.margin,
+                                slider: { min: 1, max: 90, step: 1 },
                                 label: "Target Margin",
                                 unit: "% of price",
                                 hint: "The share of the selling price you want to be profit, from 0% to 95%.",
@@ -536,6 +537,7 @@ function valueFields() {
                         <div ${common("markup")}>
                             ${numberField({
                                 id: IDS.markup,
+                                slider: { min: 1, max: 300, step: 1 },
                                 label: "Target Markup",
                                 unit: "% of cost",
                                 hint: "The profit you want as a share of the cost, from 0% to 1,000%.",
@@ -675,6 +677,7 @@ export function markup() {
 
                         ${numberField({
                             id: IDS.discount,
+                            slider: { min: 0, max: 90, step: 1 },
                             label: "Discount (optional)",
                             unit: "% off",
                             hint: "Leave blank to skip. If you enter one, you see what it does to profit per unit and how many more sales it takes to earn the same total profit.",

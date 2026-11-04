@@ -10,11 +10,12 @@ import { test, expect, expectClean, expectNoHorizontalOverflow } from "../helper
 const slider = (page, id) => page.locator(`input.calculator-form__slider[data-slider-for="${id}"]`);
 
 test.describe("slider beside a number field", () => {
-  test("EMI: one slider for the rate and one for the tenure, hidden from assistive technology and out of the tab order, none for the amounts", async ({ page, go, watch }) => {
+  test("EMI: sliders for the loan amount, rate and tenure, hidden from assistive technology and out of the tab order, none for the derived EMI", async ({ page, go, watch }) => {
     await go("calculators/emi/");
     await expect(slider(page, "emi-rate")).toHaveCount(1);
     await expect(slider(page, "emi-years")).toHaveCount(1);
-    await expect(page.locator("input.calculator-form__slider")).toHaveCount(2);
+    await expect(slider(page, "emi-loan")).toHaveCount(1);
+    await expect(page.locator("input.calculator-form__slider")).toHaveCount(3);
     await expect(slider(page, "emi-rate")).toHaveAttribute("aria-hidden", "true");
     await expect(slider(page, "emi-rate")).toHaveAttribute("tabindex", "-1");
     await expect(page.getByLabel("Interest Rate")).toHaveCount(1); // the slider adds no second control with the same name
@@ -104,13 +105,14 @@ test.describe("slider beside a number field", () => {
     }
   });
 
-  test("calculators that did not opt in have no slider (SIP's amount, Percentage, Risk-Reward)", async ({ page, go }) => {
+  test("calculators that did not opt in have no slider (Percentage, Risk-Reward); SIP has one per bounded field and amount", async ({ page, go }) => {
     await go("calculators/percentage/");
     await expect(page.locator("input.calculator-form__slider")).toHaveCount(0);
     await go("calculators/risk-reward/");
     await expect(page.locator("input.calculator-form__slider")).toHaveCount(0);
     await go("calculators/sip/");
     await expect(slider(page, "sip-years")).toHaveCount(1);
-    await expect(page.locator("input.calculator-form__slider")).toHaveCount(1);
+    await expect(slider(page, "sip-amount")).toHaveCount(1);
+    await expect(page.locator("input.calculator-form__slider").first()).toBeVisible();
   });
 });
