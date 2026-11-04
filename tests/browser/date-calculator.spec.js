@@ -128,7 +128,7 @@ test.describe("Date Calculator", () => {
     for (const h of ["How to Use the Date Calculator", "How the Date Is Calculated", "Month Ends and Leap Years", "Example", "Common Uses"]) {
       await expect(body.getByRole("heading", { name: h })).toBeVisible();
     }
-    await expect(body.locator("details")).toHaveCount(5);
+    await expect(body.locator(".calculator-info details")).toHaveCount(5);
     await expect(body.locator('.calculator-info a[href$="tools/date-difference/"]')).toHaveCount(1);
     await expect(body).toContainText("not part of this calculator");
     await expect(body).not.toContainText(/100% accurate|most accurate|\bbest\b|age calculator/i);

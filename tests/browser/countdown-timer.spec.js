@@ -235,7 +235,7 @@ test.describe("Countdown Timer", () => {
     for (const h of ["How to Use the Countdown Timer", "How the Timer Stays Accurate", "Using the Timer in Another Browser Tab", "Common Uses"]) {
       await expect(body.getByRole("heading", { name: h })).toBeVisible();
     }
-    await expect(body.locator("details")).toHaveCount(5);
+    await expect(body.locator(".calculator-info details")).toHaveCount(5);
     await expect(body).not.toContainText(/100% accurate|most accurate|\bbest\b|ultimate|streak|badge/i);
     expect(await page.evaluate(() => typeof Notification === "undefined" ? "none" : Notification.permission)).not.toBe("granted");
   });

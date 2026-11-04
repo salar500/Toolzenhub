@@ -565,13 +565,13 @@ test.describe("Time Zone Converter in the site", () => {
     await expect(page.locator("main")).not.toContainText(/time zone converter/i);
   });
 
-  test("All Tools: Time Tools has 13 tools and Developer Tools has 6", async ({ page, go }) => {
+  test("All Tools: Time Tools has 13 tools and Developer Tools has 12 (the Practice Labs are their own section)", async ({ page, go }) => {
     await go("tools.html");
     const time = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Time Tools")') });
     await expect(time.locator(".directory-section__count")).toHaveText("13 tools");
     await expect(time.locator('a[href$="tools/time-zone-converter/"]')).toHaveCount(1);
     const dev = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Developer Tools")') });
-    await expect(dev.locator(".directory-section__count")).toHaveText("17 tools");
+    await expect(dev.locator(".directory-section__count")).toHaveText("12 tools");
     await expect(dev.locator('a[href$="tools/time-zone-converter/"]')).toHaveCount(0);
   });
 
@@ -618,9 +618,9 @@ test.describe("Time Zone Converter in the site", () => {
     await go("tools/time-zone-converter/");
     await expect(page.locator('main a[href$="tools/unix-timestamp-converter/"]')).toHaveCount(1);
     await go("tools/unix-timestamp-converter/");
-    await expect(page.locator("main")).not.toContainText(/time zone converter/i);
+    expect((await page.locator("main .calculator-info").allInnerTexts()).join(" ")).not.toMatch(/time zone converter/i); // page text, not the section switcher
     await go("tools/countdown-timer/");
-    await expect(page.locator("main")).not.toContainText(/time zone converter/i);
+    expect((await page.locator("main .calculator-info").allInnerTexts()).join(" ")).not.toMatch(/time zone converter/i); // page text, not the section switcher
   });
 
   test("two existing Time Tools still load after the shared catalog change", async ({ page, go, watch }) => {

@@ -367,7 +367,7 @@ test.describe("Hours & Timesheet Calculator in Time Tools", () => {
     expect(links).toEqual([`${siteRoot}tools/date-difference/`]);
     // an older Time Tool does not gain it
     await go("tools/stopwatch/");
-    await expect(page.locator("main")).not.toContainText("Hours & Timesheet");
+    expect((await page.locator("main .calculator-info").allInnerTexts()).join(" ")).not.toContain("Hours & Timesheet"); // the page text; the section switcher lists every Time Tool
   });
 
   test("global search finds it by its own names, and the stopwatch still leads 'elapsed time'", async ({ page, go, siteRoot }) => {
