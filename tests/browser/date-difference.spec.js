@@ -78,7 +78,7 @@ test.describe("Date Difference Calculator", () => {
     for (const h of ["How to Use the Date Difference Calculator", "How the Difference Is Calculated", "Leap Years and Month Lengths", "Common Uses"]) {
       await expect(body.getByRole("heading", { name: h })).toBeVisible();
     }
-    await expect(body.locator("details")).toHaveCount(5);
+    await expect(body.locator(".calculator-info details")).toHaveCount(5); // the FAQ; the section switcher is a sixth, separate disclosure
     await expect(body).not.toContainText(/100% accurate|most accurate|\bbest\b|age calculator/i);
   });
 
