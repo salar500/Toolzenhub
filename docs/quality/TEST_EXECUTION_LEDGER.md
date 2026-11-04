@@ -105,7 +105,9 @@ New lab: own query-step engine, relationship checker and DAX subset (no eval, no
 | Unit suite | 3,825 pass, 0 fail, 4 skipped, run before `power-bi-lessons.test.mjs` was added; that file passes 6/6 alone |
 | `power-bi-practice-lab.spec.js`, subpath-desktop | 24 passed: all 43 solutions on the real page, lesson examples, report preview, axe in six states, layout at 320/390/820/1180 |
 | `navigation`, `smart-flashcards`, `dom-baseline`, `seo-baseline`, subpath-desktop | passed after baseline regeneration; diffs reviewed: new directory card, counts 7 to 8, EMI loan slider attributes, one new page entry, small text-length changes |
-| Not run | subpath-mobile and root-desktop for the new lab; full browser suite; visual spec |
+| `excel-practice-lab.spec.js` and `power-bi-practice-lab.spec.js`, subpath-mobile | 49 passed, 2 skipped by design |
+| Same two specs, root-desktop | 2 passed (only the `@portable` tests run on this project) |
+| Not run | full browser suite; visual spec; Firefox, WebKit, screen readers |
 
 ## Carried forward (not re-run at f5a1df4)
 
