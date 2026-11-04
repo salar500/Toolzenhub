@@ -242,8 +242,8 @@ test.describe("Stopwatch", () => {
     for (const h of ["How to Use the Stopwatch", "Lap Time and Total Time", "How the Stopwatch Stays Accurate", "Using the Stopwatch in Another Browser Tab", "Common Uses"]) {
       await expect(body.getByRole("heading", { name: h })).toBeVisible();
     }
-    await expect(body.locator("details")).toHaveCount(5);
-    await expect(body.locator('a[href$="tools/countdown-timer/"]')).toHaveCount(1);
+    await expect(body.locator("details:not(.section-switcher details)")).toHaveCount(5);
+    await expect(body.locator('a[href$="tools/countdown-timer/"]:not(.section-switcher a)')).toHaveCount(1);
     await expect(body).not.toContainText(/100% accurate|most accurate|\bbest\b|ultimate|streak|badge/i);
     await expect(page.locator("audio, input[type=checkbox]")).toHaveCount(0);
   });
@@ -314,7 +314,7 @@ test.describe("Stopwatch in Time Tools and search", () => {
     await expect(page.locator('.directory-section a[href$="tools/stopwatch/"]')).toHaveCount(1);
     await expect(page.locator(".directory-section__count").nth(1)).toHaveText("13 tools"); // the Time Tools section is the second of three
     await go("tools/countdown-timer/");
-    await expect(page.locator('main a[href$="tools/stopwatch/"]')).toHaveCount(1);
+    await expect(page.locator('main a[href$="tools/stopwatch/"]:not(.section-switcher a)')).toHaveCount(1);
   });
 
   test("the path Home > All Tools > Time Tools > Stopwatch works by clicking", async ({ page, go, siteRoot }) => {

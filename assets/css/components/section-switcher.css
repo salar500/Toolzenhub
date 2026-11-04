@@ -1,0 +1,115 @@
+/* "More <section>" disclosure under a tool's breadcrumb (assets/js/components/section-switcher.js). Closed, it is one line. */
+
+.section-switcher {
+
+    margin: 0 0 16px;
+
+}
+
+.section-switcher summary {
+
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 8px;
+
+    min-height: 44px;
+    padding: 0 14px;
+
+    border: 1px solid var(--line-control);
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+.section-switcher__count {
+
+    min-width: 22px;
+    padding: 1px 7px;
+
+    border-radius: 999px;
+
+    background: var(--surface-page);
+
+    color: var(--ink-muted);
+
+    font-size: 12px;
+    text-align: center;
+
+}
+
+.section-switcher[open] summary,
+.section-switcher details[open] summary {
+
+    border-color: var(--color-ink);
+
+}
+
+.section-switcher__list {
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px 24px;
+
+    margin: 10px 0 0;
+    padding: 14px 16px;
+
+    border: 1px solid var(--line-control);
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    list-style: none;
+
+}
+
+.section-switcher__list ul {
+
+    margin: 4px 0 0;
+    padding: 0;
+
+    list-style: none;
+
+}
+
+.section-switcher__label {
+
+    display: block;
+
+    color: var(--ink-muted);
+
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+}
+
+.section-switcher__list a {
+
+    display: block;
+
+    padding: 8px 0;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+}
+
+.section-switcher__list a[aria-current="page"] {
+
+    font-weight: 700;
+    text-decoration: none;
+
+}

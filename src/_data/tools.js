@@ -49,7 +49,7 @@ export default async function () {
       themeColor: tool.seo.themeColor || null,
       modulePath: modulePathOf(tool),
       fonts: style.fonts,
-      styles: style.styles,
+      styles: [...style.styles, "/assets/css/components/section-switcher.css"],
       html,
       jsonld: [breadcrumbLd(breadcrumbTrail(toolBreadcrumbItems(metadata)), sitePath)],
     });

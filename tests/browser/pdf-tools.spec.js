@@ -582,8 +582,8 @@ test.describe("PDF Tools: the section, its listings and search", () => {
 
     test("the Home page has the PDF Tools card", async ({ page, go, siteRoot }) => {
         await go("");
-        await expect(page.locator("#categories .category-card").last()).toHaveAttribute("href", `${siteRoot}pdf-tools.html`);
-        await expect(page.locator("#categories .category-card").last()).toContainText("PDF Tools");
+        await expect(page.locator("#categories .category-card").nth(4)).toHaveAttribute("href", `${siteRoot}pdf-tools.html`);
+        await expect(page.locator("#categories .category-card").nth(4)).toContainText("PDF Tools");
     });
 
     test("each tool links to the other two in its text, and to nothing outside the section", async ({ page, go, siteRoot }) => {

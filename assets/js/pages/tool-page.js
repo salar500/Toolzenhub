@@ -48,6 +48,10 @@ import {
 } from "../components/breadcrumb.js";
 
 import {
+    renderSectionSwitcher
+} from "../components/section-switcher.js";
+
+import {
     renderRelatedCalculators
 } from "../components/related-calculators.js";
 
@@ -159,7 +163,7 @@ export function buildToolPageHtml(
     return (
         html.slice(0, afterOpen) +
         (metadata
-            ? renderToolBreadcrumb(metadata)
+            ? renderToolBreadcrumb(metadata) + renderSectionSwitcher(id)
             : "") +
         html.slice(afterOpen, close) +
         related +
