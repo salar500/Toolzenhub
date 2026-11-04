@@ -1,0 +1,18 @@
+# Technical debt
+
+Carried from `docs/release-readiness-checkpoint.md` (2026-10-29) and the QC records. "Not re-verified" means the item was recorded earlier and was not checked again at `f5a1df4`.
+
+| ID | Item | Sev | Status |
+|---|---|---|---|
+| T-1 | Four asset or code files are unreachable from any live page (legacy) | P3 | Confirmed by the asset check at f5a1df4; informational |
+| T-2 | Vendored jsPDF contains a cdnjs URL string for an output mode the site never calls | P3 | Not re-verified; no first-party use found earlier |
+| T-3 | Google Fonts and Unsplash are external requests | P1 for production privacy wording | Not re-verified; decide to self-host or disclose |
+| T-4 | Loan Comparison slider target size was 18 px | P2 | Not re-verified; shared sliders were reworked in later commits (`45fc888`), so measure again before acting |
+| T-5 | Five tools had no related-tools list (`ppf`, `profit`, `margin`, `date-difference`, `image-compressor-resizer`) | P2 | Not re-verified; later curated lists may have fixed some |
+| T-6 | Topic-level flashcard deck links not built | P3 | Open |
+| T-7 | No performance measurement of the newer pages (Lighthouse is informational and was last baselined earlier) | P2 | Open; no performance claim is made |
+| T-8 | No screen-reader, Firefox, WebKit or real-device testing | P1 | Open; automated axe is clean on 126 pages at 390, 820 and 1280 px, which is not a WCAG compliance claim |
+| T-9 | Four unit tests skip on this machine (3 symlink, 1 pypdf cross-check) | P3 | Environmental |
+| T-10 | Related-cards limit of six hides Prepayment and Credit Card Payoff on some pages | P3 | Owner decision (see `DEFECT_LEDGER.md` O-3) |
+| T-11 | Process: the memory-limited machine cannot run a full browser regression unattended; the checkpoint was done in groups and one orphaned wrapper process once outlived its stop | P2 | Mitigated by foreground, grouped runs; rule 10.14 |
+| T-12 | Gratuity ceiling and legal-source verification; PPF official-source reading; second reviewer for the 163 learning items | P1 before production | Not re-verified |
