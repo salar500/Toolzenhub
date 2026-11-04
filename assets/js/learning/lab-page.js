@@ -33,7 +33,7 @@ export function labMarkup(config) {
                 <div>
 
                     <span class="calculator-eyebrow">
-                        Developer Tool
+                        ${esc(config.eyebrow ?? "Practice Lab")}
                     </span>
 
                     <h1>

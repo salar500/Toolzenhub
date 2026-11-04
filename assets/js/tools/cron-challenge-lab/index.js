@@ -1,6 +1,6 @@
 /* =========================================================
    ToolZen Hub
-   Cron Challenge Lab (Developer Tools)
+   Cron Challenge Lab (Practice Labs)
 
    Write a five-field cron expression for a schedule described in
    words. The expression is read by the same engine as the Cron

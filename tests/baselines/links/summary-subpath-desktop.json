@@ -256,79 +256,79 @@
     "deadFragments": []
   },
   "calculators/age/": {
-    "internal": 36,
+    "internal": 66,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/balance-transfer/": {
-    "internal": 41,
+    "internal": 71,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/bmi/": {
-    "internal": 33,
+    "internal": 63,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/bmr/": {
-    "internal": 33,
+    "internal": 63,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/cagr/": {
-    "internal": 38,
+    "internal": 68,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/calorie/": {
-    "internal": 33,
+    "internal": 63,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/credit-card-payoff/": {
-    "internal": 38,
+    "internal": 68,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/emi/": {
-    "internal": 44,
+    "internal": 74,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/fd/": {
-    "internal": 38,
+    "internal": 68,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/gratuity/": {
-    "internal": 30,
+    "internal": 60,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/gst/": {
-    "internal": 35,
+    "internal": 65,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/home-loan/": {
-    "internal": 40,
+    "internal": 70,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/income-tax/": {
-    "internal": 31,
+    "internal": 61,
     "external": [
       "egazette.gov.in",
       "github.com",
@@ -339,79 +339,79 @@
     "deadFragments": []
   },
   "calculators/interest/": {
-    "internal": 42,
+    "internal": 72,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/loan-comparison/": {
-    "internal": 41,
+    "internal": 71,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/loan-eligibility/": {
-    "internal": 42,
+    "internal": 72,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/margin/": {
-    "internal": 36,
+    "internal": 66,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/percentage/": {
-    "internal": 39,
+    "internal": 69,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/personal-loan/": {
-    "internal": 42,
+    "internal": 72,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/ppf/": {
-    "internal": 41,
+    "internal": 71,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/prepayment/": {
-    "internal": 41,
+    "internal": 71,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/profit/": {
-    "internal": 36,
+    "internal": 66,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/ratio/": {
-    "internal": 36,
+    "internal": 66,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/risk-reward/": {
-    "internal": 41,
+    "internal": 71,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/roi/": {
-    "internal": 34,
+    "internal": 64,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/salary-in-hand/": {
-    "internal": 32,
+    "internal": 62,
     "external": [
       "github.com"
     ],
@@ -419,25 +419,25 @@
     "deadFragments": []
   },
   "calculators/sip/": {
-    "internal": 41,
+    "internal": 71,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/swp/": {
-    "internal": 34,
+    "internal": 64,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/unit-converter/": {
-    "internal": 33,
+    "internal": 63,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/xirr/": {
-    "internal": 41,
+    "internal": 71,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -515,7 +515,7 @@
     "deadFragments": []
   },
   "practice-labs.html": {
-    "internal": 32,
+    "internal": 33,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -545,223 +545,229 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 112,
+    "internal": 113,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/base64-encoder-decoder/": {
-    "internal": 32,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/business-days/": {
-    "internal": 31,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/countdown-timer/": {
-    "internal": 27,
+    "internal": 40,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/cron-challenge-lab/": {
-    "internal": 30,
+    "internal": 36,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/cron-expression-explainer/": {
-    "internal": 29,
+    "internal": 41,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/date-calculator/": {
-    "internal": 34,
+    "internal": 47,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/date-difference/": {
-    "internal": 28,
+    "internal": 41,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/hours-calculator/": {
-    "internal": 29,
+    "internal": 42,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/image-compressor-resizer/": {
-    "internal": 26,
+    "internal": 28,
     "external": [],
     "placeholders": 1,
     "deadFragments": []
   },
   "tools/interval-timer/": {
-    "internal": 32,
+    "internal": 45,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/json-compare/": {
-    "internal": 32,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/json-csv-converter/": {
-    "internal": 30,
+    "internal": 42,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/json-error-fixing-lab/": {
-    "internal": 30,
+    "internal": 36,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/json-formatter/": {
-    "internal": 32,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/jsonpath-challenge-lab/": {
-    "internal": 30,
+    "internal": 36,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/jsonpath-tester/": {
-    "internal": 31,
+    "internal": 43,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/jwt-decoder/": {
-    "internal": 32,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/list-comparer/": {
-    "internal": 30,
+    "internal": 42,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/meeting-planner/": {
-    "internal": 31,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/merge-pdf/": {
-    "internal": 28,
+    "internal": 32,
     "external": [],
     "placeholders": 1,
     "deadFragments": []
   },
   "tools/pdf-marks/": {
-    "internal": 28,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/pdf-pages/": {
-    "internal": 28,
-    "external": [],
-    "placeholders": 1,
-    "deadFragments": []
-  },
-  "tools/photos-to-pdf/": {
-    "internal": 26,
-    "external": [],
-    "placeholders": 1,
-    "deadFragments": []
-  },
-  "tools/pomodoro-timer/": {
     "internal": 32,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
+  "tools/pdf-pages/": {
+    "internal": 32,
+    "external": [],
+    "placeholders": 1,
+    "deadFragments": []
+  },
+  "tools/photos-to-pdf/": {
+    "internal": 28,
+    "external": [],
+    "placeholders": 1,
+    "deadFragments": []
+  },
+  "tools/pomodoro-timer/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
   "tools/shift-planner/": {
-    "internal": 31,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/smart-flashcards/": {
-    "internal": 31,
+    "internal": 37,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/split-pdf/": {
-    "internal": 29,
+    "internal": 33,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/sql-practice-lab/": {
+    "internal": 35,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/stopwatch/": {
-    "internal": 27,
+    "internal": 40,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/test-design-lab/": {
-    "internal": 30,
+    "internal": 36,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/text-diff/": {
-    "internal": 31,
+    "internal": 43,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/time-duration/": {
-    "internal": 31,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/time-zone-converter/": {
-    "internal": 30,
+    "internal": 43,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/unix-timestamp-converter/": {
-    "internal": 31,
+    "internal": 43,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/url-parser/": {
-    "internal": 31,
+    "internal": 43,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/uuid-generator/": {
-    "internal": 29,
+    "internal": 41,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/world-clock/": {
-    "internal": 31,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []

@@ -115,7 +115,7 @@ test.describe("home page", () => {
   });
 
   test("Practice Labs is its own section: its hub lists the five, Developer Tools no longer does, and each lab's breadcrumb names it", async ({ page, go, siteRoot }) => {
-    const LABS = ["smart-flashcards", "json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab"];
+    const LABS = ["smart-flashcards", "json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab", "sql-practice-lab"];
     await go("practice-labs.html");
     await expect(page.locator("h1")).toHaveText("Practice Labs");
     const hub = await page.locator(".directory-tools a[href*='/tools/']").evaluateAll((as) => as.map((a) => a.getAttribute("href").replace(/\/$/, "").split("/").pop()));
@@ -545,7 +545,7 @@ test.describe("All Tools and the calculator hierarchy", () => {
     for (const r of ["loans.html", "investment.html", "tax.html", "business.html", "math.html", "calculators/emi/", "calculators/sip/", "calculators/fd/", "calculators/cagr/", "calculators/ppf/", "calculators/margin/", "calculators/profit/", "calculators/gst/", "calculators/percentage/", "calculators/income-tax/"]) expect(live).toContain(siteRoot + r);
     for (const r of ["health.html", "converter.html", "calculators/roi/", "calculators/bmi/", "calculators/unit-converter/"]) expect(live).toContain(siteRoot + r); // Tool Pack 53
     for (const bad of ["categories.html#health", "categories.html#converter"]) expect(live.some((h) => h.includes(bad)), bad).toBe(false);
-    await expect(page.locator(".directory-group")).toHaveCount(43); // the seven live calculator categories (Health and Converter since Tool Pack 53), the thirteen Time Tools tools (Tool Pack 34), the twelve Developer Tools and the five Practice Labs tools (twelve utilities and the five Practice Labs and Flashcards tools), the two Image Tools tools (Photos to PDF is the second, Tool Pack 31) and the four PDF Tools tools (Tool Pack 33, and Tool Pack 52, PDF Page Numbers and Watermark)
+    await expect(page.locator(".directory-group")).toHaveCount(44); // the seven live calculator categories (Health and Converter since Tool Pack 53), the thirteen Time Tools tools (Tool Pack 34), the twelve Developer Tools and the five Practice Labs tools (twelve utilities and the five Practice Labs and Flashcards tools), the two Image Tools tools (Photos to PDF is the second, Tool Pack 31) and the four PDF Tools tools (Tool Pack 33, and Tool Pack 52, PDF Page Numbers and Watermark)
     await expect(page.locator(".directory-soon")).toHaveCount(0);
     await expect(page.locator(".coming-soon-badge")).toHaveCount(0);
     await expect(page.getByRole("heading", { name: "Coming soon" })).toHaveCount(0);
@@ -629,7 +629,7 @@ test.describe("All Tools and the calculator hierarchy", () => {
   test("the three destinations have different jobs: All Tools (platform), Calculator Categories (the section) and All Calculators (the flat list)", async ({ page, go }) => {
     await go("tools.html");
     await expect(page.locator(".directory-section__label")).toHaveText(["Section", "Section", "Section", "Section", "Section", "Section"]);
-    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, /^13 tools$/, "12 tools", /^2 tools$/, /^4 tools$/, "5 tools"]);
+    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, /^13 tools$/, "12 tools", /^2 tools$/, /^4 tools$/, "6 tools"]);
     await go("categories.html");
     await expect(page.locator("h1")).toHaveText("Calculator Categories");
     await expect(page.locator(".categories-search__content p")).toHaveText("Search calculators"); // this search is scoped to calculators, and says so

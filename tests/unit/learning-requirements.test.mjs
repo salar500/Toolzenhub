@@ -16,7 +16,7 @@ import { validateDeck, validateExerciseSet } from "../../assets/js/learning/cont
 
 globalThis.window = { location: { hostname: "salar500.github.io", pathname: "/" } };
 
-const LABS = ["json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab"];
+const LABS = ["json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab", "sql-practice-lab"];
 const pages = {};
 const content = {};
 let toolIds;
@@ -26,7 +26,7 @@ before(async () => {
     toolIds = { has: (id) => Boolean(catalog.getToolById(id)) };
     for (const id of [...LABS, "smart-flashcards"]) pages[id] = (await import(`../../assets/js/tools/${id}/index.js`)).markup();
     content.decks = [];
-    for (const f of ["json", "http-apis", "software-testing"]) content.decks.push((await import(`../../assets/js/tools/smart-flashcards/decks/${f}.js`)).deck);
+    for (const f of ["json", "http-apis", "software-testing", "sql"]) content.decks.push((await import(`../../assets/js/tools/smart-flashcards/decks/${f}.js`)).deck);
     content.sets = [];
     for (const id of LABS) content.sets.push((await import(`../../assets/js/tools/${id}/exercises.js`)).set);
 });

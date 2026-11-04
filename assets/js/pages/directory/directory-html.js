@@ -535,7 +535,7 @@ export function sectionPageHtml(sectionId) {
    appears.
 ========================================================= */
 
-const PRACTICE_LAB_IDS = ["json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab"];
+const PRACTICE_LAB_IDS = ["json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab", "sql-practice-lab"];
 const REVISION_IDS = ["smart-flashcards"];
 
 const liveByIds = ids => ids.map(id => getToolById(id)).filter(tool => tool && tool.available);

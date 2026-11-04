@@ -107,7 +107,7 @@ Choose the format by the user's job. Do not build a calculator for an informatio
 
 ## 9. Engineering restraint
 
-1. **Avoid unnecessary APIs, frameworks, backends and dependencies.** Plain JavaScript and the platform come first; a dependency needs a compelling product reason, and a good native control often beats an editor library.
+1. **Avoid unnecessary APIs, frameworks, backends and dependencies.** Plain JavaScript and the platform come first; a dependency needs a compelling product reason, and a good native control often beats an editor library. Approved dependency (owner delegation, 2026-11-04): sql.js 1.15.2 (MIT), vendored under `assets/js/vendor/sql-js/` with licence and hashes, used only inside a Web Worker for the SQL Practice Lab (in-memory, 3 s limit, no network).
 2. **One source of truth.** Identity, SEO text, section, relationships and capabilities live in the central catalog; routes, listings, search and the sitemap derive from it. Never store the same fact twice.
 3. **Preserve working tools.** Do not modify an existing tool's implementation or logic for a new phase, and do not refactor old tools "for consistency". Touch shared code only where the change requires it (registration, catalog, search, directory rendering, routing, breadcrumbs), keep the change small, and state it in the commit.
 4. **Share only real duplication.** The shared layer wires presentation and accessibility; the tool owns its domain (formulas, validation rules, wording, result composition). No generic "render a tool from config" layers, no rules engines, no extracting something used once.

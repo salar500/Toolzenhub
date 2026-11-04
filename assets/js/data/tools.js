@@ -2337,6 +2337,41 @@ const catalog = [
     },
 
     {
+        id: "sql-practice-lab",
+        status: "published",
+        loader: () =>
+            import("../tools/sql-practice-lab/index.js"),
+        sectionId: "practice-labs",
+        icon: "🗄",
+        title: "SQL Practice Lab",
+        description:
+            "Learn SQL by writing it. Thirty exercises on a small shop database run in SQLite inside your browser, and your result is checked against the expected one. It runs in your browser: nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: ["smart-flashcards", "test-design-lab"],
+        aliases: [
+            "sql practice",
+            "learn sql",
+            "sql exercises",
+            "sql practice online",
+            "sql queries practice",
+            "sql joins practice"
+        ],
+        capabilities: {
+            examples: true,
+            explanation: true,
+            localProcessing: true,
+            reset: true,
+            validation: true
+        },
+        seo: {
+            title:
+                "SQL Practice Lab: Learn SQL with Exercises That Run | ToolZen Hub",
+            description:
+                "Practise SQL with 30 exercises on a small shop database: SELECT, WHERE, joins, grouping, subqueries, window functions, changing data and transactions. SQLite runs in your browser: nothing is uploaded."
+        }
+    },
+
+    {
         id: "list-comparer",
         status: "published",
         loader: () =>

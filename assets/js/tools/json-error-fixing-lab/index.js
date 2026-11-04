@@ -1,6 +1,6 @@
 /* =========================================================
    ToolZen Hub
-   JSON Error-Fixing Lab (Developer Tools)
+   JSON Error-Fixing Lab (Practice Labs)
 
    Broken JSON to repair, checked by the same strict JSON engine as
    the JSON Formatter and Validator. A repair is correct when the text

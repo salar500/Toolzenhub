@@ -39,7 +39,7 @@ export function defineShellTests(cfg) {
       await openLab(page, go, cfg.route);
       await expect(page.locator("h1")).toHaveText(cfg.title);
       const labels = (await page.locator(".calculator-breadcrumb").locator("a, strong").allInnerTexts()).map((t) => t.trim());
-      expect(labels).toEqual(["Home", "Developer Tools", cfg.title]);
+      expect(labels).toEqual(["Home", "Practice Labs", cfg.title]);
       await expect(app(page).locator(".lx-exlist li")).toHaveCount(cfg.count);
       await expect(app(page).locator("[data-role=counts]")).toContainText(`${cfg.count} exercises: 0 completed, 0 solution viewed, ${cfg.count} not started. Nothing is saved when you leave this page.`);
       expect(await page.evaluate(() => JSON.stringify([Object.entries(localStorage), Object.entries(sessionStorage), document.cookie]))).not.toContain("tz-learn");
@@ -141,6 +141,7 @@ export function defineShellTests(cfg) {
       await expectNoHorizontalOverflow(page);
       await answerBox(page).fill(cfg.wrong);
       await checkButton(page).click();
+      await expect(verdictOf(page)).toBeVisible(); // a lab whose check runs in a worker answers a moment later and redraws the page
       await page.getByRole("button", { name: /^Show hint 1/ }).click();
       await page.getByRole("button", { name: "Show solution" }).click();
       await expectNoHorizontalOverflow(page);
@@ -156,6 +157,7 @@ export function defineShellTests(cfg) {
       expect(await strayWords(page)).toEqual([]);
       await answerBox(page).fill(cfg.wrong);
       await checkButton(page).click();
+      await expect(verdictOf(page)).toBeVisible();
       expect(await strayWords(page)).toEqual([]);
       await page.getByRole("button", { name: /^Show hint|^Hint/ }).first().click();
       expect(await strayWords(page)).toEqual([]);

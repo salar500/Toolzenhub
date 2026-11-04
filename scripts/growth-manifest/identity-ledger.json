@@ -670,6 +670,13 @@
       "state": "active"
     },
     {
+      "id": "sql-practice-lab",
+      "module": "assets/js/tools/sql-practice-lab/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "stopwatch",
       "module": "assets/js/tools/stopwatch/index.js",
       "moduleChanges": [],

@@ -1,6 +1,6 @@
 /* =========================================================
    ToolZen Hub
-   Smart Flashcards (Developer Tools)
+   Smart Flashcards (Practice Labs)
 
    Short decks of original cards on JSON, HTTP and APIs, and software
    testing. Two kinds of card: a recall card (think, reveal, then say
@@ -46,7 +46,8 @@ const TITLE = "Smart Flashcards";
 export const DECKS = [
     { id: "json", title: "JSON", cardCount: 30, load: () => import("./decks/json.js") },
     { id: "http-apis", title: "HTTP and APIs", cardCount: 28, load: () => import("./decks/http-apis.js") },
-    { id: "software-testing", title: "Software Testing", cardCount: 29, load: () => import("./decks/software-testing.js") }
+    { id: "software-testing", title: "Software Testing", cardCount: 29, load: () => import("./decks/software-testing.js") },
+    { id: "sql", title: "SQL", cardCount: 30, load: () => import("./decks/sql.js") }
 ];
 
 const DIFFICULTY_LABEL = { beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced" };
@@ -66,7 +67,7 @@ export function markup() {
                 <div>
 
                     <span class="calculator-eyebrow">
-                        Developer Tool
+                        Practice Lab
                     </span>
 
                     <h1>
@@ -74,7 +75,7 @@ export function markup() {
                     </h1>
 
                     <p>
-                        Revise JSON, HTTP and APIs, and software testing with
+                        Revise JSON, HTTP and APIs, software testing and SQL with
                         short original cards. Think of the answer first, then
                         check it. Every card explains why. Nothing is saved
                         unless you choose to save it on this device.
@@ -149,7 +150,7 @@ export function markup() {
                 </p>
 
                 <p>
-                    To practise rather than revise, the Developer Tools section also has
+                    To practise rather than revise, the Practice Labs section also has
                     the JSON Error-Fixing Lab, the JSONPath Challenge Lab, the
                     Cron Challenge Lab and the Test Design Lab.
                 </p>

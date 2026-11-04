@@ -1,6 +1,6 @@
 /* =========================================================
    ToolZen Hub
-   Test Design Lab (Developer Tools)
+   Test Design Lab (Practice Labs)
 
    Practice in two test design techniques for whole numbers:
    boundary values and equivalence partitions. The required answer is

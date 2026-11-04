@@ -35,13 +35,24 @@ const DIFFICULTY_LABEL = { beginner: "Beginner", intermediate: "Intermediate", a
 export const MAX_HINTS = 3;
 
 /** Run an evaluator so that no failure of it reaches the learner as a wrong answer. */
+const FAILED = { verdict: "error", summary: "Something went wrong while checking this answer. Your answer is still in the box. Try Check answer again." };
+
+function validVerdict(result) {
+    if (!result || !["correct", "not-yet", "cannot-check"].includes(result.verdict)) throw new Error("bad verdict");
+    return result;
+}
+
+/**
+ * Run an evaluator so that no failure of it reaches the learner as a wrong answer. An evaluator may be synchronous (the
+ * result is returned) or asynchronous (a promise of the result is returned, for a lab whose check runs in a worker).
+ */
 export function runEvaluator(evaluate, exercise, value) {
     try {
         const result = evaluate(exercise, value);
-        if (!result || !["correct", "not-yet", "cannot-check"].includes(result.verdict)) throw new Error("bad verdict");
-        return result;
+        if (result && typeof result.then === "function") return result.then(validVerdict).catch(() => FAILED);
+        return validVerdict(result);
     } catch {
-        return { verdict: "error", summary: "Something went wrong while checking this answer. Your answer is still in the box. Try Check answer again." };
+        return FAILED;
     }
 }
 
@@ -221,7 +232,10 @@ export function mountLab({ root, live, lab }) {
             put(result, box);
         }
 
+        let running = false;
+
         function check() {
+            if (running) return; // one check at a time
             const value = control.get();
             if (st.result && st.checkedValue === value) return; // same answer: shown once, announced once
             let outcome;
@@ -233,6 +247,24 @@ export function mountLab({ root, live, lab }) {
             } else {
                 outcome = runEvaluator(lab.evaluate, ex, value);
             }
+            if (outcome && typeof outcome.then === "function") {
+                /* an asynchronous check (a worker): the button waits, and a result for an answer that has since changed is dropped */
+                const here = index;
+                running = true;
+                checkButton.setAttribute("aria-busy", "true"); // not disabled: focus must stay on the button
+                say("Running your answer.");
+                outcome.then((done) => {
+                    running = false;
+                    checkButton.removeAttribute("aria-busy");
+                    if (index !== here || control.get() !== value) return;
+                    finish(value, done);
+                });
+                return;
+            }
+            finish(value, outcome);
+        }
+
+        function finish(value, outcome) {
             st.value = value;
             if (outcome.verdict !== "cannot-check") st.touched = true; // a response that could not be checked is not an attempt
             st.result = outcome;

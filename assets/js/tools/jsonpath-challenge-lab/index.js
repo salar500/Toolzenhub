@@ -1,6 +1,6 @@
 /* =========================================================
    ToolZen Hub
-   JSONPath Challenge Lab (Developer Tools)
+   JSONPath Challenge Lab (Practice Labs)
 
    Write a JSONPath query against a built-in document. The query is
    run by the same RFC 9535 engine as the JSONPath Tester, and judged

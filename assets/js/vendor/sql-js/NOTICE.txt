@@ -1,0 +1,16 @@
+sql.js (vendored, unmodified)
+=============================
+
+Files:      sql-wasm.js and sql-wasm.wasm (the "dist/" files of the npm package; SQLite compiled to WebAssembly)
+Package:    sql.js 1.15.2, MIT licence (LICENSE.txt, copied from the package). SQLite itself is in the public domain.
+Upstream:   https://github.com/sql-js/sql.js
+Obtained:   2026-11-04 from the npm registry (npm pack)
+Integrity:  npm tarball sha512-ZmMYFsZPZWDKIJUh3A5rdnpRV3hB/r7AijwAzSzLnfv/9CSx4obUmDtA8brAjWJWjGtUVh43nIEJ+6nl6HuOUg==
+            (registry value; the tarball SHA-256 on disk was 74fbdd37...72fd)
+SHA-256 as vendored:
+            sql-wasm.js    b46d4bddfdde8a787fc4764bd0a405cdfdf96fbd77e6a4e95446106826ecfa47
+            sql-wasm.wasm  0dfeecda2070b36da0cd4f6afa250af9453de528a983770f85b13d5d6b667572
+Size:       sql-wasm.js 17 KB gzip, sql-wasm.wasm 328 KB gzip (measured with gzip -c)
+Used by:    assets/js/tools/sql-practice-lab/ only. It runs inside a Web Worker (sql-worker.js), loaded only when the SQL Practice Lab
+            starts, with an in-memory database, no network and no file access. The worker is stopped and recreated if a statement runs
+            longer than the time limit.
