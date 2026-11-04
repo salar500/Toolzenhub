@@ -2345,7 +2345,7 @@ const catalog = [
         icon: "🗄",
         title: "SQL Practice Lab",
         description:
-            "Learn SQL by writing it. Thirty exercises on a small shop database run in SQLite inside your browser, and your result is checked against the expected one. It runs in your browser: nothing is uploaded.",
+            "Learn SQL from the start: eighteen lessons with runnable examples and forty-nine exercises on a small shop database, with data cleaning and a sales-report project. SQLite runs inside your browser and your result is checked against the expected one. It runs in your browser: nothing is uploaded.",
         autoRelated: false,
         relatedTools: ["smart-flashcards", "test-design-lab"],
         aliases: [
@@ -2367,7 +2367,7 @@ const catalog = [
             title:
                 "SQL Practice Lab: Learn SQL with Exercises That Run | ToolZen Hub",
             description:
-                "Practise SQL with 30 exercises on a small shop database: SELECT, WHERE, joins, grouping, subqueries, window functions, changing data and transactions. SQLite runs in your browser: nothing is uploaded."
+                "Learn and practise SQL: 18 lessons and 49 exercises on a small shop database, from SELECT and WHERE to joins, grouping, window functions, data cleaning, changing data and transactions. SQLite runs in your browser: nothing is uploaded."
         }
     },
 

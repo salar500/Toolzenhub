@@ -771,3 +771,61 @@
         min-height: 440px;
     }
 }
+
+
+/* Lessons (SQL Practice Lab): one disclosure per lesson, a worked example with its result, and a place to run it. */
+.lx-lessons {
+    display: grid;
+    gap: 10px;
+}
+
+.lx-lesson {
+    border: 1px solid var(--color-slate-200);
+    border-radius: 10px;
+    background: var(--color-white, #fff);
+}
+
+.lx-lesson > summary {
+    padding: 12px 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.lx-lesson__body {
+    display: grid;
+    gap: 12px;
+    padding: 0 14px 14px;
+}
+
+.lx-lessons,
+.lx-lesson,
+.lx-lesson__body > * {
+    min-width: 0;
+}
+
+.lx-lesson__body h3,
+.lx-lesson__body h4,
+.lx-lesson__body p,
+.lx-lesson__body ul {
+    margin: 0;
+}
+
+.lx-lesson__body ul {
+    padding-left: 20px;
+}
+
+.lx-lesson__level {
+    margin-left: 8px;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: var(--color-ink-muted);
+}
+
+.lx-sandbox {
+    display: grid;
+    gap: 10px;
+}
+
+.lx-live-result {
+    min-height: 0;
+}

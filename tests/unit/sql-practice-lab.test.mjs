@@ -28,7 +28,7 @@ describe("SQL Practice Lab: content", () => {
 
     it("passes the shared exercise-set validation", () => {
         assert.deepEqual(validateExerciseSet(set, { toolIds: { has: (id) => Boolean(catalog.getToolById(id)) } }), []);
-        assert.equal(set.exercises.length, 30);
+        assert.equal(set.exercises.length, 49);
     });
 
     it("every exercise has a solution, a kind, an expected result of the right shape, and a verify query exactly when it modifies data", () => {
@@ -56,6 +56,42 @@ describe("SQL Practice Lab: content", () => {
         assert.equal(by("sql-subquery").expected.rows.length, 4);
         assert.deepEqual(by("sql-having").expected.rows.sort(), [[1, 4], [2, 3], [4, 3]]);
         assert.deepEqual(by("sql-delete").expected.rows, [[18]]);
+    });
+
+});
+
+describe("SQL Practice Lab: lessons", () => {
+
+    let lessons;
+    before(async () => { ({ lessons } = await import("../../assets/js/tools/sql-practice-lab/lessons.js")); });
+
+    it("has the planned 18 lessons in a beginner-first order, each with teaching text, an example and mistakes", () => {
+        assert.equal(lessons.length, 18);
+        const rank = { beginner: 0, intermediate: 1, advanced: 2 };
+        assert.ok(["beginner", "intermediate", "advanced"].includes(lessons[0].level));
+        assert.equal(lessons[0].level, "beginner");
+        for (const l of lessons) {
+            assert.ok(l.intro.length > 60 && l.points.length >= 2 && l.mistakes.length >= 1, l.id);
+            assert.ok(rank[l.level] !== undefined, l.id);
+            for (const e of l.examples) assert.ok(e.sql.length > 5 && e.says.length > 10, l.id);
+        }
+        assert.equal(new Set(lessons.map((l) => l.id)).size, lessons.length);
+    });
+
+    it("every lesson points only at exercises that exist, and every exercise is reachable from some lesson", () => {
+        const ids = new Set(set.exercises.map((e) => e.id));
+        const covered = new Set(lessons.flatMap((l) => l.practise));
+        for (const id of covered) assert.ok(ids.has(id), id);
+        const missing = [...ids].filter((id) => !covered.has(id));
+        assert.deepEqual(missing.filter((id) => !id.startsWith("sql-project")), []); // the three project steps use several lessons at once
+    });
+
+    it("the lessons page markup escapes its text and has no script", async () => {
+        const { lessonsMarkup } = await import("../../assets/js/tools/sql-practice-lab/lessons-view.js");
+        const html = lessonsMarkup(lessons, set.exercises);
+        assert.doesNotMatch(html, /<script/i);
+        assert.equal((html.match(/data-sql-run/g) ?? []).length, lessons.reduce((n, l) => n + l.examples.length, 0));
+        assert.match(html, /name FROM customers WHERE city IN \(&#39;Pune&#39;, &#39;Kochi&#39;\)|city IN \(&#39;Pune&#39;/);
     });
 
 });

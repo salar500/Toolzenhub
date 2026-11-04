@@ -5104,7 +5104,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2394
+      "visibleTextChars": 2488
     }
   },
   "/privacy.html": {
@@ -5331,7 +5331,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 14208
+      "visibleTextChars": 14302
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -6660,11 +6660,11 @@
   "/tools/sql-practice-lab/": {
     "runtime": {
       "title": "SQL Practice Lab: Learn SQL with Exercises That Run | ToolZen Hub",
-      "description": "Practise SQL with 30 exercises on a small shop database: SELECT, WHERE, joins, grouping, subqueries, window functions, changing data and transactions. SQLite runs in your browser: nothing is uploaded.",
+      "description": "Learn and practise SQL: 18 lessons and 49 exercises on a small shop database, from SELECT and WHERE to joins, grouping, window functions, data cleaning, changing data and transactions. SQLite runs in your browser: nothing is uploaded.",
       "canonical": "https://toolzenhub.in/tools/sql-practice-lab/",
       "robots": null,
       "openGraph": {
-        "og:description": "Practise SQL with 30 exercises on a small shop database: SELECT, WHERE, joins, grouping, subqueries, window functions, changing data and transactions. SQLite runs in your browser: nothing is uploaded.",
+        "og:description": "Learn and practise SQL: 18 lessons and 49 exercises on a small shop database, from SELECT and WHERE to joins, grouping, window functions, data cleaning, changing data and transactions. SQLite runs in your browser: nothing is uploaded.",
         "og:site_name": "ToolZen Hub",
         "og:title": "SQL Practice Lab: Learn SQL with Exercises That Run | ToolZen Hub",
         "og:type": "website",
@@ -6672,7 +6672,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Practise SQL with 30 exercises on a small shop database: SELECT, WHERE, joins, grouping, subqueries, window functions, changing data and transactions. SQLite runs in your browser: nothing is uploaded.",
+        "twitter:description": "Learn and practise SQL: 18 lessons and 49 exercises on a small shop database, from SELECT and WHERE to joins, grouping, window functions, data cleaning, changing data and transactions. SQLite runs in your browser: nothing is uploaded.",
         "twitter:title": "SQL Practice Lab: Learn SQL with Exercises That Run | ToolZen Hub"
       },
       "jsonLd": [
@@ -6696,14 +6696,14 @@
     },
     "rawHtml": {
       "title": "SQL Practice Lab: Learn SQL with Exercises That Run | ToolZen Hub",
-      "description": "Practise SQL with 30 exercises on a small shop database: SELECT, WHERE, joins, grouping, subqueries, window functions, changing data and transactions. SQLite runs in your browser: nothing is uploaded.",
+      "description": "Learn and practise SQL: 18 lessons and 49 exercises on a small shop database, from SELECT and WHERE to joins, grouping, window functions, data cleaning, changing data and transactions. SQLite runs in your browser: nothing is uploaded.",
       "canonical": "https://toolzenhub.in/tools/sql-practice-lab/",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5981
+      "visibleTextChars": 30215
     }
   },
   "/tools/stopwatch/": {

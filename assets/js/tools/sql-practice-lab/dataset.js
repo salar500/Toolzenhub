@@ -16,3 +16,8 @@ export const SETUP = [
     "CREATE TABLE order_items (order_id INTEGER NOT NULL, product_id INTEGER NOT NULL, quantity INTEGER NOT NULL);",
     "INSERT INTO order_items VALUES\n (1,1,3),(1,2,5),(2,4,1),(3,7,1),(3,2,2),(4,3,1),(4,5,1),(5,6,2),(6,8,2),(6,1,4),\n (7,9,1),(8,10,3),(9,4,1),(9,7,1),(10,2,10),(11,5,2),(11,10,1),(12,6,1),(13,8,1),(13,3,2),\n (14,1,2),(15,9,1),(15,2,5),(16,4,1),(17,7,1),(18,3,1),(18,6,1),(19,5,1),(20,8,3),(20,10,2),(20,1,1);"
 ];
+
+/* An untidy contacts table for the data cleaning lessons and exercises: added to the sandbox, to the lessons, and to those exercises as their own setup. */
+export const CLEANING_SETUP = [
+    "CREATE TABLE contacts_raw (id INTEGER PRIMARY KEY, name TEXT, email TEXT, city TEXT, signup TEXT); INSERT INTO contacts_raw VALUES (1, '  Asha Rao ', 'ASHA@Example.com', 'pune', '2024-01-05'), (2, 'bilal khan', 'bilal@example.com ', 'Mumbai', '2024-01-09'), (3, 'Asha Rao', 'asha@example.com', 'Pune', '2024-01-05'), (4, 'Chitra Iyer', '', 'Chennai', '05/02/2024'), (5, 'Divya Nair', NULL, '  Kochi', '2024-02-11'), (6, 'divya nair', 'divya@example.com', 'Kochi', '2024-13-40'), (7, 'Farhan Ali', 'farhan@example.com', 'MUMBAI', '2024-03-01'), (8, 'Gita Sharma', 'gita@example.com', 'Delhi', '2024-03-15');"
+];

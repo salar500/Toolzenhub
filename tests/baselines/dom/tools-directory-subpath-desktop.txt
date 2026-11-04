@@ -368,6 +368,6 @@ section.categories-page.directory-page
               article.directory-group.directory-group--tool
                 h3.directory-group__title
                   a [href="{ROOT}tools/sql-practice-lab/"] "SQL Practice Lab"
-                p.directory-group__text "Learn SQL by writing it. Thirty exercises on a small shop database run in SQLite inside yo…"
+                p.directory-group__text "Learn SQL from the start: eighteen lessons with runnable examples and forty-nine exercises…"
             p.directory-section__more
               a [href="{ROOT}practice-labs.html"] "Practice Labs: exercises and flashcards →"

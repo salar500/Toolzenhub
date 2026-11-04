@@ -20,6 +20,8 @@ const paragraphs = (list) => (list ?? []).map((p) => `<p>${esc(p)}</p>`).join(""
 
 /**
  * config: { id, title, intro, howTo[], worked: { heading, intro, steps[], example? }, sections: [{ heading, paragraphs[], items[] }] }
+ * Optional `afterApp` and `beforeSections`: HTML strings written by the lab's own source (already escaped there), placed after
+ * the exercise area and before the notes.
  */
 export function labMarkup(config) {
 
@@ -96,6 +98,8 @@ export function labMarkup(config) {
 
             </section>
 
+            ${config.afterApp ?? ""}
+
             <section class="calculator-info">
 
                 <h2>How the Lab Works</h2>
@@ -105,6 +109,8 @@ export function labMarkup(config) {
                 </ol>
 
             </section>
+
+            ${config.beforeSections ?? ""}
 
             ${(config.sections ?? []).map((s) => `
             <section class="calculator-info">

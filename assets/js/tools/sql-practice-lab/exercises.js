@@ -10,9 +10,9 @@
 
 export const set = {
     "id": "sql-practice",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "title": "SQL Practice Lab",
-    "description": "Thirty exercises that teach SQL on a small shop database, from SELECT and WHERE to joins, window functions, changing data, constraints and transactions, run by SQLite in your browser.",
+    "description": "Forty-nine exercises that teach SQL on a small shop database, from SELECT and WHERE to joins, window functions, changing data, constraints and transactions, run by SQLite in your browser.",
     "reviewed": {
         "date": "2026-11-04",
         "method": "Written by the author. Expected results were produced by Python's sqlite3 (SQLite 3.40.1, a separate build from the sql.js on the page) and the small ones checked by hand. A browser test runs every solution on the page and requires a match."
@@ -1340,6 +1340,935 @@ export const set = {
                     [
                         2,
                         700
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-in-between",
+            "topic": "where",
+            "title": "IN and BETWEEN",
+            "difficulty": "beginner",
+            "objective": "Match a list of values with IN and a range with BETWEEN.",
+            "instructions": "Return the name of every product in the Home or Bags category that costs between 300 and 1300, both ends included.",
+            "solution": "SELECT name FROM products WHERE category IN ('Home', 'Bags') AND price BETWEEN 300 AND 1300;",
+            "hints": [
+                "IN (...) is a short way to write several OR tests on one column.",
+                "BETWEEN a AND b includes both a and b."
+            ],
+            "explanation": "IN tests a column against a list, and BETWEEN 300 AND 1300 means price >= 300 AND price <= 1300, so both ends are included. The Lunch Box (280) is below the range and is left out.",
+            "source": "SQLite documentation: expressions, IN and BETWEEN",
+            "ordered": false,
+            "kind": "query",
+            "setup": [],
+            "verify": null,
+            "expected": {
+                "columns": 1,
+                "rows": [
+                    [
+                        "Desk Lamp"
+                    ],
+                    [
+                        "Backpack"
+                    ],
+                    [
+                        "Water Bottle"
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-not-in",
+            "topic": "where",
+            "title": "Leave some rows out",
+            "difficulty": "beginner",
+            "objective": "Exclude values with NOT IN.",
+            "instructions": "Return the name and city of every customer who does not live in Pune or Mumbai.",
+            "solution": "SELECT name, city FROM customers WHERE city NOT IN ('Pune', 'Mumbai');",
+            "hints": [
+                "NOT IN (...) keeps the rows whose value is not in the list."
+            ],
+            "explanation": "NOT IN keeps the rows whose value is missing from the list. If the list could contain NULL, NOT IN would return no rows at all, because a comparison with NULL is unknown; with a fixed list of text values, as here, that cannot happen.",
+            "source": "SQLite documentation: expressions, IN and NOT IN",
+            "ordered": false,
+            "kind": "query",
+            "setup": [],
+            "verify": null,
+            "expected": {
+                "columns": 2,
+                "rows": [
+                    [
+                        "Chitra Iyer",
+                        "Chennai"
+                    ],
+                    [
+                        "Divya Nair",
+                        "Kochi"
+                    ],
+                    [
+                        "Gita Sharma",
+                        "Delhi"
+                    ],
+                    [
+                        "Anil Kumar",
+                        "Delhi"
+                    ],
+                    [
+                        "Hari Prasad",
+                        "Chennai"
+                    ],
+                    [
+                        "Isha Patel",
+                        "Ahmedabad"
+                    ],
+                    [
+                        "Kavya Reddy",
+                        "Hyderabad"
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-alias-arithmetic",
+            "topic": "select",
+            "title": "Calculate a column and name it",
+            "difficulty": "beginner",
+            "objective": "Compute a value in the SELECT list and give it an alias.",
+            "instructions": "Return the name of every product and its price with 18 percent added, rounded to 2 decimals, as a column named price_with_tax.",
+            "solution": "SELECT name, ROUND(price * 1.18, 2) AS price_with_tax FROM products;",
+            "hints": [
+                "Arithmetic works on columns: price * 1.18.",
+                "ROUND(value, 2) keeps two decimals. AS gives the column a name."
+            ],
+            "explanation": "An expression in the SELECT list is calculated for every row, and AS gives its column a readable name. The lab compares the values, not the column name, but a clear alias is what makes a real report understandable.",
+            "source": "SQLite documentation: SELECT, column aliases; core functions, round()",
+            "ordered": false,
+            "kind": "query",
+            "setup": [],
+            "verify": null,
+            "expected": {
+                "columns": 2,
+                "rows": [
+                    [
+                        "Notebook",
+                        70.8
+                    ],
+                    [
+                        "Ballpoint Pen",
+                        11.8
+                    ],
+                    [
+                        "Desk Lamp",
+                        531.0
+                    ],
+                    [
+                        "Backpack",
+                        1416.0
+                    ],
+                    [
+                        "Water Bottle",
+                        413.0
+                    ],
+                    [
+                        "Calculator",
+                        826.0
+                    ],
+                    [
+                        "Headphones",
+                        2124.0
+                    ],
+                    [
+                        "Marker Set",
+                        177.0
+                    ],
+                    [
+                        "Laptop Stand",
+                        1121.0
+                    ],
+                    [
+                        "Lunch Box",
+                        330.4
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-count-distinct",
+            "topic": "aggregates",
+            "title": "Count different values",
+            "difficulty": "intermediate",
+            "objective": "Count how many different values a column holds.",
+            "instructions": "Return how many different customers have placed at least one order.",
+            "solution": "SELECT COUNT(DISTINCT customer_id) FROM orders;",
+            "hints": [
+                "COUNT(*) counts rows; COUNT(DISTINCT column) counts different values."
+            ],
+            "explanation": "Several orders can belong to one customer, so COUNT(*) on orders would count orders, not customers. COUNT(DISTINCT customer_id) counts each customer once, which is 10 here.",
+            "source": "SQLite documentation: aggregate functions, count()",
+            "ordered": false,
+            "kind": "query",
+            "setup": [],
+            "verify": null,
+            "expected": {
+                "columns": 1,
+                "rows": [
+                    [
+                        10
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-union",
+            "topic": "joins",
+            "title": "Combine two queries",
+            "difficulty": "intermediate",
+            "objective": "Stack two result sets with UNION.",
+            "instructions": "Return, as one list with no repeats, the ids of the customers who ordered in January 2024 together with those who ordered in March 2024. Use the order_date text, for example LIKE '2024-01%'.",
+            "solution": "SELECT customer_id FROM orders WHERE order_date LIKE '2024-01%' UNION SELECT customer_id FROM orders WHERE order_date LIKE '2024-03%';",
+            "hints": [
+                "Write one SELECT for each month and put UNION between them.",
+                "Both queries must return the same number of columns."
+            ],
+            "explanation": "UNION stacks the results of two queries and removes duplicate rows, so a customer who ordered in both months appears once. UNION ALL would keep the duplicates. The two queries must return the same number of columns.",
+            "source": "SQLite documentation: compound SELECT statements",
+            "ordered": false,
+            "kind": "query",
+            "setup": [],
+            "verify": null,
+            "expected": {
+                "columns": 1,
+                "rows": [
+                    [
+                        1
+                    ],
+                    [
+                        2
+                    ],
+                    [
+                        6
+                    ],
+                    [
+                        7
+                    ],
+                    [
+                        9
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-not-exists",
+            "topic": "subqueries",
+            "title": "Rows with no match",
+            "difficulty": "intermediate",
+            "objective": "Find rows that have no related row with NOT EXISTS.",
+            "instructions": "Return the name of every customer who has never placed an order, using NOT EXISTS.",
+            "solution": "SELECT name FROM customers AS c WHERE NOT EXISTS (SELECT 1 FROM orders AS o WHERE o.customer_id = c.id);",
+            "hints": [
+                "The inner query looks for an order of this customer: WHERE o.customer_id = c.id.",
+                "NOT EXISTS keeps the customers for whom the inner query finds nothing."
+            ],
+            "explanation": "EXISTS asks whether the inner query returns any row for the current customer, and NOT EXISTS keeps the customers for whom it does not. It behaves safely when NULLs are involved, unlike NOT IN with a subquery that can return NULL.",
+            "source": "SQLite documentation: expressions, EXISTS",
+            "ordered": false,
+            "kind": "query",
+            "setup": [],
+            "verify": null,
+            "expected": {
+                "columns": 1,
+                "rows": [
+                    [
+                        "Anil Kumar"
+                    ],
+                    [
+                        "Kavya Reddy"
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-running-total",
+            "topic": "window",
+            "title": "Running total",
+            "difficulty": "advanced",
+            "objective": "Add a running total with a window function.",
+            "instructions": "For each order show its id, its total value (quantity times price, added up over its items) and the running total of those values in order id order. Return the three columns: id, total and running_total.",
+            "solution": "WITH t AS (SELECT o.id, SUM(oi.quantity * p.price) AS total FROM orders AS o JOIN order_items AS oi ON oi.order_id = o.id JOIN products AS p ON p.id = oi.product_id GROUP BY o.id) SELECT id, total, SUM(total) OVER (ORDER BY id) AS running_total FROM t ORDER BY id;",
+            "hints": [
+                "First compute each order's total with a join and GROUP BY, for example in a WITH clause.",
+                "SUM(total) OVER (ORDER BY id) adds up the values so far."
+            ],
+            "explanation": "The WITH clause computes one total per order. SUM(total) OVER (ORDER BY id) then adds each total to all the ones before it, without collapsing the rows. A window function is the right tool whenever each row needs a value that depends on other rows.",
+            "source": "SQLite documentation: window functions",
+            "ordered": true,
+            "kind": "query",
+            "setup": [],
+            "verify": null,
+            "expected": {
+                "columns": 3,
+                "rows": [
+                    [
+                        1,
+                        230,
+                        230
+                    ],
+                    [
+                        2,
+                        1200,
+                        1430
+                    ],
+                    [
+                        3,
+                        1820,
+                        3250
+                    ],
+                    [
+                        4,
+                        800,
+                        4050
+                    ],
+                    [
+                        5,
+                        1400,
+                        5450
+                    ],
+                    [
+                        6,
+                        540,
+                        5990
+                    ],
+                    [
+                        7,
+                        950,
+                        6940
+                    ],
+                    [
+                        8,
+                        840,
+                        7780
+                    ],
+                    [
+                        9,
+                        3000,
+                        10780
+                    ],
+                    [
+                        10,
+                        100,
+                        10880
+                    ],
+                    [
+                        11,
+                        980,
+                        11860
+                    ],
+                    [
+                        12,
+                        700,
+                        12560
+                    ],
+                    [
+                        13,
+                        1050,
+                        13610
+                    ],
+                    [
+                        14,
+                        120,
+                        13730
+                    ],
+                    [
+                        15,
+                        1000,
+                        14730
+                    ],
+                    [
+                        16,
+                        1200,
+                        15930
+                    ],
+                    [
+                        17,
+                        1800,
+                        17730
+                    ],
+                    [
+                        18,
+                        1150,
+                        18880
+                    ],
+                    [
+                        19,
+                        350,
+                        19230
+                    ],
+                    [
+                        20,
+                        1070,
+                        20300
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-top-per-group",
+            "topic": "window",
+            "title": "Best row in each group",
+            "difficulty": "advanced",
+            "objective": "Pick the top row of every group with ROW_NUMBER.",
+            "instructions": "Return the category, name and price of the most expensive product in each category.",
+            "solution": "WITH r AS (SELECT category, name, price, ROW_NUMBER() OVER (PARTITION BY category ORDER BY price DESC) AS n FROM products) SELECT category, name, price FROM r WHERE n = 1;",
+            "hints": [
+                "Number the products inside each category: ROW_NUMBER() OVER (PARTITION BY category ORDER BY price DESC).",
+                "Keep the rows numbered 1 in an outer query."
+            ],
+            "explanation": "PARTITION BY restarts the numbering for each category, and ORDER BY price DESC gives number 1 to the dearest product. A window function cannot be used in WHERE, so the numbering is done in a WITH clause and filtered outside it.",
+            "source": "SQLite documentation: window functions, row_number()",
+            "ordered": false,
+            "kind": "query",
+            "setup": [],
+            "verify": null,
+            "expected": {
+                "columns": 3,
+                "rows": [
+                    [
+                        "Bags",
+                        "Backpack",
+                        1200
+                    ],
+                    [
+                        "Electronics",
+                        "Headphones",
+                        1800
+                    ],
+                    [
+                        "Home",
+                        "Desk Lamp",
+                        450
+                    ],
+                    [
+                        "Stationery",
+                        "Marker Set",
+                        150
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-clean-trim",
+            "topic": "data cleaning",
+            "title": "Trim stray spaces",
+            "difficulty": "beginner",
+            "objective": "Remove leading and trailing spaces with TRIM.",
+            "instructions": "The table contacts_raw holds contact records typed in by hand, so they are untidy. Return each contact's id and name with the spaces at both ends removed.",
+            "solution": "SELECT id, TRIM(name) FROM contacts_raw;",
+            "hints": [
+                "TRIM(text) removes spaces from both ends of the text."
+            ],
+            "explanation": "Hand-typed data often has spaces at the ends of values, and they make '  Asha Rao ' different from 'Asha Rao' in a comparison or a grouping. TRIM removes them. It does not touch spaces in the middle of the text.",
+            "source": "SQLite documentation: core functions, trim()",
+            "ordered": false,
+            "kind": "query",
+            "setup": [
+                "CREATE TABLE contacts_raw (id INTEGER PRIMARY KEY, name TEXT, email TEXT, city TEXT, signup TEXT); INSERT INTO contacts_raw VALUES (1, '  Asha Rao ', 'ASHA@Example.com', 'pune', '2024-01-05'), (2, 'bilal khan', 'bilal@example.com ', 'Mumbai', '2024-01-09'), (3, 'Asha Rao', 'asha@example.com', 'Pune', '2024-01-05'), (4, 'Chitra Iyer', '', 'Chennai', '05/02/2024'), (5, 'Divya Nair', NULL, '  Kochi', '2024-02-11'), (6, 'divya nair', 'divya@example.com', 'Kochi', '2024-13-40'), (7, 'Farhan Ali', 'farhan@example.com', 'MUMBAI', '2024-03-01'), (8, 'Gita Sharma', 'gita@example.com', 'Delhi', '2024-03-15');"
+            ],
+            "verify": null,
+            "expected": {
+                "columns": 2,
+                "rows": [
+                    [
+                        1,
+                        "Asha Rao"
+                    ],
+                    [
+                        2,
+                        "bilal khan"
+                    ],
+                    [
+                        3,
+                        "Asha Rao"
+                    ],
+                    [
+                        4,
+                        "Chitra Iyer"
+                    ],
+                    [
+                        5,
+                        "Divya Nair"
+                    ],
+                    [
+                        6,
+                        "divya nair"
+                    ],
+                    [
+                        7,
+                        "Farhan Ali"
+                    ],
+                    [
+                        8,
+                        "Gita Sharma"
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-clean-case",
+            "topic": "data cleaning",
+            "title": "Make text consistent",
+            "difficulty": "beginner",
+            "objective": "Standardise capitals so the same value is written the same way.",
+            "instructions": "The table contacts_raw holds contact records typed in by hand, so they are untidy. Return each different city once, written in lower case with no spaces at the ends. Pune, pune and ' pune' should be one value.",
+            "solution": "SELECT DISTINCT LOWER(TRIM(city)) FROM contacts_raw;",
+            "hints": [
+                "Use LOWER for capitals and TRIM for the spaces.",
+                "DISTINCT then removes the repeats."
+            ],
+            "explanation": "The same city was typed as 'Kochi', '  Kochi', 'pune', 'Pune' and 'MUMBAI'. Cleaning first (TRIM, LOWER) and then counting or grouping avoids splitting one city into several. There are five cities once they are cleaned.",
+            "source": "SQLite documentation: core functions, lower() and trim()",
+            "ordered": false,
+            "kind": "query",
+            "setup": [
+                "CREATE TABLE contacts_raw (id INTEGER PRIMARY KEY, name TEXT, email TEXT, city TEXT, signup TEXT); INSERT INTO contacts_raw VALUES (1, '  Asha Rao ', 'ASHA@Example.com', 'pune', '2024-01-05'), (2, 'bilal khan', 'bilal@example.com ', 'Mumbai', '2024-01-09'), (3, 'Asha Rao', 'asha@example.com', 'Pune', '2024-01-05'), (4, 'Chitra Iyer', '', 'Chennai', '05/02/2024'), (5, 'Divya Nair', NULL, '  Kochi', '2024-02-11'), (6, 'divya nair', 'divya@example.com', 'Kochi', '2024-13-40'), (7, 'Farhan Ali', 'farhan@example.com', 'MUMBAI', '2024-03-01'), (8, 'Gita Sharma', 'gita@example.com', 'Delhi', '2024-03-15');"
+            ],
+            "verify": null,
+            "expected": {
+                "columns": 1,
+                "rows": [
+                    [
+                        "pune"
+                    ],
+                    [
+                        "mumbai"
+                    ],
+                    [
+                        "chennai"
+                    ],
+                    [
+                        "kochi"
+                    ],
+                    [
+                        "delhi"
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-clean-nullif",
+            "topic": "data cleaning",
+            "title": "Empty text is not NULL",
+            "difficulty": "intermediate",
+            "objective": "Turn empty text into NULL with NULLIF.",
+            "instructions": "The table contacts_raw holds contact records typed in by hand, so they are untidy. Return each contact's id and email, trimmed, with an empty email shown as NULL.",
+            "solution": "SELECT id, NULLIF(TRIM(email), '') FROM contacts_raw;",
+            "hints": [
+                "NULLIF(a, b) returns NULL when a equals b, otherwise a.",
+                "Trim the email first."
+            ],
+            "explanation": "An empty string and NULL both mean no email, but they behave differently: COUNT(email) counts the empty string and IS NULL does not match it. Converting empty text to NULL makes missing values consistent. Email 2 has a space at the end, which TRIM also removes.",
+            "source": "SQLite documentation: core functions, nullif()",
+            "ordered": false,
+            "kind": "query",
+            "setup": [
+                "CREATE TABLE contacts_raw (id INTEGER PRIMARY KEY, name TEXT, email TEXT, city TEXT, signup TEXT); INSERT INTO contacts_raw VALUES (1, '  Asha Rao ', 'ASHA@Example.com', 'pune', '2024-01-05'), (2, 'bilal khan', 'bilal@example.com ', 'Mumbai', '2024-01-09'), (3, 'Asha Rao', 'asha@example.com', 'Pune', '2024-01-05'), (4, 'Chitra Iyer', '', 'Chennai', '05/02/2024'), (5, 'Divya Nair', NULL, '  Kochi', '2024-02-11'), (6, 'divya nair', 'divya@example.com', 'Kochi', '2024-13-40'), (7, 'Farhan Ali', 'farhan@example.com', 'MUMBAI', '2024-03-01'), (8, 'Gita Sharma', 'gita@example.com', 'Delhi', '2024-03-15');"
+            ],
+            "verify": null,
+            "expected": {
+                "columns": 2,
+                "rows": [
+                    [
+                        1,
+                        "ASHA@Example.com"
+                    ],
+                    [
+                        2,
+                        "bilal@example.com"
+                    ],
+                    [
+                        3,
+                        "asha@example.com"
+                    ],
+                    [
+                        4,
+                        null
+                    ],
+                    [
+                        5,
+                        null
+                    ],
+                    [
+                        6,
+                        "divya@example.com"
+                    ],
+                    [
+                        7,
+                        "farhan@example.com"
+                    ],
+                    [
+                        8,
+                        "gita@example.com"
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-clean-coalesce",
+            "topic": "data cleaning",
+            "title": "Replace missing values",
+            "difficulty": "intermediate",
+            "objective": "Show a default for missing values with COALESCE.",
+            "instructions": "The table contacts_raw holds contact records typed in by hand, so they are untidy. Return each contact's id and email, trimmed, showing the text unknown when the email is missing or empty.",
+            "solution": "SELECT id, COALESCE(NULLIF(TRIM(email), ''), 'unknown') FROM contacts_raw;",
+            "hints": [
+                "Combine NULLIF to turn empty text into NULL with COALESCE to replace NULL.",
+                "COALESCE returns its first argument that is not NULL."
+            ],
+            "explanation": "COALESCE returns the first value that is not NULL. Wrapping NULLIF inside it handles both missing forms at once, NULL and empty text. Replacing a missing value with a label is a presentation choice, so keep the original data when it matters.",
+            "source": "SQLite documentation: core functions, coalesce()",
+            "ordered": false,
+            "kind": "query",
+            "setup": [
+                "CREATE TABLE contacts_raw (id INTEGER PRIMARY KEY, name TEXT, email TEXT, city TEXT, signup TEXT); INSERT INTO contacts_raw VALUES (1, '  Asha Rao ', 'ASHA@Example.com', 'pune', '2024-01-05'), (2, 'bilal khan', 'bilal@example.com ', 'Mumbai', '2024-01-09'), (3, 'Asha Rao', 'asha@example.com', 'Pune', '2024-01-05'), (4, 'Chitra Iyer', '', 'Chennai', '05/02/2024'), (5, 'Divya Nair', NULL, '  Kochi', '2024-02-11'), (6, 'divya nair', 'divya@example.com', 'Kochi', '2024-13-40'), (7, 'Farhan Ali', 'farhan@example.com', 'MUMBAI', '2024-03-01'), (8, 'Gita Sharma', 'gita@example.com', 'Delhi', '2024-03-15');"
+            ],
+            "verify": null,
+            "expected": {
+                "columns": 2,
+                "rows": [
+                    [
+                        1,
+                        "ASHA@Example.com"
+                    ],
+                    [
+                        2,
+                        "bilal@example.com"
+                    ],
+                    [
+                        3,
+                        "asha@example.com"
+                    ],
+                    [
+                        4,
+                        "unknown"
+                    ],
+                    [
+                        5,
+                        "unknown"
+                    ],
+                    [
+                        6,
+                        "divya@example.com"
+                    ],
+                    [
+                        7,
+                        "farhan@example.com"
+                    ],
+                    [
+                        8,
+                        "gita@example.com"
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-clean-duplicates",
+            "topic": "data cleaning",
+            "title": "Find duplicate records",
+            "difficulty": "intermediate",
+            "objective": "Find records that repeat once the data is cleaned.",
+            "instructions": "The table contacts_raw holds contact records typed in by hand, so they are untidy. Return each email that appears more than once after trimming it and writing it in lower case, with how many times it appears. Ignore missing and empty emails.",
+            "solution": "SELECT LOWER(TRIM(email)) AS email, COUNT(*) AS n FROM contacts_raw WHERE TRIM(email) <> '' GROUP BY LOWER(TRIM(email)) HAVING COUNT(*) > 1;",
+            "hints": [
+                "Group by the cleaned email: GROUP BY LOWER(TRIM(email)).",
+                "HAVING COUNT(*) > 1 keeps the groups with repeats. A NULL email is not equal to '' so TRIM(email) <> '' also removes the NULL ones."
+            ],
+            "explanation": "ASHA@Example.com and asha@example.com are the same address written two ways, so contact 1 and contact 3 are duplicates. Grouping by the cleaned value finds them. The WHERE test also drops NULL emails, because TRIM(NULL) <> '' is not true.",
+            "source": "SQLite documentation: SELECT, GROUP BY and HAVING",
+            "ordered": false,
+            "kind": "query",
+            "setup": [
+                "CREATE TABLE contacts_raw (id INTEGER PRIMARY KEY, name TEXT, email TEXT, city TEXT, signup TEXT); INSERT INTO contacts_raw VALUES (1, '  Asha Rao ', 'ASHA@Example.com', 'pune', '2024-01-05'), (2, 'bilal khan', 'bilal@example.com ', 'Mumbai', '2024-01-09'), (3, 'Asha Rao', 'asha@example.com', 'Pune', '2024-01-05'), (4, 'Chitra Iyer', '', 'Chennai', '05/02/2024'), (5, 'Divya Nair', NULL, '  Kochi', '2024-02-11'), (6, 'divya nair', 'divya@example.com', 'Kochi', '2024-13-40'), (7, 'Farhan Ali', 'farhan@example.com', 'MUMBAI', '2024-03-01'), (8, 'Gita Sharma', 'gita@example.com', 'Delhi', '2024-03-15');"
+            ],
+            "verify": null,
+            "expected": {
+                "columns": 2,
+                "rows": [
+                    [
+                        "asha@example.com",
+                        2
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-clean-bad-dates",
+            "topic": "data cleaning",
+            "title": "Find invalid dates",
+            "difficulty": "advanced",
+            "objective": "Find values that are not valid dates in the standard format.",
+            "instructions": "The table contacts_raw holds contact records typed in by hand, so they are untidy. Return the id of every contact whose signup is not a valid date written as YYYY-MM-DD.",
+            "solution": "SELECT id FROM contacts_raw WHERE date(signup) IS NULL OR date(signup) <> signup;",
+            "hints": [
+                "The function date(text) returns NULL when it cannot read the text as a date.",
+                "Compare date(signup) with signup to catch dates written another way."
+            ],
+            "explanation": "SQLite has no date type: dates are text. date(signup) returns NULL for text that is not a valid date, such as 2024-13-40 (there is no month 13), and 05/02/2024 is not in the YYYY-MM-DD form. The second test catches text that date() would read but in a different form.",
+            "source": "SQLite documentation: date and time functions",
+            "ordered": false,
+            "kind": "query",
+            "setup": [
+                "CREATE TABLE contacts_raw (id INTEGER PRIMARY KEY, name TEXT, email TEXT, city TEXT, signup TEXT); INSERT INTO contacts_raw VALUES (1, '  Asha Rao ', 'ASHA@Example.com', 'pune', '2024-01-05'), (2, 'bilal khan', 'bilal@example.com ', 'Mumbai', '2024-01-09'), (3, 'Asha Rao', 'asha@example.com', 'Pune', '2024-01-05'), (4, 'Chitra Iyer', '', 'Chennai', '05/02/2024'), (5, 'Divya Nair', NULL, '  Kochi', '2024-02-11'), (6, 'divya nair', 'divya@example.com', 'Kochi', '2024-13-40'), (7, 'Farhan Ali', 'farhan@example.com', 'MUMBAI', '2024-03-01'), (8, 'Gita Sharma', 'gita@example.com', 'Delhi', '2024-03-15');"
+            ],
+            "verify": null,
+            "expected": {
+                "columns": 1,
+                "rows": [
+                    [
+                        4
+                    ],
+                    [
+                        6
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-clean-delete-duplicates",
+            "topic": "data cleaning",
+            "title": "Remove duplicates, keep one",
+            "difficulty": "advanced",
+            "objective": "Delete the repeated records and keep the first of each.",
+            "instructions": "The table contacts_raw holds contact records typed in by hand, so they are untidy. Delete the duplicate contacts: for each cleaned (trimmed, lower case) email that appears more than once, keep only the contact with the lowest id. Leave the contacts with a missing or empty email alone.",
+            "solution": "DELETE FROM contacts_raw WHERE TRIM(email) <> '' AND id NOT IN (SELECT MIN(id) FROM contacts_raw WHERE TRIM(email) <> '' GROUP BY LOWER(TRIM(email)));",
+            "hints": [
+                "The subquery returns the lowest id for every cleaned email.",
+                "Delete the rows with a real email whose id is not in that list."
+            ],
+            "explanation": "The subquery lists the one id to keep for each cleaned email, and the DELETE removes every other row with a real email. Contact 3 is removed and contact 1 stays. Always run the matching SELECT first to see what a DELETE will remove.",
+            "source": "SQLite documentation: DELETE",
+            "ordered": false,
+            "kind": "modify",
+            "setup": [
+                "CREATE TABLE contacts_raw (id INTEGER PRIMARY KEY, name TEXT, email TEXT, city TEXT, signup TEXT); INSERT INTO contacts_raw VALUES (1, '  Asha Rao ', 'ASHA@Example.com', 'pune', '2024-01-05'), (2, 'bilal khan', 'bilal@example.com ', 'Mumbai', '2024-01-09'), (3, 'Asha Rao', 'asha@example.com', 'Pune', '2024-01-05'), (4, 'Chitra Iyer', '', 'Chennai', '05/02/2024'), (5, 'Divya Nair', NULL, '  Kochi', '2024-02-11'), (6, 'divya nair', 'divya@example.com', 'Kochi', '2024-13-40'), (7, 'Farhan Ali', 'farhan@example.com', 'MUMBAI', '2024-03-01'), (8, 'Gita Sharma', 'gita@example.com', 'Delhi', '2024-03-15');"
+            ],
+            "verify": "SELECT id FROM contacts_raw ORDER BY id;",
+            "expected": {
+                "columns": 1,
+                "rows": [
+                    [
+                        1
+                    ],
+                    [
+                        2
+                    ],
+                    [
+                        4
+                    ],
+                    [
+                        5
+                    ],
+                    [
+                        6
+                    ],
+                    [
+                        7
+                    ],
+                    [
+                        8
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-clean-update",
+            "topic": "data cleaning",
+            "title": "Fix the whole table",
+            "difficulty": "advanced",
+            "objective": "Clean text in place with UPDATE.",
+            "instructions": "The table contacts_raw holds contact records typed in by hand, so they are untidy. Update every row so that name and city have no spaces at the ends, and so that city is written in lower case.",
+            "solution": "UPDATE contacts_raw SET name = TRIM(name), city = LOWER(TRIM(city));",
+            "hints": [
+                "UPDATE can set several columns at once, separated by commas.",
+                "Apply TRIM to name and TRIM then LOWER to city."
+            ],
+            "explanation": "One UPDATE can change several columns. Cleaning data in place is permanent, so a careful workflow keeps the raw table and writes the cleaned data to a new table or view. The lab checks the name and city of every row afterwards.",
+            "source": "SQLite documentation: UPDATE",
+            "ordered": false,
+            "kind": "modify",
+            "setup": [
+                "CREATE TABLE contacts_raw (id INTEGER PRIMARY KEY, name TEXT, email TEXT, city TEXT, signup TEXT); INSERT INTO contacts_raw VALUES (1, '  Asha Rao ', 'ASHA@Example.com', 'pune', '2024-01-05'), (2, 'bilal khan', 'bilal@example.com ', 'Mumbai', '2024-01-09'), (3, 'Asha Rao', 'asha@example.com', 'Pune', '2024-01-05'), (4, 'Chitra Iyer', '', 'Chennai', '05/02/2024'), (5, 'Divya Nair', NULL, '  Kochi', '2024-02-11'), (6, 'divya nair', 'divya@example.com', 'Kochi', '2024-13-40'), (7, 'Farhan Ali', 'farhan@example.com', 'MUMBAI', '2024-03-01'), (8, 'Gita Sharma', 'gita@example.com', 'Delhi', '2024-03-15');"
+            ],
+            "verify": "SELECT id, name, city FROM contacts_raw;",
+            "expected": {
+                "columns": 3,
+                "rows": [
+                    [
+                        1,
+                        "Asha Rao",
+                        "pune"
+                    ],
+                    [
+                        2,
+                        "bilal khan",
+                        "mumbai"
+                    ],
+                    [
+                        3,
+                        "Asha Rao",
+                        "pune"
+                    ],
+                    [
+                        4,
+                        "Chitra Iyer",
+                        "chennai"
+                    ],
+                    [
+                        5,
+                        "Divya Nair",
+                        "kochi"
+                    ],
+                    [
+                        6,
+                        "divya nair",
+                        "kochi"
+                    ],
+                    [
+                        7,
+                        "Farhan Ali",
+                        "mumbai"
+                    ],
+                    [
+                        8,
+                        "Gita Sharma",
+                        "delhi"
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-project-monthly",
+            "topic": "projects",
+            "title": "Sales report 1: revenue by month",
+            "difficulty": "intermediate",
+            "objective": "Report the revenue of delivered orders for each month.",
+            "instructions": "Project, step 1 of 3. For delivered orders only, return each month as text like 2024-02 and the revenue of that month (quantity times price, added up), oldest month first. Use strftime('%Y-%m', order_date) for the month.",
+            "solution": "SELECT strftime('%Y-%m', o.order_date) AS month, SUM(oi.quantity * p.price) AS revenue FROM orders AS o JOIN order_items AS oi ON oi.order_id = o.id JOIN products AS p ON p.id = oi.product_id WHERE o.status = 'delivered' GROUP BY month ORDER BY month;",
+            "hints": [
+                "Join orders, order_items and products, then filter the status.",
+                "Group by the month text from strftime.",
+                "Revenue is SUM(oi.quantity * p.price)."
+            ],
+            "explanation": "Each order item is worth quantity times the product price. Joining the three tables, keeping delivered orders and grouping by month gives the report. A common mistake is summing the order total after joining the items, which counts each total once per item.",
+            "source": "SQLite documentation: date and time functions, strftime()",
+            "ordered": true,
+            "kind": "query",
+            "setup": [],
+            "verify": null,
+            "expected": {
+                "columns": 2,
+                "rows": [
+                    [
+                        "2024-01",
+                        1430
+                    ],
+                    [
+                        "2024-02",
+                        2290
+                    ],
+                    [
+                        "2024-03",
+                        3980
+                    ],
+                    [
+                        "2024-04",
+                        1700
+                    ],
+                    [
+                        "2024-05",
+                        2350
+                    ],
+                    [
+                        "2024-06",
+                        1070
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-project-customers",
+            "topic": "projects",
+            "title": "Sales report 2: best customers",
+            "difficulty": "advanced",
+            "objective": "Rank customers by the revenue of their delivered orders.",
+            "instructions": "Project, step 2 of 3. Return the name and total delivered revenue of the three customers with the highest delivered revenue, the highest first.",
+            "solution": "SELECT c.name, SUM(oi.quantity * p.price) AS revenue FROM customers AS c JOIN orders AS o ON o.customer_id = c.id JOIN order_items AS oi ON oi.order_id = o.id JOIN products AS p ON p.id = oi.product_id WHERE o.status = 'delivered' GROUP BY c.id, c.name ORDER BY revenue DESC LIMIT 3;",
+            "hints": [
+                "Start from customers and join orders, order_items and products.",
+                "Group by the customer, order by the revenue descending and keep three rows."
+            ],
+            "explanation": "Four tables are joined, delivered orders are kept, and the revenue is added up per customer. Grouping by c.id as well as c.name keeps two customers with the same name apart. LIMIT 3 keeps the top three.",
+            "source": "SQLite documentation: SELECT, joins and GROUP BY",
+            "ordered": true,
+            "kind": "query",
+            "setup": [],
+            "verify": null,
+            "expected": {
+                "columns": 2,
+                "rows": [
+                    [
+                        "Bilal Khan",
+                        4150
+                    ],
+                    [
+                        "Asha Rao",
+                        1970
+                    ],
+                    [
+                        "Chitra Iyer",
+                        1800
+                    ]
+                ]
+            }
+        },
+        {
+            "id": "sql-project-share",
+            "topic": "projects",
+            "title": "Sales report 3: share by category",
+            "difficulty": "advanced",
+            "objective": "Show each category's share of the total delivered revenue.",
+            "instructions": "Project, step 3 of 3. For delivered orders, return each product category with its revenue and its share of the total delivered revenue as a percentage rounded to 1 decimal place (columns: category, revenue, share).",
+            "solution": "SELECT p.category, SUM(oi.quantity * p.price) AS revenue, ROUND(100.0 * SUM(oi.quantity * p.price) / (SELECT SUM(oi2.quantity * p2.price) FROM orders AS o2 JOIN order_items AS oi2 ON oi2.order_id = o2.id JOIN products AS p2 ON p2.id = oi2.product_id WHERE o2.status = 'delivered'), 1) AS share FROM orders AS o JOIN order_items AS oi ON oi.order_id = o.id JOIN products AS p ON p.id = oi.product_id WHERE o.status = 'delivered' GROUP BY p.category;",
+            "hints": [
+                "Compute the grand total in a subquery with the same joins and filter.",
+                "Multiply by 100.0 (with a decimal point) so the division is not whole-number division."
+            ],
+            "explanation": "The subquery returns one number, the total delivered revenue, which divides each category's revenue. 100.0 forces decimal division; with whole numbers SQLite would divide as integers and give 0 for most shares. The shares add up to about 100.",
+            "source": "SQLite documentation: expressions, scalar subqueries",
+            "ordered": false,
+            "kind": "query",
+            "setup": [],
+            "verify": null,
+            "expected": {
+                "columns": 3,
+                "rows": [
+                    [
+                        "Bags",
+                        3600,
+                        28.1
+                    ],
+                    [
+                        "Electronics",
+                        5100,
+                        39.8
+                    ],
+                    [
+                        "Home",
+                        2790,
+                        21.8
+                    ],
+                    [
+                        "Stationery",
+                        1330,
+                        10.4
                     ]
                 ]
             }

@@ -11,6 +11,9 @@ import { labMarkup, initLab } from "../../learning/lab-page.js";
 import { MAX_RESPONSE_CHARS, createEvaluator } from "./evaluator.js";
 import { createRunner } from "./sql-runner.js";
 import { set } from "./exercises.js";
+import { lessons } from "./lessons.js";
+import { SETUP, CLEANING_SETUP } from "./dataset.js";
+import { lessonsMarkup, sandboxMarkup, showResult } from "./lessons-view.js";
 
 export const showRelatedCalculators = true;
 export const showRelatedArticles = false;
@@ -22,7 +25,7 @@ export function markup() {
     return labMarkup({
         id: "sql-practice-lab",
         title: TITLE,
-        intro: "Learn SQL by writing it. Thirty exercises on a small shop database, from SELECT and WHERE to joins, grouping, window functions, changing data, constraints and transactions. Your statements really run, in SQLite inside your browser, and your result is checked against the expected one.",
+        intro: "Learn SQL from the start. Read the lessons, run their examples, then solve forty-nine exercises on a small shop database, from SELECT and WHERE to joins, grouping, window functions, data cleaning, changing data, constraints, transactions and a small sales-report project. Your statements really run, in SQLite inside your browser, and your result is checked against the expected one.",
         worked: {
             heading: "A Worked Example",
             intro: "Task: return the names of the customers who live in Mumbai. This example cannot be submitted; it shows the reasoning you will use.",
@@ -42,17 +45,19 @@ export function markup() {
             "For an exercise that changes data (INSERT, UPDATE, DELETE, CREATE), the lab runs its own query after your statements and checks that result.",
             "Use a hint if you are stuck, or show the solution. An exercise whose solution you viewed is counted as solution viewed, not completed."
         ],
+        afterApp: lessonsMarkup(lessons, set.exercises) + sandboxMarkup(),
         sections: [
             {
                 heading: "The Practice Database",
                 paragraphs: [
-                    "Four small tables of an imaginary shop. Every check starts from the same data."
+                    "Four small tables of an imaginary shop, plus one untidy table for cleaning practice. Every check starts from the same data."
                 ],
                 items: [
                     "customers: id, name, city, joined (the join date as text, empty for one customer)",
                     "products: id, name, category, price (whole rupees)",
                     "orders: id, customer_id, order_date (text, YYYY-MM-DD), status (delivered, shipped, pending or cancelled)",
-                    "order_items: order_id, product_id, quantity, one row for each product in an order"
+                    "order_items: order_id, product_id, quantity, one row for each product in an order",
+                    "contacts_raw: id, name, email, city, signup. A deliberately untidy table (extra spaces, mixed capitals, empty and missing emails, a repeated person, invalid dates) used by the data cleaning exercises. It appears only in those exercises, the data cleaning lesson and the sandbox."
                 ]
             },
             {
@@ -106,6 +111,8 @@ export function init() {
         wasmUrl: new URL("../../vendor/sql-js/sql-wasm.wasm", import.meta.url).href
     });
 
+    wireExamples(runner);
+
     initLab({
         set,
         lab: {
@@ -115,6 +122,42 @@ export function init() {
             rows: 6,
             evaluate: createEvaluator(runner)
         }
+    });
+
+}
+
+/* The "Run this example" buttons and the sandbox. Nothing here is checked against an exercise; it only shows what the SQL returns. */
+function wireExamples(runner) {
+
+    const setup = [...SETUP, ...CLEANING_SETUP];
+
+    const go = async (sql, out, button) => {
+        button.setAttribute("aria-busy", "true");
+        out.textContent = "Running...";
+        const reply = await runner.run({ setup, sql });
+        showResult(out, reply);
+        button.removeAttribute("aria-busy");
+    };
+
+    document.addEventListener("click", (event) => {
+
+        const button = event.target instanceof Element ? event.target.closest("[data-sql-run], #sql-sandbox-run") : null;
+
+        if (!button || button.getAttribute("aria-busy") === "true") return;
+
+        if (button.id === "sql-sandbox-run") {
+            const sql = document.querySelector("#sql-sandbox-input")?.value ?? "";
+            if (sql.trim() === "") return;
+            go(sql, document.querySelector("#sql-sandbox-out"), button);
+            return;
+        }
+
+        const holder = button.closest("div");
+        const source = holder?.querySelector("[data-sql-source]");
+        const out = holder?.querySelector("[data-sql-out]");
+
+        if (source && out) go(source.textContent, out, button);
+
     });
 
 }

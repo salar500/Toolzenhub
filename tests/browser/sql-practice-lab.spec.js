@@ -1,6 +1,6 @@
 /**
  * SQL Practice Lab: the shared lab behaviour (tests/helpers/lab-contract.mjs) plus what is particular to it: the statements really
- * run (SQLite in a worker), every one of the 30 stated solutions is accepted, a wrong query is told apart (columns, rows,
+ * run (SQLite in a worker), every one of the 49 stated solutions is accepted, a wrong query is told apart (columns, rows,
  * values, order), a SQL error and a runaway statement are reported without breaking the page, and an exercise that changes data
  * is judged by the lab's own check query. The expected results come from an independent SQLite build (Python's sqlite3), see
  * tests/unit/sql-practice-lab.test.mjs.
@@ -10,6 +10,7 @@ import path from "node:path";
 import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.mjs";
 import { defineShellTests, openLab, app, answerBox, checkButton, verdictOf } from "../helpers/lab-contract.mjs";
 import { set } from "../../assets/js/tools/sql-practice-lab/exercises.js";
+import { lessons } from "../../assets/js/tools/sql-practice-lab/lessons.js";
 
 const ROUTE = "tools/sql-practice-lab/";
 const AXE = path.resolve("node_modules/axe-core/axe.min.js");
@@ -17,7 +18,7 @@ const AXE = path.resolve("node_modules/axe-core/axe.min.js");
 defineShellTests({
   route: ROUTE,
   title: "SQL Practice Lab",
-  count: 30,
+  count: 49,
   limit: 4000,
   correct: "SELECT * FROM customers;",
   wrong: "SELECT name FROM customers;"
@@ -30,8 +31,8 @@ async function type(page, sql) {
 
 test.describe("SQL Practice Lab: this lab", () => {
 
-  test("every one of the 30 solutions is accepted by the real engine", async ({ page, go }) => {
-    test.setTimeout(240000);
+  test("every one of the 49 solutions is accepted by the real engine", async ({ page, go }) => {
+    test.setTimeout(420000);
     await openLab(page, go, ROUTE);
     const failures = [];
     for (let i = 0; i < set.exercises.length; i += 1) {
@@ -139,6 +140,56 @@ test.describe("SQL Practice Lab: this lab", () => {
     await expect(page.locator("body")).toContainText("not a course and not a qualification");
   });
 
+  test("every lesson example runs in the real engine and gives the result printed beside it", async ({ page, go }) => {
+    test.setTimeout(240000);
+    await openLab(page, go, ROUTE);
+    const problems = [];
+    const details = page.locator("details.lx-lesson");
+    expect(await details.count()).toBe(lessons.length);
+    for (let li = 0; li < lessons.length; li += 1) {
+      const lesson = details.nth(li);
+      await lesson.locator("summary").click();
+      for (let ei = 0; ei < lessons[li].examples.length; ei += 1) {
+        const example = lessons[li].examples[ei];
+        const block = lesson.locator(".lx-lesson__body > div").nth(ei);
+        await block.getByRole("button", { name: "Run this example" }).click();
+        const out = block.locator("[data-sql-out]");
+        await expect(out).not.toHaveText("Running...", { timeout: 20000 });
+        const text = await out.innerText();
+        if (example.error) { if (!text.includes("SQLite says:")) problems.push(`${lessons[li].id}: expected an error, got ${text}`); continue; }
+        if (example.sql.includes("sqlite_version")) { if (!/\d+\.\d+\.\d+/.test(text)) problems.push(`${lessons[li].id}: no version`); continue; }
+        const live = await out.locator("table").evaluate((t) => [...t.rows].map((r) => [...r.cells].map((c) => c.textContent)));
+        const expected = [example.columns, ...example.rows.map((r) => r.map((v) => (v === null ? "NULL" : String(v))))];
+        const shown = live.slice(0, expected.length);
+        if (JSON.stringify(shown) !== JSON.stringify(expected)) problems.push(`${lessons[li].id}: ${JSON.stringify(shown)} != ${JSON.stringify(expected)}`);
+      }
+      await lesson.locator("summary").click();
+    }
+    expect(problems).toEqual([]);
+  });
+
+  test("the sandbox runs any SQL, shows an error or a timeout, and starts fresh each time @portable", async ({ page, go }) => {
+    await openLab(page, go, ROUTE);
+    const run = page.locator("#sql-sandbox-run");
+    const out = page.locator("#sql-sandbox-out");
+    const box = page.locator("#sql-sandbox-input");
+    await run.click();
+    await expect(out.locator("table")).toBeVisible({ timeout: 20000 });
+    await expect(out).toContainText("Asha Rao");
+    await box.fill("DELETE FROM customers; SELECT COUNT(*) FROM customers;");
+    await run.click();
+    await expect(out).toContainText("0 ");
+    await box.fill("SELECT COUNT(*) AS n FROM customers");
+    await run.click();
+    await expect(out.locator("td")).toHaveText("12");
+    await box.fill("SELECT * FROM nothing_here");
+    await run.click();
+    await expect(out).toContainText("no such table: nothing_here");
+    await box.fill("SELECT COUNT(*) FROM contacts_raw");
+    await run.click();
+    await expect(out.locator("td")).toHaveText("8");
+  });
+
   test("axe finds nothing at start, after a wrong, a correct, an error and a data-changing result", async ({ page, go }) => {
     test.skip(!fs.existsSync(AXE), "axe-core is not installed");
     await openLab(page, go, ROUTE);
@@ -148,6 +199,10 @@ test.describe("SQL Practice Lab: this lab", () => {
       expect(result.violations.map((v) => `${label}: ${v.id}`), label).toEqual([]);
     };
     await scan("start");
+    await page.locator("details.lx-lesson summary").nth(8).click(); // joins: a table of results
+    await page.locator("details.lx-lesson").nth(8).getByRole("button", { name: "Run this example" }).first().click();
+    await expect(page.locator("details.lx-lesson").nth(8).locator("[data-sql-out] table").first()).toBeVisible({ timeout: 20000 });
+    await scan("a lesson open with a live result");
     await type(page, "SELECT name FROM customers");
     await expect(verdictOf(page)).toHaveText("Not yet");
     await scan("not yet");
@@ -171,6 +226,16 @@ test.describe("SQL Practice Lab: this lab", () => {
       await type(page, "SELECT orders.id, customers.name FROM orders JOIN customers ON orders.customer_id = customers.id WHERE orders.id > 0 AND customers.name <> 'a very long name that is not in the data at all and keeps going on and on' ORDER BY orders.id");
       await expect(verdictOf(page)).toHaveText("Correct");
       await expect(page.locator('.lx-feedback [aria-label="Details"]')).toContainText("more rows");
+      await expectNoHorizontalOverflow(page);
+    });
+
+    test(`lessons at ${width}px: the longest lesson open with a live result causes no sideways scroll`, async ({ page, go }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await openLab(page, go, ROUTE);
+      const lesson = page.locator("details.lx-lesson").nth(14); // cleaning: wide results
+      await lesson.locator("summary").click();
+      await lesson.getByRole("button", { name: "Run this example" }).first().click();
+      await expect(lesson.locator("[data-sql-out] table").first()).toBeVisible({ timeout: 20000 });
       await expectNoHorizontalOverflow(page);
     });
   }
