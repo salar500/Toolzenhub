@@ -187,7 +187,8 @@ export const lessons = [
             "TRIM removes extra spaces, UPPER, LOWER and PROPER make capitals consistent, SUBSTITUTE removes characters, VALUE turns number-like text into a number.",
             "Duplicates: COUNTIF with an expanding range ($A$2:A2) counts how many times a value has appeared so far, so the second and later copies can be flagged.",
             "Standardise categories: clean the value (TRIM and LOWER) and then compare it with the spellings you accept.",
-            "Keep the raw data in its own column or sheet and write the cleaned result next to it, so a mistake can be undone and checked."
+            "Keep the raw data in its own column or sheet and write the cleaned result next to it, so a mistake can be undone and checked.",
+            "The same journey appears in the SQL Practice Lab (TRIM, LOWER, GROUP BY on a contacts table) and the Power BI Practice Lab (recorded query steps): keep the raw data, clean the text first, then remove duplicates, then check the counts."
         ],
         examples: [
             { says: "Spaces and capitals fixed together.", cells: { A2: "  asha   RAO " }, formula: "=PROPER(TRIM(A2))", at: "B2" },

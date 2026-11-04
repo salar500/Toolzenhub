@@ -935,7 +935,8 @@ export const lessons = [
             "TRIM, LOWER and UPPER make text consistent. NULLIF(x, '') turns empty text into NULL, and COALESCE(x, default) replaces NULL with a default.",
             "Duplicates are found by grouping on the cleaned value and keeping groups with COUNT(*) > 1. To delete them, keep the lowest id of each group and remove the rest.",
             "Invalid dates are found with date(value) IS NULL, and by comparing date(value) with value to catch dates written in another form.",
-            "Do not clean in place without a copy. A careful workflow keeps the raw table, writes cleaned data to a new table or view, and checks the row counts before and after."
+            "Do not clean in place without a copy. A careful workflow keeps the raw table, writes cleaned data to a new table or view, and checks the row counts before and after.",
+            "The same journey appears in the Excel Practice Lab (formulas: TRIM, PROPER, COUNTIF) and the Power BI Practice Lab (recorded query steps). The order never changes: keep the raw data, clean the text first, then remove duplicates, then check the counts."
         ],
         "examples": [
             {

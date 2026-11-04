@@ -60,7 +60,8 @@ export const lessons = [
             "Replace corrects a known wrong value. Replace blanks gives missing text a clear label.",
             "Remove duplicates keeps the first of each repeated row. Clean the text first, or rows that differ only by a space survive.",
             "Remove blanks drops rows missing a required key, but check how many you are dropping and why.",
-            "Keep the original table untouched and do the cleaning in steps: you can read the steps, change them and run them again."
+            "Keep the original table untouched and do the cleaning in steps: you can read the steps, change them and run them again.",
+            "The same journey appears in the SQL Practice Lab (TRIM, LOWER, GROUP BY) and the Excel Practice Lab (TRIM, PROPER, COUNTIF): keep the raw data, clean the text first, then remove duplicates, then check the counts."
         ],
         examples: [
             { kind: "query", says: "Trim the spaces and standardise capitals in Name and City.", input: { name: "Customers_raw", table: RAW_PEOPLE }, script: "trim Name\nproper Name\nproper City" }
