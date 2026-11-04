@@ -2,7 +2,11 @@
 
 Rules: `docs/product-decision-rules.md` section 11. GitHub Pages is the development preview; Hostinger production (`toolzenhub.in`) is manual and was not touched by any record here.
 
-## State at 2026-11-04
+## Update after the Q3 cycle (2026-11-04)
+
+Eight local commits after `f5a1df4` (`b342344` to `b714e57`, plus the closing records commit). Nothing is pushed: `origin/main` is behind HEAD. The Hostinger zip and its hash below were built from `f5a1df4` and no longer match the code, so they must NOT be deployed; rebuild `dist/` and regenerate the zip and hash at release time. The preview site still shows `f5a1df4`. Full regression was not run; the checks that were run are listed per change in `TEST_EXECUTION_LEDGER.md` (Q3-2 to Q3-9). A release checkpoint (unit suite, desktop and mobile browser groups, axe sweeps) is due before any push to the preview of this batch or any deployment.
+
+## State at 2026-11-04 (as first recorded, for `f5a1df4`)
 
 | Item | State | Evidence |
 |---|---|---|

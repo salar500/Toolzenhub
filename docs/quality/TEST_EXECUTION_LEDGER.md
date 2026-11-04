@@ -60,6 +60,10 @@ Build pass. New `line-gutter.spec.js` (3 tests, repeated 4 times on each project
 
 Unit: `json-suggested-fix.test.mjs` 12 pass; full unit suite run once because the CSS custom-property test is global: 3,718 pass, 1 fail, 4 skipped (3,723). The 1 failure was `design-tokens.test.mjs` (my new `--lg-*` variables were set only by script); defaults moved into the stylesheet and that file re-run: 9 pass. The full suite was not re-run afterwards (the fix touched one stylesheet). Build pass. Browser subpath-desktop: `json-formatter` (29 with 6 new), `line-gutter`, `json-compare`: all pass after the CSS fix; mobile `json-formatter` 29 pass; axe on json-formatter 1 pass.
 
+## Q3-9 (consolidation at the end of the Q3 cycle), base `b714e57` plus the records commit
+
+Static layer re-run on the final tree: `build:all`, links, assets, SEO, inventory all exit 0. `smoke.spec.js` subpath-desktop (every live page: status, title, images, console and network errors; shared `header.js` changed in WP1a): 143 pass. Not run at this checkpoint: the full unit suite after the CSS default fix (design-tokens re-run alone, 9 pass; the last full run was 3,718 pass, 1 fail since fixed, 4 skipped), the mobile and root projects for the whole site, the axe sweep of all 126 pages, visual baselines. These are the release-checkpoint items in `RELEASE_LEDGER.md`.
+
 ## Carried forward (not re-run at f5a1df4)
 
 These ran on the working tree that was committed as `6b01b85`..`f5a1df4` (RELEASE-1 records HEAD `45fc888` plus 102 uncommitted entries, 5,597 insertions across 102 files, now in the three commits). That equivalence is inferred from the records and a clean tree; it was not proved by diffing a saved copy.
