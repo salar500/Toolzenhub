@@ -151,3 +151,11 @@ test.describe("Simple calculators: shared behaviour", () => {
     await expect(slider).toHaveValue("9.5");
   });
 });
+
+// Owner finding 3 (duplicate date icons): a date field shows the browser's own picker only; no second, custom calendar icon.
+test("Age Calculator: each date field has the native picker and Use today, with no extra calendar button", async ({ page, go }) => {
+  await go("calculators/age/");
+  await expect(page.locator("input[type=date]")).toHaveCount(2);
+  await expect(page.locator("[data-calendar], .tt-calendar-button")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Use today's date for this field" })).toHaveCount(2);
+});

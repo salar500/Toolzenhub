@@ -165,7 +165,7 @@ fieldset.mp-person {
 
 }
 
-/* the calendar icon and "Use today" under a date field: a clear gap from the field and from each other */
+/* "Use today" under a date field: a clear gap from the field and from each other */
 
 .tt-date-actions {
 
@@ -174,17 +174,6 @@ fieldset.mp-person {
     gap: 8px;
 
     margin-top: 10px;
-
-}
-
-.tt-calendar-button {
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 44px;
-    padding: 0 10px;
 
 }
 

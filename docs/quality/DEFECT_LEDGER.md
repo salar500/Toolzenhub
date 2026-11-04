@@ -9,7 +9,7 @@ Severity: P0 blocks release, P1 before production, P2 should fix, P3 minor. Clas
 | O-1 | P3 (product) | Best SIP Strategies and Tax Saving Guide articles are Coming Soon with no sourced content | PRODUCT DECISION REQUIRED; content must not be invented |
 | O-2 | P3 (product) | Currency Converter Coming Soon; needs a live-rates decision | PRODUCT DECISION REQUIRED |
 | O-3 | P3 (observation) | Related cards limited to six: Credit Card Payoff and Prepayment no longer appear as automatic related cards on some Loans pages | owner decision; a curated `relatedTools` entry restores either and changes pinned unit expectations |
-| O-4 | unknown | Owner-reported items 2, 3, 16, 17, 18 in `MASTER_REGRESSION_CATALOG.md` have no automated assertion | needs the manual pass in `MANUAL_QA_GUIDE.md` to confirm or reproduce; not reproduced here (no browser run this session) |
+| O-4 | unknown | Owner-reported items 2, 16, 17, 18 in `MASTER_REGRESSION_CATALOG.md` have no automated assertion | needs the manual pass in `MANUAL_QA_GUIDE.md` to confirm or reproduce; not reproduced here (no browser run this session) |
 
 No open P0, P1 or P2 defect is recorded in the repository. That is a statement about the records, not proof of absence: real devices, Safari and Firefox were never tested.
 
@@ -17,6 +17,7 @@ No open P0, P1 or P2 defect is recorded in the repository. That is a statement a
 
 | ID | Sev | Class | Description | Fix |
 |---|---|---|---|---|
+| D-8 | P3 | GENUINE | Date fields showed two calendar icons: the browser's own picker icon and a custom aria-hidden button beside "Use today" (owner finding 3; shared by Age and every date field built with `time-ui.js` or `simple-calculator.js`) | custom button, its wiring and CSS removed; "Use today" kept; regression test added (WP2a) |
 | D-1 | P3 | GENUINE | Breadcrumb Home on contact, privacy, terms, disclaimer, loans was `href="#"` until JS ran | base-aware URL in the five templates (QC-3.2) |
 | D-2 | P3 | TEST FAULT | axe sampled the Unit Converter Copy button mid colour transition | scan waits for stable colours (QC-8) |
 | D-3 | P2 | GENUINE | Smart Flashcards reset dialog ignored Escape early because the handler loaded after a dynamic import | static import, new same-task Escape test (release-readiness 2026-10-29) |

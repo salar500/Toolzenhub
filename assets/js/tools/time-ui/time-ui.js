@@ -181,33 +181,6 @@ export function todayIso(now = new Date()) {
  */
 export function wireTodayButtons(root, now = () => new Date()) {
 
-    /* the calendar icon beside a date field opens the browser's own date picker (a pointer and touch aid: the date
-       input stays the accessible control, and keyboard users open its picker from the input itself) */
-    for (const button of root.querySelectorAll("[data-calendar]")) {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                const input = document.getElementById(button.dataset.calendar);
-
-                if (!input) {
-                    return;
-                }
-
-                input.focus();
-
-                try {
-                    input.showPicker();
-                } catch {
-                    /* a browser without showPicker keeps the focused date field */
-                }
-
-            }
-        );
-
-    }
-
     for (const button of root.querySelectorAll("[data-today]")) {
 
         button.addEventListener(
@@ -238,14 +211,6 @@ export function wireTodayButtons(root, now = () => new Date()) {
 export function todayButton(inputId) {
 
     return `<span class="tt-date-actions">
-                                    <button
-                                        type="button"
-                                        class="tt-inline-button tt-calendar-button"
-                                        data-calendar="${escapeHTML(inputId)}"
-                                        tabindex="-1"
-                                        aria-hidden="true"
-                                        title="Open calendar"
-                                    ><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 3v4M17 3v4M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg></button>
                                     <button
                                         type="button"
                                         class="tt-inline-button"

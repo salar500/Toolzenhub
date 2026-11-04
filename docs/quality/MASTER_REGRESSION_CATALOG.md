@@ -30,7 +30,7 @@ Status key: AUTO = an automated spec covers it (matched by file and test name, n
 |---|---|---|---|
 | 1 | Slider sync, endpoints, initial styling | AUTO+MANUAL | `field-slider.spec.js` (move, type, keys, Reset, out-of-range pin); initial styling by eye |
 | 2 | Loan Comparison slider loading delay | MANUAL | `loan-comparison.spec.js` covers function, not perceived delay; time it on a slow connection |
-| 3 | Age Calculator duplicate date icons | MANUAL | no assertion found; check in Chrome and Safari (native date picker icon plus custom icon) |
+| 3 | Age Calculator duplicate date icons | AUTO | fixed in WP2a: custom calendar button removed, native picker kept; `simple-calculators.spec.js` last test; confirm by eye in Safari |
 | 4 | Date Difference inclusive presets | AUTO | `date-difference-presets.test.mjs`, `date-difference.spec.js` |
 | 5 | Countdown 12/24-hour presentation | AUTO | `countdown-target.test.mjs`, `countdown-timer.spec.js` (matched) |
 | 6 | Countdown timezone field | AUTO | same specs (matched) |

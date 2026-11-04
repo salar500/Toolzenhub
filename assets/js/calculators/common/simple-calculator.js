@@ -28,7 +28,6 @@ import { parseNumber, todayIso, money, plain } from "./number-text.js";
 
 export { parseNumber, todayIso, money, plain };
 
-const MARK_DATE_ICON = `<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 3v4M17 3v4M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg>`;
 
 function controlHTML(prefix, f) {
 
@@ -60,7 +59,6 @@ function controlHTML(prefix, f) {
 
         return `<input id="${escapeHTML(id)}" class="calculator-form__input" type="date" min="0001-01-01" max="9999-12-31" ${describedBy}>
                                 <span class="tt-date-actions">
-                                    <button type="button" class="tt-inline-button tt-calendar-button" data-calendar="${escapeHTML(id)}" tabindex="-1" aria-hidden="true" title="Open calendar">${MARK_DATE_ICON}</button>
                                     <button type="button" class="tt-inline-button" data-today="${escapeHTML(id)}" aria-label="Use today's date for this field">Use today</button>
                                 </span>`;
 
@@ -259,14 +257,7 @@ export function createSimpleCalculator(config) {
             el.addEventListener("change", update);
         }
 
-        /* the date helpers of the Time Tools (calendar icon, Use today) work on any date field here */
-        for (const button of form.querySelectorAll("[data-calendar]")) {
-            button.addEventListener("click", () => {
-                const input = document.getElementById(button.dataset.calendar);
-                input?.focus();
-                try { input?.showPicker(); } catch { /* the focused field is enough */ }
-            });
-        }
+        /* the "Use today" helper of the Time Tools works on any date field here */
 
         for (const button of form.querySelectorAll("[data-today]")) {
             button.addEventListener("click", () => {

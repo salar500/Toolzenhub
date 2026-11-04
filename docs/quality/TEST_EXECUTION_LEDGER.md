@@ -18,6 +18,16 @@ Environment: Windows 10, about 4 GB RAM (1.16 GB free at the start of Q3-1), sys
 
 Skipped, interrupted: none. Failed: none.
 
+## Q3-2 (WP2a, duplicate date icon), base `b342344` plus uncommitted change, committed after this run
+
+| Run | Command | Result |
+|---|---|---|
+| Unit | `node --test tests/unit/simple-calculators.test.mjs tests/unit/date-difference-presets.test.mjs` | 39 pass |
+| Build | `npm run build:all` | pass |
+| Browser, subpath-desktop, 1 worker | `simple-calculators.spec.js`, `time-tools-new.spec.js`, `date-difference.spec.js` (all consumers of the changed date helpers that exercise them) | 66 pass, 0 fail, 0 skipped |
+
+Not run: the other date-field consumers (`business-days`, `countdown-timer` date mode, `gratuity`, `xirr`) use the same markup helper but have no date-icon assertion; mobile project not run for this change.
+
 ## Carried forward (not re-run at f5a1df4)
 
 These ran on the working tree that was committed as `6b01b85`..`f5a1df4` (RELEASE-1 records HEAD `45fc888` plus 102 uncommitted entries, 5,597 insertions across 102 files, now in the three commits). That equivalence is inferred from the records and a clean tree; it was not proved by diffing a saved copy.
