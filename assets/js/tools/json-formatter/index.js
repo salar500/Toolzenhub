@@ -32,7 +32,9 @@ import {
     EXAMPLE,
     MAX_CHARS,
     LIVE_MAX_CHARS,
-    MAX_DEPTH
+    MAX_DEPTH,
+    applyFix,
+    locate
 } from "./json-engine.js";
 
 import {
@@ -280,6 +282,24 @@ export function markup() {
                             >
                                 Go to error
                             </button>
+
+                            <div id="jf-fix" class="jf-fix" hidden>
+
+                                <p class="jf-fix__title">Suggested fix (nothing is changed until you apply it)</p>
+
+                                <p id="jf-fix-text" class="jf-fix__text"></p>
+
+                                <pre id="jf-fix-preview" class="jf-error__context" tabindex="0" aria-label="The line as it would read after the fix"></pre>
+
+                                <button
+                                    type="button"
+                                    id="jf-fix-apply"
+                                    class="calculator-form__button jf-goto"
+                                >
+                                    Apply this fix
+                                </button>
+
+                            </div>
 
                         </div>
 
@@ -604,8 +624,12 @@ export function init() {
         copy: document.querySelector("#jf-copy"),
         clear: document.querySelector("#jf-clear"),
         example: document.querySelector("#jf-example"),
-        goto: document.querySelector("#jf-goto")
+        goto: document.querySelector("#jf-goto"),
+        applyFix: document.querySelector("#jf-fix-apply")
     };
+    const fixBox = document.querySelector("#jf-fix");
+    const fixText = document.querySelector("#jf-fix-text");
+    const fixPreview = document.querySelector("#jf-fix-preview");
 
     let liveTimer = null;
     let announceTimer = null;
@@ -626,6 +650,7 @@ export function init() {
 
     /* the error the panel is showing, so Go to error knows where to go */
     let shownError = null;
+    let shownErrorText = "";
 
 
     /* ---------- small helpers ---------- */
@@ -663,6 +688,7 @@ export function init() {
         input.setAttribute("aria-describedby", "jf-hint");
 
         shownError = null;
+        fixBox.hidden = true;
 
     }
 
@@ -715,9 +741,46 @@ export function init() {
 
     }
 
+    /* a proposed correction, shown with the line as it would read; the input box is not touched until Apply */
+    function showFix(error) {
+
+        if (!error.fix) {
+            fixBox.hidden = true;
+            return;
+        }
+
+        const fixed = applyFix(input.value, error.fix);
+        const line = locate(fixed, error.fix.edits[0].from).line;
+        const lineText = fixed.split("\n")[line - 1] ?? "";
+
+        fixText.textContent = error.fix.description;
+        fixPreview.textContent = `${line} | ${lineText.length > 160 ? `${lineText.slice(0, 160)}...` : lineText}`;
+        fixBox.hidden = false;
+
+    }
+
+    function applySuggestedFix() {
+
+        if (!shownError?.fix || input.value !== shownErrorText) {
+            return;
+        }
+
+        input.value = applyFix(input.value, shownError.fix);
+
+        run("check");
+
+        input.focus();
+
+        announce(errorBox.hidden ? "The fix was applied. The JSON is now valid." : "The fix was applied. There is another problem; see the message.");
+
+    }
+
     function showError(error) {
 
         shownError = error;
+        shownErrorText = input.value;
+
+        showFix(error);
 
         errorMessage.textContent = error.message;
         errorWhere.textContent = whereText(error);
@@ -996,6 +1059,7 @@ export function init() {
         if (!errorBox.hidden) {
             errorBox.dataset.stale = "true";
             errorStale.hidden = false;
+            fixBox.hidden = true;
         }
 
         if (output.value) {
@@ -1072,6 +1136,7 @@ export function init() {
     buttons.clear.addEventListener("click", clearAll);
     buttons.example.addEventListener("click", loadExample);
     buttons.goto.addEventListener("click", goToError);
+    buttons.applyFix.addEventListener("click", applySuggestedFix);
 
     input.addEventListener("input", onInput);
 

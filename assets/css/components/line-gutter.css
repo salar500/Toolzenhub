@@ -2,6 +2,13 @@
 
 .line-field {
 
+    /* measured from the textarea by line-gutter.js; these are the values before it has run */
+    --lg-font: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    --lg-size: 14px;
+    --lg-line: 21.7px;
+    --lg-top: 13px;
+    --lg-width: 3ch;
+
     position: relative;
     display: flex;
     flex-direction: column;
@@ -13,7 +20,7 @@
 
     flex: 1;
 
-    padding-left: calc(var(--lg-width, 3ch) + 10px);
+    padding-left: calc(var(--lg-width) + 10px);
 
     white-space: pre;
     overflow: auto;
@@ -28,7 +35,7 @@
     bottom: 1px;
     left: 1px;
 
-    width: var(--lg-width, 3ch);
+    width: var(--lg-width);
 
     overflow: hidden;
 
@@ -53,11 +60,11 @@
 .line-field__numbers {
 
     margin: 0;
-    padding: calc(var(--lg-top, 12px) - 1px) 10px 0 0;
+    padding: calc(var(--lg-top) - 1px) 10px 0 0;
 
-    font-family: var(--lg-font, monospace);
-    font-size: var(--lg-size, 14px);
-    line-height: var(--lg-line, 1.55);
+    font-family: var(--lg-font);
+    font-size: var(--lg-size);
+    line-height: var(--lg-line);
     font-variant-numeric: tabular-nums;
     text-align: right;
 
@@ -69,7 +76,7 @@
     left: 0;
     right: 0;
 
-    height: var(--lg-line, 1.55em);
+    height: var(--lg-line);
 
     background: var(--state-error);
     opacity: 0.16;

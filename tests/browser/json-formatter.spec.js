@@ -424,3 +424,44 @@ test.describe("JSON Formatter & Validator: the error is discoverable on a short 
     await expect(input(page)).toHaveAttribute("aria-invalid", "true");
   });
 });
+
+// Owner finding 13: a correction is proposed with the line as it would read, and applied only when the visitor chooses.
+test.describe("JSON Formatter: suggested fixes", () => {
+  const typeAndValidate = async (page, text) => {
+    await expect(page.locator(".line-field")).toHaveCount(2); // the tool has started
+    await page.locator("#jf-input").fill(text);
+    await page.getByRole("button", { name: "Validate", exact: true }).click();
+  };
+
+  for (const [name, bad, good, words] of [
+    ["a trailing comma", '{"a":1,}', '{"a":1}', "Remove the comma"],
+    ["a missing comma", '[1,\n2\n3]', '[1,\n2,\n3]', "Add the missing comma"],
+    ["a missing colon", '{"a" 1}', '{"a": 1}', "Add the missing colon"],
+    ["an unquoted property name", '{a:1}', '{"a":1}', "double quotes around a"],
+    ["unclosed brackets", '{"a":[1,2', '{"a":[1,2]}', "Add ]}"],
+  ]) {
+    test(`${name}: proposed, input untouched until Apply, then valid`, async ({ page, go }) => {
+      await go("tools/json-formatter/");
+      await typeAndValidate(page, bad);
+      await expect(page.locator("#jf-fix")).toBeVisible();
+      await expect(page.locator("#jf-fix-text")).toContainText(words);
+      await expect(page.locator("#jf-input")).toHaveValue(bad); // never silently changed
+      await page.getByRole("button", { name: "Apply this fix" }).click();
+      await expect(page.locator("#jf-input")).toHaveValue(good);
+      await expect(page.locator("#jf-status-text")).toContainText("Valid JSON");
+      await expect(page.locator("#jf-fix")).toBeHidden();
+    });
+  }
+
+  test("no fix is offered when the right correction cannot be known, and a fix goes away when the text changes", async ({ page, go }) => {
+    await go("tools/json-formatter/");
+    await typeAndValidate(page, '{"a":"x\ny"}'); // a line break inside a string: the intent is unknown
+    await expect(page.locator("#jf-error")).toBeVisible();
+    await expect(page.locator("#jf-fix")).toBeHidden();
+    await typeAndValidate(page, '{"a":1,}');
+    await expect(page.locator("#jf-fix")).toBeVisible();
+    await page.locator("#jf-input").press("End");
+    await page.locator("#jf-input").pressSequentially(" ");
+    await expect(page.locator("#jf-fix")).toBeHidden(); // the error is out of date, so is the proposal
+  });
+});

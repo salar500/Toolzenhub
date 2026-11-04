@@ -236,16 +236,52 @@ const hint = (text, i) =>
 
 class Fail {
 
-    constructor(message, offset) {
+    constructor(message, offset, fix = null) {
         this.message = message;
         this.offset = offset;
+        this.fix = fix;
     }
 
 }
 
-const fail = (message, offset) => {
-    throw new Fail(message, offset);
+/*
+ * `fix` (optional) is a proposal, never applied by the engine: { description, edits: [{ from, to, insert }] } with offsets
+ * into the text as typed. The tool shows it and the visitor decides (applyFix). Only changes that add or remove
+ * punctuation, or put quotes round a bare property name, are ever proposed: no property name or value is guessed or changed.
+ */
+const fail = (message, offset, fix = null) => {
+    throw new Fail(message, offset, fix);
 };
+
+/* where the previous value ended: just after the last character that is not white space before `at` */
+const endOfPrevious = (text, at) => {
+
+    let p = at;
+
+    while (p > 0 && /\s/.test(text[p - 1])) {
+        p--;
+    }
+
+    return p;
+
+};
+
+const insertFix = (description, at, insert) => ({ description, edits: [{ from: at, to: at, insert }] });
+
+const removeCommaFix = (commaAt) => ({ description: "Remove the comma before the closing bracket.", edits: [{ from: commaAt, to: commaAt + 1, insert: "" }] });
+
+/* the text with a proposed fix applied (a new string; the input box is changed only when the visitor chooses) */
+export function applyFix(text, fix) {
+
+    let result = String(text);
+
+    for (const edit of [...fix.edits].sort((a, b) => b.from - a.from)) {
+        result = result.slice(0, edit.from) + edit.insert + result.slice(edit.to);
+    }
+
+    return result;
+
+}
 
 const WORD = /[A-Za-z_$][A-Za-z0-9_$]*/y;
 
@@ -637,7 +673,9 @@ function scan(text, mode, indent = INDENT) {
             }
 
             if (/["{\[\-0-9A-Za-z']/.test(ch)) {
-                fail(`Expected "," or "${closerOf[frame.ch]}" here, but found ${describe(text, i)}. A comma may be missing before it.`, i);
+                const before = endOfPrevious(text, i);
+
+                fail(`Expected "," or "${closerOf[frame.ch]}" here, but found ${describe(text, i)}. A comma may be missing before it.`, i, insertFix("Add the missing comma after the previous value.", before, ","));
             }
 
             unexpected(`where "," or "${closerOf[frame.ch]}" was expected`);
@@ -663,7 +701,7 @@ function scan(text, mode, indent = INDENT) {
 
             }
 
-            fail(`Expected ":" after the property name, but found ${describe(text, i)}.`, i);
+            fail(`Expected ":" after the property name, but found ${describe(text, i)}.`, i, insertFix("Add the missing colon after the property name.", endOfPrevious(text, i), ":"));
 
         }
 
@@ -674,7 +712,7 @@ function scan(text, mode, indent = INDENT) {
             if (ch === "}") {
 
                 if (state === "key") {
-                    fail("A trailing comma. JSON does not allow a comma before the closing }; remove it.", commaAt);
+                    fail("A trailing comma. JSON does not allow a comma before the closing }; remove it.", commaAt, removeCommaFix(commaAt));
                 }
 
                 close("}");
@@ -735,7 +773,10 @@ function scan(text, mode, indent = INDENT) {
             const word = WORD.exec(text);
 
             if (word) {
-                fail(`Property names must be in double quotes: write "${word[0]}" instead of ${word[0]}.`, i);
+                fail(`Property names must be in double quotes: write "${word[0]}" instead of ${word[0]}.`, i, {
+                    description: `Put double quotes around ${word[0]}.`,
+                    edits: [{ from: i, to: i + word[0].length, insert: `"${word[0]}"` }]
+                });
             }
 
             if (/[0-9\-]/.test(ch)) {
@@ -849,7 +890,7 @@ function scan(text, mode, indent = INDENT) {
             if (ch === "}" || ch === "]") {
 
                 if (commaAt >= 0 && stack.length && closerOf[top().ch] === ch) {
-                    fail(`A trailing comma. JSON does not allow a comma before the closing ${ch}; remove it.`, commaAt);
+                    fail(`A trailing comma. JSON does not allow a comma before the closing ${ch}; remove it.`, commaAt, removeCommaFix(commaAt));
                 }
 
                 if (stack.length && closerOf[top().ch] !== ch) {
@@ -922,7 +963,9 @@ function scan(text, mode, indent = INDENT) {
 
         const frame = top();
 
-        fail(`The text ends too soon: the ${frame.ch} opened at ${where(frame)} is never closed with ${closerOf[frame.ch]}.`, n);
+        const closers = stack.map(item => closerOf[item.ch]).reverse().join("");
+
+        fail(`The text ends too soon: the ${frame.ch} opened at ${where(frame)} is never closed with ${closerOf[frame.ch]}.`, n, insertFix(`Add ${closers} at the end to close what is open.`, n, closers));
 
     }
 
@@ -951,7 +994,7 @@ function scan(text, mode, indent = INDENT) {
  *
  *   { state: "empty" }
  *   { state: "too-large", limit }
- *   { state: "invalid", error: { message, offset, line, column, context } }
+ *   { state: "invalid", error: { message, offset, line, column, context, fix } }   (fix: a proposal or null)
  *   { state: "valid", rootType, rootCount, depth, notes, noteTotal, output }
  *
  * `output` is the formatted or minified text (null when mode is "check").
@@ -991,7 +1034,8 @@ export function analyze(text, mode = "check", options = {}) {
                 offset: problem.offset,
                 line: at.line,
                 column: at.column,
-                context: contextOf(input, problem.offset)
+                context: contextOf(input, problem.offset),
+                fix: problem.fix
             }
         };
 
