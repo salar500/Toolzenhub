@@ -13,11 +13,13 @@ import { renderHeader } from "../components/header.js";
 import { renderFooter } from "../components/footer.js";
 import { renderToolError, renderToolNotFound } from "../pages/tool-messages.js";
 import { addJumpToResult } from "../ui/jump-link.js";
+import { initSectionRail } from "../ui/section-rail.js";
 
 async function startTool() {
 
     renderHeader();
     renderFooter();
+    initSectionRail();
 
     const app =
         document.getElementById("app");

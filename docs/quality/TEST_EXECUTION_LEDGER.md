@@ -72,6 +72,10 @@ Shared catalog change (sections, tool `sectionId`, icons, directory pages), so c
 
 New `section-switcher` component (native details of same-section links under every tool breadcrumb; build-time only). New `section-switcher.spec.js` 8 pass desktop. Consumers: `dom-baseline`, `smoke`, `site-a11y` desktop 285 pass; `site-tablet` 126 pass. Mobile run of emi, stopwatch, pdf-tools, image-compressor-resizer found five stale pins (section order and counts after Practice Labs, plus link and details counts now including the switcher); corrected and re-run on desktop (image-compressor-resizer, pdf-tools, stopwatch: all pass). The mobile project was not re-run after the pin fixes, and `loan-comparison` mobile did not complete (run stopped). An orphaned Playwright process held port 4173 until stopped by hand.
 
+## Q3-12 (Phase 1, wide-screen rail and the interrupted mobile runs), base `57dcee1` plus uncommitted change
+
+Mobile project re-run after the pin fixes: `section-switcher`, `loan-comparison`, `stopwatch`, `pdf-tools`, `image-compressor-resizer` 138 pass (this closes the Q3-11 gap). New `ui/section-rail.js` plus CSS (rail from 1400 px). `section-switcher.spec.js` desktop 12 pass (rail open and beside the tool at 1600, sticky, heading inert and out of tab order, resize wide to narrow closes it, axe on three pages at 1600, all 66 tool pages at 1600 without overflow or overlap); mobile 11 pass. Screenshots of EMI, JSON Compare and Loan Comparison at 1600 viewed. Default viewports (1280 desktop, 820, 390) are unchanged by the CSS, so the DOM, SEO and links baselines were not re-run. Not run: visual baselines, Safari/Firefox.
+
 ## Carried forward (not re-run at f5a1df4)
 
 These ran on the working tree that was committed as `6b01b85`..`f5a1df4` (RELEASE-1 records HEAD `45fc888` plus 102 uncommitted entries, 5,597 insertions across 102 files, now in the three commits). That equivalence is inferred from the records and a clean tree; it was not proved by diffing a saved copy.

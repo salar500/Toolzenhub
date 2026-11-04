@@ -52,7 +52,7 @@ Status key: AUTO = an automated spec covers it (matched by file and test name, n
 | 22 | All Tools search clearing | AUTO | WP5a: emptying or space-only input on All Tools now restores the unfiltered page, the URL and the robots hint at once (it previously needed a submit); `navigation.spec.js` |
 | 23 | Global search | AUTO | `navigation.spec.js`, `search.test.mjs` |
 | 24 | Homepage hero loading and accessibility | AUTO+MANUAL | `site-a11y`, `build`, `dom-baseline`; visual load by eye |
-| 25 | Responsive category workspace | AUTO+MANUAL | `site-tablet`, mobile runs (390, 820); feel manual |
+| 25 | Responsive category workspace | AUTO+MANUAL | Phase 1: section navigation on every tool page, held-open rail from 1400 px, disclosure below; `section-switcher.spec.js` (rail at 1600, resize, axe, all 66 tool pages without overflow), `site-tablet`, mobile runs; feel manual |
 | 26 | SQL, Excel, Power BI ecosystem | NOT IMPLEMENTED | no routes; nothing to test |
 | 27 | Image/PDF expansion | AUTO | merge, split, pages, marks, photos-to-pdf, crop, batch specs |
 
