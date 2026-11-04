@@ -27,7 +27,8 @@ const LAB_RELATED = {
   "jsonpath-challenge-lab": ["smart-flashcards", "json-error-fixing-lab"],
   "cron-challenge-lab": ["smart-flashcards", "test-design-lab"],
   "test-design-lab": ["smart-flashcards", "json-error-fixing-lab"],
-  "sql-practice-lab": ["smart-flashcards", "test-design-lab"]
+  "sql-practice-lab": ["smart-flashcards", "test-design-lab"],
+  "excel-practice-lab": ["sql-practice-lab", "smart-flashcards"]
 };
 
 // the route of the Cron Explainer is its own slug in the catalog

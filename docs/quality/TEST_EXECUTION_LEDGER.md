@@ -84,6 +84,18 @@ New tool 64 `sql-practice-lab` (Practice Labs): 30 exercises, SQLite via vendore
 
 SQL lab grows from 30 to 49 exercises (data cleaning on an untidy `contacts_raw` table, IN/BETWEEN/NOT IN, aliases, COUNT DISTINCT, UNION, NOT EXISTS, running total, top per group, a three-step sales-report project) and gains 18 lessons with 27 runnable examples and a free sandbox. Exercise expected results and lesson example results come from Python's sqlite3 (SQLite 3.40.1); the browser spec runs every solution (49) and every lesson example (27) in the real sql.js engine and requires the same result. Evidence: unit 3,741 tests, 0 fail after the pin fixes; SQL spec 29 pass on subpath-desktop and subpath-mobile, axe with a lesson open, overflow at 320 to 1180 px; navigation, dom/seo/links baselines, related-tools pass (baseline diffs reviewed: only the changed tool description). Still open: second reviewer.
 
+## Q3-15 (Phase 4, Excel Practice Lab), base `cf692fb` plus uncommitted change
+
+New lab: own tokenizer, parser and evaluator (no eval, no library), 55 exercises, 13 lessons with 25 editable examples, a free sheet, a copy-reference demonstration and a 31-card flashcard deck. Expected values were produced by an independent Python generator, and engine behaviour is pinned by hand-worked values. Not compared with a copy of Excel; no second reviewer.
+
+| Evidence | Result |
+|---|---|
+| Unit suite (`node --test tests/unit/`) | 3,801 tests: 3,797 pass, 0 fail, 4 skipped (environmental, as before) |
+| `excel-practice-lab.spec.js`, subpath-desktop | 25 passed, including all 55 solutions on the real page, all lesson examples, axe in five states, layout at 320/390/820/1180 |
+| `navigation.spec.js`, `smart-flashcards.spec.js`, subpath-desktop | passed after pins 44 to 45 groups and 6 to 7 tools |
+| DOM and SEO baselines | regenerated; diff reviewed: one new directory card, counts 6 to 7, one new page entry, small text-length changes on two pages |
+| Not run | subpath-mobile and root-desktop for the new lab; full browser suite; visual spec (see ledger rules 10.7) |
+
 ## Carried forward (not re-run at f5a1df4)
 
 These ran on the working tree that was committed as `6b01b85`..`f5a1df4` (RELEASE-1 records HEAD `45fc888` plus 102 uncommitted entries, 5,597 insertions across 102 files, now in the three commits). That equivalence is inferred from the records and a clean tree; it was not proved by diffing a saved copy.

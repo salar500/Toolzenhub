@@ -2372,6 +2372,41 @@ const catalog = [
     },
 
     {
+        id: "excel-practice-lab",
+        status: "published",
+        loader: () =>
+            import("../tools/excel-practice-lab/index.js"),
+        sectionId: "practice-labs",
+        icon: "▦",
+        title: "Excel Practice Lab",
+        description:
+            "Learn spreadsheet formulas from the start: thirteen lessons with editable examples and fifty-five formula exercises on small sheets, with lookups, data cleaning and a budget project. An educational simulation, not Microsoft Excel. It runs in your browser: nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: ["sql-practice-lab", "smart-flashcards"],
+        aliases: [
+            "excel practice",
+            "learn excel",
+            "excel formulas practice",
+            "excel exercises",
+            "spreadsheet practice",
+            "vlookup practice"
+        ],
+        capabilities: {
+            examples: true,
+            explanation: true,
+            localProcessing: true,
+            reset: true,
+            validation: true
+        },
+        seo: {
+            title:
+                "Excel Practice Lab: Learn Formulas with Exercises | ToolZen Hub",
+            description:
+                "Learn and practise spreadsheet formulas: 13 lessons and 55 exercises on small sheets, from cell references and SUM to VLOOKUP, data cleaning and a budget project. A learning simulation of Excel formulas that runs in your browser."
+        }
+    },
+
+    {
         id: "list-comparer",
         status: "published",
         loader: () =>

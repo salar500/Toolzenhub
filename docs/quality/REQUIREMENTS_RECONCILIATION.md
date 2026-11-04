@@ -31,7 +31,7 @@ The 27 findings are the rows of `Q/MASTER_REGRESSION_CATALOG.md` (the single own
 | 23 | Global search | PARTIAL | evaluate category-aware suggestions (P5111 4H) |
 | 24 | Homepage hero | PARTIAL | the unused space beside the hero was never addressed (P5111 4G) |
 | 25 | Responsive category workspace | PARTIAL | same as 2.2 |
-| 26 | SQL, Excel, Power BI | PARTIAL: SQL Practice Lab and SQL deck built (Q3-13); Excel and Power BI open | Phases 3 to 4 below |
+| 26 | SQL, Excel, Power BI | PARTIAL: SQL lab and deck built (Q3-13, Q3-14); Excel Practice Lab and deck built locally (Q3-15); Power BI open | Phases 3 to 4 below |
 | 27 | Image and PDF expansion | PARTIAL | existing tools audited; expansion candidates in 2.6 and 2.7 |
 
 Earlier owner observations B01 to B24 (`U/01`): all dispositions stand (verdict table in `U/03`). Items still open there: B03 search focus consistency (U2, done in Batch 1 and re-checked by `site-a11y`), B09 reporting channel (O-2, owner choice needed), B16 navigation speed (needs a browser trace; none run), B20 country and capital catalogue (rejected, duplicates World Clock data), B21 and B22 (rejected or evergreen only).

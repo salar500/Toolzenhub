@@ -397,6 +397,13 @@
       "state": "active"
     },
     {
+      "id": "excel-practice-lab",
+      "module": "assets/js/tools/excel-practice-lab/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "fd",
       "module": "assets/js/calculators/fd/index.js",
       "moduleChanges": [],

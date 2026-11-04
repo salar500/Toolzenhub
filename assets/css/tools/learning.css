@@ -829,3 +829,49 @@
 .lx-live-result {
     min-height: 0;
 }
+
+/* Excel Practice Lab: a small sheet. Numbers sit to the right, errors and the cells the learner fills are marked by more than colour. */
+.lx-sheet .lx-table th,
+.lx-sheet .lx-table td {
+    white-space: nowrap;
+}
+
+.lx-sheet .lx-table thead th,
+.lx-sheet .lx-table tbody th {
+    font-weight: 600;
+    text-align: center;
+}
+
+.lx-cell--number {
+    text-align: right !important;
+}
+
+.lx-cell--mark {
+    font-weight: 700;
+    text-align: center !important;
+    outline: 2px dashed var(--color-primary);
+    outline-offset: -3px;
+}
+
+.lx-cell--error {
+    font-weight: 600;
+    color: var(--color-danger);
+}
+
+.lx-cell-input {
+    min-width: 5.5rem;
+    width: 100%;
+    padding: 6px 8px;
+    font-family: var(--font-mono, monospace);
+}
+
+.lx-sheet-input {
+    display: grid;
+    gap: 10px;
+}
+
+.lx-example {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+}

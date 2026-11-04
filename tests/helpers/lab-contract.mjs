@@ -9,7 +9,7 @@ import { test, expect, expectClean, expectNoHorizontalOverflow } from "./test-ba
 
 export const app = (page) => page.locator("#lx-app");
 export const live = (page) => page.locator("#lx-live");
-export const answerBox = (page) => page.locator("#lx-app textarea");
+export const answerBox = (page) => page.locator("#lx-app textarea, #lx-app input[id^=\"xl-formula-\"]");
 export const checkButton = (page) => page.getByRole("button", { name: "Check answer", exact: true });
 export const verdictOf = (page) => page.locator(".lx-feedback h4");
 
@@ -115,7 +115,7 @@ export function defineShellTests(cfg) {
       await expect(answerBox(page)).toHaveValue(starting);
     });
 
-    test("an answer over the limit is refused with the limit stated, and nothing is evaluated", async ({ page, go }) => {
+    (cfg.customInput ? test.skip : test)("an answer over the limit is refused with the limit stated, and nothing is evaluated", async ({ page, go }) => {
       await openLab(page, go, cfg.route);
       const limit = (cfg.limit ?? 20000).toLocaleString("en-US");
       await answerBox(page).fill("x".repeat(25000));

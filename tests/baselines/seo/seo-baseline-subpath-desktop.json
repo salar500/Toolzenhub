@@ -5104,7 +5104,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2488
+      "visibleTextChars": 2786
     }
   },
   "/privacy.html": {
@@ -5331,7 +5331,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 14302
+      "visibleTextChars": 14598
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -5527,7 +5527,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3932
+      "visibleTextChars": 3951
     }
   },
   "/tools/cron-expression-explainer/": {
@@ -5675,6 +5675,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 5063
+    }
+  },
+  "/tools/excel-practice-lab/": {
+    "runtime": {
+      "title": "Excel Practice Lab: Learn Formulas with Exercises | ToolZen Hub",
+      "description": "Learn and practise spreadsheet formulas: 13 lessons and 55 exercises on small sheets, from cell references and SUM to VLOOKUP, data cleaning and a budget project. A learning simulation of Excel formulas that runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/excel-practice-lab/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Learn and practise spreadsheet formulas: 13 lessons and 55 exercises on small sheets, from cell references and SUM to VLOOKUP, data cleaning and a budget project. A learning simulation of Excel formulas that runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Excel Practice Lab: Learn Formulas with Exercises | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/excel-practice-lab/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Learn and practise spreadsheet formulas: 13 lessons and 55 exercises on small sheets, from cell references and SUM to VLOOKUP, data cleaning and a budget project. A learning simulation of Excel formulas that runs in your browser.",
+        "twitter:title": "Excel Practice Lab: Learn Formulas with Exercises | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Excel Practice Lab"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Excel Practice Lab: Learn Formulas with Exercises | ToolZen Hub",
+      "description": "Learn and practise spreadsheet formulas: 13 lessons and 55 exercises on small sheets, from cell references and SUM to VLOOKUP, data cleaning and a budget project. A learning simulation of Excel formulas that runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/excel-practice-lab/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 23824
     }
   },
   "/tools/hours-calculator/": {
@@ -5968,7 +6017,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3712
+      "visibleTextChars": 3731
     }
   },
   "/tools/json-formatter/": {
@@ -6066,7 +6115,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3797
+      "visibleTextChars": 3816
     }
   },
   "/tools/jsonpath-tester/": {
@@ -6605,7 +6654,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3908
+      "visibleTextChars": 3927
     }
   },
   "/tools/split-pdf/": {
@@ -6703,7 +6752,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 30215
+      "visibleTextChars": 30234
     }
   },
   "/tools/stopwatch/": {
@@ -6801,7 +6850,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4509
+      "visibleTextChars": 4528
     }
   },
   "/tools/text-diff/": {
