@@ -255,8 +255,10 @@ Candidate, build only with careful non-advice framing: **a SIP against paying do
 scenario using the Prepayment engine's interest saved against an assumed SIP value; it compares a known saving
 with an assumption and must say so). Deferred: inflation and the real value of a target (needs the deferred
 inflation field), taxes on mutual-fund gains and anything about a scheme's rules (dated sources needed). The
-existing Coming Soon placeholder "Best SIP Strategies for Beginners" (article id 7) is advice-shaped and vague:
-it stays Coming Soon and is not built as written; retire or replace it with a real brief at build time.
+existing Coming Soon placeholder "Best SIP Strategies for Beginners" (article id 7) was advice-shaped and vague.
+Replaced 2026-11-05 by a real brief: habits (goal, affordable amount, early start, step-up, staying through falls,
+costs, an annual review) each shown by arithmetic at an assumed return from the calculator model and its Python
+reference, with no recommendation of any scheme and no promise of a result. Published as that article.
 
 ### 22. Imagery plan
 Each from the engine's numbers, no text, no stock art: (1) two lines, total invested and estimated value, the gap
