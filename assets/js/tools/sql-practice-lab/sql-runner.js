@@ -12,6 +12,10 @@ export const RUN_LIMIT_MS = 3000;
 export const START_LIMIT_MS = 20000;
 export const MAX_ROWS = 200;
 
+// ATTACH and VACUUM INTO write files into the worker's in-memory file system, which outlives a database. After a statement that
+// names either, the worker is discarded so nothing written there reaches the next run.
+const WRITES_FILES = /\b(attach|vacuum)\b/i;
+
 export function createRunner({ workerUrl, libUrl, wasmUrl }) {
 
     let worker = null;
@@ -89,6 +93,7 @@ export function createRunner({ workerUrl, libUrl, wasmUrl }) {
 
                 clearTimeout(timer);
                 mine.removeEventListener("message", onResult);
+                if (WRITES_FILES.test(sql) && worker === mine) stop();
                 resolve(event.data);
 
             });
