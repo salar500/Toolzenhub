@@ -43,9 +43,9 @@ Status key: AUTO = an automated spec covers it (matched by file and test name, n
 | 13 | JSON correction suggestions without silent mutation | AUTO | `json-formatter.spec.js`, error-fixing lab (matched) |
 | 14 | JSON Compare line numbers, corresponding lines | AUTO | `json-compare.spec.js` |
 | 15 | Long JSON document usability | AUTO+MANUAL | width and overflow tests; large-document feel manual |
-| 16 | PDF Tools sidebar active state | MANUAL | header active state asserted in `navigation.spec.js:272-290`; sidebar item for PDF not individually confirmed |
-| 17 | Image Tools sidebar active state | MANUAL | as 16 |
-| 18 | All category sidebar active states | MANUAL | as 16; one representative per category is enough |
+| 16 | PDF Tools sidebar active state | AUTO | WP1a: the header "All Tools" item was lit only for the Calculators area, so PDF, Image, Time, Developer, Labs, Health and Converter pages and every `/tools/<id>/` tool showed no active item; now lit on all of them; `navigation.spec.js` (17 pages, plus Articles/About stay un-lit). There is still no persistent sidebar (see TECHNICAL_DEBT T-13) |
+| 17 | Image Tools sidebar active state | AUTO | WP1a: the header "All Tools" item was lit only for the Calculators area, so PDF, Image, Time, Developer, Labs, Health and Converter pages and every `/tools/<id>/` tool showed no active item; now lit on all of them; `navigation.spec.js` (17 pages, plus Articles/About stay un-lit). There is still no persistent sidebar (see TECHNICAL_DEBT T-13) |
+| 18 | All category sidebar active states | AUTO | WP1a: the header "All Tools" item was lit only for the Calculators area, so PDF, Image, Time, Developer, Labs, Health and Converter pages and every `/tools/<id>/` tool showed no active item; now lit on all of them; `navigation.spec.js` (17 pages, plus Articles/About stay un-lit). There is still no persistent sidebar (see TECHNICAL_DEBT T-13) |
 | 19 | Labs separation and navigation | AUTO+MANUAL | `developer-tools-related.spec.js`, `navigation.spec.js` |
 | 20 | Incomplete SIP and Tax articles | OPEN | two articles are Coming Soon with no route (404 asserted); product decision, content not fabricated |
 | 21 | Broken article images | AUTO | `smoke.spec.js` (images load, 126 pages), static asset check, three Pack 53 covers added |

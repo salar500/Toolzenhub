@@ -17,8 +17,9 @@ import { ROUTES } from "../routes.js";
 /* =========================================================
    TOOLS AREA
 
-   "All Tools" is lit for the pages that sit under it: the
-   Calculators section, its category pages and its tools.
+   "All Tools" is lit for every page that sits under it: each
+   section page and category page, and every tool (calculators at
+   /calculators/<id>/, all other tools at /tools/<id>/).
 ========================================================= */
 
 const TOOLS_AREA_PAGES = [
@@ -29,7 +30,14 @@ const TOOLS_AREA_PAGES = [
     "investment.html",
     "business.html",
     "tax.html",
-    "math.html"
+    "math.html",
+    "health.html",
+    "converter.html",
+    "time-tools.html",
+    "developer-tools.html",
+    "image-tools.html",
+    "pdf-tools.html",
+    "practice-labs.html"
 ];
 
 function inToolsArea(
@@ -41,7 +49,8 @@ function inToolsArea(
             page =>
                 pathname.endsWith(`/${page}`)
         ) ||
-        pathname.includes("/calculators/")
+        pathname.includes("/calculators/") ||
+        pathname.includes("/tools/")
     );
 
 }

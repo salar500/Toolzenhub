@@ -95,6 +95,23 @@ test.describe("home page", () => {
     await expect(page.locator("#tools-directory")).toBeVisible();
   });
 
+  test("All Tools stays lit on every section page, category page and tool (owner findings 16 to 18)", async ({ page, go, isMobile }) => {
+    test.skip(isMobile, "the desktop menu is checked here; the mobile menu uses the same script and links");
+    const paths = ["calculators.html", "loans.html", "investment.html", "health.html", "converter.html", "time-tools.html", "developer-tools.html",
+      "image-tools.html", "pdf-tools.html", "practice-labs.html", "calculators/emi/", "calculators/bmi/", "tools/stopwatch/", "tools/json-formatter/",
+      "tools/image-compressor-resizer/", "tools/merge-pdf/", "tools/smart-flashcards/"];
+    for (const path of paths) {
+      await go(path);
+      const active = page.locator(".navbar__menu .navbar__link.active");
+      await expect(active, path).toHaveText("All Tools");
+      await expect(active, path).toHaveAttribute("aria-current", "page");
+    }
+    for (const path of ["articles.html", "about.html"]) {
+      await go(path);
+      await expect(page.locator(".navbar__menu .navbar__link.active"), path).not.toHaveText("All Tools");
+    }
+  });
+
   test("an empty hero search does not navigate", async ({ page, go }) => {
     await go("");
     const url = page.url();
