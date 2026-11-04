@@ -5,6 +5,17 @@ import {
 } from "./Results.js";
 
 
+/* The filled part of a slider, worked out for the markup itself: the page is generated ahead of time, so the sliders are
+   already coloured when it is first drawn instead of waiting for this script to download and run. */
+function initialFill(min, max, value) {
+
+    const percentage = ((Number(value) - min) / (max - min)) * 100;
+
+    return `${Math.round(Math.max(0, Math.min(100, percentage)) * 10) / 10}%`;
+
+}
+
+
 export function createLoanCard(
     prefix,
     title,
@@ -75,6 +86,7 @@ export function createLoanCard(
                         max="100"
                         step="1"
                         value="50"
+                        style="--slider-progress: ${initialFill(1, 100, 50)}"
                     >
 
                 </div>
@@ -125,6 +137,7 @@ export function createLoanCard(
                     max="25"
                     step="0.01"
                     value="${rate}"
+                    style="--slider-progress: ${initialFill(0, 25, rate)}"
                 >
 
 
@@ -163,6 +176,7 @@ export function createLoanCard(
                     max="100"
                     step="1"
                     value="20"
+                    style="--slider-progress: ${initialFill(1, 100, 20)}"
                 >
 
 

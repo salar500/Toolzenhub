@@ -29,7 +29,7 @@ Status key: AUTO = an automated spec covers it (matched by file and test name, n
 | # | Scenario | Status | Evidence / what to check |
 |---|---|---|---|
 | 1 | Slider sync, endpoints, initial styling | AUTO+MANUAL | `field-slider.spec.js` (move, type, keys, Reset, out-of-range pin); initial styling by eye |
-| 2 | Loan Comparison slider loading delay | MANUAL | `loan-comparison.spec.js` covers function, not perceived delay; time it on a slow connection |
+| 2 | Loan Comparison slider loading delay | AUTO | WP2b: cause was the slider fill (`--slider-progress`) being applied only after the script ran; the initial fill is now in the generated markup; asserted with JavaScript disabled in `loan-comparison.spec.js`. Other calculators' sliders are created by `field-slider.js` already coloured |
 | 3 | Age Calculator duplicate date icons | AUTO | fixed in WP2a: custom calendar button removed, native picker kept; `simple-calculators.spec.js` last test; confirm by eye in Safari |
 | 4 | Date Difference inclusive presets | AUTO | `date-difference-presets.test.mjs`, `date-difference.spec.js` |
 | 5 | Countdown 12/24-hour presentation | AUTO | WP3a: date mode has a 12-hour/24-hour choice (device default) that rewrites the event line live; `time-tools-enhancements.spec.js` |

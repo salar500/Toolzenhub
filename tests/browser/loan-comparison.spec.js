@@ -417,3 +417,22 @@ test.describe("summary cards at tablet width (Design System 2.0)", () => {
     for (const b of boxes) { expect(b.l).toBeGreaterThanOrEqual(0); expect(b.r).toBeLessThanOrEqual(820); }
   });
 });
+
+// Owner finding 2: the sliders were uncoloured for a second or two, until the script had downloaded. The fill is now in the
+// generated page, so it is correct with no script at all (the strongest form of "immediately").
+test.describe("Loan Comparison: sliders are coloured before any script runs", () => {
+  test.use({ javaScriptEnabled: false });
+
+  test("initial fill of every slider is already set in the page", async ({ page, go }) => {
+    await go("calculators/loan-comparison/");
+    for (const [id, expected] of [["amount", "49.5%"], ["years", "19.2%"]]) {
+      for (const prefix of ["a", "b"]) {
+        await expect(page.locator(`#${prefix}-${id}-slider`)).toHaveCSS("--slider-progress", expected);
+      }
+    }
+    for (const prefix of ["a", "b"]) {
+      const fill = await page.locator(`#${prefix}-rate-slider`).evaluate((el) => el.style.getPropertyValue("--slider-progress"));
+      expect(parseFloat(fill)).toBeGreaterThan(0);
+    }
+  });
+});

@@ -44,6 +44,10 @@ Pins changed deliberately: `countdown-timer.spec.js` finish state now lists "Sto
 
 Build pass. `navigation.spec.js` subpath-desktop 45 pass, 2 skipped by design (0 fail), one new test; subpath-mobile: the new test only. Time-tool sound audit (no code change): Stopwatch, Business Days, Time Duration and Shift Planner have no sound by design; Pomodoro and Interval share `cycle-controller.js`, which already has an opt-in single beep and a checkbox.
 
+## Q3-5 (WP2b, Loan Comparison slider fill), base `e9d7c27` plus uncommitted change
+
+Build pass. `loan-comparison.spec.js` subpath-desktop 20 pass (1 new, JavaScript disabled); subpath-mobile new test pass; `dom-baseline.spec.js` desktop 16 pass (no baseline changed). First attempt of the new test failed because my edit had put the style on the number input instead of the slider; found by the test, fixed.
+
 ## Carried forward (not re-run at f5a1df4)
 
 These ran on the working tree that was committed as `6b01b85`..`f5a1df4` (RELEASE-1 records HEAD `45fc888` plus 102 uncommitted entries, 5,597 insertions across 102 files, now in the three commits). That equivalence is inferred from the records and a clean tree; it was not proved by diffing a saved copy.

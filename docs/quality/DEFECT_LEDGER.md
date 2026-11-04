@@ -9,7 +9,7 @@ Severity: P0 blocks release, P1 before production, P2 should fix, P3 minor. Clas
 | O-1 | P3 (product) | Best SIP Strategies and Tax Saving Guide articles are Coming Soon with no sourced content | PRODUCT DECISION REQUIRED; content must not be invented |
 | O-2 | P3 (product) | Currency Converter Coming Soon; needs a live-rates decision | PRODUCT DECISION REQUIRED |
 | O-3 | P3 (observation) | Related cards limited to six: Credit Card Payoff and Prepayment no longer appear as automatic related cards on some Loans pages | owner decision; a curated `relatedTools` entry restores either and changes pinned unit expectations |
-| O-4 | unknown | Owner-reported items 2, 16, 17, 18 in `MASTER_REGRESSION_CATALOG.md` have no automated assertion | needs the manual pass in `MANUAL_QA_GUIDE.md` to confirm or reproduce; not reproduced here (no browser run this session) |
+| O-4 | unknown | Owner-reported items 16, 17, 18 in `MASTER_REGRESSION_CATALOG.md` have no automated assertion | needs the manual pass in `MANUAL_QA_GUIDE.md` to confirm or reproduce; not reproduced here (no browser run this session) |
 
 No open P0, P1 or P2 defect is recorded in the repository. That is a statement about the records, not proof of absence: real devices, Safari and Firefox were never tested.
 
@@ -20,6 +20,7 @@ No open P0, P1 or P2 defect is recorded in the repository. That is a statement a
 | D-8 | P3 | GENUINE | Date fields showed two calendar icons: the browser's own picker icon and a custom aria-hidden button beside "Use today" (owner finding 3; shared by Age and every date field built with `time-ui.js` or `simple-calculator.js`) | custom button, its wiring and CSS removed; "Use today" kept; regression test added (WP2a) |
 | D-9 | P2 | GENUINE (design) | Countdown: the zone field looked blank; the event time had no 12/24-hour choice; the finish beep played once for under a second with no stop control; date mode never made a sound (owner findings 5 to 8) | shared `alert-sound.js` (about 12 s repeating beep, Stop sound, option), zone prefilled, clock choice (WP3a). Decision: 12 s, because the owner suggested 10 to 15 s; sound only after a click on Start (browser rule); a link-restored countdown stays silent |
 | D-10 | P2 | GENUINE | All Tools: after a search, deleting the text left the old results standing until the form was submitted (owner finding 22) | input listener in `tools-search.js` restores the page and address (WP5a) |
+| D-11 | P2 | GENUINE | Loan Comparison sliders showed grey/uncoloured for 1 to 2 s: the fill variable was set only by `initializeLoanInputs()` after the module downloaded (owner finding 2) | initial `--slider-progress` computed into the generated markup (WP2b) |
 | D-1 | P3 | GENUINE | Breadcrumb Home on contact, privacy, terms, disclaimer, loans was `href="#"` until JS ran | base-aware URL in the five templates (QC-3.2) |
 | D-2 | P3 | TEST FAULT | axe sampled the Unit Converter Copy button mid colour transition | scan waits for stable colours (QC-8) |
 | D-3 | P2 | GENUINE | Smart Flashcards reset dialog ignored Escape early because the handler loaded after a dynamic import | static import, new same-task Escape test (release-readiness 2026-10-29) |
