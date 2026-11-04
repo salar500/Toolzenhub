@@ -459,12 +459,14 @@ export function init() {
         announce("Could not copy automatically. The text is selected below; copy it yourself.");
     }
 
-    function valueCell(text, label, rowNumber) {
+    function valueCell(text, label, rowNumber, line) {
 
         const cell = el("td", null, "jc-value");
         cell.dataset.label = label;
 
         const span = el("span", truncate(text), "jc-value__text");
+
+        if (line) cell.append(el("span", `Line ${line}`, "jc-line"));
 
         cell.append(span);
 
@@ -516,8 +518,8 @@ export function init() {
             const path = el("td", normalizedPath(row.path), "jc-path");
             path.dataset.label = "Path";
 
-            const first = row.a ? valueCell(values.first, "First", i + 1) : el("td", "(none)", "jc-value jc-value--none");
-            const second = row.b ? valueCell(values.second, "Second", i + 1) : el("td", "(none)", "jc-value jc-value--none");
+            const first = row.a ? valueCell(values.first, "First", i + 1, row.lineA) : el("td", "(none)", "jc-value jc-value--none");
+            const second = row.b ? valueCell(values.second, "Second", i + 1, row.lineB) : el("td", "(none)", "jc-value jc-value--none");
 
             first.dataset.label = "First";
             second.dataset.label = "Second";

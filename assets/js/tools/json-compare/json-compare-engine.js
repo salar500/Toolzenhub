@@ -29,6 +29,7 @@ import {
     pointer,
     serialize
 } from "../json-tree/json-tree.js";
+import { locateLines } from "./line-locator.js";
 
 export const MAX_CHARS_PER_SIDE = 1_000_000;
 export const AUTO_COMBINED_CHARS = 100_000;
@@ -539,6 +540,7 @@ export function differencesText(result) {
             normalizedPath(row.path),
             row.a ? v.first : "-",
             row.b ? v.second : "-",
+            ...(row.lineA || row.lineB ? [`line ${row.lineA ?? "-"} / ${row.lineB ?? "-"}`] : []),
             ...(row.note ? [row.note] : [])
         ].join("\t"));
     }
@@ -572,6 +574,17 @@ export function compareJson(firstText, secondText, options = {}) {
     }
 
     const rows = walk(a.root, b.root, { ignoreOrder });
+
+    /* The line each side's value starts on. When array order is ignored a position in one list says nothing about the other, so no line is given. */
+    if (!ignoreOrder) {
+        /* A document on one line has no useful line number, so none is given for it. */
+        const lineA = firstText.includes("\n") ? locateLines(firstText) : () => null;
+        const lineB = secondText.includes("\n") ? locateLines(secondText) : () => null;
+        for (const row of rows) {
+            row.lineA = row.a ? lineA(row.path) : null;
+            row.lineB = row.b ? lineB(row.path) : null;
+        }
+    }
 
     const counts = { added: 0, removed: 0, changed: 0, "type-changed": 0 };
 
