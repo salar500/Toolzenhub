@@ -525,7 +525,9 @@ test.describe("Cron Expression Explainer in the Developer Tools section", () => 
     // the older pages are unchanged: they do not mention the new tool
     for (const id of ["json-formatter", "text-diff", "jwt-decoder"]) {
       await go(`tools/${id}/`);
-      await expect(page.locator("main")).not.toContainText("Cron Expression");
+      // the section sidebar lists every Developer Tool, so it is left out of the text read
+      const mainText = await page.locator("main").evaluate((e) => { const c = e.cloneNode(true); c.querySelectorAll("nav.section-switcher").forEach((n) => n.remove()); return c.textContent; });
+      expect(mainText).not.toContain("Cron Expression");
     }
     // the Unix converter lists it since the Developer Tools pilot (2026-10-27)
     await go("tools/unix-timestamp-converter/");

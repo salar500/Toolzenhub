@@ -150,7 +150,8 @@ test.describe("Credit Card Payoff Calculator", () => {
     await open(page, go);
     const rule = page.locator(".ccp-assumptions li", { hasText: "A remaining amount of half a paisa or less may be included in the final payment." });
     await expect(rule).toBeVisible();
-    await expect(page.locator("details[open]")).toHaveCount(0); // nothing had to be opened
+    // nothing had to be opened (the section sidebar's own list is open by design on a wide screen and is left out)
+    expect(await page.evaluate(() => [...document.querySelectorAll("details[open]")].filter((d) => !d.closest("nav.section-switcher")).length)).toBe(0);
     await btn(page, "Load example").click();
     await expect(rule).toBeVisible();
     // the tie: the amount due is exactly half a paisa above the payment, so one payment of ₹100.005 is shown as ₹100.01

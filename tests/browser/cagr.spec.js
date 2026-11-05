@@ -405,7 +405,7 @@ test.describe("CAGR Calculator", () => {
     await mode(page, "ahead");
     await fill(page, { bEnd: 240000, bYears: 9 });
     // the related-tools section is shared and describes other tools in their own words (the PPF card names the Public Provident Fund), so it is not this page's wording
-    const text = await page.locator(".calculator-page").evaluate((e) => { const c = e.cloneNode(true); c.querySelectorAll(".related-section").forEach((n) => n.remove()); return c.innerText || c.textContent; });
+    const text = await page.locator(".calculator-page").evaluate((e) => { const c = e.cloneNode(true); c.querySelectorAll(".related-section, nav.section-switcher").forEach((n) => n.remove()); return c.innerText || c.textContent; });
     expect(text).not.toMatch(BANNED);
     expect(unqualified(text, "achievable")).toEqual([]);
     expect(unqualified(text, "forecast")).toEqual([]);
@@ -420,7 +420,8 @@ test.describe("CAGR Calculator", () => {
       await expect(info.getByRole("heading", { name: heading })).toBeVisible();
     }
     await expect(info.filter({ hasText: "Example" }).first()).toContainText("12.47%");
-    await expect(page.locator("details")).toHaveCount(5);
+    // the section sidebar has a disclosure of its own (the narrow-screen list); only the page's accordions are counted
+    expect(await page.evaluate(() => [...document.querySelectorAll("details")].filter((d) => !d.closest("nav.section-switcher")).length)).toBe(5);
   });
 
   test("related: FD and SIP first (pack 50), then PPF and XIRR", async ({ page, go, siteRoot }) => {

@@ -31,6 +31,8 @@ test.describe("Stage 3 responsive: changed calculators", () => {
             // reach 44 px. Range sliders are not measured here: the Loan Comparison sliders are 18 px high (a pre-existing shared design
             // recorded as a finding in the ledger, not changed in Stage 3).
             if (el.type === "range") continue;
+            // In the wide sidebar layout the switcher's summary is a heading, not a control (pointer-events: none, section-switcher.css)
+            if (el.tagName === "SUMMARY" && getComputedStyle(el).pointerEvents === "none") continue;
             const shared = el.tagName === "SUMMARY" && el.closest(".calculator-info");
             const need = shared ? 24 : 44;
             if (r.height < need - 0.5) out.push(`${el.tagName.toLowerCase()}#${el.id} ${Math.round(r.height)}px < ${need}`);
