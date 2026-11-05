@@ -389,7 +389,9 @@ test.describe("JWT Decoder in the Developer Tools section", () => {
     await expect(page.locator("body")).toContainText("JWT Decoder");
     // the JSON Formatter page does not mention the tool; the Unix converter lists it since the Developer Tools pilot (2026-10-27)
     await go("tools/json-formatter/");
-    await expect(page.locator("main")).not.toContainText("JWT");
+    // the section sidebar lists every Developer Tool, so it is left out of the text read
+    const mainText = await page.locator("main").evaluate((e) => { const c = e.cloneNode(true); c.querySelectorAll("nav.section-switcher").forEach((n) => n.remove()); return c.textContent; });
+    expect(mainText).not.toContain("JWT");
     await go("tools/unix-timestamp-converter/");
     await expect(page.locator(".related-section").getByRole("link", { name: /JWT Decoder/ })).toHaveCount(1);
     // the JWT page links to both, in its own text

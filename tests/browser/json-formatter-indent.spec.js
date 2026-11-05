@@ -14,6 +14,7 @@ const DOC = '{"a":[1,{"b":2}]}';
 async function open(page, go) {
   await go("tools/json-formatter/");
   await expect(input(page)).toBeVisible();
+  await expect(page.locator("#jf-panel")).toHaveAttribute("data-ready", "true"); // the script has run (the page is visible before it binds)
 }
 
 test.describe("JSON Formatter indentation", () => {
