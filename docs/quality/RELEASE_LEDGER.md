@@ -6,6 +6,10 @@ Rules: `docs/product-decision-rules.md` section 11. GitHub Pages is the developm
 
 Eight local commits after `f5a1df4` (`b342344` to `b714e57`, plus the closing records commit). Nothing is pushed: `origin/main` is behind HEAD. The Hostinger zip and its hash below were built from `f5a1df4` and no longer match the code, so they must NOT be deployed; rebuild `dist/` and regenerate the zip and hash at release time. The preview site still shows `f5a1df4`. Full regression was not run; the checks that were run are listed per change in `TEST_EXECUTION_LEDGER.md` (Q3-2 to Q3-9). A release checkpoint (unit suite, desktop and mobile browser groups, axe sweeps) is due before any push to the preview of this batch or any deployment.
 
+## Update 2026-11-05
+
+HEAD `8daef8f`, 29 local commits after `f5a1df4`, nothing pushed. The Hostinger zip `ToolZenHub-hostinger-dist-20261103-1428.zip` (SHA-256 `A12191702E...DBE42`, re-checked 2026-11-05, still matches this record) is built from `f5a1df4` and is STALE: do not deploy it. It and `ToolZenHub-backup-20261102-2311.zip` are preserved. No fresh archive has been made: the mobile and root-desktop regression for this HEAD is incomplete (see Q3-17), so the archive preconditions are not met.
+
 ## State at 2026-11-04 (as first recorded, for `f5a1df4`)
 
 | Item | State | Evidence |

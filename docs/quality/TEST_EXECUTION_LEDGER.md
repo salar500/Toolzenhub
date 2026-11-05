@@ -109,6 +109,20 @@ New lab: own query-step engine, relationship checker and DAX subset (no eval, no
 | Same two specs, root-desktop | 2 passed (only the `@portable` tests run on this project) |
 | Not run | full browser suite; visual spec; Firefox, WebKit, screen readers |
 
+## Q3-17 (2026-11-05), HEAD `8daef8f`, sliders, Date Difference, JSON, articles, SQL hardening, cleaning journey
+
+| Run | Result |
+|---|---|
+| `node --test tests/unit/` | 3,844 tests: 3,840 pass, 0 fail, 4 skipped (the same environmental four) |
+| subpath-desktop: `articles`, `dom-baseline`, `seo-baseline`, `links`, `sip`, `income-tax`, `percentage` | pass after stale pins were corrected and the DOM, SEO and links baselines regenerated; each baseline diff was read first (only the two new articles, two category counts and the section-switcher link counts changed) |
+| subpath-desktop: `sql-practice-lab`, `excel-practice-lab`, `power-bi-practice-lab` | 82 passed |
+| subpath-desktop: `sql-practice-lab-hardening` (2), `practice-lab-xss` (4) | passed; the hardening spec first FAILED and exposed D-13, fixed in `70e5eec` |
+| subpath-mobile: the two new articles, `site-a11y` on article pages (axe) | 2 and 40 passed |
+| subpath-mobile: `sql-practice-lab-hardening` | 2 passed |
+| subpath-mobile, 14-spec batch (`field-slider`, `date-difference`, `date-difference-presets`, `json-compare`, `json-compare-lines`, `json-formatter-diagnostics`, `articles`, `sql-practice-lab`, `excel-practice-lab`, `power-bi-practice-lab`, `practice-lab-xss`, `countdown-timer`, `time-zone-converter`, `navigation`) | **INTERRUPTED** by the system for low memory after 47 passing tests, inside `articles.spec.js`. Not a verdict. Tests after position 47 were not run in that batch |
+
+Earlier in the cycle, on subpath-mobile and passing: `field-slider`, `date-difference`, the Time Tools specs after their repairs, navigation and section-switcher specs (recorded in commits `74c54d4`, `831e113`, `6fdb634`).
+
 ## Carried forward (not re-run at f5a1df4)
 
 These ran on the working tree that was committed as `6b01b85`..`f5a1df4` (RELEASE-1 records HEAD `45fc888` plus 102 uncommitted entries, 5,597 insertions across 102 files, now in the three commits). That equivalence is inferred from the records and a clean tree; it was not proved by diffing a saved copy.
