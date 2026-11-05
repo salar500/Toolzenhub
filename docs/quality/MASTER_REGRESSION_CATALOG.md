@@ -57,6 +57,11 @@ Status key: AUTO = an automated spec covers it (matched by file and test name, n
 | 27 | Image/PDF expansion | AUTO | merge, split, pages, marks, photos-to-pdf, crop, batch specs; `large-files-workspace.spec.js` (12 MP photo, 2 x 150-page merge, 26 MB and unreadable-file refusals at 1000, 1280 and 1600 px, state kept when the sidebar is hidden) |
 | 28 | Slider values drive the calculation | AUTO | `slider-inventory.spec.js` (the control, 19 calculators) and `slider-calculation.spec.js` (slider equals typing, edge inputs, Reset, CAGR independent check; EMI, FD, GST excluded by instruction) |
 | 29 | Running timers and in-page state survive the sidebar | AUTO | `large-files-workspace.spec.js` (stopwatch running and laps while the sidebar is hidden and shown) |
+| 30 | EMI and Home Loan schedule CSV matches an independent calculation, only offered when a schedule exists | AUTO | `tests/unit/schedule-csv.test.mjs`, `loan-schedule-export.spec.js` |
+| 31 | Lab exercises and lessons link both ways; typed answers kept; nothing stored | AUTO | `lab-lesson-navigation.spec.js` (SQL, Excel, Power BI) |
+| 32 | Sidebar hide/show width, Back/Forward, refresh and search carry-over in all six ecosystems | AUTO | `sidebar-history.spec.js` |
+| 33 | Large files near their limits succeed (35 MP image, 55 MB merge, 20 files) | AUTO | `large-files-near-limits.spec.js` |
+| 34 | EMI, FD and GST sliders agree with typed values; FD and GST independent numbers | AUTO | `slider-calculation.spec.js` |
 
 ## Maintenance
 
