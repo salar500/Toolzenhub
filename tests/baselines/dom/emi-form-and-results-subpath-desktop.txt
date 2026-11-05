@@ -94,6 +94,7 @@ section#emi-results.calculator-results
     p.emi-assumption "This is an estimate. It assumes a fixed rate on a reducing balance, with each payment made…"
     div.emi-actions
       button#emi-copy.calculator-form__button.calculator-form__button--secondary [type="button"] "Copy summary"
+      button#emi-download.calculator-form__button.calculator-form__button--secondary [type="button"] "Download schedule (CSV)"
       span#emi-copy-note.emi-copy-note
     p.emi-next "Next: or ."
       a [href="{ROOT}calculators/prepayment/"] "see what a part-payment would save"

@@ -257,3 +257,22 @@
     border: 0;
 
 }
+
+.home-loan-actions {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 16px;
+
+}
+
+.home-loan-download-note {
+
+    color: var(--ink-muted);
+
+    font-size: 13px;
+
+}

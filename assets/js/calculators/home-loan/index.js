@@ -32,6 +32,14 @@ import {
 } from "../formulas/home-loan.js";
 
 import {
+    calculateAmortization
+} from "../formulas/loan.js";
+
+import {
+    downloadScheduleCsv
+} from "../common/schedule-csv.js";
+
+import {
     formatINR,
     formatNumber
 } from "../common/formatter.js";
@@ -358,6 +366,17 @@ function renderResults(
                 <div class="calculator-results__summary">
                     ${summaryLines(result).map(line => `<p>${escapeHTML(line)}</p>`).join("\n                    ")}
                 </div>
+
+                ${loan > 0 ? `<div class="home-loan-actions">
+                    <button
+                        type="button"
+                        id="home-loan-download"
+                        class="calculator-form__button calculator-form__button--secondary"
+                    >
+                        Download repayment schedule (CSV)
+                    </button>
+                    <span class="home-loan-download-note" id="home-loan-download-note"></span>
+                </div>` : ""}
 
                 <div class="home-loan-note home-loan-note--trust">
                     <strong>Your own planning, under your assumptions.</strong>
@@ -880,6 +899,10 @@ export function init() {
 
     let announceTimer = null;
 
+    /* the result on the page, so the schedule download is made from the same numbers */
+
+    let shown = null;
+
     /*
      * One short sentence for screen readers, a moment after the
      * visitor stops typing, so it is not read out on every key.
@@ -934,6 +957,8 @@ export function init() {
             )
         ) {
 
+            shown = null;
+
             results.innerHTML =
                 resultEmpty(EMPTY_MESSAGE);
 
@@ -971,6 +996,8 @@ export function init() {
                     .map(error => error.message)
                     .join(" ");
 
+            shown = null;
+
             results.innerHTML =
                 resultError(
                     message,
@@ -988,6 +1015,8 @@ export function init() {
         const result =
             calculateHomeLoan(check.values);
 
+        shown = result;
+
         results.innerHTML =
             renderResults(result);
 
@@ -1000,6 +1029,48 @@ export function init() {
     form.addEventListener(
         "input",
         () => update()
+    );
+
+    /*
+     * The schedule of the loan that fits: the same loan, rate and
+     * tenure as the result above it, as a monthly CSV.
+     */
+
+    results.addEventListener(
+        "click",
+        event => {
+
+            if (!shown || !event.target.closest("#home-loan-download")) {
+                return;
+            }
+
+            const rows =
+                calculateAmortization(
+                    shown.loan,
+                    shown.input.rate,
+                    shown.input.years
+                );
+
+            const name =
+                downloadScheduleCsv(rows, "home-loan-repayment-schedule.csv");
+
+            if (!name) {
+                return;
+            }
+
+            const message =
+                `Saved ${name}: ${rows.length} monthly payments.`;
+
+            const note =
+                results.querySelector("#home-loan-download-note");
+
+            if (note) {
+                note.textContent = message;
+            }
+
+            announce(message);
+
+        }
     );
 
     form.addEventListener(

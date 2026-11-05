@@ -239,8 +239,12 @@ labelled region with a sticky first column (as the Margin and Profit tables). A 
 against interest by tenure belongs in the tenure article, drawn from the same numbers.
 
 ### 14. Print and CSV decisions
-**Print Summary: NOT NEEDED. CSV: NOT NEEDED.** A budget estimate is a working answer, not a document to share, and the print CSS is still
-unshared. Revisit with user evidence.
+**Print Summary: NOT NEEDED. Schedule CSV: BUILT (owner brief, 2026-11-05).** A budget estimate is a working answer, not a document to share, and the print CSS is still
+unshared, so there is no print. The owner asked for a repayment schedule export on EMI and Home Loan, so the result has "Download repayment schedule (CSV)":
+the monthly schedule of the loan that fits (same loan, rate and tenure as the result), made in the browser by `calculators/common/schedule-csv.js` from
+`calculateAmortization()`, shown nowhere on the page (a download only), with a totals row and no payment dates (the tool has no start date). It is offered only when a loan fits
+(no button for an empty form, invalid input or no EMI room). Checked against an independent calculation in `tests/unit/schedule-csv.test.mjs` and
+`tests/browser/loan-schedule-export.spec.js`.
 
 ### 15. Retention
 The repeat-use mechanism comes from the problem: a house-hunt means many properties and many quotes. Each visit changes one input (the
@@ -369,11 +373,11 @@ unless it is clearly this project's old server), clean `test-results`, `tests/.t
 ### 27. Deferred items
 A rate table or stress rows (what the same budget borrows if the rate moves); a repayment schedule (EMI's job); a co-applicant block; a
 loan-to-value or lender view; processing fees, stamp duty and registration; a floating-rate path; part-payments (Prepayment's job);
-Personal Loan and Loan Eligibility (a separate decision); a chart; Print and CSV; saved cases (revisit with evidence that visitors re-enter
+Personal Loan and Loan Eligibility (a separate decision); a chart; Print; saved cases (revisit with evidence that visitors re-enter
 several properties in a session); anything that implies a lender's approval (never in scope).
 
 ### 28. Quality gate
-Tick against the factory gate. NOT NEEDED with reasons: chart (13), CSV and Print (14), a schedule (EMI covers it), a Loans landing page (it
+Tick against the factory gate. NOT NEEDED with reasons: chart (13), Print (14), an on-page schedule (EMI covers it; only the CSV download of it was added, 14), a Loans landing page (it
 exists).
 
 ### 29. Commit checkpoint
@@ -450,7 +454,7 @@ EMIs X, share s, rate a, tenure N; the room B = I × s ÷ 100 − X.
   rankings were reviewed and updated.
 - **Size.** Measured, gzipped: tool module 7.3 KB, formulas 3.3 KB (about 10.5 KB together), tool CSS 1.5 KB; no dependency, no chart. Images
   (PNG / WebP): 3.9 KB / 2.9 KB, 5.2 KB / 4.6 KB and 4.3 KB / 3.9 KB. No size budget was set and none was chased.
-- **Not done (deferred, as planned):** a rate table, a repayment schedule, a co-applicant, print, CSV, a chart; the fourth article ("how existing
+- **Not done (deferred, as planned):** a rate table, an on-page repayment schedule (a CSV download of it was added on 2026-11-05, section 14), a co-applicant, print, a chart; the fourth article ("how existing
   EMIs reduce the loan that fits"), whose numbers are covered inside the first article.
 - **Repetition observed (recorded, not extracted):** the `init()` skeleton, the notes, the definition-list card, the table and sr-only rules were
   copied again from Profit and Margin; the BigInt helpers (`scaled`) are now in three engines; `toolStyles.json` gained another identical

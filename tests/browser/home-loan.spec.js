@@ -51,7 +51,8 @@ test.describe("Home Loan Calculator", () => {
     await expect(page.getByLabel("Own Funds for the Property (optional)")).toHaveValue("");
     await expect(page.getByRole("button", { name: "Reset" })).toBeVisible();
     await expect(page.getByRole("button", { name: /calculate/i })).toHaveCount(0); // live results
-    await expect(page.getByRole("button", { name: /print|csv|export/i })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: /print/i })).toHaveCount(0); // no print (spec 14)
+    await expect(page.getByRole("button", { name: "Download repayment schedule (CSV)", exact: true })).toHaveCount(1); // the schedule export asked for on 2026-11-05
 
     await expect(page.locator("#home-loan-results .calculator-results__item--primary .calculator-results__label")).toHaveText("Loan that fits your EMI budget");
     await expect(metric(page, "Loan that fits your EMI budget")).toHaveText("₹46,09,233");

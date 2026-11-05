@@ -39,6 +39,10 @@ import {
 } from "../formulas/loan.js";
 
 import {
+    downloadScheduleCsv
+} from "../common/schedule-csv.js";
+
+import {
     payoffSchedule,
     rateForEmi,
     yearlySummary,
@@ -645,7 +649,14 @@ function card(title, metrics, sentence, rows, summaryText) {
                     >
                         Copy summary
                     </button>
-                    <span class="emi-copy-note" id="emi-copy-note"></span>
+${rows && rows.length ? `                    <button
+                        type="button"
+                        id="emi-download"
+                        class="calculator-form__button calculator-form__button--secondary"
+                    >
+                        Download schedule (CSV)
+                    </button>
+` : ""}                    <span class="emi-copy-note" id="emi-copy-note"></span>
                 </div>
 
                 ${nextSteps()}
@@ -1217,6 +1228,31 @@ export function init() {
 
 
     /* =====================================================
+       DOWNLOAD
+       The monthly rows that are on the page, as a CSV file.
+    ===================================================== */
+
+    function downloadSchedule() {
+
+        const name = downloadScheduleCsv(monthlyRows, "emi-repayment-schedule.csv");
+
+        if (!name) {
+            return;
+        }
+
+        const message = `Saved ${name}: ${plural(monthlyRows.length, "payment")}.`;
+        const note = results.querySelector("#emi-copy-note");
+
+        if (note) {
+            note.textContent = message;
+        }
+
+        announce(message, 0);
+
+    }
+
+
+    /* =====================================================
        EVENTS
     ===================================================== */
 
@@ -1264,6 +1300,10 @@ export function init() {
         event => {
             if (event.target.closest("#emi-copy")) {
                 copySummary();
+            }
+
+            if (event.target.closest("#emi-download")) {
+                downloadSchedule();
             }
         }
     );
