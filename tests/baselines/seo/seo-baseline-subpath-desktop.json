@@ -4886,11 +4886,11 @@
   "/disclaimer.html": {
     "runtime": {
       "title": "Disclaimer | ToolZen Hub",
-      "description": "Read the ToolZen Hub Disclaimer.",
+      "description": "Read the ToolZen Hub disclaimer: its calculators and guides are for information and learning, not financial, tax, legal or medical advice.",
       "canonical": "https://toolzenhub.in/disclaimer.html",
       "robots": null,
       "openGraph": {
-        "og:description": "Read the ToolZen Hub Disclaimer.",
+        "og:description": "Read the ToolZen Hub disclaimer: its calculators and guides are for information and learning, not financial, tax, legal or medical advice.",
         "og:site_name": "ToolZen Hub",
         "og:title": "Disclaimer | ToolZen Hub",
         "og:type": "website",
@@ -4898,7 +4898,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Read the ToolZen Hub Disclaimer.",
+        "twitter:description": "Read the ToolZen Hub disclaimer: its calculators and guides are for information and learning, not financial, tax, legal or medical advice.",
         "twitter:title": "Disclaimer | ToolZen Hub"
       },
       "jsonLd": [],
@@ -4913,7 +4913,7 @@
     },
     "rawHtml": {
       "title": "Disclaimer | ToolZen Hub",
-      "description": "Read the ToolZen Hub Disclaimer.",
+      "description": "Read the ToolZen Hub disclaimer: its calculators and guides are for information and learning, not financial, tax, legal or medical advice.",
       "canonical": "https://toolzenhub.in/disclaimer.html",
       "robots": null,
       "hasOpenGraph": true,
@@ -5349,11 +5349,11 @@
   "/terms.html": {
     "runtime": {
       "title": "Terms & Conditions | ToolZen Hub",
-      "description": "Read the ToolZen Hub Terms and Conditions.",
+      "description": "Read the ToolZen Hub terms and conditions for using its free calculators, tools, practice labs and articles, which run in your browser.",
       "canonical": "https://toolzenhub.in/terms.html",
       "robots": null,
       "openGraph": {
-        "og:description": "Read the ToolZen Hub Terms and Conditions.",
+        "og:description": "Read the ToolZen Hub terms and conditions for using its free calculators, tools, practice labs and articles, which run in your browser.",
         "og:site_name": "ToolZen Hub",
         "og:title": "Terms & Conditions | ToolZen Hub",
         "og:type": "website",
@@ -5361,7 +5361,7 @@
       },
       "twitter": {
         "twitter:card": "summary",
-        "twitter:description": "Read the ToolZen Hub Terms and Conditions.",
+        "twitter:description": "Read the ToolZen Hub terms and conditions for using its free calculators, tools, practice labs and articles, which run in your browser.",
         "twitter:title": "Terms & Conditions | ToolZen Hub"
       },
       "jsonLd": [],
@@ -5376,7 +5376,7 @@
     },
     "rawHtml": {
       "title": "Terms &amp; Conditions | ToolZen Hub",
-      "description": "Read the ToolZen Hub Terms and Conditions.",
+      "description": "Read the ToolZen Hub terms and conditions for using its free calculators, tools, practice labs and articles, which run in your browser.",
       "canonical": "https://toolzenhub.in/terms.html",
       "robots": null,
       "hasOpenGraph": true,
@@ -5873,7 +5873,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 23846
+      "visibleTextChars": 24081
     }
   },
   "/tools/hours-calculator/": {
@@ -6755,7 +6755,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 25443
+      "visibleTextChars": 25656
     }
   },
   "/tools/shift-planner/": {
@@ -6951,7 +6951,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 30256
+      "visibleTextChars": 30508
     }
   },
   "/tools/stopwatch/": {

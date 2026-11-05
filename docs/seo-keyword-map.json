@@ -1,0 +1,3299 @@
+{
+  "$comment": "INTERNAL planning file. Not published, not a ranking mechanism, no search volumes. Built from the site's catalogs by scripts/gen-seo-keyword-map.mjs; regenerate after the catalog changes. Use it to improve real titles, descriptions, headings, copy and internal links naturally; never as a hidden keyword block (Google ignores the meta keywords tag).",
+  "generated": "2026-11-05",
+  "pages": 131,
+  "summary": {
+    "calculatorsWithoutSupportingArticle": 41,
+    "pagesWithCannibalizationWarnings": 2
+  },
+  "entries": [
+    {
+      "url": "/about.html",
+      "type": "info",
+      "title": "About ToolZen Hub | Smart Tools, Smarter You",
+      "primaryKeyword": "about toolzen hub",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational/trust",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles.html",
+      "type": "article-index",
+      "title": "Articles & Guides",
+      "primaryKeyword": "articles & guides",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational: browse guides",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/balance-transfer/balance-transfer-vs-prepayment/",
+      "type": "article",
+      "title": "Loan Balance Transfer vs Prepayment: Which Saves More?",
+      "primaryKeyword": "loan balance transfer vs prepayment",
+      "secondaryKeywords": [
+        "balance transfer",
+        "loans"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "loan balance transfer vs prepayment explained",
+        "loan balance transfer vs prepayment example"
+      ],
+      "relatedTools": [
+        "tool:balance-transfer",
+        "tool:prepayment"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/balance-transfer/is-a-loan-balance-transfer-worth-it/",
+      "type": "article",
+      "title": "Is a Loan Balance Transfer Worth It? Use Break-Even to Decide",
+      "primaryKeyword": "is a loan balance transfer worth it",
+      "secondaryKeywords": [
+        "balance transfer",
+        "loans"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "is a loan balance transfer worth it explained",
+        "is a loan balance transfer worth it example"
+      ],
+      "relatedTools": [
+        "tool:balance-transfer"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/business/roi-vs-profit-whats-the-difference/",
+      "type": "article",
+      "title": "ROI vs Profit: What's the Difference?",
+      "primaryKeyword": "roi vs profit",
+      "secondaryKeywords": [
+        "business"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "roi vs profit explained",
+        "roi vs profit example"
+      ],
+      "relatedTools": [
+        "tool:roi"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr/",
+      "type": "article",
+      "title": "CAGR vs Simple Average Growth: Why 80% Growth Over 5 Years Is Not 16% CAGR",
+      "primaryKeyword": "cagr vs simple average growth",
+      "secondaryKeywords": [
+        "cagr",
+        "investment"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "cagr vs simple average growth explained",
+        "cagr vs simple average growth example"
+      ],
+      "relatedTools": [
+        "tool:cagr"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate/",
+      "type": "article",
+      "title": "Comparing Two Investments Over Different Periods: A Bigger Gain Is Not a Higher Yearly Rate",
+      "primaryKeyword": "comparing two investments over different periods",
+      "secondaryKeywords": [
+        "cagr",
+        "investment"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "comparing two investments over different periods explained",
+        "comparing two investments over different periods example"
+      ],
+      "relatedTools": [
+        "tool:cagr"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/converter/easy-unit-conversion-guide/",
+      "type": "article",
+      "title": "Easy Unit Conversion Guide",
+      "primaryKeyword": "easy unit conversion guide",
+      "secondaryKeywords": [
+        "converter"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "easy unit conversion guide explained",
+        "easy unit conversion guide example"
+      ],
+      "relatedTools": [
+        "tool:unit-converter"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison/",
+      "type": "article",
+      "title": "Comparing Two Fixed Deposits: A Higher Rate Is Not the Whole Comparison",
+      "primaryKeyword": "comparing two fixed deposits",
+      "secondaryKeywords": [
+        "fd",
+        "investment"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "comparing two fixed deposits explained",
+        "comparing two fixed deposits example"
+      ],
+      "relatedTools": [
+        "tool:fd"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/fd/how-compounding-frequency-changes-an-fd-maturity/",
+      "type": "article",
+      "title": "How Much Does Compounding Frequency Change an FD's Maturity?",
+      "primaryKeyword": "how much does compounding frequency change an fd's maturity",
+      "secondaryKeywords": [
+        "fd",
+        "investment"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how much does compounding frequency change an fd's maturity explained",
+        "how much does compounding frequency change an fd's maturity example"
+      ],
+      "relatedTools": [
+        "tool:fd"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways/",
+      "type": "article",
+      "title": "Adding and Removing GST: Why the Tax Is Not the Same Share Both Ways",
+      "primaryKeyword": "adding and removing gst",
+      "secondaryKeywords": [
+        "gst",
+        "tax"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "adding and removing gst explained",
+        "adding and removing gst example"
+      ],
+      "relatedTools": [
+        "tool:gst"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates/",
+      "type": "article",
+      "title": "GST on a Mixed Invoice: How the Tax Adds Up Across Rates",
+      "primaryKeyword": "gst on a mixed invoice",
+      "secondaryKeywords": [
+        "gst",
+        "tax"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "gst on a mixed invoice explained",
+        "gst on a mixed invoice example"
+      ],
+      "relatedTools": [
+        "tool:gst"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/health/how-to-calculate-your-daily-calorie-needs/",
+      "type": "article",
+      "title": "How to Calculate Your Daily Calorie Needs",
+      "primaryKeyword": "how to calculate your daily calorie needs",
+      "secondaryKeywords": [
+        "health"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how to calculate your daily calorie needs explained",
+        "how to calculate your daily calorie needs example"
+      ],
+      "relatedTools": [
+        "tool:calorie",
+        "tool:bmr"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/",
+      "type": "article",
+      "title": "How Interest Rates Change the Home Loan You Can Borrow",
+      "primaryKeyword": "how interest rates change the home loan you can borrow",
+      "secondaryKeywords": [
+        "home loan",
+        "loans"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how interest rates change the home loan you can borrow explained",
+        "how interest rates change the home loan you can borrow example"
+      ],
+      "relatedTools": [
+        "tool:home-loan"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/home-loan/how-much-home-loan-fits-your-emi-budget/",
+      "type": "article",
+      "title": "How Much Home Loan Fits Your EMI Budget?",
+      "primaryKeyword": "how much home loan fits your emi budget",
+      "secondaryKeywords": [
+        "home loan",
+        "loans"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how much home loan fits your emi budget explained",
+        "how much home loan fits your emi budget example"
+      ],
+      "relatedTools": [
+        "tool:home-loan"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/home-loan/longer-tenure-bigger-loan-much-more-interest/",
+      "type": "article",
+      "title": "Longer Tenure, Bigger Loan, Much More Interest",
+      "primaryKeyword": "longer tenure, bigger loan, much more interest",
+      "secondaryKeywords": [
+        "home loan",
+        "loans"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "longer tenure, bigger loan, much more interest explained",
+        "longer tenure, bigger loan, much more interest example"
+      ],
+      "relatedTools": [
+        "tool:home-loan"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/investment/best-sip-strategies-for-beginners/",
+      "type": "article",
+      "title": "Best SIP Strategies for Beginners",
+      "primaryKeyword": "best sip strategies for beginners",
+      "secondaryKeywords": [
+        "investment"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "best sip strategies for beginners explained",
+        "best sip strategies for beginners example"
+      ],
+      "relatedTools": [
+        "tool:sip"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/loan-comparison/choose-right-loan-tenure/",
+      "type": "article",
+      "title": "How to Choose the Right Loan Tenure",
+      "primaryKeyword": "how to choose the right loan tenure",
+      "secondaryKeywords": [
+        "loan comparison",
+        "loans"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how to choose the right loan tenure explained",
+        "how to choose the right loan tenure example"
+      ],
+      "relatedTools": [
+        "tool:loan-comparison"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/loan-comparison/emi-vs-total-interest/",
+      "type": "article",
+      "title": "EMI vs Total Interest: What Should You Compare?",
+      "primaryKeyword": "emi vs total interest",
+      "secondaryKeywords": [
+        "loan comparison",
+        "loans"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "emi vs total interest explained",
+        "emi vs total interest example"
+      ],
+      "relatedTools": [
+        "tool:loan-comparison"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/loan-comparison/fixed-vs-floating-interest-rates/",
+      "type": "article",
+      "title": "Fixed vs Floating Interest Rates",
+      "primaryKeyword": "fixed vs floating interest rates",
+      "secondaryKeywords": [
+        "loan comparison",
+        "loans"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "fixed vs floating interest rates explained",
+        "fixed vs floating interest rates example"
+      ],
+      "relatedTools": [
+        "tool:loan-comparison"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/loan-comparison/how-to-reduce-home-loan-interest/",
+      "type": "article",
+      "title": "How to Reduce Your Home Loan Interest",
+      "primaryKeyword": "how to reduce your home loan interest",
+      "secondaryKeywords": [
+        "loan comparison",
+        "loans"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how to reduce your home loan interest explained",
+        "how to reduce your home loan interest example"
+      ],
+      "relatedTools": [
+        "tool:loan-comparison"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/loan-comparison/loan-tenure-total-interest/",
+      "type": "article",
+      "title": "How Loan Tenure Affects Total Interest",
+      "primaryKeyword": "how loan tenure affects total interest",
+      "secondaryKeywords": [
+        "loan comparison",
+        "loans"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how loan tenure affects total interest explained",
+        "how loan tenure affects total interest example"
+      ],
+      "relatedTools": [
+        "tool:loan-comparison"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/loan-comparison/what-is-loan-prepayment/",
+      "type": "article",
+      "title": "What Is Loan Prepayment?",
+      "primaryKeyword": "what is loan prepayment",
+      "secondaryKeywords": [
+        "loan comparison",
+        "loans"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "what is loan prepayment explained",
+        "what is loan prepayment example"
+      ],
+      "relatedTools": [
+        "tool:prepayment",
+        "tool:loan-comparison"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/loan-prepayment/early-vs-late-loan-prepayment/",
+      "type": "article",
+      "title": "Why When You Prepay Matters: Early vs Late Prepayment",
+      "primaryKeyword": "why when you prepay matters",
+      "secondaryKeywords": [
+        "loan prepayment",
+        "loans"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "why when you prepay matters explained",
+        "why when you prepay matters example"
+      ],
+      "relatedTools": [
+        "tool:prepayment"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment/",
+      "type": "article",
+      "title": "Reduce Tenure or Lower the EMI After Prepaying: Which Saves More?",
+      "primaryKeyword": "reduce tenure or lower the emi after prepaying",
+      "secondaryKeywords": [
+        "loan prepayment",
+        "loans"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "reduce tenure or lower the emi after prepaying explained",
+        "reduce tenure or lower the emi after prepaying example"
+      ],
+      "relatedTools": [
+        "tool:prepayment"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/margin/margin-vs-markup/",
+      "type": "article",
+      "title": "Margin vs Markup: Why They Are Not the Same",
+      "primaryKeyword": "margin vs markup",
+      "secondaryKeywords": [
+        "margin",
+        "business"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "margin vs markup explained",
+        "margin vs markup example"
+      ],
+      "relatedTools": [
+        "tool:margin"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/margin/price-a-product-for-a-target-margin/",
+      "type": "article",
+      "title": "How to Price a Product for a Target Margin",
+      "primaryKeyword": "how to price a product for a target margin",
+      "secondaryKeywords": [
+        "margin",
+        "business"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how to price a product for a target margin explained",
+        "how to price a product for a target margin example"
+      ],
+      "relatedTools": [
+        "tool:margin"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/margin/what-a-discount-really-costs-you/",
+      "type": "article",
+      "title": "What a Discount Really Costs You",
+      "primaryKeyword": "what a discount really costs you",
+      "secondaryKeywords": [
+        "margin",
+        "business"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "what a discount really costs you explained",
+        "what a discount really costs you example"
+      ],
+      "relatedTools": [
+        "tool:margin"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/math/how-to-calculate-percentage-easily/",
+      "type": "article",
+      "title": "How to Calculate Percentage Easily",
+      "primaryKeyword": "how to calculate percentage easily",
+      "secondaryKeywords": [
+        "math"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how to calculate percentage easily explained",
+        "how to calculate percentage easily example"
+      ],
+      "relatedTools": [
+        "tool:percentage"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/percentage/how-to-find-the-original-price-before-a-percentage-change/",
+      "type": "article",
+      "title": "How to Find the Original Price Before a Percentage Change",
+      "primaryKeyword": "how to find the original price before a percentage change",
+      "secondaryKeywords": [
+        "percentage",
+        "math"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how to find the original price before a percentage change explained",
+        "how to find the original price before a percentage change example"
+      ],
+      "relatedTools": [
+        "tool:percentage"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/percentage/percent-vs-percentage-points/",
+      "type": "article",
+      "title": "Percent vs Percentage Points",
+      "primaryKeyword": "percent vs percentage points",
+      "secondaryKeywords": [
+        "percentage",
+        "math"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "percent vs percentage points explained",
+        "percent vs percentage points example"
+      ],
+      "relatedTools": [
+        "tool:percentage"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back/",
+      "type": "article",
+      "title": "Why +20% Then −20% Doesn't Get You Back",
+      "primaryKeyword": "why +20% then −20% doesn't get you back",
+      "secondaryKeywords": [
+        "percentage",
+        "math"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "why +20% then −20% doesn't get you back explained",
+        "why +20% then −20% doesn't get you back example"
+      ],
+      "relatedTools": [
+        "tool:percentage"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/profit/how-to-find-your-break-even-point/",
+      "type": "article",
+      "title": "How to Find Your Break-Even Point",
+      "primaryKeyword": "how to find your break-even point",
+      "secondaryKeywords": [
+        "profit",
+        "business"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how to find your break-even point explained",
+        "how to find your break-even point example"
+      ],
+      "relatedTools": [
+        "tool:profit"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/profit/price-cost-or-volume-which-matters-most/",
+      "type": "article",
+      "title": "Price, Cost or Volume: Which Matters Most?",
+      "primaryKeyword": "price, cost or volume",
+      "secondaryKeywords": [
+        "profit",
+        "business"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "price, cost or volume explained",
+        "price, cost or volume example"
+      ],
+      "relatedTools": [
+        "tool:profit"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/profit/units-needed-for-a-target-profit/",
+      "type": "article",
+      "title": "How Many Units Do You Need for a Target Profit?",
+      "primaryKeyword": "how many units do you need for a target profit",
+      "secondaryKeywords": [
+        "profit",
+        "business"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how many units do you need for a target profit explained",
+        "how many units do you need for a target profit example"
+      ],
+      "relatedTools": [
+        "tool:profit"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/sip/how-a-sip-grows/",
+      "type": "article",
+      "title": "How a SIP Grows: Your Investment vs Estimated Growth",
+      "primaryKeyword": "how a sip grows",
+      "secondaryKeywords": [
+        "sip",
+        "investment"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how a sip grows explained",
+        "how a sip grows example"
+      ],
+      "relatedTools": [
+        "tool:sip"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/sip/how-much-sip-do-you-need-for-a-goal/",
+      "type": "article",
+      "title": "How Much SIP Do You Need for a Goal?",
+      "primaryKeyword": "how much sip do you need for a goal",
+      "secondaryKeywords": [
+        "sip",
+        "investment"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how much sip do you need for a goal explained",
+        "how much sip do you need for a goal example"
+      ],
+      "relatedTools": [
+        "tool:sip"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/sip/how-return-assumptions-change-a-sip-projection/",
+      "type": "article",
+      "title": "How Return Assumptions Change a SIP Projection",
+      "primaryKeyword": "how return assumptions change a sip projection",
+      "secondaryKeywords": [
+        "sip",
+        "investment"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how return assumptions change a sip projection explained",
+        "how return assumptions change a sip projection example"
+      ],
+      "relatedTools": [
+        "tool:sip"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/sip/step-up-sip-explained/",
+      "type": "article",
+      "title": "Step-Up SIP: What Increasing Your SIP Each Year Changes",
+      "primaryKeyword": "step-up sip",
+      "secondaryKeywords": [
+        "sip",
+        "investment"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "step-up sip explained",
+        "step-up sip example"
+      ],
+      "relatedTools": [
+        "tool:sip"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/swp/how-a-systematic-withdrawal-plan-works/",
+      "type": "article",
+      "title": "How a Systematic Withdrawal Plan Works: Withdrawals, Growth and the Balance Left",
+      "primaryKeyword": "how a systematic withdrawal plan works",
+      "secondaryKeywords": [
+        "swp",
+        "investment"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how a systematic withdrawal plan works explained",
+        "how a systematic withdrawal plan works example"
+      ],
+      "relatedTools": [
+        "tool:swp"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/swp/what-changes-how-long-a-corpus-lasts/",
+      "type": "article",
+      "title": "What Changes How Long a Corpus Lasts: Return, Withdrawal and Yearly Increase",
+      "primaryKeyword": "what changes how long a corpus lasts",
+      "secondaryKeywords": [
+        "swp",
+        "investment"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "what changes how long a corpus lasts explained",
+        "what changes how long a corpus lasts example"
+      ],
+      "relatedTools": [
+        "tool:swp"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/tax/tax-saving-guide-save-more-legally/",
+      "type": "article",
+      "title": "Tax Saving Guide: Save More, Legally",
+      "primaryKeyword": "tax saving guide",
+      "secondaryKeywords": [
+        "tax"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "tax saving guide explained",
+        "tax saving guide example"
+      ],
+      "relatedTools": [
+        "tool:income-tax"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/business.html",
+      "type": "directory",
+      "title": "Business Calculators",
+      "primaryKeyword": "business calculators",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators.html",
+      "type": "tool-index",
+      "title": "All Calculators",
+      "primaryKeyword": "all calculators",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational: browse all tools",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/age/",
+      "type": "calculator",
+      "title": "Age Calculator: Exact Age in Years, Months and Days",
+      "primaryKeyword": "age calculator",
+      "secondaryKeywords": [
+        "age calculator by date of birth",
+        "exact age",
+        "how old am i",
+        "age in years months days"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "age calculator online",
+        "age calculator free",
+        "how to use age calculator",
+        "age calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/percentage/",
+        "/calculators/ratio/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/balance-transfer/",
+      "type": "calculator",
+      "title": "Loan Balance Transfer Calculator",
+      "primaryKeyword": "loan balance transfer calculator",
+      "secondaryKeywords": [
+        "loan transfer",
+        "refinance",
+        "switch loan"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "loan balance transfer calculator online",
+        "loan balance transfer calculator free",
+        "how to use loan balance transfer calculator",
+        "loan balance transfer calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/prepayment/",
+        "/calculators/emi/",
+        "/calculators/loan-comparison/",
+        "/calculators/home-loan/",
+        "/calculators/personal-loan/",
+        "/calculators/loan-eligibility/",
+        "/calculators/interest/",
+        "/calculators/credit-card-payoff/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/bmi/",
+      "type": "calculator",
+      "title": "BMI Calculator: Body Mass Index for Adults",
+      "primaryKeyword": "bmi calculator",
+      "secondaryKeywords": [
+        "body mass index",
+        "bmi calculator",
+        "bmi for adults",
+        "bmi asian"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "bmi calculator online",
+        "bmi calculator free",
+        "how to use bmi calculator",
+        "bmi calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/bmr/",
+        "/calculators/calorie/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/bmr/",
+      "type": "calculator",
+      "title": "BMR Calculator: Basal Metabolic Rate",
+      "primaryKeyword": "bmr calculator",
+      "secondaryKeywords": [
+        "basal metabolic rate",
+        "bmr calculator",
+        "resting metabolic rate",
+        "mifflin st jeor"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "bmr calculator online",
+        "bmr calculator free",
+        "how to use bmr calculator",
+        "bmr calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/bmi/",
+        "/calculators/calorie/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/cagr/",
+      "type": "calculator",
+      "title": "CAGR Calculator: Annual Growth Rate and Compare Investments",
+      "primaryKeyword": "cagr calculator",
+      "secondaryKeywords": [
+        "compound annual growth rate",
+        "annualized return calculator",
+        "required cagr",
+        "cagr comparison"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "cagr calculator online",
+        "cagr calculator free",
+        "how to use cagr calculator",
+        "cagr calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/fd/",
+        "/calculators/sip/",
+        "/calculators/ppf/",
+        "/calculators/xirr/",
+        "/calculators/risk-reward/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/calorie/",
+      "type": "calculator",
+      "title": "Calorie Calculator: Daily Calories Your Body Uses",
+      "primaryKeyword": "calorie calculator",
+      "secondaryKeywords": [
+        "daily calorie needs",
+        "tdee calculator",
+        "maintenance calories",
+        "calorie calculator"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "calorie calculator online",
+        "calorie calculator free",
+        "how to use calorie calculator",
+        "calorie calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/bmr/",
+        "/calculators/bmi/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/credit-card-payoff/",
+      "type": "calculator",
+      "title": "Credit Card Payoff Calculator: Months and Interest",
+      "primaryKeyword": "credit card payoff calculator",
+      "secondaryKeywords": [
+        "credit card payoff calculator",
+        "credit card repayment calculator",
+        "credit card payoff time",
+        "pay off credit card",
+        "how long to pay off credit card",
+        "credit card debt calculator"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "credit card payoff calculator online",
+        "credit card payoff calculator free",
+        "how to use credit card payoff calculator",
+        "credit card payoff calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/balance-transfer/",
+        "/calculators/prepayment/",
+        "/calculators/emi/",
+        "/calculators/loan-comparison/",
+        "/calculators/home-loan/",
+        "/calculators/personal-loan/",
+        "/calculators/loan-eligibility/",
+        "/calculators/interest/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/emi/",
+      "type": "calculator",
+      "title": "EMI Calculator",
+      "primaryKeyword": "emi calculator",
+      "secondaryKeywords": [
+        "personal loan emi",
+        "car loan emi",
+        "education loan emi",
+        "home loan emi",
+        "loan tenure calculator",
+        "emi tenure calculator",
+        "loan amortization schedule"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "emi calculator online",
+        "emi calculator free",
+        "how to use emi calculator",
+        "emi calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/loan-comparison/",
+        "/calculators/prepayment/",
+        "/calculators/home-loan/",
+        "/calculators/personal-loan/",
+        "/calculators/loan-eligibility/",
+        "/calculators/balance-transfer/",
+        "/calculators/interest/",
+        "/calculators/credit-card-payoff/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [
+        "secondary keyword \"personal loan emi\" is also claimed by /calculators/personal-loan/"
+      ],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/fd/",
+      "type": "calculator",
+      "title": "FD Calculator: Maturity & Compare Deposits",
+      "primaryKeyword": "fd calculator",
+      "secondaryKeywords": [
+        "fixed deposit calculator",
+        "fd maturity calculator",
+        "fd comparison"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "fd calculator online",
+        "fd calculator free",
+        "how to use fd calculator",
+        "fd calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/cagr/",
+        "/calculators/sip/",
+        "/calculators/ppf/",
+        "/calculators/xirr/",
+        "/calculators/risk-reward/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/gratuity/",
+      "type": "calculator",
+      "title": "Gratuity Calculator India (Code on Social Security)",
+      "primaryKeyword": "gratuity calculator (india)",
+      "secondaryKeywords": [
+        "gratuity calculator",
+        "gratuity calculator india",
+        "gratuity calculation",
+        "gratuity formula",
+        "gratuity eligibility"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "gratuity calculator (india) online",
+        "gratuity calculator (india) free",
+        "how to use gratuity calculator (india)",
+        "gratuity calculator (india) formula"
+      ],
+      "relatedTools": [
+        "/calculators/income-tax/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for gratuity calculator (india): a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/calculators/gst/",
+      "type": "calculator",
+      "title": "GST Calculator: Add or Remove GST on an Invoice",
+      "primaryKeyword": "gst calculator",
+      "secondaryKeywords": [
+        "add gst",
+        "remove gst",
+        "gst inclusive exclusive",
+        "reverse gst calculator"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "gst calculator online",
+        "gst calculator free",
+        "how to use gst calculator",
+        "gst calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/margin/",
+        "/calculators/profit/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/home-loan/",
+      "type": "calculator",
+      "title": "Home Loan Calculator: Loan Amount for Your EMI Budget",
+      "primaryKeyword": "home loan calculator",
+      "secondaryKeywords": [
+        "home loan affordability",
+        "how much loan can i afford",
+        "loan amount calculator"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "home loan calculator online",
+        "home loan calculator free",
+        "how to use home loan calculator",
+        "home loan calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/emi/",
+        "/calculators/loan-comparison/",
+        "/calculators/personal-loan/",
+        "/calculators/loan-eligibility/",
+        "/calculators/balance-transfer/",
+        "/calculators/interest/",
+        "/calculators/prepayment/",
+        "/calculators/credit-card-payoff/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/income-tax/",
+      "type": "calculator",
+      "title": "Old vs New Tax Regime Calculator, Tax Year 2026-27",
+      "primaryKeyword": "old vs new tax regime calculator",
+      "secondaryKeywords": [
+        "income tax calculator",
+        "old vs new tax regime",
+        "tax regime comparison",
+        "new regime calculator",
+        "old regime calculator",
+        "salary tax calculator india",
+        "new vs old regime"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "old vs new tax regime calculator online",
+        "old vs new tax regime calculator free",
+        "how to use old vs new tax regime calculator",
+        "old vs new tax regime calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/home-loan/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/interest/",
+      "type": "calculator",
+      "title": "Simple and Compound Interest Calculator",
+      "primaryKeyword": "interest calculator",
+      "secondaryKeywords": [
+        "simple interest calculator",
+        "compound interest calculator",
+        "simple and compound interest",
+        "interest on principal"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "interest calculator online",
+        "interest calculator free",
+        "how to use interest calculator",
+        "interest calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/emi/",
+        "/calculators/fd/",
+        "/calculators/cagr/",
+        "/calculators/loan-comparison/",
+        "/calculators/home-loan/",
+        "/calculators/personal-loan/",
+        "/calculators/loan-eligibility/",
+        "/calculators/balance-transfer/",
+        "/calculators/prepayment/",
+        "/calculators/credit-card-payoff/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/loan-comparison/",
+      "type": "calculator",
+      "title": "Loan Comparison Calculator | ToolZenHub",
+      "primaryKeyword": "loan comparison calculator",
+      "secondaryKeywords": [],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "loan comparison calculator online",
+        "loan comparison calculator free",
+        "how to use loan comparison calculator",
+        "loan comparison calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/emi/",
+        "/calculators/prepayment/",
+        "/calculators/balance-transfer/",
+        "/calculators/home-loan/",
+        "/calculators/personal-loan/",
+        "/calculators/loan-eligibility/",
+        "/calculators/interest/",
+        "/calculators/credit-card-payoff/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/loan-eligibility/",
+      "type": "calculator",
+      "title": "Loan Eligibility Calculator: How Much Loan Can an EMI Support",
+      "primaryKeyword": "loan eligibility calculator",
+      "secondaryKeywords": [
+        "loan eligibility",
+        "how much loan can i get",
+        "loan amount by income",
+        "foir calculator"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "loan eligibility calculator online",
+        "loan eligibility calculator free",
+        "how to use loan eligibility calculator",
+        "loan eligibility calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/emi/",
+        "/calculators/home-loan/",
+        "/calculators/personal-loan/",
+        "/calculators/loan-comparison/",
+        "/calculators/balance-transfer/",
+        "/calculators/interest/",
+        "/calculators/prepayment/",
+        "/calculators/credit-card-payoff/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/margin/",
+      "type": "calculator",
+      "title": "Margin Calculator: Price, Margin and Markup",
+      "primaryKeyword": "margin calculator",
+      "secondaryKeywords": [
+        "profit margin calculator",
+        "markup calculator",
+        "selling price calculator"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "margin calculator online",
+        "margin calculator free",
+        "how to use margin calculator",
+        "margin calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/profit/",
+        "/calculators/roi/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/percentage/",
+      "type": "calculator",
+      "title": "Percentage Calculator: Change, Reverse Percentage and Original Value",
+      "primaryKeyword": "percentage calculator",
+      "secondaryKeywords": [
+        "percentage change calculator",
+        "percentage increase calculator",
+        "percentage decrease calculator",
+        "reverse percentage calculator",
+        "original price before increase"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "percentage calculator online",
+        "percentage calculator free",
+        "how to use percentage calculator",
+        "percentage calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/gst/",
+        "/calculators/margin/",
+        "/calculators/ratio/",
+        "/calculators/age/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/personal-loan/",
+      "type": "calculator",
+      "title": "Personal Loan EMI Calculator",
+      "primaryKeyword": "personal loan calculator",
+      "secondaryKeywords": [
+        "personal loan emi",
+        "personal loan emi calculator",
+        "personal loan interest",
+        "personal loan cost"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "personal loan calculator online",
+        "personal loan calculator free",
+        "how to use personal loan calculator",
+        "personal loan calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/emi/",
+        "/calculators/loan-comparison/",
+        "/calculators/home-loan/",
+        "/calculators/loan-eligibility/",
+        "/calculators/balance-transfer/",
+        "/calculators/interest/",
+        "/calculators/prepayment/",
+        "/calculators/credit-card-payoff/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [
+        "secondary keyword \"personal loan emi\" is also claimed by /calculators/emi/"
+      ],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/ppf/",
+      "type": "calculator",
+      "title": "PPF Calculator: Estimate Your PPF Balance Year by Year",
+      "primaryKeyword": "ppf calculator",
+      "secondaryKeywords": [
+        "ppf calculator",
+        "public provident fund calculator",
+        "ppf maturity calculator",
+        "ppf interest calculator",
+        "ppf return calculator"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "ppf calculator online",
+        "ppf calculator free",
+        "how to use ppf calculator",
+        "ppf calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/sip/",
+        "/calculators/fd/",
+        "/calculators/cagr/",
+        "/calculators/xirr/",
+        "/calculators/risk-reward/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/prepayment/",
+      "type": "calculator",
+      "title": "Loan Prepayment Calculator",
+      "primaryKeyword": "loan prepayment calculator",
+      "secondaryKeywords": [
+        "part payment",
+        "early repayment"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "loan prepayment calculator online",
+        "loan prepayment calculator free",
+        "how to use loan prepayment calculator",
+        "loan prepayment calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/emi/",
+        "/calculators/loan-comparison/",
+        "/calculators/balance-transfer/",
+        "/calculators/home-loan/",
+        "/calculators/personal-loan/",
+        "/calculators/loan-eligibility/",
+        "/calculators/interest/",
+        "/calculators/credit-card-payoff/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/profit/",
+      "type": "calculator",
+      "title": "Profit Calculator: Profit and Break-Even Point",
+      "primaryKeyword": "profit calculator",
+      "secondaryKeywords": [
+        "break-even calculator",
+        "business profit calculator",
+        "contribution margin calculator"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "profit calculator online",
+        "profit calculator free",
+        "how to use profit calculator",
+        "profit calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/margin/",
+        "/calculators/roi/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/ratio/",
+      "type": "calculator",
+      "title": "Ratio Calculator: Simplify and Scale a Ratio",
+      "primaryKeyword": "ratio calculator",
+      "secondaryKeywords": [
+        "ratio simplifier",
+        "simplify ratio",
+        "proportion calculator",
+        "equivalent ratio"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "ratio calculator online",
+        "ratio calculator free",
+        "how to use ratio calculator",
+        "ratio calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/percentage/",
+        "/calculators/age/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/risk-reward/",
+      "type": "calculator",
+      "title": "Risk Reward Ratio and Position Size Calculator",
+      "primaryKeyword": "risk-reward and position size calculator",
+      "secondaryKeywords": [
+        "risk reward ratio",
+        "position size calculator",
+        "stop loss calculator",
+        "trade risk calculator"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "risk-reward and position size calculator online",
+        "risk-reward and position size calculator free",
+        "how to use risk-reward and position size calculator",
+        "risk-reward and position size calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/cagr/",
+        "/calculators/xirr/",
+        "/calculators/sip/",
+        "/calculators/ppf/",
+        "/calculators/fd/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/roi/",
+      "type": "calculator",
+      "title": "ROI Calculator: Return on Investment",
+      "primaryKeyword": "roi calculator",
+      "secondaryKeywords": [
+        "return on investment calculator",
+        "roi percentage",
+        "investment return calculator",
+        "annualised return"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "roi calculator online",
+        "roi calculator free",
+        "how to use roi calculator",
+        "roi calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/profit/",
+        "/calculators/margin/",
+        "/calculators/cagr/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/salary-in-hand/",
+      "type": "calculator",
+      "title": "Salary / CTC to In-Hand Calculator India, Tax Year 2026-27",
+      "primaryKeyword": "salary / ctc to in-hand calculator (india)",
+      "secondaryKeywords": [
+        "ctc to in hand",
+        "in hand salary",
+        "in hand salary calculator",
+        "take home salary",
+        "ctc to take home",
+        "salary calculator india"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "salary / ctc to in-hand calculator (india) online",
+        "salary / ctc to in-hand calculator (india) free",
+        "how to use salary / ctc to in-hand calculator (india)",
+        "salary / ctc to in-hand calculator (india) formula"
+      ],
+      "relatedTools": [
+        "/calculators/income-tax/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for salary / ctc to in-hand calculator (india): a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/calculators/sip/",
+      "type": "calculator",
+      "title": "SIP Calculator",
+      "primaryKeyword": "sip calculator",
+      "secondaryKeywords": [
+        "systematic investment plan",
+        "step-up sip"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "sip calculator online",
+        "sip calculator free",
+        "how to use sip calculator",
+        "sip calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/swp/",
+        "/calculators/cagr/",
+        "/calculators/ppf/",
+        "/calculators/fd/",
+        "/calculators/xirr/",
+        "/calculators/risk-reward/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/swp/",
+      "type": "calculator",
+      "title": "SWP Calculator: How Long Will a Corpus Last?",
+      "primaryKeyword": "swp calculator",
+      "secondaryKeywords": [
+        "systematic withdrawal plan",
+        "retirement withdrawal",
+        "retirement drawdown",
+        "withdrawal plan"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "swp calculator online",
+        "swp calculator free",
+        "how to use swp calculator",
+        "swp calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/sip/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/unit-converter/",
+      "type": "calculator",
+      "title": "Unit Converter: Length, Mass, Area, Volume, Speed, Temperature",
+      "primaryKeyword": "unit converter",
+      "secondaryKeywords": [
+        "unit conversion",
+        "convert units",
+        "length converter",
+        "temperature converter",
+        "weight converter"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "unit converter online",
+        "unit converter free",
+        "how to use unit converter",
+        "unit converter formula"
+      ],
+      "relatedTools": [
+        "/calculators/percentage/",
+        "/calculators/ratio/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/calculators/xirr/",
+      "type": "calculator",
+      "title": "XIRR Calculator: Annualised Return from Dated Cash Flows",
+      "primaryKeyword": "xirr calculator",
+      "secondaryKeywords": [
+        "xirr",
+        "xirr calculator",
+        "irregular cash flow return",
+        "internal rate of return with dates",
+        "irr with dates",
+        "annualised return with dates"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "xirr calculator online",
+        "xirr calculator free",
+        "how to use xirr calculator",
+        "xirr calculator formula"
+      ],
+      "relatedTools": [
+        "/calculators/cagr/",
+        "/calculators/sip/",
+        "/calculators/ppf/",
+        "/calculators/fd/",
+        "/calculators/risk-reward/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/categories.html",
+      "type": "category-index",
+      "title": "Calculator Categories",
+      "primaryKeyword": "calculator categories",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/contact.html",
+      "type": "contact",
+      "title": "Contact Us",
+      "primaryKeyword": "contact us",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational/trust",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/converter.html",
+      "type": "directory",
+      "title": "Converter Calculators",
+      "primaryKeyword": "converter calculators",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/developer-tools.html",
+      "type": "directory",
+      "title": "Developer Tools",
+      "primaryKeyword": "developer tools",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/disclaimer.html",
+      "type": "legal",
+      "title": "Disclaimer",
+      "primaryKeyword": "disclaimer",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational/trust",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/health.html",
+      "type": "directory",
+      "title": "Health Calculators",
+      "primaryKeyword": "health calculators",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/image-tools.html",
+      "type": "directory",
+      "title": "Image Tools",
+      "primaryKeyword": "image tools",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/",
+      "type": "home",
+      "title": "ToolZen Hub | Practical Tools for Everyday Decisions",
+      "primaryKeyword": "toolzen hub",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational/brand",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/investment.html",
+      "type": "directory",
+      "title": "Investment Calculators",
+      "primaryKeyword": "investment calculators",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/loans.html",
+      "type": "category",
+      "title": "Loans Calculators",
+      "primaryKeyword": "loans calculators",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational/commercial investigation: a category of tools",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/math.html",
+      "type": "directory",
+      "title": "Math Calculators",
+      "primaryKeyword": "math calculators",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/pdf-tools.html",
+      "type": "directory",
+      "title": "PDF Tools",
+      "primaryKeyword": "pdf tools",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/practice-labs.html",
+      "type": "directory",
+      "title": "Practice Labs: JSON, APIs, Cron and Software Testing",
+      "primaryKeyword": "practice labs",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/privacy.html",
+      "type": "legal",
+      "title": "Privacy Policy",
+      "primaryKeyword": "privacy policy",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational/trust",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/tax.html",
+      "type": "directory",
+      "title": "Tax Calculators",
+      "primaryKeyword": "tax calculators",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/terms.html",
+      "type": "legal",
+      "title": "Terms & Conditions",
+      "primaryKeyword": "terms & conditions",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational/trust",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/time-tools.html",
+      "type": "directory",
+      "title": "Time Tools",
+      "primaryKeyword": "time tools",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/tools.html",
+      "type": "directory",
+      "title": "All Tools",
+      "primaryKeyword": "all tools",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/tools/base64-encoder-decoder/",
+      "type": "calculator",
+      "title": "Base64 Encoder & Decoder: Convert Text Online",
+      "primaryKeyword": "base64 encoder & decoder",
+      "secondaryKeywords": [
+        "base64 encoder",
+        "base64 decoder",
+        "base64 encode",
+        "base64 decode",
+        "base64 converter",
+        "text to base64",
+        "base64 to text",
+        "base64url"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "base64 encoder & decoder online",
+        "base64 encoder & decoder free",
+        "how to use base64 encoder & decoder",
+        "base64 encoder & decoder formula"
+      ],
+      "relatedTools": [
+        "/tools/jwt-decoder/",
+        "/tools/url-parser/",
+        "/tools/json-formatter/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for base64 encoder & decoder: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/business-days/",
+      "type": "calculator",
+      "title": "Business Days Calculator: Add, Subtract and Count Working Days",
+      "primaryKeyword": "business days calculator",
+      "secondaryKeywords": [
+        "business day calculator",
+        "working days calculator",
+        "add business days",
+        "workdays between dates",
+        "working day counter"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "business days calculator online",
+        "business days calculator free",
+        "how to use business days calculator",
+        "business days calculator formula"
+      ],
+      "relatedTools": [
+        "/tools/date-calculator/",
+        "/tools/date-difference/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for business days calculator: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/countdown-timer/",
+      "type": "calculator",
+      "title": "Countdown Timer: Online Timer for Any Time up to 24 Hours",
+      "primaryKeyword": "countdown timer",
+      "secondaryKeywords": [
+        "online timer",
+        "timer",
+        "minute timer",
+        "study timer",
+        "focus timer"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "countdown timer online",
+        "countdown timer free",
+        "how to use countdown timer",
+        "countdown timer formula"
+      ],
+      "relatedTools": [
+        "/tools/stopwatch/",
+        "/tools/date-difference/",
+        "/tools/date-calculator/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for countdown timer: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/cron-challenge-lab/",
+      "type": "calculator",
+      "title": "Cron Challenge Lab: Practise Cron Expressions",
+      "primaryKeyword": "cron challenge lab",
+      "secondaryKeywords": [
+        "cron practice",
+        "cron exercises",
+        "cron challenges",
+        "learn cron",
+        "crontab practice"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "cron challenge lab online",
+        "cron challenge lab free",
+        "how to use cron challenge lab",
+        "cron challenge lab formula"
+      ],
+      "relatedTools": [
+        "/tools/smart-flashcards/",
+        "/tools/test-design-lab/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for cron challenge lab: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/cron-expression-explainer/",
+      "type": "calculator",
+      "title": "Cron Expression Explainer: Read a Crontab Schedule",
+      "primaryKeyword": "cron expression explainer",
+      "secondaryKeywords": [
+        "cron expression explainer",
+        "explain cron expression",
+        "crontab explainer",
+        "cron expression",
+        "crontab syntax",
+        "cron schedule explained",
+        "cron next run times"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "cron expression explainer online",
+        "cron expression explainer free",
+        "how to use cron expression explainer",
+        "cron expression explainer formula"
+      ],
+      "relatedTools": [
+        "/tools/unix-timestamp-converter/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for cron expression explainer: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/date-calculator/",
+      "type": "calculator",
+      "title": "Date Calculator: Add or Subtract Days, Weeks, Months and Years",
+      "primaryKeyword": "date calculator",
+      "secondaryKeywords": [
+        "add days to date",
+        "subtract days from date",
+        "date after days",
+        "date before days",
+        "add months to date",
+        "subtract months from date",
+        "date arithmetic"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "date calculator online",
+        "date calculator free",
+        "how to use date calculator",
+        "date calculator formula"
+      ],
+      "relatedTools": [
+        "/tools/business-days/",
+        "/tools/date-difference/",
+        "/tools/countdown-timer/",
+        "/tools/stopwatch/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for date calculator: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/date-difference/",
+      "type": "calculator",
+      "title": "Date Difference Calculator: Days Between Two Dates",
+      "primaryKeyword": "date difference calculator",
+      "secondaryKeywords": [
+        "days between dates",
+        "date duration",
+        "weeks between dates",
+        "how many days between dates",
+        "calendar difference"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "date difference calculator online",
+        "date difference calculator free",
+        "how to use date difference calculator",
+        "date difference calculator formula"
+      ],
+      "relatedTools": [
+        "/tools/date-calculator/",
+        "/tools/countdown-timer/",
+        "/tools/stopwatch/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for date difference calculator: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/excel-practice-lab/",
+      "type": "calculator",
+      "title": "Excel Practice Lab: Learn Formulas with Exercises",
+      "primaryKeyword": "excel practice lab",
+      "secondaryKeywords": [
+        "excel practice",
+        "learn excel",
+        "excel formulas practice",
+        "excel exercises",
+        "spreadsheet practice",
+        "vlookup practice"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "excel practice lab online",
+        "excel practice lab free",
+        "how to use excel practice lab",
+        "excel practice lab formula"
+      ],
+      "relatedTools": [
+        "/tools/sql-practice-lab/",
+        "/tools/smart-flashcards/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for excel practice lab: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/hours-calculator/",
+      "type": "calculator",
+      "title": "Hours Worked Calculator: Shifts, Breaks and Total Hours",
+      "primaryKeyword": "hours & timesheet calculator",
+      "secondaryKeywords": [
+        "hours calculator",
+        "hours worked calculator",
+        "work hours calculator",
+        "timesheet calculator",
+        "time card calculator",
+        "shift hours calculator",
+        "overnight hours calculator",
+        "calculate hours worked",
+        "total hours calculator"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "hours & timesheet calculator online",
+        "hours & timesheet calculator free",
+        "how to use hours & timesheet calculator",
+        "hours & timesheet calculator formula"
+      ],
+      "relatedTools": [
+        "/tools/shift-planner/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for hours & timesheet calculator: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/image-compressor-resizer/",
+      "type": "calculator",
+      "title": "Image Compressor & Resizer",
+      "primaryKeyword": "image compressor & resizer",
+      "secondaryKeywords": [
+        "image compressor",
+        "compress image",
+        "image resizer",
+        "resize image",
+        "reduce image size",
+        "image size reducer",
+        "compress jpg",
+        "compress png",
+        "resize photo",
+        "compress image online",
+        "compress multiple images",
+        "batch image compressor",
+        "batch resize images",
+        "crop image",
+        "rotate image",
+        "flip image",
+        "convert image",
+        "png to jpg",
+        "jpg to png",
+        "webp to jpg",
+        "jpg to webp"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "image compressor & resizer online",
+        "image compressor & resizer free",
+        "how to use image compressor & resizer",
+        "image compressor & resizer formula"
+      ],
+      "relatedTools": [],
+      "articleOpportunities": [
+        "no guide article yet for image compressor & resizer: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/interval-timer/",
+      "type": "calculator",
+      "title": "Interval Timer: Work and Rest Rounds for Workouts and Routines",
+      "primaryKeyword": "interval and routine timer",
+      "secondaryKeywords": [
+        "interval timer",
+        "hiit timer",
+        "tabata timer",
+        "workout interval timer",
+        "routine timer"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "interval and routine timer online",
+        "interval and routine timer free",
+        "how to use interval and routine timer",
+        "interval and routine timer formula"
+      ],
+      "relatedTools": [
+        "/tools/pomodoro-timer/",
+        "/tools/countdown-timer/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for interval and routine timer: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/json-compare/",
+      "type": "calculator",
+      "title": "JSON Compare: Find the Differences Between Two JSON Documents",
+      "primaryKeyword": "json compare",
+      "secondaryKeywords": [
+        "json compare",
+        "compare json",
+        "json diff",
+        "json difference",
+        "json patch generator"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "json compare online",
+        "json compare free",
+        "how to use json compare",
+        "json compare formula"
+      ],
+      "relatedTools": [
+        "/tools/json-formatter/",
+        "/tools/text-diff/",
+        "/tools/jsonpath-tester/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for json compare: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/json-csv-converter/",
+      "type": "calculator",
+      "title": "JSON to CSV and CSV to JSON Converter",
+      "primaryKeyword": "json and csv converter",
+      "secondaryKeywords": [
+        "json to csv",
+        "csv to json",
+        "json csv",
+        "csv json",
+        "convert json to csv",
+        "convert csv to json",
+        "csv converter",
+        "json converter"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "json and csv converter online",
+        "json and csv converter free",
+        "how to use json and csv converter",
+        "json and csv converter formula"
+      ],
+      "relatedTools": [
+        "/tools/json-formatter/",
+        "/tools/json-compare/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for json and csv converter: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/json-error-fixing-lab/",
+      "type": "calculator",
+      "title": "JSON Error-Fixing Lab: Practise Repairing Invalid JSON",
+      "primaryKeyword": "json error-fixing lab",
+      "secondaryKeywords": [
+        "fix invalid json",
+        "json practice",
+        "json exercises",
+        "json error practice",
+        "repair json",
+        "json validation practice"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "json error-fixing lab online",
+        "json error-fixing lab free",
+        "how to use json error-fixing lab",
+        "json error-fixing lab formula"
+      ],
+      "relatedTools": [
+        "/tools/smart-flashcards/",
+        "/tools/jsonpath-challenge-lab/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for json error-fixing lab: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/json-formatter/",
+      "type": "calculator",
+      "title": "JSON Formatter & Validator",
+      "primaryKeyword": "json formatter & validator",
+      "secondaryKeywords": [
+        "json formatter",
+        "json validator",
+        "format json",
+        "pretty json",
+        "pretty print json",
+        "beautify json",
+        "minify json",
+        "validate json",
+        "json viewer"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "json formatter & validator online",
+        "json formatter & validator free",
+        "how to use json formatter & validator",
+        "json formatter & validator formula"
+      ],
+      "relatedTools": [
+        "/tools/jsonpath-tester/",
+        "/tools/json-compare/",
+        "/tools/json-csv-converter/",
+        "/tools/unix-timestamp-converter/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for json formatter & validator: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/jsonpath-challenge-lab/",
+      "type": "calculator",
+      "title": "JSONPath Challenge Lab: Practise JSONPath Queries",
+      "primaryKeyword": "jsonpath challenge lab",
+      "secondaryKeywords": [
+        "jsonpath practice",
+        "jsonpath exercises",
+        "jsonpath challenges",
+        "learn jsonpath",
+        "jsonpath practice questions"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "jsonpath challenge lab online",
+        "jsonpath challenge lab free",
+        "how to use jsonpath challenge lab",
+        "jsonpath challenge lab formula"
+      ],
+      "relatedTools": [
+        "/tools/smart-flashcards/",
+        "/tools/json-error-fixing-lab/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for jsonpath challenge lab: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/jsonpath-tester/",
+      "type": "calculator",
+      "title": "JSONPath Tester: Run RFC 9535 JSONPath Queries on JSON",
+      "primaryKeyword": "jsonpath tester",
+      "secondaryKeywords": [
+        "jsonpath",
+        "json path",
+        "jsonpath tester",
+        "jsonpath evaluator",
+        "json path query",
+        "rfc 9535"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "jsonpath tester online",
+        "jsonpath tester free",
+        "how to use jsonpath tester",
+        "jsonpath tester formula"
+      ],
+      "relatedTools": [
+        "/tools/json-formatter/",
+        "/tools/json-compare/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for jsonpath tester: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/jwt-decoder/",
+      "type": "calculator",
+      "title": "JWT Decoder: Read a Token's Header and Claims",
+      "primaryKeyword": "jwt decoder",
+      "secondaryKeywords": [
+        "jwt decoder",
+        "decode jwt",
+        "jwt parser",
+        "jwt viewer",
+        "jwt payload viewer",
+        "jwt claims",
+        "jwt expiry",
+        "json web token decoder",
+        "jwt exp"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "jwt decoder online",
+        "jwt decoder free",
+        "how to use jwt decoder",
+        "jwt decoder formula"
+      ],
+      "relatedTools": [
+        "/tools/unix-timestamp-converter/",
+        "/tools/base64-encoder-decoder/",
+        "/tools/json-formatter/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for jwt decoder: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/list-comparer/",
+      "type": "calculator",
+      "title": "List Comparer: Compare Two Lists and Find Differences and Duplicates",
+      "primaryKeyword": "list comparer",
+      "secondaryKeywords": [
+        "list comparer",
+        "compare lists",
+        "list compare",
+        "list difference",
+        "list intersection",
+        "find duplicates",
+        "common items",
+        "set difference"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "list comparer online",
+        "list comparer free",
+        "how to use list comparer",
+        "list comparer formula"
+      ],
+      "relatedTools": [
+        "/tools/text-diff/",
+        "/tools/json-compare/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for list comparer: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/meeting-planner/",
+      "type": "calculator",
+      "title": "International Meeting Planner: Find a Time Across Time Zones",
+      "primaryKeyword": "international meeting planner",
+      "secondaryKeywords": [
+        "meeting time planner",
+        "schedule meeting across time zones",
+        "find a meeting time",
+        "international meeting scheduler",
+        "best time to meet"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "international meeting planner online",
+        "international meeting planner free",
+        "how to use international meeting planner",
+        "international meeting planner formula"
+      ],
+      "relatedTools": [
+        "/tools/time-zone-converter/",
+        "/tools/world-clock/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for international meeting planner: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/merge-pdf/",
+      "type": "calculator",
+      "title": "Merge PDF: Combine PDF Files into One",
+      "primaryKeyword": "merge pdf",
+      "secondaryKeywords": [
+        "merge pdf",
+        "combine pdf",
+        "join pdf",
+        "pdf merger",
+        "merge pdf files",
+        "combine pdf files",
+        "join pdf files"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "merge pdf online",
+        "merge pdf free",
+        "how to use merge pdf",
+        "merge pdf formula"
+      ],
+      "relatedTools": [
+        "/tools/split-pdf/",
+        "/tools/pdf-pages/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for merge pdf: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/pdf-marks/",
+      "type": "calculator",
+      "title": "Add Page Numbers and Watermark to PDF",
+      "primaryKeyword": "add page numbers and watermark to pdf",
+      "secondaryKeywords": [
+        "add page numbers to pdf",
+        "pdf page numbers",
+        "number pdf pages",
+        "pdf watermark",
+        "add watermark to pdf",
+        "watermark pdf",
+        "stamp pdf",
+        "bates numbering"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "add page numbers and watermark to pdf online",
+        "add page numbers and watermark to pdf free",
+        "how to use add page numbers and watermark to pdf",
+        "add page numbers and watermark to pdf formula"
+      ],
+      "relatedTools": [
+        "/tools/pdf-pages/",
+        "/tools/merge-pdf/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for add page numbers and watermark to pdf: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/pdf-pages/",
+      "type": "calculator",
+      "title": "Extract, Reorder and Rotate PDF Pages",
+      "primaryKeyword": "extract, reorder and rotate pdf pages",
+      "secondaryKeywords": [
+        "extract pdf pages",
+        "reorder pdf pages",
+        "rotate pdf pages",
+        "rotate pdf",
+        "delete pdf pages",
+        "remove pdf pages",
+        "rearrange pdf pages",
+        "organize pdf pages",
+        "pdf page organizer"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "extract, reorder and rotate pdf pages online",
+        "extract, reorder and rotate pdf pages free",
+        "how to use extract, reorder and rotate pdf pages",
+        "extract, reorder and rotate pdf pages formula"
+      ],
+      "relatedTools": [
+        "/tools/merge-pdf/",
+        "/tools/split-pdf/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for extract, reorder and rotate pdf pages: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/photos-to-pdf/",
+      "type": "calculator",
+      "title": "Photos to PDF: Combine Pictures into One PDF",
+      "primaryKeyword": "photos to pdf",
+      "secondaryKeywords": [
+        "photos to pdf",
+        "jpg to pdf",
+        "images to pdf",
+        "combine images into pdf",
+        "picture to pdf",
+        "photo to pdf",
+        "png to pdf"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "photos to pdf online",
+        "photos to pdf free",
+        "how to use photos to pdf",
+        "photos to pdf formula"
+      ],
+      "relatedTools": [
+        "/tools/image-compressor-resizer/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for photos to pdf: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/pomodoro-timer/",
+      "type": "calculator",
+      "title": "Pomodoro Timer: Focus Periods and Breaks",
+      "primaryKeyword": "pomodoro focus timer",
+      "secondaryKeywords": [
+        "pomodoro timer",
+        "pomodoro technique timer",
+        "work and break timer"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "pomodoro focus timer online",
+        "pomodoro focus timer free",
+        "how to use pomodoro focus timer",
+        "pomodoro focus timer formula"
+      ],
+      "relatedTools": [
+        "/tools/interval-timer/",
+        "/tools/countdown-timer/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for pomodoro focus timer: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/power-bi-practice-lab/",
+      "type": "calculator",
+      "title": "Power BI Practice Lab: Learn DAX, Power Query and Modelling",
+      "primaryKeyword": "power bi practice lab",
+      "secondaryKeywords": [
+        "power bi practice",
+        "learn power bi",
+        "dax practice",
+        "power query practice",
+        "power bi exercises",
+        "data modelling practice"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "power bi practice lab online",
+        "power bi practice lab free",
+        "how to use power bi practice lab",
+        "power bi practice lab formula"
+      ],
+      "relatedTools": [
+        "/tools/sql-practice-lab/",
+        "/tools/excel-practice-lab/",
+        "/tools/smart-flashcards/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for power bi practice lab: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/shift-planner/",
+      "type": "calculator",
+      "title": "Shift Schedule Planner: Calendar for Rotating Shift Patterns",
+      "primaryKeyword": "shift schedule planner",
+      "secondaryKeywords": [
+        "shift rotation calendar",
+        "shift pattern calendar",
+        "rota planner",
+        "4 on 4 off calendar",
+        "rotating shift schedule"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "shift schedule planner online",
+        "shift schedule planner free",
+        "how to use shift schedule planner",
+        "shift schedule planner formula"
+      ],
+      "relatedTools": [
+        "/tools/hours-calculator/",
+        "/tools/date-calculator/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for shift schedule planner: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/smart-flashcards/",
+      "type": "calculator",
+      "title": "Smart Flashcards: JSON, HTTP and Software Testing Revision Cards",
+      "primaryKeyword": "smart flashcards",
+      "secondaryKeywords": [
+        "flashcards",
+        "study flashcards",
+        "revision cards",
+        "spaced repetition flashcards",
+        "json flashcards",
+        "http flashcards",
+        "software testing flashcards"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "smart flashcards online",
+        "smart flashcards free",
+        "how to use smart flashcards",
+        "smart flashcards formula"
+      ],
+      "relatedTools": [
+        "/tools/json-error-fixing-lab/",
+        "/tools/jsonpath-challenge-lab/",
+        "/tools/cron-challenge-lab/",
+        "/tools/test-design-lab/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for smart flashcards: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/split-pdf/",
+      "type": "calculator",
+      "title": "Split PDF: Cut a PDF into Parts",
+      "primaryKeyword": "split pdf",
+      "secondaryKeywords": [
+        "split pdf",
+        "pdf splitter",
+        "cut pdf",
+        "divide pdf",
+        "split pdf into parts",
+        "split pdf pages"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "split pdf online",
+        "split pdf free",
+        "how to use split pdf",
+        "split pdf formula"
+      ],
+      "relatedTools": [
+        "/tools/pdf-pages/",
+        "/tools/merge-pdf/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for split pdf: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/sql-practice-lab/",
+      "type": "calculator",
+      "title": "SQL Practice Lab: Learn SQL with Exercises That Run",
+      "primaryKeyword": "sql practice lab",
+      "secondaryKeywords": [
+        "sql practice",
+        "learn sql",
+        "sql exercises",
+        "sql practice online",
+        "sql queries practice",
+        "sql joins practice"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "sql practice lab online",
+        "sql practice lab free",
+        "how to use sql practice lab",
+        "sql practice lab formula"
+      ],
+      "relatedTools": [
+        "/tools/smart-flashcards/",
+        "/tools/test-design-lab/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for sql practice lab: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/stopwatch/",
+      "type": "calculator",
+      "title": "Online Stopwatch with Laps",
+      "primaryKeyword": "stopwatch",
+      "secondaryKeywords": [
+        "online stopwatch",
+        "lap timer",
+        "split timer",
+        "elapsed time",
+        "timer stopwatch"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "stopwatch online",
+        "stopwatch free",
+        "how to use stopwatch",
+        "stopwatch formula"
+      ],
+      "relatedTools": [
+        "/tools/countdown-timer/",
+        "/tools/date-difference/",
+        "/tools/date-calculator/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for stopwatch: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/test-design-lab/",
+      "type": "calculator",
+      "title": "Test Design Lab: Boundary Values and Equivalence Partitions",
+      "primaryKeyword": "test design lab",
+      "secondaryKeywords": [
+        "boundary value analysis",
+        "equivalence partitioning",
+        "test design practice",
+        "bva practice",
+        "software testing practice"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "test design lab online",
+        "test design lab free",
+        "how to use test design lab",
+        "test design lab formula"
+      ],
+      "relatedTools": [
+        "/tools/smart-flashcards/",
+        "/tools/json-error-fixing-lab/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for test design lab: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/text-diff/",
+      "type": "calculator",
+      "title": "Text Diff Checker: Compare Two Texts",
+      "primaryKeyword": "text diff / compare",
+      "secondaryKeywords": [
+        "text diff",
+        "diff checker",
+        "compare text",
+        "text compare",
+        "compare two texts",
+        "difference between two texts",
+        "code diff",
+        "prompt comparison",
+        "compare versions"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "text diff / compare online",
+        "text diff / compare free",
+        "how to use text diff / compare",
+        "text diff / compare formula"
+      ],
+      "relatedTools": [
+        "/tools/json-compare/",
+        "/tools/list-comparer/",
+        "/tools/json-formatter/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for text diff / compare: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/time-duration/",
+      "type": "calculator",
+      "title": "Time Duration Calculator: Add and Subtract Hours, Minutes and Seconds",
+      "primaryKeyword": "time duration calculator",
+      "secondaryKeywords": [
+        "add time",
+        "time addition calculator",
+        "add hours and minutes",
+        "subtract time",
+        "hours minutes seconds calculator"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "time duration calculator online",
+        "time duration calculator free",
+        "how to use time duration calculator",
+        "time duration calculator formula"
+      ],
+      "relatedTools": [
+        "/tools/hours-calculator/",
+        "/tools/date-difference/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for time duration calculator: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/time-zone-converter/",
+      "type": "calculator",
+      "title": "Time Zone Converter and Meeting Time Planner",
+      "primaryKeyword": "time zone converter",
+      "secondaryKeywords": [
+        "time zone converter",
+        "timezone converter",
+        "time converter",
+        "convert time zones",
+        "world time converter",
+        "meeting time converter",
+        "international time converter",
+        "time difference between countries",
+        "meeting overlap"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "time zone converter online",
+        "time zone converter free",
+        "how to use time zone converter",
+        "time zone converter formula"
+      ],
+      "relatedTools": [
+        "/tools/unix-timestamp-converter/",
+        "/tools/meeting-planner/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for time zone converter: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/unix-timestamp-converter/",
+      "type": "calculator",
+      "title": "Unix Timestamp Converter",
+      "primaryKeyword": "unix timestamp converter",
+      "secondaryKeywords": [
+        "unix timestamp",
+        "epoch converter",
+        "epoch time",
+        "timestamp converter",
+        "unix time converter",
+        "timestamp to date",
+        "date to timestamp",
+        "epoch to date",
+        "milliseconds timestamp",
+        "unix milliseconds"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "unix timestamp converter online",
+        "unix timestamp converter free",
+        "how to use unix timestamp converter",
+        "unix timestamp converter formula"
+      ],
+      "relatedTools": [
+        "/tools/jwt-decoder/",
+        "/tools/cron-expression-explainer/",
+        "/tools/json-formatter/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for unix timestamp converter: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/url-parser/",
+      "type": "calculator",
+      "title": "URL Parser & Encoder: Parse, Encode and Decode URLs",
+      "primaryKeyword": "url parser & encoder",
+      "secondaryKeywords": [
+        "url parser",
+        "parse url",
+        "url encoder",
+        "url decoder",
+        "url encode",
+        "url decode",
+        "percent encoding",
+        "query string parser",
+        "query string builder"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "url parser & encoder online",
+        "url parser & encoder free",
+        "how to use url parser & encoder",
+        "url parser & encoder formula"
+      ],
+      "relatedTools": [
+        "/tools/base64-encoder-decoder/",
+        "/tools/json-formatter/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for url parser & encoder: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/uuid-generator/",
+      "type": "calculator",
+      "title": "UUID Generator: Version 4 and Version 7 UUIDs, Bulk and Formatted",
+      "primaryKeyword": "uuid generator",
+      "secondaryKeywords": [
+        "uuid generator",
+        "uuid",
+        "guid",
+        "guid generator",
+        "uuid v4",
+        "uuid v7",
+        "random uuid",
+        "generate uuid"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "uuid generator online",
+        "uuid generator free",
+        "how to use uuid generator",
+        "uuid generator formula"
+      ],
+      "relatedTools": [
+        "/tools/base64-encoder-decoder/",
+        "/tools/jwt-decoder/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for uuid generator: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/world-clock/",
+      "type": "calculator",
+      "title": "World Clock: Live Time in Cities and Time Zones",
+      "primaryKeyword": "world clock",
+      "secondaryKeywords": [
+        "world clock",
+        "world time",
+        "current time in cities",
+        "city clocks",
+        "multiple clocks",
+        "time in different cities"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "world clock online",
+        "world clock free",
+        "how to use world clock",
+        "world clock formula"
+      ],
+      "relatedTools": [
+        "/tools/time-zone-converter/",
+        "/tools/meeting-planner/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for world clock: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    }
+  ]
+}
