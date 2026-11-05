@@ -395,7 +395,8 @@ test.describe("GST Calculator", () => {
     }
     await expect(info.filter({ hasText: "Example" }).first()).toContainText("₹1,180.00");
     await expect(info.filter({ hasText: "Reading the Result" })).toContainText("₹1,180 less 18% would give ₹967.60");
-    await expect(page.locator("details")).toHaveCount(5);
+    // the section sidebar has a disclosure of its own (the narrow-screen list); only the page's accordions are counted
+    expect(await page.evaluate(() => [...document.querySelectorAll("details")].filter((d) => !d.closest("nav.section-switcher")).length)).toBe(5);
   });
 
   test("related: Margin and Profit are offered; the Old vs New Tax Regime Calculator shares the Tax category but is not related (autoRelated: false) and the other tools are not", async ({ page, go, siteRoot }) => {
@@ -403,7 +404,7 @@ test.describe("GST Calculator", () => {
     const related = page.locator(".related-calculator-card");
     const hrefs = await related.evaluateAll((els) => els.map((e) => (e.matches("a") ? e : e.querySelector("a")).getAttribute("href")));
     expect(hrefs).toEqual([`${siteRoot}calculators/margin/`, `${siteRoot}calculators/profit/`]);
-    await expect(page.locator("a[href*='calculators/income-tax']")).toHaveCount(0);
+    await expect(page.locator("a[href*='calculators/income-tax']:not(nav.section-switcher a)")).toHaveCount(0); // the section sidebar lists every calculator and is left out
   });
 
   test("search finds it by name and by its aliases, not by rates or classification", async ({ page, go, siteRoot }) => {
