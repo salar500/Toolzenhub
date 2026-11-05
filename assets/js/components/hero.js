@@ -60,9 +60,10 @@ export function renderHero() {
 
                         <p class="hero__description">
 
-                            Calculate loan payments, compare options,
-                            plan investments and work through everyday
-                            date, GST, margin and percentage questions.
+                            Calculate loan payments, plan investments and
+                            work through GST, margin and percentage
+                            questions, then use the time, developer,
+                            image and PDF tools, all in your browser.
 
                         </p>
 

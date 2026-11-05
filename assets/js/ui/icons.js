@@ -31,6 +31,7 @@ const PATHS = {
     arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
     check: '<path d="M5 12.5l4.5 4.5L19 7.500"/>',
     book: '<path d="M5 4h10a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h10"/>',
+    flask: '<path d="M9.500 3h5M10.500 3v6L5 18.500A2 2 0 0 0 6.700 21.500h10.600A2 2 0 0 0 19 18.500L13.500 9V3"/><path d="M7.500 15h9"/>',
     tool: '<path d="M14.500 6.500a4 4 0 0 0-5 5L4 17l3 3 5.500-5.500a4 4 0 0 0 5-5l-2.500 2.500-2.500-.5-.5-2.500z"/>'
 };
 
@@ -41,7 +42,7 @@ const FOR = {
     "developer-tools": "code",
     "image-tools": "image",
     "pdf-tools": "file",
-    "practice-labs": "check",
+    "practice-labs": "flask",
     loans: "home",
     investment: "trend",
     tax: "receipt",

@@ -102,12 +102,25 @@
     color: var(--color-ink);
 
     font-size: 15px;
-    text-decoration: underline;
+    text-decoration: none;
     text-underline-offset: 3px;
 
 }
 
+/* a list of places is told apart by its layout, so only the pointed-at link is underlined; the current tool is bold with an accent bar */
+.section-switcher__list a:hover,
+.section-switcher__list a:focus-visible {
+
+    text-decoration: underline;
+
+}
+
 .section-switcher__list a[aria-current="page"] {
+
+    margin-left: -9px;
+    padding-left: 6px;
+
+    border-left: 3px solid var(--accent);
 
     font-weight: 700;
     text-decoration: none;

@@ -74,11 +74,12 @@ Built on the existing build-time "More <section>" navigation (`components/sectio
 | Routing | each entry is the tool's existing URL; Back, Forward, refresh and deep links are the browser's own |
 | Practice Labs | a lab with twelve or more exercises also has its own exercise list (section 2, D1) inside the main area, so a long lab shows two lists; the sidebar can be hidden to give the lab more room |
 
-### What the sidebar does not do (open)
+### What the sidebar does not do
 
-- It does not keep state across tools. Moving to another tool is a normal page navigation, so a typed value, a chosen file or a running timer in the old tool is lost, as it always was. Hiding or showing the sidebar does not lose them.
-- Image and PDF tools were checked for no sideways scroll and for the sidebar, not for large-file workflows at the new width.
+- It does not keep state across tools (decision D4, section 10). Moving to another tool is a normal page navigation, so a typed value, a chosen file or a running timer in the old tool is lost, as it always was; the pages promise that nothing is stored. Hiding or showing the sidebar loses nothing (tested: chosen image, typed settings, result, merged PDF, running stopwatch and laps).
+- Large Image and PDF files were tested beside the sidebar on 2026-11-05 (section 10); real phones, Safari and Firefox were not.
 - No separate mobile drawer or bottom bar.
+- A long lab hides the sidebar on screens under 1500 px (D3) so its own exercise list and the exercise keep their width; section 6's earlier line that a long lab "shows two lists" describes screens of 1500 px and up.
 
 ## 7. Slider inventory (browser-tested)
 
@@ -123,3 +124,60 @@ Read from the built pages by `scripts/gen-slider-inventory.mjs`: **71 sliders in
 | Not run | Firefox, Safari/WebKit, real phones, screen readers, Lighthouse, full suites, the full-width Image/PDF workflows at the new width |
 
 Defects found and fixed in this phase: the Image Compressor download link was blue on near-black (a shared link colour outranked the button colour; PDF Tools had the same fix already); three stale test pins from the Practice Labs section.
+
+## 9. Product research and coverage matrix (2026-11-05)
+
+### 9.1 What was inspected, and how far it goes
+
+| Source | What was read | What it was used for | Limit |
+|---|---|---|---|
+| W3C WAI-ARIA Authoring Practices, "Disclosure navigation menu" example | the pattern page | confirms the sidebar and the narrow "More <section>" disclosure: a `nav` landmark, buttons with `aria-expanded` and `aria-controls`, `aria-current="page"`, Escape closes and returns focus, Tab is the main key, and site navigation should not use the ARIA menu role | one pattern page |
+| GitLab Pajamas, "Navigation sidebar" | the design-system page | a persistent left sidebar visible by default on wide screens that the user can hide; hidden by default on small screens and opened as an overlay; a stored preference | no search guidance; GitLab stores the preference in a cookie, which this site does not do (decision D4) |
+| Calculator.net mortgage calculator | the page | a loan calculator reference: schedule by month and by year, extra payments, chart, print | one page of one site; a US mortgage, not an Indian EMI |
+| iLovePDF home page | the tool list | the usual PDF tool set (merge, split, remove, extract, organise, compress, repair, OCR, convert, rotate, page numbers, watermark, crop, edit, protect, unlock, sign, redact, compare) | a list of names, not behaviour |
+| Squoosh README | the repository front page | confirms in-browser, no-upload compression is a known and accepted pattern | the page names no formats or controls |
+| SQLBolt | a search summary only | lessons that end in an exercise, no set-up | the sidebar behaviour was not confirmed |
+| Nielsen Norman Group on navigation | not reached; only second-hand summaries came back | nothing is cited from it | treat every NN/g claim in third-party pages as unverified |
+
+This is a small, honest sample, not a market study. No traffic, Search Console, keyword or usage data was gathered, so nothing below is a demand claim. The earlier reasoned-hypothesis package (`docs/ecosystem-review/`) stands as written; this section only adds what was checked now.
+
+### 9.2 Coverage matrix: published tools and working functionality
+
+Counts are the live tools in the catalog (69). "Working" means built and covered by a browser spec in this repository; "gap" is a proposal, not a promise.
+
+| Ecosystem | Live tools | What a visitor can do now | Gap found (priority) | Action |
+|---|---|---|---|---|
+| Calculators | 30 (loans 9, investment 7, tax 4, health 3, business 3, math 3, converter 1) | every tool has a form that updates as you type; EMI has an amortisation schedule; Prepayment has CSV and print; SIP and Balance Transfer have print; the slider audit (sections 7 and 10) covers 16 of the 19 slider calculators at calculation level, the other three by instruction | Home Loan and EMI offer no schedule download or print, while Prepayment does (P2) | proposed: reuse the Prepayment export and print for the EMI schedule; not built |
+| Time Tools | 13 | timers and clocks (Countdown, Stopwatch, Pomodoro, Interval, World Clock), dates and durations (Date Difference, Date Calculator, Business Days, Time Duration, Hours and Timesheet), zones and shifts (Time Zone Converter, International Meeting Planner, Shift Planner); a running timer is not affected by hiding the sidebar (tested) | none found; no external time-tool comparison was made | none |
+| Developer Tools | 12 | JSON (Formatter and Validator, Compare, JSONPath Tester, JSON and CSV), encoding (Base64, URL Parser, JWT Decoder), text (Text Diff, List Comparer), identifiers and time (Unix Timestamp, Cron Explainer, UUID Generator) | none claimed: no competitor feature comparison was made for these | none |
+| Image Tools | 2 | Image Compressor and Resizer (resize, quality, target size, format change, batch, crop) and Photos to PDF; tested with 12 MP photos and the 25 MB and 40 MP refusals, with the sidebar open and hidden | none found against what the Squoosh README says (it says little) | none |
+| PDF Tools | 4 | Merge PDF, Split PDF, Extract, Reorder and Rotate Pages, Page Numbers and Watermark; tested with 2 x 150 pages beside the sidebar and a 600-page merge | iLovePDF also lists compress, crop, protect, unlock, sign, redact, compare, OCR and Office conversion: most need a server or a large library, and `pdf-lib` cannot recompress images, so none is proposed now (P3) | none now |
+| Practice Labs | 8 | SQL (49 exercises), Excel (55), Power BI (43) with a grouped, searchable exercise list; JSON Error-Fixing, JSONPath, Cron, Test Design; Smart Flashcards | a lesson-aware list that links each lesson to its exercises (P2, section 4) | proposed |
+
+### 9.3 References worth keeping
+
+W3C APG disclosure navigation (https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/); GitLab Pajamas navigation sidebar (https://design.gitlab.com/usability/navigation-sidebar); Calculator.net mortgage calculator (https://www.calculator.net/mortgage-calculator.html); iLovePDF (https://www.ilovepdf.com/); Squoosh (https://github.com/GoogleChromeLabs/squoosh).
+
+## 10. Decisions and results of the completion phase (2026-11-05, local, not pushed)
+
+| # | Decision | Reason | Where |
+|---|---|---|---|
+| D3 | A long lab (twelve or more exercises) tells the section sidebar to step aside below 1500 px: it starts hidden with "Show Practice Labs" above the tool, and the visitor can show it at once. Labs under twelve exercises and screens of 1500 px and up keep it open. Nothing is stored | with both lists open, the exercise got about 800 px at 1440 px; the two lists are different things (labs against exercises), so this is a layout choice, not a removal | `learning/lab-shell.js` event `tz:lab-workspace`, `ui/section-rail.js`, rule 4.8 |
+| D4 | No automatic saving of typed values, chosen files or lab answers when the visitor moves to another tool. Moving is still a normal page load. Hiding or showing the sidebar, and every other in-page interaction, keeps all of it | the pages promise that nothing is stored; the Privacy page lists exactly one stored item (flashcard progress, opt-in). An explicit "save" would need the owner's decision and a Privacy change | not built |
+| D5 | Sidebar links are underlined only on hover and focus; the current tool is bold with an accent bar; the search box shows "Search tools" | thirty underlined links read as noise; the bar marks the place without relying on colour alone | `section-switcher.css`, `section-rail.js` |
+| D6 | Home: the six ecosystem cards have the tinted icon tile used elsewhere, a live "N tools" count, a flask icon for Practice Labs, and a hero line that names all six ecosystems. Page title and description are unchanged | the tile rule listed the old calculator categories, not the six ecosystems; a hero about loans alone hid five of six | `components/categories.js`, `components/hero.js`, `categories.css`, `ui/icons.js` |
+
+### Results (completion phase, 2026-11-05, local, not pushed)
+
+| Check | Result |
+|---|---|
+| Large files beside the sidebar (`large-files-workspace.spec.js`) | 10 passed on subpath-desktop and 10 on subpath-mobile: a 12 MP photo, a 2 x 150-page merge and the refusals at 1000, 1280 and 1600 px, plus the stopwatch; chosen file, typed settings, result and running timer survive hiding and showing the sidebar; the preview widens when the sidebar is hidden; no sideways scroll. No defect found |
+| Slider audit, calculation level (`slider-calculation.spec.js`) | desktop 16 calculators passed, 11 skipped (no slider); mobile 17 passed (the 16 plus the CAGR number check), 11 skipped. Every slider at minimum, midpoint and maximum gives the same results by slider and by typing; far-out values, text and zero or negative values are answered without NaN or a script error; Reset restores values and results. EMI, FD and GST were not re-run by instruction. CAGR is also checked against `(end/start)^(1/years) - 1` |
+| Sidebar, labs, accessibility, navigation, links, sliders on subpath-desktop | section-switcher 21, learning-widths 25, learning-a11y 5, site-a11y 131, navigation 47 (2 skipped), links 1, sql-practice-lab 33, excel-practice-lab 25 (1 skipped), power-bi-practice-lab 24 (1 skipped), slider-inventory 19 (11 skipped), field-slider 20, large-files 10, lab-workspace 9: all passed |
+| subpath-mobile | section-switcher 21, lab-workspace 9, large-files 10, slider-calculation 17 (11 skipped), learning-widths 25, navigation 46 (3 skipped): all passed |
+| Unit suite | 3,858 run: 3,854 pass, 4 skipped (environmental), 0 fail |
+| Builds and static checks | `npm run build:all` passes; inventory, links, assets and SEO checks pass on both builds (132 pages, sitemap 131 URLs) |
+| Visual baselines | desktop 38 of 39, mobile 38 of 39 and tablet 19 of 20 passed without a change; only the home page differed on all three and was accepted after looking at it (icon tiles, count pills, a hero line one row longer). The sidebar link style change (D5) is below the 0.5% pixel tolerance of the desktop baselines, so those pass but are slightly stale; they were not refreshed because only the home page was reviewed one by one |
+| DOM baseline | `home-main` accepted after reading the diff (the new hero sentence and six count spans); the other 16 passed |
+| Root base path (`root-desktop`, all @portable tests) | 280 passed and 2 failed: `build.spec.js` expected 5 related-article cards on the two newest articles (Best SIP Strategies, Tax Saving Guide), whose data lists 3 and 2. A stale pin from the commit that published them, not caused by this phase; corrected with a per-article count and both pass on `root-desktop` and `subpath-desktop` |
+| Not run | Firefox, Safari/WebKit, real phones, screen readers, Lighthouse, the full regression suites, the mutation suite |

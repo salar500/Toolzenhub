@@ -77,7 +77,7 @@ export function initSectionRail(root = document) {
         const label = element("label", { for: "section-rail-search", class: "section-rail__label" }, `Find a tool in ${sectionName}`);
         const status = element("p", { class: "section-rail__status", role: "status", "aria-live": "polite" });
 
-        search = element("input", { id: "section-rail-search", type: "search", autocomplete: "off", spellcheck: "false" });
+        search = element("input", { id: "section-rail-search", type: "search", autocomplete: "off", spellcheck: "false", placeholder: "Search tools" });
         field.append(label, search, status);
         list.before(field);
 
@@ -162,5 +162,15 @@ export function initSectionRail(root = document) {
     wide.addEventListener("change", apply);
 
     apply();
+
+    /* A long lab brings its own exercise list (learning/lab-shell.js). Below 1500 px the two lists side by side would leave the exercise
+       about 800 px, so the lab list steps aside: it starts hidden with "Show Practice Labs" above the tool. Nothing is stored. */
+    document.addEventListener("tz:lab-workspace", () => {
+
+        if (wide.matches && !window.matchMedia("(min-width: 1500px)").matches) {
+            setCollapsed(true);
+        }
+
+    });
 
 }

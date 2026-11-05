@@ -98,6 +98,15 @@ function renderPopularCard(card) {
 const hasLiveTool = (section) =>
     getToolsBySection(section.id).some(tool => tool.available);
 
+function toolCount(section) {
+
+    const count = getToolsBySection(section.id).filter(tool => tool.available).length;
+
+    return `${count} ${count === 1 ? "tool" : "tools"}`;
+
+}
+
+
 function renderSectionCard(section) {
 
     return `
@@ -119,6 +128,10 @@ function renderSectionCard(section) {
                             <p>
                                 ${section.summary}
                             </p>
+
+                            <span class="category-card__count">
+                                ${toolCount(section)}
+                            </span>
 
                         </div>
 

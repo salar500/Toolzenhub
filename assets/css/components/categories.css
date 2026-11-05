@@ -231,6 +231,12 @@
 .category-card__icon--math,
 .category-card__icon--converter,
 .category-card__icon--more,
+.category-card__icon--calculators,
+.category-card__icon--time-tools,
+.category-card__icon--developer-tools,
+.category-card__icon--image-tools,
+.category-card__icon--pdf-tools,
+.category-card__icon--practice-labs,
 .calculator-card__icon--green,
 .calculator-card__icon--blue,
 .calculator-card__icon--yellow,
@@ -266,6 +272,21 @@
     line-height: 1.3;
 
     overflow-wrap: anywhere;
+}
+
+
+.category-card__count {
+    display: block;
+
+    margin-top: 8px;
+
+    color: var(--accent);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    line-height: 1.3;
 }
 
 

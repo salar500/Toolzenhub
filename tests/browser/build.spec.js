@@ -11,6 +11,8 @@
 import { test, expect, livePages, rel } from "../helpers/test-base.mjs";
 
 const articles = livePages.filter((p) => p.type === "article");
+// the two newest articles list fewer related articles in assets/js/data/articles.js (3 and 2) than the default of 5
+const RELATED_COUNT = { "best-sip-strategies-for-beginners": 3, "tax-saving-guide-save-more-legally": 2 };
 const NO_IMAGE = new Set(["what-changes-how-long-a-corpus-lasts"]); // only the second SWP article has no image (the first carries a diagram; every other article has its own)
 
 test.describe("generated pages carry their content without JavaScript @portable", () => {
@@ -24,7 +26,7 @@ test.describe("generated pages carry their content without JavaScript @portable"
       expect(await page.locator(".article-key-takeaways li").count()).toBeGreaterThanOrEqual(3);
       expect(await page.locator(".article-faq details").count()).toBeGreaterThanOrEqual(3);
       expect(await page.locator(".article-toc a").count()).toBeGreaterThanOrEqual(4);
-      await expect(page.locator(".article-related-card")).toHaveCount(/\/(health|converter)\//.test(a.url) ? 0 : /\/(margin|profit|fd|gst|cagr|percentage|math|swp|business)\//.test(a.url) ? 2 : /\/(loan-prepayment|balance-transfer|sip|home-loan)\//.test(a.url) ? 3 : 5);
+      await expect(page.locator(".article-related-card")).toHaveCount(/\/(health|converter)\//.test(a.url) ? 0 : /\/(margin|profit|fd|gst|cagr|percentage|math|swp|business)\//.test(a.url) ? 2 : /\/(loan-prepayment|balance-transfer|sip|home-loan)\//.test(a.url) ? 3 : (RELATED_COUNT[a.slug] ?? 5));
       await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
       await expect(page.locator(".article-calculator-button")).toHaveCount(1);
       await expect(page.locator(".site-header .navbar__link").first()).toBeAttached();

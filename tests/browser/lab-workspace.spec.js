@@ -100,3 +100,32 @@ test.describe("Practice lab workspace list", () => {
   });
 
 });
+
+test.describe("The lab list and the section sidebar do not crowd the exercise", () => {
+
+  test("a long lab below 1500 px starts with the Practice Labs sidebar hidden, and Show brings it back without touching the lab", async ({ page, go }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await openLab(page, go, "tools/sql-practice-lab/");
+    await expect(page.locator(".section-rail__show")).toBeVisible();
+    await expect(page.locator("nav.section-switcher")).toBeHidden();
+    const hiddenWidth = (await app(page).boundingBox()).width;
+    await expect(app(page).locator(".lx-exlist li")).toHaveCount(49);
+    await app(page).locator('li[data-index="9"] button').click();
+    await expect(heading(page)).toHaveText(/^10\. /);
+    await page.locator(".section-rail__show").click();
+    await expect(page.locator("nav.section-switcher")).toBeVisible();
+    await expect(heading(page)).toHaveText(/^10\. /); // the exercise and the list are as they were
+    expect((await app(page).boundingBox()).width).toBeLessThan(hiddenWidth);
+    await expectNoHorizontalOverflow(page);
+  });
+
+  test("at 1600 px both lists fit, so the sidebar stays open; a lab without a list is not affected", async ({ page, go }) => {
+    await page.setViewportSize({ width: 1600, height: 900 });
+    await openLab(page, go, "tools/sql-practice-lab/");
+    await expect(page.locator("nav.section-switcher")).toBeVisible();
+    await go("tools/cron-challenge-lab/");
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await expect(page.locator("nav.section-switcher")).toBeVisible();
+  });
+
+});

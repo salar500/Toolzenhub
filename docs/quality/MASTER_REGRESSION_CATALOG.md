@@ -54,7 +54,9 @@ Status key: AUTO = an automated spec covers it (matched by file and test name, n
 | 24 | Homepage hero loading and accessibility | AUTO+MANUAL | `site-a11y`, `build`, `dom-baseline`; visual load by eye |
 | 25 | Responsive category workspace | AUTO+MANUAL | Phase 1: section navigation on every tool page, held-open sidebar from 1000 px with search and Hide/Show, disclosure below; `section-switcher.spec.js` (sidebar at 1280, hide and show, search, first/middle/last tool of each section, resize, axe, every tool page at 1000, 1280 and 1600 px without overflow), `site-tablet`, mobile runs; feel manual |
 | 26 | SQL, Excel, Power BI ecosystem | NOT IMPLEMENTED | no routes; nothing to test |
-| 27 | Image/PDF expansion | AUTO | merge, split, pages, marks, photos-to-pdf, crop, batch specs |
+| 27 | Image/PDF expansion | AUTO | merge, split, pages, marks, photos-to-pdf, crop, batch specs; `large-files-workspace.spec.js` (12 MP photo, 2 x 150-page merge, 26 MB and unreadable-file refusals at 1000, 1280 and 1600 px, state kept when the sidebar is hidden) |
+| 28 | Slider values drive the calculation | AUTO | `slider-inventory.spec.js` (the control, 19 calculators) and `slider-calculation.spec.js` (slider equals typing, edge inputs, Reset, CAGR independent check; EMI, FD, GST excluded by instruction) |
+| 29 | Running timers and in-page state survive the sidebar | AUTO | `large-files-workspace.spec.js` (stopwatch running and laps while the sidebar is hidden and shown) |
 
 ## Maintenance
 

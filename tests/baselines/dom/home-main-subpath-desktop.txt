@@ -13,7 +13,7 @@ main#app
               span "Works in your browser"
             h1.hero__title "Practical tools for"
               span.hero__title-highlight "better everyday decisions"
-            p.hero__description "Calculate loan payments, compare options, plan investments and work through everyday date,…"
+            p.hero__description "Calculate loan payments, plan investments and work through GST, margin and percentage ques…"
             form#calculator-search.hero__search.tz-search [role="search"]
               span.hero__search-icon.tz-search__icon [aria-hidden="true"]
                 svg [aria-hidden="true"]
@@ -33,36 +33,42 @@ main#app
             div.category-card__content
               h3 "Calculators"
               p "Loans, investment, tax, health, business, math and converter calculators"
+              span.category-card__count "30 tools"
           a.category-card [href="{ROOT}time-tools.html"]
             div.category-card__icon.category-card__icon--time-tools
               svg [aria-hidden="true"]
             div.category-card__content
               h3 "Time Tools"
               p "Date tools, timers, a time zone converter and an hours calculator"
+              span.category-card__count "13 tools"
           a.category-card [href="{ROOT}developer-tools.html"]
             div.category-card__icon.category-card__icon--developer-tools
               svg [aria-hidden="true"]
             div.category-card__content
               h3 "Developer Tools"
               p "JSON, timestamp, text compare, JWT, cron and Base64 tools, in your browser"
+              span.category-card__count "12 tools"
           a.category-card [href="{ROOT}image-tools.html"]
             div.category-card__icon.category-card__icon--image-tools
               svg [aria-hidden="true"]
             div.category-card__content
               h3 "Image Tools"
               p "Compress and resize images in your browser"
+              span.category-card__count "2 tools"
           a.category-card [href="{ROOT}pdf-tools.html"]
             div.category-card__icon.category-card__icon--pdf-tools
               svg [aria-hidden="true"]
             div.category-card__content
               h3 "PDF Tools"
               p "Merge, split and rearrange PDF pages in your browser"
+              span.category-card__count "4 tools"
           a.category-card [href="{ROOT}practice-labs.html"]
             div.category-card__icon.category-card__icon--practice-labs
               svg [aria-hidden="true"]
             div.category-card__content
               h3 "Practice Labs"
               p "Hands-on exercises and flashcards for JSON, cron and software testing"
+              span.category-card__count "8 tools"
   section#popular-calculators.section
     section.popular-section
       div.container

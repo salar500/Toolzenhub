@@ -140,6 +140,7 @@ export function mountLab({ root, live, lab }) {
 
     if (workspace) {
         root.classList.add("lx-workspace");
+        document.dispatchEvent(new CustomEvent("tz:lab-workspace")); // the section sidebar steps aside on mid-width screens
         put(picker, pickerLabel,
             el("label", { class: "lx-label", for: "lx-exsearch", text: "Find an exercise by number, title or topic" }),
             search, searchNote, nav);
