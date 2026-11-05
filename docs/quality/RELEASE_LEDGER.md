@@ -10,6 +10,18 @@ Eight local commits after `f5a1df4` (`b342344` to `b714e57`, plus the closing re
 
 HEAD `8daef8f`, 29 local commits after `f5a1df4`, nothing pushed. The Hostinger zip `ToolZenHub-hostinger-dist-20261103-1428.zip` (SHA-256 `A12191702E...DBE42`, re-checked 2026-11-05, still matches this record) is built from `f5a1df4` and is STALE: do not deploy it. It and `ToolZenHub-backup-20261102-2311.zip` are preserved. No fresh archive has been made: the mobile and root-desktop regression for this HEAD is incomplete (see Q3-17), so the archive preconditions are not met.
 
+### GitHub Pages staging (2026-11-05)
+
+| Item | Value |
+|---|---|
+| Pushed | `f5a1df4..1d5adec` to `origin/main`, fast-forward, no force; 34 commits, 175 files; secret, size and archive scan clean first |
+| Workflow | "Deploy GitHub Pages preview" run 41962927706: completed, success, head `1d5adec943e672bdeffc2c525a2466f43dcfc036` |
+| Preview | https://salar500.github.io/Toolzenhub/ |
+| Content check | all 131 inventory URLs fetched live: status 200, title, canonical and `noindex` equal to the local `dist-ghpages/` build; `robots.txt` and `sitemap.xml` equal to the build. Four pages differ by carriage returns only (identical once stripped) |
+| Browser check on the live site | 26 of 26 passed with system Chrome (Chromium engine) at desktop 1280x800 and an iPhone 13 emulation: home, a slider, Date Difference, JSON Formatter and Compare, the SQL lab (ATTACH leaves nothing behind), the Excel and Power BI labs, both new articles, Countdown, back/forward, mobile menu, no horizontal scroll. No console or network errors were recorded |
+| Not tested | Firefox, Safari/WebKit, real phones, screen readers; most Time Tools and Developer Tools pages beyond the ones named; Image and PDF tools beyond their build and local specs |
+| Production | Hostinger / toolzenhub.in NOT touched; the 2026-11-05 zip is not deployed. Final status: GITHUB-PREVIEW-VALIDATED |
+
 ### Fresh release archive (2026-11-05, not deployed)
 
 | Item | Value |
