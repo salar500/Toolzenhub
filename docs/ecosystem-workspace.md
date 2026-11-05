@@ -44,7 +44,7 @@ Owner brief: let a user find, use and switch between tools with the least effort
 
 ## 4. Proposed, not built
 
-- A lesson-aware list that links each lesson to its exercises in the same panel.
+- ~~A lesson-aware list that links each lesson to its exercises in the same panel.~~ Built 2026-11-05 as D7 (section 10), without a second list.
 - Calculator, Time Tools, Developer Tools, Image Tools and PDF Tools side navigation. A per-ecosystem choice is needed: Developer, Image and PDF tools need the whole width for editors and previews, so a collapsible list is the likely pattern; simple Time Tools may only need a compact switcher. This is a "restructuring a section" change under rule 11.7 and is held for the owner.
 - Homepage identity and logo work.
 
@@ -182,6 +182,7 @@ W3C APG disclosure navigation (https://www.w3.org/WAI/ARIA/apg/patterns/disclosu
 | D4 | No automatic saving of typed values, chosen files or lab answers when the visitor moves to another tool. Moving is still a normal page load. Hiding or showing the sidebar, and every other in-page interaction, keeps all of it | the pages promise that nothing is stored; the Privacy page lists exactly one stored item (flashcard progress, opt-in). An explicit "save" would need the owner's decision and a Privacy change | not built |
 | D5 | Sidebar links are underlined only on hover and focus; the current tool is bold with an accent bar; the search box shows "Search tools" | thirty underlined links read as noise; the bar marks the place without relying on colour alone | `section-switcher.css`, `section-rail.js` |
 | D6 | Home: the six ecosystem cards have the tinted icon tile used elsewhere, a live "N tools" count, a flask icon for Practice Labs, and a hero line that names all six ecosystems. Page title and description are unchanged | the tile rule listed the old calculator categories, not the six ecosystems; a hero about loans alone hid five of six | `components/categories.js`, `components/hero.js`, `categories.css`, `ui/icons.js` |
+| D7 | Lesson-aware navigation in SQL, Excel and Power BI: each exercise card says which lesson(s) it practises, with "exercise N of M for it, K completed" (this visit only), and a link that opens that lesson below the lab; each lesson's "Practise" entries are buttons that open the exercise. The one grouped exercise list, search, previous/next and active state are unchanged; no second list was added | the lessons sat below the lab and the two were only joined by text; the shell already owns the single list | `learning/lab-shell.js` (`lab.lessons`, `lessonLine`), the three `lessons-view.js`, `learning.css`, `tests/browser/lab-lesson-navigation.spec.js` |
 
 ### Results (completion phase, 2026-11-05, local, not pushed)
 

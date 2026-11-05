@@ -260,6 +260,7 @@ export function init() {
         set,
         lab: {
             id: "excel-practice-lab",
+            lessons: lessons.map((l) => ({ title: l.title, practise: l.practise })),
             limit: MAX_RESPONSE_CHARS,
             inputLabel: "Your formula",
             input: exerciseInput,

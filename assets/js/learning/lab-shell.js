@@ -124,6 +124,10 @@ export function mountLab({ root, live, lab }) {
         hints: 0, solutionViewed: false, completed: false
     }));
 
+    /* lessons: [{ title, practise: [exercise ids] }], optional. The lab's lessons are on the page below; the shell only links to them. */
+    const lessons = lab.lessons ?? [];
+    const lessonsOf = (ex) => lessons.map((l, n) => ({ n, l })).filter(({ l }) => l.practise.includes(ex.id));
+
     let index = 0;
     let view = null; // the parts of the current exercise that change without a redraw
 
@@ -195,6 +199,8 @@ export function mountLab({ root, live, lab }) {
         } else {
             exercises.forEach((ex, i) => put(nav, exerciseButton(i)));
         }
+        const line = stage.querySelector('[data-role="lesson"]');
+        if (line) line.replaceWith(lessonLine(exercises[index]));
         const c = countStatuses(states);
         counts.textContent = `${plural(exercises.length, "exercise")}: ${c.completed} completed, ${c["solution-viewed"]} solution viewed, ${c["not-started"]} not started. Nothing is saved when you leave this page.`;
     }
@@ -211,6 +217,21 @@ export function mountLab({ root, live, lab }) {
             nav.querySelector('[aria-current="true"]')?.scrollIntoView({ block: "nearest" });
         }
         if (focusHeading) view.heading.focus();
+    }
+
+    /* the lesson(s) this exercise practises, with how many of that lesson's exercises are completed in this visit (memory only) */
+    function lessonLine(ex) {
+        const found = lessonsOf(ex);
+        if (found.length === 0) return null;
+        return el("p", { class: "lx-meta lx-lesson-line", "data-role": "lesson" }, found.flatMap(({ n, l }, k) => {
+            const ids = l.practise.map((id) => exercises.findIndex((e) => e.id === id)).filter((i) => i >= 0);
+            const done = ids.filter((i) => statusOf(states[i]) === "completed").length;
+            return [
+                k > 0 ? "; " : found.length > 1 ? "Practises lessons " : "Practises lesson ",
+                el("a", { href: `#lx-lesson-${n + 1}`, "data-lx-lesson": String(n + 1), text: `${n + 1}. ${l.title}` }),
+                ` (exercise ${ids.indexOf(index) + 1} of ${ids.length} for it, ${done} completed)`
+            ];
+        }));
     }
 
     function drawExercise() {
@@ -387,6 +408,7 @@ export function mountLab({ root, live, lab }) {
             el("div", { class: "lx-card" },
                 el("p", { class: "lx-meta" }, el("span", { class: "lx-tag", text: DIFFICULTY_LABEL[ex.difficulty] }), ` Exercise ${index + 1} of ${exercises.length}`),
                 heading,
+                lessonLine(ex),
                 el("p", { class: "lx-meta", text: `Objective: ${ex.objective}` }),
                 el("p", { text: ex.instructions }),
                 ex.document ? el("div", {},
@@ -413,6 +435,30 @@ export function mountLab({ root, live, lab }) {
         drawResult();
         view = { heading, control };
     }
+
+    /* the lesson link opens that lesson on the page; a lesson's practise buttons come back to the exercise. Both only move the view. */
+    const onClick = (event) => {
+        const lessonLink = event.target.closest?.("[data-lx-lesson]");
+        if (lessonLink && root.contains(lessonLink)) {
+            const target = document.getElementById(`lx-lesson-${lessonLink.dataset.lxLesson}`);
+            if (target) {
+                event.preventDefault();
+                target.open = true;
+                target.scrollIntoView({ block: "start" });
+                target.querySelector("summary")?.focus();
+            }
+            return;
+        }
+        const practise = event.target.closest?.("[data-lx-exercise]");
+        if (practise) {
+            const i = exercises.findIndex((e) => e.id === practise.dataset.lxExercise);
+            if (i >= 0) {
+                go(i, true);
+                root.scrollIntoView({ block: "start" });
+            }
+        }
+    };
+    document.addEventListener("click", onClick);
 
     drawExercise();
     drawNav();

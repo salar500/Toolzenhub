@@ -66,7 +66,7 @@ export function lessonsMarkup(lessons, exercises) {
 
             <div class="lx-lessons">
                 ${lessons.map((l, li) => `
-                <details class="lx-lesson">
+                <details class="lx-lesson" id="lx-lesson-${li + 1}">
                     <summary>${li + 1}. ${esc(l.title)}<span class="lx-lesson__level">${esc(LEVELS[l.level] ?? l.level)}</span></summary>
                     <div class="lx-lesson__body">
                         <p>${esc(l.intro)}</p>
@@ -85,7 +85,7 @@ export function lessonsMarkup(lessons, exercises) {
                         </div>`;
     }).join("")}
                         ${l.mistakes.length ? `<div><h3>Common mistakes</h3><ul>${l.mistakes.map((m) => `<li>${esc(m)}</li>`).join("")}</ul></div>` : ""}
-                        ${l.practise.length ? `<p><strong>Practise:</strong> ${l.practise.map((id) => esc(titleOf.get(id) ?? id)).join("; ")}.</p>` : ""}
+                        ${l.practise.length ? `<p class="lx-practise"><strong>Practise:</strong> ${l.practise.map((id) => `<button type="button" class="lx-practise__btn" data-lx-exercise="${esc(id)}">${esc(titleOf.get(id) ?? id)}</button>`).join(" ")}</p>` : ""}
                     </div>
                 </details>`).join("")}
             </div>
