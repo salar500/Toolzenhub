@@ -181,3 +181,19 @@ W3C APG disclosure navigation (https://www.w3.org/WAI/ARIA/apg/patterns/disclosu
 | DOM baseline | `home-main` accepted after reading the diff (the new hero sentence and six count spans); the other 16 passed |
 | Root base path (`root-desktop`, all @portable tests) | 280 passed and 2 failed: `build.spec.js` expected 5 related-article cards on the two newest articles (Best SIP Strategies, Tax Saving Guide), whose data lists 3 and 2. A stale pin from the commit that published them, not caused by this phase; corrected with a per-article count and both pass on `root-desktop` and `subpath-desktop` |
 | Not run | Firefox, Safari/WebKit, real phones, screen readers, Lighthouse, the full regression suites, the mutation suite |
+
+### Large-file measurements (2026-11-05, `large-files-measure.spec.js`, local)
+
+Each file is random noise, which does not compress, so it is as large as a detailed photograph or a scan. Images are made in the page, PDFs in the test with `pdf-lib` and `jpeg-js`; nothing large is committed. "Ready" is from choosing the file to the tool showing it; "process" is the button to the finished result. Heap is the page's JavaScript heap from `performance.memory` (Chrome rounds it; the decoded bitmaps the browser keeps outside the heap are not in it). Same files on `subpath-desktop` (1280 px) and `subpath-mobile` (390 px); the figures that differ between the two are times only.
+
+| Tool and file | Input | Output | Ready, process (desktop; mobile) | Heap before, after choose, after process, after Reset |
+|---|---|---|---|---|
+| Image Compressor, JPEG 4000 x 3000 (12 MP) | 9.4 MB | 0.9 MB JPEG, 1920 x 1440 | 3.7 s, 1.2 s; 1.9 s, 1.0 s | 3, 51, 51, 51 MB |
+| Image Compressor, JPEG 6000 x 4000 (24 MP) | 12.0 MB | 0.7 MB JPEG, 1920 x 1280 | 5.6 s, 1.6 s; 3.3 s, 1.9 s | 3, 97, 98, 97 MB |
+| Image Compressor, PNG 2500 x 1800 (4.5 MP) | 14.8 MB | 8.6 MB PNG, 1920 x 1382 | 1.6 s, 1.0 s; 1.6 s, 1.0 s | 3, 23, 23, 23 MB |
+| Merge PDF, 2 PDFs of 6 image pages | 13.7 MB and 13.7 MB | 27.4 MB, 12 pages | 12.1 s, 0.5 s; 8.8 s, 0.5 s | 3, 160 after, 161 after Reset (mobile 188) |
+| Page Numbers and Watermark, 6 image pages | 13.7 MB | 13.7 MB, 6 pages | 5.5 s, 0.3 s; 4.9 s, 0.3 s | 3, 88 after, 88 after Reset |
+
+What each case asserts: the input is in the stated size range; the preview shows and reports the right dimensions; the download opens as the right format with the right dimensions (images, read back from the file) or the right page count (PDFs, read back with the strict reader); there is no sideways scroll with the large file chosen and again with the result shown; Reset returns the tool to its empty state and hides the download. All 10 runs (5 on each project) passed and no defect was found.
+
+What these numbers do and do not say. The heap does not fall after Reset: a freshly emptied tool keeps the figure it had, until the browser collects it, so these runs show that Reset empties the tool, not that it frees memory at once. A 24 MP image is 96 MB once decoded (24 million pixels at 4 bytes each, calculated, not measured), held by the browser outside this figure. The slowest step seen is choosing the two 13.7 MB PDFs (9 to 12 s to ready); that time includes the test runner handing 27 MB to the page, so it overstates what a visitor waits; the 50 MB and 20-file limits were not run at their limits, and a 25 MB image and 40 MP image are covered only by their refusals (`image-compressor-resizer.spec.js`, `large-files-workspace.spec.js`). The machine has 4 GB, so a visitor's device with less memory was not simulated.
