@@ -114,19 +114,115 @@
 
 }
 
-/* Wide screens: the disclosure becomes a left rail beside the tool (assets/js/ui/section-rail.js keeps it open).
+/* Search box and hide/show buttons that assets/js/ui/section-rail.js adds. */
+
+.section-switcher[hidden],
+.section-rail__show[hidden] {
+
+    display: none;
+
+}
+
+.section-rail__search {
+
+    margin: 10px 0 0;
+
+}
+
+.section-rail__label {
+
+    display: block;
+    margin: 0 0 4px;
+
+    color: var(--ink-muted);
+
+    font-size: 12px;
+    font-weight: 600;
+
+}
+
+.section-rail__search input {
+
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 44px;
+    padding: 8px 12px;
+
+    border: 1px solid var(--line-control);
+    border-radius: 8px;
+
+    font: inherit;
+
+}
+
+.section-rail__status {
+
+    min-height: 1.2em;
+    margin: 4px 0 0;
+
+    color: var(--ink-muted);
+
+    font-size: 12px;
+
+}
+
+.section-switcher li[hidden] {
+
+    display: none;
+
+}
+
+.section-rail__hide,
+.section-rail__show {
+
+    min-height: 44px;
+    padding: 0 14px;
+
+    border: 1px solid var(--line-control);
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+.section-rail__hide:focus-visible,
+.section-rail__show:focus-visible {
+
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+
+}
+
+/* Narrow screens: the list is the "More <section>" disclosure, so the hide button has no job and the show button is never needed. */
+.section-rail__hide,
+.section-rail__show {
+
+    display: none;
+
+}
+
+/* Wide screens (assets/js/ui/section-rail.js keeps the list open): the list is a sidebar beside the tool, open by default.
+   The tool takes every pixel the sidebar does not: the page is as wide as the window allows, and hiding the sidebar gives its column back.
    Scoped to pages that have one, so nothing else changes; below this width it stays the closed disclosure. */
-@media (min-width: 1400px) {
+@media (min-width: 1000px) {
 
     .calculator-page:has(> .section-switcher) {
 
         display: grid;
-        grid-template-columns: 240px minmax(0, 1fr);
-        column-gap: 32px;
+        grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
+        column-gap: 28px;
         row-gap: 0;
         align-items: start;
 
-        width: min(1440px, calc(100% - 48px));
+        width: min(1760px, calc(100% - 32px));
 
     }
 
@@ -158,9 +254,19 @@
 
     }
 
-    .section-switcher summary {
+    /* the heading of the sidebar, not a button: its job on a wide screen is to name the section */
+    .calculator-page > .section-switcher summary {
 
         width: 100%;
+        min-height: 0;
+        padding: 4px 2px 8px;
+
+        border: 0;
+        border-radius: 0;
+
+        background: transparent;
+
+        font-size: 16px;
 
         pointer-events: none;
 
@@ -179,6 +285,43 @@
         grid-template-columns: 1fr;
 
         margin-top: 8px;
+
+    }
+
+    .section-rail__hide {
+
+        display: block;
+
+        width: 100%;
+        margin: 8px 0 0;
+
+    }
+
+    .section-rail__show {
+
+        display: inline-block;
+
+        width: fit-content;
+        margin: 0 0 12px;
+
+    }
+
+    .section-rail__show[hidden] {
+
+        display: none;
+
+    }
+
+    /* Hidden: no empty column, everything in one. */
+    .calculator-page.is-rail-collapsed:has(> .section-switcher) {
+
+        grid-template-columns: minmax(0, 1fr);
+
+    }
+
+    .calculator-page.is-rail-collapsed:has(> .section-switcher) > * {
+
+        grid-column: 1;
 
     }
 

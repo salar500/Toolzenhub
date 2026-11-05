@@ -613,12 +613,12 @@
 
 }
 
-/* a link styled as a button: keep its text readable in every state */
+/* a link styled as a button: keep its text readable in every state. The shared ".calculator-page a" colour is more specific than a single class, so this is too. */
 
-.ic-download,
-.ic-download:visited,
-.ic-download:hover,
-.ic-download:focus {
+.calculator-page .ic-download,
+.calculator-page .ic-download:visited,
+.calculator-page .ic-download:hover,
+.calculator-page .ic-download:focus {
 
     color: #ffffff;
 

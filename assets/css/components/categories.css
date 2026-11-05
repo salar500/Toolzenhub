@@ -741,10 +741,11 @@
 }
 
 
+/* Six section cards (Calculators, Time, Developer, Image, PDF, Practice Labs): three by two, so none is left alone on a second row */
 @media (min-width: 1100px) {
 
     .category-grid.category-grid--sections {
-        grid-template-columns: repeat(5, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
 

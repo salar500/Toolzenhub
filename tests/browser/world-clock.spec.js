@@ -795,7 +795,7 @@ test.describe("World Clock: searching by the time it is now", () => {
     await expect(live(page)).toHaveText("9 places currently between 8:00 PM and 8:59 PM");
     await page.clock.runFor(61000);
     await expect(live(page)).toHaveText("9 places currently between 8:00 PM and 8:59 PM");
-    await expect(page.locator("[aria-live]")).toHaveCount(1);
+    await expect(page.locator("[aria-live]:not(.section-switcher *)")).toHaveCount(1); // the sidebar search status is its own region
     await expect(page.locator(".wc-x-results [aria-live]")).toHaveCount(0);
   });
 });
@@ -1340,7 +1340,7 @@ test.describe("World Clock: the address, the hand-off and privacy", () => {
     await expect(page.locator("#tz-panel")).toHaveAttribute("data-ready", "true");
     await expect(page.locator("#tz-source-input")).toHaveValue(/^Asia\/(Kolkata|Calcutta)$/);
     await expect(page.locator("#tz-board .tz-row")).toHaveCount(4);
-    await expect(page.locator("main")).not.toContainText("World Clock"); // the converter does not link back (a separate decision)
+    expect(await page.evaluate(() => { const c = document.querySelector("main").cloneNode(true); c.querySelector(".section-switcher")?.remove(); return c.textContent.includes("World Clock"); })).toBe(false); // the sidebar lists every Time Tool; the page itself does not link back // the converter does not link back (a separate decision)
   });
 
   test("Copy link: the address is copied (nothing is read from the clipboard); a refusing clipboard shows it in a box to copy by hand", async ({ page, go }) => {
@@ -1424,7 +1424,7 @@ test.describe("World Clock: time, timers and the site", () => {
     await expect(row(page, "Sydney").locator(".wc-xrow__clock")).toHaveText("Tue 1:21 AM");
     expect(await live(page).innerText()).toBe(spoken);
     expect(await page.evaluate(() => window.__timers.intervals)).toBe(0);
-    await expect(page.locator("[aria-live]")).toHaveCount(1);
+    await expect(page.locator("[aria-live]:not(.section-switcher *)")).toHaveCount(1); // the sidebar search status is its own region
     // the hidden view did not repaint on the tick: the board repaints once when it is shown
     expect(await card(page, "Your time").locator("time").textContent()).toBe("7:50 PM");
     await clocksTab(page).click();

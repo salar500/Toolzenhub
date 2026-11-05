@@ -5530,7 +5530,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5715
+      "visibleTextChars": 5778
     }
   },
   "/tools/business-days/": {
@@ -5579,7 +5579,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5013
+      "visibleTextChars": 5073
     }
   },
   "/tools/countdown-timer/": {
@@ -5628,7 +5628,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5046
+      "visibleTextChars": 5106
     }
   },
   "/tools/cron-challenge-lab/": {
@@ -5677,7 +5677,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3973
+      "visibleTextChars": 4015
     }
   },
   "/tools/cron-expression-explainer/": {
@@ -5726,7 +5726,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 9047
+      "visibleTextChars": 9110
     }
   },
   "/tools/date-calculator/": {
@@ -5775,7 +5775,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5473
+      "visibleTextChars": 5533
     }
   },
   "/tools/date-difference/": {
@@ -5824,7 +5824,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5063
+      "visibleTextChars": 5123
     }
   },
   "/tools/excel-practice-lab/": {
@@ -5873,7 +5873,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 24081
+      "visibleTextChars": 24123
     }
   },
   "/tools/hours-calculator/": {
@@ -5922,7 +5922,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6501
+      "visibleTextChars": 6561
     }
   },
   "/tools/image-compressor-resizer/": {
@@ -6020,7 +6020,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4239
+      "visibleTextChars": 4299
     }
   },
   "/tools/json-compare/": {
@@ -6069,7 +6069,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4758
+      "visibleTextChars": 4821
     }
   },
   "/tools/json-csv-converter/": {
@@ -6118,7 +6118,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4665
+      "visibleTextChars": 4728
     }
   },
   "/tools/json-error-fixing-lab/": {
@@ -6167,7 +6167,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3753
+      "visibleTextChars": 3795
     }
   },
   "/tools/json-formatter/": {
@@ -6216,7 +6216,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5693
+      "visibleTextChars": 5756
     }
   },
   "/tools/jsonpath-challenge-lab/": {
@@ -6265,7 +6265,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3838
+      "visibleTextChars": 3880
     }
   },
   "/tools/jsonpath-tester/": {
@@ -6314,7 +6314,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5339
+      "visibleTextChars": 5402
     }
   },
   "/tools/jwt-decoder/": {
@@ -6363,7 +6363,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6219
+      "visibleTextChars": 6282
     }
   },
   "/tools/list-comparer/": {
@@ -6412,7 +6412,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3654
+      "visibleTextChars": 3717
     }
   },
   "/tools/meeting-planner/": {
@@ -6461,7 +6461,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4920
+      "visibleTextChars": 4980
     }
   },
   "/tools/merge-pdf/": {
@@ -6510,7 +6510,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3690
+      "visibleTextChars": 3719
     }
   },
   "/tools/pdf-marks/": {
@@ -6559,7 +6559,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3817
+      "visibleTextChars": 3846
     }
   },
   "/tools/pdf-pages/": {
@@ -6608,7 +6608,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4228
+      "visibleTextChars": 4257
     }
   },
   "/tools/photos-to-pdf/": {
@@ -6706,7 +6706,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4470
+      "visibleTextChars": 4530
     }
   },
   "/tools/power-bi-practice-lab/": {
@@ -6755,7 +6755,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 25656
+      "visibleTextChars": 25698
     }
   },
   "/tools/shift-planner/": {
@@ -6804,7 +6804,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4298
+      "visibleTextChars": 4358
     }
   },
   "/tools/smart-flashcards/": {
@@ -6853,7 +6853,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3949
+      "visibleTextChars": 3991
     }
   },
   "/tools/split-pdf/": {
@@ -6902,7 +6902,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3670
+      "visibleTextChars": 3699
     }
   },
   "/tools/sql-practice-lab/": {
@@ -6951,7 +6951,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 30508
+      "visibleTextChars": 30550
     }
   },
   "/tools/stopwatch/": {
@@ -7000,7 +7000,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3676
+      "visibleTextChars": 3736
     }
   },
   "/tools/test-design-lab/": {
@@ -7049,7 +7049,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4550
+      "visibleTextChars": 4592
     }
   },
   "/tools/text-diff/": {
@@ -7098,7 +7098,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4600
+      "visibleTextChars": 4663
     }
   },
   "/tools/time-duration/": {
@@ -7147,7 +7147,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3879
+      "visibleTextChars": 3939
     }
   },
   "/tools/time-zone-converter/": {
@@ -7196,7 +7196,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5007
+      "visibleTextChars": 5067
     }
   },
   "/tools/unix-timestamp-converter/": {
@@ -7245,7 +7245,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6318
+      "visibleTextChars": 6381
     }
   },
   "/tools/url-parser/": {
@@ -7294,7 +7294,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6315
+      "visibleTextChars": 6378
     }
   },
   "/tools/uuid-generator/": {
@@ -7343,7 +7343,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3502
+      "visibleTextChars": 3565
     }
   },
   "/tools/world-clock/": {
@@ -7392,7 +7392,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5884
+      "visibleTextChars": 5944
     }
   }
 }

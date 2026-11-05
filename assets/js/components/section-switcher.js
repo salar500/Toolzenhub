@@ -17,6 +17,67 @@ import {
     getToolsBySection
 } from "../data/taxonomy.js";
 
+/* Sidebar groups for the sections whose tools have no catalog category (the Calculators section is grouped by its categories).
+   Presentation only: the catalog, the URLs and the section a tool belongs to are unchanged. A published tool missing here lands
+   in a final "More" group, and tests/unit/section-groups.test.mjs fails so the list is kept in step with the catalog. */
+export const SECTION_GROUPS = {
+    "time-tools": [
+        { label: "Timers and clocks", ids: ["countdown-timer", "stopwatch", "pomodoro-timer", "interval-timer", "world-clock"] },
+        { label: "Dates and durations", ids: ["date-difference", "date-calculator", "business-days", "time-duration", "hours-calculator"] },
+        { label: "Time zones and shifts", ids: ["time-zone-converter", "meeting-planner", "shift-planner"] }
+    ],
+    "developer-tools": [
+        { label: "JSON", ids: ["json-formatter", "json-compare", "jsonpath-tester", "json-csv-converter"] },
+        { label: "Encoding and decoding", ids: ["base64-encoder-decoder", "url-parser", "jwt-decoder"] },
+        { label: "Text and lists", ids: ["text-diff", "list-comparer"] },
+        { label: "Time and identifiers", ids: ["unix-timestamp-converter", "cron-expression-explainer", "uuid-generator"] }
+    ],
+    "practice-labs": [
+        { label: "Data", ids: ["sql-practice-lab", "excel-practice-lab", "power-bi-practice-lab"] },
+        { label: "Developer practice", ids: ["json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab"] },
+        { label: "Testing and study", ids: ["test-design-lab", "smart-flashcards"] }
+    ],
+    "pdf-tools": [
+        { label: "Combine and split", ids: ["merge-pdf", "split-pdf"] },
+        { label: "Edit pages", ids: ["pdf-pages", "pdf-marks"] }
+    ]
+};
+
+/** The sidebar groups of a section: [{ label, items }] in display order. Pure given the tools and the category lookup. */
+export function groupSectionTools(sectionId, tools, categoryTitleOf) {
+
+    const groups = [];
+    const place = (label, item) => {
+        let group = groups.find(entry => entry.label === label);
+        if (!group) {
+            group = { label, items: [] };
+            groups.push(group);
+        }
+        group.items.push(item);
+    };
+
+    const planned = SECTION_GROUPS[sectionId];
+
+    if (!planned) {
+        for (const item of tools) place(categoryTitleOf(item) ?? "", item);
+        return groups;
+    }
+
+    for (const def of planned) {
+        for (const id of def.ids) {
+            const item = tools.find(t => t.id === id);
+            if (item) place(def.label, item);
+        }
+    }
+
+    for (const item of tools) {
+        if (!planned.some(def => def.ids.includes(item.id))) place("More", item);
+    }
+
+    return groups;
+
+}
+
 function linkHtml(tool, currentId) {
 
     const current = tool.id === currentId;
@@ -40,22 +101,7 @@ export function renderSectionSwitcher(toolId) {
         return "";
     }
 
-    /* the Calculators section has categories: group by category, in catalog order of first appearance */
-    const groups = [];
-
-    for (const item of siblings) {
-
-        const label = getCategoryForTool(item)?.title ?? "";
-        let group = groups.find(entry => entry.label === label);
-
-        if (!group) {
-            group = { label, items: [] };
-            groups.push(group);
-        }
-
-        group.items.push(item);
-
-    }
+    const groups = groupSectionTools(section.id, siblings, item => getCategoryForTool(item)?.title);
 
     const body = groups.map(group => `
                             <li class="section-switcher__group">

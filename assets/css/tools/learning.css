@@ -1037,7 +1037,7 @@
 
     }
 
-    .lx-picker__summary {
+    .lx-workspace .lx-picker > .lx-picker__summary {
 
         display: none;
 
