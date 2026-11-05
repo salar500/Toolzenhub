@@ -7,6 +7,7 @@
  * missing). This is an automated proxy only: it is not a screen-reader test and it cannot judge reading order, wording
  * or whether a live-region announcement is helpful. No screen reader was used.
  */
+import { pickExercise } from "../helpers/lab-contract.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import { test, expect } from "../helpers/test-base.mjs";
@@ -69,7 +70,7 @@ test.describe("learning area: axe-core scan", () => {
     await page.getByRole("textbox").first().fill("17, 18, 65, 66");
     await page.getByRole("button", { name: "Check answer" }).click();
     await scan(page, "boundary: correct");
-    await app(page).getByRole("button", { name: /^Exercise 11:/ }).click();
+    await pickExercise(page, /^Exercise 11:/);
     await scan(page, "partitions: start");
     await page.getByRole("button", { name: "Check answer" }).click();
     await scan(page, "partitions: not all placed");

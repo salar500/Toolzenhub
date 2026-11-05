@@ -893,3 +893,160 @@
     fill: var(--color-ink);
     font-size: 13px;
 }
+
+/* The workspace list: a long exercise set (twelve or more) is grouped by topic with titles and a search.
+   Wide screens put it beside the exercise, scrolling on its own; narrow ones fold it into one summary. */
+
+.lx-workspace {
+
+    display: grid;
+    gap: 16px;
+
+}
+
+.lx-sidebar {
+
+    min-width: 0;
+
+}
+
+.lx-picker {
+
+    border: 1px solid var(--color-gray-300);
+    border-radius: 10px;
+
+    background: var(--color-white);
+
+}
+
+.lx-picker__summary {
+
+    min-height: 44px;
+    padding: 10px 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+.lx-picker > :not(summary) {
+
+    margin-right: 12px;
+    margin-left: 12px;
+
+}
+
+.lx-exsearch {
+
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 44px;
+    padding: 8px 12px;
+
+    border: 1px solid var(--color-gray-300);
+    border-radius: 8px;
+
+    font: inherit;
+
+}
+
+.lx-exgroups {
+
+    max-height: 50vh;
+    margin-bottom: 12px;
+    overflow-y: auto;
+
+}
+
+.lx-exgroup__title {
+
+    margin: 12px 0 6px;
+
+    font-size: 14px;
+    text-transform: none;
+
+}
+
+.lx-exgroups .lx-exlist {
+
+    flex-direction: column;
+    gap: 4px;
+
+}
+
+.lx-exgroups li[hidden],
+.lx-exgroup[hidden] {
+
+    display: none;
+
+}
+
+.lx-workspace .lx-exbtn {
+
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+
+    width: 100%;
+    text-align: left;
+
+}
+
+.lx-exbtn__no {
+
+    min-width: 1.6em;
+
+    font-weight: 700;
+
+}
+
+.lx-exbtn__title {
+
+    flex: 1;
+
+}
+
+.lx-exbtn__state {
+
+    color: var(--color-gray-700);
+    font-size: 12px;
+
+}
+
+@media (min-width: 960px) {
+
+    .lx-workspace {
+
+        grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
+        align-items: start;
+
+    }
+
+    .lx-workspace > .lx-title {
+
+        grid-column: 1 / -1;
+        margin-bottom: 0;
+
+    }
+
+    .lx-sidebar {
+
+        position: sticky;
+        top: 12px;
+
+    }
+
+    .lx-picker__summary {
+
+        display: none;
+
+    }
+
+    .lx-exgroups {
+
+        max-height: calc(100vh - 220px);
+
+    }
+
+}

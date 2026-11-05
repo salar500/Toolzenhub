@@ -5,6 +5,7 @@
  */
 import { test, expect } from "../helpers/test-base.mjs";
 import { defineShellTests, openLab, answerBox, checkButton, verdictOf } from "../helpers/lab-contract.mjs";
+import { pickExercise } from "../helpers/lab-contract.mjs";
 
 const ROUTE = "tools/json-error-fixing-lab/";
 
@@ -39,7 +40,7 @@ test.describe("JSON Error-Fixing Lab: this lab", () => {
 
   test("the duplicate-key exercise accepts one key only", async ({ page, go }) => {
     await openLab(page, go, ROUTE);
-    await app(page).getByRole("button", { name: /^Exercise 16:/ }).click();
+    await pickExercise(page, /^Exercise 16:/);
     await expect(page.getByRole("heading", { name: /^16\. A key that appears twice/ })).toBeVisible();
     await answerBox(page).fill('{"id": 2, "name": "x", "id": 2}');
     await checkButton(page).click();
@@ -53,7 +54,7 @@ test.describe("JSON Error-Fixing Lab: this lab", () => {
     test.setTimeout(120000);
     await openLab(page, go, ROUTE);
     for (let i = 1; i <= 18; i += 1) {
-      await app(page).getByRole("button", { name: new RegExp(`^Exercise ${i}:`) }).click();
+      await pickExercise(page, new RegExp(`^Exercise ${i}:`));
       await page.getByRole("button", { name: "Show solution" }).click();
       const solution = await page.locator('[aria-label="Solution"]').innerText();
       await answerBox(page).fill(solution);

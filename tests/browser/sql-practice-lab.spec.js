@@ -8,7 +8,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.mjs";
-import { defineShellTests, openLab, app, answerBox, checkButton, verdictOf } from "../helpers/lab-contract.mjs";
+import { pickExercise, defineShellTests, openLab, app, answerBox, checkButton, verdictOf } from "../helpers/lab-contract.mjs";
 import { set } from "../../assets/js/tools/sql-practice-lab/exercises.js";
 import { lessons } from "../../assets/js/tools/sql-practice-lab/lessons.js";
 
@@ -55,14 +55,14 @@ test.describe("SQL Practice Lab: this lab", () => {
 
   test("column names, capitals in keywords and the order of rows do not matter for an unordered exercise", async ({ page, go }) => {
     await openLab(page, go, ROUTE);
-    await app(page).getByRole("button", { name: /^Exercise 3:/ }).click();
+    await pickExercise(page, /^Exercise 3:/);
     await type(page, "select name as who from customers where city = 'Pune' order by name desc");
     await expect(verdictOf(page)).toHaveText("Correct");
   });
 
   test("the feedback says what differs without showing the expected rows", async ({ page, go }) => {
     await openLab(page, go, ROUTE);
-    await app(page).getByRole("button", { name: /^Exercise 3:/ }).click();
+    await pickExercise(page, /^Exercise 3:/);
     await type(page, "SELECT name, city FROM customers WHERE city = 'Pune'");
     await expect(page.locator(".lx-feedback")).toContainText("returns 2 columns; this exercise asks for 1");
     await type(page, "SELECT name FROM customers WHERE city = 'Mumbai' OR city = 'Pune'");
@@ -74,7 +74,7 @@ test.describe("SQL Practice Lab: this lab", () => {
 
   test("an exercise that needs an order says when the rows are right but the order is not", async ({ page, go }) => {
     await openLab(page, go, ROUTE);
-    await app(page).getByRole("button", { name: /^Exercise 8:/ }).click();
+    await pickExercise(page, /^Exercise 8:/);
     await type(page, "SELECT name, price FROM products ORDER BY price ASC LIMIT 3");
     await expect(page.locator(".lx-feedback")).toContainText("some values differ");
     await type(page, "SELECT name, price FROM products WHERE price > 900 ORDER BY price ASC");
@@ -105,7 +105,7 @@ test.describe("SQL Practice Lab: this lab", () => {
 
   test("a statement that changes data is judged by the lab's own query, on a fresh copy each time", async ({ page, go }) => {
     await openLab(page, go, ROUTE);
-    await app(page).getByRole("button", { name: /^Exercise 24:/ }).click(); // INSERT
+    await pickExercise(page, /^Exercise 24:/); // INSERT
     await type(page, "SELECT 1");
     await expect(page.locator(".lx-feedback")).toContainText("result is empty");
     await expect(page.locator(".lx-feedback")).toContainText("After your statements the lab ran this query");
@@ -212,7 +212,7 @@ test.describe("SQL Practice Lab: this lab", () => {
     await type(page, "SELEKT");
     await expect(verdictOf(page)).toHaveText("Cannot check");
     await scan("error");
-    await app(page).getByRole("button", { name: /^Exercise 24:/ }).click();
+    await pickExercise(page, /^Exercise 24:/);
     await type(page, "SELECT 1");
     await expect(verdictOf(page)).toHaveText("Not yet");
     await scan("modify, not yet");
@@ -222,7 +222,7 @@ test.describe("SQL Practice Lab: this lab", () => {
     test(`layout at ${width}px: a long one-line statement and a 20-row result cause no sideways scroll`, async ({ page, go }) => {
       await page.setViewportSize({ width, height: 900 });
       await openLab(page, go, ROUTE);
-      await app(page).getByRole("button", { name: /^Exercise 14:/ }).click();
+      await pickExercise(page, /^Exercise 14:/);
       await type(page, "SELECT orders.id, customers.name FROM orders JOIN customers ON orders.customer_id = customers.id WHERE orders.id > 0 AND customers.name <> 'a very long name that is not in the data at all and keeps going on and on' ORDER BY orders.id");
       await expect(verdictOf(page)).toHaveText("Correct");
       await expect(page.locator('.lx-feedback [aria-label="Details"]')).toContainText("more rows");

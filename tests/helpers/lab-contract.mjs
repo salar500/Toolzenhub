@@ -26,6 +26,18 @@ export async function strayWords(page) {
   });
 }
 
+/** Open the folded exercise list of a long lab (narrow screens) so an exercise button can be reached; a no-op on a wide screen or a short lab. */
+export async function openExerciseList(page) {
+  const picker = app(page).locator("details.lx-picker");
+  if ((await picker.count()) > 0 && (await picker.evaluate((d) => !d.open))) await picker.locator("summary").click();
+}
+
+/** Click an exercise button by its accessible name (a RegExp), opening the exercise list first when it is folded. */
+export async function pickExercise(page, name) {
+  await openExerciseList(page);
+  await app(page).getByRole("button", { name }).click();
+}
+
 export async function openLab(page, go, route) {
   await go(route);
   await expect(app(page)).toHaveAttribute("data-ready", "true");
@@ -171,11 +183,12 @@ export function defineShellTests(cfg) {
       await checkButton(page).focus();
       await page.keyboard.press("Enter");
       await expect(verdictOf(page)).toHaveText("Correct");
+      await openExerciseList(page);
       const second = app(page).getByRole("button", { name: /^Exercise 2:/ });
       await second.focus();
       await page.keyboard.press("Enter");
       await expect(page.getByRole("heading", { name: /^2\./ })).toBeFocused();
-      await expect(app(page).getByRole("button", { name: /^Exercise 2:/ })).toHaveAttribute("aria-current", "true");
+      await expect(app(page).locator('li[data-index="1"] button')).toHaveAttribute("aria-current", "true"); // by position: on a narrow screen a long lab folds its list
     });
 
   });

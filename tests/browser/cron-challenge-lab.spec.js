@@ -5,7 +5,7 @@
  * tests/unit/cron-challenge-lab.test.mjs (with a Python cron implementation as the independent oracle).
  */
 import { test, expect } from "../helpers/test-base.mjs";
-import { defineShellTests, openLab, app, answerBox, checkButton, verdictOf } from "../helpers/lab-contract.mjs";
+import { pickExercise, defineShellTests, openLab, app, answerBox, checkButton, verdictOf } from "../helpers/lab-contract.mjs";
 
 const ROUTE = "tools/cron-challenge-lab/";
 
@@ -30,7 +30,7 @@ test.describe("Cron Challenge Lab: this lab", () => {
 
   test("a different spelling of the same schedule is accepted", async ({ page, go }) => {
     await openLab(page, go, ROUTE);
-    await app(page).getByRole("button", { name: /^Exercise 4:/ }).click();
+    await pickExercise(page, /^Exercise 4:/);
     await answerBox(page).fill("0,15,30,45 * * * *");
     await checkButton(page).click();
     await expect(verdictOf(page)).toHaveText("Correct");
@@ -38,7 +38,7 @@ test.describe("Cron Challenge Lab: this lab", () => {
 
   test("a wrong valid expression says which parts differ and lists its next three runs from the reference time", async ({ page, go }) => {
     await openLab(page, go, ROUTE);
-    await app(page).getByRole("button", { name: /^Exercise 5:/ }).click();
+    await pickExercise(page, /^Exercise 5:/);
     await answerBox(page).fill("0 8 * * 1-6");
     await checkButton(page).click();
     await expect(verdictOf(page)).toHaveText("Not yet");
@@ -51,7 +51,7 @@ test.describe("Cron Challenge Lab: this lab", () => {
 
   test("the day-of-month or day-of-week rule: the 15th AND a Monday is the wrong reading", async ({ page, go }) => {
     await openLab(page, go, ROUTE);
-    await app(page).getByRole("button", { name: /^Exercise 13:/ }).click();
+    await pickExercise(page, /^Exercise 13:/);
     await answerBox(page).fill("0 12 15 * *");
     await checkButton(page).click();
     await expect(verdictOf(page)).toHaveText("Not yet");
@@ -74,7 +74,7 @@ test.describe("Cron Challenge Lab: this lab", () => {
     test.setTimeout(120000);
     await openLab(page, go, ROUTE);
     for (let i = 1; i <= 19; i += 1) {
-      await app(page).getByRole("button", { name: new RegExp(`^Exercise ${i}:`) }).click();
+      await pickExercise(page, new RegExp(`^Exercise ${i}:`));
       await page.getByRole("button", { name: "Show solution" }).click();
       await answerBox(page).fill(await page.locator('[aria-label="Solution"]').innerText());
       await checkButton(page).click();

@@ -34,6 +34,34 @@ export const VERDICT_WORD = {
 const DIFFICULTY_LABEL = { beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced" };
 export const MAX_HINTS = 3;
 
+/* A set this long gets the workspace list: exercises grouped by topic, with titles and a search. A shorter set keeps the plain row of numbers. */
+export const WORKSPACE_MIN = 12;
+const WIDE = "(min-width: 960px)";
+const topicWord = (t) => (t.charAt(0).toUpperCase() + t.slice(1)).replace(/-/g, " ");
+
+/** Group exercise indexes for the workspace list: by topic when every exercise has one, otherwise by difficulty. Pure, in the order of first appearance. */
+export function groupExercises(exercises) {
+    const byTopic = exercises.every((ex) => typeof ex.topic === "string" && ex.topic !== "");
+    const groups = new Map();
+    exercises.forEach((ex, i) => {
+        const key = byTopic ? ex.topic : ex.difficulty;
+        if (!groups.has(key)) groups.set(key, { key, label: byTopic ? topicWord(key) : (DIFFICULTY_LABEL[key] ?? key), indexes: [] });
+        groups.get(key).indexes.push(i);
+    });
+    return [...groups.values()];
+}
+
+/** Indexes of the exercises that match a search: the number, or any word of the title or topic, case-insensitive. An empty search matches all. Pure. */
+export function matchExercises(exercises, query) {
+    const q = query.trim().toLowerCase();
+    return exercises.map((ex, i) => i).filter((i) => {
+        if (q === "") return true;
+        const ex = exercises[i];
+        if (/^\d+$/.test(q)) return String(i + 1) === q;
+        return `${ex.title} ${ex.topic ?? ""} ${ex.difficulty}`.toLowerCase().includes(q);
+    });
+}
+
 /** Run an evaluator so that no failure of it reaches the learner as a wrong answer. */
 const FAILED = { verdict: "error", summary: "Something went wrong while checking this answer. Your answer is still in the box. Try Check answer again." };
 
@@ -99,34 +127,73 @@ export function mountLab({ root, live, lab }) {
     let index = 0;
     let view = null; // the parts of the current exercise that change without a redraw
 
-    const nav = el("ol", { class: "lx-exlist", "aria-label": "Exercises" });
+    const workspace = exercises.length >= WORKSPACE_MIN;
+    const nav = workspace ? el("div", { class: "lx-exgroups" }) : el("ol", { class: "lx-exlist", "aria-label": "Exercises" });
     const counts = el("p", { class: "lx-meta", "data-role": "counts" });
     const stage = el("div", { class: "lx-lab-stage" });
+    const search = workspace ? el("input", { type: "search", id: "lx-exsearch", class: "lx-exsearch", autocomplete: "off", spellcheck: "false" }) : null;
+    const searchNote = workspace ? el("p", { class: "lx-meta", role: "status", "aria-live": "polite" }) : null;
+    const picker = workspace ? el("details", { class: "lx-picker" }) : null;
+    const pickerLabel = workspace ? el("summary", { class: "lx-picker__summary" }) : null;
 
     clear(root);
-    put(root, 
-        el("h2", { class: "lx-title", text: "Exercises" }),
-        nav,
-        counts,
-        stage
-    );
+
+    if (workspace) {
+        root.classList.add("lx-workspace");
+        put(picker, pickerLabel,
+            el("label", { class: "lx-label", for: "lx-exsearch", text: "Find an exercise by number, title or topic" }),
+            search, searchNote, nav);
+        put(root, el("h2", { class: "lx-title", text: "Exercises" }), el("aside", { class: "lx-sidebar", "aria-label": "Exercise list" }, picker, counts), stage);
+        /* wide screens keep the list open beside the exercise; narrow ones fold it away until it is wanted */
+        const wide = window.matchMedia(WIDE);
+        const fit = () => { picker.open = wide.matches; };
+        fit();
+        wide.addEventListener("change", fit);
+        search.addEventListener("input", applyFilter);
+    } else {
+        put(root, el("h2", { class: "lx-title", text: "Exercises" }), nav, counts, stage);
+    }
 
     function say(message) { announce(live, message); }
 
     /* ---------- the list and the counts ---------- */
 
+    function exerciseButton(i) {
+        const ex = exercises[i];
+        const status = statusOf(states[i]);
+        return el("li", { "data-index": String(i) },
+            el("button", {
+                type: "button", class: "lx-exbtn", "aria-current": i === index ? "true" : null, "data-status": status,
+                "aria-label": `Exercise ${i + 1}: ${ex.title}, ${DIFFICULTY_LABEL[ex.difficulty]}, ${STATUS_WORD[status]}`,
+                onclick: () => go(i, true)
+            }, workspace
+                ? [el("span", { class: "lx-exbtn__no", text: String(i + 1) }), el("span", { class: "lx-exbtn__title", text: ex.title }), el("span", { class: "lx-exbtn__state", text: status === "completed" ? "Done" : status === "solution-viewed" ? "Solution" : "" })]
+                : String(i + 1))
+        );
+    }
+
+    function applyFilter() {
+        const shown = new Set(matchExercises(exercises, search.value));
+        nav.querySelectorAll("li[data-index]").forEach((li) => { li.hidden = !shown.has(Number(li.dataset.index)); });
+        nav.querySelectorAll(".lx-exgroup").forEach((g) => { g.hidden = !g.querySelector("li:not([hidden])"); });
+        searchNote.textContent = search.value.trim() === "" ? "" : shown.size === 0 ? "No exercise matches." : `${plural(shown.size, "exercise")} match.`;
+    }
+
     function drawNav() {
+        const keep = nav.scrollTop;
         clear(nav);
-        exercises.forEach((ex, i) => {
-            const status = statusOf(states[i]);
-            put(nav, el("li", {},
-                el("button", {
-                    type: "button", class: "lx-exbtn", "aria-current": i === index ? "true" : null,
-                    "aria-label": `Exercise ${i + 1}: ${ex.title}, ${DIFFICULTY_LABEL[ex.difficulty]}, ${STATUS_WORD[status]}`,
-                    onclick: () => go(i, true)
-                }, String(i + 1))
-            ));
-        });
+        if (workspace) {
+            for (const g of groupExercises(exercises)) {
+                put(nav, el("section", { class: "lx-exgroup" },
+                    el("h3", { class: "lx-exgroup__title", text: `${g.label} (${g.indexes.length})` }),
+                    el("ol", { class: "lx-exlist", "aria-label": g.label }, g.indexes.map(exerciseButton))));
+            }
+            pickerLabel.textContent = `Exercise ${index + 1} of ${exercises.length}: ${exercises[index].title}. Choose another`;
+            applyFilter();
+            nav.scrollTop = keep;
+        } else {
+            exercises.forEach((ex, i) => put(nav, exerciseButton(i)));
+        }
         const c = countStatuses(states);
         counts.textContent = `${plural(exercises.length, "exercise")}: ${c.completed} completed, ${c["solution-viewed"]} solution viewed, ${c["not-started"]} not started. Nothing is saved when you leave this page.`;
     }
@@ -138,6 +205,10 @@ export function mountLab({ root, live, lab }) {
         index = i;
         drawExercise();
         drawNav();
+        if (workspace) {
+            if (!window.matchMedia(WIDE).matches) picker.open = false;
+            nav.querySelector('[aria-current="true"]')?.scrollIntoView({ block: "nearest" });
+        }
         if (focusHeading) view.heading.focus();
     }
 

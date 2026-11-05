@@ -7,7 +7,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.mjs";
-import { defineShellTests, openLab, app, answerBox, checkButton, verdictOf } from "../helpers/lab-contract.mjs";
+import { pickExercise, defineShellTests, openLab, app, answerBox, checkButton, verdictOf } from "../helpers/lab-contract.mjs";
 import { set } from "../../assets/js/tools/excel-practice-lab/exercises.js";
 import { lessons } from "../../assets/js/tools/excel-practice-lab/lessons.js";
 
@@ -59,7 +59,7 @@ test.describe("Excel Practice Lab: this lab", () => {
 
   test("a missing dollar sign is caught when the formula is copied down, and the learner's own values are shown", async ({ page, go }) => {
     await openLab(page, go, ROUTE);
-    await app(page).getByRole("button", { name: /^Exercise 4:/ }).click();
+    await pickExercise(page, /^Exercise 4:/);
     await type(page, "=A4*B1");
     await expect(verdictOf(page)).toHaveText("Not yet");
     await expect(page.locator(".lx-feedback")).toContainText("copied down and across");
@@ -171,7 +171,7 @@ test.describe("Excel Practice Lab: this lab", () => {
     test(`layout at ${width}px: a wide sheet, an open lesson and the free sheet cause no sideways scroll`, async ({ page, go }) => {
       await page.setViewportSize({ width, height: 900 });
       await openLab(page, go, ROUTE);
-      await app(page).getByRole("button", { name: /^Exercise 5:/ }).click();
+      await pickExercise(page, /^Exercise 5:/);
       await type(page, "=$A2*B$1");
       await expect(verdictOf(page)).toHaveText("Correct");
       await page.locator("details.lx-lesson summary").nth(8).click();

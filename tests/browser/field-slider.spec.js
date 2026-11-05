@@ -25,6 +25,17 @@ test.describe("slider beside a number field", () => {
     expectClean(watch);
   });
 
+  test("EMI: both ends of every slider are written under it, from the real range and unit, and are hidden from assistive technology", async ({ page, go }) => {
+    await go("calculators/emi/");
+    await expect(page.locator("[data-slider-ends-for]")).toHaveCount(3);
+    const ends = (id) => page.locator(`[data-slider-ends-for="${id}"] span`).allInnerTexts();
+    expect(await ends("emi-loan")).toEqual(["₹1 Lakh", "₹5 Crore"]);
+    expect(await ends("emi-rate")).toEqual(["1%", "20%"]);
+    expect(await ends("emi-years")).toEqual(["1 Year", "30 Years"]);
+    await expect(page.locator('[data-slider-ends-for="emi-rate"]')).toHaveAttribute("aria-hidden", "true");
+    await expectNoHorizontalOverflow(page);
+  });
+
   test("moving the slider sets the number and recalculates, as if the value had been typed", async ({ page, go }) => {
     await go("calculators/emi/");
     const before = await page.locator("#emi-results").innerText();

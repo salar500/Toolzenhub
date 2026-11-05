@@ -10,6 +10,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.mjs";
 import { strayWords } from "../helpers/lab-contract.mjs";
+import { pickExercise } from "../helpers/lab-contract.mjs";
 
 const WIDTHS = [320, 360, 390, 768, 1180];
 const OUT = path.resolve("test-results/learning-widths");
@@ -83,7 +84,7 @@ for (const width of WIDTHS) {
       await page.getByRole("button", { name: "Check answer" }).click();
       await audit(page, "td wrong", width);
       await shot(page, "td-wrong", width);
-      await app(page).getByRole("button", { name: /^Exercise 19:/ }).click();
+      await pickExercise(page, /^Exercise 19:/);
       await audit(page, "td partitions (longest labels)", width);
       await page.getByRole("button", { name: "Check answer" }).click();
       await audit(page, "td partitions refused", width);

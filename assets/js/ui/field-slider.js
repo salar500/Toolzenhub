@@ -90,6 +90,40 @@ function decimalsOf(step) {
 
 }
 
+const SINGULAR = { years: "year", Years: "Year", months: "month", Months: "Month", days: "day", Days: "Day" };
+
+/** A slider end as a person would say it: "₹1 Lakh", "1%", "30 Years". `unit` is the field's own unit text. Pure. */
+export function formatEndpoint(value, unit = "", step = 1) {
+
+    const unitText = String(unit ?? "").trim();
+    const decimals = Math.min(decimalsOf(step), 2);
+    const plain = (n, locale = "en-IN") => n.toLocaleString(locale, { maximumFractionDigits: decimals });
+    const trimmed = (n) => String(Math.round(n * 100) / 100);
+
+    if (unitText.startsWith("₹")) {
+
+        const rest = unitText.slice(1).trim();
+        const tail = rest === "" ? "" : ` ${rest}`;
+        let body;
+
+        if (value >= 1e7) body = `${trimmed(value / 1e7)} Crore`;
+        else if (value >= 1e5) body = `${trimmed(value / 1e5)} Lakh`;
+        else body = plain(value);
+
+        return `₹${body}${tail}`;
+
+    }
+
+    if (unitText.startsWith("%")) return `${plain(value)}${unitText}`;
+
+    if (unitText === "") return plain(value);
+
+    const word = value === 1 && SINGULAR[unitText] ? SINGULAR[unitText] : unitText;
+
+    return `${plain(value)} ${word}`;
+
+}
+
 const followers = [];
 
 function enhanceOne(input) {
@@ -164,6 +198,25 @@ function enhanceOne(input) {
     const field = input.closest(".calculator-form__field");
 
     (field && field.parentElement === group ? field : input).insertAdjacentElement("afterend", slider);
+
+    /* both ends of the range, so the visitor knows how far the slider goes; the number input already says the current value */
+    const unit = (group && group.querySelector(".calculator-form__unit")?.textContent) || "";
+    const ends = doc.createElement("div");
+
+    ends.className = "calculator-form__slider-ends";
+    ends.setAttribute("aria-hidden", "true");
+    ends.setAttribute("data-slider-ends-for", input.id);
+
+    for (const value of [range.min, range.max]) {
+
+        const end = doc.createElement("span");
+
+        end.textContent = formatEndpoint(value, unit, range.step);
+        ends.append(end);
+
+    }
+
+    slider.insertAdjacentElement("afterend", ends);
 
     input.setAttribute(MARK, "true");
     follow();

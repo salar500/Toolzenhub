@@ -5,7 +5,7 @@
  * tests/unit/test-design-lab.test.mjs (with a Python oracle over a generated corpus).
  */
 import { test, expect, expectClean, expectNoHorizontalOverflow } from "../helpers/test-base.mjs";
-import { defineShellTests, openLab, app, answerBox, checkButton, verdictOf } from "../helpers/lab-contract.mjs";
+import { pickExercise, defineShellTests, openLab, app, answerBox, checkButton, verdictOf } from "../helpers/lab-contract.mjs";
 
 const ROUTE = "tools/test-design-lab/";
 
@@ -18,7 +18,7 @@ defineShellTests({
   wrong: "18, 65"
 });
 
-const exercise = (page, n) => app(page).getByRole("button", { name: new RegExp(`^Exercise ${n}:`) }).click();
+const exercise = (page, n) => pickExercise(page, new RegExp(`^Exercise ${n}:`));
 
 test.describe("Test Design Lab: this lab", () => {
 

@@ -5,7 +5,7 @@
  * tests/unit/jsonpath-challenge-lab.test.mjs (with a Python evaluator as the independent oracle).
  */
 import { test, expect } from "../helpers/test-base.mjs";
-import { defineShellTests, openLab, app, answerBox, checkButton, verdictOf } from "../helpers/lab-contract.mjs";
+import { pickExercise, defineShellTests, openLab, app, answerBox, checkButton, verdictOf } from "../helpers/lab-contract.mjs";
 
 const ROUTE = "tools/jsonpath-challenge-lab/";
 
@@ -60,7 +60,7 @@ test.describe("JSONPath Challenge Lab: this lab", () => {
 
   test("an ordered exercise rejects the right nodes in the wrong order and says why", async ({ page, go }) => {
     await openLab(page, go, ROUTE);
-    await app(page).getByRole("button", { name: /^Exercise 12:/ }).click();
+    await pickExercise(page, /^Exercise 12:/);
     await answerBox(page).fill("$.library.books[4,2,0].title");
     await checkButton(page).click();
     await expect(verdictOf(page)).toHaveText("Not yet");
@@ -71,7 +71,7 @@ test.describe("JSONPath Challenge Lab: this lab", () => {
     test.setTimeout(120000);
     await openLab(page, go, ROUTE);
     for (let i = 1; i <= 19; i += 1) {
-      await app(page).getByRole("button", { name: new RegExp(`^Exercise ${i}:`) }).click();
+      await pickExercise(page, new RegExp(`^Exercise ${i}:`));
       await page.getByRole("button", { name: "Show solution" }).click();
       await answerBox(page).fill(await page.locator('[aria-label="Solution"]').innerText());
       await checkButton(page).click();

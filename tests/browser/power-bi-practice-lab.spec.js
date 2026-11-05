@@ -7,7 +7,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.mjs";
-import { defineShellTests, openLab, app, answerBox, checkButton, verdictOf } from "../helpers/lab-contract.mjs";
+import { pickExercise, defineShellTests, openLab, app, answerBox, checkButton, verdictOf } from "../helpers/lab-contract.mjs";
 import { set } from "../../assets/js/tools/power-bi-practice-lab/exercises.js";
 import { lessons } from "../../assets/js/tools/power-bi-practice-lab/lessons.js";
 
@@ -31,7 +31,7 @@ async function type(page, text) {
 }
 
 async function openExercise(page, id) {
-  await app(page).getByRole("button", { name: new RegExp(`^Exercise ${indexOf(id)}:`) }).click();
+  await pickExercise(page, new RegExp(`^Exercise ${indexOf(id)}:`));
 }
 
 test.describe("Power BI Practice Lab: this lab", () => {
