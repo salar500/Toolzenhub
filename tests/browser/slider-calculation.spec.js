@@ -1,7 +1,6 @@
 /**
  * Slider audit, calculation level (2026-11-05). slider-inventory.spec.js proves the control; this proves what the page does with it.
- * For every slider of every published calculator that has one (found on the page), except EMI, FD and GST which the owner asked not to
- * re-run unless shared code changed:
+ * For every slider of every published calculator that has one (found on the page), EMI, FD and GST included:
  *   - at the minimum, the midpoint and the maximum, the results shown for a value set by the slider are exactly the results shown when the
  *     same number is typed into the field (so the two inputs are one input), and never contain NaN, Infinity, undefined or [object Object];
  *   - a typed value far beyond the range, and text that is not a number, never break the page (no script error, no NaN) and are answered
@@ -11,7 +10,8 @@
  */
 import { test, expect, livePages, rel } from "../helpers/test-base.mjs";
 
-const SKIP = new Set(["emi", "fd", "gst"]);
+/* EMI, FD and GST were first left out (the owner asked not to re-run them unless shared code changed). The shared field-slider.js did change (endpoint labels, 09e31e2), so they are in. */
+const SKIP = new Set();
 const PAGES = livePages
   .filter((p) => /\/calculators\/[^/]+\/$/.test(p.url))
   .map((p) => rel(p.url))
@@ -113,5 +113,32 @@ test.describe("an independent number check", () => {
       const expected = ((2 ** (1 / years)) - 1) * 100;
       await expect(page.locator(".calculator-results").first(), `${years} years`).toContainText(`${expected.toFixed(2)}%`);
     }
+  });
+  test("FD: the years slider at 5 years gives 1,41,477.82 for 100,000 at 7% compounded quarterly (worked outside the code: 100000 x (1 + 0.07/4)^20)", async ({ page, go }) => {
+    await go("calculators/fd/");
+    await page.locator("#fd-amount").fill("100000");
+    await page.locator("#fd-rate").fill("7");
+    await page.locator("#fd-months").fill("0");
+    const slider = page.locator('input.calculator-form__slider[data-slider-for="fd-years"]');
+    await expect(slider).toBeVisible();
+    await slider.fill("5");
+    await settle(page);
+    const out = page.locator(".calculator-results").first();
+    await expect(out).toContainText("1,41,477.82");
+    await expect(out).toContainText("41,477.82");
+    await expect(out).toContainText("7.19%");
+  });
+  test("GST: the rate slider (0 to 28) gives GST 1,800 and a total of 11,800 for 10,000 at 18% (worked by hand: 10000 x 18 / 100)", async ({ page, go }) => {
+    await go("calculators/gst/");
+    const slider = page.locator("input.calculator-form__slider").first();
+    await expect(slider).toBeVisible();
+    const id = await slider.getAttribute("data-slider-for");
+    expect(id).toMatch(/^gst-rate/);
+    await page.locator("#gst-amount-1").fill("10000");
+    await slider.fill("18");
+    await settle(page);
+    const out = page.locator(".calculator-results").first();
+    await expect(out).toContainText("1,800");
+    await expect(out).toContainText("11,800");
   });
 });
