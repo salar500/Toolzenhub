@@ -123,6 +123,20 @@ New lab: own query-step engine, relationship checker and DAX subset (no eval, no
 
 Earlier in the cycle, on subpath-mobile and passing: `field-slider`, `date-difference`, the Time Tools specs after their repairs, navigation and section-switcher specs (recorded in commits `74c54d4`, `831e113`, `6fdb634`).
 
+## Q3-18 (2026-11-05), HEAD `9d1c984`, mobile and root-desktop completion, builds
+
+Runner: one spec at a time, one worker, waits for at least 950 MB free. Free memory ranged from 457 to 1,430 MB; one spec was skipped for low memory and rerun later.
+
+| Command (project, specs) | Result |
+|---|---|
+| subpath-mobile: `countdown-timer`, `time-zone-converter`, `navigation`, `sql-practice-lab`, `excel-practice-lab`, `power-bi-practice-lab`, `json-compare`, `json-compare-lines`, `json-formatter-diagnostics`, `date-difference`, `date-difference-presets`, `field-slider` | PASS: 17, 36, 46 (3 skipped by design), 33, 25 (1 skipped), 24 (1 skipped), 21, 3, 5, 9, 10, 19 |
+| subpath-mobile: `articles` (first attempt SKIPPED for low memory), `practice-lab-xss` (first attempt 1 FAIL: the Power BI textarea sits in a closed lesson, a test fault, fixed) | rerun together: 59 passed |
+| root-desktop (`@portable` only): `articles`, `navigation`, `sql-practice-lab`, `excel-practice-lab`, `power-bi-practice-lab`, `links`, `practice-lab-xss` | 12 passed |
+| `npm run build:all`, `npm run inventory:generate` | exit 0; 132 HTML pages in each of `dist/` (661 files) and `dist-ghpages/` (658); sitemap 131 URLs plus the 404 page; inventory unchanged, tree clean |
+| Static review | no `.map`, spec or env file in either build; user text reaches `innerHTML` in the new labs only through `esc()`; the xss spec confirms it for SQL, Power BI and JSON Compare; sql.js (728 KB) loads only in the worker on first run, its LICENSE and NOTICE ship with it |
+
+NOT RUN at this HEAD: full subpath-desktop and subpath-mobile suites, the visual spec, axe on all pages (axe ran on the article pages on mobile and inside the SQL lab spec only), Lighthouse, Firefox, WebKit, real devices, screen readers, and any independent review of the SQL, Excel, Power BI, tax or SIP content.
+
 ## Carried forward (not re-run at f5a1df4)
 
 These ran on the working tree that was committed as `6b01b85`..`f5a1df4` (RELEASE-1 records HEAD `45fc888` plus 102 uncommitted entries, 5,597 insertions across 102 files, now in the three commits). That equivalence is inferred from the records and a clean tree; it was not proved by diffing a saved copy.

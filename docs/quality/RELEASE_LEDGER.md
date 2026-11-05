@@ -10,6 +10,18 @@ Eight local commits after `f5a1df4` (`b342344` to `b714e57`, plus the closing re
 
 HEAD `8daef8f`, 29 local commits after `f5a1df4`, nothing pushed. The Hostinger zip `ToolZenHub-hostinger-dist-20261103-1428.zip` (SHA-256 `A12191702E...DBE42`, re-checked 2026-11-05, still matches this record) is built from `f5a1df4` and is STALE: do not deploy it. It and `ToolZenHub-backup-20261102-2311.zip` are preserved. No fresh archive has been made: the mobile and root-desktop regression for this HEAD is incomplete (see Q3-17), so the archive preconditions are not met.
 
+### Fresh release archive (2026-11-05, not deployed)
+
+| Item | Value |
+|---|---|
+| File | `C:\Users\DELL\Downloads\ToolZenHub-hostinger-dist-20261105-9d1c984.zip` |
+| Source commit | `9d1c984` (working tree clean; `dist/` rebuilt by `npm run build:all` at that commit, base `/`, canonical `https://toolzenhub.in`) |
+| Contents | 661 files (the whole of `dist/`), `index.html` at the root, forward-slash paths, no `.map`, `.spec.js` or `.env` files; every entry byte-identical to `dist/`; `zipfile.testzip()` clean |
+| Size / SHA-256 | 6,683,584 bytes / `9312C56F60FC0AC90489F2C02D3ACE0660CAEF3D0F586D80F6D0FF5EF8E09F6B` |
+| Note | a first attempt with PowerShell `Compress-Archive` wrote backslash separators, so it was discarded (this session's own file) and the zip was rebuilt with Python. Earlier archives were not touched |
+| Regression behind it | Q3-17 and Q3-18 in `TEST_EXECUTION_LEDGER.md`. The full browser suite was NOT re-run on this HEAD; see "NOT RUN" there |
+| Deployment | NOT DONE. Needs the owner's approval; Hostinger was not touched |
+
 ## State at 2026-11-04 (as first recorded, for `f5a1df4`)
 
 | Item | State | Evidence |
