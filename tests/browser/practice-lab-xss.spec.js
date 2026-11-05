@@ -32,6 +32,7 @@ test("SQL answer box: markup in an answer is text in the feedback", async ({ pag
 
 test("Power BI example box: markup is text", async ({ page, go }) => {
   await openLab(page, go, "tools/power-bi-practice-lab/");
+  await page.locator("details.lx-lesson").evaluateAll((l) => l.forEach((d) => { d.open = true; })); // lessons start closed
   const box = page.locator("textarea.lx-textarea").first();
   await box.fill(`trim ${PAYLOAD}\nproper ${PAYLOAD}`);
   await box.locator("xpath=following::button[1]").click();
