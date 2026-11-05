@@ -147,16 +147,32 @@ Counts are the live tools in the catalog (69). "Working" means built and covered
 
 | Ecosystem | Live tools | What a visitor can do now | Gap found (priority) | Action |
 |---|---|---|---|---|
-| Calculators | 30 (loans 9, investment 7, tax 4, health 3, business 3, math 3, converter 1) | every tool has a form that updates as you type; EMI has an amortisation schedule; Prepayment has CSV and print; SIP and Balance Transfer have print; the slider audit (sections 7 and 10) covers 16 of the 19 slider calculators at calculation level, the other three by instruction | Home Loan and EMI offer no schedule download or print, while Prepayment does (P2) | proposed: reuse the Prepayment export and print for the EMI schedule; not built |
+| Calculators | 30 (loans 9, investment 7, tax 4, health 3, business 3, math 3, converter 1) | every tool has a form that updates as you type; EMI has an amortisation schedule and, with Home Loan, a CSV download; Prepayment has CSV and print; SIP and Balance Transfer have print; the slider audit (sections 7 and 10) covers 16 of the 19 slider calculators at calculation level, the other three by instruction | EMI and Home Loan had no schedule download, while Prepayment did (P2) | built 2026-11-05 (commit 37d6aa4): a browser-only CSV of the monthly schedule on EMI and Home Loan; print for them is not built |
 | Time Tools | 13 | timers and clocks (Countdown, Stopwatch, Pomodoro, Interval, World Clock), dates and durations (Date Difference, Date Calculator, Business Days, Time Duration, Hours and Timesheet), zones and shifts (Time Zone Converter, International Meeting Planner, Shift Planner); a running timer is not affected by hiding the sidebar (tested) | none found; no external time-tool comparison was made | none |
 | Developer Tools | 12 | JSON (Formatter and Validator, Compare, JSONPath Tester, JSON and CSV), encoding (Base64, URL Parser, JWT Decoder), text (Text Diff, List Comparer), identifiers and time (Unix Timestamp, Cron Explainer, UUID Generator) | none claimed: no competitor feature comparison was made for these | none |
-| Image Tools | 2 | Image Compressor and Resizer (resize, quality, target size, format change, batch, crop) and Photos to PDF; tested with 12 MP photos and the 25 MB and 40 MP refusals, with the sidebar open and hidden | none found against what the Squoosh README says (it says little) | none |
+| Image Tools | 2 | Image Compressor and Resizer (resize, quality, target size, format change, batch, crop) and Photos to PDF; the configured limits are 25 MB and 40 MP; tested with 12 and 24 MP photos as successful operations, and with a 26 MB file and a 50 MP image as refusals (inputs just over the limits), with the sidebar open and hidden; nothing was tested as a success at the limits themselves | none found against what the Squoosh README says (it says little) | none |
 | PDF Tools | 4 | Merge PDF, Split PDF, Extract, Reorder and Rotate Pages, Page Numbers and Watermark; tested with 2 x 150 pages beside the sidebar and a 600-page merge | iLovePDF also lists compress, crop, protect, unlock, sign, redact, compare, OCR and Office conversion: most need a server or a large library, and `pdf-lib` cannot recompress images, so none is proposed now (P3) | none now |
 | Practice Labs | 8 | SQL (49 exercises), Excel (55), Power BI (43) with a grouped, searchable exercise list; JSON Error-Fixing, JSONPath, Cron, Test Design; Smart Flashcards | a lesson-aware list that links each lesson to its exercises (P2, section 4) | proposed |
 
 ### 9.3 References worth keeping
 
 W3C APG disclosure navigation (https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/); GitLab Pajamas navigation sidebar (https://design.gitlab.com/usability/navigation-sidebar); Calculator.net mortgage calculator (https://www.calculator.net/mortgage-calculator.html); iLovePDF (https://www.ilovepdf.com/); Squoosh (https://github.com/GoogleChromeLabs/squoosh).
+
+### 9.4 Adopted and rejected, per ecosystem
+
+"Reference" is only what was actually opened (9.1); an ecosystem with no reference says so. "Status" is the state in this repository on 2026-11-05.
+
+| Ecosystem | Reference | Observed pattern | Decision | Rationale | Status |
+|---|---|---|---|---|---|
+| All (navigation) | W3C APG disclosure navigation | `nav` landmark, `aria-expanded`, `aria-current`, Escape returns focus | adopted | matches the section sidebar and its narrow disclosure | built (sidebar) |
+| All (navigation) | GitLab Pajamas navigation sidebar | persistent sidebar, user can hide it, overlay on small screens | adopted, without the stored preference | a stored preference needs storage; D4 forbids it | built; the sidebar opens by default every visit |
+| Calculators | Calculator.net mortgage calculator | monthly and yearly schedule, extra payments, chart, print | schedule adopted (CSV); chart, print for EMI/Home Loan, extra payments in EMI rejected for now | the schedule is the useful part and is local; a US mortgage's extras are not an Indian EMI feature set; Prepayment already covers part-payments | CSV built; others not built |
+| Time Tools | none inspected | not applicable | no decision | no external reference was read, so nothing is adopted or rejected on evidence | no change |
+| Developer Tools | none inspected | not applicable | no decision | same | no change |
+| Image Tools | Squoosh README | in-browser compression with no upload | adopted (already the design) | privacy promise | built |
+| PDF Tools | iLovePDF tool list | the usual set: merge, split, organise, page numbers, watermark and many server-side tools | merge, split, organise, numbers, watermark kept; compress, OCR, sign, redact, protect, unlock, Office conversion rejected | they need a server or a large library; `pdf-lib` cannot recompress images; no backend is allowed | built (4 tools); rest not proposed |
+| Practice Labs (SQL) | SQLBolt (search summary only) | lessons that end in an exercise | adopted as a direction: show the lesson with its exercises | the lab list is grouped by topic already; a lesson-aware view needs no new list | being built (section 4) |
+| Practice Labs (Excel, Power BI) | none inspected | not applicable | no external decision; the same in-lab navigation is applied for consistency | one navigation pattern across the three labs | being built (section 4) |
 
 ## 10. Decisions and results of the completion phase (2026-11-05, local, not pushed)
 
@@ -182,6 +198,19 @@ W3C APG disclosure navigation (https://www.w3.org/WAI/ARIA/apg/patterns/disclosu
 | Root base path (`root-desktop`, all @portable tests) | first run 280 passed and 2 failed: `build.spec.js` expected 5 related-article cards on the two newest articles (Best SIP Strategies, Tax Saving Guide), whose data lists 3 and 2. A stale pin from the commit that published them, not caused by this phase; corrected with a per-article count. The two articles were re-run on `root-desktop` and `subpath-desktop` (4 passed), and then the whole `root-desktop` project was run again after the correction: **282 passed, 0 failed** (10.5 minutes, one worker) |
 | Not run | Firefox, Safari/WebKit, real phones, screen readers, Lighthouse, the full regression suites, the mutation suite |
 
+### Test environment (large-file measurements)
+
+| Item | Value |
+|---|---|
+| Browser | Google Chrome 156.0.8078.80 (system install, Playwright `channel: "chrome"`), headless |
+| Driver | Playwright 1.63.0, one worker |
+| Runtime | Node.js 20.17.0 |
+| Operating system | Windows 10 Home Single Language, 10.0.19045 |
+| Memory | 3.9 GB RAM on the test laptop, with the owner's other programs open |
+| "Mobile" runs | Chrome with a 390 px viewport (emulation on the same laptop), not a phone |
+| Real devices, other browsers | not recorded: none were used |
+| Limits versus inputs | configured: images 25 MB and 40 MP; PDFs 50 MB and 20 files. Test inputs: see the table below; refusal inputs: 26 MB and 50 MP |
+
 ### Large-file measurements (2026-11-05, `large-files-measure.spec.js`, local)
 
 Each file is random noise, which does not compress, so it is as large as a detailed photograph or a scan. Images are made in the page, PDFs in the test with `pdf-lib` and `jpeg-js`; nothing large is committed. "Ready" is from choosing the file to the tool showing it; "process" is the button to the finished result. Heap is the page's JavaScript heap from `performance.memory` (Chrome rounds it; the decoded bitmaps the browser keeps outside the heap are not in it). Same files on `subpath-desktop` (1280 px) and `subpath-mobile` (390 px); the figures that differ between the two are times only.
@@ -196,4 +225,4 @@ Each file is random noise, which does not compress, so it is as large as a detai
 
 What each case asserts: the input is in the stated size range; the preview shows and reports the right dimensions; the download opens as the right format with the right dimensions (images, read back from the file) or the right page count (PDFs, read back with the strict reader); there is no sideways scroll with the large file chosen and again with the result shown; Reset returns the tool to its empty state and hides the download. All 10 runs (5 on each project) passed and no defect was found.
 
-What these numbers do and do not say. The heap does not fall after Reset: a freshly emptied tool keeps the figure it had, until the browser collects it, so these runs show that Reset empties the tool, not that it frees memory at once. A 24 MP image is 96 MB once decoded (24 million pixels at 4 bytes each, calculated, not measured), held by the browser outside this figure. The slowest step seen is choosing the two 13.7 MB PDFs (9 to 12 s to ready); that time includes the test runner handing 27 MB to the page, so it overstates what a visitor waits; the 50 MB and 20-file limits were not run at their limits, and a 25 MB image and 40 MP image are covered only by their refusals (`image-compressor-resizer.spec.js`, `large-files-workspace.spec.js`). The machine has 4 GB, so a visitor's device with less memory was not simulated.
+What these numbers do and do not say. The heap does not fall after Reset: a freshly emptied tool keeps the figure it had, until the browser collects it, so these runs show that Reset empties the tool, not that it frees memory at once. A 24 MP image is 96 MB once decoded (24 million pixels at 4 bytes each, calculated, not measured), held by the browser outside this figure. The slowest step seen is choosing the two 13.7 MB PDFs (9 to 12 s to ready); that time includes the test runner handing 27 MB to the page, so it overstates what a visitor waits; the 50 MB and 20-file PDF limits were not run at their limits; for images the configured limits are 25 MB and 40 MP, and the refusal inputs were 26 MB and 50 MP (`image-compressor-resizer.spec.js`, `large-files-workspace.spec.js`), so a success at 25 MB or 40 MP is not claimed. The inputs above are test inputs (9 to 15 MB, 4.5 to 24 MP), not limits. The machine has 4 GB, so a visitor's device with less memory was not simulated.
