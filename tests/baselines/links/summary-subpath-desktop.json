@@ -605,7 +605,7 @@
     "deadFragments": []
   },
   "tools/excel-practice-lab/": {
-    "internal": 37,
+    "internal": 38,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -713,7 +713,7 @@
     "deadFragments": []
   },
   "tools/power-bi-practice-lab/": {
-    "internal": 38,
+    "internal": 40,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -737,7 +737,7 @@
     "deadFragments": []
   },
   "tools/sql-practice-lab/": {
-    "internal": 37,
+    "internal": 39,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
