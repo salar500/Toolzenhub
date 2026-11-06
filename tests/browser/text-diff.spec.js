@@ -544,7 +544,7 @@ test.describe("Text Diff / Compare in the site", () => {
 
   test("it links the JSON Formatter, and the Unix converter is not related to it", async ({ page, go }) => {
     await go("tools/text-diff/");
-    await expect(page.locator('main a[href$="tools/json-formatter/"]').first()).toBeVisible(); // the text link and the related card
+    await expect(page.locator('main a[href$="tools/json-formatter/"]:not(nav.section-switcher a)').first()).toBeVisible(); // the text link and the related card
     await expect(page.locator('main a[href$="tools/unix-timestamp-converter/"]:not(nav.section-switcher a)')).toHaveCount(0); // the sidebar is left out
     await go("tools/unix-timestamp-converter/");
     await expect(page.locator('main a[href$="tools/text-diff/"]:not(nav.section-switcher a)')).toHaveCount(0); // the section sidebar lists every Developer Tool, so it is left out; the pilot lists JWT, Cron and the JSON Formatter there
