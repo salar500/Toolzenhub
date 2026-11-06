@@ -18,6 +18,12 @@ const CASES = [
   ["tools/smart-flashcards/", "Practice Labs", "Smart Flashcards", "Cron Challenge Lab"],
 ];
 
+/* a link inside a closed group is reached the way a visitor does: open its group first */
+async function reveal(link) {
+  if (!(await link.isVisible())) await link.locator("xpath=ancestor::li[contains(@class,'section-switcher__group')]//button[contains(@class,'section-switcher__toggle')]").click();
+  return link;
+}
+
 test.describe("section switcher", () => {
   for (const [path, section, current, sibling] of CASES) {
     test(`${path}: lists its own section, marks the current tool, opens a sibling`, async ({ page, go, siteRoot }) => {
@@ -36,7 +42,7 @@ test.describe("section switcher", () => {
       expect(new Set(hrefs).size).toBe(hrefs.length);
       if (section === "Calculators") for (const h of hrefs) expect(h).toContain(`${siteRoot}calculators/`);
       else for (const h of hrefs) expect(h).toContain(`${siteRoot}tools/`);
-      await nav.getByRole("link", { name: new RegExp(sibling) }).first().click();
+      await (await reveal(nav.locator("a", { hasText: new RegExp(sibling) }).first())).click();
       await expect(page).not.toHaveURL(new RegExp(`${path}$`));
       await page.goBack();
       await expect(page).toHaveURL(new RegExp(`${path}$`)); // browser history works: they are ordinary links
@@ -58,6 +64,8 @@ test.describe("section switcher", () => {
     await expect(page.locator(".section-switcher details")).toHaveAttribute("open", "");
     await page.keyboard.press("Tab");
     await expect(page.locator(".section-switcher").getByRole("button", { name: "Close tools" })).toBeFocused(); // the drawer's close button comes first
+    await page.keyboard.press("Tab");
+    await expect(page.locator(".section-switcher .section-switcher__toggle").first()).toBeFocused(); // then the first group heading
     await page.keyboard.press("Tab");
     await expect(page.locator(".section-switcher a").first()).toBeFocused();
   });
@@ -203,7 +211,7 @@ test.describe("section switcher", () => {
         const startUrl = page.url();
         for (const target of [hrefs[0], hrefs[Math.floor(hrefs.length / 2)], hrefs[hrefs.length - 1]]) {
           await page.goto(startUrl);
-          await rail(page).locator(`a[href="${target}"]`).click();
+          await (await reveal(rail(page).locator(`a[href="${target}"]`))).click();
           await expect(page, `${section} ${target}`).toHaveURL((url) => url.pathname === target);
           await expect(rail(page).locator('a[aria-current="page"]')).toHaveAttribute("href", target);
           await expect(rail(page).getByRole("button", { name: "Hide tools" })).toBeVisible();
@@ -218,10 +226,48 @@ test.describe("section switcher", () => {
       await page.keyboard.press("Tab");
       await expect(page.getByLabel("Find a tool in Developer Tools")).toBeFocused();
       await page.keyboard.press("Tab");
+      await expect(rail(page).locator(".section-switcher__toggle").first()).toBeFocused(); // the first group heading
+      await page.keyboard.press("Tab");
       await expect(rail(page).locator("a").first()).toBeFocused();
       await rail(page).getByRole("button", { name: "Hide tools" }).focus();
       await page.keyboard.press("Enter");
       await expect(page.getByRole("button", { name: "Show Developer Tools" })).toBeFocused();
+    });
+
+    test("Calculators: seven category groups, the current one open, the others closed; a group expands and collapses; search opens matching groups and clearing restores", async ({ page, go }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await go("calculators/emi/");
+      const toggles = rail(page).locator(".section-switcher__toggle");
+      await expect(toggles).toHaveCount(7);
+      expect(await toggles.evaluateAll((els) => els.map((e) => e.firstChild.textContent.trim()))).toEqual(["Loans", "Investment", "Tax", "Health", "Business", "Math", "Converter"]);
+      const loans = toggles.nth(0), investment = toggles.nth(1);
+      const investmentLinks = rail(page).locator(".section-switcher__group").nth(1).locator("a");
+      await expect(loans).toHaveAttribute("aria-expanded", "true");
+      await expect(rail(page).locator('a[aria-current="page"]')).toHaveText("EMI Calculator");
+      await expect(investment).toHaveAttribute("aria-expanded", "false");
+      await expect(investmentLinks.first()).toBeHidden();
+      await investment.click();
+      await expect(investment).toHaveAttribute("aria-expanded", "true");
+      await expect(investmentLinks.first()).toBeVisible();
+      await investment.click();
+      await expect(investmentLinks.first()).toBeHidden();
+
+      await page.getByLabel("Find a tool in Calculators").fill("sip");
+      await expect(investment).toHaveAttribute("aria-expanded", "true");
+      await expect(rail(page).locator(".section-switcher__group").nth(1).locator("li:not([hidden]) a")).toHaveCount(1);
+      await page.getByLabel("Find a tool in Calculators").fill("");
+      await expect(investment).toHaveAttribute("aria-expanded", "false");
+      await expect(loans).toHaveAttribute("aria-expanded", "true");
+    });
+
+    test("Time, Developer and Practice Labs keep their own groups, all open, and never list another section's tool", async ({ page, go }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      for (const [url, section, outsider] of [["tools/stopwatch/", "Time Tools", "json-formatter"], ["tools/json-formatter/", "Developer Tools", "sql-practice-lab"], ["tools/sql-practice-lab/", "Practice Labs", "json-formatter"]]) {
+        await go(url);
+        const nav = page.locator(`nav.section-switcher[aria-label="${section}: switch tool"]`);
+        expect(await nav.locator('.section-switcher__toggle[aria-expanded="false"]').count()).toBe(0);
+        await expect(nav.locator(`a[href$="tools/${outsider}/"]`)).toHaveCount(0);
+      }
     });
 
     test("narrow screen: no Show button; the disclosure opens a searchable drawer that fits the screen", async ({ page, go }) => {

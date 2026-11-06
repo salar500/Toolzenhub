@@ -66,6 +66,47 @@ export function initSectionRail(root = document) {
 
     nav.id ||= "section-rail";
 
+    /* ---------- expandable groups ---------- */
+
+    const groups = [...nav.querySelectorAll(".section-switcher__group")].map((node, index) => {
+
+        const heading = node.querySelector(".section-switcher__label");
+        const items = node.querySelector("ul");
+
+        if (!heading || !items) {
+            return { node, wanted: true, toggle: null, items };
+        }
+
+        const count = items.querySelectorAll("li").length;
+        const toggle = element("button", { type: "button", class: "section-switcher__toggle", "aria-controls": `${nav.id}-group-${index}` });
+
+        items.id = `${nav.id}-group-${index}`;
+        toggle.append(element("span", {}, heading.textContent), element("span", { class: "section-switcher__group-count", "aria-hidden": "true" }, String(count)));
+        heading.replaceWith(toggle);
+
+        return { node, wanted: node.dataset.open !== "false", toggle, items };
+
+    });
+
+    const setGroup = (group, open) => {
+
+        if (!group.toggle) return;
+
+        group.toggle.setAttribute("aria-expanded", String(open));
+        group.items.hidden = !open;
+
+    };
+
+    for (const group of groups) {
+
+        setGroup(group, group.wanted);
+        group.toggle?.addEventListener("click", () => {
+            group.wanted = group.toggle.getAttribute("aria-expanded") !== "true";
+            setGroup(group, group.wanted);
+        });
+
+    }
+
     /* ---------- search ---------- */
 
     let search = null;
@@ -84,14 +125,20 @@ export function initSectionRail(root = document) {
         search.addEventListener("input", () => {
 
             const shown = new Set(matchLabels(labels, search.value));
+            const searching = search.value.trim() !== "";
 
             links.forEach((link, index) => { link.parentElement.hidden = !shown.has(index); });
 
-            for (const group of nav.querySelectorAll(".section-switcher__group")) {
-                group.hidden = !group.querySelector("li:not([hidden])");
+            for (const group of groups) {
+
+                const any = !!group.node.querySelector("li:not([hidden])");
+
+                group.node.hidden = !any;
+                setGroup(group, searching ? any : group.wanted); // a search opens every group with a match; clearing it restores the visitor's choice
+
             }
 
-            status.textContent = search.value.trim() === ""
+            status.textContent = !searching
                 ? ""
                 : shown.size === 0 ? "No tool matches." : `${shown.size} ${shown.size === 1 ? "tool matches" : "tools match"}.`;
 

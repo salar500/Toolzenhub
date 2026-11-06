@@ -103,13 +103,24 @@ export function renderSectionSwitcher(toolId) {
 
     const groups = groupSectionTools(section.id, siblings, item => getCategoryForTool(item)?.title);
 
-    const body = groups.map(group => `
-                            <li class="section-switcher__group">
+    /* Each group (a Calculators category, or a group of another section) can be expanded and collapsed by script (ui/section-rail.js); without
+       script every group is simply listed. data-open marks the groups that start open: the one holding the current tool, and every group of a
+       short section. A long section (more than 16 tools: the Calculators) starts with the other groups closed so the list stays short. */
+    const longSection = siblings.length > 16;
+
+    const body = groups.map(group => {
+
+        const isOpen = !longSection || group.items.some(item => item.id === toolId);
+
+        return `
+                            <li class="section-switcher__group" data-open="${isOpen}">
                                 ${group.label ? `<span class="section-switcher__label">${escapeHTML(group.label)}</span>` : ""}
                                 <ul>
                                     ${group.items.map(item => linkHtml(item, toolId)).join("")}
                                 </ul>
-                            </li>`).join("");
+                            </li>`;
+
+    }).join("");
 
     return `
                 <nav class="section-switcher" aria-label="${escapeHTML(section.title)}: switch tool">

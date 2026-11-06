@@ -394,3 +394,89 @@
     }
 
 }
+
+/* Expandable groups (a Calculators category, or a group of another section): the heading becomes a button (assets/js/ui/section-rail.js). */
+.section-switcher__toggle {
+
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+
+    min-height: 40px;
+    padding: 0 4px;
+
+    border: 0;
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: var(--ink-muted);
+
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-align: left;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+}
+
+.section-switcher__toggle::after {
+
+    content: "+";
+
+    font-size: 16px;
+    font-weight: 600;
+
+}
+
+.section-switcher__toggle[aria-expanded="true"]::after {
+
+    content: "\2212";
+
+}
+
+.section-switcher__toggle > span:first-child {
+
+    flex: 1;
+
+}
+
+.section-switcher__toggle:hover {
+
+    color: var(--color-ink);
+
+}
+
+.section-switcher__toggle:focus-visible {
+
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+
+}
+
+.section-switcher__group-count {
+
+    min-width: 20px;
+    padding: 0 6px;
+
+    border-radius: 999px;
+
+    background: var(--surface-page);
+
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+
+}
+
+.section-switcher__group[hidden],
+.section-switcher__group > ul[hidden] {
+
+    display: none;
+
+}
