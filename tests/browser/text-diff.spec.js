@@ -483,7 +483,7 @@ test.describe("Text Diff / Compare in the site", () => {
   test("Developer Tools lists it as the third tool, flat, with no future placeholders", async ({ page, go }) => {
     await go("developer-tools.html");
     await expect(page.locator(`a[href$="tools/text-diff/"]`)).toHaveCount(1);
-    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(17);
+    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(12); // 12 Developer Tools; the labs moved to their own Practice Labs section
     await expect(page.locator("main")).not.toContainText(/coming soon|regex/i); // UUID Generator is a live tool now (Tool Pack 39); Base64 is a live tool now (Tool Pack 27)
     await expect(page.locator("main")).toContainText("Text Diff / Compare");
     expect(await page.locator("h2, h3").allInnerTexts()).not.toContain("Subcategories");
@@ -491,9 +491,9 @@ test.describe("Text Diff / Compare in the site", () => {
 
   test("All Tools: Developer Tools has 6 tools; Time Tools and Calculators do not list it", async ({ page, go }) => {
     await go("tools.html");
-    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools"]);
+    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools", "Practice Labs"]);
     const dev = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Developer Tools")') });
-    await expect(dev.locator(".directory-section__count")).toHaveText("17 tools");
+    await expect(dev.locator(".directory-section__count")).toHaveText("12 tools");
     await expect(dev.locator('a[href$="tools/text-diff/"]')).toHaveCount(1);
     for (const section of ["Calculators", "Time Tools"]) {
       const other = page.locator(".directory-section", { has: page.locator(`.directory-section__title a:text-is("${section}")`) });
@@ -545,9 +545,9 @@ test.describe("Text Diff / Compare in the site", () => {
   test("it links the JSON Formatter, and the Unix converter is not related to it", async ({ page, go }) => {
     await go("tools/text-diff/");
     await expect(page.locator('main a[href$="tools/json-formatter/"]').first()).toBeVisible(); // the text link and the related card
-    await expect(page.locator('main a[href$="tools/unix-timestamp-converter/"]')).toHaveCount(0);
+    await expect(page.locator('main a[href$="tools/unix-timestamp-converter/"]:not(nav.section-switcher a)')).toHaveCount(0); // the sidebar is left out
     await go("tools/unix-timestamp-converter/");
-    await expect(page.locator('main a[href$="tools/text-diff/"]')).toHaveCount(0); // the pilot lists JWT, Cron and the JSON Formatter there
+    await expect(page.locator('main a[href$="tools/text-diff/"]:not(nav.section-switcher a)')).toHaveCount(0); // the section sidebar lists every Developer Tool, so it is left out; the pilot lists JWT, Cron and the JSON Formatter there
   });
 
   test("the two existing Developer Tools still load and work after the shared catalog change", async ({ page, go, watch }) => {
