@@ -61,7 +61,9 @@ import {
 
 import {
     addDays,
-    parseDate
+    parseDate,
+    presetRange,
+    SINGLE_DATE_PRESETS
 } from "./date-engine.js";
 
 
@@ -230,6 +232,36 @@ function dateField({ id, label, hint }) {
 const isoOf = ({ year, month, day }) =>
     `${String(year).padStart(4, "0")}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
+/* the quick-fill buttons: a label and the id presetRange() (date-engine.js) or SINGLE_DATE_PRESETS knows */
+const SINGLE_BUTTONS = [["Today", "today"], ["Yesterday", "yesterday"], ["Tomorrow", "tomorrow"]];
+
+const PREVIOUS_BUTTONS = [
+    ["Previous 5 days", "previous-days-5"],
+    ["Previous 7 days", "previous-days-7"],
+    ["Previous 14 days", "previous-days-14"],
+    ["Previous 30 days", "previous-days-30"],
+    ["Previous week", "previous-week"],
+    ["Previous month", "previous-month"],
+    ["Previous 3 months", "previous-months-3"],
+    ["Previous 6 months", "previous-months-6"],
+    ["Previous year", "previous-year"]
+];
+
+const NEXT_BUTTONS = [
+    ["Next 5 days", "next-days-5"],
+    ["Next 7 days", "next-days-7"],
+    ["Next 14 days", "next-days-14"],
+    ["Next 30 days", "next-days-30"],
+    ["Next week", "next-week"],
+    ["Next month", "next-month"],
+    ["Next 3 months", "next-months-3"],
+    ["Next 6 months", "next-months-6"],
+    ["Next year", "next-year"]
+];
+
+const presetButtons = (list, kind) =>
+    list.map(([label, id]) => `<button type="button" class="tt-inline-button" data-${kind}="${id}">${label}</button>`).join("\n                            ");
+
 export function markup() {
 
     return `
@@ -317,15 +349,35 @@ export function markup() {
                     <div class="date-presets" role="group" aria-labelledby="date-presets-label">
 
                         <p class="calculator-form__help" id="date-presets-label">
-                            Quick fill from today. Each button sets both dates; the gap is the number of days between them, so today to 6 days later is 6 days apart (7 if you count both end days). "Last 7 days" ends today and starts 6 days earlier, so it covers 7 calendar days counting both ends; "Last 30 days" covers 30 the same way.
+                            Quick fill from today, as your device reads it. Range buttons set both dates; the gap is the number of days between them, so today to 6 days later is 6 days apart (7 if you count both end days). "Previous 7 days" ends today and starts 6 days earlier, so it covers 7 calendar dates counting both ends; "Next 7 days" starts tomorrow. Weeks run Monday to Sunday, and months and years are complete calendar months and years.
                         </p>
 
-                        <button type="button" class="tt-inline-button" data-preset="last7">Last 7 days</button>
-                        <button type="button" class="tt-inline-button" data-preset="last30">Last 30 days</button>
-                        <button type="button" class="tt-inline-button" data-preset="6">Today to 6 days later</button>
-                        <button type="button" class="tt-inline-button" data-preset="7">Today to 7 days later</button>
-                        <button type="button" class="tt-inline-button" data-preset="30">Today to 30 days later</button>
-                        <button type="button" class="tt-inline-button" data-preset="month">1st of this month to today</button>
+                        <fieldset class="date-presets__group">
+                            <legend>Quick dates (one date)</legend>
+                            <div class="date-presets__target" role="radiogroup" aria-label="Fill which date">
+                                <label><input type="radio" name="date-quick-target" value="start" checked> Start date</label>
+                                <label><input type="radio" name="date-quick-target" value="end"> End date</label>
+                            </div>
+                            ${presetButtons(SINGLE_BUTTONS, "single")}
+                        </fieldset>
+
+                        <fieldset class="date-presets__group">
+                            <legend>Previous periods (both dates)</legend>
+                            ${presetButtons(PREVIOUS_BUTTONS, "range")}
+                        </fieldset>
+
+                        <fieldset class="date-presets__group">
+                            <legend>Future periods (both dates)</legend>
+                            ${presetButtons(NEXT_BUTTONS, "range")}
+                        </fieldset>
+
+                        <fieldset class="date-presets__group">
+                            <legend>From today (both dates)</legend>
+                            <button type="button" class="tt-inline-button" data-preset="6">Today to 6 days later</button>
+                            <button type="button" class="tt-inline-button" data-preset="7">Today to 7 days later</button>
+                            <button type="button" class="tt-inline-button" data-preset="30">Today to 30 days later</button>
+                            <button type="button" class="tt-inline-button" data-preset="month">1st of this month to today</button>
+                        </fieldset>
 
                     </div>
 
@@ -736,7 +788,17 @@ export function init() {
     /* a date is filled with today only when the button is pressed */
     wireTodayButtons(form);
 
-    /* a preset fills both fields from today's date on this device, only when pressed */
+    /* a preset fills from today's date on this device, only when pressed: a range button sets both fields, a quick date sets the one chosen */
+    const fill = (start, end) => {
+
+        if (start) inputs.start.value = isoOf(start);
+        if (end) inputs.end.value = isoOf(end);
+
+        inputs.start.dispatchEvent(new Event("input", { bubbles: true }));
+        inputs.end.dispatchEvent(new Event("change", { bubbles: true }));
+
+    };
+
     for (const button of form.querySelectorAll("[data-preset]")) {
 
         button.addEventListener("click", () => {
@@ -744,18 +806,39 @@ export function init() {
             const today = parseDate(todayIso(new Date())).date;
             const preset = button.dataset.preset;
 
-            const back = preset === "last7" ? 6 : preset === "last30" ? 29 : 0;
-            const isBack = back > 0;
-            const start = preset === "month" ? { ...today, day: 1 } : isBack ? addDays(today, -back) : today;
-            const end = preset === "month" || isBack ? today : addDays(today, Number(preset));
+            const start = preset === "month" ? { ...today, day: 1 } : today;
+            const end = preset === "month" ? today : addDays(today, Number(preset));
 
-            inputs.start.value = isoOf(start);
-            inputs.end.value = isoOf(end);
+            fill(start, end);
+            button.focus();
 
-            inputs.start.dispatchEvent(new Event("input", { bubbles: true }));
-            inputs.end.dispatchEvent(new Event("change", { bubbles: true }));
+        });
+
+    }
+
+    for (const button of form.querySelectorAll("[data-range]")) {
+
+        button.addEventListener("click", () => {
+
+            const range = presetRange(button.dataset.range, parseDate(todayIso(new Date())).date);
+
+            if (range) fill(range.start, range.end);
 
             button.focus();
+
+        });
+
+    }
+
+    for (const button of form.querySelectorAll("[data-single]")) {
+
+        button.addEventListener("click", () => {
+
+            const target = form.querySelector('input[name="date-quick-target"]:checked')?.value === "end" ? "end" : "start";
+            const date = addDays(parseDate(todayIso(new Date())).date, SINGLE_DATE_PRESETS[button.dataset.single]);
+
+            fill(target === "start" ? date : null, target === "end" ? date : null);
+            inputs[target].focus();
 
         });
 

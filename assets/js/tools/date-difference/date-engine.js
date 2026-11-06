@@ -255,3 +255,63 @@ export function dateText({ year, month, day }) {
     return `${day} ${MONTH_NAMES[month - 1]} ${year}`;
 
 }
+
+
+/* =========================================================
+   QUICK-FILL PRESETS
+   Pure: given today's calendar date (the visitor's own, read by the page), each preset returns the date or the range it stands for.
+   Definitions (the page says them in words):
+   - Previous N days: N calendar dates ending today, counting today. Next N days: N calendar dates beginning tomorrow.
+   - Previous / next week: the complete Monday to Sunday week before / after the current one.
+   - Previous / next month: the complete calendar month before / after the current one.
+   - Previous / next N months: the N complete calendar months immediately before / after the current month.
+   - Previous / next year: the complete calendar year before / after the current one.
+   A gap is counted as the calculator counts it (days between the two dates); counting both end days adds 1.
+========================================================= */
+
+export const SINGLE_DATE_PRESETS = Object.freeze({
+    today: 0,
+    yesterday: -1,
+    tomorrow: 1
+});
+
+const firstOfMonth = (today, offset) => addMonths({ year: today.year, month: today.month, day: 1 }, offset);
+const lastOfMonthsEnding = (today, offset) => addDays(firstOfMonth(today, offset), -1);
+
+/* Monday = 0 ... Sunday = 6 */
+const mondayIndex = ({ year, month, day }) => (new Date(Date.UTC(year, month - 1, day)).getUTCDay() + 6) % 7;
+
+/**
+ * The { start, end } of a range preset for `today`, or null for an unknown id. Ids: previous-days-N, next-days-N, previous-week, next-week,
+ * this-month, previous-month, next-month, previous-months-N, next-months-N, previous-year, next-year.
+ */
+export function presetRange(id, today) {
+
+    let match = /^previous-days-(\d+)$/.exec(id);
+    if (match) return { start: addDays(today, -(Number(match[1]) - 1)), end: today };
+
+    match = /^next-days-(\d+)$/.exec(id);
+    if (match) return { start: addDays(today, 1), end: addDays(today, Number(match[1])) };
+
+    const monday = addDays(today, -mondayIndex(today));
+
+    if (id === "this-month") return { start: firstOfMonth(today, 0), end: lastOfMonthsEnding(today, 1) };
+
+    if (id === "previous-week") return { start: addDays(monday, -7), end: addDays(monday, -1) };
+    if (id === "next-week") return { start: addDays(monday, 7), end: addDays(monday, 13) };
+
+    if (id === "previous-month") return { start: firstOfMonth(today, -1), end: lastOfMonthsEnding(today, 0) };
+    if (id === "next-month") return { start: firstOfMonth(today, 1), end: lastOfMonthsEnding(today, 2) };
+
+    match = /^previous-months-(\d+)$/.exec(id);
+    if (match) return { start: firstOfMonth(today, -Number(match[1])), end: lastOfMonthsEnding(today, 0) };
+
+    match = /^next-months-(\d+)$/.exec(id);
+    if (match) return { start: firstOfMonth(today, 1), end: lastOfMonthsEnding(today, 1 + Number(match[1])) };
+
+    if (id === "previous-year") return { start: { year: today.year - 1, month: 1, day: 1 }, end: { year: today.year - 1, month: 12, day: 31 } };
+    if (id === "next-year") return { start: { year: today.year + 1, month: 1, day: 1 }, end: { year: today.year + 1, month: 12, day: 31 } };
+
+    return null;
+
+}

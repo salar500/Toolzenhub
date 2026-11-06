@@ -116,3 +116,53 @@
     border: 0;
 
 }
+
+/* Quick-fill groups: quick dates, previous periods, future periods, from today */
+
+.date-presets__group {
+
+    display: flex;
+    flex: 0 0 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    min-width: 0;
+    margin: 6px 0 0;
+    padding: 10px 12px 12px;
+
+    border: 1px solid var(--line-control);
+    border-radius: 12px;
+
+}
+
+.date-presets__group > legend {
+
+    padding: 0 6px;
+
+    color: var(--ink-muted);
+
+    font-size: 13px;
+    font-weight: 700;
+
+}
+
+.date-presets__target {
+
+    display: flex;
+    flex: 0 0 100%;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+
+    font-size: 14px;
+
+}
+
+.date-presets__target label {
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    min-height: 32px;
+
+}

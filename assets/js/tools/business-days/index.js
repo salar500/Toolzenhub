@@ -35,7 +35,8 @@ import {
 import {
     DATE_LIMITS,
     parseDate,
-    dayNumber
+    dayNumber,
+    presetRange
 } from "../date-difference/date-engine.js";
 
 import {
@@ -65,7 +66,8 @@ import {
     createAnnouncer,
     wireCopy,
     wireTodayButtons,
-    todayButton
+    todayButton,
+    todayIso
 } from "../time-ui/time-ui.js";
 
 
@@ -233,6 +235,14 @@ ${introMarkup({
                                 <input type="checkbox" id="bd-include">
                                 <span>Also count the earlier date, when it is a business day</span>
                             </label>
+
+                            <div class="date-presets" role="group" aria-label="Quick ranges: set both dates">
+                                <button type="button" class="tt-inline-button" data-range="this-month">This month</button>
+                                <button type="button" class="tt-inline-button" data-range="previous-month">Previous month</button>
+                                <button type="button" class="tt-inline-button" data-range="next-month">Next month</button>
+                                <button type="button" class="tt-inline-button" data-range="previous-days-30">Previous 30 days</button>
+                                <button type="button" class="tt-inline-button" data-range="next-days-30">Next 30 days</button>
+                            </div>
 
                         </div>
 
@@ -616,6 +626,26 @@ export function init() {
     });
 
     wireTodayButtons(form);
+
+    /* quick ranges for the "count between two dates" mode: a complete month, or 30 days either side of today; they set both dates */
+    for (const button of form.querySelectorAll("[data-range]")) {
+
+        button.addEventListener("click", () => {
+
+            const range = presetRange(button.dataset.range, parseDate(todayIso(new Date())).date);
+            const iso = ({ year, month, day }) => `${String(year).padStart(4, "0")}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+            if (!range) return;
+
+            inputs.start.value = iso(range.start);
+            inputs.end.value = iso(range.end);
+            inputs.start.dispatchEvent(new Event("input", { bubbles: true }));
+            inputs.end.dispatchEvent(new Event("change", { bubbles: true }));
+            button.focus();
+
+        });
+
+    }
 
     document.getElementById("bd-reset")?.addEventListener(
         "click",

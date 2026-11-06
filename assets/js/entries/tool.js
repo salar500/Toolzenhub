@@ -14,6 +14,7 @@ import { renderFooter } from "../components/footer.js";
 import { renderToolError, renderToolNotFound } from "../pages/tool-messages.js";
 import { addJumpToResult } from "../ui/jump-link.js";
 import { initSectionRail } from "../ui/section-rail.js";
+import { watchDateFields } from "../ui/date-field.js";
 
 async function startTool() {
 
@@ -59,6 +60,8 @@ async function startTool() {
         }
 
         module.init(app);
+
+        watchDateFields(app); // a calendar button and "Use today" beside every date input, including ones drawn later
 
         if (source.includes("/calculators/")) {
             addJumpToResult(app);

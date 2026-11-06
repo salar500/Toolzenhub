@@ -1,0 +1,101 @@
+/* Calendar button and "Use today" next to every date input (assets/js/ui/date-field.js). */
+
+.date-field {
+
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+
+    max-width: 100%;
+
+}
+
+.date-field > input[type="date"] {
+
+    flex: 1 1 auto;
+    min-width: 0;
+
+}
+
+.date-field__button {
+
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 44px;
+    min-height: 44px;
+
+    border: 1px solid var(--line-control);
+    border-radius: 10px;
+
+    background: #ffffff;
+    color: var(--color-ink);
+
+    cursor: pointer;
+
+}
+
+.date-field__button:hover,
+.date-field__today:hover {
+
+    border-color: var(--color-action-green);
+    background: var(--color-action-green-soft);
+    color: var(--color-action-green-hover);
+
+}
+
+.date-field__button:focus-visible,
+.date-field__today:focus-visible {
+
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+
+}
+
+.date-field__actions {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 10px;
+
+}
+
+.date-field__today {
+
+    min-height: 44px;
+    padding: 0 14px;
+
+    border: 1px solid var(--line-control);
+    border-radius: 10px;
+
+    background: #ffffff;
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+/* One calendar icon, ours: the browser's small built-in one is hidden where it can be (Chrome, Edge, Safari). Firefox keeps its own, so our button is hidden there. */
+.date-field > input[type="date"]::-webkit-calendar-picker-indicator {
+
+    display: none;
+
+}
+
+@supports (-moz-appearance: none) {
+
+    .date-field__button {
+
+        display: none;
+
+    }
+
+}
