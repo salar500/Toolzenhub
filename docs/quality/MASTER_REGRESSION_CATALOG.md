@@ -62,6 +62,10 @@ Status key: AUTO = an automated spec covers it (matched by file and test name, n
 | 32 | Sidebar hide/show width, Back/Forward, refresh and search carry-over in all six ecosystems | AUTO | `sidebar-history.spec.js` |
 | 33 | Large files near their limits succeed (35 MP image, 55 MB merge, 20 files) | AUTO | `large-files-near-limits.spec.js` |
 | 34 | EMI, FD and GST sliders agree with typed values; FD and GST independent numbers | AUTO | `slider-calculation.spec.js` |
+| 35 | Sidebar groups expand and collapse; the current group is open; search opens matching groups; phone drawer opens, closes (button, backdrop, Escape) and keeps typed values | AUTO | `section-switcher.spec.js` |
+| 36 | Date Difference grouped quick dates and previous and future period presets (boundaries: month, year, leap day, Monday to Sunday weeks) | AUTO | `date-difference-presets.spec.js, date-difference-presets.test.mjs` |
+| 37 | Calendar button and Use today on every date input; Use today is the local date; not offered for birth or joining dates; Business Days quick ranges | AUTO | `date-fields.spec.js` |
+| 38 | Home hero (call to action, inline illustration, no external request), six ecosystem cards, one logo mark in header, footer and favicon | AUTO | `home-brand.spec.js` |
 
 ## Maintenance
 

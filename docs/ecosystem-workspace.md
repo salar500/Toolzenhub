@@ -242,3 +242,20 @@ The ready time of the 35 MP image includes making the file in the page, so it ov
 What each case asserts: the input is in the stated size range; the preview shows and reports the right dimensions; the download opens as the right format with the right dimensions (images, read back from the file) or the right page count (PDFs, read back with the strict reader); there is no sideways scroll with the large file chosen and again with the result shown; Reset returns the tool to its empty state and hides the download. All 10 runs (5 on each project) passed and no defect was found.
 
 What these numbers do and do not say. The heap does not fall after Reset: a freshly emptied tool keeps the figure it had, until the browser collects it, so these runs show that Reset empties the tool, not that it frees memory at once. A 24 MP image is 96 MB once decoded (24 million pixels at 4 bytes each, calculated, not measured), held by the browser outside this figure. The slowest step seen is choosing the two 13.7 MB PDFs (9 to 12 s to ready); that time includes the test runner handing 27 MB to the page, so it overstates what a visitor waits; the 50 MB and 20-file PDF limits were not run at their limits; for images the configured limits are 25 MB and 40 MP, and the refusal inputs were 26 MB and 50 MP (`image-compressor-resizer.spec.js`, `large-files-workspace.spec.js`), so a success at 25 MB or 40 MP is not claimed. The inputs above are test inputs (9 to 15 MB, 4.5 to 24 MP), not limits. The machine has 4 GB, so a visitor's device with less memory was not simulated.
+
+## 11. Master plan outcome (2026-11-06)
+
+Audit first: the six ecosystems, the registry-driven sidebar (desktop column from 1000 px, phone drawer below) and the Date Difference quick fill already existed; the gaps were (1) category groups that could not collapse, (2) no calendar button or consistent "Use today" across date inputs, (3) a short list of date presets, (4) a favicon that did not match the header logo and a text-only home hero.
+
+| Item | Built |
+|---|---|
+| Six ecosystems, six sidebars | unchanged structure: each tool page lists only its own section's live tools, from the catalog (`getToolsBySection`) and `SECTION_GROUPS`; Practice Labs is its own section with its own groups |
+| Collapsible groups | each group is a button with `aria-expanded` and `aria-controls` and a count; the Calculators' seven categories start closed except the current one; the other sections keep their groups open; search opens matching groups; no empty "More" category is invented |
+| Desktop and phone | unchanged from 2026-11-05 and 2026-11-06: column beside the tool from 1000 px with Hide and Show, drawer below |
+| Dates | `ui/date-field.js` (calendar button, Use today), grouped Date Difference presets, Business Days quick ranges |
+| Brand | `ui/logo.js` shared by header and footer, `/favicon.svg` and PNG icons redrawn from the same geometry |
+| Home | hero with call to action and `components/hero-art.js` |
+
+Tools that were not given preset ranges (deliberately): Date Calculator (add or subtract from one date), Countdown, Meeting Planner, Shift Planner, Time Zone Converter, Age, Gratuity, XIRR. They get the calendar button, and "Use today" where a date of today makes sense.
+
+Not done, by design: no tool is loaded into the page without navigation (the site stays a set of plain pages, so direct URLs, refresh and Back and Forward are the browser's own); "Practice Labs" lesson navigation is the lab's own list (D7), not a second list in the sidebar.
