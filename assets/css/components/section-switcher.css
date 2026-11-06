@@ -339,3 +339,58 @@
     }
 
 }
+
+/* Phones and narrow windows (assets/js/ui/section-rail.js): the same list opens as a drawer from the left over a dimmed page, so the tool keeps the
+   screen. "More <section>" opens it; "Close tools", the dimmed area, Escape or choosing a tool closes it. Without script it stays the inline disclosure. */
+@media (max-width: 999.98px) {
+
+    .section-switcher.is-drawer details[open] {
+
+        position: fixed;
+        inset: 0 auto 0 0;
+        z-index: 1001;
+
+        box-sizing: border-box;
+        width: min(88vw, 340px);
+        padding: 12px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+
+        background: #ffffff;
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25);
+
+    }
+
+    .section-switcher.is-drawer details[open] .section-rail__hide {
+
+        display: block;
+        width: 100%;
+        margin: 0 0 10px;
+
+    }
+
+    .section-switcher.is-drawer details[open] .section-switcher__list {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .section-rail__backdrop {
+
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+
+        border: 0;
+
+        background: rgba(0, 0, 0, 0.45);
+
+    }
+
+    .section-rail__backdrop[hidden] {
+
+        display: none;
+
+    }
+
+}

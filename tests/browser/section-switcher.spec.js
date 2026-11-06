@@ -57,6 +57,8 @@ test.describe("section switcher", () => {
     await page.keyboard.press("Enter");
     await expect(page.locator(".section-switcher details")).toHaveAttribute("open", "");
     await page.keyboard.press("Tab");
+    await expect(page.locator(".section-switcher").getByRole("button", { name: "Close tools" })).toBeFocused(); // the drawer's close button comes first
+    await page.keyboard.press("Tab");
     await expect(page.locator(".section-switcher a").first()).toBeFocused();
   });
 
@@ -222,7 +224,7 @@ test.describe("section switcher", () => {
       await expect(page.getByRole("button", { name: "Show Developer Tools" })).toBeFocused();
     });
 
-    test("narrow screen: no Hide or Show buttons; the disclosure opens a searchable list that fits the screen", async ({ page, go }) => {
+    test("narrow screen: no Show button; the disclosure opens a searchable drawer that fits the screen", async ({ page, go }) => {
       await page.setViewportSize({ width: 390, height: 800 });
       await go("calculators/emi/");
       await expect(rail(page).getByRole("button", { name: "Hide tools" })).toBeHidden();
@@ -231,6 +233,51 @@ test.describe("section switcher", () => {
       await page.getByLabel("Find a tool in Calculators").fill("bmi");
       await expect(rail(page).locator(".section-switcher__list ul li:not([hidden]) a")).toHaveCount(1);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    });
+
+    test("narrow screen: the drawer opens over a dimmed page, closes with Close tools, the dimmed area and Escape, and keeps what was typed", async ({ page, go }) => {
+      await page.setViewportSize({ width: 390, height: 800 });
+      await go("calculators/emi/");
+      const field = page.locator("input[type=number]").first();
+      await field.fill("777777");
+      const summary = rail(page).locator("summary");
+      const close = rail(page).getByRole("button", { name: "Close tools" });
+      const backdrop = page.locator(".section-rail__backdrop");
+
+      await summary.click();
+      await expect(close).toBeVisible();
+      await expect(backdrop).toBeVisible();
+      const box = await rail(page).locator("details").boundingBox();
+      expect(box.x).toBe(0);
+      expect(box.width).toBeLessThanOrEqual(341);
+      expect(box.height).toBeGreaterThan(700);
+
+      await close.click();
+      await expect(close).toBeHidden();
+      await expect(backdrop).toBeHidden();
+      await expect(summary).toBeFocused();
+
+      await summary.click(); // reopen
+      await expect(close).toBeVisible();
+      await backdrop.click({ position: { x: 370, y: 400 } });
+      await expect(close).toBeHidden();
+
+      await summary.click();
+      await page.keyboard.press("Escape");
+      await expect(close).toBeHidden();
+
+      await expect(field).toHaveValue("777777");
+    });
+
+    test("narrow screen: resizing to a wide window turns the drawer into the open sidebar", async ({ page, go }) => {
+      await page.setViewportSize({ width: 390, height: 800 });
+      await go("calculators/emi/");
+      await rail(page).locator("summary").click();
+      await page.setViewportSize({ width: 1280, height: 800 });
+      await expect(page.locator(".section-rail__backdrop")).toBeHidden();
+      await expect(rail(page).getByRole("button", { name: "Hide tools" })).toBeVisible();
+      const box = await rail(page).boundingBox();
+      expect(box.width).toBeLessThanOrEqual(262);
     });
 
   });

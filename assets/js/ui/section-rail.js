@@ -8,8 +8,8 @@
    - Wide screens (WIDE, 1000px and up): it is held open as a left column beside the tool, open by default, with a search box and a
      "Hide tools" button. Hidden, it takes no width: the tool gets the whole row and a "Show tools" button above it brings the list
      back. Hiding only hides; the tool, its fields and its results are not touched, and nothing is stored, so every visit starts open.
-   - Narrower screens: the closed disclosure ("More <section>"), which opens to the same searchable list over the page, so the tool keeps
-     the screen.
+   - Narrower screens: the closed disclosure ("More <section>"), which opens as a drawer from the left over a dimmed page with the same
+     searchable list and a "Close tools" button, so the tool keeps the screen. Nothing is stored; the tool is not reloaded or touched.
 
    Without script it stays a closed disclosure of ordinary links, so nothing depends on this file.
 ========================================================= */
@@ -126,8 +126,16 @@ export function initSectionRail(root = document) {
     };
 
     hide.addEventListener("click", () => {
+
+        if (!wide.matches) {
+            details.open = false; // narrow: the button closes the drawer
+            summary?.focus();
+            return;
+        }
+
         setCollapsed(true);
         show.focus();
+
     });
 
     show.addEventListener("click", () => {
@@ -145,10 +153,34 @@ export function initSectionRail(root = document) {
 
     });
 
+    /* ---------- drawer (narrow screens) ---------- */
+
+    const hideLabel = hide.textContent;
+    const backdrop = element("button", { type: "button", class: "section-rail__backdrop", tabindex: "-1", "aria-hidden": "true", hidden: "" });
+
+    nav.after(backdrop);
+    backdrop.addEventListener("click", () => { details.open = false; summary?.focus(); });
+
+    details.addEventListener("toggle", () => {
+        backdrop.hidden = wide.matches || !details.open;
+    });
+
+    document.addEventListener("keydown", event => {
+
+        if (event.key === "Escape" && !wide.matches && details.open && !(event.target === search && search.value !== "")) {
+            details.open = false;
+            summary?.focus();
+        }
+
+    });
+
     /* held open, the heading is not a control: it leaves the tab order so keyboard users do not land on a dead stop */
     const apply = () => {
 
         details.open = wide.matches;
+        nav.classList.toggle("is-drawer", !wide.matches);
+        hide.textContent = wide.matches ? hideLabel : "Close tools";
+        backdrop.hidden = true;
 
         if (wide.matches) {
             summary?.setAttribute("tabindex", "-1");
