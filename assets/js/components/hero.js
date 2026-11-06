@@ -5,6 +5,7 @@
 
 import { ROUTES } from "../routes.js";
 import { iconSvg } from "../ui/icons.js";
+import { heroArt } from "./hero-art.js";
 
 
 export function renderHero() {
@@ -68,6 +69,19 @@ export function renderHero() {
                         </p>
 
 
+                        <div class="hero__actions">
+
+                            <a class="btn btn-primary hero__cta" href="${ROUTES.tools}">
+                                Browse all tools
+                            </a>
+
+                            <a class="btn hero__cta hero__cta--secondary" href="${ROUTES.calculators}">
+                                Explore calculators
+                            </a>
+
+                        </div>
+
+
                         <!-- =================================
                              Calculator Search
                         ================================== -->
@@ -114,6 +128,10 @@ export function renderHero() {
                             aria-live="polite"
                         ></div>
 
+                    </div>
+
+                    <div class="hero__visual">
+                        ${heroArt()}
                     </div>
 
                 </div>

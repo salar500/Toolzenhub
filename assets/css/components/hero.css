@@ -766,3 +766,85 @@
         padding-bottom: 64px;
     }
 }
+
+
+/* =========================================================
+   Hero with illustration (2026-11-06)
+   Wide screens: the text on the left, the workspace illustration on the right. Narrow screens: one column, the illustration below, smaller.
+   This block comes last so it wins over the compact text-led rules above.
+========================================================= */
+
+.hero__background {
+    display: block;
+}
+
+.hero__visual {
+    display: flex;
+    justify-content: center;
+    min-height: 0;
+    margin-top: 28px;
+}
+
+.hero-art {
+    display: block;
+    width: min(100%, 420px);
+    height: auto;
+}
+
+.hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 0 0 20px;
+}
+
+.hero__cta {
+    min-height: 48px;
+}
+
+.hero__cta--secondary {
+    border: 1px solid var(--line-control);
+    background: #ffffff;
+    color: var(--color-ink);
+}
+
+.hero__cta--secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+@media (min-width: 960px) {
+
+    .hero__grid {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        align-items: center;
+        gap: clamp(24px, 4vw, 56px);
+    }
+
+    .hero__content,
+    .hero__title,
+    .hero__description {
+        max-width: none;
+    }
+
+    .hero__description {
+        max-width: 560px;
+    }
+
+    .hero__visual {
+        margin-top: 0;
+    }
+
+    .hero-art {
+        width: min(100%, 520px);
+    }
+
+}
+
+@media (max-width: 420px) {
+
+    .hero__actions .btn {
+        flex: 1 1 100%;
+    }
+
+}

@@ -4,6 +4,7 @@
 ========================================================= */
 
 import { ROUTES } from "../routes.js";
+import { logoMark } from "../ui/logo.js";
 
 
 /* =========================================================
@@ -78,15 +79,7 @@ export function headerMarkup() {
                 >
 
                     <span class="brand-logo" aria-hidden="true">
-                        <svg viewBox="0 0 100 100" focusable="false">
-                            <rect width="100" height="100" rx="22" fill="#1c1917"/>
-                            <g fill="#fff">
-                                <rect x="20" y="20" width="28" height="28" rx="7"/>
-                                <rect x="20" y="52" width="28" height="28" rx="7"/>
-                                <rect x="52" y="52" width="28" height="28" rx="7"/>
-                            </g>
-                            <rect x="56.5" y="24.5" width="19" height="19" rx="4.5" transform="rotate(45 66 34)" fill="#a5b4fc"/>
-                        </svg>
+                        ${logoMark()}
                     </span>
 
 
