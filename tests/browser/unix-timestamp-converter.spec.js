@@ -556,9 +556,9 @@ test.describe("Developer Tools in the site", () => {
 
   test("the JSON Formatter and the converter link each other, and no Time Tool links to either", async ({ page, go }) => {
     await go("tools/json-formatter/");
-    await expect(page.locator('main a[href$="tools/unix-timestamp-converter/"]').first()).toBeVisible(); // a card in the related section
+    await expect(page.locator('main a[href$="tools/unix-timestamp-converter/"]:not(nav.section-switcher a)').first()).toBeVisible(); // a card in the related section
     await go("tools/unix-timestamp-converter/");
-    await expect(page.locator('main a[href$="tools/json-formatter/"]').first()).toBeVisible();
+    await expect(page.locator('main a[href$="tools/json-formatter/"]:not(nav.section-switcher a)').first()).toBeVisible();
     for (const slug of ["date-difference", "date-calculator", "countdown-timer", "stopwatch"]) {
       await go(`tools/${slug}/`);
       await expect(page.locator('main a[href$="tools/unix-timestamp-converter/"], main a[href$="tools/json-formatter/"]')).toHaveCount(0);
