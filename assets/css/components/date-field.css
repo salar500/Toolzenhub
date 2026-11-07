@@ -1,43 +1,58 @@
-/* Calendar button and "Use today" next to every date input (assets/js/ui/date-field.js). */
+/* Calendar button and "Use today" next to every date input (assets/js/ui/date-field.js). The calendar button sits inside the field, at its right
+   edge, and the field keeps room for it so the date never runs under the icon; every date field is the same height. */
 
 .date-field {
 
-    display: flex;
-    align-items: stretch;
-    gap: 8px;
+    position: relative;
 
+    display: block;
     max-width: 100%;
 
 }
 
 .date-field > input[type="date"] {
 
-    flex: 1 1 auto;
+    box-sizing: border-box;
+    width: 100%;
     min-width: 0;
+    height: 48px;
+    min-height: 48px;
+
+    padding-right: 52px;
 
 }
 
 .date-field__button {
 
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    bottom: 2px;
+
     display: inline-flex;
-    flex: 0 0 auto;
     align-items: center;
     justify-content: center;
 
-    min-width: 44px;
-    min-height: 44px;
+    width: 44px;
+    padding: 0;
 
-    border: 1px solid var(--line-control);
-    border-radius: 10px;
+    border: 0;
+    border-radius: 8px;
 
-    background: #ffffff;
-    color: var(--color-ink);
+    background: transparent;
+    color: var(--ink-muted);
 
     cursor: pointer;
 
 }
 
-.date-field__button:hover,
+.date-field__button:hover {
+
+    background: var(--color-action-green-soft);
+    color: var(--color-action-green-hover);
+
+}
+
 .date-field__today:hover {
 
     border-color: var(--color-action-green);
@@ -95,6 +110,12 @@
     .date-field__button {
 
         display: none;
+
+    }
+
+    .date-field > input[type="date"] {
+
+        padding-right: 12px;
 
     }
 
