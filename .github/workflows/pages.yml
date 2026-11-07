@@ -6,9 +6,13 @@
 # One-time repository setting: Settings -> Pages -> Build and deployment -> Source: GitHub Actions.
 name: Deploy GitHub Pages preview
 
+# The preview site is ONE site (https://salar500.github.io/Toolzenhub/): whichever listed branch was pushed last is what it shows. main is the
+# normal source; the development branch is listed while a development cycle is under visual review, and is removed again when it is merged.
+# The github-pages environment must also allow the branch (Settings -> Environments -> github-pages -> Deployment branches), or the deploy step is
+# refused. Neither branch touches Hostinger (toolzenhub.in), which is uploaded by hand.
 on:
   push:
-    branches: [main]
+    branches: [main, feature/unified-ecosystem-workspace]
   workflow_dispatch:
 
 permissions:
