@@ -5,7 +5,8 @@
    The "More <section>" navigation is built at site-build time as a closed disclosure of plain links (components/section-switcher.js).
    This script turns it into the sidebar:
 
-   - Wide screens (WIDE, 1000px and up): it is held open as a left column beside the tool, open by default, with a search box and a
+   - Wide screens (WIDE, see nav-mode.js: a layout of 1000px and up on a device with a fine pointer or a screen that wide, so not a phone
+     in "Desktop site" mode): it is held open as a left column beside the tool, open by default, with a search box and a
      "Hide tools" button. Hidden, it takes no width: the tool gets the whole row and a "Show tools" button above it brings the list
      back. Hiding only hides; the tool, its fields and its results are not touched, and nothing is stored, so every visit starts open.
    - Narrower screens: the closed disclosure ("More <section>"), which opens as a drawer from the left over a dimmed page with the same
@@ -15,8 +16,9 @@
 ========================================================= */
 
 import { initWorkspaceNav } from "./workspace-nav.js";
+import { WIDE, drawerZoom } from "./nav-mode.js";
 
-export const WIDE = "(min-width: 1000px)";
+export { WIDE };
 export const SEARCH_MIN_TOOLS = 8;
 
 /**
@@ -230,6 +232,7 @@ export function initSectionRail(root = document) {
 
         details.open = wide.matches;
         nav.classList.toggle("is-drawer", !wide.matches);
+        nav.style.setProperty("--rail-zoom", String(drawerZoom(window.innerWidth, window.screen?.width, wide.matches)));
         hide.textContent = wide.matches ? hideLabel : "Close tools";
         backdrop.hidden = true;
 
@@ -243,6 +246,11 @@ export function initSectionRail(root = document) {
     };
 
     wide.addEventListener("change", apply);
+
+    /* the drawer's size follows the page's zoom when the screen turns (a phone in Desktop site mode) */
+    window.addEventListener("resize", () => {
+        nav.style.setProperty("--rail-zoom", String(drawerZoom(window.innerWidth, window.screen?.width, wide.matches)));
+    });
 
     apply();
 

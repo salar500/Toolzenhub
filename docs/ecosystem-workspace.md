@@ -288,3 +288,4 @@ Why: sections 6 and 12 made the sidebar present on every ecosystem page, but eac
 | URLs and SEO | unchanged: every page is still a full static page; the address, title, description, canonical, Open Graph and JSON-LD follow the page shown; Back, Forward, refresh, direct and shared links work; crawlers and no-script visitors see the full pages |
 | Fallback to a normal navigation | modified clicks, other ecosystems, `/categories.html`, `/loans.html`, `/calculators.html` (client-rendered by their own scripts), any fetch or swap failure |
 | Not stored | nothing is saved to make this work |
+| Sidebar or drawer | decided by `ui/nav-mode.js` (`WIDE`, `drawerZoom`), mirrored in `section-switcher.css`: layout width >= 1000 px and (fine pointer or screen >= 1000 px) gives the sidebar; anything else the drawer. A phone in "Desktop site" mode gets the drawer, scaled by layout width / screen width (max 4) so it fills about 83% of the screen |

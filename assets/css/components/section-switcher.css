@@ -225,7 +225,7 @@
 /* Wide screens (assets/js/ui/section-rail.js keeps the list open): the list is a sidebar beside the tool, open by default.
    The tool takes every pixel the sidebar does not: the page is as wide as the window allows, and hiding the sidebar gives its column back.
    Scoped to pages that have one, so nothing else changes; below this width it stays the closed disclosure. */
-@media (min-width: 1000px) {
+@media (min-width: 1000px) and (pointer: fine), (min-width: 1000px) and (min-device-width: 1000px) {
 
     .calculator-page:has(> .section-switcher),
     .ecosystem-layout:has(> .section-switcher) {
@@ -346,9 +346,10 @@
 
 }
 
-/* Phones and narrow windows (assets/js/ui/section-rail.js): the same list opens as a drawer from the left over a dimmed page, so the tool keeps the
+/* Phones and narrow windows, including a phone with "Desktop site" on (the screen is narrow and the pointer is a finger, whatever width the
+   browser lays the page out at; see assets/js/ui/nav-mode.js, which holds the same conditions): the same list opens as a drawer from the left over a dimmed page, so the tool keeps the
    screen. "More <section>" opens it; "Close tools", the dimmed area, Escape or choosing a tool closes it. Without script it stays the inline disclosure. */
-@media (max-width: 999.98px) {
+@media (max-width: 999.98px), (min-width: 1000px) and (pointer: coarse) and (max-device-width: 999.98px) {
 
     .section-switcher.is-drawer details[open] {
 
@@ -357,8 +358,12 @@
         z-index: 1001;
 
         box-sizing: border-box;
-        width: min(88vw, 340px);
+        width: min(calc(88vw / var(--rail-zoom, 1)), 340px);
         padding: 12px;
+
+        /* 1 on a normal screen. On a phone showing the whole desktop page zoomed out ("Desktop site") the drawer is drawn larger by the same
+           factor (assets/js/ui/nav-mode.js) so it fills most of the screen and can be read */
+        zoom: var(--rail-zoom, 1);
         overflow-y: auto;
         overscroll-behavior: contain;
 
@@ -506,7 +511,7 @@
 
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1000px) and (pointer: fine), (min-width: 1000px) and (min-device-width: 1000px) {
 
     /* inside a .container the layout fills it; directly in <main> (All Calculators) it takes the tool-page width */
     .ecosystem-layout:has(> .section-switcher) {

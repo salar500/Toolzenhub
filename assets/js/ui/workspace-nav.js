@@ -22,9 +22,9 @@
 ========================================================= */
 
 import { releaseToolScope } from "./tool-scope.js";
+import { WIDE } from "./nav-mode.js";
 
 const LAYOUT = "[data-section-page], .calculator-page";
-const WIDE = "(min-width: 1000px)";
 const STYLE_TIMEOUT_MS = 6000;
 
 const supported =
