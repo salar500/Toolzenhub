@@ -31,3 +31,20 @@ export function drawerZoom(layoutWidth, screenWidth, wide) {
     return Math.min(4, Math.round((layoutWidth / screenWidth) * 100) / 100);
 
 }
+
+/**
+ * The drawer's width in real screen pixels: the screen less a strip of the page (so the page stays visible behind it and tapping it closes
+ * the drawer), at most 300 and at least 240. `visibleWidth` is the narrower of the layout width and the screen width, because a phone
+ * showing a wide desktop layout is as wide as its screen. Pure given the numbers.
+ */
+export function drawerWidth(layoutWidth, screenWidth) {
+
+    const visible = Math.min(layoutWidth > 0 ? layoutWidth : Infinity, screenWidth > 0 ? screenWidth : Infinity);
+
+    if (!Number.isFinite(visible)) {
+        return 300;
+    }
+
+    return Math.round(Math.max(240, Math.min(300, visible - 72)));
+
+}

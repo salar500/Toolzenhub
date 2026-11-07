@@ -16,7 +16,7 @@
 ========================================================= */
 
 import { initWorkspaceNav } from "./workspace-nav.js";
-import { WIDE, drawerZoom } from "./nav-mode.js";
+import { WIDE, drawerZoom, drawerWidth } from "./nav-mode.js";
 
 export { WIDE };
 export const SEARCH_MIN_TOOLS = 8;
@@ -238,12 +238,17 @@ export function initSectionRail(root = document) {
 
     });
 
+    const sizeDrawer = () => {
+        nav.style.setProperty("--rail-zoom", String(drawerZoom(window.innerWidth, window.screen?.width, wide.matches)));
+        nav.style.setProperty("--rail-w", String(drawerWidth(window.innerWidth, window.screen?.width)));
+    };
+
     /* held open, the heading is not a control: it leaves the tab order so keyboard users do not land on a dead stop */
     const apply = () => {
 
         details.open = wide.matches;
         nav.classList.toggle("is-drawer", !wide.matches);
-        nav.style.setProperty("--rail-zoom", String(drawerZoom(window.innerWidth, window.screen?.width, wide.matches)));
+        sizeDrawer();
         hide.textContent = wide.matches ? hideLabel : "Close tools";
         backdrop.hidden = true;
 
@@ -259,9 +264,7 @@ export function initSectionRail(root = document) {
     wide.addEventListener("change", apply);
 
     /* the drawer's size follows the page's zoom when the screen turns (a phone in Desktop site mode) */
-    window.addEventListener("resize", () => {
-        nav.style.setProperty("--rail-zoom", String(drawerZoom(window.innerWidth, window.screen?.width, wide.matches)));
-    });
+    window.addEventListener("resize", sizeDrawer);
 
     apply();
 
