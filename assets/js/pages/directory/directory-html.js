@@ -17,6 +17,7 @@
 ========================================================= */
 
 import { iconSvg } from "../../ui/icons.js";
+import { renderSectionNav } from "../../components/section-switcher.js";
 import {
     ROUTES
 } from "../../routes.js";
@@ -367,6 +368,34 @@ export function allToolsHtml() {
  * route is not an older hand-written page (Loans).
  */
 
+/* =========================================================
+   ECOSYSTEM WORKSPACE
+
+   The sidebar of the ecosystem on the left, the page content on the right (rulebook 4.8). The sidebar is the same build-time list a
+   tool page carries (components/section-switcher.js), so a visitor can move from the ecosystem or category page to any tool of it
+   and between tools without coming back here. A page whose section has fewer than two live tools gets the content alone.
+========================================================= */
+
+function workspaceOpen(sectionId, currentCategoryId = null) {
+
+    const nav = renderSectionNav({ sectionId, currentCategoryId });
+
+    return nav
+        ? `<div class="ecosystem-layout" data-section-page>
+                ${nav}
+                <div class="ecosystem-main">`
+        : "";
+
+}
+
+function workspaceClose(sectionId) {
+
+    return renderSectionNav({ sectionId }) ? `</div>
+            </div>` : "";
+
+}
+
+
 export function categoryPageIds() {
 
     return sections.flatMap(
@@ -398,12 +427,14 @@ export function categoryPageHtml(categoryId) {
 
         <section class="categories-page directory-page">
 
-            <div class="container">
+            <div class="container container--workspace">
 
                 ${renderBreadcrumb([
                     { label: section.title, href: ROUTES[section.landing] },
                     { label: category.title }
                 ])}
+
+                ${workspaceOpen(section.id, categoryId)}
 
                 <div class="categories-page__intro">
 
@@ -430,6 +461,8 @@ export function categoryPageHtml(categoryId) {
                 <p class="directory-section__more">
                     <a href="${ROUTES.categories}">← All calculator categories</a>
                 </p>
+
+                ${workspaceClose(section.id)}
 
             </div>
 
@@ -480,12 +513,14 @@ export function sectionPageHtml(sectionId) {
 
         <section class="categories-page directory-page">
 
-            <div class="container">
+            <div class="container container--workspace">
 
                 ${renderBreadcrumb([
                     { label: "All Tools", href: ROUTES.tools },
                     { label: section.title }
                 ])}
+
+                ${workspaceOpen(section.id)}
 
                 <div class="categories-page__intro">
 
@@ -514,6 +549,8 @@ export function sectionPageHtml(sectionId) {
                 <p class="directory-section__more">
                     <a href="${ROUTES.tools}">← All tools</a>
                 </p>
+
+                ${workspaceClose(section.id)}
 
             </div>
 
@@ -564,12 +601,14 @@ export function practiceLabsHtml() {
 
         <section class="categories-page directory-page">
 
-            <div class="container">
+            <div class="container container--workspace">
 
                 ${renderBreadcrumb([
                     { label: "All Tools", href: ROUTES.tools },
                     { label: "Practice Labs" }
                 ])}
+
+                ${workspaceOpen("practice-labs")}
 
                 <div class="categories-page__intro">
 
@@ -594,6 +633,8 @@ export function practiceLabsHtml() {
                 <p class="directory-section__more">
                     <a href="${ROUTES.tools}">All Tools →</a>
                 </p>
+
+                ${workspaceClose("practice-labs")}
 
             </div>
 

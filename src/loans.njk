@@ -23,6 +23,7 @@ styles:
   - "/assets/css/components/footer.css"
   - "/assets/css/themes/light.css"
   - "/assets/css/pages/loans.css"
+  - "/assets/css/components/section-switcher.css"
   - "/assets/css/components/search-field.css"
 scripts:
   - "/assets/js/pages/loans.js"
@@ -33,6 +34,10 @@ clientRendered: true
     ====================================================== -->
 
     <main id="app">
+
+        <div class="ecosystem-layout" data-section-page>
+        {% sectionNav "calculators", "loans" %}
+        <div class="ecosystem-main">
 
 
         <!-- =================================================
@@ -321,6 +326,9 @@ clientRendered: true
             </div>
 
         </section>
+
+        </div>
+        </div>
 
     </main>
 

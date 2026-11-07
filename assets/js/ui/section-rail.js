@@ -1,6 +1,6 @@
 /* =========================================================
    ToolZen Hub
-   Section rail (tool pages): the sidebar of a tool's section
+   Section rail: the sidebar of an ecosystem (tool pages, category pages and the section's own page)
 
    The "More <section>" navigation is built at site-build time as a closed disclosure of plain links (components/section-switcher.js).
    This script turns it into the sidebar:
@@ -52,7 +52,7 @@ export function initSectionRail(root = document) {
 
     const nav = root.querySelector(".section-switcher");
     const details = nav?.querySelector("details");
-    const page = nav?.closest(".calculator-page");
+    const page = nav?.closest("[data-section-page], .calculator-page");
 
     if (!details || !page || typeof window.matchMedia !== "function") {
         return;

@@ -23,6 +23,7 @@ styles:
   - "/assets/css/components/footer.css"
   - "/assets/css/themes/light.css"
   - "/assets/css/pages/categories.css"
+  - "/assets/css/components/section-switcher.css"
   - "/assets/css/components/search-field.css"
 scripts:
   - "/assets/js/app.js"
@@ -36,7 +37,7 @@ clientRendered: true
 
         <section class="categories-page">
 
-            <div class="container">
+            <div class="container container--workspace">
 
 
                 <!-- =================================================
@@ -47,6 +48,11 @@ clientRendered: true
                     id="categories-breadcrumb"
                     class="categories-breadcrumb"
                 ></div>
+
+
+                <div class="ecosystem-layout" data-section-page>
+                {% sectionNav "calculators" %}
+                <div class="ecosystem-main">
 
 
                 <!-- =================================================
@@ -160,6 +166,9 @@ clientRendered: true
                 ================================================== -->
 
                 <div id="categories-sections"></div>
+
+                </div>
+                </div>
 
             </div>
 

@@ -6,6 +6,7 @@
 import { renderHeader } from "../components/header.js";
 import { renderFooter } from "../components/footer.js";
 import { markPageReady } from "../utils/page-ready.js";
+import { initSectionRail } from "../ui/section-rail.js";
 
 import {
     getCalculators,
@@ -401,6 +402,8 @@ function initializeCalculatorsPage() {
     renderHeader();
 
     renderFooter();
+
+    initSectionRail();
 
 
     /* =====================================================

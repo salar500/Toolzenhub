@@ -227,7 +227,8 @@
    Scoped to pages that have one, so nothing else changes; below this width it stays the closed disclosure. */
 @media (min-width: 1000px) {
 
-    .calculator-page:has(> .section-switcher) {
+    .calculator-page:has(> .section-switcher),
+    .ecosystem-layout:has(> .section-switcher) {
 
         display: grid;
         grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
@@ -239,7 +240,8 @@
 
     }
 
-    .calculator-page:has(> .section-switcher) > * {
+    .calculator-page:has(> .section-switcher) > *,
+    .ecosystem-layout:has(> .section-switcher) > * {
 
         grid-column: 2;
         min-width: 0;
@@ -252,7 +254,8 @@
 
     }
 
-    .calculator-page > .section-switcher {
+    .calculator-page > .section-switcher,
+    .ecosystem-layout > .section-switcher {
 
         grid-column: 1;
         grid-row: 2 / span 60;
@@ -268,7 +271,8 @@
     }
 
     /* the heading of the sidebar, not a button: its job on a wide screen is to name the section */
-    .calculator-page > .section-switcher summary {
+    .calculator-page > .section-switcher summary,
+    .ecosystem-layout > .section-switcher summary {
 
         width: 100%;
         min-height: 0;
@@ -326,13 +330,15 @@
     }
 
     /* Hidden: no empty column, everything in one. */
-    .calculator-page.is-rail-collapsed:has(> .section-switcher) {
+    .calculator-page.is-rail-collapsed:has(> .section-switcher),
+    .ecosystem-layout.is-rail-collapsed:has(> .section-switcher) {
 
         grid-template-columns: minmax(0, 1fr);
 
     }
 
-    .calculator-page.is-rail-collapsed:has(> .section-switcher) > * {
+    .calculator-page.is-rail-collapsed:has(> .section-switcher) > *,
+    .ecosystem-layout.is-rail-collapsed:has(> .section-switcher) > * {
 
         grid-column: 1;
 
@@ -478,5 +484,106 @@
 .section-switcher__group > ul[hidden] {
 
     display: none;
+
+}
+
+
+/* ---------------------------------------------------------
+   Ecosystem pages (the section's own page and its category pages): the same sidebar beside the page content.
+   The wrapper is .ecosystem-layout (assets/js/pages/directory/directory-html.js, src/categories.njk, src/calculators-index.njk); the
+   page content sits in .ecosystem-main. The grid, sticky column, Hide/Show and drawer rules above apply to it as to a tool page.
+--------------------------------------------------------- */
+
+.container--workspace {
+
+    max-width: 1760px;
+
+}
+
+.ecosystem-main {
+
+    min-width: 0;
+
+}
+
+@media (min-width: 1000px) {
+
+    /* inside a .container the layout fills it; directly in <main> (All Calculators) it takes the tool-page width */
+    .ecosystem-layout:has(> .section-switcher) {
+
+        width: 100%;
+
+    }
+
+    main > .ecosystem-layout:has(> .section-switcher) {
+
+        width: min(1760px, calc(100% - 32px));
+        margin-inline: auto;
+
+    }
+
+    .ecosystem-layout > .section-switcher {
+
+        grid-row: 1;
+
+    }
+
+}
+
+/* the way back to the ecosystem's own page, above the list */
+.section-switcher__overview {
+
+    margin: 8px 0 0;
+
+}
+
+.section-switcher__overview a {
+
+    display: block;
+
+    padding: 8px 0;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    text-underline-offset: 3px;
+
+}
+
+.section-switcher__overview a:hover,
+.section-switcher__overview a:focus-visible {
+
+    text-decoration: underline;
+
+}
+
+.section-switcher__overview a[aria-current="page"] {
+
+    margin-left: -9px;
+    padding-left: 6px;
+
+    border-left: 3px solid var(--accent);
+
+    font-weight: 700;
+    text-decoration: none;
+
+}
+
+/* the group of the page being shown (a Calculators category, or the group holding the current tool) */
+.section-switcher__group[data-current="true"] > .section-switcher__toggle,
+.section-switcher__group[data-current="true"] > .section-switcher__label {
+
+    color: var(--color-ink);
+
+}
+
+.section-switcher__group[data-current="true"] > .section-switcher__toggle > span:first-child {
+
+    padding-left: 6px;
+    margin-left: -9px;
+
+    border-left: 3px solid var(--accent);
 
 }

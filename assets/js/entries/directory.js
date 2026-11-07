@@ -10,12 +10,14 @@
 
 import { renderHeader } from "../components/header.js";
 import { renderFooter } from "../components/footer.js";
+import { initSectionRail } from "../ui/section-rail.js";
 
 document.addEventListener(
     "DOMContentLoaded",
     () => {
         renderHeader();
         renderFooter();
+        initSectionRail();
 
         /* only the All Tools page has a search */
         if (document.querySelector("[data-tools-search]")) {

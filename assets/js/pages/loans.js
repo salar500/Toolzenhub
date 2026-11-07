@@ -5,6 +5,7 @@
 
 import { renderHeader } from "../components/header.js";
 import { renderFooter } from "../components/footer.js";
+import { initSectionRail } from "../ui/section-rail.js";
 
 import { ROUTES } from "../routes.js";
 
@@ -286,6 +287,8 @@ function initializeLoansPage() {
     initializeSearch();
 
     renderFooter();
+
+    initSectionRail();
 
     markPageReady();
 

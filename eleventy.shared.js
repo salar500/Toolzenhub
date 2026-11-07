@@ -48,10 +48,13 @@ export function createConfig({ base, output }) {
   return async function eleventyConfig(eleventyConfig) {
     const { headerMarkup } = await import(fileUrl("assets/js/components/header.js"));
     const { footerMarkup } = await import(fileUrl("assets/js/components/footer.js"));
+    const { renderSectionNav } = await import(fileUrl("assets/js/components/section-switcher.js"));
 
     // ---- shared markup, produced by the same functions the browser used to run
     eleventyConfig.addShortcode("siteHeader", () => headerMarkup());
     eleventyConfig.addShortcode("siteFooter", () => footerMarkup());
+    // the ecosystem sidebar for a page that is not a tool page: {% sectionNav "calculators" %} or {% sectionNav "calculators", "loans" %}
+    eleventyConfig.addShortcode("sectionNav", (sectionId, currentCategoryId) => renderSectionNav({ sectionId, currentCategoryId: currentCategoryId || null }));
 
     // ---- filters
     // JSON for a <script type="application/ld+json"> block; "<" is escaped so a value can never close the tag

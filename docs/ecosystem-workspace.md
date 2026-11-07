@@ -64,7 +64,7 @@ Built on the existing build-time "More <section>" navigation (`components/sectio
 
 | Item | Decision |
 |---|---|
-| Where | every tool page of Calculators (30), Time Tools (13), Developer Tools (12), Practice Labs (8), PDF Tools (4), Image Tools (2) |
+| Where | every tool page of Calculators (30), Time Tools (13), Developer Tools (12), Practice Labs (8), PDF Tools (4), Image Tools (2), and since 2026-11-07 the ecosystem's own page and its category pages (section 12). Not on Home, All Tools, articles or information pages |
 | Wide (1000 px and up) | left column beside the tool, open by default on every visit, sticky, scrolls on its own, current tool marked. The page is as wide as the window allows (up to 1760 px) so the tool takes the remaining width |
 | Hide and show | "Hide tools" in the sidebar; "Show <section>" above the tool when hidden. Hidden, the column is gone (no gap). Hiding changes no field, result or timer. The sidebar does not reload the tool |
 | Search | a labelled search box where a section has eight or more tools (Calculators, Time, Developer, Practice Labs); every word must match; Escape clears; the match count is announced politely |
@@ -259,3 +259,19 @@ Audit first: the six ecosystems, the registry-driven sidebar (desktop column fro
 Tools that were not given preset ranges (deliberately): Date Calculator (add or subtract from one date), Countdown, Meeting Planner, Shift Planner, Time Zone Converter, Age, Gratuity, XIRR. They get the calendar button, and "Use today" where a date of today makes sense.
 
 Not done, by design: no tool is loaded into the page without navigation (the site stays a set of plain pages, so direct URLs, refresh and Back and Forward are the browser's own); "Practice Labs" lesson navigation is the lab's own list (D7), not a second list in the sidebar.
+
+## 12. Ecosystem pages carry the sidebar (2026-11-07)
+
+Why: the owner's master plan of 2026-11-06 asked for a contextual sidebar "when a user enters an ecosystem", not only on tool pages; sections 6 and 11 above had read it as tool pages only. Rule 4.8 now says so.
+
+| Item | Decision / built |
+|---|---|
+| Builder | `renderSectionNav({ sectionId, currentToolId, currentCategoryId })` in `components/section-switcher.js`; `renderSectionSwitcher(toolId)` calls it, so a tool page is built as before |
+| Pages (83) | the 69 tool pages, `/categories.html`, `/calculators.html`, `/loans.html` and the six other category pages, and `/time-tools.html`, `/developer-tools.html`, `/image-tools.html`, `/pdf-tools.html`, `/practice-labs.html` |
+| Not on | Home, All Tools (own page rail), Articles and article pages, About, Contact, Privacy, Terms, Disclaimer, 404 |
+| Markup | `<div class="ecosystem-layout" data-section-page>` holding the nav and `<div class="ecosystem-main">`; generated pages through `workspaceOpen/workspaceClose` in `pages/directory/directory-html.js`, hand-written pages through the `{% sectionNav %}` shortcode (`eleventy.shared.js`) |
+| Behaviour | the same `ui/section-rail.js` (it now finds `[data-section-page]` as well as `.calculator-page`); `initSectionRail()` is called by the directory, categories, All Calculators and Loans page scripts |
+| Current item | tool: `aria-current="page"`; current group (the category or the group holding the tool): `data-current`, open and marked with the accent bar; the ecosystem page itself: the "overview" link is marked |
+| Cross-ecosystem links | none (no duplicate menu; the header, Home cards and All Tools are the way between ecosystems) |
+| New tool | still derived from the catalog (`getToolsBySection`); Calculators group by catalog category; the other sections by `SECTION_GROUPS`, unchanged |
+
