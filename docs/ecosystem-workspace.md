@@ -76,7 +76,7 @@ Built on the existing build-time "More <section>" navigation (`components/sectio
 
 ### What the sidebar does not do
 
-- It does not keep state across tools (decision D4, section 10). Moving to another tool is a normal page navigation, so a typed value, a chosen file or a running timer in the old tool is lost, as it always was; the pages promise that nothing is stored. Hiding or showing the sidebar loses nothing (tested: chosen image, typed settings, result, merged PDF, running stopwatch and laps).
+- It does not keep typed values, chosen files or lab answers when you go to another tool (decision D4, section 10). Since 2026-11-07 the move is made in place (section 13), but the tool that is left is ended and the next one starts empty, exactly as after a page load; the pages promise that nothing is stored. Hiding or showing the sidebar loses nothing (tested: chosen image, typed settings, result, merged PDF, running stopwatch and laps).
 - Large Image and PDF files were tested beside the sidebar on 2026-11-05 (section 10); real phones, Safari and Firefox were not.
 - No separate mobile drawer or bottom bar.
 - A long lab hides the sidebar on screens under 1500 px (D3) so its own exercise list and the exercise keep their width; section 6's earlier line that a long lab "shows two lists" describes screens of 1500 px and up.
@@ -183,7 +183,7 @@ W3C APG disclosure navigation (https://www.w3.org/WAI/ARIA/apg/patterns/disclosu
 
 | # | Decision | Reason | Where |
 |---|---|---|---|
-| D3 | A long lab (twelve or more exercises) tells the section sidebar to step aside below 1500 px: it starts hidden with "Show Practice Labs" above the tool, and the visitor can show it at once. Labs under twelve exercises and screens of 1500 px and up keep it open. Nothing is stored | with both lists open, the exercise got about 800 px at 1440 px; the two lists are different things (labs against exercises), so this is a layout choice, not a removal | `learning/lab-shell.js` event `tz:lab-workspace`, `ui/section-rail.js`, rule 4.8 |
+| D3 | (replaced 2026-11-07) A long lab no longer hides the section sidebar below 1500 px: the sidebar is open by default on every page, as the owner requires; the visitor can hide it | the owner's persistent-workspace requirement | `ui/section-rail.js` (the `tz:lab-workspace` listener was removed; `learning/lab-shell.js` still fires the event, nothing listens) |
 | D4 | No automatic saving of typed values, chosen files or lab answers when the visitor moves to another tool. Moving is still a normal page load. Hiding or showing the sidebar, and every other in-page interaction, keeps all of it | the pages promise that nothing is stored; the Privacy page lists exactly one stored item (flashcard progress, opt-in). An explicit "save" would need the owner's decision and a Privacy change | not built |
 | D5 | Sidebar links are underlined only on hover and focus; the current tool is bold with an accent bar; the search box shows "Search tools" | thirty underlined links read as noise; the bar marks the place without relying on colour alone | `section-switcher.css`, `section-rail.js` |
 | D6 | Home: the six ecosystem cards have the tinted icon tile used elsewhere, a live "N tools" count, a flask icon for Practice Labs, and a hero line that names all six ecosystems. Page title and description are unchanged | the tile rule listed the old calculator categories, not the six ecosystems; a hero about loans alone hid five of six | `components/categories.js`, `components/hero.js`, `categories.css`, `ui/icons.js` |
@@ -275,3 +275,16 @@ Why: the owner's master plan of 2026-11-06 asked for a contextual sidebar "when 
 | Cross-ecosystem links | none (no duplicate menu; the header, Home cards and All Tools are the way between ecosystems) |
 | New tool | still derived from the catalog (`getToolsBySection`); Calculators group by catalog category; the other sections by `SECTION_GROUPS`, unchanged |
 
+## 13. Persistent workspace (2026-11-07)
+
+Why: sections 6 and 12 made the sidebar present on every ecosystem page, but each click still loaded a new document, so the sidebar was rebuilt, its state lost and the page jumped. The owner requires one workspace: the sidebar stays, only the right side changes.
+
+| Item | Built |
+|---|---|
+| Mechanism | `ui/workspace-nav.js`, started by `initSectionRail()` on every page that has the sidebar. A click on a same-ecosystem link fetches that page, checks it is a tool page (`entries/tool.js`) or a generated listing page (`entries/directory.js`) of the same ecosystem, then swaps `main#app`'s content and moves the existing sidebar element into the new layout |
+| Tool start | `ui/tool-mount.js` (extracted from `entries/tool.js`, used by both). A tool shown later in the same document is imported under `?m=n`, so its module state starts fresh |
+| Leaving a tool | `ui/tool-scope.js` records the timers, animation frames, window/document listeners, workers and audio contexts that tool code starts (by call stack) and ends them when the tool is left; the site's own code is never recorded |
+| What carries over | sidebar scroll, search text, opened groups (the group of the new page opens), hidden/shown state, open drawer closes on choosing a tool |
+| URLs and SEO | unchanged: every page is still a full static page; the address, title, description, canonical, Open Graph and JSON-LD follow the page shown; Back, Forward, refresh, direct and shared links work; crawlers and no-script visitors see the full pages |
+| Fallback to a normal navigation | modified clicks, other ecosystems, `/categories.html`, `/loans.html`, `/calculators.html` (client-rendered by their own scripts), any fetch or swap failure |
+| Not stored | nothing is saved to make this work |

@@ -16,6 +16,8 @@ import {
     getSectionForTool,
     getSectionUrl,
     getCategory,
+    getCategoryByTitle,
+    getCategoryLandingUrl,
     getCategoryForTool,
     getToolsBySection
 } from "../data/taxonomy.js";
@@ -126,8 +128,12 @@ export function renderSectionNav({ sectionId, currentToolId = null, currentCateg
         const current = isCurrentGroup(group);
         const isOpen = !longSection || current;
 
+        /* a Calculators category has a page of its own: recorded so the workspace can show it in place (ui/workspace-nav.js) */
+        const categoryId = group.label ? getCategoryByTitle(group.label)?.id : null;
+        const categoryHref = categoryId ? getCategoryLandingUrl(categoryId) : null;
+
         return `
-                            <li class="section-switcher__group" data-open="${isOpen}"${current ? ' data-current="true"' : ""}>
+                            <li class="section-switcher__group" data-open="${isOpen}"${current ? ' data-current="true"' : ""}${categoryHref ? ` data-href="${escapeHTML(categoryHref)}"` : ""}>
                                 ${group.label ? `<span class="section-switcher__label">${escapeHTML(group.label)}</span>` : ""}
                                 <ul>
                                     ${group.items.map(item => linkHtml(item, currentToolId)).join("")}

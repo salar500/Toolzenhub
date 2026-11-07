@@ -587,3 +587,29 @@
     border-left: 3px solid var(--accent);
 
 }
+
+/* The workspace (assets/js/ui/workspace-nav.js) is fetching the next page: the content beside the sidebar dims, the sidebar does not. */
+.is-workspace-loading > :not(.section-switcher):not(.section-rail__show):not(.section-rail__backdrop) {
+
+    opacity: 0.55;
+
+    transition: opacity 0.15s;
+
+}
+
+/* announced to assistive technology when the workspace shows another page; never shown */
+.workspace-status {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+
+    white-space: nowrap;
+
+}

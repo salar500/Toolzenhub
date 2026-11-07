@@ -14,6 +14,8 @@
    Without script it stays a closed disclosure of ordinary links, so nothing depends on this file.
 ========================================================= */
 
+import { initWorkspaceNav } from "./workspace-nav.js";
+
 export const WIDE = "(min-width: 1000px)";
 export const SEARCH_MIN_TOOLS = 8;
 
@@ -52,9 +54,11 @@ export function initSectionRail(root = document) {
 
     const nav = root.querySelector(".section-switcher");
     const details = nav?.querySelector("details");
-    const page = nav?.closest("[data-section-page], .calculator-page");
+    /* The layout container is looked up each time, not kept: the workspace swaps the page content in place (ui/workspace-nav.js) and moves
+       this sidebar into the new page's container, so the container it sits in can change while the sidebar stays. */
+    const pageOf = () => nav.closest("[data-section-page], .calculator-page");
 
-    if (!details || !page || typeof window.matchMedia !== "function") {
+    if (!details || !pageOf() || typeof window.matchMedia !== "function") {
         return;
     }
 
@@ -164,7 +168,7 @@ export function initSectionRail(root = document) {
 
     const setCollapsed = collapsed => {
 
-        page.classList.toggle("is-rail-collapsed", collapsed);
+        pageOf()?.classList.toggle("is-rail-collapsed", collapsed);
         nav.hidden = collapsed;
         show.hidden = !collapsed;
         hide.setAttribute("aria-expanded", String(!collapsed));
@@ -242,14 +246,22 @@ export function initSectionRail(root = document) {
 
     apply();
 
-    /* A long lab brings its own exercise list (learning/lab-shell.js). Below 1500 px the two lists side by side would leave the exercise
-       about 800 px, so the lab list steps aside: it starts hidden with "Show Practice Labs" above the tool. Nothing is stored. */
-    document.addEventListener("tz:lab-workspace", () => {
+    /* The workspace shows another page in the same sidebar: the groups holding the page now shown open, and the visitor's search and
+       collapse choices stay as they were. */
+    nav.addEventListener("tz:rail-current", () => {
 
-        if (wide.matches && !window.matchMedia("(min-width: 1500px)").matches) {
-            setCollapsed(true);
+        for (const group of groups) {
+
+            if (group.node.dataset.current === "true") {
+                group.wanted = true;
+                setGroup(group, true);
+            }
+
         }
 
     });
+
+    initWorkspaceNav(nav);
+
 
 }
