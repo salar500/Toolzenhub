@@ -10,6 +10,7 @@
 ========================================================= */
 
 import { escapeHTML } from "../ui/escape.js";
+import { ROUTES } from "../routes.js";
 import { getToolById } from "../data/tools.js";
 import {
     getSection,
@@ -149,16 +150,22 @@ export function renderSectionNav({ sectionId, currentToolId = null, currentCateg
         ? `<p class="section-switcher__overview"><a href="${escapeHTML(landingUrl)}"${onLanding ? ' aria-current="page"' : ""}>${escapeHTML(section.title)} overview</a></p>`
         : "";
 
+    /* Where the visitor is, named on the phone's tool bar (assets/css/components/section-switcher.css): the tool, the category, or the overview.
+       Not shown on a wide screen, where the sidebar itself marks the current page. */
+    const nowName = (currentToolId ? getToolById(currentToolId)?.title : currentCategoryTitle) || `${section.title} overview`;
+
     return `
                 <nav class="section-switcher" aria-label="${escapeHTML(section.title)}: switch tool">
                     <details>
                         <summary>
                             <span>${currentToolId ? "More " : ""}${escapeHTML(section.title)}</span>
+                            <span class="section-switcher__now">${escapeHTML(nowName)}</span>
                             <span class="section-switcher__count">${siblings.length}</span>
                         </summary>
                         ${overview}
                         <ul class="section-switcher__list">${body}
                         </ul>
+                        <p class="section-switcher__all"><a href="${escapeHTML(ROUTES.tools)}">All ToolZen Hub tools</a></p>
                     </details>
                 </nav>`;
 

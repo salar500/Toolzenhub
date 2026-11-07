@@ -215,7 +215,18 @@ export function initSectionRail(root = document) {
     backdrop.addEventListener("click", () => { details.open = false; summary?.focus(); });
 
     details.addEventListener("toggle", () => {
-        backdrop.hidden = wide.matches || !details.open;
+
+        const drawerOpen = !wide.matches && details.open;
+
+        backdrop.hidden = !drawerOpen;
+        nav.classList.toggle("is-drawer-open", drawerOpen);
+
+        if (drawerOpen) {
+            /* the drawer opens on the tool that is open, not on the top of a long list, and keyboard focus moves into it */
+            nav.querySelector("a[aria-current='page']")?.scrollIntoView({ block: "center" });
+            hide.focus({ preventScroll: true });
+        }
+
     });
 
     document.addEventListener("keydown", event => {

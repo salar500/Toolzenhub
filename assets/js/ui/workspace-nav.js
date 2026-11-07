@@ -56,7 +56,11 @@ export function initWorkspaceNav(nav) {
         const keys = new Set();
 
         for (const a of nav.querySelectorAll("a[href]")) {
+
+            if (a.closest(".section-switcher__all")) continue; // the tools hub is another kind of page: an ordinary navigation
+
             keys.add(keyOf(new URL(a.getAttribute("href"), location.href)));
+
         }
 
         for (const group of nav.querySelectorAll("[data-href]")) {
@@ -214,10 +218,14 @@ export function initWorkspaceNav(nav) {
             else delete group.dataset.current;
         });
 
-        const label = newNav.querySelector("summary > span");
-        const own = nav.querySelector("summary > span");
+        for (const selector of ["summary > span:first-child", ".section-switcher__now"]) {
 
-        if (label && own) own.textContent = label.textContent;
+            const label = newNav.querySelector(selector);
+            const own = nav.querySelector(selector);
+
+            if (label && own) own.textContent = label.textContent;
+
+        }
 
         nav.dispatchEvent(new Event("tz:rail-current"));
 
