@@ -137,6 +137,36 @@ Runner: one spec at a time, one worker, waits for at least 950 MB free. Free mem
 
 NOT RUN at this HEAD: full subpath-desktop and subpath-mobile suites, the visual spec, axe on all pages (axe ran on the article pages on mobile and inside the SQL lab spec only), Lighthouse, Firefox, WebKit, real devices, screen readers, and any independent review of the SQL, Excel, Power BI, tax or SIP content.
 
+## Q3-19 (2026-11-06/07), base `b49117b` plus the repair commit, full browser regression and repairs
+
+Runner: three spec files per batch, one worker, foreground, free memory 656 to 1,976 MB before each batch (never below 600 MB). A laptop power cut interrupted the subpath-desktop run after `inflation-view`; the unverified batch (`json-csv`, `json-error-fixing-lab`, `json-formatter`) was rerun from the start and no partial result was counted. Two background mobile attempts were stopped by the system for low memory and recorded nothing; the mobile run was then completed in foreground.
+
+| Command (project, specs) | Result |
+|---|---|
+| subpath-desktop, every spec except `visual`, 34 batches | first pass: 2,349 passed, 31 failed, 26 skipped, 0 interrupted, 0 flaky |
+| subpath-mobile, every spec except `visual` and `@desktop-only`, 34 batches | 2,360 passed, 1 failed (then fixed), 27 skipped by design, 0 interrupted, 0 flaky |
+| root-desktop (`@portable` only), 4 batches | 282 passed, 0 failed, 0 skipped. Root mobile: no such project in `playwright.config.js`, so not run |
+| visual-desktop, visual-mobile, visual-tablet | after the baseline update: 39 passed; 39 passed; 20 passed and 19 skipped by design |
+| `npm run test:unit` | 3,870 tests: 3,866 pass, 0 fail, 4 skipped (as before) |
+| `npm run test:static` (inventory, links, assets, seo) | pass; 132 pages in each build, sitemap 131 URLs |
+| `npm run build:all` | exit 0 after the CSS and JS changes below |
+
+Root causes of the 31 desktop failures (all resolved; each fix was verified by rerunning only the affected specs):
+
+| Failures | Class | Cause and repair |
+|---|---|---|
+| 20 in `calculators-stage3-responsive` (XIRR, EMI, PPF, Loan Comparison, five widths) | application bug | the sidebar group toggles (e9d55e4) were 40 px high, below the 44 px target rule; `section-switcher.css` now 44 px |
+| 1 in `xirr` (Reset focus) | application bug | `date-field.js` moved a focused date input into its wrapper, which dropped focus; it now restores focus |
+| 1 in `xirr`, 2 in `date-calculator` and `date-difference` | outdated test | the new calendar button and "Use today" carry the field name, so `getByLabel` matched three elements; the assertions now target the textbox (or an exact label) |
+| 1 in `accessibility` (home hero) | outdated test | expected no illustration; rule 7.12 adds an inline decorative SVG and two buttons; the test now asserts exactly that and still forbids `img` and `picture` |
+| `dom-baseline` home-main, `links` home count 41 to 43, `seo-baseline` visible text of Business Days and Date Difference | baseline | differences reviewed line by line: the two hero buttons, the hero SVG, the new date controls; updated for subpath-desktop only |
+| 2 to 3 per run in `date-difference-presets` (a different test each run) | test timing | the page ships as static HTML that the script redraws, so an early click was lost; the spec now waits for the redrawn field; 90 of 90 passed over three repeats |
+| 1 in `time-tools-new` (Meeting Planner, desktop and mobile) | test timing | same cause; the test now waits for `#mp-form[data-ready]` like its sibling; 4 of 4 on desktop and 4 of 4 on mobile |
+
+Visual baselines updated after each image was viewed: home (desktop, mobile, tablet), date-difference, date-calculator and time-zone-converter (desktop, mobile; time-zone-converter also tablet). All changes are the approved hero, calendar button, "Use today" and grouped presets.
+
+Not run: the full subpath-desktop suite was not repeated after the repairs (only the failing specs, by rule 10.7); axe on all pages, Lighthouse, Firefox, WebKit, real devices and screen readers.
+
 ## Carried forward (not re-run at f5a1df4)
 
 These ran on the working tree that was committed as `6b01b85`..`f5a1df4` (RELEASE-1 records HEAD `45fc888` plus 102 uncommitted entries, 5,597 insertions across 102 files, now in the three commits). That equivalence is inferred from the records and a clean tree; it was not proved by diffing a saved copy.
