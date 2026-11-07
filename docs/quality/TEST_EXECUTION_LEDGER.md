@@ -167,6 +167,32 @@ Visual baselines updated after each image was viewed: home (desktop, mobile, tab
 
 Not run: the full subpath-desktop suite was not repeated after the repairs (only the failing specs, by rule 10.7); axe on all pages, Lighthouse, Firefox, WebKit, real devices and screen readers.
 
+## Q3-20 (2026-11-07), HEAD `637ae76`, live GitHub Pages staging verification
+
+Target: `https://salar500.github.io/Toolzenhub/` (real network, real host, no local server). Existing specs were pointed at it through a temporary, git-ignored config (`tests/.tmp/live.config.mjs`, projects live-desktop 1280x800 and live-mobile 390x844), 2 to 3 spec files per batch, one worker, free memory 1,290 to 1,821 MB before every batch. No application code, test or baseline was changed. Specs that call the `api` fixture cannot run against a live host (it connects to 127.0.0.1), so those failures are harness artifacts and are counted separately.
+
+| Check | Result |
+|---|---|
+| Deployed commit | the "Deploy GitHub Pages preview" workflow ran on `f743d72` and on `637ae76`, both conclusion success (run 42353740865 for `637ae76`, 08:02 to 08:09 UTC); local `main`, `origin/main` and `git ls-remote` all `637ae76` |
+| Live files against a fresh `build:preview` of `637ae76` | 662 files served, 0 not served, 0 real content differences: 474 byte-identical, 189 identical once CRLF/LF line endings are normalised (this machine writes CRLF, the CI checkout writes LF) |
+| Crawl of all 131 sitemap URLs, desktop and mobile | 131 of 131 and 131 of 131: HTTP 200, exactly one `h1`, no horizontal overflow, no console error or warning, no failed request, no third-party host |
+| Internal `href` and `src` targets found in the built pages | 267 unique, 0 non-200 |
+| Unknown paths (`/definitely-missing`, five-level path, `/calculators/currency/`, `/calculators/EMI/`, a missing `.js`) | all 404 with the "Page Not Found" page; `robots.txt` allows all and names the production sitemap |
+| Live specs, desktop (GST, Percentage, Hours, Time Zone Converter, JSON Formatter, Base64, Text Diff, PDF Tools, Image Compressor and Resizer, EMI, Articles, Navigation, Not found) | 367 passed, 47 failed, 2 skipped: 45 harness artifacts (`api` fixture) and 2 timing events below |
+| Live specs, mobile (same, without Articles) | 349 passed, 9 failed, 3 skipped: 7 harness artifacts and 2 timing events below |
+
+Timing events (each passes when rerun alone, so they are recorded, not hidden):
+
+| Test | Live runs | Cause found |
+|---|---|---|
+| EMI "starting values set only the amount and the tenure" | failed in every full-file run (desktop and mobile), passed 4 of 4 alone | a probe script (`tests/.tmp/emi-probe.mjs`) reproduced it: in 1 of 6 cold loads the "Car loan" button was clicked before the page script bound it (`data-slider-ready` still absent), so nothing happened |
+| Base64 "listed with the other tools" | failed 1 of 8 | same class, not captured |
+| Navigation "a section link in the All Tools rail moves focus" (mobile) | failed 1 of 6 | same class, not captured |
+
+Finding F-1 (low, not fixed): the pages ship static HTML whose buttons and links are visible and clickable before the page script attaches its handlers, so a click in that first moment is lost on a cold load. The fast local server hides it. It is how the site is built (static page, script on top); this release did not change that path. It is not a data or correctness defect. A possible later improvement is to disable or hide starter buttons until the tool is ready.
+
+Not run: Firefox, WebKit, real devices, screen readers, Lighthouse, the visual baselines against the live site (rendering is already byte-identical to the tested build), clipboard and file-download behaviour on the live host beyond what the specs cover.
+
 ## Carried forward (not re-run at f5a1df4)
 
 These ran on the working tree that was committed as `6b01b85`..`f5a1df4` (RELEASE-1 records HEAD `45fc888` plus 102 uncommitted entries, 5,597 insertions across 102 files, now in the three commits). That equivalence is inferred from the records and a clean tree; it was not proved by diffing a saved copy.

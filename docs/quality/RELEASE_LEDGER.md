@@ -14,6 +14,8 @@ Pushed `8fa60fd..f743d72` to `origin/main`, fast-forward, no force; 6 commits. P
 | Source | built from the sources of `f743d72` (the later commit changes documentation only); `/Toolzenhub/` appears in `dist/` only in router, header and footer path comparisons and the GitHub issues link, not in any asset or page URL |
 | Not touched | Hostinger / `toolzenhub.in`; the earlier archives `20261103-1428`, `20261105-9d1c984` and the 2026-11-02 backup are preserved and stale |
 
+Staging verification (2026-11-07, HEAD `637ae76`, details in Q3-20): the Pages workflow succeeded on `637ae76` and every served file equals a fresh preview build of it; 131 of 131 sitemap pages are clean on desktop and mobile; the live smoke specs pass except harness artifacts and one timing finding (F-1). ZIP against the final commit: a fresh `npm run build` of `637ae76` gives 666 files with 0 content differences from the ZIP, and the ZIP hash is unchanged, so the filename's `f743d72` is only the label of the last code commit (`637ae76` changes this ledger only). Line endings: this machine's `dist/` uses CRLF in 189 text assets where the CI-built preview uses LF; browsers treat both alike, the content is otherwise identical, and the earlier archives were built the same way.
+
 Deploy only this exact artifact, manually, without deleting unrelated hosting content (for example `.htaccess` rules on the server or other sites); take or confirm a backup of the live site first. Production has not been assessed after deployment.
 
 ## Update after the Q3 cycle (2026-11-04)
