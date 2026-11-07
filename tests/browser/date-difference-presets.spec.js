@@ -5,6 +5,12 @@
  */
 import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.mjs";
 
+// The page ships as static HTML that the script then redraws; a click before that is lost. The date-field enhancer marks the redrawn input.
+const openTool = async (page, go) => {
+  await go("tools/date-difference/");
+  await expect(page.locator('#date-start[data-date-field="ready"]')).toBeAttached();
+};
+
 const metric = (page, label) =>
   page.locator(`#date-results .calculator-results__item:has(.calculator-results__label:text-is("${label}")) .calculator-results__value`);
 
@@ -24,14 +30,14 @@ test.describe("Date Difference presets in the browser", () => {
   });
 
   test("nothing is filled until a preset is pressed", async ({ page, go }) => {
-    await go("tools/date-difference/");
+    await openTool(page, go);
     await expect(page.locator("#date-start")).toHaveValue("");
     await expect(page.locator("#date-end")).toHaveValue("");
   });
 
   for (const [name, start, end, days] of PRESETS) {
     test(`${name}: ${start} to ${end}, ${days} apart`, async ({ page, go }) => {
-      await go("tools/date-difference/");
+      await openTool(page, go);
       await page.getByRole("button", { name, exact: true }).click();
       await expect(page.locator("#date-start")).toHaveValue(start);
       await expect(page.locator("#date-end")).toHaveValue(end);
@@ -42,7 +48,7 @@ test.describe("Date Difference presets in the browser", () => {
   }
 
   test("the help text explains the inclusive reading and matches the Previous 7 days range", async ({ page, go }) => {
-    await go("tools/date-difference/");
+    await openTool(page, go);
     const help = page.locator("#date-presets-label");
     await expect(help).toContainText("6 days apart (7 if you count both end days)");
     await expect(help).toContainText("Previous 7 days");
@@ -52,7 +58,7 @@ test.describe("Date Difference presets in the browser", () => {
   });
 
   test("a preset replaces typed dates, and a backward range is not reported as reversed", async ({ page, go }) => {
-    await go("tools/date-difference/");
+    await openTool(page, go);
     await page.locator("#date-start").fill("2020-01-01");
     await page.locator("#date-end").fill("2020-01-10");
     await page.getByRole("button", { name: "Previous 30 days", exact: true }).click();
@@ -61,7 +67,7 @@ test.describe("Date Difference presets in the browser", () => {
   });
 
   test("boundary dates give a figure or a clear message, never NaN", async ({ page, go }) => {
-    await go("tools/date-difference/");
+    await openTool(page, go);
     await page.locator("#date-start").fill("0001-01-01");
     await page.locator("#date-end").fill("9999-12-31");
     await expect(page.locator("#date-results")).not.toContainText(/NaN|undefined|Invalid Date|Infinity/);
@@ -99,7 +105,7 @@ test.describe("Date Difference: grouped presets and the calendar button", () => 
   });
 
   test("the presets are in four labelled groups, quick dates first", async ({ page, go }) => {
-    await go("tools/date-difference/");
+    await openTool(page, go);
     const legends = await page.locator(".date-presets__group > legend").allInnerTexts();
     expect(legends).toEqual(["Quick dates (one date)", "Previous periods (both dates)", "Future periods (both dates)", "From today (both dates)"]);
     await expect(page.locator(".date-presets__group").nth(1).locator("button")).toHaveCount(9);
@@ -108,7 +114,7 @@ test.describe("Date Difference: grouped presets and the calendar button", () => 
 
   for (const [name, start, end] of RANGES) {
     test(`${name}: ${start} to ${end}`, async ({ page, go }) => {
-      await go("tools/date-difference/");
+      await openTool(page, go);
       await page.getByRole("button", { name, exact: true }).click();
       await expect(page.locator("#date-start")).toHaveValue(start);
       await expect(page.locator("#date-end")).toHaveValue(end);
@@ -117,7 +123,7 @@ test.describe("Date Difference: grouped presets and the calendar button", () => 
   }
 
   test("quick dates fill the one date chosen and leave the other alone; late evening is still today", async ({ page, go }) => {
-    await go("tools/date-difference/");
+    await openTool(page, go);
     await page.locator("#date-end").fill("2030-01-01");
     await page.getByRole("button", { name: "Yesterday", exact: true }).click();
     await expect(page.locator("#date-start")).toHaveValue("2026-03-04");
@@ -131,7 +137,7 @@ test.describe("Date Difference: grouped presets and the calendar button", () => 
   });
 
   test("each date has a calendar button and Use today; manual typing still works", async ({ page, go }) => {
-    await go("tools/date-difference/");
+    await openTool(page, go);
     for (const id of ["date-start", "date-end"]) {
       await expect(page.locator(`#${id}`).locator("xpath=..").locator(".date-field__button")).toBeVisible();
     }
@@ -145,7 +151,7 @@ test.describe("Date Difference: grouped presets and the calendar button", () => 
   });
 
   test("the calendar button opens the browser's picker without changing the value", async ({ page, go }) => {
-    await go("tools/date-difference/");
+    await openTool(page, go);
     await page.locator("#date-start").fill("2026-02-01");
     await page.evaluate(() => { window.__picker = 0; HTMLInputElement.prototype.showPicker = function () { window.__picker += 1; }; });
     await page.getByRole("button", { name: /Open calendar: Start date/ }).click();

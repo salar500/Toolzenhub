@@ -71,9 +71,14 @@ export function enhanceDateField(input, now = () => new Date()) {
     const wrap = document.createElement("span");
     const button = document.createElement("button");
 
+    const hadFocus = document.activeElement === input;
+
     wrap.className = "date-field";
     input.before(wrap);
     wrap.append(input, button);
+
+    /* moving a focused element in the document drops its focus (a tool that redraws its rows and focuses the first date) */
+    if (hadFocus) input.focus();
 
     button.type = "button";
     button.className = "date-field__button";

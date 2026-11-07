@@ -289,7 +289,7 @@ test.describe("XIRR Calculator", () => {
     await open(page, go);
     await expect(page.getByRole("group", { name: "Cash flow 1" })).toBeVisible();
     await expect(page.getByRole("group", { name: "Cash flow 2" })).toBeVisible();
-    await expect(page.getByRole("group", { name: "Cash flow 1" }).getByLabel("Date")).toHaveCount(1);
+    await expect(page.getByRole("group", { name: "Cash flow 1" }).getByLabel("Date", { exact: true })).toHaveCount(1);
     await expect(page.getByRole("group", { name: "Cash flow 1" }).getByLabel("Amount (₹)")).toHaveCount(1);
     await expect(page.getByRole("group", { name: "Cash flow 1" }).getByLabel("Money out or in")).toHaveCount(1);
     await expect(live(page)).toHaveAttribute("role", "status");

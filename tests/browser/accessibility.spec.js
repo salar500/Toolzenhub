@@ -135,10 +135,12 @@ test.describe("landmarks", () => {
 });
 
 test.describe("WebP hero images", () => {
-  test("home hero is compact and text-led: search first, no illustration (Design System 2.0)", async ({ page, go }) => {
+  test("home hero has the search, a primary action and one decorative inline SVG, no image request (rule 7.12)", async ({ page, go }) => {
     await go("");
     await expect(page.locator(".hero__search input")).toBeVisible();
-    await expect(page.locator(".hero__visual")).toHaveCount(0);
+    await expect(page.getByRole("link", { name: "Browse all tools" }).first()).toBeVisible();
+    await expect(page.locator(".hero__visual svg.hero-art")).toHaveCount(1);
+    await expect(page.locator(".hero__visual svg.hero-art")).toHaveAttribute("aria-hidden", "true");
     await expect(page.locator(".hero picture, .hero img")).toHaveCount(0);
   });
 

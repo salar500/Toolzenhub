@@ -287,6 +287,7 @@ test.describe("International Meeting Planner", () => {
 
   test("a missing date and an unknown zone are named", async ({ page, go }) => {
     await go("tools/meeting-planner/");
+    await expect(page.locator("#mp-form")).toHaveAttribute("data-ready", "true");
     await btn(page, "Find meeting times").click();
     await expect(page.locator("#mp-error")).toBeVisible();
     await page.locator(".mp-zone").nth(0).fill("Europe/London");

@@ -27,7 +27,7 @@ test.describe("Date Calculator", () => {
 
     await expect(page.locator("#dcalc-start")).toHaveValue("");
     for (const sel of Object.values(IDS)) await expect(page.locator(sel)).toHaveValue("");
-    await expect(page.getByLabel("Start date")).toBeVisible();
+    await expect(page.getByRole("textbox", { name: "Start date" })).toBeVisible();
     for (const label of ["Years", "Months", "Weeks", "Days"]) await expect(page.getByLabel(label, { exact: true })).toBeVisible();
     await expect(page.getByRole("radio", { name: "Add" })).toBeChecked();
     await expect(page.getByRole("radio", { name: "Subtract" })).not.toBeChecked();

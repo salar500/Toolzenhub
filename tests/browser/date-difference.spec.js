@@ -25,8 +25,8 @@ test.describe("Date Difference Calculator", () => {
 
     await expect(page.locator("#date-start")).toHaveValue("");
     await expect(page.locator("#date-end")).toHaveValue("");
-    await expect(page.getByLabel("Start date")).toBeVisible();
-    await expect(page.getByLabel("End date")).toBeVisible();
+    await expect(page.getByRole("textbox", { name: "Start date" })).toBeVisible();
+    await expect(page.getByRole("textbox", { name: "End date" })).toBeVisible();
     await expect(page.locator("#date-results")).toContainText("Choose a start date and an end date.");
     await expect(page.getByRole("button", { name: "Reset" })).toBeVisible();
     await expect(page.locator(".related-section")).toHaveCount(0);

@@ -14,6 +14,9 @@ main#app
             h1.hero__title "Practical tools for"
               span.hero__title-highlight "better everyday decisions"
             p.hero__description "Calculate loan payments, plan investments and work through GST, margin and percentage ques…"
+            div.hero__actions
+              a.btn.btn-primary.hero__cta [href="{ROOT}tools.html"] "Browse all tools"
+              a.btn.hero__cta.hero__cta--secondary [href="{ROOT}calculators.html"] "Explore calculators"
             form#calculator-search.hero__search.tz-search [role="search"]
               span.hero__search-icon.tz-search__icon [aria-hidden="true"]
                 svg [aria-hidden="true"]
@@ -21,6 +24,8 @@ main#app
               button.hero__search-button.tz-search__button [aria-label="Search tools" type="submit"]
                 svg [aria-hidden="true"]
             div#hero-calculator-search-results.calculator-search-results [aria-live="polite"]
+          div.hero__visual
+            svg [aria-hidden="true" role="presentation"]
   section#categories.section
     section.categories-section
       div.container
