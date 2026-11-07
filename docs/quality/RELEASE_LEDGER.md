@@ -2,6 +2,20 @@
 
 Rules: `docs/product-decision-rules.md` section 11. GitHub Pages is the development preview; Hostinger production (`toolzenhub.in`) is manual and was not touched by any record here.
 
+## Update 2026-11-07 (preview current, production package ready, not deployed)
+
+Pushed `8fa60fd..f743d72` to `origin/main`, fast-forward, no force; 6 commits. Preview `https://salar500.github.io/Toolzenhub/` serves that build: `date-field.js`, `section-switcher.css` and `index.html` are byte-identical (SHA-256) to the tested `dist-ghpages/`; home, tool, calculator, article, category, robots, favicon and sitemap routes return 200, an unknown path returns the 404 page, the sitemap lists 131 production URLs. The `gh` CLI is unavailable, so the check is by direct requests (rule 11.3). Regression evidence: Q3-19 in `TEST_EXECUTION_LEDGER.md`.
+
+| Item | Record |
+|---|---|
+| File | `C:\Users\DELL\Downloads\ToolZenHub-hostinger-dist-20261107-f743d72.zip`, 6,704,220 bytes |
+| SHA-256 | `b53c948989c82d6b54c4ac4729862ea1c5934233f50d553ebe994b53f37e628c` |
+| Contents | 666 files (the whole of `dist/`, including `.htaccess`), `index.html` at the root, forward-slash paths, no `.map`, `.spec.js` or `.env`; every entry byte-identical to `dist/`; `zipfile.testzip()` clean; canonical and sitemap use `https://toolzenhub.in/`, 131 sitemap URLs |
+| Source | built from the sources of `f743d72` (the later commit changes documentation only); `/Toolzenhub/` appears in `dist/` only in router, header and footer path comparisons and the GitHub issues link, not in any asset or page URL |
+| Not touched | Hostinger / `toolzenhub.in`; the earlier archives `20261103-1428`, `20261105-9d1c984` and the 2026-11-02 backup are preserved and stale |
+
+Deploy only this exact artifact, manually, without deleting unrelated hosting content (for example `.htaccess` rules on the server or other sites); take or confirm a backup of the live site first. Production has not been assessed after deployment.
+
 ## Update after the Q3 cycle (2026-11-04)
 
 Eight local commits after `f5a1df4` (`b342344` to `b714e57`, plus the closing records commit). Nothing is pushed: `origin/main` is behind HEAD. The Hostinger zip and its hash below were built from `f5a1df4` and no longer match the code, so they must NOT be deployed; rebuild `dist/` and regenerate the zip and hash at release time. The preview site still shows `f5a1df4`. Full regression was not run; the checks that were run are listed per change in `TEST_EXECUTION_LEDGER.md` (Q3-2 to Q3-9). A release checkpoint (unit suite, desktop and mobile browser groups, axe sweeps) is due before any push to the preview of this batch or any deployment.
