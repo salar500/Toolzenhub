@@ -149,5 +149,37 @@ export const WRITING = Object.freeze([
             { name: "no environment", answer: { title: "₹49 delivery charged on a ₹999 cart", environment: "", steps: "Open the shop\nAdd the Office Chair Cushion\nOpen the cart", expected: "Free delivery for ₹999 per R6", actual: "₹49 delivery added", severity: "major" }, missing: ["env"] }
         ],
         explain: "The model report lets a developer reproduce the problem in a minute: a specific title with the value, the release and browser, four single steps from an empty cart, the expected result tied to R6, and the exact actual charge. ₹999 is a boundary value, so the cause is very likely a > where >= was meant."
+    },
+    {
+        id: "mt-w-test-plan-coupons",
+        template: "test-plan",
+        task: "ShopLite release 1.2 changes only the coupon rules (R5) and therefore the cart totals and the delivery fee that depends on them (R6). Write the key sections of its test plan.",
+        scenario: "Changed: coupon calculation (R5). Depends on it: cart totals, delivery fee (R6), checkout total. Unchanged: search, sign-up, account, order history. Two testers, three days, stable test environment.",
+        fields: [
+            { name: "scope", label: "In scope", lines: 3 },
+            { name: "outOfScope", label: "Out of scope", lines: 2 },
+            { name: "approach", label: "Approach (techniques and test types)", lines: 4 },
+            { name: "risks", label: "Risks and mitigations", lines: 3 },
+            { name: "exit", label: "Exit criteria", lines: 3 }
+        ],
+        rules: [
+            { id: "scope", type: "covers", fields: ["scope"], groups: [["coupon", "r5"], ["delivery", "r6", "total"]], label: "Scope names the changed and dependent areas", advice: "Include coupons (R5) and what depends on them: cart totals and the delivery fee (R6)." },
+            { id: "out", type: "covers", fields: ["outOfScope"], groups: [["search", "sign-up", "signup", "account", "order history", "unchanged"]], label: "Out of scope is stated", advice: "Say what will not be tested this release (the unchanged areas), so nobody assumes it was." },
+            { id: "approach", type: "covers", fields: ["approach"], groups: [["boundary", "499", "500", "999"], ["regression", "checkout"]], label: "Approach uses boundaries and regression", advice: "Coupon and delivery rules have thresholds: plan boundary-value tests, and regression of checkout." },
+            { id: "risks", type: "minLines", field: "risks", min: 2, label: "At least two risks with mitigations", advice: "For example: rounding errors in discounts (mitigation: boundary tests at ₹999), little time (risk-based order)." },
+            { id: "exit", type: "covers", fields: ["exit"], groups: [["critical", "major", "high"], ["all", "100", "%", "every"]], label: "Exit criteria are measurable", advice: "For example: all planned coupon and delivery tests run; no open critical or major defects in scope." },
+            { id: "exit-vague", type: "noVague", fields: ["exit"], words: ["good", "fine", "works", "working", "properly", "correctly", "ok", "okay", "as expected", "acceptable", "enough", "stable"], label: "Exit criteria avoid vague words", advice: "Replace 'quality is good' or 'works fine' with numbers and defect states." }
+        ],
+        model: {
+            scope: "Coupons (R5): SAVE10 and WELCOME50 rules and messages.\nCart totals and the delivery fee that depends on them (R6).\nCheckout total.",
+            outOfScope: "Search, sign-up, account and order history: unchanged in 1.2.",
+            approach: "Boundary-value tests at ₹499, ₹500 and ₹999, before and after discounts.\nNegative tests: unknown, lower-case and ineligible codes.\nOne exploratory session on cart totals.\nRegression of the checkout flow.",
+            risks: "Discount rounding errors: boundary tests with ₹999 carts.\nOnly three days: test in risk order, coupons first.\nDelivery fee calculated before the discount: explicit tests after discounts.",
+            exit: "All planned coupon and delivery tests run.\nNo open critical or major defects in scope.\nRemaining minor defects listed in the summary report."
+        },
+        weak: [
+            { name: "vague", answer: { scope: "The new release", outOfScope: "", approach: "Test everything", risks: "Bugs", exit: "Quality is good" }, missing: ["scope", "out", "approach", "risks", "exit", "exit-vague"] }
+        ],
+        explain: "A focused plan tests what changed and what depends on it, says plainly what is not tested, picks techniques that match the rules (boundaries for thresholds), names real risks with mitigations and ends with criteria anyone can check."
     }
 ]);

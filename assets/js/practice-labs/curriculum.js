@@ -139,7 +139,7 @@ export const PATHS = Object.freeze([
         id: "manual-testing",
         title: "Manual Software Testing",
         department: "software-testing",
-        status: "building",
+        status: "complete",
         tagline: "Learn to test software from zero: requirements, test scenarios and test cases, bug reports and test planning, practised on ShopLite, a shop with real seeded bugs.",
         audience: "Complete beginners, people starting a career in testing, and developers who want to test their own work better.",
         runsIn: "Everything runs in your browser: quizzes, writing labs that check your test cases and bug reports, and ShopLite, a practice shop whose test release hides ten bugs. Nothing you write is uploaded.",
@@ -246,10 +246,7 @@ export const PATHS = Object.freeze([
                 ]
             }
         ],
-        coming: [
-            "Interview practice for manual testing",
-            "A test-plan writing lab"
-        ]
+        coming: []
     }
 ]);
 

@@ -676,6 +676,8 @@ PROJECTS = [
 ]
 
 INTERVIEW = dict(
+    howTo="Answer each concept question before opening the explanation, then solve the coding problems without looking at the hints. In an interview, say your reasoning out loud: what the query must return, which tables it needs, and how you would check the result. Every explanation mentions an alternative or a follow-up question interviewers like to ask.",
+    description="10 SQL concept questions with explanations and 10 coding problems checked in your browser, from second-highest salary to pivots.",
     coding=["sqlp-iq-second-highest", "sqlp-iq-above-dept-average", "sqlp-iq-never-ordered", "sqlp-iq-orders-pivot", "sqlp-iq-first-order",
             "sqlp-iq-best-department", "sqlp-iq-big-teams", "sqlp-iq-third-distinct", "sqlp-iq-raise", "sqlp-iq-running-count"],
     quiz=[

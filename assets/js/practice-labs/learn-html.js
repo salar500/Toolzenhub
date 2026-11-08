@@ -28,6 +28,7 @@ import { renderBlocks } from "./blocks-html.js";
 import { lessons as mtLessons } from "./manual-testing/lessons.js";
 import { lessons as mtLessons2 } from "./manual-testing/lessons-2.js";
 import { lessons as mtLessons3 } from "./manual-testing/lessons-3.js";
+import { interview as mtInterview } from "./manual-testing/interview.js";
 import { WRITING as mtWriting } from "./manual-testing/writing.js";
 
 const SITE_NAME = "ToolZen Hub";
@@ -59,6 +60,7 @@ const CONTENT = {
         lessons: new Map([...mtLessons, ...mtLessons2, ...mtLessons3].map((lesson) => [lesson.id, lesson])),
         exercises: new Map(),
         writing: new Map(mtWriting.map((exercise) => [exercise.id, exercise])),
+        interview: mtInterview,
         labTool: "test-design-lab",
         flashcards: "smart-flashcards",
         morePractice: "drills boundary values and equivalence partitions with checked exercises; it pairs with the test data lessons."
@@ -556,7 +558,7 @@ function pathBody(path, content) {
                 ${content.interview ? `
                 <section class="learn-section" aria-labelledby="learn-path-interview">
                     <h2 id="learn-path-interview">Interview practice</h2>
-                    <p><a href="${esc(interviewUrl(path))}">${esc(path.title)} interview practice</a>: ${content.interview.quiz.length} concept questions with explanations and ${content.interview.coding.length} classic coding problems, checked in your browser.</p>
+                    <p><a href="${esc(interviewUrl(path))}">${esc(path.title)} interview practice</a>: ${content.interview.quiz.length} questions with explanations${content.interview.coding.length ? ` and ${content.interview.coding.length} classic coding problems, checked in your browser` : ""}.</p>
                 </section>` : ""}
 
                 ${path.coming?.length ? `
@@ -757,12 +759,12 @@ function interviewBody(path, content) {
                 <header class="learn-lesson__head">
                     <p class="learn-eyebrow"><a href="${esc(pathUrl(path))}">${esc(path.title)}</a> · Interview practice</p>
                     <h1>${esc(path.title)} interview practice</h1>
-                    <p class="learn-progress"><span class="learn-progress__text">${content.interview.quiz.length} concept questions · ${coding.length} checked coding problems</span></p>
+                    <p class="learn-progress"><span class="learn-progress__text">${content.interview.quiz.length} scenario and concept questions${coding.length ? ` · ${coding.length} checked coding problems` : ""}</span></p>
                 </header>
 
                 <section class="learn-section learn-lesson-card" aria-labelledby="learn-iq-how">
                     <h2 id="learn-iq-how">How to use this page</h2>
-                    <p>Answer each concept question before opening the explanation, then solve the coding problems without looking at the hints. In an interview, say your reasoning out loud: what the query must return, which tables it needs, and how you would check the result. Every explanation mentions an alternative or a follow-up question interviewers like to ask.</p>
+                    <p>${esc(content.interview.howTo ?? "Answer each question before opening the explanation, then solve any practical problems without looking at the hints. In an interview, say your reasoning out loud.")}</p>
                 </section>
 
                 <section class="learn-section" aria-labelledby="learn-iq-concepts">
@@ -770,15 +772,16 @@ function interviewBody(path, content) {
                     ${quizBlock(content.interview.quiz, `${path.id}-iq`)}
                 </section>
 
+                ${coding.length ? `
                 <section class="learn-section" aria-labelledby="learn-iq-coding">
                     <h2 id="learn-iq-coding">Coding problems</h2>
                     <p>Each problem is checked by SQLite in your browser on the practice databases.</p>
                     <noscript><p class="lx-note">Checking needs JavaScript and WebAssembly. The problems, hints and solutions can still be read.</p></noscript>
                     ${coding.map((exercise, i) => exerciseBlock(exercise, i, "Problem")).join("")}
-                </section>
+                </section>` : ""}
 
                 <nav class="learn-pager" aria-label="Interview practice navigation">
-                    <a class="learn-pager__link learn-pager__link--prev" href="${esc(projectsUrl(path))}"><span>Back to</span>${esc(path.title)} projects</a>
+                    ${content.projects?.length ? `<a class="learn-pager__link learn-pager__link--prev" href="${esc(projectsUrl(path))}"><span>Back to</span>${esc(path.title)} projects</a>` : `<span></span>`}
                     <a class="learn-pager__link learn-pager__link--next" href="${esc(pathUrl(path))}"><span>Back to</span>The ${esc(path.title)} learning path</a>
                 </nav>
 
@@ -1195,7 +1198,7 @@ export function learnPages() {
                 ...pageEntry({
                     url: interviewUrl(path),
                     title: `${path.title} Interview Questions with Checked Answers | ${SITE_NAME}`,
-                    description: `${content.interview.quiz.length} ${path.title} concept questions with explanations and ${content.interview.coding.length} coding problems checked in your browser, from second-highest salary to pivots.`,
+                    description: content.interview.description ?? `${content.interview.quiz.length} ${path.title} interview questions with explanations, checked in your browser.`,
                     html: frame({ trail, nav: roadmapNav(path, { now: "Interview practice", currentExtra: "interview" }), body: interviewBody(path, content) }),
                     trail
                 })

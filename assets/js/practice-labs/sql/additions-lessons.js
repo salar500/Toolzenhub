@@ -1008,6 +1008,8 @@ export const projects = [
 ];
 
 export const interview = {
+ "howTo": "Answer each concept question before opening the explanation, then solve the coding problems without looking at the hints. In an interview, say your reasoning out loud: what the query must return, which tables it needs, and how you would check the result. Every explanation mentions an alternative or a follow-up question interviewers like to ask.",
+ "description": "10 SQL concept questions with explanations and 10 coding problems checked in your browser, from second-highest salary to pivots.",
  "coding": [
   "sqlp-iq-second-highest",
   "sqlp-iq-above-dept-average",

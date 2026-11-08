@@ -62,7 +62,8 @@ export const lessons = [
             { type: "quiz", heading: "Your turn", questions: [
                 { q: "Why write 'Out of scope' explicitly?", options: ["To avoid misunderstandings about what was not tested", "It is optional decoration"], answer: 0, explain: "Stakeholders otherwise assume everything was tested." },
                 { q: "Which is a measurable exit criterion?", options: ["Quality is good", "No open critical defects and 100% of planned high-priority tests run"], answer: 1, explain: "It can be checked objectively." }
-            ] }
+            ] },
+            { type: "write", heading: "Your turn: plan a release", exercise: "mt-w-test-plan-coupons" }
         ],
         why: "Without a plan, testers, developers and managers each assume something different about what will be tested. A short, clear plan prevents surprises at release time.",
         analogy: "A test plan is the trip itinerary: where you are going, what you will skip, how you travel, the budget and when you will be back.",
