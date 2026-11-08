@@ -1287,3 +1287,9 @@ a.learn-card:hover {
 .learn-numeric { display: grid; gap: 14px; padding-left: 1.4em; }
 .learn-numeric__input { max-width: 12em; min-height: 44px; }
 .learn-write .lx-table-wrap { overflow-x: auto; margin: 0 0 12px; }
+
+/* ---------- API request tasks ---------- */
+
+.learn-api__line { display: grid; grid-template-columns: minmax(7em, auto) 1fr; gap: 10px; margin: 0 0 10px; }
+.learn-api__target .lx-input { width: 100%; }
+@media (max-width: 520px) { .learn-api__line { grid-template-columns: 1fr; } }

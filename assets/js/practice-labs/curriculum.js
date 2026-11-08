@@ -232,6 +232,37 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "http-apis",
+        title: "HTTP and REST APIs",
+        department: "web-backend",
+        status: "complete",
+        tagline: "Understand and use web APIs: methods, status codes, headers, JSON bodies, authentication, validation, REST design and API testing, with requests you build and send to a simulated ShopLite API.",
+        audience: "Developers and testers who work with APIs, analysts who pull data from them and anyone heading to backend or full-stack work. No programming is needed for the request tasks.",
+        runsIn: "Requests are answered by a model of ShopLite's API running inside the page, so results are repeatable; nothing is sent over the network.",
+        outcomes: ["Read URLs and choose the right HTTP method", "Interpret status codes and error bodies", "Send headers, query parameters and JSON bodies", "Call protected endpoints with a bearer token", "Design REST endpoints and plan API tests", "Explain caching, rate limits and API security basics"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "http-basics", title: "HTTP Basics", summary: "Clients, servers and URLs, methods, status codes, and query parameters, headers and JSON bodies, practised on a simulated API.", lessons: [
+                    { id: "http-how-web-works", slug: "clients-servers-and-urls", title: "How the web works: clients, servers and URLs" },
+                    { id: "http-methods", slug: "http-methods", title: "HTTP methods: GET, POST, PUT, PATCH and DELETE" },
+                    { id: "http-status-codes", slug: "status-codes", title: "Status codes" },
+                    { id: "http-query-headers", slug: "query-headers-and-json", title: "Query parameters, headers and JSON bodies" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "working-apis", title: "Working with Real APIs", summary: "Bearer tokens and authorisation, validation errors with field messages, and consistent REST design.", lessons: [
+                    { id: "http-auth", slug: "authentication-and-authorisation", title: "Authentication and authorisation" },
+                    { id: "http-validation", slug: "validation-errors", title: "Validation errors: 400, 415 and 422" },
+                    { id: "http-rest-design", slug: "rest-api-design", title: "REST API design" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "quality-security", title: "Testing, Performance and Security", summary: "Planning and automating API tests, and caching, rate limits and the API security basics.", lessons: [
+                    { id: "http-api-testing", slug: "testing-apis", title: "Testing APIs" },
+                    { id: "http-performance-security", slug: "caching-rate-limits-and-security", title: "Caching, rate limits and API security" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",

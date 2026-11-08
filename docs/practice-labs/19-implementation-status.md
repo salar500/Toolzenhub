@@ -60,7 +60,17 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 
 The path also has interview practice (12 questions).
 
-A new `jsrun` block runs the learner's code against the exercise's tests in a fresh **module Web Worker** (`programming/js-worker.js`). Before any code runs, the worker removes fetch, XHR, WebSocket, importScripts, IndexedDB and similar APIs. Code that contains `import` is refused. The page terminates the worker after 2 s. There are 12 exercises, each pinned by its model, buggy versions and a non-passing starter | (this milestone's commit) | JS exercises unit test (12 pinned; syntax error, missing function, thrown error, console capture and import refusal). At 1280 and 390: the starter and buggy version fail (3 of 4, with the 999 boundary named) and the model passes; an endless loop is stopped while the page stays responsive; fetch is unavailable; console output is shown; there is no overflow and no outside requests; the interview has 12 questions. 14,430 links on 182 pages resolve. The leak guard caught the word "undefined" in lesson text twice; both were reworded | Python and Java paths (planned; no large runtime downloads) |
+A new `jsrun` block runs the learner's code against the exercise's tests in a fresh **module Web Worker** (`programming/js-worker.js`). Before any code runs, the worker removes fetch, XHR, WebSocket, importScripts, IndexedDB and similar APIs. Code that contains `import` is refused. The page terminates the worker after 2 s. There are 12 exercises, each pinned by its model, buggy versions and a non-passing starter | `90f15d7` | JS exercises unit test (12 pinned; syntax error, missing function, thrown error, console capture and import refusal). At 1280 and 390: the starter and buggy version fail (3 of 4, with the 999 boundary named) and the model passes; an endless loop is stopped while the page stays responsive; fetch is unavailable; console output is shown; there is no overflow and no outside requests; the interview has 12 questions. 14,430 links on 182 pages resolve. The leak guard caught the word "undefined" in lesson text twice; both were reworded | Python and Java paths (planned; no large runtime downloads) |
+
+| M8a | **Web and Backend: the HTTP and REST APIs path**. It has 9 lessons:
+
+- Beginner: URLs, methods, status codes, and query parameters, headers and JSON.
+- Intermediate: authentication and authorisation, validation errors, and REST design.
+- Advanced: testing APIs, and caching, rate limits and security.
+
+The path also has interview practice (12 questions) and links to the JSON Error-Fixing Lab.
+
+A new `apitask` block lets the learner build a request (method, path and query, headers, body). `web/mock-api.js` answers it inside the page. It is a deterministic, stateless model of a ShopLite API with products, filters, a bearer-token orders endpoint and a JSON cart endpoint, and it covers 200, 201 (with Location), 204, 400, 401, 404, 405 (with Allow), 415 and 422. Each task's goal is checked. Nothing is sent, and the host is the reserved `.example` domain. There are 8 tasks | (this milestone's commit) | Mock API unit test (every response code; each task's model meets its goal and its start does not). At 1280 and 390: the orders endpoint gives 401 without a token and meets the goal with one; the cart gives 415 without Content-Type, then 201 with Location; there is no overflow; nothing is sent to the example host; the interview has 12 questions. 15,633 links on 199 pages resolve | HTML, CSS and DOM path and backend fundamentals (next) |
 
 ## 3. Current inventory (built)
 
@@ -81,10 +91,13 @@ A new `jsrun` block runs the learner's code against the exercise's tests in a fr
 
 ## 5. Next checkpoint
 
-**Stage 8, Web and Backend:**
+**Stage 8 remainder:** an HTML, CSS and DOM path with a sandboxed iframe playground and checks on the produced DOM.
 
-- an HTTP and REST APIs path, with a request builder against a deterministic mock ShopLite API that runs in the page;
-- an HTML, CSS and DOM path with a sandboxed iframe playground;
-- links to the JSON and JSONPath labs.
+**Stage 9, DevOps, Cloud and Cybersecurity:**
 
-**Then:** Stages 9 to 11.
+- a Git simulator: commands applied to a modelled repository;
+- a shell simulator;
+- a CI pipeline visualizer;
+- security code-reading labs.
+
+**Then:** Stages 10 to 11.

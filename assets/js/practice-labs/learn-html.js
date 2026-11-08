@@ -37,6 +37,7 @@ import { lessons as aiLessons, interview as aiInterview } from "./ai/lessons.js"
 import { AI_WRITING } from "./ai/writing.js";
 import { lessons as stLessons, interview as stInterview } from "./data/lessons.js";
 import { lessons as jsLessons, interview as jsInterview } from "./programming/lessons.js";
+import { lessons as httpLessons, interview as httpInterview } from "./web/lessons.js";
 
 const SITE_NAME = "ToolZen Hub";
 const HUB = () => ROUTES.practiceLabs;
@@ -101,6 +102,16 @@ const CONTENT = {
         labTool: null,
         flashcards: null,
         morePractice: ""
+    },
+    "http-apis": {
+        kind: "blocks",
+        lessons: new Map(httpLessons.map((lesson) => [lesson.id, lesson])),
+        interview: httpInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: "json-error-fixing-lab",
+        flashcards: "smart-flashcards",
+        morePractice: "teaches you to repair broken JSON bodies the way a strict parser sees them, the cause of many 400 responses."
     },
     "test-design": {
         kind: "blocks",

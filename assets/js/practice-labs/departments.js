@@ -159,20 +159,20 @@ export const DEPARTMENTS = Object.freeze([
         intro: [
             "Web applications talk to their servers in JSON over HTTP. Reading and writing that JSON correctly, and pulling the right value out of a large response, are everyday skills for developers and for testers who check APIs.",
             "Two labs here give checked practice on exactly that. The JSON Error-Fixing Lab teaches you to repair broken JSON the way a strict parser sees it, and the JSONPath Challenge Lab has you write queries that are evaluated by an RFC 9535 engine against a real document. When you need the full utilities, the Developer Tools section has the JSON Formatter, the JSONPath Tester, the JWT Decoder and the URL Parser.",
-            "Learning paths for HTTP and REST APIs, the web platform and backend fundamentals are being built; API testing itself lives in Software Testing and Quality Engineering.",
+            "The HTTP and REST APIs path teaches the protocol underneath it all: methods, status codes, headers, JSON bodies, tokens, validation errors, REST design and API testing. You build real requests and send them to a simulated ShopLite API that answers inside the page, so every response is repeatable and nothing leaves your browser. Paths for HTML, CSS and the DOM and for backend fundamentals follow.",
             "Both labs check your answer exactly instead of guessing. A repaired document must parse as strict JSON, and a query must return exactly the expected values from the document, so you see the effect of every bracket, quote and filter. Each exercise comes with hints and an explained solution."
         ],
         technologies: [
             { title: "JSON: reading and repairing", status: "lab", lab: "json-error-fixing-lab" },
             { title: "JSONPath queries", status: "lab", lab: "jsonpath-challenge-lab" },
-            { title: "HTTP and REST APIs", status: "planned" },
+            { title: "HTTP and REST APIs", status: "path", path: "http-apis" },
             { title: "HTML, CSS and the DOM", status: "planned" },
             { title: "Backend fundamentals", status: "planned" }
         ],
-        paths: [],
+        paths: ["http-apis"],
         labs: ["json-error-fixing-lab", "jsonpath-challenge-lab"],
         decks: ["JSON", "HTTP and APIs"],
-        start: { label: "Start by fixing broken JSON in the JSON Error-Fixing Lab.", lab: "json-error-fixing-lab" },
+        start: { label: "Start with lesson 1 of HTTP and REST APIs.", path: "http-apis" },
         related: ["software-testing", "programming", "devops-cloud-security"]
     },
     {

@@ -16,6 +16,7 @@
      aiviz     { heading?, kind, text }                 an AI teaching visualizer (learn-aiviz.js): tokens|context|sampling|retrieval|confusion
      numeric   { heading?, dataset, exercises[] }       a data table and calculations checked in the browser (data/stats.js)
      jsrun     { heading?, exercise }                   JavaScript run against tests in a Web Worker (learn-jsrun.js)
+     apitask   { heading?, task }                       an HTTP request answered by the in-page mock API (learn-api.js)
      shoplite  { text, release? }                       a task on the practice shop, opened in a new tab
 ========================================================= */
 
@@ -24,6 +25,7 @@ import { SITE_ROOT } from "../routes.js";
 import { AREAS, BUGS, RELEASES } from "./shoplite/bugs.js";
 import { CODE } from "./playwright/code.js";
 import { JS_EXERCISES } from "./programming/js-exercises.js";
+import { API_TASKS, API_HOST } from "./web/mock-api.js";
 import { DATASETS, NUMERIC, formatAnswer } from "./data/stats.js";
 
 const SHOPLITE = () => `${SITE_ROOT}practice-labs/shoplite/`;
@@ -296,6 +298,42 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                             <summary>Show a model answer and why</summary>
                             <pre class="lx-code" tabindex="0"><code>${esc(exercise.model)}</code></pre>
                             <p>${esc(exercise.explain)}</p>
+                        </details>
+                    </div>
+                </section>`;
+        }
+
+        case "apitask": {
+            const task = API_TASKS.find((t) => t.id === block.task);
+            if (!task) throw new Error(`unknown API task ${block.task}`);
+            const id = esc(task.id);
+            const methods = ["GET", "POST", "PUT", "PATCH", "DELETE"].map((m) => `<option${m === task.start.method ? " selected" : ""}>${m}</option>`).join("");
+            const model = [`${task.model.method} ${task.model.target}`, task.model.headers, task.model.body ? `\n${task.model.body}` : ""].filter(Boolean).join("\n");
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-write" data-apitask="${id}">
+                        <p>${esc(task.task)}</p>
+                        <div data-api-tools hidden>
+                            <div class="learn-api__line">
+                                <div><label class="lx-label" for="${id}-m">Method</label><select id="${id}-m" class="lx-select" data-api-field="method">${methods}</select></div>
+                                <div class="learn-api__target"><label class="lx-label" for="${id}-t">Path and query (host ${esc(API_HOST)})</label><input id="${id}-t" class="lx-input" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" value="${esc(task.start.target)}" data-api-field="target"></div>
+                            </div>
+                            <label class="lx-label" for="${id}-h">Headers (one per line, Name: value)</label>
+                            <textarea id="${id}-h" class="lx-textarea learn-editor" rows="2" spellcheck="false" autocapitalize="off" data-api-field="headers">${esc(task.start.headers)}</textarea>
+                            <label class="lx-label" for="${id}-b">Body</label>
+                            <textarea id="${id}-b" class="lx-textarea learn-editor" rows="3" spellcheck="false" autocapitalize="off" data-api-field="body">${esc(task.start.body)}</textarea>
+                            <div class="learn-actions">
+                                <button type="button" class="calculator-form__button lx-btn" data-api-send>Send request</button>
+                                <button type="button" class="calculator-form__button calculator-form__button--secondary lx-btn" data-api-reset>Start again</button>
+                            </div>
+                            <div class="learn-feedback" data-api-out role="status" aria-live="polite"></div>
+                        </div>
+                        <p class="lx-note">Simulated API: a model of ShopLite's API answers inside this page. Nothing is sent over the network, and api.shoplite.example is a reserved example address.</p>
+                        <details class="learn-reveal">
+                            <summary>Show a request that works and why</summary>
+                            <pre class="lx-code" tabindex="0"><code>${esc(model)}</code></pre>
+                            <p>${esc(task.explain)}</p>
                         </details>
                     </div>
                 </section>`;
