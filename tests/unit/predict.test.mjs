@@ -28,6 +28,25 @@ test("java outputs match the real JVM", { skip: !hasJava && "java not installed"
   }
 });
 
+const TSC = ["npx", "--no-install", "tsc"];
+const tsc = spawnSync(TSC.join(" "), ["-v"], { shell: true }).status === 0;
+
+test("typescript answers match the real compiler (tsc --strict) and Node.js", { skip: !tsc && "tsc not installed" }, () => {
+  for (const ex of PREDICT.filter((p) => p.lang === "typescript")) {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "tz-ts-"));
+    fs.writeFileSync(path.join(dir, "main.ts"), ex.code);
+    const r = spawnSync(TSC.join(" "), ["--strict", "--target", "es2022", "--module", "commonjs", "--pretty", "false", "main.ts"], { cwd: dir, encoding: "utf8", shell: true });
+    if (ex.check === "compile") {
+      const first = /main\.ts\((\d+),\d+\): error/.exec(r.stdout);
+      assert.equal(first ? `line ${first[1]}` : "compiles", ex.output, `${ex.id}: ${r.stdout}`);
+    } else {
+      assert.equal(r.status, 0, `${ex.id}: ${r.stdout}`);
+      const run = spawnSync("node", ["main.js"], { cwd: dir, encoding: "utf8" });
+      assert.equal(run.stdout.replace(/\r\n/g, "\n").replace(/\n$/, ""), ex.output, ex.id);
+    }
+  }
+});
+
 test("python outputs match CPython", { skip: !hasPython && "python not installed" }, () => {
   for (const ex of PREDICT.filter((p) => p.lang === "python")) {
     const r = spawnSync("python", ["-c", ex.code], { encoding: "utf8" });

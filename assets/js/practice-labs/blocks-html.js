@@ -444,12 +444,12 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
         case "predict": {
             const exercise = PREDICT.find((c) => c.id === block.exercise);
             if (!exercise) throw new Error(`unknown prediction exercise ${block.exercise}`);
-            const lang = exercise.lang === "java" ? "Java" : "Python";
+            const lang = { java: "Java", python: "Python", typescript: "TypeScript" }[exercise.lang];
             return `
                 <section class="learn-section"${labelled}>
                     ${heading}
                     <div class="learn-write" data-predict="${esc(exercise.id)}">
-                        <p>What does this ${lang} program print? Type the output exactly, one line per line.</p>
+                        <p>${esc(exercise.prompt ?? `What does this ${lang} program print? Type the output exactly, one line per line.`)}</p>
                         <pre class="lx-code" tabindex="0"><code>${esc(exercise.code)}</code></pre>
                         <div data-pred-tools hidden>
                             <label class="lx-label" for="${esc(exercise.id)}-out">Predicted output</label>
@@ -457,9 +457,9 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                             <div class="learn-actions"><button type="button" class="calculator-form__button lx-btn" data-pred-check>Check</button></div>
                             <p class="learn-feedback" data-pred-out role="status" aria-live="polite"></p>
                         </div>
-                        <p class="lx-note">${exercise.lang === "java" ? "Not executed in your browser: the expected output was recorded by compiling and running this code with Java 17." : "Not executed here: the expected output was recorded with CPython; Python exercises elsewhere on this path run real Python."}</p>
+                        <p class="lx-note">${{ java: "Not executed in your browser: the expected output was recorded by compiling and running this code with Java 17.", python: "Not executed here: the expected output was recorded with CPython; Python exercises elsewhere on the Python path run real Python.", typescript: "Not compiled in your browser: the expected answer was produced by the real TypeScript compiler (tsc --strict) and, for output tasks, by running the result with Node.js." }[exercise.lang]}</p>
                         <details class="learn-reveal">
-                            <summary>Show the output and why</summary>
+                            <summary>Show the answer and why</summary>
                             <pre class="lx-code" tabindex="0"><code>${esc(exercise.output)}</code></pre>
                             <p>${esc(exercise.explain)}</p>
                         </details>

@@ -5,10 +5,12 @@
    the code with the real compiler or interpreter (pinned by tests/unit/predict.test.mjs with javac 17 and CPython).
 ========================================================= */
 
+import { TS_PREDICT } from "./ts-predict.js";
+
 const indent = (text, n) => text.split("\n").map((l) => (l ? " ".repeat(n) + l : l)).join("\n");
 const java = (body, after = "", imports = "") => `${imports ? `${imports}\n\n` : ""}public class Main {\n    public static void main(String[] args) {\n${indent(body, 8)}\n    }${after ? `\n\n${indent(after, 4)}` : ""}\n}`;
 
-export const PREDICT = Object.freeze([
+const BASE = [
     { id: "jv-p-int-division", lang: "java", code: java("int items = 7;\nint boxes = 2;\nSystem.out.println(items / boxes);\nSystem.out.println(items % boxes);\nSystem.out.println((double) items / boxes);"),
         output: "3\n1\n3.5", hint: "Dividing two ints throws away the fraction; the cast happens before the division in the last line.",
         explain: "int / int is integer division (3), % is the remainder (1), and casting one operand to double first gives 3.5." },
@@ -63,7 +65,11 @@ export const PREDICT = Object.freeze([
     { id: "py-p-scope", lang: "python", code: "total = 10\n\ndef add_tax(amount):\n    total = amount * 1.18\n    return round(total, 2)\n\nprint(add_tax(100))\nprint(total)",
         output: "118.0\n10", hint: "Assigning inside a function creates a local variable.",
         explain: "The function's total is local, so the global total stays 10." }
-]);
+];
+
+/* every prediction exercise: Java and Python here, TypeScript in ts-predict.js */
+export const PREDICT = Object.freeze([...BASE, ...TS_PREDICT]);
+
 
 /** compare a learner's typed output with the expected output, ignoring trailing spaces and a final newline */
 export const normaliseOutput = (text) => String(text ?? "").replace(/\r\n/g, "\n").split("\n").map((l) => l.replace(/\s+$/, "")).join("\n").replace(/\n+$/, "");

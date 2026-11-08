@@ -810,6 +810,33 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "typescript",
+        title: "TypeScript",
+        department: "programming",
+        status: "complete",
+        tagline: "Add types to JavaScript with confidence: inference, interfaces, optional and readonly properties, unions and narrowing, generics, unknown, strict mode and runtime boundaries, practised by predicting what the real compiler says.",
+        audience: "JavaScript developers and automation engineers moving to TypeScript, including Playwright users. Complete the JavaScript Programming path first.",
+        runsIn: "TypeScript is not compiled in the page. You predict whether each snippet compiles (and where the first error is) or what it prints; every answer was produced by the real TypeScript compiler with strict mode, and output tasks by running the result with Node.js.",
+        outcomes: ["Use annotations and inference", "Describe objects with interfaces", "Model alternatives with unions and narrow them", "Write generic functions and use utility types", "Configure strict mode and validate data at boundaries"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "typescript-basics", title: "TypeScript Basics", summary: "Types, inference, the compiler, and object shapes with interfaces.", lessons: [
+                    { id: "ts-why", slug: "types-and-inference", title: "Why TypeScript: types, inference and the compiler" },
+                    { id: "ts-objects", slug: "interfaces-and-optional-properties", title: "Objects, interfaces and optional properties" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "typing-real-code", title: "Typing Real Code", summary: "Unions and narrowing with exhaustive checks, and generics with utility types.", lessons: [
+                    { id: "ts-unions", slug: "unions-and-narrowing", title: "Union types and narrowing" },
+                    { id: "ts-generics", slug: "generics-and-utility-types", title: "Generics and utility types" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "typescript-in-practice", title: "TypeScript in Practice", summary: "tsconfig, strictness and runtime validation at boundaries.", lessons: [
+                    { id: "ts-tooling", slug: "configuration-and-strictness", title: "Configuration, strictness and TypeScript in practice" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",

@@ -357,7 +357,7 @@ Both paths have interview practice (12 questions each). The Cron Challenge Lab i
   - At 1280 and 390 px the home page shows 8 journeys, the first opens with 6 steps, no department card is marked in development, and search works.
   - 33,584 links on 461 pages resolve.
 
-#### M13a: Regular Expressions (P33) and Data Structures and Algorithms (P32) paths (commit: (this milestone's commit))
+#### M13a: Regular Expressions (P33) and Data Structures and Algorithms (P32) paths (commit: `30d7ed5`)
 
 - **Why these paths:** the final audit compared the approved catalogue (`05-learning-path-catalogue.md`) with the repository. P31, P32, P33, P23, P62 and P73 had no path. Cypress is not in the approved catalogue and is not built.
 - **Regular Expressions** has 4 lessons with interview practice (8 questions).
@@ -373,6 +373,24 @@ Both paths have interview practice (12 questions each). The Cron Challenge Lab i
   - Curriculum test (one leaked word, "undefined", reworded).
   - At 1280 and 390 px: an unanchored pattern scores 3 of 5 and the anchored one passes; the page stays responsive after a nested-quantifier pattern; the LRU model passes; no overflow.
   - Links resolve.
+
+#### M13b: TypeScript path (P31) (commit: (this milestone's commit))
+
+- **TypeScript** has 5 lessons, with interview practice (8 questions):
+  - types and inference;
+  - interfaces, optional and readonly properties;
+  - unions, narrowing and exhaustive `never` checks;
+  - generics, utility types and `unknown`;
+  - tsconfig, strict mode and validating data at the boundary.
+- **10 new `predict` exercises** in `programming/ts-predict.js`:
+  - 9 compile-verdict tasks ("compiles" or "line N" of the first error);
+  - 1 output task.
+- `predict` now takes an optional `prompt` and a TypeScript language note.
+- TypeScript is not compiled in the page. This follows the catalogue's "type-reading exercises" option.
+- **Checks performed:**
+  - `tests/unit/predict.test.mjs` compiles every snippet with the real `tsc --strict` (TypeScript 4.9 via npx) and runs output tasks with Node.js: all 10 match.
+  - Curriculum test passes. The leak guard now allows the word "undefined" only on TypeScript path pages, where it is the name of a type; elsewhere it stays strict.
+  - At 1280 and 390 px: the compile prompt and compiler note show, a wrong verdict is refused, "line 7" is accepted, and there is no overflow.
 
 ### Final inventory, 2026-11-08 (preview branch, after the final remaining-development mission)
 
