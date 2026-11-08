@@ -28,31 +28,28 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 | M2b | SQL part 2: 5 projects (HR analytics, bank statement checks, shop sales report reusing the lab's 3 report exercises by id, clinic appointments, KPI pack) with 24 checked milestones; interview practice (10 concept questions with a new quiz engine, 10 coding problems); clinic and targets datasets (synthetic); projects index; roadmap groups; search covers projects and interview; SQL path status **complete** (24 lessons, 5 projects, interview) | `08e6955` | Generator: 50 path exercises run, empty-answer guard (caught and replaced one problem whose answer was empty); unit test; sql.js judged all 34 milestones and problems correct (incl. the 3 reused lab exercises and data-changing milestones); a wrong data change rejected; quiz right and wrong paths; search finds projects; roadmap groups; 4,280 links on 47 pages resolve, index of 39 entries valid; phone: project, interview and index pages without overflow | Lab pages, accessibility sweep |
 | M2c | JOIN visualizer in the "Joining tables" lesson: four join types stepped row by row (driving row and matches highlighted, result grows, plain-language note per step), then the same SQL run in sql.js and compared; static tables and the INNER result without script. Fix found on the way: primary buttons on learning pages had no style (bare text); they now use the site's form-button classes, as the labs do | `81114b9` | Unit test of the model (6 cases, expected rows worked by hand and confirmed with Python sqlite3, incl. RIGHT and FULL joins); browser at 1280 and 390: each type stepped to the end, SQLite confirms the same rows, mid-step highlight state, no overflow, first task still within 3 screens; milestone M1 checks re-run after the button change (27 pass) | Lab pages |
 | M3a | Stage 3 begins: **ShopLite**, a small original practice shop at `/practice-labs/shoplite/` (noindex, not in the sitemap). It has search, filters, sorting, product, cart (quantity, remove, coupons), checkout (address, delivery date, pay on delivery; no card fields), orders, sign-in, sign-up, account and password change, plus a Requirements screen with 10 written rules. Releases: stable and release 1.1 (`?release=r-bugs-1`) with 10 seeded bugs; bug registry with a report matcher; state in memory only | `415b647` | Unit test (10 cases: every rule in stable, every bug's exact effect, matcher recognises a plain report of each bug and rejects unrelated ones); browser: each of the 10 bugs reproduced through the UI from its steps in release 1.1 and absent in stable; a valid order flow works in stable; phone: no overflow on shop, cart and requirements | Bug Hunting Simulator (next), accessibility release |
+| M3b | Manual Software Testing path published (department Software Testing now has a page): lessons 1 to 10 (modules What Testing Is, Testing in the Life Cycle, Writing Test Cases) rendered from typed blocks; quizzes, ordering tasks, 4 structured writing labs (requirement questions, scenarios, a test case, positive and negative data) with a deterministic rubric checker; ShopLite tasks linked from lessons | `4a054e4` | Unit tests (12: curriculum generic over paths; every MT lesson has checked practice; writing models meet and weak answers miss their rubric); 5,374 links on 63 pages resolve; at 1280 and 390: quiz, ordering (wrong rejected, right accepted), writing lab (weak answer 5 of 9 items, good answer all items, model opens), department lists the path, first task within 3 screens, no overflow | Lab pages, accessibility sweep |
+| M3c-1 | Manual Testing lessons 11 to 17 (Intermediate: Test Data and Coverage; Executing Tests and Reporting Bugs; Types of Testing) and the bug-report writing lab (model and two weak answers) | `40629ff` | Unit tests (writing models and weak answers, curriculum 12 cases); at 1280 and 390: bug-report lab (weak answer not yet, good answer all items), bug life-cycle ordering accepted, no overflow; path roadmap lists 17 lessons | Other pages |
+| M3c-2 | Manual Testing lessons 18 to 24 (exploratory testing, usability and compatibility; Advanced: test plan, risk-based testing, Agile, acceptance criteria, metrics): all 24 planned lessons published. **Bug Hunting Simulator**: ShopLite release 1.1 in a frame beside a structured report form; findings recognised by `matchReport`, duplicates flagged, area hints after 3 misses, a counter, and a give-up reveal of all 10 bugs; in memory only | `ffb8e89` | Unit test (9 cases); at 1280 and 390: a real report recognised, the duplicate flagged, an unrelated report rejected, hint after 3 misses, counter 1 of 10, frame visible, no overflow; advanced lesson ordering task; 7,409 links on 84 pages resolve; earlier M3b checks re-run (17 pass) | Other pages |
+| M3c-3 | Manual Testing **complete**: interview practice (15 scenario questions; the interview page now supports paths without coding problems), a test-plan writing lab in the test-plan lesson; path status complete | `c8d7a9c` | Unit tests (writing 3, curriculum 9); at 1280 and 390: MT interview (15 questions, no coding section, quiz works, no overflow), test-plan lab not-yet for a vague plan; SQL interview unchanged (10 + 10); MT path has no "still to come"; 7,523 links on 85 pages resolve | Other pages |
+| M3d | **Test Design Techniques** path (complete): 6 lessons over 3 levels (partitions, boundaries, decision tables, state transitions, pairwise, use cases and error guessing). The new `labset` block mounts the shared lab shell inside a lesson on the Test Design Lab's own exercises (all 20, each used once), with its own evaluator and partition input; the lab page is unchanged | `3a32b81` | Unit test (10: every lab exercise used exactly once); at 1280 and 390: lab shell mounted in the lesson, a wrong answer flagged, 17/18/65/66 accepted, no overflow; department lists both paths; 8,375 links on 98 pages resolve | Lab page itself |
+| M4a | Stage 4 begins: **Automation Engineering** department published, with the **Playwright with TypeScript** path at beginner level (7 lessons: automation basics, how Playwright works, setup (run locally), TypeScript for tests, locators, web-first assertions, a complete test). A new teaching **locator evaluator** (`automation/locator.js`: getByRole for 20 roles, getByLabel, getByText, getByPlaceholder, getByTestId, CSS, filter, first, last, nth; accessible-name subset) and a **locator practice** block on ShopLite that enforces strict mode, labelled "not Playwright itself" | `a390478` | Parser unit test (2); curriculum test (12); at 1280 and 390: all 5 model locators solve their tasks; an ambiguous locator gets the "24 elements match" strict-mode message; no overflow; 9,240 links on 111 pages resolve. One defect found and fixed: the frame did not switch screens (`startsWith`) | Real Playwright runs (by design, local only) |
+| M4b | **Playwright path complete**: 8 more lessons (Intermediate: actions and forms, navigation and waiting, hooks and fixtures, Page Object Model, network mocking and API; Advanced: debugging and flaky tests, configuration and parallel runs, reports and CI) and interview practice (12 questions). A static **code-check** engine (`automation/code-check.js`: awaited actions, no fixed waits, user-facing locators, required and forbidden patterns) with 4 exercises, each with a model and weak versions; labelled "simulated check: read, not run" | `bf01ab2` | Code-check unit test (models and weak versions pinned); curriculum test (10; caught a too-short module description, fixed); at 1280 and 390: the flaky-test exercise starter gets not yet and the model gets all met; interview has 12 questions; no overflow; 10,480 links on 126 pages resolve | Real Playwright execution (by design) |
+| M5a | **AI and AI Engineering department published** with the **AI and LLM Foundations** path. It has 10 lessons across beginner, intermediate and advanced: AI, machine learning and generative AI; tokens; context windows and prompts; temperature and sampling; embeddings and RAG; evaluating AI features; hallucination and prompt injection; precision, recall and thresholds; agents; and responsible AI. It also has interview practice (10 questions). An `aiviz` block offers five deterministic teaching visualizers (`ai/models.js` with `learn-aiviz.js`): a tokenizer, a context budget, softmax with temperature and top-p, cosine retrieval over hand-made vectors, and a confusion matrix with a threshold. Each is labelled as a teaching model; no model runs and nothing is downloaded or sent. One writing lab designs an AI evaluation set | `31404cd` | AI models unit test (5, hand-counted); writing-check covers the new exercise; curriculum test; at 1280 and 390, all five visualizers render with no overflow, the threshold slider updates the metrics, and the writing lab and interview page (10 questions) are present; 11,822 links on 145 pages resolve | Real model outputs (by design); prompt-engineering and ML-foundations paths (planned) |
+| M6a | **Data and Analytics: the Statistics and Data Analysis path**, with 9 lessons. Beginner: data types, mean, median and mode, spread, and percentiles and outliers. Intermediate: grouping and pivots, cleaning, and correlation and regression. Advanced: A/B tests and significance, and charts and presenting. The path also has interview practice (10 questions) and links to the Excel Practice Lab. A new `numeric` block shows the dataset table with answer boxes; `data/stats.js` computes each answer from the same table using Excel's definitions (STDEV.S, PERCENTILE.INC) and accepts it at the stated precision. There are 12 numeric exercises | `68ffafd` | Stats unit test (functions against hand values; each exercise is answerable, an off answer and text are refused, ₹ and commas are accepted); every explanation's figures were cross-checked against the computed answers (5 corrected before commit); at 1280 and 390, a wrong answer is refused, the right one accepted with ₹ and commas and by Enter, correlation is accepted, the interview has 10 questions and there is no overflow; 13,025 links on 162 pages resolve | Excel and Power BI labs not yet split into path lessons (they remain linked labs) |
 
 **Design decisions in M2b:**
 
 - **Project 6 merged.** The planned sixth project ("interview challenges") would have duplicated the interview page, so it became the interview page.
 - **Clinic data.** Patients are identified by synthetic codes, not names.
 
-| M3b | Manual Software Testing path published (department Software Testing now has a page): lessons 1 to 10 (modules What Testing Is, Testing in the Life Cycle, Writing Test Cases) rendered from typed blocks; quizzes, ordering tasks, 4 structured writing labs (requirement questions, scenarios, a test case, positive and negative data) with a deterministic rubric checker; ShopLite tasks linked from lessons | `4a054e4` | Unit tests (12: curriculum generic over paths; every MT lesson has checked practice; writing models meet and weak answers miss their rubric); 5,374 links on 63 pages resolve; at 1280 and 390: quiz, ordering (wrong rejected, right accepted), writing lab (weak answer 5 of 9 items, good answer all items, model opens), department lists the path, first task within 3 screens, no overflow | Lab pages, accessibility sweep |
+### Milestone log (continued)
 
-| M3c-1 | Manual Testing lessons 11 to 17 (Intermediate: Test Data and Coverage; Executing Tests and Reporting Bugs; Types of Testing) and the bug-report writing lab (model and two weak answers) | `40629ff` | Unit tests (writing models and weak answers, curriculum 12 cases); at 1280 and 390: bug-report lab (weak answer not yet, good answer all items), bug life-cycle ordering accepted, no overflow; path roadmap lists 17 lessons | Other pages |
+Milestones from M7a on are recorded here as sections rather than table rows, because their entries need lists. (M7a to M10–11 were moved here from the table above, unchanged in content.)
 
-| M3c-2 | Manual Testing lessons 18 to 24 (exploratory testing, usability and compatibility; Advanced: test plan, risk-based testing, Agile, acceptance criteria, metrics): all 24 planned lessons published. **Bug Hunting Simulator**: ShopLite release 1.1 in a frame beside a structured report form; findings recognised by `matchReport`, duplicates flagged, area hints after 3 misses, a counter, and a give-up reveal of all 10 bugs; in memory only | `ffb8e89` | Unit test (9 cases); at 1280 and 390: a real report recognised, the duplicate flagged, an unrelated report rejected, hint after 3 misses, counter 1 of 10, frame visible, no overflow; advanced lesson ordering task; 7,409 links on 84 pages resolve; earlier M3b checks re-run (17 pass) | Other pages |
+#### M7a (commit: `90f15d7`)
 
-| M3c-3 | Manual Testing **complete**: interview practice (15 scenario questions; the interview page now supports paths without coding problems), a test-plan writing lab in the test-plan lesson; path status complete | `c8d7a9c` | Unit tests (writing 3, curriculum 9); at 1280 and 390: MT interview (15 questions, no coding section, quiz works, no overflow), test-plan lab not-yet for a vague plan; SQL interview unchanged (10 + 10); MT path has no "still to come"; 7,523 links on 85 pages resolve | Other pages |
-
-| M3d | **Test Design Techniques** path (complete): 6 lessons over 3 levels (partitions, boundaries, decision tables, state transitions, pairwise, use cases and error guessing). The new `labset` block mounts the shared lab shell inside a lesson on the Test Design Lab's own exercises (all 20, each used once), with its own evaluator and partition input; the lab page is unchanged | `3a32b81` | Unit test (10: every lab exercise used exactly once); at 1280 and 390: lab shell mounted in the lesson, a wrong answer flagged, 17/18/65/66 accepted, no overflow; department lists both paths; 8,375 links on 98 pages resolve | Lab page itself |
-
-| M4a | Stage 4 begins: **Automation Engineering** department published, with the **Playwright with TypeScript** path at beginner level (7 lessons: automation basics, how Playwright works, setup (run locally), TypeScript for tests, locators, web-first assertions, a complete test). A new teaching **locator evaluator** (`automation/locator.js`: getByRole for 20 roles, getByLabel, getByText, getByPlaceholder, getByTestId, CSS, filter, first, last, nth; accessible-name subset) and a **locator practice** block on ShopLite that enforces strict mode, labelled "not Playwright itself" | `a390478` | Parser unit test (2); curriculum test (12); at 1280 and 390: all 5 model locators solve their tasks; an ambiguous locator gets the "24 elements match" strict-mode message; no overflow; 9,240 links on 111 pages resolve. One defect found and fixed: the frame did not switch screens (`startsWith`) | Real Playwright runs (by design, local only) |
-
-| M4b | **Playwright path complete**: 8 more lessons (Intermediate: actions and forms, navigation and waiting, hooks and fixtures, Page Object Model, network mocking and API; Advanced: debugging and flaky tests, configuration and parallel runs, reports and CI) and interview practice (12 questions). A static **code-check** engine (`automation/code-check.js`: awaited actions, no fixed waits, user-facing locators, required and forbidden patterns) with 4 exercises, each with a model and weak versions; labelled "simulated check: read, not run" | `bf01ab2` | Code-check unit test (models and weak versions pinned); curriculum test (10; caught a too-short module description, fixed); at 1280 and 390: the flaky-test exercise starter gets not yet and the model gets all met; interview has 12 questions; no overflow; 10,480 links on 126 pages resolve | Real Playwright execution (by design) |
-
-| M5a | **AI and AI Engineering department published** with the **AI and LLM Foundations** path. It has 10 lessons across beginner, intermediate and advanced: AI, machine learning and generative AI; tokens; context windows and prompts; temperature and sampling; embeddings and RAG; evaluating AI features; hallucination and prompt injection; precision, recall and thresholds; agents; and responsible AI. It also has interview practice (10 questions). An `aiviz` block offers five deterministic teaching visualizers (`ai/models.js` with `learn-aiviz.js`): a tokenizer, a context budget, softmax with temperature and top-p, cosine retrieval over hand-made vectors, and a confusion matrix with a threshold. Each is labelled as a teaching model; no model runs and nothing is downloaded or sent. One writing lab designs an AI evaluation set | `31404cd` | AI models unit test (5, hand-counted); writing-check covers the new exercise; curriculum test; at 1280 and 390, all five visualizers render with no overflow, the threshold slider updates the metrics, and the writing lab and interview page (10 questions) are present; 11,822 links on 145 pages resolve | Real model outputs (by design); prompt-engineering and ML-foundations paths (planned) |
-
-| M6a | **Data and Analytics: the Statistics and Data Analysis path**, with 9 lessons. Beginner: data types, mean, median and mode, spread, and percentiles and outliers. Intermediate: grouping and pivots, cleaning, and correlation and regression. Advanced: A/B tests and significance, and charts and presenting. The path also has interview practice (10 questions) and links to the Excel Practice Lab. A new `numeric` block shows the dataset table with answer boxes; `data/stats.js` computes each answer from the same table using Excel's definitions (STDEV.S, PERCENTILE.INC) and accepts it at the stated precision. There are 12 numeric exercises | `68ffafd` | Stats unit test (functions against hand values; each exercise is answerable, an off answer and text are refused, ₹ and commas are accepted); every explanation's figures were cross-checked against the computed answers (5 corrected before commit); at 1280 and 390, a wrong answer is refused, the right one accepted with ₹ and commas and by Enter, correlation is accepted, the interview has 10 questions and there is no overflow; 13,025 links on 162 pages resolve | Excel and Power BI labs not yet split into path lessons (they remain linked labs) |
-
-| M7a | **Programming department published with the JavaScript Programming path**. It has 10 lessons:
+**Programming department published with the JavaScript Programming path**. It has 10 lessons:
 
 - Beginner: values and functions, conditions, loops, arrays, and objects and strings.
 - Intermediate: map, filter and reduce; errors and validation; promises and await.
@@ -60,9 +57,14 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 
 The path also has interview practice (12 questions).
 
-A new `jsrun` block runs the learner's code against the exercise's tests in a fresh **module Web Worker** (`programming/js-worker.js`). Before any code runs, the worker removes fetch, XHR, WebSocket, importScripts, IndexedDB and similar APIs. Code that contains `import` is refused. The page terminates the worker after 2 s. There are 12 exercises, each pinned by its model, buggy versions and a non-passing starter | `90f15d7` | JS exercises unit test (12 pinned; syntax error, missing function, thrown error, console capture and import refusal). At 1280 and 390: the starter and buggy version fail (3 of 4, with the 999 boundary named) and the model passes; an endless loop is stopped while the page stays responsive; fetch is unavailable; console output is shown; there is no overflow and no outside requests; the interview has 12 questions. 14,430 links on 182 pages resolve. The leak guard caught the word "undefined" in lesson text twice; both were reworded | Python and Java paths (planned; no large runtime downloads) |
+A new `jsrun` block runs the learner's code against the exercise's tests in a fresh **module Web Worker** (`programming/js-worker.js`). Before any code runs, the worker removes fetch, XHR, WebSocket, importScripts, IndexedDB and similar APIs. Code that contains `import` is refused. The page terminates the worker after 2 s. There are 12 exercises, each pinned by its model, buggy versions and a non-passing starter
 
-| M8a | **Web and Backend: the HTTP and REST APIs path**. It has 9 lessons:
+- **Checks performed:** JS exercises unit test (12 pinned; syntax error, missing function, thrown error, console capture and import refusal). At 1280 and 390: the starter and buggy version fail (3 of 4, with the 999 boundary named) and the model passes; an endless loop is stopped while the page stays responsive; fetch is unavailable; console output is shown; there is no overflow and no outside requests; the interview has 12 questions. 14,430 links on 182 pages resolve. The leak guard caught the word "undefined" in lesson text twice; both were reworded
+- **Not done or limits:** Python and Java paths (planned; no large runtime downloads)
+
+#### M8a (commit: `34e3582`)
+
+**Web and Backend: the HTTP and REST APIs path**. It has 9 lessons:
 
 - Beginner: URLs, methods, status codes, and query parameters, headers and JSON.
 - Intermediate: authentication and authorisation, validation errors, and REST design.
@@ -70,9 +72,14 @@ A new `jsrun` block runs the learner's code against the exercise's tests in a fr
 
 The path also has interview practice (12 questions) and links to the JSON Error-Fixing Lab.
 
-A new `apitask` block lets the learner build a request (method, path and query, headers, body). `web/mock-api.js` answers it inside the page. It is a deterministic, stateless model of a ShopLite API with products, filters, a bearer-token orders endpoint and a JSON cart endpoint, and it covers 200, 201 (with Location), 204, 400, 401, 404, 405 (with Allow), 415 and 422. Each task's goal is checked. Nothing is sent, and the host is the reserved `.example` domain. There are 8 tasks | `34e3582` | Mock API unit test (every response code; each task's model meets its goal and its start does not). At 1280 and 390: the orders endpoint gives 401 without a token and meets the goal with one; the cart gives 415 without Content-Type, then 201 with Location; there is no overflow; nothing is sent to the example host; the interview has 12 questions. 15,633 links on 199 pages resolve | HTML, CSS and DOM path and backend fundamentals (next) |
+A new `apitask` block lets the learner build a request (method, path and query, headers, body). `web/mock-api.js` answers it inside the page. It is a deterministic, stateless model of a ShopLite API with products, filters, a bearer-token orders endpoint and a JSON cart endpoint, and it covers 200, 201 (with Location), 204, 400, 401, 404, 405 (with Allow), 415 and 422. Each task's goal is checked. Nothing is sent, and the host is the reserved `.example` domain. There are 8 tasks
 
-| M8b | **Web and Backend: the HTML, CSS and the DOM path**, with 9 lessons:
+- **Checks performed:** Mock API unit test (every response code; each task's model meets its goal and its start does not). At 1280 and 390: the orders endpoint gives 401 without a token and meets the goal with one; the cart gives 415 without Content-Type, then 201 with Location; there is no overflow; nothing is sent to the example host; the interview has 12 questions. 15,633 links on 199 pages resolve
+- **Not done or limits:** HTML, CSS and DOM path and backend fundamentals (next)
+
+#### M8b (commit: `a14a9e0`)
+
+**Web and Backend: the HTML, CSS and the DOM path**, with 9 lessons:
 
 - Beginner: elements, links and images, semantic HTML, and forms.
 - Intermediate: CSS basics, flexbox and responsive layout, and accessibility.
@@ -80,9 +87,14 @@ A new `apitask` block lets the learner build a request (method, path and query, 
 
 It also has interview practice (12 questions).
 
-A new `webplay` block renders the learner's HTML and CSS in an `iframe sandbox="allow-same-origin"` with no scripts permission. `web/dom-check.js` then reads the rendered DOM and computed styles using these rule types: exists, count, none, attr, labelled, named and style. There are 8 exercises | `a14a9e0` | New focused browser spec `tests/browser/practice-labs-webplay.spec.js` (10 tests on subpath-desktop only): each exercise's starter fails and its model passes; a script tag and an onerror handler in learner markup do not run. Phone (390): the model passes with no overflow; the interview has 12 questions. 16,817 links on 216 pages resolve | Backend fundamentals path (planned) |
+A new `webplay` block renders the learner's HTML and CSS in an `iframe sandbox="allow-same-origin"` with no scripts permission. `web/dom-check.js` then reads the rendered DOM and computed styles using these rule types: exists, count, none, attr, labelled, named and style. There are 8 exercises
 
-| M9a | **The DevOps, Cloud and Cybersecurity department is published with two paths.**
+- **Checks performed:** New focused browser spec `tests/browser/practice-labs-webplay.spec.js` (10 tests on subpath-desktop only): each exercise's starter fails and its model passes; a script tag and an onerror handler in learner markup do not run. Phone (390): the model passes with no overflow; the interview has 12 questions. 16,817 links on 216 pages resolve
+- **Not done or limits:** Backend fundamentals path (planned)
+
+#### M9a (commit: `f6070cb`)
+
+**The DevOps, Cloud and Cybersecurity department is published with two paths.**
 
 **Git and DevOps Foundations** (8 lessons):
 
@@ -102,17 +114,21 @@ A new `gitsim` block uses `devops/git-sim.js`, a modelled repository with a work
 - secrets, configuration and dependencies;
 - security testing.
 
-Both paths have interview practice (12 questions each). The Cron Challenge Lab is linked from the Git and DevOps path | `f6070cb` | Git simulator unit test (3: status, add, commit and restore; switch refusal; fast-forward, three-way and conflict merges; all 7 task models reach their goals and their starts do not). At 1280 and 390: the merge task's goal is met only after the merge, the terminal shows the untracked file and "Fast-forward", reset restores the start, there is no overflow, the security interview has 12 questions, and the department lists both paths. 19,059 links on 249 pages resolve | Shell simulator and deeper cloud paths (planned) |
+Both paths have interview practice (12 questions each). The Cron Challenge Lab is linked from the Git and DevOps path
 
-| M10–11 | **Role journeys and completion review.**
+- **Checks performed:** Git simulator unit test (3: status, add, commit and restore; switch refusal; fast-forward, three-way and conflict merges; all 7 task models reach their goals and their starts do not). At 1280 and 390: the merge task's goal is met only after the merge, the terminal shows the untracked file and "Fast-forward", reset restores the start, there is no overflow, the security interview has 12 questions, and the department lists both paths. 19,059 links on 249 pages resolve
+- **Not done or limits:** Shell simulator and deeper cloud paths (planned)
+
+#### M10–11 (commit: `97770d8`)
+
+**Role journeys and completion review.**
 
 - The Practice Labs home page gains "Journeys by role" (`journeys.js`). Seven journeys (QA, automation, data analyst, web developer, backend developer, AI engineer and tester, DevOps) order existing paths and labs across departments. A unit test checks that every step resolves to a published path or lab.
 - Review: the search index covers every path, lesson, project and interview page (172 entries); all 8 departments are published; no path is in "building" status.
-- One stale home-page sentence ("the others are being built") was reworded | `97770d8` | 29 focused unit tests across the Practice Labs suites. At 1280 and 390: 7 journeys, the first opens with 5 linked steps, no "In development" cards, no overflow, and search finds the new Git lesson. 19,093 links on 249 pages resolve | See section 4 for honest limits |
+- One stale home-page sentence ("the others are being built") was reworded
 
-### Milestone log (continued)
-
-Milestones from M12 on are recorded here as sections rather than table rows.
+- **Checks performed:** 29 focused unit tests across the Practice Labs suites. At 1280 and 390: 7 journeys, the first opens with 5 linked steps, no "In development" cards, no overflow, and search finds the new Git lesson. 19,093 links on 249 pages resolve
+- **Not done or limits:** See section 4 for honest limits
 
 #### M12a: Python and Java Programming paths (commit: `971f80d`)
 
@@ -257,7 +273,7 @@ Milestones from M12 on are recorded here as sections rather than table rows.
 - It also has interview practice (12 questions) and links to the SQL Practice Lab.
 - The Database Engineering department's design, dialect and testing items now point to this path.
 - **New `sqlplay` block:** an editable SQL textarea run on the SQL lab's real engine (sql.js in a Worker, a fresh copy of the ShopLite tables each run). `learn-practice.js` now reads a textarea's value as well as the code text of fixed examples.
-- The path has 10 playgrounds:
+- The path has 9 playgrounds:
   - a foreign-key violation;
   - CHECK and DEFAULT constraints;
   - a normalised join;
@@ -341,49 +357,46 @@ Milestones from M12 on are recorded here as sections rather than table rows.
   - At 1280 and 390 px the home page shows 8 journeys, the first opens with 6 steps, no department card is marked in development, and search works.
   - 33,584 links on 461 pages resolve.
 
-### Final inventory, 2026-11-08 (preview branch)
+### Final inventory, 2026-11-08 (preview branch, after the final remaining-development mission)
 
-- **8 of 8 departments published.**
-- **11 learning paths, all complete, 131 lessons:**
+- **8 of 8 departments are published**, each with specialist paths. No technology is left as "planned".
+- **25 learning paths, all complete, with 235 lessons.**
+  - Database Engineering: SQL (24) and Database Design and Testing (8).
+  - Software Testing: Manual Software Testing (24), Test Design Techniques (6) and Specialised Testing (8).
+  - Automation: Playwright with TypeScript (15), API Test Automation (5) and Selenium WebDriver with Java (6).
+  - AI: AI and LLM Foundations (10), Prompt Engineering (7) and Machine Learning Foundations (9).
+  - Data and Analytics: Statistics (9), Excel Formulas (8), Power BI (6) and Data Engineering Foundations (6).
+  - Programming: JavaScript (10), Python (10) and Java (9).
+  - Web and Backend: HTTP and REST APIs (9), HTML, CSS and the DOM (9) and Backend Fundamentals (9).
+  - DevOps, Cloud and Security: Git and DevOps Foundations (8), Linux and the Command Line (8), Kubernetes and Deployment (5) and Application Security Foundations (7).
+- **461 generated pages**: the home page with search and 8 role journeys, 8 department pages, 25 path pages, 73 level pages, 89 module pages, 235 lessons, the 5 SQL projects with their index, and 24 interview-practice pages.
+- **Practice engines, all running in the browser:**
 
-| Path | Department | Lessons |
-|---|---|---|
-| SQL | Database Engineering | 24 |
-| Manual Software Testing | Software Testing | 24 |
-| Test Design Techniques | Software Testing | 6 |
-| Playwright with TypeScript | Automation | 15 |
-| AI and LLM Foundations | AI | 10 |
-| Statistics and Data Analysis | Data and Analytics | 9 |
-| JavaScript Programming | Programming | 10 |
-| HTTP and REST APIs | Web and Backend | 9 |
-| HTML, CSS and the DOM | Web and Backend | 9 |
-| Git and DevOps Foundations | DevOps, Cloud and Security | 8 |
-| Application Security Foundations | DevOps, Cloud and Security | 7 |
+  | Engine | What it does | Exercises or tasks |
+  |---|---|---|
+  | SQL (sql.js) | Lab exercises, editable examples and `sqlplay` playgrounds | 15 playgrounds |
+  | Python (Pyodide, on request) | Runs real Python | 11 |
+  | JavaScript | Runs in a sandboxed Worker | 17 |
+  | `predict` | Output prediction, verified with JDK 17 and CPython | 18 |
+  | `codecheck` | Playwright, API and Selenium code read against rules | 10 |
+  | `apitask` | Requests to an in-page mock API | 8 |
+  | `webplay` | Script-free HTML and CSS playground | 8 |
+  | `gitsim` | Git simulator | 7 |
+  | `shellsim` | Shell simulator | 9 |
+  | `aiviz` | 9 AI and ML visualizers | 9 |
+  | `schema` | Structured-output tasks | 4 |
+  | `numeric` | Statistics calculations | 12 |
+  | Excel and Power BI labs (mounted in lessons) | The labs' own exercises | 55 and 43 |
+  | Test Design Lab | Lab exercises | 20 |
+  | Locators, ShopLite bug hunt, writing labs, quizzes and ordering tasks | Various | various |
 
-- **249 generated learning pages**, including:
-  - 10 interview-practice pages;
-  - the SQL projects (5 and an index);
-  - department pages;
-  - the home page with search and journeys.
-- **Interactive engines added in this mission, all in the browser:**
-
-| Engine | What it does | Exercises |
-|---|---|---|
-| codecheck | Static Playwright code rules | 4 |
-| aiviz | Teaching visualizers | 5 |
-| numeric | Calculations from a table | 12 |
-| jsrun | JavaScript in a sandboxed Worker | 12 |
-| apitask | Requests to an in-page mock API | 8 |
-| webplay | Script-free iframe with DOM and style checks | 8 |
-| gitsim | Modelled Git repository | 7 |
-
-  The earlier engines (SQL, locators, ShopLite bug hunt, writing labs and the Test Design Lab sets) remain.
-- **Not done, by design or deferred:**
-  - real Playwright, Python or Java execution: no large runtime downloads;
-  - real AI model output: no runtime AI;
-  - shell simulator, backend-fundamentals path, prompt-engineering and ML paths, API automation and Selenium paths;
-  - progress saving: rule 7.7, the D1 exception is not approved.
-- **No full regression was run.** Testing in this mission was focused per batch, as instructed.
+- **Not done, with reasons:**
+  - **Real Java execution in the page.** D4 fallback: no small, permissively licensed in-browser compiler was confirmed, so Java uses verified output prediction.
+  - **Real Playwright, Selenium and Kubernetes execution.** These need a real browser automation host or cluster, so the paths read code against rules and explain manifests, and each page says so.
+  - **Live AI model output.** No runtime AI is allowed, so the paths use deterministic teaching models and dated, written example outputs.
+  - **Cypress** and a dedicated **TypeScript** path were not built in this mission. TypeScript is taught as needed inside the Playwright path.
+  - **Progress saving.** Rule 7.7 applies; the D1 exception is not approved.
+- **No full regression was run.** Every batch had only focused, feature-specific checks, as instructed, and each milestone above lists them.
 
 ## 3. Current inventory (built)
 
@@ -404,16 +417,8 @@ Milestones from M12 on are recorded here as sections rather than table rows.
 
 ## 5. Next checkpoint
 
-**Resume here (checkpoint after M12c).** Steps, in order:
+The final remaining-development mission is complete on the preview branch, apart from the items listed under "Not done" in the final inventory.
 
-1. *(Done in M12d.)* **Write and wire the lessons.**
-   - `ai/ml-lessons.js`, the Machine Learning path. About 9 lessons, using the aiviz kinds regression, overfit, kmeans and tree, plus confusion.
-   - `ai/prompt-lessons.js`, the Prompt Engineering path. Use the write labs pe-w-anatomy, pe-w-few-shot and pe-w-guardrails, the schema exercises pe-s-*, and quizzes on recorded outputs.
-   - Wire both with the add_path helper pattern: curriculum, learn-html CONTENT (`writing: new Map(AI_WRITING...)` for the prompt path), the BUILD_ONLY list in eleventy.shared.js, the curriculum test's extras count and its block-type list (add "schema"), and the ai-engineering department.
-   - Check in the browser: the new visualizers and the schema block, at 1280 and 390 px.
-2. *(Done in M12e.)* **Backend Fundamentals path**, reusing apitask and quizzes.
-3. *(Done in M12f.)* **API Automation and Selenium paths**: new codecheck exercises, plus predict blocks for the Selenium Java code.
-4. *(Database design done in M12g.)* **Database design**, then *(done in M12h)* **specialised testing** (API, database and accessibility testing), then *(done in M12i)* **Excel and Power BI paths**.
-5. **Final pass.**
-   - Repair the multi-line rows of the milestone table (M7a onwards): they break the Markdown table.
-   - Run the completion review.
+Recommended next step for the owner: authorise one full regression on the preview branch, then decide on merging and production. Production (Hostinger) and `main` are untouched.
+
+Optional follow-ups: a Cypress path and a dedicated TypeScript path.

@@ -77,7 +77,7 @@ export const DEPARTMENTS = Object.freeze([
             { title: "Playwright with TypeScript", status: "path", path: "playwright" },
             { title: "API test automation", status: "path", path: "api-automation" },
             { title: "Selenium WebDriver", status: "path", path: "selenium" },
-            { title: "Framework design and CI", status: "planned" }
+            { title: "Framework design and CI", status: "path", path: "playwright" }
         ],
         paths: ["playwright", "api-automation", "selenium"],
         start: { label: "Start with lesson 1 of Playwright with TypeScript.", path: "playwright" },
