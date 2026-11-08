@@ -33,6 +33,8 @@ import { lessons as tdLessons } from "./test-design/lessons.js";
 import { lessons as pwLessons } from "./playwright/lessons.js";
 import { lessons as pwLessons2, interview as pwInterview } from "./playwright/lessons-2.js";
 import { WRITING as mtWriting } from "./manual-testing/writing.js";
+import { lessons as aiLessons, interview as aiInterview } from "./ai/lessons.js";
+import { AI_WRITING } from "./ai/writing.js";
 
 const SITE_NAME = "ToolZen Hub";
 const HUB = () => ROUTES.practiceLabs;
@@ -64,6 +66,16 @@ const CONTENT = {
         interview: pwInterview,
         exercises: new Map(),
         writing: new Map(),
+        labTool: null,
+        flashcards: null,
+        morePractice: ""
+    },
+    "ai-foundations": {
+        kind: "blocks",
+        lessons: new Map(aiLessons.map((lesson) => [lesson.id, lesson])),
+        interview: aiInterview,
+        exercises: new Map(),
+        writing: new Map(AI_WRITING.map((exercise) => [exercise.id, exercise])),
         labTool: null,
         flashcards: null,
         morePractice: ""

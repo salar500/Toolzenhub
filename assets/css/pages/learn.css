@@ -1262,3 +1262,21 @@ a.learn-card:hover {
     font-family: var(--font-mono, ui-monospace, monospace);
 
 }
+
+
+/* ---------- AI visualizers ---------- */
+
+.learn-aiviz__control { display: grid; grid-template-columns: 1fr auto; gap: 4px 8px; margin: 0 0 10px; }
+.learn-aiviz__range { grid-column: 1 / -1; width: 100%; min-height: 44px; }
+.learn-aiviz__chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.learn-aiviz__chip { padding: 2px 6px; border-radius: 6px; font-family: var(--font-mono, monospace); font-size: 14px; white-space: pre; }
+.learn-aiviz__chip--0 { background: var(--accent-soft); }
+.learn-aiviz__chip--1 { background: var(--state-success-soft); }
+.learn-aiviz__chip--2 { background: var(--state-warning-soft); }
+.learn-aiviz__chip--3 { background: var(--state-info-soft); }
+.learn-aiviz__bar { display: flex; overflow: hidden; margin: 8px 0; border: 1px solid var(--line); border-radius: 8px; min-height: 32px; }
+.learn-aiviz__seg { overflow: hidden; padding: 6px 4px; font-size: 12px; white-space: nowrap; }
+.learn-aiviz__seg--system { background: var(--accent-soft); }
+.learn-aiviz__seg--document { background: var(--state-info-soft); }
+.learn-aiviz__seg--question { background: var(--state-success-soft); }
+.learn-aiviz__seg--output { background: var(--state-warning-soft); }

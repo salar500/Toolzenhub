@@ -90,13 +90,18 @@ export const DEPARTMENTS = Object.freeze([
         title: "AI and AI Engineering",
         short: "How AI and language models work, how to evaluate them, and how AI applications are built and tested.",
         audience: ["Anyone who uses AI tools at work", "Developers building AI features", "Testers evaluating AI behaviour"],
-        intro: [],
+        intro: [
+            "AI tools now sit inside everyday work: assistants that draft and summarise, search that answers in sentences, support bots built on company documents. Using them well, building with them and testing them all depend on the same understanding of how they work and where they fail.",
+            "This department starts with AI and LLM Foundations. It explains, without hype or heavy maths, how language models read text as tokens, why everything must fit in a context window, how temperature changes answers, and how retrieval-augmented generation grounds answers in real documents. Interactive visualizers let you split text into tokens, budget a context window, move temperature and top-p sliders, retrieve passages by similarity and move a classifier's threshold.",
+            "Every visualizer is an honest teaching model: small hand-made data and the real formulas, running in your browser. No AI model runs, nothing is downloaded and nothing you type is sent anywhere. The later lessons turn to evaluation, hallucination, prompt injection, agents and responsible AI, the skills teams need to ship AI features safely. Prompt engineering in depth and machine-learning foundations follow as the department grows."
+        ],
         technologies: [
-            { title: "AI and LLM foundations", status: "planned" },
+            { title: "AI and LLM foundations", status: "path", path: "ai-foundations" },
             { title: "Prompt engineering and evaluation", status: "planned" },
             { title: "Machine learning foundations", status: "planned" }
         ],
-        paths: [],
+        paths: ["ai-foundations"],
+        start: { label: "Start with lesson 1 of AI and LLM Foundations.", path: "ai-foundations" },
         labs: [],
         decks: [],
         related: ["programming", "data-analytics"]

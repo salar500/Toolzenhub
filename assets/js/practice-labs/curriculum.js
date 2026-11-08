@@ -136,6 +136,38 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "ai-foundations",
+        title: "AI and LLM Foundations",
+        department: "ai-engineering",
+        status: "complete",
+        tagline: "Understand how AI and language models work, from tokens and context windows to retrieval, evaluation and agents, with interactive visualizers that run in your browser.",
+        audience: "Anyone who uses AI tools at work, developers starting with AI features and testers who must evaluate them. No maths or programming is needed.",
+        runsIn: "Visualizers are deterministic teaching models that run in your browser with small hand-made data and the real formulas; no AI model runs, nothing is downloaded and nothing you type is sent anywhere.",
+        outcomes: ["Explain tokens, context windows and sampling", "Describe how embeddings and retrieval-augmented generation work", "Design an evaluation set for an AI feature", "Read precision, recall and a confusion matrix", "Recognise hallucination, prompt injection, agent and privacy risks"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "how-ai-works", title: "How AI and Language Models Work", summary: "What AI and machine learning are, how models read text as tokens, context windows and prompts, and how sampling chooses words.", lessons: [
+                    { id: "ai-what-is-ai", slug: "what-is-ai", title: "What AI, machine learning and generative AI are" },
+                    { id: "ai-tokens", slug: "tokens", title: "How language models read text: tokens" },
+                    { id: "ai-context", slug: "context-windows-and-prompts", title: "Context windows and prompts" },
+                    { id: "ai-sampling", slug: "temperature-and-sampling", title: "Temperature and sampling" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "building-and-evaluating", title: "Building and Evaluating AI Features", summary: "Embeddings and retrieval-augmented generation, evaluation sets for AI features, and testing for hallucination and prompt injection.", lessons: [
+                    { id: "ai-embeddings-rag", slug: "embeddings-and-rag", title: "Embeddings and retrieval-augmented generation" },
+                    { id: "ai-evaluation", slug: "evaluating-ai-features", title: "Evaluating AI features" },
+                    { id: "ai-hallucination", slug: "hallucination-and-prompt-injection", title: "Hallucination and prompt injection" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "metrics-agents-responsibility", title: "Metrics, Agents and Responsible AI", summary: "Classification metrics and thresholds, tool-using agents and their guardrails, and privacy, bias and transparency.", lessons: [
+                    { id: "ai-metrics", slug: "precision-recall-and-thresholds", title: "Classification metrics: precision, recall and the threshold" },
+                    { id: "ai-agents", slug: "tools-and-agents", title: "Tools, agents and their risks" },
+                    { id: "ai-responsible", slug: "responsible-ai", title: "Responsible AI: privacy, bias and transparency" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",

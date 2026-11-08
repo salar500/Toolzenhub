@@ -46,7 +46,9 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 
 | M4a | Stage 4 begins: **Automation Engineering** department published, with the **Playwright with TypeScript** path at beginner level (7 lessons: automation basics, how Playwright works, setup (run locally), TypeScript for tests, locators, web-first assertions, a complete test). A new teaching **locator evaluator** (`automation/locator.js`: getByRole for 20 roles, getByLabel, getByText, getByPlaceholder, getByTestId, CSS, filter, first, last, nth; accessible-name subset) and a **locator practice** block on ShopLite that enforces strict mode, labelled "not Playwright itself" | `a390478` | Parser unit test (2); curriculum test (12); at 1280 and 390: all 5 model locators solve their tasks; an ambiguous locator gets the "24 elements match" strict-mode message; no overflow; 9,240 links on 111 pages resolve. One defect found and fixed: the frame did not switch screens (`startsWith`) | Real Playwright runs (by design, local only) |
 
-| M4b | **Playwright path complete**: 8 more lessons (Intermediate: actions and forms, navigation and waiting, hooks and fixtures, Page Object Model, network mocking and API; Advanced: debugging and flaky tests, configuration and parallel runs, reports and CI) and interview practice (12 questions). A static **code-check** engine (`automation/code-check.js`: awaited actions, no fixed waits, user-facing locators, required and forbidden patterns) with 4 exercises, each with a model and weak versions; labelled "simulated check: read, not run" | (this milestone's commit) | Code-check unit test (models and weak versions pinned); curriculum test (10; caught a too-short module description, fixed); at 1280 and 390: the flaky-test exercise starter gets not yet and the model gets all met; interview has 12 questions; no overflow; 10,480 links on 126 pages resolve | Real Playwright execution (by design) |
+| M4b | **Playwright path complete**: 8 more lessons (Intermediate: actions and forms, navigation and waiting, hooks and fixtures, Page Object Model, network mocking and API; Advanced: debugging and flaky tests, configuration and parallel runs, reports and CI) and interview practice (12 questions). A static **code-check** engine (`automation/code-check.js`: awaited actions, no fixed waits, user-facing locators, required and forbidden patterns) with 4 exercises, each with a model and weak versions; labelled "simulated check: read, not run" | `bf01ab2` | Code-check unit test (models and weak versions pinned); curriculum test (10; caught a too-short module description, fixed); at 1280 and 390: the flaky-test exercise starter gets not yet and the model gets all met; interview has 12 questions; no overflow; 10,480 links on 126 pages resolve | Real Playwright execution (by design) |
+
+| M5a | **AI and AI Engineering department published** with the **AI and LLM Foundations** path. It has 10 lessons across beginner, intermediate and advanced: AI, machine learning and generative AI; tokens; context windows and prompts; temperature and sampling; embeddings and RAG; evaluating AI features; hallucination and prompt injection; precision, recall and thresholds; agents; and responsible AI. It also has interview practice (10 questions). An `aiviz` block offers five deterministic teaching visualizers (`ai/models.js` with `learn-aiviz.js`): a tokenizer, a context budget, softmax with temperature and top-p, cosine retrieval over hand-made vectors, and a confusion matrix with a threshold. Each is labelled as a teaching model; no model runs and nothing is downloaded or sent. One writing lab designs an AI evaluation set | (this milestone's commit) | AI models unit test (5, hand-counted); writing-check covers the new exercise; curriculum test; at 1280 and 390, all five visualizers render with no overflow, the threshold slider updates the metrics, and the writing lab and interview page (10 questions) are present; 11,822 links on 145 pages resolve | Real model outputs (by design); prompt-engineering and ML-foundations paths (planned) |
 
 ## 3. Current inventory (built)
 
@@ -67,14 +69,9 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 
 ## 5. Next checkpoint
 
-**Stage 4 remainder:** API test automation and Selenium concepts can follow later. Prioritise breadth first.
+**Stage 6, Data and Analytics:**
 
-**Stage 5, AI and AI Engineering:**
+- a Data Analysis path that wraps the existing Excel and Power BI labs;
+- statistics and data-cleaning lessons with checked exercises.
 
-- department page;
-- an AI and LLM Foundations path with deterministic browser visualizers: a token splitter, a context-window budget, a temperature and top-p demo over a fixed distribution, an embedding similarity map from precomputed vectors, and a confusion matrix with a threshold;
-- a prompt evaluation lab with dated recorded outputs.
-
-No runtime AI and no model downloads.
-
-**Then:** Stages 6 to 11.
+**Then:** Stages 7 to 11 (Programming, Web and Backend, DevOps and Security, cross-department journeys, completion review).

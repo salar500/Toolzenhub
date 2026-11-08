@@ -13,6 +13,7 @@
      quiz      { heading?, questions[] }                questions as in quizBlock (learn-html.js)
      order     { heading?, prompt, items[], explain }   items in the right order; shown shuffled, checked in the browser
      write     { heading?, exercise }                   a structured writing lab (writing.js), checked in the browser
+     aiviz     { heading?, kind, text }                 an AI teaching visualizer (learn-aiviz.js): tokens|context|sampling|retrieval|confusion
      shoplite  { text, release? }                       a task on the practice shop, opened in a new tab
 ========================================================= */
 
@@ -216,6 +217,17 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                     </div>
                 </section>`;
         }
+
+        case "aiviz":
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-write learn-aiviz" data-aiviz="${esc(block.kind)}">
+                        <p>${esc(block.text)}</p>
+                        <div data-aiviz-root><p class="lx-note">This interactive view needs JavaScript.</p></div>
+                        <p class="lx-note">Teaching model: it shows the idea with fixed, hand-made data and real formulas. It is not a real AI model and nothing is downloaded or sent.</p>
+                    </div>
+                </section>`;
 
         case "bughunt": {
             const release = block.release ?? "r-bugs-1";
