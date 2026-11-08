@@ -417,6 +417,60 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "linux",
+        title: "Linux and the Command Line",
+        department: "devops-cloud-security",
+        status: "complete",
+        tagline: "Work confidently on Linux: navigate, read logs, search with grep and find, build pipelines, manage files and permissions, run services and write safe scripts, practised in a shell simulator.",
+        audience: "Developers, testers, analysts and anyone who has to work on a server or in a container. No previous command-line experience is needed.",
+        runsIn: "Commands run in a simulated shell inside the page, on a small model file system of a ShopLite server, following GNU behaviour for the commands it supports. Nothing touches your computer.",
+        outcomes: ["Navigate with absolute and relative paths", "Read and search logs with tail, grep and find", "Build pipelines with pipes and redirection", "Manage files and permissions safely", "Inspect processes and services", "Write safe shell scripts"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "command-line-basics", title: "Command-Line Basics", summary: "The file system, navigation, reading files and logs, and searching with grep and find, in a shell simulator.", lessons: [
+                    { id: "lx-filesystem", slug: "file-system-and-navigation", title: "The Linux file system and navigation" },
+                    { id: "lx-reading", slug: "reading-files-and-logs", title: "Reading files and logs" },
+                    { id: "lx-searching", slug: "grep-and-find", title: "Searching with grep and find" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "working-with-files", title: "Working with Files", summary: "Pipes and redirection, managing files and folders, and users and permissions.", lessons: [
+                    { id: "lx-pipes", slug: "pipes-and-redirection", title: "Pipes and redirection" },
+                    { id: "lx-files", slug: "managing-files", title: "Managing files and folders" },
+                    { id: "lx-permissions", slug: "users-and-permissions", title: "Users and permissions" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "operating-servers", title: "Operating Servers", summary: "Processes, services and environment variables, and safe shell scripts on a schedule.", lessons: [
+                    { id: "lx-processes", slug: "processes-and-services", title: "Processes, services and environment" },
+                    { id: "lx-scripting", slug: "shell-scripting", title: "Shell scripting basics" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
+        id: "kubernetes",
+        title: "Kubernetes and Deployment",
+        department: "devops-cloud-security",
+        status: "complete",
+        tagline: "Run containers in production: Docker Compose stacks, Kubernetes deployments and services, configuration and health checks, safe release strategies and reliability targets.",
+        audience: "Developers and DevOps learners who know container basics (the Git and DevOps Foundations path) and want to understand how services are deployed and kept running.",
+        runsIn: "Manifests and compose files are read and explained in the page, with checked questions and ordering tasks. No cluster runs in your browser.",
+        outcomes: ["Describe a multi-container stack with Compose", "Read Deployments and Services", "Configure apps with ConfigMaps, Secrets and probes", "Choose rolling, blue-green or canary releases", "Define SLIs, SLOs and error budgets"],
+        levels: [
+            { id: "intermediate", modules: [
+                { id: "containers-at-scale", title: "Containers at Scale", summary: "Multi-container stacks with Docker Compose, and Kubernetes pods, deployments and services.", lessons: [
+                    { id: "k8s-compose", slug: "docker-compose", title: "Multi-container apps with Docker Compose" },
+                    { id: "k8s-objects", slug: "pods-deployments-services", title: "Kubernetes: pods, deployments and services" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "running-in-production", title: "Running in Production", summary: "Configuration, secrets and health checks, deployment strategies and rollbacks, and reliability targets.", lessons: [
+                    { id: "k8s-config-health", slug: "config-secrets-health-checks", title: "Configuration, secrets and health checks" },
+                    { id: "k8s-deploy-strategies", slug: "deployment-strategies", title: "Deployment strategies and rollbacks" },
+                    { id: "k8s-reliability", slug: "slis-slos-error-budgets", title: "Reliability: SLIs, SLOs and error budgets" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",

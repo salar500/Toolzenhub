@@ -19,6 +19,8 @@ import { getToolById } from "../data/tools.js";
 import { LEVELS, PRACTICE_LABS_PREFIX, flatLessons, getPath, lessonCount, lessonUrl, levelUrl, moduleUrl, pathUrl, publishedPaths } from "./curriculum.js";
 import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from "./departments.js";
 import { JOURNEYS } from "./journeys.js";
+import { lessons as k8sLessons, interview as k8sLessonsInterview } from "./devops/k8s-lessons.js";
+import { lessons as lxLessons, interview as lxLessonsInterview } from "./devops/linux-lessons.js";
 import { lessons as javaLessons, interview as javaLessonsInterview } from "./programming/java-lessons.js";
 import { lessons as pyLessons, interview as pyLessonsInterview } from "./programming/python-lessons.js";
 import { lessons as sqlLessons } from "../tools/sql-practice-lab/lessons.js";
@@ -167,6 +169,26 @@ const CONTENT = {
         writing: new Map(),
         labTool: null,
         flashcards: null,
+        morePractice: ""
+    },
+    "linux": {
+        kind: "blocks",
+        lessons: new Map(lxLessons.map((lesson) => [lesson.id, lesson])),
+        interview: lxLessonsInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: "cron-challenge-lab",
+        flashcards: "smart-flashcards",
+        morePractice: "practises the five-field schedules that cron uses to run scripts, checked by a real cron engine."
+    },
+    "kubernetes": {
+        kind: "blocks",
+        lessons: new Map(k8sLessons.map((lesson) => [lesson.id, lesson])),
+        interview: k8sLessonsInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: null,
+        flashcards: "smart-flashcards",
         morePractice: ""
     },
     "test-design": {

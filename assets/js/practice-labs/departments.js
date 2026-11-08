@@ -183,15 +183,17 @@ export const DEPARTMENTS = Object.freeze([
         intro: [
             "Software is only useful once it is shipped, running and safe. This department covers the skills around the code: version control with Git, the pipelines that build and test every change, containers and the cloud they run on, monitoring when things go wrong, and the security practices that keep customers' data safe.",
             "Git and DevOps Foundations starts with a Git simulator: you type real Git commands (status, add, commit, restore, branch, switch, merge, log) into a modelled repository shown beside the terminal, and each task checks the repository's state, so you learn by doing without risking your own files. Later lessons explain CI/CD pipelines, Dockerfiles, cloud service models and incident handling with checked questions and ordering tasks.",
-            "Application Security Foundations is defensive code review: you read vulnerable and fixed code for injection, cross-site scripting, authentication, access control and secrets, and choose the right fix. The Cron Challenge Lab adds scheduled-job practice, and a shell simulator and deeper cloud paths follow as the department grows."
+            "Application Security Foundations is defensive code review: you read vulnerable and fixed code for injection, cross-site scripting, authentication, access control and secrets, and choose the right fix. Linux and the Command Line has its own shell simulator, a model Linux file system where you navigate, grep logs, build pipelines, copy, move and change permissions with real commands. Kubernetes and Deployment explains Compose stacks, Deployments, probes, release strategies and reliability targets, and the Cron Challenge Lab adds scheduled-job practice."
         ],
         technologies: [
             { title: "Git and GitHub", status: "path", path: "git-devops" },
             { title: "CI/CD pipelines", status: "path", path: "git-devops" },
             { title: "Web security fundamentals", status: "path", path: "app-security" },
+            { title: "Linux and the shell", status: "path", path: "linux" },
+            { title: "Kubernetes and deployment", status: "path", path: "kubernetes" },
             { title: "Cron schedules", status: "lab", lab: "cron-challenge-lab" }
         ],
-        paths: ["git-devops", "app-security"],
+        paths: ["git-devops", "linux", "kubernetes", "app-security"],
         start: { label: "Start with lesson 1 of Git and DevOps Foundations.", path: "git-devops" },
         labs: ["cron-challenge-lab"],
         decks: [],

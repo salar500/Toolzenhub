@@ -21,6 +21,7 @@
      gitsim    { heading?, task }                       git commands on a modelled repository (learn-gitsim.js)
      pyrun     { heading?, exercise }                   Python run in Pyodide, loaded only on request (learn-pyrun.js)
      predict   { heading?, exercise }                   predict the exact output of code (learn-predict.js)
+     shellsim  { heading?, task }                       shell commands on an in-memory file system (learn-shellsim.js)
      shoplite  { text, release? }                       a task on the practice shop, opened in a new tab
 ========================================================= */
 
@@ -34,6 +35,7 @@ import { WEB_EXERCISES } from "./web/web-exercises.js";
 import { GIT_TASKS } from "./devops/git-tasks.js";
 import { PY_EXERCISES } from "./programming/py-exercises.js";
 import { PREDICT } from "./programming/predict.js";
+import { SHELL_TASKS } from "./devops/shell-tasks.js";
 import { DATASETS, NUMERIC, formatAnswer } from "./data/stats.js";
 
 const SHOPLITE = () => `${SITE_ROOT}practice-labs/shoplite/`;
@@ -454,6 +456,35 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                             <summary>Show the output and why</summary>
                             <pre class="lx-code" tabindex="0"><code>${esc(exercise.output)}</code></pre>
                             <p>${esc(exercise.explain)}</p>
+                        </details>
+                    </div>
+                </section>`;
+        }
+
+        case "shellsim": {
+            const task = SHELL_TASKS.find((t) => t.id === block.task);
+            if (!task) throw new Error(`unknown shell task ${block.task}`);
+            const id = esc(task.id);
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-write" data-shellsim="${id}">
+                        <p>${esc(task.task)}</p>
+                        <div data-sh-tools hidden>
+                            <p class="learn-feedback" data-sh-goal role="status" aria-live="polite"></p>
+                            <pre class="lx-code learn-gitsim__term" data-sh-term tabindex="0" aria-label="Terminal output"></pre>
+                            <label class="lx-label" for="${id}-cmd"><span data-sh-prompt></span> command</label>
+                            <div class="learn-actions">
+                                <input id="${id}-cmd" class="lx-input learn-gitsim__input" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="ls">
+                                <button type="button" class="calculator-form__button lx-btn" data-sh-run>Run</button>
+                                <button type="button" class="calculator-form__button calculator-form__button--secondary lx-btn" data-sh-reset>Start again</button>
+                            </div>
+                        </div>
+                        <p class="lx-note">Simulated shell: a model of a Linux file system in this page that follows GNU behaviour for the commands it supports (pwd, ls, cd, cat, head, tail, wc, grep, sort, uniq, cut, echo, mkdir, touch, cp, mv, rm, find, chmod, with pipes, redirection and &amp;&amp;). Nothing touches your computer.</p>
+                        <details class="learn-reveal">
+                            <summary>Show commands that work and why</summary>
+                            <pre class="lx-code" tabindex="0"><code>${esc(task.model.join("\n"))}</code></pre>
+                            <p>${esc(task.explain)}</p>
                         </details>
                     </div>
                 </section>`;

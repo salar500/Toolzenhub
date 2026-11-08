@@ -28,6 +28,10 @@ document.addEventListener(
             import("../practice-labs/learn-predict.js").then((module) => module.initPredict());
         }
 
+        if (document.querySelector("[data-shellsim]")) {
+            import("../practice-labs/learn-shellsim.js").then((module) => module.initShellSim());
+        }
+
         if (document.querySelector("[data-gitsim]")) {
             import("../practice-labs/learn-gitsim.js").then((module) => module.initGitSim());
         }

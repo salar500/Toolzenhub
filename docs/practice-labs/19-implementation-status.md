@@ -114,7 +114,7 @@ Both paths have interview practice (12 questions each). The Cron Challenge Lab i
 
 Milestones from M12 on are recorded here as sections rather than table rows.
 
-#### M12a: Python and Java Programming paths (commit: (this milestone's commit))
+#### M12a: Python and Java Programming paths (commit: `971f80d`)
 
 - **Python Programming** has 10 lessons:
   - Beginner: basics, conditions and arithmetic, loops and lists, dictionaries and sets.
@@ -146,6 +146,19 @@ Milestones from M12 on are recorded here as sections rather than table rows.
     - a wrong Java prediction gives the hint on the second try, and the right one is accepted.
   - Phone (390 px): no overflow on the Java or Python lesson pages.
 - **Deployment note:** the production server must serve `.mjs` as JavaScript and `.wasm` as `application/wasm`. GitHub Pages does both; the Hostinger configuration was not checked or touched.
+
+#### M12b: Shell simulator, Linux path and Kubernetes path (commit: (this milestone's commit))
+
+- **New `shellsim` block** (`devops/shell-sim.js` and `devops/shell-tasks.js`): a Bash-like shell over an in-memory model of a ShopLite server.
+  - Commands: pwd, ls (-a, -l), cd, cat, head, tail, wc, grep (-i, -n, -c, -v), sort (-r, -n), uniq (-c), cut, echo, mkdir (-p), touch, cp (-r), mv, rm (-r, refusing to delete home or root), find -name, chmod (+x, -x or octal) and whoami.
+  - Pipes, `>`, `>>` and `&&` work; listings sort as in the C locale.
+  - The prompt follows the current directory, the Up and Down keys recall earlier commands, and there are 9 goal-checked tasks.
+- **Linux and the Command Line** (8 lessons): file system and navigation, reading logs, grep and find, pipes and redirection, managing files, permissions, processes, services and environment variables, and shell scripting. It has interview practice (10 questions) and links to the Cron Challenge Lab.
+- **Kubernetes and Deployment** (5 lessons): Docker Compose; pods, deployments and services; configuration, secrets and health checks; deployment strategies and rollbacks; SLIs, SLOs and error budgets. It has interview practice (10 questions). No cluster runs in the page, and the path page says so.
+- **Checks performed:**
+  - Unit tests: shell simulator (2), covering core behaviour (navigation, pipes, redirection, mv, rm, chmod, `&&`, unsupported commands) and every task's model against a fresh shell; curriculum test (one leaked word, "undefined", reworded).
+  - At 1280 and 390 px: the prompt follows `cd`; a pipeline that keeps the header does not meet the goal; Up recalls the last command; the correct pipeline meets the goal; the terminal shows the output; no overflow; the Kubernetes path page lists its lessons.
+  - 23,377 links on 311 pages resolve.
 
 ### Final inventory, 2026-11-08 (preview branch)
 
