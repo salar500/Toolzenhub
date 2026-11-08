@@ -21,7 +21,7 @@ import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from ".
 import { lessons as sqlLessons } from "../tools/sql-practice-lab/lessons.js";
 import { set as sqlSet } from "../tools/sql-practice-lab/exercises.js";
 import { sqlExtras } from "./sql-extras.js";
-import { lessons as sqlNewLessons } from "./sql/additions-lessons.js";
+import { lessons as sqlNewLessons, projects as sqlProjects, interview as sqlInterview } from "./sql/additions-lessons.js";
 import { set as sqlNewSet, DATASET_NOTES } from "./sql/additions-data.js";
 
 const SITE_NAME = "ToolZen Hub";
@@ -42,6 +42,8 @@ const CONTENT = {
         lessons: new Map([...sqlLessons.map((lesson) => [lesson.id, { ...lesson, ...sqlExtras[lesson.id] }]), ...sqlNewLessons.map((lesson) => [lesson.id, lesson])]),
         exercises: new Map([...sqlSet.exercises, ...sqlNewSet.exercises].map((exercise) => [exercise.id, exercise])),
         datasetNotes: DATASET_NOTES,
+        projects: sqlProjects,
+        interview: sqlInterview,
         labTool: "sql-practice-lab",
         flashcards: "smart-flashcards"
     }
@@ -68,7 +70,7 @@ const list = (items, className = "") => `<ul${className ? ` class="${className}"
 ========================================================= */
 
 /** The path's roadmap in the ecosystem sidebar markup. `current` is the lesson id, or null on a path, level or module page. */
-function roadmapNav(path, { currentLessonId = null, currentModuleId = null, now = null } = {}) {
+function roadmapNav(path, { currentLessonId = null, currentModuleId = null, now = null, currentExtra = null } = {}) {
 
     const all = flatLessons(path);
     const total = all.length;
@@ -88,6 +90,26 @@ function roadmapNav(path, { currentLessonId = null, currentModuleId = null, now 
                                 <ul>${items}</ul>
                             </li>`);
         }
+    }
+
+    /* projects and interview practice, when the path has them */
+    const extra = CONTENT[path.id];
+    const extraLink = (href, label, key) => `<li><a href="${esc(href)}"${currentExtra === key ? ' aria-current="page"' : ""}>${esc(label)}</a></li>`;
+    if (extra?.projects?.length) {
+        const here = currentExtra === "projects" || String(currentExtra).startsWith("project:");
+        groups.push(`
+                            <li class="section-switcher__group" data-open="${here}"${here ? ' data-current="true"' : ""}>
+                                <span class="section-switcher__label">Projects</span>
+                                <ul>${extraLink(projectsUrl(path), "All projects", "projects")}${extra.projects.map((project) => extraLink(projectUrl(path, project), project.title, `project:${project.id}`)).join("")}</ul>
+                            </li>`);
+    }
+    if (extra?.interview) {
+        const here = currentExtra === "interview";
+        groups.push(`
+                            <li class="section-switcher__group" data-open="${here}"${here ? ' data-current="true"' : ""}>
+                                <span class="section-switcher__label">Interview practice</span>
+                                <ul>${extraLink(interviewUrl(path), `${path.title} interview practice`, "interview")}</ul>
+                            </li>`);
     }
 
     const onOverview = currentLessonId === null && currentModuleId === null && now === null;
@@ -196,11 +218,11 @@ function exampleBlock(example, index) {
 
 }
 
-function exerciseBlock(exercise, index) {
+function exerciseBlock(exercise, index, label = "Exercise") {
 
     return `
                     <div class="learn-exercise" data-exercise="${esc(exercise.id)}">
-                        <h3>Exercise ${index + 1}: ${esc(exercise.title)}</h3>
+                        <h3>${label} ${index + 1}: ${esc(exercise.title)}</h3>
                         <p class="learn-exercise__goal"><strong>Goal.</strong> ${esc(exercise.objective)}</p>
                         <p>${esc(exercise.instructions)}</p>
                         ${exercise.plan ? `<p class="lx-note">Checked by its query plan: the lab runs EXPLAIN QUERY PLAN${exercise.kind === "query" ? " on your query, after checking its result" : ""} and looks for the index search the task asks for.</p>` : ""}
@@ -404,11 +426,36 @@ function pathBody(path, content) {
                     </div>`).join("")}
                 </section>
 
+                ${content.projects?.length ? `
+                <section class="learn-section" aria-labelledby="learn-path-projects">
+                    <h2 id="learn-path-projects">Projects</h2>
+                    <p>Put the lessons to work on realistic tasks, each with milestones checked as you go.</p>
+                    <div class="learn-cards">
+                        ${content.projects.map((project) => `
+                        <a class="learn-card" href="${esc(projectUrl(path, project))}">
+                            <span class="learn-card__status">${esc(LEVELS[project.level].title)} · ${project.milestones.length} milestones</span>
+                            <strong>${esc(project.title)}</strong>
+                            <span>${esc(firstSentence(project.scenario))}</span>
+                        </a>`).join("")}
+                    </div>
+                </section>` : ""}
+
+                ${content.interview ? `
+                <section class="learn-section" aria-labelledby="learn-path-interview">
+                    <h2 id="learn-path-interview">Interview practice</h2>
+                    <p><a href="${esc(interviewUrl(path))}">${esc(path.title)} interview practice</a>: ${content.interview.quiz.length} concept questions with explanations and ${content.interview.coding.length} classic coding problems, checked in your browser.</p>
+                </section>` : ""}
+
+                ${path.coming?.length ? `
                 <section class="learn-section" aria-labelledby="learn-coming">
                     <h2 id="learn-coming">Still to come on this path</h2>
-                    <p>The ${esc(path.title)} path is being built one tested lesson at a time. It does not cover everything yet. Planned next:</p>
+                    <p>The ${esc(path.title)} path is being built one tested lesson at a time. Planned next:</p>
                     ${list(path.coming)}
-                    <p>Until then, the <a href="${esc(lab.href)}">${esc(lab.title)}</a> has forty-nine exercises and a free sandbox.</p>
+                </section>` : ""}
+
+                <section class="learn-section" aria-labelledby="learn-more-practice">
+                    <h2 id="learn-more-practice">More practice</h2>
+                    <p>The <a href="${esc(lab.href)}">${esc(lab.title)}</a> has its own exercise list and a free sandbox for any SQL you want to try.</p>
                 </section>`;
 
 }
@@ -468,6 +515,166 @@ function moduleBody(path, level, module, content) {
 
 
 /* =========================================================
+   PROJECTS AND INTERVIEW PRACTICE
+   /practice-labs/<path>/projects/ (index), /practice-labs/<path>/projects/<id>/ and /practice-labs/<path>/interview/
+========================================================= */
+
+const projectsUrl = (path) => `${pathUrl(path)}projects/`;
+const projectUrl = (path, project) => `${projectsUrl(path)}${project.id}/`;
+const interviewUrl = (path) => `${pathUrl(path)}interview/`;
+
+/* concept questions: a radio group per question; without script the options and the answer (in a disclosure) are still readable */
+function quizBlock(questions, prefix) {
+
+    return `
+                    <div class="learn-quiz">
+                        ${questions.map((question, index) => `
+                        <fieldset class="learn-quiz__q" data-answer="${question.answer}">
+                            <legend>Question ${index + 1}. ${esc(question.q)}</legend>
+                            <div class="learn-quiz__options">
+                                ${question.options.map((option, choice) => `
+                                <label class="learn-quiz__option"><input type="radio" name="${esc(prefix)}-${index}" value="${choice}"> <span>${esc(option)}</span></label>`).join("")}
+                            </div>
+                            <p class="learn-quiz__actions"><button type="button" class="lx-btn" data-quiz-check hidden>Check</button></p>
+                            <p class="learn-quiz__result" role="status" aria-live="polite"></p>
+                            <details class="learn-reveal">
+                                <summary>Show the answer and why</summary>
+                                <p><strong>Answer:</strong> ${esc(question.options[question.answer])}. ${esc(question.explain)}</p>
+                            </details>
+                        </fieldset>`).join("")}
+                    </div>`;
+
+}
+
+function projectBody(path, project, index, content) {
+
+    const all = content.projects;
+    const previous = all[index - 1];
+    const next = all[index + 1];
+    const milestones = project.milestones.map((id) => content.exercises.get(id)).filter(Boolean);
+
+    return `
+                <article class="learn-lesson learn-project">
+
+                <header class="learn-lesson__head">
+                    <p class="learn-eyebrow"><a href="${esc(pathUrl(path))}">${esc(path.title)}</a> · <a href="${esc(projectsUrl(path))}">Projects</a> · ${esc(LEVELS[project.level].title)}</p>
+                    <h1>${esc(project.title)}</h1>
+                    <p class="learn-progress"><span class="learn-progress__text">Project ${index + 1} of ${all.length} · ${milestones.length} checked milestones</span></p>
+                </header>
+
+                <section class="learn-section learn-lesson-card" aria-labelledby="learn-brief">
+                    <h2 id="learn-brief">The brief</h2>
+                    <p>${esc(project.scenario)}</p>
+                </section>
+
+                <section class="learn-section" aria-labelledby="learn-objectives">
+                    <h2 id="learn-objectives">What you will practise</h2>
+                    ${list(project.objectives)}
+                </section>
+
+                <section class="learn-section" aria-labelledby="learn-data">
+                    <h2 id="learn-data">The data</h2>
+                    <p>The shop database (customers, products, orders and order_items)${project.dataset && content.datasetNotes[project.dataset] ? `, plus ${esc(content.datasetNotes[project.dataset])}` : "."}</p>
+                    <p>Every check starts from a fresh copy, so nothing you run can damage the data for the next milestone.</p>
+                </section>
+
+                <section class="learn-section" aria-labelledby="learn-requirements">
+                    <h2 id="learn-requirements">Requirements</h2>
+                    ${list(project.requirements)}
+                </section>
+
+                <section class="learn-section" aria-labelledby="learn-milestones">
+                    <h2 id="learn-milestones">Milestones</h2>
+                    <p>Work through the milestones in order. Each one is checked against the expected result by SQLite in your browser; a hint comes before the reference solution, and the explanation says why it works and what to watch for.</p>
+                    <noscript><p class="lx-note">Checking needs JavaScript and WebAssembly. The tasks, hints and solutions can still be read.</p></noscript>
+                    ${milestones.map((exercise, i) => exerciseBlock(exercise, i, "Milestone")).join("")}
+                </section>
+
+                <section class="learn-section" aria-labelledby="learn-validation">
+                    <h2 id="learn-validation">How your work is checked</h2>
+                    <p>A milestone counts as done when your query returns the expected rows and columns${milestones.some((m) => m.kind === "modify") ? ", or, for a milestone that changes data, when the lab's own query after your statements returns the expected result" : ""}. Column names and the order of rows do not matter unless the task asks for an order. Nothing is saved: the page keeps no record of finished milestones.</p>
+                </section>
+
+                <section class="learn-section" aria-labelledby="learn-further">
+                    <h2 id="learn-further">Take it further</h2>
+                    <p>No checks for these: use the sandbox of the <a href="${esc(getToolById(content.labTool).href)}">${esc(getToolById(content.labTool).title)}</a> or the milestone editors above.</p>
+                    ${list(project.improvements)}
+                </section>
+
+                <nav class="learn-pager" aria-label="Project navigation">
+                    ${previous ? `<a class="learn-pager__link learn-pager__link--prev" rel="prev" href="${esc(projectUrl(path, previous))}"><span>Previous project</span>${esc(previous.title)}</a>` : `<span></span>`}
+                    ${next ? `<a class="learn-pager__link learn-pager__link--next" rel="next" href="${esc(projectUrl(path, next))}"><span>Next project</span>${esc(next.title)}</a>` : `<a class="learn-pager__link learn-pager__link--next" href="${esc(interviewUrl(path))}"><span>After the projects</span>Interview practice</a>`}
+                </nav>
+
+                </article>`;
+
+}
+
+function projectsIndexBody(path, content) {
+
+    return `
+                ${intro({ eyebrow: `${path.title} · Projects`, title: `${path.title} projects`, text: "Realistic tasks from real kinds of work, each broken into milestones that are checked as you go. Each project uses what several lessons taught, on its own dataset." })}
+
+                <section class="learn-section" aria-labelledby="learn-project-list">
+                    <h2 id="learn-project-list">Choose a project</h2>
+                    <div class="learn-cards">
+                        ${content.projects.map((project) => `
+                        <a class="learn-card" href="${esc(projectUrl(path, project))}">
+                            <span class="learn-card__status">${esc(LEVELS[project.level].title)} · ${project.milestones.length} milestones</span>
+                            <strong>${esc(project.title)}</strong>
+                            <span>${esc(firstSentence(project.scenario))}</span>
+                        </a>`).join("")}
+                    </div>
+                </section>
+
+                <section class="learn-section" aria-labelledby="learn-project-how">
+                    <h2 id="learn-project-how">How the projects work</h2>
+                    <p>Read the brief and the requirements first, as you would at work. Then solve the milestones in order: each is checked by SQLite in your browser, with hints and an explained reference solution. When you have finished, the "Take it further" list suggests extensions without a check, so you can practise judging your own result.</p>
+                </section>`;
+
+}
+
+function interviewBody(path, content) {
+
+    const coding = content.interview.coding.map((id) => content.exercises.get(id)).filter(Boolean);
+
+    return `
+                <article class="learn-lesson">
+
+                <header class="learn-lesson__head">
+                    <p class="learn-eyebrow"><a href="${esc(pathUrl(path))}">${esc(path.title)}</a> · Interview practice</p>
+                    <h1>${esc(path.title)} interview practice</h1>
+                    <p class="learn-progress"><span class="learn-progress__text">${content.interview.quiz.length} concept questions · ${coding.length} checked coding problems</span></p>
+                </header>
+
+                <section class="learn-section learn-lesson-card" aria-labelledby="learn-iq-how">
+                    <h2 id="learn-iq-how">How to use this page</h2>
+                    <p>Answer each concept question before opening the explanation, then solve the coding problems without looking at the hints. In an interview, say your reasoning out loud: what the query must return, which tables it needs, and how you would check the result. Every explanation mentions an alternative or a follow-up question interviewers like to ask.</p>
+                </section>
+
+                <section class="learn-section" aria-labelledby="learn-iq-concepts">
+                    <h2 id="learn-iq-concepts">Concept questions</h2>
+                    ${quizBlock(content.interview.quiz, `${path.id}-iq`)}
+                </section>
+
+                <section class="learn-section" aria-labelledby="learn-iq-coding">
+                    <h2 id="learn-iq-coding">Coding problems</h2>
+                    <p>Each problem is checked by SQLite in your browser on the practice databases.</p>
+                    <noscript><p class="lx-note">Checking needs JavaScript and WebAssembly. The problems, hints and solutions can still be read.</p></noscript>
+                    ${coding.map((exercise, i) => exerciseBlock(exercise, i, "Problem")).join("")}
+                </section>
+
+                <nav class="learn-pager" aria-label="Interview practice navigation">
+                    <a class="learn-pager__link learn-pager__link--prev" href="${esc(projectsUrl(path))}"><span>Back to</span>${esc(path.title)} projects</a>
+                    <a class="learn-pager__link learn-pager__link--next" href="${esc(pathUrl(path))}"><span>Back to</span>The ${esc(path.title)} learning path</a>
+                </nav>
+
+                </article>`;
+
+}
+
+
+/* =========================================================
    THE PRACTICE LABS HOME (/practice-labs/) AND THE DEPARTMENT PAGES (/practice-labs/<department>/)
 ========================================================= */
 
@@ -520,6 +727,8 @@ function overviewBody() {
                                     <option value="lesson">Lessons</option>
                                     <option value="lab">Labs</option>
                                     <option value="path">Learning paths</option>
+                                    <option value="project">Projects</option>
+                                    <option value="interview">Interview practice</option>
                                     <option value="department">Departments</option>
                                 </select>
                             </label>
@@ -706,6 +915,16 @@ export function learnSearchIndex() {
         }
     }
 
+    for (const path of publishedPaths()) {
+        const content = CONTENT[path.id];
+        for (const project of content.projects ?? []) {
+            entries.push({ kind: "project", title: project.title, url: projectUrl(path, project), department: path.department, level: project.level, where: `${path.title} · Project`, text: project.scenario });
+        }
+        if (content.interview) {
+            entries.push({ kind: "interview", title: `${path.title} interview practice`, url: interviewUrl(path), department: path.department, level: "", text: content.interview.quiz.map((q) => q.q).join(" ") });
+        }
+    }
+
     /* a lab belongs to the first department that lists it; drop repeats */
     const seen = new Set();
     return entries.filter((e) => (seen.has(e.url) ? false : seen.add(e.url)));
@@ -820,6 +1039,54 @@ export function learnPages() {
                 }
 
             }
+
+        }
+
+        if (content.projects?.length) {
+
+            const projectsTrail = [...pathCrumbs(path), { label: path.title, href: pathUrl(path) }, { label: "Projects" }];
+
+            pages.push({
+                kind: "projects",
+                ...pageEntry({
+                    url: projectsUrl(path),
+                    title: `${path.title} Projects: Practice With Real Datasets | ${SITE_NAME}`,
+                    description: `${content.projects.length} ${path.title} practice projects with realistic data and milestones checked in your browser: ${content.projects.map((p) => p.title).join(", ")}.`,
+                    html: frame({ trail: projectsTrail, nav: roadmapNav(path, { now: "Projects", currentExtra: "projects" }), body: projectsIndexBody(path, content) }),
+                    trail: projectsTrail
+                })
+            });
+
+            content.projects.forEach((project, index) => {
+                const trail = [...pathCrumbs(path), { label: path.title, href: pathUrl(path) }, { label: "Projects", href: projectsUrl(path) }, { label: project.title }];
+                pages.push({
+                    kind: "project",
+                    ...pageEntry({
+                        url: projectUrl(path, project),
+                        title: `${project.title}: ${path.title} Project | ${SITE_NAME}`,
+                        description: `${firstSentence(project.scenario)} A ${path.title} practice project with ${project.milestones.length} checked milestones.`,
+                        html: frame({ trail, nav: roadmapNav(path, { now: project.title, currentExtra: `project:${project.id}` }), body: projectBody(path, project, index, content) }),
+                        trail
+                    })
+                });
+            });
+
+        }
+
+        if (content.interview) {
+
+            const trail = [...pathCrumbs(path), { label: path.title, href: pathUrl(path) }, { label: "Interview practice" }];
+
+            pages.push({
+                kind: "interview",
+                ...pageEntry({
+                    url: interviewUrl(path),
+                    title: `${path.title} Interview Questions with Checked Answers | ${SITE_NAME}`,
+                    description: `${content.interview.quiz.length} ${path.title} concept questions with explanations and ${content.interview.coding.length} coding problems checked in your browser, from second-highest salary to pivots.`,
+                    html: frame({ trail, nav: roadmapNav(path, { now: "Interview practice", currentExtra: "interview" }), body: interviewBody(path, content) }),
+                    trail
+                })
+            });
 
         }
 

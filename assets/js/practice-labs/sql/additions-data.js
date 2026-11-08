@@ -18,19 +18,33 @@ export const DATASETS = {
   "INSERT INTO accounts VALUES (1,'Asha Rao','savings','2023-01-10',0),(2,'Bilal Khan','current','2022-11-02',20000),\n (3,'Chitra Iyer','savings','2023-05-21',0),(4,'Divya Nair','current','2021-08-30',50000),(5,'Farhan Ali','savings','2024-02-14',0),\n (6,'Gita Sharma','savings','2023-09-09',0);",
   "CREATE TABLE transactions (id INTEGER PRIMARY KEY, account_id INTEGER NOT NULL REFERENCES accounts(id), tx_date TEXT NOT NULL,\n amount INTEGER NOT NULL, description TEXT NOT NULL, ref TEXT NOT NULL);",
   "INSERT INTO transactions VALUES\n (1,1,'2024-01-01',50000,'Salary','SAL-0101'),(2,1,'2024-01-05',-1200,'Electricity','UPI-1001'),\n (3,1,'2024-01-18',-8000,'Rent share','UPI-1002'),(4,1,'2024-02-01',50000,'Salary','SAL-0201'),\n (5,1,'2024-02-11',-15000,'Laptop EMI','NACH-2001'),(6,1,'2024-03-01',50000,'Salary','SAL-0301'),\n (7,1,'2024-03-09',-2500,'Groceries','UPI-1003'),\n (8,2,'2024-01-03',120000,'Client payment','NEFT-5001'),(9,2,'2024-01-15',-90000,'Supplier','NEFT-5002'),\n (10,2,'2024-02-02',-45000,'Payroll','NEFT-5003'),(11,2,'2024-02-20',30000,'Client payment','NEFT-5004'),\n (12,2,'2024-03-05',-25000,'Office rent','NEFT-5005'),\n (13,3,'2024-01-02',20000,'Opening deposit','DEP-3001'),(14,3,'2024-01-20',-3500,'Insurance','NACH-3002'),\n (15,3,'2024-02-15',-3500,'Insurance','NACH-3003'),(16,3,'2024-03-15',-3500,'Insurance','NACH-3004'),\n (17,4,'2024-01-04',200000,'Client payment','RTGS-4001'),(18,4,'2024-01-25',-230000,'Equipment','RTGS-4002'),\n (19,4,'2024-02-26',80000,'Client payment','RTGS-4003'),(20,4,'2024-03-28',-10000,'Bank charges','FEE-4004'),\n (21,5,'2024-02-14',5000,'Opening deposit','DEP-5001'),(22,5,'2024-02-20',-2000,'Shopping','UPI-5002'),\n (23,5,'2024-02-20',-2000,'Shopping','UPI-5002'),(24,5,'2024-03-02',-1800,'Mobile recharge','UPI-5003'),\n (25,6,'2024-01-10',15000,'Opening deposit','DEP-6001'),(26,6,'2024-03-20',-4000,'Course fees','UPI-6002');"
+ ],
+ "clinic": [
+  "CREATE TABLE doctors (id INTEGER PRIMARY KEY, name TEXT NOT NULL, specialty TEXT NOT NULL);",
+  "INSERT INTO doctors VALUES (1,'Dr. Anand Rao','General Medicine'),(2,'Dr. Bhavna Shah','Paediatrics'),(3,'Dr. Charles Dsouza','Orthopaedics'),(4,'Dr. Deepa Menon','Dermatology');",
+  "CREATE TABLE patients (id INTEGER PRIMARY KEY, code TEXT NOT NULL UNIQUE, birth_year INTEGER NOT NULL, city TEXT NOT NULL);",
+  "INSERT INTO patients VALUES (1,'P1001',1985,'Pune'),(2,'P1002',1992,'Mumbai'),(3,'P1003',2016,'Pune'),(4,'P1004',1970,'Pune'),\n (5,'P1005',1999,'Thane'),(6,'P1006',2019,'Mumbai'),(7,'P1007',1958,'Pune'),(8,'P1008',1988,'Pune'),(9,'P1009',1963,'Mumbai'),(10,'P1010',2021,'Thane');",
+  "CREATE TABLE appointments (id INTEGER PRIMARY KEY, patient_id INTEGER NOT NULL REFERENCES patients(id), doctor_id INTEGER NOT NULL REFERENCES doctors(id),\n booked_on TEXT NOT NULL, appt_date TEXT NOT NULL, status TEXT NOT NULL CHECK (status IN ('completed','no-show','cancelled')), follow_up INTEGER NOT NULL DEFAULT 0);",
+  "INSERT INTO appointments VALUES\n (1,1,1,'2024-01-02','2024-01-05','completed',1),(2,2,1,'2024-01-03','2024-01-05','no-show',0),(3,3,2,'2024-01-04','2024-01-08','completed',0),\n (4,4,3,'2024-01-05','2024-01-12','completed',1),(5,5,4,'2024-01-08','2024-01-09','cancelled',0),(6,1,1,'2024-01-10','2024-01-19','completed',0),\n (7,6,2,'2024-01-11','2024-01-15','no-show',0),(8,7,3,'2024-01-15','2024-01-29','completed',1),(9,8,4,'2024-01-20','2024-01-23','completed',0),\n (10,9,1,'2024-01-22','2024-01-24','completed',1),(11,4,3,'2024-01-25','2024-02-09','completed',0),(12,10,2,'2024-02-01','2024-02-02','completed',0),\n (13,2,1,'2024-02-02','2024-02-05','completed',0),(14,6,2,'2024-02-05','2024-02-07','no-show',0),(15,3,2,'2024-02-08','2024-02-12','completed',1),\n (16,5,4,'2024-02-10','2024-02-13','completed',0),(17,8,4,'2024-02-14','2024-02-26','no-show',0),(18,9,1,'2024-02-15','2024-02-16','cancelled',0),\n (19,1,1,'2024-02-20','2024-02-23','completed',0),(20,7,3,'2024-02-22','2024-03-04','no-show',0),(21,10,2,'2024-03-01','2024-03-04','completed',0),\n (22,6,2,'2024-03-02','2024-03-06','completed',0),(23,3,2,'2024-03-05','2024-03-11','completed',0),(24,4,3,'2024-03-07','2024-03-18','completed',0),\n (25,8,4,'2024-03-10','2024-03-12','completed',1),(26,2,1,'2024-03-12','2024-03-13','no-show',0),(27,5,4,'2024-03-15','2024-03-25','cancelled',0),\n (28,9,1,'2024-03-18','2024-03-22','completed',0),(29,10,2,'2024-03-20','2024-03-21','completed',0),(30,1,1,'2024-03-25','2024-03-28','no-show',0);"
+ ],
+ "targets": [
+  "CREATE TABLE monthly_targets (month TEXT PRIMARY KEY, revenue_target INTEGER NOT NULL);",
+  "INSERT INTO monthly_targets VALUES ('2024-01',3000),('2024-02',3000),('2024-03',4500),('2024-04',4500),('2024-05',4000),('2024-06',2500);"
  ]
 };
 
 export const DATASET_NOTES = {
  "employees": "employees (18 people of an imaginary software company: id, name, department_id, manager_id, title, hire_date, salary in rupees a month) and departments (id, name, location).",
- "bank": "accounts (id, holder, type savings or current, opened, overdraft_limit) and transactions (id, account_id, tx_date, amount: positive money in and negative money out, description, ref)."
+ "bank": "accounts (id, holder, type savings or current, opened, overdraft_limit) and transactions (id, account_id, tx_date, amount: positive money in and negative money out, description, ref).",
+ "clinic": "doctors (id, name, specialty), patients (id, code such as P1001, birth_year, city: synthetic records, no real people) and appointments (id, patient_id, doctor_id, booked_on, appt_date, status completed, no-show or cancelled, follow_up 1 when the doctor asked for a follow-up visit).",
+ "targets": "monthly_targets (month as YYYY-MM, revenue_target in rupees), set by management for the shop."
 };
 
 export const set = {
  "id": "sql-path-additions",
  "version": "1.0.0",
  "title": "SQL learning path: advanced practice",
- "description": "Exercises for the SQL learning path's lessons on dates, running totals, ranking, recursive queries and query plans, on the shop, company and bank databases.",
+ "description": "Exercises for the SQL learning path: lessons on dates, running totals, ranking, recursion and query plans, five projects and an interview set, on the shop, company, bank and clinic databases.",
  "reviewed": {
   "date": "2026-11-08",
   "method": "Written by the author. Expected results and plans produced by Python sqlite3 (SQLite 3.40.1); the browser engine must match them."
@@ -1225,6 +1239,1594 @@ export const set = {
    "plan": {
     "must": "SEARCH oi USING (COVERING )?INDEX",
     "mustNot": "SCAN oi"
+   }
+  },
+  {
+   "id": "sqlp-pr1-headcount",
+   "title": "Headcount by department",
+   "difficulty": "intermediate",
+   "objective": "Join two tables and count per group.",
+   "instructions": "Return each department's name and its number of employees (headcount).",
+   "solution": "SELECT d.name, COUNT(*) AS headcount\nFROM employees e\nJOIN departments d ON d.id = e.department_id\nGROUP BY d.name;",
+   "hints": [
+    "employees holds department_id; departments holds the name.",
+    "JOIN them on d.id = e.department_id.",
+    "GROUP BY the department name and COUNT(*)."
+   ],
+   "explanation": "Joining first gives every employee their department's name; grouping by that name counts the people in each. Engineering is the largest team with 7 people.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE departments (id INTEGER PRIMARY KEY, name TEXT NOT NULL, location TEXT NOT NULL);",
+    "INSERT INTO departments VALUES (1,'Leadership','Bengaluru'),(2,'Engineering','Bengaluru'),(3,'Quality','Pune'),\n (4,'Sales','Mumbai'),(5,'Support','Pune');",
+    "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT NOT NULL, department_id INTEGER NOT NULL REFERENCES departments(id),\n manager_id INTEGER REFERENCES employees(id), title TEXT NOT NULL, hire_date TEXT NOT NULL, salary INTEGER NOT NULL);",
+    "INSERT INTO employees VALUES\n (1,'Meera Joshi',1,NULL,'Chief Executive','2018-04-02',420000),\n (2,'Ravi Menon',2,1,'Head of Engineering','2018-06-11',310000),\n (3,'Sana Qureshi',3,1,'Head of Quality','2019-01-07',260000),\n (4,'Vikram Rao',4,1,'Head of Sales','2019-03-18',280000),\n (5,'Neha Gupta',2,2,'Engineering Lead','2019-08-05',210000),\n (6,'Aditya Singh',2,2,'Engineering Lead','2020-02-10',205000),\n (7,'Pooja Iyer',2,5,'Developer','2020-07-01',140000),\n (8,'Rahul Das',2,5,'Developer','2021-01-11',128000),\n (9,'Fatima Shaikh',2,6,'Developer','2021-05-24',128000),\n (10,'Karan Malhotra',2,6,'Developer','2022-09-12',115000),\n (11,'Lakshmi Pillai',3,3,'QA Lead','2020-03-16',170000),\n (12,'Omar Farooq',3,11,'Test Engineer','2021-08-02',95000),\n (13,'Priya Nambiar',3,11,'Automation Engineer','2022-01-17',118000),\n (14,'Suresh Babu',4,4,'Account Manager','2020-11-09',120000),\n (15,'Tanvi Kulkarni',4,4,'Account Manager','2023-02-06',98000),\n (16,'Zoya Ahmed',5,1,'Support Manager','2021-04-12',150000),\n (17,'Manoj Yadav',5,16,'Support Agent','2022-06-20',62000),\n (18,'Ritu Saxena',5,16,'Support Agent','2024-01-08',58000);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 2,
+    "rows": [
+     [
+      "Engineering",
+      7
+     ],
+     [
+      "Leadership",
+      1
+     ],
+     [
+      "Quality",
+      4
+     ],
+     [
+      "Sales",
+      3
+     ],
+     [
+      "Support",
+      3
+     ]
+    ]
+   },
+   "dataset": "employees"
+  },
+  {
+   "id": "sqlp-pr1-salary-bands",
+   "title": "Salary bands",
+   "difficulty": "intermediate",
+   "objective": "Label rows with CASE and count each label.",
+   "instructions": "Put every employee in a salary band: 'Under 1 lakh' for a monthly salary below 100000, '1 to 2 lakh' from 100000 up to 199999, and '2 lakh and above' from 200000. Return each band and the number of people in it (columns band and people).",
+   "solution": "SELECT CASE\n         WHEN salary < 100000 THEN 'Under 1 lakh'\n         WHEN salary < 200000 THEN '1 to 2 lakh'\n         ELSE '2 lakh and above'\n       END AS band,\n       COUNT(*) AS people\nFROM employees\nGROUP BY band;",
+   "hints": [
+    "CASE checks the conditions in order, so test the lowest band first.",
+    "Give the CASE expression the alias band.",
+    "GROUP BY band and count."
+   ],
+   "explanation": "Because CASE stops at the first true condition, WHEN salary < 200000 only sees salaries of 100000 and more. Grouping by the alias counts each band. HR teams use exactly this to check pay structure.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE departments (id INTEGER PRIMARY KEY, name TEXT NOT NULL, location TEXT NOT NULL);",
+    "INSERT INTO departments VALUES (1,'Leadership','Bengaluru'),(2,'Engineering','Bengaluru'),(3,'Quality','Pune'),\n (4,'Sales','Mumbai'),(5,'Support','Pune');",
+    "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT NOT NULL, department_id INTEGER NOT NULL REFERENCES departments(id),\n manager_id INTEGER REFERENCES employees(id), title TEXT NOT NULL, hire_date TEXT NOT NULL, salary INTEGER NOT NULL);",
+    "INSERT INTO employees VALUES\n (1,'Meera Joshi',1,NULL,'Chief Executive','2018-04-02',420000),\n (2,'Ravi Menon',2,1,'Head of Engineering','2018-06-11',310000),\n (3,'Sana Qureshi',3,1,'Head of Quality','2019-01-07',260000),\n (4,'Vikram Rao',4,1,'Head of Sales','2019-03-18',280000),\n (5,'Neha Gupta',2,2,'Engineering Lead','2019-08-05',210000),\n (6,'Aditya Singh',2,2,'Engineering Lead','2020-02-10',205000),\n (7,'Pooja Iyer',2,5,'Developer','2020-07-01',140000),\n (8,'Rahul Das',2,5,'Developer','2021-01-11',128000),\n (9,'Fatima Shaikh',2,6,'Developer','2021-05-24',128000),\n (10,'Karan Malhotra',2,6,'Developer','2022-09-12',115000),\n (11,'Lakshmi Pillai',3,3,'QA Lead','2020-03-16',170000),\n (12,'Omar Farooq',3,11,'Test Engineer','2021-08-02',95000),\n (13,'Priya Nambiar',3,11,'Automation Engineer','2022-01-17',118000),\n (14,'Suresh Babu',4,4,'Account Manager','2020-11-09',120000),\n (15,'Tanvi Kulkarni',4,4,'Account Manager','2023-02-06',98000),\n (16,'Zoya Ahmed',5,1,'Support Manager','2021-04-12',150000),\n (17,'Manoj Yadav',5,16,'Support Agent','2022-06-20',62000),\n (18,'Ritu Saxena',5,16,'Support Agent','2024-01-08',58000);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 2,
+    "rows": [
+     [
+      "1 to 2 lakh",
+      8
+     ],
+     [
+      "2 lakh and above",
+      6
+     ],
+     [
+      "Under 1 lakh",
+      4
+     ]
+    ]
+   },
+   "dataset": "employees"
+  },
+  {
+   "id": "sqlp-pr1-top-earner",
+   "title": "Top earner of each department",
+   "difficulty": "advanced",
+   "objective": "Combine a grouped maximum with a join to find the rows that reach it.",
+   "instructions": "Return the department name, the employee name and the salary of the highest-paid person in each department. If two people share the top salary, show both.",
+   "solution": "SELECT d.name AS department, e.name, e.salary\nFROM employees e\nJOIN departments d ON d.id = e.department_id\nWHERE e.salary = (SELECT MAX(salary) FROM employees x WHERE x.department_id = e.department_id);",
+   "hints": [
+    "For each employee, compare their salary with the maximum of their own department.",
+    "A correlated subquery can refer to the outer row: WHERE x.department_id = e.department_id.",
+    "Join departments for the name."
+   ],
+   "explanation": "The correlated subquery calculates the maximum of the employee's own department, so only the top earners pass. A window-function version (RANK in a CTE, as in the ranking lesson) gives the same rows; both keep ties.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE departments (id INTEGER PRIMARY KEY, name TEXT NOT NULL, location TEXT NOT NULL);",
+    "INSERT INTO departments VALUES (1,'Leadership','Bengaluru'),(2,'Engineering','Bengaluru'),(3,'Quality','Pune'),\n (4,'Sales','Mumbai'),(5,'Support','Pune');",
+    "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT NOT NULL, department_id INTEGER NOT NULL REFERENCES departments(id),\n manager_id INTEGER REFERENCES employees(id), title TEXT NOT NULL, hire_date TEXT NOT NULL, salary INTEGER NOT NULL);",
+    "INSERT INTO employees VALUES\n (1,'Meera Joshi',1,NULL,'Chief Executive','2018-04-02',420000),\n (2,'Ravi Menon',2,1,'Head of Engineering','2018-06-11',310000),\n (3,'Sana Qureshi',3,1,'Head of Quality','2019-01-07',260000),\n (4,'Vikram Rao',4,1,'Head of Sales','2019-03-18',280000),\n (5,'Neha Gupta',2,2,'Engineering Lead','2019-08-05',210000),\n (6,'Aditya Singh',2,2,'Engineering Lead','2020-02-10',205000),\n (7,'Pooja Iyer',2,5,'Developer','2020-07-01',140000),\n (8,'Rahul Das',2,5,'Developer','2021-01-11',128000),\n (9,'Fatima Shaikh',2,6,'Developer','2021-05-24',128000),\n (10,'Karan Malhotra',2,6,'Developer','2022-09-12',115000),\n (11,'Lakshmi Pillai',3,3,'QA Lead','2020-03-16',170000),\n (12,'Omar Farooq',3,11,'Test Engineer','2021-08-02',95000),\n (13,'Priya Nambiar',3,11,'Automation Engineer','2022-01-17',118000),\n (14,'Suresh Babu',4,4,'Account Manager','2020-11-09',120000),\n (15,'Tanvi Kulkarni',4,4,'Account Manager','2023-02-06',98000),\n (16,'Zoya Ahmed',5,1,'Support Manager','2021-04-12',150000),\n (17,'Manoj Yadav',5,16,'Support Agent','2022-06-20',62000),\n (18,'Ritu Saxena',5,16,'Support Agent','2024-01-08',58000);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 3,
+    "rows": [
+     [
+      "Leadership",
+      "Meera Joshi",
+      420000
+     ],
+     [
+      "Engineering",
+      "Ravi Menon",
+      310000
+     ],
+     [
+      "Quality",
+      "Sana Qureshi",
+      260000
+     ],
+     [
+      "Sales",
+      "Vikram Rao",
+      280000
+     ],
+     [
+      "Support",
+      "Zoya Ahmed",
+      150000
+     ]
+    ]
+   },
+   "dataset": "employees"
+  },
+  {
+   "id": "sqlp-pr1-levels",
+   "title": "People at each level",
+   "difficulty": "advanced",
+   "objective": "Use a recursive CTE and summarise its result.",
+   "instructions": "Count how many people sit at each level of the organisation: level 0 for the person with no manager, 1 for their direct reports, and so on. Return level and people.",
+   "solution": "WITH RECURSIVE org AS (\n  SELECT id, 0 AS level FROM employees WHERE manager_id IS NULL\n  UNION ALL\n  SELECT e.id, org.level + 1 FROM employees e JOIN org ON e.manager_id = org.id\n)\nSELECT level, COUNT(*) AS people\nFROM org\nGROUP BY level;",
+   "hints": [
+    "Start the recursion at the person whose manager_id IS NULL, level 0.",
+    "Each step adds the people managed by someone already found, at level + 1.",
+    "Group the CTE by level."
+   ],
+   "explanation": "The recursive CTE assigns everyone a level; the outer GROUP BY counts them. The organisation has 1 person at level 0, 4 at level 1, 7 at level 2 and 6 at level 3.",
+   "source": "SQLite documentation: The WITH clause",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE departments (id INTEGER PRIMARY KEY, name TEXT NOT NULL, location TEXT NOT NULL);",
+    "INSERT INTO departments VALUES (1,'Leadership','Bengaluru'),(2,'Engineering','Bengaluru'),(3,'Quality','Pune'),\n (4,'Sales','Mumbai'),(5,'Support','Pune');",
+    "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT NOT NULL, department_id INTEGER NOT NULL REFERENCES departments(id),\n manager_id INTEGER REFERENCES employees(id), title TEXT NOT NULL, hire_date TEXT NOT NULL, salary INTEGER NOT NULL);",
+    "INSERT INTO employees VALUES\n (1,'Meera Joshi',1,NULL,'Chief Executive','2018-04-02',420000),\n (2,'Ravi Menon',2,1,'Head of Engineering','2018-06-11',310000),\n (3,'Sana Qureshi',3,1,'Head of Quality','2019-01-07',260000),\n (4,'Vikram Rao',4,1,'Head of Sales','2019-03-18',280000),\n (5,'Neha Gupta',2,2,'Engineering Lead','2019-08-05',210000),\n (6,'Aditya Singh',2,2,'Engineering Lead','2020-02-10',205000),\n (7,'Pooja Iyer',2,5,'Developer','2020-07-01',140000),\n (8,'Rahul Das',2,5,'Developer','2021-01-11',128000),\n (9,'Fatima Shaikh',2,6,'Developer','2021-05-24',128000),\n (10,'Karan Malhotra',2,6,'Developer','2022-09-12',115000),\n (11,'Lakshmi Pillai',3,3,'QA Lead','2020-03-16',170000),\n (12,'Omar Farooq',3,11,'Test Engineer','2021-08-02',95000),\n (13,'Priya Nambiar',3,11,'Automation Engineer','2022-01-17',118000),\n (14,'Suresh Babu',4,4,'Account Manager','2020-11-09',120000),\n (15,'Tanvi Kulkarni',4,4,'Account Manager','2023-02-06',98000),\n (16,'Zoya Ahmed',5,1,'Support Manager','2021-04-12',150000),\n (17,'Manoj Yadav',5,16,'Support Agent','2022-06-20',62000),\n (18,'Ritu Saxena',5,16,'Support Agent','2024-01-08',58000);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 2,
+    "rows": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      3,
+      6
+     ]
+    ]
+   },
+   "dataset": "employees"
+  },
+  {
+   "id": "sqlp-pr1-joiners",
+   "title": "Joiners per year",
+   "difficulty": "intermediate",
+   "objective": "Group by a part of a date.",
+   "instructions": "Return each hiring year (column year, as text such as '2021') and the number of people hired that year (joiners), oldest year first.",
+   "solution": "SELECT strftime('%Y', hire_date) AS year, COUNT(*) AS joiners\nFROM employees\nGROUP BY year\nORDER BY year;",
+   "hints": [
+    "strftime('%Y', hire_date) gives the year.",
+    "Group by it and count.",
+    "Order by year."
+   ],
+   "explanation": "Hiring by year shows how the company grew. It also tells a tester which years to cover when checking anything that depends on length of service.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": true,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE departments (id INTEGER PRIMARY KEY, name TEXT NOT NULL, location TEXT NOT NULL);",
+    "INSERT INTO departments VALUES (1,'Leadership','Bengaluru'),(2,'Engineering','Bengaluru'),(3,'Quality','Pune'),\n (4,'Sales','Mumbai'),(5,'Support','Pune');",
+    "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT NOT NULL, department_id INTEGER NOT NULL REFERENCES departments(id),\n manager_id INTEGER REFERENCES employees(id), title TEXT NOT NULL, hire_date TEXT NOT NULL, salary INTEGER NOT NULL);",
+    "INSERT INTO employees VALUES\n (1,'Meera Joshi',1,NULL,'Chief Executive','2018-04-02',420000),\n (2,'Ravi Menon',2,1,'Head of Engineering','2018-06-11',310000),\n (3,'Sana Qureshi',3,1,'Head of Quality','2019-01-07',260000),\n (4,'Vikram Rao',4,1,'Head of Sales','2019-03-18',280000),\n (5,'Neha Gupta',2,2,'Engineering Lead','2019-08-05',210000),\n (6,'Aditya Singh',2,2,'Engineering Lead','2020-02-10',205000),\n (7,'Pooja Iyer',2,5,'Developer','2020-07-01',140000),\n (8,'Rahul Das',2,5,'Developer','2021-01-11',128000),\n (9,'Fatima Shaikh',2,6,'Developer','2021-05-24',128000),\n (10,'Karan Malhotra',2,6,'Developer','2022-09-12',115000),\n (11,'Lakshmi Pillai',3,3,'QA Lead','2020-03-16',170000),\n (12,'Omar Farooq',3,11,'Test Engineer','2021-08-02',95000),\n (13,'Priya Nambiar',3,11,'Automation Engineer','2022-01-17',118000),\n (14,'Suresh Babu',4,4,'Account Manager','2020-11-09',120000),\n (15,'Tanvi Kulkarni',4,4,'Account Manager','2023-02-06',98000),\n (16,'Zoya Ahmed',5,1,'Support Manager','2021-04-12',150000),\n (17,'Manoj Yadav',5,16,'Support Agent','2022-06-20',62000),\n (18,'Ritu Saxena',5,16,'Support Agent','2024-01-08',58000);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 2,
+    "rows": [
+     [
+      "2018",
+      2
+     ],
+     [
+      "2019",
+      3
+     ],
+     [
+      "2020",
+      4
+     ],
+     [
+      "2021",
+      4
+     ],
+     [
+      "2022",
+      3
+     ],
+     [
+      "2023",
+      1
+     ],
+     [
+      "2024",
+      1
+     ]
+    ]
+   },
+   "dataset": "employees"
+  },
+  {
+   "id": "sqlp-pr2-balances",
+   "title": "Current balance of every account",
+   "difficulty": "intermediate",
+   "objective": "Sum transactions per account and join the holder.",
+   "instructions": "Return each account's holder and its current balance (the sum of all its transactions), largest balance first.",
+   "solution": "SELECT a.holder, SUM(t.amount) AS balance\nFROM accounts a\nJOIN transactions t ON t.account_id = a.id\nGROUP BY a.id, a.holder\nORDER BY balance DESC;",
+   "hints": [
+    "Money in is positive and money out negative, so SUM gives the balance.",
+    "Group by the account.",
+    "Order by the balance, largest first."
+   ],
+   "explanation": "A balance is simply the sum of all signed amounts. Grouping by a.id as well as the holder keeps two accounts of people with the same name apart.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": true,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE accounts (id INTEGER PRIMARY KEY, holder TEXT NOT NULL, type TEXT NOT NULL CHECK (type IN ('savings','current')),\n opened TEXT NOT NULL, overdraft_limit INTEGER NOT NULL DEFAULT 0);",
+    "INSERT INTO accounts VALUES (1,'Asha Rao','savings','2023-01-10',0),(2,'Bilal Khan','current','2022-11-02',20000),\n (3,'Chitra Iyer','savings','2023-05-21',0),(4,'Divya Nair','current','2021-08-30',50000),(5,'Farhan Ali','savings','2024-02-14',0),\n (6,'Gita Sharma','savings','2023-09-09',0);",
+    "CREATE TABLE transactions (id INTEGER PRIMARY KEY, account_id INTEGER NOT NULL REFERENCES accounts(id), tx_date TEXT NOT NULL,\n amount INTEGER NOT NULL, description TEXT NOT NULL, ref TEXT NOT NULL);",
+    "INSERT INTO transactions VALUES\n (1,1,'2024-01-01',50000,'Salary','SAL-0101'),(2,1,'2024-01-05',-1200,'Electricity','UPI-1001'),\n (3,1,'2024-01-18',-8000,'Rent share','UPI-1002'),(4,1,'2024-02-01',50000,'Salary','SAL-0201'),\n (5,1,'2024-02-11',-15000,'Laptop EMI','NACH-2001'),(6,1,'2024-03-01',50000,'Salary','SAL-0301'),\n (7,1,'2024-03-09',-2500,'Groceries','UPI-1003'),\n (8,2,'2024-01-03',120000,'Client payment','NEFT-5001'),(9,2,'2024-01-15',-90000,'Supplier','NEFT-5002'),\n (10,2,'2024-02-02',-45000,'Payroll','NEFT-5003'),(11,2,'2024-02-20',30000,'Client payment','NEFT-5004'),\n (12,2,'2024-03-05',-25000,'Office rent','NEFT-5005'),\n (13,3,'2024-01-02',20000,'Opening deposit','DEP-3001'),(14,3,'2024-01-20',-3500,'Insurance','NACH-3002'),\n (15,3,'2024-02-15',-3500,'Insurance','NACH-3003'),(16,3,'2024-03-15',-3500,'Insurance','NACH-3004'),\n (17,4,'2024-01-04',200000,'Client payment','RTGS-4001'),(18,4,'2024-01-25',-230000,'Equipment','RTGS-4002'),\n (19,4,'2024-02-26',80000,'Client payment','RTGS-4003'),(20,4,'2024-03-28',-10000,'Bank charges','FEE-4004'),\n (21,5,'2024-02-14',5000,'Opening deposit','DEP-5001'),(22,5,'2024-02-20',-2000,'Shopping','UPI-5002'),\n (23,5,'2024-02-20',-2000,'Shopping','UPI-5002'),(24,5,'2024-03-02',-1800,'Mobile recharge','UPI-5003'),\n (25,6,'2024-01-10',15000,'Opening deposit','DEP-6001'),(26,6,'2024-03-20',-4000,'Course fees','UPI-6002');"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 2,
+    "rows": [
+     [
+      "Asha Rao",
+      123300
+     ],
+     [
+      "Divya Nair",
+      40000
+     ],
+     [
+      "Gita Sharma",
+      11000
+     ],
+     [
+      "Chitra Iyer",
+      9500
+     ],
+     [
+      "Farhan Ali",
+      -800
+     ],
+     [
+      "Bilal Khan",
+      -10000
+     ]
+    ]
+   },
+   "dataset": "bank"
+  },
+  {
+   "id": "sqlp-pr2-duplicates",
+   "title": "Find duplicate payments",
+   "difficulty": "intermediate",
+   "objective": "Find repeated rows with GROUP BY and HAVING.",
+   "instructions": "A customer complains about being charged twice. Find every group of transactions that share the same account, date, amount and ref and appear more than once. Return account_id, ref, amount and how many times it appears (times).",
+   "solution": "SELECT account_id, ref, amount, COUNT(*) AS times\nFROM transactions\nGROUP BY account_id, tx_date, amount, ref\nHAVING COUNT(*) > 1;",
+   "hints": [
+    "Group by every column that defines 'the same payment'.",
+    "HAVING COUNT(*) > 1 keeps only repeated groups.",
+    "Show the count as times."
+   ],
+   "explanation": "Grouping by the identifying columns collapses identical payments into one group; HAVING keeps the groups with more than one row. UPI-5002 was charged twice to account 5.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE accounts (id INTEGER PRIMARY KEY, holder TEXT NOT NULL, type TEXT NOT NULL CHECK (type IN ('savings','current')),\n opened TEXT NOT NULL, overdraft_limit INTEGER NOT NULL DEFAULT 0);",
+    "INSERT INTO accounts VALUES (1,'Asha Rao','savings','2023-01-10',0),(2,'Bilal Khan','current','2022-11-02',20000),\n (3,'Chitra Iyer','savings','2023-05-21',0),(4,'Divya Nair','current','2021-08-30',50000),(5,'Farhan Ali','savings','2024-02-14',0),\n (6,'Gita Sharma','savings','2023-09-09',0);",
+    "CREATE TABLE transactions (id INTEGER PRIMARY KEY, account_id INTEGER NOT NULL REFERENCES accounts(id), tx_date TEXT NOT NULL,\n amount INTEGER NOT NULL, description TEXT NOT NULL, ref TEXT NOT NULL);",
+    "INSERT INTO transactions VALUES\n (1,1,'2024-01-01',50000,'Salary','SAL-0101'),(2,1,'2024-01-05',-1200,'Electricity','UPI-1001'),\n (3,1,'2024-01-18',-8000,'Rent share','UPI-1002'),(4,1,'2024-02-01',50000,'Salary','SAL-0201'),\n (5,1,'2024-02-11',-15000,'Laptop EMI','NACH-2001'),(6,1,'2024-03-01',50000,'Salary','SAL-0301'),\n (7,1,'2024-03-09',-2500,'Groceries','UPI-1003'),\n (8,2,'2024-01-03',120000,'Client payment','NEFT-5001'),(9,2,'2024-01-15',-90000,'Supplier','NEFT-5002'),\n (10,2,'2024-02-02',-45000,'Payroll','NEFT-5003'),(11,2,'2024-02-20',30000,'Client payment','NEFT-5004'),\n (12,2,'2024-03-05',-25000,'Office rent','NEFT-5005'),\n (13,3,'2024-01-02',20000,'Opening deposit','DEP-3001'),(14,3,'2024-01-20',-3500,'Insurance','NACH-3002'),\n (15,3,'2024-02-15',-3500,'Insurance','NACH-3003'),(16,3,'2024-03-15',-3500,'Insurance','NACH-3004'),\n (17,4,'2024-01-04',200000,'Client payment','RTGS-4001'),(18,4,'2024-01-25',-230000,'Equipment','RTGS-4002'),\n (19,4,'2024-02-26',80000,'Client payment','RTGS-4003'),(20,4,'2024-03-28',-10000,'Bank charges','FEE-4004'),\n (21,5,'2024-02-14',5000,'Opening deposit','DEP-5001'),(22,5,'2024-02-20',-2000,'Shopping','UPI-5002'),\n (23,5,'2024-02-20',-2000,'Shopping','UPI-5002'),(24,5,'2024-03-02',-1800,'Mobile recharge','UPI-5003'),\n (25,6,'2024-01-10',15000,'Opening deposit','DEP-6001'),(26,6,'2024-03-20',-4000,'Course fees','UPI-6002');"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 4,
+    "rows": [
+     [
+      5,
+      "UPI-5002",
+      -2000,
+      2
+     ]
+    ]
+   },
+   "dataset": "bank"
+  },
+  {
+   "id": "sqlp-pr2-monthly-flow",
+   "title": "Money in and out per month",
+   "difficulty": "advanced",
+   "objective": "Split one column into two with conditional aggregation.",
+   "instructions": "For the whole bank, return each month (YYYY-MM, column month), the total money in (money_in, the sum of positive amounts) and the total money out (money_out, the sum of negative amounts as a positive number), oldest first.",
+   "solution": "SELECT strftime('%Y-%m', tx_date) AS month,\n       SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END) AS money_in,\n       SUM(CASE WHEN amount < 0 THEN -amount ELSE 0 END) AS money_out\nFROM transactions\nGROUP BY month\nORDER BY month;",
+   "hints": [
+    "SUM(CASE WHEN ... THEN amount ELSE 0 END) adds only the rows that meet the condition.",
+    "Negate the negative amounts so money out is a positive figure.",
+    "Group by the month."
+   ],
+   "explanation": "Conditional aggregation turns one amount column into separate in and out totals in a single pass. The same pattern builds most pivot-style reports.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": true,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE accounts (id INTEGER PRIMARY KEY, holder TEXT NOT NULL, type TEXT NOT NULL CHECK (type IN ('savings','current')),\n opened TEXT NOT NULL, overdraft_limit INTEGER NOT NULL DEFAULT 0);",
+    "INSERT INTO accounts VALUES (1,'Asha Rao','savings','2023-01-10',0),(2,'Bilal Khan','current','2022-11-02',20000),\n (3,'Chitra Iyer','savings','2023-05-21',0),(4,'Divya Nair','current','2021-08-30',50000),(5,'Farhan Ali','savings','2024-02-14',0),\n (6,'Gita Sharma','savings','2023-09-09',0);",
+    "CREATE TABLE transactions (id INTEGER PRIMARY KEY, account_id INTEGER NOT NULL REFERENCES accounts(id), tx_date TEXT NOT NULL,\n amount INTEGER NOT NULL, description TEXT NOT NULL, ref TEXT NOT NULL);",
+    "INSERT INTO transactions VALUES\n (1,1,'2024-01-01',50000,'Salary','SAL-0101'),(2,1,'2024-01-05',-1200,'Electricity','UPI-1001'),\n (3,1,'2024-01-18',-8000,'Rent share','UPI-1002'),(4,1,'2024-02-01',50000,'Salary','SAL-0201'),\n (5,1,'2024-02-11',-15000,'Laptop EMI','NACH-2001'),(6,1,'2024-03-01',50000,'Salary','SAL-0301'),\n (7,1,'2024-03-09',-2500,'Groceries','UPI-1003'),\n (8,2,'2024-01-03',120000,'Client payment','NEFT-5001'),(9,2,'2024-01-15',-90000,'Supplier','NEFT-5002'),\n (10,2,'2024-02-02',-45000,'Payroll','NEFT-5003'),(11,2,'2024-02-20',30000,'Client payment','NEFT-5004'),\n (12,2,'2024-03-05',-25000,'Office rent','NEFT-5005'),\n (13,3,'2024-01-02',20000,'Opening deposit','DEP-3001'),(14,3,'2024-01-20',-3500,'Insurance','NACH-3002'),\n (15,3,'2024-02-15',-3500,'Insurance','NACH-3003'),(16,3,'2024-03-15',-3500,'Insurance','NACH-3004'),\n (17,4,'2024-01-04',200000,'Client payment','RTGS-4001'),(18,4,'2024-01-25',-230000,'Equipment','RTGS-4002'),\n (19,4,'2024-02-26',80000,'Client payment','RTGS-4003'),(20,4,'2024-03-28',-10000,'Bank charges','FEE-4004'),\n (21,5,'2024-02-14',5000,'Opening deposit','DEP-5001'),(22,5,'2024-02-20',-2000,'Shopping','UPI-5002'),\n (23,5,'2024-02-20',-2000,'Shopping','UPI-5002'),(24,5,'2024-03-02',-1800,'Mobile recharge','UPI-5003'),\n (25,6,'2024-01-10',15000,'Opening deposit','DEP-6001'),(26,6,'2024-03-20',-4000,'Course fees','UPI-6002');"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 3,
+    "rows": [
+     [
+      "2024-01",
+      405000,
+      332700
+     ],
+     [
+      "2024-02",
+      165000,
+      67500
+     ],
+     [
+      "2024-03",
+      50000,
+      46800
+     ]
+    ]
+   },
+   "dataset": "bank"
+  },
+  {
+   "id": "sqlp-pr2-savings-overdrawn",
+   "title": "Savings accounts that went below zero",
+   "difficulty": "advanced",
+   "objective": "Combine a running balance with a join and a filter.",
+   "instructions": "Savings accounts must never go below zero. Return the holder of every savings account whose balance went below zero at any moment, once per holder.",
+   "solution": "WITH running AS (\n  SELECT account_id,\n         SUM(amount) OVER (PARTITION BY account_id ORDER BY tx_date, id) AS balance\n  FROM transactions\n)\nSELECT DISTINCT a.holder\nFROM running r\nJOIN accounts a ON a.id = r.account_id\nWHERE a.type = 'savings' AND r.balance < 0;",
+   "hints": [
+    "Compute every account's running balance in a CTE.",
+    "Join accounts to know the type and holder.",
+    "Keep savings accounts with a negative balance; DISTINCT shows each holder once."
+   ],
+   "explanation": "Only Farhan Ali's savings account went below zero, and the duplicate payment found earlier is why: without it the balance would have stayed at 1200.",
+   "source": "SQLite documentation: Window functions",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE accounts (id INTEGER PRIMARY KEY, holder TEXT NOT NULL, type TEXT NOT NULL CHECK (type IN ('savings','current')),\n opened TEXT NOT NULL, overdraft_limit INTEGER NOT NULL DEFAULT 0);",
+    "INSERT INTO accounts VALUES (1,'Asha Rao','savings','2023-01-10',0),(2,'Bilal Khan','current','2022-11-02',20000),\n (3,'Chitra Iyer','savings','2023-05-21',0),(4,'Divya Nair','current','2021-08-30',50000),(5,'Farhan Ali','savings','2024-02-14',0),\n (6,'Gita Sharma','savings','2023-09-09',0);",
+    "CREATE TABLE transactions (id INTEGER PRIMARY KEY, account_id INTEGER NOT NULL REFERENCES accounts(id), tx_date TEXT NOT NULL,\n amount INTEGER NOT NULL, description TEXT NOT NULL, ref TEXT NOT NULL);",
+    "INSERT INTO transactions VALUES\n (1,1,'2024-01-01',50000,'Salary','SAL-0101'),(2,1,'2024-01-05',-1200,'Electricity','UPI-1001'),\n (3,1,'2024-01-18',-8000,'Rent share','UPI-1002'),(4,1,'2024-02-01',50000,'Salary','SAL-0201'),\n (5,1,'2024-02-11',-15000,'Laptop EMI','NACH-2001'),(6,1,'2024-03-01',50000,'Salary','SAL-0301'),\n (7,1,'2024-03-09',-2500,'Groceries','UPI-1003'),\n (8,2,'2024-01-03',120000,'Client payment','NEFT-5001'),(9,2,'2024-01-15',-90000,'Supplier','NEFT-5002'),\n (10,2,'2024-02-02',-45000,'Payroll','NEFT-5003'),(11,2,'2024-02-20',30000,'Client payment','NEFT-5004'),\n (12,2,'2024-03-05',-25000,'Office rent','NEFT-5005'),\n (13,3,'2024-01-02',20000,'Opening deposit','DEP-3001'),(14,3,'2024-01-20',-3500,'Insurance','NACH-3002'),\n (15,3,'2024-02-15',-3500,'Insurance','NACH-3003'),(16,3,'2024-03-15',-3500,'Insurance','NACH-3004'),\n (17,4,'2024-01-04',200000,'Client payment','RTGS-4001'),(18,4,'2024-01-25',-230000,'Equipment','RTGS-4002'),\n (19,4,'2024-02-26',80000,'Client payment','RTGS-4003'),(20,4,'2024-03-28',-10000,'Bank charges','FEE-4004'),\n (21,5,'2024-02-14',5000,'Opening deposit','DEP-5001'),(22,5,'2024-02-20',-2000,'Shopping','UPI-5002'),\n (23,5,'2024-02-20',-2000,'Shopping','UPI-5002'),(24,5,'2024-03-02',-1800,'Mobile recharge','UPI-5003'),\n (25,6,'2024-01-10',15000,'Opening deposit','DEP-6001'),(26,6,'2024-03-20',-4000,'Course fees','UPI-6002');"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 1,
+    "rows": [
+     [
+      "Farhan Ali"
+     ]
+    ]
+   },
+   "dataset": "bank"
+  },
+  {
+   "id": "sqlp-pr2-fix-duplicate",
+   "title": "Correct the duplicate safely",
+   "difficulty": "advanced",
+   "objective": "Change data inside a transaction and check the result.",
+   "instructions": "Remove the duplicate charge: delete the second UPI-5002 transaction (the one with the higher id), inside a transaction (BEGIN ... COMMIT). The lab then counts the UPI-5002 rows.",
+   "solution": "BEGIN;\nDELETE FROM transactions\nWHERE ref = 'UPI-5002'\n  AND id = (SELECT MAX(id) FROM transactions WHERE ref = 'UPI-5002');\nCOMMIT;",
+   "hints": [
+    "Write the matching SELECT first to see exactly which row you will delete.",
+    "Identify the duplicate by the higher id.",
+    "Wrap the DELETE in BEGIN; ... COMMIT;"
+   ],
+   "explanation": "Choosing the row by MAX(id) deletes exactly one of the two identical rows. In a real system the transaction would also record the refund; if any step failed, ROLLBACK would leave the data untouched.",
+   "source": "SQLite documentation: Transactions",
+   "ordered": false,
+   "kind": "modify",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE accounts (id INTEGER PRIMARY KEY, holder TEXT NOT NULL, type TEXT NOT NULL CHECK (type IN ('savings','current')),\n opened TEXT NOT NULL, overdraft_limit INTEGER NOT NULL DEFAULT 0);",
+    "INSERT INTO accounts VALUES (1,'Asha Rao','savings','2023-01-10',0),(2,'Bilal Khan','current','2022-11-02',20000),\n (3,'Chitra Iyer','savings','2023-05-21',0),(4,'Divya Nair','current','2021-08-30',50000),(5,'Farhan Ali','savings','2024-02-14',0),\n (6,'Gita Sharma','savings','2023-09-09',0);",
+    "CREATE TABLE transactions (id INTEGER PRIMARY KEY, account_id INTEGER NOT NULL REFERENCES accounts(id), tx_date TEXT NOT NULL,\n amount INTEGER NOT NULL, description TEXT NOT NULL, ref TEXT NOT NULL);",
+    "INSERT INTO transactions VALUES\n (1,1,'2024-01-01',50000,'Salary','SAL-0101'),(2,1,'2024-01-05',-1200,'Electricity','UPI-1001'),\n (3,1,'2024-01-18',-8000,'Rent share','UPI-1002'),(4,1,'2024-02-01',50000,'Salary','SAL-0201'),\n (5,1,'2024-02-11',-15000,'Laptop EMI','NACH-2001'),(6,1,'2024-03-01',50000,'Salary','SAL-0301'),\n (7,1,'2024-03-09',-2500,'Groceries','UPI-1003'),\n (8,2,'2024-01-03',120000,'Client payment','NEFT-5001'),(9,2,'2024-01-15',-90000,'Supplier','NEFT-5002'),\n (10,2,'2024-02-02',-45000,'Payroll','NEFT-5003'),(11,2,'2024-02-20',30000,'Client payment','NEFT-5004'),\n (12,2,'2024-03-05',-25000,'Office rent','NEFT-5005'),\n (13,3,'2024-01-02',20000,'Opening deposit','DEP-3001'),(14,3,'2024-01-20',-3500,'Insurance','NACH-3002'),\n (15,3,'2024-02-15',-3500,'Insurance','NACH-3003'),(16,3,'2024-03-15',-3500,'Insurance','NACH-3004'),\n (17,4,'2024-01-04',200000,'Client payment','RTGS-4001'),(18,4,'2024-01-25',-230000,'Equipment','RTGS-4002'),\n (19,4,'2024-02-26',80000,'Client payment','RTGS-4003'),(20,4,'2024-03-28',-10000,'Bank charges','FEE-4004'),\n (21,5,'2024-02-14',5000,'Opening deposit','DEP-5001'),(22,5,'2024-02-20',-2000,'Shopping','UPI-5002'),\n (23,5,'2024-02-20',-2000,'Shopping','UPI-5002'),(24,5,'2024-03-02',-1800,'Mobile recharge','UPI-5003'),\n (25,6,'2024-01-10',15000,'Opening deposit','DEP-6001'),(26,6,'2024-03-20',-4000,'Course fees','UPI-6002');"
+   ],
+   "verify": "SELECT ref, COUNT(*) AS times FROM transactions WHERE ref = 'UPI-5002' GROUP BY ref",
+   "expected": {
+    "columns": 2,
+    "rows": [
+     [
+      "UPI-5002",
+      1
+     ]
+    ]
+   },
+   "dataset": "bank"
+  },
+  {
+   "id": "sqlp-pr3-repeat-customers",
+   "title": "Repeat customers",
+   "difficulty": "intermediate",
+   "objective": "Count per customer and keep those above a threshold.",
+   "instructions": "Return the name and number of non-cancelled orders (orders) of every customer who placed more than one non-cancelled order.",
+   "solution": "SELECT c.name, COUNT(*) AS orders\nFROM customers c\nJOIN orders o ON o.customer_id = c.id\nWHERE o.status <> 'cancelled'\nGROUP BY c.id, c.name\nHAVING COUNT(*) > 1;",
+   "hints": [
+    "Join customers to orders and leave out cancelled orders in WHERE.",
+    "Group by the customer.",
+    "HAVING COUNT(*) > 1 keeps repeat customers."
+   ],
+   "explanation": "WHERE removes cancelled orders before grouping; HAVING keeps the customers with two or more remaining orders. Repeat-purchase rate is one of the first numbers an online shop watches.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [],
+   "verify": null,
+   "expected": {
+    "columns": 2,
+    "rows": [
+     [
+      "Asha Rao",
+      4
+     ],
+     [
+      "Bilal Khan",
+      3
+     ],
+     [
+      "Chitra Iyer",
+      2
+     ],
+     [
+      "Arjun Mehta",
+      2
+     ],
+     [
+      "Farhan Ali",
+      2
+     ]
+    ]
+   }
+  },
+  {
+   "id": "sqlp-pr3-cancelled-value",
+   "title": "Value lost to cancellations",
+   "difficulty": "intermediate",
+   "objective": "Total the value of a subset of orders.",
+   "instructions": "Return one number, lost_value: the total value (price times quantity) of all cancelled orders.",
+   "solution": "SELECT SUM(p.price * oi.quantity) AS lost_value\nFROM orders o\nJOIN order_items oi ON oi.order_id = o.id\nJOIN products p ON p.id = oi.product_id\nWHERE o.status = 'cancelled';",
+   "hints": [
+    "An order's value comes from its items: join orders, order_items and products.",
+    "Keep only cancelled orders.",
+    "SUM price times quantity."
+   ],
+   "explanation": "The value of an order is not stored anywhere; it is calculated from its lines. Summing over the cancelled orders' lines gives the revenue that was lost.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [],
+   "verify": null,
+   "expected": {
+    "columns": 1,
+    "rows": [
+     [
+      3200
+     ]
+    ]
+   }
+  },
+  {
+   "id": "sqlp-pr4-no-show-rate",
+   "title": "No-show rate per doctor",
+   "difficulty": "advanced",
+   "objective": "Calculate a percentage with conditional counting.",
+   "instructions": "For each doctor, count the appointments that were not cancelled (appointments), how many of those were no-shows (no_shows) and the no-show rate as a percentage rounded to one decimal (no_show_pct). Return the doctor's name with those three columns.",
+   "solution": "SELECT d.name,\n       COUNT(*) AS appointments,\n       SUM(a.status = 'no-show') AS no_shows,\n       ROUND(100.0 * SUM(a.status = 'no-show') / COUNT(*), 1) AS no_show_pct\nFROM appointments a\nJOIN doctors d ON d.id = a.doctor_id\nWHERE a.status <> 'cancelled'\nGROUP BY d.id, d.name;",
+   "hints": [
+    "Leave out cancelled appointments with WHERE.",
+    "In SQLite a comparison is 1 or 0, so SUM(a.status = 'no-show') counts no-shows (elsewhere use SUM(CASE WHEN ... THEN 1 ELSE 0 END)).",
+    "Multiply by 100.0, not 100, so the division is not done in whole numbers."
+   ],
+   "explanation": "Using 100.0 makes the division decimal; with 100 an integer division would round 33.3 down to 33 or even to 0. The no-show rate tells the clinic where reminder calls would help most.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE doctors (id INTEGER PRIMARY KEY, name TEXT NOT NULL, specialty TEXT NOT NULL);",
+    "INSERT INTO doctors VALUES (1,'Dr. Anand Rao','General Medicine'),(2,'Dr. Bhavna Shah','Paediatrics'),(3,'Dr. Charles Dsouza','Orthopaedics'),(4,'Dr. Deepa Menon','Dermatology');",
+    "CREATE TABLE patients (id INTEGER PRIMARY KEY, code TEXT NOT NULL UNIQUE, birth_year INTEGER NOT NULL, city TEXT NOT NULL);",
+    "INSERT INTO patients VALUES (1,'P1001',1985,'Pune'),(2,'P1002',1992,'Mumbai'),(3,'P1003',2016,'Pune'),(4,'P1004',1970,'Pune'),\n (5,'P1005',1999,'Thane'),(6,'P1006',2019,'Mumbai'),(7,'P1007',1958,'Pune'),(8,'P1008',1988,'Pune'),(9,'P1009',1963,'Mumbai'),(10,'P1010',2021,'Thane');",
+    "CREATE TABLE appointments (id INTEGER PRIMARY KEY, patient_id INTEGER NOT NULL REFERENCES patients(id), doctor_id INTEGER NOT NULL REFERENCES doctors(id),\n booked_on TEXT NOT NULL, appt_date TEXT NOT NULL, status TEXT NOT NULL CHECK (status IN ('completed','no-show','cancelled')), follow_up INTEGER NOT NULL DEFAULT 0);",
+    "INSERT INTO appointments VALUES\n (1,1,1,'2024-01-02','2024-01-05','completed',1),(2,2,1,'2024-01-03','2024-01-05','no-show',0),(3,3,2,'2024-01-04','2024-01-08','completed',0),\n (4,4,3,'2024-01-05','2024-01-12','completed',1),(5,5,4,'2024-01-08','2024-01-09','cancelled',0),(6,1,1,'2024-01-10','2024-01-19','completed',0),\n (7,6,2,'2024-01-11','2024-01-15','no-show',0),(8,7,3,'2024-01-15','2024-01-29','completed',1),(9,8,4,'2024-01-20','2024-01-23','completed',0),\n (10,9,1,'2024-01-22','2024-01-24','completed',1),(11,4,3,'2024-01-25','2024-02-09','completed',0),(12,10,2,'2024-02-01','2024-02-02','completed',0),\n (13,2,1,'2024-02-02','2024-02-05','completed',0),(14,6,2,'2024-02-05','2024-02-07','no-show',0),(15,3,2,'2024-02-08','2024-02-12','completed',1),\n (16,5,4,'2024-02-10','2024-02-13','completed',0),(17,8,4,'2024-02-14','2024-02-26','no-show',0),(18,9,1,'2024-02-15','2024-02-16','cancelled',0),\n (19,1,1,'2024-02-20','2024-02-23','completed',0),(20,7,3,'2024-02-22','2024-03-04','no-show',0),(21,10,2,'2024-03-01','2024-03-04','completed',0),\n (22,6,2,'2024-03-02','2024-03-06','completed',0),(23,3,2,'2024-03-05','2024-03-11','completed',0),(24,4,3,'2024-03-07','2024-03-18','completed',0),\n (25,8,4,'2024-03-10','2024-03-12','completed',1),(26,2,1,'2024-03-12','2024-03-13','no-show',0),(27,5,4,'2024-03-15','2024-03-25','cancelled',0),\n (28,9,1,'2024-03-18','2024-03-22','completed',0),(29,10,2,'2024-03-20','2024-03-21','completed',0),(30,1,1,'2024-03-25','2024-03-28','no-show',0);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 4,
+    "rows": [
+     [
+      "Dr. Anand Rao",
+      9,
+      3,
+      33.3
+     ],
+     [
+      "Dr. Bhavna Shah",
+      9,
+      2,
+      22.2
+     ],
+     [
+      "Dr. Charles Dsouza",
+      5,
+      1,
+      20.0
+     ],
+     [
+      "Dr. Deepa Menon",
+      4,
+      1,
+      25.0
+     ]
+    ]
+   },
+   "dataset": "clinic"
+  },
+  {
+   "id": "sqlp-pr4-waiting-days",
+   "title": "Average waiting time by specialty",
+   "difficulty": "advanced",
+   "objective": "Average a date difference per group.",
+   "instructions": "For completed appointments, return each specialty and the average number of days between booking and the appointment (avg_wait_days), rounded to one decimal.",
+   "solution": "SELECT d.specialty,\n       ROUND(AVG(julianday(a.appt_date) - julianday(a.booked_on)), 1) AS avg_wait_days\nFROM appointments a\nJOIN doctors d ON d.id = a.doctor_id\nWHERE a.status = 'completed'\nGROUP BY d.specialty;",
+   "hints": [
+    "julianday(appt_date) - julianday(booked_on) is the wait in days.",
+    "Average it per specialty.",
+    "Round to one decimal."
+   ],
+   "explanation": "Waiting time is a standard quality measure for clinics. Orthopaedics has the longest waits here, which is the kind of finding a report should surface.",
+   "source": "SQLite documentation: Date and time functions",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE doctors (id INTEGER PRIMARY KEY, name TEXT NOT NULL, specialty TEXT NOT NULL);",
+    "INSERT INTO doctors VALUES (1,'Dr. Anand Rao','General Medicine'),(2,'Dr. Bhavna Shah','Paediatrics'),(3,'Dr. Charles Dsouza','Orthopaedics'),(4,'Dr. Deepa Menon','Dermatology');",
+    "CREATE TABLE patients (id INTEGER PRIMARY KEY, code TEXT NOT NULL UNIQUE, birth_year INTEGER NOT NULL, city TEXT NOT NULL);",
+    "INSERT INTO patients VALUES (1,'P1001',1985,'Pune'),(2,'P1002',1992,'Mumbai'),(3,'P1003',2016,'Pune'),(4,'P1004',1970,'Pune'),\n (5,'P1005',1999,'Thane'),(6,'P1006',2019,'Mumbai'),(7,'P1007',1958,'Pune'),(8,'P1008',1988,'Pune'),(9,'P1009',1963,'Mumbai'),(10,'P1010',2021,'Thane');",
+    "CREATE TABLE appointments (id INTEGER PRIMARY KEY, patient_id INTEGER NOT NULL REFERENCES patients(id), doctor_id INTEGER NOT NULL REFERENCES doctors(id),\n booked_on TEXT NOT NULL, appt_date TEXT NOT NULL, status TEXT NOT NULL CHECK (status IN ('completed','no-show','cancelled')), follow_up INTEGER NOT NULL DEFAULT 0);",
+    "INSERT INTO appointments VALUES\n (1,1,1,'2024-01-02','2024-01-05','completed',1),(2,2,1,'2024-01-03','2024-01-05','no-show',0),(3,3,2,'2024-01-04','2024-01-08','completed',0),\n (4,4,3,'2024-01-05','2024-01-12','completed',1),(5,5,4,'2024-01-08','2024-01-09','cancelled',0),(6,1,1,'2024-01-10','2024-01-19','completed',0),\n (7,6,2,'2024-01-11','2024-01-15','no-show',0),(8,7,3,'2024-01-15','2024-01-29','completed',1),(9,8,4,'2024-01-20','2024-01-23','completed',0),\n (10,9,1,'2024-01-22','2024-01-24','completed',1),(11,4,3,'2024-01-25','2024-02-09','completed',0),(12,10,2,'2024-02-01','2024-02-02','completed',0),\n (13,2,1,'2024-02-02','2024-02-05','completed',0),(14,6,2,'2024-02-05','2024-02-07','no-show',0),(15,3,2,'2024-02-08','2024-02-12','completed',1),\n (16,5,4,'2024-02-10','2024-02-13','completed',0),(17,8,4,'2024-02-14','2024-02-26','no-show',0),(18,9,1,'2024-02-15','2024-02-16','cancelled',0),\n (19,1,1,'2024-02-20','2024-02-23','completed',0),(20,7,3,'2024-02-22','2024-03-04','no-show',0),(21,10,2,'2024-03-01','2024-03-04','completed',0),\n (22,6,2,'2024-03-02','2024-03-06','completed',0),(23,3,2,'2024-03-05','2024-03-11','completed',0),(24,4,3,'2024-03-07','2024-03-18','completed',0),\n (25,8,4,'2024-03-10','2024-03-12','completed',1),(26,2,1,'2024-03-12','2024-03-13','no-show',0),(27,5,4,'2024-03-15','2024-03-25','cancelled',0),\n (28,9,1,'2024-03-18','2024-03-22','completed',0),(29,10,2,'2024-03-20','2024-03-21','completed',0),(30,1,1,'2024-03-25','2024-03-28','no-show',0);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 2,
+    "rows": [
+     [
+      "Dermatology",
+      2.7
+     ],
+     [
+      "General Medicine",
+      4.0
+     ],
+     [
+      "Orthopaedics",
+      11.8
+     ],
+     [
+      "Paediatrics",
+      3.3
+     ]
+    ]
+   },
+   "dataset": "clinic"
+  },
+  {
+   "id": "sqlp-pr4-missed-follow-up",
+   "title": "Patients with no follow-up",
+   "difficulty": "advanced",
+   "objective": "Find rows with no matching later row using NOT EXISTS.",
+   "instructions": "Some completed appointments have follow_up = 1. Return the code of every patient who had such an appointment but no later completed appointment.",
+   "solution": "SELECT DISTINCT p.code\nFROM appointments a\nJOIN patients p ON p.id = a.patient_id\nWHERE a.status = 'completed' AND a.follow_up = 1\n  AND NOT EXISTS (\n    SELECT 1 FROM appointments later\n    WHERE later.patient_id = a.patient_id\n      AND later.appt_date > a.appt_date\n      AND later.status = 'completed'\n  );",
+   "hints": [
+    "Start from completed appointments that asked for a follow-up.",
+    "NOT EXISTS checks there is no later completed appointment for the same patient.",
+    "Show each patient code once with DISTINCT."
+   ],
+   "explanation": "P1007's follow-up was a no-show and P1008 never booked one. Finding patients who fell through the gap is a real use of NOT EXISTS, and a test case a QA engineer would write for a clinic system.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE doctors (id INTEGER PRIMARY KEY, name TEXT NOT NULL, specialty TEXT NOT NULL);",
+    "INSERT INTO doctors VALUES (1,'Dr. Anand Rao','General Medicine'),(2,'Dr. Bhavna Shah','Paediatrics'),(3,'Dr. Charles Dsouza','Orthopaedics'),(4,'Dr. Deepa Menon','Dermatology');",
+    "CREATE TABLE patients (id INTEGER PRIMARY KEY, code TEXT NOT NULL UNIQUE, birth_year INTEGER NOT NULL, city TEXT NOT NULL);",
+    "INSERT INTO patients VALUES (1,'P1001',1985,'Pune'),(2,'P1002',1992,'Mumbai'),(3,'P1003',2016,'Pune'),(4,'P1004',1970,'Pune'),\n (5,'P1005',1999,'Thane'),(6,'P1006',2019,'Mumbai'),(7,'P1007',1958,'Pune'),(8,'P1008',1988,'Pune'),(9,'P1009',1963,'Mumbai'),(10,'P1010',2021,'Thane');",
+    "CREATE TABLE appointments (id INTEGER PRIMARY KEY, patient_id INTEGER NOT NULL REFERENCES patients(id), doctor_id INTEGER NOT NULL REFERENCES doctors(id),\n booked_on TEXT NOT NULL, appt_date TEXT NOT NULL, status TEXT NOT NULL CHECK (status IN ('completed','no-show','cancelled')), follow_up INTEGER NOT NULL DEFAULT 0);",
+    "INSERT INTO appointments VALUES\n (1,1,1,'2024-01-02','2024-01-05','completed',1),(2,2,1,'2024-01-03','2024-01-05','no-show',0),(3,3,2,'2024-01-04','2024-01-08','completed',0),\n (4,4,3,'2024-01-05','2024-01-12','completed',1),(5,5,4,'2024-01-08','2024-01-09','cancelled',0),(6,1,1,'2024-01-10','2024-01-19','completed',0),\n (7,6,2,'2024-01-11','2024-01-15','no-show',0),(8,7,3,'2024-01-15','2024-01-29','completed',1),(9,8,4,'2024-01-20','2024-01-23','completed',0),\n (10,9,1,'2024-01-22','2024-01-24','completed',1),(11,4,3,'2024-01-25','2024-02-09','completed',0),(12,10,2,'2024-02-01','2024-02-02','completed',0),\n (13,2,1,'2024-02-02','2024-02-05','completed',0),(14,6,2,'2024-02-05','2024-02-07','no-show',0),(15,3,2,'2024-02-08','2024-02-12','completed',1),\n (16,5,4,'2024-02-10','2024-02-13','completed',0),(17,8,4,'2024-02-14','2024-02-26','no-show',0),(18,9,1,'2024-02-15','2024-02-16','cancelled',0),\n (19,1,1,'2024-02-20','2024-02-23','completed',0),(20,7,3,'2024-02-22','2024-03-04','no-show',0),(21,10,2,'2024-03-01','2024-03-04','completed',0),\n (22,6,2,'2024-03-02','2024-03-06','completed',0),(23,3,2,'2024-03-05','2024-03-11','completed',0),(24,4,3,'2024-03-07','2024-03-18','completed',0),\n (25,8,4,'2024-03-10','2024-03-12','completed',1),(26,2,1,'2024-03-12','2024-03-13','no-show',0),(27,5,4,'2024-03-15','2024-03-25','cancelled',0),\n (28,9,1,'2024-03-18','2024-03-22','completed',0),(29,10,2,'2024-03-20','2024-03-21','completed',0),(30,1,1,'2024-03-25','2024-03-28','no-show',0);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 1,
+    "rows": [
+     [
+      "P1007"
+     ],
+     [
+      "P1008"
+     ]
+    ]
+   },
+   "dataset": "clinic"
+  },
+  {
+   "id": "sqlp-pr4-monthly-status",
+   "title": "Appointment summary by month",
+   "difficulty": "advanced",
+   "objective": "Pivot statuses into columns with conditional aggregation.",
+   "instructions": "Return one row per month (YYYY-MM of appt_date, column month) with the number of completed, no-show and cancelled appointments in three columns: completed, no_show and cancelled. Oldest month first.",
+   "solution": "SELECT strftime('%Y-%m', appt_date) AS month,\n       SUM(status = 'completed') AS completed,\n       SUM(status = 'no-show') AS no_show,\n       SUM(status = 'cancelled') AS cancelled\nFROM appointments\nGROUP BY month\nORDER BY month;",
+   "hints": [
+    "Group by the month of the appointment.",
+    "Count each status with SUM(status = '...').",
+    "Name the three columns as asked."
+   ],
+   "explanation": "Turning the status values into columns gives a compact monthly report. The same pivot works in any database with SUM(CASE WHEN ... THEN 1 ELSE 0 END).",
+   "source": "SQLite documentation: SELECT",
+   "ordered": true,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE doctors (id INTEGER PRIMARY KEY, name TEXT NOT NULL, specialty TEXT NOT NULL);",
+    "INSERT INTO doctors VALUES (1,'Dr. Anand Rao','General Medicine'),(2,'Dr. Bhavna Shah','Paediatrics'),(3,'Dr. Charles Dsouza','Orthopaedics'),(4,'Dr. Deepa Menon','Dermatology');",
+    "CREATE TABLE patients (id INTEGER PRIMARY KEY, code TEXT NOT NULL UNIQUE, birth_year INTEGER NOT NULL, city TEXT NOT NULL);",
+    "INSERT INTO patients VALUES (1,'P1001',1985,'Pune'),(2,'P1002',1992,'Mumbai'),(3,'P1003',2016,'Pune'),(4,'P1004',1970,'Pune'),\n (5,'P1005',1999,'Thane'),(6,'P1006',2019,'Mumbai'),(7,'P1007',1958,'Pune'),(8,'P1008',1988,'Pune'),(9,'P1009',1963,'Mumbai'),(10,'P1010',2021,'Thane');",
+    "CREATE TABLE appointments (id INTEGER PRIMARY KEY, patient_id INTEGER NOT NULL REFERENCES patients(id), doctor_id INTEGER NOT NULL REFERENCES doctors(id),\n booked_on TEXT NOT NULL, appt_date TEXT NOT NULL, status TEXT NOT NULL CHECK (status IN ('completed','no-show','cancelled')), follow_up INTEGER NOT NULL DEFAULT 0);",
+    "INSERT INTO appointments VALUES\n (1,1,1,'2024-01-02','2024-01-05','completed',1),(2,2,1,'2024-01-03','2024-01-05','no-show',0),(3,3,2,'2024-01-04','2024-01-08','completed',0),\n (4,4,3,'2024-01-05','2024-01-12','completed',1),(5,5,4,'2024-01-08','2024-01-09','cancelled',0),(6,1,1,'2024-01-10','2024-01-19','completed',0),\n (7,6,2,'2024-01-11','2024-01-15','no-show',0),(8,7,3,'2024-01-15','2024-01-29','completed',1),(9,8,4,'2024-01-20','2024-01-23','completed',0),\n (10,9,1,'2024-01-22','2024-01-24','completed',1),(11,4,3,'2024-01-25','2024-02-09','completed',0),(12,10,2,'2024-02-01','2024-02-02','completed',0),\n (13,2,1,'2024-02-02','2024-02-05','completed',0),(14,6,2,'2024-02-05','2024-02-07','no-show',0),(15,3,2,'2024-02-08','2024-02-12','completed',1),\n (16,5,4,'2024-02-10','2024-02-13','completed',0),(17,8,4,'2024-02-14','2024-02-26','no-show',0),(18,9,1,'2024-02-15','2024-02-16','cancelled',0),\n (19,1,1,'2024-02-20','2024-02-23','completed',0),(20,7,3,'2024-02-22','2024-03-04','no-show',0),(21,10,2,'2024-03-01','2024-03-04','completed',0),\n (22,6,2,'2024-03-02','2024-03-06','completed',0),(23,3,2,'2024-03-05','2024-03-11','completed',0),(24,4,3,'2024-03-07','2024-03-18','completed',0),\n (25,8,4,'2024-03-10','2024-03-12','completed',1),(26,2,1,'2024-03-12','2024-03-13','no-show',0),(27,5,4,'2024-03-15','2024-03-25','cancelled',0),\n (28,9,1,'2024-03-18','2024-03-22','completed',0),(29,10,2,'2024-03-20','2024-03-21','completed',0),(30,1,1,'2024-03-25','2024-03-28','no-show',0);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 4,
+    "rows": [
+     [
+      "2024-01",
+      7,
+      2,
+      1
+     ],
+     [
+      "2024-02",
+      6,
+      2,
+      1
+     ],
+     [
+      "2024-03",
+      7,
+      3,
+      1
+     ]
+    ]
+   },
+   "dataset": "clinic"
+  },
+  {
+   "id": "sqlp-pr5-vs-target",
+   "title": "Revenue against target",
+   "difficulty": "advanced",
+   "objective": "Join a calculated summary to a table of targets.",
+   "instructions": "Return each month, its revenue (non-cancelled orders), its target from monthly_targets and the difference (revenue minus target), oldest month first. Columns: month, revenue, target, difference.",
+   "solution": "WITH monthly AS (SELECT strftime('%Y-%m', o.order_date) AS month, SUM(p.price * oi.quantity) AS revenue FROM orders o JOIN order_items oi ON oi.order_id = o.id JOIN products p ON p.id = oi.product_id WHERE o.status <> 'cancelled' GROUP BY month)\nSELECT m.month, m.revenue, t.revenue_target AS target, m.revenue - t.revenue_target AS difference\nFROM monthly m\nJOIN monthly_targets t ON t.month = m.month\nORDER BY m.month;",
+   "hints": [
+    "Calculate monthly revenue in a CTE, as in the running-totals lesson.",
+    "Join it to monthly_targets on the month.",
+    "Subtract the target from the revenue."
+   ],
+   "explanation": "Putting actuals and targets side by side is the heart of a KPI report. The months below target are the first thing a manager will ask about.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": true,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE monthly_targets (month TEXT PRIMARY KEY, revenue_target INTEGER NOT NULL);",
+    "INSERT INTO monthly_targets VALUES ('2024-01',3000),('2024-02',3000),('2024-03',4500),('2024-04',4500),('2024-05',4000),('2024-06',2500);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 4,
+    "rows": [
+     [
+      "2024-01",
+      3250,
+      3000,
+      250
+     ],
+     [
+      "2024-02",
+      2290,
+      3000,
+      -710
+     ],
+     [
+      "2024-03",
+      4920,
+      4500,
+      420
+     ],
+     [
+      "2024-04",
+      2870,
+      4500,
+      -1630
+     ],
+     [
+      "2024-05",
+      2350,
+      4000,
+      -1650
+     ],
+     [
+      "2024-06",
+      1420,
+      2500,
+      -1080
+     ]
+    ]
+   },
+   "dataset": "targets"
+  },
+  {
+   "id": "sqlp-pr5-achievement",
+   "title": "Target achievement",
+   "difficulty": "advanced",
+   "objective": "Express a ratio as a percentage and label it.",
+   "instructions": "For each month, return month, the percentage of target achieved (pct_of_target, rounded to one decimal) and a status: 'met' when the target was reached, otherwise 'missed'. Oldest month first.",
+   "solution": "WITH monthly AS (SELECT strftime('%Y-%m', o.order_date) AS month, SUM(p.price * oi.quantity) AS revenue FROM orders o JOIN order_items oi ON oi.order_id = o.id JOIN products p ON p.id = oi.product_id WHERE o.status <> 'cancelled' GROUP BY month)\nSELECT m.month,\n       ROUND(100.0 * m.revenue / t.revenue_target, 1) AS pct_of_target,\n       CASE WHEN m.revenue >= t.revenue_target THEN 'met' ELSE 'missed' END AS status\nFROM monthly m\nJOIN monthly_targets t ON t.month = m.month\nORDER BY m.month;",
+   "hints": [
+    "Reuse the monthly revenue CTE and the join to targets.",
+    "100.0 * revenue / target gives the percentage.",
+    "CASE WHEN revenue >= target THEN 'met' ELSE 'missed' END."
+   ],
+   "explanation": "A percentage makes months with different targets comparable, and the status label makes the report readable at a glance.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": true,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE monthly_targets (month TEXT PRIMARY KEY, revenue_target INTEGER NOT NULL);",
+    "INSERT INTO monthly_targets VALUES ('2024-01',3000),('2024-02',3000),('2024-03',4500),('2024-04',4500),('2024-05',4000),('2024-06',2500);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 3,
+    "rows": [
+     [
+      "2024-01",
+      108.3,
+      "met"
+     ],
+     [
+      "2024-02",
+      76.3,
+      "missed"
+     ],
+     [
+      "2024-03",
+      109.3,
+      "met"
+     ],
+     [
+      "2024-04",
+      63.8,
+      "missed"
+     ],
+     [
+      "2024-05",
+      58.8,
+      "missed"
+     ],
+     [
+      "2024-06",
+      56.8,
+      "missed"
+     ]
+    ]
+   },
+   "dataset": "targets"
+  },
+  {
+   "id": "sqlp-pr5-growth",
+   "title": "Month-over-month growth",
+   "difficulty": "advanced",
+   "objective": "Calculate growth with LAG.",
+   "instructions": "Return each month, its revenue and the growth from the previous month as a percentage rounded to one decimal (growth_pct; NULL for the first month). Oldest month first.",
+   "solution": "WITH monthly AS (SELECT strftime('%Y-%m', o.order_date) AS month, SUM(p.price * oi.quantity) AS revenue FROM orders o JOIN order_items oi ON oi.order_id = o.id JOIN products p ON p.id = oi.product_id WHERE o.status <> 'cancelled' GROUP BY month)\nSELECT month, revenue,\n       ROUND(100.0 * (revenue - LAG(revenue) OVER (ORDER BY month)) / LAG(revenue) OVER (ORDER BY month), 1) AS growth_pct\nFROM monthly\nORDER BY month;",
+   "hints": [
+    "LAG(revenue) OVER (ORDER BY month) is the previous month's revenue.",
+    "Growth is (this - previous) / previous, times 100.0.",
+    "The first month has no previous month, so its growth is NULL."
+   ],
+   "explanation": "Growth percentages are the most quoted numbers in business reviews. Notice how a small month followed by a normal one shows a large jump: always read growth together with the base.",
+   "source": "SQLite documentation: Window functions",
+   "ordered": true,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [],
+   "verify": null,
+   "expected": {
+    "columns": 3,
+    "rows": [
+     [
+      "2024-01",
+      3250,
+      null
+     ],
+     [
+      "2024-02",
+      2290,
+      -29.5
+     ],
+     [
+      "2024-03",
+      4920,
+      114.8
+     ],
+     [
+      "2024-04",
+      2870,
+      -41.7
+     ],
+     [
+      "2024-05",
+      2350,
+      -18.1
+     ],
+     [
+      "2024-06",
+      1420,
+      -39.6
+     ]
+    ]
+   }
+  },
+  {
+   "id": "sqlp-pr5-best-seller",
+   "title": "Best-selling product in each category",
+   "difficulty": "advanced",
+   "objective": "Rank aggregated rows within groups and keep the top.",
+   "instructions": "For each product category, return the category, the product name and the units sold (units, from non-cancelled orders) of the product that sold the most units. Keep ties.",
+   "solution": "WITH sold AS (\n  SELECT p.category, p.name, SUM(oi.quantity) AS units\n  FROM order_items oi\n  JOIN orders o ON o.id = oi.order_id\n  JOIN products p ON p.id = oi.product_id\n  WHERE o.status <> 'cancelled'\n  GROUP BY p.id, p.category, p.name\n), ranked AS (\n  SELECT category, name, units, RANK() OVER (PARTITION BY category ORDER BY units DESC) AS rnk\n  FROM sold\n)\nSELECT category, name, units FROM ranked WHERE rnk = 1;",
+   "hints": [
+    "First total the units per product in a CTE.",
+    "Then rank products within each category by units.",
+    "Keep rank 1; RANK keeps ties."
+   ],
+   "explanation": "Two CTEs read in order: total, then rank, then filter. Splitting a report into named steps like this makes it easy for a reviewer to check each step separately.",
+   "source": "SQLite documentation: Window functions",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [],
+   "verify": null,
+   "expected": {
+    "columns": 3,
+    "rows": [
+     [
+      "Bags",
+      "Backpack",
+      3
+     ],
+     [
+      "Electronics",
+      "Calculator",
+      2
+     ],
+     [
+      "Electronics",
+      "Headphones",
+      2
+     ],
+     [
+      "Electronics",
+      "Laptop Stand",
+      2
+     ],
+     [
+      "Home",
+      "Lunch Box",
+      6
+     ],
+     [
+      "Stationery",
+      "Ballpoint Pen",
+      22
+     ]
+    ]
+   }
+  },
+  {
+   "id": "sqlp-pr5-view",
+   "title": "Save the monthly KPIs as a view",
+   "difficulty": "advanced",
+   "objective": "Create a view that others can query by name.",
+   "instructions": "Create a view called monthly_kpis that returns, for each month (YYYY-MM, column month), the number of non-cancelled orders (orders) and their revenue (revenue). The lab then runs SELECT * FROM monthly_kpis ORDER BY month.",
+   "solution": "CREATE VIEW monthly_kpis AS\nSELECT strftime('%Y-%m', o.order_date) AS month,\n       COUNT(DISTINCT o.id) AS orders,\n       SUM(p.price * oi.quantity) AS revenue\nFROM orders o\nJOIN order_items oi ON oi.order_id = o.id\nJOIN products p ON p.id = oi.product_id\nWHERE o.status <> 'cancelled'\nGROUP BY month;",
+   "hints": [
+    "CREATE VIEW name AS followed by a SELECT.",
+    "Joining items multiplies orders by their lines, so count orders with COUNT(DISTINCT o.id).",
+    "Group by the month."
+   ],
+   "explanation": "A view saves the query under a name, so the dashboard and other analysts all use the same definition. COUNT(DISTINCT o.id) matters: after the join, an order with three items appears three times.",
+   "source": "SQLite documentation: CREATE VIEW",
+   "ordered": true,
+   "kind": "modify",
+   "topic": "sql-path",
+   "setup": [],
+   "verify": "SELECT * FROM monthly_kpis ORDER BY month",
+   "expected": {
+    "columns": 3,
+    "rows": [
+     [
+      "2024-01",
+      3,
+      3250
+     ],
+     [
+      "2024-02",
+      3,
+      2290
+     ],
+     [
+      "2024-03",
+      4,
+      4920
+     ],
+     [
+      "2024-04",
+      4,
+      2870
+     ],
+     [
+      "2024-05",
+      2,
+      2350
+     ],
+     [
+      "2024-06",
+      2,
+      1420
+     ]
+    ]
+   }
+  },
+  {
+   "id": "sqlp-iq-second-highest",
+   "title": "Second-highest salary",
+   "difficulty": "intermediate",
+   "objective": "Solve a classic interview problem with a subquery.",
+   "instructions": "Return the second-highest salary in the company (one column, second_highest). If several people share the highest salary, the answer is the next lower value.",
+   "solution": "SELECT MAX(salary) AS second_highest\nFROM employees\nWHERE salary < (SELECT MAX(salary) FROM employees);",
+   "hints": [
+    "Find the highest salary with a subquery.",
+    "Take the maximum of the salaries below it."
+   ],
+   "explanation": "MAX of everything below the maximum handles ties at the top. Alternatives: SELECT DISTINCT salary ... ORDER BY salary DESC LIMIT 1 OFFSET 1, or DENSE_RANK() = 2. Interviewers often ask how each behaves when there is no second value (this one returns NULL).",
+   "source": "SQLite documentation: SELECT",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE departments (id INTEGER PRIMARY KEY, name TEXT NOT NULL, location TEXT NOT NULL);",
+    "INSERT INTO departments VALUES (1,'Leadership','Bengaluru'),(2,'Engineering','Bengaluru'),(3,'Quality','Pune'),\n (4,'Sales','Mumbai'),(5,'Support','Pune');",
+    "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT NOT NULL, department_id INTEGER NOT NULL REFERENCES departments(id),\n manager_id INTEGER REFERENCES employees(id), title TEXT NOT NULL, hire_date TEXT NOT NULL, salary INTEGER NOT NULL);",
+    "INSERT INTO employees VALUES\n (1,'Meera Joshi',1,NULL,'Chief Executive','2018-04-02',420000),\n (2,'Ravi Menon',2,1,'Head of Engineering','2018-06-11',310000),\n (3,'Sana Qureshi',3,1,'Head of Quality','2019-01-07',260000),\n (4,'Vikram Rao',4,1,'Head of Sales','2019-03-18',280000),\n (5,'Neha Gupta',2,2,'Engineering Lead','2019-08-05',210000),\n (6,'Aditya Singh',2,2,'Engineering Lead','2020-02-10',205000),\n (7,'Pooja Iyer',2,5,'Developer','2020-07-01',140000),\n (8,'Rahul Das',2,5,'Developer','2021-01-11',128000),\n (9,'Fatima Shaikh',2,6,'Developer','2021-05-24',128000),\n (10,'Karan Malhotra',2,6,'Developer','2022-09-12',115000),\n (11,'Lakshmi Pillai',3,3,'QA Lead','2020-03-16',170000),\n (12,'Omar Farooq',3,11,'Test Engineer','2021-08-02',95000),\n (13,'Priya Nambiar',3,11,'Automation Engineer','2022-01-17',118000),\n (14,'Suresh Babu',4,4,'Account Manager','2020-11-09',120000),\n (15,'Tanvi Kulkarni',4,4,'Account Manager','2023-02-06',98000),\n (16,'Zoya Ahmed',5,1,'Support Manager','2021-04-12',150000),\n (17,'Manoj Yadav',5,16,'Support Agent','2022-06-20',62000),\n (18,'Ritu Saxena',5,16,'Support Agent','2024-01-08',58000);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 1,
+    "rows": [
+     [
+      310000
+     ]
+    ]
+   },
+   "dataset": "employees"
+  },
+  {
+   "id": "sqlp-iq-above-dept-average",
+   "title": "Paid above their department's average",
+   "difficulty": "advanced",
+   "objective": "Use a correlated subquery.",
+   "instructions": "Return the name, salary and department_id of every employee who earns more than the average salary of their own department.",
+   "solution": "SELECT name, salary, department_id\nFROM employees e\nWHERE salary > (SELECT AVG(salary) FROM employees x WHERE x.department_id = e.department_id);",
+   "hints": [
+    "Compare each salary with an average that depends on the row's department.",
+    "A subquery can refer to the outer table's alias."
+   ],
+   "explanation": "The subquery is re-evaluated for each employee's department. A window version (AVG(salary) OVER (PARTITION BY department_id) in a CTE) gives the same answer and is often faster on large tables.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE departments (id INTEGER PRIMARY KEY, name TEXT NOT NULL, location TEXT NOT NULL);",
+    "INSERT INTO departments VALUES (1,'Leadership','Bengaluru'),(2,'Engineering','Bengaluru'),(3,'Quality','Pune'),\n (4,'Sales','Mumbai'),(5,'Support','Pune');",
+    "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT NOT NULL, department_id INTEGER NOT NULL REFERENCES departments(id),\n manager_id INTEGER REFERENCES employees(id), title TEXT NOT NULL, hire_date TEXT NOT NULL, salary INTEGER NOT NULL);",
+    "INSERT INTO employees VALUES\n (1,'Meera Joshi',1,NULL,'Chief Executive','2018-04-02',420000),\n (2,'Ravi Menon',2,1,'Head of Engineering','2018-06-11',310000),\n (3,'Sana Qureshi',3,1,'Head of Quality','2019-01-07',260000),\n (4,'Vikram Rao',4,1,'Head of Sales','2019-03-18',280000),\n (5,'Neha Gupta',2,2,'Engineering Lead','2019-08-05',210000),\n (6,'Aditya Singh',2,2,'Engineering Lead','2020-02-10',205000),\n (7,'Pooja Iyer',2,5,'Developer','2020-07-01',140000),\n (8,'Rahul Das',2,5,'Developer','2021-01-11',128000),\n (9,'Fatima Shaikh',2,6,'Developer','2021-05-24',128000),\n (10,'Karan Malhotra',2,6,'Developer','2022-09-12',115000),\n (11,'Lakshmi Pillai',3,3,'QA Lead','2020-03-16',170000),\n (12,'Omar Farooq',3,11,'Test Engineer','2021-08-02',95000),\n (13,'Priya Nambiar',3,11,'Automation Engineer','2022-01-17',118000),\n (14,'Suresh Babu',4,4,'Account Manager','2020-11-09',120000),\n (15,'Tanvi Kulkarni',4,4,'Account Manager','2023-02-06',98000),\n (16,'Zoya Ahmed',5,1,'Support Manager','2021-04-12',150000),\n (17,'Manoj Yadav',5,16,'Support Agent','2022-06-20',62000),\n (18,'Ritu Saxena',5,16,'Support Agent','2024-01-08',58000);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 3,
+    "rows": [
+     [
+      "Ravi Menon",
+      310000,
+      2
+     ],
+     [
+      "Sana Qureshi",
+      260000,
+      3
+     ],
+     [
+      "Vikram Rao",
+      280000,
+      4
+     ],
+     [
+      "Neha Gupta",
+      210000,
+      2
+     ],
+     [
+      "Aditya Singh",
+      205000,
+      2
+     ],
+     [
+      "Lakshmi Pillai",
+      170000,
+      3
+     ],
+     [
+      "Zoya Ahmed",
+      150000,
+      5
+     ]
+    ]
+   },
+   "dataset": "employees"
+  },
+  {
+   "id": "sqlp-iq-never-ordered",
+   "title": "Products never bought in a city",
+   "difficulty": "advanced",
+   "objective": "Find rows without a match across several joined tables.",
+   "instructions": "The Pune sales team asks which products no customer from Pune has ever ordered. Return the name of each such product.",
+   "solution": "SELECT p.name\nFROM products p\nWHERE NOT EXISTS (\n  SELECT 1\n  FROM order_items oi\n  JOIN orders o ON o.id = oi.order_id\n  JOIN customers c ON c.id = o.customer_id\n  WHERE oi.product_id = p.id AND c.city = 'Pune'\n);",
+   "hints": [
+    "Start from products: the answer is products.",
+    "NOT EXISTS with a subquery that joins order_items, orders and customers.",
+    "Inside the subquery, match the product and the city."
+   ],
+   "explanation": "This is the 'anti-join' pattern. NOT EXISTS reads naturally: products for which no Pune order line exists. A LEFT JOIN version must put the city condition in the ON clause, not in WHERE, or it silently turns back into an inner join, which is a classic interview trap.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [],
+   "verify": null,
+   "expected": {
+    "columns": 1,
+    "rows": [
+     [
+      "Desk Lamp"
+     ],
+     [
+      "Headphones"
+     ],
+     [
+      "Laptop Stand"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "sqlp-iq-orders-pivot",
+   "title": "Order status per city",
+   "difficulty": "advanced",
+   "objective": "Pivot rows into columns with conditional aggregation.",
+   "instructions": "For each customer city, return the number of orders in each status as four columns: delivered, shipped, pending and cancelled (and the city).",
+   "solution": "SELECT c.city,\n       SUM(o.status = 'delivered') AS delivered,\n       SUM(o.status = 'shipped') AS shipped,\n       SUM(o.status = 'pending') AS pending,\n       SUM(o.status = 'cancelled') AS cancelled\nFROM orders o\nJOIN customers c ON c.id = o.customer_id\nGROUP BY c.city;",
+   "hints": [
+    "Group orders by the customer's city.",
+    "Count each status with SUM(condition)."
+   ],
+   "explanation": "Pivot questions test conditional aggregation. Only cities with at least one order appear, because the join starts from orders; start from customers with a LEFT JOIN to show every city.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [],
+   "verify": null,
+   "expected": {
+    "columns": 5,
+    "rows": [
+     [
+      "Ahmedabad",
+      0,
+      1,
+      0,
+      0
+     ],
+     [
+      "Chennai",
+      3,
+      0,
+      0,
+      1
+     ],
+     [
+      "Delhi",
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      "Kochi",
+      1,
+      0,
+      0,
+      0
+     ],
+     [
+      "Mumbai",
+      3,
+      2,
+      0,
+      0
+     ],
+     [
+      "Pune",
+      5,
+      1,
+      1,
+      1
+     ]
+    ]
+   }
+  },
+  {
+   "id": "sqlp-iq-first-order",
+   "title": "Each customer's first order",
+   "difficulty": "advanced",
+   "objective": "Pick one row per group with ROW_NUMBER.",
+   "instructions": "Return each customer's name with the id and order_date of their first order (by date, then id).",
+   "solution": "WITH numbered AS (\n  SELECT o.*, ROW_NUMBER() OVER (PARTITION BY o.customer_id ORDER BY o.order_date, o.id) AS n\n  FROM orders o\n)\nSELECT c.name, numbered.id, numbered.order_date\nFROM numbered\nJOIN customers c ON c.id = numbered.customer_id\nWHERE n = 1;",
+   "hints": [
+    "Number each customer's orders by date.",
+    "Keep row number 1.",
+    "Join customers for the name."
+   ],
+   "explanation": "ROW_NUMBER is right here because exactly one first order per customer is wanted; the id in the ORDER BY breaks ties on the same date.",
+   "source": "SQLite documentation: Window functions",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [],
+   "verify": null,
+   "expected": {
+    "columns": 3,
+    "rows": [
+     [
+      "Asha Rao",
+      1,
+      "2024-01-05"
+     ],
+     [
+      "Bilal Khan",
+      3,
+      "2024-01-22"
+     ],
+     [
+      "Chitra Iyer",
+      4,
+      "2024-02-02"
+     ],
+     [
+      "Arjun Mehta",
+      5,
+      "2024-02-10"
+     ],
+     [
+      "Divya Nair",
+      7,
+      "2024-02-28"
+     ],
+     [
+      "Farhan Ali",
+      8,
+      "2024-03-03"
+     ],
+     [
+      "Gita Sharma",
+      10,
+      "2024-03-15"
+     ],
+     [
+      "Hari Prasad",
+      11,
+      "2024-03-22"
+     ],
+     [
+      "Isha Patel",
+      13,
+      "2024-04-08"
+     ],
+     [
+      "Jatin Verma",
+      19,
+      "2024-06-12"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "sqlp-iq-best-department",
+   "title": "Department with the highest average salary",
+   "difficulty": "intermediate",
+   "objective": "Aggregate, sort and limit.",
+   "instructions": "Return the name of the department with the highest average salary and that average rounded to whole rupees (avg_salary).",
+   "solution": "SELECT d.name, ROUND(AVG(e.salary)) AS avg_salary\nFROM employees e\nJOIN departments d ON d.id = e.department_id\nGROUP BY d.id, d.name\nORDER BY AVG(e.salary) DESC\nLIMIT 1;",
+   "hints": [
+    "Average salary per department.",
+    "Order by that average, highest first.",
+    "LIMIT 1."
+   ],
+   "explanation": "Leadership wins with one very high salary, which is worth saying in an interview: an average over one person is not comparable with an average over seven. Follow-up questions often ask how to return all departments tied for first.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE departments (id INTEGER PRIMARY KEY, name TEXT NOT NULL, location TEXT NOT NULL);",
+    "INSERT INTO departments VALUES (1,'Leadership','Bengaluru'),(2,'Engineering','Bengaluru'),(3,'Quality','Pune'),\n (4,'Sales','Mumbai'),(5,'Support','Pune');",
+    "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT NOT NULL, department_id INTEGER NOT NULL REFERENCES departments(id),\n manager_id INTEGER REFERENCES employees(id), title TEXT NOT NULL, hire_date TEXT NOT NULL, salary INTEGER NOT NULL);",
+    "INSERT INTO employees VALUES\n (1,'Meera Joshi',1,NULL,'Chief Executive','2018-04-02',420000),\n (2,'Ravi Menon',2,1,'Head of Engineering','2018-06-11',310000),\n (3,'Sana Qureshi',3,1,'Head of Quality','2019-01-07',260000),\n (4,'Vikram Rao',4,1,'Head of Sales','2019-03-18',280000),\n (5,'Neha Gupta',2,2,'Engineering Lead','2019-08-05',210000),\n (6,'Aditya Singh',2,2,'Engineering Lead','2020-02-10',205000),\n (7,'Pooja Iyer',2,5,'Developer','2020-07-01',140000),\n (8,'Rahul Das',2,5,'Developer','2021-01-11',128000),\n (9,'Fatima Shaikh',2,6,'Developer','2021-05-24',128000),\n (10,'Karan Malhotra',2,6,'Developer','2022-09-12',115000),\n (11,'Lakshmi Pillai',3,3,'QA Lead','2020-03-16',170000),\n (12,'Omar Farooq',3,11,'Test Engineer','2021-08-02',95000),\n (13,'Priya Nambiar',3,11,'Automation Engineer','2022-01-17',118000),\n (14,'Suresh Babu',4,4,'Account Manager','2020-11-09',120000),\n (15,'Tanvi Kulkarni',4,4,'Account Manager','2023-02-06',98000),\n (16,'Zoya Ahmed',5,1,'Support Manager','2021-04-12',150000),\n (17,'Manoj Yadav',5,16,'Support Agent','2022-06-20',62000),\n (18,'Ritu Saxena',5,16,'Support Agent','2024-01-08',58000);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 2,
+    "rows": [
+     [
+      "Leadership",
+      420000.0
+     ]
+    ]
+   },
+   "dataset": "employees"
+  },
+  {
+   "id": "sqlp-iq-big-teams",
+   "title": "Managers with more than two direct reports",
+   "difficulty": "intermediate",
+   "objective": "Self-join a table to itself.",
+   "instructions": "Return the name of every manager with more than two direct reports and the number of those reports (reports).",
+   "solution": "SELECT m.name, COUNT(*) AS reports\nFROM employees e\nJOIN employees m ON m.id = e.manager_id\nGROUP BY m.id, m.name\nHAVING COUNT(*) > 2;",
+   "hints": [
+    "Join employees to itself: e is the employee, m is their manager.",
+    "Group by the manager and count.",
+    "HAVING COUNT(*) > 2."
+   ],
+   "explanation": "A self-join gives each table copy a role through its alias. The head of the company has four direct reports.",
+   "source": "SQLite documentation: SELECT",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE departments (id INTEGER PRIMARY KEY, name TEXT NOT NULL, location TEXT NOT NULL);",
+    "INSERT INTO departments VALUES (1,'Leadership','Bengaluru'),(2,'Engineering','Bengaluru'),(3,'Quality','Pune'),\n (4,'Sales','Mumbai'),(5,'Support','Pune');",
+    "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT NOT NULL, department_id INTEGER NOT NULL REFERENCES departments(id),\n manager_id INTEGER REFERENCES employees(id), title TEXT NOT NULL, hire_date TEXT NOT NULL, salary INTEGER NOT NULL);",
+    "INSERT INTO employees VALUES\n (1,'Meera Joshi',1,NULL,'Chief Executive','2018-04-02',420000),\n (2,'Ravi Menon',2,1,'Head of Engineering','2018-06-11',310000),\n (3,'Sana Qureshi',3,1,'Head of Quality','2019-01-07',260000),\n (4,'Vikram Rao',4,1,'Head of Sales','2019-03-18',280000),\n (5,'Neha Gupta',2,2,'Engineering Lead','2019-08-05',210000),\n (6,'Aditya Singh',2,2,'Engineering Lead','2020-02-10',205000),\n (7,'Pooja Iyer',2,5,'Developer','2020-07-01',140000),\n (8,'Rahul Das',2,5,'Developer','2021-01-11',128000),\n (9,'Fatima Shaikh',2,6,'Developer','2021-05-24',128000),\n (10,'Karan Malhotra',2,6,'Developer','2022-09-12',115000),\n (11,'Lakshmi Pillai',3,3,'QA Lead','2020-03-16',170000),\n (12,'Omar Farooq',3,11,'Test Engineer','2021-08-02',95000),\n (13,'Priya Nambiar',3,11,'Automation Engineer','2022-01-17',118000),\n (14,'Suresh Babu',4,4,'Account Manager','2020-11-09',120000),\n (15,'Tanvi Kulkarni',4,4,'Account Manager','2023-02-06',98000),\n (16,'Zoya Ahmed',5,1,'Support Manager','2021-04-12',150000),\n (17,'Manoj Yadav',5,16,'Support Agent','2022-06-20',62000),\n (18,'Ritu Saxena',5,16,'Support Agent','2024-01-08',58000);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 2,
+    "rows": [
+     [
+      "Meera Joshi",
+      4
+     ]
+    ]
+   },
+   "dataset": "employees"
+  },
+  {
+   "id": "sqlp-iq-third-distinct",
+   "title": "Third-highest distinct salary",
+   "difficulty": "advanced",
+   "objective": "Use DENSE_RANK for the Nth highest value.",
+   "instructions": "Return the third-highest distinct salary (one column, third_highest).",
+   "solution": "WITH ranked AS (\n  SELECT salary, DENSE_RANK() OVER (ORDER BY salary DESC) AS r FROM employees\n)\nSELECT DISTINCT salary AS third_highest FROM ranked WHERE r = 3;",
+   "hints": [
+    "DENSE_RANK numbers distinct values without gaps.",
+    "Keep rank 3; DISTINCT avoids repeats if several people earn it."
+   ],
+   "explanation": "DENSE_RANK generalises to any N, which is why interviewers like it. With RANK, ties at the top would make rank 3 skip.",
+   "source": "SQLite documentation: Window functions",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE departments (id INTEGER PRIMARY KEY, name TEXT NOT NULL, location TEXT NOT NULL);",
+    "INSERT INTO departments VALUES (1,'Leadership','Bengaluru'),(2,'Engineering','Bengaluru'),(3,'Quality','Pune'),\n (4,'Sales','Mumbai'),(5,'Support','Pune');",
+    "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT NOT NULL, department_id INTEGER NOT NULL REFERENCES departments(id),\n manager_id INTEGER REFERENCES employees(id), title TEXT NOT NULL, hire_date TEXT NOT NULL, salary INTEGER NOT NULL);",
+    "INSERT INTO employees VALUES\n (1,'Meera Joshi',1,NULL,'Chief Executive','2018-04-02',420000),\n (2,'Ravi Menon',2,1,'Head of Engineering','2018-06-11',310000),\n (3,'Sana Qureshi',3,1,'Head of Quality','2019-01-07',260000),\n (4,'Vikram Rao',4,1,'Head of Sales','2019-03-18',280000),\n (5,'Neha Gupta',2,2,'Engineering Lead','2019-08-05',210000),\n (6,'Aditya Singh',2,2,'Engineering Lead','2020-02-10',205000),\n (7,'Pooja Iyer',2,5,'Developer','2020-07-01',140000),\n (8,'Rahul Das',2,5,'Developer','2021-01-11',128000),\n (9,'Fatima Shaikh',2,6,'Developer','2021-05-24',128000),\n (10,'Karan Malhotra',2,6,'Developer','2022-09-12',115000),\n (11,'Lakshmi Pillai',3,3,'QA Lead','2020-03-16',170000),\n (12,'Omar Farooq',3,11,'Test Engineer','2021-08-02',95000),\n (13,'Priya Nambiar',3,11,'Automation Engineer','2022-01-17',118000),\n (14,'Suresh Babu',4,4,'Account Manager','2020-11-09',120000),\n (15,'Tanvi Kulkarni',4,4,'Account Manager','2023-02-06',98000),\n (16,'Zoya Ahmed',5,1,'Support Manager','2021-04-12',150000),\n (17,'Manoj Yadav',5,16,'Support Agent','2022-06-20',62000),\n (18,'Ritu Saxena',5,16,'Support Agent','2024-01-08',58000);"
+   ],
+   "verify": null,
+   "expected": {
+    "columns": 1,
+    "rows": [
+     [
+      280000
+     ]
+    ]
+   },
+   "dataset": "employees"
+  },
+  {
+   "id": "sqlp-iq-raise",
+   "title": "Give a team a raise",
+   "difficulty": "intermediate",
+   "objective": "Update rows with a calculation and a condition.",
+   "instructions": "Give every employee in the Quality department (department_id 3) a 10% raise, rounded to whole rupees. The lab then lists the Quality team's salaries.",
+   "solution": "UPDATE employees\nSET salary = ROUND(salary * 1.10)\nWHERE department_id = 3;",
+   "hints": [
+    "UPDATE ... SET column = expression WHERE condition.",
+    "Multiply by 1.10 and round.",
+    "Forgetting WHERE would raise everyone's salary."
+   ],
+   "explanation": "The WHERE clause is what makes this safe; run SELECT with the same WHERE first to see who will change. ROUND returns a whole number here, stored in the integer column.",
+   "source": "SQLite documentation: UPDATE",
+   "ordered": true,
+   "kind": "modify",
+   "topic": "sql-path",
+   "setup": [
+    "CREATE TABLE departments (id INTEGER PRIMARY KEY, name TEXT NOT NULL, location TEXT NOT NULL);",
+    "INSERT INTO departments VALUES (1,'Leadership','Bengaluru'),(2,'Engineering','Bengaluru'),(3,'Quality','Pune'),\n (4,'Sales','Mumbai'),(5,'Support','Pune');",
+    "CREATE TABLE employees (id INTEGER PRIMARY KEY, name TEXT NOT NULL, department_id INTEGER NOT NULL REFERENCES departments(id),\n manager_id INTEGER REFERENCES employees(id), title TEXT NOT NULL, hire_date TEXT NOT NULL, salary INTEGER NOT NULL);",
+    "INSERT INTO employees VALUES\n (1,'Meera Joshi',1,NULL,'Chief Executive','2018-04-02',420000),\n (2,'Ravi Menon',2,1,'Head of Engineering','2018-06-11',310000),\n (3,'Sana Qureshi',3,1,'Head of Quality','2019-01-07',260000),\n (4,'Vikram Rao',4,1,'Head of Sales','2019-03-18',280000),\n (5,'Neha Gupta',2,2,'Engineering Lead','2019-08-05',210000),\n (6,'Aditya Singh',2,2,'Engineering Lead','2020-02-10',205000),\n (7,'Pooja Iyer',2,5,'Developer','2020-07-01',140000),\n (8,'Rahul Das',2,5,'Developer','2021-01-11',128000),\n (9,'Fatima Shaikh',2,6,'Developer','2021-05-24',128000),\n (10,'Karan Malhotra',2,6,'Developer','2022-09-12',115000),\n (11,'Lakshmi Pillai',3,3,'QA Lead','2020-03-16',170000),\n (12,'Omar Farooq',3,11,'Test Engineer','2021-08-02',95000),\n (13,'Priya Nambiar',3,11,'Automation Engineer','2022-01-17',118000),\n (14,'Suresh Babu',4,4,'Account Manager','2020-11-09',120000),\n (15,'Tanvi Kulkarni',4,4,'Account Manager','2023-02-06',98000),\n (16,'Zoya Ahmed',5,1,'Support Manager','2021-04-12',150000),\n (17,'Manoj Yadav',5,16,'Support Agent','2022-06-20',62000),\n (18,'Ritu Saxena',5,16,'Support Agent','2024-01-08',58000);"
+   ],
+   "verify": "SELECT name, salary FROM employees WHERE department_id = 3 ORDER BY id",
+   "expected": {
+    "columns": 2,
+    "rows": [
+     [
+      "Sana Qureshi",
+      286000
+     ],
+     [
+      "Lakshmi Pillai",
+      187000
+     ],
+     [
+      "Omar Farooq",
+      104500
+     ],
+     [
+      "Priya Nambiar",
+      129800
+     ]
+    ]
+   },
+   "dataset": "employees"
+  },
+  {
+   "id": "sqlp-iq-running-count",
+   "title": "Number each customer's orders",
+   "difficulty": "intermediate",
+   "objective": "Use COUNT as a window function.",
+   "instructions": "Return every order's customer_id, id and order_date, plus a running count of that customer's orders so far (order_number: 1 for their first order, 2 for the second, and so on, by date then id).",
+   "solution": "SELECT customer_id, id, order_date,\n       COUNT(*) OVER (PARTITION BY customer_id ORDER BY order_date, id) AS order_number\nFROM orders;",
+   "hints": [
+    "COUNT(*) can be a window function too.",
+    "Partition by customer, order by date then id."
+   ],
+   "explanation": "With ORDER BY in the window, COUNT counts the rows up to the current one, which numbers each customer's orders. ROW_NUMBER() gives the same here because the order is unique.",
+   "source": "SQLite documentation: Window functions",
+   "ordered": false,
+   "kind": "query",
+   "topic": "sql-path",
+   "setup": [],
+   "verify": null,
+   "expected": {
+    "columns": 4,
+    "rows": [
+     [
+      1,
+      1,
+      "2024-01-05",
+      1
+     ],
+     [
+      1,
+      2,
+      "2024-01-20",
+      2
+     ],
+     [
+      1,
+      6,
+      "2024-02-14",
+      3
+     ],
+     [
+      1,
+      14,
+      "2024-04-19",
+      4
+     ],
+     [
+      2,
+      3,
+      "2024-01-22",
+      1
+     ],
+     [
+      2,
+      9,
+      "2024-03-09",
+      2
+     ],
+     [
+      2,
+      18,
+      "2024-05-30",
+      3
+     ],
+     [
+      3,
+      4,
+      "2024-02-02",
+      1
+     ],
+     [
+      3,
+      15,
+      "2024-04-25",
+      2
+     ],
+     [
+      4,
+      5,
+      "2024-02-10",
+      1
+     ],
+     [
+      4,
+      12,
+      "2024-04-01",
+      2
+     ],
+     [
+      4,
+      20,
+      "2024-06-21",
+      3
+     ],
+     [
+      5,
+      7,
+      "2024-02-28",
+      1
+     ],
+     [
+      6,
+      8,
+      "2024-03-03",
+      1
+     ],
+     [
+      6,
+      16,
+      "2024-05-06",
+      2
+     ],
+     [
+      7,
+      10,
+      "2024-03-15",
+      1
+     ],
+     [
+      9,
+      11,
+      "2024-03-22",
+      1
+     ],
+     [
+      9,
+      17,
+      "2024-05-18",
+      2
+     ],
+     [
+      10,
+      13,
+      "2024-04-08",
+      1
+     ],
+     [
+      11,
+      19,
+      "2024-06-12",
+      1
+     ]
+    ]
    }
   }
  ]

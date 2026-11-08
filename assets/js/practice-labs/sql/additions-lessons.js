@@ -859,3 +859,277 @@ export const lessons = [
   ]
  }
 ];
+
+export const projects = [
+ {
+  "id": "employee-database",
+  "title": "HR analytics for a software company",
+  "level": "intermediate",
+  "dataset": "employees",
+  "scenario": "The HR team of an 18-person software company is preparing its annual review. They have the employee and department tables and need a set of figures for the leadership meeting: team sizes, how pay is spread, who the top earners are, how deep the organisation is and how hiring has developed.",
+  "objectives": [
+   "Join tables and summarise them by group",
+   "Label rows with CASE",
+   "Use a correlated subquery and a recursive CTE in a real report"
+  ],
+  "requirements": [
+   "Every figure must come from the tables, not be typed in.",
+   "Department names, not ids, must appear wherever a person reads the result.",
+   "Ties must not be hidden."
+  ],
+  "milestones": [
+   "sqlp-pr1-headcount",
+   "sqlp-pr1-salary-bands",
+   "sqlp-pr1-top-earner",
+   "sqlp-pr1-levels",
+   "sqlp-pr1-joiners"
+  ],
+  "improvements": [
+   "Add each department's average salary next to its headcount.",
+   "Show each employee's manager's name with a self-join.",
+   "Turn the salary bands into a view the HR team can reuse."
+  ]
+ },
+ {
+  "id": "banking-transactions",
+  "title": "A bank's statement checks",
+  "level": "advanced",
+  "dataset": "bank",
+  "scenario": "A small bank's operations team has received a complaint: a customer says they were charged twice. They want balances for every account, a list of possible duplicate charges, a monthly cash-flow summary, the savings accounts that broke the no-overdraft rule, and the duplicate corrected safely.",
+  "objectives": [
+   "Reconcile balances from transactions",
+   "Find duplicates with GROUP BY and HAVING",
+   "Correct data inside a transaction"
+  ],
+  "requirements": [
+   "Never delete a row you have not first selected with the same condition.",
+   "Keep the original order of transactions when calculating balances: date, then id.",
+   "Change data only inside a transaction."
+  ],
+  "milestones": [
+   "sqlp-pr2-balances",
+   "sqlp-pr2-duplicates",
+   "sqlp-pr2-monthly-flow",
+   "sqlp-pr2-savings-overdrawn",
+   "sqlp-pr2-fix-duplicate"
+  ],
+  "improvements": [
+   "Flag current accounts that exceeded their overdraft_limit.",
+   "Write the duplicate check as a view the team can run every morning.",
+   "Add a reversal transaction instead of deleting, and compare the two approaches."
+  ]
+ },
+ {
+  "id": "ecommerce-sales",
+  "title": "Shop sales report",
+  "level": "intermediate",
+  "dataset": null,
+  "scenario": "The owner of the online shop wants a first sales report: revenue by month, the best customers, each category's share of revenue, how many customers come back, and how much revenue cancellations cost.",
+  "objectives": [
+   "Calculate order values from order lines",
+   "Summarise and rank customers",
+   "Combine aggregates into shares and totals"
+  ],
+  "requirements": [
+   "An order's value is the sum of price times quantity over its items.",
+   "Cancelled orders are not revenue.",
+   "Each answer must be a single query the owner can re-run."
+  ],
+  "milestones": [
+   "sql-project-monthly",
+   "sql-project-customers",
+   "sql-project-share",
+   "sqlp-pr3-repeat-customers",
+   "sqlp-pr3-cancelled-value"
+  ],
+  "improvements": [
+   "Add the average order value per month.",
+   "Show revenue by customer city.",
+   "List customers who have not ordered since March."
+  ]
+ },
+ {
+  "id": "healthcare-appointments",
+  "title": "Clinic appointment analysis",
+  "level": "advanced",
+  "dataset": "clinic",
+  "scenario": "A small clinic with four doctors wants to understand missed appointments and waiting times, and to make sure no patient who needed a follow-up visit was forgotten. All patient records here are synthetic.",
+  "objectives": [
+   "Calculate rates and averages with conditional aggregation and dates",
+   "Find missing follow-ups with NOT EXISTS",
+   "Pivot statuses into a monthly summary"
+  ],
+  "requirements": [
+   "Cancelled appointments do not count towards no-show rates.",
+   "Percentages are rounded to one decimal.",
+   "Patients are identified by code only."
+  ],
+  "milestones": [
+   "sqlp-pr4-no-show-rate",
+   "sqlp-pr4-waiting-days",
+   "sqlp-pr4-missed-follow-up",
+   "sqlp-pr4-monthly-status"
+  ],
+  "improvements": [
+   "Compare no-show rates for appointments booked more than a week ahead.",
+   "Find the weekday with the most no-shows.",
+   "Count follow-ups that were completed within 30 days."
+  ]
+ },
+ {
+  "id": "business-reporting",
+  "title": "A KPI pack for management",
+  "level": "advanced",
+  "dataset": "targets",
+  "scenario": "Management has set monthly revenue targets for the shop and wants a KPI pack: revenue against target, the percentage achieved, month-over-month growth, the best seller in each category, and the monthly figures saved as a view for the dashboard.",
+  "objectives": [
+   "Join calculated results to reference tables",
+   "Use LAG for growth and RANK for best sellers",
+   "Publish a reusable view"
+  ],
+  "requirements": [
+   "Revenue excludes cancelled orders.",
+   "Percentages are rounded to one decimal.",
+   "The view must count each order once."
+  ],
+  "milestones": [
+   "sqlp-pr5-vs-target",
+   "sqlp-pr5-achievement",
+   "sqlp-pr5-growth",
+   "sqlp-pr5-best-seller",
+   "sqlp-pr5-view"
+  ],
+  "improvements": [
+   "Add a cumulative revenue-to-date column against a cumulative target.",
+   "Show the share of revenue from repeat customers.",
+   "Create a second view per category."
+  ]
+ }
+];
+
+export const interview = {
+ "coding": [
+  "sqlp-iq-second-highest",
+  "sqlp-iq-above-dept-average",
+  "sqlp-iq-never-ordered",
+  "sqlp-iq-orders-pivot",
+  "sqlp-iq-first-order",
+  "sqlp-iq-best-department",
+  "sqlp-iq-big-teams",
+  "sqlp-iq-third-distinct",
+  "sqlp-iq-raise",
+  "sqlp-iq-running-count"
+ ],
+ "quiz": [
+  {
+   "q": "In which order does a database logically process SELECT, FROM, WHERE and ORDER BY?",
+   "options": [
+    "SELECT, FROM, WHERE, ORDER BY",
+    "FROM, WHERE, SELECT, ORDER BY",
+    "FROM, SELECT, WHERE, ORDER BY",
+    "WHERE, FROM, SELECT, ORDER BY"
+   ],
+   "answer": 1,
+   "explain": "Rows are found (FROM, JOIN), filtered (WHERE), grouped (GROUP BY, HAVING), shaped (SELECT) and finally sorted and limited. That is why a column alias from SELECT cannot be used in WHERE in most databases."
+  },
+  {
+   "q": "Which clause filters groups after they have been aggregated?",
+   "options": [
+    "WHERE",
+    "HAVING",
+    "GROUP BY",
+    "ORDER BY"
+   ],
+   "answer": 1,
+   "explain": "WHERE filters rows before grouping; HAVING filters the groups afterwards and can use aggregates such as COUNT(*) > 1."
+  },
+  {
+   "q": "A column has 5 rows, 2 of them NULL. What do COUNT(*) and COUNT(column) return?",
+   "options": [
+    "5 and 5",
+    "3 and 3",
+    "5 and 3",
+    "3 and 5"
+   ],
+   "answer": 2,
+   "explain": "COUNT(*) counts rows; COUNT(column) counts non-NULL values. Aggregates other than COUNT(*) ignore NULLs."
+  },
+  {
+   "q": "What does NULL = NULL evaluate to in SQL?",
+   "options": [
+    "TRUE",
+    "FALSE",
+    "Unknown (NULL), so a WHERE treats it as not true",
+    "An error"
+   ],
+   "answer": 2,
+   "explain": "Comparisons with NULL are unknown. Use IS NULL, IS NOT NULL, or IS DISTINCT FROM where the database supports it."
+  },
+  {
+   "q": "What is the difference between UNION and UNION ALL?",
+   "options": [
+    "UNION ALL removes duplicates",
+    "UNION removes duplicates; UNION ALL keeps every row",
+    "UNION needs the same table on both sides",
+    "There is no difference"
+   ],
+   "answer": 1,
+   "explain": "UNION de-duplicates the combined result, which costs a sort or hash; UNION ALL keeps every row and is faster when duplicates are impossible or wanted."
+  },
+  {
+   "q": "A LEFT JOIN from customers to orders returns how many rows for a customer with no orders?",
+   "options": [
+    "None",
+    "One, with NULLs in the order columns",
+    "One per order in the table",
+    "It depends on ORDER BY"
+   ],
+   "answer": 1,
+   "explain": "LEFT JOIN keeps every row of the left table; where nothing matches, the right table's columns are NULL. That is how 'customers who never ordered' queries work."
+  },
+  {
+   "q": "What does a PRIMARY KEY guarantee?",
+   "options": [
+    "Values are sorted",
+    "Values are unique and not NULL",
+    "The column is indexed in every database by name",
+    "The table cannot be updated"
+   ],
+   "answer": 1,
+   "explain": "A primary key identifies each row uniquely and cannot be empty. Most databases create an index for it, but the guarantee is uniqueness and presence."
+  },
+  {
+   "q": "What is the main cost of adding an index?",
+   "options": [
+    "Queries return different results",
+    "Writes become slower and storage grows",
+    "The table can no longer be joined",
+    "Nothing; indexes are free"
+   ],
+   "answer": 1,
+   "explain": "Every insert, update and delete must also update the index, and the index takes space. Indexes are worth it for frequent lookups and joins."
+  },
+  {
+   "q": "Salaries 500, 400, 400, 300. What does RANK() give the person earning 300 (highest first)?",
+   "options": [
+    "3",
+    "4",
+    "2",
+    "1"
+   ],
+   "answer": 1,
+   "explain": "RANK gives the tied 400s rank 2 and skips to 4. DENSE_RANK would give 3, and ROW_NUMBER 4."
+  },
+  {
+   "q": "What does atomicity mean for a transaction?",
+   "options": [
+    "It runs faster",
+    "All of its changes happen or none do",
+    "It locks the whole database",
+    "It can only contain one statement"
+   ],
+   "answer": 1,
+   "explain": "Atomicity is the A in ACID: a transaction is all-or-nothing. If any statement fails, ROLLBACK leaves the data as it was before BEGIN."
+  }
+ ]
+};

@@ -16,6 +16,10 @@ document.addEventListener(
         renderFooter();
         initSectionRail();
 
+        if (document.querySelector(".learn-quiz")) {
+            import("../practice-labs/learn-quiz.js").then((module) => module.initLearnQuiz());
+        }
+
         if (document.querySelector("[data-search-index]")) {
             import("../practice-labs/learn-search.js").then((module) => module.initLearnSearch());
         }

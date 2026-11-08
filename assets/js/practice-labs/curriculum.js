@@ -25,7 +25,7 @@ export const PATHS = Object.freeze([
         id: "sql",
         title: "SQL",
         department: "database-engineering",
-        status: "building",
+        status: "complete",
         tagline: "Learn to read and write database queries, from your first SELECT to window functions, with every example and exercise running in your browser.",
         audience: "Complete beginners, testers who check data, analysts and anyone preparing for a data or QA role.",
         runsIn: "Queries run for real in your browser (SQLite compiled to WebAssembly). Nothing you type is sent anywhere.",
@@ -132,11 +132,8 @@ export const PATHS = Object.freeze([
                 ]
             }
         ],
-        /* what the path will still gain; shown on the path page so the visitor knows this path is not finished */
-        coming: [
-            "Practice projects: employees, banking, e-commerce, healthcare and business reporting",
-            "An interview practice set with checked answers"
-        ]
+        /* nothing announced as still to come: the path is complete (lessons, projects, interview practice) */
+        coming: []
     }
 ]);
 

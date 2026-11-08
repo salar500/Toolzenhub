@@ -920,3 +920,99 @@ a.learn-card:hover {
     color: var(--ink);
 
 }
+
+
+/* ---------- concept questions ---------- */
+
+.learn-quiz__q {
+
+    margin: 0 0 18px;
+    padding: 14px 16px;
+
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface-card);
+
+}
+
+.learn-quiz__q legend {
+
+    padding: 0 4px;
+
+    font-weight: 700;
+    line-height: 1.45;
+
+}
+
+.learn-quiz__options {
+
+    display: grid;
+    gap: 6px;
+
+    margin: 10px 0 4px;
+
+}
+
+.learn-quiz__option {
+
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    min-height: 44px;
+    box-sizing: border-box;
+    padding: 10px 12px;
+
+    border: 1px solid var(--line);
+    border-radius: 10px;
+
+    cursor: pointer;
+    line-height: 1.45;
+
+}
+
+.learn-quiz__option input {
+
+    width: 20px;
+    height: 20px;
+    flex: 0 0 auto;
+    margin: 1px 0 0;
+
+}
+
+.learn-quiz__option:has(input:checked) {
+
+    border-color: var(--accent);
+    background: var(--accent-soft);
+
+}
+
+.learn-quiz__actions {
+
+    margin: 8px 0 !important;
+
+}
+
+.learn-quiz__result:empty {
+
+    display: none;
+
+}
+
+.learn-quiz__result {
+
+    font-weight: 600;
+
+}
+
+.learn-quiz__q[data-verdict="correct"] .learn-quiz__result {
+
+    color: var(--state-success);
+
+}
+
+.learn-quiz__q[data-verdict="not-yet"] .learn-quiz__result {
+
+    color: var(--ink);
+
+}

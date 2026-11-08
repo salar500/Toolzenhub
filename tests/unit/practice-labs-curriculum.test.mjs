@@ -75,11 +75,13 @@ test("SQL: each lesson has all teaching sections, real examples and existing exe
   }
 });
 
-test("generated pages: one per node, unique addresses, one h1, title and description present, no raw markup leaks", () => {
+test("generated pages: one per node, unique addresses, one h1, title and description present, no raw markup leaks", async () => {
   const pages = learnPages();
   const sql = PATHS.find((p) => p.id === "sql");
   const modules = sql.levels.reduce((n, l) => n + l.modules.length, 0);
-  assert.equal(pages.length, 1 + DEPARTMENTS.filter(isPublished).length + 1 + sql.levels.length + modules + flatLessons(sql).length);
+  const { projects: sqlProjects } = await import("../../assets/js/practice-labs/sql/additions-lessons.js");
+  const extras = 1 + sqlProjects.length + 1; /* projects index, each project, interview practice */
+  assert.equal(pages.length, 1 + DEPARTMENTS.filter(isPublished).length + 1 + sql.levels.length + modules + flatLessons(sql).length + extras);
   assert.equal(new Set(pages.map((p) => p.url)).size, pages.length);
   for (const page of pages) {
     assert.equal((page.html.match(/<h1[ >]/g) || []).length, 1, page.url);
