@@ -58,7 +58,7 @@ W2: P01 Manual Software Testing and P02 Test Design. W3: P03 API Testing. Later:
 1. **E5 ShopLite** (`assets/js/practice-labs/shoplite/`)
    - **Screens:** home and product list (search, category filter, sort); product detail; cart (quantity, remove, coupon); checkout (address form, delivery slot, "Pay on delivery" only); order confirmation; order history; signup; login; profile (name, phone, password change).
    - **Data:** 24 original products (stationery, home and bags, the same world as the SQL shop data); 3 coupons with rules (percentage, minimum order, expiry); 2 seeded users.
-   - **Release mechanism:** `?release=stable|r-bugs-1|r-a11y|r-api`. Each bug is a guarded branch in the code: `if (bug("RB1-07")) {...}`.
+   - **Release mechanism:** `?release=stable|r-bugs-1|r-a11y|r-api`. Each bug is a guarded branch in the pure rules module (`shoplite/logic.js`): `bug("RB1-07")`. Built: stable and r-bugs-1. The written requirements (R1 to R10) are shown in the app itself.
    - **The bug registry:** `shoplite/bugs.js`, with `{ id, release, feature, area, severity, title, steps[], expected, actual, matcher: { feature, fieldKeywords[], behaviourKeywords[] } }`.
    - **r-bugs-1 (10 bugs, verified reproducible):**
      1. the coupon applies below its minimum order;
@@ -66,11 +66,11 @@ W2: P01 Manual Software Testing and P02 Test Design. W3: P03 API Testing. Later:
      3. the search is case-sensitive;
      4. sort by price sorts as text ("1000" before "200");
      5. the password-change form accepts a mismatched confirmation;
-     6. the cart total rounds incorrectly for 3 items at ₹33.33;
+     6. delivery is charged on an order of exactly ₹999, although the rule makes it free from ₹999 (a boundary bug; changed at build time from a rounding bug, which taught less);
      7. the signup email accepts "a@b" (no domain dot);
      8. the order history shows another seeded user's order after logout and login;
      9. the delivery slot allows a past date;
-     10. the "Remove" button removes the wrong row after a sort.
+     10. "Remove" deletes the first cart line instead of the chosen one when the cart has three or more lines.
    - **r-a11y (8):**
      1. a missing label on the search;
      2. contrast below 3:1 on the price;
