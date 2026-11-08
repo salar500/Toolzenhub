@@ -292,7 +292,7 @@ Milestones from M12 on are recorded here as sections rather than table rows.
   - curriculum test;
   - at 1280 and 390 px: the RCA lab renders with 4 fields, a weak answer gets not yet, the database playground runs, and there is no overflow.
 
-#### M12i: Excel Formulas and Power BI paths built on the labs' own engines (commit: (this milestone's commit))
+#### M12i: Excel Formulas and Power BI paths built on the labs' own engines (commit: `c344401`)
 
 - **Excel Formulas** has 8 lessons:
   - references; everyday functions; logic;
@@ -315,6 +315,31 @@ Milestones from M12 on are recorded here as sections rather than table rows.
     - there is no overflow.
   - Both standalone lab pages still mount their exercises.
   - 32,652 links on 447 pages resolve.
+
+#### M12j: Data Engineering Foundations path and updated role journeys (commit: (this milestone's commit))
+
+- **Data Engineering Foundations** (6 lessons):
+  - ETL, ELT, batch and streaming;
+  - SQL transformations (a clean, deduplicated contacts table with lineage);
+  - incremental, idempotent loads (watermark plus INSERT OR IGNORE: 17 rows even when run twice);
+  - warehouse modelling (a fact view and a monthly mart; slowly changing dimensions);
+  - data-quality checks in one query;
+  - orchestration and backfills.
+  - It has interview practice (10 questions) and links to the SQL Practice Lab.
+- **Journeys** now use the new paths, and there is an eighth, Data engineer: SQL, Python, Database Design, Data Engineering, then Machine Learning.
+  - QA adds Specialised Testing.
+  - Automation adds API Test Automation and Selenium.
+  - Data analyst uses the Excel and Power BI paths.
+  - Web adds Backend.
+  - Backend adds Database Design and Linux.
+  - AI adds Python, Machine Learning and Prompt Engineering.
+  - DevOps adds Linux and Kubernetes.
+- **Checks performed:**
+  - `db-design.test.mjs` now runs all playgrounds of the three SQL-using paths and asserts the load count of 17.
+  - The curriculum test passes, including that every journey step resolves.
+  - At 390 px the incremental playground shows 17 and there is no overflow.
+  - At 1280 and 390 px the home page shows 8 journeys, the first opens with 6 steps, no department card is marked in development, and search works.
+  - 33,584 links on 461 pages resolve.
 
 ### Final inventory, 2026-11-08 (preview branch)
 

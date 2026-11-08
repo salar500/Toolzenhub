@@ -732,6 +732,34 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "data-engineering",
+        title: "Data Engineering Foundations",
+        department: "data-analytics",
+        status: "complete",
+        tagline: "Build trustworthy data pipelines: ETL and ELT, SQL transformations, incremental and idempotent loads, warehouse modelling, data-quality checks and orchestration, with transformations you run in your browser.",
+        audience: "Analysts moving towards engineering, backend developers who own data, and anyone preparing for data-engineering roles. SQL basics come first.",
+        runsIn: "Transformations, loads and quality checks run as real SQLite (sql.js) on the ShopLite tables in your browser. Orchestration tools such as Airflow are explained, not run. Nothing is saved or sent.",
+        outcomes: ["Design ETL and ELT pipelines", "Clean and deduplicate data with SQL", "Load incrementally and idempotently", "Model facts, dimensions and marts", "Write data-quality checks", "Orchestrate pipelines and run backfills"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "pipeline-basics", title: "Pipeline Basics", summary: "ETL, ELT, batch and streaming, and transforming raw data with SQL you run.", lessons: [
+                    { id: "de-pipelines", slug: "etl-elt-batch-streaming", title: "Data pipelines: ETL, ELT, batch and streaming" },
+                    { id: "de-transform", slug: "transforming-with-sql", title: "Transforming raw data with SQL" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "loading-and-modelling", title: "Loading and Modelling", summary: "Incremental, idempotent loads and warehouse modelling with facts, dimensions and marts.", lessons: [
+                    { id: "de-incremental", slug: "incremental-loads", title: "Incremental loads and idempotent jobs" },
+                    { id: "de-warehouse", slug: "warehouse-modelling", title: "Warehouse modelling: facts, dimensions and marts" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "reliable-pipelines", title: "Reliable Pipelines", summary: "Data-quality checks and observability, and orchestration with backfills.", lessons: [
+                    { id: "de-quality", slug: "data-quality", title: "Data quality checks and observability" },
+                    { id: "de-orchestration", slug: "orchestration-and-backfills", title: "Orchestration, scheduling and backfills" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",

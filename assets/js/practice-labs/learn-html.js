@@ -19,6 +19,7 @@ import { getToolById } from "../data/tools.js";
 import { LEVELS, PRACTICE_LABS_PREFIX, flatLessons, getPath, lessonCount, lessonUrl, levelUrl, moduleUrl, pathUrl, publishedPaths } from "./curriculum.js";
 import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from "./departments.js";
 import { JOURNEYS } from "./journeys.js";
+import { lessons as deLessons, interview as deLessonsInterview } from "./data/engineering-lessons.js";
 import { excelLessons as xlpLessons, pbiLessons as pbipLessons, excelInterview as xlpInterview, pbiInterview as pbipInterview } from "./data/excel-pbi-lessons.js";
 import { lessons as spLessons, interview as spLessonsInterview } from "./manual-testing/specialised-lessons.js";
 import { lessons as ddLessons, interview as ddLessonsInterview } from "./sql/design-lessons.js";
@@ -288,6 +289,16 @@ const CONTENT = {
         labTool: "power-bi-practice-lab",
         flashcards: "smart-flashcards",
         morePractice: "has all 43 exercises, the datasets and a report view of your model."
+    },
+    "data-engineering": {
+        kind: "blocks",
+        lessons: new Map(deLessons.map((lesson) => [lesson.id, lesson])),
+        interview: deLessonsInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: "sql-practice-lab",
+        flashcards: "smart-flashcards",
+        morePractice: "has 49 checked SQL exercises on the same tables, including a data-cleaning set."
     },
     "test-design": {
         kind: "blocks",

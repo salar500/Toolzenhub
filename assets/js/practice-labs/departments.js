@@ -122,9 +122,9 @@ export const DEPARTMENTS = Object.freeze([
             { title: "Power BI: Power Query, modelling and DAX", status: "path", path: "power-bi" },
             { title: "SQL for analytics", status: "path", path: "sql" },
             { title: "Statistics and data analysis", status: "path", path: "statistics" },
-            { title: "Data engineering fundamentals", status: "planned" }
+            { title: "Data engineering fundamentals", status: "path", path: "data-engineering" }
         ],
-        paths: ["statistics", "excel", "power-bi"],
+        paths: ["statistics", "excel", "power-bi", "data-engineering"],
         labs: ["excel-practice-lab", "power-bi-practice-lab"],
         decks: ["Excel", "Power BI"],
         start: { label: "Start with lesson 1 of Statistics and Data Analysis.", path: "statistics" },

@@ -1,4 +1,4 @@
-/* Database Design and Specialised Testing paths: every SQL playground runs on the practice data (SETUP and CLEANING_SETUP, as in the browser) with Python's sqlite3 (the same SQLite family
+/* Database Design, Specialised Testing and Data Engineering paths: every SQL playground runs on the practice data (SETUP and CLEANING_SETUP, as in the browser) with Python's sqlite3 (the same SQLite family
    as sql.js), and errors exactly when the lesson says it should (skipped if python is not installed). */
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -6,7 +6,8 @@ import { spawnSync } from "node:child_process";
 import { SETUP, CLEANING_SETUP } from "../../assets/js/tools/sql-practice-lab/dataset.js";
 import { lessons as design } from "../../assets/js/practice-labs/sql/design-lessons.js";
 import { lessons as specialised } from "../../assets/js/practice-labs/manual-testing/specialised-lessons.js";
-const lessons = [...design, ...specialised];
+import { lessons as engineering } from "../../assets/js/practice-labs/data/engineering-lessons.js";
+const lessons = [...design, ...specialised, ...engineering];
 
 const hasPython = spawnSync("python", ["--version"]).status === 0;
 
@@ -28,6 +29,8 @@ test("every SQL playground runs as the lesson claims", { skip: !hasPython && "py
   assert.match(check.error, /CHECK constraint failed/);
   const upsert = results[plays.findIndex((p) => p.sql.includes("ON CONFLICT"))];
   assert.deepEqual(upsert.rows, [[1, 8]]);
+  const load = results[plays.findIndex((p) => p.sql.includes("load_state"))];
+  assert.equal(load.rows[0][0], 17, "the load inserts the 17 orders after the watermark once, even when run twice");
   const statuses = results[plays.findIndex((p) => p.sql.includes("NOT IN"))];
   assert.deepEqual(statuses.rows, [], "every order status is in the allowed list");
   const plan = results[plays.findIndex((p) => p.sql.includes("CREATE INDEX"))];
