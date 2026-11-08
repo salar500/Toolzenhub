@@ -20,6 +20,10 @@ document.addEventListener(
             import("../practice-labs/learn-writing.js").then((module) => module.initLearnWriting());
         }
 
+        if (document.querySelector("[data-gitsim]")) {
+            import("../practice-labs/learn-gitsim.js").then((module) => module.initGitSim());
+        }
+
         if (document.querySelector("[data-webplay]")) {
             import("../practice-labs/learn-webplay.js").then((module) => module.initWebPlay());
         }

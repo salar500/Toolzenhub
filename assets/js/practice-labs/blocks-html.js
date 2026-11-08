@@ -18,6 +18,7 @@
      jsrun     { heading?, exercise }                   JavaScript run against tests in a Web Worker (learn-jsrun.js)
      apitask   { heading?, task }                       an HTTP request answered by the in-page mock API (learn-api.js)
      webplay   { heading?, exercise }                   HTML and CSS rendered in a script-free sandboxed iframe and checked (learn-webplay.js)
+     gitsim    { heading?, task }                       git commands on a modelled repository (learn-gitsim.js)
      shoplite  { text, release? }                       a task on the practice shop, opened in a new tab
 ========================================================= */
 
@@ -28,6 +29,7 @@ import { CODE } from "./playwright/code.js";
 import { JS_EXERCISES } from "./programming/js-exercises.js";
 import { API_TASKS, API_HOST } from "./web/mock-api.js";
 import { WEB_EXERCISES } from "./web/web-exercises.js";
+import { GIT_TASKS } from "./devops/git-tasks.js";
 import { DATASETS, NUMERIC, formatAnswer } from "./data/stats.js";
 
 const SHOPLITE = () => `${SITE_ROOT}practice-labs/shoplite/`;
@@ -363,6 +365,36 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                         <details class="learn-reveal">
                             <summary>Show a model answer</summary>
                             <pre class="lx-code" tabindex="0"><code>${esc(exercise.model)}</code></pre>
+                        </details>
+                    </div>
+                </section>`;
+        }
+
+        case "gitsim": {
+            const task = GIT_TASKS.find((t) => t.id === block.task);
+            if (!task) throw new Error(`unknown Git task ${block.task}`);
+            const id = esc(task.id);
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-write" data-gitsim="${id}">
+                        <p>${esc(task.task)}</p>
+                        <div data-git-tools hidden>
+                            <p class="learn-feedback" data-git-goal role="status" aria-live="polite"></p>
+                            <div data-git-state></div>
+                            <pre class="lx-code learn-gitsim__term" data-git-term tabindex="0" aria-label="Terminal output"></pre>
+                            <label class="lx-label" for="${id}-cmd">Command</label>
+                            <div class="learn-actions">
+                                <input id="${id}-cmd" class="lx-input learn-gitsim__input" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="git status">
+                                <button type="button" class="calculator-form__button lx-btn" data-git-run>Run</button>
+                                <button type="button" class="calculator-form__button calculator-form__button--secondary lx-btn" data-git-reset>Start again</button>
+                            </div>
+                        </div>
+                        <p class="lx-note">Simulated Git: a model of a repository in this page that follows Git for the commands it supports (status, add, commit, restore, branch, switch, checkout, merge, log). Nothing touches your computer.</p>
+                        <details class="learn-reveal">
+                            <summary>Show commands that work and why</summary>
+                            <pre class="lx-code" tabindex="0"><code>${esc(task.model.join("\n"))}</code></pre>
+                            <p>${esc(task.explain)}</p>
                         </details>
                     </div>
                 </section>`;

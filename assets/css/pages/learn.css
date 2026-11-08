@@ -1297,3 +1297,12 @@ a.learn-card:hover {
 /* ---------- HTML and CSS playground ---------- */
 
 .learn-webplay__frame { display: block; width: 100%; min-height: 220px; margin: 10px 0; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+
+/* ---------- Git simulator ---------- */
+
+.learn-gitsim__state { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; margin: 0 0 10px; font-size: 14px; }
+.learn-gitsim__state dt { font-weight: 600; }
+.learn-gitsim__state dd { margin: 0; overflow-wrap: anywhere; }
+.learn-gitsim__term { min-height: 120px; max-height: 280px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+.learn-gitsim__input { flex: 1 1 14em; min-height: 44px; font-family: var(--font-mono, monospace); }
+@media (max-width: 520px) { .learn-gitsim__state { grid-template-columns: 1fr; } }

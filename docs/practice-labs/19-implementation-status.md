@@ -80,7 +80,29 @@ A new `apitask` block lets the learner build a request (method, path and query, 
 
 It also has interview practice (12 questions).
 
-A new `webplay` block renders the learner's HTML and CSS in an `iframe sandbox="allow-same-origin"` with no scripts permission. `web/dom-check.js` then reads the rendered DOM and computed styles using these rule types: exists, count, none, attr, labelled, named and style. There are 8 exercises | (this milestone's commit) | New focused browser spec `tests/browser/practice-labs-webplay.spec.js` (10 tests on subpath-desktop only): each exercise's starter fails and its model passes; a script tag and an onerror handler in learner markup do not run. Phone (390): the model passes with no overflow; the interview has 12 questions. 16,817 links on 216 pages resolve | Backend fundamentals path (planned) |
+A new `webplay` block renders the learner's HTML and CSS in an `iframe sandbox="allow-same-origin"` with no scripts permission. `web/dom-check.js` then reads the rendered DOM and computed styles using these rule types: exists, count, none, attr, labelled, named and style. There are 8 exercises | `a14a9e0` | New focused browser spec `tests/browser/practice-labs-webplay.spec.js` (10 tests on subpath-desktop only): each exercise's starter fails and its model passes; a script tag and an onerror handler in learner markup do not run. Phone (390): the model passes with no overflow; the interview has 12 questions. 16,817 links on 216 pages resolve | Backend fundamentals path (planned) |
+
+| M9a | **The DevOps, Cloud and Cybersecurity department is published with two paths.**
+
+**Git and DevOps Foundations** (8 lessons):
+
+- Beginner: first commit; staging, unstaging and discarding.
+- Intermediate: branches and merging; conflicts, remotes and pull requests; CI/CD.
+- Advanced: containers, cloud and monitoring.
+
+A new `gitsim` block uses `devops/git-sim.js`, a modelled repository with a working tree, index, commits and branches. It supports status, add, commit, restore with or without `--staged`, branch, switch or checkout with or without `-c`/`-b`, fast-forward and three-way merges with conflict detection, and log. It has deterministic ids and no persistence. There are 7 goal-checked tasks.
+
+**Application Security Foundations** (7 lessons, defensive code review):
+
+- threat modelling;
+- injection;
+- XSS;
+- passwords and sessions;
+- access control;
+- secrets, configuration and dependencies;
+- security testing.
+
+Both paths have interview practice (12 questions each). The Cron Challenge Lab is linked from the Git and DevOps path | (this milestone's commit) | Git simulator unit test (3: status, add, commit and restore; switch refusal; fast-forward, three-way and conflict merges; all 7 task models reach their goals and their starts do not). At 1280 and 390: the merge task's goal is met only after the merge, the terminal shows the untracked file and "Fast-forward", reset restores the start, there is no overflow, the security interview has 12 questions, and the department lists both paths. 19,059 links on 249 pages resolve | Shell simulator and deeper cloud paths (planned) |
 
 ## 3. Current inventory (built)
 
@@ -101,10 +123,10 @@ A new `webplay` block renders the learner's HTML and CSS in an `iframe sandbox="
 
 ## 5. Next checkpoint
 
-**Stage 9, DevOps, Cloud and Cybersecurity:**
+**Stage 10, cross-department journeys:** role-based journeys on the Practice Labs home page (QA engineer, automation engineer, data analyst, web developer, AI engineer and DevOps engineer). Each journey orders existing paths across departments.
 
-- a Git path with a Git simulator: commands applied to a modelled repository and checked against goals;
-- Linux shell and CI concepts;
-- a security path with code-reading labs.
+**Stage 11, completion review:**
 
-**Then:** Stage 10 (cross-department journeys) and Stage 11 (completion review, search and SEO).
+- search-index coverage of the new paths;
+- department and roadmap pages;
+- a final inventory of paths, lessons and exercises in this document.

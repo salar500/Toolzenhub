@@ -39,6 +39,8 @@ import { lessons as stLessons, interview as stInterview } from "./data/lessons.j
 import { lessons as jsLessons, interview as jsInterview } from "./programming/lessons.js";
 import { lessons as httpLessons, interview as httpInterview } from "./web/lessons.js";
 import { lessons as htmlLessons, interview as htmlInterview } from "./web/html-lessons.js";
+import { lessons as gitLessons, interview as gitInterview } from "./devops/lessons.js";
+import { lessons as secLessons, interview as secInterview } from "./devops/security-lessons.js";
 
 const SITE_NAME = "ToolZen Hub";
 const HUB = () => ROUTES.practiceLabs;
@@ -122,6 +124,26 @@ const CONTENT = {
         writing: new Map(),
         labTool: null,
         flashcards: null,
+        morePractice: ""
+    },
+    "git-devops": {
+        kind: "blocks",
+        lessons: new Map(gitLessons.map((lesson) => [lesson.id, lesson])),
+        interview: gitInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: "cron-challenge-lab",
+        flashcards: "smart-flashcards",
+        morePractice: "practises the schedules that CI jobs, backups and reports run on, checked by a real cron engine."
+    },
+    "app-security": {
+        kind: "blocks",
+        lessons: new Map(secLessons.map((lesson) => [lesson.id, lesson])),
+        interview: secInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: null,
+        flashcards: "smart-flashcards",
         morePractice: ""
     },
     "test-design": {

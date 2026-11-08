@@ -294,6 +294,66 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "git-devops",
+        title: "Git and DevOps Foundations",
+        department: "devops-cloud-security",
+        status: "complete",
+        tagline: "Use Git with confidence and understand how software is built, shipped and run: commits, branches, merges, pull requests, CI/CD, containers, cloud and monitoring, with Git practised in a simulator.",
+        audience: "Developers and testers who are new to Git or want to understand the delivery pipeline, and anyone moving towards DevOps roles.",
+        runsIn: "Git tasks run in a simulated repository inside the page that follows Git for the commands it supports; nothing touches your computer. Other lessons are checked with questions and ordering tasks.",
+        outcomes: ["Stage, commit, unstage and discard changes", "Create, switch and merge branches", "Explain conflicts, remotes and pull requests", "Read a CI pipeline and a Dockerfile", "Explain cloud service models and shared responsibility", "Handle incidents with monitoring and blameless reviews"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "git-basics", title: "Git Basics", summary: "Version control, the working tree, staging area and commits, and careful staging, practised in a Git simulator.", lessons: [
+                    { id: "git-why", slug: "version-control-and-first-commit", title: "Version control and your first commit" },
+                    { id: "git-staging", slug: "staging-unstaging-discarding", title: "Staging carefully, unstaging and discarding" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "git-teamwork", title: "Git for Teams", summary: "Branches and merging, switching safely, conflicts, remotes and pull requests.", lessons: [
+                    { id: "git-branches", slug: "branches-and-merging", title: "Branches and merging" },
+                    { id: "git-safety", slug: "conflicts-and-remotes", title: "Switching safely, conflicts and remotes" }] },
+                { id: "delivery", title: "Continuous Delivery", summary: "Continuous integration, delivery pipelines and quality gates.", lessons: [
+                    { id: "devops-ci-cd", slug: "ci-cd", title: "Continuous integration and delivery" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "running-software", title: "Running Software", summary: "Containers and Docker, cloud computing basics, and monitoring, logging and incidents.", lessons: [
+                    { id: "devops-containers", slug: "containers-and-docker", title: "Containers and Docker" },
+                    { id: "devops-cloud", slug: "cloud-basics", title: "Cloud computing basics" },
+                    { id: "devops-monitoring", slug: "monitoring-and-incidents", title: "Monitoring, logging and incidents" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
+        id: "app-security",
+        title: "Application Security Foundations",
+        department: "devops-cloud-security",
+        status: "complete",
+        tagline: "Find and fix the most common web application vulnerabilities by reading real code: injection, cross-site scripting, authentication, access control, secrets and security testing.",
+        audience: "Developers, testers and anyone starting in security. Basic knowledge of web apps helps; the HTTP and REST APIs path is the ideal start.",
+        runsIn: "Defensive code-review exercises checked in the page: you read vulnerable and fixed code and choose the right fix. No attack tools are used and nothing is sent anywhere.",
+        outcomes: ["Threat-model a feature", "Recognise and fix SQL and command injection", "Prevent cross-site scripting", "Review password, session and access-control designs", "Keep secrets and configuration safe", "Plan and report security tests responsibly"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "security-basics", title: "Security Basics", summary: "The security mindset with threat modelling, and injection in SQL and commands with the fixes.", lessons: [
+                    { id: "sec-mindset", slug: "security-mindset-and-threat-modelling", title: "The security mindset and threat modelling" },
+                    { id: "sec-injection", slug: "injection", title: "Injection: SQL and commands" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "web-risks", title: "Common Web Risks", summary: "Cross-site scripting, passwords and sessions, and access control, reviewed in real code.", lessons: [
+                    { id: "sec-xss", slug: "cross-site-scripting", title: "Cross-site scripting" },
+                    { id: "sec-auth", slug: "passwords-and-sessions", title: "Passwords, sessions and authentication" },
+                    { id: "sec-access-control", slug: "access-control", title: "Access control" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "secure-delivery", title: "Secure Delivery", summary: "Secrets, configuration and dependencies, and security testing with responsible reporting.", lessons: [
+                    { id: "sec-secrets-config", slug: "secrets-configuration-dependencies", title: "Secrets, configuration and dependencies" },
+                    { id: "sec-testing", slug: "security-testing", title: "Security testing in practice" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",
