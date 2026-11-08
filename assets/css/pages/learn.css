@@ -1293,3 +1293,7 @@ a.learn-card:hover {
 .learn-api__line { display: grid; grid-template-columns: minmax(7em, auto) 1fr; gap: 10px; margin: 0 0 10px; }
 .learn-api__target .lx-input { width: 100%; }
 @media (max-width: 520px) { .learn-api__line { grid-template-columns: 1fr; } }
+
+/* ---------- HTML and CSS playground ---------- */
+
+.learn-webplay__frame { display: block; width: 100%; min-height: 220px; margin: 10px 0; border: 1px solid var(--line); border-radius: 8px; background: #fff; }

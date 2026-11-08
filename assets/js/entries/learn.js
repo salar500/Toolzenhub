@@ -20,6 +20,10 @@ document.addEventListener(
             import("../practice-labs/learn-writing.js").then((module) => module.initLearnWriting());
         }
 
+        if (document.querySelector("[data-webplay]")) {
+            import("../practice-labs/learn-webplay.js").then((module) => module.initWebPlay());
+        }
+
         if (document.querySelector("[data-apitask]")) {
             import("../practice-labs/learn-api.js").then((module) => module.initApiTasks());
         }

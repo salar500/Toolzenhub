@@ -70,7 +70,17 @@ A new `jsrun` block runs the learner's code against the exercise's tests in a fr
 
 The path also has interview practice (12 questions) and links to the JSON Error-Fixing Lab.
 
-A new `apitask` block lets the learner build a request (method, path and query, headers, body). `web/mock-api.js` answers it inside the page. It is a deterministic, stateless model of a ShopLite API with products, filters, a bearer-token orders endpoint and a JSON cart endpoint, and it covers 200, 201 (with Location), 204, 400, 401, 404, 405 (with Allow), 415 and 422. Each task's goal is checked. Nothing is sent, and the host is the reserved `.example` domain. There are 8 tasks | (this milestone's commit) | Mock API unit test (every response code; each task's model meets its goal and its start does not). At 1280 and 390: the orders endpoint gives 401 without a token and meets the goal with one; the cart gives 415 without Content-Type, then 201 with Location; there is no overflow; nothing is sent to the example host; the interview has 12 questions. 15,633 links on 199 pages resolve | HTML, CSS and DOM path and backend fundamentals (next) |
+A new `apitask` block lets the learner build a request (method, path and query, headers, body). `web/mock-api.js` answers it inside the page. It is a deterministic, stateless model of a ShopLite API with products, filters, a bearer-token orders endpoint and a JSON cart endpoint, and it covers 200, 201 (with Location), 204, 400, 401, 404, 405 (with Allow), 415 and 422. Each task's goal is checked. Nothing is sent, and the host is the reserved `.example` domain. There are 8 tasks | `34e3582` | Mock API unit test (every response code; each task's model meets its goal and its start does not). At 1280 and 390: the orders endpoint gives 401 without a token and meets the goal with one; the cart gives 415 without Content-Type, then 201 with Location; there is no overflow; nothing is sent to the example host; the interview has 12 questions. 15,633 links on 199 pages resolve | HTML, CSS and DOM path and backend fundamentals (next) |
+
+| M8b | **Web and Backend: the HTML, CSS and the DOM path**, with 9 lessons:
+
+- Beginner: elements, links and images, semantic HTML, and forms.
+- Intermediate: CSS basics, flexbox and responsive layout, and accessibility.
+- Advanced: the DOM and events with XSS, and performance and Core Web Vitals.
+
+It also has interview practice (12 questions).
+
+A new `webplay` block renders the learner's HTML and CSS in an `iframe sandbox="allow-same-origin"` with no scripts permission. `web/dom-check.js` then reads the rendered DOM and computed styles using these rule types: exists, count, none, attr, labelled, named and style. There are 8 exercises | (this milestone's commit) | New focused browser spec `tests/browser/practice-labs-webplay.spec.js` (10 tests on subpath-desktop only): each exercise's starter fails and its model passes; a script tag and an onerror handler in learner markup do not run. Phone (390): the model passes with no overflow; the interview has 12 questions. 16,817 links on 216 pages resolve | Backend fundamentals path (planned) |
 
 ## 3. Current inventory (built)
 
@@ -91,13 +101,10 @@ A new `apitask` block lets the learner build a request (method, path and query, 
 
 ## 5. Next checkpoint
 
-**Stage 8 remainder:** an HTML, CSS and DOM path with a sandboxed iframe playground and checks on the produced DOM.
-
 **Stage 9, DevOps, Cloud and Cybersecurity:**
 
-- a Git simulator: commands applied to a modelled repository;
-- a shell simulator;
-- a CI pipeline visualizer;
-- security code-reading labs.
+- a Git path with a Git simulator: commands applied to a modelled repository and checked against goals;
+- Linux shell and CI concepts;
+- a security path with code-reading labs.
 
-**Then:** Stages 10 to 11.
+**Then:** Stage 10 (cross-department journeys) and Stage 11 (completion review, search and SEO).

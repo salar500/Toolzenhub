@@ -17,6 +17,7 @@
      numeric   { heading?, dataset, exercises[] }       a data table and calculations checked in the browser (data/stats.js)
      jsrun     { heading?, exercise }                   JavaScript run against tests in a Web Worker (learn-jsrun.js)
      apitask   { heading?, task }                       an HTTP request answered by the in-page mock API (learn-api.js)
+     webplay   { heading?, exercise }                   HTML and CSS rendered in a script-free sandboxed iframe and checked (learn-webplay.js)
      shoplite  { text, release? }                       a task on the practice shop, opened in a new tab
 ========================================================= */
 
@@ -26,6 +27,7 @@ import { AREAS, BUGS, RELEASES } from "./shoplite/bugs.js";
 import { CODE } from "./playwright/code.js";
 import { JS_EXERCISES } from "./programming/js-exercises.js";
 import { API_TASKS, API_HOST } from "./web/mock-api.js";
+import { WEB_EXERCISES } from "./web/web-exercises.js";
 import { DATASETS, NUMERIC, formatAnswer } from "./data/stats.js";
 
 const SHOPLITE = () => `${SITE_ROOT}practice-labs/shoplite/`;
@@ -334,6 +336,33 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                             <summary>Show a request that works and why</summary>
                             <pre class="lx-code" tabindex="0"><code>${esc(model)}</code></pre>
                             <p>${esc(task.explain)}</p>
+                        </details>
+                    </div>
+                </section>`;
+        }
+
+        case "webplay": {
+            const exercise = WEB_EXERCISES.find((c) => c.id === block.exercise);
+            if (!exercise) throw new Error(`unknown web exercise ${block.exercise}`);
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-write" data-webplay="${esc(exercise.id)}">
+                        <p>${esc(exercise.task)}</p>
+                        <div data-web-tools hidden>
+                            <label class="lx-label" for="${esc(exercise.id)}-code">Your HTML and CSS</label>
+                            <textarea id="${esc(exercise.id)}-code" class="lx-textarea learn-editor" rows="9" spellcheck="false" autocapitalize="off" autocomplete="off" maxlength="8000">${esc(exercise.starter)}</textarea>
+                            <div class="learn-actions">
+                                <button type="button" class="calculator-form__button lx-btn" data-web-run>Show and check</button>
+                                <button type="button" class="calculator-form__button calculator-form__button--secondary lx-btn" data-web-reset>Start again</button>
+                            </div>
+                            <iframe class="learn-webplay__frame" title="Your page" sandbox="allow-same-origin" hidden></iframe>
+                            <div class="learn-feedback" data-web-out role="status" aria-live="polite"></div>
+                        </div>
+                        <p class="lx-note">Your page is shown in a sandbox with scripts switched off, and checked by reading its elements and styles. Nothing is stored or sent.</p>
+                        <details class="learn-reveal">
+                            <summary>Show a model answer</summary>
+                            <pre class="lx-code" tabindex="0"><code>${esc(exercise.model)}</code></pre>
                         </details>
                     </div>
                 </section>`;

@@ -263,6 +263,37 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "html-css-dom",
+        title: "HTML, CSS and the DOM",
+        department: "web-backend",
+        status: "complete",
+        tagline: "Build accessible, responsive web pages from first principles: semantic HTML, forms, CSS and layout, accessibility, the DOM and performance, with a playground that checks the page you build.",
+        audience: "Beginners to web development, testers who want to understand the pages they test and developers filling gaps in front-end fundamentals.",
+        runsIn: "Your HTML and CSS are shown in a sandbox with scripts switched off, and checked by reading the elements and computed styles of the page you built. Nothing is stored or sent.",
+        outcomes: ["Write well-structured semantic HTML", "Build labelled, accessible forms and tables", "Style pages with the cascade and the box model", "Lay out responsive pages with flexbox and media queries", "Change the DOM safely with events", "Check pages for accessibility and performance"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "html-foundations", title: "HTML Foundations", summary: "Elements and structure, links and images, semantic landmarks and forms, built in a checked playground.", lessons: [
+                    { id: "web-html-basics", slug: "elements-and-structure", title: "HTML: elements and the structure of a page" },
+                    { id: "web-links-images", slug: "links-and-images", title: "Links and images" },
+                    { id: "web-semantic", slug: "semantic-html", title: "Semantic HTML and landmarks" },
+                    { id: "web-forms", slug: "forms-and-inputs", title: "Forms and inputs" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "css-and-access", title: "CSS, Layout and Accessibility", summary: "Selectors, the cascade and the box model, flexbox and responsive layout, and the accessibility essentials.", lessons: [
+                    { id: "web-css-basics", slug: "css-basics", title: "CSS: selectors, the cascade and the box model" },
+                    { id: "web-layout", slug: "flexbox-and-responsive-design", title: "Layout with flexbox and responsive design" },
+                    { id: "web-accessibility", slug: "accessibility-essentials", title: "Accessibility essentials" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "dynamic-and-fast", title: "Dynamic and Fast Pages", summary: "The DOM and events without cross-site scripting, and Core Web Vitals with quality checks.", lessons: [
+                    { id: "web-dom-events", slug: "dom-and-events", title: "The DOM and events" },
+                    { id: "web-performance", slug: "performance-and-quality", title: "Web performance and quality checks" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",
