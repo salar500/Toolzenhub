@@ -14,6 +14,7 @@
      order     { heading?, prompt, items[], explain }   items in the right order; shown shuffled, checked in the browser
      write     { heading?, exercise }                   a structured writing lab (writing.js), checked in the browser
      aiviz     { heading?, kind, text }                 an AI teaching visualizer (learn-aiviz.js): tokens|context|sampling|retrieval|confusion
+     numeric   { heading?, dataset, exercises[] }       a data table and calculations checked in the browser (data/stats.js)
      shoplite  { text, release? }                       a task on the practice shop, opened in a new tab
 ========================================================= */
 
@@ -21,6 +22,7 @@ import { escapeHTML as esc } from "../ui/escape.js";
 import { SITE_ROOT } from "../routes.js";
 import { AREAS, BUGS, RELEASES } from "./shoplite/bugs.js";
 import { CODE } from "./playwright/code.js";
+import { DATASETS, NUMERIC, formatAnswer } from "./data/stats.js";
 
 const SHOPLITE = () => `${SITE_ROOT}practice-labs/shoplite/`;
 
@@ -228,6 +230,47 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                         <p class="lx-note">Teaching model: it shows the idea with fixed, hand-made data and real formulas. It is not a real AI model and nothing is downloaded or sent.</p>
                     </div>
                 </section>`;
+
+        case "numeric": {
+            const data = DATASETS[block.dataset];
+            if (!data) throw new Error(`unknown dataset ${block.dataset}`);
+            const items = block.exercises.map((id) => {
+                const exercise = NUMERIC.find((n) => n.id === id);
+                if (!exercise) throw new Error(`unknown numeric exercise ${id}`);
+                return exercise;
+            });
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-write">
+                        <div class="lx-table-wrap" tabindex="0" role="region" aria-label="${esc(data.title)}">
+                            <table class="lx-table">
+                                <caption>${esc(data.title)}</caption>
+                                <thead><tr>${data.columns.map((c) => `<th scope="col">${esc(data.labels[c])}</th>`).join("")}</tr></thead>
+                                <tbody>${data.rows.map((r) => `<tr>${r.map((v) => `<td>${esc(String(v))}</td>`).join("")}</tr>`).join("")}</tbody>
+                            </table>
+                        </div>
+                        <ol class="learn-numeric">
+                            ${items.map((exercise) => `
+                            <li class="learn-numeric__item" data-numeric="${esc(exercise.id)}">
+                                <p>${esc(exercise.task)}${exercise.decimals ? ` Give ${exercise.decimals} decimal place${exercise.decimals > 1 ? "s" : ""}.` : ""}</p>
+                                <div data-num-tools hidden>
+                                    <label class="lx-label" for="${esc(exercise.id)}-in">Your answer</label>
+                                    <div class="learn-actions">
+                                        <input id="${esc(exercise.id)}-in" class="lx-input learn-numeric__input" type="text" inputmode="decimal" autocomplete="off">
+                                        <button type="button" class="calculator-form__button lx-btn" data-num-check>Check</button>
+                                    </div>
+                                    <p class="learn-feedback" data-num-out role="status" aria-live="polite"></p>
+                                </div>
+                                <details class="learn-reveal">
+                                    <summary>Show the answer and how</summary>
+                                    <p><strong>${esc(formatAnswer(exercise))}</strong>. ${esc(exercise.explain)}</p>
+                                </details>
+                            </li>`).join("")}
+                        </ol>
+                    </div>
+                </section>`;
+        }
 
         case "bughunt": {
             const release = block.release ?? "r-bugs-1";

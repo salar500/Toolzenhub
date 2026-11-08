@@ -114,20 +114,20 @@ export const DEPARTMENTS = Object.freeze([
         intro: [
             "Analytics turns raw records into answers people can act on: cleaning the data, modelling it, calculating the right measures and presenting them clearly.",
             "Two labs here run real engines in your browser. The Excel Practice Lab evaluates spreadsheet formulas, and the Power BI Practice Lab runs Power Query steps, a data model and DAX measures on built-in datasets, so your answer is computed and checked rather than compared as text. Steps that only Power BI Desktop can do are marked as such.",
-            "SQL for analytics lives in Database Engineering, and the same shop data appears in both, so what you learn in one carries over to the other. Structured learning paths for Excel and Power BI are being built from these labs.",
+            "The Statistics and Data Analysis path teaches the reasoning behind every report: averages and spread, percentiles and outliers, grouped summaries, cleaning, correlation, A/B tests and honest charts, with each calculation checked in your browser against the table shown. SQL for analytics lives in Database Engineering, and the same shop data appears in both, so what you learn in one carries over to the other.",
             "Each lab starts with short lessons whose examples you can edit, followed by exercises from simple sums to a small project. When an answer is not yet right, the check says so and, where it can tell, why: an Excel formula, for example, is also tried on a second set of numbers, which catches a typed-in result. A hint comes before the solution, so the lab is worth repeating until you can solve each task without help."
         ],
         technologies: [
             { title: "Excel formulas", status: "lab", lab: "excel-practice-lab" },
             { title: "Power BI: Power Query, modelling and DAX", status: "lab", lab: "power-bi-practice-lab" },
             { title: "SQL for analytics", status: "path", path: "sql" },
-            { title: "Statistics for analysts", status: "planned" },
+            { title: "Statistics and data analysis", status: "path", path: "statistics" },
             { title: "Data engineering fundamentals", status: "planned" }
         ],
-        paths: [],
+        paths: ["statistics"],
         labs: ["excel-practice-lab", "power-bi-practice-lab"],
         decks: ["Excel", "Power BI"],
-        start: { label: "New to spreadsheets? Begin with the Excel Practice Lab's first lesson.", lab: "excel-practice-lab" },
+        start: { label: "Start with lesson 1 of Statistics and Data Analysis.", path: "statistics" },
         related: ["database-engineering", "ai-engineering"]
     },
     {

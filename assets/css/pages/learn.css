@@ -1280,3 +1280,10 @@ a.learn-card:hover {
 .learn-aiviz__seg--document { background: var(--state-info-soft); }
 .learn-aiviz__seg--question { background: var(--state-success-soft); }
 .learn-aiviz__seg--output { background: var(--state-warning-soft); }
+
+
+/* ---------- numeric exercises ---------- */
+
+.learn-numeric { display: grid; gap: 14px; padding-left: 1.4em; }
+.learn-numeric__input { max-width: 12em; min-height: 44px; }
+.learn-write .lx-table-wrap { overflow-x: auto; margin: 0 0 12px; }

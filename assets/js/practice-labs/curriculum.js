@@ -168,6 +168,37 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "statistics",
+        title: "Statistics and Data Analysis",
+        department: "data-analytics",
+        status: "complete",
+        tagline: "Describe, clean and compare data with confidence: averages, spread, outliers, grouping, correlation, A/B tests and clear charts, calculated on real tables and checked in your browser.",
+        audience: "Analysts, business users and testers who work with reports, and anyone preparing for data roles. Basic arithmetic is enough; Excel function names are given for every calculation.",
+        runsIn: "Every calculation is checked in your browser against an answer computed from the same table, at the precision the question asks for. Nothing you type is stored or sent.",
+        outcomes: ["Choose and calculate the right average and measure of spread", "Find percentiles and flag outliers", "Build grouped summaries and percentages", "Clean a messy dataset in a documented way", "Interpret correlation, regression and A/B test results", "Choose an honest chart and present a finding"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "describing-data", title: "Describing Data", summary: "Variables and types, averages, spread and percentiles, calculated on a table of ShopLite orders.", lessons: [
+                    { id: "st-data-basics", slug: "data-variables-and-types", title: "Data, variables and types" },
+                    { id: "st-averages", slug: "mean-median-mode", title: "Averages: mean, median and mode" },
+                    { id: "st-spread", slug: "range-and-standard-deviation", title: "Spread: range and standard deviation" },
+                    { id: "st-percentiles", slug: "percentiles-and-outliers", title: "Percentiles, quartiles and outliers" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "analysing-data", title: "Analysing Data", summary: "Grouped summaries and pivot tables, a documented cleaning pass, and correlation with a simple regression line.", lessons: [
+                    { id: "st-grouping", slug: "grouping-and-pivots", title: "Counting, grouping and pivot summaries" },
+                    { id: "st-cleaning", slug: "cleaning-data", title: "Cleaning data before analysis" },
+                    { id: "st-correlation", slug: "correlation-and-regression", title: "Correlation and simple regression" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "deciding-with-data", title: "Deciding with Data", summary: "Samples, A/B tests and significance read correctly, and charts and findings that lead to decisions.", lessons: [
+                    { id: "st-ab-testing", slug: "ab-tests-and-significance", title: "Samples, A/B tests and significance" },
+                    { id: "st-presenting", slug: "charts-and-presenting", title: "Choosing charts and presenting findings" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",

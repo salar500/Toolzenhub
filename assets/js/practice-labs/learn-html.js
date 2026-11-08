@@ -35,6 +35,7 @@ import { lessons as pwLessons2, interview as pwInterview } from "./playwright/le
 import { WRITING as mtWriting } from "./manual-testing/writing.js";
 import { lessons as aiLessons, interview as aiInterview } from "./ai/lessons.js";
 import { AI_WRITING } from "./ai/writing.js";
+import { lessons as stLessons, interview as stInterview } from "./data/lessons.js";
 
 const SITE_NAME = "ToolZen Hub";
 const HUB = () => ROUTES.practiceLabs;
@@ -79,6 +80,16 @@ const CONTENT = {
         labTool: null,
         flashcards: null,
         morePractice: ""
+    },
+    statistics: {
+        kind: "blocks",
+        lessons: new Map(stLessons.map((lesson) => [lesson.id, lesson])),
+        interview: stInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: "excel-practice-lab",
+        flashcards: "smart-flashcards",
+        morePractice: "evaluates real spreadsheet formulas such as AVERAGE, COUNTIF and AVERAGEIF on its own datasets, so you can practise the functions named in these lessons."
     },
     "test-design": {
         kind: "blocks",

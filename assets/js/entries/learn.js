@@ -20,6 +20,10 @@ document.addEventListener(
             import("../practice-labs/learn-writing.js").then((module) => module.initLearnWriting());
         }
 
+        if (document.querySelector("[data-numeric]")) {
+            import("../practice-labs/learn-numeric.js").then((module) => module.initNumeric());
+        }
+
         if (document.querySelector("[data-aiviz]")) {
             import("../practice-labs/learn-aiviz.js").then((module) => module.initAiViz());
         }
