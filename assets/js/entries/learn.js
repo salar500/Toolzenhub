@@ -1,0 +1,27 @@
+/* =========================================================
+   ToolZen Hub
+   Practice Labs learning-path entry (path, level, module and lesson pages)
+   These pages are generated complete: breadcrumb, roadmap, lesson text, examples, exercises, hints and solutions. The
+   script binds the header menu and the footer, starts the roadmap (sidebar or drawer), and, on a page with SQL to run,
+   loads the browser SQL engine (practice-labs/learn-practice.js) only then.
+========================================================= */
+import { renderHeader } from "../components/header.js";
+import { renderFooter } from "../components/footer.js";
+import { initSectionRail } from "../ui/section-rail.js";
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+        renderHeader();
+        renderFooter();
+        initSectionRail();
+
+        if (document.querySelector("[data-sql-run], .learn-exercise")) {
+            import("../practice-labs/learn-practice.js")
+                .then((module) => module.initLearnPractice())
+                .catch(() => {
+                    /* the lesson stays readable: its examples, hints and solutions are in the page */
+                });
+        }
+    }
+);

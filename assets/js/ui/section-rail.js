@@ -67,7 +67,10 @@ export function initSectionRail(root = document) {
     const summary = details.querySelector("summary");
     const list = details.querySelector(".section-switcher__list");
     const links = [...nav.querySelectorAll(".section-switcher__list a")];
-    const sectionName = nav.getAttribute("aria-label")?.replace(/: switch tool$/, "") ?? "tools";
+    const sectionName = nav.getAttribute("aria-label")?.replace(/: switch \w+$/, "") ?? "tools";
+    /* what the list holds, named on the buttons and in the search: "tool" everywhere except a learning path's roadmap, which says "lesson" */
+    const noun = nav.dataset.railNoun || "tool";
+    const nouns = nav.dataset.railNouns || `${noun}s`;
     const wide = window.matchMedia(WIDE);
 
     nav.id ||= "section-rail";
@@ -121,10 +124,10 @@ export function initSectionRail(root = document) {
 
         const labels = links.map(link => link.textContent.trim());
         const field = element("div", { class: "section-rail__search" });
-        const label = element("label", { for: "section-rail-search", class: "section-rail__label" }, `Find a tool in ${sectionName}`);
+        const label = element("label", { for: "section-rail-search", class: "section-rail__label" }, `Find a ${noun} in ${sectionName}`);
         const status = element("p", { class: "section-rail__status", role: "status", "aria-live": "polite" });
 
-        search = element("input", { id: "section-rail-search", type: "search", autocomplete: "off", spellcheck: "false", placeholder: "Search tools" });
+        search = element("input", { id: "section-rail-search", type: "search", autocomplete: "off", spellcheck: "false", placeholder: `Search ${nouns}` });
         field.append(label, search, status);
         list.before(field);
 
@@ -146,7 +149,7 @@ export function initSectionRail(root = document) {
 
             status.textContent = !searching
                 ? ""
-                : shown.size === 0 ? "No tool matches." : `${shown.size} ${shown.size === 1 ? "tool matches" : "tools match"}.`;
+                : shown.size === 0 ? `No ${noun} matches.` : `${shown.size} ${shown.size === 1 ? `${noun} matches` : `${nouns} match`}.`;
 
         });
 
@@ -162,7 +165,7 @@ export function initSectionRail(root = document) {
 
     /* ---------- hide and show (wide screens) ---------- */
 
-    const hide = element("button", { type: "button", class: "section-rail__hide", "aria-controls": nav.id, "aria-expanded": "true" }, "Hide tools");
+    const hide = element("button", { type: "button", class: "section-rail__hide", "aria-controls": nav.id, "aria-expanded": "true" }, `Hide ${nouns}`);
     const show = element("button", { type: "button", class: "section-rail__show", "aria-controls": nav.id, "aria-expanded": "false", hidden: "" }, `Show ${sectionName}`);
 
     (search ? search.parentElement : list).before(hide);
@@ -249,7 +252,7 @@ export function initSectionRail(root = document) {
         details.open = wide.matches;
         nav.classList.toggle("is-drawer", !wide.matches);
         sizeDrawer();
-        hide.textContent = wide.matches ? hideLabel : "Close tools";
+        hide.textContent = wide.matches ? hideLabel : `Close ${nouns}`;
         backdrop.hidden = true;
 
         if (wide.matches) {

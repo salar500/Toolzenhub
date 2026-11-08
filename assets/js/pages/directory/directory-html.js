@@ -16,6 +16,7 @@
    is not a link.
 ========================================================= */
 
+import { PRACTICE_LABS_PREFIX } from "../../practice-labs/curriculum.js";
 import { iconSvg } from "../../ui/icons.js";
 import { renderSectionNav } from "../../components/section-switcher.js";
 import {
@@ -625,6 +626,19 @@ export function practiceLabsHtml() {
                     </p>
 
                 </div>
+
+                <section class="practice-labs__group" aria-labelledby="practice-labs-paths">
+
+                    <h2 class="practice-labs__title" id="practice-labs-paths">Learning paths</h2>
+
+                    <p class="practice-labs__text">Step-by-step routes from Beginner to Advanced, with worked examples, exercises and answers that run in your browser. SQL is available now and more paths are planned.</p>
+
+                    <p class="directory-section__more">
+                        <a href="${PRACTICE_LABS_PREFIX}sql/">Start the SQL learning path →</a>
+                        <a href="${PRACTICE_LABS_PREFIX}">All learning paths →</a>
+                    </p>
+
+                </section>
 
                 ${group("Practice", "Exercises with an exact rule, so your answer is checked rather than guessed. The labs keep nothing: your answers are not stored or sent anywhere.", labs)}
 
