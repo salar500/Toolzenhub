@@ -160,7 +160,7 @@ Milestones from M12 on are recorded here as sections rather than table rows.
   - At 1280 and 390 px: the prompt follows `cd`; a pipeline that keeps the header does not meet the goal; Up recalls the last command; the correct pipeline meets the goal; the terminal shows the output; no overflow; the Kubernetes path page lists its lessons.
   - 23,377 links on 311 pages resolve.
 
-#### M12c (checkpoint): AI engines for the Machine Learning and Prompt Engineering paths (commit: (this milestone's commit))
+#### M12c (checkpoint): AI engines for the Machine Learning and Prompt Engineering paths (commit: `602f8e1`)
 
 - `ai/ml-models.js`: least squares, polynomial fit, k-means and Gini impurity, with fixed datasets. Pinned against `numpy.polyfit` in `tests/unit/ml-models.test.mjs`.
 - Four new `aiviz` kinds in `learn-aiviz.js`: regression, overfit, kmeans and tree (SVG plots).
@@ -168,6 +168,33 @@ Milestones from M12 on are recorded here as sections rather than table rows.
 - 3 prompt-writing labs added to `ai/writing.js` (pe-w-anatomy, pe-w-few-shot, pe-w-guardrails), pinned by the writing-check test.
 - **Not yet used by any lesson page**: the ML and Prompt Engineering lessons are the next step.
 - Checks performed: focused unit tests (23 pass) and the build. No browser check yet for the new visualizers or the schema block.
+
+#### M12d: Machine Learning Foundations and Prompt Engineering paths (commit: (this milestone's commit))
+
+- **Machine Learning Foundations** (9 lessons):
+  - Beginner: ML and the project workflow; data, features and splits with leakage; linear regression with an interactive fit.
+  - Intermediate: classification and thresholds; decision trees and ensembles with the Gini split visualizer; overfitting and validation with a polynomial-degree visualizer.
+  - Advanced: k-means stepped through iterations; neural networks; NLP, vision, transfer learning and drift.
+  - Interview practice (12 questions).
+- **Prompt Engineering** (7 lessons):
+  - Prompt anatomy and few-shot (writing labs checked against rubrics).
+  - Structured outputs and tool calling (4 `schema` exercises).
+  - Chains (an ordering task).
+  - Evaluation (quiz on dated, written example outputs).
+  - Prompt security (a guardrail writing lab).
+  - Interview practice (10 questions).
+- The AI department now lists three paths.
+- **Checks performed:**
+  - Curriculum test.
+  - At 1280 and 390 px:
+    - regression plot shows 8 points, and the error falls from 235.68 to 0.89 as the sliders approach the fit;
+    - degree 9 shows training error 0.0000 and test error 0.0730;
+    - k-means converges at iteration 4 with 12 points;
+    - the tree split at 6 gives 0.160;
+    - the schema block refuses "yes" for a boolean and accepts the model;
+    - the prompt-writing lab is present;
+    - no overflow.
+  - 25,573 links on 343 pages resolve.
 
 ### Final inventory, 2026-11-08 (preview branch)
 
@@ -234,7 +261,7 @@ Milestones from M12 on are recorded here as sections rather than table rows.
 
 **Resume here (checkpoint after M12c).** Steps, in order:
 
-1. **Write and wire the lessons.**
+1. *(Done in M12d.)* **Write and wire the lessons.**
    - `ai/ml-lessons.js`, the Machine Learning path. About 9 lessons, using the aiviz kinds regression, overfit, kmeans and tree, plus confusion.
    - `ai/prompt-lessons.js`, the Prompt Engineering path. Use the write labs pe-w-anatomy, pe-w-few-shot and pe-w-guardrails, the schema exercises pe-s-*, and quizzes on recorded outputs.
    - Wire both with the add_path helper pattern: curriculum, learn-html CONTENT (`writing: new Map(AI_WRITING...)` for the prompt path), the BUILD_ONLY list in eleventy.shared.js, the curriculum test's extras count and its block-type list (add "schema"), and the ai-engineering department.

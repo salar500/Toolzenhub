@@ -19,6 +19,8 @@ import { getToolById } from "../data/tools.js";
 import { LEVELS, PRACTICE_LABS_PREFIX, flatLessons, getPath, lessonCount, lessonUrl, levelUrl, moduleUrl, pathUrl, publishedPaths } from "./curriculum.js";
 import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from "./departments.js";
 import { JOURNEYS } from "./journeys.js";
+import { lessons as peLessons, interview as peLessonsInterview } from "./ai/prompt-lessons.js";
+import { lessons as mlLessons, interview as mlLessonsInterview } from "./ai/ml-lessons.js";
 import { lessons as k8sLessons, interview as k8sLessonsInterview } from "./devops/k8s-lessons.js";
 import { lessons as lxLessons, interview as lxLessonsInterview } from "./devops/linux-lessons.js";
 import { lessons as javaLessons, interview as javaLessonsInterview } from "./programming/java-lessons.js";
@@ -187,6 +189,26 @@ const CONTENT = {
         interview: k8sLessonsInterview,
         exercises: new Map(),
         writing: new Map(),
+        labTool: null,
+        flashcards: "smart-flashcards",
+        morePractice: ""
+    },
+    "machine-learning": {
+        kind: "blocks",
+        lessons: new Map(mlLessons.map((lesson) => [lesson.id, lesson])),
+        interview: mlLessonsInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: null,
+        flashcards: "smart-flashcards",
+        morePractice: ""
+    },
+    "prompt-engineering": {
+        kind: "blocks",
+        lessons: new Map(peLessons.map((lesson) => [lesson.id, lesson])),
+        interview: peLessonsInterview,
+        exercises: new Map(),
+        writing: new Map(AI_WRITING.map((exercise) => [exercise.id, exercise])),
         labTool: null,
         flashcards: "smart-flashcards",
         morePractice: ""

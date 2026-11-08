@@ -471,6 +471,66 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "machine-learning",
+        title: "Machine Learning Foundations",
+        department: "ai-engineering",
+        status: "complete",
+        tagline: "Understand how machine learning works: regression, classification, decision trees, overfitting, clustering and neural networks, with interactive visualizers that run the real algorithms in your browser.",
+        audience: "Analysts, developers and testers who want to understand ML systems, and anyone starting towards data science or AI engineering. Comfortable arithmetic is enough; no programming is needed.",
+        runsIn: "Visualizers run the real algorithms (least squares, polynomial fitting, k-means, Gini impurity, thresholds) on small fixed datasets in your browser. No model is downloaded and nothing is sent.",
+        outcomes: ["Frame problems as regression, classification or clustering", "Prepare features and avoid leakage", "Fit and interpret a regression line", "Choose thresholds with precision and recall", "Recognise and prevent overfitting", "Explain neural networks, transfer learning and drift"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "ml-basics", title: "Machine Learning Basics", summary: "Types of learning, the project workflow, data and features, and linear regression with an interactive fit.", lessons: [
+                    { id: "ml-what", slug: "what-machine-learning-is", title: "What machine learning is and how a project runs" },
+                    { id: "ml-data", slug: "data-features-splits", title: "Data, features and train/test splits" },
+                    { id: "ml-regression", slug: "linear-regression", title: "Linear regression and the error a model makes" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "models-and-evaluation", title: "Models and Evaluation", summary: "Classification thresholds, decision trees and ensembles, and overfitting with validation.", lessons: [
+                    { id: "ml-classification", slug: "classification-and-thresholds", title: "Classification, thresholds and the confusion matrix" },
+                    { id: "ml-trees", slug: "decision-trees-and-ensembles", title: "Decision trees and ensembles" },
+                    { id: "ml-overfitting", slug: "overfitting-and-validation", title: "Overfitting, validation and model evaluation" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "beyond-the-basics", title: "Beyond the Basics", summary: "Clustering with k-means, neural networks and deep learning, and NLP, vision and production monitoring.", lessons: [
+                    { id: "ml-clustering", slug: "k-means-clustering", title: "Clustering with k-means" },
+                    { id: "ml-neural", slug: "neural-networks", title: "Neural networks and deep learning" },
+                    { id: "ml-nlp-vision", slug: "nlp-vision-production", title: "NLP, computer vision and models in production" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
+        id: "prompt-engineering",
+        title: "Prompt Engineering",
+        department: "ai-engineering",
+        status: "complete",
+        tagline: "Write prompts that give reliable, checkable results: prompt structure, few-shot examples, structured JSON outputs, tool calling, task chains, evaluation and prompt security.",
+        audience: "Anyone who uses AI assistants at work, and developers and testers building or evaluating AI features. The AI and LLM Foundations path is a good start.",
+        runsIn: "Prompts are checked against explicit rubrics and JSON outputs against schemas, in your browser. No AI model runs: model outputs shown are dated, written examples, and you play the model in the structured-output tasks.",
+        outcomes: ["Write prompts with role, task, format and constraints", "Use few-shot examples well", "Specify and validate JSON outputs", "Produce and design tool calls", "Evaluate prompt versions on a test set", "Defend against prompt injection"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "prompt-basics", title: "Prompt Basics", summary: "The anatomy of a good prompt and few-shot examples, written and checked against rubrics.", lessons: [
+                    { id: "pe-anatomy", slug: "anatomy-of-a-prompt", title: "The anatomy of a good prompt" },
+                    { id: "pe-examples", slug: "few-shot-prompting", title: "Few-shot prompting and examples" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "prompts-for-software", title: "Prompts for Software", summary: "Structured JSON outputs, tool calling and chains of small prompts.", lessons: [
+                    { id: "pe-structured", slug: "structured-outputs", title: "Structured outputs and JSON schemas" },
+                    { id: "pe-tools", slug: "tool-calling", title: "Tool calling and function definitions" },
+                    { id: "pe-reasoning", slug: "steps-and-chains", title: "Breaking down tasks: steps, chains and reasoning" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "reliable-and-safe", title: "Reliable and Safe Prompts", summary: "Evaluating prompt versions, and defending against prompt injection.", lessons: [
+                    { id: "pe-evaluation", slug: "evaluating-prompts", title: "Evaluating and iterating on prompts" },
+                    { id: "pe-security", slug: "prompt-security", title: "Prompt security: injection and guardrails" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",
