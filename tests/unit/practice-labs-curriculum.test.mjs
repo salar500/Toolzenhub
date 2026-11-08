@@ -77,11 +77,10 @@ test("SQL: each lesson has all teaching sections, real examples and existing exe
 
 test("generated pages: one per node, unique addresses, one h1, title and description present, no raw markup leaks", async () => {
   const pages = learnPages();
-  const sql = PATHS.find((p) => p.id === "sql");
-  const modules = sql.levels.reduce((n, l) => n + l.modules.length, 0);
   const { projects: sqlProjects } = await import("../../assets/js/practice-labs/sql/additions-lessons.js");
-  const extras = 1 + sqlProjects.length + 1; /* projects index, each project, interview practice */
-  assert.equal(pages.length, 1 + DEPARTMENTS.filter(isPublished).length + 1 + sql.levels.length + modules + flatLessons(sql).length + extras);
+  const perPath = PATHS.reduce((n, path) => n + 1 + path.levels.length + path.levels.reduce((m, l) => m + l.modules.length, 0) + flatLessons(path).length, 0);
+  const extras = 1 + sqlProjects.length + 1; /* SQL: projects index, each project, interview practice */
+  assert.equal(pages.length, 1 + DEPARTMENTS.filter(isPublished).length + perPath + extras);
   assert.equal(new Set(pages.map((p) => p.url)).size, pages.length);
   for (const page of pages) {
     assert.equal((page.html.match(/<h1[ >]/g) || []).length, 1, page.url);
@@ -112,5 +111,22 @@ test("SQL path additions: valid exercise set, ids never collide with the lab, ev
     assert.ok(l.objectives.length >= 2 && l.check.length >= 2 && l.mistakes.length >= 2 && l.examples.length >= 1, l.id);
     for (const key of ["why", "analogy", "summary", "intro"]) assert.ok(l[key].length > 60, `${l.id}: ${key}`);
     for (const x of l.examples) assert.ok(x.columns.length > 0, `${l.id}: example without a result`);
+  }
+});
+
+test("Manual testing path: every lesson has content, blocks render, writing exercises exist", async () => {
+  const { lessons: mt } = await import("../../assets/js/practice-labs/manual-testing/lessons.js");
+  const { WRITING } = await import("../../assets/js/practice-labs/manual-testing/writing.js");
+  const path = PATHS.find((p) => p.id === "manual-testing");
+  const byId = new Map(mt.map((l) => [l.id, l]));
+  const writing = new Set(WRITING.map((w) => w.id));
+  for (const e of flatLessons(path)) {
+    const l = byId.get(e.lesson.id);
+    assert.ok(l, e.lesson.id);
+    assert.equal(l.level, e.level.id, e.lesson.id);
+    assert.ok(l.objectives.length >= 2 && l.check.length >= 2 && l.mistakes.length >= 2, l.id);
+    assert.ok(l.blocks.some((b) => ["quiz", "order", "write"].includes(b.type)), `${l.id}: needs a checked practice block`);
+    for (const b of l.blocks.filter((b) => b.type === "write")) assert.ok(writing.has(b.exercise), `${l.id}: ${b.exercise}`);
+    for (const b of l.blocks.filter((b) => b.type === "quiz")) for (const q of b.questions) assert.ok(q.answer >= 0 && q.answer < q.options.length, q.q);
   }
 });

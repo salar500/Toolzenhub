@@ -24,6 +24,9 @@ import { sqlExtras } from "./sql-extras.js";
 import { lessons as sqlNewLessons, projects as sqlProjects, interview as sqlInterview } from "./sql/additions-lessons.js";
 import { set as sqlNewSet, DATASET_NOTES } from "./sql/additions-data.js";
 import { joinMarkup } from "./join-visualizer.js";
+import { renderBlocks } from "./blocks-html.js";
+import { lessons as mtLessons } from "./manual-testing/lessons.js";
+import { WRITING as mtWriting } from "./manual-testing/writing.js";
 
 const SITE_NAME = "ToolZen Hub";
 const HUB = () => ROUTES.practiceLabs;
@@ -45,8 +48,18 @@ const CONTENT = {
         datasetNotes: DATASET_NOTES,
         projects: sqlProjects,
         interview: sqlInterview,
+        morePractice: "has its own exercise list and a free sandbox for any SQL you want to try.",
         labTool: "sql-practice-lab",
         flashcards: "smart-flashcards"
+    },
+    "manual-testing": {
+        kind: "blocks",
+        lessons: new Map(mtLessons.map((lesson) => [lesson.id, lesson])),
+        exercises: new Map(),
+        writing: new Map(mtWriting.map((exercise) => [exercise.id, exercise])),
+        labTool: "test-design-lab",
+        flashcards: "smart-flashcards",
+        morePractice: "drills boundary values and equivalence partitions with checked exercises; it pairs with the test data lessons."
     }
 };
 
@@ -256,6 +269,8 @@ function exerciseBlock(exercise, index, label = "Exercise") {
 
 function lessonBody(entry, content) {
 
+    if (content.kind === "blocks") return blocksLessonBody(entry, content);
+
     const { path, level, module, lesson, number, total, previous, next } = entry;
     const data = content.lessons.get(lesson.id);
     const exercises = data.practise.map((id) => content.exercises.get(id)).filter(Boolean);
@@ -380,6 +395,99 @@ function lessonBody(entry, content) {
 
 
 /* =========================================================
+   A LESSON OF A BLOCKS PATH (testing and other non-SQL subjects)
+   The same frame as an SQL lesson: header, lesson card, the idea, then the lesson's own blocks (practice comes early),
+   then why, analogy, mistakes, the check, summary, the pager and related links.
+========================================================= */
+
+function blocksLessonBody(entry, content) {
+
+    const { path, level, module, lesson, number, total, previous, next } = entry;
+    const data = content.lessons.get(lesson.id);
+    const lab = content.labTool ? getToolById(content.labTool) : null;
+    const cards = content.flashcards ? getToolById(content.flashcards) : null;
+    const siblings = module.lessons.filter((other) => other.id !== lesson.id);
+    const href = (e) => lessonUrl(e.path, e.level, e.module, e.lesson);
+
+    const prerequisite = data.prerequisite
+        ? esc(data.prerequisite)
+        : (previous ? `Lesson ${previous.number}, <a href="${esc(href(previous))}">${esc(previous.lesson.title)}</a>.` : "None.");
+
+    return `
+                <article class="learn-lesson">
+
+                <header class="learn-lesson__head">
+                    <p class="learn-eyebrow"><a href="${esc(pathUrl(path))}">${esc(path.title)}</a> · <a href="${esc(levelUrl(path, level))}">${esc(LEVELS[level.id].title)}</a> · <a href="${esc(moduleUrl(path, level, module))}">${esc(module.title)}</a></p>
+                    <h1>${esc(data.title)}</h1>
+                    <p class="learn-progress" aria-label="Lesson ${number} of ${total}">
+                        <span class="learn-progress__text">Lesson ${number} of ${total}</span>
+                        <span class="learn-progress__bar" aria-hidden="true"><span style="width:${Math.round(number / total * 100)}%"></span></span>
+                    </p>
+                </header>
+
+                <section class="learn-section learn-lesson-card" aria-labelledby="learn-objectives">
+                    <h2 id="learn-objectives">In this lesson</h2>
+                    ${list(data.objectives)}
+                    <p class="learn-lesson-card__before"><strong>Before you start:</strong> ${prerequisite}</p>
+                </section>
+
+                <section class="learn-section" aria-labelledby="learn-idea">
+                    <h2 id="learn-idea">The idea in plain words</h2>
+                    <p>${esc(data.intro)}</p>
+                </section>
+
+                ${renderBlocks(data.blocks, { quizBlock, writing: content.writing, idPrefix: lesson.id })}
+
+                <section class="learn-section" aria-labelledby="learn-why">
+                    <h2 id="learn-why">Why it matters at work</h2>
+                    <p>${esc(data.why)}</p>
+                </section>
+
+                <section class="learn-section learn-analogy" aria-labelledby="learn-analogy">
+                    <h2 id="learn-analogy">An everyday picture</h2>
+                    <p>${esc(data.analogy)}</p>
+                </section>
+
+                <section class="learn-section" aria-labelledby="learn-mistakes">
+                    <h2 id="learn-mistakes">Common mistakes</h2>
+                    ${list(data.mistakes)}
+                </section>
+
+                <section class="learn-section" aria-labelledby="learn-check">
+                    <h2 id="learn-check">Check your understanding</h2>
+                    ${data.check.map((item, index) => `
+                    <details class="learn-reveal">
+                        <summary>Question ${index + 1}: ${esc(item.q)}</summary>
+                        <p>${esc(item.a)}</p>
+                    </details>`).join("")}
+                </section>
+
+                <section class="learn-section" aria-labelledby="learn-summary">
+                    <h2 id="learn-summary">Summary</h2>
+                    <p>${esc(data.summary)}</p>
+                </section>
+
+                <nav class="learn-pager" aria-label="Lesson navigation">
+                    ${previous ? `<a class="learn-pager__link learn-pager__link--prev" rel="prev" href="${esc(href(previous))}"><span>Previous lesson</span>${esc(previous.lesson.title)}</a>` : `<span></span>`}
+                    ${next ? `<a class="learn-pager__link learn-pager__link--next" rel="next" href="${esc(href(next))}"><span>Next lesson</span>${esc(next.lesson.title)}</a>` : `<a class="learn-pager__link learn-pager__link--next" href="${esc(pathUrl(path))}"><span>You reached the end of the published lessons</span>Back to the ${esc(path.title)} learning path</a>`}
+                </nav>
+
+                <section class="learn-section learn-related" aria-labelledby="learn-related">
+                    <h2 id="learn-related">Keep going</h2>
+                    <ul>
+                        ${siblings.length ? `<li>More in this module, <a href="${esc(moduleUrl(path, level, module))}">${esc(module.title)}</a>: ${siblings.map((other) => `<a href="${esc(lessonUrl(path, level, module, other))}">${esc(other.title)}</a>`).join(", ")}.</li>` : ""}
+                        ${lab ? `<li>More practice: <a href="${esc(lab.href)}">${esc(lab.title)}</a>.</li>` : ""}
+                        ${cards ? `<li>Revise the terms with the <a href="${esc(cards.href)}">${esc(cards.title)}</a>.</li>` : ""}
+                        <li>The whole route: <a href="${esc(pathUrl(path))}">${esc(path.title)} learning path</a>.</li>
+                    </ul>
+                </section>
+
+                </article>`;
+
+}
+
+
+/* =========================================================
    PATH, LEVEL AND MODULE PAGES
 ========================================================= */
 
@@ -458,7 +566,7 @@ function pathBody(path, content) {
 
                 <section class="learn-section" aria-labelledby="learn-more-practice">
                     <h2 id="learn-more-practice">More practice</h2>
-                    <p>The <a href="${esc(lab.href)}">${esc(lab.title)}</a> has its own exercise list and a free sandbox for any SQL you want to try.</p>
+                    <p>The <a href="${esc(lab.href)}">${esc(lab.title)}</a> ${esc(content.morePractice)}</p>
                 </section>`;
 
 }

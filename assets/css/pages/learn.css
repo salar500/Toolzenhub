@@ -1093,3 +1093,100 @@ a.learn-card:hover {
     }
 
 }
+
+
+/* ---------- samples, ordering tasks and writing labs ---------- */
+
+.learn-sample {
+
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+
+}
+
+.learn-order,
+.learn-write {
+
+    padding: 14px 16px;
+
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface-card);
+
+}
+
+.learn-order__items {
+
+    padding-left: 0 !important;
+    list-style: none !important;
+
+}
+
+.learn-order__item {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 12px;
+
+    padding: 8px 0;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+.learn-order__pos {
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 14px;
+    color: var(--ink-muted);
+
+}
+
+.learn-order__pos select {
+
+    min-height: 44px;
+    min-width: 64px;
+
+}
+
+.learn-write__input {
+
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 44px;
+
+    font-size: 16px;
+
+}
+
+.learn-editor--text {
+
+    font-family: inherit;
+
+}
+
+.learn-write .lx-label {
+
+    display: block;
+
+    margin: 10px 0 4px;
+
+}
+
+.learn-rubric {
+
+    list-style: none !important;
+    padding-left: 0 !important;
+
+}
+
+.learn-rubric li[data-met="true"] strong {
+
+    color: var(--state-success);
+
+}

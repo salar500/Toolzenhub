@@ -34,12 +34,14 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 - **Project 6 merged.** The planned sixth project ("interview challenges") would have duplicated the interview page, so it became the interview page.
 - **Clinic data.** Patients are identified by synthetic codes, not names.
 
+| M3b | Manual Software Testing path published (department Software Testing now has a page): lessons 1 to 10 (modules What Testing Is, Testing in the Life Cycle, Writing Test Cases) rendered from typed blocks; quizzes, ordering tasks, 4 structured writing labs (requirement questions, scenarios, a test case, positive and negative data) with a deterministic rubric checker; ShopLite tasks linked from lessons | (this milestone's commit) | Unit tests (12: curriculum generic over paths; every MT lesson has checked practice; writing models meet and weak answers miss their rubric); 5,374 links on 63 pages resolve; at 1280 and 390: quiz, ordering (wrong rejected, right accepted), writing lab (weak answer 5 of 9 items, good answer all items, model opens), department lists the path, first task within 3 screens, no overflow | Lab pages, accessibility sweep |
+
 ## 3. Current inventory (built)
 
 | Item | Count |
 |---|---|
-| Learning-path pages | 47 (home, 3 departments, SQL: 1 path, 3 levels, 8 modules, 24 lessons, projects index, 5 projects, interview practice) |
-| Search index entries | 39 |
+| Learning-path pages | 62 (home, 4 departments; SQL: 40; Manual Testing: path, 1 level, 3 modules, 10 lessons) plus ShopLite |
+| Search index entries | 52 |
 | Labs (unchanged) | 7 |
 | Exercises | 223 in the labs + 50 in the SQL path (19 lesson tasks, 21 project milestones, 10 interview problems) + 10 concept questions |
 | Flashcards | 181 |
@@ -51,37 +53,13 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 - The Query Explainer (blueprint E8, stage-by-stage row counts) is not built. The query-plan lessons teach with real EXPLAIN QUERY PLAN output instead.
 - Database Engineering beyond SQL is planned only: design and modelling, PostgreSQL and database testing.
 
-## 5. Next checkpoint (exact resume point, 2026-11-08)
+## 5. Next checkpoint
 
-M3b is in progress. It is **committed locally and not pushed**, because nothing new is wired into pages yet. Files:
+**M3c:** Manual Testing modules 4 to 8 (lessons 11 to 24 per [06](06-curriculum-specifications.md), section 3) as blocks in `manual-testing/lessons.js`, adding the intermediate and advanced levels to `curriculum.js`. Also:
 
-| File | Content |
-|---|---|
-| `assets/js/practice-labs/writing-check.js` | Pure rubric checker |
-| `tests/unit/writing-check.test.mjs` | 3 passing tests |
-| `assets/js/practice-labs/manual-testing/writing.js` | 4 writing exercises, each with a model answer and weak answers |
-| `assets/js/practice-labs/manual-testing/lessons.js` | Lessons 1 to 10 (modules 1 to 3) as typed blocks |
-| `assets/js/practice-labs/blocks-html.js` | Build-time renderer for text, list, example, callout, quiz, order, write and shoplite blocks |
+- a bug-report writing lab (template bug report, in `manual-testing/writing.js`, with model and weak answers);
+- the **Bug Hunting Simulator** as project 1: ShopLite release 1.1 in an iframe (stacked on a phone), a report form (area from `AREAS`, title, steps, expected, actual, severity) calling `matchReport`, found count and area hints after 3 misses, all in memory;
+- a test plan writing lab;
+- interview practice.
 
-**Remaining steps for M3b, in order:**
-
-1. In `learn-html.js`, add `blocksLessonBody(entry, content)`. It renders the same header, lesson card and intro as the SQL lessons, then `renderBlocks(data.blocks, { quizBlock, writing: content.writing, idPrefix: lesson.id })`, then why, analogy, mistakes, check, summary, the pager and related links. Then:
-   - make `lessonBody` call it when `content.kind === "blocks"`;
-   - add `CONTENT["manual-testing"]` (kind "blocks", lessons, writing Map, labTool `test-design-lab`, `morePractice` text) and the `morePractice` text for SQL;
-   - make the path page's "More practice" text use `content.morePractice`.
-2. In `curriculum.js`, add the path `manual-testing` (department `software-testing`, status building, beginner level only: modules `what-testing-is`, `life-cycle` and `writing-test-cases` with the 10 lesson slugs, plus a `coming` list).
-3. In `departments.js`, give software-testing `paths: ["manual-testing"]`, an intro of 150+ words, a start link, and Manual testing as a "path" subject.
-4. Add `blocks-html.js` and `manual-testing/lessons.js` to BUILD_ONLY.
-5. Add client modules, loaded from `entries/learn.js` when present:
-   - `learn-writing.js`: collect `[data-field]` values, run `checkWriting`, list met and missing items, open the model answer after the first check, "Copy as text" to the clipboard;
-   - `learn-order.js`: `data-order` holds the correct index of each shown item; check the selects.
-6. Add CSS for `.learn-order`, `.learn-write` and `.learn-sample`. Update the curriculum unit test to be generic per path (lesson ids per content source, page counts).
-7. Checks: build; at 1280 and 390 a quiz, an order and a writing lab work (model passes, weak answer misses); no overflow; links resolve. Then commit and push, verify Pages, and record M3b here.
-
-A draft patch script for steps 1 to 4 is in the session scratchpad (`patch_mt.py`). It expects a `blocks_lesson.js` that was **not written yet**, so write `blocksLessonBody` directly.
-
-**After M3b:**
-
-- **M3c:** modules 4 to 8 (lessons 11 to 24 per [06](06-curriculum-specifications.md), section 3), with the Bug Hunting Simulator as a project. It shows ShopLite in an iframe plus a report form that calls `matchReport`; the bugs found are kept in memory only. Also a bug-report writing lab and the interview practice set.
-- **M3d:** the Test Design path, wrapping the Test Design Lab's 20 exercises.
-- Then Stages 4 to 11 per the mission.
+**Then:** M3d, the Test Design path wrapping the Test Design Lab; then Stages 4 to 11.

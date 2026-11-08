@@ -134,6 +134,65 @@ export const PATHS = Object.freeze([
         ],
         /* nothing announced as still to come: the path is complete (lessons, projects, interview practice) */
         coming: []
+    },
+    {
+        id: "manual-testing",
+        title: "Manual Software Testing",
+        department: "software-testing",
+        status: "building",
+        tagline: "Learn to test software from zero: requirements, test scenarios and test cases, bug reports and test planning, practised on ShopLite, a shop with real seeded bugs.",
+        audience: "Complete beginners, people starting a career in testing, and developers who want to test their own work better.",
+        runsIn: "Everything runs in your browser: quizzes, writing labs that check your test cases and bug reports, and ShopLite, a practice shop whose test release hides ten bugs. Nothing you write is uploaded.",
+        outcomes: [
+            "Explain how testing fits into software development and the testing life cycle",
+            "Read a requirement critically and turn it into test scenarios and test cases",
+            "Choose test data with positive and negative values at the boundaries",
+            "Find, describe and report defects that developers can act on"
+        ],
+        levels: [
+            {
+                id: "beginner",
+                modules: [
+                    {
+                        id: "what-testing-is",
+                        title: "What Testing Is",
+                        summary: "What testing is for, the seven principles every tester uses, and the difference between examining a document and running the software.",
+                        lessons: [
+                            { id: "mt-what-is-testing", slug: "what-is-software-testing", title: "What software testing is" },
+                            { id: "mt-principles", slug: "seven-testing-principles", title: "Seven principles of testing" },
+                            { id: "mt-static-dynamic", slug: "static-and-dynamic-testing", title: "Static and dynamic testing" }
+                        ]
+                    },
+                    {
+                        id: "life-cycle",
+                        title: "Testing in the Life Cycle",
+                        summary: "How development life cycles shape testing, the phases of the testing life cycle and the four test levels.",
+                        lessons: [
+                            { id: "mt-sdlc", slug: "software-development-life-cycles", title: "Software development life cycles" },
+                            { id: "mt-stlc", slug: "software-testing-life-cycle", title: "The software testing life cycle" },
+                            { id: "mt-test-levels", slug: "test-levels", title: "Test levels" }
+                        ]
+                    },
+                    {
+                        id: "writing-test-cases",
+                        title: "Writing Test Cases",
+                        summary: "From a requirement to questions, scenarios and precise test cases, with positive and negative data, checked by writing labs.",
+                        lessons: [
+                            { id: "mt-reading-requirements", slug: "reading-requirements", title: "Reading a requirement like a tester" },
+                            { id: "mt-test-scenarios", slug: "test-scenarios", title: "Test scenarios" },
+                            { id: "mt-test-cases", slug: "writing-test-cases", title: "Writing a good test case" },
+                            { id: "mt-positive-negative", slug: "positive-and-negative-testing", title: "Positive and negative testing" }
+                        ]
+                    }
+                ]
+            }
+        ],
+        coming: [
+            "Intermediate: test data and coverage, executing tests and writing bug reports, the bug life cycle, types of testing (functional, regression, smoke and sanity, exploratory)",
+            "Advanced: test planning, risk-based testing, testing in Agile teams and test metrics",
+            "Projects: a bug hunt on ShopLite's test release with checked bug reports, and a test plan for a release",
+            "Interview practice for manual testing"
+        ]
     }
 ]);
 

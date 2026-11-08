@@ -16,6 +16,14 @@ document.addEventListener(
         renderFooter();
         initSectionRail();
 
+        if (document.querySelector("[data-writing]")) {
+            import("../practice-labs/learn-writing.js").then((module) => module.initLearnWriting());
+        }
+
+        if (document.querySelector(".learn-order")) {
+            import("../practice-labs/learn-order.js").then((module) => module.initLearnOrder());
+        }
+
         if (document.querySelector(".learn-quiz")) {
             import("../practice-labs/learn-quiz.js").then((module) => module.initLearnQuiz());
         }
