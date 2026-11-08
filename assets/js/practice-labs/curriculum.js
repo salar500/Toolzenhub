@@ -185,10 +185,43 @@ export const PATHS = Object.freeze([
                         ]
                     }
                 ]
+            },
+            {
+                id: "intermediate",
+                modules: [
+                    {
+                        id: "test-data-coverage",
+                        title: "Test Data and Coverage",
+                        summary: "Choose data that finds defects and show what has been tested with a traceability matrix.",
+                        lessons: [
+                            { id: "mt-test-data", slug: "choosing-test-data", title: "Choosing test data" },
+                            { id: "mt-traceability", slug: "coverage-and-traceability", title: "Coverage and the traceability matrix" }
+                        ]
+                    },
+                    {
+                        id: "executing-reporting",
+                        title: "Executing Tests and Reporting Bugs",
+                        summary: "Run tests and record results honestly, write bug reports developers can act on, and follow a defect through its life cycle.",
+                        lessons: [
+                            { id: "mt-execution", slug: "executing-tests", title: "Executing tests and recording results" },
+                            { id: "mt-bug-reports", slug: "writing-bug-reports", title: "Writing a bug report developers can act on" },
+                            { id: "mt-bug-life-cycle", slug: "bug-life-cycle", title: "The bug life cycle" }
+                        ]
+                    },
+                    {
+                        id: "types-of-testing",
+                        title: "Types of Testing",
+                        summary: "Functional and non-functional testing, and when to run smoke, sanity and regression tests.",
+                        lessons: [
+                            { id: "mt-functional-nonfunctional", slug: "functional-and-non-functional-testing", title: "Functional and non-functional testing" },
+                            { id: "mt-smoke-sanity-regression", slug: "smoke-sanity-regression-testing", title: "Smoke, sanity and regression testing" }
+                        ]
+                    }
+                ]
             }
         ],
         coming: [
-            "Intermediate: test data and coverage, executing tests and writing bug reports, the bug life cycle, types of testing (functional, regression, smoke and sanity, exploratory)",
+            "Intermediate: exploratory testing, usability and compatibility testing",
             "Advanced: test planning, risk-based testing, testing in Agile teams and test metrics",
             "Projects: a bug hunt on ShopLite's test release with checked bug reports, and a test plan for a release",
             "Interview practice for manual testing"

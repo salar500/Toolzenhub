@@ -112,5 +112,42 @@ export const WRITING = Object.freeze([
             { name: "only typical values", answer: { positive: "3: accepted\n5: accepted", negative: "0\n-1\n-2" }, missing: ["pos-edges", "neg-above", "neg-kind", "neg-expected"] }
         ],
         explain: "Positive tests confirm valid input is handled; negative tests confirm invalid input is refused safely. The most useful values sit at and just beyond the edges (1, 10, 0, 11), plus values of the wrong kind. In ShopLite's release 1.1, a quantity of 0 is wrongly accepted: try it."
+    },
+    {
+        id: "mt-w-bug-report-delivery",
+        template: "bug-report",
+        task: "In ShopLite release 1.1, adding only the Office Chair Cushion (₹999) shows a delivery charge of ₹49. Write the bug report. Put each step on its own line and choose a severity (critical, major, minor or trivial).",
+        scenario: "R6: Delivery costs ₹49. It is free when the items total after any discount is ₹999 or more. Release 1.1, Chrome on Windows.",
+        fields: [
+            { name: "title", label: "Title", lines: 1 },
+            { name: "environment", label: "Environment (release, browser, device)", lines: 1 },
+            { name: "steps", label: "Steps to reproduce (one action per line)", lines: 5 },
+            { name: "expected", label: "Expected result", lines: 2 },
+            { name: "actual", label: "Actual result", lines: 2 },
+            { name: "severity", label: "Severity", lines: 1 }
+        ],
+        rules: [
+            { id: "title", type: "covers", fields: ["title"], groups: [["999"], ["delivery", "fee", "charge", "49"]], label: "Title says what fails and with which value", advice: "A good title names the failure and the condition: 'Delivery charged on a cart of exactly ₹999'." },
+            { id: "env", type: "covers", fields: ["environment"], groups: [["1.1", "release", "r-bugs-1", "build"], ["chrome", "firefox", "safari", "edge", "browser"]], label: "Environment names the release and the browser", advice: "Developers need the build or release and the browser to reproduce it." },
+            { id: "steps", type: "minLines", field: "steps", min: 3, label: "At least three steps", advice: "Start from a known state (empty cart) and list each action." },
+            { id: "atomic", type: "oneAction", field: "steps", label: "One action per step", advice: "Split steps joined with 'and then', 'then' or ';'." },
+            { id: "expected", type: "covers", fields: ["expected"], groups: [["free", "₹0", "no delivery"], ["999", "r6"]], label: "Expected result states free delivery and the rule", advice: "Say what should happen and why: free delivery, because R6 makes orders of ₹999 or more free." },
+            { id: "actual", type: "covers", fields: ["actual"], groups: [["49"]], label: "Actual result gives the exact charge", advice: "State exactly what you saw: ₹49 delivery is added." },
+            { id: "observable", type: "noVague", fields: ["expected", "actual"], label: "Results are specific, not vague", advice: "Avoid 'wrong', 'not working properly' or 'as expected': state values." },
+            { id: "severity", type: "choice", field: "severity", allowed: ["major", "Major"], label: "Severity fits the impact", advice: "Customers are overcharged on a common order value and there is a rule saying otherwise, but nothing is lost or exposed: major is the usual choice." }
+        ],
+        model: {
+            title: "Delivery fee of ₹49 charged on a cart of exactly ₹999",
+            environment: "ShopLite release 1.1, Chrome 141 on Windows 11",
+            steps: "Open ShopLite release 1.1 with an empty cart.\nAdd the Office Chair Cushion (₹999) to the cart.\nOpen the cart.\nRead the Delivery line of the summary.",
+            expected: "Delivery is Free, because R6 makes delivery free when the items total is ₹999 or more.",
+            actual: "Delivery shows ₹49 and the total is ₹1,048.",
+            severity: "major"
+        },
+        weak: [
+            { name: "vague", answer: { title: "Delivery bug", environment: "my laptop", steps: "Add the cushion and then open the cart", expected: "It should work properly", actual: "Wrong delivery", severity: "critical" }, missing: ["title", "env", "steps", "atomic", "expected", "actual", "observable", "severity"] },
+            { name: "no environment", answer: { title: "₹49 delivery charged on a ₹999 cart", environment: "", steps: "Open the shop\nAdd the Office Chair Cushion\nOpen the cart", expected: "Free delivery for ₹999 per R6", actual: "₹49 delivery added", severity: "major" }, missing: ["env"] }
+        ],
+        explain: "The model report lets a developer reproduce the problem in a minute: a specific title with the value, the release and browser, four single steps from an empty cart, the expected result tied to R6, and the exact actual charge. ₹999 is a boundary value, so the cause is very likely a > where >= was meant."
     }
 ]);

@@ -115,7 +115,9 @@ test("SQL path additions: valid exercise set, ids never collide with the lab, ev
 });
 
 test("Manual testing path: every lesson has content, blocks render, writing exercises exist", async () => {
-  const { lessons: mt } = await import("../../assets/js/practice-labs/manual-testing/lessons.js");
+  const { lessons: mt1 } = await import("../../assets/js/practice-labs/manual-testing/lessons.js");
+  const { lessons: mt2 } = await import("../../assets/js/practice-labs/manual-testing/lessons-2.js");
+  const mt = [...mt1, ...mt2];
   const { WRITING } = await import("../../assets/js/practice-labs/manual-testing/writing.js");
   const path = PATHS.find((p) => p.id === "manual-testing");
   const byId = new Map(mt.map((l) => [l.id, l]));

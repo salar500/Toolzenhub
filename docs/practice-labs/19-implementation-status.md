@@ -34,7 +34,9 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 - **Project 6 merged.** The planned sixth project ("interview challenges") would have duplicated the interview page, so it became the interview page.
 - **Clinic data.** Patients are identified by synthetic codes, not names.
 
-| M3b | Manual Software Testing path published (department Software Testing now has a page): lessons 1 to 10 (modules What Testing Is, Testing in the Life Cycle, Writing Test Cases) rendered from typed blocks; quizzes, ordering tasks, 4 structured writing labs (requirement questions, scenarios, a test case, positive and negative data) with a deterministic rubric checker; ShopLite tasks linked from lessons | (this milestone's commit) | Unit tests (12: curriculum generic over paths; every MT lesson has checked practice; writing models meet and weak answers miss their rubric); 5,374 links on 63 pages resolve; at 1280 and 390: quiz, ordering (wrong rejected, right accepted), writing lab (weak answer 5 of 9 items, good answer all items, model opens), department lists the path, first task within 3 screens, no overflow | Lab pages, accessibility sweep |
+| M3b | Manual Software Testing path published (department Software Testing now has a page): lessons 1 to 10 (modules What Testing Is, Testing in the Life Cycle, Writing Test Cases) rendered from typed blocks; quizzes, ordering tasks, 4 structured writing labs (requirement questions, scenarios, a test case, positive and negative data) with a deterministic rubric checker; ShopLite tasks linked from lessons | `4a054e4` | Unit tests (12: curriculum generic over paths; every MT lesson has checked practice; writing models meet and weak answers miss their rubric); 5,374 links on 63 pages resolve; at 1280 and 390: quiz, ordering (wrong rejected, right accepted), writing lab (weak answer 5 of 9 items, good answer all items, model opens), department lists the path, first task within 3 screens, no overflow | Lab pages, accessibility sweep |
+
+| M3c-1 | Manual Testing lessons 11 to 17 (Intermediate: Test Data and Coverage; Executing Tests and Reporting Bugs; Types of Testing) and the bug-report writing lab (model and two weak answers) | (this milestone's commit) | Unit tests (writing models and weak answers, curriculum 12 cases); at 1280 and 390: bug-report lab (weak answer not yet, good answer all items), bug life-cycle ordering accepted, no overflow; path roadmap lists 17 lessons | Other pages |
 
 ## 3. Current inventory (built)
 
@@ -55,7 +57,7 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 
 ## 5. Next checkpoint
 
-**M3c:** Manual Testing modules 4 to 8 (lessons 11 to 24 per [06](06-curriculum-specifications.md), section 3) as blocks in `manual-testing/lessons.js`, adding the intermediate and advanced levels to `curriculum.js`. Also:
+**M3c (remaining):** lessons 18 to 24 (exploratory, usability and compatibility testing; test planning; risk; Agile; acceptance criteria; metrics) and the items below. Lessons 11 to 17 are done. Original M3c scope: modules 4 to 8 (lessons 11 to 24 per [06](06-curriculum-specifications.md), section 3) as blocks in `manual-testing/lessons.js`, adding the intermediate and advanced levels to `curriculum.js`. Also:
 
 - a bug-report writing lab (template bug report, in `manual-testing/writing.js`, with model and weak answers);
 - the **Bug Hunting Simulator** as project 1: ShopLite release 1.1 in an iframe (stacked on a phone), a report form (area from `AREAS`, title, steps, expected, actual, severity) calling `matchReport`, found count and area hints after 3 misses, all in memory;
