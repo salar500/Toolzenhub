@@ -215,7 +215,7 @@ Milestones from M12 on are recorded here as sections rather than table rows.
     - no overflow.
   - 26,774 links on 360 pages resolve.
 
-#### M12f: API Test Automation and Selenium WebDriver with Java paths (commit: (this milestone's commit))
+#### M12f: API Test Automation and Selenium WebDriver with Java paths (commit: `d0728a6`)
 
 - **API Test Automation** has 5 lessons:
   - why automate at the API level;
@@ -242,6 +242,35 @@ Milestones from M12 on are recorded here as sections rather than table rows.
   - curriculum test;
   - at 1280 and 390 px, on the Selenium wait and API auth exercises: the starter is not yet met, the model meets every rule, the tool-specific run note shows, and there is no overflow;
   - 28,507 links on 387 pages resolve.
+
+#### M12g: Database Design and Testing path, with SQL playgrounds (commit: (this milestone's commit))
+
+- **Database Design and Testing** has 8 lessons:
+  - modelling;
+  - primary and foreign keys;
+  - normalisation from 1NF to 3NF;
+  - constraints;
+  - indexes and query plans;
+  - transactions, isolation and locking;
+  - PostgreSQL, MySQL and SQLite differences;
+  - database testing and integrity checks.
+- It also has interview practice (12 questions) and links to the SQL Practice Lab.
+- The Database Engineering department's design, dialect and testing items now point to this path.
+- **New `sqlplay` block:** an editable SQL textarea run on the SQL lab's real engine (sql.js in a Worker, a fresh copy of the ShopLite tables each run). `learn-practice.js` now reads a textarea's value as well as the code text of fixed examples.
+- The path has 10 playgrounds:
+  - a foreign-key violation;
+  - CHECK and DEFAULT constraints;
+  - a normalised join;
+  - a query plan before and after an index;
+  - a rollback;
+  - an upsert;
+  - orphan and duplicate checks.
+- **Checks performed:**
+  - `tests/unit/db-design.test.mjs` runs every playground with Python sqlite3 on the same setup. Each one errors or returns rows exactly as its lesson says: the foreign-key and CHECK messages, the upsert result `[1, 8]`, and the plan `USING INDEX`.
+  - Curriculum test.
+  - At 1280 and 390 px: the foreign-key error shows, the edited SQL runs, the plan shows the index search, and there is no overflow.
+  - Because the shared runner changed, I checked that an existing SQL path example still runs.
+  - 29,615 links on 403 pages resolve.
 
 ### Final inventory, 2026-11-08 (preview branch)
 
@@ -315,7 +344,7 @@ Milestones from M12 on are recorded here as sections rather than table rows.
    - Check in the browser: the new visualizers and the schema block, at 1280 and 390 px.
 2. *(Done in M12e.)* **Backend Fundamentals path**, reusing apitask and quizzes.
 3. *(Done in M12f.)* **API Automation and Selenium paths**: new codecheck exercises, plus predict blocks for the Selenium Java code.
-4. **Database design**, then **specialised testing** (API, database and accessibility testing), then **Excel and Power BI paths**.
+4. *(Database design done in M12g.)* **Database design**, then **specialised testing** (API, database and accessibility testing), then **Excel and Power BI paths**.
 5. **Final pass.**
    - Repair the multi-line rows of the milestone table (M7a onwards): they break the Markdown table.
    - Run the completion review.

@@ -19,6 +19,7 @@ import { getToolById } from "../data/tools.js";
 import { LEVELS, PRACTICE_LABS_PREFIX, flatLessons, getPath, lessonCount, lessonUrl, levelUrl, moduleUrl, pathUrl, publishedPaths } from "./curriculum.js";
 import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from "./departments.js";
 import { JOURNEYS } from "./journeys.js";
+import { lessons as ddLessons, interview as ddLessonsInterview } from "./sql/design-lessons.js";
 import { apiLessons as aaLessons, apiInterview as aaInterview, seLessons, seInterview } from "./automation/api-selenium-lessons.js";
 import { lessons as beLessons, interview as beLessonsInterview } from "./web/backend-lessons.js";
 import { lessons as peLessons, interview as peLessonsInterview } from "./ai/prompt-lessons.js";
@@ -244,6 +245,16 @@ const CONTENT = {
         labTool: null,
         flashcards: null,
         morePractice: ""
+    },
+    "database-design": {
+        kind: "blocks",
+        lessons: new Map(ddLessons.map((lesson) => [lesson.id, lesson])),
+        interview: ddLessonsInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: "sql-practice-lab",
+        flashcards: "smart-flashcards",
+        morePractice: "has 49 checked exercises and a free sandbox on the same tables, for practising the queries these lessons use."
     },
     "test-design": {
         kind: "blocks",

@@ -29,11 +29,11 @@ export const DEPARTMENTS = Object.freeze([
         technologies: [
             { title: "SQL", status: "path", path: "sql" },
             { title: "SQL Practice Lab (49 exercises and a sandbox)", status: "lab", lab: "sql-practice-lab" },
-            { title: "Database design and modelling", status: "planned" },
-            { title: "PostgreSQL in practice", status: "planned" },
-            { title: "Database testing", status: "planned" }
+            { title: "Database design and modelling", status: "path", path: "database-design" },
+            { title: "PostgreSQL, MySQL and SQLite differences", status: "path", path: "database-design" },
+            { title: "Database testing", status: "path", path: "database-design" }
         ],
-        paths: ["sql"],
+        paths: ["sql", "database-design"],
         labs: ["sql-practice-lab"],
         decks: ["SQL"],
         start: { label: "New to databases? Start with lesson 1 of the SQL path.", path: "sql" },

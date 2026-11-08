@@ -617,6 +617,36 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "database-design",
+        title: "Database Design and Testing",
+        department: "database-engineering",
+        status: "complete",
+        tagline: "Design databases that keep data correct: modelling, keys and relationships, normalisation, constraints, indexes, transactions and isolation, PostgreSQL and MySQL differences, and database testing, with SQL you run in your browser.",
+        audience: "Developers, testers and analysts who already write basic SQL and want to design schemas, reason about integrity and concurrency, and test data. The SQL path's beginner level comes first.",
+        runsIn: "Playgrounds run real SQLite (sql.js, the same engine as the SQL Practice Lab) in your browser on a fresh copy of the ShopLite tables; edit the SQL and run it again. Nothing is saved or sent.",
+        outcomes: ["Model entities and relationships", "Enforce integrity with keys and constraints", "Normalise to third normal form", "Read query plans and choose indexes", "Explain transactions, isolation and locking", "Handle dialect differences and test data integrity"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "designing-schemas", title: "Designing Schemas", summary: "Entities and relationships, primary and foreign keys, and normalisation, with SQL you run.", lessons: [
+                    { id: "dd-modelling", slug: "data-modelling", title: "Data modelling: entities, attributes and relationships" },
+                    { id: "dd-keys", slug: "keys-and-integrity", title: "Primary keys, foreign keys and referential integrity" },
+                    { id: "dd-normalisation", slug: "normalisation", title: "Normalisation: 1NF, 2NF and 3NF" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "rules-speed-safety", title: "Rules, Speed and Safety", summary: "Constraints, indexes and query plans, and transactions with isolation and locking.", lessons: [
+                    { id: "dd-constraints", slug: "constraints", title: "Constraints: NOT NULL, UNIQUE, CHECK and DEFAULT" },
+                    { id: "dd-indexes", slug: "indexes-and-plans", title: "Indexes and query plans" },
+                    { id: "dd-transactions", slug: "transactions-and-isolation", title: "Transactions, isolation and locking" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "databases-in-practice", title: "Databases in Practice", summary: "PostgreSQL, MySQL and SQLite differences, and database testing with integrity checks.", lessons: [
+                    { id: "dd-dialects", slug: "postgresql-mysql-sqlite", title: "PostgreSQL, MySQL and SQLite: the differences that matter" },
+                    { id: "dd-testing", slug: "database-testing", title: "Database testing and data integrity checks" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",

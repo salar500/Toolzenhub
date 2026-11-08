@@ -23,6 +23,7 @@
      predict   { heading?, exercise }                   predict the exact output of code (learn-predict.js)
      shellsim  { heading?, task }                       shell commands on an in-memory file system (learn-shellsim.js)
      schema    { heading?, exercise }                   write structured JSON output, validated against a schema (learn-schema.js)
+     sqlplay   { heading?, text, sql, expect }          editable SQL run on the SQL lab's engine (learn-practice.js); expect rows|error
      shoplite  { text, release? }                       a task on the practice shop, opened in a new tab
 ========================================================= */
 
@@ -52,6 +53,7 @@ function scramble(items) {
 export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
 
     let quizCount = 0;
+    let playIndex = 0;
 
     return blocks.map((block, index) => {
 
@@ -518,6 +520,23 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                             <pre class="lx-code" tabindex="0"><code>${esc(exercise.model)}</code></pre>
                             <p>${esc(exercise.explain)}</p>
                         </details>
+                    </div>
+                </section>`;
+        }
+
+        case "sqlplay": {
+            playIndex += 1;
+            const id = `${idPrefix}-sql-${playIndex}`;
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-example learn-write">
+                        <p>${esc(block.text)}</p>
+                        <label class="lx-label" for="${esc(id)}">SQL (edit it and run it again)</label>
+                        <textarea id="${esc(id)}" class="lx-textarea learn-editor" rows="${Math.min(12, block.sql.split("\n").length + 1)}" spellcheck="false" autocapitalize="off" autocomplete="off" data-sql-source>${esc(block.sql)}</textarea>
+                        <p><button type="button" class="calculator-form__button lx-btn" data-sql-run hidden>Run</button></p>
+                        <div class="lx-live-result" data-sql-out data-label="${esc(id)}" role="status" aria-live="polite"></div>
+                        <p class="lx-note">Runs real SQLite (sql.js) in your browser on a fresh copy of the ShopLite practice tables each time. Nothing is saved or sent.</p>
                     </div>
                 </section>`;
         }

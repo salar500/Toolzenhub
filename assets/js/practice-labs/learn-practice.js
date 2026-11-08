@@ -128,7 +128,8 @@ export function initLearnPractice() {
             if (!source || !out) return;
             busy(button, true);
             out.textContent = "Running...";
-            showResult(out, await runner.run({ setup: [...setup, ...(DATASETS[holder.dataset.dataset] ?? [])], sql: source.textContent }));
+            /* an editable playground (sqlplay block) has a textarea; a fixed example has code */
+            showResult(out, await runner.run({ setup: [...setup, ...(DATASETS[holder.dataset.dataset] ?? [])], sql: "value" in source ? source.value : source.textContent }));
             busy(button, false);
             return;
         }
