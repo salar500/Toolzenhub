@@ -161,6 +161,34 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                     </div>
                 </section>`;
 
+        case "locator": {
+            const url = `${SHOPLITE()}${block.screen ?? "#/"}`;
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-hunt learn-locator" data-locator>
+                        <p>${esc(block.text)}</p>
+                        <div class="learn-hunt__grid">
+                            <iframe class="learn-hunt__app" src="${esc(url)}" title="ShopLite, for locator practice" loading="lazy"></iframe>
+                            <div class="learn-hunt__panel">
+                                ${block.tasks.map((task, i) => `
+                                <div class="learn-locator__task" data-locator-task data-target="${esc(task.target)}" data-screen="${esc(task.screen ?? block.screen ?? "#/")}">
+                                    <p><strong>Task ${i + 1}.</strong> ${esc(task.prompt)}</p>
+                                    <div data-locator-tools hidden>
+                                        <label class="lx-label" for="${esc(idPrefix)}-loc-${i}">Your locator</label>
+                                        <input id="${esc(idPrefix)}-loc-${i}" class="lx-input learn-write__input learn-code-input" spellcheck="false" autocomplete="off" autocapitalize="off" value="page.">
+                                        <div class="learn-actions"><button type="button" class="calculator-form__button lx-btn" data-locator-check>Find it</button></div>
+                                        <p class="learn-feedback" data-locator-out role="status" aria-live="polite"></p>
+                                    </div>
+                                    <details class="learn-reveal"><summary>Hint and a model answer</summary><p>${esc(task.hint)}</p><pre class="lx-code"><code>${esc(task.model)}</code></pre></details>
+                                </div>`).join("")}
+                            </div>
+                        </div>
+                        <p class="lx-note">This practice uses a teaching evaluator of a subset of Playwright's locator rules, run on ShopLite in your browser. It is not Playwright itself; run the same locators in a real Playwright project to confirm.</p>
+                    </div>
+                </section>`;
+        }
+
         case "bughunt": {
             const release = block.release ?? "r-bugs-1";
             const bugs = BUGS.filter((b) => b.release === release);

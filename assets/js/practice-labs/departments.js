@@ -68,13 +68,19 @@ export const DEPARTMENTS = Object.freeze([
         title: "Automation Engineering",
         short: "Playwright-first browser and API test automation, from the first locator to a framework in CI.",
         audience: ["Testers moving into automation", "Developers who write end-to-end tests"],
-        intro: [],
-        technologies: [
-            { title: "Playwright", status: "planned" },
-            { title: "API test automation", status: "planned" },
-            { title: "Selenium WebDriver", status: "planned" }
+        intro: [
+            "Automation turns checks that people would repeat on every release into programs that run in minutes, on every build. It is one of the most requested skills in testing jobs, and it builds directly on manual testing: a good automated test is a good test case written in code.",
+            "This department starts with Playwright, the browser-testing framework from Microsoft that drives Chromium, Firefox and WebKit through one API, with TypeScript. You practise the skill that makes or breaks UI automation, finding elements reliably, directly in your browser on ShopLite, the same practice shop the testing department uses. A teaching evaluator checks each locator against ShopLite's real page and applies Playwright's strict-mode rule, and the page says plainly that it is a teaching subset.",
+            "Real Playwright runs need Node.js on your computer; the setup lesson walks through it. API test automation, Selenium for Java teams, framework design and CI follow as the department grows."
         ],
-        paths: [],
+        technologies: [
+            { title: "Playwright with TypeScript", status: "path", path: "playwright" },
+            { title: "API test automation", status: "planned" },
+            { title: "Selenium WebDriver", status: "planned" },
+            { title: "Framework design and CI", status: "planned" }
+        ],
+        paths: ["playwright"],
+        start: { label: "Start with lesson 1 of Playwright with TypeScript.", path: "playwright" },
         labs: [],
         decks: [],
         related: ["software-testing", "programming"]

@@ -128,7 +128,7 @@ test("Manual testing path: every lesson has content, blocks render, writing exer
     assert.ok(l, e.lesson.id);
     assert.equal(l.level, e.level.id, e.lesson.id);
     assert.ok(l.objectives.length >= 2 && l.check.length >= 2 && l.mistakes.length >= 2, l.id);
-    assert.ok(l.blocks.some((b) => ["quiz", "order", "write", "bughunt", "labset"].includes(b.type)), `${l.id}: needs a checked practice block`);
+    assert.ok(l.blocks.some((b) => ["quiz", "order", "write", "bughunt", "labset", "locator"].includes(b.type)), `${l.id}: needs a checked practice block`);
     for (const b of l.blocks.filter((b) => b.type === "write")) assert.ok(writing.has(b.exercise), `${l.id}: ${b.exercise}`);
     for (const b of l.blocks.filter((b) => b.type === "quiz")) for (const q of b.questions) assert.ok(q.answer >= 0 && q.answer < q.options.length, q.q);
   }

@@ -20,6 +20,10 @@ document.addEventListener(
             import("../practice-labs/learn-writing.js").then((module) => module.initLearnWriting());
         }
 
+        if (document.querySelector("[data-locator]")) {
+            import("../practice-labs/learn-locator.js").then((module) => module.initLocatorPractice());
+        }
+
         if (document.querySelector("[data-labset]")) {
             import("../practice-labs/learn-labset.js").then((module) => module.initLabsets());
         }

@@ -136,6 +136,35 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "playwright",
+        title: "Playwright with TypeScript",
+        department: "automation-engineering",
+        status: "building",
+        tagline: "Automate browser tests with Playwright: user-facing locators, web-first assertions and reliable tests, practised on ShopLite with locators you can try in your browser.",
+        audience: "Testers moving into automation and developers who write end-to-end tests. Manual testing basics help; the TypeScript you need is taught.",
+        runsIn: "Locator practice runs in your browser on ShopLite with a labelled teaching evaluator; quizzes are checked in the page. Real Playwright tests run on your own computer with Node.js, as the setup lesson shows.",
+        outcomes: ["Explain where automation helps and where it does not", "Set up a Playwright project and run tests", "Find elements with user-facing locators that satisfy strict mode", "Write complete tests with web-first assertions"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "automation-basics", title: "Automation and Playwright Basics", summary: "What to automate, how Playwright works, and a first project on your machine.", lessons: [
+                    { id: "pw-what-is-automation", slug: "what-is-test-automation", title: "What test automation is (and is not)" },
+                    { id: "pw-why-playwright", slug: "how-playwright-works", title: "Playwright and how it works" },
+                    { id: "pw-setup", slug: "setup-and-first-run", title: "Setting up and running your first test" }] },
+                { id: "just-enough-typescript", title: "Just Enough TypeScript", summary: "The TypeScript that test code needs, above all async and await.", lessons: [
+                    { id: "pw-typescript", slug: "typescript-for-testers", title: "Just enough TypeScript for tests" }] },
+                { id: "first-tests", title: "First Tests: Locators and Assertions", summary: "Find elements like a user, check outcomes with retrying assertions and put them together in a test.", lessons: [
+                    { id: "pw-locators", slug: "locators", title: "Locators: finding elements like a user" },
+                    { id: "pw-assertions", slug: "web-first-assertions", title: "Web-first assertions" },
+                    { id: "pw-first-test", slug: "writing-a-complete-test", title: "Writing a complete test" }] }
+            ] }
+        ],
+        coming: [
+            "Intermediate: actions and forms, navigation and waiting, frames and dialogs, hooks, fixtures and the Page Object Model, network mocking and API testing",
+            "Advanced: debugging with traces, fixing flaky tests, configuration, parallelism, reports and CI",
+            "A project automating ShopLite's sign-in, search and checkout, and interview practice"
+        ]
+    },
+    {
         id: "test-design",
         title: "Test Design Techniques",
         department: "software-testing",

@@ -30,6 +30,7 @@ import { lessons as mtLessons2 } from "./manual-testing/lessons-2.js";
 import { lessons as mtLessons3 } from "./manual-testing/lessons-3.js";
 import { interview as mtInterview } from "./manual-testing/interview.js";
 import { lessons as tdLessons } from "./test-design/lessons.js";
+import { lessons as pwLessons } from "./playwright/lessons.js";
 import { WRITING as mtWriting } from "./manual-testing/writing.js";
 
 const SITE_NAME = "ToolZen Hub";
@@ -55,6 +56,15 @@ const CONTENT = {
         morePractice: "has its own exercise list and a free sandbox for any SQL you want to try.",
         labTool: "sql-practice-lab",
         flashcards: "smart-flashcards"
+    },
+    playwright: {
+        kind: "blocks",
+        lessons: new Map(pwLessons.map((lesson) => [lesson.id, lesson])),
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: null,
+        flashcards: null,
+        morePractice: ""
     },
     "test-design": {
         kind: "blocks",
@@ -514,7 +524,7 @@ function pathBody(path, content) {
 
     const all = flatLessons(path);
     const first = all[0];
-    const lab = getToolById(content.labTool);
+    const lab = content.labTool ? getToolById(content.labTool) : null;
 
     return `
                 ${intro({ eyebrow: "Learning path", title: `${path.title}: from zero to confident`, text: path.tagline })}
@@ -578,10 +588,11 @@ function pathBody(path, content) {
                     ${list(path.coming)}
                 </section>` : ""}
 
+                ${lab ? `
                 <section class="learn-section" aria-labelledby="learn-more-practice">
                     <h2 id="learn-more-practice">More practice</h2>
                     <p>The <a href="${esc(lab.href)}">${esc(lab.title)}</a> ${esc(content.morePractice)}</p>
-                </section>`;
+                </section>` : ""}`;
 
 }
 

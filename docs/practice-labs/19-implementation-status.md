@@ -42,7 +42,9 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 
 | M3c-3 | Manual Testing **complete**: interview practice (15 scenario questions; the interview page now supports paths without coding problems), a test-plan writing lab in the test-plan lesson; path status complete | `c8d7a9c` | Unit tests (writing 3, curriculum 9); at 1280 and 390: MT interview (15 questions, no coding section, quiz works, no overflow), test-plan lab not-yet for a vague plan; SQL interview unchanged (10 + 10); MT path has no "still to come"; 7,523 links on 85 pages resolve | Other pages |
 
-| M3d | **Test Design Techniques** path (complete): 6 lessons over 3 levels (partitions, boundaries, decision tables, state transitions, pairwise, use cases and error guessing). The new `labset` block mounts the shared lab shell inside a lesson on the Test Design Lab's own exercises (all 20, each used once), with its own evaluator and partition input; the lab page is unchanged | (this milestone's commit) | Unit test (10: every lab exercise used exactly once); at 1280 and 390: lab shell mounted in the lesson, a wrong answer flagged, 17/18/65/66 accepted, no overflow; department lists both paths; 8,375 links on 98 pages resolve | Lab page itself |
+| M3d | **Test Design Techniques** path (complete): 6 lessons over 3 levels (partitions, boundaries, decision tables, state transitions, pairwise, use cases and error guessing). The new `labset` block mounts the shared lab shell inside a lesson on the Test Design Lab's own exercises (all 20, each used once), with its own evaluator and partition input; the lab page is unchanged | `3a32b81` | Unit test (10: every lab exercise used exactly once); at 1280 and 390: lab shell mounted in the lesson, a wrong answer flagged, 17/18/65/66 accepted, no overflow; department lists both paths; 8,375 links on 98 pages resolve | Lab page itself |
+
+| M4a | Stage 4 begins: **Automation Engineering** department published, with the **Playwright with TypeScript** path at beginner level (7 lessons: automation basics, how Playwright works, setup (run locally), TypeScript for tests, locators, web-first assertions, a complete test). A new teaching **locator evaluator** (`automation/locator.js`: getByRole for 20 roles, getByLabel, getByText, getByPlaceholder, getByTestId, CSS, filter, first, last, nth; accessible-name subset) and a **locator practice** block on ShopLite that enforces strict mode, labelled "not Playwright itself" | (this milestone's commit) | Parser unit test (2); curriculum test (12); at 1280 and 390: all 5 model locators solve their tasks; an ambiguous locator gets the "24 elements match" strict-mode message; no overflow; 9,240 links on 111 pages resolve. One defect found and fixed: the frame did not switch screens (`startsWith`) | Real Playwright runs (by design, local only) |
 
 ## 3. Current inventory (built)
 
@@ -63,12 +65,18 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 
 ## 5. Next checkpoint
 
-**Stage 3 (Software Testing) done:** Manual Testing and Test Design are complete. API testing and accessibility testing come later with the Web/API tooling.
+**Playwright intermediate and advanced, as blocks in `playwright/lessons-2.js`:**
 
-**Next:** Stage 4, Automation Engineering. Playwright first:
+- actions and forms;
+- navigation and waiting;
+- frames and dialogs;
+- hooks and fixtures;
+- the Page Object Model;
+- network mocking and API testing;
+- debugging and traces;
+- flaky tests;
+- configuration and CI.
 
-- an E7 locator evaluator against ShopLite;
-- static and simulated code checks, labelled "simulated";
-- a downloadable starter project ([18](18-department-specifications.md), D2).
+Add a code-check block: static rules on test code (await present, no `waitForTimeout`, user-facing locators), labelled "simulated". Also a project and an interview page.
 
 **Then:** Stages 5 to 11.

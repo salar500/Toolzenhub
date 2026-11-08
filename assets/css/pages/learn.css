@@ -1244,3 +1244,21 @@ a.learn-card:hover {
     }
 
 }
+
+
+/* ---------- locator practice ---------- */
+
+.learn-locator__task {
+
+    margin: 0 0 14px;
+    padding: 0 0 12px;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+.learn-code-input {
+
+    font-family: var(--font-mono, ui-monospace, monospace);
+
+}
