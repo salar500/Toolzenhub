@@ -20,6 +20,14 @@ document.addEventListener(
             import("../practice-labs/learn-writing.js").then((module) => module.initLearnWriting());
         }
 
+        if (document.querySelector("[data-pyrun]")) {
+            import("../practice-labs/learn-pyrun.js").then((module) => module.initPyRun());
+        }
+
+        if (document.querySelector("[data-predict]")) {
+            import("../practice-labs/learn-predict.js").then((module) => module.initPredict());
+        }
+
         if (document.querySelector("[data-gitsim]")) {
             import("../practice-labs/learn-gitsim.js").then((module) => module.initGitSim());
         }

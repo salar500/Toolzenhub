@@ -108,7 +108,44 @@ Both paths have interview practice (12 questions each). The Cron Challenge Lab i
 
 - The Practice Labs home page gains "Journeys by role" (`journeys.js`). Seven journeys (QA, automation, data analyst, web developer, backend developer, AI engineer and tester, DevOps) order existing paths and labs across departments. A unit test checks that every step resolves to a published path or lab.
 - Review: the search index covers every path, lesson, project and interview page (172 entries); all 8 departments are published; no path is in "building" status.
-- One stale home-page sentence ("the others are being built") was reworded | (this milestone's commit) | 29 focused unit tests across the Practice Labs suites. At 1280 and 390: 7 journeys, the first opens with 5 linked steps, no "In development" cards, no overflow, and search finds the new Git lesson. 19,093 links on 249 pages resolve | See section 4 for honest limits |
+- One stale home-page sentence ("the others are being built") was reworded | `97770d8` | 29 focused unit tests across the Practice Labs suites. At 1280 and 390: 7 journeys, the first opens with 5 linked steps, no "In development" cards, no overflow, and search finds the new Git lesson. 19,093 links on 249 pages resolve | See section 4 for honest limits |
+
+### Milestone log (continued)
+
+Milestones from M12 on are recorded here as sections rather than table rows.
+
+#### M12a: Python and Java Programming paths (commit: (this milestone's commit))
+
+- **Python Programming** has 10 lessons:
+  - Beginner: basics, conditions and arithmetic, loops and lists, dictionaries and sets.
+  - Intermediate: scope, defaults and comprehensions; exceptions; classes; files and modules.
+  - Advanced: problem solving; pytest.
+  - It also has interview practice (12 questions).
+- **Pyodide 314.0.7** (MPL-2.0) is vendored unmodified in `assets/js/vendor/pyodide/`, about 13.4 MB, with VERSION and LICENSE files, following rule D3 and the sql.js precedent:
+  - It is same-origin and loaded only when the learner presses "Load Python".
+  - It runs in a module Worker (`programming/py-worker.js`) that removes network APIs after start-up.
+  - A run is stopped after 10 s, and Python then reloads on the next run.
+- **New `pyrun` block:** 11 exercises with a shared Python harness (`programming/py-harness.js`). The same harness pins every model, buggy version and starter with the local CPython 3.10 (`tests/unit/py-exercises.test.mjs`).
+- **Java Programming** has 9 lessons:
+  - Types, strings and equality, loops and arrays.
+  - Methods and pass-by-value, classes, inheritance and polymorphism, collections.
+  - Exceptions, streams and JUnit.
+  - It also has interview practice (12 questions).
+- **Java does not run in the page.** This is the D4 fallback: TeaVM's licence, real size and behaviour on phones were not confirmed.
+- **New `predict` block:** output prediction for 14 Java and 4 Python programs. A hint appears on the second wrong try. Every expected output was produced by real `java Main.java` (JDK 17) and CPython (`tests/unit/predict.test.mjs`), and each page labels the exercise "not executed".
+- **Checks performed:**
+  - Unit tests: Python exercises (2), predictions (3) and the curriculum test.
+  - Chrome at 1280 px:
+    - no Pyodide request before the click;
+    - Python loads in about 5.7 s locally;
+    - the starter fails, the buggy version shows 2 of 3 with its printed output, and the model passes;
+    - a second exercise reuses the loaded runtime;
+    - `js.fetch` from Python fails;
+    - an endless loop is stopped at 10 s and the page stays responsive;
+    - no outside requests;
+    - a wrong Java prediction gives the hint on the second try, and the right one is accepted.
+  - Phone (390 px): no overflow on the Java or Python lesson pages.
+- **Deployment note:** the production server must serve `.mjs` as JavaScript and `.wasm` as `application/wasm`. GitHub Pages does both; the Hostinger configuration was not checked or touched.
 
 ### Final inventory, 2026-11-08 (preview branch)
 
@@ -173,4 +210,4 @@ Both paths have interview practice (12 questions each). The Cron Challenge Lab i
 
 ## 5. Next checkpoint
 
-The ecosystem build for this mission is complete on the preview branch. Recommended next step for the owner: review the GitHub Pages preview and decide whether to run one full regression before any merge or production work. Production (Hostinger) is untouched.
+**In progress (final remaining-development prompt):** Python and Java are done. The order of what remains: Shell simulator with Linux path; Prompt Engineering; Machine Learning; Backend Fundamentals; API Automation and Selenium; database design; specialised testing; Excel and Power BI paths; Kubernetes; then a final review.

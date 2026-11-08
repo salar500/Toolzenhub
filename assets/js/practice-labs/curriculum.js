@@ -354,6 +354,69 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "python",
+        title: "Python Programming",
+        department: "programming",
+        status: "complete",
+        tagline: "Learn Python from first functions to classes, files, problem solving and pytest, writing code that runs as real Python in your browser.",
+        audience: "Beginners to programming, testers and analysts who want to script, and anyone preparing for data, AI or automation work.",
+        runsIn: "Exercises run real Python (Pyodide: CPython compiled to WebAssembly) in an isolated worker in your browser. It loads only when you press Load Python (about 13 MB, once, then cached). Nothing you write is stored or sent.",
+        outcomes: ["Write Python functions with conditions and loops", "Use lists, dictionaries, sets and strings", "Avoid scope and mutable-default traps", "Handle exceptions and validate input", "Write classes and work with files", "Solve problems efficiently and test with pytest"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "python-basics", title: "Python Basics", summary: "Values, functions, conditions, arithmetic, loops, lists, dictionaries and sets, with code that runs as real Python.", lessons: [
+                    { id: "py-first-steps", slug: "values-variables-functions", title: "Python basics: values, variables and functions" },
+                    { id: "py-conditions-numbers", slug: "conditions-and-arithmetic", title: "Conditions and arithmetic" },
+                    { id: "py-loops-lists", slug: "loops-lists-ranges", title: "Loops, lists and ranges" },
+                    { id: "py-dicts-sets", slug: "dictionaries-sets-strings", title: "Dictionaries, sets and strings" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "python-in-depth", title: "Python in Depth", summary: "Scope, defaults and comprehensions, exceptions, classes, files and the standard library.", lessons: [
+                    { id: "py-functions-scope", slug: "scope-defaults-comprehensions", title: "Functions in depth: scope, defaults and comprehensions" },
+                    { id: "py-errors", slug: "exceptions-and-validation", title: "Exceptions and input validation" },
+                    { id: "py-oop", slug: "classes-and-objects", title: "Classes and objects" },
+                    { id: "py-files-modules", slug: "files-and-modules", title: "Files, modules and the standard library" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "python-professional", title: "Professional Python", summary: "Problem solving with the right data structures, and unit testing with pytest.", lessons: [
+                    { id: "py-algorithms", slug: "problem-solving-and-complexity", title: "Problem solving and complexity in Python" },
+                    { id: "py-testing", slug: "testing-with-pytest", title: "Testing Python code with pytest" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
+        id: "java",
+        title: "Java Programming",
+        department: "programming",
+        status: "complete",
+        tagline: "Learn Java's types, strings, loops, methods, classes, inheritance, collections, exceptions and streams by reading real programs and predicting exactly what they print.",
+        audience: "Beginners heading for Java back-end or Selenium with Java, and developers preparing for Java interviews. Earlier programming practice helps.",
+        runsIn: "Java does not run in this page. Each program's output was recorded by compiling and running it with Java 17; you predict it exactly and the check compares your answer. To run Java yourself, install a JDK and use java Main.java.",
+        outcomes: ["Predict integer division, string joining and equality", "Write methods and explain pass-by-value", "Design classes with encapsulation", "Use inheritance, interfaces and polymorphism", "Choose List, Set and Map", "Handle exceptions and read stream pipelines"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "java-foundations", title: "Java Foundations", summary: "Types and output, strings, equality, null, conditions, loops and arrays.", lessons: [
+                    { id: "java-basics", slug: "types-variables-output", title: "Java basics: types, variables and output" },
+                    { id: "java-strings-conditions", slug: "strings-equality-conditions", title: "Strings, equality and conditions" },
+                    { id: "java-loops-arrays", slug: "loops-and-arrays", title: "Loops and arrays" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "object-oriented-java", title: "Object-Oriented Java", summary: "Methods and pass-by-value, classes and encapsulation, inheritance and polymorphism, and collections.", lessons: [
+                    { id: "java-methods", slug: "methods-and-pass-by-value", title: "Methods, overloading and pass-by-value" },
+                    { id: "java-classes", slug: "classes-and-encapsulation", title: "Classes, objects and encapsulation" },
+                    { id: "java-inheritance", slug: "inheritance-and-polymorphism", title: "Inheritance, interfaces and polymorphism" },
+                    { id: "java-collections", slug: "collections", title: "Collections: List, Map and Set" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "modern-java", title: "Modern and Robust Java", summary: "Exceptions with try-with-resources, and streams, lambdas and JUnit tests.", lessons: [
+                    { id: "java-exceptions", slug: "exceptions", title: "Exceptions and error handling" },
+                    { id: "java-streams-testing", slug: "streams-and-junit", title: "Streams, lambdas and unit testing with JUnit" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",

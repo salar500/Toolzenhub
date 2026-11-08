@@ -19,6 +19,8 @@ import { getToolById } from "../data/tools.js";
 import { LEVELS, PRACTICE_LABS_PREFIX, flatLessons, getPath, lessonCount, lessonUrl, levelUrl, moduleUrl, pathUrl, publishedPaths } from "./curriculum.js";
 import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from "./departments.js";
 import { JOURNEYS } from "./journeys.js";
+import { lessons as javaLessons, interview as javaLessonsInterview } from "./programming/java-lessons.js";
+import { lessons as pyLessons, interview as pyLessonsInterview } from "./programming/python-lessons.js";
 import { lessons as sqlLessons } from "../tools/sql-practice-lab/lessons.js";
 import { set as sqlSet } from "../tools/sql-practice-lab/exercises.js";
 import { sqlExtras } from "./sql-extras.js";
@@ -145,6 +147,26 @@ const CONTENT = {
         writing: new Map(),
         labTool: null,
         flashcards: "smart-flashcards",
+        morePractice: ""
+    },
+    "python": {
+        kind: "blocks",
+        lessons: new Map(pyLessons.map((lesson) => [lesson.id, lesson])),
+        interview: pyLessonsInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: null,
+        flashcards: null,
+        morePractice: ""
+    },
+    "java": {
+        kind: "blocks",
+        lessons: new Map(javaLessons.map((lesson) => [lesson.id, lesson])),
+        interview: javaLessonsInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: null,
+        flashcards: null,
         morePractice: ""
     },
     "test-design": {

@@ -138,14 +138,14 @@ export const DEPARTMENTS = Object.freeze([
         intro: [
             "Programming is the skill underneath almost every technical role: developers build products with it, testers automate with it, analysts and data engineers script with it. Learning to break a problem into steps and express them precisely pays off in every department of these Practice Labs.",
             "This department starts with JavaScript, the language of the web and of Playwright, so it leads straight into Automation Engineering. You write real functions from the first lesson, and each exercise runs your code against its tests in your own browser, inside an isolated worker with no network access that is stopped after two seconds if a loop never ends. You see which test passed, which failed, what your function returned and anything you logged.",
-            "The path goes from values, conditions and loops through arrays, objects and modern array methods to validation, asynchronous code, classic interview problems and clean, tested code. Python and Java follow as the department grows; where a language cannot run in the browser without a large download, its lessons will say so plainly and use code reading and checked questions instead."
+            "The JavaScript path goes from values and loops to asynchronous code, interview problems and tested code. The Python path runs real Python in your browser through Pyodide, which loads only when you ask (about 13 MB, once) and runs in an isolated worker. The Java path is honest about its limits: Java does not run in the page, so you read real programs and predict exactly what they print, with every expected output recorded by compiling and running the code with Java 17."
         ],
         technologies: [
             { title: "JavaScript", status: "path", path: "javascript" },
-            { title: "Python", status: "planned" },
-            { title: "Java", status: "planned" }
+            { title: "Python", status: "path", path: "python" },
+            { title: "Java", status: "path", path: "java" }
         ],
-        paths: ["javascript"],
+        paths: ["javascript", "python", "java"],
         start: { label: "Start with lesson 1 of JavaScript Programming.", path: "javascript" },
         labs: [],
         decks: [],

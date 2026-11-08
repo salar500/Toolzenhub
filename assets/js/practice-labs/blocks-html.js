@@ -19,6 +19,8 @@
      apitask   { heading?, task }                       an HTTP request answered by the in-page mock API (learn-api.js)
      webplay   { heading?, exercise }                   HTML and CSS rendered in a script-free sandboxed iframe and checked (learn-webplay.js)
      gitsim    { heading?, task }                       git commands on a modelled repository (learn-gitsim.js)
+     pyrun     { heading?, exercise }                   Python run in Pyodide, loaded only on request (learn-pyrun.js)
+     predict   { heading?, exercise }                   predict the exact output of code (learn-predict.js)
      shoplite  { text, release? }                       a task on the practice shop, opened in a new tab
 ========================================================= */
 
@@ -30,6 +32,8 @@ import { JS_EXERCISES } from "./programming/js-exercises.js";
 import { API_TASKS, API_HOST } from "./web/mock-api.js";
 import { WEB_EXERCISES } from "./web/web-exercises.js";
 import { GIT_TASKS } from "./devops/git-tasks.js";
+import { PY_EXERCISES } from "./programming/py-exercises.js";
+import { PREDICT } from "./programming/predict.js";
 import { DATASETS, NUMERIC, formatAnswer } from "./data/stats.js";
 
 const SHOPLITE = () => `${SITE_ROOT}practice-labs/shoplite/`;
@@ -395,6 +399,61 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                             <summary>Show commands that work and why</summary>
                             <pre class="lx-code" tabindex="0"><code>${esc(task.model.join("\n"))}</code></pre>
                             <p>${esc(task.explain)}</p>
+                        </details>
+                    </div>
+                </section>`;
+        }
+
+        case "pyrun": {
+            const exercise = PY_EXERCISES.find((c) => c.id === block.exercise);
+            if (!exercise) throw new Error(`unknown Python exercise ${block.exercise}`);
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-write" data-pyrun="${esc(exercise.id)}">
+                        <p>${esc(exercise.task)}</p>
+                        <div data-py-tools hidden>
+                            <p class="learn-feedback" data-py-status role="status" aria-live="polite">Python is not loaded yet. Nothing is downloaded until you ask.</p>
+                            <div class="learn-actions"><button type="button" class="calculator-form__button calculator-form__button--secondary lx-btn" data-py-load>Load Python (about 13 MB, once)</button></div>
+                            <label class="lx-label" for="${esc(exercise.id)}-code">Your code</label>
+                            <textarea id="${esc(exercise.id)}-code" class="lx-textarea learn-editor" rows="9" spellcheck="false" autocapitalize="off" autocomplete="off" maxlength="6000">${esc(exercise.starter)}</textarea>
+                            <div class="learn-actions">
+                                <button type="button" class="calculator-form__button lx-btn" data-py-run>Run the tests</button>
+                                <button type="button" class="calculator-form__button calculator-form__button--secondary lx-btn" data-py-reset>Start again</button>
+                            </div>
+                            <div class="learn-feedback" data-py-out role="status" aria-live="polite"></div>
+                        </div>
+                        <p class="lx-note">Real Python (Pyodide, CPython compiled to WebAssembly) runs in your browser, in a worker without network access, and is stopped after 10 seconds. Your code is not stored or sent. Tests: ${exercise.tests.length}.</p>
+                        <details class="learn-reveal">
+                            <summary>Show a model answer and why</summary>
+                            <pre class="lx-code" tabindex="0"><code>${esc(exercise.model)}</code></pre>
+                            <p>${esc(exercise.explain)}</p>
+                        </details>
+                    </div>
+                </section>`;
+        }
+
+        case "predict": {
+            const exercise = PREDICT.find((c) => c.id === block.exercise);
+            if (!exercise) throw new Error(`unknown prediction exercise ${block.exercise}`);
+            const lang = exercise.lang === "java" ? "Java" : "Python";
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-write" data-predict="${esc(exercise.id)}">
+                        <p>What does this ${lang} program print? Type the output exactly, one line per line.</p>
+                        <pre class="lx-code" tabindex="0"><code>${esc(exercise.code)}</code></pre>
+                        <div data-pred-tools hidden>
+                            <label class="lx-label" for="${esc(exercise.id)}-out">Predicted output</label>
+                            <textarea id="${esc(exercise.id)}-out" class="lx-textarea learn-editor" rows="${Math.min(8, exercise.output.split("\n").length + 1)}" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+                            <div class="learn-actions"><button type="button" class="calculator-form__button lx-btn" data-pred-check>Check</button></div>
+                            <p class="learn-feedback" data-pred-out role="status" aria-live="polite"></p>
+                        </div>
+                        <p class="lx-note">${exercise.lang === "java" ? "Not executed in your browser: the expected output was recorded by compiling and running this code with Java 17." : "Not executed here: the expected output was recorded with CPython; Python exercises elsewhere on this path run real Python."}</p>
+                        <details class="learn-reveal">
+                            <summary>Show the output and why</summary>
+                            <pre class="lx-code" tabindex="0"><code>${esc(exercise.output)}</code></pre>
+                            <p>${esc(exercise.explain)}</p>
                         </details>
                     </div>
                 </section>`;
