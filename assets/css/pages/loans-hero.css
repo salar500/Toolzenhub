@@ -90,9 +90,11 @@
 
     display: flex;
 
+    flex-wrap: wrap;
+
     align-items: center;
 
-    gap: 9px;
+    gap: 2px 9px;
 
     padding: 9px 14px;
 
@@ -109,6 +111,13 @@
     font-weight: 600;
 }
 
+
+/* each claim stays whole; when the column is narrow the claims wrap, not the words inside one */
+.loans-hero__trust span {
+
+    white-space: nowrap;
+
+}
 
 .loans-hero__trust-icon {
 

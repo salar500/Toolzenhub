@@ -290,3 +290,19 @@ Why: sections 6 and 12 made the sidebar present on every ecosystem page, but eac
 | Not stored | nothing is saved to make this work |
 | Sidebar or drawer | decided by `ui/nav-mode.js` (`WIDE`, `drawerZoom`), mirrored in `section-switcher.css`: layout width >= 1000 px and (fine pointer or screen >= 1000 px) gives the sidebar; anything else the drawer. A phone in "Desktop site" mode gets the drawer, scaled by layout width / screen width (max 4) so it fills about 83% of the screen |
 | Phone bar and drawer | `section-switcher.js` adds the `.section-switcher__now` label (current tool, category or overview) and the `.section-switcher__all` hub link, both hidden on the wide sidebar. `section-switcher.css` (narrow block): the closed navigation is a sticky 44 px bar (icon, "Menu", the tool name on up to two lines), sized with `--z` (the page's zoom factor, from `nav-mode.js`) instead of the CSS `zoom` property, which does not scale its percentage width; from a 960 px layout it sticks under the sticky site header; `html body:has(.section-switcher.is-drawer)` uses `overflow-x: clip` because the tool pages' phone stylesheet makes the body a scroll container, which stops sticky. Open, the drawer is `--rail-w` screen px wide (`drawerWidth()` in `nav-mode.js`: screen less 72, between 240 and 300), the overview row and a 44 px close icon stay pinned at its top, the list has no box of its own and rows are at least 44 px; `is-drawer-open` (set by `section-rail.js`) raises it over the backdrop, focus goes to Close and the current tool is scrolled into view. `workspace-nav.js` keeps the label current and treats the hub link as an ordinary navigation |
+
+## 14. One page frame for every ecosystem page (2026-11-08)
+
+Why: a tool page, a category page, a toolkit's own page, Practice Labs, the Calculators landing and Loans each styled their own breadcrumb and top spacing, so on desktop the breadcrumb sat at 16 px or 13 px, flush with the header or 46 px below it, inside the content column or above the sidebar, and the Calculators landing heading was centred. On a phone the first control of a calculator started about 680 px down an 844 px screen.
+
+| Item | Built (`components/section-switcher.css`, section "One page frame") |
+|---|---|
+| Breadcrumb | one row above the sidebar and the workspace on every page type, 13 px, the same colours, 16 px below it (6 px on a phone, where the bar follows). Tool pages' breadcrumb now spans both grid columns (the old rule matched `.breadcrumb`, which tool pages do not use). Loans' own breadcrumb moved out of the workspace into the same row (`src/loans.njk`) |
+| Gap under the site header | 20 px on every page type (8 px on a phone) |
+| Heading | a toolkit landing's heading is left-aligned in the workspace (the Calculators landing was centred) |
+| Phone spacing | intro gap and padding, the trust card's box, the section gap and the "Jump to result" margin trimmed; the first control of a calculator moved up about 50 to 60 px (EMI 681 to 621, Stopwatch 572 to 524, JSON Formatter 468 to 420) |
+| Loans on a phone | its sections no longer add a second 16 px container inside the workspace (cards were inset 32 px, now 16 px, like the other pages), and the hero's trust claims wrap as whole claims (`pages/loans-hero.css`) |
+| Not changed | the desktop sidebar, the phone bar and drawer, page content, tool logic |
+
+Known limits: on a phone in Chrome's "Desktop site" mode the page is a desktop layout shown zoomed out by the browser. The navigation compensates (section 13); text and controls of the tools stay at the browser's zoom, which the site cannot change, so turning Desktop site off is still the comfortable way to use a tool there. The tool page's own side gutter on a phone is 8 px and the listing pages' 16 px (set by the calculators' phone stylesheet); left as it was.
+

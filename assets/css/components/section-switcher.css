@@ -256,9 +256,17 @@
 
     }
 
-    .calculator-page:has(> .section-switcher) > .breadcrumb {
+    .calculator-page:has(> .section-switcher) > .breadcrumb,
+    .calculator-page:has(> .section-switcher) > .calculator-breadcrumb {
 
         grid-column: 1 / -1;
+
+    }
+
+    /* the same space under the site header on a tool page as on every other ecosystem page (see the end of this file) */
+    #app .calculator-page:has(> .section-switcher) {
+
+        padding-top: 20px;
 
     }
 
@@ -867,3 +875,155 @@
     white-space: nowrap;
 
 }
+
+/* =========================================================
+   One page frame for every ecosystem page
+
+   A tool page, a category page, a toolkit's own page, Practice Labs, the Calculators landing and Loans each used to style their own
+   breadcrumb and top spacing, so the breadcrumb, the sidebar and the heading started at different heights and sizes from page to page.
+   Now: the breadcrumb is one row above the sidebar and the workspace (13 px, the same colours and the same 16 px below it), the gap
+   under the site header is the same, and the page heading is left-aligned in the workspace. The #app prefix keeps this ahead of the
+   per-page breadcrumb rules (calculators, directory, loans) without editing each of them.
+========================================================= */
+
+#app .container--workspace .calculator-breadcrumb,
+#app .calculator-page:has(> .section-switcher) > .calculator-breadcrumb {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+
+    margin: 0 0 16px;
+    padding: 0;
+
+    color: var(--color-ink-muted);
+
+    font-size: 13px;
+    line-height: 1.5;
+
+}
+
+#app .container--workspace .calculator-breadcrumb a,
+#app .calculator-page:has(> .section-switcher) > .calculator-breadcrumb a {
+
+    color: var(--color-brand-green);
+
+    text-decoration: none;
+
+}
+
+#app .container--workspace .calculator-breadcrumb a:hover,
+#app .calculator-page:has(> .section-switcher) > .calculator-breadcrumb a:hover {
+
+    text-decoration: underline;
+
+}
+
+#app .container--workspace .calculator-breadcrumb strong,
+#app .calculator-page:has(> .section-switcher) > .calculator-breadcrumb strong {
+
+    color: var(--color-ink);
+
+    font-weight: 600;
+
+}
+
+/* Loans keeps its own breadcrumb markup (a home icon); it sits in the same row, without the grey band it had inside the workspace */
+#app > .container--workspace > .loans-breadcrumb {
+
+    padding: 0 0 16px;
+
+    background: transparent;
+
+}
+
+/* the gap under the site header: the listing pages' section and the Loans wrapper had 46 px and 22 px; the tool pages 0 */
+#app > .categories-page:has(.ecosystem-layout),
+#app > .container--workspace {
+
+    padding-top: 20px;
+
+}
+
+/* the heading of a toolkit's landing page sits left in the workspace, as it does on the other ecosystem pages (the Calculators landing was centred) */
+#app .ecosystem-main > .categories-page__intro {
+
+    align-items: flex-start;
+
+    max-width: none;
+    margin-inline: 0;
+
+    text-align: left;
+
+}
+
+#app .ecosystem-main > .categories-page__intro .categories-page__description {
+
+    max-width: none;
+    margin-inline: 0;
+
+}
+
+/* Phones and narrow windows: the same frame, with the space above the tool trimmed. A tool page used to put its first control about 680 px down a
+   844 px screen (breadcrumb, bar, intro, trust card, "Jump to result" and the section heading each added their own gap). The trust card keeps
+   both lines of its claim; only its box and the gaps around it shrink. */
+@media (max-width: 760px) {
+
+    #app .container--workspace .calculator-breadcrumb,
+    #app .calculator-page:has(> .section-switcher) > .calculator-breadcrumb {
+
+        margin-bottom: 6px;
+
+    }
+
+    #app .calculator-page:has(> .section-switcher) .calculator-intro {
+
+        gap: 10px;
+        padding: 12px 0 14px;
+
+    }
+
+    #app .calculator-page:has(> .section-switcher) .calculator-trust-card {
+
+        gap: 10px;
+        padding: 8px 12px;
+
+    }
+
+    #app .calculator-page:has(> .section-switcher) .calculator-section {
+
+        margin-top: 16px;
+
+    }
+
+    #app > .categories-page:has(.ecosystem-layout),
+    #app > .container--workspace,
+    #app .calculator-page:has(> .section-switcher) {
+
+        padding-top: 8px;
+
+    }
+
+    #app .calculator-page:has(> .section-switcher) .jump-to-result {
+
+        margin-bottom: 0;
+
+    }
+
+    /* Loans: its sections each add a container of their own inside the workspace, which doubled the side gap (32 px against 16 px elsewhere);
+       the hero keeps a 16 px inset inside its band */
+    #app .ecosystem-main > section > .container {
+
+        padding-inline: 0;
+
+    }
+
+    #app .ecosystem-main > .loans-hero > .container {
+
+        padding-inline: 16px;
+
+    }
+
+}
+

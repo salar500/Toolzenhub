@@ -35,18 +35,13 @@ clientRendered: true
 
     <main id="app">
 
-        <div class="ecosystem-layout" data-section-page>
-        {% sectionNav "calculators", "loans" %}
-        <div class="ecosystem-main">
-
+        <div class="container container--workspace">
 
         <!-- =================================================
-             Breadcrumb
+             Breadcrumb: one row above the sidebar and the workspace, as on every ecosystem page
         ================================================== -->
 
         <section class="loans-breadcrumb">
-
-            <div class="container">
 
                 <nav
                     class="loans-breadcrumb__nav"
@@ -90,9 +85,12 @@ clientRendered: true
 
                 </nav>
 
-            </div>
-
         </section>
+
+        <div class="ecosystem-layout" data-section-page>
+        {% sectionNav "calculators", "loans" %}
+        <div class="ecosystem-main">
+
 
 
         <!-- =================================================
@@ -328,6 +326,8 @@ clientRendered: true
         </section>
 
         </div>
+        </div>
+
         </div>
 
     </main>
