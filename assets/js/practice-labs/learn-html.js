@@ -31,6 +31,7 @@ import { lessons as mtLessons3 } from "./manual-testing/lessons-3.js";
 import { interview as mtInterview } from "./manual-testing/interview.js";
 import { lessons as tdLessons } from "./test-design/lessons.js";
 import { lessons as pwLessons } from "./playwright/lessons.js";
+import { lessons as pwLessons2, interview as pwInterview } from "./playwright/lessons-2.js";
 import { WRITING as mtWriting } from "./manual-testing/writing.js";
 
 const SITE_NAME = "ToolZen Hub";
@@ -59,7 +60,8 @@ const CONTENT = {
     },
     playwright: {
         kind: "blocks",
-        lessons: new Map(pwLessons.map((lesson) => [lesson.id, lesson])),
+        lessons: new Map([...pwLessons, ...pwLessons2].map((lesson) => [lesson.id, lesson])),
+        interview: pwInterview,
         exercises: new Map(),
         writing: new Map(),
         labTool: null,

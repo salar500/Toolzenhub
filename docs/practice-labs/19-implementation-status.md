@@ -44,7 +44,9 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 
 | M3d | **Test Design Techniques** path (complete): 6 lessons over 3 levels (partitions, boundaries, decision tables, state transitions, pairwise, use cases and error guessing). The new `labset` block mounts the shared lab shell inside a lesson on the Test Design Lab's own exercises (all 20, each used once), with its own evaluator and partition input; the lab page is unchanged | `3a32b81` | Unit test (10: every lab exercise used exactly once); at 1280 and 390: lab shell mounted in the lesson, a wrong answer flagged, 17/18/65/66 accepted, no overflow; department lists both paths; 8,375 links on 98 pages resolve | Lab page itself |
 
-| M4a | Stage 4 begins: **Automation Engineering** department published, with the **Playwright with TypeScript** path at beginner level (7 lessons: automation basics, how Playwright works, setup (run locally), TypeScript for tests, locators, web-first assertions, a complete test). A new teaching **locator evaluator** (`automation/locator.js`: getByRole for 20 roles, getByLabel, getByText, getByPlaceholder, getByTestId, CSS, filter, first, last, nth; accessible-name subset) and a **locator practice** block on ShopLite that enforces strict mode, labelled "not Playwright itself" | (this milestone's commit) | Parser unit test (2); curriculum test (12); at 1280 and 390: all 5 model locators solve their tasks; an ambiguous locator gets the "24 elements match" strict-mode message; no overflow; 9,240 links on 111 pages resolve. One defect found and fixed: the frame did not switch screens (`startsWith`) | Real Playwright runs (by design, local only) |
+| M4a | Stage 4 begins: **Automation Engineering** department published, with the **Playwright with TypeScript** path at beginner level (7 lessons: automation basics, how Playwright works, setup (run locally), TypeScript for tests, locators, web-first assertions, a complete test). A new teaching **locator evaluator** (`automation/locator.js`: getByRole for 20 roles, getByLabel, getByText, getByPlaceholder, getByTestId, CSS, filter, first, last, nth; accessible-name subset) and a **locator practice** block on ShopLite that enforces strict mode, labelled "not Playwright itself" | `a390478` | Parser unit test (2); curriculum test (12); at 1280 and 390: all 5 model locators solve their tasks; an ambiguous locator gets the "24 elements match" strict-mode message; no overflow; 9,240 links on 111 pages resolve. One defect found and fixed: the frame did not switch screens (`startsWith`) | Real Playwright runs (by design, local only) |
+
+| M4b | **Playwright path complete**: 8 more lessons (Intermediate: actions and forms, navigation and waiting, hooks and fixtures, Page Object Model, network mocking and API; Advanced: debugging and flaky tests, configuration and parallel runs, reports and CI) and interview practice (12 questions). A static **code-check** engine (`automation/code-check.js`: awaited actions, no fixed waits, user-facing locators, required and forbidden patterns) with 4 exercises, each with a model and weak versions; labelled "simulated check: read, not run" | (this milestone's commit) | Code-check unit test (models and weak versions pinned); curriculum test (10; caught a too-short module description, fixed); at 1280 and 390: the flaky-test exercise starter gets not yet and the model gets all met; interview has 12 questions; no overflow; 10,480 links on 126 pages resolve | Real Playwright execution (by design) |
 
 ## 3. Current inventory (built)
 
@@ -65,18 +67,14 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 
 ## 5. Next checkpoint
 
-**Playwright intermediate and advanced, as blocks in `playwright/lessons-2.js`:**
+**Stage 4 remainder:** API test automation and Selenium concepts can follow later. Prioritise breadth first.
 
-- actions and forms;
-- navigation and waiting;
-- frames and dialogs;
-- hooks and fixtures;
-- the Page Object Model;
-- network mocking and API testing;
-- debugging and traces;
-- flaky tests;
-- configuration and CI.
+**Stage 5, AI and AI Engineering:**
 
-Add a code-check block: static rules on test code (await present, no `waitForTimeout`, user-facing locators), labelled "simulated". Also a project and an interview page.
+- department page;
+- an AI and LLM Foundations path with deterministic browser visualizers: a token splitter, a context-window budget, a temperature and top-p demo over a fixed distribution, an embedding similarity map from precomputed vectors, and a confusion matrix with a threshold;
+- a prompt evaluation lab with dated recorded outputs.
 
-**Then:** Stages 5 to 11.
+No runtime AI and no model downloads.
+
+**Then:** Stages 6 to 11.

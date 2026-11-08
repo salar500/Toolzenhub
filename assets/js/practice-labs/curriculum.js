@@ -139,7 +139,7 @@ export const PATHS = Object.freeze([
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",
-        status: "building",
+        status: "complete",
         tagline: "Automate browser tests with Playwright: user-facing locators, web-first assertions and reliable tests, practised on ShopLite with locators you can try in your browser.",
         audience: "Testers moving into automation and developers who write end-to-end tests. Manual testing basics help; the TypeScript you need is taught.",
         runsIn: "Locator practice runs in your browser on ShopLite with a labelled teaching evaluator; quizzes are checked in the page. Real Playwright tests run on your own computer with Node.js, as the setup lesson shows.",
@@ -156,13 +156,25 @@ export const PATHS = Object.freeze([
                     { id: "pw-locators", slug: "locators", title: "Locators: finding elements like a user" },
                     { id: "pw-assertions", slug: "web-first-assertions", title: "Web-first assertions" },
                     { id: "pw-first-test", slug: "writing-a-complete-test", title: "Writing a complete test" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "interacting", title: "Interacting with Pages", summary: "Actions and forms, and waiting for the right events instead of fixed times.", lessons: [
+                    { id: "pw-actions-forms", slug: "actions-and-forms", title: "Actions and forms" },
+                    { id: "pw-navigation-waiting", slug: "navigation-and-waiting", title: "Navigation and waiting" }] },
+                { id: "organising-tests", title: "Organising Tests", summary: "Hooks, fixtures and page objects that keep a suite readable and maintainable.", lessons: [
+                    { id: "pw-hooks-fixtures", slug: "hooks-and-fixtures", title: "Hooks, fixtures and test structure" },
+                    { id: "pw-page-objects", slug: "page-object-model", title: "The Page Object Model" }] },
+                { id: "network-api", title: "Network and API", summary: "Mock network responses with page.route to test rare situations, and test APIs directly with the request fixture.", lessons: [
+                    { id: "pw-network-api", slug: "network-mocking-and-api-testing", title: "Network mocking and API testing" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "reliability-scale", title: "Reliability and Scale", summary: "Debug and fix flaky tests, configure projects and parallel runs, and run in CI.", lessons: [
+                    { id: "pw-debugging-flaky", slug: "debugging-and-flaky-tests", title: "Debugging and fixing flaky tests" },
+                    { id: "pw-config-parallel", slug: "configuration-and-parallel-runs", title: "Configuration, projects and parallel runs" },
+                    { id: "pw-reports-ci", slug: "reports-and-ci", title: "Reports and running in CI" }] }
             ] }
         ],
-        coming: [
-            "Intermediate: actions and forms, navigation and waiting, frames and dialogs, hooks, fixtures and the Page Object Model, network mocking and API testing",
-            "Advanced: debugging with traces, fixing flaky tests, configuration, parallelism, reports and CI",
-            "A project automating ShopLite's sign-in, search and checkout, and interview practice"
-        ]
+        coming: []
     },
     {
         id: "test-design",

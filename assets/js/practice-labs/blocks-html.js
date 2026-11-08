@@ -19,6 +19,7 @@
 import { escapeHTML as esc } from "../ui/escape.js";
 import { SITE_ROOT } from "../routes.js";
 import { AREAS, BUGS, RELEASES } from "./shoplite/bugs.js";
+import { CODE } from "./playwright/code.js";
 
 const SHOPLITE = () => `${SITE_ROOT}practice-labs/shoplite/`;
 
@@ -185,6 +186,33 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                             </div>
                         </div>
                         <p class="lx-note">This practice uses a teaching evaluator of a subset of Playwright's locator rules, run on ShopLite in your browser. It is not Playwright itself; run the same locators in a real Playwright project to confirm.</p>
+                    </div>
+                </section>`;
+        }
+
+        case "codecheck": {
+            const exercise = CODE.find((c) => c.id === block.exercise);
+            if (!exercise) throw new Error(`unknown code exercise ${block.exercise}`);
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-write" data-codecheck="${esc(exercise.id)}">
+                        <p>${esc(exercise.task)}</p>
+                        <div data-code-tools hidden>
+                            <label class="lx-label" for="${esc(exercise.id)}-code">Your test code</label>
+                            <textarea id="${esc(exercise.id)}-code" class="lx-textarea learn-editor" rows="10" spellcheck="false" autocapitalize="off" autocomplete="off" maxlength="4000">${esc(exercise.starter)}</textarea>
+                            <div class="learn-actions">
+                                <button type="button" class="calculator-form__button lx-btn" data-code-check>Check my code</button>
+                                <button type="button" class="calculator-form__button calculator-form__button--secondary lx-btn" data-code-reset>Start again</button>
+                            </div>
+                            <div class="learn-feedback" data-code-out role="status" aria-live="polite"></div>
+                        </div>
+                        <p class="lx-note">Simulated check: your code is read against the rules listed in the result, not run. Run it in a real Playwright project to see it execute.</p>
+                        <details class="learn-reveal">
+                            <summary>Show a model answer and why</summary>
+                            <pre class="lx-code" tabindex="0"><code>${esc(exercise.model)}</code></pre>
+                            <p>${esc(exercise.explain)}</p>
+                        </details>
                     </div>
                 </section>`;
         }
