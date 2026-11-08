@@ -1306,3 +1306,10 @@ a.learn-card:hover {
 .learn-gitsim__term { min-height: 120px; max-height: 280px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
 .learn-gitsim__input { flex: 1 1 14em; min-height: 44px; font-family: var(--font-mono, monospace); }
 @media (max-width: 520px) { .learn-gitsim__state { grid-template-columns: 1fr; } }
+
+/* ---------- role journeys ---------- */
+
+.learn-journeys { display: grid; gap: 10px; }
+.learn-journey { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; }
+.learn-journey summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.learn-journey ol { margin: 8px 0 4px; }

@@ -18,6 +18,7 @@ import { renderBreadcrumb } from "../components/breadcrumb.js";
 import { getToolById } from "../data/tools.js";
 import { LEVELS, PRACTICE_LABS_PREFIX, flatLessons, getPath, lessonCount, lessonUrl, levelUrl, moduleUrl, pathUrl, publishedPaths } from "./curriculum.js";
 import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from "./departments.js";
+import { JOURNEYS } from "./journeys.js";
 import { lessons as sqlLessons } from "../tools/sql-practice-lab/lessons.js";
 import { set as sqlSet } from "../tools/sql-practice-lab/exercises.js";
 import { sqlExtras } from "./sql-extras.js";
@@ -965,7 +966,7 @@ function overviewBody() {
 
                 <section class="learn-section" aria-labelledby="learn-departments">
                     <h2 id="learn-departments">Departments</h2>
-                    <p>Each department is a specialist area with its own learning paths and labs. A department opens when it has real lessons or labs to offer; the others are being built and are listed so you can see where the platform is going.</p>
+                    <p>Each department is a specialist area with its own learning paths and labs. A department opens when it has real lessons or labs to offer, and each one grows as new paths are added.</p>
                     <div class="learn-cards learn-cards--departments">
                         ${DEPARTMENTS.map((department) => isPublished(department) ? `
                         <a class="learn-card" href="${esc(departmentUrl(department))}">
@@ -987,6 +988,23 @@ function overviewBody() {
                         ${live.filter((d) => d.start).map((d) => `<li><a href="${esc(startHref(d.start))}">${esc(d.start.label)}</a> (${esc(d.title)})</li>`).join("")}
                     </ul>
                     <p>Every lesson shows what you need first and what comes next, so you can also start from any topic you need today.</p>
+                </section>
+
+                <section class="learn-section" aria-labelledby="learn-journeys">
+                    <h2 id="learn-journeys">Journeys by role</h2>
+                    <p>Each journey puts learning paths and labs from several departments in a sensible order for a job role. Follow it from the top, or skip what you already know.</p>
+                    <div class="learn-journeys">
+                        ${JOURNEYS.map((journey) => `
+                        <details class="learn-journey">
+                            <summary><strong>${esc(journey.title)}</strong>: ${esc(journey.summary)}</summary>
+                            <ol>
+                                ${journey.steps.map((step) => {
+                                    const target = step.path ? { href: pathUrl(getPath(step.path)), title: getPath(step.path).title } : { href: labOf(step.lab).href, title: labOf(step.lab).title };
+                                    return `<li><a href="${esc(target.href)}">${esc(target.title)}</a>: ${esc(step.why)}</li>`;
+                                }).join("")}
+                            </ol>
+                        </details>`).join("")}
+                    </div>
                 </section>
 
                 <p class="learn-start"><a class="learn-link" href="${esc(HUB())}">See every Practice Lab and the Smart Flashcards on one page</a></p>`;

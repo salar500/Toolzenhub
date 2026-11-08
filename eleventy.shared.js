@@ -47,6 +47,7 @@ const BUILD_ONLY = [
   "js/practice-labs/web/html-lessons.js",
   "js/practice-labs/devops/lessons.js",
   "js/practice-labs/devops/security-lessons.js",
+  "js/practice-labs/journeys.js",
 ];
 
 export function normalizeBase(base) {

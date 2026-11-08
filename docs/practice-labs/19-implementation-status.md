@@ -102,7 +102,57 @@ A new `gitsim` block uses `devops/git-sim.js`, a modelled repository with a work
 - secrets, configuration and dependencies;
 - security testing.
 
-Both paths have interview practice (12 questions each). The Cron Challenge Lab is linked from the Git and DevOps path | (this milestone's commit) | Git simulator unit test (3: status, add, commit and restore; switch refusal; fast-forward, three-way and conflict merges; all 7 task models reach their goals and their starts do not). At 1280 and 390: the merge task's goal is met only after the merge, the terminal shows the untracked file and "Fast-forward", reset restores the start, there is no overflow, the security interview has 12 questions, and the department lists both paths. 19,059 links on 249 pages resolve | Shell simulator and deeper cloud paths (planned) |
+Both paths have interview practice (12 questions each). The Cron Challenge Lab is linked from the Git and DevOps path | `f6070cb` | Git simulator unit test (3: status, add, commit and restore; switch refusal; fast-forward, three-way and conflict merges; all 7 task models reach their goals and their starts do not). At 1280 and 390: the merge task's goal is met only after the merge, the terminal shows the untracked file and "Fast-forward", reset restores the start, there is no overflow, the security interview has 12 questions, and the department lists both paths. 19,059 links on 249 pages resolve | Shell simulator and deeper cloud paths (planned) |
+
+| M10–11 | **Role journeys and completion review.**
+
+- The Practice Labs home page gains "Journeys by role" (`journeys.js`). Seven journeys (QA, automation, data analyst, web developer, backend developer, AI engineer and tester, DevOps) order existing paths and labs across departments. A unit test checks that every step resolves to a published path or lab.
+- Review: the search index covers every path, lesson, project and interview page (172 entries); all 8 departments are published; no path is in "building" status.
+- One stale home-page sentence ("the others are being built") was reworded | (this milestone's commit) | 29 focused unit tests across the Practice Labs suites. At 1280 and 390: 7 journeys, the first opens with 5 linked steps, no "In development" cards, no overflow, and search finds the new Git lesson. 19,093 links on 249 pages resolve | See section 4 for honest limits |
+
+### Final inventory, 2026-11-08 (preview branch)
+
+- **8 of 8 departments published.**
+- **11 learning paths, all complete, 131 lessons:**
+
+| Path | Department | Lessons |
+|---|---|---|
+| SQL | Database Engineering | 24 |
+| Manual Software Testing | Software Testing | 24 |
+| Test Design Techniques | Software Testing | 6 |
+| Playwright with TypeScript | Automation | 15 |
+| AI and LLM Foundations | AI | 10 |
+| Statistics and Data Analysis | Data and Analytics | 9 |
+| JavaScript Programming | Programming | 10 |
+| HTTP and REST APIs | Web and Backend | 9 |
+| HTML, CSS and the DOM | Web and Backend | 9 |
+| Git and DevOps Foundations | DevOps, Cloud and Security | 8 |
+| Application Security Foundations | DevOps, Cloud and Security | 7 |
+
+- **249 generated learning pages**, including:
+  - 10 interview-practice pages;
+  - the SQL projects (5 and an index);
+  - department pages;
+  - the home page with search and journeys.
+- **Interactive engines added in this mission, all in the browser:**
+
+| Engine | What it does | Exercises |
+|---|---|---|
+| codecheck | Static Playwright code rules | 4 |
+| aiviz | Teaching visualizers | 5 |
+| numeric | Calculations from a table | 12 |
+| jsrun | JavaScript in a sandboxed Worker | 12 |
+| apitask | Requests to an in-page mock API | 8 |
+| webplay | Script-free iframe with DOM and style checks | 8 |
+| gitsim | Modelled Git repository | 7 |
+
+  The earlier engines (SQL, locators, ShopLite bug hunt, writing labs and the Test Design Lab sets) remain.
+- **Not done, by design or deferred:**
+  - real Playwright, Python or Java execution: no large runtime downloads;
+  - real AI model output: no runtime AI;
+  - shell simulator, backend-fundamentals path, prompt-engineering and ML paths, API automation and Selenium paths;
+  - progress saving: rule 7.7, the D1 exception is not approved.
+- **No full regression was run.** Testing in this mission was focused per batch, as instructed.
 
 ## 3. Current inventory (built)
 
@@ -123,10 +173,4 @@ Both paths have interview practice (12 questions each). The Cron Challenge Lab i
 
 ## 5. Next checkpoint
 
-**Stage 10, cross-department journeys:** role-based journeys on the Practice Labs home page (QA engineer, automation engineer, data analyst, web developer, AI engineer and DevOps engineer). Each journey orders existing paths across departments.
-
-**Stage 11, completion review:**
-
-- search-index coverage of the new paths;
-- department and roadmap pages;
-- a final inventory of paths, lessons and exercises in this document.
+The ecosystem build for this mission is complete on the preview branch. Recommended next step for the owner: review the GitHub Pages preview and decide whether to run one full regression before any merge or production work. Production (Hostinger) is untouched.

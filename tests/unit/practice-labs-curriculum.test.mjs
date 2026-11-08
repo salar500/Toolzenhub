@@ -142,3 +142,18 @@ test("Test Design path: every lab exercise is used exactly once, by an id that e
   assert.deepEqual([...used].sort(), set.exercises.map((e) => e.id).sort());
   for (const l of lessons) assert.ok(l.objectives.length >= 2 && l.check.length >= 2, l.id);
 });
+
+test("role journeys: unique ids, every step is a published path or a lab of a published department, no repeats", async () => {
+  const { JOURNEYS } = await import("../../assets/js/practice-labs/journeys.js");
+  const published = new Set(publishedPaths().map((p) => p.id));
+  const labs = new Set(DEPARTMENTS.filter(isPublished).flatMap((d) => d.labs));
+  assert.equal(new Set(JOURNEYS.map((j) => j.id)).size, JOURNEYS.length);
+  for (const j of JOURNEYS) {
+    assert.ok(j.steps.length >= 3, j.id);
+    const keys = j.steps.map((s) => s.path ?? s.lab);
+    assert.equal(new Set(keys).size, keys.length, j.id);
+    for (const s of j.steps) assert.ok(s.path ? published.has(s.path) : labs.has(s.lab), `${j.id}: ${s.path ?? s.lab}`);
+  }
+  const home = learnPages().find((p) => p.url === "/practice-labs/");
+  assert.ok(home.html.includes('id="learn-journeys"'));
+});
