@@ -169,7 +169,7 @@ Milestones from M12 on are recorded here as sections rather than table rows.
 - **Not yet used by any lesson page**: the ML and Prompt Engineering lessons are the next step.
 - Checks performed: focused unit tests (23 pass) and the build. No browser check yet for the new visualizers or the schema block.
 
-#### M12d: Machine Learning Foundations and Prompt Engineering paths (commit: (this milestone's commit))
+#### M12d: Machine Learning Foundations and Prompt Engineering paths (commit: `b6a44c2`)
 
 - **Machine Learning Foundations** (9 lessons):
   - Beginner: ML and the project workflow; data, features and splits with leakage; linear regression with an interactive fit.
@@ -195,6 +195,25 @@ Milestones from M12 on are recorded here as sections rather than table rows.
     - the prompt-writing lab is present;
     - no overflow.
   - 25,573 links on 343 pages resolve.
+
+#### M12e: Backend Fundamentals path (commit: (this milestone's commit))
+
+- **Backend Fundamentals** has 9 lessons:
+  - request lifecycle; routing; validation and errors;
+  - databases from code (parameters, transactions, migrations, N+1); pagination and caching; sessions and JWTs;
+  - money and idempotency; architecture with queues and services; configuration, structured logging and twelve-factor apps.
+- It also has interview practice (12 questions) and links to the JSON Error-Fixing Lab.
+- 5 new `jsrun` exercises: a router, order validation, pagination, money in paise with GST and delivery, and an idempotent payment handler.
+- `js-eval.js` gained an optional `harness` (run a scenario that calls the learner's function) and per-test `call` labels. The worker message now carries the harness.
+- The path also reuses three `apitask` tasks.
+- **Checks performed:**
+  - JS exercises unit test: all 17 pinned.
+  - Curriculum test.
+  - At 1280 and 390 px:
+    - the money and idempotency starters fail and their models pass;
+    - a buggy idempotency handler fails, showing the scenario label;
+    - no overflow.
+  - 26,774 links on 360 pages resolve.
 
 ### Final inventory, 2026-11-08 (preview branch)
 
@@ -266,7 +285,7 @@ Milestones from M12 on are recorded here as sections rather than table rows.
    - `ai/prompt-lessons.js`, the Prompt Engineering path. Use the write labs pe-w-anatomy, pe-w-few-shot and pe-w-guardrails, the schema exercises pe-s-*, and quizzes on recorded outputs.
    - Wire both with the add_path helper pattern: curriculum, learn-html CONTENT (`writing: new Map(AI_WRITING...)` for the prompt path), the BUILD_ONLY list in eleventy.shared.js, the curriculum test's extras count and its block-type list (add "schema"), and the ai-engineering department.
    - Check in the browser: the new visualizers and the schema block, at 1280 and 390 px.
-2. **Backend Fundamentals path**, reusing apitask and quizzes.
+2. *(Done in M12e.)* **Backend Fundamentals path**, reusing apitask and quizzes.
 3. **API Automation and Selenium paths**: new codecheck exercises, plus predict blocks for the Selenium Java code.
 4. **Database design**, then **specialised testing** (API, database and accessibility testing), then **Excel and Power BI paths**.
 5. **Final pass.**

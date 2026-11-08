@@ -112,5 +112,51 @@ export const JS_EXERCISES = Object.freeze([
         model: "function unique(values) {\n  return [...new Set(values)];\n}",
         buggy: ["function unique(values) {\n  return [...new Set(values)].sort();\n}"],
         explain: "A Set keeps one of each value in insertion order; spreading it back gives an array. Sorting changes the order the task asked to keep."
+    },
+    {
+        id: "be-x-route", fn: "matchRoute",
+        task: "Write matchRoute(pattern, path) for a tiny router: patterns such as \"/api/orders/:id\" match paths with the same number of segments, where :name captures that segment. Return an object of captured params, or null when the path does not match.",
+        starter: "function matchRoute(pattern, path) {\n  \n}",
+        tests: [{ args: ["/api/orders/:id", "/api/orders/SL-1004"], expect: { id: "SL-1004" } }, { args: ["/api/users/:userId/orders/:orderId", "/api/users/7/orders/SL-1"], expect: { userId: "7", orderId: "SL-1" } }, { args: ["/api/orders/:id", "/api/orders"], expect: null }, { args: ["/api/orders/:id", "/api/products/3"], expect: null }, { args: ["/health", "/health"], expect: {} }],
+        model: "function matchRoute(pattern, path) {\n  const p = pattern.split('/'), s = path.split('/');\n  if (p.length !== s.length) return null;\n  const params = {};\n  for (let i = 0; i < p.length; i++) {\n    if (p[i].startsWith(':')) params[p[i].slice(1)] = s[i];\n    else if (p[i] !== s[i]) return null;\n  }\n  return params;\n}",
+        buggy: ["function matchRoute(pattern, path) {\n  const p = pattern.split('/'), s = path.split('/');\n  const params = {};\n  for (let i = 0; i < p.length; i++) {\n    if (p[i].startsWith(':')) params[p[i].slice(1)] = s[i];\n  }\n  return params;\n}"],
+        explain: "Compare segment by segment: fixed segments must be equal and :name segments are captured. Checking the segment count first stops /api/orders matching /api/orders/:id."
+    },
+    {
+        id: "be-x-validate", fn: "validateOrder",
+        task: "Write validateOrder(body) for POST /api/orders. Return an array of error objects { field, message } (empty when valid): email must contain @, items must be a non-empty array, and every item needs a whole-number qty from 1 to 10.",
+        starter: "function validateOrder(body) {\n  const errors = [];\n  return errors;\n}",
+        tests: [{ args: [{ email: "asha@example.com", items: [{ id: 1, qty: 2 }] }], expect: [] }, { args: [{ email: "asha", items: [] }], expect: [{ field: "email", message: "must be a valid email" }, { field: "items", message: "must contain at least one item" }] }, { args: [{ email: "a@b.in", items: [{ id: 1, qty: 0 }, { id: 2, qty: 2.5 }] }], expect: [{ field: "items[0].qty", message: "must be a whole number from 1 to 10" }, { field: "items[1].qty", message: "must be a whole number from 1 to 10" }] }, { args: [{}], expect: [{ field: "email", message: "must be a valid email" }, { field: "items", message: "must contain at least one item" }] }],
+        model: "function validateOrder(body) {\n  const errors = [];\n  if (typeof body.email !== 'string' || !body.email.includes('@')) errors.push({ field: 'email', message: 'must be a valid email' });\n  if (!Array.isArray(body.items) || body.items.length === 0) {\n    errors.push({ field: 'items', message: 'must contain at least one item' });\n    return errors;\n  }\n  body.items.forEach((item, i) => {\n    if (!Number.isInteger(item.qty) || item.qty < 1 || item.qty > 10) errors.push({ field: `items[${i}].qty`, message: 'must be a whole number from 1 to 10' });\n  });\n  return errors;\n}",
+        buggy: ["function validateOrder(body) {\n  if (!body.email.includes('@')) return [{ field: 'email', message: 'must be a valid email' }];\n  if (!body.items.length) return [{ field: 'items', message: 'must contain at least one item' }];\n  return [];\n}"],
+        explain: "Collect every problem instead of stopping at the first, so the client can show all of them (the 422 pattern), and never assume fields exist: a missing email must not crash the server."
+    },
+    {
+        id: "be-x-paginate", fn: "paginate",
+        task: "Write paginate(items, page, size) returning { items, page, totalPages, hasNext } for 1-based pages. A page beyond the end returns an empty items array; page and size below 1 count as 1.",
+        starter: "function paginate(items, page, size) {\n  \n}",
+        tests: [{ args: [[1, 2, 3, 4, 5], 1, 2], expect: { items: [1, 2], page: 1, totalPages: 3, hasNext: true } }, { args: [[1, 2, 3, 4, 5], 3, 2], expect: { items: [5], page: 3, totalPages: 3, hasNext: false } }, { args: [[1, 2, 3], 9, 2], expect: { items: [], page: 9, totalPages: 2, hasNext: false } }, { args: [[1, 2, 3], 0, 0], expect: { items: [1], page: 1, totalPages: 3, hasNext: true } }, { args: [[], 1, 10], expect: { items: [], page: 1, totalPages: 0, hasNext: false } }],
+        model: "function paginate(items, page, size) {\n  page = Math.max(1, page);\n  size = Math.max(1, size);\n  const totalPages = Math.ceil(items.length / size);\n  const start = (page - 1) * size;\n  return { items: items.slice(start, start + size), page, totalPages, hasNext: page < totalPages };\n}",
+        buggy: ["function paginate(items, page, size) {\n  const start = page * size;\n  const totalPages = Math.ceil(items.length / size);\n  return { items: items.slice(start, start + size), page, totalPages, hasNext: page < totalPages };\n}"],
+        explain: "For 1-based pages the first item is at (page − 1) × size. Clamping bad input and computing totalPages with Math.ceil gives clients what they need to show navigation."
+    },
+    {
+        id: "be-x-money", fn: "orderTotalPaise",
+        task: "Money must not use floating point. Write orderTotalPaise(lines), where each line is { pricePaise, qty }, returning the total in paise plus 18% GST rounded to the nearest paisa (halves round up). Delivery is 4900 paise unless the items total exceeds 99900 paise.",
+        starter: "function orderTotalPaise(lines) {\n  \n}",
+        tests: [{ args: [[{ pricePaise: 49900, qty: 2 }]], expect: 117764 + 4900 }, { args: [[{ pricePaise: 49950, qty: 2 }]], expect: 122782 }, { args: [[{ pricePaise: 10, qty: 3 }]], expect: 35 + 4900 }],
+        model: "function orderTotalPaise(lines) {\n  const items = lines.reduce((sum, l) => sum + l.pricePaise * l.qty, 0);\n  const gst = Math.round((items * 18) / 100);\n  const delivery = items > 99900 ? 0 : 4900;\n  return items + gst + delivery;\n}",
+        buggy: ["function orderTotalPaise(lines) {\n  const rupees = lines.reduce((sum, l) => sum + (l.pricePaise / 100) * l.qty, 0);\n  const total = rupees * 1.18 + (rupees > 999 ? 0 : 49);\n  return total * 100;\n}"],
+        explain: "Keep money as integers in the smallest unit and round once, at a defined step. Converting to rupees and multiplying by 1.18 produces values like 122664.00000000001, which break comparisons and reports."
+    },
+    {
+        id: "be-x-idempotency", fn: "createPaymentHandler",
+        task: "Retries must not charge twice. Write createPaymentHandler() returning a function pay(idempotencyKey, amount) that returns { paymentId, amount, replayed }. The first call with a key creates payment P1, P2 and so on; a repeat with the same key returns the original result with replayed: true and creates nothing. Reusing a key with a different amount throws Error(\"Idempotency key reused with a different request\").",
+        starter: "function createPaymentHandler() {\n  return function pay(key, amount) {\n  };\n}",
+        tests: [{ args: [], expect: "P1,P1,P2,true", call: "pay k1, repeat k1, pay k2, reuse k1 with 900" }],
+        model: "function createPaymentHandler() {\n  const seen = new Map();\n  let next = 1;\n  return function pay(key, amount) {\n    if (seen.has(key)) {\n      const first = seen.get(key);\n      if (first.amount !== amount) throw new Error('Idempotency key reused with a different request');\n      return { ...first, replayed: true };\n    }\n    const result = { paymentId: `P${next++}`, amount, replayed: false };\n    seen.set(key, result);\n    return result;\n  };\n}",
+        buggy: ["function createPaymentHandler() {\n  let next = 1;\n  return function pay(key, amount) {\n    return { paymentId: `P${next++}`, amount, replayed: false };\n  };\n}"],
+        explain: "Store the result under the idempotency key and return it for repeats, so a network retry cannot create a second charge; a different request with the same key is a client bug and is refused.",
+        harness: "const pay = createPaymentHandler();\nconst a = pay('k1', 500), b = pay('k1', 500), c = pay('k2', 500);\nlet threw = false;\ntry { pay('k1', 900); } catch (e) { threw = e.message === 'Idempotency key reused with a different request'; }\nreturn [a.paymentId, b.paymentId, c.paymentId, b.replayed && !a.replayed && threw].join(',');"
     }
 ]);

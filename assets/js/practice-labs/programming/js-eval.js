@@ -22,13 +22,17 @@ export function runTests(code, exercise) {
     if (/\bimport\s*[(\s{*]/.test(code)) return { error: "import is not available in these exercises: write the code in the editor.", results: [], passed: 0, total: exercise.tests.length, logs };
     let fn;
     try {
-        fn = new Function("console", `"use strict";\n${code}\nreturn typeof ${exercise.fn} === "function" ? ${exercise.fn} : undefined;`)(fakeConsole);
+        /* an exercise with a harness is judged by running that scenario, which calls the learner's function */
+        const tail = exercise.harness
+            ? `return typeof ${exercise.fn} === "function" ? function () {\n${exercise.harness}\n} : undefined;`
+            : `return typeof ${exercise.fn} === "function" ? ${exercise.fn} : undefined;`;
+        fn = new Function("console", `"use strict";\n${code}\n${tail}`)(fakeConsole);
     } catch (error) {
         return { error: `${error.name}: ${error.message}`, results: [], passed: 0, total: exercise.tests.length, logs };
     }
     if (!fn) return { error: `No function named ${exercise.fn} was found. Keep the name from the starter code.`, results: [], passed: 0, total: exercise.tests.length, logs };
     const results = exercise.tests.map((t) => {
-        const call = `${exercise.fn}(${t.args.map(show).join(", ")})`;
+        const call = t.call ?? `${exercise.fn}(${t.args.map(show).join(", ")})`;
         const args = structuredClone(t.args);
         try {
             const got = fn(...args);

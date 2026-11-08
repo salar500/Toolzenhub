@@ -19,6 +19,7 @@ import { getToolById } from "../data/tools.js";
 import { LEVELS, PRACTICE_LABS_PREFIX, flatLessons, getPath, lessonCount, lessonUrl, levelUrl, moduleUrl, pathUrl, publishedPaths } from "./curriculum.js";
 import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from "./departments.js";
 import { JOURNEYS } from "./journeys.js";
+import { lessons as beLessons, interview as beLessonsInterview } from "./web/backend-lessons.js";
 import { lessons as peLessons, interview as peLessonsInterview } from "./ai/prompt-lessons.js";
 import { lessons as mlLessons, interview as mlLessonsInterview } from "./ai/ml-lessons.js";
 import { lessons as k8sLessons, interview as k8sLessonsInterview } from "./devops/k8s-lessons.js";
@@ -212,6 +213,16 @@ const CONTENT = {
         labTool: null,
         flashcards: "smart-flashcards",
         morePractice: ""
+    },
+    "backend": {
+        kind: "blocks",
+        lessons: new Map(beLessons.map((lesson) => [lesson.id, lesson])),
+        interview: beLessonsInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: "json-error-fixing-lab",
+        flashcards: "smart-flashcards",
+        morePractice: "trains the strict JSON reading that every backend parser applies to request bodies."
     },
     "test-design": {
         kind: "blocks",

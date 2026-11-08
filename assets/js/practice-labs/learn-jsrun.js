@@ -16,8 +16,8 @@ function run(code, exercise) {
         const timer = setTimeout(() => { worker.terminate(); resolve({ error: `Stopped after ${LIMIT_MS / 1000} seconds. Is there a loop that never ends?`, results: [], passed: 0, total: exercise.tests.length, logs: [] }); }, LIMIT_MS);
         worker.onmessage = (event) => { clearTimeout(timer); worker.terminate(); resolve(event.data); };
         worker.onerror = (event) => { event.preventDefault(); clearTimeout(timer); worker.terminate(); resolve({ error: event.message || "The code could not run.", results: [], passed: 0, total: exercise.tests.length, logs: [] }); };
-        const { id, fn, tests } = exercise;
-        worker.postMessage({ code, exercise: { id, fn, tests } });
+        const { id, fn, tests, harness } = exercise;
+        worker.postMessage({ code, exercise: { id, fn, tests, harness } });
     });
 }
 

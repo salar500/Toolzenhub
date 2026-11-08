@@ -159,7 +159,7 @@ export const DEPARTMENTS = Object.freeze([
         intro: [
             "Web applications talk to their servers in JSON over HTTP. Reading and writing that JSON correctly, and pulling the right value out of a large response, are everyday skills for developers and for testers who check APIs.",
             "Two labs here give checked practice on exactly that. The JSON Error-Fixing Lab teaches you to repair broken JSON the way a strict parser sees it, and the JSONPath Challenge Lab has you write queries that are evaluated by an RFC 9535 engine against a real document. When you need the full utilities, the Developer Tools section has the JSON Formatter, the JSONPath Tester, the JWT Decoder and the URL Parser.",
-            "The HTTP and REST APIs path teaches the protocol underneath it all: methods, status codes, headers, JSON bodies, tokens, validation errors, REST design and API testing. You build real requests and send them to a simulated ShopLite API that answers inside the page, so every response is repeatable and nothing leaves your browser. The HTML, CSS and the DOM path builds pages in a checked playground: your markup renders in a sandbox with scripts switched off and the checks read the elements and styles you produced. Backend fundamentals follow.",
+            "The HTTP and REST APIs path teaches the protocol underneath it all: methods, status codes, headers, JSON bodies, tokens, validation errors, REST design and API testing. You build real requests and send them to a simulated ShopLite API that answers inside the page, so every response is repeatable and nothing leaves your browser. The HTML, CSS and the DOM path builds pages in a checked playground: your markup renders in a sandbox with scripts switched off and the checks read the elements and styles you produced. Backend Fundamentals goes behind the API: you write routers, validators, pagination, money calculations and idempotent payment handlers that run against tests in your browser.",
             "Both labs check your answer exactly instead of guessing. A repaired document must parse as strict JSON, and a query must return exactly the expected values from the document, so you see the effect of every bracket, quote and filter. Each exercise comes with hints and an explained solution."
         ],
         technologies: [
@@ -167,9 +167,9 @@ export const DEPARTMENTS = Object.freeze([
             { title: "JSONPath queries", status: "lab", lab: "jsonpath-challenge-lab" },
             { title: "HTTP and REST APIs", status: "path", path: "http-apis" },
             { title: "HTML, CSS and the DOM", status: "path", path: "html-css-dom" },
-            { title: "Backend fundamentals", status: "planned" }
+            { title: "Backend fundamentals", status: "path", path: "backend" }
         ],
-        paths: ["http-apis", "html-css-dom"],
+        paths: ["http-apis", "html-css-dom", "backend"],
         labs: ["json-error-fixing-lab", "jsonpath-challenge-lab"],
         decks: ["JSON", "HTTP and APIs"],
         start: { label: "Start with lesson 1 of HTTP and REST APIs.", path: "http-apis" },

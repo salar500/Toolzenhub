@@ -531,6 +531,37 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "backend",
+        title: "Backend Fundamentals",
+        department: "web-backend",
+        status: "complete",
+        tagline: "Build the server side properly: request handling, routing, validation, databases and transactions, pagination, authentication, money and idempotency, architecture and operations, with backend logic you code and test in your browser.",
+        audience: "Developers moving into backend or full-stack work, and testers who want to understand what happens behind an API. The HTTP and REST APIs path and JavaScript basics come first.",
+        runsIn: "Backend logic exercises run as real JavaScript against tests in an isolated worker in your browser, and HTTP behaviour is practised on a simulated ShopLite API inside the page. No server is needed and nothing is sent.",
+        outcomes: ["Trace requests through middleware, routing and handlers", "Validate input and handle errors safely", "Use parameters, transactions and migrations", "Paginate and cache efficiently", "Authenticate and authorise every request", "Handle money and retries correctly and choose an architecture"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "server-basics", title: "Server Basics", summary: "The request lifecycle, routing and handlers, and validation with error handling, coded and tested in your browser.", lessons: [
+                    { id: "be-lifecycle", slug: "request-lifecycle", title: "How a backend handles a request" },
+                    { id: "be-routing", slug: "routing-and-handlers", title: "Routing and handlers" },
+                    { id: "be-validation", slug: "validation-and-errors", title: "Validation and error handling" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "data-and-identity", title: "Data and Identity", summary: "Databases from code, pagination and performance, and authentication with sessions and tokens.", lessons: [
+                    { id: "be-databases", slug: "databases-from-code", title: "Talking to the database" },
+                    { id: "be-pagination", slug: "pagination-and-performance", title: "Pagination, filtering and performance" },
+                    { id: "be-auth", slug: "sessions-and-tokens", title: "Authentication, sessions and tokens" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "production-backends", title: "Production Backends", summary: "Money and idempotency, architecture with queues and services, and configuration and logging.", lessons: [
+                    { id: "be-money-reliability", slug: "money-retries-idempotency", title: "Correctness: money, retries and idempotency" },
+                    { id: "be-architecture", slug: "architecture", title: "Architecture: monoliths, services and queues" },
+                    { id: "be-operations", slug: "configuration-and-logging", title: "Configuration, logging and twelve-factor apps" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",
