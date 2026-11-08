@@ -420,7 +420,7 @@ Both paths have interview practice (12 questions each). The Cron Challenge Lab i
     - no overflow.
   - 37,276 links on 519 pages resolve.
 
-#### M13d: Data Analysis with pandas (P73), journeys extended, and the catalogue completion audit (commit: (this milestone's commit))
+#### M13d: Data Analysis with pandas (P73), journeys extended, and the catalogue completion audit (commit: `cc1f4f4`)
 
 - **Data Analysis with pandas** (5 lessons, with interview practice of 8 questions):
   - DataFrames and Series;
