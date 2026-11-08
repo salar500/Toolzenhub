@@ -8,7 +8,8 @@ import assert from "node:assert/strict";
 import { checkWriting, validateWritingExercise, VAGUE } from "../../assets/js/practice-labs/writing-check.js";
 import { WRITING as MT } from "../../assets/js/practice-labs/manual-testing/writing.js";
 import { AI_WRITING } from "../../assets/js/practice-labs/ai/writing.js";
-const WRITING = [...MT, ...AI_WRITING];
+import { WRITING_2 } from "../../assets/js/practice-labs/manual-testing/writing-2.js";
+const WRITING = [...MT, ...AI_WRITING, ...WRITING_2];
 
 test("every writing exercise is well formed, its model passes and its weak answers miss the expected items", () => {
   for (const exercise of WRITING) assert.deepEqual(validateWritingExercise(exercise), [], exercise.id);

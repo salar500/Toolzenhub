@@ -47,17 +47,17 @@ export const DEPARTMENTS = Object.freeze([
         intro: [
             "Testing is the craft of finding out how software really behaves: reading requirements critically, designing tests that cover what matters, running them, and reporting problems so they get fixed. It is one of the most common ways into a software career, and it needs judgement more than programming.",
             "Here you practise on something real. ShopLite is a small web shop with written requirements; its test release hides ten seeded bugs for you to find. Writing labs check your questions, scenarios and test cases for structure and coverage, and quizzes check the ideas behind them. Everything runs in your browser and nothing you write is uploaded.",
-            "Start with the Manual Software Testing path: it begins with what testing is and why, and moves to requirements, scenarios and test cases. The Test Design Lab drills boundary values and equivalence partitions. Bug reports, test planning, API testing and accessibility testing follow as the department grows."
+            "Start with the Manual Software Testing path: it begins with what testing is and why, and moves to requirements, scenarios and test cases. The Test Design Lab drills boundary values and equivalence partitions. Bug reports and test planning are part of that path, and Specialised Testing adds integration, API, database, accessibility, acceptance, performance and mobile testing, with defect management and root-cause analysis."
         ],
         technologies: [
             { title: "Manual software testing", status: "path", path: "manual-testing" },
             { title: "Test design techniques", status: "path", path: "test-design" },
             { title: "Test Design Lab (20 checked exercises)", status: "lab", lab: "test-design-lab" },
             { title: "Bug hunting on ShopLite and bug reports", status: "path", path: "manual-testing" },
-            { title: "API testing", status: "planned" },
-            { title: "Accessibility testing", status: "planned" }
+            { title: "API testing", status: "path", path: "specialised-testing" },
+            { title: "Accessibility testing", status: "path", path: "specialised-testing" }
         ],
-        paths: ["manual-testing", "test-design"],
+        paths: ["manual-testing", "test-design", "specialised-testing"],
         labs: ["test-design-lab"],
         decks: ["Software testing"],
         start: { label: "New to testing? Start with lesson 1 of Manual Software Testing.", path: "manual-testing" },

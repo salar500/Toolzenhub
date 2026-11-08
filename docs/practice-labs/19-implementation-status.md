@@ -243,7 +243,7 @@ Milestones from M12 on are recorded here as sections rather than table rows.
   - at 1280 and 390 px, on the Selenium wait and API auth exercises: the starter is not yet met, the model meets every rule, the tool-specific run note shows, and there is no overflow;
   - 28,507 links on 387 pages resolve.
 
-#### M12g: Database Design and Testing path, with SQL playgrounds (commit: (this milestone's commit))
+#### M12g: Database Design and Testing path, with SQL playgrounds (commit: `89ec2fd`)
 
 - **Database Design and Testing** has 8 lessons:
   - modelling;
@@ -271,6 +271,26 @@ Milestones from M12 on are recorded here as sections rather than table rows.
   - At 1280 and 390 px: the foreign-key error shows, the edited SQL runs, the plan shows the index search, and there is no overflow.
   - Because the shared runner changed, I checked that an existing SQL path example still runs.
   - 29,615 links on 403 pages resolve.
+
+#### M12h: Specialised Testing path (commit: (this milestone's commit))
+
+- **Specialised Testing** has 8 lessons:
+  - integration testing (stubs and drivers);
+  - API testing for testers, with 2 `apitask` tasks;
+  - database testing, with 2 `sqlplay` checks: a status audit and recomputed totals;
+  - accessibility testing, with 2 `webplay` fixes and WCAG 2.2 questions;
+  - UAT (an ordering task);
+  - performance testing;
+  - defect management with a root-cause analysis lab;
+  - mobile and cross-device testing.
+- It also has interview practice (10 questions).
+- New writing lab `st-w-rca` in `manual-testing/writing-2.js`: a blameless root-cause analysis with 4 fields and 7 rules.
+- The Software Testing department now lists API and accessibility testing as covered by this path.
+- **Checks performed:**
+  - writing-check test (the RCA model passes and its weak version misses exactly 6 rules);
+  - `db-design.test.mjs` now also runs this path's playgrounds. This caught one wrong status value in a lesson query ('placed' instead of 'pending'), which I fixed, and the test now asserts that no order has an unlisted status;
+  - curriculum test;
+  - at 1280 and 390 px: the RCA lab renders with 4 fields, a weak answer gets not yet, the database playground runs, and there is no overflow.
 
 ### Final inventory, 2026-11-08 (preview branch)
 
@@ -344,7 +364,7 @@ Milestones from M12 on are recorded here as sections rather than table rows.
    - Check in the browser: the new visualizers and the schema block, at 1280 and 390 px.
 2. *(Done in M12e.)* **Backend Fundamentals path**, reusing apitask and quizzes.
 3. *(Done in M12f.)* **API Automation and Selenium paths**: new codecheck exercises, plus predict blocks for the Selenium Java code.
-4. *(Database design done in M12g.)* **Database design**, then **specialised testing** (API, database and accessibility testing), then **Excel and Power BI paths**.
+4. *(Database design done in M12g.)* **Database design**, then *(done in M12h)* **specialised testing** (API, database and accessibility testing), then **Excel and Power BI paths**.
 5. **Final pass.**
    - Repair the multi-line rows of the milestone table (M7a onwards): they break the Markdown table.
    - Run the completion review.

@@ -19,6 +19,7 @@ import { getToolById } from "../data/tools.js";
 import { LEVELS, PRACTICE_LABS_PREFIX, flatLessons, getPath, lessonCount, lessonUrl, levelUrl, moduleUrl, pathUrl, publishedPaths } from "./curriculum.js";
 import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from "./departments.js";
 import { JOURNEYS } from "./journeys.js";
+import { lessons as spLessons, interview as spLessonsInterview } from "./manual-testing/specialised-lessons.js";
 import { lessons as ddLessons, interview as ddLessonsInterview } from "./sql/design-lessons.js";
 import { apiLessons as aaLessons, apiInterview as aaInterview, seLessons, seInterview } from "./automation/api-selenium-lessons.js";
 import { lessons as beLessons, interview as beLessonsInterview } from "./web/backend-lessons.js";
@@ -43,6 +44,7 @@ import { lessons as tdLessons } from "./test-design/lessons.js";
 import { lessons as pwLessons } from "./playwright/lessons.js";
 import { lessons as pwLessons2, interview as pwInterview } from "./playwright/lessons-2.js";
 import { WRITING as mtWriting } from "./manual-testing/writing.js";
+import { WRITING_2 } from "./manual-testing/writing-2.js";
 import { lessons as aiLessons, interview as aiInterview } from "./ai/lessons.js";
 import { AI_WRITING } from "./ai/writing.js";
 import { lessons as stLessons, interview as stInterview } from "./data/lessons.js";
@@ -255,6 +257,16 @@ const CONTENT = {
         labTool: "sql-practice-lab",
         flashcards: "smart-flashcards",
         morePractice: "has 49 checked exercises and a free sandbox on the same tables, for practising the queries these lessons use."
+    },
+    "specialised-testing": {
+        kind: "blocks",
+        lessons: new Map(spLessons.map((lesson) => [lesson.id, lesson])),
+        interview: spLessonsInterview,
+        exercises: new Map(),
+        writing: new Map(WRITING_2.map((exercise) => [exercise.id, exercise])),
+        labTool: "test-design-lab",
+        flashcards: "smart-flashcards",
+        morePractice: "drills the boundary values and partitions that API and database test cases are built from."
     },
     "test-design": {
         kind: "blocks",

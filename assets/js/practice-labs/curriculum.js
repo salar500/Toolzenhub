@@ -647,6 +647,33 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "specialised-testing",
+        title: "Specialised Testing",
+        department: "software-testing",
+        status: "complete",
+        tagline: "Go beyond functional testing: integration, API, database, accessibility, acceptance, performance and mobile testing, plus defect management and blameless root-cause analysis, practised on ShopLite with real engines.",
+        audience: "Testers who know the fundamentals (the Manual Software Testing path) and want the specialist skills that experienced QA roles ask for.",
+        runsIn: "Practice runs in your browser: API requests on a simulated ShopLite API, SQL on real SQLite with the ShopLite tables, accessibility fixes in a script-free HTML playground and a root-cause analysis checked against a rubric. Nothing is sent.",
+        outcomes: ["Plan integration tests with stubs and drivers", "Design and run API test cases", "Verify stored data with SQL", "Test accessibility with keyboard and WCAG criteria", "Organise UAT and performance tests", "Triage defects and run blameless root-cause analyses"],
+        levels: [
+            { id: "intermediate", modules: [
+                { id: "beyond-the-ui", title: "Beyond the UI", summary: "Integration, API, database and accessibility testing, and user acceptance testing.", lessons: [
+                    { id: "sp-integration", slug: "integration-testing", title: "Integration testing" },
+                    { id: "sp-api-testing", slug: "api-testing", title: "API testing for testers" },
+                    { id: "sp-db-testing", slug: "database-testing", title: "Database testing for testers" },
+                    { id: "sp-accessibility", slug: "accessibility-testing", title: "Accessibility testing" },
+                    { id: "sp-uat", slug: "user-acceptance-testing", title: "User acceptance testing" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "quality-at-scale", title: "Quality at Scale", summary: "Performance testing, defect management with root-cause analysis, and mobile and cross-device testing.", lessons: [
+                    { id: "sp-performance", slug: "performance-testing", title: "Performance testing basics" },
+                    { id: "sp-rca-defects", slug: "defects-and-root-cause", title: "Defect management and root-cause analysis" },
+                    { id: "sp-mobile", slug: "mobile-testing", title: "Mobile and cross-device testing" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",

@@ -10,8 +10,9 @@
 import { checkWriting } from "./writing-check.js";
 import { WRITING } from "./manual-testing/writing.js";
 import { AI_WRITING } from "./ai/writing.js";
+import { WRITING_2 } from "./manual-testing/writing-2.js";
 
-const ALL = new Map([...WRITING, ...AI_WRITING].map((exercise) => [exercise.id, exercise]));
+const ALL = new Map([...WRITING, ...AI_WRITING, ...WRITING_2].map((exercise) => [exercise.id, exercise]));
 
 export function initLearnWriting(root = document) {
 
