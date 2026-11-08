@@ -44,6 +44,13 @@ for (const p of inventory.live) {
     e.searchIntent = "informational: the visitor wants to understand a concept before or after calculating";
     e.relatedSearchPhrases = uniq([`${e.primaryKeyword} explained`, `${e.primaryKeyword} example`]);
     e.relatedTools = uniq((art.tools ?? []).map((id) => `tool:${id}`));
+  } else if (p.type === "learn") {
+    // Practice Labs: lessons, modules, paths and interview pages answer learning questions; the home and departments browse
+    e.primaryKeyword = lc(title).replace(/\s*\|.*$/, "").trim();
+    const slug = p.url.replace(/^\/practice-labs\/|\/$/g, "");
+    const browse = slug === "" || !slug.includes("/");
+    e.searchIntent = browse ? "navigational: browse learning paths and labs" : "informational: the visitor wants to learn and practise a skill";
+    e.relatedSearchPhrases = browse ? [] : uniq([`learn ${e.primaryKeyword}`, `${e.primaryKeyword} practice`, `${e.primaryKeyword} tutorial`]);
   } else {
     e.primaryKeyword = lc(title).replace(/\s*[|:–-].*$/, "").trim();
     e.searchIntent = { home: "navigational/brand", "tool-index": "navigational: browse all tools", "article-index": "navigational: browse guides", category: "navigational/commercial investigation: a category of tools", "category-index": "navigational", directory: "navigational", legal: "navigational/trust", info: "navigational/trust", contact: "navigational/trust" }[p.type] ?? "navigational";

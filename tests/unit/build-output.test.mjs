@@ -73,14 +73,21 @@ for (const build of BUILDS) {
 
     it(".htaccess exists in the root-domain build only", () => {
       assert.equal(files.includes(".htaccess"), build.root);
-      if (build.root) assert.match(fs.readFileSync(path.join(build.dir, ".htaccess"), "utf8"), /^ErrorDocument 404 \/404\.html$/m);
+      if (build.root) {
+        const htaccess = fs.readFileSync(path.join(build.dir, ".htaccess"), "utf8");
+        assert.match(htaccess, /^ErrorDocument 404 \/404\.html$/m);
+        // module scripts (Pyodide's .mjs) and WebAssembly need these types on Apache/LiteSpeed hosts
+        assert.match(htaccess, /^\s*AddType text\/javascript \.mjs$/m);
+        assert.match(htaccess, /^\s*AddType application\/wasm \.wasm$/m);
+      }
     });
 
     it("declares its own base on every page, and the production origin as canonical", () => {
       for (const p of inventory.live) {
         const html = fs.readFileSync(path.join(build.dir, p.file), "utf8");
         assert.match(html, new RegExp(`<meta name="tz-site-base" content="${build.base}">`), p.file);
-        assert.ok(html.includes(`<link rel="canonical" href="https://toolzenhub.in${p.url}">`), `${p.file} canonical`);
+        // ShopLite (practice-target) is a standalone noindex practice app with no canonical, as the SEO check expects
+        if (p.type !== "practice-target") assert.ok(html.includes(`<link rel="canonical" href="https://toolzenhub.in${p.url}">`), `${p.file} canonical`);
         assert.ok(!/github\.io/i.test(html.replace(/href="https:\/\/fonts[^"]*"/g, "")), `${p.file} mentions the preview host`);
       }
     });

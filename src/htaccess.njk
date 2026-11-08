@@ -1,9 +1,16 @@
 ---
 eleventyExcludeFromCollections: true
 ---
-# OPTIONAL. Nothing in the site depends on this file.
+# Apache-family servers (including LiteSpeed). Written for the root-domain build only.
 #
-# On Apache-family servers (including LiteSpeed) it makes UNKNOWN URLs show the site's own 404 page.
-# Without it, valid URLs work exactly the same and unknown URLs still return 404; the host just shows
-# its default error page. Written for the root-domain build only.
+# 1. Unknown URLs show the site's own 404 page. Without this, valid URLs work exactly the same and unknown URLs
+#    still return 404; the host just shows its default error page.
 ErrorDocument 404 /404.html
+
+# 2. Correct types for the module and WebAssembly files of the in-browser engines (Pyodide for the Python lessons,
+#    sql.js for SQL). Browsers refuse a module script served with a non-JavaScript type, and WebAssembly streaming
+#    needs application/wasm, so without these the Python lessons fail to start on hosts that do not know .mjs.
+<IfModule mod_mime.c>
+  AddType text/javascript .mjs
+  AddType application/wasm .wasm
+</IfModule>

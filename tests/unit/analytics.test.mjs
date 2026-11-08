@@ -44,6 +44,11 @@ describe("build output", () => {
         assert.equal(has, false, "404 is not tracked");
         continue;
       }
+      // ShopLite, the noindex practice shop used by the testing lessons, is a standalone app and is never tracked
+      if (name.split(path.sep).join("/") === "practice-labs/shoplite/index.html") {
+        assert.equal(has || /assets\/js\/analytics\.js/.test(html), false, "ShopLite is not tracked");
+        continue;
+      }
       assert.equal(has, true, `${name}: id meta`);
       assert.equal((html.match(/tz-analytics-id/g) || []).length, 1, `${name}: one id meta`);
       assert.equal((html.match(/assets\/js\/analytics\.js/g) || []).length, 1, `${name}: one analytics module`);

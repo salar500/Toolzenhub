@@ -63,7 +63,7 @@ export const PY_EXERCISES = Object.freeze([
         id: "py-x-unique-sorted", fn: "unique_sorted",
         task: "Write unique_sorted(items) returning the distinct values in ascending order.",
         starter: "def unique_sorted(items):\n    pass\n",
-        tests: [{ args: [[3, 1, 3, 2]], expect: [1, 2, 3] }, { args: [[]], expect: [] }, { args: [["b", "a", "b"]], expect: ["a", "b"] }],
+        tests: [{ args: [[3, 1, 3, 2]], expect: [1, 2, 3] }, { args: [[]], expect: [] }, { args: [["b", "a", "b"]], expect: ["a", "b"] }, { args: [[100, 3, 50]], expect: [3, 50, 100] }],
         model: "def unique_sorted(items):\n    return sorted(set(items))\n",
         buggy: ["def unique_sorted(items):\n    return list(set(items))\n"],
         explain: "A set removes duplicates but has no order; sorted() returns a new sorted list."

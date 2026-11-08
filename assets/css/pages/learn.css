@@ -1314,7 +1314,7 @@ a.learn-card:hover {
 .learn-journey summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
 .learn-journey ol { margin: 8px 0 4px; }
 
-.learn-aiviz__plot { display: block; width: 100%; max-width: 520px; height: auto; margin: 8px 0; background: var(--surface, transparent); }
+.learn-aiviz__plot { display: block; width: 100%; max-width: 520px; height: auto; margin: 8px 0; background: var(--surface-card); }
 .learn-aiviz__axis { stroke: var(--line); stroke-width: 1; }
 .learn-aiviz__dot { fill: var(--accent); }
 .learn-aiviz__dot--test { fill: var(--state-warning, #b45309); }

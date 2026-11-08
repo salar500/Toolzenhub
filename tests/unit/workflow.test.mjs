@@ -22,7 +22,10 @@ before(() => {
 
 describe("GitHub Pages workflow", () => {
   it("is valid YAML that runs on pushes to main (the default branch) and on demand", () => {
-    assert.deepEqual(wf.on.push.branches, ["main"]);
+    // rule 11.3: during a development cycle the workflow may also deploy one named development branch to the preview
+    const [first, ...extra] = wf.on.push.branches;
+    assert.equal(first, "main");
+    assert.ok(extra.length <= 1 && extra.every((b) => /^feature\/[a-z0-9-]+$/.test(b)), `unexpected branches ${extra}`);
     assert.ok("workflow_dispatch" in wf.on);
   });
 

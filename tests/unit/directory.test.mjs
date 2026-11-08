@@ -15,6 +15,8 @@ before(async () => {
 });
 
 const hrefs = (html) => [...html.matchAll(/href="([^"]+)"/g)].map((m) => m[1]);
+/* the links of a category page's own grid (the workspace sidebar before it lists every calculator in the section) */
+const gridHrefs = (html) => hrefs(html.slice(html.indexOf("categories-detail__grid")));
 
 describe("All Tools", () => {
   test("one major section today, Calculators, with its categories; a live tool is a link; Health and Converter have live tools and category pages", () => {
@@ -50,14 +52,14 @@ describe("category pages", () => {
 
   test("Investment: SIP, PPF, FD, CAGR, SWP and XIRR are all links, and no Coming soon card is left", () => {
     const html = dir.categoryPageHtml("investment");
-    assert.deepEqual(hrefs(html).filter((h) => h.includes("/calculators/")), ["/Toolzenhub/calculators/sip/", "/Toolzenhub/calculators/ppf/", "/Toolzenhub/calculators/fd/", "/Toolzenhub/calculators/cagr/", "/Toolzenhub/calculators/swp/", "/Toolzenhub/calculators/xirr/", "/Toolzenhub/calculators/risk-reward/"]);
+    assert.deepEqual(gridHrefs(html).filter((h) => h.includes("/calculators/")), ["/Toolzenhub/calculators/sip/", "/Toolzenhub/calculators/ppf/", "/Toolzenhub/calculators/fd/", "/Toolzenhub/calculators/cagr/", "/Toolzenhub/calculators/swp/", "/Toolzenhub/calculators/xirr/", "/Toolzenhub/calculators/risk-reward/"]);
     assert.match(html, /PPF Calculator/);
     assert.equal((html.match(/category-page-card--soon/g) || []).length, 0);
     assert.match(html, /<h1[^>]*>\s*Investment Calculators/);
   });
 
   test("Business, Tax and Math show exactly their live tools; Coming soon ones are not links", () => {
-    const live = (id) => hrefs(dir.categoryPageHtml(id)).filter((h) => h.includes("/calculators/"));
+    const live = (id) => gridHrefs(dir.categoryPageHtml(id)).filter((h) => h.includes("/calculators/"));
     assert.deepEqual(live("business"), ["/Toolzenhub/calculators/profit/", "/Toolzenhub/calculators/margin/", "/Toolzenhub/calculators/roi/"]);
     assert.deepEqual(live("tax"), ["/Toolzenhub/calculators/gst/", "/Toolzenhub/calculators/income-tax/", "/Toolzenhub/calculators/gratuity/", "/Toolzenhub/calculators/salary-in-hand/"]);
     assert.deepEqual(live("math"), ["/Toolzenhub/calculators/percentage/", "/Toolzenhub/calculators/ratio/", "/Toolzenhub/calculators/age/"]);

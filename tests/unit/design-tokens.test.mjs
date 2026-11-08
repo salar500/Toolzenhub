@@ -89,7 +89,8 @@ describe("custom properties", () => {
     }
     // These are referenced without a fallback and never declared, so those declarations are ignored by the browser
     // (no transition, z-index auto). Defining them would switch on behaviour that has never run: left as is.
-    const KNOWN_UNDEFINED = ["--transition-fast", "--transition-normal", "--z-dropdown", "--z-modal"];
+    // --rail-w and --rail-zoom are set at run time by ui/section-rail.js (style.setProperty), with CSS fallbacks
+    const KNOWN_UNDEFINED = ["--transition-fast", "--transition-normal", "--z-dropdown", "--z-modal", "--rail-w", "--rail-zoom"];
     assert.deepEqual([...used].filter((n) => !defined.has(n)).sort(), KNOWN_UNDEFINED.sort());
   });
 });
@@ -103,6 +104,8 @@ describe("every generated page can use the tokens", () => {
   for (const build of ["dist", "dist-ghpages"]) {
     it(`${build}/: every live page loads base/variables.css before its other stylesheets`, () => {
       for (const p of inventory.live) {
+        // ShopLite is a standalone practice shop with its own stylesheet and deliberately not the site's design system
+        if (p.type === "practice-target") continue;
         const html = read(path.join(PROJECT, build, p.file));
         const sheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)].map((m) => m[1]).filter((h) => h.includes("/assets/css/"));
         assert.ok(sheets.length > 0, p.file);
