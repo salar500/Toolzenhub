@@ -24,7 +24,7 @@ document.addEventListener(
             import("../practice-labs/learn-search.js").then((module) => module.initLearnSearch());
         }
 
-        if (document.querySelector("[data-sql-run], .learn-exercise")) {
+        if (document.querySelector("[data-sql-run], .learn-exercise, [data-join-viz]")) {
             import("../practice-labs/learn-practice.js")
                 .then((module) => module.initLearnPractice())
                 .catch(() => {

@@ -105,6 +105,11 @@ export function initLearnPractice() {
 
     const evaluate = (exercise, sql) => (exercise.plan ? evaluatePlan(exercise, sql) : evaluateResult(exercise, sql));
 
+    /* the joins lesson's visualizer shares this page's SQL engine */
+    if (document.querySelector("[data-join-viz]")) {
+        import("./join-visualizer.js").then((module) => module.initJoinViz(runner));
+    }
+
     /* the controls start hidden: without script they would do nothing */
     for (const el of document.querySelectorAll("[data-sql-run], .learn-exercise__tool")) el.hidden = false;
 

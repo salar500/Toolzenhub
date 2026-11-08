@@ -137,6 +137,7 @@ export const sqlExtras = {
         summary: "Aggregates collapse many rows into one value. GROUP BY makes one result row per group. WHERE filters rows before grouping and HAVING filters groups afterwards."
     },
     joins: {
+        visual: "join",
         objectives: [
             "Explain why data is split across tables",
             "Combine tables with INNER JOIN and LEFT JOIN",

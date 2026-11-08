@@ -23,6 +23,7 @@ import { set as sqlSet } from "../tools/sql-practice-lab/exercises.js";
 import { sqlExtras } from "./sql-extras.js";
 import { lessons as sqlNewLessons, projects as sqlProjects, interview as sqlInterview } from "./sql/additions-lessons.js";
 import { set as sqlNewSet, DATASET_NOTES } from "./sql/additions-data.js";
+import { joinMarkup } from "./join-visualizer.js";
 
 const SITE_NAME = "ToolZen Hub";
 const HUB = () => ROUTES.practiceLabs;
@@ -212,7 +213,7 @@ function exampleBlock(example, index) {
                         <p>${esc(example.says)}</p>
                         <pre class="lx-code" tabindex="0" role="region" aria-label="SQL of example ${index + 1}"><code data-sql-source>${esc(example.sql)}</code></pre>
                         ${resultTable(example, `example ${index + 1}`)}
-                        <p><button type="button" class="lx-btn" data-sql-run hidden>Run this example</button></p>
+                        <p><button type="button" class="calculator-form__button lx-btn" data-sql-run hidden>Run this example</button></p>
                         <div class="lx-live-result" data-sql-out data-label="example ${index + 1}" role="status" aria-live="polite"></div>
                     </div>`;
 
@@ -230,8 +231,8 @@ function exerciseBlock(exercise, index, label = "Exercise") {
                             <label class="lx-label" for="learn-sql-${esc(exercise.id)}">Your SQL</label>
                             <textarea id="learn-sql-${esc(exercise.id)}" class="lx-textarea learn-editor" rows="5" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" maxlength="4000"></textarea>
                             <div class="learn-actions">
-                                <button type="button" class="lx-btn" data-learn-check>Check answer</button>
-                                <button type="button" class="lx-btn lx-btn--quiet" data-learn-clear>Clear</button>
+                                <button type="button" class="calculator-form__button lx-btn" data-learn-check>Check answer</button>
+                                <button type="button" class="calculator-form__button calculator-form__button--secondary lx-btn" data-learn-clear>Clear</button>
                             </div>
                             <div class="learn-feedback" data-learn-out role="status" aria-live="polite"></div>
                         </div>
@@ -304,6 +305,8 @@ function lessonBody(entry, content) {
                     <noscript><p class="lx-note">Running and checking SQL needs JavaScript and WebAssembly. The task, hints and solution below can still be read.</p></noscript>
                     ${exerciseBlock(exercises[0], 0)}
                 </section>` : ""}
+
+                ${data.visual === "join" ? joinMarkup() : ""}
 
                 <section class="learn-section" aria-labelledby="learn-points">
                     <h2 id="learn-points">Key points</h2>
@@ -535,7 +538,7 @@ function quizBlock(questions, prefix) {
                                 ${question.options.map((option, choice) => `
                                 <label class="learn-quiz__option"><input type="radio" name="${esc(prefix)}-${index}" value="${choice}"> <span>${esc(option)}</span></label>`).join("")}
                             </div>
-                            <p class="learn-quiz__actions"><button type="button" class="lx-btn" data-quiz-check hidden>Check</button></p>
+                            <p class="learn-quiz__actions"><button type="button" class="calculator-form__button lx-btn" data-quiz-check hidden>Check</button></p>
                             <p class="learn-quiz__result" role="status" aria-live="polite"></p>
                             <details class="learn-reveal">
                                 <summary>Show the answer and why</summary>

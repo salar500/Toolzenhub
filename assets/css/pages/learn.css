@@ -275,11 +275,10 @@
 
 }
 
-.lx-btn--quiet {
+/* buttons use the site's form button (components/buttons.css), as the labs do; on a narrow screen they share the row */
+.learn-main .calculator-form__button {
 
-    background: transparent;
-    color: var(--ink);
-    border: 1px solid var(--line-control);
+    min-width: 0;
 
 }
 
@@ -1014,5 +1013,83 @@ a.learn-card:hover {
 .learn-quiz__q[data-verdict="not-yet"] .learn-quiz__result {
 
     color: var(--ink);
+
+}
+
+
+/* ---------- JOIN visualizer ---------- */
+
+.join-viz__types,
+.join-viz__nav {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin: 0 0 12px;
+
+}
+
+.join-viz__types [aria-pressed="true"] {
+
+    background: var(--color-action-green);
+    color: var(--color-white);
+
+}
+
+.join-viz__tables {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+
+    margin: 12px 0;
+
+}
+
+.join-viz__table caption {
+
+    padding: 0 0 6px;
+
+    font-weight: 700;
+    text-align: left;
+
+}
+
+.join-viz tr.is-current td {
+
+    background: var(--accent-soft);
+    font-weight: 700;
+
+}
+
+.join-viz tr.is-match td {
+
+    background: var(--state-success-soft);
+
+}
+
+.join-viz__say {
+
+    min-height: 3em;
+
+    font-weight: 600;
+
+}
+
+@media (max-width: 760px) {
+
+    .join-viz__tables {
+
+        grid-template-columns: minmax(0, 1fr);
+
+    }
+
+    .join-viz__types .lx-btn,
+    .join-viz__nav .lx-btn {
+
+        flex: 1 1 140px;
+
+    }
 
 }
