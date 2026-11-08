@@ -97,7 +97,7 @@ const EMPTY_MESSAGE =
 function note(result) {
 
     if (result.same) {
-        return "Both dates are the same.";
+        return result.inclusive ? "Both dates are the same day, which counts as 1 day." : "Both dates are the same.";
     }
 
     if (result.reversed) {
@@ -113,15 +113,26 @@ function summaryLines(result) {
     const from = dateText(result.earlier);
     const to = dateText(result.later);
 
-    if (result.same) {
-        return [`${from} is the same day as ${to}: 0 days apart.`];
-    }
-
     const calendar =
         unitsText(result.years, result.months, result.days);
 
+    const both = `Counting both ${from} and ${to}: ${daysText(result.inclusiveDays)}.`;
+    const apart = `Not counting the start day (days between the dates): ${daysText(result.elapsedDays)}.`;
+
+    if (result.inclusive) {
+        return [
+            `From ${from} to ${to}, counting both dates, is ${daysText(result.totalDays)}${result.same ? "" : `, which the calendar counts as ${calendar}`}.`,
+            apart
+        ];
+    }
+
+    if (result.same) {
+        return [`${from} is the same day as ${to}: 0 days apart.`, both];
+    }
+
     return [
-        `From ${from} to ${to} is ${daysText(result.totalDays)}. Counted by the calendar, that is ${calendar}.`
+        `From ${from} to ${to} is ${daysText(result.totalDays)}. Counted by the calendar, that is ${calendar}.`,
+        both
     ];
 
 }
@@ -129,7 +140,7 @@ function summaryLines(result) {
 function renderResults(result) {
 
     const metrics = [
-        resultMetric({ label: "Total days", value: daysText(result.totalDays), primary: true }),
+        resultMetric({ label: result.inclusive ? "Total days (both dates counted)" : "Total days (days between)", value: daysText(result.totalDays), primary: true }),
         resultMetric({ label: "Years, months and days", value: unitsText(result.years, result.months, result.days) }),
         resultMetric({ label: "Weeks and days", value: weeksText(result.weeks, result.weekDays) })
     ];
@@ -165,9 +176,10 @@ function renderResults(result) {
                     <strong>Calendar dates only.</strong>
                     The two days you choose are treated as dates, not moments:
                     no time of day or time zone is involved, and leap years and
-                    different month lengths are counted. Total days is the number
-                    of days between the dates, not counting both ends. Business
-                    days and public holidays are not calculated.
+                    different month lengths are counted. ${result.inclusive
+                        ? "Both the start date and the end date are counted, so the result is one day more than the days between them."
+                        : "Total days is the number of days between the dates, so the start day is not counted; tick the box to count both the start and the end date."}
+                    Business days and public holidays are not calculated.
                 </div>
 
             </div>
@@ -178,10 +190,10 @@ function renderResults(result) {
 function liveSummary(result) {
 
     if (result.same) {
-        return "Both dates are the same: 0 days.";
+        return result.inclusive ? "Both dates are the same day: 1 day counting both." : "Both dates are the same: 0 days.";
     }
 
-    return `${daysText(result.totalDays)}, or ${unitsText(result.years, result.months, result.days)}.${result.reversed ? " The end date comes before the start date." : ""}`;
+    return `${daysText(result.totalDays)}${result.inclusive ? ", counting both dates" : ""}, or ${unitsText(result.years, result.months, result.days)}.${result.reversed ? " The end date comes before the start date." : ""}`;
 
 }
 
@@ -346,10 +358,19 @@ export function markup() {
 
                     </div>
 
+                    <label class="tt-check date-inclusive">
+                        <input type="checkbox" id="date-inclusive" aria-describedby="date-inclusive-help">
+                        <span>Count both the start and the end date</span>
+                    </label>
+
+                    <p class="calculator-form__help" id="date-inclusive-help">
+                        Off (the default): the number of days between the dates, so 1 June to 6 June is 5 days. On: every calendar date from the start to the end is counted, so 1 June to 6 June is 6 days. Both answers are always shown in the result.
+                    </p>
+
                     <div class="date-presets" role="group" aria-labelledby="date-presets-label">
 
                         <p class="calculator-form__help" id="date-presets-label">
-                            Quick fill from today, as your device reads it. Range buttons set both dates; the gap is the number of days between them, so today to 6 days later is 6 days apart (7 if you count both end days). "Previous 7 days" ends today and starts 6 days earlier, so it covers 7 calendar dates counting both ends; "Next 7 days" starts tomorrow. Weeks run Monday to Sunday, and months and years are complete calendar months and years.
+                            Quick fill from today, as your device reads it. Range buttons set both dates. "Previous 7 days" ends today and starts 6 days earlier, so it covers 7 calendar dates and shows as 6 days between them, or 7 with the box above ticked; "Next 7 days" starts tomorrow and works the same way. The "Today to 6 days later" buttons are 6 days between the dates, or 7 counting both. Weeks run Monday to Sunday, and months and years are complete calendar months and years.
                         </p>
 
                         <fieldset class="date-presets__group">
@@ -362,12 +383,12 @@ export function markup() {
                         </fieldset>
 
                         <fieldset class="date-presets__group">
-                            <legend>Previous periods (both dates)</legend>
+                            <legend>Previous periods (both dates; "days" ends today and includes it)</legend>
                             ${presetButtons(PREVIOUS_BUTTONS, "range")}
                         </fieldset>
 
                         <fieldset class="date-presets__group">
-                            <legend>Future periods (both dates)</legend>
+                            <legend>Future periods (both dates; "days" starts tomorrow)</legend>
                             ${presetButtons(NEXT_BUTTONS, "range")}
                         </fieldset>
 
@@ -456,6 +477,20 @@ export function markup() {
                     counted as calendar dates, so a time zone or a daylight
                     saving change cannot move the answer. The days between
                     1 January and 2 January are 1 day.
+                </p>
+
+                <p>
+                    <strong>Days between and days counted both ways.</strong>
+                    By default the start day is not counted, as when you ask how
+                    many days passed: 1 June to 6 June is 5 days. If you want
+                    every calendar date from the start to the end, such as the
+                    days of a leave, a booking or a course, tick "Count both
+                    the start and the end date": 1 June to 6 June is then 6
+                    days. The same date counted both ways is 1 day, and a whole
+                    month such as 1 to 31 January is 1 month. A phrase such as
+                    "the previous 6 days" is not a calculation until you decide
+                    whether today is one of them: the quick buttons make this
+                    explicit by including today in "Previous N days".
                 </p>
 
                 <p>
@@ -671,6 +706,9 @@ export function init() {
         end: document.getElementById(IDS.end)
     };
 
+    const inclusiveBox =
+        document.getElementById("date-inclusive");
+
     const allInputs =
         Object.values(inputs);
 
@@ -712,7 +750,8 @@ export function init() {
         const result =
             calculateDateDifference(
                 inputs.start.value,
-                inputs.end.value
+                inputs.end.value,
+                { inclusive: Boolean(inclusiveBox?.checked) }
             );
 
         if (result.status === "incomplete") {
@@ -850,6 +889,10 @@ export function init() {
 
             for (const input of allInputs) {
                 input.value = "";
+            }
+
+            if (inclusiveBox) {
+                inclusiveBox.checked = false;
             }
 
             update({ speak: false });
