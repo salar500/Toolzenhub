@@ -12,6 +12,9 @@ const { PATHS, flatLessons, publishedPaths } = await import("../../assets/js/pra
 const { lessons } = await import("../../assets/js/tools/sql-practice-lab/lessons.js");
 const { set } = await import("../../assets/js/tools/sql-practice-lab/exercises.js");
 const { sqlExtras } = await import("../../assets/js/practice-labs/sql-extras.js");
+const { lessons: newLessons } = await import("../../assets/js/practice-labs/sql/additions-lessons.js");
+const { set: newSet, DATASETS } = await import("../../assets/js/practice-labs/sql/additions-data.js");
+const { validateExerciseSet } = await import("../../assets/js/learning/content-schema.js");
 const { learnPages, learnSearchIndex } = await import("../../assets/js/practice-labs/learn-html.js");
 const { DEPARTMENTS, isPublished } = await import("../../assets/js/practice-labs/departments.js");
 
@@ -41,7 +44,7 @@ test("SQL: every lesson exists, is used once, and its slug is unique and URL-saf
   const all = flatLessons(path);
   const ids = all.map((e) => e.lesson.id);
   assert.equal(new Set(ids).size, ids.length, "a lesson is listed twice");
-  assert.deepEqual([...ids].sort(), lessons.map((l) => l.id).sort(), "every lab lesson is placed, and none is invented");
+  assert.deepEqual([...ids].sort(), [...lessons, ...newLessons].map((l) => l.id).sort(), "every lab lesson and every path lesson is placed, and none is invented");
   const slugs = all.map((e) => e.lesson.slug);
   assert.equal(new Set(slugs).size, slugs.length);
   for (const s of [...slugs, ...path.levels.flatMap((l) => [l.id, ...l.modules.map((m) => m.id)])]) assert.match(s, slug);
@@ -50,7 +53,7 @@ test("SQL: every lesson exists, is used once, and its slug is unique and URL-saf
 test("SQL: levels follow the lessons' own level, beginner to advanced", () => {
   const path = publishedPaths().find((p) => p.id === "sql");
   const rank = { beginner: 1, intermediate: 2, advanced: 3 };
-  const byId = new Map(lessons.map((l) => [l.id, l]));
+  const byId = new Map([...lessons, ...newLessons].map((l) => [l.id, l]));
   let last = 0;
   for (const e of flatLessons(path)) {
     assert.equal(e.level.id, byId.get(e.lesson.id).level, e.lesson.id);
@@ -74,7 +77,9 @@ test("SQL: each lesson has all teaching sections, real examples and existing exe
 
 test("generated pages: one per node, unique addresses, one h1, title and description present, no raw markup leaks", () => {
   const pages = learnPages();
-  assert.equal(pages.length, 1 + DEPARTMENTS.filter(isPublished).length + 1 + 3 + 7 + 18);
+  const sql = PATHS.find((p) => p.id === "sql");
+  const modules = sql.levels.reduce((n, l) => n + l.modules.length, 0);
+  assert.equal(pages.length, 1 + DEPARTMENTS.filter(isPublished).length + 1 + sql.levels.length + modules + flatLessons(sql).length);
   assert.equal(new Set(pages.map((p) => p.url)).size, pages.length);
   for (const page of pages) {
     assert.equal((page.html.match(/<h1[ >]/g) || []).length, 1, page.url);
@@ -89,4 +94,21 @@ test("search index: every entry points to a generated page or an existing lab, n
   const urls = new Set(learnPages().map((p) => p.url));
   assert.equal(new Set(index.map((e) => e.url)).size, index.length);
   for (const e of index) assert.ok(urls.has(e.url) || e.kind === "lab", `${e.kind} ${e.url}`);
+});
+
+test("SQL path additions: valid exercise set, ids never collide with the lab, every lesson complete", () => {
+  assert.deepEqual(validateExerciseSet(newSet), []);
+  const labIds = new Set(set.exercises.map((e) => e.id));
+  for (const e of newSet.exercises) {
+    assert.ok(!labIds.has(e.id), `${e.id} collides with a lab exercise`);
+    assert.ok(e.id.startsWith("sqlp-"), e.id);
+    if (e.dataset) assert.ok(DATASETS[e.dataset], `${e.id}: unknown dataset`);
+    if (e.plan) { assert.ok(e.plan.must && e.plan.mustNot, e.id); new RegExp(e.plan.must); new RegExp(e.plan.mustNot); }
+    else assert.ok(e.expected.rows.length > 0, `${e.id}: no expected rows`);
+  }
+  for (const l of newLessons) {
+    assert.ok(l.objectives.length >= 2 && l.check.length >= 2 && l.mistakes.length >= 2 && l.examples.length >= 1, l.id);
+    for (const key of ["why", "analogy", "summary", "intro"]) assert.ok(l[key].length > 60, `${l.id}: ${key}`);
+    for (const x of l.examples) assert.ok(x.columns.length > 0, `${l.id}: example without a result`);
+  }
 });

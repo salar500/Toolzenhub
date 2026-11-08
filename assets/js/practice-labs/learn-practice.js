@@ -6,6 +6,11 @@
    data for every run, a 3 second limit, and the lab's own evaluator that compares the result of the learner's query with the
    expected one (it never prints the expected rows). Nothing is sent anywhere and nothing is saved; the page keeps no record
    of what was solved. A result is drawn with DOM methods only (textContent), never as HTML.
+
+   The path's own exercises (sql/additions-data.js) may name a dataset (the company or bank tables), already included in
+   their setup, and may carry a plan check: the lab runs EXPLAIN QUERY PLAN (after the learner's statements, or on the
+   learner's query once its result is right) and requires the index search the task asks for. A plan check that cannot run
+   says so; it never passes by default.
 ========================================================= */
 
 import { createRunner } from "../tools/sql-practice-lab/sql-runner.js";
@@ -13,6 +18,7 @@ import { createEvaluator } from "../tools/sql-practice-lab/evaluator.js";
 import { set } from "../tools/sql-practice-lab/exercises.js";
 import { SETUP, CLEANING_SETUP } from "../tools/sql-practice-lab/dataset.js";
 import { showResult } from "../tools/sql-practice-lab/lessons-view.js";
+import { DATASETS, set as pathSet } from "./sql/additions-data.js";
 
 const LABELS = { correct: "Correct.", "not-yet": "Not yet.", "cannot-check": "Could not check." };
 
@@ -23,8 +29,11 @@ function showVerdict(box, verdict) {
 
     const head = document.createElement("p");
     const label = document.createElement("strong");
-    label.textContent = `${LABELS[verdict.verdict] ?? ""} `;
-    head.append(label, document.createTextNode(verdict.summary));
+    const word = LABELS[verdict.verdict] ?? "";
+    /* some summaries already open with the verdict word ("Not yet. ..."); show it once, in bold */
+    const rest = word && verdict.summary.startsWith(word) ? verdict.summary.slice(word.length).trimStart() : verdict.summary;
+    label.textContent = `${word} `;
+    head.append(label, document.createTextNode(rest));
     box.append(head);
 
     if (verdict.findings?.length) {
@@ -58,9 +67,43 @@ export function initLearnPractice() {
         wasmUrl: new URL("../vendor/sql-js/sql-wasm.wasm", import.meta.url).href
     });
 
-    const evaluate = createEvaluator(runner);
-    const exercises = new Map(set.exercises.map((exercise) => [exercise.id, exercise]));
+    const evaluateResult = createEvaluator(runner);
+    const exercises = new Map([...set.exercises, ...pathSet.exercises].map((exercise) => [exercise.id, exercise]));
     const setup = [...SETUP, ...CLEANING_SETUP];
+
+    /* the detail column of EXPLAIN QUERY PLAN rows, joined, as the generator recorded it */
+    const planText = (resultSet) => (resultSet?.rows ?? []).map((row) => String(row[3] ?? "")).join(" | ");
+
+    async function evaluatePlan(exercise, sql) {
+
+        const single = sql.trim().replace(/;\s*$/, "");
+
+        if (exercise.kind === "query") {
+            const verdict = await evaluateResult(exercise, sql);
+            if (verdict.verdict !== "correct") return verdict;
+            if (single.includes(";")) {
+                return { verdict: "cannot-check", summary: "Your result is right. To check its plan, write it as one SELECT statement without other statements." };
+            }
+        }
+
+        const reply = exercise.kind === "query"
+            ? await runner.run({ setup: [...SETUP, ...exercise.setup], sql: `EXPLAIN QUERY PLAN ${single}` })
+            : await runner.run({ setup: [...SETUP, ...exercise.setup], sql, verify: exercise.verify });
+
+        if (reply.unavailable || reply.timedOut || !reply.ok) {
+            return { verdict: "cannot-check", summary: reply.ok === false && reply.error ? "SQLite could not run your statement, so its plan was not checked." : "The plan could not be checked in this browser.", findings: reply.error ? [`SQLite says: ${reply.error}`] : [] };
+        }
+
+        const text = planText(reply.sets.at(-1));
+        const good = new RegExp(exercise.plan.must).test(text) && !new RegExp(exercise.plan.mustNot).test(text);
+
+        return good
+            ? { verdict: "correct", summary: exercise.kind === "query" ? "Right result, and the plan uses the index." : "The query now uses the plan this task asks for.", lines: [`Plan: ${text}`] }
+            : { verdict: "not-yet", summary: "Not yet. The query plan does not show the index search this task asks for.", findings: [`Plan now: ${text || "(empty)"}`, "Look for SCAN (every row read) and change the index or the condition so the plan says SEARCH."] };
+
+    }
+
+    const evaluate = (exercise, sql) => (exercise.plan ? evaluatePlan(exercise, sql) : evaluateResult(exercise, sql));
 
     /* the controls start hidden: without script they would do nothing */
     for (const el of document.querySelectorAll("[data-sql-run], .learn-exercise__tool")) el.hidden = false;
@@ -80,7 +123,7 @@ export function initLearnPractice() {
             if (!source || !out) return;
             busy(button, true);
             out.textContent = "Running...";
-            showResult(out, await runner.run({ setup, sql: source.textContent }));
+            showResult(out, await runner.run({ setup: [...setup, ...(DATASETS[holder.dataset.dataset] ?? [])], sql: source.textContent }));
             busy(button, false);
             return;
         }

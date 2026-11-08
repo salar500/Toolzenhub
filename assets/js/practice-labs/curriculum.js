@@ -71,7 +71,8 @@ export const PATHS = Object.freeze([
                         summary: "Turn many rows into totals, counts and averages, and label values with CASE.",
                         lessons: [
                             { id: "case", slug: "case-expressions", title: "CASE: choosing a value by condition" },
-                            { id: "aggregates", slug: "aggregates-group-by-having", title: "Summarising: aggregates, GROUP BY and HAVING" }
+                            { id: "aggregates", slug: "aggregates-group-by-having", title: "Summarising: aggregates, GROUP BY and HAVING" },
+                            { id: "dates-and-text", slug: "working-with-dates-and-text", title: "Working with dates and text" }
                         ]
                     },
                     {
@@ -102,9 +103,21 @@ export const PATHS = Object.freeze([
                     {
                         id: "analytics",
                         title: "Analytical Queries",
-                        summary: "Rank rows and compare each row with its group without collapsing the data.",
+                        summary: "Rank rows, keep running totals and compare each row with its neighbours and its group, without collapsing the data.",
                         lessons: [
-                            { id: "windows", slug: "window-functions", title: "Window functions" }
+                            { id: "windows", slug: "window-functions", title: "Window functions" },
+                            { id: "running-totals", slug: "running-totals-and-moving-averages", title: "Running totals and moving averages" },
+                            { id: "lag-lead-ranking", slug: "lag-lead-and-ranking", title: "Comparing rows: LAG, LEAD and ranking" }
+                        ]
+                    },
+                    {
+                        id: "recursion-performance",
+                        title: "Recursive Queries and Performance",
+                        summary: "Walk hierarchies and generate sequences with recursive queries, read query plans and make slow queries fast.",
+                        lessons: [
+                            { id: "recursive-ctes", slug: "recursive-ctes", title: "Recursive CTEs" },
+                            { id: "query-plans", slug: "reading-query-plans", title: "Reading a query plan" },
+                            { id: "query-tuning", slug: "writing-faster-queries", title: "Writing faster queries" }
                         ]
                     },
                     {
@@ -121,10 +134,8 @@ export const PATHS = Object.freeze([
         ],
         /* what the path will still gain; shown on the path page so the visitor knows this path is not finished */
         coming: [
-            "Recursive queries and more window-function practice",
-            "Reading execution plans and basic query tuning",
             "Practice projects: employees, banking, e-commerce, healthcare and business reporting",
-            "Interview-style challenges"
+            "An interview practice set with checked answers"
         ]
     }
 ]);

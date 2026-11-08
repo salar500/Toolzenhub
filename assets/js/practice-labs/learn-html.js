@@ -21,6 +21,8 @@ import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from ".
 import { lessons as sqlLessons } from "../tools/sql-practice-lab/lessons.js";
 import { set as sqlSet } from "../tools/sql-practice-lab/exercises.js";
 import { sqlExtras } from "./sql-extras.js";
+import { lessons as sqlNewLessons } from "./sql/additions-lessons.js";
+import { set as sqlNewSet, DATASET_NOTES } from "./sql/additions-data.js";
 
 const SITE_NAME = "ToolZen Hub";
 const HUB = () => ROUTES.practiceLabs;
@@ -36,8 +38,10 @@ const pathCrumbs = (path) => {
 /* the content of a path's lessons, by lesson id: the shared lesson data plus the teaching sections */
 const CONTENT = {
     sql: {
-        lessons: new Map(sqlLessons.map((lesson) => [lesson.id, { ...lesson, ...sqlExtras[lesson.id] }])),
-        exercises: new Map(sqlSet.exercises.map((exercise, index) => [exercise.id, { ...exercise, number: index + 1 }])),
+        /* the SQL Practice Lab's lessons with the path's teaching sections, then the path's own later lessons (generated, sql/additions-*.js) */
+        lessons: new Map([...sqlLessons.map((lesson) => [lesson.id, { ...lesson, ...sqlExtras[lesson.id] }]), ...sqlNewLessons.map((lesson) => [lesson.id, lesson])]),
+        exercises: new Map([...sqlSet.exercises, ...sqlNewSet.exercises].map((exercise) => [exercise.id, exercise])),
+        datasetNotes: DATASET_NOTES,
         labTool: "sql-practice-lab",
         flashcards: "smart-flashcards"
     }
@@ -181,7 +185,7 @@ function resultTable(example, label) {
 function exampleBlock(example, index) {
 
     return `
-                    <div class="learn-example">
+                    <div class="learn-example"${example.dataset ? ` data-dataset="${esc(example.dataset)}"` : ""}>
                         <h3>Example ${index + 1}</h3>
                         <p>${esc(example.says)}</p>
                         <pre class="lx-code" tabindex="0" role="region" aria-label="SQL of example ${index + 1}"><code data-sql-source>${esc(example.sql)}</code></pre>
@@ -199,6 +203,7 @@ function exerciseBlock(exercise, index) {
                         <h3>Exercise ${index + 1}: ${esc(exercise.title)}</h3>
                         <p class="learn-exercise__goal"><strong>Goal.</strong> ${esc(exercise.objective)}</p>
                         <p>${esc(exercise.instructions)}</p>
+                        ${exercise.plan ? `<p class="lx-note">Checked by its query plan: the lab runs EXPLAIN QUERY PLAN${exercise.kind === "query" ? " on your query, after checking its result" : ""} and looks for the index search the task asks for.</p>` : ""}
                         <div class="learn-exercise__tool" hidden>
                             <label class="lx-label" for="learn-sql-${esc(exercise.id)}">Your SQL</label>
                             <textarea id="learn-sql-${esc(exercise.id)}" class="lx-textarea learn-editor" rows="5" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" maxlength="4000"></textarea>
@@ -266,6 +271,7 @@ function lessonBody(entry, content) {
                 <section class="learn-section" aria-labelledby="learn-idea">
                     <h2 id="learn-idea">The idea in plain words</h2>
                     <p>${esc(data.intro)}</p>
+                    ${data.dataset && content.datasetNotes?.[data.dataset] ? `<p class="lx-note"><strong>Data in this lesson:</strong> the shop database plus ${esc(content.datasetNotes[data.dataset])}</p>` : ""}
                     ${data.examples.length ? exampleBlock(data.examples[0], 0) : ""}
                 </section>
 

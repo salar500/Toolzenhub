@@ -18,7 +18,7 @@ export const DEPARTMENTS = Object.freeze([
     {
         id: "database-engineering",
         title: "Database Engineering",
-        short: "SQL from the first SELECT to joins, window functions and transactions, with a real database engine in your browser.",
+        short: "SQL from the first SELECT to window functions, recursive queries and query plans, with a real database engine in your browser.",
         audience: ["Beginners who have never written a query", "Testers who check data behind an application", "Analysts and developers who need SQL every day"],
         intro: [
             "Almost every application keeps its records in a relational database, and SQL is how people read and change them. Developers write it, testers use it to check that the screen and the data agree, and analysts build reports on it.",
