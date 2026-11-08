@@ -29,6 +29,7 @@ import { lessons as mtLessons } from "./manual-testing/lessons.js";
 import { lessons as mtLessons2 } from "./manual-testing/lessons-2.js";
 import { lessons as mtLessons3 } from "./manual-testing/lessons-3.js";
 import { interview as mtInterview } from "./manual-testing/interview.js";
+import { lessons as tdLessons } from "./test-design/lessons.js";
 import { WRITING as mtWriting } from "./manual-testing/writing.js";
 
 const SITE_NAME = "ToolZen Hub";
@@ -54,6 +55,15 @@ const CONTENT = {
         morePractice: "has its own exercise list and a free sandbox for any SQL you want to try.",
         labTool: "sql-practice-lab",
         flashcards: "smart-flashcards"
+    },
+    "test-design": {
+        kind: "blocks",
+        lessons: new Map(tdLessons.map((lesson) => [lesson.id, lesson])),
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: "test-design-lab",
+        flashcards: "smart-flashcards",
+        morePractice: "holds all twenty exercises in one list, for repeat practice."
     },
     "manual-testing": {
         kind: "blocks",

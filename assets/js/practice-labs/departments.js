@@ -51,12 +51,13 @@ export const DEPARTMENTS = Object.freeze([
         ],
         technologies: [
             { title: "Manual software testing", status: "path", path: "manual-testing" },
-            { title: "Test design techniques", status: "lab", lab: "test-design-lab" },
+            { title: "Test design techniques", status: "path", path: "test-design" },
+            { title: "Test Design Lab (20 checked exercises)", status: "lab", lab: "test-design-lab" },
             { title: "Bug hunting on ShopLite and bug reports", status: "path", path: "manual-testing" },
             { title: "API testing", status: "planned" },
             { title: "Accessibility testing", status: "planned" }
         ],
-        paths: ["manual-testing"],
+        paths: ["manual-testing", "test-design"],
         labs: ["test-design-lab"],
         decks: ["Software testing"],
         start: { label: "New to testing? Start with lesson 1 of Manual Software Testing.", path: "manual-testing" },

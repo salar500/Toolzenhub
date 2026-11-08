@@ -149,6 +149,18 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                 </section>`;
         }
 
+        case "labset":
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-labset" data-labset="${esc(block.lab)}" data-ids="${esc(block.ids.join(","))}">
+                        <p>${esc(block.text)}</p>
+                        <p class="lx-note" data-labset-loading>The exercises load here. They need JavaScript; the <a href="${esc(`${SITE_ROOT}tools/${block.labTool}/`)}">full lab</a> lists them too.</p>
+                        <div class="lx-app"></div>
+                        <p class="lx-sr-only" aria-live="polite"></p>
+                    </div>
+                </section>`;
+
         case "bughunt": {
             const release = block.release ?? "r-bugs-1";
             const bugs = BUGS.filter((b) => b.release === release);

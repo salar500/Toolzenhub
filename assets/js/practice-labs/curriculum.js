@@ -136,6 +136,28 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "test-design",
+        title: "Test Design Techniques",
+        department: "software-testing",
+        status: "complete",
+        tagline: "Design fewer, sharper tests: equivalence partitions, boundary values, decision tables, state transitions, pairwise and error guessing, practised with exercises that check every value you choose.",
+        audience: "Testers who know the basics and want systematic techniques, and anyone preparing for testing interviews or certification-style questions.",
+        runsIn: "The exercises are the Test Design Lab's own, checked in your browser; nothing you enter is uploaded.",
+        outcomes: ["Partition inputs into valid and invalid classes", "Choose two-value and three-value boundary tests", "Build decision tables and state models and derive tests from them", "Cut configuration tests with pairwise and add experience-based tests"],
+        levels: [
+            { id: "beginner", modules: [{ id: "partitions-boundaries", title: "Partitions and Boundaries", summary: "The two techniques every tester uses daily, with exercises checked value by value.", lessons: [
+                { id: "td-partitions", slug: "equivalence-partitioning", title: "Equivalence partitioning" },
+                { id: "td-boundaries", slug: "boundary-value-analysis", title: "Boundary value analysis" }] }] },
+            { id: "intermediate", modules: [{ id: "tables-states", title: "Decision Tables and State Transitions", summary: "Techniques for rules that combine conditions and for behaviour that depends on history.", lessons: [
+                { id: "td-decision-tables", slug: "decision-tables", title: "Decision tables" },
+                { id: "td-state-transition", slug: "state-transition-testing", title: "State transition testing" }] }] },
+            { id: "advanced", modules: [{ id: "combinations-experience", title: "Combinations and Experience", summary: "Pairwise testing for configurations, use cases and error guessing, and advanced mixed practice.", lessons: [
+                { id: "td-pairwise", slug: "pairwise-testing", title: "Pairwise testing" },
+                { id: "td-use-case-error-guessing", slug: "use-cases-error-guessing", title: "Use-case testing, error guessing and mixed practice" }] }] }
+        ],
+        coming: []
+    },
+    {
         id: "manual-testing",
         title: "Manual Software Testing",
         department: "software-testing",

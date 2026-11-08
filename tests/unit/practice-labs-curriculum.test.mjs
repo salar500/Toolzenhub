@@ -128,8 +128,17 @@ test("Manual testing path: every lesson has content, blocks render, writing exer
     assert.ok(l, e.lesson.id);
     assert.equal(l.level, e.level.id, e.lesson.id);
     assert.ok(l.objectives.length >= 2 && l.check.length >= 2 && l.mistakes.length >= 2, l.id);
-    assert.ok(l.blocks.some((b) => ["quiz", "order", "write", "bughunt"].includes(b.type)), `${l.id}: needs a checked practice block`);
+    assert.ok(l.blocks.some((b) => ["quiz", "order", "write", "bughunt", "labset"].includes(b.type)), `${l.id}: needs a checked practice block`);
     for (const b of l.blocks.filter((b) => b.type === "write")) assert.ok(writing.has(b.exercise), `${l.id}: ${b.exercise}`);
     for (const b of l.blocks.filter((b) => b.type === "quiz")) for (const q of b.questions) assert.ok(q.answer >= 0 && q.answer < q.options.length, q.q);
   }
+});
+
+test("Test Design path: every lab exercise is used exactly once, by an id that exists", async () => {
+  const { lessons } = await import("../../assets/js/practice-labs/test-design/lessons.js");
+  const { set } = await import("../../assets/js/tools/test-design-lab/exercises.js");
+  const used = lessons.flatMap((l) => l.blocks.filter((b) => b.type === "labset").flatMap((b) => b.ids));
+  assert.equal(new Set(used).size, used.length);
+  assert.deepEqual([...used].sort(), set.exercises.map((e) => e.id).sort());
+  for (const l of lessons) assert.ok(l.objectives.length >= 2 && l.check.length >= 2, l.id);
 });
