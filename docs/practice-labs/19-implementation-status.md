@@ -332,7 +332,7 @@ Both paths have interview practice (12 questions each). The Cron Challenge Lab i
   - Both standalone lab pages still mount their exercises.
   - 32,652 links on 447 pages resolve.
 
-#### M12j: Data Engineering Foundations path and updated role journeys (commit: (this milestone's commit))
+#### M12j: Data Engineering Foundations path and updated role journeys (commit: `cbc6eb7`)
 
 - **Data Engineering Foundations** (6 lessons):
   - ETL, ELT, batch and streaming;
@@ -356,6 +356,23 @@ Both paths have interview practice (12 questions each). The Cron Challenge Lab i
   - At 390 px the incremental playground shows 17 and there is no overflow.
   - At 1280 and 390 px the home page shows 8 journeys, the first opens with 6 steps, no department card is marked in development, and search works.
   - 33,584 links on 461 pages resolve.
+
+#### M13a: Regular Expressions (P33) and Data Structures and Algorithms (P32) paths (commit: (this milestone's commit))
+
+- **Why these paths:** the final audit compared the approved catalogue (`05-learning-path-catalogue.md`) with the repository. P31, P32, P33, P23, P62 and P73 had no path. Cypress is not in the approved catalogue and is not built.
+- **Regular Expressions** has 4 lessons with interview practice (8 questions).
+  - New `regex` block: real JavaScript patterns run in `programming/regex-worker.js`, stopped after 1 s so ReDoS cannot freeze the page.
+  - 9 exercises, of two kinds: match (with anchors, PIN code, case flag, alternation, lookahead) and extract (prices, emails, lazy brackets, ISO dates).
+  - Weak entries may carry their own flags.
+- **Data Structures and Algorithms for Interviews** has 5 lessons with interview practice (8 questions).
+  - 6 new `jsrun` exercises: balanced brackets with a stack, binary search, merging, top-k counting, BFS shortest path and an LRU cache.
+  - The LRU cache is judged by a scenario harness.
+  - The path reuses the two-sum exercise.
+- **Checks performed:**
+  - Regex unit test (all 9 pinned); JS exercises unit test (23 pinned). This caught a BFS test set that a greedy walk passed; I added a dead-end grid.
+  - Curriculum test (one leaked word, "undefined", reworded).
+  - At 1280 and 390 px: an unanchored pattern scores 3 of 5 and the anchored one passes; the page stays responsive after a nested-quantifier pattern; the LRU model passes; no overflow.
+  - Links resolve.
 
 ### Final inventory, 2026-11-08 (preview branch, after the final remaining-development mission)
 

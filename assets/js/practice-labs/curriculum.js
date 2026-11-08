@@ -760,6 +760,56 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "regex",
+        title: "Regular Expressions",
+        department: "programming",
+        status: "complete",
+        tagline: "Write regular expressions that work: classes, quantifiers, anchors, groups, flags, extraction, lazy matching, lookarounds and safe patterns, tested live against real inputs in your browser.",
+        audience: "Developers, testers and analysts who validate input, search logs or clean data. Basic programming helps.",
+        runsIn: "Patterns are real JavaScript regular expressions tested against each exercise's inputs in a worker that is stopped after 1 second, so a runaway pattern cannot freeze the page. Nothing is stored or sent.",
+        outcomes: ["Match with classes, quantifiers and anchors", "Group, alternate and use flags", "Capture and extract data", "Use lazy quantifiers and lookarounds", "Avoid catastrophic backtracking"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "regex-basics", title: "Regex Basics", summary: "Literals, classes, quantifiers, anchors, groups, alternation and flags, tested live.", lessons: [
+                    { id: "rx-basics", slug: "classes-and-quantifiers", title: "Literal text, classes and quantifiers" },
+                    { id: "rx-groups", slug: "groups-alternation-flags", title: "Groups, alternation and flags" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "regex-extraction", title: "Extracting Data", summary: "Capturing groups, non-capturing groups and extracting every match.", lessons: [
+                    { id: "rx-extract", slug: "capturing-and-extracting", title: "Capturing and extracting data" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "regex-advanced", title: "Advanced Patterns", summary: "Greedy and lazy matching, lookarounds and regex performance.", lessons: [
+                    { id: "rx-advanced", slug: "lazy-lookarounds-performance", title: "Greedy and lazy matching, lookarounds and performance" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
+        id: "dsa",
+        title: "Data Structures and Algorithms for Interviews",
+        department: "programming",
+        status: "complete",
+        tagline: "Prepare for coding interviews: Big O, stacks and queues, searching and sorting, hashing, graphs and breadth-first search, and designing an LRU cache, writing JavaScript that runs against tests in your browser.",
+        audience: "Developers and automation engineers preparing for technical interviews. Complete the JavaScript Programming path first.",
+        runsIn: "Your code runs in your browser, in an isolated worker with no network access, against each exercise's tests, and is stopped after 2 seconds. Nothing is stored or sent.",
+        outcomes: ["Reason about time and space complexity", "Use stacks, queues, maps and sets", "Implement binary search and merging", "Solve counting and top-k problems", "Find shortest paths with BFS", "Design an O(1) LRU cache"],
+        levels: [
+            { id: "intermediate", modules: [
+                { id: "core-structures", title: "Core Structures and Algorithms", summary: "Big O and structures, searching and sorting, and hashing problems, coded and tested.", lessons: [
+                    { id: "dsa-complexity", slug: "big-o-and-structures", title: "Big O and choosing data structures" },
+                    { id: "dsa-searching-sorting", slug: "searching-and-sorting", title: "Searching and sorting" },
+                    { id: "dsa-hashing", slug: "hashing-and-counting", title: "Hashing and counting problems" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "graphs-and-design", title: "Graphs and Design", summary: "Breadth-first search on grids and designing an LRU cache.", lessons: [
+                    { id: "dsa-graphs", slug: "graphs-and-bfs", title: "Graphs and breadth-first search" },
+                    { id: "dsa-design", slug: "lru-cache", title: "Designing data structures: the LRU cache" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",

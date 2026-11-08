@@ -24,6 +24,7 @@
      shellsim  { heading?, task }                       shell commands on an in-memory file system (learn-shellsim.js)
      schema    { heading?, exercise }                   write structured JSON output, validated against a schema (learn-schema.js)
      sqlplay   { heading?, text, sql, expect }          editable SQL run on the SQL lab's engine (learn-practice.js); expect rows|error
+     regex     { heading?, exercise }                   a regular expression tested in a time-limited worker (learn-regex.js)
      shoplite  { text, release? }                       a task on the practice shop, opened in a new tab
 ========================================================= */
 
@@ -39,6 +40,7 @@ import { PY_EXERCISES } from "./programming/py-exercises.js";
 import { PREDICT } from "./programming/predict.js";
 import { SHELL_TASKS } from "./devops/shell-tasks.js";
 import { STRUCTURED } from "./ai/structured.js";
+import { REGEX } from "./programming/regex.js";
 import { DATASETS, NUMERIC, formatAnswer } from "./data/stats.js";
 
 const SHOPLITE = () => `${SITE_ROOT}practice-labs/shoplite/`;
@@ -537,6 +539,34 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                         <p><button type="button" class="calculator-form__button lx-btn" data-sql-run hidden>Run</button></p>
                         <div class="lx-live-result" data-sql-out data-label="${esc(id)}" role="status" aria-live="polite"></div>
                         <p class="lx-note">Runs real SQLite (sql.js) in your browser on a fresh copy of the ShopLite practice tables each time. Nothing is saved or sent.</p>
+                    </div>
+                </section>`;
+        }
+
+        case "regex": {
+            const exercise = REGEX.find((c) => c.id === block.exercise);
+            if (!exercise) throw new Error(`unknown regex exercise ${block.exercise}`);
+            const id = esc(exercise.id);
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-write" data-regex="${id}">
+                        <p>${esc(exercise.task)}</p>
+                        <ul class="learn-regex__tests">${exercise.tests.map((t) => `<li><code>${esc(JSON.stringify(t.text))}</code>: ${exercise.kind === "extract" ? `should give ${esc(JSON.stringify(t.want))}` : t.want ? "should match" : "should not match"}</li>`).join("")}</ul>
+                        <div data-rx-tools hidden>
+                            <div class="learn-actions">
+                                <div class="learn-regex__pattern"><label class="lx-label" for="${id}-p">Pattern (without slashes)</label><input id="${id}-p" class="lx-input" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" maxlength="300"></div>
+                                <div><label class="lx-label" for="${id}-f">Flags</label><input id="${id}-f" class="lx-input learn-regex__flags" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" maxlength="6"></div>
+                            </div>
+                            <div class="learn-actions"><button type="button" class="calculator-form__button lx-btn" data-rx-check>Test the pattern</button></div>
+                            <div class="learn-feedback" data-rx-out role="status" aria-live="polite"></div>
+                        </div>
+                        <p class="lx-note">Real JavaScript regular expressions, run in your browser in a worker that is stopped after 1 second. Other engines (PCRE, Python, Java) differ in a few details.</p>
+                        <details class="learn-reveal">
+                            <summary>Show a pattern that works and why</summary>
+                            <pre class="lx-code" tabindex="0"><code>/${esc(exercise.model)}/${esc(exercise.flags)}</code></pre>
+                            <p>${esc(exercise.explain)}</p>
+                        </details>
                     </div>
                 </section>`;
         }

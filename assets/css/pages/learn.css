@@ -1324,3 +1324,10 @@ a.learn-card:hover {
 .learn-aiviz__dot--k1 { fill: var(--state-success, #15803d); stroke: var(--state-success, #15803d); }
 .learn-aiviz__dot--k2 { fill: var(--state-warning, #b45309); stroke: var(--state-warning, #b45309); }
 .learn-aiviz__left { background: var(--accent-soft); }
+
+/* ---------- regular expressions ---------- */
+
+.learn-regex__pattern { flex: 1 1 16em; }
+.learn-regex__pattern .lx-input { width: 100%; font-family: var(--font-mono, monospace); }
+.learn-regex__flags { width: 5em; font-family: var(--font-mono, monospace); }
+.learn-regex__tests code { overflow-wrap: anywhere; }

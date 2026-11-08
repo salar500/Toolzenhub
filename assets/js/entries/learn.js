@@ -28,6 +28,10 @@ document.addEventListener(
             import("../practice-labs/learn-predict.js").then((module) => module.initPredict());
         }
 
+        if (document.querySelector("[data-regex]")) {
+            import("../practice-labs/learn-regex.js").then((module) => module.initRegex());
+        }
+
         if (document.querySelector("[data-schema]")) {
             import("../practice-labs/learn-schema.js").then((module) => module.initSchema());
         }

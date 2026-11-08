@@ -143,9 +143,11 @@ export const DEPARTMENTS = Object.freeze([
         technologies: [
             { title: "JavaScript", status: "path", path: "javascript" },
             { title: "Python", status: "path", path: "python" },
-            { title: "Java", status: "path", path: "java" }
+            { title: "Java", status: "path", path: "java" },
+            { title: "Regular expressions", status: "path", path: "regex" },
+            { title: "Data structures and algorithms", status: "path", path: "dsa" }
         ],
-        paths: ["javascript", "python", "java"],
+        paths: ["javascript", "python", "java", "dsa", "regex"],
         start: { label: "Start with lesson 1 of JavaScript Programming.", path: "javascript" },
         labs: [],
         decks: [],

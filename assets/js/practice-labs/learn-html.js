@@ -19,6 +19,7 @@ import { getToolById } from "../data/tools.js";
 import { LEVELS, PRACTICE_LABS_PREFIX, flatLessons, getPath, lessonCount, lessonUrl, levelUrl, moduleUrl, pathUrl, publishedPaths } from "./curriculum.js";
 import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from "./departments.js";
 import { JOURNEYS } from "./journeys.js";
+import { regexLessons as rxLessons, regexInterview as rxInterview, dsaLessons, dsaInterview } from "./programming/regex-dsa-lessons.js";
 import { lessons as deLessons, interview as deLessonsInterview } from "./data/engineering-lessons.js";
 import { excelLessons as xlpLessons, pbiLessons as pbipLessons, excelInterview as xlpInterview, pbiInterview as pbipInterview } from "./data/excel-pbi-lessons.js";
 import { lessons as spLessons, interview as spLessonsInterview } from "./manual-testing/specialised-lessons.js";
@@ -299,6 +300,26 @@ const CONTENT = {
         labTool: "sql-practice-lab",
         flashcards: "smart-flashcards",
         morePractice: "has 49 checked SQL exercises on the same tables, including a data-cleaning set."
+    },
+    "regex": {
+        kind: "blocks",
+        lessons: new Map(rxLessons.map((lesson) => [lesson.id, lesson])),
+        interview: rxInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: null,
+        flashcards: null,
+        morePractice: ""
+    },
+    "dsa": {
+        kind: "blocks",
+        lessons: new Map(dsaLessons.map((lesson) => [lesson.id, lesson])),
+        interview: dsaInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: null,
+        flashcards: null,
+        morePractice: ""
     },
     "test-design": {
         kind: "blocks",

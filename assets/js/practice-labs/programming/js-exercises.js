@@ -158,5 +158,60 @@ export const JS_EXERCISES = Object.freeze([
         buggy: ["function createPaymentHandler() {\n  let next = 1;\n  return function pay(key, amount) {\n    return { paymentId: `P${next++}`, amount, replayed: false };\n  };\n}"],
         explain: "Store the result under the idempotency key and return it for repeats, so a network retry cannot create a second charge; a different request with the same key is a client bug and is refused.",
         harness: "const pay = createPaymentHandler();\nconst a = pay('k1', 500), b = pay('k1', 500), c = pay('k2', 500);\nlet threw = false;\ntry { pay('k1', 900); } catch (e) { threw = e.message === 'Idempotency key reused with a different request'; }\nreturn [a.paymentId, b.paymentId, c.paymentId, b.replayed && !a.replayed && threw].join(',');"
+    },
+    {
+        id: "dsa-x-brackets", fn: "isBalanced",
+        task: "Write isBalanced(text) returning true when every (, [ and { is closed by the matching bracket in the right order. Other characters are ignored. Use a stack.",
+        starter: "function isBalanced(text) {\n  const stack = [];\n  return true;\n}",
+        tests: [{ args: ["(a[b]{c})"], expect: true }, { args: ["([)]"], expect: false }, { args: ["(("], expect: false }, { args: ["())"], expect: false }, { args: [""], expect: true }],
+        model: "function isBalanced(text) {\n  const pairs = { ')': '(', ']': '[', '}': '{' };\n  const stack = [];\n  for (const ch of text) {\n    if ('([{'.includes(ch)) stack.push(ch);\n    else if (ch in pairs && stack.pop() !== pairs[ch]) return false;\n  }\n  return stack.length === 0;\n}",
+        buggy: ["function isBalanced(text) {\n  let open = 0;\n  for (const ch of text) {\n    if ('([{'.includes(ch)) open++;\n    else if (')]}'.includes(ch)) open--;\n  }\n  return open === 0;\n}"],
+        explain: "A stack remembers the order of opening brackets, so ([)] fails; counting alone cannot see order. A closer with nothing to pop is unmatched, and leftovers at the end mean unclosed brackets."
+    },
+    {
+        id: "dsa-x-binary-search", fn: "binarySearch",
+        task: "Write binarySearch(sorted, target) returning the index of target in a sorted array, or -1. It must take O(log n) steps.",
+        starter: "function binarySearch(sorted, target) {\n  \n}",
+        tests: [{ args: [[2, 5, 8, 12, 16, 23, 38], 23], expect: 5 }, { args: [[2, 5, 8], 2], expect: 0 }, { args: [[2, 5, 8], 8], expect: 2 }, { args: [[2, 5, 8], 6], expect: -1 }, { args: [[], 1], expect: -1 }],
+        model: "function binarySearch(sorted, target) {\n  let lo = 0, hi = sorted.length - 1;\n  while (lo <= hi) {\n    const mid = (lo + hi) >> 1;\n    if (sorted[mid] === target) return mid;\n    if (sorted[mid] < target) lo = mid + 1; else hi = mid - 1;\n  }\n  return -1;\n}",
+        buggy: ["function binarySearch(sorted, target) {\n  let lo = 0, hi = sorted.length - 1;\n  while (lo < hi) {\n    const mid = (lo + hi) >> 1;\n    if (sorted[mid] === target) return mid;\n    if (sorted[mid] < target) lo = mid + 1; else hi = mid - 1;\n  }\n  return -1;\n}"],
+        explain: "Keep searching while lo <= hi: with lo < hi the last remaining candidate is never checked, so targets at some positions are missed."
+    },
+    {
+        id: "dsa-x-merge", fn: "mergeSorted",
+        task: "Write mergeSorted(a, b) that merges two sorted arrays into one sorted array in O(n + m), without calling sort.",
+        starter: "function mergeSorted(a, b) {\n  const out = [];\n  return out;\n}",
+        tests: [{ args: [[1, 4, 9], [2, 3, 10, 11]], expect: [1, 2, 3, 4, 9, 10, 11] }, { args: [[], [1]], expect: [1] }, { args: [[5, 5], [5]], expect: [5, 5, 5] }],
+        model: "function mergeSorted(a, b) {\n  const out = [];\n  let i = 0, j = 0;\n  while (i < a.length && j < b.length) out.push(a[i] <= b[j] ? a[i++] : b[j++]);\n  while (i < a.length) out.push(a[i++]);\n  while (j < b.length) out.push(b[j++]);\n  return out;\n}",
+        buggy: ["function mergeSorted(a, b) {\n  const out = [];\n  let i = 0, j = 0;\n  while (i < a.length && j < b.length) out.push(a[i] <= b[j] ? a[i++] : b[j++]);\n  return out;\n}"],
+        explain: "Two pointers walk both arrays; when one runs out, the rest of the other must be copied. This is the merge step of merge sort."
+    },
+    {
+        id: "dsa-x-top-k", fn: "topK",
+        task: "Write topK(words, k) returning the k most frequent words, most frequent first, breaking ties alphabetically.",
+        starter: "function topK(words, k) {\n  \n}",
+        tests: [{ args: [["lamp", "mug", "lamp", "pen", "mug", "lamp"], 2], expect: ["lamp", "mug"] }, { args: [["b", "a", "c", "a", "b"], 2], expect: ["a", "b"] }, { args: [["x"], 3], expect: ["x"] }],
+        model: "function topK(words, k) {\n  const counts = new Map();\n  for (const w of words) counts.set(w, (counts.get(w) ?? 0) + 1);\n  return [...counts].sort((x, y) => y[1] - x[1] || x[0].localeCompare(y[0])).slice(0, k).map(([w]) => w);\n}",
+        buggy: ["function topK(words, k) {\n  const counts = new Map();\n  for (const w of words) counts.set(w, (counts.get(w) ?? 0) + 1);\n  return [...counts].sort((x, y) => y[1] - x[1]).slice(0, k).map(([w]) => w);\n}"],
+        explain: "Count with a Map in O(n), then sort the distinct words by count and name. Without the tie-break, equal counts keep insertion order, which the task does not ask for."
+    },
+    {
+        id: "dsa-x-bfs", fn: "shortestPath",
+        task: "Write shortestPath(grid) returning the fewest steps from the top-left to the bottom-right of a grid of strings, where '.' is open and '#' is a wall, moving up, down, left or right; return -1 if unreachable. Use breadth-first search.",
+        starter: "function shortestPath(grid) {\n  \n}",
+        tests: [{ args: [["..#", "#..", "..."]], expect: 4 }, { args: [[".#", "#."]], expect: -1 }, { args: [["."]], expect: 0 }, { args: [["....", ".##.", "...."]], expect: 5 }, { args: [["..#.", ".#..", "...."]], expect: 5 }],
+        model: "function shortestPath(grid) {\n  const rows = grid.length, cols = grid[0].length;\n  if (grid[0][0] === '#' || grid[rows - 1][cols - 1] === '#') return -1;\n  const seen = new Set(['0,0']);\n  let frontier = [[0, 0]], steps = 0;\n  while (frontier.length) {\n    const next = [];\n    for (const [r, c] of frontier) {\n      if (r === rows - 1 && c === cols - 1) return steps;\n      for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {\n        const nr = r + dr, nc = c + dc, key = `${nr},${nc}`;\n        if (nr >= 0 && nc >= 0 && nr < rows && nc < cols && grid[nr][nc] === '.' && !seen.has(key)) { seen.add(key); next.push([nr, nc]); }\n      }\n    }\n    frontier = next;\n    steps++;\n  }\n  return -1;\n}",
+        buggy: ["function shortestPath(grid) {\n  const rows = grid.length, cols = grid[0].length;\n  let r = 0, c = 0, steps = 0;\n  while (r < rows - 1 || c < cols - 1) {\n    if (c < cols - 1 && grid[r][c + 1] === '.') c++;\n    else if (r < rows - 1 && grid[r + 1][c] === '.') r++;\n    else return -1;\n    steps++;\n  }\n  return steps;\n}"],
+        explain: "Breadth-first search explores all cells at distance 1, then 2, and so on, so the first time it reaches the goal is the shortest path. A greedy walk can get stuck or take a longer route."
+    },
+    {
+        id: "dsa-x-lru", fn: "createLRU",
+        task: "Write createLRU(capacity) returning { get(key), put(key, value) }: a least-recently-used cache. get returns the value or -1 and marks the key as used; put inserts or updates and, when over capacity, evicts the least recently used key. Both in O(1).",
+        starter: "function createLRU(capacity) {\n  return { get(key) { return -1; }, put(key, value) {} };\n}",
+        tests: [{ args: [], expect: "1,-1,3,4,-1", call: "capacity 2: put 1, put 2, get 1, put 3, get 2, get 3, put 4, get 4, get 1" }],
+        model: "function createLRU(capacity) {\n  const map = new Map();\n  return {\n    get(key) {\n      if (!map.has(key)) return -1;\n      const v = map.get(key);\n      map.delete(key);\n      map.set(key, v);\n      return v;\n    },\n    put(key, value) {\n      map.delete(key);\n      map.set(key, value);\n      if (map.size > capacity) map.delete(map.keys().next().value);\n    }\n  };\n}",
+        buggy: ["function createLRU(capacity) {\n  const map = new Map();\n  return {\n    get(key) { return map.has(key) ? map.get(key) : -1; },\n    put(key, value) {\n      map.set(key, value);\n      if (map.size > capacity) map.delete(map.keys().next().value);\n    }\n  };\n}"],
+        harness: "const c = createLRU(2);\nc.put(1, 1); c.put(2, 2);\nconst a = c.get(1);\nc.put(3, 3);\nconst b = c.get(2), d = c.get(3);\nc.put(4, 4);\nconst e = c.get(4), f = c.get(1);\nreturn [a, b, d, e, f].join(',');",
+        explain: "A JavaScript Map keeps insertion order, so deleting and re-inserting a key on every use moves it to the end; the first key is then always the least recently used. The buggy version never refreshes keys on get, so it evicts the wrong one."
     }
 ]);
