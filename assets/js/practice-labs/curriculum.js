@@ -837,6 +837,54 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "llm-apps",
+        title: "Building LLM Applications",
+        department: "ai-engineering",
+        status: "complete",
+        tagline: "Build reliable applications around language models: architecture, RAG plumbing (chunking, similarity, context budgets), validated tool calls, retries, cost and latency, and testing, with the application code you write running against tests in your browser.",
+        audience: "Developers building AI features and testers evaluating them. AI and LLM Foundations and JavaScript basics come first; Prompt Engineering helps.",
+        runsIn: "No AI model is called. The code around a model (chunking, ranking, budgeting, validation, backoff) runs as real JavaScript against tests in an isolated worker in your browser, and model behaviour is shown with deterministic teaching models and schema tasks.",
+        outcomes: ["Design an LLM application's request flow", "Chunk, rank and budget retrieved context", "Validate model-proposed tool calls in code", "Make model calls reliable and economical", "Test the code and evaluate the model's behaviour"],
+        levels: [
+            { id: "intermediate", modules: [
+                { id: "llm-app-foundations", title: "LLM App Foundations", summary: "The architecture of an LLM application and RAG in practice, with code you run.", lessons: [
+                    { id: "llm-architecture", slug: "architecture", title: "The architecture of an LLM application" },
+                    { id: "llm-rag", slug: "rag-in-practice", title: "Retrieval-augmented generation in practice" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "production-llm-apps", title: "Production LLM Apps", summary: "Tool validation and guardrails in code, reliability, cost and latency, and testing.", lessons: [
+                    { id: "llm-tools-safety", slug: "tools-and-guardrails", title: "Tool calling, validation and guardrails in code" },
+                    { id: "llm-reliability", slug: "reliability-cost-latency", title: "Reliability, cost and latency" },
+                    { id: "llm-testing", slug: "testing-llm-apps", title: "Testing and evaluating LLM applications" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
+        id: "frontend-frameworks",
+        title: "Frontend Frameworks Concepts",
+        department: "web-backend",
+        status: "complete",
+        tagline: "Understand what React, Vue, Angular and Svelte have in common: components and props, state and reducers, rendering and reactivity, routing and data states, and choosing a framework, with framework-style code you run in your browser.",
+        audience: "Developers moving from plain JavaScript to a framework, and testers who want to understand the apps they test. HTML, CSS and the DOM and JavaScript come first.",
+        runsIn: "No framework is installed or run. The ideas are practised as plain JavaScript (reducers, safe rendering, derived state, routing) run against tests in an isolated worker in your browser.",
+        outcomes: ["Build interfaces from components and props", "Manage state immutably with reducers", "Compare rendering strategies", "Handle routing and data states", "Choose a framework and keep bundles lean"],
+        levels: [
+            { id: "intermediate", modules: [
+                { id: "framework-core-ideas", title: "Core Framework Ideas", summary: "Components, state with reducers and immutability, and reactivity with rendering strategies.", lessons: [
+                    { id: "fe-components", slug: "components-and-props", title: "Components, props and rendering" },
+                    { id: "fe-state", slug: "state-and-reducers", title: "State, reducers and immutability" },
+                    { id: "fe-reactivity", slug: "reactivity-and-rendering", title: "Reactivity, the virtual DOM and rendering strategies" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "real-frontends", title: "Real Frontends", summary: "Routing, data fetching and forms, and choosing a framework with performance in mind.", lessons: [
+                    { id: "fe-routing-data", slug: "routing-data-forms", title: "Routing, data fetching and forms" },
+                    { id: "fe-choosing", slug: "choosing-a-framework", title: "Choosing a framework and performance basics" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",

@@ -19,6 +19,8 @@ import { getToolById } from "../data/tools.js";
 import { LEVELS, PRACTICE_LABS_PREFIX, flatLessons, getPath, lessonCount, lessonUrl, levelUrl, moduleUrl, pathUrl, publishedPaths } from "./curriculum.js";
 import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from "./departments.js";
 import { JOURNEYS } from "./journeys.js";
+import { lessons as feLessons, interview as feLessonsInterview } from "./web/frontend-lessons.js";
+import { lessons as llmLessons, interview as llmLessonsInterview } from "./ai/llm-apps-lessons.js";
 import { lessons as tsLessons, interview as tsLessonsInterview } from "./programming/typescript-lessons.js";
 import { regexLessons as rxLessons, regexInterview as rxInterview, dsaLessons, dsaInterview } from "./programming/regex-dsa-lessons.js";
 import { lessons as deLessons, interview as deLessonsInterview } from "./data/engineering-lessons.js";
@@ -326,6 +328,26 @@ const CONTENT = {
         kind: "blocks",
         lessons: new Map(tsLessons.map((lesson) => [lesson.id, lesson])),
         interview: tsLessonsInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: null,
+        flashcards: null,
+        morePractice: ""
+    },
+    "llm-apps": {
+        kind: "blocks",
+        lessons: new Map(llmLessons.map((lesson) => [lesson.id, lesson])),
+        interview: llmLessonsInterview,
+        exercises: new Map(),
+        writing: new Map(AI_WRITING.map((exercise) => [exercise.id, exercise])),
+        labTool: null,
+        flashcards: "smart-flashcards",
+        morePractice: ""
+    },
+    "frontend-frameworks": {
+        kind: "blocks",
+        lessons: new Map(feLessons.map((lesson) => [lesson.id, lesson])),
+        interview: feLessonsInterview,
         exercises: new Map(),
         writing: new Map(),
         labTool: null,

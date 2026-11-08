@@ -98,9 +98,10 @@ export const DEPARTMENTS = Object.freeze([
         technologies: [
             { title: "AI and LLM foundations", status: "path", path: "ai-foundations" },
             { title: "Prompt engineering and evaluation", status: "path", path: "prompt-engineering" },
-            { title: "Machine learning foundations", status: "path", path: "machine-learning" }
+            { title: "Machine learning foundations", status: "path", path: "machine-learning" },
+            { title: "Building LLM applications", status: "path", path: "llm-apps" }
         ],
-        paths: ["ai-foundations", "prompt-engineering", "machine-learning"],
+        paths: ["ai-foundations", "prompt-engineering", "machine-learning", "llm-apps"],
         start: { label: "Start with lesson 1 of AI and LLM Foundations.", path: "ai-foundations" },
         labs: [],
         decks: [],
@@ -170,9 +171,10 @@ export const DEPARTMENTS = Object.freeze([
             { title: "JSONPath queries", status: "lab", lab: "jsonpath-challenge-lab" },
             { title: "HTTP and REST APIs", status: "path", path: "http-apis" },
             { title: "HTML, CSS and the DOM", status: "path", path: "html-css-dom" },
+            { title: "Frontend frameworks concepts", status: "path", path: "frontend-frameworks" },
             { title: "Backend fundamentals", status: "path", path: "backend" }
         ],
-        paths: ["http-apis", "html-css-dom", "backend"],
+        paths: ["http-apis", "html-css-dom", "frontend-frameworks", "backend"],
         labs: ["json-error-fixing-lab", "jsonpath-challenge-lab"],
         decks: ["JSON", "HTTP and APIs"],
         start: { label: "Start with lesson 1 of HTTP and REST APIs.", path: "http-apis" },

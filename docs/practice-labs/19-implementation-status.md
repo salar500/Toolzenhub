@@ -374,7 +374,7 @@ Both paths have interview practice (12 questions each). The Cron Challenge Lab i
   - At 1280 and 390 px: an unanchored pattern scores 3 of 5 and the anchored one passes; the page stays responsive after a nested-quantifier pattern; the LRU model passes; no overflow.
   - Links resolve.
 
-#### M13b: TypeScript path (P31) (commit: (this milestone's commit))
+#### M13b: TypeScript path (P31) (commit: `5329e7c`)
 
 - **TypeScript** has 5 lessons, with interview practice (8 questions):
   - types and inference;
@@ -391,6 +391,34 @@ Both paths have interview practice (12 questions each). The Cron Challenge Lab i
   - `tests/unit/predict.test.mjs` compiles every snippet with the real `tsc --strict` (TypeScript 4.9 via npx) and runs output tasks with Node.js: all 10 match.
   - Curriculum test passes. The leak guard now allows the word "undefined" only on TypeScript path pages, where it is the name of a type; elsewhere it stays strict.
   - At 1280 and 390 px: the compile prompt and compiler note show, a wrong verdict is refused, "line 7" is accepted, and there is no overflow.
+
+#### M13c: Building LLM Applications (P62) and Frontend Frameworks Concepts (P23) paths (commit: (this milestone's commit))
+
+- **Building LLM Applications** (5 lessons, with interview practice of 8 questions):
+  - architecture;
+  - RAG in practice;
+  - tool validation and guardrails in code;
+  - reliability, cost and latency;
+  - testing and evaluating LLM apps (this also covers the cross-listed P06, Testing AI Systems, together with AI and LLM Foundations' evaluation lessons).
+- **Frontend Frameworks Concepts** (5 lessons, with interview practice of 8 questions):
+  - components and props;
+  - state, reducers and immutability;
+  - reactivity and rendering strategies;
+  - routing, data and forms;
+  - choosing a framework.
+- **8 new `jsrun` exercises:**
+  - chunking with overlap, cosine top-k, context budget, tool-call validation, exponential backoff;
+  - cart reducer (judged on its arguments and on an immutability scenario), escaped list rendering, derived state.
+- The paths also reuse the `pe-s-tool-call` schema task, the evaluation writing lab, the context visualizer and the route matcher.
+- No model or framework runs; each page says so.
+- **Checks performed:**
+  - JS exercises unit test: all 31 pinned. This caught one wrong budget expectation, which I fixed.
+  - Curriculum test.
+  - At 1280 and 390 px:
+    - the chunking, similarity and reducer starters fail and their models pass;
+    - the writing lab renders in the LLM path;
+    - no overflow.
+  - 37,276 links on 519 pages resolve.
 
 ### Final inventory, 2026-11-08 (preview branch, after the final remaining-development mission)
 

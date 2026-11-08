@@ -213,5 +213,78 @@ export const JS_EXERCISES = Object.freeze([
         buggy: ["function createLRU(capacity) {\n  const map = new Map();\n  return {\n    get(key) { return map.has(key) ? map.get(key) : -1; },\n    put(key, value) {\n      map.set(key, value);\n      if (map.size > capacity) map.delete(map.keys().next().value);\n    }\n  };\n}"],
         harness: "const c = createLRU(2);\nc.put(1, 1); c.put(2, 2);\nconst a = c.get(1);\nc.put(3, 3);\nconst b = c.get(2), d = c.get(3);\nc.put(4, 4);\nconst e = c.get(4), f = c.get(1);\nreturn [a, b, d, e, f].join(',');",
         explain: "A JavaScript Map keeps insertion order, so deleting and re-inserting a key on every use moves it to the end; the first key is then always the least recently used. The buggy version never refreshes keys on get, so it evicts the wrong one."
+    },
+    {
+        id: "llm-x-chunk", fn: "chunkWords",
+        task: "RAG systems split documents into overlapping chunks. Write chunkWords(text, size, overlap) that splits text into words and returns chunks of size words, each starting size − overlap words after the previous one, joined with spaces. Stop once a chunk reaches the last word.",
+        starter: "function chunkWords(text, size, overlap) {\n  const words = text.split(/\\s+/).filter(Boolean);\n  const chunks = [];\n  return chunks;\n}",
+        tests: [{ args: ["a b c d e f g", 3, 1], expect: ["a b c", "c d e", "e f g"] }, { args: ["a b c d", 2, 0], expect: ["a b", "c d"] }, { args: ["a b", 5, 2], expect: ["a b"] }, { args: ["", 3, 1], expect: [] }],
+        model: "function chunkWords(text, size, overlap) {\n  const words = text.split(/\\s+/).filter(Boolean);\n  const chunks = [];\n  const step = size - overlap;\n  for (let start = 0; start < words.length; start += step) {\n    chunks.push(words.slice(start, start + size).join(' '));\n    if (start + size >= words.length) break;\n  }\n  return chunks;\n}",
+        buggy: ["function chunkWords(text, size, overlap) {\n  const words = text.split(/\\s+/).filter(Boolean);\n  const chunks = [];\n  for (let start = 0; start < words.length; start += size - overlap) chunks.push(words.slice(start, start + size).join(' '));\n  return chunks;\n}"],
+        explain: "Overlap keeps sentences that straddle a boundary in both chunks. Without the stop condition, the loop also emits short tail chunks that only repeat words already covered."
+    },
+    {
+        id: "llm-x-topk", fn: "topKBySimilarity",
+        task: "Write topKBySimilarity(query, docs, k) where query is a vector and each doc is { id, vector }. Return the ids of the k docs with the highest cosine similarity, best first.",
+        starter: "function topKBySimilarity(query, docs, k) {\n  \n}",
+        tests: [{ args: [[1, 0], [{ id: "ship", vector: [0.9, 0.1] }, { id: "refund", vector: [0.1, 0.9] }, { id: "fee", vector: [2, 0.4] }], 2], expect: ["ship", "fee"] }, { args: [[0, 1], [{ id: "a", vector: [1, 0] }, { id: "b", vector: [0, 5] }], 1], expect: ["b"] }],
+        model: "function topKBySimilarity(query, docs, k) {\n  const dot = (a, b) => a.reduce((s, x, i) => s + x * b[i], 0);\n  const norm = (a) => Math.sqrt(dot(a, a));\n  return docs\n    .map((d) => ({ id: d.id, score: dot(query, d.vector) / (norm(query) * norm(d.vector)) }))\n    .sort((x, y) => y.score - x.score)\n    .slice(0, k)\n    .map((d) => d.id);\n}",
+        buggy: ["function topKBySimilarity(query, docs, k) {\n  const dot = (a, b) => a.reduce((s, x, i) => s + x * b[i], 0);\n  return docs.map((d) => ({ id: d.id, score: dot(query, d.vector) })).sort((x, y) => y.score - x.score).slice(0, k).map((d) => d.id);\n}"],
+        explain: "Cosine similarity divides by the vectors' lengths, so a long vector does not win just for being long: [2, 0.4] points slightly away from the query and ranks below [0.9, 0.1] even though its dot product is larger."
+    },
+    {
+        id: "llm-x-budget", fn: "fitContext",
+        task: "Write fitContext(chunks, budget, reserved) where chunks are { text, tokens } in relevance order. Return the texts that fit in budget − reserved tokens, taking chunks in order and skipping any that would overflow (a later, smaller chunk may still fit).",
+        starter: "function fitContext(chunks, budget, reserved) {\n  \n}",
+        tests: [{ args: [[{ text: "A", tokens: 300 }, { text: "B", tokens: 600 }, { text: "C", tokens: 150 }], 1000, 200], expect: ["A", "C"] }, { args: [[{ text: "A", tokens: 900 }], 1000, 200], expect: [] }, { args: [[], 1000, 0], expect: [] }],
+        model: "function fitContext(chunks, budget, reserved) {\n  let left = budget - reserved;\n  const out = [];\n  for (const c of chunks) {\n    if (c.tokens <= left) { out.push(c.text); left -= c.tokens; }\n  }\n  return out;\n}",
+        buggy: ["function fitContext(chunks, budget, reserved) {\n  let left = budget;\n  const out = [];\n  for (const c of chunks) {\n    if (c.tokens <= left) { out.push(c.text); left -= c.tokens; }\n  }\n  return out;\n}"],
+        explain: "Reserve space for the instructions and the answer before adding retrieved text, or the model's reply is cut off. Skipping a chunk that does not fit lets a smaller, still relevant one in."
+    },
+    {
+        id: "llm-x-validate-call", fn: "validateToolCall",
+        task: "The model proposes tool calls as JSON text. Write validateToolCall(text) for a single tool cancel_order(order_id) where order_id must look like SL- and four digits. Return { ok: true, orderId } or { ok: false, reason } with reason \"not json\", \"unknown tool\" or \"bad order_id\". Never throw.",
+        starter: "function validateToolCall(text) {\n  \n}",
+        tests: [{ args: ["{\"name\":\"cancel_order\",\"arguments\":{\"order_id\":\"SL-1004\"}}"], expect: { ok: true, orderId: "SL-1004" } }, { args: ["cancel SL-1004"], expect: { ok: false, reason: "not json" } }, { args: ["{\"name\":\"refund_all\",\"arguments\":{}}"], expect: { ok: false, reason: "unknown tool" } }, { args: ["{\"name\":\"cancel_order\",\"arguments\":{\"order_id\":\"1004; DROP\"}}"], expect: { ok: false, reason: "bad order_id" } }, { args: ["{\"name\":\"cancel_order\"}"], expect: { ok: false, reason: "bad order_id" } }],
+        model: "function validateToolCall(text) {\n  let call;\n  try { call = JSON.parse(text); } catch { return { ok: false, reason: 'not json' }; }\n  if (call?.name !== 'cancel_order') return { ok: false, reason: 'unknown tool' };\n  const id = call.arguments?.order_id;\n  if (typeof id !== 'string' || !/^SL-\\d{4}$/.test(id)) return { ok: false, reason: 'bad order_id' };\n  return { ok: true, orderId: id };\n}",
+        buggy: ["function validateToolCall(text) {\n  const call = JSON.parse(text);\n  if (call.name !== 'cancel_order') return { ok: false, reason: 'unknown tool' };\n  return { ok: true, orderId: call.arguments.order_id };\n}"],
+        explain: "Treat model output as untrusted input: parse safely, allow only known tools and validate every argument before acting. The buggy version throws on non-JSON and passes injected text straight through."
+    },
+    {
+        id: "llm-x-backoff", fn: "retryDelays",
+        task: "LLM APIs rate-limit with 429 responses. Write retryDelays(attempts, baseMs, capMs) returning the wait before each retry using exponential backoff: baseMs, then doubling, never above capMs. (Production code also adds random jitter; leave it out here so the result is testable.)",
+        starter: "function retryDelays(attempts, baseMs, capMs) {\n  \n}",
+        tests: [{ args: [5, 500, 4000], expect: [500, 1000, 2000, 4000, 4000] }, { args: [3, 100, 10000], expect: [100, 200, 400] }, { args: [0, 100, 1000], expect: [] }],
+        model: "function retryDelays(attempts, baseMs, capMs) {\n  return Array.from({ length: attempts }, (_, i) => Math.min(capMs, baseMs * 2 ** i));\n}",
+        buggy: ["function retryDelays(attempts, baseMs, capMs) {\n  return Array.from({ length: attempts }, (_, i) => baseMs * 2 ** i);\n}"],
+        explain: "Doubling spreads retries out so a struggling service can recover; the cap keeps waits reasonable. Respect a Retry-After header when the API sends one."
+    },
+    {
+        id: "fe-x-reducer", fn: "cartReducer",
+        task: "Write cartReducer(state, action) in the reducer style used by React's useReducer and Redux. state is { items: [{ id, qty }] }. Handle { type: \"add\", id } (add qty 1 or increase it), { type: \"remove\", id } and unknown actions (return the same state). Never mutate state: return new objects.",
+        starter: "function cartReducer(state, action) {\n  return state;\n}",
+        tests: [{ args: [{ items: [] }, { type: "add", id: 1 }], expect: { items: [{ id: 1, qty: 1 }] } }, { args: [{ items: [{ id: 1, qty: 1 }] }, { type: "add", id: 1 }], expect: { items: [{ id: 1, qty: 2 }] } }, { args: [{ items: [{ id: 1, qty: 2 }, { id: 2, qty: 1 }] }, { type: "remove", id: 1 }], expect: { items: [{ id: 2, qty: 1 }] } }, { args: [], expect: true, call: "the original state object is unchanged after add" }],
+        model: "function cartReducer(state, action) {\n  switch (action.type) {\n    case 'add': {\n      const found = state.items.some((i) => i.id === action.id);\n      return { ...state, items: found ? state.items.map((i) => (i.id === action.id ? { ...i, qty: i.qty + 1 } : i)) : [...state.items, { id: action.id, qty: 1 }] };\n    }\n    case 'remove':\n      return { ...state, items: state.items.filter((i) => i.id !== action.id) };\n    default:\n      return state;\n  }\n}",
+        buggy: ["function cartReducer(state, action) {\n  if (action.type === 'add') {\n    const item = state.items.find((i) => i.id === action.id);\n    if (item) item.qty += 1; else state.items.push({ id: action.id, qty: 1 });\n  }\n  if (action.type === 'remove') state.items = state.items.filter((i) => i.id !== action.id);\n  return state;\n}"],
+        harness: "if (arguments.length) return cartReducer(...arguments);\nconst before = { items: [{ id: 1, qty: 1 }] };\nconst snapshot = JSON.stringify(before);\nconst after = cartReducer(before, { type: 'add', id: 1 });\nreturn JSON.stringify(before) === snapshot && after !== before;",
+        explain: "Frameworks detect changes by comparing references, so a reducer must return new objects instead of mutating; the mutating version changes the old state and the screen may not update."
+    },
+    {
+        id: "fe-x-render", fn: "renderList",
+        task: "Write renderList(products) returning an HTML string <ul> with one <li> per product name, as a template or component would. Names come from users, so escape &, <, >, \" and ' to keep the markup safe. An empty list renders <p>No products</p>.",
+        starter: "function renderList(products) {\n  return '';\n}",
+        tests: [{ args: [[{ name: "Lamp" }, { name: "Mug" }]], expect: "<ul><li>Lamp</li><li>Mug</li></ul>" }, { args: [[{ name: "<img src=x onerror=alert(1)>" }]], expect: "<ul><li>&lt;img src=x onerror=alert(1)&gt;</li></ul>" }, { args: [[{ name: "Tom & Jerry's \"Mug\"" }]], expect: "<ul><li>Tom &amp; Jerry&#39;s &quot;Mug&quot;</li></ul>" }, { args: [[]], expect: "<p>No products</p>" }],
+        model: "function renderList(products) {\n  const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;').replace(/'/g, '&#39;');\n  if (products.length === 0) return '<p>No products</p>';\n  return `<ul>${products.map((p) => `<li>${esc(p.name)}</li>`).join('')}</ul>`;\n}",
+        buggy: ["function renderList(products) {\n  if (products.length === 0) return '<p>No products</p>';\n  return `<ul>${products.map((p) => `<li>${p.name}</li>`).join('')}</ul>`;\n}", "function renderList(products) {\n  const esc = (s) => s.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/&/g, '&amp;');\n  if (products.length === 0) return '<p>No products</p>';\n  return `<ul>${products.map((p) => `<li>${esc(p.name)}</li>`).join('')}</ul>`;\n}"],
+        explain: "Frameworks escape text by default, which is why they resist XSS; raw HTML options such as innerHTML or dangerouslySetInnerHTML switch that off. Escape & first, or the &lt; you just produced becomes &amp;lt;."
+    },
+    {
+        id: "fe-x-derived", fn: "cartSummary",
+        task: "Derived state should be computed, not stored twice. Write cartSummary(items, prices) where items is [{ id, qty }] and prices is an object of id to price; return { count, total } computed from the items each time.",
+        starter: "function cartSummary(items, prices) {\n  \n}",
+        tests: [{ args: [[{ id: "lamp", qty: 2 }, { id: "mug", qty: 1 }], { lamp: 1299, mug: 349 }], expect: { count: 3, total: 2947 } }, { args: [[], { lamp: 1299 }], expect: { count: 0, total: 0 } }],
+        model: "function cartSummary(items, prices) {\n  return items.reduce((s, i) => ({ count: s.count + i.qty, total: s.total + i.qty * prices[i.id] }), { count: 0, total: 0 });\n}",
+        buggy: ["function cartSummary(items, prices) {\n  return { count: items.length, total: items.reduce((s, i) => s + prices[i.id], 0) };\n}"],
+        explain: "Count and total follow from the items; computing them (with memoisation if expensive) avoids the classic bug where a stored total drifts out of sync with the cart."
     }
 ]);
