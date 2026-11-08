@@ -1,6 +1,6 @@
 # Practice Labs learning platform
 
-Owner roadmap of 2026-11-08 (Phases 3 to 10). This file owns the architecture, the content standard, the curriculum plan and the source register of the learning paths. Product rules stay in `product-decision-rules.md` (rule 4.10 for the section, 7 for persistence, 8.9 for date counting).
+Owner roadmap of 2026-11-08 (Phases 3 to 10). **The plan for everything not yet built is `docs/practice-labs-development-blueprint.md`** (research, taxonomy, catalogue, architecture, waves, open decisions). This file owns the architecture, the content standard, the curriculum plan and the source register of the learning paths. Product rules stay in `product-decision-rules.md` (rule 4.10 for the section, 7 for persistence, 8.9 for date counting).
 
 ## 1. What exists (state, not plan)
 
@@ -57,15 +57,7 @@ SQL, built: databases, SELECT, calculations, errors, WHERE, sorting, LIMIT and D
 
 ## 9. Source register
 
-Honest record, updated as sources are consulted. A source appears only after it was actually read for this work.
-
-| Source | Used for | Consulted |
-|---|---|---|
-| SQLite documentation (sqlite.org) | Behaviour of every SQL example and exercise (each exercise names its source); dialect notes | Earlier lab work, 2026-11-04 (see the lab's `reviewed` block) |
-| Python `sqlite3` as an independent oracle | Expected results of the examples and exercises | Earlier lab work, 2026-11-04 |
-| Learning-platform comparison (freeCodeCamp, Codecademy, DataCamp, SQLBolt, Microsoft Learn and others) | Structure of the template and the interface | **Not yet reviewed as sources.** The structure above follows the owner's 19-point standard and the existing lab; a recorded review of those platforms is still to do and no content is taken from any of them |
-
-All lesson text, analogies, examples and exercises are original to this site.
+Moved and expanded: `docs/practice-labs/15-source-register.md` (2026-11-08). It records every source consulted, with its evidence class and reliability, plus what was not researched. All lesson text, analogies, examples and exercises remain original to this site.
 
 ## 10. Checks run for this delivery (focused, no regression)
 
@@ -73,4 +65,4 @@ Unit: curriculum integrity (`tests/unit/practice-labs-curriculum.test.mjs`) and 
 
 ## 11. Remaining roadmap
 
-Phase 4 SQL completion (gaps in section 7); Phases 5 to 10 in the owner's order (Manual Testing, Playwright, Power BI, Java, Python, then API Testing and Git and GitHub), each one complete path at a time.
+See the blueprint: waves W0 to W9 (`docs/practice-labs-development-blueprint.md`, section 13) and the decisions awaiting the owner (section 20). The order of later paths described in section 7 above is superseded by the blueprint's waves.
