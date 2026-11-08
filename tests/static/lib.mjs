@@ -280,10 +280,18 @@ export function buildAssetGraph(entryHtml) {
       for (const r of cssRefs(read(f))) addRef(f, `css ${r.kind}`, r.value);
     } else if (ext === ".js" || ext === ".mjs") {
       stats.js++;
-      const { imports, literals, dynamicTemplate } = jsRefs(read(f));
+      const source = read(f);
+      const { imports, literals, dynamicTemplate } = jsRefs(source);
       if (dynamicTemplate) stats.dynamicTemplateFiles.push(f);
-      for (const r of imports) addRef(f, r.kind, r.value);
-      for (const r of literals) addRef(f, "js string", r.value, { asLiteral: true });
+      /* vendored Pyodide (unmodified third-party code) resolves its files at run time against its own folder and has
+         Node-only and Python-module dynamic imports ("ws", "functools"); its loading is verified in a real browser, so
+         only its static imports are checked here */
+      const runtimeResolved = /(^|\/)assets\/js\/vendor\/pyodide\//.test(rel(f));
+      for (const r of imports) if (!(runtimeResolved && r.kind === "dynamic-import")) addRef(f, r.kind, r.value);
+      if (runtimeResolved) continue;
+      /* a module whose string literals name files in a simulated file system (the Git simulator's config.json, ...)
+         opts out of literal checks with the marker "asset-check: simulated-file-names"; its imports are still checked */
+      if (!source.includes("asset-check: simulated-file-names")) for (const r of literals) addRef(f, "js string", r.value, { asLiteral: true });
     }
   }
 

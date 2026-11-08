@@ -100,6 +100,14 @@ function describePage(file) {
   if ((g = file.match(/^articles\/([^/]+)\/([^/]+)\/index\.html$/))) {
     return { type: "article", topic: g[1], slug: g[2], primarySelector: ".article-hero h1", interactive: false, rendered: "client" };
   }
+  // Practice Labs: ShopLite, the practice shop (noindex), then every generated learning page (home, departments, paths,
+  // levels, modules, lessons, projects, interview practice), all rendered at build time by practice-labs/learn-html.js
+  if (file === "practice-labs/shoplite/index.html") {
+    return { type: "practice-target", primarySelector: "#shoplite", interactive: true, rendered: "client" };
+  }
+  if ((g = file.match(/^practice-labs\/(?:(.+)\/)?index\.html$/))) {
+    return { type: "learn", slug: g[1] ?? "", primarySelector: "main h1", interactive: true, rendered: "static" };
+  }
   return { type: "unknown", primarySelector: "body", interactive: false, rendered: "unknown" };
 }
 

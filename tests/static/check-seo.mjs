@@ -64,6 +64,13 @@ for (const p of pages) {
   const is404 = p.type === "404";
   const canonicalUrl = ORIGIN + p.url;
 
+  /* a practice target (ShopLite, the deliberately buggy shop used by the testing lessons) is a standalone application
+     outside the site's header, footer and search metadata; its one SEO rule is that it must never be indexed */
+  if (p.type === "practice-target") {
+    if (!metaContent(head, "name", "robots").some((r) => /noindex/i.test(r))) fail(p.url, "a practice target must be noindex");
+    continue;
+  }
+
   /* ---- title, description ---- */
   const title = squash((head.match(/<title>([\s\S]*?)<\/title>/) || [])[1] ?? "");
   if (title !== p.expectedTitle) fail(p.url, `title "${title}" differs from the inventory "${p.expectedTitle}"`);
@@ -122,7 +129,7 @@ for (const p of pages) {
     }
   }
   const byType = (t) => blocks.filter((b) => b["@type"] === t);
-  const expectedTypes = p.type === "article" ? ["Article", "BreadcrumbList", "FAQPage"] : p.type === "calculator" || p.type === "directory" ? ["BreadcrumbList"] : [];
+  const expectedTypes = p.type === "article" ? ["Article", "BreadcrumbList", "FAQPage"] : p.type === "calculator" || p.type === "directory" || p.type === "learn" ? ["BreadcrumbList"] : [];
   const gotTypes = blocks.map((b) => b["@type"]).sort();
   if (JSON.stringify(gotTypes) !== JSON.stringify([...expectedTypes].sort())) fail(p.url, `structured data types [${gotTypes}] should be [${[...expectedTypes].sort()}]`);
   for (const crumb of byType("BreadcrumbList")) {

@@ -2,6 +2,7 @@
    ToolZen Hub
    Git path: simulator tasks. Each has a starting repository, a goal checked on the repository's state, and a model
    command sequence that reaches it (pinned by tests/unit/git-sim.test.mjs, which also checks the start does not).
+   asset-check: simulated-file-names (strings such as "config.json" are files in the simulated repository, not site assets)
 ========================================================= */
 
 import { status, branchHas, headCommit } from "./git-sim.js";
