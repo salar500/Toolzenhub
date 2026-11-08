@@ -199,6 +199,39 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "javascript",
+        title: "JavaScript Programming",
+        department: "programming",
+        status: "complete",
+        tagline: "Learn to program with JavaScript from your first variable to problem solving and clean, tested code, writing real functions that run against tests in your browser.",
+        audience: "Complete beginners to programming, testers preparing for automation and anyone getting ready for coding interviews. No installation is needed.",
+        runsIn: "Your code runs in your own browser, in an isolated Web Worker with no network access, against each exercise's tests, and is stopped after 2 seconds if it does not finish. Nothing you write is stored or sent.",
+        outcomes: ["Write functions with variables, conditions and loops", "Work with arrays, objects and strings", "Use map, filter, reduce and sort", "Validate input and debug errors", "Explain promises and async and await", "Solve classic interview problems and reason about complexity"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "programming-basics", title: "Programming Basics", summary: "Values, variables, functions, conditions and loops, written and tested in your browser.", lessons: [
+                    { id: "js-first-steps", slug: "values-variables-functions", title: "Values, variables and your first function" },
+                    { id: "js-conditions", slug: "comparisons-and-conditions", title: "Comparisons and conditions" },
+                    { id: "js-loops", slug: "loops", title: "Loops" }] },
+                { id: "working-with-data", title: "Working with Data", summary: "Arrays, objects and strings, with the edge cases that break real programs.", lessons: [
+                    { id: "js-arrays", slug: "arrays", title: "Arrays" },
+                    { id: "js-objects-strings", slug: "objects-and-strings", title: "Objects and strings" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "modern-javascript", title: "Modern JavaScript", summary: "Array methods, errors and validation, and asynchronous code with promises and await.", lessons: [
+                    { id: "js-array-methods", slug: "map-filter-reduce", title: "map, filter, reduce and sort" },
+                    { id: "js-errors", slug: "errors-and-debugging", title: "Errors, validation and debugging" },
+                    { id: "js-async", slug: "promises-and-await", title: "Asynchronous JavaScript: promises and await" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "writing-good-code", title: "Writing Good Code", summary: "Problem solving with complexity in mind, and clean, modular, unit-tested code.", lessons: [
+                    { id: "js-problem-solving", slug: "problem-solving-and-complexity", title: "Problem solving and complexity" },
+                    { id: "js-clean-code", slug: "clean-code-and-testing", title: "Clean code, modules and testing your code" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",

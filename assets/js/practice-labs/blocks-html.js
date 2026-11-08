@@ -15,6 +15,7 @@
      write     { heading?, exercise }                   a structured writing lab (writing.js), checked in the browser
      aiviz     { heading?, kind, text }                 an AI teaching visualizer (learn-aiviz.js): tokens|context|sampling|retrieval|confusion
      numeric   { heading?, dataset, exercises[] }       a data table and calculations checked in the browser (data/stats.js)
+     jsrun     { heading?, exercise }                   JavaScript run against tests in a Web Worker (learn-jsrun.js)
      shoplite  { text, release? }                       a task on the practice shop, opened in a new tab
 ========================================================= */
 
@@ -22,6 +23,7 @@ import { escapeHTML as esc } from "../ui/escape.js";
 import { SITE_ROOT } from "../routes.js";
 import { AREAS, BUGS, RELEASES } from "./shoplite/bugs.js";
 import { CODE } from "./playwright/code.js";
+import { JS_EXERCISES } from "./programming/js-exercises.js";
 import { DATASETS, NUMERIC, formatAnswer } from "./data/stats.js";
 
 const SHOPLITE = () => `${SITE_ROOT}practice-labs/shoplite/`;
@@ -268,6 +270,33 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                                 </details>
                             </li>`).join("")}
                         </ol>
+                    </div>
+                </section>`;
+        }
+
+        case "jsrun": {
+            const exercise = JS_EXERCISES.find((c) => c.id === block.exercise);
+            if (!exercise) throw new Error(`unknown JavaScript exercise ${block.exercise}`);
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-write" data-jsrun="${esc(exercise.id)}">
+                        <p>${esc(exercise.task)}</p>
+                        <div data-js-tools hidden>
+                            <label class="lx-label" for="${esc(exercise.id)}-code">Your code</label>
+                            <textarea id="${esc(exercise.id)}-code" class="lx-textarea learn-editor" rows="9" spellcheck="false" autocapitalize="off" autocomplete="off" maxlength="6000">${esc(exercise.starter)}</textarea>
+                            <div class="learn-actions">
+                                <button type="button" class="calculator-form__button lx-btn" data-js-run>Run the tests</button>
+                                <button type="button" class="calculator-form__button calculator-form__button--secondary lx-btn" data-js-reset>Start again</button>
+                            </div>
+                            <div class="learn-feedback" data-js-out role="status" aria-live="polite"></div>
+                        </div>
+                        <p class="lx-note">Your code runs in your browser, in an isolated worker with no network access, and is stopped after 2 seconds. It is not stored or sent. Tests: ${exercise.tests.length}.</p>
+                        <details class="learn-reveal">
+                            <summary>Show a model answer and why</summary>
+                            <pre class="lx-code" tabindex="0"><code>${esc(exercise.model)}</code></pre>
+                            <p>${esc(exercise.explain)}</p>
+                        </details>
                     </div>
                 </section>`;
         }

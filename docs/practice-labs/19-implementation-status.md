@@ -50,7 +50,17 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 
 | M5a | **AI and AI Engineering department published** with the **AI and LLM Foundations** path. It has 10 lessons across beginner, intermediate and advanced: AI, machine learning and generative AI; tokens; context windows and prompts; temperature and sampling; embeddings and RAG; evaluating AI features; hallucination and prompt injection; precision, recall and thresholds; agents; and responsible AI. It also has interview practice (10 questions). An `aiviz` block offers five deterministic teaching visualizers (`ai/models.js` with `learn-aiviz.js`): a tokenizer, a context budget, softmax with temperature and top-p, cosine retrieval over hand-made vectors, and a confusion matrix with a threshold. Each is labelled as a teaching model; no model runs and nothing is downloaded or sent. One writing lab designs an AI evaluation set | `31404cd` | AI models unit test (5, hand-counted); writing-check covers the new exercise; curriculum test; at 1280 and 390, all five visualizers render with no overflow, the threshold slider updates the metrics, and the writing lab and interview page (10 questions) are present; 11,822 links on 145 pages resolve | Real model outputs (by design); prompt-engineering and ML-foundations paths (planned) |
 
-| M6a | **Data and Analytics: the Statistics and Data Analysis path**, with 9 lessons. Beginner: data types, mean, median and mode, spread, and percentiles and outliers. Intermediate: grouping and pivots, cleaning, and correlation and regression. Advanced: A/B tests and significance, and charts and presenting. The path also has interview practice (10 questions) and links to the Excel Practice Lab. A new `numeric` block shows the dataset table with answer boxes; `data/stats.js` computes each answer from the same table using Excel's definitions (STDEV.S, PERCENTILE.INC) and accepts it at the stated precision. There are 12 numeric exercises | (this milestone's commit) | Stats unit test (functions against hand values; each exercise is answerable, an off answer and text are refused, ₹ and commas are accepted); every explanation's figures were cross-checked against the computed answers (5 corrected before commit); at 1280 and 390, a wrong answer is refused, the right one accepted with ₹ and commas and by Enter, correlation is accepted, the interview has 10 questions and there is no overflow; 13,025 links on 162 pages resolve | Excel and Power BI labs not yet split into path lessons (they remain linked labs) |
+| M6a | **Data and Analytics: the Statistics and Data Analysis path**, with 9 lessons. Beginner: data types, mean, median and mode, spread, and percentiles and outliers. Intermediate: grouping and pivots, cleaning, and correlation and regression. Advanced: A/B tests and significance, and charts and presenting. The path also has interview practice (10 questions) and links to the Excel Practice Lab. A new `numeric` block shows the dataset table with answer boxes; `data/stats.js` computes each answer from the same table using Excel's definitions (STDEV.S, PERCENTILE.INC) and accepts it at the stated precision. There are 12 numeric exercises | `68ffafd` | Stats unit test (functions against hand values; each exercise is answerable, an off answer and text are refused, ₹ and commas are accepted); every explanation's figures were cross-checked against the computed answers (5 corrected before commit); at 1280 and 390, a wrong answer is refused, the right one accepted with ₹ and commas and by Enter, correlation is accepted, the interview has 10 questions and there is no overflow; 13,025 links on 162 pages resolve | Excel and Power BI labs not yet split into path lessons (they remain linked labs) |
+
+| M7a | **Programming department published with the JavaScript Programming path**. It has 10 lessons:
+
+- Beginner: values and functions, conditions, loops, arrays, and objects and strings.
+- Intermediate: map, filter and reduce; errors and validation; promises and await.
+- Advanced: problem solving and complexity; clean code and testing.
+
+The path also has interview practice (12 questions).
+
+A new `jsrun` block runs the learner's code against the exercise's tests in a fresh **module Web Worker** (`programming/js-worker.js`). Before any code runs, the worker removes fetch, XHR, WebSocket, importScripts, IndexedDB and similar APIs. Code that contains `import` is refused. The page terminates the worker after 2 s. There are 12 exercises, each pinned by its model, buggy versions and a non-passing starter | (this milestone's commit) | JS exercises unit test (12 pinned; syntax error, missing function, thrown error, console capture and import refusal). At 1280 and 390: the starter and buggy version fail (3 of 4, with the 999 boundary named) and the model passes; an endless loop is stopped while the page stays responsive; fetch is unavailable; console output is shown; there is no overflow and no outside requests; the interview has 12 questions. 14,430 links on 182 pages resolve. The leak guard caught the word "undefined" in lesson text twice; both were reworded | Python and Java paths (planned; no large runtime downloads) |
 
 ## 3. Current inventory (built)
 
@@ -71,9 +81,10 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 
 ## 5. Next checkpoint
 
-**Stage 7, Software Development and Programming:**
+**Stage 8, Web and Backend:**
 
-- a JavaScript path with a sandboxed Worker runner: code runs in a Web Worker with a time limit and is checked against test cases;
-- Python and Java remain honest code-reading and quiz paths unless an in-browser runtime fits the no-download rule.
+- an HTTP and REST APIs path, with a request builder against a deterministic mock ShopLite API that runs in the page;
+- an HTML, CSS and DOM path with a sandboxed iframe playground;
+- links to the JSON and JSONPath labs.
 
-**Then:** Stages 8 to 11.
+**Then:** Stages 9 to 11.

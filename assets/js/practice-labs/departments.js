@@ -135,13 +135,18 @@ export const DEPARTMENTS = Object.freeze([
         title: "Software Development and Programming",
         short: "Python, JavaScript, Java and problem solving, with code you can run where the browser allows it.",
         audience: ["Complete beginners to programming", "Testers who need code for automation", "Students preparing for interviews"],
-        intro: [],
+        intro: [
+            "Programming is the skill underneath almost every technical role: developers build products with it, testers automate with it, analysts and data engineers script with it. Learning to break a problem into steps and express them precisely pays off in every department of these Practice Labs.",
+            "This department starts with JavaScript, the language of the web and of Playwright, so it leads straight into Automation Engineering. You write real functions from the first lesson, and each exercise runs your code against its tests in your own browser, inside an isolated worker with no network access that is stopped after two seconds if a loop never ends. You see which test passed, which failed, what your function returned and anything you logged.",
+            "The path goes from values, conditions and loops through arrays, objects and modern array methods to validation, asynchronous code, classic interview problems and clean, tested code. Python and Java follow as the department grows; where a language cannot run in the browser without a large download, its lessons will say so plainly and use code reading and checked questions instead."
+        ],
         technologies: [
-            { title: "JavaScript", status: "planned" },
+            { title: "JavaScript", status: "path", path: "javascript" },
             { title: "Python", status: "planned" },
             { title: "Java", status: "planned" }
         ],
-        paths: [],
+        paths: ["javascript"],
+        start: { label: "Start with lesson 1 of JavaScript Programming.", path: "javascript" },
         labs: [],
         decks: [],
         related: ["automation-engineering", "web-backend"]
