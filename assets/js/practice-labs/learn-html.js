@@ -27,6 +27,7 @@ import { joinMarkup } from "./join-visualizer.js";
 import { renderBlocks } from "./blocks-html.js";
 import { lessons as mtLessons } from "./manual-testing/lessons.js";
 import { lessons as mtLessons2 } from "./manual-testing/lessons-2.js";
+import { lessons as mtLessons3 } from "./manual-testing/lessons-3.js";
 import { WRITING as mtWriting } from "./manual-testing/writing.js";
 
 const SITE_NAME = "ToolZen Hub";
@@ -55,7 +56,7 @@ const CONTENT = {
     },
     "manual-testing": {
         kind: "blocks",
-        lessons: new Map([...mtLessons, ...mtLessons2].map((lesson) => [lesson.id, lesson])),
+        lessons: new Map([...mtLessons, ...mtLessons2, ...mtLessons3].map((lesson) => [lesson.id, lesson])),
         exercises: new Map(),
         writing: new Map(mtWriting.map((exercise) => [exercise.id, exercise])),
         labTool: "test-design-lab",

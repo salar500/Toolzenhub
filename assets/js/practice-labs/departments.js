@@ -52,7 +52,7 @@ export const DEPARTMENTS = Object.freeze([
         technologies: [
             { title: "Manual software testing", status: "path", path: "manual-testing" },
             { title: "Test design techniques", status: "lab", lab: "test-design-lab" },
-            { title: "Bug hunting on ShopLite and bug reports", status: "planned" },
+            { title: "Bug hunting on ShopLite and bug reports", status: "path", path: "manual-testing" },
             { title: "API testing", status: "planned" },
             { title: "Accessibility testing", status: "planned" }
         ],

@@ -214,17 +214,41 @@ export const PATHS = Object.freeze([
                         summary: "Functional and non-functional testing, and when to run smoke, sanity and regression tests.",
                         lessons: [
                             { id: "mt-functional-nonfunctional", slug: "functional-and-non-functional-testing", title: "Functional and non-functional testing" },
-                            { id: "mt-smoke-sanity-regression", slug: "smoke-sanity-regression-testing", title: "Smoke, sanity and regression testing" }
+                            { id: "mt-smoke-sanity-regression", slug: "smoke-sanity-regression-testing", title: "Smoke, sanity and regression testing" },
+                            { id: "mt-exploratory", slug: "exploratory-testing-bug-hunt", title: "Exploratory testing and the bug hunt" },
+                            { id: "mt-usability-compatibility", slug: "usability-and-compatibility-testing", title: "Usability and compatibility testing" }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: "advanced",
+                modules: [
+                    {
+                        id: "planning-risk",
+                        title: "Test Planning and Risk",
+                        summary: "Write a test plan a whole team can agree on, and spend testing effort where risk is highest.",
+                        lessons: [
+                            { id: "mt-test-plan", slug: "writing-a-test-plan", title: "Writing a test plan" },
+                            { id: "mt-risk", slug: "risk-based-testing", title: "Risk-based testing" }
+                        ]
+                    },
+                    {
+                        id: "agile-metrics",
+                        title: "Agile Testing and Metrics",
+                        summary: "Test inside Agile teams, express requirements as testable examples and report progress and risk honestly.",
+                        lessons: [
+                            { id: "mt-agile", slug: "testing-in-agile", title: "Testing in Agile and Scrum teams" },
+                            { id: "mt-acceptance-criteria", slug: "acceptance-criteria-given-when-then", title: "Acceptance criteria and Given/When/Then" },
+                            { id: "mt-metrics", slug: "test-metrics-and-reporting", title: "Test metrics and reporting" }
                         ]
                     }
                 ]
             }
         ],
         coming: [
-            "Intermediate: exploratory testing, usability and compatibility testing",
-            "Advanced: test planning, risk-based testing, testing in Agile teams and test metrics",
-            "Projects: a bug hunt on ShopLite's test release with checked bug reports, and a test plan for a release",
-            "Interview practice for manual testing"
+            "Interview practice for manual testing",
+            "A test-plan writing lab"
         ]
     }
 ]);

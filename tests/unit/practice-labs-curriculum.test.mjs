@@ -117,7 +117,8 @@ test("SQL path additions: valid exercise set, ids never collide with the lab, ev
 test("Manual testing path: every lesson has content, blocks render, writing exercises exist", async () => {
   const { lessons: mt1 } = await import("../../assets/js/practice-labs/manual-testing/lessons.js");
   const { lessons: mt2 } = await import("../../assets/js/practice-labs/manual-testing/lessons-2.js");
-  const mt = [...mt1, ...mt2];
+  const { lessons: mt3 } = await import("../../assets/js/practice-labs/manual-testing/lessons-3.js");
+  const mt = [...mt1, ...mt2, ...mt3];
   const { WRITING } = await import("../../assets/js/practice-labs/manual-testing/writing.js");
   const path = PATHS.find((p) => p.id === "manual-testing");
   const byId = new Map(mt.map((l) => [l.id, l]));
@@ -127,7 +128,7 @@ test("Manual testing path: every lesson has content, blocks render, writing exer
     assert.ok(l, e.lesson.id);
     assert.equal(l.level, e.level.id, e.lesson.id);
     assert.ok(l.objectives.length >= 2 && l.check.length >= 2 && l.mistakes.length >= 2, l.id);
-    assert.ok(l.blocks.some((b) => ["quiz", "order", "write"].includes(b.type)), `${l.id}: needs a checked practice block`);
+    assert.ok(l.blocks.some((b) => ["quiz", "order", "write", "bughunt"].includes(b.type)), `${l.id}: needs a checked practice block`);
     for (const b of l.blocks.filter((b) => b.type === "write")) assert.ok(writing.has(b.exercise), `${l.id}: ${b.exercise}`);
     for (const b of l.blocks.filter((b) => b.type === "quiz")) for (const q of b.questions) assert.ok(q.answer >= 0 && q.answer < q.options.length, q.q);
   }

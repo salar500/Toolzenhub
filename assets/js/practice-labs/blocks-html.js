@@ -18,6 +18,7 @@
 
 import { escapeHTML as esc } from "../ui/escape.js";
 import { SITE_ROOT } from "../routes.js";
+import { AREAS, BUGS, RELEASES } from "./shoplite/bugs.js";
 
 const SHOPLITE = () => `${SITE_ROOT}practice-labs/shoplite/`;
 
@@ -147,6 +148,50 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                     <p><strong>Try it on ShopLite:</strong> ${esc(block.text)} <a href="${esc(url)}" target="_blank" rel="noopener">Open ShopLite${block.release ? " release 1.1" : ""} in a new tab</a> (<a href="${esc(SHOPLITE())}" target="_blank" rel="noopener">stable release</a>).</p>
                 </section>`;
         }
+
+        case "bughunt": {
+            const release = block.release ?? "r-bugs-1";
+            const bugs = BUGS.filter((b) => b.release === release);
+            const url = `${SHOPLITE()}?release=${encodeURIComponent(release)}`;
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-hunt" data-bughunt="${esc(release)}">
+                        <p>${esc(block.text)} <a href="${esc(url)}" target="_blank" rel="noopener">Open ${esc(RELEASES[release].title)} in a new tab</a> if you prefer a full screen; the <a href="${esc(SHOPLITE())}#/requirements" target="_blank" rel="noopener">requirements</a> say what is correct.</p>
+                        <div class="learn-hunt__grid">
+                            <iframe class="learn-hunt__app" src="${esc(url)}" title="ShopLite ${esc(RELEASES[release].title)}" loading="lazy"></iframe>
+                            <div class="learn-hunt__panel">
+                                <p class="learn-hunt__count" data-hunt-count>Found 0 of ${bugs.length}</p>
+                                <form class="learn-hunt__form" hidden>
+                                    <label class="lx-label" for="hunt-area">Area</label>
+                                    <select id="hunt-area" name="area" class="lx-select"><option value="">Choose an area</option>${AREAS.map((a) => `<option>${esc(a)}</option>`).join("")}</select>
+                                    <label class="lx-label" for="hunt-title">Title</label>
+                                    <input id="hunt-title" name="title" class="lx-input learn-write__input" maxlength="200">
+                                    <label class="lx-label" for="hunt-steps">Steps to reproduce</label>
+                                    <textarea id="hunt-steps" name="steps" class="lx-textarea learn-editor learn-editor--text" rows="4" maxlength="2000"></textarea>
+                                    <label class="lx-label" for="hunt-expected">Expected result</label>
+                                    <textarea id="hunt-expected" name="expected" class="lx-textarea learn-editor learn-editor--text" rows="2" maxlength="1000"></textarea>
+                                    <label class="lx-label" for="hunt-actual">Actual result</label>
+                                    <textarea id="hunt-actual" name="actual" class="lx-textarea learn-editor learn-editor--text" rows="2" maxlength="1000"></textarea>
+                                    <label class="lx-label" for="hunt-severity">Severity</label>
+                                    <select id="hunt-severity" name="severity" class="lx-select"><option>critical</option><option selected>major</option><option>minor</option><option>trivial</option></select>
+                                    <div class="learn-actions"><button type="submit" class="calculator-form__button lx-btn">Submit finding</button></div>
+                                </form>
+                                <p class="learn-feedback" data-hunt-out role="status" aria-live="polite"></p>
+                                <p class="lx-note" data-hunt-hints aria-live="polite"></p>
+                                <h3>Your findings</h3>
+                                <ol data-hunt-found></ol>
+                            </div>
+                        </div>
+                        <p class="lx-note">Findings are recognised by the area and the key words of what went wrong, so the simulator checks what you found, not how well you wrote it. Nothing is stored or sent; reloading the page starts the hunt again.</p>
+                        <details class="learn-reveal">
+                            <summary>Give up and show every seeded bug</summary>
+                            <ol>${bugs.map((b) => `<li><strong>${esc(b.title)}</strong> (${esc(b.area)}, ${esc(b.requirement)}, ${esc(b.severity)}). Steps: ${esc(b.steps.join(" "))} Expected: ${esc(b.expected)} Actual: ${esc(b.actual)}</li>`).join("")}</ol>
+                        </details>
+                    </div>
+                </section>`;
+        }
+
 
         default:
             throw new Error(`unknown block type ${block.type}`);

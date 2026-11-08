@@ -36,7 +36,9 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 
 | M3b | Manual Software Testing path published (department Software Testing now has a page): lessons 1 to 10 (modules What Testing Is, Testing in the Life Cycle, Writing Test Cases) rendered from typed blocks; quizzes, ordering tasks, 4 structured writing labs (requirement questions, scenarios, a test case, positive and negative data) with a deterministic rubric checker; ShopLite tasks linked from lessons | `4a054e4` | Unit tests (12: curriculum generic over paths; every MT lesson has checked practice; writing models meet and weak answers miss their rubric); 5,374 links on 63 pages resolve; at 1280 and 390: quiz, ordering (wrong rejected, right accepted), writing lab (weak answer 5 of 9 items, good answer all items, model opens), department lists the path, first task within 3 screens, no overflow | Lab pages, accessibility sweep |
 
-| M3c-1 | Manual Testing lessons 11 to 17 (Intermediate: Test Data and Coverage; Executing Tests and Reporting Bugs; Types of Testing) and the bug-report writing lab (model and two weak answers) | (this milestone's commit) | Unit tests (writing models and weak answers, curriculum 12 cases); at 1280 and 390: bug-report lab (weak answer not yet, good answer all items), bug life-cycle ordering accepted, no overflow; path roadmap lists 17 lessons | Other pages |
+| M3c-1 | Manual Testing lessons 11 to 17 (Intermediate: Test Data and Coverage; Executing Tests and Reporting Bugs; Types of Testing) and the bug-report writing lab (model and two weak answers) | `40629ff` | Unit tests (writing models and weak answers, curriculum 12 cases); at 1280 and 390: bug-report lab (weak answer not yet, good answer all items), bug life-cycle ordering accepted, no overflow; path roadmap lists 17 lessons | Other pages |
+
+| M3c-2 | Manual Testing lessons 18 to 24 (exploratory testing, usability and compatibility; Advanced: test plan, risk-based testing, Agile, acceptance criteria, metrics): all 24 planned lessons published. **Bug Hunting Simulator**: ShopLite release 1.1 in a frame beside a structured report form; findings recognised by `matchReport`, duplicates flagged, area hints after 3 misses, a counter, and a give-up reveal of all 10 bugs; in memory only | (this milestone's commit) | Unit test (9 cases); at 1280 and 390: a real report recognised, the duplicate flagged, an unrelated report rejected, hint after 3 misses, counter 1 of 10, frame visible, no overflow; advanced lesson ordering task; 7,409 links on 84 pages resolve; earlier M3b checks re-run (17 pass) | Other pages |
 
 ## 3. Current inventory (built)
 
@@ -57,11 +59,6 @@ The owner's mission prompt of 2026-11-08 is the authority for these.
 
 ## 5. Next checkpoint
 
-**M3c (remaining):** lessons 18 to 24 (exploratory, usability and compatibility testing; test planning; risk; Agile; acceptance criteria; metrics) and the items below. Lessons 11 to 17 are done. Original M3c scope: modules 4 to 8 (lessons 11 to 24 per [06](06-curriculum-specifications.md), section 3) as blocks in `manual-testing/lessons.js`, adding the intermediate and advanced levels to `curriculum.js`. Also:
-
-- a bug-report writing lab (template bug report, in `manual-testing/writing.js`, with model and weak answers);
-- the **Bug Hunting Simulator** as project 1: ShopLite release 1.1 in an iframe (stacked on a phone), a report form (area from `AREAS`, title, steps, expected, actual, severity) calling `matchReport`, found count and area hints after 3 misses, all in memory;
-- a test plan writing lab;
-- interview practice.
-
-**Then:** M3d, the Test Design path wrapping the Test Design Lab; then Stages 4 to 11.
+1. **Manual Testing finishing items:** interview practice (quiz-only interview page: generalise `interviewBody` for a content without coding problems) and a test-plan writing lab. Then set the path status to complete.
+2. **M3d:** the Test Design path wrapping the Test Design Lab (20 exercises; lab engine `tools/test-design-lab`).
+3. **Stages 4 to 11** (Automation, AI, Data, Programming, Web and Backend, DevOps, integration), per the mission.
