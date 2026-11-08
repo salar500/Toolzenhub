@@ -71,15 +71,15 @@ export const DEPARTMENTS = Object.freeze([
         intro: [
             "Automation turns checks that people would repeat on every release into programs that run in minutes, on every build. It is one of the most requested skills in testing jobs, and it builds directly on manual testing: a good automated test is a good test case written in code.",
             "This department starts with Playwright, the browser-testing framework from Microsoft that drives Chromium, Firefox and WebKit through one API, with TypeScript. You practise the skill that makes or breaks UI automation, finding elements reliably, directly in your browser on ShopLite, the same practice shop the testing department uses. A teaching evaluator checks each locator against ShopLite's real page and applies Playwright's strict-mode rule, and the page says plainly that it is a teaching subset.",
-            "Real Playwright runs need Node.js on your computer; the setup lesson walks through it. API test automation, Selenium for Java teams, framework design and CI follow as the department grows."
+            "Real Playwright runs need Node.js on your computer; the setup lesson walks through it. API Test Automation covers request-level tests, authentication, test data, schemas and contracts, and Selenium WebDriver with Java covers locators, explicit waits, frames, JUnit, page objects and Grid. Code in those paths is checked by reading it against explicit rules, and each page says so, because neither tool can run inside a web page."
         ],
         technologies: [
             { title: "Playwright with TypeScript", status: "path", path: "playwright" },
-            { title: "API test automation", status: "planned" },
-            { title: "Selenium WebDriver", status: "planned" },
+            { title: "API test automation", status: "path", path: "api-automation" },
+            { title: "Selenium WebDriver", status: "path", path: "selenium" },
             { title: "Framework design and CI", status: "planned" }
         ],
-        paths: ["playwright"],
+        paths: ["playwright", "api-automation", "selenium"],
         start: { label: "Start with lesson 1 of Playwright with TypeScript.", path: "playwright" },
         labs: [],
         decks: [],

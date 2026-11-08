@@ -196,7 +196,7 @@ Milestones from M12 on are recorded here as sections rather than table rows.
     - no overflow.
   - 25,573 links on 343 pages resolve.
 
-#### M12e: Backend Fundamentals path (commit: (this milestone's commit))
+#### M12e: Backend Fundamentals path (commit: `44db5ba`)
 
 - **Backend Fundamentals** has 9 lessons:
   - request lifecycle; routing; validation and errors;
@@ -214,6 +214,34 @@ Milestones from M12 on are recorded here as sections rather than table rows.
     - a buggy idempotency handler fails, showing the scenario label;
     - no overflow.
   - 26,774 links on 360 pages resolve.
+
+#### M12f: API Test Automation and Selenium WebDriver with Java paths (commit: (this milestone's commit))
+
+- **API Test Automation** has 5 lessons:
+  - why automate at the API level;
+  - Playwright request fixture assertions;
+  - authentication, test data and clean-up;
+  - schemas, contracts and data-driven tests;
+  - frameworks and CI.
+- **Selenium WebDriver with Java** has 6 lessons:
+  - WebDriver architecture;
+  - locators;
+  - explicit waits and stale elements;
+  - actions, frames and windows;
+  - JUnit lifecycle and page objects;
+  - Grid, headless runs and CI.
+- Both paths have interview practice (10 questions each).
+- 6 new code-check exercises in `automation/more-code.js`, merged into `CODE`:
+  - API: GET with JSON and count; POST with 201, Location header and body; positive and negative auth without logging the token.
+  - Selenium: explicit wait instead of `Thread.sleep` and absolute XPath; JUnit `@BeforeEach`/`@AfterEach` with `quit()` and no static driver; a LoginPage page object.
+  - These rules are must/mustNot only. The Playwright-oriented `awaitActions` rule would wrongly flag plain `expect(value).toBe` in API tests.
+- The codecheck note now names where to run each exercise (`runIn`).
+- The Automation department now lists three paths.
+- Checks performed:
+  - code-check unit test (all 10 exercises pinned, models and weak versions);
+  - curriculum test;
+  - at 1280 and 390 px, on the Selenium wait and API auth exercises: the starter is not yet met, the model meets every rule, the tool-specific run note shows, and there is no overflow;
+  - 28,507 links on 387 pages resolve.
 
 ### Final inventory, 2026-11-08 (preview branch)
 
@@ -286,7 +314,7 @@ Milestones from M12 on are recorded here as sections rather than table rows.
    - Wire both with the add_path helper pattern: curriculum, learn-html CONTENT (`writing: new Map(AI_WRITING...)` for the prompt path), the BUILD_ONLY list in eleventy.shared.js, the curriculum test's extras count and its block-type list (add "schema"), and the ai-engineering department.
    - Check in the browser: the new visualizers and the schema block, at 1280 and 390 px.
 2. *(Done in M12e.)* **Backend Fundamentals path**, reusing apitask and quizzes.
-3. **API Automation and Selenium paths**: new codecheck exercises, plus predict blocks for the Selenium Java code.
+3. *(Done in M12f.)* **API Automation and Selenium paths**: new codecheck exercises, plus predict blocks for the Selenium Java code.
 4. **Database design**, then **specialised testing** (API, database and accessibility testing), then **Excel and Power BI paths**.
 5. **Final pass.**
    - Repair the multi-line rows of the milestone table (M7a onwards): they break the Markdown table.

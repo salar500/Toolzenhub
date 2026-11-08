@@ -226,7 +226,7 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                             </div>
                             <div class="learn-feedback" data-code-out role="status" aria-live="polite"></div>
                         </div>
-                        <p class="lx-note">Simulated check: your code is read against the rules listed in the result, not run. Run it in a real Playwright project to see it execute.</p>
+                        <p class="lx-note">Simulated check: your code is read against the rules listed in the result, not run. Run it in ${esc(exercise.runIn ?? "a real Playwright project")} to see it execute.</p>
                         <details class="learn-reveal">
                             <summary>Show a model answer and why</summary>
                             <pre class="lx-code" tabindex="0"><code>${esc(exercise.model)}</code></pre>

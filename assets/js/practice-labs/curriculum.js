@@ -562,6 +562,61 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "api-automation",
+        title: "API Test Automation",
+        department: "automation-engineering",
+        status: "complete",
+        tagline: "Automate API tests with Playwright's request fixture: requests and assertions, authentication, test data, schemas, data-driven and contract tests, frameworks and CI.",
+        audience: "Testers and developers who know HTTP basics and want fast, reliable automated API checks. Playwright basics help.",
+        runsIn: "Test code is checked in the page by reading it against explicit rules, not by running it; exploration tasks use a simulated ShopLite API inside the page. Run the tests in a real Playwright project against your own API.",
+        outcomes: ["Decide what to automate at the API level", "Write Playwright API tests with exact assertions", "Test authentication positively and negatively", "Create and clean up test data", "Use schemas, data-driven tests and contracts", "Structure an API suite and run it in CI"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "api-test-basics", title: "API Test Basics", summary: "Why API-level automation pays off, and requests with assertions in Playwright.", lessons: [
+                    { id: "aa-why", slug: "why-api-automation", title: "Why automate at the API level" },
+                    { id: "aa-requests", slug: "requests-and-assertions", title: "Requests and assertions with Playwright" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "reliable-api-suites", title: "Reliable API Suites", summary: "Authentication, test data and clean-up, and schemas, contracts and data-driven tests.", lessons: [
+                    { id: "aa-auth-data", slug: "auth-and-test-data", title: "Authentication, test data and clean-up" },
+                    { id: "aa-contracts", slug: "schemas-and-contracts", title: "Schemas, contracts and data-driven tests" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "api-frameworks", title: "API Frameworks", summary: "Client layers, API-assisted UI tests and running API tests in CI.", lessons: [
+                    { id: "aa-framework-ci", slug: "frameworks-and-ci", title: "API test frameworks and CI" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
+        id: "selenium",
+        title: "Selenium WebDriver with Java",
+        department: "automation-engineering",
+        status: "complete",
+        tagline: "Automate browsers with Selenium 4 and Java: WebDriver architecture, stable locators, explicit waits, frames and windows, JUnit lifecycles, page objects, Grid and CI.",
+        audience: "Testers and developers on Java teams, and anyone maintaining an existing Selenium suite. The Java Programming path and manual testing basics come first.",
+        runsIn: "Selenium does not run in the page. Code exercises are checked by reading your code against explicit rules, and other lessons use checked questions. Run the code in a Java project with Selenium 4 and JUnit 5.",
+        outcomes: ["Explain WebDriver and browser drivers", "Choose stable locators", "Synchronise with explicit waits", "Handle frames, windows and alerts", "Structure tests with JUnit and page objects", "Run cross-browser on Grid and in CI"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "webdriver-basics", title: "WebDriver Basics", summary: "How Selenium drives browsers, and finding elements with stable locators.", lessons: [
+                    { id: "se-intro", slug: "how-selenium-works", title: "Selenium WebDriver and how it works" },
+                    { id: "se-locators", slug: "locators", title: "Locators and finding elements" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "robust-selenium", title: "Robust Selenium Tests", summary: "Explicit waits, actions with frames and windows, and JUnit with page objects.", lessons: [
+                    { id: "se-waits", slug: "waits-and-synchronisation", title: "Waits and synchronisation" },
+                    { id: "se-actions", slug: "actions-frames-windows", title: "Actions, forms, frames and windows" },
+                    { id: "se-junit-pom", slug: "junit-and-page-objects", title: "JUnit structure and the Page Object Model" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "selenium-at-scale", title: "Selenium at Scale", summary: "Cross-browser runs, Selenium Grid and headless CI.", lessons: [
+                    { id: "se-grid-ci", slug: "grid-and-ci", title: "Cross-browser runs, Grid and CI" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",

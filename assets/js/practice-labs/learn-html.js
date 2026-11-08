@@ -19,6 +19,7 @@ import { getToolById } from "../data/tools.js";
 import { LEVELS, PRACTICE_LABS_PREFIX, flatLessons, getPath, lessonCount, lessonUrl, levelUrl, moduleUrl, pathUrl, publishedPaths } from "./curriculum.js";
 import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from "./departments.js";
 import { JOURNEYS } from "./journeys.js";
+import { apiLessons as aaLessons, apiInterview as aaInterview, seLessons, seInterview } from "./automation/api-selenium-lessons.js";
 import { lessons as beLessons, interview as beLessonsInterview } from "./web/backend-lessons.js";
 import { lessons as peLessons, interview as peLessonsInterview } from "./ai/prompt-lessons.js";
 import { lessons as mlLessons, interview as mlLessonsInterview } from "./ai/ml-lessons.js";
@@ -223,6 +224,26 @@ const CONTENT = {
         labTool: "json-error-fixing-lab",
         flashcards: "smart-flashcards",
         morePractice: "trains the strict JSON reading that every backend parser applies to request bodies."
+    },
+    "api-automation": {
+        kind: "blocks",
+        lessons: new Map(aaLessons.map((lesson) => [lesson.id, lesson])),
+        interview: aaInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: null,
+        flashcards: null,
+        morePractice: ""
+    },
+    "selenium": {
+        kind: "blocks",
+        lessons: new Map(seLessons.map((lesson) => [lesson.id, lesson])),
+        interview: seInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: null,
+        flashcards: null,
+        morePractice: ""
     },
     "test-design": {
         kind: "blocks",

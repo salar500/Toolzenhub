@@ -4,11 +4,13 @@
    Each has a model that meets every rule and weak versions that miss exactly the listed rules (unit-tested).
 ========================================================= */
 
+import { MORE_CODE } from "../automation/more-code.js";
+
 const AWAIT = { id: "await", type: "awaitActions", label: "Every action and assertion is awaited", advice: "Put await before every page action and every expect(...)." };
 const SLEEP = { id: "sleep", type: "noSleep", label: "No fixed waits", advice: "Remove waitForTimeout: Playwright auto-waits for actions and web-first assertions retry." };
 const USER = { id: "user", type: "userFacing", label: "Uses user-facing locators", advice: "Use getByRole, getByLabel or getByText rather than CSS or XPath." };
 
-export const CODE = Object.freeze([
+const PLAYWRIGHT = [
     {
         id: "pw-c-signin-form",
         task: "Write a test that signs in to ShopLite as asha@example.com with the password shoplite1 and checks that the header shows the My account link.",
@@ -59,4 +61,7 @@ export const CODE = Object.freeze([
         weak: [{ name: "kept the sleep", code: "test('adds to cart', async ({ page }) => {\n  await page.goto('/practice-labs/shoplite/');\n  await page.getByRole('listitem').filter({ hasText: 'LED Desk Lamp' }).getByRole('button', { name: 'Add to cart' }).click();\n  await page.waitForTimeout(1000);\n  await expect(page.getByRole('link', { name: 'Cart (1)' })).toBeVisible();\n});", missing: ["sleep"] }],
         explain: "The original depended on timing (a fixed wait), on position (nth(6) breaks when products are reordered) and on a one-off read. The fix waits for the real outcome and finds the product by name."
     }
-]);
+];
+
+/* every code-check exercise: Playwright UI tests here, then API automation and Selenium (automation/more-code.js) */
+export const CODE = Object.freeze([...PLAYWRIGHT, ...MORE_CODE]);
