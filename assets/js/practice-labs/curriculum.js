@@ -5,8 +5,8 @@
    Plain data and pure helpers; the site build turns them into pages (practice-labs/learn-html.js) and nothing here touches
    the DOM. A path has levels (beginner, intermediate, advanced), a level has modules and a module has lessons. A lesson is
    published only when its content exists: `lesson` names the id in the path's content source (for SQL, the lessons of the
-   SQL Practice Lab, with the extra teaching sections in sql-extras.js). A path whose status is "planned" has no pages and is
-   shown as planned; nothing here claims a path is finished that is not (docs/practice-labs-platform.md keeps the plan).
+   SQL Practice Lab, with the extra teaching sections in sql-extras.js). Planned subjects are named in departments.js, never
+   here: a path exists in this list only when it has published lessons. Nothing here claims a path is finished that is not.
 
    URL: /practice-labs/<path>/<level>/<module>/<lesson>/ (docs/practice-labs-platform.md section 3).
 ========================================================= */
@@ -24,6 +24,7 @@ export const PATHS = Object.freeze([
     {
         id: "sql",
         title: "SQL",
+        department: "database-engineering",
         status: "building",
         tagline: "Learn to read and write database queries, from your first SELECT to window functions, with every example and exercise running in your browser.",
         audience: "Complete beginners, testers who check data, analysts and anyone preparing for a data or QA role.",
@@ -125,14 +126,7 @@ export const PATHS = Object.freeze([
             "Practice projects: employees, banking, e-commerce, healthcare and business reporting",
             "Interview-style challenges"
         ]
-    },
-    { id: "manual-testing", title: "Manual Software Testing", status: "planned", tagline: "Test design, test cases, bug reports and the testing life cycle, with practical scenarios." },
-    { id: "playwright", title: "Playwright", status: "planned", tagline: "Browser test automation: locators, assertions, fixtures, the Page Object Model and debugging." },
-    { id: "power-bi", title: "Power BI", status: "planned", tagline: "Data modelling, DAX and dashboards, with practice that does not need Power BI Desktop and clear notes where it does." },
-    { id: "java", title: "Java", status: "planned", tagline: "Programming fundamentals through object-oriented design, collections and streams." },
-    { id: "python", title: "Python", status: "planned", tagline: "Fundamentals, data structures, files, exceptions and automation." },
-    { id: "api-testing", title: "API Testing", status: "planned", tagline: "HTTP, methods, status codes, headers, JSON and authentication, with positive and negative tests." },
-    { id: "git-github", title: "Git and GitHub", status: "planned", tagline: "Repositories, commits, branches, merging, pull requests and conflict resolution." }
+    }
 ]);
 
 export const PRACTICE_LABS_PREFIX = `${SITE_ROOT}practice-labs/`;

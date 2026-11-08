@@ -16,7 +16,8 @@ import { escapeHTML as esc } from "../ui/escape.js";
 import { ROUTES } from "../routes.js";
 import { renderBreadcrumb } from "../components/breadcrumb.js";
 import { getToolById } from "../data/tools.js";
-import { LEVELS, PATHS, PRACTICE_LABS_PREFIX, flatLessons, getPath, lessonCount, lessonUrl, levelUrl, moduleUrl, pathUrl, publishedPaths } from "./curriculum.js";
+import { LEVELS, PRACTICE_LABS_PREFIX, flatLessons, getPath, lessonCount, lessonUrl, levelUrl, moduleUrl, pathUrl, publishedPaths } from "./curriculum.js";
+import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from "./departments.js";
 import { lessons as sqlLessons } from "../tools/sql-practice-lab/lessons.js";
 import { set as sqlSet } from "../tools/sql-practice-lab/exercises.js";
 import { sqlExtras } from "./sql-extras.js";
@@ -24,6 +25,13 @@ import { sqlExtras } from "./sql-extras.js";
 const SITE_NAME = "ToolZen Hub";
 const HUB = () => ROUTES.practiceLabs;
 const OVERVIEW = () => PRACTICE_LABS_PREFIX;
+const departmentUrl = (department) => `${PRACTICE_LABS_PREFIX}${department.id}/`;
+
+/* the breadcrumb steps above a path: Practice Labs, then the path's department when that department has a page */
+const pathCrumbs = (path) => {
+    const department = getDepartment(path.department);
+    return [{ label: "Practice Labs", href: HUB() }, ...(department && isPublished(department) ? [{ label: department.title, href: departmentUrl(department) }] : [])];
+};
 
 /* the content of a path's lessons, by lesson id: the shared lesson data plus the teaching sections */
 const CONTENT = {
@@ -142,8 +150,6 @@ const intro = ({ eyebrow, title, text }) => `
 /* one finished page: `url` is the address a visitor sees (with the site base), `trail` the breadcrumb items after Home */
 const pageEntry = ({ url, title, description, html, trail }) => ({ url, title, description: clip(description), html, trail });
 
-const labTrail = [{ label: "Practice Labs", href: HUB() }];
-
 
 /* =========================================================
    RESULT TABLES AND EXERCISES
@@ -169,6 +175,20 @@ function resultTable(example, label) {
                             </table>
                         </div>
                         ${more}`;
+
+}
+
+function exampleBlock(example, index) {
+
+    return `
+                    <div class="learn-example">
+                        <h3>Example ${index + 1}</h3>
+                        <p>${esc(example.says)}</p>
+                        <pre class="lx-code" tabindex="0" role="region" aria-label="SQL of example ${index + 1}"><code data-sql-source>${esc(example.sql)}</code></pre>
+                        ${resultTable(example, `example ${index + 1}`)}
+                        <p><button type="button" class="lx-btn" data-sql-run hidden>Run this example</button></p>
+                        <div class="lx-live-result" data-sql-out data-label="example ${index + 1}" role="status" aria-live="polite"></div>
+                    </div>`;
 
 }
 
@@ -237,19 +257,28 @@ function lessonBody(entry, content) {
                     </p>
                 </header>
 
-                <section class="learn-section" aria-labelledby="learn-objectives">
-                    <h2 id="learn-objectives">What you will learn</h2>
+                <section class="learn-section learn-lesson-card" aria-labelledby="learn-objectives">
+                    <h2 id="learn-objectives">In this lesson</h2>
                     ${list(data.objectives)}
-                </section>
-
-                <section class="learn-section" aria-labelledby="learn-before">
-                    <h2 id="learn-before">Before you start</h2>
-                    <p>${prerequisite}</p>
+                    <p class="learn-lesson-card__before"><strong>Before you start:</strong> ${prerequisite}</p>
                 </section>
 
                 <section class="learn-section" aria-labelledby="learn-idea">
                     <h2 id="learn-idea">The idea in plain words</h2>
                     <p>${esc(data.intro)}</p>
+                    ${data.examples.length ? exampleBlock(data.examples[0], 0) : ""}
+                </section>
+
+                ${exercises.length ? `
+                <section class="learn-section" aria-labelledby="learn-try">
+                    <h2 id="learn-try">Your turn</h2>
+                    <p>Try it now, while the example is fresh. Your SQL runs on a fresh copy of the practice database in your browser and is checked against the expected result; nothing you type is uploaded. A hint comes before the answer.</p>
+                    <noscript><p class="lx-note">Running and checking SQL needs JavaScript and WebAssembly. The task, hints and solution below can still be read.</p></noscript>
+                    ${exerciseBlock(exercises[0], 0)}
+                </section>` : ""}
+
+                <section class="learn-section" aria-labelledby="learn-points">
+                    <h2 id="learn-points">Key points</h2>
                     ${list(data.points)}
                 </section>
 
@@ -263,31 +292,24 @@ function lessonBody(entry, content) {
                     <p>${esc(data.analogy)}</p>
                 </section>
 
+                ${data.examples.length > 1 ? `
                 <section class="learn-section" aria-labelledby="learn-examples">
-                    <h2 id="learn-examples">${data.examples.length === 1 ? "Worked example" : "Worked examples"}</h2>
-                    <p>Each example shows the SQL, what it does and the result it returns. Press <strong>Run this example</strong> to run it yourself on the practice database in your browser.</p>
-                    ${data.examples.map((example, index) => `
-                    <div class="learn-example">
-                        <h3>Example ${index + 1}</h3>
-                        <p>${esc(example.says)}</p>
-                        <pre class="lx-code" tabindex="0" role="region" aria-label="SQL of example ${index + 1}"><code data-sql-source>${esc(example.sql)}</code></pre>
-                        ${resultTable(example, `example ${index + 1}`)}
-                        <p><button type="button" class="lx-btn" data-sql-run hidden>Run this example</button></p>
-                        <div class="lx-live-result" data-sql-out data-label="example ${index + 1}" role="status" aria-live="polite"></div>
-                    </div>`).join("")}
-                </section>
+                    <h2 id="learn-examples">More examples</h2>
+                    ${data.examples.slice(1).map((example, index) => exampleBlock(example, index + 1)).join("")}
+                </section>` : ""}
 
-                ${exercises.length ? `
+                ${exercises.length > 1 ? `
+                <section class="learn-section" aria-labelledby="learn-practice">
+                    <h2 id="learn-practice">More practice</h2>
+                    <p>Each task builds on the lesson. Check your answer, use a hint if you are stuck, and read the explanation even when you are right: it often shows a second way.</p>
+                    ${exercises.slice(1).map((exercise, index) => exerciseBlock(exercise, index + 1)).join("")}
+                </section>` : ""}
+
+                ${exercises.length === 0 ? `
                 <section class="learn-section" aria-labelledby="learn-practice">
                     <h2 id="learn-practice">Practice</h2>
-                    <p>Write the query yourself, then check it. Your SQL runs for real on a fresh copy of the practice database, and nothing you type leaves your browser. A hint comes before the answer; the solution and its explanation are there when you want them.</p>
-                    <noscript><p class="lx-note">Running and checking SQL needs JavaScript and WebAssembly. The tasks, hints and solutions below can still be read.</p></noscript>
-                    ${exercises.map((exercise, index) => exerciseBlock(exercise, index)).join("")}
-                </section>` : `
-                <section class="learn-section" aria-labelledby="learn-practice">
-                    <h2 id="learn-practice">Practice</h2>
-                    <p>This lesson is explained in words and examples, with no exercise of its own. Try the examples above in the sandbox of the <a href="${esc(lab.href)}">${esc(lab.title)}</a>, which runs any SQL you write.</p>
-                </section>`}
+                    <p>This lesson is explained in words and examples, with no exercise of its own. Run the example above, then change it and run it again; the sandbox of the <a href="${esc(lab.href)}">${esc(lab.title)}</a> runs any SQL you write.</p>
+                </section>` : ""}
 
                 ${data.mistakes.length ? `
                 <section class="learn-section" aria-labelledby="learn-mistakes">
@@ -440,42 +462,247 @@ function moduleBody(path, level, module, content) {
 
 
 /* =========================================================
-   THE OVERVIEW OF ALL LEARNING PATHS (/practice-labs/)
+   THE PRACTICE LABS HOME (/practice-labs/) AND THE DEPARTMENT PAGES (/practice-labs/<department>/)
 ========================================================= */
+
+const labOf = (id) => getToolById(id);
+
+/* what a department offers, counted from real content only */
+function departmentCounts(department) {
+    const paths = department.paths.map(getPath).filter(Boolean);
+    const lessons = paths.reduce((sum, path) => sum + lessonCount(path), 0);
+    return { paths: paths.length, lessons, labs: department.labs.length };
+}
+
+const countText = ({ paths, lessons, labs }) => [
+    paths ? `${paths} learning ${paths === 1 ? "path" : "paths"} (${lessons} lessons)` : "",
+    labs ? `${labs} ${labs === 1 ? "lab" : "labs"} with checked exercises` : ""
+].filter(Boolean).join(" · ");
+
+/* where a department's "start here" leads: the first lesson of a path, or a lab */
+function startHref(start) {
+    if (start?.path) {
+        const first = flatLessons(getPath(start.path))[0];
+        return lessonUrl(first.path, first.level, first.module, first.lesson);
+    }
+    return start?.lab ? labOf(start.lab).href : null;
+}
 
 function overviewBody() {
 
-    const built = publishedPaths();
+    const live = publishedDepartments();
+    const indexUrl = `${OVERVIEW()}search-index.json`;
 
     return `
-                ${intro({ eyebrow: "Learn by doing", title: "Practice Labs learning paths", text: "Structured routes from zero to job-ready skills. Each path goes from Beginner to Advanced in short lessons with worked examples, exercises and answers. They run in your browser and nothing you type is uploaded." })}
+                ${intro({ eyebrow: "Learn by doing", title: "Practice Labs", text: "Learn a software skill, then practise it straight away: lessons with runnable examples, exercises that are checked by real engines, and labs you can come back to. Everything runs in your browser. It is free, and there is nothing to sign up for." })}
 
-                <section class="learn-section" aria-labelledby="learn-available">
-                    <h2 id="learn-available">Available now</h2>
-                    <div class="learn-cards">
-                        ${built.map((path) => `
-                        <a class="learn-card" href="${esc(pathUrl(path))}">
-                            <span class="learn-card__status">${lessonCount(path)} lessons, still growing</span>
-                            <strong>${esc(path.title)}</strong>
-                            <span>${esc(path.tagline)}</span>
-                        </a>`).join("")}
-                    </div>
+                <section class="learn-section learn-search" aria-labelledby="learn-search-title" data-search-index="${esc(indexUrl)}" hidden>
+                    <h2 id="learn-search-title">Find a lesson, lab or path</h2>
+                    <form class="learn-search__form" role="search" onsubmit="return false">
+                        <label class="lx-label" for="learn-search-q">Search</label>
+                        <input id="learn-search-q" class="lx-input learn-search__input" type="search" autocomplete="off" spellcheck="false" placeholder="For example: joins, NULL, DAX, JSONPath">
+                        <div class="learn-search__filters">
+                            <label>Department
+                                <select class="lx-select" data-filter="department">
+                                    <option value="">All departments</option>
+                                    ${live.map((d) => `<option value="${esc(d.id)}">${esc(d.title)}</option>`).join("")}
+                                </select>
+                            </label>
+                            <label>Type
+                                <select class="lx-select" data-filter="kind">
+                                    <option value="">Everything</option>
+                                    <option value="lesson">Lessons</option>
+                                    <option value="lab">Labs</option>
+                                    <option value="path">Learning paths</option>
+                                    <option value="department">Departments</option>
+                                </select>
+                            </label>
+                            <label>Level
+                                <select class="lx-select" data-filter="level">
+                                    <option value="">Any level</option>
+                                    <option value="beginner">Beginner</option>
+                                    <option value="intermediate">Intermediate</option>
+                                    <option value="advanced">Advanced</option>
+                                </select>
+                            </label>
+                        </div>
+                    </form>
+                    <p class="learn-search__status" role="status" aria-live="polite"></p>
+                    <ol class="learn-search__results"></ol>
                 </section>
 
-                <section class="learn-section" aria-labelledby="learn-planned">
-                    <h2 id="learn-planned">Planned, one complete path at a time</h2>
-                    <p>These paths are planned and are not published yet. A path appears here as a link only when it has real lessons.</p>
-                    <div class="learn-cards">
-                        ${PATHS.filter((path) => path.status === "planned").map((path) => `
+                <section class="learn-section" aria-labelledby="learn-departments">
+                    <h2 id="learn-departments">Departments</h2>
+                    <p>Each department is a specialist area with its own learning paths and labs. A department opens when it has real lessons or labs to offer; the others are being built and are listed so you can see where the platform is going.</p>
+                    <div class="learn-cards learn-cards--departments">
+                        ${DEPARTMENTS.map((department) => isPublished(department) ? `
+                        <a class="learn-card" href="${esc(departmentUrl(department))}">
+                            <span class="learn-card__status">${esc(countText(departmentCounts(department)))}</span>
+                            <strong>${esc(department.title)}</strong>
+                            <span>${esc(department.short)}</span>
+                        </a>` : `
                         <div class="learn-card learn-card--planned">
-                            <span class="learn-card__status">Planned</span>
-                            <strong>${esc(path.title)}</strong>
-                            <span>${esc(path.tagline)}</span>
+                            <span class="learn-card__status">In development</span>
+                            <strong>${esc(department.title)}</strong>
+                            <span>${esc(department.short)}</span>
                         </div>`).join("")}
                     </div>
                 </section>
 
-                <p class="learn-start"><a class="learn-link" href="${esc(HUB())}">Looking for single exercises and flashcards? See all Practice Labs.</a></p>`;
+                <section class="learn-section" aria-labelledby="learn-where">
+                    <h2 id="learn-where">Not sure where to start?</h2>
+                    <ul>
+                        ${live.filter((d) => d.start).map((d) => `<li><a href="${esc(startHref(d.start))}">${esc(d.start.label)}</a> (${esc(d.title)})</li>`).join("")}
+                    </ul>
+                    <p>Every lesson shows what you need first and what comes next, so you can also start from any topic you need today.</p>
+                </section>
+
+                <p class="learn-start"><a class="learn-link" href="${esc(HUB())}">See every Practice Lab and the Smart Flashcards on one page</a></p>`;
+
+}
+
+/* the department's own sidebar: its learning paths, its labs, the other departments; the same markup as every ecosystem sidebar */
+function departmentNav(department) {
+
+    const link = (href, label) => `<li><a href="${esc(href)}">${esc(label)}</a></li>`;
+    const groups = [
+        ["Learning paths", department.paths.map(getPath).filter(Boolean).map((path) => link(pathUrl(path), `${path.title} learning path`))],
+        ["Labs", department.labs.map((id) => link(labOf(id).href, labOf(id).title))],
+        ["Other departments", publishedDepartments().filter((d) => d.id !== department.id).map((d) => link(departmentUrl(d), d.title))]
+    ].filter(([, items]) => items.length);
+
+    return `
+                <nav class="section-switcher" data-rail-noun="page" aria-label="${esc(department.title)}: switch page">
+                    <details>
+                        <summary>
+                            <span>${esc(department.title)}</span>
+                            <span class="section-switcher__now">${esc(department.title)}</span>
+                            <span class="section-switcher__count">${groups.reduce((sum, [, items]) => sum + items.length, 0)}</span>
+                        </summary>
+                        <p class="section-switcher__overview"><a href="${esc(departmentUrl(department))}" aria-current="page">${esc(department.title)} overview</a></p>
+                        <ul class="section-switcher__list">${groups.map(([label, items]) => `
+                            <li class="section-switcher__group" data-open="true">
+                                <span class="section-switcher__label">${esc(label)}</span>
+                                <ul>${items.join("")}</ul>
+                            </li>`).join("")}
+                        </ul>
+                        <p class="section-switcher__all"><a href="${esc(OVERVIEW())}">All departments</a></p>
+                    </details>
+                </nav>`;
+
+}
+
+function departmentBody(department) {
+
+    const paths = department.paths.map(getPath).filter(Boolean);
+    const start = startHref(department.start);
+    const statusText = { path: "Learning path", lab: "Lab", planned: "Being built" };
+    const technologyHref = (t) => t.status === "path" ? pathUrl(getPath(t.path)) : t.status === "lab" ? labOf(t.lab).href : null;
+    const related = department.related.map(getDepartment).filter(Boolean);
+
+    return `
+                ${intro({ eyebrow: "Practice Labs department", title: department.title, text: department.short })}
+
+                ${start ? `<p class="learn-start"><a class="learn-button" href="${esc(start)}">${esc(department.start.label)}</a></p>` : ""}
+
+                <section class="learn-section" aria-labelledby="learn-about">
+                    <h2 id="learn-about">What this department teaches</h2>
+                    ${department.intro.map((paragraph) => `<p>${esc(paragraph)}</p>`).join("")}
+                    <p><strong>It is for:</strong></p>
+                    ${list(department.audience)}
+                </section>
+
+                <section class="learn-section" aria-labelledby="learn-tech">
+                    <h2 id="learn-tech">Subjects</h2>
+                    <ul class="learn-tech">
+                        ${department.technologies.map((t) => {
+                            const href = technologyHref(t);
+                            return `<li><span class="learn-badge learn-badge--${esc(t.status)}">${esc(statusText[t.status])}</span> ${href ? `<a href="${esc(href)}">${esc(t.title)}</a>` : esc(t.title)}</li>`;
+                        }).join("")}
+                    </ul>
+                </section>
+
+                ${paths.length ? `
+                <section class="learn-section" aria-labelledby="learn-paths">
+                    <h2 id="learn-paths">Learning paths</h2>
+                    <div class="learn-cards">
+                        ${paths.map((path) => `
+                        <a class="learn-card" href="${esc(pathUrl(path))}">
+                            <span class="learn-card__status">${lessonCount(path)} lessons · Beginner to Advanced${path.status === "building" ? " · still growing" : ""}</span>
+                            <strong>${esc(path.title)}</strong>
+                            <span>${esc(path.tagline)}</span>
+                        </a>`).join("")}
+                    </div>
+                </section>` : ""}
+
+                ${department.labs.length ? `
+                <section class="learn-section" aria-labelledby="learn-labs">
+                    <h2 id="learn-labs">Labs</h2>
+                    <p>A lab is a set of exercises with an exact check, each with hints and an explained solution. Labs are the place to come back to for more practice.</p>
+                    <div class="learn-cards">
+                        ${department.labs.map((id) => labOf(id)).map((lab) => `
+                        <a class="learn-card" href="${esc(lab.href)}">
+                            <span class="learn-card__status">Lab · checked in your browser</span>
+                            <strong>${esc(lab.title)}</strong>
+                            <span>${esc(lab.description)}</span>
+                        </a>`).join("")}
+                    </div>
+                </section>` : ""}
+
+                ${department.decks.length ? `
+                <section class="learn-section" aria-labelledby="learn-revise">
+                    <h2 id="learn-revise">Revise</h2>
+                    <p>The <a href="${esc(labOf("smart-flashcards").href)}">Smart Flashcards</a> have original decks for ${esc(department.decks.join(" and "))}. Use them a few days after a lesson to keep the terms fresh; saving your revision dates on this device is optional and off until you turn it on.</p>
+                </section>` : ""}
+
+                ${related.length ? `
+                <section class="learn-section" aria-labelledby="learn-related-depts">
+                    <h2 id="learn-related-depts">Related departments</h2>
+                    <ul>
+                        ${related.map((d) => `<li>${isPublished(d) ? `<a href="${esc(departmentUrl(d))}">${esc(d.title)}</a>` : `${esc(d.title)} (in development)`}: ${esc(d.short)}</li>`).join("")}
+                    </ul>
+                </section>` : ""}`;
+
+}
+
+
+/* =========================================================
+   THE SEARCH INDEX (/practice-labs/search-index.json)
+   Built from the same data as the pages, so search can only find pages that exist.
+========================================================= */
+
+export function learnSearchIndex() {
+
+    const entries = [];
+
+    for (const department of publishedDepartments()) {
+        entries.push({ kind: "department", title: department.title, url: departmentUrl(department), department: department.id, level: "", text: department.short });
+        for (const id of department.labs) {
+            const lab = labOf(id);
+            entries.push({ kind: "lab", title: lab.title, url: lab.href, department: department.id, level: "", text: lab.description });
+        }
+    }
+
+    for (const path of publishedPaths()) {
+        const content = CONTENT[path.id];
+        entries.push({ kind: "path", title: `${path.title} learning path`, url: pathUrl(path), department: path.department, level: "", text: path.tagline });
+        for (const entry of flatLessons(path)) {
+            const data = content.lessons.get(entry.lesson.id);
+            entries.push({
+                kind: "lesson",
+                title: entry.lesson.title,
+                url: lessonUrl(entry.path, entry.level, entry.module, entry.lesson),
+                department: path.department,
+                level: entry.level.id,
+                where: `${path.title} · ${LEVELS[entry.level.id].title} · ${entry.module.title}`,
+                text: `${firstSentence(data.intro)} ${data.objectives.join(". ")}`
+            });
+        }
+    }
+
+    /* a lab belongs to the first department that lists it; drop repeats */
+    const seen = new Set();
+    return entries.filter((e) => (seen.has(e.url) ? false : seen.add(e.url)));
 
 }
 
@@ -490,22 +717,41 @@ export function learnPages() {
 
     const pages = [];
 
+    const homeTrail = [{ label: "Practice Labs", href: HUB() }, { label: "Departments" }];
+
     pages.push({
         kind: "overview",
         ...pageEntry({
             url: OVERVIEW(),
-            title: `Practice Labs learning paths: SQL and more | ${SITE_NAME}`,
-            description: "Free structured learning paths with worked examples, exercises and answers that run in your browser. SQL is available now; more paths are planned.",
-            html: frame({ trail: [{ label: "Practice Labs", href: HUB() }, { label: "Learning paths" }], nav: "", body: overviewBody() }),
-            trail: [{ label: "Practice Labs", href: HUB() }, { label: "Learning paths" }]
+            title: `Practice Labs Departments: Learn and Practise Software Skills | ${SITE_NAME}`,
+            description: "Learn software skills by doing them: SQL, testing, analytics, APIs and more, with lessons, checked exercises and labs that run in your browser. Free, no sign-up.",
+            html: frame({ trail: homeTrail, nav: "", body: overviewBody() }),
+            trail: homeTrail
         })
     });
+
+    for (const department of publishedDepartments()) {
+
+        const trail = [{ label: "Practice Labs", href: HUB() }, { label: department.title }];
+
+        pages.push({
+            kind: "department",
+            ...pageEntry({
+                url: departmentUrl(department),
+                title: `${department.title}: Lessons, Labs and Practice | ${SITE_NAME}`,
+                description: department.short,
+                html: frame({ trail, nav: departmentNav(department), body: departmentBody(department) }),
+                trail
+            })
+        });
+
+    }
 
     for (const path of publishedPaths()) {
 
         const content = CONTENT[path.id];
         const all = flatLessons(path);
-        const pathTrail = [...labTrail, { label: path.title }];
+        const pathTrail = [...pathCrumbs(path), { label: path.title }];
 
         pages.push({
             kind: "path",
@@ -520,7 +766,7 @@ export function learnPages() {
 
         for (const level of path.levels) {
 
-            const levelTrail = [...labTrail, { label: path.title, href: pathUrl(path) }, { label: LEVELS[level.id].title }];
+            const levelTrail = [...pathCrumbs(path), { label: path.title, href: pathUrl(path) }, { label: LEVELS[level.id].title }];
 
             pages.push({
                 kind: "level",
@@ -535,7 +781,7 @@ export function learnPages() {
 
             for (const module of level.modules) {
 
-                const moduleTrail = [...labTrail, { label: path.title, href: pathUrl(path) }, { label: LEVELS[level.id].title, href: levelUrl(path, level) }, { label: module.title }];
+                const moduleTrail = [...pathCrumbs(path), { label: path.title, href: pathUrl(path) }, { label: LEVELS[level.id].title, href: levelUrl(path, level) }, { label: module.title }];
 
                 pages.push({
                     kind: "module",

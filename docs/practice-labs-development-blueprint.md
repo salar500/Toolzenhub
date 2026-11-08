@@ -49,6 +49,7 @@
 | 19 | Sources and research evidence | [15](practice-labs/15-source-register.md), [01](practice-labs/01-market-research.md), [02](practice-labs/02-competitor-matrix.md), [03](practice-labs/03-user-needs.md), [17](practice-labs/17-competitor-experience-audit.md) |
 | 20 | Existing assets: preserve and reuse | [16](practice-labs/16-existing-assets-reuse.md) |
 | 21 | Implementation-ready department specifications | [18](practice-labs/18-department-specifications.md) |
+| 22 | Implementation status (living record of what is built) | [19](practice-labs/19-implementation-status.md) |
 
 ---
 
@@ -90,20 +91,21 @@
 
 ## 2. Final department structure ([04](practice-labs/04-department-taxonomy.md))
 
-| Id | Department | Home paths |
-|---|---|---|
-| D1 | Software Testing and Quality | 6 |
-| D2 | Test Automation Engineering | 4 |
-| D3 | Programming and Developer Foundations (owns Git and the command line) | 8 |
-| D4 | Web Development and Frontend | 4 |
-| D5 | Databases, Backend and APIs (owns SQL) | 5 |
-| D6 | AI and Machine Learning (GenAI, LLMs, apps, agents, ML, deep learning, evaluation, responsible AI) | 6 |
-| D7 | Data Analytics and Data Engineering | 6 |
-| D8 | DevOps, Cloud and Security (security is a subdepartment) | 5 |
+Set by the owner on 2026-11-08 (rule 4.10), in this order:
 
-- **Totals:** 44 paths.
-- **One home per path.** Cross-listing is a link, never a copy.
-- **Department is not in path URLs,** so existing SQL URLs never change.
+1. Database Engineering
+2. Software Testing and Quality Engineering
+3. Automation Engineering
+4. AI and AI Engineering
+5. Data and Analytics Engineering
+6. Software Development and Programming
+7. Web and Backend Engineering
+8. DevOps, Cloud and Cybersecurity
+
+- **Canonical homes:** one home per subject; cross-links, never copies.
+- **URLs:** the department is not in path URLs.
+- **Publication:** a department page is published only with real content.
+- **Build state:** recorded in [19 implementation status](practice-labs/19-implementation-status.md).
 
 ## 3. Recommended initial audience
 

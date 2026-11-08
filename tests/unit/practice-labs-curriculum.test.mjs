@@ -12,13 +12,28 @@ const { PATHS, flatLessons, publishedPaths } = await import("../../assets/js/pra
 const { lessons } = await import("../../assets/js/tools/sql-practice-lab/lessons.js");
 const { set } = await import("../../assets/js/tools/sql-practice-lab/exercises.js");
 const { sqlExtras } = await import("../../assets/js/practice-labs/sql-extras.js");
-const { learnPages } = await import("../../assets/js/practice-labs/learn-html.js");
+const { learnPages, learnSearchIndex } = await import("../../assets/js/practice-labs/learn-html.js");
+const { DEPARTMENTS, isPublished } = await import("../../assets/js/practice-labs/departments.js");
 
 const slug = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 
-test("path ids are unique and planned paths have no levels (no page is promised)", () => {
+test("path ids are unique, every path has levels and a known department", () => {
   assert.equal(new Set(PATHS.map((p) => p.id)).size, PATHS.length);
-  for (const path of PATHS.filter((p) => p.status === "planned")) assert.equal(path.levels, undefined, path.id);
+  for (const path of PATHS) {
+    assert.ok(path.levels?.length, path.id);
+    assert.ok(DEPARTMENTS.some((d) => d.id === path.department && d.paths.includes(path.id)), `${path.id}: department must list it`);
+  }
+});
+
+test("departments: the owner's eight, unique slugs that never collide with a path or a reserved name", () => {
+  assert.equal(DEPARTMENTS.length, 8);
+  const names = [...DEPARTMENTS.map((d) => d.id), ...PATHS.map((p) => p.id), "shoplite", "api-sandbox", "search", "projects", "interview"];
+  assert.equal(new Set(names).size, names.length);
+  for (const d of DEPARTMENTS) {
+    assert.match(d.id, /^[a-z0-9]+(-[a-z0-9]+)*$/);
+    for (const t of d.technologies) assert.ok(["path", "lab", "planned"].includes(t.status), `${d.id}: ${t.title}`);
+    if (isPublished(d)) assert.ok(d.intro.join(" ").split(/\s+/).length >= 150, `${d.id}: a published department needs 150+ words of its own text`);
+  }
 });
 
 test("SQL: every lesson exists, is used once, and its slug is unique and URL-safe", () => {
@@ -59,7 +74,7 @@ test("SQL: each lesson has all teaching sections, real examples and existing exe
 
 test("generated pages: one per node, unique addresses, one h1, title and description present, no raw markup leaks", () => {
   const pages = learnPages();
-  assert.equal(pages.length, 1 + 1 + 3 + 7 + 18);
+  assert.equal(pages.length, 1 + DEPARTMENTS.filter(isPublished).length + 1 + 3 + 7 + 18);
   assert.equal(new Set(pages.map((p) => p.url)).size, pages.length);
   for (const page of pages) {
     assert.equal((page.html.match(/<h1[ >]/g) || []).length, 1, page.url);
@@ -67,4 +82,11 @@ test("generated pages: one per node, unique addresses, one h1, title and descrip
     assert.ok(page.description.length <= 160, `${page.url}: description ${page.description.length}`);
     assert.ok(!/undefined|\[object/.test(page.html), `${page.url}: leaked value`);
   }
+});
+
+test("search index: every entry points to a generated page or an existing lab, no duplicates", () => {
+  const index = learnSearchIndex();
+  const urls = new Set(learnPages().map((p) => p.url));
+  assert.equal(new Set(index.map((e) => e.url)).size, index.length);
+  for (const e of index) assert.ok(urls.has(e.url) || e.kind === "lab", `${e.kind} ${e.url}`);
 });
