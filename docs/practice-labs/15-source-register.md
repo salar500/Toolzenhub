@@ -55,6 +55,33 @@ Evidence classes follow rulebook 12 (evidence and uncertainty):
 | S45 | Transformers.js (Hugging Face docs) | Runs ONNX models in the browser; WebGPU is optional and still experimental in Firefox and Safari; model sizes vary and were not measured | Public evidence | H | Search summary |
 | S46 | isomorphic-git (isomorphic-git.org) | Pure-JS git for the browser, with a pluggable file system (LightningFS); cloning a remote needs a CORS proxy | Public evidence | H | Search summary |
 
+## Direct examination and user feedback (added 2026-11-08, second research pass)
+
+| Id | Source | What it supports | Class | Rel. | How read |
+|---|---|---|---|---|---|
+| S55 | Direct examination of 21 competitor pages plus ToolZenHub's own lesson in real Chrome at 390 × 844 (URLs in [17](17-competitor-experience-audit.md), section 2), measured 2026-11-08 | Requests, third-party domains, overflow, position of first code, editors, ads, overlays, sign-up walls; phone screenshots inspected | Verified data | H | Measured (Playwright, system Chrome) |
+| S56 | codecademy.com/pricing (INR), read 2026-11-08 | Basic is free with limited courses and no assessments, projects, code challenges, interview prep or certificates; Plus ₹300/mo yearly or ₹600 monthly; Pro ₹600/mo yearly or ₹1,200 monthly | Verified data | H | Direct fetch |
+| S57 | W3Schools vs MDN feedback: forum.freecodecamp.org/t/is-w3schools-not-good/162957; Mozilla Learning Area survey 2014 (wiki.mozilla.org); r/learnprogramming threads via mirrors | Beginners value plain English and "Try it"; criticised for stale pages and missing gotchas | Opinion (users) | M | Search summary |
+| S58 | Codecademy reviews: coursereport.com/schools/codecademy-pro, skillscouter.com/codecademy-review, checkthat.ai/brands/codecademy/reviews | Price vs value, free-tier limits, fill-in-the-blank hand-holding; Trustpilot around 2.6 driven by billing complaints (aggregator claim) | Opinion / Estimate | L–M | Search summary |
+| S59 | DataCamp reviews: trustpilot.com/review/www.datacamp.com, coursereport.com/schools/datacamp | Cancellation and billing complaints; content "decent"; limited depth for advanced learners | Opinion (users) | M | Search summary |
+| S60 | r/SQL and r/learnSQL threads (2024–2025, via mirror sites) | Learners recommend high-volume hands-on practice (SQLZoo, StrataScratch, LearnSQL.com) | Opinion (users) | M | Search summary |
+| S61 | r/softwaretesting (via mirrors), club.ministryoftesting.com threads 68705 and 86924 | Beginners ask where to practise manual testing; answers: crowdtesting, demo sites, Guru99 | Opinion (users) | M | Search summary |
+| S62 | bugbug.io "Best websites with bugs for testing" (updated 4 Nov 2026), read 2026-11-08 | Guru99 Live Testing Project is the only listed site with intentional bugs; other options are real products or bounty programs | Source | M | Direct fetch |
+| S63 | testquality.com "5 favorite web apps for practicing test automation"; automationpanda.com | SauceDemo, The Internet and Restful Booker (resets every 10 min, "loaded with bugs"); public demo sites "remain elusive" | Source | M | Search summary |
+| S64 | Central Square Foundation BaSE 2025 report (edtechbase.centralsquarefoundation.org); ASER 2024 via Business Today and Deccan Herald | 90% of low-income households own a smartphone; 95% of children with access share it; practice and doubt-solving is the top EdTech use (77%); rural 14–16: about 89% access, just over half use it for learning | Source | M (full text not read) | Search summary |
+
+## Label legend used across the Practice Labs documents
+
+The owner asked for facts, estimates, opinions and recommendations to be clearly distinguished. The documents use two compatible label sets:
+
+| Owner's term | Labels in 01–13 (rulebook 12 classes) | Labels in 16–18 |
+|---|---|---|
+| Verified fact | **[V]** verified data (measured or read first-hand); **[P]** public evidence (a cited first-party or reputable page, reported) | **[Fact]**, **[Source]** |
+| Estimate | **[E]** third-party estimate | **[Estimate]** |
+| Opinion | **[H]** reasoned hypothesis (my judgement); user reviews are tagged "Opinion (users)" in this register | **[Opinion]** |
+| Recommendation | "Decision:", "Recommendation:" or "**Recommended**" in decision tables | **Recommendation** |
+| Unknown | **[U]** | "unknown" |
+
 ## Repository facts used (verified 2026-11-08, this session)
 
 Branch `feature/unified-ecosystem-workspace` at `9b6e7e9` (clean, in sync with origin). `main` is at `637ae76`.
@@ -94,5 +121,11 @@ SQL audit facts:
 ## Not researched (stated, not hidden)
 
 - **Search volumes and keyword difficulty:** no Keyword Planner, Search Console or Trends export was available. They stay unknown until measured ([11 SEO](11-seo-strategy.md), section 6).
-- **Competitors not reviewed:** Codecademy, DataCamp, Scrimba, HackerRank, LeetCode, Codewars, CodeSignal, InterviewBit, GeeksforGeeks, Programiz, Mode, Ministry of Testing, BrowserStack Guide, Software Testing Help, GitHub Skills, the AI-education platforms and the cloud skill platforms. Their lesson UX was not opened this session. They appear in the competitor matrix only with general, well-known facts, marked "not re-verified".
+- **Competitors examined directly (S55, second pass):**
+  - W3Schools, SQLBolt, Programiz, GeeksforGeeks, Mode, Kaggle Learn, Codecademy, DataCamp, freeCodeCamp, Exercism;
+  - Learn Git Branching, Playwright docs, Test Automation University, Software Testing Help, Ministry of Testing;
+  - Postman Learning Center, GitHub Skills, roadmap.sh, Google ML Crash Course, Microsoft Learn (Power BI), HackerRank.
+
+  Lessons behind sign-in were not entered.
+- **Still not examined:** Scrimba, LeetCode, Codewars, CodeSignal, InterviewBit, BrowserStack Guide, DeepLearning.AI, Hugging Face Learn, fast.ai, AWS Skill Builder, Google Cloud Skills Boost, the Docker, Kubernetes, Selenium and Cypress docs, StrataScratch, SQLZoo and LearnSQL.com. The matrix rows that rely on general knowledge stay marked "nr".
 - **Licences to confirm before vendoring:** Pyodide (MPL-2.0, as I understand it) and TeaVM (Apache-2.0, as I understand it). Both must be confirmed from the repositories before any build.

@@ -1,6 +1,15 @@
 # Practice Labs development blueprint (master execution specification)
 
-**Status:** research and planning complete (2026-11-08). **No development has started under this blueprint.**
+**Status:** research and planning complete (2026-11-08), including a second pass:
+
+- direct examination of 21 competitor products in a phone-sized browser;
+- user feedback and free-versus-paid verification;
+- an existing-assets reuse plan;
+- implementation-ready department specifications.
+
+**No development has started under this blueprint.**
+
+**Evidence labels:** every claim is marked as a verified fact, estimate, opinion or recommendation. The legend is in [15](practice-labs/15-source-register.md), "Label legend".
 
 **Repository state:**
 
@@ -37,7 +46,9 @@
 | 16 | Acceptance criteria | [13](practice-labs/13-acceptance-criteria.md) |
 | 17 | Feature-specific sanity checks | [13](practice-labs/13-acceptance-criteria.md) section 3, [09](practice-labs/09-technical-architecture.md) section 11 |
 | 18 | Known limitations and deferred decisions | Sections 18 and 20 below |
-| 19 | Sources and research evidence | [15](practice-labs/15-source-register.md), [01](practice-labs/01-market-research.md), [02](practice-labs/02-competitor-matrix.md), [03](practice-labs/03-user-needs.md) |
+| 19 | Sources and research evidence | [15](practice-labs/15-source-register.md), [01](practice-labs/01-market-research.md), [02](practice-labs/02-competitor-matrix.md), [03](practice-labs/03-user-needs.md), [17](practice-labs/17-competitor-experience-audit.md) |
+| 20 | Existing assets: preserve and reuse | [16](practice-labs/16-existing-assets-reuse.md) |
+| 21 | Implementation-ready department specifications | [18](practice-labs/18-department-specifications.md) |
 
 ---
 
@@ -62,7 +73,20 @@
    | javac (author's claim) | about 6 MB |
 
    Playwright cannot run in a page, and AI must not depend on runtime models [S40–S46].
-6. **The approachable pattern is proven:** W3Schools and SQLBolt show a left tree, a runnable example first, tasks beside the explanation, the solution on request, and previous and next [S20, S22].
+6. **Direct examination confirms the gap** [Fact, S55, S56] ([17](practice-labs/17-competitor-experience-audit.md)):
+   - Free reference pages show an example quickly but have no checked practice: W3Schools at 371 px, Programiz at 536 px.
+   - Practice platforms put practice behind accounts: DataCamp shows a sign-up wall on the first phone screen.
+   - Codecademy's free plan has no assessments, projects, challenges or interview prep (Pro is ₹1,200 a month).
+   - Ad-funded tutorials are heavy (W3Schools: 608 requests, 96 third-party domains), while ToolZenHub's lesson uses 38 requests and no third parties.
+   - Learn Git Branching, the best Git experience, does not fit a phone.
+   - ToolZenHub's own weak point: practice starts 1,770 px down (about 2.1 phone screens).
+7. **Users** [Opinion, S57–S61]:
+   - Beginners value plain wording and "try it" tinkering.
+   - Paid platforms draw billing and cancellation complaints.
+   - Fill-in-the-blank feels too hand-holding.
+   - SQL learners want volume of practice.
+   - Testers keep asking where to practise; existing demo sites give no feedback (S62, S63).
+8. **The approachable pattern is proven:** W3Schools and SQLBolt show a left tree, a runnable example first, tasks beside the explanation, the solution on request, and previous and next [S20, S22].
 
 ## 2. Final department structure ([04](practice-labs/04-department-taxonomy.md))
 
@@ -84,6 +108,25 @@
 ## 3. Recommended initial audience
 
 Testers and testing job-seekers (manual, moving to automation), with SQL as the first technical skill. India-first, but written for everyone. Data analysts are the secondary audience, served by the existing SQL, Excel and Power BI assets. Reasons and evidence: [03](practice-labs/03-user-needs.md), section 3.
+
+## 3a. Reuse first ([16](practice-labs/16-existing-assets-reuse.md))
+
+These existing assets are preserved and become the foundation:
+
+- all 7 labs share `learning/lab-shell.js`, which **is** the challenge engine;
+- the SQL, Excel formula, DAX and Power Query engines;
+- 223 verified exercises, 44 lessons, 181 flashcards;
+- 10 developer-tool engines;
+- the built learning-path platform.
+
+**Binding rules:**
+
+- No existing URL changes.
+- Exercise ids are permanent.
+- Engines are imported, never cloned.
+- Labs are kept beside their paths.
+
+Wrapping the existing Excel and Power BI labs into paths (W6) follows the method used for SQL.
 
 ## 4–12. Specifications
 
@@ -119,6 +162,8 @@ The per-wave process (owner's rules) is:
 | W7 | Prompt Evaluation Lab, AI Foundations, Prompt Engineering, Testing AI Systems | W2 |
 | W8 | LLM Apps, ML Foundations, Responsible AI, API Test Automation, Java | W5–W7; D4 for Java |
 | W9 | All remaining catalogue paths, re-scored with measured demand | data from W1–W8 |
+
+**Effort:** the launch scope W0–W5 is about 59 deliveries; the full catalogue is about 160 [Opinion; [18](practice-labs/18-department-specifications.md), summary].
 
 **Within a wave:** engines and shared components first, then content, then standalone tool pages. Each meaningful feature is its own delivery: commit, push and report.
 
@@ -203,5 +248,5 @@ Recommended answers are in **bold**. Until a decision is approved, the gated wor
 |---|---|---|
 | Platform v1 (paths, roadmap, lesson pages) | built | `9b6e7e9` |
 | SQL path | building: 18 of 24 lessons, 0 of 6 projects | `9b6e7e9` |
-| Blueprint | complete, awaiting owner decisions D1–D10 | this commit |
+| Blueprint | complete (first pass `f2b9d3c`; second pass: direct audit, reuse plan, department specifications), awaiting owner decisions D1–D10 | this commit |
 | W0–W9 | not started | |

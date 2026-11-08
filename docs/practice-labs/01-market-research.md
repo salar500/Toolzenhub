@@ -47,6 +47,13 @@ Evidence ids refer to [the source register](15-source-register.md). Labels follo
    - SQLBolt shows the same idea at the lesson level: explanation, table, editor and tasks on one page, with the solution on request [S22, P].
    - These two patterns underpin the [UI/UX specification](08-ui-ux-specification.md).
 
+8. **Second pass: direct examination (2026-11-08)** ([17](17-competitor-experience-audit.md)) adds four verified facts:
+   - Free reference pages show an example fast but have no checked practice: W3Schools at 371 px, Programiz at 536 px [V, S55].
+   - Practice platforms put practice behind an account wall: DataCamp, Codecademy, Exercism, Kaggle, HackerRank [V, S55].
+   - Codecademy's free plan excludes assessments, projects, challenges and interview prep; Pro is ₹1,200 a month [V, S56].
+   - Ad-funded tutorial sites are heavy and tracker-laden on phones (W3Schools: 608 requests to 96 third-party domains; Programiz: 12 ad slots), while ToolZenHub's lesson uses 38 requests and no third parties [V, S55].
+   - **Decision:** lead with free checked practice, reached faster than today (ToolZenHub's first example is at 1,770 px), and with a lightweight, private page.
+
 ## 2. Market map
 
 | Segment | Leaders (public evidence) | Model | What they do well | Where the gap is |

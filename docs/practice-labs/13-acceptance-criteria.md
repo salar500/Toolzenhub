@@ -12,7 +12,7 @@ An item is **done** only when every criterion of its type holds. These are the "
 4. The page has one H1, a unique title of 65 characters or fewer before the brand where possible, a description of 155 characters or fewer, a breadcrumb including the department, and a production canonical.
 5. At 390 × 844 (phone emulation):
    - no horizontal overflow;
-   - the first example starts above 1.5 × the viewport height;
+   - the first example starts above 1.5 × the viewport height, and the first checked task starts above 3 × the viewport height (competitor benchmark: [17](17-competitor-experience-audit.md), section 8);
    - controls are at least 44 px;
    - the editor text is 16 px.
 6. At 1280 × 800, the roadmap marks the lesson and the pager links are correct.

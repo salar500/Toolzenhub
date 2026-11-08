@@ -69,7 +69,8 @@ Each block lists the required fields.
   | plan pattern (SQL EXPLAIN) | — |
 
 - **Feedback:** never reveals the expected answer in a failure message (as the built SQL evaluator does).
-- **Priority:** P1 (generalise from the existing lab code).
+- **Priority:** P1.
+- **Reuse:** this is the existing `learning/lab-shell.js` (used by all 7 labs: list, Check, verdicts, hints, solution-viewed) extended with pluggable checkers. It is not a new engine ([16](16-existing-assets-reuse.md), section 1.1).
 - **Maintenance:** L.
 
 ### E3 Quiz Engine

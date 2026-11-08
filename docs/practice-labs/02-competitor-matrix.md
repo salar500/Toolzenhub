@@ -2,6 +2,8 @@
 
 The ✓, ~ and ✗ marks describe the free experience. "nr" means not re-verified this session: these are general, well-known characteristics, used only as context ([source register](15-source-register.md), "Not researched"). Rows backed by a page read this session cite their source id. No branding, text or layout is to be copied. The columns compare *patterns*.
 
+**Second pass (2026-11-08):** 21 of these sites were examined directly in a real phone-sized browser (measurements, screenshots, free-vs-paid, user feedback): [17 competitor experience audit](17-competitor-experience-audit.md). Where 17 and this table differ, 17 is the more direct evidence. Codecademy's free tier was verified on its pricing page (no assessments, projects, challenges or interview prep on Basic; S56).
+
 ## 1. Learning platforms
 
 | Platform | Primary audience | Beginner entry | Lesson pattern | Editor in lesson | Checked exercises | Hints / solution | Projects | Interview prep | Mobile | Account needed for core use | Model | Evidence |
