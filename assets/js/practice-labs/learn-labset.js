@@ -4,7 +4,7 @@
 
    Mounts the shared lab shell (learning/lab-shell.js) on a subset of an existing lab's exercises, chosen by id, with that
    lab's own evaluator and inputs, so a lesson's practice is exactly the lab's practice (no copied engine, no copied
-   exercises). Today: the Test Design Lab. Nothing is stored or sent.
+   exercises). Labs: the Test Design Lab, the Excel Practice Lab and the Power BI Practice Lab. Nothing is stored or sent.
 ========================================================= */
 
 import { mountLab } from "../learning/lab-shell.js";
@@ -36,6 +36,22 @@ const LABS = {
                 evaluate
             }
         };
+    },
+    excel: async () => {
+        const [{ set }, { evaluate, MAX_RESPONSE_CHARS }, { exerciseInput }] = await Promise.all([
+            import("../tools/excel-practice-lab/exercises.js"),
+            import("../tools/excel-practice-lab/evaluator.js"),
+            import("../tools/excel-practice-lab/index.js")
+        ]);
+        return { exercises: set.exercises, config: { id: "excel-practice-lab", limit: MAX_RESPONSE_CHARS, inputLabel: "Your formula", input: exerciseInput, toolNote: "The full Excel Practice Lab has every exercise and a free sheet.", evaluate } };
+    },
+    "power-bi": async () => {
+        const [{ set }, { evaluate, MAX_RESPONSE_CHARS }, { exerciseInput, KIND_LABEL }] = await Promise.all([
+            import("../tools/power-bi-practice-lab/exercises.js"),
+            import("../tools/power-bi-practice-lab/evaluator.js"),
+            import("../tools/power-bi-practice-lab/index.js")
+        ]);
+        return { exercises: set.exercises, config: { id: "power-bi-practice-lab", limit: MAX_RESPONSE_CHARS, inputLabel: (ex) => KIND_LABEL[ex.kind], input: exerciseInput, toolNote: "The full Power BI Practice Lab has every exercise, the datasets and a report view.", evaluate } };
     }
 };
 

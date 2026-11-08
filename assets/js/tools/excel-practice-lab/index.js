@@ -120,7 +120,8 @@ export function render(mount = document.querySelector("#app")) {
 
 /* ---------- the exercise's own input: the sheet and a formula box ---------- */
 
-function exerciseInput(ex, value, onChange) {
+/* exported so Practice Labs lessons can mount these exercises with the same input (learn-labset.js) */
+export function exerciseInput(ex, value, onChange) {
 
     const answers = fillCells(ex.sheet).map((f) => f.addr);
     const shownAt = Object.fromEntries(answers.map((a) => [a, "?"]));

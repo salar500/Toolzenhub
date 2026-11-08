@@ -118,13 +118,13 @@ export const DEPARTMENTS = Object.freeze([
             "Each lab starts with short lessons whose examples you can edit, followed by exercises from simple sums to a small project. When an answer is not yet right, the check says so and, where it can tell, why: an Excel formula, for example, is also tried on a second set of numbers, which catches a typed-in result. A hint comes before the solution, so the lab is worth repeating until you can solve each task without help."
         ],
         technologies: [
-            { title: "Excel formulas", status: "lab", lab: "excel-practice-lab" },
-            { title: "Power BI: Power Query, modelling and DAX", status: "lab", lab: "power-bi-practice-lab" },
+            { title: "Excel formulas", status: "path", path: "excel" },
+            { title: "Power BI: Power Query, modelling and DAX", status: "path", path: "power-bi" },
             { title: "SQL for analytics", status: "path", path: "sql" },
             { title: "Statistics and data analysis", status: "path", path: "statistics" },
             { title: "Data engineering fundamentals", status: "planned" }
         ],
-        paths: ["statistics"],
+        paths: ["statistics", "excel", "power-bi"],
         labs: ["excel-practice-lab", "power-bi-practice-lab"],
         decks: ["Excel", "Power BI"],
         start: { label: "Start with lesson 1 of Statistics and Data Analysis.", path: "statistics" },

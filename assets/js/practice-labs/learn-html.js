@@ -19,6 +19,7 @@ import { getToolById } from "../data/tools.js";
 import { LEVELS, PRACTICE_LABS_PREFIX, flatLessons, getPath, lessonCount, lessonUrl, levelUrl, moduleUrl, pathUrl, publishedPaths } from "./curriculum.js";
 import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from "./departments.js";
 import { JOURNEYS } from "./journeys.js";
+import { excelLessons as xlpLessons, pbiLessons as pbipLessons, excelInterview as xlpInterview, pbiInterview as pbipInterview } from "./data/excel-pbi-lessons.js";
 import { lessons as spLessons, interview as spLessonsInterview } from "./manual-testing/specialised-lessons.js";
 import { lessons as ddLessons, interview as ddLessonsInterview } from "./sql/design-lessons.js";
 import { apiLessons as aaLessons, apiInterview as aaInterview, seLessons, seInterview } from "./automation/api-selenium-lessons.js";
@@ -267,6 +268,26 @@ const CONTENT = {
         labTool: "test-design-lab",
         flashcards: "smart-flashcards",
         morePractice: "drills the boundary values and partitions that API and database test cases are built from."
+    },
+    "excel": {
+        kind: "blocks",
+        lessons: new Map(xlpLessons.map((lesson) => [lesson.id, lesson])),
+        interview: xlpInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: "excel-practice-lab",
+        flashcards: "smart-flashcards",
+        morePractice: "has all 55 exercises in one list, the editable lesson examples and a free sheet for your own formulas."
+    },
+    "power-bi": {
+        kind: "blocks",
+        lessons: new Map(pbipLessons.map((lesson) => [lesson.id, lesson])),
+        interview: pbipInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: "power-bi-practice-lab",
+        flashcards: "smart-flashcards",
+        morePractice: "has all 43 exercises, the datasets and a report view of your model."
     },
     "test-design": {
         kind: "blocks",

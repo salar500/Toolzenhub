@@ -674,6 +674,64 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "excel",
+        title: "Excel Formulas",
+        department: "data-analytics",
+        status: "complete",
+        tagline: "Learn Excel formulas from references to lookups, cleaning and financial models, practising every one of the Excel Practice Lab's 55 exercises on a real formula engine in your browser.",
+        audience: "Analysts, office professionals, students and anyone who uses spreadsheets at work. No previous formula knowledge is needed.",
+        runsIn: "Exercises use the Excel Practice Lab's formula engine in your browser: each formula is calculated, then tried on a second set of numbers to catch typed-in results. Nothing is stored or sent.",
+        outcomes: ["Write formulas with correct references", "Use counting, rounding and logical functions", "Build conditional sums and counts", "Work with text and dates", "Combine tables with lookups", "Clean data and build budget and payroll models"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "formula-foundations", title: "Formula Foundations", summary: "Formulas and references, everyday functions and logical functions, on real sheets.", lessons: [
+                    { id: "xlp-references", slug: "formulas-and-references", title: "Formulas, operators and references" },
+                    { id: "xlp-functions", slug: "everyday-functions", title: "Everyday functions: sums, counts, averages and rounding" },
+                    { id: "xlp-logic", slug: "logical-functions", title: "Logic: IF, AND, OR, IFS and IFERROR" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "working-with-data", title: "Working with Data", summary: "Conditional sums and counts, text and dates, lookups and cleaning.", lessons: [
+                    { id: "xlp-conditional", slug: "conditional-sums-and-counts", title: "Conditional sums and counts" },
+                    { id: "xlp-text-dates", slug: "text-and-dates", title: "Text and date functions" },
+                    { id: "xlp-lookups", slug: "lookups", title: "Lookups: VLOOKUP, INDEX and MATCH, XLOOKUP" },
+                    { id: "xlp-cleaning", slug: "cleaning-with-formulas", title: "Cleaning data with formulas" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "models-and-projects", title: "Models and Projects", summary: "Loan and savings functions, a budget model and a payroll sheet.", lessons: [
+                    { id: "xlp-projects", slug: "financial-functions-and-projects", title: "Financial functions and spreadsheet projects" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
+        id: "power-bi",
+        title: "Power BI: Power Query, Modelling and DAX",
+        department: "data-analytics",
+        status: "complete",
+        tagline: "Learn the Power BI workflow: clean and shape data in Power Query, build a star-schema model and write DAX measures, practising every one of the Power BI Practice Lab's 43 exercises on working engines in your browser.",
+        audience: "Analysts and report builders, Excel users moving to Power BI and anyone preparing for data-analyst roles. The Excel Formulas path helps.",
+        runsIn: "Exercises use the Power BI Practice Lab's engines in your browser: Power Query steps on built-in datasets, a relationship checker and a DAX evaluator compared across filter contexts. Features that only Power BI Desktop has are marked as such in the lab. Nothing is stored or sent.",
+        outcomes: ["Clean columns with Power Query steps", "Shape and combine tables", "Design a star-schema model", "Write DAX measures with iterators", "Change filter context with CALCULATE", "Use time intelligence and reconcile totals"],
+        levels: [
+            { id: "beginner", modules: [
+                { id: "power-query-basics", title: "Power Query Basics", summary: "Cleaning columns with recorded applied steps.", lessons: [
+                    { id: "pbip-cleaning", slug: "power-query-cleaning", title: "Power Query: cleaning columns" }] }
+            ] },
+            { id: "intermediate", modules: [
+                { id: "shaping-and-modelling", title: "Shaping and Modelling", summary: "Shaping and combining tables, and modelling a star schema.", lessons: [
+                    { id: "pbip-shaping", slug: "power-query-shaping", title: "Power Query: shaping tables" },
+                    { id: "pbip-combining", slug: "power-query-combining", title: "Power Query: combining queries and projects" },
+                    { id: "pbip-modelling", slug: "star-schema-modelling", title: "Data modelling: star schemas and relationships" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "dax-measures", title: "DAX Measures", summary: "DAX basics, then CALCULATE, filter context and time intelligence.", lessons: [
+                    { id: "pbip-dax-basics", slug: "dax-basics", title: "DAX measures: the basics" },
+                    { id: "pbip-dax-context", slug: "calculate-and-time-intelligence", title: "DAX: CALCULATE, filter context and time intelligence" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",

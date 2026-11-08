@@ -79,7 +79,7 @@ test("generated pages: one per node, unique addresses, one h1, title and descrip
   const pages = learnPages();
   const { projects: sqlProjects } = await import("../../assets/js/practice-labs/sql/additions-lessons.js");
   const perPath = PATHS.reduce((n, path) => n + 1 + path.levels.length + path.levels.reduce((m, l) => m + l.modules.length, 0) + flatLessons(path).length, 0);
-  const extras = 1 + sqlProjects.length + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 2 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 2 + 1 + 1; /* SQL: projects index, each project, interview; Manual Testing: interview */
+  const extras = 1 + sqlProjects.length + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 2 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 2 + 1 + 1 + 2; /* SQL: projects index, each project, interview; Manual Testing: interview */
   assert.equal(pages.length, 1 + DEPARTMENTS.filter(isPublished).length + perPath + extras);
   assert.equal(new Set(pages.map((p) => p.url)).size, pages.length);
   for (const page of pages) {
@@ -141,6 +141,16 @@ test("Test Design path: every lab exercise is used exactly once, by an id that e
   assert.equal(new Set(used).size, used.length);
   assert.deepEqual([...used].sort(), set.exercises.map((e) => e.id).sort());
   for (const l of lessons) assert.ok(l.objectives.length >= 2 && l.check.length >= 2, l.id);
+});
+
+test("Excel and Power BI paths: every lab exercise is used exactly once, by an id that exists", async () => {
+  const { excelLessons, pbiLessons } = await import("../../assets/js/practice-labs/data/excel-pbi-lessons.js");
+  for (const [lessons, file] of [[excelLessons, "excel-practice-lab"], [pbiLessons, "power-bi-practice-lab"]]) {
+    const { set } = await import(`../../assets/js/tools/${file}/exercises.js`);
+    const used = lessons.flatMap((l) => l.blocks.filter((b) => b.type === "labset").flatMap((b) => b.ids));
+    assert.equal(new Set(used).size, used.length, file);
+    assert.deepEqual([...used].sort(), set.exercises.map((e) => e.id).sort(), file);
+  }
 });
 
 test("role journeys: unique ids, every step is a published path or a lab of a published department, no repeats", async () => {

@@ -48,6 +48,7 @@ const BUILD_ONLY = [
   "js/practice-labs/devops/lessons.js",
   "js/practice-labs/devops/security-lessons.js",
   "js/practice-labs/journeys.js",
+  "js/practice-labs/data/excel-pbi-lessons.js",
   "js/practice-labs/manual-testing/specialised-lessons.js",
   "js/practice-labs/sql/design-lessons.js",
   "js/practice-labs/automation/api-selenium-lessons.js",

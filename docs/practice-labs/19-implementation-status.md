@@ -272,7 +272,7 @@ Milestones from M12 on are recorded here as sections rather than table rows.
   - Because the shared runner changed, I checked that an existing SQL path example still runs.
   - 29,615 links on 403 pages resolve.
 
-#### M12h: Specialised Testing path (commit: (this milestone's commit))
+#### M12h: Specialised Testing path (commit: `2873051`)
 
 - **Specialised Testing** has 8 lessons:
   - integration testing (stubs and drivers);
@@ -291,6 +291,30 @@ Milestones from M12 on are recorded here as sections rather than table rows.
   - `db-design.test.mjs` now also runs this path's playgrounds. This caught one wrong status value in a lesson query ('placed' instead of 'pending'), which I fixed, and the test now asserts that no order has an unlisted status;
   - curriculum test;
   - at 1280 and 390 px: the RCA lab renders with 4 fields, a weak answer gets not yet, the database playground runs, and there is no overflow.
+
+#### M12i: Excel Formulas and Power BI paths built on the labs' own engines (commit: (this milestone's commit))
+
+- **Excel Formulas** has 8 lessons:
+  - references; everyday functions; logic;
+  - conditional sums and counts; text and dates; lookups; cleaning;
+  - financial functions with budget and payroll projects.
+  - Together they use all 55 Excel Practice Lab exercises, each exactly once.
+- **Power BI: Power Query, Modelling and DAX** has 6 lessons:
+  - Power Query cleaning; shaping; combining with projects;
+  - star-schema modelling;
+  - DAX basics; CALCULATE and time intelligence.
+  - Together they use all 43 Power BI Practice Lab exercises, each exactly once.
+- Both paths have interview practice (10 questions each).
+- **How the labs are reused:** the `labset` block now mounts the Excel and Power BI labs with their own evaluators and inputs, with no copied engine or exercises. Their `exerciseInput` (and the Power BI `KIND_LABEL`) are now exported for this; nothing else changed in the labs.
+- The Data and Analytics department now lists these as paths.
+- **Checks performed:**
+  - A new unit test confirms every lab exercise is used exactly once by an existing id; the curriculum test passes.
+  - At 1280 and 390 px:
+    - the Excel lab mounts in a lesson, refuses `=B2+B3` and accepts `=B2*B3`;
+    - the Power BI lab mounts with its input;
+    - there is no overflow.
+  - Both standalone lab pages still mount their exercises.
+  - 32,652 links on 447 pages resolve.
 
 ### Final inventory, 2026-11-08 (preview branch)
 
@@ -364,7 +388,7 @@ Milestones from M12 on are recorded here as sections rather than table rows.
    - Check in the browser: the new visualizers and the schema block, at 1280 and 390 px.
 2. *(Done in M12e.)* **Backend Fundamentals path**, reusing apitask and quizzes.
 3. *(Done in M12f.)* **API Automation and Selenium paths**: new codecheck exercises, plus predict blocks for the Selenium Java code.
-4. *(Database design done in M12g.)* **Database design**, then *(done in M12h)* **specialised testing** (API, database and accessibility testing), then **Excel and Power BI paths**.
+4. *(Database design done in M12g.)* **Database design**, then *(done in M12h)* **specialised testing** (API, database and accessibility testing), then *(done in M12i)* **Excel and Power BI paths**.
 5. **Final pass.**
    - Repair the multi-line rows of the milestone table (M7a onwards): they break the Markdown table.
    - Run the completion review.
