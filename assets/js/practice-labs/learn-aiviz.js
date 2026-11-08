@@ -5,6 +5,17 @@
 ========================================================= */
 
 import { tokenize, contextBudget, sampling, NEXT_TOKEN, retrieve, QUERIES, confusion } from "./ai/models.js";
+import { HOUSES, linearFit, mse, overfitTable, polyFit, WAVE, CUSTOMERS, kmeans, LOANS, splitGini } from "./ai/ml-models.js";
+
+const SVG = "http://www.w3.org/2000/svg";
+function svg(tag, attrs = {}) { const n = document.createElementNS(SVG, tag); for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, String(v)); return n; }
+/* a 320 × 200 plot with axes; returns { root, x(v), y(v) } mapping data to pixels */
+function plot(label, [x0, x1], [y0, y1]) {
+    const root = svg("svg", { viewBox: "0 0 320 200", class: "learn-aiviz__plot", role: "img", "aria-label": label });
+    const x = (v) => 30 + ((v - x0) / (x1 - x0)) * 280, y = (v) => 180 - ((v - y0) / (y1 - y0)) * 170;
+    root.append(svg("line", { x1: 30, y1: 180, x2: 310, y2: 180, class: "learn-aiviz__axis" }), svg("line", { x1: 30, y1: 10, x2: 30, y2: 180, class: "learn-aiviz__axis" }));
+    return { root, x, y };
+}
 
 function el(tag, attrs = {}, ...kids) {
     const n = document.createElement(tag);
@@ -81,6 +92,61 @@ const VIEWS = {
         };
         root.append(slider("Threshold", 0.05, 0.95, 0.05, 0.5, draw), out);
         draw(0.5);
+    },
+    regression(root) {
+        const best = linearFit(HOUSES.x, HOUSES.y);
+        const state = { slope: 0.4, intercept: 10 };
+        const out = el("div", { "aria-live": "polite" });
+        const draw = () => {
+            const p = plot("House size against price, with your line", [40, 145], [20, 100]);
+            HOUSES.x.forEach((xv, i) => p.root.append(svg("circle", { cx: p.x(xv), cy: p.y(HOUSES.y[i]), r: 4, class: "learn-aiviz__dot" })));
+            const line = (s, c, cls) => p.root.append(svg("line", { x1: p.x(40), y1: p.y(c + s * 40), x2: p.x(145), y2: p.y(c + s * 145), class: cls }));
+            line(state.slope, state.intercept, "learn-aiviz__line");
+            const yours = mse(HOUSES.x, HOUSES.y, (v) => state.intercept + state.slope * v);
+            const fit = mse(HOUSES.x, HOUSES.y, (v) => best.intercept + best.slope * v);
+            out.replaceChildren(p.root, el("p", {}, `Your line: price = ${state.intercept.toFixed(1)} + ${state.slope.toFixed(2)} × size. Mean squared error ${yours.toFixed(2)}. The least-squares line (${best.intercept.toFixed(2)} + ${best.slope.toFixed(3)} × size) has error ${fit.toFixed(2)}, the lowest possible for a straight line.`));
+        };
+        root.append(slider("Slope (₹ lakh per m²)", 0, 1.2, 0.02, state.slope, (v) => { state.slope = v; draw(); }), slider("Intercept (₹ lakh)", -20, 40, 1, state.intercept, (v) => { state.intercept = v; draw(); }), out);
+        draw();
+    },
+    overfit(root) {
+        const table = overfitTable();
+        const out = el("div", { "aria-live": "polite" });
+        const draw = (d) => {
+            const row = table[d - 1], f = polyFit(WAVE.train.x, WAVE.train.y, d, [0, 6.2]);
+            const p = plot(`Polynomial of degree ${d} fitted to training points`, [0, 6.3], [-1.6, 1.6]);
+            const pts = Array.from({ length: 64 }, (_, i) => (6.2 * i) / 63).map((xv) => `${p.x(xv)},${p.y(Math.max(-1.6, Math.min(1.6, f(xv))))}`).join(" ");
+            p.root.append(svg("polyline", { points: pts, class: "learn-aiviz__line", fill: "none" }));
+            WAVE.train.x.forEach((xv, i) => p.root.append(svg("circle", { cx: p.x(xv), cy: p.y(WAVE.train.y[i]), r: 4, class: "learn-aiviz__dot" })));
+            WAVE.test.x.forEach((xv, i) => p.root.append(svg("rect", { x: p.x(xv) - 3, y: p.y(WAVE.test.y[i]) - 3, width: 6, height: 6, class: "learn-aiviz__dot learn-aiviz__dot--test" })));
+            out.replaceChildren(p.root, el("p", {}, `Degree ${d}: training error ${row.train.toFixed(4)}, test error ${row.test.toFixed(4)}. Circles are training points, squares are unseen test points.`));
+        };
+        root.append(slider("Polynomial degree", 1, 9, 1, 1, draw), out);
+        draw(1);
+    },
+    kmeans(root) {
+        const steps = kmeans(CUSTOMERS, [[2, 3], [3, 2], [3, 4]]);
+        const out = el("div", { "aria-live": "polite" });
+        const draw = (i) => {
+            const s = steps[i - 1];
+            const p = plot(`k-means, iteration ${i}`, [0, 13], [0, 14]);
+            CUSTOMERS.forEach(([a, b], j) => p.root.append(svg("circle", { cx: p.x(a), cy: p.y(b), r: 5, class: `learn-aiviz__dot learn-aiviz__dot--k${s.assign[j]}` })));
+            s.centroids.forEach(([a, b], k) => p.root.append(svg("path", { d: `M${p.x(a) - 7},${p.y(b)} h14 M${p.x(a)},${p.y(b) - 7} v14`, class: `learn-aiviz__centroid learn-aiviz__dot--k${k}` })));
+            out.replaceChildren(p.root, el("p", {}, `Iteration ${i} of ${steps.length}: each customer joins the nearest centre (crosses), then each centre moves to the mean of its customers. Total squared distance: ${s.inertia.toFixed(2)}.${i === steps.length ? " The centres no longer move: the algorithm has converged." : ""}`));
+        };
+        root.append(el("p", {}, "Twelve customers by visits per year (across) and average basket in ₹ hundreds (up). The three starting centres were deliberately placed close together."), slider("Iteration", 1, steps.length, 1, 1, draw), out);
+        draw(1);
+    },
+    tree(root) {
+        const out = el("div", { "aria-live": "polite" });
+        const draw = (t) => {
+            const s = splitGini(t);
+            out.replaceChildren(el("table", { class: "lx-table" }, el("thead", {}, el("tr", {}, el("th", { scope: "col" }, "Income (₹ lakh)"), ...LOANS.map(([x]) => el("th", { scope: "col" }, String(x))))),
+                el("tbody", {}, el("tr", {}, el("th", { scope: "row" }, "Repaid"), ...LOANS.map(([x, y]) => el("td", { class: x <= t ? "learn-aiviz__left" : "" }, y ? "yes" : "no"))))),
+                el("p", {}, `Split at income ≤ ${t}: ${s.left} applications go left (shaded), ${s.right} go right. Weighted Gini impurity ${s.impurity.toFixed(3)} (before splitting: 0.480). Lower is purer.`));
+        };
+        root.append(slider("Split threshold", 3, 11, 1, 4, draw), out);
+        draw(4);
     }
 };
 

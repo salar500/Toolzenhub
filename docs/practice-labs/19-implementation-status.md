@@ -147,7 +147,7 @@ Milestones from M12 on are recorded here as sections rather than table rows.
   - Phone (390 px): no overflow on the Java or Python lesson pages.
 - **Deployment note:** the production server must serve `.mjs` as JavaScript and `.wasm` as `application/wasm`. GitHub Pages does both; the Hostinger configuration was not checked or touched.
 
-#### M12b: Shell simulator, Linux path and Kubernetes path (commit: (this milestone's commit))
+#### M12b: Shell simulator, Linux path and Kubernetes path (commit: `66f78ed`)
 
 - **New `shellsim` block** (`devops/shell-sim.js` and `devops/shell-tasks.js`): a Bash-like shell over an in-memory model of a ShopLite server.
   - Commands: pwd, ls (-a, -l), cd, cat, head, tail, wc, grep (-i, -n, -c, -v), sort (-r, -n), uniq (-c), cut, echo, mkdir (-p), touch, cp (-r), mv, rm (-r, refusing to delete home or root), find -name, chmod (+x, -x or octal) and whoami.
@@ -159,6 +159,15 @@ Milestones from M12 on are recorded here as sections rather than table rows.
   - Unit tests: shell simulator (2), covering core behaviour (navigation, pipes, redirection, mv, rm, chmod, `&&`, unsupported commands) and every task's model against a fresh shell; curriculum test (one leaked word, "undefined", reworded).
   - At 1280 and 390 px: the prompt follows `cd`; a pipeline that keeps the header does not meet the goal; Up recalls the last command; the correct pipeline meets the goal; the terminal shows the output; no overflow; the Kubernetes path page lists its lessons.
   - 23,377 links on 311 pages resolve.
+
+#### M12c (checkpoint): AI engines for the Machine Learning and Prompt Engineering paths (commit: (this milestone's commit))
+
+- `ai/ml-models.js`: least squares, polynomial fit, k-means and Gini impurity, with fixed datasets. Pinned against `numpy.polyfit` in `tests/unit/ml-models.test.mjs`.
+- Four new `aiviz` kinds in `learn-aiviz.js`: regression, overfit, kmeans and tree (SVG plots).
+- `ai/structured.js` with a new `schema` block (`learn-schema.js`): the learner writes JSON that is validated against a schema and checked for the expected values. 4 exercises (ticket extraction, review classification, a tool call and a refusal), pinned in `tests/unit/structured.test.mjs`.
+- 3 prompt-writing labs added to `ai/writing.js` (pe-w-anatomy, pe-w-few-shot, pe-w-guardrails), pinned by the writing-check test.
+- **Not yet used by any lesson page**: the ML and Prompt Engineering lessons are the next step.
+- Checks performed: focused unit tests (23 pass) and the build. No browser check yet for the new visualizers or the schema block.
 
 ### Final inventory, 2026-11-08 (preview branch)
 
@@ -223,4 +232,16 @@ Milestones from M12 on are recorded here as sections rather than table rows.
 
 ## 5. Next checkpoint
 
-**In progress (final remaining-development prompt):** Python and Java are done. The order of what remains: Shell simulator with Linux path; Prompt Engineering; Machine Learning; Backend Fundamentals; API Automation and Selenium; database design; specialised testing; Excel and Power BI paths; Kubernetes; then a final review.
+**Resume here (checkpoint after M12c).** Steps, in order:
+
+1. **Write and wire the lessons.**
+   - `ai/ml-lessons.js`, the Machine Learning path. About 9 lessons, using the aiviz kinds regression, overfit, kmeans and tree, plus confusion.
+   - `ai/prompt-lessons.js`, the Prompt Engineering path. Use the write labs pe-w-anatomy, pe-w-few-shot and pe-w-guardrails, the schema exercises pe-s-*, and quizzes on recorded outputs.
+   - Wire both with the add_path helper pattern: curriculum, learn-html CONTENT (`writing: new Map(AI_WRITING...)` for the prompt path), the BUILD_ONLY list in eleventy.shared.js, the curriculum test's extras count and its block-type list (add "schema"), and the ai-engineering department.
+   - Check in the browser: the new visualizers and the schema block, at 1280 and 390 px.
+2. **Backend Fundamentals path**, reusing apitask and quizzes.
+3. **API Automation and Selenium paths**: new codecheck exercises, plus predict blocks for the Selenium Java code.
+4. **Database design**, then **specialised testing** (API, database and accessibility testing), then **Excel and Power BI paths**.
+5. **Final pass.**
+   - Repair the multi-line rows of the milestone table (M7a onwards): they break the Markdown table.
+   - Run the completion review.

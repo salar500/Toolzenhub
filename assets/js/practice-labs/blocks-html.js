@@ -13,7 +13,7 @@
      quiz      { heading?, questions[] }                questions as in quizBlock (learn-html.js)
      order     { heading?, prompt, items[], explain }   items in the right order; shown shuffled, checked in the browser
      write     { heading?, exercise }                   a structured writing lab (writing.js), checked in the browser
-     aiviz     { heading?, kind, text }                 an AI teaching visualizer (learn-aiviz.js): tokens|context|sampling|retrieval|confusion
+     aiviz     { heading?, kind, text }                 an AI teaching visualizer (learn-aiviz.js): tokens|context|sampling|retrieval|confusion|regression|overfit|kmeans|tree
      numeric   { heading?, dataset, exercises[] }       a data table and calculations checked in the browser (data/stats.js)
      jsrun     { heading?, exercise }                   JavaScript run against tests in a Web Worker (learn-jsrun.js)
      apitask   { heading?, task }                       an HTTP request answered by the in-page mock API (learn-api.js)
@@ -22,6 +22,7 @@
      pyrun     { heading?, exercise }                   Python run in Pyodide, loaded only on request (learn-pyrun.js)
      predict   { heading?, exercise }                   predict the exact output of code (learn-predict.js)
      shellsim  { heading?, task }                       shell commands on an in-memory file system (learn-shellsim.js)
+     schema    { heading?, exercise }                   write structured JSON output, validated against a schema (learn-schema.js)
      shoplite  { text, release? }                       a task on the practice shop, opened in a new tab
 ========================================================= */
 
@@ -36,6 +37,7 @@ import { GIT_TASKS } from "./devops/git-tasks.js";
 import { PY_EXERCISES } from "./programming/py-exercises.js";
 import { PREDICT } from "./programming/predict.js";
 import { SHELL_TASKS } from "./devops/shell-tasks.js";
+import { STRUCTURED } from "./ai/structured.js";
 import { DATASETS, NUMERIC, formatAnswer } from "./data/stats.js";
 
 const SHOPLITE = () => `${SITE_ROOT}practice-labs/shoplite/`;
@@ -485,6 +487,36 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                             <summary>Show commands that work and why</summary>
                             <pre class="lx-code" tabindex="0"><code>${esc(task.model.join("\n"))}</code></pre>
                             <p>${esc(task.explain)}</p>
+                        </details>
+                    </div>
+                </section>`;
+        }
+
+        case "schema": {
+            const exercise = STRUCTURED.find((c) => c.id === block.exercise);
+            if (!exercise) throw new Error(`unknown structured-output exercise ${block.exercise}`);
+            return `
+                <section class="learn-section"${labelled}>
+                    ${heading}
+                    <div class="learn-write" data-schema="${esc(exercise.id)}">
+                        <p>${esc(exercise.task)}</p>
+                        <p><strong>Input:</strong></p>
+                        <pre class="lx-code" tabindex="0"><code>${esc(exercise.input)}</code></pre>
+                        <details class="learn-reveal" open>
+                            <summary>The output schema</summary>
+                            <pre class="lx-code" tabindex="0"><code>${esc(JSON.stringify(exercise.schema, null, 2))}</code></pre>
+                        </details>
+                        <div data-schema-tools hidden>
+                            <label class="lx-label" for="${esc(exercise.id)}-json">Your JSON output</label>
+                            <textarea id="${esc(exercise.id)}-json" class="lx-textarea learn-editor" rows="8" spellcheck="false" autocapitalize="off" autocomplete="off" maxlength="4000"></textarea>
+                            <div class="learn-actions"><button type="button" class="calculator-form__button lx-btn" data-schema-check>Validate</button></div>
+                            <div class="learn-feedback" data-schema-out role="status" aria-live="polite"></div>
+                        </div>
+                        <p class="lx-note">You play the AI model here: your JSON is checked in the page against the schema and the expected values. No AI model runs and nothing is sent.</p>
+                        <details class="learn-reveal">
+                            <summary>Show a correct output and why</summary>
+                            <pre class="lx-code" tabindex="0"><code>${esc(exercise.model)}</code></pre>
+                            <p>${esc(exercise.explain)}</p>
                         </details>
                     </div>
                 </section>`;

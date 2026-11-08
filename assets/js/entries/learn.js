@@ -28,6 +28,10 @@ document.addEventListener(
             import("../practice-labs/learn-predict.js").then((module) => module.initPredict());
         }
 
+        if (document.querySelector("[data-schema]")) {
+            import("../practice-labs/learn-schema.js").then((module) => module.initSchema());
+        }
+
         if (document.querySelector("[data-shellsim]")) {
             import("../practice-labs/learn-shellsim.js").then((module) => module.initShellSim());
         }

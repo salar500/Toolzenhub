@@ -1313,3 +1313,14 @@ a.learn-card:hover {
 .learn-journey { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; }
 .learn-journey summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
 .learn-journey ol { margin: 8px 0 4px; }
+
+.learn-aiviz__plot { display: block; width: 100%; max-width: 520px; height: auto; margin: 8px 0; background: var(--surface, transparent); }
+.learn-aiviz__axis { stroke: var(--line); stroke-width: 1; }
+.learn-aiviz__dot { fill: var(--accent); }
+.learn-aiviz__dot--test { fill: var(--state-warning, #b45309); }
+.learn-aiviz__line { stroke: var(--state-success, #15803d); stroke-width: 2.5; }
+.learn-aiviz__centroid { stroke-width: 3; fill: none; }
+.learn-aiviz__dot--k0 { fill: var(--accent); stroke: var(--accent); }
+.learn-aiviz__dot--k1 { fill: var(--state-success, #15803d); stroke: var(--state-success, #15803d); }
+.learn-aiviz__dot--k2 { fill: var(--state-warning, #b45309); stroke: var(--state-warning, #b45309); }
+.learn-aiviz__left { background: var(--accent-soft); }
