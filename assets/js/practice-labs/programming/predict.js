@@ -6,6 +6,7 @@
 ========================================================= */
 
 import { TS_PREDICT } from "./ts-predict.js";
+import { PANDAS_PREDICT } from "../data/pandas-predict.js";
 
 const indent = (text, n) => text.split("\n").map((l) => (l ? " ".repeat(n) + l : l)).join("\n");
 const java = (body, after = "", imports = "") => `${imports ? `${imports}\n\n` : ""}public class Main {\n    public static void main(String[] args) {\n${indent(body, 8)}\n    }${after ? `\n\n${indent(after, 4)}` : ""}\n}`;
@@ -67,8 +68,8 @@ const BASE = [
         explain: "The function's total is local, so the global total stays 10." }
 ];
 
-/* every prediction exercise: Java and Python here, TypeScript in ts-predict.js */
-export const PREDICT = Object.freeze([...BASE, ...TS_PREDICT]);
+/* every prediction exercise: Java and Python here, TypeScript in ts-predict.js, pandas in data/pandas-predict.js */
+export const PREDICT = Object.freeze([...BASE, ...TS_PREDICT, ...PANDAS_PREDICT]);
 
 
 /** compare a learner's typed output with the expected output, ignoring trailing spaces and a final newline */

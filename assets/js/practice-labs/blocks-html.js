@@ -457,7 +457,7 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                             <div class="learn-actions"><button type="button" class="calculator-form__button lx-btn" data-pred-check>Check</button></div>
                             <p class="learn-feedback" data-pred-out role="status" aria-live="polite"></p>
                         </div>
-                        <p class="lx-note">${{ java: "Not executed in your browser: the expected output was recorded by compiling and running this code with Java 17.", python: "Not executed here: the expected output was recorded with CPython; Python exercises elsewhere on the Python path run real Python.", typescript: "Not compiled in your browser: the expected answer was produced by the real TypeScript compiler (tsc --strict) and, for output tasks, by running the result with Node.js." }[exercise.lang]}</p>
+                        <p class="lx-note">${exercise.note ? esc(exercise.note) : { java: "Not executed in your browser: the expected output was recorded by compiling and running this code with Java 17.", python: "Not executed here: the expected output was recorded with CPython; Python exercises elsewhere on the Python path run real Python.", typescript: "Not compiled in your browser: the expected answer was produced by the real TypeScript compiler (tsc --strict) and, for output tasks, by running the result with Node.js." }[exercise.lang]}</p>
                         <details class="learn-reveal">
                             <summary>Show the answer and why</summary>
                             <pre class="lx-code" tabindex="0"><code>${esc(exercise.output)}</code></pre>

@@ -885,6 +885,30 @@ export const PATHS = Object.freeze([
         coming: []
     },
     {
+        id: "pandas",
+        title: "Data Analysis with pandas",
+        department: "data-analytics",
+        status: "complete",
+        tagline: "Analyse tables with Python's pandas: DataFrames, filtering, cleaning missing values, text and types, grouping, merging, pivot tables and dates, by reading real pandas code and predicting exactly what it prints.",
+        audience: "Analysts moving from spreadsheets to code, and Python learners heading for data work. The Python path's beginner level and the Statistics path come first.",
+        runsIn: "pandas does not run in this page (it would need a further large download). Each exercise's expected output was recorded by running the code with pandas 2.2 and CPython, and you predict it exactly; the Python path's exercises run real Python in your browser for the language itself.",
+        outcomes: ["Load and inspect DataFrames", "Select, filter and sort rows", "Clean missing values, text and types", "Group, merge and pivot", "Work with dates and time series"],
+        levels: [
+            { id: "intermediate", modules: [
+                { id: "pandas-basics", title: "pandas Basics", summary: "DataFrames and Series, selecting and filtering, and cleaning, practised by predicting real outputs.", lessons: [
+                    { id: "pd-intro", slug: "dataframes-and-series", title: "DataFrames, Series and first questions" },
+                    { id: "pd-select", slug: "selecting-and-filtering", title: "Selecting, filtering and sorting" },
+                    { id: "pd-cleaning", slug: "cleaning-data", title: "Cleaning: missing values, text and types" }] }
+            ] },
+            { id: "advanced", modules: [
+                { id: "pandas-analysis", title: "Analysis with pandas", summary: "Grouping, merging and pivoting, and dates with time series.", lessons: [
+                    { id: "pd-grouping", slug: "grouping-merging-pivoting", title: "Grouping, merging and pivoting" },
+                    { id: "pd-dates-reporting", slug: "dates-and-reporting", title: "Dates, time series and reporting" }] }
+            ] }
+        ],
+        coming: []
+    },
+    {
         id: "playwright",
         title: "Playwright with TypeScript",
         department: "automation-engineering",

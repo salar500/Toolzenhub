@@ -13,12 +13,12 @@ export const JOURNEYS = Object.freeze([
     {
         id: "automation-engineer", title: "Test automation engineer",
         summary: "Write reliable automated tests in code at the UI and API levels, and run them in a pipeline.",
-        steps: [{ path: "manual-testing", why: "what makes a good test case" }, { path: "javascript", why: "the language Playwright tests are written in" }, { path: "playwright", why: "locators, assertions, page objects and CI" }, { path: "api-automation", why: "fast, stable API-level tests" }, { path: "selenium", why: "the tool many Java teams still use" }, { path: "git-devops", why: "branches, pull requests and pipelines" }]
+        steps: [{ path: "manual-testing", why: "what makes a good test case" }, { path: "javascript", why: "the language Playwright tests are written in" }, { path: "typescript", why: "the types Playwright projects use" }, { path: "playwright", why: "locators, assertions, page objects and CI" }, { path: "api-automation", why: "fast, stable API-level tests" }, { path: "selenium", why: "the tool many Java teams still use" }, { path: "git-devops", why: "branches, pull requests and pipelines" }]
     },
     {
         id: "data-analyst", title: "Data analyst",
         summary: "Turn raw records into decisions: statistics, spreadsheets, SQL and dashboards.",
-        steps: [{ path: "statistics", why: "averages, spread, grouping and A/B tests" }, { path: "excel", why: "formulas on a real engine, from references to lookups" }, { path: "sql", why: "querying and joining real tables" }, { path: "power-bi", why: "Power Query, data models and DAX" }]
+        steps: [{ path: "statistics", why: "averages, spread, grouping and A/B tests" }, { path: "excel", why: "formulas on a real engine, from references to lookups" }, { path: "sql", why: "querying and joining real tables" }, { path: "pandas", why: "analysis in Python code" }, { path: "power-bi", why: "Power Query, data models and DAX" }]
     },
     {
         id: "data-engineer", title: "Data engineer",
@@ -28,7 +28,7 @@ export const JOURNEYS = Object.freeze([
     {
         id: "web-developer", title: "Web developer",
         summary: "Build accessible pages, program them with JavaScript, connect them to APIs and ship them safely.",
-        steps: [{ path: "html-css-dom", why: "structure, style, layout and accessibility" }, { path: "javascript", why: "programming fundamentals to async code" }, { path: "http-apis", why: "how front ends talk to servers" }, { path: "backend", why: "what happens behind the API" }, { path: "git-devops", why: "version control and delivery" }, { path: "app-security", why: "avoiding the common vulnerabilities" }]
+        steps: [{ path: "html-css-dom", why: "structure, style, layout and accessibility" }, { path: "javascript", why: "programming fundamentals to async code" }, { path: "frontend-frameworks", why: "components, state and rendering" }, { path: "http-apis", why: "how front ends talk to servers" }, { path: "backend", why: "what happens behind the API" }, { path: "git-devops", why: "version control and delivery" }, { path: "app-security", why: "avoiding the common vulnerabilities" }]
     },
     {
         id: "backend-developer", title: "Backend developer",
@@ -38,7 +38,7 @@ export const JOURNEYS = Object.freeze([
     {
         id: "ai-engineer", title: "AI engineer or AI tester",
         summary: "Understand how AI systems work, build on them with code and evaluate them responsibly.",
-        steps: [{ path: "ai-foundations", why: "tokens, RAG, evaluation and agents" }, { path: "python", why: "the main language of AI work, run in your browser" }, { path: "machine-learning", why: "models, metrics and overfitting" }, { path: "prompt-engineering", why: "reliable prompts, structured outputs and tool calls" }, { path: "statistics", why: "metrics, sampling and significance" }, { path: "app-security", why: "injection and data-protection risks" }]
+        steps: [{ path: "ai-foundations", why: "tokens, RAG, evaluation and agents" }, { path: "python", why: "the main language of AI work, run in your browser" }, { path: "machine-learning", why: "models, metrics and overfitting" }, { path: "prompt-engineering", why: "reliable prompts, structured outputs and tool calls" }, { path: "llm-apps", why: "the code around the model: RAG, validation, reliability" }, { path: "statistics", why: "metrics, sampling and significance" }, { path: "app-security", why: "injection and data-protection risks" }]
     },
     {
         id: "devops-engineer", title: "DevOps engineer",

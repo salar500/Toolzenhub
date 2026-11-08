@@ -48,7 +48,8 @@ test("typescript answers match the real compiler (tsc --strict) and Node.js", { 
 });
 
 test("python outputs match CPython", { skip: !hasPython && "python not installed" }, () => {
-  for (const ex of PREDICT.filter((p) => p.lang === "python")) {
+  const pandas = spawnSync("python", ["-c", "import pandas"]).status === 0;
+  for (const ex of PREDICT.filter((p) => p.lang === "python" && (pandas || !p.code.includes("import pandas")))) {
     const r = spawnSync("python", ["-c", ex.code], { encoding: "utf8" });
     assert.equal(r.status, 0, `${ex.id}: ${r.stderr}`);
     assert.equal(r.stdout.replace(/\r\n/g, "\n").replace(/\n$/, ""), ex.output, ex.id);

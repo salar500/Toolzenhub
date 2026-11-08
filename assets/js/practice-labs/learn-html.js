@@ -19,6 +19,7 @@ import { getToolById } from "../data/tools.js";
 import { LEVELS, PRACTICE_LABS_PREFIX, flatLessons, getPath, lessonCount, lessonUrl, levelUrl, moduleUrl, pathUrl, publishedPaths } from "./curriculum.js";
 import { DEPARTMENTS, getDepartment, isPublished, publishedDepartments } from "./departments.js";
 import { JOURNEYS } from "./journeys.js";
+import { lessons as pdLessons, interview as pdLessonsInterview } from "./data/pandas-lessons.js";
 import { lessons as feLessons, interview as feLessonsInterview } from "./web/frontend-lessons.js";
 import { lessons as llmLessons, interview as llmLessonsInterview } from "./ai/llm-apps-lessons.js";
 import { lessons as tsLessons, interview as tsLessonsInterview } from "./programming/typescript-lessons.js";
@@ -352,6 +353,16 @@ const CONTENT = {
         writing: new Map(),
         labTool: null,
         flashcards: null,
+        morePractice: ""
+    },
+    "pandas": {
+        kind: "blocks",
+        lessons: new Map(pdLessons.map((lesson) => [lesson.id, lesson])),
+        interview: pdLessonsInterview,
+        exercises: new Map(),
+        writing: new Map(),
+        labTool: null,
+        flashcards: "smart-flashcards",
         morePractice: ""
     },
     "test-design": {

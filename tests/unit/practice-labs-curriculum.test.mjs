@@ -79,7 +79,7 @@ test("generated pages: one per node, unique addresses, one h1, title and descrip
   const pages = learnPages();
   const { projects: sqlProjects } = await import("../../assets/js/practice-labs/sql/additions-lessons.js");
   const perPath = PATHS.reduce((n, path) => n + 1 + path.levels.length + path.levels.reduce((m, l) => m + l.modules.length, 0) + flatLessons(path).length, 0);
-  const extras = 1 + sqlProjects.length + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 2 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 2 + 1 + 1 + 2 + 1 + 2 + 1 + 1 + 1; /* SQL: projects index, each project, interview; Manual Testing: interview */
+  const extras = 1 + sqlProjects.length + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 2 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 2 + 1 + 1 + 2 + 1 + 2 + 1 + 1 + 1 + 1; /* SQL: projects index, each project, interview; Manual Testing: interview */
   assert.equal(pages.length, 1 + DEPARTMENTS.filter(isPublished).length + perPath + extras);
   assert.equal(new Set(pages.map((p) => p.url)).size, pages.length);
   for (const page of pages) {
