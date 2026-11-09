@@ -27,9 +27,10 @@ const VARIANTS = [
 
 test.describe("rendered link crawl @portable", () => {
   test("every rendered internal link is correct, known, and reachable", async ({ page, go, api, siteRoot, deployMode, browserName }, testInfo) => {
-    test.setTimeout(240_000);
     const knownRoutes = new Set(livePages.map((p) => rel(p.url))); // "", "about.html", "calculators/emi/", …
     const crawl = [...livePages.map((p) => rel(p.url)), ...VARIANTS];
+    // every page is visited, so the budget follows the inventory (about 130 pages when 240 s was set; 662 with the Practice Labs)
+    test.setTimeout(Math.max(240_000, crawl.length * 1_500));
 
     const failures = [];
     const targets = new Map(); // site-relative path -> first page that links to it
