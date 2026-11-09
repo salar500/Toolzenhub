@@ -103,19 +103,23 @@ test.describe("Practice lab workspace list", () => {
 
 test.describe("The lab list and the section sidebar do not crowd the exercise", () => {
 
-  test("a long lab below 1500 px starts with the Practice Labs sidebar hidden, and Show brings it back without touching the lab", async ({ page, go }) => {
+  // D3 replaced 2026-11-07 (docs/ecosystem-workspace.md): the sidebar is open by default on every page, a long lab included; the visitor can hide it
+  test("a long lab below 1500 px opens with the Practice Labs sidebar shown; Hide gives the lab the width and Show brings it back, without touching the lab", async ({ page, go }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await openLab(page, go, "tools/sql-practice-lab/");
-    await expect(page.locator(".section-rail__show")).toBeVisible();
-    await expect(page.locator("nav.section-switcher")).toBeHidden();
-    const hiddenWidth = (await app(page).boundingBox()).width;
+    await expect(page.locator("nav.section-switcher")).toBeVisible();
+    await expect(page.locator(".section-rail__show")).toBeHidden();
+    const shownWidth = (await app(page).boundingBox()).width;
     await expect(app(page).locator(".lx-exlist li")).toHaveCount(49);
     await app(page).locator('li[data-index="9"] button').click();
     await expect(heading(page)).toHaveText(/^10\. /);
+    await page.locator("nav.section-switcher").getByRole("button", { name: "Hide tools" }).click();
+    await expect(page.locator("nav.section-switcher")).toBeHidden();
+    await expect(heading(page)).toHaveText(/^10\. /); // the exercise and the list are as they were
+    expect((await app(page).boundingBox()).width).toBeGreaterThan(shownWidth);
     await page.locator(".section-rail__show").click();
     await expect(page.locator("nav.section-switcher")).toBeVisible();
-    await expect(heading(page)).toHaveText(/^10\. /); // the exercise and the list are as they were
-    expect((await app(page).boundingBox()).width).toBeLessThan(hiddenWidth);
+    await expect(heading(page)).toHaveText(/^10\. /);
     await expectNoHorizontalOverflow(page);
   });
 

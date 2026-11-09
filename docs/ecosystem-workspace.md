@@ -79,7 +79,7 @@ Built on the existing build-time "More <section>" navigation (`components/sectio
 - It does not keep typed values, chosen files or lab answers when you go to another tool (decision D4, section 10). Since 2026-11-07 the move is made in place (section 13), but the tool that is left is ended and the next one starts empty, exactly as after a page load; the pages promise that nothing is stored. Hiding or showing the sidebar loses nothing (tested: chosen image, typed settings, result, merged PDF, running stopwatch and laps).
 - Large Image and PDF files were tested beside the sidebar on 2026-11-05 (section 10); real phones, Safari and Firefox were not.
 - No separate mobile drawer or bottom bar.
-- A long lab hides the sidebar on screens under 1500 px (D3) so its own exercise list and the exercise keep their width; section 6's earlier line that a long lab "shows two lists" describes screens of 1500 px and up.
+- A long lab opens with the sidebar shown at every width, like every other page (D3, replaced 2026-11-07); below 1500 px the visitor can hide it to give the lab's exercise list and the exercise more width.
 
 ## 7. Slider inventory (browser-tested)
 

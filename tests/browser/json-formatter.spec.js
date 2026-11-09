@@ -365,7 +365,7 @@ test.describe("Developer Tools in the site", () => {
     await expect(time.locator('a[href$="tools/json-formatter/"]')).toHaveCount(0);
     await go("time-tools.html");
     await expect(page.locator("main")).not.toContainText(/json/i);
-    await expect(page.locator("main a[href*='tools/']")).toHaveCount(13);
+    await expect(page.locator("main a[href*='tools/']:not(.section-switcher a)")).toHaveCount(13); // the page's cards; the workspace sidebar lists the same 13
   });
 
   test("Home to the tool by clicking: Home, All Tools, Developer Tools, JSON Formatter & Validator", async ({ page, go, siteRoot }) => {
