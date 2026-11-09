@@ -419,6 +419,21 @@
 
     }
 
+    /* the site header is sticky here too and hides on scroll down: the bar follows it */
+    .section-switcher.is-drawer {
+
+        top: var(--header-offset);
+
+        transition: top 0.2s ease;
+
+    }
+
+    html.header-hidden .section-switcher.is-drawer {
+
+        top: 0;
+
+    }
+
     /* from a 960 px layout the site header is sticky too (a phone in Desktop site mode lays the page out that wide): the bar sticks under it */
     @media (min-width: 960px) {
 

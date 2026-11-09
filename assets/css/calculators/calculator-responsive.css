@@ -34,6 +34,7 @@
     body {
         max-width: 100%;
         overflow-x: hidden;
+        overflow-x: clip; /* clip, not a scroll container: keeps the sticky header working */
     }
 
     .calculator-page {

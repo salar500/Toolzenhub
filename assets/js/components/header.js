@@ -575,6 +575,36 @@ export function renderHeader() {
 
 
     /* =====================================================
+       BELOW 960 PX: HIDE WHILE SCROLLING DOWN, SHOW ON SCROLL UP
+       (from 960 px the header is simply sticky; see header.css)
+    ===================================================== */
+
+    let lastY = window.scrollY;
+
+    const setHidden = (hidden) => document.documentElement.classList.toggle("header-hidden", hidden);
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            const y = window.scrollY;
+            const menuOpen = document.documentElement.classList.contains("menu-open") || menuButton.getAttribute("aria-expanded") === "true";
+
+            if (window.innerWidth >= 960 || menuOpen || y < 80) setHidden(false);
+            else if (y > lastY + 6) setHidden(true);
+            else if (y < lastY - 6) setHidden(false);
+
+            lastY = y;
+
+        },
+        { passive: true }
+    );
+
+    /* keyboard users who tab into the header always see it */
+    document.getElementById("header")?.addEventListener("focusin", () => setHidden(false));
+
+
+    /* =====================================================
        CLOSE MOBILE MENU WHEN RESIZING TO DESKTOP
     ===================================================== */
 
