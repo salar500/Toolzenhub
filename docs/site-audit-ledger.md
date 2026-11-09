@@ -67,3 +67,14 @@ There is no Hostinger access from this environment. Production is "manually cont
 
 - What can be done here: a verified `dist/` artifact.
 - What the owner must do: the upload, and a backup of the current site before it.
+
+## Owner findings, 2026-11-09
+
+| Finding | Change | Verification | Commit |
+|---|---|---|---|
+| Date Difference quick-date wording and placement | Quick dates under each input, named for their field; plain inclusive range labels; both counts in the result; whole periods under "More ranges" | presets spec rewritten (25 passed desktop, 25 mobile); date-difference spec 9 passed | `2e4345b` |
+| Header disappears while scrolling | `overflow-x: clip` instead of `hidden` on html/body (sticky works again on the home page); below 960 px the header hides on scroll down and returns on scroll up; the phone tool bar follows it; rule GL-01 updated | new header-scroll spec (desktop 5 passed, mobile 6 passed); tablet spot check on 9 pages | `5fd2d87` |
+| All Tools sidebar differs from the ecosystems | All Tools uses the shared section-switcher in the workspace layout; ordinary navigation (`data-workspace="off"`) | navigation spec 47 passed desktop; mobile 1 stale test fixed and re-run green | `a8b60cd` |
+| Calculator results need scrolling | From 1200 px the 29 standard calculators show the form and the result side by side (both sidebar states); explanations span below | layout measured on 8 calculators: results start at y 319–405 instead of 727–1803 at 1280×800 | (this commit) |
+
+**Interrupted:** the browser run of the 28 calculator-related specs, after the side-by-side change, was stopped by the environment for low memory after 6 of 690 tests. It is **not** a pass. It must be re-run, one worker, before release.

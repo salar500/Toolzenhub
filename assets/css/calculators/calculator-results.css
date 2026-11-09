@@ -480,3 +480,78 @@
         display: none;
     }
 }
+
+
+/* =========================================================
+   ONE-SCREEN DESKTOP WORKSPACE (owner finding, 2026-11-09)
+
+   On a wide screen the result sits beside the inputs instead of below them, so a calculator can be used without
+   scrolling between the form and its answer. The page is already a grid (sidebar | content, section-switcher.css);
+   here the content column splits into the form and the result. Everything else (intro, explanations, FAQs) spans
+   both below. Narrower screens keep the single column.
+========================================================= */
+
+@media (min-width: 1200px) and (pointer: fine), (min-width: 1200px) and (min-device-width: 1200px) {
+
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) {
+
+        grid-template-columns: minmax(220px, 260px) minmax(0, 1.2fr) minmax(320px, 1fr);
+
+    }
+
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > :where(:not(.section-switcher, .breadcrumb, .calculator-breadcrumb)) {
+
+        grid-column: 2 / -1;
+
+    }
+
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-section {
+
+        grid-column: 2;
+        grid-row: span 2;
+
+    }
+
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-results,
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > [class*="-stale"] {
+
+        grid-column: 3;
+        align-self: start;
+        margin-top: 0;
+
+    }
+
+    /* the result is already in view: the "jump to result" link has no job here */
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .jump-to-result {
+
+        display: none;
+
+    }
+
+    /* with the sidebar hidden, the form and the result take the whole width */
+    .calculator-page.is-rail-collapsed:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) {
+
+        grid-template-columns: minmax(0, 1.2fr) minmax(320px, 1fr);
+
+    }
+
+    .calculator-page.is-rail-collapsed:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > :where(:not(.section-switcher, .breadcrumb, .calculator-breadcrumb)) {
+
+        grid-column: 1 / -1;
+
+    }
+
+    .calculator-page.is-rail-collapsed:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-section {
+
+        grid-column: 1;
+
+    }
+
+    .calculator-page.is-rail-collapsed:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-results,
+    .calculator-page.is-rail-collapsed:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > [class*="-stale"] {
+
+        grid-column: 2;
+
+    }
+
+}
