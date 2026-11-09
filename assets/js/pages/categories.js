@@ -43,7 +43,8 @@ export function renderCategoriesBreadcrumb() {
             "categories-breadcrumb"
         );
 
-    if (!breadcrumb) {
+    // the page template renders it (src/categories.njk); replacing it would only repaint the same trail
+    if (!breadcrumb || breadcrumb.firstElementChild) {
         return;
     }
 

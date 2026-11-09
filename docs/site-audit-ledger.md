@@ -113,3 +113,24 @@ Stale tests corrected (each re-run green). No product defect was found:
 - Section pages (loans, investment, time-tools, developer-tools): link checks also matched the workspace sidebar's link. On a phone the first match was in the closed drawer; elsewhere the counts were 2. Scoped to `:not(.section-switcher a)` in 6 specs. The Countdown Timer test's ban on the word "timers" now excludes the sidebar's real "Timers and clocks" group heading.
 - simple-calculators: Ratio and Interest read the live-updating result once, without waiting. They failed once under load and passed 3 of 3 alone. Now polled.
 - swp: the scenarios were asserted as one row at 1280 px. With the result now beside the form they stack in one column. The test now asserts the side-by-side placement and the stacked order. Screenshot checked: readable, no overflow.
+
+## Regression and fixes, 2026-11-09 (continued)
+
+### Product defect: layout shift on the Calculators overview (`categories.html`)
+
+- Found by `build.spec` ("the footer is not a layout-shift source and total CLS stays good"). The failure was deterministic: CLS **0.315** against a 0.1 limit.
+- Cause: the breadcrumb was inserted by script into an empty element after first paint, which pushed the whole sidebar-and-content layout down 36 px.
+- Fix: the template renders the breadcrumb (`src/categories.njk`), and the script leaves it alone when it is already there.
+- Result: CLS **0.031**. The CLS tests pass 6 of 6 on desktop and 6 of 6 on mobile.
+- Remaining, below the limit: the category cards are still inserted by script above the page search. Moving them into the template is a possible follow-up.
+
+### Practice Labs workspaces (reviewed)
+
+- One lesson with an editor was measured per learning path (21 paths) at 1280×800. Each exercise block is 540–880 px tall, with the task, editor, Run, and the "runs in your browser" note together, so an exercise fits about one screen.
+- The lesson column's 780 px reading width (about 75 characters a line) is deliberate typography. It is kept, not redesigned (positive finding).
+
+### Full Playwright regression, `subpath-desktop` (resumable, one spec at a time, one worker)
+
+- Started. 10 of the 74 non-calculator specs are done: accessibility, analytics, articles, base64-encoder-decoder, base64url, build, contact, countdown-timer, cron-challenge-lab and cron-explainer.
+- Results: 251 passed and 1 failed. The failure is the CLS defect above, now fixed.
+- **Not yet run:** the other 64 specs on desktop; all non-calculator specs on mobile and root-desktop; the visual project; and the full unit suite. A unit run was stopped by the environment for low memory and is not counted.

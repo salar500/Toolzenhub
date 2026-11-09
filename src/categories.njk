@@ -44,10 +44,11 @@ clientRendered: true
                      BREADCRUMB
                 ================================================== -->
 
+                <!-- rendered here, not by script: a breadcrumb added after first paint pushed the page down (CLS 0.31) -->
                 <div
                     id="categories-breadcrumb"
                     class="categories-breadcrumb"
-                ></div>
+                ><div class="calculator-breadcrumb"><a href="{{ '/' | url }}">Home</a> <span>›</span> <a href="{{ '/tools.html' | url }}">All Tools</a> <span>›</span> <strong>Calculators</strong></div></div>
 
 
                 <div class="ecosystem-layout" data-section-page>
