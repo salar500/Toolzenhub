@@ -86,7 +86,7 @@ const VIEWS = {
         const out = el("div", { "aria-live": "polite" });
         const draw = (t) => {
             const m = confusion(t);
-            out.replaceChildren(el("table", { class: "lx-table" }, el("thead", {}, el("tr", {}, el("th", {}), el("th", { scope: "col" }, "Predicted spam"), el("th", { scope: "col" }, "Predicted not spam"))),
+            out.replaceChildren(el("table", { class: "lx-table" }, el("thead", {}, el("tr", {}, el("th", { scope: "col" }, el("span", { class: "lx-sr-only" }, "Actual class")), el("th", { scope: "col" }, "Predicted spam"), el("th", { scope: "col" }, "Predicted not spam"))),
                 el("tbody", {}, el("tr", {}, el("th", { scope: "row" }, "Actually spam"), el("td", {}, `TP ${m.tp}`), el("td", {}, `FN ${m.fn}`)), el("tr", {}, el("th", { scope: "row" }, "Actually not spam"), el("td", {}, `FP ${m.fp}`), el("td", {}, `TN ${m.tn}`)))),
                 el("p", {}, `Precision ${pct(m.precision)} · Recall ${pct(m.recall)} · Accuracy ${pct(m.accuracy)} · F1 ${m.f1.toFixed(3)}`));
         };

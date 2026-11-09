@@ -394,7 +394,7 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                         <div data-git-tools hidden>
                             <p class="learn-feedback" data-git-goal role="status" aria-live="polite"></p>
                             <div data-git-state></div>
-                            <pre class="lx-code learn-gitsim__term" data-git-term tabindex="0" aria-label="Terminal output"></pre>
+                            <pre class="lx-code learn-gitsim__term" data-git-term tabindex="0" role="log" aria-label="Terminal output"></pre>
                             <label class="lx-label" for="${id}-cmd">Command</label>
                             <div class="learn-actions">
                                 <input id="${id}-cmd" class="lx-input learn-gitsim__input" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="git status">
@@ -478,7 +478,7 @@ export function renderBlocks(blocks, { quizBlock, writing, idPrefix }) {
                         <p>${esc(task.task)}</p>
                         <div data-sh-tools hidden>
                             <p class="learn-feedback" data-sh-goal role="status" aria-live="polite"></p>
-                            <pre class="lx-code learn-gitsim__term" data-sh-term tabindex="0" aria-label="Terminal output"></pre>
+                            <pre class="lx-code learn-gitsim__term" data-sh-term tabindex="0" role="log" aria-label="Terminal output"></pre>
                             <label class="lx-label" for="${id}-cmd"><span data-sh-prompt></span> command</label>
                             <div class="learn-actions">
                                 <input id="${id}-cmd" class="lx-input learn-gitsim__input" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="ls">

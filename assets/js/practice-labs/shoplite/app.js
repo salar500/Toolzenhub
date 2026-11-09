@@ -242,7 +242,7 @@ function render(screenChanged = false) {
     const message = state.message;
     state.message = null;
     root.replaceChildren(
-        h("p", { class: "sl-banner" }, `Practice app for software testing · ${RELEASES[release].title} · Do not enter real personal details: nothing is saved or sent.`),
+        h("p", { class: "sl-banner", role: "region", "aria-label": "About this practice app" }, `Practice app for software testing · ${RELEASES[release].title} · Do not enter real personal details: nothing is saved or sent.`),
         h("header", { class: "sl-header" },
             h("a", { class: "sl-logo", href: "#/" }, "ShopLite"),
             h("nav", { "aria-label": "ShopLite" },

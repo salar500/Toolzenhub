@@ -61,16 +61,19 @@
 
 }
 
+/* underlined, not colour alone: the trail's links sit in running text (WCAG 1.4.1, axe link-in-text-block) */
 .learn-eyebrow a {
 
     color: var(--accent);
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
 
 }
 
 .learn-eyebrow a:hover {
 
-    text-decoration: underline;
+    text-decoration-thickness: 2px;
 
 }
 
@@ -1331,3 +1334,14 @@ a.learn-card:hover {
 .learn-regex__pattern .lx-input { width: 100%; font-family: var(--font-mono, monospace); }
 .learn-regex__flags { width: 5em; font-family: var(--font-mono, monospace); }
 .learn-regex__tests code { overflow-wrap: anywhere; }
+
+
+/* "Keep going" and "Related departments" links sit in sentences: underlined, not colour alone (WCAG 1.4.1, axe link-in-text-block) */
+.learn-related a,
+section[aria-labelledby="learn-related-depts"] a {
+
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+
+}
