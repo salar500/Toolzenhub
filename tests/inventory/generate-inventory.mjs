@@ -176,8 +176,9 @@ export async function buildInventory() {
       ...(d.topic ? { topic: d.topic } : {}),
       expectedTitle: title,
       primarySelector: d.primarySelector,
-      expectsHeader: file !== "404.html",
-      expectsFooter: file !== "404.html",
+      // ShopLite (practice-target) is a standalone practice shop with its own header, outside the site chrome
+      expectsHeader: file !== "404.html" && d.type !== "practice-target",
+      expectsFooter: file !== "404.html" && d.type !== "practice-target",
       interactive: d.interactive,
       renderedBy: d.rendered,
       inSitemap,
