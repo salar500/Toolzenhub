@@ -87,7 +87,10 @@ test.describe("rendered link crawl @portable", () => {
 
         // fragment-only links point inside the current page
         if (url.pathname === here.pathname && url.hash) {
-          if ((await page.locator(url.hash).count()) === 0) pageSummary.deadFragments.push(raw);
+          // "#/signin": a screen of ShopLite's in-page router (the practice shop), not an element id; its screens are tested in the ShopLite and lab specs
+          if (url.hash.startsWith("#/")) continue;
+          const id = decodeURIComponent(url.hash.slice(1));
+          if ((await page.locator(`[id="${id.replace(/["\\]/g, "\\$&")}"]`).count()) === 0) pageSummary.deadFragments.push(raw);
           continue;
         }
         // known route?
