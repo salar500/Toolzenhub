@@ -117,7 +117,7 @@
 
 }
 
-/* Quick-fill groups: quick dates, previous periods, future periods, from today */
+/* Range groups: common ranges, then previous and next whole periods under More ranges */
 
 .date-presets__group {
 
@@ -146,23 +146,45 @@
 
 }
 
-.date-presets__target {
+/* quick dates directly under each date input: each button names the field it fills */
+
+.date-quick {
 
     display: flex;
-    flex: 0 0 100%;
     flex-wrap: wrap;
-    gap: 6px 18px;
+    gap: 6px;
 
-    font-size: 14px;
+    margin-top: 8px;
 
 }
 
-.date-presets__target label {
+.date-quick .tt-inline-button {
+
+    min-height: 36px;
+
+}
+
+/* whole weeks, months and years, kept out of the way until asked for */
+
+.date-presets__more {
+
+    flex: 0 0 100%;
+
+    margin-top: 6px;
+
+}
+
+.date-presets__more > summary {
 
     display: inline-flex;
     align-items: center;
-    gap: 6px;
 
-    min-height: 32px;
+    min-height: 44px;
+
+    color: var(--accent);
+
+    font-weight: 600;
+
+    cursor: pointer;
 
 }

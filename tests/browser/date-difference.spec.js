@@ -32,10 +32,10 @@ test.describe("Date Difference Calculator", () => {
     await expect(page.locator(".related-section")).toHaveCount(0);
 
     await setDates(page, "2026-01-01", "2026-02-10");
-    await expect(metric(page, "Total days")).toHaveText("40 days");
+    await expect(metric(page, "Days between the dates")).toHaveText("40 days");
     await expect(metric(page, "Years, months and days")).toHaveText("1 month, 9 days");
     await expect(metric(page, "Weeks and days")).toHaveText("5 weeks, 5 days");
-    await expect(page.locator("#date-results .calculator-results__item--primary .calculator-results__label")).toHaveText("Total days");
+    await expect(page.locator("#date-results .calculator-results__item--primary .calculator-results__label")).toHaveText("Days between the dates");
     await expect(page.locator("#date-results")).not.toContainText(/NaN|undefined|Invalid Date|Infinity/);
 
     await page.getByRole("button", { name: "Reset" }).click();
@@ -47,19 +47,19 @@ test.describe("Date Difference Calculator", () => {
   test("reversed, same date and month-end cases", async ({ page, go }) => {
     await go("tools/date-difference/");
     await setDates(page, "2026-02-10", "2026-01-01");
-    await expect(metric(page, "Total days")).toHaveText("40 days");
+    await expect(metric(page, "Days between the dates")).toHaveText("40 days");
     await expect(page.locator("#date-results")).toContainText("The end date comes before the start date");
     await setDates(page, "2026-02-10", "2026-02-10");
-    await expect(metric(page, "Total days")).toHaveText("0 days");
+    await expect(metric(page, "Days between the dates")).toHaveText("0 days");
     await expect(page.locator("#date-results")).toContainText("Both dates are the same.");
     await setDates(page, "2026-01-31", "2026-03-01");
-    await expect(metric(page, "Total days")).toHaveText("29 days");
+    await expect(metric(page, "Days between the dates")).toHaveText("29 days");
     await expect(metric(page, "Years, months and days")).toHaveText("1 month, 1 day");
     await setDates(page, "2024-02-29", "2025-02-28");
-    await expect(metric(page, "Total days")).toHaveText("365 days");
+    await expect(metric(page, "Days between the dates")).toHaveText("365 days");
     await expect(metric(page, "Years, months and days")).toHaveText("1 year");
     await setDates(page, "2000-01-01", "2026-10-05");
-    await expect(metric(page, "Total days")).toHaveText("9,774 days");
+    await expect(metric(page, "Days between the dates")).toHaveText("9,774 days");
     await expect(metric(page, "Years, months and days")).toHaveText("26 years, 9 months, 4 days");
   });
 
@@ -69,7 +69,7 @@ test.describe("Date Difference Calculator", () => {
     await expect(page.locator("#date-results")).toContainText("Choose a start date and an end date.");
     await expect(page.locator("#date-results .calculator-results__value")).toHaveCount(0);
     await page.locator("#date-end").fill("2026-01-02");
-    await expect(metric(page, "Total days")).toHaveText("1 day");
+    await expect(metric(page, "Days between the dates")).toHaveText("1 day");
   });
 
   test("explanation sections are on the page and make no accuracy claim", async ({ page, go }) => {
@@ -95,7 +95,8 @@ test.describe("Time Tools section, All Tools and search isolation", () => {
     await expect(page.locator("h1")).toHaveText("Time Tools");
     await expect(page).toHaveTitle("Time Tools | ToolZen Hub");
     expect((await crumbLabels(page)).slice(0, 3)).toEqual(["home", "all tools", "time tools"]);
-    await expect(page.locator('a[href$="tools/date-difference/"]')).toHaveCount(1);
+    // one card in the directory grid (the workspace sidebar also lists the tool)
+    await expect(page.locator('.categories-detail__grid a[href$="tools/date-difference/"]')).toHaveCount(1);
     await expect(page.locator("main")).not.toContainText(/coming soon/i);
     await expectNoHorizontalOverflow(page);
     expectClean(watch);
