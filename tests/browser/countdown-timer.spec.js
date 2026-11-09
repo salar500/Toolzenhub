@@ -269,10 +269,14 @@ test.describe("Countdown Timer on the real clock", () => {
 test.describe("Countdown Timer in Time Tools and search", () => {
   test("Time Tools and All Tools list it, directly under the section", async ({ page, go }) => {
     await go("time-tools.html");
-    await expect(page.locator('a[href$="tools/countdown-timer/"]')).toHaveCount(1);
-    await expect(page.locator('a[href$="tools/date-difference/"]')).toHaveCount(1);
-    await expect(page.locator('a[href$="tools/date-calculator/"]')).toHaveCount(1);
-    await expect(page.locator("main")).not.toContainText(/coming soon|timers|productivity/i);
+    // the page's own links; the workspace sidebar lists the tools too
+    await expect(page.locator('a[href$="tools/countdown-timer/"]:not(.section-switcher a)')).toHaveCount(1);
+    await expect(page.locator('a[href$="tools/date-difference/"]:not(.section-switcher a)')).toHaveCount(1);
+    await expect(page.locator('a[href$="tools/date-calculator/"]:not(.section-switcher a)')).toHaveCount(1);
+    await expect(page.locator("main")).not.toContainText(/coming soon|productivity/i);
+    // no placeholder "Timers" category in the page itself; the sidebar's "Timers and clocks" group heading is the real grouping
+    const ownText = await page.locator("main").evaluate((m) => { const c = m.cloneNode(true); c.querySelectorAll(".section-switcher").forEach((n) => n.remove()); return c.textContent; });
+    expect(ownText).not.toMatch(/timers/i);
     await go("tools.html");
     await expect(page.locator('.directory-section a[href$="tools/countdown-timer/"]')).toHaveCount(1);
   });

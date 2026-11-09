@@ -396,7 +396,7 @@ test.describe("Loan Prepayment Calculator", () => {
 
   test("search finds it by name and by alias", async ({ page, go, siteRoot }) => {
     await go("loans.html");
-    const card = page.locator("a[href$='calculators/prepayment/']");
+    const card = page.locator("a[href$='calculators/prepayment/']:not(.section-switcher a)"); // the card, not the workspace sidebar's link
     await expect(card.first()).toBeVisible();
   });
 

@@ -516,7 +516,7 @@ test.describe("SWP Calculator", () => {
 
   test("the Investment category lists it after the other live tools", async ({ page, go, siteRoot }) => {
     await go("investment.html");
-    const hrefs = await page.locator("a[href*='/calculators/']").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
+    const hrefs = await page.locator("a[href*='/calculators/']:not(.section-switcher a)").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
     const own = hrefs.filter((h, i) => hrefs.indexOf(h) === i && /calculators\/(sip|fd|cagr|swp)\/$/.test(h));
     expect(own).toEqual([`${siteRoot}calculators/sip/`, `${siteRoot}calculators/fd/`, `${siteRoot}calculators/cagr/`, `${siteRoot}calculators/swp/`]);
   });

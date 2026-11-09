@@ -336,7 +336,7 @@ test.describe("Loan Balance Transfer Calculator", () => {
 
   test("the Loans listing shows the live card, and the Prepayment page links to it", async ({ page, go, siteRoot }) => {
     await go("loans.html");
-    await expect(page.locator("a[href$='calculators/balance-transfer/']").first()).toBeVisible();
+    await expect(page.locator("a[href$='calculators/balance-transfer/']:not(.section-switcher a)").first()).toBeVisible();
     await go("calculators/prepayment/");
     await expect(page.locator(`.related-calculator-card[href='${siteRoot}calculators/balance-transfer/']`)).toHaveCount(1);
   });

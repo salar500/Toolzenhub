@@ -151,8 +151,9 @@ test.describe("Date Calculator", () => {
 test.describe("Date Calculator in Time Tools and search", () => {
   test("Time Tools lists both tools, with no Coming soon", async ({ page, go }) => {
     await go("time-tools.html");
-    await expect(page.locator('a[href$="tools/date-calculator/"]')).toHaveCount(1);
-    await expect(page.locator('a[href$="tools/date-difference/"]')).toHaveCount(1);
+    // the page's own links; the workspace sidebar lists the tools too
+    await expect(page.locator('a[href$="tools/date-calculator/"]:not(.section-switcher a)')).toHaveCount(1);
+    await expect(page.locator('a[href$="tools/date-difference/"]:not(.section-switcher a)')).toHaveCount(1);
     await expect(page.locator("main")).not.toContainText(/coming soon/i);
     await expectNoHorizontalOverflow(page);
   });

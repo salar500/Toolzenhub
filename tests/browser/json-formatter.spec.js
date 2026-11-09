@@ -343,7 +343,7 @@ test.describe("Developer Tools in the site", () => {
   test("the section page lists the real tools, with no future placeholders", async ({ page, go, watch, siteRoot }) => {
     await go("developer-tools.html");
     await expect(page.locator("h1")).toHaveText("Developer Tools");
-    await expect(page.locator(`a[href$="tools/json-formatter/"]`)).toHaveCount(1);
+    await expect(page.locator(`a[href$="tools/json-formatter/"]:not(.section-switcher a)`)).toHaveCount(1); // the page's own link; the workspace sidebar lists it too
     await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(12); // the published Developer Tools (the catalog)
     await expect(page.locator("main")).not.toContainText(/coming soon|regex/i); // UUID Generator is a live tool now (Tool Pack 39); Base64 is a live tool now (Tool Pack 27)
     const crumbs = (await page.locator(".calculator-breadcrumb").locator("a, strong").allInnerTexts()).map((t) => t.trim());

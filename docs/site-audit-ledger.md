@@ -86,12 +86,30 @@ There is no Hostinger access from this environment. Production is "manually cont
 | inflation-view, loan-comparison, loan-schedule-export, margin, percentage | 91 passed |
 | ppf, prepayment, profit, risk-reward, salary-in-hand | 106 passed, 1 failed (stale test, fixed, re-run green) |
 | section-switcher | 22 passed, 3 failed (stale tests, fixed; the 3 re-run green) |
-| simple-calculators, sip, slider-calculation, swp, xirr, tool-controls | **Incomplete**: stopped by the environment for low memory at 187 of 192; 1 failure seen (swp wide-screen, fixed, re-run green). Must be re-run |
-| mobile project for the calculator specs | **Not run yet** |
+| simple-calculators, sip, slider-calculation, swp, xirr, tool-controls | First run stopped for low memory at 187 of 192 (not counted). Full re-run in three chunks: **181 passed, 11 skipped, 0 failed** (192) |
+| calculators-stage3-responsive, simple-calculators-a11y | 33 passed |
+
+**Desktop total: 690 tests, 679 passed, 11 skipped, 0 failing** after the fixes below. The 11 skips are intended: slider tests on calculators that have no slider.
+
+Mobile (`subpath-mobile`, one worker):
+
+| Batch | Result |
+|---|---|
+| balance-transfer, cagr, credit-card-payoff, emi, fd | 124 passed, 1 failed (stale test, fixed, re-run green) |
+| field-slider, gratuity-auto, gst, home-loan, income-tax | 117 passed |
+| inflation-view, loan-comparison, loan-schedule-export, margin, percentage | 91 passed |
+| ppf, prepayment, profit, risk-reward, salary-in-hand | 107 passed |
+| section-switcher, simple-calculators, sip | 95 passed, 1 failed (racy test, fixed, re-run green) |
+| slider-calculation, swp | 58 passed, 11 skipped |
+| xirr, tool-controls, calculators-stage3-responsive, simple-calculators-a11y | 84 passed |
+
+**Mobile total: 689 tests, 678 passed, 11 skipped, 0 failing** after the fixes.
 
 Stale tests corrected (each re-run green). No product defect was found:
 
 - Search tests looked for a tool link anywhere on All Tools, but the sidebar now lists every tool even when hidden. Scoped to `#tools-results` in 10 specs.
 - Category-page counts included the workspace sidebar's link. Scoped to `.categories-detail__grid` in 5 specs.
 - The section-switcher tests predate the overview and All Tools links in the sidebar, and the drawer moving focus to Close. Scoped to `.section-switcher__list` and the focus order updated (3 tests).
+- Section pages (loans, investment, time-tools, developer-tools): link checks also matched the workspace sidebar's link. On a phone the first match was in the closed drawer; elsewhere the counts were 2. Scoped to `:not(.section-switcher a)` in 6 specs. The Countdown Timer test's ban on the word "timers" now excludes the sidebar's real "Timers and clocks" group heading.
+- simple-calculators: Ratio and Interest read the live-updating result once, without waiting. They failed once under load and passed 3 of 3 alone. Now polled.
 - swp: the scenarios were asserted as one row at 1280 px. With the result now beside the form they stack in one column. The test now asserts the side-by-side placement and the stacked order. Screenshot checked: readable, no overflow.
