@@ -59,17 +59,12 @@ function resultCard(entry) {
 }
 
 
-/* The section links of the no-result message, taken from the page's own section index (the rail or the chips),
+/* The section links of the no-result message, taken from the page's own sidebar (each section's overview link),
    so a section added to the catalog appears here without a second list. */
 function sectionLinks() {
 
-    const links = [...document.querySelectorAll("a.directory-rail__link")].map(a => {
-
-        const name = a.querySelector(".directory-rail__name");
-
-        return `<a href="${escapeHTML(a.getAttribute("href") || "")}">${escapeHTML((name ? name.textContent : a.textContent).trim())}</a>`;
-
-    });
+    const links = [...document.querySelectorAll("a.section-switcher__section")].map(a =>
+        `<a href="${escapeHTML(a.getAttribute("href") || "")}">${escapeHTML((a.dataset.name || a.textContent).trim())}</a>`);
 
     return links.length
         ? `<p class="directory-results__sections">Browse by section: ${links.join("")}</p>`

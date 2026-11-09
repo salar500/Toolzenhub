@@ -38,7 +38,8 @@ let started = false;
 
 export function initWorkspaceNav(nav) {
 
-    if (!supported || started || !nav) {
+    /* a sidebar that spans several ecosystems (the All Tools hub) keeps ordinary page navigation */
+    if (!supported || started || !nav || nav.dataset.workspace === "off") {
         return;
     }
 

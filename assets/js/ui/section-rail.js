@@ -86,7 +86,8 @@ export function initSectionRail(root = document) {
             return { node, wanted: true, toggle: null, items };
         }
 
-        const count = items.querySelectorAll("li").length;
+        // a section overview link (the All Tools hub's groups) is not a tool, so it is not counted
+        const count = items.querySelectorAll("li:not(:has(> a.section-switcher__section))").length;
         const toggle = element("button", { type: "button", class: "section-switcher__toggle", "aria-controls": `${nav.id}-group-${index}` });
 
         items.id = `${nav.id}-group-${index}`;

@@ -274,30 +274,41 @@ function categoryGroup(category) {
 
 }
 
-/* The page-scoped section index (rulebook 4.8 exception): a sticky rail from 960px, chips below.
-   The counts are the live tools the sections themselves list, from the same catalog. */
-function sectionRail(visibleSections) {
+/* The All Tools sidebar: the same section-switcher markup, styling, collapsing groups and phone drawer as every ecosystem
+   (components/section-switcher.js, ui/section-rail.js), one group per section with its overview and its live tools. The tools hub
+   spans every section, so it keeps ordinary page navigation (data-workspace="off" for ui/workspace-nav.js). */
+function allToolsRail(visibleSections) {
 
-    return `
-                    <nav class="directory-rail" aria-label="Tool sections">
+    const total = visibleSections.reduce((sum, section) => sum + getToolsBySection(section.id).filter(tool => tool.available).length, 0);
 
-                        <ul class="directory-rail__list">
-                            ${visibleSections.map(section => {
+    const groups = visibleSections.map(section => {
 
-                                const count =
-                                    getToolsBySection(section.id).filter(tool => tool.available).length;
+        const live = getToolsBySection(section.id).filter(tool => tool.available);
 
-                                return `<li>
-                                <a class="directory-rail__link" href="#directory-${section.id}-heading">
-                                    <span class="directory-rail__name">${escapeHTML(section.title)}</span>
-                                    <span class="directory-rail__count">${count}</span>
-                                </a>
+        return `
+                            <li class="section-switcher__group" data-open="false">
+                                <span class="section-switcher__label">${escapeHTML(section.title)}</span>
+                                <ul>
+                                    <li><a class="section-switcher__section" data-name="${escapeHTML(section.title)}" href="${escapeHTML(ROUTES[section.landing])}">${escapeHTML(section.title)} overview</a></li>
+                                    ${live.map(tool => `<li><a href="${tool.href}">${escapeHTML(tool.title)}</a></li>`).join("")}
+                                </ul>
                             </li>`;
 
-                            }).join("")}
-                        </ul>
+    }).join("");
 
-                    </nav>`;
+    return `
+                <nav class="section-switcher" data-workspace="off" aria-label="All Tools: switch section">
+                    <details>
+                        <summary>
+                            <span>All Tools</span>
+                            <span class="section-switcher__now">All Tools overview</span>
+                            <span class="section-switcher__count">${total}</span>
+                        </summary>
+                        <p class="section-switcher__overview"><a href="${escapeHTML(ROUTES.tools)}" aria-current="page">All Tools overview</a></p>
+                        <ul class="section-switcher__list">${groups}
+                        </ul>
+                    </details>
+                </nav>`;
 
 }
 
@@ -310,9 +321,15 @@ export function allToolsHtml() {
 
         <section class="categories-page directory-page">
 
-            <div class="container">
+            <div class="container container--workspace">
 
                 ${renderBreadcrumb([{ label: "All Tools" }])}
+
+                <div class="ecosystem-layout" data-section-page>
+
+                ${allToolsRail(visibleSections)}
+
+                <div class="ecosystem-main">
 
                 <div class="categories-page__intro">
 
@@ -330,19 +347,13 @@ export function allToolsHtml() {
 
                 </div>
 
-                <div class="directory-layout">
+                ${searchForm()}
 
-                    ${sectionRail(visibleSections)}
+                <div id="tools-directory">
+                    ${visibleSections.map(sectionBlock).join("")}
+                </div>
 
-                    <div class="directory-layout__main">
-
-                        ${searchForm()}
-
-                        <div id="tools-directory">
-                            ${visibleSections.map(sectionBlock).join("")}
-                        </div>
-
-                    </div>
+                </div>
 
                 </div>
 

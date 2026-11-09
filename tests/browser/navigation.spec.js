@@ -622,7 +622,7 @@ test.describe("All Tools and the calculator hierarchy", () => {
     await go("tools.html");
     await page.locator('.directory-group__title a[href$="/loans.html"]').click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}loans.html`);
-    await page.locator('a[href$="calculators/emi/"]').first().click();
+    await page.locator('a[href$="calculators/emi/"]:visible').first().click(); // the phone drawer also lists the tool, hidden while closed
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}calculators/emi/`);
   });
 
@@ -758,13 +758,21 @@ test.describe("header and All Tools section index (Design System 2.0, GL-01 and 
     }
   });
 
-  test("a section link in the All Tools rail moves focus to that section's heading", async ({ page, go }) => {
+  test("All Tools uses the shared ecosystem sidebar: a group per section with its overview and tools, ordinary navigation", async ({ page, go }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await go("tools.html");
-    const link = page.locator("a.directory-rail__link", { hasText: "Time Tools" }).first();
-    await link.focus();
-    await page.keyboard.press("Enter");
-    await expect(page.locator("#directory-time-tools-heading")).toBeFocused();
+    const nav = page.locator('nav.section-switcher[data-workspace="off"]');
+    await expect(nav).toBeVisible();
+    const toggles = nav.locator(".section-switcher__toggle");
+    await expect(toggles).toHaveCount(6);
+    await expect(toggles.first()).toContainText("Calculators");
+    await expect(toggles.first().locator(".section-switcher__group-count")).toHaveText("30");
+    await nav.locator(".section-switcher__toggle", { hasText: "Time Tools" }).click();
+    const overview = nav.getByRole("link", { name: "Time Tools overview" });
+    await expect(overview).toBeVisible();
+    await overview.click();
+    await expect(page).toHaveURL(/time-tools\.html$/);
+    await expect(page.locator("h1")).toHaveText(/Time Tools/);
   });
 
   test("a search with no match offers the six sections and a way back", async ({ page, go }) => {
