@@ -526,6 +526,9 @@ test.describe("World Clock: the Explore directory", () => {
       expect(box.x + box.width, `${item} stays inside the line`).toBeLessThanOrEqual(line.x + line.width + 1);
     }
     await expectNoHorizontalOverflow(page);
+    // a long search must not widen the Explore column: "Reset all" stays on a 320 px screen (it was at x 359 before the minmax(0, 1fr) column)
+    const reset = await resetAll(page).boundingBox();
+    expect(reset.x + reset.width, "Reset all is on screen").toBeLessThanOrEqual(320);
     await resetAll(page).click();
     await expect(page.locator(".wc-x-active")).toBeHidden();
     await type(page, "a very long search text that goes on and on");

@@ -141,14 +141,15 @@ test.describe("Date Calculator: ISO week", () => {
   });
 });
 
-test.describe("Date Difference: Use today", () => {
+test.describe("Date Difference: Today, under each date (2e4345b)", () => {
   test("fills a date only when pressed, from the browser's calendar date", async ({ page, go, watch }) => {
     await page.clock.install({ time: new Date("2026-03-10T20:00:00Z") }); // 01:30 on 11 March in India
     await go("tools/date-difference/");
     await expect(page.locator("#date-start")).toHaveValue("");
-    const buttons = page.getByRole("button", { name: "Use today's date for this field" });
+    // each date has its own quick row since 2e4345b; its Today button is named for that date
+    const buttons = page.getByRole("button", { name: /^Set the (start|end) date to today$/ });
     await expect(buttons).toHaveCount(2);
-    await buttons.first().click();
+    await page.getByRole("button", { name: "Set the start date to today" }).click();
     await expect(page.locator("#date-start")).toHaveValue("2026-03-11");
     await expect(page.locator("#date-start")).toBeFocused();
     await expect(page.locator("#date-end")).toHaveValue("");

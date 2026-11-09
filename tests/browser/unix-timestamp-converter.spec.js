@@ -496,7 +496,7 @@ test.describe("Developer Tools in the site", () => {
     await go("developer-tools.html");
     await expect(page.locator("h1")).toHaveText("Developer Tools");
     await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(12);
-    for (const slug of ["json-formatter", "unix-timestamp-converter"]) await expect(page.locator(`a[href$="tools/${slug}/"]`)).toHaveCount(1);
+    for (const slug of ["json-formatter", "unix-timestamp-converter"]) await expect(page.locator(`a[href$="tools/${slug}/"]:not(.section-switcher a)`)).toHaveCount(1); // the page's own link; the workspace sidebar lists it too
     await expect(page.locator("main")).not.toContainText(/coming soon|regex/i); // UUID Generator is a live tool now (Tool Pack 39); Base64 is a live tool now (Tool Pack 27)
     expect(await page.locator('link[rel="canonical"]').getAttribute("href")).toBe("https://toolzenhub.in/developer-tools.html");
   });
@@ -511,7 +511,7 @@ test.describe("Developer Tools in the site", () => {
     await expect(time.locator(".directory-section__count")).toHaveText("13 tools");
     await expect(time.locator('a[href$="tools/unix-timestamp-converter/"]')).toHaveCount(0);
     await go("time-tools.html");
-    await expect(page.locator("main a[href*='tools/']")).toHaveCount(13);
+    await expect(page.locator("main a[href*='tools/']:not(.section-switcher a)")).toHaveCount(13); // the page's cards; the workspace sidebar lists the same 13
     await expect(page.locator("main")).not.toContainText(/timestamp|epoch|json/i);
   });
 

@@ -309,7 +309,10 @@ test.describe("Stopwatch in Time Tools and search", () => {
   test("Time Tools and All Tools list it directly under the section; Countdown Timer and Stopwatch link each other", async ({ page, go }) => {
     await go("time-tools.html");
     for (const slug of ["stopwatch", "countdown-timer", "date-difference", "date-calculator"]) await expect(page.locator(`.categories-detail__grid a[href$="tools/${slug}/"]`)).toHaveCount(1);  // the card grid; the workspace sidebar lists the tool too
-    await expect(page.locator("main")).not.toContainText(/coming soon|timers|measurement/i);
+    await expect(page.locator("main")).not.toContainText(/coming soon|measurement/i);
+    // no placeholder "Timers" category in the page itself; the sidebar's "Timers and clocks" group heading is the real grouping
+    const ownText = await page.locator("main").evaluate((m) => { const c = m.cloneNode(true); c.querySelectorAll(".section-switcher").forEach((n) => n.remove()); return c.textContent; });
+    expect(ownText).not.toMatch(/timers/i);
     await go("tools.html");
     await expect(page.locator('.directory-section a[href$="tools/stopwatch/"]')).toHaveCount(1);
     await expect(page.locator(".directory-section__count").nth(1)).toHaveText("13 tools"); // the Time Tools section is the second of three

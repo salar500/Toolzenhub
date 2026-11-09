@@ -1047,6 +1047,8 @@
 .wc-x-results {
 
     display: grid;
+    /* one column that may shrink: an implicit auto column grew to a long search's minimum width and pushed "Reset all" off a 320 px screen */
+    grid-template-columns: minmax(0, 1fr);
     gap: 12px;
 
     min-width: 0;
