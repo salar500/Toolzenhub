@@ -128,8 +128,9 @@ test.describe("Date Calculator", () => {
     for (const h of ["How to Use the Date Calculator", "How the Date Is Calculated", "Month Ends and Leap Years", "Example", "Common Uses"]) {
       await expect(body.getByRole("heading", { name: h })).toBeVisible();
     }
-    await expect(body.locator(".calculator-info details")).toHaveCount(5);
-    await expect(body.locator('.calculator-info a[href$="tools/date-difference/"]')).toHaveCount(1);
+    await expect(body.locator(".calculator-info details")).toHaveCount(6); // the sixth, "Is the start date counted as day 1?", states the counting convention (rule 8.9, 3e280e2)
+    await expect(body.locator(".calculator-info summary", { hasText: "Is the start date counted as day 1?" })).toHaveCount(1);
+    await expect(body.locator('.calculator-info a[href$="tools/date-difference/"]')).toHaveCount(2); // the explanation, and the day-1 FAQ's "count every date, including both" pointer
     await expect(body).toContainText("not part of this calculator");
     await expect(body).not.toContainText(/100% accurate|most accurate|\bbest\b|age calculator/i);
   });

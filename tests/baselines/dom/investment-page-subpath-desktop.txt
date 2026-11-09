@@ -1,65 +1,180 @@
 section.categories-page.directory-page
-  div.container
+  div.container.container--workspace
     div.calculator-breadcrumb
       a [href="{ROOT}"] "Home"
       span "›"
       a [href="{ROOT}categories.html"] "Calculators"
       span "›"
       strong "Investment"
-    div.categories-page__intro
-      span.categories-page__eyebrow "Calculators"
-      h1.categories-page__title "Investment Calculators"
-      p.categories-page__description "Explore investment growth, returns and savings scenarios"
-    h2.categories-detail__heading "Investment calculators"
-    div.categories-detail__grid.directory-tools
-      a.category-page-card [href="{ROOT}calculators/sip/"]
-        div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
-          svg [aria-hidden="true"]
-        div.category-page-card__content
-          h3.category-page-card__title "SIP Calculator"
-          p.category-page-card__description "Estimate what a monthly SIP could grow to for a return you assume, with a yearly step-up, …"
-        span.category-page-card__arrow [aria-hidden="true"] "→"
-      a.category-page-card [href="{ROOT}calculators/ppf/"]
-        div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
-          svg [aria-hidden="true"]
-        div.category-page-card__content
-          h3.category-page-card__title "PPF Calculator"
-          p.category-page-card__description "Estimate the balance of a Public Provident Fund account from a yearly or monthly deposit, …"
-        span.category-page-card__arrow [aria-hidden="true"] "→"
-      a.category-page-card [href="{ROOT}calculators/fd/"]
-        div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
-          svg [aria-hidden="true"]
-        div.category-page-card__content
-          h3.category-page-card__title "FD Calculator"
-          p.category-page-card__description "Work out what a fixed deposit matures to for a rate and tenure you enter, see its effectiv…"
-        span.category-page-card__arrow [aria-hidden="true"] "→"
-      a.category-page-card [href="{ROOT}calculators/cagr/"]
-        div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
-          svg [aria-hidden="true"]
-        div.category-page-card__content
-          h3.category-page-card__title "CAGR Calculator"
-          p.category-page-card__description "Find the yearly growth rate that connects a starting and an ending value over a period, se…"
-        span.category-page-card__arrow [aria-hidden="true"] "→"
-      a.category-page-card [href="{ROOT}calculators/swp/"]
-        div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
-          svg [aria-hidden="true"]
-        div.category-page-card__content
-          h3.category-page-card__title "SWP Calculator"
-          p.category-page-card__description "Estimate how long a corpus could last under regular withdrawals, how much you could withdr…"
-        span.category-page-card__arrow [aria-hidden="true"] "→"
-      a.category-page-card [href="{ROOT}calculators/xirr/"]
-        div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
-          svg [aria-hidden="true"]
-        div.category-page-card__content
-          h3.category-page-card__title "XIRR Calculator"
-          p.category-page-card__description "Find the yearly rate of return of money you put in and got back on different dates. Enter …"
-        span.category-page-card__arrow [aria-hidden="true"] "→"
-      a.category-page-card [href="{ROOT}calculators/risk-reward/"]
-        div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
-          svg [aria-hidden="true"]
-        div.category-page-card__content
-          h3.category-page-card__title "Risk-Reward and Position Size Calculator"
-          p.category-page-card__description "Enter an entry, stop-loss and target to see the risk and reward per unit, the risk-reward …"
-        span.category-page-card__arrow [aria-hidden="true"] "→"
-    p.directory-section__more
-      a [href="{ROOT}categories.html"] "← All calculator categories"
+    div.ecosystem-layout [data-section-page]
+      nav#section-rail.section-switcher [aria-label="Calculators: switch tool"]
+        details
+          summary
+            span "Calculators"
+            span.section-switcher__now "Investment"
+            span.section-switcher__count "30"
+          p.section-switcher__overview
+            a [href="{ROOT}categories.html"] "Calculators overview"
+          button.section-rail__hide [aria-controls="section-rail" aria-expanded="true" type="button"] "Hide tools"
+          div.section-rail__search
+            label.section-rail__label [for="section-rail-search"] "Find a tool in Calculators"
+            input#section-rail-search [placeholder="Search tools" type="search"]
+            p.section-rail__status [aria-live="polite" role="status"]
+          ul.section-switcher__list
+            li.section-switcher__group [data-href="/Toolzenhub/loans.html" data-open="false"]
+              button.section-switcher__toggle [aria-controls="section-rail-group-0" aria-expanded="false" type="button"]
+                span "Loans"
+                span.section-switcher__group-count [aria-hidden="true"] "9"
+              ul#section-rail-group-0
+                li
+                  a [href="{ROOT}calculators/loan-comparison/"] "Loan Comparison Calculator"
+                li
+                  a [href="{ROOT}calculators/emi/"] "EMI Calculator"
+                li
+                  a [href="{ROOT}calculators/home-loan/"] "Home Loan Calculator"
+                li
+                  a [href="{ROOT}calculators/personal-loan/"] "Personal Loan Calculator"
+                li
+                  a [href="{ROOT}calculators/loan-eligibility/"] "Loan Eligibility Calculator"
+                li
+                  a [href="{ROOT}calculators/balance-transfer/"] "Loan Balance Transfer Calculator"
+                li
+                  a [href="{ROOT}calculators/interest/"] "Interest Calculator"
+                li
+                  a [href="{ROOT}calculators/prepayment/"] "Loan Prepayment Calculator"
+                li
+                  a [href="{ROOT}calculators/credit-card-payoff/"] "Credit Card Payoff Calculator"
+            li.section-switcher__group [data-current="true" data-href="/Toolzenhub/investment.html" data-open="true"]
+              button.section-switcher__toggle [aria-controls="section-rail-group-1" aria-expanded="true" type="button"]
+                span "Investment"
+                span.section-switcher__group-count [aria-hidden="true"] "7"
+              ul#section-rail-group-1
+                li
+                  a [href="{ROOT}calculators/sip/"] "SIP Calculator"
+                li
+                  a [href="{ROOT}calculators/ppf/"] "PPF Calculator"
+                li
+                  a [href="{ROOT}calculators/fd/"] "FD Calculator"
+                li
+                  a [href="{ROOT}calculators/cagr/"] "CAGR Calculator"
+                li
+                  a [href="{ROOT}calculators/swp/"] "SWP Calculator"
+                li
+                  a [href="{ROOT}calculators/xirr/"] "XIRR Calculator"
+                li
+                  a [href="{ROOT}calculators/risk-reward/"] "Risk-Reward and Position Size Calculator"
+            li.section-switcher__group [data-href="/Toolzenhub/tax.html" data-open="false"]
+              button.section-switcher__toggle [aria-controls="section-rail-group-2" aria-expanded="false" type="button"]
+                span "Tax"
+                span.section-switcher__group-count [aria-hidden="true"] "4"
+              ul#section-rail-group-2
+                li
+                  a [href="{ROOT}calculators/gst/"] "GST Calculator"
+                li
+                  a [href="{ROOT}calculators/income-tax/"] "Old vs New Tax Regime Calculator"
+                li
+                  a [href="{ROOT}calculators/gratuity/"] "Gratuity Calculator (India)"
+                li
+                  a [href="{ROOT}calculators/salary-in-hand/"] "Salary / CTC to In-Hand Calculator (India)"
+            li.section-switcher__group [data-href="/Toolzenhub/health.html" data-open="false"]
+              button.section-switcher__toggle [aria-controls="section-rail-group-3" aria-expanded="false" type="button"]
+                span "Health"
+                span.section-switcher__group-count [aria-hidden="true"] "3"
+              ul#section-rail-group-3
+                li
+                  a [href="{ROOT}calculators/bmi/"] "BMI Calculator"
+                li
+                  a [href="{ROOT}calculators/calorie/"] "Calorie Calculator"
+                li
+                  a [href="{ROOT}calculators/bmr/"] "BMR Calculator"
+            li.section-switcher__group [data-href="/Toolzenhub/business.html" data-open="false"]
+              button.section-switcher__toggle [aria-controls="section-rail-group-4" aria-expanded="false" type="button"]
+                span "Business"
+                span.section-switcher__group-count [aria-hidden="true"] "3"
+              ul#section-rail-group-4
+                li
+                  a [href="{ROOT}calculators/profit/"] "Profit Calculator"
+                li
+                  a [href="{ROOT}calculators/margin/"] "Margin Calculator"
+                li
+                  a [href="{ROOT}calculators/roi/"] "ROI Calculator"
+            li.section-switcher__group [data-href="/Toolzenhub/math.html" data-open="false"]
+              button.section-switcher__toggle [aria-controls="section-rail-group-5" aria-expanded="false" type="button"]
+                span "Math"
+                span.section-switcher__group-count [aria-hidden="true"] "3"
+              ul#section-rail-group-5
+                li
+                  a [href="{ROOT}calculators/percentage/"] "Percentage Calculator"
+                li
+                  a [href="{ROOT}calculators/ratio/"] "Ratio Calculator"
+                li
+                  a [href="{ROOT}calculators/age/"] "Age Calculator"
+            li.section-switcher__group [data-href="/Toolzenhub/converter.html" data-open="false"]
+              button.section-switcher__toggle [aria-controls="section-rail-group-6" aria-expanded="false" type="button"]
+                span "Converter"
+                span.section-switcher__group-count [aria-hidden="true"] "1"
+              ul#section-rail-group-6
+                li
+                  a [href="{ROOT}calculators/unit-converter/"] "Unit Converter"
+          p.section-switcher__all
+            a [href="{ROOT}tools.html"] "All ToolZen Hub tools"
+      button.section-rail__backdrop [aria-hidden="true" type="button"]
+      button.section-rail__show [aria-controls="section-rail" aria-expanded="false" type="button"] "Show Calculators"
+      div.ecosystem-main
+        div.categories-page__intro
+          span.categories-page__eyebrow "Calculators"
+          h1.categories-page__title "Investment Calculators"
+          p.categories-page__description "Explore investment growth, returns and savings scenarios"
+        h2.categories-detail__heading "Investment calculators"
+        div.categories-detail__grid.directory-tools
+          a.category-page-card [href="{ROOT}calculators/sip/"]
+            div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
+              svg [aria-hidden="true"]
+            div.category-page-card__content
+              h3.category-page-card__title "SIP Calculator"
+              p.category-page-card__description "Estimate what a monthly SIP could grow to for a return you assume, with a yearly step-up, …"
+            span.category-page-card__arrow [aria-hidden="true"] "→"
+          a.category-page-card [href="{ROOT}calculators/ppf/"]
+            div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
+              svg [aria-hidden="true"]
+            div.category-page-card__content
+              h3.category-page-card__title "PPF Calculator"
+              p.category-page-card__description "Estimate the balance of a Public Provident Fund account from a yearly or monthly deposit, …"
+            span.category-page-card__arrow [aria-hidden="true"] "→"
+          a.category-page-card [href="{ROOT}calculators/fd/"]
+            div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
+              svg [aria-hidden="true"]
+            div.category-page-card__content
+              h3.category-page-card__title "FD Calculator"
+              p.category-page-card__description "Work out what a fixed deposit matures to for a rate and tenure you enter, see its effectiv…"
+            span.category-page-card__arrow [aria-hidden="true"] "→"
+          a.category-page-card [href="{ROOT}calculators/cagr/"]
+            div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
+              svg [aria-hidden="true"]
+            div.category-page-card__content
+              h3.category-page-card__title "CAGR Calculator"
+              p.category-page-card__description "Find the yearly growth rate that connects a starting and an ending value over a period, se…"
+            span.category-page-card__arrow [aria-hidden="true"] "→"
+          a.category-page-card [href="{ROOT}calculators/swp/"]
+            div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
+              svg [aria-hidden="true"]
+            div.category-page-card__content
+              h3.category-page-card__title "SWP Calculator"
+              p.category-page-card__description "Estimate how long a corpus could last under regular withdrawals, how much you could withdr…"
+            span.category-page-card__arrow [aria-hidden="true"] "→"
+          a.category-page-card [href="{ROOT}calculators/xirr/"]
+            div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
+              svg [aria-hidden="true"]
+            div.category-page-card__content
+              h3.category-page-card__title "XIRR Calculator"
+              p.category-page-card__description "Find the yearly rate of return of money you put in and got back on different dates. Enter …"
+            span.category-page-card__arrow [aria-hidden="true"] "→"
+          a.category-page-card [href="{ROOT}calculators/risk-reward/"]
+            div.category-page-card__icon.category-page-card__icon--investment [aria-hidden="true"]
+              svg [aria-hidden="true"]
+            div.category-page-card__content
+              h3.category-page-card__title "Risk-Reward and Position Size Calculator"
+              p.category-page-card__description "Enter an entry, stop-loss and target to see the risk and reward per unit, the risk-reward …"
+            span.category-page-card__arrow [aria-hidden="true"] "→"
+        p.directory-section__more
+          a [href="{ROOT}categories.html"] "← All calculator categories"

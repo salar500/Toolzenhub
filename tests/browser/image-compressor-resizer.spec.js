@@ -867,7 +867,7 @@ test.describe("Image Tools in the site", () => {
     expect(await page.locator('link[rel="canonical"]').getAttribute("href")).toBe("https://toolzenhub.in/image-tools.html");
     const crumbs = (await page.locator(".calculator-breadcrumb").locator("a, strong").allInnerTexts()).map((t) => t.trim());
     expect(crumbs).toEqual(["Home", "All Tools", "Image Tools"]);
-    await expect(page.locator(`a[href$="tools/image-compressor-resizer/"]`)).toHaveCount(1);
+    await expect(page.locator(`a[href$="tools/image-compressor-resizer/"]:not(.section-switcher a)`)).toHaveCount(1); // the page's own link; the workspace sidebar lists it too
     await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(2);
     await expect(page.locator("main")).not.toContainText(/coming soon/i);
     await expect(page.locator("main")).toContainText("Private browser-based tools for resizing and optimizing images.");

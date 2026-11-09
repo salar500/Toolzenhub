@@ -376,6 +376,7 @@ test.describe("Hours & Timesheet Calculator in Time Tools", () => {
       await expect(page.locator(`#tools-results a[href='${siteRoot}tools/hours-calculator/']`).first(), q).toBeVisible();
     }
     await go(`tools.html?q=${encodeURIComponent("elapsed time")}`);
+    await expect(page.locator("#tools-results a").first()).toBeVisible(); // results are rendered by script: read them once they are there
     const hrefs = await page.locator("#tools-results a[href*='/tools/']").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
     const sw = hrefs.indexOf(`${siteRoot}tools/stopwatch/`);
     const hc = hrefs.indexOf(`${siteRoot}tools/hours-calculator/`);
