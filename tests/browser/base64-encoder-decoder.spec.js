@@ -356,7 +356,7 @@ test.describe("Base64 Encoder & Decoder in Developer Tools, search and related l
   test("global search finds it by its own names", async ({ page, go, siteRoot }) => {
     for (const q of ["base64", "base64 decode", "text to base64", "base64 encoder", "base64 converter"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
-      await expect(page.locator(`a[href='${siteRoot}tools/base64-encoder-decoder/']`).first(), q).toBeVisible();
+      await expect(page.locator(`#tools-results a[href='${siteRoot}tools/base64-encoder-decoder/']`).first(), q).toBeVisible();
     }
   });
 

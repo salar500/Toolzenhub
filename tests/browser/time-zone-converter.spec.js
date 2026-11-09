@@ -556,7 +556,7 @@ test.describe("Time Zone Converter: accessibility and layout", () => {
 test.describe("Time Zone Converter in the site", () => {
   test("Time Tools lists it as one of its tools, flat, and Developer Tools does not", async ({ page, go }) => {
     await go("time-tools.html");
-    await expect(page.locator(`a[href$="tools/time-zone-converter/"]`)).toHaveCount(1);
+    await expect(page.locator(`.categories-detail__grid a[href$="tools/time-zone-converter/"]`)).toHaveCount(1);  // the card grid; the workspace sidebar lists the tool too
     await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(13);
     await expect(page.locator("main")).not.toContainText(/coming soon/i);
     await expect(page.locator("main")).toContainText("Time Zone Converter");

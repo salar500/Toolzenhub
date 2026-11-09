@@ -403,7 +403,7 @@ test.describe("JWT Decoder in the Developer Tools section", () => {
   test("global search finds it by its own names", async ({ page, go, siteRoot }) => {
     for (const q of ["jwt decoder", "decode jwt", "jwt payload viewer", "json web token"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
-      await expect(page.locator(`a[href='${siteRoot}tools/jwt-decoder/']`).first(), q).toBeVisible();
+      await expect(page.locator(`#tools-results a[href='${siteRoot}tools/jwt-decoder/']`).first(), q).toBeVisible();
     }
   });
 });

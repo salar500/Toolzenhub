@@ -1475,10 +1475,10 @@ test.describe("World Clock: time, timers and the site", () => {
     await expect(time.locator(".directory-section__count")).toHaveText("13 tools");
     for (const q of ["world clock", "city clocks", "multiple clocks"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
-      await expect(page.locator("main a", { hasText: "World Clock" }).first(), q).toBeVisible();
+      await expect(page.locator("#tools-results a", { hasText: "World Clock" }).first(), q).toBeVisible();
     }
     await go("tools.html?q=time%20zone%20converter");
-    await expect(page.locator("main a", { hasText: "Time Zone Converter" }).first()).toBeVisible();
+    await expect(page.locator("#tools-results a", { hasText: "Time Zone Converter" }).first()).toBeVisible();
   });
 });
 

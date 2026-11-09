@@ -38,7 +38,8 @@ test.describe("section switcher", () => {
       await expect(nav.locator('a[aria-current="page"]')).toContainText(current);
       await expect(nav.locator('a[aria-current="page"]')).toHaveCount(1);
       // every link stays inside the section: no tool of another section is listed (rule 4.2)
-      const hrefs = await nav.locator("a").evaluateAll((as) => as.map((a) => a.getAttribute("href")));
+      // the tool list: the section overview and the All Tools hub links (added 2026-11-07) are navigation, not tools
+      const hrefs = await nav.locator(".section-switcher__list a").evaluateAll((as) => as.map((a) => a.getAttribute("href")));
       expect(new Set(hrefs).size).toBe(hrefs.length);
       if (section === "Calculators") for (const h of hrefs) expect(h).toContain(`${siteRoot}calculators/`);
       else for (const h of hrefs) expect(h).toContain(`${siteRoot}tools/`);
@@ -62,12 +63,11 @@ test.describe("section switcher", () => {
     await page.locator(".section-switcher summary").focus();
     await page.keyboard.press("Enter");
     await expect(page.locator(".section-switcher details")).toHaveAttribute("open", "");
-    await page.keyboard.press("Tab");
-    await expect(page.locator(".section-switcher").getByRole("button", { name: "Close tools" })).toBeFocused(); // the drawer's close button comes first
+    await expect(page.locator(".section-switcher").getByRole("button", { name: "Close tools" })).toBeFocused(); // opening the drawer moves focus to its close button (section-rail.js)
     await page.keyboard.press("Tab");
     await expect(page.locator(".section-switcher .section-switcher__toggle").first()).toBeFocused(); // then the first group heading
     await page.keyboard.press("Tab");
-    await expect(page.locator(".section-switcher a").first()).toBeFocused();
+    await expect(page.locator(".section-switcher .section-switcher__list a").first()).toBeFocused();
   });
 
   test.describe("persistent rail on a wide screen", () => {
@@ -207,7 +207,8 @@ test.describe("section switcher", () => {
       await page.setViewportSize({ width: 1280, height: 800 });
       for (const [start, section] of CASES) {
         await go(start);
-        const hrefs = await rail(page).locator("a").evaluateAll((as) => as.map((a) => a.getAttribute("href")));
+        // the tools; the overview and All Tools links are navigation, covered elsewhere
+        const hrefs = await rail(page).locator(".section-switcher__list a").evaluateAll((as) => as.map((a) => a.getAttribute("href")));
         const startUrl = page.url();
         for (const target of [hrefs[0], hrefs[Math.floor(hrefs.length / 2)], hrefs[hrefs.length - 1]]) {
           await page.goto(startUrl);
@@ -228,7 +229,7 @@ test.describe("section switcher", () => {
       await page.keyboard.press("Tab");
       await expect(rail(page).locator(".section-switcher__toggle").first()).toBeFocused(); // the first group heading
       await page.keyboard.press("Tab");
-      await expect(rail(page).locator("a").first()).toBeFocused();
+      await expect(rail(page).locator(".section-switcher__list a").first()).toBeFocused();
       await rail(page).getByRole("button", { name: "Hide tools" }).focus();
       await page.keyboard.press("Enter");
       await expect(page.getByRole("button", { name: "Show Developer Tools" })).toBeFocused();

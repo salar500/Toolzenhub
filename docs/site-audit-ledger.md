@@ -75,6 +75,23 @@ There is no Hostinger access from this environment. Production is "manually cont
 | Date Difference quick-date wording and placement | Quick dates under each input, named for their field; plain inclusive range labels; both counts in the result; whole periods under "More ranges" | presets spec rewritten (25 passed desktop, 25 mobile); date-difference spec 9 passed | `2e4345b` |
 | Header disappears while scrolling | `overflow-x: clip` instead of `hidden` on html/body (sticky works again on the home page); below 960 px the header hides on scroll down and returns on scroll up; the phone tool bar follows it; rule GL-01 updated | new header-scroll spec (desktop 5 passed, mobile 6 passed); tablet spot check on 9 pages | `5fd2d87` |
 | All Tools sidebar differs from the ecosystems | All Tools uses the shared section-switcher in the workspace layout; ordinary navigation (`data-workspace="off"`) | navigation spec 47 passed desktop; mobile 1 stale test fixed and re-run green | `a8b60cd` |
-| Calculator results need scrolling | From 1200 px the 29 standard calculators show the form and the result side by side (both sidebar states); explanations span below | layout measured on 8 calculators: results start at y 319–405 instead of 727–1803 at 1280×800 | (this commit) |
+| Calculator results need scrolling | From 1200 px the 29 standard calculators show the form and the result side by side (both sidebar states); explanations span below | layout measured on 8 calculators: results start at y 319–405 instead of 727–1803 at 1280×800 | `f811fe5` |
 
-**Interrupted:** the browser run of the 28 calculator-related specs, after the side-by-side change, was stopped by the environment for low memory after 6 of 690 tests. It is **not** a pass. It must be re-run, one worker, before release.
+### Calculator browser specs after the side-by-side change (desktop, one worker, 2026-11-09)
+
+| Batch | Result |
+|---|---|
+| balance-transfer, cagr, credit-card-payoff, emi, fd | 124 passed, 1 failed (stale test, fixed, re-run green) |
+| field-slider, gratuity-auto, gst, home-loan, income-tax | 117 passed |
+| inflation-view, loan-comparison, loan-schedule-export, margin, percentage | 91 passed |
+| ppf, prepayment, profit, risk-reward, salary-in-hand | 106 passed, 1 failed (stale test, fixed, re-run green) |
+| section-switcher | 22 passed, 3 failed (stale tests, fixed; the 3 re-run green) |
+| simple-calculators, sip, slider-calculation, swp, xirr, tool-controls | **Incomplete**: stopped by the environment for low memory at 187 of 192; 1 failure seen (swp wide-screen, fixed, re-run green). Must be re-run |
+| mobile project for the calculator specs | **Not run yet** |
+
+Stale tests corrected (each re-run green). No product defect was found:
+
+- Search tests looked for a tool link anywhere on All Tools, but the sidebar now lists every tool even when hidden. Scoped to `#tools-results` in 10 specs.
+- Category-page counts included the workspace sidebar's link. Scoped to `.categories-detail__grid` in 5 specs.
+- The section-switcher tests predate the overview and All Tools links in the sidebar, and the drawer moving focus to Close. Scoped to `.section-switcher__list` and the focus order updated (3 tests).
+- swp: the scenarios were asserted as one row at 1280 px. With the result now beside the form they stack in one column. The test now asserts the side-by-side placement and the stacked order. Screenshot checked: readable, no overflow.

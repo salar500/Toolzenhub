@@ -308,7 +308,7 @@ test.describe("Stopwatch on the real clock", () => {
 test.describe("Stopwatch in Time Tools and search", () => {
   test("Time Tools and All Tools list it directly under the section; Countdown Timer and Stopwatch link each other", async ({ page, go }) => {
     await go("time-tools.html");
-    for (const slug of ["stopwatch", "countdown-timer", "date-difference", "date-calculator"]) await expect(page.locator(`a[href$="tools/${slug}/"]`)).toHaveCount(1);
+    for (const slug of ["stopwatch", "countdown-timer", "date-difference", "date-calculator"]) await expect(page.locator(`.categories-detail__grid a[href$="tools/${slug}/"]`)).toHaveCount(1);  // the card grid; the workspace sidebar lists the tool too
     await expect(page.locator("main")).not.toContainText(/coming soon|timers|measurement/i);
     await go("tools.html");
     await expect(page.locator('.directory-section a[href$="tools/stopwatch/"]')).toHaveCount(1);

@@ -482,7 +482,7 @@ test.describe("Text Diff / Compare", () => {
 test.describe("Text Diff / Compare in the site", () => {
   test("Developer Tools lists it as the third tool, flat, with no future placeholders", async ({ page, go }) => {
     await go("developer-tools.html");
-    await expect(page.locator(`a[href$="tools/text-diff/"]`)).toHaveCount(1);
+    await expect(page.locator(`.categories-detail__grid a[href$="tools/text-diff/"]`)).toHaveCount(1);  // the card grid; the workspace sidebar lists the tool too
     await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(12); // 12 Developer Tools; the labs moved to their own Practice Labs section
     await expect(page.locator("main")).not.toContainText(/coming soon|regex/i); // UUID Generator is a live tool now (Tool Pack 39); Base64 is a live tool now (Tool Pack 27)
     await expect(page.locator("main")).toContainText("Text Diff / Compare");

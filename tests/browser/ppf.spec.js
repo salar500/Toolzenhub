@@ -461,7 +461,7 @@ test.describe("PPF Calculator with larger text", () => {
 test.describe("PPF Calculator in the Investment listing, search and related tools", () => {
   test("it is a live Investment tool in the category page, All Calculators and All Tools, and not a Coming soon card", async ({ page, go, siteRoot }) => {
     await go("investment.html");
-    await expect(page.locator(`a[href$="calculators/ppf/"]`)).toHaveCount(1);
+    await expect(page.locator(`.categories-detail__grid a[href$="calculators/ppf/"]`)).toHaveCount(1);  // the card grid; the workspace sidebar lists the tool too
     await expect(page.locator(".category-page-card--soon")).toHaveCount(0);
     await go("calculators.html");
     await expect(page.locator(`#calculators-grid a[href$="calculators/ppf/"]`)).toHaveCount(1);
@@ -489,7 +489,7 @@ test.describe("PPF Calculator in the Investment listing, search and related tool
   test("search finds it by its own names", async ({ page, go, siteRoot }) => {
     for (const q of ["ppf calculator", "public provident fund calculator", "ppf maturity calculator", "ppf interest calculator"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
-      await expect(page.locator(`a[href='${siteRoot}calculators/ppf/']`).first(), q).toBeVisible();
+      await expect(page.locator(`#tools-results a[href='${siteRoot}calculators/ppf/']`).first(), q).toBeVisible();
     }
   });
 

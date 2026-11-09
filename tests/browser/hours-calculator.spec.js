@@ -356,7 +356,7 @@ for (const width of [320, 360, 390]) {
 test.describe("Hours & Timesheet Calculator in Time Tools", () => {
   test("it is listed with the other Time Tools, not with Calculators, and has no related-tools block", async ({ page, go, siteRoot }) => {
     await go("time-tools.html");
-    await expect(page.locator(`a[href$="tools/hours-calculator/"]`)).toHaveCount(1);
+    await expect(page.locator(`.categories-detail__grid a[href$="tools/hours-calculator/"]`)).toHaveCount(1);  // the card grid; the workspace sidebar lists the tool too
     await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(13);
     await go("calculators.html");
     await expect(page.locator(`#calculators-grid a[href*="hours-calculator"]`)).toHaveCount(0);
@@ -373,10 +373,10 @@ test.describe("Hours & Timesheet Calculator in Time Tools", () => {
   test("global search finds it by its own names, and the stopwatch still leads 'elapsed time'", async ({ page, go, siteRoot }) => {
     for (const q of ["hours calculator", "timesheet calculator", "overnight hours calculator", "calculate hours worked"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
-      await expect(page.locator(`a[href='${siteRoot}tools/hours-calculator/']`).first(), q).toBeVisible();
+      await expect(page.locator(`#tools-results a[href='${siteRoot}tools/hours-calculator/']`).first(), q).toBeVisible();
     }
     await go(`tools.html?q=${encodeURIComponent("elapsed time")}`);
-    const hrefs = await page.locator("main a[href*='/tools/']").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
+    const hrefs = await page.locator("#tools-results a[href*='/tools/']").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
     const sw = hrefs.indexOf(`${siteRoot}tools/stopwatch/`);
     const hc = hrefs.indexOf(`${siteRoot}tools/hours-calculator/`);
     expect(sw).toBeGreaterThanOrEqual(0);

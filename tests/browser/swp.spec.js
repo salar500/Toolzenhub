@@ -640,11 +640,17 @@ for (const width of [320, 360, 390]) {
 test.describe("SWP Calculator on a wide screen", () => {
   test.use({ viewport: { width: 1280, height: 900 } });
 
-  test("no overflow, the scenarios side by side, and the headline answer takes the first row @desktop-only", async ({ page, go }) => {
+  test("no overflow, the result beside the inputs with the scenarios stacked in it, and the headline answer takes the first row @desktop-only", async ({ page, go }) => {
     await open(page, go);
     await expectNoHorizontalOverflow(page);
+    // one-screen workspace (2026-11-09): from 1200 px the result is a column beside the form, so the three scenarios stack in it, in order
+    const form = await page.locator(".calculator-section").first().boundingBox();
+    const results = await page.locator("#swp-results").boundingBox();
+    expect(results.x).toBeGreaterThan(form.x + form.width - 1);
     const cards = await page.locator("#swp-results .swp-compare__card").evaluateAll((els) => els.map((e) => { const r = e.getBoundingClientRect(); return { top: Math.round(r.top), left: Math.round(r.left) }; }));
-    expect(new Set(cards.map((c) => c.top)).size).toBe(1); // one row
+    expect(cards).toHaveLength(3);
+    expect(new Set(cards.map((c) => c.left)).size).toBe(1); // one column
+    expect(cards.map((c) => c.top)).toEqual([...cards.map((c) => c.top)].sort((a, b) => a - b));
     const primary = await page.locator("#swp-results .calculator-results__item--primary").evaluate((e) => ({ w: e.getBoundingClientRect().width, grid: e.parentElement.getBoundingClientRect().width }));
     expect(Math.abs(primary.w - primary.grid)).toBeLessThanOrEqual(2);
   });

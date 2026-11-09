@@ -542,7 +542,7 @@ test.describe("Cron Expression Explainer in the Developer Tools section", () => 
   test("global search finds it by its own names", async ({ page, go, siteRoot }) => {
     for (const q of ["cron expression explainer", "explain cron expression", "crontab syntax", "cron next run times"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
-      await expect(page.locator(`a[href='${siteRoot}tools/cron-expression-explainer/']`).first(), q).toBeVisible();
+      await expect(page.locator(`#tools-results a[href='${siteRoot}tools/cron-expression-explainer/']`).first(), q).toBeVisible();
     }
   });
 

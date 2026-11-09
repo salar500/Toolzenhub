@@ -320,7 +320,7 @@ test.describe("JSON Compare in Developer Tools and search", () => {
     await expect(page.locator(`a[href*="json-compare"]`)).toHaveCount(0);
     for (const q of ["json compare", "compare json", "json diff"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
-      await expect(page.locator(`a[href='${siteRoot}tools/json-compare/']`).first(), q).toBeVisible();
+      await expect(page.locator(`#tools-results a[href='${siteRoot}tools/json-compare/']`).first(), q).toBeVisible();
     }
   });
 });

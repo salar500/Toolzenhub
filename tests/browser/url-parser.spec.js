@@ -320,7 +320,7 @@ test.describe("URL Parser & Encoder in Developer Tools and search", () => {
     await expect(page.locator(`a[href*="url-parser"]`)).toHaveCount(0);
     for (const q of ["url parser", "url encode", "percent encoding", "query string"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
-      await expect(page.locator(`a[href='${siteRoot}tools/url-parser/']`).first(), q).toBeVisible();
+      await expect(page.locator(`#tools-results a[href='${siteRoot}tools/url-parser/']`).first(), q).toBeVisible();
     }
   });
 });

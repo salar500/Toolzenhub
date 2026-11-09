@@ -364,7 +364,7 @@ test.describe("JSONPath Tester in Developer Tools and search", () => {
     await expect(page.locator(`a[href*="jsonpath"]`)).toHaveCount(0);
     for (const q of ["jsonpath", "json path", "jsonpath tester"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
-      await expect(page.locator(`a[href='${siteRoot}tools/jsonpath-tester/']`).first(), q).toBeVisible();
+      await expect(page.locator(`#tools-results a[href='${siteRoot}tools/jsonpath-tester/']`).first(), q).toBeVisible();
     }
   });
 });
