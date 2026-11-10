@@ -258,3 +258,9 @@ Published to the preview as `104831f`: the Pages run succeeded, and `/ai-tools.h
 - **Wording fix found in review:** the shared page's paste line said "paste it as the first message" for every tool; a checklist is kept beside the answer instead, so the line is now tool-specific.
 
 Rule change: none.
+
+### Next in the queue (assessed, not started)
+
+- **AI articles (eight in the brief).** Article categories are the Calculators categories (`articleCategories` in `data/articles.js` reads `data/categories.js`), and the slug set is pinned in the listing filter, the link crawl's query allow-list, the search parity tests and the SEO check. An AI article cluster therefore needs an article category of its own first (one bounded change across those places), then the articles, each with a distinct question and a primary tool. Planned as its own batch after the AI Tools have been reviewed on the preview.
+- **Further AI departments** (comparison of two answers, meeting notes to action plan, workflow planner, skill-gap assessment): each needs its own engine; none is a template of the four built.
+- **Design-system and navigation audit** across the seven ecosystems, then the ecosystem-by-ecosystem improvements of the brief.
