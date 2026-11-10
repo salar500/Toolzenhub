@@ -14,6 +14,7 @@
  *   - no live page is an orphan (each is linked from somewhere)
  */
 import { test, expect, livePages, rel, INVENTORY } from "../helpers/test-base.mjs";
+import { RELEASES } from "../../assets/js/practice-labs/shoplite/bugs.js";
 
 const CATEGORY_SLUGS = ["loans", "investment", "tax", "business", "health", "math", "converter"];
 const SOON = ".calculator-card--soon, .category-page-card--soon, .article-card--soon";
@@ -105,7 +106,9 @@ test.describe("rendered link crawl @portable", () => {
             const q = url.searchParams;
             // the World Clock's hand-off to the Time Zone Converter carries the visitor's zone and the board's zones (from, to)
             const handoff = entry === "tools/world-clock/" && relPath === "tools/time-zone-converter/" && q.has("from") && [...q.keys()].every((k) => k === "from" || k === "to");
-            const okQuery = (relPath === "articles.html" && CATEGORY_SLUGS.includes(q.get("category"))) || handoff;
+            // a lesson opens ShopLite in one of its releases (?release=, docs/practice-labs/18-department-specifications.md); only a release that exists
+            const release = relPath === "practice-labs/shoplite/" && [...q.keys()].join() === "release" && Object.hasOwn(RELEASES, q.get("release"));
+            const okQuery = (relPath === "articles.html" && CATEGORY_SLUGS.includes(q.get("category"))) || handoff || release;
             if (!okQuery) failures.push(`${entry}: link "${raw}" has an unexpected query string`);
           }
         }

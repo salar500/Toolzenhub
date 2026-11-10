@@ -172,8 +172,51 @@ Stale tests were corrected along the way (sidebar-duplicate links, D3 as replace
 | Builds | `dist/` and `dist-ghpages/` rebuilt; build-output 17 of 17 |
 | GitHub Pages preview | Serves `7a9d8cd` (changed files fetched from the live preview) |
 
-### Not completed
+### Link crawl, SEO baseline and World Clock (completed later on 2026-11-10)
 
-- **Rendered link crawl** (`links`, every page): it needs more than 10 minutes, so it runs in the background, and the environment's low-memory guard has stopped it before. The static link check (33,387 anchors) passes. A run on 2026-11-10 was stopped by the guard after about 2 minutes (free memory 322 MB), and its leftover processes were ended. **Not verified.**
-- **SEO baseline** (`seo-baseline`): same constraint. Its snapshot also predates the 530 Practice Labs pages and will need a review. `npm run test:static` SEO passes.
-- **Intermittent:** `world-clock` on mobile, at 360 px. In 2 of 3 full runs one test timed out on scrollIntoViewIfNeeded, a different test each time; the third full run passed 87 of 87, and both tests pass 6 of 6 alone. Nothing was changed.
+Each of the two all-page specs runs as one test that takes more than 10 minutes, so it cannot finish in the foreground, and in the background the environment's low-memory guard stops it. They were therefore run in chunks of 190–370 pages (3–8 minutes each, one browser, in the foreground). Each chunk uses a copy of the spec's per-page code, unchanged. A merge step then ran the spec's end checks over all chunks: every distinct target answers 200, no orphans, the SEO must-hold facts, and the snapshot comparison. A first mobile chunk failed only because the laptop slept from 18:00 to 20:41 (Kernel-Power event 42). It was re-run in two smaller chunks.
+
+| Check | Result |
+|---|---|
+| Rendered link crawl, subpath-desktop | 666 entries (662 pages + 4 search/filter variants), 662 distinct targets all 200, no orphans, **0 failures** after the fix below |
+| Rendered link crawl, subpath-mobile | 666 entries, **0 failures** |
+| Rendered link crawl, root-desktop | 666 entries, **0 failures** (no hard-coded `/Toolzenhub`) |
+| SEO baseline (662 pages + the 404 page) | Must-hold facts (expected title, description over 20 characters, an H1) pass on every page after the fix below |
+| `npm run test:static` after the fix | Passes on both builds (33,465 anchors, 663 pages) |
+
+Found and fixed:
+
+| Finding | Kind | Fix |
+|---|---|---|
+| The link crawl rejected `practice-labs/shoplite/?release=r-bugs-1`, linked from 4 Manual Testing lessons | Stale test. `?release=` is the documented ShopLite release switch (`docs/practice-labs/18-department-specifications.md`) | `links.spec.js` accepts a `release` query on links to ShopLite only, and only with a release that exists in ShopLite's `RELEASES`. A typo or unknown release still fails |
+| ShopLite (`/practice-labs/shoplite/`, the one noindex page) had no meta description | Real gap, found by `seo-baseline` | A description in `src/shoplite.njk`. Nothing else on the page changed |
+
+Snapshot reviews (both snapshots predated the 530 Practice Labs pages):
+
+- **Links summary** (`tests/baselines/links/summary-subpath-desktop.json`):
+  - 531 entries added, 0 removed. No new `#` placeholders and no new external hosts.
+  - One recorded fragment: ShopLite's in-app screen `#/requirements`.
+  - Existing pages have more internal links, which come from approved navigation (workspace sidebar, Practice Labs links): +2 on most tool and calculator pages, +4 to +32 on section pages, +70 on All Tools.
+  - Re-recorded after review.
+- **SEO baseline** (`tests/baselines/seo/seo-baseline-subpath-desktop.json`):
+  - 531 entries added, 0 removed.
+  - The 530 indexable Practice Labs pages each have a self-canonical `https://toolzenhub.in/…` URL, Open Graph, JSON-LD and an H1 in the raw HTML. No title or description is duplicated anywhere on the site.
+  - On the 132 existing pages the only change is more visible text in the raw HTML (84 pages, from the statically rendered sidebar and breadcrumb). Titles, descriptions, canonicals, robots, Open Graph, JSON-LD and H1s are unchanged.
+  - Re-recorded after review.
+
+**World Clock phone intermittent: not reproduced, left unchanged.**
+
+- **Failures recorded on 2026-11-10:**
+  - `world-clock.spec.js:1548` at 360 px: "locator.scrollIntoViewIfNeeded: Test timeout of 45000ms exceeded".
+  - Once, `:1638` at 360 px, a test with no scrollIntoViewIfNeeded.
+  - Both happened during full runs while free memory was low.
+- **Investigated:**
+  - The tests take 4–5 s of their 45 s budget: 9 of 9 passed with `--repeat-each 3`.
+  - One suspected cause was a stale list read after typing, since the search render is queued on an animation frame. It was ruled out. With every frame delayed by 1.5 s, the heading and the row counts still matched each new query when measured.
+  - A full mobile run with traces kept on failure passed 87 of 87 (8.0 min).
+- **Next step if it recurs:** read the kept trace. Nothing in the product or the test was changed.
+
+### Open
+
+- The growth-manifest unit guard fails off `main` by design (finding #11).
+- Production (Hostinger, `toolzenhub.in`) is not deployed; it needs separate owner authorisation.
