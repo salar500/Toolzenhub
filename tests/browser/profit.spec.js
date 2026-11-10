@@ -23,7 +23,7 @@ async function open(page, go) {
   await go("calculators/profit/");
   await page.locator("#profit-results .calculator-results__value").first().waitFor();
 }
-const rows = (page) => page.locator("#profit-results .calculator-results__table-wrapper tbody tr");
+const rows = (page) => page.locator("#profit-wide .calculator-results__table-wrapper tbody tr");
 const cells = async (row) => row.locator("th, td").allInnerTexts();
 const summary = (page) => page.locator("#profit-results .calculator-results__summary");
 const targetCard = (page) => page.locator("#profit-target-card").locator("xpath=ancestor::section[1]");
@@ -210,10 +210,10 @@ test.describe("Profit Calculator", () => {
       ["Fixed costs +10%", "₹55,000.00", "₹25,000.00", "-₹5,000.00", "275 units"],
     ];
     for (let i = 0; i < 9; i++) expect(await cells(rows(page).nth(i))).toEqual(expected[i]);
-    const headers = await page.locator("#profit-results table thead th").allInnerTexts();
+    const headers = await page.locator("#profit-wide table thead th").allInnerTexts();
     expect(headers).toEqual(["What changes", "New value", "Profit", "Change in profit", "Break-even units"]);
-    await expect(page.locator("#profit-results")).toContainText("a 10% change in selling price moves the profit the most, by ₹32,000.00");
-    const text = await page.locator("#profit-results").innerText();
+    await expect(page.locator("#profit-wide")).toContainText("a 10% change in selling price moves the profit the most, by ₹32,000.00");
+    const text = await page.locator("#profit-wide").innerText(); // the what-if note sits with its table
     expect(text).toContain("It shows what the numbers would do, not what will happen");
   });
 
@@ -227,12 +227,12 @@ test.describe("Profit Calculator", () => {
 
   test("what-if table is semantic and accessible; there is no chart", async ({ page, go }) => {
     await open(page, go);
-    const table = page.locator("#profit-results table");
+    const table = page.locator("#profit-wide table");
     await expect(table).toHaveCount(1);
     await expect(table.locator("caption")).toHaveCount(1);
     await expect(table.locator("thead th[scope='col']")).toHaveCount(5);
     await expect(table.locator("tbody th[scope='row']")).toHaveCount(9);
-    const region = page.locator("#profit-results .calculator-results__table-wrapper");
+    const region = page.locator("#profit-wide .calculator-results__table-wrapper");
     await expect(region).toHaveAttribute("role", "region");
     await expect(region).toHaveAttribute("tabindex", "0");
     await expect(region).toHaveAttribute("aria-label", /what changes/i);
@@ -249,7 +249,7 @@ test.describe("Profit Calculator", () => {
     await expect(price).toHaveAttribute("aria-invalid", "true");
     await expect(price).toHaveAttribute("aria-describedby", /profit-results-error/);
     await expect(page.locator("#profit-results .calculator-results__value")).toHaveCount(0); // no stale numbers
-    await expect(page.locator("#profit-results table")).toHaveCount(0);
+    await expect(page.locator("#profit-wide table")).toHaveCount(0);
     await price.fill("800");
     await expect(error).toHaveCount(0);
     await expect(price).not.toHaveAttribute("aria-invalid", "true");

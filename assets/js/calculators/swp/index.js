@@ -26,6 +26,13 @@
 ========================================================= */
 
 import {
+    WIDE,
+    splitWide,
+    wideSection,
+    showWide
+} from "../common/wide-results.js";
+
+import {
     calculateSwp,
     validateSwpInputs,
     SWP_LIMITS
@@ -591,9 +598,8 @@ function renderResults(
 
                 ${scenariosSection(result)}
 
-                ${yearlyTable(result)}
-
             </div>
+            ${WIDE}${yearlyTable(result)}
         `;
 
 }
@@ -944,6 +950,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE)}
             </section>
+${wideSection("swp-wide", "Year by year")}
 
             <p
                 id="swp-live"
@@ -1233,6 +1240,23 @@ export function init() {
     const results =
         document.querySelector("#swp-results");
 
+    // the wide tables, in their own full-width section (common/wide-results.js)
+    const wide =
+        document.querySelector("#swp-wide");
+
+    const setResult = html => {
+        const [main, extra] = splitWide(html);
+        results.innerHTML = main;
+        showWide(wide, extra);
+    };
+
+    const find = selector => results.querySelector(selector) ?? wide?.querySelector(selector);
+
+    const onResults = (...args) => {
+        results.addEventListener(...args);
+        wide?.addEventListener(...args);
+    };
+
     const live =
         document.querySelector("#swp-live");
 
@@ -1337,8 +1361,8 @@ export function init() {
             )
         ) {
 
-            results.innerHTML =
-                resultEmpty(EMPTY_MESSAGE);
+            setResult(
+                resultEmpty(EMPTY_MESSAGE));
 
             if (speak) {
                 announce("");
@@ -1356,8 +1380,8 @@ export function init() {
 
         if (check.ok && !infl.ok) {
             setFieldsInvalid([inputs.inflation], ERROR_ID);
-            results.innerHTML =
-                resultError(infl.message, { id: ERROR_ID });
+            setResult(
+                resultError(infl.message, { id: ERROR_ID }));
             if (speak) {
                 announce(infl.message);
             }
@@ -1386,11 +1410,11 @@ export function init() {
                     .map(error => error.message)
                     .join(" ");
 
-            results.innerHTML =
+            setResult(
                 resultError(
                     message,
                     { id: ERROR_ID }
-                );
+                ));
 
             if (speak) {
                 announce(message);
@@ -1403,8 +1427,8 @@ export function init() {
         const result =
             calculateSwp(check.values);
 
-        results.innerHTML =
-            renderResults(result, infl.value);
+        setResult(
+            renderResults(result, infl.value));
 
         if (speak) {
             announce(liveSummary(result, infl.value));

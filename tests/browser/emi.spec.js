@@ -272,7 +272,7 @@ test.describe("EMI calculator", () => {
 
   test("schedule: yearly summary, lazily built monthly table, totals and final balance", async ({ page, go }) => {
     await go("calculators/emi/");
-    const years = page.locator("#emi-results .emi-schedule table").first();
+    const years = page.locator("#emi-wide .emi-schedule table").first(); // the schedule has its own full-width section (common/wide-results.js)
     await expect(years.locator("tbody tr")).toHaveCount(20);
     await expect(years.locator("thead th").first()).toHaveAttribute("scope", "col");
     await expect(years.locator("tbody tr").nth(0)).toContainText("₹9,80,097.71"); // reference: balance after 12 payments

@@ -28,7 +28,7 @@ async function open(page, go) {
   await go("calculators/margin/");
   await page.locator("#margin-results .calculator-results__value").first().waitFor();
 }
-const rows = (page) => page.locator("#margin-results .calculator-results__table-wrapper tbody tr");
+const rows = (page) => page.locator("#margin-wide .calculator-results__table-wrapper tbody tr");
 const cells = async (row) => row.locator("th, td").allInnerTexts();
 // the words the tool must never use about a result
 const BANNED = /\b(good|healthy|ideal|standard|industry)\s+margin|recommended price|expected sales|best pricing|predicted sales/i;
@@ -189,32 +189,32 @@ test.describe("Margin Calculator", () => {
       ["+10%", "₹660.00", "17.50%", "₹880.00", "+10.00%"],
     ];
     for (let i = 0; i < 5; i++) expect(await cells(rows(page).nth(i))).toEqual(expected[i]);
-    const headers = await page.locator("#margin-results table thead th").allInnerTexts();
+    const headers = await page.locator("#margin-wide table thead th").allInnerTexts();
     expect(headers).toEqual(["Cost change", "New cost", "Margin at your price", "Price to keep your margin", "Change in price"]);
   });
 
   test("cost-change table is semantic and accessible", async ({ page, go }) => {
     await open(page, go);
-    const table = page.locator("#margin-results table");
+    const table = page.locator("#margin-wide table");
     await expect(table.locator("caption")).toHaveCount(1);
     await expect(table.locator("thead th[scope='col']")).toHaveCount(5);
     await expect(table.locator("tbody th[scope='row']")).toHaveCount(5);
-    const region = page.locator("#margin-results .calculator-results__table-wrapper");
+    const region = page.locator("#margin-wide .calculator-results__table-wrapper");
     await expect(region).toHaveAttribute("role", "region");
     await expect(region).toHaveAttribute("tabindex", "0");
     await expect(region).toHaveAttribute("aria-label", /cost changes/i);
-    await expect(page.locator("#margin-results table")).toHaveCount(1); // one table, no chart, no second view
+    await expect(page.locator("#margin-wide table")).toHaveCount(1); // one table, no chart, no second view
     await expect(page.locator("#margin-results svg")).toHaveCount(0);
   });
 
   test("with a loss the table gives the price that covers the new cost, not a margin to keep", async ({ page, go }) => {
     await open(page, go);
     await fill(page, { cost: 800, price: 700 });
-    const headers = await page.locator("#margin-results table thead th").allInnerTexts();
+    const headers = await page.locator("#margin-wide table thead th").allInnerTexts();
     expect(headers[3]).toBe("Price to cover the new cost");
     expect(await cells(rows(page).nth(0))).toEqual(["-10%", "₹720.00", "-2.86%", "₹720.00", "+2.86%"]);
     expect(await cells(rows(page).nth(4))).toEqual(["+10%", "₹880.00", "-25.71%", "₹880.00", "+25.71%"]);
-    await expect(page.locator("#margin-results")).toContainText("no margin to keep");
+    await expect(page.locator("#margin-wide")).toContainText("no margin to keep");
   });
 
   test("discount: hidden until entered; 10% off needs about 1.67 times the sales", async ({ page, go }) => {
@@ -227,7 +227,7 @@ test.describe("Margin Calculator", () => {
     await expect(card).toContainText("₹120.00");
     await expect(card).toContainText("16.67%");
     await expect(card).toContainText("1.67 times");
-    const text = await page.locator("#margin-results").innerText();
+    const text = await page.locator("#margin-wide").innerText(); // the discount section follows the cost table
     expect(text).toContain("break-even on volume, not a forecast of sales");
     expect(text).toContain("67% more units");
     await fill(page, { discount: 20 });
@@ -244,7 +244,7 @@ test.describe("Margin Calculator", () => {
       await fill(page, { discount });
       const card = page.locator("#margin-discount-card").locator("xpath=ancestor::section[1]");
       await expect(card).toContainText("No finite number");
-      await expect(page.locator("#margin-results")).toContainText("no number of extra sales");
+      await expect(page.locator("#margin-wide")).toContainText("no number of extra sales");
       await expect(card).not.toContainText(/times/);
     }
   });
@@ -252,7 +252,7 @@ test.describe("Margin Calculator", () => {
   test("a discount on a price at or below cost shows no multiple", async ({ page, go }) => {
     await open(page, go);
     await fill(page, { cost: 800, price: 700, discount: 5 });
-    await expect(page.locator("#margin-results")).toContainText("already at or below your cost");
+    await expect(page.locator("#margin-wide")).toContainText("already at or below your cost");
     await expect(page.locator("#margin-discount-card").locator("xpath=ancestor::section[1]")).not.toContainText(/\d times/);
   });
 
@@ -266,7 +266,7 @@ test.describe("Margin Calculator", () => {
     await expect(cost).toHaveAttribute("aria-invalid", "true");
     await expect(cost).toHaveAttribute("aria-describedby", /margin-results-error/);
     await expect(page.locator("#margin-results .calculator-results__value")).toHaveCount(0);
-    await expect(page.locator("#margin-results table")).toHaveCount(0);
+    await expect(page.locator("#margin-wide table")).toHaveCount(0);
 
     await cost.fill("600");
     await expect(error).toHaveCount(0);

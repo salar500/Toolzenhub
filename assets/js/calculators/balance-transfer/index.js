@@ -20,6 +20,13 @@
 ========================================================= */
 
 import {
+    WIDE,
+    splitWide,
+    wideSection,
+    showWide
+} from "../common/wide-results.js";
+
+import {
     calculateBalanceTransfer,
     validateBalanceTransferInputs,
     BALANCE_TRANSFER_LIMITS
@@ -596,8 +603,6 @@ function renderResults(
 
                 ${sameLine}
 
-                ${yearlyTable(result)}
-
                 <div class="bt-actions">
 
                     <button
@@ -611,6 +616,7 @@ function renderResults(
                 </div>
 
             </div>
+            ${WIDE}${yearlyTable(result)}
         `;
 
 }
@@ -906,6 +912,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE)}
             </section>
+${wideSection("bt-wide", "Year by year")}
 
             <p
                 id="bt-live"
@@ -1230,6 +1237,23 @@ export function init() {
     const results =
         document.querySelector("#bt-results");
 
+    // the wide tables, in their own full-width section (common/wide-results.js)
+    const wide =
+        document.querySelector("#bt-wide");
+
+    const setResult = html => {
+        const [main, extra] = splitWide(html);
+        results.innerHTML = main;
+        showWide(wide, extra);
+    };
+
+    const find = selector => results.querySelector(selector) ?? wide?.querySelector(selector);
+
+    const onResults = (...args) => {
+        results.addEventListener(...args);
+        wide?.addEventListener(...args);
+    };
+
     const live =
         document.querySelector("#bt-live");
 
@@ -1314,8 +1338,8 @@ export function init() {
             )
         ) {
 
-            results.innerHTML =
-                resultEmpty(EMPTY_MESSAGE);
+            setResult(
+                resultEmpty(EMPTY_MESSAGE));
 
             if (speak) {
                 announce("");
@@ -1351,11 +1375,11 @@ export function init() {
                     .map(error => error.message)
                     .join(" ");
 
-            results.innerHTML =
+            setResult(
                 resultError(
                     message,
                     { id: ERROR_ID }
-                );
+                ));
 
             if (speak) {
                 announce(message);
@@ -1368,8 +1392,8 @@ export function init() {
         const result =
             calculateBalanceTransfer(check.values);
 
-        results.innerHTML =
-            renderResults(result);
+        setResult(
+            renderResults(result));
 
         if (speak) {
             announce(liveSummary(result));
@@ -1413,7 +1437,7 @@ export function init() {
         }
     );
 
-    results.addEventListener(
+    onResults(
         "click",
         event => {
 

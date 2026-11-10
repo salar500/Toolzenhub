@@ -97,6 +97,14 @@ visualization or table, explanation, examples, related content. **No tool must u
 empty zone is never rendered.** The shared tool page owns only the breadcrumb (first) and the related
 sections (last); everything between is the tool's own markup.
 
+**Calculator desktop workspace (owner, 2026-11-09 and 2026-11-10).** From 1200 px a calculator shows its input
+area and its primary result side by side (`calculator-results.css`). Text is not shrunk to make this fit. Any
+table too wide for the result column must not hide columns behind a sideways scroll there. Instead the calculator
+puts it after the `WIDE` marker in its result markup (`calculators/common/wide-results.js`), and it appears in a
+full-width section (`.calculator-wide`) under the inputs and the result. Below 1200 px that section follows the
+result, so the reading order is the same. `tests/browser/calculator-wide-tables.spec.js` checks every calculator
+at 1280 x 800.
+
 ## Accessibility requirements
 
 Every shared primitive, and every tool built on them, keeps these:

@@ -27,7 +27,7 @@ async function open(page, go) {
 // sentences that use "guarantee" without denying it ("not guaranteed", "not a guarantee")
 const unqualifiedGuarantees = (text) =>
   text.split(/(?<=[.!?])\s+/).filter((sentence) => /guarantee/i.test(sentence) && !/\b(not|no|nor|never)\b/i.test(sentence));
-const rows = (page) => page.locator("#sip-results .calculator-results__table-wrapper tbody tr");
+const rows = (page) => page.locator("#sip-wide .calculator-results__table-wrapper tbody tr");
 
 test.describe("SIP Calculator", () => {
   test("page, breadcrumb, form shell and the default projection", async ({ page, go, watch, siteRoot }) => {
@@ -186,7 +186,7 @@ test.describe("SIP Calculator", () => {
 
   test("year-by-year table: semantic, reconciles with the result", async ({ page, go }) => {
     await open(page, go);
-    const wrapper = page.locator("#sip-results .calculator-results__table-wrapper");
+    const wrapper = page.locator("#sip-wide .calculator-results__table-wrapper");
     await expect(wrapper).toHaveAttribute("role", "region");
     await expect(wrapper).toHaveAttribute("tabindex", "0");
     await expect(wrapper).toHaveAttribute("aria-label", /Year by year/);
@@ -325,7 +325,7 @@ test.describe("SIP Calculator", () => {
     await expect(page.locator(".sip-note--trust")).toBeVisible();
     await expect(page.locator(".sip-compare__card")).toHaveCount(4); // three scenarios and the target
     await expect(page.locator("svg.sip-chart")).toBeVisible();
-    await expect(page.locator("#sip-results tbody tr").first()).toBeVisible();
+    await expect(page.locator("#sip-wide tbody tr").first()).toBeVisible();
     await page.emulateMedia({ media: "screen" });
     await expect(page.locator(".sip-print-brand")).toBeHidden();
   });

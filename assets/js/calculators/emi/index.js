@@ -77,6 +77,13 @@ import {
     SITE_ROOT
 } from "../../routes.js";
 
+import {
+    WIDE,
+    splitWide,
+    wideSection,
+    showWide
+} from "../common/wide-results.js";
+
 
 /* =========================================================
    IDENTITY
@@ -438,6 +445,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE[DEFAULTS.mode])}
             </section>
+${wideSection("emi-wide", "Repayment schedule")}
 
             <p
                 id="emi-live"
@@ -661,9 +669,8 @@ ${rows && rows.length ? `                    <button
 
                 ${nextSteps()}
 
-                ${schedule}
-
             </div>
+            ${schedule ? WIDE + schedule : ""}
         `;
 
 }
@@ -950,6 +957,12 @@ export function init() {
     const results =
         document.querySelector("#emi-results");
 
+    // the repayment schedule, in its own full-width section (common/wide-results.js)
+    const wide =
+        document.querySelector("#emi-wide");
+
+    const find = selector => results.querySelector(selector) ?? wide?.querySelector(selector);
+
     const live =
         document.querySelector("#emi-live");
 
@@ -1075,9 +1088,12 @@ export function init() {
 
         shownHtml = html;
         monthlyRows = rows;
-        results.innerHTML = html;
+        const [main, extra] = splitWide(html);
 
-        const details = results.querySelector("#emi-monthly");
+        results.innerHTML = main;
+        showWide(wide, extra);
+
+        const details = find("#emi-monthly");
 
         if (details && monthlyOpen) {
             details.open = true;
@@ -1156,7 +1172,7 @@ export function init() {
     /* the monthly table is built when it is first opened, not on every keystroke */
     function fillMonthly() {
 
-        const body = results.querySelector("#emi-monthly-body");
+        const body = find("#emi-monthly-body");
 
         if (body && !body.firstChild) {
             body.innerHTML = monthlyRowsMarkup(monthlyRows);
@@ -1308,18 +1324,20 @@ export function init() {
         }
     );
 
-    results.addEventListener(
-        "toggle",
-        event => {
-            if (event.target.id === "emi-monthly") {
-                monthlyOpen = event.target.open;
-                if (monthlyOpen) {
-                    fillMonthly();
+    for (const area of [results, wide]) {
+        area?.addEventListener(
+            "toggle",
+            event => {
+                if (event.target.id === "emi-monthly") {
+                    monthlyOpen = event.target.open;
+                    if (monthlyOpen) {
+                        fillMonthly();
+                    }
                 }
-            }
-        },
-        true
-    );
+            },
+            true
+        );
+    }
 
     resetButton?.addEventListener(
         "click",

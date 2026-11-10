@@ -17,7 +17,7 @@ const metric = (page, label) =>
 const card = (page, title) => page.locator(`#swp-results .swp-compare__card:has(.swp-compare__title:text-is("${title}"))`);
 const mode = (page, name) => page.getByRole("radio", { name });
 const frequency = (page, name) => page.getByRole("radio", { name, exact: true });
-const rows = (page) => page.locator("#swp-results .calculator-results__table-wrapper tbody tr");
+const rows = (page) => page.locator("#swp-wide .calculator-results__table-wrapper tbody tr");
 const summary = (page) => page.locator("#swp-results .calculator-results__summary");
 
 const A = "How long will my corpus last?";
@@ -85,13 +85,13 @@ test.describe("SWP Calculator", () => {
 
   test("Mode A: the year table has four columns, one row a year, and marks the year the corpus is used up", async ({ page, go }) => {
     await open(page, go);
-    const table = page.locator("#swp-results table");
+    const table = page.locator("#swp-wide table");
     await expect(table.locator("thead th")).toHaveText(["Year", "Withdrawals", "Estimated growth", "Closing balance"]);
     await expect(table.locator("thead th").first()).toHaveAttribute("scope", "col");
     await expect(table.locator("tbody th").first()).toHaveAttribute("scope", "row");
     await expect(table.locator("caption")).toContainText("Year by year: withdrawals, estimated growth and closing balance"); // the table's accessible name
     await expect(page.locator("#swp-table-note")).toContainText("Closing balance = the previous closing balance − withdrawals + estimated growth"); // the visible context, linked to the region
-    await expect(page.locator("#swp-results .calculator-results__table-wrapper")).toHaveAttribute("aria-describedby", "swp-table-note");
+    await expect(page.locator("#swp-wide .calculator-results__table-wrapper")).toHaveAttribute("aria-describedby", "swp-table-note");
     await expect(rows(page)).toHaveCount(21);
     await expect(rows(page).first()).toContainText("Year 1");
     await expect(rows(page).first()).toContainText("₹9,60,000");
@@ -102,12 +102,12 @@ test.describe("SWP Calculator", () => {
     await expect(rows(page).last()).toContainText("₹23,911");
     await expect(rows(page).last().locator("td").last()).toHaveText("₹0");
     // the region is labelled and reachable by keyboard; no chart and no monthly table
-    const region = page.locator("#swp-results .calculator-results__table-wrapper");
+    const region = page.locator("#swp-wide .calculator-results__table-wrapper");
     await expect(region).toHaveAttribute("role", "region");
     await expect(region).toHaveAttribute("tabindex", "0");
     await expect(region).toHaveAttribute("aria-label", /year by year/i);
     await expect(page.locator("#swp-results svg")).toHaveCount(0);
-    await expect(page.locator("#swp-results table")).toHaveCount(1);
+    await expect(page.locator("#swp-wide table")).toHaveCount(1);
   });
 
   test("Mode A: a corpus that is not used up in 50 years says so and shows 50 rows", async ({ page, go }) => {
@@ -618,7 +618,7 @@ for (const width of [320, 360, 390]) {
       await fill(page, { corpus: 1000000000, withdrawal: 100, annualReturn: 30 }); // 50 rows of the biggest figures
       await expect(rows(page)).toHaveCount(50);
       const geometry = await page.evaluate(() => {
-        const region = document.querySelector("#swp-results .calculator-results__table-wrapper");
+        const region = document.querySelector("#swp-wide .calculator-results__table-wrapper");
         const r = region.getBoundingClientRect();
         return { regionRight: r.right, viewport: window.innerWidth, scrollWidth: region.scrollWidth, clientWidth: region.clientWidth, page: document.documentElement.scrollWidth, overflowX: getComputedStyle(region).overflowX };
       });
@@ -627,9 +627,9 @@ for (const width of [320, 360, 390]) {
       expect(geometry.page).toBeLessThanOrEqual(geometry.viewport + 1);
       // if the table is wider than the region it scrolls there, and the first column stays in view
       if (geometry.scrollWidth > geometry.clientWidth) {
-        await page.locator("#swp-results .calculator-results__table-wrapper").evaluate((el) => { el.scrollLeft = 200; });
-        const sticky = await page.locator("#swp-results tbody th").first().evaluate((th) => th.getBoundingClientRect().left);
-        const regionLeft = await page.locator("#swp-results .calculator-results__table-wrapper").evaluate((el) => el.getBoundingClientRect().left);
+        await page.locator("#swp-wide .calculator-results__table-wrapper").evaluate((el) => { el.scrollLeft = 200; });
+        const sticky = await page.locator("#swp-wide tbody th").first().evaluate((th) => th.getBoundingClientRect().left);
+        const regionLeft = await page.locator("#swp-wide .calculator-results__table-wrapper").evaluate((el) => el.getBoundingClientRect().left);
         expect(Math.abs(sticky - regionLeft)).toBeLessThanOrEqual(2);
       }
       await expectNoHorizontalOverflow(page);

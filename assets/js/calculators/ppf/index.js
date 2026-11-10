@@ -29,6 +29,13 @@
 ========================================================= */
 
 import {
+    WIDE,
+    splitWide,
+    wideSection,
+    showWide
+} from "../common/wide-results.js";
+
+import {
     PPF_LIMITS,
     PPF_PATTERNS,
     validatePpfInputs,
@@ -296,9 +303,8 @@ function renderResults(values, result) {
 
                 ${comparisonBlock(values, comparison, years)}
 
-                ${tableBlock(display)}
-
             </div>
+            ${WIDE}${tableBlock(display)}
         `;
 
 }
@@ -521,6 +527,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE)}
             </section>
+${wideSection("ppf-wide", "Year by year")}
 
             <!-- the assumptions, always beside the result -->
 
@@ -802,6 +809,23 @@ export function init() {
 
     const form = document.querySelector("#ppf-form");
     const results = document.querySelector("#ppf-results");
+
+    // the wide tables, in their own full-width section (common/wide-results.js)
+    const wide =
+        document.querySelector("#ppf-wide");
+
+    const setResult = html => {
+        const [main, extra] = splitWide(html);
+        results.innerHTML = main;
+        showWide(wide, extra);
+    };
+
+    const find = selector => results.querySelector(selector) ?? wide?.querySelector(selector);
+
+    const onResults = (...args) => {
+        results.addEventListener(...args);
+        wide?.addEventListener(...args);
+    };
     const live = document.querySelector("#ppf-live");
     const yearlyGroup = document.querySelector("#ppf-yearly-group");
     const monthlyGroup = document.querySelector("#ppf-monthly-group");
@@ -856,14 +880,14 @@ export function init() {
             return;
         }
         shownHtml = html;
-        results.innerHTML = html;
+        setResult( html);
         const details = document.querySelector("#ppf-table-details");
         if (details) {
             details.open = tableOpen ?? window.matchMedia("(min-width: 700px)").matches;
         }
     }
 
-    results.addEventListener(
+    onResults(
         "toggle",
         (event) => {
             if (event.target.id === "ppf-table-details") {

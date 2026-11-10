@@ -18,6 +18,13 @@
 ========================================================= */
 
 import {
+    WIDE,
+    splitWide,
+    wideSection,
+    showWide
+} from "../common/wide-results.js";
+
+import {
     calculatePrepayment,
     buildSchedule,
     summarizeByYear,
@@ -669,9 +676,8 @@ function renderResults(
                     ${cards.join("")}
                 </div>
 
-                ${scheduleSection(result)}
-
             </div>
+            ${WIDE}${scheduleSection(result)}
         `;
 
 }
@@ -922,6 +928,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE)}
             </section>
+${wideSection("prepay-wide", "Repayment schedule")}
 
             <p
                 id="prepay-live"
@@ -1181,6 +1188,23 @@ export function init() {
     const results =
         document.querySelector("#prepay-results");
 
+    // the wide tables, in their own full-width section (common/wide-results.js)
+    const wide =
+        document.querySelector("#prepay-wide");
+
+    const setResult = html => {
+        const [main, extra] = splitWide(html);
+        results.innerHTML = main;
+        showWide(wide, extra);
+    };
+
+    const find = selector => results.querySelector(selector) ?? wide?.querySelector(selector);
+
+    const onResults = (...args) => {
+        results.addEventListener(...args);
+        wide?.addEventListener(...args);
+    };
+
     const live =
         document.querySelector("#prepay-live");
 
@@ -1264,8 +1288,8 @@ export function init() {
 
             shown = null;
 
-            results.innerHTML =
-                resultEmpty(EMPTY_MESSAGE);
+            setResult(
+                resultEmpty(EMPTY_MESSAGE));
 
             if (speak) {
                 announce("");
@@ -1303,11 +1327,11 @@ export function init() {
 
             shown = null;
 
-            results.innerHTML =
+            setResult(
                 resultError(
                     message,
                     { id: ERROR_ID }
-                );
+                ));
 
             if (speak) {
                 announce(message);
@@ -1329,8 +1353,8 @@ export function init() {
 
         shown = result;
 
-        results.innerHTML =
-            renderResults(result);
+        setResult(
+            renderResults(result));
 
         if (speak) {
             announce(liveSummary(result));
@@ -1354,7 +1378,7 @@ export function init() {
     ) {
 
         const target =
-            results.querySelector("#prepay-schedule-view");
+            find("#prepay-schedule-view");
 
         if (!shown || !target) {
             return;
@@ -1364,12 +1388,12 @@ export function init() {
             scheduleView(shown);
 
         if (focusSelector) {
-            results.querySelector(focusSelector)?.focus();
+            find(focusSelector)?.focus();
         }
 
     }
 
-    results.addEventListener(
+    onResults(
         "change",
         event => {
 
@@ -1384,7 +1408,7 @@ export function init() {
         }
     );
 
-    results.addEventListener(
+    onResults(
         "click",
         event => {
 

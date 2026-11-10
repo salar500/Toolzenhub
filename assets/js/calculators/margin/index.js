@@ -25,6 +25,13 @@
 ========================================================= */
 
 import {
+    WIDE,
+    splitWide,
+    wideSection,
+    showWide
+} from "../common/wide-results.js";
+
+import {
     calculateMargin,
     validateMarginInputs,
     MARGIN_LIMITS
@@ -443,11 +450,10 @@ function renderResults(
                     GST. This is a calculation, not pricing advice.
                 </div>
 
-                ${costTable(result)}
+            </div>
+            ${WIDE}${costTable(result)}
 
                 ${discountSection(result)}
-
-            </div>
         `;
 
 }
@@ -718,6 +724,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE)}
             </section>
+${wideSection("margin-wide", "Costs and discounts")}
 
             <p
                 id="margin-live"
@@ -999,6 +1006,23 @@ export function init() {
     const results =
         document.querySelector("#margin-results");
 
+    // the wide tables, in their own full-width section (common/wide-results.js)
+    const wide =
+        document.querySelector("#margin-wide");
+
+    const setResult = html => {
+        const [main, extra] = splitWide(html);
+        results.innerHTML = main;
+        showWide(wide, extra);
+    };
+
+    const find = selector => results.querySelector(selector) ?? wide?.querySelector(selector);
+
+    const onResults = (...args) => {
+        results.addEventListener(...args);
+        wide?.addEventListener(...args);
+    };
+
     const live =
         document.querySelector("#margin-live");
 
@@ -1101,8 +1125,8 @@ export function init() {
 
             lastResult = null;
 
-            results.innerHTML =
-                resultEmpty(EMPTY_MESSAGE);
+            setResult(
+                resultEmpty(EMPTY_MESSAGE));
 
             if (speak) {
                 announce("");
@@ -1146,11 +1170,11 @@ export function init() {
                     .map(error => error.message)
                     .join(" ");
 
-            results.innerHTML =
+            setResult(
                 resultError(
                     message,
                     { id: ERROR_ID }
-                );
+                ));
 
             if (speak) {
                 announce(message);
@@ -1166,8 +1190,8 @@ export function init() {
         lastResult =
             result;
 
-        results.innerHTML =
-            renderResults(result);
+        setResult(
+            renderResults(result));
 
         if (speak) {
             announce(liveSummary(result));

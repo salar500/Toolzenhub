@@ -26,6 +26,13 @@
 ========================================================= */
 
 import {
+    WIDE,
+    splitWide,
+    wideSection,
+    showWide
+} from "../common/wide-results.js";
+
+import {
     calculateHomeLoan,
     validateHomeLoanInputs,
     HOME_LOAN_LIMITS
@@ -391,9 +398,8 @@ function renderResults(
 
                 ${ownFundsSection(result)}
 
-                ${tenureTable(result)}
-
             </div>
+            ${WIDE}${tenureTable(result)}
         `;
 
 }
@@ -610,6 +616,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE)}
             </section>
+${wideSection("home-loan-wide", "What the same EMI room borrows over other tenures")}
 
             <p
                 id="home-loan-live"
@@ -874,6 +881,16 @@ export function init() {
     const results =
         document.querySelector("#home-loan-results");
 
+    // the wide tables, in their own full-width section (common/wide-results.js)
+    const wide =
+        document.querySelector("#home-loan-wide");
+
+    const setResult = html => {
+        const [main, extra] = splitWide(html);
+        results.innerHTML = main;
+        showWide(wide, extra);
+    };
+
     const live =
         document.querySelector("#home-loan-live");
 
@@ -959,8 +976,8 @@ export function init() {
 
             shown = null;
 
-            results.innerHTML =
-                resultEmpty(EMPTY_MESSAGE);
+            setResult(
+                resultEmpty(EMPTY_MESSAGE));
 
             if (speak) {
                 announce("");
@@ -998,11 +1015,11 @@ export function init() {
 
             shown = null;
 
-            results.innerHTML =
+            setResult(
                 resultError(
                     message,
                     { id: ERROR_ID }
-                );
+                ));
 
             if (speak) {
                 announce(message);
@@ -1017,8 +1034,8 @@ export function init() {
 
         shown = result;
 
-        results.innerHTML =
-            renderResults(result);
+        setResult(
+            renderResults(result));
 
         if (speak) {
             announce(liveSummary(result));

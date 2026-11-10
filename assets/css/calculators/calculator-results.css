@@ -555,3 +555,47 @@
     }
 
 }
+
+
+/* =========================================================
+   WIDE RESULT TABLES (calculators/common/wide-results.js)
+
+   Schedules and year-by-year tables have their own full-width section after the result. In the side-by-side layout above,
+   it spans both columns under the form and the result, so no column of a table is hidden (owner decision, 2026-11-10).
+========================================================= */
+
+.calculator-wide {
+
+    width: 100%;
+    margin-top: 24px;
+
+    box-sizing: border-box;
+
+}
+
+.calculator-wide[hidden] {
+
+    display: none;
+
+}
+
+/* the first block opened a new part of the summary card (a rule and space above it); in its own card it starts at the top */
+.calculator-wide .calculator-results__card > :first-child {
+
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+
+}
+
+@media print {
+
+    /* printed like the summary card above it: plain, no shadow */
+    .calculator-wide .calculator-results__card {
+
+        background: #ffffff;
+        box-shadow: none;
+
+    }
+
+}

@@ -23,7 +23,7 @@ async function open(page, go) {
   await go("calculators/home-loan/");
   await page.locator("#home-loan-results .calculator-results__value").first().waitFor();
 }
-const rows = (page) => page.locator("#home-loan-results .calculator-results__table-wrapper tbody tr");
+const rows = (page) => page.locator("#home-loan-wide .calculator-results__table-wrapper tbody tr");
 const cells = async (row) => row.locator("th, td").allInnerTexts();
 const summary = (page) => page.locator("#home-loan-results .calculator-results__summary");
 // words the page must never use about a result or a lender
@@ -173,9 +173,9 @@ test.describe("Home Loan Calculator", () => {
       ["30 years", "₹39,01,609", "₹68,98,390.16", "₹1,07,99,999.16"],
     ];
     for (let i = 0; i < 5; i++) expect(await cells(rows(page).nth(i))).toEqual(expected[i]);
-    const headers = await page.locator("#home-loan-results table thead th").allInnerTexts();
+    const headers = await page.locator("#home-loan-wide table thead th").allInnerTexts();
     expect(headers).toEqual(["Tenure", "Loan that fits", "Total interest", "Total repayment"]);
-    const text = await page.locator("#home-loan-results").innerText();
+    const text = await page.locator("#home-loan-wide").innerText(); // the sentence sits with the tenure table
     expect(text).toContain("a longer tenure can raise the loan that fits while raising the total interest");
     expect(text).toContain("it does not say which tenure to choose");
     expect(text).toContain("the loan that fits changes by 61.25% and the total interest by 484.43%"); // 10 to 30 years
@@ -194,12 +194,12 @@ test.describe("Home Loan Calculator", () => {
 
   test("the tenure table is semantic and accessible; there is no chart", async ({ page, go }) => {
     await open(page, go);
-    const table = page.locator("#home-loan-results table");
+    const table = page.locator("#home-loan-wide table");
     await expect(table).toHaveCount(1);
     await expect(table.locator("caption")).toHaveCount(1);
     await expect(table.locator("thead th[scope='col']")).toHaveCount(4);
     await expect(table.locator("tbody th[scope='row']")).toHaveCount(5);
-    const region = page.locator("#home-loan-results .calculator-results__table-wrapper");
+    const region = page.locator("#home-loan-wide .calculator-results__table-wrapper");
     await expect(region).toHaveAttribute("role", "region");
     await expect(region).toHaveAttribute("tabindex", "0");
     await expect(region).toHaveAttribute("aria-label", /other tenures/i);
@@ -216,7 +216,7 @@ test.describe("Home Loan Calculator", () => {
     await expect(income).toHaveAttribute("aria-invalid", "true");
     await expect(income).toHaveAttribute("aria-describedby", /home-loan-results-error/);
     await expect(page.locator("#home-loan-results .calculator-results__value")).toHaveCount(0); // no stale numbers
-    await expect(page.locator("#home-loan-results table")).toHaveCount(0);
+    await expect(page.locator("#home-loan-wide table")).toHaveCount(0);
     await income.fill("100000");
     await expect(error).toHaveCount(0);
     await expect(income).not.toHaveAttribute("aria-invalid", "true");

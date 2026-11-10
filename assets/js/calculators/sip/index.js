@@ -26,6 +26,13 @@
 ========================================================= */
 
 import {
+    WIDE,
+    splitWide,
+    wideSection,
+    showWide
+} from "../common/wide-results.js";
+
+import {
     calculateSip,
     validateSipInputs,
     SIP_LIMITS
@@ -560,8 +567,6 @@ function renderResults(
 
                 ${chartSection(result)}
 
-                ${yearlyTable(result)}
-
                 <div class="sip-actions">
 
                     <button
@@ -575,6 +580,7 @@ function renderResults(
                 </div>
 
             </div>
+            ${WIDE}${yearlyTable(result)}
         `;
 
 }
@@ -864,6 +870,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE)}
             </section>
+${wideSection("sip-wide", "Year by year")}
 
             <p
                 id="sip-live"
@@ -1131,6 +1138,23 @@ export function init() {
     const results =
         document.querySelector("#sip-results");
 
+    // the wide tables, in their own full-width section (common/wide-results.js)
+    const wide =
+        document.querySelector("#sip-wide");
+
+    const setResult = html => {
+        const [main, extra] = splitWide(html);
+        results.innerHTML = main;
+        showWide(wide, extra);
+    };
+
+    const find = selector => results.querySelector(selector) ?? wide?.querySelector(selector);
+
+    const onResults = (...args) => {
+        results.addEventListener(...args);
+        wide?.addEventListener(...args);
+    };
+
     const live =
         document.querySelector("#sip-live");
 
@@ -1210,8 +1234,8 @@ export function init() {
             )
         ) {
 
-            results.innerHTML =
-                resultEmpty(EMPTY_MESSAGE);
+            setResult(
+                resultEmpty(EMPTY_MESSAGE));
 
             if (speak) {
                 announce("");
@@ -1229,8 +1253,8 @@ export function init() {
 
         if (check.ok && !infl.ok) {
             setFieldsInvalid([inputs.inflation], ERROR_ID);
-            results.innerHTML =
-                resultError(infl.message, { id: ERROR_ID });
+            setResult(
+                resultError(infl.message, { id: ERROR_ID }));
             if (speak) {
                 announce(infl.message);
             }
@@ -1260,11 +1284,11 @@ export function init() {
                     .map(error => error.message)
                     .join(" ");
 
-            results.innerHTML =
+            setResult(
                 resultError(
                     message,
                     { id: ERROR_ID }
-                );
+                ));
 
             if (speak) {
                 announce(message);
@@ -1277,8 +1301,8 @@ export function init() {
         const result =
             calculateSip(check.values);
 
-        results.innerHTML =
-            renderResults(result, infl.value);
+        setResult(
+            renderResults(result, infl.value));
 
         if (speak) {
             announce(liveSummary(result, infl.value));
@@ -1298,7 +1322,7 @@ export function init() {
         }
     );
 
-    results.addEventListener(
+    onResults(
         "click",
         event => {
 
