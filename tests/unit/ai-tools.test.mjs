@@ -169,9 +169,57 @@ describe("the three brief tools", () => {
   });
 });
 
+describe("the claim engine and the evidence checklist", () => {
+  let claims, checker;
+  before(async () => {
+    claims = await import("../../assets/js/tools/ai-tools/common/claim-engine.js");
+    checker = await import("../../assets/js/tools/ai-answer-checklist/index.js");
+  });
+
+  test("sentences: code blocks, list markers, headings and emphasis are stripped; short fragments dropped", () => {
+    const s = claims.sentences("## Title\n\n- **Rates** are 7.5% now. Code:\n```js\nconst x = 1;\n```\nIt *always* works! Done now.");
+    assert.ok(s.includes("Rates are 7.5% now."));
+    assert.ok(s.includes("It always works!"));
+    assert.ok(!s.some((x) => x.includes("const x")));
+  });
+
+  test("classify: money, percent, date, source and absolute wording are found; a plain sentence is not checkable", () => {
+    assert.deepEqual(claims.classify("Deposits up to ₹5 lakh are insured.").kinds, ["money"]);
+    assert.deepEqual(claims.classify("Rates are around 7.5% for 5 years.").kinds, ["percent"]);
+    assert.ok(claims.classify("According to a 2023 SEBI report, returns were lower.").kinds.includes("source"));
+    assert.ok(claims.classify("According to a 2023 SEBI report, returns were lower.").kinds.includes("date"));
+    assert.equal(claims.classify("Debt funds are always more tax-efficient.").absolute, "always");
+    assert.equal(claims.classify("It depends on your bank.").checkable, false);
+    assert.equal(claims.classify("It depends on your bank.").hedge, "it depends");
+  });
+
+  test("analyse: an answer with no source, assumption, date note or limitation lists all four gaps; a careful one lists none", () => {
+    const bare = claims.analyse("Fixed deposits pay 7% a year. They are always safe.");
+    assert.equal(bare.missing.length, 4);
+    assert.equal(bare.absolutes, 1);
+    const careful = claims.analyse("As of March 2026, according to the RBI, rates are about 7%. I assume you are in India. However, rates change.");
+    assert.deepEqual(careful.missing, []);
+  });
+
+  test("the checklist: the example composes a ready checklist with boxes, the gaps and the questions; the purpose sets the first line", () => {
+    const brief = checker.build(checker.CONFIG.example.values);
+    assert.equal(brief.state, "ok");
+    assert.ok(brief.markdown.startsWith("# Evidence checklist for an AI answer\n\n## The question asked"));
+    assert.ok(brief.markdown.includes("feeds a decision with money, legal or health consequences"));
+    assert.ok(brief.markdown.includes("1. [ ] \""));
+    assert.ok(brief.markdown.includes('absolute: "never guaranteed"') || brief.markdown.includes('absolute: "never"'));
+    assert.ok(brief.markdown.includes("## Questions to put back to the assistant"));
+    assert.ok(brief.markdown.includes("Give one exception to each absolute statement"));
+    assert.ok(!/undefined|\[object/.test(brief.markdown));
+    const general = checker.build({ answer: "It depends on what you need and how you work.", question: "", purpose: "code" });
+    assert.ok(general.markdown.includes("No figures, dates, sources or absolute statements were found"));
+    assert.ok(general.markdown.includes("Run it in a safe place first"));
+  });
+});
+
 describe("catalog integration", () => {
-  test("three published tools in the AI Tools section at /tools/<id>/, related only to each other", () => {
-    const ids = ["prompt-builder", "bug-report-prompt", "context-pack-builder"];
+  test("four published tools in the AI Tools section at /tools/<id>/, related only to each other", () => {
+    const ids = ["prompt-builder", "bug-report-prompt", "context-pack-builder", "ai-answer-checklist"];
     assert.deepEqual(tax.getToolsBySection("ai-tools").map((t) => t.id), ids);
     for (const id of ids) {
       const t = tools.getToolById(id);

@@ -61,7 +61,7 @@ test.describe("AI Tools", () => {
     await page.locator("#pb-output").fill("my own text");
     await expect(page.locator("#pb-output")).toHaveValue("my own text");
     const related = page.locator(".related-section a[href*='/tools/'], .related-calculators a[href*='/tools/']");
-    for (const href of await related.evaluateAll((as) => as.map((a) => a.getAttribute("href")))) expect(href).toMatch(/\/tools\/(bug-report-prompt|context-pack-builder)\/$/);
+    for (const href of await related.evaluateAll((as) => as.map((a) => a.getAttribute("href")))) expect(href).toMatch(/\/tools\/(bug-report-prompt|context-pack-builder|ai-answer-checklist)\/$/);
   });
 
   test("the section page lists the three tools, the home page has the seventh card, and All Tools knows the section @portable", async ({ page, go, siteRoot }) => {
@@ -72,9 +72,24 @@ test.describe("AI Tools", () => {
     await go("");
     const card = page.locator("#categories .category-card", { hasText: "AI Tools" });
     await expect(card).toHaveAttribute("href", `${siteRoot}ai-tools.html`);
-    await expect(card).toContainText("3 tools");
+    await expect(card).toContainText("4 tools");
     await go("tools.html");
     await expect(page.locator(`#tools-directory a[href="${siteRoot}tools/context-pack-builder/"]`).first()).toBeVisible(); // the directory's own listing, not the hidden rail
+  });
+
+  test("the evidence checklist: a pasted answer is ready at once, its figures and absolutes are listed, and a reset empties it", async ({ page, go, watch }) => {
+    await go("tools/ai-answer-checklist/");
+    await page.locator("#ac-form[data-ready]").waitFor();
+    await page.locator("#ac-answer").fill("FD rates are around 7.5% for 5 years and deposits are always safe.");
+    await expect(page.locator("#ac-check")).toHaveAttribute("data-state", "ok");
+    const text = await page.locator("#ac-output").inputValue();
+    expect(text).toContain("1. [ ] \"FD rates are around 7.5% for 5 years and deposits are always safe.\"");
+    expect(text).toContain("absolute: \"always\"");
+    expect(text).toContain("## What the answer leaves out");
+    await page.locator("#ac-reset").click();
+    await expect(page.locator("#ac-check")).toHaveAttribute("data-state", "empty");
+    expect(watch.external).toEqual([]);
+    expect(watch.pageErrors).toEqual([]);
   });
 
   test("on a phone the form is one column, the brief is readable and nothing overflows", async ({ page, go }) => {

@@ -129,7 +129,7 @@ export function createBriefTool(config) {
                         <button type="button" id="${prefix}-copy" class="calculator-form__button" disabled>Copy ${escapeHTML(config.outputName)}</button>
                         <button type="button" id="${prefix}-download" class="calculator-form__button calculator-form__button--secondary" disabled>Download .md</button>
                     </div>
-                    <p class="ai-usewith">Paste it as the first message of a new chat with ${ASSISTANTS}, then add anything it says you will provide.</p>
+                    <p class="ai-usewith">${config.pasteLine ?? `Paste it as the first message of a new chat with ${ASSISTANTS}, then add anything it says you will provide.`}</p>
                 </div>
             </section>
             <p id="${prefix}-live" class="ai-sr-only" role="status" aria-live="polite"></p>

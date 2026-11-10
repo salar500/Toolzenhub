@@ -248,3 +248,13 @@ Built from the owner's brief: a section for people who already use ChatGPT, Clau
 - **Not done:** AI articles (deferred until the tools are reviewed on the preview); the other candidate departments (each needs its own engine, not a template of these); visual baselines for the new pages (added when the look is approved).
 
 Rule change: rulebook 4.11 added (AI Tools section).
+
+Published to the preview as `104831f`: the Pages run succeeded, and `/ai-tools.html` and the three tool pages answered 200 (new paths took about 15 minutes to appear after the deploy, a CDN cache of the earlier 404s; existing pages updated at once).
+
+### Batch 3: AI Answer Evidence Checklist (second AI department)
+
+- **Tool:** `/tools/ai-answer-checklist/`. Paste an assistant's answer and get what to check (every money figure, percentage, date, other figure, named source and absolute statement, each with how to check it), what the answer leaves out (source, assumption, date of the figures, limitation), the questions to put back to the assistant, and a first line set by what the answer is for. Pure engine `claim-engine.js` (sentence splitting that skips code, classification by word patterns); the page says it finds what to check and does not know what is true.
+- **Verification:** `ai-tools.test.mjs` 19 of 19 (sentences, classify, the four gaps, the example and a general answer); pins updated (74 tools, the section's four tools, related lists now section-filled, "emi" ranking gains the second description that names Gemini); browser `ai-tools.spec.js` 7 of 7 desktop, 7 of 7 mobile, 2 of 2 root; both builds, inventory (667 live pages), link, asset and SEO checks pass; the page reviewed at 1280 px with the example loaded.
+- **Wording fix found in review:** the shared page's paste line said "paste it as the first message" for every tool; a checklist is kept beside the answer instead, so the line is now tool-specific.
+
+Rule change: none.

@@ -2577,6 +2577,47 @@ const catalog = [
     },
 
     {
+        id: "ai-answer-checklist",
+        status: "published",
+        loader: () =>
+            import("../tools/ai-answer-checklist/index.js"),
+        sectionId: "ai-tools",
+        toolType: "utility",
+        icon: "☑",
+        title: "AI Answer Evidence Checklist",
+        description:
+            "Paste an answer from ChatGPT, Claude or Gemini and get a checklist of what in it needs checking: every figure, date, amount, named source and absolute statement, what it leaves out, and the questions to put back to the assistant. Built in your browser.",
+        relatedTools: ["prompt-builder", "context-pack-builder"],
+        aliases: [
+            "ai answer checker",
+            "verify ai answer",
+            "fact check ai",
+            "chatgpt fact check",
+            "ai hallucination check",
+            "evidence checklist",
+            "check ai output",
+            "ai answer verification"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            download: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "AI Answer Evidence Checklist: What to Verify | ToolZen Hub",
+            description:
+                "Paste an answer from ChatGPT, Claude or Gemini and get a checklist of the figures, dates, sources and absolute claims to verify, what the answer leaves out, and the questions to ask back. Runs in your browser; nothing is sent."
+        }
+    },
+
+    {
         id: "list-comparer",
         status: "published",
         loader: () =>

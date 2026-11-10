@@ -115,5 +115,7 @@ The other candidate departments and tools (prompt improver and comparison, two-a
 
 ## Implementation notes
 
+- **Fourth tool, second department (AI Output Verification): AI Answer Evidence Checklist** (`ai-answer-checklist`, `/tools/ai-answer-checklist/`). Paste an answer; the claim engine (`ai-tools/common/claim-engine.js`, pure) splits it into sentences (code blocks, headings, list markers and emphasis stripped) and classifies each: money, percentage, date, other figure, names a source, absolute wording (always, never, guaranteed, the only…), hedged wording. The checklist lists each checkable statement with a box, its kind and how to check it, then what the answer leaves out (no source, no assumption, no date for figures, no limitation), the questions to put back to the assistant, and a first line that depends on what the answer is for (learning, a money/legal/health decision, code to run, something to publish). It is word patterns and says so on the page; it never claims to judge correctness (rulebook 4.11). Same shared page; the paste line is tool-specific (`config.pasteLine`). The briefs' related lists gain it by section fallback; its own list is curated (Prompt Builder, Context Pack) then the section.
+
 - The brief is composed while essentials are missing (state "incomplete") rather than withheld, so the visitor sees it take shape; the check says it is not ready.
 - The hero's one sentence gained "and AI" in its list of tool kinds (home copy otherwise unchanged; the card appears from the catalog).
