@@ -1,4 +1,4 @@
---- match 1 of 2 ---
+--- match 1 of 3 ---
 form#emi-form.calculator-form
   fieldset.emi-mode [aria-describedby="emi-mode-hint"]
     legend.calculator-form__label "What do you want to find?"
@@ -64,7 +64,7 @@ form#emi-form.calculator-form
     span.calculator-form__help "These set only the loan amount and the tenure, as examples. Your lender's rate and fees de…"
   div.calculator-form__actions
     button#emi-reset.calculator-form__button.calculator-form__button--secondary [type="button"] "Reset"
---- match 2 of 2 ---
+--- match 2 of 3 ---
 section#emi-results.calculator-results
   div.calculator-results__card
     div.calculator-results__header
@@ -99,6 +99,9 @@ section#emi-results.calculator-results
     p.emi-next "Next: or ."
       a [href="{ROOT}calculators/prepayment/"] "see what a part-payment would save"
       a [href="{ROOT}calculators/loan-comparison/"] "compare two loans"
+--- match 3 of 3 ---
+section#emi-wide.calculator-wide [aria-label="Repayment schedule"]
+  div.calculator-results__card
     section.emi-schedule [aria-labelledby="emi-schedule-title"]
       h3#emi-schedule-title "Repayment schedule"
       div.calculator-results__table-wrapper [aria-label="Yearly repayment summary" role="region"]

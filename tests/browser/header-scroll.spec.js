@@ -53,3 +53,18 @@ test.describe("global header while scrolling", () => {
     expect(shownBar).toBeGreaterThanOrEqual(shown.bottom - 1);
   });
 });
+
+test.describe("space under the header @desktop-only", () => {
+  // tool pages had 0 px under the header from 761 to 999 px (their 20 px sat inside the 1000 px sidebar rule); section pages had 20 px
+  test("a tool page and a section page leave the same space above the breadcrumb at phone, tablet and desktop widths", async ({ page, go }, testInfo) => {
+    test.skip(testInfo.project.name !== "subpath-desktop", "the widths are set here");
+    for (const [width, expected] of [[390, 8], [820, 20], [1280, 20]]) {
+      await page.setViewportSize({ width, height: 900 });
+      for (const url of ["calculators/emi/", "tools/json-formatter/", "time-tools.html"]) {
+        await go(url);
+        const gap = await page.evaluate(() => Math.round(document.querySelector("main .calculator-breadcrumb").getBoundingClientRect().top - document.querySelector("#header").getBoundingClientRect().bottom));
+        expect(gap, `${url} at ${width}px`).toBe(expected);
+      }
+    }
+  });
+});

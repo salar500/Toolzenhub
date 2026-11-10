@@ -263,13 +263,6 @@
 
     }
 
-    /* the same space under the site header on a tool page as on every other ecosystem page (see the end of this file) */
-    #app .calculator-page:has(> .section-switcher) {
-
-        padding-top: 20px;
-
-    }
-
     .calculator-page > .section-switcher,
     .ecosystem-layout > .section-switcher {
 
@@ -953,9 +946,11 @@
 
 }
 
-/* the gap under the site header: the listing pages' section and the Loans wrapper had 46 px and 22 px; the tool pages 0 */
+/* the gap under the site header: the listing pages' section and the Loans wrapper had 46 px and 22 px; the tool pages 0.
+   One rule for every width, so a tablet (761 to 999 px) gets it too; phones trim it to 8 px below */
 #app > .categories-page:has(.ecosystem-layout),
-#app > .container--workspace {
+#app > .container--workspace,
+#app .calculator-page:has(> .section-switcher) {
 
     padding-top: 20px;
 
