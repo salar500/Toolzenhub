@@ -738,7 +738,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE)}
             </section>
-${wideSection("profit-wide", "What if the price or cost changes")}
+${wideSection("profit-wide")}
 
             <p
                 id="profit-live"

@@ -100,7 +100,7 @@ section#emi-results.calculator-results
       a [href="{ROOT}calculators/prepayment/"] "see what a part-payment would save"
       a [href="{ROOT}calculators/loan-comparison/"] "compare two loans"
 --- match 3 of 3 ---
-section#emi-wide.calculator-wide [aria-label="Repayment schedule"]
+div#emi-wide.calculator-wide
   div.calculator-results__card
     section.emi-schedule [aria-labelledby="emi-schedule-title"]
       h3#emi-schedule-title "Repayment schedule"

@@ -527,7 +527,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE)}
             </section>
-${wideSection("ppf-wide", "Year by year")}
+${wideSection("ppf-wide")}
 
             <!-- the assumptions, always beside the result -->
 

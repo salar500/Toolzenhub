@@ -928,7 +928,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE)}
             </section>
-${wideSection("prepay-wide", "Repayment schedule")}
+${wideSection("prepay-wide")}
 
             <p
                 id="prepay-live"

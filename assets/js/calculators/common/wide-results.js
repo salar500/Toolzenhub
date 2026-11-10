@@ -7,7 +7,9 @@
    too wide for that column, so a calculator puts them after the
    WIDE marker in its result markup, and they are shown in their own
    full-width section under the form and the result
-   (`<section class="calculator-wide">` after the results section).
+   (`<div class="calculator-wide">` after the results section: a
+   layout container, not a landmark, since each table keeps its own
+   labelled heading and a second label would repeat it).
    Narrower screens show the section straight after the result, so
    the reading order is unchanged.
 
@@ -30,16 +32,15 @@ export function splitWide(html) {
 }
 
 
-/* The empty section a calculator places after its results section. */
-export function wideSection(id, label) {
+/* The empty container a calculator places after its results section. */
+export function wideSection(id) {
 
     return `
-            <section
+            <div
                 id="${id}"
                 class="calculator-wide"
-                aria-label="${label}"
                 hidden
-            ></section>`;
+            ></div>`;
 
 }
 

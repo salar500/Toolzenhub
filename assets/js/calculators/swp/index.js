@@ -950,7 +950,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE)}
             </section>
-${wideSection("swp-wide", "Year by year")}
+${wideSection("swp-wide")}
 
             <p
                 id="swp-live"

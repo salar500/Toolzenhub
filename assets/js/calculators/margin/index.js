@@ -724,7 +724,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE)}
             </section>
-${wideSection("margin-wide", "Costs and discounts")}
+${wideSection("margin-wide")}
 
             <p
                 id="margin-live"

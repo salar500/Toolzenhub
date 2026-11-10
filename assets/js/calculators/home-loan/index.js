@@ -616,7 +616,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE)}
             </section>
-${wideSection("home-loan-wide", "What the same EMI room borrows over other tenures")}
+${wideSection("home-loan-wide")}
 
             <p
                 id="home-loan-live"

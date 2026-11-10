@@ -445,7 +445,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE[DEFAULTS.mode])}
             </section>
-${wideSection("emi-wide", "Repayment schedule")}
+${wideSection("emi-wide")}
 
             <p
                 id="emi-live"

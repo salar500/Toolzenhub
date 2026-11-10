@@ -870,7 +870,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE)}
             </section>
-${wideSection("sip-wide", "Year by year")}
+${wideSection("sip-wide")}
 
             <p
                 id="sip-live"

@@ -912,7 +912,7 @@ export function markup() {
             >
                 ${resultEmpty(EMPTY_MESSAGE)}
             </section>
-${wideSection("bt-wide", "Year by year")}
+${wideSection("bt-wide")}
 
             <p
                 id="bt-live"
