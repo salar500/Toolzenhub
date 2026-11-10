@@ -68,3 +68,31 @@ test.describe("space under the header @desktop-only", () => {
     }
   });
 });
+
+test.describe("focus is not hidden under the sticky header and tool bar (WCAG 2.4.11)", () => {
+  // on a phone a tool page has two sticky strips: the site header (hidden while scrolling down) and the 52 px "Menu" tool bar under it;
+  // scroll-padding-top tells the browser to keep focused and scrolled-to elements below both
+  test("on a phone tool page the scroll padding clears the header and the tool bar, with the header shown and hidden", async ({ page, go }, testInfo) => {
+    test.skip(testInfo.project.name !== "subpath-mobile", "phone layout");
+    await go("tools/json-formatter/");
+    const bar = page.locator(".section-switcher");
+    const state = () => page.evaluate(() => ({
+      padding: parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop),
+      barBottom: document.querySelector(".section-switcher").getBoundingClientRect().bottom,
+      hidden: document.documentElement.classList.contains("header-hidden"),
+    }));
+    await expect(bar).toBeVisible();
+    // scrolling down: the header hides and the bar sticks at the top
+    await page.mouse.wheel(0, 900);
+    await expect.poll(async () => (await state()).hidden).toBe(true);
+    await expect.poll(async () => Math.round((await bar.boundingBox()).y)).toBe(0);
+    const hiddenState = await state();
+    expect(hiddenState.padding, "header hidden").toBeGreaterThanOrEqual(hiddenState.barBottom);
+    // scrolling back up a little: the header returns and the bar sticks under it
+    await page.mouse.wheel(0, -200);
+    await expect.poll(async () => (await state()).hidden).toBe(false);
+    await expect.poll(async () => Math.round((await bar.boundingBox()).y)).toBe(56);
+    const shown = await state();
+    expect(shown.padding, "header shown").toBeGreaterThanOrEqual(shown.barBottom);
+  });
+});

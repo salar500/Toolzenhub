@@ -895,7 +895,7 @@ test.describe("Image Tools in the site", () => {
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html`);
     await page.locator(".directory-section__title a", { hasText: "Image Tools" }).click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}image-tools.html`);
-    await page.locator('a[href$="tools/image-compressor-resizer/"]').first().click();
+    await page.locator('a[href$="tools/image-compressor-resizer/"]:visible').first().click(); // on a phone the closed sidebar drawer lists it first
     await expect(page.locator("h1")).toHaveText("Image Compressor & Resizer");
   });
 

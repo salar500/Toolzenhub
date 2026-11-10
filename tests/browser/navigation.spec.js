@@ -745,16 +745,17 @@ test.describe("home page rows on a phone", () => {
 });
 
 test.describe("header and All Tools section index (Design System 2.0, GL-01 and GL-04)", () => {
-  test("the header is 56px on a phone and not sticky, and 64px and sticky from 960px", async ({ page, go }) => {
+  // GL-01 as updated 2026-11-09 (5fd2d87): below 960 px the header is sticky but slides away while scrolling down (0.2 s), so the
+  // position is polled; header-scroll.spec.js covers the return on scroll up
+  test("the header is 56px on a phone and slides away while scrolling down, and 64px and sticky from 960px", async ({ page, go }) => {
     for (const [width, height, sticky] of [[390, 56, false], [1280, 64, true]]) {
       await page.setViewportSize({ width, height: 800 });
       await go("tools.html");
       const bar = page.locator(".site-header");
       expect(Math.round((await bar.boundingBox()).height), `${width}px header height`).toBe(height);
       await page.evaluate(() => window.scrollTo(0, 900));
-      const top = Math.round((await bar.boundingBox()).y);
-      if (sticky) expect(top, "stays at the top while scrolling").toBe(0);
-      else expect(top, "scrolls away on a phone").toBeLessThan(0);
+      if (sticky) expect(Math.round((await bar.boundingBox()).y), "stays at the top while scrolling").toBe(0);
+      else await expect.poll(async () => Math.round((await bar.boundingBox()).y), { message: "slides away on a phone" }).toBeLessThan(0);
     }
   });
 

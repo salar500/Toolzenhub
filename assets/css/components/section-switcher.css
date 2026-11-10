@@ -427,6 +427,20 @@
 
     }
 
+    /* WCAG 2.4.11: focused and scrolled-to elements land below both sticky strips, the header (when shown) and this 52 px bar
+       (44 px row and 4 px above and below it); header.css's own padding only clears the header */
+    html:has(.section-switcher.is-drawer) {
+
+        scroll-padding-top: calc(var(--header-offset) + 52px + 8px);
+
+    }
+
+    html.header-hidden:has(.section-switcher.is-drawer) {
+
+        scroll-padding-top: calc(52px + 8px);
+
+    }
+
     /* from a 960 px layout the site header is sticky too (a phone in Desktop site mode lays the page out that wide): the bar sticks under it */
     @media (min-width: 960px) {
 

@@ -326,7 +326,7 @@ test.describe("Stopwatch in Time Tools and search", () => {
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html`);
     await page.locator(".directory-section__title a", { hasText: "Time Tools" }).click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}time-tools.html`);
-    await page.locator('a[href$="tools/stopwatch/"]').first().click();
+    await page.locator('a[href$="tools/stopwatch/"]:visible').first().click(); // on a phone the closed sidebar drawer lists it first
     await expect(page.locator("h1")).toHaveText("Stopwatch");
   });
 

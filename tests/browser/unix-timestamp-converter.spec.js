@@ -522,7 +522,7 @@ test.describe("Developer Tools in the site", () => {
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html`);
     await page.locator(".directory-section__title a", { hasText: "Developer Tools" }).click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}developer-tools.html`);
-    await page.locator('a[href$="tools/unix-timestamp-converter/"]').first().click();
+    await page.locator('a[href$="tools/unix-timestamp-converter/"]:visible').first().click(); // on a phone the closed sidebar drawer lists it first
     await expect(page.locator("h1")).toHaveText("Unix Timestamp Converter");
   });
 
