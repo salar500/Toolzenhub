@@ -37,8 +37,15 @@ before(async () => {
 });
 
 describe("section model", () => {
-  test("six sections, each with a stable id, its landing page and its path prefix: Calculators, Time Tools, Developer Tools, Image Tools, PDF Tools and Practice Labs", () => {
-    assert.deepEqual(tax.getSections().map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools", "pdf-tools", "practice-labs"]);
+  test("seven sections, each with a stable id, its landing page and its path prefix: Calculators, Time Tools, Developer Tools, Image Tools, PDF Tools, Practice Labs and AI Tools", () => {
+    assert.deepEqual(tax.getSections().map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools", "pdf-tools", "practice-labs", "ai-tools"]);
+    const ai = tax.getSectionById("ai-tools");
+    assert.equal(ai.title, "AI Tools");
+    assert.equal(ai.landing, "aiTools");
+    assert.equal(ai.pathPrefix, "tools");
+    assert.deepEqual(tax.getCategoriesBySection("ai-tools"), []);
+    assert.deepEqual(tax.getToolsBySection("ai-tools").map((t) => t.id), ["prompt-builder", "bug-report-prompt", "context-pack-builder"]);
+    assert.equal(routes.ROUTES.aiTools, `${ROOT}ai-tools.html`);
     const section = tax.getSectionById("calculators");
     assert.equal(section.title, "Calculators");
     assert.equal(section.landing, "calculatorCategories");
@@ -196,7 +203,7 @@ describe("routing: every registered tool keeps its URL", () => {
   });
 
   test("the calculator loader registry is unchanged: loaders only for the published tools, still lazy", () => {
-    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["age", "balance-transfer", "base64-encoder-decoder", "bmi", "bmr", "business-days", "cagr", "calorie", "countdown-timer", "credit-card-payoff", "cron-challenge-lab", "cron-expression-explainer", "date-calculator", "date-difference", "emi", "excel-practice-lab", "fd", "gratuity", "gst", "home-loan", "hours-calculator", "image-compressor-resizer", "income-tax", "interest", "interval-timer", "json-compare", "json-csv-converter", "json-error-fixing-lab", "json-formatter", "jsonpath-challenge-lab", "jsonpath-tester", "jwt-decoder", "list-comparer", "loan-comparison", "loan-eligibility", "margin", "meeting-planner", "merge-pdf", "pdf-marks", "pdf-pages", "percentage", "personal-loan", "photos-to-pdf", "pomodoro-timer", "power-bi-practice-lab", "ppf", "prepayment", "profit", "ratio", "risk-reward", "roi", "salary-in-hand", "shift-planner", "sip", "smart-flashcards", "split-pdf", "sql-practice-lab", "stopwatch", "swp", "test-design-lab", "text-diff", "time-duration", "time-zone-converter", "unit-converter", "unix-timestamp-converter", "url-parser", "uuid-generator", "world-clock", "xirr"]);
+    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["age", "balance-transfer", "base64-encoder-decoder", "bmi", "bmr", "bug-report-prompt", "business-days", "cagr", "calorie", "context-pack-builder", "countdown-timer", "credit-card-payoff", "cron-challenge-lab", "cron-expression-explainer", "date-calculator", "date-difference", "emi", "excel-practice-lab", "fd", "gratuity", "gst", "home-loan", "hours-calculator", "image-compressor-resizer", "income-tax", "interest", "interval-timer", "json-compare", "json-csv-converter", "json-error-fixing-lab", "json-formatter", "jsonpath-challenge-lab", "jsonpath-tester", "jwt-decoder", "list-comparer", "loan-comparison", "loan-eligibility", "margin", "meeting-planner", "merge-pdf", "pdf-marks", "pdf-pages", "percentage", "personal-loan", "photos-to-pdf", "pomodoro-timer", "power-bi-practice-lab", "ppf", "prepayment", "profit", "prompt-builder", "ratio", "risk-reward", "roi", "salary-in-hand", "shift-planner", "sip", "smart-flashcards", "split-pdf", "sql-practice-lab", "stopwatch", "swp", "test-design-lab", "text-diff", "time-duration", "time-zone-converter", "unit-converter", "unix-timestamp-converter", "url-parser", "uuid-generator", "world-clock", "xirr"]);
     for (const loader of Object.values(registry.calculatorRegistry)) assert.equal(typeof loader, "function");
     assert.deepEqual(registry.calculatorMetadata.emi, { section: "Calculators", category: "loans", title: "EMI Calculator" });
     assert.deepEqual(registry.calculatorMetadata["income-tax"], { section: "Calculators", category: "tax", title: "Old vs New Tax Regime Calculator" });

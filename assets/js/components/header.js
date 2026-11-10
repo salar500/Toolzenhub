@@ -38,7 +38,8 @@ const TOOLS_AREA_PAGES = [
     "developer-tools.html",
     "image-tools.html",
     "pdf-tools.html",
-    "practice-labs.html"
+    "practice-labs.html",
+    "ai-tools.html"
 ];
 
 function inToolsArea(

@@ -46,6 +46,9 @@ export const SECTION_GROUPS = {
     "pdf-tools": [
         { label: "Combine and split", ids: ["merge-pdf", "split-pdf"] },
         { label: "Edit pages", ids: ["pdf-pages", "pdf-marks"] }
+    ],
+    "ai-tools": [
+        { label: "Briefs for an assistant", ids: ["prompt-builder", "bug-report-prompt", "context-pack-builder"] }
     ]
 };
 

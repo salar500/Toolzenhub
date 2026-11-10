@@ -64,7 +64,7 @@ export function renderHero() {
                             Calculate loan payments, plan investments and
                             work through GST, margin and percentage
                             questions, then use the time, developer,
-                            image and PDF tools, all in your browser.
+                            image, PDF and AI tools, all in your browser.
 
                         </p>
 

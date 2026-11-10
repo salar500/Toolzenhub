@@ -32,7 +32,8 @@ const PATHS = {
     check: '<path d="M5 12.5l4.5 4.5L19 7.500"/>',
     book: '<path d="M5 4h10a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h10"/>',
     flask: '<path d="M9.500 3h5M10.500 3v6L5 18.500A2 2 0 0 0 6.700 21.500h10.600A2 2 0 0 0 19 18.500L13.500 9V3"/><path d="M7.500 15h9"/>',
-    tool: '<path d="M14.500 6.500a4 4 0 0 0-5 5L4 17l3 3 5.500-5.500a4 4 0 0 0 5-5l-2.500 2.500-2.500-.5-.5-2.500z"/>'
+    tool: '<path d="M14.500 6.500a4 4 0 0 0-5 5L4 17l3 3 5.500-5.500a4 4 0 0 0 5-5l-2.500 2.500-2.500-.5-.5-2.500z"/>',
+    spark: '<path d="M11 3l1.900 5.600L18.500 10.500l-5.600 1.900L11 18l-1.900-5.600L3.500 10.500l5.600-1.900z"/><path d="M18.500 15.500l.800 2.200 2.200.800-2.200.800-.800 2.200-.800-2.200-2.200-.800 2.200-.800z"/>'
 };
 
 /* The icon used for each section, category and calculator group */
@@ -43,6 +44,7 @@ const FOR = {
     "image-tools": "image",
     "pdf-tools": "file",
     "practice-labs": "flask",
+    "ai-tools": "spark",
     loans: "home",
     investment: "trend",
     tax: "receipt",

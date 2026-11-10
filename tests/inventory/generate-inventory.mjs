@@ -71,6 +71,7 @@ function describePage(file) {
     "image-tools.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "pdf-tools.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "practice-labs.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
+    "ai-tools.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "tools.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "investment.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "business.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },

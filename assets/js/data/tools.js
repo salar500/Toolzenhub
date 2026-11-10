@@ -2445,6 +2445,137 @@ const catalog = [
         }
     },
 
+
+    /* =====================================================
+       AI TOOLS (the seventh section, 2026-11-11)
+
+       Briefs composed in the browser for ChatGPT, Claude,
+       Gemini or Copilot. No AI service is called.
+    ===================================================== */
+
+    {
+        id: "prompt-builder",
+        status: "published",
+        loader: () =>
+            import("../tools/prompt-builder/index.js"),
+        sectionId: "ai-tools",
+        toolType: "utility",
+        icon: "✦",
+        title: "AI Prompt Builder",
+        description:
+            "Turn a rough idea into a complete prompt for ChatGPT, Claude, Gemini or any assistant: the task, the context, the rules, the format and how you will judge the result. Built in your browser; no AI service is called.",
+        relatedTools: ["bug-report-prompt", "context-pack-builder"],
+        aliases: [
+            "prompt builder",
+            "prompt generator",
+            "write a prompt",
+            "chatgpt prompt",
+            "claude prompt",
+            "prompt template",
+            "better prompts",
+            "prompt engineering"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            download: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "AI Prompt Builder: Turn an Idea into a Complete Prompt | ToolZen Hub",
+            description:
+                "Build a complete prompt for ChatGPT, Claude, Gemini or Copilot from a rough idea: task, context, rules, format and success criteria, with a check of what is still vague. Runs in your browser; no AI service is called."
+        }
+    },
+
+    {
+        id: "bug-report-prompt",
+        status: "published",
+        loader: () =>
+            import("../tools/bug-report-prompt/index.js"),
+        sectionId: "ai-tools",
+        toolType: "utility",
+        icon: "🐞",
+        title: "Bug Report to Debugging Prompt",
+        description:
+            "Turn what you saw, what you expected and how to reproduce it into a debugging task for an AI coding assistant: find the root cause, make the smallest fix, add a test that fails first, report what was verified. Built in your browser.",
+        relatedTools: ["context-pack-builder", "prompt-builder"],
+        aliases: [
+            "bug report prompt",
+            "debugging prompt",
+            "ai debugging",
+            "bug to prompt",
+            "fix bug with ai",
+            "copilot bug fix prompt",
+            "claude code bug prompt",
+            "bug report template"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            download: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Bug Report to Debugging Prompt for AI Coding Assistants | ToolZen Hub",
+            description:
+                "Write a debugging task for Claude Code, Copilot, Cursor or ChatGPT from a bug: what happens, what should happen, steps, environment and error output, with the rules of a safe fix. Runs in your browser; nothing is sent anywhere."
+        }
+    },
+
+    {
+        id: "context-pack-builder",
+        status: "published",
+        loader: () =>
+            import("../tools/context-pack-builder/index.js"),
+        sectionId: "ai-tools",
+        toolType: "utility",
+        icon: "▤",
+        title: "Project Context Pack Builder",
+        description:
+            "Write once what an AI assistant needs to know about your project: purpose, stack, key files, what is done, known traps, rules, the next task and how it is verified. Paste it at the start of every chat. Built in your browser.",
+        relatedTools: ["prompt-builder", "bug-report-prompt"],
+        aliases: [
+            "context pack",
+            "project context for ai",
+            "ai handover",
+            "project brief for chatgpt",
+            "claude md generator",
+            "cursor rules generator",
+            "project instructions for ai",
+            "ai onboarding brief"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            download: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Project Context Pack Builder for AI Assistants | ToolZen Hub",
+            description:
+                "Build a reusable project context pack for an AI assistant: purpose, stack, key files, completed work, known traps, rules, the next task and its verification. Paste it into any chat or save it as project instructions. Runs in your browser."
+        }
+    },
+
     {
         id: "list-comparer",
         status: "published",

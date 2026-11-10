@@ -31,11 +31,11 @@ test.describe("home hero and brand", () => {
     expect(external, "no request leaves the site").toEqual([]);
   });
 
-  test("all six ecosystem cards are on the home page, in order", async ({ page, go }) => {
+  test("all seven ecosystem cards are on the home page, in order", async ({ page, go }) => {
     await go("");
     await page.waitForSelector("#categories .category-card");
     const titles = await page.locator("#categories .category-card").evaluateAll((els) => els.map((e) => e.querySelector("h2, h3, .category-card__title, strong")?.textContent.trim()));
-    expect(titles).toEqual(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools", "Practice Labs"]);
+    expect(titles).toEqual(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools", "Practice Labs", "AI Tools"]);
   });
 
   test("the header and footer logo marks are the favicon's mark; the favicon and touch icon load", async ({ page, go, api }) => {

@@ -143,6 +143,26 @@ export const sections = [
         icon: "🧪",
         landing: "practiceLabs",
         pathPrefix: "tools"
+    },
+
+    /*
+     * AI Tools (owner instruction, 2026-11-11, the seventh ecosystem): browser-built briefs for people who already use
+     * ChatGPT, Claude, Gemini or Copilot. No AI service is called and no key is needed; each tool composes text the
+     * visitor pastes into the assistant of their choice. No categories; tool URLs are /tools/<id>/ like the other
+     * utility sections.
+     */
+    {
+        id: "ai-tools",
+        title: "AI Tools",
+        description:
+            "Browser-built briefs for ChatGPT, Claude, Gemini and other assistants: a clear prompt from a rough idea, a debugging task from a bug, a context pack for a project.",
+        seoDescription:
+            "AI Tools from ToolZen Hub: build a complete prompt from a rough idea, turn a bug report into a debugging task for a coding assistant, and write a project context pack for ChatGPT, Claude, Gemini or Copilot. They run in your browser and call no AI service.",
+        summary:
+            "Prompt, debugging-task and context-pack builders for ChatGPT, Claude and Gemini",
+        icon: "✦",
+        landing: "aiTools",
+        pathPrefix: "tools"
     }
 
 ];
