@@ -174,6 +174,6 @@ Stale tests were corrected along the way (sidebar-duplicate links, D3 as replace
 
 ### Not completed
 
-- **Rendered link crawl** (`links`, every page): it needs more than 10 minutes, so it runs in the background, and the environment's low-memory guard has stopped it before. The static link check (33,387 anchors) passes. A run started on 2026-11-10 is recorded below if it finished.
+- **Rendered link crawl** (`links`, every page): it needs more than 10 minutes, so it runs in the background, and the environment's low-memory guard has stopped it before. The static link check (33,387 anchors) passes. A run on 2026-11-10 was stopped by the guard after about 2 minutes (free memory 322 MB), and its leftover processes were ended. **Not verified.**
 - **SEO baseline** (`seo-baseline`): same constraint. Its snapshot also predates the 530 Practice Labs pages and will need a review. `npm run test:static` SEO passes.
 - **Intermittent:** `world-clock` on mobile, at 360 px. In 2 of 3 full runs one test timed out on scrollIntoViewIfNeeded, a different test each time; the third full run passed 87 of 87, and both tests pass 6 of 6 alone. Nothing was changed.
