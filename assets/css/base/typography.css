@@ -73,7 +73,9 @@ a {
     transition: color var(--transition-fast);
 }
 
-a:hover {
+/* Zero-specificity hover (:where), so a control that sets its own text colour (a filled button, the footer logo) keeps it:
+   with plain `a:hover` the text of "Browse all tools" turned the same indigo as its hovered background (owner finding, 2026-11-11). */
+a:where(:hover) {
     color: var(--color-primary-dark);
 }
 

@@ -220,3 +220,17 @@ Snapshot reviews (both snapshots predated the 530 Practice Labs pages):
 
 - The growth-manifest unit guard fails off `main` by design (finding #11).
 - Production (Hostinger, `toolzenhub.in`) is not deployed; it needs separate owner authorisation.
+
+## Product transformation programme, from 2026-11-11
+
+Owner instruction (2026-11-11): work autonomously through the whole programme (design system, shared navigation, the six ecosystems, Practice Labs, a seventh AI Tools ecosystem, content), one workstream at a time, publishing to the GitHub Pages preview only. The Pages workflow (`.github/workflows/pages.yml`) deploys every push of `feature/unified-ecosystem-workspace`, so a push is the publish step; `main` and Hostinger stay untouched.
+
+### Batch 1: the three reported defects
+
+| Report | Finding | Action |
+|---|---|---|
+| "Browse Tools" label invisible on hover | **Reproduced.** The hero's "Browse all tools" button: on hover its text and its background were both `#3730a3`. Root cause: the base rule `a:hover { color: var(--color-primary-dark) }` (specificity 0,1,1) outranks every single-class control that sets its own text colour (`.btn-primary`, `.footer__logo`, `.learn-button`, `.about-primary-button`). An audit of every visible link and button on 12 page types found the same fault on 6 controls (hero CTA, footer logo on every page, "Start lesson 1" on each learning path, "Explore All Categories" on About) | The hover rule is `a:where(:hover)` (zero specificity), and `.btn-primary:hover` states its text colour. Re-audit: 0 controls under 3:1 in default, hover or focus. 4 new browser tests fail without the fix |
+| Logo and wordmark stack on phones | **Not reproduced** in Chrome at 320, 360 and 390 px on home, a calculator, a legal page, the directory, a lesson and a lab: the mark (36 px) and "ToolZen Hub" sit side by side in the header (and in the footer), and nothing overflows. The existing `home-brand` test keeps the brand under 60 px tall at 320 px | None. If it recurs, the device, browser and page are needed |
+| Lesson numbers out of order (1, 2, 33, 31) | **Not reproduced.** A scan of all 531 built Practice Labs pages found every numbered list consecutive, and the lab tools' lesson lists are consecutive. Numbering comes from the curriculum's authored order (`flatLessons`), not from file names or ids | A unit test now guards it for every published path: numbers 1..N, each module starts where the previous ended, the previous/next chain is unbroken |
+
+Rule change: none.

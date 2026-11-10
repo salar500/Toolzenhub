@@ -75,6 +75,25 @@ test("SQL: each lesson has all teaching sections, real examples and existing exe
   }
 });
 
+test("every published path numbers its lessons 1..N in curriculum order; each module starts where the previous ended; the pager chain is unbroken", () => {
+  for (const path of publishedPaths()) {
+    const all = flatLessons(path);
+    assert.deepEqual(all.map((e) => e.number), all.map((_, i) => i + 1), `${path.id}: numbering`);
+    assert.ok(all.every((e) => e.total === all.length), `${path.id}: total`);
+    assert.equal(new Set(all.map((e) => e.lesson.id)).size, all.length, `${path.id}: a lesson id repeats`);
+    all.forEach((e, i) => {
+      assert.equal(e.previous?.lesson.id ?? null, all[i - 1]?.lesson.id ?? null, `${path.id} ${e.lesson.id}: previous`);
+      assert.equal(e.next?.lesson.id ?? null, all[i + 1]?.lesson.id ?? null, `${path.id} ${e.lesson.id}: next`);
+    });
+    let expectStart = 1;
+    for (const level of path.levels) for (const module of level.modules) {
+      const first = all.find((e) => e.lesson === module.lessons[0]);
+      assert.equal(first.number, expectStart, `${path.id} ${module.id}: the module's first lesson number`);
+      expectStart += module.lessons.length;
+    }
+  }
+});
+
 test("generated pages: one per node, unique addresses, one h1, title and description present, no raw markup leaks", async () => {
   const pages = learnPages();
   const { projects: sqlProjects } = await import("../../assets/js/practice-labs/sql/additions-lessons.js");
