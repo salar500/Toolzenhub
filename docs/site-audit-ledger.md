@@ -133,65 +133,47 @@ Stale tests corrected (each re-run green). No product defect was found:
 
 - Started. 10 of the 74 non-calculator specs are done: accessibility, analytics, articles, base64-encoder-decoder, base64url, build, contact, countdown-timer, cron-challenge-lab and cron-explainer.
 - Results: 251 passed and 1 failed. The failure is the CLS defect above, now fixed.
-- **Not yet run:** the other 64 specs on desktop; all non-calculator specs on mobile and root-desktop; the visual project; and the full unit suite. A unit run was stopped by the environment for low memory and is not counted.
+- Since completed: see "Regression results" in the 2026-11-10 section below.
 
-## CHECKPOINT (paused at the owner's request, 2026-11-10)
+## Regression and fixes, 2026-11-10
 
-Branch `feature/unified-ecosystem-workspace`. Every verified change is committed and pushed. `main` and Hostinger production are untouched.
+Branch `feature/unified-ecosystem-workspace`. Every change is committed and pushed. `main` and Hostinger production are untouched.
 
-### Fixed since the previous checkpoint (product defects, each with a regression check)
+### Product defects fixed (each with a check that fails without the fix)
 
 | Defect | Commit |
 |---|---|
-| Calculators overview layout shift, CLS 0.315 → 0.031 (breadcrumb rendered in the page) | `11ce898` |
-| Practice Labs accessibility: links in sentences relied on colour, an empty table-header corner cell, ARIA on the terminal simulators, and the ShopLite banner outside a landmark. axe now passes on all 662 pages | `f3d4ace` |
-| World Clock: "Reset all" was off-screen at 320 px after a long Explore search (grid column `minmax(0, 1fr)`; new on-screen assertion that fails without the fix) | `b8fec7c` |
+| Calculators overview layout shift, CLS 0.315 → 0.031 | `11ce898` |
+| Practice Labs accessibility: links that relied on colour, an empty table-header corner, ARIA on the terminal simulators, the ShopLite banner outside a landmark | `f3d4ace` |
+| World Clock "Reset all" off-screen at 320 px after a long search | `b8fec7c` |
+| **Wide result tables squeezed by the side-by-side layout** (9 calculators, columns hidden at 1280 px). Owner decision: the summary stays beside the inputs and the tables move to a full-width section below (rule in `docs/shared-tool-ux.md`) | `d741c28` |
+| Tool pages had 0 px under the header from 761 to 999 px (section pages 20 px) | `72aa335` |
+| Phone tool pages: focus and scroll targets could land under the sticky "Menu" tool bar (WCAG 2.4.11). The scroll padding now clears the header and the bar | `f1f9df5` |
+| The wide-table container repeated the table's landmark name (axe landmark-unique); it is now a plain `div` | `7a9d8cd` |
 
-Stale tests were corrected along the way (sidebar-duplicate links, D3 as replaced, rule 8 persistent workspace, the 2e4345b quick dates, ShopLite has no site chrome). Each was re-run green; see the commit messages.
+Stale tests were corrected along the way (sidebar-duplicate links, D3 as replaced, rule 8 persistent workspace, the quick dates, GL-01 as updated, ShopLite without site chrome, phone drawer links). Each was re-run green; the commit messages give the details.
 
-### Regression status
+### Regression results (one worker, sequential)
 
-| Suite | Status |
+| Suite | Result |
 |---|---|
-| Calculator specs, desktop | 690: 679 passed, 11 skipped (intended) |
-| Calculator specs, mobile | 689: 678 passed, 11 skipped (intended) |
-| Non-calculator specs, subpath-desktop | All run, and every failure was fixed and re-run green, **except** `links` (rendered crawl) and `seo-baseline`. Each needs more than 10 minutes, so it must run in the background, and the environment's low-memory guard stopped it. **Unverified.** |
-| site-a11y (axe, 662 pages) | 662 passed |
-| smoke (all pages) | 677 passed (1 fixed: ShopLite inventory) |
-| site-tablet (662 pages) | 662 passed |
-| visual-desktop | **35 of 39 differ**. Baselines date from `3f8e17a`, before the workspace sidebar, side-by-side results and sticky header. Do not re-record yet: see the open defect below |
-| visual-mobile, visual-tablet | **Not run** |
-| subpath-mobile, non-calculator specs | **Not run** |
-| root-desktop (@portable, 813 tests) | **Not run** |
-| Full unit suite | **Not run** since the changes (the environment stopped it once); targeted unit files passed |
-| `npm run test:static`, both builds, Pages preview check | **Not run** since these changes |
+| Calculator specs, desktop / mobile | 690: 679 passed, 11 skipped / 689: 678 passed, 11 skipped. The 9 changed calculators were re-run after `d741c28`, all green |
+| `calculator-wide-tables` (new, all 30 calculators at 1280) | 31 of 31 |
+| Non-calculator specs, subpath-desktop | All run; every failure was fixed and re-run green |
+| Non-calculator specs, subpath-mobile | 70 specs: 1,198 passed, 0 failed, 16 skipped (by design) |
+| site-a11y (axe, 662 pages), desktop / mobile | 662 / 662 passed |
+| smoke (all pages), desktop / mobile / root-desktop | 677 / 677 / 677 passed |
+| site-tablet (662 pages), desktop / mobile | 662 / 662 passed |
+| root-desktop, other @portable specs | 135 passed |
+| visual-desktop / mobile / tablet | Re-recorded after review (35 / 35 / 19 images): 39 / 39 / 20 passed, 19 skipped on tablet by design |
+| dom-baseline | 16 of 16 (3 regions re-recorded after review) |
+| Unit suite (174 files) | 3,943 tests: 3,938 passed, 4 skipped, 1 failed. The failure is the intended growth-manifest guard that refuses to run off `main` (finding #11) |
+| `npm run test:static` | Passes |
+| Builds | `dist/` and `dist-ghpages/` rebuilt; build-output 17 of 17 |
+| GitHub Pages preview | Serves `7a9d8cd` (changed files fetched from the live preview) |
 
-### OPEN DEFECT (start here)
+### Not completed
 
-The side-by-side calculator layout (`f811fe5`) squeezes wide result tables. At 1280 px, the result column is 424 px wide (374 px inside), so these tables scroll sideways and their right-hand columns are hidden (EMI's "Balance at year end", for example). Needed width in px:
-
-| Calculator | Needs |
-|---|---|
-| balance-transfer, emi, home-loan, sip | 560 |
-| margin | 643 |
-| ppf | 812 |
-| prepayment | 657 |
-| profit | 573 |
-| swp | 426 |
-
-The other 20 calculators fit. Loan Comparison has its own layout.
-
-Fix options to weigh. Keep "heading, inputs, action and primary result visible at 1280" (owner finding 4), and do not shrink text:
-
-1. Let the wide schedule or table leave the result column and span the full width below the form and result. This keeps the side-by-side summary.
-2. Use a wider result column (for example 1fr 1fr) plus compact table cells. This probably still falls short for PPF.
-3. Use the side-by-side layout only from a larger width, for calculators with wide tables.
-
-Then: add a browser test that no result table scrolls sideways at 1280 (start from scratchpad `tblfit.mjs`, logic described above). Review the visual diffs and re-record the visual baselines. Run visual-mobile and visual-tablet, then the subpath-mobile non-calculator specs, root-desktop, the unit suite, static checks, both builds and the Pages preview check.
-
-### Exact next actions
-
-1. Fix the open defect (TDD), then run the calculator specs once more on desktop.
-2. Review and re-record the visual baselines (`npm run baseline:update` updates DOM and visual; review the diffs first).
-3. Continue the regression in the order of the table above, one worker, in chunks under 10 minutes. For all-page specs, split by path: `--grep-invert "practice-labs/[a-z]"`, then `-g "/practice-labs/[a-d]"`, `[e-l]`, `[m-r]` and `[s-z]`.
-4. `links` and `seo-baseline` need a background run of more than 10 minutes. They will finish only if Claude Code is started with `CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1`, or with more free memory.
+- **Rendered link crawl** (`links`, every page): it needs more than 10 minutes, so it runs in the background, and the environment's low-memory guard has stopped it before. The static link check (33,387 anchors) passes. A run started on 2026-11-10 is recorded below if it finished.
+- **SEO baseline** (`seo-baseline`): same constraint. Its snapshot also predates the 530 Practice Labs pages and will need a review. `npm run test:static` SEO passes.
+- **Intermittent:** `world-clock` on mobile, at 360 px. In 2 of 3 full runs one test timed out on scrollIntoViewIfNeeded, a different test each time; the third full run passed 87 of 87, and both tests pass 6 of 6 alone. Nothing was changed.
