@@ -10,15 +10,15 @@ import { test, expect, expectClean, settleImages, livePages, rel, expectNoHorizo
 const articles = livePages.filter((p) => p.type === "article");
 const titleOf = (p) => p.expectedTitle.replace(/ \| ToolZen Hub$/, "");
 // no featured image (a text comparison reads better than a generic chart): only the second SWP article, which also has no card image
-const NO_IMAGE = new Set(["what-changes-how-long-a-corpus-lasts"]);
+const NO_IMAGE = new Set(["what-changes-how-long-a-corpus-lasts", "how-to-write-instructions-an-ai-assistant-can-act-on", "how-to-give-an-ai-assistant-your-projects-context", "how-to-read-an-ai-answer-before-you-trust-it"]); // the AI guides (Tool Pack 56) are method, with nothing to chart
 // The original articles (topic "loan-comparison") have five curated related articles and lead to Loan Comparison; the
 // articles of each Tool Pack have three and lead to that pack's tool. A new pack adds ONE line to the first map (and to
 // the second when its category is not Loans). A topic missing from the maps fails the call-to-action or breadcrumb
 // assertion below, so a new pack cannot pass unnoticed. Which articles exist is pinned elsewhere (inventory, articles.test.mjs).
 const ORIGINAL_TOPIC = "loan-comparison";
-const PACK_TOOL = { investment: "sip", tax: "income-tax", "loan-prepayment": "prepayment", "balance-transfer": "balance-transfer", sip: "sip", margin: "margin", profit: "profit", "home-loan": "home-loan", fd: "fd", gst: "gst", cagr: "cagr", percentage: "percentage", math: "percentage", swp: "swp", business: "roi", health: "calorie", converter: "unit-converter" }; // topic -> the tool its articles lead to
-const PACK_CATEGORY = { investment: { name: "Investment", slug: "investment" }, tax: { name: "Tax", slug: "tax" }, sip: { name: "Investment", slug: "investment" }, margin: { name: "Business", slug: "business" }, profit: { name: "Business", slug: "business" }, fd: { name: "Investment", slug: "investment" }, gst: { name: "Tax", slug: "tax" }, cagr: { name: "Investment", slug: "investment" }, percentage: { name: "Math", slug: "math" }, math: { name: "Math", slug: "math" }, swp: { name: "Investment", slug: "investment" }, business: { name: "Business", slug: "business" }, health: { name: "Health", slug: "health" }, converter: { name: "Converter", slug: "converter" } }; // topic -> category, when it is not Loans
-const LEADS_TO = { "what-is-loan-prepayment": "prepayment" }; // an original guide that leads to a pack's tool
+const PACK_TOOL = { investment: "sip", tax: "income-tax", "loan-prepayment": "prepayment", "balance-transfer": "balance-transfer", sip: "sip", margin: "margin", profit: "profit", "home-loan": "home-loan", fd: "fd", gst: "gst", cagr: "cagr", percentage: "percentage", math: "percentage", swp: "swp", business: "roi", health: "calorie", converter: "unit-converter", ai: "prompt-builder" }; // topic -> the tool its articles lead to
+const PACK_CATEGORY = { investment: { name: "Investment", slug: "investment" }, tax: { name: "Tax", slug: "tax" }, sip: { name: "Investment", slug: "investment" }, margin: { name: "Business", slug: "business" }, profit: { name: "Business", slug: "business" }, fd: { name: "Investment", slug: "investment" }, gst: { name: "Tax", slug: "tax" }, cagr: { name: "Investment", slug: "investment" }, percentage: { name: "Math", slug: "math" }, math: { name: "Math", slug: "math" }, swp: { name: "Investment", slug: "investment" }, business: { name: "Business", slug: "business" }, health: { name: "Health", slug: "health" }, converter: { name: "Converter", slug: "converter" }, ai: { name: "AI", slug: "ai" } }; // topic -> category, when it is not Loans
+const LEADS_TO = { "what-is-loan-prepayment": "prepayment", "how-to-give-an-ai-assistant-your-projects-context": "context-pack-builder", "how-to-read-an-ai-answer-before-you-trust-it": "ai-answer-checklist" }; // a guide that leads to a tool other than its topic's first
 const toolOf = (a) => LEADS_TO[a.slug] ?? PACK_TOOL[a.topic] ?? "loan-comparison";
 const categoryOf = (a) => PACK_CATEGORY[a.topic] ?? { name: "Loans", slug: "loans" };
 
@@ -64,11 +64,11 @@ test.describe("published article pages", () => {
 
       // calculator link area
       const cta = page.locator(".article-calculator-button");
-      await expect(cta).toHaveAttribute("href", `${siteRoot}calculators/${toolOf(a)}/`);
+      await expect(cta).toHaveAttribute("href", `${siteRoot}${a.topic === "ai" ? "tools" : "calculators"}/${toolOf(a)}/`); // an AI guide leads to a section tool under /tools/
 
       // related articles: the curated list (five; three for the Loan Prepayment and Balance Transfer articles), all resolvable, none is the page itself
       const related = await page.locator(".article-related-card").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
-      expect(related).toHaveLength(a.topic === ORIGINAL_TOPIC ? 5 : a.topic === "health" || a.topic === "converter" ? 0 : a.topic === "business" || a.topic === "tax" ? 2 : a.topic === "margin" || a.topic === "profit" || a.topic === "fd" || a.topic === "gst" || a.topic === "cagr" || a.topic === "percentage" || a.topic === "math" || a.topic === "swp" ? 2 : 3); // Margin and Profit: three-article clusters, so two others; FD: a two-article cluster, so the other one (and one SIP article)
+      expect(related).toHaveLength(a.topic === ORIGINAL_TOPIC ? 5 : a.topic === "health" || a.topic === "converter" ? 0 : a.topic === "business" || a.topic === "tax" ? 2 : a.topic === "margin" || a.topic === "profit" || a.topic === "fd" || a.topic === "gst" || a.topic === "cagr" || a.topic === "percentage" || a.topic === "math" || a.topic === "swp" || a.topic === "ai" ? 2 : 3); // the AI guides: a three-article cluster; Margin and Profit: three-article clusters, so two others; FD: a two-article cluster, so the other one (and one SIP article)
       for (const h of related) {
         expect(h).not.toBe(`${siteRoot}articles/${a.topic}/${a.slug}/`);
         expect((await api.get(h)).status(), h).toBe(200);
@@ -99,8 +99,8 @@ test.describe("articles listing page", () => {
     await go("articles.html");
     await expect(page.locator("h1")).toHaveText("Articles & Guides");
     await expect(cards(page)).toHaveCount(5);
-    await expect(page.locator(".articles-pagination button[data-page]:not([data-page=next])")).toHaveCount(8);
-    // sidebar counts are published-only: first five shown: Loans 13, Investment 11, Tax 3, Business 7, Health 1 (Math 4 and Converter 1 sit behind "more")
+    await expect(page.locator(".articles-pagination button[data-page]:not([data-page=next])")).toHaveCount(9);
+    // sidebar counts are published-only: first five shown: Loans 13, Investment 11, Tax 3, Business 7, Health 1 (Math 4, Converter 1 and AI 3 sit behind "more")
     const counts = await page.locator(".article-category-count").evaluateAll((l) => l.map((x) => x.textContent.replace(/\D+/g, "")));
     expect(counts).toEqual(["13", "11", "3", "7", "1"]);
     // page 1 is the first five published articles, all clickable
@@ -109,16 +109,16 @@ test.describe("articles listing page", () => {
     expectClean(watch);
   });
 
-  test("pagination: eight pages of five published articles; no placeholder is left", async ({ page, go }) => {
+  test("pagination: eight full pages of five published articles and a ninth of three; no placeholder is left", async ({ page, go }) => {
     await go("articles.html");
-    for (const n of [2, 3, 4, 5, 6, 7]) {
+    for (const n of [2, 3, 4, 5, 6, 7, 8]) {
       await page.locator(`.articles-pagination button[data-page="${n}"]`).click();
       await expect(page.locator(`.articles-pagination button[data-page="${n}"]`)).toHaveClass(/active/);
       await expect(cards(page)).toHaveCount(5);
       await expect(soonCards(page)).toHaveCount(0);
     }
-    await page.locator('.articles-pagination button[data-page="8"]').click();
-    await expect(cards(page)).toHaveCount(5);
+    await page.locator('.articles-pagination button[data-page="9"]').click();
+    await expect(cards(page)).toHaveCount(3);
     await expect(soonCards(page)).toHaveCount(0);
     await expect(page.locator(".articles-pagination .pagination-next")).toBeDisabled();
   });

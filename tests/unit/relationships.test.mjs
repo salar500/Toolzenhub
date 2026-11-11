@@ -186,6 +186,9 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
       : key.startsWith("gst/") ? ["gst"] // the only published Tax tool: no category fallback beyond it
       : key.startsWith("margin/") ? ["margin", "profit", "roi"] // the primary tool first, then the other published Business tools
       : key.startsWith("profit/") ? ["profit", "margin", "roi"]
+      : key === "ai/how-to-write-instructions-an-ai-assistant-can-act-on" ? ["prompt-builder"] // the AI guides (Tool Pack 56): the curated tool only, since the AI category has no calculator category to fall back to
+      : key === "ai/how-to-give-an-ai-assistant-your-projects-context" ? ["context-pack-builder"]
+      : key === "ai/how-to-read-an-ai-answer-before-you-trust-it" ? ["ai-answer-checklist"]
       : ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"];
     for (const key of PUBLISHED) assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(key)), expected(key), key);
     assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(PUBLISHED[0], { fill: false })), ["loan-comparison"]);
@@ -195,7 +198,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     for (const key of PUBLISHED) {
       const entry = articles.getArticleByKey(key);
       assert.deepEqual(keys(rel.getRelatedArticles(key)), entry.related, key);
-      assert.equal(rel.getRelatedArticles(key).length, key === "business/roi-vs-profit-whats-the-difference" ? 2 : key.startsWith("health/") || key.startsWith("converter/") ? 0 : key === "tax/tax-saving-guide-save-more-legally" ? 2 : key === "investment/best-sip-strategies-for-beginners" ? 3 : key.startsWith("margin/") || key.startsWith("profit/") || key.startsWith("fd/") || key.startsWith("gst/") || key.startsWith("cagr/") || key.startsWith("percentage/") || key.startsWith("math/") || key.startsWith("swp/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") || key.startsWith("home-loan/") ? 3 : 5, key); // Margin and Profit: three-article clusters, so two others
+      assert.equal(rel.getRelatedArticles(key).length, key === "business/roi-vs-profit-whats-the-difference" ? 2 : key.startsWith("health/") || key.startsWith("converter/") ? 0 : key === "tax/tax-saving-guide-save-more-legally" ? 2 : key === "investment/best-sip-strategies-for-beginners" ? 3 : key.startsWith("margin/") || key.startsWith("profit/") || key.startsWith("fd/") || key.startsWith("gst/") || key.startsWith("cagr/") || key.startsWith("percentage/") || key.startsWith("math/") || key.startsWith("swp/") || key.startsWith("ai/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") || key.startsWith("home-loan/") ? 3 : 5, key); // Margin and Profit: three-article clusters, so two others
     }
   });
 
@@ -268,7 +271,7 @@ describe("curated first, automatic second", () => {
     savedRelated = first().related;
     first().related = [];
     // the other published articles of ITS category (Loans): the Investment and Business articles are not offered
-    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/") && !k.startsWith("profit/") && !k.startsWith("fd/") && !k.startsWith("gst/") && !k.startsWith("cagr/") && !k.startsWith("percentage/") && !k.startsWith("math/") && !k.startsWith("swp/") && !k.startsWith("investment/") && !k.startsWith("tax/") && !k.startsWith("business/") && !k.startsWith("health/") && !k.startsWith("converter/")).slice(1));
+    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/") && !k.startsWith("profit/") && !k.startsWith("fd/") && !k.startsWith("gst/") && !k.startsWith("cagr/") && !k.startsWith("percentage/") && !k.startsWith("math/") && !k.startsWith("swp/") && !k.startsWith("investment/") && !k.startsWith("tax/") && !k.startsWith("business/") && !k.startsWith("health/") && !k.startsWith("converter/") && !k.startsWith("ai/")).slice(1));
   });
 
   test("a curated article list is never replaced or padded by the automatic one", () => {

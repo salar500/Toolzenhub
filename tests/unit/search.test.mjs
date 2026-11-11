@@ -61,7 +61,7 @@ const buildCorpus = () => {
 describe("index structure", () => {
   test("covers categories, tools and articles (no subcategories are defined yet)", () => {
     const count = (type) => idx.searchIndex.filter((e) => e.type === type).length;
-    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 74, 40]); // 74: the four AI Tools (Tool Pack 56)
+    assert.deepEqual([count("category"), count("subcategory"), count("tool"), count("article")], [8, 0, 74, 43]); // Tool Pack 56: the four AI Tools and the three AI guides (the index's categories are the calculator categories; the AI article category is not one)
     assert.equal(new Set(idx.searchIndex.map((e) => e.key)).size, idx.searchIndex.length);
   });
 

@@ -16,7 +16,7 @@
 import { test, expect, livePages, rel, INVENTORY } from "../helpers/test-base.mjs";
 import { RELEASES } from "../../assets/js/practice-labs/shoplite/bugs.js";
 
-const CATEGORY_SLUGS = ["loans", "investment", "tax", "business", "health", "math", "converter"];
+const CATEGORY_SLUGS = ["loans", "investment", "tax", "business", "health", "math", "converter", "ai"];
 const SOON = ".calculator-card--soon, .category-page-card--soon, .article-card--soon";
 
 const VARIANTS = [

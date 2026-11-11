@@ -83,7 +83,7 @@ Each tool lists the other two (rule 4.2: inside the section). `autoRelated` is d
 
 ## 21. Articles
 
-NOT NEEDED in v1. The brief lists eight AI articles; they follow once the tools have been reviewed on the preview, so each article can point at a tool that exists.
+Built 2026-11-11 (Batch 4): article category `ai` ("AI"), and three guides, one per built tool, each answering one question: writing instructions an assistant can act on (Prompt Builder), giving an assistant a project's context (Context Pack Builder), reading an AI answer before trusting it (Evidence Checklist). Text only (method, nothing to chart); each links the other two. The brief's other five follow their tools.
 
 ## 22. Imagery
 

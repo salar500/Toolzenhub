@@ -81,13 +81,21 @@ const LAST_PLACEHOLDERS_PUBLISHED = [
   "investment/best-sip-strategies-for-beginners",
   "tax/tax-saving-guide-save-more-legally",
 ];
-const PUBLISHED = [...ORIGINAL_PUBLISHED, ...PREPAYMENT_PACK_PUBLISHED, ...BALANCE_TRANSFER_PACK_PUBLISHED, ...SIP_PACK_PUBLISHED, ...MARGIN_PACK_PUBLISHED, ...PROFIT_PACK_PUBLISHED, ...HOME_LOAN_PACK_PUBLISHED, ...FD_PACK_PUBLISHED, ...GST_PACK_PUBLISHED, ...CAGR_PACK_PUBLISHED, ...PERCENTAGE_PACK_PUBLISHED, ...SWP_PACK_PUBLISHED, ...PERCENTAGE_BASICS_PUBLISHED, ...COMPLETION_PUBLISHED, ...LAST_PLACEHOLDERS_PUBLISHED];
+// published 2026-11-11 with the AI Tools section (Tool Pack 56): text only, each beside the AI Tool built for it
+const AI_PACK_PUBLISHED = [
+  "ai/how-to-write-instructions-an-ai-assistant-can-act-on",
+  "ai/how-to-give-an-ai-assistant-your-projects-context",
+  "ai/how-to-read-an-ai-answer-before-you-trust-it",
+];
+const AI_TOOLS = { "ai/how-to-write-instructions-an-ai-assistant-can-act-on": ["prompt-builder"], "ai/how-to-give-an-ai-assistant-your-projects-context": ["context-pack-builder"], "ai/how-to-read-an-ai-answer-before-you-trust-it": ["ai-answer-checklist"] };
+const PUBLISHED = [...ORIGINAL_PUBLISHED, ...PREPAYMENT_PACK_PUBLISHED, ...BALANCE_TRANSFER_PACK_PUBLISHED, ...SIP_PACK_PUBLISHED, ...MARGIN_PACK_PUBLISHED, ...PROFIT_PACK_PUBLISHED, ...HOME_LOAN_PACK_PUBLISHED, ...FD_PACK_PUBLISHED, ...GST_PACK_PUBLISHED, ...CAGR_PACK_PUBLISHED, ...PERCENTAGE_PACK_PUBLISHED, ...SWP_PACK_PUBLISHED, ...PERCENTAGE_BASICS_PUBLISHED, ...COMPLETION_PUBLISHED, ...LAST_PLACEHOLDERS_PUBLISHED, ...AI_PACK_PUBLISHED];
 const COMING_SOON = [];
 // metadata that must live ONLY in the catalog, never in a content module
 const METADATA_KEYS = ["slug", "topic", "category", "categoryName", "title", "description", "datePublished", "dateModified", "readTime", "image", "relatedArticles"];
 
-let catalog, legacy, model, calcs;
+let catalog, legacy, model, calcs, tools;
 before(async () => {
+  tools = await import("../../assets/js/data/tools.js");
   catalog = await import("../../assets/js/data/articles.js");
   legacy = await import("../../assets/js/article-registry.js");
   model = await import("../../assets/js/pages/article/article-model.js");
@@ -95,10 +103,10 @@ before(async () => {
 });
 
 describe("catalog model", () => {
-  test("40 entries: the original ids 1..12 plus the Tool Pack articles 13 to 40, with unique ids and keys", () => {
-    assert.deepEqual(catalog.articles.map((a) => a.id), [1, 2, 3, 4, 5, 6, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 11, 9, 10, 12, 7, 8]);
-    assert.equal(new Set(catalog.articles.map((a) => a.id)).size, 40);
-    assert.equal(new Set(catalog.articles.map((a) => a.key)).size, 40);
+  test("43 entries: the original ids 1..12 plus the Tool Pack articles 13 to 43, with unique ids and keys", () => {
+    assert.deepEqual(catalog.articles.map((a) => a.id), [1, 2, 3, 4, 5, 6, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 11, 9, 10, 12, 7, 8, 41, 42, 43]);
+    assert.equal(new Set(catalog.articles.map((a) => a.id)).size, 43);
+    assert.equal(new Set(catalog.articles.map((a) => a.key)).size, 43);
   });
 
   test("every entry has an explicit status of published or coming-soon", () => {
@@ -152,7 +160,7 @@ describe("catalog model", () => {
   test("hero images: every published article has /assets/Images/articles/<slug>.png except the SWP sensitivity article, which deliberately has none", () => {
     for (const a of catalog.articles.filter((x) => x.published)) {
       // the three Tool Pack 53 guides were first published text-only (owner 2026-11-02); the owner then approved original text-free diagram covers for them, so they follow the general rule below
-      if (a.slug === "what-changes-how-long-a-corpus-lasts") assert.equal(a.heroImage, null, a.slug); // a comparison of durations reads better as text than as a generic chart (owner 2026-10-31: no repetitive generic charts)
+      if (a.slug === "what-changes-how-long-a-corpus-lasts" || AI_PACK_PUBLISHED.includes(a.key)) assert.equal(a.heroImage, null, a.slug); // a comparison of durations reads better as text than as a generic chart (owner 2026-10-31: no repetitive generic charts); the AI guides are method, with nothing to chart
       else {
         assert.equal(a.heroImage.src, `/assets/Images/articles/${a.slug}.png`, a.slug);
         assert.equal(a.cardImage.src, a.heroImage.src, a.slug);
@@ -165,10 +173,11 @@ describe("catalog model", () => {
     for (const a of catalog.articles.filter((x) => x.published && x.heroImage)) assert.ok(a.heroImage.alt.length > 30, a.slug);
   });
 
-  test("every category exists; published counts are loans 13, investment 11, tax 3, business 7, health 1, math 4, converter 1", () => {
+  test("every category exists; published counts are loans 13, investment 11, tax 3, business 7, health 1, math 4, converter 1, ai 3", () => {
     const slugs = catalog.articleCategories.map((c) => c.slug);
     for (const a of catalog.articles) assert.ok(slugs.includes(a.category), a.key);
-    assert.deepEqual(Object.fromEntries(catalog.articleCategories.map((c) => [c.slug, c.count])), { loans: 13, investment: 11, tax: 3, business: 7, health: 1, math: 4, converter: 1 });
+    assert.deepEqual(Object.fromEntries(catalog.articleCategories.map((c) => [c.slug, c.count])), { loans: 13, investment: 11, tax: 3, business: 7, health: 1, math: 4, converter: 1, ai: 3 });
+    assert.equal(catalog.articleCategories.find((c) => c.slug === "ai").name, "AI"); // no calculator category behind it: the name is the article category's own
   });
 });
 
@@ -187,7 +196,7 @@ describe("relationships", () => {
       }
       // PUBLISHED above pins which articles exist; every one that is not an original belongs to a Tool Pack. The FD cluster is two articles, each relating to the other and to one SIP article. The Margin and Profit clusters
       // are three articles each and the other Business cluster is a different tool's, so each article relates to the other two of its own cluster.
-      const expected = ORIGINAL_PUBLISHED.includes(a.key) ? 5 : [...MARGIN_PACK_PUBLISHED, ...PROFIT_PACK_PUBLISHED, ...FD_PACK_PUBLISHED, ...GST_PACK_PUBLISHED, ...CAGR_PACK_PUBLISHED, ...PERCENTAGE_PACK_PUBLISHED, ...PERCENTAGE_BASICS_PUBLISHED, ...SWP_PACK_PUBLISHED].includes(a.key) ? 2 : 3;
+      const expected = ORIGINAL_PUBLISHED.includes(a.key) ? 5 : [...MARGIN_PACK_PUBLISHED, ...PROFIT_PACK_PUBLISHED, ...FD_PACK_PUBLISHED, ...GST_PACK_PUBLISHED, ...CAGR_PACK_PUBLISHED, ...PERCENTAGE_PACK_PUBLISHED, ...PERCENTAGE_BASICS_PUBLISHED, ...SWP_PACK_PUBLISHED, ...AI_PACK_PUBLISHED].includes(a.key) ? 2 : 3; // the AI guides: a three-article cluster, so the other two
       assert.equal(a.related.length, expected, a.key);
       assert.equal(new Set(a.related).size, expected, a.key);
       for (const key of a.related) {
@@ -218,10 +227,11 @@ describe("relationships", () => {
       : SWP_PACK_PUBLISHED.includes(key) ? ["swp"]
       : LAST_PLACEHOLDERS_PUBLISHED.includes(key) ? [key.startsWith("tax/") ? "income-tax" : "sip"]
       : COMPLETION_TOOLS[key] ? COMPLETION_TOOLS[key]
+      : AI_TOOLS[key] ? AI_TOOLS[key]
       : ["loan-comparison"];
     for (const a of catalog.articles.filter((x) => x.published)) {
       assert.deepEqual(a.tools, expected(a.key), a.key);
-      for (const id of a.tools) assert.equal(calcs.getCalculatorById(id)?.status, "published");
+      for (const id of a.tools) assert.equal((calcs.getCalculatorById(id) ?? tools.getToolById(id))?.status, "published", `${a.key} -> ${id}`); // an AI guide's tool is a section tool, not a calculator
     }
   });
 });
@@ -249,8 +259,9 @@ describe("article model (metadata + content -> page object)", () => {
     assert.equal(article.dateModified, "Aug 25, 2026");
     assert.equal(article.readTime, "5 min read");
     assert.deepEqual(article.image, { src: "/assets/Images/articles/emi-vs-total-interest.png", alt: "Chart of the EMI falling and the total interest rising as the loan tenure gets longer" });
-    assert.deepEqual(Object.keys(article.calculator), ["slug", "title", "description"]);
+    assert.deepEqual(Object.keys(article.calculator), ["slug", "title", "description", "href"]);
     assert.equal(article.calculator.slug, "loan-comparison");
+    assert.equal(article.calculator.href, "/Toolzenhub/calculators/loan-comparison/"); // the tool's own page from the catalog, so a section tool (/tools/<id>/) links correctly too
     assert.equal(article.calculator.title, "Loan Comparison Calculator");
     assert.deepEqual(article.relatedArticles[0], {
       slug: "how-to-reduce-home-loan-interest",
@@ -284,8 +295,8 @@ describe("article model (metadata + content -> page object)", () => {
 });
 
 describe("derived views keep their old shape", () => {
-  test("legacy listing registry: 40 entries, first entry literal, `published` only on published articles", () => {
-    assert.equal(legacy.articleRegistry.length, 40);
+  test("legacy listing registry: 43 entries, first entry literal, `published` only on published articles", () => {
+    assert.equal(legacy.articleRegistry.length, 43);
     assert.deepEqual(legacy.articleRegistry[0], {
       id: 1, published: true, category: "loans", categoryName: "Loans", topic: "loan-comparison", slug: "how-to-reduce-home-loan-interest",
       title: "How to Reduce Your Home Loan Interest",
@@ -298,8 +309,8 @@ describe("derived views keep their old shape", () => {
       description: "Practical SIP habits for a beginner, with worked examples at an assumed return: start from the goal, keep an amount you can pay, start early, raise it, stay through falls and mind the costs.",
       date: "Nov 5, 2026", readTime: "6 min read", image: "/Toolzenhub/assets/Images/articles/best-sip-strategies-for-beginners.png", alt: "Two bars for the same 24,00,000 rupees invested: 10,000 a month for 20 years is estimated at 76,56,969 rupees and 20,000 a month for 10 years at 41,31,040 rupees, at an assumed 10% a year"
     }); // published 2026-11-05 from the Coming Soon placeholder
-    assert.equal(legacy.articleRegistry.filter((a) => a.published === true).length, 40);
-    assert.equal(legacy.articleRegistry.filter((a) => "published" in a).length, 40);
+    assert.equal(legacy.articleRegistry.filter((a) => a.published === true).length, 43);
+    assert.equal(legacy.articleRegistry.filter((a) => "published" in a).length, 43);
     // the SWP sensitivity article is the only published article without a card image (the three Tool Pack 53 guides have covers): the registry says so (image null, no alt) and its card draws no image block
     for (const a of legacy.articleRegistry.filter((x) => x.slug === "what-changes-how-long-a-corpus-lasts")) assert.deepEqual([a.image, a.alt], [null, ""], a.slug);
     for (const a of legacy.articleRegistry.filter((x) => [...COMPLETION_PUBLISHED, ...LAST_PLACEHOLDERS_PUBLISHED].some((k) => k.endsWith(`/${x.slug}`)))) assert.ok(a.image.endsWith(`/${a.slug}.png`) && a.alt.length > 40, a.slug); // covers approved by the owner after first publication

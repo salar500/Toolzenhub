@@ -11,11 +11,12 @@ import { getComingSoonTool } from "../helpers/coming-soon.mjs";
 globalThis.window = { location: { hostname: process.env.TZ_HOST || "salar500.github.io", pathname: "/" } };
 const ROOT = process.env.TZ_HOST ? "/" : "/Toolzenhub/";
 
-let cats, tax, calcs, articles, registry, crumb;
+let cats, tax, calcs, articles, registry, crumb, tools;
 before(async () => {
   cats = await import("../../assets/js/data/categories.js");
   tax = await import("../../assets/js/data/taxonomy.js");
   calcs = await import("../../assets/js/data/calculators.js");
+  tools = await import("../../assets/js/data/tools.js");
   articles = await import("../../assets/js/data/articles.js");
   registry = await import("../../assets/js/calculator-registry.js");
   crumb = await import("../../assets/js/components/breadcrumb.js");
@@ -186,12 +187,12 @@ describe("referential integrity", () => {
     assert.equal(new Set(ids).size, ids.length);
   });
 
-  test("article categories are major categories, with the same id and name", () => {
-    assert.deepEqual(articles.articleCategories.map((c) => c.slug), ["loans", "investment", "tax", "business", "health", "math", "converter"]);
-    for (const c of articles.articleCategories) assert.equal(tax.getCategory(c.slug).title, c.name, c.slug);
+  test("article categories are major categories, with the same id and name; AI is the one article category of its own", () => {
+    assert.deepEqual(articles.articleCategories.map((c) => c.slug), ["loans", "investment", "tax", "business", "health", "math", "converter", "ai"]); // AI (Tool Pack 56): an article category with no calculator category behind it
+    for (const c of articles.articleCategories) assert.equal(c.slug === "ai" ? "AI" : tax.getCategory(c.slug).title, c.name, c.slug);
     for (const a of articles.articles) {
-      assert.ok(tax.getCategory(a.category), a.key);
-      for (const id of a.tools || []) assert.ok(calcs.getCalculatorById(id), `${a.key} -> ${id}`);
+      assert.ok(a.category === "ai" || tax.getCategory(a.category), a.key);
+      for (const id of a.tools || []) assert.ok(calcs.getCalculatorById(id) || tools.getToolById(id)?.available, `${a.key} -> ${id}`); // an AI guide's tool is a section tool
     }
   });
 

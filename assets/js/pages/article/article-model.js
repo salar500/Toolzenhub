@@ -56,7 +56,9 @@ function buildCalculator(
         title:
             calculator.title,
         description:
-            content.calculator?.description
+            content.calculator?.description,
+        href:
+            calculator.href
     };
 
 }

@@ -45,6 +45,7 @@ const FOR = {
     "pdf-tools": "file",
     "practice-labs": "flask",
     "ai-tools": "spark",
+    ai: "spark",
     loans: "home",
     investment: "trend",
     tax: "receipt",

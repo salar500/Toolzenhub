@@ -66,15 +66,18 @@ const articleCategoryOrder = [
     { slug: "business", icon: "💼" },
     { slug: "health", icon: "❤️" },
     { slug: "math", icon: "🧮" },
-    { slug: "converter", icon: "🔄" }
+    { slug: "converter", icon: "🔄" },
+    /* AI (2026-11-11, Tool Pack 56): guides for the AI Tools section, which has no calculator category, so the name is given here */
+    { slug: "ai", name: "AI", icon: "✦" }
 ];
 
 
 export const articleCategories =
     articleCategoryOrder.map(
-        ({ slug, icon }) => ({
+        ({ slug, name, icon }) => ({
             slug,
             name:
+                name ||
                 categories.find(
                     category =>
                         category.id === slug
@@ -1488,6 +1491,81 @@ const catalog = [
             "gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates"
         ],
         relatedLabel: "Tax"
+    },
+
+
+    /* =====================================================
+       AI  (Tool Pack 56, published 2026-11-11; text only,
+       each beside the AI Tool built for it)
+    ===================================================== */
+
+    {
+        id: 41,
+        status: "published",
+        category: "ai",
+        topic: "ai",
+        slug: "how-to-write-instructions-an-ai-assistant-can-act-on",
+        title:
+            "How to Write Instructions an AI Assistant Can Act On",
+        description:
+            "Why the same assistant gives one person a weak answer and another a usable one: the deliverable, the reader, the facts, the rules, the criteria and what to do when unclear, with one request written badly and then well.",
+        publishedAt: "Nov 11, 2026",
+        updatedAt: "Nov 11, 2026",
+        readTime: "6 min read",
+        cardImage: null,
+        heroImage: null,
+        tools: ["prompt-builder"],
+        related: [
+            "ai/how-to-give-an-ai-assistant-your-projects-context",
+            "ai/how-to-read-an-ai-answer-before-you-trust-it"
+        ],
+        relatedLabel: "AI"
+    },
+
+    {
+        id: 42,
+        status: "published",
+        category: "ai",
+        topic: "ai",
+        slug: "how-to-give-an-ai-assistant-your-projects-context",
+        title:
+            "How to Give an AI Assistant Your Project's Context",
+        description:
+            "An assistant forgets everything between chats. A context pack is the project explained once: purpose, stack, key files, what is done, known traps, rules, the next task and how to respond, kept in the project and pasted at the start of each chat.",
+        publishedAt: "Nov 11, 2026",
+        updatedAt: "Nov 11, 2026",
+        readTime: "6 min read",
+        cardImage: null,
+        heroImage: null,
+        tools: ["context-pack-builder"],
+        related: [
+            "ai/how-to-write-instructions-an-ai-assistant-can-act-on",
+            "ai/how-to-read-an-ai-answer-before-you-trust-it"
+        ],
+        relatedLabel: "AI"
+    },
+
+    {
+        id: 43,
+        status: "published",
+        category: "ai",
+        topic: "ai",
+        slug: "how-to-read-an-ai-answer-before-you-trust-it",
+        title:
+            "How to Read an AI Answer Before You Trust It",
+        description:
+            "Fluency is not evidence. How to read an assistant's answer for what can be checked: the figures, the named sources, the absolute words, what is missing, and the questions that make the assistant show its working.",
+        publishedAt: "Nov 11, 2026",
+        updatedAt: "Nov 11, 2026",
+        readTime: "6 min read",
+        cardImage: null,
+        heroImage: null,
+        tools: ["ai-answer-checklist"],
+        related: [
+            "ai/how-to-write-instructions-an-ai-assistant-can-act-on",
+            "ai/how-to-give-an-ai-assistant-your-projects-context"
+        ],
+        relatedLabel: "AI"
     }
 
 ];
@@ -1592,6 +1670,24 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/tax/tax-saving-guide-save-more-legally.js"
+            ),
+
+    "ai/how-to-write-instructions-an-ai-assistant-can-act-on":
+        () =>
+            import(
+                "./articles/ai/how-to-write-instructions-an-ai-assistant-can-act-on.js"
+            ),
+
+    "ai/how-to-give-an-ai-assistant-your-projects-context":
+        () =>
+            import(
+                "./articles/ai/how-to-give-an-ai-assistant-your-projects-context.js"
+            ),
+
+    "ai/how-to-read-an-ai-answer-before-you-trust-it":
+        () =>
+            import(
+                "./articles/ai/how-to-read-an-ai-answer-before-you-trust-it.js"
             ),
 
     "sip/how-much-sip-do-you-need-for-a-goal":
