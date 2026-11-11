@@ -59,8 +59,11 @@ export async function mountTool(app = document.getElementById("app")) {
 
         watchDateFields(app); // a calendar button and "Use today" beside every date input, including ones drawn later
 
+        /* any tool whose result section follows a form (the calculators, the date and schedule tools; a brief tool adds its own
+           labelled link first and this call then does nothing): on a phone the result is one to three screens down */
+        addJumpToResult(app);
+
         if (source.includes("/calculators/")) {
-            addJumpToResult(app);
 
             /* a slider beside a bounded field (rate, years) that opted in; the number input stays the source of truth */
             if (app.querySelector("input[data-slider-max]")) {
