@@ -66,7 +66,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 0,
-      "visibleTextChars": 424
+      "visibleTextChars": 433
     }
   },
   "/about.html": {
@@ -106,7 +106,56 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 2884
+      "visibleTextChars": 2893
+    }
+  },
+  "/ai-tools.html": {
+    "runtime": {
+      "title": "AI Tools | ToolZen Hub",
+      "description": "AI Tools from ToolZen Hub: build a complete prompt from a rough idea, turn a bug report into a debugging task for a coding assistant, and write a project context pack for ChatGPT, Claude, Gemini or Copilot. They run in your browser and call no AI service.",
+      "canonical": "https://toolzenhub.in/ai-tools.html",
+      "robots": null,
+      "openGraph": {
+        "og:description": "AI Tools from ToolZen Hub: build a complete prompt from a rough idea, turn a bug report into a debugging task for a coding assistant, and write a project context pack for ChatGPT, Claude, Gemini or Copilot. They run in your browser and call no AI service.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "AI Tools | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/ai-tools.html"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "AI Tools from ToolZen Hub: build a complete prompt from a rough idea, turn a bug report into a debugging task for a coding assistant, and write a project context pack for ChatGPT, Claude, Gemini or Copilot. They run in your browser and call no AI service.",
+        "twitter:title": "AI Tools | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "AI Tools"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#fafaf9",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "AI Tools | ToolZen Hub",
+      "description": "AI Tools from ToolZen Hub: build a complete prompt from a rough idea, turn a bug report into a debugging task for a coding assistant, and write a project context pack for ChatGPT, Claude, Gemini or Copilot. They run in your browser and call no AI service.",
+      "canonical": "https://toolzenhub.in/ai-tools.html",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 1929
     }
   },
   "/articles.html": {
@@ -146,7 +195,223 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 0,
-      "visibleTextChars": 424
+      "visibleTextChars": 433
+    }
+  },
+  "/articles/ai/how-to-give-an-ai-assistant-your-projects-context/": {
+    "runtime": {
+      "title": "How to Give an AI Assistant Your Project's Context | ToolZen Hub",
+      "description": "An assistant forgets everything between chats. A context pack is the project explained once: purpose, stack, key files, what is done, known traps, rules, the next task and how to respond, kept in the project and pasted at the start of each chat.",
+      "canonical": "https://toolzenhub.in/articles/ai/how-to-give-an-ai-assistant-your-projects-context/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "An assistant forgets everything between chats. A context pack is the project explained once: purpose, stack, key files, what is done, known traps, rules, the next task and how to respond, kept in the project and pasted at the start of each chat.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How to Give an AI Assistant Your Project's Context | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/ai/how-to-give-an-ai-assistant-your-projects-context/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "An assistant forgets everything between chats. A context pack is the project explained once: purpose, stack, key files, what is done, known traps, rules, the next task and how to respond, kept in the project and pasted at the start of each chat.",
+        "twitter:title": "How to Give an AI Assistant Your Project's Context | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "How to Give an AI Assistant Your Project's Context"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#fafaf9",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How to Give an AI Assistant Your Project&#39;s Context | ToolZen Hub",
+      "description": "An assistant forgets everything between chats. A context pack is the project explained once: purpose, stack, key files, what is done, known traps, rules, the next task and how to respond, kept in the project and pasted at the start of each chat.",
+      "canonical": "https://toolzenhub.in/articles/ai/how-to-give-an-ai-assistant-your-projects-context/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 8639
+    }
+  },
+  "/articles/ai/how-to-read-an-ai-answer-before-you-trust-it/": {
+    "runtime": {
+      "title": "How to Read an AI Answer Before You Trust It | ToolZen Hub",
+      "description": "Fluency is not evidence. How to read an assistant's answer for what can be checked: the figures, the named sources, the absolute words, what is missing, and the questions that make the assistant show its working.",
+      "canonical": "https://toolzenhub.in/articles/ai/how-to-read-an-ai-answer-before-you-trust-it/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Fluency is not evidence. How to read an assistant's answer for what can be checked: the figures, the named sources, the absolute words, what is missing, and the questions that make the assistant show its working.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How to Read an AI Answer Before You Trust It | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/ai/how-to-read-an-ai-answer-before-you-trust-it/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Fluency is not evidence. How to read an assistant's answer for what can be checked: the figures, the named sources, the absolute words, what is missing, and the questions that make the assistant show its working.",
+        "twitter:title": "How to Read an AI Answer Before You Trust It | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "How to Read an AI Answer Before You Trust It"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#fafaf9",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How to Read an AI Answer Before You Trust It | ToolZen Hub",
+      "description": "Fluency is not evidence. How to read an assistant&#39;s answer for what can be checked: the figures, the named sources, the absolute words, what is missing, and the questions that make the assistant show its working.",
+      "canonical": "https://toolzenhub.in/articles/ai/how-to-read-an-ai-answer-before-you-trust-it/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 8961
+    }
+  },
+  "/articles/ai/how-to-write-instructions-an-ai-assistant-can-act-on/": {
+    "runtime": {
+      "title": "How to Write Instructions an AI Assistant Can Act On | ToolZen Hub",
+      "description": "Why the same assistant gives one person a weak answer and another a usable one: the deliverable, the reader, the facts, the rules, the criteria and what to do when unclear, with one request written badly and then well.",
+      "canonical": "https://toolzenhub.in/articles/ai/how-to-write-instructions-an-ai-assistant-can-act-on/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Why the same assistant gives one person a weak answer and another a usable one: the deliverable, the reader, the facts, the rules, the criteria and what to do when unclear, with one request written badly and then well.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "How to Write Instructions an AI Assistant Can Act On | ToolZen Hub",
+        "og:type": "article",
+        "og:url": "https://toolzenhub.in/articles/ai/how-to-write-instructions-an-ai-assistant-can-act-on/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Why the same assistant gives one person a weak answer and another a usable one: the deliverable, the reader, the facts, the rules, the criteria and what to do when unclear, with one request written badly and then well.",
+        "twitter:title": "How to Write Instructions an AI Assistant Can Act On | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "Article",
+          "keys": [
+            "@context",
+            "@type",
+            "articleSection",
+            "author",
+            "dateModified",
+            "datePublished",
+            "description",
+            "headline",
+            "mainEntityOfPage",
+            "publisher"
+          ]
+        },
+        {
+          "type": "FAQPage",
+          "keys": [
+            "@context",
+            "@type",
+            "mainEntity"
+          ]
+        },
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "How to Write Instructions an AI Assistant Can Act On"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#fafaf9",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "How to Write Instructions an AI Assistant Can Act On | ToolZen Hub",
+      "description": "Why the same assistant gives one person a weak answer and another a usable one: the deliverable, the reader, the facts, the rules, the criteria and what to do when unclear, with one request written badly and then well.",
+      "canonical": "https://toolzenhub.in/articles/ai/how-to-write-instructions-an-ai-assistant-can-act-on/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 8939
     }
   },
   "/articles/balance-transfer/balance-transfer-vs-prepayment/": {
@@ -221,7 +486,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6926
+      "visibleTextChars": 6935
     }
   },
   "/articles/balance-transfer/is-a-loan-balance-transfer-worth-it/": {
@@ -296,7 +561,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8310
+      "visibleTextChars": 8319
     }
   },
   "/articles/business/roi-vs-profit-whats-the-difference/": {
@@ -371,7 +636,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6002
+      "visibleTextChars": 6011
     }
   },
   "/articles/cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr/": {
@@ -446,7 +711,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6532
+      "visibleTextChars": 6541
     }
   },
   "/articles/cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate/": {
@@ -521,7 +786,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6275
+      "visibleTextChars": 6284
     }
   },
   "/articles/converter/easy-unit-conversion-guide/": {
@@ -596,7 +861,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5155
+      "visibleTextChars": 5164
     }
   },
   "/articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison/": {
@@ -671,7 +936,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6360
+      "visibleTextChars": 6369
     }
   },
   "/articles/fd/how-compounding-frequency-changes-an-fd-maturity/": {
@@ -746,7 +1011,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6646
+      "visibleTextChars": 6655
     }
   },
   "/articles/gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways/": {
@@ -821,7 +1086,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5751
+      "visibleTextChars": 5760
     }
   },
   "/articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates/": {
@@ -896,7 +1161,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5600
+      "visibleTextChars": 5609
     }
   },
   "/articles/health/how-to-calculate-your-daily-calorie-needs/": {
@@ -971,7 +1236,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5367
+      "visibleTextChars": 5376
     }
   },
   "/articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/": {
@@ -1046,7 +1311,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5033
+      "visibleTextChars": 5042
     }
   },
   "/articles/home-loan/how-much-home-loan-fits-your-emi-budget/": {
@@ -1121,7 +1386,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6469
+      "visibleTextChars": 6478
     }
   },
   "/articles/home-loan/longer-tenure-bigger-loan-much-more-interest/": {
@@ -1196,7 +1461,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5944
+      "visibleTextChars": 5953
     }
   },
   "/articles/investment/best-sip-strategies-for-beginners/": {
@@ -1271,7 +1536,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 9517
+      "visibleTextChars": 9526
     }
   },
   "/articles/loan-comparison/choose-right-loan-tenure/": {
@@ -1346,7 +1611,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6721
+      "visibleTextChars": 6730
     }
   },
   "/articles/loan-comparison/emi-vs-total-interest/": {
@@ -1421,7 +1686,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5995
+      "visibleTextChars": 6004
     }
   },
   "/articles/loan-comparison/fixed-vs-floating-interest-rates/": {
@@ -1496,7 +1761,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6812
+      "visibleTextChars": 6821
     }
   },
   "/articles/loan-comparison/how-to-reduce-home-loan-interest/": {
@@ -1571,7 +1836,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5406
+      "visibleTextChars": 5415
     }
   },
   "/articles/loan-comparison/loan-tenure-total-interest/": {
@@ -1646,7 +1911,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6272
+      "visibleTextChars": 6281
     }
   },
   "/articles/loan-comparison/what-is-loan-prepayment/": {
@@ -1721,7 +1986,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6903
+      "visibleTextChars": 6912
     }
   },
   "/articles/loan-prepayment/early-vs-late-loan-prepayment/": {
@@ -1796,7 +2061,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6392
+      "visibleTextChars": 6401
     }
   },
   "/articles/loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment/": {
@@ -1871,7 +2136,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7857
+      "visibleTextChars": 7866
     }
   },
   "/articles/margin/margin-vs-markup/": {
@@ -1946,7 +2211,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6031
+      "visibleTextChars": 6040
     }
   },
   "/articles/margin/price-a-product-for-a-target-margin/": {
@@ -2021,7 +2286,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6124
+      "visibleTextChars": 6133
     }
   },
   "/articles/margin/what-a-discount-really-costs-you/": {
@@ -2096,7 +2361,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6133
+      "visibleTextChars": 6142
     }
   },
   "/articles/math/how-to-calculate-percentage-easily/": {
@@ -2171,7 +2436,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6199
+      "visibleTextChars": 6208
     }
   },
   "/articles/percentage/how-to-find-the-original-price-before-a-percentage-change/": {
@@ -2246,7 +2511,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5317
+      "visibleTextChars": 5326
     }
   },
   "/articles/percentage/percent-vs-percentage-points/": {
@@ -2321,7 +2586,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5117
+      "visibleTextChars": 5126
     }
   },
   "/articles/percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back/": {
@@ -2396,7 +2661,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5556
+      "visibleTextChars": 5565
     }
   },
   "/articles/profit/how-to-find-your-break-even-point/": {
@@ -2471,7 +2736,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5896
+      "visibleTextChars": 5905
     }
   },
   "/articles/profit/price-cost-or-volume-which-matters-most/": {
@@ -2546,7 +2811,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5983
+      "visibleTextChars": 5992
     }
   },
   "/articles/profit/units-needed-for-a-target-profit/": {
@@ -2621,7 +2886,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5712
+      "visibleTextChars": 5721
     }
   },
   "/articles/sip/how-a-sip-grows/": {
@@ -2696,7 +2961,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6413
+      "visibleTextChars": 6422
     }
   },
   "/articles/sip/how-much-sip-do-you-need-for-a-goal/": {
@@ -2771,7 +3036,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6117
+      "visibleTextChars": 6126
     }
   },
   "/articles/sip/how-return-assumptions-change-a-sip-projection/": {
@@ -2846,7 +3111,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5797
+      "visibleTextChars": 5806
     }
   },
   "/articles/sip/step-up-sip-explained/": {
@@ -2921,7 +3186,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6087
+      "visibleTextChars": 6096
     }
   },
   "/articles/swp/how-a-systematic-withdrawal-plan-works/": {
@@ -2996,7 +3261,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 9063
+      "visibleTextChars": 9072
     }
   },
   "/articles/swp/what-changes-how-long-a-corpus-lasts/": {
@@ -3068,7 +3333,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7669
+      "visibleTextChars": 7678
     }
   },
   "/articles/tax/tax-saving-guide-save-more-legally/": {
@@ -3143,7 +3408,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 12099
+      "visibleTextChars": 12108
     }
   },
   "/business.html": {
@@ -3192,7 +3457,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1853
+      "visibleTextChars": 1862
     }
   },
   "/calculators.html": {
@@ -3232,7 +3497,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 1633
+      "visibleTextChars": 1642
     }
   },
   "/calculators/age/": {
@@ -3281,7 +3546,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4662
+      "visibleTextChars": 4671
     }
   },
   "/calculators/balance-transfer/": {
@@ -3330,7 +3595,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7948
+      "visibleTextChars": 7957
     }
   },
   "/calculators/bmi/": {
@@ -3379,7 +3644,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4719
+      "visibleTextChars": 4728
     }
   },
   "/calculators/bmr/": {
@@ -3428,7 +3693,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4315
+      "visibleTextChars": 4324
     }
   },
   "/calculators/cagr/": {
@@ -3477,7 +3742,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7623
+      "visibleTextChars": 7632
     }
   },
   "/calculators/calorie/": {
@@ -3526,7 +3791,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4521
+      "visibleTextChars": 4530
     }
   },
   "/calculators/credit-card-payoff/": {
@@ -3575,7 +3840,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8184
+      "visibleTextChars": 8193
     }
   },
   "/calculators/emi/": {
@@ -3624,7 +3889,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5401
+      "visibleTextChars": 5410
     }
   },
   "/calculators/fd/": {
@@ -3673,7 +3938,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8033
+      "visibleTextChars": 8042
     }
   },
   "/calculators/gratuity/": {
@@ -3722,7 +3987,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4508
+      "visibleTextChars": 4517
     }
   },
   "/calculators/gst/": {
@@ -3771,7 +4036,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6695
+      "visibleTextChars": 6704
     }
   },
   "/calculators/home-loan/": {
@@ -3820,7 +4085,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7071
+      "visibleTextChars": 7080
     }
   },
   "/calculators/income-tax/": {
@@ -3869,7 +4134,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 10253
+      "visibleTextChars": 10262
     }
   },
   "/calculators/interest/": {
@@ -3918,7 +4183,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5520
+      "visibleTextChars": 5529
     }
   },
   "/calculators/loan-comparison/": {
@@ -3967,7 +4232,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5394
+      "visibleTextChars": 5403
     }
   },
   "/calculators/loan-eligibility/": {
@@ -4016,7 +4281,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5766
+      "visibleTextChars": 5775
     }
   },
   "/calculators/margin/": {
@@ -4065,7 +4330,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7230
+      "visibleTextChars": 7239
     }
   },
   "/calculators/percentage/": {
@@ -4114,7 +4379,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6551
+      "visibleTextChars": 6560
     }
   },
   "/calculators/personal-loan/": {
@@ -4163,7 +4428,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5680
+      "visibleTextChars": 5689
     }
   },
   "/calculators/ppf/": {
@@ -4212,7 +4477,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 11702
+      "visibleTextChars": 11711
     }
   },
   "/calculators/prepayment/": {
@@ -4261,7 +4526,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6952
+      "visibleTextChars": 6961
     }
   },
   "/calculators/profit/": {
@@ -4310,7 +4575,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6989
+      "visibleTextChars": 6998
     }
   },
   "/calculators/ratio/": {
@@ -4359,7 +4624,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4765
+      "visibleTextChars": 4774
     }
   },
   "/calculators/risk-reward/": {
@@ -4408,7 +4673,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6209
+      "visibleTextChars": 6218
     }
   },
   "/calculators/roi/": {
@@ -4457,7 +4722,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4932
+      "visibleTextChars": 4941
     }
   },
   "/calculators/salary-in-hand/": {
@@ -4506,7 +4771,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 9093
+      "visibleTextChars": 9102
     }
   },
   "/calculators/sip/": {
@@ -4555,7 +4820,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8551
+      "visibleTextChars": 8560
     }
   },
   "/calculators/swp/": {
@@ -4604,7 +4869,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8260
+      "visibleTextChars": 8269
     }
   },
   "/calculators/unit-converter/": {
@@ -4653,7 +4918,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5125
+      "visibleTextChars": 5134
     }
   },
   "/calculators/xirr/": {
@@ -4702,7 +4967,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7713
+      "visibleTextChars": 7722
     }
   },
   "/categories.html": {
@@ -4742,7 +5007,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 1361
+      "visibleTextChars": 1370
     }
   },
   "/contact.html": {
@@ -4782,7 +5047,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 803
+      "visibleTextChars": 812
     }
   },
   "/converter.html": {
@@ -4831,7 +5096,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1565
+      "visibleTextChars": 1574
     }
   },
   "/developer-tools.html": {
@@ -4880,7 +5145,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3565
+      "visibleTextChars": 3574
     }
   },
   "/disclaimer.html": {
@@ -4920,7 +5185,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 1747
+      "visibleTextChars": 1756
     }
   },
   "/health.html": {
@@ -4969,7 +5234,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1759
+      "visibleTextChars": 1768
     }
   },
   "/image-tools.html": {
@@ -5018,7 +5283,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1114
+      "visibleTextChars": 1123
     }
   },
   "/investment.html": {
@@ -5067,7 +5332,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2922
+      "visibleTextChars": 2931
     }
   },
   "/loans.html": {
@@ -5107,7 +5372,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 1442
+      "visibleTextChars": 1451
     }
   },
   "/math.html": {
@@ -5156,7 +5421,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1787
+      "visibleTextChars": 1796
     }
   },
   "/pdf-tools.html": {
@@ -5205,7 +5470,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1387
+      "visibleTextChars": 1396
     }
   },
   "/practice-labs.html": {
@@ -5254,7 +5519,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3602
+      "visibleTextChars": 3611
     }
   },
   "/practice-labs/": {
@@ -5303,7 +5568,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7680
+      "visibleTextChars": 7689
     }
   },
   "/practice-labs/ai-engineering/": {
@@ -5352,7 +5617,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4244
+      "visibleTextChars": 4253
     }
   },
   "/practice-labs/ai-foundations/": {
@@ -5401,7 +5666,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3201
+      "visibleTextChars": 3210
     }
   },
   "/practice-labs/ai-foundations/advanced/": {
@@ -5450,7 +5715,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1961
+      "visibleTextChars": 1970
     }
   },
   "/practice-labs/ai-foundations/advanced/metrics-agents-responsibility/": {
@@ -5499,7 +5764,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2333
+      "visibleTextChars": 2342
     }
   },
   "/practice-labs/ai-foundations/advanced/metrics-agents-responsibility/precision-recall-and-thresholds/": {
@@ -5548,7 +5813,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4096
+      "visibleTextChars": 4105
     }
   },
   "/practice-labs/ai-foundations/advanced/metrics-agents-responsibility/responsible-ai/": {
@@ -5597,7 +5862,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4249
+      "visibleTextChars": 4258
     }
   },
   "/practice-labs/ai-foundations/advanced/metrics-agents-responsibility/tools-and-agents/": {
@@ -5646,7 +5911,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4297
+      "visibleTextChars": 4306
     }
   },
   "/practice-labs/ai-foundations/beginner/": {
@@ -5695,7 +5960,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2095
+      "visibleTextChars": 2104
     }
   },
   "/practice-labs/ai-foundations/beginner/how-ai-works/": {
@@ -5744,7 +6009,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2572
+      "visibleTextChars": 2581
     }
   },
   "/practice-labs/ai-foundations/beginner/how-ai-works/context-windows-and-prompts/": {
@@ -5793,7 +6058,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3888
+      "visibleTextChars": 3897
     }
   },
   "/practice-labs/ai-foundations/beginner/how-ai-works/temperature-and-sampling/": {
@@ -5842,7 +6107,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4248
+      "visibleTextChars": 4257
     }
   },
   "/practice-labs/ai-foundations/beginner/how-ai-works/tokens/": {
@@ -5891,7 +6156,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4199
+      "visibleTextChars": 4208
     }
   },
   "/practice-labs/ai-foundations/beginner/how-ai-works/what-is-ai/": {
@@ -5940,7 +6205,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4482
+      "visibleTextChars": 4491
     }
   },
   "/practice-labs/ai-foundations/intermediate/": {
@@ -5989,7 +6254,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1964
+      "visibleTextChars": 1973
     }
   },
   "/practice-labs/ai-foundations/intermediate/building-and-evaluating/": {
@@ -6038,7 +6303,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2306
+      "visibleTextChars": 2315
     }
   },
   "/practice-labs/ai-foundations/intermediate/building-and-evaluating/embeddings-and-rag/": {
@@ -6087,7 +6352,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4419
+      "visibleTextChars": 4428
     }
   },
   "/practice-labs/ai-foundations/intermediate/building-and-evaluating/evaluating-ai-features/": {
@@ -6136,7 +6401,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4596
+      "visibleTextChars": 4605
     }
   },
   "/practice-labs/ai-foundations/intermediate/building-and-evaluating/hallucination-and-prompt-injection/": {
@@ -6185,7 +6450,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4527
+      "visibleTextChars": 4536
     }
   },
   "/practice-labs/ai-foundations/interview/": {
@@ -6234,7 +6499,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4046
+      "visibleTextChars": 4055
     }
   },
   "/practice-labs/api-automation/": {
@@ -6283,7 +6548,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2596
+      "visibleTextChars": 2605
     }
   },
   "/practice-labs/api-automation/advanced/": {
@@ -6332,7 +6597,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1361
+      "visibleTextChars": 1370
     }
   },
   "/practice-labs/api-automation/advanced/api-frameworks/": {
@@ -6381,7 +6646,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1451
+      "visibleTextChars": 1460
     }
   },
   "/practice-labs/api-automation/advanced/api-frameworks/frameworks-and-ci/": {
@@ -6430,7 +6695,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3338
+      "visibleTextChars": 3347
     }
   },
   "/practice-labs/api-automation/beginner/": {
@@ -6479,7 +6744,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1517
+      "visibleTextChars": 1526
     }
   },
   "/practice-labs/api-automation/beginner/api-test-basics/": {
@@ -6528,7 +6793,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1690
+      "visibleTextChars": 1699
     }
   },
   "/practice-labs/api-automation/beginner/api-test-basics/requests-and-assertions/": {
@@ -6577,7 +6842,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4546
+      "visibleTextChars": 4555
     }
   },
   "/practice-labs/api-automation/beginner/api-test-basics/why-api-automation/": {
@@ -6626,7 +6891,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3890
+      "visibleTextChars": 3899
     }
   },
   "/practice-labs/api-automation/intermediate/": {
@@ -6675,7 +6940,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1493
+      "visibleTextChars": 1502
     }
   },
   "/practice-labs/api-automation/intermediate/reliable-api-suites/": {
@@ -6724,7 +6989,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1652
+      "visibleTextChars": 1661
     }
   },
   "/practice-labs/api-automation/intermediate/reliable-api-suites/auth-and-test-data/": {
@@ -6773,7 +7038,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4321
+      "visibleTextChars": 4330
     }
   },
   "/practice-labs/api-automation/intermediate/reliable-api-suites/schemas-and-contracts/": {
@@ -6822,7 +7087,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3565
+      "visibleTextChars": 3574
     }
   },
   "/practice-labs/api-automation/interview/": {
@@ -6871,7 +7136,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3104
+      "visibleTextChars": 3113
     }
   },
   "/practice-labs/app-security/": {
@@ -6920,7 +7185,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2759
+      "visibleTextChars": 2768
     }
   },
   "/practice-labs/app-security/advanced/": {
@@ -6969,7 +7234,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1618
+      "visibleTextChars": 1627
     }
   },
   "/practice-labs/app-security/advanced/secure-delivery/": {
@@ -7018,7 +7283,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1808
+      "visibleTextChars": 1817
     }
   },
   "/practice-labs/app-security/advanced/secure-delivery/secrets-configuration-dependencies/": {
@@ -7067,7 +7332,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4088
+      "visibleTextChars": 4097
     }
   },
   "/practice-labs/app-security/advanced/secure-delivery/security-testing/": {
@@ -7116,7 +7381,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4285
+      "visibleTextChars": 4294
     }
   },
   "/practice-labs/app-security/beginner/": {
@@ -7165,7 +7430,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1660
+      "visibleTextChars": 1669
     }
   },
   "/practice-labs/app-security/beginner/security-basics/": {
@@ -7214,7 +7479,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1843
+      "visibleTextChars": 1852
     }
   },
   "/practice-labs/app-security/beginner/security-basics/injection/": {
@@ -7263,7 +7528,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4317
+      "visibleTextChars": 4326
     }
   },
   "/practice-labs/app-security/beginner/security-basics/security-mindset-and-threat-modelling/": {
@@ -7312,7 +7577,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3695
+      "visibleTextChars": 3704
     }
   },
   "/practice-labs/app-security/intermediate/": {
@@ -7361,7 +7626,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2100
+      "visibleTextChars": 2109
     }
   },
   "/practice-labs/app-security/intermediate/web-risks/": {
@@ -7410,7 +7675,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2373
+      "visibleTextChars": 2382
     }
   },
   "/practice-labs/app-security/intermediate/web-risks/access-control/": {
@@ -7459,7 +7724,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4209
+      "visibleTextChars": 4218
     }
   },
   "/practice-labs/app-security/intermediate/web-risks/cross-site-scripting/": {
@@ -7508,7 +7773,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3888
+      "visibleTextChars": 3897
     }
   },
   "/practice-labs/app-security/intermediate/web-risks/passwords-and-sessions/": {
@@ -7557,7 +7822,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3977
+      "visibleTextChars": 3986
     }
   },
   "/practice-labs/app-security/interview/": {
@@ -7606,7 +7871,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4129
+      "visibleTextChars": 4138
     }
   },
   "/practice-labs/automation-engineering/": {
@@ -7655,7 +7920,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3595
+      "visibleTextChars": 3604
     }
   },
   "/practice-labs/backend/": {
@@ -7704,7 +7969,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3186
+      "visibleTextChars": 3195
     }
   },
   "/practice-labs/backend/advanced/": {
@@ -7753,7 +8018,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2027
+      "visibleTextChars": 2036
     }
   },
   "/practice-labs/backend/advanced/production-backends/": {
@@ -7802,7 +8067,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2360
+      "visibleTextChars": 2369
     }
   },
   "/practice-labs/backend/advanced/production-backends/architecture/": {
@@ -7851,7 +8116,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4220
+      "visibleTextChars": 4229
     }
   },
   "/practice-labs/backend/advanced/production-backends/configuration-and-logging/": {
@@ -7900,7 +8165,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3973
+      "visibleTextChars": 3982
     }
   },
   "/practice-labs/backend/advanced/production-backends/money-retries-idempotency/": {
@@ -7949,7 +8214,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5254
+      "visibleTextChars": 5263
     }
   },
   "/practice-labs/backend/beginner/": {
@@ -7998,7 +8263,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1853
+      "visibleTextChars": 1862
     }
   },
   "/practice-labs/backend/beginner/server-basics/": {
@@ -8047,7 +8312,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2161
+      "visibleTextChars": 2170
     }
   },
   "/practice-labs/backend/beginner/server-basics/request-lifecycle/": {
@@ -8096,7 +8361,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4343
+      "visibleTextChars": 4352
     }
   },
   "/practice-labs/backend/beginner/server-basics/routing-and-handlers/": {
@@ -8145,7 +8410,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4376
+      "visibleTextChars": 4385
     }
   },
   "/practice-labs/backend/beginner/server-basics/validation-and-errors/": {
@@ -8194,7 +8459,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4950
+      "visibleTextChars": 4959
     }
   },
   "/practice-labs/backend/intermediate/": {
@@ -8243,7 +8508,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1697
+      "visibleTextChars": 1706
     }
   },
   "/practice-labs/backend/intermediate/data-and-identity/": {
@@ -8292,7 +8557,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1940
+      "visibleTextChars": 1949
     }
   },
   "/practice-labs/backend/intermediate/data-and-identity/databases-from-code/": {
@@ -8341,7 +8606,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4334
+      "visibleTextChars": 4343
     }
   },
   "/practice-labs/backend/intermediate/data-and-identity/pagination-and-performance/": {
@@ -8390,7 +8655,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4300
+      "visibleTextChars": 4309
     }
   },
   "/practice-labs/backend/intermediate/data-and-identity/sessions-and-tokens/": {
@@ -8439,7 +8704,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4613
+      "visibleTextChars": 4622
     }
   },
   "/practice-labs/backend/interview/": {
@@ -8488,7 +8753,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3603
+      "visibleTextChars": 3612
     }
   },
   "/practice-labs/data-analytics/": {
@@ -8537,7 +8802,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5665
+      "visibleTextChars": 5674
     }
   },
   "/practice-labs/data-engineering/": {
@@ -8586,7 +8851,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2948
+      "visibleTextChars": 2957
     }
   },
   "/practice-labs/data-engineering/advanced/": {
@@ -8635,7 +8900,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1798
+      "visibleTextChars": 1807
     }
   },
   "/practice-labs/data-engineering/advanced/reliable-pipelines/": {
@@ -8684,7 +8949,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2010
+      "visibleTextChars": 2019
     }
   },
   "/practice-labs/data-engineering/advanced/reliable-pipelines/data-quality/": {
@@ -8733,7 +8998,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4013
+      "visibleTextChars": 4022
     }
   },
   "/practice-labs/data-engineering/advanced/reliable-pipelines/orchestration-and-backfills/": {
@@ -8782,7 +9047,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3923
+      "visibleTextChars": 3932
     }
   },
   "/practice-labs/data-engineering/beginner/": {
@@ -8831,7 +9096,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1781
+      "visibleTextChars": 1790
     }
   },
   "/practice-labs/data-engineering/beginner/pipeline-basics/": {
@@ -8880,7 +9145,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1928
+      "visibleTextChars": 1937
     }
   },
   "/practice-labs/data-engineering/beginner/pipeline-basics/etl-elt-batch-streaming/": {
@@ -8929,7 +9194,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4240
+      "visibleTextChars": 4249
     }
   },
   "/practice-labs/data-engineering/beginner/pipeline-basics/transforming-with-sql/": {
@@ -8978,7 +9243,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3669
+      "visibleTextChars": 3678
     }
   },
   "/practice-labs/data-engineering/intermediate/": {
@@ -9027,7 +9292,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1730
+      "visibleTextChars": 1739
     }
   },
   "/practice-labs/data-engineering/intermediate/loading-and-modelling/": {
@@ -9076,7 +9341,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1907
+      "visibleTextChars": 1916
     }
   },
   "/practice-labs/data-engineering/intermediate/loading-and-modelling/incremental-loads/": {
@@ -9125,7 +9390,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4046
+      "visibleTextChars": 4055
     }
   },
   "/practice-labs/data-engineering/intermediate/loading-and-modelling/warehouse-modelling/": {
@@ -9174,7 +9439,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4011
+      "visibleTextChars": 4020
     }
   },
   "/practice-labs/data-engineering/interview/": {
@@ -9223,7 +9488,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3037
+      "visibleTextChars": 3046
     }
   },
   "/practice-labs/database-design/": {
@@ -9272,7 +9537,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3316
+      "visibleTextChars": 3325
     }
   },
   "/practice-labs/database-design/advanced/": {
@@ -9321,7 +9586,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1821
+      "visibleTextChars": 1830
     }
   },
   "/practice-labs/database-design/advanced/databases-in-practice/": {
@@ -9370,7 +9635,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2083
+      "visibleTextChars": 2092
     }
   },
   "/practice-labs/database-design/advanced/databases-in-practice/database-testing/": {
@@ -9419,7 +9684,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5076
+      "visibleTextChars": 5085
     }
   },
   "/practice-labs/database-design/advanced/databases-in-practice/postgresql-mysql-sqlite/": {
@@ -9468,7 +9733,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4485
+      "visibleTextChars": 4494
     }
   },
   "/practice-labs/database-design/beginner/": {
@@ -9517,7 +9782,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1964
+      "visibleTextChars": 1973
     }
   },
   "/practice-labs/database-design/beginner/designing-schemas/": {
@@ -9566,7 +9831,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2266
+      "visibleTextChars": 2275
     }
   },
   "/practice-labs/database-design/beginner/designing-schemas/data-modelling/": {
@@ -9615,7 +9880,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4157
+      "visibleTextChars": 4166
     }
   },
   "/practice-labs/database-design/beginner/designing-schemas/keys-and-integrity/": {
@@ -9664,7 +9929,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4325
+      "visibleTextChars": 4334
     }
   },
   "/practice-labs/database-design/beginner/designing-schemas/normalisation/": {
@@ -9713,7 +9978,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4294
+      "visibleTextChars": 4303
     }
   },
   "/practice-labs/database-design/intermediate/": {
@@ -9762,7 +10027,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2191
+      "visibleTextChars": 2200
     }
   },
   "/practice-labs/database-design/intermediate/rules-speed-safety/": {
@@ -9811,7 +10076,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2459
+      "visibleTextChars": 2468
     }
   },
   "/practice-labs/database-design/intermediate/rules-speed-safety/constraints/": {
@@ -9860,7 +10125,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4185
+      "visibleTextChars": 4194
     }
   },
   "/practice-labs/database-design/intermediate/rules-speed-safety/indexes-and-plans/": {
@@ -9909,7 +10174,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3946
+      "visibleTextChars": 3955
     }
   },
   "/practice-labs/database-design/intermediate/rules-speed-safety/transactions-and-isolation/": {
@@ -9958,7 +10223,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4248
+      "visibleTextChars": 4257
     }
   },
   "/practice-labs/database-design/interview/": {
@@ -10007,7 +10272,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4124
+      "visibleTextChars": 4133
     }
   },
   "/practice-labs/database-engineering/": {
@@ -10056,7 +10321,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4216
+      "visibleTextChars": 4225
     }
   },
   "/practice-labs/devops-cloud-security/": {
@@ -10105,7 +10370,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4558
+      "visibleTextChars": 4567
     }
   },
   "/practice-labs/dsa/": {
@@ -10154,7 +10419,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2636
+      "visibleTextChars": 2645
     }
   },
   "/practice-labs/dsa/advanced/": {
@@ -10203,7 +10468,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1715
+      "visibleTextChars": 1724
     }
   },
   "/practice-labs/dsa/advanced/graphs-and-design/": {
@@ -10252,7 +10517,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1884
+      "visibleTextChars": 1893
     }
   },
   "/practice-labs/dsa/advanced/graphs-and-design/graphs-and-bfs/": {
@@ -10301,7 +10566,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4045
+      "visibleTextChars": 4054
     }
   },
   "/practice-labs/dsa/advanced/graphs-and-design/lru-cache/": {
@@ -10350,7 +10615,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3893
+      "visibleTextChars": 3902
     }
   },
   "/practice-labs/dsa/intermediate/": {
@@ -10399,7 +10664,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1905
+      "visibleTextChars": 1914
     }
   },
   "/practice-labs/dsa/intermediate/core-structures/": {
@@ -10448,7 +10713,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2167
+      "visibleTextChars": 2176
     }
   },
   "/practice-labs/dsa/intermediate/core-structures/big-o-and-structures/": {
@@ -10497,7 +10762,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4159
+      "visibleTextChars": 4168
     }
   },
   "/practice-labs/dsa/intermediate/core-structures/hashing-and-counting/": {
@@ -10546,7 +10811,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4093
+      "visibleTextChars": 4102
     }
   },
   "/practice-labs/dsa/intermediate/core-structures/searching-and-sorting/": {
@@ -10595,7 +10860,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4176
+      "visibleTextChars": 4185
     }
   },
   "/practice-labs/dsa/interview/": {
@@ -10644,7 +10909,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2502
+      "visibleTextChars": 2511
     }
   },
   "/practice-labs/excel/": {
@@ -10693,7 +10958,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2948
+      "visibleTextChars": 2957
     }
   },
   "/practice-labs/excel/advanced/": {
@@ -10742,7 +11007,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1478
+      "visibleTextChars": 1487
     }
   },
   "/practice-labs/excel/advanced/models-and-projects/": {
@@ -10791,7 +11056,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1628
+      "visibleTextChars": 1637
     }
   },
   "/practice-labs/excel/advanced/models-and-projects/financial-functions-and-projects/": {
@@ -10840,7 +11105,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2994
+      "visibleTextChars": 3003
     }
   },
   "/practice-labs/excel/beginner/": {
@@ -10889,7 +11154,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1637
+      "visibleTextChars": 1646
     }
   },
   "/practice-labs/excel/beginner/formula-foundations/": {
@@ -10938,7 +11203,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1950
+      "visibleTextChars": 1959
     }
   },
   "/practice-labs/excel/beginner/formula-foundations/everyday-functions/": {
@@ -10987,7 +11252,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2999
+      "visibleTextChars": 3008
     }
   },
   "/practice-labs/excel/beginner/formula-foundations/formulas-and-references/": {
@@ -11036,7 +11301,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3200
+      "visibleTextChars": 3209
     }
   },
   "/practice-labs/excel/beginner/formula-foundations/logical-functions/": {
@@ -11085,7 +11350,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2924
+      "visibleTextChars": 2933
     }
   },
   "/practice-labs/excel/intermediate/": {
@@ -11134,7 +11399,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1830
+      "visibleTextChars": 1839
     }
   },
   "/practice-labs/excel/intermediate/working-with-data/": {
@@ -11183,7 +11448,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2196
+      "visibleTextChars": 2205
     }
   },
   "/practice-labs/excel/intermediate/working-with-data/cleaning-with-formulas/": {
@@ -11232,7 +11497,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2969
+      "visibleTextChars": 2978
     }
   },
   "/practice-labs/excel/intermediate/working-with-data/conditional-sums-and-counts/": {
@@ -11281,7 +11546,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2897
+      "visibleTextChars": 2906
     }
   },
   "/practice-labs/excel/intermediate/working-with-data/lookups/": {
@@ -11330,7 +11595,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3053
+      "visibleTextChars": 3062
     }
   },
   "/practice-labs/excel/intermediate/working-with-data/text-and-dates/": {
@@ -11379,7 +11644,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2888
+      "visibleTextChars": 2897
     }
   },
   "/practice-labs/excel/interview/": {
@@ -11428,7 +11693,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3097
+      "visibleTextChars": 3106
     }
   },
   "/practice-labs/frontend-frameworks/": {
@@ -11477,7 +11742,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2593
+      "visibleTextChars": 2602
     }
   },
   "/practice-labs/frontend-frameworks/advanced/": {
@@ -11526,7 +11791,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1693
+      "visibleTextChars": 1702
     }
   },
   "/practice-labs/frontend-frameworks/advanced/real-frontends/": {
@@ -11575,7 +11840,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1914
+      "visibleTextChars": 1923
     }
   },
   "/practice-labs/frontend-frameworks/advanced/real-frontends/choosing-a-framework/": {
@@ -11624,7 +11889,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3593
+      "visibleTextChars": 3602
     }
   },
   "/practice-labs/frontend-frameworks/advanced/real-frontends/routing-data-forms/": {
@@ -11673,7 +11938,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4118
+      "visibleTextChars": 4127
     }
   },
   "/practice-labs/frontend-frameworks/intermediate/": {
@@ -11722,7 +11987,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1728
+      "visibleTextChars": 1737
     }
   },
   "/practice-labs/frontend-frameworks/intermediate/framework-core-ideas/": {
@@ -11771,7 +12036,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1991
+      "visibleTextChars": 2000
     }
   },
   "/practice-labs/frontend-frameworks/intermediate/framework-core-ideas/components-and-props/": {
@@ -11820,7 +12085,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4023
+      "visibleTextChars": 4032
     }
   },
   "/practice-labs/frontend-frameworks/intermediate/framework-core-ideas/reactivity-and-rendering/": {
@@ -11869,7 +12134,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3882
+      "visibleTextChars": 3891
     }
   },
   "/practice-labs/frontend-frameworks/intermediate/framework-core-ideas/state-and-reducers/": {
@@ -11918,7 +12183,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4812
+      "visibleTextChars": 4821
     }
   },
   "/practice-labs/frontend-frameworks/interview/": {
@@ -11967,7 +12232,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2763
+      "visibleTextChars": 2772
     }
   },
   "/practice-labs/git-devops/": {
@@ -12016,7 +12281,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3052
+      "visibleTextChars": 3061
     }
   },
   "/practice-labs/git-devops/advanced/": {
@@ -12065,7 +12330,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1712
+      "visibleTextChars": 1721
     }
   },
   "/practice-labs/git-devops/advanced/running-software/": {
@@ -12114,7 +12379,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1996
+      "visibleTextChars": 2005
     }
   },
   "/practice-labs/git-devops/advanced/running-software/cloud-basics/": {
@@ -12163,7 +12428,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4032
+      "visibleTextChars": 4041
     }
   },
   "/practice-labs/git-devops/advanced/running-software/containers-and-docker/": {
@@ -12212,7 +12477,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3917
+      "visibleTextChars": 3926
     }
   },
   "/practice-labs/git-devops/advanced/running-software/monitoring-and-incidents/": {
@@ -12261,7 +12526,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4132
+      "visibleTextChars": 4141
     }
   },
   "/practice-labs/git-devops/beginner/": {
@@ -12310,7 +12575,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1710
+      "visibleTextChars": 1719
     }
   },
   "/practice-labs/git-devops/beginner/git-basics/": {
@@ -12359,7 +12624,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1836
+      "visibleTextChars": 1845
     }
   },
   "/practice-labs/git-devops/beginner/git-basics/staging-unstaging-discarding/": {
@@ -12408,7 +12673,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4678
+      "visibleTextChars": 4687
     }
   },
   "/practice-labs/git-devops/beginner/git-basics/version-control-and-first-commit/": {
@@ -12457,7 +12722,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3769
+      "visibleTextChars": 3778
     }
   },
   "/practice-labs/git-devops/intermediate/": {
@@ -12506,7 +12771,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1879
+      "visibleTextChars": 1888
     }
   },
   "/practice-labs/git-devops/intermediate/delivery/": {
@@ -12555,7 +12820,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1592
+      "visibleTextChars": 1601
     }
   },
   "/practice-labs/git-devops/intermediate/delivery/ci-cd/": {
@@ -12604,7 +12869,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4118
+      "visibleTextChars": 4127
     }
   },
   "/practice-labs/git-devops/intermediate/git-teamwork/": {
@@ -12653,7 +12918,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1776
+      "visibleTextChars": 1785
     }
   },
   "/practice-labs/git-devops/intermediate/git-teamwork/branches-and-merging/": {
@@ -12702,7 +12967,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4104
+      "visibleTextChars": 4113
     }
   },
   "/practice-labs/git-devops/intermediate/git-teamwork/conflicts-and-remotes/": {
@@ -12751,7 +13016,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4738
+      "visibleTextChars": 4747
     }
   },
   "/practice-labs/git-devops/interview/": {
@@ -12800,7 +13065,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4451
+      "visibleTextChars": 4460
     }
   },
   "/practice-labs/html-css-dom/": {
@@ -12849,7 +13114,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2891
+      "visibleTextChars": 2900
     }
   },
   "/practice-labs/html-css-dom/advanced/": {
@@ -12898,7 +13163,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1503
+      "visibleTextChars": 1512
     }
   },
   "/practice-labs/html-css-dom/advanced/dynamic-and-fast/": {
@@ -12947,7 +13212,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1685
+      "visibleTextChars": 1694
     }
   },
   "/practice-labs/html-css-dom/advanced/dynamic-and-fast/dom-and-events/": {
@@ -12996,7 +13261,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3921
+      "visibleTextChars": 3930
     }
   },
   "/practice-labs/html-css-dom/advanced/dynamic-and-fast/performance-and-quality/": {
@@ -13045,7 +13310,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3866
+      "visibleTextChars": 3875
     }
   },
   "/practice-labs/html-css-dom/beginner/": {
@@ -13094,7 +13359,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1874
+      "visibleTextChars": 1883
     }
   },
   "/practice-labs/html-css-dom/beginner/html-foundations/": {
@@ -13143,7 +13408,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2243
+      "visibleTextChars": 2252
     }
   },
   "/practice-labs/html-css-dom/beginner/html-foundations/elements-and-structure/": {
@@ -13192,7 +13457,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3372
+      "visibleTextChars": 3381
     }
   },
   "/practice-labs/html-css-dom/beginner/html-foundations/forms-and-inputs/": {
@@ -13241,7 +13506,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3377
+      "visibleTextChars": 3386
     }
   },
   "/practice-labs/html-css-dom/beginner/html-foundations/links-and-images/": {
@@ -13290,7 +13555,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3239
+      "visibleTextChars": 3248
     }
   },
   "/practice-labs/html-css-dom/beginner/html-foundations/semantic-html/": {
@@ -13339,7 +13604,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3218
+      "visibleTextChars": 3227
     }
   },
   "/practice-labs/html-css-dom/intermediate/": {
@@ -13388,7 +13653,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1949
+      "visibleTextChars": 1958
     }
   },
   "/practice-labs/html-css-dom/intermediate/css-and-access/": {
@@ -13437,7 +13702,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2235
+      "visibleTextChars": 2244
     }
   },
   "/practice-labs/html-css-dom/intermediate/css-and-access/accessibility-essentials/": {
@@ -13486,7 +13751,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4053
+      "visibleTextChars": 4062
     }
   },
   "/practice-labs/html-css-dom/intermediate/css-and-access/css-basics/": {
@@ -13535,7 +13800,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4185
+      "visibleTextChars": 4194
     }
   },
   "/practice-labs/html-css-dom/intermediate/css-and-access/flexbox-and-responsive-design/": {
@@ -13584,7 +13849,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3875
+      "visibleTextChars": 3884
     }
   },
   "/practice-labs/html-css-dom/interview/": {
@@ -13633,7 +13898,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3998
+      "visibleTextChars": 4007
     }
   },
   "/practice-labs/http-apis/": {
@@ -13682,7 +13947,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3052
+      "visibleTextChars": 3061
     }
   },
   "/practice-labs/http-apis/advanced/": {
@@ -13731,7 +13996,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1608
+      "visibleTextChars": 1617
     }
   },
   "/practice-labs/http-apis/advanced/quality-security/": {
@@ -13780,7 +14045,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1816
+      "visibleTextChars": 1825
     }
   },
   "/practice-labs/http-apis/advanced/quality-security/caching-rate-limits-and-security/": {
@@ -13829,7 +14094,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4140
+      "visibleTextChars": 4149
     }
   },
   "/practice-labs/http-apis/advanced/quality-security/testing-apis/": {
@@ -13878,7 +14143,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4376
+      "visibleTextChars": 4385
     }
   },
   "/practice-labs/http-apis/beginner/": {
@@ -13927,7 +14192,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1870
+      "visibleTextChars": 1879
     }
   },
   "/practice-labs/http-apis/beginner/http-basics/": {
@@ -13976,7 +14241,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2208
+      "visibleTextChars": 2217
     }
   },
   "/practice-labs/http-apis/beginner/http-basics/clients-servers-and-urls/": {
@@ -14025,7 +14290,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3566
+      "visibleTextChars": 3575
     }
   },
   "/practice-labs/http-apis/beginner/http-basics/http-methods/": {
@@ -14074,7 +14339,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4029
+      "visibleTextChars": 4038
     }
   },
   "/practice-labs/http-apis/beginner/http-basics/query-headers-and-json/": {
@@ -14123,7 +14388,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4224
+      "visibleTextChars": 4233
     }
   },
   "/practice-labs/http-apis/beginner/http-basics/status-codes/": {
@@ -14172,7 +14437,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4429
+      "visibleTextChars": 4438
     }
   },
   "/practice-labs/http-apis/intermediate/": {
@@ -14221,7 +14486,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1754
+      "visibleTextChars": 1763
     }
   },
   "/practice-labs/http-apis/intermediate/working-apis/": {
@@ -14270,7 +14535,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2018
+      "visibleTextChars": 2027
     }
   },
   "/practice-labs/http-apis/intermediate/working-apis/authentication-and-authorisation/": {
@@ -14319,7 +14584,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4309
+      "visibleTextChars": 4318
     }
   },
   "/practice-labs/http-apis/intermediate/working-apis/rest-api-design/": {
@@ -14368,7 +14633,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4396
+      "visibleTextChars": 4405
     }
   },
   "/practice-labs/http-apis/intermediate/working-apis/validation-errors/": {
@@ -14417,7 +14682,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4204
+      "visibleTextChars": 4213
     }
   },
   "/practice-labs/http-apis/interview/": {
@@ -14466,7 +14731,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3912
+      "visibleTextChars": 3921
     }
   },
   "/practice-labs/java/": {
@@ -14515,7 +14780,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2944
+      "visibleTextChars": 2953
     }
   },
   "/practice-labs/java/advanced/": {
@@ -14564,7 +14829,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1555
+      "visibleTextChars": 1564
     }
   },
   "/practice-labs/java/advanced/modern-java/": {
@@ -14613,7 +14878,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1748
+      "visibleTextChars": 1757
     }
   },
   "/practice-labs/java/advanced/modern-java/exceptions/": {
@@ -14662,7 +14927,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3480
+      "visibleTextChars": 3489
     }
   },
   "/practice-labs/java/advanced/modern-java/streams-and-junit/": {
@@ -14711,7 +14976,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3605
+      "visibleTextChars": 3614
     }
   },
   "/practice-labs/java/beginner/": {
@@ -14760,7 +15025,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1705
+      "visibleTextChars": 1714
     }
   },
   "/practice-labs/java/beginner/java-foundations/": {
@@ -14809,7 +15074,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1944
+      "visibleTextChars": 1953
     }
   },
   "/practice-labs/java/beginner/java-foundations/loops-and-arrays/": {
@@ -14858,7 +15123,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3063
+      "visibleTextChars": 3072
     }
   },
   "/practice-labs/java/beginner/java-foundations/strings-equality-conditions/": {
@@ -14907,7 +15172,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4559
+      "visibleTextChars": 4568
     }
   },
   "/practice-labs/java/beginner/java-foundations/types-variables-output/": {
@@ -14956,7 +15221,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4112
+      "visibleTextChars": 4121
     }
   },
   "/practice-labs/java/intermediate/": {
@@ -15005,7 +15270,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1986
+      "visibleTextChars": 1995
     }
   },
   "/practice-labs/java/intermediate/object-oriented-java/": {
@@ -15054,7 +15319,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2359
+      "visibleTextChars": 2368
     }
   },
   "/practice-labs/java/intermediate/object-oriented-java/classes-and-encapsulation/": {
@@ -15103,7 +15368,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3678
+      "visibleTextChars": 3687
     }
   },
   "/practice-labs/java/intermediate/object-oriented-java/collections/": {
@@ -15152,7 +15417,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4096
+      "visibleTextChars": 4105
     }
   },
   "/practice-labs/java/intermediate/object-oriented-java/inheritance-and-polymorphism/": {
@@ -15201,7 +15466,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4034
+      "visibleTextChars": 4043
     }
   },
   "/practice-labs/java/intermediate/object-oriented-java/methods-and-pass-by-value/": {
@@ -15250,7 +15515,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4137
+      "visibleTextChars": 4146
     }
   },
   "/practice-labs/java/interview/": {
@@ -15299,7 +15564,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3869
+      "visibleTextChars": 3878
     }
   },
   "/practice-labs/javascript/": {
@@ -15348,7 +15613,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2961
+      "visibleTextChars": 2970
     }
   },
   "/practice-labs/javascript/advanced/": {
@@ -15397,7 +15662,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1631
+      "visibleTextChars": 1640
     }
   },
   "/practice-labs/javascript/advanced/writing-good-code/": {
@@ -15446,7 +15711,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1830
+      "visibleTextChars": 1839
     }
   },
   "/practice-labs/javascript/advanced/writing-good-code/clean-code-and-testing/": {
@@ -15495,7 +15760,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4049
+      "visibleTextChars": 4058
     }
   },
   "/practice-labs/javascript/advanced/writing-good-code/problem-solving-and-complexity/": {
@@ -15544,7 +15809,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4858
+      "visibleTextChars": 4867
     }
   },
   "/practice-labs/javascript/beginner/": {
@@ -15593,7 +15858,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1958
+      "visibleTextChars": 1967
     }
   },
   "/practice-labs/javascript/beginner/programming-basics/": {
@@ -15642,7 +15907,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2027
+      "visibleTextChars": 2036
     }
   },
   "/practice-labs/javascript/beginner/programming-basics/comparisons-and-conditions/": {
@@ -15691,7 +15956,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3530
+      "visibleTextChars": 3539
     }
   },
   "/practice-labs/javascript/beginner/programming-basics/loops/": {
@@ -15740,7 +16005,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4307
+      "visibleTextChars": 4316
     }
   },
   "/practice-labs/javascript/beginner/programming-basics/values-variables-functions/": {
@@ -15789,7 +16054,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3623
+      "visibleTextChars": 3632
     }
   },
   "/practice-labs/javascript/beginner/working-with-data/": {
@@ -15838,7 +16103,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1656
+      "visibleTextChars": 1665
     }
   },
   "/practice-labs/javascript/beginner/working-with-data/arrays/": {
@@ -15887,7 +16152,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3164
+      "visibleTextChars": 3173
     }
   },
   "/practice-labs/javascript/beginner/working-with-data/objects-and-strings/": {
@@ -15936,7 +16201,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3718
+      "visibleTextChars": 3727
     }
   },
   "/practice-labs/javascript/intermediate/": {
@@ -15985,7 +16250,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1737
+      "visibleTextChars": 1746
     }
   },
   "/practice-labs/javascript/intermediate/modern-javascript/": {
@@ -16034,7 +16299,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1976
+      "visibleTextChars": 1985
     }
   },
   "/practice-labs/javascript/intermediate/modern-javascript/errors-and-debugging/": {
@@ -16083,7 +16348,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3892
+      "visibleTextChars": 3901
     }
   },
   "/practice-labs/javascript/intermediate/modern-javascript/map-filter-reduce/": {
@@ -16132,7 +16397,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4022
+      "visibleTextChars": 4031
     }
   },
   "/practice-labs/javascript/intermediate/modern-javascript/promises-and-await/": {
@@ -16181,7 +16446,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3879
+      "visibleTextChars": 3888
     }
   },
   "/practice-labs/javascript/interview/": {
@@ -16230,7 +16495,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3822
+      "visibleTextChars": 3831
     }
   },
   "/practice-labs/kubernetes/": {
@@ -16279,7 +16544,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2534
+      "visibleTextChars": 2543
     }
   },
   "/practice-labs/kubernetes/advanced/": {
@@ -16328,7 +16593,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1687
+      "visibleTextChars": 1696
     }
   },
   "/practice-labs/kubernetes/advanced/running-in-production/": {
@@ -16377,7 +16642,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1957
+      "visibleTextChars": 1966
     }
   },
   "/practice-labs/kubernetes/advanced/running-in-production/config-secrets-health-checks/": {
@@ -16426,7 +16691,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3924
+      "visibleTextChars": 3933
     }
   },
   "/practice-labs/kubernetes/advanced/running-in-production/deployment-strategies/": {
@@ -16475,7 +16740,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4052
+      "visibleTextChars": 4061
     }
   },
   "/practice-labs/kubernetes/advanced/running-in-production/slis-slos-error-budgets/": {
@@ -16524,7 +16789,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3508
+      "visibleTextChars": 3517
     }
   },
   "/practice-labs/kubernetes/intermediate/": {
@@ -16573,7 +16838,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1563
+      "visibleTextChars": 1572
     }
   },
   "/practice-labs/kubernetes/intermediate/containers-at-scale/": {
@@ -16622,7 +16887,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1714
+      "visibleTextChars": 1723
     }
   },
   "/practice-labs/kubernetes/intermediate/containers-at-scale/docker-compose/": {
@@ -16671,7 +16936,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3663
+      "visibleTextChars": 3672
     }
   },
   "/practice-labs/kubernetes/intermediate/containers-at-scale/pods-deployments-services/": {
@@ -16720,7 +16985,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4033
+      "visibleTextChars": 4042
     }
   },
   "/practice-labs/kubernetes/interview/": {
@@ -16769,7 +17034,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3461
+      "visibleTextChars": 3470
     }
   },
   "/practice-labs/linux/": {
@@ -16818,7 +17083,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2898
+      "visibleTextChars": 2907
     }
   },
   "/practice-labs/linux/advanced/": {
@@ -16867,7 +17132,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1493
+      "visibleTextChars": 1502
     }
   },
   "/practice-labs/linux/advanced/operating-servers/": {
@@ -16916,7 +17181,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1673
+      "visibleTextChars": 1682
     }
   },
   "/practice-labs/linux/advanced/operating-servers/processes-and-services/": {
@@ -16965,7 +17230,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3752
+      "visibleTextChars": 3761
     }
   },
   "/practice-labs/linux/advanced/operating-servers/shell-scripting/": {
@@ -17014,7 +17279,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3496
+      "visibleTextChars": 3505
     }
   },
   "/practice-labs/linux/beginner/": {
@@ -17063,7 +17328,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1730
+      "visibleTextChars": 1739
     }
   },
   "/practice-labs/linux/beginner/command-line-basics/": {
@@ -17112,7 +17377,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1944
+      "visibleTextChars": 1953
     }
   },
   "/practice-labs/linux/beginner/command-line-basics/file-system-and-navigation/": {
@@ -17161,7 +17426,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3937
+      "visibleTextChars": 3946
     }
   },
   "/practice-labs/linux/beginner/command-line-basics/grep-and-find/": {
@@ -17210,7 +17475,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3669
+      "visibleTextChars": 3678
     }
   },
   "/practice-labs/linux/beginner/command-line-basics/reading-files-and-logs/": {
@@ -17259,7 +17524,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3064
+      "visibleTextChars": 3073
     }
   },
   "/practice-labs/linux/intermediate/": {
@@ -17308,7 +17573,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1824
+      "visibleTextChars": 1833
     }
   },
   "/practice-labs/linux/intermediate/working-with-files/": {
@@ -17357,7 +17622,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2000
+      "visibleTextChars": 2009
     }
   },
   "/practice-labs/linux/intermediate/working-with-files/managing-files/": {
@@ -17406,7 +17671,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3535
+      "visibleTextChars": 3544
     }
   },
   "/practice-labs/linux/intermediate/working-with-files/pipes-and-redirection/": {
@@ -17455,7 +17720,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3880
+      "visibleTextChars": 3889
     }
   },
   "/practice-labs/linux/intermediate/working-with-files/users-and-permissions/": {
@@ -17504,7 +17769,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3614
+      "visibleTextChars": 3623
     }
   },
   "/practice-labs/linux/interview/": {
@@ -17553,7 +17818,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3276
+      "visibleTextChars": 3285
     }
   },
   "/practice-labs/llm-apps/": {
@@ -17602,7 +17867,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2710
+      "visibleTextChars": 2719
     }
   },
   "/practice-labs/llm-apps/advanced/": {
@@ -17651,7 +17916,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1603
+      "visibleTextChars": 1612
     }
   },
   "/practice-labs/llm-apps/advanced/production-llm-apps/": {
@@ -17700,7 +17965,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1936
+      "visibleTextChars": 1945
     }
   },
   "/practice-labs/llm-apps/advanced/production-llm-apps/reliability-cost-latency/": {
@@ -17749,7 +18014,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3968
+      "visibleTextChars": 3977
     }
   },
   "/practice-labs/llm-apps/advanced/production-llm-apps/testing-llm-apps/": {
@@ -17798,7 +18063,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4701
+      "visibleTextChars": 4710
     }
   },
   "/practice-labs/llm-apps/advanced/production-llm-apps/tools-and-guardrails/": {
@@ -17847,7 +18112,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5156
+      "visibleTextChars": 5165
     }
   },
   "/practice-labs/llm-apps/intermediate/": {
@@ -17896,7 +18161,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1703
+      "visibleTextChars": 1712
     }
   },
   "/practice-labs/llm-apps/intermediate/llm-app-foundations/": {
@@ -17945,7 +18210,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1937
+      "visibleTextChars": 1946
     }
   },
   "/practice-labs/llm-apps/intermediate/llm-app-foundations/architecture/": {
@@ -17994,7 +18259,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4057
+      "visibleTextChars": 4066
     }
   },
   "/practice-labs/llm-apps/intermediate/llm-app-foundations/rag-in-practice/": {
@@ -18043,7 +18308,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5882
+      "visibleTextChars": 5891
     }
   },
   "/practice-labs/llm-apps/interview/": {
@@ -18092,7 +18357,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2706
+      "visibleTextChars": 2715
     }
   },
   "/practice-labs/machine-learning/": {
@@ -18141,7 +18406,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3194
+      "visibleTextChars": 3203
     }
   },
   "/practice-labs/machine-learning/advanced/": {
@@ -18190,7 +18455,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1829
+      "visibleTextChars": 1838
     }
   },
   "/practice-labs/machine-learning/advanced/beyond-the-basics/": {
@@ -18239,7 +18504,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2134
+      "visibleTextChars": 2143
     }
   },
   "/practice-labs/machine-learning/advanced/beyond-the-basics/k-means-clustering/": {
@@ -18288,7 +18553,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3955
+      "visibleTextChars": 3964
     }
   },
   "/practice-labs/machine-learning/advanced/beyond-the-basics/neural-networks/": {
@@ -18337,7 +18602,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4076
+      "visibleTextChars": 4085
     }
   },
   "/practice-labs/machine-learning/advanced/beyond-the-basics/nlp-vision-production/": {
@@ -18386,7 +18651,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4551
+      "visibleTextChars": 4560
     }
   },
   "/practice-labs/machine-learning/beginner/": {
@@ -18435,7 +18700,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1859
+      "visibleTextChars": 1868
     }
   },
   "/practice-labs/machine-learning/beginner/ml-basics/": {
@@ -18484,7 +18749,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2154
+      "visibleTextChars": 2163
     }
   },
   "/practice-labs/machine-learning/beginner/ml-basics/data-features-splits/": {
@@ -18533,7 +18798,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4047
+      "visibleTextChars": 4056
     }
   },
   "/practice-labs/machine-learning/beginner/ml-basics/linear-regression/": {
@@ -18582,7 +18847,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4076
+      "visibleTextChars": 4085
     }
   },
   "/practice-labs/machine-learning/beginner/ml-basics/what-machine-learning-is/": {
@@ -18631,7 +18896,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4625
+      "visibleTextChars": 4634
     }
   },
   "/practice-labs/machine-learning/intermediate/": {
@@ -18680,7 +18945,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2017
+      "visibleTextChars": 2026
     }
   },
   "/practice-labs/machine-learning/intermediate/models-and-evaluation/": {
@@ -18729,7 +18994,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2363
+      "visibleTextChars": 2372
     }
   },
   "/practice-labs/machine-learning/intermediate/models-and-evaluation/classification-and-thresholds/": {
@@ -18778,7 +19043,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3784
+      "visibleTextChars": 3793
     }
   },
   "/practice-labs/machine-learning/intermediate/models-and-evaluation/decision-trees-and-ensembles/": {
@@ -18827,7 +19092,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4113
+      "visibleTextChars": 4122
     }
   },
   "/practice-labs/machine-learning/intermediate/models-and-evaluation/overfitting-and-validation/": {
@@ -18876,7 +19141,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4239
+      "visibleTextChars": 4248
     }
   },
   "/practice-labs/machine-learning/interview/": {
@@ -18925,7 +19190,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4036
+      "visibleTextChars": 4045
     }
   },
   "/practice-labs/manual-testing/": {
@@ -18974,7 +19239,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4318
+      "visibleTextChars": 4327
     }
   },
   "/practice-labs/manual-testing/advanced/": {
@@ -19023,7 +19288,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2850
+      "visibleTextChars": 2859
     }
   },
   "/practice-labs/manual-testing/advanced/agile-metrics/": {
@@ -19072,7 +19337,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2801
+      "visibleTextChars": 2810
     }
   },
   "/practice-labs/manual-testing/advanced/agile-metrics/acceptance-criteria-given-when-then/": {
@@ -19121,7 +19386,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4551
+      "visibleTextChars": 4560
     }
   },
   "/practice-labs/manual-testing/advanced/agile-metrics/test-metrics-and-reporting/": {
@@ -19170,7 +19435,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4496
+      "visibleTextChars": 4505
     }
   },
   "/practice-labs/manual-testing/advanced/agile-metrics/testing-in-agile/": {
@@ -19219,7 +19484,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4567
+      "visibleTextChars": 4576
     }
   },
   "/practice-labs/manual-testing/advanced/planning-risk/": {
@@ -19268,7 +19533,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2528
+      "visibleTextChars": 2537
     }
   },
   "/practice-labs/manual-testing/advanced/planning-risk/risk-based-testing/": {
@@ -19317,7 +19582,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4394
+      "visibleTextChars": 4403
     }
   },
   "/practice-labs/manual-testing/advanced/planning-risk/writing-a-test-plan/": {
@@ -19366,7 +19631,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6625
+      "visibleTextChars": 6634
     }
   },
   "/practice-labs/manual-testing/beginner/": {
@@ -19415,7 +19680,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3787
+      "visibleTextChars": 3796
     }
   },
   "/practice-labs/manual-testing/beginner/life-cycle/": {
@@ -19464,7 +19729,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3006
+      "visibleTextChars": 3015
     }
   },
   "/practice-labs/manual-testing/beginner/life-cycle/software-development-life-cycles/": {
@@ -19513,7 +19778,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5288
+      "visibleTextChars": 5297
     }
   },
   "/practice-labs/manual-testing/beginner/life-cycle/software-testing-life-cycle/": {
@@ -19562,7 +19827,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5958
+      "visibleTextChars": 5967
     }
   },
   "/practice-labs/manual-testing/beginner/life-cycle/test-levels/": {
@@ -19611,7 +19876,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5404
+      "visibleTextChars": 5413
     }
   },
   "/practice-labs/manual-testing/beginner/what-testing-is/": {
@@ -19660,7 +19925,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2840
+      "visibleTextChars": 2849
     }
   },
   "/practice-labs/manual-testing/beginner/what-testing-is/seven-testing-principles/": {
@@ -19709,7 +19974,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6427
+      "visibleTextChars": 6436
     }
   },
   "/practice-labs/manual-testing/beginner/what-testing-is/static-and-dynamic-testing/": {
@@ -19758,7 +20023,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5743
+      "visibleTextChars": 5752
     }
   },
   "/practice-labs/manual-testing/beginner/what-testing-is/what-is-software-testing/": {
@@ -19807,7 +20072,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6118
+      "visibleTextChars": 6127
     }
   },
   "/practice-labs/manual-testing/beginner/writing-test-cases/": {
@@ -19856,7 +20121,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3058
+      "visibleTextChars": 3067
     }
   },
   "/practice-labs/manual-testing/beginner/writing-test-cases/positive-and-negative-testing/": {
@@ -19905,7 +20170,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6000
+      "visibleTextChars": 6009
     }
   },
   "/practice-labs/manual-testing/beginner/writing-test-cases/reading-requirements/": {
@@ -19954,7 +20219,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6157
+      "visibleTextChars": 6166
     }
   },
   "/practice-labs/manual-testing/beginner/writing-test-cases/test-scenarios/": {
@@ -20003,7 +20268,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5732
+      "visibleTextChars": 5741
     }
   },
   "/practice-labs/manual-testing/beginner/writing-test-cases/writing-test-cases/": {
@@ -20052,7 +20317,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6340
+      "visibleTextChars": 6349
     }
   },
   "/practice-labs/manual-testing/intermediate/": {
@@ -20101,7 +20366,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3407
+      "visibleTextChars": 3416
     }
   },
   "/practice-labs/manual-testing/intermediate/executing-reporting/": {
@@ -20150,7 +20415,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2858
+      "visibleTextChars": 2867
     }
   },
   "/practice-labs/manual-testing/intermediate/executing-reporting/bug-life-cycle/": {
@@ -20199,7 +20464,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4733
+      "visibleTextChars": 4742
     }
   },
   "/practice-labs/manual-testing/intermediate/executing-reporting/executing-tests/": {
@@ -20248,7 +20513,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5156
+      "visibleTextChars": 5165
     }
   },
   "/practice-labs/manual-testing/intermediate/executing-reporting/writing-bug-reports/": {
@@ -20297,7 +20562,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6396
+      "visibleTextChars": 6405
     }
   },
   "/practice-labs/manual-testing/intermediate/test-data-coverage/": {
@@ -20346,7 +20611,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2516
+      "visibleTextChars": 2525
     }
   },
   "/practice-labs/manual-testing/intermediate/test-data-coverage/choosing-test-data/": {
@@ -20395,7 +20660,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5366
+      "visibleTextChars": 5375
     }
   },
   "/practice-labs/manual-testing/intermediate/test-data-coverage/coverage-and-traceability/": {
@@ -20444,7 +20709,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4941
+      "visibleTextChars": 4950
     }
   },
   "/practice-labs/manual-testing/intermediate/types-of-testing/": {
@@ -20493,7 +20758,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3092
+      "visibleTextChars": 3101
     }
   },
   "/practice-labs/manual-testing/intermediate/types-of-testing/exploratory-testing-bug-hunt/": {
@@ -20542,7 +20807,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8100
+      "visibleTextChars": 8109
     }
   },
   "/practice-labs/manual-testing/intermediate/types-of-testing/functional-and-non-functional-testing/": {
@@ -20591,7 +20856,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5123
+      "visibleTextChars": 5132
     }
   },
   "/practice-labs/manual-testing/intermediate/types-of-testing/smoke-sanity-regression-testing/": {
@@ -20640,7 +20905,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5231
+      "visibleTextChars": 5240
     }
   },
   "/practice-labs/manual-testing/intermediate/types-of-testing/usability-and-compatibility-testing/": {
@@ -20689,7 +20954,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4898
+      "visibleTextChars": 4907
     }
   },
   "/practice-labs/manual-testing/interview/": {
@@ -20738,7 +21003,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7585
+      "visibleTextChars": 7594
     }
   },
   "/practice-labs/pandas/": {
@@ -20787,7 +21052,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2594
+      "visibleTextChars": 2603
     }
   },
   "/practice-labs/pandas/advanced/": {
@@ -20836,7 +21101,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1519
+      "visibleTextChars": 1528
     }
   },
   "/practice-labs/pandas/advanced/pandas-analysis/": {
@@ -20885,7 +21150,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1676
+      "visibleTextChars": 1685
     }
   },
   "/practice-labs/pandas/advanced/pandas-analysis/dates-and-reporting/": {
@@ -20934,7 +21199,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3760
+      "visibleTextChars": 3769
     }
   },
   "/practice-labs/pandas/advanced/pandas-analysis/grouping-merging-pivoting/": {
@@ -20983,7 +21248,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5112
+      "visibleTextChars": 5121
     }
   },
   "/practice-labs/pandas/intermediate/": {
@@ -21032,7 +21297,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1561
+      "visibleTextChars": 1570
     }
   },
   "/practice-labs/pandas/intermediate/pandas-basics/": {
@@ -21081,7 +21346,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1777
+      "visibleTextChars": 1786
     }
   },
   "/practice-labs/pandas/intermediate/pandas-basics/cleaning-data/": {
@@ -21130,7 +21395,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4430
+      "visibleTextChars": 4439
     }
   },
   "/practice-labs/pandas/intermediate/pandas-basics/dataframes-and-series/": {
@@ -21179,7 +21444,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3499
+      "visibleTextChars": 3508
     }
   },
   "/practice-labs/pandas/intermediate/pandas-basics/selecting-and-filtering/": {
@@ -21228,7 +21493,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3924
+      "visibleTextChars": 3933
     }
   },
   "/practice-labs/pandas/interview/": {
@@ -21277,7 +21542,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2424
+      "visibleTextChars": 2433
     }
   },
   "/practice-labs/playwright/": {
@@ -21326,7 +21591,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3536
+      "visibleTextChars": 3545
     }
   },
   "/practice-labs/playwright/advanced/": {
@@ -21375,7 +21640,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2035
+      "visibleTextChars": 2044
     }
   },
   "/practice-labs/playwright/advanced/reliability-scale/": {
@@ -21424,7 +21689,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2340
+      "visibleTextChars": 2349
     }
   },
   "/practice-labs/playwright/advanced/reliability-scale/configuration-and-parallel-runs/": {
@@ -21473,7 +21738,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4330
+      "visibleTextChars": 4339
     }
   },
   "/practice-labs/playwright/advanced/reliability-scale/debugging-and-flaky-tests/": {
@@ -21522,7 +21787,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4867
+      "visibleTextChars": 4876
     }
   },
   "/practice-labs/playwright/advanced/reliability-scale/reports-and-ci/": {
@@ -21571,7 +21836,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3938
+      "visibleTextChars": 3947
     }
   },
   "/practice-labs/playwright/beginner/": {
@@ -21620,7 +21885,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2823
+      "visibleTextChars": 2832
     }
   },
   "/practice-labs/playwright/beginner/automation-basics/": {
@@ -21669,7 +21934,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2510
+      "visibleTextChars": 2519
     }
   },
   "/practice-labs/playwright/beginner/automation-basics/how-playwright-works/": {
@@ -21718,7 +21983,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4594
+      "visibleTextChars": 4603
     }
   },
   "/practice-labs/playwright/beginner/automation-basics/setup-and-first-run/": {
@@ -21767,7 +22032,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4270
+      "visibleTextChars": 4279
     }
   },
   "/practice-labs/playwright/beginner/automation-basics/what-is-test-automation/": {
@@ -21816,7 +22081,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4397
+      "visibleTextChars": 4406
     }
   },
   "/practice-labs/playwright/beginner/first-tests/": {
@@ -21865,7 +22130,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2477
+      "visibleTextChars": 2486
     }
   },
   "/practice-labs/playwright/beginner/first-tests/locators/": {
@@ -21914,7 +22179,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5034
+      "visibleTextChars": 5043
     }
   },
   "/practice-labs/playwright/beginner/first-tests/web-first-assertions/": {
@@ -21963,7 +22228,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4380
+      "visibleTextChars": 4389
     }
   },
   "/practice-labs/playwright/beginner/first-tests/writing-a-complete-test/": {
@@ -22012,7 +22277,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4482
+      "visibleTextChars": 4491
     }
   },
   "/practice-labs/playwright/beginner/just-enough-typescript/": {
@@ -22061,7 +22326,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1953
+      "visibleTextChars": 1962
     }
   },
   "/practice-labs/playwright/beginner/just-enough-typescript/typescript-for-testers/": {
@@ -22110,7 +22375,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4190
+      "visibleTextChars": 4199
     }
   },
   "/practice-labs/playwright/intermediate/": {
@@ -22159,7 +22424,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2517
+      "visibleTextChars": 2526
     }
   },
   "/practice-labs/playwright/intermediate/interacting/": {
@@ -22208,7 +22473,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2083
+      "visibleTextChars": 2092
     }
   },
   "/practice-labs/playwright/intermediate/interacting/actions-and-forms/": {
@@ -22257,7 +22522,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4659
+      "visibleTextChars": 4668
     }
   },
   "/practice-labs/playwright/intermediate/interacting/navigation-and-waiting/": {
@@ -22306,7 +22571,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4214
+      "visibleTextChars": 4223
     }
   },
   "/practice-labs/playwright/intermediate/network-api/": {
@@ -22355,7 +22620,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2029
+      "visibleTextChars": 2038
     }
   },
   "/practice-labs/playwright/intermediate/network-api/network-mocking-and-api-testing/": {
@@ -22404,7 +22669,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4360
+      "visibleTextChars": 4369
     }
   },
   "/practice-labs/playwright/intermediate/organising-tests/": {
@@ -22453,7 +22718,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2134
+      "visibleTextChars": 2143
     }
   },
   "/practice-labs/playwright/intermediate/organising-tests/hooks-and-fixtures/": {
@@ -22502,7 +22767,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3997
+      "visibleTextChars": 4006
     }
   },
   "/practice-labs/playwright/intermediate/organising-tests/page-object-model/": {
@@ -22551,7 +22816,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4356
+      "visibleTextChars": 4365
     }
   },
   "/practice-labs/playwright/interview/": {
@@ -22600,7 +22865,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5258
+      "visibleTextChars": 5267
     }
   },
   "/practice-labs/power-bi/": {
@@ -22649,7 +22914,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3084
+      "visibleTextChars": 3093
     }
   },
   "/practice-labs/power-bi/advanced/": {
@@ -22698,7 +22963,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1706
+      "visibleTextChars": 1715
     }
   },
   "/practice-labs/power-bi/advanced/dax-measures/": {
@@ -22747,7 +23012,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1916
+      "visibleTextChars": 1925
     }
   },
   "/practice-labs/power-bi/advanced/dax-measures/calculate-and-time-intelligence/": {
@@ -22796,7 +23061,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3197
+      "visibleTextChars": 3206
     }
   },
   "/practice-labs/power-bi/advanced/dax-measures/dax-basics/": {
@@ -22845,7 +23110,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3157
+      "visibleTextChars": 3166
     }
   },
   "/practice-labs/power-bi/beginner/": {
@@ -22894,7 +23159,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1505
+      "visibleTextChars": 1514
     }
   },
   "/practice-labs/power-bi/beginner/power-query-basics/": {
@@ -22943,7 +23208,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1580
+      "visibleTextChars": 1589
     }
   },
   "/practice-labs/power-bi/beginner/power-query-basics/power-query-cleaning/": {
@@ -22992,7 +23257,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3021
+      "visibleTextChars": 3030
     }
   },
   "/practice-labs/power-bi/intermediate/": {
@@ -23041,7 +23306,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2100
+      "visibleTextChars": 2109
     }
   },
   "/practice-labs/power-bi/intermediate/shaping-and-modelling/": {
@@ -23090,7 +23355,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2357
+      "visibleTextChars": 2366
     }
   },
   "/practice-labs/power-bi/intermediate/shaping-and-modelling/power-query-combining/": {
@@ -23139,7 +23404,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3075
+      "visibleTextChars": 3084
     }
   },
   "/practice-labs/power-bi/intermediate/shaping-and-modelling/power-query-shaping/": {
@@ -23188,7 +23453,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3031
+      "visibleTextChars": 3040
     }
   },
   "/practice-labs/power-bi/intermediate/shaping-and-modelling/star-schema-modelling/": {
@@ -23237,7 +23502,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3216
+      "visibleTextChars": 3225
     }
   },
   "/practice-labs/power-bi/interview/": {
@@ -23286,7 +23551,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3121
+      "visibleTextChars": 3130
     }
   },
   "/practice-labs/programming/": {
@@ -23335,7 +23600,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4530
+      "visibleTextChars": 4539
     }
   },
   "/practice-labs/prompt-engineering/": {
@@ -23384,7 +23649,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2793
+      "visibleTextChars": 2802
     }
   },
   "/practice-labs/prompt-engineering/advanced/": {
@@ -23433,7 +23698,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1547
+      "visibleTextChars": 1556
     }
   },
   "/practice-labs/prompt-engineering/advanced/reliable-and-safe/": {
@@ -23482,7 +23747,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1794
+      "visibleTextChars": 1803
     }
   },
   "/practice-labs/prompt-engineering/advanced/reliable-and-safe/evaluating-prompts/": {
@@ -23531,7 +23796,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4258
+      "visibleTextChars": 4267
     }
   },
   "/practice-labs/prompt-engineering/advanced/reliable-and-safe/prompt-security/": {
@@ -23580,7 +23845,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5155
+      "visibleTextChars": 5164
     }
   },
   "/practice-labs/prompt-engineering/beginner/": {
@@ -23629,7 +23894,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1493
+      "visibleTextChars": 1502
     }
   },
   "/practice-labs/prompt-engineering/beginner/prompt-basics/": {
@@ -23678,7 +23943,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1703
+      "visibleTextChars": 1712
     }
   },
   "/practice-labs/prompt-engineering/beginner/prompt-basics/anatomy-of-a-prompt/": {
@@ -23727,7 +23992,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4059
+      "visibleTextChars": 4068
     }
   },
   "/practice-labs/prompt-engineering/beginner/prompt-basics/few-shot-prompting/": {
@@ -23776,7 +24041,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4110
+      "visibleTextChars": 4119
     }
   },
   "/practice-labs/prompt-engineering/intermediate/": {
@@ -23825,7 +24090,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1840
+      "visibleTextChars": 1849
     }
   },
   "/practice-labs/prompt-engineering/intermediate/prompts-for-software/": {
@@ -23874,7 +24139,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2099
+      "visibleTextChars": 2108
     }
   },
   "/practice-labs/prompt-engineering/intermediate/prompts-for-software/steps-and-chains/": {
@@ -23923,7 +24188,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4129
+      "visibleTextChars": 4138
     }
   },
   "/practice-labs/prompt-engineering/intermediate/prompts-for-software/structured-outputs/": {
@@ -23972,7 +24237,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5129
+      "visibleTextChars": 5138
     }
   },
   "/practice-labs/prompt-engineering/intermediate/prompts-for-software/tool-calling/": {
@@ -24021,7 +24286,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5116
+      "visibleTextChars": 5125
     }
   },
   "/practice-labs/prompt-engineering/interview/": {
@@ -24070,7 +24335,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3589
+      "visibleTextChars": 3598
     }
   },
   "/practice-labs/python/": {
@@ -24119,7 +24384,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2964
+      "visibleTextChars": 2973
     }
   },
   "/practice-labs/python/advanced/": {
@@ -24168,7 +24433,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1631
+      "visibleTextChars": 1640
     }
   },
   "/practice-labs/python/advanced/python-professional/": {
@@ -24217,7 +24482,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1840
+      "visibleTextChars": 1849
     }
   },
   "/practice-labs/python/advanced/python-professional/problem-solving-and-complexity/": {
@@ -24266,7 +24531,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3521
+      "visibleTextChars": 3530
     }
   },
   "/practice-labs/python/advanced/python-professional/testing-with-pytest/": {
@@ -24315,7 +24580,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3790
+      "visibleTextChars": 3799
     }
   },
   "/practice-labs/python/beginner/": {
@@ -24364,7 +24629,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1817
+      "visibleTextChars": 1826
     }
   },
   "/practice-labs/python/beginner/python-basics/": {
@@ -24413,7 +24678,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2126
+      "visibleTextChars": 2135
     }
   },
   "/practice-labs/python/beginner/python-basics/conditions-and-arithmetic/": {
@@ -24462,7 +24727,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4558
+      "visibleTextChars": 4567
     }
   },
   "/practice-labs/python/beginner/python-basics/dictionaries-sets-strings/": {
@@ -24511,7 +24776,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4032
+      "visibleTextChars": 4041
     }
   },
   "/practice-labs/python/beginner/python-basics/loops-lists-ranges/": {
@@ -24560,7 +24825,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3672
+      "visibleTextChars": 3681
     }
   },
   "/practice-labs/python/beginner/python-basics/values-variables-functions/": {
@@ -24609,7 +24874,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3594
+      "visibleTextChars": 3603
     }
   },
   "/practice-labs/python/intermediate/": {
@@ -24658,7 +24923,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1787
+      "visibleTextChars": 1796
     }
   },
   "/practice-labs/python/intermediate/python-in-depth/": {
@@ -24707,7 +24972,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2131
+      "visibleTextChars": 2140
     }
   },
   "/practice-labs/python/intermediate/python-in-depth/classes-and-objects/": {
@@ -24756,7 +25021,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3712
+      "visibleTextChars": 3721
     }
   },
   "/practice-labs/python/intermediate/python-in-depth/exceptions-and-validation/": {
@@ -24805,7 +25070,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3653
+      "visibleTextChars": 3662
     }
   },
   "/practice-labs/python/intermediate/python-in-depth/files-and-modules/": {
@@ -24854,7 +25119,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3908
+      "visibleTextChars": 3917
     }
   },
   "/practice-labs/python/intermediate/python-in-depth/scope-defaults-comprehensions/": {
@@ -24903,7 +25168,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4561
+      "visibleTextChars": 4570
     }
   },
   "/practice-labs/python/interview/": {
@@ -24952,7 +25217,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3644
+      "visibleTextChars": 3653
     }
   },
   "/practice-labs/regex/": {
@@ -25001,7 +25266,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2470
+      "visibleTextChars": 2479
     }
   },
   "/practice-labs/regex/advanced/": {
@@ -25050,7 +25315,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1277
+      "visibleTextChars": 1286
     }
   },
   "/practice-labs/regex/advanced/regex-advanced/": {
@@ -25099,7 +25364,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1410
+      "visibleTextChars": 1419
     }
   },
   "/practice-labs/regex/advanced/regex-advanced/lazy-lookarounds-performance/": {
@@ -25148,7 +25413,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4365
+      "visibleTextChars": 4374
     }
   },
   "/practice-labs/regex/beginner/": {
@@ -25197,7 +25462,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1424
+      "visibleTextChars": 1433
     }
   },
   "/practice-labs/regex/beginner/regex-basics/": {
@@ -25246,7 +25511,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1562
+      "visibleTextChars": 1571
     }
   },
   "/practice-labs/regex/beginner/regex-basics/classes-and-quantifiers/": {
@@ -25295,7 +25560,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3783
+      "visibleTextChars": 3792
     }
   },
   "/practice-labs/regex/beginner/regex-basics/groups-alternation-flags/": {
@@ -25344,7 +25609,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3741
+      "visibleTextChars": 3750
     }
   },
   "/practice-labs/regex/intermediate/": {
@@ -25393,7 +25658,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1354
+      "visibleTextChars": 1363
     }
   },
   "/practice-labs/regex/intermediate/regex-extraction/": {
@@ -25442,7 +25707,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1408
+      "visibleTextChars": 1417
     }
   },
   "/practice-labs/regex/intermediate/regex-extraction/capturing-and-extracting/": {
@@ -25491,7 +25756,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4569
+      "visibleTextChars": 4578
     }
   },
   "/practice-labs/regex/interview/": {
@@ -25540,7 +25805,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2758
+      "visibleTextChars": 2767
     }
   },
   "/practice-labs/selenium/": {
@@ -25589,7 +25854,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2720
+      "visibleTextChars": 2729
     }
   },
   "/practice-labs/selenium/advanced/": {
@@ -25638,7 +25903,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1368
+      "visibleTextChars": 1377
     }
   },
   "/practice-labs/selenium/advanced/selenium-at-scale/": {
@@ -25687,7 +25952,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1465
+      "visibleTextChars": 1474
     }
   },
   "/practice-labs/selenium/advanced/selenium-at-scale/grid-and-ci/": {
@@ -25736,7 +26001,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3531
+      "visibleTextChars": 3540
     }
   },
   "/practice-labs/selenium/beginner/": {
@@ -25785,7 +26050,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1781
+      "visibleTextChars": 1790
     }
   },
   "/practice-labs/selenium/beginner/webdriver-basics/": {
@@ -25834,7 +26099,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1944
+      "visibleTextChars": 1953
     }
   },
   "/practice-labs/selenium/beginner/webdriver-basics/how-selenium-works/": {
@@ -25883,7 +26148,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3556
+      "visibleTextChars": 3565
     }
   },
   "/practice-labs/selenium/beginner/webdriver-basics/locators/": {
@@ -25932,7 +26197,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3486
+      "visibleTextChars": 3495
     }
   },
   "/practice-labs/selenium/intermediate/": {
@@ -25981,7 +26246,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1704
+      "visibleTextChars": 1713
     }
   },
   "/practice-labs/selenium/intermediate/robust-selenium/": {
@@ -26030,7 +26295,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1938
+      "visibleTextChars": 1947
     }
   },
   "/practice-labs/selenium/intermediate/robust-selenium/actions-frames-windows/": {
@@ -26079,7 +26344,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3735
+      "visibleTextChars": 3744
     }
   },
   "/practice-labs/selenium/intermediate/robust-selenium/junit-and-page-objects/": {
@@ -26128,7 +26393,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4752
+      "visibleTextChars": 4761
     }
   },
   "/practice-labs/selenium/intermediate/robust-selenium/waits-and-synchronisation/": {
@@ -26177,7 +26442,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4081
+      "visibleTextChars": 4090
     }
   },
   "/practice-labs/selenium/interview/": {
@@ -26226,7 +26491,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3292
+      "visibleTextChars": 3301
     }
   },
   "/practice-labs/shoplite/": {
@@ -26305,7 +26570,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4393
+      "visibleTextChars": 4402
     }
   },
   "/practice-labs/specialised-testing/": {
@@ -26354,7 +26619,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2780
+      "visibleTextChars": 2789
     }
   },
   "/practice-labs/specialised-testing/advanced/": {
@@ -26403,7 +26668,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1624
+      "visibleTextChars": 1633
     }
   },
   "/practice-labs/specialised-testing/advanced/quality-at-scale/": {
@@ -26452,7 +26717,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1970
+      "visibleTextChars": 1979
     }
   },
   "/practice-labs/specialised-testing/advanced/quality-at-scale/defects-and-root-cause/": {
@@ -26501,7 +26766,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5027
+      "visibleTextChars": 5036
     }
   },
   "/practice-labs/specialised-testing/advanced/quality-at-scale/mobile-testing/": {
@@ -26550,7 +26815,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3689
+      "visibleTextChars": 3698
     }
   },
   "/practice-labs/specialised-testing/advanced/quality-at-scale/performance-testing/": {
@@ -26599,7 +26864,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3553
+      "visibleTextChars": 3562
     }
   },
   "/practice-labs/specialised-testing/intermediate/": {
@@ -26648,7 +26913,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2146
+      "visibleTextChars": 2155
     }
   },
   "/practice-labs/specialised-testing/intermediate/beyond-the-ui/": {
@@ -26697,7 +26962,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2604
+      "visibleTextChars": 2613
     }
   },
   "/practice-labs/specialised-testing/intermediate/beyond-the-ui/accessibility-testing/": {
@@ -26746,7 +27011,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4601
+      "visibleTextChars": 4610
     }
   },
   "/practice-labs/specialised-testing/intermediate/beyond-the-ui/api-testing/": {
@@ -26795,7 +27060,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4191
+      "visibleTextChars": 4200
     }
   },
   "/practice-labs/specialised-testing/intermediate/beyond-the-ui/database-testing/": {
@@ -26844,7 +27109,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3699
+      "visibleTextChars": 3708
     }
   },
   "/practice-labs/specialised-testing/intermediate/beyond-the-ui/integration-testing/": {
@@ -26893,7 +27158,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3647
+      "visibleTextChars": 3656
     }
   },
   "/practice-labs/specialised-testing/intermediate/beyond-the-ui/user-acceptance-testing/": {
@@ -26942,7 +27207,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3912
+      "visibleTextChars": 3921
     }
   },
   "/practice-labs/specialised-testing/interview/": {
@@ -26991,7 +27256,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3054
+      "visibleTextChars": 3063
     }
   },
   "/practice-labs/sql/": {
@@ -27040,7 +27305,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5236
+      "visibleTextChars": 5245
     }
   },
   "/practice-labs/sql/advanced/": {
@@ -27089,7 +27354,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3525
+      "visibleTextChars": 3534
     }
   },
   "/practice-labs/sql/advanced/analytics/": {
@@ -27138,7 +27403,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3112
+      "visibleTextChars": 3121
     }
   },
   "/practice-labs/sql/advanced/analytics/lag-lead-and-ranking/": {
@@ -27187,7 +27452,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 11003
+      "visibleTextChars": 11012
     }
   },
   "/practice-labs/sql/advanced/analytics/running-totals-and-moving-averages/": {
@@ -27236,7 +27501,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 10833
+      "visibleTextChars": 10842
     }
   },
   "/practice-labs/sql/advanced/analytics/window-functions/": {
@@ -27285,7 +27550,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7613
+      "visibleTextChars": 7622
     }
   },
   "/practice-labs/sql/advanced/recursion-performance/": {
@@ -27334,7 +27599,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2959
+      "visibleTextChars": 2968
     }
   },
   "/practice-labs/sql/advanced/recursion-performance/reading-query-plans/": {
@@ -27383,7 +27648,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8161
+      "visibleTextChars": 8170
     }
   },
   "/practice-labs/sql/advanced/recursion-performance/recursive-ctes/": {
@@ -27432,7 +27697,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 10375
+      "visibleTextChars": 10384
     }
   },
   "/practice-labs/sql/advanced/recursion-performance/writing-faster-queries/": {
@@ -27481,7 +27746,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8636
+      "visibleTextChars": 8645
     }
   },
   "/practice-labs/sql/advanced/reliability/": {
@@ -27530,7 +27795,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2544
+      "visibleTextChars": 2553
     }
   },
   "/practice-labs/sql/advanced/reliability/tables-constraints-views-indexes/": {
@@ -27579,7 +27844,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7258
+      "visibleTextChars": 7267
     }
   },
   "/practice-labs/sql/advanced/reliability/transactions/": {
@@ -27628,7 +27893,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5217
+      "visibleTextChars": 5226
     }
   },
   "/practice-labs/sql/beginner/": {
@@ -27677,7 +27942,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2808
+      "visibleTextChars": 2817
     }
   },
   "/practice-labs/sql/beginner/filtering-sorting/": {
@@ -27726,7 +27991,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2658
+      "visibleTextChars": 2667
     }
   },
   "/practice-labs/sql/beginner/filtering-sorting/filtering-with-where/": {
@@ -27775,7 +28040,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8849
+      "visibleTextChars": 8858
     }
   },
   "/practice-labs/sql/beginner/filtering-sorting/missing-values-null/": {
@@ -27824,7 +28089,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5151
+      "visibleTextChars": 5160
     }
   },
   "/practice-labs/sql/beginner/filtering-sorting/sorting-limiting-distinct/": {
@@ -27873,7 +28138,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6034
+      "visibleTextChars": 6043
     }
   },
   "/practice-labs/sql/beginner/fundamentals/": {
@@ -27922,7 +28187,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3002
+      "visibleTextChars": 3011
     }
   },
   "/practice-labs/sql/beginner/fundamentals/calculations-aliases-functions/": {
@@ -27971,7 +28236,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7206
+      "visibleTextChars": 7215
     }
   },
   "/practice-labs/sql/beginner/fundamentals/reading-errors/": {
@@ -28020,7 +28285,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5448
+      "visibleTextChars": 5457
     }
   },
   "/practice-labs/sql/beginner/fundamentals/select-and-from/": {
@@ -28069,7 +28334,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6040
+      "visibleTextChars": 6049
     }
   },
   "/practice-labs/sql/beginner/fundamentals/what-is-a-database/": {
@@ -28118,7 +28383,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6621
+      "visibleTextChars": 6630
     }
   },
   "/practice-labs/sql/intermediate/": {
@@ -28167,7 +28432,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3181
+      "visibleTextChars": 3190
     }
   },
   "/practice-labs/sql/intermediate/changing-data/": {
@@ -28216,7 +28481,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2863
+      "visibleTextChars": 2872
     }
   },
   "/practice-labs/sql/intermediate/changing-data/cleaning-data/": {
@@ -28265,7 +28530,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 12439
+      "visibleTextChars": 12448
     }
   },
   "/practice-labs/sql/intermediate/changing-data/insert-update-delete/": {
@@ -28314,7 +28579,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6802
+      "visibleTextChars": 6811
     }
   },
   "/practice-labs/sql/intermediate/changing-data/sqlite-and-other-databases/": {
@@ -28363,7 +28628,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4557
+      "visibleTextChars": 4566
     }
   },
   "/practice-labs/sql/intermediate/combining/": {
@@ -28412,7 +28677,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2643
+      "visibleTextChars": 2652
     }
   },
   "/practice-labs/sql/intermediate/combining/combining-results-with-union/": {
@@ -28461,7 +28726,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5040
+      "visibleTextChars": 5049
     }
   },
   "/practice-labs/sql/intermediate/combining/joining-tables/": {
@@ -28510,7 +28775,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 9376
+      "visibleTextChars": 9385
     }
   },
   "/practice-labs/sql/intermediate/combining/subqueries-exists-with/": {
@@ -28559,7 +28824,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7312
+      "visibleTextChars": 7321
     }
   },
   "/practice-labs/sql/intermediate/summarising/": {
@@ -28608,7 +28873,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2875
+      "visibleTextChars": 2884
     }
   },
   "/practice-labs/sql/intermediate/summarising/aggregates-group-by-having/": {
@@ -28657,7 +28922,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7991
+      "visibleTextChars": 8000
     }
   },
   "/practice-labs/sql/intermediate/summarising/case-expressions/": {
@@ -28706,7 +28971,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5349
+      "visibleTextChars": 5358
     }
   },
   "/practice-labs/sql/intermediate/summarising/working-with-dates-and-text/": {
@@ -28755,7 +29020,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 10552
+      "visibleTextChars": 10561
     }
   },
   "/practice-labs/sql/interview/": {
@@ -28804,7 +29069,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 13670
+      "visibleTextChars": 13679
     }
   },
   "/practice-labs/sql/projects/": {
@@ -28853,7 +29118,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3407
+      "visibleTextChars": 3416
     }
   },
   "/practice-labs/sql/projects/banking-transactions/": {
@@ -28902,7 +29167,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8212
+      "visibleTextChars": 8221
     }
   },
   "/practice-labs/sql/projects/business-reporting/": {
@@ -28951,7 +29216,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 9131
+      "visibleTextChars": 9140
     }
   },
   "/practice-labs/sql/projects/ecommerce-sales/": {
@@ -29000,7 +29265,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8227
+      "visibleTextChars": 8236
     }
   },
   "/practice-labs/sql/projects/employee-database/": {
@@ -29049,7 +29314,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7840
+      "visibleTextChars": 7849
     }
   },
   "/practice-labs/sql/projects/healthcare-appointments/": {
@@ -29098,7 +29363,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7618
+      "visibleTextChars": 7627
     }
   },
   "/practice-labs/statistics/": {
@@ -29147,7 +29412,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3207
+      "visibleTextChars": 3216
     }
   },
   "/practice-labs/statistics/advanced/": {
@@ -29196,7 +29461,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1620
+      "visibleTextChars": 1629
     }
   },
   "/practice-labs/statistics/advanced/deciding-with-data/": {
@@ -29245,7 +29510,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1841
+      "visibleTextChars": 1850
     }
   },
   "/practice-labs/statistics/advanced/deciding-with-data/ab-tests-and-significance/": {
@@ -29294,7 +29559,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4630
+      "visibleTextChars": 4639
     }
   },
   "/practice-labs/statistics/advanced/deciding-with-data/charts-and-presenting/": {
@@ -29343,7 +29608,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4177
+      "visibleTextChars": 4186
     }
   },
   "/practice-labs/statistics/beginner/": {
@@ -29392,7 +29657,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2055
+      "visibleTextChars": 2064
     }
   },
   "/practice-labs/statistics/beginner/describing-data/": {
@@ -29441,7 +29706,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2439
+      "visibleTextChars": 2448
     }
   },
   "/practice-labs/statistics/beginner/describing-data/data-variables-and-types/": {
@@ -29490,7 +29755,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3987
+      "visibleTextChars": 3996
     }
   },
   "/practice-labs/statistics/beginner/describing-data/mean-median-mode/": {
@@ -29539,7 +29804,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4240
+      "visibleTextChars": 4249
     }
   },
   "/practice-labs/statistics/beginner/describing-data/percentiles-and-outliers/": {
@@ -29588,7 +29853,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4392
+      "visibleTextChars": 4401
     }
   },
   "/practice-labs/statistics/beginner/describing-data/range-and-standard-deviation/": {
@@ -29637,7 +29902,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4248
+      "visibleTextChars": 4257
     }
   },
   "/practice-labs/statistics/intermediate/": {
@@ -29686,7 +29951,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2030
+      "visibleTextChars": 2039
     }
   },
   "/practice-labs/statistics/intermediate/analysing-data/": {
@@ -29735,7 +30000,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2306
+      "visibleTextChars": 2315
     }
   },
   "/practice-labs/statistics/intermediate/analysing-data/cleaning-data/": {
@@ -29784,7 +30049,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4637
+      "visibleTextChars": 4646
     }
   },
   "/practice-labs/statistics/intermediate/analysing-data/correlation-and-regression/": {
@@ -29833,7 +30098,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4482
+      "visibleTextChars": 4491
     }
   },
   "/practice-labs/statistics/intermediate/analysing-data/grouping-and-pivots/": {
@@ -29882,7 +30147,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4101
+      "visibleTextChars": 4110
     }
   },
   "/practice-labs/statistics/interview/": {
@@ -29931,7 +30196,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3674
+      "visibleTextChars": 3683
     }
   },
   "/practice-labs/test-design/": {
@@ -29980,7 +30245,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2539
+      "visibleTextChars": 2548
     }
   },
   "/practice-labs/test-design/advanced/": {
@@ -30029,7 +30294,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1561
+      "visibleTextChars": 1570
     }
   },
   "/practice-labs/test-design/advanced/combinations-experience/": {
@@ -30078,7 +30343,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1819
+      "visibleTextChars": 1828
     }
   },
   "/practice-labs/test-design/advanced/combinations-experience/pairwise-testing/": {
@@ -30127,7 +30392,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3350
+      "visibleTextChars": 3359
     }
   },
   "/practice-labs/test-design/advanced/combinations-experience/use-cases-error-guessing/": {
@@ -30176,7 +30441,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3392
+      "visibleTextChars": 3401
     }
   },
   "/practice-labs/test-design/beginner/": {
@@ -30225,7 +30490,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1507
+      "visibleTextChars": 1516
     }
   },
   "/practice-labs/test-design/beginner/partitions-boundaries/": {
@@ -30274,7 +30539,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1762
+      "visibleTextChars": 1771
     }
   },
   "/practice-labs/test-design/beginner/partitions-boundaries/boundary-value-analysis/": {
@@ -30323,7 +30588,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3211
+      "visibleTextChars": 3220
     }
   },
   "/practice-labs/test-design/beginner/partitions-boundaries/equivalence-partitioning/": {
@@ -30372,7 +30637,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3540
+      "visibleTextChars": 3549
     }
   },
   "/practice-labs/test-design/intermediate/": {
@@ -30421,7 +30686,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1621
+      "visibleTextChars": 1630
     }
   },
   "/practice-labs/test-design/intermediate/tables-states/": {
@@ -30470,7 +30735,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1841
+      "visibleTextChars": 1850
     }
   },
   "/practice-labs/test-design/intermediate/tables-states/decision-tables/": {
@@ -30519,7 +30784,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3740
+      "visibleTextChars": 3749
     }
   },
   "/practice-labs/test-design/intermediate/tables-states/state-transition-testing/": {
@@ -30568,7 +30833,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3717
+      "visibleTextChars": 3726
     }
   },
   "/practice-labs/typescript/": {
@@ -30617,7 +30882,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2707
+      "visibleTextChars": 2716
     }
   },
   "/practice-labs/typescript/advanced/": {
@@ -30666,7 +30931,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1311
+      "visibleTextChars": 1320
     }
   },
   "/practice-labs/typescript/advanced/typescript-in-practice/": {
@@ -30715,7 +30980,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1451
+      "visibleTextChars": 1460
     }
   },
   "/practice-labs/typescript/advanced/typescript-in-practice/configuration-and-strictness/": {
@@ -30764,7 +31029,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3646
+      "visibleTextChars": 3655
     }
   },
   "/practice-labs/typescript/beginner/": {
@@ -30813,7 +31078,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1500
+      "visibleTextChars": 1509
     }
   },
   "/practice-labs/typescript/beginner/typescript-basics/": {
@@ -30862,7 +31127,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1718
+      "visibleTextChars": 1727
     }
   },
   "/practice-labs/typescript/beginner/typescript-basics/interfaces-and-optional-properties/": {
@@ -30911,7 +31176,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4526
+      "visibleTextChars": 4535
     }
   },
   "/practice-labs/typescript/beginner/typescript-basics/types-and-inference/": {
@@ -30960,7 +31225,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4027
+      "visibleTextChars": 4036
     }
   },
   "/practice-labs/typescript/intermediate/": {
@@ -31009,7 +31274,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1469
+      "visibleTextChars": 1478
     }
   },
   "/practice-labs/typescript/intermediate/typing-real-code/": {
@@ -31058,7 +31323,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1631
+      "visibleTextChars": 1640
     }
   },
   "/practice-labs/typescript/intermediate/typing-real-code/generics-and-utility-types/": {
@@ -31107,7 +31372,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4036
+      "visibleTextChars": 4045
     }
   },
   "/practice-labs/typescript/intermediate/typing-real-code/unions-and-narrowing/": {
@@ -31156,7 +31421,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4484
+      "visibleTextChars": 4493
     }
   },
   "/practice-labs/typescript/interview/": {
@@ -31205,7 +31470,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2750
+      "visibleTextChars": 2759
     }
   },
   "/practice-labs/web-backend/": {
@@ -31254,7 +31519,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5616
+      "visibleTextChars": 5625
     }
   },
   "/privacy.html": {
@@ -31294,7 +31559,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 3376
+      "visibleTextChars": 3385
     }
   },
   "/tax.html": {
@@ -31343,7 +31608,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2299
+      "visibleTextChars": 2308
     }
   },
   "/terms.html": {
@@ -31383,7 +31648,7 @@
       "hasTwitter": true,
       "hasJsonLd": false,
       "h1Count": 1,
-      "visibleTextChars": 1857
+      "visibleTextChars": 1866
     }
   },
   "/time-tools.html": {
@@ -31432,7 +31697,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3239
+      "visibleTextChars": 3248
     }
   },
   "/tools.html": {
@@ -31481,7 +31746,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 16510
+      "visibleTextChars": 17875
+    }
+  },
+  "/tools/ai-answer-checklist/": {
+    "runtime": {
+      "title": "AI Answer Evidence Checklist: What to Verify | ToolZen Hub",
+      "description": "Paste an answer from ChatGPT, Claude or Gemini and get a checklist of the figures, dates, sources and absolute claims to verify, what the answer leaves out, and the questions to ask back. Runs in your browser; nothing is sent.",
+      "canonical": "https://toolzenhub.in/tools/ai-answer-checklist/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Paste an answer from ChatGPT, Claude or Gemini and get a checklist of the figures, dates, sources and absolute claims to verify, what the answer leaves out, and the questions to ask back. Runs in your browser; nothing is sent.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "AI Answer Evidence Checklist: What to Verify | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/ai-answer-checklist/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Paste an answer from ChatGPT, Claude or Gemini and get a checklist of the figures, dates, sources and absolute claims to verify, what the answer leaves out, and the questions to ask back. Runs in your browser; nothing is sent.",
+        "twitter:title": "AI Answer Evidence Checklist: What to Verify | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "AI Answer Evidence Checklist"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "AI Answer Evidence Checklist: What to Verify | ToolZen Hub",
+      "description": "Paste an answer from ChatGPT, Claude or Gemini and get a checklist of the figures, dates, sources and absolute claims to verify, what the answer leaves out, and the questions to ask back. Runs in your browser; nothing is sent.",
+      "canonical": "https://toolzenhub.in/tools/ai-answer-checklist/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 5732
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -31530,7 +31844,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5848
+      "visibleTextChars": 5857
+    }
+  },
+  "/tools/bug-report-prompt/": {
+    "runtime": {
+      "title": "Bug Report to Debugging Prompt for AI Coding Assistants | ToolZen Hub",
+      "description": "Write a debugging task for Claude Code, Copilot, Cursor or ChatGPT from a bug: what happens, what should happen, steps, environment and error output, with the rules of a safe fix. Runs in your browser; nothing is sent anywhere.",
+      "canonical": "https://toolzenhub.in/tools/bug-report-prompt/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Write a debugging task for Claude Code, Copilot, Cursor or ChatGPT from a bug: what happens, what should happen, steps, environment and error output, with the rules of a safe fix. Runs in your browser; nothing is sent anywhere.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Bug Report to Debugging Prompt for AI Coding Assistants | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/bug-report-prompt/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Write a debugging task for Claude Code, Copilot, Cursor or ChatGPT from a bug: what happens, what should happen, steps, environment and error output, with the rules of a safe fix. Runs in your browser; nothing is sent anywhere.",
+        "twitter:title": "Bug Report to Debugging Prompt for AI Coding Assistants | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Bug Report to Debugging Prompt"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Bug Report to Debugging Prompt for AI Coding Assistants | ToolZen Hub",
+      "description": "Write a debugging task for Claude Code, Copilot, Cursor or ChatGPT from a bug: what happens, what should happen, steps, environment and error output, with the rules of a safe fix. Runs in your browser; nothing is sent anywhere.",
+      "canonical": "https://toolzenhub.in/tools/bug-report-prompt/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6646
     }
   },
   "/tools/business-days/": {
@@ -31579,7 +31942,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5207
+      "visibleTextChars": 5216
+    }
+  },
+  "/tools/context-pack-builder/": {
+    "runtime": {
+      "title": "Project Context Pack Builder for AI Assistants | ToolZen Hub",
+      "description": "Build a reusable project context pack for an AI assistant: purpose, stack, key files, completed work, known traps, rules, the next task and its verification. Paste it into any chat or save it as project instructions. Runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/context-pack-builder/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Build a reusable project context pack for an AI assistant: purpose, stack, key files, completed work, known traps, rules, the next task and its verification. Paste it into any chat or save it as project instructions. Runs in your browser.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Project Context Pack Builder for AI Assistants | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/context-pack-builder/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Build a reusable project context pack for an AI assistant: purpose, stack, key files, completed work, known traps, rules, the next task and its verification. Paste it into any chat or save it as project instructions. Runs in your browser.",
+        "twitter:title": "Project Context Pack Builder for AI Assistants | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Project Context Pack Builder"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Project Context Pack Builder for AI Assistants | ToolZen Hub",
+      "description": "Build a reusable project context pack for an AI assistant: purpose, stack, key files, completed work, known traps, rules, the next task and its verification. Paste it into any chat or save it as project instructions. Runs in your browser.",
+      "canonical": "https://toolzenhub.in/tools/context-pack-builder/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6796
     }
   },
   "/tools/countdown-timer/": {
@@ -31628,7 +32040,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5164
+      "visibleTextChars": 5173
     }
   },
   "/tools/cron-challenge-lab/": {
@@ -31677,7 +32089,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4079
+      "visibleTextChars": 4088
     }
   },
   "/tools/cron-expression-explainer/": {
@@ -31726,7 +32138,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 9183
+      "visibleTextChars": 9192
     }
   },
   "/tools/date-calculator/": {
@@ -31775,7 +32187,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6011
+      "visibleTextChars": 6020
     }
   },
   "/tools/date-difference/": {
@@ -31824,7 +32236,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6460
+      "visibleTextChars": 6469
     }
   },
   "/tools/excel-practice-lab/": {
@@ -31873,7 +32285,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 24132
+      "visibleTextChars": 24141
     }
   },
   "/tools/hours-calculator/": {
@@ -31922,7 +32334,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6630
+      "visibleTextChars": 6639
     }
   },
   "/tools/image-compressor-resizer/": {
@@ -31971,7 +32383,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5714
+      "visibleTextChars": 5723
     }
   },
   "/tools/interval-timer/": {
@@ -32020,7 +32432,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4368
+      "visibleTextChars": 4377
     }
   },
   "/tools/json-compare/": {
@@ -32069,7 +32481,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4881
+      "visibleTextChars": 4890
     }
   },
   "/tools/json-csv-converter/": {
@@ -32118,7 +32530,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4798
+      "visibleTextChars": 4807
     }
   },
   "/tools/json-error-fixing-lab/": {
@@ -32167,7 +32579,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3862
+      "visibleTextChars": 3871
     }
   },
   "/tools/json-formatter/": {
@@ -32216,7 +32628,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5828
+      "visibleTextChars": 5837
     }
   },
   "/tools/jsonpath-challenge-lab/": {
@@ -32265,7 +32677,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3948
+      "visibleTextChars": 3957
     }
   },
   "/tools/jsonpath-tester/": {
@@ -32314,7 +32726,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5465
+      "visibleTextChars": 5474
     }
   },
   "/tools/jwt-decoder/": {
@@ -32363,7 +32775,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6341
+      "visibleTextChars": 6350
     }
   },
   "/tools/list-comparer/": {
@@ -32412,7 +32824,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3778
+      "visibleTextChars": 3787
     }
   },
   "/tools/meeting-planner/": {
@@ -32461,7 +32873,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5052
+      "visibleTextChars": 5061
     }
   },
   "/tools/merge-pdf/": {
@@ -32510,7 +32922,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3770
+      "visibleTextChars": 3779
     }
   },
   "/tools/pdf-marks/": {
@@ -32559,7 +32971,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3925
+      "visibleTextChars": 3934
     }
   },
   "/tools/pdf-pages/": {
@@ -32608,7 +33020,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4336
+      "visibleTextChars": 4345
     }
   },
   "/tools/photos-to-pdf/": {
@@ -32657,7 +33069,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4561
+      "visibleTextChars": 4570
     }
   },
   "/tools/pomodoro-timer/": {
@@ -32706,7 +33118,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4593
+      "visibleTextChars": 4602
     }
   },
   "/tools/power-bi-practice-lab/": {
@@ -32755,7 +33167,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 25716
+      "visibleTextChars": 25725
+    }
+  },
+  "/tools/prompt-builder/": {
+    "runtime": {
+      "title": "AI Prompt Builder: Turn an Idea into a Complete Prompt | ToolZen Hub",
+      "description": "Build a complete prompt for ChatGPT, Claude, Gemini or Copilot from a rough idea: task, context, rules, format and success criteria, with a check of what is still vague. Runs in your browser; no AI service is called.",
+      "canonical": "https://toolzenhub.in/tools/prompt-builder/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Build a complete prompt for ChatGPT, Claude, Gemini or Copilot from a rough idea: task, context, rules, format and success criteria, with a check of what is still vague. Runs in your browser; no AI service is called.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "AI Prompt Builder: Turn an Idea into a Complete Prompt | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/prompt-builder/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Build a complete prompt for ChatGPT, Claude, Gemini or Copilot from a rough idea: task, context, rules, format and success criteria, with a check of what is still vague. Runs in your browser; no AI service is called.",
+        "twitter:title": "AI Prompt Builder: Turn an Idea into a Complete Prompt | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "AI Prompt Builder"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "AI Prompt Builder: Turn an Idea into a Complete Prompt | ToolZen Hub",
+      "description": "Build a complete prompt for ChatGPT, Claude, Gemini or Copilot from a rough idea: task, context, rules, format and success criteria, with a check of what is still vague. Runs in your browser; no AI service is called.",
+      "canonical": "https://toolzenhub.in/tools/prompt-builder/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6747
     }
   },
   "/tools/shift-planner/": {
@@ -32804,7 +33265,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4423
+      "visibleTextChars": 4432
     }
   },
   "/tools/smart-flashcards/": {
@@ -32853,7 +33314,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4053
+      "visibleTextChars": 4062
     }
   },
   "/tools/split-pdf/": {
@@ -32902,7 +33363,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3750
+      "visibleTextChars": 3759
     }
   },
   "/tools/sql-practice-lab/": {
@@ -32951,7 +33412,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 30563
+      "visibleTextChars": 30572
     }
   },
   "/tools/stopwatch/": {
@@ -33000,7 +33461,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3788
+      "visibleTextChars": 3797
     }
   },
   "/tools/test-design-lab/": {
@@ -33049,7 +33510,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4653
+      "visibleTextChars": 4662
     }
   },
   "/tools/text-diff/": {
@@ -33098,7 +33559,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4730
+      "visibleTextChars": 4739
     }
   },
   "/tools/time-duration/": {
@@ -33147,7 +33608,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4006
+      "visibleTextChars": 4015
     }
   },
   "/tools/time-zone-converter/": {
@@ -33196,7 +33657,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5129
+      "visibleTextChars": 5138
     }
   },
   "/tools/unix-timestamp-converter/": {
@@ -33245,7 +33706,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6453
+      "visibleTextChars": 6462
     }
   },
   "/tools/url-parser/": {
@@ -33294,7 +33755,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6444
+      "visibleTextChars": 6453
     }
   },
   "/tools/uuid-generator/": {
@@ -33343,7 +33804,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3627
+      "visibleTextChars": 3636
     }
   },
   "/tools/world-clock/": {
@@ -33392,7 +33853,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5998
+      "visibleTextChars": 6007
     }
   }
 }

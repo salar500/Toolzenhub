@@ -1,6 +1,6 @@
 {
   "about.html": {
-    "internal": 31,
+    "internal": 32,
     "external": [],
     "placeholders": 0,
     "deadFragments": [
@@ -9,338 +9,362 @@
       "categories.html#tax  (fragment on another page; target element not verified)"
     ]
   },
-  "articles.html": {
-    "internal": 117,
-    "external": [],
-    "placeholders": 15,
-    "deadFragments": []
-  },
-  "articles/balance-transfer/balance-transfer-vs-prepayment/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/balance-transfer/is-a-loan-balance-transfer-worth-it/": {
-    "internal": 37,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/business/roi-vs-profit-whats-the-difference/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/converter/easy-unit-conversion-guide/": {
-    "internal": 34,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/fd/how-compounding-frequency-changes-an-fd-maturity/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/health/how-to-calculate-your-daily-calorie-needs/": {
-    "internal": 33,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/home-loan/how-much-home-loan-fits-your-emi-budget/": {
-    "internal": 37,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/home-loan/longer-tenure-bigger-loan-much-more-interest/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/investment/best-sip-strategies-for-beginners/": {
-    "internal": 39,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/loan-comparison/choose-right-loan-tenure/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/loan-comparison/emi-vs-total-interest/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/loan-comparison/fixed-vs-floating-interest-rates/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/loan-comparison/how-to-reduce-home-loan-interest/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/loan-comparison/loan-tenure-total-interest/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/loan-comparison/what-is-loan-prepayment/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/loan-prepayment/early-vs-late-loan-prepayment/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment/": {
-    "internal": 37,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/margin/margin-vs-markup/": {
-    "internal": 35,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/margin/price-a-product-for-a-target-margin/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/margin/what-a-discount-really-costs-you/": {
-    "internal": 35,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/math/how-to-calculate-percentage-easily/": {
-    "internal": 37,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/percentage/how-to-find-the-original-price-before-a-percentage-change/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/percentage/percent-vs-percentage-points/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/profit/how-to-find-your-break-even-point/": {
-    "internal": 35,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/profit/price-cost-or-volume-which-matters-most/": {
-    "internal": 35,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/profit/units-needed-for-a-target-profit/": {
-    "internal": 35,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/sip/how-a-sip-grows/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/sip/how-much-sip-do-you-need-for-a-goal/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/sip/how-return-assumptions-change-a-sip-projection/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/sip/step-up-sip-explained/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/swp/how-a-systematic-withdrawal-plan-works/": {
-    "internal": 37,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/swp/what-changes-how-long-a-corpus-lasts/": {
-    "internal": 36,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "articles/tax/tax-saving-guide-save-more-legally/": {
+  "ai-tools.html": {
     "internal": 38,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
+  "articles.html": {
+    "internal": 120,
+    "external": [],
+    "placeholders": 15,
+    "deadFragments": []
+  },
+  "articles/ai/how-to-give-an-ai-assistant-your-projects-context/": {
+    "internal": 38,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/ai/how-to-read-an-ai-answer-before-you-trust-it/": {
+    "internal": 38,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/ai/how-to-write-instructions-an-ai-assistant-can-act-on/": {
+    "internal": 38,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/balance-transfer/balance-transfer-vs-prepayment/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/balance-transfer/is-a-loan-balance-transfer-worth-it/": {
+    "internal": 38,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/business/roi-vs-profit-whats-the-difference/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/converter/easy-unit-conversion-guide/": {
+    "internal": 35,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/fd/comparing-two-fixed-deposits-higher-rate-is-not-the-whole-comparison/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/fd/how-compounding-frequency-changes-an-fd-maturity/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/gst/adding-and-removing-gst-why-the-tax-is-not-the-same-share-both-ways/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/health/how-to-calculate-your-daily-calorie-needs/": {
+    "internal": 34,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/home-loan/how-interest-rates-change-the-home-loan-you-can-borrow/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/home-loan/how-much-home-loan-fits-your-emi-budget/": {
+    "internal": 38,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/home-loan/longer-tenure-bigger-loan-much-more-interest/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/investment/best-sip-strategies-for-beginners/": {
+    "internal": 40,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/loan-comparison/choose-right-loan-tenure/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/loan-comparison/emi-vs-total-interest/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/loan-comparison/fixed-vs-floating-interest-rates/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/loan-comparison/how-to-reduce-home-loan-interest/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/loan-comparison/loan-tenure-total-interest/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/loan-comparison/what-is-loan-prepayment/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/loan-prepayment/early-vs-late-loan-prepayment/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment/": {
+    "internal": 38,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/margin/margin-vs-markup/": {
+    "internal": 36,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/margin/price-a-product-for-a-target-margin/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/margin/what-a-discount-really-costs-you/": {
+    "internal": 36,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/math/how-to-calculate-percentage-easily/": {
+    "internal": 38,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/percentage/how-to-find-the-original-price-before-a-percentage-change/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/percentage/percent-vs-percentage-points/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/percentage/why-a-20-percent-rise-then-a-20-percent-fall-does-not-get-you-back/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/profit/how-to-find-your-break-even-point/": {
+    "internal": 36,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/profit/price-cost-or-volume-which-matters-most/": {
+    "internal": 36,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/profit/units-needed-for-a-target-profit/": {
+    "internal": 36,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/sip/how-a-sip-grows/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/sip/how-much-sip-do-you-need-for-a-goal/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/sip/how-return-assumptions-change-a-sip-projection/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/sip/step-up-sip-explained/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/swp/how-a-systematic-withdrawal-plan-works/": {
+    "internal": 38,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/swp/what-changes-how-long-a-corpus-lasts/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "articles/tax/tax-saving-guide-save-more-legally/": {
+    "internal": 39,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
   "business.html": {
-    "internal": 62,
+    "internal": 63,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators.html": {
-    "internal": 88,
+    "internal": 89,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/age/": {
-    "internal": 68,
+    "internal": 69,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/balance-transfer/": {
-    "internal": 73,
+    "internal": 74,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/bmi/": {
-    "internal": 65,
+    "internal": 66,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/bmr/": {
-    "internal": 65,
+    "internal": 66,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/cagr/": {
-    "internal": 70,
+    "internal": 71,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/calorie/": {
-    "internal": 65,
+    "internal": 66,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/credit-card-payoff/": {
-    "internal": 70,
+    "internal": 71,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/emi/": {
-    "internal": 76,
+    "internal": 77,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/fd/": {
-    "internal": 70,
+    "internal": 71,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/gratuity/": {
-    "internal": 62,
+    "internal": 63,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/gst/": {
-    "internal": 67,
+    "internal": 68,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/home-loan/": {
-    "internal": 72,
+    "internal": 73,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/income-tax/": {
-    "internal": 65,
+    "internal": 66,
     "external": [
       "egazette.gov.in",
       "github.com",
@@ -351,79 +375,79 @@
     "deadFragments": []
   },
   "calculators/interest/": {
-    "internal": 74,
+    "internal": 75,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/loan-comparison/": {
-    "internal": 73,
+    "internal": 74,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/loan-eligibility/": {
-    "internal": 74,
+    "internal": 75,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/margin/": {
-    "internal": 68,
+    "internal": 69,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/percentage/": {
-    "internal": 71,
+    "internal": 72,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/personal-loan/": {
-    "internal": 74,
+    "internal": 75,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/ppf/": {
-    "internal": 73,
+    "internal": 74,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/prepayment/": {
-    "internal": 73,
+    "internal": 74,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/profit/": {
-    "internal": 68,
+    "internal": 69,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/ratio/": {
-    "internal": 68,
+    "internal": 69,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/risk-reward/": {
-    "internal": 73,
+    "internal": 74,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/roi/": {
-    "internal": 66,
+    "internal": 67,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/salary-in-hand/": {
-    "internal": 64,
+    "internal": 65,
     "external": [
       "github.com"
     ],
@@ -431,1969 +455,1969 @@
     "deadFragments": []
   },
   "calculators/sip/": {
-    "internal": 74,
+    "internal": 75,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/swp/": {
-    "internal": 66,
+    "internal": 67,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/unit-converter/": {
-    "internal": 65,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "calculators/xirr/": {
-    "internal": 73,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "categories.html": {
-    "internal": 65,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "contact.html": {
-    "internal": 25,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "converter.html": {
-    "internal": 60,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "developer-tools.html": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "disclaimer.html": {
-    "internal": 26,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "health.html": {
-    "internal": 62,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "image-tools.html": {
-    "internal": 33,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "(home)": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "investment.html": {
     "internal": 66,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "loans.html": {
-    "internal": 67,
+  "calculators/xirr/": {
+    "internal": 74,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "math.html": {
-    "internal": 62,
+  "categories.html": {
+    "internal": 66,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "pdf-tools.html": {
-    "internal": 37,
+  "contact.html": {
+    "internal": 26,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs.html": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-engineering/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/advanced/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/advanced/metrics-agents-responsibility/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/advanced/metrics-agents-responsibility/precision-recall-and-thresholds/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/advanced/metrics-agents-responsibility/responsible-ai/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/advanced/metrics-agents-responsibility/tools-and-agents/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/beginner/how-ai-works/context-windows-and-prompts/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/beginner/how-ai-works/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/beginner/how-ai-works/temperature-and-sampling/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/beginner/how-ai-works/tokens/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/beginner/how-ai-works/what-is-ai/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/beginner/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/": {
-    "internal": 58,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/intermediate/building-and-evaluating/embeddings-and-rag/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/intermediate/building-and-evaluating/evaluating-ai-features/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/intermediate/building-and-evaluating/hallucination-and-prompt-injection/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/intermediate/building-and-evaluating/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/intermediate/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/ai-foundations/interview/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/api-automation/advanced/api-frameworks/frameworks-and-ci/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/api-automation/advanced/api-frameworks/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/api-automation/advanced/": {
-    "internal": 39,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/api-automation/beginner/api-test-basics/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/api-automation/beginner/api-test-basics/requests-and-assertions/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/api-automation/beginner/api-test-basics/why-api-automation/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/api-automation/beginner/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/api-automation/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/api-automation/intermediate/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/api-automation/intermediate/reliable-api-suites/auth-and-test-data/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/api-automation/intermediate/reliable-api-suites/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/api-automation/intermediate/reliable-api-suites/schemas-and-contracts/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/api-automation/interview/": {
-    "internal": 38,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/app-security/advanced/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/app-security/advanced/secure-delivery/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/app-security/advanced/secure-delivery/secrets-configuration-dependencies/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/app-security/advanced/secure-delivery/security-testing/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/app-security/beginner/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/app-security/beginner/security-basics/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/app-security/beginner/security-basics/injection/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/app-security/beginner/security-basics/security-mindset-and-threat-modelling/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/app-security/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/app-security/intermediate/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/app-security/intermediate/web-risks/access-control/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/app-security/intermediate/web-risks/cross-site-scripting/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/app-security/intermediate/web-risks/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/app-security/intermediate/web-risks/passwords-and-sessions/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/app-security/interview/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/automation-engineering/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/advanced/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/advanced/production-backends/architecture/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/advanced/production-backends/configuration-and-logging/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/advanced/production-backends/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/advanced/production-backends/money-retries-idempotency/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/beginner/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/beginner/server-basics/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/beginner/server-basics/request-lifecycle/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/beginner/server-basics/routing-and-handlers/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/beginner/server-basics/validation-and-errors/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/": {
-    "internal": 57,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/intermediate/data-and-identity/databases-from-code/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/intermediate/data-and-identity/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/intermediate/data-and-identity/pagination-and-performance/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/intermediate/data-and-identity/sessions-and-tokens/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/intermediate/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/backend/interview/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/data-analytics/": {
-    "internal": 59,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/data-engineering/advanced/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/data-engineering/advanced/reliable-pipelines/data-quality/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/data-engineering/advanced/reliable-pipelines/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/data-engineering/advanced/reliable-pipelines/orchestration-and-backfills/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/data-engineering/beginner/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/data-engineering/beginner/pipeline-basics/etl-elt-batch-streaming/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/data-engineering/beginner/pipeline-basics/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/data-engineering/beginner/pipeline-basics/transforming-with-sql/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/data-engineering/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/data-engineering/intermediate/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/data-engineering/intermediate/loading-and-modelling/incremental-loads/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/data-engineering/intermediate/loading-and-modelling/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/data-engineering/intermediate/loading-and-modelling/warehouse-modelling/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/data-engineering/interview/": {
-    "internal": 39,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/advanced/databases-in-practice/database-testing/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/advanced/databases-in-practice/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/advanced/databases-in-practice/postgresql-mysql-sqlite/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/advanced/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/beginner/designing-schemas/data-modelling/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/beginner/designing-schemas/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/beginner/designing-schemas/keys-and-integrity/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/beginner/designing-schemas/normalisation/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/beginner/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/": {
-    "internal": 55,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/intermediate/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/intermediate/rules-speed-safety/constraints/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/intermediate/rules-speed-safety/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/intermediate/rules-speed-safety/indexes-and-plans/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/intermediate/rules-speed-safety/transactions-and-isolation/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-design/interview/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/database-engineering/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/devops-cloud-security/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/dsa/advanced/graphs-and-design/graphs-and-bfs/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/dsa/advanced/graphs-and-design/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/dsa/advanced/graphs-and-design/lru-cache/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/dsa/advanced/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/dsa/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/dsa/intermediate/core-structures/big-o-and-structures/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/dsa/intermediate/core-structures/hashing-and-counting/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/dsa/intermediate/core-structures/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/dsa/intermediate/core-structures/searching-and-sorting/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/dsa/intermediate/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/dsa/interview/": {
-    "internal": 38,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/advanced/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/advanced/models-and-projects/financial-functions-and-projects/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/advanced/models-and-projects/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/beginner/formula-foundations/everyday-functions/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/beginner/formula-foundations/formulas-and-references/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/beginner/formula-foundations/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/beginner/formula-foundations/logical-functions/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/beginner/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/": {
-    "internal": 55,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/intermediate/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/intermediate/working-with-data/cleaning-with-formulas/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/intermediate/working-with-data/conditional-sums-and-counts/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/intermediate/working-with-data/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/intermediate/working-with-data/lookups/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/intermediate/working-with-data/text-and-dates/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/excel/interview/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/frontend-frameworks/advanced/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/frontend-frameworks/advanced/real-frontends/choosing-a-framework/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/frontend-frameworks/advanced/real-frontends/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/frontend-frameworks/advanced/real-frontends/routing-data-forms/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/frontend-frameworks/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/frontend-frameworks/intermediate/framework-core-ideas/components-and-props/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/frontend-frameworks/intermediate/framework-core-ideas/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/frontend-frameworks/intermediate/framework-core-ideas/reactivity-and-rendering/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/frontend-frameworks/intermediate/framework-core-ideas/state-and-reducers/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/frontend-frameworks/intermediate/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/frontend-frameworks/interview/": {
-    "internal": 38,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/advanced/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/advanced/running-software/cloud-basics/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/advanced/running-software/containers-and-docker/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/advanced/running-software/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/advanced/running-software/monitoring-and-incidents/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/beginner/git-basics/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/beginner/git-basics/staging-unstaging-discarding/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/beginner/git-basics/version-control-and-first-commit/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/beginner/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/": {
-    "internal": 56,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/intermediate/delivery/ci-cd/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/intermediate/delivery/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/intermediate/git-teamwork/branches-and-merging/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/intermediate/git-teamwork/conflicts-and-remotes/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/intermediate/git-teamwork/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/intermediate/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/git-devops/interview/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/advanced/dynamic-and-fast/dom-and-events/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/advanced/dynamic-and-fast/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/advanced/dynamic-and-fast/performance-and-quality/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/advanced/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/beginner/html-foundations/elements-and-structure/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/beginner/html-foundations/forms-and-inputs/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/beginner/html-foundations/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/beginner/html-foundations/links-and-images/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/beginner/html-foundations/semantic-html/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/beginner/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/": {
-    "internal": 56,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/intermediate/css-and-access/accessibility-essentials/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/intermediate/css-and-access/css-basics/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/intermediate/css-and-access/flexbox-and-responsive-design/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/intermediate/css-and-access/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/intermediate/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/html-css-dom/interview/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/advanced/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/advanced/quality-security/caching-rate-limits-and-security/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/advanced/quality-security/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/advanced/quality-security/testing-apis/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/beginner/http-basics/clients-servers-and-urls/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/beginner/http-basics/http-methods/": {
-    "internal": 55,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/beginner/http-basics/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/beginner/http-basics/query-headers-and-json/": {
-    "internal": 55,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/beginner/http-basics/status-codes/": {
-    "internal": 55,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/beginner/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/": {
-    "internal": 57,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/intermediate/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/intermediate/working-apis/authentication-and-authorisation/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/intermediate/working-apis/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/intermediate/working-apis/rest-api-design/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/intermediate/working-apis/validation-errors/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/http-apis/interview/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/": {
-    "internal": 91,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/advanced/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/advanced/modern-java/exceptions/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/advanced/modern-java/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/advanced/modern-java/streams-and-junit/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/beginner/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/beginner/java-foundations/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/beginner/java-foundations/loops-and-arrays/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/beginner/java-foundations/strings-equality-conditions/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/beginner/java-foundations/types-variables-output/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/": {
-    "internal": 56,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/intermediate/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/intermediate/object-oriented-java/classes-and-encapsulation/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/intermediate/object-oriented-java/collections/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/intermediate/object-oriented-java/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/intermediate/object-oriented-java/inheritance-and-polymorphism/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/intermediate/object-oriented-java/methods-and-pass-by-value/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/java/interview/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/advanced/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/advanced/writing-good-code/clean-code-and-testing/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/advanced/writing-good-code/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/advanced/writing-good-code/problem-solving-and-complexity/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/beginner/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/beginner/programming-basics/comparisons-and-conditions/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/beginner/programming-basics/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/beginner/programming-basics/loops/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/beginner/programming-basics/values-variables-functions/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/beginner/working-with-data/arrays/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/beginner/working-with-data/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/beginner/working-with-data/objects-and-strings/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/": {
-    "internal": 59,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/intermediate/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/intermediate/modern-javascript/errors-and-debugging/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/intermediate/modern-javascript/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/intermediate/modern-javascript/map-filter-reduce/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/intermediate/modern-javascript/promises-and-await/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/javascript/interview/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/kubernetes/advanced/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/kubernetes/advanced/running-in-production/config-secrets-health-checks/": {
-    "internal": 49,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/kubernetes/advanced/running-in-production/deployment-strategies/": {
-    "internal": 49,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/kubernetes/advanced/running-in-production/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/kubernetes/advanced/running-in-production/slis-slos-error-budgets/": {
-    "internal": 49,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/kubernetes/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/kubernetes/intermediate/containers-at-scale/docker-compose/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/kubernetes/intermediate/containers-at-scale/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/kubernetes/intermediate/containers-at-scale/pods-deployments-services/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/kubernetes/intermediate/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/kubernetes/interview/": {
-    "internal": 38,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/advanced/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/advanced/operating-servers/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/advanced/operating-servers/processes-and-services/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/advanced/operating-servers/shell-scripting/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/beginner/command-line-basics/file-system-and-navigation/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/beginner/command-line-basics/grep-and-find/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/beginner/command-line-basics/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/beginner/command-line-basics/reading-files-and-logs/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/beginner/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/": {
-    "internal": 55,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/intermediate/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/intermediate/working-with-files/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/intermediate/working-with-files/managing-files/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/intermediate/working-with-files/pipes-and-redirection/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/intermediate/working-with-files/users-and-permissions/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/linux/interview/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/llm-apps/advanced/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/llm-apps/advanced/production-llm-apps/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/llm-apps/advanced/production-llm-apps/reliability-cost-latency/": {
-    "internal": 49,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/llm-apps/advanced/production-llm-apps/testing-llm-apps/": {
-    "internal": 49,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/llm-apps/advanced/production-llm-apps/tools-and-guardrails/": {
-    "internal": 49,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/llm-apps/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/llm-apps/intermediate/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/llm-apps/intermediate/llm-app-foundations/architecture/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/llm-apps/intermediate/llm-app-foundations/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/llm-apps/intermediate/llm-app-foundations/rag-in-practice/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/llm-apps/interview/": {
-    "internal": 38,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/advanced/beyond-the-basics/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/advanced/beyond-the-basics/k-means-clustering/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/advanced/beyond-the-basics/neural-networks/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/advanced/beyond-the-basics/nlp-vision-production/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/advanced/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/beginner/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/beginner/ml-basics/data-features-splits/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/beginner/ml-basics/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/beginner/ml-basics/linear-regression/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/beginner/ml-basics/what-machine-learning-is/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/": {
-    "internal": 56,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/intermediate/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/intermediate/models-and-evaluation/classification-and-thresholds/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/intermediate/models-and-evaluation/decision-trees-and-ensembles/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/intermediate/models-and-evaluation/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/intermediate/models-and-evaluation/overfitting-and-validation/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/machine-learning/interview/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/advanced/agile-metrics/acceptance-criteria-given-when-then/": {
-    "internal": 69,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/advanced/agile-metrics/": {
+  "converter.html": {
     "internal": 61,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/manual-testing/advanced/agile-metrics/test-metrics-and-reporting/": {
-    "internal": 69,
+  "developer-tools.html": {
+    "internal": 55,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/manual-testing/advanced/agile-metrics/testing-in-agile/": {
-    "internal": 69,
+  "disclaimer.html": {
+    "internal": 27,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/manual-testing/advanced/": {
+  "health.html": {
     "internal": 63,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/manual-testing/advanced/planning-risk/": {
-    "internal": 60,
+  "image-tools.html": {
+    "internal": 34,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/manual-testing/advanced/planning-risk/risk-based-testing/": {
-    "internal": 68,
+  "(home)": {
+    "internal": 45,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/manual-testing/advanced/planning-risk/writing-a-test-plan/": {
-    "internal": 68,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/beginner/": {
-    "internal": 70,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/beginner/life-cycle/": {
-    "internal": 61,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/beginner/life-cycle/software-development-life-cycles/": {
-    "internal": 69,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/beginner/life-cycle/software-testing-life-cycle/": {
-    "internal": 69,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/beginner/life-cycle/test-levels/": {
-    "internal": 69,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/beginner/what-testing-is/": {
-    "internal": 61,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/beginner/what-testing-is/seven-testing-principles/": {
-    "internal": 69,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/beginner/what-testing-is/static-and-dynamic-testing/": {
-    "internal": 69,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/beginner/what-testing-is/what-is-software-testing/": {
+  "investment.html": {
     "internal": 67,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/manual-testing/beginner/writing-test-cases/": {
-    "internal": 62,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/beginner/writing-test-cases/positive-and-negative-testing/": {
-    "internal": 72,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/beginner/writing-test-cases/reading-requirements/": {
-    "internal": 70,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/beginner/writing-test-cases/test-scenarios/": {
-    "internal": 70,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/beginner/writing-test-cases/writing-test-cases/": {
-    "internal": 72,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/": {
-    "internal": 92,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/intermediate/executing-reporting/bug-life-cycle/": {
-    "internal": 69,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/intermediate/executing-reporting/executing-tests/": {
-    "internal": 71,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/intermediate/executing-reporting/": {
-    "internal": 61,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/intermediate/executing-reporting/writing-bug-reports/": {
-    "internal": 69,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/intermediate/": {
-    "internal": 69,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/manual-testing/intermediate/test-data-coverage/choosing-test-data/": {
+  "loans.html": {
     "internal": 68,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/manual-testing/intermediate/test-data-coverage/coverage-and-traceability/": {
-    "internal": 68,
+  "math.html": {
+    "internal": 63,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/manual-testing/intermediate/test-data-coverage/": {
+  "pdf-tools.html": {
+    "internal": 38,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs.html": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-engineering/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/advanced/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/advanced/metrics-agents-responsibility/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/advanced/metrics-agents-responsibility/precision-recall-and-thresholds/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/advanced/metrics-agents-responsibility/responsible-ai/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/advanced/metrics-agents-responsibility/tools-and-agents/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/beginner/how-ai-works/context-windows-and-prompts/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/beginner/how-ai-works/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/beginner/how-ai-works/temperature-and-sampling/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/beginner/how-ai-works/tokens/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/beginner/how-ai-works/what-is-ai/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/beginner/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/": {
+    "internal": 59,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/intermediate/building-and-evaluating/embeddings-and-rag/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/intermediate/building-and-evaluating/evaluating-ai-features/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/intermediate/building-and-evaluating/hallucination-and-prompt-injection/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/intermediate/building-and-evaluating/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/intermediate/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/ai-foundations/interview/": {
+    "internal": 44,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/api-automation/advanced/api-frameworks/frameworks-and-ci/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/api-automation/advanced/api-frameworks/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/api-automation/advanced/": {
+    "internal": 40,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/api-automation/beginner/api-test-basics/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/api-automation/beginner/api-test-basics/requests-and-assertions/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/api-automation/beginner/api-test-basics/why-api-automation/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/api-automation/beginner/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/api-automation/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/api-automation/intermediate/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/api-automation/intermediate/reliable-api-suites/auth-and-test-data/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/api-automation/intermediate/reliable-api-suites/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/api-automation/intermediate/reliable-api-suites/schemas-and-contracts/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/api-automation/interview/": {
+    "internal": 39,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/app-security/advanced/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/app-security/advanced/secure-delivery/": {
+    "internal": 44,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/app-security/advanced/secure-delivery/secrets-configuration-dependencies/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/app-security/advanced/secure-delivery/security-testing/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/app-security/beginner/": {
+    "internal": 44,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/app-security/beginner/security-basics/": {
+    "internal": 44,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/app-security/beginner/security-basics/injection/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/app-security/beginner/security-basics/security-mindset-and-threat-modelling/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/app-security/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/app-security/intermediate/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/app-security/intermediate/web-risks/access-control/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/app-security/intermediate/web-risks/cross-site-scripting/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/app-security/intermediate/web-risks/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/app-security/intermediate/web-risks/passwords-and-sessions/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/app-security/interview/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/automation-engineering/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/advanced/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/advanced/production-backends/architecture/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/advanced/production-backends/configuration-and-logging/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/advanced/production-backends/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/advanced/production-backends/money-retries-idempotency/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/beginner/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/beginner/server-basics/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/beginner/server-basics/request-lifecycle/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/beginner/server-basics/routing-and-handlers/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/beginner/server-basics/validation-and-errors/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/": {
+    "internal": 58,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/intermediate/data-and-identity/databases-from-code/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/intermediate/data-and-identity/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/intermediate/data-and-identity/pagination-and-performance/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/intermediate/data-and-identity/sessions-and-tokens/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/intermediate/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/backend/interview/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/data-analytics/": {
     "internal": 60,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/manual-testing/intermediate/types-of-testing/exploratory-testing-bug-hunt/": {
+  "practice-labs/data-engineering/advanced/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/data-engineering/advanced/reliable-pipelines/data-quality/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/data-engineering/advanced/reliable-pipelines/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/data-engineering/advanced/reliable-pipelines/orchestration-and-backfills/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/data-engineering/beginner/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/data-engineering/beginner/pipeline-basics/etl-elt-batch-streaming/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/data-engineering/beginner/pipeline-basics/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/data-engineering/beginner/pipeline-basics/transforming-with-sql/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/data-engineering/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/data-engineering/intermediate/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/data-engineering/intermediate/loading-and-modelling/incremental-loads/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/data-engineering/intermediate/loading-and-modelling/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/data-engineering/intermediate/loading-and-modelling/warehouse-modelling/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/data-engineering/interview/": {
+    "internal": 40,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/advanced/databases-in-practice/database-testing/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/advanced/databases-in-practice/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/advanced/databases-in-practice/postgresql-mysql-sqlite/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/advanced/": {
+    "internal": 44,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/beginner/designing-schemas/data-modelling/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/beginner/designing-schemas/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/beginner/designing-schemas/keys-and-integrity/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/beginner/designing-schemas/normalisation/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/beginner/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/": {
+    "internal": 56,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/intermediate/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/intermediate/rules-speed-safety/constraints/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/intermediate/rules-speed-safety/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/intermediate/rules-speed-safety/indexes-and-plans/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/intermediate/rules-speed-safety/transactions-and-isolation/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-design/interview/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/database-engineering/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/devops-cloud-security/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/dsa/advanced/graphs-and-design/graphs-and-bfs/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/dsa/advanced/graphs-and-design/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/dsa/advanced/graphs-and-design/lru-cache/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/dsa/advanced/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/dsa/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/dsa/intermediate/core-structures/big-o-and-structures/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/dsa/intermediate/core-structures/hashing-and-counting/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/dsa/intermediate/core-structures/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/dsa/intermediate/core-structures/searching-and-sorting/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/dsa/intermediate/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/dsa/interview/": {
+    "internal": 39,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/advanced/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/advanced/models-and-projects/financial-functions-and-projects/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/advanced/models-and-projects/": {
+    "internal": 44,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/beginner/formula-foundations/everyday-functions/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/beginner/formula-foundations/formulas-and-references/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/beginner/formula-foundations/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/beginner/formula-foundations/logical-functions/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/beginner/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/": {
+    "internal": 56,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/intermediate/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/intermediate/working-with-data/cleaning-with-formulas/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/intermediate/working-with-data/conditional-sums-and-counts/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/intermediate/working-with-data/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/intermediate/working-with-data/lookups/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/intermediate/working-with-data/text-and-dates/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/excel/interview/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/frontend-frameworks/advanced/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/frontend-frameworks/advanced/real-frontends/choosing-a-framework/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/frontend-frameworks/advanced/real-frontends/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/frontend-frameworks/advanced/real-frontends/routing-data-forms/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/frontend-frameworks/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/frontend-frameworks/intermediate/framework-core-ideas/components-and-props/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/frontend-frameworks/intermediate/framework-core-ideas/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/frontend-frameworks/intermediate/framework-core-ideas/reactivity-and-rendering/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/frontend-frameworks/intermediate/framework-core-ideas/state-and-reducers/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/frontend-frameworks/intermediate/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/frontend-frameworks/interview/": {
+    "internal": 39,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/advanced/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/advanced/running-software/cloud-basics/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/advanced/running-software/containers-and-docker/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/advanced/running-software/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/advanced/running-software/monitoring-and-incidents/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/beginner/git-basics/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/beginner/git-basics/staging-unstaging-discarding/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/beginner/git-basics/version-control-and-first-commit/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/beginner/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/": {
+    "internal": 57,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/intermediate/delivery/ci-cd/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/intermediate/delivery/": {
+    "internal": 44,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/intermediate/git-teamwork/branches-and-merging/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/intermediate/git-teamwork/conflicts-and-remotes/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/intermediate/git-teamwork/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/intermediate/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/git-devops/interview/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/advanced/dynamic-and-fast/dom-and-events/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/advanced/dynamic-and-fast/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/advanced/dynamic-and-fast/performance-and-quality/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/advanced/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/beginner/html-foundations/elements-and-structure/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/beginner/html-foundations/forms-and-inputs/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/beginner/html-foundations/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/beginner/html-foundations/links-and-images/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/beginner/html-foundations/semantic-html/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/beginner/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/": {
+    "internal": 57,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/intermediate/css-and-access/accessibility-essentials/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/intermediate/css-and-access/css-basics/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/intermediate/css-and-access/flexbox-and-responsive-design/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/intermediate/css-and-access/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/intermediate/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/html-css-dom/interview/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/advanced/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/advanced/quality-security/caching-rate-limits-and-security/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/advanced/quality-security/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/advanced/quality-security/testing-apis/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/beginner/http-basics/clients-servers-and-urls/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/beginner/http-basics/http-methods/": {
+    "internal": 56,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/beginner/http-basics/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/beginner/http-basics/query-headers-and-json/": {
+    "internal": 56,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/beginner/http-basics/status-codes/": {
+    "internal": 56,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/beginner/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/": {
+    "internal": 58,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/intermediate/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/intermediate/working-apis/authentication-and-authorisation/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/intermediate/working-apis/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/intermediate/working-apis/rest-api-design/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/intermediate/working-apis/validation-errors/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/http-apis/interview/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/": {
+    "internal": 92,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/advanced/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/advanced/modern-java/exceptions/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/advanced/modern-java/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/advanced/modern-java/streams-and-junit/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/beginner/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/beginner/java-foundations/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/beginner/java-foundations/loops-and-arrays/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/beginner/java-foundations/strings-equality-conditions/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/beginner/java-foundations/types-variables-output/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/": {
+    "internal": 57,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/intermediate/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/intermediate/object-oriented-java/classes-and-encapsulation/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/intermediate/object-oriented-java/collections/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/intermediate/object-oriented-java/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/intermediate/object-oriented-java/inheritance-and-polymorphism/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/intermediate/object-oriented-java/methods-and-pass-by-value/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/java/interview/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/advanced/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/advanced/writing-good-code/clean-code-and-testing/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/advanced/writing-good-code/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/advanced/writing-good-code/problem-solving-and-complexity/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/beginner/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/beginner/programming-basics/comparisons-and-conditions/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/beginner/programming-basics/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/beginner/programming-basics/loops/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/beginner/programming-basics/values-variables-functions/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/beginner/working-with-data/arrays/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/beginner/working-with-data/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/beginner/working-with-data/objects-and-strings/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/": {
+    "internal": 60,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/intermediate/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/intermediate/modern-javascript/errors-and-debugging/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/intermediate/modern-javascript/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/intermediate/modern-javascript/map-filter-reduce/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/intermediate/modern-javascript/promises-and-await/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/javascript/interview/": {
+    "internal": 44,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/kubernetes/advanced/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/kubernetes/advanced/running-in-production/config-secrets-health-checks/": {
+    "internal": 50,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/kubernetes/advanced/running-in-production/deployment-strategies/": {
+    "internal": 50,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/kubernetes/advanced/running-in-production/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/kubernetes/advanced/running-in-production/slis-slos-error-budgets/": {
+    "internal": 50,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/kubernetes/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/kubernetes/intermediate/containers-at-scale/docker-compose/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/kubernetes/intermediate/containers-at-scale/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/kubernetes/intermediate/containers-at-scale/pods-deployments-services/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/kubernetes/intermediate/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/kubernetes/interview/": {
+    "internal": 39,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/advanced/": {
+    "internal": 44,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/advanced/operating-servers/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/advanced/operating-servers/processes-and-services/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/advanced/operating-servers/shell-scripting/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/beginner/command-line-basics/file-system-and-navigation/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/beginner/command-line-basics/grep-and-find/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/beginner/command-line-basics/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/beginner/command-line-basics/reading-files-and-logs/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/beginner/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/": {
+    "internal": 56,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/intermediate/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/intermediate/working-with-files/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/intermediate/working-with-files/managing-files/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/intermediate/working-with-files/pipes-and-redirection/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/intermediate/working-with-files/users-and-permissions/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/linux/interview/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/llm-apps/advanced/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/llm-apps/advanced/production-llm-apps/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/llm-apps/advanced/production-llm-apps/reliability-cost-latency/": {
+    "internal": 50,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/llm-apps/advanced/production-llm-apps/testing-llm-apps/": {
+    "internal": 50,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/llm-apps/advanced/production-llm-apps/tools-and-guardrails/": {
+    "internal": 50,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/llm-apps/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/llm-apps/intermediate/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/llm-apps/intermediate/llm-app-foundations/architecture/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/llm-apps/intermediate/llm-app-foundations/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/llm-apps/intermediate/llm-app-foundations/rag-in-practice/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/llm-apps/interview/": {
+    "internal": 39,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/advanced/beyond-the-basics/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/advanced/beyond-the-basics/k-means-clustering/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/advanced/beyond-the-basics/neural-networks/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/advanced/beyond-the-basics/nlp-vision-production/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/advanced/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/beginner/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/beginner/ml-basics/data-features-splits/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/beginner/ml-basics/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/beginner/ml-basics/linear-regression/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/beginner/ml-basics/what-machine-learning-is/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/": {
+    "internal": 57,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/intermediate/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/intermediate/models-and-evaluation/classification-and-thresholds/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/intermediate/models-and-evaluation/decision-trees-and-ensembles/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/intermediate/models-and-evaluation/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/intermediate/models-and-evaluation/overfitting-and-validation/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/machine-learning/interview/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/advanced/agile-metrics/acceptance-criteria-given-when-then/": {
+    "internal": 70,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/advanced/agile-metrics/": {
+    "internal": 62,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/advanced/agile-metrics/test-metrics-and-reporting/": {
+    "internal": 70,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/advanced/agile-metrics/testing-in-agile/": {
+    "internal": 70,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/advanced/": {
+    "internal": 64,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/advanced/planning-risk/": {
+    "internal": 61,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/advanced/planning-risk/risk-based-testing/": {
+    "internal": 69,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/advanced/planning-risk/writing-a-test-plan/": {
+    "internal": 69,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/beginner/": {
+    "internal": 71,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/beginner/life-cycle/": {
+    "internal": 62,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/beginner/life-cycle/software-development-life-cycles/": {
+    "internal": 70,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/beginner/life-cycle/software-testing-life-cycle/": {
+    "internal": 70,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/beginner/life-cycle/test-levels/": {
+    "internal": 70,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/beginner/what-testing-is/": {
+    "internal": 62,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/beginner/what-testing-is/seven-testing-principles/": {
+    "internal": 70,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/beginner/what-testing-is/static-and-dynamic-testing/": {
+    "internal": 70,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/beginner/what-testing-is/what-is-software-testing/": {
+    "internal": 68,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/beginner/writing-test-cases/": {
+    "internal": 63,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/beginner/writing-test-cases/positive-and-negative-testing/": {
+    "internal": 73,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/beginner/writing-test-cases/reading-requirements/": {
+    "internal": 71,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/beginner/writing-test-cases/test-scenarios/": {
+    "internal": 71,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/beginner/writing-test-cases/writing-test-cases/": {
+    "internal": 73,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/": {
+    "internal": 93,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/intermediate/executing-reporting/bug-life-cycle/": {
+    "internal": 70,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/intermediate/executing-reporting/executing-tests/": {
     "internal": 72,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/intermediate/executing-reporting/": {
+    "internal": 62,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/intermediate/executing-reporting/writing-bug-reports/": {
+    "internal": 70,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/intermediate/": {
+    "internal": 70,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/intermediate/test-data-coverage/choosing-test-data/": {
+    "internal": 69,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/intermediate/test-data-coverage/coverage-and-traceability/": {
+    "internal": 69,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/intermediate/test-data-coverage/": {
+    "internal": 61,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/manual-testing/intermediate/types-of-testing/exploratory-testing-bug-hunt/": {
+    "internal": 73,
     "external": [],
     "placeholders": 0,
     "deadFragments": [
@@ -2401,703 +2425,703 @@
     ]
   },
   "practice-labs/manual-testing/intermediate/types-of-testing/functional-and-non-functional-testing/": {
-    "internal": 70,
+    "internal": 71,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/manual-testing/intermediate/types-of-testing/": {
-    "internal": 62,
+    "internal": 63,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/manual-testing/intermediate/types-of-testing/smoke-sanity-regression-testing/": {
-    "internal": 70,
+    "internal": 71,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/manual-testing/intermediate/types-of-testing/usability-and-compatibility-testing/": {
-    "internal": 70,
+    "internal": 71,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/manual-testing/interview/": {
-    "internal": 57,
+    "internal": 58,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/pandas/advanced/": {
-    "internal": 40,
+    "internal": 41,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/pandas/advanced/pandas-analysis/dates-and-reporting/": {
-    "internal": 48,
+    "internal": 49,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/pandas/advanced/pandas-analysis/grouping-merging-pivoting/": {
-    "internal": 48,
+    "internal": 49,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/pandas/advanced/pandas-analysis/": {
-    "internal": 41,
+    "internal": 42,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/pandas/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/pandas/intermediate/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/pandas/intermediate/pandas-basics/cleaning-data/": {
-    "internal": 49,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/pandas/intermediate/pandas-basics/dataframes-and-series/": {
     "internal": 47,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
+  "practice-labs/pandas/intermediate/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/pandas/intermediate/pandas-basics/cleaning-data/": {
+    "internal": 50,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/pandas/intermediate/pandas-basics/dataframes-and-series/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
   "practice-labs/pandas/intermediate/pandas-basics/": {
-    "internal": 42,
+    "internal": 43,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/pandas/intermediate/pandas-basics/selecting-and-filtering/": {
-    "internal": 49,
+    "internal": 50,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/pandas/interview/": {
-    "internal": 38,
+    "internal": 39,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/advanced/": {
-    "internal": 51,
+    "internal": 52,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/advanced/reliability-scale/configuration-and-parallel-runs/": {
-    "internal": 58,
+    "internal": 59,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/advanced/reliability-scale/debugging-and-flaky-tests/": {
-    "internal": 58,
+    "internal": 59,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/advanced/reliability-scale/": {
-    "internal": 52,
+    "internal": 53,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/advanced/reliability-scale/reports-and-ci/": {
-    "internal": 58,
+    "internal": 59,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/beginner/automation-basics/how-playwright-works/": {
-    "internal": 58,
+    "internal": 59,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/beginner/automation-basics/": {
-    "internal": 52,
+    "internal": 53,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/beginner/automation-basics/setup-and-first-run/": {
-    "internal": 58,
+    "internal": 59,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/beginner/automation-basics/what-is-test-automation/": {
-    "internal": 56,
+    "internal": 57,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/beginner/first-tests/": {
-    "internal": 52,
+    "internal": 53,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/beginner/first-tests/locators/": {
-    "internal": 58,
+    "internal": 59,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/beginner/first-tests/web-first-assertions/": {
-    "internal": 58,
+    "internal": 59,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/beginner/first-tests/writing-a-complete-test/": {
-    "internal": 58,
+    "internal": 59,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/beginner/": {
-    "internal": 58,
+    "internal": 59,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/beginner/just-enough-typescript/": {
-    "internal": 50,
+    "internal": 51,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/beginner/just-enough-typescript/typescript-for-testers/": {
-    "internal": 55,
+    "internal": 56,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/": {
-    "internal": 72,
+    "internal": 73,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/intermediate/": {
-    "internal": 56,
+    "internal": 57,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/playwright/intermediate/interacting/actions-and-forms/": {
-    "internal": 57,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/playwright/intermediate/interacting/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/playwright/intermediate/interacting/navigation-and-waiting/": {
-    "internal": 57,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/playwright/intermediate/network-api/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/playwright/intermediate/network-api/network-mocking-and-api-testing/": {
-    "internal": 55,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/playwright/intermediate/organising-tests/hooks-and-fixtures/": {
-    "internal": 57,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/playwright/intermediate/organising-tests/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/playwright/intermediate/organising-tests/page-object-model/": {
-    "internal": 57,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/playwright/interview/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/power-bi/advanced/dax-measures/calculate-and-time-intelligence/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/power-bi/advanced/dax-measures/dax-basics/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/power-bi/advanced/dax-measures/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/power-bi/advanced/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/power-bi/beginner/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/power-bi/beginner/power-query-basics/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/power-bi/beginner/power-query-basics/power-query-cleaning/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/power-bi/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/power-bi/intermediate/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/power-bi/intermediate/shaping-and-modelling/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/power-bi/intermediate/shaping-and-modelling/power-query-combining/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/power-bi/intermediate/shaping-and-modelling/power-query-shaping/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/power-bi/intermediate/shaping-and-modelling/star-schema-modelling/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/power-bi/interview/": {
-    "internal": 39,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/programming/": {
-    "internal": 56,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/prompt-engineering/advanced/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/prompt-engineering/advanced/reliable-and-safe/evaluating-prompts/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/prompt-engineering/advanced/reliable-and-safe/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/prompt-engineering/advanced/reliable-and-safe/prompt-security/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/prompt-engineering/beginner/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/prompt-engineering/beginner/prompt-basics/anatomy-of-a-prompt/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/prompt-engineering/beginner/prompt-basics/few-shot-prompting/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/prompt-engineering/beginner/prompt-basics/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/prompt-engineering/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/prompt-engineering/intermediate/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/prompt-engineering/intermediate/prompts-for-software/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/prompt-engineering/intermediate/prompts-for-software/steps-and-chains/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/prompt-engineering/intermediate/prompts-for-software/structured-outputs/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/prompt-engineering/intermediate/prompts-for-software/tool-calling/": {
-    "internal": 51,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/prompt-engineering/interview/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/python/advanced/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/python/advanced/python-professional/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/python/advanced/python-professional/problem-solving-and-complexity/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/python/advanced/python-professional/testing-with-pytest/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/python/beginner/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/python/beginner/python-basics/conditions-and-arithmetic/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/python/beginner/python-basics/dictionaries-sets-strings/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/python/beginner/python-basics/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/python/beginner/python-basics/loops-lists-ranges/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/python/beginner/python-basics/values-variables-functions/": {
-    "internal": 52,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/python/": {
     "internal": 58,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/python/intermediate/": {
-    "internal": 48,
+  "practice-labs/playwright/intermediate/interacting/": {
+    "internal": 52,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/python/intermediate/python-in-depth/classes-and-objects/": {
-    "internal": 54,
+  "practice-labs/playwright/intermediate/interacting/navigation-and-waiting/": {
+    "internal": 58,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/python/intermediate/python-in-depth/exceptions-and-validation/": {
-    "internal": 54,
+  "practice-labs/playwright/intermediate/network-api/": {
+    "internal": 51,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/python/intermediate/python-in-depth/files-and-modules/": {
-    "internal": 54,
+  "practice-labs/playwright/intermediate/network-api/network-mocking-and-api-testing/": {
+    "internal": 56,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/python/intermediate/python-in-depth/": {
-    "internal": 48,
+  "practice-labs/playwright/intermediate/organising-tests/hooks-and-fixtures/": {
+    "internal": 58,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/python/intermediate/python-in-depth/scope-defaults-comprehensions/": {
-    "internal": 54,
+  "practice-labs/playwright/intermediate/organising-tests/": {
+    "internal": 52,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/python/interview/": {
+  "practice-labs/playwright/intermediate/organising-tests/page-object-model/": {
+    "internal": 58,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/playwright/interview/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/power-bi/advanced/dax-measures/calculate-and-time-intelligence/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/power-bi/advanced/dax-measures/dax-basics/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/power-bi/advanced/dax-measures/": {
     "internal": 43,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/regex/advanced/": {
-    "internal": 38,
+  "practice-labs/power-bi/advanced/": {
+    "internal": 42,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/regex/advanced/regex-advanced/": {
-    "internal": 39,
+  "practice-labs/power-bi/beginner/": {
+    "internal": 42,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/regex/advanced/regex-advanced/lazy-lookarounds-performance/": {
+  "practice-labs/power-bi/beginner/power-query-basics/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/power-bi/beginner/power-query-basics/power-query-cleaning/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/power-bi/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/power-bi/intermediate/": {
     "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/regex/beginner/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/regex/beginner/regex-basics/classes-and-quantifiers/": {
+  "practice-labs/power-bi/intermediate/shaping-and-modelling/": {
     "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/regex/beginner/regex-basics/groups-alternation-flags/": {
-    "internal": 46,
+  "practice-labs/power-bi/intermediate/shaping-and-modelling/power-query-combining/": {
+    "internal": 52,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/regex/beginner/regex-basics/": {
+  "practice-labs/power-bi/intermediate/shaping-and-modelling/power-query-shaping/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/power-bi/intermediate/shaping-and-modelling/star-schema-modelling/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/power-bi/interview/": {
     "internal": 40,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/regex/": {
-    "internal": 46,
+  "practice-labs/programming/": {
+    "internal": 57,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/regex/intermediate/": {
-    "internal": 39,
+  "practice-labs/prompt-engineering/advanced/": {
+    "internal": 43,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/regex/intermediate/regex-extraction/capturing-and-extracting/": {
+  "practice-labs/prompt-engineering/advanced/reliable-and-safe/evaluating-prompts/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/prompt-engineering/advanced/reliable-and-safe/": {
     "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/regex/intermediate/regex-extraction/": {
-    "internal": 39,
+  "practice-labs/prompt-engineering/advanced/reliable-and-safe/prompt-security/": {
+    "internal": 51,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/regex/interview/": {
-    "internal": 37,
+  "practice-labs/prompt-engineering/beginner/": {
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/selenium/advanced/": {
-    "internal": 40,
+  "practice-labs/prompt-engineering/beginner/prompt-basics/anatomy-of-a-prompt/": {
+    "internal": 49,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/selenium/advanced/selenium-at-scale/grid-and-ci/": {
-    "internal": 46,
+  "practice-labs/prompt-engineering/beginner/prompt-basics/few-shot-prompting/": {
+    "internal": 51,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/selenium/advanced/selenium-at-scale/": {
+  "practice-labs/prompt-engineering/beginner/prompt-basics/": {
+    "internal": 44,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/prompt-engineering/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/prompt-engineering/intermediate/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/prompt-engineering/intermediate/prompts-for-software/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/prompt-engineering/intermediate/prompts-for-software/steps-and-chains/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/prompt-engineering/intermediate/prompts-for-software/structured-outputs/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/prompt-engineering/intermediate/prompts-for-software/tool-calling/": {
+    "internal": 52,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/prompt-engineering/interview/": {
     "internal": 41,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/selenium/beginner/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/selenium/beginner/webdriver-basics/how-selenium-works/": {
+  "practice-labs/python/advanced/": {
     "internal": 46,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/selenium/beginner/webdriver-basics/": {
+  "practice-labs/python/advanced/python-professional/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/advanced/python-professional/problem-solving-and-complexity/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/advanced/python-professional/testing-with-pytest/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/beginner/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/beginner/python-basics/conditions-and-arithmetic/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/beginner/python-basics/dictionaries-sets-strings/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/beginner/python-basics/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/beginner/python-basics/loops-lists-ranges/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/beginner/python-basics/values-variables-functions/": {
+    "internal": 53,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/": {
+    "internal": 59,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/intermediate/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/intermediate/python-in-depth/classes-and-objects/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/intermediate/python-in-depth/exceptions-and-validation/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/intermediate/python-in-depth/files-and-modules/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/intermediate/python-in-depth/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/intermediate/python-in-depth/scope-defaults-comprehensions/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/python/interview/": {
+    "internal": 44,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/regex/advanced/": {
+    "internal": 39,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/regex/advanced/regex-advanced/": {
+    "internal": 40,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/regex/advanced/regex-advanced/lazy-lookarounds-performance/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/regex/beginner/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/regex/beginner/regex-basics/classes-and-quantifiers/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/regex/beginner/regex-basics/groups-alternation-flags/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/regex/beginner/regex-basics/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/regex/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/regex/intermediate/": {
+    "internal": 40,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/regex/intermediate/regex-extraction/capturing-and-extracting/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/regex/intermediate/regex-extraction/": {
+    "internal": 40,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/regex/interview/": {
+    "internal": 38,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/selenium/advanced/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/selenium/advanced/selenium-at-scale/grid-and-ci/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/selenium/advanced/selenium-at-scale/": {
     "internal": 42,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
+  "practice-labs/selenium/beginner/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/selenium/beginner/webdriver-basics/how-selenium-works/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/selenium/beginner/webdriver-basics/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
   "practice-labs/selenium/beginner/webdriver-basics/locators/": {
-    "internal": 48,
+    "internal": 49,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/selenium/": {
-    "internal": 50,
+    "internal": 51,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/selenium/intermediate/": {
-    "internal": 43,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/selenium/intermediate/robust-selenium/actions-frames-windows/": {
-    "internal": 49,
+    "internal": 50,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/selenium/intermediate/robust-selenium/": {
-    "internal": 43,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/selenium/intermediate/robust-selenium/junit-and-page-objects/": {
-    "internal": 49,
+    "internal": 50,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/selenium/intermediate/robust-selenium/waits-and-synchronisation/": {
-    "internal": 49,
+    "internal": 50,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/selenium/interview/": {
-    "internal": 39,
+    "internal": 40,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -3109,901 +3133,925 @@
     "deadFragments": []
   },
   "practice-labs/software-testing/": {
-    "internal": 53,
+    "internal": 54,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/specialised-testing/advanced/": {
-    "internal": 44,
+    "internal": 45,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/specialised-testing/advanced/quality-at-scale/defects-and-root-cause/": {
-    "internal": 53,
+    "internal": 54,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/specialised-testing/advanced/quality-at-scale/": {
-    "internal": 45,
+    "internal": 46,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/specialised-testing/advanced/quality-at-scale/mobile-testing/": {
-    "internal": 53,
+    "internal": 54,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/specialised-testing/advanced/quality-at-scale/performance-testing/": {
-    "internal": 53,
+    "internal": 54,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/specialised-testing/": {
-    "internal": 53,
+    "internal": 54,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/specialised-testing/intermediate/beyond-the-ui/accessibility-testing/": {
-    "internal": 55,
+    "internal": 56,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/specialised-testing/intermediate/beyond-the-ui/api-testing/": {
-    "internal": 55,
+    "internal": 56,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/specialised-testing/intermediate/beyond-the-ui/database-testing/": {
-    "internal": 55,
+    "internal": 56,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/specialised-testing/intermediate/beyond-the-ui/": {
-    "internal": 47,
+    "internal": 48,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/specialised-testing/intermediate/beyond-the-ui/integration-testing/": {
-    "internal": 53,
+    "internal": 54,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/specialised-testing/intermediate/beyond-the-ui/user-acceptance-testing/": {
-    "internal": 55,
+    "internal": 56,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/specialised-testing/intermediate/": {
-    "internal": 47,
+    "internal": 48,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/specialised-testing/interview/": {
-    "internal": 41,
+    "internal": 42,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/advanced/analytics/": {
-    "internal": 67,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/advanced/analytics/lag-lead-and-ranking/": {
-    "internal": 75,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/advanced/analytics/running-totals-and-moving-averages/": {
-    "internal": 75,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/advanced/analytics/window-functions/": {
-    "internal": 75,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/advanced/": {
-    "internal": 73,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/advanced/recursion-performance/": {
-    "internal": 67,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/advanced/recursion-performance/reading-query-plans/": {
-    "internal": 75,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/advanced/recursion-performance/recursive-ctes/": {
-    "internal": 75,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/advanced/recursion-performance/writing-faster-queries/": {
-    "internal": 75,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/advanced/reliability/": {
-    "internal": 66,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/advanced/reliability/tables-constraints-views-indexes/": {
-    "internal": 74,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/advanced/reliability/transactions/": {
-    "internal": 74,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/beginner/filtering-sorting/filtering-with-where/": {
-    "internal": 75,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/beginner/filtering-sorting/": {
-    "internal": 67,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/beginner/filtering-sorting/missing-values-null/": {
-    "internal": 75,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/beginner/filtering-sorting/sorting-limiting-distinct/": {
-    "internal": 75,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/beginner/fundamentals/calculations-aliases-functions/": {
-    "internal": 76,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/beginner/fundamentals/": {
     "internal": 68,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/sql/beginner/fundamentals/reading-errors/": {
+  "practice-labs/sql/advanced/analytics/lag-lead-and-ranking/": {
     "internal": 76,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/sql/beginner/fundamentals/select-and-from/": {
+  "practice-labs/sql/advanced/analytics/running-totals-and-moving-averages/": {
     "internal": 76,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/sql/beginner/fundamentals/what-is-a-database/": {
+  "practice-labs/sql/advanced/analytics/window-functions/": {
+    "internal": 76,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/advanced/": {
     "internal": 74,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/sql/beginner/": {
-    "internal": 72,
+  "practice-labs/sql/advanced/recursion-performance/": {
+    "internal": 68,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/sql/": {
-    "internal": 103,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/intermediate/changing-data/cleaning-data/": {
-    "internal": 75,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/intermediate/changing-data/": {
-    "internal": 67,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/intermediate/changing-data/insert-update-delete/": {
-    "internal": 75,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/sql/intermediate/changing-data/sqlite-and-other-databases/": {
+  "practice-labs/sql/advanced/recursion-performance/reading-query-plans/": {
     "internal": 76,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "practice-labs/sql/intermediate/combining/combining-results-with-union/": {
+  "practice-labs/sql/advanced/recursion-performance/recursive-ctes/": {
+    "internal": 76,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/advanced/recursion-performance/writing-faster-queries/": {
+    "internal": 76,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/advanced/reliability/": {
+    "internal": 67,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/advanced/reliability/tables-constraints-views-indexes/": {
     "internal": 75,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/advanced/reliability/transactions/": {
+    "internal": 75,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/beginner/filtering-sorting/filtering-with-where/": {
+    "internal": 76,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/beginner/filtering-sorting/": {
+    "internal": 68,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/beginner/filtering-sorting/missing-values-null/": {
+    "internal": 76,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/beginner/filtering-sorting/sorting-limiting-distinct/": {
+    "internal": 76,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/beginner/fundamentals/calculations-aliases-functions/": {
+    "internal": 77,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/beginner/fundamentals/": {
+    "internal": 69,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/beginner/fundamentals/reading-errors/": {
+    "internal": 77,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/beginner/fundamentals/select-and-from/": {
+    "internal": 77,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/beginner/fundamentals/what-is-a-database/": {
+    "internal": 75,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/beginner/": {
+    "internal": 73,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/": {
+    "internal": 104,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/intermediate/changing-data/cleaning-data/": {
+    "internal": 76,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/intermediate/changing-data/": {
+    "internal": 68,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/intermediate/changing-data/insert-update-delete/": {
+    "internal": 76,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/intermediate/changing-data/sqlite-and-other-databases/": {
+    "internal": 77,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/sql/intermediate/combining/combining-results-with-union/": {
+    "internal": 76,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/intermediate/combining/": {
-    "internal": 67,
+    "internal": 68,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/intermediate/combining/joining-tables/": {
-    "internal": 75,
+    "internal": 76,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/intermediate/combining/subqueries-exists-with/": {
-    "internal": 75,
+    "internal": 76,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/intermediate/": {
-    "internal": 75,
+    "internal": 76,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/intermediate/summarising/aggregates-group-by-having/": {
-    "internal": 75,
+    "internal": 76,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/intermediate/summarising/case-expressions/": {
-    "internal": 75,
+    "internal": 76,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/intermediate/summarising/": {
-    "internal": 67,
+    "internal": 68,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/intermediate/summarising/working-with-dates-and-text/": {
-    "internal": 75,
+    "internal": 76,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/interview/": {
-    "internal": 64,
+    "internal": 65,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/projects/banking-transactions/": {
-    "internal": 67,
+    "internal": 68,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/projects/business-reporting/": {
-    "internal": 67,
+    "internal": 68,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/projects/ecommerce-sales/": {
-    "internal": 67,
+    "internal": 68,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/projects/employee-database/": {
-    "internal": 66,
+    "internal": 67,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/projects/healthcare-appointments/": {
-    "internal": 67,
+    "internal": 68,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "practice-labs/sql/projects/": {
-    "internal": 66,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/advanced/deciding-with-data/ab-tests-and-significance/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/advanced/deciding-with-data/charts-and-presenting/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/advanced/deciding-with-data/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/advanced/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/beginner/describing-data/data-variables-and-types/": {
-    "internal": 53,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/beginner/describing-data/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/beginner/describing-data/mean-median-mode/": {
-    "internal": 55,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/beginner/describing-data/percentiles-and-outliers/": {
-    "internal": 55,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/beginner/describing-data/range-and-standard-deviation/": {
-    "internal": 55,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/beginner/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/": {
-    "internal": 57,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/intermediate/analysing-data/cleaning-data/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/intermediate/analysing-data/correlation-and-regression/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/intermediate/analysing-data/grouping-and-pivots/": {
-    "internal": 54,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/intermediate/analysing-data/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/intermediate/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/statistics/interview/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/test-design/advanced/combinations-experience/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/test-design/advanced/combinations-experience/pairwise-testing/": {
-    "internal": 49,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/test-design/advanced/combinations-experience/use-cases-error-guessing/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/test-design/advanced/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/test-design/beginner/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/test-design/beginner/partitions-boundaries/boundary-value-analysis/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/test-design/beginner/partitions-boundaries/equivalence-partitioning/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/test-design/beginner/partitions-boundaries/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/test-design/": {
-    "internal": 49,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/test-design/intermediate/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/test-design/intermediate/tables-states/decision-tables/": {
-    "internal": 49,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/test-design/intermediate/tables-states/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/test-design/intermediate/tables-states/state-transition-testing/": {
-    "internal": 49,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/typescript/advanced/": {
-    "internal": 39,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/typescript/advanced/typescript-in-practice/configuration-and-strictness/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/typescript/advanced/typescript-in-practice/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/typescript/beginner/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/typescript/beginner/typescript-basics/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/typescript/beginner/typescript-basics/interfaces-and-optional-properties/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/typescript/beginner/typescript-basics/types-and-inference/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/typescript/": {
-    "internal": 48,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/typescript/intermediate/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/typescript/intermediate/typing-real-code/generics-and-utility-types/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/typescript/intermediate/typing-real-code/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/typescript/intermediate/typing-real-code/unions-and-narrowing/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/typescript/interview/": {
-    "internal": 38,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "practice-labs/web-backend/": {
-    "internal": 58,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "privacy.html": {
-    "internal": 26,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tax.html": {
-    "internal": 63,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "terms.html": {
-    "internal": 26,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "time-tools.html": {
-    "internal": 55,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools.html": {
-    "internal": 185,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/base64-encoder-decoder/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/business-days/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/countdown-timer/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/cron-challenge-lab/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/cron-expression-explainer/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/date-calculator/": {
-    "internal": 50,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/date-difference/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/excel-practice-lab/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/hours-calculator/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/image-compressor-resizer/": {
-    "internal": 30,
-    "external": [],
-    "placeholders": 1,
-    "deadFragments": []
-  },
-  "tools/interval-timer/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/json-compare/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/json-csv-converter/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/json-error-fixing-lab/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/json-formatter/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/jsonpath-challenge-lab/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/jsonpath-tester/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/jwt-decoder/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/list-comparer/": {
-    "internal": 44,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/meeting-planner/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/merge-pdf/": {
-    "internal": 34,
-    "external": [],
-    "placeholders": 1,
-    "deadFragments": []
-  },
-  "tools/pdf-marks/": {
-    "internal": 34,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/pdf-pages/": {
-    "internal": 34,
-    "external": [],
-    "placeholders": 1,
-    "deadFragments": []
-  },
-  "tools/photos-to-pdf/": {
-    "internal": 30,
-    "external": [],
-    "placeholders": 1,
-    "deadFragments": []
-  },
-  "tools/pomodoro-timer/": {
-    "internal": 47,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/power-bi-practice-lab/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/shift-planner/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/smart-flashcards/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/split-pdf/": {
-    "internal": 35,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/sql-practice-lab/": {
-    "internal": 41,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/stopwatch/": {
-    "internal": 42,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/test-design-lab/": {
-    "internal": 40,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/text-diff/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/time-duration/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/time-zone-converter/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/unix-timestamp-converter/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/url-parser/": {
-    "internal": 45,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/uuid-generator/": {
-    "internal": 43,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "tools/world-clock/": {
-    "internal": 46,
-    "external": [],
-    "placeholders": 0,
-    "deadFragments": []
-  },
-  "categories.html?q=loan": {
     "internal": 67,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
-  "calculators.html?q=emi": {
+  "practice-labs/statistics/advanced/deciding-with-data/ab-tests-and-significance/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/advanced/deciding-with-data/charts-and-presenting/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/advanced/deciding-with-data/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/advanced/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/beginner/describing-data/data-variables-and-types/": {
+    "internal": 54,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/beginner/describing-data/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/beginner/describing-data/mean-median-mode/": {
+    "internal": 56,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/beginner/describing-data/percentiles-and-outliers/": {
+    "internal": 56,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/beginner/describing-data/range-and-standard-deviation/": {
+    "internal": 56,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/beginner/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/": {
+    "internal": 58,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/intermediate/analysing-data/cleaning-data/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/intermediate/analysing-data/correlation-and-regression/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/intermediate/analysing-data/grouping-and-pivots/": {
+    "internal": 55,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/intermediate/analysing-data/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/intermediate/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/statistics/interview/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/test-design/advanced/combinations-experience/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/test-design/advanced/combinations-experience/pairwise-testing/": {
+    "internal": 50,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/test-design/advanced/combinations-experience/use-cases-error-guessing/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/test-design/advanced/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/test-design/beginner/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/test-design/beginner/partitions-boundaries/boundary-value-analysis/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/test-design/beginner/partitions-boundaries/equivalence-partitioning/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/test-design/beginner/partitions-boundaries/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/test-design/": {
+    "internal": 50,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/test-design/intermediate/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/test-design/intermediate/tables-states/decision-tables/": {
+    "internal": 50,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/test-design/intermediate/tables-states/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/test-design/intermediate/tables-states/state-transition-testing/": {
+    "internal": 50,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/typescript/advanced/": {
+    "internal": 40,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/typescript/advanced/typescript-in-practice/configuration-and-strictness/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/typescript/advanced/typescript-in-practice/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/typescript/beginner/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/typescript/beginner/typescript-basics/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/typescript/beginner/typescript-basics/interfaces-and-optional-properties/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/typescript/beginner/typescript-basics/types-and-inference/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/typescript/": {
+    "internal": 49,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/typescript/intermediate/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/typescript/intermediate/typing-real-code/generics-and-utility-types/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/typescript/intermediate/typing-real-code/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/typescript/intermediate/typing-real-code/unions-and-narrowing/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/typescript/interview/": {
+    "internal": 39,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "practice-labs/web-backend/": {
+    "internal": 59,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "privacy.html": {
+    "internal": 27,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tax.html": {
     "internal": 64,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
+  "terms.html": {
+    "internal": 27,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "time-tools.html": {
+    "internal": 56,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools.html": {
+    "internal": 196,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/ai-answer-checklist/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/base64-encoder-decoder/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/bug-report-prompt/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/business-days/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/context-pack-builder/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/countdown-timer/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/cron-challenge-lab/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/cron-expression-explainer/": {
+    "internal": 44,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/date-calculator/": {
+    "internal": 51,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/date-difference/": {
+    "internal": 44,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/excel-practice-lab/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/hours-calculator/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/image-compressor-resizer/": {
+    "internal": 31,
+    "external": [],
+    "placeholders": 1,
+    "deadFragments": []
+  },
+  "tools/interval-timer/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/json-compare/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/json-csv-converter/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/json-error-fixing-lab/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/json-formatter/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/jsonpath-challenge-lab/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/jsonpath-tester/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/jwt-decoder/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/list-comparer/": {
+    "internal": 45,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/meeting-planner/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/merge-pdf/": {
+    "internal": 35,
+    "external": [],
+    "placeholders": 1,
+    "deadFragments": []
+  },
+  "tools/pdf-marks/": {
+    "internal": 35,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/pdf-pages/": {
+    "internal": 35,
+    "external": [],
+    "placeholders": 1,
+    "deadFragments": []
+  },
+  "tools/photos-to-pdf/": {
+    "internal": 31,
+    "external": [],
+    "placeholders": 1,
+    "deadFragments": []
+  },
+  "tools/pomodoro-timer/": {
+    "internal": 48,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/power-bi-practice-lab/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/prompt-builder/": {
+    "internal": 37,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/shift-planner/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/smart-flashcards/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/split-pdf/": {
+    "internal": 36,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/sql-practice-lab/": {
+    "internal": 42,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/stopwatch/": {
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/test-design-lab/": {
+    "internal": 41,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/text-diff/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/time-duration/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/time-zone-converter/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/unix-timestamp-converter/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/url-parser/": {
+    "internal": 46,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/uuid-generator/": {
+    "internal": 44,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/world-clock/": {
+    "internal": 47,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "categories.html?q=loan": {
+    "internal": 68,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "calculators.html?q=emi": {
+    "internal": 65,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
   "articles.html?category=loans": {
-    "internal": 39,
+    "internal": 40,
     "external": [],
     "placeholders": 5,
     "deadFragments": []
   },
   "articles.html?category=investment": {
-    "internal": 39,
+    "internal": 40,
     "external": [],
     "placeholders": 5,
     "deadFragments": []
