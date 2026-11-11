@@ -167,6 +167,7 @@ describe("the three brief tools", () => {
         assert.ok(html.includes(`aria-describedby="${prefix}-${f.key}-hint"`), `${t.CONFIG.toolId}: hint of ${f.key}`);
       }
       assert.ok(html.includes(`<textarea id="${prefix}-output"`), t.CONFIG.toolId);
+      assert.ok(!t.CONFIG.fields.some((f) => ["output", "load-example", "copy", "download", "reset", "check", "live", "form"].includes(f.key)), `${t.CONFIG.toolId}: a field key must not collide with the page's own ids`);
       assert.ok(html.includes(`id="${prefix}-copy"`) && html.includes(`id="${prefix}-download"`) && html.includes(`id="${prefix}-load-example"`) && html.includes(`id="${prefix}-reset"`));
       assert.ok(html.includes('class="calculator-section"') && html.includes('class="calculator-results"'), "the shared side-by-side layout");
       assert.equal(t.showRelatedArticles, false);
@@ -270,9 +271,65 @@ describe("the comparison engine and Compare Two AI Answers", () => {
   });
 });
 
+describe("the notes engine and Meeting Notes to Action Plan", () => {
+  let notes, tool;
+  before(async () => {
+    notes = await import("../../assets/js/tools/ai-tools/common/notes-engine.js");
+    tool = await import("../../assets/js/tools/meeting-notes-action-plan/index.js");
+  });
+
+  test("owners: @name, 'Name to', 'Name will', 'owner:', '(Name)', an attendee's name; never a pronoun or a prefix word", () => {
+    assert.equal(notes.ownerOf("@Meera: update the pricing page"), "Meera");
+    assert.equal(notes.ownerOf("Priya to send the deck by Friday"), "Priya");
+    assert.equal(notes.ownerOf("Rahul will book the venue"), "Rahul");
+    assert.equal(notes.ownerOf("Book the venue, owner: Arjun"), "Arjun");
+    assert.equal(notes.ownerOf("Book the venue (Rahul)"), "Rahul");
+    assert.equal(notes.ownerOf("Marketing needs the press note; ask Meera", ["Priya", "Meera"]), "Meera");
+    assert.equal(notes.ownerOf("We will launch on the 20th"), null);
+    assert.equal(notes.ownerOf("Decision to drop the feature"), null);
+  });
+
+  test("due phrases: weekdays, 'next week', dates, 'before 18 Nov', 'by the 15th'", () => {
+    assert.equal(notes.dueOf("send the deck by Friday"), "Friday");
+    assert.equal(notes.dueOf("book the venue next week"), null); // no "by": not a deadline
+    assert.equal(notes.dueOf("update the pricing page before 18 Nov"), "18 Nov");
+    assert.equal(notes.dueOf("confirm the vendor can deliver by the 15th"), null); // "by the 15th" names the vendor's date, not the action's; a plain "by 15th" would
+    assert.equal(notes.dueOf("deadline 15/11"), "15/11");
+  });
+
+  test("classify: decisions, actions with owner and due, questions, risks, notes", () => {
+    assert.equal(notes.classifyLine("Decided: launch on 20 Nov").kind, "decision");
+    assert.equal(notes.classifyLine("Agreed to drop the referral feature").kind, "decision");
+    assert.deepEqual(notes.classifyLine("Priya to send the revised deck by Friday"), { kind: "action", text: "Send the revised deck", owner: "Priya", due: "Friday" });
+    assert.deepEqual(notes.classifyLine("@Meera: update the pricing page before 18 Nov"), { kind: "action", text: "Update the pricing page", owner: "Meera", due: "18 Nov" });
+    assert.equal(notes.classifyLine("Is the event budget approved?").kind, "question");
+    assert.equal(notes.classifyLine("Risk: the vendor contract is not signed yet").kind, "risk");
+    assert.equal(notes.classifyLine("Next meeting Thursday").kind, "note");
+  });
+
+  test("the plan: the example yields decisions, owned and flagged actions, questions, risks, the message and nothing invented", () => {
+    const brief = tool.build(tool.CONFIG.example.values);
+    assert.equal(brief.state, "ok");
+    assert.ok(brief.markdown.startsWith("# Action plan: Launch planning (11 Nov 2026)\n\nAttendees: Priya, Rahul, Meera, Arjun"));
+    assert.ok(brief.markdown.includes("## Decisions\n\n- The launch date is 20 Nov, no further slip\n- Agreed to drop the referral feature"));
+    assert.ok(brief.markdown.includes("[ ] Send the revised deck to the sales team — owner: Priya — due: Friday"));
+    assert.ok(brief.markdown.includes("[ ] Book the venue next week — owner: Rahul — no date"));
+    assert.ok(brief.markdown.includes("## Open questions\n\n- Is the event budget approved? Finance has not replied"));
+    assert.ok(brief.markdown.includes("## Risks and blockers\n\n- The vendor contract is not signed yet"));
+    assert.ok(brief.markdown.includes("## Follow-up message to the attendees\n\nHi all,"));
+    assert.ok(brief.markdown.includes("- Send the revised deck to the sales team (Priya, by Friday)"));
+    assert.ok(brief.markdown.includes("## Other notes (not sorted)\n\n- Marketing wants the press note two days earlier\n- Next meeting Thursday"));
+    assert.ok(!/undefined|\[object|NaN/.test(brief.markdown));
+    const only = tool.build({ ...tool.CONFIG.example.values, deliver: "message" });
+    assert.ok(!only.markdown.includes("# Action plan") && only.markdown.includes("Hi all,"));
+    const empty = tool.build({ notes: "Chatted about the weather", attendees: "", meeting: "", date: "", deliver: "plan" });
+    assert.ok(empty.markdown.includes("No decision was recorded") && empty.markdown.includes("No action was recorded"));
+  });
+});
+
 describe("catalog integration", () => {
-  test("five published tools in the AI Tools section at /tools/<id>/, related only to each other", () => {
-    const ids = ["prompt-builder", "bug-report-prompt", "context-pack-builder", "ai-answer-checklist", "ai-answer-compare"];
+  test("six published tools in the AI Tools section at /tools/<id>/, related only to each other", () => {
+    const ids = ["prompt-builder", "bug-report-prompt", "context-pack-builder", "ai-answer-checklist", "ai-answer-compare", "meeting-notes-action-plan"];
     assert.deepEqual(tax.getToolsBySection("ai-tools").map((t) => t.id), ids);
     for (const id of ids) {
       const t = tools.getToolById(id);

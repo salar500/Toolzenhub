@@ -49,7 +49,8 @@ export const SECTION_GROUPS = {
     ],
     "ai-tools": [
         { label: "Briefs for an assistant", ids: ["prompt-builder", "bug-report-prompt", "context-pack-builder"] },
-        { label: "Checking an answer", ids: ["ai-answer-checklist", "ai-answer-compare"] }
+        { label: "Checking an answer", ids: ["ai-answer-checklist", "ai-answer-compare"] },
+        { label: "Work and productivity", ids: ["meeting-notes-action-plan"] }
     ]
 };
 

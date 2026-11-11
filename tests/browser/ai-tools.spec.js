@@ -61,7 +61,7 @@ test.describe("AI Tools", () => {
     await page.locator("#pb-output").fill("my own text");
     await expect(page.locator("#pb-output")).toHaveValue("my own text");
     const related = page.locator(".related-section a[href*='/tools/'], .related-calculators a[href*='/tools/']");
-    for (const href of await related.evaluateAll((as) => as.map((a) => a.getAttribute("href")))) expect(href).toMatch(/\/tools\/(bug-report-prompt|context-pack-builder|ai-answer-checklist|ai-answer-compare)\/$/);
+    for (const href of await related.evaluateAll((as) => as.map((a) => a.getAttribute("href")))) expect(href).toMatch(/\/tools\/(bug-report-prompt|context-pack-builder|ai-answer-checklist|ai-answer-compare|meeting-notes-action-plan)\/$/);
   });
 
   test("the section page lists the three tools, the home page has the seventh card, and All Tools knows the section @portable", async ({ page, go, siteRoot }) => {
@@ -72,7 +72,7 @@ test.describe("AI Tools", () => {
     await go("");
     const card = page.locator("#categories .category-card", { hasText: "AI Tools" });
     await expect(card).toHaveAttribute("href", `${siteRoot}ai-tools.html`);
-    await expect(card).toContainText("5 tools");
+    await expect(card).toContainText("6 tools");
     await go("tools.html");
     await expect(page.locator(`#tools-directory a[href="${siteRoot}tools/context-pack-builder/"]`).first()).toBeVisible(); // the directory's own listing, not the hidden rail
   });
@@ -124,6 +124,20 @@ test.describe("AI Tools", () => {
     expect(watch.external).toEqual([]);
     expect(watch.pageErrors).toEqual([]);
     await expectNoHorizontalOverflow(page);
+  });
+
+  test("meeting notes: typed notes become a plan with an owned action, a flagged one and a question; nothing leaves the site", async ({ page, go, watch }) => {
+    await go("tools/meeting-notes-action-plan/");
+    await page.locator("#mn-form[data-ready]").waitFor();
+    await page.locator("#mn-notes").fill("Decided: launch on 20 Nov\nPriya to send the deck by Friday\nBook the venue\nIs the budget approved?");
+    await expect(page.locator("#mn-check")).toHaveAttribute("data-state", "ok");
+    const text = await page.locator("#mn-output").inputValue();
+    expect(text).toContain("## Decisions\n\n- Launch on 20 Nov");
+    expect(text).toContain("[ ] Send the deck — owner: Priya — due: Friday");
+    expect(text).toContain("## Open questions\n\n- Is the budget approved?");
+    expect(text).toContain("Other notes (not sorted)\n\n- Book the venue"); // no owner and no date: not an action, and nothing is invented
+    expect(watch.external).toEqual([]);
+    expect(watch.pageErrors).toEqual([]);
   });
 
   test("on a phone the form is one column, the brief is readable and nothing overflows", async ({ page, go }) => {

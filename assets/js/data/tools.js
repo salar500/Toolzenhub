@@ -2659,6 +2659,47 @@ const catalog = [
     },
 
     {
+        id: "meeting-notes-action-plan",
+        status: "published",
+        loader: () =>
+            import("../tools/meeting-notes-action-plan/index.js"),
+        sectionId: "ai-tools",
+        toolType: "utility",
+        icon: "☰",
+        title: "Meeting Notes to Action Plan",
+        description:
+            "Paste rough meeting notes and get the decisions, the actions with owners and due dates (and which ones lack them), the open questions, the risks, and a follow-up message ready to send. Sorted in your browser; nothing is invented or sent.",
+        relatedTools: ["prompt-builder", "context-pack-builder"],
+        aliases: [
+            "meeting notes to action items",
+            "meeting minutes generator",
+            "action items from notes",
+            "meeting summary",
+            "follow-up email after meeting",
+            "meeting action plan",
+            "minutes of meeting",
+            "extract action items"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            download: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Meeting Notes to Action Plan: Decisions, Owners, Dates | ToolZen Hub",
+            description:
+                "Turn rough meeting notes into an action plan: decisions, actions with owners and due dates, open questions, risks, and a follow-up message to the attendees. Runs in your browser; nothing is invented or sent anywhere."
+        }
+    },
+
+    {
         id: "list-comparer",
         status: "published",
         loader: () =>
