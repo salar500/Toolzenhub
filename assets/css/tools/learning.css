@@ -1052,6 +1052,17 @@
 }
 
 /* a lesson's practise exercises are buttons that open the exercise; they read as links, not as primary actions */
+/* on a touch screen the exercise chips are finger-sized rows (44 px); with a mouse they stay compact */
+@media (pointer: coarse) {
+
+    .lx-practise__btn {
+        min-height: 44px;
+        margin: 4px 8px 4px 0;
+        padding: 8px 12px;
+    }
+
+}
+
 .lx-practise__btn {
 
     margin: 2px 6px 2px 0;

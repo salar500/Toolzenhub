@@ -184,6 +184,15 @@
     color: var(--articles-green);
 }
 
+/* on a touch screen the button is finger-sized (44 px) */
+@media (pointer: coarse) {
+
+    .article-more-categories {
+        min-height: 44px;
+    }
+
+}
+
 
 /* =========================================================
    POPULAR ARTICLES

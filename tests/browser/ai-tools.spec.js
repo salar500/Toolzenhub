@@ -150,5 +150,13 @@ test.describe("AI Tools", () => {
     expect(box.width).toBeGreaterThan(300);
     expect(box.height).toBeGreaterThanOrEqual(260);
     await expectNoHorizontalOverflow(page);
+    // the long form pushes the brief far down a phone: the calculators' "jump" link sits before the form and lands focus on the brief
+    const jump = page.locator(".jump-to-result");
+    await expect(jump).toBeVisible();
+    await expect(jump).toHaveText("Jump to the debugging prompt");
+    await jump.click();
+    await expect(page.locator("#bug-results")).toBeFocused();
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await expect(jump).toBeHidden(); // from 960 px the brief is beside the form
   });
 });

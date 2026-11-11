@@ -19,6 +19,7 @@ import { getToolById } from "../../../data/tools.js";
 import { fieldShell, hintIdOf } from "../../../ui/field.js";
 import { escapeHTML } from "../../../ui/escape.js";
 import { buildBrief } from "./brief-engine.js";
+import { addJumpToResult } from "../../../ui/jump-link.js";
 
 
 const ASSISTANTS = "ChatGPT, Claude, Gemini, Copilot or any other assistant";
@@ -236,6 +237,9 @@ export function createBriefTool(config) {
                 announce("Suggestions added to the empty fields. Edit them freely.", 0);
             });
         }
+
+        /* on a phone the brief follows a long form (the Prompt Builder's starts about 2,500 px down): the calculators' link before the form */
+        addJumpToResult(form.closest("#app") ?? document.body, `Jump to the ${config.outputName}`);
 
         /* the page is live from here: typing before this point changed nothing (tests wait for it) */
         form.dataset.ready = "true";

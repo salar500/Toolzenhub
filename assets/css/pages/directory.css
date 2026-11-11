@@ -227,6 +227,16 @@
     margin-top: 0;
 }
 
+/* on a touch screen the "more" links are finger-sized (44 px) */
+@media (pointer: coarse) {
+
+    .directory-section__more a {
+        display: inline-block;
+        padding: 12px 0;
+    }
+
+}
+
 .directory-section__more {
     margin: 18px 0 0;
 

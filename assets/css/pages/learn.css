@@ -649,6 +649,19 @@ a.learn-card:hover {
 }
 
 
+/* ---------- touch screens: list links are finger-sized rows (44 px), with a mouse they stay plain text ---------- */
+
+@media (pointer: coarse) {
+
+    .learn-tech li > a,
+    .learn-lessons li > a,
+    .learn-section li > a:only-child {
+        display: inline-block;
+        padding: 12px 0;
+    }
+
+}
+
 /* ---------- phones: the lesson is one calm column ---------- */
 
 @media (max-width: 760px) {
