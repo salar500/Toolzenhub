@@ -270,8 +270,19 @@ Rule change: none.
 
 Rule change: none.
 
+## Depth programme, from 2026-11-11 (second master brief)
+
+Owner brief (2026-11-11, afternoon): seven ecosystems and no eighth; depth, guided controls instead of free text, competitor-informed decisions, autonomous batches published to the Pages preview; production stays a manual Hostinger step. **Conflict recorded, not acted on:** the brief names a primary green `#0b9f58` as the established brand colour; the repository's approved Design System 2.0 uses the indigo accent `#4338ca` and has no green token (`--color-brand-green` is an alias of the accent). The palette is unchanged until the owner decides; everything else proceeds.
+
+### Batch 5: the Prompt Builder becomes guided (the brief's own example)
+
+- **Kind of task** select (write, summarise, analyse, code, plan, ideas, rewrite, teach): choosing one writes suggested rules and success criteria into those fields **only when they are empty**, as a starting point the visitor edits; the task type opens the prompt's task line. The shared page gained the mechanism (`option.fill` on any select), so other brief tools can use it.
+- **Tone**, **how much detail** and **which assistant** selects add requirement lines (a coding assistant gets "read the files I name; show the commands you run"). Essentials unchanged (what to produce, how you will judge it). Reset returns focus to the first essential.
+- Verification: `ai-tools.test` 19 of 19 (the guided lines, every task type's suggestions); `ai-tools.spec` 8 of 8 desktop and mobile (suggestions fill empty fields only, the choices reach the prompt, reset clears them); both builds; static checks.
+
 ### Next in the queue (assessed, not started)
 
+- **Compare Two AI Answers** (verification department): a real comparison engine (shared statements, only-in-one, number and negation conflicts, each side's unsupported claims), not a prompt wrapper.
 - **The remaining AI articles** follow their tools (above). The category work is done.
 - **(Done in Batch 4) AI articles (eight in the brief).** Article categories are the Calculators categories (`articleCategories` in `data/articles.js` reads `data/categories.js`), so an AI cluster needs an article category first: `{ slug: "ai", name: "AI", icon }` in `articleCategoryOrder` (the map must take a name when no calculator category matches), `icons.js` FOR `ai`, and the category pins: `taxonomy.test` line 190 (slugs), `articles.test` (ids order, the PUBLISHED list, per-category counts, related counts), `search.test` (article count 40, the listing parity corpus), `links.spec` `CATEGORY_SLUGS` (the `?category=` allow-list), `articles.spec` (`PACK_TOOL` per topic, pagination 8 pages at 5 cards), `relationships.test` (article to tools: curated AI tools, no category fallback since the section has no category), then the links and SEO crawl baselines. Each article is a content module of the existing shape (introduction, takeaways, sections, example, bigger picture, considerations, FAQ; no image) with one distinct question and one primary AI tool. First three planned: writing instructions an assistant can act on (Prompt Builder), giving an assistant a project's context (Context Pack Builder), reading an AI answer before trusting it (Evidence Checklist).
 - **Further AI departments** (comparison of two answers, meeting notes to action plan, workflow planner, skill-gap assessment): each needs its own engine; none is a template of the four built.

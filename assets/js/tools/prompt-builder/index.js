@@ -30,6 +30,44 @@ const FORMATS = [
     { value: "An email, ready to send.", label: "Email" }
 ];
 
+/* Task types: each suggests rules and success criteria for a visitor who does not yet know what to ask for (written only into empty fields). */
+const TASKS = [
+    { value: "", label: "Choose the kind of task (optional)" },
+    { value: "Write or draft a text", label: "Write or draft a text", fill: { rules: "Written for the reader named above, in their words\nNo filler phrases and no padding\nOne idea per paragraph", success: "A reader gets the point in the first two sentences\nNothing in it would make the reader ask \"what do you mean?\"\nIt is the length the situation needs and no longer" } },
+    { value: "Summarise or explain something", label: "Summarise or explain something", fill: { rules: "Keep every number and name exactly as in the source\nSay what is uncertain or missing in the source\nNo new claims that are not in the source", success: "Someone who has not read the source could act on the summary\nEvery figure can be traced back to the source\nThe main point comes first" } },
+    { value: "Analyse data or a document", label: "Analyse data or a document", fill: { rules: "State the method before the findings\nShow the figures behind each finding\nSeparate what the data shows from what you infer", success: "Each finding names the numbers it rests on\nAssumptions and gaps in the data are listed\nIt ends with the two or three findings that matter most" } },
+    { value: "Write or fix code", label: "Write or fix code", fill: { rules: "Use only the language, framework and versions I name\nDo not add dependencies\nExplain any change outside the file I asked about", success: "It runs as written, with the command to run it shown\nEdge cases are handled or named as unhandled\nNothing unrelated was changed" } },
+    { value: "Plan or decide something", label: "Plan or decide something", fill: { rules: "Give options before a recommendation\nName the trade-off of each option in one line\nSay what information would change the recommendation", success: "I can see why the recommended option wins\nEach step of the plan has an owner or a next action\nRisks are listed with what to do about them" } },
+    { value: "Generate ideas or options", label: "Generate ideas or options", fill: { rules: "Quantity first, then mark the three strongest\nMix safe and unusual ideas\nOne line per idea, no explanation unless asked", success: "At least ten distinct ideas, none a rewording of another\nThe three marked ones come with one reason each" } },
+    { value: "Rewrite, translate or adapt a text", label: "Rewrite, translate or adapt a text", fill: { rules: "Keep the meaning; change only what the task asks\nKeep names, numbers and quotations exact\nMark anything you could not render faithfully", success: "A reader of the result would not know it was adapted\nNothing from the original is lost or added" } },
+    { value: "Teach me a topic", label: "Teach me a topic", fill: { rules: "Start from what I said I already know\nOne concept at a time, each with one concrete example\nAsk me a question at the end of each part before moving on", success: "I can explain each concept back in my own words\nI can do the small exercise you set without looking at the answer" } }
+];
+
+const TONES = [
+    { value: "", label: "Let the assistant choose" },
+    { value: "Plain and direct, no padding.", label: "Plain and direct" },
+    { value: "Friendly and warm, but still precise.", label: "Friendly" },
+    { value: "Formal, as for an official document.", label: "Formal" },
+    { value: "Technical and precise, for a specialist reader.", label: "Technical and precise" },
+    { value: "Persuasive: lead with the benefit, anticipate objections.", label: "Persuasive" },
+    { value: "Simple words and short sentences, for a reader new to the subject.", label: "Simple, for a newcomer" }
+];
+
+const DETAIL = [
+    { value: "", label: "Standard" },
+    { value: "Keep it brief: the shortest answer that meets the criteria, with no preamble.", label: "Brief" },
+    { value: "Be thorough: cover the edge cases, the alternatives and the reasons, with headings.", label: "Thorough" }
+];
+
+const ASSISTANTS = [
+    { value: "", label: "Any assistant" },
+    { value: "ChatGPT", label: "ChatGPT" },
+    { value: "Claude", label: "Claude" },
+    { value: "Gemini", label: "Gemini" },
+    { value: "Copilot", label: "Microsoft Copilot" },
+    { value: "a coding assistant (Claude Code, Cursor, Copilot in the editor)", label: "A coding assistant in my editor" }
+];
+
 const UNCLEAR = [
     { value: "Before you answer, ask me any question whose answer would change the result. Then wait.", label: "Ask me first, then wait" },
     { value: "Do not ask questions. State every assumption you make in a short list at the top, then answer.", label: "State assumptions and continue" },
@@ -45,9 +83,10 @@ export const CONFIG = {
     fileName: "prompt",
     intro: "Say what you want in your own words and get a complete prompt: the task, the context, the rules, the format and how you will judge the result. Paste it into ChatGPT, Claude, Gemini or any assistant.",
     sectionTitle: "Describe what you want",
-    sectionText: "Two fields are essential. The rest make the answer better each time you fill one in. The prompt is written as you type.",
+    sectionText: "Two fields are essential. Choosing a kind of task suggests rules and success criteria you can edit; the rest make the answer better each time you fill one in. The prompt is written as you type.",
 
     fields: [
+        { key: "task", label: "What kind of task is it?", kind: "select", options: TASKS, hint: "Choosing one writes suggested rules and success criteria into those fields if they are empty. Edit or delete them freely." },
         { key: "goal", label: "What should the assistant produce?", required: true, rows: 3, hint: "One or two sentences. Name the thing itself: a plan, a reply, a table, a function, a summary.", placeholder: "A one-page summary of our customer survey for Monday's leadership meeting." },
         { key: "role", label: "Who should the assistant act as?", kind: "text", hint: "A role sets the knowledge and the tone. Leave it empty if it does not matter.", placeholder: "an experienced customer-research analyst" },
         { key: "audience", label: "Who is the result for?", kind: "text", hint: "The reader decides the level of detail and the words used.", placeholder: "senior managers with no research background" },
@@ -55,6 +94,9 @@ export const CONFIG = {
         { key: "material", label: "Material you will paste after the prompt", rows: 2, hint: "Name each thing and its form, so the assistant knows what to expect.", placeholder: "The survey export as CSV, 420 rows. The three free-text questions as a separate list." },
         { key: "rules", label: "Rules and limits", rows: 4, hint: "One per line: length, language, tone, what to leave out, what must be true.", placeholder: "No more than 400 words\nBritish English\nQuote at least two customer comments word for word\nDo not invent numbers that are not in the data" },
         { key: "format", label: "Format of the answer", kind: "select", options: FORMATS, hint: "The shape of the result." },
+        { key: "tone", label: "Tone", kind: "select", options: TONES, hint: "How it should read." },
+        { key: "detail", label: "How much detail", kind: "select", options: DETAIL, hint: "Brief, standard or thorough." },
+        { key: "assistant", label: "Which assistant will you paste it into?", kind: "select", options: ASSISTANTS, hint: "The prompt works in all of them; this adds one line for a coding assistant that can read your files." },
         { key: "example", label: "An example of what good looks like", rows: 3, hint: "A short sample, or a description of one you liked. Optional, and very effective.", placeholder: "Like last quarter's summary: a headline finding, three themes with a number each, then two risks." },
         { key: "success", label: "How you will judge the result", required: true, rows: 3, hint: "One per line. The assistant checks its own answer against these before it replies.", placeholder: "A manager can read it in two minutes\nEvery claim has a number or a quote behind it\nIt ends with one recommendation" },
         { key: "unclear", label: "If something is unclear", kind: "select", options: UNCLEAR, hint: "What the assistant should do instead of guessing." }
@@ -62,13 +104,16 @@ export const CONFIG = {
 
     compose(v) {
 
-        const format = v.format
-            ? `Format: ${v.format}`
-            : "";
-        const requirements = [bullets(v.rules), format ? `- ${format}` : ""].filter(Boolean).join("\n");
+        const extras = [
+            v.format ? `- Format: ${v.format}` : "",
+            v.tone ? `- Tone: ${v.tone}` : "",
+            v.detail ? `- Length: ${v.detail}` : "",
+            v.assistant.startsWith("a coding assistant") ? "- You can read the files I name; do not guess their contents. Show the commands you run and their output." : ""
+        ].filter(Boolean).join("\n");
+        const requirements = [bullets(v.rules), extras].filter(Boolean).join("\n");
 
         return doc([
-            section("Task", v.goal, 1),
+            section("Task", (v.task ? `${v.task}: ` : "") + v.goal, 1),
             section("Act as", v.role),
             section("The result is for", v.audience),
             section("Context", v.context),
@@ -83,6 +128,10 @@ export const CONFIG = {
 
     example: {
         values: {
+            task: TASKS[2].value,
+            tone: TONES[1].value,
+            detail: "",
+            assistant: "",
             goal: "A one-page summary of our customer survey for Monday's leadership meeting.",
             role: "an experienced customer-research analyst",
             audience: "senior managers with no research background",
@@ -97,7 +146,7 @@ export const CONFIG = {
     },
 
     howTo: [
-        "Write what you want the assistant to produce, in your own words.",
+        "Choose the kind of task if one fits: it suggests rules and success criteria you can edit. Then write what you want the assistant to produce, in your own words.",
         "Add the context and the rules you would give a capable colleague: what exists, what to avoid, how long, in what form.",
         "Say how you will judge the result. The prompt asks the assistant to check its answer against your criteria before replying.",
         "Copy the prompt, paste it as the first message of a new chat, and add the material you named.",

@@ -129,6 +129,13 @@ describe("the three brief tools", () => {
     assert.ok(brief.markdown.includes("## Success criteria\n\n- Polite\n- Under 120 words\n\nCheck your answer"));
     const withFormat = prompt.build({ ...v, goal: "x".repeat(20), success: "y".repeat(20), format: "Valid JSON only, with no text before or after it." });
     assert.ok(withFormat.markdown.includes("## Requirements\n\n- Format: Valid JSON only"));
+    // the guided choices (2026-11-11 brief): task type opens the task line; tone, detail and a coding assistant add requirement lines
+    const guided = prompt.build({ ...v, task: "Write or fix code", goal: "A function that parses the CSV export.", success: "It runs as written", tone: "Plain and direct, no padding.", detail: "Keep it brief: the shortest answer that meets the criteria, with no preamble.", assistant: "a coding assistant (Claude Code, Cursor, Copilot in the editor)" });
+    assert.ok(guided.markdown.startsWith("# Task\n\nWrite or fix code: A function that parses the CSV export."));
+    assert.ok(guided.markdown.includes("- Tone: Plain and direct, no padding.\n- Length: Keep it brief") && guided.markdown.includes("- You can read the files I name"));
+    assert.ok(!prompt.build({ ...v, goal: "x".repeat(20), success: "y".repeat(20), assistant: "ChatGPT" }).markdown.includes("read the files"));
+    // every task type suggests rules and success criteria, as a starting point the page writes only into empty fields
+    for (const o of prompt.CONFIG.fields.find((f) => f.key === "task").options.slice(1)) assert.ok(o.fill.rules.length > 20 && o.fill.success.length > 20, o.label);
   });
 
   test("bug report: steps are numbered, error output is fenced, the method follows the chosen scope and tests", () => {

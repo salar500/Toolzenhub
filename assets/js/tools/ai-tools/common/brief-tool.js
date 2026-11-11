@@ -222,6 +222,21 @@ export function createBriefTool(config) {
             el.addEventListener("change", update);
         }
 
+        /* A choice can suggest text for other fields (option.fill = { key: text }): a starting point written into a field that is
+           still empty, never over something the visitor typed. The visitor edits or clears it like any other text. */
+        for (const field of config.fields.filter((f) => f.kind === "select" && f.options.some((o) => o.fill))) {
+            inputs[field.key].addEventListener("change", () => {
+                const option = field.options.find((o) => o.value === inputs[field.key].value);
+                for (const [key, text] of Object.entries(option?.fill ?? {})) {
+                    if (inputs[key] && inputs[key].value.trim() === "") {
+                        inputs[key].value = text;
+                    }
+                }
+                update();
+                announce("Suggestions added to the empty fields. Edit them freely.", 0);
+            });
+        }
+
         /* the page is live from here: typing before this point changed nothing (tests wait for it) */
         form.dataset.ready = "true";
 
@@ -244,7 +259,7 @@ export function createBriefTool(config) {
 
             update();
             announce("Cleared.", 0);
-            inputs[config.fields[0].key]?.focus();
+            inputs[(config.fields.find((f) => f.required) ?? config.fields[0]).key]?.focus(); // the first essential, where the next brief starts
 
         });
 

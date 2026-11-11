@@ -50,7 +50,7 @@ test.describe("AI Tools", () => {
     await page.locator("#pb-form[data-ready]").waitFor();
     const controls = page.locator("#pb-form .calculator-form__input");
     const n = await controls.count();
-    expect(n).toBe(10);
+    expect(n).toBe(14); // task, goal, role, audience, context, material, rules, format, tone, detail, assistant, example, success, unclear
     for (let i = 0; i < n; i++) {
       const el = controls.nth(i);
       const id = await el.getAttribute("id");
@@ -75,6 +75,24 @@ test.describe("AI Tools", () => {
     await expect(card).toContainText("4 tools");
     await go("tools.html");
     await expect(page.locator(`#tools-directory a[href="${siteRoot}tools/context-pack-builder/"]`).first()).toBeVisible(); // the directory's own listing, not the hidden rail
+  });
+
+  test("prompt builder: choosing a kind of task suggests rules and criteria into empty fields only, and the choices reach the prompt", async ({ page, go }) => {
+    await go("tools/prompt-builder/");
+    await page.locator("#pb-form[data-ready]").waitFor();
+    await page.locator("#pb-rules").fill("My own rule");
+    await page.locator("#pb-task").selectOption({ label: "Write or fix code" });
+    await expect(page.locator("#pb-rules")).toHaveValue("My own rule"); // never over the visitor's text
+    await expect(page.locator("#pb-success")).toHaveValue(/It runs as written/); // the empty field gets the suggestion
+    await page.locator("#pb-goal").fill("A function that parses the export.");
+    await page.locator("#pb-tone").selectOption({ label: "Plain and direct" });
+    await expect(page.locator("#pb-check")).toHaveAttribute("data-state", "ok");
+    const text = await page.locator("#pb-output").inputValue();
+    expect(text).toContain("# Task\n\nWrite or fix code: A function that parses the export.");
+    expect(text).toContain("- My own rule\n- Tone: Plain and direct");
+    await page.locator("#pb-reset").click();
+    await expect(page.locator("#pb-task")).toHaveValue("");
+    await expect(page.locator("#pb-success")).toHaveValue("");
   });
 
   test("the evidence checklist: a pasted answer is ready at once, its figures and absolutes are listed, and a reset empties it", async ({ page, go, watch }) => {
