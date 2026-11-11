@@ -10,7 +10,7 @@ section.categories-page.directory-page
           summary
             span "All Tools"
             span.section-switcher__now "All Tools overview"
-            span.section-switcher__count "69"
+            span.section-switcher__count "75"
           p.section-switcher__overview
             a [aria-current="page" href="{ROOT}tools.html"] "All Tools overview"
           button.section-rail__hide [aria-controls="section-rail" aria-expanded="true" type="button"] "Hide tools"
@@ -199,6 +199,25 @@ section.categories-page.directory-page
                   a [href="{ROOT}tools/excel-practice-lab/"] "Excel Practice Lab"
                 li
                   a [href="{ROOT}tools/power-bi-practice-lab/"] "Power BI Practice Lab"
+            li.section-switcher__group [data-open="false"]
+              button.section-switcher__toggle [aria-controls="section-rail-group-6" aria-expanded="false" type="button"]
+                span "AI Tools"
+                span.section-switcher__group-count [aria-hidden="true"] "6"
+              ul#section-rail-group-6
+                li
+                  a.section-switcher__section [data-name="AI Tools" href="{ROOT}ai-tools.html"] "AI Tools overview"
+                li
+                  a [href="{ROOT}tools/prompt-builder/"] "AI Prompt Builder"
+                li
+                  a [href="{ROOT}tools/bug-report-prompt/"] "Bug Report to Debugging Prompt"
+                li
+                  a [href="{ROOT}tools/context-pack-builder/"] "Project Context Pack Builder"
+                li
+                  a [href="{ROOT}tools/ai-answer-checklist/"] "AI Answer Evidence Checklist"
+                li
+                  a [href="{ROOT}tools/ai-answer-compare/"] "Compare Two AI Answers"
+                li
+                  a [href="{ROOT}tools/meeting-notes-action-plan/"] "Meeting Notes to Action Plan"
       button.section-rail__backdrop [aria-hidden="true" type="button"]
       button.section-rail__show [aria-controls="section-rail" aria-expanded="false" type="button"] "Show All Tools"
       div.ecosystem-main
@@ -549,3 +568,35 @@ section.categories-page.directory-page
                 p.directory-group__text "Learn the path from raw data to a report: thirteen lessons, forty-three exercises and a sa…"
             p.directory-section__more
               a [href="{ROOT}practice-labs.html"] "Practice Labs: exercises and flashcards →"
+          section.directory-section [aria-labelledby="directory-ai-tools-heading"]
+            div.directory-section__header
+              span.directory-section__label "Section"
+              h2#directory-ai-tools-heading.directory-section__title
+                a [href="{ROOT}ai-tools.html"] "AI Tools"
+              p.directory-section__text "Browser-built briefs for ChatGPT, Claude, Gemini and other assistants: a clear prompt from…"
+                span.directory-section__count "6 tools"
+            div.directory-groups
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/prompt-builder/"] "AI Prompt Builder"
+                p.directory-group__text "Turn a rough idea into a complete prompt for ChatGPT, Claude, Gemini or any assistant: the…"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/bug-report-prompt/"] "Bug Report to Debugging Prompt"
+                p.directory-group__text "Turn what you saw, what you expected and how to reproduce it into a debugging task for an …"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/context-pack-builder/"] "Project Context Pack Builder"
+                p.directory-group__text "Write once what an AI assistant needs to know about your project: purpose, stack, key file…"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/ai-answer-checklist/"] "AI Answer Evidence Checklist"
+                p.directory-group__text "Paste an answer from ChatGPT, Claude or Gemini and get a checklist of what in it needs che…"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/ai-answer-compare/"] "Compare Two AI Answers"
+                p.directory-group__text "Paste two answers to the same question, from ChatGPT, Claude, Copilot or two attempts, and…"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/meeting-notes-action-plan/"] "Meeting Notes to Action Plan"
+                p.directory-group__text "Paste rough meeting notes and get the decisions, the actions with owners and due dates (an…"

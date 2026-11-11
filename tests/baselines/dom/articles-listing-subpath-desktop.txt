@@ -26,6 +26,7 @@ div#articles-page
       button.article-filter [data-category="health" type="button"] "Health"
       button.article-filter [data-category="math" type="button"] "Math"
       button.article-filter [data-category="converter" type="button"] "Converter"
+      button.article-filter [data-category="ai" type="button"] "AI"
     div.articles-layout
       section.articles-feed
         div#articles-list.articles-list
@@ -118,6 +119,7 @@ div#articles-page
           button.pagination-button [data-page="6" type="button"] "6"
           button.pagination-button [data-page="7" type="button"] "7"
           button.pagination-button [data-page="8" type="button"] "8"
+          button.pagination-button [data-page="9" type="button"] "9"
           button.pagination-next [data-page="next" type="button"] "Next"
             span [aria-hidden="true"] "→"
       aside.articles-sidebar

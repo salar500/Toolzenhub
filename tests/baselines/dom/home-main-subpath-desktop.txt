@@ -74,6 +74,13 @@ main#app
               h3 "Practice Labs"
               p "Hands-on exercises and flashcards for JSON, cron and software testing"
               span.category-card__count "8 tools"
+          a.category-card [href="{ROOT}ai-tools.html"]
+            div.category-card__icon.category-card__icon--ai-tools
+              svg [aria-hidden="true"]
+            div.category-card__content
+              h3 "AI Tools"
+              p "Prompt, debugging-task and context-pack builders for ChatGPT, Claude and Gemini"
+              span.category-card__count "6 tools"
   section#popular-calculators.section
     section.popular-section
       div.container
