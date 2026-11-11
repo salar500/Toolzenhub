@@ -224,9 +224,55 @@ describe("the claim engine and the evidence checklist", () => {
   });
 });
 
+describe("the comparison engine and Compare Two AI Answers", () => {
+  let cmp, tool;
+  before(async () => {
+    cmp = await import("../../assets/js/tools/ai-tools/common/compare-engine.js");
+    tool = await import("../../assets/js/tools/ai-answer-compare/index.js");
+  });
+
+  test("tokens and similarity: content words, light stemming, stop words dropped; reworded sentences match, unrelated ones do not", () => {
+    assert.deepEqual([...cmp.tokens("The deposits are insured up to ₹5 lakh.")].sort(), ["deposit", "insur", "lakh"]);
+    assert.ok(cmp.similarity("FD rates are around 7.5% for 5 years.", "FD rates are currently about 7% for 5 years.") >= 0.5);
+    assert.ok(cmp.similarity("A liquid fund suits money needed within a year.", "The interest is taxed at your slab rate.") < 0.5);
+  });
+
+  test("conflict: different figures, or one side negated", () => {
+    assert.equal(cmp.conflict("FD rates are around 7.5% for 5 years.", "FD rates are around 7% for 5 years."), "different figures");
+    assert.equal(cmp.conflict("Returns are guaranteed.", "Returns are not guaranteed."), "one says the opposite of the other");
+    assert.equal(cmp.conflict("Deposits up to ₹5 lakh are insured.", "Deposits up to ₹5 lakh per bank are insured by DICGC."), null);
+    // a caveat added to the same statement is an addition, not a contradiction
+    assert.equal(cmp.conflict("Debt funds returned about 6.5% a year.", "Debt funds returned about 6.5% a year, but a fund can lose value in a bad year; it is not guaranteed."), null);
+    // two unrelated sentences that share one word do not match
+    assert.equal(cmp.compare("A liquid fund suits money needed within a year.", "The interest is taxed every year.").agree.length, 0);
+    assert.deepEqual(cmp.numbers("₹5,00,000 at 7.5% over 5 years"), [500000, 7.5, 5]);
+  });
+
+  test("compare: the example's agreements, disagreements and omissions land where they should", () => {
+    const r = cmp.compare(tool.CONFIG.example.values.answerA, tool.CONFIG.example.values.answerB);
+    assert.ok(r.agree.some((d) => d.a.includes("insured")), "the insurance sentence is shared");
+    assert.ok(r.disagree.some((d) => d.why === "different figures" && d.a.includes("7.5%")), "the FD rate differs");
+    assert.ok(r.onlyB.some((s) => s.includes("taxed")), "only B mentions tax");
+    assert.ok(r.onlyA.some((s) => s.includes("liquid fund")), "only A mentions a liquid fund");
+    assert.ok(r.profileA.recommendations.length >= 1 && r.profileB.recommendations.length >= 1);
+    assert.equal(r.profileB.limitations, true);
+  });
+
+  test("the comparison: ready from the example, every section present, the focus sets the first line, no leaked value", () => {
+    const brief = tool.build(tool.CONFIG.example.values);
+    assert.equal(brief.state, "ok");
+    for (const h of ["# Two answers compared", "## The question", "## Before you choose", "## In one look", "## Where they disagree", "## Where they agree", "## Only in Answer A", "## Only in Answer B", "## What each recommends", "## What to do next", "## About this comparison"]) assert.ok(brief.markdown.includes(h), h);
+    assert.ok(brief.markdown.includes("You are choosing between recommendations"));
+    assert.ok(brief.markdown.includes("1. different figures.\n   - Answer A: \"FD rates are currently around 7.5%"));
+    assert.ok(!/undefined|\[object|NaN/.test(brief.markdown));
+    const same = tool.build({ question: "", focus: "facts", answerA: "The sky is blue on a clear day.", answerB: "The sky is blue on a clear day." });
+    assert.ok(same.markdown.includes("No matched statement contradicts the other") && same.markdown.includes("Nothing that the other answer does not also say."));
+  });
+});
+
 describe("catalog integration", () => {
-  test("four published tools in the AI Tools section at /tools/<id>/, related only to each other", () => {
-    const ids = ["prompt-builder", "bug-report-prompt", "context-pack-builder", "ai-answer-checklist"];
+  test("five published tools in the AI Tools section at /tools/<id>/, related only to each other", () => {
+    const ids = ["prompt-builder", "bug-report-prompt", "context-pack-builder", "ai-answer-checklist", "ai-answer-compare"];
     assert.deepEqual(tax.getToolsBySection("ai-tools").map((t) => t.id), ids);
     for (const id of ids) {
       const t = tools.getToolById(id);

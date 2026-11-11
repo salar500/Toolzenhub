@@ -2618,6 +2618,47 @@ const catalog = [
     },
 
     {
+        id: "ai-answer-compare",
+        status: "published",
+        loader: () =>
+            import("../tools/ai-answer-compare/index.js"),
+        sectionId: "ai-tools",
+        toolType: "utility",
+        icon: "⇆",
+        title: "Compare Two AI Answers",
+        description:
+            "Paste two answers to the same question, from ChatGPT, Claude, Copilot or two attempts, and see where they agree, where they contradict each other (different figures, one negating the other), what only one says, what each recommends and which carries more evidence. Compared in your browser.",
+        relatedTools: ["ai-answer-checklist", "prompt-builder"],
+        aliases: [
+            "compare ai answers",
+            "compare two ai responses",
+            "chatgpt vs claude answer",
+            "which ai answer is better",
+            "ai answer comparison",
+            "compare chatgpt answers",
+            "ai response diff",
+            "contradictions between ai answers"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            download: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Compare Two AI Answers: Agreements and Contradictions | ToolZen Hub",
+            description:
+                "Paste two AI answers to the same question and see where they agree, where they contradict each other, what only one of them says, what each recommends and which carries more checkable evidence. Runs in your browser; nothing is sent."
+        }
+    },
+
+    {
         id: "list-comparer",
         status: "published",
         loader: () =>

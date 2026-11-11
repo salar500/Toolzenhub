@@ -61,7 +61,7 @@ test.describe("AI Tools", () => {
     await page.locator("#pb-output").fill("my own text");
     await expect(page.locator("#pb-output")).toHaveValue("my own text");
     const related = page.locator(".related-section a[href*='/tools/'], .related-calculators a[href*='/tools/']");
-    for (const href of await related.evaluateAll((as) => as.map((a) => a.getAttribute("href")))) expect(href).toMatch(/\/tools\/(bug-report-prompt|context-pack-builder|ai-answer-checklist)\/$/);
+    for (const href of await related.evaluateAll((as) => as.map((a) => a.getAttribute("href")))) expect(href).toMatch(/\/tools\/(bug-report-prompt|context-pack-builder|ai-answer-checklist|ai-answer-compare)\/$/);
   });
 
   test("the section page lists the three tools, the home page has the seventh card, and All Tools knows the section @portable", async ({ page, go, siteRoot }) => {
@@ -72,7 +72,7 @@ test.describe("AI Tools", () => {
     await go("");
     const card = page.locator("#categories .category-card", { hasText: "AI Tools" });
     await expect(card).toHaveAttribute("href", `${siteRoot}ai-tools.html`);
-    await expect(card).toContainText("4 tools");
+    await expect(card).toContainText("5 tools");
     await go("tools.html");
     await expect(page.locator(`#tools-directory a[href="${siteRoot}tools/context-pack-builder/"]`).first()).toBeVisible(); // the directory's own listing, not the hidden rail
   });
@@ -108,6 +108,22 @@ test.describe("AI Tools", () => {
     await expect(page.locator("#ac-check")).toHaveAttribute("data-state", "empty");
     expect(watch.external).toEqual([]);
     expect(watch.pageErrors).toEqual([]);
+  });
+
+  test("compare two answers: one answer is incomplete, two make a comparison with the disagreement and the omissions, nothing leaves the site", async ({ page, go, watch }) => {
+    await go("tools/ai-answer-compare/");
+    await page.locator("#cmp-form[data-ready]").waitFor();
+    await page.locator("#cmp-answerA").fill("FD rates are around 7.5% for 5 years. A liquid fund suits money needed within a year.");
+    await expect(page.locator("#cmp-check")).toHaveAttribute("data-state", "incomplete");
+    await page.locator("#cmp-answerB").fill("FD rates are around 7% for 5 years. The interest is taxed every year.");
+    await expect(page.locator("#cmp-check")).toHaveAttribute("data-state", "ok");
+    const text = await page.locator("#cmp-output").inputValue();
+    expect(text).toContain("1. different figures.");
+    expect(text).toContain("## Only in Answer A\n\n- \"A liquid fund");
+    expect(text).toContain("## Only in Answer B\n\n- \"The interest is taxed");
+    expect(watch.external).toEqual([]);
+    expect(watch.pageErrors).toEqual([]);
+    await expectNoHorizontalOverflow(page);
   });
 
   test("on a phone the form is one column, the brief is readable and nothing overflows", async ({ page, go }) => {
