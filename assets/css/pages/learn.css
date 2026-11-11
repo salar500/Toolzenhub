@@ -418,7 +418,7 @@
 
     margin-bottom: 2px;
 
-    font-size: 12px;
+    font-size: var(--font-xs);
     font-weight: 600;
     color: var(--ink-muted);
 

@@ -175,7 +175,7 @@
         "Liberation Mono",
         monospace;
 
-    --font-xs: .75rem;
+    --font-xs: .8125rem; /* 13 px: helper text, descriptions and meta (12 px was too small on phones; owner brief 2026-11-11) */
     --font-sm: .875rem;
     --font-base: 1rem;
     --font-lg: 1.125rem;

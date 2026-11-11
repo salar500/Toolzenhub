@@ -379,7 +379,7 @@
 .directory-result__meta {
     color: var(--color-brand-green);
 
-    font-size: 12px;
+    font-size: var(--font-xs);
     font-weight: 750;
     letter-spacing: .06em;
     text-transform: uppercase;

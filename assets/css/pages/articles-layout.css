@@ -141,7 +141,7 @@
     margin: 7px 0 0;
     overflow: hidden;
     color: var(--articles-body);
-    font-size: 12px;
+    font-size: var(--font-xs);
     line-height: 1.55;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -176,7 +176,7 @@
     align-items: center;
     gap: 4px;
     color: var(--articles-muted);
-    font-size: 12px;
+    font-size: var(--font-xs);
 }
 
 

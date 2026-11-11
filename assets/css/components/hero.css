@@ -596,7 +596,7 @@
     .hero__search input {
         padding: 0 7px;
 
-        font-size: 12px;
+        font-size: var(--font-xs);
     }
 
 
@@ -694,7 +694,7 @@
     .hero__search input {
         padding: 0 6px;
 
-        font-size: 12px;
+        font-size: var(--font-xs);
     }
 
 

@@ -275,7 +275,7 @@
 
     color: var(--ink-muted);
 
-    font-size: 12px;
+    font-size: var(--font-xs);
 
     line-height: 1.55;
 }
@@ -369,7 +369,7 @@
 
     .calculator-card__description {
 
-        font-size: 12px;
+        font-size: var(--font-xs);
     }
 
 }

@@ -307,8 +307,12 @@ A script measured 17 page types (home, All Tools, the AI section, two calculator
 - Measured at 390 px across all `/tools/` pages: six time and schedule tools have a result section one to three screens down (Date Calculator 1,233 px, Time Duration 1,107, Business Days 1,610, Shift Planner 1,628, Date Difference 1,742, Meeting Planner 2,523) and had no link. `tool-mount.js` now adds the shared link for any tool with such a section, not only the calculators; a brief tool's own labelled link comes first and the shared call then does nothing.
 - Verification: the probe shows the link on all six; the six time-tool specs pass on mobile (91 of 91); the two mobile visual baselines that include the page top (Date Difference, Date Calculator) were reviewed by eye (the link above the form, everything else shifted down) and re-recorded; both builds.
 
+### Batch 10: helper text from 12 to 13 px, one isolated batch
+
+- The `--font-xs` token is 0.8125rem (13 px), and 41 rules in the 15 shared stylesheets that hard-coded 12 px for readable text now use the token: form hints, errors and slider labels, result descriptions, summaries and metric labels, card and listing descriptions, "read time" and meta lines, the article filter buttons, pagination, the articles sidebar's items, the search inputs that were 12 px, "View all" links, the lesson pager's labels, the section switcher's hide button. Uppercase eyebrows, counts, badges and chips stay at 12 px by design (they are labels, not reading text), and the per-calculator stylesheets were not touched.
+- Review: the emi, articles and home pages at 390 px compared against their previous screenshots; the text is larger, nothing shifts out of place, no line wraps badly. Visual baselines re-recorded for the three projects after that review (38 of 39 mobile images changed, the header subtitle being on every page).
+
 ### Next in the queue (assessed, not started)
-- **Helper-text size** (`--font-xs` 12 → 13 px) as one reviewed batch with its visual baselines.
 - **(Done in Batch 9)** Jump link for the long time-tool forms.
 - **Guided controls in Developer, PDF and Image tools** (presets, examples, fewer free text fields), tool by tool.
 - **The remaining AI articles** follow their tools (above). The category work is done.

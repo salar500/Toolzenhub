@@ -228,7 +228,7 @@
 
     color: var(--ink-muted);
 
-    font-size: 12px;
+    font-size: var(--font-xs);
 
     line-height: 1.45;
 }
@@ -337,7 +337,7 @@
 
     color: var(--ink-muted);
 
-    font-size: 12px;
+    font-size: var(--font-xs);
 
     line-height: 1.4;
 }
@@ -394,7 +394,7 @@
 
     font-family: inherit;
 
-    font-size: 12px;
+    font-size: var(--font-xs);
 }
 
 
@@ -541,7 +541,7 @@
 
 
     .category-page-card__description {
-        font-size: 12px;
+        font-size: var(--font-xs);
     }
 
 

@@ -117,7 +117,7 @@
     background: var(--articles-white);
     color: var(--ink-muted);
     font: inherit;
-    font-size: 12px;
+    font-size: var(--font-xs);
     font-weight: 700;
     cursor: pointer;
     transition:
@@ -201,7 +201,7 @@
     background: var(--articles-white);
     color: var(--ink-muted);
     font: inherit;
-    font-size: 12px;
+    font-size: var(--font-xs);
     font-weight: 700;
     cursor: pointer;
 }

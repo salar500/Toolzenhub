@@ -178,7 +178,7 @@
 
     color: var(--color-ink-muted);
 
-    font-size: 12px;
+    font-size: var(--font-xs);
 
     line-height: 1.5;
 }
@@ -209,7 +209,7 @@
 .article-card__read {
     color: var(--accent);
 
-    font-size: 12px;
+    font-size: var(--font-xs);
 
     font-weight: 600;
 
@@ -333,7 +333,7 @@
 
 
     .article-card__description {
-        font-size: 12px;
+        font-size: var(--font-xs);
     }
 
 }
