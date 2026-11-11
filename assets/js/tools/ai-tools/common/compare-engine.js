@@ -162,7 +162,8 @@ const FOCUS = {
     completeness: "You are checking which answer is more complete. The \"only in\" sections are the heart of this: give each assistant the points it missed and ask it to respond."
 };
 
-const SIDE = (label, p) => `| ${label} | ${p.words} | ${p.sentences} | ${p.checkable} | ${p.sources} | ${p.absolutes} | ${p.hedges} | ${p.limitations ? "yes" : "no"} | ${p.assumptions ? "yes" : "no"} |`;
+/* one line per side (a table wraps badly in a plain text box and in a chat) */
+const SIDE = (label, p) => `- ${label}: ${p.words} words, ${p.sentences} sentences, ${p.checkable} statements to check, ${p.sources} source${p.sources === 1 ? "" : "s"} named, ${p.absolutes} absolute and ${p.hedges} hedged; mentions a limitation: ${p.limitations ? "yes" : "no"}; states an assumption: ${p.assumptions ? "yes" : "no"}.`;
 const quote = (s) => `"${s}"`;
 const cut = (list) => list.slice(0, MAX_LIST);
 
@@ -176,7 +177,7 @@ export function comparison({ answerA, answerB, question, focus, labelA = "Answer
     parts.push("# Two answers compared");
     parts.push(question ? `## The question\n\n${tidy(question)}` : "");
     parts.push(`## Before you choose\n\n${FOCUS[focus] ?? FOCUS.completeness}`);
-    parts.push(`## In one look\n\n| | Words | Sentences | Statements to check | Sources named | Absolute wording | Hedged wording | Mentions a limitation | States an assumption |\n|---|---|---|---|---|---|---|---|---|\n${SIDE(labelA, r.profileA)}\n${SIDE(labelB, r.profileB)}`);
+    parts.push(`## In one look\n\n${SIDE(labelA, r.profileA)}\n${SIDE(labelB, r.profileB)}`);
 
     parts.push(`## Where they disagree\n\n${r.disagree.length
         ? cut(r.disagree).map((d, i) => `${i + 1}. ${d.why}.\n   - ${labelA}: ${quote(d.a)}\n   - ${labelB}: ${quote(d.b)}`).join("\n")
