@@ -379,6 +379,36 @@
     font-weight: 600;
 }
 
+/* Quick counts: one tap instead of typing a number */
+.ug-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.ug-chip {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid var(--line-control);
+    border-radius: 10px;
+    background: #ffffff;
+    color: var(--color-ink);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ug-chip:hover {
+    background: var(--surface-sunken);
+}
+
+.ug-chip:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
 .ug-item__text {
     min-width: 0;
     overflow-wrap: anywhere;

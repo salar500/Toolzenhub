@@ -65,6 +65,16 @@ const DEBOUNCE_MS = 300;
 const countChars = (n) =>
     `${n.toLocaleString("en-US")} character${n === 1 ? "" : "s"}`;
 
+/* one click instead of typing a query: the usual shapes, each valid RFC 9535 and meaningful on the example document */
+const QUERY_PRESETS = [
+    "$.store.book[*].author",
+    "$..price",
+    "$.store.book[0]",
+    "$..book[?@.price<10]",
+    "$.store.book[-1:]",
+    "$..book[?@.isbn].title"
+];
+
 const EXAMPLE_RESULT = evaluateQuery(EXAMPLE_DOCUMENT, EXAMPLE_QUERY);
 
 const EXAMPLE_PATHS = EXAMPLE_RESULT.nodes
@@ -195,6 +205,11 @@ export function markup() {
                             <p id="jp-query-status" class="jp-side-status" data-state="empty">Empty.</p>
 
                             <pre id="jp-query-context" class="jp-context" hidden></pre>
+
+                            <p id="jp-chips-label" class="jp-chips-label">Common queries (on the example document when yours is empty)</p>
+                            <div class="jp-chips" role="group" aria-labelledby="jp-chips-label">
+                                ${QUERY_PRESETS.map((q) => `<button type="button" class="jp-chip" data-query="${q.replace(/"/g, "&quot;")}">${q.replace(/</g, "&lt;")}</button>`).join("")}
+                            </div>
 
                         </div>
 
@@ -734,6 +749,17 @@ export function init() {
         query.value = EXAMPLE_QUERY;
         run();
     });
+
+    /* a preset query runs at once; an empty document is filled with the example so the click shows something */
+    for (const chip of document.querySelectorAll(".jp-chip")) {
+        chip.addEventListener("click", () => {
+            if (!doc.value.trim()) {
+                doc.value = EXAMPLE_DOCUMENT;
+            }
+            query.value = chip.dataset.query;
+            run();
+        });
+    }
 
     $("reset").addEventListener("click", () => {
         clearTimeout(debounce);

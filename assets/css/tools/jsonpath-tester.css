@@ -117,6 +117,43 @@
     min-height: 48px;
 }
 
+/* Common queries: one click instead of typing (the cron explainer's chip pattern) */
+.jp-chips-label {
+    margin: 10px 0 6px;
+    color: var(--color-gray-700);
+    font-size: var(--font-xs);
+    font-weight: 700;
+}
+
+.jp-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.jp-chip {
+    min-width: 0;
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid var(--line-control);
+    border-radius: 10px;
+    background: #ffffff;
+    color: var(--color-ink);
+    font-family: ui-monospace, "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 13px;
+    cursor: pointer;
+    overflow-wrap: anywhere;
+}
+
+.jp-chip:hover {
+    background: var(--surface-sunken);
+}
+
+.jp-chip:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
 .jp-output {
     max-height: 260px;
     margin: 0 0 10px;

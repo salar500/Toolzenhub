@@ -45,6 +45,16 @@ test.describe("UUID Generator", () => {
     expect(again.some((u) => list.includes(u))).toBe(false);
   });
 
+  test("a quick count chip sets the number and generates at once, with the chosen version", async ({ page, go }) => {
+    await open(page, go);
+    await page.locator(".ug-chip", { hasText: /^10$/ }).click();
+    await expect(count(page)).toHaveValue("10");
+    expect(await items(page).allInnerTexts()).toHaveLength(10);
+    await expect(status(page)).toHaveText("10 version 4 (random) UUIDs generated.");
+    await page.locator(".ug-chip", { hasText: /^1$/ }).click();
+    expect(await items(page).allInnerTexts()).toHaveLength(1);
+  });
+
   test("version 7 UUIDs carry the current time and sort in the order made", async ({ page, go }) => {
     await open(page, go);
     await page.getByLabel(/Version 7/).check();
@@ -169,7 +179,7 @@ test.describe("UUID Generator", () => {
     await page.keyboard.press("Tab");
     await expect(count(page)).toBeFocused();
     expect(await outline(count(page))).toBeGreaterThanOrEqual(2);
-    for (const target of [page.locator("#ug-upper"), page.locator("#ug-hyphens"), page.locator("#ug-braces"), btn(page, "Generate"), btn(page, "Copy all"), btn(page, "Reset")]) {
+    for (const target of [...[1, 5, 10, 25, 100].map((n) => page.locator(".ug-chip", { hasText: new RegExp(`^${n}$`) })), page.locator("#ug-upper"), page.locator("#ug-hyphens"), page.locator("#ug-braces"), btn(page, "Generate"), btn(page, "Copy all"), btn(page, "Reset")]) { // the five quick-count chips sit between the count and the format options
       await page.keyboard.press("Tab");
       await expect(target).toBeFocused();
       expect(await outline(target)).toBeGreaterThanOrEqual(2);

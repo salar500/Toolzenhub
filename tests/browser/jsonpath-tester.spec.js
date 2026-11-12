@@ -69,6 +69,18 @@ test.describe("JSONPath Tester", () => {
     ]);
   });
 
+  test("a common-query chip fills an empty document with the example and evaluates; with a document of the visitor's own, it keeps it", async ({ page, go }) => {
+    await open(page, go);
+    await page.locator(".jp-chip", { hasText: "$.store.book[*].author" }).click();
+    await expect(query(page)).toHaveValue("$.store.book[*].author");
+    await expect(status(page)).toHaveText("4 nodes matched.");
+    expect((await tableRows(page)).map((r) => r[1])).toEqual(['"Nigel Rees"', '"Evelyn Waugh"', '"Herman Melville"', '"J. R. R. Tolkien"']);
+    await page.locator("#jp-document").fill('{"store": {"book": [{"author": "Only Me", "price": 1}]}}');
+    await page.locator(".jp-chip", { hasText: "$..price" }).click();
+    await expect(status(page)).toHaveText("1 node matched.");
+    expect((await tableRows(page)).map((r) => r[1])).toEqual(["1"]);
+  });
+
   test("evaluates as you type after a short pause; Enter runs immediately; one node is singular", async ({ page, go }) => {
     await open(page, go);
     await doc(page).fill(DOC);
