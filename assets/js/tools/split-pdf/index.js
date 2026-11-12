@@ -39,6 +39,7 @@ import {
     readBytes,
     createMessenger,
     createUrlStore,
+    setPresetChips,
     introHtml,
     chooseFileHtml,
     actionsHtml,
@@ -162,6 +163,8 @@ export function markup() {
                                         aria-describedby="sp-plan-note"
                                     >
 
+                                    <div id="sp-every-chips" class="pt-chips" hidden></div>
+
                                 </div>
 
                                 <div
@@ -183,6 +186,8 @@ export function markup() {
                                         placeholder="for example 1-3, 4-4, 5-12"
                                         aria-describedby="sp-plan-note"
                                     >
+
+                                    <div id="sp-range-chips" class="pt-chips" hidden></div>
 
                                 </div>
 
@@ -424,6 +429,28 @@ export function init() {
 
     }
 
+    /* quick picks that fit the chosen PDF: sizes smaller than the page count, and ready-made ranges */
+    function showChips() {
+
+        const n = state.pageCount;
+        const sizes = [1, 2, 5, 10].filter((size) => size < n).map((size) => ({ label: String(size), value: String(size) }));
+        const half = Math.ceil(n / 2);
+
+        if (n > 2 && !sizes.some((s) => s.value === String(half))) {
+            sizes.push({ label: "Half", value: String(half) });
+        }
+
+        const ranges = n < 2 ? [] : [
+            { label: "Two halves", value: `1-${half}, ${half + 1}-${n}` },
+            { label: "First page, then the rest", value: `1-1, 2-${n}` },
+            { label: "The rest, then last page", value: `1-${n - 1}, ${n}-${n}` }
+        ];
+
+        setPresetChips($("#sp-every-chips"), everyInput, "Quick picks:", sizes);
+        setPresetChips($("#sp-range-chips"), rangesInput, "Quick picks:", ranges);
+
+    }
+
     /* ---------- state of the page ---------- */
 
     function busy() {
@@ -502,6 +529,7 @@ export function init() {
         state.size = file.size;
         state.pageCount = info.pageCount;
 
+        showChips();
         refresh();
 
         say(`${file.name} added: ${info.pageCount} ${info.pageCount === 1 ? "page" : "pages"}.`);

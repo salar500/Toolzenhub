@@ -319,6 +319,14 @@ A script measured 17 page types (home, All Tools, the AI section, two calculator
 - **UUID Generator:** quick-count chips (1, 5, 10, 25, 100) that generate at once with the chosen version and format; typing a count still works.
 - Verification: `jsonpath-tester.spec` 23 and `uuid-generator.spec` 15 on desktop (new tests for both chips; the keyboard-order test now walks the chips), both specs on mobile (38), both builds, static checks.
 
+### Batch 12: PDF Tools, quick picks for page selection
+
+- **Audit first:** after a file is chosen, Split PDF has a mode choice with a free-text "pages in each part" and a free-text range list; Extract, Reorder and Rotate has a free-text "pages to keep", a select for the turn and a free-text "pages to turn". Merge PDF and PDF Marks already use lists, selects and previews (not changed).
+- **Shared helper** `setPresetChips` (pdf-shared/pdf-page.js) and `.pt-chip` styles (36 px, 44 px on coarse pointers): a chip writes its value into the box and fires `input`, so the existing validation and plan preview run unchanged.
+- **Split PDF:** sizes that fit the file (1, 2, 5, plus "Half"); ranges "Two halves", "First page, then the rest", "The rest, then last page".
+- **Extract, Reorder and Rotate:** keep list "All pages", "Odd pages", "Even pages", "Reverse order", "Without the first page", "Without the last page"; pages to turn "First page", "Last page", "Odd pages", "Even pages", "All pages". Chips are built from the chosen file's page count and appear only with a file.
+- Verification: `pdf-tools.spec` 42 of 42 on desktop and on mobile (two new tests); preview build. Rule change: none.
+
 ### Next in the queue (assessed, not started)
 - **(Done in Batch 9)** Jump link for the long time-tool forms.
 - **Guided controls in PDF and Image tools** (presets, page selection, fewer free text fields), tool by tool; their controls appear after a file is chosen, so the audit loads the test fixtures first.

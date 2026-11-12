@@ -524,6 +524,68 @@
 
 }
 
+/* quick picks under a text box */
+
+.pt-chips {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 8px;
+
+}
+
+.pt-chips[hidden] {
+    display: none;
+}
+
+.pt-chips__label {
+
+    color: var(--ink-muted);
+    font-size: var(--font-xs);
+
+}
+
+.pt-chip {
+
+    min-height: 36px;
+    padding: 4px 12px;
+
+    border: 1px solid var(--line-control);
+    border-radius: 999px;
+
+    background: #ffffff;
+
+    color: var(--color-ink);
+
+    font: inherit;
+    font-size: var(--font-xs);
+
+    cursor: pointer;
+
+}
+
+.pt-chip:hover {
+    border-color: var(--color-action-green);
+}
+
+.pt-chip:focus-visible {
+
+    outline: 3px solid var(--color-action-green);
+    outline-offset: 2px;
+
+}
+
+@media (pointer: coarse) {
+
+    .pt-chip {
+        min-height: 44px;
+    }
+
+}
+
 .pt-fieldset {
 
     min-width: 0;

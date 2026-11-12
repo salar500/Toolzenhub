@@ -39,6 +39,7 @@ import {
     readBytes,
     createMessenger,
     createUrlStore,
+    setPresetChips,
     introHtml,
     chooseFileHtml,
     actionsHtml,
@@ -137,6 +138,8 @@ export function markup() {
                                         aria-describedby="pg-keep-hint pg-plan-note"
                                     >
 
+                                    <div id="pg-keep-chips" class="pt-chips" hidden></div>
+
                                     <p
                                         id="pg-keep-hint"
                                         class="pt-note"
@@ -207,6 +210,8 @@ export function markup() {
                                         placeholder="for example 2, 4-6"
                                         aria-describedby="pg-plan-note"
                                     >
+
+                                    <div id="pg-some-chips" class="pt-chips" hidden></div>
 
                                 </div>
 
@@ -468,6 +473,34 @@ export function init() {
 
     }
 
+    /* quick picks that fit the chosen PDF */
+    function showChips() {
+
+        const n = state.pageCount;
+        const list = (from, step) => Array.from({ length: Math.ceil((n - from + 1) / step) }, (_, i) => from + i * step).join(", ");
+
+        const keep = n < 2 ? [] : [
+            { label: "All pages", value: "all" },
+            { label: "Odd pages", value: list(1, 2) },
+            { label: "Even pages", value: list(2, 2) },
+            { label: "Reverse order", value: `${n}-1` },
+            { label: "Without the first page", value: `2-${n}` },
+            { label: "Without the last page", value: `1-${n - 1}` }
+        ];
+
+        const some = n < 2 ? [] : [
+            { label: "First page", value: "1" },
+            { label: "Last page", value: String(n) },
+            { label: "Odd pages", value: list(1, 2) },
+            { label: "Even pages", value: list(2, 2) },
+            { label: "All pages", value: `1-${n}` }
+        ];
+
+        setPresetChips($("#pg-keep-chips"), keepInput, "Quick picks:", keep);
+        setPresetChips($("#pg-some-chips"), someInput, "Quick picks:", some);
+
+    }
+
     function showFacts() {
 
         const shown = state.facts.slice(0, SHOWN_FACTS).map((fact, index) => {
@@ -578,6 +611,7 @@ export function init() {
 
         keepInput.value = "all";
 
+        showChips();
         showFacts();
         refresh();
 
