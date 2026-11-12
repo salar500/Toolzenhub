@@ -318,8 +318,8 @@
     background:
         linear-gradient(to right, var(--surface-card) 30%, transparent) left center / 32px 100% no-repeat local,
         linear-gradient(to left, var(--surface-card) 30%, transparent) right center / 32px 100% no-repeat local,
-        radial-gradient(farthest-side at 0 50%, rgba(28, 25, 23, 0.22), rgba(28, 25, 23, 0)) left center / 12px 100% no-repeat scroll,
-        radial-gradient(farthest-side at 100% 50%, rgba(28, 25, 23, 0.22), rgba(28, 25, 23, 0)) right center / 12px 100% no-repeat scroll;
+        radial-gradient(farthest-side at 0 50%, rgba(32, 44, 69, 0.22), rgba(32, 44, 69, 0)) left center / 12px 100% no-repeat scroll,
+        radial-gradient(farthest-side at 100% 50%, rgba(32, 44, 69, 0.22), rgba(32, 44, 69, 0)) right center / 12px 100% no-repeat scroll;
 }
 
 .calculator-results__table-wrapper:focus-visible {

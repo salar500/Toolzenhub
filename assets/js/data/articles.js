@@ -876,13 +876,13 @@ const catalog = [
             src:
                 "/assets/Images/articles/longer-tenure-bigger-loan-much-more-interest.png",
             alt:
-                "Five pairs of columns for tenures of 10 to 30 years: the loan that fits, in green, rises slowly while the total interest, in slate, rises much faster"
+                "Five pairs of columns for tenures of 10 to 30 years: the loan that fits, in violet, rises slowly while the total interest, in slate, rises much faster"
         },
         heroImage: {
             src:
                 "/assets/Images/articles/longer-tenure-bigger-loan-much-more-interest.png",
             alt:
-                "Five pairs of columns for tenures of 10 to 30 years: the loan that fits, in green, rises slowly while the total interest, in slate, rises much faster"
+                "Five pairs of columns for tenures of 10 to 30 years: the loan that fits, in violet, rises slowly while the total interest, in slate, rises much faster"
         },
         tools: ["home-loan"],
         related: [

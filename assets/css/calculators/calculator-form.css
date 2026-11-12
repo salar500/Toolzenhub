@@ -108,6 +108,21 @@
 }
 
 
+/* A textarea shares the field look but not the one-line height: three lines, so an example or a pasted line is not cut off */
+textarea.calculator-form__input {
+
+    height: auto;
+    min-height: 92px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    line-height: 1.45;
+
+    resize: vertical;
+}
+
+
 /* =========================================================
    INPUT FOCUS
 ========================================================= */
@@ -118,7 +133,7 @@
     border-color: var(--color-brand-green);
 
     box-shadow:
-        0 0 0 3px rgba(67, 56, 202, .10);
+        0 0 0 3px rgba(118, 86, 201, .10);
 }
 
 
@@ -449,7 +464,8 @@
 
         height: 44px;
 
-        font-size: 13px;
+        /* 16px: below this iOS Safari zooms the page when a field is focused */
+        font-size: 16px;
 
     }
 
@@ -524,7 +540,7 @@
 }
 
 .calculator-form__slider:focus-visible {
-    outline: 3px solid rgba(67, 56, 202, .35);
+    outline: 3px solid rgba(118, 86, 201, .35);
     outline-offset: 3px;
     border-radius: 6px;
 }

@@ -501,9 +501,9 @@ test.describe("Developer Tools in the site", () => {
     expect(await page.locator('link[rel="canonical"]').getAttribute("href")).toBe("https://toolzenhub.in/developer-tools.html");
   });
 
-  test("All Tools: Developer Tools has 6 tools; Time Tools is unchanged and holds no developer tool", async ({ page, go }) => {
+  test("All Tools: Developer Tools has 12 tools; Time Tools is unchanged and holds no developer tool", async ({ page, go }) => {
     await go("tools.html");
-    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools", "Practice Labs"]);
+    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools", "Practice Labs", "AI Tools"]);
     const dev = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Developer Tools")') });
     await expect(dev.locator(".directory-section__count")).toHaveText("12 tools");
     await expect(dev.locator('a[href$="tools/unix-timestamp-converter/"]')).toHaveCount(1);

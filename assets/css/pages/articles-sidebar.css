@@ -50,7 +50,7 @@
 .article-sidebar-search input:focus {
     border-color: var(--articles-green);
     box-shadow:
-        0 0 0 3px rgba(67, 56, 202, .10);
+        0 0 0 3px rgba(118, 86, 201, .10);
 }
 
 
