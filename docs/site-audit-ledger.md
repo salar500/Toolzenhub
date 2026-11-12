@@ -380,6 +380,12 @@ A script measured 17 page types (home, All Tools, the AI section, two calculator
 - **Dark theme audit** (script, 1280 and 390): article, AI Tools, SQL, Excel and Power BI labs, Home Loan, Photos to PDF, SQL learning path, World Clock. No unreadable text; the flagged "light background" elements are the intentional light action buttons of the dark theme; two secondary or disabled buttons measure 3.2:1 (disabled controls are exempt). Screenshots of the article (1280) and SQL lab (390) reviewed. Dark VISUAL BASELINES are not recorded (the visual projects capture light only).
 - Verification: articles/search/relationships/keyword-map unit green; articles.spec desktop 58/58 after the search-test fix (mobile 58/58 after the same fix); baselines re-recorded. NOT RUN: links crawl baseline, tablet.
 
+### Production package status (2026-11-12, built from a3b498d, NOT deployed)
+
+- `npm run build` (dist/, root paths) gives 677 pages and files; packaged by Python zipfile (forward-slash entries, .htaccess included) as toolzenhub-production-a3b498d.zip (1,297 files, 16.4 MB) in C:/Users/DELL/Documents/ToolZenHub-production-package/, outside the repository.
+- Verified: `npm run test:static` passed (inventory 672 live pages, 671 indexable; links, assets with exact case, SEO, both builds); build-output and static-checker unit tests green; the output holds no development host (only a code comment, the public report-an-issue link to the repository, and runtime base-path detection).
+- NOT verified in this batch: browser-run of the root-desktop project against the package, a full unit suite after the last change, tablet and dark visual baselines. Hostinger was not touched and nothing was uploaded; deployment needs the owner's explicit authorization.
+
 ### Next in the queue (assessed, not started)
 - **(Done in Batch 17)** AI articles in the Growth manifest.
 - **(Done in Batch 9)** Jump link for the long time-tool forms.
