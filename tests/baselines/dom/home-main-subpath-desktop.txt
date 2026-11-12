@@ -72,7 +72,7 @@ main#app
               svg [aria-hidden="true"]
             div.category-card__content
               h3 "Practice Labs"
-              p "Hands-on exercises and flashcards for JSON, cron and software testing"
+              p "Paths, exercises and flashcards for SQL, Excel, Python and testing"
               span.category-card__count "8 tools"
           a.category-card [href="{ROOT}ai-tools.html"]
             div.category-card__icon.category-card__icon--ai-tools

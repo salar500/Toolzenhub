@@ -139,7 +139,7 @@ export const sections = [
         description:
             "Hands-on exercises and flashcards that check your answer and explain it.",
         summary:
-            "Hands-on exercises and flashcards for JSON, cron and software testing",
+            "Paths, exercises and flashcards for SQL, Excel, Python and testing",
         icon: "🧪",
         landing: "practiceLabs",
         pathPrefix: "tools"
