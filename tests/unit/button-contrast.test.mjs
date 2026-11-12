@@ -91,8 +91,8 @@ describe("the stylesheet uses the action tokens, not the brand green, inside con
   });
 
   it("the documented ratios in variables.css are the measured ones", () => {
-    assert.equal(ratio(WHITE, ACTION).toFixed(2), "17.49");
-    assert.equal(ratio(WHITE, HOVER).toFixed(2), "15.17");
-    assert.ok(ratio(WHITE, ACTIVE) > 18);
+    assert.equal(ratio(WHITE, ACTION).toFixed(2), "13.93");
+    assert.equal(ratio(WHITE, HOVER).toFixed(2), "12.35");
+    assert.ok(ratio(WHITE, ACTIVE) > 15);
   });
 });

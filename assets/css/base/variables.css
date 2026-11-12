@@ -62,7 +62,7 @@
 
     /* Primary action: near-black fill, the page's one strong colour is the accent */
     --action: #202c45;
-    --action-hover: #2d3d63;
+    --action-hover: #25335a;
     --action-active: #141b2d;
     --action-soft: #edeff4;
     --action-pressed: #e1e5ec;
