@@ -416,7 +416,8 @@ describe("the real ledger", () => {
   });
 
   test("provenance claims exactly what the evidence supports", () => {
-    assert.ok(file.ledger.articles.every((a) => a.provenance === "history-verified"));
+    /* ids 1 to 40 were verified against the Git history window; an article recorded after the bootstrap carries "allocated" (docs/growth-manifest.md) and claims no history */
+    assert.ok(file.ledger.articles.every((a) => (a.id <= 40 ? a.provenance === "history-verified" : a.provenance === "allocated")));
     const w = file.ledger.historyWindow;
     assert.equal(w.startDate, "2026-09-29");
     assert.match(w.scope, /Nothing before 2026-09-29 is claimed/);

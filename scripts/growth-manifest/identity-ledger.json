@@ -279,6 +279,27 @@
       "keyChanges": [],
       "provenance": "history-verified",
       "state": "active"
+    },
+    {
+      "id": 41,
+      "key": "ai/how-to-write-instructions-an-ai-assistant-can-act-on",
+      "keyChanges": [],
+      "provenance": "allocated",
+      "state": "active"
+    },
+    {
+      "id": 42,
+      "key": "ai/how-to-give-an-ai-assistant-your-projects-context",
+      "keyChanges": [],
+      "provenance": "allocated",
+      "state": "active"
+    },
+    {
+      "id": 43,
+      "key": "ai/how-to-read-an-ai-answer-before-you-trust-it",
+      "keyChanges": [],
+      "provenance": "allocated",
+      "state": "active"
     }
   ],
   "historyWindow": {
@@ -287,13 +308,27 @@
     "startDate": "2026-09-29",
     "verifiedAtCommit": "ca7b631c8bcb86e1f8ebd5576b3ee97abd72a052"
   },
-  "nextArticleId": 41,
+  "nextArticleId": 44,
   "readme": "Permanent content identity ledger for the Growth manifest. Edited only by a reviewed commit, never by a script. Rules and procedure: the header of scripts/growth-manifest/ledger.mjs and rulebook section 6.",
   "schemaVersion": 1,
   "tools": [
     {
       "id": "age",
       "module": "assets/js/calculators/age/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
+      "id": "ai-answer-checklist",
+      "module": "assets/js/tools/ai-answer-checklist/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
+      "id": "ai-answer-compare",
+      "module": "assets/js/tools/ai-answer-compare/index.js",
       "moduleChanges": [],
       "provenance": "added",
       "state": "active"
@@ -327,6 +362,13 @@
       "state": "active"
     },
     {
+      "id": "bug-report-prompt",
+      "module": "assets/js/tools/bug-report-prompt/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "business-days",
       "module": "assets/js/tools/business-days/index.js",
       "moduleChanges": [],
@@ -343,6 +385,13 @@
     {
       "id": "calorie",
       "module": "assets/js/calculators/calorie/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
+      "id": "context-pack-builder",
+      "module": "assets/js/tools/context-pack-builder/index.js",
       "moduleChanges": [],
       "provenance": "added",
       "state": "active"
@@ -544,6 +593,13 @@
       "state": "active"
     },
     {
+      "id": "meeting-notes-action-plan",
+      "module": "assets/js/tools/meeting-notes-action-plan/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "meeting-planner",
       "module": "assets/js/tools/meeting-planner/index.js",
       "moduleChanges": [],
@@ -625,6 +681,13 @@
       "module": "assets/js/calculators/profit/index.js",
       "moduleChanges": [],
       "provenance": "bootstrap",
+      "state": "active"
+    },
+    {
+      "id": "prompt-builder",
+      "module": "assets/js/tools/prompt-builder/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
       "state": "active"
     },
     {
