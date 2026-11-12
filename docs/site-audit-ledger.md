@@ -398,6 +398,14 @@ A script measured 17 page types (home, All Tools, the AI section, two calculator
 
 - `node --test tests/unit/`: 3,971 tests, 3,967 passed, 0 failed, 4 skipped (the 17 failures seen before Batch 17 are gone: they were the AI category pins, the CRLF working copy, the keyword map, and builds that were out of date). Playwright projects were not part of this run.
 
+### Batch 21: Premium Spectrum palette and ecosystem accents (owner brief 2026-11-12)
+
+- **Decision (rule change: design palette):** the 2026-11-12 brief explicitly authorises replacing the indigo-and-stone palette; this supersedes the earlier green-versus-indigo conflict note. Light: midnight navy action/footer (#202c45), royal violet accent (#7656c9), warm ivory page (#f6f4ee), slate lines. Dark: navy page #0e1424, card #161e33, violet accent #bba8f6. Tokens only in assets/css/base/variables.css; the literals in hero art, logo, footer, the 404 page, theme-color metas and favicon follow.
+- **Accessibility:** the requested teal #269A91 is 3.44:1 as text on white, so teal is used only as a fill; the calculators chip uses the darker #17695f. All token text pairs and every ecosystem chip pair measure 4.5:1 or more. Axe (WCAG 2.0 to 2.2 AA plus best practice) passed on all 672 live pages on the preview build (desktop); a light and a dark contrast audit of 13 representative pages found no unreadable text.
+- **Ecosystem accents:** one chip colour per ecosystem (calculators teal, time amber, developer blue, image coral, PDF red-orange, Practice Labs and AI violet/indigo), icon chips only; the violet stays the single interface accent.
+- **Baselines:** all 139 visual baselines re-recorded (light desktop/mobile/tablet and dark). Lesson: `--update-snapshots` in its default "changed" mode wrote nothing here and reported passes, which looked like success; the first recording was therefore empty. Use `--update-snapshots=all` and confirm files changed. Desktop re-run for stability: 57 of 57 passed; mobile and tablet not re-run.
+- **Known gap:** the article card thumbnails still draw green chart bars (article illustration data); not yet recoloured.
+
 ### Production package status (2026-11-12, built from a3b498d, NOT deployed)
 
 - `npm run build` (dist/, root paths) gives 677 pages and files; packaged by Python zipfile (forward-slash entries, .htaccess included) as toolzenhub-production-a3b498d.zip (1,297 files, 16.4 MB) in C:/Users/DELL/Documents/ToolZenHub-production-package/, outside the repository.

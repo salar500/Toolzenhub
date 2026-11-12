@@ -43,59 +43,76 @@
     ======================================== */
 
     /* Surfaces */
-    --surface-page: #fafaf9;
+    --surface-page: #f6f4ee;
     --surface-card: #ffffff;
-    --surface-sunken: #f5f5f4;
-    --surface-footer: #1c1917;
+    --surface-sunken: #edeff4;
+    --surface-footer: #202c45;
 
     /* Lines. --line is decoration; --line-control is the 3:1 boundary of an
        input, checkbox or button outline (WCAG 1.4.11). */
-    --line: #e7e5e4;
-    --line-control: #78716c;
+    --line: #e1e5ec;
+    --line-control: #6b7690;
 
     /* Text */
-    --ink: #1c1917;
-    --ink-muted: #57534e;
-    --ink-subtle: #78716c;
-    --ink-on-footer: #e7e5e4;
-    --ink-muted-on-footer: #d6d3d1;
+    --ink: #1b2438;
+    --ink-muted: #475269;
+    --ink-subtle: #5b677e;
+    --ink-on-footer: #e7eaf2;
+    --ink-muted-on-footer: #cbd2e1;
 
     /* Primary action: near-black fill, the page's one strong colour is the accent */
-    --action: #1c1917;
-    --action-hover: #292524;
-    --action-active: #0c0a09;
-    --action-soft: #f5f5f4;
-    --action-pressed: #e7e5e4;
+    --action: #202c45;
+    --action-hover: #2d3d63;
+    --action-active: #141b2d;
+    --action-soft: #edeff4;
+    --action-pressed: #e1e5ec;
     --on-action: #ffffff;
 
     /* Accent: links, eyebrows, selected states, focus */
-    --accent: #4338ca;
-    --accent-hover: #3730a3;
-    --accent-active: #312e81;
-    --accent-soft: #eef2ff;
-    --accent-line: #c7d2fe;
-    --accent-on-dark: #a5b4fc;
-    --link: #4338ca;
-    --focus-ring: #4338ca;
+    --accent: #7656c9;
+    --accent-hover: #6446b8;
+    --accent-active: #53389f;
+    --accent-soft: #f1edfb;
+    --accent-line: #d5c9f3;
+    --accent-on-dark: #bba8f6;
+    --link: #7656c9;
+    --focus-ring: #7656c9;
 
     /* State colours keep their meaning. Always paired with words or an icon. */
-    --state-success: #166534;
-    --state-success-soft: #f0fdf4;
-    --state-success-line: #86efac;
+    --state-success: #17695f;
+    --state-success-soft: #e8f6f4;
+    --state-success-line: #8fd3cb;
     --state-error: #b91c1c;
     --state-error-soft: #fef2f2;
     --state-error-line: #fca5a5;
-    --state-warning: #92400e;
-    --state-warning-soft: #fffbeb;
-    --state-warning-line: #fcd34d;
-    --state-info: #4338ca;
-    --state-info-soft: #eef2ff;
-    --state-info-line: #c7d2fe;
+    --state-warning: #8a5a0b;
+    --state-warning-soft: #fff6e5;
+    --state-warning-line: #f2c879;
+    --state-info: #2a5caa;
+    --state-info-soft: #eaf1fb;
+    --state-info-line: #b9cfef;
 
     /* The unmistakably "unavailable" look (exempt from contrast rules, as
        inactive). An enabled control never uses this pair. */
-    --disabled-bg: #e7e5e4;
-    --disabled-text: #a8a29e;
+    --disabled-bg: #e4e8ef;
+    --disabled-text: #98a2b8;
+
+    /* Ecosystem accents (owner brief, 2026-11-12): one chip colour per ecosystem, used for its icon and nothing else.
+       Each pair is at least 4.5:1 (foreground on its soft fill). The shared violet stays the one interface accent. */
+    --eco-calculators: #17695f;
+    --eco-calculators-soft: #e4f4f2;
+    --eco-time-tools: #8a5a0b;
+    --eco-time-tools-soft: #fff1d6;
+    --eco-developer-tools: #2a5caa;
+    --eco-developer-tools-soft: #e6eefa;
+    --eco-image-tools: #b23a55;
+    --eco-image-tools-soft: #fce9ed;
+    --eco-pdf-tools: #ad4a15;
+    --eco-pdf-tools-soft: #fceadd;
+    --eco-practice-labs: #6446b8;
+    --eco-practice-labs-soft: #f1edfb;
+    --eco-ai-tools: #4650bf;
+    --eco-ai-tools-soft: #e9ebfb;
 
     /* ========================================
        Compatibility aliases (older names, same roles)
@@ -133,12 +150,12 @@
     --color-gray-50: var(--surface-page);
     --color-gray-100: var(--surface-sunken);
     --color-gray-200: var(--line);
-    --color-gray-300: #d6d3d1;
-    --color-gray-400: #a8a29e;
+    --color-gray-300: #d3d9e4;
+    --color-gray-400: #9aa5ba;
     --color-gray-500: var(--ink-subtle);
     --color-gray-600: var(--ink-muted);
-    --color-gray-700: #44403c;
-    --color-gray-800: #292524;
+    --color-gray-700: #3a455c;
+    --color-gray-800: #202c45;
     --color-gray-900: var(--ink);
 
     --bg-body: var(--surface-page);
@@ -222,11 +239,11 @@
        Shadows (neutral, low)
     ======================================== */
 
-    --shadow-sm: 0 1px 2px rgba(28, 25, 23, .06);
+    --shadow-sm: 0 1px 2px rgba(32, 44, 69, .06);
 
-    --shadow-md: 0 4px 14px rgba(28, 25, 23, .08);
+    --shadow-md: 0 4px 14px rgba(32, 44, 69, .08);
 
-    --shadow-lg: 0 10px 28px rgba(28, 25, 23, .12);
+    --shadow-lg: 0 10px 28px rgba(32, 44, 69, .12);
 
     /* ========================================
        Layout
@@ -273,64 +290,80 @@
     color-scheme: dark;
 
     /* Surfaces */
-    --surface-page: #0f0e0d;
-    --surface-card: #1c1917;
-    --surface-sunken: #171413;
-    --surface-footer: #0a0908;
+    --surface-page: #0e1424;
+    --surface-card: #161e33;
+    --surface-sunken: #121a2c;
+    --surface-footer: #0a0f1c;
 
     /* Lines */
-    --line: #3a3532;
-    --line-control: #a8a29e;
+    --line: #2b3652;
+    --line-control: #7f8ca8;
 
     /* Text */
-    --ink: #f5f5f4;
-    --ink-muted: #d6d3d1;
-    --ink-subtle: #a8a29e;
-    --ink-on-footer: #e7e5e4;
-    --ink-muted-on-footer: #d6d3d1;
+    --ink: #f1f4fa;
+    --ink-muted: #b8c2d6;
+    --ink-subtle: #98a4bc;
+    --ink-on-footer: #e7eaf2;
+    --ink-muted-on-footer: #cbd2e1;
 
     /* Primary action: a light fill with dark text */
-    --action: #f5f5f4;
-    --action-hover: #e7e5e4;
-    --action-active: #d6d3d1;
-    --action-soft: #292524;
-    --action-pressed: #3a3532;
-    --on-action: #1c1917;
+    --action: #eef1f8;
+    --action-hover: #dde3f0;
+    --action-active: #c9d1e4;
+    --action-soft: #1e2840;
+    --action-pressed: #2b3652;
+    --on-action: #1b2438;
 
     /* Accent */
-    --accent: #a5b4fc;
-    --accent-hover: #c7d2fe;
-    --accent-active: #e0e7ff;
-    --accent-soft: #1e1b4b;
-    --accent-line: #4338ca;
-    --accent-on-dark: #a5b4fc;
-    --link: #a5b4fc;
-    --focus-ring: #a5b4fc;
+    --accent: #bba8f6;
+    --accent-hover: #d0c2fa;
+    --accent-active: #e3dafc;
+    --accent-soft: #251c45;
+    --accent-line: #5b43a8;
+    --accent-on-dark: #bba8f6;
+    --link: #bba8f6;
+    --focus-ring: #bba8f6;
 
     /* States */
-    --state-success: #86efac;
-    --state-success-soft: #052e16;
-    --state-success-line: #166534;
+    --state-success: #6edbcc;
+    --state-success-soft: #0b2b2b;
+    --state-success-line: #17695f;
     --state-error: #fca5a5;
     --state-error-soft: #450a0a;
     --state-error-line: #991b1b;
-    --state-warning: #fcd34d;
-    --state-warning-soft: #451a03;
-    --state-warning-line: #92400e;
-    --state-info: #a5b4fc;
-    --state-info-soft: #1e1b4b;
-    --state-info-line: #4338ca;
+    --state-warning: #f2c879;
+    --state-warning-soft: #3a2a0b;
+    --state-warning-line: #8a5a0b;
+    --state-info: #93b8f0;
+    --state-info-soft: #14233f;
+    --state-info-line: #2a5caa;
 
-    --disabled-bg: #292524;
-    --disabled-text: #78716c;
+    --disabled-bg: #1e2840;
+    --disabled-text: #6b7690;
 
     /* Aliases that hold literals */
-    --color-gray-300: #44403c;
-    --color-gray-400: #78716c;
-    --color-gray-700: #d6d3d1;
-    --color-gray-800: #e7e5e4;
+    --color-gray-300: #2b3652;
+    --color-gray-400: #6b7690;
+    --color-gray-700: #b8c2d6;
+    --color-gray-800: #dde3f0;
 
-    --bg-header: rgba(28, 25, 23, 0.94);
+    /* Ecosystem accents */
+    --eco-calculators: #6edbcc;
+    --eco-calculators-soft: #0f2a2b;
+    --eco-time-tools: #f2c879;
+    --eco-time-tools-soft: #33260b;
+    --eco-developer-tools: #93b8f0;
+    --eco-developer-tools-soft: #14233f;
+    --eco-image-tools: #f4a3b5;
+    --eco-image-tools-soft: #3a1520;
+    --eco-pdf-tools: #f5b58a;
+    --eco-pdf-tools-soft: #3a1d0c;
+    --eco-practice-labs: #bba8f6;
+    --eco-practice-labs-soft: #251c45;
+    --eco-ai-tools: #a9b1f5;
+    --eco-ai-tools-soft: #1c2046;
+
+    --bg-header: rgba(22, 30, 51, 0.94);
 
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
     --shadow-md: 0 4px 14px rgba(0, 0, 0, .45);

@@ -222,7 +222,7 @@
    Category Icon Colors
 ========================================================= */
 
-/* Design System 2.0: one accent chip, no per-category rainbow */
+/* Design System 2.0: one accent chip for the calculator categories; each ecosystem has its own chip colour (variables.css, --eco-*) */
 .category-card__icon--loans,
 .category-card__icon--investment,
 .category-card__icon--tax,
@@ -231,13 +231,6 @@
 .category-card__icon--math,
 .category-card__icon--converter,
 .category-card__icon--more,
-.category-card__icon--calculators,
-.category-card__icon--time-tools,
-.category-card__icon--developer-tools,
-.category-card__icon--image-tools,
-.category-card__icon--pdf-tools,
-.category-card__icon--practice-labs,
-.category-card__icon--ai-tools,
 .calculator-card__icon--green,
 .calculator-card__icon--blue,
 .calculator-card__icon--yellow,
@@ -246,6 +239,41 @@
 .calculator-card__icon--teal {
     background: var(--accent-soft);
     color: var(--accent);
+}
+
+.category-card__icon--calculators {
+    background: var(--eco-calculators-soft);
+    color: var(--eco-calculators);
+}
+
+.category-card__icon--time-tools {
+    background: var(--eco-time-tools-soft);
+    color: var(--eco-time-tools);
+}
+
+.category-card__icon--developer-tools {
+    background: var(--eco-developer-tools-soft);
+    color: var(--eco-developer-tools);
+}
+
+.category-card__icon--image-tools {
+    background: var(--eco-image-tools-soft);
+    color: var(--eco-image-tools);
+}
+
+.category-card__icon--pdf-tools {
+    background: var(--eco-pdf-tools-soft);
+    color: var(--eco-pdf-tools);
+}
+
+.category-card__icon--practice-labs {
+    background: var(--eco-practice-labs-soft);
+    color: var(--eco-practice-labs);
+}
+
+.category-card__icon--ai-tools {
+    background: var(--eco-ai-tools-soft);
+    color: var(--eco-ai-tools);
 }
 
 /* =========================================================

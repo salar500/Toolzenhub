@@ -3,7 +3,7 @@ permalink: "/404.html"
 title: "Page Not Found | ToolZen Hub"
 description: "The page you are looking for could not be found on ToolZen Hub."
 robots: "noindex"
-themeColor: "#fafaf9"
+themeColor: "#f6f4ee"
 noindex: true
 ---
 <!DOCTYPE html>
@@ -24,7 +24,7 @@ noindex: true
     <meta name="robots" content="{{ robots }}">
 
     <meta name="theme-color" content="{{ themeColor }}" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#0f0e0d" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#0e1424" media="(prefers-color-scheme: dark)">
 
 
     {#- This page is served at whatever URL was requested (for example /a/b/missing), so every link
@@ -73,8 +73,8 @@ noindex: true
             display: flex;
             flex-direction: column;
 
-            background: #fafaf9;
-            color: #1c1917;
+            background: #f6f4ee;
+            color: #202c45;
 
             font-family:
                 "Inter",
@@ -89,7 +89,7 @@ noindex: true
         }
 
         .nf-header {
-            border-bottom: 1px solid #e7e5e4;
+            border-bottom: 1px solid #e1e5ec;
             background: #ffffff;
         }
 
@@ -122,11 +122,11 @@ noindex: true
             font-size: 21px;
             font-weight: 800;
             letter-spacing: -0.6px;
-            color: #1c1917;
+            color: #202c45;
         }
 
         .nf-brand span {
-            color: #4338ca;
+            color: #7656c9;
         }
 
         .nf-main {
@@ -145,19 +145,19 @@ noindex: true
             width: 100%;
             padding: 40px 32px;
 
-            border: 1px solid #e7e5e4;
+            border: 1px solid #e1e5ec;
             border-radius: 14px;
             background: #ffffff;
             text-align: center;
 
-            box-shadow: 0 8px 25px rgba(16, 24, 40, 0.05);
+            box-shadow: 0 8px 25px rgba(32, 44, 69, 0.06);
         }
 
         .nf-code {
             display: inline-block;
             margin-bottom: 8px;
 
-            color: #4338ca;
+            color: #7656c9;
             font-size: 13px;
             font-weight: 800;
             letter-spacing: 0.14em;
@@ -177,7 +177,7 @@ noindex: true
             max-width: 480px;
             margin: 0 auto 26px;
 
-            color: #57534e;
+            color: #475269;
             font-size: 15px;
         }
 
@@ -186,7 +186,7 @@ noindex: true
             padding: 12px 26px;
 
             border-radius: 8px;
-            background: #1c1917;
+            background: #202c45;
             color: #ffffff;
 
             font-size: 14px;
@@ -198,13 +198,13 @@ noindex: true
 
         .nf-btn:hover,
         .nf-btn:focus-visible {
-            background: #292524;
+            background: #2d3d63;
         }
 
         .nf-card p.nf-explore {
             margin: 30px auto 10px;
 
-            color: #44403c;
+            color: #3a455c;
             font-size: 12px;
             font-weight: 700;
             letter-spacing: 0.08em;
@@ -221,7 +221,7 @@ noindex: true
             margin-bottom: 6px;
             font-size: 0.8125rem;
             font-weight: 600;
-            color: #57534e;
+            color: #475269;
         }
 
         .nf-search__row {
@@ -234,11 +234,11 @@ noindex: true
             min-width: 0;
             min-height: 44px;
             padding: 0 12px;
-            border: 1px solid #78716c;
+            border: 1px solid #6b7690;
             border-radius: 8px;
             font: inherit;
             font-size: 16px;
-            color: #1c1917;
+            color: #202c45;
             background: #fff;
         }
 
@@ -250,13 +250,13 @@ noindex: true
             font: inherit;
             font-weight: 600;
             color: #fff;
-            background: #4338ca;
+            background: #7656c9;
             cursor: pointer;
         }
 
         .nf-search__input:focus-visible,
         .nf-search__btn:focus-visible {
-            outline: 2px solid #4338ca;
+            outline: 2px solid #7656c9;
             outline-offset: 2px;
         }
 
@@ -275,10 +275,10 @@ noindex: true
             display: inline-block;
             padding: 8px 16px;
 
-            border: 1px solid #78716c;
+            border: 1px solid #6b7690;
             border-radius: 999px;
             background: #ffffff;
-            color: #44403c;
+            color: #3a455c;
 
             font-size: 13px;
             font-weight: 600;
@@ -291,22 +291,22 @@ noindex: true
 
         .nf-links a:hover,
         .nf-links a:focus-visible {
-            border-color: #4338ca;
-            color: #4338ca;
+            border-color: #7656c9;
+            color: #7656c9;
         }
 
         .nf-btn:focus-visible,
         .nf-links a:focus-visible {
-            outline: 3px solid rgba(67, 56, 202, 0.5);
+            outline: 3px solid rgba(118, 86, 201, 0.5);
             outline-offset: 2px;
         }
 
         .nf-footer {
             padding: 18px 16px;
 
-            border-top: 1px solid #e7e5e4;
+            border-top: 1px solid #e1e5ec;
             background: #ffffff;
-            color: #57534e;
+            color: #475269;
 
             font-size: 12px;
             text-align: center;
@@ -330,21 +330,21 @@ noindex: true
 
         /* Dark device setting: the site's dark tokens (assets/css/base/variables.css), since this page carries its own CSS */
         @media (prefers-color-scheme: dark) {
-            body { background: #0f0e0d; color: #f5f5f4; }
-            .nf-header, .nf-footer { background: #171413; border-color: #3a3532; }
-            .nf-footer { color: #d6d3d1; }
-            .nf-brand { color: #f5f5f4; }
-            .nf-brand span, .nf-code { color: #a5b4fc; }
-            .nf-card { background: #1c1917; border-color: #3a3532; box-shadow: none; }
-            .nf-card p, .nf-search__label { color: #d6d3d1; }
-            .nf-card p.nf-explore { color: #d6d3d1; }
-            .nf-btn { background: #f5f5f4; color: #1c1917; }
-            .nf-btn:focus-visible { background: #e7e5e4; }
-            .nf-search__input { background: #0f0e0d; color: #f5f5f4; border-color: #a8a29e; }
-            .nf-search__btn { background: #a5b4fc; color: #1c1917; }
-            .nf-search__btn:focus-visible { outline-color: #a5b4fc; }
-            .nf-links a { background: #1c1917; color: #e7e5e4; border-color: #a8a29e; }
-            .nf-links a:focus-visible { border-color: #a5b4fc; color: #a5b4fc; outline-color: rgba(165, 180, 252, 0.6); }
+            body { background: #0e1424; color: #f1f4fa; }
+            .nf-header, .nf-footer { background: #161e33; border-color: #2b3652; }
+            .nf-footer { color: #b8c2d6; }
+            .nf-brand { color: #f1f4fa; }
+            .nf-brand span, .nf-code { color: #bba8f6; }
+            .nf-card { background: #161e33; border-color: #2b3652; box-shadow: none; }
+            .nf-card p, .nf-search__label { color: #b8c2d6; }
+            .nf-card p.nf-explore { color: #b8c2d6; }
+            .nf-btn { background: #eef1f8; color: #1b2438; }
+            .nf-btn:focus-visible { background: #e7eaf2; }
+            .nf-search__input { background: #0e1424; color: #f1f4fa; border-color: #7f8ca8; }
+            .nf-search__btn { background: #bba8f6; color: #1b2438; }
+            .nf-search__btn:focus-visible { outline-color: #bba8f6; }
+            .nf-links a { background: #161e33; color: #e7eaf2; border-color: #7f8ca8; }
+            .nf-links a:focus-visible { border-color: #bba8f6; color: #bba8f6; outline-color: rgba(187, 168, 246, 0.6); }
         }
 
     </style>
