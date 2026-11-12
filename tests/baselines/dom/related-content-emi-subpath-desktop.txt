@@ -50,8 +50,8 @@ section.related-section
       div.related-article-image
         img [alt="Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate" loading="lazy" src="{ROOT}assets/Images/articles/how-to-reduce-home-loan-interest.png"]
       div.related-article-content
-        h3 "How to Reduce Your Home Loan Interest"
-        p "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save…"
+        h3 "How to Reduce Home Loan Interest: 6 Ways With Examples"
+        p "Six ways to reduce home loan interest and EMI: shorter tenure, part-prepayment, extra paym…"
     a.related-article-card [href="{ROOT}articles/loan-comparison/emi-vs-total-interest/"]
       div.related-article-image
         img [alt="Chart of the EMI falling and the total interest rising as the loan tenure gets longer" loading="lazy" src="{ROOT}assets/Images/articles/emi-vs-total-interest.png"]

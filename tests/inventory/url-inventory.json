@@ -519,7 +519,7 @@
       "type": "article",
       "slug": "how-to-reduce-home-loan-interest",
       "topic": "loan-comparison",
-      "expectedTitle": "How to Reduce Your Home Loan Interest | ToolZen Hub",
+      "expectedTitle": "How to Reduce Home Loan Interest: 6 Ways With Examples | ToolZen Hub",
       "primarySelector": ".article-hero h1",
       "expectsHeader": true,
       "expectsFooter": true,

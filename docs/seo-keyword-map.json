@@ -486,15 +486,15 @@
       "url": "/articles/loan-comparison/how-to-reduce-home-loan-interest/",
       "type": "article",
       "title": "How to Reduce Your Home Loan Interest",
-      "primaryKeyword": "how to reduce your home loan interest",
+      "primaryKeyword": "how to reduce home loan interest",
       "secondaryKeywords": [
         "loan comparison",
         "loans"
       ],
       "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
       "relatedSearchPhrases": [
-        "how to reduce your home loan interest explained",
-        "how to reduce your home loan interest example"
+        "how to reduce home loan interest explained",
+        "how to reduce home loan interest example"
       ],
       "relatedTools": [
         "tool:loan-comparison"

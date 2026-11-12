@@ -104,9 +104,9 @@ const catalog = [
         topic: "loan-comparison",
         slug: "how-to-reduce-home-loan-interest",
         title:
-            "How to Reduce Your Home Loan Interest",
+            "How to Reduce Home Loan Interest: 6 Ways With Examples",
         description:
-            "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
+            "Six ways to reduce home loan interest and EMI: shorter tenure, part-prepayment, extra payments, a lower rate or a balance transfer, with a ₹40 lakh example.",
         publishedAt: "Aug 25, 2026",
         updatedAt: "Aug 25, 2026",
         readTime: "6 min read",

@@ -31,14 +31,14 @@ div#articles-page
       section.articles-feed
         div#articles-list.articles-list
           article.article-card
-            a.article-card-image-link [aria-label="How to Reduce Your Home Loan Interest" data-article-id="1" href="{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"]
+            a.article-card-image-link [aria-label="How to Reduce Home Loan Interest: 6 Ways With Examples" data-article-id="1" href="{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"]
               img.article-card-image [alt="Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate" loading="lazy" src="{ROOT}assets/Images/articles/how-to-reduce-home-loan-interest.png"]
             div.article-card-content
               div
                 span.article-card-category "Loans"
                 h2
-                  a [data-article-id="1" href="{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"] "How to Reduce Your Home Loan Interest"
-                p "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save…"
+                  a [data-article-id="1" href="{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"] "How to Reduce Home Loan Interest: 6 Ways With Examples"
+                p "Six ways to reduce home loan interest and EMI: shorter tenure, part-prepayment, extra paym…"
               div.article-card-meta
                 div.article-meta-items
                   span "Aug 25, 2026"
@@ -167,7 +167,7 @@ div#articles-page
             a.popular-article [data-article-id="1" href="{ROOT}articles/loan-comparison/how-to-reduce-home-loan-interest/"]
               img [alt="Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate" loading="lazy" src="{ROOT}assets/Images/articles/how-to-reduce-home-loan-interest.png"]
               div
-                h3 "How to Reduce Your Home Loan Interest"
+                h3 "How to Reduce Home Loan Interest: 6 Ways With Examples"
                 span "Aug 25, 2026"
             a.popular-article [data-article-id="2" href="{ROOT}articles/loan-comparison/emi-vs-total-interest/"]
               img [alt="Chart of the EMI falling and the total interest rising as the loan tenure gets longer" loading="lazy" src="{ROOT}assets/Images/articles/emi-vs-total-interest.png"]

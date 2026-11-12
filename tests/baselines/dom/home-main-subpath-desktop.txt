@@ -144,8 +144,8 @@ main#app
               img [alt="Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate" loading="lazy" src="{ROOT}assets/Images/articles/how-to-reduce-home-loan-interest.png"]
             div.article-card__content
               div.article-card__category "Loans"
-              h3.article-card__title "How to Reduce Your Home Loan Interest"
-              p.article-card__description "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save…"
+              h3.article-card__title "How to Reduce Home Loan Interest: 6 Ways With Examples"
+              p.article-card__description "Six ways to reduce home loan interest and EMI: shorter tenure, part-prepayment, extra paym…"
               div.article-card__footer
                 span.article-card__read "Read article"
                 span.article-card__arrow [aria-hidden="true"] "→"

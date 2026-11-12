@@ -155,7 +155,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1929
+      "visibleTextChars": 2588
     }
   },
   "/articles.html": {
@@ -1611,7 +1611,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6730
+      "visibleTextChars": 6747
     }
   },
   "/articles/loan-comparison/emi-vs-total-interest/": {
@@ -1686,7 +1686,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6004
+      "visibleTextChars": 6021
     }
   },
   "/articles/loan-comparison/fixed-vs-floating-interest-rates/": {
@@ -1761,28 +1761,28 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6821
+      "visibleTextChars": 6838
     }
   },
   "/articles/loan-comparison/how-to-reduce-home-loan-interest/": {
     "runtime": {
-      "title": "How to Reduce Your Home Loan Interest | ToolZen Hub",
-      "description": "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
+      "title": "How to Reduce Home Loan Interest: 6 Ways With Examples | ToolZen Hub",
+      "description": "Six ways to reduce home loan interest and EMI: shorter tenure, part-prepayment, extra payments, a lower rate or a balance transfer, with a ₹40 lakh example.",
       "canonical": "https://toolzenhub.in/articles/loan-comparison/how-to-reduce-home-loan-interest/",
       "robots": null,
       "openGraph": {
-        "og:description": "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
+        "og:description": "Six ways to reduce home loan interest and EMI: shorter tenure, part-prepayment, extra payments, a lower rate or a balance transfer, with a ₹40 lakh example.",
         "og:image": "https://toolzenhub.in/assets/Images/articles/how-to-reduce-home-loan-interest.png",
         "og:site_name": "ToolZen Hub",
-        "og:title": "How to Reduce Your Home Loan Interest | ToolZen Hub",
+        "og:title": "How to Reduce Home Loan Interest: 6 Ways With Examples | ToolZen Hub",
         "og:type": "article",
         "og:url": "https://toolzenhub.in/articles/loan-comparison/how-to-reduce-home-loan-interest/"
       },
       "twitter": {
         "twitter:card": "summary_large_image",
-        "twitter:description": "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
+        "twitter:description": "Six ways to reduce home loan interest and EMI: shorter tenure, part-prepayment, extra payments, a lower rate or a balance transfer, with a ₹40 lakh example.",
         "twitter:image": "https://toolzenhub.in/assets/Images/articles/how-to-reduce-home-loan-interest.png",
-        "twitter:title": "How to Reduce Your Home Loan Interest | ToolZen Hub"
+        "twitter:title": "How to Reduce Home Loan Interest: 6 Ways With Examples | ToolZen Hub"
       },
       "jsonLd": [
         {
@@ -1819,7 +1819,7 @@
         }
       ],
       "h1": [
-        "How to Reduce Your Home Loan Interest"
+        "How to Reduce Home Loan Interest: 6 Ways With Examples"
       ],
       "lang": "en",
       "viewport": "width=device-width, initial-scale=1.0",
@@ -1828,15 +1828,15 @@
       "charset": "UTF-8"
     },
     "rawHtml": {
-      "title": "How to Reduce Your Home Loan Interest | ToolZen Hub",
-      "description": "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
+      "title": "How to Reduce Home Loan Interest: 6 Ways With Examples | ToolZen Hub",
+      "description": "Six ways to reduce home loan interest and EMI: shorter tenure, part-prepayment, extra payments, a lower rate or a balance transfer, with a ₹40 lakh example.",
       "canonical": "https://toolzenhub.in/articles/loan-comparison/how-to-reduce-home-loan-interest/",
       "robots": null,
       "hasOpenGraph": true,
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5415
+      "visibleTextChars": 10322
     }
   },
   "/articles/loan-comparison/loan-tenure-total-interest/": {
@@ -1911,7 +1911,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6281
+      "visibleTextChars": 6298
     }
   },
   "/articles/loan-comparison/what-is-loan-prepayment/": {
@@ -1986,7 +1986,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6912
+      "visibleTextChars": 6929
     }
   },
   "/articles/loan-prepayment/early-vs-late-loan-prepayment/": {
@@ -3889,7 +3889,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5410
+      "visibleTextChars": 5459
     }
   },
   "/calculators/fd/": {
@@ -4183,7 +4183,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5529
+      "visibleTextChars": 5578
     }
   },
   "/calculators/loan-comparison/": {
@@ -4232,7 +4232,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5403
+      "visibleTextChars": 5452
     }
   },
   "/calculators/loan-eligibility/": {
@@ -4281,7 +4281,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5775
+      "visibleTextChars": 5824
     }
   },
   "/calculators/margin/": {
@@ -4428,7 +4428,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5689
+      "visibleTextChars": 5738
     }
   },
   "/calculators/ppf/": {
@@ -4526,7 +4526,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6961
+      "visibleTextChars": 7010
     }
   },
   "/calculators/profit/": {
@@ -31746,7 +31746,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 17875
+      "visibleTextChars": 18508
     }
   },
   "/tools/ai-answer-checklist/": {
@@ -31795,7 +31795,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5732
+      "visibleTextChars": 6387
+    }
+  },
+  "/tools/ai-answer-compare/": {
+    "runtime": {
+      "title": "Compare Two AI Answers: Agreements and Contradictions | ToolZen Hub",
+      "description": "Paste two AI answers to the same question and see where they agree, where they contradict each other, what only one of them says, what each recommends and which carries more checkable evidence. Runs in your browser; nothing is sent.",
+      "canonical": "https://toolzenhub.in/tools/ai-answer-compare/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Paste two AI answers to the same question and see where they agree, where they contradict each other, what only one of them says, what each recommends and which carries more checkable evidence. Runs in your browser; nothing is sent.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Compare Two AI Answers: Agreements and Contradictions | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/ai-answer-compare/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Paste two AI answers to the same question and see where they agree, where they contradict each other, what only one of them says, what each recommends and which carries more checkable evidence. Runs in your browser; nothing is sent.",
+        "twitter:title": "Compare Two AI Answers: Agreements and Contradictions | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Compare Two AI Answers"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Compare Two AI Answers: Agreements and Contradictions | ToolZen Hub",
+      "description": "Paste two AI answers to the same question and see where they agree, where they contradict each other, what only one of them says, what each recommends and which carries more checkable evidence. Runs in your browser; nothing is sent.",
+      "canonical": "https://toolzenhub.in/tools/ai-answer-compare/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6459
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -31893,7 +31942,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6646
+      "visibleTextChars": 7301
     }
   },
   "/tools/business-days/": {
@@ -31991,7 +32040,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6796
+      "visibleTextChars": 7451
     }
   },
   "/tools/countdown-timer/": {
@@ -32383,7 +32432,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5723
+      "visibleTextChars": 5749
     }
   },
   "/tools/interval-timer/": {
@@ -32726,7 +32775,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5474
+      "visibleTextChars": 5645
     }
   },
   "/tools/jwt-decoder/": {
@@ -32825,6 +32874,55 @@
       "hasJsonLd": true,
       "h1Count": 1,
       "visibleTextChars": 3787
+    }
+  },
+  "/tools/meeting-notes-action-plan/": {
+    "runtime": {
+      "title": "Meeting Notes to Action Plan: Decisions, Owners, Dates | ToolZen Hub",
+      "description": "Turn rough meeting notes into an action plan: decisions, actions with owners and due dates, open questions, risks, and a follow-up message to the attendees. Runs in your browser; nothing is invented or sent anywhere.",
+      "canonical": "https://toolzenhub.in/tools/meeting-notes-action-plan/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Turn rough meeting notes into an action plan: decisions, actions with owners and due dates, open questions, risks, and a follow-up message to the attendees. Runs in your browser; nothing is invented or sent anywhere.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Meeting Notes to Action Plan: Decisions, Owners, Dates | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/meeting-notes-action-plan/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Turn rough meeting notes into an action plan: decisions, actions with owners and due dates, open questions, risks, and a follow-up message to the attendees. Runs in your browser; nothing is invented or sent anywhere.",
+        "twitter:title": "Meeting Notes to Action Plan: Decisions, Owners, Dates | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Meeting Notes to Action Plan"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Meeting Notes to Action Plan: Decisions, Owners, Dates | ToolZen Hub",
+      "description": "Turn rough meeting notes into an action plan: decisions, actions with owners and due dates, open questions, risks, and a follow-up message to the attendees. Runs in your browser; nothing is invented or sent anywhere.",
+      "canonical": "https://toolzenhub.in/tools/meeting-notes-action-plan/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 6222
     }
   },
   "/tools/meeting-planner/": {
@@ -33216,7 +33314,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6747
+      "visibleTextChars": 8389
     }
   },
   "/tools/shift-planner/": {
@@ -33804,7 +33902,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3636
+      "visibleTextChars": 3650
     }
   },
   "/tools/world-clock/": {

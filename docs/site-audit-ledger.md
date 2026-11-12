@@ -372,6 +372,14 @@ A script measured 17 page types (home, All Tools, the AI section, two calculator
 - **Effect:** AI guides now list the other five AI tools as related (category fill); AI tools gain related AI guides.
 - Verification: unit pins updated (taxonomy, sections, search, relationships, catalog); growth-manifest, tool-capabilities and ai-tools unit 543/543; static-checkers 21/21; navigation spec (categories page, All Tools) 19/19; ai-tools, section-switcher, home-brand desktop green; header DOM baseline re-recorded. NOT RUN after the final change: full unit suite, test:static in full (a background run was stopped for low memory), mobile, tablet, dark visual baselines.
 
+### Batch 18: home-loan article title and description, dark-theme audit
+
+- **Title:** "How to Reduce Home Loan Interest: 6 Ways With Examples" (the six numbered sections). **Description (156 characters):** names EMI, the five levers and the worked 40 lakh example. URL, hero, publication date and updatedAt unchanged. No Search Console figure was available or invented; the wording follows the queries the owner's brief reported (interest, interest rate, EMI).
+- **Re-recorded in one reviewed batch:** four DOM baselines (articles-listing, home-main, related-content-emi, article-content-shell), the SEO baseline (title, description, og and twitter text; it also records the two AI pages added earlier and the rewritten article's text length), the URL inventory, the SEO keyword map, articles.test and articles.spec pins.
+- **Search effect (intended):** article 1 now matches "emi", "tenure" and "prepay" because its description names them; search.test pins updated; the articles page search test now queries the full title "what is loan prepayment" because the bare word finds five articles (a page's worth) instead of four.
+- **Dark theme audit** (script, 1280 and 390): article, AI Tools, SQL, Excel and Power BI labs, Home Loan, Photos to PDF, SQL learning path, World Clock. No unreadable text; the flagged "light background" elements are the intentional light action buttons of the dark theme; two secondary or disabled buttons measure 3.2:1 (disabled controls are exempt). Screenshots of the article (1280) and SQL lab (390) reviewed. Dark VISUAL BASELINES are not recorded (the visual projects capture light only).
+- Verification: articles/search/relationships/keyword-map unit green; articles.spec desktop 58/58 after the search-test fix (mobile 58/58 after the same fix); baselines re-recorded. NOT RUN: links crawl baseline, tablet.
+
 ### Next in the queue (assessed, not started)
 - **(Done in Batch 17)** AI articles in the Growth manifest.
 - **(Done in Batch 9)** Jump link for the long time-tool forms.

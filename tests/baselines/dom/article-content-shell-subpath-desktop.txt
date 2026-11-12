@@ -218,7 +218,7 @@ article.article
             img [alt="Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate" loading="lazy" src="{ROOT}assets/Images/articles/how-to-reduce-home-loan-interest.png"]
           div.article-related-card-content
             span.article-related-category "Finance"
-            h3 "How to Reduce Your Home Loan Interest"
+            h3 "How to Reduce Home Loan Interest: 6 Ways With Examples"
             span.article-related-link "Read article →"
         a.article-related-card [href="{ROOT}articles/loan-comparison/emi-vs-total-interest/"]
           div.article-related-image

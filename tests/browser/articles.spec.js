@@ -162,9 +162,9 @@ test.describe("articles listing page", () => {
   test("search: finds an article, shows an empty state, and clears", async ({ page, go }) => {
     await go("articles.html");
     const search = page.locator("#article-search");
-    await search.fill("prepayment");
+    await search.fill("what is loan prepayment");
     await expect(cards(page).first()).toContainText("What Is Loan Prepayment?");
-    expect(await cards(page).count()).toBeLessThan(5);
+    expect(await cards(page).count()).toBeLessThan(5); // the full title matches one article; the bare word "prepayment" also finds the home-loan guide since 2026-11-12
     await search.fill("zzzz-no-such-article");
     await expect(page.locator("#articles-list .articles-empty")).toBeVisible();
     await expect(cards(page)).toHaveCount(0);
@@ -192,7 +192,7 @@ test.describe("articles listing page", () => {
  * not derived from the code under test.
  * ------------------------------------------------------------------------------------------------------- */
 const CATALOG = {
-  "how-to-reduce-home-loan-interest": { title: "How to Reduce Your Home Loan Interest", description: "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.", readTime: "6 min read", hero: "/assets/Images/articles/how-to-reduce-home-loan-interest.png", alt: "Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate", related: ["emi-vs-total-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","what-is-loan-prepayment","choose-right-loan-tenure"] },
+  "how-to-reduce-home-loan-interest": { title: "How to Reduce Home Loan Interest: 6 Ways With Examples", description: "Six ways to reduce home loan interest and EMI: shorter tenure, part-prepayment, extra payments, a lower rate or a balance transfer, with a ₹40 lakh example.", readTime: "6 min read", hero: "/assets/Images/articles/how-to-reduce-home-loan-interest.png", alt: "Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate", related: ["emi-vs-total-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","what-is-loan-prepayment","choose-right-loan-tenure"] },
   "emi-vs-total-interest": { title: "EMI vs Total Interest: What Should You Compare?", description: "Understand why EMI alone does not tell the complete story when comparing loan options and borrowing costs.", readTime: "5 min read", hero: "/assets/Images/articles/emi-vs-total-interest.png", alt: "Chart of the EMI falling and the total interest rising as the loan tenure gets longer", related: ["how-to-reduce-home-loan-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","what-is-loan-prepayment","choose-right-loan-tenure"] },
   "fixed-vs-floating-interest-rates": { title: "Fixed vs Floating Interest Rates", description: "Understand the difference between fixed and floating interest rates before choosing a loan.", readTime: "6 min read", hero: "/assets/Images/articles/fixed-vs-floating-interest-rates.png", alt: "Illustrative diagram: a fixed interest rate stays flat while a floating rate moves up and down in steps over the life of a loan", related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","loan-tenure-total-interest","what-is-loan-prepayment","choose-right-loan-tenure"] },
   "loan-tenure-total-interest": { title: "How Loan Tenure Affects Total Interest", description: "See why choosing a longer or shorter loan tenure can significantly affect your total interest cost.", readTime: "6 min read", hero: "/assets/Images/articles/loan-tenure-total-interest.png", alt: "Stacked bars showing how much interest is repaid on the same loan over tenures of 10 to 30 years", related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","fixed-vs-floating-interest-rates","what-is-loan-prepayment","choose-right-loan-tenure"] },

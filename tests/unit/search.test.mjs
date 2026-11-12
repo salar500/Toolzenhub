@@ -223,8 +223,8 @@ describe("real data: policy and ranking", () => {
   });
 
   test("article titles and partial matches (published articles only by default)", () => {
-    assert.deepEqual(ids(engine.search("tenure", { types: ["article"] })), [4, 6, 13, 28, 15, 29, 31]);
-    assert.deepEqual(ids(engine.search("prepay", { types: ["article"] })), [5, 13, 14, 16]);
+    assert.deepEqual(ids(engine.search("tenure", { types: ["article"] })), [4, 6, 13, 28, 1, 15, 29, 31]); // article 1 (home-loan interest) joins: its description now names a shorter tenure (2026-11-12)
+    assert.deepEqual(ids(engine.search("prepay", { types: ["article"] })), [5, 13, 14, 16, 1]); // article 1 last: only its description names part-prepayment (2026-11-12)
     assert.deepEqual(ids(engine.search("what is loan prepayment", { types: ["article"] })), [5]);
     assert.deepEqual(ids(engine.search("fixed vs floating", { types: ["article"] })), [3]);
   });
@@ -236,7 +236,7 @@ describe("real data: policy and ranking", () => {
 
   test("a mixed global search returns each type, published only", () => {
     const r = engine.search("emi");
-    assert.deepEqual(r.map((x) => x.key), ["tool:emi", "article:2", "article:13", "article:27", "tool:personal-loan", "tool:loan-comparison", "tool:home-loan", "tool:loan-eligibility", "tool:prepayment", "tool:prompt-builder", "tool:ai-answer-checklist", "article:28", "article:29"]);
+    assert.deepEqual(r.map((x) => x.key), ["tool:emi", "article:2", "article:13", "article:27", "tool:personal-loan", "tool:loan-comparison", "tool:home-loan", "tool:loan-eligibility", "tool:prepayment", "tool:prompt-builder", "tool:ai-answer-checklist", "article:1", "article:28", "article:29"]); // article:1: its description now names EMI (2026-11-12)
     // the new tool is found by its aliases and only as a published tool
     assert.deepEqual(engine.search("part payment").map((x) => x.key), ["tool:prepayment"]);
     assert.deepEqual(engine.search("early repayment").map((x) => x.key), ["tool:prepayment"]);

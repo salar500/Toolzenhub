@@ -7,7 +7,7 @@
    related tools and articles) lives in data/articles.js.
 
    Article:
-   How to Reduce Your Home Loan Interest
+   How to Reduce Home Loan Interest: 6 Ways With Examples
 
    Category:
    Finance
