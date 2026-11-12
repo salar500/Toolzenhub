@@ -23,7 +23,8 @@ noindex: true
 
     <meta name="robots" content="{{ robots }}">
 
-    <meta name="theme-color" content="{{ themeColor }}">
+    <meta name="theme-color" content="{{ themeColor }}" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0f0e0d" media="(prefers-color-scheme: dark)">
 
 
     {#- This page is served at whatever URL was requested (for example /a/b/missing), so every link
@@ -325,6 +326,25 @@ noindex: true
                 font-size: 30px;
             }
 
+        }
+
+        /* Dark device setting: the site's dark tokens (assets/css/base/variables.css), since this page carries its own CSS */
+        @media (prefers-color-scheme: dark) {
+            body { background: #0f0e0d; color: #f5f5f4; }
+            .nf-header, .nf-footer { background: #171413; border-color: #3a3532; }
+            .nf-footer { color: #d6d3d1; }
+            .nf-brand { color: #f5f5f4; }
+            .nf-brand span, .nf-code { color: #a5b4fc; }
+            .nf-card { background: #1c1917; border-color: #3a3532; box-shadow: none; }
+            .nf-card p, .nf-search__label { color: #d6d3d1; }
+            .nf-card p.nf-explore { color: #d6d3d1; }
+            .nf-btn { background: #f5f5f4; color: #1c1917; }
+            .nf-btn:focus-visible { background: #e7e5e4; }
+            .nf-search__input { background: #0f0e0d; color: #f5f5f4; border-color: #a8a29e; }
+            .nf-search__btn { background: #a5b4fc; color: #1c1917; }
+            .nf-search__btn:focus-visible { outline-color: #a5b4fc; }
+            .nf-links a { background: #1c1917; color: #e7e5e4; border-color: #a8a29e; }
+            .nf-links a:focus-visible { border-color: #a5b4fc; color: #a5b4fc; outline-color: rgba(165, 180, 252, 0.6); }
         }
 
     </style>
