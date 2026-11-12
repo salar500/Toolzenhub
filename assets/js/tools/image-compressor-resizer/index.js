@@ -483,6 +483,15 @@ ${batchSizeMarkup()}
                                                 aria-describedby="ic-target-help ic-target-error"
                                             >
 
+                                            <div
+                                                class="ic-chips"
+                                                id="ic-target-chips"
+                                                role="group"
+                                                aria-label="Common file sizes"
+                                            >${[100, 200, 500, 1000].map((kb) => `
+                                                <button type="button" class="ic-chip" data-kb="${kb}">${kb === 1000 ? "1 MB" : `${kb} KB`}</button>`).join("")}
+                                            </div>
+
                                             <p
                                                 id="ic-target-help"
                                                 class="ic-hint"
@@ -2075,6 +2084,20 @@ export function init() {
     });
 
     /* a changed setting makes an earlier batch's results stale */
+    /* common file sizes write the target and fire "input", as if typed */
+    $("#ic-target-chips").addEventListener("click", (event) => {
+
+        const chip = event.target.closest("[data-kb]");
+
+        if (!chip) {
+            return;
+        }
+
+        targetInput.value = chip.dataset.kb;
+        targetInput.dispatchEvent(new Event("input", { bubbles: true }));
+
+    });
+
     settings.addEventListener("input", () => batch.markStale());
     settings.addEventListener("change", () => batch.markStale());
 

@@ -327,6 +327,13 @@ A script measured 17 page types (home, All Tools, the AI section, two calculator
 - **Extract, Reorder and Rotate:** keep list "All pages", "Odd pages", "Even pages", "Reverse order", "Without the first page", "Without the last page"; pages to turn "First page", "Last page", "Odd pages", "Even pages", "All pages". Chips are built from the chosen file's page count and appear only with a file.
 - Verification: `pdf-tools.spec` 42 of 42 on desktop and on mobile (two new tests); preview build. Rule change: none.
 
+### Batch 13: Image Tools, guided controls
+
+- **Audit first (source and controls):** Image Compressor & Resizer already had size presets, a locked aspect ratio, a format select, quality preset radios, and a ratio select for cropping; Photos to PDF has only selects (page size, direction, margin). The one remaining typed field in the common path was "Up to (KB)".
+- **Change:** chips 100 KB, 200 KB, 500 KB and 1 MB under that field; a click writes the value and fires `input`, so validation and the stale-result marking run as if typed. Photos to PDF unchanged.
+- **Stale pin fixed:** `image-compressor-resizer.spec` still expected six sections on All Tools; it now lists AI Tools (6 tools), a consequence of the AI ecosystem, not of this batch.
+- Verification: image spec 50 of 50 desktop run (two failures were my test's number format and that stale pin; both fixed, re-run 2 of 2), 51 of 51 on mobile; preview build. Rule change: none.
+
 ### Next in the queue (assessed, not started)
 - **(Done in Batch 9)** Jump link for the long time-tool forms.
 - **Guided controls in PDF and Image tools** (presets, page selection, fewer free text fields), tool by tool; their controls appear after a file is chosen, so the audit loads the test fixtures first.

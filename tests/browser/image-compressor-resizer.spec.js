@@ -315,6 +315,17 @@ test.describe("Image Compressor & Resizer", () => {
     await expect(page.locator("#ic-result")).not.toContainText(/exactly/i);
   });
 
+  test("common file-size chips fill the target, and the result follows the chosen size", async ({ page, go }) => {
+    await open(page, go);
+    await chooseReady(page, "photo.jpg");
+    await page.getByLabel("Up to a file size").check();
+    await expect(page.locator("#ic-target-chips .ic-chip")).toHaveText(["100 KB", "200 KB", "500 KB", "1 MB"]);
+    await page.locator("#ic-target-chips .ic-chip", { hasText: "1 MB" }).click();
+    await expect(page.locator("#ic-target")).toHaveValue("1000");
+    await compress(page);
+    await expect(page.locator("#ic-target-result")).toContainText("Target: Up to 1,000 KB");
+  });
+
   test("a target the image already fits is done at the highest quality in one encode", async ({ page, go }) => {
     await open(page, go);
     await chooseReady(page, "photo.jpg");
@@ -877,8 +888,8 @@ test.describe("Image Tools in the site", () => {
 
   test("All Tools lists Image Tools as a fourth section (then PDF Tools), with the catalog counts", async ({ page, go }) => {
     await go("tools.html");
-    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools", "Practice Labs"]);
-    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, "13 tools", "12 tools", "2 tools", "4 tools", "8 tools"]);
+    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools", "Practice Labs", "AI Tools"]);
+    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, "13 tools", "12 tools", "2 tools", "4 tools", "8 tools", "6 tools"]);
     const image = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Image Tools")') });
     await expect(image.locator('a[href$="tools/image-compressor-resizer/"]')).toHaveCount(1);
     for (const section of ["Calculators", "Time Tools", "Developer Tools"]) {
