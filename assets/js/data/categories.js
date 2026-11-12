@@ -162,7 +162,9 @@ export const sections = [
             "Prompt, debugging-task and context-pack builders for ChatGPT, Claude and Gemini",
         icon: "✦",
         landing: "aiTools",
-        pathPrefix: "tools"
+        pathPrefix: "tools",
+        /* its page lists the tools directly; its one category (below) is for the taxonomy, not a navigation layer */
+        listing: "tools"
     }
 
 ];
@@ -278,7 +280,24 @@ export const categories = [
         title: "More",
         description: "Explore all calculators and tools",
         href: "more.html"
-    }
+    },
+
+
+    /*
+     * AI (owner decision, 2026-11-12): the AI Tools section's own category, so its tools and guides resolve through the
+     * taxonomy like every other (tool -> category -> section) and the Growth manifest needs no exception. Its landing
+     * is the section page.
+     */
+    {
+        id: "ai",
+        sectionId: "ai-tools",
+        icon: "✦",
+        iconClass: "ai",
+        title: "AI",
+        description: "Build prompts, debugging tasks and context packs for the AI assistant you already use",
+        href: "ai-tools.html",
+        landing: "aiTools"
+    },
 
 ];
 

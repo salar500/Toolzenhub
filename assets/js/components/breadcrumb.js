@@ -36,6 +36,7 @@ import {
 } from "../routes.js";
 
 import {
+    getSection,
     getSectionUrl,
     getCategoryLandingUrl,
     getSubcategory,
@@ -169,7 +170,8 @@ export function toolBreadcrumbItems(
        CATEGORY
     ===================================================== */
 
-    if (metadata.category) {
+    /* a section that lists its tools directly (AI Tools) has a taxonomy-only category: no breadcrumb step of its own */
+    if (metadata.category && getSection(metadata.section)?.listing !== "tools") {
 
         items.push({
 

@@ -362,8 +362,18 @@ A script measured 17 page types (home, All Tools, the AI section, two calculator
 - **Not changed on purpose:** the title and meta description (they are pinned in four DOM baselines, the SEO baseline, the inventory and two specs, so changing them needs a crawl re-record) and `updatedAt` (a unit pin says the original articles keep their dates); the curated related tools (pinned). Recommended next for this article: a new title and description aimed at the queries above, with the baselines re-recorded in one reviewed batch.
 - Verification: `articles.test`, `search.test`, `relationships.test` pass; `articles.spec` 58 of 58 on desktop; screenshot of the new top section at 1280 reviewed. NOT RUN: mobile article spec, links crawl and SEO baseline on the changed page.
 
+### Batch 17: the AI taxonomy category and the Growth manifest
+
+- **Decision (owner, 2026-11-12):** create a real AI category; do not weaken the manifest validator. `categories.js` gains category `ai` (section `ai-tools`, landing the section page); the six AI tools carry `category: "ai"` instead of `sectionId`, so tool -> category -> section resolves like every other section and articles 41 to 43 (category "ai") resolve through the same taxonomy. No validator rule changed.
+- **Navigation kept as it was:** the AI Tools section is flagged `listing: "tools"`, so its page, the All Tools block and the related-tools block still list tools directly (no calculator-style category page, no category group, no "Related Calculators" block, no extra breadcrumb step). Helpers: `sectionListsToolsDirectly`, `getDirectSectionId` (taxonomy.js). The Calculators categories page shows only calculator categories.
+- **Real defects the new category exposed, fixed:** AI related-tool links pointed at /calculators/<id>/ (caught by the links checker); the categories page showed a ninth card; the All Tools page rendered AI as a category group.
+- **Check-mode test:** the export refuses off `main` by design (rule unchanged). The test now asserts that on another branch ONLY BRANCH_UNEXPECTED refuses, then checks the export inputs with `expectedBranch` set to the current branch.
+- **Other fixes:** the items.mjs working copy was CRLF (environment, not content) and failed two ASCII hygiene tests; the SEO keyword map was regenerated (672 pages, was 662: it had no AI pages); the header DOM baseline was re-recorded for the theme toggle (stale since the theme commit).
+- **Effect:** AI guides now list the other five AI tools as related (category fill); AI tools gain related AI guides.
+- Verification: unit pins updated (taxonomy, sections, search, relationships, catalog); growth-manifest, tool-capabilities and ai-tools unit 543/543; static-checkers 21/21; navigation spec (categories page, All Tools) 19/19; ai-tools, section-switcher, home-brand desktop green; header DOM baseline re-recorded. NOT RUN after the final change: full unit suite, test:static in full (a background run was stopped for low memory), mobile, tablet, dark visual baselines.
+
 ### Next in the queue (assessed, not started)
-- **AI articles in the Growth manifest:** owner decision needed on a taxonomy category (Batch 15).
+- **(Done in Batch 17)** AI articles in the Growth manifest.
 - **(Done in Batch 9)** Jump link for the long time-tool forms.
 - **Guided controls in PDF and Image tools** (presets, page selection, fewer free text fields), tool by tool; their controls appear after a file is chosen, so the audit loads the test fixtures first.
 - **The remaining AI articles** follow their tools (above). The category work is done.

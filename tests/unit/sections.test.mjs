@@ -43,7 +43,7 @@ describe("section model", () => {
     assert.equal(ai.title, "AI Tools");
     assert.equal(ai.landing, "aiTools");
     assert.equal(ai.pathPrefix, "tools");
-    assert.deepEqual(tax.getCategoriesBySection("ai-tools"), []);
+    assert.deepEqual(tax.getCategoriesBySection("ai-tools").map((c) => c.id), ["ai"]); // the AI category (2026-11-12); its tools resolve through it
     assert.deepEqual(tax.getToolsBySection("ai-tools").map((t) => t.id), ["prompt-builder", "bug-report-prompt", "context-pack-builder", "ai-answer-checklist", "ai-answer-compare", "meeting-notes-action-plan"]);
     assert.equal(routes.ROUTES.aiTools, `${ROOT}ai-tools.html`);
     const section = tax.getSectionById("calculators");
@@ -103,9 +103,9 @@ describe("section model", () => {
 });
 
 describe("category ownership", () => {
-  test("the eight existing categories, unrenamed and in order, all belong to the Calculators section", () => {
-    assert.deepEqual(cats.categories.map((c) => c.id), CATEGORY_IDS);
-    for (const c of cats.categories) assert.equal(c.sectionId, "calculators", c.id);
+  test("the eight existing categories, unrenamed and in order, belong to the Calculators section; the AI category (2026-11-12) to AI Tools", () => {
+    assert.deepEqual(cats.categories.map((c) => c.id), [...CATEGORY_IDS, "ai"]);
+    for (const c of cats.categories) assert.equal(c.sectionId, c.id === "ai" ? "ai-tools" : "calculators", c.id);
   });
 
   test("every category's sectionId refers to a section that exists", () => {

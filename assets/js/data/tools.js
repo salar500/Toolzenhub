@@ -2458,7 +2458,7 @@ const catalog = [
         status: "published",
         loader: () =>
             import("../tools/prompt-builder/index.js"),
-        sectionId: "ai-tools",
+        category: "ai",
         toolType: "utility",
         icon: "✦",
         title: "AI Prompt Builder",
@@ -2499,7 +2499,7 @@ const catalog = [
         status: "published",
         loader: () =>
             import("../tools/bug-report-prompt/index.js"),
-        sectionId: "ai-tools",
+        category: "ai",
         toolType: "utility",
         icon: "🐞",
         title: "Bug Report to Debugging Prompt",
@@ -2540,7 +2540,7 @@ const catalog = [
         status: "published",
         loader: () =>
             import("../tools/context-pack-builder/index.js"),
-        sectionId: "ai-tools",
+        category: "ai",
         toolType: "utility",
         icon: "▤",
         title: "Project Context Pack Builder",
@@ -2581,7 +2581,7 @@ const catalog = [
         status: "published",
         loader: () =>
             import("../tools/ai-answer-checklist/index.js"),
-        sectionId: "ai-tools",
+        category: "ai",
         toolType: "utility",
         icon: "☑",
         title: "AI Answer Evidence Checklist",
@@ -2622,7 +2622,7 @@ const catalog = [
         status: "published",
         loader: () =>
             import("../tools/ai-answer-compare/index.js"),
-        sectionId: "ai-tools",
+        category: "ai",
         toolType: "utility",
         icon: "⇆",
         title: "Compare Two AI Answers",
@@ -2663,7 +2663,7 @@ const catalog = [
         status: "published",
         loader: () =>
             import("../tools/meeting-notes-action-plan/index.js"),
-        sectionId: "ai-tools",
+        category: "ai",
         toolType: "utility",
         icon: "☰",
         title: "Meeting Notes to Action Plan",

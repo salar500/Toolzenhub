@@ -33,6 +33,7 @@ import {
     getToolsByCategory,
     getToolsBySection,
     getDirectToolsBySection,
+    sectionListsToolsDirectly,
     getCategoryUrl
 } from "../../data/taxonomy.js";
 
@@ -129,13 +130,13 @@ const hasLiveTools = (section) =>
 
 function sectionBlock(section) {
 
-    return getCategoriesBySection(section.id).length > 0
-        ? categorySectionBlock(section)
-        : directSectionBlock(section);
+    return sectionListsToolsDirectly(section.id)
+        ? directSectionBlock(section)
+        : categorySectionBlock(section);
 
 }
 
-/* a section whose tools sit directly under it (no categories), such as Time Tools */
+/* a section whose tools are listed directly under it (no category groups), such as Time Tools and AI Tools */
 function directSectionBlock(section) {
 
     const live =
@@ -498,7 +499,7 @@ export function sectionPageIds() {
     return sections
         .filter(
             section =>
-                getCategoriesBySection(section.id).length === 0 &&
+                sectionListsToolsDirectly(section.id) &&
                 section.seoDescription &&
                 getDirectToolsBySection(section.id).some(tool => tool.available)
         )

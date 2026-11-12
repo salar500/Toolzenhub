@@ -1,7 +1,7 @@
 {
   "$comment": "INTERNAL planning file. Not published, not a ranking mechanism, no search volumes. Built from the site's catalogs by scripts/gen-seo-keyword-map.mjs; regenerate after the catalog changes. Use it to improve real titles, descriptions, headings, copy and internal links naturally; never as a hidden keyword block (Google ignores the meta keywords tag).",
-  "generated": "2026-11-08",
-  "pages": 662,
+  "generated": "2026-11-12",
+  "pages": 672,
   "summary": {
     "calculatorsWithoutSupportingArticle": 41,
     "pagesWithCannibalizationWarnings": 2
@@ -21,6 +21,19 @@
       "contentGaps": []
     },
     {
+      "url": "/ai-tools.html",
+      "type": "directory",
+      "title": "AI Tools",
+      "primaryKeyword": "ai tools",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
       "url": "/articles.html",
       "type": "article-index",
       "title": "Articles & Guides",
@@ -29,6 +42,66 @@
       "searchIntent": "navigational: browse guides",
       "relatedSearchPhrases": [],
       "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/ai/how-to-give-an-ai-assistant-your-projects-context/",
+      "type": "article",
+      "title": "How to Give an AI Assistant Your Project's Context",
+      "primaryKeyword": "how to give an ai assistant your project's context",
+      "secondaryKeywords": [
+        "ai"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how to give an ai assistant your project's context explained",
+        "how to give an ai assistant your project's context example"
+      ],
+      "relatedTools": [
+        "tool:context-pack-builder"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/ai/how-to-read-an-ai-answer-before-you-trust-it/",
+      "type": "article",
+      "title": "How to Read an AI Answer Before You Trust It",
+      "primaryKeyword": "how to read an ai answer before you trust it",
+      "secondaryKeywords": [
+        "ai"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how to read an ai answer before you trust it explained",
+        "how to read an ai answer before you trust it example"
+      ],
+      "relatedTools": [
+        "tool:ai-answer-checklist"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/articles/ai/how-to-write-instructions-an-ai-assistant-can-act-on/",
+      "type": "article",
+      "title": "How to Write Instructions an AI Assistant Can Act On",
+      "primaryKeyword": "how to write instructions an ai assistant can act on",
+      "secondaryKeywords": [
+        "ai"
+      ],
+      "searchIntent": "informational: the visitor wants to understand a concept before or after calculating",
+      "relatedSearchPhrases": [
+        "how to write instructions an ai assistant can act on explained",
+        "how to write instructions an ai assistant can act on example"
+      ],
+      "relatedTools": [
+        "tool:prompt-builder"
+      ],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
       "contentGaps": []
@@ -10862,6 +10935,72 @@
       "contentGaps": []
     },
     {
+      "url": "/tools/ai-answer-checklist/",
+      "type": "calculator",
+      "title": "AI Answer Evidence Checklist: What to Verify",
+      "primaryKeyword": "ai answer evidence checklist",
+      "secondaryKeywords": [
+        "ai answer checker",
+        "verify ai answer",
+        "fact check ai",
+        "chatgpt fact check",
+        "ai hallucination check",
+        "evidence checklist",
+        "check ai output",
+        "ai answer verification"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "ai answer evidence checklist online",
+        "ai answer evidence checklist free",
+        "how to use ai answer evidence checklist",
+        "ai answer evidence checklist formula"
+      ],
+      "relatedTools": [
+        "/tools/prompt-builder/",
+        "/tools/context-pack-builder/",
+        "/tools/bug-report-prompt/",
+        "/tools/ai-answer-compare/",
+        "/tools/meeting-notes-action-plan/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/tools/ai-answer-compare/",
+      "type": "calculator",
+      "title": "Compare Two AI Answers: Agreements and Contradictions",
+      "primaryKeyword": "compare two ai answers",
+      "secondaryKeywords": [
+        "compare ai answers",
+        "compare two ai responses",
+        "chatgpt vs claude answer",
+        "which ai answer is better",
+        "ai answer comparison",
+        "compare chatgpt answers",
+        "ai response diff",
+        "contradictions between ai answers"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "compare two ai answers online",
+        "compare two ai answers free",
+        "how to use compare two ai answers",
+        "compare two ai answers formula"
+      ],
+      "relatedTools": [
+        "/tools/ai-answer-checklist/",
+        "/tools/prompt-builder/",
+        "/tools/bug-report-prompt/",
+        "/tools/context-pack-builder/",
+        "/tools/meeting-notes-action-plan/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
       "url": "/tools/base64-encoder-decoder/",
       "type": "calculator",
       "title": "Base64 Encoder & Decoder: Convert Text Online",
@@ -10897,6 +11036,39 @@
       ]
     },
     {
+      "url": "/tools/bug-report-prompt/",
+      "type": "calculator",
+      "title": "Bug Report to Debugging Prompt for AI Coding Assistants",
+      "primaryKeyword": "bug report to debugging prompt",
+      "secondaryKeywords": [
+        "bug report prompt",
+        "debugging prompt",
+        "ai debugging",
+        "bug to prompt",
+        "fix bug with ai",
+        "copilot bug fix prompt",
+        "claude code bug prompt",
+        "bug report template"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "bug report to debugging prompt online",
+        "bug report to debugging prompt free",
+        "how to use bug report to debugging prompt",
+        "bug report to debugging prompt formula"
+      ],
+      "relatedTools": [
+        "/tools/context-pack-builder/",
+        "/tools/prompt-builder/",
+        "/tools/ai-answer-checklist/",
+        "/tools/ai-answer-compare/",
+        "/tools/meeting-notes-action-plan/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
       "url": "/tools/business-days/",
       "type": "calculator",
       "title": "Business Days Calculator: Add, Subtract and Count Working Days",
@@ -10926,6 +11098,39 @@
       "contentGaps": [
         "no supporting article"
       ]
+    },
+    {
+      "url": "/tools/context-pack-builder/",
+      "type": "calculator",
+      "title": "Project Context Pack Builder for AI Assistants",
+      "primaryKeyword": "project context pack builder",
+      "secondaryKeywords": [
+        "context pack",
+        "project context for ai",
+        "ai handover",
+        "project brief for chatgpt",
+        "claude md generator",
+        "cursor rules generator",
+        "project instructions for ai",
+        "ai onboarding brief"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "project context pack builder online",
+        "project context pack builder free",
+        "how to use project context pack builder",
+        "project context pack builder formula"
+      ],
+      "relatedTools": [
+        "/tools/prompt-builder/",
+        "/tools/bug-report-prompt/",
+        "/tools/ai-answer-checklist/",
+        "/tools/ai-answer-compare/",
+        "/tools/meeting-notes-action-plan/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
     },
     {
       "url": "/tools/countdown-timer/",
@@ -11499,6 +11704,39 @@
       ]
     },
     {
+      "url": "/tools/meeting-notes-action-plan/",
+      "type": "calculator",
+      "title": "Meeting Notes to Action Plan: Decisions, Owners, Dates",
+      "primaryKeyword": "meeting notes to action plan",
+      "secondaryKeywords": [
+        "meeting notes to action items",
+        "meeting minutes generator",
+        "action items from notes",
+        "meeting summary",
+        "follow-up email after meeting",
+        "meeting action plan",
+        "minutes of meeting",
+        "extract action items"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "meeting notes to action plan online",
+        "meeting notes to action plan free",
+        "how to use meeting notes to action plan",
+        "meeting notes to action plan formula"
+      ],
+      "relatedTools": [
+        "/tools/prompt-builder/",
+        "/tools/context-pack-builder/",
+        "/tools/bug-report-prompt/",
+        "/tools/ai-answer-checklist/",
+        "/tools/ai-answer-compare/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
       "url": "/tools/meeting-planner/",
       "type": "calculator",
       "title": "International Meeting Planner: Find a Time Across Time Zones",
@@ -11724,6 +11962,39 @@
       "contentGaps": [
         "no supporting article"
       ]
+    },
+    {
+      "url": "/tools/prompt-builder/",
+      "type": "calculator",
+      "title": "AI Prompt Builder: Turn an Idea into a Complete Prompt",
+      "primaryKeyword": "ai prompt builder",
+      "secondaryKeywords": [
+        "prompt builder",
+        "prompt generator",
+        "write a prompt",
+        "chatgpt prompt",
+        "claude prompt",
+        "prompt template",
+        "better prompts",
+        "prompt engineering"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "ai prompt builder online",
+        "ai prompt builder free",
+        "how to use ai prompt builder",
+        "ai prompt builder formula"
+      ],
+      "relatedTools": [
+        "/tools/bug-report-prompt/",
+        "/tools/context-pack-builder/",
+        "/tools/ai-answer-checklist/",
+        "/tools/ai-answer-compare/",
+        "/tools/meeting-notes-action-plan/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
     },
     {
       "url": "/tools/shift-planner/",

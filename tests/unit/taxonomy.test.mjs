@@ -35,13 +35,13 @@ describe("current hierarchy data", () => {
     assert.equal(tax.getSectionUrl("Articles"), null);
   });
 
-  test("the eight existing categories, in order, with their titles unchanged", () => {
-    assert.deepEqual(cats.categories.map((c) => c.id), CATEGORY_IDS);
-    assert.deepEqual(cats.categories.map((c) => c.title), ["Loans", "Investment", "Tax", "Health", "Business", "Math", "Converter", "More"]);
+  test("the eight calculator categories, in order, with their titles unchanged, then the AI category (2026-11-12)", () => {
+    assert.deepEqual(cats.categories.map((c) => c.id), [...CATEGORY_IDS, "ai"]);
+    assert.deepEqual(cats.categories.map((c) => c.title), ["Loans", "Investment", "Tax", "Health", "Business", "Math", "Converter", "More", "AI"]);
   });
 
   test("Loans, Investment, Tax, Health, Business, Math and Converter have a landing page; More links to its anchor on the categories page", () => {
-    assert.deepEqual(cats.categories.filter((c) => c.landing).map((c) => c.id), ["loans", "investment", "tax", "health", "business", "math", "converter"]);
+    assert.deepEqual(cats.categories.filter((c) => c.landing).map((c) => c.id), ["loans", "investment", "tax", "health", "business", "math", "converter", "ai"]); // AI lands on the AI Tools section page
     assert.equal(tax.getCategoryLandingUrl("loans"), `${ROOT}loans.html`);
     assert.equal(tax.getCategoryUrl("loans"), `${ROOT}loans.html`);
     for (const id of ["investment", "tax", "health", "business", "math", "converter"]) {

@@ -19,6 +19,9 @@ header#header
           li
             a.navbar__link [data-nav="about" href="{ROOT}about.html"] "About"
       div.navbar__actions
+        button.theme-toggle [aria-label="Switch to dark theme" aria-pressed="false" data-action="theme" data-bound="true" type="button"]
+          svg [aria-hidden="true"]
+          svg [aria-hidden="true"]
         button.menu-toggle [aria-controls="mobile-navigation" aria-expanded="false" aria-label="Open navigation menu" data-action="menu" type="button"]
           span
           span

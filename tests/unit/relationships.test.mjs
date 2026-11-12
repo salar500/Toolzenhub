@@ -188,9 +188,9 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
       : key.startsWith("gst/") ? ["gst"] // the only published Tax tool: no category fallback beyond it
       : key.startsWith("margin/") ? ["margin", "profit", "roi"] // the primary tool first, then the other published Business tools
       : key.startsWith("profit/") ? ["profit", "margin", "roi"]
-      : key === "ai/how-to-write-instructions-an-ai-assistant-can-act-on" ? ["prompt-builder"] // the AI guides (Tool Pack 56): the curated tool only, since the AI category has no calculator category to fall back to
-      : key === "ai/how-to-give-an-ai-assistant-your-projects-context" ? ["context-pack-builder"]
-      : key === "ai/how-to-read-an-ai-answer-before-you-trust-it" ? ["ai-answer-checklist"]
+      : key === "ai/how-to-write-instructions-an-ai-assistant-can-act-on" ? ["prompt-builder", "bug-report-prompt", "context-pack-builder", "ai-answer-checklist", "ai-answer-compare", "meeting-notes-action-plan"] // the AI guides (Tool Pack 56): the curated tool first, then the other AI tools (the AI category, 2026-11-12)
+      : key === "ai/how-to-give-an-ai-assistant-your-projects-context" ? ["context-pack-builder", "prompt-builder", "bug-report-prompt", "ai-answer-checklist", "ai-answer-compare", "meeting-notes-action-plan"]
+      : key === "ai/how-to-read-an-ai-answer-before-you-trust-it" ? ["ai-answer-checklist", "prompt-builder", "bug-report-prompt", "context-pack-builder", "ai-answer-compare", "meeting-notes-action-plan"]
       : ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"];
     for (const key of PUBLISHED) assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(key)), expected(key), key);
     assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(PUBLISHED[0], { fill: false })), ["loan-comparison"]);

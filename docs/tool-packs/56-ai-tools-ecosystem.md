@@ -8,7 +8,7 @@ Owner instruction, 2026-11-11 (the master transformation brief): create a dedica
 
 | id | Title | Section | Type | One sentence |
 | --- | --- | --- | --- | --- |
-| `prompt-builder` | AI Prompt Builder | ai-tools (no category) | utility | A rough idea becomes a complete prompt: task, role, audience, context, material, rules, format, example, success criteria, and what to do when unclear. |
+| `prompt-builder` | AI Prompt Builder | ai-tools (category `ai`) | utility | A rough idea becomes a complete prompt: task, role, audience, context, material, rules, format, example, success criteria, and what to do when unclear. |
 | `bug-report-prompt` | Bug Report to Debugging Prompt | ai-tools | utility | What happened, what should happen, steps, environment and error output become a debugging task with the rules of a safe fix. |
 | `context-pack-builder` | Project Context Pack Builder | ai-tools | utility | Purpose, stack, key files, completed work, traps, rules, next task and verification, written once and pasted into every chat. |
 
@@ -79,7 +79,7 @@ Aliases in the catalog; the queries "prompt builder", "debugging prompt", "conte
 
 ## 20. Related tools
 
-Each tool lists the other two (rule 4.2: inside the section). `autoRelated` is default: the section has no category, so automatic lists stay within it.
+Each tool lists the other two (rule 4.2: inside the section). `autoRelated` is default: the section's one category `ai` (added 2026-11-12, taxonomy only) keeps automatic lists within it.
 
 ## 21. Articles
 

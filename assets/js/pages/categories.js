@@ -78,8 +78,10 @@ export function renderCategoriesBreadcrumb() {
  */
 function visibleCategories() {
 
+    /* this page is the Calculators section's: other sections' categories (AI) have their own section page */
     return categories.filter(
         category =>
+            category.sectionId === "calculators" &&
             getToolsByCategory(category.id).length > 0
     );
 
