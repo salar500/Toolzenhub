@@ -394,6 +394,10 @@ A script measured 17 page types (home, All Tools, the AI section, two calculator
 - **Copy fix:** the Practice Labs card on the home page said "Hands-on exercises and flashcards for JSON, cron and software testing", which no longer describes the section. It now reads "Paths, exercises and flashcards for SQL, Excel, Python and testing" (same length, so no layout change). The home DOM baseline was re-recorded for that one line.
 - Verification: before re-recording: light visual desktop 35 of 39 passed, mobile 33 of 39, tablet 17 passed with 3 failed and 19 skipped; the re-recorded tests passed on the recording run only (not re-run for stability); dark home 3/3; home-brand 8/8 desktop.
 
+### Full unit suite (2026-11-12, at 19d13c4, both builds fresh)
+
+- `node --test tests/unit/`: 3,971 tests, 3,967 passed, 0 failed, 4 skipped (the 17 failures seen before Batch 17 are gone: they were the AI category pins, the CRLF working copy, the keyword map, and builds that were out of date). Playwright projects were not part of this run.
+
 ### Production package status (2026-11-12, built from a3b498d, NOT deployed)
 
 - `npm run build` (dist/, root paths) gives 677 pages and files; packaged by Python zipfile (forward-slash entries, .htaccess included) as toolzenhub-production-a3b498d.zip (1,297 files, 16.4 MB) in C:/Users/DELL/Documents/ToolZenHub-production-package/, outside the repository.
