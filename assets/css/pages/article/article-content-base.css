@@ -135,7 +135,7 @@
         14px;
 
     background:
-        #ffffff;
+        var(--surface-card);
 
 }
 
@@ -368,7 +368,7 @@
         9px;
 
     background:
-        #ffffff;
+        var(--surface-card);
 
     color:
         var(--accent);
@@ -489,7 +489,7 @@
         var(--accent);
 
     color:
-        #ffffff;
+        var(--on-action);
 
 }
 

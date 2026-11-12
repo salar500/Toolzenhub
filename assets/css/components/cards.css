@@ -184,7 +184,7 @@
 
     border-radius: 12px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     text-decoration: none;
 

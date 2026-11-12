@@ -215,7 +215,7 @@
         var(--calculators-green);
 
     color:
-        #FFFFFF;
+        var(--on-action);
 
     font:
         inherit;

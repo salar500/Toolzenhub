@@ -45,7 +45,7 @@
         14px;
 
     background:
-        #ffffff;
+        var(--surface-card);
 
     box-shadow:
         0 4px 18px rgba(
@@ -94,7 +94,7 @@
         14px;
 
     background:
-        #ffffff;
+        var(--surface-card);
 
 }
 
@@ -255,7 +255,7 @@
 .article-sidebar-calculator {
 
     background:
-        #f8fbff;
+        var(--surface-sunken);
 
 }
 
@@ -392,7 +392,7 @@
         8px;
 
     background:
-        #ffffff;
+        var(--surface-card);
 
 }
 
@@ -446,7 +446,7 @@
         var(--accent);
 
     color:
-        #ffffff;
+        var(--on-action);
 
     text-decoration:
         none;

@@ -352,7 +352,7 @@
         12px;
 
     background:
-        #ffffff;
+        var(--surface-card);
 
 }
 

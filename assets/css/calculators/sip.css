@@ -494,7 +494,7 @@
     body,
     #sip-results .calculator-results__card {
 
-        background: #ffffff;
+        background: var(--surface-card);
 
         box-shadow: none;
 

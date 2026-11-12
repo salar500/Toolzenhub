@@ -12,7 +12,7 @@
     overflow: hidden;
     border: 1px solid var(--color-slate-200);
     border-radius: 14px;
-    background: #ffffff;
+    background: var(--surface-card);
     box-shadow: 0 8px 30px rgba(15, 23, 42, .06);
 }
 
@@ -100,7 +100,7 @@
     border: 1px solid var(--accent-line);
     border-radius: 50%;
 
-    background: #ffffff;
+    background: var(--surface-card);
     color: #1e3a8a;
 
     font-size: 12px;

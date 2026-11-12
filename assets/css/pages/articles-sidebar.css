@@ -78,7 +78,7 @@
     width: 17px;
     height: 17px;
     fill: none;
-    stroke: #FFFFFF;
+    stroke: var(--surface-card);
     stroke-width: 2;
 }
 

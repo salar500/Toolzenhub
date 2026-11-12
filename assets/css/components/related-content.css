@@ -69,7 +69,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 12px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     text-decoration: none;
 
@@ -82,7 +82,7 @@
 .related-calculator-card:hover {
     transform: translateY(-2px);
 
-    border-color: #bfdbfe;
+    border-color: var(--accent-line);
 
     box-shadow:
         0 8px 24px
@@ -152,7 +152,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 12px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     transition:
         transform .2s ease,
@@ -163,7 +163,7 @@
 .related-article-card:hover {
     transform: translateY(-2px);
 
-    border-color: #bfdbfe;
+    border-color: var(--accent-line);
 
     box-shadow:
         0 8px 24px

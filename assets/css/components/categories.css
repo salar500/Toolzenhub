@@ -163,11 +163,11 @@
 
     padding: 12px;
 
-    border: 1px solid #e7ecea;
+    border: 1px solid var(--line);
 
     border-radius: 12px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     box-shadow:
         0 2px 7px rgba(16, 24, 40, 0.035);
@@ -349,7 +349,7 @@
 
     border-radius: 12px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: inherit;
 

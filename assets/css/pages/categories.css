@@ -140,7 +140,7 @@
 
     border-radius: 14px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     box-shadow:
         0 3px 12px rgba(16, 24, 40, 0.045);
@@ -364,7 +364,7 @@
 
     border-radius: 8px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     box-shadow:
         0 1px 3px rgba(16, 24, 40, 0.04);
@@ -388,7 +388,7 @@
 
     outline: 0;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: var(--color-ink);
 
@@ -416,7 +416,7 @@
 
     background: var(--color-brand-green);
 
-    color: #ffffff;
+    color: var(--on-action);
 
     font-size: 20px;
 

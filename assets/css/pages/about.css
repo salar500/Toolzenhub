@@ -10,7 +10,7 @@
     --about-green-light: var(--accent-soft);
 
     --about-bg: var(--surface-page);
-    --about-white: #FFFFFF;
+    --about-white: var(--surface-card);
 
     --about-heading: var(--ink);
     --about-body: var(--ink-subtle);
@@ -61,7 +61,7 @@
         linear-gradient(
             180deg,
             var(--surface-page) 0%,
-            #FFFFFF 100%
+            var(--surface-card) 100%
         );
 
     border-bottom: 1px solid var(--about-border);
@@ -471,11 +471,11 @@
 
     padding: 17px;
 
-    border: 1px solid #EEF2F7;
+    border: 1px solid var(--line);
 
     border-radius: 9px;
 
-    background: #FCFDFC;
+    background: var(--surface-sunken);
 
 }
 
@@ -531,7 +531,7 @@
 
     background: var(--about-green);
 
-    color: #FFFFFF;
+    color: var(--on-action);
 
     font-size: 12px;
 

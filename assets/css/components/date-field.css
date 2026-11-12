@@ -87,7 +87,7 @@
     border: 1px solid var(--line-control);
     border-radius: 10px;
 
-    background: #ffffff;
+    background: var(--surface-card);
     color: var(--color-ink);
 
     font: inherit;

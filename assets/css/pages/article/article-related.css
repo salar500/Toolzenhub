@@ -137,7 +137,7 @@
         12px;
 
     background:
-        #ffffff;
+        var(--surface-card);
 
     text-decoration:
         none;

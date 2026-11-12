@@ -98,7 +98,7 @@
     padding: 10px 14px;
     border: 1px solid var(--line);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--surface-card);
     color: var(--color-ink);
     font-family:
         ui-monospace, SFMono-Regular, Menlo, Consolas,
@@ -137,7 +137,7 @@
     padding: 8px 12px;
     border: 1px solid var(--line-control);
     border-radius: 10px;
-    background: #ffffff;
+    background: var(--surface-card);
     color: var(--color-ink);
     font-family: ui-monospace, "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
     font-size: 13px;
@@ -262,7 +262,7 @@
     padding: 14px;
     border: 1px solid var(--state-error-line);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--surface-card);
 }
 
 .jp-error p {

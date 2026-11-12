@@ -62,7 +62,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 14px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
 }
 
@@ -128,7 +128,7 @@
     border: 1px solid var(--line-control);
     border-radius: 10px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: var(--color-ink);
 
@@ -237,7 +237,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 12px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
 }
 
@@ -386,7 +386,7 @@
     border: 1px solid var(--line-control);
     border-radius: 10px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: var(--color-ink);
 
@@ -522,7 +522,7 @@
 .calculator-page .pp-download:hover,
 .calculator-page .pp-download:focus {
 
-    color: #ffffff;
+    color: var(--on-action);
 
 }
 

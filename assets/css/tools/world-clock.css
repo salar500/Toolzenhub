@@ -99,7 +99,7 @@
     border: 1px solid var(--line-control);
     border-radius: 10px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: var(--color-ink);
 
@@ -321,7 +321,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 14px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     box-shadow: var(--shadow-sm);
 
@@ -614,7 +614,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 14px;
 
-    background: linear-gradient(135deg, #ffffff 0%, var(--color-action-green-soft) 100%);
+    background: linear-gradient(135deg, var(--surface-card) 0%, var(--color-action-green-soft) 100%);
 
 }
 
@@ -668,7 +668,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 14px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
 }
 
@@ -776,7 +776,7 @@
     border: 1px solid var(--line-control);
     border-radius: var(--radius-full);
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: var(--color-ink);
 
@@ -953,7 +953,7 @@
     border: 1px solid var(--line-control);
     border-radius: 10px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: var(--color-ink);
 
@@ -1262,7 +1262,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 12px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     /* the intrinsic size is the content box: 94px plus 20px of padding and 2px of border is the 116px of a drawn row with a one-line place */
     content-visibility: auto;
@@ -1387,7 +1387,7 @@
 
     background: var(--color-action-green);
 
-    color: #ffffff;
+    color: var(--on-action);
 
     font: inherit;
     font-size: 15px;

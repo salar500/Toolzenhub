@@ -16,7 +16,7 @@
         linear-gradient(
             180deg,
             var(--surface-page) 0%,
-            #FFFFFF 100%
+            var(--surface-card) 100%
         );
 }
 
@@ -117,7 +117,7 @@
     border: 1px solid var(--articles-green);
     border-radius: 999px;
     background: var(--articles-green);
-    color: #FFFFFF;
+    color: var(--on-action);
     font: inherit;
     font-size: 12px;
     font-weight: 700;

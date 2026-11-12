@@ -782,7 +782,7 @@
 .lx-lesson {
     border: 1px solid var(--color-slate-200);
     border-radius: 10px;
-    background: var(--color-white, #fff);
+    background: var(--surface-card);
 }
 
 .lx-lesson > summary {

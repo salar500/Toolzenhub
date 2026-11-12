@@ -98,7 +98,7 @@
     padding: 10px 14px;
     border: 1px solid var(--line);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--surface-card);
     color: var(--color-ink);
     font-family:
         ui-monospace, SFMono-Regular, Menlo, Consolas,
@@ -228,7 +228,7 @@
     padding: 14px;
     border: 1px solid var(--state-error-line);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--surface-card);
 }
 
 .jc-error p {

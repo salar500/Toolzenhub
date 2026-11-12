@@ -1225,7 +1225,7 @@ a.learn-card:hover {
 
     border: 1px solid var(--line);
     border-radius: 12px;
-    background: #fff;
+    background: var(--surface-card);
 
 }
 
@@ -1312,7 +1312,7 @@ a.learn-card:hover {
 
 /* ---------- HTML and CSS playground ---------- */
 
-.learn-webplay__frame { display: block; width: 100%; min-height: 220px; margin: 10px 0; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.learn-webplay__frame { display: block; width: 100%; min-height: 220px; margin: 10px 0; border: 1px solid var(--line); border-radius: 8px; background: var(--surface-card); }
 
 /* ---------- Git simulator ---------- */
 

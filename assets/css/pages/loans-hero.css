@@ -19,7 +19,7 @@
         linear-gradient(
             180deg,
             var(--surface-sunken) 0%,
-            #ffffff 100%
+            var(--surface-card) 100%
         );
 }
 
@@ -272,7 +272,7 @@
 
     border-top: 0;
 
-    background: #ffffff;
+    background: var(--surface-card);
 }
 
 
@@ -375,7 +375,7 @@
 
     border-radius: 7px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: #263746;
 
@@ -423,7 +423,7 @@
 
     border-radius: 8px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 }
 
 
@@ -513,7 +513,7 @@
 
     background: var(--action);
 
-    color: #ffffff;
+    color: var(--on-action);
 
     font-size: 24px;
 

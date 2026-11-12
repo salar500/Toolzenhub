@@ -27,7 +27,7 @@
     border: 1px solid var(--line);
     border-radius: 12px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     box-shadow:
         0 4px 14px rgba(16, 24, 40, .04);
@@ -235,7 +235,7 @@
 
     border-radius: 7px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: var(--color-gray-700);
 
@@ -289,7 +289,7 @@
     border: 1px dashed var(--line);
     border-radius: 10px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: var(--color-ink-muted);
 
@@ -316,8 +316,8 @@
     /* Design System 2.0: a soft edge shows where more columns are hidden. The white
        layers scroll with the content and cover the shadow once an edge is reached. */
     background:
-        linear-gradient(to right, var(--surface-card) 30%, rgba(255, 255, 255, 0)) left center / 32px 100% no-repeat local,
-        linear-gradient(to left, var(--surface-card) 30%, rgba(255, 255, 255, 0)) right center / 32px 100% no-repeat local,
+        linear-gradient(to right, var(--surface-card) 30%, transparent) left center / 32px 100% no-repeat local,
+        linear-gradient(to left, var(--surface-card) 30%, transparent) right center / 32px 100% no-repeat local,
         radial-gradient(farthest-side at 0 50%, rgba(28, 25, 23, 0.22), rgba(28, 25, 23, 0)) left center / 12px 100% no-repeat scroll,
         radial-gradient(farthest-side at 100% 50%, rgba(28, 25, 23, 0.22), rgba(28, 25, 23, 0)) right center / 12px 100% no-repeat scroll;
 }
@@ -593,7 +593,7 @@
     /* printed like the summary card above it: plain, no shadow */
     .calculator-wide .calculator-results__card {
 
-        background: #ffffff;
+        background: var(--surface-card);
         box-shadow: none;
 
     }

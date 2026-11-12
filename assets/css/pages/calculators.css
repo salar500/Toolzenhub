@@ -15,7 +15,7 @@
     --calculators-green-light: var(--accent-soft);
 
     --calculators-bg: var(--surface-page);
-    --calculators-white: #FFFFFF;
+    --calculators-white: var(--surface-card);
 
     --calculators-heading: var(--ink);
     --calculators-body: var(--ink-subtle);
@@ -127,7 +127,7 @@
         linear-gradient(
             180deg,
             var(--surface-page) 0%,
-            #FFFFFF 100%
+            var(--surface-card) 100%
         );
 
 }
@@ -357,7 +357,7 @@
         var(--calculators-green);
 
     color:
-        #FFFFFF;
+        var(--on-action);
 
     font:
         inherit;

@@ -207,7 +207,7 @@
 
     border-radius: 8px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     box-shadow:
         0 4px 16px rgba(16, 24, 40, 0.07);
@@ -280,7 +280,7 @@
 
     background: var(--color-brand-green);
 
-    color: #ffffff;
+    color: var(--on-action);
 
     font-size: 24px;
 
@@ -804,7 +804,7 @@
 
 .hero__cta--secondary {
     border: 1px solid var(--line-control);
-    background: #ffffff;
+    background: var(--surface-card);
     color: var(--color-ink);
 }
 

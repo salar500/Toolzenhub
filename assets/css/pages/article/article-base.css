@@ -54,7 +54,7 @@
         0;
 
     background:
-        #ffffff;
+        var(--surface-card);
 
 }
 

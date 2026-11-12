@@ -295,7 +295,7 @@
 .article-meta-divider {
 
     color:
-        #cbd5e1;
+        var(--line);
 
 }
 

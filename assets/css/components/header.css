@@ -229,6 +229,40 @@ html {
 .navbar__actions {
     display: flex;
     align-items: center;
+    gap: var(--space-2);
+}
+
+/* Theme toggle: the moon shows in the light theme (press for dark), the sun in the dark theme */
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--target-size);
+    height: var(--target-size);
+    padding: 0;
+    border: 1px solid var(--line-control);
+    border-radius: var(--radius-sm);
+    background: var(--surface-card);
+    color: var(--ink);
+    cursor: pointer;
+}
+
+.theme-toggle:hover {
+    background: var(--surface-sunken);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.theme-toggle__sun,
+:root[data-theme="dark"] .theme-toggle__moon {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle__sun {
+    display: block;
 }
 
 .menu-toggle {
@@ -348,9 +382,10 @@ html.menu-open {
 @media (min-width: 960px) {
     .navbar__menu {
         display: block;
+        margin-left: auto;
     }
 
-    .navbar__actions,
+    .navbar__actions .menu-toggle,
     .mobile-navigation {
         display: none;
     }

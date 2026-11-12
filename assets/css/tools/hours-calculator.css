@@ -82,7 +82,7 @@
     border: 1px solid var(--line);
     border-radius: 12px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
 }
 
@@ -208,7 +208,7 @@
     border: 1px solid var(--line-control);
     border-radius: 10px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: var(--color-ink);
 
@@ -378,7 +378,7 @@
     border: 2px solid var(--action);
     border-radius: 14px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
 }
 
@@ -627,7 +627,7 @@
     border: 1px solid var(--line-control);
     border-radius: 10px;
 
-    background: #ffffff;
+    background: var(--surface-card);
     color: var(--color-ink);
 
     font: inherit;

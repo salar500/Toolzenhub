@@ -82,7 +82,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 14px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     box-shadow:
         0 25px 70px rgba(15, 23, 42, .25);
@@ -107,7 +107,7 @@
 
     border-bottom: 1px solid var(--color-slate-200);
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     min-width: 0;
 }
@@ -196,7 +196,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 9px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     min-width: 0;
 }
@@ -233,7 +233,7 @@
 
     overflow: hidden;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     box-sizing: border-box;
 }
@@ -319,7 +319,7 @@
 
     border-top: 1px solid var(--color-slate-200);
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     min-width: 0;
 }

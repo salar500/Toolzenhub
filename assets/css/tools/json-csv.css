@@ -75,7 +75,7 @@
     padding: 10px 14px;
     border: 1px solid var(--line-control);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--surface-card);
     color: var(--color-ink);
     font-family:
         ui-monospace, SFMono-Regular, Menlo, Consolas,
@@ -316,7 +316,7 @@
     padding: 10px 14px;
     border: 1px solid var(--line-control);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--surface-card);
     cursor: pointer;
 }
 
@@ -357,7 +357,7 @@
     padding: 0 14px;
     border: 1px solid var(--line-control);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--surface-card);
     color: var(--color-ink);
     font-size: 16px;
 }
@@ -394,7 +394,7 @@
     padding: 0 12px;
     border: 1px solid var(--line-control);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--surface-card);
     color: var(--color-ink);
     font-size: 16px;
 }

@@ -116,7 +116,7 @@ fieldset.mp-person {
     border: 1px solid var(--line-control);
     border-radius: 10px;
 
-    background: #ffffff;
+    background: var(--surface-card);
     color: var(--color-ink);
 
     font: inherit;
@@ -622,7 +622,7 @@ fieldset.mp-person {
     border: 1px solid var(--color-slate-200);
     border-radius: 6px;
 
-    background: #ffffff;
+    background: var(--surface-card);
     color: var(--color-ink);
 
     font-size: 12px;
@@ -654,9 +654,9 @@ fieldset.mp-person {
 
 .sp-cell--day {
 
-    border-color: #175cd3;
+    border-color: var(--state-info);
 
-    background: #eff8ff;
+    background: var(--state-info-soft);
 
 }
 
@@ -670,9 +670,9 @@ fieldset.mp-person {
 
 .sp-cell--night {
 
-    border-color: #3538cd;
+    border-color: var(--accent);
 
-    background: #eef4ff;
+    background: var(--accent-soft);
 
 }
 
