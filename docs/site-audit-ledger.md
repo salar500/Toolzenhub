@@ -431,6 +431,12 @@ Owner decisions applied: the Premium Spectrum palette stays (green is not restor
 - **Functional specs after the CSS changes:** ai-tools, tool-controls, xirr and unix-timestamp-converter on subpath-desktop and subpath-mobile: 175 passed, 2 failed before the pin fix (the stale section list, now fixed and re-run 1 of 1 on each).
 - **Production package:** toolzenhub-production-794cf6a.zip is now outdated: this batch changes shipped CSS, images and article data. Source of truth for the next package is the commit of this batch, to be built only after the owner's review. Not built; not deployed.
 
+### Batch 24: completion-first checkpoint (2026-11-13), no code change
+
+- **Phase 10 to 20 recovery:** the repository records the owner's roadmap phases only up to 12 (`docs/quality/REQUIREMENTS_RECONCILIATION.md`, P5111 Phases 1 to 12). No document holds a specification for phases 13 to 20, and they are not invented here; the owner needs to supply them.
+- **Scrolling and spacing, measured at 1280 and 390 on 74 tool and calculator pages:** median first control 511 px down a 1280 screen and 623 px down a 390 screen (Batch 8, 9 and the page frame already trimmed this). Deepest are the Practice Labs lesson pages, whose first control is a lesson widget and not a form. No page needed a change on this evidence; the Meeting Planner at 1280 shows two roughly 45 px row gaps and a half-width form, recorded as a candidate, not a confirmed defect.
+- **Still open:** JSON Formatter 1 MB timing (passes alone, fails only under full-suite load; threshold unchanged); Loan Comparison intermittent visual failure (not reproduced 8 of 8); mobile and tablet visual re-run after the last re-record; new production package from this commit; JSON Schema Validator and phases 13 to 20 need owner input.
+
 ### Production package status (2026-11-12, built from a3b498d, NOT deployed)
 
 - `npm run build` (dist/, root paths) gives 677 pages and files; packaged by Python zipfile (forward-slash entries, .htaccess included) as toolzenhub-production-a3b498d.zip (1,297 files, 16.4 MB) in C:/Users/DELL/Documents/ToolZenHub-production-package/, outside the repository.
