@@ -450,6 +450,9 @@ Owner decisions applied: the Premium Spectrum palette stays (green is not restor
 - **Technical issues:** JSON Formatter 1 MB check measures 320 to 470 ms alone against 1,500 ms and failed only under parallel full-suite load (threshold unchanged); Loan Comparison visual failure not reproduced (pixel-identical over six captures); both treated as load-related, unproven.
 - Hostinger, `main` and the production site were not touched. Rule changes: none.
 
+- **Follow-up (owner-approved test-only change): the four stale expectations in `tests/browser/build.spec.js` are resolved.** (1) The three AI guides (ids 41 to 43) are asserted to list exactly the other two guides, in order, and their related-card count is 2; (2) the article page module cap is 10 instead of 9, for `ui/theme.js`; (3) the three AI guides join the no-hero-image set (`NO_IMAGE`), so the hero-image assertion stays active for every other article. This third change was found only after the first two were applied, because the image check follows the related-card check. No application code, article content, image, threshold or baseline was changed.
+- **Evidence for the follow-up (targeted, NOT a full regression):** `npx playwright test --project=root-desktop --workers=1 --reporter=line tests/browser/build.spec.js` gave 60 tests, 60 passed, 0 failed, 0 skipped (1.4 minutes). The full root-desktop project (828 tests) was NOT re-run after this change; its recorded result stays 824 passed and 4 failed, which is the historical evidence for the unchanged package.
+
 ### Production package status (2026-11-12, built from a3b498d, NOT deployed)
 
 - `npm run build` (dist/, root paths) gives 677 pages and files; packaged by Python zipfile (forward-slash entries, .htaccess included) as toolzenhub-production-a3b498d.zip (1,297 files, 16.4 MB) in C:/Users/DELL/Documents/ToolZenHub-production-package/, outside the repository.
