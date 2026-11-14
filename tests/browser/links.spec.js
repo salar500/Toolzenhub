@@ -30,8 +30,11 @@ test.describe("rendered link crawl @portable", () => {
   test("every rendered internal link is correct, known, and reachable", async ({ page, go, api, siteRoot, deployMode, browserName }, testInfo) => {
     const knownRoutes = new Set(livePages.map((p) => rel(p.url))); // "", "about.html", "calculators/emi/", …
     const crawl = [...livePages.map((p) => rel(p.url)), ...VARIANTS];
-    // every page is visited, so the budget follows the inventory (about 130 pages when 240 s was set; 662 with the Practice Labs)
-    test.setTimeout(Math.max(240_000, crawl.length * 1_500));
+    // every page is visited, so the budget follows the inventory (about 130 pages when 240 s was set; 662 with the Practice Labs).
+    // 2.5 s a page (was 1.5 s): each page waits for networkidle (500 ms of quiet at least) after it renders, and on the 4 GB development
+    // laptop the crawl measured 1.65 to 1.70 s a page (2026-11-14: two runs timed out at about 89 % of 680 pages, none of them hanging;
+    // the pages load in under 0.7 s alone). Every page and every check is unchanged; a page that hangs still fails on its own timeouts.
+    test.setTimeout(Math.max(240_000, crawl.length * 2_500));
 
     const failures = [];
     const targets = new Map(); // site-relative path -> first page that links to it
