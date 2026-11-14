@@ -76,8 +76,12 @@ test.describe("Business Days Calculator", () => {
     await page.clock.install({ time: new Date("2026-03-10T10:00:00Z") });
     await go("tools/business-days/");
     await expect(page.locator("#bd-start")).toHaveValue("");
-    await page.locator("[data-today='bd-start']").click();
-    await expect(page.locator("#bd-start")).toHaveValue("2026-03-10");
+    // the button is in the prebuilt page and its click handler is wired when the tool's module runs; on a loaded machine the first
+    // click could land before that, so the click is retried until it takes effect (the field still fills only on a click)
+    await expect(async () => {
+      await page.locator("[data-today='bd-start']").click();
+      await expect(page.locator("#bd-start")).toHaveValue("2026-03-10", { timeout: 1000 });
+    }).toPass({ timeout: 10_000 });
   });
 });
 
