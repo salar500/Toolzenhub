@@ -2,6 +2,19 @@
 
 Rules: `docs/product-decision-rules.md` section 11. GitHub Pages is the development preview; Hostinger production (`toolzenhub.in`) is manual and was not touched by any record here.
 
+## Update 2026-11-14 (release candidate f994b41c, built, not deployed)
+
+| Item | Record |
+|---|---|
+| File | `C:\Users\DELL\Documents\ToolZenHub-production-package\toolzenhub-production-f994b41c.zip`, 16,598,797 bytes, 1,297 entries |
+| SHA-256 | `c809ab2b21baeb5261f409a19a67ee2f1bbc81effb40e638e93e569f26ada93d` |
+| Source | `f994b41c`, branch `feature/unified-ecosystem-workspace` (application code identical to `997990b0`); `npm run build`, clean tree, 2026-11-14 19:36 IST |
+| Checks | byte-identical to `dist/`, zip test clean, production canonicals and sitemap (671 URLs) and robots, static checks passed, browser smoke on 11 pages at 1280 and 390 px; full projects in `docs/site-audit-ledger.md` Batch 27 |
+| Open | browser link crawl not passed on this code (timeouts, then stopped for low memory) |
+| Superseded | `toolzenhub-production-a395fb0.zip`, `-794cf6a`, `-a3b498d` (kept, stale) |
+
+Migration steps, smoke checklist and rollback: `docs/production-handoff.md`. Hostinger, DNS and `main` untouched.
+
 ## Update 2026-11-07 (preview current, production package ready, not deployed)
 
 Pushed `8fa60fd..f743d72` to `origin/main`, fast-forward, no force; 6 commits. Preview `https://salar500.github.io/Toolzenhub/` serves that build: `date-field.js`, `section-switcher.css` and `index.html` are byte-identical (SHA-256) to the tested `dist-ghpages/`; home, tool, calculator, article, category, robots, favicon and sitemap routes return 200, an unknown path returns the 404 page, the sitemap lists 131 production URLs. The `gh` CLI is unavailable, so the check is by direct requests (rule 11.3). Regression evidence: Q3-19 in `TEST_EXECUTION_LEDGER.md`.
