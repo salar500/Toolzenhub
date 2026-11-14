@@ -7,7 +7,7 @@
  *
  * Reviewed before recording: do not accept a diff to make a run pass.
  */
-import { test, expect, settleImages } from "../helpers/test-base.mjs";
+import { test, expect, settleImages, settleCaptureState } from "../helpers/test-base.mjs";
 
 const PAGES = [
   // name, path, ready selector, include on tablet
@@ -45,6 +45,7 @@ test.describe("dark theme visual baselines @visual", () => {
       expect(await settleImages(page), "broken images would make the screenshot meaningless").toEqual([]);
       await page.evaluate(() => Promise.all([...document.images].map((i) => i.decode().catch(() => {}))));
       await page.evaluate(() => window.scrollTo(0, 0));
+      await settleCaptureState(page);
       await expect(page).toHaveScreenshot(["visual-dark", `${name}.png`], { fullPage: true });
     });
   }

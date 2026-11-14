@@ -146,6 +146,17 @@ export async function settleImages(page) {
   });
 }
 
+/**
+ * Chromium drops touch emulation the first time a full-page screenshot is taken: "(pointer: coarse)" and "(hover: none)" stop matching,
+ * so the 44 px touch-target rules switch off and a tablet page reflows (about 55 px shorter) between the first and the second capture.
+ * toHaveScreenshot then needed a third capture to see two equal ones and, on a loaded machine, timed out ("Failed to take two
+ * consecutive stable screenshots"). One throwaway capture first puts the page in the state every later capture sees, so the compared
+ * screenshot is deterministic. Baselines and thresholds are unchanged; touch-target sizes are checked by the functional specs.
+ */
+export async function settleCaptureState(page) {
+  await page.screenshot({ fullPage: true });
+}
+
 export async function expectNoHorizontalOverflow(page) {
   const o = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, iw: window.innerWidth }));
   expect(o.sw, `horizontal overflow: scrollWidth ${o.sw} > viewport ${o.iw}`).toBeLessThanOrEqual(o.iw + 1);

@@ -633,16 +633,27 @@
    (these apply to every tool family that loads this file)
 ========================================================= */
 
-/* The reset removes list markers; reading lists get them back */
-.calculator-info ul {
+/* The reset removes list markers; reading lists get them back (the scope and assumption boxes and the loan explanations
+   kept their 20px indent but had lost their bullets, so wrapped items ran together) */
+.calculator-info ul,
+.it-scope__list,
+.ccp-assumptions ul,
+.ppf-assumptions ul,
+.loan-info-card ul:not([class]),
+.loan-consider-list {
     list-style: disc;
 }
 
-.calculator-info ol {
+.calculator-info ol,
+.loan-info-card ol:not([class]) {
     list-style: decimal;
 }
 
-.calculator-info li::marker {
+.calculator-info li::marker,
+.it-scope__list li::marker,
+.ccp-assumptions li::marker,
+.ppf-assumptions li::marker,
+.loan-info-card li::marker {
     color: var(--ink-subtle);
 }
 

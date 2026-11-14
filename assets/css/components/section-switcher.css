@@ -1049,5 +1049,27 @@
 
     }
 
+    /* The page's own name was shown three times above the first control: as the breadcrumb's last item (on a line of its own), in the drawer
+       bar and as the heading. While the drawer bar is shown, the breadcrumb's last item and the separator before it are hidden from view but
+       kept for screen readers, so the trail still ends at the current page; the bar and the heading keep the name on screen. */
+    html:has(.section-switcher.is-drawer) #app .container--workspace .calculator-breadcrumb > :is(strong, [aria-current]):last-child,
+    html:has(.section-switcher.is-drawer) #app .container--workspace .calculator-breadcrumb > span:has(+ :is(strong, [aria-current]):last-child),
+    html:has(.section-switcher.is-drawer) #app .calculator-page:has(> .section-switcher) > .calculator-breadcrumb > :is(strong, [aria-current]):last-child,
+    html:has(.section-switcher.is-drawer) #app .calculator-page:has(> .section-switcher) > .calculator-breadcrumb > span:has(+ :is(strong, [aria-current]):last-child) {
+
+        position: absolute;
+
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+
+        white-space: nowrap;
+
+    }
+
 }
 

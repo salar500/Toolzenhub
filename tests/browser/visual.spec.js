@@ -11,7 +11,7 @@
  * platforms, so regenerate with `npm run baseline:update` on a new machine rather than loosening
  * the tolerance. Do not redesign to "make screenshots pass" — review the diff images in test-results/.
  */
-import { test, expect, settleImages } from "../helpers/test-base.mjs";
+import { test, expect, settleImages, settleCaptureState } from "../helpers/test-base.mjs";
 
 const PAGES = [
   // name, path, ready selector, include on tablet
@@ -64,6 +64,7 @@ test.describe("visual baselines @visual (clock and zone pinned)", () => {
     await expect(page.locator("#ts-panel")).toHaveAttribute("data-ready", "true");
     await page.evaluate(() => document.fonts.ready);
     await page.evaluate(() => window.scrollTo(0, 0));
+    await settleCaptureState(page);
     await expect(page).toHaveScreenshot(["visual", "unix-timestamp-converter.png"], { fullPage: true });
   });
 
@@ -74,6 +75,7 @@ test.describe("visual baselines @visual (clock and zone pinned)", () => {
     await expect(page.locator("#td-panel")).toHaveAttribute("data-state", "result");
     await page.evaluate(() => document.fonts.ready);
     await page.evaluate(() => window.scrollTo(0, 0));
+    await settleCaptureState(page);
     await expect(page).toHaveScreenshot(["visual", "text-diff.png"], { fullPage: true });
   });
 
@@ -84,6 +86,7 @@ test.describe("visual baselines @visual (clock and zone pinned)", () => {
     await expect(page.locator("#tz-panel")).toHaveAttribute("data-ready", "true");
     await page.evaluate(() => document.fonts.ready);
     await page.evaluate(() => window.scrollTo(0, 0));
+    await settleCaptureState(page);
     await expect(page).toHaveScreenshot(["visual", "time-zone-converter.png"], { fullPage: true });
   });
 
@@ -97,6 +100,7 @@ test.describe("visual baselines @visual (clock and zone pinned)", () => {
     await expect(page.locator("#ic-panel")).toHaveAttribute("data-state", "done");
     await page.evaluate(() => document.fonts.ready);
     await page.evaluate(() => window.scrollTo(0, 0));
+    await settleCaptureState(page);
     await expect(page).toHaveScreenshot(["visual", "image-compressor-resizer.png"], { fullPage: true });
   });
 
@@ -115,6 +119,7 @@ test.describe("visual baselines @visual (clock and zone pinned)", () => {
     await expect(page.locator("#wc-here-time")).toHaveText("7:50 PM");
     await page.evaluate(() => document.fonts.ready);
     await page.evaluate(() => window.scrollTo(0, 0));
+    await settleCaptureState(page);
     await expect(page).toHaveScreenshot(["visual", "world-clock.png"], { fullPage: true });
   });
 
@@ -130,6 +135,7 @@ test.describe("visual baselines @visual (clock and zone pinned)", () => {
     await expect(page.locator("#wc-board .wc-card").first().locator("time")).toHaveText("7:50 PM");
     await page.evaluate(() => document.fonts.ready);
     await page.evaluate(() => window.scrollTo(0, 0));
+    await settleCaptureState(page);
     await expect(page).toHaveScreenshot(["visual", "world-clock-clocks.png"], { fullPage: true });
   });
 });
@@ -145,6 +151,7 @@ test.describe("visual baselines @visual", () => {
       expect(await settleImages(page), "broken images would make the screenshot meaningless").toEqual([]);
       await page.evaluate(() => Promise.all([...document.images].map((i) => i.decode().catch(() => {}))));
       await page.evaluate(() => window.scrollTo(0, 0));
+      await settleCaptureState(page);
       await expect(page).toHaveScreenshot(["visual", `${name}.png`], { fullPage: true });
     });
   }
