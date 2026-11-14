@@ -464,6 +464,12 @@ Owner decisions applied: the Premium Spectrum palette stays (green is not restor
 - **NOT run (memory):** the complete unit suite was stopped by the system for low memory partway through (no failure in the part that ran); NOT run on this commit: full `subpath-desktop`, `subpath-mobile` and `root-desktop` projects, dark visual set. Earlier stale pins show these projects have not been run in full since the palette change, so a full pass is needed before a production package is built.
 - The production ZIP built from `a395fb0` does NOT contain this batch; a new package must be built from the final verified commit. Hostinger, `main` and the production site were not touched. Rule changes: none.
 
+### Batch 27: release validation on 9534e98, in progress (2026-11-14)
+
+- **Complete unit suite, serial (`node --test --test-concurrency=1`, two halves of the 175 files):** 3,971 tests, 3,967 passed, 0 failed, 4 skipped. The JSON Formatter 1 MB check passes when test files do not run in parallel, consistent with the earlier load explanation; its threshold is unchanged.
+- **`subpath-desktop` (4,027 tests in 106 files), run in batches of about 200 tests, one worker, each batch on its own:** batches 1 to 9 of 16 finished: 1,380 passed, 6 skipped, 1 failed. The failure is the rendered link crawl (`links.spec.js`), which exceeded its own budget (1.5 s a page, 1,014 s) after 16.9 minutes while navigating to a TypeScript lesson; that page loads in 657 ms on its own and the same crawl passed in 12.8 minutes on root-desktop, so it is recorded as slowness under memory pressure, to be re-run alone, not as a pass. Batch 10 (risk-reward to sip, 151 tests) was stopped by the system for low memory at test 49 with no failure so far; its orphaned Playwright processes were ours and were stopped. Batches 10 to 16 are NOT run.
+- **NOT run yet on this commit:** `subpath-mobile` (3,977 tests), `root-desktop` (828), the dark visual set; therefore no new production package and no handoff guide yet. Nothing here is a release claim.
+
 ### Production package status (2026-11-12, built from a3b498d, NOT deployed)
 
 - `npm run build` (dist/, root paths) gives 677 pages and files; packaged by Python zipfile (forward-slash entries, .htaccess included) as toolzenhub-production-a3b498d.zip (1,297 files, 16.4 MB) in C:/Users/DELL/Documents/ToolZenHub-production-package/, outside the repository.
