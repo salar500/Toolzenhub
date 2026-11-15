@@ -19,11 +19,14 @@ const picker = (page) => app(page).locator("details.lx-picker");
 test.describe("Practice lab workspace list", () => {
 
   for (const lab of LABS) {
-    test(`${lab.route}: grouped list, titles, jump to the first, a middle and the last exercise`, async ({ page, go }) => {
+    test(`${lab.route}: list in number order with topics, titles, jump to the first, a middle and the last exercise`, async ({ page, go }) => {
       await openLab(page, go, lab.route);
       await expect(app(page)).toHaveClass(/lx-workspace/);
       await expect(app(page).locator(".lx-exlist li")).toHaveCount(lab.count);
-      expect(await app(page).locator(".lx-exgroup").count()).toBeGreaterThan(2);
+      const numbers = await app(page).locator(".lx-exlist .lx-exbtn__no").allTextContents();
+      expect(numbers.map(Number)).toEqual(Array.from({ length: lab.count }, (_, i) => i + 1));
+      expect(await app(page).locator("#lx-extopic option").count()).toBeGreaterThan(3); // "All topics" and at least three topics
+      await expect(app(page).locator(".lx-exbtn__tags").first()).not.toBeEmpty();
       await expect(app(page).locator(".lx-exbtn__title").first()).not.toBeEmpty();
       if (await picker(page).evaluate((d) => !d.open)) await picker(page).locator("summary").click();
       for (const n of [lab.count, Math.ceil(lab.count / 2), 1]) {
@@ -44,7 +47,11 @@ test.describe("Practice lab workspace list", () => {
     const shown = await app(page).locator(".lx-exgroups li:not([hidden])").count();
     expect(shown).toBeGreaterThanOrEqual(5);
     expect(shown).toBeLessThan(49);
-    await expect(app(page).locator(".lx-exgroup:not([hidden])")).toHaveCount(1);
+    await box.fill("");
+    // the topic filter: Where is exercises 3-7 and 31-32, in number order
+    await page.getByLabel("Show topic").selectOption("where");
+    await expect(app(page).locator(".lx-exgroups li:not([hidden]) .lx-exbtn__no")).toHaveText(["3", "4", "5", "6", "7", "31", "32"]);
+    await page.getByLabel("Show topic").selectOption("");
     await box.fill("12");
     await expect(app(page).locator(".lx-exgroups li:not([hidden])")).toHaveCount(1);
     await box.fill("zzzz-nothing");

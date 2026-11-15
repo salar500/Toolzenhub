@@ -1001,9 +1001,39 @@
 
 }
 
-.lx-exbtn__title {
+.lx-exbtn__body {
 
+    display: flex;
     flex: 1;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+
+}
+
+/* the topic and level under the title, so the number order still shows what each exercise is about */
+.lx-exbtn__tags {
+
+    color: var(--color-gray-700);
+    font-size: 12px;
+    font-weight: 400;
+
+}
+
+.lx-extopic {
+
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 44px;
+    margin-bottom: 8px;
+    padding: 8px 12px;
+
+    border: 1px solid var(--color-gray-300);
+    border-radius: 8px;
+    background: var(--surface-card);
+    color: var(--color-ink);
+
+    font-size: 16px;
 
 }
 
