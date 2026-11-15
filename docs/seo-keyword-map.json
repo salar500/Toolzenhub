@@ -1,9 +1,9 @@
 {
   "$comment": "INTERNAL planning file. Not published, not a ranking mechanism, no search volumes. Built from the site's catalogs by scripts/gen-seo-keyword-map.mjs; regenerate after the catalog changes. Use it to improve real titles, descriptions, headings, copy and internal links naturally; never as a hidden keyword block (Google ignores the meta keywords tag).",
-  "generated": "2026-11-12",
-  "pages": 672,
+  "generated": "2026-11-15",
+  "pages": 674,
   "summary": {
-    "calculatorsWithoutSupportingArticle": 41,
+    "calculatorsWithoutSupportingArticle": 45,
     "pagesWithCannibalizationWarnings": 2
   },
   "entries": [
@@ -25,6 +25,19 @@
       "type": "directory",
       "title": "AI Tools",
       "primaryKeyword": "ai tools",
+      "secondaryKeywords": [],
+      "searchIntent": "navigational",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/ai-tools/directory/",
+      "type": "directory",
+      "title": "AI Products Directory: Coding, Testing, Data and More",
+      "primaryKeyword": "ai products directory",
       "secondaryKeywords": [],
       "searchIntent": "navigational",
       "relatedSearchPhrases": [],
@@ -485,7 +498,7 @@
     {
       "url": "/articles/loan-comparison/how-to-reduce-home-loan-interest/",
       "type": "article",
-      "title": "How to Reduce Your Home Loan Interest",
+      "title": "How to Reduce Home Loan Interest: 6 Ways With Examples",
       "primaryKeyword": "how to reduce home loan interest",
       "secondaryKeywords": [
         "loan comparison",
@@ -991,9 +1004,13 @@
         "/calculators/percentage/",
         "/calculators/ratio/"
       ],
-      "articleOpportunities": [],
+      "articleOpportunities": [
+        "no guide article yet for age calculator: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
       "cannibalizationWarnings": [],
-      "contentGaps": []
+      "contentGaps": [
+        "no supporting article"
+      ]
     },
     {
       "url": "/calculators/balance-transfer/",
@@ -1554,9 +1571,13 @@
         "/calculators/xirr/",
         "/calculators/risk-reward/"
       ],
-      "articleOpportunities": [],
+      "articleOpportunities": [
+        "no guide article yet for ppf calculator: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
       "cannibalizationWarnings": [],
-      "contentGaps": []
+      "contentGaps": [
+        "no supporting article"
+      ]
     },
     {
       "url": "/calculators/prepayment/",
@@ -1664,9 +1685,13 @@
         "/calculators/ppf/",
         "/calculators/fd/"
       ],
-      "articleOpportunities": [],
+      "articleOpportunities": [
+        "no guide article yet for risk-reward and position size calculator: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
       "cannibalizationWarnings": [],
-      "contentGaps": []
+      "contentGaps": [
+        "no supporting article"
+      ]
     },
     {
       "url": "/calculators/roi/",
@@ -11398,6 +11423,40 @@
       "relatedTools": [],
       "articleOpportunities": [
         "no guide article yet for image compressor & resizer: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
+      ],
+      "cannibalizationWarnings": [],
+      "contentGaps": [
+        "no supporting article"
+      ]
+    },
+    {
+      "url": "/tools/image-metadata/",
+      "type": "calculator",
+      "title": "Photo Metadata Viewer and Remover: See and Remove EXIF and GPS",
+      "primaryKeyword": "photo metadata viewer and remover",
+      "secondaryKeywords": [
+        "remove exif",
+        "exif remover",
+        "exif viewer",
+        "photo metadata",
+        "image metadata",
+        "remove gps from photo",
+        "remove location from photo",
+        "strip metadata"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "photo metadata viewer and remover online",
+        "photo metadata viewer and remover free",
+        "how to use photo metadata viewer and remover",
+        "photo metadata viewer and remover formula"
+      ],
+      "relatedTools": [
+        "/tools/image-compressor-resizer/",
+        "/tools/photos-to-pdf/"
+      ],
+      "articleOpportunities": [
+        "no guide article yet for photo metadata viewer and remover: a \"how it works\" or \"common mistakes\" guide would serve the informational intent"
       ],
       "cannibalizationWarnings": [],
       "contentGaps": [

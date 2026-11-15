@@ -479,6 +479,29 @@ Owner decisions applied: the Premium Spectrum palette stays (green is not restor
 - **Dark visual set:** desktop and mobile 36 of 36, tablet 15 passed with 3 skipped by design. Light visual sets: as recorded in Batch 26 for the same application code.
 - **Unit suite:** recorded above (3,967 of 3,971 passed, 0 failed, 4 skipped); application code unchanged since.
 
+## Phase: master prompt of 2026-11-15 (audience research, defects, knowledge layer, AI directory, labs, image tool)
+
+Owner prompts of 2026-11-15: research (Prompt 1, docs/ecosystem-review/audience-ecosystems/), then the "Ultimate master prompt": complete development across the seven ecosystems, no audience pages, AI directory inside AI Tools. Branch `feature/unified-ecosystem-workspace`, starting at `cb9f2c56`.
+
+| Item | Status | Commit |
+|---|---|---|
+| XIRR rows overflowed the form beside the open sidebar (container query) | Completed | e8557d89 |
+| Calculator form and result cards start on one line (29 calculators measured) | Completed | 705c221d |
+| Gap above the footer (110-160 px to 40-56 px), home section rhythm, smaller hero art on phones | Completed | 31b801bd |
+| Pomodoro/Interval finish sound distinct from the phase cue | Completed | ddbe5e1d |
+| Time Zone Converter searches cities and countries (World Clock's place search, no second data copy) | Completed | 68b13ce8 |
+| Lab exercise list in number order with topic, level and a topic filter (numbers unchanged) | Completed | c93813bd |
+| Learn and check block: 35 dated official sources, 49 tools and labs linked to lessons, labs and sources | Completed | 7fa6fedb |
+| AI products directory, 49 products checked on official sites, audience tags, /ai-tools/directory/ | Completed | 81cf17d0, 2d7c49bf |
+| Shared button hover flicker at the bottom edge (found by the lab spec) | Completed | 9333fa39 |
+| Rulebook: 4.8, 4.11, 6.3, 7.12 record the owner's decisions | Completed | d4afacfb |
+| Labs: 'What you will learn' and 'Your task'; jump to the exercises on phones; list controls fit the card | Completed | c7256825 |
+| Photo Metadata Viewer and Remover (Tool Pack 57), lossless, orientation kept | Completed | f74fa54f |
+| PDF to Images (pdf.js, a new dependency of about 1 MB) | Deferred: needs its own weight review and Tool Pack | - |
+| Compress PDF, protect/unlock, OCR, background removal, WebP/HEIC metadata | Deferred: browser-only output not reliable enough yet | - |
+| Theme palettes, saved lab progress | Deferred: not in the master prompt; need a privacy and product decision | - |
+| Audience landing pages | Not built: withdrawn by the owner | - |
+
 ### Production package status (2026-11-12, built from a3b498d, NOT deployed)
 
 - `npm run build` (dist/, root paths) gives 677 pages and files; packaged by Python zipfile (forward-slash entries, .htaccess included) as toolzenhub-production-a3b498d.zip (1,297 files, 16.4 MB) in C:/Users/DELL/Documents/ToolZenHub-production-package/, outside the repository.
