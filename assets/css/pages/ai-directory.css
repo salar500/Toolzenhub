@@ -290,3 +290,24 @@
     color: var(--ink-muted);
     line-height: 1.6;
 }
+
+
+/* ---------- phones ----------
+   Twenty chips wrapped into about ten rows and pushed the products two screens down. On a narrow screen each chip
+   group is one row that scrolls sideways inside itself (rule 7.2: long content scrolls in its own region); the
+   padding keeps the focus ring inside the scrolling box. */
+@media (max-width: 599px) {
+
+    .ai-chips {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        margin: 0 -4px;
+        padding: 4px 4px 8px;
+        scrollbar-width: thin;
+    }
+
+    .ai-chip span {
+        white-space: nowrap;
+    }
+
+}
