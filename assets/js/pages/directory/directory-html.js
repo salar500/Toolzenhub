@@ -562,12 +562,10 @@ export function sectionPageHtml(sectionId) {
                 <h2 class="categories-detail__heading">${escapeHTML(section.title)} tools</h2>
 
                 <div class="categories-detail__grid directory-tools">
-                    ${tools.map(tool => toolCardHtml(tool, look)).join("")}
+                    ${tools.map(tool => toolCardHtml(tool, look)).join("")}${sectionId === "ai-tools" ? aiDirectoryCard(look) : ""}
                 </div>
 
                 ${sectionId === "developer-tools" ? practiceLabsLink() : ""}
-
-                ${sectionId === "ai-tools" ? aiDirectoryLink() : ""}
 
                 <p class="directory-section__more">
                     <a href="${ROUTES.tools}">← All tools</a>
@@ -685,13 +683,15 @@ const practiceLabsLink = () => `
                     <a href="${ROUTES.practiceLabs}">Practice Labs: exercises and flashcards →</a>
                 </p>`;
 
-/* the AI Tools page points to the directory of external products, which is a different kind of thing from the tools above */
-const aiDirectoryLink = () => `
-                <section class="ai-directory-promo" aria-labelledby="ai-directory-promo-title">
-                    <h2 id="ai-directory-promo-title" class="categories-detail__heading">AI products directory</h2>
-                    <p>The tools above are built here and run in your browser. For AI products made by other companies (assistants, coding, testing, data, research, writing, images, audio and more), see the directory: ${AI_PRODUCTS.length} products, each checked on its official site, filterable for developers, QA testers and data analysts.</p>
-                    <p class="directory-section__more"><a href="${ROUTES.aiDirectory}">Browse the AI products directory →</a></p>
-                </section>`;
+/* The AI Tools page lists the AI Directory as one more card of its grid, drawn by the same card component as the tools
+   (owner, 2026-11-15). It is a page of the section, not a catalog tool, so it is not in the catalog, search or sidebar lists. */
+const aiDirectoryCard = (look) => toolCardHtml({
+    id: "ai-directory",
+    title: "AI Directory",
+    description: `Discover ${AI_PRODUCTS.length} AI products made by other companies and filter them by task and by who they help: developers, QA testers, data analysts and more.`,
+    href: ROUTES.aiDirectory,
+    available: true
+}, look);
 
 
 /* =========================================================
@@ -753,14 +753,14 @@ export function aiDirectoryHtml() {
                 ${renderBreadcrumb([
                     { label: "All Tools", href: ROUTES.tools },
                     { label: "AI Tools", href: ROUTES.aiTools },
-                    { label: "AI products directory" }
+                    { label: "AI Directory" }
                 ])}
 
-                ${workspaceOpen("ai-tools", null, "AI products directory")}
+                ${workspaceOpen("ai-tools", null, "AI Directory")}
 
                 <div class="categories-page__intro">
                     <span class="categories-page__eyebrow">AI Tools</span>
-                    <h1 class="categories-page__title">AI products directory</h1>
+                    <h1 class="categories-page__title">AI Directory</h1>
                     <p class="categories-page__description">${AI_PRODUCTS.length} AI products made by other companies, grouped by what they do. Each one was checked on its official site on the date shown; the descriptions are ours and say only what that site said. Nothing here is sponsored, ranked or an endorsement, and no link carries a referral code.</p>
                     <p class="ai-directory__native">Looking for the tools built here, which run in your browser and need no account? See <a href="${ROUTES.aiTools}">AI Tools</a>.</p>
                 </div>

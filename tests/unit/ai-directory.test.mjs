@@ -65,6 +65,16 @@ test("the page: every product as plain HTML, safe external links, filters only a
   assert.match(html, /data-ai-filters hidden/, "the filter form appears only when the script runs");
   assert.match(html, /Nothing here is sponsored, ranked or an endorsement/);
   assert.doesNotMatch(html, /<img\b/, "no logos or images from other sites");
-  assert.match(sectionPageHtml("ai-tools"), /href="\/ai-tools\/directory\/"/);
+  assert.match(html, /<h1 class="categories-page__title">AI Directory<\/h1>/);
+  // the sidebar names this page and does not call the overview the current page
+  assert.match(html, /section-switcher__now">AI Directory</);
+  assert.doesNotMatch(html, /aria-current="page"[^>]*>AI Tools overview/);
+  // on the AI Tools page: one standard card in the tools grid, drawn by the shared card component (owner, 2026-11-15)
+  const aiTools = sectionPageHtml("ai-tools");
+  const grid = aiTools.slice(aiTools.indexOf("directory-tools"), aiTools.indexOf("directory-section__more"));
+  assert.match(grid, /<a\s+href="\/ai-tools\/directory\/"\s+class="category-page-card"\s*>/);
+  assert.match(grid, /<h3 class="category-page-card__title">\s*AI Directory\s*<\/h3>/);
+  assert.equal((grid.match(/class="category-page-card"/g) || []).length, 7, "the six AI tools and the directory card");
+  assert.equal((aiTools.match(/ai-tools\/directory\//g) || []).length, 1, "linked once, by the card: no banner or extra link");
   assert.doesNotMatch(sectionPageHtml("developer-tools"), /ai-tools\/directory/, "only the AI Tools page links it");
 });

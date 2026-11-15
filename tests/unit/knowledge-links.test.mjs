@@ -38,7 +38,7 @@ test("learning links stay on the site and lab links are Practice Labs tools (rul
   assert.throws(() => resolveLearn("lesson:sql/beginner/nothing/here"), /no lesson/);
   assert.throws(() => resolveLearn("path:not-a-path"), /no published learning path/);
   assert.throws(() => resolveLearn("page:x"), /unknown reference/);
-  assert.deepEqual(resolveLearn("directory:qa"), { kind: "AI products directory", title: "AI products for QA testers", href: "/ai-tools/directory/?audience=qa" });
+  assert.deepEqual(resolveLearn("directory:qa"), { kind: "AI Directory", title: "AI Directory: products for QA testers", href: "/ai-tools/directory/?audience=qa" });
   assert.equal(resolveLearn("directory:").href, "/ai-tools/directory/");
   assert.throws(() => resolveLearn("directory:managers"), /no AI directory audience/);
 });

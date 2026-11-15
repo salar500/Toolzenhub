@@ -77,6 +77,29 @@ test.describe("AI Tools", () => {
     await expect(page.locator(`#tools-directory a[href="${siteRoot}tools/context-pack-builder/"]`).first()).toBeVisible(); // the directory's own listing, not the hidden rail
   });
 
+  for (const [label, width] of [["desktop", 1280], ["tablet", 820], ["phone", 390]]) {
+    test(`the AI Directory is one standard tool card in the section's grid (${label}) and opens the directory`, async ({ page, go, siteRoot }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await go("ai-tools.html");
+      const cards = page.locator(".directory-tools .category-page-card");
+      await expect(cards).toHaveCount(7); // the six AI tools and the directory
+      const card = cards.last();
+      await expect(card).toHaveAttribute("href", `${siteRoot}ai-tools/directory/`);
+      await expect(card.locator(".category-page-card__title")).toHaveText("AI Directory");
+      await expect(card.locator(".category-page-card__description")).toContainText("filter");
+      // the same component as its neighbours: same height in its row or the same width when stacked, icon and arrow present
+      const [a, b] = [await cards.nth(0).boundingBox(), await card.boundingBox()];
+      expect(Math.abs(a.width - b.width)).toBeLessThanOrEqual(1);
+      await expect(card.locator(".category-page-card__icon svg")).toHaveCount(1);
+      await expect(card.locator(".category-page-card__arrow")).toHaveCount(1);
+      await expect(page.locator(`a[href="${siteRoot}ai-tools/directory/"]`)).toHaveCount(1); // no banner or second link
+      await expectNoHorizontalOverflow(page);
+      await card.click();
+      await expect(page.locator("h1")).toHaveText("AI Directory");
+      await expect(page.locator(".ai-card")).toHaveCount(49);
+    });
+  }
+
   test("prompt builder: choosing a kind of task suggests rules and criteria into empty fields only, and the choices reach the prompt", async ({ page, go }) => {
     await go("tools/prompt-builder/");
     await page.locator("#pb-form[data-ready]").waitFor();

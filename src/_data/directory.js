@@ -70,12 +70,12 @@ export default function () {
   };
 
   const aiDirectory = {
-    title: "AI Products Directory: Coding, Testing, Data and More | ToolZen Hub",
+    title: "AI Directory: AI Products for Coding, Testing, Data and More | ToolZen Hub",
     description: `${AI_PRODUCTS.length} AI products for developers, QA testers, data analysts and other professionals, grouped by what they do. Each checked on its official site; nothing sponsored or ranked.`,
     html: aiDirectoryHtml(),
     jsonld: [
       breadcrumbLd(
-        breadcrumbTrail([{ label: "All Tools", href: ROUTES.tools }, { label: "AI Tools", href: ROUTES.aiTools }, { label: "AI products directory" }]),
+        breadcrumbTrail([{ label: "All Tools", href: ROUTES.tools }, { label: "AI Tools", href: ROUTES.aiTools }, { label: "AI Directory" }]),
         "/ai-tools/directory/"
       ),
     ],

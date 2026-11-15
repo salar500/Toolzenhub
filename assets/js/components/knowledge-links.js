@@ -59,8 +59,8 @@ export function resolveLearn(ref) {
         const audience = AI_AUDIENCES.find((a) => a.id === rest);
         if (rest !== "" && !audience) throw new Error(`knowledge: no AI directory audience "${rest}"`);
         return {
-            kind: "AI products directory",
-            title: audience ? `AI products for ${audience.phrase}` : "AI products directory",
+            kind: "AI Directory",
+            title: audience ? `AI Directory: products for ${audience.phrase}` : "AI Directory",
             href: audience ? `${ROUTES.aiDirectory}?audience=${audience.id}` : ROUTES.aiDirectory
         };
     }

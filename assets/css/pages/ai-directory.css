@@ -11,16 +11,6 @@
     font-size: 15px;
 }
 
-.ai-directory-promo {
-    margin-top: 32px;
-}
-
-.ai-directory-promo p {
-    max-width: 72ch;
-    color: var(--ink-muted);
-}
-
-
 /* ---------- filters ---------- */
 
 .ai-filters {

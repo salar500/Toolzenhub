@@ -58,6 +58,7 @@ const FOR = {
 
 /* Where a section's one icon would make several tools look identical, the tool gets its own */
 const FOR_TOOL = {
+    "ai-directory": "search",
     "date-difference": "calendar",
     "date-calculator": "calendar",
     "business-days": "calendar",

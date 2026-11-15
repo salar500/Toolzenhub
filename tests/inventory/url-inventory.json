@@ -165,7 +165,7 @@
       "file": "ai-tools/directory/index.html",
       "classification": "live-indexable",
       "type": "directory",
-      "expectedTitle": "AI Products Directory: Coding, Testing, Data and More | ToolZen Hub",
+      "expectedTitle": "AI Directory: AI Products for Coding, Testing, Data and More | ToolZen Hub",
       "primarySelector": ".ai-card",
       "expectsHeader": true,
       "expectsFooter": true,
