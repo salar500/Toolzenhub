@@ -105,7 +105,18 @@ export function createCycleController(options) {
 
     }
 
-    function beep() {
+    /*
+     * Two sounds, so the end of the session cannot be mistaken for a phase change (owner finding 2026-11-15: both were
+     * the same 0.45 s beep). A phase change is one short tone; the finish is three rising tones played twice, about
+     * 1.8 s, once (not a looping alarm). Both stay off unless the visitor ticks the sound box, and Reset or Start again
+     * silences a finish that is still playing.
+     */
+    const PHASE_CUE = [{ at: 0, hz: 880, length: 0.45 }];
+    const FINISH = [0, 0.9].flatMap((group) => [660, 880, 1100].map((hz, i) => ({ at: group + i * 0.25, hz, length: 0.3 })));
+
+    let playing = [];
+
+    function play(tones) {
 
         if (!audio || !options.sound?.()) {
             return;
@@ -117,24 +128,50 @@ export function createCycleController(options) {
                 audio.resume();
             }
 
-            const oscillator = audio.createOscillator();
-            const gain = audio.createGain();
+            const start = audio.currentTime;
 
-            oscillator.frequency.value = 880;
+            for (const tone of tones) {
 
-            gain.gain.setValueAtTime(0.0001, audio.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.25, audio.currentTime + 0.02);
-            gain.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + 0.4);
+                const oscillator = audio.createOscillator();
+                const gain = audio.createGain();
+                const t = start + tone.at;
 
-            oscillator.connect(gain);
-            gain.connect(audio.destination);
+                oscillator.frequency.value = tone.hz;
 
-            oscillator.start();
-            oscillator.stop(audio.currentTime + 0.45);
+                gain.gain.setValueAtTime(0.0001, t);
+                gain.gain.exponentialRampToValueAtTime(0.25, t + 0.02);
+                gain.gain.exponentialRampToValueAtTime(0.0001, t + tone.length - 0.05);
+
+                oscillator.connect(gain);
+                gain.connect(audio.destination);
+
+                oscillator.start(t);
+                oscillator.stop(t + tone.length);
+
+                playing.push(oscillator);
+                oscillator.addEventListener("ended", () => {
+                    playing = playing.filter((item) => item !== oscillator);
+                });
+
+            }
 
         } catch {
             /* sound is never required */
         }
+
+    }
+
+    function silence() {
+
+        for (const oscillator of playing) {
+            try {
+                oscillator.stop();
+            } catch {
+                /* already stopped */
+            }
+        }
+
+        playing = [];
 
     }
 
@@ -247,7 +284,7 @@ export function createCycleController(options) {
 
             paintState();
 
-            beep();
+            play(runner.status === "done" ? FINISH : PHASE_CUE);
 
             if (runner.status === "done") {
 
@@ -277,7 +314,7 @@ export function createCycleController(options) {
 
             lastAbsolute = s.at.absolute;
 
-            beep();
+            play(PHASE_CUE);
 
             announce(options.phaseText?.(s) ?? `${s.at.phase.label}, ${phaseLengthText(s.at.phase)}.`, 0);
 
@@ -418,6 +455,8 @@ export function createCycleController(options) {
 
         stopLoop();
 
+        silence();
+
         runner = createRunner();
 
         lastAbsolute = -1;
@@ -463,6 +502,7 @@ export function createCycleController(options) {
     buttons.start?.addEventListener("click", begin);
     buttons.again?.addEventListener("click", () => {
         stopLoop();
+        silence();
         runner = createRunner();
         begin();
     });
