@@ -1,4 +1,19 @@
---- match 1 of 2 ---
+--- match 1 of 3 ---
+section.knowledge-links.related-section
+  div.related-section__heading
+    h2#knowledge-links-title "Learn and check"
+  div.knowledge-links__groups
+    div.knowledge-links__group
+      h3 "Official references"
+      ul.knowledge-links__list
+        li
+          a [href="https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=12663" rel="noopener noreferrer" target="_blank"] "Key Facts Statement (KFS) for loans and advances"
+            span.knowledge-links__sr "(opens the official site in a new tab)"
+            span [aria-hidden="true"] "↗"
+          span.knowledge-links__kind "Reserve Bank of India · checked 15 Nov 2026"
+          p "Before you sign, a lender must give you this statement of the annual percentage rate and e…"
+  p.knowledge-links__note "Official pages open on their own sites. A link is a pointer to the source, not an endorsem…"
+--- match 2 of 3 ---
 section.related-section
   div.related-section__heading
     h2 "Related Calculators"
@@ -40,7 +55,7 @@ section.related-section
       div.related-calculator-content
         strong "Loan Balance Transfer Calculator"
         span "See whether moving your loan to a lower rate pays off after the charges, and when you earn…"
---- match 2 of 2 ---
+--- match 3 of 3 ---
 section.related-section
   div.related-section__heading
     h2 "Related Articles"

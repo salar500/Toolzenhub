@@ -51,7 +51,7 @@ test.describe("Unix Timestamp Converter", () => {
     await expect(page.locator("#ts-now-zone")).toContainText("UTC+05:30");
     await expect(aOut(page)).toBeHidden();
     await expect(page.locator("#ts-board")).toBeHidden();
-    await expect(page.locator(".related-section")).toHaveCount(1); // the Developer Tools related-tools pilot (developer-tools-related.spec.js checks the links)
+    await expect(page.locator(".related-section:not(.knowledge-links)")).toHaveCount(1); // the Developer Tools related-tools pilot (developer-tools-related.spec.js checks the links)
     await expect(page.locator("main")).toContainText("Your timestamps and dates are processed in your browser");
     await expect(page.locator("main")).not.toContainText(/\bbest\b|ultimate|most accurate|AI-powered|smart/i);
     expectClean(watch);

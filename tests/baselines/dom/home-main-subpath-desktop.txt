@@ -59,7 +59,7 @@ main#app
             div.category-card__content
               h3 "Image Tools"
               p "Compress and resize images in your browser"
-              span.category-card__count "2 tools"
+              span.category-card__count "3 tools"
           a.category-card [href="{ROOT}pdf-tools.html"]
             div.category-card__icon.category-card__icon--pdf-tools
               svg [aria-hidden="true"]

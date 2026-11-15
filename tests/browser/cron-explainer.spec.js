@@ -531,7 +531,7 @@ test.describe("Cron Expression Explainer in the Developer Tools section", () => 
     }
     // the Unix converter lists it since the Developer Tools pilot (2026-10-27)
     await go("tools/unix-timestamp-converter/");
-    await expect(page.locator(".related-section").getByRole("link", { name: /Cron Expression Explainer/ })).toHaveCount(1);
+    await expect(page.locator(".related-section:not(.knowledge-links)").getByRole("link", { name: /Cron Expression Explainer/ })).toHaveCount(1);
     await go("tools/cron-expression-explainer/");
     const links = await page.locator("main .calculator-info a").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
     expect(links).toEqual([`${siteRoot}tools/unix-timestamp-converter/`]);

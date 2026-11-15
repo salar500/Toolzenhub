@@ -29,7 +29,7 @@ test.describe("Date Difference Calculator", () => {
     await expect(page.getByRole("textbox", { name: "End date" })).toBeVisible();
     await expect(page.locator("#date-results")).toContainText("Choose a start date and an end date.");
     await expect(page.getByRole("button", { name: "Reset" })).toBeVisible();
-    await expect(page.locator(".related-section")).toHaveCount(0);
+    await expect(page.locator(".related-section:not(.knowledge-links)")).toHaveCount(0);
 
     await setDates(page, "2026-01-01", "2026-02-10");
     await expect(metric(page, "Days between the dates")).toHaveText("40 days");

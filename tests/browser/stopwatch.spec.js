@@ -42,7 +42,7 @@ test.describe("Stopwatch", () => {
     await expect(page.locator("#sw-status")).toHaveText("Ready");
     expect(await shown(page)).toEqual(["Start"]);
     await expect(page.locator("#sw-laps")).toBeHidden();
-    await expect(page.locator(".related-section")).toHaveCount(0);
+    await expect(page.locator(".related-section:not(.knowledge-links)")).toHaveCount(0);
     expectClean(watch);
   });
 

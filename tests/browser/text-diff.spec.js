@@ -59,7 +59,7 @@ test.describe("Text Diff / Compare", () => {
     await expect(page.locator(".td-limit")).toContainText("Up to 300,000 characters and 20,000 lines per side.");
     await expect(page.locator("#td-ignore")).not.toBeChecked();
     await expect(page.locator("#td-wrap")).toBeChecked();
-    await expect(page.locator(".related-section")).toHaveCount(1); // the Developer Tools related-tools pilot (developer-tools-related.spec.js checks the links)
+    await expect(page.locator(".related-section:not(.knowledge-links)")).toHaveCount(1); // the Developer Tools related-tools pilot (developer-tools-related.spec.js checks the links)
     await expect(page.locator(".report-issue")).toHaveCount(0);
     await expect(page.locator("main")).toContainText("Your text is compared in your browser");
     await expect(page.locator("main")).not.toContainText(/\bbest\b|ultimate|most accurate|AI-powered|intelligent|smart/i);

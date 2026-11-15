@@ -20,7 +20,7 @@ async function basics(page, watch, siteRoot, title) {
   await expect(page.locator("h1")).toHaveCount(1);
   const labels = (await page.locator(".calculator-breadcrumb").locator("a, strong, span[aria-current]").allInnerTexts()).map((t) => t.trim().toLowerCase()).filter(Boolean);
   expect(labels.slice(0, 3)).toEqual(["home", "time tools", title.toLowerCase()]);
-  await expect(page.locator(".related-section")).toHaveCount(1); // the Time Tools related-tools pilot
+  await expect(page.locator(".related-section:not(.knowledge-links)")).toHaveCount(1); // the Time Tools related-tools pilot
   await expectNoHorizontalOverflow(page);
   expectClean(watch);
 }

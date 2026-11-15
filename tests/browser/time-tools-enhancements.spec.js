@@ -226,7 +226,7 @@ test.describe("Time Tools related-tools pilot", () => {
   for (const [path, linked] of pairs) {
     test(`${path} links to ${linked}, in its own section only`, async ({ page, go }) => {
       await go(path);
-      const section = page.locator(".related-section");
+      const section = page.locator(".related-section:not(.knowledge-links)");
       await expect(section).toHaveCount(1);
       await expect(section.locator("h2")).toHaveText("Related Time Tools");
       await expect(section.locator(`a[href*='/${linked}/']`)).toHaveCount(1);
@@ -240,7 +240,7 @@ test.describe("Time Tools related-tools pilot", () => {
     // JSON Formatter joined the related-tools rollout with the Developer Tools (tests/browser/developer-tools-related.spec.js)
     for (const path of ["tools/stopwatch/"]) {
       await go(path);
-      await expect(page.locator(".related-section")).toHaveCount(0);
+      await expect(page.locator(".related-section:not(.knowledge-links)")).toHaveCount(0);
     }
   });
 });

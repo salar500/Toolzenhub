@@ -347,7 +347,7 @@ test.describe("Base64 Encoder & Decoder in Developer Tools, search and related l
     const mainText = await page.locator("main").evaluate((e) => { const c = e.cloneNode(true); c.querySelectorAll("nav.section-switcher").forEach((n) => n.remove()); return c.textContent; });
     expect(mainText).not.toContain("Base64 Encoder");
     await go("tools/jwt-decoder/");
-    await expect(page.locator(".related-section").getByRole("link", { name: /Base64 Encoder/ })).toHaveCount(1); // the Developer Tools pilot (2026-10-27) lists it
+    await expect(page.locator(".related-section:not(.knowledge-links)").getByRole("link", { name: /Base64 Encoder/ })).toHaveCount(1); // the Developer Tools pilot (2026-10-27) lists it
     await go("tools/base64-encoder-decoder/");
     await page.locator("main .calculator-info a", { hasText: "JWT Decoder" }).click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools/jwt-decoder/`);

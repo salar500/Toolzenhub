@@ -44,7 +44,7 @@ test.describe("Countdown Timer", () => {
     await expect(page.locator("#ct-stage")).toBeHidden();
     await expect(page.getByRole("group", { name: "Quick presets" }).getByRole("button")).toHaveText(["1 min", "5 min", "10 min", "25 min", "30 min", "60 min"]);
     await expect(page.getByLabel("Play a reminder sound when the timer finishes")).toBeChecked();
-    await expect(page.locator(".related-section")).toHaveCount(0);
+    await expect(page.locator(".related-section:not(.knowledge-links)")).toHaveCount(0);
     expectClean(watch);
   });
 

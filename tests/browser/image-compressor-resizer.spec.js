@@ -94,7 +94,7 @@ test.describe("Image Compressor & Resizer", () => {
     await expect(page.locator("#ic-download")).toBeHidden();
     await expect(page.locator("#ic-drop-hint")).toContainText("each up to 25.0 MB and 40 megapixels");
     await expect(page.locator("#ic-drop-hint")).toContainText("processed in your browser and are not uploaded by this tool");
-    await expect(page.locator(".related-section")).toHaveCount(0);
+    await expect(page.locator(".related-section:not(.knowledge-links)")).toHaveCount(0);
     await expect(page.locator("main")).not.toContainText(/lossless compression|no quality loss|zero quality loss|\bbest\b|AI-powered|AI optimi|guaranteed/i);
     expectClean(watch);
   });
