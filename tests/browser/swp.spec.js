@@ -644,7 +644,7 @@ test.describe("SWP Calculator on a wide screen", () => {
     await open(page, go);
     await expectNoHorizontalOverflow(page);
     // one-screen workspace (2026-11-09): from 1200 px the result is a column beside the form, so the three scenarios stack in it, in order
-    const form = await page.locator(".calculator-section").first().boundingBox();
+    const form = await page.locator(".calculator-section > .calculator-form").first().boundingBox(); // the section box steps aside on wide screens (display: contents), so the form card is measured;
     const results = await page.locator("#swp-results").boundingBox();
     expect(results.x).toBeGreaterThan(form.x + form.width - 1);
     const cards = await page.locator("#swp-results .swp-compare__card").evaluateAll((els) => els.map((e) => { const r = e.getBoundingClientRect(); return { top: Math.round(r.top), left: Math.round(r.left) }; }));
