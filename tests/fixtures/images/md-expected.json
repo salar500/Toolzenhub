@@ -1,0 +1,55 @@
+{
+  "md-gps-rot6.jpg": {
+    "dateTaken": "2031:02:03 04:05:06",
+    "dateTime": "2031:02:03 04:05:06",
+    "gps": {
+      "altitude": 123.0,
+      "latitude": 12.3456,
+      "longitude": -65.4321
+    },
+    "make": "ZZ-MAKE",
+    "model": "ZZ-MODEL-42",
+    "orientation": 6,
+    "size": [
+      64,
+      48
+    ],
+    "software": "ZZ-EDITOR 1.0",
+    "text": {}
+  },
+  "md-plain.png": {
+    "dateTaken": null,
+    "dateTime": null,
+    "gps": null,
+    "make": null,
+    "model": null,
+    "orientation": null,
+    "size": [
+      40,
+      30
+    ],
+    "software": null,
+    "text": {}
+  },
+  "md-text.png": {
+    "dateTaken": "2031:02:03 04:05:06",
+    "dateTime": "2031:02:03 04:05:06",
+    "gps": {
+      "altitude": 123.0,
+      "latitude": 12.3456,
+      "longitude": -65.4321
+    },
+    "make": "ZZ-MAKE",
+    "model": "ZZ-MODEL-42",
+    "orientation": null,
+    "size": [
+      40,
+      30
+    ],
+    "software": "ZZ-EDITOR 1.0",
+    "text": {
+      "Author": "ZZ-AUTHOR",
+      "Description": "ZZ-DESCRIPTION"
+    }
+  }
+}

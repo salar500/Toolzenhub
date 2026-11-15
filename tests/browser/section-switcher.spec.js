@@ -195,7 +195,7 @@ test.describe("section switcher", () => {
       expect(await visible()).toBe(30);
     });
 
-    test("a small section (Image Tools, 2 tools) has no search box but still has the sidebar", async ({ page, go }) => {
+    test("a small section (Image Tools, 3 tools) has no search box but still has the sidebar", async ({ page, go }) => {
       await page.setViewportSize({ width: 1280, height: 800 });
       await go("tools/image-compressor-resizer/");
       await expect(rail(page)).toBeVisible();

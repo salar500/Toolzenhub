@@ -495,6 +495,13 @@
       "state": "active"
     },
     {
+      "id": "image-metadata",
+      "module": "assets/js/tools/image-metadata/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "income-tax",
       "module": "assets/js/calculators/income-tax/index.js",
       "moduleChanges": [],

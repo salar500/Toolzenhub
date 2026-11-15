@@ -2916,6 +2916,45 @@ const catalog = [
         }
     },
 
+    /* Tool Pack 57 (docs/tool-packs/57-image-metadata.md) */
+    {
+        id: "image-metadata",
+        status: "published",
+        loader: () =>
+            import("../tools/image-metadata/index.js"),
+        sectionId: "image-tools",
+        icon: "⌖",
+        title: "Photo Metadata Viewer and Remover",
+        description:
+            "See whether a JPEG or PNG carries a location, the camera or phone, dates or text, and download a copy without it. The picture is not recompressed, and nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: ["image-compressor-resizer", "photos-to-pdf"],
+        aliases: [
+            "remove exif",
+            "exif remover",
+            "exif viewer",
+            "photo metadata",
+            "image metadata",
+            "remove gps from photo",
+            "remove location from photo",
+            "strip metadata"
+        ],
+        capabilities: {
+            reset: true,
+            download: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Photo Metadata Viewer and Remover: See and Remove EXIF and GPS | ToolZen Hub",
+            description:
+                "Check a JPEG or PNG for its location, camera, dates and text, and download a copy without them. The picture is copied as it is, not recompressed. It runs in your browser: your photos are not uploaded."
+        }
+    },
+
     {
         id: "merge-pdf",
         status: "published",

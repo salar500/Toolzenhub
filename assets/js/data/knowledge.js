@@ -181,6 +181,7 @@ export const KNOWLEDGE = Object.freeze({
 
     /* ---------- Image Tools ---------- */
     "image-compressor-resizer": { official: [{ ref: "mdn-image-types", why: "JPEG, PNG and WebP compared: transparency, quality and browser support." }] },
-    "photos-to-pdf": { official: [{ ref: "mdn-image-types", why: "The image formats this tool accepts, compared." }] }
+    "photos-to-pdf": { official: [{ ref: "mdn-image-types", why: "The image formats this tool accepts, compared." }] },
+    "image-metadata": { official: [{ ref: "mdn-image-types", why: "JPEG and PNG compared, including what each format can store besides the picture." }] }
 
 });
