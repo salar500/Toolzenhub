@@ -191,6 +191,28 @@
 
 }
 
+/* The hover lift moves the button 1 px up. A pointer resting on its bottom edge then left it, the hover ended, the
+   button dropped back under the pointer, and it flickered every frame (found 2026-11-15 on the lab's Check answer).
+   This transparent strip below the button is part of it for the pointer, so the lifted button still covers that edge. */
+.calculator-form__button {
+
+    position: relative;
+
+}
+
+.calculator-form__button::after {
+
+    content: "";
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+
+    height: 2px;
+
+}
+
 .calculator-form__button:active {
 
     background: var(--color-action-green-active);
