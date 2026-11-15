@@ -10,9 +10,19 @@
 
 /* =========================================================
    ROWS
-   A phone shows each row as a small card with visible labels;
-   a wide screen shows one line a row under one header line.
+   A narrow form shows each row as a small card with visible
+   labels; a wide one shows one line a row under one header
+   line. The switch follows the width of the form itself
+   (a container query), not the window: with the section
+   sidebar open, a 1366 px window leaves the form only about
+   500 px, which is too narrow for four columns. A browser
+   without container queries keeps the card layout.
 ========================================================= */
+
+#xirr-form {
+    container-type: inline-size;
+    container-name: xirr-form;
+}
 
 .xirr-rows {
     display: grid;
@@ -48,8 +58,10 @@
     box-sizing: border-box;
 }
 
+/* the shared button keeps a 150 px minimum; in a row the column decides the width */
 .xirr-remove {
     min-height: 44px;
+    min-width: 0;
     width: 100%;
 }
 
@@ -61,11 +73,21 @@
 
 }
 
-@media (min-width: 760px) {
+/* two columns: date and amount, then direction and Remove */
+@container xirr-form (min-width: 440px) {
+
+    .xirr-row {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: start;
+    }
+
+}
+
+@container xirr-form (min-width: 620px) {
 
     .xirr-head,
     .xirr-row {
-        grid-template-columns: minmax(150px, 1.1fr) minmax(120px, 1fr) minmax(170px, 1.1fr) 110px;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.1fr) minmax(96px, 0.7fr);
         gap: 12px;
         align-items: center;
     }
