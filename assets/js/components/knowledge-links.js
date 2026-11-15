@@ -138,7 +138,7 @@ export function renderKnowledgeLinks(id) {
 
     return `
 
-        <section class="related-section knowledge-links" aria-labelledby="knowledge-links-title">
+        <section class="related-section knowledge-links">
 
             <div class="related-section__heading">
                 <h2 id="knowledge-links-title">Learn and check</h2>

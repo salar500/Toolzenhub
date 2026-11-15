@@ -28,7 +28,7 @@ test.describe("Calculator result tables at 1280 px @desktop-only", () => {
   test("the wide-table calculators keep the result summary beside the inputs, with the tables under both", async ({ page, go }) => {
     for (const id of ["emi", "home-loan", "sip", "ppf", "margin", "prepayment", "profit", "balance-transfer", "swp"]) {
       await go(`calculators/${id}/`);
-      const form = page.locator(".calculator-page > .calculator-section").first();
+      const form = page.locator(".calculator-page > .calculator-section > .calculator-form").first(); // the section box steps aside on wide screens (display: contents), so the form card is measured
       const results = page.locator(".calculator-page > .calculator-results").first();
       const wide = page.locator(".calculator-page > .calculator-wide").first();
       await expect(wide.locator(".calculator-results__table-wrapper").first(), id).toBeAttached();
