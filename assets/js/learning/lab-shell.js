@@ -430,8 +430,10 @@ export function mountLab({ root, live, lab }) {
                 el("p", { class: "lx-meta" }, el("span", { class: "lx-tag", text: DIFFICULTY_LABEL[ex.difficulty] }), ` Exercise ${index + 1} of ${exercises.length}`),
                 heading,
                 lessonLine(ex),
-                el("p", { class: "lx-meta", text: `Objective: ${ex.objective}` }),
-                el("p", { text: ex.instructions }),
+                /* what the exercise teaches, then what to do, as two labelled parts (owner finding 2026-11-15: the objective,
+                   the task and the answer area must be told apart at a glance) */
+                el("p", { class: "lx-objective" }, el("span", { class: "lx-part", text: "What you will learn" }), ex.objective),
+                el("div", { class: "lx-task" }, el("p", { class: "lx-part", text: "Your task" }), el("p", { text: ex.instructions })),
                 ex.document ? el("div", {},
                     el("p", { class: "lx-label", text: lab.documentLabel ?? "Document (read only)" }),
                     codeBlock(ex.document, lab.documentLabel ?? "Document (read only)")) : null,

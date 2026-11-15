@@ -42,7 +42,6 @@ export const OFFICIAL_SOURCES = Object.freeze({
     "ms-excel-functions": source("Excel functions (alphabetical)", "Microsoft Support", "https://support.microsoft.com/en-us/excel/excel-functions-alphabetical", "documentation"),
     "ms-dax": source("DAX reference", "Microsoft Learn", "https://learn.microsoft.com/en-us/dax/", "documentation"),
     "ms-power-query-m": source("Power Query M formula language reference", "Microsoft Learn", "https://learn.microsoft.com/en-us/powerquery-m/", "documentation"),
-    "istqb-glossary": source("ISTQB Glossary of testing terms", "ISTQB", "https://glossary.istqb.org/", "standard"),
     "bipm-si": source("The International System of Units (SI)", "BIPM", "https://www.bipm.org/en/measurement-units", "standard"),
 
     /* India: government and regulators */

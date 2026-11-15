@@ -55,7 +55,7 @@ test.describe("Test Design Lab: this lab", () => {
     await openLab(page, go, ROUTE);
     await exercise(page, 11);
     await expect(page.getByRole("heading", { name: /^11\. Partitions: an age limit/ })).toBeFocused();
-    await expect(app(page).locator("select")).toHaveCount(6);
+    await expect(app(page).locator(".lx-lab-stage select")).toHaveCount(6); // the exercise's own choices; the list's topic filter is outside the stage
     for (const v of [17, 18, 40, 65, 66, 0]) await expect(page.getByLabel(`Value ${v}`, { exact: true })).toBeVisible();
     await checkButton(page).click();
     await expect(verdictOf(page)).toHaveText("Cannot check");

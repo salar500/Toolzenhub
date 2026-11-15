@@ -937,6 +937,14 @@
 
 }
 
+/* a full-width control inside the picker keeps those margins: 100% plus 24 px ran past the card's edge */
+.lx-picker > .lx-exsearch,
+.lx-picker > .lx-extopic {
+
+    width: calc(100% - 24px);
+
+}
+
 .lx-exsearch {
 
     box-sizing: border-box;
@@ -1115,5 +1123,63 @@
 
     text-decoration: underline;
     text-underline-offset: 2px;
+
+}
+
+
+/* =========================================================
+   THE EXERCISE: WHAT YOU WILL LEARN, YOUR TASK (2026-11-15)
+   Two labelled parts so the objective, the task and the
+   answer area read as different things. Tokens only.
+========================================================= */
+
+.lx-part {
+    display: block;
+    margin: 0 0 2px;
+    color: var(--ink-muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.lx-objective {
+    margin: 12px 0 0;
+    color: var(--ink);
+    font-size: 15px;
+}
+
+.lx-task {
+    margin: 12px 0 16px;
+    padding: 12px 14px;
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    background: var(--accent-soft);
+}
+
+.lx-task p:last-child {
+    margin: 0;
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+/* a phone reaches the exercises in one tap; a wide screen shows them soon enough */
+.lx-jump {
+    margin: 10px 0 0;
+}
+
+.lx-jump a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-weight: 600;
+}
+
+@media (min-width: 960px) {
+
+    .lx-jump {
+        display: none;
+    }
 
 }

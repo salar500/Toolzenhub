@@ -150,8 +150,8 @@ export const KNOWLEDGE = Object.freeze({
         learn: [
             { ref: "lesson:test-design/beginner/partitions-boundaries/equivalence-partitioning", why: "Equivalence partitioning, explained before you practise it." },
             { ref: "lesson:test-design/beginner/partitions-boundaries/boundary-value-analysis", why: "Boundary value analysis, explained before you practise it." }
-        ],
-        official: [{ ref: "istqb-glossary", why: "The standard names and definitions of test design techniques." }]
+        ]
+        /* no certification body is linked: the lab states it is not exam or syllabus preparation (test-design-lab.spec) */
     },
     "json-error-fixing-lab": { official: [{ ref: "rfc-8259", why: "The JSON standard every exercise here is checked against." }] },
     "jsonpath-challenge-lab": { official: [{ ref: "rfc-9535", why: "The JSONPath standard behind the challenges." }] },
