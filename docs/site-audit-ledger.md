@@ -508,6 +508,20 @@ Runs are foreground, one batch of five spec files at a time, one worker (a backg
 
 - **subpath-desktop:** batches 1-2 and 5-16 on the AI Directory card code (`1f31fe7a` and later), batches 3-4 carried forward from `ff74baf0` (their files are not touched by the later changes). Failures found and fixed: the Learn and check block was a region landmark (`ff74baf0`); the wide-table spec measured the section box that now steps aside (`ff74baf0`); 13 specs counted `.related-section`, which the new block also carries (scoped to `:not(.knowledge-links)`, `44dfe393`); the button hover strip overflowed the compressor's download button (lift removed, `48fcc575`); three DOM baselines re-recorded after review (`44dfe393`). Batch 16 exceeded one run's time and was run file by file.
 
+### CHECKPOINT (paused at the owner's request, night of 2026-11-15; code at 0cd48167)
+
+Done on this code (each run foreground, one worker):
+- **subpath-desktop: complete.** All 22 batches pass, plus site-a11y/site-tablet 1,348 in 8 shards, smoke 689 in 3 shards; SEO baseline re-recorded by the chunked method (7b61e9a1). Fixes found and committed: 48fcc575, 44dfe393, 0cd48167, ff74baf0.
+- **subpath-mobile: complete, 0 failures.** All batches; site-a11y/site-tablet 1,348 in 8 shards; smoke 689 in 3 shards.
+- **root-desktop: complete.** 140 portable tests and smoke 689 in 3 shards, all pass.
+- **Unit:** full suite 3,980 of 3,987 earlier (3 deliberate pins then fixed); touched files 162 of 162 since.
+
+Resume from here, in this order:
+1. **visual-desktop** shard 1/2 ran: 28 failed, 1 passed (nearly every page differs, which points to a site-wide change such as the footer gap and section spacing, intended). Review the diff images in `test-results/` by eye before any baseline update; run shard 2/2; then visual-mobile and visual-tablet (57 each, 2 shards each), the same way. Never update a baseline without looking at it.
+2. **Link crawl** (`links.spec.js`, one ~17 min test): too long for one foreground run; check the same links in chunks, or record the gap.
+3. **Rebuild the production package** from the final commit (`ff74baf0` package is outdated: the AI Directory card, button and test changes came after), verify (zip vs dist, canonicals, sitemap, robots, smoke), update `docs/production-handoff.md` and `docs/quality/RELEASE_LEDGER.md`, commit, push.
+4. Give the READY / NOT READY decision.
+
 ### Production package status (2026-11-12, built from a3b498d, NOT deployed)
 
 - `npm run build` (dist/, root paths) gives 677 pages and files; packaged by Python zipfile (forward-slash entries, .htaccess included) as toolzenhub-production-a3b498d.zip (1,297 files, 16.4 MB) in C:/Users/DELL/Documents/ToolZenHub-production-package/, outside the repository.
