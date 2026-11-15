@@ -244,6 +244,11 @@ export function getRelatedArticlesForTool(
         Array.isArray(tool.relatedArticles) &&
         tool.relatedArticles.length > 0;
 
+    /* articleFallback: false (data/tools.js): the curated list only, no same-category fill */
+    if (tool.articleFallback === false) {
+        return resolve(curated, [], { ...options, fill: false });
+    }
+
     return resolve(
         curated,
         automatic,

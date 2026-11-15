@@ -59,6 +59,10 @@ import {
     renderRelatedArticles
 } from "../components/related-articles.js";
 
+import {
+    renderKnowledgeLinks
+} from "../components/knowledge-links.js";
+
 
 /* =========================================================
    CONTRACT
@@ -152,7 +156,9 @@ export function buildToolPageHtml(
     const afterOpen =
         open + PAGE_OPEN.length;
 
+    /* "Learn and check" first (data/knowledge.js; nothing when the tool has no entry), then related tools and articles */
     const related =
+        renderKnowledgeLinks(id) +
         (contract.showRelatedTools
             ? renderRelatedCalculators(id)
             : "") +

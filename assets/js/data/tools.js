@@ -35,6 +35,11 @@
                    (data/relationships.js). Its curated relatedTools
                    still apply. Used where two tools share a category
                    but not an intent (Income Tax and GST).
+   - articleFallback  optional; false shows only the curated
+                   relatedArticles (none when there are none), never
+                   the automatic same-category articles. For a tool
+                   whose category's articles do not fit its job (the
+                   Age calculator is not about percentages).
 
    Derived, never written here:
    - section    from the category (tool -> category -> section)
@@ -538,6 +543,7 @@ const catalog = [
             examples: true,
             localProcessing: true
         },
+        articleFallback: false,
         seo: {
             title:
                 "PPF Calculator: Estimate Your PPF Balance Year by Year | ToolZen Hub",
@@ -698,6 +704,10 @@ const catalog = [
             examples: true,
             localProcessing: true
         },
+        relatedArticles: [
+            "cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate",
+            "cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr"
+        ],
         seo: {
             title:
                 "XIRR Calculator: Annualised Return from Dated Cash Flows | ToolZen Hub",
@@ -740,6 +750,7 @@ const catalog = [
             localProcessing: true
         },
         relatedArticles: [],
+        articleFallback: false,
         seo: {
             title:
                 "Risk Reward Ratio and Position Size Calculator | ToolZen Hub",
@@ -1268,6 +1279,7 @@ const catalog = [
             localProcessing: true
         },
         relatedArticles: [],
+        articleFallback: false,
         seo: {
             title:
                 "Age Calculator: Exact Age in Years, Months and Days | ToolZen Hub",
