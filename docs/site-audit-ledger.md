@@ -502,6 +502,12 @@ Owner prompts of 2026-11-15: research (Prompt 1, docs/ecosystem-review/audience-
 | Theme palettes, saved lab progress | Deferred: not in the master prompt; need a privacy and product decision | - |
 | Audience landing pages | Not built: withdrawn by the owner | - |
 
+### Final regression of the 2026-11-15 phase (owner authorisation of 2026-11-15, second prompt)
+
+Runs are foreground, one batch of five spec files at a time, one worker (a background run is stopped by the system when memory is low and the session is idle; that happened twice). The link crawl and the SEO crawl are single long tests and are run on their own.
+
+- **subpath-desktop:** batches 1-2 and 5-16 on the AI Directory card code (`1f31fe7a` and later), batches 3-4 carried forward from `ff74baf0` (their files are not touched by the later changes). Failures found and fixed: the Learn and check block was a region landmark (`ff74baf0`); the wide-table spec measured the section box that now steps aside (`ff74baf0`); 13 specs counted `.related-section`, which the new block also carries (scoped to `:not(.knowledge-links)`, `44dfe393`); the button hover strip overflowed the compressor's download button (lift removed, `48fcc575`); three DOM baselines re-recorded after review (`44dfe393`). Batch 16 exceeded one run's time and was run file by file.
+
 ### Production package status (2026-11-12, built from a3b498d, NOT deployed)
 
 - `npm run build` (dist/, root paths) gives 677 pages and files; packaged by Python zipfile (forward-slash entries, .htaccess included) as toolzenhub-production-a3b498d.zip (1,297 files, 16.4 MB) in C:/Users/DELL/Documents/ToolZenHub-production-package/, outside the repository.
