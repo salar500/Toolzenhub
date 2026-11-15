@@ -155,7 +155,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 2588
+      "visibleTextChars": 2745
+    }
+  },
+  "/ai-tools/directory/": {
+    "runtime": {
+      "title": "AI Directory: AI Products for Coding, Testing, Data and More | ToolZen Hub",
+      "description": "49 AI products for developers, QA testers, data analysts and other professionals, grouped by what they do. Each checked on its official site; nothing sponsored or ranked.",
+      "canonical": "https://toolzenhub.in/ai-tools/directory/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "49 AI products for developers, QA testers, data analysts and other professionals, grouped by what they do. Each checked on its official site; nothing sponsored or ranked.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "AI Directory: AI Products for Coding, Testing, Data and More | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/ai-tools/directory/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "49 AI products for developers, QA testers, data analysts and other professionals, grouped by what they do. Each checked on its official site; nothing sponsored or ranked.",
+        "twitter:title": "AI Directory: AI Products for Coding, Testing, Data and More | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "AI Directory"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": "#f6f4ee",
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "AI Directory: AI Products for Coding, Testing, Data and More | ToolZen Hub",
+      "description": "49 AI products for developers, QA testers, data analysts and other professionals, grouped by what they do. Each checked on its official site; nothing sponsored or ranked.",
+      "canonical": "https://toolzenhub.in/ai-tools/directory/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 17830
     }
   },
   "/articles.html": {
@@ -3546,7 +3595,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4671
+      "visibleTextChars": 3938
     }
   },
   "/calculators/balance-transfer/": {
@@ -3595,7 +3644,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7957
+      "visibleTextChars": 8363
     }
   },
   "/calculators/bmi/": {
@@ -3644,7 +3693,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4728
+      "visibleTextChars": 5080
     }
   },
   "/calculators/bmr/": {
@@ -3693,7 +3742,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4324
+      "visibleTextChars": 4717
     }
   },
   "/calculators/cagr/": {
@@ -3742,7 +3791,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7632
+      "visibleTextChars": 8001
     }
   },
   "/calculators/calorie/": {
@@ -3791,7 +3840,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4530
+      "visibleTextChars": 4923
     }
   },
   "/calculators/credit-card-payoff/": {
@@ -3840,7 +3889,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8193
+      "visibleTextChars": 8605
     }
   },
   "/calculators/emi/": {
@@ -3889,7 +3938,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5459
+      "visibleTextChars": 5903
     }
   },
   "/calculators/fd/": {
@@ -3938,7 +3987,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8042
+      "visibleTextChars": 8984
     }
   },
   "/calculators/gratuity/": {
@@ -4036,7 +4085,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6704
+      "visibleTextChars": 7303
     }
   },
   "/calculators/home-loan/": {
@@ -4085,7 +4134,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7080
+      "visibleTextChars": 7524
     }
   },
   "/calculators/income-tax/": {
@@ -4134,7 +4183,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 10262
+      "visibleTextChars": 10652
     }
   },
   "/calculators/interest/": {
@@ -4183,7 +4232,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5578
+      "visibleTextChars": 6022
     }
   },
   "/calculators/loan-comparison/": {
@@ -4232,7 +4281,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5452
+      "visibleTextChars": 5879
     }
   },
   "/calculators/loan-eligibility/": {
@@ -4281,7 +4330,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5824
+      "visibleTextChars": 6268
     }
   },
   "/calculators/margin/": {
@@ -4428,7 +4477,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5738
+      "visibleTextChars": 6182
     }
   },
   "/calculators/ppf/": {
@@ -4477,7 +4526,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 11711
+      "visibleTextChars": 10526
     }
   },
   "/calculators/prepayment/": {
@@ -4526,7 +4575,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7010
+      "visibleTextChars": 7454
     }
   },
   "/calculators/profit/": {
@@ -4673,7 +4722,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6218
+      "visibleTextChars": 5033
     }
   },
   "/calculators/roi/": {
@@ -4771,7 +4820,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 9102
+      "visibleTextChars": 9677
     }
   },
   "/calculators/sip/": {
@@ -4820,7 +4869,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8560
+      "visibleTextChars": 8950
     }
   },
   "/calculators/swp/": {
@@ -4869,7 +4918,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8269
+      "visibleTextChars": 8651
     }
   },
   "/calculators/unit-converter/": {
@@ -4918,7 +4967,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5134
+      "visibleTextChars": 5476
     }
   },
   "/calculators/xirr/": {
@@ -4967,7 +5016,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7722
+      "visibleTextChars": 7358
     }
   },
   "/categories.html": {
@@ -5283,7 +5332,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 1123
+      "visibleTextChars": 1365
     }
   },
   "/investment.html": {
@@ -31746,7 +31795,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 18508
+      "visibleTextChars": 18748
     }
   },
   "/tools/ai-answer-checklist/": {
@@ -31795,7 +31844,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6387
+      "visibleTextChars": 6529
     }
   },
   "/tools/ai-answer-compare/": {
@@ -31844,7 +31893,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6459
+      "visibleTextChars": 6591
     }
   },
   "/tools/base64-encoder-decoder/": {
@@ -31893,7 +31942,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5857
+      "visibleTextChars": 6209
     }
   },
   "/tools/bug-report-prompt/": {
@@ -31942,7 +31991,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7301
+      "visibleTextChars": 7557
     }
   },
   "/tools/business-days/": {
@@ -32040,7 +32089,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 7451
+      "visibleTextChars": 7703
     }
   },
   "/tools/countdown-timer/": {
@@ -32138,7 +32187,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4088
+      "visibleTextChars": 4447
     }
   },
   "/tools/cron-expression-explainer/": {
@@ -32187,7 +32236,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 9192
+      "visibleTextChars": 9670
     }
   },
   "/tools/date-calculator/": {
@@ -32334,7 +32383,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 24141
+      "visibleTextChars": 24765
     }
   },
   "/tools/hours-calculator/": {
@@ -32432,7 +32481,56 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5749
+      "visibleTextChars": 6140
+    }
+  },
+  "/tools/image-metadata/": {
+    "runtime": {
+      "title": "Photo Metadata Viewer and Remover: See and Remove EXIF and GPS | ToolZen Hub",
+      "description": "Check a JPEG or PNG for its location, camera, dates and text, and download a copy without them. The picture is copied as it is, not recompressed. It runs in your browser: your photos are not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/image-metadata/",
+      "robots": null,
+      "openGraph": {
+        "og:description": "Check a JPEG or PNG for its location, camera, dates and text, and download a copy without them. The picture is copied as it is, not recompressed. It runs in your browser: your photos are not uploaded.",
+        "og:site_name": "ToolZen Hub",
+        "og:title": "Photo Metadata Viewer and Remover: See and Remove EXIF and GPS | ToolZen Hub",
+        "og:type": "website",
+        "og:url": "https://toolzenhub.in/tools/image-metadata/"
+      },
+      "twitter": {
+        "twitter:card": "summary",
+        "twitter:description": "Check a JPEG or PNG for its location, camera, dates and text, and download a copy without them. The picture is copied as it is, not recompressed. It runs in your browser: your photos are not uploaded.",
+        "twitter:title": "Photo Metadata Viewer and Remover: See and Remove EXIF and GPS | ToolZen Hub"
+      },
+      "jsonLd": [
+        {
+          "type": "BreadcrumbList",
+          "keys": [
+            "@context",
+            "@type",
+            "itemListElement"
+          ]
+        }
+      ],
+      "h1": [
+        "Photo Metadata Viewer and Remover"
+      ],
+      "lang": "en",
+      "viewport": "width=device-width, initial-scale=1.0",
+      "themeColor": null,
+      "favicon": "{ROOT}favicon.svg",
+      "charset": "UTF-8"
+    },
+    "rawHtml": {
+      "title": "Photo Metadata Viewer and Remover: See and Remove EXIF and GPS | ToolZen Hub",
+      "description": "Check a JPEG or PNG for its location, camera, dates and text, and download a copy without them. The picture is copied as it is, not recompressed. It runs in your browser: your photos are not uploaded.",
+      "canonical": "https://toolzenhub.in/tools/image-metadata/",
+      "robots": null,
+      "hasOpenGraph": true,
+      "hasTwitter": true,
+      "hasJsonLd": true,
+      "h1Count": 1,
+      "visibleTextChars": 3938
     }
   },
   "/tools/interval-timer/": {
@@ -32530,7 +32628,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4890
+      "visibleTextChars": 5408
     }
   },
   "/tools/json-csv-converter/": {
@@ -32579,7 +32677,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4807
+      "visibleTextChars": 5336
     }
   },
   "/tools/json-error-fixing-lab/": {
@@ -32628,7 +32726,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3871
+      "visibleTextChars": 4260
     }
   },
   "/tools/json-formatter/": {
@@ -32677,7 +32775,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5837
+      "visibleTextChars": 6596
     }
   },
   "/tools/jsonpath-challenge-lab/": {
@@ -32726,7 +32824,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3957
+      "visibleTextChars": 4336
     }
   },
   "/tools/jsonpath-tester/": {
@@ -32775,7 +32873,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5645
+      "visibleTextChars": 6131
     }
   },
   "/tools/jwt-decoder/": {
@@ -32824,7 +32922,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6350
+      "visibleTextChars": 6830
     }
   },
   "/tools/list-comparer/": {
@@ -32971,7 +33069,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5061
+      "visibleTextChars": 5396
     }
   },
   "/tools/merge-pdf/": {
@@ -33167,7 +33265,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4570
+      "visibleTextChars": 4936
     }
   },
   "/tools/pomodoro-timer/": {
@@ -33265,7 +33363,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 25725
+      "visibleTextChars": 26436
     }
   },
   "/tools/prompt-builder/": {
@@ -33314,7 +33412,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 8389
+      "visibleTextChars": 8640
     }
   },
   "/tools/shift-planner/": {
@@ -33510,7 +33608,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 30572
+      "visibleTextChars": 31168
     }
   },
   "/tools/stopwatch/": {
@@ -33608,7 +33706,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 4662
+      "visibleTextChars": 4909
     }
   },
   "/tools/text-diff/": {
@@ -33755,7 +33853,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 5138
+      "visibleTextChars": 5500
     }
   },
   "/tools/unix-timestamp-converter/": {
@@ -33804,7 +33902,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6462
+      "visibleTextChars": 6846
     }
   },
   "/tools/url-parser/": {
@@ -33853,7 +33951,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6453
+      "visibleTextChars": 7064
     }
   },
   "/tools/uuid-generator/": {
@@ -33902,7 +34000,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 3650
+      "visibleTextChars": 4011
     }
   },
   "/tools/world-clock/": {
@@ -33951,7 +34049,7 @@
       "hasTwitter": true,
       "hasJsonLd": true,
       "h1Count": 1,
-      "visibleTextChars": 6007
+      "visibleTextChars": 6357
     }
   }
 }
