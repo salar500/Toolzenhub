@@ -505,10 +505,34 @@
 
     }
 
+    /* The form and the result start on one line (owner finding, 2026-11-15). The section's heading and notes span both
+       columns, and the section box itself steps aside (display: contents; it has no accessible name, so it is not a
+       landmark), which puts the form card and the result card side by side in the same grid row. Before this the result
+       was level with the section heading, about 140 px above the form card. */
     .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-section {
+
+        display: contents;
+
+    }
+
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-section > * {
+
+        grid-column: 2 / -1;
+
+    }
+
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-section > :first-child {
+
+        margin-top: 28px;
+
+    }
+
+    /* two rows: a visible "out of date" note (-stale) and the result then stack beside the form; hidden, the second row is empty */
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-section > .calculator-form {
 
         grid-column: 2;
         grid-row: span 2;
+        align-self: start;
 
     }
 
@@ -541,7 +565,13 @@
 
     }
 
-    .calculator-page.is-rail-collapsed:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-section {
+    .calculator-page.is-rail-collapsed:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-section > * {
+
+        grid-column: 1 / -1;
+
+    }
+
+    .calculator-page.is-rail-collapsed:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-section > .calculator-form {
 
         grid-column: 1;
 
