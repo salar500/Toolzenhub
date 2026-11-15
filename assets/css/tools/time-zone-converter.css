@@ -212,6 +212,25 @@
 
 }
 
+/* a place over its zone name: "Mumbai, India" / Asia/Kolkata */
+.tz-list__option {
+
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1px;
+
+}
+
+.tz-list__zone {
+
+    color: var(--ink-muted);
+
+    font-size: 13px;
+    font-weight: 400;
+
+}
+
 .tz-row-actions,
 .tz-share,
 .tz-days {

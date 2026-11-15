@@ -27,7 +27,9 @@ async function open(page, go, query = "") {
   await expect(panel(page)).toHaveAttribute("data-ready", "true");
 }
 
-const option = (page, picker, zone) => page.locator(`#tz-${picker}-list .tz-list__option`, { hasText: new RegExp(`^${zone}$`) });
+/* an option is a place ("New York, United States") over its zone name; before the place search has loaded it is the zone name alone */
+const option = (page, picker, zone) => page.locator(`#tz-${picker}-list .tz-list__option`).filter({ has: page.locator(".tz-list__zone, .tz-list__place", { hasText: new RegExp(`^${zone}$`) }) }).first();
+const optionZone = (opt) => opt.locator(".tz-list__zone, .tz-list__place:only-child");
 
 async function addZone(page, query, zone) {
   await page.locator("#tz-add-input").fill(query);
@@ -112,13 +114,13 @@ test.describe("Time Zone Converter", () => {
 
   test("India to New York: 5:30 AM, and the quick-add button adds a zone and then goes away", async ({ page, go }) => {
     await open(page, go);
-    await page.getByRole("button", { name: "Add America/New_York", exact: true }).click();
+    await page.getByRole("button", { name: "Add New York (America/New_York)", exact: true }).click();
     await state(page, "ok");
     const ny = await rowText(page);
     expect([ny.time, ny.relation, ny.offset.startsWith("UTC−04:00")]).toEqual(["5:30 AM", "Same day", true]);
-    await expect(page.getByRole("button", { name: "Add America/New_York", exact: true })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Add New York (America/New_York)", exact: true })).toHaveCount(0);
     // an old and a new spelling of the browser's own zone are one zone: the quick button for Kolkata does not appear
-    await expect(page.getByRole("button", { name: "Add Asia/Kolkata", exact: true })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Add Kolkata (Asia/Kolkata)", exact: true })).toHaveCount(0);
   });
 
   test("a later date in the destination is told in words: Next day and Previous day", async ({ page, go }) => {
@@ -152,7 +154,7 @@ test.describe("Time Zone Converter", () => {
     await expect(input).toHaveAttribute("aria-expanded", "false");
     await input.fill("NEW york");
     await expect(input).toHaveAttribute("aria-expanded", "true");
-    await expect(page.locator("#tz-add-list .tz-list__option").first()).toHaveText("America/New_York");
+    await expect(optionZone(page.locator("#tz-add-list .tz-list__option").first())).toHaveText("America/New_York");
     await expect(page.locator("#tz-add-list .tz-list__option")).toHaveCount(await page.locator("#tz-add-list .tz-list__option").count());
     expect(await page.locator("#tz-add-list .tz-list__option").count()).toBeLessThanOrEqual(8);
     await expect(input).toHaveAttribute("aria-activedescendant", /option-0$/);
