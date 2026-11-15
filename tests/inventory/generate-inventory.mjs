@@ -72,6 +72,7 @@ function describePage(file) {
     "pdf-tools.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "practice-labs.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "ai-tools.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
+    "ai-tools/directory/index.html": { type: "directory", primarySelector: ".ai-card", interactive: true, rendered: "static", queryVariants: ["?audience=<audience id>", "?category=<category id>"] },
     "tools.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "investment.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },
     "business.html": { type: "directory", primarySelector: "h1.categories-page__title", interactive: true, rendered: "static" },

@@ -173,7 +173,7 @@ test.describe("Time Zone Converter", () => {
     await state(page, "ok");
     expect((await rowText(page)).zone).toBe("Australia/Lord_Howe");
     await input.fill("zzzzzz");
-    await expect(page.locator("#tz-add-list")).toContainText("No time zone matches that.");
+    await expect(page.locator("#tz-add-list")).toContainText("No city, country or time zone matches that.");
     await input.press("Enter");
     await expect(rows(page)).toHaveCount(1);
     // the whole zone name is typed, with no list: Enter accepts it only if the browser supports it
@@ -359,7 +359,7 @@ test.describe("Time Zone Converter", () => {
     await expect(page.locator("#tz-panel img, #tz-panel script, #tz-panel b")).toHaveCount(0);
     // typed text in a picker is text, too
     await page.locator("#tz-add-input").fill('<img src=x onerror="window.__xss=3">');
-    await expect(page.locator("#tz-add-list")).toContainText("No time zone matches that.");
+    await expect(page.locator("#tz-add-list")).toContainText("No city, country or time zone matches that.");
     await expect(page.locator("#tz-add-list img")).toHaveCount(0);
     expect(await page.evaluate(() => window.__xss)).toBe(0);
     expectClean(watch);
