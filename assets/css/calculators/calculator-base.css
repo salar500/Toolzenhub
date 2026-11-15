@@ -19,8 +19,9 @@
     margin:
         0 auto;
 
+    /* the footer owns the gap below the page (components/footer.css) */
     padding:
-        0 0 70px;
+        0 0 var(--space-4);
 
     color:
         var(--color-ink);
@@ -493,7 +494,7 @@
             );
 
         padding-bottom:
-            45px;
+            var(--space-4);
 
     }
 

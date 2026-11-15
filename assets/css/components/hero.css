@@ -861,3 +861,26 @@
     }
 
 }
+
+/* Phones (owner finding 2026-11-15): the decorative illustration comes after the message, the actions and the search, and
+   is kept small so the tool ecosystems start close to the first screen; on a short phone screen it is left out, since it
+   would otherwise fill the rest of that screen. Wide screens are unchanged. */
+@media (max-width: 959px) {
+
+    .hero__visual {
+        margin-top: 16px;
+    }
+
+    .hero-art {
+        width: min(100%, 300px);
+    }
+
+}
+
+@media (max-width: 599px) and (max-height: 700px) {
+
+    .hero__visual {
+        display: none;
+    }
+
+}

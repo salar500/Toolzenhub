@@ -561,7 +561,7 @@
 
 .about-disclaimer-section {
 
-    padding: 24px 0 55px;
+    padding: 24px 0 var(--space-4);
 
 }
 

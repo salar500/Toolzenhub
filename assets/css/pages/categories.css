@@ -14,7 +14,7 @@
     box-sizing: border-box;
 
     padding-top: 42px;
-    padding-bottom: 26px;
+    padding-bottom: var(--space-4);
 
     background: var(--surface-page);
 }
@@ -441,7 +441,8 @@
     .categories-page {
         padding-top: 46px;
 
-        padding-bottom: 30px;
+        /* the footer owns the gap below the page (components/footer.css) */
+        padding-bottom: var(--space-4);
     }
 
 
