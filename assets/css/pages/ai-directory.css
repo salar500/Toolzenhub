@@ -1,0 +1,292 @@
+/* =========================================================
+   ToolZen Hub
+   AI products directory (/ai-tools/directory/)
+   Filters, category groups and product cards. Tokens only,
+   so the light and dark themes both apply.
+========================================================= */
+
+.ai-directory__native {
+    margin: 8px 0 0;
+    color: var(--ink-muted);
+    font-size: 15px;
+}
+
+.ai-directory-promo {
+    margin-top: 32px;
+}
+
+.ai-directory-promo p {
+    max-width: 72ch;
+    color: var(--ink-muted);
+}
+
+
+/* ---------- filters ---------- */
+
+.ai-filters {
+    display: grid;
+    gap: 14px;
+    margin: 20px 0 8px;
+    padding: 16px 18px;
+    border: 1px solid var(--color-slate-200);
+    border-radius: 12px;
+    background: var(--surface-card);
+}
+
+.ai-filters[hidden] {
+    display: none;
+}
+
+.ai-filters__search {
+    display: grid;
+    gap: 6px;
+}
+
+.ai-filters__search label,
+.ai-filters__group legend {
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.ai-filters__search input {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid var(--line-control);
+    border-radius: 8px;
+    background: var(--surface-card);
+    color: var(--ink);
+    font-size: 16px;
+}
+
+.ai-filters__group {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.ai-filters__group legend {
+    margin-bottom: 6px;
+    padding: 0;
+}
+
+.ai-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.ai-chip {
+    position: relative;
+}
+
+/* the radio stays in the page for the keyboard and screen readers; the pill is its visible face */
+.ai-chip input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.ai-chip span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 14px;
+    border: 1px solid var(--line-control);
+    border-radius: 999px;
+    background: var(--surface-card);
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.ai-chip input:checked + span {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--ink);
+    box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.ai-chip input:checked + span::before {
+    content: "✓ ";
+    white-space: pre;
+}
+
+.ai-chip input:focus-visible + span {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.ai-filters__count {
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: 14px;
+}
+
+.ai-filters__reset,
+.ai-directory__empty button {
+    justify-self: start;
+    min-height: 44px;
+    padding: 0 16px;
+    border: 1px solid var(--line-control);
+    border-radius: 8px;
+    background: var(--surface-card);
+    color: var(--ink);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ai-filters__reset[hidden] {
+    display: none;
+}
+
+
+/* ---------- groups and cards ---------- */
+
+.ai-group {
+    margin-top: 28px;
+}
+
+.ai-group[hidden],
+.ai-card[hidden],
+.ai-directory__empty[hidden] {
+    display: none;
+}
+
+.ai-group__count {
+    color: var(--ink-muted);
+    font-weight: 500;
+}
+
+.ai-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ai-card > article {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 16px 18px;
+    border: 1px solid var(--color-slate-200);
+    border-radius: 12px;
+    background: var(--surface-card);
+}
+
+.ai-card__head {
+    display: grid;
+    gap: 2px;
+}
+
+.ai-card__name {
+    margin: 0;
+    color: var(--ink);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.ai-card__kind {
+    color: var(--ink-muted);
+    font-size: 13px;
+}
+
+.ai-card__summary {
+    margin: 0;
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.ai-card__note {
+    margin: 0;
+    color: var(--ink-muted);
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.ai-card__facts {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    font-size: 13px;
+}
+
+.ai-card__facts > div {
+    display: grid;
+    grid-template-columns: 6.5em minmax(0, 1fr);
+    gap: 8px;
+}
+
+.ai-card__facts dt {
+    color: var(--ink-muted);
+    font-weight: 600;
+}
+
+.ai-card__facts dd {
+    margin: 0;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+}
+
+.ai-card__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px 12px;
+    margin: auto 0 0;
+    padding-top: 6px;
+}
+
+.ai-card__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.ai-card__checked {
+    color: var(--ink-muted);
+    font-size: 12px;
+}
+
+.ai-card__sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.ai-directory__empty {
+    margin: 24px 0;
+    color: var(--ink-muted);
+}
+
+.ai-directory__policy {
+    margin-top: 36px;
+}
+
+.ai-directory__policy ul {
+    max-width: 78ch;
+    padding-left: 1.2em;
+    color: var(--ink-muted);
+    line-height: 1.6;
+}

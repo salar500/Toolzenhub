@@ -23,14 +23,14 @@ test("every entry belongs to a published tool and resolves completely", () => {
     assert.ok(k.learn.length + k.official.length + (k.sources ? 1 : 0) > 0, `${id} has an empty entry`);
     assert.equal(k.learn.length + k.official.length + (k.sources ? 1 : 0) <= 6, true, `${id}: at most six items`);
     for (const item of [...k.learn, ...k.official]) assert.ok(item.why && item.why.length <= 200, `${id}: every link says why, briefly`);
-    for (const { ref } of entry.learn ?? []) assert.match(ref, /^(path|lesson|lab):/);
+    for (const { ref } of entry.learn ?? []) assert.match(ref, /^(path|lesson|lab|directory):/);
   }
 });
 
 test("learning links stay on the site and lab links are Practice Labs tools (rule 4.2: no other section's tools here)", () => {
   for (const id of Object.keys(KNOWLEDGE)) {
     for (const item of getKnowledgeFor(id).learn) {
-      assert.match(item.href, /^\/(practice-labs|tools)\//, `${id}: ${item.href}`);
+      assert.match(item.href, /^\/(practice-labs|tools|ai-tools\/directory)\//, `${id}: ${item.href}`);
       if (item.kind === "Practice lab") assert.equal(getToolById(item.href.split("/")[2]).sectionId, "practice-labs");
     }
   }
@@ -38,6 +38,9 @@ test("learning links stay on the site and lab links are Practice Labs tools (rul
   assert.throws(() => resolveLearn("lesson:sql/beginner/nothing/here"), /no lesson/);
   assert.throws(() => resolveLearn("path:not-a-path"), /no published learning path/);
   assert.throws(() => resolveLearn("page:x"), /unknown reference/);
+  assert.deepEqual(resolveLearn("directory:qa"), { kind: "AI products directory", title: "AI products for QA testers", href: "/ai-tools/directory/?audience=qa" });
+  assert.equal(resolveLearn("directory:").href, "/ai-tools/directory/");
+  assert.throws(() => resolveLearn("directory:managers"), /no AI directory audience/);
 });
 
 test("official sources: https, a publisher, a known kind, checked on a real date not in the future, no referral parameters", () => {

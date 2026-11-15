@@ -14,6 +14,8 @@ import { KNOWLEDGE } from "../data/knowledge.js";
 import { OFFICIAL_SOURCES } from "../data/official-sources.js";
 import { getToolById } from "../data/tools.js";
 import { getPath, flatLessons, pathUrl, lessonUrl } from "../practice-labs/curriculum.js";
+import { AI_AUDIENCES } from "../data/ai-directory.js";
+import { ROUTES } from "../routes.js";
 
 const ESCAPES = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
 const esc = (text) => String(text).replace(/[&<>"']/g, (c) => ESCAPES[c]);
@@ -51,6 +53,16 @@ export function resolveLearn(ref) {
         const tool = getToolById(rest);
         if (!tool || !tool.available || tool.sectionId !== "practice-labs") throw new Error(`knowledge: no published Practice Labs tool "${rest}"`);
         return { kind: "Practice lab", title: tool.title, href: tool.href };
+    }
+
+    if (type === "directory") {
+        const audience = AI_AUDIENCES.find((a) => a.id === rest);
+        if (rest !== "" && !audience) throw new Error(`knowledge: no AI directory audience "${rest}"`);
+        return {
+            kind: "AI products directory",
+            title: audience ? `AI products for ${audience.phrase}` : "AI products directory",
+            href: audience ? `${ROUTES.aiDirectory}?audience=${audience.id}` : ROUTES.aiDirectory
+        };
     }
 
     throw new Error(`knowledge: unknown reference "${ref}"`);

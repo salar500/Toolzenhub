@@ -53,6 +53,14 @@ import {
     escapeHTML
 } from "../../ui/escape.js";
 
+import {
+    AI_PRODUCTS,
+    AI_CATEGORIES,
+    AI_AUDIENCES,
+    PRICING,
+    KINDS
+} from "../../data/ai-directory.js";
+
 
 /* =========================================================
    HELPERS
@@ -389,9 +397,9 @@ export function allToolsHtml() {
    and between tools without coming back here. A page whose section has fewer than two live tools gets the content alone.
 ========================================================= */
 
-function workspaceOpen(sectionId, currentCategoryId = null) {
+function workspaceOpen(sectionId, currentCategoryId = null, currentPageName = null) {
 
-    const nav = renderSectionNav({ sectionId, currentCategoryId });
+    const nav = renderSectionNav({ sectionId, currentCategoryId, currentPageName });
 
     return nav
         ? `<div class="ecosystem-layout" data-section-page>
@@ -559,6 +567,8 @@ export function sectionPageHtml(sectionId) {
 
                 ${sectionId === "developer-tools" ? practiceLabsLink() : ""}
 
+                ${sectionId === "ai-tools" ? aiDirectoryLink() : ""}
+
                 <p class="directory-section__more">
                     <a href="${ROUTES.tools}">← All tools</a>
                 </p>
@@ -674,3 +684,135 @@ const practiceLabsLink = () => `
                 <p class="directory-section__more">
                     <a href="${ROUTES.practiceLabs}">Practice Labs: exercises and flashcards →</a>
                 </p>`;
+
+/* the AI Tools page points to the directory of external products, which is a different kind of thing from the tools above */
+const aiDirectoryLink = () => `
+                <section class="ai-directory-promo" aria-labelledby="ai-directory-promo-title">
+                    <h2 id="ai-directory-promo-title" class="categories-detail__heading">AI products directory</h2>
+                    <p>The tools above are built here and run in your browser. For AI products made by other companies (assistants, coding, testing, data, research, writing, images, audio and more), see the directory: ${AI_PRODUCTS.length} products, each checked on its official site, filterable for developers, QA testers and data analysts.</p>
+                    <p class="directory-section__more"><a href="${ROUTES.aiDirectory}">Browse the AI products directory →</a></p>
+                </section>`;
+
+
+/* =========================================================
+   AI PRODUCTS DIRECTORY (/ai-tools/directory/)
+
+   External products, grouped by category, every card plain
+   HTML so the page works and is crawlable without script;
+   assets/js/entries/ai-directory.js adds the search and the
+   category and audience filters. Data: data/ai-directory.js.
+========================================================= */
+
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const longDate = (iso) => { const [y, m, d] = iso.split("-").map(Number); return `${d} ${MONTHS[m - 1]} ${y}`; };
+
+function aiProductCard(product) {
+
+    const audiences = AI_AUDIENCES.filter((a) => product.audiences.includes(a.id));
+    const search = [product.name, product.by, product.summary, product.note, ...product.access, ...product.categories.map((c) => AI_CATEGORIES.find((x) => x.id === c).label), ...audiences.map((a) => a.label)].join(" ").toLowerCase();
+
+    return `
+                        <li class="ai-card" data-categories="${escapeHTML(product.categories.join(" "))}" data-audiences="${escapeHTML(product.audiences.join(" "))}" data-search="${escapeHTML(search)}">
+                            <article aria-labelledby="ai-${escapeHTML(product.id)}">
+                                <div class="ai-card__head">
+                                    <h3 id="ai-${escapeHTML(product.id)}" class="ai-card__name">${escapeHTML(product.name)}</h3>
+                                    <span class="ai-card__kind">${escapeHTML(KINDS[product.kind])}${product.by && product.by !== product.name ? ` · ${escapeHTML(product.by)}` : ""}</span>
+                                </div>
+                                <p class="ai-card__summary">${escapeHTML(product.summary)}</p>
+                                ${product.note ? `<p class="ai-card__note">${escapeHTML(product.note)}</p>` : ""}
+                                <dl class="ai-card__facts">
+                                    ${product.access.length ? `<div><dt>Where</dt><dd>${escapeHTML(product.access.join(", "))}</dd></div>` : ""}
+                                    <div><dt>Pricing</dt><dd>${escapeHTML(PRICING[product.pricing])}</dd></div>
+                                    <div><dt>Useful for</dt><dd>${escapeHTML(audiences.map((a) => a.label).join(", "))}</dd></div>
+                                </dl>
+                                <p class="ai-card__foot">
+                                    <a class="ai-card__link" href="${escapeHTML(product.url)}" target="_blank" rel="noopener noreferrer">Official site<span class="ai-card__sr">: ${escapeHTML(product.name)}, opens in a new tab</span> <span aria-hidden="true">↗</span></a>
+                                    <span class="ai-card__checked">Checked ${escapeHTML(longDate(product.verifiedOn))}</span>
+                                </p>
+                            </article>
+                        </li>`;
+
+}
+
+export function aiDirectoryHtml() {
+
+    const groups = AI_CATEGORIES
+        .map((category) => ({ category, products: AI_PRODUCTS.filter((p) => p.categories[0] === category.id) }))
+        .filter((g) => g.products.length);
+
+    const chip = (name, value, label, checked) => `
+                            <label class="ai-chip"><input type="radio" name="${name}" value="${escapeHTML(value)}"${checked ? " checked" : ""}><span>${escapeHTML(label)}</span></label>`;
+
+    return `
+    <main id="app">
+
+        <section class="categories-page directory-page ai-directory">
+
+            <div class="container container--workspace">
+
+                ${renderBreadcrumb([
+                    { label: "All Tools", href: ROUTES.tools },
+                    { label: "AI Tools", href: ROUTES.aiTools },
+                    { label: "AI products directory" }
+                ])}
+
+                ${workspaceOpen("ai-tools", null, "AI products directory")}
+
+                <div class="categories-page__intro">
+                    <span class="categories-page__eyebrow">AI Tools</span>
+                    <h1 class="categories-page__title">AI products directory</h1>
+                    <p class="categories-page__description">${AI_PRODUCTS.length} AI products made by other companies, grouped by what they do. Each one was checked on its official site on the date shown; the descriptions are ours and say only what that site said. Nothing here is sponsored, ranked or an endorsement, and no link carries a referral code.</p>
+                    <p class="ai-directory__native">Looking for the tools built here, which run in your browser and need no account? See <a href="${ROUTES.aiTools}">AI Tools</a>.</p>
+                </div>
+
+                <form class="ai-filters" role="search" aria-label="Filter the AI products" data-ai-filters hidden>
+                    <div class="ai-filters__search">
+                        <label for="ai-search">Search the directory</label>
+                        <input id="ai-search" type="search" autocomplete="off" spellcheck="false" placeholder="For example: test automation, SQL, transcription">
+                    </div>
+                    <fieldset class="ai-filters__group">
+                        <legend>Useful for</legend>
+                        <div class="ai-chips">${chip("audience", "", "Everyone", true)}${AI_AUDIENCES.map((a) => chip("audience", a.id, a.label, false)).join("")}
+                        </div>
+                    </fieldset>
+                    <fieldset class="ai-filters__group">
+                        <legend>Category</legend>
+                        <div class="ai-chips">${chip("category", "", "All categories", true)}${groups.map((g) => chip("category", g.category.id, g.category.label, false)).join("")}
+                        </div>
+                    </fieldset>
+                    <p class="ai-filters__count" role="status" aria-live="polite" data-ai-count></p>
+                    <button type="button" class="ai-filters__reset" data-ai-reset hidden>Show all products</button>
+                </form>
+
+                ${groups.map((g) => `
+                <section class="ai-group" data-ai-group="${g.category.id}" aria-labelledby="ai-group-${g.category.id}">
+                    <h2 id="ai-group-${g.category.id}" class="categories-detail__heading">${escapeHTML(g.category.label)} <span class="ai-group__count">(${g.products.length})</span></h2>
+                    <ul class="ai-grid">${g.products.map(aiProductCard).join("")}
+                    </ul>
+                </section>`).join("")}
+
+                <p class="ai-directory__empty" data-ai-empty hidden>No product matches. Try fewer words, or <button type="button" data-ai-reset>show all products</button>.</p>
+
+                <section class="ai-directory__policy" aria-labelledby="ai-policy-title">
+                    <h2 id="ai-policy-title" class="categories-detail__heading">How this directory is kept</h2>
+                    <ul>
+                        <li>Every product is listed because it does a clear job for developers, testers, analysts or other professionals, not because it paid or asked.</li>
+                        <li>Pricing shows only what the product's own site said on the day it was checked, never a price; plans change, so check the official site before you sign up.</li>
+                        <li>Each entry is checked again at least every six months. A product whose official site no longer describes it is removed.</li>
+                        <li>These products run on their makers' servers under their own terms and privacy policies. Unlike the tools on this site, what you type into them is sent to them.</li>
+                    </ul>
+                </section>
+
+                <p class="directory-section__more">
+                    <a href="${ROUTES.aiTools}">← AI Tools</a>
+                </p>
+
+                ${workspaceClose("ai-tools")}
+
+            </div>
+
+        </section>
+
+    </main>`;
+
+}

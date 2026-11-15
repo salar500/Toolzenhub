@@ -14,8 +14,9 @@
    useful has no entry, and the block is not drawn (no
    generic or padded links).
 
-     learn     [{ ref, why }]   ref: "path:<id>", "lesson:<path>/<level>/<module>/<slug>"
-                                or "lab:<tool id>" (a Practice Labs tool)
+     learn     [{ ref, why }]   ref: "path:<id>", "lesson:<path>/<level>/<module>/<slug>",
+                                "lab:<tool id>" (a Practice Labs tool) or "directory:<audience>"
+                                (the AI products directory, filtered; "directory:" for all)
      official  [{ ref, why }]   ref: an id in data/official-sources.js
      sources   { label, refs: [ids], why }   several official pages that answer one
                                 question (banks' own FD rate pages), drawn as one row
@@ -157,9 +158,24 @@ export const KNOWLEDGE = Object.freeze({
     "cron-challenge-lab": { official: [{ ref: "crontab-5", why: "The crontab format the challenges use." }] },
 
     /* ---------- AI Tools ---------- */
-    "bug-report-prompt": { learn: [{ ref: "lesson:manual-testing/intermediate/executing-reporting/writing-bug-reports", why: "What a bug report needs before any assistant can help with it." }] },
-    "prompt-builder": { learn: [{ ref: "path:prompt-engineering", why: "A short path on writing prompts that get usable answers." }] },
-    "context-pack-builder": { learn: [{ ref: "path:prompt-engineering", why: "A short path on giving an assistant the right context." }] },
+    "bug-report-prompt": {
+        learn: [
+            { ref: "lesson:manual-testing/intermediate/executing-reporting/writing-bug-reports", why: "What a bug report needs before any assistant can help with it." },
+            { ref: "directory:qa", why: "AI products for testing, checked on their official sites." }
+        ]
+    },
+    "prompt-builder": {
+        learn: [
+            { ref: "path:prompt-engineering", why: "A short path on writing prompts that get usable answers." },
+            { ref: "directory:", why: "The assistants and other AI products you might paste a prompt into, checked on their official sites." }
+        ]
+    },
+    "context-pack-builder": {
+        learn: [
+            { ref: "path:prompt-engineering", why: "A short path on giving an assistant the right context." },
+            { ref: "directory:developers", why: "AI coding assistants and developer platforms, checked on their official sites." }
+        ]
+    },
     "ai-answer-checklist": { learn: [{ ref: "path:ai-foundations", why: "How language models produce answers, and why an answer needs checking." }] },
     "ai-answer-compare": { learn: [{ ref: "path:ai-foundations", why: "How language models produce answers, and why two can differ." }] },
 

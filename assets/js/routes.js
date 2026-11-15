@@ -130,6 +130,10 @@ export const ROUTES = {
     aiTools:
         `${SITE_ROOT}ai-tools.html`,
 
+    /* external AI products, a page of the AI Tools section (data/ai-directory.js) */
+    aiDirectory:
+        `${SITE_ROOT}ai-tools/directory/`,
+
 
     /* =====================================================
        CATEGORIES

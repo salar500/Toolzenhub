@@ -105,7 +105,7 @@ function linkHtml(tool, currentId) {
  *   currentCategoryId the category page being shown (Calculators), marked as the current group
  * Returns "" when the section has fewer than two live tools (nothing to switch between).
  */
-export function renderSectionNav({ sectionId, currentToolId = null, currentCategoryId = null }) {
+export function renderSectionNav({ sectionId, currentToolId = null, currentCategoryId = null, currentPageName = null }) {
 
     const section = getSection(sectionId);
 
@@ -150,14 +150,15 @@ export function renderSectionNav({ sectionId, currentToolId = null, currentCateg
 
     /* the section's own page: a way back to the ecosystem overview from any tool, marked when that is the page being shown */
     const landingUrl = getSectionUrl(section.id);
-    const onLanding = currentToolId === null && currentCategoryId === null;
+    /* currentPageName: another page of the section that is not a tool (the AI products directory), so the overview is not the current page */
+    const onLanding = currentToolId === null && currentCategoryId === null && currentPageName === null;
     const overview = landingUrl
         ? `<p class="section-switcher__overview"><a href="${escapeHTML(landingUrl)}"${onLanding ? ' aria-current="page"' : ""}>${escapeHTML(section.title)} overview</a></p>`
         : "";
 
     /* Where the visitor is, named on the phone's tool bar (assets/css/components/section-switcher.css): the tool, the category, or the overview.
        Not shown on a wide screen, where the sidebar itself marks the current page. */
-    const nowName = (currentToolId ? getToolById(currentToolId)?.title : currentCategoryTitle) || `${section.title} overview`;
+    const nowName = (currentToolId ? getToolById(currentToolId)?.title : currentCategoryTitle) || currentPageName || `${section.title} overview`;
 
     return `
                 <nav class="section-switcher" aria-label="${escapeHTML(section.title)}: switch tool">
