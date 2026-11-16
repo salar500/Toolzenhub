@@ -20,7 +20,7 @@ import {
     getCategoryByTitle,
     getCategoryLandingUrl,
     getCategoryForTool,
-    getToolsBySection
+    getSectionListing
 } from "../data/taxonomy.js";
 
 /* Sidebar groups for the sections whose tools have no catalog category (the Calculators section is grouped by its categories).
@@ -50,7 +50,8 @@ export const SECTION_GROUPS = {
     "ai-tools": [
         { label: "Briefs for an assistant", ids: ["prompt-builder", "bug-report-prompt", "context-pack-builder"] },
         { label: "Checking an answer", ids: ["ai-answer-checklist", "ai-answer-compare"] },
-        { label: "Work and productivity", ids: ["meeting-notes-action-plan"] }
+        { label: "Work and productivity", ids: ["meeting-notes-action-plan"] },
+        { label: "AI products", ids: ["ai-directory"] }
     ]
 };
 
@@ -89,9 +90,10 @@ export function groupSectionTools(sectionId, tools, categoryTitleOf) {
 
 }
 
-function linkHtml(tool, currentId) {
+function linkHtml(tool, currentId, currentPageName) {
 
-    const current = tool.id === currentId;
+    /* a section page (the AI Directory) is current when it is the page being shown */
+    const current = tool.id === currentId || (tool.isPage === true && tool.title === currentPageName);
 
     return `<li><a href="${escapeHTML(tool.href)}"${current ? ' aria-current="page"' : ""}>${escapeHTML(tool.title)}</a></li>`;
 
@@ -113,7 +115,7 @@ export function renderSectionNav({ sectionId, currentToolId = null, currentCateg
         return "";
     }
 
-    const siblings = getToolsBySection(section.id).filter(item => item.available);
+    const siblings = getSectionListing(section.id);
 
     if (siblings.length < 2) {
         return "";
@@ -122,7 +124,8 @@ export function renderSectionNav({ sectionId, currentToolId = null, currentCateg
     const groups = groupSectionTools(section.id, siblings, item => getCategoryForTool(item)?.title);
     const currentCategoryTitle = currentCategoryId ? getCategory(currentCategoryId)?.title : null;
     const isCurrentGroup = group =>
-        group.items.some(item => item.id === currentToolId) || (currentCategoryTitle !== null && group.label === currentCategoryTitle);
+        group.items.some(item => item.id === currentToolId || (item.isPage === true && item.title === currentPageName)) ||
+        (currentCategoryTitle !== null && group.label === currentCategoryTitle);
 
     /* Each group (a Calculators category, or a group of another section) can be expanded and collapsed by script (ui/section-rail.js); without
        script every group is simply listed. data-open marks the groups that start open: the current one, and every group of a short section.
@@ -142,7 +145,7 @@ export function renderSectionNav({ sectionId, currentToolId = null, currentCateg
                             <li class="section-switcher__group" data-open="${isOpen}"${current ? ' data-current="true"' : ""}${categoryHref ? ` data-href="${escapeHTML(categoryHref)}"` : ""}>
                                 ${group.label ? `<span class="section-switcher__label">${escapeHTML(group.label)}</span>` : ""}
                                 <ul>
-                                    ${group.items.map(item => linkHtml(item, currentToolId)).join("")}
+                                    ${group.items.map(item => linkHtml(item, currentToolId, currentPageName)).join("")}
                                 </ul>
                             </li>`;
 

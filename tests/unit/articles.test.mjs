@@ -137,7 +137,8 @@ describe("catalog model", () => {
     for (const key of ORIGINAL_PUBLISHED) {
       const a = catalog.getArticleByKey(key);
       assert.equal(a.publishedAt, "Aug 25, 2026");
-      assert.equal(a.updatedAt, "Aug 25, 2026");
+      // Fixed vs Floating gained a worked numeric example (2026-11-16), so its update date moved
+      assert.equal(a.updatedAt, key === "loan-comparison/fixed-vs-floating-interest-rates" ? "Nov 16, 2026" : "Aug 25, 2026", key);
       assert.match(a.readTime, /^\d min read$/);
       // a local article picture, or none: no card loads an image from another site
       if (a.cardImage) assert.match(a.cardImage.src, /^\/assets\/Images\/articles\//);
@@ -212,7 +213,8 @@ describe("relationships", () => {
   });
 
   test("related tools point at published calculators; the first one is the article's primary tool", () => {
-    const expected = (key) => key === "loan-comparison/what-is-loan-prepayment" ? ["prepayment", "loan-comparison"]
+    // the home-loan interest guide's worked examples are prepayments, so it leads with that calculator (2026-11-16)
+    const expected = (key) => key === "loan-comparison/what-is-loan-prepayment" || key === "loan-comparison/how-to-reduce-home-loan-interest" ? ["prepayment", "loan-comparison"]
       : PREPAYMENT_PACK_PUBLISHED.includes(key) ? ["prepayment"]
       : key === "balance-transfer/is-a-loan-balance-transfer-worth-it" ? ["balance-transfer"]
       : key === "balance-transfer/balance-transfer-vs-prepayment" ? ["balance-transfer", "prepayment"]

@@ -278,6 +278,19 @@
     display: none;
 }
 
+/* the result count for screen readers, announced once the visitor pauses typing (the visible count is in the header) */
+.directory-results__status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 .directory-results__header {
     display: flex;
     flex-wrap: wrap;

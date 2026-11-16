@@ -122,7 +122,8 @@ const catalog = [
             alt:
                 "Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate"
         },
-        tools: ["loan-comparison"],
+        /* the Loan Prepayment Calculator first: the article's worked examples and its "try your own" line are prepayments (2026-11-16) */
+        tools: ["prepayment", "loan-comparison"],
         related: [
             "loan-comparison/emi-vs-total-interest",
             "loan-comparison/fixed-vs-floating-interest-rates",
@@ -178,9 +179,9 @@ const catalog = [
         title:
             "Fixed vs Floating Interest Rates",
         description:
-            "Understand the difference between fixed and floating interest rates before choosing a loan.",
+            "How fixed and floating interest rates differ, and what a 1% rate rise or fall does to the EMI, tenure and total interest of a ₹40 lakh loan.",
         publishedAt: "Aug 25, 2026",
-        updatedAt: "Aug 25, 2026",
+        updatedAt: "Nov 16, 2026",
         readTime: "6 min read",
         cardImage: {
             src:

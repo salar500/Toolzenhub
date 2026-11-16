@@ -33,6 +33,8 @@ import {
     getToolsByCategory,
     getToolsBySection,
     getDirectToolsBySection,
+    getSectionPages,
+    getSectionListing,
     sectionListsToolsDirectly,
     getCategoryUrl
 } from "../../data/taxonomy.js";
@@ -115,11 +117,16 @@ function searchForm() {
 
                 </form>
 
+                <p
+                    id="tools-results-status"
+                    class="directory-results__status"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
                 <div
                     id="tools-results"
                     class="directory-results"
-                    role="status"
-                    aria-live="polite"
                 ></div>`;
 
 }
@@ -147,8 +154,10 @@ function sectionBlock(section) {
 /* a section whose tools are listed directly under it (no category groups), such as Time Tools and AI Tools */
 function directSectionBlock(section) {
 
-    const live =
-        getDirectToolsBySection(section.id).filter(tool => tool.available);
+    const live = [
+        ...getDirectToolsBySection(section.id).filter(tool => tool.available),
+        ...getSectionPages(section.id)
+    ];
 
     return `
                 <section
@@ -288,11 +297,11 @@ function categoryGroup(category) {
    spans every section, so it keeps ordinary page navigation (data-workspace="off" for ui/workspace-nav.js). */
 function allToolsRail(visibleSections) {
 
-    const total = visibleSections.reduce((sum, section) => sum + getToolsBySection(section.id).filter(tool => tool.available).length, 0);
+    const total = visibleSections.reduce((sum, section) => sum + getSectionListing(section.id).length, 0);
 
     const groups = visibleSections.map(section => {
 
-        const live = getToolsBySection(section.id).filter(tool => tool.available);
+        const live = getSectionListing(section.id);
 
         return `
                             <li class="section-switcher__group" data-open="false">
@@ -562,7 +571,7 @@ export function sectionPageHtml(sectionId) {
                 <h2 class="categories-detail__heading">${escapeHTML(section.title)} tools</h2>
 
                 <div class="categories-detail__grid directory-tools">
-                    ${tools.map(tool => toolCardHtml(tool, look)).join("")}${sectionId === "ai-tools" ? aiDirectoryCard(look) : ""}
+                    ${[...tools, ...getSectionPages(sectionId)].map(tool => toolCardHtml(tool, look)).join("")}
                 </div>
 
                 ${sectionId === "developer-tools" ? practiceLabsLink() : ""}
@@ -682,17 +691,6 @@ const practiceLabsLink = () => `
                 <p class="directory-section__more">
                     <a href="${ROUTES.practiceLabs}">Practice Labs: exercises and flashcards →</a>
                 </p>`;
-
-/* The AI Tools page lists the AI Directory as one more card of its grid, drawn by the same card component as the tools
-   (owner, 2026-11-15). It is a page of the section, not a catalog tool, so it is not in the catalog, search or sidebar lists. */
-const aiDirectoryCard = (look) => toolCardHtml({
-    id: "ai-directory",
-    title: "AI Directory",
-    description: `Discover ${AI_PRODUCTS.length} AI products made by other companies and filter them by task and by who they help: developers, QA testers, data analysts and more.`,
-    href: ROUTES.aiDirectory,
-    available: true
-}, look);
-
 
 /* =========================================================
    AI PRODUCTS DIRECTORY (/ai-tools/directory/)

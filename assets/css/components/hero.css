@@ -297,6 +297,92 @@
 
 
 /* =========================================================
+   Live results under the search (shown while typing)
+========================================================= */
+
+.hero-results:empty {
+    display: none;
+}
+
+.hero-results {
+    width: min(100%, 606px);
+    box-sizing: border-box;
+
+    margin-top: 8px;
+    padding: 6px;
+
+    border: 1px solid var(--line);
+    border-radius: 8px;
+
+    background: var(--surface-card);
+}
+
+.hero-results__list {
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.hero-results__link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-height: 44px;
+    box-sizing: border-box;
+    padding: 6px 10px;
+
+    border-radius: 6px;
+
+    color: var(--color-ink);
+
+    text-decoration: none;
+}
+
+.hero-results__link:hover,
+.hero-results__link:focus-visible {
+    background: var(--surface-page);
+}
+
+.hero-results__title {
+    font-size: 15px;
+    font-weight: 650;
+    overflow-wrap: anywhere;
+}
+
+.hero-results__meta {
+    color: var(--ink-subtle);
+
+    font-size: 13px;
+}
+
+.hero-results__empty,
+.hero-results__all {
+    margin: 0;
+    padding: 8px 10px;
+
+    font-size: 14px;
+}
+
+.hero-results__all a {
+    font-weight: 650;
+}
+
+.hero-results__status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+
+/* =========================================================
    Hero Visual
 ========================================================= */
 

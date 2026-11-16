@@ -112,6 +112,39 @@ export function getToolsBySection(
 
 
 /*
+ * The pages a section lists beside its tools without being catalog tools (`pages` in data/categories.js), shaped like a
+ * live tool so a listing draws them with the same card or link.
+ */
+
+export function getSectionPages(
+    sectionId
+) {
+
+    return (getSectionById(sectionId)?.pages ?? []).map(
+        page => ({ ...page, href: ROUTES[page.route], available: true, isPage: true })
+    );
+
+}
+
+
+/*
+ * Everything a section lists and counts: its live tools, then its pages. The home card, All Tools, the section page
+ * and the sidebar all use this, so their counts agree.
+ */
+
+export function getSectionListing(
+    sectionId
+) {
+
+    return [
+        ...getToolsBySection(sectionId).filter(tool => tool.available),
+        ...getSectionPages(sectionId)
+    ];
+
+}
+
+
+/*
  * A section lists its tools directly (no category groups) when it has no categories, or when it says so with
  * `listing: "tools"` (AI Tools: its one category exists for the taxonomy, not as a navigation layer).
  */

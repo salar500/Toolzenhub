@@ -96,7 +96,7 @@ const article = {
     calculator: {
 
         description:
-            "Compare EMI, interest rate, total interest and total repayment to understand the overall cost of different loan options."
+            "Enter your loan and a prepayment to see the interest and time it saves, keeping your EMI or lowering it."
 
     },
 

@@ -6,6 +6,7 @@
 import { ROUTES } from "../routes.js";
 import { iconSvg } from "../ui/icons.js";
 import { heroArt } from "./hero-art.js";
+import { escapeHTML } from "../ui/escape.js";
 
 
 export function renderHero() {
@@ -122,10 +123,16 @@ export function renderHero() {
                         </form>
 
 
+                        <p
+                            class="hero-results__status"
+                            id="hero-search-status"
+                            role="status"
+                            aria-live="polite"
+                        ></p>
+
                         <div
                             id="hero-calculator-search-results"
-                            class="calculator-search-results"
-                            aria-live="polite"
+                            class="calculator-search-results hero-results"
                         ></div>
 
                     </div>
@@ -157,6 +164,93 @@ export function renderHero() {
     if (!searchForm || !searchInput) {
         return;
     }
+
+
+    /* =====================================================
+       LIVE RESULTS (owner, 2026-11-16)
+       The first few matching tools appear under the box after a
+       short pause in typing, from the same search as All Tools;
+       "See all" opens All Tools with the query. The search code is
+       loaded on the first keystroke. Only the count is announced.
+    ===================================================== */
+
+    const resultsBox =
+        hero.querySelector("#hero-calculator-search-results");
+
+    const status =
+        hero.querySelector("#hero-search-status");
+
+    const SHOWN = 5;
+    let searchModule = null;
+    let latest = 0;
+    let timer = 0;
+
+    const clearLive = () => {
+        latest += 1;
+        resultsBox.innerHTML = "";
+        status.textContent = "";
+    };
+
+    const showLive = async (query) => {
+
+        const ticket = ++latest;
+
+        searchModule ??= import("../utils/search.js");
+
+        const { search } = await searchModule;
+
+        if (ticket !== latest) {
+            return;
+        }
+
+        const found = search(query, { types: ["tool", "page"] }).filter(entry => entry.route);
+        const allHref = `${ROUTES.tools}?q=${encodeURIComponent(query)}`;
+
+        if (found.length === 0) {
+            resultsBox.innerHTML = `
+                            <p class="hero-results__empty">No tools match “${escapeHTML(query)}”. <a href="${ROUTES.tools}">Browse all tools</a></p>`;
+            status.textContent = `No tools match ${query}.`;
+            return;
+        }
+
+        resultsBox.innerHTML = `
+                            <ul class="hero-results__list">
+                                ${found.slice(0, SHOWN).map(entry => `<li><a class="hero-results__link" href="${entry.route}">
+                                    <span class="hero-results__title">${escapeHTML(entry.title)}</span>
+                                    <span class="hero-results__meta">${escapeHTML(entry.categoryTitle ? `${entry.sectionTitle} › ${entry.categoryTitle}` : entry.sectionTitle)}</span>
+                                </a></li>`).join("")}
+                            </ul>${found.length > SHOWN ? `
+                            <p class="hero-results__all"><a href="${allHref}">See all ${found.length} tools for “${escapeHTML(query)}” →</a></p>` : ""}`;
+
+        status.textContent = `${found.length} ${found.length === 1 ? "tool" : "tools"} found.`;
+
+    };
+
+    searchInput.addEventListener("input", () => {
+
+        const query = searchInput.value.trim();
+
+        window.clearTimeout(timer);
+
+        if (!query) {
+            clearLive();
+            return;
+        }
+
+        timer = window.setTimeout(() => showLive(query), 200);
+
+    });
+
+    /* Escape empties the box and its results, as in the other search boxes */
+    searchInput.addEventListener("keydown", (event) => {
+
+        if (event.key === "Escape" && searchInput.value) {
+            searchInput.value = "";
+            window.clearTimeout(timer);
+            clearLive();
+        }
+
+    });
 
 
     /* =====================================================

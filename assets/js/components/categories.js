@@ -17,7 +17,8 @@ import {
 } from "../data/categories.js";
 
 import {
-    getToolsBySection
+    getToolsBySection,
+    getSectionListing
 } from "../data/taxonomy.js";
 
 
@@ -41,9 +42,11 @@ import { iconSvg, iconFor } from "../ui/icons.js";
    `title`, `blurb`, `icon` and `color` are card copy.
 ========================================================= */
 
+/* 2026-11-16 (owner): an AI experience leads. The AI Prompt Builder (guided, working) replaced the GST Calculator, the
+   second calculator entry, so the six cards stay one per tool section and the grid keeps whole rows. */
 const FEATURED_TOOLS = [
+    { id: "prompt-builder", title: "AI Prompt Builder", blurb: "Turn a rough idea into a clear prompt", icon: "spark", color: "purple" },
     { id: "home-loan", title: "Home Loan Calculator", blurb: "Find the loan that fits your EMI budget", icon: "home", color: "pink" },
-    { id: "gst", title: "GST Calculator", blurb: "Add or remove GST on an invoice", icon: "receipt", color: "purple" },
     { id: "time-zone-converter", title: "Time Zone Converter", blurb: "Convert a time between places", icon: "globe", color: "blue" },
     { id: "json-formatter", title: "JSON Formatter and Validator", blurb: "Format, check and minify JSON", icon: "code", color: "teal" },
     { id: "merge-pdf", title: "Merge PDF", blurb: "Combine PDF files in your browser", icon: "file", color: "green" },
@@ -98,9 +101,18 @@ function renderPopularCard(card) {
 const hasLiveTool = (section) =>
     getToolsBySection(section.id).some(tool => tool.available);
 
+/* Explore Tools opens with AI Tools (owner, 2026-11-16); the other sections follow in catalog order. Home only:
+   All Tools, the footer and the catalog keep the catalog order. */
+const EXPLORE_FIRST = ["ai-tools"];
+
+const exploreOrder = (list) => [
+    ...EXPLORE_FIRST.map(id => list.find(section => section.id === id)).filter(Boolean),
+    ...list.filter(section => !EXPLORE_FIRST.includes(section.id))
+];
+
 function toolCount(section) {
 
-    const count = getToolsBySection(section.id).filter(tool => tool.available).length;
+    const count = getSectionListing(section.id).length;
 
     return `${count} ${count === 1 ? "tool" : "tools"}`;
 
@@ -173,7 +185,7 @@ export function renderCategories() {
                 <!-- one card per major section that has a live tool (data/categories.js); a section with none is not shown -->
                 <div class="category-grid category-grid--sections">
 
-                    ${sections.filter(hasLiveTool).map(renderSectionCard).join("")}
+                    ${exploreOrder(sections.filter(hasLiveTool)).map(renderSectionCard).join("")}
 
                 </div>
 

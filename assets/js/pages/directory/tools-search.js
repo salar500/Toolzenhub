@@ -8,14 +8,18 @@
    later is searched automatically. A tool that is not built yet
    is not found.
 
-   The form is a plain GET to /tools.html?q=..., so a search can
-   be reloaded, bookmarked and shared, and the browser's Back
-   button works. The search code is loaded only when there is a
-   query.
+   Results follow the box as the visitor types (owner, 2026-11-16),
+   after a short pause so a fast typist does not redraw the page on
+   every key; Enter and the search button show them at once. The
+   address keeps ?q=... in step (replaced, not pushed), so a search
+   can be reloaded, bookmarked and shared. Without script the form
+   is still a plain GET to /tools.html?q=.... The search code is
+   loaded only when there is a query.
 
    With results: the matching tools replace the directory below.
    With none: a short message and a way back to browsing, and the
-   directory stays visible.
+   directory stays visible. An empty box puts the full directory
+   back. Only the count is announced, in its own status line.
 ========================================================= */
 
 import {
@@ -25,6 +29,9 @@ import {
 import {
     escapeHTML
 } from "../../ui/escape.js";
+
+
+const TYPING_PAUSE_MS = 200;
 
 
 function resultCard(entry) {
@@ -73,19 +80,47 @@ function sectionLinks() {
 }
 
 
+/* a search-result URL is not a page to index: the clean page is */
+function setNoindex(on) {
+
+    const existing = document.head.querySelector("meta[data-directory-results]");
+
+    if (!on) {
+        existing?.remove();
+        return;
+    }
+
+    if (existing) {
+        return;
+    }
+
+    const robots = document.createElement("meta");
+
+    robots.name = "robots";
+    robots.content = "noindex, follow";
+    robots.dataset.directoryResults = "";
+
+    document.head.append(robots);
+
+}
+
+
 export async function initializeToolsSearch() {
 
-    const params =
-        new URLSearchParams(window.location.search);
-
     const query =
-        (params.get("q") || "").trim();
+        (new URLSearchParams(window.location.search).get("q") || "").trim();
+
+    const form =
+        document.querySelector("form[data-tools-search]");
 
     const input =
         document.getElementById("directory-search-input");
 
     const results =
         document.getElementById("tools-results");
+
+    const status =
+        document.getElementById("tools-results-status");
 
     const directory =
         document.getElementById("tools-directory");
@@ -115,50 +150,66 @@ export async function initializeToolsSearch() {
 
     });
 
-    input.value = query;
+    let searchModule = null;
+    let latest = 0;          // the newest query asked for; an older one that finishes later is dropped
+    let shownQuery = "";
+    let timer = 0;
 
-    /* Emptying the box (or leaving only spaces) puts the normal, unfiltered page back at once: the results are not left
-       standing, the address loses ?q= and the noindex hint added for a result page goes with them. */
-    input.addEventListener("input", () => {
+    const announce = (text) => {
+        if (status) status.textContent = text;
+    };
 
-        if (input.value.trim() !== "" || !results.innerHTML.trim()) {
-            return;
-        }
+    const keepAddress = (value) => {
+        const url = value ? `${window.location.pathname}?q=${encodeURIComponent(value)}` : window.location.pathname;
+        window.history.replaceState(window.history.state, "", url);
+    };
+
+    const clearResults = () => {
+
+        latest += 1;
+        shownQuery = "";
 
         results.innerHTML = "";
         directory.hidden = false;
 
-        document.head.querySelector("meta[data-directory-results]")?.remove();
+        setNoindex(false);
+        announce("");
 
-        window.history.replaceState(window.history.state, "", window.location.pathname);
+    };
 
-    });
+    const show = async (value) => {
 
-    if (!query) {
-        return;
-    }
+        if (!value) {
+            clearResults();
+            return;
+        }
 
-    /* a search-result URL is not a page to index: the clean page is */
-    const robots = document.createElement("meta");
+        if (value === shownQuery) {
+            return;
+        }
 
-    robots.name = "robots";
-    robots.content = "noindex, follow";
-    robots.dataset.directoryResults = "";
+        const ticket = ++latest;
 
-    document.head.append(robots);
+        searchModule ??= import("../../utils/search.js");
 
-    const { search } =
-        await import("../../utils/search.js");
+        const { search } = await searchModule;
 
-    const found =
-        search(query, { types: ["tool"] })
-            .filter(entry => entry.route);
+        if (ticket !== latest) {
+            return;
+        }
 
-    const shown = escapeHTML(query);
+        shownQuery = value;
+        setNoindex(true);
 
-    if (found.length === 0) {
+        const found =
+            search(value, { types: ["tool", "page"] })
+                .filter(entry => entry.route);
 
-        results.innerHTML = `
+        const shown = escapeHTML(value);
+
+        if (found.length === 0) {
+
+            results.innerHTML = `
                 <div class="directory-results__empty">
 
                     <p>
@@ -177,17 +228,20 @@ export async function initializeToolsSearch() {
 
                 </div>`;
 
-        directory.hidden = false;
+            directory.hidden = false;
+            announce(`No tools found for ${value}.`);
 
-        return;
+            return;
 
-    }
+        }
 
-    results.innerHTML = `
+        const countText = `${found.length} ${found.length === 1 ? "tool" : "tools"} found for “${value}”`;
+
+        results.innerHTML = `
                 <div class="directory-results__header">
 
                     <p class="directory-results__count">
-                        ${found.length} ${found.length === 1 ? "tool" : "tools"} found for “${shown}”
+                        ${escapeHTML(countText)}
                     </p>
 
                     <a
@@ -203,6 +257,55 @@ export async function initializeToolsSearch() {
                     ${found.map(resultCard).join("")}
                 </div>`;
 
-    directory.hidden = true;
+        directory.hidden = true;
+        announce(countText);
+
+    };
+
+    input.value = query;
+
+    input.addEventListener("input", () => {
+
+        const value = input.value.trim();
+
+        window.clearTimeout(timer);
+
+        /* emptying the box (or leaving only spaces) puts the unfiltered page back at once */
+        if (!value) {
+            keepAddress("");
+            clearResults();
+            return;
+        }
+
+        timer = window.setTimeout(() => {
+            keepAddress(value);
+            show(value);
+        }, TYPING_PAUSE_MS);
+
+    });
+
+    /* Enter or the button: the results now, without reloading the page */
+    form?.addEventListener("submit", event => {
+
+        event.preventDefault();
+        window.clearTimeout(timer);
+
+        const value = input.value.trim();
+
+        keepAddress(value);
+
+        if (!value) {
+            clearResults();
+            input.focus();
+            return;
+        }
+
+        show(value);
+
+    });
+
+    if (query) {
+        await show(query);
+    }
 
 }

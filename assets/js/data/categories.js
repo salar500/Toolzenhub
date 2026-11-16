@@ -164,7 +164,19 @@ export const sections = [
         landing: "aiTools",
         pathPrefix: "tools",
         /* its page lists the tools directly; its one category (below) is for the taxonomy, not a navigation layer */
-        listing: "tools"
+        listing: "tools",
+        /* Pages of the section that are not catalog tools but are listed and counted with its tools wherever the section is
+           (home card, All Tools, the section page, the sidebar, the global search; owner, 2026-11-16). `route` is a ROUTES
+           key; `category` is the section's taxonomy category, from which search derives the section as for a tool. */
+        pages: [
+            {
+                id: "ai-directory",
+                title: "AI Directory",
+                description: "AI products made by other companies, checked on their official sites, with filters by task and by who they help: developers, QA testers, data analysts and more.",
+                route: "aiDirectory",
+                category: "ai"
+            }
+        ]
     }
 
 ];

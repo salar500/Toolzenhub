@@ -174,7 +174,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     const expected = (key) => key === "business/roi-vs-profit-whats-the-difference" ? ["roi", "profit", "margin"]
       : key === "health/how-to-calculate-your-daily-calorie-needs" ? ["calorie", "bmr", "bmi"]
       : key === "converter/easy-unit-conversion-guide" ? ["unit-converter"]
-      : key === "loan-comparison/what-is-loan-prepayment" ? ["prepayment", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "credit-card-payoff"]
+      : key === "loan-comparison/what-is-loan-prepayment" || key === "loan-comparison/how-to-reduce-home-loan-interest" ? ["prepayment", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "credit-card-payoff"]
       : key.startsWith("loan-prepayment/") ? ["prepayment", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "credit-card-payoff"]
       : key === "balance-transfer/is-a-loan-balance-transfer-worth-it" ? ["balance-transfer", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "interest", "prepayment", "credit-card-payoff"]
       : key === "balance-transfer/balance-transfer-vs-prepayment" ? ["balance-transfer", "prepayment", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "interest", "credit-card-payoff"]
@@ -194,7 +194,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
       : key === "ai/how-to-read-an-ai-answer-before-you-trust-it" ? ["ai-answer-checklist", "prompt-builder", "bug-report-prompt", "context-pack-builder", "ai-answer-compare", "meeting-notes-action-plan"]
       : ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"];
     for (const key of PUBLISHED) assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(key)), expected(key), key);
-    assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(PUBLISHED[0], { fill: false })), ["loan-comparison"]);
+    assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(PUBLISHED[0], { fill: false })), ["prepayment", "loan-comparison"]); // the home-loan interest guide (2026-11-16)
   });
 
   test("article -> related articles: exactly the curated list, in order, not padded", () => {
