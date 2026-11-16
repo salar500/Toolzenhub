@@ -135,6 +135,52 @@ const present = (list, a, x) => (list ?? []).map((item) => valueOf(item, a, x)).
 
 const visible = (question, a) => !question.showIf || question.showIf(a);
 
+/* requirements said twice (a blueprint line and an experience line, say) are written once; the first wording wins */
+const normal = (t) => String(t).toLowerCase().replace(/\s+/g, " ").replace(/[.\s]+$/, "").trim();
+function unique(items) {
+    const seen = new Set();
+    return items.filter((t) => {
+        const k = normal(t);
+        if (seen.has(k)) return false;
+        seen.add(k);
+        return true;
+    });
+}
+
+/* text in a fence that its own backticks cannot close */
+function fence(text) {
+    const longest = Math.max(2, ...(String(text).match(/`+/g) ?? []).map((m) => m.length));
+    const bar = "`".repeat(longest + 1);
+    return `${bar}text\n${text}\n${bar}`;
+}
+
+/* AI ecosystem programme 17 §5.4 rule 4: text that is still a placeholder is not an answer */
+const PLACEHOLDER_TEXT = /\[add\b|\bTODO\b|\bTBD\b|\blorem\b|\bxxx\b/i;
+
+/* the consistency sheet of image, video and audio work (17 §5.4 rule 7), in this order */
+export const CONSISTENCY = Object.freeze([
+    { key: "subject", label: "Subject or character" },
+    { key: "look", label: "Look and style" },
+    { key: "colours", label: "Colours" },
+    { key: "lighting", label: "Lighting" },
+    { key: "camera", label: "Camera and framing" },
+    { key: "voice", label: "Voice and pronunciation" },
+    { key: "never", label: "Never change" }
+]);
+
+export const CONTEXT_LIMIT = 8000;
+export const LONG_PROMPT_WORDS = 600;
+
+function consistencyLine(sheet) {
+    const items = CONSISTENCY.map((c) => [c.label, tidy(sheet?.[c.key]).replace(/\s*\n\s*/g, "; ")]).filter(([, v]) => v);
+    return items.length ? `Keep the same in every output: ${items.map(([l, v]) => `${l}: ${v}`).join("; ")}.` : "";
+}
+
+/* a downloaded pack pasted back as project context: its data comment is not context */
+const withoutMeta = (text) => String(text ?? "").replace(/<!-- toolzenhub:[\s\S]*?-->/g, "");
+
+export const wordsIn = (text) => (String(text).match(/\S+/g) ?? []).length;
+
 
 /** The questions that apply to the current answers (a question may depend on another's answer). */
 export function activeQuestions(blueprint, answers = {}) {
@@ -231,6 +277,10 @@ function masterPrompt(blueprint, a, x, missing) {
 
         const parts = [b.text];
 
+        if (x.consistencyLine) {
+            parts.push(x.consistencyLine);
+        }
+
         if (b.keep?.length) {
             parts.push(`Keep unchanged: ${b.keep.join("; ")}.`);
         }
@@ -245,11 +295,15 @@ function masterPrompt(blueprint, a, x, missing) {
 
     const blocks = [b.goal];
 
+    if (x.context) blocks.push(`Project context (from my notes, use it; do not repeat it back):\n${fence(x.context)}`);
+
     const context = contextLines([...(me ? [["About me", me]] : []), ...(b.context ?? [])]);
     if (context.length) blocks.push(`Context:\n${context.join("\n")}`);
 
-    const requirements = [...present(b.requirements, a, x), ...(exp?.requirements ?? [])];
+    const requirements = unique([...present(b.requirements, a, x), ...(exp?.requirements ?? [])]);
     if (requirements.length) blocks.push(`Requirements:\n${bulletList(requirements)}`);
+
+    if (x.consistencyLine) blocks.push(x.consistencyLine);
 
     const format = present(b.format, a, x);
     if (format.length) blocks.push(`Format of your answer:\n${bulletList(format)}`);
@@ -299,10 +353,16 @@ export function compileWorkPack(blueprint, task, input = {}) {
         deliverable: blueprint.deliverable,
         deliverableShort: blueprint.deliverable.replace(/^(a|an|the) /, ""),
         audience: raw.audience || "",
-        tone: raw.tone || ""
+        tone: raw.tone || "",
+        /* project context is for labelled briefs; a one-paragraph image, video or audio prompt gets the consistency sheet instead (16 D12) */
+        context: blueprint.style === "descriptive" ? "" : tidy(withoutMeta(input.context)).slice(0, CONTEXT_LIMIT),
+        consistencyLine: consistencyLine(input.consistency)
     };
 
-    const conflicts = blueprint.conflicts ? blueprint.conflicts(raw).filter(Boolean) : [];
+    const placeholders = questions
+        .filter((q) => raw[q.key] && PLACEHOLDER_TEXT.test(raw[q.key]))
+        .map((q) => `${q.label} still contains placeholder text: replace it or leave the field empty.`);
+    const conflicts = [...(blueprint.conflicts ? blueprint.conflicts(raw).filter(Boolean) : []), ...placeholders];
     const prompt = masterPrompt(blueprint, a, x, missing);
 
     const plan = stagesFor(blueprint, depth);
@@ -314,7 +374,7 @@ export function compileWorkPack(blueprint, task, input = {}) {
         name: s.name,
         objective: valueOf(s.objective, a, x),
         submit: valueOf(s.submit, a, x),
-        prompt: `Stage ${i + 1} of ${stageList.length}: ${s.name}.\n\n${valueOf(s.ask, a, x)}`,
+        prompt: `Stage ${i + 1} of ${stageList.length}: ${s.name}. (Part of the work on ${blueprint.deliverable}.)\n\n${valueOf(s.ask, a, x)}${x.consistencyLine ? `\n\n${x.consistencyLine}` : ""}`,
         expect: valueOf(s.expect, a, x),
         done: valueOf(s.done, a, x),
         next: i + 1 < stageList.length ? `Go to stage ${i + 2}: ${stageList[i + 1].name}.` : "Use the refinement prompts for anything that still falls short, then the quality checklist."
@@ -363,7 +423,9 @@ export function compileWorkPack(blueprint, task, input = {}) {
         stages,
         refinements,
         quality,
-        nextSteps: present(blueprint.next, a, x)
+        nextSteps: present(blueprint.next, a, x),
+        promptWords: wordsIn(prompt),
+        notes: wordsIn(prompt) > LONG_PROMPT_WORDS ? ["A long prompt is followed less reliably. Consider Standard depth or a shorter project context."] : []
     };
 
     pack.markdown = toMarkdown(pack, x);

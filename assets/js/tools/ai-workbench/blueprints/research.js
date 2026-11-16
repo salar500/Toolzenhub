@@ -9,7 +9,7 @@
    Power BI or DAX; the visitor runs them in their own tool.
 ========================================================= */
 
-import { text, area, choose } from "./shared.js";
+import { text, area, choose, more } from "./shared.js";
 
 const CATS = [{ id: "research" }, { id: "assistants" }];
 
@@ -179,6 +179,44 @@ export const BLUEPRINTS = {
         quality: ["Each statement traces to a finding.", "Limitations are stated.", "The first paragraph gives the conclusion."],
         prepare: { required: ["Your findings and the data behind them."], optional: ["A previous report to match the format."] },
         next: ["Check every figure against your data.", "Ask one reader what they took away before sending widely."]
+    },
+
+    /* AI ecosystem programme 16 D4: information from a document the visitor has (research 01, S25) */
+    "doc-summary": {
+        deliverable: "a summary of a document",
+        categories: CATS,
+        depth: "standard",
+        noFabrication: true,
+        questions: [
+            area("document", "The document", { essential: true, rows: 3, hint: "What it is and how long. Attach or paste the document itself in the AI product, not here.", placeholder: "A 40-page supplier contract (PDF)" }),
+            area("purpose", "What the summary is for", { essential: true, rows: 2, hint: "The decision or job it serves.", placeholder: "Deciding whether to renew the contract in January" }),
+            text("reader", "Who will read it", { placeholder: "Our finance manager, not a lawyer" }),
+            text("length", "Length", { placeholder: "One page, or ten bullet points" }),
+            area("questions", "Questions it must answer", { rows: 3, hint: "One per line.", placeholder: "What is the notice period?\nAre prices fixed or indexed?" }),
+            more(choose("shape", "Format", ["Paragraphs", "Bullet points", "A table"]))
+        ],
+        brief: (a) => ({
+            goal: `Summarise the document I attach or paste (${a.document}) for this purpose: ${a.purpose}`,
+            context: [["Reader", a.reader], ["Length", a.length], ["Questions to answer", a.questions], ["Format", a.shape]],
+            requirements: [
+                "Use only the document. For every fact you give, quote the passage it comes from or name the section or page.",
+                a.questions ? "Answer each of my questions; where the document does not answer one, say so plainly." : "",
+                "Put what matters most for the purpose first.",
+                SEPARATE
+            ],
+            format: [a.shape ? `${a.shape}.` : "Short sections or bullet points.", "End with a list of what the document does not say that the purpose needs."],
+            avoid: ["Facts that are not in the document."]
+        }),
+        conflicts: (a) => /table/i.test(a.shape) && /paragraph/i.test(a.length) ? ["You asked for a table but a length in paragraphs. Choose one."] : [],
+        stages: [
+            { at: "standard", name: "Map the document", objective: "Know what is in it before summarising.", submit: "The master prompt and the document.", ask: () => "Before summarising, list the document's sections with one line each, and say which sections matter for my purpose.", expect: "A section map.", done: "You recognise the document from the map." },
+            { at: "standard", name: "Summary", objective: "The summary itself.", submit: "Any section to add or drop.", ask: () => "Write the summary as specified in the master prompt, with a quote or section reference for every fact.", expect: "The summary with references.", done: "Every fact has its reference." },
+            { at: "detailed", name: "Quote check", objective: "Catch facts the document does not support.", submit: "Nothing new.", ask: () => "Go through the summary fact by fact. For each, give the exact quote from the document. Remove any fact you cannot quote and say which.", expect: "A fact-to-quote list.", done: "Every remaining fact has a quote you can find in the document." }
+        ],
+        refine: ["evidence", "accuracy", "completeness"],
+        quality: ["Every fact has a quote or a section reference you found in the document.", "Each of your questions is answered or marked as not in the document.", "The most important point for the purpose comes first.", "Nothing comes from outside the document."],
+        prepare: { required: ["The document, as a file or text you can paste into the AI product.", "The purpose in one sentence."], optional: ["The questions you need answered."] },
+        next: ["Open the document at two or three of the quoted places and check them.", "Keep the summary with the document's name and date."]
     }
 
 };

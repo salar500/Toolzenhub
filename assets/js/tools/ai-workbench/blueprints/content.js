@@ -168,6 +168,49 @@ export const BLUEPRINTS = {
         quality: ["Nothing in the new version contradicts the original.", "It stands alone for someone who never saw the original."],
         prepare: { required: ["The original content."], optional: ["An example of the target format you like."] },
         next: ["Link back to the original where the format allows."]
+    },
+
+    /* AI ecosystem programme 16 D4: writing on the user's own text leads work use of assistants (research 01, S25) */
+    "email-message": {
+        deliverable: "an email or message",
+        categories: CATS,
+        depth: "short",
+        questions: [
+            choose("kind", "New message or a reply", ["A new message", "A reply to a message I received"]),
+            area("received", "The message you are replying to", { essential: true, long: true, rows: 6, showIf: (a) => /reply/i.test(a.kind), hint: "Paste it as received. Remove anything confidential first." }),
+            area("goal", "What it must achieve", { essential: true, rows: 3, hint: "The one outcome you want: a decision, a meeting, a payment, a polite no.", placeholder: "Agree a new delivery date of 28 November without losing the order" }),
+            text("recipient", "Who it is to", { essential: true, hint: "Their role and your relationship, not their name.", placeholder: "A long-standing customer, the purchasing manager" }),
+            choose("tone", "Tone", TONES),
+            choose("length", "Length", ["Short (under 100 words)", "Medium (100 to 200 words)", "As long as it needs"]),
+            area("include", "Points it must include", { rows: 3, hint: "One per line. Only facts you know are true.", placeholder: "The delay is caused by our supplier\nWe can offer 5% off this order" }),
+            more(area("avoid", "Anything it must not say", { rows: 2, placeholder: "Do not promise a date before the 28th" }))
+        ],
+        brief: (a) => ({
+            goal: /reply/i.test(a.kind) ? `Write a reply to the message below. It must achieve this: ${a.goal}` : `Write a message that achieves this: ${a.goal}`,
+            context: [["Recipient", a.recipient], ["Tone", a.tone], ["Length", a.length], ["Points to include", a.include], ["Message received", a.received]],
+            requirements: [
+                "Put the request or the answer in the first two sentences.",
+                "Include every point I listed, and no fact I did not give you.",
+                a.avoid ? `Do not say: ${a.avoid}` : "",
+                "End with one clear next step for the recipient."
+            ],
+            format: ["A subject line (for an email), then the message, ready to send.", "Plain sentences; no headings."],
+            avoid: ["Promises, dates or figures I did not give you.", "Filler such as \"I hope this email finds you well\"."]
+        }),
+        conflicts: (a) => {
+            const out = [];
+            if (/short/i.test(a.length) && String(a.include).split("\n").filter((l) => l.trim()).length > 5) out.push("You chose a short message but listed more than five points. Choose a longer length or fewer points.");
+            return out;
+        },
+        stages: [
+            { at: "standard", name: "Points to make", objective: "Agree what the message says before the wording.", submit: "The master prompt.", ask: () => "List, in order, the points the message will make and the next step it asks for. No message yet.", expect: "An ordered list of points.", done: "Nothing is missing and nothing is extra." },
+            { at: "standard", name: "Draft", objective: "The message itself.", submit: "Your changes to the points.", ask: () => "Write the message from the approved points.", expect: "The message, ready to send.", done: "You would send it as it is." },
+            { at: "detailed", name: "Tone check", objective: "Make sure it reads as intended.", submit: "Nothing new.", ask: (a) => `Read the message as the recipient (${a.recipient}) would. Point out anything that could read as rude, vague or more certain than I am, and suggest the smallest change for each.`, expect: "A short list of wording changes.", done: "You agree with each change or reject it." }
+        ],
+        refine: ["clarity", "style", "completeness"],
+        quality: ["The first two sentences say what you want.", "Every fact, date and figure is one you gave.", "It asks for one clear next step.", "You would be comfortable if it were forwarded."],
+        prepare: { required: ["The outcome you want, in one sentence."], optional: ["The message you are replying to.", "An earlier message of yours whose tone you like."] },
+        next: ["Read it once aloud before sending.", "Check every date and figure against your own records."]
     }
 
 };

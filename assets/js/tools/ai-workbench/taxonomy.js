@@ -11,12 +11,12 @@
 ========================================================= */
 
 export const OUTCOMES = Object.freeze([
-    { id: "content", title: "Create content", text: "Articles, posts, scripts and marketing copy" },
+    { id: "content", title: "Create content", text: "Articles, posts, emails, scripts and marketing copy" },
     { id: "images", title: "Create images", text: "Generate or edit images, product photos, thumbnails" },
     { id: "video", title: "Create videos", text: "Concepts, scripts, storyboards, AI video" },
     { id: "audio", title: "Create audio", text: "Voiceovers, podcasts, music, sound effects" },
     { id: "software", title: "Build software", text: "Requirements, code, debugging, reviews, testing" },
-    { id: "research", title: "Research and analyse", text: "Research plans, literature, data, reports" },
+    { id: "research", title: "Research and analyse", text: "Research plans, documents, data, reports" },
     { id: "improve", title: "Improve existing work", text: "Review, correct or adapt something you have" },
     { id: "plan", title: "Plan a multi-step workflow", text: "Projects, learning plans, interviews, proposals" },
     { id: "unsure", title: "I'm not sure. Help me choose", text: "Describe what you want in a few words" }
@@ -30,6 +30,7 @@ export const TASKS = Object.freeze([
     { id: "marketing-copy", outcome: "content", family: "content", title: "Marketing or product copy" },
     { id: "script", outcome: "content", family: "content", title: "A script for a video or podcast" },
     { id: "repurpose", outcome: "content", family: "content", title: "Repurpose content for another format" },
+    { id: "email-message", outcome: "content", family: "content", title: "Write or reply to an email or message" },
 
     { id: "image-generate", outcome: "images", family: "images", title: "Generate a new image" },
     { id: "image-edit", outcome: "images", family: "images", title: "Edit an existing image" },
@@ -67,6 +68,7 @@ export const TASKS = Object.freeze([
     { id: "data-analysis", outcome: "research", family: "research", title: "Analyse data (SQL, Excel, Power BI or DAX)" },
     { id: "market-research", outcome: "research", family: "research", title: "Market or competitor research" },
     { id: "report", outcome: "research", family: "research", title: "A report from findings" },
+    { id: "doc-summary", outcome: "research", family: "research", title: "Summarise or pull information from a document" },
 
     { id: "review-draft", outcome: "improve", family: "improve", title: "Review and improve a draft" },
     { id: "fix-accuracy", outcome: "improve", family: "improve", title: "Check accuracy and clarity" },
