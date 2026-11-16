@@ -125,3 +125,64 @@
     }
 
 }
+
+/* AI Context Bridge: bring context from an AI conversation, open a saved pack (AI ecosystem programme 17 §6) */
+.ai-bridge {
+    display: grid;
+    gap: 10px;
+    margin: 0 0 16px;
+}
+
+.ai-bridge__part {
+    padding: 4px 14px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-page);
+}
+
+.ai-bridge__part > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.ai-bridge__prompt {
+    display: grid;
+    gap: 8px;
+    margin: 6px 0 12px;
+}
+
+.ai-bridge__text {
+    max-height: 220px;
+    margin: 0;
+    padding: 10px 12px;
+    overflow: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--surface-sunken);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.ai-bridge__text:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.ai-bridge .calculator-form__button {
+    justify-self: start;
+}
+
+@media (max-width: 599px) {
+
+    .ai-bridge .calculator-form__button {
+        width: 100%;
+    }
+
+}

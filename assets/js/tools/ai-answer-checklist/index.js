@@ -1,16 +1,34 @@
 /* =========================================================
    ToolZen Hub
-   AI Answer Evidence Checklist (AI Tools)
+   AI Output Reviewer (AI Tools; id ai-answer-checklist, formerly
+   the AI Answer Evidence Checklist)
 
-   Paste an assistant's answer; get the list of what in it needs
-   checking (figures, dates, money, named sources, absolute
-   wording), what it leaves out, and the questions to put back
-   to the assistant. The analysis is word patterns in the
-   browser (claim-engine.js); the page is the shared brief page.
+   Paste an AI answer and, if you can, what you asked. The review
+   lists the requested items the answer does not visibly address,
+   format problems, leftovers and contradictions (review-engine.js),
+   then what in it needs checking (figures, dates, money, named
+   sources, absolute wording; claim-engine.js), and one follow-up
+   prompt naming the gaps. Without requested items in what was
+   asked, it is the evidence checklist exactly as before. Word
+   patterns in the browser; it never judges truth. The page is
+   the shared brief page (AI ecosystem programme, 17 §7).
 ========================================================= */
 
 import { createBriefTool } from "../ai-tools/common/brief-tool.js";
-import { checklist } from "../ai-tools/common/claim-engine.js";
+import { review, REVIEW_TYPES } from "../ai-tools/common/review-engine.js";
+import { take } from "../ai-tools/common/handoff.js";
+import { ROUTES } from "../../routes.js";
+import { escapeHTML } from "../../ui/escape.js";
+
+/* the kind of answer a Workbench task produces, for a request handed over from it */
+const TYPE_OF_TASK = {
+    "code-feature": "code", debug: "code", "code-review": "code", refactor: "code", "api-design": "code",
+    "test-plan": "testing", "test-cases": "testing", "api-testing": "testing", "test-automation": "code", regression: "testing", defect: "testing", "performance-test": "testing",
+    article: "article", "social-posts": "article", "marketing-copy": "article", script: "article", repurpose: "article", "email-message": "article",
+    "research-plan": "research", "literature-review": "research", "market-research": "research", report: "research", "doc-summary": "research",
+    "image-generate": "media", "image-edit": "media", "product-photo": "media", thumbnail: "media", "image-series": "media",
+    "video-concept": "media", storyboard: "media", "text-to-video": "media", "image-to-video": "media"
+};
 
 
 export const showRelatedCalculators = true;
@@ -29,20 +47,50 @@ export const CONFIG = {
 
     toolId: "ai-answer-checklist",
     prefix: "ac",
-    outputName: "checklist",
-    fileName: "evidence-checklist",
-    intro: "Paste an answer from ChatGPT, Claude, Gemini or any assistant and get a checklist of what in it needs checking: every figure, date, amount, named source and absolute statement, what the answer leaves out, and the questions to put back to the assistant.",
-    pasteLine: "Keep the checklist beside the answer and tick it as you verify. Paste its last questions back into the same chat; the assistant answers them with the context it already has.",
+    outputName: "review",
+    fileName: "ai-output-review",
+    intro: "Paste an AI answer and, if you can, what you asked. Get the requested items it does not visibly address, format problems, leftovers, statements to verify, and a follow-up prompt that names the gaps. It compares words with your request and finds patterns; it does not judge whether anything is true.",
+    pasteLine: "Paste the follow-up prompt into the same chat; the AI revises with the context it already has. Keep the review beside the answer and tick it as you verify.",
     sectionTitle: "Paste the answer",
-    sectionText: "One field is essential. Saying what you asked and what the answer is for makes the checklist sharper. It is written as you type.",
+    sectionText: "One field is essential. Pasting what you asked lets the review check the answer against it. The review is written as you type.",
 
     fields: [
-        { key: "answer", label: "The assistant's answer", required: true, rows: 12, maxlength: 20000, hint: "Paste the whole answer, Markdown and all. Code blocks are skipped.", placeholder: "Paste the answer here." },
-        { key: "question", label: "What you asked", rows: 2, hint: "The question or task, so the checklist can be read beside it.", placeholder: "Is a 5-year fixed deposit better than a debt fund for me?" },
-        { key: "purpose", label: "What the answer is for", kind: "select", options: PURPOSES, hint: "Sets how strict the first line of the checklist is." }
+        { key: "answer", label: "The AI's answer", required: true, rows: 12, maxlength: 40000, hint: "Paste the whole answer, Markdown and all. Code blocks are skipped when statements are listed.", placeholder: "Paste the answer here." },
+        { key: "question", label: "What you asked (your prompt or requirements)", rows: 4, maxlength: 12000, hint: "Paste the prompt you gave, or a list of requirements. The review checks the answer against it.", placeholder: "Is a 5-year fixed deposit better than a debt fund for me?" },
+        { key: "purpose", label: "What the answer is for", kind: "select", options: PURPOSES, hint: "Sets how strict the first line of the checklist is." },
+        { key: "reviewType", label: "Kind of answer", kind: "select", options: REVIEW_TYPES, hint: "Adds the checks for that kind of work: test ids and expected results, code blocks, citations." },
+        { key: "wordLimit", label: "Word limit, if you set one", kind: "text", maxlength: 6, hint: "Digits only. A limit written in your request, such as \"under 300 words\", is also found.", placeholder: "300" }
     ],
 
-    compose: (v) => checklist(v),
+    compose: (v) => review(v).markdown,
+
+    notes: (values) => {
+        const { counts } = review(values);
+        const total = counts.missing + counts.format + counts.leftovers + counts.contradictions;
+        const n = (count, word) => `${count} ${word}${count === 1 ? "" : "s"}`;
+        return total ? [`Review: ${n(counts.missing, "requested item")} not visibly addressed, ${n(counts.format, "format problem")}, ${n(counts.leftovers, "leftover")}, ${n(counts.contradictions, "contradiction")}.`] : [];
+    },
+
+    actions: [
+        { id: "follow-up", label: "Copy follow-up prompt", text: (brief, values) => review(values).followUp }
+    ],
+
+    wire({ setValues, announce }) {
+
+        /* the request a Workbench pack was built for, handed over in this tab (16 D8) */
+        const brought = take("review");
+        if (brought?.request) {
+            setValues({ question: brought.request, reviewType: TYPE_OF_TASK[brought.task] ?? "general" });
+            announce(`Brought from the Workbench: the request for ${brought.title || "your task"}. Paste the AI's answer.`, 0);
+            document.getElementById("ac-answer")?.focus();
+        }
+
+        const go = document.createElement("p");
+        go.className = "ai-note";
+        go.innerHTML = `Two answers to the same question? <a href="${escapeHTML(ROUTES.tool("tools", "ai-answer-compare"))}">Compare Two AI Answers</a>.`;
+        document.querySelector(".ai-usewith")?.after(go);
+
+    },
 
     example: {
         values: {
@@ -53,14 +101,17 @@ export const CONFIG = {
     },
 
     howTo: [
-        "Copy the assistant's whole answer and paste it into the first field.",
-        "Add the question you asked and choose what the answer is for.",
-        "Read the statements to check: each has a box, what kind of claim it is, and how to check it.",
-        "Read what the answer leaves out, then put the listed questions back to the assistant in the same chat.",
-        "Copy or download the checklist and tick it as you verify. Nothing is kept here."
+        "Copy the AI's whole answer and paste it into the first field.",
+        "Paste what you asked: your prompt, or the requirements. From the AI Workbench, \"Open the AI Output Reviewer with this request\" fills it for you.",
+        "Choose what the answer is for and what kind of answer it is.",
+        "Read what the review found against your request, the format problems and leftovers, then the statements to check.",
+        "Copy the follow-up prompt into the same chat, and tick the review as you verify. Nothing is kept here."
     ],
 
     parts: [
+        { title: "Against your request", text: "Each requested item of your prompt (its requirements and format lines, or its bullet points, or its sentences with must and should), and whether its words appear in the answer. \"Not visibly addressed\" means no matching words were found; the answer may say it differently, so read for it." },
+        { title: "Format, leftovers and contradictions", text: "A table, JSON, headings, code, a word limit or a number of items you asked for and did not get; placeholders such as TODO or [add: …] left in; an answer that stops mid-sentence; and two sentences that give different figures for the same thing." },
+        { title: "Follow-up prompt", text: "One prompt that names only the gaps found, for the same chat, asking for the corrected answer in full without new facts." },
         { title: "Statements to check", text: "Sentences with money, percentages, dates or other figures, sentences that name a source, and sentences with absolute wording (always, never, guaranteed, the only). These are where a confident answer most often goes wrong, and each comes with the way to check it." },
         { title: "What the answer leaves out", text: "Whether any source is named, whether an assumption is stated, whether the figures carry a date, and whether any limitation or exception is mentioned. An answer with none of these is not wrong, but it has given you nothing to check it against." },
         { title: "Questions to put back to the assistant", text: "The questions that make an assistant show its working: what it is least sure of, where each figure comes from, what would make it wrong, and what it assumed about you. Asked in the same chat, they often change the answer." },

@@ -235,3 +235,133 @@ test("the two new tasks: an email reply asks for the received message; a documen
   assert.match(d.masterPrompt, /quote the passage/);
   assert.match(d.masterPrompt, /Invented sources/);
 });
+
+/* ---------- AI Context Bridge (17 §6) ---------- */
+
+const ctx = await import("../../assets/js/tools/ai-tools/common/context-engine.js");
+const bridge = await import("../../assets/js/tools/context-pack-builder/index.js");
+const reviewer = await import("../../assets/js/tools/ai-answer-checklist/index.js");
+const rv = await import("../../assets/js/tools/ai-tools/common/review-engine.js");
+
+const PROJECT = { project: "Shop", purpose: "An online shop.", role: "Developer", stack: "Node\nPostgres", state: "Beta.", decisions: "d1\nd2\nd3\nd4\nd5\nd6\nd7", rejected: "A chatbot", terms: "SKU: stock unit", files: "app.js - entry", done: "c1\nc2\nc3\nc4\nc5\nc6", issues: "Slow search", rules: "No new dependencies", task: "Add coupons.", verify: "npm test", reply: "Ask first." };
+
+test("bridge: every mode renders from the same fields, with its own title and sections; the handoff keeps the latest five", () => {
+  const brief = ctx.composeContext({ ...PROJECT, mode: "brief" });
+  assert.ok(brief.startsWith("# Project context: Shop"));
+  for (const h of ["## Purpose", "## Decisions", "## Rejected approaches", "## Terms", "## How to respond"]) assert.ok(brief.includes(h), h);
+  const hand = ctx.composeContext({ ...PROJECT, mode: "handoff" });
+  assert.ok(hand.startsWith("# Handoff: Shop"));
+  assert.ok(hand.includes("- d3\n") && !hand.includes("- d2\n") && hand.includes("(2 earlier items left out)"));
+  assert.ok(hand.includes("(1 earlier item left out)"));
+  assert.ok(!hand.includes("## Terms") && !hand.includes("## Rejected"));
+  const session = ctx.composeContext({ ...PROJECT, mode: "session" });
+  assert.ok(session.startsWith("# Continuing: Shop") && !session.includes("## Purpose"));
+  const agent = ctx.composeContext({ ...PROJECT, mode: "agent" });
+  assert.ok(agent.startsWith("# Shop: instructions for coding assistants"));
+  for (const h of ["## Project", "## Do not", "## Where things are", "## How to check work"]) assert.ok(agent.includes(h), h);
+  assert.ok(!agent.includes("## The next task"));
+  assert.equal(ctx.modeOf("nonsense"), "brief");
+});
+
+test("bridge: an opened pack's next version names what changed", () => {
+  const md = ctx.composeContext({ ...PROJECT, mode: "brief" }, { version: 4, date: "2026-11-16", changed: ["Current state", "The next task"] });
+  assert.ok(md.includes("Version 4, 2026-11-16. Changed since version 3: Current state, The next task."));
+  assert.deepEqual(ctx.changedSections(PROJECT, { ...PROJECT, state: "Live.", task: "Ship." }), ["Current state", "The next task"]);
+});
+
+test("bridge: the extraction prompt names every heading; a reply is parsed by heading, empties and unknowns handled, nothing invented", () => {
+  for (const s of ctx.SECTIONS.filter((x) => x.key !== "reply")) assert.ok(ctx.EXTRACTION_PROMPT.includes(`## ${s.heading}`), s.heading);
+  const reply = "Sure! Here it is.\n## Project name\nShop\n## Purpose\nAn online shop.\n**Current state**\nBeta\n## Decisions\n- Use Postgres\n- Keep REST\n## Rejected approaches\nnone\n## The next task\nAdd coupons\n## Mood\nOptimistic";
+  const { values, filled, empty } = ctx.parseReply(reply);
+  assert.deepEqual(values.decisions, "Use Postgres\nKeep REST");
+  assert.equal(values.project, "Shop");
+  assert.equal(values.state, "Beta");
+  assert.ok(!("rejected" in values));
+  assert.ok(empty.includes("Rejected approaches") && filled.includes("The next task"));
+  assert.match(values.notes, /Mood: Optimistic/);
+  assert.match(values.notes, /Sure! Here it is/);
+  assert.deepEqual(ctx.parseReply("no headings at all").filled, []);
+});
+
+test("bridge: notes warn about secrets, length and stale or contradictory items without changing any field", () => {
+  const labels = { stack: "How it is built" };
+  const v = { ...PROJECT, mode: "handoff", stack: "api_key = abcd1234efgh", task: "c6", decisions: "Use a chatbot for help", rejected: "Use a chatbot" };
+  const notes = ctx.contextNotes(v, "word ".repeat(450), labels, { today: "2026-11-30", opened: "2026-11-01" });
+  assert.ok(notes.some((n) => /Short handoff: 450 words\. Over 400/.test(n)));
+  assert.ok(notes.some((n) => /How it is built contains text that looks like a password or key/.test(n)));
+  assert.ok(notes.some((n) => /more than 14 days ago/.test(n)));
+  assert.ok(notes.some((n) => /also appears under completed work/.test(n)));
+  assert.ok(notes.some((n) => /both a decision and a rejected approach/.test(n)));
+  assert.equal(v.stack, "api_key = abcd1234efgh");
+  assert.deepEqual(ctx.contextNotes({ ...PROJECT, mode: "brief" }, "", {}, {}), []);
+});
+
+test("bridge page: the mode is the first field, the example still composes the brief, a download carries its version", () => {
+  assert.equal(bridge.CONFIG.fields[0].key, "mode");
+  const b = bridge.build(bridge.CONFIG.example.values);
+  assert.ok(b.markdown.startsWith("# Project context: ToolZen Hub"));
+  const file = bridge.CONFIG.downloadText(b.markdown, bridge.CONFIG.example.values, {});
+  const { meta } = readMeta(file);
+  assert.equal(meta.kind, "context-pack");
+  assert.equal(meta.version, 1);
+  assert.equal(meta.values.project, "ToolZen Hub");
+  assert.equal(bridge.CONFIG.fileName({ project: "ToolZen Hub" }, { version: 3 }), "context-toolzen-hub-v3");
+});
+
+/* ---------- AI Output Reviewer (17 §7) ---------- */
+
+const REQUEST = "Write release notes.\n\nRequirements:\n- Mention the coupon feature and its expiry rules\n- List known issues\n- Thank the beta testers\n\nFormat of your answer:\n- A table of changes\n- Under 120 words";
+
+test("reviewer: requested items are found in a Workbench prompt and checked by their words, never called met or failed", () => {
+  const items = rv.extractRequirements(REQUEST);
+  assert.deepEqual(items, ["Mention the coupon feature and its expiry rules", "List known issues", "Thank the beta testers", "A table of changes", "Under 120 words"]);
+  assert.deepEqual(rv.extractRequirements("Please:\n1. include a summary\n2. add tests"), ["include a summary", "add tests"]);
+  assert.deepEqual(rv.extractRequirements("Is a fixed deposit better than a debt fund?"), []);
+  assert.equal(rv.coverage("Mention the coupon feature and its expiry rules", "Coupons now expire after 30 days, see the expiry rules.").addressed, true);
+  assert.equal(rv.coverage("Thank the beta testers", "Coupons now expire.").addressed, false);
+});
+
+test("reviewer: format checks for a table, JSON only, headings, code, word limits and counts", () => {
+  assert.ok(rv.formatChecks("Give a table", "No table here.").some((f) => /no Markdown table/.test(f)));
+  assert.deepEqual(rv.formatChecks("Give a table", "| a | b |\n|---|---|\n| 1 | 2 |"), []);
+  assert.ok(rv.formatChecks("Return JSON only", "{\"a\": 1,}").some((f) => /not valid JSON/.test(f)));
+  assert.deepEqual(rv.formatChecks("Return JSON only", "```json\n{\"a\": 1}\n```"), []);
+  assert.ok(rv.formatChecks("Use headings", "Plain text.").some((f) => /no headings/.test(f)));
+  assert.ok(rv.formatChecks("Write the code to fix it", "Change line 3.").some((f) => /no code block/.test(f)));
+  assert.ok(rv.formatChecks("Keep it under 5 words", "one two three four five six seven").some((f) => /7 words; the limit is 5/.test(f)));
+  assert.ok(rv.formatChecks("", "one two three", "2").some((f) => /limit is 2/.test(f)));
+  assert.ok(rv.formatChecks("Give 3 ideas", "- a\n- b").some((f) => /asks for 3; the answer lists 2/.test(f)));
+});
+
+test("reviewer: leftovers and contradictions inside one answer", () => {
+  assert.ok(rv.leftovers("Dear [your name], the plan is TODO").length >= 2);
+  assert.ok(rv.leftovers("It starts like this and then").some((l) => /cut off/.test(l)));
+  assert.ok(rv.leftovers("```js\nlet a = 1;").some((l) => /never closed/.test(l)));
+  assert.deepEqual(rv.leftovers("All done."), []);
+  const c = rv.contradictions("The plan costs 500 rupees per month. Later we note the plan costs 700 rupees per month.");
+  assert.equal(c.length, 1);
+  assert.equal(c[0].why, "different figures");
+});
+
+test("reviewer: a request with items gives the review with a follow-up prompt naming only the gaps; a plain question keeps the old checklist", () => {
+  const answer = "| Change | Note |\n|---|---|\n| Coupons | Coupon codes now have expiry rules. |\n\nKnown issues: search is slow.";
+  const r = rv.review({ answer, question: REQUEST, purpose: "publish", reviewType: "article", wordLimit: "" });
+  assert.ok(r.markdown.startsWith("# Review of an AI answer\n\n## Against your request"));
+  assert.match(r.markdown, /Thank the beta testers: \*\*not visibly addressed\*\*/);
+  assert.match(r.markdown, /List known issues: visibly addressed/);
+  assert.match(r.followUp, /Thank the beta testers/);
+  assert.doesNotMatch(r.followUp, /coupon feature/);
+  assert.match(r.markdown, /## What this review cannot tell you/);
+  for (const word of [/\bverified\b/i, /\baccurate\b/i, /\bcorrect answer\b/i, /\bscore\b/i, /%/]) assert.doesNotMatch(r.markdown.split("## Statements to check")[0], word);
+  const plain = reviewer.build(reviewer.CONFIG.example.values);
+  assert.ok(plain.markdown.startsWith("# Evidence checklist for an AI answer\n\n## The question asked"));
+  assert.ok(reviewer.CONFIG.fields.some((f) => f.key === "reviewType") && reviewer.CONFIG.actions[0].id === "follow-up");
+});
+
+test("reviewer: testing and research types add their checks", () => {
+  const t = rv.review({ answer: "Login works.", question: "", purpose: "learning", reviewType: "testing" });
+  assert.match(t.markdown, /No test case ids were found/);
+  assert.match(t.markdown, /No expected results were found/);
+  const r = rv.review({ answer: "Remote work raises output.", question: "", purpose: "learning", reviewType: "research" });
+  assert.match(r.markdown, /No citations or links were found/);
+});

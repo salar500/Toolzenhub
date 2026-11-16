@@ -170,11 +170,12 @@ export function clarityCheck(fields, values) {
 /*
  * A tool's brief from its raw field values.
  *
- * config: { fields, compose(values) }  where compose returns the Markdown for tidied values.
+ * config: { fields, compose(values, extra) }  where compose returns the Markdown for tidied values; `extra` is optional
+ * data the tool keeps beside its fields (the AI Context Bridge's opened version, for example) and is passed through as is.
  * Returns { state: "empty" | "incomplete" | "ok", check, markdown, words }.
  * The brief is composed even while essentials are missing, so the visitor sees it take shape; the state says whether it is ready.
  */
-export function buildBrief(config, values) {
+export function buildBrief(config, values, extra = {}) {
 
     const tidied = Object.fromEntries(config.fields.map((field) => [field.key, tidy(values[field.key])]));
     const check = clarityCheck(config.fields, tidied);
@@ -183,7 +184,7 @@ export function buildBrief(config, values) {
         return { state: "empty", check, markdown: "", words: 0 };
     }
 
-    const markdown = config.compose(tidied);
+    const markdown = config.compose(tidied, extra);
 
     return {
         state: check.missing.length ? "incomplete" : "ok",

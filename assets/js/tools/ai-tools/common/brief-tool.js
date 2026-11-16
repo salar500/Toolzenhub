@@ -13,6 +13,17 @@
    The brief is composed in the browser as the visitor types and
    is theirs to edit before copying. Nothing is sent to any AI
    service and nothing is stored.
+
+   Optional hooks (AI ecosystem programme, 16 D10; a tool that
+   passes none renders exactly as before):
+     panel()                    markup above the form
+     context()                  extra data passed to compose
+     notes(values, brief, extra) extra lines for the check panel
+     actions                    [{ id, label, text(brief, values) }]
+                                more Copy buttons
+     downloadText(md, values, extra) the text saved by Download
+     fileName                   a name, or (values, extra) => name
+     wire(api)                  behaviour of the panel and actions
 ========================================================= */
 
 import { getToolById } from "../../../data/tools.js";
@@ -110,7 +121,8 @@ export function createBriefTool(config) {
             <section class="calculator-section">
                 <div class="calculator-section__title">${escapeHTML(config.sectionTitle)}</div>
                 <p class="calculator-section__description">${config.sectionText}</p>
-                <form id="${prefix}-form" class="calculator-form ai-form" novalidate>
+                ${config.panel ? `${config.panel()}
+                ` : ""}<form id="${prefix}-form" class="calculator-form ai-form" novalidate>
                     <div class="calculator-form__grid">${fields}
                     </div>
                     <div class="calculator-form__actions">
@@ -128,7 +140,8 @@ export function createBriefTool(config) {
                     <p id="${prefix}-output-note" class="ai-note">Edit it here before you copy. Changing a field above writes it again.</p>
                     <div class="calculator-form__actions ai-actions">
                         <button type="button" id="${prefix}-copy" class="calculator-form__button" disabled>Copy ${escapeHTML(config.outputName)}</button>
-                        <button type="button" id="${prefix}-download" class="calculator-form__button calculator-form__button--secondary" disabled>Download .md</button>
+                        <button type="button" id="${prefix}-download" class="calculator-form__button calculator-form__button--secondary" disabled>Download .md</button>${(config.actions ?? []).map((a) => `
+                        <button type="button" id="${prefix}-${a.id}" class="calculator-form__button calculator-form__button--secondary" data-action="${escapeHTML(a.id)}" disabled>${escapeHTML(a.label)}</button>`).join("")}
                     </div>
                     <p class="ai-usewith">${config.pasteLine ?? `Paste it as the first message of a new chat with ${ASSISTANTS}, then add anything it says you will provide.`}</p>
                 </div>
@@ -200,15 +213,24 @@ export function createBriefTool(config) {
 
         const values = () => Object.fromEntries(Object.entries(inputs).map(([key, el]) => [key, el.value]));
 
+        let lastBrief = null;
+
         function update() {
 
-            const brief = buildBrief(config, values());
+            const extra = config.context?.() ?? {};
+            const brief = buildBrief(config, values(), extra);
+            const notes = brief.state === "empty" ? [] : (config.notes?.(values(), brief, extra) ?? []);
 
-            check.innerHTML = checkHTML(brief);
+            lastBrief = brief;
+            check.innerHTML = `${checkHTML(brief)}${notes.length ? `<ul class="ai-check__tips">${notes.map((n) => `<li>${escapeHTML(n)}</li>`).join("")}</ul>` : ""}`;
             check.dataset.state = brief.state;
             output.value = brief.markdown;
             copyButton.disabled = !brief.markdown;
             downloadButton.disabled = !brief.markdown;
+            for (const a of config.actions ?? []) {
+                const button = document.querySelector(`#${prefix}-${a.id}`);
+                if (button) button.disabled = !brief.markdown || !a.text(brief, values());
+            }
 
             announce(brief.state === "empty"
                 ? ""
@@ -290,18 +312,55 @@ export function createBriefTool(config) {
                 return;
             }
 
-            const blob = new Blob([output.value], { type: "text/markdown;charset=utf-8" });
+            const extra = config.context?.() ?? {};
+            const name = typeof config.fileName === "function" ? config.fileName(values(), extra) : config.fileName;
+            const text = config.downloadText ? config.downloadText(output.value, values(), extra) : output.value;
+            const blob = new Blob([text], { type: "text/markdown;charset=utf-8" });
             const url = URL.createObjectURL(blob);
             const link = document.createElement("a");
 
             link.href = url;
-            link.download = `${config.fileName}.md`;
+            link.download = `${name}.md`;
             document.body.append(link);
             link.click();
             link.remove();
             setTimeout(() => URL.revokeObjectURL(url), 1000);
-            announce(`Downloaded ${config.fileName}.md.`, 0);
+            announce(`Downloaded ${name}.md.`, 0);
+            config.afterDownload?.();
 
+        });
+
+        for (const a of config.actions ?? []) {
+            document.querySelector(`#${prefix}-${a.id}`)?.addEventListener("click", async () => {
+                const text = lastBrief ? a.text(lastBrief, values()) : "";
+                if (!text) return;
+                try {
+                    await navigator.clipboard.writeText(text);
+                    announce(`${a.label.replace(/^Copy /, "")} copied.`.replace(/^./, (c) => c.toUpperCase()), 0);
+                } catch {
+                    output.focus();
+                    announce("Copying was refused by the browser. Copy it from the text above.", 0);
+                }
+            });
+        }
+
+        /* a tool's own panel and hand-offs; setValues writes fields the way typing does */
+        config.wire?.({
+            form,
+            inputs,
+            values,
+            update,
+            announce,
+            setValues(map, { onlyEmpty = false } = {}) {
+                for (const [key, value] of Object.entries(map)) {
+                    const el = inputs[key];
+                    if (!el || typeof value !== "string") continue;
+                    if (onlyEmpty && el.value.trim() !== "" && !(el.tagName === "SELECT" && el.selectedIndex === 0)) continue;
+                    if (el.tagName === "SELECT" && ![...el.options].some((o) => o.value === value)) continue;
+                    el.value = el.maxLength > 0 ? value.slice(0, el.maxLength) : value;
+                }
+                update();
+            }
         });
 
     }
