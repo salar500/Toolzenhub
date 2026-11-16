@@ -15,6 +15,10 @@
  */
 import { test, expect, livePages, rel, INVENTORY } from "../helpers/test-base.mjs";
 import { RELEASES } from "../../assets/js/practice-labs/shoplite/bugs.js";
+import { AI_AUDIENCES, AI_CATEGORIES } from "../../assets/js/data/ai-directory.js";
+
+const AI_AUDIENCE_IDS = new Set(AI_AUDIENCES.map((a) => a.id));
+const AI_CATEGORY_IDS = new Set(AI_CATEGORIES.map((c) => c.id));
 
 const CATEGORY_SLUGS = ["loans", "investment", "tax", "business", "health", "math", "converter", "ai"];
 const SOON = ".calculator-card--soon, .category-page-card--soon, .article-card--soon";
@@ -111,7 +115,9 @@ test.describe("rendered link crawl @portable", () => {
             const handoff = entry === "tools/world-clock/" && relPath === "tools/time-zone-converter/" && q.has("from") && [...q.keys()].every((k) => k === "from" || k === "to");
             // a lesson opens ShopLite in one of its releases (?release=, docs/practice-labs/18-department-specifications.md); only a release that exists
             const release = relPath === "practice-labs/shoplite/" && [...q.keys()].join() === "release" && Object.hasOwn(RELEASES, q.get("release"));
-            const okQuery = (relPath === "articles.html" && CATEGORY_SLUGS.includes(q.get("category"))) || handoff || release;
+            // a Learn and check link opens the AI Directory filtered for one audience or category (data/ai-directory.js); only values that exist
+            const directory = relPath === "ai-tools/directory/" && [...q.keys()].every((k) => (k === "audience" && AI_AUDIENCE_IDS.has(q.get(k))) || (k === "category" && AI_CATEGORY_IDS.has(q.get(k))));
+            const okQuery = (relPath === "articles.html" && CATEGORY_SLUGS.includes(q.get("category"))) || handoff || release || directory;
             if (!okQuery) failures.push(`${entry}: link "${raw}" has an unexpected query string`);
           }
         }

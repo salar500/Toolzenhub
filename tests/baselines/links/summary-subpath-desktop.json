@@ -10,8 +10,61 @@
     ]
   },
   "ai-tools.html": {
-    "internal": 38,
+    "internal": 43,
     "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "ai-tools/directory/": {
+    "internal": 38,
+    "external": [
+      "aistudio.google.com",
+      "applitools.com",
+      "aws.amazon.com",
+      "chatgpt.com",
+      "claude.com",
+      "consensus.app",
+      "copilot.com",
+      "crewai.com",
+      "cursor.com",
+      "elevenlabs.io",
+      "elicit.com",
+      "fireflies.ai",
+      "firefly.adobe.com",
+      "gemini.google",
+      "github.com",
+      "hex.tech",
+      "huggingface.co",
+      "ideogram.ai",
+      "katalon.com",
+      "learn.microsoft.com",
+      "mistral.ai",
+      "n8n.io",
+      "notebook.google.com",
+      "ollama.com",
+      "otter.ai",
+      "platform.claude.com",
+      "replit.com",
+      "rows.com",
+      "runway.com",
+      "support.microsoft.com",
+      "testrigor.com",
+      "www.beautiful.ai",
+      "www.deepl.com",
+      "www.descript.com",
+      "www.figma.com",
+      "www.functionize.com",
+      "www.grammarly.com",
+      "www.khanmigo.ai",
+      "www.langchain.com",
+      "www.mabl.com",
+      "www.notion.com",
+      "www.qodo.ai",
+      "www.remove.bg",
+      "www.semanticscholar.org",
+      "www.testim.io",
+      "zapier.com"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
@@ -148,7 +201,7 @@
     "deadFragments": []
   },
   "articles/loan-comparison/how-to-reduce-home-loan-interest/": {
-    "internal": 41,
+    "internal": 42,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -292,56 +345,78 @@
     "deadFragments": []
   },
   "calculators/age/": {
-    "internal": 69,
+    "internal": 64,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/balance-transfer/": {
     "internal": 74,
-    "external": [],
+    "external": [
+      "www.rbi.org.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/bmi/": {
     "internal": 66,
-    "external": [],
+    "external": [
+      "www.who.int"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/bmr/": {
     "internal": 66,
-    "external": [],
+    "external": [
+      "www.nin.res.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/cagr/": {
     "internal": 71,
-    "external": [],
+    "external": [
+      "investor.sebi.gov.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/calorie/": {
     "internal": 66,
-    "external": [],
+    "external": [
+      "www.nin.res.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/credit-card-payoff/": {
     "internal": 71,
-    "external": [],
+    "external": [
+      "www.rbi.org.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/emi/": {
     "internal": 77,
-    "external": [],
+    "external": [
+      "www.rbi.org.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/fd/": {
     "internal": 71,
-    "external": [],
+    "external": [
+      "bankofbaroda.bank.in",
+      "sbi.bank.in",
+      "www.axis.bank.in",
+      "www.dicgc.org.in",
+      "www.hdfc.bank.in",
+      "www.icici.bank.in",
+      "www.kotak.bank.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
@@ -353,13 +428,18 @@
   },
   "calculators/gst/": {
     "internal": 68,
-    "external": [],
+    "external": [
+      "cbic-gst.gov.in",
+      "www.gst.gov.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/home-loan/": {
     "internal": 73,
-    "external": [],
+    "external": [
+      "www.rbi.org.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
@@ -376,19 +456,25 @@
   },
   "calculators/interest/": {
     "internal": 75,
-    "external": [],
+    "external": [
+      "www.rbi.org.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/loan-comparison/": {
     "internal": 74,
-    "external": [],
+    "external": [
+      "www.rbi.org.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/loan-eligibility/": {
     "internal": 75,
-    "external": [],
+    "external": [
+      "www.rbi.org.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
@@ -406,19 +492,23 @@
   },
   "calculators/personal-loan/": {
     "internal": 75,
-    "external": [],
+    "external": [
+      "www.rbi.org.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/ppf/": {
-    "internal": 74,
+    "internal": 67,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/prepayment/": {
     "internal": 74,
-    "external": [],
+    "external": [
+      "www.rbi.org.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
@@ -435,7 +525,7 @@
     "deadFragments": []
   },
   "calculators/risk-reward/": {
-    "internal": 74,
+    "internal": 67,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -449,32 +539,42 @@
   "calculators/salary-in-hand/": {
     "internal": 65,
     "external": [
-      "github.com"
+      "github.com",
+      "www.epfo.gov.in",
+      "www.incometax.gov.in"
     ],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/sip/": {
     "internal": 75,
-    "external": [],
+    "external": [
+      "investor.sebi.gov.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/swp/": {
     "internal": 67,
-    "external": [],
+    "external": [
+      "investor.sebi.gov.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/unit-converter/": {
     "internal": 66,
-    "external": [],
+    "external": [
+      "www.bipm.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "calculators/xirr/": {
-    "internal": 74,
-    "external": [],
+    "internal": 70,
+    "external": [
+      "investor.sebi.gov.in"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
@@ -515,7 +615,7 @@
     "deadFragments": []
   },
   "image-tools.html": {
-    "internal": 34,
+    "internal": 36,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -3769,37 +3869,45 @@
     "deadFragments": []
   },
   "tools.html": {
-    "internal": 196,
+    "internal": 202,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/ai-answer-checklist/": {
-    "internal": 37,
+    "internal": 43,
+    "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/ai-answer-compare/": {
+    "internal": 43,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/base64-encoder-decoder/": {
     "internal": 47,
-    "external": [],
+    "external": [
+      "www.rfc-editor.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/bug-report-prompt/": {
-    "internal": 37,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/business-days/": {
-    "internal": 47,
+    "internal": 48,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/context-pack-builder/": {
-    "internal": 37,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -3811,32 +3919,38 @@
     "deadFragments": []
   },
   "tools/cron-challenge-lab/": {
-    "internal": 41,
-    "external": [],
+    "internal": 42,
+    "external": [
+      "man7.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/cron-expression-explainer/": {
-    "internal": 44,
-    "external": [],
+    "internal": 45,
+    "external": [
+      "man7.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/date-calculator/": {
-    "internal": 51,
+    "internal": 52,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/date-difference/": {
-    "internal": 44,
+    "internal": 45,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/excel-practice-lab/": {
-    "internal": 41,
-    "external": [],
+    "internal": 44,
+    "external": [
+      "support.microsoft.com"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
@@ -3847,9 +3961,19 @@
     "deadFragments": []
   },
   "tools/image-compressor-resizer/": {
-    "internal": 31,
-    "external": [],
+    "internal": 32,
+    "external": [
+      "developer.mozilla.org"
+    ],
     "placeholders": 1,
+    "deadFragments": []
+  },
+  "tools/image-metadata/": {
+    "internal": 35,
+    "external": [
+      "developer.mozilla.org"
+    ],
+    "placeholders": 0,
     "deadFragments": []
   },
   "tools/interval-timer/": {
@@ -3859,44 +3983,59 @@
     "deadFragments": []
   },
   "tools/json-compare/": {
-    "internal": 47,
-    "external": [],
+    "internal": 48,
+    "external": [
+      "www.rfc-editor.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/json-csv-converter/": {
     "internal": 45,
-    "external": [],
+    "external": [
+      "www.rfc-editor.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/json-error-fixing-lab/": {
-    "internal": 41,
-    "external": [],
+    "internal": 42,
+    "external": [
+      "www.rfc-editor.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/json-formatter/": {
-    "internal": 47,
-    "external": [],
+    "internal": 49,
+    "external": [
+      "developer.mozilla.org",
+      "www.rfc-editor.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/jsonpath-challenge-lab/": {
-    "internal": 41,
-    "external": [],
+    "internal": 42,
+    "external": [
+      "www.rfc-editor.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/jsonpath-tester/": {
-    "internal": 46,
-    "external": [],
+    "internal": 47,
+    "external": [
+      "www.rfc-editor.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/jwt-decoder/": {
-    "internal": 47,
-    "external": [],
+    "internal": 48,
+    "external": [
+      "www.rfc-editor.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
@@ -3906,9 +4045,17 @@
     "placeholders": 0,
     "deadFragments": []
   },
-  "tools/meeting-planner/": {
-    "internal": 47,
+  "tools/meeting-notes-action-plan/": {
+    "internal": 42,
     "external": [],
+    "placeholders": 0,
+    "deadFragments": []
+  },
+  "tools/meeting-planner/": {
+    "internal": 48,
+    "external": [
+      "www.iana.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
@@ -3931,8 +4078,10 @@
     "deadFragments": []
   },
   "tools/photos-to-pdf/": {
-    "internal": 31,
-    "external": [],
+    "internal": 32,
+    "external": [
+      "developer.mozilla.org"
+    ],
     "placeholders": 1,
     "deadFragments": []
   },
@@ -3943,19 +4092,21 @@
     "deadFragments": []
   },
   "tools/power-bi-practice-lab/": {
-    "internal": 43,
-    "external": [],
+    "internal": 45,
+    "external": [
+      "learn.microsoft.com"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/prompt-builder/": {
-    "internal": 37,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/shift-planner/": {
-    "internal": 47,
+    "internal": 48,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -3973,8 +4124,10 @@
     "deadFragments": []
   },
   "tools/sql-practice-lab/": {
-    "internal": 42,
-    "external": [],
+    "internal": 45,
+    "external": [
+      "www.sqlite.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
@@ -3985,7 +4138,7 @@
     "deadFragments": []
   },
   "tools/test-design-lab/": {
-    "internal": 41,
+    "internal": 44,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
@@ -3997,38 +4150,49 @@
     "deadFragments": []
   },
   "tools/time-duration/": {
-    "internal": 47,
+    "internal": 48,
     "external": [],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/time-zone-converter/": {
     "internal": 46,
-    "external": [],
+    "external": [
+      "www.iana.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/unix-timestamp-converter/": {
     "internal": 46,
-    "external": [],
+    "external": [
+      "developer.mozilla.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/url-parser/": {
-    "internal": 46,
-    "external": [],
+    "internal": 47,
+    "external": [
+      "url.spec.whatwg.org",
+      "www.rfc-editor.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/uuid-generator/": {
     "internal": 44,
-    "external": [],
+    "external": [
+      "www.rfc-editor.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
   "tools/world-clock/": {
     "internal": 47,
-    "external": [],
+    "external": [
+      "www.iana.org"
+    ],
     "placeholders": 0,
     "deadFragments": []
   },
