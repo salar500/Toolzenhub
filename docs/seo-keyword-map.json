@@ -1,7 +1,7 @@
 {
   "$comment": "INTERNAL planning file. Not published, not a ranking mechanism, no search volumes. Built from the site's catalogs by scripts/gen-seo-keyword-map.mjs; regenerate after the catalog changes. Use it to improve real titles, descriptions, headings, copy and internal links naturally; never as a hidden keyword block (Google ignores the meta keywords tag).",
-  "generated": "2026-11-15",
-  "pages": 674,
+  "generated": "2026-11-16",
+  "pages": 675,
   "summary": {
     "calculatorsWithoutSupportingArticle": 45,
     "pagesWithCannibalizationWarnings": 2
@@ -510,6 +510,7 @@
         "how to reduce home loan interest example"
       ],
       "relatedTools": [
+        "tool:prepayment",
         "tool:loan-comparison"
       ],
       "articleOpportunities": [],
@@ -10963,8 +10964,12 @@
       "url": "/tools/ai-answer-checklist/",
       "type": "calculator",
       "title": "AI Answer Evidence Checklist: What to Verify",
-      "primaryKeyword": "ai answer evidence checklist",
+      "primaryKeyword": "ai output reviewer",
       "secondaryKeywords": [
+        "ai output reviewer",
+        "ai answer evidence checklist",
+        "review ai answer",
+        "check ai answer against prompt",
         "ai answer checker",
         "verify ai answer",
         "fact check ai",
@@ -10976,16 +10981,17 @@
       ],
       "searchIntent": "transactional/tool: the visitor wants to calculate now",
       "relatedSearchPhrases": [
-        "ai answer evidence checklist online",
-        "ai answer evidence checklist free",
-        "how to use ai answer evidence checklist",
-        "ai answer evidence checklist formula"
+        "ai output reviewer online",
+        "ai output reviewer free",
+        "how to use ai output reviewer",
+        "ai output reviewer formula"
       ],
       "relatedTools": [
-        "/tools/prompt-builder/",
-        "/tools/context-pack-builder/",
-        "/tools/bug-report-prompt/",
         "/tools/ai-answer-compare/",
+        "/tools/ai-workbench/",
+        "/tools/prompt-builder/",
+        "/tools/bug-report-prompt/",
+        "/tools/context-pack-builder/",
         "/tools/meeting-notes-action-plan/"
       ],
       "articleOpportunities": [],
@@ -11017,8 +11023,43 @@
       "relatedTools": [
         "/tools/ai-answer-checklist/",
         "/tools/prompt-builder/",
+        "/tools/ai-workbench/",
         "/tools/bug-report-prompt/",
         "/tools/context-pack-builder/",
+        "/tools/meeting-notes-action-plan/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/tools/ai-workbench/",
+      "type": "calculator",
+      "title": "AI Workbench: From an Idea to an AI Work Pack",
+      "primaryKeyword": "ai workbench",
+      "secondaryKeywords": [
+        "ai workbench",
+        "ai work pack",
+        "ai workflow",
+        "ai workflow planner",
+        "which ai tool should i use",
+        "ai prompts for testing",
+        "ai image prompt",
+        "ai video prompt"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "ai workbench online",
+        "ai workbench free",
+        "how to use ai workbench",
+        "ai workbench formula"
+      ],
+      "relatedTools": [
+        "/tools/prompt-builder/",
+        "/tools/context-pack-builder/",
+        "/tools/ai-answer-checklist/",
+        "/tools/bug-report-prompt/",
+        "/tools/ai-answer-compare/",
         "/tools/meeting-notes-action-plan/"
       ],
       "articleOpportunities": [],
@@ -11085,6 +11126,7 @@
       "relatedTools": [
         "/tools/context-pack-builder/",
         "/tools/prompt-builder/",
+        "/tools/ai-workbench/",
         "/tools/ai-answer-checklist/",
         "/tools/ai-answer-compare/",
         "/tools/meeting-notes-action-plan/"
@@ -11128,9 +11170,15 @@
       "url": "/tools/context-pack-builder/",
       "type": "calculator",
       "title": "Project Context Pack Builder for AI Assistants",
-      "primaryKeyword": "project context pack builder",
+      "primaryKeyword": "ai context bridge",
       "secondaryKeywords": [
+        "context bridge",
+        "project context pack builder",
+        "context pack builder",
         "context pack",
+        "switch from chatgpt to claude",
+        "move chat to another ai",
+        "agents md generator",
         "project context for ai",
         "ai handover",
         "project brief for chatgpt",
@@ -11141,12 +11189,13 @@
       ],
       "searchIntent": "transactional/tool: the visitor wants to calculate now",
       "relatedSearchPhrases": [
-        "project context pack builder online",
-        "project context pack builder free",
-        "how to use project context pack builder",
-        "project context pack builder formula"
+        "ai context bridge online",
+        "ai context bridge free",
+        "how to use ai context bridge",
+        "ai context bridge formula"
       ],
       "relatedTools": [
+        "/tools/ai-workbench/",
         "/tools/prompt-builder/",
         "/tools/bug-report-prompt/",
         "/tools/ai-answer-checklist/",
@@ -11787,6 +11836,7 @@
       "relatedTools": [
         "/tools/prompt-builder/",
         "/tools/context-pack-builder/",
+        "/tools/ai-workbench/",
         "/tools/bug-report-prompt/",
         "/tools/ai-answer-checklist/",
         "/tools/ai-answer-compare/"
@@ -12047,6 +12097,7 @@
       "relatedTools": [
         "/tools/bug-report-prompt/",
         "/tools/context-pack-builder/",
+        "/tools/ai-workbench/",
         "/tools/ai-answer-checklist/",
         "/tools/ai-answer-compare/",
         "/tools/meeting-notes-action-plan/"

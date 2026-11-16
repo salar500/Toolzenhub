@@ -2595,12 +2595,18 @@ const catalog = [
         category: "ai",
         toolType: "utility",
         icon: "▤",
-        title: "Project Context Pack Builder",
+        title: "AI Context Bridge",
         description:
-            "Write once what an AI assistant needs to know about your project: purpose, stack, key files, what is done, known traps, rules, the next task and how it is verified. Paste it at the start of every chat. Built in your browser.",
-        relatedTools: ["prompt-builder", "bug-report-prompt"],
+            "Carry a project between AI chats and products: one set of facts written as a full brief, a short handoff, a session update or a coding agent file. Bring them out of an AI conversation with one prompt, and open a saved pack to update what changed. Built in your browser.",
+        relatedTools: ["ai-workbench", "prompt-builder"],
         aliases: [
+            "context bridge",
+            "project context pack builder",
+            "context pack builder",
             "context pack",
+            "switch from chatgpt to claude",
+            "move chat to another ai",
+            "agents md generator",
             "project context for ai",
             "ai handover",
             "project brief for chatgpt",
@@ -2622,9 +2628,9 @@ const catalog = [
         },
         seo: {
             title:
-                "Project Context Pack Builder for AI Assistants | ToolZen Hub",
+                "AI Context Bridge: Move a Project Between AI Tools | ToolZen Hub",
             description:
-                "Build a reusable project context pack for an AI assistant: purpose, stack, key files, completed work, known traps, rules, the next task and its verification. Paste it into any chat or save it as project instructions. Runs in your browser."
+                "Carry a project between ChatGPT, Claude, Gemini and coding assistants: a full brief, a short handoff, a session update or an agent file from one set of facts, with an extraction prompt and versions. Runs in your browser."
         }
     },
 
@@ -2636,11 +2642,15 @@ const catalog = [
         category: "ai",
         toolType: "utility",
         icon: "☑",
-        title: "AI Answer Evidence Checklist",
+        title: "AI Output Reviewer",
         description:
-            "Paste an answer from ChatGPT, Claude or Gemini and get a checklist of what in it needs checking: every figure, date, amount, named source and absolute statement, what it leaves out, and the questions to put back to the assistant. Built in your browser.",
-        relatedTools: ["prompt-builder", "context-pack-builder"],
+            "Paste an AI answer and what you asked: see the requested items it does not visibly address, format problems, leftovers, contradictions and the statements to verify, with a follow-up prompt that names the gaps. Word patterns in your browser; it does not judge truth.",
+        relatedTools: ["ai-answer-compare", "ai-workbench"],
         aliases: [
+            "ai output reviewer",
+            "ai answer evidence checklist",
+            "review ai answer",
+            "check ai answer against prompt",
             "ai answer checker",
             "verify ai answer",
             "fact check ai",
@@ -2663,9 +2673,9 @@ const catalog = [
         },
         seo: {
             title:
-                "AI Answer Evidence Checklist: What to Verify | ToolZen Hub",
+                "AI Output Reviewer: Check an AI Answer | ToolZen Hub",
             description:
-                "Paste an answer from ChatGPT, Claude or Gemini and get a checklist of the figures, dates, sources and absolute claims to verify, what the answer leaves out, and the questions to ask back. Runs in your browser; nothing is sent."
+                "Paste an answer from ChatGPT, Claude or Gemini and your prompt: requested items not visibly addressed, format problems, leftovers, contradictions, statements to verify and a follow-up prompt. Runs in your browser; nothing is sent."
         }
     },
 

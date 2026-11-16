@@ -166,8 +166,8 @@ describe("registry is derived from the catalog", () => {
       "ai-workbench": { section: "AI Tools", category: "ai", title: "AI Workbench" },
       "prompt-builder": { section: "AI Tools", category: "ai", title: "AI Prompt Builder" },
       "bug-report-prompt": { section: "AI Tools", category: "ai", title: "Bug Report to Debugging Prompt" },
-      "context-pack-builder": { section: "AI Tools", category: "ai", title: "Project Context Pack Builder" },
-      "ai-answer-checklist": { section: "AI Tools", category: "ai", title: "AI Answer Evidence Checklist" },
+      "context-pack-builder": { section: "AI Tools", category: "ai", title: "AI Context Bridge" }, // retitled 2026-11-16 (AI ecosystem programme, decision D2)
+      "ai-answer-checklist": { section: "AI Tools", category: "ai", title: "AI Output Reviewer" }, // retitled 2026-11-16 (AI ecosystem programme, decision D3)
       "ai-answer-compare": { section: "AI Tools", category: "ai", title: "Compare Two AI Answers" },
       "meeting-notes-action-plan": { section: "AI Tools", category: "ai", title: "Meeting Notes to Action Plan" },
       "cron-challenge-lab": { section: "Practice Labs", title: "Cron Challenge Lab" },

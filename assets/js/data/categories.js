@@ -155,11 +155,11 @@ export const sections = [
         id: "ai-tools",
         title: "AI Tools",
         description:
-            "Browser-built briefs for ChatGPT, Claude, Gemini and other assistants: a clear prompt from a rough idea, a debugging task from a bug, a context pack for a project.",
+            "Prepare your AI work, carry your project between AI products and check what comes back: a Workbench, a context bridge, an output reviewer, quick briefs and a directory of AI products. Nothing is sent to any AI service.",
         seoDescription:
-            "AI Tools from ToolZen Hub: build a complete prompt from a rough idea, turn a bug report into a debugging task for a coding assistant, and write a project context pack for ChatGPT, Claude, Gemini or Copilot. They run in your browser and call no AI service.",
+            "AI Tools from ToolZen Hub: plan AI work as a Work Pack, carry a project between ChatGPT, Claude and Gemini, check an AI answer against your prompt, and find AI products by task. Everything runs in your browser; no AI service is called.",
         summary:
-            "Prompt, debugging-task and context-pack builders for ChatGPT, Claude and Gemini",
+            "Prepare, carry and check your work with ChatGPT, Claude, Gemini and other AI products",
         icon: "✦",
         landing: "aiTools",
         pathPrefix: "tools",

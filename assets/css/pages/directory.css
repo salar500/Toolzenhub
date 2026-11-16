@@ -774,3 +774,88 @@
     font-size: 15px;
     line-height: 1.55;
 }
+
+/* AI Home: the start block of the AI Tools page (AI ecosystem programme 17 §4; rendered for that section only) */
+.ai-start {
+    max-width: var(--width-wide);
+    margin: 0 0 var(--space-8);
+    padding: var(--space-6);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface-card);
+}
+
+.ai-start__title {
+    margin: 0 0 var(--space-2);
+    font-size: var(--font-xl);
+}
+
+.ai-start__text,
+.ai-start__hint {
+    margin: 0 0 var(--space-4);
+    color: var(--ink-muted);
+    line-height: 1.55;
+}
+
+.ai-start__hint {
+    margin-top: var(--space-2);
+    font-size: var(--font-sm);
+}
+
+.ai-start__primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--target-size);
+    text-decoration: none;
+}
+
+.ai-start__sub {
+    margin: var(--space-5) 0 var(--space-2);
+    font-size: var(--font-base);
+}
+
+.ai-start__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ai-start__chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target-size);
+    padding: 0 var(--space-4);
+    border: 1px solid var(--line-control);
+    border-radius: var(--radius-full);
+    background: var(--surface-page);
+    color: var(--ink);
+    font-size: var(--font-sm);
+    text-decoration: none;
+}
+
+.ai-start__chip:hover {
+    border-color: var(--eco-ai-tools);
+    text-decoration: underline;
+}
+
+.ai-start__chip:focus-visible,
+.ai-start__primary:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+@media (max-width: 599px) {
+
+    .ai-start {
+        padding: var(--space-4);
+    }
+
+    .ai-start__primary {
+        width: 100%;
+    }
+
+}

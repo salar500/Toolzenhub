@@ -358,6 +358,24 @@ test("reviewer: a request with items gives the review with a follow-up prompt na
   assert.ok(reviewer.CONFIG.fields.some((f) => f.key === "reviewType") && reviewer.CONFIG.actions[0].id === "follow-up");
 });
 
+/* ---------- AI Home (17 §4) ---------- */
+
+test("AI Home: the AI Tools page starts with plain links into the Workbench and the AI tools; other sections are untouched", async () => {
+  const { sectionPageHtml, aiHomeStartHtml } = await import("../../assets/js/pages/directory/directory-html.js");
+  const ai = sectionPageHtml("ai-tools");
+  const start = aiHomeStartHtml();
+  assert.ok(ai.includes(start));
+  assert.ok(ai.indexOf("ai-start-title") < ai.indexOf("categories-detail__heading"), "the start block comes before the tool list");
+  assert.match(start, /href="\/tools\/ai-workbench\/\?start=describe"/);
+  assert.equal((start.match(/\?outcome=/g) || []).length, 8);
+  for (const t of ["test-plan", "article", "debug", "email-message"]) assert.ok(start.includes(`?task=${t}"`), t);
+  assert.match(start, /\/tools\/context-pack-builder\/\?mode=handoff/);
+  assert.match(start, /\/tools\/ai-answer-checklist\//);
+  assert.doesNotMatch(start, /ai-tools\/directory/, "the directory keeps its card and sidebar entry only");
+  assert.doesNotMatch(start, /<script|<form|<input/);
+  for (const id of ["time-tools", "developer-tools", "image-tools", "pdf-tools"]) assert.doesNotMatch(sectionPageHtml(id), /ai-start/, id);
+});
+
 test("reviewer: testing and research types add their checks", () => {
   const t = rv.review({ answer: "Login works.", question: "", purpose: "learning", reviewType: "testing" });
   assert.match(t.markdown, /No test case ids were found/);

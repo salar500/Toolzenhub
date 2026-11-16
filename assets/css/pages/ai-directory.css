@@ -301,3 +301,15 @@
     }
 
 }
+
+/* "Plan a task with <product>": into the AI Workbench with the product chosen (AI ecosystem programme 17 §8) */
+.ai-card__plan {
+    margin: 8px 0 0;
+    font-size: 14px;
+}
+
+.ai-card__plan a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
