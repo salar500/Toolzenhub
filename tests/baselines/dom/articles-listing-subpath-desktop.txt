@@ -70,7 +70,7 @@ div#articles-page
                 span.article-card-category "Loans"
                 h2
                   a [data-article-id="3" href="{ROOT}articles/loan-comparison/fixed-vs-floating-interest-rates/"] "Fixed vs Floating Interest Rates"
-                p "Understand the difference between fixed and floating interest rates before choosing a loan…"
+                p "How fixed and floating interest rates differ, and what a 1% rate rise or fall does to the …"
               div.article-card-meta
                 div.article-meta-items
                   span "Aug 25, 2026"

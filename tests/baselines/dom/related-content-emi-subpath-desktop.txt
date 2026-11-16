@@ -78,7 +78,7 @@ section.related-section
         img [alt="Illustrative diagram: a fixed interest rate stays flat while a floating rate moves up and down in steps over the life of a loan" loading="lazy" src="{ROOT}assets/Images/articles/fixed-vs-floating-interest-rates.png"]
       div.related-article-content
         h3 "Fixed vs Floating Interest Rates"
-        p "Understand the difference between fixed and floating interest rates before choosing a loan…"
+        p "How fixed and floating interest rates differ, and what a 1% rate rise or fall does to the …"
     a.related-article-card [href="{ROOT}articles/loan-comparison/loan-tenure-total-interest/"]
       div.related-article-image
         img [alt="Stacked bars showing how much interest is repaid on the same loan over tenures of 10 to 30 years" loading="lazy" src="{ROOT}assets/Images/articles/loan-tenure-total-interest.png"]

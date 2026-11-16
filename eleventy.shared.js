@@ -28,7 +28,7 @@ const BUILD_ONLY = [
   "js/pages/article/articleContent.js",
   "js/pages/about/about-template.js",
   "js/pages/directory/directory-html.js",
-  "js/data/ai-directory.js",
+  // js/data/ai-directory.js ships since 2026-11-16: the AI Workbench reads it in the browser when a task is chosen
   "js/data/knowledge.js",
   "js/data/official-sources.js",
   "js/components/knowledge-links.js",

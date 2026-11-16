@@ -10,7 +10,7 @@ section.categories-page.directory-page
           summary
             span "All Tools"
             span.section-switcher__now "All Tools overview"
-            span.section-switcher__count "76"
+            span.section-switcher__count "78"
           p.section-switcher__overview
             a [aria-current="page" href="{ROOT}tools.html"] "All Tools overview"
           button.section-rail__hide [aria-controls="section-rail" aria-expanded="true" type="button"] "Hide tools"
@@ -204,10 +204,12 @@ section.categories-page.directory-page
             li.section-switcher__group [data-open="false"]
               button.section-switcher__toggle [aria-controls="section-rail-group-6" aria-expanded="false" type="button"]
                 span "AI Tools"
-                span.section-switcher__group-count [aria-hidden="true"] "6"
+                span.section-switcher__group-count [aria-hidden="true"] "8"
               ul#section-rail-group-6
                 li
                   a.section-switcher__section [data-name="AI Tools" href="{ROOT}ai-tools.html"] "AI Tools overview"
+                li
+                  a [href="{ROOT}tools/ai-workbench/"] "AI Workbench"
                 li
                   a [href="{ROOT}tools/prompt-builder/"] "AI Prompt Builder"
                 li
@@ -220,6 +222,8 @@ section.categories-page.directory-page
                   a [href="{ROOT}tools/ai-answer-compare/"] "Compare Two AI Answers"
                 li
                   a [href="{ROOT}tools/meeting-notes-action-plan/"] "Meeting Notes to Action Plan"
+                li
+                  a [href="{ROOT}ai-tools/directory/"] "AI Directory"
       button.section-rail__backdrop [aria-hidden="true" type="button"]
       button.section-rail__show [aria-controls="section-rail" aria-expanded="false" type="button"] "Show All Tools"
       div.ecosystem-main
@@ -235,7 +239,8 @@ section.categories-page.directory-page
             input#directory-search-input.directory-search__input.tz-search__input [name="q" placeholder="Search by name, for example EMI or GST" type="search"]
             button.directory-search__button.tz-search__button [aria-label="Search" type="submit"]
               svg [aria-hidden="true"]
-        div#tools-results.directory-results [aria-live="polite" role="status"]
+        p#tools-results-status.directory-results__status [aria-live="polite" role="status"]
+        div#tools-results.directory-results
         div#tools-directory
           section.directory-section [aria-labelledby="directory-calculators-heading"]
             div.directory-section__header
@@ -580,8 +585,12 @@ section.categories-page.directory-page
               h2#directory-ai-tools-heading.directory-section__title
                 a [href="{ROOT}ai-tools.html"] "AI Tools"
               p.directory-section__text "Browser-built briefs for ChatGPT, Claude, Gemini and other assistants: a clear prompt from…"
-                span.directory-section__count "6 tools"
+                span.directory-section__count "8 tools"
             div.directory-groups
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/ai-workbench/"] "AI Workbench"
+                p.directory-group__text "Choose what you want to accomplish with AI and get a Work Pack: what to prepare, which AI …"
               article.directory-group.directory-group--tool
                 h3.directory-group__title
                   a [href="{ROOT}tools/prompt-builder/"] "AI Prompt Builder"
@@ -606,3 +615,7 @@ section.categories-page.directory-page
                 h3.directory-group__title
                   a [href="{ROOT}tools/meeting-notes-action-plan/"] "Meeting Notes to Action Plan"
                 p.directory-group__text "Paste rough meeting notes and get the decisions, the actions with owners and due dates (an…"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}ai-tools/directory/"] "AI Directory"
+                p.directory-group__text "AI products made by other companies, checked on their official sites, with filters by task…"

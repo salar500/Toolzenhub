@@ -61,7 +61,7 @@ test.describe("AI Tools", () => {
     await page.locator("#pb-output").fill("my own text");
     await expect(page.locator("#pb-output")).toHaveValue("my own text");
     const related = page.locator(".related-section a[href*='/tools/'], .related-calculators a[href*='/tools/']");
-    for (const href of await related.evaluateAll((as) => as.map((a) => a.getAttribute("href")))) expect(href).toMatch(/\/tools\/(bug-report-prompt|context-pack-builder|ai-answer-checklist|ai-answer-compare|meeting-notes-action-plan)\/$/);
+    for (const href of await related.evaluateAll((as) => as.map((a) => a.getAttribute("href")))) expect(href).toMatch(/\/tools\/(ai-workbench|bug-report-prompt|context-pack-builder|ai-answer-checklist|ai-answer-compare|meeting-notes-action-plan)\/$/);
   });
 
   test("the section page lists the three tools, the home page has the seventh card, and All Tools knows the section @portable", async ({ page, go, siteRoot }) => {
@@ -72,7 +72,7 @@ test.describe("AI Tools", () => {
     await go("");
     const card = page.locator("#categories .category-card", { hasText: "AI Tools" });
     await expect(card).toHaveAttribute("href", `${siteRoot}ai-tools.html`);
-    await expect(card).toContainText("6 tools");
+    await expect(card).toContainText("8 tools"); // seven tools (the Workbench, 2026-11-16) and the AI Directory, counted alike everywhere
     await go("tools.html");
     await expect(page.locator(`#tools-directory a[href="${siteRoot}tools/context-pack-builder/"]`).first()).toBeVisible(); // the directory's own listing, not the hidden rail
   });
@@ -82,7 +82,7 @@ test.describe("AI Tools", () => {
       await page.setViewportSize({ width, height: 900 });
       await go("ai-tools.html");
       const cards = page.locator(".directory-tools .category-page-card");
-      await expect(cards).toHaveCount(7); // the six AI tools and the directory
+      await expect(cards).toHaveCount(8); // the seven AI tools and the directory
       const card = cards.last();
       await expect(card).toHaveAttribute("href", `${siteRoot}ai-tools/directory/`);
       await expect(card.locator(".category-page-card__title")).toHaveText("AI Directory");
@@ -92,7 +92,8 @@ test.describe("AI Tools", () => {
       expect(Math.abs(a.width - b.width)).toBeLessThanOrEqual(1);
       await expect(card.locator(".category-page-card__icon svg")).toHaveCount(1);
       await expect(card.locator(".category-page-card__arrow")).toHaveCount(1);
-      await expect(page.locator(`a[href="${siteRoot}ai-tools/directory/"]`)).toHaveCount(1); // no banner or second link
+      await expect(page.locator(`a[href="${siteRoot}ai-tools/directory/"]`)).toHaveCount(2); // the card and its one sidebar entry (2026-11-16): no banner
+      await expect(page.locator(`nav.section-switcher a[href="${siteRoot}ai-tools/directory/"]`)).toHaveCount(1);
       await expectNoHorizontalOverflow(page);
       await card.click();
       await expect(page.locator("h1")).toHaveText("AI Directory");

@@ -93,6 +93,28 @@ test.describe("home page", () => {
     await expect(page.locator("#tools-directory")).toBeVisible();
   });
 
+  test("live search (owner, 2026-11-16): All Tools and the hero show results while typing, the newest query wins, only the count is announced", async ({ page, go, siteRoot }) => {
+    await go("tools.html");
+    const input = page.locator("#directory-search-input");
+    await input.pressSequentially("json", { delay: 30 }); // no Enter
+    await expect(page.locator('.directory-result[href$="tools/json-formatter/"]')).toHaveCount(1);
+    await expect(page.locator("#tools-directory")).toBeHidden();
+    await expect(page).toHaveURL((u) => u.searchParams.get("q") === "json");
+    await expect(page.locator("#tools-results-status")).toHaveText(/tools? found for “json”/);
+    await expect(page.locator("#tools-results")).not.toHaveAttribute("aria-live", /./); // the grid itself is not read out
+    await input.fill("ai directory");
+    await expect(page.locator('.directory-result[href$="ai-tools/directory/"]')).toHaveCount(1); // the Directory is searchable (Finding A)
+    await expect(page.locator('.directory-result[href$="tools/json-formatter/"]')).toHaveCount(0); // the older query's results are gone
+
+    await go("");
+    const hero = page.locator('#calculator-search input[name="q"]');
+    await hero.pressSequentially("stopwatch", { delay: 30 });
+    await expect(page.locator(".hero-results__link").first()).toHaveAttribute("href", `${siteRoot}tools/stopwatch/`);
+    await expect(page).toHaveURL((u) => u.pathname === siteRoot); // typing does not leave the home page
+    await hero.press("Escape");
+    await expect(page.locator(".hero-results__link")).toHaveCount(0);
+  });
+
   test("All Tools stays lit on every section page, category page and tool (owner findings 16 to 18)", async ({ page, go, isMobile }) => {
     test.skip(isMobile, "the desktop menu is checked here; the mobile menu uses the same script and links");
     const paths = ["calculators.html", "loans.html", "investment.html", "health.html", "converter.html", "time-tools.html", "developer-tools.html",
