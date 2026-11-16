@@ -49,3 +49,9 @@ export function productsFor(blueprint, limit = 6) {
 }
 
 export const directoryChecked = () => longDate(VERIFIED);
+
+/** a directory product by id ({ id, name } or null), for a link that names one (?product=) */
+export function productById(id) {
+    const p = AI_PRODUCTS.find((x) => x.id === id);
+    return p ? { id: p.id, name: p.name } : null;
+}

@@ -114,8 +114,86 @@
     color: var(--ink-muted);
 }
 
-.wb-unsure {
-    margin: -6px 0 20px;
+/* the start panel: describe, playbooks, open a saved pack (AI ecosystem programme 17 §5.1) */
+.wb-start {
+    margin: 0 0 20px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-page);
+}
+
+.wb-start > .calculator-form__button {
+    margin-top: 4px;
+}
+
+.wb-match-list {
+    display: grid;
+    gap: 8px;
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.wb-match {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+}
+
+.wb-match span {
+    overflow-wrap: anywhere;
+}
+
+.wb-match-list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target-size);
+}
+
+.wb-disclosure {
+    margin: 12px 0 0;
+    padding: 4px 0 0;
+    border-top: 1px solid var(--line);
+}
+
+.wb-disclosure > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.wb-playbook-list {
+    display: grid;
+    gap: 12px;
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.wb-playbook {
+    display: grid;
+    gap: 4px;
+}
+
+.wb-playbook__steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.wb-error:not(:empty) {
+    color: var(--state-error);
+    font-weight: 650;
 }
 
 .wb-product-list {
@@ -149,6 +227,52 @@
 .wb-more .calculator-form__grid,
 .wb-context .calculator-form__grid {
     margin-top: 8px;
+}
+
+/* the pack: "Prompts only" hides everything but the prompts (17 §5.3) */
+.wb-view {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 16px;
+    margin: 14px 0 0;
+    padding: 0;
+    border: 0;
+}
+
+.wb-view legend {
+    float: left;
+    margin-right: 8px;
+}
+
+.wb-view label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: var(--target-size);
+}
+
+[data-view="prompts"] .wb-info {
+    display: none;
+}
+
+.wb-stage--fold > summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 12px;
+    min-height: 44px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.wb-stage--fold[open] > summary {
+    margin-bottom: 8px;
+}
+
+.wb-next-tools {
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
 }
 
 /* the pack */
@@ -306,6 +430,12 @@
 
     .wb-prompt__text {
         font-size: 15px;
+    }
+
+    .wb-start > .calculator-form__button,
+    .wb-next-tools .calculator-form__button,
+    .wb-match .calculator-form__button {
+        width: 100%;
     }
 
 }
