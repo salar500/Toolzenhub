@@ -2466,6 +2466,46 @@ const catalog = [
     ===================================================== */
 
     {
+        id: "ai-workbench",
+        status: "published",
+        loader: () =>
+            import("../tools/ai-workbench/index.js"),
+        category: "ai",
+        toolType: "utility",
+        icon: "✦",
+        title: "AI Workbench",
+        description:
+            "Choose what you want to accomplish with AI and get a Work Pack: what to prepare, which AI product fits, a master prompt, staged prompts, refinement prompts and a quality checklist. Prepared in your browser; no AI service is called.",
+        relatedTools: ["prompt-builder", "context-pack-builder", "ai-answer-checklist"],
+        aliases: [
+            "ai workbench",
+            "ai work pack",
+            "ai workflow",
+            "ai workflow planner",
+            "which ai tool should i use",
+            "ai prompts for testing",
+            "ai image prompt",
+            "ai video prompt"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            download: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "AI Workbench: From an Idea to an AI Work Pack | ToolZen Hub",
+            description:
+                "Plan work with ChatGPT, Claude, Gemini or another AI product: pick an outcome and a task, answer a few questions, and get a preparation checklist, master prompt, stage prompts, refinements and a quality checklist. Runs in your browser."
+        }
+    },
+
+    {
         id: "prompt-builder",
         status: "published",
         loader: () =>

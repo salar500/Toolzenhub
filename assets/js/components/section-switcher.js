@@ -48,6 +48,7 @@ export const SECTION_GROUPS = {
         { label: "Edit pages", ids: ["pdf-pages", "pdf-marks"] }
     ],
     "ai-tools": [
+        { label: "Plan with AI", ids: ["ai-workbench"] },
         { label: "Briefs for an assistant", ids: ["prompt-builder", "bug-report-prompt", "context-pack-builder"] },
         { label: "Checking an answer", ids: ["ai-answer-checklist", "ai-answer-compare"] },
         { label: "Work and productivity", ids: ["meeting-notes-action-plan"] },

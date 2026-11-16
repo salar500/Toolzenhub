@@ -42,10 +42,10 @@ import { iconSvg, iconFor } from "../ui/icons.js";
    `title`, `blurb`, `icon` and `color` are card copy.
 ========================================================= */
 
-/* 2026-11-16 (owner): an AI experience leads. The AI Prompt Builder (guided, working) replaced the GST Calculator, the
-   second calculator entry, so the six cards stay one per tool section and the grid keeps whole rows. */
+/* 2026-11-16 (owner): an AI experience leads. The AI Workbench (Tool Pack 58) replaced the GST Calculator, the second
+   calculator entry, so the six cards stay one per tool section and the grid keeps whole rows. */
 const FEATURED_TOOLS = [
-    { id: "prompt-builder", title: "AI Prompt Builder", blurb: "Turn a rough idea into a clear prompt", icon: "spark", color: "purple" },
+    { id: "ai-workbench", title: "AI Workbench", blurb: "Plan a task and get the prompts for your AI", icon: "spark", color: "purple" },
     { id: "home-loan", title: "Home Loan Calculator", blurb: "Find the loan that fits your EMI budget", icon: "home", color: "pink" },
     { id: "time-zone-converter", title: "Time Zone Converter", blurb: "Convert a time between places", icon: "globe", color: "blue" },
     { id: "json-formatter", title: "JSON Formatter and Validator", blurb: "Format, check and minify JSON", icon: "code", color: "teal" },

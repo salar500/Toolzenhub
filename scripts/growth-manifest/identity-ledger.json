@@ -334,6 +334,13 @@
       "state": "active"
     },
     {
+      "id": "ai-workbench",
+      "module": "assets/js/tools/ai-workbench/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "balance-transfer",
       "module": "assets/js/calculators/balance-transfer/index.js",
       "moduleChanges": [],

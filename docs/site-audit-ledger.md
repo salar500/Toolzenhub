@@ -557,3 +557,23 @@ Owner prompt of 2026-11-16: fix five findings on the existing site, then build t
 | Appearance selector (dark mode plus two alternative styles) | Deferred by the owner: the light and dark themes and the tokens stay as they are | - |
 
 Rule change: rulebook 4.11 (Directory listed and counted with the section's tools), 5.1 (live global search), 7.12 (Explore order, hero results).
+
+### Stages 2 to 9: the AI Workbench (Tool Pack 58), built locally
+
+| Item | Status |
+|---|---|
+| Spec `docs/tool-packs/58-ai-workbench.md` (identity, AI-era test, taxonomy, compiler contract, product rule, screens, tests) | Written |
+| Taxonomy: 9 outcomes ("I'm not sure" suggests one from a description), 44 tasks in 9 blueprint families, roles per outcome, 5 experience levels, 4 depths | Built |
+| Compiler (`tools/ai-workbench/compiler.js`, pure): master prompt (labelled brief, or one descriptive paragraph for image, video and audio generators), stages by depth with a final review for detailed and multi-stage packs, refinement prompts, quality checklist, preparation, next steps, missing essentials as `[add: …]`, edit conflicts, Markdown export | Built |
+| Blueprints: testing (7), software (7), content (5), images (5), video (4), audio (4), research and data incl. SQL, Excel, Power BI and DAX (5, no-fabrication rule), improve (3), plan (4); four to six questions up front, details under "More details" | Built |
+| Products from the AI Directory only (category fit, an assistant only when its official summary names the work), not ranked; "Tool suitability not verified" when none fits; loaded only when a task is chosen | Built |
+| Page `/tools/ai-workbench/`: one form revealed in order, progress line, live pack, copy per prompt, copy all, download .md, start again; nothing stored | Built, not yet seen in a browser |
+| Catalog, sidebar group "Plan with AI", identity ledger, styles; Featured Tools now leads with the Workbench (replacing the interim Prompt Builder card) | Done |
+| Project Consistency Kits and saved Work Packs (Stage 11) | Not started: needs browser-local saving, off by default, with a Privacy page change |
+| Google Trends (Part 11) | No Trends dataset is in the repository and the prompt gives the terms without their values, settings or dates, so nothing was added to the Directory from it; candidates stay unverified until their official pages are checked |
+
+Tests: unit `ai-workbench.test.mjs` 17 of 17 (every task compiles empty and answered, essentials always reach a prompt, depth and experience, no fabrication, conflicts, products from the directory only, determinism, build-time markup); catalog, sections, search, relationships, AI tools and directory pins updated for the seventh AI tool (8 entries with the Directory). Not run: the build, the URL inventory (`search.test` "status follows the catalogs" fails until `npm run inventory:generate` runs on a fresh build), and the browser specs `ai-workbench.spec.js` and `navigation.spec.js`.
+
+### CHECKPOINT (2026-11-16, memory)
+
+Free memory stayed at about 550 MB (this session and the editor hold most of it), inside rule 10.3's "defer builds" band, so the Workbench is committed locally without a build. Nothing is pushed: `569d11d9` (Stage 1) and the Workbench commit wait for browser verification. Resume, in order: when free memory is above 700 MB, `npm run build:preview` (or `npm run build` for the inventory), `npm run inventory:generate`, re-run `search.test.mjs`; then one worker, subpath-desktop: `ai-workbench.spec.js`, `navigation.spec.js -g "home page|Featured"`, `ai-tools.spec.js`, then the same three on subpath-mobile; review the home page, All Tools search, the AI Tools page and the Workbench at 1280 and 390 px; update the DOM baselines that the hero status line and the All Tools status line change (`home-main`, `tools-directory`) after looking at the diffs; then push the branch.

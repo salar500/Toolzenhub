@@ -1,0 +1,311 @@
+/* =========================================================
+   ToolZen Hub
+   AI Workbench (Tool Pack 58)
+
+   Only what the shared tool styles and ai-tools.css do not give:
+   the progress line, the outcome and task choices, the product
+   list, the prompt blocks and the stage cards. Colours come from
+   the design tokens, so the light and dark themes both work. The
+   chosen option is marked by its own radio and a thicker border,
+   never by colour alone. Loaded after ai-tools.css.
+========================================================= */
+
+/* progress: four words, the current one bold and marked aria-current */
+.wb-progress {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+    counter-reset: wb-step;
+    font-size: 14px;
+    color: var(--ink-muted);
+}
+
+.wb-progress li {
+    counter-increment: wb-step;
+}
+
+.wb-progress li::before {
+    content: counter(wb-step) ". ";
+}
+
+.wb-progress li[aria-current="step"] {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.wb-progress li[data-done="true"]::after {
+    content: " ✓";
+}
+
+/* the form's parts */
+.wb-group {
+    margin: 0 0 20px;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+}
+
+.wb-group > legend {
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.wb-choices {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    gap: 10px;
+}
+
+.wb-choices--tasks {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+}
+
+.wb-choice,
+.wb-product {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 10px;
+    align-items: start;
+    min-height: 44px;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+    color: var(--ink);
+    cursor: pointer;
+}
+
+.wb-choice input,
+.wb-product input {
+    grid-row: span 2;
+    width: 18px;
+    height: 18px;
+    margin: 2px 0 0;
+    accent-color: var(--accent);
+}
+
+.wb-choice:has(input:checked),
+.wb-product:has(input:checked) {
+    border-color: var(--action);
+    box-shadow: inset 0 0 0 1px var(--action);
+}
+
+.wb-choice:has(input:focus-visible),
+.wb-product:has(input:focus-visible) {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.wb-choice__title {
+    font-weight: 650;
+    line-height: 1.35;
+}
+
+.wb-choice__text {
+    grid-column: 2;
+    margin-top: 2px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ink-muted);
+}
+
+.wb-unsure {
+    margin: -6px 0 20px;
+}
+
+.wb-product-list {
+    display: grid;
+    gap: 8px;
+}
+
+.wb-product span {
+    overflow-wrap: anywhere;
+}
+
+.wb-context,
+.wb-more {
+    grid-column: 1 / -1;
+    margin: 4px 0 16px;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-page);
+}
+
+.wb-context > summary,
+.wb-more > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.wb-more .calculator-form__grid,
+.wb-context .calculator-form__grid {
+    margin-top: 8px;
+}
+
+/* the pack */
+.wb-pack__title {
+    margin: 0 0 12px;
+    font-size: 1.25rem;
+}
+
+.wb-pack__title:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 4px;
+}
+
+.wb-part {
+    margin-top: 22px;
+}
+
+.wb-part h3 {
+    margin: 0 0 8px;
+    font-size: 1.0625rem;
+}
+
+.wb-part ul,
+.wb-part ol {
+    margin: 6px 0 0;
+    padding-left: 20px;
+    line-height: 1.55;
+}
+
+.wb-sub {
+    margin: 10px 0 0;
+    font-weight: 650;
+    font-size: 14px;
+}
+
+.wb-alert {
+    margin: 12px 0 0;
+    padding: 10px 14px;
+    border: 1px solid var(--state-warning-line);
+    border-left-width: 6px;
+    border-radius: 10px;
+    background: var(--state-warning-soft);
+    color: var(--ink);
+    font-size: 14px;
+}
+
+.wb-prompt {
+    margin-top: 10px;
+}
+
+.wb-prompt__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.wb-prompt__title {
+    margin: 0;
+    font-size: 15px;
+}
+
+.wb-prompt__text {
+    margin: 6px 0 0;
+    padding: 12px 14px;
+    max-height: 420px;
+    overflow: auto;
+    border: 1px solid var(--line-control);
+    border-radius: 10px;
+    background: var(--surface-sunken);
+    color: var(--ink);
+    font-family: ui-monospace, "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 14px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.wb-prompt__text:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.wb-stage-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin: 0 0 6px;
+    padding-left: 20px;
+}
+
+.wb-stage {
+    margin-top: 16px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+    scroll-margin-top: 90px;
+}
+
+.wb-stage__name {
+    margin: 0 0 8px;
+    font-size: 1rem;
+}
+
+.wb-stage__facts {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+}
+
+.wb-stage__facts div {
+    display: grid;
+    grid-template-columns: minmax(90px, max-content) 1fr;
+    gap: 10px;
+}
+
+.wb-stage__facts dt {
+    font-weight: 650;
+    color: var(--ink-muted);
+}
+
+.wb-stage__facts dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.wb-checklist {
+    list-style: none;
+    padding-left: 0;
+}
+
+.wb-checklist label {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: start;
+    min-height: 32px;
+}
+
+.wb-checklist input {
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    accent-color: var(--accent);
+}
+
+@media (max-width: 599px) {
+
+    .wb-stage__facts div {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .wb-prompt__text {
+        font-size: 15px;
+    }
+
+}
