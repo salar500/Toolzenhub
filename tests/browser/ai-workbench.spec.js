@@ -54,19 +54,23 @@ test.describe("AI Workbench", () => {
 
     await page.locator("#wb-reset").click();
     await expect(page.locator("#wb-tasks")).toBeHidden();
-    await expect(page.locator("input[name='wb-outcome']").first()).toBeFocused();
+    await expect(page.locator("#wb-describe")).toBeFocused(); // Start again returns to the first control, the describe box (AI ecosystem programme 17 §5.2)
 
     expect(watch.external, "nothing leaves the site").toEqual([]);
     expect(watch.pageErrors).toEqual([]);
   });
 
-  test("not sure: a description suggests an outcome; an image edit reports a conflict; More details stays closed; no overflow", async ({ page, go, watch }) => {
+  test("not sure: a description lists the closest tasks to choose from; an image edit reports a conflict; More details stays closed; no overflow", async ({ page, go, watch }) => {
     await open(page, go);
     await page.getByLabel("I'm not sure. Help me choose").check();
+    await expect(page.locator("#wb-describe")).toBeFocused();
     await page.locator("#wb-describe").fill("edit a photo of my shop");
     await page.locator("#wb-suggest").click();
+    await expect(page.locator("#wb-matches")).toContainText("Best match");
+    await expect(page.getByLabel("Create images")).not.toBeChecked(); // nothing is chosen for the visitor (AI ecosystem programme 17 §5.2)
+    await page.locator("[data-use-task='image-edit']").click();
     await expect(page.getByLabel("Create images")).toBeChecked();
-    await page.getByLabel("Edit an existing image").check();
+    await expect(page.getByLabel("Edit an existing image")).toBeChecked();
     await expect(page.locator("#wb-q-change")).toBeVisible();
     await page.locator("#wb-q-source").fill("our shop front");
     await page.locator("#wb-q-change").fill("brighten the sign");

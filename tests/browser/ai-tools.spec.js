@@ -7,7 +7,7 @@ import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.m
 const TOOLS = [
   { id: "prompt-builder", prefix: "pb", first: "goal", essentials: 2, title: "AI Prompt Builder", heading: "# Task" },
   { id: "bug-report-prompt", prefix: "bug", first: "observed", essentials: 3, title: "Bug Report to Debugging Prompt", heading: "# Debugging task" },
-  { id: "context-pack-builder", prefix: "cp", first: "project", essentials: 4, title: "Project Context Pack Builder", heading: "# Project context:" }
+  { id: "context-pack-builder", prefix: "cp", first: "project", essentials: 4, title: "AI Context Bridge", heading: "# Project context:" }
 ];
 
 test.describe("AI Tools", () => {

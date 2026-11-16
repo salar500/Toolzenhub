@@ -206,6 +206,7 @@
 }
 
 .wb-context,
+.wb-sheet,
 .wb-more {
     grid-column: 1 / -1;
     margin: 4px 0 16px;
@@ -216,6 +217,7 @@
 }
 
 .wb-context > summary,
+.wb-sheet > summary,
 .wb-more > summary {
     min-height: 44px;
     display: flex;
@@ -225,6 +227,7 @@
 }
 
 .wb-more .calculator-form__grid,
+.wb-sheet .calculator-form__grid,
 .wb-context .calculator-form__grid {
     margin-top: 8px;
 }

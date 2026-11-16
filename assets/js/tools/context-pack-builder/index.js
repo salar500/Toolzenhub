@@ -53,7 +53,7 @@ export const CONFIG = {
     sectionText: "Four fields are essential. Decisions, completed work and known traps are what save the most repeated explaining. The pack is written as you type, in the form you choose first.",
 
     fields: [
-        { key: "mode", label: "What is it for", kind: "select", options: MODES, hint: "The same facts, written for the job. Changing it never clears a field." },
+        { key: "mode", label: "What is it for", kind: "select", options: MODES, hint: "Project brief: everything, for the start of a project. Handoff: short, to continue in another AI product. Session update: what changed, for a new chat. Coding agent file: instructions for a coding assistant. Changing it never clears a field." },
         { key: "project", label: "Project name", kind: "text", required: true, hint: "What you call it.", placeholder: "ToolZen Hub" },
         { key: "purpose", label: "What it does, and for whom", required: true, rows: 3, hint: "Two or three sentences: the product, its users and the problem it solves.", placeholder: "A website of free calculators and browser tools for people in India: loans, investment, tax, time, developer and PDF tools. Everything runs in the browser; there is no backend." },
         { key: "role", label: "My role", kind: "text", hint: "Your role and level, so the AI pitches its answers right.", placeholder: "Solo developer and product owner" },
@@ -273,8 +273,8 @@ export const CONFIG = {
 
     useWith: [
         "Paste the pack as the first message of a new chat, or save it where your AI product reads project instructions (a project's instructions, a CLAUDE.md or AGENTS.md file, a custom GPT, a Gem).",
-        "Moving to another product: choose Hand off to another AI. It stays short, so the new assistant reads all of it.",
-        "Hitting a chat's limit or starting a fresh chat: choose Continue a session.",
+        "Moving to another product: choose Handoff to another AI. It stays short, so the new assistant reads all of it.",
+        "Hitting a chat's limit or starting a fresh chat: choose Session update.",
         "With a coding assistant: choose Coding agent file and save it in your repository under the file name your assistant reads.",
         "Remove passwords, keys and personal data before you paste a pack anywhere."
     ],

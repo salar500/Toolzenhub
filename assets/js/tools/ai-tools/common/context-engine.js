@@ -16,10 +16,10 @@ import { section, bullets, lines, document as doc, wordCount } from "./brief-eng
 import { sectionsOf, keyOf } from "./pack-format.js";
 
 export const MODES = Object.freeze([
-    { value: "brief", label: "Project brief: everything, for the start of a project" },
-    { value: "handoff", label: "Hand off to another AI: short, to continue in another product" },
-    { value: "session", label: "Continue a session: what changed, for a new chat" },
-    { value: "agent", label: "Coding agent file: instructions for a coding assistant" }
+    { value: "brief", label: "Project brief" },
+    { value: "handoff", label: "Handoff to another AI" },
+    { value: "session", label: "Session update" },
+    { value: "agent", label: "Coding agent file" }
 ]);
 
 /* the sections, in order; `in` says which modes show them, `cut` caps a list in a mode (latest items first kept) */

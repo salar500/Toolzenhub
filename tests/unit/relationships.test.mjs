@@ -149,8 +149,8 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     // (curated first, then the rest of the section in catalog order: the checklist joins the briefs' lists and they join its)
     assert.deepEqual(toolIds(rel.getRelatedTools("prompt-builder")), ["bug-report-prompt", "context-pack-builder", "ai-workbench", "ai-answer-checklist", "ai-answer-compare", "meeting-notes-action-plan"]);
     assert.deepEqual(toolIds(rel.getRelatedTools("bug-report-prompt")), ["context-pack-builder", "prompt-builder", "ai-workbench", "ai-answer-checklist", "ai-answer-compare", "meeting-notes-action-plan"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("context-pack-builder")), ["prompt-builder", "bug-report-prompt", "ai-workbench", "ai-answer-checklist", "ai-answer-compare", "meeting-notes-action-plan"]);
-    assert.deepEqual(toolIds(rel.getRelatedTools("ai-answer-checklist")), ["prompt-builder", "context-pack-builder", "ai-workbench", "bug-report-prompt", "ai-answer-compare", "meeting-notes-action-plan"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("context-pack-builder")), ["ai-workbench", "prompt-builder", "bug-report-prompt", "ai-answer-checklist", "ai-answer-compare", "meeting-notes-action-plan"]); // AI Context Bridge: curated Workbench first (AI ecosystem programme, 2026-11-16)
+    assert.deepEqual(toolIds(rel.getRelatedTools("ai-answer-checklist")), ["ai-answer-compare", "ai-workbench", "prompt-builder", "bug-report-prompt", "context-pack-builder", "meeting-notes-action-plan"]); // AI Output Reviewer: curated Compare first (AI ecosystem programme, 2026-11-16)
     assert.deepEqual(toolIds(rel.getRelatedTools("ai-answer-compare")), ["ai-answer-checklist", "prompt-builder", "ai-workbench", "bug-report-prompt", "context-pack-builder", "meeting-notes-action-plan"]);
     assert.deepEqual(toolIds(rel.getRelatedTools("meeting-notes-action-plan")), ["prompt-builder", "context-pack-builder", "ai-workbench", "bug-report-prompt", "ai-answer-checklist", "ai-answer-compare"]);
     // the AI Workbench (Tool Pack 58) joins each list after the curated entries, by catalog order, and curates its own

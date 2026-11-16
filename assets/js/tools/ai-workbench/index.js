@@ -63,6 +63,9 @@ const FILE_SCHEMA = {
 
 const routeOf = (id) => ROUTES.tool("tools", id);
 
+/* a task's title without the "Testing: " grouping prefix, starting with a capital */
+const taskLabel = (title) => title.replace(/^Testing: /, "").replace(/^./, (c) => c.toUpperCase());
+
 
 /* ---------- static markup (built into the page) ---------- */
 
@@ -72,7 +75,7 @@ function playbookList() {
                                 <li class="${P}-playbook">
                                     <strong>${escapeHTML(p.title)}</strong>
                                     <span class="ai-note">${escapeHTML(p.purpose)}</span>
-                                    <span class="${P}-playbook__steps">${p.steps.map((s, i) => `<button type="button" class="calculator-form__button calculator-form__button--secondary ${P}-step" data-playbook="${escapeHTML(p.id)}" data-step="${i}">${p.steps.length > 1 ? `Step ${i + 1}: ` : "Open: "}${escapeHTML(getTask(s.task)?.title.replace(/^Testing: /, "") ?? s.task)}</button>`).join("")}</span>
+                                    <span class="${P}-playbook__steps">${p.steps.map((s, i) => `<button type="button" class="calculator-form__button calculator-form__button--secondary ${P}-step" data-playbook="${escapeHTML(p.id)}" data-step="${i}">${p.steps.length > 1 ? `Step ${i + 1}: ` : "Open: "}${escapeHTML(taskLabel(getTask(s.task)?.title ?? s.task))}</button>`).join("")}</span>
                                 </li>`).join("");
 
 }
@@ -160,7 +163,7 @@ export function markup() {
                         <p class="calculator-section__description">Only what changes the result. Fields marked essential go into the prompt; leave the rest empty if you do not know.</p>
                         <div class="calculator-form__grid" id="${P}-questions"></div>
 
-                        <details class="${P}-context" id="${P}-consistency" hidden>
+                        <details class="${P}-sheet" id="${P}-consistency" hidden>
                             <summary>Keep the same across every output (optional)</summary>
                             <p class="ai-note">Written once, repeated in the master prompt and in every stage, so a series of images, shots or recordings stays consistent.</p>
                             <div class="calculator-form__grid">${CONSISTENCY.map((c) => fieldShell({ id: `${P}-cs-${c.key}`, label: c.label, hint: CONSISTENCY_HINTS[c.key], control: `<input id="${P}-cs-${c.key}" class="calculator-form__input" type="text" maxlength="300" autocomplete="off" data-cs="${c.key}" aria-describedby="${hintIdOf(`${P}-cs-${c.key}`)}">` })).join("")}</div>
@@ -475,7 +478,15 @@ export function init(app = document.getElementById("app")) {
         });
 
         state.pack = pack;
-        body.innerHTML = packHTML(pack, state.offered, state.view, state.blueprint.style !== "descriptive");
+
+        /* A field's change event fires on blur, which happens on the mousedown of a click on a button or link in the pack:
+           redrawing an unchanged pack then would replace the element under the pointer and lose the click. Redraw only
+           when the pack (or the view) really changed. */
+        const signature = `${state.view}\n${pack.markdown}`;
+        if (signature !== state.drawn) {
+            body.innerHTML = packHTML(pack, state.offered, state.view, state.blueprint.style !== "descriptive");
+            state.drawn = signature;
+        }
         body.dataset.view = state.view;
         setStep(pack.state === "empty" ? 3 : 4);
 
@@ -663,6 +674,7 @@ export function init(app = document.getElementById("app")) {
         state.blueprint = null;
         state.taskId = "";
         body.innerHTML = `<p class="ai-check__line">Now choose the task.</p>`;
+        state.drawn = "";
         setStep(2);
 
     }
@@ -692,7 +704,7 @@ export function init(app = document.getElementById("app")) {
 
     const matchCard = (t) => `
                             <li class="${P}-match">
-                                <span><strong>${escapeHTML(t.title.replace(/^Testing: /, ""))}</strong> <span class="ai-note">${escapeHTML(getOutcome(t.outcome)?.title ?? "")}</span></span>
+                                <span><strong>${escapeHTML(taskLabel(t.title))}</strong> <span class="ai-note">${escapeHTML(getOutcome(t.outcome)?.title ?? "")}</span></span>
                                 <button type="button" class="calculator-form__button calculator-form__button--secondary" data-use-task="${escapeHTML(t.id)}">Use this task</button>
                             </li>`;
 
@@ -809,6 +821,7 @@ export function init(app = document.getElementById("app")) {
         note("suggestion", "");
         note("open-error", "");
         body.innerHTML = `<p class="ai-check__line">${EMPTY_LINE}</p>`;
+        state.drawn = "";
         setStep(1);
         announce("Cleared.", 0);
         $("describe").focus();
@@ -911,7 +924,7 @@ export function init(app = document.getElementById("app")) {
     const brought = take("context");
     if (brought?.text) {
         $("project").value = String(brought.text).slice(0, CONTEXT_LIMIT);
-        form.querySelector(`.${P}-context:not(#${P}-consistency)`)?.setAttribute("open", "");
+        form.querySelector(`.${P}-context`)?.setAttribute("open", "");
         note("suggestion", "Project context brought from the AI Context Bridge. Choose a task; it is used in the master prompt.");
         announce("Project context brought from the AI Context Bridge.", 0);
     }

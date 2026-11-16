@@ -110,6 +110,7 @@
 
 .ai-actions {
     margin-top: 12px;
+    flex-wrap: wrap; /* a third action (the Context Bridge, the Output Reviewer) wraps instead of widening the page */
 }
 
 .calculator-info h3 {
