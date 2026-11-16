@@ -2,7 +2,18 @@
 
 Rules: `docs/product-decision-rules.md` section 11. GitHub Pages is the development preview; Hostinger production (`toolzenhub.in`) is manual and was not touched by any record here.
 
-## Update 2026-11-15 (release candidate ff74baf0, built, not deployed; supersedes f994b41c)
+## Update 2026-11-16 (release candidate 3e5ce4cd, built, not deployed; supersedes ff74baf0)
+
+| Item | Record |
+|---|---|
+| File | `C:\Users\DELL\Documents\ToolZenHub-production-package\toolzenhub-production-3e5ce4cd.zip`, 16,578,544 bytes, 1,304 entries |
+| SHA-256 | `56589da8a5b5a369ec602b7816e0561e3cf91896354e30e55885e26793559ca6` |
+| Source | `3e5ce4cd`, branch `feature/unified-ecosystem-workspace`; `npm run build`, clean tree, 2026-11-16 |
+| Checks | byte-identical to `dist/`, zip test clean, production canonicals (ShopLite noindex by design), sitemap 673 URLs each with a file, robots, no secrets or development files; static checks on both builds; root smoke on 13 pages at 1280 and 390 px |
+| Tests | unit 3,983 of 3,987 (0 failed, 4 skipped); subpath-desktop, subpath-mobile and root-desktop complete (details `docs/production-handoff.md` section 7); visual 145 baselines re-recorded after review; SEO baseline and link crawl by chunked equivalents (specs not run end to end) |
+| Production deployment | NOT DONE (owner's manual step; guide `docs/production-handoff.md`) |
+
+## Update 2026-11-15 (release candidate ff74baf0, built, not deployed; supersedes f994b41c; superseded by 3e5ce4cd)
 
 | Item | Record |
 |---|---|

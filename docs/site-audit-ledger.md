@@ -522,6 +522,10 @@ Resume from here, in this order:
 3. **Rebuild the production package** from the final commit (`ff74baf0` package is outdated: the AI Directory card, button and test changes came after), verify (zip vs dist, canonicals, sitemap, robots, smoke), update `docs/production-handoff.md` and `docs/quality/RELEASE_LEDGER.md`, commit, push.
 4. Give the READY / NOT READY decision.
 
+### Regression completed (2026-11-16, code at 3e5ce4cd)
+
+Resumed from the checkpoint above. Visual: all 145 differences (desktop 55, mobile 55, tablet 35) compared with their old images before re-recording (ccfdbea2, 0ba95aed, a1f4353d); every one traces to an intended change of this phase or to the phone breadcrumb of 997990b0, whose mobile and tablet baselines had not been re-recorded then. Link crawl: run with the spec's per-page checks in three foreground chunks, 678 entries, 0 failures, every target 200, no orphan; the spec now allows the AI Directory's ?audience= and ?category= links (3e5ce4cd). Unit: 3,983 of 3,987, 0 failed. Package `toolzenhub-production-3e5ce4cd.zip` built and verified (see `docs/quality/RELEASE_LEDGER.md`). Not deployed.
+
 ### Production package status (2026-11-12, built from a3b498d, NOT deployed)
 
 - `npm run build` (dist/, root paths) gives 677 pages and files; packaged by Python zipfile (forward-slash entries, .htaccess included) as toolzenhub-production-a3b498d.zip (1,297 files, 16.4 MB) in C:/Users/DELL/Documents/ToolZenHub-production-package/, outside the repository.

@@ -1,22 +1,22 @@
-# Production handoff: toolzenhub-production-ff74baf0.zip (2026-11-15)
+# Production handoff: toolzenhub-production-3e5ce4cd.zip (2026-11-16)
 
-The owner deploys this by hand. Nothing here has been uploaded, and Hostinger, DNS and `main` were not touched. Release records live in `docs/quality/RELEASE_LEDGER.md`; test evidence in `docs/site-audit-ledger.md` (phase "master prompt of 2026-11-15"). This package replaces `toolzenhub-production-f994b41c.zip`, which is outdated.
+The owner deploys this by hand. Nothing here has been uploaded, and Hostinger, DNS and `main` were not touched. Release records live in `docs/quality/RELEASE_LEDGER.md`; test evidence in `docs/site-audit-ledger.md` (phase "master prompt of 2026-11-15"). This package replaces `toolzenhub-production-ff74baf0.zip` and `toolzenhub-production-f994b41c.zip`, which are outdated.
 
 ## 1. The package
 
 | Item | Value |
 |---|---|
-| File | `toolzenhub-production-ff74baf0.zip` |
+| File | `toolzenhub-production-3e5ce4cd.zip` |
 | Location | `C:\Users\DELL\Documents\ToolZenHub-production-package\` |
-| SHA-256 | `daf13ee0d97ff7e34631c32b19e7f5499e216183ef4504e38f3e2b4977d022c0` |
-| Size | 16,578,682 bytes (15.8 MB) |
+| SHA-256 | `56589da8a5b5a369ec602b7816e0561e3cf91896354e30e55885e26793559ca6` |
+| Size | 16,578,544 bytes (15.8 MB) |
 | Entries | 1,304 files: 675 HTML pages, the assets, `.htaccess`, `robots.txt`, `sitemap.xml`, `favicon.svg`, `404.html` |
-| Source | `ff74baf0` on `feature/unified-ecosystem-workspace`, built with `npm run build` from a clean tree |
-| Built | 2026-11-15 |
+| Source | `3e5ce4cd` on `feature/unified-ecosystem-workspace`, built with `npm run build` from a clean tree |
+| Built | 2026-11-16 |
 
 Check the download before uploading (PowerShell): `Get-FileHash <path-to-zip> -Algorithm SHA256` must print the SHA-256 above.
 
-What is new since `f994b41c`: the AI products directory (`/ai-tools/directory/`), the Photo Metadata Viewer and Remover (`/tools/image-metadata/`), "Learn and check" links on 49 tools and labs, the time-zone city and country search, lab exercise lists in number order, and the layout fixes (XIRR rows, calculator cards, footer gap, home spacing, timer finish sound, button hover). Details: `docs/site-audit-ledger.md`.
+What is new since `f994b41c`: the AI Directory (`/ai-tools/directory/`, shown as a tool card on the AI Tools page), the Photo Metadata Viewer and Remover (`/tools/image-metadata/`), "Learn and check" links on 49 tools and labs, the time-zone city and country search, lab exercise lists in number order, and the layout fixes (XIRR rows, calculator cards, footer gap, home spacing, timer finish sound, steady button hover). Details: `docs/site-audit-ledger.md`.
 
 ## 2. What was verified on this package
 
@@ -35,7 +35,7 @@ What is new since `f994b41c`: the AI products directory (`/ai-tools/directory/`)
 
 ## 4. Replace the site
 
-1. Upload `toolzenhub-production-ff74baf0.zip` to the web root with File Manager.
+1. Upload `toolzenhub-production-3e5ce4cd.zip` to the web root with File Manager.
 2. Remove the old site files from the web root (they are in your backup), keeping anything that is not the site: the `.htaccess` you are merging, `.well-known` if present, and any other folder you know belongs to something else. Removing the old files avoids leftovers from the previous release, which had fewer pages.
 3. Extract the zip **into the web root itself**. Afterwards `index.html`, `assets/`, `tools/`, `calculators/`, `practice-labs/`, `sitemap.xml` and `robots.txt` must sit directly in the web root, not inside an extra folder.
 4. Put the merged `.htaccess` in place (section 3, step 3).
@@ -69,9 +69,18 @@ Open each in a normal and in a private window; on a phone for the last few.
 
 If a check fails and cannot be fixed at once: remove the new files from the web root, extract your backup archive (section 3, step 2) back into it, restore the old `.htaccess`, purge the cache, and open the home page to confirm the old site is back. Nothing outside the web root was changed by the steps above, so nothing else needs undoing.
 
-## 7. Known limitations of this release candidate
+## 7. Test results on this code (all foreground, one worker)
 
-- **The full browser regression is incomplete on this code.** The sequential `subpath-desktop` run was stopped by the system for low memory after 4 of 22 batches (447 passed, 2 failed; both failures were caused by this phase, fixed in `ff74baf0` and their files re-run, 52 of 52). `subpath-mobile`, `root-desktop`, the visual projects and the browser link crawl were NOT run on this code. Instead, every spec touched by this phase was run and passes (time-zone converter 45, lab workspace 18 desktop and mobile, lab specs 142, Test Design Lab 21, image metadata 12 desktop and mobile, Image Tools and navigation counts 25, base64 and wide tables 52), with static checks and the root smoke test above. Visual baselines of the home page, calculators and labs are expected to differ (intended layout changes) and were not re-recorded. Finishing the regression needs more free memory, or Claude Code started with `CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1`.
-- **Unit tests:** 3,987 tests, 3,980 passed, 4 skipped, 3 failed on deliberate pins of the new tool and page; those were updated and their files pass 41 of 41.
+- **Unit:** 3,987 tests, 3,983 passed, 0 failed, 4 skipped (structural).
+- **subpath-desktop:** every spec file passes, including the axe accessibility scan and tablet layout of every page (1,348 tests) and the smoke test of every page (689).
+- **subpath-mobile:** every spec file passes, including the same 1,348 and 689.
+- **root-desktop (production paths):** 829 of 829 (140 portable tests and 689 smoke).
+- **Visual:** desktop, mobile and tablet, light and dark: 145 baselines re-recorded only after each difference was compared with its old image; all differences trace to this release's intended changes or to the approved phone breadcrumb of `997990b0`.
+- **SEO baseline and link crawl:** each is a single test longer than one foreground run on this laptop, and background runs are stopped by the system for low memory. Both were run with the specs' own checks in foreground chunks over every page: SEO facts unchanged on all 672 earlier pages except visible-text size on 54 (intended); the crawl visited all 678 entries with 0 failures, every link target answers 200, no orphan page. The two specs themselves were not run end to end (honest limitation, alternative evidence above).
+- **Static:** URL inventory (674 live pages), links, assets with exact case, SEO, on both builds.
+
+## 8. Known limitations
+
 - `main` does not contain this release: production would be ahead of `main` until the branch is merged, which is a separate decision.
 - Deferred, not part of this package: PDF to Images (a new dependency of about 1 MB, needs its own review), compress PDF, protect/unlock, OCR, WebP and HEIC metadata, theme palettes, saved lab progress. JSON Schema Validator stays unbuilt (a permission decision, recorded in its tool pack).
+- Real-device checks (an Android phone, Safari/WebKit) were not done here; the browser tests use Chrome with phone and tablet emulation.
