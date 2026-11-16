@@ -46,4 +46,20 @@ As `15` §4, with these concrete files: `tests/unit/ai-ecosystem.test.mjs` (pack
 | Date | Step | Result | Next |
 | --- | --- | --- | --- |
 | 2026-11-16 | Phase 1 research (`00`-`15`) | committed 5e8c39ee | design freeze |
-| 2026-11-16 | Phase 1 design freeze (`16`-`19`) | this commit | B1 |
+| 2026-11-16 | Phase 1 design freeze (`16`-`19`) | 230d2e0d | B1 |
+| 2026-11-16 | B1-B2 file format, hand-off, task index, playbooks, compiler, two tasks | 2037a41f | B3 |
+| 2026-11-16 | B3 Workbench UI | d58822d4 | B4 |
+| 2026-11-16 | B4-B6 brief page hooks, Context Bridge, Output Reviewer | 977e1776 | B7 |
+| 2026-11-16 | B7-B8 AI Home, Directory links, catalog, sidebar | 41888734 | B9 |
+| 2026-11-16 | B9 rulebook 4.11, Tool Packs 56 and 58, this log | next commit | Phase 3 |
+
+## 5. Deviations from the frozen design (recorded with their evidence)
+
+| Design | Built | Why |
+| --- | --- | --- |
+| `17` §4: a common start "Which AI product?" linking the Directory | replaced by "Write or reply to an email" | an owner decision of 2026-11-16, pinned in `tests/unit/ai-directory.test.mjs`, allows the AI Tools page to link the Directory only by its card and sidebar entry |
+| `17` §7: any pasted request gives the "Review of an AI answer" | the review sections appear when the request has requested items (Requirements or Format lines, bullets, or must/should sentences) or a format, leftover, contradiction or review-type finding; otherwise the output is the old evidence checklist | a plain question has nothing to check against; keeps the tool's verified behaviour for that case |
+| `17` §6: mode as a radio group | a select, the first field | the shared brief page draws selects; same choices and wording |
+| `17` §6: "Use in the Workbench" button | "Copy and use in the Workbench" action plus a link line to the Workbench | the shared page's actions copy; the hand-off is put on the same click |
+| `17` §5.2: matches announce "N tasks match." | "N tasks match. Choose one." | clearer next step |
+| `14` §6: performance budgets | to be measured in Phase 3 | |
