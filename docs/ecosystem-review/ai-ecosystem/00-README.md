@@ -1,6 +1,6 @@
 # AI ecosystem programme, Phase 1: research and specification
 
-Status: **Phase 1 research complete, awaiting owner review** (2026-11-16). Nothing here is approved product policy until the owner approves it (rulebook 15, item 3). No application code, route, registry, style or test was changed in Phase 1.
+Status: **Phase 1 complete and design frozen** (2026-11-16). The owner's master directive of 2026-11-16 delegated routine product and design decisions; they are resolved in `16-DECISION-REGISTER.md`, and `17-FINAL-DESIGN.md` is the build specification (it wins where `06`-`15` differ). Programme checkpoint: `19-IMPLEMENTATION-MAP-AND-FREEZE.md` section 4.
 
 Programme: AI Tools only (rulebook 4.11). Phase 1 research and specification (this folder), Phase 2 development, Phase 3 AI-only testing and production readiness. The other six ecosystems are out of scope and were not audited.
 
@@ -34,14 +34,10 @@ Repository state when the research started: branch `feature/unified-ecosystem-wo
 | 13 | Prompt engineering research | `12-PROMPT-RESEARCH.md` |
 | 14 | Micro-level UX specification | `13-UX-SPEC.md` |
 | 15 | Technical feasibility | `14-TECHNICAL-FEASIBILITY.md` |
-| 16, 17 | Production scope, Phase 2 and Phase 3 handoff, owner decisions | `15-SCOPE-AND-HANDOFFS.md` |
+| 16, 17 | Production scope, Phase 2 and Phase 3 handoff | `15-SCOPE-AND-HANDOFFS.md` |
+| (decisions) | Final product decision register (D1-D16) | `16-DECISION-REGISTER.md` |
+| (design) | Final design: pages, states, microcopy, compiler rules, data models, responsive, themes, accessibility, privacy | `17-FINAL-DESIGN.md` |
+| (matrix) | Task blueprint and prompt matrix, permutations | `18-TASK-BLUEPRINT-MATRIX.md` |
+| (map) | Implementation map, design-freeze gate, checkpoint log | `19-IMPLEMENTATION-MAP-AND-FREEZE.md` |
 
-## Owner decisions needed before Phase 2
-
-Listed with recommendations in `15-SCOPE-AND-HANDOFFS.md` section 1 (D1 to D7). The two that change visible names or shared templates: the AI Home launcher on the generated section page (D1) and the retitling of two tools (D2, D3). Everything else in the Phase 2 scope fits rulebook 4.11 as written.
-
-## Checkpoint (for resuming)
-
-- Completed: all 17 deliverables, written in this folder.
-- Not done, by design: hands-on walk-throughs inside competitor products (need accounts and paid plans; see `01` limitations); search-volume data (none available; rule 12.4).
-- Next exact task: owner review of `15-SCOPE-AND-HANDOFFS.md` section 1, then the Phase 2 prompt.
+Not done, by design: hands-on walk-throughs inside competitor products (need accounts and paid plans; see `01` limitations); search-volume data (none available; rule 12.4).

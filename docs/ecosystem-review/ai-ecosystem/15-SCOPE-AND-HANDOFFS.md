@@ -1,6 +1,6 @@
 # 15. Production scope, owner decisions, Phase 2 and Phase 3 handoffs
 
-## 1. Owner decisions (recommendations; none is approved until the owner says so)
+## 1. Owner decisions (superseded: resolved under the owner's delegation in `16-DECISION-REGISTER.md`; kept as the research trail)
 
 | Id | Decision | Recommendation | If declined |
 | --- | --- | --- | --- |
