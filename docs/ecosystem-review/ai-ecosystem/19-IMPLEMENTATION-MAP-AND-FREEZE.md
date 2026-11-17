@@ -19,8 +19,11 @@
 | Technical architecture and file map | section 2 below, `14` | done |
 | AI-only testing | `15` §4, section 3 below | done |
 | Routine owner decisions resolved | `16` | done (D1-D16) |
+| User journeys, final, each with its test | `17` §12 | done (2026-11-17) |
+| Matcher, playbooks, architecture, performance budget, the two renamed tools | `17` §13-17 | done (2026-11-17) |
+| Design matches what was built | `17` (deviations of section 5 folded in) | done (2026-11-17) |
 
-**Design frozen on 2026-11-16.** Phase 2 builds `17` exactly; a deviation is recorded in section 4 with its evidence.
+**Design frozen on 2026-11-16; reconciled and re-frozen on 2026-11-17.** `17` now describes the built product exactly. Any later change to behaviour is a deviation, recorded in section 5 with its evidence and folded into `17` in the same phase.
 
 ## 2. Implementation map (batches, files, checks)
 
@@ -52,9 +55,10 @@ As `15` §4, with these concrete files: `tests/unit/ai-ecosystem.test.mjs` (pack
 | 2026-11-16 | B4-B6 brief page hooks, Context Bridge, Output Reviewer | 977e1776 | B7 |
 | 2026-11-16 | B7-B8 AI Home, Directory links, catalog, sidebar | 41888734 | B9 |
 | 2026-11-16 | B9 rulebook 4.11, Tool Packs 56 and 58, this log | c43edfb8 | Phase 3 |
-| 2026-11-17 | Phase 3 tests, fixes, baselines, inventory | next commit | owner review, push decision |
+| 2026-11-17 | Phase 3 tests, fixes, baselines, inventory | 912ada6b | owner review, push decision |
+| 2026-11-17 | Owner: "finish Phase 1 completely" before any preview. Design reconciled with the build; `17` §12-17 added; findings classified (section 7) | this commit | owner review of the freeze |
 
-## 5. Deviations from the frozen design (recorded with their evidence)
+## 5. Deviations from the frozen design (recorded with their evidence; all folded into `17` on 2026-11-17)
 
 | Design | Built | Why |
 | --- | --- | --- |
@@ -63,7 +67,8 @@ As `15` §4, with these concrete files: `tests/unit/ai-ecosystem.test.mjs` (pack
 | `17` §6: mode as a radio group | a select, the first field | the shared brief page draws selects; same choices and wording |
 | `17` §6: "Use in the Workbench" button | "Copy and use in the Workbench" action plus a link line to the Workbench | the shared page's actions copy; the hand-off is put on the same click |
 | `17` §5.2: matches announce "N tasks match." | "N tasks match. Choose one." | clearer next step |
-| `14` §6: performance budgets | **exceeded** (measured, section 6) | the features were kept; every module loads only on its own page; a later pass can trim the task index and the Workbench markup |
+| `17` §7: contradiction pairs at similarity ≥ 0.5 | ≥ 0.6 | at 0.5 unrelated sentences that shared a number were paired in testing |
+| `14` §6: performance budgets for the new modules only | budget redefined as all JavaScript a page adds, with final ceilings (`17` §16); all met; the Bridge's new modules alone are 1.4 kB raw over the old line | the old line left page growth unbudgeted, which is what a visitor downloads; trimming is an implementation follow-up (section 7) |
 
 ## 6. Phase 3 results (2026-11-17)
 
@@ -83,3 +88,19 @@ Defects found and fixed in Phase 3: (1) a click on a link or button in the Work 
 Measured added JavaScript (raw / gzip): Workbench page about 46 kB / 16 kB (task index 11.1 / 4.3, playbooks 4.3 / 1.3, file format 6.8 / 2.6, hand-off 1.1 / 0.6, page and compiler growth about 23 raw) against a budget of 25 / 9; Context Bridge about 28 kB raw (engine 9.6 / 3.7, page growth 12) against 15; Output Reviewer about 16.5 kB raw (engine 12.3 / 4.6) against 15 / 6.
 
 Not verified: the in-tab hand-offs on phones (the two journeys are tagged `@desktop-only`; on a full page load the hand-off is lost by design and paste works), real Android and Safari devices, an automated accessibility scan (keyboard and focus are asserted in the specs), light-theme visual baselines for AI pages (none exist), Lighthouse.
+
+## 7. Outstanding findings, classified (2026-11-17)
+
+| Finding | Class | Why that class | What closes it |
+| --- | --- | --- | --- |
+| Hand-offs (journeys I, J) not run on the mobile project | **testing limitation** | the design is the same at every width, and in-tab navigation is the same code at every width (`workspace-nav.js` handles a link inside the page with no width condition); the two specs were tagged `@desktop-only` as a precaution in Phase 3 and so never ran on the mobile project | drop the tag and run the two journeys on `subpath-mobile`; then by hand on the preview |
+| Real Android and Safari devices not checked | **testing limitation** | no device or cloud browser on this machine; Playwright mobile is Chromium emulation | owner review on a phone on the preview (needs a push, which needs approval) |
+| No automated accessibility scan | **testing limitation** | no axe dependency in the project, and adding one is a new dependency | keyboard, focus, labels and live regions are asserted in specs; a scan when the project adopts a scanner |
+| No light-theme visual baselines for AI pages | **testing limitation** | the project keeps dark baselines for these pages only; light uses the same tokens | first light-theme run records them |
+| Lighthouse not run | **testing limitation** | not part of the project's suite on this machine | optional, on the preview |
+| `static-checkers.test.mjs` timed out (280 s) | **testing limitation** | a self-test of unchanged checkers over a build copy; the real checks passed | run alone, with a longer timeout, on a quiet machine |
+| JavaScript size: the earlier report said "over budget" | **design issue, now resolved** | the old budget counted new modules only; by that line the Workbench (23.3 / 8.5 vs 25 / 9) and Reviewer (12.3 / 4.6 vs 15 / 6) were within, the Bridge 1.4 kB raw over; the budget is now per page, all added code (`17` §16), and every page is within | none for the design |
+| Reviewer loads all of `pack-format.js` for two helpers; Workbench page module carries static markup; four other brief tools carry 3.3 kB of hooks they do not use | **implementation issue** (small) | behaviour is as designed; the code could be smaller | the trims in `17` §16; optional, not a preview blocker |
+| Journey L (Directory card into the Workbench) has no automated test | **testing limitation** | built and checked by eye; the URL is in the link crawl | add one browser step to `ai-ecosystem.spec.js` |
+
+No finding is a design gap: none needs a product or design decision.

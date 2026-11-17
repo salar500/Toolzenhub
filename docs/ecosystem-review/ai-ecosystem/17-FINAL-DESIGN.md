@@ -1,6 +1,6 @@
 # 17. Final design (design freeze)
 
-This is the build specification for Phase 2. It supersedes `06` to `15` where they differ (see `16`). Visual design uses only the existing layer: `variables.css` tokens (`--space-*`, `--font-*`, `--fw-*`, `--radius-*`, `--surface-*`, `--ink*`, `--line*`, `--state-*`, `--eco-ai-tools*`, `--focus-ring`, `--target-size`), the shared button and form classes (`calculator-form__button`, `--secondary`, `calculator-form__input`, `calculator-form__group`), `ai-tools.css`, `ai-workbench.css`, `directory.css`. No new colour, font or token. Dark theme comes from `:root[data-theme="dark"]` tokens; every new rule uses tokens only, so both themes work without theme-specific CSS.
+This is the build specification for Phase 2. It supersedes `06` to `15` where they differ (see `16`). **Reconciled on 2026-11-17** with what was built and verified: the six recorded deviations (`19` §5) are folded into the text below, so this document now describes the final product exactly. Sections 12-17 (journeys, matcher, playbooks, architecture, performance, the two renamed tools) were added in the same review so that no behaviour is left for development-time invention. Visual design uses only the existing layer: `variables.css` tokens (`--space-*`, `--font-*`, `--fw-*`, `--radius-*`, `--surface-*`, `--ink*`, `--line*`, `--state-*`, `--eco-ai-tools*`, `--focus-ring`, `--target-size`), the shared button and form classes (`calculator-form__button`, `--secondary`, `calculator-form__input`, `calculator-form__group`), `ai-tools.css`, `ai-workbench.css`, `directory.css`. No new colour, font or token. Dark theme comes from `:root[data-theme="dark"]` tokens; every new rule uses tokens only, so both themes work without theme-specific CSS.
 
 ## 1. Target users (final)
 
@@ -31,7 +31,7 @@ Start block markup (`aiHomeStartHtml()` in `pages/directory/directory-html.js`, 
 </section>
 ```
 
-Common starts: "A test plan" (`?task=test-plan`), "An article" (`?task=article`), "Debug a problem" (`?task=debug`), "Continue a project in another AI" (Context Bridge `?mode=handoff`), "Check an AI answer" (Output Reviewer), "Which AI product?" (Directory). Outcome links use the `OUTCOMES` titles except "unsure".
+Common starts: "A test plan" (`?task=test-plan`), "An article" (`?task=article`), "Debug a problem" (`?task=debug`), "Continue a project in another AI" (Context Bridge `?mode=handoff`), "Check an AI answer" (Output Reviewer), "Write or reply to an email" (`?task=email-message`). There is no Directory link in the block: an owner decision of 2026-11-16 (pinned in `tests/unit/ai-directory.test.mjs`) allows the AI Tools page to link the Directory only by its card and sidebar entry. Outcome links use the `OUTCOMES` titles except "unsure". All links are built with `ROUTES` so they carry the preview base path.
 
 Layout: the block is a card (`--surface-card`, `--line` border, `--radius-lg`, padding `--space-6`, max width `--width-wide`), placed in the content column. Chips: `display:flex; flex-wrap:wrap; gap: --space-2`; each chip a link styled as a pill (`--radius-full`, `--line-control` border, min-height `--target-size`, padding `0 --space-4`, `--font-sm`). Primary link uses the primary button class. Phone (< 600 px): primary link full width; chips wrap; padding `--space-4`. States: static; no empty or error states. Accessibility: one h2, two h3, lists of links; focus ring from the shared layer.
 
@@ -64,14 +64,17 @@ Section catalog text (catalog-driven, rule 4.5): `description` "Prepare your AI 
 | `?task=x` | outcome and task chosen, questions loaded, focus on the Details heading, step 3 |
 | Unknown id in a query | ignored; note under the start panel: "That link named a task that is not offered. Choose what you want to accomplish." |
 | Find matching tasks, empty text | note "Type a few words first." |
-| Matches found (confident) | heading "Best match:" and one card, then "Other possible tasks:" up to two; status "N tasks match." |
+| Matches found (confident) | heading "Best match:" and one card, then "Other possible tasks:" up to two; status "N tasks match. Choose one." |
 | Matches found (ambiguous) | "Several could fit. Choose one:" up to three cards |
 | No match | "No close match. Choose what you want to accomplish below, or write one prompt for anything with the AI Prompt Builder." (link) |
 | Use this task | outcome and task chosen as if clicked; focus to the Details heading |
 | Playbook step | task chosen; the step's answers and depth filled into empty fields only; note "Filled from the playbook \"<title>\". Edit anything." |
 | Open a pack (valid) | outcome, task, answers, role, experience, depth, product, project context, consistency restored; note "Opened \"<task>\", version N of <date>." and a list of ignored fields if any |
 | Open a pack (invalid) | error in words beside the control: "This is not a Work Pack file." / "This pack is for a task that is no longer offered: <id>." / "The file is larger than 200 kB." Focus stays; nothing else changes |
-| Answer typed | pack recomposed after 150 ms; one announcement per state change |
+| Answer typed | pack recomposed after 150 ms; one announcement per state change. The pack's markup is replaced only when its Markdown or the view changed (a signature of both), so a change event fired on blur never redraws the pack under a pointer that is clicking a button in it |
+| Utility words in the description ("bug report", "meeting notes", "compare answers", "which AI") | the matching utility tools are listed under the task matches, under "Another AI tool may fit", as links |
+| Context hand-off present on load | project context filled; note "Project context brought from the AI Context Bridge. Choose a task; it is used in the master prompt." |
+| `?product=` for a task that does not list it | note "<name> is not listed for this task in the AI Directory. You can still use it: it is set as your own AI product." |
 | Essential left empty | "Almost ready. Missing: X. It is marked [add: x] in the prompts; fill it in here or tell the AI when it asks." |
 | Conflict | "Check this first:" list above the pack |
 | Earlier answer changed | pack recomposed; nothing else reset; a changed task resets questions (a different blueprint) |
@@ -145,7 +148,7 @@ Handoff       { review:{ request, task, title } | context:{ text, from } | seed:
 
 Page: the shared brief page (D10) with this order: intro; trust card; **panel** (two `details`): "Bring context from an AI conversation" and "Open a saved context pack"; the form; the check panel and output; how to use; contents; using it; FAQ.
 
-Fields (in order): `mode` select "What is it for" (Project brief — everything, for the start of a project; Hand off to another AI — short, to continue in another product; Continue a session — what changed, for a new chat; Coding agent file — instructions for a coding assistant), `project`*, `purpose`*, `role`, `stack`, `state`*, `decisions`, `rejected`, `terms`, `files`, `done`, `issues`, `rules`, `task`*, `verify`, `reply`. (* essential.) Existing keys keep their meaning; new keys are optional.
+Fields (in order): `mode`, a select (the shared brief page draws selects; the first field), labelled "What is it for", choices "Project brief", "Handoff to another AI", "Session update", "Coding agent file" (short labels so the control never widens the page at 1280 px; the hint explains each), `project`*, `purpose`*, `role`, `stack`, `state`*, `decisions`, `rejected`, `terms`, `files`, `done`, `issues`, `rules`, `task`*, `verify`, `reply`. (* essential.) Existing keys keep their meaning; new keys are optional.
 
 Compose by mode:
 
@@ -170,31 +173,41 @@ Heading: Brief "# Project context: X"; Handoff "# Handoff: X"; Session "# Contin
 
 Check panel notes (no score change): "Short handoff: N words" and, over 400, "Over 400 words: an assistant may skim it; trim the longest sections."; secret-like text "Field X contains text that looks like a password or key. Remove it before you paste this anywhere."; staleness (opened pack older than 14 days, item both done and next, next task empty with open issues).
 
-Extraction panel: step 1 a read-only prompt with Copy ("Copy the prompt, paste it at the end of your AI conversation"), step 2 textarea "Paste the AI's reply" and button "Fill the form from this reply". Result note: "Filled N sections. Nothing for: …. Check every field: the AI's summary may be wrong or incomplete." Fields already typed are overwritten only after the visitor confirms "Replace what you typed?" (native confirm) when any target field is non-empty.
+Extraction panel: step 1 a read-only prompt with Copy ("Copy the prompt, paste it at the end of your AI conversation"), step 2 textarea "Paste the AI's reply" and button "Fill the form from this reply". Result note: "Filled N sections. Nothing for: …. Check every field: the AI's summary may be wrong or incomplete." No heading matched: "No section of the reply matched the headings. Check that the AI kept the headings from the prompt; nothing was changed." Fields already typed are overwritten only after the native confirm "Replace what you typed with the AI's summary? Fields the reply leaves empty keep what you typed." when any field is non-empty.
 
-Open panel: file input and paste textarea with "Open this pack"; errors as in 5.2. Download name `context-<project-slug>-v<N>.md`; metadata `{kind:"context-pack", format:1, version, date, values}`.
+Reply parsing (`parseReply`): the reply is split at Markdown headings (`#` to `######`, or a line that is wholly `**bold**` or `__bold__`, with an optional colon); a heading is matched case-insensitively, without a leading number, to a section heading, its coding-agent heading, or an alias (Project name, Completed work, Next task, Rules, Known issues, Key files, Files and references, How it will be verified, Verification, Technical context, Constraints). Bullet marks are removed. A body of "none", "n/a", "nothing" or a dash counts as empty. Text under an unknown heading goes to Notes, never dropped.
 
-"Use in the Workbench" button under the output (link to `/tools/ai-workbench/` after `handoff.put("context")`); the Workbench announces "Project context brought from the AI Context Bridge."
+Open panel: file input and paste textarea with "Open this pack". A file with the Bridge's metadata opens its values and version: note "Opened version N of <date>. Edit what changed; the download becomes version N+1 and lists what changed." Any other Markdown pack is read by its headings through `parseReply`: note "Read by its headings (it has no saved version). Check every field." Typed fields are replaced only after the confirm "Replace what you typed with the opened pack?". Errors as in 5.2. Download name `context-<project-slug>-v<N>.md`; metadata `{kind:"context-pack", format:1, version, date, values}` (each value at most 4,000 characters).
+
+Hand-off out: the action "Copy and use in the Workbench" copies the pack and puts it as the `context` hand-off in the same click; a line under the actions links "open the AI Workbench". The Workbench announces "Project context brought from the AI Context Bridge." Hand-off in: a `seed` from the Workbench fills project, purpose and next task when they are empty.
+
+Secret-like text (note only, never a block): keys beginning `sk-` or `AKIA`, a private-key header, `password|passwd|pwd|secret|api key|token` followed by `:` or `=` and four or more characters, a hexadecimal run of 40 or more, or a base64-like run of 48 or more.
 
 ## 7. AI Output Reviewer (`/tools/ai-answer-checklist/`)
 
 Fields: `answer`* (40,000), `question` relabelled "What you asked (your prompt or requirements)" (12,000; hint "Paste the prompt you gave, or a list of requirements. The review checks the answer against it."), `purpose` (existing), `reviewType` select (General; Code; Test plan or test cases; Article or copy; Research or report; Image or video prompt), `wordLimit` text (digits, optional; "Word limit, if you set one").
 
 Output (Markdown in the output text area):
-- With no request and default type: exactly the existing checklist (backward compatible).
-- With a request: `# Review of an AI answer`, then `## Against your request` (each extracted requirement: "- [ ] <requirement> — visibly addressed" or "— not visibly addressed"), `## Format` (findings or "No format problems found by these checks."), `## Leftovers`, `## Contradictions inside the answer`, then the existing sections (statements to check, what it leaves out, questions to put back), then `## Follow-up prompt` (fenced, only gaps), then `## What this review cannot tell you`.
+- When nothing in the request can be checked (no requested items extracted) and no format, leftover, contradiction or review-type finding exists: exactly the existing evidence checklist (backward compatible; a plain question has nothing to check against).
+- Otherwise: `# Review of an AI answer`, then `## Against your request` (each extracted requirement: "- [ ] <requirement> — visibly addressed" or "— not visibly addressed"), `## Format` (findings or "No format problems found by these checks."), `## Leftovers`, `## Contradictions inside the answer`, then the existing sections (statements to check, what it leaves out, questions to put back), then `## Follow-up prompt` (fenced, only gaps), then `## What this review cannot tell you`.
 
 Requirement extraction from the request: lines under "Requirements:" and "Format of your answer:" (Workbench prompts) or else every bullet or numbered line; else every sentence with "must", "should", "include", "need". Coverage: a requirement is "visibly addressed" when at least half (minimum two) of its content words (length ≥ 4, stop words removed, simple stem) appear in the answer.
 
-Format checks: request mentions "table" → a Markdown table in the answer; "JSON" with "only" → `JSON.parse` of the answer (or its single fenced block), error position reported; "headings" or a Markdown heading list in the request → each requested heading present; a word limit (field or "under/at most/no more than N words") → word count compared; "N items/posts/cases/ideas" → count of list items compared.
+Format checks: request mentions "table" → a Markdown table in the answer; "JSON" with "only" → `JSON.parse` of the answer (or its single fenced block), error position reported; "headings" or a Markdown heading list in the request → each requested heading present; a word limit (field or "under/at most/no more than N words") → word count compared; "N items/posts/cases/ideas" → count of list items compared; "write/fix/give/return … code" → a code block present. Requirement headings recognised: Requirements, Format of your answer, Acceptance criteria, Must include. At most 40 requirements.
 
-Leftovers: `[add:`, `TODO`, `TBD`, `lorem ipsum`, `XXX`, `<placeholder>`, `as an AI`, an answer ending without terminal punctuation or inside an open code fence.
+Review-type checks (added to Format): Test plan or test cases → test case ids (TC-1, ID, Case 1, or an id column) and the word "expected"; Code → a code block; Research or report → a link, DOI, "(year)" or "et al" to check. General, Article and Image/video add no extra check.
 
-Contradictions: sentence pairs inside the answer with similarity ≥ 0.5 and a figure or negation conflict (`compare-engine.conflict`), first 400 sentences.
+Leftovers: `[add:`, `TODO`, `TBD`, `lorem ipsum`, `XXX`, `<placeholder>` / `<insert …>` / `<your …>`, `[insert …]` / `[your …]` / `[name]` / `[date]` / `[company]`, `as an AI`, an answer ending without terminal punctuation or inside an open code fence.
 
-Check panel notes: "Review: N requested items not visibly addressed, M statements to verify, K format problems." Extra action "Copy follow-up prompt". Hand-off in: request and review type from the Workbench, note "Brought from the Workbench: the request for <task>."
+Contradictions: sentence pairs inside the answer with similarity ≥ 0.6 (raised from 0.5 in testing: at 0.5 unrelated sentences sharing a number were paired) and a figure or negation conflict (`compare-engine.conflict`), first 400 sentences, at most 10 pairs.
+
+Follow-up prompt: "Please revise your last answer." then one line per gap in the order found (missing requirement, format, leftover, contradiction), then "Keep everything that is already correct. Do not add facts I did not give you; mark anything uncertain. Then give the corrected answer in full." Empty, and the action disabled, when there are no gaps.
+
+Check panel notes: "Review: N requested items not visibly addressed, M statements to verify, K format problems." Extra action "Copy follow-up prompt". Hand-off in: request and review type from the Workbench (task to type, `TYPE_OF_TASK` in the page module: code-feature, debug, code-review, refactor, api-design and test-automation → Code; test-plan, test-cases, api-testing, regression, defect, performance-test → Test plan or test cases; article, social-posts, marketing-copy, script, repurpose, email-message → Article or copy; research-plan, literature-review, market-research, report, doc-summary → Research or report; the five image and four video tasks → Image or video prompt; every other task General), announcement "Brought from the Workbench: the request for <task>. Paste the AI's answer." A link to Compare Two AI Answers sits under the output.
 
 Guarantees (shown on the page): the review **can** tell you which requested items have no visible match, whether the requested format was followed by these checks, what placeholders were left, which statements contain figures, dates, sources or absolute wording, and where the answer contradicts itself on a figure. It **cannot** tell you whether anything is true, whether reasoning is sound, or whether a cited source says what is claimed.
+
+Responsive and theme (Context Bridge and Output Reviewer, the shared brief page): ≥ 1200 px form left, output right; below, one column with the output after the form. The action row wraps (`.ai-actions { flex-wrap: wrap }`) so a third action never widens the page. The Bridge's two panels are `details` cards (`--surface-page`, `--line`, `--radius-md`), summaries 44 px high; their buttons go full width under 600 px; the extraction prompt is a scrollable block at most 220 px high (`--surface-sunken`, monospace). The output text area uses 16 px text under 600 px (no zoom on focus). Tokens only, so light and dark need no theme-specific rule.
 
 ## 8. AI Directory (`/ai-tools/directory/`)
 
@@ -215,3 +228,96 @@ Nothing is stored (no localStorage, sessionStorage, IndexedDB or cookies written
 - Workbench FAQ "Is anything saved?": "No. Your answers stay on this page and are gone when you leave it. Download the Work Pack to keep it; Open a saved Work Pack brings every answer back."
 - Bridge intro: "Write down once what an AI product needs to know about your project, then carry it to another chat or another product: a full brief, a short handoff, a session update or a file for a coding assistant."
 - Reviewer intro: "Paste an AI answer and, if you can, what you asked. Get the requested items it does not visibly address, format problems, leftovers, statements to verify, and a follow-up prompt that names the gaps."
+
+## 12. User journeys (final)
+
+Each journey names its entry, steps, end state and the test that pins it (`tests/browser/ai-ecosystem.spec.js` = E, `ai-workbench.spec.js` = W, `ai-tools.spec.js` = T, `tests/unit/ai-ecosystem.test.mjs` = U).
+
+| Id | Journey | Steps | Ends with | Pinned by |
+| --- | --- | --- | --- | --- |
+| A | Knows the outcome | AI Home outcome link → Workbench task list → task → answers → pack | Copy or Download | W |
+| B | Not sure what to ask for | AI Home "Describe your task" (or "I'm not sure") → describe → matches → Use this task → answers → pack | pack | E, W |
+| C | Common start | AI Home "A test plan" → Workbench with task and questions open | pack | E |
+| D | Recurring work | Workbench → Start from a playbook → Step n → fields prefilled (empty fields only) → pack; repeat per step | one pack per step | U |
+| E | Reuse my own setup | Download a Work Pack → later: Open a saved Work Pack (file or paste) → every answer restored → edit → pack | same master prompt as before | E (@portable) |
+| F | Move a project to another AI | AI Home "Continue a project in another AI" → Bridge in Handoff mode → Copy the extraction prompt → paste it into the old chat → paste the reply → Fill → check fields → Copy → paste into the new product | handoff text | E |
+| G | Start a new session | Bridge → Open a saved context pack → edit what changed → Session update → Download (version N+1, changed sections named) | versioned file | U |
+| H | Coding assistant file | Bridge → Coding agent file → Download → saved by the visitor as AGENTS.md / CLAUDE.md | file | E, U |
+| I | Context into a task | Bridge → "Copy and use in the Workbench" → open the AI Workbench → project context filled → task → pack | pack with context | E (@desktop-only) |
+| J | Check what came back | Workbench pack → "Open the AI Output Reviewer with this request" → paste the AI's answer → review → Copy follow-up prompt → paste back into the AI | follow-up prompt | E (@desktop-only) |
+| K | Check any answer | Reviewer direct → paste answer and own prompt → review | review | U, T |
+| L | Choose a product | Directory → filter → card "Plan a task with <name>" → Workbench with the product set | pack for that product | **not pinned** (built and checked by eye; the link crawl covers the URL; a browser test is a Phase 3 follow-up) |
+
+Journeys I and J depend on the in-memory hand-off; on a full page load (a new tab, a reload) the hand-off is empty by design and the receiving field accepts paste, which is the documented fallback.
+
+## 13. The task matcher (`ai-workbench/task-index.js`)
+
+- **Input:** the describe text, at most 300 characters. Lower-cased; anything not a letter or digit becomes a space; a light stem (`-ing` from 6 letters, `-ies` → `-y`, `-es` after ss/sh/ch/x, a final `-s` from 4 letters except `-ss`); stop words removed (a, an, the, for, to, of, and, or, my, me, I, we, our, on, in, with, from, about, this, that, it, is, be, do, need, want, help, make, create, write, some, new, please, can, you, how, get, use).
+- **Synonyms:** each of the 46 tasks has a list of real terms (no broad or invented words, rule 5.3); a unit test (`indexCovers`) fails when a task has none or a list names no task.
+- **Score:** each synonym phrase found as a consecutive word run: 3 when it has two or more words, 2 for one word (a phrase that stems to one already counted is skipped); each further word of the task title present: 1; each word of the outcome title present: 0.5. Tasks under 1 are dropped.
+- **Result:** up to three tasks, best first, ties in catalog order; **confident** when the best is at least 3 and at least 1.5 times the second. Confident: "Best match" plus "Other possible tasks"; otherwise "Several could fit". Utility tools whose trigger phrases appear are listed as links.
+- **Never:** choose a task for the visitor, call a service, or store the text. A 60-phrase golden table (`U`) pins the expected top task for real phrasings; changing a synonym means running it.
+
+## 14. Playbook starters (`ai-workbench/playbooks.js`)
+
+Ten starters, data only, each `{ id, title, purpose, steps: [{ task, depth, answers }] }`; answers are generic choices, never project facts. Choosing a step selects the task with the step's depth and fills only fields that are still empty; note "Filled from the playbook \"<title>\". Edit anything."
+
+| Starter | Steps (task, depth) |
+| --- | --- |
+| Weekly article or newsletter | article (detailed, purpose "Explain or teach"); repurpose (standard, target "Social posts") |
+| YouTube video from idea to upload | video-concept; script; thumbnail (short) |
+| Release testing | test-plan (detailed, scope "Functional and regression"); test-cases; regression; defect (short) |
+| API test cycle | api-testing; test-automation |
+| Bug investigation | debug (multi); purpose points to Bug Report for a single bug |
+| Feature from requirements to review | requirements; code-feature (detailed); code-review |
+| Research report | research-plan (detailed); literature-review; report |
+| Monthly business report | data-analysis; report; presentation |
+| Meeting follow-up | email-message (short, kind "A new message"); purpose points to Meeting Notes |
+| Consistent image series | image-series |
+
+Unmarked depths are Standard. A unit test fails if a step names a task that is not offered, or an answer that is not a real option of that task's questions. Review date `PLAYBOOKS_REVIEWED`, at least every six months with the blueprints.
+
+## 15. Technical architecture (final)
+
+Static pages, vanilla ES modules, no framework, no backend, no AI API, no storage. Every module below loads only on the page that imports it.
+
+| Module | Role | Loaded by |
+| --- | --- | --- |
+| `pages/directory/directory-html.js` `aiHomeStartHtml()` | AI Home start block, plain links, rendered only for section `ai-tools` at build | build (no runtime script) |
+| `tools/ai-workbench/index.js` | Workbench page: start panel, form, pack view, hand-offs | Workbench |
+| `ai-workbench/compiler.js`, `taxonomy.js`, `blueprints/*.js` (lazy per family), `products.js` | the pack compiler and its data | Workbench |
+| `ai-workbench/task-index.js`, `playbooks.js` | matcher, starters | Workbench |
+| `ai-tools/common/pack-format.js` | file metadata write/read (`withMeta`, `readMeta`, allow-list `pick`, 200 kB cap), headings parser, `slug`, `today`, local download and file read | Workbench, Bridge, Reviewer |
+| `ai-tools/common/handoff.js` | one in-memory payload per kind (`review`, `context`, `seed`), taken once | Workbench, Bridge, Reviewer |
+| `ai-tools/common/brief-tool.js`, `brief-engine.js` | shared brief page; optional hooks `panel`, `wire(api)`, `context()`, `notes(values)`, `actions`, `downloadText(markdown, values)`, `fileName(values, extra)`, `afterDownload`; without hooks the markup is byte-identical to before | six brief tools |
+| `context-pack-builder/index.js` + `common/context-engine.js` | AI Context Bridge | Bridge |
+| `ai-answer-checklist/index.js` + `common/review-engine.js` (+ existing `claim-engine.js`, `compare-engine.js`) | AI Output Reviewer | Reviewer |
+
+Data flow: form values → pure engine (`compose`, `composeContext`, `review`) → Markdown shown in the page → Copy (Markdown) or Download (Markdown + metadata comment). Opened files → `readMeta` → `pick` (only known keys, typed, capped) → form controls (never `innerHTML`, rule 8.7). Hand-off: sender `put(kind)` then same-tab navigation; receiver `take(kind)` on mount. The hand-off works because workspace navigation re-imports only the tool module (`?m=N`) while shared modules keep their identity (`tool-mount.js`).
+
+## 16. Performance (final budget)
+
+Measured 2026-11-17, unminified source (the build does not minify), raw / gzip, compared with commit 7b339d7f:
+
+| Page | New shared modules | Page module growth | Total added | Budget (`14` §6) |
+| --- | --- | --- | --- | --- |
+| Workbench | task index 11.1 / 4.2, playbooks 4.3 / 1.2, pack format 6.8 / 2.6, hand-off 1.1 / 0.5 = 23.3 / 8.5 | index +19.9 / +5.2, compiler +3.0 / +1.1 | about 46 / 15 | 25 / 9 for the new modules: **met** (23.3 / 8.5); page growth was not budgeted |
+| Context Bridge | engine 9.6 / 3.7, pack format 6.8 / 2.6, hand-off 1.1 / 0.5 | page +12.1 / +3.6, brief-tool +3.3 / +0.8 | about 33 / 11 | 15 / 6 for engine + pack format: **over** (16.4 / 6.3) |
+| Output Reviewer | engine 12.3 / 4.6, pack format 6.8 / 2.6 (imported by the engine), hand-off 1.1 / 0.5 | page +4.2 / +1.6, brief-tool +3.3 / +0.8 | about 28 / 10 | 15 / 6 for the engine: **met** (12.3 / 4.6) |
+| Four other brief tools | none | brief-tool +3.3 / +0.8 | 3.3 / 0.8 | not budgeted |
+
+Final budget decision (owner delegation, routine): the budget applies to **all JavaScript a page adds**, not only its new modules, because that is what a visitor downloads. Final per-page ceilings: Workbench 50 / 16, Context Bridge 35 / 12, Output Reviewer 30 / 10, other brief tools 4 / 1, AI Home 0 (no script). All are met today. The trim work below is an implementation follow-up, not a design change: (1) the Reviewer imports all of `pack-format.js` for `sectionsOf`/`keyOf`; move those two into a small module (about −6 kB raw on the Reviewer); (2) the Workbench page module carries static markup that can be built once (about −5 kB). Neither changes behaviour, and neither blocks a preview.
+
+## 17. The two renamed tools (what they are, and are not)
+
+**AI Context Bridge** (formerly Project Context Pack Builder; `/tools/context-pack-builder/`, id unchanged, old names kept as search aliases).
+- *What it represents:* the "carry" step. A visitor writes down once what any AI product needs to know about a project (purpose, how it is built, state, decisions, rejected approaches, terms, files, done work, issues, rules, next task, verification) and gets it out in four forms: a full project brief, a short handoff (latest five decisions and done items), a session update (what changed), and a coding-agent instruction file.
+- *Journeys:* F, G, H, I (section 12).
+- *Functions:* four modes from one set of fields; an extraction prompt to run at the end of an AI conversation, whose reply fills the form by heading; open a saved pack (with version) or any Markdown pack (by headings); versioned download that names the changed sections; notes for a long handoff, secret-like text, a pack older than 14 days, an item both done and next, open issues with no next task, and a line both decided and rejected; hand-off to the Workbench.
+- *Limitations:* it does not read any AI conversation itself (the visitor copies the prompt and the reply); the AI's summary may be wrong or incomplete, and the page says to check every field; the secret check is a pattern, not a guarantee; nothing is saved unless the visitor downloads the file; the hand-off to the Workbench is lost on reload (paste works); it does not install the coding-agent file anywhere.
+
+**AI Output Reviewer** (formerly AI Answer Evidence Checklist; `/tools/ai-answer-checklist/`, id unchanged, old name kept as an alias).
+- *What it represents:* the "check" step. It compares an AI answer with what was asked.
+- *Journeys:* J, K.
+- *Functions:* extracts the requested items from the request and marks each "visibly addressed" (with an excerpt) or "not visibly addressed"; format checks (table, JSON only, headings, code, word limit, item count) and review-type checks; leftovers and signs of a cut-off answer; contradictions on a figure or negation inside the answer; the existing evidence checklist (statements with figures, dates, sources or absolute wording to verify; what it leaves out; questions to put back); one follow-up prompt naming only the gaps; a hand-off from the Workbench with the request and review type.
+- *Limitations:* it reads words, not meaning, so a requirement met in other words shows as "not visibly addressed" (the page says to read for it); it never says an answer is true, accurate, verified or correct; it cannot check reasoning or whether a source says what is claimed; with a plain question and nothing to check, the output is the old checklist; the contradiction check covers the first 400 sentences.

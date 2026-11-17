@@ -1,6 +1,6 @@
 # AI ecosystem programme, Phase 1: research and specification
 
-Status: **Phase 1 complete and design frozen** (2026-11-16). The owner's master directive of 2026-11-16 delegated routine product and design decisions; they are resolved in `16-DECISION-REGISTER.md`, and `17-FINAL-DESIGN.md` is the build specification (it wins where `06`-`15` differ). Programme checkpoint: `19-IMPLEMENTATION-MAP-AND-FREEZE.md` section 4.
+Status: **Phase 1 complete and design frozen** (2026-11-16; reconciled with the build and re-frozen 2026-11-17, `19` sections 1, 5 and 7). The owner's master directive of 2026-11-16 delegated routine product and design decisions; they are resolved in `16-DECISION-REGISTER.md`, and `17-FINAL-DESIGN.md` is the build specification (it wins where `06`-`15` differ). Programme checkpoint: `19-IMPLEMENTATION-MAP-AND-FREEZE.md` section 4.
 
 Programme: AI Tools only (rulebook 4.11). Phase 1 research and specification (this folder), Phase 2 development, Phase 3 AI-only testing and production readiness. The other six ecosystems are out of scope and were not audited.
 
@@ -36,7 +36,7 @@ Repository state when the research started: branch `feature/unified-ecosystem-wo
 | 15 | Technical feasibility | `14-TECHNICAL-FEASIBILITY.md` |
 | 16, 17 | Production scope, Phase 2 and Phase 3 handoff | `15-SCOPE-AND-HANDOFFS.md` |
 | (decisions) | Final product decision register (D1-D16) | `16-DECISION-REGISTER.md` |
-| (design) | Final design: pages, states, microcopy, compiler rules, data models, responsive, themes, accessibility, privacy | `17-FINAL-DESIGN.md` |
+| (design) | Final design: pages, states, microcopy, compiler rules, data models, responsive, themes, accessibility, privacy, journeys, matcher, playbooks, architecture, performance, the two renamed tools | `17-FINAL-DESIGN.md` |
 | (matrix) | Task blueprint and prompt matrix, permutations | `18-TASK-BLUEPRINT-MATRIX.md` |
 | (map) | Implementation map, design-freeze gate, checkpoint log | `19-IMPLEMENTATION-MAP-AND-FREEZE.md` |
 
