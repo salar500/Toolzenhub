@@ -34,13 +34,16 @@ export function stripMeta(text) {
 
 }
 
-/** { meta } from the last metadata comment, or { error } in words. */
-export function readMeta(text) {
+/* "200 kB", "3 MB": the limit in the words a refusal uses */
+const sizeLabel = (max) => (max >= 1000000 ? `${Math.round(max / 100000) / 10} MB` : `${Math.round(max / 1000)} kB`);
+
+/** { meta } from the last metadata comment, or { error } in words. `max` is the size limit in characters (default 200 kB; the QA Workbench passes its own). */
+export function readMeta(text, max = MAX_FILE) {
 
     const source = String(text ?? "");
 
-    if (source.length > MAX_FILE) {
-        return { error: "The file is larger than 200 kB." };
+    if (source.length > max) {
+        return { error: `The file is larger than ${sizeLabel(max)}.` };
     }
 
     const start = source.lastIndexOf(MARK);
@@ -191,11 +194,11 @@ export function downloadText(text, fileName, doc = globalThis.document) {
 
 }
 
-/** The text of a chosen file, or { error } for a file that is too large. */
-export async function readFile(file) {
+/** The text of a chosen file, or { error } for a file that is too large (`max` in bytes, default 200 kB). */
+export async function readFile(file, max = MAX_FILE) {
 
     if (!file) return { error: "Choose a file first." };
-    if (file.size > MAX_FILE) return { error: "The file is larger than 200 kB." };
+    if (file.size > max) return { error: `The file is larger than ${sizeLabel(max)}.` };
 
     try {
         return { text: await file.text() };

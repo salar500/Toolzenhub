@@ -9,9 +9,11 @@
    reload, a new tab or a direct visit starts empty, by design.
    Nothing is stored. A receiver takes the payload once.
 
-   Kinds: "review"  { request, task, title }   Workbench -> Reviewer
+   Kinds: "review"  { request, task, title }   Workbench or QA Workbench -> Reviewer
           "context" { text }                   Bridge -> Workbench
           "seed"    { project, purpose, task } Workbench -> Bridge
+          "task"    { task, answers }          QA Workbench -> Workbench
+          "bug"     { observed, expected, steps, environment, evidence }   QA Workbench -> Bug Report
 ========================================================= */
 
 const payloads = new Map();

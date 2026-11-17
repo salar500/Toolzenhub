@@ -52,6 +52,7 @@ export const SECTION_GROUPS = {
         { label: "Carry your context", ids: ["context-pack-builder"] },
         { label: "Check an answer", ids: ["ai-answer-checklist", "ai-answer-compare"] },
         { label: "Quick briefs", ids: ["prompt-builder", "bug-report-prompt", "meeting-notes-action-plan"] },
+        { label: "Test and release", ids: ["qa-workbench"] },
         { label: "AI products", ids: ["ai-directory"] }
     ]
 };

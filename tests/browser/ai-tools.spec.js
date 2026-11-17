@@ -72,7 +72,7 @@ test.describe("AI Tools", () => {
     await go("");
     const card = page.locator("#categories .category-card", { hasText: "AI Tools" });
     await expect(card).toHaveAttribute("href", `${siteRoot}ai-tools.html`);
-    await expect(card).toContainText("8 tools"); // seven tools (the Workbench, 2026-11-16) and the AI Directory, counted alike everywhere
+    await expect(card).toContainText("9 tools"); // eight tools (the Workbench, 2026-11-16; the QA Workbench, 2026-11-17) and the AI Directory, counted alike everywhere
     await go("tools.html");
     await expect(page.locator(`#tools-directory a[href="${siteRoot}tools/context-pack-builder/"]`).first()).toBeVisible(); // the directory's own listing, not the hidden rail
   });
@@ -82,7 +82,7 @@ test.describe("AI Tools", () => {
       await page.setViewportSize({ width, height: 900 });
       await go("ai-tools.html");
       const cards = page.locator(".directory-tools .category-page-card");
-      await expect(cards).toHaveCount(8); // the seven AI tools and the directory
+      await expect(cards).toHaveCount(9); // the eight AI tools and the directory
       const card = cards.last();
       await expect(card).toHaveAttribute("href", `${siteRoot}ai-tools/directory/`);
       await expect(card.locator(".category-page-card__title")).toHaveText("AI Directory");

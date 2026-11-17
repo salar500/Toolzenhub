@@ -1,7 +1,7 @@
 {
   "$comment": "INTERNAL planning file. Not published, not a ranking mechanism, no search volumes. Built from the site's catalogs by scripts/gen-seo-keyword-map.mjs; regenerate after the catalog changes. Use it to improve real titles, descriptions, headings, copy and internal links naturally; never as a hidden keyword block (Google ignores the meta keywords tag).",
-  "generated": "2026-11-16",
-  "pages": 675,
+  "generated": "2026-11-17",
+  "pages": 676,
   "summary": {
     "calculatorsWithoutSupportingArticle": 45,
     "pagesWithCannibalizationWarnings": 2
@@ -10963,7 +10963,7 @@
     {
       "url": "/tools/ai-answer-checklist/",
       "type": "calculator",
-      "title": "AI Answer Evidence Checklist: What to Verify",
+      "title": "AI Output Reviewer: Check an AI Answer",
       "primaryKeyword": "ai output reviewer",
       "secondaryKeywords": [
         "ai output reviewer",
@@ -10992,7 +10992,8 @@
         "/tools/prompt-builder/",
         "/tools/bug-report-prompt/",
         "/tools/context-pack-builder/",
-        "/tools/meeting-notes-action-plan/"
+        "/tools/meeting-notes-action-plan/",
+        "/tools/qa-workbench/"
       ],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
@@ -11026,7 +11027,8 @@
         "/tools/ai-workbench/",
         "/tools/bug-report-prompt/",
         "/tools/context-pack-builder/",
-        "/tools/meeting-notes-action-plan/"
+        "/tools/meeting-notes-action-plan/",
+        "/tools/qa-workbench/"
       ],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
@@ -11060,7 +11062,8 @@
         "/tools/ai-answer-checklist/",
         "/tools/bug-report-prompt/",
         "/tools/ai-answer-compare/",
-        "/tools/meeting-notes-action-plan/"
+        "/tools/meeting-notes-action-plan/",
+        "/tools/qa-workbench/"
       ],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
@@ -11129,7 +11132,8 @@
         "/tools/ai-workbench/",
         "/tools/ai-answer-checklist/",
         "/tools/ai-answer-compare/",
-        "/tools/meeting-notes-action-plan/"
+        "/tools/meeting-notes-action-plan/",
+        "/tools/qa-workbench/"
       ],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
@@ -11169,7 +11173,7 @@
     {
       "url": "/tools/context-pack-builder/",
       "type": "calculator",
-      "title": "Project Context Pack Builder for AI Assistants",
+      "title": "AI Context Bridge: Move a Project Between AI Tools",
       "primaryKeyword": "ai context bridge",
       "secondaryKeywords": [
         "context bridge",
@@ -11200,7 +11204,8 @@
         "/tools/bug-report-prompt/",
         "/tools/ai-answer-checklist/",
         "/tools/ai-answer-compare/",
-        "/tools/meeting-notes-action-plan/"
+        "/tools/meeting-notes-action-plan/",
+        "/tools/qa-workbench/"
       ],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
@@ -11839,7 +11844,8 @@
         "/tools/ai-workbench/",
         "/tools/bug-report-prompt/",
         "/tools/ai-answer-checklist/",
-        "/tools/ai-answer-compare/"
+        "/tools/ai-answer-compare/",
+        "/tools/qa-workbench/"
       ],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
@@ -12099,6 +12105,43 @@
         "/tools/context-pack-builder/",
         "/tools/ai-workbench/",
         "/tools/ai-answer-checklist/",
+        "/tools/ai-answer-compare/",
+        "/tools/meeting-notes-action-plan/",
+        "/tools/qa-workbench/"
+      ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/tools/qa-workbench/",
+      "type": "calculator",
+      "title": "QA Workbench: Requirements Traceability to QA Report",
+      "primaryKeyword": "qa requirement-to-release workbench",
+      "secondaryKeywords": [
+        "qa workbench",
+        "requirements traceability matrix",
+        "traceability matrix",
+        "test case management",
+        "test coverage tracker",
+        "test execution tracker",
+        "qa test report",
+        "test summary report",
+        "acceptance criteria coverage"
+      ],
+      "searchIntent": "transactional/tool: the visitor wants to calculate now",
+      "relatedSearchPhrases": [
+        "qa requirement-to-release workbench online",
+        "qa requirement-to-release workbench free",
+        "how to use qa requirement-to-release workbench",
+        "qa requirement-to-release workbench formula"
+      ],
+      "relatedTools": [
+        "/tools/ai-answer-checklist/",
+        "/tools/ai-workbench/",
+        "/tools/bug-report-prompt/",
+        "/tools/prompt-builder/",
+        "/tools/context-pack-builder/",
         "/tools/ai-answer-compare/",
         "/tools/meeting-notes-action-plan/"
       ],

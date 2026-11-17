@@ -929,7 +929,18 @@ export function init(app = document.getElementById("app")) {
         announce("Project context brought from the AI Context Bridge.", 0);
     }
 
-    if (linkedTask) {
+    /* a testing task handed over from the QA Workbench in this tab (Tool Pack 59, QD26): its answers fill the questions */
+    const asked = take("task");
+    const askedAnswers = asked && getTask(asked.task) && asked.answers && typeof asked.answers === "object"
+        ? Object.fromEntries(Object.entries(asked.answers).filter(([, v]) => typeof v === "string").map(([k, v]) => [k, v.slice(0, CONTEXT_LIMIT)]))
+        : null;
+
+    if (askedAnswers) {
+        selectTask(asked.task, { answers: askedAnswers }).then(() => {
+            note("suggestion", "Brought from the QA Workbench: what is being tested and its acceptance criteria. Check them, then answer the other questions.");
+            announce("Brought from the QA Workbench.", 0);
+        });
+    } else if (linkedTask) {
         if (getTask(linkedTask)) selectTask(linkedTask);
         else note("suggestion", "That link named a task that is not offered. Choose what you want to accomplish.");
     } else if (linkedOutcome) {

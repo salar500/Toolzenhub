@@ -75,7 +75,7 @@ test("the page: every product as plain HTML, safe external links, filters only a
   const grid = aiTools.slice(aiTools.indexOf("directory-tools"), aiTools.indexOf("directory-section__more"));
   assert.match(grid, /<a\s+href="\/ai-tools\/directory\/"\s+class="category-page-card"\s*>/);
   assert.match(grid, /<h3 class="category-page-card__title">\s*AI Directory\s*<\/h3>/);
-  assert.equal((grid.match(/class="category-page-card"/g) || []).length, 8, "the seven AI tools and the directory card");
+  assert.equal((grid.match(/class="category-page-card"/g) || []).length, 9, "the eight AI tools and the directory card");
   // linked by the card and by its one sidebar entry (owner, 2026-11-16): no banner or extra link
   const nav = aiTools.slice(aiTools.indexOf('<nav class="section-switcher"'), aiTools.indexOf("</nav>", aiTools.indexOf('<nav class="section-switcher"')));
   assert.equal((nav.match(/ai-tools\/directory\//g) || []).length, 1, "one sidebar entry");
@@ -84,10 +84,10 @@ test("the page: every product as plain HTML, safe external links, filters only a
   // the directory page marks itself in the sidebar
   assert.match(html, /<a href="\/ai-tools\/directory\/" aria-current="page">AI Directory<\/a>/);
   // the same seven entries wherever the section is listed and counted (owner, 2026-11-16)
-  assert.equal(tax.getSectionListing("ai-tools").length, 8); // seven tools (the Workbench since 2026-11-16) and the directory
-  assert.match(nav, /section-switcher__count">8</);
+  assert.equal(tax.getSectionListing("ai-tools").length, 9); // eight tools (the Workbench since 2026-11-16, the QA Workbench since 2026-11-17) and the directory
+  assert.match(nav, /section-switcher__count">9</);
   const all = allToolsHtml();
   const aiBlock = all.slice(all.indexOf('id="directory-ai-tools-heading"'), all.indexOf("</section>", all.indexOf('id="directory-ai-tools-heading"')));
-  assert.match(aiBlock, /directory-section__count">8 tools</);
+  assert.match(aiBlock, /directory-section__count">9 tools</);
   assert.equal((aiBlock.match(/ai-tools\/directory\//g) || []).length, 1, "All Tools lists the directory once");
 });

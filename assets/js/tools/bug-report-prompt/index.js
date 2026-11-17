@@ -12,6 +12,7 @@
 
 import { createBriefTool } from "../ai-tools/common/brief-tool.js";
 import { section, bullets, numbered, fenced, document as doc } from "../ai-tools/common/brief-engine.js";
+import { take } from "../ai-tools/common/handoff.js";
 
 
 export const showRelatedCalculators = true;
@@ -80,6 +81,15 @@ export const CONFIG = {
             section("How to work", numbered(method))
         ]);
 
+    },
+
+    /* a defect handed over from the QA Workbench in this tab (Tool Pack 59, QD26): it fills only fields still empty */
+    wire({ setValues, announce }) {
+        const brought = take("bug");
+        if (!brought) return;
+        setValues(Object.fromEntries(["observed", "expected", "steps", "environment", "evidence"].filter((k) => typeof brought[k] === "string").map((k) => [k, brought[k]])), { onlyEmpty: true });
+        announce("Brought from the QA Workbench: the defect's details. Check them, then add the error output and where to look.", 0);
+        document.getElementById("bug-observed")?.focus();
     },
 
     example: {

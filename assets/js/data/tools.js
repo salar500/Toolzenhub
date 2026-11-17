@@ -2762,6 +2762,45 @@ const catalog = [
     },
 
     {
+        id: "qa-workbench",
+        status: "published",
+        loader: () =>
+            import("../tools/qa-workbench/index.js"),
+        category: "ai",
+        toolType: "utility",
+        icon: "☑",
+        title: "QA Requirement-to-Release Workbench",
+        description:
+            "Keep one QA project together: requirements and acceptance criteria, test cases, the mapping between them, test runs and defects, with mapped, executed and passed counted separately and a QA report to download. Runs in your browser; saved as a file you keep.",
+        relatedTools: ["ai-answer-checklist", "ai-workbench", "bug-report-prompt"],
+        aliases: [
+            "qa workbench",
+            "requirements traceability matrix",
+            "traceability matrix",
+            "test case management",
+            "test coverage tracker",
+            "test execution tracker",
+            "qa test report",
+            "test summary report",
+            "acceptance criteria coverage"
+        ],
+        capabilities: {
+            copy: true,
+            download: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "QA Workbench: Requirements Traceability to QA Report | ToolZen Hub",
+            description:
+                "Map acceptance criteria to test cases, record pass, fail and blocked runs, track defects and download a QA report with mapped, executed and passed kept apart. Runs in your browser; your project is a file you keep."
+        }
+    },
+
+    {
         id: "list-comparer",
         status: "published",
         loader: () =>

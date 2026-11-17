@@ -705,6 +705,13 @@
       "state": "active"
     },
     {
+      "id": "qa-workbench",
+      "module": "assets/js/tools/qa-workbench/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "ratio",
       "module": "assets/js/calculators/ratio/index.js",
       "moduleChanges": [],

@@ -328,9 +328,9 @@ describe("the notes engine and Meeting Notes to Action Plan", () => {
 });
 
 describe("catalog integration", () => {
-  test("seven published tools in the AI Tools section at /tools/<id>/, related only to each other", () => {
-    // the AI Workbench (Tool Pack 58, 2026-11-16) leads the section
-    const ids = ["ai-workbench", "prompt-builder", "bug-report-prompt", "context-pack-builder", "ai-answer-checklist", "ai-answer-compare", "meeting-notes-action-plan"];
+  test("eight published tools in the AI Tools section at /tools/<id>/, related only to each other", () => {
+    // the AI Workbench (Tool Pack 58, 2026-11-16) leads the section; the QA Workbench (Tool Pack 59, 2026-11-17) comes last
+    const ids = ["ai-workbench", "prompt-builder", "bug-report-prompt", "context-pack-builder", "ai-answer-checklist", "ai-answer-compare", "meeting-notes-action-plan", "qa-workbench"];
     assert.deepEqual(tax.getToolsBySection("ai-tools").map((t) => t.id), ids);
     for (const id of ids) {
       const t = tools.getToolById(id);

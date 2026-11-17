@@ -15,6 +15,7 @@
 ========================================================= */
 
 import { createBriefTool } from "../ai-tools/common/brief-tool.js";
+import { tidy } from "../ai-tools/common/brief-engine.js";
 import { review, REVIEW_TYPES } from "../ai-tools/common/review-engine.js";
 import { take } from "../ai-tools/common/handoff.js";
 import { ROUTES } from "../../routes.js";
@@ -33,6 +34,23 @@ const TYPE_OF_TASK = {
 
 export const showRelatedCalculators = true;
 export const showRelatedArticles = false;
+
+
+/* The brief page asks for the review three times per keystroke (the brief, the check line, the follow-up action); the same
+   input gives the same review, so it is worked out once (Tool Pack 59, QD27: a long answer took about 360 ms per key). */
+let last = { key: "", result: null };
+const KEYS = ["answer", "question", "purpose", "reviewType", "wordLimit"];
+
+function reviewed(values) {
+
+    const tidied = Object.fromEntries(KEYS.map((k) => [k, tidy(values[k])]));
+    const key = JSON.stringify(KEYS.map((k) => tidied[k]));
+
+    if (key !== last.key) last = { key, result: review(tidied) };
+
+    return last.result;
+
+}
 
 
 const PURPOSES = [
@@ -62,17 +80,17 @@ export const CONFIG = {
         { key: "wordLimit", label: "Word limit, if you set one", kind: "text", maxlength: 6, hint: "Digits only. A limit written in your request, such as \"under 300 words\", is also found.", placeholder: "300" }
     ],
 
-    compose: (v) => review(v).markdown,
+    compose: (v) => reviewed(v).markdown,
 
     notes: (values) => {
-        const { counts } = review(values);
+        const { counts } = reviewed(values);
         const total = counts.missing + counts.format + counts.leftovers + counts.contradictions;
         const n = (count, word) => `${count} ${word}${count === 1 ? "" : "s"}`;
         return total ? [`Review: ${n(counts.missing, "requested item")} not visibly addressed, ${n(counts.format, "format problem")}, ${n(counts.leftovers, "leftover")}, ${n(counts.contradictions, "contradiction")}.`] : [];
     },
 
     actions: [
-        { id: "follow-up", label: "Copy follow-up prompt", text: (brief, values) => review(values).followUp }
+        { id: "follow-up", label: "Copy follow-up prompt", text: (brief, values) => reviewed(values).followUp }
     ],
 
     wire({ setValues, announce }) {
