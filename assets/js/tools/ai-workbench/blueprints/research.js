@@ -85,6 +85,41 @@ export const BLUEPRINTS = {
         next: ["Check every citation against the original.", "Follow your institution's rules on declaring AI assistance.", "Write the final text in your own voice."]
     },
 
+    dashboard: {
+        deliverable: "a dashboard design and build plan",
+        categories: [{ id: "data" }, { id: "assistants" }],
+        depth: "standard",
+        noFabrication: true,
+        questions: [
+            area("purpose", "Who uses the dashboard and for what decisions", { essential: true, rows: 2, placeholder: "Regional sales managers, weekly: which regions and products are behind target and why" }),
+            area("data", "The data: tables, columns and how often it updates", { essential: true, long: true, rows: 5, hint: "Column names and types, and the grain (one row per what). Remove personal or confidential data.", placeholder: "sales(order_id, order_date, region, product_id, qty, revenue) one row per order line, daily\ntargets(month, region, revenue_target)" }),
+            area("kpis", "Measures you need (if known)", { rows: 3, placeholder: "Revenue vs target, growth vs last year, average order value, top products" }),
+            choose("tool", "Where it is built", ["Power BI", "Excel", "Tableau", "Looker Studio", "Not decided"]),
+            more(area("rules", "Business rules and definitions", { rows: 2, placeholder: "Revenue excludes tax and returns; the financial year starts in April" }))
+        ],
+        brief: (a) => ({
+            goal: `Design a business performance dashboard and the plan to build it${a.tool && a.tool !== "Not decided" ? ` in ${a.tool}` : ""}, for: ${a.purpose}`,
+            context: [["Data", a.data], ["Measures wanted", a.kpis], ["Business rules", a.rules]],
+            requirements: [
+                "Start from the decisions the users make, then define each KPI: its business meaning, the exact calculation, the grain, the filters it respects, and the comparison it needs (target, last period, last year).",
+                "Design the data model and the preparation the data needs before any visual.",
+                "Lay out the pages: the summary first, then the detail, each visual with the question it answers.",
+                "Use only the tables and columns I listed; ask for anything missing.",
+                "Do not show results or example numbers as if they were mine: I will build it and tell you what came back."
+            ],
+            format: ["KPI definitions as a table: name, meaning, calculation, comparison, owner.", "The data model and preparation steps.", "The page layout, visual by visual.", "How to validate the numbers."]
+        }),
+        stages: [
+            { at: "standard", name: "KPIs and questions", objective: "Agree what the dashboard must answer.", submit: "The master prompt with the data description.", ask: () => "Propose the KPI definitions and the questions each page answers. List the questions you have about the data and the definitions. Do not design visuals yet.", expect: "A KPI table and open questions.", done: "Every KPI has an agreed definition." },
+            { at: "standard", name: "Model and build", objective: "A model and pages to build.", submit: "Your answers and the agreed KPIs.", ask: () => "Give the data preparation, the model, the calculations and the page layout, ready to build.", expect: "Preparation steps, model, calculations and layout.", done: "You can build it step by step." },
+            { at: "detailed", name: "Validate", objective: "Trust the numbers.", submit: "The totals the built dashboard shows and a figure you trust for the same period.", ask: () => "Here are the dashboard's totals and a trusted figure. List each check to run, explain any difference and what would cause it.", expect: "Validation checks and explanations.", done: "The totals reconcile." }
+        ],
+        refine: ["technical", "completeness", "missing"],
+        quality: ["Every KPI has a written definition and calculation.", "Totals reconcile with a figure you trust for the same period and filters.", "Each visual answers a stated question.", "Nothing uses a column that does not exist."],
+        prepare: { required: ["The table and column names, types and grain.", "Who uses the dashboard and the decisions they make."], optional: ["Existing reports or spreadsheets the dashboard replaces.", "Targets or budgets to compare with.", "A trusted total for one period, to reconcile."] },
+        next: ["Build one page first and reconcile its totals before the rest.", "Show it to two users and watch them answer their questions with it.", "Write the KPI definitions where users can find them."]
+    },
+
     "data-analysis": {
         deliverable: "an analysis of the data",
         categories: [{ id: "data" }, { id: "assistants" }],

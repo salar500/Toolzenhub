@@ -22,9 +22,12 @@ import { addJumpToResult } from "../../ui/jump-link.js";
 import { OUTCOMES, ROLES, EXPERIENCE, DEPTHS, getTask, getOutcome, tasksFor } from "./taxonomy.js";
 import { compileWorkPack, activeQuestions, NOT_VERIFIED, CONSISTENCY, CONTEXT_LIMIT } from "./compiler.js";
 import { loadBlueprint } from "./blueprints.js";
-import { matchTasks } from "./task-index.js";
-import { PLAYBOOKS, getPlaybook } from "./playbooks.js";
-import { withMeta, readMeta, readFile, pick, stripMeta, downloadText, today, FORMAT } from "../ai-tools/common/pack-format.js";
+/* the task matcher loads when the visitor first describes a task (D17) */
+const loadMatcher = () => import("./task-index.js");
+/* the playbooks load the first time their section is opened (D17) */
+const loadPlaybooks = () => import("./playbooks.js");
+/* the file format is needed only to save or open a pack; it loads with the first task or the first open (D17) */
+const loadFormat = () => import("../ai-tools/common/pack-format.js");
 import { put, take } from "../ai-tools/common/handoff.js";
 
 /* the directory data is needed only once a task is chosen */
@@ -58,7 +61,9 @@ const CONSISTENCY_HINTS = {
 const FILE_SCHEMA = {
     kind: "string:20", format: "int", version: "int", date: "string:10", task: "string:40", answers: "strings:8000",
     role: "string:100", experience: "string:20", depth: "string:10", product: "string:100", ownProduct: "bool",
-    context: `string:${CONTEXT_LIMIT}`, consistency: "strings:300"
+    context: `string:${CONTEXT_LIMIT}`, consistency: "strings:300",
+    profession: "string:40", tools: "strings:20", toolChoice: "string:20", otherTool: "string:100",
+    prompt: "strings:60"
 };
 
 const routeOf = (id) => ROUTES.tool("tools", id);
@@ -69,16 +74,6 @@ const taskLabel = (title) => title.replace(/^Testing: /, "").replace(/^./, (c) =
 
 /* ---------- static markup (built into the page) ---------- */
 
-function playbookList() {
-
-    return PLAYBOOKS.map((p) => `
-                                <li class="${P}-playbook">
-                                    <strong>${escapeHTML(p.title)}</strong>
-                                    <span class="ai-note">${escapeHTML(p.purpose)}</span>
-                                    <span class="${P}-playbook__steps">${p.steps.map((s, i) => `<button type="button" class="calculator-form__button calculator-form__button--secondary ${P}-step" data-playbook="${escapeHTML(p.id)}" data-step="${i}">${p.steps.length > 1 ? `Step ${i + 1}: ` : "Open: "}${escapeHTML(taskLabel(getTask(s.task)?.title ?? s.task))}</button>`).join("")}</span>
-                                </li>`).join("");
-
-}
 
 function outcomeChoices() {
 
@@ -120,8 +115,25 @@ export function markup() {
                 <li data-step="4">Work Pack</li>
             </ol>
 
+            <div class="${P}-panel" id="${P}-panel" data-mode="guided">
+            <div class="${P}-panel__head" id="${P}-panel-head">
+                <ol class="${P}-steps" id="${P}-steps" aria-label="Your steps"></ol>
+                <h2 class="calculator-section__title ${P}-panel__title" id="${P}-step-title" tabindex="-1">What is your role?</h2>
+                <p class="ai-note" id="${P}-step-why"></p>
+            </div>
             <section class="calculator-section">
                 <form id="${P}-form" class="calculator-form ai-form ${P}-form" novalidate>
+
+                    <fieldset class="${P}-group ${P}-roles" id="${P}-roles" data-panel-step="role">
+                        <legend class="ai-sr-only">Your role</legend>
+                        <div class="calculator-form__group ${P}-roles__find"><label class="calculator-form__label" for="${P}-role-search">Find your role</label><input id="${P}-role-search" class="calculator-form__input" type="search" autocomplete="off"></div>
+                        <div id="${P}-role-grid"><p class="ai-note">Loading the professions…</p></div>
+                    </fieldset>
+
+                    <fieldset class="${P}-group" id="${P}-guide-tasks" data-panel-step="task">
+                        <legend class="ai-sr-only">What do you want to accomplish?</legend>
+                        <div class="${P}-choices ${P}-choices--tasks" id="${P}-guide-task-list"></div>
+                    </fieldset>
 
                     <div class="${P}-group ${P}-start" id="${P}-unsure">
                         ${fieldShell({ id: `${P}-describe`, label: "Describe what you want to do", hint: "In your own words, for example \"test plan for a coupon feature\" or \"animate a product photo\".", control: `<input id="${P}-describe" class="calculator-form__input" type="text" maxlength="300" autocomplete="off" aria-describedby="${hintIdOf(`${P}-describe`)}">` })}
@@ -129,10 +141,15 @@ export function markup() {
                         <p id="${P}-suggestion" class="ai-note"></p>
                         <div id="${P}-matches" class="${P}-matches"></div>
 
+                        <details class="${P}-disclosure" id="${P}-professions">
+                            <summary>Start from your profession</summary>
+                            <div id="${P}-profession-body"><p class="ai-note">Loading the professions…</p></div>
+                        </details>
+
                         <details class="${P}-disclosure" id="${P}-playbooks">
                             <summary>Start from a playbook</summary>
                             <p class="ai-note">Recurring work in steps. A step opens its task and fills a few choices; nothing about your project is assumed.</p>
-                            <ul class="${P}-playbook-list">${playbookList()}</ul>
+                            <ul class="${P}-playbook-list" id="${P}-playbook-list"><li class="ai-note">Loading the playbooks…</li></ul>
                         </details>
 
                         <details class="${P}-disclosure" id="${P}-open">
@@ -162,6 +179,8 @@ export function markup() {
                         <h2 class="calculator-section__title" id="${P}-details-title" tabindex="-1">A few questions</h2>
                         <p class="calculator-section__description">Only what changes the result. Fields marked essential go into the prompt; leave the rest empty if you do not know.</p>
                         <div class="calculator-form__grid" id="${P}-questions"></div>
+
+                        <fieldset class="${P}-group ${P}-tools" id="${P}-tools" hidden></fieldset>
 
                         <details class="${P}-sheet" id="${P}-consistency" hidden>
                             <summary>Keep the same across every output (optional)</summary>
@@ -200,11 +219,14 @@ export function markup() {
             <section id="${P}-results" class="calculator-results ${P}-pack" aria-labelledby="${P}-pack-title">
                 <div class="calculator-results__card">
                     <h2 id="${P}-pack-title" class="${P}-pack__title" tabindex="-1">Your AI Work Pack</h2>
+                    <div id="${P}-prompt-controls" class="${P}-controls" hidden></div>
                     <div id="${P}-pack-body">
                         <p class="ai-check__line">${EMPTY_LINE}</p>
                     </div>
                 </div>
             </section>
+            <div class="${P}-panel__nav" id="${P}-panel-nav"></div>
+            </div>
             <p id="${P}-live" class="ai-sr-only" role="status" aria-live="polite"></p>
 
             <section class="calculator-info">
@@ -251,149 +273,6 @@ export function render(mount = document.querySelector("#app")) {
 }
 
 
-/* ---------- the pack ---------- */
-
-const promptBlock = (id, title, body) => `
-                        <div class="${P}-prompt">
-                            <div class="${P}-prompt__head">
-                                <h4 class="${P}-prompt__title" id="${id}-title">${escapeHTML(title)}</h4>
-                                <button type="button" class="calculator-form__button calculator-form__button--secondary ${P}-copy" data-copy="${id}" aria-describedby="${id}-title">Copy</button>
-                            </div>
-                            <pre class="${P}-prompt__text" id="${id}" tabindex="0" aria-labelledby="${id}-title">${escapeHTML(body)}</pre>
-                        </div>`;
-
-const list = (items, tag = "ul") => items.length ? `<${tag}>${items.map((t) => `<li>${escapeHTML(t)}</li>`).join("")}</${tag}>` : "";
-
-function productHTML(pack, offered) {
-
-    const chosen = pack.product.chosen;
-
-    if (chosen?.name) {
-        return `
-                    <p><strong>${escapeHTML(chosen.name)}</strong>${chosen.own ? " (your choice)" : ""}</p>
-                    ${chosen.summary ? `<p class="ai-note">Its official site, checked ${escapeHTML(chosen.checked)}: ${escapeHTML(chosen.summary)} <a href="${escapeHTML(chosen.url)}" target="_blank" rel="noopener noreferrer">Official site<span class="ai-sr-only">, opens in a new tab</span> ↗</a></p>` : ""}
-                    ${chosen.reason ? `<p class="ai-note">${escapeHTML(chosen.reason)}</p>` : ""}
-                    ${pack.product.alternatives.length ? `<p class="ai-note">Also listed for this task (not a ranking): ${escapeHTML(pack.product.alternatives.join(", "))}.</p>` : ""}`;
-    }
-
-    return offered.length
-        ? `<p>Products listed for this task in the AI Directory (not a ranking): ${escapeHTML(offered.map((p) => p.name).join(", "))}. Choose one above, or use your own.</p>`
-        : `<p>${escapeHTML(NOT_VERIFIED)}</p>`;
-
-}
-
-function packHTML(pack, offered, viewChoice = "all", brief = true) {
-
-    const stateLine = pack.state === "empty"
-        ? `<p class="ai-check__line">Answer the questions. The pack is written as you type.</p>`
-        : pack.state === "incomplete"
-            ? `<p class="ai-check__line"><strong>Almost ready.</strong> Missing: ${escapeHTML(pack.missing.join(", "))}. They are marked [add: …] in the prompts; fill them in here or tell the AI when it asks.</p>`
-            : `<p class="ai-check__line"><strong>Ready.</strong> ${escapeHTML(DEPTH_NAMES[pack.depth])} pack${pack.stages.length ? `, ${pack.stages.length} stage${pack.stages.length === 1 ? "" : "s"}` : ", one prompt"}.</p>`;
-
-    const conflicts = pack.conflicts.length ? `
-                <div class="${P}-alert" role="note"><strong>Check this first:</strong>${list(pack.conflicts)}</div>` : "";
-
-    const stagesNav = pack.stages.length > 1 ? `
-                    <ol class="${P}-stage-nav" aria-label="Stages">${pack.stages.map((s) => `<li><a href="#${P}-stage-${s.n}">${escapeHTML(s.name)}</a></li>`).join("")}</ol>` : "";
-
-    /* a multi-stage pack opens its first stage and folds the rest, each named with its "done when" (17 §5.3) */
-    const fold = pack.depth === "multi" && pack.stages.length > 1;
-
-    const stageBody = (s) => `
-                        <dl class="${P}-stage__facts ${P}-info">
-                            <div><dt>Objective</dt><dd>${escapeHTML(s.objective)}</dd></div>
-                            <div><dt>Submit</dt><dd>${escapeHTML(s.submit)}</dd></div>
-                            <div><dt>Expect</dt><dd>${escapeHTML(s.expect)}</dd></div>
-                            <div><dt>Done when</dt><dd>${escapeHTML(s.done)}</dd></div>
-                        </dl>
-                        ${promptBlock(`${P}-stage-${s.n}-prompt`, `Stage ${s.n} prompt`, s.prompt)}
-                        <p class="ai-note ${P}-info">${escapeHTML(s.next)}</p>`;
-
-    const stages = pack.stages.map((s) => fold ? `
-                    <details class="${P}-stage ${P}-stage--fold" id="${P}-stage-${s.n}"${s.n === 1 ? " open" : ""}>
-                        <summary class="${P}-stage__name"><span id="${P}-stage-${s.n}-name">${s.n}. ${escapeHTML(s.name)}</span> <span class="ai-note">Done when: ${escapeHTML(s.done)}</span></summary>${stageBody(s)}
-                    </details>` : `
-                    <article class="${P}-stage" id="${P}-stage-${s.n}" aria-labelledby="${P}-stage-${s.n}-name">
-                        <h4 class="${P}-stage__name" id="${P}-stage-${s.n}-name">${s.n}. ${escapeHTML(s.name)}</h4>${stageBody(s)}
-                    </article>`).join("");
-
-    const view = `
-                <fieldset class="${P}-view">
-                    <legend class="calculator-form__label">Show</legend>
-                    <label><input type="radio" name="${P}-view" value="all"${viewChoice === "all" ? " checked" : ""}> Everything</label>
-                    <label><input type="radio" name="${P}-view" value="prompts"${viewChoice === "prompts" ? " checked" : ""}> Prompts only</label>
-                </fieldset>`;
-
-    const notes = pack.notes?.length ? `<p class="ai-note">${escapeHTML(pack.notes.join(" "))}</p>` : "";
-
-    return `
-                ${stateLine}${conflicts}${view}
-
-                <section class="${P}-part ${P}-info" aria-labelledby="${P}-h-overview">
-                    <h3 id="${P}-h-overview">Overview</h3>
-                    <dl class="${P}-stage__facts">
-                        <div><dt>Task</dt><dd>${escapeHTML(pack.overview.task)}</dd></div>
-                        <div><dt>Deliverable</dt><dd>${escapeHTML(pack.overview.deliverable)}</dd></div>
-                        <div><dt>Success</dt><dd>${escapeHTML(pack.overview.success.join(" "))}</dd></div>
-                    </dl>
-                </section>
-
-                <section class="${P}-part ${P}-info" aria-labelledby="${P}-h-product">
-                    <h3 id="${P}-h-product">AI product</h3>
-                    ${productHTML(pack, offered)}
-                </section>
-
-                <section class="${P}-part ${P}-info" aria-labelledby="${P}-h-prepare">
-                    <h3 id="${P}-h-prepare">Prepare</h3>
-                    ${pack.preparation.required.length ? `<p class="${P}-sub">Have ready</p>${list(pack.preparation.required)}` : ""}
-                    ${pack.preparation.optional.length ? `<p class="${P}-sub">Helpful</p>${list(pack.preparation.optional)}` : ""}
-                    ${pack.missing.length ? `<p class="${P}-sub">Still missing from your answers</p>${list(pack.missing)}` : ""}
-                </section>
-
-                <section class="${P}-part" aria-labelledby="${P}-h-master">
-                    <h3 id="${P}-h-master">Master prompt <span class="ai-note">${pack.promptWords} words</span></h3>
-                    <p class="ai-note">${pack.stages.length ? "Paste it as the first message of a new conversation, then use the stage prompts in the same conversation." : "Paste it into the AI product."}</p>${notes}
-                    ${promptBlock(`${P}-master`, "Master prompt", pack.masterPrompt)}
-                </section>
-                ${pack.stages.length ? `
-                <section class="${P}-part" aria-labelledby="${P}-h-stages">
-                    <h3 id="${P}-h-stages">Stages</h3>${fold ? `
-                    <button type="button" id="${P}-expand" class="calculator-form__button calculator-form__button--secondary">Expand all stages</button>` : ""}${stagesNav}${stages}
-                </section>` : ""}
-                ${pack.refinements.length ? `
-                <section class="${P}-part" aria-labelledby="${P}-h-refine">
-                    <h3 id="${P}-h-refine">Refinement prompts</h3>
-                    <p class="ai-note">Use one when an answer falls short in that way, in the same conversation.</p>
-                    ${pack.refinements.map((r) => promptBlock(`${P}-refine-${r.id}`, r.title, r.prompt)).join("")}
-                </section>` : ""}
-
-                <section class="${P}-part ${P}-info" aria-labelledby="${P}-h-quality">
-                    <h3 id="${P}-h-quality">Quality checklist</h3>
-                    <ul class="${P}-checklist">${pack.quality.map((q, i) => `<li><label><input type="checkbox" id="${P}-q-${i}"> <span>${escapeHTML(q)}</span></label></li>`).join("")}</ul>
-                    <p class="ai-note">Ticks are for this visit only; nothing is saved.</p>
-                </section>
-                ${pack.nextSteps.length ? `
-                <section class="${P}-part ${P}-info" aria-labelledby="${P}-h-next">
-                    <h3 id="${P}-h-next">Next steps</h3>
-                    ${list(pack.nextSteps)}
-                </section>` : ""}
-
-                <div class="calculator-form__actions ai-actions">
-                    <button type="button" id="${P}-copy-all" class="calculator-form__button">Copy the whole pack</button>
-                    <button type="button" id="${P}-download" class="calculator-form__button calculator-form__button--secondary">Download .md</button>
-                </div>
-
-                <section class="${P}-part ${P}-next-tools" aria-labelledby="${P}-h-check">
-                    <h3 id="${P}-h-check">Check the answer you get</h3>
-                    <p class="ai-note">When the AI has answered, the AI Output Reviewer checks the answer against this request: what it does not visibly address, format problems, leftovers and statements to verify.</p>
-                    <p><a id="${P}-to-review" class="calculator-form__button calculator-form__button--secondary" href="${escapeHTML(routeOf("ai-answer-checklist"))}">Open the AI Output Reviewer with this request</a></p>${brief ? `
-                    <p class="ai-note">Working on a longer project? Carry it to another chat or AI product with a context pack.</p>
-                    <p><a id="${P}-to-bridge" class="calculator-form__button calculator-form__button--secondary" href="${escapeHTML(routeOf("context-pack-builder"))}">Start a context pack from this task</a></p>` : ""}
-                </section>`;
-
-}
-
-
 /* ---------- behaviour ---------- */
 
 export function init(app = document.getElementById("app")) {
@@ -406,7 +285,16 @@ export function init(app = document.getElementById("app")) {
         return;
     }
 
-    const state = { outcome: "", taskId: "", blueprint: null, offered: [], pack: null, view: "all", version: 0 };
+    const state = { outcome: "", taskId: "", blueprint: null, offered: [], pack: null, view: "all", version: 0, profession: "", guide: null, method: null };
+
+    /* professions, tools, the context review (D18) and the prompt detail controls (D19) load only when first needed */
+    const loadGuide = async () => (state.guide ??= await import("./guide.js"));
+    const controls = () => (state.method ? state.guide.readControls(P) : null);
+    /* a profession's title is not among an outcome's suggested roles: add it so it can be selected */
+    const addRole = (title) => {
+        if (![...$("role").options].some((o) => o.value === title)) $("role").insertAdjacentHTML("beforeend", `<option value="${escapeHTML(title)}">${escapeHTML(title)}</option>`);
+    };
+    const toolInfo = () => state.guide && !$("tools").hidden ? state.guide.toolInput(P, form, state.taskId, controls()?.detail, controls()?.extras) : { tools: [] };
 
     const consistency = () => Object.fromEntries([...form.querySelectorAll("[data-cs]")].map((el) => [el.dataset.cs, el.value]));
 
@@ -465,7 +353,12 @@ export function init(app = document.getElementById("app")) {
 
         syncVisibility();
 
-        const pack = compileWorkPack(state.blueprint, getTask(state.taskId), {
+        const tools = toolInfo();
+        const settings = controls();
+        const methodAt = (detail) => settings && state.guide.methodFor(state.method, { ...settings, detail }, state.blueprint, answers(), $("project").value);
+        const input = {
+            ...tools,
+            method: methodAt(settings?.detail),
             answers: answers(),
             role: $("role").value,
             experience: $("experience").value,
@@ -475,16 +368,21 @@ export function init(app = document.getElementById("app")) {
             noProductLine: state.offered.length ? "No product chosen; the prompts work in any capable assistant." : NOT_VERIFIED,
             context: $("project").value,
             consistency: consistency()
-        });
+        };
+        const pack = compileWorkPack(state.blueprint, getTask(state.taskId), input);
 
         state.pack = pack;
+
+        /* each level's word count, from the same answers (D19) */
+        if (settings) state.guide.countWords(P, settings.detail, pack, (d) => compileWorkPack(state.blueprint, getTask(state.taskId), { ...input, ...(!$("tools").hidden ? state.guide.toolInput(P, form, state.taskId, d, settings.extras) : {}), method: methodAt(d) }));
 
         /* A field's change event fires on blur, which happens on the mousedown of a click on a button or link in the pack:
            redrawing an unchanged pack then would replace the element under the pointer and lose the click. Redraw only
            when the pack (or the view) really changed. */
-        const signature = `${state.view}\n${pack.markdown}`;
+        const review = state.guide?.contextHTML(P, pack, tools, input.method, state.checkOpen) ?? "";
+        const signature = `${state.view}\n${settings?.version ?? ""}\n${review}\n${pack.markdown}`;
         if (signature !== state.drawn) {
-            body.innerHTML = packHTML(pack, state.offered, state.view, state.blueprint.style !== "descriptive");
+            body.innerHTML = review + state.packView.packHTML(pack, state.offered, state.view, state.blueprint.style !== "descriptive", state.guide);
             state.drawn = signature;
         }
         body.dataset.view = state.view;
@@ -547,9 +445,12 @@ export function init(app = document.getElementById("app")) {
         let blueprint;
         let productsFor;
         let productById;
+        let method;
 
         try {
-            [blueprint, { productsFor, productById }] = await Promise.all([loadBlueprint(taskId), loadProducts()]);
+            [blueprint, { productsFor, productById }, state.packView] = await Promise.all([loadBlueprint(taskId), loadProducts(), import("./view.js"), loadGuide()]);
+            loadFormat().catch(() => {});
+            method = blueprint?.style === "descriptive" ? null : await state.guide.loadMethod(taskId);
         } catch {
             $("questions").innerHTML = `<p class="ai-note">The questions could not be loaded. Check your connection and choose the task again.</p>`;
             return;
@@ -560,6 +461,11 @@ export function init(app = document.getElementById("app")) {
         state.taskId = taskId;
         state.blueprint = blueprint;
         state.offered = productsFor(blueprint);
+
+        state.method = state.guide.setupControls(P, method, state.method, prefill, () => {
+            update();
+            return state.pack?.promptWords ?? 0;
+        }, announce);
         state.productById = productById;
 
         $("details-title").textContent = `A few questions: ${task.title.replace(/^Testing: /, "")}`;
@@ -571,6 +477,8 @@ export function init(app = document.getElementById("app")) {
                                 <div class="calculator-form__grid">${extra.map(questionControl).join("")}</div>
                             </details>` : ""}`;
         renderProducts();
+
+        state.guide.showTools(P, form, blueprint.style === "descriptive" ? "" : taskId, state.profession, prefill);
 
         /* image, video and audio work keeps a consistency sheet; labelled briefs take project context instead (16 D12) */
         $("consistency").hidden = !CREATIVE.has(task.family);
@@ -600,6 +508,7 @@ export function init(app = document.getElementById("app")) {
         for (const [key, value] of Object.entries(p.answers ?? {})) fillField($("questions").querySelector(`[data-key="${CSS.escape(key)}"]`), value); // a question shown by an earlier answer
 
         fillField($("depth"), p.depth);
+        if (typeof p.role === "string" && p.role) addRole(p.role.slice(0, 100));
         fillField($("role"), p.role);
         fillField($("experience"), p.experience);
         if (typeof p.context === "string" && p.context && !$("context-field").hidden) $("project").value = p.context.slice(0, CONTEXT_LIMIT);
@@ -685,6 +594,14 @@ export function init(app = document.getElementById("app")) {
 
         if (t.name === `${P}-outcome`) chooseOutcome(t.value);
         else if (t.name === `${P}-task`) chooseTask(t.value);
+        else if (t.id === `${P}-profession`) {
+            state.profession = t.value;
+            $("profession-tasks").innerHTML = state.guide?.professionTasks(t.value) ?? "";
+            if (t.value) announce("The tasks of this profession are listed below the choice.", 0);
+        } else if (t.closest(`#${P}-tools`)) {
+            state.guide?.onToolChange(P, form, t);
+            update();
+        }
         else if (t.name === `${P}-product`) {
             $("own").hidden = t.value !== OWN;
             update();
@@ -695,8 +612,42 @@ export function init(app = document.getElementById("app")) {
     });
 
     form.addEventListener("input", (event) => {
-        if (event.target.matches("textarea, input[type=text]") && ![`${P}-describe`, `${P}-open-text`].includes(event.target.id)) scheduleUpdate();
+        if (event.target.id === `${P}-tool-search`) state.guide?.filterTools(P, form, event.target.value);
+        else if (event.target.matches("textarea, input[type=text]") && ![`${P}-describe`, `${P}-open-text`].includes(event.target.id)) scheduleUpdate();
     });
+
+    body.addEventListener("toggle", (event) => {
+        if (event.target.id === `${P}-prompt-check`) state.checkOpen = event.target.open;
+    }, true);
+
+    $("playbooks").addEventListener("toggle", async () => {
+        if (!$("playbooks").open || $("playbooks").dataset.loaded) return;
+        try {
+            $("playbook-list").innerHTML = (await loadPlaybooks()).playbookList();
+            $("playbooks").dataset.loaded = "true";
+        } catch {
+            $("playbook-list").innerHTML = `<li class="ai-note">The playbooks could not be loaded. Check your connection and open this again.</li>`;
+        }
+    });
+
+    /* "Start from your profession": the list loads the first time it is opened (D18) */
+    $("professions").addEventListener("toggle", async () => {
+        if (!$("professions").open || $("profession")) return;
+        try {
+            $("profession-body").innerHTML = (await loadGuide()).professionPicker(P);
+        } catch {
+            $("profession-body").innerHTML = `<p class="ai-note">The professions could not be loaded. Check your connection and open this again.</p>`;
+        }
+    });
+
+    /* a profession's task also sets the role written into the prompt */
+    const setRole = (roleId) => {
+        const title = state.guide?.roleTitle(roleId);
+        if (!title) return;
+        addRole(title);
+        $("role").value = title;
+        update();
+    };
 
     form.addEventListener("submit", (event) => event.preventDefault());
 
@@ -708,7 +659,7 @@ export function init(app = document.getElementById("app")) {
                                 <button type="button" class="calculator-form__button calculator-form__button--secondary" data-use-task="${escapeHTML(t.id)}">Use this task</button>
                             </li>`;
 
-    function findMatches() {
+    async function findMatches() {
 
         const text = $("describe").value.trim();
         const box = $("matches");
@@ -719,6 +670,13 @@ export function init(app = document.getElementById("app")) {
             return;
         }
 
+        let matchTasks;
+        try {
+            ({ matchTasks } = await loadMatcher());
+        } catch {
+            note("suggestion", "The task finder could not be loaded. Check your connection, or choose what you want to accomplish below.");
+            return;
+        }
         const { tasks, utilities, confident } = matchTasks(text);
         const tools = utilities.length ? `
                             <p class="${P}-sub">Another AI tool may fit</p>
@@ -754,9 +712,11 @@ export function init(app = document.getElementById("app")) {
         const step = event.target.closest("[data-playbook]");
 
         if (use) {
+            if (!use.dataset.role) state.profession = "";
             await selectTask(use.dataset.useTask);
+            if (use.dataset.role) setRole(use.dataset.role);
         } else if (step) {
-            const playbook = getPlaybook(step.dataset.playbook);
+            const playbook = (await loadPlaybooks()).getPlaybook(step.dataset.playbook);
             const s = playbook?.steps[Number(step.dataset.step)];
             if (s) await selectTask(s.task, { answers: s.answers, depth: s.depth, onlyEmpty: true, message: `Filled from the playbook "${playbook.title}". Edit anything.` });
         } else if (event.target.id === `${P}-open-button`) {
@@ -776,6 +736,13 @@ export function init(app = document.getElementById("app")) {
 
         let text = $("open-text").value;
         const file = $("open-file").files?.[0];
+        let format;
+        try {
+            format = await loadFormat();
+        } catch {
+            return error("Opening a pack could not be loaded. Check your connection and try again.");
+        }
+        const { readFile, readMeta, pick } = format;
 
         if (file) {
             const read = await readFile(file);
@@ -794,6 +761,7 @@ export function init(app = document.getElementById("app")) {
 
         note("open-error", "");
         state.version = value.version ?? 1;
+        state.profession = value.profession ?? "";
         const message = `Opened "${getTask(value.task).title}", version ${state.version}${value.date ? ` of ${value.date}` : ""}.${ignored.length ? ` Ignored: ${ignored.join(", ")}.` : ""}`;
 
         await selectTask(value.task, { ...value, more: true, message });
@@ -814,7 +782,9 @@ export function init(app = document.getElementById("app")) {
         state.outcome = "";
         state.taskId = "";
         state.blueprint = null;
+        state.method = null;
         state.version = 0;
+        $("prompt-controls").hidden = true;
         $("tasks").hidden = true;
         $("details").hidden = true;
         $("matches").innerHTML = "";
@@ -834,6 +804,12 @@ export function init(app = document.getElementById("app")) {
         } catch {
             if (source) {
                 const range = document.createRange();
+                if (source.select) {
+                    source.select();
+                    source.focus();
+                    announce("Copying was refused by the browser. The text is selected: press Ctrl+C or Cmd+C.", 0);
+                    return;
+                }
                 range.selectNodeContents(source);
                 const selection = window.getSelection();
                 selection.removeAllRanges();
@@ -845,7 +821,7 @@ export function init(app = document.getElementById("app")) {
     };
 
     /* the file keeps everything needed to open it again; Copy never includes the data comment (16 D9) */
-    function packFile() {
+    function packFile({ withMeta, today, FORMAT }) {
 
         const product = chosenProduct();
         state.version += 1;
@@ -863,7 +839,10 @@ export function init(app = document.getElementById("app")) {
             product: product ? (product.own ? product.name : product.id) : "",
             ownProduct: Boolean(product?.own),
             context: $("context-field").hidden ? "" : $("project").value,
-            consistency: Object.fromEntries(Object.entries(consistency()).filter(([, v]) => v))
+            consistency: Object.fromEntries(Object.entries(consistency()).filter(([, v]) => v)),
+            profession: state.profession,
+            ...(state.method ? { prompt: state.guide.promptState(P) } : {}),
+            ...(state.guide && !$("tools").hidden ? state.guide.toolState(P, form, state.taskId) : {})
         });
 
     }
@@ -891,18 +870,54 @@ export function init(app = document.getElementById("app")) {
             return;
         }
 
+        /* the context review's "Change" links: open a folded section, then go to the answer */
+        const edit = event.target.closest(".wb-review__edit");
+        if (edit) {
+            const target = document.getElementById(edit.getAttribute("href").slice(1));
+            const fold = target?.closest("details");
+            if (fold) fold.open = true;
+            if (target) {
+                event.preventDefault();
+                target.scrollIntoView({ block: "center" });
+                target.focus?.();
+            }
+            return;
+        }
+
         const button = event.target.closest("button");
         if (!button) return;
 
-        if (button.dataset.copy) {
+        if (button.dataset.adjust && state.method) {
+            /* a labelled task steps the prompt detail (D19) */
+            const level = state.guide.stepDetail(P, Number(button.dataset.adjust));
+            if (level) {
+                update();
+                announce(`Prompt detail set to ${level}: ${state.pack.promptWords} words. Written again here; no AI is used.`, 0);
+            }
+        } else if (button.dataset.adjust) {
+            /* a local rewrite at another depth, labelled as such on the page; no AI is used */
+            const order = ["short", "standard", "detailed", "multi"];
+            const next = order[order.indexOf(state.pack.depth) + Number(button.dataset.adjust)];
+            if (next) {
+                $("depth").value = next;
+                update();
+                announce(`Depth set to ${DEPTH_NAMES[next]}. The pack was written again.`, 0);
+            }
+        } else if (button.id === `${P}-copy-edit`) {
+            const area = $("master-edit");
+            copy(area.value, "Edited prompt", area);
+        } else if (button.dataset.copy) {
             const source = document.getElementById(button.dataset.copy);
             copy(source.textContent, document.getElementById(`${button.dataset.copy}-title`)?.textContent ?? "Prompt", source);
         } else if (button.id === `${P}-copy-all`) {
             copy(state.pack.markdown, "Work Pack", null);
         } else if (button.id === `${P}-download`) {
-            const name = `ai-work-pack-${state.taskId}-${today()}.md`;
-            downloadText(packFile(), name);
-            announce(`Downloaded ${name}. Open it here again with Open a saved Work Pack.`, 0);
+            /* loaded with the first task, so normally already here */
+            loadFormat().then((format) => {
+                const name = `ai-work-pack-${state.taskId}-${format.today()}.md`;
+                format.downloadText(packFile(format), name);
+                announce(`Downloaded ${name}. Open it here again with Open a saved Work Pack.`, 0);
+            }, () => announce("Downloading could not be prepared. Check your connection and try again.", 0));
         } else if (button.id === `${P}-expand`) {
             const folds = [...body.querySelectorAll(`.${P}-stage--fold`)];
             const open = folds.some((d) => !d.open);
@@ -953,6 +968,15 @@ export function init(app = document.getElementById("app")) {
         $("describe").focus();
     }
 
-    form.dataset.ready = "true";
+    /* the guided panel (D20): every profession first, one step at a time; a link, a hand-off or a describe start opens the full page */
+    const guided = !askedAnswers && !linkedTask && !linkedOutcome && query.get("start") !== "describe";
+    /* the page may have been left (in-place navigation) before the panel arrives: then there is nothing to set up */
+    import("./panel.js").then((m) => {
+        if (form.isConnected) m.initPanel({ P, form, state, chooseTask, setRole, answers, reset: () => $("reset").click(), update, announce, guided });
+    }, () => {
+        if (form.isConnected) $("panel").dataset.mode = "full";
+    }).finally(() => {
+        form.dataset.ready = "true";
+    });
 
 }

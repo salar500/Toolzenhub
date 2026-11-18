@@ -261,13 +261,19 @@ function aboutMe(x) {
 
     const level = x.experience ? EXPERIENCE_RULES[x.experience]?.label : "";
 
+    /* "Software developer" reads "a software developer"; an acronym keeps its capitals ("a QA engineer", "an HR or recruiter") */
+    const acronym = /^[A-Z]{2}/.test(x.role);
+    const role = acronym ? x.role : `${x.role.charAt(0).toLowerCase()}${x.role.slice(1)}`;
+    /* the article follows the sound: an acronym by how its first letter is spoken ("an HR", "a UI/UX"), a word by its vowel */
+    const article = (acronym ? /^[AEFHILMNORSX]/.test(role) : /^[aeiou]/i.test(role) && !/^(uni|use|usu)/i.test(role)) ? "an" : "a";
+
     return x.role
-        ? `I work as a ${x.role.charAt(0).toLowerCase()}${x.role.slice(1)}${level ? ` (${level} level)` : ""}.`
+        ? `I work as ${article} ${role}${level ? ` (${level} level)` : ""}.`
         : `My experience with this kind of work: ${level}.`;
 
 }
 
-function masterPrompt(blueprint, a, x, missing) {
+function masterPrompt(blueprint, a, x, missing, concise = false) {
 
     const b = blueprint.brief(a, x);
     const exp = x.experience ? EXPERIENCE_RULES[x.experience] : null;
@@ -293,12 +299,19 @@ function masterPrompt(blueprint, a, x, missing) {
 
     }
 
-    const blocks = [b.goal];
+    /* the professional method (method.js, D19): the AI's role, the goal, the method's sections after the context, its
+       presentation after the format, and the AI's self-check and closing list last; absent, the prompt is as before */
+    const m = x.method;
+    const blocks = [m?.lead, b.goal];
 
     if (x.context) blocks.push(`Project context (from my notes, use it; do not repeat it back):\n${fence(x.context)}`);
 
     const context = contextLines([...(me ? [["About me", me]] : []), ...(b.context ?? [])]);
     if (context.length) blocks.push(`Context:\n${context.join("\n")}`);
+
+    if (m) blocks.push(...(concise ? m.concise.blocks : m.blocks));
+
+    blocks.push(...((concise ? x.toolConcise : x.toolBlocks) ?? []));
 
     const requirements = unique([...present(b.requirements, a, x), ...(exp?.requirements ?? [])]);
     if (requirements.length) blocks.push(`Requirements:\n${bulletList(requirements)}`);
@@ -307,9 +320,12 @@ function masterPrompt(blueprint, a, x, missing) {
 
     const format = present(b.format, a, x);
     if (format.length) blocks.push(`Format of your answer:\n${bulletList(format)}`);
+    if (m?.presentation) blocks.push(m.presentation);
 
     const avoid = [...present(b.avoid, a, x), ...(blueprint.noFabrication ? [NO_FABRICATION] : [])];
     if (avoid.length) blocks.push(`Avoid:\n${bulletList(avoid)}`);
+
+    blocks.push(...(concise ? [m?.concise.check] : [m?.selfCheck, m?.endWith]));
 
     blocks.push(missing.length
         ? `Some details are still marked [add: ...]. Before you start, ask me for them; do not fill them in yourself.`
@@ -356,8 +372,14 @@ export function compileWorkPack(blueprint, task, input = {}) {
         tone: raw.tone || "",
         /* project context is for labelled briefs; a one-paragraph image, video or audio prompt gets the consistency sheet instead (16 D12) */
         context: blueprint.style === "descriptive" ? "" : tidy(withoutMeta(input.context)).slice(0, CONTEXT_LIMIT),
-        consistencyLine: consistencyLine(input.consistency)
+        consistencyLine: consistencyLine(input.consistency),
+        /* the tools' prompt blocks, written by tools.js toolPrompt() (D18); an image, video or audio prompt takes none */
+        toolBlocks: blueprint.style === "descriptive" ? [] : present(input.toolPrompt?.blocks),
+        toolConcise: blueprint.style === "descriptive" ? [] : present(input.toolPrompt?.concise),
+        /* the professional method at the chosen detail, written by method.js methodPrompt() (D19) */
+        method: blueprint.style === "descriptive" ? null : (input.method ?? null)
     };
+    const toolExtra = blueprint.style === "descriptive" ? {} : (input.toolPrompt ?? {});
 
     const placeholders = questions
         .filter((q) => raw[q.key] && PLACEHOLDER_TEXT.test(raw[q.key]))
@@ -387,12 +409,14 @@ export function compileWorkPack(blueprint, task, input = {}) {
         "Every requirement in the master prompt is met, or you know which one is not and why.",
         ...present(blueprint.quality, a, x),
         ...(blueprint.noFabrication ? ["Every source, citation and figure exists and says what the answer claims; open each one."] : []),
-        ...(x.experience ? EXPERIENCE_RULES[x.experience].quality : [])
+        ...(x.experience ? EXPERIENCE_RULES[x.experience].quality : []),
+        ...present(toolExtra.quality),
+        ...present(x.method?.quality)
     ];
 
     const prepare = blueprint.prepare ?? {};
     const preparation = {
-        required: present(prepare.required, a, x),
+        required: [...present(prepare.required, a, x), ...present(toolExtra.prepare)],
         optional: present(prepare.optional, a, x),
         missing
     };
@@ -424,8 +448,15 @@ export function compileWorkPack(blueprint, task, input = {}) {
         refinements,
         quality,
         nextSteps: present(blueprint.next, a, x),
+        detail: x.method?.settings.detail ?? "",
+        /* a shorter prompt with the same objective, context, method outline, constraints and output (D21); only with a method */
+        concisePrompt: x.method ? masterPrompt(blueprint, a, x, missing, true) : "",
+        strategy: x.method?.strategy ?? null,
         promptWords: wordsIn(prompt),
-        notes: wordsIn(prompt) > LONG_PROMPT_WORDS ? ["A long prompt is followed less reliably. Consider Standard depth or a shorter project context."] : []
+        /* a long prompt the visitor asked for is kept, with the way to work through it; otherwise the research note (12) */
+        notes: wordsIn(prompt) <= LONG_PROMPT_WORDS ? []
+            : x.method ? [`Long by design${x.method.settings.detail === "comprehensive" ? " (Very detailed)" : ""}. If the AI skips parts of it, work through the stages one at a time, or choose a lower prompt detail.`]
+                : ["A long prompt is followed less reliably. Consider Standard depth or a shorter project context."]
     };
 
     pack.markdown = toMarkdown(pack, x);
@@ -451,7 +482,7 @@ function toMarkdown(pack, x) {
 
     const lines = [`# AI Work Pack: ${pack.overview.task}`, ""];
 
-    lines.push("## Overview", "", `- Objective: ${pack.overview.objective}`, `- Deliverable: ${pack.overview.deliverable}`, `- Depth: ${pack.depth}`, "");
+    lines.push("## Overview", "", `- Objective: ${pack.overview.objective}`, `- Deliverable: ${pack.overview.deliverable}`, `- Depth: ${pack.depth}`, ...(pack.detail ? [`- Prompt detail: ${pack.detail}`] : []), ...(pack.strategy ? [`- Approach: ${[pack.strategy.approach, pack.strategy.emphasis, pack.strategy.audience].filter(Boolean).join("; ")} (${pack.strategy.id})`] : []), "");
 
     const chosen = pack.product.chosen;
     lines.push("## AI product", "");
@@ -473,6 +504,7 @@ function toMarkdown(pack, x) {
     if (pack.missing.length) lines.push("Still missing from your answers:", bulletList(pack.missing), "");
 
     lines.push("## Master prompt", "", "```text", pack.masterPrompt, "```", "");
+    if (pack.concisePrompt) lines.push("## Concise prompt", "", "```text", pack.concisePrompt, "```", "");
 
     if (pack.stages.length) {
         lines.push("## Stages", "");

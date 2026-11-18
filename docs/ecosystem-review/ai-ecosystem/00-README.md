@@ -39,5 +39,11 @@ Repository state when the research started: branch `feature/unified-ecosystem-wo
 | (design) | Final design: pages, states, microcopy, compiler rules, data models, responsive, themes, accessibility, privacy, journeys, matcher, playbooks, architecture, performance, the two renamed tools | `17-FINAL-DESIGN.md` |
 | (matrix) | Task blueprint and prompt matrix, permutations | `18-TASK-BLUEPRINT-MATRIX.md` |
 | (map) | Implementation map, design-freeze gate, checkpoint log | `19-IMPLEMENTATION-MAP-AND-FREEZE.md` |
+| (D18) | Professions, tasks and professional tool intelligence in the AI Workbench: research, sources, rules, results | `20-ROLES-TASKS-TOOLS.md` |
+| (D19) | The professional prompt engine: gap analysis, design, prompt detail levels, sources, results, limitations | `21-PROFESSIONAL-PROMPT-ENGINE.md` |
+| (D19) | Nine generated prompts: three journeys at Standard, Detailed and Very detailed, with word counts | `22-PROMPT-ENGINE-EXAMPLES.md` |
+| (D20) | The guided single panel: steps, behaviour, lazy loading, accessibility, performance | `23-GUIDED-PANEL.md` |
+| (D21) | Strategy engine, concise prompts, domain method, prompt check, and the coverage audit of all 84 tasks | `24-STRATEGY-ENGINE.md` |
+| (D21) | 24 benchmark journeys across the professions and one-change comparisons | `25-BENCHMARK-JOURNEYS.md` |
 
 Not done, by design: hands-on walk-throughs inside competitor products (need accounts and paid plans; see `01` limitations); search-volume data (none available; rule 12.4).

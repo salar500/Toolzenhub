@@ -10,6 +10,12 @@
    Reviewed with the blueprints, at least every six months.
 ========================================================= */
 
+import { escapeHTML } from "../../ui/escape.js";
+import { getTask } from "./taxonomy.js";
+
+const P = "wb";
+const taskLabel = (title) => title.replace(/^Testing: /, "").replace(/^./, (c) => c.toUpperCase());
+
 export const PLAYBOOKS_REVIEWED = "2026-11-16";
 
 export const PLAYBOOKS = Object.freeze([
@@ -109,3 +115,15 @@ export const PLAYBOOKS = Object.freeze([
 ]);
 
 export const getPlaybook = (id) => PLAYBOOKS.find((p) => p.id === id) ?? null;
+
+/** The starters as the list in "Start from a playbook": each step a button that opens its task. */
+export function playbookList() {
+
+    return PLAYBOOKS.map((p) => `
+                                <li class="${P}-playbook">
+                                    <strong>${escapeHTML(p.title)}</strong>
+                                    <span class="ai-note">${escapeHTML(p.purpose)}</span>
+                                    <span class="${P}-playbook__steps">${p.steps.map((s, i) => `<button type="button" class="calculator-form__button calculator-form__button--secondary ${P}-step" data-playbook="${escapeHTML(p.id)}" data-step="${i}">${p.steps.length > 1 ? `Step ${i + 1}: ` : "Open: "}${escapeHTML(taskLabel(getTask(s.task)?.title ?? s.task))}</button>`).join("")}</span>
+                                </li>`).join("");
+
+}

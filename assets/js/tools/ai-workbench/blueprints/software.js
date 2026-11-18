@@ -55,6 +55,40 @@ export const BLUEPRINTS = {
         next: ["Send the open questions to the owner of the requirement.", "Use the stories for estimation and for test design (the Workbench task \"test scenarios and test cases\")."]
     },
 
+    architecture: {
+        deliverable: "an architecture design",
+        categories: CATS,
+        depth: "detailed",
+        questions: [
+            area("system", "What the system must do", { essential: true, rows: 4, hint: "The problem, the users and the main things it must do.", placeholder: "An appointment booking service for 40 clinics: patients book online, staff manage calendars, reminders by SMS" }),
+            choose("kind", "What you are designing", ["A new system", "A change to an existing system", "A migration (for example to the cloud)", "Not sure"]),
+            area("quality", "Qualities that matter most", { rows: 3, hint: "Load, availability, response time, security, cost, time to build.", placeholder: "5,000 bookings a day; 99.9% availability in clinic hours; patient data protected" }),
+            area("constraints", "Constraints and what exists", { rows: 3, hint: "Technology you must use, systems to integrate with, team skills, budget, deadlines.", placeholder: "Existing PostgreSQL database; team knows Java; must run on Azure" }),
+            more(text("scale", "Expected growth", { placeholder: "Twice the clinics in two years" }))
+        ],
+        brief: (a) => ({
+            goal: `Design the software architecture for: ${a.system}`,
+            context: [["Kind of work", a.kind], ["Qualities that matter", a.quality], ["Constraints and existing systems", a.constraints], ["Expected growth", a.scale]],
+            requirements: [
+                "Start from the requirements and the qualities that matter, and say how each design decision serves them.",
+                "Describe the components, their responsibilities, the interfaces between them, the data and where it lives, and the main flows through the system.",
+                "For each significant decision, give the options considered, the choice, the trade-offs and what would make you revisit it.",
+                "Cover security, reliability, scalability, observability and deployment as far as the requirements need them.",
+                "Do not choose technologies I have ruled out, and mark every assumption about load, data or constraints."
+            ],
+            format: ["Context and requirements, then a component view, data, key flows, decisions (as decision records), risks and open questions.", "Diagrams as text (for example Mermaid, or a list of boxes and arrows) so they can be drawn."]
+        }),
+        stages: [
+            { at: "standard", name: "Requirements and qualities", objective: "Agree what the architecture must achieve.", submit: "The master prompt.", ask: () => "List the functional requirements, the quality requirements with measurable targets, the constraints and your questions. Do not design yet.", expect: "Requirements, targets, constraints and questions.", done: "The targets are agreed." },
+            { at: "standard", name: "Options", objective: "Compare approaches before choosing.", submit: "Your answers.", ask: () => "Propose two or three architectural options with their trade-offs against the agreed targets, and recommend one.", expect: "Options and a recommendation.", done: "You have chosen an option." },
+            { at: "detailed", name: "The design", objective: "The chosen architecture in detail.", submit: "The chosen option.", ask: () => "Write the full architecture for the chosen option, with components, data, flows, decisions and risks.", expect: "The architecture document.", done: "Every requirement maps to a part of the design." }
+        ],
+        refine: ["technical", "completeness", "missing"],
+        quality: ["Every requirement and quality target maps to a part of the design.", "Each significant decision has its options, trade-offs and reasons.", "Assumptions about load, data and constraints are marked.", "The failure of each component has been considered."],
+        prepare: { required: ["The requirements and the quality targets (load, availability, response time).", "The constraints: technology, systems to integrate, team, budget."], optional: ["Diagrams of the existing system.", "Current usage and growth figures."] },
+        next: ["Review the decisions with the team and the people who will run the system.", "Prototype the riskiest part before committing to it.", "Keep the decision records with the code."]
+    },
+
     "code-feature": {
         deliverable: "the code for a feature",
         categories: CATS,

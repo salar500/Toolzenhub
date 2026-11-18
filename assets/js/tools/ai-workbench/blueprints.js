@@ -17,7 +17,15 @@ const FAMILY_LOADERS = {
     testing: () => import("./blueprints/testing.js"),
     research: () => import("./blueprints/research.js"),
     improve: () => import("./blueprints/improve.js"),
-    plan: () => import("./blueprints/plan.js")
+    plan: () => import("./blueprints/plan.js"),
+    marketing: () => import("./blueprints/marketing.js"),
+    business: () => import("./blueprints/business.js"),
+    people: () => import("./blueprints/people.js"),
+    education: () => import("./blueprints/education.js"),
+    design: () => import("./blueprints/design.js"),
+    operations: () => import("./blueprints/operations.js"),
+    finance: () => import("./blueprints/finance.js"),
+    legal: () => import("./blueprints/legal.js")
 };
 
 /** The blueprint of a task, or null for an unknown task. */

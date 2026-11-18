@@ -17,6 +17,9 @@ const PLANNING_CATS = [{ id: "assistants" }, { id: "video" }];
 
 const idea = area("idea", "The idea", { essential: true, rows: 3, placeholder: "A 60-second explainer on why bread goes stale, for curious adults" });
 const audience = text("audience", "Who watches it", { placeholder: "Curious adults on YouTube Shorts" });
+/* a length typed as a bare number is in seconds ("8" reads "About 8 seconds long") */
+const seconds = (v) => /^\d+(\.\d+)?$/.test(v) ? `${v} seconds` : v;
+
 const duration = text("duration", "Length", { essential: true, placeholder: "60 seconds" });
 const aspect = choose("aspect", "Shape", ASPECTS);
 
@@ -100,7 +103,7 @@ export const BLUEPRINTS = {
             more(text("audio", "Sound, if the product makes it", { placeholder: "Oven door, quiet kitchen ambience, no music" }))
         ],
         brief: (a) => ({
-            text: sentence([`${a.scene}.`, a.camera ? `Camera: ${a.camera}.` : "", a.motion ? `Motion: ${a.motion}.` : "", a.look ? `Look: ${a.look}.` : "", a.seconds ? `About ${a.seconds} long.` : "", a.aspect ? `Shape: ${a.aspect}.` : "", a.audio ? `Sound: ${a.audio}.` : "", "One continuous shot, no cuts, no on-screen text."]),
+            text: sentence([`${a.scene}.`, a.camera ? `Camera: ${a.camera}.` : "", a.motion ? `Motion: ${a.motion}.` : "", a.look ? `Look: ${a.look}.` : "", a.seconds ? `About ${seconds(a.seconds)} long.` : "", a.aspect ? `Shape: ${a.aspect}.` : "", a.audio ? `Sound: ${a.audio}.` : "", "One continuous shot, no cuts, no on-screen text."]),
             avoid: ["sudden changes of the subject's appearance", "extra people or objects not described"]
         }),
         stages: [
@@ -109,7 +112,7 @@ export const BLUEPRINTS = {
         ],
         refine: ["visual", "continuity"],
         quality: VIDEO_QUALITY,
-        prepare: { required: ["One scene described in a sentence or two (one shot per prompt)."], optional: ["A still image of the look you want.", "The storyboard, if the clip is one of several."] },
+        prepare: { required: ["One scene described in a sentence or two (one shot per prompt)."], optional: ["A still image of the look you want.", "The storyboard, if the clip is one of several.", "In many video generators the length and aspect ratio are settings rather than words in the prompt (Runway's documentation lists them as settings): set them in the tool too."] },
         next: ["Generate one shot per prompt and join them in an editor.", "Keep the exact prompt that worked for each shot."]
     },
 
@@ -126,7 +129,7 @@ export const BLUEPRINTS = {
             area("keep", "Must not change", { rows: 2, placeholder: "Her face, the coat's colour, the bridge" })
         ],
         brief: (a) => ({
-            text: sentence(["Animate the attached image.", `Motion: ${a.motion}.`, a.camera ? `Camera: ${a.camera}.` : "Camera: static.", a.seconds ? `About ${a.seconds} long.` : "", "Do not add new objects or people."]),
+            text: sentence(["Animate the attached image.", `Motion: ${a.motion}.`, a.camera ? `Camera: ${a.camera}.` : "Camera: static.", a.seconds ? `About ${seconds(a.seconds)} long.` : "", "Do not add new objects or people."]),
             keep: [`what the image shows (${a.image})`, a.keep].filter(Boolean)
         }),
         stages: [
@@ -135,7 +138,7 @@ export const BLUEPRINTS = {
         ],
         refine: ["visual"],
         quality: ["The first frame still matches your image.", ...VIDEO_QUALITY],
-        prepare: { required: ["A high-resolution image you have the right to animate."], optional: ["A reference clip for the kind of motion."] },
+        prepare: { required: ["A high-resolution image you have the right to animate."], optional: ["A reference clip for the kind of motion.", "In many video generators the length and aspect ratio are settings rather than words in the prompt (Runway's documentation lists them as settings): set them in the tool too."] },
         next: ["Small, slow motions give the most believable results; add more only if needed.", "Do not animate a real person without their consent."]
     }
 

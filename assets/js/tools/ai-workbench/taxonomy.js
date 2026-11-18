@@ -37,6 +37,7 @@ export const TASKS = Object.freeze([
     { id: "product-photo", outcome: "images", family: "images", title: "A product photo" },
     { id: "thumbnail", outcome: "images", family: "images", title: "A thumbnail or banner" },
     { id: "image-series", outcome: "images", family: "images", title: "A character or illustration series (consistent look)" },
+    { id: "graphic-design", outcome: "images", family: "design", title: "A graphic design brief" },
 
     { id: "video-concept", outcome: "video", family: "video", title: "A video concept and script" },
     { id: "storyboard", outcome: "video", family: "video", title: "A storyboard and shot list" },
@@ -49,6 +50,7 @@ export const TASKS = Object.freeze([
     { id: "sound-effects", outcome: "audio", family: "audio", title: "Sound effects" },
 
     { id: "requirements", outcome: "software", family: "software", title: "Analyse requirements" },
+    { id: "architecture", outcome: "software", family: "software", title: "A software architecture design" },
     { id: "code-feature", outcome: "software", family: "software", title: "Write code for a feature" },
     { id: "debug", outcome: "software", family: "software", title: "Debug a problem" },
     { id: "code-review", outcome: "software", family: "software", title: "Review code" },
@@ -67,6 +69,7 @@ export const TASKS = Object.freeze([
     { id: "literature-review", outcome: "research", family: "research", title: "A literature review" },
     { id: "data-analysis", outcome: "research", family: "research", title: "Analyse data (SQL, Excel, Power BI or DAX)" },
     { id: "market-research", outcome: "research", family: "research", title: "Market or competitor research" },
+    { id: "dashboard", outcome: "research", family: "research", title: "A business performance dashboard" },
     { id: "report", outcome: "research", family: "research", title: "A report from findings" },
     { id: "doc-summary", outcome: "research", family: "research", title: "Summarise or pull information from a document" },
 
@@ -77,11 +80,56 @@ export const TASKS = Object.freeze([
     { id: "project-plan", outcome: "plan", family: "plan", title: "Plan a project with AI, step by step" },
     { id: "learning-plan", outcome: "plan", family: "plan", title: "A learning plan" },
     { id: "interview-prep", outcome: "plan", family: "plan", title: "Prepare for an interview" },
-    { id: "presentation", outcome: "plan", family: "plan", title: "A presentation or proposal" }
+    { id: "presentation", outcome: "plan", family: "plan", title: "A presentation or proposal" },
+
+    /* professions the first catalogue did not cover (AI programme D18, 20-ROLES-TASKS-TOOLS.md) */
+    { id: "seo-audit", outcome: "research", family: "marketing", title: "An SEO audit" },
+    { id: "keyword-research", outcome: "research", family: "marketing", title: "Keyword research" },
+    { id: "campaign-plan", outcome: "plan", family: "marketing", title: "A marketing campaign plan" },
+
+    { id: "sales-outreach", outcome: "content", family: "business", title: "A sales outreach sequence" },
+    { id: "discovery-call", outcome: "plan", family: "business", title: "Prepare a sales discovery call" },
+    { id: "business-plan", outcome: "plan", family: "business", title: "A business plan" },
+    { id: "prd", outcome: "plan", family: "business", title: "A product requirements document" },
+    { id: "status-report", outcome: "plan", family: "business", title: "A project status report" },
+    { id: "risk-register", outcome: "plan", family: "business", title: "A project risk register" },
+
+    { id: "job-description", outcome: "content", family: "people", title: "A job description" },
+    { id: "hiring-interview", outcome: "plan", family: "people", title: "An interview plan for a hiring panel" },
+    { id: "onboarding-plan", outcome: "plan", family: "people", title: "An onboarding plan for a new hire" },
+    { id: "hr-policy", outcome: "content", family: "people", title: "An HR policy draft" },
+    { id: "support-reply", outcome: "content", family: "people", title: "A customer support reply" },
+    { id: "kb-article", outcome: "content", family: "people", title: "A help-centre article" },
+    { id: "ticket-analysis", outcome: "research", family: "people", title: "Analyse support tickets" },
+
+    { id: "lesson-plan", outcome: "plan", family: "education", title: "A lesson plan" },
+    { id: "assessment", outcome: "content", family: "education", title: "A quiz or assessment" },
+    { id: "rubric", outcome: "content", family: "education", title: "A marking rubric" },
+    { id: "explain-concept", outcome: "research", family: "education", title: "Explain a concept I am learning" },
+
+    { id: "ux-research-plan", outcome: "research", family: "design", title: "A user research plan" },
+    { id: "usability-test", outcome: "research", family: "design", title: "A usability test plan" },
+    { id: "user-flow", outcome: "plan", family: "design", title: "A user flow" },
+    { id: "ux-review", outcome: "improve", family: "design", title: "A UX and accessibility review" },
+    { id: "design-handoff", outcome: "software", family: "design", title: "A design handoff specification" },
+
+    { id: "incident", outcome: "software", family: "operations", title: "Troubleshoot a system incident" },
+    { id: "ops-script", outcome: "software", family: "operations", title: "An admin script (PowerShell or Bash)" },
+    { id: "runbook", outcome: "software", family: "operations", title: "A runbook or operating procedure" },
+    { id: "change-plan", outcome: "plan", family: "operations", title: "An infrastructure change plan" },
+
+    { id: "financial-analysis", outcome: "research", family: "finance", title: "A financial analysis" },
+    { id: "budget-forecast", outcome: "plan", family: "finance", title: "A budget or forecast" },
+    { id: "variance-analysis", outcome: "research", family: "finance", title: "A budget-versus-actual variance analysis" },
+    { id: "reconciliation", outcome: "research", family: "finance", title: "An account reconciliation check" },
+
+    { id: "contract-review", outcome: "improve", family: "legal", title: "A contract review checklist" },
+    { id: "legal-research", outcome: "research", family: "legal", title: "A legal research memo" },
+    { id: "clause-draft", outcome: "content", family: "legal", title: "Draft or revise a contract clause" }
 
 ]);
 
-export const FAMILIES = Object.freeze(["content", "images", "video", "audio", "software", "testing", "research", "improve", "plan"]);
+export const FAMILIES = Object.freeze(["content", "images", "video", "audio", "software", "testing", "research", "improve", "plan", "marketing", "business", "people", "education", "design", "operations", "finance", "legal"]);
 
 export const getOutcome = (id) => OUTCOMES.find((o) => o.id === id) ?? null;
 export const getTask = (id) => TASKS.find((t) => t.id === id) ?? null;

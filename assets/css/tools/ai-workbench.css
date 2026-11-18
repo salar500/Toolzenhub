@@ -424,7 +424,148 @@
     accent-color: var(--accent);
 }
 
+/* the tool step (D18): a tool is chosen by its checkbox; its experience select appears beside it once chosen */
+.wb-tools {
+    margin: 16px 0 20px;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+}
+
+.wb-tool-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 8px;
+    margin: 10px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.wb-tool {
+    display: grid;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+}
+
+.wb-tool:has(input:checked) {
+    border-color: var(--accent);
+    border-width: 2px;
+}
+
+.wb-tool__pick {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    min-height: 44px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.wb-tool__pick input {
+    width: 20px;
+    height: 20px;
+    margin: 1px 0 0;
+    flex: none;
+    accent-color: var(--accent);
+}
+
+.wb-tool-other {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+}
+
+.wb-adjust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.wb-edit {
+    margin-top: 12px;
+}
+
+.wb-edit > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.wb-review {
+    border-left: 4px solid var(--accent-line);
+    padding-left: 12px;
+}
+
+/* prompt detail and refinements (D19): above the pack and not redrawn with it, so focus stays on the control used */
+.wb-controls {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.wb-detail,
+.wb-extras {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.wb-detail {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 8px;
+}
+
+.wb-detail .calculator-form__label {
+    grid-column: 1 / -1;
+}
+
+.wb-detail__option {
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+}
+
+/* WCAG 2.2 target size: the radios sit close together in the three-column layout, so each is 24px */
+.wb-detail__option input {
+    width: 24px;
+    height: 24px;
+}
+
+.wb-detail__option:has(input:checked) {
+    border-color: var(--accent);
+    border-width: 2px;
+}
+
+.wb-extras {
+    display: grid;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.wb-check__list {
+    margin: 8px 0 0;
+    padding-left: 20px;
+}
+
+.wb-review__edit {
+    margin-left: 6px;
+    white-space: nowrap;
+    text-decoration: underline; /* a link inside text is told apart by more than colour (WCAG 1.4.1) */
+}
+
 @media (max-width: 599px) {
+
+    .wb-adjust .calculator-form__button {
+        width: 100%;
+    }
 
     .wb-stage__facts div {
         grid-template-columns: 1fr;
@@ -441,4 +582,194 @@
         width: 100%;
     }
 
+}
+
+/* ---------- the guided panel (D20): one step at a time in one card; the page around it does not change ---------- */
+.wb-panel[data-mode="guided"] {
+    margin-top: 28px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-card);
+    box-shadow: 0 4px 14px rgba(16, 24, 40, .04);
+}
+
+.wb-panel[data-mode="guided"] .wb-off {
+    display: none !important;
+}
+
+.wb-panel[data-mode="guided"] > .calculator-section {
+    margin-top: 0;
+}
+
+.wb-panel[data-mode="guided"] .calculator-results__card {
+    padding: 0;
+    border: 0;
+    background: none;
+    box-shadow: none;
+}
+
+.wb-panel[data-mode="full"] .wb-panel__head,
+.wb-panel[data-mode="full"] #wb-roles,
+.wb-panel[data-mode="full"] #wb-guide-tasks {
+    display: none;
+}
+
+/* in a one-question step the step's title is the question, so the field's own label is kept for screen readers only */
+.wb-panel[data-mode="guided"] [data-panel-q] > .calculator-form__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+.wb-panel[data-mode="guided"] [data-panel-q] select:has(+ .wb-pick) {
+    display: none;
+}
+
+.wb-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 6px;
+    margin: 0 0 12px;
+    padding: 0;
+    list-style: none;
+    font-size: .875rem;
+}
+
+.wb-steps li + li::before {
+    content: "→ ";
+}
+
+.wb-steps li[aria-current="step"] {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.wb-panel__title {
+    margin-bottom: 4px;
+}
+
+.wb-panel__title:focus {
+    outline: none;
+}
+
+.wb-panel__title:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.wb-roles {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.wb-roles__find {
+    max-width: 360px;
+}
+
+.wb-role-group__title {
+    margin: 16px 0 8px;
+    font-size: 1rem;
+}
+
+.wb-role-list,
+.wb-choices--tasks:has(.wb-role),
+.wb-pick {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.wb-role {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.wb-role:hover {
+    border-color: var(--accent);
+}
+
+.wb-role:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.wb-role[aria-pressed="true"] {
+    border: 2px solid var(--accent);
+    font-weight: 700;
+}
+
+.wb-role__name {
+    display: block;
+}
+
+.wb-panel__nav {
+    margin-top: 20px;
+}
+
+.wb-panel__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.wb-panel__other {
+    margin: 12px 0 0;
+}
+
+.wb-linkish {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--accent);
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+    min-height: 24px;
+    text-align: left;
+}
+
+@media (max-width: 599px) {
+
+    .wb-panel[data-mode="guided"] {
+        padding: 16px;
+    }
+
+    .wb-panel__buttons .calculator-form__button {
+        flex: 1 1 auto;
+    }
+
+}
+
+.wb-panel[data-mode="guided"] .wb-form {
+    padding: 0;
+    border: 0;
+    background: none;
+    box-shadow: none;
+}
+
+.wb-panel[data-mode="guided"] #wb-pack-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
 }

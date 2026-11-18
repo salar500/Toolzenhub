@@ -44,7 +44,13 @@ export function productsFor(blueprint, limit = 6) {
         }
     }
 
-    return out.slice(0, limit);
+    /* the prompt is pasted into an assistant, so when the blueprint names assistants, specialist products never take every
+       place: up to three general assistants keep theirs (otherwise six testing platforms hid ChatGPT, Claude and Gemini) */
+    const assistant = (p) => AI_PRODUCTS.find((x) => x.id === p.id)?.categories.includes("assistants");
+    const wantsAssistants = (blueprint.categories ?? []).some((c) => c.id === "assistants" && !c.mention);
+    if (!wantsAssistants || out.slice(0, limit).some(assistant)) return out.slice(0, limit);
+    const general = out.filter(assistant).slice(0, 3);
+    return [...out.filter((p) => !assistant(p)).slice(0, limit - general.length), ...general];
 
 }
 

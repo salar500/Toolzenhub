@@ -119,7 +119,7 @@ export const BLUEPRINTS = {
                 "Do not invent endpoints or fields that are not in the API I gave; list what you need to know instead.",
                 NO_GUESS
             ],
-            format: ["A table of cases: id, request, expected status, checks, priority.", /automated/.test(a.output) ? "Then the test code in one block per file." : "", "Open questions about the contract at the end."]
+            format: ["A table of cases: id, request, expected status, checks, priority.", /Postman collection/.test(a.output) ? "Then an outline of the Postman collection: folders, the requests in run order, the variables each request needs or sets, and the tests in each request." : "", /automated/.test(a.output) ? "Then the test code in one block per file." : "", "Open questions about the contract at the end."]
         }),
         stages: [
             { at: "standard", name: "Contract questions", objective: "Close gaps in the API description.", submit: "The master prompt with the specification.", ask: () => "List what is unclear or missing in the API description (status codes, error format, limits, auth rules) before designing tests. Wait for my answers.", expect: "A list of contract questions.", done: "The contract is clear enough to test." },

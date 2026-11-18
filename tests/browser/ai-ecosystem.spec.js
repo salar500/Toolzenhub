@@ -128,6 +128,9 @@ test.describe("AI ecosystem", () => {
     }
     await go("tools/ai-workbench/");
     await page.locator("#wb-form[data-ready]").waitFor();
+    /* the guided panel's profession buttons first (D20), then the full page's start controls */
+    expect((await page.locator("[data-role-pick]").first().boundingBox()).height).toBeGreaterThanOrEqual(44);
+    await page.getByRole("button", { name: /^Other ways to start/ }).click();
     const box = await page.locator("#wb-suggest").boundingBox();
     expect(box.height).toBeGreaterThanOrEqual(44);
   });

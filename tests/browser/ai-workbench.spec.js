@@ -5,9 +5,11 @@
  */
 import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.mjs";
 
+/* these tests cover the full page; the guided panel (D20) is the first screen, so they open the full page from it */
 const open = async (page, go) => {
   await go("tools/ai-workbench/");
   await page.locator("#wb-form[data-ready]").waitFor();
+  await page.getByRole("button", { name: /^Other ways to start/ }).click();
 };
 
 test.describe("AI Workbench", () => {
@@ -46,7 +48,7 @@ test.describe("AI Workbench", () => {
     // a directory product, chosen, reaches the pack with its official summary
     const first = page.locator("input[name='wb-product']").first();
     await first.check();
-    await expect(page.locator("#wb-pack-body .wb-part").nth(1)).toContainText("Its official site, checked");
+    await expect(page.locator("#wb-pack-body .wb-part", { has: page.locator("#wb-h-product") })).toContainText("Its official site, checked"); // found by its heading: the context review (D18) now comes first
 
     // copy a stage prompt (the browser may refuse the clipboard; either way the page says what happened)
     await page.locator(".wb-stage .wb-copy").first().click();
