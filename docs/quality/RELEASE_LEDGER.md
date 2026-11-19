@@ -2,6 +2,18 @@
 
 Rules: `docs/product-decision-rules.md` section 11. GitHub Pages is the development preview; Hostinger production (`toolzenhub.in`) is manual and was not touched by any record here.
 
+## Update 2026-11-19 (AI ecosystem release candidate c950b797, built, not deployed; supersedes 3e5ce4cd)
+
+| Item | Record |
+|---|---|
+| File | `C:\Users\DELL\Documents\ToolZenHub-production-package\toolzenhub-production-c950b797.zip`, 16,819,564 bytes, 1,361 entries; checksum beside it in `.sha256` |
+| SHA-256 | `07cde2e841659db2cc1ba6954f38a6da80222667b42ebdc48f502dad092d2a45` |
+| Source | `c950b797`, branch `feature/unified-ecosystem-workspace` (D22 consolidation `65b4a67b`, D23 Prompt Builder `98cbaefa`, fix D-19); `npm run build` on a clean tree, 2026-11-19. Built on Windows, so text files have CRLF line ends as in earlier packages |
+| Checks | every entry byte-identical to `dist/`, zip test clean, forward-slash paths, `index.html` and `.htaccess` at the root, the seven D22 redirects in `.htaccess` (single 301 to live targets), no `.env`, `.map`, `.spec.js` or `.git`; sitemap 669 URLs on `https://toolzenhub.in`, no retired route; static checks on both builds; AI ecosystem tests in `TEST_EXECUTION_LEDGER.md` run AI-1 |
+| Preview | GitHub Pages from the feature branch: run 44580927586 (`98cbaefa`) success, live pages content-identical to the tested build; `c950b797` pushed after it |
+| Not covered | full-site regression since `3e5ce4cd` (out of this phase's scope: only AI files changed); the SEO baseline re-recording (stopped by the system at low memory); real devices, Safari, screen readers (T-18). After a Hostinger upload, check by hand that the 301s carry a link's query string |
+| Status | **Not deployed.** Production deployment and any merge into `main` need the owner's separate approval |
+
 ## Update 2026-11-16 (release candidate 3e5ce4cd, built, not deployed; supersedes ff74baf0)
 
 | Item | Record |
