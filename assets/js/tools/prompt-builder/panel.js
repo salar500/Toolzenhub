@@ -79,6 +79,11 @@ export function initPanel(h) {
         mount().catch(() => {});
     };
     for (const type of ["focus", "pointerdown", "keydown"]) input.addEventListener(type, early);
+    /* the box was pressed before this script arrived (a slow connection): open the list now rather than lose the press */
+    if (document.activeElement === input) {
+        wantOpen = true;
+        mount().catch(() => {});
+    }
 
     const load = () => (steps ??= Promise.all([import("./panel-steps.js"), mount()]).then(([m, rp]) => {
         const api = m.initSteps({ ...h, rolePicker: rp });

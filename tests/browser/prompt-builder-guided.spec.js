@@ -188,6 +188,22 @@ test.describe("AI Prompt Builder: one question at a time", () => {
     expect(watch.external).toEqual([]);
   });
 
+  test("a press on the role box before the panel's script arrives (slow connection) is not lost: the list opens when it does", async ({ page, go }) => {
+    let release;
+    const held = new Promise((r) => { release = r; });
+    await page.route(/prompt-builder\/panel\.js/, async (route) => {
+      await held;
+      await route.continue();
+    });
+    await go("tools/prompt-builder/");
+    await page.locator("#wb-role-input").click(); // the box is in the page's markup before any script
+    await expect(page.locator("#wb-role-input")).toHaveAttribute("aria-expanded", "false");
+    release();
+    await ready(page);
+    await expect(page.locator("#wb-role-input")).toHaveAttribute("aria-expanded", "true");
+    await expect(page.getByRole("option", { name: /^QA engineer/ })).toBeVisible();
+  });
+
   test("the list works by keyboard: arrows, Enter, Escape, typing; no match says so; Back; the full page and back", async ({ page, go }) => {
     await go("tools/prompt-builder/");
     await ready(page);

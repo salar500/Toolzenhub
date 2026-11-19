@@ -208,7 +208,9 @@ Free RAM 1.0 to 1.4 GB, one worker, foreground runs. Builds: `npm run build:all`
 | Visual, dark | `playwright test --project=visual-* -g "ai-tools\|prompt-builder"` | 6 images | prompt-builder 3 / 3; ai-tools 3 failed: baselines from `912ada6b` showed eight tools; reviewed by eye (three products, new sidebar groups, nothing broken) and updated |
 | Static | inventory, links, assets, seo | both builds | pass: 677 live pages, 7 unreachable files (informational, T-1), sitemap 669 |
 | SEO baseline | `playwright test seo-baseline.spec.js` | every page | **not completed**: stopped by the system at low memory; not restarted. AI pages checked from the built HTML instead: title, description, one canonical, Open Graph, JSON-LD; the seven retired pages noindex, canonical to the target, 0 s refresh, no analytics |
-| First load | doc 23 §4 method (reproduces 41.4 / 12.8 at `99530433`) | Prompt Builder | 46.5 / 14.1 kB of 50 / 16 after the trim (was 54.4 / 16.6, D-18) |
+| First load | doc 23 §4 method (reproduces 41.4 / 12.8 at `99530433`) | Prompt Builder | 46.5 / 14.1 kB of 50 / 16 after the trim (was 54.4 / 16.6, D-18); 46.7 / 14.2 with D-19 |
+| Live preview | Pages run 44580927586 for `98cbaefa`, success; a scripted journey on the preview at 390 and 1280 px | 4 AI pages, 7 retired routes, sitemap | 200, content identical to `dist-ghpages/` (line endings differ: CI checks out LF); retired routes noindex with a 0 s refresh to the right target; journey passed with no page errors once ready, and found D-19 |
+| D-19 regression | `playwright test prompt-builder-guided.spec.js` (new slow-connection test failed on the old build, then all) | three projects; plus prompt-builder, professions, ai-ecosystem on desktop | 16 / 10 / 2; 15 / 15 |
 
 Not run (scope): full smoke, the full browser suite, `links.spec.js` (whole-site crawl), DOM baselines (no AI region), the rest of `navigation.spec.js` (its line-620 All Tools live-region expectation is still stale against the owner's 2026-11-16 live-search rule), the full unit suite. Not run (tooling): Firefox, WebKit, real devices, screen readers.
 

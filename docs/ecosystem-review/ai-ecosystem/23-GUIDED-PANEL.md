@@ -63,7 +63,7 @@ The form in `index.js` stays the **one store of every answer**: the steps show i
 
 | Measure | Result (2026-11-19) |
 | --- | --- |
-| First-load JavaScript added, D17 budget 50 / 16 kB | `99530433` (D21): 41.4 / 12.8. `65b4a67b` (D22): **48.1 / 14.6** (the 41.3 / 12.8 repeated in later notes was the D21 figure). This redesign before trimming: **54.4 / 16.6, over the budget**. After trimming: **46.5 / 14.1, within it** |
+| First-load JavaScript added, D17 budget 50 / 16 kB | `99530433` (D21): 41.4 / 12.8. `65b4a67b` (D22): **48.1 / 14.6** (the 41.3 / 12.8 repeated in later notes was the D21 figure). This redesign before trimming: **54.4 / 16.6, over the budget**. After trimming: **46.7 / 14.2, within it** (with the slow-connection fix below) |
 | The trim | `roles.js` (5.2 / 1.8) loads with the list instead of with the page; writing and opening a pack file (`pack-io.js`, 3.0 / 0.9 out of `index.js`) loads with the first download or opening. Nothing the visitor sees changed |
 | Layout shift on load | 0.0001 (was 0.3247: the page was drawn as the one-page form, then hidden; fixed by drawing the guided state) |
 | Writing the pack after a change | 3.8 to 5.0 ms per change (20 changes, API tests) |
