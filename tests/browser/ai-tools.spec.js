@@ -3,7 +3,23 @@
  * section page with its three products and the home card. The checker writes its review or comparison in the browser as
  * the visitor types; nothing is sent and nothing is stored. The AI Prompt Builder has its own specs (prompt-builder*.spec.js).
  */
+import { fileURLToPath } from "node:url";
 import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.mjs";
+
+const AXE = fileURLToPath(new URL("../../node_modules/axe-core/axe.min.js", import.meta.url));
+
+/* axe on the region shown, in the light and the dark theme, after the colour transition settles (site-a11y.spec.js covers only the first state) */
+async function axeBothThemes(page, where) {
+  await page.addScriptTag({ path: AXE });
+  for (const theme of ["light", "dark"]) {
+    await page.evaluate((t) => document.documentElement.setAttribute("data-theme", t), theme);
+    await page.waitForTimeout(400);
+    await expectNoHorizontalOverflow(page);
+    await page.evaluate(() => window.scrollTo(0, 0)); // a control scrolled under the sticky bars would count as obscured
+    const violations = await page.evaluate(async () => (await window.axe.run(document, { runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag21aa", "wcag22aa"] } })).violations.map((v) => `${v.id}: ${v.nodes.slice(0, 2).map((n) => n.target.join(" ")).join(" | ")}`));
+    expect(violations, `${where}, ${theme}`).toEqual([]);
+  }
+}
 
 const MODES = [
   { mode: "review", prefix: "ac", first: "answer", title: "Review one answer", heading: "# Evidence checklist for an AI answer" },
@@ -111,6 +127,27 @@ test.describe("AI Tools", () => {
       await expect(page.locator("h1")).toHaveText("AI Directory");
       await expect(page.locator(".ai-card")).toHaveCount(49);
       await expect(page.locator(".ai-directory__native a", { hasText: "Describe your task in the AI Prompt Builder" })).toHaveAttribute("href", `${siteRoot}tools/prompt-builder/?start=describe`);
+    });
+  }
+
+  for (const width of [390, 1280]) {
+    test(`the checker's results (both modes) and the directory's search and empty states pass axe at ${width}px, light and dark @desktop-only`, async ({ page, go }) => {
+      await page.setViewportSize({ width, height: 900 });
+      for (const m of MODES) {
+        await go(`tools/ai-answer-checker/${m.mode === "compare" ? "?mode=compare" : ""}`);
+        await page.locator(`#${m.prefix}-form[data-ready]`).waitFor();
+        await page.locator(`#${m.prefix}-load-example`).click();
+        await expect(page.locator(`#${m.prefix}-check`)).toHaveAttribute("data-state", "ok");
+        await axeBothThemes(page, `checker, ${m.mode} result`);
+      }
+      await go("ai-tools/directory/");
+      await expect(page.locator(".ai-card")).toHaveCount(49);
+      await page.locator("#ai-search").fill("sql");
+      await expect.poll(() => page.locator(".ai-card:visible").count()).toBeLessThan(49);
+      await axeBothThemes(page, "directory, searched");
+      await page.locator("#ai-search").fill("zzzzqqq");
+      await expect.poll(() => page.locator(".ai-card:visible").count()).toBe(0);
+      await axeBothThemes(page, "directory, nothing found");
     });
   }
 

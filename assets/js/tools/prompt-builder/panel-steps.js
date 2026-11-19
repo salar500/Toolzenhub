@@ -1,43 +1,59 @@
 /* =========================================================
    ToolZen Hub
    AI Prompt Builder: the guided panel's steps (AI programme D20;
+   one question at a time since 2026-11-19;
    docs/ecosystem-review/ai-ecosystem/23-GUIDED-PANEL.md)
 
-   Everything after the first screen, as a conversation (D22): the
-   task matched from the visitor's description or listed for their
-   profession, only the questions the task needs (an essential
-   answer or a choice gets its own step, the rest share one
-   optional step), the tools, the visitor and their project (with
-   the project context pack), the AI product and the prompt. Each
-   answer stays visible above the current question with a Change
-   button; Back, Continue, Skip, Clear, Start over and the full
-   page. The steps are the page's own form fields and pack, shown
-   one group at a time. Loaded by panel.js on the first press in
-   the panel, so the page's first load carries only the first
-   screen (D17). The description is matched by fixed words in the
-   browser (task-index.js); no AI reads it.
+   Everything after the first screen. Each step replaces the one
+   before it: the role, the task (one searchable list; typed words
+   are also matched by task-index.js), then only the questions this
+   task needs, one at a time (a choice moves on by itself, a typed
+   answer with Continue or Skip), the tools where the task has
+   them, and "Anything else we should know?" with the prompt's
+   length, the visitor's experience and the AI product. "Generate
+   my prompt" replaces the steps with the prompt and its actions:
+   copy, edit, download, settings, Reuse selections and New prompt.
+   The answers so far are a trail of buttons above the question;
+   pressing one reopens it with its answer kept.
+
+   The steps are the page's own form fields and pack (index.js),
+   shown one at a time, so the form stays the one store of every
+   answer. Loaded by panel.js on the first choice (D17). Nothing
+   is sent anywhere and nothing is stored.
 ========================================================= */
 
 import { escapeHTML as e } from "../../ui/escape.js";
-import { ROLES, getRole } from "./roles.js";
-import { getTask, tasksFor } from "./taxonomy.js";
+import { getRole } from "./roles.js";
+import { OUTCOMES, getTask, getOutcome, tasksFor } from "./taxonomy.js";
 import { activeQuestions } from "./compiler.js";
-
-const STAGES = { role: "Start", task: "Task", q: "Details", optional: "Details", tools: "Tools", you: "You", ai: "AI", prompt: "Prompt" };
+import { mountPicker, filterGroups } from "./picker.js";
+import { NO_ROLE } from "./panel.js";
 
 const label = (title) => title.replace(/^Testing: /, "").replace(/^./, (c) => c.toUpperCase());
 
-/* the matcher loads with the first description (D17) */
+/* the matcher loads with the first words typed into the task search (D17) */
 const loadMatcher = () => import("./task-index.js");
 
-const short = (text, n = 140) => {
+const short = (text, n = 48) => {
     const t = String(text ?? "").replace(/\s+/g, " ").trim();
     return t.length > n ? `${t.slice(0, n - 1)}…` : t;
 };
 
+const GENERAL = "general-prompt";
+
+const taskItem = (id) => {
+    const t = getTask(id);
+    return { id, label: label(t.title), keywords: getOutcome(t.outcome)?.title ?? "" };
+};
+
+/* every task, by outcome, for a visitor whose role is not listed and for searches */
+const allGroups = () => OUTCOMES.filter((o) => o.id !== "unsure")
+    .map((o) => ({ title: o.title, items: tasksFor(o.id).map((t) => taskItem(t.id)) }))
+    .filter((g) => g.items.length);
+
 /**
- * h: { P, form, state, chooseTask(taskId, prefill), setRole(roleId), answers(), reset(), update(), announce(text, delay), filter(text) }
- * The first screen is already drawn by panel.js. Returns { handle(button), setMode(mode), go(step), begin({ task, role }) }.
+ * h: { P, form, state, chooseTask(taskId, prefill), setRole(roleId), answers(), reset(), update(), announce(text, delay), rolePicker }
+ * Returns { handle(button), pickRole(id), setMode(mode), go(step), begin({ task, role }) }.
  */
 export function initSteps(h) {
 
@@ -45,125 +61,151 @@ export function initSteps(h) {
     const $ = (id) => document.getElementById(`${P}-${id}`);
     const panel = $("panel");
     const formSection = form.closest("section");
+
     let current = "role";
+    /* a profession id; "" when none is chosen or the visitor's role is not listed */
     let role = "";
+    let roleChosen = false;
+    /* the role changed to one that does not list the chosen task: the task is asked again, its answers kept */
+    let taskStale = false;
+    let generated = false;
     let promptSeen = false;
-    /* what the visitor typed on the first screen, kept for the first question it answers */
-    let asked = "";
+    let visited = new Set(["role"]);
 
     /* ---------- the steps of this journey, worked out from the answers so far ---------- */
 
     const groupOf = (key) => form.querySelector(`#${P}-questions [data-key="${CSS.escape(key)}"]`)?.closest(".calculator-form__group");
+    const questionOf = (step) => step?.startsWith("q:") ? state.blueprint?.questions.find((q) => q.key === step.slice(2)) ?? null : null;
 
     function plan() {
 
-        const steps = ["role"];
-        if (role) steps.push("task");
-        if (!state.blueprint) return steps;
-        if (!role) steps.push("task");
-
-        const shown = activeQuestions(state.blueprint, h.answers());
-        const own = shown.filter((q) => !q.more && (q.essential || q.kind === "select"));
-        steps.push(...own.map((q) => `q:${q.key}`));
-        if (shown.some((q) => !own.includes(q))) steps.push("optional");
+        const steps = ["role", "task"];
+        if (!state.blueprint || !state.taskId || taskStale) return steps;
+        /* only the questions this task asks for these answers, in the blueprint's order; the deeper ones wait in the final step */
+        steps.push(...activeQuestions(state.blueprint, h.answers()).filter((q) => !q.more).map((q) => `q:${q.key}`));
         if (!$("tools").hidden) steps.push("tools");
-        steps.push("you", "ai", "prompt");
-
+        steps.push("final");
+        if (generated) steps.push("prompt");
         return steps;
 
     }
-
-    const optionalKeys = () => {
-        const own = new Set(plan().filter((s) => s.startsWith("q:")).map((s) => s.slice(2)));
-        return activeQuestions(state.blueprint, h.answers()).filter((q) => !own.has(q.key));
-    };
 
     function nodesOf(step) {
 
         if (step === "role") return [$("roles")];
         if (step === "task") return [$("guide-tasks")];
         if (step.startsWith("q:")) return [$("details"), groupOf(step.slice(2))];
-        if (step === "optional") {
-            const keys = optionalKeys();
-            const more = form.querySelector(`.${P}-more`);
-            if (more && keys.some((q) => q.more)) more.open = true;
-            return [$("details"), ...keys.map((q) => groupOf(q.key)), ...(keys.some((q) => q.more) ? [more] : [])];
-        }
         if (step === "tools") return [$("details"), $("tools")];
-        if (step === "you") {
-            const about = form.querySelector(`.${P}-context`);
-            about.open = true;
-            return [$("details"), about, ...($("consistency").hidden ? [] : [$("consistency")]), ...($("context-field").hidden ? [] : [$("bridge")])];
-        }
-        if (step === "ai") return [$("details"), $("products")];
+        if (step === "final") return [$("details"), $("final"), ...($("context-field").hidden ? [] : [$("bridge")])];
         return [$("results")];
 
     }
 
     /* everything a step can show; a guided step hides the rest */
     const parts = () => [$("unsure"), $("outcomes"), $("tasks"), $("roles"), $("guide-tasks"), $("details"), $("details-title"), $("details-title").nextElementSibling,
-        ...form.querySelectorAll(`#${P}-questions > .calculator-form__group, .${P}-more`), $("tools"), $("consistency"), form.querySelector(`.${P}-context`),
-        $("products"), form.querySelector(`#${P}-details > .calculator-form__actions`), $("results"), $("bridge"), formSection].filter(Boolean);
+        ...form.querySelectorAll(`#${P}-questions > .calculator-form__group`), $("tools"), $("final"),
+        form.querySelector(`#${P}-details > .calculator-form__actions`), $("results"), $("bridge"), formSection].filter(Boolean);
 
-    /* ---------- showing a step ---------- */
+    const fieldsOf = (step) => nodesOf(step).filter((n) => n && n !== $("details") && n !== $("bridge"))
+        .flatMap((n) => [...n.querySelectorAll("input:not([type=search]), textarea, select")]).filter((f) => !f.closest(`.${P}-full-only`));
+
+    const filled = (f) => (f.type === "checkbox" || f.type === "radio") ? f.checked : Boolean(f.value.trim?.() ?? f.value) && !(f.tagName === "SELECT" && f.selectedIndex === 0);
+
+    function answered(step) {
+
+        if (step === "role") return roleChosen;
+        if (step === "task") return Boolean(state.taskId) && !taskStale;
+        if (step.startsWith("q:") || step === "tools") return fieldsOf(step).some(filled);
+        return false;
+
+    }
+
+    /* ---------- words for the title, the trail and the buttons ---------- */
 
     function titleOf(step) {
 
         const task = getTask(state.taskId);
-        if (step === "role") return ["What would you like to create today?", "Tell us what you want to accomplish. We'll help you build a professional prompt for your AI assistant."];
-        if (step === "task") return ["What do you want to accomplish?", role ? `Tasks of a ${getRole(role).title.toLowerCase()}. Choose one; you can come back and change it.` : "Tasks like the one you chose. Choose one, or describe your task again with Start over."];
+        if (step === "role") return ["What best describes your role?", "Choose the closest one. It shapes the tasks offered and the prompt's language."];
+        if (step === "task") return ["What would you like to accomplish?", role ? `Tasks for: ${getRole(role).title}. Type a few words to search every task.` : "Type a few words to search, or open the list."];
         if (step.startsWith("q:")) {
-            const q = state.blueprint.questions.find((x) => x.key === step.slice(2));
-            return [q.label, `${task ? `${label(task.title)}. ` : ""}${q.essential ? "Essential: it goes into the prompt. Leave it empty and the prompt asks the AI to ask you for it." : "Choose one, or skip it if you do not know."}`];
+            const q = questionOf(step);
+            const why = q.essential ? "Essential: it goes into the prompt. Leave it empty and the prompt asks the AI to ask you for it."
+                : q.kind === "select" ? "Choose one; the next question follows. Skip it if it does not matter."
+                    : "Optional. Skip it if you do not know.";
+            return [q.label, `${task ? `${label(task.title)}. ` : ""}${why}`];
         }
-        if (step === "optional") return ["Anything else that helps? (optional)", "Fill in what you know and leave the rest empty; nothing is guessed in its place."];
         if (step === "tools") return ["Which tools do you use for this?", "Optional. The prompt then works the way your tools do: their terms, steps and what to share."];
-        if (step === "you") return ["About you and your project (optional)", "Your experience shapes the explanations. Pasted notes are used as material, never as instructions to the AI."];
-        if (step === "ai") return ["Where will you use the prompt?", "Products from the AI Directory for this task, not a ranking. The prompt works in any capable assistant; you can also name your own."];
-        return ["Your prompt", "Copy the main prompt into your AI product. Change the detail, refine it, or go back to change any answer; nothing is sent anywhere."];
+        if (step === "final") return ["Anything else we should know?", "Optional. Add project details, choose the prompt's length, your experience and the AI product, then generate."];
+        return ["Your prompt", "Copy it into your AI product, or edit it first. Press any answer above to change it; nothing is sent anywhere."];
 
     }
 
-    /* a choice question is answered with one press, like the role and the task */
-    function picks(step) {
+    const stepName = (step) => step === "role" ? "Role" : step === "task" ? "Task" : step === "tools" ? "Tools" : step === "final" ? "Final details" : step === "prompt" ? "Your prompt" : short(questionOf(step)?.label, 40);
 
-        if (!step.startsWith("q:")) return;
-        const key = step.slice(2);
-        const group = groupOf(key);
-        const select = group?.querySelector("select");
-        if (!select) return;
-        group.dataset.panelQ = "";
-        let box = group.querySelector(`.${P}-pick`);
-        if (!box) {
-            box = document.createElement("div");
-            box.className = `${P}-pick`;
-            box.setAttribute("role", "group");
-            box.setAttribute("aria-label", select.labels?.[0]?.textContent ?? key);
-            select.after(box);
+    function answerOf(step) {
+
+        if (step === "role") return role ? getRole(role).title : roleChosen ? "Role not listed" : "Choose a role";
+        if (step === "task") return state.taskId && !taskStale ? label(getTask(state.taskId).title) : "Choose a task";
+        if (step === "prompt") return "Your prompt";
+        const fields = fieldsOf(step);
+        if (step === "tools") {
+            const chosen = fields.filter((x) => (x.type === "checkbox" || x.type === "radio") && x.checked)
+                .map((x) => x.closest("label")?.querySelector("span, strong")?.textContent?.trim() || x.value);
+            return chosen.length ? short(chosen.join(", ")) : "Skipped";
         }
-        box.innerHTML = [...select.options].filter((o) => o.value).map((o) => `<button type="button" class="${P}-role" data-pick="${e(o.value)}" aria-pressed="${o.value === select.value}">${e(o.textContent)}</button>`).join("");
+        if (step === "final") {
+            const n = fields.filter((x) => x.type !== "checkbox" && x.type !== "radio" && filled(x)).length;
+            return n ? `${n} detail${n === 1 ? "" : "s"} added` : "Nothing added";
+        }
+        const x = fields.find(filled);
+        if (!x) return questionOf(step)?.essential ? "Missing" : "Skipped";
+        return short(x.tagName === "SELECT" ? x.options[x.selectedIndex].textContent : x.value);
+
+    }
+
+    /* ---------- the trail of answers: every step reached so far, the current one marked ---------- */
+
+    function trail(steps) {
+
+        const last = steps.reduce((m, s, i) => visited.has(s) ? i : m, 0);
+        const shown = steps.slice(0, Math.max(last, steps.indexOf(current)) + 1);
+        const nav = $("trail-nav");
+        nav.hidden = shown.length < 2;
+        $("trail").innerHTML = shown.map((s) => {
+            if (s === current) return `<li><span class="${P}-trail__item ${P}-trail__item--current" aria-current="step"><span class="ai-sr-only">Current step: </span>${e(stepName(s))}</span></li>`;
+            const a = answerOf(s);
+            const quiet = ["Skipped", "Nothing added", "Missing", "Choose a role", "Choose a task"].includes(a);
+            return `<li><button type="button" class="${P}-trail__item${quiet ? ` ${P}-trail__item--quiet` : ""}" data-panel-go="${e(s)}"><span class="ai-sr-only">${e(stepName(s))}: </span>${e(a)}<span class="ai-sr-only">. Change</span></button></li>`;
+        }).join("");
+        /* on a phone the trail scrolls sideways inside itself: keep the current step in view */
+        const list = $("trail");
+        const at = list.querySelector("[aria-current]")?.parentElement;
+        if (at && list.scrollWidth > list.clientWidth) list.scrollLeft = Math.max(0, at.offsetLeft - 24);
 
     }
 
     function nav(steps) {
 
         const i = steps.indexOf(current);
-        /* the role and the task are chosen with one press; every later step moves on with Continue, or Skip while it is empty */
-        const pressed = current === "role" || current === "task" || current === "prompt";
-        const fields = current === "role" || current === "task" ? [] : nodesOf(current).filter((n) => n && n !== $("details")).flatMap((n) => [...n.querySelectorAll("input:not([type=search]), textarea, select")]);
-        const empty = fields.every((f) => (f.type === "checkbox" || f.type === "radio") ? !f.checked : !f.value || (f.tagName === "SELECT" && f.selectedIndex === 0));
+        const q = questionOf(current);
+        const has = answered(current);
         const button = (id, text, extra = "") => `<button type="button" class="calculator-form__button${extra}" data-panel="${id}">${text}</button>`;
         const secondary = " calculator-form__button--secondary";
 
-        /* redrawn only when it changes: a field's change event fires on the mousedown of a click on Continue */
+        /* a choice moves on by itself; Continue appears only where something is already chosen or typed */
+        let primary = "";
+        if (current === "final") primary = button("generate", "Generate my prompt");
+        else if (current === "role" || current === "task") primary = has && steps[i + 1] ? button("next", "Continue") : "";
+        else if (current !== "prompt") primary = button("next", has ? "Continue" : q?.essential ? "Skip for now" : "Skip", has ? "" : secondary);
+
         const html = `
                 <div class="${P}-panel__buttons">
+                    ${primary}
                     ${i > 0 ? button("back", "Back", secondary) : ""}
-                    ${pressed ? "" : button("next", empty ? "Skip" : "Continue")}
-                    ${fields.length && current !== "prompt" && !empty ? button("clear", "Clear this step", secondary) : ""}
-                    ${current !== "role" ? button("restart", "Start over", secondary) : ""}
+                    ${current !== "prompt" && (current !== "role" || roleChosen) ? button("restart", "New prompt", secondary) : ""}
                 </div>
-                <p class="${P}-panel__other">${current === "role" ? `<button type="button" class="${P}-linkish" data-panel="full">Other ways to start: an outcome, a playbook, a saved Work Pack or a project context pack</button>` : `<button type="button" class="${P}-linkish" data-panel="full">Show everything on one page</button>`}</p>`;
+                <p class="${P}-panel__other"><button type="button" class="${P}-linkish" data-panel="full">${current === "role" ? "More ways to start: an outcome, a playbook, a saved Work Pack or a project context pack" : "Show everything on one page"}</button></p>`;
+        /* redrawn only when it changes: a field's change event fires on the mousedown of a click on Continue */
         if ($("panel-nav").dataset.drawn !== html) {
             $("panel-nav").innerHTML = html;
             $("panel-nav").dataset.drawn = html;
@@ -171,46 +213,48 @@ export function initSteps(h) {
 
     }
 
-    /* what the visitor answered at a step, in a few words, for the conversation above the current question */
-    function answerOf(step) {
+    /* a choice question is answered with one press, like the role and the task */
+    function picks(step) {
 
-        if (step === "role") return asked ? short(asked) : role ? getRole(role).title : "";
-        if (step === "task") return state.taskId ? label(getTask(state.taskId).title) : "";
-        const fields = nodesOf(step).filter((n) => n && n !== $("details") && n !== $("bridge")).flatMap((n) => [...n.querySelectorAll("input:not([type=search]), textarea, select")]);
-        if (step === "tools" || step === "ai") {
-            const chosen = fields.filter((x) => (x.type === "checkbox" || x.type === "radio") && x.checked)
-                .map((x) => x.closest("label")?.querySelector("span, strong")?.textContent?.trim() || x.closest("label")?.textContent?.trim() || x.value);
-            return chosen.length ? short(chosen.join(", ")) : "Skipped";
+        const group = step.startsWith("q:") && groupOf(step.slice(2));
+        const select = group && group.querySelector("select");
+        if (!select) return;
+        group.dataset.panelQ = "";
+        let box = group.querySelector(`.${P}-pick`);
+        if (!box) {
+            box = document.createElement("div");
+            box.className = `${P}-pick`;
+            box.setAttribute("role", "group");
+            box.setAttribute("aria-labelledby", `${P}-step-title`);
+            select.after(box);
         }
-        const filled = fields.filter((x) => x.type !== "checkbox" && x.type !== "radio" && x.value && !(x.tagName === "SELECT" && x.selectedIndex === 0));
-        if (step.startsWith("q:")) {
-            const x = filled[0];
-            return x ? short(x.tagName === "SELECT" ? x.options[x.selectedIndex].textContent : x.value) : "Skipped";
-        }
-        return filled.length ? `${filled.length} detail${filled.length === 1 ? "" : "s"} added` : "Skipped";
+        box.innerHTML = [...select.options].filter((o) => o.value).map((o) => `<button type="button" class="${P}-role" data-pick="${e(o.value)}" aria-pressed="${o.value === select.value}">${e(o.textContent)}</button>`).join("");
 
     }
 
-    function thread(steps) {
+    /* the result's summary, what is still missing and the two ways to go again */
+    function result() {
 
-        const done = steps.slice(0, Math.max(0, steps.indexOf(current))).filter((s) => !(s === "role" && !asked && !role));
-        $("thread").hidden = !done.length;
-        $("thread").innerHTML = done.map((s) => {
-            const q = s === "role" ? (asked ? "What would you like to create today?" : "Your profession") : titleOf(s)[0];
-            return `
-                    <li class="${P}-thread__item">
-                        <span class="${P}-thread__q">${e(q)}</span>
-                        <span class="${P}-thread__a">${e(answerOf(s) || "Skipped")}</span>
-                        <button type="button" class="${P}-linkish ${P}-thread__change" data-panel-go="${e(s)}" aria-label="Change: ${e(q)}">Change</button>
-                    </li>`;
-        }).join("");
+        const task = getTask(state.taskId);
+        $("result-sum").textContent = [role ? getRole(role).title : "", task ? label(task.title) : ""].filter(Boolean).join(" · ");
+        const missing = plan().filter((s) => s.startsWith("q:") && questionOf(s).essential && !answered(s));
+        $("result-missing").innerHTML = missing.length ? `
+                        <p class="ai-note">Marked <code>[add: …]</code> in the prompt, so the AI asks you for ${missing.length === 1 ? "it" : "them"}. Answer here instead:</p>
+                        <p class="${P}-result-missing__list">${missing.map((s) => `<button type="button" class="calculator-form__button calculator-form__button--secondary" data-panel-go="${e(s)}">${e(questionOf(s).label)}</button>`).join("")}</p>` : "";
+        $("result-again").innerHTML = `
+                        <button type="button" class="calculator-form__button calculator-form__button--secondary" data-panel="reuse">Reuse selections</button>
+                        <button type="button" class="calculator-form__button calculator-form__button--secondary" data-panel="restart">New prompt</button>`;
 
     }
 
-    function show(step, { focus = true } = {}) {
+    /* ---------- showing a step ---------- */
+
+    function go(step, { focus = true } = {}) {
 
         const steps = plan();
-        current = steps.includes(step) ? step : steps[Math.min(steps.length - 1, 1)] ?? "role";
+        current = steps.includes(step) ? step : steps.includes(current) ? current : steps[0];
+        visited.add(current);
+        state.quiet = current !== "prompt";
 
         if (panel.dataset.mode === "guided") {
             const keep = new Set([...nodesOf(current), ...(current === "prompt" ? [] : [formSection])].filter(Boolean));
@@ -219,29 +263,29 @@ export function initSteps(h) {
             if (current.startsWith("q:")) groupOf(current.slice(2)).dataset.panelQ = "";
             picks(current);
         }
+        panel.dataset.step = current.split(":")[0];
 
-        /* the prompt step opens on the prompts; "Everything" is one press away */
-        if (current === "prompt" && !promptSeen) {
-            promptSeen = true;
-            state.view = "prompts";
+        /* the prompt opens on the prompts; "Everything" is one press away */
+        if (current === "prompt") {
+            if (!promptSeen) {
+                promptSeen = true;
+                state.view = "prompts";
+            }
             h.update();
+            result();
         }
 
         const [title, why] = titleOf(current);
         $("step-title").textContent = title;
         $("step-why").textContent = why;
-
-        /* the progress names the kinds of step this journey has, in order, never a fixed count */
-        const stages = [...new Set(steps.map((s) => STAGES[s.split(":")[0]]))];
-        const at = STAGES[current.split(":")[0]];
-        $("steps").innerHTML = stages.map((s, n) => `<li${s === at ? ` aria-current="step"` : ""} data-done="${n < stages.indexOf(at)}">${e(s)}</li>`).join("");
-        thread(steps);
-
+        trail(steps);
         nav(steps);
 
         if (focus) {
             $("step-title").focus({ preventScroll: true });
-            if ($("panel-head").getBoundingClientRect().top < 0) $("panel-head").scrollIntoView({ block: "start" });
+            /* the trail and the question start below the sticky bars (the page's scroll padding), never under them */
+            const covered = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+            if ($("panel-head").getBoundingClientRect().top < covered) $("panel-head").scrollIntoView({ block: "start" });
         }
 
     }
@@ -249,105 +293,169 @@ export function initSteps(h) {
     const move = (by) => {
         const steps = plan();
         const next = steps[steps.indexOf(current) + by];
-        if (next) show(next);
+        if (next) go(next);
     };
+
+    /* ---------- the task list: the role's tasks, every task on a search ---------- */
+
+    function taskGroups() {
+
+        const r = getRole(role);
+        return r
+            ? [{ title: `Tasks for: ${r.title}`, items: [...r.tasks.filter((id) => id !== GENERAL), GENERAL].map(taskItem) }]
+            : allGroups();
+
+    }
+
+    async function searchTasks(query, mine) {
+
+        const seen = new Set();
+        const fresh = (items) => items.filter((it) => !seen.has(it.id) && seen.add(it.id));
+        const groups = [];
+        let matched = { tasks: [], utilities: [] };
+        try {
+            matched = (await loadMatcher()).matchTasks(query);
+        } catch {
+            /* the plain search below still works */
+        }
+        /* among the closest, the role's own tasks come first (an "API" search by a tester leads with API tests) */
+        const mineIds = new Set(getRole(role)?.tasks ?? []);
+        const closest = fresh([...matched.tasks].sort((a, b) => Number(!mineIds.has(a.id)) - Number(!mineIds.has(b.id))).map((t) => taskItem(t.id)));
+        if (closest.length) groups.push({ title: "Closest to your words", items: closest });
+        for (const g of mine) {
+            const items = fresh(g.items);
+            if (items.length) groups.push({ ...g, items });
+        }
+        const others = fresh(filterGroups(allGroups(), query).flatMap((g) => g.items));
+        if (others.length) groups.push({ title: getRole(role) ? "Other tasks" : "More tasks", items: others });
+        if (!seen.has(GENERAL)) groups.push({ title: "Something else", items: [taskItem(GENERAL)] });
+
+        $("task-tools").innerHTML = matched.utilities.length
+            ? `Already have an answer, or looking for an AI product? ${matched.utilities.map((u) => `<a href="${e(u.route)}">${e(u.title)}</a>`).join(" · ")}`
+            : "";
+        return groups;
+
+    }
+
+    const taskPicker = mountPicker($("task-picker"), {
+        id: `${P}-task-input`,
+        labelledBy: `${P}-step-title`,
+        placeholder: "Search or choose a task",
+        hint: "Type a few words, for example \"API tests\" or \"follow-up email\", or open the list and use the arrow keys.",
+        groups: taskGroups,
+        search: searchTasks,
+        empty: () => "Nothing matches.",
+        onPick: (id, { query }) => pickTask(id, query),
+        announce: (text) => h.announce(text)
+    });
 
     /* ---------- choices ---------- */
 
-    function taskList() {
-
-        const r = getRole(role);
-        const list = r ? r.tasks : state.taskId ? tasksFor(getTask(state.taskId).outcome).map((t) => t.id) : [];
-        const ids = list.length ? [...list.filter((id) => id !== "general-prompt"), "general-prompt"] : [];
-        $("guide-task-list").innerHTML = ids.map(getTask).filter(Boolean).map((t) => `
-                            <button type="button" class="${P}-role ${P}-role--task" data-guide-task="${e(t.id)}" aria-pressed="${t.id === state.taskId}">${e(label(t.title))}</button>`).join("");
-
-    }
-
     function pickRole(id) {
 
-        role = id;
-        state.profession = id;
-        for (const b of panel.querySelectorAll("[data-role-pick]")) b.setAttribute("aria-pressed", String(b.dataset.rolePick === id));
-        taskList();
-        /* a task already chosen stays, with its answers, when the new profession has it too */
-        if (state.taskId && getRole(id).tasks.includes(state.taskId)) h.setRole(id);
-        show("task");
-        h.announce(`${getRole(id).title}: ${getRole(id).tasks.length} tasks listed.`, 0);
+        const next = id === NO_ROLE ? "" : id;
+        if (next && !getRole(next)) return;
+        roleChosen = true;
+        role = next;
+        state.profession = role;
+        h.rolePicker.setCurrent(id);
+        if (role) h.setRole(role);
+        else $("role").value = "";
+        /* a chosen task the new role does not list is asked again; its answers stay in the form until another task is chosen */
+        if (state.taskId && role && !getRole(role).tasks.includes(state.taskId)) {
+            taskStale = true;
+            generated = false;
+            visited = new Set(["role"]);
+        }
+        $("task-tools").textContent = "";
+        go("task");
+        h.announce(role ? `${getRole(role).title}: ${getRole(role).tasks.length} tasks listed.` : "Every task is listed.", 0);
 
     }
 
-    async function pickTask(id) {
+    async function pickTask(id, query = "") {
 
+        if (!getTask(id)) return;
         if (id !== state.taskId) {
-            /* answers whose questions the new task also asks are carried over; nothing else is */
+            /* answers whose questions the new task also asks are carried over, shown in their own steps; nothing else is */
             const kept = Object.fromEntries(Object.entries(h.answers()).filter(([, v]) => v));
             await h.chooseTask(id, Object.keys(kept).length ? { answers: kept, onlyEmpty: true, message: `${getTask(id).title}: answers it shares with the previous task were kept.` } : null);
             if (state.taskId !== id) return;
+            generated = false;
+            visited = new Set(["role", "task"]);
         }
+        taskStale = false;
+        taskPicker.setCurrent(id);
         if (role) h.setRole(role);
-        if (asked) {
-            const first = state.blueprint.questions.find((q) => q.essential && q.kind !== "select");
+        /* words typed to find the task answer its first essential question, where that is still empty */
+        if (query.split(/\s+/).filter(Boolean).length >= 3) {
+            const first = state.blueprint.questions.find((q) => q.essential && q.kind !== "select" && !q.more);
             const field = first && form.querySelector(`#${P}-questions [data-key="${CSS.escape(first.key)}"]`);
             if (field && !field.value.trim()) {
-                field.value = asked.slice(0, field.maxLength > 0 ? field.maxLength : 300);
-                field.dispatchEvent(new Event("input", { bubbles: true }));
+                field.value = query.slice(0, field.maxLength > 0 ? field.maxLength : 300);
                 h.update();
             }
         }
-        taskList();
         const steps = plan();
-        show(steps[steps.indexOf("task") + 1] ?? "prompt");
+        go(steps[steps.indexOf("task") + 1] ?? "final");
 
     }
 
-    async function ask() {
+    function generate() {
 
-        const text = $("ask").value.trim();
-        const box = $("ask-result");
-        if (!text) {
-            box.innerHTML = `<p class="ai-note">Type a few words about your task first.</p>`;
-            $("ask").focus();
-            return;
-        }
-
-        let matchTasks;
-        let routeOfUtility = (u) => u.route;
+        const error = $("final-error");
+        error.textContent = "";
         try {
-            ({ matchTasks } = await loadMatcher());
+            state.quiet = true;
+            h.update();
         } catch {
-            box.innerHTML = `<p class="ai-note">The task finder could not be loaded. Check your connection, or start from your profession below.</p>`;
+            error.textContent = "The prompt could not be written. Your answers are kept: press Generate my prompt again.";
             return;
         }
-
-        const { tasks, utilities, confident } = matchTasks(text);
-        const offer = (t, primary) => `<li><button type="button" class="${primary ? "calculator-form__button" : `${P}-role ${P}-role--task`}" data-ask-task="${e(t.id)}">${e(label(t.title))}</button></li>`;
-        const general = tasks.some((t) => t.id === "general-prompt") ? "" : `<li><button type="button" class="${P}-role ${P}-role--task" data-ask-task="general-prompt">Something else: one well-built prompt for this</button></li>`;
-        const tools = utilities.length ? `<p class="ai-note">Already have an answer, or looking for an AI product? ${utilities.map((u) => `<a href="${e(routeOfUtility(u))}">${e(u.title)}</a>`).join(" · ")}</p>` : "";
-
-        box.innerHTML = `
-                            <div class="${P}-bubble" role="group" aria-label="Matching tasks">
-                                <p>${tasks.length ? confident ? `This looks like <strong>${e(label(tasks[0].title))}</strong>. Use it, or choose another.` : "Several tasks could fit. Choose the closest:" : "No task matches those words closely. Write one prompt for it, or start from your profession below."}</p>
-                                <ul class="${P}-ask-list">${tasks.map((t, i) => offer(t, confident && i === 0)).join("")}${general}</ul>
-                                ${tools}
-                            </div>`;
-        h.announce(tasks.length ? `${tasks.length} task${tasks.length === 1 ? "" : "s"} match. Choose one.` : "No close match.", 0);
+        const pack = state.pack;
+        if (!pack || pack.state === "empty") {
+            const first = plan().find((s) => s.startsWith("q:"));
+            error.innerHTML = `Answer at least one question first, so the prompt is about your work.${first ? ` <button type="button" class="${P}-linkish" data-panel-go="${e(first)}">Go to: ${e(questionOf(first).label)}</button>` : ""}`;
+            return;
+        }
+        generated = true;
+        go("prompt");
+        h.announce(`Your prompt is ready: ${state.pack.promptWords} words.${state.pack.missing.length ? ` ${state.pack.missing.length} essential${state.pack.missing.length === 1 ? " is" : "s are"} marked to add.` : ""}`, 0);
 
     }
 
-    function clearStep() {
+    /* the next prompt with the same role, task, answers and preferences; the project's own details and any edit are cleared */
+    function reuse() {
 
-        for (const n of nodesOf(current)) {
-            if (!n || n === $("details")) continue;
-            for (const f of n.querySelectorAll("input:not([type=search]), textarea, select")) {
-                if (f.type === "checkbox" || f.type === "radio") f.checked = false;
-                else if (f.tagName === "SELECT") f.selectedIndex = 0;
-                else f.value = "";
-            }
-        }
+        state.edit = null;
+        $("project").value = "";
+        for (const el of form.querySelectorAll("[data-cs]")) el.value = "";
+        $("final-error").textContent = "";
+        generated = false;
+        promptSeen = false;
         h.update();
-        show(current);
-        h.announce("This step was cleared.", 0);
+        visited = new Set(plan());
+        go("task");
+        h.announce("Reusing your selections. Your role, task, answers and preferences are kept; the project details were cleared. Change anything, then generate again.", 0);
+
+    }
+
+    function restart() {
+
+        h.reset();
+        role = "";
+        roleChosen = false;
+        taskStale = false;
+        generated = false;
+        promptSeen = false;
+        visited = new Set(["role"]);
+        state.profession = "";
+        h.rolePicker.clear();
+        taskPicker.clear();
+        $("task-tools").textContent = "";
+        setMode("guided", false);
+        go("role");
+        h.announce("New prompt. Choose your role.", 0);
 
     }
 
@@ -357,12 +465,13 @@ export function initSteps(h) {
         const old = document.querySelector(`.${P}-progress`);
         if (old) old.hidden = mode === "guided";
         if (mode === "full") {
+            state.quiet = false;
             for (const part of parts()) part.classList.remove(`${P}-off`);
             $("panel-nav").innerHTML = `<p class="${P}-panel__other"><button type="button" class="${P}-linkish" data-panel="guided">Back to the guided steps</button></p>`;
             $("panel-nav").dataset.drawn = "";
             return;
         }
-        show(state.blueprint ? plan().find((s) => s.startsWith("q:") || s === "optional" || s === "tools") ?? "you" : role ? "task" : "role", { focus });
+        go(state.blueprint && !taskStale ? (visited.has(current) && current !== "role" ? current : plan()[2] ?? "final") : roleChosen ? "task" : "role", { focus });
 
     }
 
@@ -370,42 +479,21 @@ export function initSteps(h) {
 
     function handle(b) {
 
-        if (b.dataset.panel === "ask") ask();
-        else if (b.dataset.askTask) {
-            asked = $("ask").value.trim();
-            role = "";
-            state.profession = "";
-            pickTask(b.dataset.askTask);
-        } else if (b.dataset.panelGo) show(b.dataset.panelGo);
-        else if (b.dataset.rolePick) {
-            asked = "";
-            pickRole(b.dataset.rolePick);
-        }
-        else if (b.dataset.guideTask) pickTask(b.dataset.guideTask);
-        else if (b.dataset.pick !== undefined) {
+        if (b.dataset.panelGo) {
+            const step = b.dataset.panelGo;
+            if (step === "prompt") generate();
+            else go(step);
+        } else if (b.dataset.pick !== undefined) {
             const select = b.closest(".calculator-form__group").querySelector("select");
             select.value = b.dataset.pick;
             select.dispatchEvent(new Event("change", { bubbles: true }));
             move(1);
         } else if (b.dataset.panel === "back") move(-1);
         else if (b.dataset.panel === "next") move(1);
-        else if (b.dataset.panel === "clear") clearStep();
-        else if (b.dataset.panel === "restart") {
-            h.reset();
-            role = "";
-            asked = "";
-            promptSeen = false;
-            state.profession = "";
-            $("role-search").value = "";
-            $("ask").value = "";
-            $("ask-result").innerHTML = "";
-            h.filter("");
-            for (const x of panel.querySelectorAll("[data-role-pick]")) x.setAttribute("aria-pressed", "false");
-            $("guide-task-list").innerHTML = "";
-            setMode("guided");
-            show("role");
-            h.announce("Started over. Describe your task or choose your profession.", 0);
-        } else if (b.dataset.panel === "full") {
+        else if (b.dataset.panel === "generate") generate();
+        else if (b.dataset.panel === "reuse") reuse();
+        else if (b.dataset.panel === "restart") restart();
+        else if (b.dataset.panel === "full") {
             setMode("full");
             $(state.blueprint ? "details-title" : "describe").focus();
         } else if (b.dataset.panel === "guided") setMode("guided");
@@ -417,26 +505,41 @@ export function initSteps(h) {
         if (b && panel.contains(b)) handle(b);
     });
 
-    /* the navigation follows the answers: Continue becomes Skip on an empty optional step, Clear appears once something is filled */
-    form.addEventListener("input", () => panel.dataset.mode === "guided" && nav(plan()));
-    form.addEventListener("change", () => panel.dataset.mode === "guided" && nav(plan()));
+    /* the buttons follow the answers: Skip becomes Continue once something is typed or chosen */
+    const follow = () => panel.dataset.mode === "guided" && nav(plan());
+    form.addEventListener("input", follow);
+    form.addEventListener("change", follow);
+
+    /* Enter in a one-line answer moves on, as Continue does */
+    form.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" || event.isComposing || panel.dataset.mode !== "guided" || !current.startsWith("q:")) return;
+        if (event.target.matches("input[type=text]") && groupOf(current.slice(2))?.contains(event.target)) {
+            event.preventDefault();
+            move(1);
+        }
+    });
+
+    /* the context review's Change links, in the guided panel: the step that holds the answer */
+    state.goTo = (target) => {
+        const steps = plan();
+        const missing = steps.find((s) => s.startsWith("q:") && questionOf(s).essential && !answered(s));
+        go({ role: "role", outcomes: "task", tools: "tools", experience: "final" }[target] ?? missing ?? steps.find((s) => s.startsWith("q:")) ?? "final");
+    };
 
     /* a link named a task (and perhaps a profession), or only a profession */
     async function begin({ task = "", role: roleId = "" } = {}) {
 
         if (roleId && getRole(roleId)) {
             role = roleId;
+            roleChosen = true;
             state.profession = roleId;
-            for (const x of panel.querySelectorAll("[data-role-pick]")) x.setAttribute("aria-pressed", String(x.dataset.rolePick === roleId));
+            h.rolePicker.setCurrent(roleId);
         }
         if (task && getTask(task)) await pickTask(task);
-        else if (role) {
-            taskList();
-            show("task", { focus: false });
-        }
+        else if (role) go("task", { focus: false });
 
     }
 
-    return { handle, setMode, go: show, begin };
+    return { handle, pickRole, setMode, go, begin };
 
 }

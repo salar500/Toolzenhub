@@ -100,7 +100,7 @@ export function contextHTML(P, pack, tools, method, checkOpen) {
     const exp = field("experience");
 
     return reviewHTML(P, pack, { ...tools, hasTools: !field("tools").hidden, role: field("role").value, experience: exp.selectedIndex > 0 ? exp.selectedOptions[0].textContent : "" })
-        + (method ? checkHTML(P, pack, { ...tools, method, answers: Object.fromEntries([...document.querySelectorAll(`#${P}-questions [data-key]:not(select)`)].map((x) => [x.dataset.key, x.value])) }, checkOpen) : "");
+        + (method ? checkHTML(P, pack, { ...tools, method, answers: Object.fromEntries([...document.querySelectorAll(`#${P}-details [data-key]:not(select)`)].map((x) => [x.dataset.key, x.value])) }, checkOpen) : "");
 
 }
 
@@ -324,7 +324,7 @@ export function adjustHTML(P, pack) {
 ${otherVersion(P, pack)}${sectionsHTML(P, pack)}
                     <details class="${P}-edit">
                         <summary>Edit the prompt before copying</summary>
-                        <label class="calculator-form__label" for="${P}-master-edit">Your edited prompt (changes here are not kept when an answer changes)</label>
+                        <label class="calculator-form__label" for="${P}-master-edit">Your edited prompt (kept on this page until you start a new prompt)</label>
                         <textarea id="${P}-master-edit" class="calculator-form__input ai-textarea" rows="10">${e(shownPrompt(P, pack))}</textarea>
                         <button type="button" id="${P}-copy-edit" class="calculator-form__button calculator-form__button--secondary">Copy the edited prompt</button>
                     </details>`;
@@ -361,6 +361,63 @@ function sectionsHTML(P, pack) {
                     <details class="${P}-edit" id="${P}-sections">
                         <summary>Copy one section (${sections.length})</summary>${sections.map((b, i) => copyBlock(`${P}-sec-${i}`, b.split(":\n")[0], b)).join("")}
                     </details>`;
+
+}
+
+/* ---------- the final step's output preferences (2026-11-19): a mirror of the controls above, never a second store ---------- */
+
+/* Concise is the concise version at the chosen detail; the others are the full version at that detail */
+const LENGTHS = [{ id: "concise", label: "Concise" }, ...DETAIL.map((d) => ({ id: d.id, label: d.label }))];
+const STYLE_EXTRAS = ["steps", "examples", "verify", "edges", "risks"];
+
+/** Prompt length, as one row of choices. */
+export function styleHTML(P) {
+
+    return `
+                    <fieldset class="${P}-chips">
+                        <legend class="calculator-form__label">Prompt length</legend>${LENGTHS.map((l) => `
+                        <label class="${P}-chip"><input type="radio" name="${P}-length" value="${l.id}"> <span>${e(l.label)}</span></label>`).join("")}
+                    </fieldset>`;
+
+}
+
+/** Parts to add, among the final step's more options. */
+export function styleExtraHTML(P) {
+
+    return `
+                    <fieldset class="${P}-chips">
+                        <legend class="calculator-form__label">Add to the prompt</legend>${EXTRAS.filter((x) => STYLE_EXTRAS.includes(x.id)).map((x) => `
+                        <label class="${P}-chip"><input type="checkbox" name="${P}-pref-extra" value="${x.id}"> <span>${e(x.label)}</span></label>`).join("")}
+                    </fieldset>`;
+
+}
+
+/** Writes the final step's choices into the prompt controls. */
+export function applyStyle(P) {
+
+    const length = document.querySelector(`input[name="${P}-length"]:checked`)?.value;
+    const saved = promptState(P);
+    const picked = [...document.querySelectorAll(`input[name="${P}-pref-extra"]`)];
+    const extras = new Set(saved.extras.split(",").filter(Boolean));
+    for (const c of picked) {
+        if (c.checked) extras.add(c.value);
+        else extras.delete(c.value);
+    }
+    applyControls(P, {
+        ...saved,
+        ...(length === "concise" ? { version: "concise" } : length ? { version: "full", detail: length } : {}),
+        extras: [...extras].join(",")
+    });
+
+}
+
+/** Shows the controls' current values in the final step's choices. */
+export function syncStyle(P) {
+
+    const s = readControls(P);
+    const length = s.version === "concise" ? "concise" : s.detail;
+    for (const r of document.querySelectorAll(`input[name="${P}-length"]`)) r.checked = r.value === length;
+    for (const c of document.querySelectorAll(`input[name="${P}-pref-extra"]`)) c.checked = s.extras.includes(c.value);
 
 }
 

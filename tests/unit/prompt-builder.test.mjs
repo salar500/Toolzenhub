@@ -225,15 +225,20 @@ test("user text is kept as data: markup in an answer reaches the text unchanged 
   assert.ok(a.masterPrompt.includes("it \"works\" & returns `0`"));
 });
 
-test("the page markup (built into the HTML): the first question, the task box, ten outcome radios, labelled fields, one status region, no AI call", async () => {
+test("the page markup (built into the HTML): the first question, the trail, ten outcome radios, labelled fields, one status region, no AI call", async () => {
   const page = await import("../../assets/js/tools/prompt-builder/index.js");
   const html = page.markup();
   assert.ok(html.trimStart().startsWith('<div class="calculator-page">'));
   assert.match(html, /<h1>AI Prompt Builder<\/h1>/);
-  /* the conversational first screen (D22): the question, and a labelled box to describe the task */
-  assert.match(html, /id="wb-step-title"[^>]*>What would you like to create today\?<\/h2>/);
-  assert.match(html, /<label class="calculator-form__label" for="wb-ask">Describe your task<\/label>/);
-  assert.match(html, /id="wb-thread" aria-label="Your answers so far" hidden/);
+  /* one question at a time (2026-11-19): the role first, its list drawn into one place; the trail of answers, hidden until there is one */
+  assert.match(html, /id="wb-step-title"[^>]*>What best describes your role\?<\/h2>/);
+  assert.match(html, /<div id="wb-role-picker">/);
+  assert.match(html, /<nav class="wb-trail" id="wb-trail-nav" aria-label="Your selections" hidden><ol id="wb-trail"><\/ol><\/nav>/);
+  assert.doesNotMatch(html, /id="wb-thread"|id="wb-ask"|id="wb-steps"/, "the earlier conversation and step list are gone");
+  /* the final step and the result's own actions */
+  assert.match(html, /for="wb-project"\s*>\s*Project details, constraints or instructions \(optional\)\s*<\/label>/);
+  for (const id of ["wb-copy-main", "wb-edit-main", "wb-download-main"]) assert.match(html, new RegExp(`<button type="button" id="${id}"`), id);
+  assert.match(html, /id="wb-final-error" role="alert"/);
   /* the project context pack has its own form, so it sits outside the page form */
   assert.ok(html.indexOf('id="wb-bridge"') > html.indexOf("</form>"));
   assert.match(html, /<legend class="calculator-section__title">What do you want to accomplish with AI\?<\/legend>/);

@@ -63,8 +63,7 @@
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
 }
 
-.wb-choice,
-.wb-product {
+.wb-choice {
     position: relative;
     display: grid;
     grid-template-columns: auto 1fr;
@@ -80,8 +79,7 @@
     cursor: pointer;
 }
 
-.wb-choice input,
-.wb-product input {
+.wb-choice input {
     grid-row: span 2;
     width: 18px;
     height: 18px;
@@ -89,14 +87,12 @@
     accent-color: var(--accent);
 }
 
-.wb-choice:has(input:checked),
-.wb-product:has(input:checked) {
+.wb-choice:has(input:checked) {
     border-color: var(--action);
     box-shadow: inset 0 0 0 1px var(--action);
 }
 
-.wb-choice:has(input:focus-visible),
-.wb-product:has(input:focus-visible) {
+.wb-choice:has(input:focus-visible) {
     outline: 3px solid var(--focus-ring);
     outline-offset: 2px;
 }
@@ -196,16 +192,6 @@
     font-weight: 650;
 }
 
-.wb-product-list {
-    display: grid;
-    gap: 8px;
-}
-
-.wb-product span {
-    overflow-wrap: anywhere;
-}
-
-.wb-context,
 .wb-sheet,
 .wb-more {
     grid-column: 1 / -1;
@@ -216,7 +202,6 @@
     background: var(--surface-page);
 }
 
-.wb-context > summary,
 .wb-sheet > summary,
 .wb-more > summary {
     min-height: 44px;
@@ -227,8 +212,7 @@
 }
 
 .wb-more .calculator-form__grid,
-.wb-sheet .calculator-form__grid,
-.wb-context .calculator-form__grid {
+.wb-sheet .calculator-form__grid {
     margin-top: 8px;
 }
 
@@ -630,25 +614,6 @@
     display: none;
 }
 
-.wb-steps {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 6px;
-    margin: 0 0 12px;
-    padding: 0;
-    list-style: none;
-    font-size: .875rem;
-}
-
-.wb-steps li + li::before {
-    content: "→ ";
-}
-
-.wb-steps li[aria-current="step"] {
-    font-weight: 700;
-    color: var(--accent);
-}
-
 .wb-panel__title {
     margin-bottom: 4px;
 }
@@ -668,17 +633,6 @@
     border: 0;
 }
 
-.wb-roles__find {
-    max-width: 360px;
-}
-
-.wb-role-group__title {
-    margin: 16px 0 8px;
-    font-size: 1rem;
-}
-
-.wb-role-list,
-.wb-choices--tasks:has(.wb-role),
 .wb-pick {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
@@ -774,120 +728,369 @@
     white-space: nowrap;
 }
 
-/* ---------- the conversation (D22): describe the task, the answers so far, the current question ---------- */
-.wb-composer {
-    margin: 0 0 8px;
+/* ---------- one question at a time (2026-11-19): the trail of answers, the searchable list, the final step, the result ---------- */
+
+/* the trail: each answer so far is a button that reopens its question; the current step is marked, not a button */
+.wb-trail {
+    margin: 0 0 14px;
 }
 
-.wb-composer__row {
+.wb-trail ol {
+    position: relative;
     display: flex;
-    gap: 8px;
-    align-items: flex-end;
-}
-
-.wb-composer__input {
-    flex: 1 1 auto;
-    min-height: 56px;
-    resize: vertical;
-}
-
-.wb-composer__send {
-    flex: 0 0 auto;
-}
-
-.wb-or {
-    margin: 18px 0 6px;
-    color: var(--ink-muted);
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
     font-size: .875rem;
-    text-transform: uppercase;
-    letter-spacing: .06em;
 }
 
-.wb-ask-result:not(:empty) {
-    margin-top: 12px;
+.wb-trail li {
+    display: flex;
+    align-items: center;
+    min-width: 0;
 }
 
-.wb-bubble {
-    padding: 12px 14px;
+.wb-trail li + li::before {
+    content: "›" / "";
+    padding: 0 6px;
+    color: var(--ink-muted);
+}
+
+.wb-trail__item {
+    display: inline-block;
+    max-width: 24ch;
+    min-height: 36px;
+    padding: 7px 12px;
+    overflow: hidden;
     border: 1px solid var(--line);
-    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-full);
+    background: var(--surface-card);
+    color: var(--ink);
+    font: inherit;
+    line-height: 1.4;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+button.wb-trail__item {
+    cursor: pointer;
+}
+
+button.wb-trail__item:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+button.wb-trail__item:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.wb-trail__item--quiet {
+    color: var(--ink-muted);
+    font-style: italic;
+}
+
+.wb-trail__item--current {
+    border-color: var(--accent-line);
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 700;
+}
+
+@media (pointer: coarse) {
+
+    .wb-trail__item {
+        min-height: 44px;
+        padding-top: 11px;
+        padding-bottom: 11px;
+    }
+
+}
+
+@media (max-width: 599px) {
+
+    /* on a phone the trail is one row that scrolls sideways inside itself; the page never does */
+    .wb-trail ol {
+        flex-wrap: nowrap;
+        padding-bottom: 6px;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scrollbar-width: thin;
+    }
+
+    .wb-trail li {
+        flex: 0 0 auto;
+    }
+
+    .wb-trail__item {
+        max-width: 18ch;
+    }
+
+}
+
+/* the searchable list: the box, then the list in the page's flow under it */
+.wb-picker {
+    max-width: 560px;
+}
+
+.wb-picker__field {
+    position: relative;
+}
+
+.wb-picker__input {
+    width: 100%;
+    padding-right: 48px;
+}
+
+.wb-picker__toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    cursor: pointer;
+}
+
+.wb-picker__toggle::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--ink-muted);
+    border-bottom: 2px solid var(--ink-muted);
+    transform: translateY(-2px) rotate(45deg);
+}
+
+.wb-picker[data-open] .wb-picker__toggle::before {
+    transform: translateY(2px) rotate(-135deg);
+}
+
+.wb-picker__hint {
+    margin: 8px 0 0;
+}
+
+.wb-picker[data-open] .wb-picker__hint {
+    display: none;
+}
+
+.wb-picker__list {
+    max-height: min(360px, 55vh);
+    margin-top: 6px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid var(--line-control);
     border-radius: var(--radius-md);
+    background: var(--surface-card);
+    box-shadow: var(--shadow-md);
+}
+
+.wb-picker__group {
+    padding: 12px 14px 4px;
+    color: var(--ink-muted);
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+}
+
+.wb-picker__option {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 44px;
+    padding: 10px 14px;
+    color: var(--ink);
+    cursor: pointer;
+}
+
+.wb-picker__option:hover {
     background: var(--surface-sunken);
 }
 
-.wb-bubble p {
-    margin: 0 0 10px;
+.wb-picker__option[aria-selected="true"] {
+    background: var(--accent-soft);
+    box-shadow: inset 3px 0 0 var(--accent);
 }
 
-.wb-bubble p:last-child {
-    margin-bottom: 0;
+.wb-picker__option[data-current] .wb-picker__label {
+    font-weight: 700;
 }
 
-.wb-ask-list {
+.wb-picker__option[data-current] .wb-picker__label::after {
+    content: " ✓" / "";
+    color: var(--accent);
+}
+
+.wb-picker__note {
+    flex: 0 0 auto;
+    color: var(--ink-muted);
+    font-size: .875rem;
+}
+
+.wb-picker__none {
+    margin: 8px 0 0;
+}
+
+.wb-task-tools:empty {
+    display: none;
+}
+
+/* the final step: project details, the prompt's length, the visitor's preferences, more options folded */
+.wb-final {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+    gap: 18px;
+}
+
+.wb-final .ai-textarea {
+    min-height: 112px;
+    resize: vertical;
+}
+
+.wb-prefs {
+    align-items: start;
+}
+
+.wb-style:empty,
+#wb-final-error:empty {
+    display: none;
+}
+
+.wb-chips {
+    display: flex;
+    flex-wrap: wrap;
     gap: 8px;
-    margin: 0 0 10px;
+    margin: 0;
     padding: 0;
-    list-style: none;
+    border: 0;
 }
 
-.wb-ask-list .calculator-form__button {
+.wb-chips > legend {
     width: 100%;
+    margin-bottom: 8px;
+    padding: 0;
 }
 
-.wb-role-list--suggested {
-    margin-bottom: 10px;
-}
-
-.wb-all-roles > summary {
+.wb-chip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
     min-height: 44px;
-    padding: 10px 0;
+    padding: 0 16px;
+    border: 1px solid var(--line-control);
+    border-radius: var(--radius-full);
+    background: var(--surface-card);
+    color: var(--ink);
+    cursor: pointer;
+}
+
+.wb-chip input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.wb-chip:hover {
+    border-color: var(--accent);
+}
+
+.wb-chip:has(input:checked) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.wb-chip:has(input:checked)::before {
+    content: "✓ " / "";
+}
+
+.wb-chip:has(input:focus-visible) {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.wb-options__body {
+    display: grid;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.wb-panel[data-mode="guided"] .wb-full-only {
+    display: none;
+}
+
+/* in the guided steps the trail is the context: the review list and the jump link of the one-page form are left out */
+.wb-panel[data-mode="guided"] .wb-review,
+.calculator-page:has(.wb-panel[data-mode="guided"]) .jump-to-result {
+    display: none;
+}
+
+/* the result: what it is for, the three actions, what is missing, and the two ways to go again */
+.wb-result-bar {
+    display: grid;
+    gap: 12px;
+    margin: 0 0 16px;
+    padding: 0 0 16px;
+    border-bottom: 1px solid var(--line);
+}
+
+.wb-result-sum {
+    margin: 0;
+    color: var(--ink-muted);
+    font-weight: 600;
+}
+
+.wb-result-sum:empty {
+    display: none;
+}
+
+.wb-result-actions,
+.wb-result-again,
+.wb-result-missing__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+}
+
+.wb-result-missing:empty,
+.wb-result-again:empty {
+    display: none;
+}
+
+.wb-result-missing .ai-note {
+    margin: 0 0 8px;
+}
+
+.wb-settings {
+    margin: 0 0 16px;
+    padding: 0 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+}
+
+.wb-settings > summary {
+    min-height: 44px;
+    padding: 11px 0;
     color: var(--accent);
     font-weight: 600;
     cursor: pointer;
 }
 
-.wb-thread {
-    display: grid;
-    gap: 8px;
-    margin: 0 0 16px;
-    padding: 0;
-    list-style: none;
+.wb-settings[open] > summary {
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 12px;
 }
 
-.wb-thread__item {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 2px 12px;
-    align-items: start;
-    padding: 8px 12px;
-    border-radius: var(--radius-md);
-    background: var(--surface-sunken);
-}
-
-.wb-thread__q {
-    grid-column: 1;
-    color: var(--ink-muted);
-    font-size: .875rem;
-}
-
-.wb-thread__a {
-    grid-column: 1;
-    color: var(--ink);
-    font-weight: 600;
-    overflow-wrap: anywhere;
-}
-
-.wb-thread__change {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    align-self: center;
-    min-height: 44px;
-}
-
-.wb-panel[data-mode="full"] .wb-thread {
-    display: none;
+.wb-edit-note {
+    margin: 8px 0;
 }
 
 /* the three kinds of prompt, named above the pack */
@@ -910,13 +1113,30 @@
 
 @media (max-width: 599px) {
 
-    .wb-composer__row {
-        flex-direction: column;
-        align-items: stretch;
+    /* the step's main button takes the row; Back and New prompt share the next one */
+    .wb-panel__buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 
-    .wb-composer__send {
-        width: 100%;
+    .wb-panel__buttons > [data-panel="next"],
+    .wb-panel__buttons > [data-panel="generate"] {
+        grid-column: 1 / -1;
+    }
+
+    /* Copy takes the row; Edit and Download, then Reuse and New prompt, share a row each */
+    .wb-result-actions,
+    .wb-result-again {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .wb-result-actions > #wb-copy-main {
+        grid-column: 1 / -1;
+    }
+
+    .wb-picker__note {
+        display: none;
     }
 
 }

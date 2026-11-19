@@ -29,6 +29,8 @@ The section sidebar groups them as "Create a prompt", "Check an answer" and "Fin
 
 ## 3. The AI Prompt Builder's conversation
 
+**Replaced on 2026-11-19 (D23):** the conversation below was the D22 design. The AI Prompt Builder now asks one question at a time, role first, with a trail of answers; the current design is `23-GUIDED-PANEL.md`. This section is kept as the record of D22.
+
 1. **First screen.** "What would you like to create today?" with "Tell us what you want to accomplish. We'll help you build a professional prompt for your AI assistant." A box takes the task in the visitor's own words (Enter sends, Shift and Enter is a new line); below it, eight suggested professions, every one of the 22 under "All 22 professions, by area", and a search through all of them. "Other ways to start" opens the full page (outcomes, playbooks, a saved Work Pack, the project context pack).
 2. **A description** is matched to the tasks by fixed synonyms (`task-index.js`, deterministic, in the browser). A confident match is offered first; otherwise the closest three are offered as equals; "Something else: one well-built prompt for this" is always offered; the AI Answer Checker, the context pack or the AI Directory are linked when the words name their job. The chosen task's first open question receives the description, which the visitor can edit. No AI reads the description and the page never says it does.
 3. **A profession** lists its tasks, with "Any other task" last.

@@ -1,52 +1,81 @@
-# 23. The guided single panel of the AI Workbench
+# 23. The guided panel of the AI Prompt Builder: one question at a time
 
-Status: **built locally on 2026-11-17 and 2026-11-18, not committed** (base `3cafe100`). Decision: D20 in `16-DECISION-REGISTER.md`; policy: rulebook 4.11 (AI Workbench item).
+Status: the guided single panel was built on 2026-11-17 and 2026-11-18 (D20) and made conversational by D22. On **2026-11-19** the owner's master brief replaced the conversation with **one question at a time** (D23 in `16-DECISION-REGISTER.md`; policy: rulebook 4.11). Built and verified locally, **not committed** (base `65b4a67b`).
 
 ## 1. What the visitor sees
 
-The Workbench opens on **"What is your role?"** with every profession (22, in seven groups) and a search. Choosing one changes only the panel: the header, navigation, page background and the rest of the page stay as they are, nothing navigates and nothing reloads (a browser test checks the address, a marker set on the page and the header's position across a whole journey).
+Open → choose your role → choose your task → answer only the questions that task needs → add optional details → Generate → copy, edit, refine or reuse. Each step **replaces** the one before it in the same panel; the page around it (header, sidebar, information sections) does not change, nothing navigates and nothing reloads.
 
-| Step | Shown when | What it is |
+| Step | Shown when | Control |
 | --- | --- | --- |
-| Role | Always first | Every profession as a button, grouped, with a search |
-| Task | After a role | That profession's tasks only |
-| One question | For each essential question and each choice | The question as the step's title; a choice is answered with one press |
-| Anything else that helps | When the task has other questions | The optional questions together, "More details" opened |
-| Tools | When the task has tools | The D18 tool step (several tools, none, recommend, another; experience per tool) |
-| About you and your project | Always | Experience, project context, depth; the consistency sheet for image, video and audio work |
-| Where will you use the prompt | Always | AI Directory products for the task, or your own |
-| Your prompt | Last | The pack, opened on "Prompts only", with the D19 and D21 controls |
+| What best describes your role? | Always first | One searchable list (combobox): the 22 professions grouped by area, each with its number of tasks, and "My role is not listed" at the end |
+| What would you like to accomplish? | After the role | One searchable list: the role's tasks and "Any other task" (every task, by outcome, when the role is not listed). Typing searches every task by its words and through `task-index.js` ("Closest to your words", the role's own tasks first); three or more typed words also answer the task's first essential question, where it is empty |
+| One question | For each question of the task that is not a "more" question, in the blueprint's order, recomputed after every answer (conditional questions appear and disappear) | A choice: one button per option, pressing one moves on. A typed answer: Continue (Skip, or "Skip for now" for an essential, while empty); Enter in a one-line answer is Continue |
+| Which tools do you use for this? | When the task has tools | The D18 tool step (several, none, recommend, another; experience per tool) |
+| Anything else we should know? | Always, last | Project details (up to 8,000 characters), prompt length (Concise, Standard, Detailed, Very detailed) for tasks with a method, experience, AI product (one select from the AI Directory, or another by name); folded: "More details for this task" (the deeper questions), "More options" (parts to add, stages), the consistency sheet for image, video and audio work, and the project context pack |
+| Your prompt | After Generate my prompt | The result: what it is for (role · task), Copy prompt, Edit prompt, Download .md, Reuse selections, New prompt, essentials still missing as buttons that reopen their question, the prompt settings folded (detail, concise or full, another approach, refine), then the pack on "Prompts only" |
 
-The progress line names the kinds of step this journey has (for example Role → Task → Details → Tools → You → AI → Prompt), never a fixed count. Back keeps every answer; Continue becomes Skip on an empty step; Clear empties the current step; Start over clears everything, including tools and refinements, so nothing reaches the next prompt. Changing the task keeps the answers both tasks ask for (for example "What is being tested" from a test plan to test cases) and nothing else.
+**The trail.** Above the question, every step reached so far is a button showing its answer ("QA engineer or software tester › API tests › Banking API… › Skipped › …"), the current step marked with `aria-current="step"`. Pressing one reopens that question with its answer kept and Continue offered. On a phone the trail is one row that scrolls sideways inside itself, kept on the current step; the page never scrolls sideways. It is a step trail inside the tool, not the page breadcrumb of rule 4.6 (which is unchanged). It replaces the D22 conversation and the D20 step list: there is one progress system.
 
-"Other ways to start" and "Show everything on one page" switch to the full page, where describing a task, playbooks, opening a saved Work Pack and choosing by outcome work as before; "Back to the guided steps" returns. A link with a task or outcome, a hand-off from the QA Workbench or `?start=describe` opens the full page directly.
+**Changing an earlier answer.** A role that also lists the chosen task keeps it with every answer. A role that does not list it asks for the task again (the old answers stay in the form; a newly chosen task keeps only the answers both tasks ask for, shown in their own steps, never silently). A choice that makes a later question irrelevant removes that step; its typed value is kept but not used in the prompt. Nothing typed is discarded by navigation.
+
+**Generate.** Writes the pack from the same compiler as the full page. With nothing answered it refuses, says so in the final step (`role="alert"`) and offers the first question; a missing essential is written as `[add: …]` (never invented) and listed in the result with a button to answer it. A failure to write the pack leaves every answer in place and asks to press again.
+
+**Edit.** "Edit prompt" opens the edit box under the main prompt. The edit is kept when an answer or setting rewrites the pack (with a note and "Replace my edit with the new prompt"); Copy prompt then copies the edit, and the download adds it as "Your edited prompt". It is never stored; New prompt and Reuse selections clear it.
+
+**Reuse selections** keeps the role, the task, every answer, the tools and the prompt preferences, clears the project details, the consistency sheet and any edit, and opens the task step with Continue, so the visitor changes only what differs. **New prompt** clears everything, including the prompt settings, so nothing reaches the next prompt.
+
+"More ways to start" (first screen) and "Show everything on one page" switch to the one-page form, where describing a task, playbooks, opening a saved Work Pack and choosing by outcome work as before; "Back to the guided steps" returns. Links: `?task=` and `?role=` continue in the steps; `?outcome=`, `?start=describe` and `?start=context` open the one-page form.
 
 ## 2. How it is built
 
-The steps are the page's own form groups and pack, shown one group at a time (a `wb-off` class while the panel is in guided mode), so every field, rule and file format of the full page applies unchanged.
+The form in `index.js` stays the **one store of every answer**: the steps show its own fields one at a time (a `wb-off` class in guided mode), so every rule, the compiler, the blueprints, the methods, the file format and the hand-off to the AI Answer Checker are unchanged. The page is drawn in its guided state (so nothing moves when the script starts); the one-page form removes `wb-off` when it is chosen or when the steps cannot load.
 
-| Module | Loaded | Size (raw / gzip) | Job |
-| --- | --- | --- | --- |
-| `panel.js` | With the page | 4.1 / 1.7 kB | Professions, search, the first screen; loads the steps on the first press |
-| `roles.js` | With the page | 5.1 / 1.8 kB | Professions and their tasks (their tools are in `tools.js`) |
-| `panel-steps.js` | First press in the panel | 15.5 / 5.1 kB | Every later step, Back, Continue, Skip, Clear, Start over, the full-page switch |
-| `playbooks.js` | "Start from a playbook" opened | 5.3 / 1.7 kB | Starters and their list |
-| `view.js`, `pack-format.js`, `guide.js`, `method.js`, `strategies.js`, `tools.js`, blueprint and method families | A task chosen | see section 4 | The pack, files, tools, method and strategies |
+| State | Where it lives |
+| --- | --- |
+| Role, chosen or "not listed" | `panel-steps.js` (`role`, `roleChosen`); the role's title in the form's role field for the prompt |
+| Task, answers, tools, experience, product, project details, consistency | The form fields (`index.js`) |
+| Prompt length, version, approach, parts, format, tone | The prompt controls (`guide.js`); the final step's chips write into them and are redrawn from them |
+| Current step, steps reached, generated | `panel-steps.js` (`current`, `visited`, `generated`); the plan is recomputed from the answers each time |
+| Generated pack, the visitor's edit | `state.pack`, `state.edit` in `index.js` |
 
-Defect found and fixed: when the page was left by in-place navigation before the lazily loaded panel arrived, the panel wrote into a page that was gone (a QA Workbench hand-off test caught the error); the panel now starts only if the form is still on the page.
+| Module | Loaded | Job |
+| --- | --- | --- |
+| `panel.js` | With the page | The first screen; loads the list behaviour on the box's first use and the steps on the first choice |
+| `picker-markup.js` | With the page | The list's box and hint as markup, built into the page |
+| `picker.js`, `roles.js` | First use of the role box | The searchable list (ARIA combobox and listbox, keyboard, filter) and the professions it lists (the first screen's hint counts them with `ROLE_COUNT`, kept equal to `roles.js` by a unit test) |
+| `pack-io.js` | First download or opening of a pack | Writing the Work Pack file with its data comment, and opening a saved one again |
+| `panel-steps.js` | First choice | Every later step, the trail, Generate, Reuse, New prompt, the full-page switch |
+| `task-index.js` | First words typed into the task search | The fixed-synonym matcher |
+| `view.js`, `guide.js`, blueprints, methods, `pack-format.js` | A task chosen | The pack, controls, files |
 
-## 3. Accessibility and layouts
+## 3. Accessibility
 
-- Roles, tasks and choices are buttons with `aria-pressed`; the step title receives focus on each step (not on first load); the progress list marks the current step with `aria-current`.
-- In a one-question step the field's label stays for screen readers (the visible title is the question).
-- Tested with axe (WCAG 2.0 to 2.2 A and AA) at 390, 412, 820 and 1280 px, light and dark, on the role, task, question and prompt steps: no violations, no horizontal overflow. Automated checks only; no screen-reader or real-phone session was run.
+- The lists follow the ARIA combobox pattern: `aria-expanded`, `aria-controls`, `aria-activedescendant`, options grouped with labelled `role="group"`; Arrow keys, Page keys, Enter, Escape and Tab; the number of matches is announced in the page's one polite status region; the current choice is marked in words, not by colour alone.
+- Each step's title is the question and receives focus when the step changes (not on first load); a one-question field keeps its own label for screen readers; choices are buttons with `aria-pressed`; Generate's refusal is a `role="alert"` message.
+- The trail is a `nav` named "Your selections", each answer a button whose name says the step, the answer and "Change".
+- Touch targets: list options, chips and trail buttons are at least 44 px tall on touch screens; the step's main button takes its own row on a phone.
+- Tested with axe (WCAG 2.0 to 2.2 A and AA) at 320, 360, 390, 430, 820 and 1280 px, light and dark, on the role list open, the task list open, a question, a choice, the final step and the prompt: no violations, no page-level horizontal overflow. Automated checks only: no screen-reader, real-phone or Safari session was run.
 
 ## 4. Performance (D17)
 
-Measured from the browser's requests on opening the page (preview build), gzip level 9, minus the same files at `7b339d7f`:
+**Method (reproducible).** The method of `17` §16: all JavaScript the page adds on first load, unminified source with LF line ends, raw / gzip (Node's default level), each file against its own path at `7b339d7f` (a `prompt-builder/` file against `ai-workbench/`, since an older tool used that path then). First load is the static import graph of `index.js` plus `panel.js`, which `index.js` loads as the page starts; the site-wide catalogue (`data/tools.js`, `categories.js`, `tool-capabilities.js`), which every page loads, is left out. The method gives exactly the recorded 41.4 / 12.8 kB at `99530433`.
 
-| | Before the split | After (2026-11-18) | Budget |
-| --- | --- | --- | --- |
-| First-load JavaScript added | 58.5 / 17.8 kB | 41.3 / 12.8 kB | 50 / 16 kB |
+| Measure | Result (2026-11-19) |
+| --- | --- |
+| First-load JavaScript added, D17 budget 50 / 16 kB | `99530433` (D21): 41.4 / 12.8. `65b4a67b` (D22): **48.1 / 14.6** (the 41.3 / 12.8 repeated in later notes was the D21 figure). This redesign before trimming: **54.4 / 16.6, over the budget**. After trimming: **46.5 / 14.1, within it** |
+| The trim | `roles.js` (5.2 / 1.8) loads with the list instead of with the page; writing and opening a pack file (`pack-io.js`, 3.0 / 0.9 out of `index.js`) loads with the first download or opening. Nothing the visitor sees changed |
+| Layout shift on load | 0.0001 (was 0.3247: the page was drawn as the one-page form, then hidden; fixed by drawing the guided state) |
+| Writing the pack after a change | 3.8 to 5.0 ms per change (20 changes, API tests) |
+| JavaScript heap after a journey | about 5 MB |
 
-What made room: the pack view, the file format and the playbooks load when needed; the step logic loads on the first press; each profession's tools moved to `tools.js`.
+## 5. Tests
+
+`tests/browser/prompt-builder-guided.spec.js` (the journeys, the trail, edit, copy, download, reuse, new prompt, the list by keyboard, links, role and task changes, refusal and missing essentials, length and settings, playbooks, old files, six widths with axe in both themes), `prompt-builder.spec.js` and `prompt-builder-professions.spec.js` (the one-page form), `ai-ecosystem.spec.js`; `tests/unit/prompt-builder-flow.test.mjs` (all 22 professions and 90 tasks: every task has a first question, answered gives a ready prompt with no `[add: …]` and every answer in it, unanswered is the state Generate refuses; the list filter; API test, design and documentation wording).
+
+## 6. Known limitations
+
+- The visitor's edit of the prompt is not restored when a downloaded Work Pack is opened again (the file keeps the answers; the edit is in the text only).
+- The full page shows the final step's length chips and the prompt settings together: two views of one setting.
+- Nothing is kept across a reload (rule 7.7); Reuse works within the visit.
+- No real-device, screen-reader or Safari check has been made.

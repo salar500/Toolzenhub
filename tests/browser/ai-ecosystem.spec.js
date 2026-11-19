@@ -44,7 +44,6 @@ test.describe("AI ecosystem", () => {
     await page.locator("#wb-describe").press("Enter");
     await page.locator("[data-use-task='test-plan']").click();
     await answerTestPlan(page);
-    await page.locator(".wb-context > summary").click();
     await page.locator("#wb-project").fill("React web app; release on the 20th");
     await expect(page.locator("#wb-master")).toContainText("Project context (from my notes");
     const before = await page.locator("#wb-master").textContent();
@@ -133,10 +132,12 @@ test.describe("AI ecosystem", () => {
     }
     await go("tools/prompt-builder/");
     await page.locator("#wb-form[data-ready]").waitFor();
-    /* the conversation's controls first (D20, D22), then the full page's start controls */
-    expect((await page.locator("[data-role-pick]").first().boundingBox()).height).toBeGreaterThanOrEqual(44);
-    expect((await page.getByRole("button", { name: "Find my task" }).boundingBox()).height).toBeGreaterThanOrEqual(44);
-    await page.getByRole("button", { name: /^Other ways to start/ }).click();
+    /* the guided steps' controls first (one question at a time, 2026-11-19), then the full page's start controls */
+    expect((await page.locator("#wb-role-input").boundingBox()).height).toBeGreaterThanOrEqual(44);
+    await page.locator("#wb-role-input").click();
+    expect((await page.getByRole("option").first().boundingBox()).height).toBeGreaterThanOrEqual(44);
+    await page.keyboard.press("Escape");
+    await page.getByRole("button", { name: /^More ways to start/ }).click();
     const box = await page.locator("#wb-suggest").boundingBox();
     expect(box.height).toBeGreaterThanOrEqual(44);
   });

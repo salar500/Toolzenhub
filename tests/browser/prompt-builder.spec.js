@@ -9,7 +9,7 @@ import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.m
 const open = async (page, go) => {
   await go("tools/prompt-builder/");
   await page.locator("#wb-form[data-ready]").waitFor();
-  await page.getByRole("button", { name: /^Other ways to start/ }).click();
+  await page.getByRole("button", { name: /^More ways to start/ }).click();
 };
 
 test.describe("AI Prompt Builder: the full page", () => {
@@ -40,14 +40,12 @@ test.describe("AI Prompt Builder: the full page", () => {
     await expect(page.locator(".wb-stage")).toHaveCount(2);
 
     // a senior specialist gets more control: a detailed pack with a final review
-    await page.locator(".wb-context summary").click();
     await page.locator("#wb-experience").selectOption("senior");
     await expect(page.locator(".wb-stage").last()).toContainText("Final review");
     await expect(page.locator("#wb-master")).toContainText("trade-offs");
 
     // a directory product, chosen, reaches the pack with its official summary
-    const first = page.locator("input[name='wb-product']").first();
-    await first.check();
+    await page.locator("#wb-product").selectOption({ index: 1 });
     await expect(page.locator("#wb-pack-body .wb-part", { has: page.locator("#wb-h-product") })).toContainText("Its official site, checked"); // found by its heading: the context review (D18) now comes first
 
     // copy a stage prompt (the browser may refuse the clipboard; either way the page says what happened)
@@ -82,9 +80,9 @@ test.describe("AI Prompt Builder: the full page", () => {
 
     await page.getByLabel("Create images").check();
     await page.getByLabel("Generate a new image").check();
-    await expect(page.locator(".wb-more")).not.toHaveAttribute("open", "");
+    await expect(page.locator("#wb-more-details")).not.toHaveAttribute("open", "");
     await expect(page.locator("#wb-q-lighting")).toBeHidden();
-    await page.locator(".wb-more summary").click();
+    await page.locator("#wb-more-details > summary").click();
     await expect(page.locator("#wb-q-lighting")).toBeVisible();
 
     expect(watch.pageErrors).toEqual([]);

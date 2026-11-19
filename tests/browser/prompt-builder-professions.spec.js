@@ -9,16 +9,21 @@ import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.m
 
 const AXE = fileURLToPath(new URL("../../node_modules/axe-core/axe.min.js", import.meta.url));
 const ready = (page) => page.locator("#wb-form[data-ready]").waitFor();
+const ctl = (page) => page.locator("#wb-prompt-controls");
 
 async function qaApiTask(page, go) {
   await go("tools/prompt-builder/");
   await ready(page);
-  /* chosen in the guided panel (D20), then shown on the full page, where these tests work on every part at once */
-  await page.getByRole("button", { name: /^QA engineer or software tester/ }).click();
-  await page.getByRole("button", { name: "API tests", exact: true }).click();
+  /* chosen in the guided panel's lists (one question at a time, 2026-11-19), then shown on the full page, where these tests
+     work on every part at once; the prompt settings are opened from their fold */
+  await page.locator("#wb-role-input").click();
+  await page.getByRole("option", { name: /^QA engineer or software tester/ }).click();
+  await page.locator("#wb-task-input").click();
+  await page.getByRole("option", { name: "API tests", exact: true }).click();
   await expect(page.locator("#wb-details-title")).toContainText("API tests");
   await page.getByRole("button", { name: "Show everything on one page" }).click();
   await expect(page.locator("#wb-tools")).toBeVisible();
+  await page.locator("#wb-settings > summary").click();
 }
 
 test.describe("AI Prompt Builder: professions and tools", () => {
@@ -62,15 +67,15 @@ test.describe("AI Prompt Builder: professions and tools", () => {
     await qaApiTask(page, go);
     await page.locator(".wb-review").getByRole("link", { name: /Change.*profession/ }).click();
     await expect(page.locator("#wb-role")).toBeFocused();
-    await expect(page.getByRole("radio", { name: /^Detailed/ })).toBeChecked();
+    await expect(ctl(page).getByRole("radio", { name: /^Detailed/ })).toBeChecked();
     await page.getByRole("button", { name: "Make it more detailed" }).click();
-    await expect(page.getByRole("radio", { name: /^Very detailed/ })).toBeChecked();
+    await expect(ctl(page).getByRole("radio", { name: /^Very detailed/ })).toBeChecked();
     await expect(page.locator("#wb-master")).toContainText("Negative, boundary and edge cases:");
     await expect(page.locator("#wb-live")).toContainText("Prompt detail set to Very detailed");
     await expect(page.getByRole("button", { name: "Make it more detailed" })).toBeDisabled();
     await page.getByRole("button", { name: "Make it shorter" }).click();
     await page.getByRole("button", { name: "Make it shorter" }).click();
-    await expect(page.getByRole("radio", { name: /^Standard/ })).toBeChecked();
+    await expect(ctl(page).getByRole("radio", { name: /^Standard/ })).toBeChecked();
     await expect(page.locator("#wb-master")).not.toContainText("Endpoint analysis:");
     await expect(page.getByRole("button", { name: "Make it shorter" })).toBeDisabled();
     await page.locator("#wb-pack-body .wb-edit > summary", { hasText: "Edit the prompt before copying" }).click();
@@ -82,7 +87,7 @@ test.describe("AI Prompt Builder: professions and tools", () => {
 
   test("a downloaded Work Pack keeps the profession, tools and prompt settings; opening it restores them", async ({ page, go }) => {
     await qaApiTask(page, go);
-    await page.getByRole("radio", { name: /^Very detailed/ }).check();
+    await ctl(page).getByRole("radio", { name: /^Very detailed/ }).check();
     await page.locator(".wb-refine > summary").click();
     await page.getByLabel("Tone of the answer").selectOption("formal");
     await page.getByRole("checkbox", { name: "Postman API client", exact: true }).check();
@@ -99,10 +104,11 @@ test.describe("AI Prompt Builder: professions and tools", () => {
     await page.locator("#wb-open summary").click();
     await page.locator("#wb-open-text").fill(file);
     await page.locator("#wb-open-button").click();
+    await page.locator("#wb-settings > summary").click();
     await expect(page.getByRole("checkbox", { name: "Postman API client", exact: true })).toBeChecked();
     await expect(page.getByLabel("Your experience with Postman")).toHaveValue("advanced");
     await expect(page.locator("#wb-master")).toContainText("I use Postman at an advanced level");
-    await expect(page.getByRole("radio", { name: /^Very detailed/ })).toBeChecked();
+    await expect(ctl(page).getByRole("radio", { name: /^Very detailed/ })).toBeChecked();
     await expect(page.locator("#wb-master")).toContainText("formal, professional tone");
   });
 
@@ -115,10 +121,10 @@ test.describe("AI Prompt Builder: professions and tools", () => {
     expect(n[0]).toBeLessThan(n[1]);
     expect(n[1]).toBeLessThan(n[2]);
     await expect(page.locator("#wb-h-master")).toContainText(`${n[1]} words`);
-    await page.getByRole("radio", { name: /^Standard/ }).check();
-    await expect(page.getByRole("radio", { name: /^Standard/ })).toBeFocused();
+    await ctl(page).getByRole("radio", { name: /^Standard/ }).check();
+    await expect(ctl(page).getByRole("radio", { name: /^Standard/ })).toBeFocused();
     await page.locator(".wb-refine > summary").click();
-    await page.getByRole("checkbox", { name: "Edge cases and failure scenarios" }).check();
+    await ctl(page).getByRole("checkbox", { name: "Edge cases and failure scenarios" }).check();
     await expect(page.locator("#wb-master")).toContainText("Negative, boundary and edge cases:");
     await page.getByLabel("Answer format").selectOption("csv");
     await expect(page.locator("#wb-master")).toContainText("Give every table as CSV");
@@ -127,8 +133,8 @@ test.describe("AI Prompt Builder: professions and tools", () => {
     await page.locator("#wb-q-api").fill("Healthcare API: patient records, appointments");
     await expect(page.locator("#wb-prompt-check")).toHaveAttribute("open", "");
     await page.getByRole("button", { name: "Back to the recommended prompt" }).click();
-    await expect(page.getByRole("radio", { name: /^Detailed/ })).toBeChecked();
-    await expect(page.getByRole("checkbox", { name: "Edge cases and failure scenarios" })).not.toBeChecked();
+    await expect(ctl(page).getByRole("radio", { name: /^Detailed/ })).toBeChecked();
+    await expect(ctl(page).getByRole("checkbox", { name: "Edge cases and failure scenarios" })).not.toBeChecked();
     await expect(page.locator("#wb-master")).not.toContainText("Give every table as CSV");
   });
 

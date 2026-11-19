@@ -25,12 +25,16 @@ import { addJumpToResult } from "../../ui/jump-link.js";
 import { OUTCOMES, ROLES, EXPERIENCE, DEPTHS, getTask, getOutcome, tasksFor } from "./taxonomy.js";
 import { compileWorkPack, activeQuestions, NOT_VERIFIED, CONSISTENCY, CONTEXT_LIMIT } from "./compiler.js";
 import { loadBlueprint } from "./blueprints.js";
+import { pickerMarkup } from "./picker-markup.js";
+import { ROLE_PICKER, MORE_WAYS } from "./panel.js";
 /* the task matcher loads when the visitor first describes a task (D17) */
 const loadMatcher = () => import("./task-index.js");
 /* the playbooks load the first time their section is opened (D17) */
 const loadPlaybooks = () => import("./playbooks.js");
 /* the file format is needed only to save or open a pack; it loads with the first task or the first open (D17) */
 const loadFormat = () => import("../ai-tools/common/pack-format.js");
+/* writing a pack file and opening one again load with the first download or opening (D17) */
+const loadPackIO = () => import("./pack-io.js");
 import { put } from "../ai-tools/common/handoff.js";
 
 /* the directory data is needed only once a task is chosen */
@@ -58,15 +62,6 @@ const CONSISTENCY_HINTS = {
     camera: "For example \"eye level, medium shot\".",
     voice: "For audio: the voice, pace and how names are said.",
     never: "Details that must never change, one per line or separated by commas."
-};
-
-/* what a Work Pack file may hold (17 §5.5); anything else is ignored and listed */
-const FILE_SCHEMA = {
-    kind: "string:20", format: "int", version: "int", date: "string:10", task: "string:40", answers: "strings:8000",
-    role: "string:100", experience: "string:20", depth: "string:10", product: "string:100", ownProduct: "bool",
-    context: `string:${CONTEXT_LIMIT}`, consistency: "strings:300",
-    profession: "string:40", tools: "strings:20", toolChoice: "string:20", otherTool: "string:100",
-    prompt: "strings:60"
 };
 
 const routeOf = (id) => ROUTES.tool("tools", id);
@@ -100,7 +95,7 @@ export function markup() {
                 <div>
                     <span class="calculator-eyebrow">AI Tool</span>
                     <h1>${escapeHTML(tool.title)}</h1>
-                    <p>Create professional AI prompts for your work, business, learning and creative projects. Describe what you want to accomplish or start from your profession, answer a few questions, and get a main prompt, stage prompts for larger work and refinement prompts to improve an answer. You paste them into the AI assistant you use: ChatGPT, Claude, Gemini or any other.</p>
+                    <p>Create professional AI prompts in a few simple steps. Choose your role, select what you want to accomplish and receive a prompt tailored to your work, ready for ChatGPT, Claude, Gemini or any other AI assistant.</p>
                 </div>
                 <div class="calculator-trust-card">
                     <div class="calculator-trust-icon">✓</div>
@@ -111,7 +106,7 @@ export function markup() {
                 </div>
             </section>
 
-            <ol class="${P}-progress" aria-label="Your progress">
+            <ol class="${P}-progress" aria-label="Your progress" hidden>
                 <li data-step="1" aria-current="step">Outcome</li>
                 <li data-step="2">Task</li>
                 <li data-step="3">Details</li>
@@ -120,36 +115,23 @@ export function markup() {
 
             <div class="${P}-panel" id="${P}-panel" data-mode="guided">
             <div class="${P}-panel__head" id="${P}-panel-head">
-                <ol class="${P}-steps" id="${P}-steps" aria-label="Your steps"></ol>
-                <ol class="${P}-thread" id="${P}-thread" aria-label="Your answers so far" hidden></ol>
-                <h2 class="calculator-section__title ${P}-panel__title" id="${P}-step-title" tabindex="-1">What would you like to create today?</h2>
-                <p class="ai-note" id="${P}-step-why"></p>
+                <nav class="${P}-trail" id="${P}-trail-nav" aria-label="Your selections" hidden><ol id="${P}-trail"></ol></nav>
+                <h2 class="calculator-section__title ${P}-panel__title" id="${P}-step-title" tabindex="-1">What best describes your role?</h2>
+                <p class="ai-note" id="${P}-step-why">Choose the closest one. It shapes the tasks offered and the prompt's language.</p>
             </div>
             <section class="calculator-section">
                 <form id="${P}-form" class="calculator-form ai-form ${P}-form" novalidate>
 
-                    <fieldset class="${P}-group ${P}-roles" id="${P}-roles" data-panel-step="role">
-                        <legend class="ai-sr-only">Describe your task or choose your profession</legend>
-                        <div class="${P}-composer" id="${P}-composer">
-                            <label class="calculator-form__label" for="${P}-ask">Describe your task</label>
-                            <p class="ai-note" id="${P}-ask-hint">In your own words, for example "test a healthcare API with patient login and appointment endpoints" or "a follow-up from my meeting notes".</p>
-                            <div class="${P}-composer__row">
-                                <textarea id="${P}-ask" class="calculator-form__input ${P}-composer__input" rows="2" maxlength="300" autocomplete="off" aria-describedby="${P}-ask-hint"></textarea>
-                                <button type="button" class="calculator-form__button ${P}-composer__send" data-panel="ask">Find my task</button>
-                            </div>
-                            <div class="${P}-ask-result" id="${P}-ask-result"></div>
-                        </div>
-                        <p class="${P}-or" aria-hidden="true">or</p>
-                        <div class="calculator-form__group ${P}-roles__find"><label class="calculator-form__label" for="${P}-role-search">Start from your profession</label><input id="${P}-role-search" class="calculator-form__input" type="search" autocomplete="off"></div>
-                        <div id="${P}-role-grid"><p class="ai-note">Loading the professions…</p></div>
-                    </fieldset>
+                    <div class="${P}-group ${P}-roles" id="${P}-roles" data-panel-step="role">
+                        <div id="${P}-role-picker">${pickerMarkup(ROLE_PICKER)}</div>
+                    </div>
 
-                    <fieldset class="${P}-group" id="${P}-guide-tasks" data-panel-step="task">
-                        <legend class="ai-sr-only">What do you want to accomplish?</legend>
-                        <div class="${P}-choices ${P}-choices--tasks" id="${P}-guide-task-list"></div>
-                    </fieldset>
+                    <div class="${P}-group ${P}-off" id="${P}-guide-tasks" data-panel-step="task">
+                        <div id="${P}-task-picker"></div>
+                        <p class="ai-note ${P}-task-tools" id="${P}-task-tools"></p>
+                    </div>
 
-                    <div class="${P}-group ${P}-start" id="${P}-unsure">
+                    <div class="${P}-group ${P}-start ${P}-off" id="${P}-unsure">
                         ${fieldShell({ id: `${P}-describe`, label: "Describe what you want to do", hint: "In your own words, for example \"test plan for a coupon feature\" or \"animate a product photo\".", control: `<input id="${P}-describe" class="calculator-form__input" type="text" maxlength="300" autocomplete="off" aria-describedby="${hintIdOf(`${P}-describe`)}">` })}
                         <button type="button" id="${P}-suggest" class="calculator-form__button calculator-form__button--secondary">Find matching tasks</button>
                         <p id="${P}-suggestion" class="ai-note"></p>
@@ -178,7 +160,7 @@ export function markup() {
                         </details>
                     </div>
 
-                    <fieldset class="${P}-group" id="${P}-outcomes">
+                    <fieldset class="${P}-group ${P}-off" id="${P}-outcomes">
                         <legend class="calculator-section__title">What do you want to accomplish with AI?</legend>
                         <div class="${P}-choices">${outcomeChoices()}
                         </div>
@@ -196,30 +178,34 @@ export function markup() {
 
                         <fieldset class="${P}-group ${P}-tools" id="${P}-tools" hidden></fieldset>
 
-                        <details class="${P}-sheet" id="${P}-consistency" hidden>
-                            <summary>Keep the same across every output (optional)</summary>
-                            <p class="ai-note">Written once, repeated in the main prompt and in every stage, so a series of images, shots or recordings stays consistent.</p>
-                            <div class="calculator-form__grid">${CONSISTENCY.map((c) => fieldShell({ id: `${P}-cs-${c.key}`, label: c.label, hint: CONSISTENCY_HINTS[c.key], control: `<input id="${P}-cs-${c.key}" class="calculator-form__input" type="text" maxlength="300" autocomplete="off" data-cs="${c.key}" aria-describedby="${hintIdOf(`${P}-cs-${c.key}`)}">` })).join("")}</div>
-                        </details>
-
-                        <details class="${P}-context">
-                            <summary>Your context (optional)</summary>
-                            <div class="calculator-form__grid">
-                                <div id="${P}-context-field">${fieldShell({ id: `${P}-project`, label: "Project context", hint: "Notes the AI should know, or a project context pack (write one below, under Project context pack). Up to 8,000 characters.", control: `<textarea id="${P}-project" class="calculator-form__input ai-textarea" rows="4" maxlength="${CONTEXT_LIMIT}" aria-describedby="${hintIdOf(`${P}-project`)}"></textarea>` })}</div>
-                                ${fieldShell({ id: `${P}-role`, label: "Your role", hint: "It shapes the terms and the deliverable, not the tone.", control: `<select id="${P}-role" class="calculator-form__input" aria-describedby="${hintIdOf(`${P}-role`)}"><option value="">Skip</option></select>` })}
+                        <div class="${P}-final" id="${P}-final">
+                            <div id="${P}-context-field">${fieldShell({ id: `${P}-project`, label: "Project details, constraints or instructions (optional)", hint: "Technology, audience, limits or anything the AI should know. Up to 8,000 characters; a project context pack fits here too.", control: `<textarea id="${P}-project" class="calculator-form__input ai-textarea" rows="4" maxlength="${CONTEXT_LIMIT}" aria-describedby="${hintIdOf(`${P}-project`)}"></textarea>` })}</div>
+                            <div class="${P}-style" id="${P}-style"></div>
+                            <div class="calculator-form__grid ${P}-prefs">
+                                <div class="${P}-full-only">${fieldShell({ id: `${P}-role`, label: "Your role", hint: "It shapes the terms and the deliverable, not the tone.", control: `<select id="${P}-role" class="calculator-form__input" aria-describedby="${hintIdOf(`${P}-role`)}"><option value="">Skip</option></select>` })}</div>
                                 ${fieldShell({ id: `${P}-experience`, label: "Your experience", hint: "Beginners get explanations; senior levels get trade-offs, risks and decisions.", control: `<select id="${P}-experience" class="calculator-form__input" aria-describedby="${hintIdOf(`${P}-experience`)}">${EXPERIENCE.map((e) => `<option value="${escapeHTML(e.id)}">${escapeHTML(e.label)}</option>`).join("")}</select>` })}
-                                ${fieldShell({ id: `${P}-depth`, label: "Depth", hint: "Detailed is not always better: a simple task needs one prompt.", control: `<select id="${P}-depth" class="calculator-form__input" aria-describedby="${hintIdOf(`${P}-depth`)}">${DEPTHS.map((d) => `<option value="${escapeHTML(d.id)}">${escapeHTML(d.label)}</option>`).join("")}</select>` })}
+                                <div class="${P}-products" id="${P}-products">
+                                    <div id="${P}-product-list"></div>
+                                    <p class="ai-note" id="${P}-products-note">From the <a href="${ROUTES.aiDirectory}">AI Directory</a>, each checked on its official site. Not a ranking; the prompt works in any capable assistant.</p>
+                                </div>
                             </div>
-                        </details>
+                            <div id="${P}-more-box"></div>
+                            <details class="${P}-more ${P}-options" id="${P}-options">
+                                <summary>More options (optional)</summary>
+                                <div class="${P}-options__body">
+                                    <div id="${P}-style-extra"></div>
+                                    ${fieldShell({ id: `${P}-depth`, label: "Stages", hint: "Detailed is not always better: a simple task needs one prompt.", control: `<select id="${P}-depth" class="calculator-form__input" aria-describedby="${hintIdOf(`${P}-depth`)}">${DEPTHS.map((d) => `<option value="${escapeHTML(d.id)}">${escapeHTML(d.label)}</option>`).join("")}</select>` })}
+                                </div>
+                            </details>
+                            <details class="${P}-sheet" id="${P}-consistency" hidden>
+                                <summary>Keep the same across every output (optional)</summary>
+                                <p class="ai-note">Written once, repeated in the main prompt and in every stage, so a series of images, shots or recordings stays consistent.</p>
+                                <div class="calculator-form__grid">${CONSISTENCY.map((c) => fieldShell({ id: `${P}-cs-${c.key}`, label: c.label, hint: CONSISTENCY_HINTS[c.key], control: `<input id="${P}-cs-${c.key}" class="calculator-form__input" type="text" maxlength="300" autocomplete="off" data-cs="${c.key}" aria-describedby="${hintIdOf(`${P}-cs-${c.key}`)}">` })).join("")}</div>
+                            </details>
+                            <p class="ai-note ${P}-error" id="${P}-final-error" role="alert"></p>
+                        </div>
 
-                        <fieldset class="${P}-group ${P}-products" id="${P}-products">
-                            <legend class="calculator-form__label">AI product</legend>
-                            <p class="ai-note" id="${P}-products-note"></p>
-                            <div class="${P}-product-list" id="${P}-product-list"></div>
-                            <p class="ai-note">Products are from the <a href="${ROUTES.aiDirectory}">AI Directory</a>, each checked on its official site. Not a ranking, and the prompts work in any capable assistant.</p>
-                        </fieldset>
-
-                        <div class="calculator-form__actions">
+                        <div class="calculator-form__actions ${P}-full-only">
                             <button type="button" id="${P}-show" class="calculator-form__button">Show my Work Pack</button>
                             <button type="button" id="${P}-reset" class="calculator-form__button calculator-form__button--secondary">Start again</button>
                         </div>
@@ -230,7 +216,7 @@ export function markup() {
                 </form>
             </section>
 
-            <section class="calculator-section ${P}-bridge" id="${P}-bridge" aria-labelledby="${P}-bridge-title">
+            <section class="calculator-section ${P}-bridge ${P}-off" id="${P}-bridge" aria-labelledby="${P}-bridge-title">
                 <details class="${P}-disclosure" id="${P}-bridge-fold">
                     <summary id="${P}-bridge-title">Project context pack: write, update or carry your project's context</summary>
                     <p class="ai-note">Write down once what any AI needs to know about your project, then use it in this prompt or carry it to another chat or AI product: a full brief, a short handoff, a session update or a file for a coding assistant. You can also bring the facts out of an AI conversation, or open a saved pack.</p>
@@ -238,27 +224,40 @@ export function markup() {
                 </details>
             </section>
 
-            <section id="${P}-results" class="calculator-results ${P}-pack" aria-labelledby="${P}-pack-title">
+            <section id="${P}-results" class="calculator-results ${P}-pack ${P}-off" aria-labelledby="${P}-pack-title">
                 <div class="calculator-results__card">
                     <h2 id="${P}-pack-title" class="${P}-pack__title" tabindex="-1">Your AI Work Pack</h2>
-                    <div id="${P}-prompt-controls" class="${P}-controls" hidden></div>
+                    <div class="${P}-result-bar" id="${P}-result-bar" hidden>
+                        <p class="${P}-result-sum" id="${P}-result-sum"></p>
+                        <div class="${P}-result-actions">
+                            <button type="button" id="${P}-copy-main" class="calculator-form__button">Copy prompt</button>
+                            <button type="button" id="${P}-edit-main" class="calculator-form__button calculator-form__button--secondary">Edit prompt</button>
+                            <button type="button" id="${P}-download-main" class="calculator-form__button calculator-form__button--secondary">Download .md</button>
+                        </div>
+                        <div class="${P}-result-missing" id="${P}-result-missing"></div>
+                        <div class="${P}-result-again" id="${P}-result-again"></div>
+                    </div>
+                    <details class="${P}-settings" id="${P}-settings" hidden>
+                        <summary>Prompt settings: detail, concise version, another approach, refine</summary>
+                        <div id="${P}-prompt-controls" class="${P}-controls" hidden></div>
+                    </details>
                     <div id="${P}-pack-body">
                         <p class="ai-check__line">${EMPTY_LINE}</p>
                     </div>
                 </div>
             </section>
-            <div class="${P}-panel__nav" id="${P}-panel-nav"></div>
+            <div class="${P}-panel__nav" id="${P}-panel-nav"><p class="${P}-panel__other"><button type="button" class="${P}-linkish" data-panel="full">${MORE_WAYS}</button></p></div>
             </div>
             <p id="${P}-live" class="ai-sr-only" role="status" aria-live="polite"></p>
 
             <section class="calculator-info">
                 <h2>How the AI Prompt Builder works</h2>
                 <ol>
-                    <li>Describe what you want to do in your own words and choose one of the closest tasks, or start from your profession and pick one of its tasks. Nothing fits? "Any other task" writes one well-built prompt for anything. A playbook starts recurring work in steps; a Work Pack you downloaded opens again with every answer.</li>
-                    <li>Answer the few questions that change the result. Essentials are marked; anything you leave out is listed as missing and written into the prompt as <code>[add: …]</code>, never guessed.</li>
-                    <li>Optionally give your role and experience (a beginner's pack explains each step; a senior pack asks for trade-offs, risks and decisions), paste or write a project context pack, or, for images, video and audio, say what must stay the same in every output.</li>
-                    <li>Pick an AI product from the ones listed for this task, or use your own.</li>
-                    <li>Copy the main prompt into the product, then work through the stage prompts one at a time, use the refinement prompts where the answer falls short, and check what comes back with the AI Answer Checker and the checklist.</li>
+                    <li>Choose your role, then what you want to accomplish. Type a few words to search every task; nothing fits? "Any other task" writes one well-built prompt for anything. More ways to start: an outcome, a playbook, or a Work Pack you downloaded, which opens again with every answer.</li>
+                    <li>Answer one question at a time; a choice moves on by itself. Only the questions this task needs are asked. Essentials are marked; anything you leave out is listed as missing and written into the prompt as <code>[add: …]</code>, never guessed. Your answers so far are listed above the question: press one to change it.</li>
+                    <li>At the end, add anything else the AI should know, choose the prompt's length, your experience (a beginner's prompt explains each step; a senior one asks for trade-offs, risks and decisions) and, if you like, the AI product, then press Generate my prompt.</li>
+                    <li>Copy the prompt into your AI product, or edit it first. Change its detail, try another professional approach or refine it; use the stage prompts one at a time and the refinement prompts where the answer falls short, and check what comes back with the AI Answer Checker.</li>
+                    <li>Reuse selections starts the next prompt with the same role, task, answers and preferences (your project details are cleared); New prompt starts with nothing.</li>
                 </ol>
             </section>
 
@@ -348,12 +347,12 @@ export function init(app = document.getElementById("app")) {
 
     const answers = () => {
         const out = {};
-        for (const el of $("questions").querySelectorAll("[data-key]")) out[el.dataset.key] = el.value;
+        for (const el of $("details").querySelectorAll("[data-key]")) out[el.dataset.key] = el.value;
         return out;
     };
 
     const chosenProduct = () => {
-        const picked = form.querySelector(`input[name="${P}-product"]:checked`)?.value;
+        const picked = $("product")?.value;
         if (!picked) return null;
         if (picked === OWN) {
             const name = $("own-name")?.value.trim();
@@ -362,11 +361,14 @@ export function init(app = document.getElementById("app")) {
         return state.offered.find((p) => p.id === picked) ?? null;
     };
 
+    /* what pack-io.js needs to write a pack file and to open one again */
+    const packHost = { P, $, form, state, answers, chosenProduct, consistency, note, announce, loadFormat, selectTask: (...a) => selectTask(...a) };
+
     /* questions that depend on another answer are shown or hidden in place, keeping what was typed */
     const syncVisibility = () => {
         if (!state.blueprint) return;
         const shown = new Set(activeQuestions(state.blueprint, answers()).map((q) => q.key));
-        for (const el of $("questions").querySelectorAll("[data-key]")) {
+        for (const el of $("details").querySelectorAll("[data-key]")) {
             el.closest(".calculator-form__group").hidden = !shown.has(el.dataset.key);
         }
     };
@@ -408,13 +410,40 @@ export function init(app = document.getElementById("app")) {
         if (signature !== state.drawn) {
             body.innerHTML = review + state.packView.packHTML(pack, state.offered, state.view, state.blueprint.style !== "descriptive", state.guide);
             state.drawn = signature;
+            restoreEdit();
         }
         body.dataset.view = state.view;
         setStep(pack.state === "empty" ? 3 : 4);
+        $("result-bar").hidden = pack.state === "empty";
+        $("settings").hidden = $("prompt-controls").hidden;
+        $("copy-main").textContent = state.edit ? "Copy edited prompt" : "Copy prompt";
+        state.guide?.syncStyle(P);
 
-        announce(pack.state === "ready" ? `Work Pack ready, ${pack.stages.length || 1} prompt${pack.stages.length === 1 ? "" : "s"} plus refinements.` : pack.state === "incomplete" ? `${pack.missing.length} essential${pack.missing.length === 1 ? "" : "s"} missing.` : "");
+        if (!state.quiet) announce(pack.state === "ready" ? `Work Pack ready, ${pack.stages.length || 1} prompt${pack.stages.length === 1 ? "" : "s"} plus refinements.` : pack.state === "incomplete" ? `${pack.missing.length} essential${pack.missing.length === 1 ? "" : "s"} missing.` : "");
 
     }
+
+    /* ---------- the visitor's own edit of the prompt: kept when the pack is written again, until a new prompt (2026-11-19) ---------- */
+
+    /* the main prompt as the pack shows it: the concise version when the visitor prefers it (D21) */
+    const shownMain = () => state.pack.concisePrompt && state.guide?.promptVersion(P) === "concise" ? state.pack.concisePrompt : state.pack.masterPrompt;
+
+    function restoreEdit() {
+        const area = $("master-edit");
+        if (!area || !state.edit) return;
+        area.value = state.edit.text;
+        area.closest("details").open = true;
+        if (state.edit.base !== shownMain()) {
+            area.insertAdjacentHTML("afterend", `<p class="ai-note ${P}-edit-note" id="${P}-edit-note">The generated prompt has changed since you edited it (an answer or a setting changed). Your edit is kept. <button type="button" class="${P}-linkish" id="${P}-edit-replace">Replace my edit with the new prompt</button></p>`);
+        }
+    }
+
+    body.addEventListener("input", (event) => {
+        if (event.target.id !== `${P}-master-edit`) return;
+        const text = event.target.value;
+        state.edit = text === shownMain() && !state.edit ? null : { text, base: state.edit?.base ?? shownMain() };
+        $("copy-main").textContent = state.edit ? "Copy edited prompt" : "Copy prompt";
+    });
 
     const scheduleUpdate = () => {
         clearTimeout(timer);
@@ -437,24 +466,24 @@ export function init(app = document.getElementById("app")) {
 
     }
 
+    /* one compact choice (2026-11-19); a product already chosen stays chosen when the next task lists it too */
     function renderProducts() {
 
         const offered = state.offered;
-        $("products-note").textContent = offered.length ? "Listed for this kind of task:" : NOT_VERIFIED;
+        const was = $("product")?.value ?? "";
+        const ownName = $("own-name")?.value ?? "";
 
-        $("product-list").innerHTML = `${offered.map((p) => `
-                            <label class="wb-product">
-                                <input type="radio" name="${P}-product" value="${escapeHTML(p.id)}">
-                                <span><strong>${escapeHTML(p.name)}</strong>${p.by && p.by !== p.name ? ` <span class="ai-note">by ${escapeHTML(p.by)}</span>` : ""}<br><span class="ai-note">${escapeHTML(p.summary)}</span></span>
-                            </label>`).join("")}
-                            <label class="wb-product">
-                                <input type="radio" name="${P}-product" value="${OWN}">
-                                <span><strong>My own AI product</strong></span>
-                            </label>
+        $("product-list").innerHTML = `${fieldShell({ id: `${P}-product`, label: "AI product (optional)", hint: offered.length ? "Listed for this kind of task." : NOT_VERIFIED, control: `<select id="${P}-product" class="calculator-form__input" aria-describedby="${hintIdOf(`${P}-product`)} ${P}-products-note"><option value="">Any capable assistant</option>${offered.map((p) => `<option value="${escapeHTML(p.id)}">${escapeHTML(p.name)}${p.by && p.by !== p.name ? ` (${escapeHTML(p.by)})` : ""}</option>`).join("")}<option value="${OWN}">Another AI product…</option></select>` })}
                             <div class="calculator-form__group" id="${P}-own" hidden>
                                 <label class="calculator-form__label" for="${P}-own-name">Its name</label>
                                 <input id="${P}-own-name" class="calculator-form__input" type="text" maxlength="100" autocomplete="off">
                             </div>`;
+
+        if (was === OWN || offered.some((p) => p.id === was)) {
+            $("product").value = was;
+            $("own").hidden = was !== OWN;
+            $("own-name").value = ownName;
+        }
 
     }
 
@@ -495,14 +524,18 @@ export function init(app = document.getElementById("app")) {
         $("details-title").textContent = `A few questions: ${task.title.replace(/^Testing: /, "")}`;
         const upFront = blueprint.questions.filter((q) => !q.more);
         const extra = blueprint.questions.filter((q) => q.more);
-        $("questions").innerHTML = `${upFront.map(questionControl).join("")}${extra.length ? `
-                            <details class="${P}-more">
-                                <summary>More details (optional)</summary>
+        /* the deeper, optional questions sit with the final details, folded */
+        $("questions").innerHTML = upFront.map(questionControl).join("");
+        $("more-box").innerHTML = extra.length ? `
+                            <details class="${P}-more" id="${P}-more-details">
+                                <summary>More details for this task (optional)</summary>
                                 <div class="calculator-form__grid">${extra.map(questionControl).join("")}</div>
-                            </details>` : ""}`;
+                            </details>` : "";
         renderProducts();
 
         state.guide.showTools(P, form, blueprint.style === "descriptive" ? "" : taskId, state.profession, prefill);
+        $("style").innerHTML = method ? state.guide.styleHTML(P) : "";
+        $("style-extra").innerHTML = method ? state.guide.styleExtraHTML(P) : "";
 
         /* image, video and audio work keeps a consistency sheet; labelled briefs take project context instead (16 D12) */
         $("consistency").hidden = !CREATIVE.has(task.family);
@@ -527,9 +560,9 @@ export function init(app = document.getElementById("app")) {
             el.value = value;
         };
 
-        for (const [key, value] of Object.entries(p.answers ?? {})) fillField($("questions").querySelector(`[data-key="${CSS.escape(key)}"]`), value);
+        for (const [key, value] of Object.entries(p.answers ?? {})) fillField($("details").querySelector(`[data-key="${CSS.escape(key)}"]`), value);
         syncVisibility();
-        for (const [key, value] of Object.entries(p.answers ?? {})) fillField($("questions").querySelector(`[data-key="${CSS.escape(key)}"]`), value); // a question shown by an earlier answer
+        for (const [key, value] of Object.entries(p.answers ?? {})) fillField($("details").querySelector(`[data-key="${CSS.escape(key)}"]`), value); // a question shown by an earlier answer
 
         fillField($("depth"), p.depth);
         if (typeof p.role === "string" && p.role) addRole(p.role.slice(0, 100));
@@ -540,7 +573,7 @@ export function init(app = document.getElementById("app")) {
         if (p.product) applyProduct(p.product, p.ownProduct);
 
         if (p.more && Object.keys(p.answers ?? {}).some((k) => state.blueprint.questions.find((q) => q.key === k)?.more)) {
-            form.querySelector(`.${P}-more`)?.setAttribute("open", "");
+            $("more-details")?.setAttribute("open", "");
         }
 
     }
@@ -549,9 +582,8 @@ export function init(app = document.getElementById("app")) {
     function applyProduct(product, own) {
 
         const listed = !own && state.offered.find((p) => p.id === product);
-        const radio = form.querySelector(`input[name="${P}-product"][value="${CSS.escape(listed ? product : OWN)}"]`);
-        if (!radio) return;
-        radio.checked = true;
+        if (!$("product")) return;
+        $("product").value = listed ? product : OWN;
         $("own").hidden = Boolean(listed);
 
         if (!listed) {
@@ -626,8 +658,12 @@ export function init(app = document.getElementById("app")) {
             state.guide?.onToolChange(P, form, t);
             update();
         }
-        else if (t.name === `${P}-product`) {
+        else if (t.id === `${P}-product`) {
             $("own").hidden = t.value !== OWN;
+            update();
+        } else if (t.name === `${P}-length` || t.name === `${P}-pref-extra`) {
+            /* the final step's prompt length and additions write into the prompt controls, the one place they are kept */
+            state.guide?.applyStyle(P);
             update();
         } else if (t.id === `${P}-open-file` || t.id === `${P}-open-text` || t.id === `${P}-describe`) {
             return;
@@ -744,55 +780,14 @@ export function init(app = document.getElementById("app")) {
             const s = playbook?.steps[Number(step.dataset.step)];
             if (s) await selectTask(s.task, { answers: s.answers, depth: s.depth, onlyEmpty: true, message: `Filled from the playbook "${playbook.title}". Edit anything.` });
         } else if (event.target.id === `${P}-open-button`) {
-            await openPack();
+            /* open a saved Work Pack (16 D6, D9): pack-io.js */
+            await loadPackIO().then((io) => io.openPack(packHost), () => {
+                note("open-error", "Opening a pack could not be loaded. Check your connection and try again.");
+                announce("Opening a pack could not be loaded. Check your connection and try again.", 0);
+            });
         }
 
     });
-
-    /* ---------- open a saved Work Pack (16 D6, D9) ---------- */
-
-    async function openPack() {
-
-        const error = (text) => {
-            note("open-error", text);
-            announce(text, 0);
-        };
-
-        let text = $("open-text").value;
-        const file = $("open-file").files?.[0];
-        let format;
-        try {
-            format = await loadFormat();
-        } catch {
-            return error("Opening a pack could not be loaded. Check your connection and try again.");
-        }
-        const { readFile, readMeta, pick } = format;
-
-        if (file) {
-            const read = await readFile(file);
-            if (read.error) return error(read.error);
-            text = read.text;
-        }
-
-        if (!text.trim()) return error("Choose a Work Pack file or paste its text first.");
-
-        const { meta, error: problem } = readMeta(text);
-        if (problem) return error(problem === "none" ? "This is not a Work Pack file: it has no ToolZen Hub data at its end. Only a pack downloaded from this page can be opened." : problem);
-
-        const { value, ignored } = pick(meta, FILE_SCHEMA);
-        if (value.kind !== "work-pack") return error("This file is not a Work Pack. A context pack opens under Project context pack, below the questions.");
-        if (!getTask(value.task)) return error(`This pack is for a task that is no longer offered: ${String(value.task ?? "none").slice(0, 40)}.`);
-
-        note("open-error", "");
-        state.version = value.version ?? 1;
-        state.profession = value.profession ?? "";
-        const message = `Opened "${getTask(value.task).title}", version ${state.version}${value.date ? ` of ${value.date}` : ""}.${ignored.length ? ` Ignored: ${ignored.join(", ")}.` : ""}`;
-
-        await selectTask(value.task, { ...value, more: true, message });
-        note("suggestion", message);
-        $("open").open = false;
-
-    }
 
     $("show").addEventListener("click", () => {
         update();
@@ -808,9 +803,21 @@ export function init(app = document.getElementById("app")) {
         state.blueprint = null;
         state.method = null;
         state.version = 0;
+        state.edit = null;
+        state.pack = null;
+        state.guide?.applyControls(P, {});
         $("prompt-controls").hidden = true;
+        $("settings").hidden = true;
+        $("settings").open = false;
+        $("result-bar").hidden = true;
         $("tasks").hidden = true;
         $("details").hidden = true;
+        $("questions").innerHTML = "";
+        $("more-box").innerHTML = "";
+        $("style").innerHTML = "";
+        $("style-extra").innerHTML = "";
+        $("product-list").innerHTML = "";
+        note("final-error", "");
         $("matches").innerHTML = "";
         note("suggestion", "");
         note("open-error", "");
@@ -844,33 +851,6 @@ export function init(app = document.getElementById("app")) {
         }
     };
 
-    /* the file keeps everything needed to open it again; Copy never includes the data comment (16 D9) */
-    function packFile({ withMeta, today, FORMAT }) {
-
-        const product = chosenProduct();
-        state.version += 1;
-
-        return withMeta(state.pack.markdown, {
-            kind: "work-pack",
-            format: FORMAT,
-            version: state.version,
-            date: today(),
-            task: state.taskId,
-            answers: Object.fromEntries(Object.entries(answers()).filter(([, v]) => v)),
-            role: $("role").value,
-            experience: $("experience").value,
-            depth: $("depth").value,
-            product: product ? (product.own ? product.name : product.id) : "",
-            ownProduct: Boolean(product?.own),
-            context: $("context-field").hidden ? "" : $("project").value,
-            consistency: Object.fromEntries(Object.entries(consistency()).filter(([, v]) => v)),
-            profession: state.profession,
-            ...(state.method ? { prompt: state.guide.promptState(P) } : {}),
-            ...(state.guide && !$("tools").hidden ? state.guide.toolState(P, form, state.taskId) : {})
-        });
-
-    }
-
     body.addEventListener("change", (event) => {
         if (event.target.name === `${P}-view`) {
             state.view = event.target.value;
@@ -897,6 +877,11 @@ export function init(app = document.getElementById("app")) {
 
         /* the context review's "Change" links: open a folded section, then go to the answer */
         const edit = event.target.closest(".wb-review__edit");
+        if (edit && state.goTo && $("panel").dataset.mode === "guided") {
+            event.preventDefault();
+            state.goTo(edit.getAttribute("href").slice(P.length + 2));
+            return;
+        }
         if (edit) {
             const target = document.getElementById(edit.getAttribute("href").slice(1));
             const fold = target?.closest("details");
@@ -937,12 +922,13 @@ export function init(app = document.getElementById("app")) {
         } else if (button.id === `${P}-copy-all`) {
             copy(state.pack.markdown, "Work Pack", null);
         } else if (button.id === `${P}-download`) {
-            /* loaded with the first task, so normally already here */
-            loadFormat().then((format) => {
-                const name = `ai-work-pack-${state.taskId}-${format.today()}.md`;
-                format.downloadText(packFile(format), name);
-                announce(`Downloaded ${name}. Open it here again with Open a saved Work Pack.`, 0);
-            }, () => announce("Downloading could not be prepared. Check your connection and try again.", 0));
+            download();
+        } else if (button.id === `${P}-edit-replace`) {
+            state.edit = null;
+            $("master-edit").value = shownMain();
+            $("edit-note")?.remove();
+            $("copy-main").textContent = "Copy prompt";
+            announce("Your edit was replaced with the generated prompt.", 0);
         } else if (button.id === `${P}-expand`) {
             const folds = [...body.querySelectorAll(`.${P}-stage--fold`)];
             const open = folds.some((d) => !d.open);
@@ -950,6 +936,30 @@ export function init(app = document.getElementById("app")) {
             button.textContent = open ? "Fold the later stages" : "Expand all stages";
         }
 
+    });
+
+    /* the format is loaded with the first task, so normally already here; the file is written by pack-io.js */
+    const download = () => Promise.all([loadFormat(), loadPackIO()]).then(([format, io]) => {
+        const name = `ai-work-pack-${state.taskId}-${format.today()}.md`;
+        format.downloadText(io.packFile(packHost, format), name);
+        announce(`Downloaded ${name}. Open it here again with Open a saved Work Pack.`, 0);
+    }, () => announce("Downloading could not be prepared. Check your connection and try again.", 0));
+
+    /* the result's own actions (2026-11-19): copy the prompt as shown (or as edited), edit it, download the pack */
+    $("result-bar").addEventListener("click", (event) => {
+        const button = event.target.closest("button");
+        if (!button || !state.pack) return;
+        if (button.id === `${P}-copy-main`) {
+            copy(state.edit?.text ?? shownMain(), state.edit ? "Edited prompt" : "Prompt", state.edit ? $("master-edit") : $("master"));
+        } else if (button.id === `${P}-edit-main`) {
+            const area = $("master-edit");
+            if (!area) return;
+            area.closest("details").open = true;
+            area.scrollIntoView({ block: "center" });
+            area.focus();
+        } else if (button.id === `${P}-download-main`) {
+            download();
+        }
     });
 
     let bridgeSeed = null;
@@ -1004,19 +1014,25 @@ export function init(app = document.getElementById("app")) {
             radio.checked = true;
             chooseOutcome(linkedOutcome);
         } else note("suggestion", "That link named an outcome that is not offered. Choose what you want to accomplish.");
-    } else if (start === "describe") {
-        $("describe").focus();
     }
 
     const full = Boolean(linkedOutcome && !linkedTask) || start === "describe" || start === "context";
     const guided = !full;
+    /* the guided steps speak for themselves; the pack's own announcements wait for the prompt step */
+    state.quiet = guided;
     /* the page may have been left (in-place navigation) before the panel arrives: then there is nothing to set up */
     import("./panel.js").then((m) => {
         if (!form.isConnected) return;
         m.initPanel({ P, form, state, chooseTask, setRole, answers, reset: () => $("reset").click(), update, announce, guided, start: guided && (linkedTask || linkedRole) ? { task: linkedTask, role: linkedRole } : null });
         if (start === "context") openBridge();
+        /* focused once the full page is shown (it is drawn hidden, ready for the guided steps) */
+        else if (start === "describe") $("describe").focus();
     }, () => {
-        if (form.isConnected) $("panel").dataset.mode = "full";
+        if (!form.isConnected) return;
+        /* the steps could not load: the one-page form still works */
+        $("panel").dataset.mode = "full";
+        for (const el of $("panel").querySelectorAll(`.${P}-off`)) el.classList.remove(`${P}-off`);
+        document.querySelector(`.${P}-progress`).hidden = false;
     }).finally(() => {
         form.dataset.ready = "true";
     });
