@@ -320,25 +320,41 @@
       "state": "active"
     },
     {
+      "id": "ai-answer-checker",
+      "module": "assets/js/tools/ai-answer-checker/index.js",
+      "moduleChanges": [],
+      "provenance": "added",
+      "state": "active"
+    },
+    {
       "id": "ai-answer-checklist",
       "module": "assets/js/tools/ai-answer-checklist/index.js",
       "moduleChanges": [],
       "provenance": "added",
-      "state": "active"
+      "retired": {
+        "reason": "Became the review mode of the AI Answer Checker in the AI consolidation D22, 2026-11-18"
+      },
+      "state": "retired"
     },
     {
       "id": "ai-answer-compare",
       "module": "assets/js/tools/ai-answer-compare/index.js",
       "moduleChanges": [],
       "provenance": "added",
-      "state": "active"
+      "retired": {
+        "reason": "Became the compare mode of the AI Answer Checker in the AI consolidation D22, 2026-11-18"
+      },
+      "state": "retired"
     },
     {
       "id": "ai-workbench",
       "module": "assets/js/tools/ai-workbench/index.js",
       "moduleChanges": [],
       "provenance": "added",
-      "state": "active"
+      "retired": {
+        "reason": "Became the AI Prompt Builder (prompt-builder) in the AI consolidation D22, 2026-11-18"
+      },
+      "state": "retired"
     },
     {
       "id": "balance-transfer",
@@ -373,7 +389,10 @@
       "module": "assets/js/tools/bug-report-prompt/index.js",
       "moduleChanges": [],
       "provenance": "added",
-      "state": "active"
+      "retired": {
+        "reason": "Merged into the AI Prompt Builder debug task in the AI consolidation D22, 2026-11-18"
+      },
+      "state": "retired"
     },
     {
       "id": "business-days",
@@ -401,7 +420,10 @@
       "module": "assets/js/tools/context-pack-builder/index.js",
       "moduleChanges": [],
       "provenance": "added",
-      "state": "active"
+      "retired": {
+        "reason": "Context packs merged into the AI Prompt Builder in the AI consolidation D22, 2026-11-18"
+      },
+      "state": "retired"
     },
     {
       "id": "countdown-timer",
@@ -611,7 +633,10 @@
       "module": "assets/js/tools/meeting-notes-action-plan/index.js",
       "moduleChanges": [],
       "provenance": "added",
-      "state": "active"
+      "retired": {
+        "reason": "Retired; meeting follow-up is a task of the AI Prompt Builder (AI consolidation D22, 2026-11-18)"
+      },
+      "state": "retired"
     },
     {
       "id": "meeting-planner",
@@ -709,7 +734,10 @@
       "module": "assets/js/tools/qa-workbench/index.js",
       "moduleChanges": [],
       "provenance": "added",
-      "state": "active"
+      "retired": {
+        "reason": "Retired; QA prompts are tasks of the AI Prompt Builder, project records discontinued (D22, 2026-11-18)"
+      },
+      "state": "retired"
     },
     {
       "id": "ratio",

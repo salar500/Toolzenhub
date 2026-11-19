@@ -406,9 +406,15 @@ describe("the real ledger", () => {
 
   test("records exactly the published tools, anchored to their real implementation files; placeholders are not recorded", () => {
     const published = registry.tools.filter((t) => t.status === "published").map((t) => t.id).sort();
-    assert.deepEqual(file.ledger.tools.map((t) => t.id), published);
+    const active = file.ledger.tools.filter((t) => t.state === "active");
+    assert.deepEqual(active.map((t) => t.id), published);
     assert.ok(registry.tools.some((t) => t.status !== "published"), "premise: coming-soon tools exist");
-    for (const record of file.ledger.tools) {
+    /* a retired tool (first: the AI consolidation D22, 2026-11-18) keeps its record and its id, and is in the catalog no more */
+    for (const record of file.ledger.tools.filter((t) => t.state === "retired")) {
+      assert.ok(!registry.tools.some((t) => t.id === record.id), `${record.id} is retired but still in the catalog`);
+      assert.ok(record.retired.reason.length > 0, record.id);
+    }
+    for (const record of active) {
       assert.equal(record.module, registry.facts.toolModules[record.id].path);
       assert.ok(fs.statSync(path.join(REPO_ROOT, record.module)).isFile(), record.module);
       assert.ok(["bootstrap", "added"].includes(record.provenance), `${record.id}: ${record.provenance}`); // "added" is the provenance of a tool recorded after the bootstrap (docs/growth-manifest.md)

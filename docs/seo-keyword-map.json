@@ -1,7 +1,7 @@
 {
   "$comment": "INTERNAL planning file. Not published, not a ranking mechanism, no search volumes. Built from the site's catalogs by scripts/gen-seo-keyword-map.mjs; regenerate after the catalog changes. Use it to improve real titles, descriptions, headings, copy and internal links naturally; never as a hidden keyword block (Google ignores the meta keywords tag).",
-  "generated": "2026-11-17",
-  "pages": 676,
+  "generated": "2026-11-19",
+  "pages": 677,
   "summary": {
     "calculatorsWithoutSupportingArticle": 45,
     "pagesWithCannibalizationWarnings": 2
@@ -73,7 +73,7 @@
         "how to give an ai assistant your project's context example"
       ],
       "relatedTools": [
-        "tool:context-pack-builder"
+        "tool:prompt-builder"
       ],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
@@ -93,7 +93,7 @@
         "how to read an ai answer before you trust it example"
       ],
       "relatedTools": [
-        "tool:ai-answer-checklist"
+        "tool:ai-answer-checker"
       ],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
@@ -10961,110 +10961,77 @@
       "contentGaps": []
     },
     {
-      "url": "/tools/ai-answer-checklist/",
+      "url": "/tools/ai-answer-checker/",
       "type": "calculator",
-      "title": "AI Output Reviewer: Check an AI Answer",
-      "primaryKeyword": "ai output reviewer",
+      "title": "AI Answer Checker: Review or Compare AI Answers",
+      "primaryKeyword": "ai answer checker",
       "secondaryKeywords": [
+        "ai answer checker",
         "ai output reviewer",
         "ai answer evidence checklist",
         "review ai answer",
         "check ai answer against prompt",
-        "ai answer checker",
         "verify ai answer",
         "fact check ai",
         "chatgpt fact check",
         "ai hallucination check",
-        "evidence checklist",
         "check ai output",
-        "ai answer verification"
+        "compare ai answers",
+        "compare two ai responses",
+        "chatgpt vs claude answer",
+        "which ai answer is better",
+        "ai answer comparison",
+        "contradictions between ai answers"
       ],
       "searchIntent": "transactional/tool: the visitor wants to calculate now",
       "relatedSearchPhrases": [
-        "ai output reviewer online",
-        "ai output reviewer free",
-        "how to use ai output reviewer",
-        "ai output reviewer formula"
+        "ai answer checker online",
+        "ai answer checker free",
+        "how to use ai answer checker",
+        "ai answer checker formula"
       ],
       "relatedTools": [
-        "/tools/ai-answer-compare/",
-        "/tools/ai-workbench/",
-        "/tools/prompt-builder/",
-        "/tools/bug-report-prompt/",
-        "/tools/context-pack-builder/",
-        "/tools/meeting-notes-action-plan/",
-        "/tools/qa-workbench/"
+        "/tools/prompt-builder/"
       ],
+      "articleOpportunities": [],
+      "cannibalizationWarnings": [],
+      "contentGaps": []
+    },
+    {
+      "url": "/tools/ai-answer-checklist/",
+      "type": "redirect",
+      "title": "AI Output Reviewer has moved",
+      "primaryKeyword": "ai output reviewer has moved",
+      "secondaryKeywords": [],
+      "searchIntent": "none: a noindex redirect to /tools/ai-answer-checker/",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
       "contentGaps": []
     },
     {
       "url": "/tools/ai-answer-compare/",
-      "type": "calculator",
-      "title": "Compare Two AI Answers: Agreements and Contradictions",
-      "primaryKeyword": "compare two ai answers",
-      "secondaryKeywords": [
-        "compare ai answers",
-        "compare two ai responses",
-        "chatgpt vs claude answer",
-        "which ai answer is better",
-        "ai answer comparison",
-        "compare chatgpt answers",
-        "ai response diff",
-        "contradictions between ai answers"
-      ],
-      "searchIntent": "transactional/tool: the visitor wants to calculate now",
-      "relatedSearchPhrases": [
-        "compare two ai answers online",
-        "compare two ai answers free",
-        "how to use compare two ai answers",
-        "compare two ai answers formula"
-      ],
-      "relatedTools": [
-        "/tools/ai-answer-checklist/",
-        "/tools/prompt-builder/",
-        "/tools/ai-workbench/",
-        "/tools/bug-report-prompt/",
-        "/tools/context-pack-builder/",
-        "/tools/meeting-notes-action-plan/",
-        "/tools/qa-workbench/"
-      ],
+      "type": "redirect",
+      "title": "Compare Two AI Answers has moved",
+      "primaryKeyword": "compare two ai answers has moved",
+      "secondaryKeywords": [],
+      "searchIntent": "none: a noindex redirect to /tools/ai-answer-checker/?mode=compare",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
       "contentGaps": []
     },
     {
       "url": "/tools/ai-workbench/",
-      "type": "calculator",
-      "title": "AI Workbench: From an Idea to an AI Work Pack",
-      "primaryKeyword": "ai workbench",
-      "secondaryKeywords": [
-        "ai workbench",
-        "ai work pack",
-        "ai workflow",
-        "ai workflow planner",
-        "which ai tool should i use",
-        "ai prompts for testing",
-        "ai image prompt",
-        "ai video prompt"
-      ],
-      "searchIntent": "transactional/tool: the visitor wants to calculate now",
-      "relatedSearchPhrases": [
-        "ai workbench online",
-        "ai workbench free",
-        "how to use ai workbench",
-        "ai workbench formula"
-      ],
-      "relatedTools": [
-        "/tools/prompt-builder/",
-        "/tools/context-pack-builder/",
-        "/tools/ai-answer-checklist/",
-        "/tools/bug-report-prompt/",
-        "/tools/ai-answer-compare/",
-        "/tools/meeting-notes-action-plan/",
-        "/tools/qa-workbench/"
-      ],
+      "type": "redirect",
+      "title": "AI Workbench has moved",
+      "primaryKeyword": "ai workbench has moved",
+      "secondaryKeywords": [],
+      "searchIntent": "none: a noindex redirect to /tools/prompt-builder/",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
       "contentGaps": []
@@ -11106,35 +11073,13 @@
     },
     {
       "url": "/tools/bug-report-prompt/",
-      "type": "calculator",
-      "title": "Bug Report to Debugging Prompt for AI Coding Assistants",
-      "primaryKeyword": "bug report to debugging prompt",
-      "secondaryKeywords": [
-        "bug report prompt",
-        "debugging prompt",
-        "ai debugging",
-        "bug to prompt",
-        "fix bug with ai",
-        "copilot bug fix prompt",
-        "claude code bug prompt",
-        "bug report template"
-      ],
-      "searchIntent": "transactional/tool: the visitor wants to calculate now",
-      "relatedSearchPhrases": [
-        "bug report to debugging prompt online",
-        "bug report to debugging prompt free",
-        "how to use bug report to debugging prompt",
-        "bug report to debugging prompt formula"
-      ],
-      "relatedTools": [
-        "/tools/context-pack-builder/",
-        "/tools/prompt-builder/",
-        "/tools/ai-workbench/",
-        "/tools/ai-answer-checklist/",
-        "/tools/ai-answer-compare/",
-        "/tools/meeting-notes-action-plan/",
-        "/tools/qa-workbench/"
-      ],
+      "type": "redirect",
+      "title": "Bug Report to Debugging Prompt has moved",
+      "primaryKeyword": "bug report to debugging prompt has moved",
+      "secondaryKeywords": [],
+      "searchIntent": "none: a noindex redirect to /tools/prompt-builder/?task=debug",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
       "contentGaps": []
@@ -11172,41 +11117,13 @@
     },
     {
       "url": "/tools/context-pack-builder/",
-      "type": "calculator",
-      "title": "AI Context Bridge: Move a Project Between AI Tools",
-      "primaryKeyword": "ai context bridge",
-      "secondaryKeywords": [
-        "context bridge",
-        "project context pack builder",
-        "context pack builder",
-        "context pack",
-        "switch from chatgpt to claude",
-        "move chat to another ai",
-        "agents md generator",
-        "project context for ai",
-        "ai handover",
-        "project brief for chatgpt",
-        "claude md generator",
-        "cursor rules generator",
-        "project instructions for ai",
-        "ai onboarding brief"
-      ],
-      "searchIntent": "transactional/tool: the visitor wants to calculate now",
-      "relatedSearchPhrases": [
-        "ai context bridge online",
-        "ai context bridge free",
-        "how to use ai context bridge",
-        "ai context bridge formula"
-      ],
-      "relatedTools": [
-        "/tools/ai-workbench/",
-        "/tools/prompt-builder/",
-        "/tools/bug-report-prompt/",
-        "/tools/ai-answer-checklist/",
-        "/tools/ai-answer-compare/",
-        "/tools/meeting-notes-action-plan/",
-        "/tools/qa-workbench/"
-      ],
+      "type": "redirect",
+      "title": "AI Context Bridge has moved",
+      "primaryKeyword": "ai context bridge has moved",
+      "secondaryKeywords": [],
+      "searchIntent": "none: a noindex redirect to /tools/prompt-builder/?start=context",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
       "contentGaps": []
@@ -11818,35 +11735,13 @@
     },
     {
       "url": "/tools/meeting-notes-action-plan/",
-      "type": "calculator",
-      "title": "Meeting Notes to Action Plan: Decisions, Owners, Dates",
-      "primaryKeyword": "meeting notes to action plan",
-      "secondaryKeywords": [
-        "meeting notes to action items",
-        "meeting minutes generator",
-        "action items from notes",
-        "meeting summary",
-        "follow-up email after meeting",
-        "meeting action plan",
-        "minutes of meeting",
-        "extract action items"
-      ],
-      "searchIntent": "transactional/tool: the visitor wants to calculate now",
-      "relatedSearchPhrases": [
-        "meeting notes to action plan online",
-        "meeting notes to action plan free",
-        "how to use meeting notes to action plan",
-        "meeting notes to action plan formula"
-      ],
-      "relatedTools": [
-        "/tools/prompt-builder/",
-        "/tools/context-pack-builder/",
-        "/tools/ai-workbench/",
-        "/tools/bug-report-prompt/",
-        "/tools/ai-answer-checklist/",
-        "/tools/ai-answer-compare/",
-        "/tools/qa-workbench/"
-      ],
+      "type": "redirect",
+      "title": "Meeting Notes to Action Plan has moved",
+      "primaryKeyword": "meeting notes to action plan has moved",
+      "secondaryKeywords": [],
+      "searchIntent": "none: a noindex redirect to /tools/prompt-builder/?task=meeting-follow-up",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
       "contentGaps": []
@@ -12081,7 +11976,7 @@
     {
       "url": "/tools/prompt-builder/",
       "type": "calculator",
-      "title": "AI Prompt Builder: Turn an Idea into a Complete Prompt",
+      "title": "AI Prompt Builder: Professional Prompts for Any Task",
       "primaryKeyword": "ai prompt builder",
       "secondaryKeywords": [
         "prompt builder",
@@ -12090,8 +11985,15 @@
         "chatgpt prompt",
         "claude prompt",
         "prompt template",
-        "better prompts",
-        "prompt engineering"
+        "prompt engineering",
+        "ai workbench",
+        "ai work pack",
+        "ai prompts for testing",
+        "debugging prompt",
+        "ai image prompt",
+        "ai video prompt",
+        "context pack",
+        "context bridge"
       ],
       "searchIntent": "transactional/tool: the visitor wants to calculate now",
       "relatedSearchPhrases": [
@@ -12101,13 +12003,7 @@
         "ai prompt builder formula"
       ],
       "relatedTools": [
-        "/tools/bug-report-prompt/",
-        "/tools/context-pack-builder/",
-        "/tools/ai-workbench/",
-        "/tools/ai-answer-checklist/",
-        "/tools/ai-answer-compare/",
-        "/tools/meeting-notes-action-plan/",
-        "/tools/qa-workbench/"
+        "/tools/ai-answer-checker/"
       ],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
@@ -12115,36 +12011,13 @@
     },
     {
       "url": "/tools/qa-workbench/",
-      "type": "calculator",
-      "title": "QA Workbench: Requirements Traceability to QA Report",
-      "primaryKeyword": "qa requirement-to-release workbench",
-      "secondaryKeywords": [
-        "qa workbench",
-        "requirements traceability matrix",
-        "traceability matrix",
-        "test case management",
-        "test coverage tracker",
-        "test execution tracker",
-        "qa test report",
-        "test summary report",
-        "acceptance criteria coverage"
-      ],
-      "searchIntent": "transactional/tool: the visitor wants to calculate now",
-      "relatedSearchPhrases": [
-        "qa requirement-to-release workbench online",
-        "qa requirement-to-release workbench free",
-        "how to use qa requirement-to-release workbench",
-        "qa requirement-to-release workbench formula"
-      ],
-      "relatedTools": [
-        "/tools/ai-answer-checklist/",
-        "/tools/ai-workbench/",
-        "/tools/bug-report-prompt/",
-        "/tools/prompt-builder/",
-        "/tools/context-pack-builder/",
-        "/tools/ai-answer-compare/",
-        "/tools/meeting-notes-action-plan/"
-      ],
+      "type": "redirect",
+      "title": "QA Requirement-to-Release Workbench has moved",
+      "primaryKeyword": "qa requirement",
+      "secondaryKeywords": [],
+      "searchIntent": "none: a noindex redirect to /tools/prompt-builder/?role=qa",
+      "relatedSearchPhrases": [],
+      "relatedTools": [],
       "articleOpportunities": [],
       "cannibalizationWarnings": [],
       "contentGaps": []

@@ -140,7 +140,7 @@ const article = {
             answer: "No. The pack sets the scene; the next task section states what you want now. For anything bigger than a one-line task, write the task itself with the AI Prompt Builder and paste it after the pack."
         },
         {
-            question: "Is my project information stored by the AI Context Bridge?",
+            question: "Is my project information stored by the AI Prompt Builder's context pack?",
             answer: "No. The pack is composed in your browser and nothing is kept when you leave the page. Download it or copy it into your project to keep it."
         }
     ]

@@ -1,0 +1,922 @@
+/* =========================================================
+   ToolZen Hub
+   AI Workbench (Tool Pack 58)
+
+   Only what the shared tool styles and ai-tools.css do not give:
+   the progress line, the outcome and task choices, the product
+   list, the prompt blocks and the stage cards. Colours come from
+   the design tokens, so the light and dark themes both work. The
+   chosen option is marked by its own radio and a thicker border,
+   never by colour alone. Loaded after ai-tools.css.
+========================================================= */
+
+/* progress: four words, the current one bold and marked aria-current */
+.wb-progress {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+    counter-reset: wb-step;
+    font-size: 14px;
+    color: var(--ink-muted);
+}
+
+.wb-progress li {
+    counter-increment: wb-step;
+}
+
+.wb-progress li::before {
+    content: counter(wb-step) ". ";
+}
+
+.wb-progress li[aria-current="step"] {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.wb-progress li[data-done="true"]::after {
+    content: " ✓";
+}
+
+/* the form's parts */
+.wb-group {
+    margin: 0 0 20px;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+}
+
+.wb-group > legend {
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.wb-choices {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    gap: 10px;
+}
+
+.wb-choices--tasks {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+}
+
+.wb-choice,
+.wb-product {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 10px;
+    align-items: start;
+    min-height: 44px;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+    color: var(--ink);
+    cursor: pointer;
+}
+
+.wb-choice input,
+.wb-product input {
+    grid-row: span 2;
+    width: 18px;
+    height: 18px;
+    margin: 2px 0 0;
+    accent-color: var(--accent);
+}
+
+.wb-choice:has(input:checked),
+.wb-product:has(input:checked) {
+    border-color: var(--action);
+    box-shadow: inset 0 0 0 1px var(--action);
+}
+
+.wb-choice:has(input:focus-visible),
+.wb-product:has(input:focus-visible) {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.wb-choice__title {
+    font-weight: 650;
+    line-height: 1.35;
+}
+
+.wb-choice__text {
+    grid-column: 2;
+    margin-top: 2px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ink-muted);
+}
+
+/* the start panel: describe, playbooks, open a saved pack (AI ecosystem programme 17 §5.1) */
+.wb-start {
+    margin: 0 0 20px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-page);
+}
+
+.wb-start > .calculator-form__button {
+    margin-top: 4px;
+}
+
+.wb-match-list {
+    display: grid;
+    gap: 8px;
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.wb-match {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+}
+
+.wb-match span {
+    overflow-wrap: anywhere;
+}
+
+.wb-match-list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target-size);
+}
+
+.wb-disclosure {
+    margin: 12px 0 0;
+    padding: 4px 0 0;
+    border-top: 1px solid var(--line);
+}
+
+.wb-disclosure > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.wb-playbook-list {
+    display: grid;
+    gap: 12px;
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.wb-playbook {
+    display: grid;
+    gap: 4px;
+}
+
+.wb-playbook__steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.wb-error:not(:empty) {
+    color: var(--state-error);
+    font-weight: 650;
+}
+
+.wb-product-list {
+    display: grid;
+    gap: 8px;
+}
+
+.wb-product span {
+    overflow-wrap: anywhere;
+}
+
+.wb-context,
+.wb-sheet,
+.wb-more {
+    grid-column: 1 / -1;
+    margin: 4px 0 16px;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-page);
+}
+
+.wb-context > summary,
+.wb-sheet > summary,
+.wb-more > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.wb-more .calculator-form__grid,
+.wb-sheet .calculator-form__grid,
+.wb-context .calculator-form__grid {
+    margin-top: 8px;
+}
+
+/* the pack: "Prompts only" hides everything but the prompts (17 §5.3) */
+.wb-view {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 16px;
+    margin: 14px 0 0;
+    padding: 0;
+    border: 0;
+}
+
+.wb-view legend {
+    float: left;
+    margin-right: 8px;
+}
+
+.wb-view label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: var(--target-size);
+}
+
+[data-view="prompts"] .wb-info {
+    display: none;
+}
+
+.wb-stage--fold > summary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 12px;
+    min-height: 44px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.wb-stage--fold[open] > summary {
+    margin-bottom: 8px;
+}
+
+.wb-next-tools {
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+}
+
+/* the pack */
+.wb-pack__title {
+    margin: 0 0 12px;
+    font-size: 1.25rem;
+}
+
+.wb-pack__title:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 4px;
+}
+
+.wb-part {
+    margin-top: 22px;
+}
+
+.wb-part h3 {
+    margin: 0 0 8px;
+    font-size: 1.0625rem;
+}
+
+.wb-part ul,
+.wb-part ol {
+    margin: 6px 0 0;
+    padding-left: 20px;
+    line-height: 1.55;
+}
+
+.wb-sub {
+    margin: 10px 0 0;
+    font-weight: 650;
+    font-size: 14px;
+}
+
+.wb-alert {
+    margin: 12px 0 0;
+    padding: 10px 14px;
+    border: 1px solid var(--state-warning-line);
+    border-left-width: 6px;
+    border-radius: 10px;
+    background: var(--state-warning-soft);
+    color: var(--ink);
+    font-size: 14px;
+}
+
+.wb-prompt {
+    margin-top: 10px;
+}
+
+.wb-prompt__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.wb-prompt__title {
+    margin: 0;
+    font-size: 15px;
+}
+
+.wb-prompt__text {
+    margin: 6px 0 0;
+    padding: 12px 14px;
+    max-height: 420px;
+    overflow: auto;
+    border: 1px solid var(--line-control);
+    border-radius: 10px;
+    background: var(--surface-sunken);
+    color: var(--ink);
+    font-family: ui-monospace, "Cascadia Mono", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 14px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.wb-prompt__text:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.wb-stage-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin: 0 0 6px;
+    padding-left: 20px;
+}
+
+.wb-stage {
+    margin-top: 16px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+    scroll-margin-top: 90px;
+}
+
+.wb-stage__name {
+    margin: 0 0 8px;
+    font-size: 1rem;
+}
+
+.wb-stage__facts {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+}
+
+.wb-stage__facts div {
+    display: grid;
+    grid-template-columns: minmax(90px, max-content) 1fr;
+    gap: 10px;
+}
+
+.wb-stage__facts dt {
+    font-weight: 650;
+    color: var(--ink-muted);
+}
+
+.wb-stage__facts dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.wb-checklist {
+    list-style: none;
+    padding-left: 0;
+}
+
+.wb-checklist label {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: start;
+    min-height: 32px;
+}
+
+.wb-checklist input {
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    accent-color: var(--accent);
+}
+
+/* the tool step (D18): a tool is chosen by its checkbox; its experience select appears beside it once chosen */
+.wb-tools {
+    margin: 16px 0 20px;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+}
+
+.wb-tool-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 8px;
+    margin: 10px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.wb-tool {
+    display: grid;
+    gap: 6px;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+}
+
+.wb-tool:has(input:checked) {
+    border-color: var(--accent);
+    border-width: 2px;
+}
+
+.wb-tool__pick {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    min-height: 44px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.wb-tool__pick input {
+    width: 20px;
+    height: 20px;
+    margin: 1px 0 0;
+    flex: none;
+    accent-color: var(--accent);
+}
+
+.wb-tool-other {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+}
+
+.wb-adjust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.wb-edit {
+    margin-top: 12px;
+}
+
+.wb-edit > summary {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.wb-review {
+    border-left: 4px solid var(--accent-line);
+    padding-left: 12px;
+}
+
+/* prompt detail and refinements (D19): above the pack and not redrawn with it, so focus stays on the control used */
+.wb-controls {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.wb-detail,
+.wb-extras {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.wb-detail {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 8px;
+}
+
+.wb-detail .calculator-form__label {
+    grid-column: 1 / -1;
+}
+
+.wb-detail__option {
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+}
+
+/* WCAG 2.2 target size: the radios sit close together in the three-column layout, so each is 24px */
+.wb-detail__option input {
+    width: 24px;
+    height: 24px;
+}
+
+.wb-detail__option:has(input:checked) {
+    border-color: var(--accent);
+    border-width: 2px;
+}
+
+.wb-extras {
+    display: grid;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.wb-check__list {
+    margin: 8px 0 0;
+    padding-left: 20px;
+}
+
+.wb-review__edit {
+    margin-left: 6px;
+    white-space: nowrap;
+    text-decoration: underline; /* a link inside text is told apart by more than colour (WCAG 1.4.1) */
+}
+
+@media (max-width: 599px) {
+
+    .wb-adjust .calculator-form__button {
+        width: 100%;
+    }
+
+    .wb-stage__facts div {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .wb-prompt__text {
+        font-size: 15px;
+    }
+
+    .wb-start > .calculator-form__button,
+    .wb-next-tools .calculator-form__button,
+    .wb-match .calculator-form__button {
+        width: 100%;
+    }
+
+}
+
+/* ---------- the guided panel (D20): one step at a time in one card; the page around it does not change ---------- */
+.wb-panel[data-mode="guided"] {
+    margin-top: 28px;
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-card);
+    box-shadow: 0 4px 14px rgba(16, 24, 40, .04);
+}
+
+.wb-panel[data-mode="guided"] .wb-off {
+    display: none !important;
+}
+
+.wb-panel[data-mode="guided"] > .calculator-section {
+    margin-top: 0;
+}
+
+.wb-panel[data-mode="guided"] .calculator-results__card {
+    padding: 0;
+    border: 0;
+    background: none;
+    box-shadow: none;
+}
+
+.wb-panel[data-mode="full"] .wb-panel__head,
+.wb-panel[data-mode="full"] #wb-roles,
+.wb-panel[data-mode="full"] #wb-guide-tasks {
+    display: none;
+}
+
+/* in a one-question step the step's title is the question, so the field's own label is kept for screen readers only */
+.wb-panel[data-mode="guided"] [data-panel-q] > .calculator-form__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+.wb-panel[data-mode="guided"] [data-panel-q] select:has(+ .wb-pick) {
+    display: none;
+}
+
+.wb-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 6px;
+    margin: 0 0 12px;
+    padding: 0;
+    list-style: none;
+    font-size: .875rem;
+}
+
+.wb-steps li + li::before {
+    content: "→ ";
+}
+
+.wb-steps li[aria-current="step"] {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.wb-panel__title {
+    margin-bottom: 4px;
+}
+
+.wb-panel__title:focus {
+    outline: none;
+}
+
+.wb-panel__title:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.wb-roles {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.wb-roles__find {
+    max-width: 360px;
+}
+
+.wb-role-group__title {
+    margin: 16px 0 8px;
+    font-size: 1rem;
+}
+
+.wb-role-list,
+.wb-choices--tasks:has(.wb-role),
+.wb-pick {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.wb-role {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.wb-role:hover {
+    border-color: var(--accent);
+}
+
+.wb-role:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.wb-role[aria-pressed="true"] {
+    border: 2px solid var(--accent);
+    font-weight: 700;
+}
+
+.wb-role__name {
+    display: block;
+}
+
+.wb-panel__nav {
+    margin-top: 20px;
+}
+
+.wb-panel__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.wb-panel__other {
+    margin: 12px 0 0;
+}
+
+.wb-linkish {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--accent);
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+    min-height: 24px;
+    text-align: left;
+}
+
+@media (max-width: 599px) {
+
+    .wb-panel[data-mode="guided"] {
+        padding: 16px;
+    }
+
+    .wb-panel__buttons .calculator-form__button {
+        flex: 1 1 auto;
+    }
+
+}
+
+.wb-panel[data-mode="guided"] .wb-form {
+    padding: 0;
+    border: 0;
+    background: none;
+    box-shadow: none;
+}
+
+.wb-panel[data-mode="guided"] #wb-pack-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+/* ---------- the conversation (D22): describe the task, the answers so far, the current question ---------- */
+.wb-composer {
+    margin: 0 0 8px;
+}
+
+.wb-composer__row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+}
+
+.wb-composer__input {
+    flex: 1 1 auto;
+    min-height: 56px;
+    resize: vertical;
+}
+
+.wb-composer__send {
+    flex: 0 0 auto;
+}
+
+.wb-or {
+    margin: 18px 0 6px;
+    color: var(--ink-muted);
+    font-size: .875rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+.wb-ask-result:not(:empty) {
+    margin-top: 12px;
+}
+
+.wb-bubble {
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-md);
+    background: var(--surface-sunken);
+}
+
+.wb-bubble p {
+    margin: 0 0 10px;
+}
+
+.wb-bubble p:last-child {
+    margin-bottom: 0;
+}
+
+.wb-ask-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+    gap: 8px;
+    margin: 0 0 10px;
+    padding: 0;
+    list-style: none;
+}
+
+.wb-ask-list .calculator-form__button {
+    width: 100%;
+}
+
+.wb-role-list--suggested {
+    margin-bottom: 10px;
+}
+
+.wb-all-roles > summary {
+    min-height: 44px;
+    padding: 10px 0;
+    color: var(--accent);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.wb-thread {
+    display: grid;
+    gap: 8px;
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+}
+
+.wb-thread__item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2px 12px;
+    align-items: start;
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+    background: var(--surface-sunken);
+}
+
+.wb-thread__q {
+    grid-column: 1;
+    color: var(--ink-muted);
+    font-size: .875rem;
+}
+
+.wb-thread__a {
+    grid-column: 1;
+    color: var(--ink);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.wb-thread__change {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    min-height: 44px;
+}
+
+.wb-panel[data-mode="full"] .wb-thread {
+    display: none;
+}
+
+/* the three kinds of prompt, named above the pack */
+.wb-types ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0 0 14px;
+    padding: 0;
+    list-style: none;
+}
+
+.wb-types a {
+    font-weight: 600;
+}
+
+.wb-bridge .wb-disclosure > summary {
+    font-weight: 600;
+}
+
+@media (max-width: 599px) {
+
+    .wb-composer__row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .wb-composer__send {
+        width: 100%;
+    }
+
+}

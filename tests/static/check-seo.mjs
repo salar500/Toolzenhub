@@ -71,6 +71,21 @@ for (const p of pages) {
     continue;
   }
 
+  /* a retired tool's address (AI consolidation D22, assets/js/data/retired-tools.js) is a page that sends the visitor on:
+     never indexed, its one canonical is the product that now does the job, and it refreshes there at once */
+  if (p.type === "redirect") {
+    const target = p.redirectTo ?? "";
+    const targetPath = target.split("?")[0];
+    if (!metaContent(head, "name", "robots").some((r) => /noindex/i.test(r))) fail(p.url, "a retired address must be noindex");
+    const canon = links(head, "canonical");
+    if (canon.length !== 1 || canon[0] !== ORIGIN + targetPath) fail(p.url, `a retired address needs one canonical on ${ORIGIN + targetPath} (found ${canon.join(", ") || "none"})`);
+    const refresh = (head.match(/<meta http-equiv="refresh" content="0; url=([^"]+)">/) || [])[1] ?? "";
+    if (!refresh.endsWith(target.replace(/^\//, ""))) fail(p.url, `the refresh "${refresh}" should go to ${target}`);
+    if (p.inSitemap) fail(p.url, "a retired address must not be in the sitemap");
+    if (!inventory.live.some((x) => x.url === targetPath && x.type === "calculator")) fail(p.url, `its target ${targetPath} is not a live tool page`);
+    continue;
+  }
+
   /* ---- title, description ---- */
   const title = squash((head.match(/<title>([\s\S]*?)<\/title>/) || [])[1] ?? "");
   if (title !== p.expectedTitle) fail(p.url, `title "${title}" differs from the inventory "${p.expectedTitle}"`);

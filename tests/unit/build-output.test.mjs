@@ -85,6 +85,13 @@ for (const build of BUILDS) {
     it("declares its own base on every page, and the production origin as canonical", () => {
       for (const p of inventory.live) {
         const html = fs.readFileSync(path.join(build.dir, p.file), "utf8");
+        // a retired tool's address (src/retired-tools.njk) runs no site script, so it needs no base; its canonical is its new home
+        if (p.type === "redirect") {
+          assert.ok(html.includes(`<link rel="canonical" href="https://toolzenhub.in${p.redirectTo.split("?")[0]}">`), `${p.file} canonical`);
+          assert.ok(html.includes(`content="0; url=${build.base}${p.redirectTo.slice(1)}"`), `${p.file} refresh`);
+          assert.ok(!/github\.io/i.test(html), `${p.file} mentions the preview host`);
+          continue;
+        }
         assert.match(html, new RegExp(`<meta name="tz-site-base" content="${build.base}">`), p.file);
         // ShopLite (practice-target) is a standalone noindex practice app with no canonical, as the SEO check expects
         if (p.type !== "practice-target") assert.ok(html.includes(`<link rel="canonical" href="https://toolzenhub.in${p.url}">`), `${p.file} canonical`);

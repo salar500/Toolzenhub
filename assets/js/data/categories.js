@@ -155,7 +155,7 @@ export const sections = [
         id: "ai-tools",
         title: "AI Tools",
         description:
-            "Prepare your AI work, carry your project between AI products and check what comes back: a Workbench, a context bridge, an output reviewer, quick briefs and a directory of AI products. Nothing is sent to any AI service.",
+            "Prepare your AI work, carry your project between AI products and check what comes back: the AI Prompt Builder (with project context packs), the AI Answer Checker and a directory of AI products. Nothing is sent to any AI service.",
         seoDescription:
             "AI Tools from ToolZen Hub: plan AI work as a Work Pack, carry a project between ChatGPT, Claude and Gemini, check an AI answer against your prompt, and find AI products by task. Everything runs in your browser; no AI service is called.",
         summary:

@@ -1,6 +1,6 @@
 # Tool Pack 59: QA Requirement-to-Release Workbench
 
-Status: **built locally (P1-P7 of section 14), not committed, not released**      Base commit: 89f3e604      Section `ai-tools` (category `ai`); tool `qa-workbench` (route `/tools/qa-workbench/`)
+Status: **retired 2026-11-18 (AI consolidation, decision D22)**: the tool, its tests and its stylesheet were removed; `/tools/qa-workbench/` redirects to the AI Prompt Builder's QA tasks (`/tools/prompt-builder/?role=qa`) and the id stays reserved. The QA project records it kept are discontinued, not moved (`docs/ecosystem-review/ai-ecosystem/26-CONSOLIDATION.md` section 2). This pack is kept as the record of what was built (it was committed at 3cafe100 and shown on the preview).      Previous status: built locally (P1-P7 of section 14)      Base commit: 89f3e604      Section `ai-tools` (category `ai`); tool `qa-workbench` (route `/tools/qa-workbench/`)
 
 Owner direction, 2026-11-17: one focused tool for small QA teams, manual and automation QA professionals, that manages one connected workflow, **requirement → test cases → traceability and coverage → execution → defects → QA report**, inside AI Tools. It must stay useful without any AI product; AI help is optional and reuses the existing AI tools. The core differentiation is reliable requirements traceability, deterministic coverage, explicit execution records and a trustworthy report. The architecture was mapped read-only against the code at `89f3e604` before this spec was written; every reuse point below was checked in that checkout.
 

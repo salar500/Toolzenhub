@@ -1,6 +1,6 @@
 # Tool Pack 58: AI Workbench
 
-Status: built; extended by the AI ecosystem programme (2026-11-16)      Base commit: b0772e83      Section `ai-tools` (category `ai`); tool `ai-workbench` (route `/tools/ai-workbench/`)
+Status: built; extended by the AI ecosystem programme (2026-11-16); **renamed the AI Prompt Builder and made the central AI product on 2026-11-18 (decision D22)**: id `prompt-builder`, route `/tools/prompt-builder/`, code in `assets/js/tools/prompt-builder/`; `/tools/ai-workbench/` redirects there. The conversational first screen, the absorbed tasks and the context pack are in `docs/ecosystem-review/ai-ecosystem/26-CONSOLIDATION.md`; this pack's sections stay valid for the engine      Base commit: b0772e83      Section `ai-tools` (category `ai`); tool `ai-workbench` (route `/tools/ai-workbench/`)
 
 Owner instruction, 2026-11-16 (the final master development prompt): a comprehensive AI Workbench inside AI Tools that takes a visitor from an outcome they want to a complete **AI Work Pack**: what to prepare, which AI product suits the job, the instructions to give it, the stages to follow, how to refine the result and how to check it. ToolZen Hub prepares the work; the visitor's own AI product does it. No AI service is called, nothing is sent, and there is no eighth ecosystem: professions are contexts inside one Workbench, never separate pages.
 

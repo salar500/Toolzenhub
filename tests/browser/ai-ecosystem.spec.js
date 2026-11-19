@@ -1,8 +1,9 @@
 /**
  * AI ecosystem programme (docs/ecosystem-review/ai-ecosystem/17-FINAL-DESIGN.md), Phase 3: the journeys across the AI tools.
- * AI Home's links, a Work Pack that downloads and opens again, the Workbench handing its request to the AI Output Reviewer, the
- * AI Context Bridge reading an AI's reply and handing the pack to the Workbench, and the privacy promises: nothing leaves the site,
- * nothing is stored, no typed text reaches the address bar. Engines are covered by tests/unit/ai-ecosystem.test.mjs.
+ * Three products since D22 (26-CONSOLIDATION.md): AI Home's links, a Work Pack that downloads and opens again, the AI Prompt
+ * Builder handing its prompt to the AI Answer Checker, the project context pack (inside the Prompt Builder) reading an AI's reply and
+ * going into the prompt, the retired addresses, and the privacy promises: nothing leaves the site, nothing is stored, no typed text
+ * reaches the address bar. Engines are covered by tests/unit/ai-ecosystem.test.mjs.
  */
 import fs from "node:fs";
 import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.mjs";
@@ -20,22 +21,23 @@ const answerTestPlan = async (page) => {
 
 test.describe("AI ecosystem", () => {
 
-  test("AI Home: the start block links into the Workbench; a common start opens its task; no overflow", async ({ page, go, watch }) => {
+  test("AI Home: the start block links into the AI Prompt Builder and the AI Answer Checker; a common start opens its task in the conversation; no overflow", async ({ page, go, watch }) => {
     await go("ai-tools.html");
     const start = page.locator(".ai-start");
-    await expect(start.locator("h2")).toHaveText("What do you want to do with AI?");
+    await expect(start.locator("h2")).toHaveText("What would you like to create today?");
     await expect(start.locator(".ai-start__chips").first().locator("a")).toHaveCount(8);
+    await expect(start.getByRole("link", { name: "Compare two AI answers" })).toBeVisible();
     await expectNoHorizontalOverflow(page);
     await start.getByRole("link", { name: "A test plan" }).click();
     await page.locator("#wb-form[data-ready]").waitFor();
-    await expect(page.getByLabel("Testing: a test plan")).toBeChecked();
+    await expect(page.locator("#wb-step-title")).toHaveText("What is being tested");
     await expect(page.locator("#wb-q-feature")).toBeVisible();
     expect(watch.external).toEqual([]);
     expect(watch.pageErrors).toEqual([]);
   });
 
-  test("Workbench: describe, choose, answer; download the pack and open it again: the same master prompt; nothing stored @portable", async ({ page, go, watch }) => {
-    await go("tools/ai-workbench/?start=describe");
+  test("the full page: describe, choose, answer; download the pack and open it again: the same main prompt; nothing stored @portable", async ({ page, go, watch }) => {
+    await go("tools/prompt-builder/?start=describe");
     await page.locator("#wb-form[data-ready]").waitFor();
     await expect(page.locator("#wb-describe")).toBeFocused();
     await page.locator("#wb-describe").fill("test plan for a coupon feature");
@@ -71,13 +73,15 @@ test.describe("AI ecosystem", () => {
     expect(watch.pageErrors).toEqual([]);
   });
 
-  test("Workbench to Output Reviewer: the request arrives in the same tab; the review names what the answer missed @desktop-only", async ({ page, go, watch }) => {
-    await go("tools/ai-workbench/?task=test-plan");
+  test("Prompt Builder to Answer Checker: the prompt arrives in the same tab; the review names what the answer missed @desktop-only", async ({ page, go, watch }) => {
+    await go("tools/prompt-builder/?task=test-plan");
     await page.locator("#wb-form[data-ready]").waitFor();
     await expect(page.locator("#wb-q-feature")).toBeVisible();
+    await page.getByRole("button", { name: "Show everything on one page" }).click();
     await answerTestPlan(page);
     await page.locator("#wb-to-review").click();
-    await expect(page.locator("h1")).toHaveText("AI Output Reviewer");
+    await expect(page.locator("h1")).toHaveText("AI Answer Checker");
+    await expect(page.getByRole("radio", { name: "Review one answer" })).toBeChecked();
     await page.locator("#ac-form[data-ready]").waitFor();
     await expect(page.locator("#ac-question")).toHaveValue(/Write a test plan for the following/);
     await page.locator("#ac-answer").fill("Test plan. Scope: coupons at checkout. Out of scope: payments. TODO add the schedule");
@@ -92,11 +96,13 @@ test.describe("AI ecosystem", () => {
     expect(watch.pageErrors).toEqual([]);
   });
 
-  test("Context Bridge: an AI's reply fills the form by heading; modes keep every field; the pack goes to the Workbench @desktop-only", async ({ page, go, watch }) => {
-    await go("tools/context-pack-builder/?mode=handoff");
+  test("the project context pack, inside the Prompt Builder: an AI's reply fills it by heading; modes keep every field; the pack goes into the prompt @desktop-only", async ({ page, go, watch }) => {
+    await go("tools/prompt-builder/?start=context");
+    await page.locator("#wb-form[data-ready]").waitFor();
+    await expect(page.locator("#wb-bridge-fold")).toHaveAttribute("open", "");
     await page.locator("#cp-form[data-ready]").waitFor();
-    await expect(page.locator("h1")).toHaveText("AI Context Bridge");
-    await expect(page.locator("#cp-mode")).toHaveValue("handoff");
+    await expect(page.locator("h1")).toHaveText("AI Prompt Builder");
+    await page.locator("#cp-mode").selectOption("handoff");
     await page.locator("#cp-extract summary").click();
     await expect(page.locator("#cp-extract-prompt")).toContainText("## Decisions");
     await page.locator("#cp-reply-text").fill("## Project name\nShop\n## Purpose\nAn online shop for tea.\n## Current state\nBeta, 40 customers.\n## Decisions\n- Postgres\n## The next task\nAdd coupon codes.");
@@ -111,28 +117,53 @@ test.describe("AI ecosystem", () => {
     await page.locator("#cp-state").fill("Beta, 40 customers. api_key = abcd1234efgh");
     await expect(page.locator("#cp-check")).toContainText("looks like a password or key");
 
-    await page.locator("#cp-to-workbench").click();
-    await page.getByRole("link", { name: "open the AI Workbench" }).click();
-    await page.locator("#wb-form[data-ready]").waitFor();
+    await page.locator("#cp-use").click();
     await expect(page.locator("#wb-project")).toHaveValue(/# Project context: Shop/);
+    await expect(page.locator("#wb-suggestion")).toContainText("The context pack is in Project context");
     expect(onlyApproved(await storageKeys(page))).toBe(true);
     expect(watch.external).toEqual([]);
     expect(watch.pageErrors).toEqual([]);
   });
 
   test("every AI page fits its width (no page-level horizontal scroll) and the start panel's controls are reachable", async ({ page, go }) => {
-    for (const path of ["ai-tools.html", "tools/ai-workbench/", "tools/context-pack-builder/", "tools/ai-answer-checklist/", "ai-tools/directory/"]) {
+    for (const path of ["ai-tools.html", "tools/prompt-builder/", "tools/prompt-builder/?start=context", "tools/ai-answer-checker/", "tools/ai-answer-checker/?mode=compare", "ai-tools/directory/"]) {
       await go(path);
       const o = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, iw: window.innerWidth }));
       expect(o.sw, `${path}: scrollWidth ${o.sw} > viewport ${o.iw}`).toBeLessThanOrEqual(o.iw + 1);
     }
-    await go("tools/ai-workbench/");
+    await go("tools/prompt-builder/");
     await page.locator("#wb-form[data-ready]").waitFor();
-    /* the guided panel's profession buttons first (D20), then the full page's start controls */
+    /* the conversation's controls first (D20, D22), then the full page's start controls */
     expect((await page.locator("[data-role-pick]").first().boundingBox()).height).toBeGreaterThanOrEqual(44);
+    expect((await page.getByRole("button", { name: "Find my task" }).boundingBox()).height).toBeGreaterThanOrEqual(44);
     await page.getByRole("button", { name: /^Other ways to start/ }).click();
     const box = await page.locator("#wb-suggest").boundingBox();
     expect(box.height).toBeGreaterThanOrEqual(44);
+  });
+
+  test("the retired addresses go to the product that now does the job, keep a link's own start, and are never indexed @portable", async ({ page, go }) => {
+    const cases = [
+      ["tools/ai-workbench/?outcome=video", /\/tools\/prompt-builder\/\?outcome=video$/],
+      ["tools/bug-report-prompt/", /\/tools\/prompt-builder\/\?task=debug$/],
+      ["tools/context-pack-builder/", /\/tools\/prompt-builder\/\?start=context$/],
+      ["tools/meeting-notes-action-plan/", /\/tools\/prompt-builder\/\?task=meeting-follow-up$/],
+      ["tools/qa-workbench/", /\/tools\/prompt-builder\/\?role=qa$/],
+      ["tools/ai-answer-checklist/", /\/tools\/ai-answer-checker\/$/],
+      ["tools/ai-answer-compare/", /\/tools\/ai-answer-checker\/\?mode=compare$/]
+    ];
+    for (const [from, to] of cases) {
+      await go(from);
+      await page.waitForURL(to);
+    }
+    /* the compare link opens the second mode */
+    await expect(page.getByRole("radio", { name: "Compare two answers" })).toBeChecked();
+    await expect(page.locator("#cmp-answerA")).toBeVisible();
+    await expect(page.locator("#ac-answer")).toBeHidden();
+    /* the page left at the old address: noindex, canonical on the new one */
+    /* fetched from the page, so the test server answers it; a fetch never runs the page's script */
+    const html = await page.evaluate(async (u) => (await fetch(u)).text(), page.url().replace(/tools\/ai-answer-checker\/\?mode=compare$/, "tools/ai-answer-compare/"));
+    expect(html).toContain('<meta name="robots" content="noindex">');
+    expect(html).toMatch(/<link rel="canonical" href="https:\/\/[^"]+\/tools\/ai-answer-checker\/">/);
   });
 
 });

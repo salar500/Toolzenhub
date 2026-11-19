@@ -48,12 +48,9 @@ export const SECTION_GROUPS = {
         { label: "Edit pages", ids: ["pdf-pages", "pdf-marks"] }
     ],
     "ai-tools": [
-        { label: "Plan with AI", ids: ["ai-workbench"] },
-        { label: "Carry your context", ids: ["context-pack-builder"] },
-        { label: "Check an answer", ids: ["ai-answer-checklist", "ai-answer-compare"] },
-        { label: "Quick briefs", ids: ["prompt-builder", "bug-report-prompt", "meeting-notes-action-plan"] },
-        { label: "Test and release", ids: ["qa-workbench"] },
-        { label: "AI products", ids: ["ai-directory"] }
+        { label: "Create a prompt", ids: ["prompt-builder"] },
+        { label: "Check an answer", ids: ["ai-answer-checker"] },
+        { label: "Find an AI product", ids: ["ai-directory"] }
     ]
 };
 

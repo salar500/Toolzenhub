@@ -27,7 +27,7 @@ before(async () => {
 
 // the published tools of the Calculators section; Date Difference (Time Tools) is a published tool too, but it is not a calculator
 const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "swp", "percentage", "income-tax", "credit-card-payoff", "ppf", "gratuity", "salary-in-hand", "xirr", "risk-reward", "interest", "roi", "ratio", "age", "personal-loan", "loan-eligibility", "bmi", "bmr", "calorie", "unit-converter"];
-const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "smart-flashcards", "json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab", "sql-practice-lab", "excel-practice-lab", "power-bi-practice-lab", "list-comparer", "uuid-generator", "json-csv-converter", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "image-metadata", "merge-pdf", "split-pdf", "pdf-pages", "pdf-marks", "ai-workbench", "prompt-builder", "bug-report-prompt", "context-pack-builder", "ai-answer-checklist", "ai-answer-compare", "meeting-notes-action-plan", "qa-workbench"];
+const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "smart-flashcards", "json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab", "sql-practice-lab", "excel-practice-lab", "power-bi-practice-lab", "list-comparer", "uuid-generator", "json-csv-converter", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "image-metadata", "merge-pdf", "split-pdf", "pdf-pages", "pdf-marks", "prompt-builder", "ai-answer-checker"]; // D22: the AI tools are two products (and the AI Directory page)
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"];
 
 describe("catalog model", () => {
@@ -163,14 +163,8 @@ describe("registry is derived from the catalog", () => {
       "sql-practice-lab": { section: "Practice Labs", title: "SQL Practice Lab" },
       "excel-practice-lab": { section: "Practice Labs", title: "Excel Practice Lab" },
       "power-bi-practice-lab": { section: "Practice Labs", title: "Power BI Practice Lab" },
-      "ai-workbench": { section: "AI Tools", category: "ai", title: "AI Workbench" },
-      "prompt-builder": { section: "AI Tools", category: "ai", title: "AI Prompt Builder" },
-      "bug-report-prompt": { section: "AI Tools", category: "ai", title: "Bug Report to Debugging Prompt" },
-      "context-pack-builder": { section: "AI Tools", category: "ai", title: "AI Context Bridge" }, // retitled 2026-11-16 (AI ecosystem programme, decision D2)
-      "ai-answer-checklist": { section: "AI Tools", category: "ai", title: "AI Output Reviewer" }, // retitled 2026-11-16 (AI ecosystem programme, decision D3)
-      "ai-answer-compare": { section: "AI Tools", category: "ai", title: "Compare Two AI Answers" },
-      "meeting-notes-action-plan": { section: "AI Tools", category: "ai", title: "Meeting Notes to Action Plan" },
-      "qa-workbench": { section: "AI Tools", category: "ai", title: "QA Requirement-to-Release Workbench" }, // Tool Pack 59
+      "prompt-builder": { section: "AI Tools", category: "ai", title: "AI Prompt Builder" }, // the former AI Workbench since D22 (2026-11-18)
+      "ai-answer-checker": { section: "AI Tools", category: "ai", title: "AI Answer Checker" }, // the Output Reviewer and Compare Two AI Answers, D22
       "cron-challenge-lab": { section: "Practice Labs", title: "Cron Challenge Lab" },
       "jsonpath-challenge-lab": { section: "Practice Labs", title: "JSONPath Challenge Lab" },
       "json-error-fixing-lab": { section: "Practice Labs", title: "JSON Error-Fixing Lab" },

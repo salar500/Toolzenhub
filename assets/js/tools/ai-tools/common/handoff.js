@@ -9,11 +9,9 @@
    reload, a new tab or a direct visit starts empty, by design.
    Nothing is stored. A receiver takes the payload once.
 
-   Kinds: "review"  { request, task, title }   Workbench or QA Workbench -> Reviewer
-          "context" { text }                   Bridge -> Workbench
-          "seed"    { project, purpose, task } Workbench -> Bridge
-          "task"    { task, answers }          QA Workbench -> Workbench
-          "bug"     { observed, expected, steps, environment, evidence }   QA Workbench -> Bug Report
+   Kinds: "review"  { request, task, title }   AI Prompt Builder -> AI Answer Checker
+   (since D22 the context pack is written inside the Prompt Builder, so it
+   needs no hand-off; the QA Workbench and Bug Report pages are retired)
 ========================================================= */
 
 const payloads = new Map();

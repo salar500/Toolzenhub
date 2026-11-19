@@ -1538,7 +1538,7 @@ const catalog = [
         readTime: "6 min read",
         cardImage: null,
         heroImage: null,
-        tools: ["context-pack-builder"],
+        tools: ["prompt-builder"],
         related: [
             "ai/how-to-write-instructions-an-ai-assistant-can-act-on",
             "ai/how-to-read-an-ai-answer-before-you-trust-it"
@@ -1561,7 +1561,7 @@ const catalog = [
         readTime: "6 min read",
         cardImage: null,
         heroImage: null,
-        tools: ["ai-answer-checklist"],
+        tools: ["ai-answer-checker"],
         related: [
             "ai/how-to-write-instructions-an-ai-assistant-can-act-on",
             "ai/how-to-give-an-ai-assistant-your-projects-context"

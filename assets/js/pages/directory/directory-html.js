@@ -524,9 +524,10 @@ export function sectionPageIds() {
 
 }
 
-/* AI Home (AI ecosystem programme, 16 D1, 17 §4): the AI Tools page starts with plain links into the Workbench and
-   the other AI tools. Links, not a script, so it works when the page is shown by the ecosystem workspace, without
-   script and for crawlers; the visitor's words are typed in the Workbench, never put in a URL. */
+/* AI Home (AI ecosystem programme, 16 D1, 17 §4; three products since D22): the AI Tools page starts with plain links
+   into the AI Prompt Builder and the AI Answer Checker. Links, not a script, so it works when the page is shown by the
+   ecosystem workspace, without script and for crawlers; the visitor's words are typed in the Prompt Builder, never put
+   in a URL. */
 const AI_START_OUTCOMES = [
     ["content", "Create content"], ["images", "Create images"], ["video", "Create videos"], ["audio", "Create audio"],
     ["software", "Build software"], ["research", "Research and analyse"], ["improve", "Improve existing work"], ["plan", "Plan a multi-step workflow"]
@@ -534,28 +535,31 @@ const AI_START_OUTCOMES = [
 
 export function aiHomeStartHtml() {
 
-    const workbench = ROUTES.tool("tools", "ai-workbench");
+    const builder = ROUTES.tool("tools", "prompt-builder");
+    const checker = ROUTES.tool("tools", "ai-answer-checker");
     const starts = [
-        ["A test plan", `${workbench}?task=test-plan`],
-        ["An article", `${workbench}?task=article`],
-        ["Debug a problem", `${workbench}?task=debug`],
-        ["Continue a project in another AI", `${ROUTES.tool("tools", "context-pack-builder")}?mode=handoff`],
-        ["Check an AI answer", ROUTES.tool("tools", "ai-answer-checklist")],
-        /* not the AI Directory: the page links it only by its card and its sidebar entry (owner, 2026-11-16) */
-        ["Write or reply to an email", `${workbench}?task=email-message`]
+        ["API tests", `${builder}?task=api-testing`],
+        ["A test plan", `${builder}?task=test-plan`],
+        ["Debug a problem or a bug report", `${builder}?task=debug`],
+        ["An article", `${builder}?task=article`],
+        ["A meeting follow-up", `${builder}?task=meeting-follow-up`],
+        ["Any other task", `${builder}?task=general-prompt`],
+        ["Carry a project to another AI", `${builder}?start=context`]
     ];
     const chips = (items) => items.map(([label, href]) => `<li><a class="ai-start__chip" href="${escapeHTML(href)}">${escapeHTML(label)}</a></li>`).join("");
 
     return `
                 <section class="ai-start" aria-labelledby="ai-start-title">
-                    <h2 id="ai-start-title" class="ai-start__title">What do you want to do with AI?</h2>
-                    <p class="ai-start__text">Prepare the work, carry your project between AI products, and check what comes back. Everything runs in your browser; no AI service is called.</p>
-                    <a class="calculator-form__button ai-start__primary" href="${escapeHTML(workbench)}?start=describe">Describe your task</a>
-                    <p class="ai-start__hint">Type it in your own words; the Workbench shows the closest tasks for you to choose from.</p>
+                    <h2 id="ai-start-title" class="ai-start__title">What would you like to create today?</h2>
+                    <p class="ai-start__text">Create a professional prompt, use it in the AI assistant you already have, then check what comes back. Everything runs in your browser; no AI service is called.</p>
+                    <a class="calculator-form__button ai-start__primary" href="${escapeHTML(builder)}">Build a prompt</a>
+                    <p class="ai-start__hint">Describe your task in your own words or choose your profession; the AI Prompt Builder asks only what changes the prompt.</p>
                     <h3 class="ai-start__sub">Or choose an outcome</h3>
-                    <ul class="ai-start__chips">${chips(AI_START_OUTCOMES.map(([id, label]) => [label, `${workbench}?outcome=${id}`]))}</ul>
+                    <ul class="ai-start__chips">${chips(AI_START_OUTCOMES.map(([id, label]) => [label, `${builder}?outcome=${id}`]))}</ul>
                     <h3 class="ai-start__sub">Common starts</h3>
                     <ul class="ai-start__chips">${chips(starts)}</ul>
+                    <h3 class="ai-start__sub">Already have an answer?</h3>
+                    <ul class="ai-start__chips">${chips([["Review one AI answer", checker], ["Compare two AI answers", `${checker}?mode=compare`]])}</ul>
                 </section>
 `;
 
@@ -764,7 +768,7 @@ function aiProductCard(product) {
                                     <a class="ai-card__link" href="${escapeHTML(product.url)}" target="_blank" rel="noopener noreferrer">Official site<span class="ai-card__sr">: ${escapeHTML(product.name)}, opens in a new tab</span> <span aria-hidden="true">↗</span></a>
                                     <span class="ai-card__checked">Checked ${escapeHTML(longDate(product.verifiedOn))}</span>
                                 </p>
-                                <p class="ai-card__plan"><a href="${escapeHTML(ROUTES.tool("tools", "ai-workbench"))}?product=${encodeURIComponent(product.id)}">Plan a task with ${escapeHTML(product.name)}</a></p>
+                                <p class="ai-card__plan"><a href="${escapeHTML(ROUTES.tool("tools", "prompt-builder"))}?product=${encodeURIComponent(product.id)}">Plan a task with ${escapeHTML(product.name)}</a></p>
                             </article>
                         </li>`;
 
@@ -799,7 +803,7 @@ export function aiDirectoryHtml() {
                     <h1 class="categories-page__title">AI Directory</h1>
                     <p class="categories-page__description">${AI_PRODUCTS.length} AI products made by other companies, grouped by what they do. Each one was checked on its official site on the date shown; the descriptions are ours and say only what that site said. Nothing here is sponsored, ranked or an endorsement, and no link carries a referral code.</p>
                     <p class="ai-directory__native">Looking for the tools built here, which run in your browser and need no account? See <a href="${ROUTES.aiTools}">AI Tools</a>.</p>
-                    <p class="ai-directory__native">Not sure which product fits? <a href="${escapeHTML(ROUTES.tool("tools", "ai-workbench"))}?start=describe">Describe your task in the AI Workbench</a>; it lists the products made for that kind of task.</p>
+                    <p class="ai-directory__native">Not sure which product fits? <a href="${escapeHTML(ROUTES.tool("tools", "prompt-builder"))}?start=describe">Describe your task in the AI Prompt Builder</a>; it lists the products made for that kind of task.</p>
                 </div>
 
                 <form class="ai-filters" role="search" aria-label="Filter the AI products" data-ai-filters hidden>

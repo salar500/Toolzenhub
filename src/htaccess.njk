@@ -14,3 +14,11 @@ ErrorDocument 404 /404.html
   AddType text/javascript .mjs
   AddType application/wasm .wasm
 </IfModule>
+
+# 3. Retired tool pages (AI ecosystem consolidation, decision D22, assets/js/data/retired-tools.js): a permanent redirect
+#    to the product that now does the job. A target without its own query keeps the visitor's query string.
+<IfModule mod_alias.c>
+{%- for r in retiredTools %}
+  RedirectMatch 301 ^/tools/{{ r.id }}/?(index\.html)?$ /tools/{{ r.to }}/{{ r.query }}
+{%- endfor %}
+</IfModule>

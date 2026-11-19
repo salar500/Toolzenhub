@@ -88,7 +88,9 @@ export function createBriefTool(config) {
 
     }
 
-    function markup() {
+    /* the parts of the page, so one page can hold two brief tools (the AI Answer Checker's two modes): the form with its
+       result, and the information sections; markup() is the whole page of one tool, exactly as before */
+    function body() {
 
         const fields = config.fields.map((f) => fieldShell({
             id: idOf(f.key),
@@ -97,27 +99,7 @@ export function createBriefTool(config) {
             control: controlHTML(idOf(f.key), f)
         })).join("");
 
-        const faq = (config.faq ?? []).map((q) => `
-                    <details class="calculator-faq__item"><summary>${escapeHTML(q.q)}</summary><p>${q.a}</p></details>`).join("");
-
         return `
-        <div class="calculator-page">
-
-            <section class="calculator-intro">
-                <div>
-                    <span class="calculator-eyebrow">AI Tool</span>
-                    <h1>${escapeHTML(tool().title)}</h1>
-                    <p>${config.intro}</p>
-                </div>
-                <div class="calculator-trust-card">
-                    <div class="calculator-trust-icon">✓</div>
-                    <div>
-                        <strong>Built in your browser</strong>
-                        <span>No AI service is called • Nothing is stored</span>
-                    </div>
-                </div>
-            </section>
-
             <section class="calculator-section">
                 <div class="calculator-section__title">${escapeHTML(config.sectionTitle)}</div>
                 <p class="calculator-section__description">${config.sectionText}</p>
@@ -146,15 +128,23 @@ export function createBriefTool(config) {
                     <p class="ai-usewith">${config.pasteLine ?? `Paste it as the first message of a new chat with ${ASSISTANTS}, then add anything it says you will provide.`}</p>
                 </div>
             </section>
-            <p id="${prefix}-live" class="ai-sr-only" role="status" aria-live="polite"></p>
+            <p id="${prefix}-live" class="ai-sr-only" role="status" aria-live="polite"></p>`;
 
+    }
+
+    function info() {
+
+        const faq = (config.faq ?? []).map((q) => `
+                    <details class="calculator-faq__item"><summary>${escapeHTML(q.q)}</summary><p>${q.a}</p></details>`).join("");
+
+        return `
             <section class="calculator-info">
-                <h2>How to use it</h2>
+                <h2>${escapeHTML(config.howToTitle ?? "How to use it")}</h2>
                 ${listHTML(config.howTo, "ol")}
             </section>
 
             <section class="calculator-info">
-                <h2>What the ${escapeHTML(config.outputName)} contains, and why</h2>
+                <h2>${escapeHTML(config.partsTitle ?? `What the ${config.outputName} contains, and why`)}</h2>
                 ${config.parts.map((p) => `<h3>${escapeHTML(p.title)}</h3><p>${p.text}</p>`).join("")}
             </section>
 
@@ -162,7 +152,31 @@ export function createBriefTool(config) {
                 <h2>Using it with an AI assistant</h2>
                 ${listHTML(config.useWith)}
             </section>
-            ${faq ? `<section class="calculator-info"><h2>Frequently Asked Questions</h2>${faq}</section>` : ""}
+            ${faq ? `<section class="calculator-info"><h2>Frequently Asked Questions</h2>${faq}</section>` : ""}`;
+
+    }
+
+    function markup() {
+
+        return `
+        <div class="calculator-page">
+
+            <section class="calculator-intro">
+                <div>
+                    <span class="calculator-eyebrow">AI Tool</span>
+                    <h1>${escapeHTML(tool().title)}</h1>
+                    <p>${config.intro}</p>
+                </div>
+                <div class="calculator-trust-card">
+                    <div class="calculator-trust-icon">✓</div>
+                    <div>
+                        <strong>Built in your browser</strong>
+                        <span>No AI service is called • Nothing is stored</span>
+                    </div>
+                </div>
+            </section>
+${body()}
+${info()}
 
         </div>`;
 
@@ -261,7 +275,7 @@ export function createBriefTool(config) {
         }
 
         /* on a phone the brief follows a long form (the Prompt Builder's starts about 2,500 px down): the calculators' link before the form */
-        addJumpToResult(form.closest("#app") ?? document.body, `Jump to the ${config.outputName}`);
+        if (config.jump !== false) addJumpToResult(form.closest("#app") ?? document.body, `Jump to the ${config.outputName}`);
 
         /* the page is live from here: typing before this point changed nothing (tests wait for it) */
         form.dataset.ready = "true";
@@ -367,6 +381,8 @@ export function createBriefTool(config) {
 
     return {
         markup,
+        body,
+        info,
         render,
         init,
         build: (raw) => buildBrief(config, raw)

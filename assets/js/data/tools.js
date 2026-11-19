@@ -2459,51 +2459,13 @@ const catalog = [
 
 
     /* =====================================================
-       AI TOOLS (the seventh section, 2026-11-11)
+       AI TOOLS (the seventh section, 2026-11-11; consolidated
+       into three products on 2026-11-18, decision D22)
 
-       Briefs composed in the browser for ChatGPT, Claude,
-       Gemini or Copilot. No AI service is called.
+       The AI Prompt Builder (prompts), the AI Answer Checker
+       (one answer reviewed, or two compared) and the AI Directory
+       page. Prepared in the browser; no AI service is called.
     ===================================================== */
-
-    {
-        id: "ai-workbench",
-        status: "published",
-        loader: () =>
-            import("../tools/ai-workbench/index.js"),
-        category: "ai",
-        toolType: "utility",
-        icon: "✦",
-        title: "AI Workbench",
-        description:
-            "Choose what you want to accomplish with AI and get a Work Pack: what to prepare, which AI product fits, a master prompt, staged prompts, refinement prompts and a quality checklist. Prepared in your browser; no AI service is called.",
-        relatedTools: ["prompt-builder", "context-pack-builder", "ai-answer-checklist"],
-        aliases: [
-            "ai workbench",
-            "ai work pack",
-            "ai workflow",
-            "ai workflow planner",
-            "which ai tool should i use",
-            "ai prompts for testing",
-            "ai image prompt",
-            "ai video prompt"
-        ],
-        capabilities: {
-            reset: true,
-            copy: true,
-            download: true,
-            realtime: true,
-            multipleInputs: true,
-            validation: true,
-            explanation: true,
-            localProcessing: true
-        },
-        seo: {
-            title:
-                "AI Workbench: From an Idea to an AI Work Pack | ToolZen Hub",
-            description:
-                "Plan work with ChatGPT, Claude, Gemini or another AI product: pick an outcome and a task, answer a few questions, and get a preparation checklist, master prompt, stage prompts, refinements and a quality checklist. Runs in your browser."
-        }
-    },
 
     {
         id: "prompt-builder",
@@ -2515,8 +2477,8 @@ const catalog = [
         icon: "✦",
         title: "AI Prompt Builder",
         description:
-            "Turn a rough idea into a complete prompt for ChatGPT, Claude, Gemini or any assistant: the task, the context, the rules, the format and how you will judge the result. Built in your browser; no AI service is called.",
-        relatedTools: ["bug-report-prompt", "context-pack-builder"],
+            "Create professional AI prompts for your work, business, learning and creative projects: describe the task or choose your profession, answer a few questions, and get a main prompt, stage prompts and refinement prompts. Prepared in your browser; no AI service is called.",
+        relatedTools: ["ai-answer-checker"],
         aliases: [
             "prompt builder",
             "prompt generator",
@@ -2524,96 +2486,15 @@ const catalog = [
             "chatgpt prompt",
             "claude prompt",
             "prompt template",
-            "better prompts",
-            "prompt engineering"
-        ],
-        capabilities: {
-            reset: true,
-            copy: true,
-            download: true,
-            realtime: true,
-            multipleInputs: true,
-            validation: true,
-            explanation: true,
-            examples: true,
-            localProcessing: true
-        },
-        seo: {
-            title:
-                "AI Prompt Builder: Turn an Idea into a Complete Prompt | ToolZen Hub",
-            description:
-                "Build a complete prompt for ChatGPT, Claude, Gemini or Copilot from a rough idea: task, context, rules, format and success criteria, with a check of what is still vague. Runs in your browser; no AI service is called."
-        }
-    },
-
-    {
-        id: "bug-report-prompt",
-        status: "published",
-        loader: () =>
-            import("../tools/bug-report-prompt/index.js"),
-        category: "ai",
-        toolType: "utility",
-        icon: "🐞",
-        title: "Bug Report to Debugging Prompt",
-        description:
-            "Turn what you saw, what you expected and how to reproduce it into a debugging task for an AI coding assistant: find the root cause, make the smallest fix, add a test that fails first, report what was verified. Built in your browser.",
-        relatedTools: ["context-pack-builder", "prompt-builder"],
-        aliases: [
-            "bug report prompt",
+            "prompt engineering",
+            "ai workbench",
+            "ai work pack",
+            "ai prompts for testing",
             "debugging prompt",
-            "ai debugging",
-            "bug to prompt",
-            "fix bug with ai",
-            "copilot bug fix prompt",
-            "claude code bug prompt",
-            "bug report template"
-        ],
-        capabilities: {
-            reset: true,
-            copy: true,
-            download: true,
-            realtime: true,
-            multipleInputs: true,
-            validation: true,
-            explanation: true,
-            examples: true,
-            localProcessing: true
-        },
-        seo: {
-            title:
-                "Bug Report to Debugging Prompt for AI Coding Assistants | ToolZen Hub",
-            description:
-                "Write a debugging task for Claude Code, Copilot, Cursor or ChatGPT from a bug: what happens, what should happen, steps, environment and error output, with the rules of a safe fix. Runs in your browser; nothing is sent anywhere."
-        }
-    },
-
-    {
-        id: "context-pack-builder",
-        status: "published",
-        loader: () =>
-            import("../tools/context-pack-builder/index.js"),
-        category: "ai",
-        toolType: "utility",
-        icon: "▤",
-        title: "AI Context Bridge",
-        description:
-            "Carry a project between AI chats and products: one set of facts written as a full brief, a short handoff, a session update or a coding agent file. Bring them out of an AI conversation with one prompt, and open a saved pack to update what changed. Built in your browser.",
-        relatedTools: ["ai-workbench", "prompt-builder"],
-        aliases: [
-            "context bridge",
-            "project context pack builder",
-            "context pack builder",
+            "ai image prompt",
+            "ai video prompt",
             "context pack",
-            "switch from chatgpt to claude",
-            "move chat to another ai",
-            "agents md generator",
-            "project context for ai",
-            "ai handover",
-            "project brief for chatgpt",
-            "claude md generator",
-            "cursor rules generator",
-            "project instructions for ai",
-            "ai onboarding brief"
+            "context bridge"
         ],
         capabilities: {
             reset: true,
@@ -2623,82 +2504,44 @@ const catalog = [
             multipleInputs: true,
             validation: true,
             explanation: true,
-            examples: true,
             localProcessing: true
         },
         seo: {
             title:
-                "AI Context Bridge: Move a Project Between AI Tools | ToolZen Hub",
+                "AI Prompt Builder: Professional Prompts for Any Task | ToolZen Hub",
             description:
-                "Carry a project between ChatGPT, Claude, Gemini and coding assistants: a full brief, a short handoff, a session update or an agent file from one set of facts, with an extraction prompt and versions. Runs in your browser."
+                "Build professional prompts for ChatGPT, Claude, Gemini or any AI assistant: describe your task or choose your profession, answer a few questions, and get a main prompt, stage prompts and refinement prompts. Runs in your browser."
         }
     },
 
     {
-        id: "ai-answer-checklist",
+        id: "ai-answer-checker",
         status: "published",
         loader: () =>
-            import("../tools/ai-answer-checklist/index.js"),
+            import("../tools/ai-answer-checker/index.js"),
         category: "ai",
         toolType: "utility",
         icon: "☑",
-        title: "AI Output Reviewer",
+        title: "AI Answer Checker",
         description:
-            "Paste an AI answer and what you asked: see the requested items it does not visibly address, format problems, leftovers, contradictions and the statements to verify, with a follow-up prompt that names the gaps. Word patterns in your browser; it does not judge truth.",
-        relatedTools: ["ai-answer-compare", "ai-workbench"],
+            "Review AI responses, identify missing information and compare answers from different AI platforms: review one answer against what you asked, or compare two answers to the same question. Word patterns in your browser; it does not judge truth.",
+        relatedTools: ["prompt-builder"],
         aliases: [
+            "ai answer checker",
             "ai output reviewer",
             "ai answer evidence checklist",
             "review ai answer",
             "check ai answer against prompt",
-            "ai answer checker",
             "verify ai answer",
             "fact check ai",
             "chatgpt fact check",
             "ai hallucination check",
-            "evidence checklist",
             "check ai output",
-            "ai answer verification"
-        ],
-        capabilities: {
-            reset: true,
-            copy: true,
-            download: true,
-            realtime: true,
-            multipleInputs: true,
-            validation: true,
-            explanation: true,
-            examples: true,
-            localProcessing: true
-        },
-        seo: {
-            title:
-                "AI Output Reviewer: Check an AI Answer | ToolZen Hub",
-            description:
-                "Paste an answer from ChatGPT, Claude or Gemini and your prompt: requested items not visibly addressed, format problems, leftovers, contradictions, statements to verify and a follow-up prompt. Runs in your browser; nothing is sent."
-        }
-    },
-
-    {
-        id: "ai-answer-compare",
-        status: "published",
-        loader: () =>
-            import("../tools/ai-answer-compare/index.js"),
-        category: "ai",
-        toolType: "utility",
-        icon: "⇆",
-        title: "Compare Two AI Answers",
-        description:
-            "Paste two answers to the same question, from ChatGPT, Claude, Copilot or two attempts, and see where they agree, where they contradict each other (different figures, one negating the other), what only one says, what each recommends and which carries more evidence. Compared in your browser.",
-        relatedTools: ["ai-answer-checklist", "prompt-builder"],
-        aliases: [
             "compare ai answers",
             "compare two ai responses",
             "chatgpt vs claude answer",
             "which ai answer is better",
             "ai answer comparison",
-            "compare chatgpt answers",
-            "ai response diff",
             "contradictions between ai answers"
         ],
         capabilities: {
@@ -2714,89 +2557,9 @@ const catalog = [
         },
         seo: {
             title:
-                "Compare Two AI Answers: Agreements and Contradictions | ToolZen Hub",
+                "AI Answer Checker: Review or Compare AI Answers | ToolZen Hub",
             description:
-                "Paste two AI answers to the same question and see where they agree, where they contradict each other, what only one of them says, what each recommends and which carries more checkable evidence. Runs in your browser; nothing is sent."
-        }
-    },
-
-    {
-        id: "meeting-notes-action-plan",
-        status: "published",
-        loader: () =>
-            import("../tools/meeting-notes-action-plan/index.js"),
-        category: "ai",
-        toolType: "utility",
-        icon: "☰",
-        title: "Meeting Notes to Action Plan",
-        description:
-            "Paste rough meeting notes and get the decisions, the actions with owners and due dates (and which ones lack them), the open questions, the risks, and a follow-up message ready to send. Sorted in your browser; nothing is invented or sent.",
-        relatedTools: ["prompt-builder", "context-pack-builder"],
-        aliases: [
-            "meeting notes to action items",
-            "meeting minutes generator",
-            "action items from notes",
-            "meeting summary",
-            "follow-up email after meeting",
-            "meeting action plan",
-            "minutes of meeting",
-            "extract action items"
-        ],
-        capabilities: {
-            reset: true,
-            copy: true,
-            download: true,
-            realtime: true,
-            multipleInputs: true,
-            validation: true,
-            explanation: true,
-            examples: true,
-            localProcessing: true
-        },
-        seo: {
-            title:
-                "Meeting Notes to Action Plan: Decisions, Owners, Dates | ToolZen Hub",
-            description:
-                "Turn rough meeting notes into an action plan: decisions, actions with owners and due dates, open questions, risks, and a follow-up message to the attendees. Runs in your browser; nothing is invented or sent anywhere."
-        }
-    },
-
-    {
-        id: "qa-workbench",
-        status: "published",
-        loader: () =>
-            import("../tools/qa-workbench/index.js"),
-        category: "ai",
-        toolType: "utility",
-        icon: "☑",
-        title: "QA Requirement-to-Release Workbench",
-        description:
-            "Keep one QA project together: requirements and acceptance criteria, test cases, the mapping between them, test runs and defects, with mapped, executed and passed counted separately and a QA report to download. Runs in your browser; saved as a file you keep.",
-        relatedTools: ["ai-answer-checklist", "ai-workbench", "bug-report-prompt"],
-        aliases: [
-            "qa workbench",
-            "requirements traceability matrix",
-            "traceability matrix",
-            "test case management",
-            "test coverage tracker",
-            "test execution tracker",
-            "qa test report",
-            "test summary report",
-            "acceptance criteria coverage"
-        ],
-        capabilities: {
-            copy: true,
-            download: true,
-            multipleInputs: true,
-            validation: true,
-            explanation: true,
-            localProcessing: true
-        },
-        seo: {
-            title:
-                "QA Workbench: Requirements Traceability to QA Report | ToolZen Hub",
-            description:
-                "Map acceptance criteria to test cases, record pass, fail and blocked runs, track defects and download a QA report with mapped, executed and passed kept apart. Runs in your browser; your project is a file you keep."
+                "Check an answer from ChatGPT, Claude or Gemini against your prompt, or compare two answers: missing requirements, contradictions, format problems, statements to verify and a follow-up prompt. Runs in your browser; nothing is sent."
         }
     },
 

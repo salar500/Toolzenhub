@@ -30,6 +30,9 @@ if (!fs.existsSync(REPO)) {
 }
 export const INVENTORY_PATH = path.join(HERE, "url-inventory.json");
 
+/* retired tool addresses (AI consolidation D22): a build page that sends the visitor on, never a tool page */
+const { RETIRED_TOOLS } = await import(pathToFileURL(path.join(SRC, "assets", "js", "data", "retired-tools.js")).href);
+
 const SKIP_DIRS = new Set(["node_modules", "tests", "test-results", "playwright-report", ".git"]);
 
 function walk(dir, out = []) {
@@ -97,6 +100,8 @@ function describePage(file) {
   }
   // a tool of a section other than Calculators: /tools/<slug>/ (a tool page like any other)
   if ((g = file.match(/^tools\/([^/]+)\/index\.html$/))) {
+    const retired = RETIRED_TOOLS.find((r) => r.id === g[1]);
+    if (retired) return { type: "redirect", slug: g[1], redirectTo: `/tools/${retired.to}/${retired.query}`, primarySelector: "main h1", interactive: false, rendered: "static" };
     return { type: "calculator", slug: g[1], primarySelector: ".calculator-page", interactive: true, rendered: "client" };
   }
   if ((g = file.match(/^articles\/([^/]+)\/([^/]+)\/index\.html$/))) {
@@ -176,11 +181,12 @@ export async function buildInventory() {
       type: d.type,
       ...(d.slug ? { slug: d.slug } : {}),
       ...(d.topic ? { topic: d.topic } : {}),
+      ...(d.redirectTo ? { redirectTo: d.redirectTo } : {}),
       expectedTitle: title,
       primarySelector: d.primarySelector,
       // ShopLite (practice-target) is a standalone practice shop with its own header, outside the site chrome
-      expectsHeader: file !== "404.html" && d.type !== "practice-target",
-      expectsFooter: file !== "404.html" && d.type !== "practice-target",
+      expectsHeader: file !== "404.html" && d.type !== "practice-target" && d.type !== "redirect",
+      expectsFooter: file !== "404.html" && d.type !== "practice-target" && d.type !== "redirect",
       interactive: d.interactive,
       renderedBy: d.rendered,
       inSitemap,

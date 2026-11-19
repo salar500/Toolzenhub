@@ -19,6 +19,16 @@ test.describe("smoke: every live page loads @portable", () => {
       const response = await go(rel(p.url));
       expect(response.status(), "HTTP status").toBe(200);
 
+      // a retired address (D22) sends the visitor straight on, so the page that loads is its destination
+      if (p.type === "redirect") {
+        await page.waitForURL((u) => (u.pathname + u.search).endsWith(p.redirectTo));
+        await expect(page).toHaveTitle(/ToolZen/);
+        await expect(page.locator("h1").first()).toBeVisible();
+        expectClean(watch);
+        expect(watch.external, "unexpected external network use").toEqual([]);
+        return;
+      }
+
       // client-rendered pages: wait for the real content, not a timer
       await expect(page.locator(p.primarySelector).first(), `primary element ${p.primarySelector}`).toBeVisible();
 

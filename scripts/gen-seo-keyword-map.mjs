@@ -53,7 +53,7 @@ for (const p of inventory.live) {
     e.relatedSearchPhrases = browse ? [] : uniq([`learn ${e.primaryKeyword}`, `${e.primaryKeyword} practice`, `${e.primaryKeyword} tutorial`]);
   } else {
     e.primaryKeyword = lc(title).replace(/\s*[|:–-].*$/, "").trim();
-    e.searchIntent = { home: "navigational/brand", "tool-index": "navigational: browse all tools", "article-index": "navigational: browse guides", category: "navigational/commercial investigation: a category of tools", "category-index": "navigational", directory: "navigational", legal: "navigational/trust", info: "navigational/trust", contact: "navigational/trust" }[p.type] ?? "navigational";
+    e.searchIntent = { home: "navigational/brand", "tool-index": "navigational: browse all tools", "article-index": "navigational: browse guides", category: "navigational/commercial investigation: a category of tools", "category-index": "navigational", directory: "navigational", legal: "navigational/trust", info: "navigational/trust", contact: "navigational/trust", redirect: `none: a noindex redirect to ${p.redirectTo}` }[p.type] ?? "navigational";
   }
   entries.push(e);
 }

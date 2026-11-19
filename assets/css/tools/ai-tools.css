@@ -187,3 +187,67 @@
     }
 
 }
+
+/* AI Answer Checker (D22): the two modes, chosen with native radio buttons drawn as cards; one panel is shown at a time */
+.chk-modes {
+    margin: 0 0 18px;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+}
+
+.chk-modes__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 10px;
+}
+
+.chk-mode {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 10px;
+    align-items: start;
+    min-height: 44px;
+    padding: 12px 14px;
+    box-sizing: border-box;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface-card);
+    color: var(--ink);
+    cursor: pointer;
+}
+
+.chk-mode input {
+    grid-row: span 2;
+    width: 18px;
+    height: 18px;
+    margin: 2px 0 0;
+    accent-color: var(--accent);
+}
+
+.chk-mode:has(input:checked) {
+    border-color: var(--action);
+    box-shadow: inset 0 0 0 1px var(--action);
+}
+
+.chk-mode:has(input:focus-visible) {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.chk-mode__title {
+    font-weight: 650;
+    line-height: 1.35;
+}
+
+.chk-mode__text {
+    grid-column: 2;
+    margin-top: 2px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--ink-muted);
+}
+
+.chk-next {
+    margin: 18px 0 0;
+}

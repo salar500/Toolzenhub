@@ -107,6 +107,8 @@ describe("every generated page can use the tokens", () => {
       for (const p of inventory.live) {
         // ShopLite is a standalone practice shop with its own stylesheet and deliberately not the site's design system
         if (p.type === "practice-target") continue;
+        // a retired tool's address (src/retired-tools.njk) is an unstyled stub that replaces itself at once with its new home
+        if (p.type === "redirect") continue;
         const html = read(path.join(PROJECT, build, p.file));
         const sheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)].map((m) => m[1]).filter((h) => h.includes("/assets/css/"));
         assert.ok(sheets.length > 0, p.file);

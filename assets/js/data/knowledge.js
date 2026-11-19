@@ -158,26 +158,14 @@ export const KNOWLEDGE = Object.freeze({
     "cron-challenge-lab": { official: [{ ref: "crontab-5", why: "The crontab format the challenges use." }] },
 
     /* ---------- AI Tools ---------- */
-    "bug-report-prompt": {
-        learn: [
-            { ref: "lesson:manual-testing/intermediate/executing-reporting/writing-bug-reports", why: "What a bug report needs before any assistant can help with it." },
-            { ref: "directory:qa", why: "AI products for testing, checked on their official sites." }
-        ]
-    },
     "prompt-builder": {
         learn: [
             { ref: "path:prompt-engineering", why: "A short path on writing prompts that get usable answers." },
+            { ref: "lesson:manual-testing/intermediate/executing-reporting/writing-bug-reports", why: "What a bug report needs before any assistant can help with it." },
             { ref: "directory:", why: "The assistants and other AI products you might paste a prompt into, checked on their official sites." }
         ]
     },
-    "context-pack-builder": {
-        learn: [
-            { ref: "path:prompt-engineering", why: "A short path on giving an assistant the right context." },
-            { ref: "directory:developers", why: "AI coding assistants and developer platforms, checked on their official sites." }
-        ]
-    },
-    "ai-answer-checklist": { learn: [{ ref: "path:ai-foundations", why: "How language models produce answers, and why an answer needs checking." }] },
-    "ai-answer-compare": { learn: [{ ref: "path:ai-foundations", why: "How language models produce answers, and why two can differ." }] },
+    "ai-answer-checker": { learn: [{ ref: "path:ai-foundations", why: "How language models produce answers, why an answer needs checking, and why two can differ." }] },
 
     /* ---------- Image Tools ---------- */
     "image-compressor-resizer": { official: [{ ref: "mdn-image-types", why: "JPEG, PNG and WebP compared: transparency, quality and browser support." }] },

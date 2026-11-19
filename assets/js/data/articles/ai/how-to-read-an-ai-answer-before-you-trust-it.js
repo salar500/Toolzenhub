@@ -125,7 +125,7 @@ const article = {
 
     faq: [
         {
-            question: "Does the AI Output Reviewer tell me whether an answer is correct?",
+            question: "Does the AI Answer Checker tell me whether an answer is correct?",
             answer: "No. It finds the statements that can be checked and says how, using word patterns in your browser. It knows nothing about the subject. A statement it did not list can still be wrong, and one it listed can be right."
         },
         {

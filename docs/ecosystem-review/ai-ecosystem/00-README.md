@@ -2,6 +2,8 @@
 
 Status: **Phase 1 complete and design frozen** (2026-11-16; reconciled with the build and re-frozen 2026-11-17, `19` sections 1, 5 and 7). The owner's master directive of 2026-11-16 delegated routine product and design decisions; they are resolved in `16-DECISION-REGISTER.md`, and `17-FINAL-DESIGN.md` is the build specification (it wins where `06`-`15` differ). Programme checkpoint: `19-IMPLEMENTATION-MAP-AND-FREEZE.md` section 4.
 
+**Current structure (owner, 2026-11-18, decision D22):** the ecosystem is three products, the **AI Prompt Builder** (`/tools/prompt-builder/`, the former AI Workbench, central), the **AI Answer Checker** (`/tools/ai-answer-checker/`, review one answer or compare two) and the **AI Directory**. The documents below describe the programme as it was designed and built; where they name the Workbench, the Context Bridge, the Output Reviewer or the other retired tools, read `26-CONSOLIDATION.md` for where each now lives.
+
 Programme: AI Tools only (rulebook 4.11). Phase 1 research and specification (this folder), Phase 2 development, Phase 3 AI-only testing and production readiness. The other six ecosystems are out of scope and were not audited.
 
 Repository state when the research started: branch `feature/unified-ecosystem-workspace`, HEAD `7b339d7f`, working tree clean.
@@ -45,5 +47,6 @@ Repository state when the research started: branch `feature/unified-ecosystem-wo
 | (D20) | The guided single panel: steps, behaviour, lazy loading, accessibility, performance | `23-GUIDED-PANEL.md` |
 | (D21) | Strategy engine, concise prompts, domain method, prompt check, and the coverage audit of all 84 tasks | `24-STRATEGY-ENGINE.md` |
 | (D21) | 24 benchmark journeys across the professions and one-change comparisons | `25-BENCHMARK-JOURNEYS.md` |
+| (D22) | Three AI products: the AI Prompt Builder (the former Workbench, central), the AI Answer Checker, the AI Directory; what was absorbed, what was discontinued, the redirects | `26-CONSOLIDATION.md` |
 
 Not done, by design: hands-on walk-throughs inside competitor products (need accounts and paid plans; see `01` limitations); search-volume data (none available; rule 12.4).

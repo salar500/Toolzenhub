@@ -35,7 +35,7 @@ Common starts: "A test plan" (`?task=test-plan`), "An article" (`?task=article`)
 
 Layout: the block is a card (`--surface-card`, `--line` border, `--radius-lg`, padding `--space-6`, max width `--width-wide`), placed in the content column. Chips: `display:flex; flex-wrap:wrap; gap: --space-2`; each chip a link styled as a pill (`--radius-full`, `--line-control` border, min-height `--target-size`, padding `0 --space-4`, `--font-sm`). Primary link uses the primary button class. Phone (< 600 px): primary link full width; chips wrap; padding `--space-4`. States: static; no empty or error states. Accessibility: one h2, two h3, lists of links; focus ring from the shared layer.
 
-Section catalog text (catalog-driven, rule 4.5): `description` "Prepare your AI work, carry your project between AI products and check what comes back: a Workbench, a context bridge, an output reviewer, quick briefs and a directory of AI products. Nothing is sent to any AI service."; `summary` "Prepare, carry and check your work with ChatGPT, Claude, Gemini and other AI products"; `seoDescription` accordingly (under 240 characters).
+Section catalog text (catalog-driven, rule 4.5): `description` "Prepare your AI work, carry your project between AI products and check what comes back: the AI Prompt Builder (with project context packs), the AI Answer Checker and a directory of AI products. Nothing is sent to any AI service." (rewritten for the three products of D22, 2026-11-19); `summary` "Prepare, carry and check your work with ChatGPT, Claude, Gemini and other AI products"; `seoDescription` accordingly (under 240 characters).
 
 ## 5. AI Workbench (`/tools/ai-workbench/`)
 

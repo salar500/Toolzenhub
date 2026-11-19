@@ -87,7 +87,7 @@ const AI_PACK_PUBLISHED = [
   "ai/how-to-give-an-ai-assistant-your-projects-context",
   "ai/how-to-read-an-ai-answer-before-you-trust-it",
 ];
-const AI_TOOLS = { "ai/how-to-write-instructions-an-ai-assistant-can-act-on": ["prompt-builder"], "ai/how-to-give-an-ai-assistant-your-projects-context": ["context-pack-builder"], "ai/how-to-read-an-ai-answer-before-you-trust-it": ["ai-answer-checklist"] };
+const AI_TOOLS = { "ai/how-to-write-instructions-an-ai-assistant-can-act-on": ["prompt-builder"], "ai/how-to-give-an-ai-assistant-your-projects-context": ["prompt-builder"], "ai/how-to-read-an-ai-answer-before-you-trust-it": ["ai-answer-checker"] };
 const PUBLISHED = [...ORIGINAL_PUBLISHED, ...PREPAYMENT_PACK_PUBLISHED, ...BALANCE_TRANSFER_PACK_PUBLISHED, ...SIP_PACK_PUBLISHED, ...MARGIN_PACK_PUBLISHED, ...PROFIT_PACK_PUBLISHED, ...HOME_LOAN_PACK_PUBLISHED, ...FD_PACK_PUBLISHED, ...GST_PACK_PUBLISHED, ...CAGR_PACK_PUBLISHED, ...PERCENTAGE_PACK_PUBLISHED, ...SWP_PACK_PUBLISHED, ...PERCENTAGE_BASICS_PUBLISHED, ...COMPLETION_PUBLISHED, ...LAST_PLACEHOLDERS_PUBLISHED, ...AI_PACK_PUBLISHED];
 const COMING_SOON = [];
 // metadata that must live ONLY in the catalog, never in a content module

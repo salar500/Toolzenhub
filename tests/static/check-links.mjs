@@ -224,6 +224,12 @@ for (const a of artMod.articleRegistry) {
 for (const p of inventory.live) {
   if (p.type === "calculator" && !calcMod.tools.some((c) => c.status === "published" && c.id === p.slug)) fail("registry", `orphan page ${p.url}: no 'available' calculator "${p.slug}" in data/tools.js`);
   if (p.type === "article" && !artMod.articleRegistry.some((a) => a.published === true && a.topic === p.topic && a.slug === p.slug)) fail("registry", `orphan page ${p.url}: no published article in article-registry.js`);
+  /* a retired address (D22) stays out of the catalog, and its target is a published tool, never another retired address */
+  if (p.type === "redirect") {
+    if (calcMod.tools.some((c) => c.id === p.slug)) fail("registry", `retired address ${p.url} is still a catalog tool "${p.slug}"`);
+    const to = (p.redirectTo ?? "").match(/^\/tools\/([^/]+)\//)?.[1];
+    if (!to || !calcMod.tools.some((c) => c.status === "published" && c.id === to)) fail("registry", `retired address ${p.url} goes to ${p.redirectTo}, which is not a published tool`);
+  }
 }
 
 /* ---------------------------------------------------------------------------------------------- */

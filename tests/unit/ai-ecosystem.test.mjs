@@ -8,14 +8,14 @@ import assert from "node:assert/strict";
 
 import { withMeta, readMeta, stripMeta, pick, sectionsOf, keyOf, slug, today } from "../../assets/js/tools/ai-tools/common/pack-format.js";
 import { put, take } from "../../assets/js/tools/ai-tools/common/handoff.js";
-import { PLAYBOOKS } from "../../assets/js/tools/ai-workbench/playbooks.js";
-import { compileWorkPack, activeQuestions, CONSISTENCY } from "../../assets/js/tools/ai-workbench/compiler.js";
-import { loadBlueprint } from "../../assets/js/tools/ai-workbench/blueprints.js";
-import { TASKS, getTask } from "../../assets/js/tools/ai-workbench/taxonomy.js";
+import { PLAYBOOKS } from "../../assets/js/tools/prompt-builder/playbooks.js";
+import { compileWorkPack, activeQuestions, CONSISTENCY } from "../../assets/js/tools/prompt-builder/compiler.js";
+import { loadBlueprint } from "../../assets/js/tools/prompt-builder/blueprints.js";
+import { TASKS, getTask } from "../../assets/js/tools/prompt-builder/taxonomy.js";
 
 /* routes.js reads the host once (as in the other AI unit tests) */
 globalThis.window ??= { location: { hostname: "toolzenhub.in", pathname: "/" } };
-const { matchTasks, indexCovers } = await import("../../assets/js/tools/ai-workbench/task-index.js");
+const { matchTasks, indexCovers } = await import("../../assets/js/tools/prompt-builder/task-index.js");
 
 const blueprints = Object.fromEntries(await Promise.all(TASKS.map(async (t) => [t.id, await loadBlueprint(t.id)])));
 
@@ -146,8 +146,12 @@ test("task index: ambiguity is shown, never resolved silently; utilities are off
   assert.ok(both.includes("debug") && both.includes("data-analysis"), both.join());
   assert.equal(matchTasks("interview podcast").confident, false, "equal scores are shown as equal");
   assert.equal(matchTasks("test plan for a checkout coupon feature").confident, true);
-  assert.ok(matchTasks("compare two answers from chatgpt").utilities.some((u) => u.id === "ai-answer-compare"));
-  assert.ok(matchTasks("switch to claude and continue my project").utilities.some((u) => u.id === "context-pack-builder"));
+  /* "document" as a verb offers the documentation task (it once scored 0 for "document our FHIR API") */
+  assert.ok(matchTasks("document our FHIR API").tasks.some((t) => t.id === "tech-docs"));
+  assert.equal(matchTasks("summarise this document").tasks[0].id, "doc-summary");
+  assert.ok(matchTasks("compare two answers from chatgpt").utilities.some((u) => u.id === "ai-answer-checker"));
+  /* the context pack is part of the Prompt Builder since D22: offered as its own start, not another tool */
+  assert.ok(matchTasks("switch to claude and continue my project").utilities.some((u) => u.id === "context" && u.route.endsWith("/tools/prompt-builder/?start=context")));
   assert.ok(matchTasks("which ai tool for video").utilities.some((u) => u.id === "ai-directory"));
   assert.deepEqual(matchTasks("   ").tasks, []);
   assert.deepEqual(matchTasks("zzqx qqq").tasks, []);
@@ -236,11 +240,11 @@ test("the two new tasks: an email reply asks for the received message; a documen
   assert.match(d.masterPrompt, /Invented sources/);
 });
 
-/* ---------- AI Context Bridge (17 §6) ---------- */
+/* ---------- the project context pack (17 §6; the former AI Context Bridge, part of the AI Prompt Builder since D22) ---------- */
 
 const ctx = await import("../../assets/js/tools/ai-tools/common/context-engine.js");
-const bridge = await import("../../assets/js/tools/context-pack-builder/index.js");
-const reviewer = await import("../../assets/js/tools/ai-answer-checklist/index.js");
+const bridge = await import("../../assets/js/tools/prompt-builder/context.js");
+const reviewer = await import("../../assets/js/tools/ai-answer-checker/review.js");
 const rv = await import("../../assets/js/tools/ai-tools/common/review-engine.js");
 
 const PROJECT = { project: "Shop", purpose: "An online shop.", role: "Developer", stack: "Node\nPostgres", state: "Beta.", decisions: "d1\nd2\nd3\nd4\nd5\nd6\nd7", rejected: "A chatbot", terms: "SKU: stock unit", files: "app.js - entry", done: "c1\nc2\nc3\nc4\nc5\nc6", issues: "Slow search", rules: "No new dependencies", task: "Add coupons.", verify: "npm test", reply: "Ask first." };
@@ -308,7 +312,7 @@ test("bridge page: the mode is the first field, the example still composes the b
   assert.equal(bridge.CONFIG.fileName({ project: "ToolZen Hub" }, { version: 3 }), "context-toolzen-hub-v3");
 });
 
-/* ---------- AI Output Reviewer (17 §7) ---------- */
+/* ---------- the AI Answer Checker: Review one answer (17 §7; the former AI Output Reviewer) ---------- */
 
 const REQUEST = "Write release notes.\n\nRequirements:\n- Mention the coupon feature and its expiry rules\n- List known issues\n- Thank the beta testers\n\nFormat of your answer:\n- A table of changes\n- Under 120 words";
 
@@ -353,24 +357,28 @@ test("reviewer: a request with items gives the review with a follow-up prompt na
   assert.doesNotMatch(r.followUp, /coupon feature/);
   assert.match(r.markdown, /## What this review cannot tell you/);
   for (const word of [/\bverified\b/i, /\baccurate\b/i, /\bcorrect answer\b/i, /\bscore\b/i, /%/]) assert.doesNotMatch(r.markdown.split("## Statements to check")[0], word);
-  const plain = reviewer.build(reviewer.CONFIG.example.values);
+  const plain = reviewer.tool.build(reviewer.CONFIG.example.values);
   assert.ok(plain.markdown.startsWith("# Evidence checklist for an AI answer\n\n## The question asked"));
   assert.ok(reviewer.CONFIG.fields.some((f) => f.key === "reviewType") && reviewer.CONFIG.actions[0].id === "follow-up");
 });
 
 /* ---------- AI Home (17 §4) ---------- */
 
-test("AI Home: the AI Tools page starts with plain links into the Workbench and the AI tools; other sections are untouched", async () => {
+test("AI Home: the AI Tools page starts with plain links into the AI Prompt Builder and the AI Answer Checker; other sections are untouched", async () => {
   const { sectionPageHtml, aiHomeStartHtml } = await import("../../assets/js/pages/directory/directory-html.js");
   const ai = sectionPageHtml("ai-tools");
   const start = aiHomeStartHtml();
   assert.ok(ai.includes(start));
   assert.ok(ai.indexOf("ai-start-title") < ai.indexOf("categories-detail__heading"), "the start block comes before the tool list");
-  assert.match(start, /href="\/tools\/ai-workbench\/\?start=describe"/);
+  assert.match(start, /href="\/tools\/prompt-builder\/"/);
+  assert.match(start, /What would you like to create today\?/);
   assert.equal((start.match(/\?outcome=/g) || []).length, 8);
-  for (const t of ["test-plan", "article", "debug", "email-message"]) assert.ok(start.includes(`?task=${t}"`), t);
-  assert.match(start, /\/tools\/context-pack-builder\/\?mode=handoff/);
-  assert.match(start, /\/tools\/ai-answer-checklist\//);
+  for (const t of ["api-testing", "test-plan", "debug", "article", "meeting-follow-up", "general-prompt"]) assert.ok(start.includes(`?task=${t}"`), t);
+  assert.match(start, /\/tools\/prompt-builder\/\?start=context/);
+  assert.match(start, /\/tools\/ai-answer-checker\/"/);
+  assert.match(start, /\/tools\/ai-answer-checker\/\?mode=compare/);
+  /* no link to a retired address */
+  assert.doesNotMatch(start, /ai-workbench|context-pack-builder|ai-answer-checklist|ai-answer-compare|bug-report-prompt|meeting-notes|qa-workbench/);
   assert.doesNotMatch(start, /ai-tools\/directory/, "the directory keeps its card and sidebar entry only");
   assert.doesNotMatch(start, /<script|<form|<input/);
   for (const id of ["time-tools", "developer-tools", "image-tools", "pdf-tools"]) assert.doesNotMatch(sectionPageHtml(id), /ai-start/, id);
