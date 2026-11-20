@@ -61,7 +61,7 @@ for (const build of BUILDS) {
     it("has only the expected top-level entries", () => {
       const top = fs.readdirSync(build.dir).sort();
       const html = inventory.live.map((p) => p.file.split("/")[0]);
-      const allowed = new Set([...html, inventory.notFound.file, "assets", "loans", "favicon.svg", "robots.txt", "sitemap.xml", ".htaccess"]);
+      const allowed = new Set([...html, inventory.notFound.file, "assets", "loans", "favicon.svg", "robots.txt", "sitemap.xml", ".htaccess", "_redirects"]);
       assert.deepEqual(top.filter((t) => !allowed.has(t)), []);
     });
 
@@ -79,6 +79,18 @@ for (const build of BUILDS) {
         // module scripts (Pyodide's .mjs) and WebAssembly need these types on Apache/LiteSpeed hosts
         assert.match(htaccess, /^\s*AddType text\/javascript \.mjs$/m);
         assert.match(htaccess, /^\s*AddType application\/wasm \.wasm$/m);
+      }
+    });
+
+    it("_redirects (Cloudflare Pages) exists in the root-domain build only: the retired tools' 301s, and every root .html page kept at its own address", () => {
+      assert.equal(files.includes("_redirects"), build.root);
+      if (build.root) {
+        const rules = fs.readFileSync(path.join(build.dir, "_redirects"), "utf8").split(/\r?\n/).filter((l) => l && !l.startsWith("#"));
+        assert.ok(rules.includes("/tools/qa-workbench/ /tools/prompt-builder/?role=qa 301"));
+        assert.equal(rules.filter((l) => / 301$/.test(l)).length % 3, 0, "three address forms per retired tool");
+        const rootHtml = files.filter((f) => /^[^/]+\.html$/.test(f) && f !== "index.html" && f !== inventory.notFound.file).sort();
+        assert.deepEqual(rules.filter((l) => / 200$/.test(l)).map((l) => l.split(" ")[0].slice(1)).sort(), rootHtml);
+        assert.ok(rules.every((l) => / 200$/.test(l) ? /^\/([^/]+)\.html \/\1 200$/.test(l) : true), "each .html page is served at its own address");
       }
     });
 
@@ -110,9 +122,9 @@ for (const build of BUILDS) {
 }
 
 describe("both builds are the same site", () => {
-  it("the same files exist in both (apart from .htaccess), with the same sizes for everything that does not carry the base", () => {
-    // .htaccess and the analytics consent files exist in the production build only (tests/unit/analytics.test.mjs owns them)
-    const PRODUCTION_ONLY = new Set([".htaccess", "assets/js/analytics.js", "assets/css/components/consent.css"]);
+  it("the same files exist in both (apart from .htaccess and _redirects), with the same sizes for everything that does not carry the base", () => {
+    // .htaccess, _redirects and the analytics consent files exist in the production build only (tests/unit/analytics.test.mjs owns them)
+    const PRODUCTION_ONLY = new Set([".htaccess", "_redirects", "assets/js/analytics.js", "assets/css/components/consent.css"]);
     const a = list(BUILDS[0].dir).filter((f) => !PRODUCTION_ONLY.has(f));
     const b = list(BUILDS[1].dir);
     assert.deepEqual(a, b);

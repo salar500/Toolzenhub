@@ -69,14 +69,14 @@ const allowedTop = new Set([
   ...inventory.live.map((p) => p.file.split("/")[0]),
   inventory.notFound.file,
   ...inventory.resources.map((r) => r.slice(1).split("/")[0]),
-  "assets", "loans", ".htaccess",
+  "assets", "loans", ".htaccess", "_redirects",
 ]);
 const deployFailures = [];
 for (const name of fs.readdirSync(REPO)) {
   if (DEV_ONLY.includes(name)) deployFailures.push(`development-only path "${name}" is in the build output`);
   else if (!allowedTop.has(name)) deployFailures.push(`unexpected top-level entry "${name}" in the build output`);
 }
-if (SITE_BASE !== "/" && fs.existsSync(path.join(REPO, ".htaccess"))) deployFailures.push(".htaccess belongs to the root-domain build only");
+for (const f of [".htaccess", "_redirects"]) if (SITE_BASE !== "/" && fs.existsSync(path.join(REPO, f))) deployFailures.push(`${f} belongs to the root-domain build only`);
 for (const page of inventory.live.filter((p) => p.type === "calculator")) {
   const html = read(page.file);
   const m = html.match(/data-tool-module="([^"]+)"/);
