@@ -296,14 +296,19 @@ export function initSteps(h) {
 
     /* the trail and the question start below the sticky bars, never under them (on a phone the section menu is one of them) */
     function keepHeadInView() {
-        const bars = [...document.querySelectorAll("header, nav")].filter((el) => {
-            const position = getComputedStyle(el).position;
-            const box = el.getBoundingClientRect();
-            return (position === "sticky" || position === "fixed") && box.top <= 1 && box.width > innerWidth * 0.6;
-        });
-        const covered = Math.max(parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0, ...bars.map((el) => el.getBoundingClientRect().bottom));
-        const top = $("panel-head").getBoundingClientRect().top;
-        if (top < covered + 4) window.scrollBy(0, top - covered - 8);
+        const covered = () => {
+            const bars = [...document.querySelectorAll("header, nav")].filter((el) => {
+                const position = getComputedStyle(el).position;
+                const box = el.getBoundingClientRect();
+                return (position === "sticky" || position === "fixed") && box.top <= 1 && box.width > innerWidth * 0.6;
+            });
+            return Math.max(parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0, ...bars.map((el) => el.getBoundingClientRect().bottom));
+        };
+        if ($("panel-head").getBoundingClientRect().top >= covered() + 4) return;
+        /* below 960 px a scroll up brings the site's header back (components/header.js), which pushes the section menu down
+           under it: measure with the header shown, and aim at one place in the page so the second call does not add to the first */
+        document.documentElement.classList.remove("header-hidden");
+        window.scrollTo(0, scrollY + $("panel-head").getBoundingClientRect().top - covered() - 8);
     }
 
     const move = (by) => {

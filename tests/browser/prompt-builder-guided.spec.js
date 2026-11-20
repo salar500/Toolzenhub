@@ -274,6 +274,18 @@ test.describe("AI Prompt Builder: one question at a time", () => {
     await expect(page.locator("#wb-q-feature")).toHaveValue("Coupon codes at checkout");
   });
 
+  test("a task picked far down the list: once the scroll settles, the trail is below the header and the section menu, which a scroll up brings back on a phone (2026-11-20)", async ({ page, go }) => {
+    await page.emulateMedia({ reducedMotion: "no-preference" }); // the smooth scroll most visitors get (the suite turns it off)
+    await go("tools/prompt-builder/");
+    await ready(page);
+    await chooseRole(page, /^QA engineer or software tester/);
+    await chooseTask(page, "Test scenarios and test cases");
+    await expect(title(page)).toHaveText("What are you testing?");
+    for (let y = -1, i = 0; i < 20 && y !== (y = await page.evaluate(() => scrollY)); i += 1) await page.waitForTimeout(200);
+    const stuck = await page.evaluate(() => Math.max(0, ...[...document.querySelectorAll("header, nav")].filter((el) => ["sticky", "fixed"].includes(getComputedStyle(el).position) && el.getBoundingClientRect().bottom > 0 && el.getBoundingClientRect().top < innerHeight / 3 && el.getBoundingClientRect().width > innerWidth * 0.6).map((el) => el.getBoundingClientRect().bottom)));
+    expect((await page.locator("#wb-trail-nav").boundingBox()).y).toBeGreaterThanOrEqual(stuck);
+  });
+
   test("spacing: the panel follows the introduction with one gap, and the hint under a field and the buttons share one gap (2026-11-20)", async ({ page, go }) => {
     await go("tools/prompt-builder/");
     await ready(page);
