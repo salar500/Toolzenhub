@@ -16,7 +16,7 @@ Principle (owner's brief, 2026-11-17): few selections, deep professional thinkin
 | Refinement controls | Shorter and longer stepped the stage depth; edit and copy | No way to add edge cases, examples, steps or deliverables; no format or tone | Controls above the pack: detail level with word counts, four parts to add, answer format, tone, reset; shorter and longer step the detail |
 | Prompt validation | Missing essentials, placeholders and conflicts listed | No check of the prompt as a whole | A 20-point prompt check by fixed rules, shown above the pack, labelled as not an AI review |
 | Missing information and assumptions | Placeholders and "ask me" (essential questions) | Facts, assumptions and unknowns not separated | Working rules: four kinds of information labelled; never present planned work as done |
-| Safeguards | Professional safeguards in the D18 blueprints | Health, payments, personal data and security not handled from the visitor's own words; pasted material could carry instructions | Domain safeguards when the visitor's words name the domain; pasted material treated as data; family safeguards at every level |
+| Safeguards | Professional safeguards in the D18 blueprints | Health, payments, personal data and security not handled from the visitor's own words; pasted material could carry instructions | Domain safeguards when the visitor's words name the domain (a word that only suggests it, such as "checkout" or "clinic", becomes an open question for the AI instead, D-25, 2026-11-20); pasted material treated as data; family safeguards at every level |
 | Long prompts | A note advised a shorter prompt over 600 words | Contradicts a requested long prompt | A chosen long prompt keeps a note on working through the stages instead (12's research kept for prompts without a method) |
 | Work Pack files | Kept profession and tools | Detail and refinements not kept | `prompt` object in the file (detail, extras, format, tone); older files open at Detailed |
 
@@ -80,6 +80,6 @@ All 72 labelled tasks compile at the three levels with no repeated line; without
 - Depth of task-specific content varies: 10 tasks have three or more task-specific sections (requirements, debugging, technical documentation, test plan, test cases, API testing, test automation, data analysis, dashboard, project plan); the other 62 have a role, an approach and up to two sections, and reach Very detailed through their family's sections and the generic sections written for their deliverable. Deepening them, starting with the most used, is the main follow-up.
 - 60 of 71 tools still rely on general documentation terms (`20` section 4).
 - The prompt check reads structure and wording by fixed rules; it cannot judge whether the advice is right for a particular project.
-- Domain safeguards trigger on words; a domain described in other words is missed (the profession's own safeguards still apply).
+- Domain safeguards trigger on words; a domain described in other words is missed (the profession's own safeguards still apply). A suggesting word alone (checkout, billing, clinic, security, user accounts) asks the AI to raise the domain as an open question rather than apply its rules.
 - The raw first-load budget has about 100 bytes left: the next first-load feature needs a trim or a budget decision.
 - Real-device checks are outstanding.

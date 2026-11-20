@@ -128,6 +128,40 @@ test("domain safeguards: banking is recognised; ordinary words are not over-trig
   assert.deepEqual(domainsIn("Use the bank holiday calendar"), []);
 });
 
+test("domain inference (D-25): a word that only suggests a domain is an open question, never its requirements; a confirmed domain gets its guidance; general checks stay", async () => {
+  const PAYMENT_RULES = /PCI DSS where cards are processed|test card numbers|idempotency keys for payment calls|integer minor units|reconciliation with the provider's records|failed and retried payments/;
+  /* checkout, with or without a coupon, does not establish payments */
+  for (const [taskId, answers] of [["test-cases", { feature: "Apply a coupon at checkout" }], ["code-feature", { feature: "Apply a coupon at checkout" }], ["test-cases", { feature: "Coupon codes give 10% off at checkout" }]]) {
+    const p = (await build(taskId, { answers })).pack.masterPrompt;
+    assert.doesNotMatch(p, PAYMENT_RULES, `${taskId}: ${answers.feature}`);
+    assert.doesNotMatch(p, /This work touches payments or banking/, `${taskId}: ${answers.feature}`);
+    /* unknown stays unknown: the AI is told to ask, and why */
+    assert.match(p, /Unknown: my words \("checkout"\) do not say whether this work takes payments or handles card or bank details\. Do not assume it does/, taskId);
+    assert.match(p, /list it as an open question and say why the answer matters: payments bring/, taskId);
+    /* the general engineering and honesty guidance is kept */
+    assert.match(p, /your assumptions, and what is unknown/, taskId);
+  }
+  const code = (await build("code-feature", { answers: { feature: "Apply a coupon at checkout" } })).pack.masterPrompt;
+  for (const re of [/validat/i, /error/i, /edge cases/i]) assert.match(code, re, "general checks stay");
+  /* an explicit payment requirement gets payment guidance, with the provider left unknown */
+  const pay = (await build("code-feature", { answers: { feature: "Implement payment retry after a failed transaction" } })).pack.masterPrompt;
+  assert.match(pay, /idempotency keys for payment calls/);
+  assert.match(pay, /This work touches payments or banking/);
+  assert.match(pay, /Do not assume a payment provider, its API or its rules/);
+  assert.doesNotMatch(pay, /Unknown: my words/, "a confirmed domain is not asked about again");
+  /* the other domains: confirmed by their own words, only asked about from a suggestion */
+  assert.deepEqual(domainsIn("Apply a coupon at checkout"), []);
+  assert.deepEqual(domainsIn("Diagnose why the health check endpoint fails"), []);
+  assert.deepEqual(domainsIn("Appointment booking for a dental clinic"), []);
+  assert.deepEqual(domainsIn("Login with user accounts and a security question"), []);
+  assert.deepEqual(domainsIn("Patient records API"), ["health"]);
+  assert.deepEqual(domainsIn("A security review of our login API"), ["security"]);
+  const clinic = (await build("test-cases", { answers: { feature: "Appointment booking for a dental clinic" } })).pack.masterPrompt;
+  assert.doesNotMatch(clinic, /This work involves health information|Because of the domain/);
+  assert.match(clinic, /Unknown: my words \("clinic"\) do not say whether this work handles health or patient information/);
+  assert.doesNotMatch((await build("debug", { answers: { problem: "The health check endpoint returns 500" } })).pack.masterPrompt, /Unknown: my words|health information/);
+});
+
 test("the check names unused answers and tools that do not fit the task, and says which points are structural", async () => {
   const { pack, method } = await build("api-testing", { answers: { api: "Orders API" } });
   const checks = checkPrompt(pack, { method, answers: { api: "Orders API", contract: "" }, offered: ["Postman"], tools: [{ tool: TOOL_BY_ID.figma }] });

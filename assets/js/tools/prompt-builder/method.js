@@ -91,6 +91,8 @@ export async function loadMethod(taskId) {
 /*
  * Safeguards set by the visitor's own words, not guessed from the profession: each applies only when its words appear
  * in the answers or the project context. The laws are named as examples to check, never as the law that applies.
+ * words establish the domain; hints only suggest it ("checkout" can be a coupon with no payment in it), so a hint alone
+ * becomes an open question for the AI to ask, never the domain's requirements (2026-11-20, D-25).
  */
 const DOMAINS = [
     {
@@ -111,7 +113,9 @@ const DOMAINS = [
                 "Design for stressed, unwell or older users and their carers: plain language, large targets, and no step that hides who will see their information."
             ]
         },
-        words: /\b(health(care)?|patients?|clinical|clinics?|hospitals?|medical|medicines?|prescriptions?|diagnos\w*|EHR|EMR|HIPAA|FHIR|HL7)\b/i,
+        words: /\b(healthcare|health (records?|data|information)|patients?|clinical|medical|medicines?|prescriptions?|EHR|EMR|HIPAA|FHIR|HL7)\b/i,
+        hints: /\b(health(?![- ]?checks?\b)|clinics?|hospitals?)\b/i,
+        question: ["handles health or patient information", "health data needs synthetic or de-identified examples, privacy rules and a review of clinical risk"],
         lines: [
             "This work involves health information. Use synthetic or fully de-identified data only: never real patient records, names, identifiers or images.",
             "Privacy law for health data depends on where the service runs (for example HIPAA in the United States, or GDPR for health data in the EU and UK); name the rules you assume and mark them for the compliance owner to confirm.",
@@ -121,7 +125,7 @@ const DOMAINS = [
     {
         id: "payments",
         /* the method lines are about moving money; a banking app's password reset gets the safeguards only */
-        methodWords: /\b(payments?|checkout|billing|invoices?|refunds?|card numbers?|credit cards?|debit cards?|transfers?|transactions?|wallets?|UPI)\b/i,
+        methodWords: /\b(payments?|refunds?|card numbers?|credit cards?|debit cards?|transfers?|transactions?|UPI)\b/i,
         /* what the domain changes in the work itself, for the task families where it matters */
         method: {
             testing: [
@@ -134,10 +138,13 @@ const DOMAINS = [
                 "Reconcile every figure with the bank or provider statement, and treat fees, refunds and chargebacks as separate lines."
             ]
         },
-        words: /\b(payments?|card numbers?|credit cards?|debit cards?|PCI|checkout|billing|invoices?|refunds?|wallets?|UPI|banking|bank accounts?)\b/i,
+        words: /\b(payments?|card numbers?|credit cards?|debit cards?|PCI|refunds?|UPI|banking|bank accounts?)\b/i,
+        hints: /\b(checkout|billing|invoices?|wallets?|transactions?)\b/i,
+        question: ["takes payments or handles card or bank details", "payments bring the provider's test mode, card-data rules such as PCI DSS, and reconciliation"],
         lines: [
             "This work touches payments or banking. Use the payment provider's test mode and test card numbers only; never real card or bank details.",
-            "Card data handling is governed by PCI DSS where cards are processed; do not design anything that stores full card numbers, and mark compliance questions for the owner of that compliance."
+            "Card data handling is governed by PCI DSS where cards are processed; do not design anything that stores full card numbers, and mark compliance questions for the owner of that compliance.",
+            "Do not assume a payment provider, its API or its rules: where they matter, ask me or mark them as unknown."
         ]
     },
     {
@@ -157,14 +164,18 @@ const DOMAINS = [
                 "Keep personal details about candidates and employees to what the process needs, and say who may see each record."
             ]
         },
-        words: /\b(personal data|PII|GDPR|DPDP|customer data|employee data|user accounts?|email addresses|phone numbers|date of birth|addresses)\b/i,
+        words: /\b(personal data|PII|GDPR|DPDP|customer data|employee data|email addresses|phone numbers|date of birth|(home|postal|delivery|shipping) addresses)\b/i,
+        hints: /\b(user accounts?|addresses)\b/i,
+        question: ["stores or shows personal data about real people", "personal data brings consent, retention and access rules"],
         lines: [
             "Personal data is involved. Use made-up or masked examples, collect and show only the data the task needs, and flag where consent, retention or access rules must be confirmed under the data protection law that applies (for example GDPR or India's DPDP Act)."
         ]
     },
     {
         id: "security",
-        words: /\b(security|vulnerabilit\w*|penetration|pentest|exploit\w*|malware|CVE-\d+|OWASP|attack\w*)\b/i,
+        words: /\b(security (tests?|testing|reviews?|audits?|scans?|assessments?)|vulnerabilit\w*|penetration|pentest\w*|exploit\w*|malware|CVE-\d+|OWASP)\b/i,
+        hints: /\b(security|attack\w*)\b/i,
+        question: ["is security testing or touches security-sensitive parts of a system", "security work must stay defensive and limited to systems I am authorised to test"],
         lines: [
             "Keep security work defensive and authorised: test only systems I am permitted to test, describe findings and fixes, and do not produce working exploit code for systems I have not said I own or am authorised to test."
         ]
@@ -246,6 +257,10 @@ export function methodPrompt(method, settings = {}) {
     const domainText = `${Object.values(a).join("\n")}\n${settings.context ?? ""}`;
     const domains = DOMAINS.filter((d) => d.words.test(domainText));
     for (const d of domains) rules.push(...d.lines);
+    for (const d of DOMAINS.filter((x) => !domains.includes(x) && x.hints?.test(domainText))) {
+        const [whether, why] = d.question;
+        rules.push(`Unknown: my words ("${domainText.match(d.hints)[0]}") do not say whether this work ${whether}. Do not assume it does or add requirements for it; list it as an open question and say why the answer matters: ${why}.`);
+    }
     const domainMethod = domains.filter((d) => !d.methodWords || d.methodWords.test(domainText)).flatMap((d) => d.method?.[method.task?.family] ?? []);
     if (domainMethod.length) blocks.push(section("Because of the domain", domainMethod));
     if (rules.length) blocks.push(section("Working rules", rules));
