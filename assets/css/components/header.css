@@ -24,12 +24,32 @@ html {
     --header-offset: 64px;
 }
 
-/* GL-01: 56 px on phones, not sticky so the working area keeps its height; 64 px and sticky from 960 px.
+/* GL-01: 56 px on phones and 64 px from 960 px. From 960 px the header is always sticky; below it, it hides while scrolling
+   down (so the working area keeps its height) and returns on any scroll up (owner finding, 2026-11-09).
    The sticky element is #header, whose parent is the whole page: .site-header alone could not stick,
    because its own parent (#header) is only as tall as the bar. */
 @media (max-width: 959px) {
     :root {
         --header-offset: 56px;
+    }
+
+    /* Below 960 px the header stays reachable without costing working height: it slides out of view while the
+       visitor scrolls down and back in on any scroll up (html.header-hidden, set by components/header.js). */
+    #header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: transform 0.2s ease;
+    }
+
+    html.header-hidden #header {
+        transform: translateY(-100%);
+    }
+}
+
+@media (max-width: 959px) and (prefers-reduced-motion: reduce) {
+    #header {
+        transition: none;
     }
 }
 
@@ -209,6 +229,40 @@ html {
 .navbar__actions {
     display: flex;
     align-items: center;
+    gap: var(--space-2);
+}
+
+/* Theme toggle: the moon shows in the light theme (press for dark), the sun in the dark theme */
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--target-size);
+    height: var(--target-size);
+    padding: 0;
+    border: 1px solid var(--line-control);
+    border-radius: var(--radius-sm);
+    background: var(--surface-card);
+    color: var(--ink);
+    cursor: pointer;
+}
+
+.theme-toggle:hover {
+    background: var(--surface-sunken);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.theme-toggle__sun,
+:root[data-theme="dark"] .theme-toggle__moon {
+    display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle__sun {
+    display: block;
 }
 
 .menu-toggle {
@@ -266,7 +320,7 @@ html {
     z-index: 999;
     visibility: hidden;
     opacity: 0;
-    background: rgba(28, 25, 23, 0.45);
+    background: rgba(32, 44, 69, 0.45);
     transition: opacity var(--motion-base) ease, visibility 0s linear var(--motion-base);
 }
 
@@ -328,9 +382,10 @@ html.menu-open {
 @media (min-width: 960px) {
     .navbar__menu {
         display: block;
+        margin-left: auto;
     }
 
-    .navbar__actions,
+    .navbar__actions .menu-toggle,
     .mobile-navigation {
         display: none;
     }

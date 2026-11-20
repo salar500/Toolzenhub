@@ -66,15 +66,18 @@ const articleCategoryOrder = [
     { slug: "business", icon: "💼" },
     { slug: "health", icon: "❤️" },
     { slug: "math", icon: "🧮" },
-    { slug: "converter", icon: "🔄" }
+    { slug: "converter", icon: "🔄" },
+    /* AI (2026-11-11, Tool Pack 56): guides for the AI Tools section, which has no calculator category, so the name is given here */
+    { slug: "ai", name: "AI", icon: "✦" }
 ];
 
 
 export const articleCategories =
     articleCategoryOrder.map(
-        ({ slug, icon }) => ({
+        ({ slug, name, icon }) => ({
             slug,
             name:
+                name ||
                 categories.find(
                     category =>
                         category.id === slug
@@ -101,9 +104,9 @@ const catalog = [
         topic: "loan-comparison",
         slug: "how-to-reduce-home-loan-interest",
         title:
-            "How to Reduce Your Home Loan Interest",
+            "How to Reduce Home Loan Interest: 6 Ways With Examples",
         description:
-            "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.",
+            "Six ways to reduce home loan interest and EMI: shorter tenure, part-prepayment, extra payments, a lower rate or a balance transfer, with a ₹40 lakh example.",
         publishedAt: "Aug 25, 2026",
         updatedAt: "Aug 25, 2026",
         readTime: "6 min read",
@@ -119,7 +122,8 @@ const catalog = [
             alt:
                 "Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate"
         },
-        tools: ["loan-comparison"],
+        /* the Loan Prepayment Calculator first: the article's worked examples and its "try your own" line are prepayments (2026-11-16) */
+        tools: ["prepayment", "loan-comparison"],
         related: [
             "loan-comparison/emi-vs-total-interest",
             "loan-comparison/fixed-vs-floating-interest-rates",
@@ -175,9 +179,9 @@ const catalog = [
         title:
             "Fixed vs Floating Interest Rates",
         description:
-            "Understand the difference between fixed and floating interest rates before choosing a loan.",
+            "How fixed and floating interest rates differ, and what a 1% rate rise or fall does to the EMI, tenure and total interest of a ₹40 lakh loan.",
         publishedAt: "Aug 25, 2026",
-        updatedAt: "Aug 25, 2026",
+        updatedAt: "Nov 16, 2026",
         readTime: "6 min read",
         cardImage: {
             src:
@@ -873,13 +877,13 @@ const catalog = [
             src:
                 "/assets/Images/articles/longer-tenure-bigger-loan-much-more-interest.png",
             alt:
-                "Five pairs of columns for tenures of 10 to 30 years: the loan that fits, in green, rises slowly while the total interest, in slate, rises much faster"
+                "Five pairs of columns for tenures of 10 to 30 years: the loan that fits, in violet, rises slowly while the total interest, in slate, rises much faster"
         },
         heroImage: {
             src:
                 "/assets/Images/articles/longer-tenure-bigger-loan-much-more-interest.png",
             alt:
-                "Five pairs of columns for tenures of 10 to 30 years: the loan that fits, in green, rises slowly while the total interest, in slate, rises much faster"
+                "Five pairs of columns for tenures of 10 to 30 years: the loan that fits, in violet, rises slowly while the total interest, in slate, rises much faster"
         },
         tools: ["home-loan"],
         related: [
@@ -1488,6 +1492,81 @@ const catalog = [
             "gst/gst-on-a-mixed-invoice-how-the-tax-adds-up-across-rates"
         ],
         relatedLabel: "Tax"
+    },
+
+
+    /* =====================================================
+       AI  (Tool Pack 56, published 2026-11-11; text only,
+       each beside the AI Tool built for it)
+    ===================================================== */
+
+    {
+        id: 41,
+        status: "published",
+        category: "ai",
+        topic: "ai",
+        slug: "how-to-write-instructions-an-ai-assistant-can-act-on",
+        title:
+            "How to Write Instructions an AI Assistant Can Act On",
+        description:
+            "Why the same assistant gives one person a weak answer and another a usable one: the deliverable, the reader, the facts, the rules, the criteria and what to do when unclear, with one request written badly and then well.",
+        publishedAt: "Nov 11, 2026",
+        updatedAt: "Nov 11, 2026",
+        readTime: "6 min read",
+        cardImage: null,
+        heroImage: null,
+        tools: ["prompt-builder"],
+        related: [
+            "ai/how-to-give-an-ai-assistant-your-projects-context",
+            "ai/how-to-read-an-ai-answer-before-you-trust-it"
+        ],
+        relatedLabel: "AI"
+    },
+
+    {
+        id: 42,
+        status: "published",
+        category: "ai",
+        topic: "ai",
+        slug: "how-to-give-an-ai-assistant-your-projects-context",
+        title:
+            "How to Give an AI Assistant Your Project's Context",
+        description:
+            "An assistant forgets everything between chats. A context pack is the project explained once: purpose, stack, key files, what is done, known traps, rules, the next task and how to respond, kept in the project and pasted at the start of each chat.",
+        publishedAt: "Nov 11, 2026",
+        updatedAt: "Nov 11, 2026",
+        readTime: "6 min read",
+        cardImage: null,
+        heroImage: null,
+        tools: ["prompt-builder"],
+        related: [
+            "ai/how-to-write-instructions-an-ai-assistant-can-act-on",
+            "ai/how-to-read-an-ai-answer-before-you-trust-it"
+        ],
+        relatedLabel: "AI"
+    },
+
+    {
+        id: 43,
+        status: "published",
+        category: "ai",
+        topic: "ai",
+        slug: "how-to-read-an-ai-answer-before-you-trust-it",
+        title:
+            "How to Read an AI Answer Before You Trust It",
+        description:
+            "Fluency is not evidence. How to read an assistant's answer for what can be checked: the figures, the named sources, the absolute words, what is missing, and the questions that make the assistant show its working.",
+        publishedAt: "Nov 11, 2026",
+        updatedAt: "Nov 11, 2026",
+        readTime: "6 min read",
+        cardImage: null,
+        heroImage: null,
+        tools: ["ai-answer-checker"],
+        related: [
+            "ai/how-to-write-instructions-an-ai-assistant-can-act-on",
+            "ai/how-to-give-an-ai-assistant-your-projects-context"
+        ],
+        relatedLabel: "AI"
     }
 
 ];
@@ -1592,6 +1671,24 @@ const contentLoaders = {
         () =>
             import(
                 "./articles/tax/tax-saving-guide-save-more-legally.js"
+            ),
+
+    "ai/how-to-write-instructions-an-ai-assistant-can-act-on":
+        () =>
+            import(
+                "./articles/ai/how-to-write-instructions-an-ai-assistant-can-act-on.js"
+            ),
+
+    "ai/how-to-give-an-ai-assistant-your-projects-context":
+        () =>
+            import(
+                "./articles/ai/how-to-give-an-ai-assistant-your-projects-context.js"
+            ),
+
+    "ai/how-to-read-an-ai-answer-before-you-trust-it":
+        () =>
+            import(
+                "./articles/ai/how-to-read-an-ai-answer-before-you-trust-it.js"
             ),
 
     "sip/how-much-sip-do-you-need-for-a-goal":

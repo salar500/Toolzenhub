@@ -10,11 +10,17 @@
 ========================================================= */
 
 import { escapeHTML } from "../ui/escape.js";
+import { ROUTES } from "../routes.js";
 import { getToolById } from "../data/tools.js";
 import {
+    getSection,
     getSectionForTool,
+    getSectionUrl,
+    getCategory,
+    getCategoryByTitle,
+    getCategoryLandingUrl,
     getCategoryForTool,
-    getToolsBySection
+    getSectionListing
 } from "../data/taxonomy.js";
 
 /* Sidebar groups for the sections whose tools have no catalog category (the Calculators section is grouped by its categories).
@@ -40,6 +46,11 @@ export const SECTION_GROUPS = {
     "pdf-tools": [
         { label: "Combine and split", ids: ["merge-pdf", "split-pdf"] },
         { label: "Edit pages", ids: ["pdf-pages", "pdf-marks"] }
+    ],
+    "ai-tools": [
+        { label: "Create a prompt", ids: ["prompt-builder"] },
+        { label: "Check an answer", ids: ["ai-answer-checker"] },
+        { label: "Find an AI product", ids: ["ai-directory"] }
     ]
 };
 
@@ -78,14 +89,97 @@ export function groupSectionTools(sectionId, tools, categoryTitleOf) {
 
 }
 
-function linkHtml(tool, currentId) {
+function linkHtml(tool, currentId, currentPageName) {
 
-    const current = tool.id === currentId;
+    /* a section page (the AI Directory) is current when it is the page being shown */
+    const current = tool.id === currentId || (tool.isPage === true && tool.title === currentPageName);
 
     return `<li><a href="${escapeHTML(tool.href)}"${current ? ' aria-current="page"' : ""}>${escapeHTML(tool.title)}</a></li>`;
 
 }
 
+/**
+ * The sidebar of a section, for any page of that section: a tool page (current tool), a category page (current category) or
+ * the section's own landing page (nothing current). The same markup everywhere, so the ecosystem keeps one navigation.
+ *   sectionId         the section (ecosystem) whose live tools are listed
+ *   currentToolId     the tool page being shown, marked aria-current="page"
+ *   currentCategoryId the category page being shown (Calculators), marked as the current group
+ * Returns "" when the section has fewer than two live tools (nothing to switch between).
+ */
+export function renderSectionNav({ sectionId, currentToolId = null, currentCategoryId = null, currentPageName = null }) {
+
+    const section = getSection(sectionId);
+
+    if (!section) {
+        return "";
+    }
+
+    const siblings = getSectionListing(section.id);
+
+    if (siblings.length < 2) {
+        return "";
+    }
+
+    const groups = groupSectionTools(section.id, siblings, item => getCategoryForTool(item)?.title);
+    const currentCategoryTitle = currentCategoryId ? getCategory(currentCategoryId)?.title : null;
+    const isCurrentGroup = group =>
+        group.items.some(item => item.id === currentToolId || (item.isPage === true && item.title === currentPageName)) ||
+        (currentCategoryTitle !== null && group.label === currentCategoryTitle);
+
+    /* Each group (a Calculators category, or a group of another section) can be expanded and collapsed by script (ui/section-rail.js); without
+       script every group is simply listed. data-open marks the groups that start open: the current one, and every group of a short section.
+       A long section (more than 16 tools: the Calculators) starts with the other groups closed so the list stays short. */
+    const longSection = siblings.length > 16;
+
+    const body = groups.map(group => {
+
+        const current = isCurrentGroup(group);
+        const isOpen = !longSection || current;
+
+        /* a Calculators category has a page of its own: recorded so the workspace can show it in place (ui/workspace-nav.js) */
+        const categoryId = group.label ? getCategoryByTitle(group.label)?.id : null;
+        const categoryHref = categoryId ? getCategoryLandingUrl(categoryId) : null;
+
+        return `
+                            <li class="section-switcher__group" data-open="${isOpen}"${current ? ' data-current="true"' : ""}${categoryHref ? ` data-href="${escapeHTML(categoryHref)}"` : ""}>
+                                ${group.label ? `<span class="section-switcher__label">${escapeHTML(group.label)}</span>` : ""}
+                                <ul>
+                                    ${group.items.map(item => linkHtml(item, currentToolId, currentPageName)).join("")}
+                                </ul>
+                            </li>`;
+
+    }).join("");
+
+    /* the section's own page: a way back to the ecosystem overview from any tool, marked when that is the page being shown */
+    const landingUrl = getSectionUrl(section.id);
+    /* currentPageName: another page of the section that is not a tool (the AI products directory), so the overview is not the current page */
+    const onLanding = currentToolId === null && currentCategoryId === null && currentPageName === null;
+    const overview = landingUrl
+        ? `<p class="section-switcher__overview"><a href="${escapeHTML(landingUrl)}"${onLanding ? ' aria-current="page"' : ""}>${escapeHTML(section.title)} overview</a></p>`
+        : "";
+
+    /* Where the visitor is, named on the phone's tool bar (assets/css/components/section-switcher.css): the tool, the category, or the overview.
+       Not shown on a wide screen, where the sidebar itself marks the current page. */
+    const nowName = (currentToolId ? getToolById(currentToolId)?.title : currentCategoryTitle) || currentPageName || `${section.title} overview`;
+
+    return `
+                <nav class="section-switcher" aria-label="${escapeHTML(section.title)}: switch tool">
+                    <details>
+                        <summary>
+                            <span>${currentToolId ? "More " : ""}${escapeHTML(section.title)}</span>
+                            <span class="section-switcher__now">${escapeHTML(nowName)}</span>
+                            <span class="section-switcher__count">${siblings.length}</span>
+                        </summary>
+                        ${overview}
+                        <ul class="section-switcher__list">${body}
+                        </ul>
+                        <p class="section-switcher__all"><a href="${escapeHTML(ROUTES.tools)}">All ToolZen Hub tools</a></p>
+                    </details>
+                </nav>`;
+
+}
+
+/** The sidebar of a tool's own section, the tool marked. */
 export function renderSectionSwitcher(toolId) {
 
     const tool = getToolById(toolId);
@@ -95,43 +189,6 @@ export function renderSectionSwitcher(toolId) {
         return "";
     }
 
-    const siblings = getToolsBySection(section.id).filter(item => item.available);
-
-    if (siblings.length < 2) {
-        return "";
-    }
-
-    const groups = groupSectionTools(section.id, siblings, item => getCategoryForTool(item)?.title);
-
-    /* Each group (a Calculators category, or a group of another section) can be expanded and collapsed by script (ui/section-rail.js); without
-       script every group is simply listed. data-open marks the groups that start open: the one holding the current tool, and every group of a
-       short section. A long section (more than 16 tools: the Calculators) starts with the other groups closed so the list stays short. */
-    const longSection = siblings.length > 16;
-
-    const body = groups.map(group => {
-
-        const isOpen = !longSection || group.items.some(item => item.id === toolId);
-
-        return `
-                            <li class="section-switcher__group" data-open="${isOpen}">
-                                ${group.label ? `<span class="section-switcher__label">${escapeHTML(group.label)}</span>` : ""}
-                                <ul>
-                                    ${group.items.map(item => linkHtml(item, toolId)).join("")}
-                                </ul>
-                            </li>`;
-
-    }).join("");
-
-    return `
-                <nav class="section-switcher" aria-label="${escapeHTML(section.title)}: switch tool">
-                    <details>
-                        <summary>
-                            <span>More ${escapeHTML(section.title)}</span>
-                            <span class="section-switcher__count">${siblings.length}</span>
-                        </summary>
-                        <ul class="section-switcher__list">${body}
-                        </ul>
-                    </details>
-                </nav>`;
+    return renderSectionNav({ sectionId: section.id, currentToolId: toolId });
 
 }

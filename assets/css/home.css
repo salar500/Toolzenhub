@@ -34,6 +34,7 @@ body {
     padding: 0;
 
     overflow-x: hidden;
+    overflow-x: clip; /* clip, not a scroll container: keeps the sticky header working */
 }
 
 
@@ -126,6 +127,7 @@ body {
         max-width: 100%;
 
         overflow-x: hidden;
+        overflow-x: clip; /* clip, not a scroll container: keeps the sticky header working */
     }
 
 
@@ -248,12 +250,14 @@ body {
 }
 
 
-/* Design System 2.0: one consistent vertical rhythm between the home sections */
+/* Design System 2.0: one consistent vertical rhythm between the home sections. The inner blocks (categories, featured,
+   articles) carry their own padding, so the outer wrapper adds only a small step (owner finding 2026-11-15: 54-68 px gaps
+   came from both layers adding up). */
 #categories.section,
 #popular-calculators.section,
 #latest-articles.section {
-    padding-top: var(--space-8);
-    padding-bottom: var(--space-4);
+    padding-top: var(--space-4);
+    padding-bottom: 0;
 }
 
 

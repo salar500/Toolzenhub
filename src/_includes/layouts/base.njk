@@ -10,6 +10,9 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+    {#- Sets the theme before first paint (saved choice, else the device's setting) so a dark visitor never sees a white flash. See assets/js/ui/theme.js. #}
+    <script>(function(){var t;try{t=localStorage.getItem("tz-theme")}catch(e){}if(t!=="light"&&t!=="dark"){t=window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.setAttribute("data-theme",t)})()</script>
+
     {#- Where THIS build is deployed. Browser scripts read it (assets/js/routes.js). It is not a canonical. #}
     <meta name="tz-site-base" content="{{ site.base }}">
 {%- if site.analyticsId and not noindex %}

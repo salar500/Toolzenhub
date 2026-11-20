@@ -145,8 +145,13 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     for (const id of ["merge-pdf", "split-pdf", "pdf-pages", "pdf-marks"]) for (const other of ["photos-to-pdf", "image-compressor-resizer", "json-formatter", "emi"]) assert.equal(toolIds(rel.getRelatedTools(other)).includes(id), false, `${other} -> ${id}`);
     assert.equal(toolIds(rel.getRelatedTools("photos-to-pdf")).some((id) => ["merge-pdf", "split-pdf", "pdf-pages"].includes(id)), false);
     assert.deepEqual(rel.getRelatedTools("nope"), []);
+    // AI Tools (D22, 2026-11-18): two tools, each related only to the other; nothing crosses the section
+    assert.deepEqual(toolIds(rel.getRelatedTools("prompt-builder")), ["ai-answer-checker"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("ai-answer-checker")), ["prompt-builder"]);
+    assert.deepEqual(toolIds(rel.getRelatedTools("image-metadata")), ["image-compressor-resizer", "photos-to-pdf"]); // Tool Pack 57: its curated list, same section
+    for (const id of ["prompt-builder", "ai-answer-checker"]) for (const other of ["json-formatter", "text-diff", "emi", "smart-flashcards", "merge-pdf"]) assert.equal(toolIds(rel.getRelatedTools(other)).includes(id), false, `${other} -> ${id}`);
     // parity with the pre-M7 rule for every tool without a curated list (the Loan Prepayment page curates its own order; GST and Percentage curate cross-category lists)
-    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "risk-reward", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "list-comparer", "uuid-generator", "test-design-lab", "sql-practice-lab", "excel-practice-lab", "power-bi-practice-lab", "cron-challenge-lab", "jsonpath-challenge-lab", "json-error-fixing-lab", "smart-flashcards", "json-csv-converter", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages", "pdf-marks", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "income-tax", "swp", "credit-card-payoff", "gratuity", "salary-in-hand", "emi", "loan-comparison", "home-loan", "sip", "fd", "cagr", "xirr", "interest", "roi", "ratio", "age", "personal-loan", "loan-eligibility", "bmi", "bmr", "calorie", "unit-converter"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug); // the tools with a curated list are pinned one by one in the first test (pack 50 added emi, loan-comparison, home-loan, sip, fd, cagr and xirr)
+    for (const slug of Object.keys(registry.calculatorMetadata).filter((s) => !["prepayment", "balance-transfer", "gst", "percentage", "risk-reward", "date-difference", "date-calculator", "countdown-timer", "stopwatch", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "list-comparer", "uuid-generator", "test-design-lab", "sql-practice-lab", "excel-practice-lab", "power-bi-practice-lab", "cron-challenge-lab", "jsonpath-challenge-lab", "json-error-fixing-lab", "smart-flashcards", "json-csv-converter", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages", "pdf-marks", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "income-tax", "swp", "credit-card-payoff", "gratuity", "salary-in-hand", "emi", "loan-comparison", "home-loan", "sip", "fd", "cagr", "xirr", "interest", "roi", "ratio", "age", "personal-loan", "loan-eligibility", "bmi", "bmr", "calorie", "unit-converter", "prompt-builder", "bug-report-prompt", "context-pack-builder", "ai-answer-checklist", "ai-answer-compare", "meeting-notes-action-plan", "ai-workbench", "image-metadata", "qa-workbench"].includes(s))) assert.deepEqual(toolIds(rel.getRelatedTools(slug, { limit: 6 })), OLD_RELATED_TOOLS(slug), slug); // the tools with a curated list are pinned one by one in the first test (pack 50 added emi, loan-comparison, home-loan, sip, fd, cagr and xirr)
   });
 
   test("tool -> related articles: the first six published loan articles, in catalog order, for EMI and Loan Comparison", () => {
@@ -164,7 +169,7 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
     const expected = (key) => key === "business/roi-vs-profit-whats-the-difference" ? ["roi", "profit", "margin"]
       : key === "health/how-to-calculate-your-daily-calorie-needs" ? ["calorie", "bmr", "bmi"]
       : key === "converter/easy-unit-conversion-guide" ? ["unit-converter"]
-      : key === "loan-comparison/what-is-loan-prepayment" ? ["prepayment", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "credit-card-payoff"]
+      : key === "loan-comparison/what-is-loan-prepayment" || key === "loan-comparison/how-to-reduce-home-loan-interest" ? ["prepayment", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "credit-card-payoff"]
       : key.startsWith("loan-prepayment/") ? ["prepayment", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "credit-card-payoff"]
       : key === "balance-transfer/is-a-loan-balance-transfer-worth-it" ? ["balance-transfer", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "interest", "prepayment", "credit-card-payoff"]
       : key === "balance-transfer/balance-transfer-vs-prepayment" ? ["balance-transfer", "prepayment", "loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "interest", "credit-card-payoff"]
@@ -179,16 +184,19 @@ describe("current relationships (parity with the pre-M7 selection)", () => {
       : key.startsWith("gst/") ? ["gst"] // the only published Tax tool: no category fallback beyond it
       : key.startsWith("margin/") ? ["margin", "profit", "roi"] // the primary tool first, then the other published Business tools
       : key.startsWith("profit/") ? ["profit", "margin", "roi"]
+      : key === "ai/how-to-write-instructions-an-ai-assistant-can-act-on" ? ["prompt-builder", "ai-answer-checker"] // the AI guides (Tool Pack 56): the curated tool first, then the other AI tools (the AI category, 2026-11-12)
+      : key === "ai/how-to-give-an-ai-assistant-your-projects-context" ? ["prompt-builder", "ai-answer-checker"]
+      : key === "ai/how-to-read-an-ai-answer-before-you-trust-it" ? ["ai-answer-checker", "prompt-builder"]
       : ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"];
     for (const key of PUBLISHED) assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(key)), expected(key), key);
-    assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(PUBLISHED[0], { fill: false })), ["loan-comparison"]);
+    assert.deepEqual(toolIds(rel.getRelatedToolsForArticle(PUBLISHED[0], { fill: false })), ["prepayment", "loan-comparison"]); // the home-loan interest guide (2026-11-16)
   });
 
   test("article -> related articles: exactly the curated list, in order, not padded", () => {
     for (const key of PUBLISHED) {
       const entry = articles.getArticleByKey(key);
       assert.deepEqual(keys(rel.getRelatedArticles(key)), entry.related, key);
-      assert.equal(rel.getRelatedArticles(key).length, key === "business/roi-vs-profit-whats-the-difference" ? 2 : key.startsWith("health/") || key.startsWith("converter/") ? 0 : key === "tax/tax-saving-guide-save-more-legally" ? 2 : key === "investment/best-sip-strategies-for-beginners" ? 3 : key.startsWith("margin/") || key.startsWith("profit/") || key.startsWith("fd/") || key.startsWith("gst/") || key.startsWith("cagr/") || key.startsWith("percentage/") || key.startsWith("math/") || key.startsWith("swp/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") || key.startsWith("home-loan/") ? 3 : 5, key); // Margin and Profit: three-article clusters, so two others
+      assert.equal(rel.getRelatedArticles(key).length, key === "business/roi-vs-profit-whats-the-difference" ? 2 : key.startsWith("health/") || key.startsWith("converter/") ? 0 : key === "tax/tax-saving-guide-save-more-legally" ? 2 : key === "investment/best-sip-strategies-for-beginners" ? 3 : key.startsWith("margin/") || key.startsWith("profit/") || key.startsWith("fd/") || key.startsWith("gst/") || key.startsWith("cagr/") || key.startsWith("percentage/") || key.startsWith("math/") || key.startsWith("swp/") || key.startsWith("ai/") ? 2 : key.startsWith("loan-prepayment/") || key.startsWith("balance-transfer/") || key.startsWith("sip/") || key.startsWith("home-loan/") ? 3 : 5, key); // Margin and Profit: three-article clusters, so two others
     }
   });
 
@@ -261,7 +269,7 @@ describe("curated first, automatic second", () => {
     savedRelated = first().related;
     first().related = [];
     // the other published articles of ITS category (Loans): the Investment and Business articles are not offered
-    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/") && !k.startsWith("profit/") && !k.startsWith("fd/") && !k.startsWith("gst/") && !k.startsWith("cagr/") && !k.startsWith("percentage/") && !k.startsWith("math/") && !k.startsWith("swp/") && !k.startsWith("investment/") && !k.startsWith("tax/") && !k.startsWith("business/") && !k.startsWith("health/") && !k.startsWith("converter/")).slice(1));
+    assert.deepEqual(keys(rel.getRelatedArticles(PUBLISHED[0])), PUBLISHED.filter((k) => !k.startsWith("sip/") && !k.startsWith("margin/") && !k.startsWith("profit/") && !k.startsWith("fd/") && !k.startsWith("gst/") && !k.startsWith("cagr/") && !k.startsWith("percentage/") && !k.startsWith("math/") && !k.startsWith("swp/") && !k.startsWith("investment/") && !k.startsWith("tax/") && !k.startsWith("business/") && !k.startsWith("health/") && !k.startsWith("converter/") && !k.startsWith("ai/")).slice(1));
   });
 
   test("a curated article list is never replaced or padded by the automatic one", () => {

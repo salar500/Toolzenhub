@@ -13,6 +13,8 @@ const PROJECT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..",
 const ID = "G-YEJZMCXJ7V";
 const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]));
 const htmlFiles = (dir) => walk(dir).filter((p) => p.endsWith(".html"));
+const inventory = JSON.parse(fs.readFileSync(path.join(PROJECT, "tests", "inventory", "url-inventory.json"), "utf8"));
+const REDIRECTS = new Set(inventory.live.filter((p) => p.type === "redirect").map((p) => p.file));
 
 describe("analytics helpers", () => {
   it("runs on the production host only", () => {
@@ -42,6 +44,16 @@ describe("build output", () => {
       const has = html.includes(`name="tz-analytics-id" content="${ID}"`);
       if (name === "404.html") {
         assert.equal(has, false, "404 is not tracked");
+        continue;
+      }
+      // ShopLite, the noindex practice shop used by the testing lessons, is a standalone app and is never tracked
+      if (name.split(path.sep).join("/") === "practice-labs/shoplite/index.html") {
+        assert.equal(has || /assets\/js\/analytics\.js/.test(html), false, "ShopLite is not tracked");
+        continue;
+      }
+      // a retired tool's address (src/retired-tools.njk) replaces itself at once with its new home, which is tracked; the stub is not
+      if (REDIRECTS.has(name.split(path.sep).join("/"))) {
+        assert.equal(has || /assets\/js\/analytics\.js/.test(html), false, `${name}: a redirect is not tracked`);
         continue;
       }
       assert.equal(has, true, `${name}: id meta`);

@@ -128,14 +128,15 @@ function tableNode(name, table) {
         table.rows.length > SHOWN ? el("p", { class: "lx-note", text: `${table.rows.length - SHOWN} more rows are not shown (${table.rows.length} rows in all).` }) : null);
 }
 
-const KIND_LABEL = { query: "Your query steps (one per line)", model: "Your relationships (one per line)", dax: "Your measure" };
+export const KIND_LABEL = { query: "Your query steps (one per line)", model: "Your relationships (one per line)", dax: "Your measure" };
 const KIND_HINT = {
     query: "Write each step on its own line, for example trim Name. The steps are applied from the first line to the last.",
     model: "Write each relationship as Table[Column] -> Table[Column], from the many side to the one side.",
     dax: "Write Name = expression. Provided measures can be used by name in square brackets."
 };
 
-function exerciseInput(ex, value, onChange) {
+/* exported so Practice Labs lessons can mount these exercises with the same input (learn-labset.js) */
+export function exerciseInput(ex, value, onChange) {
 
     const id = `pb-input-${ex.id}`;
     const tables = [];

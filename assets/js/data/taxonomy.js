@@ -112,7 +112,78 @@ export function getToolsBySection(
 
 
 /*
- * The tools that sit directly under a section (no category).
+ * The pages a section lists beside its tools without being catalog tools (`pages` in data/categories.js), shaped like a
+ * live tool so a listing draws them with the same card or link.
+ */
+
+export function getSectionPages(
+    sectionId
+) {
+
+    return (getSectionById(sectionId)?.pages ?? []).map(
+        page => ({ ...page, href: ROUTES[page.route], available: true, isPage: true })
+    );
+
+}
+
+
+/*
+ * Everything a section lists and counts: its live tools, then its pages. The home card, All Tools, the section page
+ * and the sidebar all use this, so their counts agree.
+ */
+
+export function getSectionListing(
+    sectionId
+) {
+
+    return [
+        ...getToolsBySection(sectionId).filter(tool => tool.available),
+        ...getSectionPages(sectionId)
+    ];
+
+}
+
+
+/*
+ * A section lists its tools directly (no category groups) when it has no categories, or when it says so with
+ * `listing: "tools"` (AI Tools: its one category exists for the taxonomy, not as a navigation layer).
+ */
+
+export function sectionListsToolsDirectly(
+    sectionId
+) {
+
+    return getSectionById(sectionId)?.listing === "tools" ||
+        getCategoriesBySection(sectionId).length === 0;
+
+}
+
+
+/*
+ * The directly-listing section a tool is shown under: the one it names with `sectionId`, or, for a section with
+ * `listing: "tools"`, the one its category belongs to. Undefined for a tool listed under a calculator category.
+ */
+
+export function getDirectSectionId(
+    tool
+) {
+
+    if (tool?.sectionId) {
+        return tool.sectionId;
+    }
+
+    const section = sectionOfTool(tool);
+
+    return section?.listing === "tools"
+        ? section.id
+        : undefined;
+
+}
+
+
+/*
+ * The tools a directly-listing section shows: those that sit directly under it and, for a section with
+ * `listing: "tools"`, those under its category.
  */
 
 export function getDirectToolsBySection(
@@ -121,7 +192,7 @@ export function getDirectToolsBySection(
 
     return tools.filter(
         tool =>
-            tool.sectionId === sectionId
+            getDirectSectionId(tool) === sectionId
     );
 
 }

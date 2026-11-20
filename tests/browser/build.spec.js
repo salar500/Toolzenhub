@@ -13,7 +13,11 @@ import { test, expect, livePages, rel } from "../helpers/test-base.mjs";
 const articles = livePages.filter((p) => p.type === "article");
 // the two newest articles list fewer related articles in assets/js/data/articles.js (3 and 2) than the default of 5
 const RELATED_COUNT = { "best-sip-strategies-for-beginners": 3, "tax-saving-guide-save-more-legally": 2 };
-const NO_IMAGE = new Set(["what-changes-how-long-a-corpus-lasts"]); // only the second SWP article has no image (the first carries a diagram; every other article has its own)
+// the three AI guides (ids 41 to 43) are curated: each lists the other two, in this order, and has no category fallback to fill five
+const AI_GUIDES = ["how-to-write-instructions-an-ai-assistant-can-act-on", "how-to-give-an-ai-assistant-your-projects-context", "how-to-read-an-ai-answer-before-you-trust-it"];
+const AI_RELATED = Object.fromEntries(AI_GUIDES.map((slug) => [slug, AI_GUIDES.filter((other) => other !== slug).map((other) => `/articles/ai/${other}/`)]));
+for (const slug of AI_GUIDES) RELATED_COUNT[slug] = 2;
+const NO_IMAGE = new Set(["what-changes-how-long-a-corpus-lasts", ...AI_GUIDES]); // the second SWP article and the three AI guides (ids 41 to 43, published without an image, ledger Batch 4) have no image; every other article has its own
 
 test.describe("generated pages carry their content without JavaScript @portable", () => {
   test.use({ javaScriptEnabled: false });
@@ -27,6 +31,10 @@ test.describe("generated pages carry their content without JavaScript @portable"
       expect(await page.locator(".article-faq details").count()).toBeGreaterThanOrEqual(3);
       expect(await page.locator(".article-toc a").count()).toBeGreaterThanOrEqual(4);
       await expect(page.locator(".article-related-card")).toHaveCount(/\/(health|converter)\//.test(a.url) ? 0 : /\/(margin|profit|fd|gst|cagr|percentage|math|swp|business)\//.test(a.url) ? 2 : /\/(loan-prepayment|balance-transfer|sip|home-loan)\//.test(a.url) ? 3 : (RELATED_COUNT[a.slug] ?? 5));
+      if (AI_RELATED[a.slug]) {
+        const hrefs = await page.locator(".article-related-card").evaluateAll((els) => els.map((e) => new URL(e.href).pathname.replace("/Toolzenhub/articles/", "/articles/")));
+        expect(hrefs, "curated related articles").toEqual(AI_RELATED[a.slug]);
+      }
       await expect(page.locator(".calculator-breadcrumb")).toHaveCount(1);
       await expect(page.locator(".article-calculator-button")).toHaveCount(1);
       await expect(page.locator(".site-header .navbar__link").first()).toBeAttached();
@@ -116,7 +124,7 @@ test.describe("each page loads only its own scripts @portable", () => {
     for (const heavy of ["/calculators/", "/loans/", "/js/app.js", "/pages/articles/", "/pages/article/article-render.js", "/pages/article/articleContent.js", "/pages/article/article-seo.js", "/pages/tool-page.js", "/data/articles.js", "/data/calculators.js", "/hero.js"]) {
       expect(has(js, heavy), heavy).toBe(false);
     }
-    expect(js.length, `modules loaded: ${js.join(", ")}`).toBeLessThanOrEqual(9);
+    expect(js.length, `modules loaded: ${js.join(", ")}`).toBeLessThanOrEqual(10); // header, footer, theme toggle (ui/theme.js), the article entry and its interactions, plus the shared data and config modules
   });
 
   test("home page: the application entry; no tool module", async ({ page, go }) => {

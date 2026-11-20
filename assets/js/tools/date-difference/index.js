@@ -55,15 +55,13 @@ import {
 
 import {
     wireTodayButtons,
-    todayButton,
     todayIso
 } from "../time-ui/time-ui.js";
 
 import {
     addDays,
     parseDate,
-    presetRange,
-    SINGLE_DATE_PRESETS
+    presetRange
 } from "./date-engine.js";
 
 
@@ -97,7 +95,7 @@ const EMPTY_MESSAGE =
 function note(result) {
 
     if (result.same) {
-        return "Both dates are the same.";
+        return result.inclusive ? "Both dates are the same day, which counts as 1 day." : "Both dates are the same.";
     }
 
     if (result.reversed) {
@@ -113,15 +111,26 @@ function summaryLines(result) {
     const from = dateText(result.earlier);
     const to = dateText(result.later);
 
-    if (result.same) {
-        return [`${from} is the same day as ${to}: 0 days apart.`];
-    }
-
     const calendar =
         unitsText(result.years, result.months, result.days);
 
+    const both = `Counting both ${from} and ${to}: ${daysText(result.inclusiveDays)}.`;
+    const apart = `Not counting the start day (days between the dates): ${daysText(result.elapsedDays)}.`;
+
+    if (result.inclusive) {
+        return [
+            `From ${from} to ${to}, counting both dates, is ${daysText(result.totalDays)}${result.same ? "" : `, which the calendar counts as ${calendar}`}.`,
+            apart
+        ];
+    }
+
+    if (result.same) {
+        return [`${from} is the same day as ${to}: 0 days apart.`, both];
+    }
+
     return [
-        `From ${from} to ${to} is ${daysText(result.totalDays)}. Counted by the calendar, that is ${calendar}.`
+        `From ${from} to ${to} is ${daysText(result.totalDays)}. Counted by the calendar, that is ${calendar}.`,
+        both
     ];
 
 }
@@ -129,7 +138,8 @@ function summaryLines(result) {
 function renderResults(result) {
 
     const metrics = [
-        resultMetric({ label: "Total days", value: daysText(result.totalDays), primary: true }),
+        resultMetric({ label: result.inclusive ? "Calendar dates, both counted" : "Days between the dates", value: daysText(result.totalDays), primary: true }),
+        resultMetric({ label: result.inclusive ? "Days between the dates" : "Calendar dates, both counted", value: daysText(result.inclusive ? result.elapsedDays : result.inclusiveDays) }),
         resultMetric({ label: "Years, months and days", value: unitsText(result.years, result.months, result.days) }),
         resultMetric({ label: "Weeks and days", value: weeksText(result.weeks, result.weekDays) })
     ];
@@ -165,9 +175,10 @@ function renderResults(result) {
                     <strong>Calendar dates only.</strong>
                     The two days you choose are treated as dates, not moments:
                     no time of day or time zone is involved, and leap years and
-                    different month lengths are counted. Total days is the number
-                    of days between the dates, not counting both ends. Business
-                    days and public holidays are not calculated.
+                    different month lengths are counted. ${result.inclusive
+                        ? "Both the start date and the end date are counted, so the result is one day more than the days between them."
+                        : "Total days is the number of days between the dates, so the start day is not counted; tick the box to count both the start and the end date."}
+                    Business days and public holidays are not calculated.
                 </div>
 
             </div>
@@ -178,10 +189,10 @@ function renderResults(result) {
 function liveSummary(result) {
 
     if (result.same) {
-        return "Both dates are the same: 0 days.";
+        return result.inclusive ? "Both dates are the same day: 1 day counting both." : "Both dates are the same: 0 days.";
     }
 
-    return `${daysText(result.totalDays)}, or ${unitsText(result.years, result.months, result.days)}.${result.reversed ? " The end date comes before the start date." : ""}`;
+    return `${daysText(result.totalDays)}${result.inclusive ? ", counting both dates" : ""}, or ${unitsText(result.years, result.months, result.days)}.${result.reversed ? " The end date comes before the start date." : ""}`;
 
 }
 
@@ -209,7 +220,7 @@ function exampleParagraph() {
    see the heading, the explanation and the FAQ.
 ========================================================= */
 
-function dateField({ id, label, hint }) {
+function dateField({ id, label, hint, extra }) {
 
     return fieldShell({
         id,
@@ -223,23 +234,31 @@ function dateField({ id, label, hint }) {
                                     max="9999-12-31"
                                     aria-describedby="${escapeHTML(id)}-hint"
                                 >
-                                ${todayButton(id)}`
+                                ${quickRow(id, label, extra)}`
     });
 
+}
+
+/* quick dates under a date input: each button names the field it fills, so there is no separate "which date" choice */
+function quickRow(id, label, extra) {
+    const field = label.toLowerCase();
+    const button = (text, offset, name) => offset === 0
+        ? `<button type="button" class="tt-inline-button" data-today="${escapeHTML(id)}" aria-label="Set the ${field} to today">${text}</button>`
+        : `<button type="button" class="tt-inline-button" data-quick="${escapeHTML(id)}" data-offset="${offset}" aria-label="Set the ${field} to ${name}">${text}</button>`;
+    return `<div class="date-quick" role="group" aria-label="Quick dates for the ${field}">
+                                    ${button("Yesterday", -1, "yesterday")}
+                                    ${button("Today", 0)}
+                                    ${button("Tomorrow", 1, "tomorrow")}
+                                    ${button(extra[0], extra[1], extra[0].toLowerCase())}
+                                </div>`;
 }
 
 /* the yyyy-mm-dd value of a date input */
 const isoOf = ({ year, month, day }) =>
     `${String(year).padStart(4, "0")}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
-/* the quick-fill buttons: a label and the id presetRange() (date-engine.js) or SINGLE_DATE_PRESETS knows */
-const SINGLE_BUTTONS = [["Today", "today"], ["Yesterday", "yesterday"], ["Tomorrow", "tomorrow"]];
-
+/* whole-period ranges behind "More ranges": a label and the id presetRange() (date-engine.js) knows */
 const PREVIOUS_BUTTONS = [
-    ["Previous 5 days", "previous-days-5"],
-    ["Previous 7 days", "previous-days-7"],
-    ["Previous 14 days", "previous-days-14"],
-    ["Previous 30 days", "previous-days-30"],
     ["Previous week", "previous-week"],
     ["Previous month", "previous-month"],
     ["Previous 3 months", "previous-months-3"],
@@ -248,10 +267,6 @@ const PREVIOUS_BUTTONS = [
 ];
 
 const NEXT_BUTTONS = [
-    ["Next 5 days", "next-days-5"],
-    ["Next 7 days", "next-days-7"],
-    ["Next 14 days", "next-days-14"],
-    ["Next 30 days", "next-days-30"],
     ["Next week", "next-week"],
     ["Next month", "next-month"],
     ["Next 3 months", "next-months-3"],
@@ -335,49 +350,53 @@ export function markup() {
                         ${dateField({
                             id: IDS.start,
                             label: "Start date",
-                            hint: "The first date. Choose it from the calendar or type it."
+                            hint: "The first date. Choose it from the calendar or type it.",
+                            extra: ["6 days ago", -6]
                         })}
 
                         ${dateField({
                             id: IDS.end,
                             label: "End date",
-                            hint: "The second date. It can be before the start date. Choose it from the calendar or type it."
+                            hint: "The second date. It can be before the start date. Choose it from the calendar or type it.",
+                            extra: ["6 days from today", 6]
                         })}
 
                     </div>
 
+                    <label class="tt-check date-inclusive">
+                        <input type="checkbox" id="date-inclusive" aria-describedby="date-inclusive-help">
+                        <span>Count both the start and the end date</span>
+                    </label>
+
+                    <p class="calculator-form__help" id="date-inclusive-help">
+                        Off (the default): the number of days between the dates, so 1 June to 6 June is 5 days. On: every calendar date from the start to the end is counted, so 1 June to 6 June is 6 days. Both answers are always shown in the result.
+                    </p>
+
                     <div class="date-presets" role="group" aria-labelledby="date-presets-label">
 
                         <p class="calculator-form__help" id="date-presets-label">
-                            Quick fill from today, as your device reads it. Range buttons set both dates; the gap is the number of days between them, so today to 6 days later is 6 days apart (7 if you count both end days). "Previous 7 days" ends today and starts 6 days earlier, so it covers 7 calendar dates counting both ends; "Next 7 days" starts tomorrow. Weeks run Monday to Sunday, and months and years are complete calendar months and years.
+                            Days between two dates and calendar dates are different counts: today to 6 days from today is 6 days apart and covers 7 calendar dates, today included. The result always shows both. Ranges use today's date on your device.
                         </p>
 
                         <fieldset class="date-presets__group">
-                            <legend>Quick dates (one date)</legend>
-                            <div class="date-presets__target" role="radiogroup" aria-label="Fill which date">
-                                <label><input type="radio" name="date-quick-target" value="start" checked> Start date</label>
-                                <label><input type="radio" name="date-quick-target" value="end"> End date</label>
-                            </div>
-                            ${presetButtons(SINGLE_BUTTONS, "single")}
+                            <legend>Common ranges (set both dates and count both)</legend>
+                            <button type="button" class="tt-inline-button" data-span="-6">Last 7 calendar days (including today)</button>
+                            <button type="button" class="tt-inline-button" data-span="6">Next 7 calendar days (including today)</button>
+                            <button type="button" class="tt-inline-button" data-span="13">Next 14 calendar days (including today)</button>
+                            <button type="button" class="tt-inline-button" data-preset="month">This month so far (1st to today)</button>
                         </fieldset>
 
-                        <fieldset class="date-presets__group">
-                            <legend>Previous periods (both dates)</legend>
-                            ${presetButtons(PREVIOUS_BUTTONS, "range")}
-                        </fieldset>
-
-                        <fieldset class="date-presets__group">
-                            <legend>Future periods (both dates)</legend>
-                            ${presetButtons(NEXT_BUTTONS, "range")}
-                        </fieldset>
-
-                        <fieldset class="date-presets__group">
-                            <legend>From today (both dates)</legend>
-                            <button type="button" class="tt-inline-button" data-preset="6">Today to 6 days later</button>
-                            <button type="button" class="tt-inline-button" data-preset="7">Today to 7 days later</button>
-                            <button type="button" class="tt-inline-button" data-preset="30">Today to 30 days later</button>
-                            <button type="button" class="tt-inline-button" data-preset="month">1st of this month to today</button>
-                        </fieldset>
+                        <details class="date-presets__more">
+                            <summary>More ranges: whole weeks, months and years</summary>
+                            <fieldset class="date-presets__group">
+                                <legend>Previous (both dates)</legend>
+                                ${presetButtons(PREVIOUS_BUTTONS, "range")}
+                            </fieldset>
+                            <fieldset class="date-presets__group">
+                                <legend>Next (both dates)</legend>
+                                ${presetButtons(NEXT_BUTTONS, "range")}
+                            </fieldset>
+                        </details>
 
                     </div>
 
@@ -425,13 +444,14 @@ export function markup() {
 
                 <ol>
                     <li>
-                        Choose the start date and the end date. "Use today" fills
-                        a field with today's date from your device, only when
-                        you press it.
+                        Choose the start date and the end date. The buttons under
+                        each date (Yesterday, Today, Tomorrow and one more) fill
+                        that date from your device's clock, only when you press them.
                     </li>
                     <li>
-                        Read the total number of days, then the same gap as
-                        years, months and days, and as weeks and days.
+                        Read the days between the dates and the number of calendar
+                        dates counted, then the same gap as years, months and days,
+                        and as weeks and days.
                     </li>
                     <li>
                         Change either date to see the result update. Reset
@@ -451,11 +471,25 @@ export function markup() {
                 </h2>
 
                 <p>
-                    <strong>Total days</strong> is the exact number of days
+                    <strong>Days between the dates</strong> is the exact number of days
                     from the earlier date to the later one. The two dates are
                     counted as calendar dates, so a time zone or a daylight
                     saving change cannot move the answer. The days between
                     1 January and 2 January are 1 day.
+                </p>
+
+                <p>
+                    <strong>Days between and days counted both ways.</strong>
+                    By default the start day is not counted, as when you ask how
+                    many days passed: 1 June to 6 June is 5 days. If you want
+                    every calendar date from the start to the end, such as the
+                    days of a leave, a booking or a course, tick "Count both
+                    the start and the end date": 1 June to 6 June is then 6
+                    days. The same date counted both ways is 1 day, and a whole
+                    month such as 1 to 31 January is 1 month. A phrase such as
+                    "the previous 6 days" is not a calculation until you decide
+                    whether today is one of them: the range buttons make this
+                    explicit, as in "Last 7 calendar days (including today)".
                 </p>
 
                 <p>
@@ -671,6 +705,9 @@ export function init() {
         end: document.getElementById(IDS.end)
     };
 
+    const inclusiveBox =
+        document.getElementById("date-inclusive");
+
     const allInputs =
         Object.values(inputs);
 
@@ -712,7 +749,8 @@ export function init() {
         const result =
             calculateDateDifference(
                 inputs.start.value,
-                inputs.end.value
+                inputs.end.value,
+                { inclusive: Boolean(inclusiveBox?.checked) }
             );
 
         if (result.status === "incomplete") {
@@ -809,6 +847,7 @@ export function init() {
             const start = preset === "month" ? { ...today, day: 1 } : today;
             const end = preset === "month" ? today : addDays(today, Number(preset));
 
+            if (inclusiveBox) inclusiveBox.checked = true;
             fill(start, end);
             button.focus();
 
@@ -830,15 +869,31 @@ export function init() {
 
     }
 
-    for (const button of form.querySelectorAll("[data-single]")) {
+    for (const button of form.querySelectorAll("[data-quick]")) {
 
         button.addEventListener("click", () => {
 
-            const target = form.querySelector('input[name="date-quick-target"]:checked')?.value === "end" ? "end" : "start";
-            const date = addDays(parseDate(todayIso(new Date())).date, SINGLE_DATE_PRESETS[button.dataset.single]);
+            const target = button.dataset.quick === inputs.end.id ? "end" : "start";
+            const date = addDays(parseDate(todayIso(new Date())).date, Number(button.dataset.offset));
 
             fill(target === "start" ? date : null, target === "end" ? date : null);
-            inputs[target].focus();
+            button.focus();
+
+        });
+
+    }
+
+    for (const button of form.querySelectorAll("[data-span]")) {
+
+        button.addEventListener("click", () => {
+
+            const today = parseDate(todayIso(new Date())).date;
+            const span = Number(button.dataset.span);
+            const other = addDays(today, span);
+
+            if (inclusiveBox) inclusiveBox.checked = true;
+            fill(span < 0 ? other : today, span < 0 ? today : other);
+            button.focus();
 
         });
 
@@ -850,6 +905,10 @@ export function init() {
 
             for (const input of allInputs) {
                 input.value = "";
+            }
+
+            if (inclusiveBox) {
+                inclusiveBox.checked = false;
             }
 
             update({ speak: false });

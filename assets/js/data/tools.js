@@ -35,6 +35,11 @@
                    (data/relationships.js). Its curated relatedTools
                    still apply. Used where two tools share a category
                    but not an intent (Income Tax and GST).
+   - articleFallback  optional; false shows only the curated
+                   relatedArticles (none when there are none), never
+                   the automatic same-category articles. For a tool
+                   whose category's articles do not fit its job (the
+                   Age calculator is not about percentages).
 
    Derived, never written here:
    - section    from the category (tool -> category -> section)
@@ -160,7 +165,7 @@ const catalog = [
             description:
                 "Calculate your monthly EMI, total interest and total repayment for a loan.",
             themeColor:
-                "#fafaf9"
+                "#f6f4ee"
         }
     },
 
@@ -538,6 +543,7 @@ const catalog = [
             examples: true,
             localProcessing: true
         },
+        articleFallback: false,
         seo: {
             title:
                 "PPF Calculator: Estimate Your PPF Balance Year by Year | ToolZen Hub",
@@ -698,6 +704,10 @@ const catalog = [
             examples: true,
             localProcessing: true
         },
+        relatedArticles: [
+            "cagr/comparing-two-investments-over-different-periods-a-bigger-gain-is-not-a-higher-yearly-rate",
+            "cagr/cagr-vs-simple-average-growth-why-80-percent-over-5-years-is-not-16-percent-cagr"
+        ],
         seo: {
             title:
                 "XIRR Calculator: Annualised Return from Dated Cash Flows | ToolZen Hub",
@@ -740,6 +750,7 @@ const catalog = [
             localProcessing: true
         },
         relatedArticles: [],
+        articleFallback: false,
         seo: {
             title:
                 "Risk Reward Ratio and Position Size Calculator | ToolZen Hub",
@@ -1268,6 +1279,7 @@ const catalog = [
             localProcessing: true
         },
         relatedArticles: [],
+        articleFallback: false,
         seo: {
             title:
                 "Age Calculator: Exact Age in Years, Months and Days | ToolZen Hub",
@@ -2445,6 +2457,112 @@ const catalog = [
         }
     },
 
+
+    /* =====================================================
+       AI TOOLS (the seventh section, 2026-11-11; consolidated
+       into three products on 2026-11-18, decision D22)
+
+       The AI Prompt Builder (prompts), the AI Answer Checker
+       (one answer reviewed, or two compared) and the AI Directory
+       page. Prepared in the browser; no AI service is called.
+    ===================================================== */
+
+    {
+        id: "prompt-builder",
+        status: "published",
+        loader: () =>
+            import("../tools/prompt-builder/index.js"),
+        category: "ai",
+        toolType: "utility",
+        icon: "✦",
+        title: "AI Prompt Builder",
+        description:
+            "Create professional AI prompts for your work, business, learning and creative projects: describe the task or choose your profession, answer a few questions, and get a main prompt, stage prompts and refinement prompts. Prepared in your browser; no AI service is called.",
+        relatedTools: ["ai-answer-checker"],
+        aliases: [
+            "prompt builder",
+            "prompt generator",
+            "write a prompt",
+            "chatgpt prompt",
+            "claude prompt",
+            "prompt template",
+            "prompt engineering",
+            "ai workbench",
+            "ai work pack",
+            "ai prompts for testing",
+            "debugging prompt",
+            "ai image prompt",
+            "ai video prompt",
+            "context pack",
+            "context bridge"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            download: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "AI Prompt Builder: Professional Prompts for Any Task | ToolZen Hub",
+            description:
+                "Build professional prompts for ChatGPT, Claude, Gemini or any AI assistant: describe your task or choose your profession, answer a few questions, and get a main prompt, stage prompts and refinement prompts. Runs in your browser."
+        }
+    },
+
+    {
+        id: "ai-answer-checker",
+        status: "published",
+        loader: () =>
+            import("../tools/ai-answer-checker/index.js"),
+        category: "ai",
+        toolType: "utility",
+        icon: "☑",
+        title: "AI Answer Checker",
+        description:
+            "Review AI responses, identify missing information and compare answers from different AI platforms: review one answer against what you asked, or compare two answers to the same question. Word patterns in your browser; it does not judge truth.",
+        relatedTools: ["prompt-builder"],
+        aliases: [
+            "ai answer checker",
+            "ai output reviewer",
+            "ai answer evidence checklist",
+            "review ai answer",
+            "check ai answer against prompt",
+            "verify ai answer",
+            "fact check ai",
+            "chatgpt fact check",
+            "ai hallucination check",
+            "check ai output",
+            "compare ai answers",
+            "compare two ai responses",
+            "chatgpt vs claude answer",
+            "which ai answer is better",
+            "ai answer comparison",
+            "contradictions between ai answers"
+        ],
+        capabilities: {
+            reset: true,
+            copy: true,
+            download: true,
+            realtime: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            examples: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "AI Answer Checker: Review or Compare AI Answers | ToolZen Hub",
+            description:
+                "Check an answer from ChatGPT, Claude or Gemini against your prompt, or compare two answers: missing requirements, contradictions, format problems, statements to verify and a follow-up prompt. Runs in your browser; nothing is sent."
+        }
+    },
+
     {
         id: "list-comparer",
         status: "published",
@@ -2647,6 +2765,45 @@ const catalog = [
                 "Photos to PDF: Combine Pictures into One PDF | ToolZen Hub",
             description:
                 "Free photos to PDF tool for JPEG, PNG and WebP. Put several photos into one PDF in the order you choose, with A4, Letter or photo-sized pages. It runs in your browser: your photos are not uploaded."
+        }
+    },
+
+    /* Tool Pack 57 (docs/tool-packs/57-image-metadata.md) */
+    {
+        id: "image-metadata",
+        status: "published",
+        loader: () =>
+            import("../tools/image-metadata/index.js"),
+        sectionId: "image-tools",
+        icon: "⌖",
+        title: "Photo Metadata Viewer and Remover",
+        description:
+            "See whether a JPEG or PNG carries a location, the camera or phone, dates or text, and download a copy without it. The picture is not recompressed, and nothing is uploaded.",
+        autoRelated: false,
+        relatedTools: ["image-compressor-resizer", "photos-to-pdf"],
+        aliases: [
+            "remove exif",
+            "exif remover",
+            "exif viewer",
+            "photo metadata",
+            "image metadata",
+            "remove gps from photo",
+            "remove location from photo",
+            "strip metadata"
+        ],
+        capabilities: {
+            reset: true,
+            download: true,
+            multipleInputs: true,
+            validation: true,
+            explanation: true,
+            localProcessing: true
+        },
+        seo: {
+            title:
+                "Photo Metadata Viewer and Remover: See and Remove EXIF and GPS | ToolZen Hub",
+            description:
+                "Check a JPEG or PNG for its location, camera, dates and text, and download a copy without them. The picture is copied as it is, not recompressed. It runs in your browser: your photos are not uploaded."
         }
     },
 

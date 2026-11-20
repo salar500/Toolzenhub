@@ -42,7 +42,7 @@ test.describe("Stopwatch", () => {
     await expect(page.locator("#sw-status")).toHaveText("Ready");
     expect(await shown(page)).toEqual(["Start"]);
     await expect(page.locator("#sw-laps")).toBeHidden();
-    await expect(page.locator(".related-section")).toHaveCount(0);
+    await expect(page.locator(".related-section:not(.knowledge-links)")).toHaveCount(0);
     expectClean(watch);
   });
 
@@ -308,8 +308,11 @@ test.describe("Stopwatch on the real clock", () => {
 test.describe("Stopwatch in Time Tools and search", () => {
   test("Time Tools and All Tools list it directly under the section; Countdown Timer and Stopwatch link each other", async ({ page, go }) => {
     await go("time-tools.html");
-    for (const slug of ["stopwatch", "countdown-timer", "date-difference", "date-calculator"]) await expect(page.locator(`a[href$="tools/${slug}/"]`)).toHaveCount(1);
-    await expect(page.locator("main")).not.toContainText(/coming soon|timers|measurement/i);
+    for (const slug of ["stopwatch", "countdown-timer", "date-difference", "date-calculator"]) await expect(page.locator(`.categories-detail__grid a[href$="tools/${slug}/"]`)).toHaveCount(1);  // the card grid; the workspace sidebar lists the tool too
+    await expect(page.locator("main")).not.toContainText(/coming soon|measurement/i);
+    // no placeholder "Timers" category in the page itself; the sidebar's "Timers and clocks" group heading is the real grouping
+    const ownText = await page.locator("main").evaluate((m) => { const c = m.cloneNode(true); c.querySelectorAll(".section-switcher").forEach((n) => n.remove()); return c.textContent; });
+    expect(ownText).not.toMatch(/timers/i);
     await go("tools.html");
     await expect(page.locator('.directory-section a[href$="tools/stopwatch/"]')).toHaveCount(1);
     await expect(page.locator(".directory-section__count").nth(1)).toHaveText("13 tools"); // the Time Tools section is the second of three
@@ -323,7 +326,7 @@ test.describe("Stopwatch in Time Tools and search", () => {
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html`);
     await page.locator(".directory-section__title a", { hasText: "Time Tools" }).click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}time-tools.html`);
-    await page.locator('a[href$="tools/stopwatch/"]').first().click();
+    await page.locator('a[href$="tools/stopwatch/"]:visible').first().click(); // on a phone the closed sidebar drawer lists it first
     await expect(page.locator("h1")).toHaveText("Stopwatch");
   });
 

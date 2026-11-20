@@ -10,7 +10,7 @@
    Comparison) gets no link. The position is not measured, because the form may still be rendering when this runs.
 ========================================================= */
 
-export function addJumpToResult(app) {
+export function addJumpToResult(app, label = "Jump to result") {
 
     const result =
         app.querySelector("section.calculator-results[id]");
@@ -29,7 +29,7 @@ export function addJumpToResult(app) {
 
     link.href = `#${result.id}`;
 
-    link.textContent = "Jump to result";
+    link.textContent = label;
 
     link.addEventListener("click", () => {
 

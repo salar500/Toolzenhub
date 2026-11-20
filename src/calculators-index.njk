@@ -3,7 +3,7 @@ layout: layouts/listing.njk
 permalink: "/calculators.html"
 title: "All Calculators | ToolZen Hub"
 description: "Explore all ToolZen Hub calculators for finance, health, business, math, investment and everyday calculations."
-themeColor: "#fafaf9"
+themeColor: "#f6f4ee"
 bodyClass: "calculators-page-body"
 headerTag: div
 footerTag: div
@@ -17,6 +17,7 @@ styles:
   - "/assets/css/components/header.css"
   - "/assets/css/components/footer.css"
   - "/assets/css/components/cards.css"
+  - "/assets/css/components/section-switcher.css"
   - "/assets/css/themes/light.css"
   - "/assets/css/pages/calculators.css"
   - "/assets/css/pages/calculators-empty.css"
@@ -29,6 +30,10 @@ clientRendered: true
     ====================================================== -->
 
     <main id="calculators-page">
+
+        <div class="ecosystem-layout" data-section-page>
+        {% sectionNav "calculators" %}
+        <div class="ecosystem-main">
 
 
         <!-- =====================================================
@@ -215,6 +220,9 @@ clientRendered: true
             </div>
 
         </section>
+
+        </div>
+        </div>
 
     </main>
 

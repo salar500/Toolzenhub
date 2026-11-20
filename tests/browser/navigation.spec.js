@@ -16,28 +16,24 @@ test.describe("home page", () => {
   test("hero, category card, featured tools, latest articles", async ({ page, go, watch, siteRoot }) => {
     await go("");
     await expect(page.locator("h1.hero__title")).toContainText("Practical tools");
-    // six major sections with a live tool (Calculators, Time Tools, Developer Tools, Image Tools, PDF Tools, Practice Labs): one card each, and no "More" card that opens nothing of its own
-    await expect(page.locator("#categories .category-card")).toHaveCount(6);
-    await expect(page.locator("#categories .category-card").nth(0)).toContainText("Calculators");
-    await expect(page.locator("#categories .category-card").nth(1)).toContainText("Time Tools");
-    await expect(page.locator("#categories .category-card").nth(2)).toContainText("Developer Tools");
+    // seven major sections with a live tool, AI Tools first (owner, 2026-11-16), then the catalog order: one card each, and no "More" card that opens nothing of its own
+    const sectionCards = page.locator("#categories .category-card");
+    await expect(sectionCards).toHaveCount(7);
     await expect(page.locator("#categories")).not.toContainText("More");
-    await expect(page.locator("#categories .category-card").nth(0)).toHaveAttribute("href", `${siteRoot}categories.html`);
-    await expect(page.locator("#categories .category-card").nth(1)).toHaveAttribute("href", `${siteRoot}time-tools.html`);
-    await expect(page.locator("#categories .category-card").nth(2)).toHaveAttribute("href", `${siteRoot}developer-tools.html`);
-    await expect(page.locator("#categories .category-card").nth(3)).toContainText("Image Tools");
-    await expect(page.locator("#categories .category-card").nth(3)).toHaveAttribute("href", `${siteRoot}image-tools.html`);
-    await expect(page.locator("#categories .category-card").nth(4)).toContainText("PDF Tools");
-    await expect(page.locator("#categories .category-card").nth(4)).toHaveAttribute("href", `${siteRoot}pdf-tools.html`);
-    await expect(page.locator("#categories .category-card").nth(5)).toContainText("Practice Labs");
-    await expect(page.locator("#categories .category-card").nth(5)).toHaveAttribute("href", `${siteRoot}practice-labs.html`);
+    const order = [["AI Tools", "ai-tools.html"], ["Calculators", "categories.html"], ["Time Tools", "time-tools.html"], ["Developer Tools", "developer-tools.html"], ["Image Tools", "image-tools.html"], ["PDF Tools", "pdf-tools.html"], ["Practice Labs", "practice-labs.html"]];
+    for (const [i, [title, href]] of order.entries()) {
+      await expect(sectionCards.nth(i).locator("h3")).toHaveText(title);
+      await expect(sectionCards.nth(i)).toHaveAttribute("href", `${siteRoot}${href}`);
+    }
+    // the AI Tools count includes the AI Directory, as on its own page, All Tools and the sidebar
+    await expect(sectionCards.nth(0).locator(".category-card__count")).toHaveText("3 tools"); // D22: the AI Prompt Builder, the AI Answer Checker and the AI Directory
     // Featured Tools: a short curated list of live tools (no usage data, so it is not called "popular"), all links
     await expect(page.getByRole("heading", { name: "Featured Tools" })).toBeVisible();
     await expect(page.locator("#popular-calculators").getByRole("heading", { name: "Popular Calculators" })).toHaveCount(0);
     await expect(page.locator("#popular-calculators .calculator-card")).toHaveCount(6);
     await expect(page.locator("#popular-calculators a.calculator-card")).toHaveCount(6);
     await expect(page.locator("#popular-calculators .calculator-card--soon")).toHaveCount(0);
-    await expect(page.locator("#popular-calculators a.calculator-card").first()).toHaveAttribute("href", `${siteRoot}calculators/home-loan/`);
+    await expect(page.locator("#popular-calculators a.calculator-card").first()).toHaveAttribute("href", `${siteRoot}tools/prompt-builder/`);
     // the Home discovery actions each have one clear role: the section card opens the Calculators section, the hero search and
     // "View all tools" open All Tools; there is no second "view all" that says the same thing
     await expect(page.locator("#categories .section-title")).toHaveText("Explore Tools");
@@ -45,8 +41,8 @@ test.describe("home page", () => {
     await expect(page.locator("#popular-calculators .section-link")).toHaveAttribute("href", `${siteRoot}tools.html`);
     await expect(page.locator("#popular-calculators .section-link")).toContainText("View all tools");
     await expect(page.locator(".section-link", { hasText: /view all (categories|calculators)/i })).toHaveCount(0);
-    // Featured Tools is curated: one live tool from each of six different jobs (finance, business, time, developer, PDF, image), in a fixed order, and says nothing about popularity
-    expect(await page.locator("#popular-calculators a.calculator-card").evaluateAll((l) => l.map((x) => x.getAttribute("href")))).toEqual([...["home-loan", "gst"].map((id) => `${siteRoot}calculators/${id}/`), ...["time-zone-converter", "json-formatter", "merge-pdf", "image-compressor-resizer"].map((id) => `${siteRoot}tools/${id}/`)]);
+    // Featured Tools is curated: one live tool from each of six tool sections (AI, finance, time, developer, PDF, image), in a fixed order, and says nothing about popularity
+    expect(await page.locator("#popular-calculators a.calculator-card").evaluateAll((l) => l.map((x) => x.getAttribute("href")))).toEqual([`${siteRoot}tools/prompt-builder/`, `${siteRoot}calculators/home-loan/`, ...["time-zone-converter", "json-formatter", "merge-pdf", "image-compressor-resizer"].map((id) => `${siteRoot}tools/${id}/`)]);
     await expect(page.locator("#popular-calculators")).not.toContainText(/popular|trending|most (used|searched)/i);
     // latest articles: the first three published, linking into /articles/…
     const latest = page.locator("#latest-articles a.article-card");
@@ -95,6 +91,28 @@ test.describe("home page", () => {
     await input.fill("   ");
     await expect(page.locator("#tools-results")).toBeEmpty();
     await expect(page.locator("#tools-directory")).toBeVisible();
+  });
+
+  test("live search (owner, 2026-11-16): All Tools and the hero show results while typing, the newest query wins, only the count is announced", async ({ page, go, siteRoot }) => {
+    await go("tools.html");
+    const input = page.locator("#directory-search-input");
+    await input.pressSequentially("json", { delay: 30 }); // no Enter
+    await expect(page.locator('.directory-result[href$="tools/json-formatter/"]')).toHaveCount(1);
+    await expect(page.locator("#tools-directory")).toBeHidden();
+    await expect(page).toHaveURL((u) => u.searchParams.get("q") === "json");
+    await expect(page.locator("#tools-results-status")).toHaveText(/tools? found for “json”/);
+    await expect(page.locator("#tools-results")).not.toHaveAttribute("aria-live", /./); // the grid itself is not read out
+    await input.fill("ai directory");
+    await expect(page.locator('.directory-result[href$="ai-tools/directory/"]')).toHaveCount(1); // the Directory is searchable (Finding A)
+    await expect(page.locator('.directory-result[href$="tools/json-formatter/"]')).toHaveCount(0); // the older query's results are gone
+
+    await go("");
+    const hero = page.locator('#calculator-search input[name="q"]');
+    await hero.pressSequentially("stopwatch", { delay: 30 });
+    await expect(page.locator(".hero-results__link").first()).toHaveAttribute("href", `${siteRoot}tools/stopwatch/`);
+    await expect(page).toHaveURL((u) => u.pathname === siteRoot); // typing does not leave the home page
+    await hero.press("Escape");
+    await expect(page.locator(".hero-results__link")).toHaveCount(0);
   });
 
   test("All Tools stays lit on every section page, category page and tool (owner findings 16 to 18)", async ({ page, go, isMobile }) => {
@@ -387,7 +405,7 @@ test.describe("calculator catalog drives tool identity (M1)", () => {
     await go("");
     const links = page.locator("#popular-calculators a.calculator-card");
     await expect(links).toHaveCount(6);
-    const expected = [["calculators/home-loan", "Home Loan Calculator"], ["calculators/gst", "GST Calculator"], ["tools/time-zone-converter", "Time Zone Converter"], ["tools/json-formatter", "JSON Formatter and Validator"], ["tools/merge-pdf", "Merge PDF"], ["tools/image-compressor-resizer", "Image Compressor and Resizer"]];
+    const expected = [["tools/prompt-builder", "AI Prompt Builder"], ["calculators/home-loan", "Home Loan Calculator"],["tools/time-zone-converter", "Time Zone Converter"], ["tools/json-formatter", "JSON Formatter and Validator"], ["tools/merge-pdf", "Merge PDF"], ["tools/image-compressor-resizer", "Image Compressor and Resizer"]];
     for (const [i, [slug, title]] of expected.entries()) {
       await expect(links.nth(i)).toHaveAttribute("href", `${siteRoot}${slug}/`);
       await expect(links.nth(i)).toContainText(title);
@@ -530,22 +548,23 @@ test.describe("All Tools and the calculator hierarchy", () => {
     expect(await page.locator(".calculator-breadcrumb a").evaluateAll((l) => l.map((x) => x.getAttribute("href")))).toEqual([siteRoot, `${siteRoot}categories.html`, `${siteRoot}investment.html`]);
   });
 
-  test("the All Tools page: six sections (Calculators, Time Tools, Developer Tools, Image Tools, PDF Tools, Practice Labs), live tools as links, no Coming soon block (hidden from the public directory)", async ({ page, go, siteRoot, watch }) => {
+  test("the All Tools page: seven sections (Calculators, Time Tools, Developer Tools, Image Tools, PDF Tools, Practice Labs, AI Tools), live tools as links, no Coming soon block (hidden from the public directory)", async ({ page, go, siteRoot, watch }) => {
     await go("tools.html");
     await expect(page.locator("h1")).toHaveText("All Tools");
     await expect(page).toHaveTitle("All Tools | ToolZen Hub");
     await expect(page.locator(".calculator-breadcrumb")).toContainText("All Tools");
-    await expect(page.locator(".directory-section")).toHaveCount(6);
+    await expect(page.locator(".directory-section")).toHaveCount(7);
     await expect(page.getByRole("heading", { name: "Calculators", level: 2 })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Time Tools", level: 2 })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Developer Tools", level: 2 })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "AI Tools", level: 2 })).toBeVisible();
     await expect(page.getByRole("heading", { name: "PDF Tools", level: 2 })).toBeVisible();
     await expect(page.locator('.directory-section a[href$="tools/date-difference/"]')).toHaveCount(1);
     const live = await page.locator(".directory-group a").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
     for (const r of ["loans.html", "investment.html", "tax.html", "business.html", "math.html", "calculators/emi/", "calculators/sip/", "calculators/fd/", "calculators/cagr/", "calculators/ppf/", "calculators/margin/", "calculators/profit/", "calculators/gst/", "calculators/percentage/", "calculators/income-tax/"]) expect(live).toContain(siteRoot + r);
     for (const r of ["health.html", "converter.html", "calculators/roi/", "calculators/bmi/", "calculators/unit-converter/"]) expect(live).toContain(siteRoot + r); // Tool Pack 53
     for (const bad of ["categories.html#health", "categories.html#converter"]) expect(live.some((h) => h.includes(bad)), bad).toBe(false);
-    await expect(page.locator(".directory-group")).toHaveCount(46); // the seven live calculator categories (Health and Converter since Tool Pack 53), the thirteen Time Tools tools (Tool Pack 34), the twelve Developer Tools and the seven Practice Labs tools (twelve utilities and the five Practice Labs and Flashcards tools), the two Image Tools tools (Photos to PDF is the second, Tool Pack 31) and the four PDF Tools tools (Tool Pack 33, and Tool Pack 52, PDF Page Numbers and Watermark)
+    await expect(page.locator(".directory-group")).toHaveCount(50); // the Photo Metadata Viewer and Remover (Tool Pack 57) adds one; AI Tools adds three groups (its two tools and the AI Directory, D22) to the 46 below;  the seven live calculator categories (Health and Converter since Tool Pack 53), the thirteen Time Tools tools (Tool Pack 34), the twelve Developer Tools and the seven Practice Labs tools (twelve utilities and the five Practice Labs and Flashcards tools), the two Image Tools tools (Photos to PDF is the second, Tool Pack 31) and the four PDF Tools tools (Tool Pack 33, and Tool Pack 52, PDF Page Numbers and Watermark)
     await expect(page.locator(".directory-soon")).toHaveCount(0);
     await expect(page.locator(".coming-soon-badge")).toHaveCount(0);
     await expect(page.getByRole("heading", { name: "Coming soon" })).toHaveCount(0);
@@ -622,14 +641,14 @@ test.describe("All Tools and the calculator hierarchy", () => {
     await go("tools.html");
     await page.locator('.directory-group__title a[href$="/loans.html"]').click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}loans.html`);
-    await page.locator('a[href$="calculators/emi/"]').first().click();
+    await page.locator('a[href$="calculators/emi/"]:visible').first().click(); // the phone drawer also lists the tool, hidden while closed
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}calculators/emi/`);
   });
 
   test("the three destinations have different jobs: All Tools (platform), Calculator Categories (the section) and All Calculators (the flat list)", async ({ page, go }) => {
     await go("tools.html");
-    await expect(page.locator(".directory-section__label")).toHaveText(["Section", "Section", "Section", "Section", "Section", "Section"]);
-    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, /^13 tools$/, "12 tools", /^2 tools$/, /^4 tools$/, "8 tools"]);
+    await expect(page.locator(".directory-section__label")).toHaveText(["Section", "Section", "Section", "Section", "Section", "Section", "Section"]);
+    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, /^13 tools$/, "12 tools", /^3 tools$/, /^4 tools$/, "3 tools", /^6 tools$/]);
     await go("categories.html");
     await expect(page.locator("h1")).toHaveText("Calculator Categories");
     await expect(page.locator(".categories-search__content p")).toHaveText("Search calculators"); // this search is scoped to calculators, and says so
@@ -745,35 +764,44 @@ test.describe("home page rows on a phone", () => {
 });
 
 test.describe("header and All Tools section index (Design System 2.0, GL-01 and GL-04)", () => {
-  test("the header is 56px on a phone and not sticky, and 64px and sticky from 960px", async ({ page, go }) => {
+  // GL-01 as updated 2026-11-09 (5fd2d87): below 960 px the header is sticky but slides away while scrolling down (0.2 s), so the
+  // position is polled; header-scroll.spec.js covers the return on scroll up
+  test("the header is 56px on a phone and slides away while scrolling down, and 64px and sticky from 960px", async ({ page, go }) => {
     for (const [width, height, sticky] of [[390, 56, false], [1280, 64, true]]) {
       await page.setViewportSize({ width, height: 800 });
       await go("tools.html");
       const bar = page.locator(".site-header");
       expect(Math.round((await bar.boundingBox()).height), `${width}px header height`).toBe(height);
       await page.evaluate(() => window.scrollTo(0, 900));
-      const top = Math.round((await bar.boundingBox()).y);
-      if (sticky) expect(top, "stays at the top while scrolling").toBe(0);
-      else expect(top, "scrolls away on a phone").toBeLessThan(0);
+      if (sticky) expect(Math.round((await bar.boundingBox()).y), "stays at the top while scrolling").toBe(0);
+      else await expect.poll(async () => Math.round((await bar.boundingBox()).y), { message: "slides away on a phone" }).toBeLessThan(0);
     }
   });
 
-  test("a section link in the All Tools rail moves focus to that section's heading", async ({ page, go }) => {
+  test("All Tools uses the shared ecosystem sidebar: a group per section with its overview and tools, ordinary navigation", async ({ page, go }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
     await go("tools.html");
-    const link = page.locator("a.directory-rail__link", { hasText: "Time Tools" }).first();
-    await link.focus();
-    await page.keyboard.press("Enter");
-    await expect(page.locator("#directory-time-tools-heading")).toBeFocused();
+    const nav = page.locator('nav.section-switcher[data-workspace="off"]');
+    await expect(nav).toBeVisible();
+    const toggles = nav.locator(".section-switcher__toggle");
+    await expect(toggles).toHaveCount(7);
+    await expect(toggles.first()).toContainText("Calculators");
+    await expect(toggles.first().locator(".section-switcher__group-count")).toHaveText("30");
+    await nav.locator(".section-switcher__toggle", { hasText: "Time Tools" }).click();
+    const overview = nav.getByRole("link", { name: "Time Tools overview" });
+    await expect(overview).toBeVisible();
+    await overview.click();
+    await expect(page).toHaveURL(/time-tools\.html$/);
+    await expect(page.locator("h1")).toHaveText(/Time Tools/);
   });
 
-  test("a search with no match offers the six sections and a way back", async ({ page, go }) => {
+  test("a search with no match offers the seven sections and a way back", async ({ page, go }) => {
     await go("tools.html?q=zzzzqq");
     const box = page.locator("#tools-results");
     await expect(box).toContainText("No tools found");
     const links = box.locator(".directory-results__sections a");
-    await expect(links).toHaveCount(6);
-    await expect(links).toContainText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools", "Practice Labs"]);
+    await expect(links).toHaveCount(7);
+    await expect(links).toContainText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools", "Practice Labs", "AI Tools"]);
     await expect(box.getByRole("link", { name: "Clear search" })).toBeVisible();
   });
 });

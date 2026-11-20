@@ -7,7 +7,8 @@ const { SECTION_GROUPS, groupSectionTools } = await import("../../assets/js/comp
 const { matchLabels } = await import("../../assets/js/ui/section-rail.js");
 const tax = await import("../../assets/js/data/taxonomy.js");
 
-const live = (id) => tax.getToolsBySection(id).filter((t) => t.available);
+// what the sidebar lists: the live tools and the section's own pages (the AI Directory, owner 2026-11-16)
+const live = (id) => tax.getSectionListing(id);
 
 test("every published tool of a grouped section is in exactly one named group, and no group names a missing tool", () => {
   for (const [section, defs] of Object.entries(SECTION_GROUPS)) {

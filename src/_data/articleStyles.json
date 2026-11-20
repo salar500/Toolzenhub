@@ -1,6 +1,6 @@
 {
   "fonts": true,
-  "themeColor": "#fafaf9",
+  "themeColor": "#f6f4ee",
   "styles": [
     "/assets/css/base/variables.css",
     "/assets/css/base/reset.css",

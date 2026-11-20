@@ -3,7 +3,7 @@ layout: layouts/listing.njk
 permalink: "/categories.html"
 title: "Calculator Categories | ToolZen Hub"
 description: "Browse ToolZen Hub calculators by category: loans, investment, tax, business and math."
-themeColor: "#fafaf9"
+themeColor: "#f6f4ee"
 bodyClass: "categories-page-body"
 headerTag: div
 footerTag: div
@@ -23,6 +23,7 @@ styles:
   - "/assets/css/components/footer.css"
   - "/assets/css/themes/light.css"
   - "/assets/css/pages/categories.css"
+  - "/assets/css/components/section-switcher.css"
   - "/assets/css/components/search-field.css"
 scripts:
   - "/assets/js/app.js"
@@ -36,17 +37,23 @@ clientRendered: true
 
         <section class="categories-page">
 
-            <div class="container">
+            <div class="container container--workspace">
 
 
                 <!-- =================================================
                      BREADCRUMB
                 ================================================== -->
 
+                <!-- rendered here, not by script: a breadcrumb added after first paint pushed the page down (CLS 0.31) -->
                 <div
                     id="categories-breadcrumb"
                     class="categories-breadcrumb"
-                ></div>
+                ><div class="calculator-breadcrumb"><a href="{{ '/' | url }}">Home</a> <span>›</span> <a href="{{ '/tools.html' | url }}">All Tools</a> <span>›</span> <strong>Calculators</strong></div></div>
+
+
+                <div class="ecosystem-layout" data-section-page>
+                {% sectionNav "calculators" %}
+                <div class="ecosystem-main">
 
 
                 <!-- =================================================
@@ -160,6 +167,9 @@ clientRendered: true
                 ================================================== -->
 
                 <div id="categories-sections"></div>
+
+                </div>
+                </div>
 
             </div>
 

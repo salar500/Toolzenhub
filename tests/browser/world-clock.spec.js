@@ -526,6 +526,9 @@ test.describe("World Clock: the Explore directory", () => {
       expect(box.x + box.width, `${item} stays inside the line`).toBeLessThanOrEqual(line.x + line.width + 1);
     }
     await expectNoHorizontalOverflow(page);
+    // a long search must not widen the Explore column: "Reset all" stays on a 320 px screen (it was at x 359 before the minmax(0, 1fr) column)
+    const reset = await resetAll(page).boundingBox();
+    expect(reset.x + reset.width, "Reset all is on screen").toBeLessThanOrEqual(320);
     await resetAll(page).click();
     await expect(page.locator(".wc-x-active")).toBeHidden();
     await type(page, "a very long search text that goes on and on");
@@ -1397,10 +1400,10 @@ test.describe("World Clock: the address, the hand-off and privacy", () => {
       const [hi, lo] = [lum(fg), lum(bg === "rgba(0, 0, 0, 0)" ? "rgb(255, 255, 255)" : bg)].sort((x, y) => y - x);
       return { fg, ratio: (hi + 0.05) / (lo + 0.05) };
     });
-    expect(result.fg).toBe("rgb(28, 25, 23)"); // the action ink
+    expect(result.fg).toBe("rgb(32, 44, 69)"); // the action ink
     expect(result.ratio).toBeGreaterThanOrEqual(4.5);
     // the rest of the page's links keep the shared theme colour
-    expect(await page.locator(".calculator-info a").first().evaluate((a) => getComputedStyle(a).color)).toBe("rgb(67, 56, 202)"); // the accent
+    expect(await page.locator(".calculator-info a").first().evaluate((a) => getComputedStyle(a).color)).toBe("rgb(118, 86, 201)"); // the accent
   });
 });
 
@@ -1475,10 +1478,10 @@ test.describe("World Clock: time, timers and the site", () => {
     await expect(time.locator(".directory-section__count")).toHaveText("13 tools");
     for (const q of ["world clock", "city clocks", "multiple clocks"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
-      await expect(page.locator("main a", { hasText: "World Clock" }).first(), q).toBeVisible();
+      await expect(page.locator("#tools-results a", { hasText: "World Clock" }).first(), q).toBeVisible();
     }
     await go("tools.html?q=time%20zone%20converter");
-    await expect(page.locator("main a", { hasText: "Time Zone Converter" }).first()).toBeVisible();
+    await expect(page.locator("#tools-results a", { hasText: "Time Zone Converter" }).first()).toBeVisible();
   });
 });
 

@@ -93,7 +93,7 @@
     border: 1px solid var(--line-control);
     border-radius: 8px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: var(--color-ink);
 
@@ -108,6 +108,21 @@
 }
 
 
+/* A textarea shares the field look but not the one-line height: three lines, so an example or a pasted line is not cut off */
+textarea.calculator-form__input {
+
+    height: auto;
+    min-height: 92px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    line-height: 1.45;
+
+    resize: vertical;
+}
+
+
 /* =========================================================
    INPUT FOCUS
 ========================================================= */
@@ -118,7 +133,7 @@
     border-color: var(--color-brand-green);
 
     box-shadow:
-        0 0 0 3px rgba(67, 56, 202, .10);
+        0 0 0 3px rgba(118, 86, 201, .10);
 }
 
 
@@ -205,7 +220,7 @@
 
     color: var(--color-ink-muted);
 
-    font-size: 12px;
+    font-size: var(--font-xs);
 
     line-height: 1.5;
 
@@ -224,7 +239,7 @@
 
     color: var(--state-error);
 
-    font-size: 12px;
+    font-size: var(--font-xs);
 
     line-height: 1.5;
 
@@ -352,7 +367,7 @@
     appearance: none;
     -webkit-appearance: none;
 
-    border: 2px solid #ffffff;
+    border: 2px solid var(--surface-card);
 
     border-radius: 50%;
 
@@ -381,7 +396,7 @@
     width: 18px;
     height: 18px;
 
-    border: 2px solid #ffffff;
+    border: 2px solid var(--surface-card);
 
     border-radius: 50%;
 
@@ -409,7 +424,7 @@
 
     color: var(--ink-subtle);
 
-    font-size: 12px;
+    font-size: var(--font-xs);
 
 }
 
@@ -449,7 +464,8 @@
 
         height: 44px;
 
-        font-size: 13px;
+        /* 16px: below this iOS Safari zooms the page when a field is focused */
+        font-size: 16px;
 
     }
 
@@ -478,13 +494,13 @@
 
     .calculator-form__label {
 
-        font-size: 12px;
+        font-size: var(--font-xs);
 
     }
 
     .calculator-form__help {
 
-        font-size: 12px;
+        font-size: var(--font-xs);
 
     }
 
@@ -524,7 +540,7 @@
 }
 
 .calculator-form__slider:focus-visible {
-    outline: 3px solid rgba(67, 56, 202, .35);
+    outline: 3px solid rgba(118, 86, 201, .35);
     outline-offset: 3px;
     border-radius: 6px;
 }
@@ -536,8 +552,8 @@
         to right,
         var(--color-brand-green) 0%,
         var(--color-brand-green) var(--slider-progress),
-        var(--color-slate-200, #e2e8f0) var(--slider-progress),
-        var(--color-slate-200, #e2e8f0) 100%
+        var(--color-slate-200, var(--line)) var(--slider-progress),
+        var(--color-slate-200, var(--line)) 100%
     );
 }
 
@@ -549,7 +565,7 @@
     appearance: none;
     -webkit-appearance: none;
 
-    border: 2px solid #ffffff;
+    border: 2px solid var(--surface-card);
     border-radius: 50%;
     background: var(--color-brand-green);
     box-shadow: 0 2px 6px rgba(15, 23, 42, .22);
@@ -558,7 +574,7 @@
 .calculator-form__slider::-moz-range-track {
     height: 6px;
     border-radius: 999px;
-    background: var(--color-slate-200, #e2e8f0);
+    background: var(--color-slate-200, var(--line));
 }
 
 .calculator-form__slider::-moz-range-progress {
@@ -571,7 +587,7 @@
     width: 18px;
     height: 18px;
 
-    border: 2px solid #ffffff;
+    border: 2px solid var(--surface-card);
     border-radius: 50%;
     background: var(--color-brand-green);
     box-shadow: 0 2px 6px rgba(15, 23, 42, .22);

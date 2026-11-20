@@ -402,7 +402,16 @@ describe("the real repository (read-only)", () => {
   test("check mode either passes or refuses only because of uncommitted export inputs; it never writes and never blocks on drafts", async () => {
     const before = execFileSync("git", ["status", "--porcelain=v1", "-uall"], { cwd: REPO_ROOT, encoding: "utf8" });
     const existed = fs.existsSync(path.join(REPO_ROOT, "growth-export"));
-    const r = await runExport({ root: REPO_ROOT, mode: "check", nowMs: Date.now() });
+    // The export is only allowed from main (the default expectedBranch). On any other branch that guard must refuse,
+    // and nothing else; the export inputs are then checked against the branch actually checked out.
+    const branch = execFileSync("git", ["rev-parse", "--abbrev-ref", "HEAD"], { cwd: REPO_ROOT, encoding: "utf8" }).trim();
+    if (branch !== "main") {
+      const guarded = await runExport({ root: REPO_ROOT, mode: "check", nowMs: Date.now() });
+      assert.equal(guarded.ok, false);
+      assert.equal(guarded.wrote, false);
+      assert.deepEqual(guarded.errors.map((e) => e.code), ["BRANCH_UNEXPECTED"], "off main, only the branch guard refuses");
+    }
+    const r = await runExport({ root: REPO_ROOT, mode: "check", nowMs: Date.now(), expectedBranch: branch });
     assert.equal(r.wrote, false);
     assert.equal(fs.existsSync(path.join(REPO_ROOT, "growth-export")), existed, "check mode creates nothing");
     assert.equal(execFileSync("git", ["status", "--porcelain=v1", "-uall"], { cwd: REPO_ROOT, encoding: "utf8" }), before);

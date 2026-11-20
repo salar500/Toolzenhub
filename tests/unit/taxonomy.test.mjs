@@ -11,11 +11,12 @@ import { getComingSoonTool } from "../helpers/coming-soon.mjs";
 globalThis.window = { location: { hostname: process.env.TZ_HOST || "salar500.github.io", pathname: "/" } };
 const ROOT = process.env.TZ_HOST ? "/" : "/Toolzenhub/";
 
-let cats, tax, calcs, articles, registry, crumb;
+let cats, tax, calcs, articles, registry, crumb, tools;
 before(async () => {
   cats = await import("../../assets/js/data/categories.js");
   tax = await import("../../assets/js/data/taxonomy.js");
   calcs = await import("../../assets/js/data/calculators.js");
+  tools = await import("../../assets/js/data/tools.js");
   articles = await import("../../assets/js/data/articles.js");
   registry = await import("../../assets/js/calculator-registry.js");
   crumb = await import("../../assets/js/components/breadcrumb.js");
@@ -26,21 +27,21 @@ const hrefs = (html) => [...html.matchAll(/href="([^"]*)"/g)].map((m) => m[1]);
 const labels = (html) => [...html.matchAll(/<(?:a|strong)[^>]*>\s*([^<]*?)\s*<\/(?:a|strong)>/g)].map((m) => m[1]);
 
 describe("current hierarchy data", () => {
-  test("six sections: Calculators (landing on the categories page), Time Tools, Developer Tools, Image Tools, PDF Tools and Practice Labs (no categories; Practice Labs lands on its own hub)", () => {
-    assert.deepEqual(cats.sections.map((s) => [s.id, s.title, s.landing, s.pathPrefix]), [["calculators", "Calculators", "calculatorCategories", "calculators"], ["time-tools", "Time Tools", "timeTools", "tools"], ["developer-tools", "Developer Tools", "developerTools", "tools"], ["image-tools", "Image Tools", "imageTools", "tools"], ["pdf-tools", "PDF Tools", "pdfTools", "tools"], ["practice-labs", "Practice Labs", "practiceLabs", "tools"]]);
+  test("seven sections: Calculators (landing on the categories page), Time Tools, Developer Tools, Image Tools, PDF Tools, Practice Labs (lands on its own hub) and AI Tools (no categories)", () => {
+    assert.deepEqual(cats.sections.map((s) => [s.id, s.title, s.landing, s.pathPrefix]), [["calculators", "Calculators", "calculatorCategories", "calculators"], ["time-tools", "Time Tools", "timeTools", "tools"], ["developer-tools", "Developer Tools", "developerTools", "tools"], ["image-tools", "Image Tools", "imageTools", "tools"], ["pdf-tools", "PDF Tools", "pdfTools", "tools"], ["practice-labs", "Practice Labs", "practiceLabs", "tools"], ["ai-tools", "AI Tools", "aiTools", "tools"]]);
     assert.equal(cats.categories.filter((c) => c.sectionId === "time-tools").length, 0);
     assert.equal(tax.getSectionUrl("Calculators"), `${ROOT}categories.html`);
     assert.equal(tax.getSectionUrl("calculators"), `${ROOT}categories.html`);
     assert.equal(tax.getSectionUrl("Articles"), null);
   });
 
-  test("the eight existing categories, in order, with their titles unchanged", () => {
-    assert.deepEqual(cats.categories.map((c) => c.id), CATEGORY_IDS);
-    assert.deepEqual(cats.categories.map((c) => c.title), ["Loans", "Investment", "Tax", "Health", "Business", "Math", "Converter", "More"]);
+  test("the eight calculator categories, in order, with their titles unchanged, then the AI category (2026-11-12)", () => {
+    assert.deepEqual(cats.categories.map((c) => c.id), [...CATEGORY_IDS, "ai"]);
+    assert.deepEqual(cats.categories.map((c) => c.title), ["Loans", "Investment", "Tax", "Health", "Business", "Math", "Converter", "More", "AI"]);
   });
 
   test("Loans, Investment, Tax, Health, Business, Math and Converter have a landing page; More links to its anchor on the categories page", () => {
-    assert.deepEqual(cats.categories.filter((c) => c.landing).map((c) => c.id), ["loans", "investment", "tax", "health", "business", "math", "converter"]);
+    assert.deepEqual(cats.categories.filter((c) => c.landing).map((c) => c.id), ["loans", "investment", "tax", "health", "business", "math", "converter", "ai"]); // AI lands on the AI Tools section page
     assert.equal(tax.getCategoryLandingUrl("loans"), `${ROOT}loans.html`);
     assert.equal(tax.getCategoryUrl("loans"), `${ROOT}loans.html`);
     for (const id of ["investment", "tax", "health", "business", "math", "converter"]) {
@@ -110,7 +111,7 @@ describe("Investment is a category inside Calculators (Tool Pack 7 pins SIP and 
   });
 
   test("Investment is a category of the Calculators section, not a section of its own", () => {
-    assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools", "pdf-tools", "practice-labs"]); // a category belongs to Calculators; the other sections have none
+    assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools", "pdf-tools", "practice-labs", "ai-tools"]); // a category belongs to Calculators; the other sections have none
     assert.equal(cats.categories.find((c) => c.id === "investment").sectionId, "calculators");
     assert.equal(cats.categories.find((c) => c.id === "investment").title, "Investment");
     assert.deepEqual(tax.getToolsByCategory("investment").map((t) => t.id), ["sip", "ppf", "fd", "cagr", "swp", "xirr", "risk-reward"]);
@@ -151,7 +152,7 @@ describe("Tax is a category inside Calculators (Tool Pack 8 pins GST and Income 
   });
 
   test("Tax is a category of the Calculators section, not a section of its own; GST and the Old vs New Tax Regime Calculator are its live tools", () => {
-    assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools", "pdf-tools", "practice-labs"]); // a category belongs to Calculators; the other sections have none
+    assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools", "pdf-tools", "practice-labs", "ai-tools"]); // a category belongs to Calculators; the other sections have none
     assert.equal(cats.categories.find((c) => c.id === "tax").sectionId, "calculators");
     assert.deepEqual(tax.getToolsByCategory("tax").map((t) => t.id), ["gst", "income-tax", "gratuity", "salary-in-hand"]);
     assert.deepEqual(tax.getToolsByCategory("tax").filter((t) => t.available).map((t) => t.id), ["gst", "income-tax", "gratuity", "salary-in-hand"]);
@@ -186,12 +187,12 @@ describe("referential integrity", () => {
     assert.equal(new Set(ids).size, ids.length);
   });
 
-  test("article categories are major categories, with the same id and name", () => {
-    assert.deepEqual(articles.articleCategories.map((c) => c.slug), ["loans", "investment", "tax", "business", "health", "math", "converter"]);
-    for (const c of articles.articleCategories) assert.equal(tax.getCategory(c.slug).title, c.name, c.slug);
+  test("article categories are major categories, with the same id and name; AI is the one article category of its own", () => {
+    assert.deepEqual(articles.articleCategories.map((c) => c.slug), ["loans", "investment", "tax", "business", "health", "math", "converter", "ai"]); // AI (Tool Pack 56): an article category with no calculator category behind it
+    for (const c of articles.articleCategories) assert.equal(c.slug === "ai" ? "AI" : tax.getCategory(c.slug).title, c.name, c.slug);
     for (const a of articles.articles) {
-      assert.ok(tax.getCategory(a.category), a.key);
-      for (const id of a.tools || []) assert.ok(calcs.getCalculatorById(id), `${a.key} -> ${id}`);
+      assert.ok(a.category === "ai" || tax.getCategory(a.category), a.key);
+      for (const id of a.tools || []) assert.ok(calcs.getCalculatorById(id) || tools.getToolById(id)?.available, `${a.key} -> ${id}`); // an AI guide's tool is a section tool
     }
   });
 
@@ -278,7 +279,7 @@ describe("Math is a category inside Calculators (Tool Pack 10 pins Percentage, t
     assert.equal(tax.getSectionForTool(tool("percentage")).id, "calculators");
     assert.equal(tax.getCategoryForTool(tool("percentage")).id, "math");
     assert.equal(cats.categories.find((c) => c.id === "math").sectionId, "calculators");
-    assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools", "pdf-tools", "practice-labs"]); // a category belongs to Calculators; the other sections have none // Math is not a section of its own
+    assert.deepEqual(cats.sections.map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools", "pdf-tools", "practice-labs", "ai-tools"]); // a category belongs to Calculators; the other sections have none // Math is not a section of its own
     // the shared breadcrumb prints the category id (a deferred display issue); Home is added by the renderer
     assert.deepEqual(crumb.toolBreadcrumbItems(registry.calculatorMetadata.percentage).map((i) => i.label), ["Calculators", "Math", "Percentage Calculator"]);
     assert.deepEqual(registry.calculatorMetadata.percentage, { section: "Calculators", category: "math", title: "Percentage Calculator" });

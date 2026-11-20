@@ -44,7 +44,10 @@ async function audit(page, label, width) {
 }
 
 async function shot(page, name, width) {
-  await page.screenshot({ path: path.join(OUT, `${name}-${width}.png`), fullPage: true });
+  // review images only (nothing is asserted on them). A full-page capture would make Chromium drop the touch emulation (the pointer
+  // turns "fine" and the viewport is briefly 1 px wide), so at 1180 px the page switched from the drawer to the sidebar layout in the
+  // middle of the test and later clicks landed on the sidebar. A viewport capture keeps the emulated device as it is.
+  await page.screenshot({ path: path.join(OUT, `${name}-${width}.png`) });
 }
 
 for (const width of WIDTHS) {

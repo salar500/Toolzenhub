@@ -42,7 +42,7 @@ test.describe("Developer Tools related-tools pilot", () => {
   for (const [id, expected] of Object.entries(RELATED)) {
     test(`${slug(id)}: lists exactly its curated Developer Tools, in order, with a View all link`, async ({ page, go }) => {
       await go(`tools/${slug(id)}/`);
-      const section = page.locator(".related-section");
+      const section = page.locator(".related-section:not(.knowledge-links)"); // the Learn and check block (data/knowledge.js) is a separate section
       await expect(section).toHaveCount(1);
       await expect(section.locator("h2")).toHaveText("Related Developer Tools");
       const hrefs = await section.locator(".related-calculator-card").evaluateAll((as) => as.map((a) => a.getAttribute("href")));
@@ -63,7 +63,7 @@ test.describe("Developer Tools related-tools pilot", () => {
   for (const [id, expected] of Object.entries(LAB_RELATED)) {
     test(`${id}: Related Practice Labs lists exactly its curated labs, in order, with a View all link to the hub`, async ({ page, go }) => {
       await go(`tools/${id}/`);
-      const section = page.locator(".related-section");
+      const section = page.locator(".related-section:not(.knowledge-links)"); // the Learn and check block (data/knowledge.js) is a separate section
       await expect(section).toHaveCount(1);
       await expect(section.locator("h2")).toHaveText("Related Practice Labs");
       const hrefs = await section.locator(".related-calculator-card").evaluateAll((as) => as.map((a) => a.getAttribute("href")));
@@ -75,7 +75,7 @@ test.describe("Developer Tools related-tools pilot", () => {
   test("a related link opens the other tool and the tool starts empty (nothing is passed along)", async ({ page, go }) => {
     await go("tools/json-formatter/");
     await page.locator("#jf-input").fill('{"secret":"carried?"}');
-    await page.locator(".related-section").getByRole("link", { name: /JSON Compare/ }).click();
+    await page.locator(".related-section:not(.knowledge-links)").getByRole("link", { name: /JSON Compare/ }).click();
     await expect(page.locator("h1")).toHaveText("JSON Compare");
     await expect(page).toHaveURL(/tools\/json-compare\/$/);
     expect(await page.locator("textarea").evaluateAll((els) => els.map((e) => e.value).join(""))).toBe("");

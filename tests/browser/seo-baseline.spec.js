@@ -49,7 +49,8 @@ test.describe("SEO baseline @desktop-only", () => {
   });
 
   test("record title / description / canonical / robots / OG / Twitter / JSON-LD / H1 for every page", async ({ page, go, api, siteRoot, baseURL }) => {
-    test.setTimeout(240_000);
+    // every page is visited, so the budget follows the inventory (about 130 pages when 240 s was set; 662 with the Practice Labs)
+    test.setTimeout(Math.max(240_000, (livePages.length + 1) * 1_500));
     const origin = new URL(baseURL).origin;
     const norm = (v) => (v == null ? v : v.split(origin).join("{ORIGIN}").split(siteRoot).join("{ROOT}"));
     const result = {};

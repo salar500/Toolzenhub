@@ -35,6 +35,7 @@ import {
     MAX_RESULT_WINDOWS,
     isValidZone,
     sameZone,
+    canonicalZone,
     localZone,
     listZones,
     searchZones,
@@ -305,7 +306,7 @@ ${picker("source", "From time zone", "Search, for example London", `Your time zo
                             Convert to
                         </h2>
 
-${picker("add", "Add a time zone", "Search, for example New York", "Search by the city in the zone name, such as Kolkata or New_York.")}
+${picker("add", "Add a time zone", "Search a city or country, for example Tokyo", "Search by city, country or zone name, such as Mumbai, Japan or Europe/Berlin.")}
 
                         <div
                             id="tz-quick"
@@ -813,6 +814,80 @@ export function init() {
     }
 
 
+    /* ---------- place search ----------
+       The pickers search places the way the World Clock does (owner finding 2026-11-15: only zone names were
+       searched, so "india" found America/Indiana and "japan" found nothing). Its city directory and IANA country table
+       are loaded the first time a picker is used; until they arrive, and if they fail to load, the zone names are
+       searched as before. A choice is still a zone name, so nothing after the picker changes. */
+
+    let placeEngine = null;
+    let countryData = null;
+    let placeLoad = null;
+    const placeWaiters = new Set();
+
+    function loadPlaceSearch() {
+
+        if (placeLoad) {
+            return;
+        }
+
+        placeLoad = Promise.all([import("../world-clock/clock-engine.js"), import("../world-clock/country-zones.js")])
+            .then(([engine, countries]) => {
+                placeEngine = engine;
+                countryData = countries;
+                placeWaiters.forEach((refresh) => refresh());
+            })
+            .catch(() => {
+                /* the zone-name search stays */
+            });
+
+    }
+
+    /* [{ zone, text, detail }] for a query, and a note when the query cannot be searched (an abbreviation such as EST) */
+    function pickerOptions(query) {
+
+        if (!placeEngine) {
+            return { options: searchZones(query, zones, MAX_PICKER_OPTIONS).map((zone) => ({ zone, text: zone, detail: "" })), note: "" };
+        }
+
+        const found = placeEngine.runSearch(query, { cap: MAX_PICKER_OPTIONS * 3, countryData, zones });
+
+        if (found.mode === "abbreviation") {
+            return { options: [], note: found.note };
+        }
+
+        const options = [];
+        const seen = new Set();
+
+        for (const place of found.places) {
+
+            if (!isValidZone(place.zone)) {
+                continue;
+            }
+
+            const country = place.kind === "city" ? place.subtitle : place.country ? placeEngine.countryLabel(place.country) : "";
+            const name = place.kind === "city" ? place.title : `${place.title}${place.note ? ` (${place.note})` : ""}`;
+            const text = country ? `${name}, ${country}` : name;
+            const key = `${text}|${canonicalZone(place.zone)}`;
+
+            if (seen.has(key)) {
+                continue;
+            }
+
+            seen.add(key);
+            options.push({ zone: place.zone, text, detail: place.zone });
+
+            if (options.length === MAX_PICKER_OPTIONS) {
+                break;
+            }
+
+        }
+
+        return { options, note: "" };
+
+    }
+
+
     /* ---------- the zone pickers (an ARIA combobox) ---------- */
 
     function wirePicker(root, { onChoose, current, clearOnChoose }) {
@@ -855,13 +930,15 @@ export function init() {
 
         function open(query) {
 
-            options = searchZones(query, zones, MAX_PICKER_OPTIONS);
+            const found = pickerOptions(query);
+
+            options = found.options;
 
             list.replaceChildren();
 
             if (options.length === 0) {
 
-                const none = element("li", "tz-list__none", "No time zone matches that.");
+                const none = element("li", "tz-list__none", found.note || "No city, country or time zone matches that. Try a city name, such as Mumbai or Chicago.");
 
                 none.setAttribute("role", "presentation");
 
@@ -869,9 +946,15 @@ export function init() {
 
             }
 
-            options.forEach((zone, index) => {
+            options.forEach((option, index) => {
 
-                const item = element("li", "tz-list__option", zone);
+                const item = element("li", "tz-list__option");
+
+                item.append(element("span", "tz-list__place", option.text));
+
+                if (option.detail && option.detail !== option.text) {
+                    item.append(element("span", "tz-list__zone", option.detail));
+                }
 
                 item.id = optionId(index);
                 item.setAttribute("role", "option");
@@ -880,7 +963,7 @@ export function init() {
                 /* mousedown so the box keeps focus until the choice is made */
                 item.addEventListener("mousedown", (event) => {
                     event.preventDefault();
-                    choose(zone);
+                    choose(option.zone);
                 });
 
                 list.append(item);
@@ -946,7 +1029,7 @@ export function init() {
 
                     event.preventDefault();
 
-                    choose(options[active]);
+                    choose(options[active].zone);
 
                 } else if (isValidZone(input.value.trim())) {
 
@@ -973,6 +1056,15 @@ export function init() {
             input.addEventListener("focus", () => input.select());
 
         }
+
+        /* the place search loads on first use; an open list is redrawn with it when it arrives */
+        input.addEventListener("focus", loadPlaceSearch);
+
+        placeWaiters.add(() => {
+            if (!list.hidden && document.activeElement === input && input.value.trim() !== "") {
+                open(input.value);
+            }
+        });
 
         input.addEventListener("blur", () => {
 
@@ -1015,11 +1107,15 @@ export function init() {
                 continue;
             }
 
-            const button = element("button", "tz-chip", zone);
+            /* the city reads better than the zone path; the accessible name keeps the zone */
+            const city = zone.includes("/") ? zone.slice(zone.lastIndexOf("/") + 1).replace(/_/g, " ") : zone;
+
+            const button = element("button", "tz-chip", city);
 
             button.type = "button";
 
-            button.setAttribute("aria-label", `Add ${zone}`);
+            button.setAttribute("aria-label", city === zone ? `Add ${zone}` : `Add ${city} (${zone})`);
+            button.title = zone;
 
             button.addEventListener("click", () => addTarget(zone));
 

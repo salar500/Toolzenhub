@@ -51,7 +51,7 @@ test.describe("Unix Timestamp Converter", () => {
     await expect(page.locator("#ts-now-zone")).toContainText("UTC+05:30");
     await expect(aOut(page)).toBeHidden();
     await expect(page.locator("#ts-board")).toBeHidden();
-    await expect(page.locator(".related-section")).toHaveCount(1); // the Developer Tools related-tools pilot (developer-tools-related.spec.js checks the links)
+    await expect(page.locator(".related-section:not(.knowledge-links)")).toHaveCount(1); // the Developer Tools related-tools pilot (developer-tools-related.spec.js checks the links)
     await expect(page.locator("main")).toContainText("Your timestamps and dates are processed in your browser");
     await expect(page.locator("main")).not.toContainText(/\bbest\b|ultimate|most accurate|AI-powered|smart/i);
     expectClean(watch);
@@ -496,14 +496,14 @@ test.describe("Developer Tools in the site", () => {
     await go("developer-tools.html");
     await expect(page.locator("h1")).toHaveText("Developer Tools");
     await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(12);
-    for (const slug of ["json-formatter", "unix-timestamp-converter"]) await expect(page.locator(`a[href$="tools/${slug}/"]`)).toHaveCount(1);
+    for (const slug of ["json-formatter", "unix-timestamp-converter"]) await expect(page.locator(`a[href$="tools/${slug}/"]:not(.section-switcher a)`)).toHaveCount(1); // the page's own link; the workspace sidebar lists it too
     await expect(page.locator("main")).not.toContainText(/coming soon|regex/i); // UUID Generator is a live tool now (Tool Pack 39); Base64 is a live tool now (Tool Pack 27)
     expect(await page.locator('link[rel="canonical"]').getAttribute("href")).toBe("https://toolzenhub.in/developer-tools.html");
   });
 
-  test("All Tools: Developer Tools has 6 tools; Time Tools is unchanged and holds no developer tool", async ({ page, go }) => {
+  test("All Tools: Developer Tools has 12 tools; Time Tools is unchanged and holds no developer tool", async ({ page, go }) => {
     await go("tools.html");
-    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools", "Practice Labs"]);
+    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools", "Practice Labs", "AI Tools"]);
     const dev = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Developer Tools")') });
     await expect(dev.locator(".directory-section__count")).toHaveText("12 tools");
     await expect(dev.locator('a[href$="tools/unix-timestamp-converter/"]')).toHaveCount(1);
@@ -511,7 +511,7 @@ test.describe("Developer Tools in the site", () => {
     await expect(time.locator(".directory-section__count")).toHaveText("13 tools");
     await expect(time.locator('a[href$="tools/unix-timestamp-converter/"]')).toHaveCount(0);
     await go("time-tools.html");
-    await expect(page.locator("main a[href*='tools/']")).toHaveCount(13);
+    await expect(page.locator("main a[href*='tools/']:not(.section-switcher a)")).toHaveCount(13); // the page's cards; the workspace sidebar lists the same 13
     await expect(page.locator("main")).not.toContainText(/timestamp|epoch|json/i);
   });
 
@@ -522,7 +522,7 @@ test.describe("Developer Tools in the site", () => {
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html`);
     await page.locator(".directory-section__title a", { hasText: "Developer Tools" }).click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}developer-tools.html`);
-    await page.locator('a[href$="tools/unix-timestamp-converter/"]').first().click();
+    await page.locator('a[href$="tools/unix-timestamp-converter/"]:visible').first().click(); // on a phone the closed sidebar drawer lists it first
     await expect(page.locator("h1")).toHaveText("Unix Timestamp Converter");
   });
 

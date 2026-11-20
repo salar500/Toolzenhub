@@ -21,6 +21,10 @@ import {
     currentPage
 } from "./router.js";
 
+import {
+    initSectionRail
+} from "./ui/section-rail.js";
+
 
 /* =========================================================
    Central Routes
@@ -168,6 +172,8 @@ async function initializeApp() {
         initializeSearch();
 
         renderFooter();
+
+        initSectionRail();
 
         return;
 

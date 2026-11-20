@@ -75,7 +75,7 @@
     padding: 10px 14px;
     border: 1px solid var(--line-control);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--surface-card);
     color: var(--color-ink);
     font-family:
         ui-monospace, SFMono-Regular, Menlo, Consolas,
@@ -316,7 +316,7 @@
     padding: 10px 14px;
     border: 1px solid var(--line-control);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--surface-card);
     cursor: pointer;
 }
 
@@ -357,7 +357,7 @@
     padding: 0 14px;
     border: 1px solid var(--line-control);
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--surface-card);
     color: var(--color-ink);
     font-size: 16px;
 }
@@ -377,6 +377,36 @@
     color: var(--state-error);
     font-size: 14px;
     font-weight: 600;
+}
+
+/* Quick counts: one tap instead of typing a number */
+.ug-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.ug-chip {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px 12px;
+    border: 1px solid var(--line-control);
+    border-radius: 10px;
+    background: var(--surface-card);
+    color: var(--color-ink);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ug-chip:hover {
+    background: var(--surface-sunken);
+}
+
+.ug-chip:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
 }
 
 .ug-item__text {

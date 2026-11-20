@@ -27,7 +27,7 @@
     border: 1px solid var(--line);
     border-radius: 12px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     box-shadow:
         0 4px 14px rgba(16, 24, 40, .04);
@@ -105,7 +105,7 @@
 
     color: var(--color-ink-muted);
 
-    font-size: 12px;
+    font-size: var(--font-xs);
     font-weight: 600;
 
     line-height: 1.4;
@@ -181,7 +181,7 @@
 
     color: var(--color-ink-muted);
 
-    font-size: 12px;
+    font-size: var(--font-xs);
 
     line-height: 1.5;
 }
@@ -203,7 +203,7 @@
 
     color: var(--ink-muted);
 
-    font-size: 12px;
+    font-size: var(--font-xs);
 
     line-height: 1.6;
 }
@@ -235,13 +235,13 @@
 
     border-radius: 7px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: var(--color-gray-700);
 
     font: inherit;
 
-    font-size: 12px;
+    font-size: var(--font-xs);
     font-weight: 700;
 
     cursor: pointer;
@@ -272,7 +272,7 @@
 
     color: var(--state-error);
 
-    font-size: 12px;
+    font-size: var(--font-xs);
 
     line-height: 1.5;
 }
@@ -289,7 +289,7 @@
     border: 1px dashed var(--line);
     border-radius: 10px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: var(--color-ink-muted);
 
@@ -316,10 +316,10 @@
     /* Design System 2.0: a soft edge shows where more columns are hidden. The white
        layers scroll with the content and cover the shadow once an edge is reached. */
     background:
-        linear-gradient(to right, var(--surface-card) 30%, rgba(255, 255, 255, 0)) left center / 32px 100% no-repeat local,
-        linear-gradient(to left, var(--surface-card) 30%, rgba(255, 255, 255, 0)) right center / 32px 100% no-repeat local,
-        radial-gradient(farthest-side at 0 50%, rgba(28, 25, 23, 0.22), rgba(28, 25, 23, 0)) left center / 12px 100% no-repeat scroll,
-        radial-gradient(farthest-side at 100% 50%, rgba(28, 25, 23, 0.22), rgba(28, 25, 23, 0)) right center / 12px 100% no-repeat scroll;
+        linear-gradient(to right, var(--surface-card) 30%, transparent) left center / 32px 100% no-repeat local,
+        linear-gradient(to left, var(--surface-card) 30%, transparent) right center / 32px 100% no-repeat local,
+        radial-gradient(farthest-side at 0 50%, rgba(32, 44, 69, 0.22), rgba(32, 44, 69, 0)) left center / 12px 100% no-repeat scroll,
+        radial-gradient(farthest-side at 100% 50%, rgba(32, 44, 69, 0.22), rgba(32, 44, 69, 0)) right center / 12px 100% no-repeat scroll;
 }
 
 .calculator-results__table-wrapper:focus-visible {
@@ -479,4 +479,153 @@
     .jump-to-result {
         display: none;
     }
+}
+
+
+/* =========================================================
+   ONE-SCREEN DESKTOP WORKSPACE (owner finding, 2026-11-09)
+
+   On a wide screen the result sits beside the inputs instead of below them, so a calculator can be used without
+   scrolling between the form and its answer. The page is already a grid (sidebar | content, section-switcher.css);
+   here the content column splits into the form and the result. Everything else (intro, explanations, FAQs) spans
+   both below. Narrower screens keep the single column.
+========================================================= */
+
+@media (min-width: 1200px) and (pointer: fine), (min-width: 1200px) and (min-device-width: 1200px) {
+
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) {
+
+        grid-template-columns: minmax(220px, 260px) minmax(0, 1.2fr) minmax(320px, 1fr);
+
+    }
+
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > :where(:not(.section-switcher, .breadcrumb, .calculator-breadcrumb)) {
+
+        grid-column: 2 / -1;
+
+    }
+
+    /* The form and the result start on one line (owner finding, 2026-11-15). The section's heading and notes span both
+       columns, and the section box itself steps aside (display: contents; it has no accessible name, so it is not a
+       landmark), which puts the form card and the result card side by side in the same grid row. Before this the result
+       was level with the section heading, about 140 px above the form card. */
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-section {
+
+        display: contents;
+
+    }
+
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-section > * {
+
+        grid-column: 2 / -1;
+
+    }
+
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-section > :first-child {
+
+        margin-top: 28px;
+
+    }
+
+    /* two rows: a visible "out of date" note (-stale) and the result then stack beside the form; hidden, the second row is empty */
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-section > .calculator-form {
+
+        grid-column: 2;
+        grid-row: span 2;
+        align-self: start;
+
+    }
+
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-results,
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > [class*="-stale"] {
+
+        grid-column: 3;
+        align-self: start;
+        margin-top: 0;
+
+    }
+
+    /* the result is already in view: the "jump to result" link has no job here */
+    .calculator-page:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .jump-to-result {
+
+        display: none;
+
+    }
+
+    /* with the sidebar hidden, the form and the result take the whole width */
+    .calculator-page.is-rail-collapsed:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) {
+
+        grid-template-columns: minmax(0, 1.2fr) minmax(320px, 1fr);
+
+    }
+
+    .calculator-page.is-rail-collapsed:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > :where(:not(.section-switcher, .breadcrumb, .calculator-breadcrumb)) {
+
+        grid-column: 1 / -1;
+
+    }
+
+    .calculator-page.is-rail-collapsed:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-section > * {
+
+        grid-column: 1 / -1;
+
+    }
+
+    .calculator-page.is-rail-collapsed:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-section > .calculator-form {
+
+        grid-column: 1;
+
+    }
+
+    .calculator-page.is-rail-collapsed:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > .calculator-results,
+    .calculator-page.is-rail-collapsed:has(> .section-switcher):has(> .calculator-section + .calculator-results, > .calculator-section + [class*="-stale"]) > [class*="-stale"] {
+
+        grid-column: 2;
+
+    }
+
+}
+
+
+/* =========================================================
+   WIDE RESULT TABLES (calculators/common/wide-results.js)
+
+   Schedules and year-by-year tables have their own full-width section after the result. In the side-by-side layout above,
+   it spans both columns under the form and the result, so no column of a table is hidden (owner decision, 2026-11-10).
+========================================================= */
+
+.calculator-wide {
+
+    width: 100%;
+    margin-top: 24px;
+
+    box-sizing: border-box;
+
+}
+
+.calculator-wide[hidden] {
+
+    display: none;
+
+}
+
+/* the first block opened a new part of the summary card (a rule and space above it); in its own card it starts at the top */
+.calculator-wide .calculator-results__card > :first-child {
+
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+
+}
+
+@media print {
+
+    /* printed like the summary card above it: plain, no shadow */
+    .calculator-wide .calculator-results__card {
+
+        background: var(--surface-card);
+        box-shadow: none;
+
+    }
+
 }

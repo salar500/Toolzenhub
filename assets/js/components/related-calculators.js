@@ -27,6 +27,10 @@ import {
     getSectionById
 } from "../data/categories.js";
 
+import {
+    getDirectSectionId
+} from "../data/taxonomy.js";
+
 
 import { iconForTool } from "../ui/icons.js";
 /* =========================================================
@@ -79,10 +83,11 @@ export function renderRelatedCalculators(
 
     /*
      * A tool in a section that has no categories (the Time Tools
-     * pilot, rulebook 4.8) is related only to tools of its own
+     * pilot, rulebook 4.8), or whose section lists its tools
+     * directly (AI Tools), is related only to tools of its own
      * section.
      */
-    if (!category) {
+    if (!category || getDirectSectionId(getToolById(currentSlug))) {
         return renderRelatedSectionTools(currentSlug);
     }
 
@@ -116,8 +121,8 @@ export function renderRelatedCalculators(
                         icon:
                             copy.icon ?? tool.icon,
                         iconKey:
-                            tool.sectionId && tool.sectionId !== "calculators"
-                                ? tool.sectionId
+                            getDirectSectionId(tool) && getDirectSectionId(tool) !== "calculators"
+                                ? getDirectSectionId(tool)
                                 : String(tool.category || "").toLowerCase(),
                         title: tool.title,
                         description:
@@ -219,7 +224,7 @@ function renderRelatedSectionTools(
         getToolById(currentSlug);
 
     const section =
-        current && getSectionById(current.sectionId);
+        current && getSectionById(getDirectSectionId(current));
 
     if (!section) {
         return "";
@@ -232,7 +237,7 @@ function renderRelatedSectionTools(
         )
             .filter(
                 tool =>
-                    tool.sectionId === current.sectionId
+                    getDirectSectionId(tool) === getDirectSectionId(current)
             );
 
     if (!related.length) {
@@ -268,7 +273,7 @@ function renderRelatedSectionTools(
                     >
 
                         <div class="related-calculator-icon" aria-hidden="true">
-                            ${iconForTool(tool.id, tool.sectionId && tool.sectionId !== "calculators" ? tool.sectionId : String(tool.category || "").toLowerCase())}
+                            ${iconForTool(tool.id, getDirectSectionId(tool) && getDirectSectionId(tool) !== "calculators" ? getDirectSectionId(tool) : String(tool.category || "").toLowerCase())}
                         </div>
 
 

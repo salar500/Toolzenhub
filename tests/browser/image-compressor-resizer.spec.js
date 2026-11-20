@@ -94,7 +94,7 @@ test.describe("Image Compressor & Resizer", () => {
     await expect(page.locator("#ic-download")).toBeHidden();
     await expect(page.locator("#ic-drop-hint")).toContainText("each up to 25.0 MB and 40 megapixels");
     await expect(page.locator("#ic-drop-hint")).toContainText("processed in your browser and are not uploaded by this tool");
-    await expect(page.locator(".related-section")).toHaveCount(0);
+    await expect(page.locator(".related-section:not(.knowledge-links)")).toHaveCount(0);
     await expect(page.locator("main")).not.toContainText(/lossless compression|no quality loss|zero quality loss|\bbest\b|AI-powered|AI optimi|guaranteed/i);
     expectClean(watch);
   });
@@ -313,6 +313,17 @@ test.describe("Image Compressor & Resizer", () => {
     expect(quality).toBeLessThanOrEqual(95);
     expect(Number(await panel(page).getAttribute("data-attempts"))).toBeLessThanOrEqual(8);
     await expect(page.locator("#ic-result")).not.toContainText(/exactly/i);
+  });
+
+  test("common file-size chips fill the target, and the result follows the chosen size", async ({ page, go }) => {
+    await open(page, go);
+    await chooseReady(page, "photo.jpg");
+    await page.getByLabel("Up to a file size").check();
+    await expect(page.locator("#ic-target-chips .ic-chip")).toHaveText(["100 KB", "200 KB", "500 KB", "1 MB"]);
+    await page.locator("#ic-target-chips .ic-chip", { hasText: "1 MB" }).click();
+    await expect(page.locator("#ic-target")).toHaveValue("1000");
+    await compress(page);
+    await expect(page.locator("#ic-target-result")).toContainText("Target: Up to 1,000 KB");
   });
 
   test("a target the image already fits is done at the highest quality in one encode", async ({ page, go }) => {
@@ -860,15 +871,15 @@ test.describe("Image Compressor & Resizer: accessibility and layout", () => {
 });
 
 test.describe("Image Tools in the site", () => {
-  test("the Image Tools page: its two real tools (counts from the catalog), no placeholders, the right title and trail", async ({ page, go, siteRoot, watch }) => {
+  test("the Image Tools page: its three real tools (counts from the catalog), no placeholders, the right title and trail", async ({ page, go, siteRoot, watch }) => {
     await go("image-tools.html");
     await expect(page.locator("h1")).toHaveText("Image Tools");
     expect(await page.title()).toBe("Image Tools | ToolZen Hub");
     expect(await page.locator('link[rel="canonical"]').getAttribute("href")).toBe("https://toolzenhub.in/image-tools.html");
     const crumbs = (await page.locator(".calculator-breadcrumb").locator("a, strong").allInnerTexts()).map((t) => t.trim());
     expect(crumbs).toEqual(["Home", "All Tools", "Image Tools"]);
-    await expect(page.locator(`a[href$="tools/image-compressor-resizer/"]`)).toHaveCount(1);
-    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(2);
+    await expect(page.locator(`a[href$="tools/image-compressor-resizer/"]:not(.section-switcher a)`)).toHaveCount(1); // the page's own link; the workspace sidebar lists it too
+    await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(3); // Tool Pack 57 added the Photo Metadata Viewer and Remover
     await expect(page.locator("main")).not.toContainText(/coming soon/i);
     await expect(page.locator("main")).toContainText("Private browser-based tools for resizing and optimizing images.");
     expectClean(watch);
@@ -877,8 +888,8 @@ test.describe("Image Tools in the site", () => {
 
   test("All Tools lists Image Tools as a fourth section (then PDF Tools), with the catalog counts", async ({ page, go }) => {
     await go("tools.html");
-    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools", "Practice Labs"]);
-    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, "13 tools", "12 tools", "2 tools", "4 tools", "8 tools"]);
+    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools", "Practice Labs", "AI Tools"]);
+    await expect(page.locator(".directory-section__count")).toHaveText([/^\d+ tools$/, "13 tools", "12 tools", "3 tools", "4 tools", "8 tools", "6 tools"]);
     const image = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Image Tools")') });
     await expect(image.locator('a[href$="tools/image-compressor-resizer/"]')).toHaveCount(1);
     for (const section of ["Calculators", "Time Tools", "Developer Tools"]) {
@@ -895,7 +906,7 @@ test.describe("Image Tools in the site", () => {
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html`);
     await page.locator(".directory-section__title a", { hasText: "Image Tools" }).click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}image-tools.html`);
-    await page.locator('a[href$="tools/image-compressor-resizer/"]').first().click();
+    await page.locator('a[href$="tools/image-compressor-resizer/"]:visible').first().click(); // on a phone the closed sidebar drawer lists it first
     await expect(page.locator("h1")).toHaveText("Image Compressor & Resizer");
   });
 

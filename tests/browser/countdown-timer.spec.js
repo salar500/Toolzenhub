@@ -44,7 +44,7 @@ test.describe("Countdown Timer", () => {
     await expect(page.locator("#ct-stage")).toBeHidden();
     await expect(page.getByRole("group", { name: "Quick presets" }).getByRole("button")).toHaveText(["1 min", "5 min", "10 min", "25 min", "30 min", "60 min"]);
     await expect(page.getByLabel("Play a reminder sound when the timer finishes")).toBeChecked();
-    await expect(page.locator(".related-section")).toHaveCount(0);
+    await expect(page.locator(".related-section:not(.knowledge-links)")).toHaveCount(0);
     expectClean(watch);
   });
 
@@ -269,10 +269,14 @@ test.describe("Countdown Timer on the real clock", () => {
 test.describe("Countdown Timer in Time Tools and search", () => {
   test("Time Tools and All Tools list it, directly under the section", async ({ page, go }) => {
     await go("time-tools.html");
-    await expect(page.locator('a[href$="tools/countdown-timer/"]')).toHaveCount(1);
-    await expect(page.locator('a[href$="tools/date-difference/"]')).toHaveCount(1);
-    await expect(page.locator('a[href$="tools/date-calculator/"]')).toHaveCount(1);
-    await expect(page.locator("main")).not.toContainText(/coming soon|timers|productivity/i);
+    // the page's own links; the workspace sidebar lists the tools too
+    await expect(page.locator('a[href$="tools/countdown-timer/"]:not(.section-switcher a)')).toHaveCount(1);
+    await expect(page.locator('a[href$="tools/date-difference/"]:not(.section-switcher a)')).toHaveCount(1);
+    await expect(page.locator('a[href$="tools/date-calculator/"]:not(.section-switcher a)')).toHaveCount(1);
+    await expect(page.locator("main")).not.toContainText(/coming soon|productivity/i);
+    // no placeholder "Timers" category in the page itself; the sidebar's "Timers and clocks" group heading is the real grouping
+    const ownText = await page.locator("main").evaluate((m) => { const c = m.cloneNode(true); c.querySelectorAll(".section-switcher").forEach((n) => n.remove()); return c.textContent; });
+    expect(ownText).not.toMatch(/timers/i);
     await go("tools.html");
     await expect(page.locator('.directory-section a[href$="tools/countdown-timer/"]')).toHaveCount(1);
   });
@@ -283,7 +287,7 @@ test.describe("Countdown Timer in Time Tools and search", () => {
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html`);
     await page.locator(".directory-section__title a", { hasText: "Time Tools" }).click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}time-tools.html`);
-    await page.locator('a[href$="tools/countdown-timer/"]').first().click();
+    await page.locator('a[href$="tools/countdown-timer/"]:visible').first().click(); // on a phone the closed sidebar drawer lists it first
     await expect(page.locator("h1")).toHaveText("Countdown Timer");
   });
 

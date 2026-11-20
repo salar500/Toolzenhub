@@ -39,7 +39,7 @@ test.describe("JSON Formatter & Validator", () => {
     await expect(btn(page, "Load an example")).toBeVisible();
     await expect(status(page)).toHaveText("Paste JSON, or load an example.");
     await expect(errorBox(page)).toBeHidden();
-    await expect(page.locator(".related-section")).toHaveCount(1); // the Developer Tools related-tools pilot (developer-tools-related.spec.js checks the links)
+    await expect(page.locator(".related-section:not(.knowledge-links)")).toHaveCount(1); // the Developer Tools related-tools pilot (developer-tools-related.spec.js checks the links)
     await expect(page.locator("main")).toContainText("Your JSON is processed in your browser");
     await expect(page.locator("main")).not.toContainText(/\bbest\b|ultimate|most accurate|AI-powered|smart/i);
     expectClean(watch);
@@ -343,7 +343,7 @@ test.describe("Developer Tools in the site", () => {
   test("the section page lists the real tools, with no future placeholders", async ({ page, go, watch, siteRoot }) => {
     await go("developer-tools.html");
     await expect(page.locator("h1")).toHaveText("Developer Tools");
-    await expect(page.locator(`a[href$="tools/json-formatter/"]`)).toHaveCount(1);
+    await expect(page.locator(`a[href$="tools/json-formatter/"]:not(.section-switcher a)`)).toHaveCount(1); // the page's own link; the workspace sidebar lists it too
     await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(12); // the published Developer Tools (the catalog)
     await expect(page.locator("main")).not.toContainText(/coming soon|regex/i); // UUID Generator is a live tool now (Tool Pack 39); Base64 is a live tool now (Tool Pack 27)
     const crumbs = (await page.locator(".calculator-breadcrumb").locator("a, strong").allInnerTexts()).map((t) => t.trim());
@@ -356,7 +356,7 @@ test.describe("Developer Tools in the site", () => {
 
   test("All Tools shows the sections; Developer Tools holds the JSON tool and the timestamp converter; Time Tools is unchanged", async ({ page, go }) => {
     await go("tools.html");
-    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools", "Practice Labs"]);
+    await expect(page.locator(".directory-section__title a")).toHaveText(["Calculators", "Time Tools", "Developer Tools", "Image Tools", "PDF Tools", "Practice Labs", "AI Tools"]);
     const dev = page.locator(".directory-section", { has: page.locator('.directory-section__title a:text-is("Developer Tools")') });
     await expect(dev.locator(".directory-section__count")).toHaveText("12 tools");
     await expect(dev.locator('a[href$="tools/json-formatter/"]')).toHaveCount(1);
@@ -365,7 +365,7 @@ test.describe("Developer Tools in the site", () => {
     await expect(time.locator('a[href$="tools/json-formatter/"]')).toHaveCount(0);
     await go("time-tools.html");
     await expect(page.locator("main")).not.toContainText(/json/i);
-    await expect(page.locator("main a[href*='tools/']")).toHaveCount(13);
+    await expect(page.locator("main a[href*='tools/']:not(.section-switcher a)")).toHaveCount(13); // the page's cards; the workspace sidebar lists the same 13
   });
 
   test("Home to the tool by clicking: Home, All Tools, Developer Tools, JSON Formatter & Validator", async ({ page, go, siteRoot }) => {
@@ -375,7 +375,7 @@ test.describe("Developer Tools in the site", () => {
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html`);
     await page.locator(".directory-section__title a", { hasText: "Developer Tools" }).click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}developer-tools.html`);
-    await page.locator('a[href$="tools/json-formatter/"]').first().click();
+    await page.locator('a[href$="tools/json-formatter/"]:visible').first().click(); // on a phone the closed sidebar drawer lists it first
     await expect(page.locator("h1")).toHaveText("JSON Formatter & Validator");
   });
 

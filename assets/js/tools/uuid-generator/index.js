@@ -115,6 +115,9 @@ ${radio("nil", "Nil", "all zeros, a placeholder", false)}
                         <label for="ug-count" class="ug-label">How many (1 to ${MAX_COUNT})</label>
                         <input id="ug-count" class="ug-number" type="text" inputmode="numeric" value="${DEFAULT_COUNT}" autocomplete="off" aria-describedby="ug-count-error">
                         <p id="ug-count-error" class="ug-error" hidden></p>
+                        <div class="ug-chips" role="group" aria-label="Quick counts">
+                            ${[1, 5, 10, 25, 100].filter((n) => n <= MAX_COUNT).map((n) => `<button type="button" class="ug-chip" data-count="${n}">${n}</button>`).join("")}
+                        </div>
                     </div>
 
                     <fieldset class="ug-options">
@@ -374,6 +377,14 @@ export function init() {
     }
 
     $("generate").addEventListener("click", run);
+
+    /* a quick count generates at once, with the version and format chosen above */
+    for (const chip of document.querySelectorAll(".ug-chip")) {
+        chip.addEventListener("click", () => {
+            count.value = chip.dataset.count;
+            run();
+        });
+    }
     copyAll.addEventListener("click", () => copy(current.join("\n"), "All UUIDs"));
     $("reset").addEventListener("click", reset);
 

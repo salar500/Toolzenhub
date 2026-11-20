@@ -20,7 +20,7 @@ const REGIONS = [
   ["investment-page", "investment.html", ".category-page-card", ".directory-page"],
   ["articles-listing", "articles.html", "#articles-list .article-card", "#articles-page"],
   ["breadcrumb-emi", "calculators/emi/", "#emi-form", ".calculator-breadcrumb"],
-  ["emi-form-and-results", "calculators/emi/", "#emi-results .calculator-results__value", "#emi-form, #emi-results"],
+  ["emi-form-and-results", "calculators/emi/", "#emi-results .calculator-results__value", "#emi-form, #emi-results, #emi-wide"], // the schedule has its own full-width section since 2026-11-10
   ["related-content-emi", "calculators/emi/", ".related-section", ".related-section"],
   ["breadcrumb-loan-comparison", "calculators/loan-comparison/", "#reset-loans", ".calculator-breadcrumb"],
   ["loan-comparison-main", "calculators/loan-comparison/", "#comparison-result .loan-summary-card", ".loan-comparison-tool, #comparison-result"],

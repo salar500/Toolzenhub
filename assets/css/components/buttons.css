@@ -41,6 +41,7 @@
 
 .btn-primary:hover {
     background: var(--color-primary-dark);
+    color: var(--color-white);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
@@ -180,13 +181,15 @@
 
 }
 
+/* Hover changes colour and shadow only. The button used to lift 1 px (translateY): a pointer resting on its bottom edge
+   then left it, the hover ended, it dropped back under the pointer and flickered every frame (found 2026-11-15 on the
+   lab's Check answer). A strip below the button to hold the pointer was tried and made content overflow its box, so the
+   lift is gone instead; nothing moves under the pointer. */
 .calculator-form__button:hover {
 
     background: var(--color-action-green-hover);
 
-    transform: translateY(-1px);
-
-    box-shadow: 0 5px 14px rgba(67, 56, 202, .18);
+    box-shadow: 0 5px 14px rgba(118, 86, 201, .18);
 
 }
 

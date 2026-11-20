@@ -27,7 +27,9 @@ async function open(page, go, query = "") {
   await expect(panel(page)).toHaveAttribute("data-ready", "true");
 }
 
-const option = (page, picker, zone) => page.locator(`#tz-${picker}-list .tz-list__option`, { hasText: new RegExp(`^${zone}$`) });
+/* an option is a place ("New York, United States") over its zone name; before the place search has loaded it is the zone name alone */
+const option = (page, picker, zone) => page.locator(`#tz-${picker}-list .tz-list__option`).filter({ has: page.locator(".tz-list__zone, .tz-list__place", { hasText: new RegExp(`^${zone}$`) }) }).first();
+const optionZone = (opt) => opt.locator(".tz-list__zone, .tz-list__place:only-child");
 
 async function addZone(page, query, zone) {
   await page.locator("#tz-add-input").fill(query);
@@ -112,13 +114,13 @@ test.describe("Time Zone Converter", () => {
 
   test("India to New York: 5:30 AM, and the quick-add button adds a zone and then goes away", async ({ page, go }) => {
     await open(page, go);
-    await page.getByRole("button", { name: "Add America/New_York", exact: true }).click();
+    await page.getByRole("button", { name: "Add New York (America/New_York)", exact: true }).click();
     await state(page, "ok");
     const ny = await rowText(page);
     expect([ny.time, ny.relation, ny.offset.startsWith("UTC−04:00")]).toEqual(["5:30 AM", "Same day", true]);
-    await expect(page.getByRole("button", { name: "Add America/New_York", exact: true })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Add New York (America/New_York)", exact: true })).toHaveCount(0);
     // an old and a new spelling of the browser's own zone are one zone: the quick button for Kolkata does not appear
-    await expect(page.getByRole("button", { name: "Add Asia/Kolkata", exact: true })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Add Kolkata (Asia/Kolkata)", exact: true })).toHaveCount(0);
   });
 
   test("a later date in the destination is told in words: Next day and Previous day", async ({ page, go }) => {
@@ -152,7 +154,7 @@ test.describe("Time Zone Converter", () => {
     await expect(input).toHaveAttribute("aria-expanded", "false");
     await input.fill("NEW york");
     await expect(input).toHaveAttribute("aria-expanded", "true");
-    await expect(page.locator("#tz-add-list .tz-list__option").first()).toHaveText("America/New_York");
+    await expect(optionZone(page.locator("#tz-add-list .tz-list__option").first())).toHaveText("America/New_York");
     await expect(page.locator("#tz-add-list .tz-list__option")).toHaveCount(await page.locator("#tz-add-list .tz-list__option").count());
     expect(await page.locator("#tz-add-list .tz-list__option").count()).toBeLessThanOrEqual(8);
     await expect(input).toHaveAttribute("aria-activedescendant", /option-0$/);
@@ -171,7 +173,7 @@ test.describe("Time Zone Converter", () => {
     await state(page, "ok");
     expect((await rowText(page)).zone).toBe("Australia/Lord_Howe");
     await input.fill("zzzzzz");
-    await expect(page.locator("#tz-add-list")).toContainText("No time zone matches that.");
+    await expect(page.locator("#tz-add-list")).toContainText("No city, country or time zone matches that.");
     await input.press("Enter");
     await expect(rows(page)).toHaveCount(1);
     // the whole zone name is typed, with no list: Enter accepts it only if the browser supports it
@@ -357,7 +359,7 @@ test.describe("Time Zone Converter", () => {
     await expect(page.locator("#tz-panel img, #tz-panel script, #tz-panel b")).toHaveCount(0);
     // typed text in a picker is text, too
     await page.locator("#tz-add-input").fill('<img src=x onerror="window.__xss=3">');
-    await expect(page.locator("#tz-add-list")).toContainText("No time zone matches that.");
+    await expect(page.locator("#tz-add-list")).toContainText("No city, country or time zone matches that.");
     await expect(page.locator("#tz-add-list img")).toHaveCount(0);
     expect(await page.evaluate(() => window.__xss)).toBe(0);
     expectClean(watch);
@@ -556,7 +558,7 @@ test.describe("Time Zone Converter: accessibility and layout", () => {
 test.describe("Time Zone Converter in the site", () => {
   test("Time Tools lists it as one of its tools, flat, and Developer Tools does not", async ({ page, go }) => {
     await go("time-tools.html");
-    await expect(page.locator(`a[href$="tools/time-zone-converter/"]`)).toHaveCount(1);
+    await expect(page.locator(`.categories-detail__grid a[href$="tools/time-zone-converter/"]`)).toHaveCount(1);  // the card grid; the workspace sidebar lists the tool too
     await expect(page.locator(".directory-tools a, .category-page-card")).toHaveCount(13);
     await expect(page.locator("main")).not.toContainText(/coming soon/i);
     await expect(page.locator("main")).toContainText("Time Zone Converter");
@@ -581,7 +583,7 @@ test.describe("Time Zone Converter in the site", () => {
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools.html`);
     await page.locator(".directory-section__title a", { hasText: "Time Tools" }).click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}time-tools.html`);
-    await page.locator('a[href$="tools/time-zone-converter/"]').first().click();
+    await page.locator('a[href$="tools/time-zone-converter/"]:visible').first().click(); // on a phone the closed sidebar drawer lists it first
     await expect(page.locator("h1")).toHaveText("Time Zone Converter");
   });
 

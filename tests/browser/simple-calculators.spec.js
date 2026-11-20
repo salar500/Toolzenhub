@@ -125,7 +125,8 @@ test.describe("Simple calculators: shared behaviour", () => {
     const c = CASES.find((x) => x.slug === "ratio");
     await open(page, go, c);
     await enter(page, c, { a: "12", b: "20", c: "" });
-    expect(plain(await page.locator("#ratio-results").innerText())).toMatch(/3\s*:\s*5/);
+    // polled: the result updates as you type, so a single read can race the update on a busy machine
+    await expect.poll(async () => plain(await page.locator("#ratio-results").innerText())).toMatch(/3\s*:\s*5/);
   });
 
   test("Interest: compounding more often gives more than annual compounding", async ({ page, go }) => {
@@ -134,8 +135,7 @@ test.describe("Simple calculators: shared behaviour", () => {
     await enter(page, c);
     const annual = plain(await page.locator("#interest-results").innerText());
     await page.locator("#interest-frequency").selectOption({ index: 3 });
-    const other = plain(await page.locator("#interest-results").innerText());
-    expect(other).not.toEqual(annual);
+    await expect.poll(async () => plain(await page.locator("#interest-results").innerText())).not.toEqual(annual);
   });
 
   test("a rate slider and its number field stay in step (Personal Loan)", async ({ page, go }) => {

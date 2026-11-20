@@ -1,0 +1,98 @@
+/**
+ * The global header stays reachable while scrolling (owner finding, 2026-11-09).
+ * From 960 px it is sticky on every kind of page, the home page included (whose overflow rule used to defeat it).
+ * Below 960 px it slides away while scrolling down and returns on any scroll up, and the phone tool bar is never covered.
+ */
+import { test, expect, expectNoHorizontalOverflow } from "../helpers/test-base.mjs";
+
+const PAGES = ["", "calculators/emi/", "tools/date-difference/", "practice-labs/sql/intermediate/combining/joining-tables/", "articles.html"];
+
+const headerBox = (page) => page.evaluate(() => {
+  const b = document.getElementById("header").getBoundingClientRect();
+  return { top: Math.round(b.top), bottom: Math.round(b.bottom) };
+});
+
+const scrollTo = async (page, y) => {
+  await page.evaluate((to) => window.scrollTo(0, to), y);
+  await page.waitForTimeout(350);
+};
+
+test.describe("global header while scrolling", () => {
+  for (const url of PAGES) {
+    test(`${url || "home"}: reachable at the bottom of the page`, async ({ page, go }, info) => {
+      await go(url);
+      await page.waitForLoadState("load");
+      const bottom = await page.evaluate(() => document.documentElement.scrollHeight);
+      await scrollTo(page, bottom);
+      const wide = (page.viewportSize()?.width ?? 0) >= 960;
+      if (!wide) {
+        // scrolled down: tucked away, then any upward scroll brings it back
+        expect((await headerBox(page)).bottom).toBeLessThanOrEqual(0);
+        const y = await page.evaluate(() => window.scrollY);
+        await scrollTo(page, y - 40);
+      }
+      expect((await headerBox(page)).top).toBe(0);
+      await expectNoHorizontalOverflow(page);
+      info.annotations.push({ type: "width", description: String(page.viewportSize()?.width) });
+    });
+  }
+
+  test("on a phone tool page the tool bar sits under the shown header and at the top when it hides", async ({ page, go }) => {
+    test.skip((page.viewportSize()?.width ?? 0) >= 960, "phone and tablet behaviour");
+    await go("tools/date-difference/");
+    await page.waitForLoadState("load");
+    const bar = page.locator(".section-switcher.is-drawer");
+    test.skip((await bar.count()) === 0, "this layout has no drawer bar");
+    await scrollTo(page, 1200);
+    const hiddenBar = await bar.evaluate((el) => Math.round(el.getBoundingClientRect().top));
+    expect(hiddenBar).toBeLessThanOrEqual(1);
+    await scrollTo(page, 1100);
+    const shown = await headerBox(page);
+    const shownBar = await bar.evaluate((el) => Math.round(el.getBoundingClientRect().top));
+    expect(shown.top).toBe(0);
+    expect(shownBar).toBeGreaterThanOrEqual(shown.bottom - 1);
+  });
+});
+
+test.describe("space under the header @desktop-only", () => {
+  // tool pages had 0 px under the header from 761 to 999 px (their 20 px sat inside the 1000 px sidebar rule); section pages had 20 px
+  test("a tool page and a section page leave the same space above the breadcrumb at phone, tablet and desktop widths", async ({ page, go }, testInfo) => {
+    test.skip(testInfo.project.name !== "subpath-desktop", "the widths are set here");
+    for (const [width, expected] of [[390, 8], [820, 20], [1280, 20]]) {
+      await page.setViewportSize({ width, height: 900 });
+      for (const url of ["calculators/emi/", "tools/json-formatter/", "time-tools.html"]) {
+        await go(url);
+        const gap = await page.evaluate(() => Math.round(document.querySelector("main .calculator-breadcrumb").getBoundingClientRect().top - document.querySelector("#header").getBoundingClientRect().bottom));
+        expect(gap, `${url} at ${width}px`).toBe(expected);
+      }
+    }
+  });
+});
+
+test.describe("focus is not hidden under the sticky header and tool bar (WCAG 2.4.11)", () => {
+  // on a phone a tool page has two sticky strips: the site header (hidden while scrolling down) and the 52 px "Menu" tool bar under it;
+  // scroll-padding-top tells the browser to keep focused and scrolled-to elements below both
+  test("on a phone tool page the scroll padding clears the header and the tool bar, with the header shown and hidden", async ({ page, go }, testInfo) => {
+    test.skip(testInfo.project.name !== "subpath-mobile", "phone layout");
+    await go("tools/json-formatter/");
+    const bar = page.locator(".section-switcher");
+    const state = () => page.evaluate(() => ({
+      padding: parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop),
+      barBottom: document.querySelector(".section-switcher").getBoundingClientRect().bottom,
+      hidden: document.documentElement.classList.contains("header-hidden"),
+    }));
+    await expect(bar).toBeVisible();
+    // scrolling down: the header hides and the bar sticks at the top
+    await page.mouse.wheel(0, 900);
+    await expect.poll(async () => (await state()).hidden).toBe(true);
+    await expect.poll(async () => Math.round((await bar.boundingBox()).y)).toBe(0);
+    const hiddenState = await state();
+    expect(hiddenState.padding, "header hidden").toBeGreaterThanOrEqual(hiddenState.barBottom);
+    // scrolling back up a little: the header returns and the bar sticks under it
+    await page.mouse.wheel(0, -200);
+    await expect.poll(async () => (await state()).hidden).toBe(false);
+    await expect.poll(async () => Math.round((await bar.boundingBox()).y)).toBe(56);
+    const shown = await state();
+    expect(shown.padding, "header shown").toBeGreaterThanOrEqual(shown.barBottom);
+  });
+});

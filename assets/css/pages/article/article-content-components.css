@@ -102,7 +102,7 @@
         10px;
 
     background:
-        #ffffff;
+        var(--surface-card);
 
     color:
         var(--color-brand-green);
@@ -368,7 +368,7 @@
         12px;
 
     background:
-        #ffffff;
+        var(--surface-card);
 
     color:
         var(--color-brand-green);
@@ -491,7 +491,7 @@
         var(--color-brand-green);
 
     color:
-        #ffffff;
+        var(--on-action);
 
     text-decoration:
         none;
@@ -558,7 +558,7 @@
         10px;
 
     background:
-        #ffffff;
+        var(--surface-card);
 
     overflow:
         hidden;
@@ -862,7 +862,7 @@
         12px;
 
     background:
-        #ffffff;
+        var(--surface-card);
 
     color:
         var(--color-gray-800);

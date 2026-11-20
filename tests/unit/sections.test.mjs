@@ -37,8 +37,15 @@ before(async () => {
 });
 
 describe("section model", () => {
-  test("six sections, each with a stable id, its landing page and its path prefix: Calculators, Time Tools, Developer Tools, Image Tools, PDF Tools and Practice Labs", () => {
-    assert.deepEqual(tax.getSections().map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools", "pdf-tools", "practice-labs"]);
+  test("seven sections, each with a stable id, its landing page and its path prefix: Calculators, Time Tools, Developer Tools, Image Tools, PDF Tools, Practice Labs and AI Tools", () => {
+    assert.deepEqual(tax.getSections().map((s) => s.id), ["calculators", "time-tools", "developer-tools", "image-tools", "pdf-tools", "practice-labs", "ai-tools"]);
+    const ai = tax.getSectionById("ai-tools");
+    assert.equal(ai.title, "AI Tools");
+    assert.equal(ai.landing, "aiTools");
+    assert.equal(ai.pathPrefix, "tools");
+    assert.deepEqual(tax.getCategoriesBySection("ai-tools").map((c) => c.id), ["ai"]); // the AI category (2026-11-12); its tools resolve through it
+    assert.deepEqual(tax.getToolsBySection("ai-tools").map((t) => t.id), ["prompt-builder", "ai-answer-checker"]); // D22: three products, the third is the AI Directory page
+    assert.equal(routes.ROUTES.aiTools, `${ROOT}ai-tools.html`);
     const section = tax.getSectionById("calculators");
     assert.equal(section.title, "Calculators");
     assert.equal(section.landing, "calculatorCategories");
@@ -62,7 +69,7 @@ describe("section model", () => {
     assert.equal(image.pathPrefix, "tools"); // /tools/<id>/ like the other non-calculator sections
     assert.equal(image.description, "Private browser-based tools for resizing and optimizing images.");
     assert.deepEqual(tax.getCategoriesBySection("image-tools"), []); // flat: no categories, no placeholders
-    assert.deepEqual(tax.getToolsBySection("image-tools").map((t) => t.id), ["image-compressor-resizer", "photos-to-pdf"]); // Photos to PDF (Tool Pack 31) is the second Image Tools tool
+    assert.deepEqual(tax.getToolsBySection("image-tools").map((t) => t.id), ["image-compressor-resizer", "photos-to-pdf", "image-metadata"]); // Photos to PDF (Tool Pack 31) is the second Image Tools tool, the Photo Metadata Viewer and Remover (Tool Pack 57) the third
     const pdf = tax.getSectionById("pdf-tools");
     assert.equal(pdf.title, "PDF Tools");
     assert.equal(pdf.landing, "pdfTools");
@@ -96,9 +103,9 @@ describe("section model", () => {
 });
 
 describe("category ownership", () => {
-  test("the eight existing categories, unrenamed and in order, all belong to the Calculators section", () => {
-    assert.deepEqual(cats.categories.map((c) => c.id), CATEGORY_IDS);
-    for (const c of cats.categories) assert.equal(c.sectionId, "calculators", c.id);
+  test("the eight existing categories, unrenamed and in order, belong to the Calculators section; the AI category (2026-11-12) to AI Tools", () => {
+    assert.deepEqual(cats.categories.map((c) => c.id), [...CATEGORY_IDS, "ai"]);
+    for (const c of cats.categories) assert.equal(c.sectionId, c.id === "ai" ? "ai-tools" : "calculators", c.id);
   });
 
   test("every category's sectionId refers to a section that exists", () => {
@@ -196,7 +203,7 @@ describe("routing: every registered tool keeps its URL", () => {
   });
 
   test("the calculator loader registry is unchanged: loaders only for the published tools, still lazy", () => {
-    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["age", "balance-transfer", "base64-encoder-decoder", "bmi", "bmr", "business-days", "cagr", "calorie", "countdown-timer", "credit-card-payoff", "cron-challenge-lab", "cron-expression-explainer", "date-calculator", "date-difference", "emi", "excel-practice-lab", "fd", "gratuity", "gst", "home-loan", "hours-calculator", "image-compressor-resizer", "income-tax", "interest", "interval-timer", "json-compare", "json-csv-converter", "json-error-fixing-lab", "json-formatter", "jsonpath-challenge-lab", "jsonpath-tester", "jwt-decoder", "list-comparer", "loan-comparison", "loan-eligibility", "margin", "meeting-planner", "merge-pdf", "pdf-marks", "pdf-pages", "percentage", "personal-loan", "photos-to-pdf", "pomodoro-timer", "power-bi-practice-lab", "ppf", "prepayment", "profit", "ratio", "risk-reward", "roi", "salary-in-hand", "shift-planner", "sip", "smart-flashcards", "split-pdf", "sql-practice-lab", "stopwatch", "swp", "test-design-lab", "text-diff", "time-duration", "time-zone-converter", "unit-converter", "unix-timestamp-converter", "url-parser", "uuid-generator", "world-clock", "xirr"]);
+    assert.deepEqual(Object.keys(registry.calculatorRegistry).sort(), ["age", "ai-answer-checker", "balance-transfer", "base64-encoder-decoder", "bmi", "bmr", "business-days", "cagr", "calorie", "countdown-timer", "credit-card-payoff", "cron-challenge-lab", "cron-expression-explainer", "date-calculator", "date-difference", "emi", "excel-practice-lab", "fd", "gratuity", "gst", "home-loan", "hours-calculator", "image-compressor-resizer", "image-metadata", "income-tax", "interest", "interval-timer", "json-compare", "json-csv-converter", "json-error-fixing-lab", "json-formatter", "jsonpath-challenge-lab", "jsonpath-tester", "jwt-decoder", "list-comparer", "loan-comparison", "loan-eligibility", "margin", "meeting-planner", "merge-pdf", "pdf-marks", "pdf-pages", "percentage", "personal-loan", "photos-to-pdf", "pomodoro-timer", "power-bi-practice-lab", "ppf", "prepayment", "profit", "prompt-builder", "ratio", "risk-reward", "roi", "salary-in-hand", "shift-planner", "sip", "smart-flashcards", "split-pdf", "sql-practice-lab", "stopwatch", "swp", "test-design-lab", "text-diff", "time-duration", "time-zone-converter", "unit-converter", "unix-timestamp-converter", "url-parser", "uuid-generator", "world-clock", "xirr"]);
     for (const loader of Object.values(registry.calculatorRegistry)) assert.equal(typeof loader, "function");
     assert.deepEqual(registry.calculatorMetadata.emi, { section: "Calculators", category: "loans", title: "EMI Calculator" });
     assert.deepEqual(registry.calculatorMetadata["income-tax"], { section: "Calculators", category: "tax", title: "Old vs New Tax Regime Calculator" });

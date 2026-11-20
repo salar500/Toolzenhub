@@ -2,6 +2,63 @@
 
 Rules: `docs/product-decision-rules.md` section 11. GitHub Pages is the development preview; Hostinger production (`toolzenhub.in`) is manual and was not touched by any record here.
 
+## Update 2026-11-20 (AI ecosystem release candidate 5eff89de, built, not deployed; supersedes c950b797)
+
+| Item | Record |
+|---|---|
+| File | `C:\Users\DELL\Documents\ToolZenHub-production-package\toolzenhub-production-5eff89de.zip`, 16,821,655 bytes, 1,361 entries; checksum beside it in `.sha256` |
+| SHA-256 | `ad4f92837fe32879f77e01dc727ad5e66ab29aebda5cc3e4644f082b9805b863` |
+| Source | `5eff89de` (the owner's Prompt Builder UX review on top of `c950b797`); `npm run build` on a clean tree, 2026-11-20 |
+| Checks | as for `c950b797` (byte-identical to `dist/`, zip test clean, seven redirects, no development files); tests in `TEST_EXECUTION_LEDGER.md` run AI-2 |
+| Status | **Not deployed.** The `c950b797` package is kept for the record and is superseded |
+
+## Update 2026-11-19 (AI ecosystem release candidate c950b797, built, not deployed; supersedes 3e5ce4cd)
+
+| Item | Record |
+|---|---|
+| File | `C:\Users\DELL\Documents\ToolZenHub-production-package\toolzenhub-production-c950b797.zip`, 16,819,564 bytes, 1,361 entries; checksum beside it in `.sha256` |
+| SHA-256 | `07cde2e841659db2cc1ba6954f38a6da80222667b42ebdc48f502dad092d2a45` |
+| Source | `c950b797`, branch `feature/unified-ecosystem-workspace` (D22 consolidation `65b4a67b`, D23 Prompt Builder `98cbaefa`, fix D-19); `npm run build` on a clean tree, 2026-11-19. Built on Windows, so text files have CRLF line ends as in earlier packages |
+| Checks | every entry byte-identical to `dist/`, zip test clean, forward-slash paths, `index.html` and `.htaccess` at the root, the seven D22 redirects in `.htaccess` (single 301 to live targets), no `.env`, `.map`, `.spec.js` or `.git`; sitemap 669 URLs on `https://toolzenhub.in`, no retired route; static checks on both builds; AI ecosystem tests in `TEST_EXECUTION_LEDGER.md` run AI-1 |
+| Preview | GitHub Pages from the feature branch: run 44580927586 (`98cbaefa`) success, live pages content-identical to the tested build; `c950b797` pushed after it |
+| Not covered | full-site regression since `3e5ce4cd` (out of this phase's scope: only AI files changed); the SEO baseline re-recording (stopped by the system at low memory); real devices, Safari, screen readers (T-18). After a Hostinger upload, check by hand that the 301s carry a link's query string |
+| Status | **Not deployed.** Production deployment and any merge into `main` need the owner's separate approval |
+
+## Update 2026-11-16 (release candidate 3e5ce4cd, built, not deployed; supersedes ff74baf0)
+
+| Item | Record |
+|---|---|
+| File | `C:\Users\DELL\Documents\ToolZenHub-production-package\toolzenhub-production-3e5ce4cd.zip`, 16,578,544 bytes, 1,304 entries |
+| SHA-256 | `56589da8a5b5a369ec602b7816e0561e3cf91896354e30e55885e26793559ca6` |
+| Source | `3e5ce4cd`, branch `feature/unified-ecosystem-workspace`; `npm run build`, clean tree, 2026-11-16 |
+| Checks | byte-identical to `dist/`, zip test clean, production canonicals (ShopLite noindex by design), sitemap 673 URLs each with a file, robots, no secrets or development files; static checks on both builds; root smoke on 13 pages at 1280 and 390 px |
+| Tests | unit 3,983 of 3,987 (0 failed, 4 skipped); subpath-desktop, subpath-mobile and root-desktop complete (details `docs/production-handoff.md` section 7); visual 145 baselines re-recorded after review; SEO baseline and link crawl by chunked equivalents (specs not run end to end) |
+| Production deployment | NOT DONE (owner's manual step; guide `docs/production-handoff.md`) |
+
+## Update 2026-11-15 (release candidate ff74baf0, built, not deployed; supersedes f994b41c; superseded by 3e5ce4cd)
+
+| Item | Record |
+|---|---|
+| File | `C:\Users\DELL\Documents\ToolZenHub-production-package\toolzenhub-production-ff74baf0.zip`, 16,578,682 bytes, 1,304 entries |
+| SHA-256 | `daf13ee0d97ff7e34631c32b19e7f5499e216183ef4504e38f3e2b4977d022c0` |
+| Source | `ff74baf0`, branch `feature/unified-ecosystem-workspace`; `npm run build`, clean tree, 2026-11-15 |
+| Checks | byte-identical to `dist/`, zip test clean, production canonicals (ShopLite is noindex by design), sitemap 673 URLs each with a file, robots, no secrets or development files; static checks passed on both builds; browser smoke on 13 pages at 1280 and 390 px |
+| Tests | unit 3,980 of 3,987 (3 deliberate pins then updated, 41 of 41; 4 skipped); every spec touched by the phase passes; full browser regression INCOMPLETE (subpath-desktop 4 of 22 batches, stopped by the system for low memory; mobile, root, visual and the link crawl not run) |
+| Production deployment | NOT DONE (owner's manual step; guide `docs/production-handoff.md`) |
+
+## Update 2026-11-14 (release candidate f994b41c, built, not deployed; superseded by ff74baf0)
+
+| Item | Record |
+|---|---|
+| File | `C:\Users\DELL\Documents\ToolZenHub-production-package\toolzenhub-production-f994b41c.zip`, 16,598,797 bytes, 1,297 entries |
+| SHA-256 | `c809ab2b21baeb5261f409a19a67ee2f1bbc81effb40e638e93e569f26ada93d` |
+| Source | `f994b41c`, branch `feature/unified-ecosystem-workspace` (application code identical to `997990b0`); `npm run build`, clean tree, 2026-11-14 19:36 IST |
+| Checks | byte-identical to `dist/`, zip test clean, production canonicals and sitemap (671 URLs) and robots, static checks passed, browser smoke on 11 pages at 1280 and 390 px; full projects in `docs/site-audit-ledger.md` Batch 27 |
+| Open | browser link crawl not passed on this code (timeouts, then stopped for low memory) |
+| Superseded | `toolzenhub-production-a395fb0.zip`, `-794cf6a`, `-a3b498d` (kept, stale) |
+
+Migration steps, smoke checklist and rollback: `docs/production-handoff.md`. Hostinger, DNS and `main` untouched.
+
 ## Update 2026-11-07 (preview current, production package ready, not deployed)
 
 Pushed `8fa60fd..f743d72` to `origin/main`, fast-forward, no force; 6 commits. Preview `https://salar500.github.io/Toolzenhub/` serves that build: `date-field.js`, `section-switcher.css` and `index.html` are byte-identical (SHA-256) to the tested `dist-ghpages/`; home, tool, calculator, article, category, robots, favicon and sitemap routes return 200, an unknown path returns the 404 page, the sitemap lists 131 production URLs. The `gh` CLI is unavailable, so the check is by direct requests (rule 11.3). Regression evidence: Q3-19 in `TEST_EXECUTION_LEDGER.md`.

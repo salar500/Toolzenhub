@@ -1,11 +1,12 @@
 /* =========================================================
    ToolZen Hub
-   Section rail (tool pages): the sidebar of a tool's section
+   Section rail: the sidebar of an ecosystem (tool pages, category pages and the section's own page)
 
    The "More <section>" navigation is built at site-build time as a closed disclosure of plain links (components/section-switcher.js).
    This script turns it into the sidebar:
 
-   - Wide screens (WIDE, 1000px and up): it is held open as a left column beside the tool, open by default, with a search box and a
+   - Wide screens (WIDE, see nav-mode.js: a layout of 1000px and up on a device with a fine pointer or a screen that wide, so not a phone
+     in "Desktop site" mode): it is held open as a left column beside the tool, open by default, with a search box and a
      "Hide tools" button. Hidden, it takes no width: the tool gets the whole row and a "Show tools" button above it brings the list
      back. Hiding only hides; the tool, its fields and its results are not touched, and nothing is stored, so every visit starts open.
    - Narrower screens: the closed disclosure ("More <section>"), which opens as a drawer from the left over a dimmed page with the same
@@ -14,7 +15,10 @@
    Without script it stays a closed disclosure of ordinary links, so nothing depends on this file.
 ========================================================= */
 
-export const WIDE = "(min-width: 1000px)";
+import { initWorkspaceNav } from "./workspace-nav.js";
+import { WIDE, drawerZoom, drawerWidth } from "./nav-mode.js";
+
+export { WIDE };
 export const SEARCH_MIN_TOOLS = 8;
 
 /**
@@ -52,16 +56,21 @@ export function initSectionRail(root = document) {
 
     const nav = root.querySelector(".section-switcher");
     const details = nav?.querySelector("details");
-    const page = nav?.closest(".calculator-page");
+    /* The layout container is looked up each time, not kept: the workspace swaps the page content in place (ui/workspace-nav.js) and moves
+       this sidebar into the new page's container, so the container it sits in can change while the sidebar stays. */
+    const pageOf = () => nav.closest("[data-section-page], .calculator-page");
 
-    if (!details || !page || typeof window.matchMedia !== "function") {
+    if (!details || !pageOf() || typeof window.matchMedia !== "function") {
         return;
     }
 
     const summary = details.querySelector("summary");
     const list = details.querySelector(".section-switcher__list");
     const links = [...nav.querySelectorAll(".section-switcher__list a")];
-    const sectionName = nav.getAttribute("aria-label")?.replace(/: switch tool$/, "") ?? "tools";
+    const sectionName = nav.getAttribute("aria-label")?.replace(/: switch \w+$/, "") ?? "tools";
+    /* what the list holds, named on the buttons and in the search: "tool" everywhere except a learning path's roadmap, which says "lesson" */
+    const noun = nav.dataset.railNoun || "tool";
+    const nouns = nav.dataset.railNouns || `${noun}s`;
     const wide = window.matchMedia(WIDE);
 
     nav.id ||= "section-rail";
@@ -77,7 +86,8 @@ export function initSectionRail(root = document) {
             return { node, wanted: true, toggle: null, items };
         }
 
-        const count = items.querySelectorAll("li").length;
+        // a section overview link (the All Tools hub's groups) is not a tool, so it is not counted
+        const count = items.querySelectorAll("li:not(:has(> a.section-switcher__section))").length;
         const toggle = element("button", { type: "button", class: "section-switcher__toggle", "aria-controls": `${nav.id}-group-${index}` });
 
         items.id = `${nav.id}-group-${index}`;
@@ -115,10 +125,10 @@ export function initSectionRail(root = document) {
 
         const labels = links.map(link => link.textContent.trim());
         const field = element("div", { class: "section-rail__search" });
-        const label = element("label", { for: "section-rail-search", class: "section-rail__label" }, `Find a tool in ${sectionName}`);
+        const label = element("label", { for: "section-rail-search", class: "section-rail__label" }, `Find a ${noun} in ${sectionName}`);
         const status = element("p", { class: "section-rail__status", role: "status", "aria-live": "polite" });
 
-        search = element("input", { id: "section-rail-search", type: "search", autocomplete: "off", spellcheck: "false", placeholder: "Search tools" });
+        search = element("input", { id: "section-rail-search", type: "search", autocomplete: "off", spellcheck: "false", placeholder: `Search ${nouns}` });
         field.append(label, search, status);
         list.before(field);
 
@@ -140,7 +150,7 @@ export function initSectionRail(root = document) {
 
             status.textContent = !searching
                 ? ""
-                : shown.size === 0 ? "No tool matches." : `${shown.size} ${shown.size === 1 ? "tool matches" : "tools match"}.`;
+                : shown.size === 0 ? `No ${noun} matches.` : `${shown.size} ${shown.size === 1 ? `${noun} matches` : `${nouns} match`}.`;
 
         });
 
@@ -156,7 +166,7 @@ export function initSectionRail(root = document) {
 
     /* ---------- hide and show (wide screens) ---------- */
 
-    const hide = element("button", { type: "button", class: "section-rail__hide", "aria-controls": nav.id, "aria-expanded": "true" }, "Hide tools");
+    const hide = element("button", { type: "button", class: "section-rail__hide", "aria-controls": nav.id, "aria-expanded": "true" }, `Hide ${nouns}`);
     const show = element("button", { type: "button", class: "section-rail__show", "aria-controls": nav.id, "aria-expanded": "false", hidden: "" }, `Show ${sectionName}`);
 
     (search ? search.parentElement : list).before(hide);
@@ -164,7 +174,7 @@ export function initSectionRail(root = document) {
 
     const setCollapsed = collapsed => {
 
-        page.classList.toggle("is-rail-collapsed", collapsed);
+        pageOf()?.classList.toggle("is-rail-collapsed", collapsed);
         nav.hidden = collapsed;
         show.hidden = !collapsed;
         hide.setAttribute("aria-expanded", String(!collapsed));
@@ -209,7 +219,18 @@ export function initSectionRail(root = document) {
     backdrop.addEventListener("click", () => { details.open = false; summary?.focus(); });
 
     details.addEventListener("toggle", () => {
-        backdrop.hidden = wide.matches || !details.open;
+
+        const drawerOpen = !wide.matches && details.open;
+
+        backdrop.hidden = !drawerOpen;
+        nav.classList.toggle("is-drawer-open", drawerOpen);
+
+        if (drawerOpen) {
+            /* the drawer opens on the tool that is open, not on the top of a long list, and keyboard focus moves into it */
+            nav.querySelector("a[aria-current='page']")?.scrollIntoView({ block: "center" });
+            hide.focus({ preventScroll: true });
+        }
+
     });
 
     document.addEventListener("keydown", event => {
@@ -221,12 +242,18 @@ export function initSectionRail(root = document) {
 
     });
 
+    const sizeDrawer = () => {
+        nav.style.setProperty("--rail-zoom", String(drawerZoom(window.innerWidth, window.screen?.width, wide.matches)));
+        nav.style.setProperty("--rail-w", String(drawerWidth(window.innerWidth, window.screen?.width)));
+    };
+
     /* held open, the heading is not a control: it leaves the tab order so keyboard users do not land on a dead stop */
     const apply = () => {
 
         details.open = wide.matches;
         nav.classList.toggle("is-drawer", !wide.matches);
-        hide.textContent = wide.matches ? hideLabel : "Close tools";
+        sizeDrawer();
+        hide.textContent = wide.matches ? hideLabel : `Close ${nouns}`;
         backdrop.hidden = true;
 
         if (wide.matches) {
@@ -240,16 +267,27 @@ export function initSectionRail(root = document) {
 
     wide.addEventListener("change", apply);
 
+    /* the drawer's size follows the page's zoom when the screen turns (a phone in Desktop site mode) */
+    window.addEventListener("resize", sizeDrawer);
+
     apply();
 
-    /* A long lab brings its own exercise list (learning/lab-shell.js). Below 1500 px the two lists side by side would leave the exercise
-       about 800 px, so the lab list steps aside: it starts hidden with "Show Practice Labs" above the tool. Nothing is stored. */
-    document.addEventListener("tz:lab-workspace", () => {
+    /* The workspace shows another page in the same sidebar: the groups holding the page now shown open, and the visitor's search and
+       collapse choices stay as they were. */
+    nav.addEventListener("tz:rail-current", () => {
 
-        if (wide.matches && !window.matchMedia("(min-width: 1500px)").matches) {
-            setCollapsed(true);
+        for (const group of groups) {
+
+            if (group.node.dataset.current === "true") {
+                group.wanted = true;
+                setGroup(group, true);
+            }
+
         }
 
     });
+
+    initWorkspaceNav(nav);
+
 
 }

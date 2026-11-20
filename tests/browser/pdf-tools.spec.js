@@ -351,6 +351,25 @@ test.describe("Split PDF: the flow", () => {
         await expect(createButton(page, T)).toBeEnabled();
     });
 
+    test("quick-pick chips fit the PDF and fill the box, so the plan follows without typing", async ({ page, go }) => {
+        await open(page, go, T);
+        await choose(page, T, await numbered(7, "seven.pdf"));
+        await state(page, T, "ready");
+        const chip = (name) => page.locator(".pt-chip", { hasText: new RegExp(`^${name}$`) });
+        await expect(page.locator("#sp-every-chips .pt-chip")).toHaveText(["1", "2", "5", "Half"]);
+        await chip("2").first().click();
+        await expect(page.getByLabel("Pages in each part")).toHaveValue("2");
+        await expect(page.locator("#sp-plan-note")).toHaveText("4 parts will be made.");
+        await chip("Half").click();
+        await expect(page.locator("#sp-plan > li")).toHaveText(["part-1.pdf: pages 1 to 4 (4 pages)", "part-2.pdf: pages 5 to 7 (3 pages)"]);
+        await page.getByLabel("At page ranges").check();
+        await expect(page.locator("#sp-range-chips .pt-chip")).toHaveText(["Two halves", "First page, then the rest", "The rest, then last page"]);
+        await chip("First page, then the rest").click();
+        await expect(page.getByLabel("Page ranges, one part for each")).toHaveValue("1-1, 2-7");
+        await expect(page.locator("#sp-plan > li")).toHaveText(["part-1.pdf: page 1 (1 page)", "part-2.pdf: pages 2 to 7 (6 pages)"]);
+        await expect(createButton(page, T)).toBeEnabled();
+    });
+
     test("every part is its own download with exactly its pages; the parts add up to the source", async ({ page, go }) => {
         await open(page, go, T);
         await choose(page, T, pdf("a-deco"));
@@ -449,6 +468,30 @@ test.describe("Extract, Reorder and Rotate PDF Pages: the flow", () => {
 
     const T = TOOLS.pages;
     const plan = (page) => page.locator("#pg-plan > li");
+
+    test("quick-pick chips write the page list for odd, even, reversed and trimmed selections", async ({ page, go }) => {
+        await open(page, go, T);
+        await choose(page, T, await numbered(5, "five.pdf"));
+        await state(page, T, "ready");
+        const keep = page.getByLabel("Pages to keep, in order");
+        const chip = (name) => page.locator("#pg-keep-chips .pt-chip", { hasText: name });
+        await expect(page.locator("#pg-keep-chips .pt-chip")).toHaveText(["All pages", "Odd pages", "Even pages", "Reverse order", "Without the first page", "Without the last page"]);
+        await chip("Odd pages").click();
+        await expect(keep).toHaveValue("1, 3, 5");
+        await expect(plan(page)).toHaveText(["Page 1 = original page 1", "Page 2 = original page 3", "Page 3 = original page 5"]);
+        await chip("Even pages").click();
+        await expect(keep).toHaveValue("2, 4");
+        await chip("Reverse order").click();
+        await expect(plan(page).first()).toHaveText("Page 1 = original page 5");
+        await expect(page.locator("#pg-plan-note")).toHaveText("The new PDF will have 5 pages.");
+        await chip("Without the first page").click();
+        await expect(page.locator("#pg-plan-note")).toHaveText("The new PDF will have 4 pages.");
+        await page.getByLabel("Turn the pages").selectOption("90");
+        await page.getByLabel("Turn", { exact: true }).selectOption("some");
+        await page.locator("#pg-some-chips .pt-chip", { hasText: "Last page" }).click();
+        await expect(page.getByLabel("Original pages to turn")).toHaveValue("5");
+        await expect(createButton(page, T)).toBeEnabled();
+    });
 
     test("the plan follows the settings: order, repeats, turns and where they apply", async ({ page, go }) => {
         await open(page, go, T);

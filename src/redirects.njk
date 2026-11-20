@@ -1,0 +1,21 @@
+---
+eleventyExcludeFromCollections: true
+---
+# Cloudflare Pages reads this file (it ignores .htaccess).
+#
+# 1. Retired tool pages: the same permanent redirects as section 3 of .htaccess (decision D22,
+#    assets/js/data/retired-tools.js), one line per address form a visitor or a search engine may have kept.
+{%- for r in retiredTools %}
+/tools/{{ r.id }} /tools/{{ r.to }}/{{ r.query }} 301
+/tools/{{ r.id }}/ /tools/{{ r.to }}/{{ r.query }} 301
+/tools/{{ r.id }}/index.html /tools/{{ r.to }}/{{ r.query }} 301
+{%- endfor %}
+
+# 2. Pages at the root that end in .html keep that address: Cloudflare Pages would otherwise answer /about.html with a
+#    redirect to /about, while the canonical URLs, the sitemap and every link use /about.html. A 200 rule serves the
+#    same file at the same address.
+{%- for p in collections.all %}
+{%- if p.url and p.url.endsWith(".html") and p.url.indexOf("/", 1) == -1 and p.url != "/404.html" %}
+{{ p.url }} {{ p.url.slice(0, -5) }} 200
+{%- endif %}
+{%- endfor %}

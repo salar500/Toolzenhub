@@ -393,7 +393,7 @@ test.describe("JWT Decoder in the Developer Tools section", () => {
     const mainText = await page.locator("main").evaluate((e) => { const c = e.cloneNode(true); c.querySelectorAll("nav.section-switcher").forEach((n) => n.remove()); return c.textContent; });
     expect(mainText).not.toContain("JWT");
     await go("tools/unix-timestamp-converter/");
-    await expect(page.locator(".related-section").getByRole("link", { name: /JWT Decoder/ })).toHaveCount(1);
+    await expect(page.locator(".related-section:not(.knowledge-links)").getByRole("link", { name: /JWT Decoder/ })).toHaveCount(1);
     // the JWT page links to both, in its own text
     await go("tools/jwt-decoder/");
     const links = await page.locator("main .calculator-info a").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
@@ -403,7 +403,7 @@ test.describe("JWT Decoder in the Developer Tools section", () => {
   test("global search finds it by its own names", async ({ page, go, siteRoot }) => {
     for (const q of ["jwt decoder", "decode jwt", "jwt payload viewer", "json web token"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
-      await expect(page.locator(`a[href='${siteRoot}tools/jwt-decoder/']`).first(), q).toBeVisible();
+      await expect(page.locator(`#tools-results a[href='${siteRoot}tools/jwt-decoder/']`).first(), q).toBeVisible();
     }
   });
 });

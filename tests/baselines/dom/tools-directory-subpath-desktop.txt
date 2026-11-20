@@ -1,41 +1,236 @@
 section.categories-page.directory-page
-  div.container
+  div.container.container--workspace
     div.calculator-breadcrumb
       a [href="{ROOT}"] "Home"
       span "›"
       strong "All Tools"
-    div.categories-page__intro
-      span.categories-page__eyebrow "Explore"
-      h1.categories-page__title "All Tools"
-      p.categories-page__description "Search or browse every ToolZen Hub tool, by section and category."
-    div.directory-layout
-      nav.directory-rail [aria-label="Tool sections"]
-        ul.directory-rail__list
-          li
-            a.directory-rail__link [href="{ROOT}tools.html#directory-calculators-heading"]
-              span.directory-rail__name "Calculators"
-              span.directory-rail__count "30"
-          li
-            a.directory-rail__link [href="{ROOT}tools.html#directory-time-tools-heading"]
-              span.directory-rail__name "Time Tools"
-              span.directory-rail__count "13"
-          li
-            a.directory-rail__link [href="{ROOT}tools.html#directory-developer-tools-heading"]
-              span.directory-rail__name "Developer Tools"
-              span.directory-rail__count "12"
-          li
-            a.directory-rail__link [href="{ROOT}tools.html#directory-image-tools-heading"]
-              span.directory-rail__name "Image Tools"
-              span.directory-rail__count "2"
-          li
-            a.directory-rail__link [href="{ROOT}tools.html#directory-pdf-tools-heading"]
-              span.directory-rail__name "PDF Tools"
-              span.directory-rail__count "4"
-          li
-            a.directory-rail__link [href="{ROOT}tools.html#directory-practice-labs-heading"]
-              span.directory-rail__name "Practice Labs"
-              span.directory-rail__count "8"
-      div.directory-layout__main
+    div.ecosystem-layout [data-section-page]
+      nav#section-rail.section-switcher [aria-label="All Tools: switch section" data-workspace="off"]
+        details
+          summary
+            span "All Tools"
+            span.section-switcher__now "All Tools overview"
+            span.section-switcher__count "78"
+          p.section-switcher__overview
+            a [aria-current="page" href="{ROOT}tools.html"] "All Tools overview"
+          button.section-rail__hide [aria-controls="section-rail" aria-expanded="true" type="button"] "Hide tools"
+          div.section-rail__search
+            label.section-rail__label [for="section-rail-search"] "Find a tool in All Tools"
+            input#section-rail-search [placeholder="Search tools" type="search"]
+            p.section-rail__status [aria-live="polite" role="status"]
+          ul.section-switcher__list
+            li.section-switcher__group [data-open="false"]
+              button.section-switcher__toggle [aria-controls="section-rail-group-0" aria-expanded="false" type="button"]
+                span "Calculators"
+                span.section-switcher__group-count [aria-hidden="true"] "30"
+              ul#section-rail-group-0
+                li
+                  a.section-switcher__section [data-name="Calculators" href="{ROOT}categories.html"] "Calculators overview"
+                li
+                  a [href="{ROOT}calculators/loan-comparison/"] "Loan Comparison Calculator"
+                li
+                  a [href="{ROOT}calculators/emi/"] "EMI Calculator"
+                li
+                  a [href="{ROOT}calculators/home-loan/"] "Home Loan Calculator"
+                li
+                  a [href="{ROOT}calculators/personal-loan/"] "Personal Loan Calculator"
+                li
+                  a [href="{ROOT}calculators/loan-eligibility/"] "Loan Eligibility Calculator"
+                li
+                  a [href="{ROOT}calculators/balance-transfer/"] "Loan Balance Transfer Calculator"
+                li
+                  a [href="{ROOT}calculators/interest/"] "Interest Calculator"
+                li
+                  a [href="{ROOT}calculators/prepayment/"] "Loan Prepayment Calculator"
+                li
+                  a [href="{ROOT}calculators/credit-card-payoff/"] "Credit Card Payoff Calculator"
+                li
+                  a [href="{ROOT}calculators/sip/"] "SIP Calculator"
+                li
+                  a [href="{ROOT}calculators/ppf/"] "PPF Calculator"
+                li
+                  a [href="{ROOT}calculators/fd/"] "FD Calculator"
+                li
+                  a [href="{ROOT}calculators/cagr/"] "CAGR Calculator"
+                li
+                  a [href="{ROOT}calculators/swp/"] "SWP Calculator"
+                li
+                  a [href="{ROOT}calculators/xirr/"] "XIRR Calculator"
+                li
+                  a [href="{ROOT}calculators/risk-reward/"] "Risk-Reward and Position Size Calculator"
+                li
+                  a [href="{ROOT}calculators/gst/"] "GST Calculator"
+                li
+                  a [href="{ROOT}calculators/income-tax/"] "Old vs New Tax Regime Calculator"
+                li
+                  a [href="{ROOT}calculators/gratuity/"] "Gratuity Calculator (India)"
+                li
+                  a [href="{ROOT}calculators/salary-in-hand/"] "Salary / CTC to In-Hand Calculator (India)"
+                li
+                  a [href="{ROOT}calculators/bmi/"] "BMI Calculator"
+                li
+                  a [href="{ROOT}calculators/calorie/"] "Calorie Calculator"
+                li
+                  a [href="{ROOT}calculators/bmr/"] "BMR Calculator"
+                li
+                  a [href="{ROOT}calculators/profit/"] "Profit Calculator"
+                li
+                  a [href="{ROOT}calculators/margin/"] "Margin Calculator"
+                li
+                  a [href="{ROOT}calculators/roi/"] "ROI Calculator"
+                li
+                  a [href="{ROOT}calculators/percentage/"] "Percentage Calculator"
+                li
+                  a [href="{ROOT}calculators/ratio/"] "Ratio Calculator"
+                li
+                  a [href="{ROOT}calculators/age/"] "Age Calculator"
+                li
+                  a [href="{ROOT}calculators/unit-converter/"] "Unit Converter"
+            li.section-switcher__group [data-open="false"]
+              button.section-switcher__toggle [aria-controls="section-rail-group-1" aria-expanded="false" type="button"]
+                span "Time Tools"
+                span.section-switcher__group-count [aria-hidden="true"] "13"
+              ul#section-rail-group-1
+                li
+                  a.section-switcher__section [data-name="Time Tools" href="{ROOT}time-tools.html"] "Time Tools overview"
+                li
+                  a [href="{ROOT}tools/date-difference/"] "Date Difference Calculator"
+                li
+                  a [href="{ROOT}tools/date-calculator/"] "Date Calculator"
+                li
+                  a [href="{ROOT}tools/countdown-timer/"] "Countdown Timer"
+                li
+                  a [href="{ROOT}tools/stopwatch/"] "Stopwatch"
+                li
+                  a [href="{ROOT}tools/business-days/"] "Business Days Calculator"
+                li
+                  a [href="{ROOT}tools/time-duration/"] "Time Duration Calculator"
+                li
+                  a [href="{ROOT}tools/shift-planner/"] "Shift Schedule Planner"
+                li
+                  a [href="{ROOT}tools/pomodoro-timer/"] "Pomodoro Focus Timer"
+                li
+                  a [href="{ROOT}tools/interval-timer/"] "Interval and Routine Timer"
+                li
+                  a [href="{ROOT}tools/meeting-planner/"] "International Meeting Planner"
+                li
+                  a [href="{ROOT}tools/time-zone-converter/"] "Time Zone Converter"
+                li
+                  a [href="{ROOT}tools/world-clock/"] "World Clock"
+                li
+                  a [href="{ROOT}tools/hours-calculator/"] "Hours & Timesheet Calculator"
+            li.section-switcher__group [data-open="false"]
+              button.section-switcher__toggle [aria-controls="section-rail-group-2" aria-expanded="false" type="button"]
+                span "Developer Tools"
+                span.section-switcher__group-count [aria-hidden="true"] "12"
+              ul#section-rail-group-2
+                li
+                  a.section-switcher__section [data-name="Developer Tools" href="{ROOT}developer-tools.html"] "Developer Tools overview"
+                li
+                  a [href="{ROOT}tools/json-formatter/"] "JSON Formatter & Validator"
+                li
+                  a [href="{ROOT}tools/unix-timestamp-converter/"] "Unix Timestamp Converter"
+                li
+                  a [href="{ROOT}tools/text-diff/"] "Text Diff / Compare"
+                li
+                  a [href="{ROOT}tools/jwt-decoder/"] "JWT Decoder"
+                li
+                  a [href="{ROOT}tools/cron-expression-explainer/"] "Cron Expression Explainer"
+                li
+                  a [href="{ROOT}tools/base64-encoder-decoder/"] "Base64 Encoder & Decoder"
+                li
+                  a [href="{ROOT}tools/url-parser/"] "URL Parser & Encoder"
+                li
+                  a [href="{ROOT}tools/json-compare/"] "JSON Compare"
+                li
+                  a [href="{ROOT}tools/jsonpath-tester/"] "JSONPath Tester"
+                li
+                  a [href="{ROOT}tools/list-comparer/"] "List Comparer"
+                li
+                  a [href="{ROOT}tools/uuid-generator/"] "UUID Generator"
+                li
+                  a [href="{ROOT}tools/json-csv-converter/"] "JSON and CSV Converter"
+            li.section-switcher__group [data-open="false"]
+              button.section-switcher__toggle [aria-controls="section-rail-group-3" aria-expanded="false" type="button"]
+                span "Image Tools"
+                span.section-switcher__group-count [aria-hidden="true"] "3"
+              ul#section-rail-group-3
+                li
+                  a.section-switcher__section [data-name="Image Tools" href="{ROOT}image-tools.html"] "Image Tools overview"
+                li
+                  a [href="{ROOT}tools/image-compressor-resizer/"] "Image Compressor & Resizer"
+                li
+                  a [href="{ROOT}tools/photos-to-pdf/"] "Photos to PDF"
+                li
+                  a [href="{ROOT}tools/image-metadata/"] "Photo Metadata Viewer and Remover"
+            li.section-switcher__group [data-open="false"]
+              button.section-switcher__toggle [aria-controls="section-rail-group-4" aria-expanded="false" type="button"]
+                span "PDF Tools"
+                span.section-switcher__group-count [aria-hidden="true"] "4"
+              ul#section-rail-group-4
+                li
+                  a.section-switcher__section [data-name="PDF Tools" href="{ROOT}pdf-tools.html"] "PDF Tools overview"
+                li
+                  a [href="{ROOT}tools/merge-pdf/"] "Merge PDF"
+                li
+                  a [href="{ROOT}tools/split-pdf/"] "Split PDF"
+                li
+                  a [href="{ROOT}tools/pdf-pages/"] "Extract, Reorder and Rotate PDF Pages"
+                li
+                  a [href="{ROOT}tools/pdf-marks/"] "Add Page Numbers and Watermark to PDF"
+            li.section-switcher__group [data-open="false"]
+              button.section-switcher__toggle [aria-controls="section-rail-group-5" aria-expanded="false" type="button"]
+                span "Practice Labs"
+                span.section-switcher__group-count [aria-hidden="true"] "8"
+              ul#section-rail-group-5
+                li
+                  a.section-switcher__section [data-name="Practice Labs" href="{ROOT}practice-labs.html"] "Practice Labs overview"
+                li
+                  a [href="{ROOT}tools/smart-flashcards/"] "Smart Flashcards"
+                li
+                  a [href="{ROOT}tools/json-error-fixing-lab/"] "JSON Error-Fixing Lab"
+                li
+                  a [href="{ROOT}tools/jsonpath-challenge-lab/"] "JSONPath Challenge Lab"
+                li
+                  a [href="{ROOT}tools/cron-challenge-lab/"] "Cron Challenge Lab"
+                li
+                  a [href="{ROOT}tools/test-design-lab/"] "Test Design Lab"
+                li
+                  a [href="{ROOT}tools/sql-practice-lab/"] "SQL Practice Lab"
+                li
+                  a [href="{ROOT}tools/excel-practice-lab/"] "Excel Practice Lab"
+                li
+                  a [href="{ROOT}tools/power-bi-practice-lab/"] "Power BI Practice Lab"
+            li.section-switcher__group [data-open="false"]
+              button.section-switcher__toggle [aria-controls="section-rail-group-6" aria-expanded="false" type="button"]
+                span "AI Tools"
+                span.section-switcher__group-count [aria-hidden="true"] "8"
+              ul#section-rail-group-6
+                li
+                  a.section-switcher__section [data-name="AI Tools" href="{ROOT}ai-tools.html"] "AI Tools overview"
+                li
+                  a [href="{ROOT}tools/ai-workbench/"] "AI Workbench"
+                li
+                  a [href="{ROOT}tools/prompt-builder/"] "AI Prompt Builder"
+                li
+                  a [href="{ROOT}tools/bug-report-prompt/"] "Bug Report to Debugging Prompt"
+                li
+                  a [href="{ROOT}tools/context-pack-builder/"] "Project Context Pack Builder"
+                li
+                  a [href="{ROOT}tools/ai-answer-checklist/"] "AI Answer Evidence Checklist"
+                li
+                  a [href="{ROOT}tools/ai-answer-compare/"] "Compare Two AI Answers"
+                li
+                  a [href="{ROOT}tools/meeting-notes-action-plan/"] "Meeting Notes to Action Plan"
+                li
+                  a [href="{ROOT}ai-tools/directory/"] "AI Directory"
+      button.section-rail__backdrop [aria-hidden="true" type="button"]
+      button.section-rail__show [aria-controls="section-rail" aria-expanded="false" type="button"] "Show All Tools"
+      div.ecosystem-main
+        div.categories-page__intro
+          span.categories-page__eyebrow "Explore"
+          h1.categories-page__title "All Tools"
+          p.categories-page__description "Search or browse every ToolZen Hub tool, by section and category."
         form.directory-search [action="{ROOT}tools.html" data-tools-search method="get" role="search"]
           label.directory-search__label [for="directory-search-input"] "Search tools"
           div.directory-search__row.tz-search
@@ -44,7 +239,8 @@ section.categories-page.directory-page
             input#directory-search-input.directory-search__input.tz-search__input [name="q" placeholder="Search by name, for example EMI or GST" type="search"]
             button.directory-search__button.tz-search__button [aria-label="Search" type="submit"]
               svg [aria-hidden="true"]
-        div#tools-results.directory-results [aria-live="polite" role="status"]
+        p#tools-results-status.directory-results__status [aria-live="polite" role="status"]
+        div#tools-results.directory-results
         div#tools-directory
           section.directory-section [aria-labelledby="directory-calculators-heading"]
             div.directory-section__header
@@ -303,7 +499,7 @@ section.categories-page.directory-page
               h2#directory-image-tools-heading.directory-section__title
                 a [href="{ROOT}image-tools.html"] "Image Tools"
               p.directory-section__text "Private browser-based tools for resizing and optimizing images."
-                span.directory-section__count "2 tools"
+                span.directory-section__count "3 tools"
             div.directory-groups
               article.directory-group.directory-group--tool
                 h3.directory-group__title
@@ -313,6 +509,10 @@ section.categories-page.directory-page
                 h3.directory-group__title
                   a [href="{ROOT}tools/photos-to-pdf/"] "Photos to PDF"
                 p.directory-group__text "Put several photos into one PDF, in the order you choose, with a page size and margin you …"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/image-metadata/"] "Photo Metadata Viewer and Remover"
+                p.directory-group__text "See whether a JPEG or PNG carries a location, the camera or phone, dates or text, and down…"
           section.directory-section [aria-labelledby="directory-pdf-tools-heading"]
             div.directory-section__header
               span.directory-section__label "Section"
@@ -379,3 +579,43 @@ section.categories-page.directory-page
                 p.directory-group__text "Learn the path from raw data to a report: thirteen lessons, forty-three exercises and a sa…"
             p.directory-section__more
               a [href="{ROOT}practice-labs.html"] "Practice Labs: exercises and flashcards →"
+          section.directory-section [aria-labelledby="directory-ai-tools-heading"]
+            div.directory-section__header
+              span.directory-section__label "Section"
+              h2#directory-ai-tools-heading.directory-section__title
+                a [href="{ROOT}ai-tools.html"] "AI Tools"
+              p.directory-section__text "Browser-built briefs for ChatGPT, Claude, Gemini and other assistants: a clear prompt from…"
+                span.directory-section__count "8 tools"
+            div.directory-groups
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/ai-workbench/"] "AI Workbench"
+                p.directory-group__text "Choose what you want to accomplish with AI and get a Work Pack: what to prepare, which AI …"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/prompt-builder/"] "AI Prompt Builder"
+                p.directory-group__text "Turn a rough idea into a complete prompt for ChatGPT, Claude, Gemini or any assistant: the…"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/bug-report-prompt/"] "Bug Report to Debugging Prompt"
+                p.directory-group__text "Turn what you saw, what you expected and how to reproduce it into a debugging task for an …"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/context-pack-builder/"] "Project Context Pack Builder"
+                p.directory-group__text "Write once what an AI assistant needs to know about your project: purpose, stack, key file…"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/ai-answer-checklist/"] "AI Answer Evidence Checklist"
+                p.directory-group__text "Paste an answer from ChatGPT, Claude or Gemini and get a checklist of what in it needs che…"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/ai-answer-compare/"] "Compare Two AI Answers"
+                p.directory-group__text "Paste two answers to the same question, from ChatGPT, Claude, Copilot or two attempts, and…"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}tools/meeting-notes-action-plan/"] "Meeting Notes to Action Plan"
+                p.directory-group__text "Paste rough meeting notes and get the decisions, the actions with owners and due dates (an…"
+              article.directory-group.directory-group--tool
+                h3.directory-group__title
+                  a [href="{ROOT}ai-tools/directory/"] "AI Directory"
+                p.directory-group__text "AI products made by other companies, checked on their official sites, with filters by task…"

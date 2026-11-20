@@ -352,7 +352,7 @@ test.describe("FD Calculator", () => {
       const c = getComputedStyle(el);
       return { bg: c.backgroundColor, color: c.color, cursor: c.cursor };
     });
-    expect(s).toEqual({ bg: "rgb(255, 255, 255)", color: "rgb(28, 25, 23)", cursor: "pointer" });
+    expect(s).toEqual({ bg: "rgb(255, 255, 255)", color: "rgb(32, 44, 69)", cursor: "pointer" });
     await expect(page.locator("button.calculator-form__button:not(.calculator-form__button--secondary)")).toHaveCount(0);
   });
 

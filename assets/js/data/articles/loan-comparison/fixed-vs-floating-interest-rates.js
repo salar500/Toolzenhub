@@ -319,15 +319,17 @@ const article = {
     example: {
 
         heading:
-            "Example: Fixed vs Floating Rate",
+            "Example: What a 1% Rate Change Does to One Loan",
 
         paragraphs: [
 
-            "Suppose two loans have the same principal amount and repayment tenure. One loan uses a fixed interest rate while the other uses a floating rate.",
+            "These are illustrations, not offers or forecasts. Take a ₹40 lakh loan over 20 years that starts at 8.5% a year: the EMI is about ₹34,700 and, if the rate never changed, the total interest would be about ₹43.3 lakh. After 36 EMIs about ₹37.4 lakh is still owed.",
 
-            "The fixed-rate loan may provide more predictable payments during its fixed period. The floating-rate loan may have a different repayment cost later if the applicable interest rate changes.",
+            "If the loan is floating and the rate rises to 9.5% at that point, the lender may keep your EMI and extend the loan, or raise the EMI and keep the end date. Keeping the EMI stretches the loan from 20 years to about 23 years 3 months and raises the total interest to about ₹56.8 lakh. Raising the EMI to about ₹37,000 keeps the 20-year end date and brings the total interest to about ₹48.0 lakh.",
 
-            "Comparing the EMI, interest rate and total repayment under different rate scenarios can help you understand how each loan could behave over time."
+            "If the rate falls to 7.5% instead, keeping the EMI ends the loan about 2 years early, with about ₹34.8 lakh of total interest; lowering the EMI to about ₹32,500 keeps the end date, with about ₹38.8 lakh. A rate fixed at 8.5% for that period would keep the EMI at about ₹34,700 either way, until the fixed period ends.",
+
+            "Notice that the same rise costs far more when the tenure is extended than when the EMI goes up, because the balance is paid down more slowly. Ask your lender which of the two it does when the rate changes, and whether you can choose. To try your own amount, rates and tenures, use the Loan Comparison Calculator."
 
         ]
 

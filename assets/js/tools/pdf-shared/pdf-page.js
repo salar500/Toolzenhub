@@ -298,6 +298,42 @@ export function chooseFileHtml(p, { step, label, multiple, hint }) {
 
 }
 
+/* Quick picks under a text box: each chip writes its value into the box and fires
+   "input", so the tool's own validation and plan preview run as if it were typed. */
+export function setPresetChips(container, input, label, presets) {
+
+    container.replaceChildren();
+    container.hidden = presets.length === 0;
+
+    if (!presets.length) {
+        return;
+    }
+
+    const heading = document.createElement("span");
+
+    heading.className = "pt-chips__label";
+    heading.textContent = label;
+    container.append(heading);
+
+    for (const preset of presets) {
+
+        const chip = document.createElement("button");
+
+        chip.type = "button";
+        chip.className = "pt-chip";
+        chip.textContent = preset.label;
+
+        chip.addEventListener("click", () => {
+            input.value = preset.value;
+            input.dispatchEvent(new Event("input", { bubbles: true }));
+        });
+
+        container.append(chip);
+
+    }
+
+}
+
 export function infoHtml(title, paragraphs) {
 
     return `

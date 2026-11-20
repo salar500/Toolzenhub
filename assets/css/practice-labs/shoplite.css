@@ -1,0 +1,38 @@
+/* ShopLite: the practice shop's own plain style (deliberately not the ToolZen Hub look: it is the application under test) */
+:root { --sl-ink: #1f2933; --sl-muted: #52606d; --sl-line: #cbd2d9; --sl-bg: #ffffff; --sl-soft: #f5f7fa; --sl-brand: #0b6e4f; --sl-error: #b42318; --sl-ok: #05603a; }
+@media (prefers-color-scheme: dark) { :root { --sl-ink: #e4e7eb; --sl-muted: #9aa5b1; --sl-line: #3e4c59; --sl-bg: #1f2933; --sl-soft: #29323d; --sl-brand: #3ebd93; --sl-error: #f97066; --sl-ok: #6ce9a6; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--sl-bg); color: var(--sl-ink); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+#shoplite { max-width: 960px; margin: 0 auto; padding: 0 16px 32px; }
+.sl-banner { margin: 0 -16px; padding: 8px 16px; background: #fff4ce; color: #3d2e00; font-size: 13px; }
+.sl-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 12px 0; border-bottom: 1px solid var(--sl-line); }
+.sl-header nav { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.sl-header a { color: var(--sl-brand); font-weight: 600; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+.sl-logo { font-size: 20px; }
+.sl-main h1 { font-size: 26px; margin: 16px 0 12px; }
+.sl-message:empty { display: none; }
+.sl-message { margin: 12px 0 0; padding: 10px 12px; border-radius: 8px; background: var(--sl-soft); }
+.sl-message--error { color: var(--sl-error); border: 1px solid currentColor; }
+.sl-message--ok { color: var(--sl-ok); border: 1px solid currentColor; }
+.sl-filters, .sl-inline { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 12px; margin: 0 0 12px; }
+.sl-field { display: grid; gap: 4px; flex: 1 1 180px; margin: 0 0 10px; }
+.sl-field label { font-weight: 600; font-size: 14px; }
+.sl-hint { margin: 0; color: var(--sl-muted); font-size: 13px; }
+input, select, textarea { font: inherit; color: inherit; background: var(--sl-bg); min-height: 44px; padding: 8px 10px; border: 1px solid var(--sl-line); border-radius: 8px; width: 100%; }
+input[type="number"] { width: 5.5em; }
+.sl-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px 16px; border: 1px solid var(--sl-brand); border-radius: 8px; background: var(--sl-brand); color: #fff; font: inherit; font-weight: 600; cursor: pointer; text-decoration: none; }
+.sl-btn--quiet { background: transparent; color: var(--sl-brand); }
+.sl-btn--small { min-height: 36px; padding: 4px 10px; margin-left: 6px; }
+.sl-count { color: var(--sl-muted); }
+.sl-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 12px; }
+.sl-card { display: grid; gap: 6px; padding: 12px; border: 1px solid var(--sl-line); border-radius: 10px; }
+.sl-card a { color: var(--sl-ink); font-weight: 600; }
+.sl-cat { color: var(--sl-muted); font-size: 13px; }
+.sl-table { width: 100%; border-collapse: collapse; margin: 0 0 16px; display: block; overflow-x: auto; }
+.sl-table th, .sl-table td { padding: 8px; border-bottom: 1px solid var(--sl-line); text-align: left; white-space: nowrap; }
+.sl-summary { display: grid; grid-template-columns: auto auto; gap: 4px 16px; max-width: 320px; margin: 0 0 16px; }
+.sl-summary dd { margin: 0; text-align: right; }
+.sl-total { font-weight: 700; }
+.sl-form { max-width: 480px; }
+.sl-reqs li { margin: 0 0 8px; }
+.sl-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }

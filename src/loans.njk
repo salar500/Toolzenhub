@@ -3,7 +3,7 @@ layout: layouts/listing.njk
 permalink: "/loans.html"
 title: "Loans Calculators | ToolZen Hub"
 description: "Calculate, compare and plan loans with ToolZen Hub tools for EMI, home loans, loan prepayment, balance transfer and loan comparison."
-themeColor: "#fafaf9"
+themeColor: "#f6f4ee"
 sitemapOrder: 3
 fonts: true
 styles:
@@ -23,6 +23,7 @@ styles:
   - "/assets/css/components/footer.css"
   - "/assets/css/themes/light.css"
   - "/assets/css/pages/loans.css"
+  - "/assets/css/components/section-switcher.css"
   - "/assets/css/components/search-field.css"
 scripts:
   - "/assets/js/pages/loans.js"
@@ -34,14 +35,13 @@ clientRendered: true
 
     <main id="app">
 
+        <div class="container container--workspace">
 
         <!-- =================================================
-             Breadcrumb
+             Breadcrumb: one row above the sidebar and the workspace, as on every ecosystem page
         ================================================== -->
 
         <section class="loans-breadcrumb">
-
-            <div class="container">
 
                 <nav
                     class="loans-breadcrumb__nav"
@@ -85,9 +85,12 @@ clientRendered: true
 
                 </nav>
 
-            </div>
-
         </section>
+
+        <div class="ecosystem-layout" data-section-page>
+        {% sectionNav "calculators", "loans" %}
+        <div class="ecosystem-main">
+
 
 
         <!-- =================================================
@@ -321,6 +324,11 @@ clientRendered: true
             </div>
 
         </section>
+
+        </div>
+        </div>
+
+        </div>
 
     </main>
 

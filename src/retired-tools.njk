@@ -1,0 +1,50 @@
+---
+pagination:
+  data: retiredTools
+  size: 1
+  alias: retired
+permalink: "/tools/{{ retired.id }}/"
+eleventyExcludeFromCollections: true
+noindex: true
+---
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ retired.title }} has moved | ToolZen Hub</title>
+
+    <meta name="description" content="{{ retired.now }}">
+
+    <meta name="robots" content="noindex">
+
+    <link rel="canonical" href="{{ site.productionUrl('/tools/' + retired.to + '/') }}">
+
+    <meta http-equiv="refresh" content="0; url={{ site.base }}tools/{{ retired.to }}/{{ retired.query }}">
+
+    {#- A link with its own query (for example ?mode=compare) opens that start; otherwise the visitor's query and
+        fragment are carried over, so an old ?outcome=video link still lands on that outcome. #}
+    <script>
+        (function () {
+            var target = {{ (site.base + "tools/" + retired.to + "/") | jsonLd | safe }};
+            var query = {{ retired.query | jsonLd | safe }};
+            location.replace(target + (query || location.search) + location.hash);
+        })();
+    </script>
+
+</head>
+
+<body>
+
+    <main>
+        <h1>{{ retired.title }} has moved</h1>
+        <p>{{ retired.now }}</p>
+        <p><a href="{{ site.base }}tools/{{ retired.to }}/{{ retired.query }}">Continue to the {{ "AI Answer Checker" if retired.to == "ai-answer-checker" else "AI Prompt Builder" }}</a></p>
+    </main>
+
+</body>
+
+</html>

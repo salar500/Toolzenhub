@@ -10,15 +10,15 @@ import { test, expect, expectClean, settleImages, livePages, rel, expectNoHorizo
 const articles = livePages.filter((p) => p.type === "article");
 const titleOf = (p) => p.expectedTitle.replace(/ \| ToolZen Hub$/, "");
 // no featured image (a text comparison reads better than a generic chart): only the second SWP article, which also has no card image
-const NO_IMAGE = new Set(["what-changes-how-long-a-corpus-lasts"]);
+const NO_IMAGE = new Set(["what-changes-how-long-a-corpus-lasts", "how-to-write-instructions-an-ai-assistant-can-act-on", "how-to-give-an-ai-assistant-your-projects-context", "how-to-read-an-ai-answer-before-you-trust-it"]); // the AI guides (Tool Pack 56) are method, with nothing to chart
 // The original articles (topic "loan-comparison") have five curated related articles and lead to Loan Comparison; the
 // articles of each Tool Pack have three and lead to that pack's tool. A new pack adds ONE line to the first map (and to
 // the second when its category is not Loans). A topic missing from the maps fails the call-to-action or breadcrumb
 // assertion below, so a new pack cannot pass unnoticed. Which articles exist is pinned elsewhere (inventory, articles.test.mjs).
 const ORIGINAL_TOPIC = "loan-comparison";
-const PACK_TOOL = { investment: "sip", tax: "income-tax", "loan-prepayment": "prepayment", "balance-transfer": "balance-transfer", sip: "sip", margin: "margin", profit: "profit", "home-loan": "home-loan", fd: "fd", gst: "gst", cagr: "cagr", percentage: "percentage", math: "percentage", swp: "swp", business: "roi", health: "calorie", converter: "unit-converter" }; // topic -> the tool its articles lead to
-const PACK_CATEGORY = { investment: { name: "Investment", slug: "investment" }, tax: { name: "Tax", slug: "tax" }, sip: { name: "Investment", slug: "investment" }, margin: { name: "Business", slug: "business" }, profit: { name: "Business", slug: "business" }, fd: { name: "Investment", slug: "investment" }, gst: { name: "Tax", slug: "tax" }, cagr: { name: "Investment", slug: "investment" }, percentage: { name: "Math", slug: "math" }, math: { name: "Math", slug: "math" }, swp: { name: "Investment", slug: "investment" }, business: { name: "Business", slug: "business" }, health: { name: "Health", slug: "health" }, converter: { name: "Converter", slug: "converter" } }; // topic -> category, when it is not Loans
-const LEADS_TO = { "what-is-loan-prepayment": "prepayment" }; // an original guide that leads to a pack's tool
+const PACK_TOOL = { investment: "sip", tax: "income-tax", "loan-prepayment": "prepayment", "balance-transfer": "balance-transfer", sip: "sip", margin: "margin", profit: "profit", "home-loan": "home-loan", fd: "fd", gst: "gst", cagr: "cagr", percentage: "percentage", math: "percentage", swp: "swp", business: "roi", health: "calorie", converter: "unit-converter", ai: "prompt-builder" }; // topic -> the tool its articles lead to
+const PACK_CATEGORY = { investment: { name: "Investment", slug: "investment" }, tax: { name: "Tax", slug: "tax" }, sip: { name: "Investment", slug: "investment" }, margin: { name: "Business", slug: "business" }, profit: { name: "Business", slug: "business" }, fd: { name: "Investment", slug: "investment" }, gst: { name: "Tax", slug: "tax" }, cagr: { name: "Investment", slug: "investment" }, percentage: { name: "Math", slug: "math" }, math: { name: "Math", slug: "math" }, swp: { name: "Investment", slug: "investment" }, business: { name: "Business", slug: "business" }, health: { name: "Health", slug: "health" }, converter: { name: "Converter", slug: "converter" }, ai: { name: "AI", slug: "ai" } }; // topic -> category, when it is not Loans
+const LEADS_TO = { "what-is-loan-prepayment": "prepayment", "how-to-reduce-home-loan-interest": "prepayment", "how-to-give-an-ai-assistant-your-projects-context": "prompt-builder", "how-to-read-an-ai-answer-before-you-trust-it": "ai-answer-checker" }; // a guide that leads to a tool other than its topic's first
 const toolOf = (a) => LEADS_TO[a.slug] ?? PACK_TOOL[a.topic] ?? "loan-comparison";
 const categoryOf = (a) => PACK_CATEGORY[a.topic] ?? { name: "Loans", slug: "loans" };
 
@@ -64,11 +64,11 @@ test.describe("published article pages", () => {
 
       // calculator link area
       const cta = page.locator(".article-calculator-button");
-      await expect(cta).toHaveAttribute("href", `${siteRoot}calculators/${toolOf(a)}/`);
+      await expect(cta).toHaveAttribute("href", `${siteRoot}${a.topic === "ai" ? "tools" : "calculators"}/${toolOf(a)}/`); // an AI guide leads to a section tool under /tools/
 
       // related articles: the curated list (five; three for the Loan Prepayment and Balance Transfer articles), all resolvable, none is the page itself
       const related = await page.locator(".article-related-card").evaluateAll((l) => l.map((x) => x.getAttribute("href")));
-      expect(related).toHaveLength(a.topic === ORIGINAL_TOPIC ? 5 : a.topic === "health" || a.topic === "converter" ? 0 : a.topic === "business" || a.topic === "tax" ? 2 : a.topic === "margin" || a.topic === "profit" || a.topic === "fd" || a.topic === "gst" || a.topic === "cagr" || a.topic === "percentage" || a.topic === "math" || a.topic === "swp" ? 2 : 3); // Margin and Profit: three-article clusters, so two others; FD: a two-article cluster, so the other one (and one SIP article)
+      expect(related).toHaveLength(a.topic === ORIGINAL_TOPIC ? 5 : a.topic === "health" || a.topic === "converter" ? 0 : a.topic === "business" || a.topic === "tax" ? 2 : a.topic === "margin" || a.topic === "profit" || a.topic === "fd" || a.topic === "gst" || a.topic === "cagr" || a.topic === "percentage" || a.topic === "math" || a.topic === "swp" || a.topic === "ai" ? 2 : 3); // the AI guides: a three-article cluster; Margin and Profit: three-article clusters, so two others; FD: a two-article cluster, so the other one (and one SIP article)
       for (const h of related) {
         expect(h).not.toBe(`${siteRoot}articles/${a.topic}/${a.slug}/`);
         expect((await api.get(h)).status(), h).toBe(200);
@@ -99,8 +99,8 @@ test.describe("articles listing page", () => {
     await go("articles.html");
     await expect(page.locator("h1")).toHaveText("Articles & Guides");
     await expect(cards(page)).toHaveCount(5);
-    await expect(page.locator(".articles-pagination button[data-page]:not([data-page=next])")).toHaveCount(8);
-    // sidebar counts are published-only: first five shown: Loans 13, Investment 11, Tax 3, Business 7, Health 1 (Math 4 and Converter 1 sit behind "more")
+    await expect(page.locator(".articles-pagination button[data-page]:not([data-page=next])")).toHaveCount(9);
+    // sidebar counts are published-only: first five shown: Loans 13, Investment 11, Tax 3, Business 7, Health 1 (Math 4, Converter 1 and AI 3 sit behind "more")
     const counts = await page.locator(".article-category-count").evaluateAll((l) => l.map((x) => x.textContent.replace(/\D+/g, "")));
     expect(counts).toEqual(["13", "11", "3", "7", "1"]);
     // page 1 is the first five published articles, all clickable
@@ -109,16 +109,16 @@ test.describe("articles listing page", () => {
     expectClean(watch);
   });
 
-  test("pagination: eight pages of five published articles; no placeholder is left", async ({ page, go }) => {
+  test("pagination: eight full pages of five published articles and a ninth of three; no placeholder is left", async ({ page, go }) => {
     await go("articles.html");
-    for (const n of [2, 3, 4, 5, 6, 7]) {
+    for (const n of [2, 3, 4, 5, 6, 7, 8]) {
       await page.locator(`.articles-pagination button[data-page="${n}"]`).click();
       await expect(page.locator(`.articles-pagination button[data-page="${n}"]`)).toHaveClass(/active/);
       await expect(cards(page)).toHaveCount(5);
       await expect(soonCards(page)).toHaveCount(0);
     }
-    await page.locator('.articles-pagination button[data-page="8"]').click();
-    await expect(cards(page)).toHaveCount(5);
+    await page.locator('.articles-pagination button[data-page="9"]').click();
+    await expect(cards(page)).toHaveCount(3);
     await expect(soonCards(page)).toHaveCount(0);
     await expect(page.locator(".articles-pagination .pagination-next")).toBeDisabled();
   });
@@ -162,9 +162,9 @@ test.describe("articles listing page", () => {
   test("search: finds an article, shows an empty state, and clears", async ({ page, go }) => {
     await go("articles.html");
     const search = page.locator("#article-search");
-    await search.fill("prepayment");
+    await search.fill("what is loan prepayment");
     await expect(cards(page).first()).toContainText("What Is Loan Prepayment?");
-    expect(await cards(page).count()).toBeLessThan(5);
+    expect(await cards(page).count()).toBeLessThan(5); // the full title matches one article; the bare word "prepayment" also finds the home-loan guide since 2026-11-12
     await search.fill("zzzz-no-such-article");
     await expect(page.locator("#articles-list .articles-empty")).toBeVisible();
     await expect(cards(page)).toHaveCount(0);
@@ -192,9 +192,9 @@ test.describe("articles listing page", () => {
  * not derived from the code under test.
  * ------------------------------------------------------------------------------------------------------- */
 const CATALOG = {
-  "how-to-reduce-home-loan-interest": { title: "How to Reduce Your Home Loan Interest", description: "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save money over the life of your loan.", readTime: "6 min read", hero: "/assets/Images/articles/how-to-reduce-home-loan-interest.png", alt: "Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate", related: ["emi-vs-total-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","what-is-loan-prepayment","choose-right-loan-tenure"] },
+  "how-to-reduce-home-loan-interest": { title: "How to Reduce Home Loan Interest: 6 Ways With Examples", description: "Six ways to reduce home loan interest and EMI: shorter tenure, part-prepayment, extra payments, a lower rate or a balance transfer, with a ₹40 lakh example.", readTime: "6 min read", hero: "/assets/Images/articles/how-to-reduce-home-loan-interest.png", alt: "Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate", related: ["emi-vs-total-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","what-is-loan-prepayment","choose-right-loan-tenure"] },
   "emi-vs-total-interest": { title: "EMI vs Total Interest: What Should You Compare?", description: "Understand why EMI alone does not tell the complete story when comparing loan options and borrowing costs.", readTime: "5 min read", hero: "/assets/Images/articles/emi-vs-total-interest.png", alt: "Chart of the EMI falling and the total interest rising as the loan tenure gets longer", related: ["how-to-reduce-home-loan-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","what-is-loan-prepayment","choose-right-loan-tenure"] },
-  "fixed-vs-floating-interest-rates": { title: "Fixed vs Floating Interest Rates", description: "Understand the difference between fixed and floating interest rates before choosing a loan.", readTime: "6 min read", hero: "/assets/Images/articles/fixed-vs-floating-interest-rates.png", alt: "Illustrative diagram: a fixed interest rate stays flat while a floating rate moves up and down in steps over the life of a loan", related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","loan-tenure-total-interest","what-is-loan-prepayment","choose-right-loan-tenure"] },
+  "fixed-vs-floating-interest-rates": { title: "Fixed vs Floating Interest Rates", description: "How fixed and floating interest rates differ, and what a 1% rate rise or fall does to the EMI, tenure and total interest of a ₹40 lakh loan.", modified: "2026-11-16", readTime: "6 min read", hero: "/assets/Images/articles/fixed-vs-floating-interest-rates.png", alt: "Illustrative diagram: a fixed interest rate stays flat while a floating rate moves up and down in steps over the life of a loan", related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","loan-tenure-total-interest","what-is-loan-prepayment","choose-right-loan-tenure"] },
   "loan-tenure-total-interest": { title: "How Loan Tenure Affects Total Interest", description: "See why choosing a longer or shorter loan tenure can significantly affect your total interest cost.", readTime: "6 min read", hero: "/assets/Images/articles/loan-tenure-total-interest.png", alt: "Stacked bars showing how much interest is repaid on the same loan over tenures of 10 to 30 years", related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","fixed-vs-floating-interest-rates","what-is-loan-prepayment","choose-right-loan-tenure"] },
   "what-is-loan-prepayment": { title: "What Is Loan Prepayment?", description: "Understand how loan prepayment works and how paying down your principal can potentially reduce interest.", readTime: "4 min read", hero: "/assets/Images/articles/what-is-loan-prepayment.png", alt: "Chart of a loan balance falling sooner after a one-time prepayment than without one", related: ["loan-prepayment/reduce-tenure-or-lower-emi-after-prepayment","loan-prepayment/early-vs-late-loan-prepayment","how-to-reduce-home-loan-interest","emi-vs-total-interest","loan-tenure-total-interest"] },
   "choose-right-loan-tenure": { title: "How to Choose the Right Loan Tenure", description: "Learn how to balance monthly affordability with total borrowing cost when choosing a loan tenure.", readTime: "5 min read", hero: "/assets/Images/articles/choose-right-loan-tenure.png", alt: "Diagram: a shorter tenure means a higher monthly EMI and lower total interest; a longer tenure means a lower EMI and higher total interest", related: ["how-to-reduce-home-loan-interest","emi-vs-total-interest","fixed-vs-floating-interest-rates","loan-tenure-total-interest","what-is-loan-prepayment"] },
@@ -215,7 +215,7 @@ test.describe("M5 article metadata comes from the catalog and is unchanged", () 
       await expect(page.locator(".article-hero h1")).toHaveText(want.title);
       await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", want.description);
       await expect(page.locator(".article-meta")).toContainText(want.readTime);
-      await expect(page.locator(".article-meta")).toContainText("Aug 25, 2026");
+      await expect(page.locator(".article-meta")).toContainText("Aug 25, 2026"); // the visible date is the publication date; Fixed vs Floating's update (2026-11-16) is in dateModified
 
       // JSON-LD carries the same metadata
       const article = await page.locator('script[type="application/ld+json"]').evaluateAll((s) => s.map((x) => JSON.parse(x.textContent)).find((j) => j["@type"] === "Article"));
@@ -224,7 +224,7 @@ test.describe("M5 article metadata comes from the catalog and is unchanged", () 
       expect(article.articleSection).toBe("loans");
       // M8: structured data now uses ISO 8601 (was "Aug 25, 2026"); the VISIBLE date above is unchanged
       expect(article.datePublished).toBe("2026-08-25");
-      expect(article.dateModified).toBe("2026-08-25");
+      expect(article.dateModified).toBe(want.modified ?? "2026-08-25");
 
       // hero image
       const hero = page.locator(".article-hero-image img");

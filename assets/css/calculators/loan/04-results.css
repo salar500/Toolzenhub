@@ -30,7 +30,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 10px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     box-shadow:
         0 3px 12px rgba(15, 23, 42, .04);
@@ -66,7 +66,7 @@
     background: linear-gradient(
         135deg,
         var(--accent-soft),
-        #ffffff
+        var(--surface-card)
     );
 
     border-color: var(--line);
@@ -130,7 +130,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: 12px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 }
 
 .loan-content-card h2,

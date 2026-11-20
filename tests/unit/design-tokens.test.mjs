@@ -15,9 +15,10 @@ const CSS_DIR = path.join(PROJECT, "assets", "css");
 // Design System 2.0, approved Design C (docs/ecosystem-review/ui-ux-design-system/05-...). Semantic tokens carry literals;
 // the older names are aliases that must keep resolving until no stylesheet reads them.
 const TOKENS = {
-  "--surface-page": "#fafaf9", "--surface-card": "#ffffff", "--line": "#e7e5e4", "--line-control": "#78716c",
-  "--ink": "#1c1917", "--ink-muted": "#57534e", "--action": "#1c1917", "--accent": "#4338ca",
-  "--state-success": "#166534", "--state-error": "#b91c1c", "--state-warning": "#92400e",
+  // Premium Spectrum (owner brief, 2026-11-12): ivory page, midnight-navy action, royal-violet accent
+  "--surface-page": "#f6f4ee", "--surface-card": "#ffffff", "--line": "#e1e5ec", "--line-control": "#6b7690",
+  "--ink": "#1b2438", "--ink-muted": "#475269", "--action": "#202c45", "--accent": "#7656c9",
+  "--state-success": "#17695f", "--state-error": "#b91c1c", "--state-warning": "#8a5a0b",
 };
 const ALIASES = { "--color-brand-green": "--accent", "--color-action-green": "--action", "--color-ink": "--ink", "--color-ink-muted": "--ink-muted", "--color-slate-200": "--line", "--color-primary": "--accent", "--text-primary": "--ink", "--bg-body": "--surface-page" };
 const RETIRED_GREEN = ["#0b9f58", "#087f47", "#07733f", "#066b3b"];
@@ -89,7 +90,8 @@ describe("custom properties", () => {
     }
     // These are referenced without a fallback and never declared, so those declarations are ignored by the browser
     // (no transition, z-index auto). Defining them would switch on behaviour that has never run: left as is.
-    const KNOWN_UNDEFINED = ["--transition-fast", "--transition-normal", "--z-dropdown", "--z-modal"];
+    // --rail-w and --rail-zoom are set at run time by ui/section-rail.js (style.setProperty), with CSS fallbacks
+    const KNOWN_UNDEFINED = ["--transition-fast", "--transition-normal", "--z-dropdown", "--z-modal", "--rail-w", "--rail-zoom"];
     assert.deepEqual([...used].filter((n) => !defined.has(n)).sort(), KNOWN_UNDEFINED.sort());
   });
 });
@@ -103,6 +105,10 @@ describe("every generated page can use the tokens", () => {
   for (const build of ["dist", "dist-ghpages"]) {
     it(`${build}/: every live page loads base/variables.css before its other stylesheets`, () => {
       for (const p of inventory.live) {
+        // ShopLite is a standalone practice shop with its own stylesheet and deliberately not the site's design system
+        if (p.type === "practice-target") continue;
+        // a retired tool's address (src/retired-tools.njk) is an unstyled stub that replaces itself at once with its new home
+        if (p.type === "redirect") continue;
         const html = read(path.join(PROJECT, build, p.file));
         const sheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)].map((m) => m[1]).filter((h) => h.includes("/assets/css/"));
         assert.ok(sheets.length > 0, p.file);

@@ -28,6 +28,47 @@ const BUILD_ONLY = [
   "js/pages/article/articleContent.js",
   "js/pages/about/about-template.js",
   "js/pages/directory/directory-html.js",
+  // js/data/ai-directory.js ships since 2026-11-16: the AI Workbench reads it in the browser when a task is chosen
+  "js/data/knowledge.js",
+  "js/data/official-sources.js",
+  "js/components/knowledge-links.js",
+  "js/practice-labs/curriculum.js",
+  "js/practice-labs/learn-html.js",
+  "js/practice-labs/sql-extras.js",
+  "js/practice-labs/departments.js",
+  "js/practice-labs/sql/additions-lessons.js",
+  "js/practice-labs/blocks-html.js",
+  "js/practice-labs/manual-testing/lessons.js",
+  "js/practice-labs/manual-testing/lessons-2.js",
+  "js/practice-labs/manual-testing/lessons-3.js",
+  "js/practice-labs/test-design/lessons.js",
+  "js/practice-labs/playwright/lessons.js",
+  "js/practice-labs/playwright/lessons-2.js",
+  "js/practice-labs/ai/lessons.js",
+  "js/practice-labs/data/lessons.js",
+  "js/practice-labs/programming/lessons.js",
+  "js/practice-labs/web/lessons.js",
+  "js/practice-labs/web/html-lessons.js",
+  "js/practice-labs/devops/lessons.js",
+  "js/practice-labs/devops/security-lessons.js",
+  "js/practice-labs/journeys.js",
+  "js/practice-labs/data/pandas-lessons.js",
+  "js/practice-labs/web/frontend-lessons.js",
+  "js/practice-labs/ai/llm-apps-lessons.js",
+  "js/practice-labs/programming/typescript-lessons.js",
+  "js/practice-labs/programming/regex-dsa-lessons.js",
+  "js/practice-labs/data/engineering-lessons.js",
+  "js/practice-labs/data/excel-pbi-lessons.js",
+  "js/practice-labs/manual-testing/specialised-lessons.js",
+  "js/practice-labs/sql/design-lessons.js",
+  "js/practice-labs/automation/api-selenium-lessons.js",
+  "js/practice-labs/web/backend-lessons.js",
+  "js/practice-labs/ai/prompt-lessons.js",
+  "js/practice-labs/ai/ml-lessons.js",
+  "js/practice-labs/devops/k8s-lessons.js",
+  "js/practice-labs/devops/linux-lessons.js",
+  "js/practice-labs/programming/java-lessons.js",
+  "js/practice-labs/programming/python-lessons.js",
 ];
 
 export function normalizeBase(base) {
@@ -48,10 +89,13 @@ export function createConfig({ base, output }) {
   return async function eleventyConfig(eleventyConfig) {
     const { headerMarkup } = await import(fileUrl("assets/js/components/header.js"));
     const { footerMarkup } = await import(fileUrl("assets/js/components/footer.js"));
+    const { renderSectionNav } = await import(fileUrl("assets/js/components/section-switcher.js"));
 
     // ---- shared markup, produced by the same functions the browser used to run
     eleventyConfig.addShortcode("siteHeader", () => headerMarkup());
     eleventyConfig.addShortcode("siteFooter", () => footerMarkup());
+    // the ecosystem sidebar for a page that is not a tool page: {% sectionNav "calculators" %} or {% sectionNav "calculators", "loans" %}
+    eleventyConfig.addShortcode("sectionNav", (sectionId, currentCategoryId) => renderSectionNav({ sectionId, currentCategoryId: currentCategoryId || null }));
 
     // ---- filters
     // JSON for a <script type="application/ld+json"> block; "<" is escaped so a value can never close the tag

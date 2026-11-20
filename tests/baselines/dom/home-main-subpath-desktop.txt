@@ -23,7 +23,8 @@ main#app
               input.tz-search__input [aria-label="Search tools" name="q" placeholder="Search tools..." type="search"]
               button.hero__search-button.tz-search__button [aria-label="Search tools" type="submit"]
                 svg [aria-hidden="true"]
-            div#hero-calculator-search-results.calculator-search-results [aria-live="polite"]
+            p#hero-search-status.hero-results__status [aria-live="polite" role="status"]
+            div#hero-calculator-search-results.calculator-search-results.hero-results
           div.hero__visual
             svg [aria-hidden="true" role="presentation"]
   section#categories.section
@@ -32,6 +33,13 @@ main#app
         div.section-header
           h2.section-title "Explore Tools"
         div.category-grid.category-grid--sections
+          a.category-card [href="{ROOT}ai-tools.html"]
+            div.category-card__icon.category-card__icon--ai-tools
+              svg [aria-hidden="true"]
+            div.category-card__content
+              h3 "AI Tools"
+              p "Prompt, debugging-task and context-pack builders for ChatGPT, Claude and Gemini"
+              span.category-card__count "8 tools"
           a.category-card [href="{ROOT}categories.html"]
             div.category-card__icon.category-card__icon--calculators
               svg [aria-hidden="true"]
@@ -59,7 +67,7 @@ main#app
             div.category-card__content
               h3 "Image Tools"
               p "Compress and resize images in your browser"
-              span.category-card__count "2 tools"
+              span.category-card__count "3 tools"
           a.category-card [href="{ROOT}pdf-tools.html"]
             div.category-card__icon.category-card__icon--pdf-tools
               svg [aria-hidden="true"]
@@ -72,7 +80,7 @@ main#app
               svg [aria-hidden="true"]
             div.category-card__content
               h3 "Practice Labs"
-              p "Hands-on exercises and flashcards for JSON, cron and software testing"
+              p "Paths, exercises and flashcards for SQL, Excel, Python and testing"
               span.category-card__count "8 tools"
   section#popular-calculators.section
     section.popular-section
@@ -82,19 +90,19 @@ main#app
           a.section-link [href="{ROOT}tools.html"] "View all tools"
             span [aria-hidden="true"] "→"
         div.calculator-grid
+          a.calculator-card [href="{ROOT}tools/ai-workbench/"]
+            div.calculator-card__icon.calculator-card__icon--purple
+              svg [aria-hidden="true"]
+            div.calculator-card__content
+              h3 "AI Workbench"
+              p "Plan a task and get the prompts for your AI"
+            span.calculator-card__arrow [aria-hidden="true"] "→"
           a.calculator-card [href="{ROOT}calculators/home-loan/"]
             div.calculator-card__icon.calculator-card__icon--pink
               svg [aria-hidden="true"]
             div.calculator-card__content
               h3 "Home Loan Calculator"
               p "Find the loan that fits your EMI budget"
-            span.calculator-card__arrow [aria-hidden="true"] "→"
-          a.calculator-card [href="{ROOT}calculators/gst/"]
-            div.calculator-card__icon.calculator-card__icon--purple
-              svg [aria-hidden="true"]
-            div.calculator-card__content
-              h3 "GST Calculator"
-              p "Add or remove GST on an invoice"
             span.calculator-card__arrow [aria-hidden="true"] "→"
           a.calculator-card [href="{ROOT}tools/time-zone-converter/"]
             div.calculator-card__icon.calculator-card__icon--blue
@@ -137,8 +145,8 @@ main#app
               img [alt="Bar chart comparing the total interest on the same loan as it is, with a prepayment, with a shorter tenure and with a lower rate" loading="lazy" src="{ROOT}assets/Images/articles/how-to-reduce-home-loan-interest.png"]
             div.article-card__content
               div.article-card__category "Loans"
-              h3.article-card__title "How to Reduce Your Home Loan Interest"
-              p.article-card__description "Learn practical ways to reduce your home loan interest, lower your borrowing cost and save…"
+              h3.article-card__title "How to Reduce Home Loan Interest: 6 Ways With Examples"
+              p.article-card__description "Six ways to reduce home loan interest and EMI: shorter tenure, part-prepayment, extra paym…"
               div.article-card__footer
                 span.article-card__read "Read article"
                 span.article-card__arrow [aria-hidden="true"] "→"
@@ -158,7 +166,7 @@ main#app
             div.article-card__content
               div.article-card__category "Loans"
               h3.article-card__title "Fixed vs Floating Interest Rates"
-              p.article-card__description "Understand the difference between fixed and floating interest rates before choosing a loan…"
+              p.article-card__description "How fixed and floating interest rates differ, and what a 1% rate rise or fall does to the …"
               div.article-card__footer
                 span.article-card__read "Read article"
                 span.article-card__arrow [aria-hidden="true"] "→"

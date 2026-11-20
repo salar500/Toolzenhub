@@ -122,6 +122,20 @@ export const ROUTES = {
 
 
     /* =====================================================
+       AI TOOLS
+
+       The section's own page (it has no categories).
+    ===================================================== */
+
+    aiTools:
+        `${SITE_ROOT}ai-tools.html`,
+
+    /* external AI products, a page of the AI Tools section (data/ai-directory.js) */
+    aiDirectory:
+        `${SITE_ROOT}ai-tools/directory/`,
+
+
+    /* =====================================================
        CATEGORIES
 
        The Calculators section's own page: its categories.

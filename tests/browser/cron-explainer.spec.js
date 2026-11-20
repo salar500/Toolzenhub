@@ -531,7 +531,7 @@ test.describe("Cron Expression Explainer in the Developer Tools section", () => 
     }
     // the Unix converter lists it since the Developer Tools pilot (2026-10-27)
     await go("tools/unix-timestamp-converter/");
-    await expect(page.locator(".related-section").getByRole("link", { name: /Cron Expression Explainer/ })).toHaveCount(1);
+    await expect(page.locator(".related-section:not(.knowledge-links)").getByRole("link", { name: /Cron Expression Explainer/ })).toHaveCount(1);
     await go("tools/cron-expression-explainer/");
     const links = await page.locator("main .calculator-info a").evaluateAll((a) => a.map((x) => x.getAttribute("href")));
     expect(links).toEqual([`${siteRoot}tools/unix-timestamp-converter/`]);
@@ -542,7 +542,7 @@ test.describe("Cron Expression Explainer in the Developer Tools section", () => 
   test("global search finds it by its own names", async ({ page, go, siteRoot }) => {
     for (const q of ["cron expression explainer", "explain cron expression", "crontab syntax", "cron next run times"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
-      await expect(page.locator(`a[href='${siteRoot}tools/cron-expression-explainer/']`).first(), q).toBeVisible();
+      await expect(page.locator(`#tools-results a[href='${siteRoot}tools/cron-expression-explainer/']`).first(), q).toBeVisible();
     }
   });
 

@@ -87,7 +87,7 @@ export function footerMarkup() {
                             >
 
                                 <span class="footer__logo-mark" aria-hidden="true">
-                                    ${logoMark({ background: "#292524" })}
+                                    ${logoMark({ background: "#25335a" })}
                                 </span>
 
                                 <span>

@@ -475,7 +475,9 @@ function renderCalculator(
     }
 
 
+    /* the tool's own page: a section tool lives under /tools/, a calculator under /calculators/ (the catalog knows which) */
     const href =
+        calculator.href ||
         ROUTES.calculator(
             calculator.slug
         );

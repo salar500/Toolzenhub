@@ -21,6 +21,16 @@
        days = dayNumber(B) - dayNumber(addMonths(A, n)).
        So addMonths(A, n) <= B < addMonths(A, n + 1).
 
+   COUNTING BOTH DATES (option `inclusive`)
+       Elapsed days (the default) do not count the start day: 1 June
+       to 6 June is 5 days. Counting both the start and the end date
+       gives 6 calendar dates. The inclusive result is the elapsed
+       result for the same start and the day AFTER the end date, so
+       the days, the weeks and the years, months and days all agree
+       (1 to 31 January counted both ways is 1 month). The same date
+       counted both ways is 1 day. `elapsedDays` and `inclusiveDays`
+       are always returned, so a page can show both.
+
    Checked against an independent reference
    (tests/fixtures/date-difference-golden.py), which walks months
    with Python's calendar and datetime.
@@ -153,10 +163,11 @@ export function parseDate(text) {
      { status: "invalid", errors: [{ field, message }] }
      { status: "ok", ... }
    `ok` carries: earlier, later (dates), reversed, same,
-   totalDays, years, months, days, weeks, weekDays.
+   totalDays, years, months, days, weeks, weekDays (all counted as
+   chosen by `inclusive`), plus inclusive, elapsedDays, inclusiveDays.
 ========================================================= */
 
-export function calculateDateDifference(startText, endText) {
+export function calculateDateDifference(startText, endText, { inclusive = false } = {}) {
 
     const start = parseDate(startText);
     const end = parseDate(endText);
@@ -181,23 +192,31 @@ export function calculateDateDifference(startText, endText) {
     const earlier = reversed ? end.date : start.date;
     const later = reversed ? start.date : end.date;
 
-    const totalDays = dayNumber(later) - dayNumber(earlier);
+    const elapsedDays = dayNumber(later) - dayNumber(earlier);
+
+    /* counting both dates measures to the end of the later day, i.e. to the start of the next one */
+    const span = inclusive ? addDays(later, 1) : later;
+
+    const totalDays = dayNumber(span) - dayNumber(earlier);
 
     /* the largest n with addMonths(earlier, n) <= later: the month difference, or one less when the day of the month is not yet reached */
-    let months = (later.year - earlier.year) * 12 + (later.month - earlier.month);
+    let months = (span.year - earlier.year) * 12 + (span.month - earlier.month);
 
-    if (isAfter(addMonths(earlier, months), later)) {
+    if (isAfter(addMonths(earlier, months), span)) {
         months -= 1;
     }
 
-    const days = dayNumber(later) - dayNumber(addMonths(earlier, months));
+    const days = dayNumber(span) - dayNumber(addMonths(earlier, months));
 
     return {
         status: "ok",
         earlier,
         later,
         reversed,
-        same: totalDays === 0,
+        same: elapsedDays === 0,
+        inclusive,
+        elapsedDays,
+        inclusiveDays: elapsedDays + 1,
         totalDays,
         years: Math.floor(months / 12),
         months: months % 12,
@@ -266,7 +285,7 @@ export function dateText({ year, month, day }) {
    - Previous / next month: the complete calendar month before / after the current one.
    - Previous / next N months: the N complete calendar months immediately before / after the current month.
    - Previous / next year: the complete calendar year before / after the current one.
-   A gap is counted as the calculator counts it (days between the two dates); counting both end days adds 1.
+   A gap is counted as the calculator counts it (days between the two dates, the default); with "count both dates" chosen it is 1 more.
 ========================================================= */
 
 export const SINGLE_DATE_PRESETS = Object.freeze({

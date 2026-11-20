@@ -11,7 +11,8 @@
     background: var(--surface-footer);
     color: var(--ink-on-footer);
     font-family: var(--font-family);
-    margin-top: var(--space-16);
+    /* the one gap between a page's last block and the footer; page containers add at most --space-4 (owner finding 2026-11-15: 110-160 px gaps) */
+    margin-top: var(--space-10);
 }
 
 .footer .container {

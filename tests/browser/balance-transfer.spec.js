@@ -201,7 +201,7 @@ test.describe("Loan Balance Transfer Calculator", () => {
 
   test("year-by-year table: semantic, local scroll, the position starts below zero and ends at the net saving", async ({ page, go }) => {
     await open(page, go);
-    const wrapper = page.locator("#bt-results .calculator-results__table-wrapper");
+    const wrapper = page.locator("#bt-wide .calculator-results__table-wrapper");
     await expect(wrapper).toHaveAttribute("role", "region");
     await expect(wrapper).toHaveAttribute("tabindex", "0");
     await expect(wrapper).toHaveAttribute("aria-label", /Year by year/);
@@ -225,7 +225,7 @@ test.describe("Loan Balance Transfer Calculator", () => {
   test("with a longer tenure the table runs until both loans end, and the position falls back", async ({ page, go }) => {
     await open(page, go);
     await fill(page, { newYears: 20 });
-    const rows = page.locator("#bt-results .calculator-results__table-wrapper tbody tr");
+    const rows = page.locator("#bt-wide .calculator-results__table-wrapper tbody tr");
     await expect(rows).toHaveCount(21);
     await expect(rows.last().locator("td").last()).toHaveText("−₹5,22,928");
     await expect(rows.nth(15).locator("td").last()).toHaveText("+₹7,78,807"); // year 15: the peak, before the extra years
@@ -250,7 +250,7 @@ test.describe("Loan Balance Transfer Calculator", () => {
     await expect(inputs).toContainText("₹15,000");
     await expect(page.locator(".calculator-results__summary")).toBeVisible();
     await expect(page.locator(".bt-compare__card")).toHaveCount(2);
-    await expect(page.locator("#bt-results tbody tr").first()).toBeVisible();
+    await expect(page.locator("#bt-wide tbody tr").first()).toBeVisible();
     await page.emulateMedia({ media: "screen" });
     await expect(page.locator(".bt-print-brand")).toBeHidden();
   });
@@ -277,7 +277,7 @@ test.describe("Loan Balance Transfer Calculator", () => {
     for (const id of ["#bt-reset", "#bt-print"]) {
       await expect(page.locator(id)).toHaveClass(/calculator-form__button--secondary/);
       const s = await page.locator(id).evaluate((e) => { const c = getComputedStyle(e); return { bg: c.backgroundColor, color: c.color, cursor: c.cursor }; });
-      expect(s).toEqual({ bg: "rgb(255, 255, 255)", color: "rgb(28, 25, 23)", cursor: "pointer" });
+      expect(s).toEqual({ bg: "rgb(255, 255, 255)", color: "rgb(32, 44, 69)", cursor: "pointer" });
     }
     await expect(page.locator("button.calculator-form__button:not(.calculator-form__button--secondary)")).toHaveCount(0);
   });
@@ -336,7 +336,7 @@ test.describe("Loan Balance Transfer Calculator", () => {
 
   test("the Loans listing shows the live card, and the Prepayment page links to it", async ({ page, go, siteRoot }) => {
     await go("loans.html");
-    await expect(page.locator("a[href$='calculators/balance-transfer/']").first()).toBeVisible();
+    await expect(page.locator("a[href$='calculators/balance-transfer/']:not(.section-switcher a)").first()).toBeVisible();
     await go("calculators/prepayment/");
     await expect(page.locator(`.related-calculator-card[href='${siteRoot}calculators/balance-transfer/']`)).toHaveCount(1);
   });

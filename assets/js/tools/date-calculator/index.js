@@ -541,7 +541,9 @@ export function markup() {
                 </ul>
 
                 <p>
-                    This calculator counts every calendar day. It does not
+                    This calculator counts every calendar day. The start date
+                    is day 0, not day 1: adding 5 days to 1 June gives 6 June,
+                    which is 6 calendar dates if you count both ends. It does not
                     skip weekends, calculate business days or public holidays,
                     or use the time of day. See the
                     <a href="${ROUTES.disclaimer}">disclaimer</a>.
@@ -613,6 +615,20 @@ export function markup() {
                         After a month-end adjustment the original day is lost.
                         31 January plus one month is 28 February, and 28
                         February minus one month is 28 January.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>
+                        Is the start date counted as day 1?
+                    </summary>
+                    <p>
+                        No. Adding 5 days to 1 June gives 6 June: the start
+                        date is the starting point, and the first day added is
+                        2 June. To count every date from a start to an end,
+                        including both, use the
+                        <a href="${DIFFERENCE.href}">${escapeHTML(DIFFERENCE.title)}</a>
+                        and tick "Count both the start and the end date".
                     </p>
                 </details>
 

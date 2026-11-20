@@ -139,10 +139,44 @@ export const sections = [
         description:
             "Hands-on exercises and flashcards that check your answer and explain it.",
         summary:
-            "Hands-on exercises and flashcards for JSON, cron and software testing",
+            "Paths, exercises and flashcards for SQL, Excel, Python and testing",
         icon: "🧪",
         landing: "practiceLabs",
         pathPrefix: "tools"
+    },
+
+    /*
+     * AI Tools (owner instruction, 2026-11-11, the seventh ecosystem): browser-built briefs for people who already use
+     * ChatGPT, Claude, Gemini or Copilot. No AI service is called and no key is needed; each tool composes text the
+     * visitor pastes into the assistant of their choice. No categories; tool URLs are /tools/<id>/ like the other
+     * utility sections.
+     */
+    {
+        id: "ai-tools",
+        title: "AI Tools",
+        description:
+            "Prepare your AI work, carry your project between AI products and check what comes back: the AI Prompt Builder (with project context packs), the AI Answer Checker and a directory of AI products. Nothing is sent to any AI service.",
+        seoDescription:
+            "AI Tools from ToolZen Hub: plan AI work as a Work Pack, carry a project between ChatGPT, Claude and Gemini, check an AI answer against your prompt, and find AI products by task. Everything runs in your browser; no AI service is called.",
+        summary:
+            "Prepare, carry and check your work with ChatGPT, Claude, Gemini and other AI products",
+        icon: "✦",
+        landing: "aiTools",
+        pathPrefix: "tools",
+        /* its page lists the tools directly; its one category (below) is for the taxonomy, not a navigation layer */
+        listing: "tools",
+        /* Pages of the section that are not catalog tools but are listed and counted with its tools wherever the section is
+           (home card, All Tools, the section page, the sidebar, the global search; owner, 2026-11-16). `route` is a ROUTES
+           key; `category` is the section's taxonomy category, from which search derives the section as for a tool. */
+        pages: [
+            {
+                id: "ai-directory",
+                title: "AI Directory",
+                description: "AI products made by other companies, checked on their official sites, with filters by task and by who they help: developers, QA testers, data analysts and more.",
+                route: "aiDirectory",
+                category: "ai"
+            }
+        ]
     }
 
 ];
@@ -258,7 +292,24 @@ export const categories = [
         title: "More",
         description: "Explore all calculators and tools",
         href: "more.html"
-    }
+    },
+
+
+    /*
+     * AI (owner decision, 2026-11-12): the AI Tools section's own category, so its tools and guides resolve through the
+     * taxonomy like every other (tool -> category -> section) and the Growth manifest needs no exception. Its landing
+     * is the section page.
+     */
+    {
+        id: "ai",
+        sectionId: "ai-tools",
+        icon: "✦",
+        iconClass: "ai",
+        title: "AI",
+        description: "Build prompts, debugging tasks and context packs for the AI assistant you already use",
+        href: "ai-tools.html",
+        landing: "aiTools"
+    },
 
 ];
 

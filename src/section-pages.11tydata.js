@@ -4,7 +4,7 @@ export default {
     title: (data) => data.sectionPage.title,
     description: (data) => data.sectionPage.description,
     jsonld: (data) => data.sectionPage.jsonld,
-    themeColor: () => "#fafaf9",
+    themeColor: () => "#f6f4ee",
     sitemapOrder: () => 3.2,
     fonts: () => true,
   },

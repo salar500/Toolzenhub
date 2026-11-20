@@ -8,10 +8,6 @@ import {
 } from "../routes.js";
 
 import {
-    calculatorMetadata
-} from "../calculator-registry.js";
-
-import {
     articleRegistry
 } from "../article-registry.js";
 
@@ -62,25 +58,11 @@ export function renderRelatedArticles(
 
 
     /*
-     * Find the category of the current calculator.
+     * Any tool of the catalog, not only calculators (2026-11-15:
+     * the AI Tools pages never showed the AI articles that point
+     * at them). A tool whose category has no articles gets none,
+     * so no unrelated article is shown.
      */
-
-    const calculator =
-        calculatorMetadata[currentSlug];
-
-
-    const category =
-        calculator?.category;
-
-
-    /*
-     * If the calculator does not have a category,
-     * there is nothing relevant to display.
-     */
-
-    if (!category) {
-        return "";
-    }
 
 
     /*

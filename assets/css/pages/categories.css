@@ -14,7 +14,7 @@
     box-sizing: border-box;
 
     padding-top: 42px;
-    padding-bottom: 26px;
+    padding-bottom: var(--space-4);
 
     background: var(--surface-page);
 }
@@ -140,7 +140,7 @@
 
     border-radius: 14px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     box-shadow:
         0 3px 12px rgba(16, 24, 40, 0.045);
@@ -228,7 +228,7 @@
 
     color: var(--ink-muted);
 
-    font-size: 12px;
+    font-size: var(--font-xs);
 
     line-height: 1.45;
 }
@@ -337,7 +337,7 @@
 
     color: var(--ink-muted);
 
-    font-size: 12px;
+    font-size: var(--font-xs);
 
     line-height: 1.4;
 }
@@ -364,7 +364,7 @@
 
     border-radius: 8px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     box-shadow:
         0 1px 3px rgba(16, 24, 40, 0.04);
@@ -388,13 +388,13 @@
 
     outline: 0;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: var(--color-ink);
 
     font-family: inherit;
 
-    font-size: 12px;
+    font-size: var(--font-xs);
 }
 
 
@@ -416,7 +416,7 @@
 
     background: var(--color-brand-green);
 
-    color: #ffffff;
+    color: var(--on-action);
 
     font-size: 20px;
 
@@ -441,7 +441,8 @@
     .categories-page {
         padding-top: 46px;
 
-        padding-bottom: 30px;
+        /* the footer owns the gap below the page (components/footer.css) */
+        padding-bottom: var(--space-4);
     }
 
 
@@ -541,7 +542,7 @@
 
 
     .category-page-card__description {
-        font-size: 12px;
+        font-size: var(--font-xs);
     }
 
 

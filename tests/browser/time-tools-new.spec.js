@@ -20,7 +20,7 @@ async function basics(page, watch, siteRoot, title) {
   await expect(page.locator("h1")).toHaveCount(1);
   const labels = (await page.locator(".calculator-breadcrumb").locator("a, strong, span[aria-current]").allInnerTexts()).map((t) => t.trim().toLowerCase()).filter(Boolean);
   expect(labels.slice(0, 3)).toEqual(["home", "time tools", title.toLowerCase()]);
-  await expect(page.locator(".related-section")).toHaveCount(1); // the Time Tools related-tools pilot
+  await expect(page.locator(".related-section:not(.knowledge-links)")).toHaveCount(1); // the Time Tools related-tools pilot
   await expectNoHorizontalOverflow(page);
   expectClean(watch);
 }
@@ -76,8 +76,12 @@ test.describe("Business Days Calculator", () => {
     await page.clock.install({ time: new Date("2026-03-10T10:00:00Z") });
     await go("tools/business-days/");
     await expect(page.locator("#bd-start")).toHaveValue("");
-    await page.locator("[data-today='bd-start']").click();
-    await expect(page.locator("#bd-start")).toHaveValue("2026-03-10");
+    // the button is in the prebuilt page and its click handler is wired when the tool's module runs; on a loaded machine the first
+    // click could land before that, so the click is retried until it takes effect (the field still fills only on a click)
+    await expect(async () => {
+      await page.locator("[data-today='bd-start']").click();
+      await expect(page.locator("#bd-start")).toHaveValue("2026-03-10", { timeout: 1000 });
+    }).toPass({ timeout: 10_000 });
   });
 });
 

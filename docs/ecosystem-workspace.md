@@ -64,7 +64,7 @@ Built on the existing build-time "More <section>" navigation (`components/sectio
 
 | Item | Decision |
 |---|---|
-| Where | every tool page of Calculators (30), Time Tools (13), Developer Tools (12), Practice Labs (8), PDF Tools (4), Image Tools (2) |
+| Where | every tool page of Calculators (30), Time Tools (13), Developer Tools (12), Practice Labs (8), PDF Tools (4), Image Tools (2), and since 2026-11-07 the ecosystem's own page and its category pages (section 12). Not on Home, All Tools, articles or information pages |
 | Wide (1000 px and up) | left column beside the tool, open by default on every visit, sticky, scrolls on its own, current tool marked. The page is as wide as the window allows (up to 1760 px) so the tool takes the remaining width |
 | Hide and show | "Hide tools" in the sidebar; "Show <section>" above the tool when hidden. Hidden, the column is gone (no gap). Hiding changes no field, result or timer. The sidebar does not reload the tool |
 | Search | a labelled search box where a section has eight or more tools (Calculators, Time, Developer, Practice Labs); every word must match; Escape clears; the match count is announced politely |
@@ -76,10 +76,10 @@ Built on the existing build-time "More <section>" navigation (`components/sectio
 
 ### What the sidebar does not do
 
-- It does not keep state across tools (decision D4, section 10). Moving to another tool is a normal page navigation, so a typed value, a chosen file or a running timer in the old tool is lost, as it always was; the pages promise that nothing is stored. Hiding or showing the sidebar loses nothing (tested: chosen image, typed settings, result, merged PDF, running stopwatch and laps).
+- It does not keep typed values, chosen files or lab answers when you go to another tool (decision D4, section 10). Since 2026-11-07 the move is made in place (section 13), but the tool that is left is ended and the next one starts empty, exactly as after a page load; the pages promise that nothing is stored. Hiding or showing the sidebar loses nothing (tested: chosen image, typed settings, result, merged PDF, running stopwatch and laps).
 - Large Image and PDF files were tested beside the sidebar on 2026-11-05 (section 10); real phones, Safari and Firefox were not.
 - No separate mobile drawer or bottom bar.
-- A long lab hides the sidebar on screens under 1500 px (D3) so its own exercise list and the exercise keep their width; section 6's earlier line that a long lab "shows two lists" describes screens of 1500 px and up.
+- A long lab opens with the sidebar shown at every width, like every other page (D3, replaced 2026-11-07); below 1500 px the visitor can hide it to give the lab's exercise list and the exercise more width.
 
 ## 7. Slider inventory (browser-tested)
 
@@ -183,7 +183,7 @@ W3C APG disclosure navigation (https://www.w3.org/WAI/ARIA/apg/patterns/disclosu
 
 | # | Decision | Reason | Where |
 |---|---|---|---|
-| D3 | A long lab (twelve or more exercises) tells the section sidebar to step aside below 1500 px: it starts hidden with "Show Practice Labs" above the tool, and the visitor can show it at once. Labs under twelve exercises and screens of 1500 px and up keep it open. Nothing is stored | with both lists open, the exercise got about 800 px at 1440 px; the two lists are different things (labs against exercises), so this is a layout choice, not a removal | `learning/lab-shell.js` event `tz:lab-workspace`, `ui/section-rail.js`, rule 4.8 |
+| D3 | (replaced 2026-11-07) A long lab no longer hides the section sidebar below 1500 px: the sidebar is open by default on every page, as the owner requires; the visitor can hide it | the owner's persistent-workspace requirement | `ui/section-rail.js` (the `tz:lab-workspace` listener was removed; `learning/lab-shell.js` still fires the event, nothing listens) |
 | D4 | No automatic saving of typed values, chosen files or lab answers when the visitor moves to another tool. Moving is still a normal page load. Hiding or showing the sidebar, and every other in-page interaction, keeps all of it | the pages promise that nothing is stored; the Privacy page lists exactly one stored item (flashcard progress, opt-in). An explicit "save" would need the owner's decision and a Privacy change | not built |
 | D5 | Sidebar links are underlined only on hover and focus; the current tool is bold with an accent bar; the search box shows "Search tools" | thirty underlined links read as noise; the bar marks the place without relying on colour alone | `section-switcher.css`, `section-rail.js` |
 | D6 | Home: the six ecosystem cards have the tinted icon tile used elsewhere, a live "N tools" count, a flask icon for Practice Labs, and a hero line that names all six ecosystems. Page title and description are unchanged | the tile rule listed the old calculator categories, not the six ecosystems; a hero about loans alone hid five of six | `components/categories.js`, `components/hero.js`, `categories.css`, `ui/icons.js` |
@@ -259,3 +259,50 @@ Audit first: the six ecosystems, the registry-driven sidebar (desktop column fro
 Tools that were not given preset ranges (deliberately): Date Calculator (add or subtract from one date), Countdown, Meeting Planner, Shift Planner, Time Zone Converter, Age, Gratuity, XIRR. They get the calendar button, and "Use today" where a date of today makes sense.
 
 Not done, by design: no tool is loaded into the page without navigation (the site stays a set of plain pages, so direct URLs, refresh and Back and Forward are the browser's own); "Practice Labs" lesson navigation is the lab's own list (D7), not a second list in the sidebar.
+
+## 12. Ecosystem pages carry the sidebar (2026-11-07)
+
+Why: the owner's master plan of 2026-11-06 asked for a contextual sidebar "when a user enters an ecosystem", not only on tool pages; sections 6 and 11 above had read it as tool pages only. Rule 4.8 now says so.
+
+| Item | Decision / built |
+|---|---|
+| Builder | `renderSectionNav({ sectionId, currentToolId, currentCategoryId })` in `components/section-switcher.js`; `renderSectionSwitcher(toolId)` calls it, so a tool page is built as before |
+| Pages (83) | the 69 tool pages, `/categories.html`, `/calculators.html`, `/loans.html` and the six other category pages, and `/time-tools.html`, `/developer-tools.html`, `/image-tools.html`, `/pdf-tools.html`, `/practice-labs.html` |
+| Not on | Home, All Tools (own page rail), Articles and article pages, About, Contact, Privacy, Terms, Disclaimer, 404 |
+| Markup | `<div class="ecosystem-layout" data-section-page>` holding the nav and `<div class="ecosystem-main">`; generated pages through `workspaceOpen/workspaceClose` in `pages/directory/directory-html.js`, hand-written pages through the `{% sectionNav %}` shortcode (`eleventy.shared.js`) |
+| Behaviour | the same `ui/section-rail.js` (it now finds `[data-section-page]` as well as `.calculator-page`); `initSectionRail()` is called by the directory, categories, All Calculators and Loans page scripts |
+| Current item | tool: `aria-current="page"`; current group (the category or the group holding the tool): `data-current`, open and marked with the accent bar; the ecosystem page itself: the "overview" link is marked |
+| Cross-ecosystem links | none (no duplicate menu; the header, Home cards and All Tools are the way between ecosystems) |
+| New tool | still derived from the catalog (`getToolsBySection`); Calculators group by catalog category; the other sections by `SECTION_GROUPS`, unchanged |
+
+## 13. Persistent workspace (2026-11-07)
+
+Why: sections 6 and 12 made the sidebar present on every ecosystem page, but each click still loaded a new document, so the sidebar was rebuilt, its state lost and the page jumped. The owner requires one workspace: the sidebar stays, only the right side changes.
+
+| Item | Built |
+|---|---|
+| Mechanism | `ui/workspace-nav.js`, started by `initSectionRail()` on every page that has the sidebar. A click on a same-ecosystem link fetches that page, checks it is a tool page (`entries/tool.js`) or a generated listing page (`entries/directory.js`) of the same ecosystem, then swaps `main#app`'s content and moves the existing sidebar element into the new layout |
+| Tool start | `ui/tool-mount.js` (extracted from `entries/tool.js`, used by both). A tool shown later in the same document is imported under `?m=n`, so its module state starts fresh |
+| Leaving a tool | `ui/tool-scope.js` records the timers, animation frames, window/document listeners, workers and audio contexts that tool code starts (by call stack) and ends them when the tool is left; the site's own code is never recorded |
+| What carries over | sidebar scroll, search text, opened groups (the group of the new page opens), hidden/shown state, open drawer closes on choosing a tool |
+| URLs and SEO | unchanged: every page is still a full static page; the address, title, description, canonical, Open Graph and JSON-LD follow the page shown; Back, Forward, refresh, direct and shared links work; crawlers and no-script visitors see the full pages |
+| Fallback to a normal navigation | modified clicks, other ecosystems, `/categories.html`, `/loans.html`, `/calculators.html` (client-rendered by their own scripts), any fetch or swap failure |
+| Not stored | nothing is saved to make this work |
+| Sidebar or drawer | decided by `ui/nav-mode.js` (`WIDE`, `drawerZoom`), mirrored in `section-switcher.css`: layout width >= 1000 px and (fine pointer or screen >= 1000 px) gives the sidebar; anything else the drawer. A phone in "Desktop site" mode gets the drawer, scaled by layout width / screen width (max 4) so it fills about 83% of the screen |
+| Phone bar and drawer | `section-switcher.js` adds the `.section-switcher__now` label (current tool, category or overview) and the `.section-switcher__all` hub link, both hidden on the wide sidebar. `section-switcher.css` (narrow block): the closed navigation is a sticky 44 px bar (icon, "Menu", the tool name on up to two lines), sized with `--z` (the page's zoom factor, from `nav-mode.js`) instead of the CSS `zoom` property, which does not scale its percentage width; from a 960 px layout it sticks under the sticky site header; `html body:has(.section-switcher.is-drawer)` uses `overflow-x: clip` because the tool pages' phone stylesheet makes the body a scroll container, which stops sticky. Open, the drawer is `--rail-w` screen px wide (`drawerWidth()` in `nav-mode.js`: screen less 72, between 240 and 300), the overview row and a 44 px close icon stay pinned at its top, the list has no box of its own and rows are at least 44 px; `is-drawer-open` (set by `section-rail.js`) raises it over the backdrop, focus goes to Close and the current tool is scrolled into view. `workspace-nav.js` keeps the label current and treats the hub link as an ordinary navigation |
+
+## 14. One page frame for every ecosystem page (2026-11-08)
+
+Why: a tool page, a category page, a toolkit's own page, Practice Labs, the Calculators landing and Loans each styled their own breadcrumb and top spacing, so on desktop the breadcrumb sat at 16 px or 13 px, flush with the header or 46 px below it, inside the content column or above the sidebar, and the Calculators landing heading was centred. On a phone the first control of a calculator started about 680 px down an 844 px screen.
+
+| Item | Built (`components/section-switcher.css`, section "One page frame") |
+|---|---|
+| Breadcrumb | one row above the sidebar and the workspace on every page type, 13 px, the same colours, 16 px below it (6 px on a phone, where the bar follows). Tool pages' breadcrumb now spans both grid columns (the old rule matched `.breadcrumb`, which tool pages do not use). Loans' own breadcrumb moved out of the workspace into the same row (`src/loans.njk`) |
+| Gap under the site header | 20 px on every page type (8 px on a phone) |
+| Heading | a toolkit landing's heading is left-aligned in the workspace (the Calculators landing was centred) |
+| Phone spacing | intro gap and padding, the trust card's box, the section gap and the "Jump to result" margin trimmed; the first control of a calculator moved up about 50 to 60 px (EMI 681 to 621, Stopwatch 572 to 524, JSON Formatter 468 to 420) |
+| Loans on a phone | its sections no longer add a second 16 px container inside the workspace (cards were inset 32 px, now 16 px, like the other pages), and the hero's trust claims wrap as whole claims (`pages/loans-hero.css`) |
+| Not changed | the desktop sidebar, the phone bar and drawer, page content, tool logic |
+
+Known limits: on a phone in Chrome's "Desktop site" mode the page is a desktop layout shown zoomed out by the browser. The navigation compensates (section 13); text and controls of the tools stay at the browser's zoom, which the site cannot change, so turning Desktop site off is still the comfortable way to use a tool there. The tool page's own side gutter on a phone is 8 px and the listing pages' 16 px (set by the calculators' phone stylesheet); left as it was.
+

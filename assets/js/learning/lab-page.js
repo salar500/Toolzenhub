@@ -46,6 +46,8 @@ export function labMarkup(config) {
                         ${esc(config.intro)}
                     </p>
 
+                    <p class="lx-jump"><a href="#lx-app">Go straight to the exercises ↓</a></p>
+
                 </div>
 
                 <div class="calculator-trust-card">

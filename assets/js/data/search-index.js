@@ -9,7 +9,8 @@
 
    Entry
      key           "type:id", unique
-     type          "category" | "subcategory" | "tool" | "article"
+     type          "category" | "subcategory" | "tool" | "page" | "article"
+                   ("page": a section page listed with its tools, data/categories.js `pages`)
      id            the item's id in its own catalog
      title
      description
@@ -43,6 +44,7 @@ import {
 } from "../routes.js";
 
 import {
+    sections,
     categories,
     subcategories
 } from "./categories.js";
@@ -61,7 +63,8 @@ import {
     getCategoryUrl,
     getSubcategoryLandingUrl,
     getSectionForCategory,
-    getSectionForTool
+    getSectionForTool,
+    getSectionPages
 } from "./taxonomy.js";
 
 
@@ -206,6 +209,31 @@ function toolEntries() {
 }
 
 
+/* a section's own pages that are listed with its tools (the AI Directory), found by the global searches */
+function pageEntries() {
+
+    return sections.flatMap(
+        section => getSectionPages(section.id).map(page => ({
+            key: `page:${page.id}`,
+            type: "page",
+            id: page.id,
+            title: page.title,
+            description: page.description,
+            category: page.category,
+            categoryTitle: titleOf(page.category),
+            ...sectionFields(getSectionForCategory(page.category)),
+            subcategory: null,
+            subcategoryTitle: "",
+            aliases: words(page.aliases),
+            keywords: words(page.keywords),
+            route: page.href,
+            status: "published"
+        }))
+    );
+
+}
+
+
 function articleEntries() {
 
     return articles.map(
@@ -245,6 +273,7 @@ export function buildSearchIndex() {
         ...categoryEntries(),
         ...subcategoryEntries(),
         ...toolEntries(),
+        ...pageEntries(),
         ...articleEntries()
     ];
 

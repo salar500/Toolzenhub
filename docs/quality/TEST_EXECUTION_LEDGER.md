@@ -193,6 +193,42 @@ Finding F-1 (low, not fixed): the pages ship static HTML whose buttons and links
 
 Not run: Firefox, WebKit, real devices, screen readers, Lighthouse, the visual baselines against the live site (rendering is already byte-identical to the tested build), clipboard and file-download behaviour on the live host beyond what the specs cover.
 
+## AI-1 (2026-11-19), base `65b4a67b` plus the D23 Prompt Builder work, AI ecosystem only (owner's scope correction: no full-site regression)
+
+Free RAM 1.0 to 1.4 GB, one worker, foreground runs. Builds: `npm run build:all`, rc 0, no warnings, sitemap 669 in each.
+
+| Run | Command | Scope | Result |
+|---|---|---|---|
+| Unit, AI | `node --test tests/unit/<file>` one file at a time | ai-directory, ai-ecosystem, ai-models, ai-tools, directory, the five prompt-builder files, build-output | 147 / 147 (flow file 8 after the first-load test was added) |
+| Unit, shared | `node --test tests/unit/static-checkers.test.mjs` | static checkers | **not completed**: stopped by my 280 s time limit (runs the checkers over both builds on this laptop); the checks themselves ran directly below |
+| Browser, Prompt Builder | `playwright test prompt-builder-guided prompt-builder prompt-builder-professions ai-ecosystem` | subpath-desktop / subpath-mobile / root-desktop | 30 / 21 / 6 passed, after the first-load trim |
+| Browser, AI Tools | `playwright test ai-tools ai-ecosystem` | the three projects | 16 / 12 / 4 passed (desktop includes 2 new axe tests: the checker's two result states and the directory's searched and empty states, 390 and 1280 px, light and dark) |
+| Navigation, AI part | `playwright test navigation.spec.js -g` the five tests that name AI Tools | subpath-desktop | 5 / 5 |
+| Accessibility | `playwright test site-a11y.spec.js -g "ai-tools\|prompt-builder\|ai-answer-checker"` | 4 AI pages, desktop and mobile | 8 / 8 |
+| Visual, dark | `playwright test --project=visual-* -g "ai-tools\|prompt-builder"` | 6 images | prompt-builder 3 / 3; ai-tools 3 failed: baselines from `912ada6b` showed eight tools; reviewed by eye (three products, new sidebar groups, nothing broken) and updated |
+| Static | inventory, links, assets, seo | both builds | pass: 677 live pages, 7 unreachable files (informational, T-1), sitemap 669 |
+| SEO baseline | `playwright test seo-baseline.spec.js` | every page | **not completed**: stopped by the system at low memory; not restarted. AI pages checked from the built HTML instead: title, description, one canonical, Open Graph, JSON-LD; the seven retired pages noindex, canonical to the target, 0 s refresh, no analytics |
+| First load | doc 23 §4 method (reproduces 41.4 / 12.8 at `99530433`) | Prompt Builder | 46.5 / 14.1 kB of 50 / 16 after the trim (was 54.4 / 16.6, D-18); 46.7 / 14.2 with D-19 |
+| Live preview | Pages run 44580927586 for `98cbaefa`, success; a scripted journey on the preview at 390 and 1280 px | 4 AI pages, 7 retired routes, sitemap | 200, content identical to `dist-ghpages/` (line endings differ: CI checks out LF); retired routes noindex with a 0 s refresh to the right target; journey passed with no page errors once ready, and found D-19 |
+| D-19 regression | `playwright test prompt-builder-guided.spec.js` (new slow-connection test failed on the old build, then all) | three projects; plus prompt-builder, professions, ai-ecosystem on desktop | 16 / 10 / 2; 15 / 15 |
+
+Not run (scope): full smoke, the full browser suite, `links.spec.js` (whole-site crawl), DOM baselines (no AI region), the rest of `navigation.spec.js` (its line-620 All Tools live-region expectation is still stale against the owner's 2026-11-16 live-search rule), the full unit suite. Not run (tooling): Firefox, WebKit, real devices, screen readers.
+
+## AI-2 (2026-11-20), base `f428782f` plus the owner's Prompt Builder UX review (spacing, role change, wording, view switch, test-case prompts)
+
+Free RAM about 1.0 GB, one worker, foreground. `npm run build:all` rc 0 before each browser batch.
+
+| Run | Command | Scope | Result |
+|---|---|---|---|
+| Unit | `node --test tests/unit/<file>` one at a time | the five prompt-builder files, ai-ecosystem, ai-tools, build-output | 133 / 133 (flow 9, with the new test-cases rules test; the blueprint rule "six questions up front" first failed when the website question was added, so "Known risks" moved under More details) |
+| Guided | `playwright test prompt-builder-guided.spec.js` | subpath-desktop / subpath-mobile / root-desktop | 18 / 12 / 2 (new: role visible and changeable, view round trip, trail below the sticky bars, spacing) |
+| Other AI | `playwright test prompt-builder prompt-builder-professions ai-ecosystem ai-tools` | the three projects | 25 / 20 / 6; root guided + ai-ecosystem 4 / 4 after the last change |
+| Visual, dark | `--project=visual-* -g "prompt-builder\|ai-tools"` | 6 images | prompt-builder 3 changed (spacing and wording), reviewed by eye and updated; 6 / 6 after |
+| Static | inventory, links, assets, seo | both builds | pass |
+| First load | doc 23 §4 method | Prompt Builder | 47.4 / 14.4 kB of 50 / 16 |
+
+Not run: the full suites (out of scope), real devices, Safari, screen readers.
+
 ## Carried forward (not re-run at f5a1df4)
 
 These ran on the working tree that was committed as `6b01b85`..`f5a1df4` (RELEASE-1 records HEAD `45fc888` plus 102 uncommitted entries, 5,597 insertions across 102 files, now in the three commits). That equivalence is inferred from the records and a clean tree; it was not proved by diffing a saved copy.

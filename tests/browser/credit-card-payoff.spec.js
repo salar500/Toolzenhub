@@ -409,7 +409,7 @@ test.describe("Credit Card Payoff Calculator in the Loans listing, search and re
   test("search finds it by its own names", async ({ page, go, siteRoot }) => {
     for (const q of ["credit card payoff", "pay off credit card", "credit card repayment calculator", "how long to pay off credit card"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
-      await expect(page.locator(`a[href='${siteRoot}calculators/credit-card-payoff/']`).first(), q).toBeVisible();
+      await expect(page.locator(`#tools-results a[href='${siteRoot}calculators/credit-card-payoff/']`).first(), q).toBeVisible();
     }
     // the alias list itself (no "minimum payment", no "statement") is pinned in tests/unit/search.test.mjs
   });

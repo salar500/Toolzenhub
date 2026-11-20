@@ -5,7 +5,8 @@
  *
  * `html` is the finished <main> content, produced by assets/js/pages/directory/directory-html.js.
  */
-import { allToolsHtml, categoryPageHtml, categoryPageIds, practiceLabsHtml, sectionPageHtml, sectionPageIds } from "../../assets/js/pages/directory/directory-html.js";
+import { aiDirectoryHtml, allToolsHtml, categoryPageHtml, categoryPageIds, practiceLabsHtml, sectionPageHtml, sectionPageIds } from "../../assets/js/pages/directory/directory-html.js";
+import { AI_PRODUCTS } from "../../assets/js/data/ai-directory.js";
 import { getCategory } from "../../assets/js/data/taxonomy.js";
 import { breadcrumbTrail } from "../../assets/js/components/breadcrumb.js";
 import { sections } from "../../assets/js/data/categories.js";
@@ -68,5 +69,17 @@ export default function () {
     ],
   };
 
-  return { allTools, categoryPages, sectionPages, practiceLabs };
+  const aiDirectory = {
+    title: "AI Directory: AI Products for Coding, Testing, Data and More | ToolZen Hub",
+    description: `${AI_PRODUCTS.length} AI products for developers, QA testers, data analysts and other professionals, grouped by what they do. Each checked on its official site; nothing sponsored or ranked.`,
+    html: aiDirectoryHtml(),
+    jsonld: [
+      breadcrumbLd(
+        breadcrumbTrail([{ label: "All Tools", href: ROUTES.tools }, { label: "AI Tools", href: ROUTES.aiTools }, { label: "AI Directory" }]),
+        "/ai-tools/directory/"
+      ),
+    ],
+  };
+
+  return { allTools, categoryPages, sectionPages, practiceLabs, aiDirectory };
 }

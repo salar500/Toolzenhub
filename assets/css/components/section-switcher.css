@@ -19,7 +19,7 @@
     border: 1px solid var(--line-control);
     border-radius: 10px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: var(--color-ink);
 
@@ -27,6 +27,14 @@
     font-weight: 600;
 
     cursor: pointer;
+
+}
+
+/* the name of the page shown, for the phone's tool bar, and the link to the tools hub at the end of the phone's drawer: not part of the wide sidebar */
+.section-switcher__now,
+.section-switcher__all {
+
+    display: none;
 
 }
 
@@ -65,7 +73,7 @@
     border: 1px solid var(--line-control);
     border-radius: 12px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     list-style: none;
 
@@ -194,7 +202,7 @@
     border: 1px solid var(--line-control);
     border-radius: 10px;
 
-    background: #ffffff;
+    background: var(--surface-card);
 
     color: var(--color-ink);
 
@@ -225,9 +233,10 @@
 /* Wide screens (assets/js/ui/section-rail.js keeps the list open): the list is a sidebar beside the tool, open by default.
    The tool takes every pixel the sidebar does not: the page is as wide as the window allows, and hiding the sidebar gives its column back.
    Scoped to pages that have one, so nothing else changes; below this width it stays the closed disclosure. */
-@media (min-width: 1000px) {
+@media (min-width: 1000px) and (pointer: fine), (min-width: 1000px) and (min-device-width: 1000px) {
 
-    .calculator-page:has(> .section-switcher) {
+    .calculator-page:has(> .section-switcher),
+    .ecosystem-layout:has(> .section-switcher) {
 
         display: grid;
         grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
@@ -239,20 +248,23 @@
 
     }
 
-    .calculator-page:has(> .section-switcher) > * {
+    .calculator-page:has(> .section-switcher) > *,
+    .ecosystem-layout:has(> .section-switcher) > * {
 
         grid-column: 2;
         min-width: 0;
 
     }
 
-    .calculator-page:has(> .section-switcher) > .breadcrumb {
+    .calculator-page:has(> .section-switcher) > .breadcrumb,
+    .calculator-page:has(> .section-switcher) > .calculator-breadcrumb {
 
         grid-column: 1 / -1;
 
     }
 
-    .calculator-page > .section-switcher {
+    .calculator-page > .section-switcher,
+    .ecosystem-layout > .section-switcher {
 
         grid-column: 1;
         grid-row: 2 / span 60;
@@ -268,7 +280,8 @@
     }
 
     /* the heading of the sidebar, not a button: its job on a wide screen is to name the section */
-    .calculator-page > .section-switcher summary {
+    .calculator-page > .section-switcher summary,
+    .ecosystem-layout > .section-switcher summary {
 
         width: 100%;
         min-height: 0;
@@ -326,13 +339,15 @@
     }
 
     /* Hidden: no empty column, everything in one. */
-    .calculator-page.is-rail-collapsed:has(> .section-switcher) {
+    .calculator-page.is-rail-collapsed:has(> .section-switcher),
+    .ecosystem-layout.is-rail-collapsed:has(> .section-switcher) {
 
         grid-template-columns: minmax(0, 1fr);
 
     }
 
-    .calculator-page.is-rail-collapsed:has(> .section-switcher) > * {
+    .calculator-page.is-rail-collapsed:has(> .section-switcher) > *,
+    .ecosystem-layout.is-rail-collapsed:has(> .section-switcher) > * {
 
         grid-column: 1;
 
@@ -340,9 +355,10 @@
 
 }
 
-/* Phones and narrow windows (assets/js/ui/section-rail.js): the same list opens as a drawer from the left over a dimmed page, so the tool keeps the
+/* Phones and narrow windows, including a phone with "Desktop site" on (the screen is narrow and the pointer is a finger, whatever width the
+   browser lays the page out at; see assets/js/ui/nav-mode.js, which holds the same conditions): the same list opens as a drawer from the left over a dimmed page, so the tool keeps the
    screen. "More <section>" opens it; "Close tools", the dimmed area, Escape or choosing a tool closes it. Without script it stays the inline disclosure. */
-@media (max-width: 999.98px) {
+@media (max-width: 999.98px), (min-width: 1000px) and (pointer: coarse) and (max-device-width: 999.98px) {
 
     .section-switcher.is-drawer details[open] {
 
@@ -351,27 +367,301 @@
         z-index: 1001;
 
         box-sizing: border-box;
-        width: min(88vw, 340px);
-        padding: 12px;
+        width: calc(var(--rail-w, 300) * 1px);
+        padding: 0 12px 16px;
+
+        /* --rail-w is the drawer's width in real screen pixels (the screen less a strip of the page, at most 300) and --rail-zoom is 1 on a normal
+           screen; on a phone showing the whole desktop page zoomed out ("Desktop site") the drawer is drawn larger by the same factor
+           (assets/js/ui/nav-mode.js), so it has the same size on the screen either way */
+        zoom: var(--rail-zoom, 1);
         overflow-y: auto;
         overscroll-behavior: contain;
 
-        background: #ffffff;
+        background: var(--surface-card);
         box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25);
+
+    }
+
+    /* The closed navigation is a bar that stays at the top of the screen while the tool scrolls: a menu icon, the toolkit and the tool that is
+       open, so the visitor always knows where they are and can switch without going back to the top. Opening it raises the whole navigation
+       above the dimmed page (is-drawer-open, set by assets/js/ui/section-rail.js). */
+    .section-switcher.is-drawer {
+
+        position: sticky;
+        top: 0;
+        z-index: 998;
+
+        margin: 0 0 8px;
+        padding: calc(4px * var(--rail-zoom, 1)) 0;
+
+        background: var(--surface-page);
+
+    }
+
+    /* A tool page's phone stylesheet sets overflow-x: hidden on html and on body, which makes the body a scroll container and a sticky bar inside it
+       never sticks to the screen. "clip" clips the same sideways overflow without becoming one. */
+    html body:has(.section-switcher.is-drawer) {
+
+        overflow-x: clip;
+
+    }
+
+    .section-switcher.is-drawer.is-drawer-open {
+
+        z-index: 1001;
+
+    }
+
+    /* the site header is sticky here too and hides on scroll down: the bar follows it */
+    .section-switcher.is-drawer {
+
+        top: var(--header-offset);
+
+        transition: top 0.2s ease;
+
+    }
+
+    html.header-hidden .section-switcher.is-drawer {
+
+        top: 0;
+
+    }
+
+    /* WCAG 2.4.11: focused and scrolled-to elements land below both sticky strips, the header (when shown) and this 52 px bar
+       (44 px row and 4 px above and below it); header.css's own padding only clears the header */
+    html:has(.section-switcher.is-drawer) {
+
+        scroll-padding-top: calc(var(--header-offset) + 52px + 8px);
+
+    }
+
+    html.header-hidden:has(.section-switcher.is-drawer) {
+
+        scroll-padding-top: calc(52px + 8px);
+
+    }
+
+    /* from a 960 px layout the site header is sticky too (a phone in Desktop site mode lays the page out that wide): the bar sticks under it */
+    @media (min-width: 960px) {
+
+        .section-switcher.is-drawer {
+
+            top: var(--header-offset);
+
+        }
+
+    }
+
+    /* --z is 1 on a normal screen, and the page's zoom factor on a phone showing the whole desktop page zoomed out (assets/js/ui/nav-mode.js):
+       the bar's own sizes are multiplied by it, so it is the same size on the screen either way. (The CSS zoom property is not used here: it does
+       not scale the bar's percentage width.) */
+    .section-switcher.is-drawer {
+
+        --z: var(--rail-zoom, 1);
+
+    }
+
+    .section-switcher.is-drawer summary {
+
+        display: grid;
+        grid-template-columns: auto auto minmax(0, 1fr);
+        grid-template-areas: "icon menu now";
+        column-gap: calc(8px * var(--z));
+        align-items: center;
+
+        box-sizing: border-box;
+        width: 100%;
+        min-height: calc(44px * var(--z));
+        padding: calc(2px * var(--z)) calc(12px * var(--z));
+
+        border-radius: calc(10px * var(--z));
+
+    }
+
+    .section-switcher.is-drawer summary::before {
+
+        content: "";
+
+        grid-area: icon;
+
+        width: calc(18px * var(--z));
+        height: calc(14px * var(--z));
+
+        background: linear-gradient(var(--color-ink) 0 0) 0 0 / 100% calc(2px * var(--z)) no-repeat, linear-gradient(var(--color-ink) 0 0) 0 50% / 100% calc(2px * var(--z)) no-repeat, linear-gradient(var(--color-ink) 0 0) 0 100% / 100% calc(2px * var(--z)) no-repeat;
+
+    }
+
+    /* the word beside the icon says what the control is; the toolkit's name stays in the control's accessible name (the first span) */
+    .section-switcher.is-drawer summary::after {
+
+        content: "Menu";
+
+        grid-area: menu;
+
+        padding-right: calc(10px * var(--z));
+
+        border-right: 1px solid var(--line-control);
+
+        color: var(--ink-muted);
+
+        font-size: calc(13px * var(--z));
+        font-weight: 600;
+        line-height: 1.2;
+
+    }
+
+    .section-switcher.is-drawer summary > span:first-child,
+    .section-switcher.is-drawer summary .section-switcher__count,
+    .section-switcher.is-drawer .section-rail__label {
+
+        position: absolute;
+
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+
+        white-space: nowrap;
+
+    }
+
+    /* a long tool name takes a second line before it is ever cut off */
+    .section-switcher.is-drawer .section-switcher__now {
+
+        display: -webkit-box;
+        grid-area: now;
+
+        overflow: hidden;
+
+        font-size: calc(15px * var(--z));
+        font-weight: 700;
+        line-height: 1.25;
+        overflow-wrap: anywhere;
+
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+
+    }
+
+    /* open, the drawer has its own close button and the bar is covered: the bar's button would only repeat it */
+    .section-switcher.is-drawer details[open] summary {
+
+        display: none;
+
+    }
+
+    /* the drawer reads top down: the toolkit overview as its title with the close button on the same row (both stay at the top while the list
+       scrolls), then search, the categories and tools, then the hub. The close button is a 44 px icon; its text stays for assistive technology. */
+    .section-switcher.is-drawer details[open] .section-switcher__overview {
+
+        position: sticky;
+        top: 0;
+        z-index: 3;
+
+        display: flex;
+        align-items: center;
+        height: 52px;
+        margin: 0;
+        padding: 0 52px 0 4px;
+
+        background: var(--surface-card);
+
+    }
+
+    .section-switcher.is-drawer details[open] .section-switcher__overview a {
+
+        display: block;
+
+        padding: 4px 0;
+
+        color: var(--color-ink);
+
+        font-size: 17px;
+        font-weight: 700;
+        text-decoration: none;
 
     }
 
     .section-switcher.is-drawer details[open] .section-rail__hide {
 
+        position: sticky;
+        top: 4px;
+        z-index: 4;
+
         display: block;
-        width: 100%;
-        margin: 0 0 10px;
+        width: 44px;
+        min-height: 44px;
+        margin: -48px 0 4px auto;
+        padding: 0;
+
+        font-size: 0;
 
     }
 
+    .section-switcher.is-drawer details[open] .section-rail__hide::before {
+
+        content: "✕";
+
+        font-size: 18px;
+
+    }
+
+    .section-switcher.is-drawer details[open] .section-switcher__all {
+
+        display: block;
+
+        margin: 12px 0 0;
+        padding-top: 12px;
+
+        border-top: 1px solid var(--line);
+
+    }
+
+    .section-switcher.is-drawer details[open] .section-switcher__all a {
+
+        display: block;
+
+        padding: 10px 0;
+
+        color: var(--color-ink);
+
+        font-size: 15px;
+        font-weight: 600;
+
+    }
+
+    /* no box inside the drawer: the drawer is the box, and the names get the width */
     .section-switcher.is-drawer details[open] .section-switcher__list {
 
         grid-template-columns: 1fr;
+
+        margin: 4px 0 0;
+        padding: 0;
+
+        border: 0;
+        border-radius: 0;
+
+        background: transparent;
+
+    }
+
+    .section-switcher.is-drawer details[open] .section-switcher__list a {
+
+        box-sizing: border-box;
+        min-height: 44px;
+        padding: 10px 0 10px 13px;
+
+        line-height: 1.3;
+
+    }
+
+    .section-switcher.is-drawer details[open] .section-switcher__list a[aria-current="page"] {
+
+        margin-left: 0;
+        padding-left: 10px;
 
     }
 
@@ -415,7 +705,7 @@
     color: var(--ink-muted);
 
     font: inherit;
-    font-size: 12px;
+    font-size: var(--font-xs);
     font-weight: 700;
     letter-spacing: 0.04em;
     text-align: left;
@@ -480,3 +770,306 @@
     display: none;
 
 }
+
+
+/* ---------------------------------------------------------
+   Ecosystem pages (the section's own page and its category pages): the same sidebar beside the page content.
+   The wrapper is .ecosystem-layout (assets/js/pages/directory/directory-html.js, src/categories.njk, src/calculators-index.njk); the
+   page content sits in .ecosystem-main. The grid, sticky column, Hide/Show and drawer rules above apply to it as to a tool page.
+--------------------------------------------------------- */
+
+.container--workspace {
+
+    max-width: 1760px;
+
+}
+
+.ecosystem-main {
+
+    min-width: 0;
+
+}
+
+@media (min-width: 1000px) and (pointer: fine), (min-width: 1000px) and (min-device-width: 1000px) {
+
+    /* inside a .container the layout fills it; directly in <main> (All Calculators) it takes the tool-page width */
+    .ecosystem-layout:has(> .section-switcher) {
+
+        width: 100%;
+
+    }
+
+    main > .ecosystem-layout:has(> .section-switcher) {
+
+        width: min(1760px, calc(100% - 32px));
+        margin-inline: auto;
+
+    }
+
+    .ecosystem-layout > .section-switcher {
+
+        grid-row: 1;
+
+    }
+
+}
+
+/* the way back to the ecosystem's own page, above the list */
+.section-switcher__overview {
+
+    margin: 8px 0 0;
+
+}
+
+.section-switcher__overview a {
+
+    display: block;
+
+    padding: 8px 0;
+
+    color: var(--color-ink);
+
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    text-underline-offset: 3px;
+
+}
+
+.section-switcher__overview a:hover,
+.section-switcher__overview a:focus-visible {
+
+    text-decoration: underline;
+
+}
+
+.section-switcher__overview a[aria-current="page"] {
+
+    margin-left: -9px;
+    padding-left: 6px;
+
+    border-left: 3px solid var(--accent);
+
+    font-weight: 700;
+    text-decoration: none;
+
+}
+
+/* the group of the page being shown (a Calculators category, or the group holding the current tool) */
+.section-switcher__group[data-current="true"] > .section-switcher__toggle,
+.section-switcher__group[data-current="true"] > .section-switcher__label {
+
+    color: var(--color-ink);
+
+}
+
+.section-switcher__group[data-current="true"] > .section-switcher__toggle > span:first-child {
+
+    padding-left: 6px;
+    margin-left: -9px;
+
+    border-left: 3px solid var(--accent);
+
+}
+
+/* The workspace (assets/js/ui/workspace-nav.js) is fetching the next page: the content beside the sidebar dims, the sidebar does not. */
+.is-workspace-loading > :not(.section-switcher):not(.section-rail__show):not(.section-rail__backdrop) {
+
+    opacity: 0.55;
+
+    transition: opacity 0.15s;
+
+}
+
+/* announced to assistive technology when the workspace shows another page; never shown */
+.workspace-status {
+
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+
+    white-space: nowrap;
+
+}
+
+/* =========================================================
+   One page frame for every ecosystem page
+
+   A tool page, a category page, a toolkit's own page, Practice Labs, the Calculators landing and Loans each used to style their own
+   breadcrumb and top spacing, so the breadcrumb, the sidebar and the heading started at different heights and sizes from page to page.
+   Now: the breadcrumb is one row above the sidebar and the workspace (13 px, the same colours and the same 16 px below it), the gap
+   under the site header is the same, and the page heading is left-aligned in the workspace. The #app prefix keeps this ahead of the
+   per-page breadcrumb rules (calculators, directory, loans) without editing each of them.
+========================================================= */
+
+#app .container--workspace .calculator-breadcrumb,
+#app .calculator-page:has(> .section-switcher) > .calculator-breadcrumb {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+
+    margin: 0 0 16px;
+    padding: 0;
+
+    color: var(--color-ink-muted);
+
+    font-size: 13px;
+    line-height: 1.5;
+
+}
+
+#app .container--workspace .calculator-breadcrumb a,
+#app .calculator-page:has(> .section-switcher) > .calculator-breadcrumb a {
+
+    color: var(--color-brand-green);
+
+    text-decoration: none;
+
+}
+
+#app .container--workspace .calculator-breadcrumb a:hover,
+#app .calculator-page:has(> .section-switcher) > .calculator-breadcrumb a:hover {
+
+    text-decoration: underline;
+
+}
+
+#app .container--workspace .calculator-breadcrumb strong,
+#app .calculator-page:has(> .section-switcher) > .calculator-breadcrumb strong {
+
+    color: var(--color-ink);
+
+    font-weight: 600;
+
+}
+
+/* Loans keeps its own breadcrumb markup (a home icon); it sits in the same row, without the grey band it had inside the workspace */
+#app > .container--workspace > .loans-breadcrumb {
+
+    padding: 0 0 16px;
+
+    background: transparent;
+
+}
+
+/* the gap under the site header: the listing pages' section and the Loans wrapper had 46 px and 22 px; the tool pages 0.
+   One rule for every width, so a tablet (761 to 999 px) gets it too; phones trim it to 8 px below */
+#app > .categories-page:has(.ecosystem-layout),
+#app > .container--workspace,
+#app .calculator-page:has(> .section-switcher) {
+
+    padding-top: 20px;
+
+}
+
+/* the heading of a toolkit's landing page sits left in the workspace, as it does on the other ecosystem pages (the Calculators landing was centred) */
+#app .ecosystem-main > .categories-page__intro {
+
+    align-items: flex-start;
+
+    max-width: none;
+    margin-inline: 0;
+
+    text-align: left;
+
+}
+
+#app .ecosystem-main > .categories-page__intro .categories-page__description {
+
+    max-width: none;
+    margin-inline: 0;
+
+}
+
+/* Phones and narrow windows: the same frame, with the space above the tool trimmed. A tool page used to put its first control about 680 px down a
+   844 px screen (breadcrumb, bar, intro, trust card, "Jump to result" and the section heading each added their own gap). The trust card keeps
+   both lines of its claim; only its box and the gaps around it shrink. */
+@media (max-width: 760px) {
+
+    #app .container--workspace .calculator-breadcrumb,
+    #app .calculator-page:has(> .section-switcher) > .calculator-breadcrumb {
+
+        margin-bottom: 6px;
+
+    }
+
+    #app .calculator-page:has(> .section-switcher) .calculator-intro {
+
+        gap: 10px;
+        padding: 12px 0 14px;
+
+    }
+
+    #app .calculator-page:has(> .section-switcher) .calculator-trust-card {
+
+        gap: 10px;
+        padding: 8px 12px;
+
+    }
+
+    #app .calculator-page:has(> .section-switcher) .calculator-section {
+
+        margin-top: 16px;
+
+    }
+
+    #app > .categories-page:has(.ecosystem-layout),
+    #app > .container--workspace,
+    #app .calculator-page:has(> .section-switcher) {
+
+        padding-top: 8px;
+
+    }
+
+    #app .calculator-page:has(> .section-switcher) .jump-to-result {
+
+        margin-bottom: 0;
+
+    }
+
+    /* Loans: its sections each add a container of their own inside the workspace, which doubled the side gap (32 px against 16 px elsewhere);
+       the hero keeps a 16 px inset inside its band */
+    #app .ecosystem-main > section > .container {
+
+        padding-inline: 0;
+
+    }
+
+    #app .ecosystem-main > .loans-hero > .container {
+
+        padding-inline: 16px;
+
+    }
+
+    /* The page's own name was shown three times above the first control: as the breadcrumb's last item (on a line of its own), in the drawer
+       bar and as the heading. While the drawer bar is shown, the breadcrumb's last item and the separator before it are hidden from view but
+       kept for screen readers, so the trail still ends at the current page; the bar and the heading keep the name on screen. */
+    html:has(.section-switcher.is-drawer) #app .container--workspace .calculator-breadcrumb > :is(strong, [aria-current]):last-child,
+    html:has(.section-switcher.is-drawer) #app .container--workspace .calculator-breadcrumb > span:has(+ :is(strong, [aria-current]):last-child),
+    html:has(.section-switcher.is-drawer) #app .calculator-page:has(> .section-switcher) > .calculator-breadcrumb > :is(strong, [aria-current]):last-child,
+    html:has(.section-switcher.is-drawer) #app .calculator-page:has(> .section-switcher) > .calculator-breadcrumb > span:has(+ :is(strong, [aria-current]):last-child) {
+
+        position: absolute;
+
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+
+        white-space: nowrap;
+
+    }
+
+}
+

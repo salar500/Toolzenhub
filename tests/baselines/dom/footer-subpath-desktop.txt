@@ -25,6 +25,8 @@ div#footer
                 a [href="{ROOT}pdf-tools.html"] "PDF Tools"
               li
                 a [href="{ROOT}practice-labs.html"] "Practice Labs"
+              li
+                a [href="{ROOT}ai-tools.html"] "AI Tools"
           div.footer__column
             h3.footer__column-title "Explore"
             ul.footer__links

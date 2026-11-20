@@ -128,8 +128,9 @@ test.describe("Date Calculator", () => {
     for (const h of ["How to Use the Date Calculator", "How the Date Is Calculated", "Month Ends and Leap Years", "Example", "Common Uses"]) {
       await expect(body.getByRole("heading", { name: h })).toBeVisible();
     }
-    await expect(body.locator(".calculator-info details")).toHaveCount(5);
-    await expect(body.locator('.calculator-info a[href$="tools/date-difference/"]')).toHaveCount(1);
+    await expect(body.locator(".calculator-info details")).toHaveCount(6); // the sixth, "Is the start date counted as day 1?", states the counting convention (rule 8.9, 3e280e2)
+    await expect(body.locator(".calculator-info summary", { hasText: "Is the start date counted as day 1?" })).toHaveCount(1);
+    await expect(body.locator('.calculator-info a[href$="tools/date-difference/"]')).toHaveCount(2); // the explanation, and the day-1 FAQ's "count every date, including both" pointer
     await expect(body).toContainText("not part of this calculator");
     await expect(body).not.toContainText(/100% accurate|most accurate|\bbest\b|age calculator/i);
   });
@@ -151,8 +152,9 @@ test.describe("Date Calculator", () => {
 test.describe("Date Calculator in Time Tools and search", () => {
   test("Time Tools lists both tools, with no Coming soon", async ({ page, go }) => {
     await go("time-tools.html");
-    await expect(page.locator('a[href$="tools/date-calculator/"]')).toHaveCount(1);
-    await expect(page.locator('a[href$="tools/date-difference/"]')).toHaveCount(1);
+    // the page's own links; the workspace sidebar lists the tools too
+    await expect(page.locator('a[href$="tools/date-calculator/"]:not(.section-switcher a)')).toHaveCount(1);
+    await expect(page.locator('a[href$="tools/date-difference/"]:not(.section-switcher a)')).toHaveCount(1);
     await expect(page.locator("main")).not.toContainText(/coming soon/i);
     await expectNoHorizontalOverflow(page);
   });

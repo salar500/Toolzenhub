@@ -1,0 +1,1360 @@
+/* =========================================================
+   ToolZen Hub
+   Practice Labs learning paths: path, level, module and lesson pages
+
+   The page frame (breadcrumb row, sidebar or drawer, workspace) is the ecosystem's own (components/section-switcher.css); this
+   file styles what is inside the workspace. Mobile first: one readable column, 16 px text in the editor so a phone does not zoom,
+   44 px controls, tables and code scroll inside their own box so the page never scrolls sideways. The reading width is capped on
+   a wide screen so a line stays comfortable.
+========================================================= */
+
+.learn-main [hidden] {
+
+    display: none !important;
+
+}
+
+.learn-main {
+
+    min-width: 0;
+
+    color: var(--ink);
+
+}
+
+.learn-main--wide {
+
+    max-width: 960px;
+
+}
+
+.learn-lesson,
+.learn-main > .learn-section,
+.learn-main > .learn-start {
+
+    max-width: 780px;
+
+}
+
+.learn-intro {
+
+    max-width: 780px;
+
+}
+
+
+/* ---------- lesson header ---------- */
+
+.learn-lesson__head {
+
+    margin: 0 0 20px;
+
+}
+
+.learn-eyebrow {
+
+    margin: 0 0 8px;
+
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-muted);
+
+}
+
+/* underlined, not colour alone: the trail's links sit in running text (WCAG 1.4.1, axe link-in-text-block) */
+.learn-eyebrow a {
+
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+
+}
+
+.learn-eyebrow a:hover {
+
+    text-decoration-thickness: 2px;
+
+}
+
+.learn-lesson__head h1 {
+
+    margin: 0 0 12px;
+
+    font-size: 32px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+
+}
+
+.learn-progress {
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin: 0;
+
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-muted);
+
+}
+
+.learn-progress__bar {
+
+    flex: 1 1 auto;
+    max-width: 240px;
+    height: 6px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+    background: var(--accent-soft);
+
+}
+
+.learn-progress__bar > span {
+
+    display: block;
+    height: 100%;
+
+    border-radius: 999px;
+    background: var(--accent);
+
+}
+
+
+/* ---------- sections ---------- */
+
+.learn-section {
+
+    margin: 0 0 28px;
+
+}
+
+.learn-section h2 {
+
+    margin: 0 0 10px;
+
+    font-size: 22px;
+    line-height: 1.3;
+
+}
+
+.learn-section h2 a {
+
+    color: inherit;
+
+}
+
+.learn-section h3 {
+
+    margin: 18px 0 8px;
+
+    font-size: 17px;
+    line-height: 1.35;
+
+}
+
+.learn-section p,
+.learn-section li {
+
+    font-size: 16px;
+    line-height: 1.65;
+
+}
+
+.learn-section p {
+
+    margin: 0 0 12px;
+
+}
+
+.learn-section p,
+.learn-section li {
+
+    color: var(--ink);
+
+}
+
+.learn-section ul,
+.learn-section ol {
+
+    margin: 0 0 12px;
+    padding-left: 22px;
+
+}
+
+.learn-section ul {
+
+    list-style: disc;
+
+}
+
+.learn-section ol {
+
+    list-style: decimal;
+
+}
+
+.learn-section li + li {
+
+    margin-top: 6px;
+
+}
+
+.learn-analogy p {
+
+    padding: 14px 16px;
+
+    border-left: 4px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    background: var(--accent-soft);
+
+}
+
+
+/* ---------- examples and exercises ---------- */
+
+.learn-example,
+.learn-exercise {
+
+    min-width: 0;
+
+    margin: 0 0 18px;
+    padding: 16px;
+
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface-card);
+
+}
+
+.learn-example h3,
+.learn-exercise h3 {
+
+    margin-top: 0;
+
+}
+
+.learn-example .lx-code,
+.learn-exercise .lx-code {
+
+    margin: 0 0 12px;
+
+}
+
+.learn-example .lx-table-wrap {
+
+    margin: 0 0 12px;
+
+}
+
+.learn-editor {
+
+    width: 100%;
+    box-sizing: border-box;
+
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 16px;
+    line-height: 1.5;
+
+}
+
+.learn-actions {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin: 10px 0;
+
+}
+
+.learn-main .lx-btn {
+
+    min-height: 44px;
+
+}
+
+/* buttons use the site's form button (components/buttons.css), as the labs do; on a narrow screen they share the row */
+.learn-main .calculator-form__button {
+
+    min-width: 0;
+
+}
+
+.learn-feedback:empty {
+
+    display: none;
+
+}
+
+.learn-feedback {
+
+    margin: 0 0 12px;
+    padding: 12px 14px;
+
+    border: 1px solid var(--line);
+    border-radius: 10px;
+
+}
+
+.learn-feedback p {
+
+    margin: 0 0 8px;
+
+}
+
+.learn-feedback > :last-child {
+
+    margin-bottom: 0;
+
+}
+
+.learn-feedback[data-verdict="correct"] {
+
+    border-color: var(--state-success-line);
+    background: var(--state-success-soft);
+
+}
+
+.learn-feedback[data-verdict="not-yet"] {
+
+    border-color: var(--state-warning-line);
+    background: var(--state-warning-soft);
+
+}
+
+.learn-feedback[data-verdict="cannot-check"] {
+
+    border-color: var(--state-info-line);
+    background: var(--state-info-soft);
+
+}
+
+.learn-reveal {
+
+    margin: 0 0 10px;
+
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface-page);
+
+}
+
+.learn-reveal > summary {
+
+    min-height: 44px;
+    box-sizing: border-box;
+    padding: 10px 14px;
+
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 1.4;
+
+}
+
+.learn-reveal > :not(summary) {
+
+    margin-left: 14px;
+    margin-right: 14px;
+
+}
+
+.learn-reveal > :last-child {
+
+    margin-bottom: 14px;
+
+}
+
+.learn-reveal ol {
+
+    padding-left: 20px;
+
+}
+
+
+/* ---------- previous and next ---------- */
+
+.learn-pager {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+
+    margin: 0 0 28px;
+
+}
+
+.learn-pager__link {
+
+    display: block;
+    box-sizing: border-box;
+    min-height: 44px;
+    padding: 12px 14px;
+
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-card);
+
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--ink);
+    text-decoration: none;
+
+}
+
+.learn-pager__link:hover {
+
+    border-color: var(--accent-line);
+
+}
+
+.learn-pager__link span {
+
+    display: block;
+
+    margin-bottom: 2px;
+
+    font-size: var(--font-xs);
+    font-weight: 600;
+    color: var(--ink-muted);
+
+}
+
+.learn-pager__link--next {
+
+    grid-column: 2;
+
+    text-align: right;
+
+}
+
+
+/* ---------- path, level and module pages ---------- */
+
+.learn-start {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 16px;
+
+    margin: 0 0 28px;
+
+}
+
+.learn-start__note {
+
+    font-size: 14px;
+    color: var(--ink-muted);
+
+}
+
+.learn-button {
+
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    box-sizing: border-box;
+    padding: 10px 18px;
+
+    border-radius: 10px;
+    background: var(--action);
+
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--on-action);
+    text-decoration: none;
+
+}
+
+.learn-button:hover {
+
+    background: var(--action-hover);
+
+}
+
+.learn-link {
+
+    font-weight: 600;
+    color: var(--accent);
+
+}
+
+.learn-count {
+
+    margin-left: 6px;
+
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-muted);
+
+}
+
+.learn-level {
+
+    margin: 0 0 22px;
+
+}
+
+.learn-level h3 a {
+
+    color: inherit;
+
+}
+
+.learn-module {
+
+    margin: 0 0 12px;
+    padding: 12px 16px;
+
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-card);
+
+}
+
+.learn-module h4 {
+
+    margin: 0 0 6px;
+
+    font-size: 16px;
+
+}
+
+.learn-module h4 a {
+
+    color: var(--ink);
+
+}
+
+.learn-module ol {
+
+    margin: 0;
+    padding-left: 22px;
+
+}
+
+.learn-lessons {
+
+    list-style: none;
+    padding-left: 0 !important;
+
+}
+
+.learn-lessons > li {
+
+    margin: 0 0 14px;
+    padding: 12px 16px;
+
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-card);
+
+}
+
+.learn-lessons > li > a {
+
+    font-weight: 700;
+    color: var(--ink);
+
+}
+
+.learn-blurb {
+
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 15px;
+    color: var(--ink-muted);
+
+}
+
+.learn-objectives-list {
+
+    margin: 8px 0 0 !important;
+
+    font-size: 14px;
+
+}
+
+.learn-objectives-list li {
+
+    font-size: 14px !important;
+
+}
+
+.learn-cards {
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: 14px;
+
+}
+
+.learn-card {
+
+    display: grid;
+    gap: 6px;
+    align-content: start;
+
+    padding: 16px;
+
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface-card);
+
+    line-height: 1.5;
+    color: var(--ink);
+    text-decoration: none;
+
+}
+
+a.learn-card:hover {
+
+    border-color: var(--accent-line);
+
+}
+
+.learn-card strong {
+
+    font-size: 18px;
+
+}
+
+.learn-card__status {
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+
+}
+
+.learn-card--planned {
+
+    background: var(--surface-sunken);
+
+}
+
+.learn-card--planned .learn-card__status {
+
+    color: var(--ink-muted);
+
+}
+
+
+/* ---------- touch screens: list links are finger-sized rows (44 px), with a mouse they stay plain text ---------- */
+
+@media (pointer: coarse) {
+
+    .learn-tech li > a,
+    .learn-lessons li > a,
+    .learn-section li > a:only-child {
+        display: inline-block;
+        padding: 12px 0;
+    }
+
+}
+
+/* ---------- phones: the lesson is one calm column ---------- */
+
+@media (max-width: 760px) {
+
+    .learn-lesson__head h1 {
+
+        font-size: 26px;
+
+    }
+
+    /* a long trail (Home, Practice Labs, path, level, module, lesson) would take two 44 px rows: keep Home, Practice Labs and the last two steps;
+       the line above the lesson title links the path, level and module (the full trail stays in the page's structured data) */
+    #app .learn-page .calculator-breadcrumb > :nth-child(n+5):nth-last-child(n+4) {
+
+        display: none;
+
+    }
+
+    .learn-section {
+
+        margin-bottom: 22px;
+
+    }
+
+    .learn-section h2 {
+
+        font-size: 20px;
+
+    }
+
+    .learn-example,
+    .learn-exercise {
+
+        padding: 14px;
+
+    }
+
+    .learn-actions .lx-btn {
+
+        flex: 1 1 140px;
+
+    }
+
+    .learn-pager {
+
+        grid-template-columns: minmax(0, 1fr);
+
+    }
+
+    .learn-pager__link--next {
+
+        grid-column: auto;
+
+        text-align: left;
+
+    }
+
+    .learn-button {
+
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+
+    }
+
+}
+
+.learn-pager > span:empty {
+
+    display: none;
+
+}
+
+
+/* ---------- the lesson card: objectives and the prerequisite in one compact box, so the first example comes early ---------- */
+
+.learn-lesson-card {
+
+    padding: 14px 16px;
+
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface-card);
+
+}
+
+.learn-lesson-card h2 {
+
+    margin-bottom: 6px;
+
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+
+}
+
+.learn-lesson-card ul {
+
+    margin-bottom: 8px;
+
+}
+
+.learn-lesson-card li + li {
+
+    margin-top: 2px;
+
+}
+
+.learn-lesson-card__before {
+
+    margin: 0 !important;
+
+    font-size: 15px !important;
+
+}
+
+
+/* ---------- subjects with their status ---------- */
+
+.learn-tech {
+
+    list-style: none !important;
+    padding-left: 0 !important;
+
+}
+
+.learn-tech li {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 10px;
+
+    padding: 8px 0;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+.learn-badge {
+
+    display: inline-block;
+    padding: 2px 8px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+
+}
+
+.learn-badge--path {
+
+    background: var(--state-success-soft);
+    color: var(--ink);
+
+}
+
+.learn-badge--lab {
+
+    background: var(--accent-soft);
+    color: var(--ink);
+
+}
+
+.learn-badge--planned {
+
+    background: var(--surface-sunken);
+    color: var(--ink-muted);
+
+}
+
+
+/* ---------- search ---------- */
+
+.learn-search__form {
+
+    display: grid;
+    gap: 8px;
+
+}
+
+.learn-search__input {
+
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 44px;
+
+    font-size: 16px;
+
+}
+
+.learn-search__filters {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+
+}
+
+.learn-search__filters label {
+
+    display: grid;
+    gap: 4px;
+    flex: 1 1 160px;
+
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-muted);
+
+}
+
+.learn-search__filters select {
+
+    min-height: 44px;
+
+}
+
+.learn-search__status:empty {
+
+    display: none;
+
+}
+
+.learn-search__status {
+
+    margin: 12px 0 8px !important;
+
+    font-size: 14px !important;
+    color: var(--ink-muted) !important;
+
+}
+
+.learn-search__results {
+
+    list-style: none !important;
+    padding-left: 0 !important;
+
+}
+
+.learn-search__results li {
+
+    display: grid;
+    gap: 2px;
+
+    padding: 10px 0;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+.learn-search__results a {
+
+    font-weight: 700;
+
+}
+
+.learn-search__meta {
+
+    font-size: 13px;
+    color: var(--ink-muted);
+
+}
+
+.learn-search__text {
+
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink);
+
+}
+
+
+/* ---------- concept questions ---------- */
+
+.learn-quiz__q {
+
+    margin: 0 0 18px;
+    padding: 14px 16px;
+
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface-card);
+
+}
+
+.learn-quiz__q legend {
+
+    padding: 0 4px;
+
+    font-weight: 700;
+    line-height: 1.45;
+
+}
+
+.learn-quiz__options {
+
+    display: grid;
+    gap: 6px;
+
+    margin: 10px 0 4px;
+
+}
+
+.learn-quiz__option {
+
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    min-height: 44px;
+    box-sizing: border-box;
+    padding: 10px 12px;
+
+    border: 1px solid var(--line);
+    border-radius: 10px;
+
+    cursor: pointer;
+    line-height: 1.45;
+
+}
+
+.learn-quiz__option input {
+
+    width: 20px;
+    height: 20px;
+    flex: 0 0 auto;
+    margin: 1px 0 0;
+
+}
+
+.learn-quiz__option:has(input:checked) {
+
+    border-color: var(--accent);
+    background: var(--accent-soft);
+
+}
+
+.learn-quiz__actions {
+
+    margin: 8px 0 !important;
+
+}
+
+.learn-quiz__result:empty {
+
+    display: none;
+
+}
+
+.learn-quiz__result {
+
+    font-weight: 600;
+
+}
+
+.learn-quiz__q[data-verdict="correct"] .learn-quiz__result {
+
+    color: var(--state-success);
+
+}
+
+.learn-quiz__q[data-verdict="not-yet"] .learn-quiz__result {
+
+    color: var(--ink);
+
+}
+
+
+/* ---------- JOIN visualizer ---------- */
+
+.join-viz__types,
+.join-viz__nav {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin: 0 0 12px;
+
+}
+
+.join-viz__types [aria-pressed="true"] {
+
+    background: var(--color-action-green);
+    color: var(--color-white);
+
+}
+
+.join-viz__tables {
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+
+    margin: 12px 0;
+
+}
+
+.join-viz__table caption {
+
+    padding: 0 0 6px;
+
+    font-weight: 700;
+    text-align: left;
+
+}
+
+.join-viz tr.is-current td {
+
+    background: var(--accent-soft);
+    font-weight: 700;
+
+}
+
+.join-viz tr.is-match td {
+
+    background: var(--state-success-soft);
+
+}
+
+.join-viz__say {
+
+    min-height: 3em;
+
+    font-weight: 600;
+
+}
+
+@media (max-width: 760px) {
+
+    .join-viz__tables {
+
+        grid-template-columns: minmax(0, 1fr);
+
+    }
+
+    .join-viz__types .lx-btn,
+    .join-viz__nav .lx-btn {
+
+        flex: 1 1 140px;
+
+    }
+
+}
+
+
+/* ---------- samples, ordering tasks and writing labs ---------- */
+
+.learn-sample {
+
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+
+}
+
+.learn-order,
+.learn-write {
+
+    padding: 14px 16px;
+
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface-card);
+
+}
+
+.learn-order__items {
+
+    padding-left: 0 !important;
+    list-style: none !important;
+
+}
+
+.learn-order__item {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 12px;
+
+    padding: 8px 0;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+.learn-order__pos {
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 14px;
+    color: var(--ink-muted);
+
+}
+
+.learn-order__pos select {
+
+    min-height: 44px;
+    min-width: 64px;
+
+}
+
+.learn-write__input {
+
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 44px;
+
+    font-size: 16px;
+
+}
+
+.learn-editor--text {
+
+    font-family: inherit;
+
+}
+
+.learn-write .lx-label {
+
+    display: block;
+
+    margin: 10px 0 4px;
+
+}
+
+.learn-rubric {
+
+    list-style: none !important;
+    padding-left: 0 !important;
+
+}
+
+.learn-rubric li[data-met="true"] strong {
+
+    color: var(--state-success);
+
+}
+
+
+/* ---------- Bug Hunting Simulator ---------- */
+
+.learn-hunt__grid {
+
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 14px;
+
+}
+
+.learn-hunt__app {
+
+    width: 100%;
+    height: 640px;
+
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-card);
+
+}
+
+.learn-hunt__count {
+
+    margin: 0 0 8px !important;
+
+    font-weight: 700;
+
+}
+
+.learn-hunt__form select,
+.learn-hunt__form textarea {
+
+    width: 100%;
+    box-sizing: border-box;
+
+}
+
+@media (max-width: 1100px) {
+
+    .learn-hunt__grid {
+
+        grid-template-columns: minmax(0, 1fr);
+
+    }
+
+    .learn-hunt__app {
+
+        height: 560px;
+
+    }
+
+}
+
+
+/* ---------- locator practice ---------- */
+
+.learn-locator__task {
+
+    margin: 0 0 14px;
+    padding: 0 0 12px;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+.learn-code-input {
+
+    font-family: var(--font-mono, ui-monospace, monospace);
+
+}
+
+
+/* ---------- AI visualizers ---------- */
+
+.learn-aiviz__control { display: grid; grid-template-columns: 1fr auto; gap: 4px 8px; margin: 0 0 10px; }
+.learn-aiviz__range { grid-column: 1 / -1; width: 100%; min-height: 44px; }
+.learn-aiviz__chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.learn-aiviz__chip { padding: 2px 6px; border-radius: 6px; font-family: var(--font-mono, monospace); font-size: 14px; white-space: pre; }
+.learn-aiviz__chip--0 { background: var(--accent-soft); }
+.learn-aiviz__chip--1 { background: var(--state-success-soft); }
+.learn-aiviz__chip--2 { background: var(--state-warning-soft); }
+.learn-aiviz__chip--3 { background: var(--state-info-soft); }
+.learn-aiviz__bar { display: flex; overflow: hidden; margin: 8px 0; border: 1px solid var(--line); border-radius: 8px; min-height: 32px; }
+.learn-aiviz__seg { overflow: hidden; padding: 6px 4px; font-size: 12px; white-space: nowrap; }
+.learn-aiviz__seg--system { background: var(--accent-soft); }
+.learn-aiviz__seg--document { background: var(--state-info-soft); }
+.learn-aiviz__seg--question { background: var(--state-success-soft); }
+.learn-aiviz__seg--output { background: var(--state-warning-soft); }
+
+
+/* ---------- numeric exercises ---------- */
+
+.learn-numeric { display: grid; gap: 14px; padding-left: 1.4em; }
+.learn-numeric__input { max-width: 12em; min-height: 44px; }
+.learn-write .lx-table-wrap { overflow-x: auto; margin: 0 0 12px; }
+
+/* ---------- API request tasks ---------- */
+
+.learn-api__line { display: grid; grid-template-columns: minmax(7em, auto) 1fr; gap: 10px; margin: 0 0 10px; }
+.learn-api__target .lx-input { width: 100%; }
+@media (max-width: 520px) { .learn-api__line { grid-template-columns: 1fr; } }
+
+/* ---------- HTML and CSS playground ---------- */
+
+.learn-webplay__frame { display: block; width: 100%; min-height: 220px; margin: 10px 0; border: 1px solid var(--line); border-radius: 8px; background: var(--surface-card); }
+
+/* ---------- Git simulator ---------- */
+
+.learn-gitsim__state { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; margin: 0 0 10px; font-size: 14px; }
+.learn-gitsim__state dt { font-weight: 600; }
+.learn-gitsim__state dd { margin: 0; overflow-wrap: anywhere; }
+.learn-gitsim__term { min-height: 120px; max-height: 280px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+.learn-gitsim__input { flex: 1 1 14em; min-height: 44px; font-family: var(--font-mono, monospace); }
+@media (max-width: 520px) { .learn-gitsim__state { grid-template-columns: 1fr; } }
+
+/* ---------- role journeys ---------- */
+
+.learn-journeys { display: grid; gap: 10px; }
+.learn-journey { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; }
+.learn-journey summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.learn-journey ol { margin: 8px 0 4px; }
+
+.learn-aiviz__plot { display: block; width: 100%; max-width: 520px; height: auto; margin: 8px 0; background: var(--surface-card); }
+.learn-aiviz__axis { stroke: var(--line); stroke-width: 1; }
+.learn-aiviz__dot { fill: var(--accent); }
+.learn-aiviz__dot--test { fill: var(--state-warning, #b45309); }
+.learn-aiviz__line { stroke: var(--state-success, #15803d); stroke-width: 2.5; }
+.learn-aiviz__centroid { stroke-width: 3; fill: none; }
+.learn-aiviz__dot--k0 { fill: var(--accent); stroke: var(--accent); }
+.learn-aiviz__dot--k1 { fill: var(--state-success, #15803d); stroke: var(--state-success, #15803d); }
+.learn-aiviz__dot--k2 { fill: var(--state-warning, #b45309); stroke: var(--state-warning, #b45309); }
+.learn-aiviz__left { background: var(--accent-soft); }
+
+/* ---------- regular expressions ---------- */
+
+.learn-regex__pattern { flex: 1 1 16em; }
+.learn-regex__pattern .lx-input { width: 100%; font-family: var(--font-mono, monospace); }
+.learn-regex__flags { width: 5em; font-family: var(--font-mono, monospace); }
+.learn-regex__tests code { overflow-wrap: anywhere; }
+
+
+/* "Keep going" and "Related departments" links sit in sentences: underlined, not colour alone (WCAG 1.4.1, axe link-in-text-block) */
+.learn-related a,
+section[aria-labelledby="learn-related-depts"] a {
+
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+
+}

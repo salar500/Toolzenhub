@@ -282,7 +282,7 @@
         var(--color-brand-green);
 
     color:
-        #ffffff;
+        var(--on-action);
 
     text-decoration:
         none;
@@ -335,7 +335,7 @@
         10px;
 
     background:
-        #ffffff;
+        var(--surface-card);
 
     overflow:
         hidden;

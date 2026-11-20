@@ -347,7 +347,7 @@ test.describe("Base64 Encoder & Decoder in Developer Tools, search and related l
     const mainText = await page.locator("main").evaluate((e) => { const c = e.cloneNode(true); c.querySelectorAll("nav.section-switcher").forEach((n) => n.remove()); return c.textContent; });
     expect(mainText).not.toContain("Base64 Encoder");
     await go("tools/jwt-decoder/");
-    await expect(page.locator(".related-section").getByRole("link", { name: /Base64 Encoder/ })).toHaveCount(1); // the Developer Tools pilot (2026-10-27) lists it
+    await expect(page.locator(".related-section:not(.knowledge-links)").getByRole("link", { name: /Base64 Encoder/ })).toHaveCount(1); // the Developer Tools pilot (2026-10-27) lists it
     await go("tools/base64-encoder-decoder/");
     await page.locator("main .calculator-info a", { hasText: "JWT Decoder" }).click();
     await expect(page).toHaveURL((u) => u.pathname === `${siteRoot}tools/jwt-decoder/`);
@@ -356,7 +356,7 @@ test.describe("Base64 Encoder & Decoder in Developer Tools, search and related l
   test("global search finds it by its own names", async ({ page, go, siteRoot }) => {
     for (const q of ["base64", "base64 decode", "text to base64", "base64 encoder", "base64 converter"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
-      await expect(page.locator(`a[href='${siteRoot}tools/base64-encoder-decoder/']`).first(), q).toBeVisible();
+      await expect(page.locator(`#tools-results a[href='${siteRoot}tools/base64-encoder-decoder/']`).first(), q).toBeVisible();
     }
   });
 

@@ -14,8 +14,13 @@
  *   - no live page is an orphan (each is linked from somewhere)
  */
 import { test, expect, livePages, rel, INVENTORY } from "../helpers/test-base.mjs";
+import { RELEASES } from "../../assets/js/practice-labs/shoplite/bugs.js";
+import { AI_AUDIENCES, AI_CATEGORIES } from "../../assets/js/data/ai-directory.js";
 
-const CATEGORY_SLUGS = ["loans", "investment", "tax", "business", "health", "math", "converter"];
+const AI_AUDIENCE_IDS = new Set(AI_AUDIENCES.map((a) => a.id));
+const AI_CATEGORY_IDS = new Set(AI_CATEGORIES.map((c) => c.id));
+
+const CATEGORY_SLUGS = ["loans", "investment", "tax", "business", "health", "math", "converter", "ai"];
 const SOON = ".calculator-card--soon, .category-page-card--soon, .article-card--soon";
 
 const VARIANTS = [
@@ -27,9 +32,13 @@ const VARIANTS = [
 
 test.describe("rendered link crawl @portable", () => {
   test("every rendered internal link is correct, known, and reachable", async ({ page, go, api, siteRoot, deployMode, browserName }, testInfo) => {
-    test.setTimeout(240_000);
     const knownRoutes = new Set(livePages.map((p) => rel(p.url))); // "", "about.html", "calculators/emi/", …
     const crawl = [...livePages.map((p) => rel(p.url)), ...VARIANTS];
+    // every page is visited, so the budget follows the inventory (about 130 pages when 240 s was set; 662 with the Practice Labs).
+    // 2.5 s a page (was 1.5 s): each page waits for networkidle (500 ms of quiet at least) after it renders, and on the 4 GB development
+    // laptop the crawl measured 1.65 to 1.70 s a page (2026-11-14: two runs timed out at about 89 % of 680 pages, none of them hanging;
+    // the pages load in under 0.7 s alone). Every page and every check is unchanged; a page that hangs still fails on its own timeouts.
+    test.setTimeout(Math.max(240_000, crawl.length * 2_500));
 
     const failures = [];
     const targets = new Map(); // site-relative path -> first page that links to it
@@ -86,7 +95,10 @@ test.describe("rendered link crawl @portable", () => {
 
         // fragment-only links point inside the current page
         if (url.pathname === here.pathname && url.hash) {
-          if ((await page.locator(url.hash).count()) === 0) pageSummary.deadFragments.push(raw);
+          // "#/signin": a screen of ShopLite's in-page router (the practice shop), not an element id; its screens are tested in the ShopLite and lab specs
+          if (url.hash.startsWith("#/")) continue;
+          const id = decodeURIComponent(url.hash.slice(1));
+          if ((await page.locator(`[id="${id.replace(/["\\]/g, "\\$&")}"]`).count()) === 0) pageSummary.deadFragments.push(raw);
           continue;
         }
         // known route?
@@ -101,7 +113,11 @@ test.describe("rendered link crawl @portable", () => {
             const q = url.searchParams;
             // the World Clock's hand-off to the Time Zone Converter carries the visitor's zone and the board's zones (from, to)
             const handoff = entry === "tools/world-clock/" && relPath === "tools/time-zone-converter/" && q.has("from") && [...q.keys()].every((k) => k === "from" || k === "to");
-            const okQuery = (relPath === "articles.html" && CATEGORY_SLUGS.includes(q.get("category"))) || handoff;
+            // a lesson opens ShopLite in one of its releases (?release=, docs/practice-labs/18-department-specifications.md); only a release that exists
+            const release = relPath === "practice-labs/shoplite/" && [...q.keys()].join() === "release" && Object.hasOwn(RELEASES, q.get("release"));
+            // a Learn and check link opens the AI Directory filtered for one audience or category (data/ai-directory.js); only values that exist
+            const directory = relPath === "ai-tools/directory/" && [...q.keys()].every((k) => (k === "audience" && AI_AUDIENCE_IDS.has(q.get(k))) || (k === "category" && AI_CATEGORY_IDS.has(q.get(k))));
+            const okQuery = (relPath === "articles.html" && CATEGORY_SLUGS.includes(q.get("category"))) || handoff || release || directory;
             if (!okQuery) failures.push(`${entry}: link "${raw}" has an unexpected query string`);
           }
         }

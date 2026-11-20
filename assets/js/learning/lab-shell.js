@@ -34,12 +34,17 @@ export const VERDICT_WORD = {
 const DIFFICULTY_LABEL = { beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced" };
 export const MAX_HINTS = 3;
 
-/* A set this long gets the workspace list: exercises grouped by topic, with titles and a search. A shorter set keeps the plain row of numbers. */
+/*
+ * A set this long gets the workspace list: every exercise in number order with its title, topic and level, a search
+ * and a topic filter. A shorter set keeps the plain row of numbers. The list follows the numbers, not the topics
+ * (owner direction 2026-11-15): an exercise keeps its number for good, and topics added later (SQL 31-38) no longer
+ * make a topic group read 3-7, 31, 32.
+ */
 export const WORKSPACE_MIN = 12;
 const WIDE = "(min-width: 960px)";
 const topicWord = (t) => (t.charAt(0).toUpperCase() + t.slice(1)).replace(/-/g, " ");
 
-/** Group exercise indexes for the workspace list: by topic when every exercise has one, otherwise by difficulty. Pure, in the order of first appearance. */
+/** Group exercise indexes by topic when every exercise has one, otherwise by difficulty: the topic filter's choices. Pure, in the order of first appearance. */
 export function groupExercises(exercises) {
     const byTopic = exercises.every((ex) => typeof ex.topic === "string" && ex.topic !== "");
     const groups = new Map();
@@ -60,6 +65,12 @@ export function matchExercises(exercises, query) {
         if (/^\d+$/.test(q)) return String(i + 1) === q;
         return `${ex.title} ${ex.topic ?? ""} ${ex.difficulty}`.toLowerCase().includes(q);
     });
+}
+
+/** Indexes shown by the list: the search (matchExercises) and the chosen group key ("" for all), in number order. Pure. */
+export function filterExercises(exercises, query, group = "") {
+    const keys = new Map(groupExercises(exercises).flatMap((g) => g.indexes.map((i) => [i, g.key])));
+    return matchExercises(exercises, query).filter((i) => group === "" || keys.get(i) === group);
 }
 
 /** Run an evaluator so that no failure of it reaches the learner as a wrong answer. */
@@ -136,6 +147,11 @@ export function mountLab({ root, live, lab }) {
     const counts = el("p", { class: "lx-meta", "data-role": "counts" });
     const stage = el("div", { class: "lx-lab-stage" });
     const search = workspace ? el("input", { type: "search", id: "lx-exsearch", class: "lx-exsearch", autocomplete: "off", spellcheck: "false" }) : null;
+    const groups = workspace ? groupExercises(exercises) : [];
+    const groupOf = new Map(groups.flatMap((g) => g.indexes.map((i) => [i, g])));
+    const topic = workspace ? el("select", { id: "lx-extopic", class: "lx-extopic" },
+        el("option", { value: "", text: `All topics (${exercises.length})` }),
+        groups.map((g) => el("option", { value: g.key, text: `${g.label} (${g.indexes.length})` }))) : null;
     const searchNote = workspace ? el("p", { class: "lx-meta", role: "status", "aria-live": "polite" }) : null;
     const picker = workspace ? el("details", { class: "lx-picker" }) : null;
     const pickerLabel = workspace ? el("summary", { class: "lx-picker__summary" }) : null;
@@ -147,7 +163,9 @@ export function mountLab({ root, live, lab }) {
         document.dispatchEvent(new CustomEvent("tz:lab-workspace")); // the section sidebar steps aside on mid-width screens
         put(picker, pickerLabel,
             el("label", { class: "lx-label", for: "lx-exsearch", text: "Find an exercise by number, title or topic" }),
-            search, searchNote, nav);
+            search,
+            el("label", { class: "lx-label", for: "lx-extopic", text: "Show topic" }),
+            topic, searchNote, nav);
         put(root, el("h2", { class: "lx-title", text: "Exercises" }), el("aside", { class: "lx-sidebar", "aria-label": "Exercise list" }, picker, counts), stage);
         /* wide screens keep the list open beside the exercise; narrow ones fold it away until it is wanted */
         const wide = window.matchMedia(WIDE);
@@ -155,6 +173,7 @@ export function mountLab({ root, live, lab }) {
         fit();
         wide.addEventListener("change", fit);
         search.addEventListener("input", applyFilter);
+        topic.addEventListener("change", applyFilter);
     } else {
         put(root, el("h2", { class: "lx-title", text: "Exercises" }), nav, counts, stage);
     }
@@ -169,30 +188,32 @@ export function mountLab({ root, live, lab }) {
         return el("li", { "data-index": String(i) },
             el("button", {
                 type: "button", class: "lx-exbtn", "aria-current": i === index ? "true" : null, "data-status": status,
-                "aria-label": `Exercise ${i + 1}: ${ex.title}, ${DIFFICULTY_LABEL[ex.difficulty]}, ${STATUS_WORD[status]}`,
+                "aria-label": `Exercise ${i + 1}: ${ex.title}, ${workspace && groupOf.get(i)?.label !== DIFFICULTY_LABEL[ex.difficulty] ? `${groupOf.get(i)?.label}, ` : ""}${DIFFICULTY_LABEL[ex.difficulty]}, ${STATUS_WORD[status]}`,
                 onclick: () => go(i, true)
             }, workspace
-                ? [el("span", { class: "lx-exbtn__no", text: String(i + 1) }), el("span", { class: "lx-exbtn__title", text: ex.title }), el("span", { class: "lx-exbtn__state", text: status === "completed" ? "Done" : status === "solution-viewed" ? "Solution" : "" })]
+                ? [
+                    el("span", { class: "lx-exbtn__no", text: String(i + 1) }),
+                    el("span", { class: "lx-exbtn__body" },
+                        el("span", { class: "lx-exbtn__title", text: ex.title }),
+                        el("span", { class: "lx-exbtn__tags", text: [groupOf.get(i)?.label, DIFFICULTY_LABEL[ex.difficulty]].filter((t, k, all) => t && all.indexOf(t) === k).join(" · ") })),
+                    el("span", { class: "lx-exbtn__state", text: status === "completed" ? "Done" : status === "solution-viewed" ? "Solution" : "" })
+                ]
                 : String(i + 1))
         );
     }
 
     function applyFilter() {
-        const shown = new Set(matchExercises(exercises, search.value));
+        const shown = new Set(filterExercises(exercises, search.value, topic.value));
         nav.querySelectorAll("li[data-index]").forEach((li) => { li.hidden = !shown.has(Number(li.dataset.index)); });
-        nav.querySelectorAll(".lx-exgroup").forEach((g) => { g.hidden = !g.querySelector("li:not([hidden])"); });
-        searchNote.textContent = search.value.trim() === "" ? "" : shown.size === 0 ? "No exercise matches." : `${plural(shown.size, "exercise")} match.`;
+        const narrowed = search.value.trim() !== "" || topic.value !== "";
+        searchNote.textContent = !narrowed ? "" : shown.size === 0 ? "No exercise matches." : `${plural(shown.size, "exercise")} shown.`;
     }
 
     function drawNav() {
         const keep = nav.scrollTop;
         clear(nav);
         if (workspace) {
-            for (const g of groupExercises(exercises)) {
-                put(nav, el("section", { class: "lx-exgroup" },
-                    el("h3", { class: "lx-exgroup__title", text: `${g.label} (${g.indexes.length})` }),
-                    el("ol", { class: "lx-exlist", "aria-label": g.label }, g.indexes.map(exerciseButton))));
-            }
+            put(nav, el("ol", { class: "lx-exlist", "aria-label": "Exercises in number order" }, exercises.map((ex, i) => exerciseButton(i))));
             pickerLabel.textContent = `Exercise ${index + 1} of ${exercises.length}: ${exercises[index].title}. Choose another`;
             applyFilter();
             nav.scrollTop = keep;
@@ -409,8 +430,10 @@ export function mountLab({ root, live, lab }) {
                 el("p", { class: "lx-meta" }, el("span", { class: "lx-tag", text: DIFFICULTY_LABEL[ex.difficulty] }), ` Exercise ${index + 1} of ${exercises.length}`),
                 heading,
                 lessonLine(ex),
-                el("p", { class: "lx-meta", text: `Objective: ${ex.objective}` }),
-                el("p", { text: ex.instructions }),
+                /* what the exercise teaches, then what to do, as two labelled parts (owner finding 2026-11-15: the objective,
+                   the task and the answer area must be told apart at a glance) */
+                el("p", { class: "lx-objective" }, el("span", { class: "lx-part", text: "What you will learn" }), ex.objective),
+                el("div", { class: "lx-task" }, el("p", { class: "lx-part", text: "Your task" }), el("p", { text: ex.instructions })),
                 ex.document ? el("div", {},
                     el("p", { class: "lx-label", text: lab.documentLabel ?? "Document (read only)" }),
                     codeBlock(ex.document, lab.documentLabel ?? "Document (read only)")) : null,

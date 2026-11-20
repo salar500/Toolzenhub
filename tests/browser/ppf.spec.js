@@ -22,7 +22,7 @@ const F = {
 };
 const pattern = (page, which) => page.getByRole("radio", { name: which === "yearly" ? "Yearly: all in April, by the 5th" : "Monthly: every month, by the 5th" });
 const kind = (page) => page.locator("#ppf-results .ppf-kind");
-const rows = (page) => page.locator("#ppf-results .ppf-table tbody tr");
+const rows = (page) => page.locator("#ppf-wide .ppf-table tbody tr");
 
 async function open(page, go) {
   await go("calculators/ppf/");
@@ -125,7 +125,7 @@ test.describe("PPF Calculator", () => {
     const last = rows(page).last();
     await expect(last.locator("td").first()).toHaveText("First term ends: earliest full closure");
     await expect(last.locator("td").last()).toHaveText("₹45,17,702");
-    await expect(page.locator("#ppf-results .ppf-table caption")).toHaveText(/Every row is a projection/);
+    await expect(page.locator("#ppf-wide .ppf-table caption")).toHaveText(/Every row is a projection/);
     await expect(page.getByRole("columnheader")).toHaveText(["Year", "What this year is", "Opening balance", "Deposits", "Interest added at year-end", "Closing balance"]);
     // every displayed row adds up: opening + deposits + interest = closing
     const sums = await rows(page).evaluateAll((trs) => trs.map((tr) => {
@@ -406,7 +406,7 @@ for (const width of [320, 360, 390]) {
       await page.locator("#ppf-table-details summary").click(); // folded on a phone: open it
       await expect(rows(page)).toHaveCount(50);
       await expectNoHorizontalOverflow(page);
-      const wide = await page.locator("#ppf-results *:not(.calculator-results__table-wrapper *)").evaluateAll((els, w) => els.filter((e) => e.getBoundingClientRect().right > w + 1).map((e) => e.tagName + "." + e.className), width);
+      const wide = await page.locator("#ppf-results *, #ppf-wide *:not(.calculator-results__table-wrapper *)").evaluateAll((els, w) => els.filter((e) => e.getBoundingClientRect().right > w + 1).map((e) => e.tagName + "." + e.className), width);
       expect(wide).toEqual([]);
       const region = page.getByRole("region", { name: /Year-by-year balance/ });
       expect(await region.evaluate((e) => e.scrollWidth > e.clientWidth)).toBe(true); // the table scrolls inside its own box
@@ -461,7 +461,7 @@ test.describe("PPF Calculator with larger text", () => {
 test.describe("PPF Calculator in the Investment listing, search and related tools", () => {
   test("it is a live Investment tool in the category page, All Calculators and All Tools, and not a Coming soon card", async ({ page, go, siteRoot }) => {
     await go("investment.html");
-    await expect(page.locator(`a[href$="calculators/ppf/"]`)).toHaveCount(1);
+    await expect(page.locator(`.categories-detail__grid a[href$="calculators/ppf/"]`)).toHaveCount(1);  // the card grid; the workspace sidebar lists the tool too
     await expect(page.locator(".category-page-card--soon")).toHaveCount(0);
     await go("calculators.html");
     await expect(page.locator(`#calculators-grid a[href$="calculators/ppf/"]`)).toHaveCount(1);
@@ -489,7 +489,7 @@ test.describe("PPF Calculator in the Investment listing, search and related tool
   test("search finds it by its own names", async ({ page, go, siteRoot }) => {
     for (const q of ["ppf calculator", "public provident fund calculator", "ppf maturity calculator", "ppf interest calculator"]) {
       await go(`tools.html?q=${encodeURIComponent(q)}`);
-      await expect(page.locator(`a[href='${siteRoot}calculators/ppf/']`).first(), q).toBeVisible();
+      await expect(page.locator(`#tools-results a[href='${siteRoot}calculators/ppf/']`).first(), q).toBeVisible();
     }
   });
 

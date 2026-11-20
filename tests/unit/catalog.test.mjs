@@ -27,7 +27,7 @@ before(async () => {
 
 // the published tools of the Calculators section; Date Difference (Time Tools) is a published tool too, but it is not a calculator
 const PUBLISHED_CALCULATORS = ["loan-comparison", "emi", "prepayment", "balance-transfer", "sip", "margin", "profit", "home-loan", "fd", "gst", "cagr", "swp", "percentage", "income-tax", "credit-card-payoff", "ppf", "gratuity", "salary-in-hand", "xirr", "risk-reward", "interest", "roi", "ratio", "age", "personal-loan", "loan-eligibility", "bmi", "bmr", "calorie", "unit-converter"];
-const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "smart-flashcards", "json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab", "sql-practice-lab", "excel-practice-lab", "power-bi-practice-lab", "list-comparer", "uuid-generator", "json-csv-converter", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "merge-pdf", "split-pdf", "pdf-pages", "pdf-marks"];
+const PUBLISHED = [...PUBLISHED_CALCULATORS, "date-difference", "date-calculator", "countdown-timer", "stopwatch", "business-days", "time-duration", "shift-planner", "pomodoro-timer", "interval-timer", "meeting-planner", "json-formatter", "unix-timestamp-converter", "text-diff", "jwt-decoder", "cron-expression-explainer", "base64-encoder-decoder", "url-parser", "json-compare", "jsonpath-tester", "smart-flashcards", "json-error-fixing-lab", "jsonpath-challenge-lab", "cron-challenge-lab", "test-design-lab", "sql-practice-lab", "excel-practice-lab", "power-bi-practice-lab", "list-comparer", "uuid-generator", "json-csv-converter", "time-zone-converter", "world-clock", "hours-calculator", "image-compressor-resizer", "photos-to-pdf", "image-metadata", "merge-pdf", "split-pdf", "pdf-pages", "pdf-marks", "prompt-builder", "ai-answer-checker"]; // D22: the AI tools are two products (and the AI Directory page)
 const LOANS = ["loan-comparison", "emi", "home-loan", "personal-loan", "loan-eligibility", "balance-transfer", "interest", "prepayment", "credit-card-payoff"];
 
 describe("catalog model", () => {
@@ -163,6 +163,8 @@ describe("registry is derived from the catalog", () => {
       "sql-practice-lab": { section: "Practice Labs", title: "SQL Practice Lab" },
       "excel-practice-lab": { section: "Practice Labs", title: "Excel Practice Lab" },
       "power-bi-practice-lab": { section: "Practice Labs", title: "Power BI Practice Lab" },
+      "prompt-builder": { section: "AI Tools", category: "ai", title: "AI Prompt Builder" }, // the former AI Workbench since D22 (2026-11-18)
+      "ai-answer-checker": { section: "AI Tools", category: "ai", title: "AI Answer Checker" }, // the Output Reviewer and Compare Two AI Answers, D22
       "cron-challenge-lab": { section: "Practice Labs", title: "Cron Challenge Lab" },
       "jsonpath-challenge-lab": { section: "Practice Labs", title: "JSONPath Challenge Lab" },
       "json-error-fixing-lab": { section: "Practice Labs", title: "JSON Error-Fixing Lab" },
@@ -177,6 +179,7 @@ describe("registry is derived from the catalog", () => {
       "world-clock": { section: "Time Tools", title: "World Clock" },
       "image-compressor-resizer": { section: "Image Tools", title: "Image Compressor & Resizer" },
       "photos-to-pdf": { section: "Image Tools", title: "Photos to PDF" },
+      "image-metadata": { section: "Image Tools", title: "Photo Metadata Viewer and Remover" },
       "merge-pdf": { section: "PDF Tools", title: "Merge PDF" },
       "split-pdf": { section: "PDF Tools", title: "Split PDF" },
       "pdf-pages": { section: "PDF Tools", title: "Extract, Reorder and Rotate PDF Pages" },
