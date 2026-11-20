@@ -38,6 +38,11 @@ export const ROLE_PICKER = {
     hint: `${ROLE_COUNT} professions. Type to search, or open the list and use the arrow keys.`
 };
 
+/* the first two steps' words, also in the page's markup (index.js) */
+export const ROLE_TITLE = "What best describes your role?";
+export const ROLE_WHY = "Choose the closest match. It decides which tasks are suggested first and how the prompt is written. You can change it at any time.";
+export const TASK_TITLE = "What would you like help with?";
+
 /* the first screen's way to the one-page form, also in the page's markup */
 export const MORE_WAYS = "More ways to start: an outcome, a playbook, a saved Work Pack or a project context pack";
 

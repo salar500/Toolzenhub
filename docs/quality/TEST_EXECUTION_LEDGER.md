@@ -214,6 +214,21 @@ Free RAM 1.0 to 1.4 GB, one worker, foreground runs. Builds: `npm run build:all`
 
 Not run (scope): full smoke, the full browser suite, `links.spec.js` (whole-site crawl), DOM baselines (no AI region), the rest of `navigation.spec.js` (its line-620 All Tools live-region expectation is still stale against the owner's 2026-11-16 live-search rule), the full unit suite. Not run (tooling): Firefox, WebKit, real devices, screen readers.
 
+## AI-2 (2026-11-20), base `f428782f` plus the owner's Prompt Builder UX review (spacing, role change, wording, view switch, test-case prompts)
+
+Free RAM about 1.0 GB, one worker, foreground. `npm run build:all` rc 0 before each browser batch.
+
+| Run | Command | Scope | Result |
+|---|---|---|---|
+| Unit | `node --test tests/unit/<file>` one at a time | the five prompt-builder files, ai-ecosystem, ai-tools, build-output | 133 / 133 (flow 9, with the new test-cases rules test; the blueprint rule "six questions up front" first failed when the website question was added, so "Known risks" moved under More details) |
+| Guided | `playwright test prompt-builder-guided.spec.js` | subpath-desktop / subpath-mobile / root-desktop | 18 / 12 / 2 (new: role visible and changeable, view round trip, trail below the sticky bars, spacing) |
+| Other AI | `playwright test prompt-builder prompt-builder-professions ai-ecosystem ai-tools` | the three projects | 25 / 20 / 6; root guided + ai-ecosystem 4 / 4 after the last change |
+| Visual, dark | `--project=visual-* -g "prompt-builder\|ai-tools"` | 6 images | prompt-builder 3 changed (spacing and wording), reviewed by eye and updated; 6 / 6 after |
+| Static | inventory, links, assets, seo | both builds | pass |
+| First load | doc 23 §4 method | Prompt Builder | 47.4 / 14.4 kB of 50 / 16 |
+
+Not run: the full suites (out of scope), real devices, Safari, screen readers.
+
 ## Carried forward (not re-run at f5a1df4)
 
 These ran on the working tree that was committed as `6b01b85`..`f5a1df4` (RELEASE-1 records HEAD `45fc888` plus 102 uncommitted entries, 5,597 insertions across 102 files, now in the three commits). That equivalence is inferred from the records and a clean tree; it was not proved by diffing a saved copy.

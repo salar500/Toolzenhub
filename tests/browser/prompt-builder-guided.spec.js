@@ -56,7 +56,7 @@ test.describe("AI Prompt Builder: one question at a time", () => {
     await page.keyboard.press("Escape");
 
     await chooseRole(page, /^QA engineer or software tester/);
-    await expect(title(page)).toHaveText("What would you like to accomplish?");
+    await expect(title(page)).toHaveText("What would you like help with?");
     await expect(page.locator("#wb-role-input")).toBeHidden(); // replaced, not stacked
     await expect(trail(page).getByRole("button")).toHaveText(["Role: QA engineer or software tester. Change"]);
     await page.locator("#wb-task-input").click();
@@ -66,7 +66,7 @@ test.describe("AI Prompt Builder: one question at a time", () => {
     await expect(page.getByRole("option", { name: "A business plan" })).toHaveCount(0);
     await page.getByRole("option", { name: "A test plan", exact: true }).click();
 
-    await expect(title(page)).toHaveText("What is being tested");
+    await expect(title(page)).toHaveText("What are you testing?");
     await expect(page.locator("#wb-task-input")).toBeHidden();
     await expect(next(page)).toHaveText("Skip for now");
     await page.locator("#wb-q-feature").fill("Appointment booking for a clinic: patients book, staff confirm");
@@ -108,7 +108,7 @@ test.describe("AI Prompt Builder: one question at a time", () => {
     await expect(page.locator("#wb-master-edit")).toBeFocused();
     await page.locator("#wb-master-edit").fill("My own version of the prompt");
     await expect(page.locator("#wb-copy-main")).toHaveText("Copy edited prompt");
-    await trail(page).getByRole("button", { name: /^What is being tested:/ }).click();
+    await trail(page).getByRole("button", { name: /^What are you testing\?:/ }).click();
     await page.locator("#wb-q-feature").fill("Appointment booking for a dental clinic");
     await trail(page).getByRole("button", { name: /^Your prompt/ }).click();
     await expect(master(page)).toContainText("dental clinic");
@@ -128,10 +128,10 @@ test.describe("AI Prompt Builder: one question at a time", () => {
 
     /* reuse: the role, task, answers and tools stay; the project's own details are cleared */
     await page.getByRole("button", { name: "Reuse selections" }).click();
-    await expect(title(page)).toHaveText("What would you like to accomplish?");
+    await expect(title(page)).toHaveText("What would you like help with?");
     await expect(next(page)).toHaveText("Continue");
     await next(page).click();
-    await expect(title(page)).toHaveText("What is being tested");
+    await expect(title(page)).toHaveText("What are you testing?");
     await expect(page.locator("#wb-q-feature")).toHaveValue("Appointment booking for a dental clinic");
     await trail(page).getByRole("button", { name: /^Final details:/ }).click();
     await expect(page.getByLabel("Project details, constraints or instructions (optional)")).toHaveValue("");
@@ -167,7 +167,7 @@ test.describe("AI Prompt Builder: one question at a time", () => {
     await expect(trail(page).getByRole("button")).toHaveText(["Role: Role not listed. Change"]);
     const words = "I want to test a healthcare API with patient authentication";
     await page.locator("#wb-task-input").fill(words);
-    await expect(page.locator("#wb-task-picker .wb-picker__group").first()).toHaveText("Closest to your words");
+    await expect(page.locator("#wb-task-picker .wb-picker__group").first()).toHaveText("Best matches");
     await expect(page.getByRole("option").first()).toHaveText("API tests");
     await page.keyboard.press("Enter");
     await expect(page.locator("#wb-q-api")).toHaveValue(words);
@@ -221,15 +221,76 @@ test.describe("AI Prompt Builder: one question at a time", () => {
     await input.fill("legal");
     await expect(page.getByRole("option")).toHaveCount(1);
     await page.keyboard.press("Enter");
-    await expect(title(page)).toHaveText("What would you like to accomplish?");
+    await expect(title(page)).toHaveText("What would you like help with?");
     await page.locator("[data-panel=back]").click();
     await expect(title(page)).toHaveText("What best describes your role?");
     await expect(next(page)).toHaveText("Continue"); // the role is kept
     await next(page).click();
     await page.getByRole("button", { name: "Show everything on one page" }).click();
     await expect(page.locator("#wb-outcomes")).toBeVisible();
-    await page.getByRole("button", { name: "Back to the guided steps" }).click();
-    await expect(title(page)).toHaveText("What would you like to accomplish?");
+    await page.locator("#wb-panel-back").getByRole("button", { name: "Back to the guided steps" }).click();
+    await expect(title(page)).toHaveText("What would you like help with?");
+  });
+
+  test("the chosen role stays visible and can be changed at any step; the one-page view and back keep the role, the task and every answer; the trail is never under the sticky bars (2026-11-20)", async ({ page, go }) => {
+    await go("tools/prompt-builder/");
+    await ready(page);
+    await chooseRole(page, /^QA engineer or software tester/);
+    const chosen = page.locator("#wb-chosen-role");
+    await expect(chosen).toContainText("Your role: QA engineer or software tester");
+    await page.locator("#wb-task-input").click();
+    await expect(page.locator("#wb-task-picker .wb-picker__group").first()).toHaveText("Suggested for QA engineer or software tester");
+    await page.keyboard.press("Escape");
+    await chosen.getByRole("button", { name: "Change role" }).click();
+    await expect(title(page)).toHaveText("What best describes your role?");
+    await expect(page.locator("#wb-step-why")).toContainText("You can change it at any time");
+    await chooseRole(page, /^Business analyst/);
+    await expect(chosen).toContainText("Your role: Business analyst");
+    await page.locator("#wb-task-input").click();
+    await expect(page.locator("#wb-task-picker .wb-picker__group").first()).toHaveText("Suggested for Business analyst");
+    await page.keyboard.press("Escape");
+    await chosen.getByRole("button", { name: "Change role" }).click();
+    await chooseRole(page, /^QA engineer or software tester/);
+    await chooseTask(page, "Test scenarios and test cases");
+    await expect(title(page)).toHaveText("What are you testing?");
+    /* the trail and the question start below whatever is stuck to the top of the window */
+    const stuck = await page.evaluate(() => Math.max(0, ...[...document.querySelectorAll("header, nav")].filter((el) => ["sticky", "fixed"].includes(getComputedStyle(el).position) && el.getBoundingClientRect().top <= 1 && el.getBoundingClientRect().width > innerWidth * 0.6).map((el) => el.getBoundingClientRect().bottom)));
+    expect((await page.locator("#wb-trail-nav").boundingBox()).y).toBeGreaterThanOrEqual(stuck);
+    await page.locator("#wb-q-feature").fill("Coupon codes at checkout");
+    await next(page).click();
+    await expect(title(page)).toHaveText("Website or web app to explore (optional)");
+    await page.locator("#wb-q-site").fill("https://shop.example.com");
+
+    await page.getByRole("button", { name: "Show everything on one page" }).click();
+    await expect(page.locator("#wb-q-feature")).toBeVisible();
+    await expect(page.locator("#wb-q-site")).toHaveValue("https://shop.example.com");
+    const back = page.locator("#wb-panel-back").getByRole("button", { name: "Back to the guided steps" });
+    await expect(back).toBeVisible(); // at the top of the one-page view, not only after the whole pack
+    await back.click();
+    await expect(title(page)).toHaveText("Website or web app to explore (optional)");
+    await expect(page.locator("#wb-q-site")).toHaveValue("https://shop.example.com");
+    await expect(trail(page).getByRole("button", { name: /^Role:/ })).toContainText("QA engineer or software tester");
+    await expect(trail(page).getByRole("button", { name: /^Task:/ })).toContainText("Test scenarios and test cases");
+    await expect(page.locator("#wb-q-feature")).toHaveValue("Coupon codes at checkout");
+  });
+
+  test("spacing: the panel follows the introduction with one gap, and the hint under a field and the buttons share one gap (2026-11-20)", async ({ page, go }) => {
+    await go("tools/prompt-builder/");
+    await ready(page);
+    const intro = await page.locator(".calculator-intro").boundingBox();
+    const panel = await page.locator("#wb-panel").boundingBox();
+    expect(panel.y - (intro.y + intro.height)).toBeLessThanOrEqual(8); // the introduction's own padding is the gap, as on the AI Answer Checker
+    await chooseRole(page, /^QA engineer or software tester/);
+    const listHint = await page.locator("#wb-task-picker .wb-picker__hint").boundingBox();
+    const taskButtons = await page.locator(".wb-panel__buttons").boundingBox();
+    expect(taskButtons.y - (listHint.y + listHint.height)).toBeLessThanOrEqual(24);
+    await chooseTask(page, "Test scenarios and test cases");
+    const hint = await page.locator("[data-panel-q] .calculator-form__help").boundingBox();
+    const buttons = await page.locator(".wb-panel__buttons").boundingBox();
+    expect(buttons.y - (hint.y + hint.height)).toBeLessThanOrEqual(24);
+    const why = await page.locator("#wb-step-why").boundingBox();
+    const field = await page.locator("[data-panel-q] .calculator-form__field").boundingBox();
+    expect(field.y - (why.y + why.height)).toBeGreaterThanOrEqual(8); // the explanation does not touch the field
   });
 
   test("a link names a task or a profession: the steps start there", async ({ page, go }) => {
@@ -238,7 +299,7 @@ test.describe("AI Prompt Builder: one question at a time", () => {
     await expect(title(page)).toHaveText("What is being released");
     await go("tools/prompt-builder/?role=qa");
     await ready(page);
-    await expect(title(page)).toHaveText("What would you like to accomplish?");
+    await expect(title(page)).toHaveText("What would you like help with?");
     await page.locator("#wb-task-input").click();
     await expect(page.getByRole("option").first()).toHaveText("Review requirements and acceptance criteria");
   });
@@ -251,9 +312,9 @@ test.describe("AI Prompt Builder: one question at a time", () => {
     await page.locator("#wb-q-feature").fill("Password reset by email");
     await trail(page).getByRole("button", { name: /^Role:/ }).click();
     await chooseRole(page, /^Software developer/);
-    await expect(title(page)).toHaveText("What would you like to accomplish?");
+    await expect(title(page)).toHaveText("What would you like help with?");
     await expect(next(page)).toHaveCount(0); // the test plan is not a developer's task: choose again
-    await expect(trail(page).getByRole("button", { name: /^What is being tested/ })).toHaveCount(0);
+    await expect(trail(page).getByRole("button", { name: /^What are you testing\?/ })).toHaveCount(0);
     await page.locator("#wb-task-input").fill("test scenarios");
     await page.getByRole("option", { name: "Test scenarios and test cases", exact: true }).click();
     await expect(page.locator("#wb-q-feature")).toHaveValue("Password reset by email");

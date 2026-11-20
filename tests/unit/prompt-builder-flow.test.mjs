@@ -113,6 +113,29 @@ test("the searchable list matches every typed word in a choice's label or keywor
   assert.deepEqual(filterGroups([{ title: "T", items: [{ id: "c", label: "Café menu" }] }], "cafe").length, 1, "accents do not matter");
 });
 
+test("test cases (2026-11-20): a named website is explored first by the receiving AI, observed kept apart from assumed; an unconfirmed rule blocks a case instead of being invented", async () => {
+  const t = getTask("test-cases");
+  const bp = await loadBlueprint(t.id);
+  const prompt = (answers) => compileWorkPack(bp, t, { answers: { format: "numbered steps with expected results", ...answers } });
+  for (const answers of [{ feature: "Coupon codes at checkout", site: "https://shop.example.com" }, { feature: "Amazon.in checkout with a coupon" }, { feature: "Checkout on www.example.org" }]) {
+    const p = prompt(answers);
+    assert.match(p.masterPrompt, /open .+ if you can browse the web/, answers.feature);
+    assert.match(p.masterPrompt, /"Observed".+"Assumed"/, answers.feature);
+    assert.match(p.masterPrompt, /If you cannot open websites, say so in your first line/, answers.feature);
+    assert.match(p.markdown, /First open .+ if you can browse/, `${answers.feature}: the first stage explores before listing scenarios`);
+  }
+  /* library names that look like domains are not websites; a feature without a site gets no browsing instructions */
+  for (const feature of ["ASP.NET login API with socket.io events", "Coupon codes at checkout", "Chart.js dashboard filters"]) {
+    assert.doesNotMatch(prompt({ feature }).masterPrompt, /if you can browse the web/, feature);
+  }
+  /* always: exact expected results, blocked cases with their question, assumptions labelled */
+  const p = prompt({ feature: "Coupon codes at checkout" });
+  assert.match(p.masterPrompt, /Blocked – Requirement Confirmation Needed/);
+  assert.match(p.masterPrompt, /write the exact question that must be answered/);
+  assert.match(p.masterPrompt, /labelled "Assumption:"/);
+  assert.match(p.masterPrompt, /according to the defined behaviour/, "the vague phrases are named as ones to avoid");
+});
+
 test("typed words: an API test, an API design and API documentation lead to their own tasks", () => {
   const top = (text) => matchTasks(text).tasks.map((t) => t.id);
   assert.equal(top("write API tests for our payment endpoints")[0], "api-testing");

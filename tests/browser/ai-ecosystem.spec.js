@@ -30,7 +30,7 @@ test.describe("AI ecosystem", () => {
     await expectNoHorizontalOverflow(page);
     await start.getByRole("link", { name: "A test plan" }).click();
     await page.locator("#wb-form[data-ready]").waitFor();
-    await expect(page.locator("#wb-step-title")).toHaveText("What is being tested");
+    await expect(page.locator("#wb-step-title")).toHaveText("What are you testing?");
     await expect(page.locator("#wb-q-feature")).toBeVisible();
     expect(watch.external).toEqual([]);
     expect(watch.pageErrors).toEqual([]);

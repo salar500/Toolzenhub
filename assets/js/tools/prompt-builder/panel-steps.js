@@ -27,7 +27,7 @@ import { getRole } from "./roles.js";
 import { OUTCOMES, getTask, getOutcome, tasksFor } from "./taxonomy.js";
 import { activeQuestions } from "./compiler.js";
 import { mountPicker, filterGroups } from "./picker.js";
-import { NO_ROLE } from "./panel.js";
+import { NO_ROLE, ROLE_TITLE, ROLE_WHY, TASK_TITLE } from "./panel.js";
 
 const label = (title) => title.replace(/^Testing: /, "").replace(/^./, (c) => c.toUpperCase());
 
@@ -124,19 +124,18 @@ export function initSteps(h) {
 
     function titleOf(step) {
 
-        const task = getTask(state.taskId);
-        if (step === "role") return ["What best describes your role?", "Choose the closest one. It shapes the tasks offered and the prompt's language."];
-        if (step === "task") return ["What would you like to accomplish?", role ? `Tasks for: ${getRole(role).title}. Type a few words to search every task.` : "Type a few words to search, or open the list."];
+        if (step === "role") return [ROLE_TITLE, ROLE_WHY];
+        if (step === "task") return [TASK_TITLE, role ? "Choose one of the suggested tasks, or type a few words to search all of them. If nothing fits, choose \"Any other task\" and describe it in your own words." : "Choose a task from the list, or type a few words to search. If nothing fits, choose \"Any other task\" and describe it in your own words."];
         if (step.startsWith("q:")) {
             const q = questionOf(step);
-            const why = q.essential ? "Essential: it goes into the prompt. Leave it empty and the prompt asks the AI to ask you for it."
-                : q.kind === "select" ? "Choose one; the next question follows. Skip it if it does not matter."
-                    : "Optional. Skip it if you do not know.";
-            return [q.label, `${task ? `${label(task.title)}. ` : ""}${why}`];
+            const why = q.essential ? "Needed for a useful prompt. If you leave it blank, the prompt asks the AI to request it from you before it starts."
+                : q.kind === "select" ? "Choose one to continue, or skip it if it does not matter."
+                    : "Optional. Skip it if it does not apply or you do not know yet.";
+            return [q.label, why];
         }
-        if (step === "tools") return ["Which tools do you use for this?", "Optional. The prompt then works the way your tools do: their terms, steps and what to share."];
-        if (step === "final") return ["Anything else we should know?", "Optional. Add project details, choose the prompt's length, your experience and the AI product, then generate."];
-        return ["Your prompt", "Copy it into your AI product, or edit it first. Press any answer above to change it; nothing is sent anywhere."];
+        if (step === "tools") return ["Which tools do you use for this?", "Optional. The prompt will use your tools' own terms and steps."];
+        if (step === "final") return ["Anything else we should know?", "Optional. Add details about your project and choose how long the prompt should be, your experience and the AI assistant. Then generate your prompt."];
+        return ["Your prompt", "Copy it into your AI assistant, or edit it first. To change an answer, press it in the list above. Nothing is sent anywhere."];
 
     }
 
@@ -175,7 +174,7 @@ export function initSteps(h) {
             if (s === current) return `<li><span class="${P}-trail__item ${P}-trail__item--current" aria-current="step"><span class="ai-sr-only">Current step: </span>${e(stepName(s))}</span></li>`;
             const a = answerOf(s);
             const quiet = ["Skipped", "Nothing added", "Missing", "Choose a role", "Choose a task"].includes(a);
-            return `<li><button type="button" class="${P}-trail__item${quiet ? ` ${P}-trail__item--quiet` : ""}" data-panel-go="${e(s)}"><span class="ai-sr-only">${e(stepName(s))}: </span>${e(a)}<span class="ai-sr-only">. Change</span></button></li>`;
+            return `<li><button type="button" class="${P}-trail__item${quiet ? ` ${P}-trail__item--quiet` : ""}" data-panel-go="${e(s)}" title="${e(`${stepName(s)}: ${a}. Press to change.`)}"><span class="ai-sr-only">${e(stepName(s))}: </span>${e(a)}<span class="ai-sr-only">. Change</span></button></li>`;
         }).join("");
         /* on a phone the trail scrolls sideways inside itself: keep the current step in view */
         const list = $("trail");
@@ -278,16 +277,33 @@ export function initSteps(h) {
         const [title, why] = titleOf(current);
         $("step-title").textContent = title;
         $("step-why").textContent = why;
+        /* the task step says which role it is suggesting for, with a way back to change it */
+        if (current === "task") {
+            $("chosen-role").innerHTML = role
+                ? `Your role: <strong>${e(getRole(role).title)}</strong> <button type="button" class="${P}-linkish" data-panel-go="role">Change role</button>`
+                : `Your role is not listed, so every task is shown. <button type="button" class="${P}-linkish" data-panel-go="role">Choose a role</button>`;
+        }
         trail(steps);
         nav(steps);
 
         if (focus) {
             $("step-title").focus({ preventScroll: true });
-            /* the trail and the question start below the sticky bars (the page's scroll padding), never under them */
-            const covered = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
-            if ($("panel-head").getBoundingClientRect().top < covered) $("panel-head").scrollIntoView({ block: "start" });
+            keepHeadInView();
+            requestAnimationFrame(keepHeadInView);
         }
 
+    }
+
+    /* the trail and the question start below the sticky bars, never under them (on a phone the section menu is one of them) */
+    function keepHeadInView() {
+        const bars = [...document.querySelectorAll("header, nav")].filter((el) => {
+            const position = getComputedStyle(el).position;
+            const box = el.getBoundingClientRect();
+            return (position === "sticky" || position === "fixed") && box.top <= 1 && box.width > innerWidth * 0.6;
+        });
+        const covered = Math.max(parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0, ...bars.map((el) => el.getBoundingClientRect().bottom));
+        const top = $("panel-head").getBoundingClientRect().top;
+        if (top < covered + 4) window.scrollBy(0, top - covered - 8);
     }
 
     const move = (by) => {
@@ -302,7 +318,7 @@ export function initSteps(h) {
 
         const r = getRole(role);
         return r
-            ? [{ title: `Tasks for: ${r.title}`, items: [...r.tasks.filter((id) => id !== GENERAL), GENERAL].map(taskItem) }]
+            ? [{ title: `Suggested for ${r.title}`, items: [...r.tasks.filter((id) => id !== GENERAL), GENERAL].map(taskItem) }]
             : allGroups();
 
     }
@@ -321,14 +337,14 @@ export function initSteps(h) {
         /* among the closest, the role's own tasks come first (an "API" search by a tester leads with API tests) */
         const mineIds = new Set(getRole(role)?.tasks ?? []);
         const closest = fresh([...matched.tasks].sort((a, b) => Number(!mineIds.has(a.id)) - Number(!mineIds.has(b.id))).map((t) => taskItem(t.id)));
-        if (closest.length) groups.push({ title: "Closest to your words", items: closest });
+        if (closest.length) groups.push({ title: "Best matches", items: closest });
         for (const g of mine) {
             const items = fresh(g.items);
             if (items.length) groups.push({ ...g, items });
         }
         const others = fresh(filterGroups(allGroups(), query).flatMap((g) => g.items));
-        if (others.length) groups.push({ title: getRole(role) ? "Other tasks" : "More tasks", items: others });
-        if (!seen.has(GENERAL)) groups.push({ title: "Something else", items: [taskItem(GENERAL)] });
+        if (others.length) groups.push({ title: getRole(role) ? "All other tasks" : "More tasks", items: others });
+        if (!seen.has(GENERAL)) groups.push({ title: "Not in the list", items: [taskItem(GENERAL)] });
 
         $("task-tools").innerHTML = matched.utilities.length
             ? `Already have an answer, or looking for an AI product? ${matched.utilities.map((u) => `<a href="${e(u.route)}">${e(u.title)}</a>`).join(" · ")}`
@@ -341,7 +357,7 @@ export function initSteps(h) {
         id: `${P}-task-input`,
         labelledBy: `${P}-step-title`,
         placeholder: "Search or choose a task",
-        hint: "Type a few words, for example \"API tests\" or \"follow-up email\", or open the list and use the arrow keys.",
+        hint: "You can also open the list and move through it with the arrow keys.",
         groups: taskGroups,
         search: searchTasks,
         empty: () => "Nothing matches.",
@@ -369,7 +385,7 @@ export function initSteps(h) {
         }
         $("task-tools").textContent = "";
         go("task");
-        h.announce(role ? `${getRole(role).title}: ${getRole(role).tasks.length} tasks listed.` : "Every task is listed.", 0);
+        h.announce(role ? `Role set to ${getRole(role).title}. ${getRole(role).tasks.length} tasks are suggested.` : "Every task is listed.", 0);
 
     }
 

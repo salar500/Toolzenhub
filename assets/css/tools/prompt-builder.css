@@ -569,8 +569,9 @@
 }
 
 /* ---------- the guided panel (D20): one step at a time in one card; the page around it does not change ---------- */
+/* the introduction's own bottom padding is the gap above the panel, as on the AI Answer Checker (2026-11-20: 28px more read as a break) */
 .wb-panel[data-mode="guided"] {
-    margin-top: 28px;
+    margin-top: 0;
     padding: 24px;
     border: 1px solid var(--line);
     border-radius: 12px;
@@ -616,6 +617,37 @@
 
 .wb-panel__title {
     margin-bottom: 4px;
+}
+
+/* the step's explanation sits a little apart from the field below it; the field's hint and the buttons share one gap */
+.wb-panel[data-mode="guided"] .wb-panel__why {
+    margin-bottom: 12px;
+}
+
+.wb-panel[data-mode="guided"] #wb-details,
+.wb-panel[data-mode="guided"] #wb-roles,
+.wb-panel[data-mode="guided"] #wb-guide-tasks {
+    margin-bottom: 0;
+}
+
+/* the role the task step is suggesting for, with Change role */
+.wb-chosen {
+    margin: 0 0 10px;
+    font-size: 14px;
+}
+
+.wb-chosen:empty {
+    display: none;
+}
+
+/* the one-page form's way back to the steps, at its top as well as its end */
+.wb-panel__back {
+    display: none;
+    margin: 0 0 12px;
+}
+
+.wb-panel[data-mode="full"] .wb-panel__back {
+    display: block;
 }
 
 .wb-panel__title:focus {
@@ -761,7 +793,7 @@
 
 .wb-trail__item {
     display: inline-block;
-    max-width: 24ch;
+    max-width: 32ch;
     min-height: 36px;
     padding: 7px 12px;
     overflow: hidden;
@@ -827,7 +859,7 @@ button.wb-trail__item:focus-visible {
     }
 
     .wb-trail__item {
-        max-width: 18ch;
+        max-width: 22ch;
     }
 
 }

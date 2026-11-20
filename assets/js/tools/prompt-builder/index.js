@@ -26,7 +26,7 @@ import { OUTCOMES, ROLES, EXPERIENCE, DEPTHS, getTask, getOutcome, tasksFor } fr
 import { compileWorkPack, activeQuestions, NOT_VERIFIED, CONSISTENCY, CONTEXT_LIMIT } from "./compiler.js";
 import { loadBlueprint } from "./blueprints.js";
 import { pickerMarkup } from "./picker-markup.js";
-import { ROLE_PICKER, MORE_WAYS } from "./panel.js";
+import { ROLE_PICKER, MORE_WAYS, ROLE_TITLE, ROLE_WHY } from "./panel.js";
 /* the task matcher loads when the visitor first describes a task (D17) */
 const loadMatcher = () => import("./task-index.js");
 /* the playbooks load the first time their section is opened (D17) */
@@ -116,9 +116,10 @@ export function markup() {
             <div class="${P}-panel" id="${P}-panel" data-mode="guided">
             <div class="${P}-panel__head" id="${P}-panel-head">
                 <nav class="${P}-trail" id="${P}-trail-nav" aria-label="Your selections" hidden><ol id="${P}-trail"></ol></nav>
-                <h2 class="calculator-section__title ${P}-panel__title" id="${P}-step-title" tabindex="-1">What best describes your role?</h2>
-                <p class="ai-note" id="${P}-step-why">Choose the closest one. It shapes the tasks offered and the prompt's language.</p>
+                <h2 class="calculator-section__title ${P}-panel__title" id="${P}-step-title" tabindex="-1">${ROLE_TITLE}</h2>
+                <p class="ai-note ${P}-panel__why" id="${P}-step-why">${ROLE_WHY}</p>
             </div>
+            <p class="${P}-panel__back" id="${P}-panel-back"><button type="button" class="${P}-linkish" data-panel="guided">Back to the guided steps</button> <span class="ai-note">Your answers are kept.</span></p>
             <section class="calculator-section">
                 <form id="${P}-form" class="calculator-form ai-form ${P}-form" novalidate>
 
@@ -127,6 +128,7 @@ export function markup() {
                     </div>
 
                     <div class="${P}-group ${P}-off" id="${P}-guide-tasks" data-panel-step="task">
+                        <p class="${P}-chosen" id="${P}-chosen-role"></p>
                         <div id="${P}-task-picker"></div>
                         <p class="ai-note ${P}-task-tools" id="${P}-task-tools"></p>
                     </div>
@@ -253,8 +255,8 @@ export function markup() {
             <section class="calculator-info">
                 <h2>How the AI Prompt Builder works</h2>
                 <ol>
-                    <li>Choose your role, then what you want to accomplish. Type a few words to search every task; nothing fits? "Any other task" writes one well-built prompt for anything. More ways to start: an outcome, a playbook, or a Work Pack you downloaded, which opens again with every answer.</li>
-                    <li>Answer one question at a time; a choice moves on by itself. Only the questions this task needs are asked. Essentials are marked; anything you leave out is listed as missing and written into the prompt as <code>[add: …]</code>, never guessed. Your answers so far are listed above the question: press one to change it.</li>
+                    <li>Choose your role, then what you would like help with: pick a suggested task or type a few words to search them all. If nothing fits, "Any other task" lets you describe it in your own words. You can change your role at any time. More ways to start: an outcome, a playbook, or a Work Pack you downloaded, which opens again with every answer.</li>
+                    <li>Answer one question at a time; a choice moves on by itself. Only the questions this task needs are asked. If you leave a needed answer blank, the prompt asks the AI to request it from you, so nothing is guessed. Your answers so far are listed above the question: press one to change it, or show everything on one page and come back without losing anything.</li>
                     <li>At the end, add anything else the AI should know, choose the prompt's length, your experience (a beginner's prompt explains each step; a senior one asks for trade-offs, risks and decisions) and, if you like, the AI product, then press Generate my prompt.</li>
                     <li>Copy the prompt into your AI product, or edit it first. Change its detail, try another professional approach or refine it; use the stage prompts one at a time and the refinement prompts where the answer falls short, and check what comes back with the AI Answer Checker.</li>
                     <li>Reuse selections starts the next prompt with the same role, task, answers and preferences (your project details are cleared); New prompt starts with nothing.</li>

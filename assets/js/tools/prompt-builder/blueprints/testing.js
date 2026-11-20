@@ -12,10 +12,14 @@ import { text, area, choose, more, when } from "./shared.js";
 
 const CATS = [{ id: "testing" }, { id: "assistants" }, { id: "coding" }];
 
-const feature = area("feature", "What is being tested", { essential: true, rows: 4, hint: "The feature, change or system, in a few sentences.", placeholder: "Checkout: a signed-in customer applies a coupon code to the basket before paying." });
-const requirements = area("requirements", "Requirements or acceptance criteria", { long: true, rows: 5, hint: "Paste them as written, or say they are not written down yet.", placeholder: "AC1: a valid code reduces the total by its value\nAC2: an expired code shows \"This code has expired\"" });
-const stack = text("stack", "Technology and test tools", { hint: "Only what is really used, for example \"React web app, Playwright, GitHub Actions\". Leave empty if you do not know.", placeholder: "React web app, REST API, Playwright" });
+const feature = area("feature", "What are you testing?", { essential: true, rows: 4, hint: "Describe the feature, change or system in a few sentences.", placeholder: "Checkout: a signed-in customer applies a coupon code to the basket before paying." });
+const requirements = area("requirements", "Requirements or acceptance criteria", { long: true, rows: 5, hint: "Paste them as they are written. If there are none yet, say so.", placeholder: "AC1: a valid code reduces the total by its value\nAC2: an expired code shows \"This code has expired\"" });
+const stack = text("stack", "Technology and test tools", { hint: "Only what you actually use, for example \"React web app, Playwright, GitHub Actions\". Leave it blank if you are not sure.", placeholder: "React web app, REST API, Playwright" });
 const risk = area("risk", "Known risks or past defects", { rows: 3, hint: "Where it has broken before, or what would hurt users most.", placeholder: "Coupons stacked twice last release; payment rounding on discounts" });
+
+/* a website named in its own field, or a web address or site name written into the description ("amazon.in");
+   endings that are also library names (".net", ".io", ".js") are left out, so "ASP.NET" or "socket.io" is not taken for a site */
+const websiteOf = (a) => a.site || (a.feature ?? "").match(/\bhttps?:\/\/[^\s,;]+|\bwww\.[^\s,;]+|\b[a-z0-9-]+\.(?:com|in|co\.uk|org|shop|store)\b/i)?.[0] || "";
 
 const NO_GUESS = "Do not assume a language, framework, tool or environment I have not named; ask, or mark the assumption clearly.";
 
@@ -64,6 +68,7 @@ export const BLUEPRINTS = {
         depth: "standard",
         questions: [
             feature,
+            text("site", "Website or web app to explore (optional)", { hint: "Its address. If your AI assistant can browse, the prompt asks it to open the site first and base the tests on what it sees. Leave it blank for something that is not online.", placeholder: "https://www.example.com" }),
             requirements,
             choose("technique", "Design technique", ["Let the AI choose and say why", "Equivalence partitioning and boundary values", "Decision table", "State transitions", "Use cases and user journeys", "Exploratory charters"]),
             choose("format", "Case format", [
@@ -72,28 +77,40 @@ export const BLUEPRINTS = {
                 { value: "a table I can import into a test management tool", label: "A table for a test management tool" }
             ], { essential: true }),
             text("data", "Rules and limits that matter", { hint: "Field limits, roles, values, statuses.", placeholder: "Code is 6-12 characters; one code per order; minimum basket ₹500" }),
-            risk
+            more(risk)
         ],
-        brief: (a) => ({
-            goal: `Design test scenarios and then test cases for: ${a.feature}`,
-            context: [["Requirements", a.requirements], ["Rules and limits", a.data], ["Known risks", a.risk]],
-            requirements: [
-                a.technique && a.technique !== "Let the AI choose and say why" ? `Use ${a.technique.toLowerCase()}.` : "Choose the design techniques that fit and name the technique next to each scenario.",
-                "Cover positive, negative, boundary and error cases; include the cases a careless implementation would get wrong.",
-                "Give each case an id, a priority (high, medium, low) and the requirement it covers.",
-                "Each case has preconditions, test data, steps and an expected result that can be checked exactly.",
-                NO_GUESS
-            ],
-            format: [`Cases as ${a.format}.`,"Scenarios first as a short list, then the cases grouped by scenario.", "End with a coverage summary: requirement, number of cases, gaps."],
-            avoid: ["Vague expected results such as \"works correctly\"."]
-        }),
+        brief: (a) => {
+            const site = websiteOf(a);
+            return {
+                goal: `Design test scenarios and then test cases for: ${a.feature}`,
+                context: [["Website or web app", a.site], ["Requirements", a.requirements], ["Rules and limits", a.data], ["Known risks", a.risk]],
+                requirements: [
+                    /* the Prompt Builder does not browse: the AI that receives the prompt explores the site, if it can (2026-11-20) */
+                    ...(site ? [
+                        `Before writing any scenario, open ${site} if you can browse the web. Inspect the pages, forms, buttons, messages and user flows related to what is being tested, and follow those flows as far as you safely can: do not place real orders, make payments, create real accounts or send messages.`,
+                        "Base the scenarios on what you actually observed. Label each scenario \"Observed\" (seen on the site) or \"Assumed\" (expected but not seen), and list the pages and functions you could not reach or verify, with the reason.",
+                        "Do not invent features, fields, messages or rules the site does not show.",
+                        "If you cannot open websites, say so in your first line, then work only from the details in this prompt and mark every scenario \"Assumed\"."
+                    ] : []),
+                    a.technique && a.technique !== "Let the AI choose and say why" ? `Use ${a.technique.toLowerCase()}.` : "Choose the design techniques that fit and name the technique next to each scenario.",
+                    "Cover positive, negative, boundary and error cases; include the cases a careless implementation would get wrong.",
+                    "Give each case an id, a priority (high, medium, low) and the requirement it covers.",
+                    "Each case has preconditions, test data, steps and an expected result that can be checked exactly: the exact message, value, status or page that a tester can confirm or refute.",
+                    "When the right result depends on a rule that is not stated in the requirements (or, for a website, not observed), do not invent it: mark the case \"Blocked – Requirement Confirmation Needed\", write the exact question that must be answered, and keep it apart from the executable cases.",
+                    "Keep confirmed expectations apart from assumptions. A provisional expected result is allowed only when it is labelled \"Assumption:\".",
+                    NO_GUESS
+                ],
+                format: [`Cases as ${a.format}.`, "Scenarios first as a short list, then the cases grouped by scenario.", "Then the blocked cases, each with its open question.", "End with a coverage summary: requirement, number of cases, blocked cases, gaps."],
+                avoid: ["Vague expected results such as \"works correctly\", \"behaves appropriately\", \"according to the defined behaviour\" or \"if persistence is required\"."]
+            };
+        },
         stages: [
-            { at: "standard", name: "Scenarios", objective: "Agree what to test before writing steps.", submit: "The main prompt.", ask: () => "List the test scenarios only (one line each, with the technique and the requirement it covers). Point out any requirement that is ambiguous or untestable. Wait for my review.", expect: "A scenario list and the ambiguities.", done: "You have removed, added or approved scenarios." },
+            { at: "standard", name: "Scenarios", objective: "Agree what to test before writing steps.", submit: "The main prompt.", ask: (a) => `${websiteOf(a) ? `First open ${websiteOf(a)} if you can browse, and list what you observed (pages, functions, messages) and what you could not reach. Then list` : "List"} the test scenarios only (one line each, with the technique and the requirement it covers${websiteOf(a) ? ", marked Observed or Assumed" : ""}). Point out any requirement that is ambiguous or untestable. Wait for my review.`, expect: "A scenario list and the ambiguities.", done: "You have removed, added or approved scenarios." },
             { at: "standard", name: "Test cases", objective: "Get executable cases.", submit: "Your approved scenario list.", ask: (a) => `Write the test cases for the approved scenarios, as ${a.format}.`, expect: "Cases with ids, priorities, data, steps and expected results.", done: "Each approved scenario has cases." },
             { at: "detailed", name: "Gap check", objective: "Find what is still untested.", submit: "Nothing new.", ask: () => "Check the cases for gaps: missing boundaries, invalid inputs, roles and permissions, concurrency, interruptions (refresh, back, timeout), and accessibility. Add cases for each real gap.", expect: "New cases for the gaps.", done: "No category above is left without a case or a stated reason." }
         ],
         refine: ["completeness", "technical", "consistency", "missing"],
-        quality: ["Each expected result can be checked exactly, without judgement.", "Boundaries are tested on both sides.", "Every requirement has a case; untestable ones are reported.", "Test data is concrete, not \"valid data\"."],
+        quality: ["Each expected result can be checked exactly, without judgement.", "No case looks executable while its expected result depends on an unconfirmed rule: it is marked blocked with its question.", "Boundaries are tested on both sides.", "Every requirement has a case; untestable ones are reported.", "Test data is concrete, not \"valid data\"."],
         prepare: { required: ["The requirements or acceptance criteria.", "The field rules and limits."], optional: ["Screenshots or a link to the feature.", "Your test management tool's import format."] },
         next: ["Review the cases with a developer for missing technical edge cases.", "Import them into your test management tool or tracker.", "Automate the stable, high-priority ones (the Prompt Builder task \"automate tests\")."]
     },
