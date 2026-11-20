@@ -2,6 +2,16 @@
 
 Rules: `docs/product-decision-rules.md` section 11. GitHub Pages is the development preview; Hostinger production (`toolzenhub.in`) is manual and was not touched by any record here.
 
+## Update 2026-11-20 (AI ecosystem release candidate 5eff89de, built, not deployed; supersedes c950b797)
+
+| Item | Record |
+|---|---|
+| File | `C:\Users\DELL\Documents\ToolZenHub-production-package\toolzenhub-production-5eff89de.zip`, 16,821,655 bytes, 1,361 entries; checksum beside it in `.sha256` |
+| SHA-256 | `ad4f92837fe32879f77e01dc727ad5e66ab29aebda5cc3e4644f082b9805b863` |
+| Source | `5eff89de` (the owner's Prompt Builder UX review on top of `c950b797`); `npm run build` on a clean tree, 2026-11-20 |
+| Checks | as for `c950b797` (byte-identical to `dist/`, zip test clean, seven redirects, no development files); tests in `TEST_EXECUTION_LEDGER.md` run AI-2 |
+| Status | **Not deployed.** The `c950b797` package is kept for the record and is superseded |
+
 ## Update 2026-11-19 (AI ecosystem release candidate c950b797, built, not deployed; supersedes 3e5ce4cd)
 
 | Item | Record |
